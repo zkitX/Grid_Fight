@@ -7,6 +7,8 @@ using Rewired.Platforms.Switch;
 #endif
 public class InputController : MonoBehaviour
 {
+
+    #region Button Down
     public delegate void ButtonADown(int player);
     public event ButtonADown ButtonADownEvent;
     public delegate void ButtonBDown(int player);
@@ -51,9 +53,9 @@ public class InputController : MonoBehaviour
     public event ButtonRightSLDown ButtonRightSLDownEvent;
     public delegate void ButtonRightSRDown(int player);
     public event ButtonRightSRDown ButtonRightSRDownEvent;
+    #endregion
 
-
-
+    #region Button Up
     public delegate void ButtonAUp(int player);
     public event ButtonAUp ButtonAUpEvent;
     public delegate void ButtonBUp(int player);
@@ -98,11 +100,11 @@ public class InputController : MonoBehaviour
     public event ButtonRightSLPressed ButtonRightSLPressedEvent;
     public delegate void ButtonRightSRPressed(int player);
     public event ButtonRightSRPressed ButtonRightSRPressedEvent;
+    #endregion
 
 
 
-
-
+    #region Button Press
     public delegate void ButtonAPressed(int player);
     public event ButtonAPressed ButtonAPressedEvent;
     public delegate void ButtonBPressed(int player);
@@ -147,20 +149,21 @@ public class InputController : MonoBehaviour
     public event ButtonRightSLUp ButtonRightSLUpEvent;
     public delegate void ButtonRightSRUp(int player);
     public event ButtonRightSRUp ButtonRightSRUpEvent;
+    #endregion
 
+    #region JoyStick
     public delegate void LeftJoystickUsed(int player, InputDirection dir);
     public event LeftJoystickUsed LeftJoystickUsedEvent;
     public delegate void RightJoystickUsed(int player, InputDirection dir);
     public event RightJoystickUsed RightJoystickUsedEvent;
+    #endregion
 
-
-
-    public static InputController Instance;
+    
+    public static InputController Instance; //Singleton instance
 
     public int PlayersNumber;
     private List<Player> players = new List<Player>(); // The Rewired Player
-    public Vector2 LeftJoystic, RightJoystic;
-    public List<ButtonStateClass> ListOfButtons = new List<ButtonStateClass>();
+    public Vector2 LeftJoystic, RightJoystic; //Joysticks movement 
     void Awake()
     {
         Instance = this;
@@ -172,8 +175,9 @@ public class InputController : MonoBehaviour
         
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
+        //Looking for all the possible players input
         foreach (Player item in players)
         {
             ButtonsUp(item);
@@ -183,6 +187,7 @@ public class InputController : MonoBehaviour
         }
     }
 
+    //Check for Joysticks movement
     private void JoystickMovement(Player currentPlayer)
     {
         LeftJoystic = new Vector2(currentPlayer.GetAxis("Left Move Horizontal"), currentPlayer.GetAxis("Left Move Vertical"));
@@ -247,7 +252,7 @@ public class InputController : MonoBehaviour
             }
         }
     }
-
+    //Check for Buttons Up
     private void ButtonsUp(Player currentPlayer)
     {
         if (currentPlayer.GetButtonUp("A"))
@@ -427,7 +432,7 @@ public class InputController : MonoBehaviour
             }
         }
     }
-
+    //Check for Buttons Press
     private void ButtonsPress(Player currentPlayer)
     {
         if (currentPlayer.GetButton("A"))
@@ -609,8 +614,7 @@ public class InputController : MonoBehaviour
 
 
     }
-
-
+    //Check for Buttons Down
     private void ButtonsDown(Player currentPlayer)
     {
         if (currentPlayer.GetButtonDown("A"))
@@ -793,14 +797,11 @@ public class InputController : MonoBehaviour
 
     }
 
-
-
-  
-
+    //Applet calling
     public void Applet()
     {
 #if UNITY_SWITCH
-      /*  // Set the options to pass to the Controller Applet
+        // Set the options to pass to the Controller Applet
         ControllerAppletOptions options = new ControllerAppletOptions();
         options.playerCountMax = 8;
         options.showColors = true;
@@ -817,46 +818,10 @@ public class InputController : MonoBehaviour
         // Show the controller applet
         UnityEngine.Switch.Applet.Begin(); // See Unity documentation for explanation of this function
         SwitchInput.ControllerApplet.Show(options);
-        UnityEngine.Switch.Applet.End();*/
+        UnityEngine.Switch.Applet.End();
 #endif
     }
 
 
-}
-
-
-public class ButtonStateClass
-{
-    public string ButtonName;
-    public ButtonClickStateType ButtonClickState;
-
-    public ButtonStateClass()
-    {
-
-    }
-
-    public ButtonStateClass(string buttonName, ButtonClickStateType buttonClickState)
-    {
-        ButtonName = buttonName;
-        ButtonClickState = buttonClickState;
-    }
-}
-
-
-
-public enum InputDirection
-{
-    Up,
-    Down,
-    Left,
-    Right
-}
-
-
-public enum ButtonClickStateType
-{
-    Down,
-    Press,
-    Up
 }
 

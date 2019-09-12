@@ -88,24 +88,35 @@ public class UserInputManager : MonoBehaviour
         #endregion
 
 
-        InputController.Instance.Applet();
+        //InputController.Instance.Applet();
+    }
+    public int PPPlayer; public InputDirection DDir;
+    public bool t = false;
+    private void Update()
+    {
+        if(t)
+        {
+            t = false;
+            UserInputJoystickHandler(PPPlayer, DDir);
+        }
+
+
     }
 
-   
-    
 
-   
 
 
     #region Joystick
     private void Instance_RightJoystickUsedEvent(int player, InputDirection dir)
     {
         Debug.Log(player + "    " + dir);
+        UserInputJoystickHandler(PPPlayer, DDir);
     }
 
     private void Instance_LeftJoystickUsedEvent(int player, InputDirection dir)
     {
         Debug.Log(player + "    " + dir);
+        UserInputJoystickHandler(PPPlayer, DDir);
     }
 
     #endregion
@@ -180,6 +191,7 @@ public class UserInputManager : MonoBehaviour
     {
         Debug.Log(player + "  " + "A Up");
         VibrationController.Instance.CustomVibration(player, VibrationType.a);
+
     }
 
     private void Instance_ButtonRightSRUpEvent(int player)
@@ -446,4 +458,10 @@ public class UserInputManager : MonoBehaviour
         Debug.Log(player + "  " + "Home Down");
     }
     #endregion
+
+
+    public void UserInputJoystickHandler(int player, InputDirection dir)
+    {
+        BattleManagerScript.Instance.MoveSelectedCharacterInDirection((ControllerType)player, dir);
+    }
 }

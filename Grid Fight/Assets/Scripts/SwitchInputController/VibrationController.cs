@@ -9,21 +9,21 @@ using Rewired.Platforms.Switch;
 
 public class VibrationController : MonoBehaviour
 {
-    public static VibrationController Instance;
+    public static VibrationController Instance; //Singleton instance
 
-    public List<VibrationTypeClass> VibrationType = new List<VibrationTypeClass>();
+    public List<VibrationTypeClass> VibrationType = new List<VibrationTypeClass>(); //List of vibration
 
 
     private void Awake()
     {
         Instance = this;
-
+        //setup the bnvib
         foreach (VibrationTypeClass item in VibrationType)
         {
             item.vibFile = Resources.Load<TextAsset>(item.VibrationT.ToString() + ".bnvib").bytes;
         }
     }
-
+    //calling custom vibration  
     public void CustomVibration(int playerId, VibrationType vT)
     {
 #if UNITY_SWITCH
@@ -42,7 +42,7 @@ public class VibrationController : MonoBehaviour
         }
 #endif
     }
-
+    //calling default vibration 
     public void Vibration(int playerId)
     {
 #if UNITY_SWITCH
@@ -82,9 +82,5 @@ public class VibrationTypeClass
     public byte[] vibFile;
 }
 
-public enum VibrationType
-{
-    a,
-    b
-}
+
 
