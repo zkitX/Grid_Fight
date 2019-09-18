@@ -131,19 +131,19 @@ public enum BattleTileType
     Debuff_Armor_Elemental_Ice_3_ForTime,
     Debuff_Armor_Elemental_Wind_3_ForTime,
     Debuff_Armor_Elemental_Life_3_ForTime,
-    Trap,
-    Freeze,
-    Portal,
-    Weapon_Elemental_Neutral_ForTime,
-    Weapon_Elemental_Light_ForTime,
-    Weapon_Elemental_Dark_ForTime,
-    Weapon_Elemental_Earth_ForTime,
-    Weapon_Elemental_Lightning_ForTime,
-    Weapon_Elemental_Water_ForTime,
-    Weapon_Elemental_Fire_ForTime,
-    Weapon_Elemental_Ice_ForTime,
-    Weapon_Elemental_Wind_ForTime,
-    Weapon_Elemental_Life_ForTime,
+    Debuff_Trap,
+    Debuff_Freeze,
+    Debuff_Portal,
+    Debuff_Weapon_Elemental_Neutral_ForTime,
+    Debuff_Weapon_Elemental_Light_ForTime,
+    Debuff_Weapon_Elemental_Dark_ForTime,
+    Debuff_Weapon_Elemental_Earth_ForTime,
+    Debuff_Weapon_Elemental_Lightning_ForTime,
+    Debuff_Weapon_Elemental_Water_ForTime,
+    Debuff_Weapon_Elemental_Fire_ForTime,
+    Debuff_Weapon_Elemental_Ice_ForTime,
+    Debuff_Weapon_Elemental_Wind_ForTime,
+    Debuff_Weapon_Elemental_Life_ForTime,
 }
 
 public enum ControllerType
@@ -270,4 +270,29 @@ public enum ElementalWeaknessType
     Resistent = 1,
     VeryResistent = 2,
     ExtremelyResistent = 3
+}
+
+
+public enum CharacterAnimationStateType
+{
+    NoMesh,
+    Idle,
+    Atk,
+    Atk1,
+    Buff,
+    Debuff,
+    Gettinghit,
+    Defending,
+    Paralized,
+    Arriving,
+    DashRight,
+    DashLeft,
+    DashDown,
+    DashUp,
+    Selection,
+    PowerUp,
+    Speaking,
+    Victory,
+    Defeat,
+    Death
 }

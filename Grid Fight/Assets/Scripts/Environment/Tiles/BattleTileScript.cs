@@ -13,7 +13,7 @@ public class BattleTileScript : MonoBehaviour
         }
         set
         {
-            Debug.Log(value);
+            //Debug.Log(value);
             _BattleTileState = value;
         }
     }
@@ -376,43 +376,43 @@ public class BattleTileScript : MonoBehaviour
     public float Min_Duration_Debuff_Armor_Elemental_Life_3_ForTime;
     public float Max_Duration_Debuff_Armor_Elemental_Life_3_ForTime;
 
-    [Header("Weapon_Elemental_Neutral_ForTime")]
+    [Header("Debuff_Weapon_Elemental_Neutral_ForTime")]
     public float Min_Duration_Weapon_Elemental_Neutral_ForTime;
     public float Max_Duration_Weapon_Elemental_Neutral_ForTime;
 
-    [Header("Weapon_Elemental_Light_ForTime")]
+    [Header("Debuff_Weapon_Elemental_Light_ForTime")]
     public float Min_Duration_Weapon_Elemental_Light_ForTime;
     public float Max_Duration_Weapon_Elemental_Light_ForTime;
 
-    [Header("Weapon_Elemental_Dark_ForTime")]
+    [Header("Debuff_Weapon_Elemental_Dark_ForTime")]
     public float Min_Duration_Weapon_Elemental_Dark_ForTime;
     public float Max_Duration_Weapon_Elemental_Dark_ForTime;
 
-    [Header("Weapon_Elemental_Earth_ForTime")]
+    [Header("Debuff_Weapon_Elemental_Earth_ForTime")]
     public float Min_Duration_Weapon_Elemental_Earth_ForTime;
     public float Max_Duration_Weapon_Elemental_Earth_ForTime;
 
-    [Header("Weapon_Elemental_Lightning_ForTime")]
+    [Header("Debuff_Weapon_Elemental_Lightning_ForTime")]
     public float Min_Duration_Weapon_Elemental_Lightning_ForTime;
     public float Max_Duration_Weapon_Elemental_Lightning_ForTime;
 
-    [Header("Weapon_Elemental_Water_ForTime")]
+    [Header("Debuff_Weapon_Elemental_Water_ForTime")]
     public float Min_Duration_Weapon_Elemental_Water_ForTime;
     public float Max_Duration_Weapon_Elemental_Water_ForTime;
 
-    [Header("Weapon_Elemental_Fire_ForTime")]
+    [Header("Debuff_Weapon_Elemental_Fire_ForTime")]
     public float Min_Duration_Weapon_Elemental_Fire_ForTime;
     public float Max_Duration_Weapon_Elemental_Fire_ForTime;
 
-    [Header("Weapon_Elemental_Ice_ForTime")]
+    [Header("Debuff_Weapon_Elemental_Ice_ForTime")]
     public float Min_Duration_Weapon_Elemental_Ice_ForTime;
     public float Max_Duration_Weapon_Elemental_Ice_ForTime;
 
-    [Header("Weapon_Elemental_Wind_ForTime")]
+    [Header("Debuff_Weapon_Elemental_Wind_ForTime")]
     public float Min_Duration_Weapon_Elemental_Wind_ForTime;
     public float Max_Duration_Weapon_Elemental_Wind_ForTime;
 
-    [Header("Weapon_Elemental_Life_ForTime")]
+    [Header("Debuff_Weapon_Elemental_Life_ForTime")]
     public float Min_Duration_Weapon_Elemental_Life_ForTime;
     public float Max_Duration_Weapon_Elemental_Life_ForTime;
 
@@ -430,15 +430,19 @@ public class BattleTileScript : MonoBehaviour
         BattleTileState = info.BattleTileState;
         BattleTileT = info.BattleTileT;
         TileOwner = info.TileOwner;
-        if (BattleTileState == BattleTileStateType.Empty)
+        if (BattleTileT ==  BattleTileType.Base)
         {
-            SP.color = Color.red;
+            SP.color = Color.blue;
         }
-        else
+        else if(BattleTileT.ToString().Contains("Buff"))
         {
             SP.color = Color.white;
         }
-        
+        else if (BattleTileT.ToString().Contains("Debuff"))
+        {
+            SP.color = Color.green;
+        }
+
         CreateTile();
     }
 
@@ -615,31 +619,31 @@ public class BattleTileScript : MonoBehaviour
                 break;
             case BattleTileType.Debuff_Armor_Elemental_Life_3_ForTime:
                 break;
-            case BattleTileType.Trap:
+            case BattleTileType.Debuff_Trap:
                 break;
-            case BattleTileType.Freeze:
+            case BattleTileType.Debuff_Freeze:
                 break;
-            case BattleTileType.Portal:
+            case BattleTileType.Debuff_Portal:
                 break;
-            case BattleTileType.Weapon_Elemental_Neutral_ForTime:
+            case BattleTileType.Debuff_Weapon_Elemental_Neutral_ForTime:
                 break;
-            case BattleTileType.Weapon_Elemental_Light_ForTime:
+            case BattleTileType.Debuff_Weapon_Elemental_Light_ForTime:
                 break;
-            case BattleTileType.Weapon_Elemental_Dark_ForTime:
+            case BattleTileType.Debuff_Weapon_Elemental_Dark_ForTime:
                 break;
-            case BattleTileType.Weapon_Elemental_Earth_ForTime:
+            case BattleTileType.Debuff_Weapon_Elemental_Earth_ForTime:
                 break;
-            case BattleTileType.Weapon_Elemental_Lightning_ForTime:
+            case BattleTileType.Debuff_Weapon_Elemental_Lightning_ForTime:
                 break;
-            case BattleTileType.Weapon_Elemental_Water_ForTime:
+            case BattleTileType.Debuff_Weapon_Elemental_Water_ForTime:
                 break;
-            case BattleTileType.Weapon_Elemental_Fire_ForTime:
+            case BattleTileType.Debuff_Weapon_Elemental_Fire_ForTime:
                 break;
-            case BattleTileType.Weapon_Elemental_Ice_ForTime:
+            case BattleTileType.Debuff_Weapon_Elemental_Ice_ForTime:
                 break;
-            case BattleTileType.Weapon_Elemental_Wind_ForTime:
+            case BattleTileType.Debuff_Weapon_Elemental_Wind_ForTime:
                 break;
-            case BattleTileType.Weapon_Elemental_Life_ForTime:
+            case BattleTileType.Debuff_Weapon_Elemental_Life_ForTime:
                 break;
             default:
                 break;
@@ -667,10 +671,11 @@ public class BattleTileScript : MonoBehaviour
                 Buff_DebuffClass t = new Buff_DebuffClass();
                 t.Duration = BuffDebuffDuration;
                 t.Value = BuffDebuffValue;
+                t.AnimToFire = (CharacterAnimationStateType)System.Enum.Parse(typeof(CharacterAnimationStateType), res[0]);
                 t.Stat = (BuffDebuffStatsType)System.Enum.Parse(typeof(BuffDebuffStatsType), res[1]);
                 if ((BuffDebuffStatsType)System.Enum.Parse(typeof(BuffDebuffStatsType), res[1]) == BuffDebuffStatsType.Armor)
                 {
-                    ElementalWeaknessType ewt = res[0] == "Buff" ? (ElementalWeaknessType)System.Convert.ToInt16(res[4]) : (ElementalWeaknessType)(-System.Convert.ToInt16(res[4]));
+                    ElementalWeaknessType ewt = t.AnimToFire == CharacterAnimationStateType.Buff ? (ElementalWeaknessType)System.Convert.ToInt16(res[4]) : (ElementalWeaknessType)(-System.Convert.ToInt16(res[4]));
                     t.ElementalResistence = new ElementalResistenceClass((ElementalType)System.Enum.Parse(typeof(ElementalType), res[3]), ewt);
                 }
                 else if ((BuffDebuffStatsType)System.Enum.Parse(typeof(BuffDebuffStatsType), res[1]) == BuffDebuffStatsType.ElementalPower)

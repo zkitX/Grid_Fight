@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ede280587bd405459b300c7ae873cb3, type: 3}
   m_Name: 6x12Playable
   m_EditorClassIdentifier: 
-  BattleFieldSize: {x: 6, y: 6}
+  BattleFieldSize: {x: 6, y: 12}
   GridInfo:
   - name: 0/0
     Pos: {x: 0, y: 0}
@@ -47,7 +47,7 @@ MonoBehaviour:
   - name: 0/6
     Pos: {x: 0, y: 6}
     BattleTileState: 1
-    BattleTileT: 0
+    BattleTileT: 60
     TileOwner: 0
   - name: 0/7
     Pos: {x: 0, y: 7}
@@ -374,4 +374,4 @@ MonoBehaviour:
     BattleTileState: 1
     BattleTileT: 0
     TileOwner: 0
-  CameraBasePos: 0
+  CameraBasePos: 4

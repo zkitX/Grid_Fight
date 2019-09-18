@@ -23,16 +23,19 @@ public class CharacterBase : MonoBehaviour
     private BoxCollider PlayerCharacterCollider;
     [SerializeField]
     private BoxCollider EnemyCollider;
+    public CharacterAnimationHub CharacterAnimHub;
     private IEnumerator MoveCo;
     public ControllerType PlayerController;
     [HideInInspector]
     public BattleTileScript CurrentBattleTile;
     private bool isEnemyOrPlayerController;
-
-
+    private SpineAnimationManager SpineAnim;
+    public CharacterAnimationStateType AnimationState;
+    
     public bool AllowMoreElementalOnWepon_ElementalResistence_Armor = false;
     private void Awake()
     {
+        
     }
 
     private void Start()
@@ -48,26 +51,28 @@ public class CharacterBase : MonoBehaviour
             PlayerCharacterCollider.enabled = true;
         }
         StartCoroutine(AttackAction());
+        
+        //SetAnimation(CharacterAnimationStateType.Arriving);
     }
 
     private void Update()
     {
 
-        if (Input.GetKeyUp(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            MoveChar(InputDirection.Up);
+            MoveCharOnDirection(InputDirection.Up);
         }
-        if (Input.GetKeyUp(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            MoveChar(InputDirection.Down);
+            MoveCharOnDirection(InputDirection.Down);
         }
-        if (Input.GetKeyUp(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            MoveChar(InputDirection.Right);
+            MoveCharOnDirection(InputDirection.Right);
         }
-        if (Input.GetKeyUp(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            MoveChar(InputDirection.Left);
+            MoveCharOnDirection(InputDirection.Left);
         }
     }
 
@@ -97,14 +102,14 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
-    public void MoveChar(InputDirection nextDir)
+    public void MoveCharOnDirection(InputDirection nextDir)
     {
-        if (CharacterInfo.Health > 0)
+        if (CharacterInfo.Health > 0 && !isMoving)
         {
             BattleTileScript prevBattleTile = CurrentBattleTile;
-            int AnimState = 0;
+            CharacterAnimationStateType AnimState = CharacterAnimationStateType.Idle;
+            AnimationCurve curve = new AnimationCurve();
             Vector2Int nextPos;
-            //Debug.Log(nextDir);
             switch (nextDir)
             {
                 case InputDirection.Up:
@@ -113,7 +118,8 @@ public class CharacterBase : MonoBehaviour
                     {
                         CurrentBattleTile = GridManagerScript.Instance.GetBattleTile(nextPos, isEnemyOrPlayerController);
                     }
-                    AnimState = 2;
+                    curve = CharacterAnimHub.UpMovementSpeed;
+                    AnimState = CharacterAnimationStateType.DashUp;
                     break;
                 case InputDirection.Down:
                     nextPos = new Vector2Int(Pos.x + 1, Pos.y);
@@ -121,7 +127,8 @@ public class CharacterBase : MonoBehaviour
                     {
                         CurrentBattleTile = GridManagerScript.Instance.GetBattleTile(nextPos, isEnemyOrPlayerController);
                     }
-                    AnimState = 3;
+                    curve = CharacterAnimHub.DownMovementSpeed;
+                    AnimState = CharacterAnimationStateType.DashDown;
                     break;
                 case InputDirection.Right:
                     nextPos = new Vector2Int(Pos.x, Pos.y + 1);
@@ -129,7 +136,8 @@ public class CharacterBase : MonoBehaviour
                     {
                         CurrentBattleTile = GridManagerScript.Instance.GetBattleTile(nextPos, isEnemyOrPlayerController);
                     }
-                    AnimState = 2;
+                    curve = CharacterAnimHub.RightMovementSpeed;
+                    AnimState = CharacterAnimationStateType.DashRight;
                     break;
                 case InputDirection.Left:
                     nextPos = new Vector2Int(Pos.x, Pos.y - 1);
@@ -137,21 +145,21 @@ public class CharacterBase : MonoBehaviour
                     {
                         CurrentBattleTile = GridManagerScript.Instance.GetBattleTile(nextPos, isEnemyOrPlayerController);
                     }
-                    AnimState = 3;
+                    curve = CharacterAnimHub.LeftMovementSpeed;
+                    AnimState = CharacterAnimationStateType.DashLeft;
                     break;
             }
 
             if (CurrentBattleTile.BattleTileState == BattleTileStateType.Empty)
             {
-                isMoving = true;
                 GridManagerScript.Instance.SetBattleTileState(Pos, BattleTileStateType.Empty);
                 Pos = CurrentBattleTile.Pos;
-
+                GridManagerScript.Instance.SetBattleTileState(Pos, BattleTileStateType.Occupied);
                 if (MoveCo != null)
                 {
                     StopCoroutine(MoveCo);
                 }
-                MoveCo = Move(CurrentBattleTile.transform.position, AnimState);
+                MoveCo = MoveByTile(CurrentBattleTile.transform.position, AnimState, curve);
                 StartCoroutine(MoveCo);
             }
 
@@ -166,13 +174,25 @@ public class CharacterBase : MonoBehaviour
 
     }
 
-    private IEnumerator Move(Vector3 nextPos, int animState)
+
+    public void MoveCharToTargetDestination(Vector3 nextPos, CharacterAnimationStateType animState, float duration)
     {
-        //Anim.SetInteger("State", 0);
+        if (MoveCo != null)
+        {
+            StopCoroutine(MoveCo);
+        }
+        MoveCo = MoveWorldSpace(nextPos, animState,duration);
+        StartCoroutine(MoveCo);
+    }
+
+    private IEnumerator MoveWorldSpace(Vector3 nextPos, CharacterAnimationStateType animState, float duration)
+    {
+        SetAnimation(CharacterAnimationStateType.Idle);
         yield return new WaitForEndOfFrame();
-        //Anim.SetInteger("State", animState);
+        SetAnimation(animState);
         float timer = 0;
         Vector3 offset = transform.position;
+
         while (timer < 1)
         {
             yield return new WaitForFixedUpdate();
@@ -181,8 +201,31 @@ public class CharacterBase : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
             //Debug.Log(inum);
-            timer += (Time.fixedDeltaTime + (Time.fixedDeltaTime * 0.333f)) * 2;//TODO Movement Speed
+            timer += Time.fixedDeltaTime / duration;//TODO Movement Speed
             transform.position = Vector3.Lerp(offset, nextPos, timer);
+        }
+        transform.position = nextPos;
+        MoveCo = null;
+    }
+    private IEnumerator MoveByTile(Vector3 nextPos, CharacterAnimationStateType animState, AnimationCurve curve)
+    {
+        StartCoroutine(SetMoveAnimation(animState));
+        float AnimLength = SpineAnim.GetAnimLenght(animState);
+        float timer = 0;
+        float speedTimer = 0;
+        Vector3 offset = transform.position;
+        
+        while (timer < 1)
+        {
+            yield return new WaitForFixedUpdate();
+            while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            float newAdd = (Time.fixedDeltaTime / AnimLength);
+            timer += (Time.fixedDeltaTime / AnimLength);
+            speedTimer += newAdd * curve.Evaluate(timer + newAdd);
+            transform.position = Vector3.Lerp(offset, nextPos, speedTimer);
         }
         isMoving = false;
         transform.position = nextPos;
@@ -195,7 +238,13 @@ public class CharacterBase : MonoBehaviour
     public IEnumerator Buff_DebuffCoroutine(Buff_DebuffClass bdClass)
     {
         float timer = 0;
-        float valueOverDuration = 0; 
+        float valueOverDuration = 0;
+
+        while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause || isMoving)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
         switch (bdClass.Stat)
         {
             case BuffDebuffStatsType.Health:
@@ -246,6 +295,7 @@ public class CharacterBase : MonoBehaviour
                 break;
         }
 
+        SetMixAnimation(bdClass.AnimToFire);
 
         while (timer <= bdClass.Duration)
         {
@@ -254,7 +304,6 @@ public class CharacterBase : MonoBehaviour
             {
                 yield return new WaitForEndOfFrame();
             }
-            Debug.Log("Enter");
 
             if (bdClass.Stat == BuffDebuffStatsType.HealthOverTime)
             {
@@ -263,7 +312,6 @@ public class CharacterBase : MonoBehaviour
 
             timer += Time.fixedDeltaTime;
         }
-        Debug.Log("Enter2");
         switch (bdClass.Stat)
         {
             case BuffDebuffStatsType.Armor:
@@ -303,6 +351,49 @@ public class CharacterBase : MonoBehaviour
                 break;
         }
     }
+
+    public IEnumerator SetAnimationWithFrameDelay(CharacterAnimationStateType animState)
+    {
+        if(SpineAnim == null)
+        {
+            SpineAnim = GetComponentInChildren<SpineAnimationManager>();
+            SpineAnim.CharOwner = this;
+        }
+        SpineAnim.SetAnim(CharacterAnimationStateType.Idle, false);
+        yield return new WaitForFixedUpdate();
+        SpineAnim.SetAnim(animState, animState == CharacterAnimationStateType.Idle ? true : false);
+    }
+
+    public IEnumerator SetMoveAnimation(CharacterAnimationStateType animState)
+    {
+        if (SpineAnim == null)
+        {
+            SpineAnim = GetComponentInChildren<SpineAnimationManager>();
+            SpineAnim.CharOwner = this;
+        }
+        isMoving = true;
+        SpineAnim.SetAnim(animState, false);
+        yield return new WaitForSecondsRealtime((SpineAnim.GetAnimLenght(animState) / 100) * 90);
+        isMoving = false;
+    }
+    public void SetAnimation(CharacterAnimationStateType animState)
+    {
+        if (SpineAnim == null)
+        {
+            SpineAnim = GetComponentInChildren<SpineAnimationManager>();
+            SpineAnim.CharOwner = this;
+        }
+        SpineAnim.SetAnim(animState, animState == CharacterAnimationStateType.Idle ? true : false);
+    }
+
+    public void SetMixAnimation(CharacterAnimationStateType animState)
+    {
+        SpineAnim.SetMixAnim(animState, 0.1f,false);
+    }
+
+
+
+
 }
 
 
@@ -351,12 +442,13 @@ public class Buff_DebuffClass
 {
     public float Duration;
     public float Value;
+    public CharacterAnimationStateType AnimToFire;
     public BuffDebuffStatsType Stat;
     public AttackType AttackT;
     public ElementalResistenceClass ElementalResistence;
     public ElementalType ElementalPower;
 
-    public Buff_DebuffClass(float duration, float value, BuffDebuffStatsType stat, ElementalResistenceClass elementalResistence, ElementalType elementalPower)
+    public Buff_DebuffClass(float duration, float value, BuffDebuffStatsType stat, ElementalResistenceClass elementalResistence, ElementalType elementalPower, CharacterAnimationStateType animToFire)
     {
         Duration = duration;
         Value = value;
@@ -364,6 +456,7 @@ public class Buff_DebuffClass
         //AttackT = attackT;
         ElementalResistence = elementalResistence;
         ElementalPower = elementalPower;
+        AnimToFire = animToFire;
     }
 
     public Buff_DebuffClass()

@@ -70,18 +70,21 @@ namespace Spine.Unity.Examples {
 			skeletonAnimation = GetComponent<SkeletonAnimation>();
 			spineAnimationState = skeletonAnimation.AnimationState;
 			skeleton = skeletonAnimation.Skeleton;
-
 			StartCoroutine(DoDemoRoutine());
-		}
+        }
 
 		/// This is an infinitely repeating Unity Coroutine. Read the Unity documentation on Coroutines to learn more.
-		IEnumerator DoDemoRoutine () {
+		IEnumerator DoDemoRoutine ()
+        {
 			while (true) {
-				// SetAnimation is the basic way to set an animation.
-				// SetAnimation sets the animation and starts playing it from the beginning.
-				// Common Mistake: If you keep calling it in Update, it will keep showing the first pose of the animation, do don't do that.
+                // SetAnimation is the basic way to set an animation.
+                // SetAnimation sets the animation and starts playing it from the beginning.
+                // Common Mistake: If you keep calling it in Update, it will keep showing the first pose of the animation, do don't do that.
 
-				spineAnimationState.SetAnimation(0, walkAnimationName, true);
+
+               
+
+                spineAnimationState.SetAnimation(0, walkAnimationName, true);
 				yield return new WaitForSeconds(runWalkDuration);
 
 				spineAnimationState.SetAnimation(0, runAnimationName, true);
@@ -101,9 +104,7 @@ namespace Spine.Unity.Examples {
 				spineAnimationState.AddAnimation(0, idleAnimationName, true, 0);
 				yield return new WaitForSeconds(0.5f);
 
-			}
+            }
 		}
-
-	}
-
+    }
 }

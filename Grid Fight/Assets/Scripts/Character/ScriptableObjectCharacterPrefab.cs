@@ -8,6 +8,7 @@ public class ScriptableObjectCharacterPrefab : ScriptableObject
 {
     public CharacterType CT;
     public GameObject CharacterPrefab;
+    
 }
 public class ScriptableObjectArmorClass : ScriptableObject 
 {

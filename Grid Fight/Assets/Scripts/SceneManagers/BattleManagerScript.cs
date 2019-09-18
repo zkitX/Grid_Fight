@@ -69,27 +69,72 @@ public class BattleManagerScript : MonoBehaviour
     public void SetCharOnBoardOnRandomPos(ControllerType playerController, CharacterType ct)
     {
         BattleTileScript freeBattleTile = GridManagerScript.Instance.GetFreeBattleTile(true);
-        CharacterBase Pchar = CreatePlayerChar(ct, playerController, freeBattleTile);
+        CharacterBase Pchar = CreatePlayerCharOnTile(ct, playerController, freeBattleTile);
     }
 
     public void SetCharOnBoardOnFixedPos(ControllerType playerController, CharacterType ct, Vector2Int pos)
     {
         BattleTileScript battleTile = GridManagerScript.Instance.GetBattleTile(pos);
-        CharacterBase Pchar = CreatePlayerChar(ct, playerController, battleTile);
+        CharacterBase Pchar = CreatePlayerCharOnTile(ct, playerController, battleTile);
     }
 
-    public CharacterBase CreatePlayerChar(CharacterType ct, ControllerType playerController, BattleTileScript bts)
+    public void SetCharOnWorldPositionMovingToTile(ControllerType playerController, CharacterType ct, Vector3 worldpos, Vector2Int tilepos, float duration)
+    {
+        BattleTileScript battleTile = GridManagerScript.Instance.GetBattleTile(tilepos);
+        CharacterBase Pchar = CreatePlayerCharOnWorldPos(ct, playerController, worldpos, battleTile);
+        Pchar.MoveCharToTargetDestination(battleTile.transform.position, CharacterAnimationStateType.DashRight, duration);
+    }
+
+    public CharacterBase CreatePlayerCharOnTile(CharacterType ct, ControllerType playerController, BattleTileScript bts)
     {
         GameObject characterBasePrefab = null;
         ScriptableObjectCharacterPrefab soCharacterPrefab = ListOfScriptableObjectCharacterPrefab.Where(r => r.CT == ct).First();
         characterBasePrefab = Instantiate(CharacterBasePrefab,bts.transform.position, Quaternion.identity, CharactersContainer);
-        Instantiate(soCharacterPrefab.CharacterPrefab, characterBasePrefab.transform.position, Quaternion.identity, characterBasePrefab.transform);
+        GameObject child = Instantiate(soCharacterPrefab.CharacterPrefab, characterBasePrefab.transform.position, Quaternion.identity, characterBasePrefab.transform);
         CharacterBase currentCharacter = characterBasePrefab.GetComponent<CharacterBase>();
         currentCharacter.CharacterInfo = BattleInfoManagerScript.Instance.PlayerBattleInfo.Where(r=> r.CT == ct).First();
         currentCharacter.Pos = bts.Pos;
         currentCharacter.CurrentBattleTile = bts;
         currentCharacter.PlayerController = playerController;
-        if(!CurrentSelectedCharacters.ContainsKey(playerController))
+        currentCharacter.SetAnimation(CharacterAnimationStateType.Arriving);
+        CharacterAnimationHub animHub = child.GetComponentInChildren<CharacterAnimationHub>();
+        currentCharacter.CharacterAnimHub = animHub;
+        animHub.CharOwner = currentCharacter;
+        SelectCharacter(playerController, currentCharacter);
+        GridManagerScript.Instance.SetBattleTileState(bts.Pos, BattleTileStateType.Occupied);
+        return currentCharacter;
+    }
+
+    public CharacterBase CreatePlayerCharOnWorldPos(CharacterType ct, ControllerType playerController, Vector3 worldpos, BattleTileScript bts)
+    {
+        GameObject characterBasePrefab = null;
+        ScriptableObjectCharacterPrefab soCharacterPrefab = ListOfScriptableObjectCharacterPrefab.Where(r => r.CT == ct).First();
+        characterBasePrefab = Instantiate(CharacterBasePrefab, worldpos, Quaternion.identity, CharactersContainer);
+        Instantiate(soCharacterPrefab.CharacterPrefab, characterBasePrefab.transform.position, Quaternion.identity, characterBasePrefab.transform);
+        CharacterBase currentCharacter = characterBasePrefab.GetComponent<CharacterBase>();
+        currentCharacter.CharacterInfo = BattleInfoManagerScript.Instance.PlayerBattleInfo.Where(r => r.CT == ct).First();
+        currentCharacter.Pos = bts.Pos;
+        currentCharacter.CurrentBattleTile = bts;
+        currentCharacter.PlayerController = playerController;
+        SelectCharacter(playerController, currentCharacter);
+        GridManagerScript.Instance.SetBattleTileState(bts.Pos, BattleTileStateType.Occupied);
+        return currentCharacter;
+    }
+
+
+
+
+    public void MoveSelectedCharacterInDirection(ControllerType playerController, InputDirection dir)
+    {
+        if(CurrentSelectedCharacters.ContainsKey(playerController))
+        {
+            CurrentSelectedCharacters[playerController].MoveCharOnDirection(dir);
+        }
+    }
+
+    public void SelectCharacter(ControllerType playerController, CharacterBase currentCharacter)
+    {
+        if (!CurrentSelectedCharacters.ContainsKey(playerController))
         {
             CurrentSelectedCharacters.Add(playerController, currentCharacter);
         }
@@ -97,17 +142,8 @@ public class BattleManagerScript : MonoBehaviour
         {
             CurrentSelectedCharacters[playerController] = currentCharacter;
         }
-        GridManagerScript.Instance.SetBattleTileState(bts.Pos, BattleTileStateType.Occupied);
-        return currentCharacter;
     }
 
-    public void MoveSelectedCharacterInDirection(ControllerType playerController, InputDirection dir)
-    {
-        if(CurrentSelectedCharacters.ContainsKey(playerController))
-        {
-            CurrentSelectedCharacters[playerController].MoveChar(dir);
-        }
-    }
 }
 
 
