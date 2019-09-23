@@ -23,6 +23,7 @@ public class CharacetrBaseInfoClass
     public ControllerType ControllerT;
     public CharacterSelectionType CharacterSelection;
     public CharacterType CT;
+    public AttackParticleTypes AttackParticle;
     public ArmorClass Armor;
     public WeaponClass Weapon;
     public AttackClass CurrentAttack;
@@ -40,9 +41,26 @@ public class CharacetrBaseInfoClass
 [System.Serializable]
 public class ElementalResistenceClass
 {
-    public ElementalType Elemental;
-    public ElementalWeaknessType ElementalWeakness;
 
+    public ElementalWeaknessType ElementalWeakness
+    {
+        get
+        {
+            return _ElementalWeakness;
+        }
+        set
+        {
+            _ElementalWeakness = value;
+        }
+    }
+
+    public ElementalType Elemental;
+    public ElementalWeaknessType _ElementalWeakness;
+
+    public ElementalResistenceClass()
+    {
+
+    }
     public ElementalResistenceClass(ElementalType elemental, ElementalWeaknessType elementalWeakness)
     {
         Elemental = elemental;

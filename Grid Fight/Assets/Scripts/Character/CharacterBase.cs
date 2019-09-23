@@ -23,7 +23,6 @@ public class CharacterBase : MonoBehaviour
     private BoxCollider PlayerCharacterCollider;
     [SerializeField]
     private BoxCollider EnemyCollider;
-    public CharacterAnimationHub CharacterAnimHub;
     private IEnumerator MoveCo;
     public ControllerType PlayerController;
     [HideInInspector]
@@ -31,7 +30,10 @@ public class CharacterBase : MonoBehaviour
     private bool isEnemyOrPlayerController;
     private SpineAnimationManager SpineAnim;
     public CharacterAnimationStateType AnimationState;
-    
+    public List<CurrentBuffsDebuffsClass> BuffsDebuffs = new List<CurrentBuffsDebuffsClass>();
+    public bool IsUsingAPortal = false;
+    public Transform FiringPoint;
+   
     public bool AllowMoreElementalOnWepon_ElementalResistence_Armor = false;
     private void Awake()
     {
@@ -73,6 +75,12 @@ public class CharacterBase : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             MoveCharOnDirection(InputDirection.Left);
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            FireAttackParticles();
         }
     }
 
@@ -118,7 +126,7 @@ public class CharacterBase : MonoBehaviour
                     {
                         CurrentBattleTile = GridManagerScript.Instance.GetBattleTile(nextPos, isEnemyOrPlayerController);
                     }
-                    curve = CharacterAnimHub.UpMovementSpeed;
+                    curve = SpineAnim.UpMovementSpeed;
                     AnimState = CharacterAnimationStateType.DashUp;
                     break;
                 case InputDirection.Down:
@@ -127,7 +135,7 @@ public class CharacterBase : MonoBehaviour
                     {
                         CurrentBattleTile = GridManagerScript.Instance.GetBattleTile(nextPos, isEnemyOrPlayerController);
                     }
-                    curve = CharacterAnimHub.DownMovementSpeed;
+                    curve = SpineAnim.DownMovementSpeed;
                     AnimState = CharacterAnimationStateType.DashDown;
                     break;
                 case InputDirection.Right:
@@ -136,7 +144,7 @@ public class CharacterBase : MonoBehaviour
                     {
                         CurrentBattleTile = GridManagerScript.Instance.GetBattleTile(nextPos, isEnemyOrPlayerController);
                     }
-                    curve = CharacterAnimHub.RightMovementSpeed;
+                    curve = SpineAnim.RightMovementSpeed;
                     AnimState = CharacterAnimationStateType.DashRight;
                     break;
                 case InputDirection.Left:
@@ -145,7 +153,7 @@ public class CharacterBase : MonoBehaviour
                     {
                         CurrentBattleTile = GridManagerScript.Instance.GetBattleTile(nextPos, isEnemyOrPlayerController);
                     }
-                    curve = CharacterAnimHub.LeftMovementSpeed;
+                    curve = SpineAnim.LeftMovementSpeed;
                     AnimState = CharacterAnimationStateType.DashLeft;
                     break;
             }
@@ -173,7 +181,6 @@ public class CharacterBase : MonoBehaviour
         }
 
     }
-
 
     public void MoveCharToTargetDestination(Vector3 nextPos, CharacterAnimationStateType animState, float duration)
     {
@@ -207,6 +214,7 @@ public class CharacterBase : MonoBehaviour
         transform.position = nextPos;
         MoveCo = null;
     }
+
     private IEnumerator MoveByTile(Vector3 nextPos, CharacterAnimationStateType animState, AnimationCurve curve)
     {
         StartCoroutine(SetMoveAnimation(animState));
@@ -232,9 +240,6 @@ public class CharacterBase : MonoBehaviour
         MoveCo = null;
     }
 
-
-
-
     public IEnumerator Buff_DebuffCoroutine(Buff_DebuffClass bdClass)
     {
         float timer = 0;
@@ -251,23 +256,63 @@ public class CharacterBase : MonoBehaviour
                 CharacterInfo.Health += valueOverDuration;
                 break;
             case BuffDebuffStatsType.Armor:
-                List<ElementalResistenceClass> ElementalsResistence = CharacterInfo.ElementalsResistence.Where(r => r.Elemental == bdClass.ElementalResistence.Elemental).ToList();
-                if (ElementalsResistence.Count > 0)
+                CurrentBuffsDebuffsClass newBuffDebuff = new CurrentBuffsDebuffsClass();
+                ElementalResistenceClass elementalsResistence;
+                CurrentBuffsDebuffsClass currentBuffDebuff = BuffsDebuffs.Where(r => r.ElementalResistence.Elemental == bdClass.ElementalResistence.Elemental).FirstOrDefault();
+                if (currentBuffDebuff != null)
                 {
-                    //CharacterInfo.ElementalsResistence.Where(r => r.Elemental == bdClass.ElementalResistence.Elemental).First().ElementalWeakness += (int)bdClass.ElementalResistence.ElementalWeakness;
-                    ElementalsResistence.First().ElementalWeakness += (int)bdClass.ElementalResistence.ElementalWeakness;
-                    if (ElementalsResistence.First().ElementalWeakness > ElementalWeaknessType.ExtremelyResistent)
+                    StopCoroutine(currentBuffDebuff.BuffDebuffCo);
+                    BuffsDebuffs.Remove(currentBuffDebuff);
+                    newBuffDebuff.ElementalResistence = bdClass.ElementalResistence;
+                    newBuffDebuff.Duration = 100 + bdClass.Duration;
+                    newBuffDebuff.BuffDebuffCo = ElementalBuffDebuffCo(newBuffDebuff);
+                    elementalsResistence = CharacterInfo.ElementalsResistence.Where(r => r.Elemental == bdClass.ElementalResistence.Elemental).FirstOrDefault();
+                    if (elementalsResistence != null)
                     {
-                        ElementalsResistence.First().ElementalWeakness = ElementalWeaknessType.ExtremelyResistent;
+                        if (newBuffDebuff.ElementalResistence.ElementalWeakness > ElementalWeaknessType.Neutral)
+                        {
+                            newBuffDebuff.TotalBuffDebuff = (int)newBuffDebuff.ElementalResistence.ElementalWeakness + (int)elementalsResistence.ElementalWeakness + (int)currentBuffDebuff.TotalBuffDebuff > 3 ?
+                            3 - (int)elementalsResistence.ElementalWeakness : (int)currentBuffDebuff.TotalBuffDebuff + (int)newBuffDebuff.ElementalResistence.ElementalWeakness ;
+                        }
+                        else if (newBuffDebuff.ElementalResistence.ElementalWeakness < ElementalWeaknessType.Neutral)
+                        {
+
+                            newBuffDebuff.TotalBuffDebuff = (int)newBuffDebuff.ElementalResistence.ElementalWeakness + (int)elementalsResistence.ElementalWeakness + (int)currentBuffDebuff.TotalBuffDebuff < -3 ?
+                             -3 - (int)elementalsResistence.ElementalWeakness : (int)currentBuffDebuff.TotalBuffDebuff + (int)newBuffDebuff.ElementalResistence.ElementalWeakness;
+                        }
                     }
-                    else if (ElementalsResistence.First().ElementalWeakness < ElementalWeaknessType.ExtremelyWeak)
+                    else
                     {
-                        ElementalsResistence.First().ElementalWeakness = ElementalWeaknessType.ExtremelyWeak;
+                        newBuffDebuff.TotalBuffDebuff = (int)newBuffDebuff.ElementalResistence.ElementalWeakness;
                     }
+                    BuffsDebuffs.Add(newBuffDebuff);
+                    StartCoroutine(newBuffDebuff.BuffDebuffCo);
                 }
                 else
                 {
-                    CharacterInfo.ElementalsResistence.Add(bdClass.ElementalResistence);
+                    newBuffDebuff.ElementalResistence = bdClass.ElementalResistence;
+                    newBuffDebuff.Duration = 100 + bdClass.Duration;//TODO
+                    newBuffDebuff.BuffDebuffCo = ElementalBuffDebuffCo(newBuffDebuff);
+                    elementalsResistence = CharacterInfo.ElementalsResistence.Where(r => r.Elemental == bdClass.ElementalResistence.Elemental).FirstOrDefault();
+                    if (elementalsResistence != null)
+                    {                        
+                        if (newBuffDebuff.ElementalResistence.ElementalWeakness > ElementalWeaknessType.Neutral)
+                        {
+                            newBuffDebuff.TotalBuffDebuff = (int)newBuffDebuff.ElementalResistence.ElementalWeakness + (int)elementalsResistence.ElementalWeakness > 3 ?
+                            3 - (int)elementalsResistence.ElementalWeakness : (int)newBuffDebuff.ElementalResistence.ElementalWeakness;
+                        }
+                        else if (newBuffDebuff.ElementalResistence.ElementalWeakness < ElementalWeaknessType.Neutral)
+                        {
+
+                            newBuffDebuff.TotalBuffDebuff = (int)newBuffDebuff.ElementalResistence.ElementalWeakness + (int)elementalsResistence.ElementalWeakness < -3 ?
+                             -3 - (int)elementalsResistence.ElementalWeakness : (int)newBuffDebuff.ElementalResistence.ElementalWeakness;
+                        }                    }
+                    else
+                    {
+                        newBuffDebuff.TotalBuffDebuff = (int)newBuffDebuff.ElementalResistence.ElementalWeakness;
+                    }
+                    BuffsDebuffs.Add(newBuffDebuff);
+                    StartCoroutine(newBuffDebuff.BuffDebuffCo);
                 }
                 break;
             case BuffDebuffStatsType.Regeneration:
@@ -314,18 +359,6 @@ public class CharacterBase : MonoBehaviour
         }
         switch (bdClass.Stat)
         {
-            case BuffDebuffStatsType.Armor:
-                List<ElementalResistenceClass> ElementalsResistence = CharacterInfo.ElementalsResistence.Where(r => r.Elemental == bdClass.ElementalResistence.Elemental).ToList();
-                CharacterInfo.ElementalsResistence.Where(r => r.Elemental == bdClass.ElementalResistence.Elemental).First().ElementalWeakness -= (int)bdClass.ElementalResistence.ElementalWeakness;
-                if (ElementalsResistence.First().ElementalWeakness > ElementalWeaknessType.ExtremelyResistent)
-                {
-                    ElementalsResistence.First().ElementalWeakness = ElementalWeaknessType.ExtremelyResistent;
-                }
-                else if (ElementalsResistence.First().ElementalWeakness < ElementalWeaknessType.ExtremelyWeak)
-                {
-                    ElementalsResistence.First().ElementalWeakness = ElementalWeaknessType.ExtremelyWeak;
-                }
-                break;
             case BuffDebuffStatsType.Regeneration:
                 CharacterInfo.Health -= valueOverDuration;
                 break;
@@ -352,6 +385,40 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
+    private IEnumerator ElementalBuffDebuffCo(CurrentBuffsDebuffsClass newBuffDebuff)
+    {
+        float timer = 0;
+        float newDuration = newBuffDebuff.Duration - Mathf.Abs((int)newBuffDebuff.ElementalResistence.ElementalWeakness);
+        while (timer <= newDuration)
+        {
+            yield return new WaitForFixedUpdate();
+            while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
+            timer += Time.fixedDeltaTime;
+        }
+
+        for (int i = 0; i < Mathf.Abs((int)newBuffDebuff.ElementalResistence.ElementalWeakness); i++)
+        {
+            timer = 0;
+           /* BuffsDebuffs.Where(r => r.ElementalResistence.Elemental == newBuffDebuff.ElementalResistence.Elemental).First()
+                .ElementalResistence.ElementalWeakness += newBuffDebuff.ElementalResistence.ElementalWeakness > ElementalWeaknessType.Neutral ? 1 : -1;*/
+            while (timer <= 1)
+            {
+                yield return new WaitForFixedUpdate();
+                while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
+                {
+                    yield return new WaitForEndOfFrame();
+                }
+
+                timer += Time.fixedDeltaTime;
+            }
+        }
+        BuffsDebuffs.Remove(newBuffDebuff);
+    }
+
     public IEnumerator SetAnimationWithFrameDelay(CharacterAnimationStateType animState)
     {
         if(SpineAnim == null)
@@ -376,6 +443,7 @@ public class CharacterBase : MonoBehaviour
         yield return new WaitForSecondsRealtime((SpineAnim.GetAnimLenght(animState) / 100) * 90);
         isMoving = false;
     }
+
     public void SetAnimation(CharacterAnimationStateType animState)
     {
         if (SpineAnim == null)
@@ -391,7 +459,82 @@ public class CharacterBase : MonoBehaviour
         SpineAnim.SetMixAnim(animState, 0.1f,false);
     }
 
+    public void SetDamage(float damage, List<ElementalType> elelmntals)
+    {
 
+    }
+
+    public ElementalWeaknessType GetElementalMultiplier(List<ElementalType> armorElelmntals, List<ElementalType> weaponElementals)
+    {
+        int resVal = 0;
+
+        foreach (ElementalType elemental in armorElelmntals)
+        {
+            int res = (int)elemental - (int)weaponElementals[0];
+
+            if(res < 0)
+            {
+                res *= -1;
+            }
+
+            resVal += res;
+        }
+
+        return (ElementalWeaknessType)(resVal / armorElelmntals.Count);
+    }
+
+    public IEnumerator UsePortal(PortalInfoClass outPortal)
+    {
+        while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause || isMoving)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        StopCoroutine(MoveCo);
+        IsUsingAPortal = true;
+        transform.position = outPortal.PortalPos.transform.position;
+
+    }
+
+    public IEnumerator Freeze(float duration, float speed)
+    {
+        
+        while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause || isMoving)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        SpineAnim.SetAnimationSpeed(speed);
+        float timer = 0;
+        while (timer <= duration)
+        {
+            yield return new WaitForFixedUpdate();
+            while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
+            timer += Time.fixedDeltaTime;
+        }
+
+        SpineAnim.SetAnimationSpeed(1);
+
+    }
+
+    public IEnumerator Trap(PortalInfoClass outPortal)
+    {
+        while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause || isMoving)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        StopCoroutine(MoveCo);
+        IsUsingAPortal = true;
+        transform.position = outPortal.PortalPos.transform.position;
+
+    }
+
+    public void FireAttackParticles()
+    {
+        ParticleManagerScript.Instance.FireParticlesInPosition(CharacterInfo.AttackParticle, ParticleTypes.Cast, FiringPoint);
+    }
 
 
 }
@@ -403,7 +546,7 @@ public class CharacterBase : MonoBehaviour
 public class AttackClass
 {
     public AttackType AttackT;
-    public ParticleTypes ParticleType;
+    public AttackParticleTypes ParticleType;
     public List<ElementalType> Elemental = new List<ElementalType>();
 
 
@@ -437,7 +580,7 @@ public class WeaponClass
     public float Health;
 }
 
-
+[System.Serializable]
 public class Buff_DebuffClass
 {
     public float Duration;
@@ -464,3 +607,25 @@ public class Buff_DebuffClass
 
     }
 }
+
+
+[System.Serializable]
+public class CurrentBuffsDebuffsClass
+{
+    public ElementalResistenceClass ElementalResistence;
+    public float Duration;
+    public int TotalBuffDebuff = 0;
+    public IEnumerator BuffDebuffCo;
+
+    public CurrentBuffsDebuffsClass()
+    {
+    }
+
+    public CurrentBuffsDebuffsClass(ElementalResistenceClass elementalResistence, IEnumerator buffDebuffCo, float duration)
+    {
+        ElementalResistence = elementalResistence;
+        BuffDebuffCo = buffDebuffCo;
+        Duration = duration;
+    }
+}
+

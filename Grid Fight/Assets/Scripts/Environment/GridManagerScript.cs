@@ -11,6 +11,9 @@ public class GridManagerScript : MonoBehaviour
     public static GridManagerScript Instance;
     public List<BattleTileScript> BattleTiles = new List<BattleTileScript>();
     public Vector2Int BattleFieldSize;
+
+    public List<PortalInfoClass> Portals = new List<PortalInfoClass>();
+
     private void Awake()
     {
         Instance = this;
@@ -102,5 +105,24 @@ public class GridManagerScript : MonoBehaviour
         int battletileCount = emptyBattleTiles.Count;
         
         return emptyBattleTiles[Random.Range(0, battletileCount)];
+    }
+}
+
+
+public class PortalInfoClass
+{
+    public BattleTileScript PortalPos;
+    public PortalType Portal;
+    public int IDPortal;
+
+    public PortalInfoClass()
+    {
+    }
+
+    public PortalInfoClass(BattleTileScript portalPos, PortalType portal, int idPortal)
+    {
+        PortalPos = portalPos;
+        Portal = portal;
+        IDPortal = idPortal;
     }
 }

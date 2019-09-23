@@ -31,115 +31,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4232427762015249087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2670543494711069349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2efecff4ecaa91543b48edf4fbf4d497, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UpMovementSpeed:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  DownMovementSpeed:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  LeftMovementSpeed:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  RightMovementSpeed:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  CharOwner: {fileID: 0}
 --- !u!1001 &334240234150626075
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -222,14 +113,133 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.02
       objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: UpMovementSpeed.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: DownMovementSpeed.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: LeftMovementSpeed.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: RightMovementSpeed.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: UpMovementSpeed.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: UpMovementSpeed.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: UpMovementSpeed.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: UpMovementSpeed.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: UpMovementSpeed.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: DownMovementSpeed.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: DownMovementSpeed.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: DownMovementSpeed.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: DownMovementSpeed.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: DownMovementSpeed.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: LeftMovementSpeed.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: LeftMovementSpeed.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: LeftMovementSpeed.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: LeftMovementSpeed.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: LeftMovementSpeed.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: RightMovementSpeed.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: RightMovementSpeed.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: RightMovementSpeed.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: RightMovementSpeed.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185521, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: RightMovementSpeed.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426552412724185520, guid: 688ffa327315c4d47987893a935f91f7,
+        type: 3}
+      propertyPath: _animationName
+      value: Buff
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 688ffa327315c4d47987893a935f91f7, type: 3}
---- !u!1 &2670543494711069349 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2426552412724185534, guid: 688ffa327315c4d47987893a935f91f7,
-    type: 3}
-  m_PrefabInstance: {fileID: 334240234150626075}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2670543494711069358 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2426552412724185525, guid: 688ffa327315c4d47987893a935f91f7,

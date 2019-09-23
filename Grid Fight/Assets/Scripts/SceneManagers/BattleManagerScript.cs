@@ -97,9 +97,6 @@ public class BattleManagerScript : MonoBehaviour
         currentCharacter.CurrentBattleTile = bts;
         currentCharacter.PlayerController = playerController;
         currentCharacter.SetAnimation(CharacterAnimationStateType.Arriving);
-        CharacterAnimationHub animHub = child.GetComponentInChildren<CharacterAnimationHub>();
-        currentCharacter.CharacterAnimHub = animHub;
-        animHub.CharOwner = currentCharacter;
         SelectCharacter(playerController, currentCharacter);
         GridManagerScript.Instance.SetBattleTileState(bts.Pos, BattleTileStateType.Occupied);
         return currentCharacter;

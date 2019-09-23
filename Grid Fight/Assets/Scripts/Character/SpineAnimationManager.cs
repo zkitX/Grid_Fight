@@ -14,6 +14,11 @@ public class SpineAnimationManager : MonoBehaviour
     public CharacterAnimationStateType MixAnim;
     public CharacterBase CharOwner;
 
+    public AnimationCurve UpMovementSpeed;
+    public AnimationCurve DownMovementSpeed;
+    public AnimationCurve LeftMovementSpeed;
+    public AnimationCurve RightMovementSpeed;
+
     private void SetupSpineAnim()
     {
         if(skeletonAnimation == null)
@@ -153,4 +158,10 @@ public class SpineAnimationManager : MonoBehaviour
     {
         return skeletonAnimation.Skeleton.Data.FindAnimation(anim.ToString()).Duration;
     }
+
+    public void SetAnimationSpeed(float speed)
+    {
+        spineAnimationState.Tracks.ForEach(r => r.TimeScale = speed);
+    }
+
 }

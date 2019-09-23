@@ -19,4 +19,6 @@ public class BattleTileInfo
     public BattleTileStateType BattleTileState;
     public BattleTileType BattleTileT;
     public ControllerType TileOwner;
+    public PortalType Portal;
+    public int IDPortal;
 }

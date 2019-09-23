@@ -131,9 +131,9 @@ public enum BattleTileType
     Debuff_Armor_Elemental_Ice_3_ForTime,
     Debuff_Armor_Elemental_Wind_3_ForTime,
     Debuff_Armor_Elemental_Life_3_ForTime,
-    Debuff_Trap,
-    Debuff_Freeze,
-    Debuff_Portal,
+    Debuff_Trap_ForTime,
+    Debuff_Freeze_ForTime,
+    Portal,
     Debuff_Weapon_Elemental_Neutral_ForTime,
     Debuff_Weapon_Elemental_Light_ForTime,
     Debuff_Weapon_Elemental_Dark_ForTime,
@@ -177,10 +177,6 @@ public enum AttackType
     Static
 }
 
-public enum ParticleTypes
-{
-    none
-}
 
 public enum ElementalType
 {
@@ -245,7 +241,6 @@ public enum CharacterSelectionType
     Y
 }
 
-
 public enum BuffDebuffStatsType
 {
     Health,
@@ -295,4 +290,23 @@ public enum CharacterAnimationStateType
     Victory,
     Defeat,
     Death
+}
+
+public enum PortalType
+{
+    In,
+    Out
+}
+
+public enum AttackParticleTypes
+{
+    Balistica
+}
+
+
+public enum ParticleTypes
+{
+    Cast,
+    Attack,
+    Effect
 }
