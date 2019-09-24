@@ -4847,7 +4847,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6585221168287974345}
   m_LocalRotation: {x: -0.38268343, y: -0, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: 8.29, y: 0.011000022, z: 0.01}
+  m_LocalPosition: {x: 8.285, y: 0.011000007, z: 0.01}
   m_LocalScale: {x: 0.19999999, y: 0.20000002, z: 0.20000002}
   m_Children:
   - {fileID: 6585221168776816161}
@@ -9690,13 +9690,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6585221168344069566}
   serializedVersion: 6
-  lengthInSec: 0.2
+  lengthInSec: 3
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -9800,8 +9800,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 10
-      minScalar: 3
+      scalar: 15
+      minScalar: 6
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -9898,8 +9898,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1.3
-      minScalar: 0.7
+      scalar: 2.5
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -10443,7 +10443,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 35
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -10553,7 +10553,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 25
+        scalar: 7
         minScalar: 25
         maxCurve:
           serializedVersion: 2
@@ -10603,7 +10603,7 @@ ParticleSystem:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      cycleCount: 1
+      cycleCount: 6
       repeatInterval: 0.01
       probability: 1
   SizeModule:
@@ -10997,13 +10997,13 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0.9999
       maxCurve:
@@ -11107,7 +11107,16 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: -3091061467168119872, guid: f0afb6568412ef445b3a20378975140c,
+        type: 3}
+    - sprite: {fileID: -1790394106869334682, guid: f0afb6568412ef445b3a20378975140c,
+        type: 3}
+    - sprite: {fileID: -4551861209089045626, guid: f0afb6568412ef445b3a20378975140c,
+        type: 3}
+    - sprite: {fileID: -2931478309355477803, guid: f0afb6568412ef445b3a20378975140c,
+        type: 3}
+    - sprite: {fileID: -6996357939408812203, guid: f0afb6568412ef445b3a20378975140c,
+        type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -14530,7 +14539,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -14628,8 +14637,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 3
-      minScalar: 1
+      scalar: 6
+      minScalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -15727,14 +15736,14 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
       serializedVersion: 2
-      minMaxState: 1
-      scalar: 0.9999
+      minMaxState: 3
+      scalar: 0
       minScalar: 0.9999
       maxCurve:
         serializedVersion: 2
@@ -15846,7 +15855,16 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: -3091061467168119872, guid: f0afb6568412ef445b3a20378975140c,
+        type: 3}
+    - sprite: {fileID: -1790394106869334682, guid: f0afb6568412ef445b3a20378975140c,
+        type: 3}
+    - sprite: {fileID: -4551861209089045626, guid: f0afb6568412ef445b3a20378975140c,
+        type: 3}
+    - sprite: {fileID: -2931478309355477803, guid: f0afb6568412ef445b3a20378975140c,
+        type: 3}
+    - sprite: {fileID: -6996357939408812203, guid: f0afb6568412ef445b3a20378975140c,
+        type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
