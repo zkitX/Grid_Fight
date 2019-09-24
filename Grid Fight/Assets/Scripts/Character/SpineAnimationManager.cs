@@ -19,6 +19,8 @@ public class SpineAnimationManager : MonoBehaviour
     public AnimationCurve LeftMovementSpeed;
     public AnimationCurve RightMovementSpeed;
 
+    public Transform FiringPoint;
+
     private void SetupSpineAnim()
     {
         if(skeletonAnimation == null)

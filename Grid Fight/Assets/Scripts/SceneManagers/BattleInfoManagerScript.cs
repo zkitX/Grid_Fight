@@ -20,13 +20,11 @@ public class BattleInfoManagerScript : MonoBehaviour
 public class CharacetrBaseInfoClass
 {
     public string Name;
-    public ControllerType ControllerT;
     public CharacterSelectionType CharacterSelection;
     public CharacterType CT;
     public AttackParticleTypes AttackParticle;
     public ArmorClass Armor;
     public WeaponClass Weapon;
-    public AttackClass CurrentAttack;
     public List<ElementalResistenceClass> ElementalsResistence = new List<ElementalResistenceClass>();
     public List<ElementalType> ElementalsPower = new List<ElementalType>();
     public float AttackSpeed;

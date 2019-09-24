@@ -6,38 +6,16 @@ public class BulletScript : MonoBehaviour
 {
 	public float Speed;
 	public float Damage;
-	public AttackType AType;
+    public AttackParticleTypes AttackParticle;
+    public Vector2Int Destination;
+    public SideType Side;
+    public AttackType AType;
 	public ControllerType ControllerT;
-	public float Minx, Maxx, Miny, Maxy;
     public AnimationCurve Height;
-	public bool Hit = false;
     public bool Dead = false;
-	//public ParticleSystem PS;
-
-
-	// Start is called before the first frame update
-	private void OnEnable()
-	{
-		Hit = false;
-        Dead = false;
-		if (AType == AttackType.Static)
-		{
-			StartCoroutine(SelfDeactivate(3));
-		}
-		else if (AType == AttackType.PowerAct)
-		{
-			StartCoroutine(SelfDeactivate(7));
-            float x = (ControllerT == ControllerType.Player1 ? Random.Range(Minx, Maxx) : -Random.Range(Minx, Maxx));
-            float y = (float)Random.Range(Miny, Maxy);
-
-            StartCoroutine(MoveParabola(x,y, 3.14f));
-		}
-		else
-		{
-			StartCoroutine(SelfDeactivate(3));
-			StartCoroutine(MoveLinear(transform.right * (ControllerT == ControllerType.Player1 ? 15 : -15)));
-		}
-    }
+    public float Duration;
+    BattleTileScript bts;
+    public GameObject PS;
 
     private void Update()
     {
@@ -69,64 +47,49 @@ public class BulletScript : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private IEnumerator MoveLinear(Vector3 dest)
+    public IEnumerator Move()
 	{
 		Vector3 offset = transform.position;
         float timer = 0;
-
+        bts = GridManagerScript.Instance.GetBattleTile(Destination);
+        Vector3 destination = bts.transform.position;
         while (!Dead)
         {
             yield return new WaitForFixedUpdate();
-			while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+			/*while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
             {
                 yield return new WaitForEndOfFrame();
-            }
+            }*/
 
-		/*	if(Hit)
-			{
-				break;
-			}*/
-			transform.position = Vector3.Lerp(offset, dest + offset, timer);
-            timer += Time.fixedDeltaTime;
-        }
-	}
-
-	private IEnumerator MoveParabola(float x, float y, float time)
-    {
-		//Debug.Log(time);
-		Vector3 offset = transform.position;
-		float timer = 0;
-		float pp = 0;
-		bool inside = true;
-		while (inside)
-		{
-			yield return new WaitForFixedUpdate();
-			while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
-            {
-                yield return new WaitForEndOfFrame();
-            }
-
-            /*	if (Hit)
+            /*	if(Hit)
                 {
                     break;
                 }*/
 
-            Vector3 res = new Vector3(Mathf.Lerp(0, x, timer) + offset.x,
-                                          (((float)(Height.Evaluate(timer)) * y)) + offset.y,
-                                          offset.z);
 
+            Vector3 res;
+            res = Vector3.Lerp(offset, destination, timer);
+            res.y = AType == AttackType.PowerAct ? Height.Evaluate(timer) + res.y : 0;
+            transform.position = res;
+            timer += Time.fixedDeltaTime / Duration;
+            if (timer > 1)
+            {
+                Dead = true;
+            }
+        }
+        ParticleManagerScript.Instance.FireParticlesInPosition(AttackParticle, ParticleTypes.Effect, bts.transform);
+        PS.GetComponent<DisableParticleScript>().ResetParticle();
+        PS.transform.parent = null;
+        Destroy(this.gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.name);
+        if(other.tag.Contains("Character") && other.tag != Side.ToString())
+        {
             
-
-			timer += Time.fixedDeltaTime / time;
-			//Debug.Log(timer);
-			pp += Time.fixedDeltaTime;// * (time / 3.14f);
-			//Debug.Log(pp);
-			transform.position = res;
-			if(timer > 1)
-			{
-				inside = false;
-			}
-		}
-	}
+        }
+    }
 }
 

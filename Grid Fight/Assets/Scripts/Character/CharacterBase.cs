@@ -17,6 +17,12 @@ public class CharacterBase : MonoBehaviour
         }
     }
     public Vector2Int _Pos;
+
+
+    public Vector2Int TestAttackPosition;
+
+    public SideType Side;
+    public BulletInfoScript BulletInfo;
     public bool isMoving = false;
     public CharacetrBaseInfoClass CharacterInfo;
     [SerializeField]
@@ -32,29 +38,14 @@ public class CharacterBase : MonoBehaviour
     public CharacterAnimationStateType AnimationState;
     public List<CurrentBuffsDebuffsClass> BuffsDebuffs = new List<CurrentBuffsDebuffsClass>();
     public bool IsUsingAPortal = false;
-    public Transform FiringPoint;
-   
     public bool AllowMoreElementalOnWepon_ElementalResistence_Armor = false;
-    private void Awake()
-    {
-        
-    }
+    private FacingType facing;
+
+    public bool shoot = true;
 
     private void Start()
     {
-        if (CharacterInfo.ControllerT == ControllerType.Enemy)
-        {
-            isEnemyOrPlayerController = false;
-            EnemyCollider.enabled = true;
-        }
-        else
-        {
-            isEnemyOrPlayerController = true;
-            PlayerCharacterCollider.enabled = true;
-        }
         StartCoroutine(AttackAction());
-        
-        //SetAnimation(CharacterAnimationStateType.Arriving);
     }
 
     private void Update()
@@ -80,10 +71,29 @@ public class CharacterBase : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            FireAttackParticles();
+            CastAttackParticles();
+            CreateBullet();
         }
     }
 
+    public void SetupCharacterSide()
+    {
+        if (PlayerController == ControllerType.Enemy)
+        {
+            isEnemyOrPlayerController = false;
+            EnemyCollider.enabled = true;
+            gameObject.tag = "EnemyCharacter";
+            facing = FacingType.Left;
+        }
+        else
+        {
+            isEnemyOrPlayerController = true;
+            PlayerCharacterCollider.enabled = true;
+            gameObject.tag = "PlayerCharacter";
+            facing = FacingType.Right;
+            transform.Rotate(new Vector3(0, 180, 0));
+        }
+    }
 
     public void SetupEquipment()
     {
@@ -98,15 +108,20 @@ public class CharacterBase : MonoBehaviour
             {
                 yield return new WaitForEndOfFrame();
             }
-            //Anim.SetInteger("State", 0);
-            yield return new WaitForEndOfFrame();
-            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+            SetAnimation(CharacterAnimationStateType.Atk);
+            CastAttackParticles();
+            CreateBullet();
+            float timer = 0;
+            while (timer <= CharacterInfo.AttackSpeed)
             {
-                yield return new WaitForEndOfFrame();
+                yield return new WaitForFixedUpdate();
+                while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
+                {
+                    yield return new WaitForEndOfFrame();
+                }
+
+                timer += Time.fixedDeltaTime;
             }
-            //Anim.SetInteger("State", 1);
-            float Delay = CharacterInfo.AttackSpeed;
-            yield return new WaitForSecondsRealtime(Delay);
         }
     }
 
@@ -145,7 +160,7 @@ public class CharacterBase : MonoBehaviour
                         CurrentBattleTile = GridManagerScript.Instance.GetBattleTile(nextPos, isEnemyOrPlayerController);
                     }
                     curve = SpineAnim.RightMovementSpeed;
-                    AnimState = CharacterAnimationStateType.DashRight;
+                    AnimState = facing == FacingType.Left ? CharacterAnimationStateType.DashRight : CharacterAnimationStateType.DashLeft;
                     break;
                 case InputDirection.Left:
                     nextPos = new Vector2Int(Pos.x, Pos.y - 1);
@@ -154,7 +169,7 @@ public class CharacterBase : MonoBehaviour
                         CurrentBattleTile = GridManagerScript.Instance.GetBattleTile(nextPos, isEnemyOrPlayerController);
                     }
                     curve = SpineAnim.LeftMovementSpeed;
-                    AnimState = CharacterAnimationStateType.DashLeft;
+                    AnimState = facing == FacingType.Left ? CharacterAnimationStateType.DashLeft : CharacterAnimationStateType.DashRight;
                     break;
             }
 
@@ -531,37 +546,32 @@ public class CharacterBase : MonoBehaviour
 
     }
 
-    public void FireAttackParticles()
+    public void CastAttackParticles()
     {
-        ParticleManagerScript.Instance.FireParticlesInPosition(CharacterInfo.AttackParticle, ParticleTypes.Cast, FiringPoint);
+        ParticleManagerScript.Instance.FireParticlesInPosition(CharacterInfo.AttackParticle, ParticleTypes.Cast, SpineAnim.FiringPoint);
     }
 
-
-}
-
-
-
-
-[System.Serializable]
-public class AttackClass
-{
-    public AttackType AttackT;
-    public AttackParticleTypes ParticleType;
-    public List<ElementalType> Elemental = new List<ElementalType>();
-
-
-    public int AttackPower;
-
-
-    public float BulletSpeed;
-    public AnimationCurve Height;
-
-
-    public int AttackAngle;
-    public int NumberOfBullets;
-    public AttackClass()
+    public void CreateBullet()
     {
+        if(!shoot)
+        {
+            return;
+        }
+        if (BulletInfo == null)
+        {
+            BulletInfo = this.GetComponentInChildren<BulletInfoScript>();
+        }
+        GameObject bullet = Instantiate(BattleManagerScript.Instance.BaseBullet, SpineAnim.FiringPoint.position, Quaternion.identity);
+        BulletScript bs = bullet.GetComponent<BulletScript>();
+        bs.AType = BulletInfo.AttackT;
+        bs.Height = BulletInfo.TrajectoryHeightUp;
+        bs.Destination = TestAttackPosition;
+        bs.Duration = 5;
+        bs.gameObject.SetActive(true);
+        bs.PS = ParticleManagerScript.Instance.FireParticlesInPosition(CharacterInfo.AttackParticle, ParticleTypes.Attack, bullet.transform);
+        StartCoroutine(bs.Move());
     }
+
 }
 
 

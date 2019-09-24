@@ -17,8 +17,13 @@ public class DisableParticleScript : MonoBehaviour
     {
         if(!ps.IsAlive(true))
         {
-            ps.time = 0;
-            gameObject.SetActive(false);
+            ResetParticle();
         }
+    }
+
+    public void ResetParticle()
+    {
+        ps.time = 0;
+        gameObject.SetActive(false);
     }
 }

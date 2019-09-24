@@ -540,7 +540,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &73760348
 PrefabInstance:
@@ -701,51 +701,23 @@ MonoBehaviour:
   MatchInfoType: 0
   PlayerBattleInfo:
   - Name: c1
-    ControllerT: 0
     CharacterSelection: 0
     CT: 0
-    CurrentAttack:
-      AttackT: 0
-      ParticleType: 0
-      Elemental: 
-      AttackPower: 0
-      BulletSpeed: 0
-      Height:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-      AttackAngle: 0
-      NumberOfBullets: 0
+    AttackParticle: 0
     ElementalsResistence:
     - Elemental: 9
       _ElementalWeakness: 0
     ElementalsPower: 
-    AttackSpeed: 0
+    AttackSpeed: 5
     Health: 10
-    Regeneration: 0
-    MovementSpeed: 0
-    Stamina: 0
-    StaminaRegeneration: 0
+    Regeneration: 4
+    MovementSpeed: 5
+    Stamina: 5
+    StaminaRegeneration: 5
   - Name: c2
-    ControllerT: 0
     CharacterSelection: 1
     CT: 1
-    CurrentAttack:
-      AttackT: 0
-      ParticleType: 0
-      Elemental: 
-      AttackPower: 0
-      BulletSpeed: 0
-      Height:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-      AttackAngle: 0
-      NumberOfBullets: 0
+    AttackParticle: 0
     ElementalsResistence: []
     ElementalsPower: 
     AttackSpeed: 0
@@ -755,23 +727,9 @@ MonoBehaviour:
     Stamina: 0
     StaminaRegeneration: 0
   - Name: c3
-    ControllerT: 1
     CharacterSelection: 0
     CT: 2
-    CurrentAttack:
-      AttackT: 0
-      ParticleType: 0
-      Elemental: 
-      AttackPower: 0
-      BulletSpeed: 0
-      Height:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-      AttackAngle: 0
-      NumberOfBullets: 0
+    AttackParticle: 0
     ElementalsResistence: []
     ElementalsPower: 
     AttackSpeed: 0
@@ -781,23 +739,9 @@ MonoBehaviour:
     Stamina: 0
     StaminaRegeneration: 0
   - Name: c4
-    ControllerT: 1
     CharacterSelection: 0
     CT: 3
-    CurrentAttack:
-      AttackT: 0
-      ParticleType: 0
-      Elemental: 
-      AttackPower: 0
-      BulletSpeed: 0
-      Height:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-      AttackAngle: 0
-      NumberOfBullets: 0
+    AttackParticle: 0
     ElementalsResistence: []
     ElementalsPower: 
     AttackSpeed: 0
@@ -807,23 +751,9 @@ MonoBehaviour:
     Stamina: 0
     StaminaRegeneration: 0
   - Name: c5
-    ControllerT: 2
     CharacterSelection: 0
     CT: 4
-    CurrentAttack:
-      AttackT: 0
-      ParticleType: 0
-      Elemental: 
-      AttackPower: 0
-      BulletSpeed: 0
-      Height:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-      AttackAngle: 0
-      NumberOfBullets: 0
+    AttackParticle: 0
     ElementalsResistence: []
     ElementalsPower: 
     AttackSpeed: 0
@@ -833,23 +763,9 @@ MonoBehaviour:
     Stamina: 0
     StaminaRegeneration: 0
   - Name: c6
-    ControllerT: 2
     CharacterSelection: 0
     CT: 5
-    CurrentAttack:
-      AttackT: 0
-      ParticleType: 0
-      Elemental: 
-      AttackPower: 0
-      BulletSpeed: 0
-      Height:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-      AttackAngle: 0
-      NumberOfBullets: 0
+    AttackParticle: 0
     ElementalsResistence: []
     ElementalsPower: 
     AttackSpeed: 0
@@ -859,23 +775,9 @@ MonoBehaviour:
     Stamina: 0
     StaminaRegeneration: 0
   - Name: c7
-    ControllerT: 0
     CharacterSelection: 0
     CT: 6
-    CurrentAttack:
-      AttackT: 0
-      ParticleType: 0
-      Elemental: 
-      AttackPower: 0
-      BulletSpeed: 0
-      Height:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-      AttackAngle: 0
-      NumberOfBullets: 0
+    AttackParticle: 0
     ElementalsResistence: []
     ElementalsPower: 
     AttackSpeed: 0
@@ -885,23 +787,9 @@ MonoBehaviour:
     Stamina: 0
     StaminaRegeneration: 0
   - Name: c8
-    ControllerT: 0
     CharacterSelection: 0
     CT: 7
-    CurrentAttack:
-      AttackT: 0
-      ParticleType: 0
-      Elemental: 
-      AttackPower: 0
-      BulletSpeed: 0
-      Height:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-      AttackAngle: 0
-      NumberOfBullets: 0
+    AttackParticle: 0
     ElementalsResistence: []
     ElementalsPower: 
     AttackSpeed: 0
@@ -2673,11 +2561,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: stage01-minion-mountain-impact
-      objectReference: {fileID: 0}
-    - target: {fileID: 1520403422852718316, guid: a8710f4573db2574aa06226468cee516,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1520403422852718304, guid: a8710f4573db2574aa06226468cee516,
         type: 3}
@@ -7438,24 +7321,6 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 027fd8a7250cc364ebd7d4041bccda1f, type: 3}
---- !u!1 &1374979028 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2798907190123954233, guid: 657f4856735c1154da3009cc0cf6ea26,
-    type: 3}
-  m_PrefabInstance: {fileID: 2125304687}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1374979032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1374979028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1389778483 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 818337680082671104, guid: 027fd8a7250cc364ebd7d4041bccda1f,
@@ -7595,7 +7460,6 @@ GameObject:
   - component: {fileID: 1483483109}
   - component: {fileID: 1483483108}
   - component: {fileID: 1483483107}
-  - component: {fileID: 1483483106}
   - component: {fileID: 1483483111}
   m_Layer: 0
   m_Name: Flowchart
@@ -7604,25 +7468,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1483483106
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1483483105}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 824691464dd8d304186fabefa695e8f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 1
-  indentLevel: 0
-  PlayerController: 0
-  Ct: 0
-  WorldPos: {fileID: 1669866063}
-  TilePos: {x: 2, y: 2}
-  Duration: 5
 --- !u!114 &1483483107
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -7662,7 +7507,6 @@ MonoBehaviour:
   description: 
   eventHandler: {fileID: 1483483107}
   commandList:
-  - {fileID: 1483483106}
   - {fileID: 1483483111}
 --- !u!114 &1483483109
 MonoBehaviour:
@@ -7688,8 +7532,7 @@ MonoBehaviour:
     y: -340
     width: 1114
     height: 859
-  selectedBlocks:
-  - {fileID: 1483483108}
+  selectedBlocks: []
   selectedCommands:
   - {fileID: 1483483111}
   variables: []
@@ -7715,7 +7558,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1483483111
 MonoBehaviour:
@@ -7731,9 +7574,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 2
   indentLevel: 0
-  playerController: 0
+  playerController: 4
   ct: 0
-  pos: {x: 1, y: 8}
+  pos: {x: 2, y: 6}
 --- !u!1001 &1489474888
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8265,6 +8108,7 @@ GameObject:
   - component: {fileID: 1669949545}
   - component: {fileID: 1669949544}
   - component: {fileID: 1669949546}
+  - component: {fileID: 1669949547}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -8326,7 +8170,23 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7bc08e0a009b4d44ebe39055ef8c65e1, type: 2}
   - {fileID: 11400000, guid: dc630f67f261bc141a6ecd46ff5f430d, type: 2}
   - {fileID: 11400000, guid: ae0c2a510d5ee2b4c9d365fa9d7442dd, type: 2}
+  BaseBullet: {fileID: 476742215486157040, guid: a68cc87bb45b95b40a034a7c64f04b34,
+    type: 3}
   CharactersContainer: {fileID: 1669949545}
+--- !u!114 &1669949547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669949543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0681df0f498a0a40995a743673d6972, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ListOfAttckParticles:
+  - {fileID: 11400000, guid: ebcddc2a5067f1543bd93f1f2d06deab, type: 2}
 --- !u!1001 &1685897328
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9364,7 +9224,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1941912468 stripped
 Transform:
@@ -9601,7 +9461,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1979613221 stripped
 Transform:
@@ -10293,11 +10153,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: stage01-minion-mountain-cast
       objectReference: {fileID: 0}
-    - target: {fileID: 2798907190123954233, guid: 657f4856735c1154da3009cc0cf6ea26,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2798907190123954180, guid: 657f4856735c1154da3009cc0cf6ea26,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10948,6 +10803,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bullet
       objectReference: {fileID: 0}
+    - target: {fileID: 476742215486157040, guid: a68cc87bb45b95b40a034a7c64f04b34,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6475570289829867025, guid: a68cc87bb45b95b40a034a7c64f04b34,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10986,7 +10846,7 @@ PrefabInstance:
     - target: {fileID: 6475570289829867025, guid: a68cc87bb45b95b40a034a7c64f04b34,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6475570289829867025, guid: a68cc87bb45b95b40a034a7c64f04b34,
         type: 3}
@@ -11109,80 +10969,6 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 027fd8a7250cc364ebd7d4041bccda1f, type: 3}
---- !u!1001 &3523573218627164974
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2355261897548669010, guid: e422ec2eaee60924aa30656d5013b8cb,
-        type: 3}
-      propertyPath: m_Name
-      value: CharacterPrefab_none
-      objectReference: {fileID: 0}
-    - target: {fileID: 2355261897548669010, guid: e422ec2eaee60924aa30656d5013b8cb,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6805929144800478913, guid: e422ec2eaee60924aa30656d5013b8cb,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6805929144800478913, guid: e422ec2eaee60924aa30656d5013b8cb,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6805929144800478913, guid: e422ec2eaee60924aa30656d5013b8cb,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6805929144800478913, guid: e422ec2eaee60924aa30656d5013b8cb,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6805929144800478913, guid: e422ec2eaee60924aa30656d5013b8cb,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6805929144800478913, guid: e422ec2eaee60924aa30656d5013b8cb,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6805929144800478913, guid: e422ec2eaee60924aa30656d5013b8cb,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6805929144800478913, guid: e422ec2eaee60924aa30656d5013b8cb,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6805929144800478913, guid: e422ec2eaee60924aa30656d5013b8cb,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6805929144800478913, guid: e422ec2eaee60924aa30656d5013b8cb,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6805929144800478913, guid: e422ec2eaee60924aa30656d5013b8cb,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e422ec2eaee60924aa30656d5013b8cb, type: 3}
 --- !u!1001 &3701392416667089293
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11948,7 +11734,7 @@ PrefabInstance:
     - target: {fileID: 6172265738050289145, guid: 0326b79d40b54d740911b323f55a570d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6172265738050289145, guid: 0326b79d40b54d740911b323f55a570d,
         type: 3}
@@ -11965,15 +11751,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2670543494711069353, guid: 0326b79d40b54d740911b323f55a570d,
-        type: 3}
+    - target: {fileID: 822090979, guid: 0326b79d40b54d740911b323f55a570d, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2670543494711069355, guid: 0326b79d40b54d740911b323f55a570d,
-        type: 3}
-      propertyPath: initialFlipX
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0326b79d40b54d740911b323f55a570d, type: 3}
@@ -11990,7 +11770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BattleFieldSize: {x: 0, y: 0}
-  GridStructure: {fileID: 11400000, guid: acb9352861d5d3841bf0f97ae22d2e60, type: 2}
+  GridStructure: {fileID: 11400000, guid: 0554d8949ec254f48b04be119ea01980, type: 2}
   MainCamera: {fileID: 5422980212760745618}
   ChangeGridStructure: 0
 --- !u!1001 &7219400288335740684
@@ -12078,11 +11858,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: stage01-minion-mountain-bullet
-      objectReference: {fileID: 0}
-    - target: {fileID: 5959571826488102192, guid: c952c631c437fd44997e2b49e8704dc6,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5959571826488102194, guid: c952c631c437fd44997e2b49e8704dc6,
         type: 3}

@@ -300,7 +300,7 @@ public enum PortalType
 
 public enum AttackParticleTypes
 {
-    Balistica
+    Stage01_Minion_Mountain
 }
 
 
@@ -309,4 +309,17 @@ public enum ParticleTypes
     Cast,
     Attack,
     Effect
+}
+
+public enum SideType
+{
+    PlayerCharacter,
+    EnemyCharacter
+}
+
+
+public enum FacingType
+{
+    Left,
+    Right
 }

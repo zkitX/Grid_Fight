@@ -11,6 +11,8 @@ public class BattleManagerScript : MonoBehaviour
     public GameObject CharacterBasePrefab;
     public Dictionary<ControllerType, CharacterBase> CurrentSelectedCharacters = new Dictionary<ControllerType, CharacterBase>();
     public List<ScriptableObjectCharacterPrefab> ListOfScriptableObjectCharacterPrefab = new List<ScriptableObjectCharacterPrefab>();
+    public GameObject BaseBullet;
+
     [SerializeField]
     private Transform CharactersContainer;
     private void Awake()
@@ -98,6 +100,7 @@ public class BattleManagerScript : MonoBehaviour
         currentCharacter.PlayerController = playerController;
         currentCharacter.SetAnimation(CharacterAnimationStateType.Arriving);
         SelectCharacter(playerController, currentCharacter);
+        currentCharacter.SetupCharacterSide();
         GridManagerScript.Instance.SetBattleTileState(bts.Pos, BattleTileStateType.Occupied);
         return currentCharacter;
     }
@@ -114,6 +117,7 @@ public class BattleManagerScript : MonoBehaviour
         currentCharacter.CurrentBattleTile = bts;
         currentCharacter.PlayerController = playerController;
         SelectCharacter(playerController, currentCharacter);
+        currentCharacter.SetupCharacterSide();
         GridManagerScript.Instance.SetBattleTileState(bts.Pos, BattleTileStateType.Occupied);
         return currentCharacter;
     }

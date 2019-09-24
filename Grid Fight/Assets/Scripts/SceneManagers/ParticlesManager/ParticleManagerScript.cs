@@ -16,14 +16,17 @@ public class ParticleManagerScript : MonoBehaviour
 		Instance = this;
 	}
 
-	public void FireParticlesInPosition(AttackParticleTypes pType, ParticleTypes ParticleType, Transform parent)
+	public GameObject FireParticlesInPosition(AttackParticleTypes pType, ParticleTypes ParticleType, Transform parent)
 	{
         FiredParticle psToFire = ParticlesFired.Where(r => r.ParticleType == ParticleType && r.AttackParticle == pType && !r.PS.gameObject.activeInHierarchy).FirstOrDefault();
 		if(psToFire != null)
 		{
+            psToFire.PS.transform.parent = parent;
             psToFire.PS.transform.rotation = Quaternion.Euler(parent.eulerAngles);
             psToFire.PS.transform.position = parent.position;
             psToFire.PS.SetActive(true);
+
+            return psToFire.PS;
 		}
 		else
 		{
@@ -40,9 +43,10 @@ public class ParticleManagerScript : MonoBehaviour
                     ps = ListOfAttckParticles.Where(r => r.PSType == pType).First().EffectPS;
                     break;
             }
-            GameObject go = Instantiate(ps, parent.position, Quaternion.Euler(parent.eulerAngles));
+            GameObject go = Instantiate(ps, parent.position, Quaternion.Euler(parent.eulerAngles), parent);
 			go.SetActive(true);
 			ParticlesFired.Add(new FiredParticle(go, pType, ParticleType));
+            return go;
         }
 	}
 

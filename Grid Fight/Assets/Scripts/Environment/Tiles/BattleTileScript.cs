@@ -449,7 +449,7 @@ public class BattleTileScript : MonoBehaviour
 
         if (BattleTileT ==  BattleTileType.Base)
         {
-            SP.color = Color.blue;
+            SP.color = TileOwner == ControllerType.Enemy ? Color.blue : Color.yellow;
         }
         else if(BattleTileT.ToString().Contains("Buff"))
         {
@@ -479,7 +479,7 @@ public class BattleTileScript : MonoBehaviour
         switch (BattleTileT)
         {
             case BattleTileType.Base:
-                SP.color = Color.blue;
+                //SP.color = Color.blue;
                 break;
             case BattleTileType.Buff_Health_Instant:
                 break;
