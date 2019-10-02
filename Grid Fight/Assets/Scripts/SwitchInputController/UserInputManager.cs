@@ -99,7 +99,72 @@ public class UserInputManager : MonoBehaviour
             t = false;
             UserInputJoystickHandler(PPPlayer, DDir);
         }
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Instance_ButtonDownDownEvent(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Instance_ButtonUpDownEvent(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Instance_ButtonRightDownEvent(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            Instance_ButtonLeftDownEvent(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            Instance_ButtonDownDownEvent(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            Instance_ButtonUpDownEvent(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            Instance_ButtonRightDownEvent(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            Instance_ButtonLeftDownEvent(1);
+        }
 
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            UserInputJoystickHandler(1,InputDirection.Up);
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            UserInputJoystickHandler(1,InputDirection.Down);
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            UserInputJoystickHandler(1,InputDirection.Right);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            UserInputJoystickHandler(1,InputDirection.Left);
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            UserInputJoystickHandler(0, InputDirection.Up);
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            UserInputJoystickHandler(0, InputDirection.Down);
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            UserInputJoystickHandler(0, InputDirection.Right);
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            UserInputJoystickHandler(0, InputDirection.Left);
+        }
 
     }
 
@@ -110,13 +175,15 @@ public class UserInputManager : MonoBehaviour
     private void Instance_RightJoystickUsedEvent(int player, InputDirection dir)
     {
         Debug.Log(player + "    " + dir);
-        UserInputJoystickHandler(PPPlayer, DDir);
+        //UserInputJoystickHandler(PPPlayer, DDir);
+        UserInputJoystickHandler(player, dir);
     }
 
     private void Instance_LeftJoystickUsedEvent(int player, InputDirection dir)
     {
         Debug.Log(player + "    " + dir);
-        UserInputJoystickHandler(PPPlayer, DDir);
+        //UserInputJoystickHandler(PPPlayer, DDir);
+        UserInputJoystickHandler(player, dir);
     }
 
     #endregion
@@ -231,6 +298,7 @@ public class UserInputManager : MonoBehaviour
 
     private void Instance_ButtonHomeUpEvent(int player)
     {
+        BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
         Debug.Log(player + "  " + "Home Up");
     }
 
@@ -381,41 +449,49 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonLeftDownEvent(int player)
     {
         Debug.Log(player + "  " + "Left Down");
+        SelectCharacter(CharacterSelectionType.Left, (ControllerType)player);
     }
 
     private void Instance_ButtonRightDownEvent(int player)
     {
         Debug.Log(player + "  " + "Right Down");
+        SelectCharacter(CharacterSelectionType.Right, (ControllerType)player);
     }
 
     private void Instance_ButtonDownDownEvent(int player)
     {
         Debug.Log(player + "  " + "Down Down");
+        SelectCharacter(CharacterSelectionType.Down, (ControllerType)player);
     }
 
     private void Instance_ButtonUpDownEvent(int player)
     {
         Debug.Log(player + "  " + "Up Down");
+        SelectCharacter(CharacterSelectionType.Up, (ControllerType)player);
     }
 
     private void Instance_ButtonYDownEvent(int player)
     {
         Debug.Log(player + "  " + "Y Down");
+        //SelectCharacter(CharacterSelectionType.Y, (ControllerType)player);
     }
 
     private void Instance_ButtonXDownEvent(int player)
     {
         Debug.Log(player + "  " + "X Down");
+        //SelectCharacter(CharacterSelectionType.X, (ControllerType)player);
     }
 
     private void Instance_ButtonBDownEvent(int player)
     {
         Debug.Log(player + "  " + "B Down");
+        //SelectCharacter(CharacterSelectionType.B, (ControllerType)player);
     }
 
     private void Instance_ButtonADownEvent(int player)
     {
         Debug.Log(player + "  " + "A Down");
+        //SelectCharacter(CharacterSelectionType.A, (ControllerType)player);
     }
 
     private void Instance_ButtonRightSRDownEvent(int player)
@@ -464,4 +540,10 @@ public class UserInputManager : MonoBehaviour
     {
         BattleManagerScript.Instance.MoveSelectedCharacterInDirection((ControllerType)player, dir);
     }
+
+    public void SelectCharacter(CharacterSelectionType characterSelection, ControllerType controllerType)
+    {
+        BattleManagerScript.Instance.SetCharacterSelection(characterSelection, controllerType);
+    }
+
 }

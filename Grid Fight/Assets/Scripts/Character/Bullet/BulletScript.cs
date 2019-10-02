@@ -9,6 +9,7 @@ public class BulletScript : MonoBehaviour
     public AttackParticleTypes AttackParticle;
     public Vector2Int Destination;
     public SideType Side;
+    public ElementalType Elemental;
     public AttackType AType;
 	public ControllerType ControllerT;
     public AnimationCurve Height;
@@ -47,12 +48,18 @@ public class BulletScript : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        Physics.IgnoreLayerCollision(Side == SideType.PlayerCharacter ? 9 : 10, Side == SideType.PlayerCharacter ? 11 : 12);
+    }
     public IEnumerator Move()
 	{
+    
 		Vector3 offset = transform.position;
         float timer = 0;
         bts = GridManagerScript.Instance.GetBattleTile(Destination);
         Vector3 destination = bts.transform.position;
+        Duration = Vector3.Distance(transform.position, destination) / Speed;
         while (!Dead)
         {
             yield return new WaitForFixedUpdate();
@@ -69,27 +76,40 @@ public class BulletScript : MonoBehaviour
 
             Vector3 res;
             res = Vector3.Lerp(offset, destination, timer);
-            res.y = AType == AttackType.PowerAct ? Height.Evaluate(timer) + res.y : 0;
+            res.y = AType == AttackType.PowerAct ? Height.Evaluate(timer) + res.y : res.y;
             transform.position = res;
             timer += Time.fixedDeltaTime / Duration;
             if (timer > 1)
             {
-                Dead = true;
+                FireEffectParticles(destination);
             }
         }
-        ParticleManagerScript.Instance.FireParticlesInPosition(AttackParticle, ParticleTypes.Effect, bts.transform);
-        PS.GetComponent<DisableParticleScript>().ResetParticle();
-        PS.transform.parent = null;
-        Destroy(this.gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
-        if(other.tag.Contains("Character") && other.tag != Side.ToString())
+       // Debug.Log(other.tag);
+        if (other.tag.Contains("Character") && other.tag != Side.ToString())
         {
-            
+            CharacterBase target = other.GetComponentInParent<CharacterBase>();
+            target.SetDamage(Damage, Elemental);
+            FireEffectParticles(transform.position);
         }
     }
+
+    public void FireEffectParticles(Vector3 pos)
+    {
+        if(!Dead)
+        {
+            Dead = true;
+            StopAllCoroutines();
+            ParticleManagerScript.Instance.FireParticlesInPosition(AttackParticle, ParticleTypes.Effect, pos);
+          //  PS.GetComponent<DisableParticleScript>().ResetParticle();
+            //PS.SetActive(false);
+            //PS.transform.parent = null;
+            Destroy(this.gameObject);
+        }
+    }
+
 }
 

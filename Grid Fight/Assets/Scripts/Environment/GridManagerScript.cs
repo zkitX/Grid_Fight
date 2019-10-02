@@ -35,7 +35,7 @@ public class GridManagerScript : MonoBehaviour
         foreach (BattleTileInfo tile in gridStructure.GridInfo)
         {
             //Debug.Log(tile.Pos);
-            BattleTiles.Where(r => r.Pos == tile.Pos).First().SetupTile(tile);
+            BattleTiles.Where(r => r.Pos == tile.Pos).First().SetupTileFromBattleTileInfo(tile);
         }
 
         if(InitializationCompleteEvent != null)

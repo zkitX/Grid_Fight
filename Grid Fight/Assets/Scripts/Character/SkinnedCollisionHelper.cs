@@ -1,9 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Spine.Unity;
+using System.Collections.Generic;
+using System.Linq;
 
 public class SkinnedCollisionHelper : MonoBehaviour
 {
     // Public variables
+    public SkeletonAnimation skeletonAnimation;
+    public SkeletonUtility Skeleton;
+    public List<SkeletonUtilityBone> Bones = new List<SkeletonUtilityBone>();
+    public Spine.Skeleton skeleton;
+
     // Instance variables
     private CWeightList[] nodeWeights; // array of node weights (one per node)
     private Vector3[] newVert; // array for the regular update of the collision mesh
@@ -12,10 +20,23 @@ public class SkinnedCollisionHelper : MonoBehaviour
                                   // Function:    Start
                                   //      This basically translates the information about the skinned mesh into
                                   // data that we can internally use to quickly update the collision mesh.
+
+
+    private void Awake()
+    {
+       
+    }
     void Start()
     {
-        SkinnedMeshRenderer rend = GetComponent(typeof(SkinnedMeshRenderer)) as SkinnedMeshRenderer;
+        Bones = Skeleton.boneComponents;
+        skeletonAnimation = GetComponent<SkeletonAnimation>();
+        skeleton = skeletonAnimation.Skeleton;
+
+        List<Spine.Slot> slots = skeleton.Slots.ToList();
+
+        MeshFilter rend = GetComponent(typeof(MeshFilter)) as MeshFilter;
         collide = GetComponent(typeof(MeshCollider)) as MeshCollider;
+
         if (collide != null && rend != null)
         {
             Mesh baseMesh = rend.sharedMesh;
@@ -26,11 +47,11 @@ public class SkinnedCollisionHelper : MonoBehaviour
             newVert = new Vector3[baseMesh.vertices.Length];
             short i;
             // Make a CWeightList for each bone in the skinned mesh         
-            nodeWeights = new CWeightList[rend.bones.Length];
-            for (i = 0; i < rend.bones.Length; i++)
+            nodeWeights = new CWeightList[Bones.Count];
+            for (i = 0; i < Bones.Count; i++)
             {
                 nodeWeights[i] = new CWeightList();
-                nodeWeights[i].transform = rend.bones[i];
+                nodeWeights[i].transform = Bones[i].transform;
             }
 
             // Create a bone weight list for each bone, ready for quick calculation during an update...

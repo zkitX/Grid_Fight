@@ -12,6 +12,7 @@ public class BattleManagerScript : MonoBehaviour
     public Dictionary<ControllerType, CharacterBase> CurrentSelectedCharacters = new Dictionary<ControllerType, CharacterBase>();
     public List<ScriptableObjectCharacterPrefab> ListOfScriptableObjectCharacterPrefab = new List<ScriptableObjectCharacterPrefab>();
     public GameObject BaseBullet;
+    public List<CharacterBase> AllCharactersOnField = new List<CharacterBase>();
 
     [SerializeField]
     private Transform CharactersContainer;
@@ -30,41 +31,9 @@ public class BattleManagerScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void SetupBattleState()
     {
-        if(Input.GetKeyUp(KeyCode.Alpha1))
-        {
-            SetCharOnBoardOnRandomPos(ControllerType.Player1, CharacterType.c1);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha2))
-        {
-            SetCharOnBoardOnRandomPos(ControllerType.Player1, CharacterType.c2);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha3))
-        {
-            SetCharOnBoardOnRandomPos(ControllerType.Player2, CharacterType.c3);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha4))
-        {
-            SetCharOnBoardOnRandomPos(ControllerType.Player2, CharacterType.c4);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha5))
-        {
-            SetCharOnBoardOnRandomPos(ControllerType.Player3, CharacterType.c5);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha6))
-        {
-            SetCharOnBoardOnRandomPos(ControllerType.Player3, CharacterType.c6);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha7))
-        {
-            SetCharOnBoardOnRandomPos(ControllerType.Player4, CharacterType.c7);
-        }
-        if (Input.GetKeyUp(KeyCode.Alpha8))
-        {
-            SetCharOnBoardOnRandomPos(ControllerType.Player4, CharacterType.c8);
-        }
-
+        CurrentBattleState = BattleState.Battle;
     }
 
 
@@ -72,12 +41,14 @@ public class BattleManagerScript : MonoBehaviour
     {
         BattleTileScript freeBattleTile = GridManagerScript.Instance.GetFreeBattleTile(true);
         CharacterBase Pchar = CreatePlayerCharOnTile(ct, playerController, freeBattleTile);
+        AllCharactersOnField.Add(Pchar);
     }
 
     public void SetCharOnBoardOnFixedPos(ControllerType playerController, CharacterType ct, Vector2Int pos)
     {
         BattleTileScript battleTile = GridManagerScript.Instance.GetBattleTile(pos);
         CharacterBase Pchar = CreatePlayerCharOnTile(ct, playerController, battleTile);
+        AllCharactersOnField.Add(Pchar);
     }
 
     public void SetCharOnWorldPositionMovingToTile(ControllerType playerController, CharacterType ct, Vector3 worldpos, Vector2Int tilepos, float duration)
@@ -133,18 +104,25 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
-    public void SelectCharacter(ControllerType playerController, CharacterBase currentCharacter)
+    public void SetCharacterSelection(CharacterSelectionType characterSelection, ControllerType playerController)
     {
-        if (!CurrentSelectedCharacters.ContainsKey(playerController))
-        {
-            CurrentSelectedCharacters.Add(playerController, currentCharacter);
-        }
-        else
-        {
-            CurrentSelectedCharacters[playerController] = currentCharacter;
-        }
+        SelectCharacter(playerController, AllCharactersOnField.Where(r=> r.CharacterInfo.CharacterSelection == characterSelection && r.CharacterInfo.playerController == playerController).FirstOrDefault());
     }
 
+    public void SelectCharacter(ControllerType playerController, CharacterBase currentCharacter)
+    {
+        if(currentCharacter != null)
+        {
+            if (!CurrentSelectedCharacters.ContainsKey(playerController))
+            {
+                CurrentSelectedCharacters.Add(playerController, currentCharacter);
+            }
+            else
+            {
+                CurrentSelectedCharacters[playerController] = currentCharacter;
+            }
+        }
+    }
 }
 
 

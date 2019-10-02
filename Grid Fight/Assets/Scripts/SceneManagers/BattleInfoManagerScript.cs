@@ -12,7 +12,19 @@ public class BattleInfoManagerScript : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        DontDestroyOnLoad(this);
     }
+    /*
+      PvE,
+    PvP,
+    PPvE,
+    PPvPP
+         */
+    public void SetupMatchInfoType(int v)
+    {
+        MatchInfoType = (MatchType)v;
+    }
+
 }
 
 
@@ -21,6 +33,7 @@ public class CharacetrBaseInfoClass
 {
     public string Name;
     public CharacterSelectionType CharacterSelection;
+    public ControllerType playerController;
     public CharacterType CT;
     public AttackParticleTypes AttackParticle;
     public ArmorClass Armor;

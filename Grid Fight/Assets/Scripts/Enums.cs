@@ -235,10 +235,15 @@ public enum MatchType
 
 public enum CharacterSelectionType
 {
+    Up,
+    Down,
+    Left,
+    Right,
     A,
     B,
     X,
     Y
+    
 }
 
 public enum BuffDebuffStatsType
@@ -322,4 +327,20 @@ public enum FacingType
 {
     Left,
     Right
+}
+
+public enum RelationshipBetweenElements
+{
+    Neutral = 0,
+    ExtremelyResistent = 1,
+    VeryResistent = 2,
+    Resistent = 3,
+    Weak = 4,
+    VeryWeak = 5,
+    VeryWeak_1 = 6,
+    VeryWeak_2 = 7,
+    VeryWeak_3 = 8,
+    ExtremelyWeak = 9,
+    
+   
 }

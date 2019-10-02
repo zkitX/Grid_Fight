@@ -798,22 +798,37 @@ public class InputController : MonoBehaviour
     }
 
     //Applet calling
-    public void Applet()
+    public void Applet(int playersNumber)
     {
 #if UNITY_SWITCH
         // Set the options to pass to the Controller Applet
         ControllerAppletOptions options = new ControllerAppletOptions();
-        options.playerCountMax = 8;
+        options.playerCountMax = playersNumber;
         options.showColors = true;
         options.showLabels = true;
-        options.players[0].color = Color.red;
-        options.players[0].label = "Red Player";
-        options.players[1].color = Color.green;
-        options.players[1].label = "Green Player";
-        options.players[2].color = Color.blue;
-        options.players[2].label = "Blue Player";
-        options.players[3].color = Color.yellow;
-        options.players[3].label = "Yellow Player";
+
+        if (playersNumber == 1)
+        {
+            options.players[0].color = Color.red;
+            options.players[0].label = "Red Player";
+           
+        }
+
+        if (playersNumber >= 2)
+        {
+            options.players[0].color = Color.red;
+            options.players[0].label = "Red Player";
+            options.players[1].color = Color.green;
+            options.players[1].label = "Green Player";
+        }
+
+        if(playersNumber == 4)
+        {
+            options.players[2].color = Color.blue;
+            options.players[2].label = "Blue Player";
+            options.players[3].color = Color.yellow;
+            options.players[3].label = "Yellow Player";
+        }
 
         // Show the controller applet
         UnityEngine.Switch.Applet.Begin(); // See Unity documentation for explanation of this function

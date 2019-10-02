@@ -1,0 +1,167 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7041136247027644043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7041136247027644045}
+  - component: {fileID: 7041136247027644042}
+  m_Layer: 0
+  m_Name: BattleInfoManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7041136247027644045
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7041136247027644043}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.542286, y: -0.109479904, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7041136247027644042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7041136247027644043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce3848cecc12c964185142d667db2abf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MatchInfoType: 1
+  PlayerBattleInfo:
+  - Name: c1
+    CharacterSelection: 0
+    playerController: 0
+    CT: 0
+    AttackParticle: 0
+    ElementalsResistence:
+    - Elemental: 9
+      _ElementalWeakness: -3
+    ElementalsPower: 00000000
+    AttackSpeed: 5
+    Health: 100000
+    Regeneration: 4
+    MovementSpeed: 5
+    Stamina: 5
+    StaminaRegeneration: 5
+  - Name: c2
+    CharacterSelection: 1
+    playerController: 0
+    CT: 1
+    AttackParticle: 0
+    ElementalsResistence:
+    - Elemental: 0
+      _ElementalWeakness: 0
+    ElementalsPower: 05000000
+    AttackSpeed: 5
+    Health: 10
+    Regeneration: 4
+    MovementSpeed: 4
+    Stamina: 4
+    StaminaRegeneration: 4
+  - Name: c3
+    CharacterSelection: 2
+    playerController: 0
+    CT: 2
+    AttackParticle: 0
+    ElementalsResistence:
+    - Elemental: 0
+      _ElementalWeakness: 0
+    ElementalsPower: 00000000
+    AttackSpeed: 5
+    Health: 10
+    Regeneration: 0
+    MovementSpeed: 0
+    Stamina: 0
+    StaminaRegeneration: 0
+  - Name: c4
+    CharacterSelection: 3
+    playerController: 0
+    CT: 3
+    AttackParticle: 0
+    ElementalsResistence:
+    - Elemental: 0
+      _ElementalWeakness: 0
+    ElementalsPower: 00000000
+    AttackSpeed: 5
+    Health: 10
+    Regeneration: 0
+    MovementSpeed: 0
+    Stamina: 0
+    StaminaRegeneration: 0
+  - Name: c5
+    CharacterSelection: 0
+    playerController: 0
+    CT: 4
+    AttackParticle: 0
+    ElementalsResistence:
+    - Elemental: 0
+      _ElementalWeakness: 0
+    ElementalsPower: 00000000
+    AttackSpeed: 5
+    Health: 10
+    Regeneration: 0
+    MovementSpeed: 0
+    Stamina: 0
+    StaminaRegeneration: 0
+  - Name: c6
+    CharacterSelection: 1
+    playerController: 0
+    CT: 5
+    AttackParticle: 0
+    ElementalsResistence:
+    - Elemental: 0
+      _ElementalWeakness: 0
+    ElementalsPower: 00000000
+    AttackSpeed: 5
+    Health: 10
+    Regeneration: 0
+    MovementSpeed: 0
+    Stamina: 0
+    StaminaRegeneration: 0
+  - Name: c7
+    CharacterSelection: 2
+    playerController: 0
+    CT: 6
+    AttackParticle: 0
+    ElementalsResistence:
+    - Elemental: 0
+      _ElementalWeakness: 0
+    ElementalsPower: 00000000
+    AttackSpeed: 5
+    Health: 10
+    Regeneration: 0
+    MovementSpeed: 0
+    Stamina: 0
+    StaminaRegeneration: 0
+  - Name: c8
+    CharacterSelection: 3
+    playerController: 0
+    CT: 7
+    AttackParticle: 0
+    ElementalsResistence:
+    - Elemental: 0
+      _ElementalWeakness: 0
+    ElementalsPower: 00000000
+    AttackSpeed: 5
+    Health: 10
+    Regeneration: 0
+    MovementSpeed: 0
+    Stamina: 0
+    StaminaRegeneration: 0

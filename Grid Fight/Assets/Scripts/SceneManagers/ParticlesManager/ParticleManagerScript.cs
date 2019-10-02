@@ -16,14 +16,12 @@ public class ParticleManagerScript : MonoBehaviour
 		Instance = this;
 	}
 
-	public GameObject FireParticlesInPosition(AttackParticleTypes pType, ParticleTypes ParticleType, Transform parent)
+	public GameObject FireParticlesInPosition(AttackParticleTypes pType, ParticleTypes ParticleType, Vector3 pos)
 	{
         FiredParticle psToFire = ParticlesFired.Where(r => r.ParticleType == ParticleType && r.AttackParticle == pType && !r.PS.gameObject.activeInHierarchy).FirstOrDefault();
 		if(psToFire != null)
 		{
-            psToFire.PS.transform.parent = parent;
-            psToFire.PS.transform.rotation = Quaternion.Euler(parent.eulerAngles);
-            psToFire.PS.transform.position = parent.position;
+            psToFire.PS.transform.position = pos;
             psToFire.PS.SetActive(true);
 
             return psToFire.PS;
@@ -43,14 +41,48 @@ public class ParticleManagerScript : MonoBehaviour
                     ps = ListOfAttckParticles.Where(r => r.PSType == pType).First().EffectPS;
                     break;
             }
-            GameObject go = Instantiate(ps, parent.position, Quaternion.Euler(parent.eulerAngles), parent);
+            GameObject go = Instantiate(ps, pos, Quaternion.identity);
 			go.SetActive(true);
 			ParticlesFired.Add(new FiredParticle(go, pType, ParticleType));
             return go;
         }
 	}
 
-	private void Update()
+
+    public GameObject FireParticlesInTransform(AttackParticleTypes pType, ParticleTypes ParticleType, Transform parent)
+    {
+        FiredParticle psToFire = ParticlesFired.Where(r => r.ParticleType == ParticleType && r.AttackParticle == pType && !r.PS.gameObject.activeInHierarchy).FirstOrDefault();
+        if (psToFire != null)
+        {
+            psToFire.PS.transform.position = parent.position;
+            psToFire.PS.transform.parent = parent;
+            psToFire.PS.SetActive(true);
+            return psToFire.PS;
+        }
+        else
+        {
+            GameObject ps = null;
+            switch (ParticleType)
+            {
+                case ParticleTypes.Cast:
+                    ps = ListOfAttckParticles.Where(r => r.PSType == pType).First().CastPS;
+                    break;
+                case ParticleTypes.Attack:
+                    ps = ListOfAttckParticles.Where(r => r.PSType == pType).First().AttackPS;
+                    break;
+                case ParticleTypes.Effect:
+                    ps = ListOfAttckParticles.Where(r => r.PSType == pType).First().EffectPS;
+                    break;
+            }
+            GameObject go = Instantiate(ps, parent.position, Quaternion.identity, parent);
+            go.SetActive(true);
+            ParticlesFired.Add(new FiredParticle(go, pType, ParticleType));
+            return go;
+        }
+    }
+
+
+    private void Update()
 	{
 		if(BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause && !isTheGamePaused)
 		{
