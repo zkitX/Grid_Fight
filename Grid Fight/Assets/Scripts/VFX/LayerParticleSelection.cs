@@ -64,19 +64,25 @@ public class LayerParticleSelection : MonoBehaviour
             t.gameObject.SetActive(true);
         }
     }
-
+    /// <summary>
+    /// Internal method, Disable all the objects of a list of transform
+    /// </summary>
+    void DeselectLayer(List<Transform> s)
+    {
+        foreach (Transform t in s)
+        {
+            t.gameObject.SetActive(false);
+        }
+    }
     /// <summary>
     /// Clear all children particles to start clear
     /// </summary>
     public void CloseAllLayers()
     {
-        foreach (Transform t in transform.GetComponentsInChildren<Transform>())
-        {
-            if (t != transform)
-            {
-                t.gameObject.SetActive(false);
-            }
-        }
+        DeselectLayer(ShotNovice);
+        DeselectLayer(ShotDefiant);
+        DeselectLayer(ShotHeroine);
+        DeselectLayer(ShotGodness);
     }
 
 }
