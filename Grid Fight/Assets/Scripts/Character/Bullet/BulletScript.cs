@@ -104,9 +104,9 @@ public class BulletScript : MonoBehaviour
             Dead = true;
             StopAllCoroutines();
             ParticleManagerScript.Instance.FireParticlesInPosition(AttackParticle, ParticleTypes.Effect, pos);
-          //  PS.GetComponent<DisableParticleScript>().ResetParticle();
-            //PS.SetActive(false);
-            //PS.transform.parent = null;
+            PS.GetComponent<DisableParticleScript>().ResetParticle();
+            PS.SetActive(false);
+            PS.transform.parent = null;
             Destroy(this.gameObject);
         }
     }

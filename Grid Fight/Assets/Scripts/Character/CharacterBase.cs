@@ -624,10 +624,9 @@ public class CharacterBase : MonoBehaviour
         bs.Damage = 10;
         bs.Side = Side;
         bs.gameObject.SetActive(true);
-        //bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharacterInfo.AttackParticle, ParticleTypes.Attack, bullet.transform);
+        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharacterInfo.AttackParticle, ParticleTypes.Attack, bullet.transform);
         StartCoroutine(bs.Move());
     }
-
 }
 
 
