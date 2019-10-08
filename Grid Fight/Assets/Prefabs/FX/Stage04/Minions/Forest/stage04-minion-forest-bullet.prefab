@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2284594597646784500}
   - component: {fileID: 2284594597646784501}
   m_Layer: 0
-  m_Name: stage01-minion-forest-bullet
+  m_Name: stage04-minion-forest-bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4626255140522935333}
-  - {fileID: 4916505525024240007}
   - {fileID: 4626255141130948411}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -9802,7 +9801,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2284594597646784490}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!198 &4626255141130948409
 ParticleSystem:
@@ -19273,78 +19272,3 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!1001 &2436254533578255740
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 2284594597646784490}
-    m_Modifications:
-    - target: {fileID: 7846973069066144318, guid: 61ad7877f69151e49839ba67beb5a464,
-        type: 3}
-      propertyPath: m_Name
-      value: stage01-minion-valley-impact
-      objectReference: {fileID: 0}
-    - target: {fileID: 7346988574686665979, guid: 61ad7877f69151e49839ba67beb5a464,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7346988574686665979, guid: 61ad7877f69151e49839ba67beb5a464,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7346988574686665979, guid: 61ad7877f69151e49839ba67beb5a464,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7346988574686665979, guid: 61ad7877f69151e49839ba67beb5a464,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.27059802
-      objectReference: {fileID: 0}
-    - target: {fileID: 7346988574686665979, guid: 61ad7877f69151e49839ba67beb5a464,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.6532815
-      objectReference: {fileID: 0}
-    - target: {fileID: 7346988574686665979, guid: 61ad7877f69151e49839ba67beb5a464,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.27059802
-      objectReference: {fileID: 0}
-    - target: {fileID: 7346988574686665979, guid: 61ad7877f69151e49839ba67beb5a464,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.6532815
-      objectReference: {fileID: 0}
-    - target: {fileID: 7346988574686665979, guid: 61ad7877f69151e49839ba67beb5a464,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7346988574686665979, guid: 61ad7877f69151e49839ba67beb5a464,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -45
-      objectReference: {fileID: 0}
-    - target: {fileID: 7346988574686665979, guid: 61ad7877f69151e49839ba67beb5a464,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7346988574686665979, guid: 61ad7877f69151e49839ba67beb5a464,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 61ad7877f69151e49839ba67beb5a464, type: 3}
---- !u!4 &4916505525024240007 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7346988574686665979, guid: 61ad7877f69151e49839ba67beb5a464,
-    type: 3}
-  m_PrefabInstance: {fileID: 2436254533578255740}
-  m_PrefabAsset: {fileID: 0}
