@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Switch;
 #if UNITY_SWITCH
 using Rewired.Platforms.Switch;
 #endif
@@ -175,6 +176,11 @@ public class InputController : MonoBehaviour
         
     }
 
+    private void Start()
+    {
+        Notification.notificationMessageReceived += Notification_notificationMessageReceived;
+    }
+
     private void Update()
     {
         //Looking for all the possible players input
@@ -184,6 +190,23 @@ public class InputController : MonoBehaviour
             ButtonsPress(item);
             ButtonsDown(item);
             JoystickMovement(item);
+        }
+    }
+
+
+    private void Notification_notificationMessageReceived(Notification.Message obj)
+    {
+        if (obj == Notification.Message.OperationModeChanged)
+        {
+            if(Operation.mode == Operation.OperationMode.Console)
+            {
+                //Performance.SetConfiguration(Performance.PerformanceMode.Boost,Performance.PerformanceConfiguration.Cpu1020MhzGpu768MhzEmc1600Mhz);
+
+
+                //Screen.SetResolution(640, 480, true);
+            }
+            Debug.Log("---------------------------------------------" + Operation.mode.ToString());
+           // Operation.mode = Operation.OperationMode.Console
         }
     }
 

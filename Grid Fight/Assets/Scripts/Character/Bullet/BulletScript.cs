@@ -2,30 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This is the component that take care of all the Bullet behaviours in the game
+/// </summary>
 public class BulletScript : MonoBehaviour
 {
-	public float Speed;
-	public float Damage;
-    public AttackParticleTypes AttackParticle;
-    public Vector2Int Destination;
+    //Public
+    public BulletInfoScript BulletInfo;
+    public Vector2Int DestinationTile;
+    public Vector3 DestinationWorld;
     public SideType Side;
     public ElementalType Elemental;
-    public AttackType AType;
 	public ControllerType ControllerT;
-    public AnimationCurve Height;
     public bool Dead = false;
-    public float Duration;
-    BattleTileScript bts;
     public GameObject PS;
+
+
+    //Private 
+    private BattleTileScript bts;
+
 
     private void Update()
     {
+        //Stop the bullet when the match ended
         if(BattleManagerScript.Instance.CurrentBattleState == BattleState.End)
         {
             StartCoroutine(SelfDeactivate(0));
         }
     }
 
+    //Self deactivation method with a delay parameter
     public IEnumerator SelfDeactivate(float delay)
 	{
 		float timer = 0;
@@ -50,35 +56,38 @@ public class BulletScript : MonoBehaviour
 
     private void OnEnable()
     {
+        //On enabled setup the collision avoidance for determinated layers 
         Physics.IgnoreLayerCollision(Side == SideType.PlayerCharacter ? 9 : 10, Side == SideType.PlayerCharacter ? 11 : 12);
     }
-    public IEnumerator Move()
+
+    //Move the bullet on a determinated tile using the BulletInfo.Trajectory
+    public IEnumerator MoveToTile()
 	{
-    
+        //setup the base offset for the movement
 		Vector3 offset = transform.position;
+        //Timer used to set up the coroutine
         float timer = 0;
-        bts = GridManagerScript.Instance.GetBattleTile(Destination);
+        //Destination battle tile
+        bts = GridManagerScript.Instance.GetBattleTile(DestinationTile);
+        //Destination position
         Vector3 destination = bts.transform.position;
-        Duration = Vector3.Distance(transform.position, destination) / Speed;
+        //Duration of the particles 
+        float Duration = Vector3.Distance(transform.position, destination) / BulletInfo.BulletSpeed;
+        Vector3 res;
         while (!Dead)
         {
             yield return new WaitForFixedUpdate();
-			/*while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+            //In case the game ended or in pause I will block the movement
+            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.End)
             {
-                yield return new WaitForEndOfFrame();
-            }*/
-
-            /*	if(Hit)
-                {
-                    break;
-                }*/
-
-
-            Vector3 res;
+                yield return new WaitForFixedUpdate();
+            }
+            //Calutation for next world position of the bullet
             res = Vector3.Lerp(offset, destination, timer);
-            res.y = AType == AttackType.PowerAct ? Height.Evaluate(timer) + res.y : res.y;
+            res.y = BulletInfo.AttackT == AttackType.PowerAct ? BulletInfo.Trajectory.Evaluate(timer) + res.y : res.y;
             transform.position = res;
             timer += Time.fixedDeltaTime / Duration;
+            //if timer ended the bullet fire the Effect
             if (timer > 1)
             {
                 FireEffectParticles(destination);
@@ -86,13 +95,45 @@ public class BulletScript : MonoBehaviour
         }
     }
 
+
+    //Move the bullet on a straight movement 
+    public IEnumerator MoveStraight()
+    {
+        //setup the base offset for the movement
+        Vector3 offset = transform.position;
+        //Timer used to set up the coroutine
+        float timer = 0;
+       
+        while (!Dead)
+        {
+           
+            yield return new WaitForFixedUpdate();
+            //In case the game ended or in pause I will block the movement
+            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.End)
+            {
+                yield return new WaitForFixedUpdate();
+            }
+
+            //Calutation for next world position of the bullet
+            transform.position = Vector3.Lerp(offset, DestinationWorld + offset, timer);
+            timer += Time.fixedDeltaTime;
+            //if timer ended the bullet fire the Effect
+            if (timer > 1)
+            {
+                FireEffectParticles(transform.position);
+            }
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-       // Debug.Log(other.tag);
+        //If the bullet collide with a character 
         if (other.tag.Contains("Character") && other.tag != Side.ToString())
         {
             CharacterBase target = other.GetComponentInParent<CharacterBase>();
-            target.SetDamage(Damage, Elemental);
+            //Set damage to the hitting character
+            target.SetDamage(BulletInfo.Damage, Elemental);
+            //fire the Effect
             FireEffectParticles(transform.position);
         }
     }
@@ -103,7 +144,8 @@ public class BulletScript : MonoBehaviour
         {
             Dead = true;
             StopAllCoroutines();
-            ParticleManagerScript.Instance.FireParticlesInPosition(AttackParticle, ParticleTypes.Effect, pos);
+            //fire the Effect
+            ParticleManagerScript.Instance.FireParticlesInPosition(BulletInfo.ParticleType, ParticleTypes.Effect, pos, Side);
             PS.GetComponent<DisableParticleScript>().ResetParticle();
             PS.SetActive(false);
             PS.transform.parent = null;

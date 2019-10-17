@@ -8,7 +8,7 @@ public class ScriptableObjectCharacterPrefab : ScriptableObject
 {
     public CharacterType CT;
     public GameObject CharacterPrefab;
-    
+    public List<Vector2Int> OccupiedTiles = new List<Vector2Int>();
 }
 public class ScriptableObjectArmorClass : ScriptableObject 
 {

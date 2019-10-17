@@ -11,8 +11,6 @@ public class DisableParticleScript : MonoBehaviour
         ps = GetComponent<ParticleSystem>();
     }
 
-
-    // Update is called once per frame
     void Update()
     {
         if(!ps.IsAlive(true))
@@ -24,6 +22,12 @@ public class DisableParticleScript : MonoBehaviour
     public void ResetParticle()
     {
         ps.time = 0;
+
+        foreach (TrailRenderer item in GetComponentsInChildren<TrailRenderer>())
+        {
+            item.Clear();
+        }
+
         gameObject.SetActive(false);
     }
 }

@@ -9,7 +9,7 @@ public class CharacterBase : MonoBehaviour
 
     public delegate void TileMovementComplete(CharacterBase movingChar);
     public event TileMovementComplete TileMovementCompleteEvent;
-    public Vector2Int Pos
+    public List<Vector2Int> Pos
     {
         get
         {
@@ -20,20 +20,42 @@ public class CharacterBase : MonoBehaviour
             _Pos = value;
         }
     }
-    public Vector2Int _Pos;
+    public List<Vector2Int> _Pos = new List<Vector2Int>();
 
+    public Vector2Int PhysicalPosOnTile
+    {
+        get
+        {
+            return _PhysicalPosOnTile;
+        }
+        set
+        {
+            _PhysicalPosOnTile = value;
+        }
+    }
+    public Vector2Int _PhysicalPosOnTile;
+
+    public BulletInfoScript BulletInfo
+    {
+        get
+        {
+            if (_BulletInfo == null)
+            {
+                _BulletInfo = this.GetComponentInChildren<BulletInfoScript>();
+            }
+            return _BulletInfo;
+        }
+    }
 
     public Vector2Int TestAttackPosition;
-
     public SideType Side;
-    public BulletInfoScript BulletInfo;
+    public BulletInfoScript _BulletInfo;
     public bool isMoving = false;
-    public CharacetrBaseInfoClass CharacterInfo;
+    public CharacterBaseInfoClass CharacterInfo;
     private IEnumerator MoveCo;
     public ControllerType PlayerController;
     [HideInInspector]
-    public BattleTileScript CurrentBattleTile;
-    private bool isEnemyOrPlayerController;
+    public List<BattleTileScript> CurrentBattleTiles = new List<BattleTileScript>();
     private SpineAnimationManager SpineAnim;
     public CharacterAnimationStateType AnimationState;
     public List<CurrentBuffsDebuffsClass> BuffsDebuffs = new List<CurrentBuffsDebuffsClass>();
@@ -41,10 +63,10 @@ public class CharacterBase : MonoBehaviour
     public bool AllowMoreElementalOnWepon_ElementalResistence_Armor = false;
     private FacingType facing;
 
-    public float BulletSpeed = 1;
 
     public bool shoot = true;
 
+    #region Unity Life Cycles
     private void Start()
     {
         StartCoroutine(AttackAction());
@@ -52,11 +74,13 @@ public class CharacterBase : MonoBehaviour
 
     private void Update()
     {
+        
     }
+    #endregion
 
+    #region Setup Character
     public void SetupCharacterSide()
     {
-
         switch (BattleInfoManagerScript.Instance.MatchInfoType)
         {
             case MatchType.PvE:
@@ -105,18 +129,16 @@ public class CharacterBase : MonoBehaviour
         SpineAnim.gameObject.layer = layer;
     }
 
-
     private void EnemyControllerSettings()
     {
-        isEnemyOrPlayerController = false;
         gameObject.tag = "EnemyCharacter";
         SpineAnim.gameObject.tag = "EnemyCharacter";
         facing = FacingType.Left;
         Side = SideType.EnemyCharacter;
     }
+
     private void PlayerControllerSettings()
     {
-        isEnemyOrPlayerController = true;
         gameObject.tag = "PlayerCharacter";
         SpineAnim.gameObject.tag = "PlayerCharacter";
         facing = FacingType.Right;
@@ -124,12 +146,14 @@ public class CharacterBase : MonoBehaviour
         Side = SideType.PlayerCharacter;
     }
 
-
     public void SetupEquipment()
     {
 
     }
 
+    #endregion
+
+    #region Attack
     public IEnumerator AttackAction()
     {
         while (true)
@@ -154,76 +178,177 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
+    public void CastAttackParticles()
+    {
+        ParticleManagerScript.Instance.FireParticlesInPosition(CharacterInfo.AttackParticle, ParticleTypes.Cast, SpineAnim.FiringPoint.position, Side);
+    }
+
+    public void CreateSingleBullet()
+    {
+        if (!shoot)
+        {
+            return;
+        }
+      
+        GameObject bullet = Instantiate(BattleManagerScript.Instance.BaseBullet, SpineAnim.FiringPoint.position, Quaternion.identity);
+        BulletScript bs = bullet.GetComponent<BulletScript>();
+        bs.Elemental = CharacterInfo.ElementalsPower.First();
+        bs.Side = Side;
+        bs.BulletInfo = BulletInfo;
+        bs.gameObject.SetActive(true);
+        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharacterInfo.AttackParticle, ParticleTypes.Attack, bullet.transform, Side);
+        switch (BulletInfo.AttackT)
+        {
+            case AttackType.Straight:
+                if (Side == SideType.PlayerCharacter)
+                {
+                    // bs.Destination = TestAttackPosition;
+                    bs.DestinationTile = new Vector2Int(PhysicalPosOnTile.x, 11);
+                }
+                else
+                {
+                    bs.DestinationTile = new Vector2Int(PhysicalPosOnTile.x, 0);
+                }
+                StartCoroutine(bs.MoveToTile());
+                break;
+            case AttackType.PowerAct:
+                if (Side == SideType.PlayerCharacter)
+                {
+                     bs.DestinationTile = TestAttackPosition;
+                    //bs.DestinationTile = new Vector2Int(Pos.x, 11);
+                }
+                else
+                {
+                    bs.DestinationTile = TestAttackPosition;
+                    // bs.DestinationTile = new Vector2Int(Pos.x, 0);
+                }
+                StartCoroutine(bs.MoveToTile());
+                break;
+            case AttackType.Machingun:
+                bs.DestinationWorld = transform.right * (PlayerController == ControllerType.Enemy ? 15 : -15);
+                StartCoroutine(bs.MoveStraight());
+                break;
+            case AttackType.Debuff:
+                StartCoroutine(bs.MoveToTile());
+                break;
+            case AttackType.Static:
+                break;
+        }
+    }
+
+
+    public void CreateMachingunBullets()
+    {
+        Vector3 offsetRotation = transform.eulerAngles;
+        transform.eulerAngles -= new Vector3(0, 0, BulletInfo.MultiBulletAttackAngle / 2);
+        for (int i = 0; i < BulletInfo.MultiBulletAttackNumberOfBullets; i++)
+        {
+            transform.eulerAngles += new Vector3(0, 0, BulletInfo.MultiBulletAttackAngle / (BulletInfo.MultiBulletAttackNumberOfBullets - 1));
+            CreateSingleBullet();
+        }
+        transform.eulerAngles = offsetRotation;
+    }
+
+    #endregion
+
+    #region Move
+
     public void MoveCharOnDirection(InputDirection nextDir)
     {
         if (CharacterInfo.Health > 0 && !isMoving)
         {
-            BattleTileScript prevBattleTile = CurrentBattleTile;
+            List<BattleTileScript> prevBattleTile = CurrentBattleTiles;
+            List<BattleTileScript>  CurrentBattleTilesToCheck = new List<BattleTileScript>();
             CharacterAnimationStateType AnimState = CharacterAnimationStateType.Idle;
             AnimationCurve curve = new AnimationCurve();
-            Vector2Int nextPos;
+            List<Vector2Int> nextPos;
+            Vector2Int dir = Vector2Int.zero;
             switch (nextDir)
             {
                 case InputDirection.Up:
-                    nextPos = new Vector2Int(Pos.x - 1, Pos.y);
-                    if (GridManagerScript.Instance.IsBattleTileInControllerArea(nextPos, isEnemyOrPlayerController))
+                    dir = new Vector2Int(-1, 0);
+                    nextPos = CalculateNextPos(Pos, dir);
+                    if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, Side))
                     {
-                        CurrentBattleTile = GridManagerScript.Instance.GetBattleTile(nextPos, isEnemyOrPlayerController);
+                        CurrentBattleTilesToCheck = GridManagerScript.Instance.GetBattleTiles(nextPos, Side);
                     }
                     curve = SpineAnim.UpMovementSpeed;
                     AnimState = CharacterAnimationStateType.DashUp;
                     break;
                 case InputDirection.Down:
-                    nextPos = new Vector2Int(Pos.x + 1, Pos.y);
-                    if (GridManagerScript.Instance.IsBattleTileInControllerArea(nextPos, isEnemyOrPlayerController))
+                    dir = new Vector2Int(1, 0);
+                    nextPos = CalculateNextPos(Pos, dir);
+                    if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, Side))
                     {
-                        CurrentBattleTile = GridManagerScript.Instance.GetBattleTile(nextPos, isEnemyOrPlayerController);
+                        CurrentBattleTilesToCheck = GridManagerScript.Instance.GetBattleTiles(nextPos, Side);
                     }
                     curve = SpineAnim.DownMovementSpeed;
                     AnimState = CharacterAnimationStateType.DashDown;
                     break;
                 case InputDirection.Right:
-                    nextPos = new Vector2Int(Pos.x, Pos.y + 1);
-                    if (GridManagerScript.Instance.IsBattleTileInControllerArea(nextPos, isEnemyOrPlayerController))
+                    dir = new Vector2Int(0, 1);
+                    nextPos = CalculateNextPos(Pos, dir);
+                    if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, Side))
                     {
-                        CurrentBattleTile = GridManagerScript.Instance.GetBattleTile(nextPos, isEnemyOrPlayerController);
+                        CurrentBattleTilesToCheck = GridManagerScript.Instance.GetBattleTiles(nextPos, Side);
                     }
                     curve = SpineAnim.RightMovementSpeed;
                     AnimState = facing == FacingType.Left ? CharacterAnimationStateType.DashRight : CharacterAnimationStateType.DashLeft;
                     break;
                 case InputDirection.Left:
-                    nextPos = new Vector2Int(Pos.x, Pos.y - 1);
-                    if (GridManagerScript.Instance.IsBattleTileInControllerArea(nextPos, isEnemyOrPlayerController))
+                    dir = new Vector2Int(0, -1);
+                    nextPos = CalculateNextPos(Pos, dir);
+                    if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, Side))
                     {
-                        CurrentBattleTile = GridManagerScript.Instance.GetBattleTile(nextPos, isEnemyOrPlayerController);
+                        CurrentBattleTilesToCheck = GridManagerScript.Instance.GetBattleTiles(nextPos, Side);
                     }
                     curve = SpineAnim.LeftMovementSpeed;
                     AnimState = facing == FacingType.Left ? CharacterAnimationStateType.DashLeft : CharacterAnimationStateType.DashRight;
                     break;
             }
 
-            if (CurrentBattleTile.BattleTileState == BattleTileStateType.Empty)
+            if (CurrentBattleTilesToCheck.Count > 0 && CurrentBattleTilesToCheck.Where(r=>!Pos.Contains(r.Pos) && r.BattleTileState == BattleTileStateType.Empty).ToList().Count ==
+                CurrentBattleTilesToCheck.Where(r => !Pos.Contains(r.Pos)).ToList().Count)
             {
-                GridManagerScript.Instance.SetBattleTileState(Pos, BattleTileStateType.Empty);
-                Pos = CurrentBattleTile.Pos;
-                GridManagerScript.Instance.SetBattleTileState(Pos, BattleTileStateType.Occupied);
+                foreach (BattleTileScript item in prevBattleTile)
+                {
+                    GridManagerScript.Instance.SetBattleTileState(item.Pos, BattleTileStateType.Empty);
+                }
+                PhysicalPosOnTile += dir;
+                CurrentBattleTiles = CurrentBattleTilesToCheck;
+                Pos = new List<Vector2Int>();
+                foreach (BattleTileScript item in CurrentBattleTilesToCheck)
+                {
+                    GridManagerScript.Instance.SetBattleTileState(item.Pos, BattleTileStateType.Occupied);
+                    Pos.Add(item.Pos);
+                }
+                
                 if (MoveCo != null)
                 {
                     StopCoroutine(MoveCo);
                 }
-                MoveCo = MoveByTile(CurrentBattleTile.transform.position, AnimState, curve);
+                MoveCo = MoveByTile(CurrentBattleTiles.Where(r=> r.Pos == PhysicalPosOnTile).First().transform.position, AnimState, curve);
                 StartCoroutine(MoveCo);
             }
 
 
-            if (prevBattleTile != CurrentBattleTile)
+            if (CurrentBattleTiles.Count > 0)
             {
-
-                BattleManagerScript.Instance.OccupiedBattleTiles.Remove(prevBattleTile);
-                BattleManagerScript.Instance.OccupiedBattleTiles.Add(CurrentBattleTile);
+                foreach (BattleTileScript item in prevBattleTile)
+                {
+                    BattleManagerScript.Instance.OccupiedBattleTiles.Remove(item);
+                }
+                BattleManagerScript.Instance.OccupiedBattleTiles.AddRange(CurrentBattleTiles);
             }
         }
 
+    }
+
+    public List<Vector2Int> CalculateNextPos(List<Vector2Int> currentPos, Vector2Int direction)
+    {
+        List<Vector2Int> res = new List<Vector2Int>();
+        currentPos.ForEach(r => res.Add(r + direction));
+        return res;
     }
 
     public void MoveCharToTargetDestination(Vector3 nextPos, CharacterAnimationStateType animState, float duration)
@@ -262,6 +387,7 @@ public class CharacterBase : MonoBehaviour
     private IEnumerator MoveByTile(Vector3 nextPos, CharacterAnimationStateType animState, AnimationCurve curve)
     {
         SetAnimation(animState);
+        SpineAnim.SetAnimationSpeed(CharacterInfo.MovementSpeed);
         float AnimLength = SpineAnim.GetAnimLenght(animState);
         float timer = 0;
         float speedTimer = 0;
@@ -275,8 +401,8 @@ public class CharacterBase : MonoBehaviour
             {
                 yield return new WaitForEndOfFrame();
             }
-            float newAdd = (Time.fixedDeltaTime / AnimLength);
-            timer += (Time.fixedDeltaTime / AnimLength);
+            float newAdd = (Time.fixedDeltaTime / (AnimLength / CharacterInfo.MovementSpeed));
+            timer += (Time.fixedDeltaTime / (AnimLength / CharacterInfo.MovementSpeed));
             speedTimer += newAdd * curve.Evaluate(timer + newAdd);
             transform.position = Vector3.Lerp(offset, nextPos, speedTimer);
 
@@ -290,10 +416,14 @@ public class CharacterBase : MonoBehaviour
                 }
             }
         }
+        SpineAnim.SetAnimationSpeed(1);
         transform.position = nextPos;
         MoveCo = null;
     }
 
+    #endregion
+
+    #region Buff/Debuff
     public IEnumerator Buff_DebuffCoroutine(Buff_DebuffClass bdClass)
     {
         float timer = 0;
@@ -362,7 +492,7 @@ public class CharacterBase : MonoBehaviour
                 break;
         }
 
-        SetMixAnimation(bdClass.AnimToFire);
+        SetAnimation(bdClass.AnimToFire);
 
         while (timer <= bdClass.Duration)
         {
@@ -441,6 +571,9 @@ public class CharacterBase : MonoBehaviour
         BuffsDebuffs.Remove(newBuffDebuff);
     }
 
+    #endregion
+
+    #region Animation
     public IEnumerator SetAnimationWithFrameDelay(CharacterAnimationStateType animState)
     {
         if(SpineAnim == null)
@@ -452,15 +585,15 @@ public class CharacterBase : MonoBehaviour
         SpineAnim.SetAnim(animState, animState == CharacterAnimationStateType.Idle ? true : false);
     }
 
-   
-
     public void SetAnimation(CharacterAnimationStateType animState)
     {
         if (SpineAnim == null)
         {
             SpineAnimatorsetup();
         }
-        SpineAnim.SetAnim(animState, animState == CharacterAnimationStateType.Idle ? true : false);
+       
+        SetMixAnimation(animState);
+
     }
 
     public void SpineAnimatorsetup()
@@ -472,9 +605,10 @@ public class CharacterBase : MonoBehaviour
 
     public void SetMixAnimation(CharacterAnimationStateType animState)
     {
-        SpineAnim.SetMixAnim(animState, 0.1f,false);
+        SpineAnim.SetAnim(animState,false);
     }
 
+    #endregion
     public void SetDamage(float damage, ElementalType elemental)
     {
         ElementalWeaknessType ElaboratedWeakness;
@@ -591,42 +725,7 @@ public class CharacterBase : MonoBehaviour
 
     }
 
-    public void CastAttackParticles()
-    {
-        ParticleManagerScript.Instance.FireParticlesInPosition(CharacterInfo.AttackParticle, ParticleTypes.Cast, SpineAnim.FiringPoint.position);
-    }
-
-    public void CreateBullet()
-    {
-        if(!shoot)
-        {
-            return;
-        }
-        if (BulletInfo == null)
-        {
-            BulletInfo = this.GetComponentInChildren<BulletInfoScript>();
-        }
-        GameObject bullet = Instantiate(BattleManagerScript.Instance.BaseBullet, SpineAnim.FiringPoint.position, Quaternion.identity);
-        BulletScript bs = bullet.GetComponent<BulletScript>();
-        bs.AType = BulletInfo.AttackT;
-        bs.Height = BulletInfo.TrajectoryHeightUp;
-        if(Side == SideType.PlayerCharacter)
-        {
-            // bs.Destination = TestAttackPosition;
-            bs.Destination = new Vector2Int(Pos.x, 11);
-        }
-        else
-        {
-            bs.Destination = new Vector2Int(Pos.x, 0);
-        }
-        bs.Elemental = CharacterInfo.ElementalsPower.First();
-        bs.Speed = BulletSpeed;
-        bs.Damage = 10;
-        bs.Side = Side;
-        bs.gameObject.SetActive(true);
-        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharacterInfo.AttackParticle, ParticleTypes.Attack, bullet.transform);
-        StartCoroutine(bs.Move());
-    }
+  
 }
 
 

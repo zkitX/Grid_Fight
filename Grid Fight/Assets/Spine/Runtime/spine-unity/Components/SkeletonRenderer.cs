@@ -413,16 +413,18 @@ namespace Spine.Unity {
 
 			meshGenerator.FillLateVertexData(currentMesh);
 
-			// STEP 4. The UnityEngine.Mesh is ready. Set it as the MeshFilter's mesh. Store the instructions used for that mesh. ===========
-			meshFilter.sharedMesh = currentMesh;
+            // STEP 4. The UnityEngine.Mesh is ready. Set it as the MeshFilter's mesh. Store the instructions used for that mesh. ===========
+            meshFilter.sharedMesh = currentMesh;
 			currentSmartMesh.instructionUsed.Set(currentInstructions);
 
 			#if BUILT_IN_SPRITE_MASK_COMPONENT
 			if (meshRenderer != null) {
 				AssignSpriteMaskMaterials();
 			}
-			#endif
-		}
+#endif
+
+            
+        }
 
 		public void FindAndApplySeparatorSlots (string startsWith, bool clearExistingSeparators = true, bool updateStringArray = false) {
 			if (string.IsNullOrEmpty(startsWith)) return;

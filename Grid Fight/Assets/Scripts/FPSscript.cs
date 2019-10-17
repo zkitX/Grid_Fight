@@ -2,15 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Switch;
 
 public class FPSscript : MonoBehaviour
 {
-    public Text txt;
-   
+    public Text FPStxt;
+    public Text Modetxt;
+    public Text Resolutiontxt;
+    public Text Performancestxt;
 
     // Update is called once per frame
     void Update()
     {
-        txt.text = ((int)(1f / Time.unscaledDeltaTime)).ToString();
+        FPStxt.text = ((int)(1f / Time.unscaledDeltaTime)).ToString();
+        Modetxt.text = Operation.mode.ToString();
+        Resolutiontxt.text = "Width: " + Display.main.renderingWidth + "  Height: " + Display.main.renderingHeight;
+        Performancestxt.text = Performance.mode.ToString();
     }
 }

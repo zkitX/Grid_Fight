@@ -16,14 +16,14 @@ public class ParticleManagerScript : MonoBehaviour
 		Instance = this;
 	}
 
-	public GameObject FireParticlesInPosition(AttackParticleTypes pType, ParticleTypes ParticleType, Vector3 pos)
+	public GameObject FireParticlesInPosition(AttackParticleTypes pType, ParticleTypes ParticleType, Vector3 pos, SideType side)
 	{
         FiredParticle psToFire = ParticlesFired.Where(r => r.ParticleType == ParticleType && r.AttackParticle == pType && !r.PS.gameObject.activeInHierarchy).FirstOrDefault();
 		if(psToFire != null)
 		{
             psToFire.PS.transform.position = pos;
             psToFire.PS.SetActive(true);
-
+            psToFire.PS.transform.localScale = side == SideType.EnemyCharacter ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
             return psToFire.PS;
 		}
 		else
@@ -42,20 +42,22 @@ public class ParticleManagerScript : MonoBehaviour
                     break;
             }
             GameObject go = Instantiate(ps, pos, Quaternion.identity);
-			go.SetActive(true);
+            go.transform.localScale = side == SideType.EnemyCharacter ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
+            go.SetActive(true);
 			ParticlesFired.Add(new FiredParticle(go, pType, ParticleType));
             return go;
         }
 	}
 
 
-    public GameObject FireParticlesInTransform(AttackParticleTypes pType, ParticleTypes ParticleType, Transform parent)
+    public GameObject FireParticlesInTransform(AttackParticleTypes pType, ParticleTypes ParticleType, Transform parent, SideType side)
     {
         FiredParticle psToFire = ParticlesFired.Where(r => r.ParticleType == ParticleType && r.AttackParticle == pType && !r.PS.gameObject.activeInHierarchy).FirstOrDefault();
         if (psToFire != null)
         {
-            psToFire.PS.transform.position = parent.position;
             psToFire.PS.transform.parent = parent;
+            psToFire.PS.transform.localPosition = Vector3.zero;
+            psToFire.PS.transform.localScale = side == SideType.EnemyCharacter ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
             psToFire.PS.SetActive(true);
             return psToFire.PS;
         }
@@ -74,7 +76,8 @@ public class ParticleManagerScript : MonoBehaviour
                     ps = ListOfAttckParticles.Where(r => r.PSType == pType).First().EffectPS;
                     break;
             }
-            GameObject go = Instantiate(ps, parent.position, Quaternion.identity, parent);
+            GameObject go = Instantiate(ps, parent.position, parent.rotation, parent);
+            go.transform.localScale = side == SideType.EnemyCharacter ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
             go.SetActive(true);
             ParticlesFired.Add(new FiredParticle(go, pType, ParticleType));
             return go;

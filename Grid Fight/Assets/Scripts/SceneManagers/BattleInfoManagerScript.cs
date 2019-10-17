@@ -7,7 +7,7 @@ public class BattleInfoManagerScript : MonoBehaviour
     public static BattleInfoManagerScript Instance;
    
     public MatchType MatchInfoType;
-    public List<CharacetrBaseInfoClass> PlayerBattleInfo = new List<CharacetrBaseInfoClass>();
+    public List<CharacterBaseInfoClass> PlayerBattleInfo = new List<CharacterBaseInfoClass>();
 
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class BattleInfoManagerScript : MonoBehaviour
 
 
 [System.Serializable]
-public class CharacetrBaseInfoClass
+public class CharacterBaseInfoClass
 {
     public string Name;
     public CharacterSelectionType CharacterSelection;

@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class UserInputManager : MonoBehaviour
 {
+    public List<RectTransform> PressableItems = new List<RectTransform>();
+    private Vector2 MouseIn;
+    private bool isMoving = true;
+    public int PPPlayer; public InputDirection DDir;
+    public bool t = false;
+
+
+    public float Threshold = 50;
     private void Start()
     {
         #region Button Down
@@ -87,13 +95,60 @@ public class UserInputManager : MonoBehaviour
         InputController.Instance.RightJoystickUsedEvent += Instance_RightJoystickUsedEvent;
         #endregion
 
-
-        //InputController.Instance.Applet();
     }
-    public int PPPlayer; public InputDirection DDir;
-    public bool t = false;
-    private void Update()
+  
+    void Update()
     {
+        if (Input.GetMouseButtonDown(0) && BattleManagerScript.Instance.CurrentSelectedCharacters[ControllerType.Player1] != null)
+        {
+            isMoving = true;
+            foreach (RectTransform item in PressableItems)
+            {
+                Vector2 localMousePosition = item.InverseTransformPoint(Input.mousePosition);
+                if (item.rect.Contains(localMousePosition) && item.gameObject.activeInHierarchy)
+                {
+                    isMoving = false;
+                    break;
+                }
+            }
+            if (isMoving)
+            {
+                MouseIn = Input.mousePosition;
+            }
+        }
+
+        if (Input.GetMouseButton(0) && isMoving && BattleManagerScript.Instance.CurrentSelectedCharacters[ControllerType.Player1] != null)
+        {
+            float X = Mathf.Abs(Input.mousePosition.x) - Mathf.Abs(MouseIn.x);
+            float Y = Mathf.Abs(Input.mousePosition.y) - Mathf.Abs(MouseIn.y);
+            if ((Mathf.Abs(X) > Threshold || Mathf.Abs(Y) > Threshold))
+            {
+                isMoving = false;
+                if (Mathf.Abs(X) > Mathf.Abs(Y))
+                {
+                    if (Input.mousePosition.x > MouseIn.x)
+                    {
+                        UserInputJoystickHandler(0, InputDirection.Right);
+                    }
+                    else
+                    {
+                        UserInputJoystickHandler(0, InputDirection.Left);
+                    }
+                }
+                else
+                {
+                    if (Input.mousePosition.y > MouseIn.y)
+                    {
+                        UserInputJoystickHandler(0, InputDirection.Up);
+                    }
+                    else
+                    {
+                        UserInputJoystickHandler(0, InputDirection.Down);
+                    }
+                }
+            }
+        }
+
         if(t)
         {
             t = false;
@@ -132,40 +187,39 @@ public class UserInputManager : MonoBehaviour
             Instance_ButtonLeftDownEvent(1);
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow))
         {
             UserInputJoystickHandler(1,InputDirection.Up);
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow))
         {
             UserInputJoystickHandler(1,InputDirection.Down);
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             UserInputJoystickHandler(1,InputDirection.Right);
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             UserInputJoystickHandler(1,InputDirection.Left);
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
             UserInputJoystickHandler(0, InputDirection.Up);
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
             UserInputJoystickHandler(0, InputDirection.Down);
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
             UserInputJoystickHandler(0, InputDirection.Right);
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
             UserInputJoystickHandler(0, InputDirection.Left);
         }
-
     }
 
 
@@ -221,21 +275,25 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonLeftUpEvent(int player)
     {
         Debug.Log(player + "  " + "Left Up");
+        StopLoadSelectCharacter(CharacterSelectionType.Left, (ControllerType)player);
     }
 
     private void Instance_ButtonRightUpEvent(int player)
     {
         Debug.Log(player + "  " + "Right Up");
+        StopLoadSelectCharacter(CharacterSelectionType.Right, (ControllerType)player);
     }
 
     private void Instance_ButtonDownUpEvent(int player)
     {
         Debug.Log(player + "  " + "Down Up");
+        StopLoadSelectCharacter(CharacterSelectionType.Down, (ControllerType)player);
     }
 
     private void Instance_ButtonUpUpEvent(int player)
     {
         Debug.Log(player + "  " + "Up Up");
+        StopLoadSelectCharacter(CharacterSelectionType.Up, (ControllerType)player);
     }
 
     private void Instance_ButtonYUpEvent(int player)
@@ -251,13 +309,13 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonBUpEvent(int player)
     {
         Debug.Log(player + "  " + "B Up");
-        VibrationController.Instance.CustomVibration(player, VibrationType.b);
+        //VibrationController.Instance.CustomVibration(player, VibrationType.b);
     }
 
     private void Instance_ButtonAUpEvent(int player)
     {
         Debug.Log(player + "  " + "A Up");
-        VibrationController.Instance.CustomVibration(player, VibrationType.a);
+        //VibrationController.Instance.CustomVibration(player, VibrationType.a);
 
     }
 
@@ -338,21 +396,25 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonLeftPressedEvent(int player)
     {
         Debug.Log(player + "  " + "Left Press");
+        LoadSelectCharacter( CharacterSelectionType.Left, (ControllerType)player);
     }
 
     private void Instance_ButtonRightPressedEvent(int player)
     {
         Debug.Log(player + "  " + "Right Press");
+        LoadSelectCharacter(CharacterSelectionType.Right, (ControllerType)player);
     }
 
     private void Instance_ButtonDownPressedEvent(int player)
     {
         Debug.Log(player + "  " + "Down Press");
+        LoadSelectCharacter(CharacterSelectionType.Down, (ControllerType)player);
     }
 
     private void Instance_ButtonUpPressedEvent(int player)
     {
         Debug.Log(player + "  " + "Up Press");
+        LoadSelectCharacter(CharacterSelectionType.Up, (ControllerType)player);
     }
 
     private void Instance_ButtonYPressedEvent(int player)
@@ -449,25 +511,30 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonLeftDownEvent(int player)
     {
         Debug.Log(player + "  " + "Left Down");
-        SelectCharacter(CharacterSelectionType.Left, (ControllerType)player);
+        //SelectCharacter(CharacterSelectionType.Left, (ControllerType)player);
+        LoadSelectCharacter(CharacterSelectionType.Left, (ControllerType)player);
+
     }
 
     private void Instance_ButtonRightDownEvent(int player)
     {
         Debug.Log(player + "  " + "Right Down");
-        SelectCharacter(CharacterSelectionType.Right, (ControllerType)player);
+        //SelectCharacter(CharacterSelectionType.Right, (ControllerType)player);
+        LoadSelectCharacter(CharacterSelectionType.Right, (ControllerType)player);
     }
 
     private void Instance_ButtonDownDownEvent(int player)
     {
         Debug.Log(player + "  " + "Down Down");
-        SelectCharacter(CharacterSelectionType.Down, (ControllerType)player);
+        //SelectCharacter(CharacterSelectionType.Down, (ControllerType)player);
+        LoadSelectCharacter(CharacterSelectionType.Down, (ControllerType)player);
     }
 
     private void Instance_ButtonUpDownEvent(int player)
     {
         Debug.Log(player + "  " + "Up Down");
-        SelectCharacter(CharacterSelectionType.Up, (ControllerType)player);
+        //SelectCharacter(CharacterSelectionType.Up, (ControllerType)player);
+        LoadSelectCharacter(CharacterSelectionType.Up, (ControllerType)player);
     }
 
     private void Instance_ButtonYDownEvent(int player)
@@ -544,6 +611,16 @@ public class UserInputManager : MonoBehaviour
     public void SelectCharacter(CharacterSelectionType characterSelection, ControllerType controllerType)
     {
         BattleManagerScript.Instance.SetCharacterSelection(characterSelection, controllerType);
+    }
+
+    public void LoadSelectCharacter(CharacterSelectionType characterSelection, ControllerType controllerType)
+    {
+        BattleManagerScript.Instance.Switch_LoadingNewCharacterInRandomPosition(characterSelection, controllerType);
+    }
+
+    public void StopLoadSelectCharacter(CharacterSelectionType characterSelection, ControllerType controllerType)
+    {
+        BattleManagerScript.Instance.Switch_StopLoadingNewCharacter(characterSelection, controllerType);
     }
 
 }

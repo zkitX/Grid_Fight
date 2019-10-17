@@ -305,7 +305,8 @@ public enum PortalType
 
 public enum AttackParticleTypes
 {
-    Stage04_Minion_Mountain
+    Stage04_Minion_Mountain,
+    Stage04_Minion_Forest
 }
 
 

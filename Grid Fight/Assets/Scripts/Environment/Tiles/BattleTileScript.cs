@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// This is the component that take care of all the tile behaviours in the game
+/// </summary>
 public class BattleTileScript : MonoBehaviour
 {
 
@@ -14,7 +17,7 @@ public class BattleTileScript : MonoBehaviour
         }
         set
         {
-            //Debug.Log(value);
+            //Debug.Log(Pos + "   " + value);
             _BattleTileState = value;
         }
     }
@@ -24,6 +27,8 @@ public class BattleTileScript : MonoBehaviour
     public ControllerType TileOwner;
     public SpriteRenderer SP;
     public PortalInfoClass PortalInfo;
+
+    //Private
     private bool isMovingEventSubscribed = false;
 
 
@@ -436,6 +441,7 @@ public class BattleTileScript : MonoBehaviour
     {
         SP = GetComponent<SpriteRenderer>();
     }
+    //Setup tile info
     public void SetupTileFromBattleTileInfo(BattleTileInfo info)
     {
         BattleTileState = info.BattleTileState;
@@ -449,6 +455,7 @@ public class BattleTileScript : MonoBehaviour
         SetupTile();
     }
 
+    //Placeholde for the TileSetup
     public void SetupTile()
     {
         if (BattleTileT == BattleTileType.Base)
@@ -471,6 +478,7 @@ public class BattleTileScript : MonoBehaviour
         CreateTile();
     }
 
+    //Reset the tile to the default values
     public void ResetTile()
     {
         BattleTileState =  BattleTileStateType.Blocked;
@@ -480,213 +488,21 @@ public class BattleTileScript : MonoBehaviour
 
     public void CreateTile()
     {
-        switch (BattleTileT)
-        {
-            case BattleTileType.Base:
-                //SP.color = Color.blue;
-                break;
-            case BattleTileType.Buff_Health_Instant:
-                break;
-            case BattleTileType.Buff_Health_OverTime:
-                break;
-            case BattleTileType.Buff_Armor_ForTime:
-                break;
-            case BattleTileType.Buff_MovementSpeed_ForTime:
-                break;
-            case BattleTileType.Buff_Regeneration_ForTime:
-                break;
-            case BattleTileType.Buff_Stamina_ForTime:
-                break;
-            case BattleTileType.Buff_StaminaRegeneration_ForTime:
-                break;
-            case BattleTileType.Buff_AttackSpeed_ForTime:
-                break;
-            case BattleTileType.Buff_BulletSpeed_ForTime:
-                break;
-            case BattleTileType.Buff_AttackType_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Neutral_1_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Light_1_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Dark_1_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Earth_1_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Lightning_1_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Water_1_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Fire_1_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Ice_1_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Wind_1_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Life_1_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Neutral_2_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Light_2_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Dark_2_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Earth_2_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Lightning_2_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Water_2_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Fire_2_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Ice_2_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Wind_2_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Life_2_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Neutral_3_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Light_3_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Dark_3_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Earth_3_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Lightning_3_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Water_3_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Fire_3_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Ice_3_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Wind_3_ForTime:
-                break;
-            case BattleTileType.Buff_Armor_Elemental_Life_3_ForTime:
-                break;
-            case BattleTileType.Debuff_Health_Instant:
-                break;
-            case BattleTileType.Debuff_Health_OverTime:
-                break;
-            case BattleTileType.Debuff_Armor_ForTime:
-                break;
-            case BattleTileType.Debuff_MovementSpeed_ForTime:
-                break;
-            case BattleTileType.Debuff_Regeneration_ForTime:
-                break;
-            case BattleTileType.Debuff_Stamina_ForTime:
-                break;
-            case BattleTileType.Debuff_StaminaRegeneration_ForTime:
-                break;
-            case BattleTileType.Debuff_AttackSpeed_ForTime:
-                break;
-            case BattleTileType.Debuff_BulletSpeed_ForTime:
-                break;
-            case BattleTileType.Debuff_AttackType_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Neutral_1_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Light_1_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Dark_1_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Earth_1_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Lightning_1_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Water_1_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Fire_1_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Ice_1_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Wind_1_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Life_1_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Neutral_2_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Light_2_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Dark_2_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Earth_2_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Lightning_2_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Water_2_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Fire_2_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Ice_2_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Wind_2_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Life_2_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Neutral_3_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Light_3_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Dark_3_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Earth_3_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Lightning_3_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Water_3_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Fire_3_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Ice_3_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Wind_3_ForTime:
-                break;
-            case BattleTileType.Debuff_Armor_Elemental_Life_3_ForTime:
-                break;
-            case BattleTileType.Debuff_Trap_ForTime:
-                break;
-            case BattleTileType.Debuff_Freeze_ForTime:
-                break;
-            case BattleTileType.Debuff_Weapon_Elemental_Neutral_ForTime:
-                break;
-            case BattleTileType.Debuff_Weapon_Elemental_Light_ForTime:
-                break;
-            case BattleTileType.Debuff_Weapon_Elemental_Dark_ForTime:
-                break;
-            case BattleTileType.Debuff_Weapon_Elemental_Earth_ForTime:
-                break;
-            case BattleTileType.Debuff_Weapon_Elemental_Lightning_ForTime:
-                break;
-            case BattleTileType.Debuff_Weapon_Elemental_Water_ForTime:
-                break;
-            case BattleTileType.Debuff_Weapon_Elemental_Fire_ForTime:
-                break;
-            case BattleTileType.Debuff_Weapon_Elemental_Ice_ForTime:
-                break;
-            case BattleTileType.Debuff_Weapon_Elemental_Wind_ForTime:
-                break;
-            case BattleTileType.Debuff_Weapon_Elemental_Life_ForTime:
-                break;
-            case BattleTileType.Portal:
-                break;
-            default:
-                break;
-        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        //If collides with a character and the tile type is not base
         if (other.tag.Contains("Character") && BattleTileT != BattleTileType.Base && BattleTileState == BattleTileStateType.Occupied)
         {
             CharacterBase targetCharacter = other.GetComponentInParent<CharacterBase>();
 
-            if(targetCharacter.Pos == Pos)
+            if(targetCharacter.Pos.Contains(Pos))
             {
                 if (!isMovingEventSubscribed)
                 {
                     isMovingEventSubscribed = true;
+                    //Subscribe to the TargetCharacter_TileMovementCompleteEvent event
                     targetCharacter.TileMovementCompleteEvent += TargetCharacter_TileMovementCompleteEvent;
 
                 }
@@ -694,26 +510,29 @@ public class BattleTileScript : MonoBehaviour
         }
     }
 
+    //Setup the Tile effect
     private void TargetCharacter_TileMovementCompleteEvent(CharacterBase movingChar)
     {
+        //If is a Portal-In
         if (BattleTileT == BattleTileType.Portal && PortalInfo.Portal == PortalType.In)
         {
             StartCoroutine(movingChar.UsePortal(GridManagerScript.Instance.Portals.Where(r => r.IDPortal == PortalInfo.IDPortal && r.Portal == PortalType.Out).First()));
             return;
         }
+        //If is a Portal-Out
         if (BattleTileT == BattleTileType.Portal && PortalInfo.Portal == PortalType.Out && movingChar.IsUsingAPortal)
         {
             //TODO
             return;
         }
-
+        //If is freeze tile
         if (BattleTileT == BattleTileType.Debuff_Freeze_ForTime)
         {
             float freezeDuration = Random.Range((float)this.GetType().GetField("Min_Duration_" + BattleTileT.ToString()).GetValue(this), (float)this.GetType().GetField("Max_Duration_" + BattleTileT.ToString()).GetValue(this));
             StartCoroutine(movingChar.Freeze(freezeDuration, 0));
             return;
         }
-
+        //If is trap tile
         if (BattleTileT == BattleTileType.Debuff_Trap_ForTime)
         {
 
@@ -727,7 +546,7 @@ public class BattleTileScript : MonoBehaviour
         float BuffDebuffValue = res.Length == 3 ?
         Random.Range((float)this.GetType().GetField("Min_" + BattleTileT.ToString()).GetValue(this), (float)this.GetType().GetField("Max_" + BattleTileT.ToString()).GetValue(this)) : 0;
 
-
+        //Creation of the Buff/Debuff
         Buff_DebuffClass bdClass = new Buff_DebuffClass();
         bdClass.Duration = BuffDebuffDuration;
         bdClass.Value = BuffDebuffValue;
