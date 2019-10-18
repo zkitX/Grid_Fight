@@ -84,7 +84,7 @@ public class BulletScript : MonoBehaviour
             }
             //Calutation for next world position of the bullet
             res = Vector3.Lerp(offset, destination, timer);
-            res.y = BulletInfo.AttackT == AttackType.PowerAct ? BulletInfo.Trajectory.Evaluate(timer) + res.y : res.y;
+            res.y = BulletInfo.ClassType == CharacterClassType.Mountain ? BulletInfo.Trajectory.Evaluate(timer) + res.y : res.y;
             transform.position = res;
             timer += Time.fixedDeltaTime / Duration;
             //if timer ended the bullet fire the Effect

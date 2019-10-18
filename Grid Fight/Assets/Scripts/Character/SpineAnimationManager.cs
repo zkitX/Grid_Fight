@@ -36,21 +36,19 @@ public class SpineAnimationManager : MonoBehaviour
         if (e.Data.Name == "FireParticles")
         {
             CharOwner.CastAttackParticles();
-            switch (CharOwner.BulletInfo.AttackT)
+            switch (CharOwner.BulletInfo.ClassType)
             {
-                case AttackType.Straight:
+                case CharacterClassType.Valley:
                     CharOwner.CreateSingleBullet();
                     break;
-                case AttackType.PowerAct:
+                case CharacterClassType.Mountain:
                     CharOwner.CreateSingleBullet();
                     break;
-                case AttackType.Machingun:
+                case CharacterClassType.Forest:
                     CharOwner.CreateMachingunBullets();
                     break;
-                case AttackType.Debuff:
+                case CharacterClassType.Desert:
                     CharOwner.CreateSingleBullet();
-                    break;
-                case AttackType.Static:
                     break;
             }
             
@@ -66,7 +64,7 @@ public class SpineAnimationManager : MonoBehaviour
 
        
 
-        Debug.Log("Complete" + "   " + skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name + "     " + trackEntry.TrackIndex);
+        //Debug.Log("Complete" + "   " + skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name + "     " + trackEntry.TrackIndex);
 
 
         if (trackEntry.TrackIndex != CurrentAnim.CurrentTrack)
@@ -163,9 +161,11 @@ public class SpineAnimationManager : MonoBehaviour
         SpineAnimationState.AddAnimation(CurrentAnim.CurrentTrack, anim.ToString(), loop, 0).MixDuration = duration;
         if(CurrentAnim.CurrentTrack - 1 >= 0)
         {
-           // StartCoroutine(ClearTrack(duration, CurrentAnim.CurrentTrack - 1));
+            StartCoroutine(ClearTrack(duration, CurrentAnim.CurrentTrack - 1));
         }
-        Debug.Log("SetMixAnim   " + anim.ToString() + "   " + CurrentAnim.CurrentTrack);
+        //Debug.Log("SetMixAnim   " + anim.ToString() + "   " + CurrentAnim.CurrentTrack);
+
+       
     }
 
    
@@ -182,7 +182,7 @@ public class SpineAnimationManager : MonoBehaviour
 
             timer += Time.fixedDeltaTime;
         }
-        Debug.Log("Clear   " + track);
+        //Debug.Log("Clear   " + track);
         SpineAnimationState.ClearTrack(track);
     }
 

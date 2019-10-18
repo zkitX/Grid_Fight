@@ -197,9 +197,9 @@ public class CharacterBase : MonoBehaviour
         bs.BulletInfo = BulletInfo;
         bs.gameObject.SetActive(true);
         bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharacterInfo.AttackParticle, ParticleTypes.Attack, bullet.transform, Side);
-        switch (BulletInfo.AttackT)
+        switch (BulletInfo.ClassType)
         {
-            case AttackType.Straight:
+            case CharacterClassType.Valley:
                 if (Side == SideType.PlayerCharacter)
                 {
                     // bs.Destination = TestAttackPosition;
@@ -211,7 +211,7 @@ public class CharacterBase : MonoBehaviour
                 }
                 StartCoroutine(bs.MoveToTile());
                 break;
-            case AttackType.PowerAct:
+            case CharacterClassType.Mountain:
                 if (Side == SideType.PlayerCharacter)
                 {
                      bs.DestinationTile = TestAttackPosition;
@@ -224,14 +224,12 @@ public class CharacterBase : MonoBehaviour
                 }
                 StartCoroutine(bs.MoveToTile());
                 break;
-            case AttackType.Machingun:
+            case CharacterClassType.Forest:
                 bs.DestinationWorld = transform.right * (PlayerController == ControllerType.Enemy ? 15 : -15);
                 StartCoroutine(bs.MoveStraight());
                 break;
-            case AttackType.Debuff:
+            case CharacterClassType.Desert:
                 StartCoroutine(bs.MoveToTile());
-                break;
-            case AttackType.Static:
                 break;
         }
     }
@@ -751,7 +749,6 @@ public class Buff_DebuffClass
     public float Value;
     public CharacterAnimationStateType AnimToFire;
     public BuffDebuffStatsType Stat;
-    public AttackType AttackT;
     public ElementalResistenceClass ElementalResistence;
     public ElementalType ElementalPower;
 

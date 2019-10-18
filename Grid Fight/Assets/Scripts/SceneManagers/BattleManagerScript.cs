@@ -202,11 +202,16 @@ public class BattleManagerScript : MonoBehaviour
             {
                 CurrentSelectedCharacters[playerController] = currentCharacter;
             }
+
+            UIBattleManager.Instance.CharacterSelected(playerController, currentCharacter);
         }
     }
 
     private IEnumerator CharacterLoadingInRandomPosition(CharacterType ct, ControllerType playerController)
     {
+
+
+        //TODO Setup animation for the UI
         float timer = 0;
         while (timer <= 1)
         {
@@ -268,6 +273,12 @@ public class BattleManagerScript : MonoBehaviour
     }
 
     #endregion
+
+    public void SetUICharacterSelectionIcons()
+    {
+
+    }
+
 }
 
 

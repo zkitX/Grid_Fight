@@ -168,16 +168,6 @@ public enum BattleState
     WinLose
 }
 
-public enum AttackType
-{
-    Straight,
-    PowerAct,
-    Machingun,
-    Debuff,
-    Static
-}
-
-
 public enum ElementalType
 {
     Neutral,
@@ -344,4 +334,21 @@ public enum RelationshipBetweenElements
     ExtremelyWeak = 9,
     
    
+}
+
+
+public enum PlayerColorType
+{
+    _FF0D0D,
+    _FF0CDC,
+    _0C21FF,
+    _0CFF1F
+}
+
+public enum CharacterClassType
+{
+    Valley,
+    Mountain,
+    Forest,
+    Desert
 }

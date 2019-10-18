@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class BulletInfoScript : MonoBehaviour
 {
-    public AttackType AttackT;
+    public CharacterClassType ClassType;
     public AttackParticleTypes ParticleType;
     public List<ElementalType> Elemental = new List<ElementalType>();
     public AnimationCurve Trajectory;
