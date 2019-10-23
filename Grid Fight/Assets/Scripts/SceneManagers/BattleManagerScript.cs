@@ -32,17 +32,13 @@ public class BattleManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GridManagerScript.Instance.InitializationCompleteEvent += Instance_InitializationCompleteEvent;
+        
     }
 
 
     #endregion
 
     #region Events
-    private void Instance_InitializationCompleteEvent()
-    {
-    }
-
 
     #endregion 
 
@@ -276,7 +272,23 @@ public class BattleManagerScript : MonoBehaviour
 
     public void SetUICharacterSelectionIcons()
     {
+        List<UIIconClass> resLeft = new List<UIIconClass>();
+        List<UIIconClass> resRight = new List<UIIconClass>();
 
+        foreach (CharacterBase item in AllCharactersOnField)
+        {
+            if(item.Side == SideType.EnemyCharacter)
+            {
+                resRight.Add(new UIIconClass(item.CharInfo.CharacterIcon, item.CharacterInfo.CharacterSelection));
+            }
+            else 
+            {
+                resLeft.Add(new UIIconClass(item.CharInfo.CharacterIcon, item.CharacterInfo.CharacterSelection));
+            }
+        }
+
+        UIBattleManager.Instance.UICharacterSelectionLeft.SetupCharacterIcons(resLeft);
+        UIBattleManager.Instance.UICharacterSelectionRight.SetupCharacterIcons(resRight);
     }
 
 }

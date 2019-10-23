@@ -191,6 +191,13 @@ public enum CharacterLevelType
     Godness
 }
 
+public enum RelationshipType
+{
+    Strangers,
+    Acquaintances,
+    Friends,
+    Sisters
+}
 
 public enum CharacterType
 {
@@ -296,7 +303,8 @@ public enum PortalType
 public enum AttackParticleTypes
 {
     Stage04_Minion_Mountain,
-    Stage04_Minion_Forest
+    Stage04_Minion_Forest,
+    Stage04_Minion_Desert
 }
 
 
@@ -351,4 +359,12 @@ public enum CharacterClassType
     Mountain,
     Forest,
     Desert
+}
+
+
+public enum CharacterNameType
+{
+    Balistica,
+    LadyBush,
+    Jaguar
 }

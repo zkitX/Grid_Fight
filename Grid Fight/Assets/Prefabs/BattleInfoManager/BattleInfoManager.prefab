@@ -47,6 +47,7 @@ MonoBehaviour:
   PlayerBattleInfo:
   - Name: c1
     CharacterSelection: 0
+    CharacterLevel: 0
     playerController: 0
     CT: 0
     AttackParticle: 0
@@ -54,14 +55,18 @@ MonoBehaviour:
     - Elemental: 9
       _ElementalWeakness: -3
     ElementalsPower: 00000000
+    CharacterRelationships: []
     AttackSpeed: 5
-    Health: 100000
+    Health: 100
+    HealthBase: 100
     Regeneration: 4
     MovementSpeed: 1
     Stamina: 5
+    StaminaBase: 0
     StaminaRegeneration: 5
   - Name: c2
     CharacterSelection: 1
+    CharacterLevel: 0
     playerController: 0
     CT: 1
     AttackParticle: 0
@@ -69,14 +74,18 @@ MonoBehaviour:
     - Elemental: 0
       _ElementalWeakness: 0
     ElementalsPower: 05000000
+    CharacterRelationships: []
     AttackSpeed: 5
-    Health: 100000
+    Health: 100
+    HealthBase: 100
     Regeneration: 4
-    MovementSpeed: 3
+    MovementSpeed: 1
     Stamina: 4
+    StaminaBase: 0
     StaminaRegeneration: 4
   - Name: c3
     CharacterSelection: 2
+    CharacterLevel: 0
     playerController: 0
     CT: 2
     AttackParticle: 0
@@ -84,14 +93,18 @@ MonoBehaviour:
     - Elemental: 0
       _ElementalWeakness: 0
     ElementalsPower: 00000000
+    CharacterRelationships: []
     AttackSpeed: 5
-    Health: 100000
+    Health: 100
+    HealthBase: 100
     Regeneration: 0
-    MovementSpeed: 2
+    MovementSpeed: 1
     Stamina: 0
+    StaminaBase: 0
     StaminaRegeneration: 0
   - Name: c4
     CharacterSelection: 3
+    CharacterLevel: 0
     playerController: 0
     CT: 3
     AttackParticle: 0
@@ -99,14 +112,20 @@ MonoBehaviour:
     - Elemental: 0
       _ElementalWeakness: 0
     ElementalsPower: 00000000
+    CharacterRelationships:
+    - Relationship: 2
+      CharacterName: 2
     AttackSpeed: 5
-    Health: 100000
+    Health: 100
+    HealthBase: 100
     Regeneration: 0
-    MovementSpeed: 4
+    MovementSpeed: 1
     Stamina: 0
+    StaminaBase: 0
     StaminaRegeneration: 0
   - Name: c5
     CharacterSelection: 0
+    CharacterLevel: 0
     playerController: 0
     CT: 4
     AttackParticle: 1
@@ -114,14 +133,18 @@ MonoBehaviour:
     - Elemental: 0
       _ElementalWeakness: 0
     ElementalsPower: 00000000
+    CharacterRelationships: []
     AttackSpeed: 5
-    Health: 100000
+    Health: 100
+    HealthBase: 100
     Regeneration: 0
     MovementSpeed: 1
     Stamina: 0
+    StaminaBase: 0
     StaminaRegeneration: 0
   - Name: c6
     CharacterSelection: 1
+    CharacterLevel: 0
     playerController: 0
     CT: 5
     AttackParticle: 1
@@ -129,14 +152,18 @@ MonoBehaviour:
     - Elemental: 0
       _ElementalWeakness: 0
     ElementalsPower: 00000000
+    CharacterRelationships: []
     AttackSpeed: 5
-    Health: 100000
+    Health: 100
+    HealthBase: 100
     Regeneration: 0
     MovementSpeed: 1
     Stamina: 0
+    StaminaBase: 0
     StaminaRegeneration: 0
   - Name: c7
     CharacterSelection: 2
+    CharacterLevel: 0
     playerController: 0
     CT: 6
     AttackParticle: 1
@@ -144,14 +171,18 @@ MonoBehaviour:
     - Elemental: 0
       _ElementalWeakness: 0
     ElementalsPower: 00000000
+    CharacterRelationships: []
     AttackSpeed: 5
-    Health: 100000
+    Health: 100
+    HealthBase: 100
     Regeneration: 0
     MovementSpeed: 1
     Stamina: 0
+    StaminaBase: 0
     StaminaRegeneration: 0
   - Name: c8
     CharacterSelection: 3
+    CharacterLevel: 0
     playerController: 0
     CT: 7
     AttackParticle: 1
@@ -159,9 +190,12 @@ MonoBehaviour:
     - Elemental: 0
       _ElementalWeakness: 0
     ElementalsPower: 00000000
+    CharacterRelationships: []
     AttackSpeed: 5
-    Health: 100000
+    Health: 100
+    HealthBase: 100
     Regeneration: 0
     MovementSpeed: 1
     Stamina: 0
+    StaminaBase: 0
     StaminaRegeneration: 0

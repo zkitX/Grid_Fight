@@ -33,6 +33,7 @@ public class CharacterBaseInfoClass
 {
     public string Name;
     public CharacterSelectionType CharacterSelection;
+    public CharacterLevelType CharacterLevel;
     public ControllerType playerController;
     public CharacterType CT;
     public AttackParticleTypes AttackParticle;
@@ -40,12 +41,31 @@ public class CharacterBaseInfoClass
     public WeaponClass Weapon;
     public List<ElementalResistenceClass> ElementalsResistence = new List<ElementalResistenceClass>();
     public List<ElementalType> ElementalsPower = new List<ElementalType>();
+    public List<CharactersRelationshipClass> CharacterRelationships = new List<CharactersRelationshipClass>();
     public float AttackSpeed;
     public float Health;
+    public float HealthBase;
     public float Regeneration;
     public float MovementSpeed;
     public float Stamina;
+    public float StaminaBase;
     public float StaminaRegeneration;
+
+    public float HealthPerc 
+    {
+        get
+        {
+            return (Health * 100) / HealthBase;
+        }
+    }
+
+    public float StaminaPerc
+    {
+        get
+        {
+            return (Stamina * 100) / StaminaBase;
+        }
+    }
 }
 
 
@@ -78,3 +98,21 @@ public class ElementalResistenceClass
         ElementalWeakness = elementalWeakness;
     }
 }
+
+[System.Serializable]
+public class CharactersRelationshipClass
+{
+    public RelationshipType Relationship;
+    public CharacterNameType CharacterName;
+
+    public CharactersRelationshipClass()
+    {
+    }
+
+    public CharactersRelationshipClass(RelationshipType relationship, CharacterNameType characterName)
+    {
+        Relationship = relationship;
+        CharacterName = characterName;
+    }
+}
+

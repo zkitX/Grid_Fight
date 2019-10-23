@@ -35,21 +35,22 @@ public class CharacterBase : MonoBehaviour
     }
     public Vector2Int _PhysicalPosOnTile;
 
-    public BulletInfoScript BulletInfo
+    public CharacterInfoScript CharInfo
     {
         get
         {
-            if (_BulletInfo == null)
+            if (_CharInfo == null)
             {
-                _BulletInfo = this.GetComponentInChildren<BulletInfoScript>();
+                _CharInfo = this.GetComponentInChildren<CharacterInfoScript>();
             }
-            return _BulletInfo;
+            return _CharInfo;
         }
     }
-
+    public CharacterInfoScript _CharInfo;
+    
+    
     public Vector2Int TestAttackPosition;
     public SideType Side;
-    public BulletInfoScript _BulletInfo;
     public bool isMoving = false;
     public CharacterBaseInfoClass CharacterInfo;
     private IEnumerator MoveCo;
@@ -62,8 +63,6 @@ public class CharacterBase : MonoBehaviour
     public bool IsUsingAPortal = false;
     public bool AllowMoreElementalOnWepon_ElementalResistence_Armor = false;
     private FacingType facing;
-
-
     public bool shoot = true;
 
     #region Unity Life Cycles
@@ -194,10 +193,10 @@ public class CharacterBase : MonoBehaviour
         BulletScript bs = bullet.GetComponent<BulletScript>();
         bs.Elemental = CharacterInfo.ElementalsPower.First();
         bs.Side = Side;
-        bs.BulletInfo = BulletInfo;
+        bs.CharInfo = CharInfo;
         bs.gameObject.SetActive(true);
         bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharacterInfo.AttackParticle, ParticleTypes.Attack, bullet.transform, Side);
-        switch (BulletInfo.ClassType)
+        switch (CharInfo.ClassType)
         {
             case CharacterClassType.Valley:
                 if (Side == SideType.PlayerCharacter)
@@ -238,10 +237,10 @@ public class CharacterBase : MonoBehaviour
     public void CreateMachingunBullets()
     {
         Vector3 offsetRotation = transform.eulerAngles;
-        transform.eulerAngles -= new Vector3(0, 0, BulletInfo.MultiBulletAttackAngle / 2);
-        for (int i = 0; i < BulletInfo.MultiBulletAttackNumberOfBullets; i++)
+        transform.eulerAngles -= new Vector3(0, 0, CharInfo.MultiBulletAttackAngle / 2);
+        for (int i = 0; i < CharInfo.MultiBulletAttackNumberOfBullets; i++)
         {
-            transform.eulerAngles += new Vector3(0, 0, BulletInfo.MultiBulletAttackAngle / (BulletInfo.MultiBulletAttackNumberOfBullets - 1));
+            transform.eulerAngles += new Vector3(0, 0, CharInfo.MultiBulletAttackAngle / (CharInfo.MultiBulletAttackNumberOfBullets - 1));
             CreateSingleBullet();
         }
         transform.eulerAngles = offsetRotation;
@@ -424,6 +423,11 @@ public class CharacterBase : MonoBehaviour
     #region Buff/Debuff
     public IEnumerator Buff_DebuffCoroutine(Buff_DebuffClass bdClass)
     {
+        while (SpineAnim.CurrentAnim != CharacterAnimationStateType.Idle)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
         float timer = 0;
         float valueOverDuration = 0;
         switch (bdClass.Stat)

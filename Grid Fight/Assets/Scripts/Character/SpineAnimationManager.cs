@@ -17,7 +17,7 @@ public class SpineAnimationManager : MonoBehaviour
     public AnimationCurve RightMovementSpeed;
 
     public Transform FiringPoint;
-    public CurrentAnimClass CurrentAnim = new CurrentAnimClass();
+    public CharacterAnimationStateType CurrentAnim;
     public float AnimationTransition = 0.1f;
     private void SetupSpineAnim()
     {
@@ -28,6 +28,9 @@ public class SpineAnimationManager : MonoBehaviour
             skeleton = skeletonAnimation.Skeleton;
             SpineAnimationState.Complete += SpineAnimationState_Complete;
             SpineAnimationState.Event += SpineAnimationState_Event;
+            SpineAnimationState.SetAnimation(0, "Idle", true);
+            SpineAnimationState.SetEmptyAnimation(1, 0);
+            CurrentAnim = CharacterAnimationStateType.Idle;
         }
     }
 
@@ -36,7 +39,7 @@ public class SpineAnimationManager : MonoBehaviour
         if (e.Data.Name == "FireParticles")
         {
             CharOwner.CastAttackParticles();
-            switch (CharOwner.BulletInfo.ClassType)
+            switch (CharOwner.CharInfo.ClassType)
             {
                 case CharacterClassType.Valley:
                     CharOwner.CreateSingleBullet();
@@ -62,116 +65,30 @@ public class SpineAnimationManager : MonoBehaviour
             return;
         }
 
-       
-
-        //Debug.Log("Complete" + "   " + skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name + "     " + trackEntry.TrackIndex);
-
-
-        if (trackEntry.TrackIndex != CurrentAnim.CurrentTrack)
-        {
-            return;
-        }
-
-        switch ((CharacterAnimationStateType)System.Enum.Parse(typeof(CharacterAnimationStateType), skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name))
-        {
-            case CharacterAnimationStateType.NoMesh:
-                break;
-            case CharacterAnimationStateType.Idle:
-                break;
-            case CharacterAnimationStateType.Atk:
-                SetAnim(CharacterAnimationStateType.Idle, true);
-                break;
-            case CharacterAnimationStateType.Atk1:
-                SetAnim(CharacterAnimationStateType.Idle, true);
-                break;
-            case CharacterAnimationStateType.Buff:
-                SetAnim(CharacterAnimationStateType.Idle, true);
-                break;
-            case CharacterAnimationStateType.Debuff:
-                SetAnim(CharacterAnimationStateType.Idle, true);
-                break;
-            case CharacterAnimationStateType.Gettinghit:
-                SetAnim(CharacterAnimationStateType.Idle, true);
-                break;
-            case CharacterAnimationStateType.Defending:
-                SetAnim(CharacterAnimationStateType.Idle, true);
-                break;
-            case CharacterAnimationStateType.Paralized:
-                SetAnim(CharacterAnimationStateType.Idle, true);
-                break;
-            case CharacterAnimationStateType.Arriving:
-                SetAnim(CharacterAnimationStateType.Idle, true);
-                break;
-            case CharacterAnimationStateType.DashRight:
-                SetAnim(CharacterAnimationStateType.Idle, true);
-                break;
-            case CharacterAnimationStateType.DashLeft:
-                SetAnim(CharacterAnimationStateType.Idle, true);
-                break;
-            case CharacterAnimationStateType.DashDown:
-                SetAnim(CharacterAnimationStateType.Idle, true);
-                break;
-            case CharacterAnimationStateType.DashUp:
-                SetAnim(CharacterAnimationStateType.Idle, true);
-                break;
-            case CharacterAnimationStateType.Selection:
-                SetAnim(CharacterAnimationStateType.Idle, true);
-                break;
-            case CharacterAnimationStateType.PowerUp:
-                SetAnim(CharacterAnimationStateType.Idle, true);
-                break;
-            case CharacterAnimationStateType.Speaking:
-                SetAnim(CharacterAnimationStateType.Idle, true);
-                break;
-            case CharacterAnimationStateType.Victory:
-                SetAnim(CharacterAnimationStateType.Idle, true);
-                break;
-            case CharacterAnimationStateType.Defeat:
-                SetAnim(CharacterAnimationStateType.Idle, true);
-                break;
-            case CharacterAnimationStateType.Death:
-                SetAnim(CharacterAnimationStateType.Idle, true);
-                break;
-        }
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            SetAnim(BaseAnim, true);
-        }
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            SetMixAnim(MixAnim, AnimationTransition, false);
-        }
-
+        SpineAnimationState.SetAnimation(0, "Idle", true);
     }
 
     public void SetAnim(CharacterAnimationStateType anim, bool loop)
     {
-        SetMixAnim(anim, AnimationTransition, loop);
+         SetupSpineAnim();
+         SpineAnimationState.SetAnimation(0, anim.ToString(), loop);
+         CurrentAnim = anim;
     }
 
-    public void SetMixAnim(CharacterAnimationStateType anim, float duration, bool loop)
+
+    public void SetMixAnim(CharacterAnimationStateType anim, bool loop)
     {
+        CurrentAnim = anim;
         SetupSpineAnim();
-        CurrentAnim.CurrentAnimation = anim;
-        CurrentAnim.CurrentTrack++;
-        SpineAnimationState.SetEmptyAnimation(CurrentAnim.CurrentTrack, 0);
-        SpineAnimationState.AddAnimation(CurrentAnim.CurrentTrack, anim.ToString(), loop, 0).MixDuration = duration;
-        if(CurrentAnim.CurrentTrack - 1 >= 0)
-        {
-            StartCoroutine(ClearTrack(duration, CurrentAnim.CurrentTrack - 1));
-        }
-        //Debug.Log("SetMixAnim   " + anim.ToString() + "   " + CurrentAnim.CurrentTrack);
-
-       
+        SpineAnimationState.SetEmptyAnimation(1, 0);
+        SpineAnimationState.AddAnimation(1, anim.ToString(), false, 0).MixDuration = AnimationTransition;
+        StartCoroutine(ClearTrack(GetAnimLenght(anim), anim, 1));
     }
 
-   
-    public IEnumerator ClearTrack(float duration, int track)
+    public IEnumerator ClearTrack(float duration, CharacterAnimationStateType anim, int track)
     {
         float timer = 0;
+        bool test;
         while (timer <= duration)
         {
             yield return new WaitForFixedUpdate();
@@ -179,11 +96,14 @@ public class SpineAnimationManager : MonoBehaviour
             {
                 yield return new WaitForEndOfFrame();
             }
-
             timer += Time.fixedDeltaTime;
         }
-        //Debug.Log("Clear   " + track);
-        SpineAnimationState.ClearTrack(track);
+        if(anim == CurrentAnim)
+        {
+            SpineAnimationState.AddEmptyAnimation(track, 0.2f, 0);
+            CurrentAnim = CharacterAnimationStateType.Idle;
+            SpineAnimationState.SetAnimation(0, "Idle", true);
+        }
     }
 
     public float GetAnimLenght(CharacterAnimationStateType anim)
@@ -201,6 +121,13 @@ public class SpineAnimationManager : MonoBehaviour
         });
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyUp(KeyCode.V))
+        {
+            SetMixAnim(CharacterAnimationStateType.Gettinghit, false);
+        }
+    }
 }
 
 [System.Serializable]
@@ -211,7 +138,7 @@ public class CurrentAnimClass
 
     public CurrentAnimClass()
     {
-        CurrentTrack = -1;
+        CurrentTrack = 0;
     }
 }
 

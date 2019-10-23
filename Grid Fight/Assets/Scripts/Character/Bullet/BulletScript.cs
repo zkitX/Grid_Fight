@@ -8,7 +8,7 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     //Public
-    public BulletInfoScript BulletInfo;
+    public CharacterInfoScript CharInfo;
     public Vector2Int DestinationTile;
     public Vector3 DestinationWorld;
     public SideType Side;
@@ -72,7 +72,7 @@ public class BulletScript : MonoBehaviour
         //Destination position
         Vector3 destination = bts.transform.position;
         //Duration of the particles 
-        float Duration = Vector3.Distance(transform.position, destination) / BulletInfo.BulletSpeed;
+        float Duration = Vector3.Distance(transform.position, destination) / CharInfo.BulletSpeed;
         Vector3 res;
         while (!Dead)
         {
@@ -84,7 +84,7 @@ public class BulletScript : MonoBehaviour
             }
             //Calutation for next world position of the bullet
             res = Vector3.Lerp(offset, destination, timer);
-            res.y = BulletInfo.ClassType == CharacterClassType.Mountain ? BulletInfo.Trajectory.Evaluate(timer) + res.y : res.y;
+            res.y = CharInfo.ClassType == CharacterClassType.Mountain ? CharInfo.Trajectory.Evaluate(timer) + res.y : res.y;
             transform.position = res;
             timer += Time.fixedDeltaTime / Duration;
             //if timer ended the bullet fire the Effect
@@ -132,7 +132,7 @@ public class BulletScript : MonoBehaviour
         {
             CharacterBase target = other.GetComponentInParent<CharacterBase>();
             //Set damage to the hitting character
-            target.SetDamage(BulletInfo.Damage, Elemental);
+            target.SetDamage(CharInfo.Damage, Elemental);
             //fire the Effect
             FireEffectParticles(transform.position);
         }
@@ -145,7 +145,7 @@ public class BulletScript : MonoBehaviour
             Dead = true;
             StopAllCoroutines();
             //fire the Effect
-            ParticleManagerScript.Instance.FireParticlesInPosition(BulletInfo.ParticleType, ParticleTypes.Effect, pos, Side);
+            ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleType, ParticleTypes.Effect, pos, Side);
             PS.GetComponent<DisableParticleScript>().ResetParticle();
             PS.SetActive(false);
             PS.transform.parent = null;
