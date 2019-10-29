@@ -28,6 +28,8 @@ public class UIPlayerSectionScript : MonoBehaviour
     private Image CharacterStaminaBar;
     [SerializeField]
     private UICharacterSkillContainerScript CharSkills;
+    [SerializeField]
+    private Animator CharLevel;
     public void SetSelectedCharacter(CharacterBase selectedCharacter)
     {
         currentSelectedCharacter = selectedCharacter;
@@ -45,6 +47,7 @@ public class UIPlayerSectionScript : MonoBehaviour
         }
 
         CharSkills.SetupCharacterSkills(currentSelectedCharacter);
+        CharLevel.SetInteger("CharLevel", (int)currentSelectedCharacter.CharacterInfo.CharacterLevel);
     }
 
     public void SetupPlayer(int idPlayer)

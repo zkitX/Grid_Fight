@@ -19,11 +19,11 @@ public class ParticleManagerScript : MonoBehaviour
 	public GameObject FireParticlesInPosition(AttackParticleTypes pType, ParticleTypes ParticleType, Vector3 pos, SideType side)
 	{
         FiredParticle psToFire = ParticlesFired.Where(r => r.ParticleType == ParticleType && r.AttackParticle == pType && !r.PS.gameObject.activeInHierarchy).FirstOrDefault();
-		if(psToFire != null)
+        if (psToFire != null)
 		{
             psToFire.PS.transform.position = pos;
             psToFire.PS.SetActive(true);
-            psToFire.PS.transform.localScale = side == SideType.EnemyCharacter ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
+            psToFire.PS.transform.localScale = side == SideType.RightSide ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
             return psToFire.PS;
 		}
 		else
@@ -42,7 +42,7 @@ public class ParticleManagerScript : MonoBehaviour
                     break;
             }
             GameObject go = Instantiate(ps, pos, Quaternion.identity);
-            go.transform.localScale = side == SideType.EnemyCharacter ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
+            go.transform.localScale = side == SideType.RightSide ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
             go.SetActive(true);
 			ParticlesFired.Add(new FiredParticle(go, pType, ParticleType));
             return go;
@@ -57,7 +57,7 @@ public class ParticleManagerScript : MonoBehaviour
         {
             psToFire.PS.transform.parent = parent;
             psToFire.PS.transform.localPosition = Vector3.zero;
-            psToFire.PS.transform.localScale = side == SideType.EnemyCharacter ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
+            psToFire.PS.transform.localScale = side == SideType.RightSide ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
             psToFire.PS.SetActive(true);
             return psToFire.PS;
         }
@@ -77,7 +77,8 @@ public class ParticleManagerScript : MonoBehaviour
                     break;
             }
             GameObject go = Instantiate(ps, parent.position, parent.rotation, parent);
-            go.transform.localScale = side == SideType.EnemyCharacter ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
+            go.transform.localPosition = Vector3.zero;
+            go.transform.localScale = side == SideType.RightSide ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
             go.SetActive(true);
             ParticlesFired.Add(new FiredParticle(go, pType, ParticleType));
             return go;

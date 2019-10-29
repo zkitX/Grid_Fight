@@ -57,7 +57,7 @@ public class BulletScript : MonoBehaviour
     private void OnEnable()
     {
         //On enabled setup the collision avoidance for determinated layers 
-        Physics.IgnoreLayerCollision(Side == SideType.PlayerCharacter ? 9 : 10, Side == SideType.PlayerCharacter ? 11 : 12);
+        Physics.IgnoreLayerCollision(Side == SideType.LeftSide ? 9 : 10, Side == SideType.LeftSide ? 11 : 12);
     }
 
     //Move the bullet on a determinated tile using the BulletInfo.Trajectory

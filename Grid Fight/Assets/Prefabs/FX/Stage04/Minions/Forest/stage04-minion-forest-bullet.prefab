@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2284594597646784491}
   - component: {fileID: 2284594597646784500}
   - component: {fileID: 2284594597646784501}
+  - component: {fileID: 1698366254657596095}
   m_Layer: 0
   m_Name: stage04-minion-forest-bullet
   m_TagString: Untagged
@@ -43,7 +44,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2284594597646784502}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: b7fc3c060cae5884c99516acdeb95dd6, type: 2}
   m_CullingMode: 0
@@ -4775,6 +4776,18 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &1698366254657596095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2284594597646784502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2284594598185661192
 GameObject:
   m_ObjectHideFlags: 0
@@ -9481,7 +9494,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4626255140395310621
 Transform:
   m_ObjectHideFlags: 0
@@ -9616,7 +9629,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4626255140522935333
 Transform:
   m_ObjectHideFlags: 0
@@ -9651,7 +9664,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4626255140886459571
 Transform:
   m_ObjectHideFlags: 0
@@ -9788,7 +9801,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4626255141130948411
 Transform:
   m_ObjectHideFlags: 0

@@ -24,15 +24,14 @@ public class LayerParticleSelection : MonoBehaviour
 
     private void OnEnable()
     {
-        SelectShotLevel(Shot);
+        SelectShotLevel();
     }
 
     /// <summary>
     /// Enables the selected particles based on the type of shot(idle for normal shot, Lvl# for the stamina attacks)
     /// </summary>
-    public void SelectShotLevel(CharacterLevelType s)
+    public void SelectShotLevel()
     {
-        Shot = s;
         //close unnecessary layers
         CloseAllLayers();
         //Select all necessary layers for playing the selected shot level

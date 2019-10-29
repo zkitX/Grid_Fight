@@ -124,25 +124,25 @@ public class CharacterBase : MonoBehaviour
                 break;
         }
         CharacterInfo.playerController = PlayerController;
-        int layer = Side == SideType.PlayerCharacter ? 9 : 10;
+        int layer = Side == SideType.LeftSide ? 9 : 10;
         SpineAnim.gameObject.layer = layer;
     }
 
     private void EnemyControllerSettings()
     {
-        gameObject.tag = "EnemyCharacter";
-        SpineAnim.gameObject.tag = "EnemyCharacter";
         facing = FacingType.Left;
-        Side = SideType.EnemyCharacter;
+        Side = SideType.RightSide;
+        gameObject.tag = Side.ToString();
+        SpineAnim.gameObject.tag = Side.ToString();
     }
 
     private void PlayerControllerSettings()
     {
-        gameObject.tag = "PlayerCharacter";
-        SpineAnim.gameObject.tag = "PlayerCharacter";
         facing = FacingType.Right;
         transform.Rotate(new Vector3(0, 180, 0));
-        Side = SideType.PlayerCharacter;
+        Side = SideType.LeftSide;
+        gameObject.tag = Side.ToString();
+        SpineAnim.gameObject.tag = Side.ToString();
     }
 
     public void SetupEquipment()
@@ -191,6 +191,12 @@ public class CharacterBase : MonoBehaviour
       
         GameObject bullet = Instantiate(BattleManagerScript.Instance.BaseBullet, SpineAnim.FiringPoint.position, Quaternion.identity);
         BulletScript bs = bullet.GetComponent<BulletScript>();
+        LayerParticleSelection lps = bullet.GetComponent<LayerParticleSelection>();
+        if(lps != null)
+        {
+            lps.Shot = CharacterInfo.CharacterLevel;
+        }
+
         bs.Elemental = CharacterInfo.ElementalsPower.First();
         bs.Side = Side;
         bs.CharInfo = CharInfo;
@@ -199,7 +205,7 @@ public class CharacterBase : MonoBehaviour
         switch (CharInfo.ClassType)
         {
             case CharacterClassType.Valley:
-                if (Side == SideType.PlayerCharacter)
+                if (Side == SideType.LeftSide)
                 {
                     // bs.Destination = TestAttackPosition;
                     bs.DestinationTile = new Vector2Int(PhysicalPosOnTile.x, 11);
@@ -211,7 +217,7 @@ public class CharacterBase : MonoBehaviour
                 StartCoroutine(bs.MoveToTile());
                 break;
             case CharacterClassType.Mountain:
-                if (Side == SideType.PlayerCharacter)
+                if (Side == SideType.LeftSide)
                 {
                      bs.DestinationTile = TestAttackPosition;
                     //bs.DestinationTile = new Vector2Int(Pos.x, 11);
@@ -228,7 +234,8 @@ public class CharacterBase : MonoBehaviour
                 StartCoroutine(bs.MoveStraight());
                 break;
             case CharacterClassType.Desert:
-                StartCoroutine(bs.MoveToTile());
+                bs.DestinationWorld = transform.right * (PlayerController == ControllerType.Enemy ? 15 : -15);
+                StartCoroutine(bs.MoveStraight());
                 break;
         }
     }

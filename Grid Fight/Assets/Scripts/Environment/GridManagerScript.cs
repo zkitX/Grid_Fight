@@ -65,7 +65,7 @@ public class GridManagerScript : MonoBehaviour
     public bool AreBattleTilesInControllerArea(List<Vector2Int> pos, SideType isEnemyOrPlayer)
     {
         bool AreInControlledArea = false;
-        if (isEnemyOrPlayer == SideType.PlayerCharacter)
+        if (isEnemyOrPlayer == SideType.LeftSide)
         {
             foreach (Vector2Int item in pos)
             {
@@ -94,7 +94,7 @@ public class GridManagerScript : MonoBehaviour
     //Get BattleTileScript of the tile
     public BattleTileScript GetBattleTile(Vector2Int pos, SideType isEnemyOrPlayer)//isEnemyOrPlayer = true/Player false/Enemy
     {
-        if (isEnemyOrPlayer == SideType.PlayerCharacter)
+        if (isEnemyOrPlayer == SideType.LeftSide)
         {
             return BattleTiles.Where(r => r.Pos == pos && r.TileOwner != ControllerType.Enemy).FirstOrDefault();
         }
@@ -112,48 +112,48 @@ public class GridManagerScript : MonoBehaviour
             case MatchType.PvE:
                 if (ct == ControllerType.Enemy)
                 {
-                    return SideType.EnemyCharacter;
+                    return SideType.RightSide;
                 }
                 else
                 {
-                    return SideType.PlayerCharacter;
+                    return SideType.LeftSide;
                 }
             case MatchType.PvP:
                 if (ct == ControllerType.Player2)
                 {
-                    return SideType.EnemyCharacter;
+                    return SideType.RightSide;
                 }
                 else
                 {
-                    return SideType.PlayerCharacter;
+                    return SideType.LeftSide;
                 }
             case MatchType.PPvE:
                 if (ct == ControllerType.Enemy)
                 {
-                    return SideType.EnemyCharacter;
+                    return SideType.RightSide;
                 }
                 else
                 {
-                    return SideType.PlayerCharacter;
+                    return SideType.LeftSide;
                 }
             case MatchType.PPvPP:
                 if (ct == ControllerType.Player3 || ct == ControllerType.Player4)
                 {
-                    return SideType.EnemyCharacter;
+                    return SideType.RightSide;
                 }
                 else
                 {
-                    return SideType.PlayerCharacter;
+                    return SideType.LeftSide;
                 }
         }
 
-        return SideType.PlayerCharacter;
+        return SideType.LeftSide;
     }
 
     public List<BattleTileScript> GetBattleTiles(List<Vector2Int> pos, SideType isEnemyOrPlayer)
     {
         List<BattleTileScript> res = new List<BattleTileScript>();
-        if (isEnemyOrPlayer == SideType.PlayerCharacter)
+        if (isEnemyOrPlayer == SideType.LeftSide)
         {
             foreach (Vector2Int item in pos)
             {
@@ -183,7 +183,7 @@ public class GridManagerScript : MonoBehaviour
     public BattleTileScript GetFreeBattleTile(SideType isEnemyOrPlayer)
     {
         List<BattleTileScript> emptyBattleTiles = new List<BattleTileScript>();
-        if (isEnemyOrPlayer == SideType.PlayerCharacter)
+        if (isEnemyOrPlayer == SideType.LeftSide)
         {
             emptyBattleTiles = BattleTiles.Where(r => r.BattleTileState == BattleTileStateType.Empty && r.TileOwner != ControllerType.Enemy).ToList();
         }
@@ -200,7 +200,7 @@ public class GridManagerScript : MonoBehaviour
     public BattleTileScript GetFreeBattleTile(SideType isEnemyOrPlayer, List<Vector2Int> occupiedTiles)
     {
         List<BattleTileScript> emptyBattleTiles = new List<BattleTileScript>();
-        if (isEnemyOrPlayer == SideType.PlayerCharacter)
+        if (isEnemyOrPlayer == SideType.LeftSide)
         {
             emptyBattleTiles = BattleTiles.Where(r => r.BattleTileState == BattleTileStateType.Empty && r.TileOwner != ControllerType.Enemy).ToList();
         }

@@ -304,7 +304,9 @@ public enum AttackParticleTypes
 {
     Stage04_Minion_Mountain,
     Stage04_Minion_Forest,
-    Stage04_Minion_Desert
+    Stage04_Minion_Desert,
+    Stage04_Minion_Valley,
+    Stage03_Minion_Desert
 }
 
 
@@ -317,8 +319,8 @@ public enum ParticleTypes
 
 public enum SideType
 {
-    PlayerCharacter,
-    EnemyCharacter
+    LeftSide,
+    RightSide
 }
 
 
@@ -366,5 +368,6 @@ public enum CharacterNameType
 {
     Balistica,
     LadyBush,
-    Jaguar
+    Jaguar,
+    Monkena
 }

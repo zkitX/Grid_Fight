@@ -36,7 +36,7 @@ public class SpineAnimationManager : MonoBehaviour
 
     private void SpineAnimationState_Event(Spine.TrackEntry trackEntry, Spine.Event e)
     {
-        if (e.Data.Name == "FireParticles")
+        if (e.Data.Name.Contains("FireParticle"))
         {
             CharOwner.CastAttackParticles();
             switch (CharOwner.CharInfo.ClassType)

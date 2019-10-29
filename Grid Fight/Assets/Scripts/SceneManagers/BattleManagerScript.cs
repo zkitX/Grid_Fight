@@ -156,11 +156,11 @@ public class BattleManagerScript : MonoBehaviour
     #endregion
 
     #region Loading_Selection Character
-    public void LoadingNewCharacterInRandomPosition(CharacterType ct, ControllerType playerController)
+    public void LoadingNewCharacterInRandomPosition(CharacterType ct,SideType side, ControllerType playerController)
     {
         if(CurrentCharacterLoadingInfo == null)
         {
-            if(AllCharactersOnField.Where(r=> r.PlayerController == playerController && r.CharacterInfo.CT == ct).ToList().Count == 0)
+            if(AllCharactersOnField.Where(r=> r.Side == side && r.CharacterInfo.CT == ct).ToList().Count == 0)
             {
                 CharacterLoadingCo = CharacterLoadingInRandomPosition(ct, playerController);
                 CurrentCharacterLoadingInfo = new CharacterLoadingInfoClass(ct, playerController, CharacterLoadingCo);
@@ -168,7 +168,7 @@ public class BattleManagerScript : MonoBehaviour
             }
             else
             {
-                SelectCharacter(playerController, AllCharactersOnField.Where(r => r.PlayerController == playerController && r.CharacterInfo.CT == ct).First());
+                SelectCharacter(playerController, AllCharactersOnField.Where(r => r.Side == side && r.CharacterInfo.CT == ct).First());
             }
         }
     }
@@ -248,10 +248,11 @@ public class BattleManagerScript : MonoBehaviour
 
     public void Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType characterSelection, ControllerType controllerType)
     {
-        CharacterBaseInfoClass cbic = BattleInfoManagerScript.Instance.PlayerBattleInfo.Where(r => r.CharacterSelection == characterSelection && r.playerController == controllerType).FirstOrDefault();
-        if (cbic != null)
+        SideType side = GetSideFromPlayer(controllerType);
+        CharacterBase cb = AllCharactersOnField.Where(r => r.CharacterInfo.CharacterSelection == characterSelection && r.Side == side).FirstOrDefault();
+        if (cb != null)
         {
-            LoadingNewCharacterInRandomPosition(cbic.CT, controllerType);
+            LoadingNewCharacterInRandomPosition(cb.CharacterInfo.CT, side, controllerType);
         }
 
     }
@@ -265,7 +266,7 @@ public class BattleManagerScript : MonoBehaviour
 
     public void Mobile_LoadingNewCharacterInRandomPosition(CharacterType ct, ControllerType playerController)
     {
-        LoadingNewCharacterInRandomPosition(ct, playerController);
+        LoadingNewCharacterInRandomPosition(ct,GetSideFromPlayer(playerController), playerController);
     }
 
     #endregion
@@ -277,7 +278,7 @@ public class BattleManagerScript : MonoBehaviour
 
         foreach (CharacterBase item in AllCharactersOnField)
         {
-            if(item.Side == SideType.EnemyCharacter)
+            if(item.Side == SideType.RightSide)
             {
                 resRight.Add(new UIIconClass(item.CharInfo.CharacterIcon, item.CharacterInfo.CharacterSelection));
             }
@@ -289,6 +290,24 @@ public class BattleManagerScript : MonoBehaviour
 
         UIBattleManager.Instance.UICharacterSelectionLeft.SetupCharacterIcons(resLeft);
         UIBattleManager.Instance.UICharacterSelectionRight.SetupCharacterIcons(resRight);
+    }
+
+
+    public SideType GetSideFromPlayer(ControllerType ct)
+    {
+        switch (BattleInfoManagerScript.Instance.MatchInfoType)
+        {
+            case MatchType.PvE:
+                return ct == ControllerType.Player1 ? SideType.LeftSide : SideType.RightSide;
+            case MatchType.PvP:
+                return ct == ControllerType.Player1 ? SideType.LeftSide : SideType.RightSide;
+            case MatchType.PPvE:
+                return ct == ControllerType.Player1 || ct == ControllerType.Player1 ? SideType.LeftSide : SideType.RightSide;
+            case MatchType.PPvPP:
+                return ct == ControllerType.Player1 || ct == ControllerType.Player1 ? SideType.LeftSide : SideType.RightSide;
+        }
+
+        return SideType.LeftSide;
     }
 
 }

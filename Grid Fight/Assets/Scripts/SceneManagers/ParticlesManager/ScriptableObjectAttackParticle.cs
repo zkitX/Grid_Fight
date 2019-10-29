@@ -11,3 +11,23 @@ public class ScriptableObjectAttackParticle : ScriptableObject
     public GameObject AttackPS;
     public GameObject EffectPS;
 }
+
+
+
+[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/SkillParticles")]
+public class ScriptableObjectSkillParticles : ScriptableObject
+{
+    public CharacterClassType CharacterClass;
+    public List<ScriptableObjectSkillParticlesClass> CastPS = new List<ScriptableObjectSkillParticlesClass>();
+    public List<ScriptableObjectSkillParticlesClass> AttackPS = new List<ScriptableObjectSkillParticlesClass>();
+    public List<ScriptableObjectSkillParticlesClass> EffectPS = new List<ScriptableObjectSkillParticlesClass>();
+}
+
+
+[System.Serializable]
+public class ScriptableObjectSkillParticlesClass
+{
+    public string Name;
+    public ElementalType ElementalT;
+    public GameObject Particle;
+}
