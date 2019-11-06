@@ -99,7 +99,7 @@ public class UserInputManager : MonoBehaviour
   
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && BattleManagerScript.Instance.CurrentSelectedCharacters[ControllerType.Player1] != null)
+      /*  if (Input.GetMouseButtonDown(0) && BattleManagerScript.Instance.CurrentSelectedCharacters.ContainsKey(ControllerType.Player1))
         {
             isMoving = true;
             foreach (RectTransform item in PressableItems)
@@ -147,7 +147,7 @@ public class UserInputManager : MonoBehaviour
                     }
                 }
             }
-        }
+        }*/
 
         if(t)
         {
@@ -186,6 +186,40 @@ public class UserInputManager : MonoBehaviour
         {
             Instance_ButtonLeftDownEvent(1);
         }
+
+        if (Input.GetKeyUp(KeyCode.Alpha1))
+        {
+            Instance_ButtonDownUpEvent(0);
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha2))
+        {
+            Instance_ButtonUpUpEvent(0);
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha3))
+        {
+            Instance_ButtonRightUpEvent(0);
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha4))
+        {
+            Instance_ButtonLeftUpEvent(0);
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha5))
+        {
+            Instance_ButtonDownUpEvent(1);
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha6))
+        {
+            Instance_ButtonUpUpEvent(1);
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha7))
+        {
+            Instance_ButtonRightUpEvent(1);
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha8))
+        {
+            Instance_ButtonLeftUpEvent(1);
+        }
+
 
         if (Input.GetKey(KeyCode.UpArrow))
         {

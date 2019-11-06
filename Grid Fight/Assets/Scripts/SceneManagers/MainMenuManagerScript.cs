@@ -19,7 +19,7 @@ public class MainMenuManagerScript : MonoBehaviour
     public void GoToScene(string nextScene)
     {
         //UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(nextScene, UnityEngine.SceneManagement.LoadSceneMode.Additive);
-        StartCoroutine(LoaderManagerScript.Instance.LoadNewSceneWithLoading(nextScene, UnityEngine.SceneManagement.SceneManager.GetActiveScene().name));
+        LoaderManagerScript.Instance.LoadNewSceneWithLoading(nextScene, UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
     public IEnumerator LoadLoadingScene(string nextScene)

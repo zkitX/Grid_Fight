@@ -107,7 +107,8 @@ public class GridManagerScript : MonoBehaviour
 
     public SideType GetSideTypeFromControllerType(ControllerType ct)
     {
-        switch (BattleInfoManagerScript.Instance.MatchInfoType)
+        MatchType matchType = LoaderManagerScript.Instance != null ? LoaderManagerScript.Instance.MatchInfoType : BattleInfoManagerScript.Instance.MatchInfoType;
+        switch (matchType)
         {
             case MatchType.PvE:
                 if (ct == ControllerType.Enemy)

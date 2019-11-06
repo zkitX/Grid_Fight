@@ -43,6 +43,8 @@ public class CharacterBaseInfoClass
     public List<ElementalType> ElementalsPower = new List<ElementalType>();
     public List<CharactersRelationshipClass> CharacterRelationships = new List<CharactersRelationshipClass>();
     public float AttackSpeed;
+    public float Special2LoadingDuration;
+    public float Special3LoadingDuration; 
     public float Health;
     public float HealthBase;
     public float Regeneration;

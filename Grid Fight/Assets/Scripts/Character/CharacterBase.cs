@@ -41,17 +41,18 @@ public class CharacterBase : MonoBehaviour
         {
             if (_CharInfo == null)
             {
-                _CharInfo = this.GetComponentInChildren<CharacterInfoScript>();
+                _CharInfo = this.GetComponentInChildren<CharacterInfoScript>(true);
             }
             return _CharInfo;
         }
     }
     public CharacterInfoScript _CharInfo;
-    
-    
+
+
     public Vector2Int TestAttackPosition;
     public SideType Side;
     public bool isMoving = false;
+    public bool isSpecialLoading = false;
     public CharacterBaseInfoClass CharacterInfo;
     private IEnumerator MoveCo;
     public ControllerType PlayerController;
@@ -61,9 +62,11 @@ public class CharacterBase : MonoBehaviour
     public CharacterAnimationStateType AnimationState;
     public List<CurrentBuffsDebuffsClass> BuffsDebuffs = new List<CurrentBuffsDebuffsClass>();
     public bool IsUsingAPortal = false;
+    public bool IsOnField = false;
     public bool AllowMoreElementalOnWepon_ElementalResistence_Armor = false;
     private FacingType facing;
     public bool shoot = true;
+    public CharacterLevelType NextAttackLevel = CharacterLevelType.Novice;
 
     #region Unity Life Cycles
     private void Start()
@@ -73,14 +76,16 @@ public class CharacterBase : MonoBehaviour
 
     private void Update()
     {
-        
+
     }
     #endregion
 
     #region Setup Character
     public void SetupCharacterSide()
     {
-        switch (BattleInfoManagerScript.Instance.MatchInfoType)
+        SpineAnimatorsetup();
+        MatchType matchType = LoaderManagerScript.Instance != null ? LoaderManagerScript.Instance.MatchInfoType : BattleInfoManagerScript.Instance.MatchInfoType;
+        switch (matchType)
         {
             case MatchType.PvE:
                 if (PlayerController == ControllerType.Enemy)
@@ -157,12 +162,12 @@ public class CharacterBase : MonoBehaviour
     {
         while (true)
         {
-            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || isMoving)
+            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || isMoving || isSpecialLoading)
             {
                 yield return new WaitForEndOfFrame();
             }
             SetAnimation(CharacterAnimationStateType.Atk);
-            
+
             float timer = 0;
             while (timer <= CharacterInfo.AttackSpeed)
             {
@@ -172,10 +177,24 @@ public class CharacterBase : MonoBehaviour
                     yield return new WaitForEndOfFrame();
                 }
 
+                while (isSpecialLoading)
+                {
+                    yield return new WaitForEndOfFrame();
+                    timer = 0;
+                }
+
                 timer += Time.fixedDeltaTime;
             }
         }
     }
+
+    public void SpecialAttack(CharacterLevelType attackLevel)
+    {
+        NextAttackLevel = attackLevel;
+        SetAnimation(CharacterAnimationStateType.Atk);
+    }
+
+
 
     public void CastAttackParticles()
     {
@@ -607,9 +626,8 @@ public class CharacterBase : MonoBehaviour
 
     public void SpineAnimatorsetup()
     {
-        SpineAnim = GetComponentInChildren<SpineAnimationManager>();
+        SpineAnim = GetComponentInChildren<SpineAnimationManager>(true);
         SpineAnim.CharOwner = this;
-       
     }
 
     public void SetMixAnimation(CharacterAnimationStateType animState)

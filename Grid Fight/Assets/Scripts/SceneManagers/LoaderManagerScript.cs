@@ -10,29 +10,48 @@ public class LoaderManagerScript : MonoBehaviour
     public static LoaderManagerScript Instance;
     public Image LoadingBar;
     public CanvasGroup MainCanvasGroup;
+    public List<CharacterBaseInfoClass> PlayerBattleInfo = new List<CharacterBaseInfoClass>();
+    public MatchType MatchInfoType;
     private void Awake()
     {
         Instance = this;
     }
+
+    public void LoadNewSceneWithLoading(string nextScene, string prevScene)
+    {
+        StartCoroutine(LoadNewSceneWithLoading_co(nextScene, prevScene));
+    }
     // Start is called before the first frame update
-    public IEnumerator LoadNewSceneWithLoading(string nextScene, string prevScene)
+    public IEnumerator LoadNewSceneWithLoading_co(string nextScene, string prevScene)
     {
         MainCanvasGroup.alpha = 1;
-        yield return new WaitForEndOfFrame();
+
+        if(nextScene == "BattleScene")
+        {
+
+        }
+
         SceneManager.UnloadSceneAsync(prevScene);
+        //Begin to load the Scene you specify
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(nextScene, LoadSceneMode.Additive);
-       // asyncLoad.allowSceneActivation = false;
-        asyncLoad.completed += AsyncLoad_completed;
-        // Wait until the asynchronous scene fully loads
+        //Don't let the Scene activate until you allow it to
+        asyncLoad.allowSceneActivation = false;
+        //When the load is still in progress, output the Text and progress bar
         while (!asyncLoad.isDone)
         {
+            //Output the current progress
             LoadingBar.fillAmount = asyncLoad.progress;
-            yield return new WaitForFixedUpdate();
+
+            // Check if the load has finished
+            if (asyncLoad.progress >= 0.9f)
+            {
+                asyncLoad.allowSceneActivation = true;
+            }
+
+            yield return new WaitForEndOfFrame();
         }
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextScene));
     }
 
-    private void AsyncLoad_completed(AsyncOperation obj)
-    {
-        //obj.allowSceneActivation = true;
-    }
+
 }

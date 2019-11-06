@@ -15,6 +15,9 @@ public class SplashScreenManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+#if UNITY_SWITCH && !UNITY_EDITOR
+        PlayerPrefsSwitch.PlayerPrefsSwitch.Init();
+#endif
         Invoke("GoToMainMenu", 2);
     }
 

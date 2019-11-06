@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1356531903299505067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1356531903299505061}
+  - component: {fileID: 1356531903299505060}
+  - component: {fileID: 1356531903299505062}
+  - component: {fileID: 1356531903299505063}
+  m_Layer: 0
+  m_Name: BattleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1356531903299505061
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356531903299505067}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1356531903299505060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356531903299505067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d779dc6dc4f2a6d4e80ed0c1ae4c8126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PressableItems: []
+  PPPlayer: 0
+  DDir: 0
+  t: 0
+  Threshold: 50
+--- !u!114 &1356531903299505062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356531903299505067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffaee637ee62fa4099cb0dc5741cd66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentBattleState: 0
+  OccupiedBattleTiles: []
+  CharacterBasePrefab: {fileID: 6286762205357209611, guid: 8fcf2c7adbb50844c8b549242125f32d,
+    type: 3}
+  ListOfScriptableObjectCharacterPrefab:
+  - {fileID: 11400000, guid: 34fa256374470c84e90609437f601e02, type: 2}
+  - {fileID: 11400000, guid: 380ec67c02d34ac4081fa7fa11ea9f5f, type: 2}
+  - {fileID: 11400000, guid: a68efcf76541af24f9728f38668b35c2, type: 2}
+  - {fileID: 11400000, guid: 1af5aa8409e92fc4da95d226c89c545c, type: 2}
+  - {fileID: 11400000, guid: 4403b6783b4a19f49948995accb51b6a, type: 2}
+  - {fileID: 11400000, guid: 7bc08e0a009b4d44ebe39055ef8c65e1, type: 2}
+  - {fileID: 11400000, guid: dc630f67f261bc141a6ecd46ff5f430d, type: 2}
+  - {fileID: 11400000, guid: ae0c2a510d5ee2b4c9d365fa9d7442dd, type: 2}
+  BaseBullet: {fileID: 476742215486157040, guid: a68cc87bb45b95b40a034a7c64f04b34,
+    type: 3}
+  AllCharactersOnField: []
+  CharactersContainer: {fileID: 1356531903299505061}
+--- !u!114 &1356531903299505063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356531903299505067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0681df0f498a0a40995a743673d6972, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ListOfAttckParticles:
+  - {fileID: 11400000, guid: ebcddc2a5067f1543bd93f1f2d06deab, type: 2}
+  - {fileID: 11400000, guid: 8b3076cfa3198de46a15e58ca4d4205c, type: 2}
+  - {fileID: 11400000, guid: 9f3bc84a85e7e4f419f2a11ec7b07995, type: 2}
+  - {fileID: 11400000, guid: f746cfdbfc320ba4392b57c2e20d2369, type: 2}

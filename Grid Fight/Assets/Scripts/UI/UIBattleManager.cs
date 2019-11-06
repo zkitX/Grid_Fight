@@ -25,7 +25,10 @@ public class UIBattleManager : MonoBehaviour
 
     private void Start()
     {
-        switch (BattleInfoManagerScript.Instance.MatchInfoType)
+        MatchType matchType = LoaderManagerScript.Instance != null ? LoaderManagerScript.Instance.MatchInfoType : BattleInfoManagerScript.Instance.MatchInfoType;
+
+
+        switch (matchType)
         {
             case MatchType.PvE:
                 PlayerA.SetupPlayer(0);
