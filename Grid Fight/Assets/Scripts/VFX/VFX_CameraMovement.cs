@@ -13,7 +13,7 @@ public class VFX_CameraMovement : MonoBehaviour
         //{
             if (Input.GetMouseButton(0))
                 {
-                    transform.position += (Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2, 0)) / 6000 * GetComponent<Camera>().orthographicSize;
+                    transform.position += (Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2, 0)) / 60000 * GetComponent<Camera>().orthographicSize;
                 
                 }
             GetComponent<Camera>().orthographicSize -= (Input.mouseScrollDelta.y);

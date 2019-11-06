@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Switch;
 #if UNITY_SWITCH
+using UnityEngine.Switch;
+
 using Rewired.Platforms.Switch;
 #endif
 public class InputController : MonoBehaviour
@@ -178,7 +179,7 @@ public class InputController : MonoBehaviour
 
     private void Start()
     {
-        Notification.notificationMessageReceived += Notification_notificationMessageReceived;
+        //Notification.notificationMessageReceived += Notification_notificationMessageReceived;
     }
 
     private void Update()
@@ -194,7 +195,7 @@ public class InputController : MonoBehaviour
     }
 
 
-    private void Notification_notificationMessageReceived(Notification.Message obj)
+    /*private void Notification_notificationMessageReceived(Notification.Message obj)
     {
         if (obj == Notification.Message.OperationModeChanged)
         {
@@ -208,7 +209,7 @@ public class InputController : MonoBehaviour
             Debug.Log("---------------------------------------------" + Operation.mode.ToString());
            // Operation.mode = Operation.OperationMode.Console
         }
-    }
+    }*/
 
     //Check for Joysticks movement
     private void JoystickMovement(Player currentPlayer)
