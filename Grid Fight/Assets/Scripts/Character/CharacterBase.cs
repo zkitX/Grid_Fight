@@ -67,6 +67,7 @@ public class CharacterBase : MonoBehaviour
     private FacingType facing;
     public bool shoot = true;
     public CharacterLevelType NextAttackLevel = CharacterLevelType.Novice;
+    public Transform SelectionIndicator;
 
     #region Unity Life Cycles
     private void Start()
@@ -176,6 +177,7 @@ public class CharacterBase : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
             Debug.Log("Anim");
+            CastAttackParticles();
             SetAnimation(CharacterAnimationStateType.Atk);
 
             float timer = 0;

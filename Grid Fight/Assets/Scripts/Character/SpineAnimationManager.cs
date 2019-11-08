@@ -36,7 +36,7 @@ public class SpineAnimationManager : MonoBehaviour
     {
         if (e.Data.Name.Contains("FireParticle"))
         {
-            CharOwner.CastAttackParticles();
+            
             switch (CharOwner.CharInfo.ClassType)
             {
                 case CharacterClassType.Valley:

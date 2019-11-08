@@ -192,6 +192,9 @@ public class BattleManagerScript : MonoBehaviour
             currentCharacter.Pos.Add(item);
         }
         currentCharacter.SetupCharacterSide();
+        currentCharacter.SelectionIndicator.eulerAngles = new Vector3(0,0, currentCharacter.CharacterInfo.CharacterSelection == CharacterSelectionType.Up ? 90 :
+            currentCharacter.CharacterInfo.CharacterSelection == CharacterSelectionType.Down ? -90 :
+            currentCharacter.CharacterInfo.CharacterSelection == CharacterSelectionType.Left ? 180 : 0);
         return currentCharacter;
     }
 
