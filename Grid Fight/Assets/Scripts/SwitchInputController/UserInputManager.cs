@@ -267,7 +267,11 @@ public class UserInputManager : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.O))
         {
-            Instance_ButtonDownUpEvent(0);
+            Instance_ButtonPlusUpEvent(0);
+        }
+        if (Input.GetKeyUp(KeyCode.P))
+        {
+            Instance_ButtonMinusUpEvent(0);
         }
     }
 

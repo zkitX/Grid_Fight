@@ -9,6 +9,12 @@ public class UICharacterSelectionScript : MonoBehaviour
     public Image Down;
     public Image Left;
     public Image Right;
+    public Animator UpAnim;
+    public Animator DownAnim;
+    public Animator LeftAnim;
+    public Animator RightAnim;
+
+    public CharacterSelectionType LastSelected;
 
     public void SetupCharacterIcons(List<UIIconClass> listOfIcons)
     {
@@ -52,30 +58,38 @@ public class UICharacterSelectionScript : MonoBehaviour
         switch (characterSelection)
         {
             case CharacterSelectionType.Up:
-                Up.GetComponent<Animator>().SetBool("LoadSelect", status);
+                UpAnim.SetBool("LoadSelect", status);
                 break;
             case CharacterSelectionType.Down:
-                Down.GetComponent<Animator>().SetBool("LoadSelect", status);
+                DownAnim.SetBool("LoadSelect", status);
                 break;
             case CharacterSelectionType.Left:
-                Left.GetComponent<Animator>().SetBool("LoadSelect", status);
+                LeftAnim.SetBool("LoadSelect", status);
                 break;
             case CharacterSelectionType.Right:
-                Right.GetComponent<Animator>().SetBool("LoadSelect", status);
+                RightAnim.SetBool("LoadSelect", status);
                 break;
             case CharacterSelectionType.A:
-                Right.GetComponent<Animator>().SetBool("LoadSelect", status);
+                RightAnim.SetBool("LoadSelect", status);
                 break;
             case CharacterSelectionType.B:
-                Down.GetComponent<Animator>().SetBool("LoadSelect", status);
+                DownAnim.SetBool("LoadSelect", status);
                 break;
             case CharacterSelectionType.X:
-                Up.GetComponent<Animator>().SetBool("LoadSelect", status);
+                UpAnim.SetBool("LoadSelect", status);
                 break;
             case CharacterSelectionType.Y:
-                Left.GetComponent<Animator>().SetBool("LoadSelect", status);
+                LeftAnim.SetBool("LoadSelect", status);
                 break;
         }
+    }
+
+
+    public void SetCharSelected(CharacterSelectionType selection)
+    {
+        LoadingOrSelectionChar(LastSelected, false);
+        LastSelected = selection;
+        LoadingOrSelectionChar(LastSelected, true);
     }
 
 }

@@ -73,5 +73,13 @@ public class UIBattleManager : MonoBehaviour
     public void CharacterSelected(ControllerType playerController, CharacterBase currentCharacter)
     {
         currentPlayers[(int)playerController].SetSelectedCharacter(currentCharacter);
+        if (GridManagerScript.Instance.GetSideTypeFromControllerType(playerController) == SideType.LeftSide)
+        {
+            UICharacterSelectionLeft.SetCharSelected(currentCharacter.CharacterInfo.CharacterSelection);
+        }
+        else
+        {
+            UICharacterSelectionRight.SetCharSelected(currentCharacter.CharacterInfo.CharacterSelection);
+        }
     }
 }
