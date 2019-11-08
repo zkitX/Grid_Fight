@@ -28,9 +28,7 @@ public class SpineAnimationManager : MonoBehaviour
             skeleton = skeletonAnimation.Skeleton;
             SpineAnimationState.Complete += SpineAnimationState_Complete;
             SpineAnimationState.Event += SpineAnimationState_Event;
-            SpineAnimationState.SetAnimation(0, "Idle", true);
-            SpineAnimationState.SetEmptyAnimation(1, 0);
-            CurrentAnim = CharacterAnimationStateType.Idle;
+           
         }
     }
 
@@ -42,16 +40,16 @@ public class SpineAnimationManager : MonoBehaviour
             switch (CharOwner.CharInfo.ClassType)
             {
                 case CharacterClassType.Valley:
-                    CharOwner.CreateSingleBullet();
+                    CharOwner.CreateSingleBullet(CharOwner.CharInfo.BulletDistanceInTile[0]);
                     break;
                 case CharacterClassType.Mountain:
-                    CharOwner.CreateSingleBullet();
+                    CharOwner.CreateSingleBullet(CharOwner.CharInfo.BulletDistanceInTile[0]);
                     break;
                 case CharacterClassType.Forest:
                     CharOwner.CreateMachingunBullets();
                     break;
                 case CharacterClassType.Desert:
-                    CharOwner.CreateSingleBullet();
+                    CharOwner.CreateSingleBullet(CharOwner.CharInfo.BulletDistanceInTile[0]);
                     break;
             }
             
@@ -60,9 +58,16 @@ public class SpineAnimationManager : MonoBehaviour
 
     private void SpineAnimationState_Complete(Spine.TrackEntry trackEntry)
     {
+        //Debug.Log(skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name + "   complete  " + Time.time);
+        float t = GetAnimLenght((CharacterAnimationStateType)System.Enum.Parse(typeof(CharacterAnimationStateType), skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name));
         if (skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name == "<empty>")
         {
             return;
+        }
+
+        if((CharacterAnimationStateType)System.Enum.Parse(typeof(CharacterAnimationStateType), skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name) == CharacterAnimationStateType.Arriving)
+        {
+            CharOwner.IsOnField = true;
         }
 
         SpineAnimationState.SetAnimation(0, "Idle", true);
@@ -70,9 +75,11 @@ public class SpineAnimationManager : MonoBehaviour
 
     public void SetAnim(CharacterAnimationStateType anim, bool loop)
     {
-         SetupSpineAnim();
-         SpineAnimationState.SetAnimation(0, anim.ToString(), loop);
-         CurrentAnim = anim;
+        SetupSpineAnim();
+       // Debug.Log(anim + "   start  " + Time.time);
+        SpineAnimationState.ClearTrack(0);
+        SpineAnimationState.SetAnimation(0, anim.ToString(), loop);
+        CurrentAnim = anim;
     }
 
 
@@ -125,7 +132,7 @@ public class SpineAnimationManager : MonoBehaviour
     {
         if(Input.GetKeyUp(KeyCode.V))
         {
-            SetMixAnim(CharacterAnimationStateType.Gettinghit, false);
+           // SetMixAnim(CharacterAnimationStateType.Gettinghit, false);
         }
     }
 }

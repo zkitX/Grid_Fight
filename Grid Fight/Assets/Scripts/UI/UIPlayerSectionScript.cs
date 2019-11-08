@@ -64,8 +64,18 @@ public class UIPlayerSectionScript : MonoBehaviour
     {
         if(currentSelectedCharacter != null)
         {
-            CharacterHealthBar.rectTransform.anchoredPosition = new Vector2((CharacterHealthBar.rectTransform.rect.width * currentSelectedCharacter.CharacterInfo.HealthPerc)/ 100, 0);
-            CharacterStaminaBar.rectTransform.anchoredPosition = new Vector2((CharacterStaminaBar.rectTransform.rect.width * currentSelectedCharacter.CharacterInfo.StaminaPerc) / 100, 0);
+            if(currentSelectedCharacter.Side == SideType.LeftSide)
+            {
+                CharacterHealthBar.rectTransform.anchoredPosition = new Vector2((CharacterHealthBar.rectTransform.rect.width * currentSelectedCharacter.CharacterInfo.HealthPerc) / 100, 0);
+                CharacterStaminaBar.rectTransform.anchoredPosition = new Vector2((CharacterStaminaBar.rectTransform.rect.width * currentSelectedCharacter.CharacterInfo.StaminaPerc) / 100, 0);
+            }
+            else if (currentSelectedCharacter.Side == SideType.RightSide)
+            {
+                CharacterHealthBar.rectTransform.anchoredPosition = new Vector2(-(CharacterHealthBar.rectTransform.rect.width * currentSelectedCharacter.CharacterInfo.HealthPerc) / 100, 0);
+                CharacterStaminaBar.rectTransform.anchoredPosition = new Vector2(-(CharacterStaminaBar.rectTransform.rect.width * currentSelectedCharacter.CharacterInfo.StaminaPerc) / 100, 0);
+            }
+
+
         }
     }
 }

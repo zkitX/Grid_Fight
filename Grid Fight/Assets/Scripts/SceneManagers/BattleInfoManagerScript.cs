@@ -52,6 +52,10 @@ public class CharacterBaseInfoClass
     public float Stamina;
     public float StaminaBase;
     public float StaminaRegeneration;
+    public float StaminaCostSpecial1;
+    public float StaminaCostSpecial2;
+    public float StaminaCostSpecial3;
+
 
     public float HealthPerc 
     {

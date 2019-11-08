@@ -4226,7 +4226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3683845633639345594
 Transform:
   m_ObjectHideFlags: 0
@@ -4702,13 +4702,84 @@ MonoBehaviour:
   ClassType: 1
   ParticleType: 0
   Elemental: 
-  Trajectory:
+  Trajectory_Y:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0005950928
+      value: -0.018249512
+      inSlope: 10.624879
+      outSlope: 10.624879
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.0505867
+      value: 0.52555084
+      inSlope: 9.857885
+      outSlope: 9.857885
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.37137794
+      outWeight: 0.057512525
+    - serializedVersion: 3
+      time: 0.6846289
+      value: 2.081201
+      inSlope: -4.1357026
+      outSlope: -4.1357026
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.06974473
+    - serializedVersion: 3
+      time: 1.0012207
+      value: -0.028381348
+      inSlope: -6.6634145
+      outSlope: -6.6634145
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  BulletSpeed: 1
+  Trajectory_Z:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0023498535
+      value: 0.0029296875
+      inSlope: -2.0356243
+      outSlope: -2.0356243
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.49307296
+      value: -1.005565
+      inSlope: -0.036683142
+      outSlope: -0.036683142
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.007019
+      value: 0.0029296875
+      inSlope: 1.962258
+      outSlope: 1.962258
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  BulletSpeed: 3
+  BulletDistanceInTile:
+  - {x: 0, y: 8}
   Damage: 10
   MultiBulletAttackAngle: 90
   MultiBulletAttackNumberOfBullets: 4

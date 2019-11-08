@@ -4767,7 +4767,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -14281,7 +14281,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -23807,8 +23807,9 @@ GameObject:
   - component: {fileID: 1091210815158133638}
   - component: {fileID: 1091210815158133639}
   - component: {fileID: 338050409}
+  - component: {fileID: -3264114560521217340}
   m_Layer: 0
-  m_Name: stage01-valley-impact
+  m_Name: stage04-valley-impact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28658,3 +28659,15 @@ MonoBehaviour:
   - {fileID: 1091210814143014134}
   ShotGodness:
   - {fileID: 1091210813929366265}
+--- !u!114 &-3264114560521217340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091210815158133637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

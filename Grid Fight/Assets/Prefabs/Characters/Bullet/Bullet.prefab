@@ -44,23 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71cc02f949b62ef44ac1b5096dcfedbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0
-  Damage: 0
-  AttackParticle: 0
-  Destination: {x: 0, y: 0}
+  CharInfo: {fileID: 0}
+  DestinationTile: {x: 0, y: 0}
+  DestinationWorld: {x: 0, y: 0, z: 0}
   Side: 0
   Elemental: 0
-  AType: 0
   ControllerT: 0
-  Height:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   Dead: 0
-  Duration: 0
   PS: {fileID: 0}
+  TargetIndicator: {fileID: 3973921136129711116, guid: 4b92c55d8274de74386587e2c5d2d1a7,
+    type: 3}
+  UsedTargets: []
 --- !u!65 &7833339530506051404
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -16,11 +16,6 @@ public class LayerParticleSelection : MonoBehaviour
     public List<Transform> ShotHeroine;
     [Tooltip("Level3 attack particle(only when character is pressed)")]
     public List<Transform> ShotGodness;
-    private void Awake()
-    {
-        //close unnecessary layers
-        CloseAllLayers();
-    }
 
     private void OnEnable()
     {

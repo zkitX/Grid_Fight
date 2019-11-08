@@ -29175,6 +29175,7 @@ GameObject:
   - component: {fileID: 8097926224568323551}
   - component: {fileID: 8097926224568323536}
   - component: {fileID: 8097926224568323549}
+  - component: {fileID: -6766499507534731002}
   m_Layer: 0
   m_Name: stage04-forest-bullet
   m_TagString: Untagged
@@ -33933,7 +33934,6 @@ MonoBehaviour:
   Shot: 0
   ShotNovice:
   - {fileID: 8097926224085952377}
-  - {fileID: 0}
   ShotDefiant:
   - {fileID: 8097926224533647994}
   ShotHeroine:
@@ -33948,7 +33948,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8097926224568323538}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: b17eb101da021584fac28f62822c6bb8, type: 2}
   m_CullingMode: 0
@@ -33959,6 +33959,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-6766499507534731002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097926224568323538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8097926224780187553
 GameObject:
   m_ObjectHideFlags: 0

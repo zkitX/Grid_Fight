@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -16,6 +17,8 @@ public class BulletScript : MonoBehaviour
 	public ControllerType ControllerT;
     public bool Dead = false;
     public GameObject PS;
+    public GameObject TargetIndicator;
+    public List<GameObject> UsedTargets = new List<GameObject>();
 
 
     //Private 
@@ -63,6 +66,41 @@ public class BulletScript : MonoBehaviour
     //Move the bullet on a determinated tile using the BulletInfo.Trajectory
     public IEnumerator MoveToTile()
 	{
+        if (CharInfo.ClassType == CharacterClassType.Valley)
+        {
+            foreach (BattleTileScript item in GridManagerScript.Instance.GetBattleTileInARowToDestination(DestinationTile, Side))
+            {
+                GameObject go = UsedTargets.Where(r => !r.gameObject.activeInHierarchy).FirstOrDefault();
+                if(go == null)
+                {
+                    go = Instantiate(TargetIndicator, item.transform.position, Quaternion.identity);
+                    go.GetComponent<BattleTileTargetScript>().StartTarget(Vector3.Distance(transform.position, item.transform.position) / CharInfo.BulletSpeed);
+                }
+                else
+                {
+                    go.transform.position = GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position;
+                    go.SetActive(true);
+                }
+                UsedTargets.Add(go);
+            }
+        }
+        else
+        {
+            GameObject go = UsedTargets.Where(r => !r.gameObject.activeInHierarchy).FirstOrDefault();
+            if (go == null)
+            {
+                go = Instantiate(TargetIndicator, GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position, Quaternion.identity);
+                go.GetComponent<BattleTileTargetScript>().StartTarget(Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position) / CharInfo.BulletSpeed);
+            }
+            else
+            {
+                go.transform.position = GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position;
+                go.SetActive(true);
+            }
+            UsedTargets.Add(go);
+        }
+
+
         //setup the base offset for the movement
 		Vector3 offset = transform.position;
         //Timer used to set up the coroutine
@@ -84,7 +122,11 @@ public class BulletScript : MonoBehaviour
             }
             //Calutation for next world position of the bullet
             res = Vector3.Lerp(offset, destination, timer);
-            res.y = CharInfo.ClassType == CharacterClassType.Mountain ? CharInfo.Trajectory.Evaluate(timer) + res.y : res.y;
+            if(CharInfo.ClassType == CharacterClassType.Mountain)
+            {
+                res.y = CharInfo.Trajectory_Y.Evaluate(timer) + res.y;
+                res.z = CharInfo.Trajectory_Z.Evaluate(timer) + res.z;
+            }
             transform.position = res;
             timer += Time.fixedDeltaTime / Duration;
             //if timer ended the bullet fire the Effect
@@ -103,7 +145,7 @@ public class BulletScript : MonoBehaviour
         Vector3 offset = transform.position;
         //Timer used to set up the coroutine
         float timer = 0;
-       
+        float Duration = Vector3.Distance(transform.position, DestinationWorld) / CharInfo.BulletSpeed;
         while (!Dead)
         {
            
@@ -115,8 +157,8 @@ public class BulletScript : MonoBehaviour
             }
 
             //Calutation for next world position of the bullet
-            transform.position = Vector3.Lerp(offset, DestinationWorld + offset, timer);
-            timer += Time.fixedDeltaTime;
+            transform.position = Vector3.Lerp(offset, DestinationWorld, timer);
+            timer += Time.fixedDeltaTime / Duration;
             //if timer ended the bullet fire the Effect
             if (timer > 1)
             {
@@ -128,8 +170,13 @@ public class BulletScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //If the bullet collide with a character 
-        if (other.tag.Contains("Character") && other.tag != Side.ToString())
+        if (other.tag.Contains("Side") && other.tag != Side.ToString())
         {
+
+            foreach (GameObject item in UsedTargets)
+            {
+                Destroy(item);
+            }
             CharacterBase target = other.GetComponentInParent<CharacterBase>();
             //Set damage to the hitting character
             target.SetDamage(CharInfo.Damage, Elemental);

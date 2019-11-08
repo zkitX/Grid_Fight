@@ -76,7 +76,10 @@ public class CharacterBase : MonoBehaviour
 
     private void Update()
     {
-
+        if (BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle)
+        {
+            CharacterInfo.Stamina = (CharacterInfo.Stamina + CharacterInfo.StaminaRegeneration / 60) > CharacterInfo.StaminaBase ? CharacterInfo.StaminaBase : (CharacterInfo.Stamina + CharacterInfo.StaminaRegeneration / 60);   
+        }
     }
     #endregion
 
@@ -160,19 +163,26 @@ public class CharacterBase : MonoBehaviour
     #region Attack
     public IEnumerator AttackAction()
     {
+        Debug.Log("-----Anim");
         while (true)
         {
+            while (!IsOnField)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
             while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || isMoving || isSpecialLoading)
             {
                 yield return new WaitForEndOfFrame();
             }
+            Debug.Log("Anim");
             SetAnimation(CharacterAnimationStateType.Atk);
 
             float timer = 0;
             while (timer <= CharacterInfo.AttackSpeed)
             {
                 yield return new WaitForFixedUpdate();
-                while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
+                while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause || isMoving || isSpecialLoading)
                 {
                     yield return new WaitForEndOfFrame();
                 }
@@ -185,6 +195,25 @@ public class CharacterBase : MonoBehaviour
 
                 timer += Time.fixedDeltaTime;
             }
+        }
+    }
+
+    public IEnumerator LoadSpecialAttack()
+    {
+        if(CharacterInfo.Stamina - CharacterInfo.StaminaCostSpecial1 >= 0)
+        {
+            float timer = 0;
+            while (isSpecialLoading)
+            {
+                while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
+                {
+                    yield return new WaitForEndOfFrame();
+                }
+                yield return new WaitForFixedUpdate();
+                timer += Time.fixedDeltaTime;
+            }
+            CharacterInfo.Stamina -= CharacterInfo.StaminaCostSpecial1;
+            SpecialAttack(CharacterLevelType.Defiant);
         }
     }
 
@@ -201,7 +230,7 @@ public class CharacterBase : MonoBehaviour
         ParticleManagerScript.Instance.FireParticlesInPosition(CharacterInfo.AttackParticle, ParticleTypes.Cast, SpineAnim.FiringPoint.position, Side);
     }
 
-    public void CreateSingleBullet()
+    public void CreateSingleBullet(Vector2Int bulletDistanceInTile)
     {
         if (!shoot)
         {
@@ -213,7 +242,7 @@ public class CharacterBase : MonoBehaviour
         LayerParticleSelection lps = bullet.GetComponent<LayerParticleSelection>();
         if(lps != null)
         {
-            lps.Shot = CharacterInfo.CharacterLevel;
+            lps.Shot = NextAttackLevel;
         }
 
         bs.Elemental = CharacterInfo.ElementalsPower.First();
@@ -221,44 +250,25 @@ public class CharacterBase : MonoBehaviour
         bs.CharInfo = CharInfo;
         bs.gameObject.SetActive(true);
         bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharacterInfo.AttackParticle, ParticleTypes.Attack, bullet.transform, Side);
-        switch (CharInfo.ClassType)
+        if ((PhysicalPosOnTile.x + bulletDistanceInTile.x > 5) || (PhysicalPosOnTile.x + bulletDistanceInTile.x < 0))
         {
-            case CharacterClassType.Valley:
-                if (Side == SideType.LeftSide)
-                {
-                    // bs.Destination = TestAttackPosition;
-                    bs.DestinationTile = new Vector2Int(PhysicalPosOnTile.x, 11);
-                }
-                else
-                {
-                    bs.DestinationTile = new Vector2Int(PhysicalPosOnTile.x, 0);
-                }
-                StartCoroutine(bs.MoveToTile());
-                break;
-            case CharacterClassType.Mountain:
-                if (Side == SideType.LeftSide)
-                {
-                     bs.DestinationTile = TestAttackPosition;
-                    //bs.DestinationTile = new Vector2Int(Pos.x, 11);
-                }
-                else
-                {
-                    bs.DestinationTile = TestAttackPosition;
-                    // bs.DestinationTile = new Vector2Int(Pos.x, 0);
-                }
-                StartCoroutine(bs.MoveToTile());
-                break;
-            case CharacterClassType.Forest:
-                bs.DestinationWorld = transform.right * (PlayerController == ControllerType.Enemy ? 15 : -15);
-                StartCoroutine(bs.MoveStraight());
-                break;
-            case CharacterClassType.Desert:
-                bs.DestinationWorld = transform.right * (PlayerController == ControllerType.Enemy ? 15 : -15);
-                StartCoroutine(bs.MoveStraight());
-                break;
+            BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(PhysicalPosOnTile.x - bulletDistanceInTile.x, Side == SideType.LeftSide ? PhysicalPosOnTile.y + bulletDistanceInTile.y : PhysicalPosOnTile.y - bulletDistanceInTile.y));
+            float h = transform.position.y - bts.transform.position.y;
+            bs.DestinationWorld = new Vector3(bts.transform.position.x, (transform.position.y + h), bts.transform.position.z);
+            StartCoroutine(bs.MoveStraight());
+            return;
         }
-    }
 
+        if (Side == SideType.LeftSide)
+        {
+            bs.DestinationTile = new Vector2Int(PhysicalPosOnTile.x + bulletDistanceInTile.x, PhysicalPosOnTile.y + bulletDistanceInTile.y > 11 ? 11 : PhysicalPosOnTile.y + bulletDistanceInTile.y);
+        }
+        else
+        {
+            bs.DestinationTile = new Vector2Int(PhysicalPosOnTile.x + bulletDistanceInTile.x, PhysicalPosOnTile.y - bulletDistanceInTile.y < 0 ? 0 : PhysicalPosOnTile.y - bulletDistanceInTile.y);
+        }
+        StartCoroutine(bs.MoveToTile());
+    }
 
     public void CreateMachingunBullets()
     {
@@ -266,8 +276,8 @@ public class CharacterBase : MonoBehaviour
         transform.eulerAngles -= new Vector3(0, 0, CharInfo.MultiBulletAttackAngle / 2);
         for (int i = 0; i < CharInfo.MultiBulletAttackNumberOfBullets; i++)
         {
-            transform.eulerAngles += new Vector3(0, 0, CharInfo.MultiBulletAttackAngle / (CharInfo.MultiBulletAttackNumberOfBullets - 1));
-            CreateSingleBullet();
+           // transform.eulerAngles += new Vector3(0, 0, CharInfo.MultiBulletAttackAngle / (CharInfo.MultiBulletAttackNumberOfBullets - 1));
+            CreateSingleBullet(CharInfo.BulletDistanceInTile[i]);
         }
         transform.eulerAngles = offsetRotation;
     }
@@ -602,16 +612,6 @@ public class CharacterBase : MonoBehaviour
     #endregion
 
     #region Animation
-    public IEnumerator SetAnimationWithFrameDelay(CharacterAnimationStateType animState)
-    {
-        if(SpineAnim == null)
-        {
-            SpineAnimatorsetup();
-        }
-        SpineAnim.SetAnim(CharacterAnimationStateType.Idle, false);
-        yield return new WaitForFixedUpdate();
-        SpineAnim.SetAnim(animState, animState == CharacterAnimationStateType.Idle ? true : false);
-    }
 
     public void SetAnimation(CharacterAnimationStateType animState)
     {
@@ -632,7 +632,7 @@ public class CharacterBase : MonoBehaviour
 
     public void SetMixAnimation(CharacterAnimationStateType animState)
     {
-        SpineAnim.SetAnim(animState,false);
+        SpineAnim.SetAnim(animState, animState == CharacterAnimationStateType.Idle ? true : false);
     }
 
     #endregion

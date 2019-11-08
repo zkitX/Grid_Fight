@@ -13,8 +13,10 @@ public class CharacterInfoScript : MonoBehaviour
     public CharacterClassType ClassType;
     public AttackParticleTypes ParticleType;
     public List<ElementalType> Elemental = new List<ElementalType>();
-    public AnimationCurve Trajectory;
+    public AnimationCurve Trajectory_Y;
+    public AnimationCurve Trajectory_Z;
     public float BulletSpeed = 1;
+    public List<Vector2Int> BulletDistanceInTile = new List<Vector2Int>();
     public float Damage = 10;
     public int MultiBulletAttackAngle;
     public int MultiBulletAttackNumberOfBullets;

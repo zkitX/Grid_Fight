@@ -2168,7 +2168,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1285516442321741731
 Transform:
   m_ObjectHideFlags: 0
@@ -2963,13 +2963,21 @@ MonoBehaviour:
   ClassType: 0
   ParticleType: 3
   Elemental: 
-  Trajectory:
+  Trajectory_Y:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  BulletSpeed: 1
+  Trajectory_Z:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  BulletSpeed: 3
+  BulletDistanceInTile:
+  - {x: 0, y: 8}
   Damage: 10
   MultiBulletAttackAngle: 90
   MultiBulletAttackNumberOfBullets: 4
@@ -3014,8 +3022,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.7, z: 1}
-  m_Center: {x: 0, y: 0.82, z: 0}
+  m_Size: {x: 1, y: 1.2, z: 1}
+  m_Center: {x: 0.09, y: 0.5, z: 0}
 --- !u!1 &7667801406422732612
 GameObject:
   m_ObjectHideFlags: 0

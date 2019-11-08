@@ -3724,7 +3724,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5832199333284077979
 Transform:
   m_ObjectHideFlags: 0
@@ -5544,7 +5544,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   FiringPoint: {fileID: 5832199333923187195}
-  CurrentAnim: 0
+  CurrentAnim: 1
   AnimationTransition: 0.1
 --- !u!114 &5832199333681902676
 MonoBehaviour:
@@ -5563,34 +5563,26 @@ MonoBehaviour:
   ClassType: 2
   ParticleType: 1
   Elemental: 
-  Trajectory:
+  Trajectory_Y:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  BulletSpeed: 1
+  Trajectory_Z:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  BulletSpeed: 2
+  BulletDistanceInTile:
+  - {x: -1, y: 4}
+  - {x: 0, y: 8}
+  - {x: 1, y: 4}
   Damage: 10
-  MultiBulletAttackAngle: 90
-  MultiBulletAttackNumberOfBullets: 7
+  MultiBulletAttackAngle: 45
+  MultiBulletAttackNumberOfBullets: 3
 --- !u!54 &5832199333681902667
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5619,7 +5611,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.4, y: 1.5, z: 0}
-  m_Center: {x: 0.05, y: 0.67, z: 0}
+  m_Center: {x: -0.26, y: 0.67, z: 0}
 --- !u!114 &5832199333681902665
 MonoBehaviour:
   m_ObjectHideFlags: 0

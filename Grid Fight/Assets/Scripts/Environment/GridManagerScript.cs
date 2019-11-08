@@ -91,19 +91,7 @@ public class GridManagerScript : MonoBehaviour
         return AreInControlledArea;
     }
 
-    //Get BattleTileScript of the tile
-    public BattleTileScript GetBattleTile(Vector2Int pos, SideType isEnemyOrPlayer)//isEnemyOrPlayer = true/Player false/Enemy
-    {
-        if (isEnemyOrPlayer == SideType.LeftSide)
-        {
-            return BattleTiles.Where(r => r.Pos == pos && r.TileOwner != ControllerType.Enemy).FirstOrDefault();
-        }
-        else
-        {
-            return BattleTiles.Where(r => r.Pos == pos && r.TileOwner == ControllerType.Enemy).FirstOrDefault();
-        }
-        
-    }
+    
 
     public SideType GetSideTypeFromControllerType(ControllerType ct)
     {
@@ -175,6 +163,45 @@ public class GridManagerScript : MonoBehaviour
     {
         return BattleTiles.Where(r => r.Pos == pos).FirstOrDefault();
     }
+
+    //Get BattleTileScript of the tile
+    public BattleTileScript GetBattleTile(Vector2Int pos, SideType isEnemyOrPlayer)//isEnemyOrPlayer = true/Player false/Enemy
+    {
+        if (isEnemyOrPlayer == SideType.LeftSide)
+        {
+            return BattleTiles.Where(r => r.Pos == pos && r.TileOwner != ControllerType.Enemy).FirstOrDefault();
+        }
+        else
+        {
+            return BattleTiles.Where(r => r.Pos == pos && r.TileOwner == ControllerType.Enemy).FirstOrDefault();
+        }
+
+    }
+
+    public List<BattleTileScript> GetBattleTileInARowToDestination(Vector2Int destPos, SideType isEnemyOrPlayer)
+    {
+        List<BattleTileScript> res = new List<BattleTileScript>();
+        if(isEnemyOrPlayer == SideType.LeftSide)
+        {
+            for (int i = 6; i < destPos.y; i++)
+            {
+                res.Add(GetBattleTile(new Vector2Int(destPos.x, i)));
+            }
+        }
+        else
+        {
+            for (int i = 5; i > destPos.y; i--)
+            {
+                res.Add(GetBattleTile(new Vector2Int(destPos.x, i)));
+            }
+        }
+
+
+
+        return res;
+
+    }
+
 
     public void SetBattleTileState(Vector2Int pos, BattleTileStateType battleTileState)
     {
