@@ -35,7 +35,6 @@ public class BattleManagerScript : MonoBehaviour
     public List<ScriptableObjectCharacterPrefab> ListOfScriptableObjectCharacterPrefab = new List<ScriptableObjectCharacterPrefab>();
     public GameObject BaseBullet;
     public List<CharacterBase> AllCharactersOnField = new List<CharacterBase>();
-
     public List<CharacterLoadingInfoClass> CurrentCharactersLoadingInfo = new List<CharacterLoadingInfoClass>();
     private IEnumerator CharacterLoadingCo;
     [SerializeField]
@@ -81,10 +80,8 @@ public class BattleManagerScript : MonoBehaviour
         {
             CurrentSelectedCharacters.Add(playerController, currentCharacter);
         }
-        else
-        {
-            CurrentSelectedCharacters[playerController] = currentCharacter;
-        }
+       
+        SelectCharacter(playerController, currentCharacter);
 
         foreach (Vector2Int item in currentCharacter.Pos)
         {
@@ -286,8 +283,10 @@ public class BattleManagerScript : MonoBehaviour
     {
         if(currentCharacter != null)
         {
+            CurrentSelectedCharacters[playerController].SetCharSelected(false);
             CurrentSelectedCharacters[playerController] = currentCharacter;
             UIBattleManager.Instance.CharacterSelected(playerController, currentCharacter);
+            currentCharacter.SetCharSelected(true);
         }
     }
 

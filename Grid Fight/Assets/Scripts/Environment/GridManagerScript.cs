@@ -183,14 +183,14 @@ public class GridManagerScript : MonoBehaviour
         List<BattleTileScript> res = new List<BattleTileScript>();
         if(isEnemyOrPlayer == SideType.LeftSide)
         {
-            for (int i = 6; i < destPos.y; i++)
+            for (int i = 6; i <= destPos.y; i++)
             {
                 res.Add(GetBattleTile(new Vector2Int(destPos.x, i)));
             }
         }
         else
         {
-            for (int i = 5; i > destPos.y; i--)
+            for (int i = 5; i >= destPos.y; i--)
             {
                 res.Add(GetBattleTile(new Vector2Int(destPos.x, i)));
             }

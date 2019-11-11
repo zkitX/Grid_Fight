@@ -59,7 +59,6 @@ public class CharacterBase : MonoBehaviour
     [HideInInspector]
     public List<BattleTileScript> CurrentBattleTiles = new List<BattleTileScript>();
     private SpineAnimationManager SpineAnim;
-    public CharacterAnimationStateType AnimationState;
     public List<CurrentBuffsDebuffsClass> BuffsDebuffs = new List<CurrentBuffsDebuffsClass>();
     public bool IsUsingAPortal = false;
     public bool IsOnField = false;
@@ -68,6 +67,9 @@ public class CharacterBase : MonoBehaviour
     public bool shoot = true;
     public CharacterLevelType NextAttackLevel = CharacterLevelType.Novice;
     public Transform SelectionIndicator;
+    public SpriteRenderer SelectionIndicatorSprite;
+    public Color SelectionIndicatorColorSelected;
+    public Color SelectionIndicatorColorUnselected;
 
     #region Unity Life Cycles
     private void Start()
@@ -79,6 +81,15 @@ public class CharacterBase : MonoBehaviour
     {
         if (BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle)
         {
+            if(CharacterInfo.Health <= 0)
+            {
+                foreach (Vector2Int item in Pos)
+                {
+                    GridManagerScript.Instance.SetBattleTileState(item, BattleTileStateType.Empty);
+                }
+                IsOnField = false;
+                gameObject.SetActive(false);
+            }
             CharacterInfo.Stamina = (CharacterInfo.Stamina + CharacterInfo.StaminaRegeneration / 60) > CharacterInfo.StaminaBase ? CharacterInfo.StaminaBase : (CharacterInfo.Stamina + CharacterInfo.StaminaRegeneration / 60);   
         }
     }
@@ -176,7 +187,6 @@ public class CharacterBase : MonoBehaviour
             {
                 yield return new WaitForEndOfFrame();
             }
-            Debug.Log("Anim");
             CastAttackParticles();
             SetAnimation(CharacterAnimationStateType.Atk);
 
@@ -214,8 +224,12 @@ public class CharacterBase : MonoBehaviour
                 yield return new WaitForFixedUpdate();
                 timer += Time.fixedDeltaTime;
             }
-            CharacterInfo.Stamina -= CharacterInfo.StaminaCostSpecial1;
-            SpecialAttack(CharacterLevelType.Defiant);
+            if(IsOnField)
+            {
+                CharacterInfo.Stamina -= CharacterInfo.StaminaCostSpecial1;
+                SpecialAttack(CharacterLevelType.Defiant);
+            }
+           
         }
     }
 
@@ -232,7 +246,7 @@ public class CharacterBase : MonoBehaviour
         ParticleManagerScript.Instance.FireParticlesInPosition(CharacterInfo.AttackParticle, ParticleTypes.Cast, SpineAnim.FiringPoint.position, Side);
     }
 
-    public void CreateSingleBullet(Vector2Int bulletDistanceInTile)
+    public void CreateSingleBullet(Vector2Int bulletDistanceInTile, CharacterLevelType clt)
     {
         if (!shoot)
         {
@@ -241,17 +255,21 @@ public class CharacterBase : MonoBehaviour
       
         GameObject bullet = Instantiate(BattleManagerScript.Instance.BaseBullet, SpineAnim.FiringPoint.position, Quaternion.identity);
         BulletScript bs = bullet.GetComponent<BulletScript>();
-        LayerParticleSelection lps = bullet.GetComponent<LayerParticleSelection>();
-        if(lps != null)
-        {
-            lps.Shot = NextAttackLevel;
-        }
-
+      
+       
         bs.Elemental = CharacterInfo.ElementalsPower.First();
         bs.Side = Side;
         bs.CharInfo = CharInfo;
         bs.gameObject.SetActive(true);
         bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharacterInfo.AttackParticle, ParticleTypes.Attack, bullet.transform, Side);
+        LayerParticleSelection lps = bs.PS.GetComponent<LayerParticleSelection>();
+        if (lps != null)
+        {
+            lps.Shot = clt;
+            lps.SelectShotLevel();
+            
+        }
+
         if ((PhysicalPosOnTile.x + bulletDistanceInTile.x > 5) || (PhysicalPosOnTile.x + bulletDistanceInTile.x < 0))
         {
             BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(PhysicalPosOnTile.x - bulletDistanceInTile.x, Side == SideType.LeftSide ? PhysicalPosOnTile.y + bulletDistanceInTile.y : PhysicalPosOnTile.y - bulletDistanceInTile.y));
@@ -279,8 +297,9 @@ public class CharacterBase : MonoBehaviour
         for (int i = 0; i < CharInfo.MultiBulletAttackNumberOfBullets; i++)
         {
            // transform.eulerAngles += new Vector3(0, 0, CharInfo.MultiBulletAttackAngle / (CharInfo.MultiBulletAttackNumberOfBullets - 1));
-            CreateSingleBullet(CharInfo.BulletDistanceInTile[i]);
+            CreateSingleBullet(CharInfo.BulletDistanceInTile[i], NextAttackLevel);
         }
+        NextAttackLevel = CharacterLevelType.Novice;
         transform.eulerAngles = offsetRotation;
     }
 
@@ -290,7 +309,7 @@ public class CharacterBase : MonoBehaviour
 
     public void MoveCharOnDirection(InputDirection nextDir)
     {
-        if (CharacterInfo.Health > 0 && !isMoving)
+        if (CharacterInfo.Health > 0 && !isMoving && IsOnField)
         {
             List<BattleTileScript> prevBattleTile = CurrentBattleTiles;
             List<BattleTileScript>  CurrentBattleTilesToCheck = new List<BattleTileScript>();
@@ -621,7 +640,6 @@ public class CharacterBase : MonoBehaviour
         {
             SpineAnimatorsetup();
         }
-       
         SetMixAnimation(animState);
 
     }
@@ -754,7 +772,11 @@ public class CharacterBase : MonoBehaviour
 
     }
 
-  
+    public void SetCharSelected(bool isSelected)
+    {
+        SelectionIndicatorSprite.color = isSelected ? SelectionIndicatorColorSelected : SelectionIndicatorColorUnselected;
+    }
+
 }
 
 

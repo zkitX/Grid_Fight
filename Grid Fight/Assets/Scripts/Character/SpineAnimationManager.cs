@@ -19,6 +19,8 @@ public class SpineAnimationManager : MonoBehaviour
     public Transform FiringPoint;
     public CharacterAnimationStateType CurrentAnim;
     public float AnimationTransition = 0.1f;
+    private float lastStartingAnim = 0;
+
     private void SetupSpineAnim()
     {
         if(skeletonAnimation == null)
@@ -40,16 +42,19 @@ public class SpineAnimationManager : MonoBehaviour
             switch (CharOwner.CharInfo.ClassType)
             {
                 case CharacterClassType.Valley:
-                    CharOwner.CreateSingleBullet(CharOwner.CharInfo.BulletDistanceInTile[0]);
+                    CharOwner.CreateSingleBullet(CharOwner.CharInfo.BulletDistanceInTile[0], CharOwner.NextAttackLevel);
+                    CharOwner.NextAttackLevel = CharacterLevelType.Novice;
                     break;
                 case CharacterClassType.Mountain:
-                    CharOwner.CreateSingleBullet(CharOwner.CharInfo.BulletDistanceInTile[0]);
+                    CharOwner.CreateSingleBullet(CharOwner.CharInfo.BulletDistanceInTile[0], CharOwner.NextAttackLevel);
+                    CharOwner.NextAttackLevel = CharacterLevelType.Novice;
                     break;
                 case CharacterClassType.Forest:
                     CharOwner.CreateMachingunBullets();
                     break;
                 case CharacterClassType.Desert:
-                    CharOwner.CreateSingleBullet(CharOwner.CharInfo.BulletDistanceInTile[0]);
+                    CharOwner.CreateSingleBullet(CharOwner.CharInfo.BulletDistanceInTile[0], CharOwner.NextAttackLevel);
+                    CharOwner.NextAttackLevel = CharacterLevelType.Novice;
                     break;
             }
             
@@ -58,7 +63,7 @@ public class SpineAnimationManager : MonoBehaviour
 
     private void SpineAnimationState_Complete(Spine.TrackEntry trackEntry)
     {
-        //Debug.Log(skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name + "   complete  " + Time.time);
+        //Debug.Log(skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name + "   complete  " + trackEntry.TrackIndex  + "  " + Time.time);
         float t = GetAnimLenght((CharacterAnimationStateType)System.Enum.Parse(typeof(CharacterAnimationStateType), skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name));
         if (skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name == "<empty>")
         {
@@ -70,16 +75,29 @@ public class SpineAnimationManager : MonoBehaviour
             CharOwner.IsOnField = true;
         }
 
-        SpineAnimationState.SetAnimation(0, "Idle", true);
+        float r = (float)System.Math.Round((lastStartingAnim + t),1); 
+        float time = (float)System.Math.Round((Time.time), 1);
+       // Debug.Log((lastStartingAnim + t) + "  " + Time.time);
+      //  Debug.Log(r + "  " + time);
+        if (Mathf.Abs(time - r) <0.2f)
+        {
+            SetAnim( CharacterAnimationStateType.Idle, true);
+        }
     }
 
     public void SetAnim(CharacterAnimationStateType anim, bool loop)
     {
         SetupSpineAnim();
-       // Debug.Log(anim + "   start  " + Time.time);
-        SpineAnimationState.ClearTrack(0);
+        //Debug.Log(anim + "   start  " + Time.time);
+       // SpineAnimationState.ClearTrack(0);
+
+        if(CurrentAnim == CharacterAnimationStateType.Atk && anim == CharacterAnimationStateType.Atk)
+        {
+            return;
+        }
         SpineAnimationState.SetAnimation(0, anim.ToString(), loop);
         CurrentAnim = anim;
+        lastStartingAnim = Time.time;
     }
 
 
@@ -95,7 +113,6 @@ public class SpineAnimationManager : MonoBehaviour
     public IEnumerator ClearTrack(float duration, CharacterAnimationStateType anim, int track)
     {
         float timer = 0;
-        bool test;
         while (timer <= duration)
         {
             yield return new WaitForFixedUpdate();

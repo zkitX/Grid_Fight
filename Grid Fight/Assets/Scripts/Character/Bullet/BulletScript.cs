@@ -122,11 +122,24 @@ public class BulletScript : MonoBehaviour
             }
             //Calutation for next world position of the bullet
             res = Vector3.Lerp(offset, destination, timer);
-            if(CharInfo.ClassType == CharacterClassType.Mountain)
+
+            switch (CharInfo.ClassType)
             {
-                res.y = CharInfo.Trajectory_Y.Evaluate(timer) + res.y;
-                res.z = CharInfo.Trajectory_Z.Evaluate(timer) + res.z;
+                case CharacterClassType.Valley:
+                    break;
+                case CharacterClassType.Mountain:
+                    res.y = CharInfo.Trajectory_Y.Evaluate(timer) + res.y;
+                    res.z = CharInfo.Trajectory_Z.Evaluate(timer) + res.z;
+                    break;
+                case CharacterClassType.Forest:
+                    res.z = CharInfo.Trajectory_Z.Evaluate(timer) + res.z;
+                    break;
+                case CharacterClassType.Desert:
+                    break;
+                default:
+                    break;
             }
+            
             transform.position = res;
             timer += Time.fixedDeltaTime / Duration;
             //if timer ended the bullet fire the Effect

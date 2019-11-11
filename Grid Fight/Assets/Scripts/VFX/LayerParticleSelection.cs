@@ -17,11 +17,6 @@ public class LayerParticleSelection : MonoBehaviour
     [Tooltip("Level3 attack particle(only when character is pressed)")]
     public List<Transform> ShotGodness;
 
-    private void OnEnable()
-    {
-        SelectShotLevel();
-    }
-
     /// <summary>
     /// Enables the selected particles based on the type of shot(idle for normal shot, Lvl# for the stamina attacks)
     /// </summary>

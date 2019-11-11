@@ -306,7 +306,8 @@ public enum AttackParticleTypes
     Stage04_Minion_Forest,
     Stage04_Minion_Desert,
     Stage04_Minion_Valley,
-    Stage03_Minion_Desert
+    Stage03_Minion_Desert,
+    Stage04_Desert
 }
 
 

@@ -13,7 +13,7 @@ public class BattleTileTargetScript : MonoBehaviour
     private IEnumerator TargetAnim(float duration)
     {
         float timer = 0;
-        Debug.Log(duration);
+      //  Debug.Log(duration);
         while (timer < 1)
         {
             yield return new WaitForFixedUpdate();
