@@ -195,7 +195,7 @@ public class CharacterBase : MonoBehaviour
             while (timer <= CharacterInfo.AttackSpeed)
             {
                 yield return new WaitForFixedUpdate();
-                while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause || isMoving || isSpecialLoading)
+                while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause || isMoving)
                 {
                     yield return new WaitForEndOfFrame();
                 }
@@ -203,6 +203,7 @@ public class CharacterBase : MonoBehaviour
                 while (isSpecialLoading)
                 {
                     yield return new WaitForEndOfFrame();
+                    Debug.Log(0);
                     timer = 0;
                 }
 
@@ -215,6 +216,7 @@ public class CharacterBase : MonoBehaviour
     {
         if(CharacterInfo.Stamina - CharacterInfo.StaminaCostSpecial1 >= 0)
         {
+            isSpecialLoading = true;
             float timer = 0;
             while (isSpecialLoading)
             {
@@ -237,7 +239,7 @@ public class CharacterBase : MonoBehaviour
     public void SpecialAttack(CharacterLevelType attackLevel)
     {
         NextAttackLevel = attackLevel;
-        SetAnimation(CharacterAnimationStateType.Atk);
+        SetAnimation(CharacterAnimationStateType.Atk1);
     }
 
 
@@ -253,7 +255,7 @@ public class CharacterBase : MonoBehaviour
         {
             return;
         }
-      
+        isSpecialLoading = false;
         GameObject bullet = Instantiate(BattleManagerScript.Instance.BaseBullet, SpineAnim.FiringPoint.position, Quaternion.identity);
         BulletScript bs = bullet.GetComponent<BulletScript>();
       
