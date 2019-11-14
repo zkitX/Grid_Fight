@@ -154,6 +154,7 @@ public class CharacterBase : MonoBehaviour
         Side = SideType.RightSide;
         gameObject.tag = Side.ToString();
         SpineAnim.gameObject.tag = Side.ToString();
+        StartCoroutine(GetComponent<AIScript>().MoveCo());
     }
 
     private void PlayerControllerSettings()
