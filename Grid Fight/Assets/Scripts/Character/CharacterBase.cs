@@ -146,6 +146,7 @@ public class CharacterBase : MonoBehaviour
         CharacterInfo.playerController = PlayerController;
         int layer = Side == SideType.LeftSide ? 9 : 10;
         SpineAnim.gameObject.layer = layer;
+        CharInfo.ParticleType = CharacterInfo.AttackParticle;
     }
 
     private void EnemyControllerSettings()
@@ -188,7 +189,7 @@ public class CharacterBase : MonoBehaviour
             {
                 yield return new WaitForEndOfFrame();
             }
-            CastAttackParticles();
+            CastAttackParticles( CharacterLevelType.Novice);
             SetAnimation(CharacterAnimationStateType.Atk);
 
             float timer = 0;
@@ -239,14 +240,22 @@ public class CharacterBase : MonoBehaviour
     public void SpecialAttack(CharacterLevelType attackLevel)
     {
         NextAttackLevel = attackLevel;
+        CastAttackParticles(attackLevel);
         SetAnimation(CharacterAnimationStateType.Atk1);
     }
 
 
 
-    public void CastAttackParticles()
+    public void CastAttackParticles(CharacterLevelType clt)
     {
-        ParticleManagerScript.Instance.FireParticlesInPosition(CharacterInfo.AttackParticle, ParticleTypes.Cast, SpineAnim.FiringPoint.position, Side);
+        GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharacterInfo.AttackParticle, ParticleTypes.Cast, SpineAnim.FiringPoint.position, Side);
+        LayerParticleSelection lps = cast.GetComponent<LayerParticleSelection>();
+        if (lps != null)
+        {
+            lps.Shot = clt;
+            lps.SelectShotLevel();
+
+        }
     }
 
     public void CreateSingleBullet(Vector2Int bulletDistanceInTile, CharacterLevelType clt)
@@ -268,6 +277,7 @@ public class CharacterBase : MonoBehaviour
         LayerParticleSelection lps = bs.PS.GetComponent<LayerParticleSelection>();
         if (lps != null)
         {
+            bs.attackLevel = clt;
             lps.Shot = clt;
             lps.SelectShotLevel();
             

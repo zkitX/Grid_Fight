@@ -19,7 +19,7 @@ public class BulletScript : MonoBehaviour
     public GameObject PS;
     public GameObject TargetIndicator;
     public List<GameObject> UsedTargets = new List<GameObject>();
-
+    public CharacterLevelType attackLevel;
 
     //Private 
     private BattleTileScript bts;
@@ -205,7 +205,14 @@ public class BulletScript : MonoBehaviour
             Dead = true;
             StopAllCoroutines();
             //fire the Effect
-            ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleType, ParticleTypes.Effect, pos, Side);
+            GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleType, ParticleTypes.Effect, pos, Side);
+            LayerParticleSelection lps = effect.GetComponent<LayerParticleSelection>();
+            if (lps != null)
+            {
+                lps.Shot = attackLevel;
+                lps.SelectShotLevel();
+
+            }
             PS.GetComponent<DisableParticleScript>().ResetParticle();
             PS.SetActive(false);
             PS.transform.parent = null;
