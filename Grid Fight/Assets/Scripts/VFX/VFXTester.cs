@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class VFXTester : MonoBehaviour
 {
@@ -15,7 +16,10 @@ public class VFXTester : MonoBehaviour
     public TMPro.TMP_Dropdown ParticleType;
     public TMPro.TMP_Dropdown CharacterClass;
     public Slider AttackSpeed;
+    public Slider NumberOfBullets;
     private GameObject charOnScene;
+    public TextMeshProUGUI AttackSpeedText;
+    public TextMeshProUGUI NumberOfBulletsText;
 
     private void Start()
     {
@@ -44,6 +48,12 @@ public class VFXTester : MonoBehaviour
 
         }
 
+    }
+
+    private void Update()
+    {
+        AttackSpeedText.text = AttackSpeed.value.ToString("F2");
+        NumberOfBulletsText.text = NumberOfBullets.value.ToString();
     }
 
     // Start is called before the first frame update
