@@ -43,18 +43,30 @@ public class SpineAnimationManager : MonoBehaviour
             {
                 case CharacterClassType.Valley:
                     CharOwner.CreateSingleBullet(CharOwner.CharInfo.BulletDistanceInTile[0], CharOwner.NextAttackLevel);
-                    CharOwner.NextAttackLevel = CharacterLevelType.Novice;
+                    if(!CharOwner.VFXTestMode)
+                    {
+                        CharOwner.NextAttackLevel = CharacterLevelType.Novice;
+
+                    }
                     break;
                 case CharacterClassType.Mountain:
                     CharOwner.CreateSingleBullet(CharOwner.CharInfo.BulletDistanceInTile[0], CharOwner.NextAttackLevel);
-                    CharOwner.NextAttackLevel = CharacterLevelType.Novice;
+                    if (!CharOwner.VFXTestMode)
+                    {
+                        CharOwner.NextAttackLevel = CharacterLevelType.Novice;
+
+                    }
                     break;
                 case CharacterClassType.Forest:
                     CharOwner.CreateMachingunBullets();
                     break;
                 case CharacterClassType.Desert:
                     CharOwner.CreateSingleBullet(CharOwner.CharInfo.BulletDistanceInTile[0], CharOwner.NextAttackLevel);
-                    CharOwner.NextAttackLevel = CharacterLevelType.Novice;
+                    if (!CharOwner.VFXTestMode)
+                    {
+                        CharOwner.NextAttackLevel = CharacterLevelType.Novice;
+
+                    }
                     break;
             }
             

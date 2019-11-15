@@ -88,30 +88,33 @@ public class ParticleManagerScript : MonoBehaviour
 
     private void Update()
 	{
-		if(BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause && !isTheGamePaused)
-		{
-			isTheGamePaused = true;
-			foreach (var item in ParticlesFired.Where(r=> r.PS.activeInHierarchy).ToList())
-			{
-				foreach (ParticleSystem ps in item.PS.GetComponentsInChildren<ParticleSystem>())
-				{
-					var main = ps.main;
-					main.simulationSpeed = 0;
-				}
-			}
-		}
-		else if(isTheGamePaused && BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle)
-		{
-			isTheGamePaused = false;
-            foreach (var item in ParticlesFired.Where(r => r.PS.activeInHierarchy).ToList())
+        if (BattleManagerScript.Instance != null)
+        {
+            if (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause && !isTheGamePaused)
             {
-                foreach (ParticleSystem ps in item.PS.GetComponentsInChildren<ParticleSystem>())
+                isTheGamePaused = true;
+                foreach (var item in ParticlesFired.Where(r => r.PS.activeInHierarchy).ToList())
                 {
-                    var main = ps.main;
-                    main.simulationSpeed = 1;
+                    foreach (ParticleSystem ps in item.PS.GetComponentsInChildren<ParticleSystem>())
+                    {
+                        var main = ps.main;
+                        main.simulationSpeed = 0;
+                    }
                 }
             }
-		}
+            else if (isTheGamePaused && BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle)
+            {
+                isTheGamePaused = false;
+                foreach (var item in ParticlesFired.Where(r => r.PS.activeInHierarchy).ToList())
+                {
+                    foreach (ParticleSystem ps in item.PS.GetComponentsInChildren<ParticleSystem>())
+                    {
+                        var main = ps.main;
+                        main.simulationSpeed = 1;
+                    }
+                }
+            }
+        }
 	}
 }
 

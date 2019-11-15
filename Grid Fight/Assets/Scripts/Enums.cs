@@ -370,5 +370,6 @@ public enum CharacterNameType
     Balistica,
     LadyBush,
     Jaguar,
-    Monkena
+    Monkena,
+    OldLady
 }

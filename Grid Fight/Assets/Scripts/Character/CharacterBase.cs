@@ -70,6 +70,10 @@ public class CharacterBase : MonoBehaviour
     public SpriteRenderer SelectionIndicatorSprite;
     public Color SelectionIndicatorColorSelected;
     public Color SelectionIndicatorColorUnselected;
+    public GameObject BaseBullet;
+
+
+    public bool VFXTestMode = false;
 
     #region Unity Life Cycles
     private void Start()
@@ -79,7 +83,7 @@ public class CharacterBase : MonoBehaviour
 
     private void Update()
     {
-        if (BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle)
+        if (BattleManagerScript.Instance != null && BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle)
         {
             if(CharacterInfo.Health <= 0)
             {
@@ -105,7 +109,7 @@ public class CharacterBase : MonoBehaviour
             case MatchType.PvE:
                 if (PlayerController == ControllerType.Enemy)
                 {
-                    EnemyControllerSettings();
+                    EnemyControllerSettings(true);
                 }
                 else
                 {
@@ -115,7 +119,7 @@ public class CharacterBase : MonoBehaviour
             case MatchType.PvP:
                 if (PlayerController == ControllerType.Player2)
                 {
-                    EnemyControllerSettings();
+                    EnemyControllerSettings(false);
                 }
                 else
                 {
@@ -125,7 +129,7 @@ public class CharacterBase : MonoBehaviour
             case MatchType.PPvE:
                 if (PlayerController == ControllerType.Enemy)
                 {
-                    EnemyControllerSettings();
+                    EnemyControllerSettings(true);
                 }
                 else
                 {
@@ -135,7 +139,7 @@ public class CharacterBase : MonoBehaviour
             case MatchType.PPvPP:
                 if (PlayerController == ControllerType.Player3 || PlayerController == ControllerType.Player4)
                 {
-                    EnemyControllerSettings();
+                    EnemyControllerSettings(false);
                 }
                 else
                 {
@@ -149,13 +153,17 @@ public class CharacterBase : MonoBehaviour
         CharInfo.ParticleType = CharacterInfo.AttackParticle;
     }
 
-    private void EnemyControllerSettings()
+    private void EnemyControllerSettings(bool ai)
     {
         facing = FacingType.Left;
         Side = SideType.RightSide;
         gameObject.tag = Side.ToString();
         SpineAnim.gameObject.tag = Side.ToString();
-        StartCoroutine(GetComponent<AIScript>().MoveCo());
+        if(ai)
+        {
+            StartCoroutine(GetComponent<AIScript>().MoveCo());
+
+        }
     }
 
     private void PlayerControllerSettings()
@@ -180,23 +188,24 @@ public class CharacterBase : MonoBehaviour
         Debug.Log("-----Anim");
         while (true)
         {
-            while (!IsOnField)
+            while (!IsOnField && !VFXTestMode)
             {
                 yield return new WaitForEndOfFrame();
             }
 
-            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || isMoving || isSpecialLoading)
+            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || isMoving || isSpecialLoading))
             {
                 yield return new WaitForEndOfFrame();
             }
-            CastAttackParticles( CharacterLevelType.Novice);
             SetAnimation(CharacterAnimationStateType.Atk);
+            CastAttackParticles(NextAttackLevel);
+
 
             float timer = 0;
             while (timer <= CharacterInfo.AttackSpeed)
             {
                 yield return new WaitForFixedUpdate();
-                while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause || isMoving)
+                while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause || isMoving))
                 {
                     yield return new WaitForEndOfFrame();
                 }
@@ -265,12 +274,15 @@ public class CharacterBase : MonoBehaviour
             return;
         }
         isSpecialLoading = false;
-        GameObject bullet = Instantiate(BattleManagerScript.Instance.BaseBullet, SpineAnim.FiringPoint.position, Quaternion.identity);
+        GameObject bullet = Instantiate(BaseBullet, SpineAnim.FiringPoint.position, Quaternion.identity);
         BulletScript bs = bullet.GetComponent<BulletScript>();
       
-       
-        bs.Elemental = CharacterInfo.ElementalsPower.First();
+        if(CharacterInfo.ElementalsPower.Count > 0)
+        {
+            bs.Elemental = CharacterInfo.ElementalsPower.First();
+        }
         bs.Side = Side;
+        bs.VFXTestMode = VFXTestMode;
         bs.CharInfo = CharInfo;
         bs.gameObject.SetActive(true);
         bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharacterInfo.AttackParticle, ParticleTypes.Attack, bullet.transform, Side);
@@ -312,7 +324,10 @@ public class CharacterBase : MonoBehaviour
            // transform.eulerAngles += new Vector3(0, 0, CharInfo.MultiBulletAttackAngle / (CharInfo.MultiBulletAttackNumberOfBullets - 1));
             CreateSingleBullet(CharInfo.BulletDistanceInTile[i], NextAttackLevel);
         }
-        NextAttackLevel = CharacterLevelType.Novice;
+        if(!VFXTestMode)
+        {
+            NextAttackLevel = CharacterLevelType.Novice;
+        }
         transform.eulerAngles = offsetRotation;
     }
 

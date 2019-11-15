@@ -33,7 +33,6 @@ public class BattleManagerScript : MonoBehaviour
     public GameObject CharacterBasePrefab;
     public Dictionary<ControllerType, CharacterBase> CurrentSelectedCharacters = new Dictionary<ControllerType, CharacterBase>();
     public List<ScriptableObjectCharacterPrefab> ListOfScriptableObjectCharacterPrefab = new List<ScriptableObjectCharacterPrefab>();
-    public GameObject BaseBullet;
     public List<CharacterBase> AllCharactersOnField = new List<CharacterBase>();
     public List<CharacterLoadingInfoClass> CurrentCharactersLoadingInfo = new List<CharacterLoadingInfoClass>();
     private IEnumerator CharacterLoadingCo;

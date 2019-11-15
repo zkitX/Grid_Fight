@@ -20,6 +20,7 @@ public class BulletScript : MonoBehaviour
     public GameObject TargetIndicator;
     public List<GameObject> UsedTargets = new List<GameObject>();
     public CharacterLevelType attackLevel;
+    public bool VFXTestMode = false;
 
     //Private 
     private BattleTileScript bts;
@@ -28,10 +29,10 @@ public class BulletScript : MonoBehaviour
     private void Update()
     {
         //Stop the bullet when the match ended
-        if(BattleManagerScript.Instance.CurrentBattleState == BattleState.End)
+       /* if(BattleManagerScript.Instance.CurrentBattleState == BattleState.End)
         {
             StartCoroutine(SelfDeactivate(0));
-        }
+        }*/
     }
 
     //Self deactivation method with a delay parameter
@@ -116,7 +117,7 @@ public class BulletScript : MonoBehaviour
         {
             yield return new WaitForFixedUpdate();
             //In case the game ended or in pause I will block the movement
-            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.End)
+            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.End))
             {
                 yield return new WaitForFixedUpdate();
             }
@@ -164,7 +165,7 @@ public class BulletScript : MonoBehaviour
            
             yield return new WaitForFixedUpdate();
             //In case the game ended or in pause I will block the movement
-            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.End)
+            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.End))
             {
                 yield return new WaitForFixedUpdate();
             }
