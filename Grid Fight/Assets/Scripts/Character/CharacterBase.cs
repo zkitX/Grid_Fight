@@ -312,7 +312,7 @@ public class CharacterBase : MonoBehaviour
         {
             bs.DestinationTile = new Vector2Int(PhysicalPosOnTile.x + bulletDistanceInTile.x, PhysicalPosOnTile.y - bulletDistanceInTile.y < 0 ? 0 : PhysicalPosOnTile.y - bulletDistanceInTile.y);
         }
-        StartCoroutine(bs.MoveToTile());
+        bs.StartMoveToTile();
     }
 
     public void CreateMachingunBullets()

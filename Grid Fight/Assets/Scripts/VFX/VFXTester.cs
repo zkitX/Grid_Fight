@@ -16,10 +16,10 @@ public class VFXTester : MonoBehaviour
     public TMPro.TMP_Dropdown ParticleType;
     public TMPro.TMP_Dropdown CharacterClass;
     public Slider AttackSpeed;
-    public Slider NumberOfBullets;
+    public Slider SpeedOfBullets;
     private GameObject charOnScene;
     public TextMeshProUGUI AttackSpeedText;
-    public TextMeshProUGUI NumberOfBulletsText;
+    public TextMeshProUGUI SpeedOfBulletsText;
 
     private void Start()
     {
@@ -53,7 +53,7 @@ public class VFXTester : MonoBehaviour
     private void Update()
     {
         AttackSpeedText.text = AttackSpeed.value.ToString("F2");
-        NumberOfBulletsText.text = NumberOfBullets.value.ToString();
+        SpeedOfBulletsText.text = SpeedOfBullets.value.ToString();
     }
 
     // Start is called before the first frame update
@@ -77,7 +77,9 @@ public class VFXTester : MonoBehaviour
         currentCharacter.CharacterInfo.AttackParticle = (AttackParticleTypes)Enum.Parse(typeof(AttackParticleTypes), ParticleType.options[ParticleType.value].text);
         currentCharacter.CharacterInfo.AttackSpeed = AttackSpeed.value;
         currentCharacter.Side = SideType.RightSide;
-        currentCharacter.CharInfo.ClassType = (CharacterClassType)Enum.Parse(typeof(CharacterClassType), CharacterClass.options[ParticleType.value].text);
+        currentCharacter.CharInfo.ClassType = (CharacterClassType)Enum.Parse(typeof(CharacterClassType), CharacterClass.options[CharacterClass.value].text);
+        currentCharacter.CharInfo.BulletSpeed = SpeedOfBullets.value;
+
     }
 }
 

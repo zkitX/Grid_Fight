@@ -64,6 +64,11 @@ public class BulletScript : MonoBehaviour
         Physics.IgnoreLayerCollision(Side == SideType.LeftSide ? 9 : 10, Side == SideType.LeftSide ? 11 : 12);
     }
 
+    public void StartMoveToTile()
+    {
+        StartCoroutine(MoveToTile());
+    }
+
     //Move the bullet on a determinated tile using the BulletInfo.Trajectory
     public IEnumerator MoveToTile()
 	{
