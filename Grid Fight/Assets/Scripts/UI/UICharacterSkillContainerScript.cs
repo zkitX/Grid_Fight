@@ -21,7 +21,7 @@ public class UICharacterSkillContainerScript : MonoBehaviour
         UICharSkillScript nextAnimAvailable = BSkill;
         ASkill.Anim.SetBool("Active", true);
         ASkill.SkillIcon.sprite = currentSelectedChar.CharInfo.CharacterIcon;
-        foreach (CharacterBase item in BattleManagerScript.Instance.AllCharactersOnField.Where(r=> r != currentSelectedChar && r.Side == currentSelectedChar.Side))
+        foreach (CharacterBase item in BattleManagerScript.Instance.AllCharactersOnField.Where(r=> r != currentSelectedChar && r.UMS.Side == currentSelectedChar.UMS.Side))
         {
             CharactersRelationshipClass crc = currentSelectedChar.CharacterInfo.CharacterRelationships.Where(r => r.CharacterName == item.CharInfo.CharacterName).FirstOrDefault();
             if (crc != null)

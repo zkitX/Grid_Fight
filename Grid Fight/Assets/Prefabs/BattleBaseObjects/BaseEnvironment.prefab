@@ -182,12 +182,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BattleFieldSize: {x: 0, y: 0}
-  GridStructure: {fileID: 11400000, guid: 0554d8949ec254f48b04be119ea01980, type: 2}
+  GridStructures:
+  - {fileID: 11400000, guid: e736540b6a4d06f40ace3d07a11733f0, type: 2}
+  - {fileID: 11400000, guid: 2074e3f7af22a6a45825c1b972354b56, type: 2}
+  - {fileID: 11400000, guid: 0554d8949ec254f48b04be119ea01980, type: 2}
+  - {fileID: 11400000, guid: d7b2bca91274c534c96e3a2b4859daa4, type: 2}
+  GridStructure: 2
   MainCamera: {fileID: 0}
-  test: 2
-  boooo: 0
-  dir: {x: 0, y: 0, z: 0}
-  ChangeGridStructure: 0
+  isChangeGridStructure: 0
 --- !u!1 &2064186934847335309
 GameObject:
   m_ObjectHideFlags: 0

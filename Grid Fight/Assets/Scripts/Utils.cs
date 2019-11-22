@@ -191,7 +191,7 @@ namespace PlaytraGamesLtd
             }
             catch (System.Exception ex)
             {
-                //Debug.Log("Error  1 " + ex.Message + ex.Source);
+                Debug.Log("Error  1 " + ex.Message + ex.Source);
             }
 
 #elif UNITY_ANDROID && !UNITY_EDITOR

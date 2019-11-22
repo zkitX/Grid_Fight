@@ -66,13 +66,13 @@ public class BattleManagerScript : MonoBehaviour
 
     public void SetCharOnBoardOnRandomPos(ControllerType playerController, CharacterType ct)
     {
-        CharacterBase currentCharacter = AllCharactersOnField.Where(r=> r.PlayerController == playerController && r.CharacterInfo.CT == ct).First();
-        BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(GridManagerScript.Instance.GetSideTypeFromControllerType(playerController), currentCharacter.Pos);
-        currentCharacter.PhysicalPosOnTile = bts.Pos;
-        for (int i = 0; i < currentCharacter.Pos.Count; i++)
+        CharacterBase currentCharacter = AllCharactersOnField.Where(r=> r.UMS.PlayerController == playerController && r.CharacterInfo.CT == ct).First();
+        BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(GridManagerScript.Instance.GetSideTypeFromControllerType(playerController), currentCharacter.UMS.Pos);
+        currentCharacter.UMS.CurrentTilePos = bts.Pos;
+        for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)
         {
-            currentCharacter.Pos[i] += bts.Pos;
-            BattleTileScript cbts = GridManagerScript.Instance.GetBattleTile(currentCharacter.Pos[i]);
+            currentCharacter.UMS.Pos[i] += bts.Pos;
+            BattleTileScript cbts = GridManagerScript.Instance.GetBattleTile(currentCharacter.UMS.Pos[i]);
             currentCharacter.CurrentBattleTiles.Add(cbts);
         }
         if(!CurrentSelectedCharacters.ContainsKey(playerController))
@@ -82,7 +82,7 @@ public class BattleManagerScript : MonoBehaviour
        
         SelectCharacter(playerController, currentCharacter);
 
-        foreach (Vector2Int item in currentCharacter.Pos)
+        foreach (Vector2Int item in currentCharacter.UMS.Pos)
         {
             GridManagerScript.Instance.SetBattleTileState(item, BattleTileStateType.Occupied);
         }
@@ -110,25 +110,17 @@ public class BattleManagerScript : MonoBehaviour
 
     public void SetCharOnBoardOnFixedPos(ControllerType playerController, CharacterType ct, Vector2Int pos)
     {
-        CharacterBase currentCharacter = AllCharactersOnField.Where(r => r.PlayerController == playerController && r.CharacterInfo.CT == ct).First();
+        CharacterBase currentCharacter = AllCharactersOnField.Where(r => r.UMS.PlayerController == playerController && r.CharacterInfo.CT == ct).First();
         BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(pos, GridManagerScript.Instance.GetSideTypeFromControllerType(playerController));
-        currentCharacter.PhysicalPosOnTile = bts.Pos;
+        currentCharacter.UMS.CurrentTilePos = bts.Pos;
         currentCharacter.transform.position = bts.transform.position;
-        for (int i = 0; i < currentCharacter.Pos.Count; i++)
+        for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)
         {
-            currentCharacter.Pos[i] += bts.Pos;
-            BattleTileScript cbts = GridManagerScript.Instance.GetBattleTile(currentCharacter.Pos[i]);
+            currentCharacter.UMS.Pos[i] += bts.Pos;
+            BattleTileScript cbts = GridManagerScript.Instance.GetBattleTile(currentCharacter.UMS.Pos[i]);
             currentCharacter.CurrentBattleTiles.Add(cbts);
         }
     }
-
-    public void SetCharOnWorldPositionMovingToTile(ControllerType playerController, CharacterType ct, Vector3 worldpos, Vector2Int tilepos, float duration)
-    {
-        BattleTileScript battleTile = GridManagerScript.Instance.GetBattleTile(tilepos);
-        CharacterBase Pchar = CreateCharOnWorldPos(ct, playerController, worldpos, battleTile);
-        Pchar.MoveCharToTargetDestination(battleTile.transform.position, CharacterAnimationStateType.DashRight, duration);
-    }
-
 
     #endregion
 
@@ -146,34 +138,6 @@ public class BattleManagerScript : MonoBehaviour
         SetUICharacterSelectionIcons();
     }
 
-    public CharacterBase CreateCharOnTile(CharacterType ct, ControllerType playerController, BattleTileScript bts)
-    {
-        GameObject characterBasePrefab = null;
-        ScriptableObjectCharacterPrefab soCharacterPrefab = ListOfScriptableObjectCharacterPrefab.Where(r => r.CT == ct).First();
-        characterBasePrefab = Instantiate(CharacterBasePrefab,bts.transform.position, Quaternion.identity, CharactersContainer);
-        GameObject child = Instantiate(soCharacterPrefab.CharacterPrefab, characterBasePrefab.transform.position, Quaternion.identity, characterBasePrefab.transform);
-        CharacterBase currentCharacter = characterBasePrefab.GetComponent<CharacterBase>();
-        currentCharacter.CharacterInfo = BattleInfoManagerScript.Instance.PlayerBattleInfo.Where(r=> r.CT == ct).First();
-        currentCharacter.PhysicalPosOnTile = bts.Pos;
-        foreach (Vector2Int item in soCharacterPrefab.OccupiedTiles)
-        {
-            currentCharacter.Pos.Add(bts.Pos + item);
-            BattleTileScript cbts = GridManagerScript.Instance.GetBattleTile(bts.Pos + item);
-            currentCharacter.CurrentBattleTiles.Add(cbts);
-        }
-        
-        currentCharacter.PlayerController = playerController;
-        currentCharacter.SetAnimation(CharacterAnimationStateType.Arriving);
-        SelectCharacter(playerController, currentCharacter);
-        currentCharacter.SetupCharacterSide();
-        foreach (Vector2Int item in currentCharacter.Pos)
-        {
-            GridManagerScript.Instance.SetBattleTileState(item, BattleTileStateType.Occupied);
-        }
-        
-        return currentCharacter;
-    }
-
     public CharacterBase CreateChar(CharacterType ct, ControllerType playerController)
     {
         GameObject characterBasePrefab = null;
@@ -182,10 +146,10 @@ public class BattleManagerScript : MonoBehaviour
         GameObject child = Instantiate(soCharacterPrefab.CharacterPrefab, characterBasePrefab.transform.position, Quaternion.identity, characterBasePrefab.transform);
         CharacterBase currentCharacter = characterBasePrefab.GetComponent<CharacterBase>();
         currentCharacter.CharacterInfo = PlayerBattleInfo.Where(r => r.CT == ct).First();
-        currentCharacter.PlayerController = playerController;
+        currentCharacter.UMS.PlayerController = playerController;
         foreach (Vector2Int item in soCharacterPrefab.OccupiedTiles)
         {
-            currentCharacter.Pos.Add(item);
+            currentCharacter.UMS.Pos.Add(item);
         }
         currentCharacter.SetupCharacterSide();
         currentCharacter.SelectionIndicator.eulerAngles = new Vector3(0,0, currentCharacter.CharacterInfo.CharacterSelection == CharacterSelectionType.Up ? 90 :
@@ -194,67 +158,12 @@ public class BattleManagerScript : MonoBehaviour
         return currentCharacter;
     }
 
-    public CharacterBase CreateCharOnRandomTile(CharacterType ct, ControllerType playerController)
-    {
-        GameObject characterBasePrefab = null;
-        ScriptableObjectCharacterPrefab soCharacterPrefab = ListOfScriptableObjectCharacterPrefab.Where(r => r.CT == ct).First();
-        BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(GridManagerScript.Instance.GetSideTypeFromControllerType(playerController), soCharacterPrefab.OccupiedTiles);
-        if(bts != null)
-        {
-            characterBasePrefab = Instantiate(CharacterBasePrefab, bts.transform.position, Quaternion.identity, CharactersContainer);
-            GameObject child = Instantiate(soCharacterPrefab.CharacterPrefab, characterBasePrefab.transform.position, Quaternion.identity, characterBasePrefab.transform);
-            CharacterBase currentCharacter = characterBasePrefab.GetComponent<CharacterBase>();
-            currentCharacter.CharacterInfo = BattleInfoManagerScript.Instance.PlayerBattleInfo.Where(r => r.CT == ct).First();
-            currentCharacter.PhysicalPosOnTile = bts.Pos;
-            foreach (Vector2Int item in soCharacterPrefab.OccupiedTiles)
-            {
-                currentCharacter.Pos.Add(bts.Pos + item);
-                BattleTileScript cbts = GridManagerScript.Instance.GetBattleTile(bts.Pos + item);
-                currentCharacter.CurrentBattleTiles.Add(cbts);
-            }
-
-            currentCharacter.PlayerController = playerController;
-            currentCharacter.SetAnimation(CharacterAnimationStateType.Arriving);
-            SelectCharacter(playerController, currentCharacter);
-            currentCharacter.SetupCharacterSide();
-            foreach (Vector2Int item in currentCharacter.Pos)
-            {
-                GridManagerScript.Instance.SetBattleTileState(item, BattleTileStateType.Occupied);
-            }
-
-            return currentCharacter;
-        }
-
-        return null;
-    }
-
-    public CharacterBase CreateCharOnWorldPos(CharacterType ct, ControllerType playerController, Vector3 worldpos, BattleTileScript bts)
-    {
-        GameObject characterBasePrefab = null;
-        ScriptableObjectCharacterPrefab soCharacterPrefab = ListOfScriptableObjectCharacterPrefab.Where(r => r.CT == ct).First();
-        characterBasePrefab = Instantiate(CharacterBasePrefab, worldpos, Quaternion.identity, CharactersContainer);
-        Instantiate(soCharacterPrefab.CharacterPrefab, characterBasePrefab.transform.position, Quaternion.identity, characterBasePrefab.transform);
-        CharacterBase currentCharacter = characterBasePrefab.GetComponent<CharacterBase>();
-        currentCharacter.CharacterInfo = BattleInfoManagerScript.Instance.PlayerBattleInfo.Where(r => r.CT == ct).First();
-        currentCharacter.PhysicalPosOnTile = bts.Pos;
-        foreach (Vector2Int item in soCharacterPrefab.OccupiedTiles)
-        {
-            currentCharacter.Pos.Add(bts.Pos + item);
-            currentCharacter.CurrentBattleTiles.Add(GridManagerScript.Instance.GetBattleTile(bts.Pos + item));
-        }
-        currentCharacter.PlayerController = playerController;
-        SelectCharacter(playerController, currentCharacter);
-        currentCharacter.SetupCharacterSide();
-        GridManagerScript.Instance.SetBattleTileState(bts.Pos, BattleTileStateType.Occupied);
-        return currentCharacter;
-    }
-
     #endregion
 
     #region Loading_Selection Character
     public void LoadingNewCharacterInRandomPosition(CharacterType ct,SideType side, ControllerType playerController)
     {
-        if(!AllCharactersOnField.Where(r=> r.Side == side && r.CharacterInfo.CT == ct).First().IsOnField)
+        if(!AllCharactersOnField.Where(r=> r.UMS.Side == side && r.CharacterInfo.CT == ct).First().IsOnField)
         {
             CharacterLoadingCo = CharacterLoadingInRandomPosition(ct, playerController);
             CurrentCharactersLoadingInfo.Add(new CharacterLoadingInfoClass(ct, playerController, CharacterLoadingCo));
@@ -262,7 +171,7 @@ public class BattleManagerScript : MonoBehaviour
         }
         else
         {
-            SelectCharacter(playerController, AllCharactersOnField.Where(r => r.Side == side && r.CharacterInfo.CT == ct).First());
+            SelectCharacter(playerController, AllCharactersOnField.Where(r => r.UMS.Side == side && r.CharacterInfo.CT == ct).First());
         }
     }
 
@@ -275,7 +184,7 @@ public class BattleManagerScript : MonoBehaviour
     }
     public void SetCharacterSelection(CharacterSelectionType characterSelection, ControllerType playerController)
     {
-        SelectCharacter(playerController, AllCharactersOnField.Where(r=> r.CharacterInfo.CharacterSelection == characterSelection && r.CharacterInfo.playerController == playerController).FirstOrDefault());
+        SelectCharacter(playerController, AllCharactersOnField.Where(r=> r.CharacterInfo.CharacterSelection == characterSelection && r.UMS.PlayerController == playerController).FirstOrDefault());
     }
 
     public void SelectCharacter(ControllerType playerController, CharacterBase currentCharacter)
@@ -313,7 +222,11 @@ public class BattleManagerScript : MonoBehaviour
     {
         if (CurrentSelectedCharacters.ContainsKey(playerController))
         {
-            CurrentSelectedCharacters[playerController].MoveCharOnDirection(dir);
+            if(CurrentSelectedCharacters[playerController].UMS.UnitBehaviour == UnitBehaviourType.ControlledByPlayer)
+            {
+                CurrentSelectedCharacters[playerController].MoveCharOnDirection(dir);
+
+            }
         }
     }
 
@@ -323,7 +236,7 @@ public class BattleManagerScript : MonoBehaviour
     public void Switch_StopLoadingNewCharacter(CharacterSelectionType characterSelection, ControllerType controllerType)
     {
         SideType side = GetSideFromPlayer(controllerType);
-        CharacterBase cb = AllCharactersOnField.Where(r => r.CharacterInfo.CharacterSelection == characterSelection && r.Side == side).FirstOrDefault();
+        CharacterBase cb = AllCharactersOnField.Where(r => r.CharacterInfo.CharacterSelection == characterSelection && r.UMS.Side == side).FirstOrDefault();
         if (cb != null)
         {
             StopLoadingNewCharacter(cb.CharacterInfo.CT, controllerType);
@@ -334,7 +247,7 @@ public class BattleManagerScript : MonoBehaviour
     public void Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType characterSelection, ControllerType controllerType)
     {
         SideType side = GetSideFromPlayer(controllerType);
-        CharacterBase cb = AllCharactersOnField.Where(r => r.CharacterInfo.CharacterSelection == characterSelection && r.Side == side).FirstOrDefault();
+        CharacterBase cb = AllCharactersOnField.Where(r => r.CharacterInfo.CharacterSelection == characterSelection && r.UMS.Side == side).FirstOrDefault();
         if (cb != null)
         {
             LoadingNewCharacterInRandomPosition(cb.CharacterInfo.CT, side, controllerType);
@@ -375,7 +288,7 @@ public class BattleManagerScript : MonoBehaviour
 
         foreach (CharacterBase item in AllCharactersOnField)
         {
-            if(item.Side == SideType.RightSide)
+            if(item.UMS.Side == SideType.RightSide)
             {
                 resRight.Add(new UIIconClass(item.CharInfo.CharacterIcon, item.CharacterInfo.CharacterSelection));
             }

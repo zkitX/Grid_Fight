@@ -24,7 +24,7 @@ public class BattleTileScript : MonoBehaviour
     public Vector2Int Pos;
     public BattleTileStateType _BattleTileState;
     public BattleTileType BattleTileT;
-    public ControllerType TileOwner;
+    public SideType TileSide;
     public SpriteRenderer SP;
     public PortalInfoClass PortalInfo;
 
@@ -446,7 +446,7 @@ public class BattleTileScript : MonoBehaviour
     {
         BattleTileState = info.BattleTileState;
         BattleTileT = info.BattleTileT;
-        TileOwner = info.TileOwner;
+        TileSide = info.TileSide;
         if (BattleTileT == BattleTileType.Portal)
         {
             PortalInfo = new PortalInfoClass(this, info.Portal, info.IDPortal);
@@ -458,23 +458,6 @@ public class BattleTileScript : MonoBehaviour
     //Placeholde for the TileSetup
     public void SetupTile()
     {
-        if (BattleTileT == BattleTileType.Base)
-        {
-            SP.color = TileOwner == ControllerType.Enemy ? Color.blue : Color.yellow;
-        }
-        else if (BattleTileT.ToString().Contains("Buff"))
-        {
-            SP.color = Color.white;
-        }
-        else if (BattleTileT.ToString().Contains("Debuff"))
-        {
-            SP.color = Color.green;
-        }
-        else if (BattleTileT.ToString().Contains("Portal"))
-        {
-            SP.color = Color.red;
-        }
-
         CreateTile();
     }
 
@@ -497,7 +480,7 @@ public class BattleTileScript : MonoBehaviour
         {
             CharacterBase targetCharacter = other.GetComponentInParent<CharacterBase>();
 
-            if(targetCharacter.Pos.Contains(Pos))
+            if(targetCharacter.UMS.Pos.Contains(Pos))
             {
                 if (!isMovingEventSubscribed)
                 {

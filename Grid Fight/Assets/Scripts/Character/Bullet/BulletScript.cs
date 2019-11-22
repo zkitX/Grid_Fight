@@ -13,6 +13,7 @@ public class BulletScript : MonoBehaviour
     public Vector2Int DestinationTile;
     public Vector3 DestinationWorld;
     public SideType Side;
+    public FacingType Facing;
     public ElementalType Elemental;
 	public ControllerType ControllerT;
     public bool Dead = false;
@@ -21,7 +22,11 @@ public class BulletScript : MonoBehaviour
     public List<GameObject> UsedTargets = new List<GameObject>();
     public CharacterLevelType attackLevel;
     public bool VFXTestMode = false;
-
+    public AnimationCurve Trajectory_Y;
+    public AnimationCurve Trajectory_Z;
+    public List<Vector2Int> BulletEffectTiles = new List<Vector2Int>();
+    public Vector2Int BulletGapStartingTile;
+    public Vector2Int StartingTile;
     //Private 
     private BattleTileScript bts;
 
@@ -72,9 +77,11 @@ public class BulletScript : MonoBehaviour
     //Move the bullet on a determinated tile using the BulletInfo.Trajectory
     public IEnumerator MoveToTile()
 	{
-        if (CharInfo.ClassType == CharacterClassType.Valley)
+       
+        if (CharInfo.ClassType != CharacterClassType.Mountain)
         {
-            foreach (BattleTileScript item in GridManagerScript.Instance.GetBattleTileInARowToDestination(DestinationTile, Side))
+            int startingYTile = Facing == FacingType.Left ? StartingTile.y - BulletGapStartingTile.y : StartingTile.y + BulletGapStartingTile.y;
+            foreach (BattleTileScript item in GridManagerScript.Instance.GetBattleTileInARowToDestination(DestinationTile, Facing, startingYTile))
             {
                 GameObject go = UsedTargets.Where(r => !r.gameObject.activeInHierarchy).FirstOrDefault();
                 if(go == null)
@@ -89,23 +96,28 @@ public class BulletScript : MonoBehaviour
                 }
                 UsedTargets.Add(go);
             }
+            
         }
-        else
+        else if (CharInfo.ClassType == CharacterClassType.Mountain)
         {
-            GameObject go = UsedTargets.Where(r => !r.gameObject.activeInHierarchy).FirstOrDefault();
-            if (go == null)
+            int ran = Random.Range(0, 101);
+            DestinationTile.y = ran < 25 ? DestinationTile.y - 1 : ran < 75 ? DestinationTile.y : DestinationTile.y + 1;
+            bts = GridManagerScript.Instance.GetBattleTile(DestinationTile);
+            float duration = Vector3.Distance(transform.position, bts.transform.position) / CharInfo.BulletSpeed;
+            foreach (Vector2Int item in BulletEffectTiles)
             {
-                go = Instantiate(TargetIndicator, GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position, Quaternion.identity);
-                go.GetComponent<BattleTileTargetScript>().StartTarget(Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position) / CharInfo.BulletSpeed);
+                if(GridManagerScript.Instance.isPosOnField(DestinationTile + item))
+                {
+                    bts = GridManagerScript.Instance.GetBattleTile(DestinationTile + item, Facing == FacingType.Left ? SideType.LeftSide : SideType.RightSide);
+                    if(bts != null)
+                    {
+                        GameObject go = Instantiate(TargetIndicator, bts.transform.position, Quaternion.identity);
+                        go.GetComponent<BattleTileTargetScript>().StartTarget(duration);
+                        UsedTargets.Add(go);
+                    }
+                }
             }
-            else
-            {
-                go.transform.position = GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position;
-                go.SetActive(true);
-            }
-            UsedTargets.Add(go);
         }
-
 
         //setup the base offset for the movement
 		Vector3 offset = transform.position;
@@ -129,59 +141,64 @@ public class BulletScript : MonoBehaviour
             //Calutation for next world position of the bullet
             res = Vector3.Lerp(offset, destination, timer);
 
-            switch (CharInfo.ClassType)
-            {
-                case CharacterClassType.Valley:
-                    break;
-                case CharacterClassType.Mountain:
-                    res.y = CharInfo.Trajectory_Y.Evaluate(timer) + res.y;
-                    res.z = CharInfo.Trajectory_Z.Evaluate(timer) + res.z;
-                    break;
-                case CharacterClassType.Forest:
-                    res.z = CharInfo.Trajectory_Z.Evaluate(timer) + res.z;
-                    break;
-                case CharacterClassType.Desert:
-                    break;
-                default:
-                    break;
-            }
-            
+            res.y = Trajectory_Y.Evaluate(timer) + res.y;
+            res.z = Trajectory_Z.Evaluate(timer) + res.z;
+
             transform.position = res;
             timer += Time.fixedDeltaTime / Duration;
             //if timer ended the bullet fire the Effect
             if (timer > 1)
             {
-                FireEffectParticles(destination);
+                for (int i = 0; i < BulletEffectTiles.Count; i++)
+                {
+                    if (GridManagerScript.Instance.isPosOnField(DestinationTile + BulletEffectTiles[i]))
+                    {
+                        FireEffectParticles(GridManagerScript.Instance.GetBattleTile(DestinationTile + BulletEffectTiles[i]).transform.position, i == BulletEffectTiles.Count - 1 ? true : false);
+                    }
+                    else
+                    {
+                        Vector3 dest = new Vector3(BulletEffectTiles[i].y * GridManagerScript.Instance.GetWorldDistanceBetweenTiles() *(-1),
+                            BulletEffectTiles[i].x * GridManagerScript.Instance.GetWorldDistanceBetweenTiles() * (-1), 0);
+                        FireEffectParticles(GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position
+                            + dest, i == BulletEffectTiles.Count - 1 ? true : false);
+                    }
+                }
             }
         }
     }
 
 
     //Move the bullet on a straight movement 
-    public IEnumerator MoveStraight()
+    public IEnumerator MoveToWorldPos()
     {
         //setup the base offset for the movement
         Vector3 offset = transform.position;
         //Timer used to set up the coroutine
         float timer = 0;
+        Vector3 res;
         float Duration = Vector3.Distance(transform.position, DestinationWorld) / CharInfo.BulletSpeed;
         while (!Dead)
         {
-           
+
             yield return new WaitForFixedUpdate();
             //In case the game ended or in pause I will block the movement
             while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.End))
             {
                 yield return new WaitForFixedUpdate();
             }
-
             //Calutation for next world position of the bullet
-            transform.position = Vector3.Lerp(offset, DestinationWorld, timer);
+            res = Vector3.Lerp(offset, DestinationWorld, timer);
+
+            res.y = Trajectory_Y.Evaluate(timer) + res.y;
+            res.z = Trajectory_Z.Evaluate(timer) + res.z;
+
+            transform.position = res;
             timer += Time.fixedDeltaTime / Duration;
             //if timer ended the bullet fire the Effect
             if (timer > 1)
             {
-                FireEffectParticles(transform.position);
+               
+                FireEffectParticles(transform.position, true);
             }
         }
     }
@@ -191,25 +208,19 @@ public class BulletScript : MonoBehaviour
         //If the bullet collide with a character 
         if (other.tag.Contains("Side") && other.tag != Side.ToString())
         {
-
-            foreach (GameObject item in UsedTargets)
-            {
-                Destroy(item);
-            }
             CharacterBase target = other.GetComponentInParent<CharacterBase>();
             //Set damage to the hitting character
             target.SetDamage(CharInfo.Damage, Elemental);
             //fire the Effect
-            FireEffectParticles(transform.position);
+            FireEffectParticles(transform.position, CharInfo.ClassType == CharacterClassType.Desert ? false : true);
         }
     }
 
-    public void FireEffectParticles(Vector3 pos)
+    public void FireEffectParticles(Vector3 pos, bool destroyBullet)
     {
         if(!Dead)
         {
-            Dead = true;
-            StopAllCoroutines();
+            
             //fire the Effect
             GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleType, ParticleTypes.Effect, pos, Side);
             LayerParticleSelection lps = effect.GetComponent<LayerParticleSelection>();
@@ -219,10 +230,20 @@ public class BulletScript : MonoBehaviour
                 lps.SelectShotLevel();
 
             }
-            PS.GetComponent<DisableParticleScript>().ResetParticle();
-            PS.SetActive(false);
-            PS.transform.parent = null;
-            Destroy(this.gameObject);
+            if(destroyBullet)
+            {
+                foreach (GameObject item in UsedTargets)
+                {
+                    Destroy(item);
+                }
+                PS.GetComponent<DisableParticleScript>().ResetParticle();
+                PS.SetActive(false);
+                PS.transform.parent = null;
+                Dead = true;
+                StopAllCoroutines();
+                Destroy(this.gameObject);
+            }
+                
         }
     }
 

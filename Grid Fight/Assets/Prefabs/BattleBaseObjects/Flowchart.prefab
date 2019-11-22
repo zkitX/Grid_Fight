@@ -52,14 +52,14 @@ GameObject:
   - component: {fileID: 7013245850223156907}
   - component: {fileID: 7013245850223156925}
   - component: {fileID: 7013245850223156924}
-  - component: {fileID: 7013245850223156927}
   - component: {fileID: 7013245850223156918}
   - component: {fileID: 7013245850223156913}
   - component: {fileID: 7013245850223156912}
   - component: {fileID: 7013245850223156915}
   - component: {fileID: 7013245850223156914}
-  - component: {fileID: 1576554630}
   - component: {fileID: 1797083508}
+  - component: {fileID: 1185173931}
+  - component: {fileID: 1240204927379713641}
   m_Layer: 0
   m_Name: Flowchart
   m_TagString: Untagged
@@ -97,7 +97,7 @@ MonoBehaviour:
   scrollPos: {x: -7.954538, y: -6.818174}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
-  blockViewHeight: 247
+  blockViewHeight: 462
   zoom: 1
   scrollViewRect:
     serializedVersion: 2
@@ -105,7 +105,8 @@ MonoBehaviour:
     y: -340
     width: 1114
     height: 859
-  selectedBlocks: []
+  selectedBlocks:
+  - {fileID: 7013245850223156929}
   selectedCommands: []
   variables: []
   description: 
@@ -141,7 +142,7 @@ MonoBehaviour:
   itemId: 0
   blockName: PlayerModeSelection
   description: 
-  eventHandler: {fileID: 1576554630}
+  eventHandler: {fileID: 1240204927379713641}
   commandList:
   - {fileID: 7013245850223156906}
   - {fileID: 7013245850223156949}
@@ -259,7 +260,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7013245850223156931}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0d3235cf6c1c7b42b704c9380e2ce8d, type: 3}
   m_Name: 
@@ -275,7 +276,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7013245850223156931}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0d3235cf6c1c7b42b704c9380e2ce8d, type: 3}
   m_Name: 
@@ -291,7 +292,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7013245850223156931}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0d3235cf6c1c7b42b704c9380e2ce8d, type: 3}
   m_Name: 
@@ -307,7 +308,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7013245850223156931}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0d3235cf6c1c7b42b704c9380e2ce8d, type: 3}
   m_Name: 
@@ -323,7 +324,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7013245850223156931}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0d3235cf6c1c7b42b704c9380e2ce8d, type: 3}
   m_Name: 
@@ -339,7 +340,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7013245850223156931}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0d3235cf6c1c7b42b704c9380e2ce8d, type: 3}
   m_Name: 
@@ -355,7 +356,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7013245850223156931}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0d3235cf6c1c7b42b704c9380e2ce8d, type: 3}
   m_Name: 
@@ -1021,9 +1022,10 @@ MonoBehaviour:
   itemId: 41
   blockName: FirstTalk
   description: 
-  eventHandler: {fileID: 7013245850223156927}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 7013245850223156924}
+  - {fileID: 1185173931}
 --- !u!114 &7013245850223156924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1051,20 +1053,6 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
---- !u!114 &7013245850223156927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7013245850223156931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2f6487d21a03404cb21b245f0242e79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 7013245850223156925}
-  waitForFrames: 1
 --- !u!114 &7013245850223156918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1135,19 +1123,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 47
   indentLevel: 0
---- !u!114 &1576554630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7013245850223156931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c1f3b9a4ed8db246868573a3c0c4dcf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 7013245850223156929}
 --- !u!114 &1797083508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1164,3 +1139,44 @@ MonoBehaviour:
   indentLevel: 2
   playerController: 0
   characterToSelect: {fileID: 0}
+--- !u!114 &1185173931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7013245850223156931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 49
+  indentLevel: 0
+  storyText: fgdfgghfdjhfghf
+  description: 
+  character: {fileID: 0}
+  portrait: {fileID: 0}
+  voiceOverClip: {fileID: 0}
+  showAlways: 1
+  showCount: 1
+  extendPrevious: 0
+  fadeWhenDone: 1
+  waitForClick: 1
+  stopVoiceover: 1
+  waitForVO: 0
+  setSayDialog: {fileID: 0}
+--- !u!114 &1240204927379713641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7013245850223156931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2f6487d21a03404cb21b245f0242e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentBlock: {fileID: 7013245850223156929}
+  waitForFrames: 1

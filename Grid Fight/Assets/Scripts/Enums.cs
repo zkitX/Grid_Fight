@@ -155,6 +155,12 @@ public enum ControllerType
     Enemy
 }
 
+public enum UnitBehaviourType
+{
+    ControlledByPlayer,
+    NPC
+}
+
 public enum BattleState
 {
     Initialization,
@@ -321,9 +327,18 @@ public enum ParticleTypes
 public enum SideType
 {
     LeftSide,
-    RightSide
+    RightSide,
+    Both
 }
 
+
+public enum GridStructureType
+{
+    r2xc4,
+    r4xc8,
+    r6xc12,
+    r6xc12_8x4
+}
 
 public enum FacingType
 {

@@ -7,21 +7,28 @@ public class AIScript : MonoBehaviour
 
     public float MinMovementTimer = 5;
     public float MaxMovementTimer = 8;
-
+    private IEnumerator MoveCo;
+    private bool MoveCoOn = true;
     public CharacterBase CharOwner;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        CharOwner = GetComponent<CharacterBase>();
+            
     }
 
-    public IEnumerator MoveCo()
+    public void StartMoveCo()
+    {
+        MoveCoOn = true;
+        MoveCo = Move();
+        StartCoroutine(MoveCo);
+    }
+
+    public IEnumerator Move()
     {
         while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
         {
             yield return new WaitForFixedUpdate();
         }
-        bool MoveCoOn = true;
         while (MoveCoOn)
         {
             float timer = 0;
@@ -29,15 +36,12 @@ public class AIScript : MonoBehaviour
             while (timer < 1)
             {
                 yield return new WaitForFixedUpdate();
-
-
                 while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
                 {
                     yield return new WaitForFixedUpdate();
                 }
 
                 timer += Time.fixedDeltaTime / MoveTime;
-
             }
             if (CharOwner.CharacterInfo.Health > 0)
             {
@@ -45,4 +49,14 @@ public class AIScript : MonoBehaviour
             }
         }
     }
+
+    public void StopMoveCo()
+    {
+        MoveCoOn = false;
+        if(MoveCo != null)
+        {
+            StopCoroutine(MoveCo);
+        }
+    }
+
 }

@@ -11,6 +11,7 @@ public class GridManagerScript : MonoBehaviour
     public static GridManagerScript Instance;
     public List<BattleTileScript> BattleTiles = new List<BattleTileScript>();
     public Vector2Int BattleFieldSize;
+    public int YGridSeparator;
 
     public List<PortalInfoClass> Portals = new List<PortalInfoClass>();
 
@@ -33,7 +34,7 @@ public class GridManagerScript : MonoBehaviour
             //Debug.Log(tile.Pos);
             BattleTiles.Where(r => r.Pos == tile.Pos).First().SetupTileFromBattleTileInfo(tile);
         }
-
+        YGridSeparator = gridStructure.YGridSeparator;
         if(InitializationCompleteEvent != null)
         {
             InitializationCompleteEvent();
@@ -47,51 +48,27 @@ public class GridManagerScript : MonoBehaviour
             BattleTiles.Where(r => r.Pos == tile.Pos).First().ResetTile();
         }
     }
-
-
-    //Checking if the given position is part of the desired movent area
-    public bool IsBattleTileInControllerArea(Vector2Int pos, bool isEnemyOrPlayer)
-    {
-        if (isEnemyOrPlayer)
-        {
-            return BattleTiles.Where(r => r.Pos == pos && r.TileOwner != ControllerType.Enemy).ToList().Count > 0 ? true : false;
-        }
-        else
-        {
-            return BattleTiles.Where(r => r.Pos == pos && r.TileOwner == ControllerType.Enemy).ToList().Count > 0 ? true : false;
-        }
-    }
+  
     //Checking if the given positions are part of the desired movent area
     public bool AreBattleTilesInControllerArea(List<Vector2Int> pos, SideType isEnemyOrPlayer)
     {
         bool AreInControlledArea = false;
-        if (isEnemyOrPlayer == SideType.LeftSide)
+        foreach (Vector2Int item in pos)
         {
-            foreach (Vector2Int item in pos)
+            AreInControlledArea = BattleTiles.Where(r => r.Pos == item && (r.TileSide == isEnemyOrPlayer || isEnemyOrPlayer == SideType.Both)).ToList().Count > 0 ? true : false;
+            if (!AreInControlledArea)
             {
-                AreInControlledArea = BattleTiles.Where(r => r.Pos == item && r.TileOwner != ControllerType.Enemy).ToList().Count > 0 ? true : false;
-                if(!AreInControlledArea)
-                {
-                    break;
-                }
-            }
-        }
-        else
-        {
-            foreach (Vector2Int item in pos)
-            {
-                AreInControlledArea = BattleTiles.Where(r => r.Pos == item && r.TileOwner == ControllerType.Enemy).ToList().Count > 0 ? true : false;
-                if (!AreInControlledArea)
-                {
-                    break;
-                }
+                break;
             }
         }
 
         return AreInControlledArea;
     }
 
-    
+    public bool isPosOnField(Vector2Int pos)
+    {
+        return BattleTiles.Where(r => r.Pos == pos).ToList().Count > 0 ? true : false;
+    }
 
     public SideType GetSideTypeFromControllerType(ControllerType ct)
     {
@@ -139,22 +116,12 @@ public class GridManagerScript : MonoBehaviour
         return SideType.LeftSide;
     }
 
-    public List<BattleTileScript> GetBattleTiles(List<Vector2Int> pos, SideType isEnemyOrPlayer)
+    public List<BattleTileScript> GetBattleTiles(List<Vector2Int> pos, FacingType isEnemyOrPlayer, SideType side)
     {
         List<BattleTileScript> res = new List<BattleTileScript>();
-        if (isEnemyOrPlayer == SideType.LeftSide)
+        foreach (Vector2Int item in pos)
         {
-            foreach (Vector2Int item in pos)
-            {
-                res.Add(GetBattleTile(item, isEnemyOrPlayer));
-            }
-        }
-        else
-        {
-            foreach (Vector2Int item in pos)
-            {
-                res.Add(GetBattleTile(item, isEnemyOrPlayer));
-            }
+            res.Add(GetBattleTile(item, side));
         }
         return res;
     }
@@ -165,43 +132,35 @@ public class GridManagerScript : MonoBehaviour
     }
 
     //Get BattleTileScript of the tile
-    public BattleTileScript GetBattleTile(Vector2Int pos, SideType isEnemyOrPlayer)//isEnemyOrPlayer = true/Player false/Enemy
+    public BattleTileScript GetBattleTile(Vector2Int pos, SideType side)//isEnemyOrPlayer = true/Player false/Enemy
     {
-        if (isEnemyOrPlayer == SideType.LeftSide)
-        {
-            return BattleTiles.Where(r => r.Pos == pos && r.TileOwner != ControllerType.Enemy).FirstOrDefault();
-        }
-        else
-        {
-            return BattleTiles.Where(r => r.Pos == pos && r.TileOwner == ControllerType.Enemy).FirstOrDefault();
-        }
-
+        return BattleTiles.Where(r => r.Pos == pos && (r.TileSide == side || side == SideType.Both)).FirstOrDefault();
     }
 
-    public List<BattleTileScript> GetBattleTileInARowToDestination(Vector2Int destPos, SideType isEnemyOrPlayer)
+    public List<BattleTileScript> GetBattleTileInARowToDestination(Vector2Int destPos, FacingType isEnemyOrPlayer, int startingColumn)
     {
         List<BattleTileScript> res = new List<BattleTileScript>();
-        if(isEnemyOrPlayer == SideType.LeftSide)
+        if(isEnemyOrPlayer == FacingType.Right)
         {
-            for (int i = 6; i <= destPos.y; i++)
+            for (int i = YGridSeparator <= startingColumn ? startingColumn : YGridSeparator; i <= destPos.y; i++)
             {
                 res.Add(GetBattleTile(new Vector2Int(destPos.x, i)));
             }
         }
         else
         {
-            for (int i = 5; i >= destPos.y; i--)
+            for (int i = YGridSeparator > startingColumn ? startingColumn : YGridSeparator - 1; i >= destPos.y; i--)
             {
                 res.Add(GetBattleTile(new Vector2Int(destPos.x, i)));
             }
         }
-
-
-
         return res;
-
     }
 
+    public float GetWorldDistanceBetweenTiles()
+    {
+        return Vector3.Distance(BattleTiles[0].transform.position, BattleTiles[1].transform.position);
+    }
 
     public void SetBattleTileState(Vector2Int pos, BattleTileStateType battleTileState)
     {
@@ -211,32 +170,15 @@ public class GridManagerScript : MonoBehaviour
     public BattleTileScript GetFreeBattleTile(SideType isEnemyOrPlayer)
     {
         List<BattleTileScript> emptyBattleTiles = new List<BattleTileScript>();
-        if (isEnemyOrPlayer == SideType.LeftSide)
-        {
-            emptyBattleTiles = BattleTiles.Where(r => r.BattleTileState == BattleTileStateType.Empty && r.TileOwner != ControllerType.Enemy).ToList();
-        }
-        else
-        {
-            emptyBattleTiles = BattleTiles.Where(r => r.BattleTileState == BattleTileStateType.Empty && r.TileOwner == ControllerType.Enemy).ToList();
-        }
-        
+        emptyBattleTiles = BattleTiles.Where(r => r.BattleTileState == BattleTileStateType.Empty && (r.TileSide == isEnemyOrPlayer || isEnemyOrPlayer == SideType.Both)).ToList();
         int battletileCount = emptyBattleTiles.Count;
-        
         return emptyBattleTiles[Random.Range(0, battletileCount)];
     }
     //Get free tile for a more than one tile character
     public BattleTileScript GetFreeBattleTile(SideType isEnemyOrPlayer, List<Vector2Int> occupiedTiles)
     {
         List<BattleTileScript> emptyBattleTiles = new List<BattleTileScript>();
-        if (isEnemyOrPlayer == SideType.LeftSide)
-        {
-            emptyBattleTiles = BattleTiles.Where(r => r.BattleTileState == BattleTileStateType.Empty && r.TileOwner != ControllerType.Enemy).ToList();
-        }
-        else
-        {
-            emptyBattleTiles = BattleTiles.Where(r => r.BattleTileState == BattleTileStateType.Empty && r.TileOwner == ControllerType.Enemy).ToList();
-        }
-
+        emptyBattleTiles = BattleTiles.Where(r => r.BattleTileState == BattleTileStateType.Empty && (r.TileSide == isEnemyOrPlayer || isEnemyOrPlayer == SideType.Both)).ToList();
         bool areOccupiedTileFree = true;
         BattleTileScript emptyTile = null;
         while (emptyBattleTiles.Count > 0)
@@ -268,6 +210,8 @@ public class GridManagerScript : MonoBehaviour
         }
         return null;
     }
+
+
 
 }
 

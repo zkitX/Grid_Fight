@@ -1,5 +1,25 @@
 Rewired Nintendo Switch Plugin
 
+v19:
+  - Improved detection of rapid button taps at lower frame rates.
+  - Fixed issue causing very fast button taps to possibly be missed when Fixed Update loop enabled.
+
+v18:
+  - SDK check and native library install/upgrade is now only performed when in Switch build target mode to avoid error messages when the Rewired Nintendo Switch plugin is installed on a system without when the Nintendo SDK installed.
+  - Fixed compiler errors in Switch PlayMaker integration when not in Switch build target mode in Unity Editor.
+
+v17:
+
+  Changes:
+    - Fixed issues downloading updates in .NET 4.x scripting runtime.
+
+v16:
+
+  Changes:
+    - Added support for different native libraries built to different Nintendo SDK versions.
+    - Added Nintendo SDK 8.2.0+ support due to breaking API changes.
+    - Added native library installer/updater editor code.
+
 v15:
 
   Changes:

@@ -23,7 +23,7 @@ public class CallSetCharOnWorldPositionMovingToTile : Command
 
     protected virtual void CallTheMethod()
     {
-        BattleManagerScript.Instance.SetCharOnWorldPositionMovingToTile(PlayerController, Ct, WorldPos.position, TilePos, Duration);
+       // BattleManagerScript.Instance.SetCharOnWorldPositionMovingToTile(PlayerController, Ct, WorldPos.position, TilePos, Duration);
     }
 
     #region Public members

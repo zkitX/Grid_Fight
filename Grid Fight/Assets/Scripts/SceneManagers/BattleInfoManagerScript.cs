@@ -42,13 +42,13 @@ public class CharacterBaseInfoClass
     public List<ElementalResistenceClass> ElementalsResistence = new List<ElementalResistenceClass>();
     public List<ElementalType> ElementalsPower = new List<ElementalType>();
     public List<CharactersRelationshipClass> CharacterRelationships = new List<CharactersRelationshipClass>();
-    public float AttackSpeed;
+    public float AttackTimeRatio;
     public float Special2LoadingDuration;
     public float Special3LoadingDuration; 
     public float Health;
     public float HealthBase;
     public float Regeneration;
-    public float MovementSpeed;
+    public float BaseSpeed = 1;
     public float Stamina;
     public float StaminaBase;
     public float StaminaRegeneration;

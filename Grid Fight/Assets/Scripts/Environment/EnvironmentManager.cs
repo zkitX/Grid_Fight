@@ -1,30 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnvironmentManager : MonoBehaviour
 {
     public Vector2Int BattleFieldSize;
-    public ScriptableObjectGridStructure GridStructure;
+    public List<ScriptableObjectGridStructure> GridStructures = new List<ScriptableObjectGridStructure>();
+    public GridStructureType GridStructure;
     public Camera MainCamera;
-    public TransparencySortMode test;
-    public bool boooo = false;
-    public Vector3 dir;
+    public bool isChangeGridStructure = false;
 
-    public bool ChangeGridStructure = false;
     // Start is called before the first frame update
     void Start()
     {
-        ChangeScriptableObjectGridStructure(GridStructure);
-        
+        ChangeGridStructure();
     }
-
 
     //Setting up the camera position
    public void ChangeScriptableObjectGridStructure(ScriptableObjectGridStructure gridStructure)
    {
-        GridStructure = gridStructure;
-        GridManagerScript.Instance.SetupGrid(GridStructure);
+        GridManagerScript.Instance.SetupGrid(gridStructure);
        /* switch (GridStructure.CameraBasePos)
         {
             case CameraBasePosType.VeryClose:
@@ -48,18 +44,19 @@ public class EnvironmentManager : MonoBehaviour
         }*/
     }
 
-
     private void Update()
     {
-       /* MainCamera.transparencySortAxis = dir;
-        MainCamera.transparencySortMode = test;
-        MainCamera.useJitteredProjectionMatrixForTransparentRendering = boooo;*/
-        if (ChangeGridStructure)
+        if (isChangeGridStructure)
         {
-            GridManagerScript.Instance.ResetGrid();
-            ChangeGridStructure = false;
-            ChangeScriptableObjectGridStructure(GridStructure);
+            ChangeGridStructure();
         }
+    }
+
+    public void ChangeGridStructure()
+    {
+        GridManagerScript.Instance.ResetGrid();
+        isChangeGridStructure = false;
+        ChangeScriptableObjectGridStructure(GridStructures.Where(r => r.GridStructure == GridStructure).First());
     }
 }
 
