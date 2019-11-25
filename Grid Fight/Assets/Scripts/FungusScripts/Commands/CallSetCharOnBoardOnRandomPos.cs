@@ -14,11 +14,11 @@ using Fungus;
 public class CallSetCharOnBoardOnRandomPos : Command
 {
     public ControllerType playerController;
-    public CharacterType ct;
+    public CharacterNameType cName;
 
     protected virtual void CallTheMethod()
     {
-        BattleManagerScript.Instance.SetCharOnBoardOnRandomPos(playerController, ct);
+        BattleManagerScript.Instance.SetCharOnBoardOnRandomPos(playerController, cName);
     }
 
     #region Public members

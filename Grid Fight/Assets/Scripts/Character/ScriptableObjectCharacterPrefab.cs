@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/CharacterPrefab")]
 public class ScriptableObjectCharacterPrefab : ScriptableObject
 {
-    public CharacterType CT;
+    public CharacterNameType CharacterName;
     public GameObject CharacterPrefab;
     public List<Vector2Int> OccupiedTiles = new List<Vector2Int>();
 }

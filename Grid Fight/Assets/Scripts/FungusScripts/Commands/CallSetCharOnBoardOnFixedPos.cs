@@ -14,12 +14,12 @@ using Fungus;
 public class CallSetCharOnBoardOnFixedPos : Command
 {
     public ControllerType playerController;
-    public CharacterType ct;
+    public CharacterNameType cName;
     public Vector2Int pos;
 
     protected virtual void CallTheMethod()
     {
-        BattleManagerScript.Instance.SetCharOnBoardOnFixedPos(playerController, ct, pos);
+        BattleManagerScript.Instance.SetCharOnBoardOnFixedPos(playerController, cName, pos);
     }
 
     #region Public members

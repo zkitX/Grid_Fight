@@ -13,6 +13,22 @@ public class WorldMapManagerScript : MonoBehaviour
     public List<WorldMapArenaClass> Arenas = new List<WorldMapArenaClass>();
     public WorldMapSaveClass WorldMapSave;
 
+    #region SwitchVariables
+
+    private nn.account.Uid userId;
+    private const string Switch_MountName = "MySave";
+    private const string Switch_FileName = "WorldMapProgress.xml";
+    private const string PlayerPref_Name = "WorldMapProgress";
+    private string filePath;
+    private nn.fs.FileHandle fileHandle = new nn.fs.FileHandle();
+    private const int saveDataSize = 8;
+    private int saveData = 0;
+    private int loadData = 0;
+
+    private nn.Result result;
+
+    #endregion
+
     private void Awake()
     {
         Instance = this;
@@ -21,7 +37,7 @@ public class WorldMapManagerScript : MonoBehaviour
     public void SetupWorldMap()
     {
         WorldMapSave = null;
-        //WorldMapSave = PlaytraGamesLtd.Utils.DeserializeFileSwitch<WorldMapSaveClass>("WorldMapProgress");
+        
         if (WorldMapSave == null)
         {
             WorldMapSave = new WorldMapSaveClass();
@@ -31,12 +47,20 @@ public class WorldMapManagerScript : MonoBehaviour
                 WorldMapSave.arenas.Add(new WorldMapArenaSaveClass(i, i == 0 ? true : false));
             }
 
-            Save();
-
+#if UNITY_SWITCH && !UNITY_EDITOR
+        SaveSwitch();
+#elif UNITY_EDITOR
+        Save();
+#endif
 
         }
 
+#if UNITY_SWITCH && !UNITY_EDITOR
+        LoadSwitch();
+
+#elif UNITY_EDITOR
         Load();
+#endif
         
         for (int i = 0; i < Arenas.Count; i++)
         {
@@ -53,61 +77,31 @@ public class WorldMapManagerScript : MonoBehaviour
         LoaderManagerScript.Instance.LoadNewSceneWithLoading("BattleScene", UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
-
-
-
-    private System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
-
-    private nn.account.Uid userId;
-    private const string mountName = "MySave";
-    private const string fileName = "WorldMapProgress.xml";
-    private string filePath;
-    private nn.fs.FileHandle fileHandle = new nn.fs.FileHandle();
-
-    private nn.hid.NpadState npadState;
-    private nn.hid.NpadId[] npadIds = { nn.hid.NpadId.Handheld, nn.hid.NpadId.No1 };
-    private const int saveDataSize = 8;
-    private int saveData = 0;
-    private int loadData = 0;
-
-    nn.Result result;
-
     void Start()
     {
         nn.account.Account.Initialize();
-        nn.account.UserHandle userHandle = new nn.account.UserHandle();
-
-        // Open the user that was selected before the application started.
-        // This assumes that Startup user account is set to Required.
-        if (nn.account.Account.TryOpenPreselectedUser(ref userHandle))
-        {
-            // Get the user ID of the preselected user account.
-            nn.account.Account.GetUserId(ref userId, userHandle);
-        }
-        else
-        {
-            // This method will only ever return false if StartupUserAccountOption is set to IsOptional.
-            nn.Result result = nn.fs.SaveData.Mount(mountName, userId);
-            while (nn.account.Account.ResultCancelledByUser.Includes(result))
-            {
-                Debug.LogError("You must select a user account");
-            }
-            nn.account.Account.OpenUser(ref userHandle, userId);
-        }
-        // Mount the save data archive as "save" for the selected user account.
-        Debug.Log("Mounting save data archive");
-        result = nn.fs.SaveData.Mount(mountName, userId);
-        filePath = string.Format("{0}:/{1}", mountName, fileName);
+        result = nn.fs.SaveData.Mount(Switch_MountName, userId);
+        filePath = string.Format("{0}:/{1}", Switch_MountName, Switch_FileName);
         SetupWorldMap();
 
     }
 
     void OnDestroy()
     {
-        nn.fs.FileSystem.Unmount(mountName);
+        nn.fs.FileSystem.Unmount(Switch_MountName);
     }
 
-    private void Save()
+    public void Save()
+    {
+        PlayerPrefs.SetString(PlayerPref_Name, PlaytraGamesLtd.Utils.SerializeToString<WorldMapSaveClass>(WorldMapSave));
+    }
+
+    public void Load()
+    {
+        WorldMapSave = PlaytraGamesLtd.Utils.DeserializeFromString<WorldMapSaveClass>(PlayerPrefs.GetString(PlayerPref_Name));
+    }
+
+    private void SaveSwitch()
     {
 
 #if UNITY_SWITCH
@@ -172,7 +166,7 @@ public class WorldMapManagerScript : MonoBehaviour
         // This method moves the data from the journaling area to the main storage area.
         // If you do not call this method, all changes will be lost when the application closes.
         // Only call this when you are sure that all previous operations succeeded.
-        nn.fs.FileSystem.Commit(mountName);
+        nn.fs.FileSystem.Commit(Switch_MountName);
 
 #if UNITY_SWITCH && !UNITY_EDITOR
 // Stop preventing the system from terminating the game while saving.
@@ -181,8 +175,9 @@ UnityEngine.Switch.Notification.LeaveExitRequestHandlingSection();
 
     }
 
-    private void Load()
+    private void LoadSwitch()
     {
+        WorldMapSave = new WorldMapSaveClass();
         // Attempt to open the file in read-only mode.
         result = nn.fs.File.Open(ref fileHandle, filePath, nn.fs.OpenFileMode.Read);
         if (!result.IsSuccess())

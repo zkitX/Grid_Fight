@@ -18,7 +18,9 @@ public class UnitManagementScript : MonoBehaviour
     }
     public List<Vector2Int> _Pos = new List<Vector2Int>();
 
-    public Vector2Int CurrentTilePos
+    public
+
+        Vector2Int CurrentTilePos
     {
         get
         {
@@ -40,6 +42,8 @@ public class UnitManagementScript : MonoBehaviour
     public bool Test = false;
     public CharacterBase CharOwner;
 
+
+    //Used to decide the side
     public void SetupCharacterSide()
     {
         MatchType matchType = LoaderManagerScript.Instance != null ? LoaderManagerScript.Instance.MatchInfoType : BattleInfoManagerScript.Instance.MatchInfoType;
@@ -88,7 +92,7 @@ public class UnitManagementScript : MonoBehaviour
         }
     }
 
-
+    //Used to set the unit info for the facing,side,unitbehaviour, tag and AI
     public void SetUnit(FacingType facing, SideType side, UnitBehaviourType ubt, bool ai = false)
     {
         Facing = facing;

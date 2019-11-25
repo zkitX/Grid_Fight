@@ -49,7 +49,7 @@ MonoBehaviour:
     CharacterSelection: 0
     CharacterLevel: 0
     playerController: 0
-    CT: 0
+    CharacterName: 4
     AttackParticle: 5
     ElementalsResistence:
     - Elemental: 9
@@ -62,8 +62,7 @@ MonoBehaviour:
     Health: 100
     HealthBase: 100
     Regeneration: 4
-    MovementSpeed: 1
-    AttackSpeed: 5
+    BaseSpeed: 1
     Stamina: 10
     StaminaBase: 10
     StaminaRegeneration: 2
@@ -74,7 +73,7 @@ MonoBehaviour:
     CharacterSelection: 1
     CharacterLevel: 0
     playerController: 0
-    CT: 1
+    CharacterName: 5
     AttackParticle: 1
     ElementalsResistence:
     - Elemental: 0
@@ -87,8 +86,7 @@ MonoBehaviour:
     Health: 100
     HealthBase: 100
     Regeneration: 4
-    MovementSpeed: 1
-    AttackSpeed: 5
+    BaseSpeed: 1
     Stamina: 10
     StaminaBase: 10
     StaminaRegeneration: 2
@@ -99,7 +97,7 @@ MonoBehaviour:
     CharacterSelection: 2
     CharacterLevel: 0
     playerController: 0
-    CT: 2
+    CharacterName: 6
     AttackParticle: 0
     ElementalsResistence:
     - Elemental: 0
@@ -112,8 +110,7 @@ MonoBehaviour:
     Health: 100
     HealthBase: 100
     Regeneration: 0
-    MovementSpeed: 1
-    AttackSpeed: 5
+    BaseSpeed: 1
     Stamina: 10
     StaminaBase: 10
     StaminaRegeneration: 2
@@ -124,7 +121,7 @@ MonoBehaviour:
     CharacterSelection: 3
     CharacterLevel: 0
     playerController: 0
-    CT: 3
+    CharacterName: 3
     AttackParticle: 3
     ElementalsResistence:
     - Elemental: 0
@@ -139,8 +136,7 @@ MonoBehaviour:
     Health: 100
     HealthBase: 100
     Regeneration: 0
-    MovementSpeed: 1
-    AttackSpeed: 5
+    BaseSpeed: 1
     Stamina: 10
     StaminaBase: 10
     StaminaRegeneration: 2
@@ -151,32 +147,7 @@ MonoBehaviour:
     CharacterSelection: 0
     CharacterLevel: 0
     playerController: 1
-    CT: 4
-    AttackParticle: 1
-    ElementalsResistence:
-    - Elemental: 0
-      _ElementalWeakness: 0
-    ElementalsPower: 00000000
-    CharacterRelationships: []
-    AttackTimeRatio: 5
-    Special2LoadingDuration: 0
-    Special3LoadingDuration: 0
-    Health: 100
-    HealthBase: 100
-    Regeneration: 0
-    MovementSpeed: 1
-    AttackSpeed: 5
-    Stamina: 10
-    StaminaBase: 10
-    StaminaRegeneration: 2
-    StaminaCostSpecial1: 1
-    StaminaCostSpecial2: 5
-    StaminaCostSpecial3: 5
-  - Name: c6
-    CharacterSelection: 1
-    CharacterLevel: 0
-    playerController: 1
-    CT: 5
+    CharacterName: 0
     AttackParticle: 0
     ElementalsResistence:
     - Elemental: 0
@@ -189,19 +160,18 @@ MonoBehaviour:
     Health: 100
     HealthBase: 100
     Regeneration: 0
-    MovementSpeed: 1
-    AttackSpeed: 5
+    BaseSpeed: 1
     Stamina: 10
     StaminaBase: 10
     StaminaRegeneration: 2
     StaminaCostSpecial1: 1
     StaminaCostSpecial2: 5
     StaminaCostSpecial3: 5
-  - Name: c7
-    CharacterSelection: 2
+  - Name: c6
+    CharacterSelection: 1
     CharacterLevel: 0
     playerController: 1
-    CT: 6
+    CharacterName: 1
     AttackParticle: 2
     ElementalsResistence:
     - Elemental: 0
@@ -214,8 +184,31 @@ MonoBehaviour:
     Health: 100
     HealthBase: 100
     Regeneration: 0
-    MovementSpeed: 1
-    AttackSpeed: 5
+    BaseSpeed: 1
+    Stamina: 10
+    StaminaBase: 10
+    StaminaRegeneration: 2
+    StaminaCostSpecial1: 1
+    StaminaCostSpecial2: 5
+    StaminaCostSpecial3: 5
+  - Name: c7
+    CharacterSelection: 2
+    CharacterLevel: 0
+    playerController: 1
+    CharacterName: 2
+    AttackParticle: 1
+    ElementalsResistence:
+    - Elemental: 0
+      _ElementalWeakness: 0
+    ElementalsPower: 00000000
+    CharacterRelationships: []
+    AttackTimeRatio: 5
+    Special2LoadingDuration: 0
+    Special3LoadingDuration: 0
+    Health: 100
+    HealthBase: 100
+    Regeneration: 0
+    BaseSpeed: 1
     Stamina: 10
     StaminaBase: 10
     StaminaRegeneration: 2
@@ -226,7 +219,7 @@ MonoBehaviour:
     CharacterSelection: 3
     CharacterLevel: 0
     playerController: 1
-    CT: 7
+    CharacterName: 3
     AttackParticle: 3
     ElementalsResistence:
     - Elemental: 0
@@ -239,8 +232,7 @@ MonoBehaviour:
     Health: 100
     HealthBase: 100
     Regeneration: 0
-    MovementSpeed: 1
-    AttackSpeed: 5
+    BaseSpeed: 1
     Stamina: 10
     StaminaBase: 10
     StaminaRegeneration: 2

@@ -35,7 +35,7 @@ public class CharacterBaseInfoClass
     public CharacterSelectionType CharacterSelection;
     public CharacterLevelType CharacterLevel;
     public ControllerType playerController;
-    public CharacterType CT;
+    public CharacterNameType CharacterName;
     public AttackParticleTypes AttackParticle;
     public ArmorClass Armor;
     public WeaponClass Weapon;

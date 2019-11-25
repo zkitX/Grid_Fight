@@ -25,7 +25,7 @@ public class LoaderManagerScript : MonoBehaviour
     public IEnumerator LoadNewSceneWithLoading_co(string nextScene, string prevScene)
     {
         MainCanvasGroup.alpha = 1;
-
+        bool isSceneActive = false;
         if(nextScene == "BattleScene")
         {
 
@@ -43,8 +43,9 @@ public class LoaderManagerScript : MonoBehaviour
             LoadingBar.fillAmount = asyncLoad.progress;
 
             // Check if the load has finished
-            if (asyncLoad.progress >= 0.9f)
+            if (!isSceneActive && asyncLoad.progress >= 0.9f)
             {
+                isSceneActive = true;
                 asyncLoad.allowSceneActivation = true;
             }
 

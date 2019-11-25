@@ -386,5 +386,7 @@ public enum CharacterNameType
     LadyBush,
     Jaguar,
     Monkena,
-    OldLady
+    GoldenGunGirl,
+    OldLady,
+    Zoila
 }

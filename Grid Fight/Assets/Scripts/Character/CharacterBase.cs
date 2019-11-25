@@ -82,19 +82,12 @@ public class CharacterBase : MonoBehaviour
         CurrentAttackTypeInfo = AttackTypesInfo.Where(r => r.CharacterClass == CharInfo.ClassType).First();
     }
 
-
-
-    public void SetupEquipment()
-    {
-
-    }
-
     #endregion
 
     #region Attack
+    //Basic attack Action that will start the attack anim every x seconds
     public IEnumerator AttackAction()
     {
-        Debug.Log("-----Anim");
         while (true)
         {
             while (!IsOnField && !VFXTestMode)
@@ -114,7 +107,7 @@ public class CharacterBase : MonoBehaviour
             while (timer <= CharacterInfo.AttackTimeRatio)
             {
                 yield return new WaitForFixedUpdate();
-                while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause || isMoving))
+                while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
                 {
                     yield return new WaitForEndOfFrame();
                 }
@@ -131,6 +124,7 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
+    //Load the special attack and fire it if the load is complete
     public IEnumerator LoadSpecialAttack()
     {
         if (CharacterInfo.Stamina - CharacterInfo.StaminaCostSpecial1 >= 0)
@@ -155,6 +149,7 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
+    //Set ste special attack
     public void SpecialAttack(CharacterLevelType attackLevel)
     {
         NextAttackLevel = attackLevel;
@@ -163,7 +158,7 @@ public class CharacterBase : MonoBehaviour
     }
 
 
-
+    //start the casting particlaes foe the attack
     public void CastAttackParticles(CharacterLevelType clt)
     {
         GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharacterInfo.AttackParticle, ParticleTypes.Cast, SpineAnim.FiringPoint.position, UMS.Side);
@@ -176,6 +171,7 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
+    //Create and set up the basic info for the bullet
     public void CreateBullet(BulletBehaviourInfoClass bulletBehaviourInfo)
     {
         if (!shoot)
@@ -228,7 +224,7 @@ public class CharacterBase : MonoBehaviour
         bs.StartMoveToTile();
     }
 
-
+    
     public void CreateSingleBullet()
     {
         CreateBullet(CurrentAttackTypeInfo.BulletTrajectories[0]);
@@ -251,7 +247,7 @@ public class CharacterBase : MonoBehaviour
     #endregion
 
     #region Move
-
+    //used to set the movement of the character on a determinated direction
     public void MoveCharOnDirection(InputDirection nextDir)
     {
         if (CharacterInfo.Health > 0 && !isMoving && IsOnField)
@@ -266,7 +262,7 @@ public class CharacterBase : MonoBehaviour
             {
                 case InputDirection.Up:
                     dir = new Vector2Int(-1, 0);
-                    nextPos = CalculateNextPos(UMS.Pos, dir);
+                    nextPos = CalculateNextPos(dir);
                     if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, UMS.Side))
                     {
                         CurrentBattleTilesToCheck = GridManagerScript.Instance.GetBattleTiles(nextPos, UMS.Facing, UMS.Side);
@@ -276,7 +272,7 @@ public class CharacterBase : MonoBehaviour
                     break;
                 case InputDirection.Down:
                     dir = new Vector2Int(1, 0);
-                    nextPos = CalculateNextPos(UMS.Pos, dir);
+                    nextPos = CalculateNextPos(dir);
                     if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, UMS.Side))
                     {
                         CurrentBattleTilesToCheck = GridManagerScript.Instance.GetBattleTiles(nextPos, UMS.Facing, UMS.Side);
@@ -286,7 +282,7 @@ public class CharacterBase : MonoBehaviour
                     break;
                 case InputDirection.Right:
                     dir = new Vector2Int(0, 1);
-                    nextPos = CalculateNextPos(UMS.Pos, dir);
+                    nextPos = CalculateNextPos(dir);
                     if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, UMS.Side))
                     {
                         CurrentBattleTilesToCheck = GridManagerScript.Instance.GetBattleTiles(nextPos, UMS.Facing, UMS.Side);
@@ -296,7 +292,7 @@ public class CharacterBase : MonoBehaviour
                     break;
                 case InputDirection.Left:
                     dir = new Vector2Int(0, -1);
-                    nextPos = CalculateNextPos(UMS.Pos, dir);
+                    nextPos = CalculateNextPos(dir);
                     if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, UMS.Side))
                     {
                         CurrentBattleTilesToCheck = GridManagerScript.Instance.GetBattleTiles(nextPos, UMS.Facing, UMS.Side);
@@ -343,12 +339,14 @@ public class CharacterBase : MonoBehaviour
 
     }
 
-    public List<Vector2Int> CalculateNextPos(List<Vector2Int> currentPos, Vector2Int direction)
+    //Calculate the next position fro the actual 
+    public List<Vector2Int> CalculateNextPos(Vector2Int direction)
     {
         List<Vector2Int> res = new List<Vector2Int>();
-        currentPos.ForEach(r => res.Add(r + direction));
+        UMS.Pos.ForEach(r => res.Add(r + direction));
         return res;
     }
+
 
     public void MoveCharToTargetDestination(Vector3 nextPos, CharacterAnimationStateType animState, float duration)
     {
@@ -362,8 +360,6 @@ public class CharacterBase : MonoBehaviour
 
     private IEnumerator MoveWorldSpace(Vector3 nextPos, CharacterAnimationStateType animState, float duration)
     {
-        SetAnimation(CharacterAnimationStateType.Idle);
-        yield return new WaitForEndOfFrame();
         SetAnimation(animState);
         float timer = 0;
         Vector3 offset = transform.position;
@@ -383,6 +379,7 @@ public class CharacterBase : MonoBehaviour
         MoveCo = null;
     }
 
+    //Move the character on the determinated Tile position
     private IEnumerator MoveByTile(Vector3 nextPos, CharacterAnimationStateType animState, AnimationCurve curve)
     {
         SetAnimation(animState);
@@ -421,6 +418,8 @@ public class CharacterBase : MonoBehaviour
     #endregion
 
     #region Buff/Debuff
+
+    //Used to Buff/Debuff the character
     public IEnumerator Buff_DebuffCoroutine(Buff_DebuffClass bdClass)
     {
         while (SpineAnim.CurrentAnim != CharacterAnimationStateType.Idle)
@@ -539,6 +538,8 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
+
+    
     private IEnumerator ElementalBuffDebuffCo(CurrentBuffsDebuffsClass newBuffDebuff)
     {
         float timer = 0;
@@ -557,8 +558,6 @@ public class CharacterBase : MonoBehaviour
         for (int i = 0; i < Mathf.Abs((int)newBuffDebuff.ElementalResistence.ElementalWeakness); i++)
         {
             timer = 0;
-           /* BuffsDebuffs.Where(r => r.ElementalResistence.Elemental == newBuffDebuff.ElementalResistence.Elemental).First()
-                .ElementalResistence.ElementalWeakness += newBuffDebuff.ElementalResistence.ElementalWeakness > ElementalWeaknessType.Neutral ? 1 : -1;*/
             while (timer <= 1)
             {
                 yield return new WaitForFixedUpdate();
@@ -583,8 +582,8 @@ public class CharacterBase : MonoBehaviour
         {
             SpineAnimatorsetup();
         }
-        
-        SetMixAnimation(animState);
+
+        SpineAnim.SetAnim(animState, animState == CharacterAnimationStateType.Idle ? true : false);
         SpineAnim.SetAnimationSpeed(CharacterInfo.BaseSpeed);
     }
 
@@ -594,12 +593,9 @@ public class CharacterBase : MonoBehaviour
         SpineAnim.CharOwner = this;
     }
 
-    public void SetMixAnimation(CharacterAnimationStateType animState)
-    {
-        SpineAnim.SetAnim(animState, animState == CharacterAnimationStateType.Idle ? true : false);
-    }
-
     #endregion
+
+    
     public void SetDamage(float damage, ElementalType elemental)
     {
         ElementalWeaknessType ElaboratedWeakness;
@@ -716,6 +712,8 @@ public class CharacterBase : MonoBehaviour
 
     }
 
+
+    //Used to indicate the character that is selected in the battlefield
     public void SetCharSelected(bool isSelected)
     {
         SelectionIndicatorSprite.color = isSelected ? SelectionIndicatorColorSelected : SelectionIndicatorColorUnselected;
