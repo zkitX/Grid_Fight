@@ -98,6 +98,7 @@ public class SpineAnimationManager : MonoBehaviour
         if(completedAnim != CharacterAnimationStateType.Idle)
         {
             SpineAnimationState.AddEmptyAnimation(1,AnimationTransition,0);
+            CurrentAnim = CharacterAnimationStateType.Idle;
         }
        
         
