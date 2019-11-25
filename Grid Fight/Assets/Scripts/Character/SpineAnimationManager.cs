@@ -15,6 +15,7 @@ public class SpineAnimationManager : MonoBehaviour
     public AnimationCurve RightMovementSpeed;
 
     public Transform FiringPoint;
+    public Transform SpecialFiringPoint;
     public CharacterAnimationStateType CurrentAnim;
     public float AnimationTransition = 0.1f;
     private float BaseSpeed;

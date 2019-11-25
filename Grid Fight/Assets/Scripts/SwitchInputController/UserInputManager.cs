@@ -304,7 +304,8 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonPlusUpEvent(int player)
     {
         Debug.Log(player + "  " + "Plus Up");
-        BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
+        BattleManagerScript.Instance.SetupBattleState();
+
     }
 
     private void Instance_ButtonZLUpEvent(int player)

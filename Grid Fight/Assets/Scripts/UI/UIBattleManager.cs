@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class UIBattleManager : MonoBehaviour
 {
@@ -14,6 +16,12 @@ public class UIBattleManager : MonoBehaviour
 
     public UICharacterSelectionScript UICharacterSelectionLeft;
     public UICharacterSelectionScript UICharacterSelectionRight;
+
+    public TextMeshProUGUI RestartMatch;
+    public TextMeshProUGUI StartMatch;
+
+    public CanvasGroup Win;
+    public CanvasGroup Lose;
 
     private Dictionary<int, UIPlayerSectionScript> currentPlayers = new Dictionary<int, UIPlayerSectionScript>();
    

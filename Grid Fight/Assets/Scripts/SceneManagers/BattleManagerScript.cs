@@ -42,6 +42,7 @@ public class BattleManagerScript : MonoBehaviour
     public void SetupBattleState()
     {
         CurrentBattleState = BattleState.Battle;
+        UIBattleManager.Instance.StartMatch.gameObject.SetActive(false);
     }
 
     #region Unity Life Cycle

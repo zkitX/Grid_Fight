@@ -78,7 +78,6 @@ public class CharacterBase : MonoBehaviour
         UMS.SetupCharacterSide();
         int layer = UMS.Side == SideType.LeftSide ? 9 : 10;
         SpineAnim.gameObject.layer = layer;
-        CharInfo.ParticleType = CharacterInfo.AttackParticle;
         CurrentAttackTypeInfo = AttackTypesInfo.Where(r => r.CharacterClass == CharInfo.ClassType).First();
     }
 
@@ -161,7 +160,7 @@ public class CharacterBase : MonoBehaviour
     //start the casting particlaes foe the attack
     public void CastAttackParticles(CharacterLevelType clt)
     {
-        GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharacterInfo.AttackParticle, ParticleTypes.Cast, SpineAnim.FiringPoint.position, UMS.Side);
+        GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharacterInfo.AttackParticle, ParticleTypes.Cast, clt == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, UMS.Side);
         LayerParticleSelection lps = cast.GetComponent<LayerParticleSelection>();
         if (lps != null)
         {
@@ -179,7 +178,7 @@ public class CharacterBase : MonoBehaviour
             return;
         }
         isSpecialLoading = false;
-        GameObject bullet = Instantiate(BaseBullet, SpineAnim.FiringPoint.position, Quaternion.identity);
+        GameObject bullet = Instantiate(BaseBullet, NextAttackLevel == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, Quaternion.identity);
         BulletScript bs = bullet.GetComponent<BulletScript>();
         bs.BulletEffectTiles = bulletBehaviourInfo.BulletEffectTiles;
         bs.Trajectory_Y = bulletBehaviourInfo.Trajectory_Y;
@@ -583,7 +582,7 @@ public class CharacterBase : MonoBehaviour
             SpineAnimatorsetup();
         }
 
-        SpineAnim.SetAnim(animState, animState == CharacterAnimationStateType.Idle ? true : false);
+        SpineAnim.SetAnim(animState, false);
         SpineAnim.SetAnimationSpeed(CharacterInfo.BaseSpeed);
     }
 
