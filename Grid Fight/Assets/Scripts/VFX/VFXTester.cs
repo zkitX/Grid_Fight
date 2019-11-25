@@ -79,6 +79,7 @@ public class VFXTester : MonoBehaviour
         currentCharacter.UMS.Side = SideType.RightSide;
         currentCharacter.CharInfo.ClassType = (CharacterClassType)Enum.Parse(typeof(CharacterClassType), CharacterClass.options[CharacterClass.value].text);
         currentCharacter.CharInfo.BulletSpeed = SpeedOfBullets.value;
+        currentCharacter.CharInfo.ParticleType = currentCharacter.CharacterInfo.AttackParticle;
         currentCharacter.CurrentAttackTypeInfo = currentCharacter.AttackTypesInfo.Where(r => r.CharacterClass == currentCharacter.CharInfo.ClassType).First();
     }
 }
