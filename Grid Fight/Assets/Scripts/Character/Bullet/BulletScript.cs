@@ -77,7 +77,6 @@ public class BulletScript : MonoBehaviour
     //Move the bullet on a determinated tile using the BulletInfo.Trajectory
     public IEnumerator MoveToTile()
 	{
-       
         if (CharInfo.ClassType != CharacterClassType.Mountain)
         {
             int startingYTile = Facing == FacingType.Left ? StartingTile.y - BulletGapStartingTile.y : StartingTile.y + BulletGapStartingTile.y;
@@ -96,7 +95,6 @@ public class BulletScript : MonoBehaviour
                 }
                 UsedTargets.Add(go);
             }
-            
         }
         else if (CharInfo.ClassType == CharacterClassType.Mountain)
         {
@@ -128,7 +126,7 @@ public class BulletScript : MonoBehaviour
         //Destination position
         Vector3 destination = bts.transform.position;
         //Duration of the particles 
-        float Duration = Vector3.Distance(transform.position, destination) / CharInfo.BulletSpeed;
+       // float Duration = Vector3.Distance(transform.position, destination) / CharInfo.BulletSpeed;
         Vector3 res;
         while (!Dead)
         {
@@ -145,7 +143,7 @@ public class BulletScript : MonoBehaviour
             res.z = Trajectory_Z.Evaluate(timer) + res.z;
 
             transform.position = res;
-            timer += Time.fixedDeltaTime / Duration;
+            timer += Time.fixedDeltaTime / CharInfo.BulletSpeed;
             //if timer ended the bullet fire the Effect
             if (timer > 1)
             {
@@ -176,7 +174,7 @@ public class BulletScript : MonoBehaviour
         //Timer used to set up the coroutine
         float timer = 0;
         Vector3 res;
-        float Duration = Vector3.Distance(transform.position, DestinationWorld) / CharInfo.BulletSpeed;
+       // float Duration = Vector3.Distance(transform.position, DestinationWorld) / CharInfo.BulletSpeed;
         while (!Dead)
         {
 
@@ -193,7 +191,7 @@ public class BulletScript : MonoBehaviour
             res.z = Trajectory_Z.Evaluate(timer) + res.z;
 
             transform.position = res;
-            timer += Time.fixedDeltaTime / Duration;
+            timer += Time.fixedDeltaTime / CharInfo.BulletSpeed;
             //if timer ended the bullet fire the Effect
             if (timer > 1)
             {
