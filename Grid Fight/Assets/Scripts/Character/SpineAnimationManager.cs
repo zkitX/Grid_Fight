@@ -83,7 +83,7 @@ public class SpineAnimationManager : MonoBehaviour
     //Method fired when an animation is complete
     private void SpineAnimationState_Complete(Spine.TrackEntry trackEntry)
     {
-
+        Debug.Log(skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name);
         if (skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name == "<empty>")
         {
             return;
@@ -109,12 +109,8 @@ public class SpineAnimationManager : MonoBehaviour
     public void SetAnim(CharacterAnimationStateType anim, bool loop)
     {
         SetupSpineAnim();
-     
-        if(CurrentAnim == CharacterAnimationStateType.Atk && anim == CharacterAnimationStateType.Atk)
-        {
-            return;
-        }
-        SpineAnimationState.AddAnimation(1, anim.ToString(), loop, 0).MixDuration = AnimationTransition;
+        //SpineAnimationState.AddEmptyAnimation(1, 0, 0);
+        SpineAnimationState.SetAnimation(1, anim.ToString(), loop).MixDuration = AnimationTransition;
         CurrentAnim = anim;
     }
 

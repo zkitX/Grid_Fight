@@ -39,6 +39,10 @@ public class BattleManagerScript : MonoBehaviour
     [SerializeField]
     private Transform CharactersContainer;
     private List<CharacterBaseInfoClass> PlayerBattleInfo = new List<CharacterBaseInfoClass>();
+
+
+    public List<CharacterBase> WaveCharcters = new List<CharacterBase>();
+
     public void SetupBattleState()
     {
         CurrentBattleState = BattleState.Battle;
@@ -56,10 +60,25 @@ public class BattleManagerScript : MonoBehaviour
 
     #region Events
 
-    #endregion 
+    #endregion
+
+    #region Waves
+
+    public CharacterBase GetWaveCharacter(CharacterNameType characterName)
+    {
+        CharacterBase res;
+        res = WaveCharcters.Where(r => r.CharacterInfo.CharacterName == characterName && !r.IsOnField).FirstOrDefault();
+        if(res == null)
+        {
+            res = CreateChar(characterName, ControllerType.Enemy);
+        }
+
+        return res;
+    }
+    #endregion
 
     #region SetCharacterOnBoard
-//Used to set the already created char on a random Position in the battlefield
+    //Used to set the already created char on a random Position in the battlefield
     public void SetCharOnBoardOnRandomPos(ControllerType playerController, CharacterNameType cName)
     {
         CharacterBase currentCharacter = AllCharactersOnField.Where(r=> r.UMS.PlayerController == playerController && r.CharacterInfo.CharacterName == cName).First();

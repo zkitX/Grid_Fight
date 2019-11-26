@@ -11,37 +11,33 @@ public class EnvironmentManager : MonoBehaviour
     public Camera MainCamera;
     public bool isChangeGridStructure = false;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
+        MainCamera = Camera.main;
         ChangeGridStructure();
+
     }
 
     //Setting up the camera position
    public void ChangeScriptableObjectGridStructure(ScriptableObjectGridStructure gridStructure)
    {
         GridManagerScript.Instance.SetupGrid(gridStructure);
-       /* switch (GridStructure.CameraBasePos)
+        switch (GridStructure)
         {
-            case CameraBasePosType.VeryClose:
-                MainCamera.orthographicSize = 1.5f;
+            case GridStructureType.r2xc4:
+                MainCamera.orthographicSize = 2f;
+                MainCamera.transform.position = new Vector3(0,2f,-8.5f);
                 break;
-            case CameraBasePosType.Close:
-                MainCamera.orthographicSize = 2;
+            case GridStructureType.r4xc8:
                 break;
-            case CameraBasePosType.Mid:
-                MainCamera.orthographicSize = 2.5f;
+            case GridStructureType.r6xc12:
                 break;
-            case CameraBasePosType.MidFar:
-                MainCamera.orthographicSize = 3;
+            case GridStructureType.r6xc12_8x4:
                 break;
-            case CameraBasePosType.Far:
-                MainCamera.orthographicSize = 4;
-                break;
-            case CameraBasePosType.VeryFar:
-                MainCamera.orthographicSize = 5;
-                break;
-        }*/
+        }
     }
 
     private void Update()

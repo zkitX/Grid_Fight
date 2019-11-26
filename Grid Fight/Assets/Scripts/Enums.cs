@@ -391,5 +391,13 @@ public enum CharacterNameType
     Monkena,
     GoldenGunGirl,
     OldLady,
-    Zoila
+    Zoila,
+    ElectroRider
+}
+
+
+public enum WavePhaseType
+{
+    Combat,
+    Event
 }
