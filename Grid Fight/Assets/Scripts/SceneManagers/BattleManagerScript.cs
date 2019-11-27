@@ -64,13 +64,13 @@ public class BattleManagerScript : MonoBehaviour
 
     #region Waves
 
-    public CharacterBase GetWaveCharacter(CharacterNameType characterName)
+    public CharacterBase GetWaveCharacter(CharacterNameType characterName, Transform parent)
     {
         CharacterBase res;
         res = WaveCharcters.Where(r => r.CharacterInfo.CharacterName == characterName && !r.IsOnField).FirstOrDefault();
         if(res == null)
         {
-            res = CreateChar(characterName, ControllerType.Enemy);
+            res = CreateChar(characterName, ControllerType.Enemy, parent);
         }
 
         return res;
@@ -103,7 +103,7 @@ public class BattleManagerScript : MonoBehaviour
         }
         UIBattleManager.Instance.CharacterSelected(playerController, currentCharacter);
         currentCharacter.SetAnimation(CharacterAnimationStateType.Arriving);
-        StartCoroutine(MoveCharToBoardWithDelay(0.2f, currentCharacter, bts.transform.position));
+        StartCoroutine(MoveCharToBoardWithDelay(0.1f, currentCharacter, bts.transform.position));
     }
     
    
@@ -162,18 +162,18 @@ public class BattleManagerScript : MonoBehaviour
         PlayerBattleInfo = LoaderManagerScript.Instance != null ? LoaderManagerScript.Instance.PlayerBattleInfo : BattleInfoManagerScript.Instance.PlayerBattleInfo;
         foreach (CharacterBaseInfoClass item in PlayerBattleInfo)
         {
-            AllCharactersOnField.Add(CreateChar(item.CharacterName, item.playerController));
+            AllCharactersOnField.Add(CreateChar(item.CharacterName, item.playerController, CharactersContainer));
             yield return new WaitForSeconds(delay);
         }
 
         SetUICharacterSelectionIcons();
     }
 //Creation of the character with the basic info
-    public CharacterBase CreateChar(CharacterNameType cName, ControllerType playerController)
+    public CharacterBase CreateChar(CharacterNameType cName, ControllerType playerController, Transform parent)
     {
         GameObject characterBasePrefab = null;
         ScriptableObjectCharacterPrefab soCharacterPrefab = ListOfScriptableObjectCharacterPrefab.Where(r => r.CharacterName == cName).First();
-        characterBasePrefab = Instantiate(CharacterBasePrefab, new Vector3(100,100,100), Quaternion.identity, CharactersContainer);
+        characterBasePrefab = Instantiate(CharacterBasePrefab, new Vector3(100,100,100), Quaternion.identity, parent);
         GameObject child = Instantiate(soCharacterPrefab.CharacterPrefab, characterBasePrefab.transform.position, Quaternion.identity, characterBasePrefab.transform);
         CharacterBase currentCharacter = characterBasePrefab.GetComponent<CharacterBase>();
         currentCharacter.CharacterInfo = PlayerBattleInfo.Where(r => r.CharacterName == cName).First();

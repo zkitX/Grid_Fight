@@ -25,20 +25,26 @@ public class WaveManagerScript : MonoBehaviour
         float timer = 0;
         foreach (WavePhaseClass wavePhase in WavePhases)
         {
+            while (BattleManagerScript.Instance == null)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            CharacterBase newChar = BattleManagerScript.Instance.GetWaveCharacter(GetAvailableWaveCharacter(wavePhase), transform);
+            SetCharInRandomPos(newChar);
             isWaveComplete = false;
             while (!isWaveComplete)
             {
                 yield return new WaitForFixedUpdate();
                 timer += Time.fixedDeltaTime;
-                while (BattleManagerScript.Instance != null && BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+                while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
                 {
                     yield return new WaitForEndOfFrame();
                 }
 
-                if(wavePhase.WavePhaseT == WavePhaseType.Combat && timer > wavePhase.DelayBetweenChars)
+                if(wavePhase.WavePhaseT == WavePhaseType.Combat && timer > wavePhase.DelayBetweenChars && CurrentNumberOfWaveChars < wavePhase.MaxEnemyOnScreen)
                 {
 
-                    CharacterBase newChar = BattleManagerScript.Instance.GetWaveCharacter(GetAvailableWaveCharacter(wavePhase));
+                    newChar = BattleManagerScript.Instance.GetWaveCharacter(GetAvailableWaveCharacter(wavePhase), transform);
                     SetCharInRandomPos(newChar);
                     timer = 0;
                 }
@@ -63,6 +69,7 @@ public class WaveManagerScript : MonoBehaviour
         }
         currentCharacter.SetAnimation(CharacterAnimationStateType.Arriving);
         StartCoroutine(BattleManagerScript.Instance.MoveCharToBoardWithDelay(0.2f, currentCharacter, bts.transform.position));
+        CurrentNumberOfWaveChars++;
     }
 
 

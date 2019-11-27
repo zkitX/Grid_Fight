@@ -86,7 +86,9 @@ public class BulletScript : MonoBehaviour
                 if(go == null)
                 {
                     go = Instantiate(TargetIndicator, item.transform.position, Quaternion.identity);
-                    go.GetComponent<BattleTileTargetScript>().StartTarget(Vector3.Distance(transform.position, item.transform.position) / CharInfo.BulletSpeed);
+                    go.GetComponent<BattleTileTargetScript>().StartTarget(
+                        (Vector3.Distance(transform.position, item.transform.position) * CharInfo.BulletSpeed) /
+                        Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position));
                 }
                 else
                 {
@@ -101,7 +103,7 @@ public class BulletScript : MonoBehaviour
             int ran = Random.Range(0, 101);
             DestinationTile.y = ran < 25 ? DestinationTile.y - 1 : ran < 75 ? DestinationTile.y : DestinationTile.y + 1;
             bts = GridManagerScript.Instance.GetBattleTile(DestinationTile);
-            float duration = Vector3.Distance(transform.position, bts.transform.position) / CharInfo.BulletSpeed;
+            float duration = CharInfo.BulletSpeed;
             foreach (Vector2Int item in BulletEffectTiles)
             {
                 if(GridManagerScript.Instance.isPosOnField(DestinationTile + item))
@@ -204,7 +206,7 @@ public class BulletScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //If the bullet collide with a character 
-        if (other.tag.Contains("Side") && other.tag != Side.ToString())
+        if(other.tag.Contains("Side") && other.tag != Side.ToString()) 
         {
             CharacterBase target = other.GetComponentInParent<CharacterBase>();
             //Set damage to the hitting character

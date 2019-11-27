@@ -65,6 +65,10 @@ public class CharacterBase : MonoBehaviour
                 }
                 IsOnField = false;
                 gameObject.SetActive(false);
+                if(WaveManagerScript.Instance != null)
+                {
+                    WaveManagerScript.Instance.CurrentNumberOfWaveChars--;
+                }
             }
             CharacterInfo.Stamina = (CharacterInfo.Stamina + CharacterInfo.StaminaRegeneration / 60) > CharacterInfo.StaminaBase ? CharacterInfo.StaminaBase : (CharacterInfo.Stamina + CharacterInfo.StaminaRegeneration / 60);
         }

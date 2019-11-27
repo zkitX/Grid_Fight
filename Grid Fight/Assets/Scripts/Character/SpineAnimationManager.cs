@@ -101,16 +101,20 @@ public class SpineAnimationManager : MonoBehaviour
             SpineAnimationState.AddEmptyAnimation(1,AnimationTransition,0);
             CurrentAnim = CharacterAnimationStateType.Idle;
         }
-       
-        
     }
 
 
     public void SetAnim(CharacterAnimationStateType anim, bool loop)
     {
         SetupSpineAnim();
-        //SpineAnimationState.AddEmptyAnimation(1, 0, 0);
-        SpineAnimationState.SetAnimation(1, anim.ToString(), loop).MixDuration = AnimationTransition;
+        if(anim == CharacterAnimationStateType.Arriving)
+        {
+            SpineAnimationState.SetAnimation(1, anim.ToString(), loop);
+        }
+        else
+        {
+            SpineAnimationState.SetAnimation(1, anim.ToString(), loop).MixDuration = AnimationTransition;
+        }
         CurrentAnim = anim;
     }
 
