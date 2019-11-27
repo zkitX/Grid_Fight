@@ -27,6 +27,8 @@ public class BulletScript : MonoBehaviour
     public List<Vector2Int> BulletEffectTiles = new List<Vector2Int>();
     public Vector2Int BulletGapStartingTile;
     public Vector2Int StartingTile;
+    public float ChildrenExplosionDelay;
+
     //Private 
     private BattleTileScript bts;
 
@@ -130,7 +132,8 @@ public class BulletScript : MonoBehaviour
         //Duration of the particles 
        // float Duration = Vector3.Distance(transform.position, destination) / CharInfo.BulletSpeed;
         Vector3 res;
-        while (!Dead)
+        bool isMoving = true;
+        while (isMoving)
         {
             yield return new WaitForFixedUpdate();
             //In case the game ended or in pause I will block the movement
@@ -149,22 +152,41 @@ public class BulletScript : MonoBehaviour
             //if timer ended the bullet fire the Effect
             if (timer > 1)
             {
-                for (int i = 0; i < BulletEffectTiles.Count; i++)
-                {
-                    if (GridManagerScript.Instance.isPosOnField(DestinationTile + BulletEffectTiles[i]))
-                    {
-                        FireEffectParticles(GridManagerScript.Instance.GetBattleTile(DestinationTile + BulletEffectTiles[i]).transform.position, i == BulletEffectTiles.Count - 1 ? true : false);
-                    }
-                    else
-                    {
-                        Vector3 dest = new Vector3(BulletEffectTiles[i].y * GridManagerScript.Instance.GetWorldDistanceBetweenTiles() *(-1),
-                            BulletEffectTiles[i].x * GridManagerScript.Instance.GetWorldDistanceBetweenTiles() * (-1), 0);
-                        FireEffectParticles(GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position
-                            + dest, i == BulletEffectTiles.Count - 1 ? true : false);
-                    }
-                }
+                isMoving = false;
+                FireEffectParticles(GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position, BulletEffectTiles.Count == 1 ? true : false);
+                StartCoroutine(ChildExplosion(BulletEffectTiles.Where(r=> r != Vector2Int.zero).ToList()));
             }
         }
+    }
+
+    public IEnumerator ChildExplosion(List<Vector2Int> bet)
+    {
+        float timer = 0;
+        while (timer < ChildrenExplosionDelay)
+        {
+            timer += Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.End))
+            {
+                yield return new WaitForFixedUpdate();
+            }
+        }
+
+        for (int i = 0; i < bet.Count; i++)
+        {
+            if (GridManagerScript.Instance.isPosOnField(DestinationTile + bet[i]))
+            {
+                FireEffectParticles(GridManagerScript.Instance.GetBattleTile(DestinationTile + bet[i]).transform.position, i == bet.Count - 1 ? true : false);
+            }
+            else
+            {
+                Vector3 dest = new Vector3(bet[i].y * GridManagerScript.Instance.GetWorldDistanceBetweenTiles() * (-1),
+                    bet[i].x * GridManagerScript.Instance.GetWorldDistanceBetweenTiles() * (-1), 0);
+                FireEffectParticles(GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position
+                    + dest, i == bet.Count - 1 ? true : false);
+            }
+        }
+
     }
 
 
@@ -220,7 +242,6 @@ public class BulletScript : MonoBehaviour
     {
         if(!Dead)
         {
-            
             //fire the Effect
             GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleType, ParticleTypes.Effect, pos, Side);
             LayerParticleSelection lps = effect.GetComponent<LayerParticleSelection>();

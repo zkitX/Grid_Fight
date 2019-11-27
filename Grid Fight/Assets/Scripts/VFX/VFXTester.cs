@@ -17,9 +17,11 @@ public class VFXTester : MonoBehaviour
     public TMPro.TMP_Dropdown CharacterClass;
     public Slider AttackSpeed;
     public Slider SpeedOfBullets;
+    public Slider MountainDelay;
     private GameObject charOnScene;
     public TextMeshProUGUI AttackSpeedText;
     public TextMeshProUGUI SpeedOfBulletsText;
+    public TextMeshProUGUI MountainDelayText;
 
     private void Start()
     {
@@ -54,6 +56,7 @@ public class VFXTester : MonoBehaviour
     {
         AttackSpeedText.text = AttackSpeed.value.ToString("F2");
         SpeedOfBulletsText.text = SpeedOfBullets.value.ToString("F2");
+        MountainDelayText.text = MountainDelay.value.ToString("F2");
     }
 
     // Start is called before the first frame update
@@ -81,6 +84,7 @@ public class VFXTester : MonoBehaviour
         currentCharacter.CharInfo.BulletSpeed = SpeedOfBullets.value;
         currentCharacter.CharInfo.ParticleType = currentCharacter.CharacterInfo.AttackParticle;
         currentCharacter.CurrentAttackTypeInfo = currentCharacter.AttackTypesInfo.Where(r => r.CharacterClass == currentCharacter.CharInfo.ClassType).First();
+        currentCharacter.CharInfo.ChildrenExplosionDelay = MountainDelay.value;
     }
 }
 

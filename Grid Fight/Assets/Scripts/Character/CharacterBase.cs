@@ -57,7 +57,7 @@ public class CharacterBase : MonoBehaviour
     {
         if (BattleManagerScript.Instance != null && BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle)
         {
-            if (CharacterInfo.Health <= 0)
+            if (CharacterInfo.Health <= 0 && IsOnField)
             {
                 foreach (Vector2Int item in UMS.Pos)
                 {
@@ -188,6 +188,7 @@ public class CharacterBase : MonoBehaviour
         bs.Trajectory_Y = bulletBehaviourInfo.Trajectory_Y;
         bs.Trajectory_Z = bulletBehaviourInfo.Trajectory_Z;
         bs.Facing = UMS.Facing;
+        bs.ChildrenExplosionDelay = CharInfo.ChildrenExplosionDelay;
         bs.StartingTile = UMS.CurrentTilePos;
         bs.BulletGapStartingTile = bulletBehaviourInfo.BulletGapStartingTile;
         if (CharacterInfo.ElementalsPower.Count > 0)

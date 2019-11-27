@@ -19,5 +19,5 @@ public class CharacterInfoScript : MonoBehaviour
    // public List<Vector2Int> BulletDistanceInTile = new List<Vector2Int>();
     public float Damage = 10;
     public int MultiBulletAttackNumberOfBullets = 3;
-
+    public float ChildrenExplosionDelay;
 }
