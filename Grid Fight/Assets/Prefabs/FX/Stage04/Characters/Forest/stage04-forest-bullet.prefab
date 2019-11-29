@@ -5040,7 +5040,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.6
+      scalar: 0.3
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5621,7 +5621,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5674,7 +5674,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -6894,7 +6894,7 @@ ParticleSystem:
         m_RotationOrder: 4
     inWorldSpace: 0
   InheritVelocityModule:
-    enabled: 1
+    enabled: 0
     m_Mode: 0
     m_Curve:
       serializedVersion: 2
@@ -9745,7 +9745,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 10
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -11129,7 +11129,7 @@ ParticleSystem:
     flipU: 0
     flipV: 0
   VelocityModule:
-    enabled: 1
+    enabled: 0
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -13656,7 +13656,7 @@ ParticleSystem:
     widthOverTrail:
       serializedVersion: 2
       minMaxState: 2
-      scalar: 0.2
+      scalar: 0.1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -14474,6 +14474,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8097926224361470680}
   - component: {fileID: 8097926224361470663}
+  - component: {fileID: 439292506}
   m_Layer: 0
   m_Name: TrailWhite (1)
   m_TagString: Untagged
@@ -14537,7 +14538,7 @@ TrailRenderer:
   m_Time: 0.8
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.3
+    widthMultiplier: 0.15
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -14618,6 +14619,22 @@ TrailRenderer:
   m_MinVertexDistance: 0.4
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &439292506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097926224361470681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff95d6aee0aea3498f97a2ecad6d45c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Trail: 1
+  Particle: 1
+  BulletDuration: 1
+  BulletOriginalDuration: 1
 --- !u!1 &8097926224463650320
 GameObject:
   m_ObjectHideFlags: 0
@@ -14629,6 +14646,7 @@ GameObject:
   - component: {fileID: 8097926224463650335}
   - component: {fileID: 8097926224463650333}
   - component: {fileID: 8097926224463650334}
+  - component: {fileID: 1311980604}
   m_Layer: 0
   m_Name: ElectricTrail
   m_TagString: Untagged
@@ -14902,7 +14920,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.2
+      scalar: 0.6
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -15483,7 +15501,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -15536,7 +15554,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -16756,7 +16774,7 @@ ParticleSystem:
         m_RotationOrder: 4
     inWorldSpace: 0
   InheritVelocityModule:
-    enabled: 1
+    enabled: 0
     m_Mode: 0
     m_Curve:
       serializedVersion: 2
@@ -19439,6 +19457,22 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &1311980604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097926224463650320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff95d6aee0aea3498f97a2ecad6d45c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Trail: 1
+  Particle: 1
+  BulletDuration: 1
+  BulletOriginalDuration: 1
 --- !u!1 &8097926224469767537
 GameObject:
   m_ObjectHideFlags: 0
@@ -19449,6 +19483,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8097926224469767536}
   - component: {fileID: 8097926224469767551}
+  - component: {fileID: 633332206}
   m_Layer: 0
   m_Name: TrailWhite (3)
   m_TagString: Untagged
@@ -19512,7 +19547,7 @@ TrailRenderer:
   m_Time: 1.2
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.5
+    widthMultiplier: 0.25
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -19593,6 +19628,22 @@ TrailRenderer:
   m_MinVertexDistance: 0.4
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &633332206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097926224469767537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff95d6aee0aea3498f97a2ecad6d45c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Trail: 1
+  Particle: 1
+  BulletDuration: 1
+  BulletOriginalDuration: 1
 --- !u!1 &8097926224480643025
 GameObject:
   m_ObjectHideFlags: 0
@@ -19877,7 +19928,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 1
-      scalar: 2.5
+      scalar: 1.25
       minScalar: 2
       maxCurve:
         serializedVersion: 2
@@ -29176,6 +29227,7 @@ GameObject:
   - component: {fileID: 8097926224568323536}
   - component: {fileID: 8097926224568323549}
   - component: {fileID: -6766499507534731002}
+  - component: {fileID: 191526801}
   m_Layer: 0
   m_Name: stage04-forest-bullet
   m_TagString: Untagged
@@ -29213,7 +29265,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -33971,6 +34023,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &191526801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097926224568323538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba9e6c852f53ac7448afd635fab03e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletTargetTime: 1
+  BulletOriginalTime: 3
 --- !u!1 &8097926224780187553
 GameObject:
   m_ObjectHideFlags: 0
@@ -39013,8 +39079,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.4
-      minScalar: 0.1
+      scalar: 0.2
+      minScalar: 0.05
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -48334,6 +48400,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8097926225320489819}
   - component: {fileID: 8097926225320489818}
+  - component: {fileID: 374669015}
   m_Layer: 0
   m_Name: TrailWhite (4)
   m_TagString: Untagged
@@ -48397,7 +48464,7 @@ TrailRenderer:
   m_Time: 1.6
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.9
+    widthMultiplier: 0.45
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -48478,6 +48545,22 @@ TrailRenderer:
   m_MinVertexDistance: 0.4
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &374669015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097926225320489820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff95d6aee0aea3498f97a2ecad6d45c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Trail: 1
+  Particle: 1
+  BulletDuration: 1
+  BulletOriginalDuration: 1
 --- !u!1 &8097926225321306129
 GameObject:
   m_ObjectHideFlags: 0
@@ -48504,7 +48587,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8097926225321306129}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.21, y: 0.38, z: -0}
+  m_LocalPosition: {x: -0.48, y: -0.01, z: 0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8097926224533647994}
@@ -48583,7 +48666,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -48593,7 +48676,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.3
+      scalar: 0.1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -48646,7 +48729,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 15
+      scalar: 10
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -48762,8 +48845,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.2
-      minScalar: 0.1
+      scalar: 0.1
+      minScalar: 0.05
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -49342,9 +49425,9 @@ ParticleSystem:
     serializedVersion: 4
     rateOverTime:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 5
-      minScalar: 10
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -50043,7 +50126,7 @@ ParticleSystem:
     x:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 30
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -50096,7 +50179,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3.69
+      scalar: 0.5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -50202,7 +50285,7 @@ ParticleSystem:
     orbitalX:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -10
+      scalar: -1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -50625,7 +50708,7 @@ ParticleSystem:
         m_RotationOrder: 4
     inWorldSpace: 0
   InheritVelocityModule:
-    enabled: 1
+    enabled: 0
     m_Mode: 1
     m_Curve:
       serializedVersion: 2
@@ -53343,7 +53426,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8097926225356093605}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.21, y: -0.43, z: 0}
+  m_LocalPosition: {x: -0.47999996, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8097926224533647994}
@@ -53422,7 +53505,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -53432,7 +53515,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.3
+      scalar: 0.1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -53485,7 +53568,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 15
+      scalar: 10
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -53601,8 +53684,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.2
-      minScalar: 0.1
+      scalar: 0.1
+      minScalar: 0.05
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -54181,9 +54264,9 @@ ParticleSystem:
     serializedVersion: 4
     rateOverTime:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 5
-      minScalar: 10
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -54882,7 +54965,7 @@ ParticleSystem:
     x:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 30
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -54935,7 +55018,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -1.9
+      scalar: -0.5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -55041,7 +55124,7 @@ ParticleSystem:
     orbitalX:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -55464,7 +55547,7 @@ ParticleSystem:
         m_RotationOrder: 4
     inWorldSpace: 0
   InheritVelocityModule:
-    enabled: 1
+    enabled: 0
     m_Mode: 1
     m_Curve:
       serializedVersion: 2
@@ -58440,7 +58523,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 0.25
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -68019,8 +68102,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.8
-      minScalar: 0.5
+      scalar: 0.4
+      minScalar: 0.25
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -72567,6 +72650,7 @@ GameObject:
   - component: {fileID: 8097926225777508017}
   - component: {fileID: 8097926225777508031}
   - component: {fileID: 8097926225777508016}
+  - component: {fileID: 1141832175}
   m_Layer: 0
   m_Name: Lightning
   m_TagString: Untagged
@@ -72804,8 +72888,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1.5
-      minScalar: 0.5
+      scalar: 0.75
+      minScalar: 0.25
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -73349,7 +73433,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -73402,7 +73486,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -77237,6 +77321,22 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &1141832175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097926225777508018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff95d6aee0aea3498f97a2ecad6d45c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Trail: 1
+  Particle: 1
+  BulletDuration: 1
+  BulletOriginalDuration: 1
 --- !u!1 &8097926225834878950
 GameObject:
   m_ObjectHideFlags: 0
@@ -77521,8 +77621,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1
-      minScalar: 0.5
+      scalar: 0.5
+      minScalar: 0.25
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -82069,6 +82169,7 @@ GameObject:
   - component: {fileID: 8097926226041815555}
   - component: {fileID: 8097926226041815553}
   - component: {fileID: 8097926226041815554}
+  - component: {fileID: 111298630}
   m_Layer: 0
   m_Name: ElectricTrail
   m_TagString: Untagged
@@ -82226,7 +82327,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 4
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -82342,8 +82443,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.6
-      minScalar: 0.2
+      scalar: 0.3
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -82923,7 +83024,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -82976,7 +83077,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 4
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -83610,7 +83711,7 @@ ParticleSystem:
     flipU: 0
     flipV: 0
   VelocityModule:
-    enabled: 1
+    enabled: 0
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -84196,7 +84297,7 @@ ParticleSystem:
         m_RotationOrder: 4
     inWorldSpace: 0
   InheritVelocityModule:
-    enabled: 1
+    enabled: 0
     m_Mode: 1
     m_Curve:
       serializedVersion: 2
@@ -86879,6 +86980,22 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &111298630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097926226041815556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff95d6aee0aea3498f97a2ecad6d45c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Trail: 1
+  Particle: 1
+  BulletDuration: 1
+  BulletOriginalDuration: 1
 --- !u!1 &8097926226065364086
 GameObject:
   m_ObjectHideFlags: 0
@@ -86889,6 +87006,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8097926226065364085}
   - component: {fileID: 8097926226065364084}
+  - component: {fileID: 476146538}
   m_Layer: 0
   m_Name: TrailWhite
   m_TagString: Untagged
@@ -86952,7 +87070,7 @@ TrailRenderer:
   m_Time: 0.48
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 0.05
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -87033,3 +87151,19 @@ TrailRenderer:
   m_MinVertexDistance: 0.4
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &476146538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097926226065364086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff95d6aee0aea3498f97a2ecad6d45c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Trail: 1
+  Particle: 1
+  BulletDuration: 1
+  BulletOriginalDuration: 1

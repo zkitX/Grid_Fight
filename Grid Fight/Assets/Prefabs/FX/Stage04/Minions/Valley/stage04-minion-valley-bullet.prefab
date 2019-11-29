@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1915285204305672094}
   - component: {fileID: 1915285204305672092}
   - component: {fileID: 1915285204305672095}
+  - component: {fileID: 9010644964301154776}
   m_Layer: 0
   m_Name: LightningTrail
   m_TagString: Untagged
@@ -4690,6 +4691,22 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &9010644964301154776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915285204305672081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff95d6aee0aea3498f97a2ecad6d45c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Trail: 1
+  Particle: 1
+  BulletDuration: 1
+  BulletOriginalDuration: 1
 --- !u!1 &1915285204450942449
 GameObject:
   m_ObjectHideFlags: 0
@@ -4703,6 +4720,7 @@ GameObject:
   - component: {fileID: 1915285204450942463}
   - component: {fileID: 1915285204450942462}
   - component: {fileID: -6853554504462579455}
+  - component: {fileID: 198546371394562112}
   m_Layer: 0
   m_Name: stage04-minion-valley-bullet
   m_TagString: Untagged
@@ -9477,6 +9495,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &198546371394562112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915285204450942449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba9e6c852f53ac7448afd635fab03e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletTargetTime: 1
+  BulletOriginalTime: 1
 --- !u!1 &7723996662766597278
 GameObject:
   m_ObjectHideFlags: 0
@@ -21465,7 +21497,7 @@ ParticleSystem:
     strength:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 0.2
       minScalar: 1
       maxCurve:
         serializedVersion: 2

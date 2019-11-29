@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2284594597646784490}
-  - component: {fileID: 2284594597646784491}
   - component: {fileID: 2284594597646784500}
   - component: {fileID: 2284594597646784501}
   - component: {fileID: 1698366254657596095}
+  - component: {fileID: 1917894117}
   m_Layer: 0
   m_Name: stage04-minion-forest-bullet
   m_TagString: Untagged
@@ -36,25 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
---- !u!95 &2284594597646784491
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2284594597646784502}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b7fc3c060cae5884c99516acdeb95dd6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!198 &2284594597646784500
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4788,6 +4769,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1917894117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2284594597646784502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba9e6c852f53ac7448afd635fab03e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletTargetTime: 1
+  BulletOriginalTime: 3
 --- !u!1 &2284594598185661192
 GameObject:
   m_ObjectHideFlags: 0
@@ -4799,6 +4794,7 @@ GameObject:
   - component: {fileID: 2284594598185661199}
   - component: {fileID: 2284594598185661197}
   - component: {fileID: 2284594598185661198}
+  - component: {fileID: 1686161092}
   m_Layer: 0
   m_Name: LightningTrail
   m_TagString: Untagged
@@ -4828,7 +4824,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2284594598185661192}
   serializedVersion: 6
-  lengthInSec: 1
+  lengthInSec: 10
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3
@@ -9478,6 +9474,22 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &1686161092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2284594598185661192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff95d6aee0aea3498f97a2ecad6d45c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Trail: 1
+  Particle: 1
+  BulletDuration: 1
+  BulletOriginalDuration: 1
 --- !u!1 &4626255140395310622
 GameObject:
   m_ObjectHideFlags: 0
@@ -9488,6 +9500,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4626255140395310621}
   - component: {fileID: 4626255140395310620}
+  - component: {fileID: 1257003958}
   m_Layer: 0
   m_Name: TrailWhite
   m_TagString: Untagged
@@ -9614,6 +9627,22 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &1257003958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4626255140395310622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff95d6aee0aea3498f97a2ecad6d45c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Trail: 1
+  Particle: 1
+  BulletDuration: 1
+  BulletOriginalDuration: 1
 --- !u!1 &4626255140522935334
 GameObject:
   m_ObjectHideFlags: 0
@@ -9658,6 +9687,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4626255140886459571}
   - component: {fileID: 4626255140886459570}
+  - component: {fileID: 720536365}
   m_Layer: 0
   m_Name: TrailBlue
   m_TagString: Untagged
@@ -9784,6 +9814,22 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &720536365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4626255140886460236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff95d6aee0aea3498f97a2ecad6d45c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Trail: 1
+  Particle: 1
+  BulletDuration: 1
+  BulletOriginalDuration: 1
 --- !u!1 &4626255141130948404
 GameObject:
   m_ObjectHideFlags: 0
@@ -9795,6 +9841,7 @@ GameObject:
   - component: {fileID: 4626255141130948411}
   - component: {fileID: 4626255141130948409}
   - component: {fileID: 4626255141130948410}
+  - component: {fileID: 78677950}
   m_Layer: 0
   m_Name: ParticleMain
   m_TagString: Untagged
@@ -9824,7 +9871,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4626255141130948404}
   serializedVersion: 6
-  lengthInSec: 3
+  lengthInSec: 10
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -9891,7 +9938,7 @@ ParticleSystem:
       m_RotationOrder: 4
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
-  scalingMode: 1
+  scalingMode: 0
   randomSeed: 0
   InitialModule:
     serializedVersion: 3
@@ -9899,7 +9946,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 0.1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -10649,7 +10696,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 20
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -11326,7 +11373,7 @@ ParticleSystem:
     flipU: 0
     flipV: 0
   VelocityModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -11436,7 +11483,7 @@ ParticleSystem:
     z:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.001
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -14578,7 +14625,7 @@ ParticleSystemRenderer:
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
-  m_LengthScale: 2
+  m_LengthScale: 1
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
@@ -14595,6 +14642,18 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &78677950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4626255141130948404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c0ccb23293b79b448be0eb6c42629c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4626255141232134796
 GameObject:
   m_ObjectHideFlags: 0
@@ -14606,6 +14665,7 @@ GameObject:
   - component: {fileID: 4626255141232134899}
   - component: {fileID: 4626255141232134897}
   - component: {fileID: 4626255141232134898}
+  - component: {fileID: 619904603}
   m_Layer: 0
   m_Name: RisingFire
   m_TagString: Untagged
@@ -14635,7 +14695,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4626255141232134796}
   serializedVersion: 6
-  lengthInSec: 1
+  lengthInSec: 10
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3
@@ -19285,3 +19345,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &619904603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4626255141232134796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff95d6aee0aea3498f97a2ecad6d45c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Trail: 1
+  Particle: 1
+  BulletDuration: 1
+  BulletOriginalDuration: 1
