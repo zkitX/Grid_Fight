@@ -14,10 +14,9 @@ public class CharacterInfoScript : MonoBehaviour
 
     public Sprite CharacterIcon;
     public CharacterClassType ClassType;
-    public List<ElementalType> Elemental = new List<ElementalType>();
   //  public AnimationCurve Trajectory_Y;
   //  public AnimationCurve Trajectory_Z;
-    public float BulletSpeed = 1;
+    public float _BulletSpeed = 5;
    // public List<Vector2Int> BulletDistanceInTile = new List<Vector2Int>();
     public float Damage = 10;
     public int MultiBulletAttackNumberOfBullets = 3;
@@ -33,7 +32,7 @@ public class CharacterInfoScript : MonoBehaviour
     public List<ElementalResistenceClass> ElementalsResistence = new List<ElementalResistenceClass>();
     public List<ElementalType> ElementalsPower = new List<ElementalType>();
     // public List<CharactersRelationshipClass> CharacterRelationships = new List<CharactersRelationshipClass>();
-    private float _AttackTimeRatio;
+    public float _AttackTimeRatio;
     public float Special2LoadingDuration;
     public float Special3LoadingDuration;
     public float Health;
@@ -70,11 +69,23 @@ public class CharacterInfoScript : MonoBehaviour
     {
         get
         {
-            return _AttackTimeRatio * BaseSpeed;
+            return _AttackTimeRatio / BaseSpeed;
         }
         set
         {
             _AttackTimeRatio = value;
+        }
+    }
+
+    public float BulletSpeed
+    {
+        get
+        {
+            return _BulletSpeed / BaseSpeed;
+        }
+        set
+        {
+            _BulletSpeed = value;
         }
     }
 

@@ -173,7 +173,11 @@ public class CharacterBase : MonoBehaviour
     //start the casting particlaes foe the attack
     public void CastAttackParticles(CharacterLevelType clt)
     {
-        GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.AttackParticle, ParticleTypes.Cast, clt == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, UMS.Side);
+        //   GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.AttackParticle, ParticleTypes.Cast, clt == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, UMS.Side);
+        //   cast.GetComponent<DisableParticleScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
+
+        GameObject cast = ParticleManagerScript.Instance.FireParticlesInTransform(CharInfo.AttackParticle, ParticleTypes.Cast, clt == CharacterLevelType.Novice ? SpineAnim.FiringPoint : SpineAnim.SpecialFiringPoint, UMS.Side);
+        cast.GetComponent<DisableParticleScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
         LayerParticleSelection lps = cast.GetComponent<LayerParticleSelection>();
         if (lps != null)
         {

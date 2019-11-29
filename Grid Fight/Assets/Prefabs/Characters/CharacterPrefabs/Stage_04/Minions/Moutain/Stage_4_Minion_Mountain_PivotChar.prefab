@@ -4698,10 +4698,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterIcon: {fileID: 21300000, guid: 305df1f998953104ab04eb3eba46ee09, type: 3}
   ClassType: 1
-  Elemental: 
-  BulletSpeed: 3
+  _BulletSpeed: 5
   Damage: 10
-  MultiBulletAttackNumberOfBullets: 4
+  MultiBulletAttackNumberOfBullets: 3
   ChildrenExplosionDelay: 0
   Name: 
   CharacterSelection: 0
@@ -4709,21 +4708,23 @@ MonoBehaviour:
   PlayerController: 0
   CharacterName: 0
   AttackParticle: 0
-  ElementalsResistence: []
-  ElementalsPower: 
-  AttackTimeRatio: 5
+  ElementalsResistence:
+  - Elemental: 0
+    _ElementalWeakness: 0
+  ElementalsPower: 00000000
+  _AttackTimeRatio: 5
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
   Health: 100
   HealthBase: 100
   Regeneration: 1
-  BaseSpeed: 1
   Stamina: 40
   StaminaBase: 40
   StaminaRegeneration: 1
   StaminaCostSpecial1: 0
   StaminaCostSpecial2: 0
   StaminaCostSpecial3: 0
+  testBaseSpeed: 1
 --- !u!114 &1913423863889360730
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -28,18 +28,25 @@ public class BulletScript : MonoBehaviour
     public Vector2Int BulletGapStartingTile;
     public Vector2Int StartingTile;
     public float ChildrenExplosionDelay;
-
+    private VFXBulletSpeedController vfx;
     //Private 
     private BattleTileScript bts;
 
 
+    private void Start()
+    {
+       
+    }
+
+
     private void Update()
     {
+
         //Stop the bullet when the match ended
-       /* if(BattleManagerScript.Instance.CurrentBattleState == BattleState.End)
-        {
-            StartCoroutine(SelfDeactivate(0));
-        }*/
+        /* if(BattleManagerScript.Instance.CurrentBattleState == BattleState.End)
+         {
+             StartCoroutine(SelfDeactivate(0));
+         }*/
     }
 
     //Self deactivation method with a delay parameter
@@ -69,6 +76,7 @@ public class BulletScript : MonoBehaviour
     {
         //On enabled setup the collision avoidance for determinated layers 
         Physics.IgnoreLayerCollision(Side == SideType.LeftSide ? 9 : 10, Side == SideType.LeftSide ? 11 : 12);
+        
     }
 
     public void StartMoveToTile()
@@ -79,6 +87,12 @@ public class BulletScript : MonoBehaviour
     //Move the bullet on a determinated tile using the BulletInfo.Trajectory
     public IEnumerator MoveToTile()
 	{
+        vfx = GetComponentInChildren<VFXBulletSpeedController>();
+        if (vfx != null)
+        {
+            vfx.BulletTargetTime = CharInfo.BulletSpeed;
+            vfx.ApplyTargetTime();
+        }
         if (CharInfo.ClassType != CharacterClassType.Mountain)
         {
             int startingYTile = Facing == FacingType.Left ? StartingTile.y - BulletGapStartingTile.y : StartingTile.y + BulletGapStartingTile.y;
@@ -193,6 +207,12 @@ public class BulletScript : MonoBehaviour
     //Move the bullet on a straight movement 
     public IEnumerator MoveToWorldPos()
     {
+        vfx = GetComponentInChildren<VFXBulletSpeedController>();
+        if (vfx != null)
+        {
+            vfx.BulletTargetTime = CharInfo.BulletSpeed;
+            vfx.ApplyTargetTime();
+        }
         //setup the base offset for the movement
         Vector3 offset = transform.position;
         //Timer used to set up the coroutine
