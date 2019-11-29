@@ -126,12 +126,15 @@ public class SpineAnimationManager : MonoBehaviour
     public void SetAnimationSpeed(float speed)
     {
         BaseSpeed = speed;
-        SpineAnimationState.Tracks.ForEach(r => {
-            if(r != null)
-            {
-                r.TimeScale = speed;
-            }
-        });
+        if(SpineAnimationState != null)
+        {
+            SpineAnimationState.Tracks.ForEach(r => {
+                if (r != null)
+                {
+                    r.TimeScale = speed;
+                }
+            });
+        }
     }
 
     private void Update()

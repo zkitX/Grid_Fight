@@ -43,7 +43,7 @@ public class AIScript : MonoBehaviour
 
                 timer += Time.fixedDeltaTime / MoveTime;
             }
-            if (CharOwner.CharacterInfo.Health > 0)
+            if (CharOwner.CharInfo.Health > 0)
             {
                 CharOwner.MoveCharOnDirection((InputDirection)Random.Range(0,4));
             }

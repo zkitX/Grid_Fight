@@ -17,16 +17,20 @@ public class CharacterBase : MonoBehaviour
             if (_CharInfo == null)
             {
                 _CharInfo = this.GetComponentInChildren<CharacterInfoScript>(true);
+                _CharInfo.BaseSpeedChangedEvent += _CharInfo_BaseSpeedChangedEvent;
             }
             return _CharInfo;
         }
     }
+
+    
+
     public CharacterInfoScript _CharInfo;
 
 
     public bool isMoving = false;
     public bool isSpecialLoading = false;
-    public CharacterBaseInfoClass CharacterInfo;
+    
     private IEnumerator MoveCo;
     [HideInInspector]
     public List<BattleTileScript> CurrentBattleTiles = new List<BattleTileScript>();
@@ -57,7 +61,7 @@ public class CharacterBase : MonoBehaviour
     {
         if (BattleManagerScript.Instance != null && BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle)
         {
-            if (CharacterInfo.Health <= 0 && IsOnField)
+            if (CharInfo.Health <= 0 && IsOnField)
             {
                 foreach (Vector2Int item in UMS.Pos)
                 {
@@ -70,7 +74,7 @@ public class CharacterBase : MonoBehaviour
                     WaveManagerScript.Instance.CurrentNumberOfWaveChars--;
                 }
             }
-            CharacterInfo.Stamina = (CharacterInfo.Stamina + CharacterInfo.StaminaRegeneration / 60) > CharacterInfo.StaminaBase ? CharacterInfo.StaminaBase : (CharacterInfo.Stamina + CharacterInfo.StaminaRegeneration / 60);
+            CharInfo.Stamina = (CharInfo.Stamina + CharInfo.StaminaRegeneration / 60) > CharInfo.StaminaBase ? CharInfo.StaminaBase : (CharInfo.Stamina + CharInfo.StaminaRegeneration / 60);
         }
     }
     #endregion
@@ -83,6 +87,11 @@ public class CharacterBase : MonoBehaviour
         int layer = UMS.Side == SideType.LeftSide ? 9 : 10;
         SpineAnim.gameObject.layer = layer;
         CurrentAttackTypeInfo = AttackTypesInfo.Where(r => r.CharacterClass == CharInfo.ClassType).First();
+    }
+
+    private void _CharInfo_BaseSpeedChangedEvent(float baseSpeed)
+    {
+        SpineAnim.SetAnimationSpeed(baseSpeed);
     }
 
     #endregion
@@ -107,7 +116,7 @@ public class CharacterBase : MonoBehaviour
 
 
             float timer = 0;
-            while (timer <= CharacterInfo.AttackTimeRatio)
+            while (timer <= CharInfo.AttackTimeRatio)
             {
                 yield return new WaitForFixedUpdate();
                 while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
@@ -130,7 +139,7 @@ public class CharacterBase : MonoBehaviour
     //Load the special attack and fire it if the load is complete
     public IEnumerator LoadSpecialAttack()
     {
-        if (CharacterInfo.Stamina - CharacterInfo.StaminaCostSpecial1 >= 0)
+        if (CharInfo.Stamina - CharInfo.StaminaCostSpecial1 >= 0)
         {
             isSpecialLoading = true;
             float timer = 0;
@@ -145,7 +154,7 @@ public class CharacterBase : MonoBehaviour
             }
             if (IsOnField)
             {
-                CharacterInfo.Stamina -= CharacterInfo.StaminaCostSpecial1;
+                CharInfo.Stamina -= CharInfo.StaminaCostSpecial1;
                 SpecialAttack(CharacterLevelType.Defiant);
             }
 
@@ -164,7 +173,7 @@ public class CharacterBase : MonoBehaviour
     //start the casting particlaes foe the attack
     public void CastAttackParticles(CharacterLevelType clt)
     {
-        GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharacterInfo.AttackParticle, ParticleTypes.Cast, clt == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, UMS.Side);
+        GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.AttackParticle, ParticleTypes.Cast, clt == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, UMS.Side);
         LayerParticleSelection lps = cast.GetComponent<LayerParticleSelection>();
         if (lps != null)
         {
@@ -191,15 +200,15 @@ public class CharacterBase : MonoBehaviour
         bs.ChildrenExplosionDelay = CharInfo.ChildrenExplosionDelay;
         bs.StartingTile = UMS.CurrentTilePos;
         bs.BulletGapStartingTile = bulletBehaviourInfo.BulletGapStartingTile;
-        if (CharacterInfo.ElementalsPower.Count > 0)
+        if (CharInfo.ElementalsPower.Count > 0)
         {
-            bs.Elemental = CharacterInfo.ElementalsPower.First();
+            bs.Elemental = CharInfo.ElementalsPower.First();
         }
         bs.Side = UMS.Side;
         bs.VFXTestMode = VFXTestMode;
         bs.CharInfo = CharInfo;
         bs.gameObject.SetActive(true);
-        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharacterInfo.AttackParticle, ParticleTypes.Attack, bullet.transform, UMS.Side);
+        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharInfo.AttackParticle, ParticleTypes.Attack, bullet.transform, UMS.Side);
         LayerParticleSelection lps = bs.PS.GetComponent<LayerParticleSelection>();
         if (lps != null)
         {
@@ -254,7 +263,7 @@ public class CharacterBase : MonoBehaviour
     //used to set the movement of the character on a determinated direction
     public void MoveCharOnDirection(InputDirection nextDir)
     {
-        if (CharacterInfo.Health > 0 && !isMoving && IsOnField)
+        if (CharInfo.Health > 0 && !isMoving && IsOnField)
         {
             List<BattleTileScript> prevBattleTile = CurrentBattleTiles;
             List<BattleTileScript>  CurrentBattleTilesToCheck = new List<BattleTileScript>();
@@ -400,8 +409,8 @@ public class CharacterBase : MonoBehaviour
             {
                 yield return new WaitForEndOfFrame();
             }
-            float newAdd = (Time.fixedDeltaTime / (AnimLength / CharacterInfo.BaseSpeed));
-            timer += (Time.fixedDeltaTime / (AnimLength / CharacterInfo.BaseSpeed));
+            float newAdd = (Time.fixedDeltaTime / (AnimLength / CharInfo.BaseSpeed));
+            timer += (Time.fixedDeltaTime / (AnimLength / CharInfo.BaseSpeed));
             speedTimer += newAdd * curve.Evaluate(timer + newAdd);
             transform.position = Vector3.Lerp(offset, nextPos, speedTimer);
 
@@ -436,12 +445,12 @@ public class CharacterBase : MonoBehaviour
         switch (bdClass.Stat)
         {
             case BuffDebuffStatsType.Health:
-                CharacterInfo.Health += valueOverDuration;
+                CharInfo.Health += valueOverDuration;
                 break;
             case BuffDebuffStatsType.Armor:
                 
                 CurrentBuffsDebuffsClass currentBuffDebuff = BuffsDebuffs.Where(r => r.ElementalResistence.Elemental == bdClass.ElementalResistence.Elemental).FirstOrDefault();
-                ElementalWeaknessType BaseWeakness = GetElementalMultiplier(CharacterInfo.ElementalsResistence, bdClass.ElementalResistence.Elemental);
+                ElementalWeaknessType BaseWeakness = GetElementalMultiplier(CharInfo.ElementalsResistence, bdClass.ElementalResistence.Elemental);
                 CurrentBuffsDebuffsClass newBuffDebuff = new CurrentBuffsDebuffsClass();
                 newBuffDebuff.ElementalResistence = bdClass.ElementalResistence;
                 newBuffDebuff.Duration = 100 + bdClass.Duration;
@@ -473,27 +482,27 @@ public class CharacterBase : MonoBehaviour
                 }
                 break;
             case BuffDebuffStatsType.Regeneration:
-                CharacterInfo.Health += valueOverDuration;
+                CharInfo.Health += valueOverDuration;
                 break;
             case BuffDebuffStatsType.MovementSpeed:
-                CharacterInfo.Health += valueOverDuration;
+                CharInfo.Health += valueOverDuration;
                 break;
             case BuffDebuffStatsType.Stamina:
-                CharacterInfo.Health += valueOverDuration;
+                CharInfo.Health += valueOverDuration;
                 break;
             case BuffDebuffStatsType.StaminaRegeneration:
-                CharacterInfo.Health += valueOverDuration;
+                CharInfo.Health += valueOverDuration;
                 break;
             case BuffDebuffStatsType.AttackSpeed:
-                CharacterInfo.Health += valueOverDuration;
+                CharInfo.Health += valueOverDuration;
                 break;
             case BuffDebuffStatsType.BulletSpeed:
-                CharacterInfo.Health += valueOverDuration;
+                CharInfo.Health += valueOverDuration;
                 break;
             case BuffDebuffStatsType.AttackType:
                 break;
             case BuffDebuffStatsType.ElementalPower:
-                CharacterInfo.ElementalsPower.Add(bdClass.ElementalPower);
+                CharInfo.ElementalsPower.Add(bdClass.ElementalPower);
                 break;
         }
 
@@ -517,27 +526,27 @@ public class CharacterBase : MonoBehaviour
         switch (bdClass.Stat)
         {
             case BuffDebuffStatsType.Regeneration:
-                CharacterInfo.Health -= valueOverDuration;
+                CharInfo.Health -= valueOverDuration;
                 break;
             case BuffDebuffStatsType.MovementSpeed:
-                CharacterInfo.Health -= valueOverDuration;
+                CharInfo.Health -= valueOverDuration;
                 break;
             case BuffDebuffStatsType.Stamina:
-                CharacterInfo.Health -= valueOverDuration;
+                CharInfo.Health -= valueOverDuration;
                 break;
             case BuffDebuffStatsType.StaminaRegeneration:
-                CharacterInfo.Health -= valueOverDuration;
+                CharInfo.Health -= valueOverDuration;
                 break;
             case BuffDebuffStatsType.AttackSpeed:
-                CharacterInfo.Health -= valueOverDuration;
+                CharInfo.Health -= valueOverDuration;
                 break;
             case BuffDebuffStatsType.BulletSpeed:
-                CharacterInfo.Health -= valueOverDuration;
+                CharInfo.Health -= valueOverDuration;
                 break;
             case BuffDebuffStatsType.AttackType:
                 break;
             case BuffDebuffStatsType.ElementalPower:
-                CharacterInfo.ElementalsPower.Remove(bdClass.ElementalPower);
+                CharInfo.ElementalsPower.Remove(bdClass.ElementalPower);
                 break;
         }
     }
@@ -588,7 +597,7 @@ public class CharacterBase : MonoBehaviour
         }
 
         SpineAnim.SetAnim(animState, false);
-        SpineAnim.SetAnimationSpeed(CharacterInfo.BaseSpeed);
+        SpineAnim.SetAnimationSpeed(CharInfo.BaseSpeed);
     }
 
     public void SpineAnimatorsetup()
@@ -605,7 +614,7 @@ public class CharacterBase : MonoBehaviour
         ElementalWeaknessType ElaboratedWeakness;
         CurrentBuffsDebuffsClass buffDebuffWeakness = BuffsDebuffs.Where(r => r.ElementalResistence.Elemental == elemental).FirstOrDefault();
 
-        ElementalWeaknessType BaseWeakness = GetElementalMultiplier(CharacterInfo.ElementalsResistence, elemental);
+        ElementalWeaknessType BaseWeakness = GetElementalMultiplier(CharInfo.ElementalsResistence, elemental);
         if (buffDebuffWeakness == null)
         {
             ElaboratedWeakness = BaseWeakness;
@@ -639,7 +648,7 @@ public class CharacterBase : MonoBehaviour
                 break;
         }
         //Debug.Log(damage);
-        CharacterInfo.Health -= damage;
+        CharInfo.Health -= damage;
     }
 
     public ElementalWeaknessType GetElementalMultiplier(List<ElementalResistenceClass> armorElelmntals, ElementalType elementalToCheck)
@@ -700,7 +709,7 @@ public class CharacterBase : MonoBehaviour
             timer += Time.fixedDeltaTime;
         }
 
-        SpineAnim.SetAnimationSpeed(CharacterInfo.BaseSpeed);
+        SpineAnim.SetAnimationSpeed(CharInfo.BaseSpeed);
 
     }
 
