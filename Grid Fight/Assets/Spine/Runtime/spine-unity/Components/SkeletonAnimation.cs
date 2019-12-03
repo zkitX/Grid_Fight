@@ -166,19 +166,22 @@ namespace Spine.Unity {
 			}
 		}
 
-		void Update () {
-			#if UNITY_EDITOR
-			if (!Application.isPlaying) {
-				Update(0f);
-				return;
-			}
-			#endif
 
-			Update(Time.deltaTime);
-		}
+		void Update ()
+        {
+#if UNITY_EDITOR
+                if (!Application.isPlaying)
+                {
+                    Update(0f);
+                    return;
+                }
+#endif
+                Update(Time.deltaTime);
+        }
 
-		/// <summary>Progresses the AnimationState according to the given deltaTime, and applies it to the Skeleton. Use Time.deltaTime to update manually. Use deltaTime 0 to update without progressing the time.</summary>
-		public void Update (float deltaTime) {
+      
+        /// <summary>Progresses the AnimationState according to the given deltaTime, and applies it to the Skeleton. Use Time.deltaTime to update manually. Use deltaTime 0 to update without progressing the time.</summary>
+        public void Update (float deltaTime) {
 			if (!valid)
 				return;
 

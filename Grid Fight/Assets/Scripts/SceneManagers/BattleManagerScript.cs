@@ -45,8 +45,9 @@ public class BattleManagerScript : MonoBehaviour
 
     public void SetupBattleState()
     {
+
         CurrentBattleState = BattleState.Battle;
-        UIBattleManager.Instance.StartMatch.gameObject.SetActive(false);
+       UIBattleManager.Instance.StartMatch.gameObject.SetActive(false);
     }
 
     #region Unity Life Cycle
@@ -174,7 +175,7 @@ public class BattleManagerScript : MonoBehaviour
     {
         GameObject characterBasePrefab = null;
         ScriptableObjectCharacterPrefab soCharacterPrefab = ListOfScriptableObjectCharacterPrefab.Where(r => r.CharacterName == charInfo.CharacterName).First();
-        characterBasePrefab = Instantiate(CharacterBasePrefab, new Vector3(100,100,100), Quaternion.identity, parent);
+        characterBasePrefab = Instantiate(CharacterBasePrefab, new Vector3(100, 100, 100), Quaternion.identity, parent);
         GameObject child = Instantiate(soCharacterPrefab.CharacterPrefab, characterBasePrefab.transform.position, Quaternion.identity, characterBasePrefab.transform);
         CharacterBase currentCharacter = characterBasePrefab.GetComponent<CharacterBase>();
         currentCharacter.UMS.PlayerController = charInfo.PlayerController;

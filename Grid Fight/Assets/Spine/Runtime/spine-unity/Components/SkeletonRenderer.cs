@@ -316,13 +316,15 @@ namespace Spine.Unity {
 			#endif
 		}
 
-		/// <summary>
-		/// Generates a new UnityEngine.Mesh from the internal Skeleton.</summary>
-		public virtual void LateUpdate () {
-			if (!valid) return;
+        /// <summary>
+        /// Generates a new UnityEngine.Mesh from the internal Skeleton.</summary>
+        /// 
 
-			#if SPINE_OPTIONAL_RENDEROVERRIDE
-			bool doMeshOverride = generateMeshOverride != null;
+
+        public virtual void LateUpdate () {
+			if (!valid) return;
+#if SPINE_OPTIONAL_RENDEROVERRIDE
+            bool doMeshOverride = generateMeshOverride != null;
 			if ((!meshRenderer.enabled)	&& !doMeshOverride) return;
 			#else
 			const bool doMeshOverride = false;

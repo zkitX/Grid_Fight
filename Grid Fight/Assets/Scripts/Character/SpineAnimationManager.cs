@@ -19,13 +19,14 @@ public class SpineAnimationManager : MonoBehaviour
     public CharacterAnimationStateType CurrentAnim;
     public float AnimationTransition = 0.1f;
     private float BaseSpeed;
-
+    public bool iseven = true;
 //initialize all the spine element
     private void SetupSpineAnim()
     {
         if(skeletonAnimation == null)
         {
             skeletonAnimation = GetComponent<SkeletonAnimation>();
+            skeletonAnimation.enabled = true;
             SpineAnimationState = skeletonAnimation.AnimationState;
             skeleton = skeletonAnimation.Skeleton;
             SpineAnimationState.Complete += SpineAnimationState_Complete;
@@ -34,6 +35,8 @@ public class SpineAnimationManager : MonoBehaviour
             SpineAnimationState.SetEmptyAnimation(1, 0);
         }
     }
+
+
 
 
     //Used to get spine event
@@ -134,14 +137,6 @@ public class SpineAnimationManager : MonoBehaviour
                     r.TimeScale = speed;
                 }
             });
-        }
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyUp(KeyCode.V))
-        {
-           // SetMixAnim(CharacterAnimationStateType.Gettinghit, false);
         }
     }
 }

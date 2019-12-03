@@ -32,13 +32,6 @@ public class BulletScript : MonoBehaviour
     //Private 
     private BattleTileScript bts;
 
-
-    private void Start()
-    {
-       
-    }
-
-
     private void Update()
     {
 
