@@ -20,6 +20,9 @@ public class UIBattleManager : MonoBehaviour
     public TextMeshProUGUI RestartMatch;
     public TextMeshProUGUI StartMatch;
 
+    public GameObject TimeToPlay;
+    public TextMeshProUGUI SecondsToPlay;
+    public bool isPlayerPlaying = false;
     public CanvasGroup Win;
     public CanvasGroup Lose;
 
@@ -88,6 +91,41 @@ public class UIBattleManager : MonoBehaviour
         else
         {
             UICharacterSelectionRight.SetCharSelected(currentCharacter.CharInfo.CharacterSelection);
+        }
+    }
+
+
+    public void StartTimeUp(float duration)
+    {
+        StartCoroutine(TimeUpCo(duration));
+    }
+
+    private IEnumerator TimeUpCo(float duration)
+    {
+        TimeToPlay.SetActive(true);
+        isPlayerPlaying = false;
+        while (duration > 0 && !isPlayerPlaying)
+        {
+            yield return new WaitForFixedUpdate();
+            while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            SecondsToPlay.text = ((int)duration).ToString();
+            duration -= Time.fixedDeltaTime;
+
+        }
+
+        if(duration > 0 )
+        {
+            TimeToPlay.SetActive(false);
+
+            BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
+        }
+        else
+        {
+            Win.alpha = 1;
+            BattleManagerScript.Instance.CurrentBattleState = BattleState.End;
         }
     }
 }

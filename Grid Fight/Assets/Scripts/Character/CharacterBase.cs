@@ -10,6 +10,10 @@ public class CharacterBase : MonoBehaviour
     public delegate void TileMovementComplete(CharacterBase movingChar);
     public event TileMovementComplete TileMovementCompleteEvent;
 
+    public delegate void CurrentCharIsDead(CharacterNameType cName, ControllerType playerController);
+    public event CurrentCharIsDead CurrentCharIsDeadEvent;
+
+
     public CharacterInfoScript CharInfo
     {
         get
@@ -73,6 +77,7 @@ public class CharacterBase : MonoBehaviour
                 {
                     WaveManagerScript.Instance.CurrentNumberOfWaveChars--;
                 }
+                CurrentCharIsDeadEvent(CharInfo.CharacterName, UMS.PlayerController);
             }
             CharInfo.Stamina = (CharInfo.Stamina + CharInfo.StaminaRegeneration / 60) > CharInfo.StaminaBase ? CharInfo.StaminaBase : (CharInfo.Stamina + CharInfo.StaminaRegeneration / 60);
         }

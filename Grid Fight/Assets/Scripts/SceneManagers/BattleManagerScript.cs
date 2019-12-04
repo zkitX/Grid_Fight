@@ -39,10 +39,10 @@ public class BattleManagerScript : MonoBehaviour
     [SerializeField]
     private Transform CharactersContainer;
     private List<CharacterBaseInfoClass> PlayerBattleInfo = new List<CharacterBaseInfoClass>();
-
+    private List<PlayableCharOnScene> PlayablesCharOnScene = new List<PlayableCharOnScene>();
 
     public List<CharacterBase> WaveCharcters = new List<CharacterBase>();
-
+    private MatchType matchType;
     public void SetupBattleState()
     {
 
@@ -106,6 +106,8 @@ public class BattleManagerScript : MonoBehaviour
         UIBattleManager.Instance.CharacterSelected(playerController, currentCharacter);
         currentCharacter.SetAnimation(CharacterAnimationStateType.Arriving);
         StartCoroutine(MoveCharToBoardWithDelay(0.1f, currentCharacter, bts.transform.position));
+        UIBattleManager.Instance.isPlayerPlaying = true;
+        PlayablesCharOnScene.Where(r => r.PlayerController == playerController && r.CName == cName).First().isUsed = true; ;
     }
     
    
@@ -164,6 +166,7 @@ public class BattleManagerScript : MonoBehaviour
         PlayerBattleInfo = LoaderManagerScript.Instance != null ? LoaderManagerScript.Instance.PlayerBattleInfo : BattleInfoManagerScript.Instance.PlayerBattleInfo;
         foreach (CharacterBaseInfoClass item in PlayerBattleInfo)
         {
+            PlayablesCharOnScene.Add(new PlayableCharOnScene(item.CharacterName, item.PlayerController, false));
             AllCharactersOnField.Add(CreateChar(item, CharactersContainer));
             yield return new WaitForSeconds(delay);
         }
@@ -189,7 +192,30 @@ public class BattleManagerScript : MonoBehaviour
             currentCharacter.CharInfo.CharacterSelection == CharacterSelectionType.Down ? -90 :
             currentCharacter.CharInfo.CharacterSelection == CharacterSelectionType.Left ? 180 : 0);
         currentCharacter.CharInfo.CharacterSelection = charInfo.CharacterSelection;
+        currentCharacter.CurrentCharIsDeadEvent += CurrentCharacter_CurrentCharIsDeadEvent;
         return currentCharacter;
+    }
+
+    private void CurrentCharacter_CurrentCharIsDeadEvent(CharacterNameType cName, ControllerType playerController)
+    {
+        PlayablesCharOnScene.Where(r=> r.PlayerController == playerController && r.CName == cName).First().isAlive = false;
+
+        List<PlayableCharOnScene> res = new List<PlayableCharOnScene>();
+
+        res = PlayablesCharOnScene.Where(r => r.PlayerController == playerController).ToList();
+
+        if(res.Where(r=> !r.isAlive && r.isUsed).ToList().Count == res.Count)
+        {
+            UIBattleManager.Instance.Win.alpha = 1;
+            CurrentBattleState = BattleState.End;
+            return;
+        }
+
+        if(res.Where(r=> r.isUsed).ToList().Count == res.Where(r=> !r.isAlive).ToList().Count)
+        {
+            UIBattleManager.Instance.StartTimeUp(15);
+        }
+
     }
 
     #endregion
@@ -341,6 +367,9 @@ public class BattleManagerScript : MonoBehaviour
 
     #endregion
 
+
+
+
    //Used to setup all the current char icons
     public void SetUICharacterSelectionIcons()
     {
@@ -366,7 +395,7 @@ public class BattleManagerScript : MonoBehaviour
 //
     public SideType GetSideFromPlayer(ControllerType ct)
     {
-        MatchType matchType = LoaderManagerScript.Instance != null ? LoaderManagerScript.Instance.MatchInfoType : BattleInfoManagerScript.Instance.MatchInfoType;
+        matchType = LoaderManagerScript.Instance != null ? LoaderManagerScript.Instance.MatchInfoType : BattleInfoManagerScript.Instance.MatchInfoType;
         switch (matchType)
         {
             case MatchType.PvE:
@@ -405,7 +434,21 @@ public class CharacterLoadingInfoClass
 }
 
 
+public class PlayableCharOnScene
+{
+    public CharacterNameType CName;
+    public ControllerType PlayerController;
+    public bool isUsed;
+    public bool isAlive = true;
 
+    public PlayableCharOnScene(CharacterNameType cname, ControllerType pc, bool isused)
+    {
+        CName = cname;
+        PlayerController = pc;
+        isUsed = isused;
+
+    }
+}
 
 
 
