@@ -106,7 +106,16 @@ public class BattleManagerScript : MonoBehaviour
         UIBattleManager.Instance.CharacterSelected(playerController, currentCharacter);
         currentCharacter.SetAnimation(CharacterAnimationStateType.Arriving);
         StartCoroutine(MoveCharToBoardWithDelay(0.1f, currentCharacter, bts.transform.position));
-        UIBattleManager.Instance.isPlayerPlaying = true;
+        if (playerController == ControllerType.Player1)
+        {
+            UIBattleManager.Instance.isPlayerPlayingP1 = true;
+
+        }
+        else if (playerController == ControllerType.Player2)
+        {
+            UIBattleManager.Instance.isPlayerPlayingP2 = true;
+
+        }
         PlayablesCharOnScene.Where(r => r.PlayerController == playerController && r.CName == cName).First().isUsed = true; ;
     }
     

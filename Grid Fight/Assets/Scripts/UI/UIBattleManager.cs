@@ -20,9 +20,13 @@ public class UIBattleManager : MonoBehaviour
     public TextMeshProUGUI RestartMatch;
     public TextMeshProUGUI StartMatch;
 
-    public GameObject TimeToPlay;
-    public TextMeshProUGUI SecondsToPlay;
-    public bool isPlayerPlaying = false;
+    public GameObject TimeToPlayP1;
+    public TextMeshProUGUI SecondsToPlayP1;
+    public bool isPlayerPlayingP1 = false;
+
+    public GameObject TimeToPlayP2;
+    public TextMeshProUGUI SecondsToPlayP2;
+    public bool isPlayerPlayingP2 = false;
     public CanvasGroup Win;
 
     public TextMeshProUGUI Player1;
@@ -99,28 +103,36 @@ public class UIBattleManager : MonoBehaviour
 
     public void StartTimeUp(float duration, ControllerType timeupPlayer)
     {
-        StartCoroutine(TimeUpCo(duration, timeupPlayer));
+        if (timeupPlayer == ControllerType.Player1)
+        {
+            StartCoroutine(TimeUpCoP1(duration, timeupPlayer));
+        }
+        else if (timeupPlayer == ControllerType.Player2)
+        {
+            StartCoroutine(TimeUpCoP2(duration, timeupPlayer));
+        }
+      
     }
 
-    private IEnumerator TimeUpCo(float duration, ControllerType timeupPlayer)
+    private IEnumerator TimeUpCoP1(float duration, ControllerType timeupPlayer)
     {
-        TimeToPlay.SetActive(true);
-        isPlayerPlaying = false;
-        while (duration > 0 && !isPlayerPlaying)
+        TimeToPlayP1.SetActive(true);
+        isPlayerPlayingP1 = false;
+        while (duration > 0 && !isPlayerPlayingP1)
         {
             yield return new WaitForFixedUpdate();
             while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
             {
                 yield return new WaitForEndOfFrame();
             }
-            SecondsToPlay.text = ((int)duration).ToString();
+            SecondsToPlayP1.text = ((int)duration).ToString();
             duration -= Time.fixedDeltaTime;
 
         }
 
         if(duration > 0 )
         {
-            TimeToPlay.SetActive(false);
+            TimeToPlayP1.SetActive(false);
 
             BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
         }
@@ -131,7 +143,34 @@ public class UIBattleManager : MonoBehaviour
         }
     }
 
+    private IEnumerator TimeUpCoP2(float duration, ControllerType timeupPlayer)
+    {
+        TimeToPlayP2.SetActive(true);
+        isPlayerPlayingP2 = false;
+        while (duration > 0 && !isPlayerPlayingP2)
+        {
+            yield return new WaitForFixedUpdate();
+            while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            SecondsToPlayP2.text = ((int)duration).ToString();
+            duration -= Time.fixedDeltaTime;
 
+        }
+
+        if (duration > 0)
+        {
+            TimeToPlayP2.SetActive(false);
+
+            BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
+        }
+        else
+        {
+            Winner(timeupPlayer == ControllerType.Player1 ? "Lost" : "Win", timeupPlayer == ControllerType.Player2 ? "Lost" : "Win");
+            BattleManagerScript.Instance.CurrentBattleState = BattleState.End;
+        }
+    }
     public void Winner(string p1, string p2)
     {
         Win.alpha = 1;
