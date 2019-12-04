@@ -22,13 +22,13 @@ public class CharacterBase : MonoBehaviour
             {
                 _CharInfo = this.GetComponentInChildren<CharacterInfoScript>(true);
                 _CharInfo.BaseSpeedChangedEvent += _CharInfo_BaseSpeedChangedEvent;
+                _CharInfo.DeathEvent += _CharInfo_DeathEvent;
             }
             return _CharInfo;
         }
     }
 
-    
-
+   
     public CharacterInfoScript _CharInfo;
 
 
@@ -63,24 +63,7 @@ public class CharacterBase : MonoBehaviour
 
     private void Update()
     {
-        if (BattleManagerScript.Instance != null && BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle)
-        {
-            if (CharInfo.Health <= 0 && IsOnField)
-            {
-                foreach (Vector2Int item in UMS.Pos)
-                {
-                    GridManagerScript.Instance.SetBattleTileState(item, BattleTileStateType.Empty);
-                }
-                IsOnField = false;
-                gameObject.SetActive(false);
-                if(WaveManagerScript.Instance != null)
-                {
-                    WaveManagerScript.Instance.CurrentNumberOfWaveChars--;
-                }
-                CurrentCharIsDeadEvent(CharInfo.CharacterName, UMS.PlayerController);
-            }
-            CharInfo.Stamina = (CharInfo.Stamina + CharInfo.StaminaRegeneration / 60) > CharInfo.StaminaBase ? CharInfo.StaminaBase : (CharInfo.Stamina + CharInfo.StaminaRegeneration / 60);
-        }
+      
     }
     #endregion
 
@@ -97,6 +80,30 @@ public class CharacterBase : MonoBehaviour
     private void _CharInfo_BaseSpeedChangedEvent(float baseSpeed)
     {
         SpineAnim.SetAnimationSpeed(baseSpeed);
+    }
+
+    private void _CharInfo_DeathEvent()
+    {
+        if (IsOnField)
+        {
+            SetCharDead();
+        }
+    }
+
+
+    public void SetCharDead()
+    {
+        foreach (Vector2Int item in UMS.Pos)
+        {
+            GridManagerScript.Instance.SetBattleTileState(item, BattleTileStateType.Empty);
+        }
+        IsOnField = false;
+        gameObject.SetActive(false);
+        if (WaveManagerScript.Instance != null)
+        {
+            WaveManagerScript.Instance.CurrentNumberOfWaveChars--;
+        }
+        CurrentCharIsDeadEvent(CharInfo.CharacterName, UMS.PlayerController);
     }
 
     #endregion

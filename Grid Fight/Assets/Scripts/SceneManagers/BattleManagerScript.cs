@@ -206,14 +206,14 @@ public class BattleManagerScript : MonoBehaviour
 
         if(res.Where(r=> !r.isAlive && r.isUsed).ToList().Count == res.Count)
         {
-            UIBattleManager.Instance.Win.alpha = 1;
+            UIBattleManager.Instance.Winner(playerController == ControllerType.Player1 ? "Lost" : "Win", playerController == ControllerType.Player2 ? "Lost" : "Win");
             CurrentBattleState = BattleState.End;
             return;
         }
 
         if(res.Where(r=> r.isUsed).ToList().Count == res.Where(r=> !r.isAlive).ToList().Count)
         {
-            UIBattleManager.Instance.StartTimeUp(15);
+            UIBattleManager.Instance.StartTimeUp(15, playerController);
         }
 
     }

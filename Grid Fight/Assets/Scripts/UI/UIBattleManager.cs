@@ -24,7 +24,9 @@ public class UIBattleManager : MonoBehaviour
     public TextMeshProUGUI SecondsToPlay;
     public bool isPlayerPlaying = false;
     public CanvasGroup Win;
-    public CanvasGroup Lose;
+
+    public TextMeshProUGUI Player1;
+    public TextMeshProUGUI Player2;
 
     private Dictionary<int, UIPlayerSectionScript> currentPlayers = new Dictionary<int, UIPlayerSectionScript>();
    
@@ -95,12 +97,12 @@ public class UIBattleManager : MonoBehaviour
     }
 
 
-    public void StartTimeUp(float duration)
+    public void StartTimeUp(float duration, ControllerType timeupPlayer)
     {
-        StartCoroutine(TimeUpCo(duration));
+        StartCoroutine(TimeUpCo(duration, timeupPlayer));
     }
 
-    private IEnumerator TimeUpCo(float duration)
+    private IEnumerator TimeUpCo(float duration, ControllerType timeupPlayer)
     {
         TimeToPlay.SetActive(true);
         isPlayerPlaying = false;
@@ -124,8 +126,17 @@ public class UIBattleManager : MonoBehaviour
         }
         else
         {
-            Win.alpha = 1;
+            Winner(timeupPlayer == ControllerType.Player1 ? "Lost" : "Win", timeupPlayer == ControllerType.Player2 ? "Lost" : "Win");
             BattleManagerScript.Instance.CurrentBattleState = BattleState.End;
         }
+    }
+
+
+    public void Winner(string p1, string p2)
+    {
+        Win.alpha = 1;
+
+        Player1.text = p1;
+        Player2.text = p2;
     }
 }

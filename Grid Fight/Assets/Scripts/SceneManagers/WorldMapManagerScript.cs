@@ -14,18 +14,22 @@ public class WorldMapManagerScript : MonoBehaviour
     public WorldMapSaveClass WorldMapSave;
 
     #region SwitchVariables
-
+#if UNITY_SWITCH && !UNITY_EDITOR
     private nn.account.Uid userId;
+#endif
     private const string Switch_MountName = "MySave";
     private const string Switch_FileName = "WorldMapProgress.xml";
     private const string PlayerPref_Name = "WorldMapProgress";
     private string filePath;
+#if UNITY_SWITCH && !UNITY_EDITOR
     private nn.fs.FileHandle fileHandle = new nn.fs.FileHandle();
+#endif
     private const int saveDataSize = 8;
     private int saveData = 0;
     private int loadData = 0;
-
+#if UNITY_SWITCH && !UNITY_EDITOR
     private nn.Result result;
+#endif
 
     #endregion
 
@@ -79,8 +83,10 @@ public class WorldMapManagerScript : MonoBehaviour
 
     void Start()
     {
+#if UNITY_SWITCH && !UNITY_EDITOR
         nn.account.Account.Initialize();
         result = nn.fs.SaveData.Mount(Switch_MountName, userId);
+#endif
         filePath = string.Format("{0}:/{1}", Switch_MountName, Switch_FileName);
         SetupWorldMap();
 
@@ -88,7 +94,9 @@ public class WorldMapManagerScript : MonoBehaviour
 
     void OnDestroy()
     {
+#if UNITY_SWITCH && !UNITY_EDITOR
         nn.fs.FileSystem.Unmount(Switch_MountName);
+#endif
     }
 
     public void Save()
@@ -108,6 +116,8 @@ public class WorldMapManagerScript : MonoBehaviour
         // Nintendo Switch Guideline 0080
         UnityEngine.Switch.Notification.EnterExitRequestHandlingSection();
 #endif
+
+#if UNITY_SWITCH && !UNITY_EDITOR
         // Convert the text to UTF-8-encoded bytes.
         byte[] data = Encoding.UTF8.GetBytes(PlaytraGamesLtd.Utils.SerializeToString<WorldMapSaveClass>(WorldMapSave));
 
@@ -167,7 +177,7 @@ public class WorldMapManagerScript : MonoBehaviour
         // If you do not call this method, all changes will be lost when the application closes.
         // Only call this when you are sure that all previous operations succeeded.
         nn.fs.FileSystem.Commit(Switch_MountName);
-
+#endif
 #if UNITY_SWITCH && !UNITY_EDITOR
 // Stop preventing the system from terminating the game while saving.
 UnityEngine.Switch.Notification.LeaveExitRequestHandlingSection();
@@ -177,6 +187,7 @@ UnityEngine.Switch.Notification.LeaveExitRequestHandlingSection();
 
     private void LoadSwitch()
     {
+#if UNITY_SWITCH && !UNITY_EDITOR
         WorldMapSave = new WorldMapSaveClass();
         // Attempt to open the file in read-only mode.
         result = nn.fs.File.Open(ref fileHandle, filePath, nn.fs.OpenFileMode.Read);
@@ -203,6 +214,7 @@ UnityEngine.Switch.Notification.LeaveExitRequestHandlingSection();
         nn.fs.File.Close(fileHandle);
         // Decode the UTF8-encoded data and store it in the string buffer.
         WorldMapSave = PlaytraGamesLtd.Utils.DeserializeFromString<WorldMapSaveClass>(Encoding.UTF8.GetString(data));
+#endif
     }
 }
 

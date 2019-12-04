@@ -10,9 +10,11 @@ public class CharacterInfoScript : MonoBehaviour
 {
     public delegate void BaseSpeedChanged(float baseSpeed);
     public event BaseSpeedChanged BaseSpeedChangedEvent;
-
+    public delegate void Death();
+    public event Death DeathEvent;
 
     public Sprite CharacterIcon;
+
     public CharacterClassType ClassType;
   //  public AnimationCurve Trajectory_Y;
   //  public AnimationCurve Trajectory_Z;
@@ -35,7 +37,7 @@ public class CharacterInfoScript : MonoBehaviour
     public float _AttackTimeRatio;
     public float Special2LoadingDuration;
     public float Special3LoadingDuration;
-    public float Health;
+    public float _Health;
     public float HealthBase;
     public float Regeneration;
     private float _BaseSpeed = 1;
@@ -105,9 +107,29 @@ public class CharacterInfoScript : MonoBehaviour
         }
     }
 
+    public float Health
+    {
+        get
+        {
+            return _Health;
+        }
+        set
+        {
+            _Health = value;
+            if (_Health <= 0)
+            {
+                if (DeathEvent != null)
+                {
+                    DeathEvent();
+                }
+            }
+        }
+    }
 
     private void Update()
     {
         BaseSpeed = testBaseSpeed;
+        Stamina = (Stamina + StaminaRegeneration / 60) > StaminaBase ? StaminaBase : (Stamina + StaminaRegeneration / 60);
+        Health = Health;
     }
 }
