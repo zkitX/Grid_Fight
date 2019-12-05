@@ -109,6 +109,7 @@ public class BulletScript : MonoBehaviour
         }
         else if (CharInfo.ClassType == CharacterClassType.Mountain)
         {
+            GetComponent<BoxCollider>().enabled = false;
             int ran = Random.Range(0, 101);
             DestinationTile.y = ran < 25 ? DestinationTile.y - 1 : ran < 75 ? DestinationTile.y : DestinationTile.y + 1;
             bts = GridManagerScript.Instance.GetBattleTile(DestinationTile);
@@ -169,6 +170,8 @@ public class BulletScript : MonoBehaviour
     public IEnumerator ChildExplosion(List<Vector2Int> bet)
     {
         float timer = 0;
+        CharacterBase target = target = BattleManagerScript.Instance.GetCharInPos(DestinationTile);
+        MakeDamage(target);
         while (timer < ChildrenExplosionDelay)
         {
             timer += Time.fixedDeltaTime;
@@ -178,11 +181,13 @@ public class BulletScript : MonoBehaviour
                 yield return new WaitForFixedUpdate();
             }
         }
-
+       
         for (int i = 0; i < bet.Count; i++)
         {
             if (GridManagerScript.Instance.isPosOnField(DestinationTile + bet[i]))
             {
+                target = BattleManagerScript.Instance.GetCharInPos(DestinationTile + bet[i]);
+                MakeDamage(target);
                 FireEffectParticles(GridManagerScript.Instance.GetBattleTile(DestinationTile + bet[i]).transform.position, i == bet.Count - 1 ? true : false);
             }
             else
@@ -192,8 +197,20 @@ public class BulletScript : MonoBehaviour
                 FireEffectParticles(GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position
                     + dest, i == bet.Count - 1 ? true : false);
             }
+
+            
         }
 
+    }
+
+
+    public void MakeDamage(CharacterBase target)
+    {
+        if (target != null)
+        {
+            //Set damage to the hitting character
+            target.SetDamage(CharInfo.Damage, Elemental);
+        }
     }
 
 
@@ -244,8 +261,7 @@ public class BulletScript : MonoBehaviour
         if(other.tag.Contains("Side") && other.tag != Side.ToString()) 
         {
             CharacterBase target = other.GetComponentInParent<CharacterBase>();
-            //Set damage to the hitting character
-            target.SetDamage(CharInfo.Damage, Elemental);
+            MakeDamage(target);
             //fire the Effect
             FireEffectParticles(transform.position, CharInfo.ClassType == CharacterClassType.Desert ? false : true);
         }

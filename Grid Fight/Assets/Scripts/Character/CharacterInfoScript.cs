@@ -14,7 +14,7 @@ public class CharacterInfoScript : MonoBehaviour
     public event Death DeathEvent;
 
     public Sprite CharacterIcon;
-
+    public BaseCharType BaseCharacterType;
     public CharacterClassType ClassType;
   //  public AnimationCurve Trajectory_Y;
   //  public AnimationCurve Trajectory_Z;

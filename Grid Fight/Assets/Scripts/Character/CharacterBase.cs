@@ -151,7 +151,7 @@ public class CharacterBase : MonoBehaviour
     //Load the special attack and fire it if the load is complete
     public IEnumerator LoadSpecialAttack()
     {
-        if (CharInfo.Stamina - CharInfo.StaminaCostSpecial1 >= 0)
+        if (CharInfo.Stamina - CharInfo.StaminaCostSpecial1 >= 0 && CharInfo.BaseCharacterType != BaseCharType.Minion)
         {
             isSpecialLoading = true;
             float timer = 0;
@@ -185,10 +185,7 @@ public class CharacterBase : MonoBehaviour
     //start the casting particlaes foe the attack
     public void CastAttackParticles(CharacterLevelType clt)
     {
-        //   GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.AttackParticle, ParticleTypes.Cast, clt == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, UMS.Side);
-        //   cast.GetComponent<DisableParticleScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
-
-        GameObject cast = ParticleManagerScript.Instance.FireParticlesInTransform(CharInfo.AttackParticle, ParticleTypes.Cast, clt == CharacterLevelType.Novice ? SpineAnim.FiringPoint : SpineAnim.SpecialFiringPoint, UMS.Side);
+        GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.AttackParticle, ParticleTypes.Cast, clt == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, UMS.Side);
         cast.GetComponent<DisableParticleScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
         LayerParticleSelection lps = cast.GetComponent<LayerParticleSelection>();
         if (lps != null)

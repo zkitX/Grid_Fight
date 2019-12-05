@@ -352,13 +352,18 @@ public class BattleManagerScript : MonoBehaviour
 
     public void Switch_StopLoadingSpecial(ControllerType controllerType)
     {
-        CurrentSelectedCharacters[controllerType].isSpecialLoading = false;
-
+        if (CurrentBattleState == BattleState.Battle)
+        {
+            CurrentSelectedCharacters[controllerType].isSpecialLoading = false;
+        }
     }
 
     public void Switch_LoadingSpecial(ControllerType controllerType)
     {
-        StartCoroutine(CurrentSelectedCharacters[controllerType].LoadSpecialAttack());
+        if(CurrentBattleState == BattleState.Battle)
+        {
+            StartCoroutine(CurrentSelectedCharacters[controllerType].LoadSpecialAttack());
+        }
     }
 
     #endregion
@@ -377,7 +382,10 @@ public class BattleManagerScript : MonoBehaviour
     #endregion
 
 
-
+    public CharacterBase GetCharInPos(Vector2Int pos)
+    {
+        return AllCharactersOnField.Where(r => r.IsOnField && r.UMS.Pos.Contains(pos)).FirstOrDefault();
+    }
 
    //Used to setup all the current char icons
     public void SetUICharacterSelectionIcons()

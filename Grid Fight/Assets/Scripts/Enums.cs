@@ -306,6 +306,15 @@ public enum PortalType
     Out
 }
 
+
+public enum BaseCharType
+{
+    Minion,
+    SecondaryCharacter,
+    MainCharacter,
+    Boss
+}
+
 public enum AttackParticleTypes
 {
     Stage04_Minion_Mountain,

@@ -86,7 +86,7 @@ public class SpineAnimationManager : MonoBehaviour
     //Method fired when an animation is complete
     private void SpineAnimationState_Complete(Spine.TrackEntry trackEntry)
     {
-        Debug.Log(skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name);
+      // Debug.Log(skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name);
         if (skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name == "<empty>")
         {
             return;
