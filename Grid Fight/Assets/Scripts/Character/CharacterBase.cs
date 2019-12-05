@@ -139,7 +139,6 @@ public class CharacterBase : MonoBehaviour
                 while (isSpecialLoading)
                 {
                     yield return new WaitForEndOfFrame();
-                    Debug.Log(0);
                     timer = 0;
                 }
 
@@ -422,8 +421,8 @@ public class CharacterBase : MonoBehaviour
             {
                 yield return new WaitForEndOfFrame();
             }
-            float newAdd = (Time.fixedDeltaTime / (AnimLength / CharInfo.BaseSpeed));
-            timer += (Time.fixedDeltaTime / (AnimLength / CharInfo.BaseSpeed));
+            float newAdd = (Time.fixedDeltaTime / (AnimLength / CharInfo.MovementSpeed));
+            timer += (Time.fixedDeltaTime / (AnimLength / CharInfo.MovementSpeed));
             speedTimer += newAdd * curve.Evaluate(timer + newAdd);
             transform.position = Vector3.Lerp(offset, nextPos, speedTimer);
 
@@ -610,7 +609,21 @@ public class CharacterBase : MonoBehaviour
         }
 
         SpineAnim.SetAnim(animState, false);
-        SpineAnim.SetAnimationSpeed(CharInfo.BaseSpeed);
+        if (animState == CharacterAnimationStateType.Atk || animState == CharacterAnimationStateType.Atk1)
+        {
+            SpineAnim.SetAnimationSpeed(CharInfo.AttackSpeed * CharInfo.BaseSpeed);
+        }
+        else if (animState == CharacterAnimationStateType.DashDown || animState == CharacterAnimationStateType.DashUp ||
+            animState == CharacterAnimationStateType.DashLeft ||
+            animState == CharacterAnimationStateType.DashRight)
+        {
+            SpineAnim.SetAnimationSpeed(CharInfo.MovementSpeed * CharInfo.BaseSpeed);
+        }
+        else
+        {
+            SpineAnim.SetAnimationSpeed(CharInfo.BaseSpeed);
+        }
+
     }
 
     public void SpineAnimatorsetup()
@@ -662,6 +675,7 @@ public class CharacterBase : MonoBehaviour
         }
         //Debug.Log(damage);
         CharInfo.Health -= damage;
+        SetAnimation(CharacterAnimationStateType.GettingHit);
     }
 
     public ElementalWeaknessType GetElementalMultiplier(List<ElementalResistenceClass> armorElelmntals, ElementalType elementalToCheck)

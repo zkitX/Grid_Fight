@@ -339,6 +339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterIcon: {fileID: 21300000, guid: a4b923570b948624b981763f6febbcad, type: 3}
+  BaseCharacterType: 0
   ClassType: 3
   _BulletSpeed: 5
   Damage: 10
@@ -360,13 +361,15 @@ MonoBehaviour:
   _Health: 100
   HealthBase: 100
   Regeneration: 1
+  _BaseSpeed: 1
+  _MovementSpeed: 1
+  _AttackSpeed: 1
   Stamina: 40
   StaminaBase: 40
   StaminaRegeneration: 1
   StaminaCostSpecial1: 0
   StaminaCostSpecial2: 0
   StaminaCostSpecial3: 0
-  testBaseSpeed: 1
 --- !u!114 &8153432632079385034
 MonoBehaviour:
   m_ObjectHideFlags: 0

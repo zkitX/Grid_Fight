@@ -18,7 +18,6 @@ public class SpineAnimationManager : MonoBehaviour
     public Transform SpecialFiringPoint;
     public CharacterAnimationStateType CurrentAnim;
     public float AnimationTransition = 0.1f;
-    private float BaseSpeed;
     public bool iseven = true;
 //initialize all the spine element
     private void SetupSpineAnim()
@@ -93,7 +92,6 @@ public class SpineAnimationManager : MonoBehaviour
         }
 
         CharacterAnimationStateType completedAnim = (CharacterAnimationStateType)System.Enum.Parse(typeof(CharacterAnimationStateType), skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name);
-
         if (completedAnim == CharacterAnimationStateType.Arriving)
         {
             CharOwner.IsOnField = true;
@@ -101,6 +99,7 @@ public class SpineAnimationManager : MonoBehaviour
         }
         if(completedAnim != CharacterAnimationStateType.Idle)
         {
+            SetAnimationSpeed(CharOwner.CharInfo.BaseSpeed);
             SpineAnimationState.AddEmptyAnimation(1,AnimationTransition,0);
             CurrentAnim = CharacterAnimationStateType.Idle;
         }
@@ -128,7 +127,6 @@ public class SpineAnimationManager : MonoBehaviour
 
     public void SetAnimationSpeed(float speed)
     {
-        BaseSpeed = speed;
         if(SpineAnimationState != null)
         {
             SpineAnimationState.Tracks.ForEach(r => {

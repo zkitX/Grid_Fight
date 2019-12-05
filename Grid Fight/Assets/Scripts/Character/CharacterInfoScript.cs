@@ -40,16 +40,15 @@ public class CharacterInfoScript : MonoBehaviour
     public float _Health;
     public float HealthBase;
     public float Regeneration;
-    private float _BaseSpeed = 1;
+    public float _BaseSpeed = 1;
+    public float _MovementSpeed = 1;
+    public float _AttackSpeed = 1;
     public float Stamina;
     public float StaminaBase;
     public float StaminaRegeneration;
     public float StaminaCostSpecial1;
     public float StaminaCostSpecial2;
     public float StaminaCostSpecial3;
-
-
-    public float testBaseSpeed = 1;
 
     public float HealthPerc
     {
@@ -71,7 +70,7 @@ public class CharacterInfoScript : MonoBehaviour
     {
         get
         {
-            return _AttackTimeRatio / BaseSpeed;
+            return _AttackTimeRatio;
         }
         set
         {
@@ -83,11 +82,35 @@ public class CharacterInfoScript : MonoBehaviour
     {
         get
         {
-            return _BulletSpeed / BaseSpeed;
+            return _BulletSpeed;
         }
         set
         {
             _BulletSpeed = value;
+        }
+    }
+
+    public float MovementSpeed
+    {
+        get
+        {
+            return _MovementSpeed * BaseSpeed;
+        }
+        set
+        {
+            _MovementSpeed = value;
+        }
+    }
+
+    public float AttackSpeed
+    {
+        get
+        {
+            return _AttackSpeed * BaseSpeed;
+        }
+        set
+        {
+            _AttackSpeed = value;
         }
     }
 
@@ -128,7 +151,6 @@ public class CharacterInfoScript : MonoBehaviour
 
     private void Update()
     {
-        BaseSpeed = testBaseSpeed;
         Stamina = (Stamina + StaminaRegeneration / 60) > StaminaBase ? StaminaBase : (Stamina + StaminaRegeneration / 60);
         Health = Health;
     }

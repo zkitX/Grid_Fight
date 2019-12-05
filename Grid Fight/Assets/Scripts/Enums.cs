@@ -284,7 +284,7 @@ public enum CharacterAnimationStateType
     Atk1,
     Buff,
     Debuff,
-    Gettinghit,
+    GettingHit,
     Defending,
     Paralized,
     Arriving,
