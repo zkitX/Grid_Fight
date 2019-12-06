@@ -43,7 +43,29 @@ public class SpineAnimationManager : MonoBehaviour
     {
         if (e.Data.Name.Contains("FireParticle"))
         {
-            
+            /* switch (CharOwner.NextAttackLevel)
+             {
+                 case CharacterLevelType.Novice:
+
+
+                     break;
+                 case CharacterLevelType.Defiant:
+                     CharOwner.CharInfo.StaminaStats.Stamina -= CharOwner.CharInfo.StaminaStats.Stamina_Cost_S_Atk01;
+
+                     break;
+                 case CharacterLevelType.Heroine:
+                     CharOwner.CharInfo.StaminaStats.Stamina -= CharOwner.CharInfo.StaminaStats.Stamina_Cost_S_Atk01;
+
+                     break;
+                 case CharacterLevelType.Godness:
+                     CharOwner.CharInfo.StaminaStats.Stamina -= CharOwner.CharInfo.StaminaStats.Stamina_Cost_S_Atk01;
+
+                     break;
+             }*/
+
+            CharOwner.CharInfo.StaminaStats.Stamina -= CharOwner.CharInfo.StaminaStats.Stamina_Cost_Atk;
+
+
             switch (CharOwner.CharInfo.ClassType)
             {
                 case CharacterClassType.Valley:

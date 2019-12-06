@@ -124,7 +124,7 @@ public class CharacterBase : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
             SetAnimation(CharacterAnimationStateType.Atk);
-            CastAttackParticles(NextAttackLevel);
+            
 
 
             float timer = 0;
@@ -169,7 +169,7 @@ public class CharacterBase : MonoBehaviour
                 {
                     yield return new WaitForEndOfFrame();
                 }
-                CharInfo.StaminaStats.Stamina -= CharInfo.StaminaStats.Stamina_Cost_S_Atk01;
+                
                 SpecialAttack(CharacterLevelType.Defiant);
             }
 
@@ -180,7 +180,6 @@ public class CharacterBase : MonoBehaviour
     public void SpecialAttack(CharacterLevelType attackLevel)
     {
         NextAttackLevel = attackLevel;
-        CastAttackParticles(attackLevel);
         SetAnimation(CharacterAnimationStateType.Atk1);
     }
 
@@ -616,7 +615,7 @@ public class CharacterBase : MonoBehaviour
 
         if (animState == CharacterAnimationStateType.Atk || animState == CharacterAnimationStateType.Atk1)
         {
-          
+            CastAttackParticles(NextAttackLevel);
             SpineAnim.SetAnimationSpeed(CharInfo.AttackSpeed * CharInfo.BaseSpeed);
         }
         else if (animState == CharacterAnimationStateType.DashDown ||
