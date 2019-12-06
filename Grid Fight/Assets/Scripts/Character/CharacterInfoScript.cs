@@ -60,9 +60,11 @@ public class CharacterInfoScript : MonoBehaviour
         public float Base;
         public float Regeneration;
         public float BaseStaminaRegeneration;
+        public float Stamina_Cost_Atk;
         public float Stamina_Cost_S_Atk01;
         public float Stamina_Cost_S_Atk02;
         public float Stamina_Cost_S_Atk03;
+        public float Stamina_Cost_S_Atk04;
         public float LevelMultiplier;
     }
 
