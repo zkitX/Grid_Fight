@@ -22,6 +22,7 @@ public class OrientRotation : MonoBehaviour
         //transform.RotateAround(currentPos,new Vector3(0,0,1),)
              transform.rotation = Quaternion.FromToRotation(new Vector3(0, 0, 1), previousPos - currentPos);
         var main = GetComponent<ParticleSystem>().main;
-        main.startRotationZMultiplier = Quaternion.ToEulerAngles( Quaternion.FromToRotation(new Vector3(0, 0, 1), previousPos - currentPos)).z ;
+        int Offset = transform.localScale.x < 0 ? 1 : 0;
+        main.startRotationZMultiplier = Quaternion.ToEulerAngles( Quaternion.FromToRotation(new Vector3(0, 0, 1), previousPos - currentPos)).z+180*(Offset) ;
     }
 }
