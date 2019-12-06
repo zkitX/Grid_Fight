@@ -39,7 +39,7 @@ public class UIPlayerSectionScript : MonoBehaviour
     public void SetupCharacter()
     {
         ClassText.text = currentSelectedCharacter.CharInfo.ClassType.ToString();
-        CharacterNameText.text = currentSelectedCharacter.CharInfo.CharacterName.ToString();
+        CharacterNameText.text = currentSelectedCharacter.CharInfo.CharacterID.ToString();
         CharacterIcon.sprite = currentSelectedCharacter.CharInfo.CharacterIcon;
         for (int i = 0; i < (int)currentSelectedCharacter.CharInfo.CharacterLevel - 1; i++)
         {

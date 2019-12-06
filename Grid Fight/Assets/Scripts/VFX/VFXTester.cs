@@ -76,14 +76,14 @@ public class VFXTester : MonoBehaviour
             currentCharacter.CurrentBattleTiles.Add(cbts);
         }
         currentCharacter.NextAttackLevel = (CharacterLevelType)Enum.Parse(typeof(CharacterLevelType), ParticleLevel.options[ParticleLevel.value].text);
-        currentCharacter.CharInfo.AttackParticle = (AttackParticleTypes)Enum.Parse(typeof(AttackParticleTypes), ParticleType.options[ParticleType.value].text);
-        currentCharacter.CharInfo.AttackTimeRatio = AttackSpeed.value;
+        currentCharacter.CharInfo.ParticleID = (AttackParticleTypes)Enum.Parse(typeof(AttackParticleTypes), ParticleType.options[ParticleType.value].text);
+        currentCharacter.CharInfo.AttackSpeedRatio = AttackSpeed.value;
         currentCharacter.UMS.Side = SideType.RightSide;
         currentCharacter.CharInfo.ClassType = (CharacterClassType)Enum.Parse(typeof(CharacterClassType), CharacterClass.options[CharacterClass.value].text);
         currentCharacter.CharInfo.BulletSpeed = SpeedOfBullets.value;
-        currentCharacter.CharInfo.AttackParticle = currentCharacter.CharInfo.AttackParticle;
+        currentCharacter.CharInfo.ParticleID = currentCharacter.CharInfo.ParticleID;
         currentCharacter.CurrentAttackTypeInfo = currentCharacter.AttackTypesInfo.Where(r => r.CharacterClass == currentCharacter.CharInfo.ClassType).First();
-        currentCharacter.CharInfo.ChildrenExplosionDelay = MountainDelay.value;
+        currentCharacter.CharInfo.DamageStats.ChildrenBulletDelay = MountainDelay.value;
     }
 }
 

@@ -394,14 +394,14 @@ public enum CharacterClassType
 
 public enum CharacterNameType
 {
-    Balistica,
-    LadyBush,
-    Jaguar,
-    Monkena,
-    GoldenGunGirl,
-    OldLady,
-    Zoila,
-    ElectroRider
+    Stage04_Minion_Mountain,
+    Stage04_Minion_Desert,
+    Stage04_Minion_Forest,
+    Stage04_Minion_Valley,
+    Stage04_Character_Valley,
+    Stage04_Character_Desert,
+    Stage04_Character_Mountain,
+    Stage04_Character_Forest
 }
 
 

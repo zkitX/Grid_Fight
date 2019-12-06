@@ -103,7 +103,7 @@ public class CharacterBase : MonoBehaviour
         {
             WaveManagerScript.Instance.CurrentNumberOfWaveChars--;
         }
-        CurrentCharIsDeadEvent(CharInfo.CharacterName, UMS.PlayerController);
+        CurrentCharIsDeadEvent(CharInfo.CharacterID, UMS.PlayerController);
     }
 
     #endregion
@@ -128,7 +128,7 @@ public class CharacterBase : MonoBehaviour
 
 
             float timer = 0;
-            while (timer <= CharInfo.AttackTimeRatio)
+            while (timer <= CharInfo.AttackSpeedRatio)
             {
                 yield return new WaitForFixedUpdate();
                 while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
@@ -150,7 +150,7 @@ public class CharacterBase : MonoBehaviour
     //Load the special attack and fire it if the load is complete
     public IEnumerator LoadSpecialAttack()
     {
-        if (CharInfo.Stamina - CharInfo.StaminaCostSpecial1 >= 0 && CharInfo.BaseCharacterType != BaseCharType.Minion)
+        if (CharInfo.StaminaStats.Stamina - CharInfo.StaminaStats.Stamina_Cost_S_Atk01 >= 0 && CharInfo.BaseCharacterType != BaseCharType.Minion)
         {
             isSpecialLoading = true;
             float timer = 0;
@@ -165,7 +165,7 @@ public class CharacterBase : MonoBehaviour
             }
             if (IsOnField)
             {
-                CharInfo.Stamina -= CharInfo.StaminaCostSpecial1;
+                CharInfo.StaminaStats.Stamina -= CharInfo.StaminaStats.Stamina_Cost_S_Atk01;
                 SpecialAttack(CharacterLevelType.Defiant);
             }
 
@@ -184,7 +184,7 @@ public class CharacterBase : MonoBehaviour
     //start the casting particlaes foe the attack
     public void CastAttackParticles(CharacterLevelType clt)
     {
-        GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.AttackParticle, ParticleTypes.Cast, clt == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, UMS.Side);
+        GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, ParticleTypes.Cast, clt == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, UMS.Side);
         cast.GetComponent<DisableParticleScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
         LayerParticleSelection lps = cast.GetComponent<LayerParticleSelection>();
         if (lps != null)
@@ -209,18 +209,15 @@ public class CharacterBase : MonoBehaviour
         bs.Trajectory_Y = bulletBehaviourInfo.Trajectory_Y;
         bs.Trajectory_Z = bulletBehaviourInfo.Trajectory_Z;
         bs.Facing = UMS.Facing;
-        bs.ChildrenExplosionDelay = CharInfo.ChildrenExplosionDelay;
+        bs.ChildrenExplosionDelay = CharInfo.DamageStats.ChildrenBulletDelay;
         bs.StartingTile = UMS.CurrentTilePos;
         bs.BulletGapStartingTile = bulletBehaviourInfo.BulletGapStartingTile;
-        if (CharInfo.ElementalsPower.Count > 0)
-        {
-            bs.Elemental = CharInfo.ElementalsPower.First();
-        }
+        bs.Elemental = CharInfo.DamageStats.CurrentElemental;
         bs.Side = UMS.Side;
         bs.VFXTestMode = VFXTestMode;
         bs.CharInfo = CharInfo;
         bs.gameObject.SetActive(true);
-        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharInfo.AttackParticle, ParticleTypes.Attack, bullet.transform, UMS.Side);
+        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharInfo.ParticleID, ParticleTypes.Attack, bullet.transform, UMS.Side);
         LayerParticleSelection lps = bs.PS.GetComponent<LayerParticleSelection>();
         if (lps != null)
         {
@@ -258,7 +255,7 @@ public class CharacterBase : MonoBehaviour
     public void CreateMachingunBullets()
     {
         Vector3 offsetRotation = transform.eulerAngles;
-        for (int i = 0; i < CharInfo.MultiBulletAttackNumberOfBullets; i++)
+        for (int i = 0; i < CharInfo.DamageStats.MultiBulletAttackNumberOfBullets; i++)
         {
             CreateBullet(CurrentAttackTypeInfo.BulletTrajectories[i]);
         }
@@ -462,7 +459,7 @@ public class CharacterBase : MonoBehaviour
             case BuffDebuffStatsType.Armor:
                 
                 CurrentBuffsDebuffsClass currentBuffDebuff = BuffsDebuffs.Where(r => r.ElementalResistence.Elemental == bdClass.ElementalResistence.Elemental).FirstOrDefault();
-                ElementalWeaknessType BaseWeakness = GetElementalMultiplier(CharInfo.ElementalsResistence, bdClass.ElementalResistence.Elemental);
+                ElementalWeaknessType BaseWeakness = GetElementalMultiplier(CharInfo.DamageStats.ElementalsResistence, bdClass.ElementalResistence.Elemental);
                 CurrentBuffsDebuffsClass newBuffDebuff = new CurrentBuffsDebuffsClass();
                 newBuffDebuff.ElementalResistence = bdClass.ElementalResistence;
                 newBuffDebuff.Duration = 100 + bdClass.Duration;
@@ -514,7 +511,7 @@ public class CharacterBase : MonoBehaviour
             case BuffDebuffStatsType.AttackType:
                 break;
             case BuffDebuffStatsType.ElementalPower:
-                CharInfo.ElementalsPower.Add(bdClass.ElementalPower);
+                CharInfo.DamageStats.CurrentElemental = bdClass.ElementalPower;
                 break;
         }
 
@@ -558,7 +555,7 @@ public class CharacterBase : MonoBehaviour
             case BuffDebuffStatsType.AttackType:
                 break;
             case BuffDebuffStatsType.ElementalPower:
-                CharInfo.ElementalsPower.Remove(bdClass.ElementalPower);
+                CharInfo.DamageStats.CurrentElemental = CharInfo.Elemental;
                 break;
         }
     }
@@ -607,10 +604,12 @@ public class CharacterBase : MonoBehaviour
         {
             SpineAnimatorsetup();
         }
-
-        SpineAnim.SetAnim(animState, false);
         if (animState == CharacterAnimationStateType.Atk || animState == CharacterAnimationStateType.Atk1)
         {
+            if (animState == CharacterAnimationStateType.Atk1 && SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1)
+            {
+                return;
+            }
             SpineAnim.SetAnimationSpeed(CharInfo.AttackSpeed * CharInfo.BaseSpeed);
         }
         else if (animState == CharacterAnimationStateType.DashDown || animState == CharacterAnimationStateType.DashUp ||
@@ -623,6 +622,9 @@ public class CharacterBase : MonoBehaviour
         {
             SpineAnim.SetAnimationSpeed(CharInfo.BaseSpeed);
         }
+
+
+        SpineAnim.SetAnim(animState, false);
 
     }
 
@@ -640,7 +642,7 @@ public class CharacterBase : MonoBehaviour
         ElementalWeaknessType ElaboratedWeakness;
         CurrentBuffsDebuffsClass buffDebuffWeakness = BuffsDebuffs.Where(r => r.ElementalResistence.Elemental == elemental).FirstOrDefault();
 
-        ElementalWeaknessType BaseWeakness = GetElementalMultiplier(CharInfo.ElementalsResistence, elemental);
+        ElementalWeaknessType BaseWeakness = GetElementalMultiplier(CharInfo.DamageStats.ElementalsResistence, elemental);
         if (buffDebuffWeakness == null)
         {
             ElaboratedWeakness = BaseWeakness;

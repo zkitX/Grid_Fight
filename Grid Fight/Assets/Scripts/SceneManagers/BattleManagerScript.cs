@@ -68,7 +68,7 @@ public class BattleManagerScript : MonoBehaviour
     public CharacterBase GetWaveCharacter(CharacterNameType characterName, Transform parent)
     {
         CharacterBase res;
-        res = WaveCharcters.Where(r => r.CharInfo.CharacterName == characterName && !r.IsOnField).FirstOrDefault();
+        res = WaveCharcters.Where(r => r.CharInfo.CharacterID == characterName && !r.IsOnField).FirstOrDefault();
         if(res == null)
         {
             res = CreateChar(new CharacterBaseInfoClass(characterName.ToString(), CharacterSelectionType.A,
@@ -83,7 +83,7 @@ public class BattleManagerScript : MonoBehaviour
     //Used to set the already created char on a random Position in the battlefield
     public void SetCharOnBoardOnRandomPos(ControllerType playerController, CharacterNameType cName)
     {
-        CharacterBase currentCharacter = AllCharactersOnField.Where(r=> r.UMS.PlayerController == playerController && r.CharInfo.CharacterName == cName).First();
+        CharacterBase currentCharacter = AllCharactersOnField.Where(r=> r.UMS.PlayerController == playerController && r.CharInfo.CharacterID == cName).First();
         BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(GridManagerScript.Instance.GetSideTypeFromControllerType(playerController), currentCharacter.UMS.Pos);
         currentCharacter.UMS.CurrentTilePos = bts.Pos;
         for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)
@@ -124,7 +124,7 @@ public class BattleManagerScript : MonoBehaviour
     //Used to set the already created char on a fixed Position in the battlefield
     public void SetCharOnBoardOnFixedPos(ControllerType playerController, CharacterNameType cName, Vector2Int pos)
     {
-        CharacterBase currentCharacter = AllCharactersOnField.Where(r => r.UMS.PlayerController == playerController && r.CharInfo.CharacterName == cName).First();
+        CharacterBase currentCharacter = AllCharactersOnField.Where(r => r.UMS.PlayerController == playerController && r.CharInfo.CharacterID == cName).First();
         BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(pos);
         currentCharacter.UMS.CurrentTilePos = bts.Pos;
         for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)
@@ -234,7 +234,7 @@ public class BattleManagerScript : MonoBehaviour
     //Used when the char is not in the battlefield to move it on the battlefield
     public void LoadingNewCharacterInRandomPosition(CharacterNameType cName,SideType side, ControllerType playerController)
     {
-        if(!AllCharactersOnField.Where(r=> r.UMS.Side == side && r.CharInfo.CharacterName == cName).First().IsOnField)
+        if(!AllCharactersOnField.Where(r=> r.UMS.Side == side && r.CharInfo.CharacterID == cName).First().IsOnField)
         {
             CharacterLoadingCo = CharacterLoadingInRandomPosition(cName, playerController);
             CurrentCharactersLoadingInfo.Add(new CharacterLoadingInfoClass(cName, playerController, CharacterLoadingCo));
@@ -242,7 +242,7 @@ public class BattleManagerScript : MonoBehaviour
         }
         else
         {
-            SelectCharacter(playerController, AllCharactersOnField.Where(r => r.UMS.Side == side && r.CharInfo.CharacterName == cName).First());
+            SelectCharacter(playerController, AllCharactersOnField.Where(r => r.UMS.Side == side && r.CharInfo.CharacterID == cName).First());
         }
     }
 
@@ -334,7 +334,7 @@ public class BattleManagerScript : MonoBehaviour
         CharacterBase cb = AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == characterSelection && r.UMS.Side == side).FirstOrDefault();
         if (cb != null)
         {
-            StopLoadingNewCharacter(cb.CharInfo.CharacterName, controllerType);
+            StopLoadingNewCharacter(cb.CharInfo.CharacterID, controllerType);
         }
 
     }
@@ -345,7 +345,7 @@ public class BattleManagerScript : MonoBehaviour
         CharacterBase cb = AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == characterSelection && r.UMS.Side == side).FirstOrDefault();
         if (cb != null)
         {
-            LoadingNewCharacterInRandomPosition(cb.CharInfo.CharacterName, side, controllerType);
+            LoadingNewCharacterInRandomPosition(cb.CharInfo.CharacterID, side, controllerType);
         }
 
     }

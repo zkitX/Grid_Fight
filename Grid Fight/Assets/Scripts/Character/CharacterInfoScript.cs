@@ -8,53 +8,105 @@ using UnityEngine;
 /// </summary>
 public class CharacterInfoScript : MonoBehaviour
 {
+
+
+    #region Events
     public delegate void BaseSpeedChanged(float baseSpeed);
     public event BaseSpeedChanged BaseSpeedChangedEvent;
     public delegate void Death();
     public event Death DeathEvent;
+    #endregion
 
+
+    public string Name;
     public Sprite CharacterIcon;
     public BaseCharType BaseCharacterType;
+    public CharacterNameType CharacterID;
+    public AttackParticleTypes ParticleID;
+    public ElementalType Elemental;
     public CharacterClassType ClassType;
-  //  public AnimationCurve Trajectory_Y;
-  //  public AnimationCurve Trajectory_Z;
-    public float _BulletSpeed = 5;
-   // public List<Vector2Int> BulletDistanceInTile = new List<Vector2Int>();
-    public float Damage = 10;
-    public int MultiBulletAttackNumberOfBullets = 3;
-    public float ChildrenExplosionDelay;
-    public string Name;
-    public CharacterSelectionType CharacterSelection;
     public CharacterLevelType CharacterLevel;
+
+    //  public AnimationCurve Trajectory_Y;
+    //  public AnimationCurve Trajectory_Z;
+    // public List<Vector2Int> BulletDistanceInTile = new List<Vector2Int>();
+    [HideInInspector]
+    public CharacterSelectionType CharacterSelection;
+    [HideInInspector]
     public ControllerType PlayerController;
-    public CharacterNameType CharacterName;
-    public AttackParticleTypes AttackParticle;
-    public ArmorClass Armor;
-    public WeaponClass Weapon;
-    public List<ElementalResistenceClass> ElementalsResistence = new List<ElementalResistenceClass>();
-    public List<ElementalType> ElementalsPower = new List<ElementalType>();
+
+    //  public ArmorClass Armor;
+    //   public WeaponClass Weapon;
+
     // public List<CharactersRelationshipClass> CharacterRelationships = new List<CharactersRelationshipClass>();
-    public float _AttackTimeRatio;
+
+    public HealthStastsClass HealthStats;
+
+    [System.Serializable]
+    public class HealthStastsClass
+    {
+        public float Health;
+        public float Base;
+        public float Regeneration;
+        public float BaseHealthRegeneration;
+        public float LevelMultiplier;
+    }
+
+    public StaminaStastsClass StaminaStats;
+    [System.Serializable]
+    public class StaminaStastsClass
+    {
+        public float Stamina;
+        public float Base;
+        public float Regeneration;
+        public float BaseStaminaRegeneration;
+        public float Stamina_Cost_S_Atk01;
+        public float Stamina_Cost_S_Atk02;
+        public float Stamina_Cost_S_Atk03;
+        public float LevelMultiplier;
+    }
+
+    public SpeedStastsClass SpeedStats;
+    [System.Serializable]
+    public class SpeedStastsClass
+    {
+        public float BaseSpeed = 1;
+        public float MovementSpeed = 1;
+        public float AttackSpeed = 1;
+        public float AttackSpeedRatio;
+        public float BulletSpeed = 5;
+        public float LevelMultiplier;
+    }
+
+
+    public DamageStastsClass DamageStats;
+    [System.Serializable]
+    public class DamageStastsClass
+    {
+        public float BaseDamage = 10;
+        [HideInInspector]
+        public float CurrentDamage = 10;
+        [HideInInspector]
+        public int MultiBulletAttackNumberOfBullets = 3;
+        public float ChildrenBulletDelay;
+        [HideInInspector]
+        public List<ElementalResistenceClass> ElementalsResistence = new List<ElementalResistenceClass>();
+        [HideInInspector]
+        public ElementalType CurrentElemental;
+        public float LevelMultiplier;
+    }
+
+    public float Special1LoadingDuration;
     public float Special2LoadingDuration;
     public float Special3LoadingDuration;
-    public float _Health;
-    public float HealthBase;
-    public float Regeneration;
-    public float _BaseSpeed = 1;
-    public float _MovementSpeed = 1;
-    public float _AttackSpeed = 1;
-    public float Stamina;
-    public float StaminaBase;
-    public float StaminaRegeneration;
-    public float StaminaCostSpecial1;
-    public float StaminaCostSpecial2;
-    public float StaminaCostSpecial3;
+
+
 
     public float HealthPerc
     {
         get
         {
-            return (Health * 100) / HealthBase;
+            return (Health * 100) / HealthStats.Base;
         }
     }
 
@@ -62,19 +114,19 @@ public class CharacterInfoScript : MonoBehaviour
     {
         get
         {
-            return (Stamina * 100) / StaminaBase;
+            return (StaminaStats.Stamina * 100) / StaminaStats.Base;
         }
     }
 
-    public float AttackTimeRatio
+    public float AttackSpeedRatio
     {
         get
         {
-            return _AttackTimeRatio;
+            return SpeedStats.AttackSpeedRatio;
         }
         set
         {
-            _AttackTimeRatio = value;
+            SpeedStats.AttackSpeedRatio = value;
         }
     }
 
@@ -82,11 +134,11 @@ public class CharacterInfoScript : MonoBehaviour
     {
         get
         {
-            return _BulletSpeed;
+            return SpeedStats.BulletSpeed;
         }
         set
         {
-            _BulletSpeed = value;
+            SpeedStats.BulletSpeed = value;
         }
     }
 
@@ -94,11 +146,11 @@ public class CharacterInfoScript : MonoBehaviour
     {
         get
         {
-            return _MovementSpeed * BaseSpeed;
+            return SpeedStats.MovementSpeed * BaseSpeed;
         }
         set
         {
-            _MovementSpeed = value;
+            SpeedStats.MovementSpeed = value;
         }
     }
 
@@ -106,11 +158,11 @@ public class CharacterInfoScript : MonoBehaviour
     {
         get
         {
-            return _AttackSpeed * BaseSpeed;
+            return SpeedStats.AttackSpeed * BaseSpeed;
         }
         set
         {
-            _AttackSpeed = value;
+            SpeedStats.AttackSpeed = value;
         }
     }
 
@@ -118,7 +170,7 @@ public class CharacterInfoScript : MonoBehaviour
     {
         get
         {
-            return _BaseSpeed;
+            return SpeedStats.BaseSpeed;
         }
         set
         {
@@ -126,7 +178,7 @@ public class CharacterInfoScript : MonoBehaviour
             {
                 BaseSpeedChangedEvent(value);
             }
-            _BaseSpeed = value;
+            SpeedStats.BaseSpeed = value;
         }
     }
 
@@ -134,12 +186,12 @@ public class CharacterInfoScript : MonoBehaviour
     {
         get
         {
-            return _Health;
+            return HealthStats.Health;
         }
         set
         {
-            _Health = value;
-            if (_Health <= 0)
+            HealthStats.Health = value;
+            if (HealthStats.Health <= 0)
             {
                 if (DeathEvent != null)
                 {
@@ -149,9 +201,9 @@ public class CharacterInfoScript : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        Stamina = (Stamina + StaminaRegeneration / 60) > StaminaBase ? StaminaBase : (Stamina + StaminaRegeneration / 60);
+        StaminaStats.Stamina = (StaminaStats.Stamina + StaminaStats.Regeneration / 50) > StaminaStats.Base ? StaminaStats.Base : (StaminaStats.Stamina + StaminaStats.Regeneration / 50);
         Health = Health;
     }
 }

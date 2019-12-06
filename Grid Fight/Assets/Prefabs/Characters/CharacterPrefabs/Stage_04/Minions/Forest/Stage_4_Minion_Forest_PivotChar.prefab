@@ -107,7 +107,6 @@ GameObject:
   - component: {fileID: 5832199333681902676}
   - component: {fileID: 5832199333681902667}
   - component: {fileID: 5832199333681902666}
-  - component: {fileID: 5832199333681902665}
   m_Layer: 0
   m_Name: Spine GameObject (GridFight-Stage1-Minion3-JaguarVivern-20190912-V4)
   m_TagString: Untagged
@@ -338,38 +337,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: 
   CharacterIcon: {fileID: 21300000, guid: 36ea2693c0daafd448326ccdcd319fb7, type: 3}
   BaseCharacterType: 0
+  CharacterID: 2
+  ParticleID: 1
+  Elemental: 0
   ClassType: 2
-  _BulletSpeed: 5
-  Damage: 10
-  MultiBulletAttackNumberOfBullets: 3
-  ChildrenExplosionDelay: 0
-  Name: 
-  CharacterSelection: 0
   CharacterLevel: 0
+  CharacterSelection: 0
   PlayerController: 0
-  CharacterName: 2
-  AttackParticle: 1
-  ElementalsResistence:
-  - Elemental: 0
-    _ElementalWeakness: 0
-  ElementalsPower: 00000000
-  _AttackTimeRatio: 5
+  HealthStats:
+    Health: 100
+    Base: 100
+    Regeneration: 1
+    BaseHealthRegeneration: 1
+    LevelMultiplier: 0
+  StaminaStats:
+    Stamina: 40
+    Base: 40
+    Regeneration: 1
+    BaseStaminaRegeneration: 1
+    Stamina_Cost_S_Atk01: 1
+    Stamina_Cost_S_Atk02: 1
+    Stamina_Cost_S_Atk03: 1
+    LevelMultiplier: 0
+  SpeedStats:
+    BaseSpeed: 1
+    MovementSpeed: 1
+    AttackSpeed: 1
+    AttackSpeedRatio: 5
+    BulletSpeed: 5
+    LevelMultiplier: 0
+  DamageStats:
+    BaseDamage: 10
+    CurrentDamage: 10
+    MultiBulletAttackNumberOfBullets: 3
+    ChildrenBulletDelay: 0.5
+    ElementalsResistence: []
+    CurrentElemental: 0
+    LevelMultiplier: 0
+  Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
-  _Health: 100
-  HealthBase: 100
-  Regeneration: 1
-  _BaseSpeed: 1
-  _MovementSpeed: 1
-  _AttackSpeed: 1
-  Stamina: 40
-  StaminaBase: 40
-  StaminaRegeneration: 1
-  StaminaCostSpecial1: 0
-  StaminaCostSpecial2: 0
-  StaminaCostSpecial3: 0
 --- !u!54 &5832199333681902667
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -399,17 +409,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 1.5, z: 0}
   m_Center: {x: -0.26, y: 0.67, z: 0}
---- !u!114 &5832199333681902665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5832199333681902671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f726fb798ad621458c431cb9966d91d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boneRoot: {fileID: 0}
-  skeletonRenderer: {fileID: 5832199333681902678}

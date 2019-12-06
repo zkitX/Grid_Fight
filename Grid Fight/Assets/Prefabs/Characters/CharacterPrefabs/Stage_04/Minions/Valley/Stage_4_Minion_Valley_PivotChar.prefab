@@ -105,7 +105,6 @@ GameObject:
   - component: {fileID: 4468372656787337226}
   - component: {fileID: 1908228735091625009}
   - component: {fileID: 699255908732162135}
-  - component: {fileID: 1060525533399441017}
   - component: {fileID: 2743517199768158886}
   - component: {fileID: 5489085825387383571}
   m_Layer: 0
@@ -338,52 +337,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: 
   CharacterIcon: {fileID: 21300000, guid: f7007247efa4ba4429b39ff1ec58819d, type: 3}
   BaseCharacterType: 0
+  CharacterID: 3
+  ParticleID: 3
+  Elemental: 0
   ClassType: 0
-  _BulletSpeed: 5
-  Damage: 10
-  MultiBulletAttackNumberOfBullets: 3
-  ChildrenExplosionDelay: 0
-  Name: 
-  CharacterSelection: 0
   CharacterLevel: 0
+  CharacterSelection: 0
   PlayerController: 0
-  CharacterName: 3
-  AttackParticle: 3
-  ElementalsResistence:
-  - Elemental: 0
-    _ElementalWeakness: 0
-  ElementalsPower: 00000000
-  _AttackTimeRatio: 5
+  HealthStats:
+    Health: 100
+    Base: 100
+    Regeneration: 1
+    BaseHealthRegeneration: 1
+    LevelMultiplier: 0
+  StaminaStats:
+    Stamina: 40
+    Base: 40
+    Regeneration: 1
+    BaseStaminaRegeneration: 1
+    Stamina_Cost_S_Atk01: 1
+    Stamina_Cost_S_Atk02: 1
+    Stamina_Cost_S_Atk03: 1
+    LevelMultiplier: 0
+  SpeedStats:
+    BaseSpeed: 1
+    MovementSpeed: 1
+    AttackSpeed: 1
+    AttackSpeedRatio: 5
+    BulletSpeed: 5
+    LevelMultiplier: 0
+  DamageStats:
+    BaseDamage: 10
+    CurrentDamage: 10
+    MultiBulletAttackNumberOfBullets: 3
+    ChildrenBulletDelay: 0.5
+    ElementalsResistence: []
+    CurrentElemental: 0
+    LevelMultiplier: 0
+  Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
-  _Health: 100
-  HealthBase: 100
-  Regeneration: 1
-  _BaseSpeed: 1
-  _MovementSpeed: 1
-  _AttackSpeed: 1
-  Stamina: 40
-  StaminaBase: 40
-  StaminaRegeneration: 1
-  StaminaCostSpecial1: 0
-  StaminaCostSpecial2: 0
-  StaminaCostSpecial3: 0
---- !u!114 &1060525533399441017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7631020346914969949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f726fb798ad621458c431cb9966d91d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boneRoot: {fileID: 0}
-  skeletonRenderer: {fileID: 4468372656787337226}
 --- !u!54 &2743517199768158886
 Rigidbody:
   m_ObjectHideFlags: 0

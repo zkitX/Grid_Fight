@@ -209,7 +209,7 @@ public class BulletScript : MonoBehaviour
         if (target != null)
         {
             //Set damage to the hitting character
-            target.SetDamage(CharInfo.Damage, Elemental);
+            target.SetDamage(CharInfo.DamageStats.CurrentDamage, Elemental);
         }
     }
 
@@ -272,7 +272,7 @@ public class BulletScript : MonoBehaviour
         if(!Dead)
         {
             //fire the Effect
-            GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.AttackParticle, ParticleTypes.Effect, pos, Side);
+            GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, ParticleTypes.Effect, pos, Side);
             LayerParticleSelection lps = effect.GetComponent<LayerParticleSelection>();
             if (lps != null)
             {
