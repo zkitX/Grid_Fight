@@ -89,23 +89,29 @@ public class BulletScript : MonoBehaviour
         if (CharInfo.ClassType != CharacterClassType.Mountain)
         {
             int startingYTile = Facing == FacingType.Left ? StartingTile.y - BulletGapStartingTile.y : StartingTile.y + BulletGapStartingTile.y;
-            foreach (BattleTileScript item in GridManagerScript.Instance.GetBattleTileInARowToDestination(DestinationTile, Facing, startingYTile))
-            {
-                GameObject go = UsedTargets.Where(r => !r.gameObject.activeInHierarchy).FirstOrDefault();
-                if(go == null)
-                {
-                    go = Instantiate(TargetIndicator, item.transform.position, Quaternion.identity);
-                    go.GetComponent<BattleTileTargetScript>().StartTarget(
-                        (Vector3.Distance(transform.position, item.transform.position) * CharInfo.BulletSpeed) /
-                        Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position));
-                }
-                else
-                {
-                    go.transform.position = GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position;
-                    go.SetActive(true);
-                }
-                UsedTargets.Add(go);
-            }
+            /*  foreach (BattleTileScript item in GridManagerScript.Instance.GetBattleTileInARowToDestination(DestinationTile, Facing, startingYTile))
+              {
+                  GameObject go = UsedTargets.Where(r => !r.gameObject.activeInHierarchy).FirstOrDefault();
+                  if(go == null)
+                  {
+                      go = Instantiate(TargetIndicator, item.transform.position, Quaternion.identity);
+                      go.GetComponent<BattleTileTargetScript>().StartTarget(
+                          (Vector3.Distance(transform.position, item.transform.position) * CharInfo.BulletSpeed) /
+                          Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position));
+                  }
+                  else
+                  {
+                      go.transform.position = GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position;
+                      go.SetActive(true);
+                  }
+                  UsedTargets.Add(go);
+              }*/
+
+            GameObject go;
+            go = Instantiate(TargetIndicator, GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position, Quaternion.identity);
+            go.GetComponent<BattleTileTargetScript>().StartTarget(
+                (Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position) * CharInfo.BulletSpeed) /
+                Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position));
         }
         else if (CharInfo.ClassType == CharacterClassType.Mountain)
         {

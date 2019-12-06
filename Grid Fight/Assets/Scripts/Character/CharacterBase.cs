@@ -165,6 +165,10 @@ public class CharacterBase : MonoBehaviour
             }
             if (IsOnField)
             {
+                while (isMoving)
+                {
+                    yield return new WaitForEndOfFrame();
+                }
                 CharInfo.StaminaStats.Stamina -= CharInfo.StaminaStats.Stamina_Cost_S_Atk01;
                 SpecialAttack(CharacterLevelType.Defiant);
             }
@@ -272,7 +276,7 @@ public class CharacterBase : MonoBehaviour
     //used to set the movement of the character on a determinated direction
     public void MoveCharOnDirection(InputDirection nextDir)
     {
-        if (CharInfo.Health > 0 && !isMoving && IsOnField)
+        if (CharInfo.Health > 0 && !isMoving && IsOnField && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1)
         {
             List<BattleTileScript> prevBattleTile = CurrentBattleTiles;
             List<BattleTileScript>  CurrentBattleTilesToCheck = new List<BattleTileScript>();
@@ -604,15 +608,19 @@ public class CharacterBase : MonoBehaviour
         {
             SpineAnimatorsetup();
         }
+
+        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1)
+        {
+            return;
+        }
+
         if (animState == CharacterAnimationStateType.Atk || animState == CharacterAnimationStateType.Atk1)
         {
-            if (animState == CharacterAnimationStateType.Atk1 && SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1)
-            {
-                return;
-            }
+          
             SpineAnim.SetAnimationSpeed(CharInfo.AttackSpeed * CharInfo.BaseSpeed);
         }
-        else if (animState == CharacterAnimationStateType.DashDown || animState == CharacterAnimationStateType.DashUp ||
+        else if (animState == CharacterAnimationStateType.DashDown ||
+            animState == CharacterAnimationStateType.DashUp ||
             animState == CharacterAnimationStateType.DashLeft ||
             animState == CharacterAnimationStateType.DashRight)
         {
@@ -703,7 +711,7 @@ public class CharacterBase : MonoBehaviour
             }
         }
 
-        return (ElementalWeaknessType)(resVal / armorElelmntals.Count);
+        return (ElementalWeaknessType)(resVal);
     }
 
     public IEnumerator UsePortal(PortalInfoClass outPortal)
