@@ -348,35 +348,37 @@ MonoBehaviour:
   CharacterSelection: 0
   PlayerController: 0
   HealthStats:
-    Health: 100
-    Base: 100
-    Regeneration: 1
-    BaseHealthRegeneration: 1
-    LevelMultiplier: 0
+    Health: 50
+    Base: 50
+    Regeneration: 0.1
+    BaseHealthRegeneration: 0.1
+    LevelMultiplier: 30
   StaminaStats:
-    Stamina: 40
-    Base: 40
+    Stamina: 30
+    Base: 30
     Regeneration: 1
     BaseStaminaRegeneration: 1
-    Stamina_Cost_S_Atk01: 1
-    Stamina_Cost_S_Atk02: 1
-    Stamina_Cost_S_Atk03: 1
-    LevelMultiplier: 0
+    Stamina_Cost_Atk: 0
+    Stamina_Cost_S_Atk01: 3
+    Stamina_Cost_S_Atk02: 15
+    Stamina_Cost_S_Atk03: 30
+    Stamina_Cost_S_Atk04: 42
+    LevelMultiplier: 40
   SpeedStats:
     BaseSpeed: 1
-    MovementSpeed: 1
-    AttackSpeed: 1
-    AttackSpeedRatio: 5
-    BulletSpeed: 5
-    LevelMultiplier: 0
+    MovementSpeed: 2
+    AttackSpeed: 2
+    AttackSpeedRatio: 1
+    BulletSpeed: 2
+    LevelMultiplier: 20
   DamageStats:
-    BaseDamage: 10
+    BaseDamage: 2
     CurrentDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []
     CurrentElemental: 0
-    LevelMultiplier: 0
+    LevelMultiplier: 10
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
@@ -407,5 +409,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.7, z: 1}
-  m_Center: {x: 0, y: 0.82, z: 0}
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
+  m_Center: {x: 0, y: 0.45, z: 0}
