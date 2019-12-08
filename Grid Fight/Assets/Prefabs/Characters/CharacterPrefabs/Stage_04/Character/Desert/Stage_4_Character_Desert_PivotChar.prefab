@@ -307,46 +307,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Rose
   CharacterIcon: {fileID: 21300000, guid: 00f116689177d5c4c83e893b97cd7cc7, type: 3}
   BaseCharacterType: 1
   CharacterID: 5
   ParticleID: 5
-  Elemental: 0
+  Elemental: 4
   ClassType: 3
   CharacterLevel: 0
-  CharacterSelection: 0
+  CharacterSelection: 1
   PlayerController: 0
   HealthStats:
-    Health: 100
-    Base: 100
-    Regeneration: 1
-    BaseHealthRegeneration: 1
-    LevelMultiplier: 0
+    Health: 70
+    Base: 70
+    Regeneration: 0.2
+    BaseHealthRegeneration: 0.2
+    LevelMultiplier: 20
   StaminaStats:
-    Stamina: 40
-    Base: 40
-    Regeneration: 1
-    BaseStaminaRegeneration: 1
-    Stamina_Cost_S_Atk01: 1
-    Stamina_Cost_S_Atk02: 1
-    Stamina_Cost_S_Atk03: 1
-    LevelMultiplier: 0
+    Stamina: 30
+    Base: 30
+    Regeneration: 1.5
+    BaseStaminaRegeneration: 1.5
+    Stamina_Cost_Atk: 0
+    Stamina_Cost_S_Atk01: 3
+    Stamina_Cost_S_Atk02: 15
+    Stamina_Cost_S_Atk03: 30
+    Stamina_Cost_S_Atk04: 42
+    LevelMultiplier: 40
   SpeedStats:
     BaseSpeed: 1
-    MovementSpeed: 1
-    AttackSpeed: 1
-    AttackSpeedRatio: 5
-    BulletSpeed: 5
-    LevelMultiplier: 0
+    MovementSpeed: 1.4
+    AttackSpeed: 1.4
+    AttackSpeedRatio: 3
+    BulletSpeed: 2.5
+    LevelMultiplier: 5
   DamageStats:
-    BaseDamage: 10
+    BaseDamage: 1.2
     CurrentDamage: 10
     MultiBulletAttackNumberOfBullets: 3
-    ChildrenBulletDelay: 0.5
+    ChildrenBulletDelay: 0
     ElementalsResistence: []
     CurrentElemental: 0
-    LevelMultiplier: 0
+    LevelMultiplier: 10
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
@@ -377,8 +379,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.7, z: 1}
-  m_Center: {x: 0, y: 0.82, z: 0}
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
+  m_Center: {x: 0, y: 0.45, z: 0}
 --- !u!1 &6024442639177701080
 GameObject:
   m_ObjectHideFlags: 0
