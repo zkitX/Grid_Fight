@@ -55,6 +55,10 @@ public class CharacterBase : MonoBehaviour
     public AttackTypesInfoClass CurrentAttackTypeInfo;
     public bool VFXTestMode = false;
 
+    public bool isAttackStarted = false;
+    public bool isAttackCompletetd = false;
+
+
     #region Unity Life Cycles
     private void Start()
     {
@@ -116,16 +120,30 @@ public class CharacterBase : MonoBehaviour
         {
             while (!IsOnField && !VFXTestMode)
             {
-                yield return new WaitForEndOfFrame();
+                yield return null;
             }
 
             while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || isMoving || isSpecialLoading))
             {
-                yield return new WaitForEndOfFrame();
+                yield return null;
             }
-            SetAnimation(CharacterAnimationStateType.Atk);
-            
 
+            isAttackStarted = false;
+            isAttackCompletetd = false;
+
+            while (!isAttackCompletetd)
+            {
+                if (!isAttackStarted && !isMoving)
+                {
+                    isAttackStarted = true;
+                    SetAnimation(CharacterAnimationStateType.Atk);
+
+                }
+                yield return null;
+            }
+
+
+            
 
             float timer = 0;
             while (timer <= CharInfo.AttackSpeedRatio)
@@ -172,7 +190,6 @@ public class CharacterBase : MonoBehaviour
                 
                 SpecialAttack(CharacterLevelType.Defiant);
             }
-
         }
     }
 
@@ -185,7 +202,7 @@ public class CharacterBase : MonoBehaviour
 
 
     //start the casting particlaes foe the attack
-    public void CastAttackParticles(CharacterLevelType clt)
+    public IEnumerator CastAttackParticles(CharacterLevelType clt)
     {
         GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, ParticleTypes.Cast, clt == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, UMS.Side);
         cast.GetComponent<DisableParticleScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
@@ -194,7 +211,16 @@ public class CharacterBase : MonoBehaviour
         {
             lps.Shot = clt;
             lps.SelectShotLevel();
+        }
 
+        while (!isAttackCompletetd)
+        {
+            if (!isAttackStarted)
+            {
+                cast.GetComponentsInChildren<DisableParticleScript>().ToList().ForEach(r => r.ResetParticle());
+                isAttackCompletetd = true;
+            }
+            yield return null;
         }
     }
 
@@ -613,9 +639,14 @@ public class CharacterBase : MonoBehaviour
             return;
         }
 
+        if (animState != CharacterAnimationStateType.Atk)
+        {
+            isAttackStarted = false;
+        }
+
         if (animState == CharacterAnimationStateType.Atk || animState == CharacterAnimationStateType.Atk1)
         {
-            CastAttackParticles(NextAttackLevel);
+            StartCoroutine(CastAttackParticles(NextAttackLevel));
             SpineAnim.SetAnimationSpeed(CharInfo.AttackSpeed * CharInfo.BaseSpeed);
         }
         else if (animState == CharacterAnimationStateType.DashDown ||

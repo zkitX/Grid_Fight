@@ -83,6 +83,10 @@ public class BattleManagerScript : MonoBehaviour
     //Used to set the already created char on a random Position in the battlefield
     public void SetCharOnBoardOnRandomPos(ControllerType playerController, CharacterNameType cName)
     {
+        if (PlayablesCharOnScene.Where(r => r.PlayerController == playerController && r.CName == cName).First().isUsed)
+        {
+            return;
+        }
         CharacterBase currentCharacter = AllCharactersOnField.Where(r=> r.UMS.PlayerController == playerController && r.CharInfo.CharacterID == cName).First();
         BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(GridManagerScript.Instance.GetSideTypeFromControllerType(playerController), currentCharacter.UMS.Pos);
         currentCharacter.UMS.CurrentTilePos = bts.Pos;
@@ -116,7 +120,7 @@ public class BattleManagerScript : MonoBehaviour
             UIBattleManager.Instance.isPlayerPlayingP2 = true;
 
         }
-        PlayablesCharOnScene.Where(r => r.PlayerController == playerController && r.CName == cName).First().isUsed = true; ;
+        PlayablesCharOnScene.Where(r => r.PlayerController == playerController && r.CName == cName).First().isUsed = true; 
     }
     
    
@@ -202,6 +206,7 @@ public class BattleManagerScript : MonoBehaviour
             currentCharacter.CharInfo.CharacterSelection == CharacterSelectionType.Left ? 180 : 0);
         currentCharacter.CharInfo.CharacterSelection = charInfo.CharacterSelection;
         currentCharacter.CurrentCharIsDeadEvent += CurrentCharacter_CurrentCharIsDeadEvent;
+        UIBattleFieldManager.Instance.SetUIBattleField(currentCharacter);
         return currentCharacter;
     }
 

@@ -43,6 +43,8 @@ public class SpineAnimationManager : MonoBehaviour
     {
         if (e.Data.Name.Contains("FireParticle"))
         {
+            CharOwner.isAttackCompletetd = true;
+
             /* switch (CharOwner.NextAttackLevel)
              {
                  case CharacterLevelType.Novice:
