@@ -176,8 +176,12 @@ public class BulletScript : MonoBehaviour
     public IEnumerator ChildExplosion(List<Vector2Int> bet)
     {
         float timer = 0;
-        CharacterBase target = target = BattleManagerScript.Instance.GetCharInPos(DestinationTile);
-        MakeDamage(target);
+        CharacterBase target;
+        if (!VFXTestMode)
+        {
+            target = target = BattleManagerScript.Instance.GetCharInPos(DestinationTile);
+            MakeDamage(target);
+        }
         while (timer < ChildrenExplosionDelay)
         {
             timer += Time.fixedDeltaTime;
@@ -192,8 +196,11 @@ public class BulletScript : MonoBehaviour
         {
             if (GridManagerScript.Instance.isPosOnField(DestinationTile + bet[i]))
             {
-                target = BattleManagerScript.Instance.GetCharInPos(DestinationTile + bet[i]);
-                MakeDamage(target);
+                if (!VFXTestMode)
+                {
+                    target = BattleManagerScript.Instance.GetCharInPos(DestinationTile + bet[i]);
+                    MakeDamage(target);
+                }
                 FireEffectParticles(GridManagerScript.Instance.GetBattleTile(DestinationTile + bet[i]).transform.position, i == bet.Count - 1 ? true : false);
             }
             else
