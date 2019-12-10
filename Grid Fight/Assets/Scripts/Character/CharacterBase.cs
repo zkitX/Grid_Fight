@@ -56,6 +56,7 @@ public class CharacterBase : MonoBehaviour
     public bool VFXTestMode = false;
 
     public bool isAttackStarted = false;
+    public bool isAttackGoing = false;
     public bool isAttackCompletetd = false;
 
 
@@ -130,20 +131,24 @@ public class CharacterBase : MonoBehaviour
 
             isAttackStarted = false;
             isAttackCompletetd = false;
-
+            isAttackGoing = false;
             while (!isAttackCompletetd)
             {
-                if (!isAttackStarted && !isMoving)
+                if (!isAttackStarted)
                 {
                     isAttackStarted = true;
+                    isAttackGoing = true;
                     SetAnimation(CharacterAnimationStateType.Atk);
+                }
 
+                if (isAttackStarted && !isAttackGoing && !isMoving)
+                {
+                    isAttackGoing = true;
+                    SetAnimation(CharacterAnimationStateType.Atk);
                 }
                 yield return null;
             }
 
-
-            
 
             float timer = 0;
             while (timer <= CharInfo.AttackSpeedRatio)
@@ -210,18 +215,20 @@ public class CharacterBase : MonoBehaviour
         if (lps != null)
         {
             lps.Shot = clt;
+            if (clt > CharacterLevelType.Novice)
+            {
+                CharInfo.StaminaStats.Stamina -= CharInfo.StaminaStats.Stamina_Cost_S_Atk01;
+            }
             lps.SelectShotLevel();
         }
-
-        while (!isAttackCompletetd)
-        {
-            if (!isAttackStarted)
-            {
-                cast.GetComponentsInChildren<DisableParticleScript>().ToList().ForEach(r => r.ResetParticle());
-                isAttackCompletetd = true;
-            }
-            yield return null;
-        }
+         while (!isAttackCompletetd)
+         {
+             if (!isAttackGoing)
+             {
+                 cast.GetComponentsInChildren<DisableParticleScript>().ToList().ForEach(r => r.ResetParticle());
+             }
+             yield return null;
+         }
     }
 
     //Create and set up the basic info for the bullet
@@ -639,9 +646,9 @@ public class CharacterBase : MonoBehaviour
             return;
         }
 
-        if (animState != CharacterAnimationStateType.Atk)
+        if (animState != CharacterAnimationStateType.Atk && SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk)
         {
-            isAttackStarted = false;
+            isAttackGoing = false;
         }
 
         if (animState == CharacterAnimationStateType.Atk || animState == CharacterAnimationStateType.Atk1)

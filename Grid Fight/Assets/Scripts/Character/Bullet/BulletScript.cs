@@ -221,8 +221,11 @@ public class BulletScript : MonoBehaviour
     {
         if (target != null)
         {
-            //Set damage to the hitting character
-            target.SetDamage(CharInfo.DamageStats.CurrentDamage, Elemental);
+            if (target.tag.Contains("Side") && target.tag != Side.ToString())
+            {
+                //Set damage to the hitting character
+                target.SetDamage(CharInfo.DamageStats.CurrentDamage, Elemental);
+            }
         }
     }
 
