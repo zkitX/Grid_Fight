@@ -161,6 +161,13 @@ public enum UnitBehaviourType
     NPC
 }
 
+public enum WalkingSideType
+{
+    LeftSide,
+    RightSide,
+    Both
+}
+
 public enum BattleState
 {
     Initialization,
@@ -339,8 +346,7 @@ public enum ParticleTypes
 public enum SideType
 {
     LeftSide,
-    RightSide,
-    Both
+    RightSide
 }
 
 

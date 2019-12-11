@@ -54,7 +54,7 @@ public class WaveManagerScript : MonoBehaviour
 
     public void SetCharInRandomPos(CharacterBase currentCharacter)
     {
-        BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(GridManagerScript.Instance.GetSideTypeFromControllerType(ControllerType.Enemy), currentCharacter.UMS.Pos);
+        BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(currentCharacter.UMS.WalkingSide, currentCharacter.UMS.Pos);
         currentCharacter.UMS.CurrentTilePos = bts.Pos;
         for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)
         {

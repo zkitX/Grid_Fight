@@ -164,7 +164,7 @@ public class InputController : MonoBehaviour
     public static InputController Instance; //Singleton instance
 
     public int PlayersNumber;
-    private List<Player> players = new List<Player>(); // The Rewired Player
+    public List<Player> players = new List<Player>(); // The Rewired Player
     public Vector2 LeftJoystic, RightJoystic; //Joysticks movement 
     void Awake()
     {
@@ -175,11 +175,6 @@ public class InputController : MonoBehaviour
             players.Add(ReInput.players.GetPlayer(i));
         }
         
-    }
-
-    private void Start()
-    {
-        //Notification.notificationMessageReceived += Notification_notificationMessageReceived;
     }
 
     private void Update()

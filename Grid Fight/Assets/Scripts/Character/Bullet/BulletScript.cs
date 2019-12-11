@@ -15,7 +15,7 @@ public class BulletScript : MonoBehaviour
     public SideType Side;
     public FacingType Facing;
     public ElementalType Elemental;
-	public ControllerType ControllerT;
+    public List<ControllerType> PlayerController = new List<ControllerType>();
     public bool Dead = false;
     public GameObject PS;
     public GameObject TargetIndicator;
@@ -124,7 +124,7 @@ public class BulletScript : MonoBehaviour
             {
                 if(GridManagerScript.Instance.isPosOnField(DestinationTile + item))
                 {
-                    bts = GridManagerScript.Instance.GetBattleTile(DestinationTile + item, Facing == FacingType.Left ? SideType.LeftSide : SideType.RightSide);
+                    bts = GridManagerScript.Instance.GetBattleTile(DestinationTile + item, Facing == FacingType.Left ? WalkingSideType.LeftSide : WalkingSideType.RightSide);
                     if(bts != null)
                     {
                         GameObject go = Instantiate(TargetIndicator, bts.transform.position, Quaternion.identity);

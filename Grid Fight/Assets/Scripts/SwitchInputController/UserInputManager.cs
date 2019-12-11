@@ -172,19 +172,19 @@ public class UserInputManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            Instance_ButtonDownDownEvent(BattleInfoManagerScript.Instance.MatchInfoType == MatchType.PvP ? 1 : 4);
+            Instance_ButtonDownDownEvent(1);
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            Instance_ButtonUpDownEvent(BattleInfoManagerScript.Instance.MatchInfoType == MatchType.PvP ? 1 : 4);
+            Instance_ButtonUpDownEvent(1);
         }
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            Instance_ButtonRightDownEvent(BattleInfoManagerScript.Instance.MatchInfoType == MatchType.PvP ? 1 : 4);
+            Instance_ButtonRightDownEvent(1);
         }
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
-            Instance_ButtonLeftDownEvent(BattleInfoManagerScript.Instance.MatchInfoType == MatchType.PvP ? 1 : 4);
+            Instance_ButtonLeftDownEvent(1);
         }
 
         if (Input.GetKeyUp(KeyCode.Alpha1))
@@ -205,19 +205,20 @@ public class UserInputManager : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.Alpha5))
         {
-            Instance_ButtonDownUpEvent(BattleInfoManagerScript.Instance.MatchInfoType == MatchType.PvP ? 1 : 4);
+          
+            Instance_ButtonDownUpEvent(1);
         }
         if (Input.GetKeyUp(KeyCode.Alpha6))
         {
-            Instance_ButtonUpUpEvent(BattleInfoManagerScript.Instance.MatchInfoType == MatchType.PvP ? 1 : 4);
+            Instance_ButtonUpUpEvent(1);
         }
         if (Input.GetKeyUp(KeyCode.Alpha7))
         {
-            Instance_ButtonRightUpEvent(BattleInfoManagerScript.Instance.MatchInfoType == MatchType.PvP ? 1 : 4);
+            Instance_ButtonRightUpEvent(1);
         }
         if (Input.GetKeyUp(KeyCode.Alpha8))
         {
-            Instance_ButtonLeftUpEvent(BattleInfoManagerScript.Instance.MatchInfoType == MatchType.PvP ? 1 : 4);
+            Instance_ButtonLeftUpEvent(1);
         }
 
 
@@ -274,6 +275,7 @@ public class UserInputManager : MonoBehaviour
             Instance_ButtonMinusUpEvent(0);
         }
     }
+
 
 
 

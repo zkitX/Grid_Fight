@@ -10,7 +10,7 @@ public class CharacterBase : MonoBehaviour
     public delegate void TileMovementComplete(CharacterBase movingChar);
     public event TileMovementComplete TileMovementCompleteEvent;
 
-    public delegate void CurrentCharIsDead(CharacterNameType cName, ControllerType playerController);
+    public delegate void CurrentCharIsDead(CharacterNameType cName, List<ControllerType> playerController, SideType side);
     public event CurrentCharIsDead CurrentCharIsDeadEvent;
 
 
@@ -47,7 +47,6 @@ public class CharacterBase : MonoBehaviour
     public CharacterLevelType NextAttackLevel = CharacterLevelType.Novice;
     public Transform SelectionIndicator;
     public SpriteRenderer SelectionIndicatorSprite;
-    public Color SelectionIndicatorColorSelected;
     public Color SelectionIndicatorColorUnselected;
     public GameObject BaseBullet;
     public UnitManagementScript UMS;
@@ -108,7 +107,7 @@ public class CharacterBase : MonoBehaviour
         {
             WaveManagerScript.Instance.CurrentNumberOfWaveChars--;
         }
-        CurrentCharIsDeadEvent(CharInfo.CharacterID, UMS.PlayerController);
+        CurrentCharIsDeadEvent(CharInfo.CharacterID,UMS.PlayerController, UMS.Side);
     }
 
     #endregion
@@ -321,9 +320,9 @@ public class CharacterBase : MonoBehaviour
                 case InputDirection.Up:
                     dir = new Vector2Int(-1, 0);
                     nextPos = CalculateNextPos(dir);
-                    if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, UMS.Side))
+                    if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, UMS.WalkingSide))
                     {
-                        CurrentBattleTilesToCheck = GridManagerScript.Instance.GetBattleTiles(nextPos, UMS.Facing, UMS.Side);
+                        CurrentBattleTilesToCheck = GridManagerScript.Instance.GetBattleTiles(nextPos, UMS.WalkingSide);
                     }
                     curve = SpineAnim.UpMovementSpeed;
                     AnimState = CharacterAnimationStateType.DashUp;
@@ -331,9 +330,9 @@ public class CharacterBase : MonoBehaviour
                 case InputDirection.Down:
                     dir = new Vector2Int(1, 0);
                     nextPos = CalculateNextPos(dir);
-                    if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, UMS.Side))
+                    if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, UMS.WalkingSide))
                     {
-                        CurrentBattleTilesToCheck = GridManagerScript.Instance.GetBattleTiles(nextPos, UMS.Facing, UMS.Side);
+                        CurrentBattleTilesToCheck = GridManagerScript.Instance.GetBattleTiles(nextPos, UMS.WalkingSide);
                     }
                     curve = SpineAnim.DownMovementSpeed;
                     AnimState = CharacterAnimationStateType.DashDown;
@@ -341,9 +340,9 @@ public class CharacterBase : MonoBehaviour
                 case InputDirection.Right:
                     dir = new Vector2Int(0, 1);
                     nextPos = CalculateNextPos(dir);
-                    if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, UMS.Side))
+                    if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, UMS.WalkingSide))
                     {
-                        CurrentBattleTilesToCheck = GridManagerScript.Instance.GetBattleTiles(nextPos, UMS.Facing, UMS.Side);
+                        CurrentBattleTilesToCheck = GridManagerScript.Instance.GetBattleTiles(nextPos, UMS.WalkingSide);
                     }
                     curve = SpineAnim.RightMovementSpeed;
                     AnimState = UMS.Facing == FacingType.Left ? CharacterAnimationStateType.DashRight : CharacterAnimationStateType.DashLeft;
@@ -351,9 +350,9 @@ public class CharacterBase : MonoBehaviour
                 case InputDirection.Left:
                     dir = new Vector2Int(0, -1);
                     nextPos = CalculateNextPos(dir);
-                    if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, UMS.Side))
+                    if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, UMS.WalkingSide))
                     {
-                        CurrentBattleTilesToCheck = GridManagerScript.Instance.GetBattleTiles(nextPos, UMS.Facing, UMS.Side);
+                        CurrentBattleTilesToCheck = GridManagerScript.Instance.GetBattleTiles(nextPos, UMS.WalkingSide);
                     }
                     curve = SpineAnim.LeftMovementSpeed;
                     AnimState = UMS.Facing == FacingType.Left ? CharacterAnimationStateType.DashLeft : CharacterAnimationStateType.DashRight;
@@ -442,9 +441,9 @@ public class CharacterBase : MonoBehaviour
     {
         SetAnimation(animState);
         float AnimLength = SpineAnim.GetAnimLenght(animState);
+        Debug.Log(AnimLength + "  AnimLenght   " + AnimLength / CharInfo.MovementSpeed + " Actual duration" );
         float timer = 0;
         float speedTimer = 0;
-        bool IsMovementComplete = false;
         Vector3 offset = transform.position;
         isMoving = true;
         while (timer < 1)
@@ -458,16 +457,11 @@ public class CharacterBase : MonoBehaviour
             timer += (Time.fixedDeltaTime / (AnimLength / CharInfo.MovementSpeed));
             speedTimer += newAdd * curve.Evaluate(timer + newAdd);
             transform.position = Vector3.Lerp(offset, nextPos, speedTimer);
-
-            if(timer > 0.9f && !IsMovementComplete)
-            {
-                isMoving = false;
-                IsMovementComplete = true;
-                if(TileMovementCompleteEvent != null)
-                {
-                    TileMovementCompleteEvent(this);
-                }
-            }
+        }
+        isMoving = false;
+        if (TileMovementCompleteEvent != null)
+        {
+            TileMovementCompleteEvent(this);
         }
         transform.position = nextPos;
         MoveCo = null;
@@ -636,6 +630,7 @@ public class CharacterBase : MonoBehaviour
 
     public void SetAnimation(CharacterAnimationStateType animState)
     {
+        float AnimSpeed = 1;
         if (SpineAnim == null)
         {
             SpineAnimatorsetup();
@@ -645,7 +640,7 @@ public class CharacterBase : MonoBehaviour
         {
             return;
         }
-
+        
         if (animState != CharacterAnimationStateType.Atk && SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk)
         {
             isAttackGoing = false;
@@ -654,23 +649,22 @@ public class CharacterBase : MonoBehaviour
         if (animState == CharacterAnimationStateType.Atk || animState == CharacterAnimationStateType.Atk1)
         {
             StartCoroutine(CastAttackParticles(NextAttackLevel));
-            SpineAnim.SetAnimationSpeed(CharInfo.AttackSpeed * CharInfo.BaseSpeed);
+            AnimSpeed = CharInfo.AttackSpeed * CharInfo.BaseSpeed;
         }
         else if (animState == CharacterAnimationStateType.DashDown ||
             animState == CharacterAnimationStateType.DashUp ||
             animState == CharacterAnimationStateType.DashLeft ||
             animState == CharacterAnimationStateType.DashRight)
         {
-            SpineAnim.SetAnimationSpeed(CharInfo.MovementSpeed * CharInfo.BaseSpeed);
+            AnimSpeed = CharInfo.MovementSpeed * CharInfo.BaseSpeed;
         }
         else
         {
-            SpineAnim.SetAnimationSpeed(CharInfo.BaseSpeed);
+            AnimSpeed = CharInfo.BaseSpeed;
         }
 
-
         SpineAnim.SetAnim(animState, false);
-
+        SpineAnim.SetAnimationSpeed(AnimSpeed);
     }
 
     public void SpineAnimatorsetup()
@@ -801,9 +795,9 @@ public class CharacterBase : MonoBehaviour
 
 
     //Used to indicate the character that is selected in the battlefield
-    public void SetCharSelected(bool isSelected)
+    public void SetCharSelected(bool isSelected, Color selectionIndicatorColorSelected)
     {
-        SelectionIndicatorSprite.color = isSelected ? SelectionIndicatorColorSelected : SelectionIndicatorColorUnselected;
+        SelectionIndicatorSprite.color = isSelected ? selectionIndicatorColorSelected : SelectionIndicatorColorUnselected;
     }
 
 }

@@ -24,7 +24,7 @@ public class BattleTileScript : MonoBehaviour
     public Vector2Int Pos;
     public BattleTileStateType _BattleTileState;
     public BattleTileType BattleTileT;
-    public SideType TileSide;
+    public WalkingSideType WalkingSide;
     public SpriteRenderer SP;
     public PortalInfoClass PortalInfo;
 
@@ -446,7 +446,7 @@ public class BattleTileScript : MonoBehaviour
     {
         BattleTileState = info.BattleTileState;
         BattleTileT = info.BattleTileT;
-        TileSide = info.TileSide;
+        WalkingSide = info.WalkingSide;
         if (BattleTileT == BattleTileType.Portal)
         {
             PortalInfo = new PortalInfoClass(this, info.Portal, info.IDPortal);

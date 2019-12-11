@@ -114,8 +114,14 @@ public class SpineAnimationManager : MonoBehaviour
         {
             return;
         }
-
+        
         CharacterAnimationStateType completedAnim = (CharacterAnimationStateType)System.Enum.Parse(typeof(CharacterAnimationStateType), skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name);
+
+        if (completedAnim.ToString().Contains("Dash"))
+        {
+            Debug.Log(Time.time);
+        }
+
         if (completedAnim == CharacterAnimationStateType.Arriving)
         {
             CharOwner.IsOnField = true;
@@ -133,6 +139,7 @@ public class SpineAnimationManager : MonoBehaviour
     public void SetAnim(CharacterAnimationStateType anim, bool loop)
     {
         SetupSpineAnim();
+        Debug.Log(anim);
         if(anim == CharacterAnimationStateType.Arriving)
         {
             SpineAnimationState.SetAnimation(1, anim.ToString(), loop);
@@ -140,6 +147,10 @@ public class SpineAnimationManager : MonoBehaviour
         else
         {
             SpineAnimationState.SetAnimation(1, anim.ToString(), loop).MixDuration = AnimationTransition;
+        }
+        if (anim.ToString().Contains("Dash"))
+        {
+            Debug.Log(Time.time);
         }
         CurrentAnim = anim;
     }

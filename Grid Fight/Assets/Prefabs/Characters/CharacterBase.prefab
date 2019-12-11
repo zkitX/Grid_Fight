@@ -232,7 +232,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 101
   m_Sprite: {fileID: 21300000, guid: f6d823693a2880945a62937a0a5fc6f8, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.41568628, g: 0.3529412, b: 0.3529412, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -291,29 +291,6 @@ MonoBehaviour:
   _CharInfo: {fileID: 0}
   isMoving: 0
   isSpecialLoading: 0
-  CharacterInfo:
-    Name: 
-    CharacterSelection: 0
-    CharacterLevel: 0
-    playerController: 0
-    CharacterName: 0
-    AttackParticle: 0
-    ElementalsResistence: []
-    ElementalsPower: 
-    CharacterRelationships: []
-    AttackTimeRatio: 0
-    Special2LoadingDuration: 0
-    Special3LoadingDuration: 0
-    Health: 0
-    HealthBase: 0
-    Regeneration: 0
-    BaseSpeed: 1
-    Stamina: 0
-    StaminaBase: 0
-    StaminaRegeneration: 0
-    StaminaCostSpecial1: 0
-    StaminaCostSpecial2: 0
-    StaminaCostSpecial3: 0
   CurrentBattleTiles: []
   SpineAnim: {fileID: 0}
   BuffsDebuffs: []
@@ -324,7 +301,6 @@ MonoBehaviour:
   NextAttackLevel: 0
   SelectionIndicator: {fileID: 109818329}
   SelectionIndicatorSprite: {fileID: 1908467993}
-  SelectionIndicatorColorSelected: {r: 1, g: 0, b: 0, a: 1}
   SelectionIndicatorColorUnselected: {r: 0.41509432, g: 0.35439655, b: 0.35439655,
     a: 1}
   BaseBullet: {fileID: 476742215486157040, guid: a68cc87bb45b95b40a034a7c64f04b34,
@@ -722,6 +698,9 @@ MonoBehaviour:
     BulletTrajectories: []
     CharacterClass: 0
   VFXTestMode: 0
+  isAttackStarted: 0
+  isAttackGoing: 0
+  isAttackCompletetd: 0
 --- !u!114 &1336864638560235350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -751,9 +730,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Pos: []
   _CurrentTilePos: {x: 0, y: 0}
-  PlayerController: 0
+  PlayerController: 
   UnitBehaviour: 0
   Side: 0
+  WalkingSide: 0
   Facing: 0
   isAIOn: 0
   AI: {fileID: 1336864638560235350}

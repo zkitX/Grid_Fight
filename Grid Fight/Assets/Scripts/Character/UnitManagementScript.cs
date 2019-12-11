@@ -33,9 +33,10 @@ public class UnitManagementScript : MonoBehaviour
     }
     public Vector2Int _CurrentTilePos;
 
-    public ControllerType PlayerController;
+    public List<ControllerType> PlayerController = new List<ControllerType>();
     public UnitBehaviourType UnitBehaviour;
     public SideType Side;
+    public WalkingSideType WalkingSide;
     public FacingType Facing;
     public bool isAIOn;
     public AIScript AI;
@@ -50,7 +51,7 @@ public class UnitManagementScript : MonoBehaviour
         switch (matchType)
         {
             case MatchType.PvE:
-                if (PlayerController == ControllerType.Enemy)
+                if (PlayerController.Contains(ControllerType.Enemy))
                 {
                     SetUnit(FacingType.Left, SideType.RightSide, UnitBehaviourType.NPC, true);
                 }
@@ -60,7 +61,7 @@ public class UnitManagementScript : MonoBehaviour
                 }
                 break;
             case MatchType.PvP:
-                if (PlayerController == ControllerType.Player2)
+                if (PlayerController.Contains(ControllerType.Player2))
                 {
                     SetUnit(FacingType.Left, SideType.RightSide, UnitBehaviourType.ControlledByPlayer);
                 }
@@ -70,7 +71,7 @@ public class UnitManagementScript : MonoBehaviour
                 }
                 break;
             case MatchType.PPvE:
-                if (PlayerController == ControllerType.Enemy)
+                if (PlayerController.Contains(ControllerType.Enemy))
                 {
                     SetUnit(FacingType.Left, SideType.RightSide, UnitBehaviourType.NPC, true);
                 }
@@ -80,7 +81,7 @@ public class UnitManagementScript : MonoBehaviour
                 }
                 break;
             case MatchType.PPvPP:
-                if (PlayerController == ControllerType.Player3 || PlayerController == ControllerType.Player4)
+                if (PlayerController.Contains(ControllerType.Player3) && PlayerController.Contains(ControllerType.Player4))
                 {
                     SetUnit(FacingType.Left, SideType.RightSide, UnitBehaviourType.ControlledByPlayer);
                 }

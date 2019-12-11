@@ -63,52 +63,18 @@ public class CharacterBaseInfoClass
     public string Name;
     public CharacterSelectionType CharacterSelection;
     public CharacterLevelType CharacterLevel;
-    public ControllerType PlayerController;
+    public List<ControllerType> PlayerController = new List<ControllerType>();
     public CharacterNameType CharacterName;
-    /* public AttackParticleTypes AttackParticle;
-     public ArmorClass Armor;
-     public WeaponClass Weapon;
-     public List<ElementalResistenceClass> ElementalsResistence = new List<ElementalResistenceClass>();
-     public List<ElementalType> ElementalsPower = new List<ElementalType>();
-     public List<CharactersRelationshipClass> CharacterRelationships = new List<CharactersRelationshipClass>();
-     public float AttackTimeRatio;
-     public float Special2LoadingDuration;
-     public float Special3LoadingDuration;
-     public float Health;
-     public float HealthBase;
-     public float Regeneration;
-     public float BaseSpeed = 1;
-     public float Stamina;
-     public float StaminaBase;
-     public float StaminaRegeneration;
-     public float StaminaCostSpecial1;
-     public float StaminaCostSpecial2;
-     public float StaminaCostSpecial3;
+    public WalkingSideType WalkingSide;
 
-
-     public float HealthPerc
-     {
-         get
-         {
-             return (Health * 100) / HealthBase;
-         }
-     }
-
-     public float StaminaPerc
-     {
-         get
-         {
-             return (Stamina * 100) / StaminaBase;
-         }
-     }*/
-
-
-    public CharacterBaseInfoClass(string name, CharacterSelectionType characterSelection, CharacterLevelType characterLevel, ControllerType playerController, CharacterNameType characterName)
+    public CharacterBaseInfoClass(string name, CharacterSelectionType characterSelection,
+        CharacterLevelType characterLevel, List<ControllerType> playerController, CharacterNameType characterName, WalkingSideType walkingSide)
     {
         Name = name;
         CharacterSelection = characterSelection;
         CharacterLevel = characterLevel;
         PlayerController = playerController;
         CharacterName = characterName;
+        WalkingSide = walkingSide;
     }                             
 }                                

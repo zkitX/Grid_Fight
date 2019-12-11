@@ -19,7 +19,7 @@ public class BattleTileInfo
     public Vector2Int Pos;
     public BattleTileStateType BattleTileState;
     public BattleTileType BattleTileT;
-    public SideType TileSide;
+    public WalkingSideType WalkingSide;
     public PortalType Portal;
     public int IDPortal;
 }

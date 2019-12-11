@@ -33,7 +33,7 @@ public class CharacterInfoScript : MonoBehaviour
     [HideInInspector]
     public CharacterSelectionType CharacterSelection;
     [HideInInspector]
-    public ControllerType PlayerController;
+    public List<ControllerType> PlayerController = new List<ControllerType>();
 
     //  public ArmorClass Armor;
     //   public WeaponClass Weapon;

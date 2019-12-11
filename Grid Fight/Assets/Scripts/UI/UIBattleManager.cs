@@ -20,17 +20,17 @@ public class UIBattleManager : MonoBehaviour
     public TextMeshProUGUI RestartMatch;
     public TextMeshProUGUI StartMatch;
 
-    public GameObject TimeToPlayP1;
-    public TextMeshProUGUI SecondsToPlayP1;
-    public bool isPlayerPlayingP1 = false;
+    public GameObject TimeToPlayLeftSide;
+    public TextMeshProUGUI SecondsToPlayLeftSide;
+    public bool isLeftSidePlaying = false;
 
-    public GameObject TimeToPlayP2;
-    public TextMeshProUGUI SecondsToPlayP2;
-    public bool isPlayerPlayingP2 = false;
+    public GameObject TimeToPlayRightSide;
+    public TextMeshProUGUI SecondsToPlayRightSide;
+    public bool isRightSidePlaying = false;
     public CanvasGroup Win;
 
-    public TextMeshProUGUI Player1;
-    public TextMeshProUGUI Player2;
+    public TextMeshProUGUI LeftSide;
+    public TextMeshProUGUI RightSide;
 
     private Dictionary<int, UIPlayerSectionScript> currentPlayers = new Dictionary<int, UIPlayerSectionScript>();
    
@@ -101,73 +101,73 @@ public class UIBattleManager : MonoBehaviour
     }
 
 
-    public void StartTimeUp(float duration, ControllerType timeupPlayer)
+    public void StartTimeUp(float duration, SideType side)
     {
-        if (timeupPlayer == ControllerType.Player1)
+        if (side == SideType.LeftSide)
         {
-            StartCoroutine(TimeUpCoP1(duration, timeupPlayer));
+            StartCoroutine(TimeUpCoP1(duration, side));
         }
-        else if (timeupPlayer == ControllerType.Player2)
+        else if (side == SideType.RightSide)
         {
-            StartCoroutine(TimeUpCoP2(duration, timeupPlayer));
+            StartCoroutine(TimeUpCoP2(duration, side));
         }
       
     }
 
-    private IEnumerator TimeUpCoP1(float duration, ControllerType timeupPlayer)
+    private IEnumerator TimeUpCoP1(float duration, SideType side)
     {
-        TimeToPlayP1.SetActive(true);
-        isPlayerPlayingP1 = false;
-        while (duration > 0 && !isPlayerPlayingP1)
+        TimeToPlayLeftSide.SetActive(true);
+        isLeftSidePlaying = false;
+        while (duration > 0 && !isLeftSidePlaying)
         {
             yield return new WaitForFixedUpdate();
             while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
             {
                 yield return new WaitForEndOfFrame();
             }
-            SecondsToPlayP1.text = ((int)duration).ToString();
+            SecondsToPlayLeftSide.text = ((int)duration).ToString();
             duration -= Time.fixedDeltaTime;
 
         }
 
         if(duration > 0 )
         {
-            TimeToPlayP1.SetActive(false);
+            TimeToPlayLeftSide.SetActive(false);
 
             BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
         }
         else
         {
-            Winner(timeupPlayer == ControllerType.Player1 ? "Lost" : "Win", timeupPlayer == ControllerType.Player2 ? "Lost" : "Win");
+            Winner(side == SideType.LeftSide ? "Lost" : "Win", side == SideType.RightSide ? "Lost" : "Win");
             BattleManagerScript.Instance.CurrentBattleState = BattleState.End;
         }
     }
 
-    private IEnumerator TimeUpCoP2(float duration, ControllerType timeupPlayer)
+    private IEnumerator TimeUpCoP2(float duration, SideType side)
     {
-        TimeToPlayP2.SetActive(true);
-        isPlayerPlayingP2 = false;
-        while (duration > 0 && !isPlayerPlayingP2)
+        TimeToPlayRightSide.SetActive(true);
+        isRightSidePlaying = false;
+        while (duration > 0 && !isRightSidePlaying)
         {
             yield return new WaitForFixedUpdate();
             while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
             {
                 yield return new WaitForEndOfFrame();
             }
-            SecondsToPlayP2.text = ((int)duration).ToString();
+            SecondsToPlayRightSide.text = ((int)duration).ToString();
             duration -= Time.fixedDeltaTime;
 
         }
 
         if (duration > 0)
         {
-            TimeToPlayP2.SetActive(false);
+            TimeToPlayRightSide.SetActive(false);
 
             BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
         }
         else
         {
-            Winner(timeupPlayer == ControllerType.Player1 ? "Lost" : "Win", timeupPlayer == ControllerType.Player2 ? "Lost" : "Win");
+            Winner(side == SideType.LeftSide ? "Lost" : "Win", side == SideType.RightSide ? "Lost" : "Win");
             BattleManagerScript.Instance.CurrentBattleState = BattleState.End;
         }
     }
@@ -175,7 +175,7 @@ public class UIBattleManager : MonoBehaviour
     {
         Win.alpha = 1;
 
-        Player1.text = p1;
-        Player2.text = p2;
+        LeftSide.text = p1;
+        RightSide.text = p2;
     }
 }

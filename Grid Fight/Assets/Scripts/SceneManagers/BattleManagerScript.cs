@@ -40,7 +40,8 @@ public class BattleManagerScript : MonoBehaviour
     private Transform CharactersContainer;
     private List<CharacterBaseInfoClass> PlayerBattleInfo = new List<CharacterBaseInfoClass>();
     private List<PlayableCharOnScene> PlayablesCharOnScene = new List<PlayableCharOnScene>();
-
+    [SerializeField]
+    private List<Color> playersColor = new List<Color>();
     public List<CharacterBase> WaveCharcters = new List<CharacterBase>();
     private MatchType matchType;
     public void SetupBattleState()
@@ -71,8 +72,9 @@ public class BattleManagerScript : MonoBehaviour
         res = WaveCharcters.Where(r => r.CharInfo.CharacterID == characterName && !r.IsOnField).FirstOrDefault();
         if(res == null)
         {
+            
             res = CreateChar(new CharacterBaseInfoClass(characterName.ToString(), CharacterSelectionType.A,
-                CharacterLevelType.Novice, ControllerType.Enemy, characterName), parent);
+                CharacterLevelType.Novice, new List<ControllerType> {  ControllerType.Enemy}, characterName, WalkingSideType.RightSide), parent);
         }
 
         return res;
@@ -83,12 +85,12 @@ public class BattleManagerScript : MonoBehaviour
     //Used to set the already created char on a random Position in the battlefield
     public void SetCharOnBoardOnRandomPos(ControllerType playerController, CharacterNameType cName)
     {
-        if (PlayablesCharOnScene.Where(r => r.PlayerController == playerController && r.CName == cName).First().isUsed)
+        if (PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == cName).First().isUsed)
         {
             return;
         }
-        CharacterBase currentCharacter = AllCharactersOnField.Where(r=> r.UMS.PlayerController == playerController && r.CharInfo.CharacterID == cName).First();
-        BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(GridManagerScript.Instance.GetSideTypeFromControllerType(playerController), currentCharacter.UMS.Pos);
+        CharacterBase currentCharacter = AllCharactersOnField.Where(r=> r.UMS.PlayerController.Contains(playerController) && r.CharInfo.CharacterID == cName).First();
+        BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(currentCharacter.UMS.WalkingSide, currentCharacter.UMS.Pos);
         currentCharacter.UMS.CurrentTilePos = bts.Pos;
         for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)
         {
@@ -96,31 +98,24 @@ public class BattleManagerScript : MonoBehaviour
             BattleTileScript cbts = GridManagerScript.Instance.GetBattleTile(currentCharacter.UMS.Pos[i]);
             currentCharacter.CurrentBattleTiles.Add(cbts);
         }
-        if(!CurrentSelectedCharacters.ContainsKey(playerController))
-        {
-            CurrentSelectedCharacters.Add(playerController, currentCharacter);
-        }
-       
-        SelectCharacter(playerController, currentCharacter);
-
+      
         foreach (Vector2Int item in currentCharacter.UMS.Pos)
         {
             GridManagerScript.Instance.SetBattleTileState(item, BattleTileStateType.Occupied);
         }
-        UIBattleManager.Instance.CharacterSelected(playerController, currentCharacter);
         currentCharacter.SetAnimation(CharacterAnimationStateType.Arriving);
         StartCoroutine(MoveCharToBoardWithDelay(0.1f, currentCharacter, bts.transform.position));
         if (playerController == ControllerType.Player1)
         {
-            UIBattleManager.Instance.isPlayerPlayingP1 = true;
+            UIBattleManager.Instance.isLeftSidePlaying = true;
 
         }
         else if (playerController == ControllerType.Player2)
         {
-            UIBattleManager.Instance.isPlayerPlayingP2 = true;
-
+            UIBattleManager.Instance.isRightSidePlaying = true;
         }
-        PlayablesCharOnScene.Where(r => r.PlayerController == playerController && r.CName == cName).First().isUsed = true; 
+        PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == cName).First().isUsed = true;
+        SelectCharacter(playerController, currentCharacter);
     }
     
    
@@ -128,7 +123,7 @@ public class BattleManagerScript : MonoBehaviour
     //Used to set the already created char on a fixed Position in the battlefield
     public void SetCharOnBoardOnFixedPos(ControllerType playerController, CharacterNameType cName, Vector2Int pos)
     {
-        CharacterBase currentCharacter = AllCharactersOnField.Where(r => r.UMS.PlayerController == playerController && r.CharInfo.CharacterID == cName).First();
+        CharacterBase currentCharacter = AllCharactersOnField.Where(r => r.UMS.PlayerController.Contains(playerController) && r.CharInfo.CharacterID == cName).First();
         BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(pos);
         currentCharacter.UMS.CurrentTilePos = bts.Pos;
         for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)
@@ -137,20 +132,15 @@ public class BattleManagerScript : MonoBehaviour
             BattleTileScript cbts = GridManagerScript.Instance.GetBattleTile(currentCharacter.UMS.Pos[i]);
             currentCharacter.CurrentBattleTiles.Add(cbts);
         }
-        if (!CurrentSelectedCharacters.ContainsKey(playerController))
-        {
-            CurrentSelectedCharacters.Add(playerController, currentCharacter);
-        }
-
-        SelectCharacter(playerController, currentCharacter);
-
+        
         foreach (Vector2Int item in currentCharacter.UMS.Pos)
         {
             GridManagerScript.Instance.SetBattleTileState(item, BattleTileStateType.Occupied);
         }
-        UIBattleManager.Instance.CharacterSelected(playerController, currentCharacter);
         currentCharacter.SetAnimation(CharacterAnimationStateType.Arriving);
         StartCoroutine(MoveCharToBoardWithDelay(0.2f, currentCharacter, bts.transform.position));
+        SelectCharacter(playerController, currentCharacter);
+
     }
 
     public IEnumerator MoveCharToBoardWithDelay(float delay, CharacterBase cb, Vector3 nextPos)
@@ -179,7 +169,7 @@ public class BattleManagerScript : MonoBehaviour
         PlayerBattleInfo = LoaderManagerScript.Instance != null ? LoaderManagerScript.Instance.PlayerBattleInfo : BattleInfoManagerScript.Instance.PlayerBattleInfo;
         foreach (CharacterBaseInfoClass item in PlayerBattleInfo)
         {
-            PlayablesCharOnScene.Add(new PlayableCharOnScene(item.CharacterName, item.PlayerController, false));
+            PlayablesCharOnScene.Add(new PlayableCharOnScene(item.CharacterName, item.PlayerController, false, GetSideFromPlayer(item.PlayerController)));
             AllCharactersOnField.Add(CreateChar(item, CharactersContainer));
             yield return new WaitForSeconds(delay);
         }
@@ -200,6 +190,7 @@ public class BattleManagerScript : MonoBehaviour
             currentCharacter.UMS.Pos.Add(item);
         }
         currentCharacter.SetupCharacterSide();
+        currentCharacter.UMS.WalkingSide = charInfo.WalkingSide;
         currentCharacter.CharInfo.CharacterSelection = charInfo.CharacterSelection;
         currentCharacter.SelectionIndicator.eulerAngles = new Vector3(0,0, currentCharacter.CharInfo.CharacterSelection == CharacterSelectionType.Up ? 90 :
             currentCharacter.CharInfo.CharacterSelection == CharacterSelectionType.Down ? -90 :
@@ -210,9 +201,9 @@ public class BattleManagerScript : MonoBehaviour
         return currentCharacter;
     }
 
-    private void CurrentCharacter_CurrentCharIsDeadEvent(CharacterNameType cName, ControllerType playerController)
+    private void CurrentCharacter_CurrentCharIsDeadEvent(CharacterNameType cName, List<ControllerType> playerController,  SideType side)
     {
-        PlayablesCharOnScene.Where(r=> r.PlayerController == playerController && r.CName == cName).First().isAlive = false;
+        PlayablesCharOnScene.Where(r=> r.Side == side && r.CName == cName).First().isAlive = false;
 
         List<PlayableCharOnScene> res = new List<PlayableCharOnScene>();
 
@@ -220,14 +211,14 @@ public class BattleManagerScript : MonoBehaviour
 
         if(res.Where(r=> !r.isAlive && r.isUsed).ToList().Count == res.Count)
         {
-            UIBattleManager.Instance.Winner(playerController == ControllerType.Player1 ? "Lost" : "Win", playerController == ControllerType.Player2 ? "Lost" : "Win");
+            UIBattleManager.Instance.Winner(side == SideType.LeftSide ? "Lost" : "Win", side == SideType.RightSide ? "Lost" : "Win");
             CurrentBattleState = BattleState.End;
             return;
         }
 
         if(res.Where(r=> r.isUsed).ToList().Count == res.Where(r=> !r.isAlive).ToList().Count)
         {
-            UIBattleManager.Instance.StartTimeUp(15, playerController);
+            UIBattleManager.Instance.StartTimeUp(15, side);
         }
 
     }
@@ -263,7 +254,7 @@ public class BattleManagerScript : MonoBehaviour
     //Used to select a char under a determinated player
     public void SetCharacterSelection(CharacterSelectionType characterSelection, ControllerType playerController)
     {
-        SelectCharacter(playerController, AllCharactersOnField.Where(r=> r.CharInfo.CharacterSelection == characterSelection && r.UMS.PlayerController == playerController).FirstOrDefault());
+        SelectCharacter(playerController, AllCharactersOnField.Where(r=> r.CharInfo.CharacterSelection == characterSelection && r.UMS.PlayerController.Contains(playerController)).FirstOrDefault());
     }
 
     //Used to select a char 
@@ -271,10 +262,22 @@ public class BattleManagerScript : MonoBehaviour
     {
         if(currentCharacter != null)
         {
-            CurrentSelectedCharacters[playerController].SetCharSelected(false);
-            CurrentSelectedCharacters[playerController] = currentCharacter;
-            UIBattleManager.Instance.CharacterSelected(playerController, currentCharacter);
-            currentCharacter.SetCharSelected(true);
+            if (!CurrentSelectedCharacters.ContainsKey(playerController))
+            {
+                CurrentSelectedCharacters.Add(playerController, currentCharacter);
+                UIBattleManager.Instance.CharacterSelected(playerController, currentCharacter);
+                currentCharacter.SetCharSelected(true, playersColor[(int)playerController]);
+            }
+
+            if (!CurrentSelectedCharacters.ContainsValue(currentCharacter))
+            {
+                CurrentSelectedCharacters[playerController].SetCharSelected(false, new Color());
+                CurrentSelectedCharacters[playerController] = currentCharacter;
+                UIBattleManager.Instance.CharacterSelected(playerController, currentCharacter);
+                currentCharacter.SetCharSelected(true, playersColor[(int)playerController]);
+            }
+
+           
         }
     }
 
@@ -325,7 +328,6 @@ public class BattleManagerScript : MonoBehaviour
             if(CurrentSelectedCharacters[playerController].UMS.UnitBehaviour == UnitBehaviourType.ControlledByPlayer)
             {
                 CurrentSelectedCharacters[playerController].MoveCharOnDirection(dir);
-
             }
         }
     }
@@ -333,24 +335,25 @@ public class BattleManagerScript : MonoBehaviour
     #endregion
 
     #region Switch Input
-    public void Switch_StopLoadingNewCharacter(CharacterSelectionType characterSelection, ControllerType controllerType)
+    public void Switch_StopLoadingNewCharacter(CharacterSelectionType characterSelection, ControllerType playerController)
     {
-        SideType side = GetSideFromPlayer(controllerType);
+
+        SideType side = GetSideFromPlayer(new List<ControllerType> { playerController });
         CharacterBase cb = AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == characterSelection && r.UMS.Side == side).FirstOrDefault();
         if (cb != null)
         {
-            StopLoadingNewCharacter(cb.CharInfo.CharacterID, controllerType);
+            StopLoadingNewCharacter(cb.CharInfo.CharacterID, playerController);
         }
 
     }
 
-    public void Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType characterSelection, ControllerType controllerType)
+    public void Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType characterSelection, ControllerType playerController)
     {
-        SideType side = GetSideFromPlayer(controllerType);
+        SideType side = GetSideFromPlayer(new List<ControllerType> { playerController });
         CharacterBase cb = AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == characterSelection && r.UMS.Side == side).FirstOrDefault();
         if (cb != null)
         {
-            LoadingNewCharacterInRandomPosition(cb.CharInfo.CharacterID, side, controllerType);
+            LoadingNewCharacterInRandomPosition(cb.CharInfo.CharacterID, side, playerController);
         }
 
     }
@@ -381,7 +384,7 @@ public class BattleManagerScript : MonoBehaviour
 
     public void Mobile_LoadingNewCharacterInRandomPosition(CharacterNameType cName, ControllerType playerController)
     {
-        LoadingNewCharacterInRandomPosition(cName, GetSideFromPlayer(playerController), playerController);
+        LoadingNewCharacterInRandomPosition(cName, GetSideFromPlayer(new List<ControllerType> { playerController }), playerController);
     }
 
     #endregion
@@ -415,19 +418,19 @@ public class BattleManagerScript : MonoBehaviour
     }
 
 //
-    public SideType GetSideFromPlayer(ControllerType ct)
+    public SideType GetSideFromPlayer(List<ControllerType> ct)
     {
         matchType = LoaderManagerScript.Instance != null ? LoaderManagerScript.Instance.MatchInfoType : BattleInfoManagerScript.Instance.MatchInfoType;
         switch (matchType)
         {
             case MatchType.PvE:
-                return ct == ControllerType.Player1 ? SideType.LeftSide : SideType.RightSide;
+                return ct.Contains(ControllerType.Player1) ? SideType.LeftSide : SideType.RightSide;
             case MatchType.PvP:
-                return ct == ControllerType.Player1 ? SideType.LeftSide : SideType.RightSide;
+                return ct.Contains(ControllerType.Player1) ? SideType.LeftSide : SideType.RightSide;
             case MatchType.PPvE:
-                return ct == ControllerType.Player1 || ct == ControllerType.Player1 ? SideType.LeftSide : SideType.RightSide;
+                return ct.Contains(ControllerType.Player1) || ct.Contains(ControllerType.Player2) ? SideType.LeftSide : SideType.RightSide;
             case MatchType.PPvPP:
-                return ct == ControllerType.Player1 || ct == ControllerType.Player1 ? SideType.LeftSide : SideType.RightSide;
+                return ct.Contains(ControllerType.Player1) || ct.Contains(ControllerType.Player2) ? SideType.LeftSide : SideType.RightSide;
         }
 
         return SideType.LeftSide;
@@ -459,16 +462,17 @@ public class CharacterLoadingInfoClass
 public class PlayableCharOnScene
 {
     public CharacterNameType CName;
-    public ControllerType PlayerController;
+    public List<ControllerType> PlayerController = new List<ControllerType>();
     public bool isUsed;
     public bool isAlive = true;
+    public SideType Side;
 
-    public PlayableCharOnScene(CharacterNameType cname, ControllerType pc, bool isused)
+    public PlayableCharOnScene(CharacterNameType cname, List<ControllerType> playerController, bool isused, SideType side)
     {
         CName = cname;
-        PlayerController = pc;
+        PlayerController = playerController;
         isUsed = isused;
-
+        Side = side;
     }
 }
 
