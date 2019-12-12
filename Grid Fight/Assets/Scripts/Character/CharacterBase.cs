@@ -176,7 +176,7 @@ public class CharacterBase : MonoBehaviour
         {
             isSpecialLoading = true;
             float timer = 0;
-            while (isSpecialLoading)
+            while (isSpecialLoading && !VFXTestMode)
             {
                 while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
                 {
@@ -185,7 +185,7 @@ public class CharacterBase : MonoBehaviour
                 yield return new WaitForFixedUpdate();
                 timer += Time.fixedDeltaTime;
             }
-            if (IsOnField)
+            if (IsOnField || VFXTestMode)
             {
                 while (isMoving)
                 {

@@ -57,6 +57,11 @@ public class VFXTester : MonoBehaviour
         AttackSpeedText.text = AttackSpeed.value.ToString("F2");
         SpeedOfBulletsText.text = SpeedOfBullets.value.ToString("F2");
         MountainDelayText.text = MountainDelay.value.ToString("F2");
+
+        if(charOnScene != null && Input.GetKeyUp(KeyCode.V))
+        {
+            StartCoroutine(charOnScene.GetComponent<CharacterBase>().LoadSpecialAttack());
+        }
     }
 
     // Start is called before the first frame update
