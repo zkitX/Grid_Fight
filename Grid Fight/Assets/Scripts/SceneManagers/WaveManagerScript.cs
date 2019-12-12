@@ -9,7 +9,7 @@ public class WaveManagerScript : MonoBehaviour
     public List<WavePhaseClass> WavePhases = new List<WavePhaseClass>();
     public bool isWaveComplete = false;
     public int CurrentNumberOfWaveChars = 0;
-    public List<CharacterBase> WaveCharcters = new List<CharacterBase>();
+    public List<BaseCharacter> WaveCharcters = new List<BaseCharacter>();
 
     private WaveCharClass CurrentWaveChar;
     private List<ScriptableObjectWaveEvent> Events = new List<ScriptableObjectWaveEvent>();
@@ -59,7 +59,7 @@ public class WaveManagerScript : MonoBehaviour
 
     private bool CharStatsCheckInPerc(ScriptableObjectWaveEvent_CharStatsCheckInPerc so)
     {
-        CharacterBase target = null;
+        BaseCharacter target = null;
         foreach (CharacterNameType item in so.CharactersID)
         {
             switch (so.StatToCheck)
@@ -108,9 +108,9 @@ public class WaveManagerScript : MonoBehaviour
 
 
 
-    public CharacterBase GetWaveCharacter(CharacterNameType characterName, Transform parent)
+    public BaseCharacter GetWaveCharacter(CharacterNameType characterName, Transform parent)
     {
-        CharacterBase res;
+        BaseCharacter res;
         res = WaveCharcters.Where(r => r.CharInfo.CharacterID == characterName && !r.IsOnField).FirstOrDefault();
         if (res == null)
         {
@@ -134,7 +134,7 @@ public class WaveManagerScript : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
 
-            CharacterBase newChar = GetWaveCharacter(wavePhase.IsRandom ? GetAvailableRandomWaveCharacter(wavePhase) : GetAvailableWaveCharacter(wavePhase), transform);
+            BaseCharacter newChar = GetWaveCharacter(wavePhase.IsRandom ? GetAvailableRandomWaveCharacter(wavePhase) : GetAvailableWaveCharacter(wavePhase), transform);
             SetCharInRandomPos(newChar);
             isWaveComplete = false;
 
@@ -163,7 +163,7 @@ public class WaveManagerScript : MonoBehaviour
         }
     }
 
-    public void SetCharInRandomPos(CharacterBase currentCharacter)
+    public void SetCharInRandomPos(BaseCharacter currentCharacter)
     {
         BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(currentCharacter.UMS.WalkingSide, currentCharacter.UMS.Pos);
         currentCharacter.UMS.CurrentTilePos = bts.Pos;

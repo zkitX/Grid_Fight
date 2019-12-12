@@ -12,7 +12,7 @@ public class UICharacterSkillContainerScript : MonoBehaviour
 
 
 
-    public void SetupCharacterSkills(CharacterBase currentSelectedChar)
+    public void SetupCharacterSkills(CharacterTypeScript currentSelectedChar)
     {
         ASkill.Anim.SetBool("Active", false);
         YSkill.Anim.SetBool("Active", false);
@@ -21,7 +21,7 @@ public class UICharacterSkillContainerScript : MonoBehaviour
         UICharSkillScript nextAnimAvailable = BSkill;
         ASkill.Anim.SetBool("Active", true);
         ASkill.SkillIcon.sprite = currentSelectedChar.CharInfo.CharacterIcon;
-        foreach (CharacterBase item in BattleManagerScript.Instance.AllCharactersOnField.Where(r=> r != currentSelectedChar && r.UMS.Side == currentSelectedChar.UMS.Side))
+        foreach (CharacterTypeScript item in BattleManagerScript.Instance.AllCharactersOnField.Where(r=> r != currentSelectedChar && r.UMS.Side == currentSelectedChar.UMS.Side))
         {
 
             //TODO relationship

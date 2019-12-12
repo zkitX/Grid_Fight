@@ -23,6 +23,9 @@ public class VFXTester : MonoBehaviour
     public TextMeshProUGUI SpeedOfBulletsText;
     public TextMeshProUGUI MountainDelayText;
 
+    public List<ScriptableObjectAttackType> AttacksTypeInfo = new List<ScriptableObjectAttackType>();
+
+
     private void Start()
     {
 
@@ -60,7 +63,7 @@ public class VFXTester : MonoBehaviour
 
         if(charOnScene != null && Input.GetKeyUp(KeyCode.V))
         {
-            StartCoroutine(charOnScene.GetComponent<CharacterBase>().LoadSpecialAttack());
+            StartCoroutine(charOnScene.GetComponent<CharacterTypeScript>().LoadSpecialAttack());
         }
     }
 
@@ -71,7 +74,7 @@ public class VFXTester : MonoBehaviour
         BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(3,9));
         charOnScene = Instantiate(CharacterBasePrefab, bts.transform.position, Quaternion.identity);
         GameObject child = Instantiate(Characters.Where(r=> r.CharName.ToString() == CharToUse.options[CharToUse.value].text).First().Char, charOnScene.transform.position, Quaternion.identity, charOnScene.transform);
-        CharacterBase currentCharacter = charOnScene.GetComponent<CharacterBase>();
+        CharacterTypeScript currentCharacter = charOnScene.GetComponent<CharacterTypeScript>();
         currentCharacter.VFXTestMode = true;
         currentCharacter.UMS.CurrentTilePos = bts.Pos;
         for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)
@@ -87,7 +90,7 @@ public class VFXTester : MonoBehaviour
         currentCharacter.CharInfo.ClassType = (CharacterClassType)Enum.Parse(typeof(CharacterClassType), CharacterClass.options[CharacterClass.value].text);
         currentCharacter.CharInfo.BulletSpeed = SpeedOfBullets.value;
         currentCharacter.CharInfo.ParticleID = currentCharacter.CharInfo.ParticleID;
-        currentCharacter.CurrentAttackTypeInfo = currentCharacter.AttackTypesInfo.Where(r => r.CharacterClass == currentCharacter.CharInfo.ClassType).First();
+        currentCharacter.CharInfo.CurrentAttackTypeInfo = AttacksTypeInfo.Where(r => r.CharacterClass == currentCharacter.CharInfo.ClassType).First();
         currentCharacter.CharInfo.DamageStats.ChildrenBulletDelay = MountainDelay.value;
     }
 }

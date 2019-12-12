@@ -9,15 +9,16 @@ public class AIScript : MonoBehaviour
     public float MaxMovementTimer = 8;
     private IEnumerator MoveCo;
     private bool MoveCoOn = true;
-    public CharacterBase CharOwner;
+    public BaseCharacter CharOwner;
     // Start is called before the first frame update
     private void Start()
     {
             
     }
 
-    public void StartMoveCo()
+    public void StartMoveCo(BaseCharacter charOwner)
     {
+        CharOwner = charOwner;
         MoveCoOn = true;
         MoveCo = Move();
         StartCoroutine(MoveCo);

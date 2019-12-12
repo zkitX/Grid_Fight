@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIBattleFieldScript : MonoBehaviour
 {
 
-    public CharacterBase CharOwner;
+    public BaseCharacter CharOwner;
     [SerializeField]
     private Image CharacterHealthBar;
     [SerializeField]

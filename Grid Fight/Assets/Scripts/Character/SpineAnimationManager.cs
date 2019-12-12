@@ -7,7 +7,7 @@ public class SpineAnimationManager : MonoBehaviour
     private SkeletonAnimation skeletonAnimation;
     public Spine.AnimationState SpineAnimationState;
     public Spine.Skeleton skeleton;
-    public CharacterBase CharOwner;
+    public BaseCharacter CharOwner;
 
     public AnimationCurve UpMovementSpeed;
     public AnimationCurve DownMovementSpeed;

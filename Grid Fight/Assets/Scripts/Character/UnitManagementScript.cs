@@ -41,7 +41,7 @@ public class UnitManagementScript : MonoBehaviour
     public bool isAIOn;
     public AIScript AI;
     public bool Test = false;
-    public CharacterBase CharOwner;
+    public BaseCharacter CharOwner;
 
 
     //Used to decide the side
@@ -111,7 +111,7 @@ public class UnitManagementScript : MonoBehaviour
         UnitBehaviour = ubt;
         if (ai)
         {
-            AI.StartMoveCo();
+            AI.StartMoveCo(CharOwner);
         }
         else
         {

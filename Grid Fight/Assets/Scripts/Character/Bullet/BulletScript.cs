@@ -176,7 +176,7 @@ public class BulletScript : MonoBehaviour
     public IEnumerator ChildExplosion(List<Vector2Int> bet)
     {
         float timer = 0;
-        CharacterBase target;
+        BaseCharacter target;
         if (!VFXTestMode)
         {
             target = target = BattleManagerScript.Instance.GetCharInPos(DestinationTile);
@@ -217,7 +217,7 @@ public class BulletScript : MonoBehaviour
     }
 
 
-    public void MakeDamage(CharacterBase target)
+    public void MakeDamage(BaseCharacter target)
     {
         if (target != null)
         {
@@ -276,7 +276,7 @@ public class BulletScript : MonoBehaviour
         //If the bullet collide with a character 
         if(other.tag.Contains("Side") && other.tag != Side.ToString()) 
         {
-            CharacterBase target = other.GetComponentInParent<CharacterBase>();
+            CharacterTypeScript target = other.GetComponentInParent<CharacterTypeScript>();
             MakeDamage(target);
             //fire the Effect
             FireEffectParticles(transform.position, CharInfo.ClassType == CharacterClassType.Desert ? false : true);

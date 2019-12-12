@@ -14,7 +14,7 @@ public class UIBattleFieldManager : MonoBehaviour
     {
         Instance = this;
     }
-    public void SetUIBattleField(CharacterBase cb)
+    public void SetUIBattleField(BaseCharacter cb)
     {
         GameObject uibattleField = ListOfUIBattleField.Where(r => !r.activeInHierarchy).FirstOrDefault();
         if (uibattleField == null)

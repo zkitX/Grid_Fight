@@ -478,7 +478,7 @@ public class BattleTileScript : MonoBehaviour
         //If collides with a character and the tile type is not base
         if (other.tag.Contains("Character") && BattleTileT != BattleTileType.Base && BattleTileState == BattleTileStateType.Occupied)
         {
-            CharacterBase targetCharacter = other.GetComponentInParent<CharacterBase>();
+            BaseCharacter targetCharacter = other.GetComponentInParent<BaseCharacter>();
 
             if(targetCharacter.UMS.Pos.Contains(Pos))
             {
@@ -494,7 +494,7 @@ public class BattleTileScript : MonoBehaviour
     }
 
     //Setup the Tile effect
-    private void TargetCharacter_TileMovementCompleteEvent(CharacterBase movingChar)
+    private void TargetCharacter_TileMovementCompleteEvent(BaseCharacter movingChar)
     {
         //If is a Portal-In
         if (BattleTileT == BattleTileType.Portal && PortalInfo.Portal == PortalType.In)

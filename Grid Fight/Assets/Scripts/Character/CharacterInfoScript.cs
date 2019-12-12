@@ -22,22 +22,15 @@ public class CharacterInfoScript : MonoBehaviour
     public Sprite CharacterIcon;
     public BaseCharType BaseCharacterType;
     public CharacterNameType CharacterID;
+    public ScriptableObjectAttackType CurrentAttackTypeInfo;
     public AttackParticleTypes ParticleID;
     public ElementalType Elemental;
     public CharacterClassType ClassType;
     public CharacterLevelType CharacterLevel;
-
-    //  public AnimationCurve Trajectory_Y;
-    //  public AnimationCurve Trajectory_Z;
-    // public List<Vector2Int> BulletDistanceInTile = new List<Vector2Int>();
     [HideInInspector]
     public CharacterSelectionType CharacterSelection;
     [HideInInspector]
     public List<ControllerType> PlayerController = new List<ControllerType>();
-
-    //  public ArmorClass Armor;
-    //   public WeaponClass Weapon;
-
     // public List<CharactersRelationshipClass> CharacterRelationships = new List<CharactersRelationshipClass>();
 
     public HealthStastsClass HealthStats;

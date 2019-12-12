@@ -332,10 +332,12 @@ public enum PortalType
 
 public enum BaseCharType
 {
-    Minion,
-    SecondaryCharacter,
-    MainCharacter,
-    Boss
+    CharacterTypeScript,
+    MinionTypeScript,
+    Stage04_BossGirl_Flower_Script,
+    Stage04_BossGirl_Script,
+    Stage04_BossMonster_Flower_Script,
+    Stage04_BossMonster_Script
 }
 
 public enum AttackParticleTypes
