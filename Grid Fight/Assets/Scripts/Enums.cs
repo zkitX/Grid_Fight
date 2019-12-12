@@ -271,6 +271,22 @@ public enum BuffDebuffStatsType
     AttackType
 }
 
+public enum WaveStatsType
+{
+    Health,
+    Stamina,
+    AttackSpeed,
+    MovementSpeed,
+    BaseSpeed
+}
+
+public enum ValueCheckerType
+{
+    LessThan,
+    EqualTo,
+    MoreThan
+}
+
 public enum ElementalWeaknessType
 {
     ExtremelyWeak = -3,

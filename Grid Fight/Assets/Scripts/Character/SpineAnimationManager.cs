@@ -41,52 +41,25 @@ public class SpineAnimationManager : MonoBehaviour
     //Used to get spine event
     private void SpineAnimationState_Event(Spine.TrackEntry trackEntry, Spine.Event e)
     {
-        if (e.Data.Name.Contains("FireParticle"))
+
+        if (e.Data.Name.Contains("FireCastParticle"))
+        {
+            CharOwner.FireCastParticles();
+        }
+        if (e.Data.Name.Contains("FireBulletParticle"))
         {
             CharOwner.isAttackCompletetd = true;
-
-            /* switch (CharOwner.NextAttackLevel)
-             {
-                 case CharacterLevelType.Novice:
-
-
-                     break;
-                 case CharacterLevelType.Defiant:
-                     CharOwner.CharInfo.StaminaStats.Stamina -= CharOwner.CharInfo.StaminaStats.Stamina_Cost_S_Atk01;
-
-                     break;
-                 case CharacterLevelType.Heroine:
-                     CharOwner.CharInfo.StaminaStats.Stamina -= CharOwner.CharInfo.StaminaStats.Stamina_Cost_S_Atk01;
-
-                     break;
-                 case CharacterLevelType.Godness:
-                     CharOwner.CharInfo.StaminaStats.Stamina -= CharOwner.CharInfo.StaminaStats.Stamina_Cost_S_Atk01;
-
-                     break;
-             }*/
-
             CharOwner.CharInfo.StaminaStats.Stamina -= CharOwner.CharInfo.StaminaStats.Stamina_Cost_Atk;
-
 
             switch (CharOwner.CharInfo.ClassType)
             {
                 case CharacterClassType.Valley:
                     //CharOwner.CreateSingleBullet(CharOwner.CharInfo.BulletDistanceInTile[0], CharOwner.NextAttackLevel);
                     CharOwner.CreateSingleBullet();
-                    if (!CharOwner.VFXTestMode)
-                    {
-                        CharOwner.NextAttackLevel = CharacterLevelType.Novice;
-
-                    }
                     break;
                 case CharacterClassType.Mountain:
                     //CharOwner.CreateSingleBullet(CharOwner.CharInfo.BulletDistanceInTile[0], CharOwner.NextAttackLevel);
                     CharOwner.CreateSingleBullet();
-                    if (!CharOwner.VFXTestMode)
-                    {
-                        CharOwner.NextAttackLevel = CharacterLevelType.Novice;
-
-                    }
                     break;
                 case CharacterClassType.Forest:
                     CharOwner.CreateMachingunBullets();
@@ -94,14 +67,13 @@ public class SpineAnimationManager : MonoBehaviour
                 case CharacterClassType.Desert:
                     //CharOwner.CreateSingleBullet(CharOwner.CharInfo.BulletDistanceInTile[0], CharOwner.NextAttackLevel);
                     CharOwner.CreateSingleBullet();
-                    if (!CharOwner.VFXTestMode)
-                    {
-                        CharOwner.NextAttackLevel = CharacterLevelType.Novice;
-
-                    }
                     break;
             }
-            
+            if (!CharOwner.VFXTestMode)
+            {
+                CharOwner.NextAttackLevel = CharacterLevelType.Novice;
+
+            }
         }
     }
 
@@ -116,11 +88,6 @@ public class SpineAnimationManager : MonoBehaviour
         }
         
         CharacterAnimationStateType completedAnim = (CharacterAnimationStateType)System.Enum.Parse(typeof(CharacterAnimationStateType), skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name);
-
-        if (completedAnim.ToString().Contains("Dash"))
-        {
-            Debug.Log(Time.time);
-        }
 
         if (completedAnim == CharacterAnimationStateType.Arriving)
         {
@@ -139,7 +106,6 @@ public class SpineAnimationManager : MonoBehaviour
     public void SetAnim(CharacterAnimationStateType anim, bool loop)
     {
         SetupSpineAnim();
-        Debug.Log(anim);
         if(anim == CharacterAnimationStateType.Arriving)
         {
             SpineAnimationState.SetAnimation(1, anim.ToString(), loop);
@@ -147,10 +113,6 @@ public class SpineAnimationManager : MonoBehaviour
         else
         {
             SpineAnimationState.SetAnimation(1, anim.ToString(), loop).MixDuration = AnimationTransition;
-        }
-        if (anim.ToString().Contains("Dash"))
-        {
-            Debug.Log(Time.time);
         }
         CurrentAnim = anim;
     }

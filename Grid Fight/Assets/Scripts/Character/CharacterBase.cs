@@ -204,7 +204,10 @@ public class CharacterBase : MonoBehaviour
         SetAnimation(CharacterAnimationStateType.Atk1);
     }
 
-
+    public void FireCastParticles()
+    {
+        StartCoroutine(CastAttackParticles(NextAttackLevel));
+    }
     //start the casting particlaes foe the attack
     public IEnumerator CastAttackParticles(CharacterLevelType clt)
     {
@@ -441,7 +444,7 @@ public class CharacterBase : MonoBehaviour
     {
         SetAnimation(animState);
         float AnimLength = SpineAnim.GetAnimLenght(animState);
-        Debug.Log(AnimLength + "  AnimLenght   " + AnimLength / CharInfo.MovementSpeed + " Actual duration" );
+      //  Debug.Log(AnimLength + "  AnimLenght   " + AnimLength / CharInfo.MovementSpeed + " Actual duration" );
         float timer = 0;
         float speedTimer = 0;
         Vector3 offset = transform.position;
@@ -648,7 +651,6 @@ public class CharacterBase : MonoBehaviour
 
         if (animState == CharacterAnimationStateType.Atk || animState == CharacterAnimationStateType.Atk1)
         {
-            StartCoroutine(CastAttackParticles(NextAttackLevel));
             AnimSpeed = CharInfo.AttackSpeed * CharInfo.BaseSpeed;
         }
         else if (animState == CharacterAnimationStateType.DashDown ||

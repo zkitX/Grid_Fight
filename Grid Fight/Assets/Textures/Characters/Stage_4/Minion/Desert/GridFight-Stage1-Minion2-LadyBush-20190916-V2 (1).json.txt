@@ -695,7 +695,8 @@
 	}
 ],
 "events": {
-	"FireParticles": {}
+	"FireCastParticle": {},
+	"FireBulletParticle": {}
 },
 "animations": {
 	"Arriving": {
@@ -6366,7 +6367,8 @@
 			}
 		],
 		"events": [
-			{ "time": 0.6, "name": "FireParticles" }
+			{ "time": 0.6, "name": "FireCastParticle" },
+			{ "time": 0.6, "name": "FireBulletParticle" }
 		]
 	},
 	"Buff": {

@@ -122,7 +122,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7341625253220457038}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.971, z: 0}
+  m_LocalPosition: {x: 0, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2088360085285252918}
@@ -346,7 +346,7 @@ MonoBehaviour:
   ClassType: 3
   CharacterLevel: 0
   CharacterSelection: 0
-  PlayerController: 0
+  PlayerController: 
   HealthStats:
     Health: 100
     Base: 100
@@ -358,9 +358,11 @@ MonoBehaviour:
     Base: 40
     Regeneration: 1
     BaseStaminaRegeneration: 1
+    Stamina_Cost_Atk: 0
     Stamina_Cost_S_Atk01: 1
     Stamina_Cost_S_Atk02: 1
     Stamina_Cost_S_Atk03: 1
+    Stamina_Cost_S_Atk04: 0
     LevelMultiplier: 0
   SpeedStats:
     BaseSpeed: 1

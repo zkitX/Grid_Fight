@@ -42,7 +42,6 @@ public class BattleManagerScript : MonoBehaviour
     private List<PlayableCharOnScene> PlayablesCharOnScene = new List<PlayableCharOnScene>();
     [SerializeField]
     private List<Color> playersColor = new List<Color>();
-    public List<CharacterBase> WaveCharcters = new List<CharacterBase>();
     private MatchType matchType;
     public void SetupBattleState()
     {
@@ -66,19 +65,7 @@ public class BattleManagerScript : MonoBehaviour
 
     #region Waves
 
-    public CharacterBase GetWaveCharacter(CharacterNameType characterName, Transform parent)
-    {
-        CharacterBase res;
-        res = WaveCharcters.Where(r => r.CharInfo.CharacterID == characterName && !r.IsOnField).FirstOrDefault();
-        if(res == null)
-        {
-            
-            res = CreateChar(new CharacterBaseInfoClass(characterName.ToString(), CharacterSelectionType.A,
-                CharacterLevelType.Novice, new List<ControllerType> {  ControllerType.Enemy}, characterName, WalkingSideType.RightSide), parent);
-        }
-
-        return res;
-    }
+   
     #endregion
 
     #region SetCharacterOnBoard
