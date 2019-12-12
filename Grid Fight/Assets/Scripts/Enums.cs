@@ -348,7 +348,10 @@ public enum AttackParticleTypes
     Stage04_Desert,
     Stage04_Mountain,
     Stage04_Forest,
-    Stage04_Valley
+    Stage04_Valley,
+    Stage00_Minion_Valley,
+    Stage00_Minion_Forest,
+    Stage00_Minion_Mountain
 }
 
 
