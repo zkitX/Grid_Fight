@@ -91,12 +91,9 @@ public class BaseCharacter : MonoBehaviour
             UMS.Pos[i] = Vector2Int.zero;
         }
         IsOnField = false;
-        gameObject.SetActive(false);
-        if (WaveManagerScript.Instance != null)
-        {
-            WaveManagerScript.Instance.CurrentNumberOfWaveChars--;
-        }
+        CanAttack = false;
         CurrentCharIsDeadEvent(CharInfo.CharacterID, UMS.PlayerController, UMS.Side);
+        gameObject.SetActive(false);
     }
 
     public virtual void SetUpEnteringOnBattle()

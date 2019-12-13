@@ -1,5 +1,5 @@
-C:\Users\amico\Documents\Playtra\GridFight\Grid\ Fight\SwitchIL2CPPCache\il2cpp_cache\DC306898E0DC4D659BFD336E46D152FE.o: \
-  C:\Users\amico\Documents\Playtra\GridFight\Grid\ Fight\Temp\StagingArea\il2cppOutput\Il2CppCompilerCalculateTypeValues3.cpp \
+C:\Users\amico\Documents\Playtra\GridFight\Grid\ Fight\SwitchIL2CPPCache\il2cpp_cache\C86EF40B078FD9E3A52953C867C1E780.o: \
+  C:\Users\amico\Documents\Playtra\GridFight\Grid\ Fight\Temp\StagingArea\il2cppOutput\Assembly-CSharp24.cpp \
   C:\Unity2019.2.12\Unity\Editor\Data\il2cpp\libil2cpp\il2cpp-config.h \
   C:\Nintendo\GridFight\NintendoSDK\Compilers\NX\nx\aarch64\include\assert.h \
   C:\Nintendo\GridFight\NintendoSDK\Compilers\NX\nx\aarch64\include\features.h \
@@ -80,6 +80,8 @@ C:\Users\amico\Documents\Playtra\GridFight\Grid\ Fight\SwitchIL2CPPCache\il2cpp_
   C:\Nintendo\GridFight\NintendoSDK\Compilers\NX\nx\aarch64\include\c++\v1\cmath \
   C:\Nintendo\GridFight\NintendoSDK\Compilers\NX\nx\aarch64\include\c++\v1\math.h \
   C:\Nintendo\GridFight\NintendoSDK\Compilers\NX\nx\aarch64\include\math.h \
+  C:\Unity2019.2.12\Unity\Editor\Data\il2cpp\libil2cpp\codegen\il2cpp-codegen.h \
+  C:\Unity2019.2.12\Unity\Editor\Data\il2cpp\libil2cpp\codegen\il2cpp-codegen-metadata.h \
   C:\Unity2019.2.12\Unity\Editor\Data\il2cpp\libil2cpp\il2cpp-class-internals.h \
   C:\Unity2019.2.12\Unity\Editor\Data\il2cpp\libil2cpp\il2cpp-config.h \
   C:\Unity2019.2.12\Unity\Editor\Data\il2cpp\libil2cpp\il2cpp-runtime-metadata.h \
@@ -89,8 +91,6 @@ C:\Users\amico\Documents\Playtra\GridFight\Grid\ Fight\SwitchIL2CPPCache\il2cpp_
   C:\Unity2019.2.12\Unity\Editor\Data\il2cpp\libil2cpp\il2cpp-pinvoke-support.h \
   C:\Unity2019.2.12\Unity\Editor\Data\il2cpp\libil2cpp\il2cpp-windowsruntime-types.h \
   C:\Unity2019.2.12\Unity\Editor\Data\il2cpp\libil2cpp\utils\StringView.h \
-  C:\Unity2019.2.12\Unity\Editor\Data\il2cpp\libil2cpp\codegen\il2cpp-codegen.h \
-  C:\Unity2019.2.12\Unity\Editor\Data\il2cpp\libil2cpp\codegen\il2cpp-codegen-metadata.h \
   C:\Unity2019.2.12\Unity\Editor\Data\il2cpp\libil2cpp\codegen\il2cpp-codegen-il2cpp.h \
   C:\Unity2019.2.12\Unity\Editor\Data\il2cpp\libil2cpp\codegen\il2cpp-codegen-common.h \
   C:\Unity2019.2.12\Unity\Editor\Data\il2cpp\libil2cpp\il2cpp-object-internals.h \

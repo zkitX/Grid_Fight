@@ -190,6 +190,7 @@ public class CharacterInfoScript : MonoBehaviour
             {
                 if (DeathEvent != null)
                 {
+                    Debug.Log("Enter");
                     DeathEvent();
                 }
             }

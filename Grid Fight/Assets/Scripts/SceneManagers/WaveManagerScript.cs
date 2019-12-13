@@ -8,7 +8,6 @@ public class WaveManagerScript : MonoBehaviour
     public static WaveManagerScript Instance;
     public List<WavePhaseClass> WavePhases = new List<WavePhaseClass>();
     public bool isWaveComplete = false;
-    public int CurrentNumberOfWaveChars = 0;
     public List<BaseCharacter> WaveCharcters = new List<BaseCharacter>();
 
     private WaveCharClass CurrentWaveChar;
@@ -156,7 +155,7 @@ public class WaveManagerScript : MonoBehaviour
                     yield return new WaitForEndOfFrame();
                 }
 
-                if(timer > CurrentWaveChar.DelayBetweenChars && CurrentNumberOfWaveChars < wavePhase.MaxEnemyOnScreen)
+                if(timer > CurrentWaveChar.DelayBetweenChars && WaveCharcters.Where(r=> r.gameObject.activeInHierarchy).ToList().Count < wavePhase.MaxEnemyOnScreen)
                 {
                     newChar = GetWaveCharacter(wavePhase.IsRandom ? GetAvailableRandomWaveCharacter(wavePhase) : GetAvailableWaveCharacter(wavePhase), transform);
                     SetCharInRandomPos(newChar);
@@ -187,7 +186,6 @@ public class WaveManagerScript : MonoBehaviour
         }
         currentCharacter.SetUpEnteringOnBattle();
         StartCoroutine(BattleManagerScript.Instance.MoveCharToBoardWithDelay(0.2f, currentCharacter, bts.transform.position));
-        CurrentNumberOfWaveChars++;
     }
 
 
