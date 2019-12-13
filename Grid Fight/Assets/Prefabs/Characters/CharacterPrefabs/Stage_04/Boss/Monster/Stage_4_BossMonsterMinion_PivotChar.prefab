@@ -212,9 +212,6 @@ GameObject:
   - component: {fileID: 1910994676725504018}
   - component: {fileID: 1910994676725504017}
   - component: {fileID: 1910994676725504016}
-  - component: {fileID: 906339637}
-  - component: {fileID: 1415493789}
-  - component: {fileID: 819893721}
   - component: {fileID: 443278945}
   m_Layer: 0
   m_Name: Spine GameObject (Stage01-Minion-Moutain)
@@ -265,15 +262,15 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc8d395c929a750488bbb66d1753f991, type: 2}
-  - {fileID: 2100000, guid: 2084b49d75d6fbd4e90736c23840b6f5, type: 2}
-  - {fileID: 2100000, guid: bc8d395c929a750488bbb66d1753f991, type: 2}
-  - {fileID: 2100000, guid: 2084b49d75d6fbd4e90736c23840b6f5, type: 2}
-  - {fileID: 2100000, guid: bc8d395c929a750488bbb66d1753f991, type: 2}
-  - {fileID: 2100000, guid: 2084b49d75d6fbd4e90736c23840b6f5, type: 2}
-  - {fileID: 2100000, guid: bc8d395c929a750488bbb66d1753f991, type: 2}
-  - {fileID: 2100000, guid: 2084b49d75d6fbd4e90736c23840b6f5, type: 2}
-  - {fileID: 2100000, guid: bc8d395c929a750488bbb66d1753f991, type: 2}
+  - {fileID: 2100000, guid: 2a87f403d5c9e784cb59990fb0138b23, type: 2}
+  - {fileID: 2100000, guid: 9f8dd2353c3a09a419bae71937b1d21e, type: 2}
+  - {fileID: 2100000, guid: 2a87f403d5c9e784cb59990fb0138b23, type: 2}
+  - {fileID: 2100000, guid: 9f8dd2353c3a09a419bae71937b1d21e, type: 2}
+  - {fileID: 2100000, guid: 2a87f403d5c9e784cb59990fb0138b23, type: 2}
+  - {fileID: 2100000, guid: 9f8dd2353c3a09a419bae71937b1d21e, type: 2}
+  - {fileID: 2100000, guid: 2a87f403d5c9e784cb59990fb0138b23, type: 2}
+  - {fileID: 2100000, guid: 9f8dd2353c3a09a419bae71937b1d21e, type: 2}
+  - {fileID: 2100000, guid: 2a87f403d5c9e784cb59990fb0138b23, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -306,7 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: ccc2a58030957a344b077b78936edc51, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 02188723063949342869ce67caa6089e, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -457,8 +454,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   CharacterIcon: {fileID: 21300000, guid: 305df1f998953104ab04eb3eba46ee09, type: 3}
-  BaseCharacterType: 0
-  CharacterID: 0
+  BaseCharacterType: 4
+  CharacterID: 13
   CurrentAttackTypeInfo: {fileID: 0}
   ParticleID: 0
   Elemental: 0
@@ -530,48 +527,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 0.687141, z: 0}
   m_Center: {x: -0.09, y: 0.34, z: 0}
---- !u!114 &906339637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1910994676725504022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f726fb798ad621458c431cb9966d91d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boneRoot: {fileID: 0}
-  skeletonRenderer: {fileID: 1910994676725504012}
---- !u!114 &1415493789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1910994676725504022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f726fb798ad621458c431cb9966d91d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boneRoot: {fileID: 0}
-  skeletonRenderer: {fileID: 1910994676725504012}
---- !u!114 &819893721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1910994676725504022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f726fb798ad621458c431cb9966d91d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boneRoot: {fileID: 0}
-  skeletonRenderer: {fileID: 1910994676725504012}
 --- !u!114 &443278945
 MonoBehaviour:
   m_ObjectHideFlags: 0

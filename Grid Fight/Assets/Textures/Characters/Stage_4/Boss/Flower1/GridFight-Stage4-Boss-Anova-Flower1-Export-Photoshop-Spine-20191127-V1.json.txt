@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "ceHbIJxFZRHj/cKsz3HMtb7ASxg", "spine": "3.8.78", "x": -115.48, "y": -4.51, "width": 161.97, "height": 158.08 },
+"skeleton": { "hash": "x/DKAhV6SLtYlqxFPGZhrKAFklk", "spine": "3.8.78", "x": -115.48, "y": -4.51, "width": 161.97, "height": 158.08 },
 "bones": [
 	{ "name": "root" },
 	{ "name": "Flower1_Controler", "parent": "root", "x": 35.14, "y": 133.08 },
@@ -299,6 +299,113 @@
 					{ "time": 0.05, "curve": 0.327, "c2": 0.28, "c3": 0.661, "c4": 0.62 },
 					{ "time": 0.0833, "x": 0.379, "curve": 0.285, "c2": 0.15, "c3": 0.754 },
 					{ "time": 2.8333 }
+				]
+			}
+		}
+	},
+	"Growing": {
+		"bones": {
+			"Flower1_MiddleLeaf2": {
+				"rotate": [
+					{ "angle": 1.62 }
+				]
+			},
+			"Flower1_BottonLeaf2": {
+				"rotate": [
+					{ "angle": 1.78, "curve": 0.269, "c3": 0.618, "c4": 0.42 },
+					{ "time": 0.5, "angle": -27.65, "curve": 0.25, "c3": 0.75 },
+					{ "time": 2, "angle": 15.63, "curve": 0.25, "c3": 0.75 },
+					{ "time": 3.3333, "angle": -13.04, "curve": 0.269, "c3": 0.618, "c4": 0.42 },
+					{ "time": 4.25, "angle": -27.65, "curve": 0.25, "c3": 0.75 },
+					{ "time": 5.75, "angle": 15.63, "curve": 0.25, "c3": 0.75 },
+					{ "time": 6.6833, "angle": 1.78 }
+				]
+			},
+			"Flower1_MiddleLeaf3": {
+				"rotate": [
+					{ "angle": 3.24 }
+				]
+			},
+			"Flower1_Controler": {
+				"rotate": [
+					{ "curve": 0.269, "c3": 0.618, "c4": 0.42 },
+					{ "time": 3.3333, "angle": -31.84, "curve": 0.269, "c3": 0.618, "c4": 0.42 },
+					{ "time": 6.6833 }
+				],
+				"translate": [
+					{ "curve": 0.406, "c3": 0.644 },
+					{ "time": 3.3333, "y": 74.06, "curve": 0.406, "c3": 0.644 },
+					{ "time": 6.6833 }
+				],
+				"scale": [
+					{ "x": 0.019, "y": 0.019 },
+					{ "time": 6.6833 }
+				]
+			},
+			"Flower1_TopLeaf": {
+				"rotate": [
+					{ "curve": 0.269, "c3": 0.618, "c4": 0.42 },
+					{ "time": 0.5, "angle": -17.44, "curve": 0.25, "c3": 0.75 },
+					{ "time": 2, "angle": -18.78, "curve": 0.25, "c3": 0.75 },
+					{ "time": 3.3333, "curve": 0.269, "c3": 0.618, "c4": 0.42 },
+					{ "time": 4.25, "angle": -17.44, "curve": 0.25, "c3": 0.75 },
+					{ "time": 5.75, "angle": -18.78, "curve": 0.25, "c3": 0.75 },
+					{ "time": 6.6833 }
+				]
+			},
+			"Flower1_TopLeaf2": {
+				"rotate": [
+					{ "angle": 2.47, "curve": 0.269, "c3": 0.618, "c4": 0.42 },
+					{ "time": 0.5, "angle": 27.9, "curve": 0.25, "c3": 0.75 },
+					{ "time": 2, "angle": -16.31, "curve": 0.25, "c3": 0.75 },
+					{ "time": 3.3333, "angle": 15.62, "curve": 0.269, "c3": 0.618, "c4": 0.42 },
+					{ "time": 4.25, "angle": 27.9, "curve": 0.25, "c3": 0.75 },
+					{ "time": 5.75, "angle": -16.31, "curve": 0.25, "c3": 0.75 },
+					{ "time": 6.6833, "angle": 2.47 }
+				]
+			},
+			"Flower1_TopLeaf3": {
+				"rotate": [
+					{ "angle": 4.94, "curve": 0.269, "c3": 0.618, "c4": 0.42 },
+					{ "time": 0.5, "angle": 30.37, "curve": 0.25, "c3": 0.75 },
+					{ "time": 2, "angle": -13.84, "curve": 0.25, "c3": 0.75 },
+					{ "time": 3.3333, "angle": 18.09, "curve": 0.269, "c3": 0.618, "c4": 0.42 },
+					{ "time": 4.25, "angle": 30.37, "curve": 0.25, "c3": 0.75 },
+					{ "time": 5.75, "angle": -13.84, "curve": 0.25, "c3": 0.75 },
+					{ "time": 6.6833, "angle": 4.94 }
+				]
+			},
+			"Flower1_BottonLeaf": {
+				"rotate": [
+					{ "curve": 0.269, "c3": 0.618, "c4": 0.42 },
+					{ "time": 0.5, "angle": 15.99, "curve": 0.25, "c3": 0.75 },
+					{ "time": 2, "angle": 13.85, "curve": 0.25, "c3": 0.75 },
+					{ "time": 3.3333, "curve": 0.269, "c3": 0.618, "c4": 0.42 },
+					{ "time": 4.25, "angle": 15.99, "curve": 0.25, "c3": 0.75 },
+					{ "time": 5.75, "angle": 13.85, "curve": 0.25, "c3": 0.75 },
+					{ "time": 6.6833 }
+				]
+			},
+			"Flower1_MiddleLeaf": {
+				"scale": [
+					{ "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.5, "x": 0.944, "y": 0.981, "curve": 0.25, "c3": 0.75 },
+					{ "time": 2, "x": 0.921, "y": 0.921, "curve": 0.25, "c3": 0.75 },
+					{ "time": 3.3333, "x": 0.887, "y": 0.887, "curve": 0.25, "c3": 0.75 },
+					{ "time": 4.25, "x": 0.944, "y": 0.981, "curve": 0.25, "c3": 0.75 },
+					{ "time": 5.75, "x": 0.921, "y": 0.921, "curve": 0.25, "c3": 0.75 },
+					{ "time": 6.6833 }
+				]
+			},
+			"Flower1_BottonLeaf3": {
+				"rotate": [
+					{ "angle": 3.55, "curve": 0.269, "c3": 0.618, "c4": 0.42 },
+					{ "time": 0.5, "angle": -25.87, "curve": 0.25, "c3": 0.75 },
+					{ "time": 2, "angle": 17.4, "curve": 0.25, "c3": 0.75 },
+					{ "time": 3.3333, "angle": -11.26, "curve": 0.269, "c3": 0.618, "c4": 0.42 },
+					{ "time": 4.25, "angle": -25.87, "curve": 0.25, "c3": 0.75 },
+					{ "time": 5.75, "angle": 17.4, "curve": 0.25, "c3": 0.75 },
+					{ "time": 6.6833, "angle": 3.55 }
 				]
 			}
 		}

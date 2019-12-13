@@ -174,7 +174,6 @@ public class UIBattleManager : MonoBehaviour
     public void Winner(string p1, string p2)
     {
         Win.alpha = 1;
-
         LeftSide.text = p1;
         RightSide.text = p2;
     }

@@ -312,6 +312,8 @@ public enum CharacterAnimationStateType
     Paralized,
     Arriving,
     Growing,
+    Growing1,
+    Growing2,
     DashRight,
     DashLeft,
     DashDown,
