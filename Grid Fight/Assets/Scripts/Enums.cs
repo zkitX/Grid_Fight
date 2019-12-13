@@ -311,6 +311,7 @@ public enum CharacterAnimationStateType
     Defending,
     Paralized,
     Arriving,
+    Growing,
     DashRight,
     DashLeft,
     DashDown,
@@ -332,8 +333,8 @@ public enum PortalType
 
 public enum BaseCharType
 {
-    CharacterTypeScript,
-    MinionTypeScript,
+    CharacterType_Script,
+    MinionType_Script,
     Stage04_BossGirl_Flower_Script,
     Stage04_BossGirl_Script,
     Stage04_BossMonster_Flower_Script,
@@ -351,6 +352,10 @@ public enum AttackParticleTypes
     Stage04_Mountain,
     Stage04_Forest,
     Stage04_Valley,
+    Stage04_BossGirl_Minion,
+    Stage04_BossGirl,
+    Stage04_BossMonster_Minion,
+    Stage04_BossMonster,
     Stage00_Minion_Valley,
     Stage00_Minion_Forest,
     Stage00_Minion_Mountain,
@@ -429,7 +434,14 @@ public enum CharacterNameType
     Stage04_Character_Valley,
     Stage04_Character_Desert,
     Stage04_Character_Mountain,
-    Stage04_Character_Forest
+    Stage04_Character_Forest,
+    Stage04_BossGirl_Minion1,
+    Stage04_BossGirl_Minion2,
+    Stage04_BossGirl_Minion3,
+    Stage04_BossGirl_Minion4,
+    Stage04_BossGirl,
+    Stage04_BossMonster_Minion,
+    Stage04_BossMonster
 }
 
 

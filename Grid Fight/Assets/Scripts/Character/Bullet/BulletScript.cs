@@ -276,7 +276,7 @@ public class BulletScript : MonoBehaviour
         //If the bullet collide with a character 
         if(other.tag.Contains("Side") && other.tag != Side.ToString()) 
         {
-            CharacterTypeScript target = other.GetComponentInParent<CharacterTypeScript>();
+            CharacterType_Script target = other.GetComponentInParent<CharacterType_Script>();
             MakeDamage(target);
             //fire the Effect
             FireEffectParticles(transform.position, CharInfo.ClassType == CharacterClassType.Desert ? false : true);

@@ -86,13 +86,10 @@ public class SpineAnimationManager : MonoBehaviour
         {
             return;
         }
-        
         CharacterAnimationStateType completedAnim = (CharacterAnimationStateType)System.Enum.Parse(typeof(CharacterAnimationStateType), skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name);
-
-        if (completedAnim == CharacterAnimationStateType.Arriving)
+        if (completedAnim == CharacterAnimationStateType.Arriving || completedAnim == CharacterAnimationStateType.Growing)
         {
-            CharOwner.IsOnField = true;
-            
+            CharOwner.CanAttack = true;
         }
         if(completedAnim != CharacterAnimationStateType.Idle)
         {
@@ -106,8 +103,9 @@ public class SpineAnimationManager : MonoBehaviour
     public void SetAnim(CharacterAnimationStateType anim, bool loop)
     {
         SetupSpineAnim();
-        if(anim == CharacterAnimationStateType.Arriving)
+        if(anim == CharacterAnimationStateType.Arriving || anim == CharacterAnimationStateType.Growing)
         {
+            CharOwner.IsOnField = true;
             SpineAnimationState.SetAnimation(1, anim.ToString(), loop);
         }
         else

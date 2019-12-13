@@ -10,7 +10,7 @@ public class UIPlayerSectionScript : MonoBehaviour
 {
     public CanvasGroup CurrentCanvasGroup;
     private int PlayerID;
-    private CharacterTypeScript currentSelectedCharacter;
+    private CharacterType_Script currentSelectedCharacter;
     private Color PlayerColor;
     [SerializeField]
     private List<Image> ComponentToColor = new List<Image>();
@@ -30,7 +30,7 @@ public class UIPlayerSectionScript : MonoBehaviour
     private UICharacterSkillContainerScript CharSkills;
     [SerializeField]
     private Animator CharLevel;
-    public void SetSelectedCharacter(CharacterTypeScript selectedCharacter)
+    public void SetSelectedCharacter(CharacterType_Script selectedCharacter)
     {
         currentSelectedCharacter = selectedCharacter;
         SetupCharacter();

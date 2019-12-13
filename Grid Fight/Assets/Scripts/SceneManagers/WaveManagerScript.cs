@@ -108,17 +108,19 @@ public class WaveManagerScript : MonoBehaviour
 
 
 
-    public BaseCharacter GetWaveCharacter(CharacterNameType characterName, Transform parent)
+    public BaseCharacter GetWaveCharacter(WaveCharacterInfoClass character, Transform parent)
     {
         BaseCharacter res;
-        res = WaveCharcters.Where(r => r.CharInfo.CharacterID == characterName && !r.IsOnField).FirstOrDefault();
+        res = WaveCharcters.Where(r => r.CharInfo.CharacterID == character.CharacterName && !r.IsOnField).FirstOrDefault();
         if (res == null)
         {
 
-            res = BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(characterName.ToString(), CharacterSelectionType.A,
-                CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, characterName, WalkingSideType.RightSide), parent);
+            res = BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(character.CharacterName.ToString(), CharacterSelectionType.A,
+                CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, character.CharacterName, WalkingSideType.RightSide), parent);
 
         }
+        res.CharInfo.HealthStats.Health = Random.Range(character.Health.x, character.Health.y);
+        res.CharInfo.HealthStats.Base = res.CharInfo.HealthStats.Health;
         WaveCharcters.Add(res);
         return res;
     }
@@ -158,6 +160,10 @@ public class WaveManagerScript : MonoBehaviour
                     newChar = GetWaveCharacter(wavePhase.IsRandom ? GetAvailableRandomWaveCharacter(wavePhase) : GetAvailableWaveCharacter(wavePhase), transform);
                     SetCharInRandomPos(newChar);
                     timer = 0;
+                    if(wavePhase.ListOfEnemy.Where(r => r.NumberOfCharacter > 0).ToList().Count == 0)
+                    {
+                        isWaveComplete = true;
+                    }
                 }
             }
         }
@@ -178,29 +184,29 @@ public class WaveManagerScript : MonoBehaviour
         {
             GridManagerScript.Instance.SetBattleTileState(item, BattleTileStateType.Occupied);
         }
-        currentCharacter.SetAnimation(CharacterAnimationStateType.Arriving);
+        currentCharacter.SetUpEnteringOnBattle();
         StartCoroutine(BattleManagerScript.Instance.MoveCharToBoardWithDelay(0.2f, currentCharacter, bts.transform.position));
         CurrentNumberOfWaveChars++;
     }
 
 
-    private CharacterNameType GetAvailableRandomWaveCharacter(WavePhaseClass wavePhase)
+    private WaveCharacterInfoClass GetAvailableRandomWaveCharacter(WavePhaseClass wavePhase)
     {
         List<WaveCharClass> ListOfEnemy = wavePhase.ListOfEnemy.Where(r => r.NumberOfCharacter > 0).ToList();
         CurrentWaveChar = ListOfEnemy[Random.Range(0, ListOfEnemy.Count)];
         CurrentWaveChar.NumberOfCharacter--;
         Events.AddRange(CurrentWaveChar.TypeOfCharacter.Events);
         Events = Events.Distinct().ToList();
-        return CurrentWaveChar.TypeOfCharacter.CharacterName;
+        return CurrentWaveChar.TypeOfCharacter;
     }
 
-    private CharacterNameType GetAvailableWaveCharacter(WavePhaseClass wavePhase)
+    private WaveCharacterInfoClass GetAvailableWaveCharacter(WavePhaseClass wavePhase)
     {
         CurrentWaveChar = wavePhase.ListOfEnemy.Where(r => r.NumberOfCharacter > 0).First();
         CurrentWaveChar.NumberOfCharacter--;
         Events.AddRange(CurrentWaveChar.TypeOfCharacter.Events);
         Events = Events.Distinct().ToList();
-        return CurrentWaveChar.TypeOfCharacter.CharacterName;
+        return CurrentWaveChar.TypeOfCharacter;
     }
 }
 

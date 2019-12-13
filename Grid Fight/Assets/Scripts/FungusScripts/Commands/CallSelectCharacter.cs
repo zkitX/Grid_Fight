@@ -15,7 +15,7 @@ using Fungus;
 public class CallSelectCharacter : Command
 {
     public ControllerType playerController;
-    public CharacterTypeScript characterToSelect;
+    public CharacterType_Script characterToSelect;
 
     protected virtual void CallTheMethod()
     {

@@ -63,7 +63,7 @@ public class VFXTester : MonoBehaviour
 
         if(charOnScene != null && Input.GetKeyUp(KeyCode.V))
         {
-            StartCoroutine(charOnScene.GetComponent<CharacterTypeScript>().LoadSpecialAttack());
+            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().LoadSpecialAttack());
         }
     }
 
@@ -74,7 +74,7 @@ public class VFXTester : MonoBehaviour
         BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(3,9));
         charOnScene = Instantiate(CharacterBasePrefab, bts.transform.position, Quaternion.identity);
         GameObject child = Instantiate(Characters.Where(r=> r.CharName.ToString() == CharToUse.options[CharToUse.value].text).First().Char, charOnScene.transform.position, Quaternion.identity, charOnScene.transform);
-        CharacterTypeScript currentCharacter = charOnScene.GetComponent<CharacterTypeScript>();
+        CharacterType_Script currentCharacter = charOnScene.GetComponent<CharacterType_Script>();
         currentCharacter.VFXTestMode = true;
         currentCharacter.UMS.CurrentTilePos = bts.Pos;
         for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)

@@ -31,7 +31,7 @@ public class BattleManagerScript : MonoBehaviour
     public BattleState _CurrentBattleState;
     public List<BattleTileScript> OccupiedBattleTiles = new List<BattleTileScript>();
     public GameObject CharacterBasePrefab;
-    public Dictionary<ControllerType, CharacterTypeScript> CurrentSelectedCharacters = new Dictionary<ControllerType, CharacterTypeScript>();
+    public Dictionary<ControllerType, CharacterType_Script> CurrentSelectedCharacters = new Dictionary<ControllerType, CharacterType_Script>();
     public List<ScriptableObjectCharacterPrefab> ListOfScriptableObjectCharacterPrefab = new List<ScriptableObjectCharacterPrefab>();
     public List<BaseCharacter> AllCharactersOnField = new List<BaseCharacter>();
     public List<CharacterLoadingInfoClass> CurrentCharactersLoadingInfo = new List<CharacterLoadingInfoClass>();
@@ -90,7 +90,7 @@ public class BattleManagerScript : MonoBehaviour
         {
             GridManagerScript.Instance.SetBattleTileState(item, BattleTileStateType.Occupied);
         }
-        currentCharacter.SetAnimation(CharacterAnimationStateType.Arriving);
+        currentCharacter.SetUpEnteringOnBattle();
         StartCoroutine(MoveCharToBoardWithDelay(0.1f, currentCharacter, bts.transform.position));
         if (playerController == ControllerType.Player1)
         {
@@ -102,7 +102,7 @@ public class BattleManagerScript : MonoBehaviour
             UIBattleManager.Instance.isRightSidePlaying = true;
         }
         PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == cName).First().isUsed = true;
-        SelectCharacter(playerController, (CharacterTypeScript)currentCharacter);
+        SelectCharacter(playerController, (CharacterType_Script)currentCharacter);
     }
     
    
@@ -128,7 +128,7 @@ public class BattleManagerScript : MonoBehaviour
         {
             GridManagerScript.Instance.SetBattleTileState(item, BattleTileStateType.Occupied);
         }
-        currentCharacter.SetAnimation(CharacterAnimationStateType.Arriving);
+        currentCharacter.SetUpEnteringOnBattle();
         StartCoroutine(MoveCharToBoardWithDelay(0.1f, currentCharacter, bts.transform.position));
         if (playerController == ControllerType.Player1)
         {
@@ -140,7 +140,7 @@ public class BattleManagerScript : MonoBehaviour
             UIBattleManager.Instance.isRightSidePlaying = true;
         }
         PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == cName).First().isUsed = true;
-        SelectCharacter(playerController, (CharacterTypeScript)currentCharacter);
+        SelectCharacter(playerController, (CharacterType_Script)currentCharacter);
     }
 
     public IEnumerator MoveCharToBoardWithDelay(float delay, BaseCharacter cb, Vector3 nextPos)
@@ -203,23 +203,33 @@ public class BattleManagerScript : MonoBehaviour
 
     private void CurrentCharacter_CurrentCharIsDeadEvent(CharacterNameType cName, List<ControllerType> playerController,  SideType side)
     {
-        PlayablesCharOnScene.Where(r=> r.Side == side && r.CName == cName).First().isAlive = false;
-
-        List<PlayableCharOnScene> res = new List<PlayableCharOnScene>();
-
-        res = PlayablesCharOnScene.Where(r => r.PlayerController == playerController).ToList();
-
-        if(res.Where(r=> !r.isAlive && r.isUsed).ToList().Count == res.Count)
+        if(!playerController.Contains(ControllerType.Enemy))
         {
-            UIBattleManager.Instance.Winner(side == SideType.LeftSide ? "Lost" : "Win", side == SideType.RightSide ? "Lost" : "Win");
-            CurrentBattleState = BattleState.End;
-            return;
-        }
+            PlayablesCharOnScene.Where(r => r.Side == side && r.CName == cName).First().isAlive = false;
 
-        if(res.Where(r=> r.isUsed).ToList().Count == res.Where(r=> !r.isAlive).ToList().Count)
-        {
-            UIBattleManager.Instance.StartTimeUp(15, side);
+            List<PlayableCharOnScene> res = new List<PlayableCharOnScene>();
+
+            PlayablesCharOnScene.ForEach(r =>
+            {
+                if(r.PlayerController.Intersect(playerController).Count() == playerController.Count)
+                {
+                    res.Add(r);
+                }
+            });
+
+            if (res.Where(r => !r.isAlive && r.isUsed).ToList().Count == res.Count)
+            {
+                UIBattleManager.Instance.Winner(side == SideType.LeftSide ? "Lost" : "Win", side == SideType.RightSide ? "Lost" : "Win");
+                CurrentBattleState = BattleState.End;
+                return;
+            }
+
+            if (res.Where(r => r.isUsed).ToList().Count == res.Where(r => !r.isAlive).ToList().Count)
+            {
+                UIBattleManager.Instance.StartTimeUp(15, side);
+            }
         }
+       
 
     }
 
@@ -238,7 +248,7 @@ public class BattleManagerScript : MonoBehaviour
         }
         else
         {
-            SelectCharacter(playerController, (CharacterTypeScript)AllCharactersOnField.Where(r => r.UMS.Side == side && r.CharInfo.CharacterID == cName).First());
+            SelectCharacter(playerController, (CharacterType_Script)AllCharactersOnField.Where(r => r.UMS.Side == side && r.CharInfo.CharacterID == cName).First());
         }
     }
 
@@ -254,11 +264,11 @@ public class BattleManagerScript : MonoBehaviour
     //Used to select a char under a determinated player
     public void SetCharacterSelection(CharacterSelectionType characterSelection, ControllerType playerController)
     {
-        SelectCharacter(playerController, (CharacterTypeScript)AllCharactersOnField.Where(r=> r.CharInfo.CharacterSelection == characterSelection && r.UMS.PlayerController.Contains(playerController)).FirstOrDefault());
+        SelectCharacter(playerController, (CharacterType_Script)AllCharactersOnField.Where(r=> r.CharInfo.CharacterSelection == characterSelection && r.UMS.PlayerController.Contains(playerController)).FirstOrDefault());
     }
 
     //Used to select a char 
-    public void SelectCharacter(ControllerType playerController, CharacterTypeScript currentCharacter)
+    public void SelectCharacter(ControllerType playerController, CharacterType_Script currentCharacter)
     {
         if(currentCharacter != null)
         {
@@ -401,7 +411,7 @@ public class BattleManagerScript : MonoBehaviour
         List<UIIconClass> resLeft = new List<UIIconClass>();
         List<UIIconClass> resRight = new List<UIIconClass>();
 
-        foreach (CharacterTypeScript item in AllCharactersOnField)
+        foreach (BaseCharacter item in AllCharactersOnField)
         {
             if(item.UMS.Side == SideType.RightSide)
             {

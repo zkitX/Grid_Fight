@@ -37,6 +37,7 @@ public class BaseCharacter : MonoBehaviour
     public List<BattleTileScript> CurrentBattleTiles = new List<BattleTileScript>();
     public SpineAnimationManager SpineAnim;
     public bool IsOnField = false;
+    public bool CanAttack = false;
     public GameObject BaseBullet;
     public CharacterLevelType NextAttackLevel = CharacterLevelType.Novice;
     public bool isSpecialLoading = false;
@@ -84,9 +85,10 @@ public class BaseCharacter : MonoBehaviour
 
     protected virtual void SetCharDead()
     {
-        foreach (Vector2Int item in UMS.Pos)
+        for (int i = 0; i < UMS.Pos.Count; i++)
         {
-            GridManagerScript.Instance.SetBattleTileState(item, BattleTileStateType.Empty);
+            GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
+            UMS.Pos[i] = Vector2Int.zero;
         }
         IsOnField = false;
         gameObject.SetActive(false);
@@ -97,9 +99,11 @@ public class BaseCharacter : MonoBehaviour
         CurrentCharIsDeadEvent(CharInfo.CharacterID, UMS.PlayerController, UMS.Side);
     }
 
+    public virtual void SetUpEnteringOnBattle()
+    {
+
+    }
     #endregion
-
-
     #region Attack
 
     public virtual IEnumerator AttackAction()
@@ -203,7 +207,6 @@ public class BaseCharacter : MonoBehaviour
         transform.eulerAngles = offsetRotation;
     }
     #endregion
-
     #region Move
     public virtual void MoveCharOnDirection(InputDirection nextDir)
     {
@@ -489,6 +492,10 @@ public class BaseCharacter : MonoBehaviour
 
     public void SetDamage(float damage, ElementalType elemental)
     {
+        if(!CanAttack)
+        {
+            return;
+        }
         ElementalWeaknessType ElaboratedWeakness;
         CurrentBuffsDebuffsClass buffDebuffWeakness = BuffsDebuffs.Where(r => r.ElementalResistence.Elemental == elemental).FirstOrDefault();
 
