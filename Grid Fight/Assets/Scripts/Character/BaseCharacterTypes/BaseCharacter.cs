@@ -109,6 +109,7 @@ public class BaseCharacter : MonoBehaviour
         IsOnField = false;
         CanAttack = false;
         Call_CurrentCharIsDeadEvent();
+        transform.position = new Vector3(100,100,100);
         gameObject.SetActive(false);
     }
 
@@ -650,7 +651,7 @@ public class BaseCharacter : MonoBehaviour
     #endregion
 
 
-    public void SetDamage(float damage, ElementalType elemental)
+    public virtual void SetDamage(float damage, ElementalType elemental)
     {
         if(!CanAttack)
         {

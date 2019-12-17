@@ -162,6 +162,7 @@ public class WaveManagerScript : MonoBehaviour
                         isWaveComplete = true;
                         break;
                     }
+                    yield return new WaitForSecondsRealtime(0.1f);
                     newChar = GetWaveCharacter(wavePhase.IsRandom ? GetAvailableRandomWaveCharacter(wavePhase) : GetAvailableWaveCharacter(wavePhase), transform);
                     SetCharInRandomPos(newChar);
                     timer = 0;
@@ -182,6 +183,7 @@ public class WaveManagerScript : MonoBehaviour
 
     public void SetCharInRandomPos(BaseCharacter currentCharacter)
     {
+        currentCharacter.gameObject.SetActive(true);
         BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(currentCharacter.UMS.WalkingSide, currentCharacter.UMS.Pos);
         currentCharacter.UMS.CurrentTilePos = bts.Pos;
         for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)

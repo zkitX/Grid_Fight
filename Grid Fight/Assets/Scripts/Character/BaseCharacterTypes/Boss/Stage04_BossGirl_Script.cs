@@ -11,7 +11,7 @@ public class Stage04_BossGirl_Script : BaseCharacter
     public GameObject Flower2;
     public GameObject Flower3;
     public GameObject Flower4;
-
+    public bool CanGetDamage = false;
     private List<Stage04_BossGirl_Flower_Script> Flowers = new List<Stage04_BossGirl_Flower_Script>();
     private List<Transform> TargetControllerList = new List<Transform>();
 
@@ -70,6 +70,7 @@ public class Stage04_BossGirl_Script : BaseCharacter
     private void Flower_CurrentCharIsRebornEvent(CharacterNameType cName, List<ControllerType> playerController, SideType side)
     {
         AreChildrenAlive[cName] = true;
+        CanGetDamage = false;
     }
 
     private void Flower_CurrentCharIsDeadEvent(CharacterNameType cName, List<ControllerType> playerController, SideType side)
@@ -80,6 +81,7 @@ public class Stage04_BossGirl_Script : BaseCharacter
             foreach (Stage04_BossGirl_Flower_Script item in Flowers)
             {
                 item.CanRebirth = false;
+                CanGetDamage = true;
             }
         }
     }
@@ -106,5 +108,13 @@ public class Stage04_BossGirl_Script : BaseCharacter
     public override IEnumerator AttackAction()
     {
         yield return null;
+    }
+
+    public override void SetDamage(float damage, ElementalType elemental)
+    {
+        if(CanGetDamage)
+        {
+            base.SetDamage(damage, elemental);
+        }
     }
 }
