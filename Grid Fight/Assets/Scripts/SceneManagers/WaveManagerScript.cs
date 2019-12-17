@@ -168,6 +168,15 @@ public class WaveManagerScript : MonoBehaviour
                    
                 }
             }
+
+            while (isWaveComplete)
+            {
+                yield return null;
+                if(WaveCharcters.Where(r=> r.IsOnField).ToList().Count == 0)
+                {
+                    isWaveComplete = false;
+                }
+            }
         }
     }
 
