@@ -39,10 +39,11 @@ public class UnitManagementScript : MonoBehaviour
     public WalkingSideType WalkingSide;
     public FacingType Facing;
     public bool isAIOn;
-    public AIScript AI;
     public bool Test = false;
     public BaseCharacter CharOwner;
-
+    public Transform SelectionIndicator;
+    public SpriteRenderer SelectionIndicatorSprite;
+    public Color SelectionIndicatorColorUnselected;
 
     //Used to decide the side
     public void SetupCharacterSide()
@@ -111,11 +112,11 @@ public class UnitManagementScript : MonoBehaviour
         UnitBehaviour = ubt;
         if (ai)
         {
-            AI.StartMoveCo(CharOwner);
+            CharOwner.StartMoveCo();
         }
         else
         {
-            AI.StopMoveCo();
+            CharOwner.StopMoveCo();
         }
     }
 

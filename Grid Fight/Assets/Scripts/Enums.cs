@@ -437,10 +437,10 @@ public enum CharacterNameType
     Stage04_Character_Desert,
     Stage04_Character_Mountain,
     Stage04_Character_Forest,
+    Stage04_BossGirl_Minion0,
     Stage04_BossGirl_Minion1,
     Stage04_BossGirl_Minion2,
     Stage04_BossGirl_Minion3,
-    Stage04_BossGirl_Minion4,
     Stage04_BossGirl,
     Stage04_BossMonster_Minion,
     Stage04_BossMonster
@@ -451,4 +451,12 @@ public enum WavePhaseType
 {
     Combat,
     Event
+}
+
+public enum MonsterFlowerType
+{
+    Head1,
+    Head2,
+    Head3,
+    Head4
 }

@@ -11,7 +11,8 @@ public class BaseCharacter : MonoBehaviour
     public delegate void TileMovementComplete(BaseCharacter movingChar);
     public event TileMovementComplete TileMovementCompleteEvent;
 
-
+    public delegate void CurrentCharIsRebirth(CharacterNameType cName, List<ControllerType> playerController, SideType side);
+    public event CurrentCharIsRebirth CurrentCharIsRebirthEvent;
 
     public CharacterInfoScript CharInfo
     {
@@ -26,10 +27,7 @@ public class BaseCharacter : MonoBehaviour
             return _CharInfo;
         }
     }
-
-
     public CharacterInfoScript _CharInfo;
-
     public bool isMoving = false;
     public bool IsUsingAPortal = false;
     protected IEnumerator MoveCo;
@@ -47,7 +45,7 @@ public class BaseCharacter : MonoBehaviour
     public bool isAttackGoing = false;
     public bool isAttackCompletetd = false;
     public UnitManagementScript UMS;
-
+    public BoxCollider CharBoxCollider;
 
     protected virtual void Start()
     {
@@ -64,10 +62,21 @@ public class BaseCharacter : MonoBehaviour
     #region Setup Character
     public virtual void SetupCharacterSide()
     {
+        CharBoxCollider = GetComponentInChildren<BoxCollider>(true);
         SpineAnimatorsetup();
         UMS.SetupCharacterSide();
         int layer = UMS.Side == SideType.LeftSide ? 9 : 10;
         SpineAnim.gameObject.layer = layer;
+    }
+
+    public virtual void StartMoveCo()
+    {
+
+    }
+
+    public virtual void StopMoveCo()
+    {
+       
     }
 
     private void _CharInfo_BaseSpeedChangedEvent(float baseSpeed)
@@ -83,17 +92,34 @@ public class BaseCharacter : MonoBehaviour
         }
     }
 
-    protected virtual void SetCharDead()
+    public void SetAttackReady()
+    {
+        CharBoxCollider.enabled = true;
+        CanAttack = true;
+    }
+
+    public virtual void SetCharDead()
     {
         for (int i = 0; i < UMS.Pos.Count; i++)
         {
             GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
             UMS.Pos[i] = Vector2Int.zero;
         }
+        CharBoxCollider.enabled = false;
         IsOnField = false;
         CanAttack = false;
-        CurrentCharIsDeadEvent(CharInfo.CharacterID, UMS.PlayerController, UMS.Side);
+        Call_CurrentCharIsDeadEvent();
         gameObject.SetActive(false);
+    }
+
+    protected virtual void Call_CurrentCharIsDeadEvent()
+    {
+        CurrentCharIsDeadEvent(CharInfo.CharacterID, UMS.PlayerController, UMS.Side);
+    }
+
+    protected virtual void Call_CurrentCharIsRebirthEvent()
+    {
+        CurrentCharIsRebirthEvent(CharInfo.CharacterID, UMS.PlayerController, UMS.Side);
     }
 
     public virtual void SetUpEnteringOnBattle()
@@ -103,9 +129,60 @@ public class BaseCharacter : MonoBehaviour
     #endregion
     #region Attack
 
+    //Basic attack Action that will start the attack anim every x seconds
     public virtual IEnumerator AttackAction()
     {
-        yield return null;
+        while (true)
+        {
+            while (!CanAttack && !VFXTestMode)
+            {
+                yield return null;
+            }
+
+            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || isMoving || isSpecialLoading))
+            {
+                yield return null;
+            }
+
+            isAttackStarted = false;
+            isAttackCompletetd = false;
+            isAttackGoing = false;
+            while (!isAttackCompletetd)
+            {
+                if (!isAttackStarted)
+                {
+                    isAttackStarted = true;
+                    isAttackGoing = true;
+                    SetAnimation(CharacterAnimationStateType.Atk);
+                }
+
+                if (isAttackStarted && !isAttackGoing && !isMoving)
+                {
+                    isAttackGoing = true;
+                    SetAnimation(CharacterAnimationStateType.Atk);
+                }
+                yield return null;
+            }
+
+
+            float timer = 0;
+            while (timer <= CharInfo.AttackSpeedRatio)
+            {
+                yield return new WaitForFixedUpdate();
+                while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
+                {
+                    yield return new WaitForEndOfFrame();
+                }
+
+                while (isSpecialLoading)
+                {
+                    yield return new WaitForEndOfFrame();
+                    timer = 0;
+                }
+
+                timer += Time.fixedDeltaTime;
+            }
+        }
     }
 
     public void FireCastParticles()
@@ -207,6 +284,92 @@ public class BaseCharacter : MonoBehaviour
     #region Move
     public virtual void MoveCharOnDirection(InputDirection nextDir)
     {
+        if (CharInfo.Health > 0 && !isMoving && CanAttack && IsOnField && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1)
+        {
+            List<BattleTileScript> prevBattleTile = CurrentBattleTiles;
+            List<BattleTileScript> CurrentBattleTilesToCheck = new List<BattleTileScript>();
+            CharacterAnimationStateType AnimState = CharacterAnimationStateType.Idle;
+            AnimationCurve curve = new AnimationCurve();
+            List<Vector2Int> nextPos;
+            Vector2Int dir = Vector2Int.zero;
+            switch (nextDir)
+            {
+                case InputDirection.Up:
+                    dir = new Vector2Int(-1, 0);
+                    nextPos = CalculateNextPos(dir);
+                    if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, UMS.WalkingSide))
+                    {
+                        CurrentBattleTilesToCheck = GridManagerScript.Instance.GetBattleTiles(nextPos, UMS.WalkingSide);
+                    }
+                    curve = SpineAnim.UpMovementSpeed;
+                    AnimState = CharacterAnimationStateType.DashUp;
+                    break;
+                case InputDirection.Down:
+                    dir = new Vector2Int(1, 0);
+                    nextPos = CalculateNextPos(dir);
+                    if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, UMS.WalkingSide))
+                    {
+                        CurrentBattleTilesToCheck = GridManagerScript.Instance.GetBattleTiles(nextPos, UMS.WalkingSide);
+                    }
+                    curve = SpineAnim.DownMovementSpeed;
+                    AnimState = CharacterAnimationStateType.DashDown;
+                    break;
+                case InputDirection.Right:
+                    dir = new Vector2Int(0, 1);
+                    nextPos = CalculateNextPos(dir);
+                    if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, UMS.WalkingSide))
+                    {
+                        CurrentBattleTilesToCheck = GridManagerScript.Instance.GetBattleTiles(nextPos, UMS.WalkingSide);
+                    }
+                    curve = SpineAnim.RightMovementSpeed;
+                    AnimState = UMS.Facing == FacingType.Left ? CharacterAnimationStateType.DashRight : CharacterAnimationStateType.DashLeft;
+                    break;
+                case InputDirection.Left:
+                    dir = new Vector2Int(0, -1);
+                    nextPos = CalculateNextPos(dir);
+                    if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, UMS.WalkingSide))
+                    {
+                        CurrentBattleTilesToCheck = GridManagerScript.Instance.GetBattleTiles(nextPos, UMS.WalkingSide);
+                    }
+                    curve = SpineAnim.LeftMovementSpeed;
+                    AnimState = UMS.Facing == FacingType.Left ? CharacterAnimationStateType.DashLeft : CharacterAnimationStateType.DashRight;
+                    break;
+            }
+
+            if (CurrentBattleTilesToCheck.Count > 0 && CurrentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos) && r.BattleTileState == BattleTileStateType.Empty).ToList().Count ==
+                CurrentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos)).ToList().Count)
+            {
+                foreach (BattleTileScript item in prevBattleTile)
+                {
+                    GridManagerScript.Instance.SetBattleTileState(item.Pos, BattleTileStateType.Empty);
+                }
+                UMS.CurrentTilePos += dir;
+                CurrentBattleTiles = CurrentBattleTilesToCheck;
+                UMS.Pos = new List<Vector2Int>();
+                foreach (BattleTileScript item in CurrentBattleTilesToCheck)
+                {
+                    GridManagerScript.Instance.SetBattleTileState(item.Pos, BattleTileStateType.Occupied);
+                    UMS.Pos.Add(item.Pos);
+                }
+
+                if (MoveCo != null)
+                {
+                    StopCoroutine(MoveCo);
+                }
+                MoveCo = MoveByTile(CurrentBattleTiles.Where(r => r.Pos == UMS.CurrentTilePos).First().transform.position, AnimState, curve);
+                StartCoroutine(MoveCo);
+            }
+
+
+            if (CurrentBattleTiles.Count > 0)
+            {
+                foreach (BattleTileScript item in prevBattleTile)
+                {
+                    BattleManagerScript.Instance.OccupiedBattleTiles.Remove(item);
+                }
+                BattleManagerScript.Instance.OccupiedBattleTiles.AddRange(CurrentBattleTiles);
+            }
+        }
     }
 
     //Calculate the next position fro the actual 
@@ -251,7 +414,7 @@ public class BaseCharacter : MonoBehaviour
 
 
     //Move the character on the determinated Tile position
-    protected IEnumerator MoveByTile(Vector3 nextPos, CharacterAnimationStateType animState, AnimationCurve curve)
+    protected virtual IEnumerator MoveByTile(Vector3 nextPos, CharacterAnimationStateType animState, AnimationCurve curve)
     {
         SetAnimation(animState);
         float AnimLength = SpineAnim.GetAnimLenght(animState);

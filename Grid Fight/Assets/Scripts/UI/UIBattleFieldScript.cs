@@ -30,6 +30,7 @@ public class UIBattleFieldScript : MonoBehaviour
             if (CharOwner.CharInfo.Health <= 0)
             {
                 gameObject.SetActive(false);
+                CharOwner = null;
             }
         }
     }

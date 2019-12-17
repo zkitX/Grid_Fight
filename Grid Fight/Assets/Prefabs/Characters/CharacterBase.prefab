@@ -201,7 +201,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2236780381530750445}
-  - component: {fileID: 1336864638560235350}
   - component: {fileID: 2354565912544450135}
   m_Layer: 0
   m_Name: CharacterBase
@@ -225,21 +224,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1336864638560235350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6286762205357209611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbd93e064154557428052228a1de8f22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MinMovementTimer: 5
-  MaxMovementTimer: 8
-  CharOwner: {fileID: 0}
 --- !u!114 &2354565912544450135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,6 +244,8 @@ MonoBehaviour:
   WalkingSide: 0
   Facing: 0
   isAIOn: 0
-  AI: {fileID: 1336864638560235350}
   Test: 0
   CharOwner: {fileID: 0}
+  SelectionIndicator: {fileID: 109818329}
+  SelectionIndicatorSprite: {fileID: 1908467993}
+  SelectionIndicatorColorUnselected: {r: 0, g: 0, b: 0, a: 0}

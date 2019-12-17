@@ -157,13 +157,15 @@ public class WaveManagerScript : MonoBehaviour
 
                 if(timer > CurrentWaveChar.DelayBetweenChars && WaveCharcters.Where(r=> r.gameObject.activeInHierarchy).ToList().Count < wavePhase.MaxEnemyOnScreen)
                 {
+                    if (wavePhase.ListOfEnemy.Where(r => r.NumberOfCharacter > 0).ToList().Count == 0)
+                    {
+                        isWaveComplete = true;
+                        break;
+                    }
                     newChar = GetWaveCharacter(wavePhase.IsRandom ? GetAvailableRandomWaveCharacter(wavePhase) : GetAvailableWaveCharacter(wavePhase), transform);
                     SetCharInRandomPos(newChar);
                     timer = 0;
-                    if(wavePhase.ListOfEnemy.Where(r => r.NumberOfCharacter > 0).ToList().Count == 0)
-                    {
-                        isWaveComplete = true;
-                    }
+                   
                 }
             }
         }

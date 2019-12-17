@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/CharacterPrefab")]
+[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/CharacterPrefab/CharacterBasePrefab")]
 public class ScriptableObjectCharacterPrefab : ScriptableObject
 {
     public CharacterNameType CharacterName;

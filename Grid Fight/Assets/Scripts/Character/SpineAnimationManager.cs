@@ -89,7 +89,7 @@ public class SpineAnimationManager : MonoBehaviour
         CharacterAnimationStateType completedAnim = (CharacterAnimationStateType)System.Enum.Parse(typeof(CharacterAnimationStateType), skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name);
         if (completedAnim == CharacterAnimationStateType.Arriving || completedAnim == CharacterAnimationStateType.Growing)
         {
-            CharOwner.CanAttack = true;
+            CharOwner.SetAttackReady();
         }
         if(completedAnim != CharacterAnimationStateType.Idle)
         {

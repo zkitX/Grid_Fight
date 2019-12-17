@@ -74,7 +74,9 @@ public class VFXTester : MonoBehaviour
         BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(3,9));
         charOnScene = Instantiate(CharacterBasePrefab, bts.transform.position, Quaternion.identity);
         GameObject child = Instantiate(Characters.Where(r=> r.CharName.ToString() == CharToUse.options[CharToUse.value].text).First().Char, charOnScene.transform.position, Quaternion.identity, charOnScene.transform);
-        CharacterType_Script currentCharacter = charOnScene.GetComponent<CharacterType_Script>();
+        BaseCharacter currentCharacter = (BaseCharacter)charOnScene.AddComponent(System.Type.GetType(child.GetComponentInChildren<CharacterInfoScript>().BaseCharacterType.ToString()));
+        currentCharacter.UMS = currentCharacter.GetComponent<UnitManagementScript>();
+        currentCharacter.UMS.CharOwner = currentCharacter;
         currentCharacter.VFXTestMode = true;
         currentCharacter.UMS.CurrentTilePos = bts.Pos;
         for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)
