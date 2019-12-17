@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 94768782700317435}
   - component: {fileID: 94768782700317433}
   - component: {fileID: 94768782700317432}
+  - component: {fileID: 6554247897974775742}
   m_Layer: 0
   m_Name: ElectricTrail
   m_TagString: Untagged
@@ -115,7 +116,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -2165,8 +2166,8 @@ ParticleSystem:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.62672234
-          value: -0.2555788
+          time: 0.6345959
+          value: -0.07621172
           inSlope: 1.4267842
           outSlope: 1.4267842
           tangentMode: 0
@@ -4992,6 +4993,22 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &6554247897974775742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94768782700317434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff95d6aee0aea3498f97a2ecad6d45c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Trail: 1
+  Particle: 1
+  BulletDuration: 1
+  BulletOriginalDuration: 1
 --- !u!1 &94768782854203875
 GameObject:
   m_ObjectHideFlags: 0
@@ -9805,9 +9822,9 @@ GameObject:
   - component: {fileID: 94768783948093500}
   - component: {fileID: 94768783948093475}
   - component: {fileID: 94768783948093474}
-  - component: {fileID: 94768783948093501}
   - component: {fileID: 9103685550848338346}
   - component: {fileID: 4421294086000450572}
+  - component: {fileID: 8547414508250319016}
   m_Layer: 0
   m_Name: stage04-boss-phase1-flower-bullet
   m_TagString: Untagged
@@ -14551,25 +14568,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!95 &94768783948093501
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 94768783948093503}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3a94ea9b5a07aed49859bbc90c314a8b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &9103685550848338346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14599,3 +14597,17 @@ MonoBehaviour:
   ShotDefiant: []
   ShotHeroine: []
   ShotGodness: []
+--- !u!114 &8547414508250319016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94768783948093503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba9e6c852f53ac7448afd635fab03e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletTargetTime: 1
+  BulletOriginalTime: 1
