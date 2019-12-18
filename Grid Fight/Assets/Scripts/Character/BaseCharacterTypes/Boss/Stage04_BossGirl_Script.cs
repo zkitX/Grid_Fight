@@ -45,8 +45,7 @@ public class Stage04_BossGirl_Script : BaseCharacter
         }
 
         SetAnimation(CharacterAnimationStateType.Idle);
-        CanAttack = true;
-        IsOnField = true;
+        SetAttackReady(true);
         yield return new WaitForSecondsRealtime(3);
 
         for (int i = 0; i < 4; i++)

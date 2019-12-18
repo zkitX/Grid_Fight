@@ -10,8 +10,7 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
     public bool CanRebirth = true;
     public override void SetUpEnteringOnBattle()
     {
-        SetAnimation(CharacterAnimationStateType.Growing);
-        StartCoroutine(MoveByTile(GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).transform.position, CharacterAnimationStateType.Growing, SpineAnim.UpMovementSpeed));
+        StartCoroutine(base.MoveByTile(GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).transform.position, CharacterAnimationStateType.Growing, SpineAnim.UpMovementSpeed));
     }
 
     public override void StartMoveCo()
@@ -26,7 +25,6 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
         {
             yield return new WaitForFixedUpdate();
         }
-        SetAttackReady();
         while (MoveCoOn)
         {
             float timer = 0;
@@ -66,7 +64,7 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
 
     protected override IEnumerator MoveByTile(Vector3 nextPos, CharacterAnimationStateType animState, AnimationCurve curve)
     {
-        return base.MoveByTile(nextPos, CharacterAnimationStateType.Idle, curve);
+        return base.MoveByTile(nextPos,  CharacterAnimationStateType.Idle, curve);
     }
 
     public override void StopMoveCo()
@@ -78,9 +76,7 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
     {
         if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Death)
         {
-            IsOnField = false;
-            CanAttack = false;
-            CharBoxCollider.enabled = false;
+            SetAttackReady(false);
             Call_CurrentCharIsDeadEvent();
             StartCoroutine(DeathStasy());
         }
@@ -108,12 +104,10 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
     {
         if(CanRebirth)
         {
-            CharBoxCollider.enabled = true;
+            SetAttackReady(true);
             SetAnimation(CharacterAnimationStateType.Idle);
             base.Call_CurrentCharIsRebirthEvent();
             CharInfo.HealthStats.Health = CharInfo.HealthStats.Base;
-            IsOnField = true;
-            CanAttack = true;
         }
     }
 }

@@ -110,7 +110,7 @@ public class WaveManagerScript : MonoBehaviour
     public BaseCharacter GetWaveCharacter(WaveCharacterInfoClass character, Transform parent)
     {
         BaseCharacter res;
-        res = WaveCharcters.Where(r => r.CharInfo.CharacterID == character.CharacterName && !r.IsOnField).FirstOrDefault();
+        res = WaveCharcters.Where(r => r.CharInfo.CharacterID == character.CharacterName && !r.IsOnField && !r.gameObject.activeInHierarchy).FirstOrDefault();
         if (res == null)
         {
 
@@ -121,6 +121,7 @@ public class WaveManagerScript : MonoBehaviour
         }
         res.CharInfo.HealthStats.Health = Random.Range(character.Health.x, character.Health.y);
         res.CharInfo.HealthStats.Base = res.CharInfo.HealthStats.Health;
+       
         WaveCharcters.Add(res);
         return res;
     }

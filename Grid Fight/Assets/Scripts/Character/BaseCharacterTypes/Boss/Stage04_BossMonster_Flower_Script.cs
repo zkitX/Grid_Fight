@@ -12,13 +12,12 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
 
     public override void SetUpEnteringOnBattle()
     {
-        SetAnimation((CharacterAnimationStateType)System.Enum.Parse(typeof(CharacterAnimationStateType), CharacterAnimationStateType.Growing.ToString() + Random.Range(1, 3).ToString()));
+        StartCoroutine(base.MoveByTile(GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).transform.position, (CharacterAnimationStateType)System.Enum.Parse(typeof(CharacterAnimationStateType), CharacterAnimationStateType.Growing.ToString() + Random.Range(1, 3).ToString()), SpineAnim.UpMovementSpeed));
         Skin newSkin = new Skin("new-skin"); // 1. Create a new empty skin
         newSkin.AddSkin(SpineAnim.skeleton.Data.FindSkin(mfType.ToString())); // 2. Add items
         SpineAnim.skeleton.SetSkin(mfType.ToString());
         SpineAnim.skeleton.SetSlotsToSetupPose();
         SpineAnim.SpineAnimationState.Apply(SpineAnim.skeleton);
-        StartCoroutine(MoveByTile(GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).transform.position, CharacterAnimationStateType.Growing, SpineAnim.UpMovementSpeed));
     }
 
     public override void StartMoveCo()
@@ -32,7 +31,6 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
         {
             yield return new WaitForFixedUpdate();
         }
-        SetAttackReady();
         while (MoveCoOn)
         {
             float timer = 0;
@@ -84,9 +82,7 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
     {
         if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Death)
         {
-            IsOnField = false;
-            CanAttack = false;
-            CharBoxCollider.enabled = false;
+            SetAttackReady(false);
             Call_CurrentCharIsDeadEvent();
             StartCoroutine(DeathStasy());
         }
@@ -114,12 +110,10 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
     {
         if (CanRebirth)
         {
-            CharBoxCollider.enabled = true;
+            SetAttackReady(true);
             SetAnimation(CharacterAnimationStateType.Idle);
             base.Call_CurrentCharIsRebirthEvent();
             CharInfo.HealthStats.Health = CharInfo.HealthStats.Base;
-            IsOnField = true;
-            CanAttack = true;
         }
     }
 }
