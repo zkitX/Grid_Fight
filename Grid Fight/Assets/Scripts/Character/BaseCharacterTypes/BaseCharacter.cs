@@ -638,7 +638,7 @@ public class BaseCharacter : MonoBehaviour
             AnimSpeed = CharInfo.BaseSpeed;
         }
 
-        SpineAnim.SetAnim(animState, false);
+        SpineAnim.SetAnim(animState);
         SpineAnim.SetAnimationSpeed(AnimSpeed);
     }
 
@@ -693,7 +693,6 @@ public class BaseCharacter : MonoBehaviour
                 damage = damage - (damage * 0.7f);
                 break;
         }
-        //Debug.Log(damage);
         CharInfo.Health -= damage;
         SetAnimation(CharacterAnimationStateType.GettingHit);
     }

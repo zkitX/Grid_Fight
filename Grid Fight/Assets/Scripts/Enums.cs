@@ -335,33 +335,33 @@ public enum PortalType
 
 public enum BaseCharType
 {
-    CharacterType_Script,
-    MinionType_Script,
-    Stage04_BossGirl_Flower_Script,
-    Stage04_BossGirl_Script,
-    Stage04_BossMonster_Flower_Script,
-    Stage04_BossMonster_Script
+    CharacterType_Script = 0,
+    MinionType_Script = 1,
+    Stage04_BossGirl_Flower_Script = 2,
+    Stage04_BossGirl_Script = 3,
+    Stage04_BossMonster_Flower_Script = 4,
+    Stage04_BossMonster_Script = 5
 }
 
 public enum AttackParticleTypes
 {
-    Stage04_Minion_Mountain,
-    Stage04_Minion_Forest,
-    Stage04_Minion_Desert,
-    Stage04_Minion_Valley,
-    Stage03_Minion_Desert,
-    Stage04_Desert,
-    Stage04_Mountain,
-    Stage04_Forest,
-    Stage04_Valley,
-    Stage04_BossGirl_Minion,
-    Stage04_BossGirl,
-    Stage04_BossMonster_Minion,
-    Stage04_BossMonster,
-    Stage00_Minion_Valley,
-    Stage00_Minion_Forest,
-    Stage00_Minion_Mountain,
-    Stage00_Minion_Desert
+    Stage04_Minion_Mountain = 0,
+    Stage04_Minion_Forest = 1,
+    Stage04_Minion_Desert = 2,
+    Stage04_Minion_Valley = 3,
+    Stage03_Minion_Desert = 4,
+    Stage04_Desert = 5,
+    Stage04_Mountain = 6,
+    Stage04_Forest = 7,
+    Stage04_Valley = 8,
+    Stage04_BossGirl_Minion = 9,
+    Stage04_BossGirl = 10,
+    Stage04_BossMonster_Minion = 11,
+    Stage04_BossMonster = 12,
+    Stage00_Minion_Valley = 13,
+    Stage00_Minion_Forest = 14,
+    Stage00_Minion_Mountain = 15,
+    Stage00_Minion_Desert = 16
 }
 
 
@@ -429,21 +429,25 @@ public enum CharacterClassType
 
 public enum CharacterNameType
 {
-    Stage04_Minion_Mountain,
-    Stage04_Minion_Desert,
-    Stage04_Minion_Forest,
-    Stage04_Minion_Valley,
-    Stage04_Character_Valley,
-    Stage04_Character_Desert,
-    Stage04_Character_Mountain,
-    Stage04_Character_Forest,
-    Stage04_BossGirl_Minion0,
-    Stage04_BossGirl_Minion1,
-    Stage04_BossGirl_Minion2,
-    Stage04_BossGirl_Minion3,
-    Stage04_BossGirl,
-    Stage04_BossMonster_Minion,
-    Stage04_BossMonster
+    Stage04_Minion_Mountain = 0,
+    Stage04_Minion_Desert = 1,
+    Stage04_Minion_Forest = 2,
+    Stage04_Minion_Valley = 3,
+    Stage04_Character_Valley = 4,
+    Stage04_Character_Desert = 5,
+    Stage04_Character_Mountain = 6,
+    Stage04_Character_Forest = 7,
+    Stage04_BossGirl_Minion0 = 8,
+    Stage04_BossGirl_Minion1 = 9,
+    Stage04_BossGirl_Minion2 = 10,
+    Stage04_BossGirl_Minion3 = 11,
+    Stage04_BossGirl = 12,
+    Stage04_BossMonster_Minion = 13,
+    Stage04_BossMonster = 14,
+    Stage04_BossMonster_Minion0 = 15,
+    Stage04_BossMonster_Minion1 = 16,
+    Stage04_BossMonster_Minion2 = 17,
+    Stage04_BossMonster_Minion3 = 18
 }
 
 

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class GridManagerScript : MonoBehaviour
 {
-
     public delegate void InitializationComplete();
     public event InitializationComplete InitializationCompleteEvent;
     public static GridManagerScript Instance;
@@ -129,6 +128,38 @@ public class GridManagerScript : MonoBehaviour
     public BattleTileScript GetBattleTile(Vector2Int pos)
     {
         return BattleTiles.Where(r => r.Pos == pos).FirstOrDefault();
+    }
+
+    public BattleTileScript GetBattleBestTileInsideTheBattlefield(Vector2Int pos, FacingType facing)
+    {
+        BattleTileScript res = null;
+        int startValue = pos.y;
+        if (facing == FacingType.Left)
+        {
+            for (int i = startValue; i < YGridSeparator; i++)
+            {
+                pos.y = i;
+                res = BattleTiles.Where(r => r.Pos == new Vector2Int(pos.x, i)).FirstOrDefault();
+                if (res.BattleTileState != BattleTileStateType.Blocked)
+                {
+                    return res;
+                }
+            }
+        }
+        else
+        {
+            for (int i = startValue; i >= YGridSeparator; i--)
+            {
+                pos.y = i;
+                res = BattleTiles.Where(r => r.Pos == pos).FirstOrDefault();
+                if (res.BattleTileState != BattleTileStateType.Blocked)
+                {
+                    return res;
+                }
+            }
+        }
+
+        return res;
     }
 
     //Get BattleTileScript of the tile

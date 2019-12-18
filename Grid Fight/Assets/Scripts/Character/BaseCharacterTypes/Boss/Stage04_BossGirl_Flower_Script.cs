@@ -6,7 +6,7 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
 {
 
     public Vector2Int BasePos;
-    private float StasyTime = 30;
+    private float StasyTime = 50;
     public bool CanRebirth = true;
     public override void SetUpEnteringOnBattle()
     {
@@ -21,6 +21,7 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
 
     public override IEnumerator Move()
     {
+
         while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
         {
             yield return new WaitForFixedUpdate();
@@ -44,6 +45,7 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
             {
                 MoveCharOnDirection((InputDirection)Random.Range(0, 4));
             }
+            timer = 0;
             MoveTime = Random.Range(MinMovementTimer, MaxMovementTimer);
             while (timer < 1)
             {
@@ -74,14 +76,20 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
 
     public override void SetCharDead()
     {
-        IsOnField = false;
-        CanAttack = false;
-        Call_CurrentCharIsDeadEvent();
+        if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Death)
+        {
+            IsOnField = false;
+            CanAttack = false;
+            CharBoxCollider.enabled = false;
+            Call_CurrentCharIsDeadEvent();
+            StartCoroutine(DeathStasy());
+        }
     }
 
     private IEnumerator DeathStasy()
     {
         float timer = 0;
+        SetAnimation(CharacterAnimationStateType.Death);
         while (timer < StasyTime)
         {
             yield return new WaitForFixedUpdate();
@@ -100,6 +108,8 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
     {
         if(CanRebirth)
         {
+            CharBoxCollider.enabled = true;
+            SetAnimation(CharacterAnimationStateType.Idle);
             base.Call_CurrentCharIsRebirthEvent();
             CharInfo.HealthStats.Health = CharInfo.HealthStats.Base;
             IsOnField = true;

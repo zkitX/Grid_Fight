@@ -91,6 +91,11 @@ public class SpineAnimationManager : MonoBehaviour
         {
             CharOwner.SetAttackReady();
         }
+        if(CurrentAnim == CharacterAnimationStateType.Death)
+        {
+            return;
+        }
+
         if(completedAnim != CharacterAnimationStateType.Idle)
         {
             SetAnimationSpeed(CharOwner.CharInfo.BaseSpeed);
@@ -100,17 +105,23 @@ public class SpineAnimationManager : MonoBehaviour
     }
 
 
-    public void SetAnim(CharacterAnimationStateType anim, bool loop)
+    public void SetAnim(CharacterAnimationStateType anim)
     {
         SetupSpineAnim();
+
+        if(CurrentAnim == CharacterAnimationStateType.Death && anim != CharacterAnimationStateType.Idle)
+        {
+            return;
+        }
+
         if(anim == CharacterAnimationStateType.Arriving || anim == CharacterAnimationStateType.Growing)
         {
             CharOwner.IsOnField = true;
-            SpineAnimationState.SetAnimation(1, anim.ToString(), loop);
+            SpineAnimationState.SetAnimation(1, anim.ToString(), false);
         }
         else
         {
-            SpineAnimationState.SetAnimation(1, anim.ToString(), loop).MixDuration = AnimationTransition;
+            SpineAnimationState.SetAnimation(1, anim.ToString(), anim == CharacterAnimationStateType.Death ? true : false).MixDuration = AnimationTransition;
         }
         CurrentAnim = anim;
     }
