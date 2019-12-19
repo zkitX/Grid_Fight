@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "x/DKAhV6SLtYlqxFPGZhrKAFklk", "spine": "3.8.78", "x": -115.48, "y": -4.51, "width": 161.97, "height": 158.08 },
+"skeleton": { "hash": "QLWLMFI5VFGw6fp7JgtHNQuFWcI", "spine": "3.8.79", "x": -115.48, "y": -4.51, "width": 161.97, "height": 158.08 },
 "bones": [
 	{ "name": "root" },
 	{ "name": "Flower1_Controler", "parent": "root", "x": 35.14, "y": 133.08 },
@@ -189,6 +189,81 @@
 			{ "time": 0.5, "name": "FireCastParticle" },
 			{ "time": 0.5667, "name": "FireBulletParticle" }
 		]
+	},
+	"Death": {
+		"slots": {
+			"Petal1-Flower1": {
+				"color": [
+					{ "color": "939393ff" }
+				]
+			},
+			"Petal2-Flowe1": {
+				"color": [
+					{ "color": "939393ff" }
+				]
+			},
+			"Petal3-Flower1": {
+				"color": [
+					{ "color": "939393ff" }
+				]
+			}
+		},
+		"bones": {
+			"Flower1_MiddleLeaf2": {
+				"rotate": [
+					{ "angle": -53.67 }
+				]
+			},
+			"Flower1_BottonLeaf2": {
+				"rotate": [
+					{ "angle": 14.2 }
+				]
+			},
+			"Flower1_MiddleLeaf3": {
+				"rotate": [
+					{ "angle": -52.05 }
+				]
+			},
+			"Flower1_Controler": {
+				"rotate": [
+					{ "angle": -92.99 }
+				],
+				"translate": [
+					{ "x": -34.37, "y": -7.86 }
+				]
+			},
+			"Flower1_TopLeaf": {
+				"rotate": [
+					{ "angle": -106.41 }
+				]
+			},
+			"Flower1_TopLeaf2": {
+				"rotate": [
+					{ "angle": -10.08 }
+				]
+			},
+			"Flower1_TopLeaf3": {
+				"rotate": [
+					{ "angle": -18.1 }
+				]
+			},
+			"Flower1_BottonLeaf": {
+				"rotate": [
+					{ "angle": 19.43 }
+				]
+			},
+			"Flower1_MiddleLeaf": {
+				"rotate": [
+					{ "angle": -76.58 }
+				]
+			},
+			"Flower1_BottonLeaf3": {
+				"rotate": [
+					{ "angle": 25.79, "curve": "stepped" },
+					{ "time": 1, "angle": 25.79 }
+				]
+			}
+		}
 	},
 	"GettingHit": {
 		"bones": {

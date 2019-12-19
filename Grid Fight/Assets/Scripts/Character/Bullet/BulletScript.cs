@@ -108,17 +108,17 @@ public class BulletScript : MonoBehaviour
               }*/
 
             GameObject go;
-            go = Instantiate(TargetIndicator, GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position, Quaternion.identity);
+            go = Instantiate(TargetIndicator, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position, Quaternion.identity);
             go.GetComponent<BattleTileTargetScript>().StartTarget(
-                (Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position) * CharInfo.BulletSpeed) /
-                Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position));
+                (Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position) * CharInfo.BulletSpeed) /
+                Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position));
         }
         else if (CharInfo.ClassType == CharacterClassType.Mountain)
         {
             GetComponent<BoxCollider>().enabled = false;
             int ran = Random.Range(0, 101);
             DestinationTile.y = ran < 25 ? DestinationTile.y - 1 : ran < 75 ? DestinationTile.y : DestinationTile.y + 1;
-            bts = GridManagerScript.Instance.GetBattleTile(DestinationTile);
+            bts = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing);
             float duration = CharInfo.BulletSpeed;
             foreach (Vector2Int item in BulletEffectTiles)
             {
@@ -140,7 +140,7 @@ public class BulletScript : MonoBehaviour
         //Timer used to set up the coroutine
         float timer = 0;
         //Destination battle tile
-        bts = GridManagerScript.Instance.GetBattleTile(DestinationTile);
+        bts = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing);
         //Destination position
         Vector3 destination = bts.transform.position;
         //Duration of the particles 
@@ -167,7 +167,7 @@ public class BulletScript : MonoBehaviour
             if (timer > 1)
             {
                 isMoving = false;
-                FireEffectParticles(GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position, BulletEffectTiles.Count == 1 ? true : false);
+                FireEffectParticles(GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position, BulletEffectTiles.Count == 1 ? true : false);
                 StartCoroutine(ChildExplosion(BulletEffectTiles.Where(r=> r != Vector2Int.zero).ToList()));
             }
         }

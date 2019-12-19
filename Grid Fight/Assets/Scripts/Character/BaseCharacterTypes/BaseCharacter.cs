@@ -92,10 +92,11 @@ public class BaseCharacter : MonoBehaviour
         }
     }
 
-    public void SetAttackReady()
+    public virtual void SetAttackReady(bool value)
     {
-        CharBoxCollider.enabled = true;
-        CanAttack = true;
+        CharBoxCollider.enabled = value;
+        CanAttack = value;
+        IsOnField = value;
     }
 
     public virtual void SetCharDead()
@@ -105,9 +106,7 @@ public class BaseCharacter : MonoBehaviour
             GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
             UMS.Pos[i] = Vector2Int.zero;
         }
-        CharBoxCollider.enabled = false;
-        IsOnField = false;
-        CanAttack = false;
+        SetAttackReady(false);
         Call_CurrentCharIsDeadEvent();
         transform.position = new Vector3(100,100,100);
         gameObject.SetActive(false);
@@ -638,7 +637,7 @@ public class BaseCharacter : MonoBehaviour
             AnimSpeed = CharInfo.BaseSpeed;
         }
 
-        SpineAnim.SetAnim(animState, false);
+        SpineAnim.SetAnim(animState);
         SpineAnim.SetAnimationSpeed(AnimSpeed);
     }
 
@@ -693,7 +692,6 @@ public class BaseCharacter : MonoBehaviour
                 damage = damage - (damage * 0.7f);
                 break;
         }
-        //Debug.Log(damage);
         CharInfo.Health -= damage;
         SetAnimation(CharacterAnimationStateType.GettingHit);
     }

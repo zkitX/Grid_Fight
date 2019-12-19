@@ -87,10 +87,15 @@ public class SpineAnimationManager : MonoBehaviour
             return;
         }
         CharacterAnimationStateType completedAnim = (CharacterAnimationStateType)System.Enum.Parse(typeof(CharacterAnimationStateType), skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name);
-        if (completedAnim == CharacterAnimationStateType.Arriving || completedAnim == CharacterAnimationStateType.Growing)
+        if (completedAnim == CharacterAnimationStateType.Arriving || completedAnim.ToString().Contains("Growing"))
         {
-            CharOwner.SetAttackReady();
+            CharOwner.SetAttackReady(true);
         }
+        if(CurrentAnim == CharacterAnimationStateType.Death)
+        {
+            return;
+        }
+
         if(completedAnim != CharacterAnimationStateType.Idle)
         {
             SetAnimationSpeed(CharOwner.CharInfo.BaseSpeed);
@@ -100,17 +105,22 @@ public class SpineAnimationManager : MonoBehaviour
     }
 
 
-    public void SetAnim(CharacterAnimationStateType anim, bool loop)
+    public void SetAnim(CharacterAnimationStateType anim)
     {
         SetupSpineAnim();
-        if(anim == CharacterAnimationStateType.Arriving || anim == CharacterAnimationStateType.Growing)
+
+        if(CurrentAnim == CharacterAnimationStateType.Death && anim != CharacterAnimationStateType.Idle)
         {
-            CharOwner.IsOnField = true;
-            SpineAnimationState.SetAnimation(1, anim.ToString(), loop);
+            return;
+        }
+
+        if(anim == CharacterAnimationStateType.Arriving || anim.ToString().Contains("Growing"))
+        {
+            SpineAnimationState.SetAnimation(1, anim.ToString(), false);
         }
         else
         {
-            SpineAnimationState.SetAnimation(1, anim.ToString(), loop).MixDuration = AnimationTransition;
+            SpineAnimationState.SetAnimation(1, anim.ToString(), anim == CharacterAnimationStateType.Death ? true : false).MixDuration = AnimationTransition;
         }
         CurrentAnim = anim;
     }

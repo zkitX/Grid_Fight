@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 271327344}
   m_Layer: 0
-  m_Name: IK_Target
+  m_Name: Stage04_BossMonster_Minion_Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -262,15 +262,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2a87f403d5c9e784cb59990fb0138b23, type: 2}
-  - {fileID: 2100000, guid: 9f8dd2353c3a09a419bae71937b1d21e, type: 2}
-  - {fileID: 2100000, guid: 2a87f403d5c9e784cb59990fb0138b23, type: 2}
-  - {fileID: 2100000, guid: 9f8dd2353c3a09a419bae71937b1d21e, type: 2}
-  - {fileID: 2100000, guid: 2a87f403d5c9e784cb59990fb0138b23, type: 2}
-  - {fileID: 2100000, guid: 9f8dd2353c3a09a419bae71937b1d21e, type: 2}
-  - {fileID: 2100000, guid: 2a87f403d5c9e784cb59990fb0138b23, type: 2}
-  - {fileID: 2100000, guid: 9f8dd2353c3a09a419bae71937b1d21e, type: 2}
-  - {fileID: 2100000, guid: 2a87f403d5c9e784cb59990fb0138b23, type: 2}
+  - {fileID: 2100000, guid: 8a73bc7040ccf444ca83acc597030a42, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -290,7 +282,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
 --- !u!114 &1910994676725504012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,7 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 02188723063949342869ce67caa6089e, type: 2}
-  initialSkinName: 
+  initialSkinName: Head3
   initialFlipX: 0
   initialFlipY: 0
   separatorSlotNames: []
@@ -319,11 +311,29 @@ MonoBehaviour:
   calculateTangents: 0
   maskInteraction: 0
   maskMaterials:
-    materialsMaskDisabled: []
-    materialsInsideMask: []
+    materialsMaskDisabled:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    materialsInsideMask:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  _animationName: Idle
+  _animationName: Atk
   loop: 0
   timeScale: 1
 --- !u!114 &1910994676725504019
@@ -456,10 +466,11 @@ MonoBehaviour:
   CharacterIcon: {fileID: 21300000, guid: 305df1f998953104ab04eb3eba46ee09, type: 3}
   BaseCharacterType: 4
   CharacterID: 13
-  CurrentAttackTypeInfo: {fileID: 0}
-  ParticleID: 0
+  CurrentAttackTypeInfo: {fileID: 11400000, guid: 73c66a9d114b7ea4a86c401084c4d62f,
+    type: 2}
+  ParticleID: 11
   Elemental: 0
-  ClassType: 1
+  ClassType: 0
   CharacterLevel: 0
   CharacterSelection: 0
   PlayerController: 
@@ -595,7 +606,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1910994677824891889}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.46, y: 0.395, z: 0}
+  m_LocalPosition: {x: -0.597, y: 0.165, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1910994676725504023}

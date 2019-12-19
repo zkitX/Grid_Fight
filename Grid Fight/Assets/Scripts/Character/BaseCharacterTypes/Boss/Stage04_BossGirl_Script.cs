@@ -6,7 +6,6 @@ using UnityEngine.Experimental.U2D.IK;
 
 public class Stage04_BossGirl_Script : BaseCharacter
 {
-
     public GameObject Flower1;
     public GameObject Flower2;
     public GameObject Flower3;
@@ -18,10 +17,10 @@ public class Stage04_BossGirl_Script : BaseCharacter
 
     private List<Vector2Int> FlowersPos = new List<Vector2Int>()
     {
-        new Vector2Int(0,6),
-        new Vector2Int(0,9),
-        new Vector2Int(4,7),
-        new Vector2Int(5,10)
+         new Vector2Int(0,6),
+        new Vector2Int(1,8),
+        new Vector2Int(2,6),
+        new Vector2Int(3,8)
     };
 
     private Dictionary<CharacterNameType, bool> AreChildrenAlive = new Dictionary<CharacterNameType, bool>()
@@ -46,7 +45,7 @@ public class Stage04_BossGirl_Script : BaseCharacter
         }
 
         SetAnimation(CharacterAnimationStateType.Idle);
-
+        SetAttackReady(true);
         yield return new WaitForSecondsRealtime(3);
 
         for (int i = 0; i < 4; i++)
@@ -64,6 +63,7 @@ public class Stage04_BossGirl_Script : BaseCharacter
             flower.CurrentCharIsRebirthEvent += Flower_CurrentCharIsRebornEvent;
             Transform t = flower.GetComponentsInChildren<Transform>().Where(r => r.name == "Stage04_GirlBoss_Minion_Target").First();
             TargetControllerList[i].parent = t;
+            TargetControllerList[i].localPosition = Vector3.zero;
         }
     }
 
@@ -103,6 +103,53 @@ public class Stage04_BossGirl_Script : BaseCharacter
         }
         currentCharacter.SetUpEnteringOnBattle();
         StartCoroutine(BattleManagerScript.Instance.MoveCharToBoardWithDelay(0.2f, currentCharacter, bts.transform.position));
+    }
+
+    public override void SetCharDead()
+    {
+        if(SpineAnim.CurrentAnim != CharacterAnimationStateType.Death)
+        {
+            BattleManagerScript.Instance.CurrentBattleState = BattleState.Pause;
+            StartCoroutine(DeathStasy());
+        }
+       
+    }
+
+    private IEnumerator DeathStasy()
+    {
+        float timer = 0;
+        SetAnimation(CharacterAnimationStateType.Death);
+        while (timer < 5)
+        {
+            yield return new WaitForFixedUpdate();
+            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Pause)
+            {
+                yield return new WaitForFixedUpdate();
+            }
+
+            timer += Time.fixedDeltaTime;
+        }
+
+        Stage04_BossMonster_Script mask = (Stage04_BossMonster_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass((CharacterNameType.Stage04_BossMonster).ToString(), CharacterSelectionType.A,
+                CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage04_BossMonster, WalkingSideType.RightSide), WaveManagerScript.Instance.transform);
+        BattleManagerScript.Instance.AllCharactersOnField.Add(mask);
+        mask.UMS.Pos = UMS.Pos;
+        mask.UMS.CurrentTilePos = UMS.CurrentTilePos;
+        mask.transform.position = transform.position;
+        mask.SetUpEnteringOnBattle();
+        timer = 0;
+        while (timer < 3)
+        {
+            yield return new WaitForFixedUpdate();
+            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Pause)
+            {
+                yield return new WaitForFixedUpdate();
+            }
+
+            timer += Time.fixedDeltaTime;
+        }
+        BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
+        base.SetCharDead();
     }
 
     public override IEnumerator AttackAction()

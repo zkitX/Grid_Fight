@@ -110,7 +110,7 @@ public class WaveManagerScript : MonoBehaviour
     public BaseCharacter GetWaveCharacter(WaveCharacterInfoClass character, Transform parent)
     {
         BaseCharacter res;
-        res = WaveCharcters.Where(r => r.CharInfo.CharacterID == character.CharacterName && !r.IsOnField).FirstOrDefault();
+        res = WaveCharcters.Where(r => r.CharInfo.CharacterID == character.CharacterName && !r.IsOnField && !r.gameObject.activeInHierarchy).FirstOrDefault();
         if (res == null)
         {
 
@@ -121,6 +121,7 @@ public class WaveManagerScript : MonoBehaviour
         }
         res.CharInfo.HealthStats.Health = Random.Range(character.Health.x, character.Health.y);
         res.CharInfo.HealthStats.Base = res.CharInfo.HealthStats.Health;
+       
         WaveCharcters.Add(res);
         return res;
     }
@@ -137,7 +138,7 @@ public class WaveManagerScript : MonoBehaviour
             }
 
             BaseCharacter newChar = GetWaveCharacter(wavePhase.IsRandom ? GetAvailableRandomWaveCharacter(wavePhase) : GetAvailableWaveCharacter(wavePhase), transform);
-            SetCharInRandomPos(newChar);
+            SpawChar(newChar);
             isWaveComplete = false;
 
             if(Event_Co != null)
@@ -164,7 +165,7 @@ public class WaveManagerScript : MonoBehaviour
                     }
                     yield return new WaitForSecondsRealtime(0.1f);
                     newChar = GetWaveCharacter(wavePhase.IsRandom ? GetAvailableRandomWaveCharacter(wavePhase) : GetAvailableWaveCharacter(wavePhase), transform);
-                    SetCharInRandomPos(newChar);
+                    SpawChar(newChar);
                     timer = 0;
                    
                 }
@@ -181,10 +182,21 @@ public class WaveManagerScript : MonoBehaviour
         }
     }
 
-    public void SetCharInRandomPos(BaseCharacter currentCharacter)
+    private void SpawChar(BaseCharacter newChar)
+    {
+        if (CurrentWaveChar.IsFixedSpowiningTile)
+        {
+            SetCharInPos(newChar, GridManagerScript.Instance.GetBattleTile(CurrentWaveChar.SpowningTile[Random.Range(0, CurrentWaveChar.SpowningTile.Count)]));
+        }
+        else
+        {
+            SetCharInPos(newChar, GridManagerScript.Instance.GetFreeBattleTile(newChar.UMS.WalkingSide, newChar.UMS.Pos));
+        }
+    }
+
+    public void SetCharInPos(BaseCharacter currentCharacter, BattleTileScript bts)
     {
         currentCharacter.gameObject.SetActive(true);
-        BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(currentCharacter.UMS.WalkingSide, currentCharacter.UMS.Pos);
         currentCharacter.UMS.CurrentTilePos = bts.Pos;
         for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)
         {
@@ -256,6 +268,8 @@ public class WaveCharClass
     public string name;
     public int NumberOfCharacter;
     public WaveCharacterInfoClass TypeOfCharacter;
+    public bool IsFixedSpowiningTile = false;
+    public List<Vector2Int> SpowningTile = new List<Vector2Int>();
     public float DelayBetweenChars;
 
 }

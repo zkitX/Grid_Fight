@@ -17,9 +17,22 @@ public class BattleTileInfo
 {
     public string name;
     public Vector2Int Pos;
-    public BattleTileStateType BattleTileState;
+    public BattleTileStateType _BattleTileState;
     public BattleTileType BattleTileT;
     public WalkingSideType WalkingSide;
     public PortalType Portal;
     public int IDPortal;
+
+
+    public BattleTileStateType BattleTileState
+    {
+        get
+        {
+            return _BattleTileState;
+        }
+        set
+        {
+            _BattleTileState = value;
+        }
+    }
 }
