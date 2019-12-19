@@ -5,6 +5,7 @@ using UnityEngine;
 public class VFXOffsetToTargetVOL : MonoBehaviour
 {
     public Transform Target;
+    public Vector3 Adjustment;
     public bool IncludeChildren = true;
 
 
@@ -35,7 +36,7 @@ public class VFXOffsetToTargetVOL : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         var VOL = PS.velocityOverLifetime;
         VOL.orbitalOffsetXMultiplier = Target.position.x - transform.position.x;
@@ -45,8 +46,8 @@ public class VFXOffsetToTargetVOL : MonoBehaviour
             foreach (ParticleSystem pS in PSChildren)
             {
                 var VOLChild = pS.velocityOverLifetime;
-                VOLChild.orbitalOffsetXMultiplier = Target.position.x - transform.position.x;
-                VOLChild.orbitalOffsetYMultiplier = Target.position.y - transform.position.y;
+                VOLChild.orbitalOffsetXMultiplier = Target.position.x - transform.position.x- Adjustment.x;
+                VOLChild.orbitalOffsetYMultiplier = Target.position.y - transform.position.y- Adjustment.y;
             }
         }
     }
