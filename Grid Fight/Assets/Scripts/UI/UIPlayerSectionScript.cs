@@ -39,7 +39,7 @@ public class UIPlayerSectionScript : MonoBehaviour
     public void SetupCharacter()
     {
         ClassText.text = currentSelectedCharacter.CharInfo.ClassType.ToString();
-        CharacterNameText.text = currentSelectedCharacter.CharInfo.CharacterID.ToString();
+        CharacterNameText.text = currentSelectedCharacter.CharInfo.Name.ToString();
         CharacterIcon.sprite = currentSelectedCharacter.CharInfo.CharacterIcon;
         for (int i = 0; i < (int)currentSelectedCharacter.CharInfo.CharacterLevel - 1; i++)
         {
@@ -53,11 +53,11 @@ public class UIPlayerSectionScript : MonoBehaviour
     public void SetupPlayer(int idPlayer)
     {
         PlayerID = idPlayer;
-        ColorUtility.TryParseHtmlString("#" + ((PlayerColorType)PlayerID).ToString().Split('_').Last(), out PlayerColor);
-        foreach (Image item in ComponentToColor)
+        //ColorUtility.TryParseHtmlString("#" + ((PlayerColorType)PlayerID).ToString().Split('_').Last(), out PlayerColor);
+        /*foreach (Image item in ComponentToColor)
         {
             item.color = PlayerColor;
-        }
+        }*/
     }
 
     private void Update()
