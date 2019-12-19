@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 81311622}
   - component: {fileID: 81311621}
+  - component: {fileID: 2924045561237212083}
   m_Layer: 0
   m_Name: Stage04_BossMonster_Tentacle01
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 81311620}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 88633959}
   - {fileID: 649185225}
@@ -48,6 +49,19 @@ MonoBehaviour:
   m_Solvers:
   - {fileID: 649185224}
   m_Weight: 1
+--- !u!114 &2924045561237212083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81311620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9250046ec259ba04aa86c8995a7ef364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!1 &88633958
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +160,7 @@ MonoBehaviour:
   offsetIndividual: 0.281
   ScaleAmmount: 0.1
   offsetGeneral: 0.188
-  ChainCount: 0.108
+  ChainCount: 0.9
   WaveCurve:
     serializedVersion: 2
     m_Curve: []
@@ -2439,6 +2453,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3798344982664721378}
   - component: {fileID: 5472841980257098292}
+  - component: {fileID: 7595306061527285339}
   m_Layer: 0
   m_Name: Stage04_BossMonster_Tentacle02
   m_TagString: Untagged
@@ -2455,7 +2470,7 @@ Transform:
   m_GameObject: {fileID: 2673330213103051625}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 7287543898489825402}
   - {fileID: 760652219507904885}
@@ -2477,6 +2492,19 @@ MonoBehaviour:
   m_Solvers:
   - {fileID: 992725514104535527}
   m_Weight: 1
+--- !u!114 &7595306061527285339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2673330213103051625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9250046ec259ba04aa86c8995a7ef364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rotation: {x: 0, y: 0, z: 90}
 --- !u!1 &2685060098672370748
 GameObject:
   m_ObjectHideFlags: 0
@@ -2664,7 +2692,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2744454182628256999}
-  m_LocalRotation: {x: -0, y: -0, z: -0.00000004470348, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.000000104308114, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4078,17 +4106,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7016f786cc4436d40b86a0936ec21fb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offsetIndividual: 0.281
+  offsetIndividual: 0.238
   ScaleAmmount: 0.1
   offsetGeneral: 0.188
-  ChainCount: 0.108
+  ChainCount: 0.9
   WaveCurve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  velocidad: 1
+  velocidad: 0.7
   amplitud: 2
 --- !u!1 &6191344837777407408
 GameObject:
@@ -4194,7 +4222,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6296071521715864491}
-  m_LocalRotation: {x: -0, y: -0, z: -0.000000081956365, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.000000104308114, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4654,17 +4682,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7016f786cc4436d40b86a0936ec21fb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offsetIndividual: 0.281
+  offsetIndividual: 0.425
   ScaleAmmount: 0.1
   offsetGeneral: 0.188
-  ChainCount: 0.108
+  ChainCount: 0.9
   WaveCurve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  velocidad: 1
+  velocidad: 1.1
   amplitud: 2
 --- !u!1 &7512449625171353813
 GameObject:
@@ -5303,6 +5331,7 @@ GameObject:
   m_Component:
   - component: {fileID: 455852488154821215}
   - component: {fileID: 3477632259544120513}
+  - component: {fileID: 573487416505674522}
   m_Layer: 0
   m_Name: Stage04_BossMonster_Tentacle03
   m_TagString: Untagged
@@ -5317,15 +5346,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8363138924650119220}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: 0, y: -0, z: 0.7071068, w: -0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 8692659202225740380}
   - {fileID: 6843406234099071564}
   m_Father: {fileID: 8765429856674785457}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
 --- !u!114 &3477632259544120513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5341,6 +5370,19 @@ MonoBehaviour:
   m_Solvers:
   - {fileID: 8811904953859435725}
   m_Weight: 1
+--- !u!114 &573487416505674522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8363138924650119220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9250046ec259ba04aa86c8995a7ef364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rotation: {x: 0, y: 0, z: 270}
 --- !u!1 &8410713761090353066
 GameObject:
   m_ObjectHideFlags: 0
@@ -6133,6 +6175,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8013781178849785637}
   - component: {fileID: 6711112596792952205}
+  - component: {fileID: 1864450045763856566}
   m_Layer: 0
   m_Name: Stage04_BossMonster_Tentacle04
   m_TagString: Untagged
@@ -6147,15 +6190,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8870950074899924253}
-  m_LocalRotation: {x: 0, y: -0, z: 0.7071068, w: -0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 849014166892258107}
   - {fileID: 4475658450532272682}
   m_Father: {fileID: 8765429856674785457}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!114 &6711112596792952205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6171,6 +6214,19 @@ MonoBehaviour:
   m_Solvers:
   - {fileID: 3924568943055720444}
   m_Weight: 1
+--- !u!114 &1864450045763856566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8870950074899924253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9250046ec259ba04aa86c8995a7ef364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rotation: {x: 0, y: 0, z: 180}
 --- !u!1 &8881762004604907137
 GameObject:
   m_ObjectHideFlags: 0
@@ -6266,15 +6322,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7016f786cc4436d40b86a0936ec21fb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offsetIndividual: 0.281
+  offsetIndividual: 0.505
   ScaleAmmount: 0.1
   offsetGeneral: 0.188
-  ChainCount: 0.108
+  ChainCount: 0.9
   WaveCurve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  velocidad: 1
+  velocidad: 0.9
   amplitud: 2
