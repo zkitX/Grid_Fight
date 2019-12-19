@@ -30,7 +30,7 @@ public class GridManagerScript : MonoBehaviour
     {
         foreach (BattleTileInfo tile in gridStructure.GridInfo)
         {
-            //Debug.Log(tile.Pos);
+            //Debug.Log(tile.Pos + "   " + tile.BattleTileState.ToString());
             BattleTiles.Where(r => r.Pos == tile.Pos).First().SetupTileFromBattleTileInfo(tile);
         }
         YGridSeparator = gridStructure.YGridSeparator;

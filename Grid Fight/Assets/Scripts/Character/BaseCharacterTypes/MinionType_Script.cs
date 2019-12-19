@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class MinionType_Script : BaseCharacter
 {
-    public float MinMovementTimer = 5;
-    public float MaxMovementTimer = 8;
+    public Vector2 MovementTimer = new Vector2(5,8);
     protected IEnumerator MoveCo;
     protected bool MoveCoOn = true;
 
@@ -30,7 +29,7 @@ public class MinionType_Script : BaseCharacter
         while (MoveCoOn)
         {
             float timer = 0;
-            float MoveTime = Random.Range(MinMovementTimer, MaxMovementTimer);
+            float MoveTime = Random.Range(MovementTimer.x, MovementTimer.y);
             while (timer < 1)
             {
                 yield return new WaitForFixedUpdate();

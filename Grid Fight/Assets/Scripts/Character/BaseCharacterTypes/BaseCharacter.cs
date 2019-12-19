@@ -201,7 +201,7 @@ public class BaseCharacter : MonoBehaviour
             lps.Shot = clt;
             if (clt > CharacterLevelType.Novice)
             {
-                CharInfo.StaminaStats.Stamina -= CharInfo.StaminaStats.Stamina_Cost_S_Atk01;
+                CharInfo.Stamina -= CharInfo.StaminaStats.Stamina_Cost_S_Atk01;
             }
             lps.SelectShotLevel();
         }
@@ -446,6 +446,12 @@ public class BaseCharacter : MonoBehaviour
     #endregion
     #region Buff/Debuff
 
+
+    public void Buff_DebuffCo(Buff_DebuffClass bdClass)
+    {
+        StartCoroutine(Buff_DebuffCoroutine(bdClass));
+    }
+
     //Used to Buff/Debuff the character
     public IEnumerator Buff_DebuffCoroutine(Buff_DebuffClass bdClass)
     {
@@ -455,14 +461,13 @@ public class BaseCharacter : MonoBehaviour
         }
 
         float timer = 0;
-        float valueOverDuration = 0;
+        float valueOverDuration = bdClass.Value;
         switch (bdClass.Stat)
         {
             case BuffDebuffStatsType.Health:
                 CharInfo.Health += valueOverDuration;
                 break;
-            case BuffDebuffStatsType.Armor:
-
+            case BuffDebuffStatsType.ElementalResistance:
                 CurrentBuffsDebuffsClass currentBuffDebuff = BuffsDebuffs.Where(r => r.ElementalResistence.Elemental == bdClass.ElementalResistence.Elemental).FirstOrDefault();
                 ElementalWeaknessType BaseWeakness = GetElementalMultiplier(CharInfo.DamageStats.ElementalsResistence, bdClass.ElementalResistence.Elemental);
                 CurrentBuffsDebuffsClass newBuffDebuff = new CurrentBuffsDebuffsClass();
@@ -495,28 +500,34 @@ public class BaseCharacter : MonoBehaviour
                     StartCoroutine(newBuffDebuff.BuffDebuffCo);
                 }
                 break;
-            case BuffDebuffStatsType.Regeneration:
-                CharInfo.Health += valueOverDuration;
+            case BuffDebuffStatsType.HealthRegeneration:
+                CharInfo.HealthStats.Regeneration += valueOverDuration;
                 break;
             case BuffDebuffStatsType.MovementSpeed:
-                CharInfo.Health += valueOverDuration;
+                CharInfo.MovementSpeed += valueOverDuration;
                 break;
             case BuffDebuffStatsType.Stamina:
-                CharInfo.Health += valueOverDuration;
+                CharInfo.Stamina += valueOverDuration;
                 break;
             case BuffDebuffStatsType.StaminaRegeneration:
-                CharInfo.Health += valueOverDuration;
+                CharInfo.StaminaStats.Regeneration += valueOverDuration;
                 break;
             case BuffDebuffStatsType.AttackSpeed:
-                CharInfo.Health += valueOverDuration;
+                CharInfo.AttackSpeed += valueOverDuration;
                 break;
             case BuffDebuffStatsType.BulletSpeed:
-                CharInfo.Health += valueOverDuration;
+                CharInfo.SpeedStats.BulletSpeed += valueOverDuration;
                 break;
             case BuffDebuffStatsType.AttackType:
                 break;
             case BuffDebuffStatsType.ElementalPower:
                 CharInfo.DamageStats.CurrentElemental = bdClass.ElementalPower;
+                break;
+            case BuffDebuffStatsType.BaseSpeed:
+                CharInfo.SpeedStats.BaseSpeed += valueOverDuration;
+                break;
+            case BuffDebuffStatsType.Damage:
+                CharInfo.DamageStats.CurrentDamage += valueOverDuration;
                 break;
         }
 
@@ -539,28 +550,34 @@ public class BaseCharacter : MonoBehaviour
         }
         switch (bdClass.Stat)
         {
-            case BuffDebuffStatsType.Regeneration:
-                CharInfo.Health -= valueOverDuration;
+            case BuffDebuffStatsType.HealthRegeneration:
+                CharInfo.HealthStats.Regeneration -= valueOverDuration;
                 break;
             case BuffDebuffStatsType.MovementSpeed:
-                CharInfo.Health -= valueOverDuration;
+                CharInfo.MovementSpeed -= valueOverDuration;
                 break;
             case BuffDebuffStatsType.Stamina:
-                CharInfo.Health -= valueOverDuration;
+                CharInfo.Stamina -= valueOverDuration;
                 break;
             case BuffDebuffStatsType.StaminaRegeneration:
-                CharInfo.Health -= valueOverDuration;
+                CharInfo.StaminaStats.Regeneration -= valueOverDuration;
                 break;
             case BuffDebuffStatsType.AttackSpeed:
-                CharInfo.Health -= valueOverDuration;
+                CharInfo.AttackSpeed -= valueOverDuration;
                 break;
             case BuffDebuffStatsType.BulletSpeed:
-                CharInfo.Health -= valueOverDuration;
+                CharInfo.SpeedStats.BulletSpeed -= valueOverDuration;
                 break;
             case BuffDebuffStatsType.AttackType:
                 break;
             case BuffDebuffStatsType.ElementalPower:
                 CharInfo.DamageStats.CurrentElemental = CharInfo.Elemental;
+                break;
+            case BuffDebuffStatsType.BaseSpeed:
+                CharInfo.SpeedStats.BaseSpeed -= valueOverDuration;
+                break;
+            case BuffDebuffStatsType.Damage:
+                CharInfo.DamageStats.CurrentDamage -= valueOverDuration;
                 break;
         }
     }

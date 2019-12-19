@@ -35,7 +35,7 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
         {
             float timer = 0;
             InputDirection dir = (InputDirection)Random.Range(0, 4);
-            float MoveTime = Random.Range(MinMovementTimer, MaxMovementTimer);
+            float MoveTime = Random.Range(MovementTimer.x, MovementTimer.y);
             while (timer < 1)
             {
                 yield return new WaitForFixedUpdate();
@@ -51,7 +51,7 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
                 MoveCharOnDirection(dir);
             }
             timer = 0;
-            MoveTime = Random.Range(MinMovementTimer, MaxMovementTimer);
+            MoveTime = Random.Range(MovementTimer.x, MovementTimer.y);
             while (timer < 1)
             {
                 yield return new WaitForFixedUpdate();
@@ -107,6 +107,6 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
 
         SetAttackReady(true);
         SetAnimation(CharacterAnimationStateType.Idle);
-        CharInfo.HealthStats.Health = CharInfo.HealthStats.Base;
+        CharInfo.Health = CharInfo.HealthStats.Base;
     }
 }

@@ -119,9 +119,9 @@ public class WaveManagerScript : MonoBehaviour
             BattleManagerScript.Instance.AllCharactersOnField.Add(res);
 
         }
-        res.CharInfo.HealthStats.Health = Random.Range(character.Health.x, character.Health.y);
-        res.CharInfo.HealthStats.Base = res.CharInfo.HealthStats.Health;
-       
+        res.CharInfo.HealthStats.Base = Random.Range(character.Health.x, character.Health.y);
+        res.CharInfo.Health = res.CharInfo.HealthStats.Base;
+
         WaveCharcters.Add(res);
         return res;
     }

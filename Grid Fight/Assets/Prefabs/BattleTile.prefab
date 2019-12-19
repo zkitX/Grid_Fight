@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 818337680082671105}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.33, y: 0.33, z: 0.33}
   m_Children:
   - {fileID: 7135573795863483298}
   m_Father: {fileID: 0}
@@ -47,227 +47,119 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2f62ca4933cb344b9a1b3a3b38ccf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Pos: {x: 3, y: 9}
+  Pos: {x: 0, y: 0}
   _BattleTileState: 0
   BattleTileT: 0
-  TileOwner: 0
+  WalkingSide: 0
   SP: {fileID: 0}
-  Min_Buff_Health_Instant: 0
-  Max_Buff_Health_Instant: 0
-  Min_Buff_Health_OverTime: 0
-  Max_Buff_Health_OverTime: 0
-  Min_Duration_Buff_Health_OverTime: 0
-  Max_Duration_Buff_Health_OverTime: 0
-  Min_Buff_Armor_ForTime: 0
-  Max_Buff_Armor_ForTime: 0
-  Min_Duration_Buff_Armor_ForTime: 0
-  Max_Duration_Buff_Armor_ForTime: 0
-  Min_Buff_MovementSpeed_ForTime: 0
-  Max_Buff_MovementSpeed_ForTime: 0
-  Min_Duration_Buff_MovementSpeed_ForTime: 0
-  Max_Duration_Buff_MovementSpeed_ForTime: 0
-  Min_Buff_Regeneration_ForTime: 0
-  Max_Buff_Regeneration_ForTime: 0
-  Min_Duration_Buff_Regeneration_ForTime: 0
-  Max_Duration_Buff_Regeneration_ForTime: 0
-  Min_Buff_Stamina_ForTime: 0
-  Max_Buff_Stamina_ForTime: 0
-  Min_Duration_Buff_Stamina_ForTime: 0
-  Max_Duration_Buff_Stamina_ForTime: 0
-  Min_Buff_StaminaRegeneration_ForTime: 0
-  Max_Buff_StaminaRegeneration_ForTime: 0
-  Min_Duration_Buff_StaminaRegeneration_ForTime: 0
-  Max_Duration_Buff_StaminaRegeneration_ForTime: 0
-  Min_Buff_AttackSpeed_ForTime: 0
-  Max_Buff_AttackSpeed_ForTime: 0
-  Min_Duration_Buff_AttackSpeed_ForTime: 0
-  Max_Duration_Buff_AttackSpeed_ForTime: 0
-  Min_Buff_BulletSpeed_ForTime: 0
-  Max_Buff_BulletSpeed_ForTime: 0
-  Min_Duration_Buff_BulletSpeed_ForTime: 0
-  Max_Duration_Buff_BulletSpeed_ForTime: 0
-  Min_Buff_AttackType_ForTime: 0
-  Max_Buff_AttackType_ForTime: 0
-  Min_Duration_Buff_AttackType_ForTime: 0
-  Max_Duration_Buff_AttackType_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Neutral_1_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Neutral_1_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Light_1_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Light_1_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Dark_1_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Dark_1_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Earth_1_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Earth_1_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Lightning_1_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Lightning_1_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Water_1_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Water_1_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Fire_1_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Fire_1_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Ice_1_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Ice_1_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Wind_1_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Wind_1_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Life_1_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Life_1_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Neutral_2_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Neutral_2_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Light_2_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Light_2_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Dark_2_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Dark_2_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Earth_2_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Earth_2_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Lightning_2_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Lightning_2_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Water_2_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Water_2_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Fire_2_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Fire_2_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Ice_2_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Ice_2_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Wind_2_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Wind_2_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Life_2_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Life_2_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Neutral_3_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Neutral_3_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Light_3_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Light_3_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Dark_3_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Dark_3_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Earth_3_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Earth_3_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Lightning_3_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Lightning_3_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Water_3_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Water_3_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Fire_3_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Fire_3_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Ice_3_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Ice_3_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Wind_3_ForTime: 0
-  Max_Duration_Buff_Armor_Elemental_Wind_3_ForTime: 0
-  Min_Duration_Buff_Armor_Elemental_Life_3_ForTime: 5
-  Max_Duration_Buff_Armor_Elemental_Life_3_ForTime: 6
-  Min_Debuff_Health_Instant: 0
-  Max_Debuff_Health_Instant: 0
-  Min_Debuff_Health_OverTime: 0
-  Max_Debuff_Health_OverTime: 0
-  Min_Duration_Debuff_Health_OverTime: 0
-  Max_Duration_Debuff_Health_OverTime: 0
-  Min_Debuff_MovementSpeed_ForTime: 0
-  Max_Debuff_MovementSpeed_ForTime: 0
-  Min_Duration_Debuff_MovementSpeed_ForTime: 0
-  Max_Duration_Debuff_MovementSpeed_ForTime: 0
-  Min_Debuff_Regeneration_ForTime: 0
-  Max_Debuff_Regeneration_ForTime: 0
-  Min_Duration_Debuff_Regeneration_ForTime: 0
-  Max_Duration_Debuff_Regeneration_ForTime: 0
-  Min_Debuff_Stamina_ForTime: 0
-  Max_Debuff_Stamina_ForTime: 0
-  Min_Duration_Debuff_Stamina_ForTime: 0
-  Max_Duration_Debuff_Stamina_ForTime: 0
-  Min_Debuff_StaminaRegeneration_ForTime: 0
-  Max_Debuff_StaminaRegeneration_ForTime: 0
-  Min_Duration_Debuff_StaminaRegeneration_ForTime: 0
-  Max_Duration_Debuff_StaminaRegeneration_ForTime: 0
-  Min_Debuff_AttackSpeed_ForTime: 0
-  Max_Debuff_AttackSpeed_ForTime: 0
-  Min_Duration_Debuff_AttackSpeed_ForTime: 0
-  Max_Duration_Debuff_AttackSpeed_ForTime: 0
-  Min_Debuff_BulletSpeed_ForTime: 0
-  Max_Debuff_BulletSpeed_ForTime: 0
-  Min_Duration_Debuff_BulletSpeed_ForTime: 0
-  Max_Duration_Debuff_BulletSpeed_ForTime: 0
-  Min_Debuff_AttackType_ForTime: 0
-  Max_Debuff_AttackType_ForTime: 0
-  Min_Duration_Debuff_AttackType_ForTime: 0
-  Max_Duration_Debuff_AttackType_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Neutral_1_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Neutral_1_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Light_1_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Light_1_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Dark_1_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Dark_1_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Earth_1_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Earth_1_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Lightning_1_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Lightning_1_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Water_1_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Water_1_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Fire_1_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Fire_1_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Ice_1_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Ice_1_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Wind_1_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Wind_1_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Life_1_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Life_1_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Neutral_2_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Neutral_2_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Light_2_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Light_2_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Dark_2_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Dark_2_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Earth_2_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Earth_2_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Lightning_2_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Lightning_2_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Water_2_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Water_2_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Fire_2_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Fire_2_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Ice_2_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Ice_2_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Wind_2_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Wind_2_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Life_2_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Life_2_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Neutral_3_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Neutral_3_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Light_3_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Light_3_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Dark_3_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Dark_3_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Earth_3_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Earth_3_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Lightning_3_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Lightning_3_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Water_3_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Water_3_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Fire_3_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Fire_3_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Ice_3_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Ice_3_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Wind_3_ForTime: 0
-  Max_Duration_Debuff_Armor_Elemental_Wind_3_ForTime: 0
-  Min_Duration_Debuff_Armor_Elemental_Life_3_ForTime: 5
-  Max_Duration_Debuff_Armor_Elemental_Life_3_ForTime: 6
-  Min_Duration_Debuff_Weapon_Elemental_Neutral_ForTime: 0
-  Max_Duration_Debuff_Weapon_Elemental_Neutral_ForTime: 0
-  Min_Duration_Debuff_Weapon_Elemental_Light_ForTime: 0
-  Max_Duration_Debuff_Weapon_Elemental_Light_ForTime: 0
-  Min_Duration_Debuff_Weapon_Elemental_Dark_ForTime: 0
-  Max_Duration_Debuff_Weapon_Elemental_Dark_ForTime: 0
-  Min_Duration_Debuff_Weapon_Elemental_Earth_ForTime: 0
-  Max_Duration_Debuff_Weapon_Elemental_Earth_ForTime: 0
-  Min_Duration_Debuff_Weapon_Elemental_Lightning_ForTime: 0
-  Max_Duration_Debuff_Weapon_Elemental_Lightning_ForTime: 0
-  Min_Duration_Weapon_Elemental_Water_ForTime: 0
-  Max_Duration_Debuff_Weapon_Elemental_Water_ForTime: 0
-  Min_Duration_Debuff_Weapon_Elemental_Fire_ForTime: 0
-  Max_Duration_Debuff_Weapon_Elemental_Fire_ForTime: 0
-  Min_Duration_Debuff_Weapon_Elemental_Ice_ForTime: 0
-  Max_Duration_Debuff_Weapon_Elemental_Ice_ForTime: 0
-  Min_Duration_Debuff_Weapon_Elemental_Wind_ForTime: 0
-  Max_Duration_Debuff_Weapon_Elemental_Wind_ForTime: 0
-  Min_Duration_Debuff_Weapon_Elemental_Life_ForTime: 0
-  Max_Duration_Debuff_Weapon_Elemental_Life_ForTime: 0
-  Min_Duration_Debuff_Freeze_ForTime: 2
-  Max_Duration_Debuff_Freeze_ForTime: 3
-  Min_Duration_Debuff_Trap_ForTime: 0
-  Max_Duration_Debuff_Trap_ForTime: 0
+  Buff_Health_Instant: {x: 1, y: 0}
+  Buff_Health_OverTime: {x: 0, y: 0}
+  Duration_Buff_Health_OverTime: {x: 0, y: 0}
+  Buff_Armor_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_ForTime: {x: 0, y: 0}
+  Buff_MovementSpeed_ForTime: {x: 0, y: 0}
+  Duration_Buff_MovementSpeed_ForTime: {x: 0, y: 0}
+  Buff_Regeneration_ForTime: {x: 0, y: 0}
+  Duration_Buff_Regeneration_ForTime: {x: 0, y: 0}
+  Buff_Stamina_ForTime: {x: 0, y: 0}
+  Duration_Buff_Stamina_ForTime: {x: 0, y: 0}
+  Buff_StaminaRegeneration_ForTime: {x: 0, y: 0}
+  Duration_Buff_StaminaRegeneration_ForTime: {x: 0, y: 0}
+  Buff_AttackSpeed_ForTime: {x: 0, y: 0}
+  Duration_Buff_AttackSpeed_ForTime: {x: 0, y: 0}
+  Buff_BulletSpeed_ForTime: {x: 0, y: 0}
+  Duration_Buff_BulletSpeed_ForTime: {x: 0, y: 0}
+  Buff_AttackType_ForTime: {x: 0, y: 0}
+  Duration_Buff_AttackType_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Neutral_1_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Light_1_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Dark_1_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Earth_1_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Lightning_1_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Water_1_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Fire_1_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Ice_1_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Wind_1_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Life_1_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Neutral_2_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Light_2_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Dark_2_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Earth_2_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Lightning_2_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Water_2_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Fire_2_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Ice_2_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Wind_2_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Life_2_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Neutral_3_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Light_3_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Dark_3_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Earth_3_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Lightning_3_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Water_3_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Fire_3_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Ice_3_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Wind_3_ForTime: {x: 0, y: 0}
+  Duration_Buff_Armor_Elemental_Life_3_ForTime: {x: 0, y: 0}
+  Debuff_Health_Instant: {x: 0, y: 0}
+  Debuff_Health_OverTime: {x: 0, y: 0}
+  Duration_Debuff_Health_OverTime: {x: 0, y: 0}
+  Debuff_MovementSpeed_ForTime: {x: 0, y: 0}
+  Duration_Debuff_MovementSpeed_ForTime: {x: 0, y: 0}
+  Debuff_Regeneration_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Regeneration_ForTime: {x: 0, y: 0}
+  Debuff_Stamina_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Stamina_ForTime: {x: 0, y: 0}
+  Debuff_StaminaRegeneration_ForTime: {x: 0, y: 0}
+  Duration_Debuff_StaminaRegeneration_ForTime: {x: 0, y: 0}
+  Debuff_AttackSpeed_ForTime: {x: 0, y: 0}
+  Duration_Debuff_AttackSpeed_ForTime: {x: 0, y: 0}
+  Debuff_BulletSpeed_ForTime: {x: 0, y: 0}
+  Duration_Debuff_BulletSpeed_ForTime: {x: 0, y: 0}
+  Debuff_AttackType_ForTime: {x: 0, y: 0}
+  Duration_Debuff_AttackType_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Neutral_1_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Light_1_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Dark_1_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Earth_1_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Lightning_1_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Water_1_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Fire_1_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Ice_1_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Wind_1_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Life_1_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Neutral_2_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Light_2_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Dark_2_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Earth_2_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Lightning_2_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Water_2_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Fire_2_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Ice_2_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Wind_2_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Life_2_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Neutral_3_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Light_3_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Dark_3_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Earth_3_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Lightning_3_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Water_3_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Fire_3_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Ice_3_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Wind_3_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Armor_Elemental_Life_3_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Weapon_Elemental_Neutral_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Weapon_Elemental_Light_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Weapon_Elemental_Dark_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Weapon_Elemental_Earth_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Weapon_Elemental_Lightning_ForTime: {x: 0, y: 0}
+  Duration_Weapon_Elemental_Water_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Weapon_Elemental_Fire_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Weapon_Elemental_Ice_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Weapon_Elemental_Wind_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Weapon_Elemental_Life_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Freeze_ForTime: {x: 0, y: 0}
+  Duration_Debuff_Trap_ForTime: {x: 0, y: 0}
 --- !u!65 &818337680082671118
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -279,7 +171,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &1633131786
 SpriteRenderer:
@@ -318,8 +210,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
-  m_Sprite: {fileID: 9014088816381977342, guid: 25d711a980c5e094a85d721688c5c415,
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 4940802098303136787, guid: 44da30dc741a1b2499ad1bafe360ec15,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -49,7 +49,7 @@ public class SpineAnimationManager : MonoBehaviour
         if (e.Data.Name.Contains("FireBulletParticle"))
         {
             CharOwner.isAttackCompletetd = true;
-            CharOwner.CharInfo.StaminaStats.Stamina -= CharOwner.CharInfo.StaminaStats.Stamina_Cost_Atk;
+            CharOwner.CharInfo.Stamina -= CharOwner.CharInfo.StaminaStats.Stamina_Cost_Atk;
 
             switch (CharOwner.CharInfo.ClassType)
             {

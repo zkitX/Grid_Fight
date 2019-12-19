@@ -260,15 +260,17 @@ public enum BuffDebuffStatsType
 {
     Health,
     HealthOverTime,
-    Armor,
+    ElementalResistance,
     ElementalPower,
-    Regeneration,
+    HealthRegeneration,
     MovementSpeed,
     Stamina,
     StaminaRegeneration,
     AttackSpeed,
     BulletSpeed,
-    AttackType
+    AttackType,
+    BaseSpeed,
+    Damage
 }
 
 public enum WaveStatsType
@@ -377,6 +379,15 @@ public enum SideType
     LeftSide,
     RightSide
 }
+
+public enum ItemType
+{
+    PowerUp_Damage,
+    PowerUp_Speed,
+    PowerUP_Health,
+    PowerUP_FullRecovery
+}
+
 
 
 public enum GridStructureType

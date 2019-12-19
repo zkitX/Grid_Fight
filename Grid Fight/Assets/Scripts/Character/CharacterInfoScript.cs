@@ -193,12 +193,33 @@ public class CharacterInfoScript : MonoBehaviour
                     DeathEvent();
                 }
             }
+            if(HealthStats.Health > HealthStats.Base)
+            {
+                Health = HealthStats.Base;
+            }
+        }
+    }
+
+    public float Stamina
+    {
+        get
+        {
+            return StaminaStats.Stamina;
+        }
+        set
+        {
+            StaminaStats.Stamina = value;
+            
+            if (StaminaStats.Stamina > StaminaStats.Base)
+            {
+                Stamina = StaminaStats.Base;
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        StaminaStats.Stamina = (StaminaStats.Stamina + StaminaStats.Regeneration / 50) > StaminaStats.Base ? StaminaStats.Base : (StaminaStats.Stamina + StaminaStats.Regeneration / 50);
+        Stamina += StaminaStats.Regeneration / 50;
         Health = Health;
     }
 }
