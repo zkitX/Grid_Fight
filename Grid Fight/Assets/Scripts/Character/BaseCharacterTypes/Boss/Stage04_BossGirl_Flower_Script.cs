@@ -28,6 +28,7 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
         while (MoveCoOn)
         {
             float timer = 0;
+            InputDirection dir = (InputDirection)Random.Range(0, 4);
             float MoveTime = Random.Range(MinMovementTimer, MaxMovementTimer);
             while (timer < 1)
             {
@@ -41,7 +42,7 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
             }
             if (CharInfo.Health > 0)
             {
-                MoveCharOnDirection((InputDirection)Random.Range(0, 4));
+                MoveCharOnDirection(dir);
             }
             timer = 0;
             MoveTime = Random.Range(MinMovementTimer, MaxMovementTimer);
@@ -57,7 +58,7 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
             }
             if (CharInfo.Health > 0)
             {
-                StartCoroutine(MoveByTile(GridManagerScript.Instance.GetBattleTile(BasePos).transform.position, CharacterAnimationStateType.Idle, SpineAnim.UpMovementSpeed));
+                MoveCharOnDirection(dir == InputDirection.Down ? InputDirection.Up : dir == InputDirection.Up ? InputDirection.Down : dir == InputDirection.Left ? InputDirection.Right : InputDirection.Left);
             }
         }
     }

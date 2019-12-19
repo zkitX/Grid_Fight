@@ -13,10 +13,10 @@ public class Stage04_BossMonster_Script : BaseCharacter
 
     private List<Vector2Int> FlowersPos = new List<Vector2Int>()
     {
-        new Vector2Int(0,6),
-        new Vector2Int(1,8),
-        new Vector2Int(2,6),
-        new Vector2Int(3,8)
+        new Vector2Int(0,9),
+        new Vector2Int(1,6),
+        new Vector2Int(3,6),
+        new Vector2Int(4,9)
     };
     private List<Stage04_BossMonster_Flower_Script> Flowers = new List<Stage04_BossMonster_Flower_Script>();
     private List<Transform> TargetControllerList = new List<Transform>();

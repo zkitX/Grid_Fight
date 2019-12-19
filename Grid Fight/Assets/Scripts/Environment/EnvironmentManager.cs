@@ -39,6 +39,10 @@ public class EnvironmentManager : MonoBehaviour
                 break;
             case GridStructureType.r6xc12_8x4:
                 break;
+            case GridStructureType.r5xc8:
+                MainCamera.orthographicSize = 3.5f;
+                MainCamera.transform.position = new Vector3(0, 1f, -8.5f);
+                break;
         }
     }
 

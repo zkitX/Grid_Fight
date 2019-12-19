@@ -17,10 +17,10 @@ public class Stage04_BossGirl_Script : BaseCharacter
 
     private List<Vector2Int> FlowersPos = new List<Vector2Int>()
     {
-         new Vector2Int(0,6),
-        new Vector2Int(1,8),
-        new Vector2Int(2,6),
-        new Vector2Int(3,8)
+        new Vector2Int(0,9),
+        new Vector2Int(1,6),
+        new Vector2Int(3,6),
+        new Vector2Int(4,9)
     };
 
     private Dictionary<CharacterNameType, bool> AreChildrenAlive = new Dictionary<CharacterNameType, bool>()

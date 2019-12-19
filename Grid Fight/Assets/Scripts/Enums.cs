@@ -384,7 +384,9 @@ public enum GridStructureType
     r2xc4,
     r4xc8,
     r6xc12,
-    r6xc12_8x4
+    r6xc12_8x4,
+    r5xc8
+
 }
 
 public enum FacingType
