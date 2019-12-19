@@ -396,7 +396,8 @@ public enum GridStructureType
     r4xc8,
     r6xc12,
     r6xc12_8x4,
-    r5xc8
+    r5xc8,
+    r5xc10
 
 }
 
