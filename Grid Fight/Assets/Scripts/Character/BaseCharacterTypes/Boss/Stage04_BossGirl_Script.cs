@@ -12,7 +12,7 @@ public class Stage04_BossGirl_Script : BaseCharacter
     public GameObject Flower4;
     public bool CanGetDamage = false;
     private List<Stage04_BossGirl_Flower_Script> Flowers = new List<Stage04_BossGirl_Flower_Script>();
-    private List<Transform> TargetControllerList = new List<Transform>();
+    private List<VFXOffsetToTargetVOL> TargetControllerList = new List<VFXOffsetToTargetVOL>();
 
 
     private List<Vector2Int> FlowersPos = new List<Vector2Int>()
@@ -39,9 +39,9 @@ public class Stage04_BossGirl_Script : BaseCharacter
     private IEnumerator SetUpEnteringOnBattle_Co()
     {
 
-        foreach (FabrikSolver2D item in GetComponentsInChildren<FabrikSolver2D>())
+        foreach (VFXOffsetToTargetVOL item in GetComponentsInChildren<VFXOffsetToTargetVOL>())
         {
-            TargetControllerList.Add(item.transform.GetChild(0));
+            TargetControllerList.Add(item);
         }
 
         SetAnimation(CharacterAnimationStateType.Idle);
@@ -62,8 +62,8 @@ public class Stage04_BossGirl_Script : BaseCharacter
             flower.CurrentCharIsDeadEvent += Flower_CurrentCharIsDeadEvent;
             flower.CurrentCharIsRebirthEvent += Flower_CurrentCharIsRebornEvent;
             Transform t = flower.GetComponentsInChildren<Transform>().Where(r => r.name == "Stage04_GirlBoss_Minion_Target").First();
-            TargetControllerList[i].parent = t;
-            TargetControllerList[i].localPosition = Vector3.zero;
+            TargetControllerList[i].Target = t;
+            TargetControllerList[i].transform.localPosition = Vector3.zero;
         }
     }
 
