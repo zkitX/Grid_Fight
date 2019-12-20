@@ -42,6 +42,10 @@ public class BattleManagerScript : MonoBehaviour
     private List<PlayableCharOnScene> PlayablesCharOnScene = new List<PlayableCharOnScene>();
     [SerializeField]
     private List<Color> playersColor = new List<Color>();
+    [SerializeField]
+    private List<Sprite> playersNumberBig = new List<Sprite>();
+    [SerializeField]
+    private List<Sprite> playersNumberSmall = new List<Sprite>();
     private MatchType matchType;
     public void SetupBattleState()
     {
@@ -276,15 +280,15 @@ public class BattleManagerScript : MonoBehaviour
             {
                 CurrentSelectedCharacters.Add(playerController, currentCharacter);
                 UIBattleManager.Instance.CharacterSelected(playerController, currentCharacter);
-                currentCharacter.SetCharSelected(true, playersColor[(int)playerController]);
+                currentCharacter.SetCharSelected(true, playersNumberBig[(int)playerController], playersNumberSmall[(int)playerController], playersColor[(int)playerController]);
             }
 
             if (!CurrentSelectedCharacters.ContainsValue(currentCharacter))
             {
-                CurrentSelectedCharacters[playerController].SetCharSelected(false, new Color());
+                CurrentSelectedCharacters[playerController].SetCharSelected(false, playersNumberBig[(int)playerController], playersNumberSmall[(int)playerController], new Color());
                 CurrentSelectedCharacters[playerController] = currentCharacter;
                 UIBattleManager.Instance.CharacterSelected(playerController, currentCharacter);
-                currentCharacter.SetCharSelected(true, playersColor[(int)playerController]);
+                currentCharacter.SetCharSelected(true, playersNumberBig[(int)playerController], playersNumberSmall[(int)playerController], playersColor[(int)playerController]);
             }
 
            

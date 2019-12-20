@@ -49,6 +49,7 @@ public class UIBattleManager : MonoBehaviour
         {
             case MatchType.PvE:
                 PlayerA.SetupPlayer(0);
+                PlayerB.CurrentCanvasGroup.alpha = 0;
                 PlayerC.CurrentCanvasGroup.alpha = 0;
                 PlayerD.CurrentCanvasGroup.alpha = 0;
 
@@ -67,6 +68,7 @@ public class UIBattleManager : MonoBehaviour
             case MatchType.PPvE:
                 PlayerA.SetupPlayer(0);
                 PlayerC.SetupPlayer(1);
+                PlayerB.CurrentCanvasGroup.alpha = 0;
                 PlayerD.CurrentCanvasGroup.alpha = 0;
 
                 currentPlayers.Add(0, PlayerA);

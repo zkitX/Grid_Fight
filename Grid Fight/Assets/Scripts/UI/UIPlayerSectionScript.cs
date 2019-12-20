@@ -29,7 +29,7 @@ public class UIPlayerSectionScript : MonoBehaviour
     [SerializeField]
     private UICharacterSkillContainerScript CharSkills;
     [SerializeField]
-    private Animator CharLevel;
+   // private Animator CharLevel;
     public void SetSelectedCharacter(CharacterType_Script selectedCharacter)
     {
         currentSelectedCharacter = selectedCharacter;
@@ -47,7 +47,7 @@ public class UIPlayerSectionScript : MonoBehaviour
         }
 
         CharSkills.SetupCharacterSkills(currentSelectedCharacter);
-        CharLevel.SetInteger("CharLevel", (int)currentSelectedCharacter.CharInfo.CharacterLevel);
+       // CharLevel.SetInteger("CharLevel", (int)currentSelectedCharacter.CharInfo.CharacterLevel);
     }
 
     public void SetupPlayer(int idPlayer)

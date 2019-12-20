@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CharacterType_Script : BaseCharacter
 {
-  
+   
 
     #region Unity Life Cycles
     protected override void Start()
@@ -23,7 +23,7 @@ public class CharacterType_Script : BaseCharacter
     public override void SetupCharacterSide()
     {
         base.SetupCharacterSide();
-        transform.GetChild(0).eulerAngles = new Vector3(0, 0, CharInfo.CharacterSelection == CharacterSelectionType.Up ? 90 :
+        UMS.SelectionIndicator.eulerAngles = new Vector3(0, 0, CharInfo.CharacterSelection == CharacterSelectionType.Up ? 90 :
             CharInfo.CharacterSelection == CharacterSelectionType.Down ? -90 :
             CharInfo.CharacterSelection == CharacterSelectionType.Left ? 180 : 0);
     }
@@ -86,9 +86,24 @@ public class CharacterType_Script : BaseCharacter
     #endregion
 
     //Used to indicate the character that is selected in the battlefield
-    public void SetCharSelected(bool isSelected, Color selectionIndicatorColorSelected)
+    public void SetCharSelected(bool isSelected,Sprite big, Sprite small, Color selectionIndicatorColorSelected)
     {
-        UMS.SelectionIndicatorSprite.color = isSelected ? selectionIndicatorColorSelected : UMS.SelectionIndicatorColorUnselected;
+        if(isSelected)
+        {
+            UMS.IndicatorAnim.SetBool("indicatorOn", true);
+            UMS.SelectionIndicatorSprite.color = selectionIndicatorColorSelected;
+            UMS.SelectionIndicatorPlayerSmall.color = selectionIndicatorColorSelected;
+            UMS.SelectionIndicatorPlayerNumberSmall.color = selectionIndicatorColorSelected;
+            UMS.SelectionIndicatorPlayerNumberBig.sprite = big;
+            UMS.SelectionIndicatorPlayerNumberSmall.sprite = small;
+        }
+        else
+        {
+            UMS.IndicatorAnim.SetBool("indicatorOn", false);
+            UMS.SelectionIndicatorSprite.color = UMS.SelectionIndicatorColorUnselected;
+        }
+
+        
     }
 
 }

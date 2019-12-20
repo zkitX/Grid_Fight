@@ -14,12 +14,12 @@ public class UICharacterSkillContainerScript : MonoBehaviour
 
     public void SetupCharacterSkills(CharacterType_Script currentSelectedChar)
     {
-        ASkill.Anim.SetBool("Active", false);
-        YSkill.Anim.SetBool("Active", false);
-        XSkill.Anim.SetBool("Active", false);
-        BSkill.Anim.SetBool("Active", false);
+        //ASkill.Anim.SetBool("Active", false);
+        //YSkill.Anim.SetBool("Active", false);
+        //XSkill.Anim.SetBool("Active", false);
+        //BSkill.Anim.SetBool("Active", false);
         UICharSkillScript nextAnimAvailable = BSkill;
-        ASkill.Anim.SetBool("Active", true);
+        //ASkill.Anim.SetBool("Active", true);
         ASkill.SkillIcon.sprite = currentSelectedChar.CharInfo.CharacterIcon;
         foreach (CharacterType_Script item in BattleManagerScript.Instance.AllCharactersOnField.Where(r=> r != currentSelectedChar && r.UMS.Side == currentSelectedChar.UMS.Side))
         {

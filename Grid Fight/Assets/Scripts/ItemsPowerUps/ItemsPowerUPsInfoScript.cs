@@ -6,11 +6,19 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
 {
     public ScriptableObjectItemPowerUps ItemPowerUpInfo;
     public SpriteRenderer Icon;
+    private IEnumerator DurationOnBattleFieldCo;
     public void SetItemPowerUp(ScriptableObjectItemPowerUps itemPowerUpInfo, Vector3 pos)
     {
         ItemPowerUpInfo = itemPowerUpInfo;
         Icon.sprite = itemPowerUpInfo.Icon;
         transform.position = pos;
+        if(DurationOnBattleFieldCo != null)
+        {
+            StopCoroutine(DurationOnBattleFieldCo);
+        }
+
+        DurationOnBattleFieldCo = DurationOnBattleField_Co();
+        StartCoroutine(DurationOnBattleFieldCo);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,5 +32,22 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
 
             gameObject.SetActive(false);
         }
+    }
+
+
+    private IEnumerator DurationOnBattleField_Co()
+    {
+        float timer = 0;
+        while (timer <= ItemPowerUpInfo.DurationOnField)
+        {
+            yield return new WaitForFixedUpdate();
+            while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            timer += Time.fixedDeltaTime;
+        }
+        DurationOnBattleFieldCo = null;
+        gameObject.SetActive(false);
     }
 }

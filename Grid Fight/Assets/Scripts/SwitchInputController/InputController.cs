@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_SWITCH
 using UnityEngine.Switch;
-
 using Rewired.Platforms.Switch;
 #endif
 public class InputController : MonoBehaviour

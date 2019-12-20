@@ -23,6 +23,16 @@ public class VibrationController : MonoBehaviour
             item.vibFile = Resources.Load<TextAsset>(item.VibrationT.ToString() + ".bnvib").bytes;
         }
     }
+
+    private void Start()
+    {
+        
+    }
+
+    private void Update()
+    {
+        
+    }
     //calling custom vibration  
     public void CustomVibration(int playerId, VibrationType vT)
     {

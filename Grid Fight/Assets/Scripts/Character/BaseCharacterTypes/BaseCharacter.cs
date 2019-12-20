@@ -47,6 +47,8 @@ public class BaseCharacter : MonoBehaviour
     public UnitManagementScript UMS;
     public BoxCollider CharBoxCollider;
 
+    
+
     protected virtual void Start()
     {
         StartCoroutine(AttackAction());
@@ -62,6 +64,14 @@ public class BaseCharacter : MonoBehaviour
     #region Setup Character
     public virtual void SetupCharacterSide()
     {
+        if(UMS.PlayerController.Contains(ControllerType.Enemy))
+        {
+            UMS.SelectionIndicator.parent.gameObject.SetActive(false);
+        }
+        else
+        {
+            UMS.SelectionIndicator.parent.gameObject.SetActive(true);
+        }
         CharBoxCollider = GetComponentInChildren<BoxCollider>(true);
         SpineAnimatorsetup();
         UMS.SetupCharacterSide();

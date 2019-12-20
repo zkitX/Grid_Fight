@@ -43,8 +43,11 @@ public class UnitManagementScript : MonoBehaviour
     public BaseCharacter CharOwner;
     public Transform SelectionIndicator;
     public SpriteRenderer SelectionIndicatorSprite;
+    public SpriteRenderer SelectionIndicatorPlayerNumberBig;
+    public SpriteRenderer SelectionIndicatorPlayerNumberSmall;
+    public SpriteRenderer SelectionIndicatorPlayerSmall;
     public Color SelectionIndicatorColorUnselected;
-
+    public Animator IndicatorAnim;
     //Used to decide the side
     public void SetupCharacterSide()
     {

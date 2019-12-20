@@ -120,7 +120,7 @@ public class SpineAnimationManager : MonoBehaviour
         }
         else
         {
-            SpineAnimationState.SetAnimation(1, anim.ToString(), anim == CharacterAnimationStateType.Death ? true : false).MixDuration = AnimationTransition;
+            SpineAnimationState.SetAnimation(1, anim.ToString(), anim == CharacterAnimationStateType.Death || anim.ToString().Contains("Idle") ? true : false).MixDuration = AnimationTransition;
         }
         CurrentAnim = anim;
     }
