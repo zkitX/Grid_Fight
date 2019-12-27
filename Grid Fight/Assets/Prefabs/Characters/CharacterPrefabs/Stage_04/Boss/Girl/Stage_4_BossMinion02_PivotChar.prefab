@@ -261,14 +261,14 @@ MonoBehaviour:
   CharacterSelection: 0
   PlayerController: 
   HealthStats:
-    Health: 5
-    Base: 5
+    Health: 200
+    Base: 200
     Regeneration: 1
     BaseHealthRegeneration: 1
     LevelMultiplier: 0
   StaminaStats:
-    Stamina: 40
-    Base: 40
+    Stamina: 10
+    Base: 10
     Regeneration: 1
     BaseStaminaRegeneration: 1
     Stamina_Cost_Atk: 0
@@ -278,7 +278,7 @@ MonoBehaviour:
     Stamina_Cost_S_Atk04: 0
     LevelMultiplier: 0
   SpeedStats:
-    BaseSpeed: 1
+    BaseSpeed: 2
     MovementSpeed: 1
     AttackSpeed: 1
     AttackSpeedRatio: 5
@@ -322,8 +322,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.82, z: 1}
-  m_Center: {x: 0.15, y: 0.33, z: 0}
+  m_Size: {x: 0.5, y: 0.9, z: 0.9}
+  m_Center: {x: -0.14, y: 0.19, z: 0}
 --- !u!114 &7947825197144355786
 MonoBehaviour:
   m_ObjectHideFlags: 0
