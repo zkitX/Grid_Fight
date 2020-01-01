@@ -117,12 +117,16 @@ public class WaveManagerScript : MonoBehaviour
             res = BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(character.CharacterName.ToString(), CharacterSelectionType.A,
                 CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, character.CharacterName, WalkingSideType.RightSide), parent);
             BattleManagerScript.Instance.AllCharactersOnField.Add(res);
-
+            WaveCharcters.Add(res);
+        }
+        else
+        {
+            res.gameObject.SetActive(true);
+            res.StartAttakCo();
         }
         res.CharInfo.HealthStats.Base = Random.Range(character.Health.x, character.Health.y);
         res.CharInfo.Health = res.CharInfo.HealthStats.Base;
 
-        WaveCharcters.Add(res);
         return res;
     }
 
@@ -166,6 +170,7 @@ public class WaveManagerScript : MonoBehaviour
                     yield return new WaitForSecondsRealtime(0.1f);
                     newChar = GetWaveCharacter(wavePhase.IsRandom ? GetAvailableRandomWaveCharacter(wavePhase) : GetAvailableWaveCharacter(wavePhase), transform);
                     SpawChar(newChar);
+                    Debug.Log("new char " + WaveCharcters.Where(r => r.gameObject.activeInHierarchy).ToList().Count);
                     timer = 0;
                    
                 }
@@ -196,7 +201,6 @@ public class WaveManagerScript : MonoBehaviour
 
     public void SetCharInPos(BaseCharacter currentCharacter, BattleTileScript bts)
     {
-        currentCharacter.gameObject.SetActive(true);
         currentCharacter.UMS.CurrentTilePos = bts.Pos;
         for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)
         {

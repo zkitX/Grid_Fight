@@ -51,7 +51,7 @@ public class BaseCharacter : MonoBehaviour
 
     protected virtual void Start()
     {
-        StartCoroutine(AttackAction());
+        
         BaseBullet = (GameObject)Resources.Load("Prefabs/Bullet/Bullet");
     }
 
@@ -59,6 +59,8 @@ public class BaseCharacter : MonoBehaviour
     {
         
     }
+
+
 
 
     #region Setup Character
@@ -77,6 +79,7 @@ public class BaseCharacter : MonoBehaviour
         UMS.SetupCharacterSide();
         int layer = UMS.Side == SideType.LeftSide ? 9 : 10;
         SpineAnim.gameObject.layer = layer;
+        StartAttakCo();
     }
 
     public virtual void StartMoveCo()
@@ -138,6 +141,12 @@ public class BaseCharacter : MonoBehaviour
     }
     #endregion
     #region Attack
+
+
+    public void StartAttakCo()
+    {
+        StartCoroutine(AttackAction());
+    }
 
     //Basic attack Action that will start the attack anim every x seconds
     public virtual IEnumerator AttackAction()

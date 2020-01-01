@@ -112,6 +112,11 @@ public class BulletScript : MonoBehaviour
             go.GetComponent<BattleTileTargetScript>().StartTarget(
                 (Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position) * CharInfo.BulletSpeed) /
                 Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position));
+
+            //Destination battle tile
+            Debug.Log(DestinationTile);
+            bts = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing);
+
         }
         else if (CharInfo.ClassType == CharacterClassType.Mountain)
         {
@@ -133,14 +138,17 @@ public class BulletScript : MonoBehaviour
                     }
                 }
             }
+
+            //Destination battle tile
+            Debug.Log(DestinationTile);
+            bts = GridManagerScript.Instance.GetBattleTile(DestinationTile);
         }
 
         //setup the base offset for the movement
 		Vector3 offset = transform.position;
         //Timer used to set up the coroutine
         float timer = 0;
-        //Destination battle tile
-        bts = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing);
+     
         //Destination position
         Vector3 destination = bts.transform.position;
         //Duration of the particles 
@@ -167,7 +175,7 @@ public class BulletScript : MonoBehaviour
             if (timer > 1)
             {
                 isMoving = false;
-                FireEffectParticles(GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position, BulletEffectTiles.Count == 1 ? true : false);
+                FireEffectParticles(bts.transform.position, BulletEffectTiles.Count == 1 ? true : false);
                 StartCoroutine(ChildExplosion(BulletEffectTiles.Where(r=> r != Vector2Int.zero).ToList()));
             }
         }
