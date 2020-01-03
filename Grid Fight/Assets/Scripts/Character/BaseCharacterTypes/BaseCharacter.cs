@@ -252,7 +252,11 @@ public class BaseCharacter : MonoBehaviour
         bs.VFXTestMode = VFXTestMode;
         bs.CharInfo = CharInfo;
         bs.gameObject.SetActive(true);
-        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharInfo.ParticleID, ParticleTypes.Attack, bullet.transform, UMS.Side);
+        
+        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharInfo.ParticleID, ParticleTypes.Attack, bullet.transform, UMS.Side,
+            CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script ? true : false);
+
+
         LayerParticleSelection lps = bs.PS.GetComponent<LayerParticleSelection>();
         if (lps != null)
         {

@@ -282,7 +282,7 @@ public class BulletScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //If the bullet collide with a character 
-        if(other.tag.Contains("Side") && other.tag != Side.ToString()) 
+        if(other.tag.Contains("Side") && other.tag != Side.ToString() && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script) 
         {
             BaseCharacter target = other.GetComponentInParent<BaseCharacter>();
             MakeDamage(target);

@@ -18,7 +18,8 @@ public class SpineAnimationManager : MonoBehaviour
     public Transform SpecialFiringPoint;
     public CharacterAnimationStateType CurrentAnim;
     public float AnimationTransition = 0.1f;
-    public bool iseven = true;
+
+
 //initialize all the spine element
     private void SetupSpineAnim()
     {

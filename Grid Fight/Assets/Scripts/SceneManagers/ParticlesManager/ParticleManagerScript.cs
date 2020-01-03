@@ -50,7 +50,7 @@ public class ParticleManagerScript : MonoBehaviour
 	}
 
 
-    public GameObject FireParticlesInTransform(AttackParticleTypes pType, ParticleTypes ParticleType, Transform parent, SideType side)
+    public GameObject FireParticlesInTransform(AttackParticleTypes pType, ParticleTypes ParticleType, Transform parent, SideType side, bool particlesVisible)
     {
         FiredParticle psToFire = ParticlesFired.Where(r => r.ParticleType == ParticleType && r.AttackParticle == pType && !r.PS.gameObject.activeInHierarchy).FirstOrDefault();
         if (psToFire != null)
@@ -58,7 +58,7 @@ public class ParticleManagerScript : MonoBehaviour
             psToFire.PS.transform.parent = parent;
             psToFire.PS.transform.localPosition = Vector3.zero;
             psToFire.PS.transform.localScale = side == SideType.RightSide ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
-            psToFire.PS.SetActive(true);
+            psToFire.PS.SetActive(particlesVisible);
             return psToFire.PS;
         }
         else
@@ -79,7 +79,7 @@ public class ParticleManagerScript : MonoBehaviour
             GameObject go = Instantiate(ps, parent.position, parent.rotation, parent);
             go.transform.localPosition = Vector3.zero;
             go.transform.localScale = side == SideType.RightSide ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
-            go.SetActive(true);
+            go.SetActive(particlesVisible);
             ParticlesFired.Add(new FiredParticle(go, pType, ParticleType));
             return go;
         }

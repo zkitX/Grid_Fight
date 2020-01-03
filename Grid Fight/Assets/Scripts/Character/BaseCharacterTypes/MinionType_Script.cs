@@ -5,7 +5,6 @@ using UnityEngine;
 public class MinionType_Script : BaseCharacter
 {
     public Vector2 MovementTimer = new Vector2(5,8);
-    protected IEnumerator MoveCo;
     protected bool MoveCoOn = true;
 
     public override void SetUpEnteringOnBattle()

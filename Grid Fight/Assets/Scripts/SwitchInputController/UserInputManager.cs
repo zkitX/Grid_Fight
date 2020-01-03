@@ -5,13 +5,7 @@ using UnityEngine;
 public class UserInputManager : MonoBehaviour
 {
     public List<RectTransform> PressableItems = new List<RectTransform>();
-    private Vector2 MouseIn;
-    private bool isMoving = true;
-    public int PPPlayer; public InputDirection DDir;
-    public bool t = false;
-
-
-    public float Threshold = 50;
+    
     private void Start()
     {
         #region Button Down
@@ -149,11 +143,6 @@ public class UserInputManager : MonoBehaviour
             }
         }*/
 
-        if(t)
-        {
-            t = false;
-            UserInputJoystickHandler(PPPlayer, DDir);
-        }
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
             Instance_ButtonDownDownEvent(0);
