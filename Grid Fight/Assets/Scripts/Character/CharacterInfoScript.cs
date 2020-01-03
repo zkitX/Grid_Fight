@@ -22,7 +22,8 @@ public class CharacterInfoScript : MonoBehaviour
     public Sprite CharacterIcon;
     public BaseCharType BaseCharacterType;
     public CharacterNameType CharacterID;
-    public ScriptableObjectAttackType CurrentAttackTypeInfo;
+    public ScriptableObjectAttackType CurrentParticlesAttackTypeInfo;
+    public ScriptableObjectAttackTypeOnBattlefield CurrentOnBattleFieldAttackTypeInfo;
     public AttackParticleTypes ParticleID;
     public ElementalType Elemental;
     public CharacterClassType ClassType;

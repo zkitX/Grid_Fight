@@ -7,6 +7,9 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
     public ScriptableObjectItemPowerUps ItemPowerUpInfo;
     public SpriteRenderer Icon;
     private IEnumerator DurationOnBattleFieldCo;
+
+
+
     public void SetItemPowerUp(ScriptableObjectItemPowerUps itemPowerUpInfo, Vector3 pos)
     {
         ItemPowerUpInfo = itemPowerUpInfo;
@@ -28,7 +31,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
             other.GetComponentInParent<BaseCharacter>().Buff_DebuffCo(new Buff_DebuffClass(ItemPowerUpInfo.EffectDuration,
                 Random.Range(ItemPowerUpInfo.Value.x, ItemPowerUpInfo.Value.y),
                 ItemPowerUpInfo.StatsToAffect, new ElementalResistenceClass(),
-                ElementalType.Neutral, ItemPowerUpInfo.AnimToFire));
+                ElementalType.Neutral, ItemPowerUpInfo.AnimToFire, ItemPowerUpInfo.ParticleToFire));
 
             gameObject.SetActive(false);
         }

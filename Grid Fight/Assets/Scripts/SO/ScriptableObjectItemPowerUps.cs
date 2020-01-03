@@ -11,4 +11,5 @@ public class ScriptableObjectItemPowerUps : ScriptableObject
     public CharacterAnimationStateType AnimToFire;
     public float DurationOnField;
     public float EffectDuration;
+    public GameObject ParticleToFire;
 }

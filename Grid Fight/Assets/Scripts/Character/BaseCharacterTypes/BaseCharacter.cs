@@ -285,24 +285,23 @@ public class BaseCharacter : MonoBehaviour
         bs.StartMoveToTile();
     }
 
-    public void CreateSingleBullet()
+
+    public void CreateAttack()
     {
-        CreateBullet(CharInfo.CurrentAttackTypeInfo.BulletTrajectories[0]);
+        if(UMS.Facing == FacingType.Right)
+        {
+            foreach (BulletBehaviourInfoClass item in CharInfo.CurrentParticlesAttackTypeInfo.BulletTrajectories)
+            {
+                CreateBullet(item);
+            }
+        }
+        else
+        {
+            GridManagerScript.Instance.StartOnBattleFieldAttackCo(CharInfo.CurrentOnBattleFieldAttackTypeInfo, UMS.CurrentTilePos, CharInfo.ParticleID);
+        }
     }
 
-    public void CreateMachingunBullets()
-    {
-        Vector3 offsetRotation = transform.eulerAngles;
-        for (int i = 0; i < CharInfo.DamageStats.MultiBulletAttackNumberOfBullets; i++)
-        {
-            CreateBullet(CharInfo.CurrentAttackTypeInfo.BulletTrajectories[i]);
-        }
-        if (!VFXTestMode)
-        {
-            NextAttackLevel = CharacterLevelType.Novice;
-        }
-        transform.eulerAngles = offsetRotation;
-    }
+  
     #endregion
     #region Move
     public virtual void MoveCharOnDirection(InputDirection nextDir)
@@ -483,6 +482,14 @@ public class BaseCharacter : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
+        SetAnimation(CharacterAnimationStateType.Buff);
+        GameObject ps = null;
+        if (bdClass.ParticlesToFire != null)
+        {
+            ps = Instantiate(bdClass.ParticlesToFire, transform);
+            ps.transform.localPosition = Vector3.zero;
+        }
+        
         float timer = 0;
         float valueOverDuration = bdClass.Value;
         switch (bdClass.Stat)
@@ -603,6 +610,8 @@ public class BaseCharacter : MonoBehaviour
                 CharInfo.DamageStats.CurrentDamage -= valueOverDuration;
                 break;
         }
+
+        Destroy(ps);
     }
 
 
@@ -837,8 +846,11 @@ public class Buff_DebuffClass
     public BuffDebuffStatsType Stat;
     public ElementalResistenceClass ElementalResistence;
     public ElementalType ElementalPower;
+    public GameObject ParticlesToFire;
 
-    public Buff_DebuffClass(float duration, float value, BuffDebuffStatsType stat, ElementalResistenceClass elementalResistence, ElementalType elementalPower, CharacterAnimationStateType animToFire)
+    public Buff_DebuffClass(float duration, float value, BuffDebuffStatsType stat
+        , ElementalResistenceClass elementalResistence, ElementalType elementalPower
+        , CharacterAnimationStateType animToFire, GameObject particlesToFire = null)
     {
         Duration = duration;
         Value = value;
@@ -847,6 +859,7 @@ public class Buff_DebuffClass
         ElementalResistence = elementalResistence;
         ElementalPower = elementalPower;
         AnimToFire = animToFire;
+        ParticlesToFire = particlesToFire;
     }
 
     public Buff_DebuffClass()

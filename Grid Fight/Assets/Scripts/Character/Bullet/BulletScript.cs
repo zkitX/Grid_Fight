@@ -86,66 +86,11 @@ public class BulletScript : MonoBehaviour
             vfx.BulletTargetTime = CharInfo.BulletSpeed;
             vfx.ApplyTargetTime();
         }
-        if (CharInfo.ClassType != CharacterClassType.Mountain)
-        {
-            int startingYTile = Facing == FacingType.Left ? StartingTile.y - BulletGapStartingTile.y : StartingTile.y + BulletGapStartingTile.y;
-            /*  foreach (BattleTileScript item in GridManagerScript.Instance.GetBattleTileInARowToDestination(DestinationTile, Facing, startingYTile))
-              {
-                  GameObject go = UsedTargets.Where(r => !r.gameObject.activeInHierarchy).FirstOrDefault();
-                  if(go == null)
-                  {
-                      go = Instantiate(TargetIndicator, item.transform.position, Quaternion.identity);
-                      go.GetComponent<BattleTileTargetScript>().StartTarget(
-                          (Vector3.Distance(transform.position, item.transform.position) * CharInfo.BulletSpeed) /
-                          Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position));
-                  }
-                  else
-                  {
-                      go.transform.position = GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position;
-                      go.SetActive(true);
-                  }
-                  UsedTargets.Add(go);
-              }*/
 
-            GameObject go;
-            go = Instantiate(TargetIndicator, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position, Quaternion.identity);
-            go.GetComponent<BattleTileTargetScript>().StartTarget(
-                (Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position) * CharInfo.BulletSpeed) /
-                Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position));
-
-            //Destination battle tile
-            Debug.Log(DestinationTile);
-            bts = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing);
-
-        }
-        else if (CharInfo.ClassType == CharacterClassType.Mountain)
-        {
-            GetComponent<BoxCollider>().enabled = false;
-            int ran = Random.Range(0, 101);
-            DestinationTile.y = ran < 25 ? DestinationTile.y - 1 : ran < 75 ? DestinationTile.y : DestinationTile.y + 1;
-            bts = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing);
-            float duration = CharInfo.BulletSpeed;
-            foreach (Vector2Int item in BulletEffectTiles)
-            {
-                if(GridManagerScript.Instance.isPosOnField(DestinationTile + item))
-                {
-                    bts = GridManagerScript.Instance.GetBattleTile(DestinationTile + item, Facing == FacingType.Left ? WalkingSideType.LeftSide : WalkingSideType.RightSide);
-                    if(bts != null)
-                    {
-                        GameObject go = Instantiate(TargetIndicator, bts.transform.position, Quaternion.identity);
-                        go.GetComponent<BattleTileTargetScript>().StartTarget(duration);
-                        UsedTargets.Add(go);
-                    }
-                }
-            }
-
-            //Destination battle tile
-            Debug.Log(DestinationTile);
-            bts = GridManagerScript.Instance.GetBattleTile(DestinationTile);
-        }
+        BulletTarget();
 
         //setup the base offset for the movement
-		Vector3 offset = transform.position;
+        Vector3 offset = transform.position;
         //Timer used to set up the coroutine
         float timer = 0;
      
@@ -178,6 +123,43 @@ public class BulletScript : MonoBehaviour
                 FireEffectParticles(bts.transform.position, BulletEffectTiles.Count == 1 ? true : false);
                 StartCoroutine(ChildExplosion(BulletEffectTiles.Where(r=> r != Vector2Int.zero).ToList()));
             }
+        }
+    }
+
+
+    public void BulletTarget()
+    {
+        if (CharInfo.ClassType != CharacterClassType.Mountain)
+        {
+            int startingYTile = Facing == FacingType.Left ? StartingTile.y - BulletGapStartingTile.y : StartingTile.y + BulletGapStartingTile.y;
+            GameObject go;
+            go = Instantiate(TargetIndicator, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position, Quaternion.identity);
+            go.GetComponent<BattleTileTargetScript>().StartTarget(
+                (Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position) * CharInfo.BulletSpeed) /
+                Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position));
+            bts = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing);
+        }
+        else if (CharInfo.ClassType == CharacterClassType.Mountain)
+        {
+            GetComponent<BoxCollider>().enabled = false;
+            int ran = Random.Range(0, 101);
+            DestinationTile.y = ran < 25 ? DestinationTile.y - 1 : ran < 75 ? DestinationTile.y : DestinationTile.y + 1;
+            bts = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing);
+            float duration = CharInfo.BulletSpeed;
+            foreach (Vector2Int item in BulletEffectTiles)
+            {
+                if (GridManagerScript.Instance.isPosOnField(DestinationTile + item))
+                {
+                    bts = GridManagerScript.Instance.GetBattleTile(DestinationTile + item, Facing == FacingType.Left ? WalkingSideType.LeftSide : WalkingSideType.RightSide);
+                    if (bts != null)
+                    {
+                        GameObject go = Instantiate(TargetIndicator, bts.transform.position, Quaternion.identity);
+                        go.GetComponent<BattleTileTargetScript>().StartTarget(duration);
+                        UsedTargets.Add(go);
+                    }
+                }
+            }
+            bts = GridManagerScript.Instance.GetBattleTile(DestinationTile);
         }
     }
 

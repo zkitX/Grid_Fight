@@ -51,25 +51,25 @@ public class SpineAnimationManager : MonoBehaviour
         {
             CharOwner.isAttackCompletetd = true;
             CharOwner.CharInfo.Stamina -= CharOwner.CharInfo.StaminaStats.Stamina_Cost_Atk;
-
-            switch (CharOwner.CharInfo.ClassType)
-            {
-                case CharacterClassType.Valley:
-                    //CharOwner.CreateSingleBullet(CharOwner.CharInfo.BulletDistanceInTile[0], CharOwner.NextAttackLevel);
-                    CharOwner.CreateSingleBullet();
-                    break;
-                case CharacterClassType.Mountain:
-                    //CharOwner.CreateSingleBullet(CharOwner.CharInfo.BulletDistanceInTile[0], CharOwner.NextAttackLevel);
-                    CharOwner.CreateSingleBullet();
-                    break;
-                case CharacterClassType.Forest:
-                    CharOwner.CreateMachingunBullets();
-                    break;
-                case CharacterClassType.Desert:
-                    //CharOwner.CreateSingleBullet(CharOwner.CharInfo.BulletDistanceInTile[0], CharOwner.NextAttackLevel);
-                    CharOwner.CreateSingleBullet();
-                    break;
-            }
+            CharOwner.CreateAttack();
+            /* switch (CharOwner.CharInfo.ClassType)
+             {
+                 case CharacterClassType.Valley:
+                     //CharOwner.CreateSingleBullet(CharOwner.CharInfo.BulletDistanceInTile[0], CharOwner.NextAttackLevel);
+                     CharOwner.CreateSingleBullet();
+                     break;
+                 case CharacterClassType.Mountain:
+                     //CharOwner.CreateSingleBullet(CharOwner.CharInfo.BulletDistanceInTile[0], CharOwner.NextAttackLevel);
+                     CharOwner.CreateSingleBullet();
+                     break;
+                 case CharacterClassType.Forest:
+                     CharOwner.CreateMachingunBullets();
+                     break;
+                 case CharacterClassType.Desert:
+                     //CharOwner.CreateSingleBullet(CharOwner.CharInfo.BulletDistanceInTile[0], CharOwner.NextAttackLevel);
+                     CharOwner.CreateSingleBullet();
+                     break;
+             }*/
             if (!CharOwner.VFXTestMode)
             {
                 CharOwner.NextAttackLevel = CharacterLevelType.Novice;

@@ -7,10 +7,15 @@ public class GridManagerScript : MonoBehaviour
 {
     public delegate void InitializationComplete();
     public event InitializationComplete InitializationCompleteEvent;
+
+
     public static GridManagerScript Instance;
+
+
     public List<BattleTileScript> BattleTiles = new List<BattleTileScript>();
     public Vector2Int BattleFieldSize;
     public int YGridSeparator;
+    public GameObject TargetIndicator;
 
     public List<PortalInfoClass> Portals = new List<PortalInfoClass>();
 
@@ -242,8 +247,42 @@ public class GridManagerScript : MonoBehaviour
         return null;
     }
 
+    public void StartOnBattleFieldAttackCo(ScriptableObjectAttackTypeOnBattlefield atk, Vector2Int basePos, AttackParticleTypes atkPS)
+    {
+        StartCoroutine(OnBattleFieldAttackCo(atk, basePos, atkPS));
+    }
 
 
+    public IEnumerator OnBattleFieldAttackCo(ScriptableObjectAttackTypeOnBattlefield atk, Vector2Int basePos, AttackParticleTypes atkPS)
+    {
+        if(!atk.IsAttackStartingFromCharacter)
+        {
+            basePos.y = YGridSeparator;
+        }
+        foreach (BulletBehaviourInfoClassOnBattleField item in atk.BulletTrajectories)
+        {
+            float timer = 0;
+            foreach (Vector2Int target in item.BulletEffectTiles)
+            {
+                if(isPosOnField(basePos - target))
+                {
+                    GameObject go;
+                    go = Instantiate(TargetIndicator, GetBattleTile(basePos - target).transform.position, Quaternion.identity);
+                    go.GetComponent<BattleTileTargetScript>().StartTarget(item.Delay, atkPS);
+                }
+                
+            }
+            while (timer <= item.Delay)
+            {
+                yield return new WaitForFixedUpdate();
+                while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
+                {
+                    yield return new WaitForEndOfFrame();
+                }
+                timer += Time.fixedDeltaTime;
+            }
+        }
+    }
 }
 
 
