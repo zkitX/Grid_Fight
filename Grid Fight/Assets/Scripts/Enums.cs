@@ -347,11 +347,19 @@ public enum BaseCharType
 
 public enum AttackParticleTypes
 {
+    Stage00_Minion_Valley = 13,
+    Stage00_Minion_Forest = 14,
+    Stage00_Minion_Mountain = 15,
+    Stage00_Minion_Desert = 16,
+    Stage00_Desert = 17,
+    Stage00_Mountain = 18,
+    Stage00_Forest = 19,
+    Stage00_Valley = 20,
+    Stage03_Minion_Desert = 4,
     Stage04_Minion_Mountain = 0,
     Stage04_Minion_Forest = 1,
     Stage04_Minion_Desert = 2,
     Stage04_Minion_Valley = 3,
-    Stage03_Minion_Desert = 4,
     Stage04_Desert = 5,
     Stage04_Mountain = 6,
     Stage04_Forest = 7,
@@ -359,11 +367,8 @@ public enum AttackParticleTypes
     Stage04_BossGirl_Minion = 9,
     Stage04_BossGirl = 10,
     Stage04_BossMonster_Minion = 11,
-    Stage04_BossMonster = 12,
-    Stage00_Minion_Valley = 13,
-    Stage00_Minion_Forest = 14,
-    Stage00_Minion_Mountain = 15,
-    Stage00_Minion_Desert = 16
+    Stage04_BossMonster = 12
+    
 }
 
 
@@ -443,6 +448,14 @@ public enum CharacterClassType
 
 public enum CharacterNameType
 {
+    Stage00_Minion_Mountain = 23,
+    Stage00_Minion_Desert = 24,
+    Stage00_Minion_Forest = 25,
+    Stage00_Minion_Valley = 26,
+    Stage00_Character_Mountain = 19,
+    Stage00_Character_Valley = 20,
+    Stage00_Character_Forest = 21,
+    Stage00_Character_Desert = 22,
     Stage04_Minion_Mountain = 0,
     Stage04_Minion_Desert = 1,
     Stage04_Minion_Forest = 2,
