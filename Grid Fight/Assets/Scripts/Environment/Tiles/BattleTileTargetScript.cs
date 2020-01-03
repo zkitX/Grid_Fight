@@ -5,12 +5,18 @@ using UnityEngine;
 public class BattleTileTargetScript : MonoBehaviour
 {
 
+    public Vector2Int Pos;
+    public float Damage;
+    public ElementalType Elemental;
     public void StartTarget(float duration)
     {
         StartCoroutine(TargetAnim(duration));
     }
-    public void StartTarget(float duration, AttackParticleTypes atkPS)
+    public void StartTarget(float duration, AttackParticleTypes atkPS, Vector2Int pos, float damage, ElementalType ele)
     {
+        Pos = pos;
+        Damage = damage;
+        Elemental = ele;
         StartCoroutine(TargetAnim(duration, atkPS));
     }
 
@@ -57,6 +63,12 @@ public class BattleTileTargetScript : MonoBehaviour
             lps.Shot = CharacterLevelType.Novice;
             lps.SelectShotLevel();
 
+        }
+        BaseCharacter target;
+        target = BattleManagerScript.Instance.GetCharInPos(Pos);
+        if (target != null)
+        {
+            target.SetDamage(Damage, Elemental);
         }
         Destroy(gameObject);
     }

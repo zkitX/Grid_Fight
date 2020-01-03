@@ -169,7 +169,7 @@ public class BulletScript : MonoBehaviour
         BaseCharacter target;
         if (!VFXTestMode)
         {
-            target = target = BattleManagerScript.Instance.GetCharInPos(DestinationTile);
+            target = BattleManagerScript.Instance.GetCharInPos(DestinationTile);
             MakeDamage(target);
         }
         while (timer < ChildrenExplosionDelay)

@@ -118,20 +118,18 @@ public class BattleManagerScript : MonoBehaviour
         {
             return;
         }
+
         BaseCharacter currentCharacter = AllCharactersOnField.Where(r => r.UMS.PlayerController.Contains(playerController) && r.CharInfo.CharacterID == cName).First();
         BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(pos);
         currentCharacter.UMS.CurrentTilePos = bts.Pos;
         for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)
         {
             currentCharacter.UMS.Pos[i] += bts.Pos;
+            GridManagerScript.Instance.SetBattleTileState(currentCharacter.UMS.Pos[i], BattleTileStateType.Occupied);
             BattleTileScript cbts = GridManagerScript.Instance.GetBattleTile(currentCharacter.UMS.Pos[i]);
             currentCharacter.CurrentBattleTiles.Add(cbts);
         }
-
-        foreach (Vector2Int item in currentCharacter.UMS.Pos)
-        {
-            GridManagerScript.Instance.SetBattleTileState(item, BattleTileStateType.Occupied);
-        }
+      
         currentCharacter.SetUpEnteringOnBattle();
         StartCoroutine(MoveCharToBoardWithDelay(0.1f, currentCharacter, bts.transform.position));
         if (playerController == ControllerType.Player1)
@@ -201,7 +199,6 @@ public class BattleManagerScript : MonoBehaviour
         currentCharacter.CharInfo.CharacterSelection = charInfo.CharacterSelection;
         currentCharacter.CharInfo.CharacterSelection = charInfo.CharacterSelection;
         currentCharacter.CurrentCharIsDeadEvent += CurrentCharacter_CurrentCharIsDeadEvent;
-        UIBattleFieldManager.Instance.SetUIBattleField(currentCharacter);
         return currentCharacter;
     }
 

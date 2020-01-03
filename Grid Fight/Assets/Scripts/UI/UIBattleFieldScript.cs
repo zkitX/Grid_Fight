@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIBattleFieldScript : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class UIBattleFieldScript : MonoBehaviour
     private Image CharacterStaminaBar;
     private Camera mCamera;
     public Canvas CanvasParent;
+    public GameObject Damage;
+    public GameObject Healing;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,9 +32,45 @@ public class UIBattleFieldScript : MonoBehaviour
             CharacterStaminaBar.rectTransform.anchoredPosition = new Vector2(CharacterStaminaBar.rectTransform.rect.width - ((CharacterStaminaBar.rectTransform.rect.width / 100) * CharOwner.CharInfo.StaminaPerc), 0);
             if (CharOwner.CharInfo.Health <= 0)
             {
+                CharOwner.DamageReceivedEvent -= CharOwner_DamageReceivedEvent;
+                CharOwner.HealReceivedEvent -= CharOwner_HealReceivedEvent;
                 gameObject.SetActive(false);
                 CharOwner = null;
             }
         }
+    }
+
+
+    public void SetupCharOwner(BaseCharacter charOwner)
+    {
+        CharOwner = charOwner;
+        CharOwner.DamageReceivedEvent += CharOwner_DamageReceivedEvent;
+        CharOwner.HealReceivedEvent += CharOwner_HealReceivedEvent;
+    }
+
+    private void CharOwner_HealReceivedEvent(float heal)
+    {
+        StartCoroutine(HealingCo(heal));
+    }
+
+    private IEnumerator HealingCo(float heal)
+    {
+        GameObject h = Instantiate(Healing, transform);
+        h.GetComponent<TextMeshProUGUI>().text = heal.ToString();
+        yield return new WaitForSecondsRealtime(2);
+        Destroy(h);
+    }
+
+    private void CharOwner_DamageReceivedEvent(float damage)
+    {
+        StartCoroutine(DamageCo(damage));
+    }
+
+    private IEnumerator DamageCo(float heal)
+    {
+        GameObject d = Instantiate(Damage, transform);
+        d.GetComponent<TextMeshProUGUI>().text = heal.ToString();
+        yield return new WaitForSecondsRealtime(2);
+        Destroy(d);
     }
 }

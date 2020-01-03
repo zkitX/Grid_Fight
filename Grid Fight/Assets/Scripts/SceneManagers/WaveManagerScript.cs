@@ -170,7 +170,6 @@ public class WaveManagerScript : MonoBehaviour
                     yield return new WaitForSecondsRealtime(0.1f);
                     newChar = GetWaveCharacter(wavePhase.IsRandom ? GetAvailableRandomWaveCharacter(wavePhase) : GetAvailableWaveCharacter(wavePhase), transform);
                     SpawChar(newChar);
-                    Debug.Log("new char " + WaveCharcters.Where(r => r.gameObject.activeInHierarchy).ToList().Count);
                     timer = 0;
                    
                 }

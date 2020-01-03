@@ -52,6 +52,7 @@ public class UIBattleManager : MonoBehaviour
                 PlayerB.CurrentCanvasGroup.alpha = 0;
                 PlayerC.CurrentCanvasGroup.alpha = 0;
                 PlayerD.CurrentCanvasGroup.alpha = 0;
+                UICharacterSelectionRight.gameObject.SetActive(false);
 
                 currentPlayers.Add(0, PlayerA);
                 currentPlayers.Add(4, PlayerB);
@@ -70,7 +71,7 @@ public class UIBattleManager : MonoBehaviour
                 PlayerC.SetupPlayer(1);
                 PlayerB.CurrentCanvasGroup.alpha = 0;
                 PlayerD.CurrentCanvasGroup.alpha = 0;
-
+                UICharacterSelectionRight.gameObject.SetActive(false);
                 currentPlayers.Add(0, PlayerA);
                 currentPlayers.Add(1, PlayerC);
                 currentPlayers.Add(4, PlayerB);

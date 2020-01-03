@@ -21,12 +21,12 @@ public class UIBattleFieldManager : MonoBehaviour
         {
             uibattleField = Instantiate(UIBattleField, transform);
             ListOfUIBattleField.Add(uibattleField);
-            uibattleField.GetComponent<UIBattleFieldScript>().CharOwner = cb;
+            uibattleField.GetComponent<UIBattleFieldScript>().SetupCharOwner(cb);
         }
         else
         {
             uibattleField.SetActive(true);
-            uibattleField.GetComponent<UIBattleFieldScript>().CharOwner = cb;
+            uibattleField.GetComponent<UIBattleFieldScript>().SetupCharOwner(cb);
         }
     }
 }

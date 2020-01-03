@@ -247,13 +247,13 @@ public class GridManagerScript : MonoBehaviour
         return null;
     }
 
-    public void StartOnBattleFieldAttackCo(ScriptableObjectAttackTypeOnBattlefield atk, Vector2Int basePos, AttackParticleTypes atkPS)
+    public void StartOnBattleFieldAttackCo(CharacterInfoScript cInfo, ScriptableObjectAttackTypeOnBattlefield atk, Vector2Int basePos, AttackParticleTypes atkPS)
     {
-        StartCoroutine(OnBattleFieldAttackCo(atk, basePos, atkPS));
+        StartCoroutine(OnBattleFieldAttackCo(cInfo, atk, basePos, atkPS));
     }
 
 
-    public IEnumerator OnBattleFieldAttackCo(ScriptableObjectAttackTypeOnBattlefield atk, Vector2Int basePos, AttackParticleTypes atkPS)
+    public IEnumerator OnBattleFieldAttackCo(CharacterInfoScript cInfo, ScriptableObjectAttackTypeOnBattlefield atk, Vector2Int basePos, AttackParticleTypes atkPS)
     {
         if(!atk.IsAttackStartingFromCharacter)
         {
@@ -268,9 +268,8 @@ public class GridManagerScript : MonoBehaviour
                 {
                     GameObject go;
                     go = Instantiate(TargetIndicator, GetBattleTile(basePos - target).transform.position, Quaternion.identity);
-                    go.GetComponent<BattleTileTargetScript>().StartTarget(item.Delay, atkPS);
+                    go.GetComponent<BattleTileTargetScript>().StartTarget(item.Delay, atkPS, basePos - target, cInfo.DamageStats.CurrentDamage, cInfo.Elemental);
                 }
-                
             }
             while (timer <= item.Delay)
             {

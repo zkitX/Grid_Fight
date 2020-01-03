@@ -11,6 +11,12 @@ public class BaseCharacter : MonoBehaviour
     public delegate void TileMovementComplete(BaseCharacter movingChar);
     public event TileMovementComplete TileMovementCompleteEvent;
 
+    public delegate void DamageReceived(float damage);
+    public event DamageReceived DamageReceivedEvent;
+
+    public delegate void HealReceived(float heal);
+    public event HealReceived HealReceivedEvent;
+
     public delegate void CurrentCharIsRebirth(CharacterNameType cName, List<ControllerType> playerController, SideType side);
     public event CurrentCharIsRebirth CurrentCharIsRebirthEvent;
 
@@ -79,7 +85,6 @@ public class BaseCharacter : MonoBehaviour
         UMS.SetupCharacterSide();
         int layer = UMS.Side == SideType.LeftSide ? 9 : 10;
         SpineAnim.gameObject.layer = layer;
-        StartAttakCo();
     }
 
     public virtual void StartMoveCo()
@@ -145,6 +150,7 @@ public class BaseCharacter : MonoBehaviour
 
     public void StartAttakCo()
     {
+        UIBattleFieldManager.Instance.SetUIBattleField(this);
         StartCoroutine(AttackAction());
     }
 
@@ -297,7 +303,7 @@ public class BaseCharacter : MonoBehaviour
         }
         else
         {
-            GridManagerScript.Instance.StartOnBattleFieldAttackCo(CharInfo.CurrentOnBattleFieldAttackTypeInfo, UMS.CurrentTilePos, CharInfo.ParticleID);
+            GridManagerScript.Instance.StartOnBattleFieldAttackCo(CharInfo, CharInfo.CurrentOnBattleFieldAttackTypeInfo, UMS.CurrentTilePos, CharInfo.ParticleID);
         }
     }
 
@@ -403,38 +409,6 @@ public class BaseCharacter : MonoBehaviour
     }
 
 
-    /*  public void MoveCharToTargetDestination(Vector3 nextPos, CharacterAnimationStateType animState, float duration)
-      {
-          if (MoveCo != null)
-          {
-              StopCoroutine(MoveCo);
-          }
-          MoveCo = MoveWorldSpace(nextPos, animState, duration);
-          StartCoroutine(MoveCo);
-      }
-
-      private IEnumerator MoveWorldSpace(Vector3 nextPos, CharacterAnimationStateType animState, float duration)
-      {
-          SetAnimation(animState);
-          float timer = 0;
-          Vector3 offset = transform.position;
-
-          while (timer < 1)
-          {
-              yield return new WaitForFixedUpdate();
-              while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
-              {
-                  yield return new WaitForEndOfFrame();
-              }
-              //Debug.Log(inum);
-              timer += Time.fixedDeltaTime / duration;//TODO Movement Speed
-              transform.position = Vector3.Lerp(offset, nextPos, timer);
-          }
-          transform.position = nextPos;
-          MoveCo = null;
-      }*/
-
-
     //Move the character on the determinated Tile position
     protected virtual IEnumerator MoveByTile(Vector3 nextPos, CharacterAnimationStateType animState, AnimationCurve curve)
     {
@@ -495,6 +469,14 @@ public class BaseCharacter : MonoBehaviour
         switch (bdClass.Stat)
         {
             case BuffDebuffStatsType.Health:
+                if(valueOverDuration < 0)
+                {
+                    DamageReceivedEvent(valueOverDuration);
+                }
+                else
+                {
+                    HealReceivedEvent(valueOverDuration);
+                }
                 CharInfo.Health += valueOverDuration;
                 break;
             case BuffDebuffStatsType.ElementalResistance:
@@ -742,6 +724,7 @@ public class BaseCharacter : MonoBehaviour
                 break;
         }
         CharInfo.Health -= damage;
+        DamageReceivedEvent(damage);
         SetAnimation(CharacterAnimationStateType.GettingHit);
     }
 
