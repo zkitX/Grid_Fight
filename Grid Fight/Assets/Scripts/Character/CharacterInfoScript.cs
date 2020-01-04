@@ -218,6 +218,11 @@ public class CharacterInfoScript : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        DamageStats.CurrentDamage = DamageStats.BaseDamage;
+    }
+
     private void FixedUpdate()
     {
         Stamina += StaminaStats.Regeneration / 50;
