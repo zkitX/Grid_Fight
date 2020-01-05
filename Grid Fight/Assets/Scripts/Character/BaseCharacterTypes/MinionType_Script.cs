@@ -6,7 +6,7 @@ public class MinionType_Script : BaseCharacter
 {
     public Vector2 MovementTimer = new Vector2(5,8);
     protected bool MoveCoOn = true;
-
+    private IEnumerator MoveActionCo;
     public override void SetUpEnteringOnBattle()
     {
         SetAnimation(CharacterAnimationStateType.Arriving);
@@ -15,8 +15,8 @@ public class MinionType_Script : BaseCharacter
     public override void StartMoveCo()
     {
         MoveCoOn = true;
-        MoveCo = Move();
-        StartCoroutine(MoveCo);
+        MoveActionCo = Move();
+        StartCoroutine(MoveActionCo);
     }
 
     public virtual IEnumerator Move()
@@ -49,9 +49,9 @@ public class MinionType_Script : BaseCharacter
     public override void StopMoveCo()
     {
         MoveCoOn = false;
-        if (MoveCo != null)
+        if (MoveActionCo != null)
         {
-            StopCoroutine(MoveCo);
+            StopCoroutine(MoveActionCo);
         }
     }
 }

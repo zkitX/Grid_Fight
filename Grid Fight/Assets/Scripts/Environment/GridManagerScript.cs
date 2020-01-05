@@ -249,7 +249,25 @@ public class GridManagerScript : MonoBehaviour
 
     public void StartOnBattleFieldAttackCo(CharacterInfoScript cInfo, ScriptableObjectAttackTypeOnBattlefield atk, Vector2Int basePos, AttackParticleTypes atkPS)
     {
-        StartCoroutine(OnBattleFieldAttackCo(cInfo, atk, basePos, atkPS));
+        if (!atk.IsAttackStartingFromCharacter)
+        {
+            basePos.y = YGridSeparator;
+        }
+        foreach (BulletBehaviourInfoClassOnBattleField item in atk.BulletTrajectories)
+        {
+            float timer = 0;
+            foreach (Vector2Int target in item.BulletEffectTiles)
+            {
+                if (isPosOnField(basePos - target))
+                {
+                    GameObject go;
+                    go = Instantiate(TargetIndicator, GetBattleTile(basePos - target).transform.position, Quaternion.identity);
+                    go.GetComponent<BattleTileTargetScript>().StartTarget(item.Delay, atkPS, basePos - target, cInfo.DamageStats.CurrentDamage, cInfo.Elemental);
+                }
+            }
+        }
+
+        //StartCoroutine(OnBattleFieldAttackCo(cInfo, atk, basePos, atkPS));
     }
 
 
