@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MinionType_Script : BaseCharacter
 {
-    public Vector2 MovementTimer = new Vector2(5,8);
+    
     protected bool MoveCoOn = true;
     private IEnumerator MoveActionCo;
     public override void SetUpEnteringOnBattle()
@@ -28,7 +28,7 @@ public class MinionType_Script : BaseCharacter
         while (MoveCoOn)
         {
             float timer = 0;
-            float MoveTime = Random.Range(MovementTimer.x, MovementTimer.y);
+            float MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y);
             while (timer < 1)
             {
                 yield return new WaitForFixedUpdate();

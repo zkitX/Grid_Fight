@@ -96,7 +96,7 @@ public class CharacterInfoScript : MonoBehaviour
     public float Special2LoadingDuration;
     public float Special3LoadingDuration;
 
-
+    public Vector2 MovementTimer = new Vector2(5, 8);
 
     public float HealthPerc
     {

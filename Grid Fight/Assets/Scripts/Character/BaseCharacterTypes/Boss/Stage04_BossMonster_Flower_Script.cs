@@ -35,7 +35,7 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
         {
             float timer = 0;
             InputDirection dir = (InputDirection)Random.Range(0, 4);
-            float MoveTime = Random.Range(MovementTimer.x, MovementTimer.y);
+            float MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y);
             while (timer < 1)
             {
                 yield return new WaitForFixedUpdate();
@@ -51,7 +51,7 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
                 MoveCharOnDirection(dir);
             }
             timer = 0;
-            MoveTime = Random.Range(MovementTimer.x, MovementTimer.y);
+            MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y);
             while (timer < 1)
             {
                 yield return new WaitForFixedUpdate();
