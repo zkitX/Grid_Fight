@@ -56,7 +56,7 @@ public class UIBattleFieldScript : MonoBehaviour
     private IEnumerator HealingCo(float heal)
     {
         GameObject h = Instantiate(Healing, transform);
-        h.GetComponent<TextMeshProUGUI>().text = (heal * 100).ToString();
+        h.GetComponent<TextMeshProUGUI>().text = ((int)(heal * 100)).ToString();
         yield return new WaitForSecondsRealtime(2);
         Destroy(h);
     }
@@ -69,7 +69,7 @@ public class UIBattleFieldScript : MonoBehaviour
     private IEnumerator DamageCo(float damage)
     {
         GameObject d = Instantiate(Damage, transform);
-        d.GetComponent<TextMeshProUGUI>().text = (damage * 100).ToString();
+        d.GetComponent<TextMeshProUGUI>().text = ((int)(damage * 100)).ToString();
         yield return new WaitForSecondsRealtime(2);
         Destroy(d);
     }
