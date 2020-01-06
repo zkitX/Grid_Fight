@@ -54,4 +54,14 @@ public class MinionType_Script : BaseCharacter
             StopCoroutine(MoveActionCo);
         }
     }
+
+    public override void SetAnimation(CharacterAnimationStateType animState)
+    {
+        if(animState == CharacterAnimationStateType.GettingHit && SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk)
+        {
+            return;
+        }
+
+        base.SetAnimation(animState);
+    }
 }

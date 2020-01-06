@@ -5,13 +5,20 @@ using UnityEngine;
 
 public class EnvironmentManager : MonoBehaviour
 {
+    public static EnvironmentManager Instance;
+
     public Vector2Int BattleFieldSize;
     public List<ScriptableObjectGridStructure> GridStructures = new List<ScriptableObjectGridStructure>();
     public GridStructureType GridStructure;
     public Camera MainCamera;
     public bool isChangeGridStructure = false;
+    public GameObject ExclamationTarget;
+    public List<GameObject> AllExclamationTargets = new List<GameObject>();
 
-
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +63,14 @@ public class EnvironmentManager : MonoBehaviour
         {
             ChangeGridStructure();
         }
+    }
+
+
+    public GameObject CreateNewExclamationTarget()
+    {
+        GameObject exclamationT = Instantiate(ExclamationTarget, new Vector3(100,100,100), Quaternion.identity);
+        AllExclamationTargets.Add(exclamationT);
+        return exclamationT;
     }
 
     public void ChangeGridStructure()

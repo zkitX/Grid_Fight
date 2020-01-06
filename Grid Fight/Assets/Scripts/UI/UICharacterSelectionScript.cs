@@ -9,12 +9,24 @@ public class UICharacterSelectionScript : MonoBehaviour
     public Image Down;
     public Image Left;
     public Image Right;
+    public List<Image> UpImageToColor = new List<Image>();
+    public List<Image> DownImageToColor = new List<Image>();
+    public List<Image> LeftImageToColor = new List<Image>();
+    public List<Image> RightImageToColor = new List<Image>();
     public Animator UpAnim;
     public Animator DownAnim;
     public Animator LeftAnim;
     public Animator RightAnim;
 
-    public CharacterSelectionType LastSelected;
+
+
+    private Dictionary<ControllerType, CharacterSelectionType> LastSelectedD = new Dictionary<ControllerType, CharacterSelectionType>()
+    {
+        { ControllerType.Player1, CharacterSelectionType.A},
+        { ControllerType.Player2, CharacterSelectionType.B},
+        { ControllerType.Player3, CharacterSelectionType.X},
+        { ControllerType.Player4, CharacterSelectionType.Y}
+    };
 
     public void SetupCharacterIcons(List<UIIconClass> listOfIcons)
     {
@@ -51,45 +63,60 @@ public class UICharacterSelectionScript : MonoBehaviour
     }
 
     /// <summary>
-    /// Firing animation of Character Loadin or selection
+    /// Firing animation of Character Loading or selection
     /// </summary>
-    public void LoadingOrSelectionChar(CharacterSelectionType characterSelection, bool status)
+    public void LoadingOrSelectionChar(ControllerType playerController, CharacterSelectionType characterSelection, bool status)
     {
         switch (characterSelection)
         {
             case CharacterSelectionType.Up:
                 UpAnim.SetBool("LoadSelect", status);
+                ChangeColorForSelection(UpImageToColor, status ? BattleManagerScript.Instance.playersColor[(int)playerController] : Color.white);
                 break;
             case CharacterSelectionType.Down:
                 DownAnim.SetBool("LoadSelect", status);
+                ChangeColorForSelection(DownImageToColor, status ? BattleManagerScript.Instance.playersColor[(int)playerController] : Color.white);
                 break;
             case CharacterSelectionType.Left:
                 LeftAnim.SetBool("LoadSelect", status);
+                ChangeColorForSelection(LeftImageToColor, status ? BattleManagerScript.Instance.playersColor[(int)playerController] : Color.white);
                 break;
             case CharacterSelectionType.Right:
                 RightAnim.SetBool("LoadSelect", status);
+                ChangeColorForSelection(RightImageToColor, status ? BattleManagerScript.Instance.playersColor[(int)playerController] : Color.white);
                 break;
             case CharacterSelectionType.A:
                 RightAnim.SetBool("LoadSelect", status);
+              //  ChangeColorForSelection(UpImageToColor, status ? BattleManagerScript.Instance.playersColor[idColor] : Color.white);
                 break;
             case CharacterSelectionType.B:
                 DownAnim.SetBool("LoadSelect", status);
+             //   ChangeColorForSelection(UpImageToColor, status ? BattleManagerScript.Instance.playersColor[idColor] : Color.white);
                 break;
             case CharacterSelectionType.X:
                 UpAnim.SetBool("LoadSelect", status);
+             //   ChangeColorForSelection(UpImageToColor, status ? BattleManagerScript.Instance.playersColor[idColor] : Color.white);
                 break;
             case CharacterSelectionType.Y:
                 LeftAnim.SetBool("LoadSelect", status);
+             //   ChangeColorForSelection(UpImageToColor, status ? BattleManagerScript.Instance.playersColor[idColor] : Color.white);
                 break;
         }
     }
 
-
-    public void SetCharSelected(CharacterSelectionType selection)
+    public void ChangeColorForSelection(List<Image> imgs, Color color)
     {
-        LoadingOrSelectionChar(LastSelected, false);
-        LastSelected = selection;
-        LoadingOrSelectionChar(LastSelected, true);
+        foreach (Image item in imgs)
+        {
+            item.color = color;
+        }
+    }
+
+    public void SetCharSelected(ControllerType playerController, CharacterSelectionType selection)
+    {
+        LoadingOrSelectionChar(playerController,LastSelectedD[playerController], false);
+        LastSelectedD[playerController] = selection;
+        LoadingOrSelectionChar(playerController, selection, true);
     }
 
 }

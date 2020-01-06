@@ -40,8 +40,7 @@ public class BattleManagerScript : MonoBehaviour
     private Transform CharactersContainer;
     private List<CharacterBaseInfoClass> PlayerBattleInfo = new List<CharacterBaseInfoClass>();
     private List<PlayableCharOnScene> PlayablesCharOnScene = new List<PlayableCharOnScene>();
-    [SerializeField]
-    private List<Color> playersColor = new List<Color>();
+    public List<Color> playersColor = new List<Color>();
     [SerializeField]
     private List<Sprite> playersNumberBig = new List<Sprite>();
     [SerializeField]

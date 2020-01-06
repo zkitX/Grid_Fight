@@ -28,6 +28,7 @@ public class BattleTileScript : MonoBehaviour
     public SpriteRenderer SP;
     public PortalInfoClass PortalInfo;
 
+    public BattleTileTargetsScript BattleTargetScript;
     //Private
     private bool isMovingEventSubscribed = false;
 

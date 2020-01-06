@@ -260,9 +260,10 @@ public class GridManagerScript : MonoBehaviour
             {
                 if (isPosOnField(basePos - target))
                 {
-                    GameObject go;
+                    GetBattleTile(basePos - target).BattleTargetScript.SetAttack(item.Delay, atkPS, basePos - target, cInfo.DamageStats.CurrentDamage, cInfo.Elemental);
+                   /* GameObject go;
                     go = Instantiate(TargetIndicator, GetBattleTile(basePos - target).transform.position, Quaternion.identity);
-                    go.GetComponent<BattleTileTargetScript>().StartTarget(item.Delay, atkPS, basePos - target, cInfo.DamageStats.CurrentDamage, cInfo.Elemental);
+                    go.GetComponent<BattleTileTargetScript>().StartTarget(item.Delay, atkPS, basePos - target, cInfo.DamageStats.CurrentDamage, cInfo.Elemental);*/
                 }
             }
         }

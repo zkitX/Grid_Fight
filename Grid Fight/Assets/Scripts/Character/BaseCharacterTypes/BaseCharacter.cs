@@ -634,7 +634,7 @@ public class BaseCharacter : MonoBehaviour
 
     #region Animation
 
-    public void SetAnimation(CharacterAnimationStateType animState)
+    public virtual void SetAnimation(CharacterAnimationStateType animState)
     {
         float AnimSpeed = 1;
         if (SpineAnim == null)

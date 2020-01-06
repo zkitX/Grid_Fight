@@ -17,7 +17,7 @@ namespace Fungus
     {
         private void Start()
         {
-            BattleManagerScript.Instance.CurrentBattleStateChangedEvent += Instance_CurrentBattleStateChangedEvent;
+            BattleManagerScript.Instance.CurrentBattleStateChangedEvent += Instance_CurrentBattleStateChangedEvent; 
         }
 
         private void Instance_CurrentBattleStateChangedEvent(BattleState currentBattleState)
