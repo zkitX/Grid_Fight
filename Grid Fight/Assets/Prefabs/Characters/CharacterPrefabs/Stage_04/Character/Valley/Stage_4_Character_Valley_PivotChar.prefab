@@ -362,13 +362,13 @@ MonoBehaviour:
     Regeneration: 1
     BaseStaminaRegeneration: 1
     Stamina_Cost_Atk: 0
-    Stamina_Cost_S_Atk01: 3
+    Stamina_Cost_S_Atk01: 0.5
     Stamina_Cost_S_Atk02: 15
     Stamina_Cost_S_Atk03: 30
     Stamina_Cost_S_Atk04: 42
     LevelMultiplier: 30
   SpeedStats:
-    BaseSpeed: 1
+    BaseSpeed: 1.5
     MovementSpeed: 2.3
     AttackSpeed: 2
     AttackSpeedRatio: 1
@@ -385,6 +385,7 @@ MonoBehaviour:
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
+  MovementTimer: {x: 5, y: 8}
 --- !u!54 &2652619474111178787
 Rigidbody:
   m_ObjectHideFlags: 0
