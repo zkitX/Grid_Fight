@@ -125,6 +125,12 @@ public class WaveManagerScript : MonoBehaviour
             res.StartAttakCo();
         }
         res.CharInfo.HealthStats.Base = Random.Range(character.Health.x, character.Health.y);
+        res.CharInfo.HealthStats.Regeneration = Random.Range(character.HealthRegeneration.x, character.HealthRegeneration.y);
+        res.CharInfo.StaminaStats.Base = Random.Range(character.Stamina.x, character.Stamina.y);
+        res.CharInfo.StaminaStats.Regeneration = Random.Range(character.StaminaRegeneration.x, character.StaminaRegeneration.y);
+        res.CharInfo.SpeedStats.BaseSpeed = Random.Range(character.BaseSpeed.x, character.BaseSpeed.y);
+        res.CharInfo.SpeedStats.AttackSpeedRatio = Random.Range(character.AttackSpeedRatio.x, character.AttackSpeedRatio.y);
+        res.CharInfo.DamageStats.BaseDamage = Random.Range(character.Damage.x, character.Damage.y);
         res.CharInfo.Health = res.CharInfo.HealthStats.Base;
 
         return res;
