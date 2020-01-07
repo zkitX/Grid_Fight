@@ -257,7 +257,7 @@ public class BaseCharacter : MonoBehaviour
         bs.Side = UMS.Side;
         bs.VFXTestMode = VFXTestMode;
         bs.CharInfo = CharInfo;
-        bs.gameObject.SetActive(true);
+       
         
         bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharInfo.ParticleID, ParticleTypes.Attack, bullet.transform, UMS.Side,
             CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script ? true : false);
@@ -273,14 +273,7 @@ public class BaseCharacter : MonoBehaviour
 
         if ((UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x > 5) || (UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x < 0))
         {
-            BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(UMS.CurrentTilePos.x - bulletBehaviourInfo.BulletDistanceInTile.x, UMS.Side == SideType.LeftSide ? UMS.CurrentTilePos.y + bulletBehaviourInfo.BulletDistanceInTile.y : UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y));
-            if(bts == null)
-            {
-                return;
-            }
-            float h = transform.position.y - bts.transform.position.y;
-            bs.DestinationWorld = new Vector3(bts.transform.position.x, (transform.position.y + h), bts.transform.position.z);
-            StartCoroutine(bs.MoveToWorldPos());
+            bs.gameObject.SetActive(false);
             return;
         }
 
@@ -292,6 +285,7 @@ public class BaseCharacter : MonoBehaviour
         {
             bs.DestinationTile = new Vector2Int(UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x, UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y < 0 ? 0 : UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y);
         }
+        bs.gameObject.SetActive(true);
         bs.StartMoveToTile();
     }
 
