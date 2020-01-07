@@ -30,19 +30,17 @@ public class UIBattleFieldScript : MonoBehaviour
             transform.position = mCamera.WorldToScreenPoint(CharOwner.transform.position);
             CharacterHealthBar.rectTransform.anchoredPosition = new Vector2(CharacterHealthBar.rectTransform.rect.width - ((CharacterHealthBar.rectTransform.rect.width / 100) * CharOwner.CharInfo.HealthPerc), 0);
             CharacterStaminaBar.rectTransform.anchoredPosition = new Vector2(CharacterStaminaBar.rectTransform.rect.width - ((CharacterStaminaBar.rectTransform.rect.width / 100) * CharOwner.CharInfo.StaminaPerc), 0);
-            if (CharOwner.CharInfo.Health <= 0)
-            {
-                CharOwner.DamageReceivedEvent -= CharOwner_DamageReceivedEvent;
-                CharOwner.HealReceivedEvent -= CharOwner_HealReceivedEvent;
-                gameObject.SetActive(false);
-                CharOwner = null;
-            }
         }
     }
 
 
     public void SetupCharOwner(BaseCharacter charOwner)
     {
+        if(CharOwner != null)
+        {
+            CharOwner.DamageReceivedEvent -= CharOwner_DamageReceivedEvent;
+            CharOwner.HealReceivedEvent -= CharOwner_HealReceivedEvent;
+        }
         CharOwner = charOwner;
         CharOwner.DamageReceivedEvent += CharOwner_DamageReceivedEvent;
         CharOwner.HealReceivedEvent += CharOwner_HealReceivedEvent;
