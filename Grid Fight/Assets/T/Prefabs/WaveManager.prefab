@@ -1,0 +1,260 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3511135238630928034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3511135238630928035}
+  - component: {fileID: 3511135238630928032}
+  m_Layer: 0
+  m_Name: WaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3511135238630928035
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3511135238630928034}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.2474627, y: 0.9679096, z: -3.4060545}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3511135238630928032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3511135238630928034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09b0c490261b08d4dbe285554c10a1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WavePhases:
+  - name: Wave1
+    IsRandom: 0
+    MaxEnemyOnScreen: 2
+    ListOfEnemy:
+    - name: Bush
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 0
+        CharacterClass: 0
+        Health: {x: 20, y: 25}
+        HealthRegeneration: {x: 0.2, y: 0.2}
+        Damage: {x: 5, y: 6}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 5, y: 4}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 0
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+  - name: Wave2
+    IsRandom: 0
+    MaxEnemyOnScreen: 2
+    ListOfEnemy:
+    - name: Lady Bush
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 1
+        CharacterClass: 0
+        Health: {x: 20, y: 35}
+        HealthRegeneration: {x: 1, y: 1}
+        Damage: {x: 5, y: 6}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 3, y: 5}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 0
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+    - name: Monkeyna
+      NumberOfCharacter: 5
+      TypeOfCharacter:
+        CharacterName: 3
+        CharacterClass: 0
+        Health: {x: 15, y: 25}
+        HealthRegeneration: {x: 0.5, y: 1}
+        Damage: {x: 7, y: 8}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 3, y: 4}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 0
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+  - name: Wave3
+    IsRandom: 0
+    MaxEnemyOnScreen: 5
+    ListOfEnemy:
+    - name: Monkeyna
+      NumberOfCharacter: 13
+      TypeOfCharacter:
+        CharacterName: 3
+        CharacterClass: 0
+        Health: {x: 20, y: 15}
+        HealthRegeneration: {x: 1, y: 1.5}
+        Damage: {x: 7, y: 9}
+        BaseSpeed: {x: 1, y: 2}
+        AttackSpeedRatio: {x: 3, y: 5}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 0
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 2
+  - name: Wave4
+    IsRandom: 1
+    MaxEnemyOnScreen: 3
+    ListOfEnemy:
+    - name: Jaguar
+      NumberOfCharacter: 6
+      TypeOfCharacter:
+        CharacterName: 2
+        CharacterClass: 0
+        Health: {x: 40, y: 50}
+        HealthRegeneration: {x: 1, y: 1}
+        Damage: {x: 3, y: 4}
+        BaseSpeed: {x: 1, y: 1.5}
+        AttackSpeedRatio: {x: 3, y: 5}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 0
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 2
+    - name: Llhama
+      NumberOfCharacter: 4
+      TypeOfCharacter:
+        CharacterName: 0
+        CharacterClass: 0
+        Health: {x: 60, y: 70}
+        HealthRegeneration: {x: 1, y: 1}
+        Damage: {x: 15, y: 18}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 4, y: 7}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 0
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 2
+  - name: Wave5
+    IsRandom: 1
+    MaxEnemyOnScreen: 4
+    ListOfEnemy:
+    - name: Lady Bush
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 1
+        CharacterClass: 0
+        Health: {x: 30, y: 40}
+        HealthRegeneration: {x: 1, y: 1}
+        Damage: {x: 6, y: 7}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 5, y: 5}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 0
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 2
+    - name: Mankeyna
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 4
+        CharacterClass: 0
+        Health: {x: 20, y: 25}
+        HealthRegeneration: {x: 1, y: 1}
+        Damage: {x: 7, y: 8}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 4, y: 5}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 0
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 2
+    - name: Jaguar
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 2
+        CharacterClass: 0
+        Health: {x: 40, y: 50}
+        HealthRegeneration: {x: 1, y: 1}
+        Damage: {x: 3, y: 4}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 3, y: 6}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 0
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 2
+    - name: Llhama
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 0
+        CharacterClass: 0
+        Health: {x: 60, y: 70}
+        HealthRegeneration: {x: 1, y: 1}
+        Damage: {x: 15, y: 18}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 4, y: 6}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 0
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 2
+  - name: Wave6
+    IsRandom: 0
+    MaxEnemyOnScreen: 10
+    ListOfEnemy:
+    - name: Pristest
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 12
+        CharacterClass: 0
+        Health: {x: 60, y: 70}
+        HealthRegeneration: {x: 2, y: 2}
+        Damage: {x: 20, y: 25}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 4, y: 6}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 9}
+      DelayBetweenChars: 1
+  isWaveComplete: 0
+  WaveCharcters: []
+  CurrentWave: 0
