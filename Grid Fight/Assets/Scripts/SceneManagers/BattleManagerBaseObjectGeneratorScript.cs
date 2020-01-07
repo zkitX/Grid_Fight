@@ -17,7 +17,7 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(LevelLoader(LoaderManagerScript.Instance != null ? 1 : 0));
+        StartCoroutine(LevelLoader(LoaderManagerScript.Instance != null ? 1 : 0.2f));
     }
 
     // Update is called once per frame

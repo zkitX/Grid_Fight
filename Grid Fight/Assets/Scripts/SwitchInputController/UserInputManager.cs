@@ -272,14 +272,14 @@ public class UserInputManager : MonoBehaviour
     #region Joystick
     private void Instance_RightJoystickUsedEvent(int player, InputDirection dir)
     {
-        Debug.Log(player + "    " + dir);
+        //Debug.Log(player + "    " + dir);
         //UserInputJoystickHandler(PPPlayer, DDir);
         UserInputJoystickHandler(player, dir);
     }
 
     private void Instance_LeftJoystickUsedEvent(int player, InputDirection dir)
     {
-        Debug.Log(player + "    " + dir);
+        //Debug.Log(player + "    " + dir);
         //UserInputJoystickHandler(PPPlayer, DDir);
         UserInputJoystickHandler(player, dir);
     }
@@ -288,123 +288,123 @@ public class UserInputManager : MonoBehaviour
     #region Button Up
     private void Instance_ButtonMinusUpEvent(int player)
     {
-        Debug.Log(player + "  " + "Minus Up");
+        //Debug.Log(player + "  " + "Minus Up");
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
     private void Instance_ButtonPlusUpEvent(int player)
     {
-        Debug.Log(player + "  " + "Plus Up");
+        //Debug.Log(player + "  " + "Plus Up");
         BattleManagerScript.Instance.SetupBattleState();
 
     }
 
     private void Instance_ButtonZLUpEvent(int player)
     {
-        Debug.Log(player + "  " + "ZL Up");
+        //Debug.Log(player + "  " + "ZL Up");
     }
 
     private void Instance_ButtonLUpEvent(int player)
     {
-        Debug.Log(player + "  " + "L Up");
+        //Debug.Log(player + "  " + "L Up");
     }
 
     private void Instance_ButtonZRUpEvent(int player)
     {
-        Debug.Log(player + "  " + "ZR Up");
+        //Debug.Log(player + "  " + "ZR Up");
     }
 
     private void Instance_ButtonRUpEvent(int player)
     {
-        Debug.Log(player + "  " + "R Up");
+        //Debug.Log(player + "  " + "R Up");
     }
 
     private void Instance_ButtonLeftUpEvent(int player)
     {
-        Debug.Log(player + "  " + "Left Up");
+        //Debug.Log(player + "  " + "Left Up");
         StopLoadSelectCharacter(CharacterSelectionType.Left, (ControllerType)player);
     }
 
     private void Instance_ButtonRightUpEvent(int player)
     {
-        Debug.Log(player + "  " + "Right Up");
+        //Debug.Log(player + "  " + "Right Up");
         StopLoadSelectCharacter(CharacterSelectionType.Right, (ControllerType)player);
     }
 
     private void Instance_ButtonDownUpEvent(int player)
     {
-        Debug.Log(player + "  " + "Down Up");
+        //Debug.Log(player + "  " + "Down Up");
         StopLoadSelectCharacter(CharacterSelectionType.Down, (ControllerType)player);
     }
 
     private void Instance_ButtonUpUpEvent(int player)
     {
-        Debug.Log(player + "  " + "Up Up");
+        //Debug.Log(player + "  " + "Up Up");
         StopLoadSelectCharacter(CharacterSelectionType.Up, (ControllerType)player);
     }
 
     private void Instance_ButtonYUpEvent(int player)
     {
-        Debug.Log(player + "  " + "Y Up");
+        //Debug.Log(player + "  " + "Y Up");
     }
 
     private void Instance_ButtonXUpEvent(int player)
     {
-        Debug.Log(player + "  " + "X Up");
+        //Debug.Log(player + "  " + "X Up");
     }
 
     private void Instance_ButtonBUpEvent(int player)
     {
-        Debug.Log(player + "  " + "B Up");
+        //Debug.Log(player + "  " + "B Up");
         //VibrationController.Instance.CustomVibration(player, VibrationType.b);
     }
 
     private void Instance_ButtonAUpEvent(int player)
     {
-        Debug.Log(player + "  " + "A Up");
+        //Debug.Log(player + "  " + "A Up");
         //VibrationController.Instance.CustomVibration(player, VibrationType.a);
         StopSelectedCharacterLoadingSpecialAttack(player);
     }
 
     private void Instance_ButtonRightSRUpEvent(int player)
     {
-        Debug.Log(player + "  " + "Right SR Up");
+        //Debug.Log(player + "  " + "Right SR Up");
     }
 
     private void Instance_ButtonLeftSRUpEvent(int player)
     {
-        Debug.Log(player + "  " + "Left SR Up");
+        //Debug.Log(player + "  " + "Left SR Up");
     }
 
     private void Instance_ButtonLeftSLUpEvent(int player)
     {
-        Debug.Log(player + "  " + "Left SL Up");
+        //Debug.Log(player + "  " + "Left SL Up");
     }
 
     private void Instance_ButtonRightSLUpEvent(int player)
     {
-        Debug.Log(player + "  " + "Right SL Up");
+        //Debug.Log(player + "  " + "Right SL Up");
     }
 
     private void Instance_ButtonLeftStickUpEvent(int player)
     {
-        Debug.Log(player + "  " + "Left Stick Up");
+        //Debug.Log(player + "  " + "Left Stick Up");
     }
 
     private void Instance_ButtonRightStickUpEvent(int player)
     {
-        Debug.Log(player + "  " + "Right Stick Up");
+        //Debug.Log(player + "  " + "Right Stick Up");
     }
 
     private void Instance_ButtonCaptureUpEvent(int player)
     {
-        Debug.Log(player + "  " + "Capture Up");
+        //Debug.Log(player + "  " + "Capture Up");
     }
 
     private void Instance_ButtonHomeUpEvent(int player)
     {
         BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
-        Debug.Log(player + "  " + "Home Up");
+        //Debug.Log(player + "  " + "Home Up");
     }
 
 
@@ -412,229 +412,229 @@ public class UserInputManager : MonoBehaviour
     #region Button Press
     private void Instance_ButtonMinusPressedEvent(int player)
     {
-        Debug.Log(player + "  " + "Minus Press");
+        //Debug.Log(player + "  " + "Minus Press");
     }
 
     private void Instance_ButtonPlusPressedEvent(int player)
     {
-        Debug.Log(player + "  " + "Plus Press");
+        //Debug.Log(player + "  " + "Plus Press");
     }
 
     private void Instance_ButtonZLPressedEvent(int player)
     {
-        Debug.Log(player + "  " + "ZL Press");
+        //Debug.Log(player + "  " + "ZL Press");
     }
 
     private void Instance_ButtonLPressedEvent(int player)
     {
-        Debug.Log(player + "  " + "L Press");
+        //Debug.Log(player + "  " + "L Press");
     }
 
     private void Instance_ButtonZRPressedEvent(int player)
     {
-        Debug.Log(player + "  " + "ZR Press");
+        //Debug.Log(player + "  " + "ZR Press");
     }
 
     private void Instance_ButtonRPressedEvent(int player)
     {
-        Debug.Log(player + "  " + "R Press");
+        //Debug.Log(player + "  " + "R Press");
     }
 
     private void Instance_ButtonLeftPressedEvent(int player)
     {
-        Debug.Log(player + "  " + "Left Press");
+        //Debug.Log(player + "  " + "Left Press");
     }
 
     private void Instance_ButtonRightPressedEvent(int player)
     {
-        Debug.Log(player + "  " + "Right Press");
+        //Debug.Log(player + "  " + "Right Press");
     }
 
     private void Instance_ButtonDownPressedEvent(int player)
     {
-        Debug.Log(player + "  " + "Down Press");
+        //Debug.Log(player + "  " + "Down Press");
     }
 
     private void Instance_ButtonUpPressedEvent(int player)
     {
-        Debug.Log(player + "  " + "Up Press");
+        //Debug.Log(player + "  " + "Up Press");
     }
 
     private void Instance_ButtonYPressedEvent(int player)
     {
-        Debug.Log(player + "  " + "Y Press");
+        //Debug.Log(player + "  " + "Y Press");
     }
 
     private void Instance_ButtonXPressedEvent(int player)
     {
-        Debug.Log(player + "  " + "X Press");
+        //Debug.Log(player + "  " + "X Press");
     }
 
     private void Instance_ButtonBPressedEvent(int player)
     {
-        Debug.Log(player + "  " + "B Press");
+        //Debug.Log(player + "  " + "B Press");
     }
 
     private void Instance_ButtonAPressedEvent(int player)
     {
-        Debug.Log(player + "  " + "A Press");
+        //Debug.Log(player + "  " + "A Press");
     }
 
     private void Instance_ButtonLeftSRPressedEvent(int player)
     {
-        Debug.Log(player + "  " + "Left SR Press");
+        //Debug.Log(player + "  " + "Left SR Press");
     }
 
     private void Instance_ButtonRightSRPressedEvent(int player)
     {
-        Debug.Log(player + "  " + "Right SR Press");
+        //Debug.Log(player + "  " + "Right SR Press");
     }
 
     private void Instance_ButtonRightSLPressedEvent(int player)
     {
-        Debug.Log(player + "  " + "Right SL Press");
+        //Debug.Log(player + "  " + "Right SL Press");
     }
 
     private void Instance_ButtonLeftSLPressedEvent(int player)
     {
-        Debug.Log(player + "  " + "Left SL Press");
+        //Debug.Log(player + "  " + "Left SL Press");
     }
 
     private void Instance_ButtonRightStickPressedEvent(int player)
     {
-        Debug.Log(player + "  " + "Right Stick Press");
+        //Debug.Log(player + "  " + "Right Stick Press");
     }
 
     private void Instance_ButtonLeftStickPressedEvent(int player)
     {
-        Debug.Log(player + "  " + "Left Stick Press");
+        //Debug.Log(player + "  " + "Left Stick Press");
     }
 
     private void Instance_ButtonCapturePressedEvent(int player)
     {
-        Debug.Log(player + "  " + "Capture Press");
+        //Debug.Log(player + "  " + "Capture Press");
     }
 
     private void Instance_ButtonHomePressedEvent(int player)
     {
-        Debug.Log(player + "  " + "Home Press");
+        //Debug.Log(player + "  " + "Home Press");
     }
     #endregion
     #region Button Down
     private void Instance_ButtonPlusDownEvent(int player)
     {
-        Debug.Log(player + "  " + "Plus Down");
+        //Debug.Log(player + "  " + "Plus Down");
     }
 
     private void Instance_ButtonMinusDownEvent(int player)
     {
-        Debug.Log(player + "  " + "Minus Down");
+        //Debug.Log(player + "  " + "Minus Down");
     }
 
     private void Instance_ButtonZLDownEvent(int player)
     {
-        Debug.Log(player + "  " + "ZL Down");
+        //Debug.Log(player + "  " + "ZL Down");
     }
 
     private void Instance_ButtonLDownEvent(int player)
     {
-        Debug.Log(player + "  " + "L Down");
+        //Debug.Log(player + "  " + "L Down");
     }
 
     private void Instance_ButtonZRDownEvent(int player)
     {
-        Debug.Log(player + "  " + "ZR Down");
+        //Debug.Log(player + "  " + "ZR Down");
     }
 
     private void Instance_ButtonRDownEvent(int player)
     {
-        Debug.Log(player + "  " + "R Down");
+        //Debug.Log(player + "  " + "R Down");
     }
 
     private void Instance_ButtonLeftDownEvent(int player)
     {
-        Debug.Log(player + "  " + "Left Down");
+        //Debug.Log(player + "  " + "Left Down");
         LoadSelectCharacter(CharacterSelectionType.Left, (ControllerType)player);
 
     }
 
     private void Instance_ButtonRightDownEvent(int player)
     {
-        Debug.Log(player + "  " + "Right Down");
+        //Debug.Log(player + "  " + "Right Down");
         LoadSelectCharacter(CharacterSelectionType.Right, (ControllerType)player);
     }
 
     private void Instance_ButtonDownDownEvent(int player)
     {
-        Debug.Log(player + "  " + "Down Down");
+        //Debug.Log(player + "  " + "Down Down");
         LoadSelectCharacter(CharacterSelectionType.Down, (ControllerType)player);
     }
 
     private void Instance_ButtonUpDownEvent(int player)
     {
-        Debug.Log(player + "  " + "Up Down");
+        //Debug.Log(player + "  " + "Up Down");
         LoadSelectCharacter(CharacterSelectionType.Up, (ControllerType)player);
     }
 
     private void Instance_ButtonYDownEvent(int player)
     {
-        Debug.Log(player + "  " + "Y Down");
+        //Debug.Log(player + "  " + "Y Down");
     }
 
     private void Instance_ButtonXDownEvent(int player)
     {
-        Debug.Log(player + "  " + "X Down");
+        //Debug.Log(player + "  " + "X Down");
     }
 
     private void Instance_ButtonBDownEvent(int player)
     {
-        Debug.Log(player + "  " + "B Down");
+        //Debug.Log(player + "  " + "B Down");
     }
 
     private void Instance_ButtonADownEvent(int player)
     {
-        Debug.Log(player + "  " + "A Down");
+        //Debug.Log(player + "  " + "A Down");
         SelectedCharacterLoadingSpecialAttack(player);
     }
 
     private void Instance_ButtonRightSRDownEvent(int player)
     {
-        Debug.Log(player + "  " + "Right SR Down");
+        //Debug.Log(player + "  " + "Right SR Down");
     }
 
     private void Instance_ButtonLeftSRDownEvent(int player)
     {
-        Debug.Log(player + "  " + "Left SR Down");
+        //Debug.Log(player + "  " + "Left SR Down");
     }
 
     private void Instance_ButtonRightSLDownEvent(int player)
     {
-        Debug.Log(player + "  " + "Right SL Down");
+        //Debug.Log(player + "  " + "Right SL Down");
     }
 
     private void Instance_ButtonLeftSLDownEvent(int player)
     {
-        Debug.Log(player + "  " + "Left SL Down");
+        //Debug.Log(player + "  " + "Left SL Down");
     }
 
     private void Instance_ButtonRightStickDownEvent(int player)
     {
-        Debug.Log(player + "  " + "Right Stick Down");
+        //Debug.Log(player + "  " + "Right Stick Down");
     }
 
     private void Instance_ButtonLeftStickDownEvent(int player)
     {
-        Debug.Log(player + "  " + "Left Stick Down");
+        //Debug.Log(player + "  " + "Left Stick Down");
     }
 
     private void Instance_ButtonCaptureDownEvent(int player)
     {
-        Debug.Log(player + "  " + "Capture Down");
+        //Debug.Log(player + "  " + "Capture Down");
     }
 
     private void Instance_ButtonHomeDownEvent(int player)
     {
-        Debug.Log(player + "  " + "Home Down");
+        //Debug.Log(player + "  " + "Home Down");
     }
     #endregion
 
@@ -661,7 +661,7 @@ public class UserInputManager : MonoBehaviour
 
     public void LoadSelectCharacter(CharacterSelectionType characterSelection, ControllerType controllerType)
     {
-        Debug.Log("Loading");
+        //Debug.Log("Loading");
         BattleManagerScript.Instance.Switch_LoadingNewCharacterInRandomPosition(characterSelection, controllerType);
     }
 

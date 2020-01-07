@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SplashScreenManagerScript : MonoBehaviour
 {
 
     public static SplashScreenManagerScript Instance;
-
-
+    public bool isloading = false;
+    public bool ShowScene = false;
+    public Animator Anim;
+    public AudioSource AudioS;
     private void Awake()
     {
         Instance = this;
@@ -17,19 +20,57 @@ public class SplashScreenManagerScript : MonoBehaviour
     {
 #if UNITY_SWITCH && !UNITY_EDITOR
         PlayerPrefsSwitch.PlayerPrefsSwitch.Init();
-#endif
         Invoke("GoToMainMenu", 2);
+#endif
+        InputController.Instance.ButtonPlusUpEvent += Instance_ButtonPlusUpEvent;
+
+        Invoke("StartLoadingBattleScene", 1);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Instance_ButtonPlusUpEvent(int player)
     {
-        
+        if(!isloading)
+        {
+            isloading = true;
+            Anim.SetBool("FadeOutIn", true);
+        }
     }
 
+    IEnumerator LoadYourAsyncScene()
+    {
+        // The Application loads the Scene in the background as the current Scene runs.
+        // This is particularly good for creating loading screens.
+        // You could also load the Scene by using sceneBuildIndex. In this case Scene2 has
+        // a sceneBuildIndex of 1 as shown in Build Settings.
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("BattleScene", LoadSceneMode.Additive);
+        asyncLoad.allowSceneActivation = false;
+        // Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone && !ShowScene)
+        {
+            yield return null;
+        }
+
+        asyncLoad.allowSceneActivation = true;
+
+        yield return new WaitForSecondsRealtime(0.2f);
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("BattleScene"));
+        SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("SplashScreenDemo"));
+    }
+
+
+    public void StartLoadingBattleScene()
+    {
+        StartCoroutine(LoadYourAsyncScene());
+    }
+
+    public void ShowBattleScene()
+    {
+        ShowScene = true;
+    }
 
     public void GoToMainMenu()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenu");
     }
 }
