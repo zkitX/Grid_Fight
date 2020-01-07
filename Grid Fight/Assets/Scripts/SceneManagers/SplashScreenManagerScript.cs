@@ -11,6 +11,8 @@ public class SplashScreenManagerScript : MonoBehaviour
     public bool ShowScene = false;
     public Animator Anim;
     public AudioSource AudioS;
+    public AudioClip ButtonPressed;
+    public AudioClip PressStart;
     private void Awake()
     {
         Instance = this;
@@ -31,6 +33,9 @@ public class SplashScreenManagerScript : MonoBehaviour
     {
         if(!isloading)
         {
+            AudioS.PlayOneShot(ButtonPressed);
+            AudioS.clip = PressStart;
+            AudioS.Play();
             isloading = true;
             Anim.SetBool("FadeOutIn", true);
         }

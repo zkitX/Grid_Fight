@@ -33,6 +33,7 @@ public class Stage04_BossGirl_Script : BaseCharacter
 
     public override void SetUpEnteringOnBattle()
     {
+        UIBattleFieldManager.Instance.SetUIBattleField(this);
         StartCoroutine(SetUpEnteringOnBattle_Co());
     }
 

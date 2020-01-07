@@ -33,6 +33,7 @@ public class Stage04_BossMonster_Script : BaseCharacter
 
     public override void SetUpEnteringOnBattle()
     {
+        UIBattleFieldManager.Instance.SetUIBattleField(this);
         StartCoroutine(SetUpEnteringOnBattle_Co());
     }
 
