@@ -700,7 +700,7 @@ public class BaseCharacter : MonoBehaviour
             ElaboratedWeakness = BaseWeakness + (int)buffDebuffWeakness.ElementalResistence.ElementalWeakness;
         }
 
-        switch (ElaboratedWeakness)
+    /*    switch (ElaboratedWeakness)
         {
             case ElementalWeaknessType.ExtremelyWeak:
                 damage = damage + (damage * 0.7f);
@@ -722,7 +722,7 @@ public class BaseCharacter : MonoBehaviour
             case ElementalWeaknessType.ExtremelyResistent:
                 damage = damage - (damage * 0.7f);
                 break;
-        }
+        }*/
         CharInfo.Health -= damage;
         DamageReceivedEvent(damage);
         SetAnimation(CharacterAnimationStateType.GettingHit);
