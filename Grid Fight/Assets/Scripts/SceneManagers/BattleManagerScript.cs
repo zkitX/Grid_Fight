@@ -334,7 +334,7 @@ public class BattleManagerScript : MonoBehaviour
     //Move selected char under determinated player
     public void MoveSelectedCharacterInDirection(ControllerType playerController, InputDirection dir)
     {
-        if (CurrentSelectedCharacters.ContainsKey(playerController))
+        if (CurrentSelectedCharacters[playerController] != null)
         {
             if(CurrentSelectedCharacters[playerController].UMS.UnitBehaviour == UnitBehaviourType.ControlledByPlayer)
             {

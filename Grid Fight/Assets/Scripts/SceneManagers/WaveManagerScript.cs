@@ -13,6 +13,8 @@ public class WaveManagerScript : MonoBehaviour
     private WaveCharClass CurrentWaveChar;
     private List<ScriptableObjectWaveEvent> Events = new List<ScriptableObjectWaveEvent>();
 
+    public int CurrentWave = 0;
+
     private IEnumerator Wave_Co;
     private IEnumerator Event_Co;
 
@@ -131,6 +133,7 @@ public class WaveManagerScript : MonoBehaviour
         res.CharInfo.SpeedStats.BaseSpeed = Random.Range(character.BaseSpeed.x, character.BaseSpeed.y);
         res.CharInfo.SpeedStats.AttackSpeedRatio = Random.Range(character.AttackSpeedRatio.x, character.AttackSpeedRatio.y);
         res.CharInfo.DamageStats.BaseDamage = Random.Range(character.Damage.x, character.Damage.y);
+        res.CharInfo.DamageStats.CurrentDamage = res.CharInfo.DamageStats.BaseDamage;
         res.CharInfo.Health = res.CharInfo.HealthStats.Base;
 
         return res;
@@ -142,6 +145,7 @@ public class WaveManagerScript : MonoBehaviour
         float timer = 0;
         foreach (WavePhaseClass wavePhase in WavePhases)
         {
+            CurrentWave++;
             while (BattleManagerScript.Instance == null)
             {
                 yield return new WaitForEndOfFrame();

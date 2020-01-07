@@ -255,7 +255,6 @@ public class GridManagerScript : MonoBehaviour
         }
         foreach (BulletBehaviourInfoClassOnBattleField item in atk.BulletTrajectories)
         {
-            float timer = 0;
             foreach (Vector2Int target in item.BulletEffectTiles)
             {
                 if (isPosOnField(basePos - target))
