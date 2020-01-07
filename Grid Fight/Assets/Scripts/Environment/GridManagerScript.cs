@@ -259,7 +259,11 @@ public class GridManagerScript : MonoBehaviour
             {
                 if (isPosOnField(basePos - target))
                 {
-                    GetBattleTile(basePos - target).BattleTargetScript.SetAttack(item.Delay, atkPS, basePos - target, cInfo.DamageStats.CurrentDamage, cInfo.Elemental);
+                    BattleTileScript bts = GetBattleTile(basePos - target);
+                    if(bts._BattleTileState != BattleTileStateType.Blocked)
+                    {
+                        bts.BattleTargetScript.SetAttack(item.Delay, atkPS, basePos - target, cInfo.DamageStats.CurrentDamage, cInfo.Elemental);
+                    }
                    /* GameObject go;
                     go = Instantiate(TargetIndicator, GetBattleTile(basePos - target).transform.position, Quaternion.identity);
                     go.GetComponent<BattleTileTargetScript>().StartTarget(item.Delay, atkPS, basePos - target, cInfo.DamageStats.CurrentDamage, cInfo.Elemental);*/

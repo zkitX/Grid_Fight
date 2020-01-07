@@ -15,6 +15,8 @@ public class EnvironmentManager : MonoBehaviour
     public GameObject ExclamationTarget;
     public List<GameObject> AllExclamationTargets = new List<GameObject>();
 
+
+
     private void Awake()
     {
         Instance = this;
@@ -51,8 +53,8 @@ public class EnvironmentManager : MonoBehaviour
                 MainCamera.transform.position = new Vector3(0, 1.4f, -8.5f);
                 break;
             case GridStructureType.r5xc10:
-                MainCamera.orthographicSize = 3.7f;
-                MainCamera.transform.position = new Vector3(0, 1.4f, -8.5f);
+                MainCamera.orthographicSize = 4;
+                MainCamera.transform.position = new Vector3(0.6f, 1.75f, -8.5f);
                 break;
         }
     }
