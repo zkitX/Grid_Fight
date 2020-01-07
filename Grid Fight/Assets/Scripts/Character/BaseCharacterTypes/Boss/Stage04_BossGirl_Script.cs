@@ -150,6 +150,7 @@ public class Stage04_BossGirl_Script : BaseCharacter
             timer += Time.fixedDeltaTime;
         }
         BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
+        Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         base.SetCharDead();
     }
 

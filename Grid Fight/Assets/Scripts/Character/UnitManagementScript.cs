@@ -48,6 +48,7 @@ public class UnitManagementScript : MonoBehaviour
     public SpriteRenderer SelectionIndicatorPlayerSmall;
     public Color SelectionIndicatorColorUnselected;
     public Animator IndicatorAnim;
+    public GameObject DeathParticles;
     //Used to decide the side
     public void SetupCharacterSide()
     {

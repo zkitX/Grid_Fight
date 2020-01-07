@@ -19,6 +19,12 @@ public class MinionType_Script : BaseCharacter
         StartCoroutine(MoveActionCo);
     }
 
+    public override void SetCharDead()
+    {
+        Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
+        base.SetCharDead();
+    }
+
     public virtual IEnumerator Move()
     {
         while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)

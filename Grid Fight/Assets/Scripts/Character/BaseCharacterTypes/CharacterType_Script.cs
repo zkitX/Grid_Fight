@@ -31,8 +31,8 @@ public class CharacterType_Script : BaseCharacter
 
     public override void SetCharDead()
     {
+        Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         base.SetCharDead();
-      
     }
 
     public override void SetUpEnteringOnBattle()
