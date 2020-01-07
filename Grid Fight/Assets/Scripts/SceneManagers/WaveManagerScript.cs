@@ -210,10 +210,12 @@ public class WaveManagerScript : MonoBehaviour
 
     public void SetCharInPos(BaseCharacter currentCharacter, BattleTileScript bts)
     {
+        GridManagerScript.Instance.SetBattleTileState(bts.Pos, BattleTileStateType.Occupied);
         currentCharacter.UMS.CurrentTilePos = bts.Pos;
         for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)
         {
             currentCharacter.UMS.Pos[i] += bts.Pos;
+            GridManagerScript.Instance.SetBattleTileState(currentCharacter.UMS.Pos[i], BattleTileStateType.Occupied);
             BattleTileScript cbts = GridManagerScript.Instance.GetBattleTile(currentCharacter.UMS.Pos[i]);
             currentCharacter.CurrentBattleTiles.Add(cbts);
         }

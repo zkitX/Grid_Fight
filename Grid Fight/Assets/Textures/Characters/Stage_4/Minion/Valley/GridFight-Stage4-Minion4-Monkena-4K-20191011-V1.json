@@ -15261,1528 +15261,1688 @@
       "deform": { "default": { "Arm-1-Stick": { "Arm-1-Stick": [ { "vertices": [ -1.14355, 1.8316 ] } ] } } }
     },
     "GettingHit": {
-      "bones": {
-        "Monkena_Body": {
-          "rotate": [
-            { "angle": 51.18 },
-            {
-              "time": 0.0833,
-              "angle": -87.24
+            "bones": {
+                "Monkena_Body": {
+                    "rotate": [
+                        {
+                            "angle": 51.18
+                        },
+                        {
+                            "time": 0.0167,
+                            "angle": -87.24
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 155.69
+                        },
+                        {
+                            "time": 0.1167,
+                            "angle": -177.37
+                        },
+                        {
+                            "time": 0.2,
+                            "angle": -110.08
+                        },
+                        {
+                            "time": 0.5833,
+                            "angle": 51.18
+                        }
+                    ],
+                    "translate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "x": 591.97,
+                            "y": -9.58
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": 490.03,
+                            "y": -500.08
+                        },
+                        {
+                            "time": 0.2,
+                            "x": 465.69,
+                            "y": -335.63
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_Body2": {
+                    "rotate": [
+                        {
+                            "angle": -30.49
+                        },
+                        {
+                            "time": 0.0167,
+                            "angle": -31.87,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": -31.87
+                        },
+                        {
+                            "time": 0.1167,
+                            "angle": -24.9
+                        },
+                        {
+                            "time": 0.2,
+                            "angle": -19.41
+                        },
+                        {
+                            "time": 0.5833,
+                            "angle": -30.49
+                        }
+                    ],
+                    "scale": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "x": 1.106,
+                            "y": 1.106,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": 1.106,
+                            "y": 1.106
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_Body3": {
+                    "rotate": [
+                        {
+                            "angle": -45.33
+                        },
+                        {
+                            "time": 0.0167,
+                            "angle": -49.04
+                        },
+                        {
+                            "time": 0.0333,
+                            "angle": 0.64
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": -49.04
+                        },
+                        {
+                            "time": 0.1167,
+                            "angle": -33.74
+                        },
+                        {
+                            "time": 0.15,
+                            "angle": -20.77
+                        },
+                        {
+                            "time": 0.2,
+                            "angle": -29.58
+                        },
+                        {
+                            "time": 0.5833,
+                            "angle": -45.33
+                        }
+                    ]
+                },
+                "Monkena_Body4": {
+                    "rotate": [
+                        {
+                            "angle": -5.11
+                        },
+                        {
+                            "time": 0.0167,
+                            "angle": -23.1
+                        },
+                        {
+                            "time": 0.0333,
+                            "angle": -6.45
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": -23.1
+                        },
+                        {
+                            "time": 0.1167,
+                            "angle": -5.76
+                        },
+                        {
+                            "time": 0.15,
+                            "angle": 5.2
+                        },
+                        {
+                            "time": 0.5833,
+                            "angle": -5.11
+                        }
+                    ]
+                },
+                "Monkena_LeftArm_Controler": {
+                    "rotate": [
+                        {
+                            "angle": -1.93,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0167,
+                            "angle": -1.93
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": -44.17
+                        },
+                        {
+                            "time": 0.45,
+                            "angle": -1.93
+                        }
+                    ],
+                    "translate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "x": 197.43,
+                            "y": -6.64
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": 425.32,
+                            "y": -26.18
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ]
+                },
+                "Monkena_LeftUpArm": {
+                    "translate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "x": -2.12,
+                            "y": -16.03,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": -2.12,
+                            "y": -16.03
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ]
+                },
+                "Monkena_LeftJoint": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": -39.01
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 7.55
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ],
+                    "translate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "x": -388.85,
+                            "y": 7.47,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": -388.85,
+                            "y": 7.47
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ]
+                },
+                "Monkena_LeftDownArm": {
+                    "scale": [
+                        {
+                            "x": 1.009,
+                            "y": 1.009
+                        }
+                    ]
+                },
+                "Monkena_RightDownArm": {
+                    "scale": [
+                        {
+                            "x": 1.009,
+                            "y": 1.009
+                        }
+                    ]
+                },
+                "Monkena_RightJoint": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": -39.01
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 7.55
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ],
+                    "translate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "x": -348.3,
+                            "y": -4.52,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": -348.3,
+                            "y": -4.52
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ]
+                },
+                "Monkena_RightArm_Controler": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": -13.85
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": -58.02
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ],
+                    "translate": [
+                        {
+                            "x": 114.03
+                        },
+                        {
+                            "time": 0.0167,
+                            "x": 532.97,
+                            "y": -159.74
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": 760.86,
+                            "y": -302.78
+                        },
+                        {
+                            "time": 0.45,
+                            "x": 114.03
+                        }
+                    ]
+                },
+                "Monkena_RightHand_Thumb1": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": 33.4,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 33.4
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ]
+                },
+                "Monkena_RightHand_Thumb2": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": -134.4,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": -134.4
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ]
+                },
+                "Monkena_RightHand_Thumb3": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": 44.89,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 44.89
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ]
+                },
+                "Monkena_RightFinger1": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": 40.58,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 40.58
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ],
+                    "translate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "x": -27.29,
+                            "y": 45.84,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": -27.29,
+                            "y": 45.84
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ]
+                },
+                "Monkena_RightFinger2": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": 40.58,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 40.58
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ],
+                    "translate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "x": -27.29,
+                            "y": 45.84,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": -27.29,
+                            "y": 45.84
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ]
+                },
+                "Monkena_RightFinger3": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": 40.58,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 40.58
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ],
+                    "translate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "x": -27.29,
+                            "y": 45.84,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": -27.29,
+                            "y": 45.84
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ]
+                },
+                "Monkena_LeftHand_Thumb2": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": 67.24,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 67.24
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ]
+                },
+                "Monkena_LeftHand_Thumb1": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": 21.64,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 21.64
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ]
+                },
+                "Monkena_LeftFinger1": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": 34.08,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 34.08
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ],
+                    "translate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "x": -23.25,
+                            "y": 36.42,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": -23.25,
+                            "y": 36.42
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ]
+                },
+                "Monkena_LeftFinger2": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": 34.08,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 34.08
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ],
+                    "translate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "x": -23.25,
+                            "y": 36.42,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": -23.25,
+                            "y": 36.42
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ]
+                },
+                "Monkena_LeftFinger3": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": 34.08,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 34.08
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ],
+                    "translate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "x": -23.25,
+                            "y": 36.42,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": -23.25,
+                            "y": 36.42
+                        },
+                        {
+                            "time": 0.45
+                        }
+                    ]
+                },
+                "Monkena_Body_Controler": {
+                    "translate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "x": 478.04,
+                            "y": -443.99,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": 478.04,
+                            "y": -443.99
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_FootLeft1": {
+                    "rotate": [
+                        {
+                            "angle": 20.92
+                        },
+                        {
+                            "time": 0.0167,
+                            "angle": 39.34,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 39.34
+                        },
+                        {
+                            "time": 0.5833,
+                            "angle": 20.92
+                        }
+                    ],
+                    "translate": [
+                        {
+                            "x": 55.87,
+                            "y": -16.13
+                        },
+                        {
+                            "time": 0.0167,
+                            "x": 49.57,
+                            "y": -175.79
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": -50.26,
+                            "y": -95
+                        },
+                        {
+                            "time": 0.5833,
+                            "x": 55.87,
+                            "y": -16.13
+                        }
+                    ]
+                },
+                "Monkena_FootLeft2": {
+                    "rotate": [
+                        {
+                            "angle": -21.82
+                        },
+                        {
+                            "time": 0.0167,
+                            "angle": 10.13,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 10.13
+                        },
+                        {
+                            "time": 0.5833,
+                            "angle": -21.82
+                        }
+                    ]
+                },
+                "Monkena_FootRight1": {
+                    "rotate": [
+                        {
+                            "angle": 20.92
+                        },
+                        {
+                            "time": 0.0167,
+                            "angle": 49.02,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 49.02
+                        },
+                        {
+                            "time": 0.5833,
+                            "angle": 20.92
+                        }
+                    ],
+                    "translate": [
+                        {
+                            "x": 55.87,
+                            "y": -16.13
+                        },
+                        {
+                            "time": 0.0167,
+                            "x": 74.29,
+                            "y": 49.61,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": 74.29,
+                            "y": 49.61
+                        },
+                        {
+                            "time": 0.5833,
+                            "x": 55.87,
+                            "y": -16.13
+                        }
+                    ]
+                },
+                "Monkena_FootRight2": {
+                    "rotate": [
+                        {
+                            "angle": 20.76
+                        },
+                        {
+                            "time": 0.0167,
+                            "angle": -9.71,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": -9.71
+                        },
+                        {
+                            "time": 0.5833,
+                            "angle": 20.76
+                        }
+                    ]
+                },
+                "Monkena_PistolRight2": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": -0.1
+                        }
+                    ],
+                    "translate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "x": -111.21,
+                            "y": -0.01
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": -42.81,
+                            "y": -0.12
+                        },
+                        {
+                            "time": 0.2333,
+                            "x": -108.6,
+                            "y": 0.07
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_PistolLeft2": {
+                    "translate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "x": -86.15
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": -17.76
+                        },
+                        {
+                            "time": 0.2333,
+                            "x": -94.28
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_PistolLeft1": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": -31.95
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 8.64
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ],
+                    "scale": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "x": 1.439,
+                            "y": 1.439,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": 1.439,
+                            "y": 1.439
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_PistolRight1": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": -31.83
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 35.39
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ],
+                    "scale": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "x": 1.439,
+                            "y": 1.439,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": 1.439,
+                            "y": 1.439
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_Head": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": -139.26
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 130.16
+                        },
+                        {
+                            "time": 0.1167,
+                            "angle": 166.43
+                        },
+                        {
+                            "time": 0.2,
+                            "angle": -158.59
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ],
+                    "translate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "x": 398.61,
+                            "y": 5.81
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": 348.53,
+                            "y": -349.12
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ],
+                    "scale": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "x": 1.106,
+                            "y": 1.106,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": 1.106,
+                            "y": 1.106
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_EyeLeft": {
+                    "scale": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "y": 0.117,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "y": 0.117
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_EyeRight": {
+                    "scale": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "y": 0.14,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.0667,
+                            "y": 0.14
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_Head_BackHair1": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": -46.81
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": -59.03
+                        },
+                        {
+                            "time": 0.2333,
+                            "angle": -51.08
+                        },
+                        {
+                            "time": 0.4333,
+                            "angle": 5.49
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_Head_BackHair2": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": -31.91
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": -44.12
+                        },
+                        {
+                            "time": 0.2333,
+                            "angle": -41.71
+                        },
+                      {
+                        "time": 0.4333,
+                        "angle": 8.47
+                      },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_Head_BackHair3": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": -46.81
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": -59.03
+                        },
+                        {
+                            "time": 0.2333,
+                            "angle": -76.57
+                        },
+                        {
+                            "time": 0.4333,
+                            "angle": -2.62
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_Head_BackHair4": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": 19.55
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": -20.85
+                        },
+                        {
+                            "time": 0.2333,
+                            "angle": -30.73
+                        },
+                        {
+                            "time": 0.4333,
+                            "angle": 11.97
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_Head_BackHair5": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": 19.55
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": -20.85
+                        },
+                        {
+                            "time": 0.2333,
+                            "angle": -30.73
+                        },
+                        {
+                            "time": 0.4333,
+                            "angle": 11.97
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_Head2": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": -29.42
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": -41.64
+                        },
+                        {
+                            "time": 0.2333,
+                            "angle": -40.15
+                        },
+                        {
+                            "time": 0.4333,
+                            "angle": 8.97
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_Head3": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": -6.91
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": -19.12
+                        },
+                        {
+                            "time": 0.2333,
+                            "angle": -26
+                        },
+                        {
+                            "time": 0.4333,
+                            "angle": 13.47
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_Head4": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": -14.82
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": -27.03
+                        },
+                        {
+                            "time": 0.2333,
+                            "angle": -30.97
+                        },
+                        {
+                            "time": 0.4333,
+                            "angle": 11.89
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_Head5": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": -12.05
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": -24.26
+                        },
+                        {
+                            "time": 0.2333,
+                            "angle": -29.23
+                        },
+                        {
+                            "time": 0.4333,
+                            "angle": 12.45
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_Head7": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": -28.62
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": -40.83
+                        },
+                        {
+                            "time": 0.2333,
+                            "angle": -39.64
+                        },
+                        {
+                            "time": 0.4333,
+                            "angle": 9.13
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_Head6": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": -29.42
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": -41.64
+                        },
+                        {
+                            "time": 0.2333,
+                            "angle": -40.15
+                        },
+                        {
+                            "time": 0.4333,
+                            "angle": 8.97
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_Head8": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": -4.33
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": -16.54
+                        },
+                        {
+                            "time": 0.2333,
+                            "angle": -24.38
+                        },
+                        {
+                            "time": 0.4333,
+                            "angle": 13.99
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_Head9": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": -3.77
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": -15.99
+                        },
+                        {
+                            "time": 0.2333,
+                            "angle": -24.03
+                        },
+                        {
+                            "time": 0.4333,
+                            "angle": 14.1
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_Shadow": {
+                    "scale": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "x": 1.298,
+                            "y": 1.298
+                        },
+                        {
+                            "time": 0.0667,
+                            "x": 1.671,
+                            "y": 1.458
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                },
+                "Monkena_Head_Controler": {
+                    "rotate": [
+                        {
+                            "angle": 21.13
+                        }
+                    ],
+                    "translate": [
+                        {
+                            "x": 71.7,
+                            "y": 96.52
+                        }
+                    ]
+                },
+                "Monkena_Tail1": {
+                    "rotate": [
+                        {
+                            "angle": -6.5
+                        },
+                        {
+                            "time": 0.0167,
+                            "angle": -2.76
+                        },
+                        {
+                            "time": 0.0333,
+                            "angle": -0.87
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 27.59
+                        },
+                        {
+                            "time": 0.1,
+                            "angle": 2.33
+                        },
+                        {
+                            "time": 0.15,
+                            "angle": -20.97
+                        },
+                        {
+                            "time": 0.2667,
+                            "angle": -13.16
+                        },
+                        {
+                            "time": 0.5833,
+                            "angle": -6.5
+                        }
+                    ]
+                },
+                "Monkena_Tail2": {
+                    "rotate": [
+                        {
+                            "angle": -23.35
+                        },
+                        {
+                            "time": 0.0167,
+                            "angle": 14.61
+                        },
+                        {
+                            "time": 0.0333,
+                            "angle": 11.72
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 9.66
+                        },
+                        {
+                            "time": 0.1,
+                            "angle": -21.26
+                        },
+                        {
+                            "time": 0.5833,
+                            "angle": -23.35
+                        }
+                    ]
+                },
+                "Monkena_Tail3": {
+                    "rotate": [
+                        {
+                            "angle": -30.74
+                        },
+                        {
+                            "time": 0.0167,
+                            "angle": 8
+                        },
+                        {
+                            "time": 0.0333,
+                            "angle": 9.19
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 24.53
+                        },
+                        {
+                            "time": 0.1,
+                            "angle": -8.51
+                        },
+                        {
+                            "time": 0.5833,
+                            "angle": -30.74
+                        }
+                    ]
+                },
+                "Monkena_Tail4": {
+                    "rotate": [
+                        {
+                            "angle": -39.68
+                        },
+                        {
+                            "time": 0.0167,
+                            "angle": 16.73
+                        },
+                        {
+                            "time": 0.0333,
+                            "angle": 30.5
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 17.08
+                        },
+                        {
+                            "time": 0.1,
+                            "angle": -16.1
+                        },
+                        {
+                            "time": 0.5833,
+                            "angle": -39.68
+                        }
+                    ]
+                },
+                "Monkena_Tail5": {
+                    "rotate": [
+                        {
+                            "angle": -43.49
+                        },
+                        {
+                            "time": 0.0167,
+                            "angle": 32.48
+                        },
+                        {
+                            "time": 0.0333,
+                            "angle": 20.84
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 17.82
+                        },
+                        {
+                            "time": 0.1,
+                            "angle": 2.88
+                        },
+                        {
+                            "time": 0.15,
+                            "angle": -29.59
+                        },
+                        {
+                            "time": 0.2667,
+                            "angle": -28.18
+                        },
+                        {
+                            "time": 0.5833,
+                            "angle": -43.49
+                        }
+                    ]
+                },
+                "Monkena_Tail6": {
+                    "rotate": [
+                        {
+                            "angle": -11.87
+                        },
+                        {
+                            "time": 0.0167,
+                            "angle": 9.7
+                        },
+                        {
+                            "time": 0.0333,
+                            "angle": 16.57
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 16.35
+                        },
+                        {
+                            "time": 0.1,
+                            "angle": 4.57
+                        },
+                        {
+                            "time": 0.15,
+                            "angle": -20.1
+                        },
+                        {
+                            "time": 0.2667,
+                            "angle": -16.5
+                        },
+                        {
+                            "time": 0.5833,
+                            "angle": -11.87
+                        }
+                    ]
+                },
+                "Monkena_Tail7": {
+                    "rotate": [
+                        {
+                            "angle": 40.01
+                        },
+                        {
+                            "time": 0.0167,
+                            "angle": 20.49
+                        },
+                        {
+                            "time": 0.0333,
+                            "angle": 22.97
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 23.12
+                        },
+                        {
+                            "time": 0.1,
+                            "angle": 15.64
+                        },
+                        {
+                            "time": 0.15,
+                            "angle": -10.17
+                        },
+                        {
+                            "time": 0.2667,
+                            "angle": -8.09
+                        },
+                        {
+                            "time": 0.5833,
+                            "angle": 40.01
+                        }
+                    ]
+                },
+                "Monkena_Tail8": {
+                    "rotate": [
+                        {
+                            "angle": 40.01
+                        },
+                        {
+                            "time": 0.0167,
+                            "angle": 14.4
+                        },
+                        {
+                            "time": 0.0333,
+                            "angle": 7.82
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 16.35
+                        },
+                        {
+                            "time": 0.1,
+                            "angle": 9.51
+                        },
+                        {
+                            "time": 0.15,
+                            "angle": -6.62
+                        },
+                        {
+                            "time": 0.2667,
+                            "angle": -2.42
+                        },
+                        {
+                            "time": 0.5833,
+                            "angle": 40.01
+                        }
+                    ]
+                },
+                "Monkena_Tail9": {
+                    "rotate": [
+                        {
+                            "angle": 22.13
+                        },
+                        {
+                            "time": 0.0167,
+                            "angle": 13.98
+                        },
+                        {
+                            "time": 0.0333,
+                            "angle": 2.78
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": 10.9
+                        },
+                        {
+                            "time": 0.1,
+                            "angle": 2.87
+                        },
+                        {
+                            "time": 0.15,
+                            "angle": -2.79
+                        },
+                        {
+                            "time": 0.2667,
+                            "angle": -11.73
+                        },
+                        {
+                            "time": 0.5833,
+                            "angle": 22.13
+                        }
+                    ]
+                },
+                "Monkena_Gun": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.0167,
+                            "angle": 14.02
+                        },
+                        {
+                            "time": 0.0333,
+                            "angle": 6.32
+                        },
+                        {
+                            "time": 0.0667,
+                            "angle": -4.49
+                        },
+                        {
+                            "time": 0.0833,
+                            "angle": 12.22
+                        },
+                        {
+                            "time": 0.1,
+                            "angle": 21.02
+                        },
+                        {
+                            "time": 0.15,
+                            "angle": 3.25
+                        },
+                        {
+                            "time": 0.2667,
+                            "angle": 0.77
+                        },
+                        {
+                            "time": 0.3,
+                            "angle": 3.08
+                        },
+                        {
+                            "time": 0.5833
+                        }
+                    ]
+                }
             },
-            {
-              "time": 0.1667,
-              "angle": 155.69
-            },
-            {
-              "time": 0.2333,
-              "angle": -177.37
-            },
-            {
-              "time": 0.3333,
-              "angle": -110.08
-            },
-            {
-              "time": 0.75,
-              "angle": 51.18
+            "deform": {
+                "default": {
+                    "Arm-1-Stick": {
+                        "Arm-1-Stick": [
+                            {
+                                "vertices": [
+                                    -1.14355,
+                                    1.8316
+                                ]
+                            },
+                            {
+                                "time": 0.0167,
+                                "vertices": [
+                                    -135.76208,
+                                    -72.06635
+                                ],
+                                "curve": "stepped"
+                            },
+                            {
+                                "time": 0.0667,
+                                "vertices": [
+                                    -135.76208,
+                                    -72.06635
+                                ]
+                            },
+                            {
+                                "time": 0.45,
+                                "vertices": [
+                                    -1.14355,
+                                    1.8316
+                                ]
+                            }
+                        ]
+                    }
+                }
             }
-          ],
-          "translate": [
-            {},
-            {
-              "time": 0.0833,
-              "x": 591.97,
-              "y": -9.58
-            },
-            {
-              "time": 0.1667,
-              "x": 490.03,
-              "y": -500.08
-            },
-            {
-              "time": 0.3333,
-              "x": 465.69,
-              "y": -335.63
-            },
-            { "time": 0.75 }
-          ]
         },
-        "Monkena_Body2": {
-          "rotate": [
-            { "angle": -30.49 },
-            {
-              "time": 0.0833,
-              "angle": -31.87,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "angle": -31.87
-            },
-            {
-              "time": 0.2333,
-              "angle": -24.9
-            },
-            {
-              "time": 0.3333,
-              "angle": -19.41
-            },
-            {
-              "time": 0.75,
-              "angle": -30.49
-            }
-          ],
-          "scale": [
-            {},
-            {
-              "time": 0.0833,
-              "x": 1.106,
-              "y": 1.106,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "x": 1.106,
-              "y": 1.106
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_Body3": {
-          "rotate": [
-            { "angle": -45.33 },
-            {
-              "time": 0.0833,
-              "angle": -49.04
-            },
-            {
-              "time": 0.1167,
-              "angle": 0.64
-            },
-            {
-              "time": 0.1667,
-              "angle": -49.04
-            },
-            {
-              "time": 0.2333,
-              "angle": -33.74
-            },
-            {
-              "time": 0.2833,
-              "angle": -20.77
-            },
-            {
-              "time": 0.3333,
-              "angle": -29.58
-            },
-            {
-              "time": 0.75,
-              "angle": -45.33
-            }
-          ]
-        },
-        "Monkena_Body4": {
-          "rotate": [
-            { "angle": -5.11 },
-            {
-              "time": 0.0833,
-              "angle": -23.1
-            },
-            {
-              "time": 0.1167,
-              "angle": -6.45
-            },
-            {
-              "time": 0.1667,
-              "angle": -23.1
-            },
-            {
-              "time": 0.2333,
-              "angle": -5.76
-            },
-            {
-              "time": 0.2833,
-              "angle": 5.2
-            },
-            {
-              "time": 0.75,
-              "angle": -5.11
-            }
-          ]
-        },
-        "Monkena_LeftArm_Controler": {
-          "rotate": [
-            {
-              "angle": -1.93,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.0833,
-              "angle": -1.93
-            },
-            {
-              "time": 0.1667,
-              "angle": -44.17
-            },
-            {
-              "time": 0.6667,
-              "angle": -1.93
-            }
-          ],
-          "translate": [
-            {},
-            {
-              "time": 0.0833,
-              "x": 197.43,
-              "y": -6.64
-            },
-            {
-              "time": 0.1667,
-              "x": 425.32,
-              "y": -26.18
-            },
-            { "time": 0.6667 }
-          ]
-        },
-        "Monkena_LeftUpArm": {
-          "translate": [
-            {},
-            {
-              "time": 0.0833,
-              "x": -2.12,
-              "y": -16.03,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "x": -2.12,
-              "y": -16.03
-            },
-            { "time": 0.6667 }
-          ]
-        },
-        "Monkena_LeftJoint": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": -39.01
-            },
-            {
-              "time": 0.1667,
-              "angle": 7.55
-            },
-            { "time": 0.6667 }
-          ],
-          "translate": [
-            {},
-            {
-              "time": 0.0833,
-              "x": -388.85,
-              "y": 7.47,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "x": -388.85,
-              "y": 7.47
-            },
-            { "time": 0.6667 }
-          ]
-        },
-        "Monkena_LeftDownArm": {
-          "scale": [
-            {
-              "x": 1.009,
-              "y": 1.009
-            }
-          ]
-        },
-        "Monkena_RightDownArm": {
-          "scale": [
-            {
-              "x": 1.009,
-              "y": 1.009
-            }
-          ]
-        },
-        "Monkena_RightJoint": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": -39.01
-            },
-            {
-              "time": 0.1667,
-              "angle": 7.55
-            },
-            { "time": 0.6667 }
-          ],
-          "translate": [
-            {},
-            {
-              "time": 0.0833,
-              "x": -348.3,
-              "y": -4.52,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "x": -348.3,
-              "y": -4.52
-            },
-            { "time": 0.6667 }
-          ]
-        },
-        "Monkena_RightArm_Controler": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": -13.85
-            },
-            {
-              "time": 0.1667,
-              "angle": -58.02
-            },
-            { "time": 0.6667 }
-          ],
-          "translate": [
-            { "x": 114.03 },
-            {
-              "time": 0.0833,
-              "x": 532.97,
-              "y": -159.74
-            },
-            {
-              "time": 0.1667,
-              "x": 760.86,
-              "y": -302.78
-            },
-            {
-              "time": 0.6667,
-              "x": 114.03
-            }
-          ]
-        },
-        "Monkena_RightHand_Thumb1": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": 33.4,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "angle": 33.4
-            },
-            { "time": 0.6667 }
-          ]
-        },
-        "Monkena_RightHand_Thumb2": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": -134.4,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "angle": -134.4
-            },
-            { "time": 0.6667 }
-          ]
-        },
-        "Monkena_RightHand_Thumb3": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": 44.89,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "angle": 44.89
-            },
-            { "time": 0.6667 }
-          ]
-        },
-        "Monkena_RightFinger1": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": 40.58,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "angle": 40.58
-            },
-            { "time": 0.6667 }
-          ],
-          "translate": [
-            {},
-            {
-              "time": 0.0833,
-              "x": -27.29,
-              "y": 45.84,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "x": -27.29,
-              "y": 45.84
-            },
-            { "time": 0.6667 }
-          ]
-        },
-        "Monkena_RightFinger2": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": 40.58,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "angle": 40.58
-            },
-            { "time": 0.6667 }
-          ],
-          "translate": [
-            {},
-            {
-              "time": 0.0833,
-              "x": -27.29,
-              "y": 45.84,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "x": -27.29,
-              "y": 45.84
-            },
-            { "time": 0.6667 }
-          ]
-        },
-        "Monkena_RightFinger3": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": 40.58,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "angle": 40.58
-            },
-            { "time": 0.6667 }
-          ],
-          "translate": [
-            {},
-            {
-              "time": 0.0833,
-              "x": -27.29,
-              "y": 45.84,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "x": -27.29,
-              "y": 45.84
-            },
-            { "time": 0.6667 }
-          ]
-        },
-        "Monkena_LeftHand_Thumb2": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": 67.24,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "angle": 67.24
-            },
-            { "time": 0.6667 }
-          ]
-        },
-        "Monkena_LeftHand_Thumb1": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": 21.64,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "angle": 21.64
-            },
-            { "time": 0.6667 }
-          ]
-        },
-        "Monkena_LeftFinger1": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": 34.08,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "angle": 34.08
-            },
-            { "time": 0.6667 }
-          ],
-          "translate": [
-            {},
-            {
-              "time": 0.0833,
-              "x": -23.25,
-              "y": 36.42,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "x": -23.25,
-              "y": 36.42
-            },
-            { "time": 0.6667 }
-          ]
-        },
-        "Monkena_LeftFinger2": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": 34.08,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "angle": 34.08
-            },
-            { "time": 0.6667 }
-          ],
-          "translate": [
-            {},
-            {
-              "time": 0.0833,
-              "x": -23.25,
-              "y": 36.42,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "x": -23.25,
-              "y": 36.42
-            },
-            { "time": 0.6667 }
-          ]
-        },
-        "Monkena_LeftFinger3": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": 34.08,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "angle": 34.08
-            },
-            { "time": 0.6667 }
-          ],
-          "translate": [
-            {},
-            {
-              "time": 0.0833,
-              "x": -23.25,
-              "y": 36.42,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "x": -23.25,
-              "y": 36.42
-            },
-            { "time": 0.6667 }
-          ]
-        },
-        "Monkena_Body_Controler": {
-          "translate": [
-            {},
-            {
-              "time": 0.0833,
-              "x": 478.04,
-              "y": -443.99,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "x": 478.04,
-              "y": -443.99
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_FootLeft1": {
-          "rotate": [
-            { "angle": 20.92 },
-            {
-              "time": 0.0833,
-              "angle": 39.34,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "angle": 39.34
-            },
-            {
-              "time": 0.75,
-              "angle": 20.92
-            }
-          ],
-          "translate": [
-            {
-              "x": 55.87,
-              "y": -16.13
-            },
-            {
-              "time": 0.0833,
-              "x": 49.57,
-              "y": -175.79
-            },
-            {
-              "time": 0.1667,
-              "x": -50.26,
-              "y": -95
-            },
-            {
-              "time": 0.75,
-              "x": 55.87,
-              "y": -16.13
-            }
-          ]
-        },
-        "Monkena_FootLeft2": {
-          "rotate": [
-            { "angle": -21.82 },
-            {
-              "time": 0.0833,
-              "angle": 10.13,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "angle": 10.13
-            },
-            {
-              "time": 0.75,
-              "angle": -21.82
-            }
-          ]
-        },
-        "Monkena_FootRight1": {
-          "rotate": [
-            { "angle": 20.92 },
-            {
-              "time": 0.0833,
-              "angle": 49.02,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "angle": 49.02
-            },
-            {
-              "time": 0.75,
-              "angle": 20.92
-            }
-          ],
-          "translate": [
-            {
-              "x": 55.87,
-              "y": -16.13
-            },
-            {
-              "time": 0.0833,
-              "x": 74.29,
-              "y": 49.61,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "x": 74.29,
-              "y": 49.61
-            },
-            {
-              "time": 0.75,
-              "x": 55.87,
-              "y": -16.13
-            }
-          ]
-        },
-        "Monkena_FootRight2": {
-          "rotate": [
-            { "angle": 20.76 },
-            {
-              "time": 0.0833,
-              "angle": -9.71,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "angle": -9.71
-            },
-            {
-              "time": 0.75,
-              "angle": 20.76
-            }
-          ]
-        },
-        "Monkena_PistolRight2": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": -0.1
-            }
-          ],
-          "translate": [
-            {},
-            {
-              "time": 0.0833,
-              "x": -111.21,
-              "y": -0.01
-            },
-            {
-              "time": 0.1667,
-              "x": -42.81,
-              "y": -0.12
-            },
-            {
-              "time": 0.3833,
-              "x": -108.6,
-              "y": 0.07
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_PistolLeft2": {
-          "translate": [
-            {},
-            {
-              "time": 0.0833,
-              "x": -86.15
-            },
-            {
-              "time": 0.1667,
-              "x": -17.76
-            },
-            {
-              "time": 0.3833,
-              "x": -94.28
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_PistolLeft1": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": -31.95
-            },
-            {
-              "time": 0.1667,
-              "angle": 8.64
-            },
-            { "time": 0.75 }
-          ],
-          "scale": [
-            {},
-            {
-              "time": 0.0833,
-              "x": 1.439,
-              "y": 1.439,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "x": 1.439,
-              "y": 1.439
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_PistolRight1": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": -31.83
-            },
-            {
-              "time": 0.1667,
-              "angle": 35.39
-            },
-            { "time": 0.75 }
-          ],
-          "scale": [
-            {},
-            {
-              "time": 0.0833,
-              "x": 1.439,
-              "y": 1.439,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "x": 1.439,
-              "y": 1.439
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_Head": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": -139.26
-            },
-            {
-              "time": 0.1667,
-              "angle": 130.16
-            },
-            {
-              "time": 0.2333,
-              "angle": 166.43
-            },
-            {
-              "time": 0.3333,
-              "angle": -158.59
-            },
-            { "time": 0.75 }
-          ],
-          "translate": [
-            {},
-            {
-              "time": 0.0833,
-              "x": 398.61,
-              "y": 5.81
-            },
-            {
-              "time": 0.1667,
-              "x": 348.53,
-              "y": -349.12
-            },
-            { "time": 0.75 }
-          ],
-          "scale": [
-            {},
-            {
-              "time": 0.0833,
-              "x": 1.106,
-              "y": 1.106,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "x": 1.106,
-              "y": 1.106
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_EyeLeft": {
-          "scale": [
-            {},
-            {
-              "time": 0.0833,
-              "y": 0.117,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "y": 0.117
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_EyeRight": {
-          "scale": [
-            {},
-            {
-              "time": 0.0833,
-              "y": 0.14,
-              "curve": "stepped"
-            },
-            {
-              "time": 0.1667,
-              "y": 0.14
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_Head_BackHair1": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": -46.81
-            },
-            {
-              "time": 0.1667,
-              "angle": -59.03
-            },
-            {
-              "time": 0.3833,
-              "angle": -51.08
-            },
-            {
-              "time": 0.6333,
-              "angle": 5.49
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_Head_BackHair2": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": -31.91
-            },
-            {
-              "time": 0.1667,
-              "angle": -44.12
-            },
-            {
-              "time": 0.3833,
-              "angle": -41.71
-            },
-            {
-              "time": 0.6333,
-              "angle": 8.47
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_Head_BackHair3": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": -46.81
-            },
-            {
-              "time": 0.1667,
-              "angle": -59.03
-            },
-            {
-              "time": 0.3833,
-              "angle": -76.57
-            },
-            {
-              "time": 0.6333,
-              "angle": -2.62
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_Head_BackHair4": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": 19.55
-            },
-            {
-              "time": 0.1667,
-              "angle": -20.85
-            },
-            {
-              "time": 0.3833,
-              "angle": -30.73
-            },
-            {
-              "time": 0.6333,
-              "angle": 11.97
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_Head_BackHair5": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": 19.55
-            },
-            {
-              "time": 0.1667,
-              "angle": -20.85
-            },
-            {
-              "time": 0.3833,
-              "angle": -30.73
-            },
-            {
-              "time": 0.6333,
-              "angle": 11.97
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_Head2": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": -29.42
-            },
-            {
-              "time": 0.1667,
-              "angle": -41.64
-            },
-            {
-              "time": 0.3833,
-              "angle": -40.15
-            },
-            {
-              "time": 0.6333,
-              "angle": 8.97
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_Head3": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": -6.91
-            },
-            {
-              "time": 0.1667,
-              "angle": -19.12
-            },
-            {
-              "time": 0.3833,
-              "angle": -26
-            },
-            {
-              "time": 0.6333,
-              "angle": 13.47
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_Head4": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": -14.82
-            },
-            {
-              "time": 0.1667,
-              "angle": -27.03
-            },
-            {
-              "time": 0.3833,
-              "angle": -30.97
-            },
-            {
-              "time": 0.6333,
-              "angle": 11.89
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_Head5": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": -12.05
-            },
-            {
-              "time": 0.1667,
-              "angle": -24.26
-            },
-            {
-              "time": 0.3833,
-              "angle": -29.23
-            },
-            {
-              "time": 0.6333,
-              "angle": 12.45
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_Head7": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": -28.62
-            },
-            {
-              "time": 0.1667,
-              "angle": -40.83
-            },
-            {
-              "time": 0.3833,
-              "angle": -39.64
-            },
-            {
-              "time": 0.6333,
-              "angle": 9.13
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_Head6": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": -29.42
-            },
-            {
-              "time": 0.1667,
-              "angle": -41.64
-            },
-            {
-              "time": 0.3833,
-              "angle": -40.15
-            },
-            {
-              "time": 0.6333,
-              "angle": 8.97
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_Head8": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": -4.33
-            },
-            {
-              "time": 0.1667,
-              "angle": -16.54
-            },
-            {
-              "time": 0.3833,
-              "angle": -24.38
-            },
-            {
-              "time": 0.6333,
-              "angle": 13.99
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_Head9": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": -3.77
-            },
-            {
-              "time": 0.1667,
-              "angle": -15.99
-            },
-            {
-              "time": 0.3833,
-              "angle": -24.03
-            },
-            {
-              "time": 0.6333,
-              "angle": 14.1
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_Shadow": {
-          "scale": [
-            {},
-            {
-              "time": 0.0833,
-              "x": 1.298,
-              "y": 1.298
-            },
-            {
-              "time": 0.1667,
-              "x": 1.671,
-              "y": 1.458
-            },
-            { "time": 0.75 }
-          ]
-        },
-        "Monkena_Head_Controler": {
-          "rotate": [ { "angle": 21.13 } ],
-          "translate": [
-            {
-              "x": 71.7,
-              "y": 96.52
-            }
-          ]
-        },
-        "Monkena_Tail1": {
-          "rotate": [
-            { "angle": -6.5 },
-            {
-              "time": 0.0833,
-              "angle": -2.76
-            },
-            {
-              "time": 0.1167,
-              "angle": -0.87
-            },
-            {
-              "time": 0.1667,
-              "angle": 27.59
-            },
-            {
-              "time": 0.2167,
-              "angle": 2.33
-            },
-            {
-              "time": 0.2833,
-              "angle": -20.97
-            },
-            {
-              "time": 0.4167,
-              "angle": -13.16
-            },
-            {
-              "time": 0.75,
-              "angle": -6.5
-            }
-          ]
-        },
-        "Monkena_Tail2": {
-          "rotate": [
-            { "angle": -23.35 },
-            {
-              "time": 0.0833,
-              "angle": 14.61
-            },
-            {
-              "time": 0.1167,
-              "angle": 11.72
-            },
-            {
-              "time": 0.1667,
-              "angle": 9.66
-            },
-            {
-              "time": 0.2167,
-              "angle": -21.26
-            },
-            {
-              "time": 0.75,
-              "angle": -23.35
-            }
-          ]
-        },
-        "Monkena_Tail3": {
-          "rotate": [
-            { "angle": -30.74 },
-            {
-              "time": 0.0833,
-              "angle": 8
-            },
-            {
-              "time": 0.1167,
-              "angle": 9.19
-            },
-            {
-              "time": 0.1667,
-              "angle": 24.53
-            },
-            {
-              "time": 0.2167,
-              "angle": -8.51
-            },
-            {
-              "time": 0.75,
-              "angle": -30.74
-            }
-          ]
-        },
-        "Monkena_Tail4": {
-          "rotate": [
-            { "angle": -39.68 },
-            {
-              "time": 0.0833,
-              "angle": 16.73
-            },
-            {
-              "time": 0.1167,
-              "angle": 30.5
-            },
-            {
-              "time": 0.1667,
-              "angle": 17.08
-            },
-            {
-              "time": 0.2167,
-              "angle": -16.1
-            },
-            {
-              "time": 0.75,
-              "angle": -39.68
-            }
-          ]
-        },
-        "Monkena_Tail5": {
-          "rotate": [
-            { "angle": -43.49 },
-            {
-              "time": 0.0833,
-              "angle": 32.48
-            },
-            {
-              "time": 0.1167,
-              "angle": 20.84
-            },
-            {
-              "time": 0.1667,
-              "angle": 17.82
-            },
-            {
-              "time": 0.2167,
-              "angle": 2.88
-            },
-            {
-              "time": 0.2833,
-              "angle": -29.59
-            },
-            {
-              "time": 0.4167,
-              "angle": -28.18
-            },
-            {
-              "time": 0.75,
-              "angle": -43.49
-            }
-          ]
-        },
-        "Monkena_Tail6": {
-          "rotate": [
-            { "angle": -11.87 },
-            {
-              "time": 0.0833,
-              "angle": 9.7
-            },
-            {
-              "time": 0.1167,
-              "angle": 16.57
-            },
-            {
-              "time": 0.1667,
-              "angle": 16.35
-            },
-            {
-              "time": 0.2167,
-              "angle": 4.57
-            },
-            {
-              "time": 0.2833,
-              "angle": -20.1
-            },
-            {
-              "time": 0.4167,
-              "angle": -16.5
-            },
-            {
-              "time": 0.75,
-              "angle": -11.87
-            }
-          ]
-        },
-        "Monkena_Tail7": {
-          "rotate": [
-            { "angle": 40.01 },
-            {
-              "time": 0.0833,
-              "angle": 20.49
-            },
-            {
-              "time": 0.1167,
-              "angle": 22.97
-            },
-            {
-              "time": 0.1667,
-              "angle": 23.12
-            },
-            {
-              "time": 0.2167,
-              "angle": 15.64
-            },
-            {
-              "time": 0.2833,
-              "angle": -10.17
-            },
-            {
-              "time": 0.4167,
-              "angle": -8.09
-            },
-            {
-              "time": 0.75,
-              "angle": 40.01
-            }
-          ]
-        },
-        "Monkena_Tail8": {
-          "rotate": [
-            { "angle": 40.01 },
-            {
-              "time": 0.0833,
-              "angle": 14.4
-            },
-            {
-              "time": 0.1167,
-              "angle": 7.82
-            },
-            {
-              "time": 0.1667,
-              "angle": 16.35
-            },
-            {
-              "time": 0.2167,
-              "angle": 9.51
-            },
-            {
-              "time": 0.2833,
-              "angle": -6.62
-            },
-            {
-              "time": 0.4167,
-              "angle": -2.42
-            },
-            {
-              "time": 0.75,
-              "angle": 40.01
-            }
-          ]
-        },
-        "Monkena_Tail9": {
-          "rotate": [
-            { "angle": 22.13 },
-            {
-              "time": 0.0833,
-              "angle": 13.98
-            },
-            {
-              "time": 0.1167,
-              "angle": 2.78
-            },
-            {
-              "time": 0.1667,
-              "angle": 10.9
-            },
-            {
-              "time": 0.2167,
-              "angle": 2.87
-            },
-            {
-              "time": 0.2833,
-              "angle": -2.79
-            },
-            {
-              "time": 0.4167,
-              "angle": -11.73
-            },
-            {
-              "time": 0.75,
-              "angle": 22.13
-            }
-          ]
-        },
-        "Monkena_Gun": {
-          "rotate": [
-            {},
-            {
-              "time": 0.0833,
-              "angle": 14.02
-            },
-            {
-              "time": 0.1167,
-              "angle": 6.32
-            },
-            {
-              "time": 0.1667,
-              "angle": -4.49
-            },
-            {
-              "time": 0.1833,
-              "angle": 12.22
-            },
-            {
-              "time": 0.2167,
-              "angle": 21.02
-            },
-            {
-              "time": 0.2833,
-              "angle": 3.25
-            },
-            {
-              "time": 0.4167,
-              "angle": 0.77
-            },
-            {
-              "time": 0.4667,
-              "angle": 3.08
-            },
-            { "time": 0.75 }
-          ]
-        }
-      },
-      "deform": {
-        "default": {
-          "Arm-1-Stick": {
-            "Arm-1-Stick": [
-              { "vertices": [ -1.14355, 1.8316 ] },
-              {
-                "time": 0.0833,
-                "vertices": [ -135.76208, -72.06635 ],
-                "curve": "stepped"
-              },
-              {
-                "time": 0.1667,
-                "vertices": [ -135.76208, -72.06635 ]
-              },
-              {
-                "time": 0.6667,
-                "vertices": [ -1.14355, 1.8316 ]
-              }
-            ]
-          }
-        }
-      }
-    },
     "Idle": {
       "bones": {
         "Monkena_Body": {
