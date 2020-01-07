@@ -7,7 +7,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
     public ScriptableObjectItemPowerUps ItemPowerUpInfo;
     public SpriteRenderer Icon;
     private IEnumerator DurationOnBattleFieldCo;
-
+    public Animator Anim;
 
 
     public void SetItemPowerUp(ScriptableObjectItemPowerUps itemPowerUpInfo, Vector3 pos)
@@ -22,6 +22,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
 
         DurationOnBattleFieldCo = DurationOnBattleField_Co();
         StartCoroutine(DurationOnBattleFieldCo);
+        Anim.SetBool("FadeInOut", true);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -51,6 +52,11 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
             timer += Time.fixedDeltaTime;
         }
         DurationOnBattleFieldCo = null;
+        Anim.SetBool("FadeInOut", false);
+    }
+
+    public void DisablePowerUp()
+    {
         gameObject.SetActive(false);
     }
 }
