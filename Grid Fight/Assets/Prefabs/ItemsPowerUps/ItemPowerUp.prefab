@@ -13,13 +13,14 @@ GameObject:
   - component: {fileID: 1907318318640804283}
   - component: {fileID: 8908030659829967106}
   - component: {fileID: 7847653279918072027}
+  - component: {fileID: 447215818658411905}
   m_Layer: 0
   m_Name: ItemPowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8951191436322701698
 Transform:
   m_ObjectHideFlags: 0
@@ -48,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemPowerUpInfo: {fileID: 0}
   Icon: {fileID: 1907318318640804283}
+  Anim: {fileID: 447215818658411905}
 --- !u!212 &1907318318640804283
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -86,7 +88,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5a1fd10d20ae1064eb744787c8a2f611, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 325c69a591c73cc47abf3c1ebaf6e023, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -126,3 +128,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!95 &447215818658411905
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8721716021469158974}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 81b1872f638310240bfc79a1c2068b84, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
