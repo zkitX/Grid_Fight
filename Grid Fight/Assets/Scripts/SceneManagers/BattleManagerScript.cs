@@ -31,7 +31,13 @@ public class BattleManagerScript : MonoBehaviour
     public BattleState _CurrentBattleState;
     public List<BattleTileScript> OccupiedBattleTiles = new List<BattleTileScript>();
     public GameObject CharacterBasePrefab;
-    public Dictionary<ControllerType, CharacterType_Script> CurrentSelectedCharacters = new Dictionary<ControllerType, CharacterType_Script>();
+    public Dictionary<ControllerType, CharacterType_Script> CurrentSelectedCharacters = new Dictionary<ControllerType, CharacterType_Script>()
+    {
+        { ControllerType.Player1, null },
+        { ControllerType.Player2, null },
+        { ControllerType.Player3, null },
+        { ControllerType.Player4, null }
+    };
     public List<ScriptableObjectCharacterPrefab> ListOfScriptableObjectCharacterPrefab = new List<ScriptableObjectCharacterPrefab>();
     public List<BaseCharacter> AllCharactersOnField = new List<BaseCharacter>();
     public List<CharacterLoadingInfoClass> CurrentCharactersLoadingInfo = new List<CharacterLoadingInfoClass>();
@@ -272,22 +278,17 @@ public class BattleManagerScript : MonoBehaviour
     {
         if(currentCharacter != null)
         {
-            if (!CurrentSelectedCharacters.ContainsKey(playerController))
-            {
-                CurrentSelectedCharacters.Add(playerController, currentCharacter);
-                UIBattleManager.Instance.CharacterSelected(playerController, currentCharacter);
-                currentCharacter.SetCharSelected(true, playersNumberBig[(int)playerController], playersNumberSmall[(int)playerController], playersColor[(int)playerController]);
-            }
-
             if (!CurrentSelectedCharacters.ContainsValue(currentCharacter))
             {
-                CurrentSelectedCharacters[playerController].SetCharSelected(false, playersNumberBig[(int)playerController], playersNumberSmall[(int)playerController], new Color());
+                if(CurrentSelectedCharacters[playerController] != null)
+                {
+                    CurrentSelectedCharacters[playerController].SetCharSelected(false, playersNumberBig[(int)playerController], playersNumberSmall[(int)playerController], new Color());
+
+                }
                 CurrentSelectedCharacters[playerController] = currentCharacter;
                 UIBattleManager.Instance.CharacterSelected(playerController, currentCharacter);
                 currentCharacter.SetCharSelected(true, playersNumberBig[(int)playerController], playersNumberSmall[(int)playerController], playersColor[(int)playerController]);
             }
-
-           
         }
     }
 
@@ -347,25 +348,29 @@ public class BattleManagerScript : MonoBehaviour
     #region Switch Input
     public void Switch_StopLoadingNewCharacter(CharacterSelectionType characterSelection, ControllerType playerController)
     {
-
-        SideType side = GetSideFromPlayer(new List<ControllerType> { playerController });
-        BaseCharacter cb = AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == characterSelection && r.UMS.Side == side).FirstOrDefault();
-        if (cb != null)
+        if (CurrentBattleState == BattleState.Battle || CurrentBattleState == BattleState.Intro)
         {
-            StopLoadingNewCharacter(cb.CharInfo.CharacterID, playerController);
+            SideType side = GetSideFromPlayer(new List<ControllerType> { playerController });
+            BaseCharacter cb = AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == characterSelection && r.UMS.Side == side).FirstOrDefault();
+            if (cb != null)
+            {
+                StopLoadingNewCharacter(cb.CharInfo.CharacterID, playerController);
+            }
         }
 
     }
 
     public void Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType characterSelection, ControllerType playerController)
     {
-        SideType side = GetSideFromPlayer(new List<ControllerType> { playerController });
-        BaseCharacter cb = AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == characterSelection && r.UMS.Side == side).FirstOrDefault();
-        if (cb != null)
+        if(CurrentBattleState == BattleState.Battle || CurrentBattleState == BattleState.Intro)
         {
-            LoadingNewCharacterInRandomPosition(cb.CharInfo.CharacterID, side, playerController);
+            SideType side = GetSideFromPlayer(new List<ControllerType> { playerController });
+            BaseCharacter cb = AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == characterSelection && r.UMS.Side == side).FirstOrDefault();
+            if (cb != null)
+            {
+                LoadingNewCharacterInRandomPosition(cb.CharInfo.CharacterID, side, playerController);
+            }
         }
-
     }
 
     public void Switch_StopLoadingSpecial(ControllerType controllerType)
@@ -398,6 +403,12 @@ public class BattleManagerScript : MonoBehaviour
     }
 
     #endregion
+
+    public void RestartScene()
+    {
+        CurrentBattleState = BattleState.End;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
 
 
     public BaseCharacter GetCharInPos(Vector2Int pos)

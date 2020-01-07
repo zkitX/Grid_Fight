@@ -8,6 +8,18 @@ public class UserInputManager : MonoBehaviour
     
     private void Start()
     {
+        StartCoroutine(StartUserInputManager());
+
+    }
+
+    private IEnumerator StartUserInputManager()
+    {
+        while (InputController.Instance == null)
+        {
+            yield return null;
+        }
+
+
         #region Button Down
         InputController.Instance.ButtonADownEvent += Instance_ButtonADownEvent;
         InputController.Instance.ButtonBDownEvent += Instance_ButtonBDownEvent;
@@ -88,9 +100,9 @@ public class UserInputManager : MonoBehaviour
         InputController.Instance.LeftJoystickUsedEvent += Instance_LeftJoystickUsedEvent;
         InputController.Instance.RightJoystickUsedEvent += Instance_RightJoystickUsedEvent;
         #endregion
-
     }
-  
+
+
     void Update()
     {
       /*  if (Input.GetMouseButtonDown(0) && BattleManagerScript.Instance.CurrentSelectedCharacters.ContainsKey(ControllerType.Player1))
@@ -289,7 +301,7 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonMinusUpEvent(int player)
     {
         //Debug.Log(player + "  " + "Minus Up");
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        BattleManagerScript.Instance.RestartScene();
     }
 
     private void Instance_ButtonPlusUpEvent(int player)
