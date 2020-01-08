@@ -38,6 +38,7 @@ public class CharacterType_Script : BaseCharacter
     public override void SetUpEnteringOnBattle()
     {
         SetAnimation(CharacterAnimationStateType.Arriving);
+        SFXmanager.Instance.PlayOnce(SFXmanager.Instance.ArrivingSpawn);
     }
     #endregion
 
@@ -67,7 +68,7 @@ public class CharacterType_Script : BaseCharacter
                     yield return new WaitForEndOfFrame();
                 }
                 
-                SpecialAttack(CharacterLevelType.Defiant);
+                SpecialAttack(CharInfo.CharacterLevel);
             }
         }
     }
