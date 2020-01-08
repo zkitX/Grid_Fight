@@ -39,7 +39,14 @@ public class CharacterType_Script : BaseCharacter
     {
         SetAnimation(CharacterAnimationStateType.Arriving);
         SFXmanager.Instance.PlayOnce(SFXmanager.Instance.ArrivingSpawn);
+        
     }
+
+    private void SetCamBack()
+    {
+        BattleManagerScript.Instance.MCam.GetComponent<Animator>().SetBool("Shake", false);
+    }
+
     #endregion
 
     #region Attack

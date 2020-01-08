@@ -635,6 +635,8 @@ public class BaseCharacter : MonoBehaviour
     {
         SFXmanager.Instance.PlayOnce(SFXmanager.Instance.ArrivingImpact);
         UMS.ArrivingParticle.SetActive(true);
+        BattleManagerScript.Instance.MCam.GetComponent<Animator>().SetBool("Shake", true);
+        Invoke("SetCamBack", 0.1f);
     }
 
 

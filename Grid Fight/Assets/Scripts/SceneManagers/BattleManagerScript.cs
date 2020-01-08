@@ -52,6 +52,9 @@ public class BattleManagerScript : MonoBehaviour
     [SerializeField]
     private List<Sprite> playersNumberSmall = new List<Sprite>();
     private MatchType matchType;
+    public Camera MCam;
+
+
     public void SetupBattleState()
     {
 
@@ -65,7 +68,10 @@ public class BattleManagerScript : MonoBehaviour
         Instance = this;
     }
     // Start is called before the first frame update
-
+    private void Start()
+    {
+        MCam = Camera.main;
+    }
     #endregion
 
     #region Events
@@ -74,7 +80,7 @@ public class BattleManagerScript : MonoBehaviour
 
     #region Waves
 
-   
+
     #endregion
 
     #region SetCharacterOnBoard
