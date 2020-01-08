@@ -629,7 +629,6 @@ public class BaseCharacter : MonoBehaviour
     }
 
     #endregion
-
     #region Animation
 
     public void ArrivingEvent()

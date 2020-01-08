@@ -30,8 +30,6 @@ public class CharacterInfoScript : MonoBehaviour
     public CharacterLevelType CharacterLevel;
     [HideInInspector]
     public CharacterSelectionType CharacterSelection;
-    [HideInInspector]
-    public List<ControllerType> PlayerController = new List<ControllerType>();
     // public List<CharactersRelationshipClass> CharacterRelationships = new List<CharactersRelationshipClass>();
 
     public HealthStastsClass HealthStats;

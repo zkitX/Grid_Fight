@@ -8,6 +8,7 @@ public class SFXmanager : MonoBehaviour
     [SerializeField]
     private AudioSource audioS;
     public AudioClip ArrivingImpact;
+    public AudioClip ArrivingSpawn;
 
 
     private void Awake()

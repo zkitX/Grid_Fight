@@ -219,6 +219,7 @@ public class BattleManagerScript : MonoBehaviour
         currentCharacter.UMS.WalkingSide = charInfo.WalkingSide;
         currentCharacter.CharInfo.CharacterSelection = charInfo.CharacterSelection;
         currentCharacter.CharInfo.CharacterSelection = charInfo.CharacterSelection;
+        currentCharacter.CharInfo.CharacterLevel = charInfo.CharacterLevel;
         currentCharacter.CurrentCharIsDeadEvent += CurrentCharacter_CurrentCharIsDeadEvent;
         return currentCharacter;
     }
