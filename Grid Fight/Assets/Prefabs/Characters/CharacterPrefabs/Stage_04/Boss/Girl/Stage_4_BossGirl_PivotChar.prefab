@@ -396,10 +396,10 @@ MonoBehaviour:
   CharacterSelection: 0
   PlayerController: 
   HealthStats:
-    Health: 300
-    Base: 300
-    Regeneration: 1
-    BaseHealthRegeneration: 1
+    Health: 100
+    Base: 100
+    Regeneration: 2
+    BaseHealthRegeneration: 2
     LevelMultiplier: 0
   StaminaStats:
     Stamina: 40
@@ -430,6 +430,7 @@ MonoBehaviour:
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
+  MovementTimer: {x: 5, y: 8}
 --- !u!54 &7632219196605725027
 Rigidbody:
   m_ObjectHideFlags: 0

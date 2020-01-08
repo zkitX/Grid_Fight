@@ -320,10 +320,10 @@ MonoBehaviour:
   CharacterSelection: 1
   PlayerController: 
   HealthStats:
-    Health: 70
-    Base: 70
-    Regeneration: 0.2
-    BaseHealthRegeneration: 0.2
+    Health: 60
+    Base: 60
+    Regeneration: 0.5
+    BaseHealthRegeneration: 0.5
     LevelMultiplier: 20
   StaminaStats:
     Stamina: 30
@@ -344,7 +344,7 @@ MonoBehaviour:
     BulletSpeed: 2.5
     LevelMultiplier: 5
   DamageStats:
-    BaseDamage: 3
+    BaseDamage: 4
     CurrentDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0
@@ -354,6 +354,7 @@ MonoBehaviour:
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
+  MovementTimer: {x: 5, y: 8}
 --- !u!54 &5488154605279807352
 Rigidbody:
   m_ObjectHideFlags: 0
