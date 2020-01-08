@@ -72,6 +72,7 @@ public class Stage04_BossGirl_Script : BaseCharacter
     {
         AreChildrenAlive[cName] = true;
         CanGetDamage = false;
+        
     }
 
     private void Flower_CurrentCharIsDeadEvent(CharacterNameType cName, List<ControllerType> playerController, SideType side)
@@ -83,6 +84,8 @@ public class Stage04_BossGirl_Script : BaseCharacter
             {
                 item.CanRebirth = false;
                 CanGetDamage = true;
+                GetComponentInChildren<LayerParticleSelection>(true).gameObject.SetActive(false);
+
             }
         }
     }

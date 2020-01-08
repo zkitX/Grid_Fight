@@ -248,7 +248,7 @@ public class BattleManagerScript : MonoBehaviour
 
             if (res.Where(r => !r.isAlive && r.isUsed).ToList().Count == res.Count)
             {
-                UIBattleManager.Instance.Winner(side == SideType.LeftSide ? "Lost" : "Win", side == SideType.RightSide ? "Lost" : "Win");
+                UIBattleManager.Instance.Lose.gameObject.SetActive(true);
                 CurrentBattleState = BattleState.End;
                 return;
             }

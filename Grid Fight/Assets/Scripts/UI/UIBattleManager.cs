@@ -28,9 +28,10 @@ public class UIBattleManager : MonoBehaviour
     public TextMeshProUGUI SecondsToPlayRightSide;
     public bool isRightSidePlaying = false;
     public CanvasGroup Win;
+    public CanvasGroup Lose;
 
-    public TextMeshProUGUI LeftSide;
-    public TextMeshProUGUI RightSide;
+   // public TextMeshProUGUI LeftSide;
+ //   public TextMeshProUGUI RightSide;
 
     private Dictionary<int, UIPlayerSectionScript> currentPlayers = new Dictionary<int, UIPlayerSectionScript>();
    
@@ -136,7 +137,15 @@ public class UIBattleManager : MonoBehaviour
         }
         else
         {
-            Winner(side == SideType.LeftSide ? "Lost" : "Win", side == SideType.RightSide ? "Lost" : "Win");
+            if (side == SideType.LeftSide)
+            {
+                Lose.gameObject.SetActive(true);
+            }
+            else
+            {
+                Win.gameObject.SetActive(true);
+            }
+            // Winner(side == SideType.LeftSide ? "Lost" : "Win", side == SideType.RightSide ? "Lost" : "Win");
             BattleManagerScript.Instance.CurrentBattleState = BattleState.End;
         }
     }
@@ -165,14 +174,22 @@ public class UIBattleManager : MonoBehaviour
         }
         else
         {
-            Winner(side == SideType.LeftSide ? "Lost" : "Win", side == SideType.RightSide ? "Lost" : "Win");
             BattleManagerScript.Instance.CurrentBattleState = BattleState.End;
+            if(side == SideType.LeftSide)
+            {
+
+            }
+            else
+            {
+
+            }
+           // Winner(side == SideType.LeftSide ? "Lost" : "Win", side == SideType.RightSide ? "Lost" : "Win");
         }
     }
-    public void Winner(string p1, string p2)
+ /*   public void Winner(string p1, string p2)
     {
         Win.alpha = 1;
-        LeftSide.text = p1;
-        RightSide.text = p2;
-    }
+       // LeftSide.text = p1;
+      //  RightSide.text = p2;
+    }*/
 }

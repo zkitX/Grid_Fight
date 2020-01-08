@@ -310,7 +310,7 @@ public class BaseCharacter : MonoBehaviour
     #region Move
     public virtual void MoveCharOnDirection(InputDirection nextDir)
     {
-        if (CharInfo.Health > 0 && !isMoving && CanAttack && IsOnField && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1)
+        if (CharInfo.Health > 0 && !isMoving && CanAttack && IsOnField)
         {
             List<BattleTileScript> prevBattleTile = CurrentBattleTiles;
             List<BattleTileScript> CurrentBattleTilesToCheck = new List<BattleTileScript>();
@@ -648,8 +648,8 @@ public class BaseCharacter : MonoBehaviour
         {
             SpineAnimatorsetup();
         }
-
-        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1)
+       // Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + NextAttackLevel.ToString());
+        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1 && NextAttackLevel == CharacterLevelType.Novice)
         {
             return;
         }

@@ -91,6 +91,7 @@ public class Stage04_BossMonster_Script : BaseCharacter
     public IEnumerator CanGetDamage_Co()
     {
         CanGetDamage = true;
+        GetComponentInChildren<LayerParticleSelection>(true).gameObject.SetActive(false);
         float timer = 0;
         while (timer <= 20)
         {
@@ -102,6 +103,7 @@ public class Stage04_BossMonster_Script : BaseCharacter
             timer += Time.fixedDeltaTime;
         }
         CanGetDamage = false;
+        GetComponentInChildren<LayerParticleSelection>(true).gameObject.SetActive(true);
     }
 
     public override IEnumerator AttackAction()
