@@ -10052,8 +10052,8 @@ GameObject:
   - component: {fileID: 486702005584109069}
   - component: {fileID: 1757542618210566318}
   - component: {fileID: 154551745012062785}
-  - component: {fileID: 6490444046122691992}
   - component: {fileID: 689707859479388073}
+  - component: {fileID: 181355858723672324}
   m_Layer: 5
   m_Name: Win
   m_TagString: Untagged
@@ -10135,22 +10135,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!111 &6490444046122691992
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3720644757415931904}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: ee6fdbc23fab56c4ab71377be03c833f, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: ee6fdbc23fab56c4ab71377be03c833f, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &689707859479388073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10165,6 +10149,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayAgain: {fileID: 6118448994070543071}
   SplashScreen: {fileID: 8840627341888903938}
+--- !u!95 &181355858723672324
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3720644757415931904}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f2ade2a56b6710741ba98a1bf53cf522, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3752825692458885899
 GameObject:
   m_ObjectHideFlags: 0
@@ -13403,8 +13406,8 @@ GameObject:
   - component: {fileID: 6855533723021468085}
   - component: {fileID: 446275832953323521}
   - component: {fileID: 3286472206768194368}
-  - component: {fileID: 6788240048468883815}
   - component: {fileID: 8501172534869621087}
+  - component: {fileID: 8827520133463401740}
   m_Layer: 5
   m_Name: Lose
   m_TagString: Untagged
@@ -13486,22 +13489,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!111 &6788240048468883815
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5195049549570227412}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: cf8d311a8dd672647ab6102e490dd259, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: cf8d311a8dd672647ab6102e490dd259, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &8501172534869621087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13516,6 +13503,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayAgain: {fileID: 6110053580995796199}
   SplashScreen: {fileID: 8971345923614414850}
+--- !u!95 &8827520133463401740
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5195049549570227412}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: faab2b581aa66b543949a1493fbdc594, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5248348487518262294
 GameObject:
   m_ObjectHideFlags: 0
