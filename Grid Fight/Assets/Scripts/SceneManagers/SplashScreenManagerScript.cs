@@ -13,6 +13,7 @@ public class SplashScreenManagerScript : MonoBehaviour
     public AudioSource AudioS;
     public AudioClip ButtonPressed;
     public AudioClip PressStart;
+    public GameObject rewired;
     private void Awake()
     {
         Instance = this;
@@ -47,7 +48,7 @@ public class SplashScreenManagerScript : MonoBehaviour
         // This is particularly good for creating loading screens.
         // You could also load the Scene by using sceneBuildIndex. In this case Scene2 has
         // a sceneBuildIndex of 1 as shown in Build Settings.
-
+        
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("BattleScene", LoadSceneMode.Additive);
         asyncLoad.allowSceneActivation = false;
         // Wait until the asynchronous scene fully loads
@@ -55,7 +56,7 @@ public class SplashScreenManagerScript : MonoBehaviour
         {
             yield return null;
         }
-
+        Destroy(rewired);
         asyncLoad.allowSceneActivation = true;
 
         yield return new WaitForSecondsRealtime(0.2f);
