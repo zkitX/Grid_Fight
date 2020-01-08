@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3511135238630928034
+--- !u!1 &604552460572068600
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3511135238630928035}
-  - component: {fileID: 3511135238630928032}
+  - component: {fileID: 604552460572068601}
+  - component: {fileID: 604552460572068602}
   m_Layer: 0
-  m_Name: WaveManager
+  m_Name: WaveManager-Dan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3511135238630928035
+--- !u!4 &604552460572068601
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3511135238630928034}
+  m_GameObject: {fileID: 604552460572068600}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.2474627, y: 0.9679096, z: -3.4060545}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,13 +31,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3511135238630928032
+--- !u!114 &604552460572068602
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3511135238630928034}
+  m_GameObject: {fileID: 604552460572068600}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09b0c490261b08d4dbe285554c10a1e3, type: 3}
@@ -238,6 +238,74 @@ MonoBehaviour:
     IsRandom: 0
     MaxEnemyOnScreen: 10
     ListOfEnemy:
+    - name: Flowe01
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 15
+        CharacterClass: 0
+        Health: {x: 80, y: 90}
+        HealthRegeneration: {x: 1, y: 1}
+        Damage: {x: 7, y: 9}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 4, y: 6}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 7}
+      DelayBetweenChars: 1
+    - name: Flowe02
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 16
+        CharacterClass: 0
+        Health: {x: 100, y: 110}
+        HealthRegeneration: {x: 1, y: 1}
+        Damage: {x: 7, y: 8}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 4, y: 6}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 1
+      SpowningTile:
+      - {x: 1, y: 10}
+      DelayBetweenChars: 1
+    - name: Flowe03
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 17
+        CharacterClass: 0
+        Health: {x: 60, y: 70}
+        HealthRegeneration: {x: 1, y: 1}
+        Damage: {x: 12, y: 16}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 4, y: 6}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 1
+      SpowningTile:
+      - {x: 3, y: 10}
+      DelayBetweenChars: 1
+    - name: Flowe04
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 18
+        CharacterClass: 0
+        Health: {x: 50, y: 60}
+        HealthRegeneration: {x: 1, y: 1}
+        Damage: {x: 20, y: 22}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 4, y: 6}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 6}
+      DelayBetweenChars: 1
     - name: Pristest
       NumberOfCharacter: 1
       TypeOfCharacter:
@@ -246,6 +314,95 @@ MonoBehaviour:
         Health: {x: 60, y: 70}
         HealthRegeneration: {x: 2, y: 2}
         Damage: {x: 20, y: 25}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 4, y: 6}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 9}
+      DelayBetweenChars: 1
+  - name: Wave7
+    IsRandom: 0
+    MaxEnemyOnScreen: 10
+    ListOfEnemy:
+    - name: Flowe01
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 13
+        CharacterClass: 0
+        Health: {x: 80, y: 90}
+        HealthRegeneration: {x: 1, y: 1}
+        Damage: {x: 15, y: 16}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 4, y: 6}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 7}
+      DelayBetweenChars: 1
+    - name: Flowe02
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 13
+        CharacterClass: 0
+        Health: {x: 70, y: 80}
+        HealthRegeneration: {x: 1, y: 1}
+        Damage: {x: 15, y: 16}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 4, y: 6}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 1
+      SpowningTile:
+      - {x: 1, y: 10}
+      DelayBetweenChars: 1
+    - name: Flowe03
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 13
+        CharacterClass: 0
+        Health: {x: 70, y: 80}
+        HealthRegeneration: {x: 1, y: 1}
+        Damage: {x: 15, y: 16}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 4, y: 6}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 1
+      SpowningTile:
+      - {x: 3, y: 10}
+      DelayBetweenChars: 1
+    - name: Flowe04
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 13
+        CharacterClass: 0
+        Health: {x: 70, y: 80}
+        HealthRegeneration: {x: 1, y: 1}
+        Damage: {x: 15, y: 16}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 4, y: 6}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 6}
+      DelayBetweenChars: 1
+    - name: Mask
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 14
+        CharacterClass: 0
+        Health: {x: 100, y: 120}
+        HealthRegeneration: {x: 1, y: 1}
+        Damage: {x: 20, y: 23}
         BaseSpeed: {x: 1, y: 1}
         AttackSpeedRatio: {x: 4, y: 6}
         Stamina: {x: 10, y: 10}
