@@ -194,6 +194,8 @@ public class WaveManagerScript : MonoBehaviour
                 }
             }
         }
+
+        UIBattleManager.Instance.Win.gameObject.SetActive(true);
     }
 
     private void SpawChar(BaseCharacter newChar)
