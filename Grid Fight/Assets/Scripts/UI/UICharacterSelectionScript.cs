@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,38 +29,80 @@ public class UICharacterSelectionScript : MonoBehaviour
         { ControllerType.Player4, CharacterSelectionType.Y}
     };
 
+
+    public class Charsinfo
+    {
+        public Image Icon;
+        public CharacterNameType CharName;
+
+        public Charsinfo(Image icon, CharacterNameType charName)
+        {
+            Icon = icon;
+            CharName = charName;
+        }
+    }
+    private List<Charsinfo> Chars = new List<Charsinfo>();
+
+
+    private void Awake()
+    {
+        Chars.Add(new Charsinfo(Up, CharacterNameType.Stage00_Character_Desert));
+        Chars.Add(new Charsinfo(Down, CharacterNameType.Stage00_Character_Desert));
+        Chars.Add(new Charsinfo(Left, CharacterNameType.Stage00_Character_Desert));
+        Chars.Add(new Charsinfo(Right, CharacterNameType.Stage00_Character_Desert));
+    }
+
+
+
+
     public void SetupCharacterIcons(List<UIIconClass> listOfIcons)
     {
         foreach (UIIconClass item in listOfIcons)
         {
+            item.CharIcon.CurrentCharIsDeadEvent += CharIcon_CurrentCharIsDeadEvent;
             switch (item.CharacterSelection)
             {
                 case CharacterSelectionType.Up:
-                    Up.sprite = item.CharIcon;
+                    Up.sprite = item.CharIcon.CharInfo.CharacterIcon;
+                    Chars[0].CharName = item.CharIcon.CharInfo.CharacterID;
+
                     break;
                 case CharacterSelectionType.Down:
-                    Down.sprite = item.CharIcon;
+                    Down.sprite = item.CharIcon.CharInfo.CharacterIcon;
+                    Chars[1].CharName = item.CharIcon.CharInfo.CharacterID;
                     break;
                 case CharacterSelectionType.Left:
-                    Left.sprite = item.CharIcon;
+                    Left.sprite = item.CharIcon.CharInfo.CharacterIcon;
+                    Chars[2].CharName = item.CharIcon.CharInfo.CharacterID;
                     break;
                 case CharacterSelectionType.Right:
-                    Right.sprite = item.CharIcon;
+                    Right.sprite = item.CharIcon.CharInfo.CharacterIcon;
+                    Chars[3].CharName = item.CharIcon.CharInfo.CharacterID;
                     break;
                 case CharacterSelectionType.A:
-                    Right.sprite = item.CharIcon;
+                    Right.sprite = item.CharIcon.CharInfo.CharacterIcon;
                     break;
                 case CharacterSelectionType.B:
-                    Down.sprite = item.CharIcon;
+                    Down.sprite = item.CharIcon.CharInfo.CharacterIcon;
                     break;
                 case CharacterSelectionType.X:
-                    Up.sprite = item.CharIcon;
+                    Up.sprite = item.CharIcon.CharInfo.CharacterIcon;
                     break;
                 case CharacterSelectionType.Y:
-                    Left.sprite = item.CharIcon;
+                    Left.sprite = item.CharIcon.CharInfo.CharacterIcon;
                     break;
             }
         }
+    }
+
+    private void CharIcon_CurrentCharIsDeadEvent(CharacterNameType cName, List<ControllerType> playerController, SideType side)
+    {
+        Charsinfo icon = Chars.Where(r => r.CharName == cName).FirstOrDefault();
+        if(icon != null)
+        {
+            icon.Icon.color = Color.gray;
+        }
+
     }
 
     /// <summary>
@@ -124,13 +167,13 @@ public class UICharacterSelectionScript : MonoBehaviour
 
 public class UIIconClass
 {
-    public Sprite CharIcon;
+    public BaseCharacter CharIcon;
     public CharacterSelectionType CharacterSelection;
     public UIIconClass()
     {
     }
 
-    public UIIconClass(Sprite charIcon, CharacterSelectionType characterSelection)
+    public UIIconClass(BaseCharacter charIcon, CharacterSelectionType characterSelection)
     {
         CharIcon = charIcon;
         CharacterSelection = characterSelection;

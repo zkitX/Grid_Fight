@@ -28,7 +28,9 @@ public class UIPlayerSectionScript : MonoBehaviour
     private Image CharacterStaminaBar;
     [SerializeField]
     private UICharacterSkillContainerScript CharSkills;
-    [SerializeField]
+    public Animator Anim;
+
+
    // private Animator CharLevel;
     public void SetSelectedCharacter(CharacterType_Script selectedCharacter)
     {

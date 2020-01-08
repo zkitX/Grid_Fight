@@ -180,7 +180,23 @@ public class BattleManagerScript : MonoBehaviour
             AllCharactersOnField.Add(CreateChar(item, CharactersContainer));
             yield return new WaitForSeconds(delay);
         }
-
+        switch (matchType)
+        {
+            case MatchType.PvE:
+                UIBattleManager.Instance.UICharacterSelectionLeft.gameObject.SetActive(true);
+                break;
+            case MatchType.PvP:
+                UIBattleManager.Instance.UICharacterSelectionLeft.gameObject.SetActive(true);
+                UIBattleManager.Instance.UICharacterSelectionRight.gameObject.SetActive(true);
+                break;
+            case MatchType.PPvE:
+                UIBattleManager.Instance.UICharacterSelectionLeft.gameObject.SetActive(true);
+                break;
+            case MatchType.PPvPP:
+                UIBattleManager.Instance.UICharacterSelectionLeft.gameObject.SetActive(true);
+                UIBattleManager.Instance.UICharacterSelectionRight.gameObject.SetActive(true);
+                break;
+        }
         SetUICharacterSelectionIcons();
     }
 //Creation of the character with the basic info
@@ -276,14 +292,78 @@ public class BattleManagerScript : MonoBehaviour
     //Used to select a char 
     public void SelectCharacter(ControllerType playerController, CharacterType_Script currentCharacter)
     {
-        if(currentCharacter != null)
+        if(currentCharacter != null && currentCharacter.CharInfo.HealthPerc > 0)
         {
             if (!CurrentSelectedCharacters.ContainsValue(currentCharacter))
             {
                 if(CurrentSelectedCharacters[playerController] != null)
                 {
                     CurrentSelectedCharacters[playerController].SetCharSelected(false, playersNumberBig[(int)playerController], playersNumberSmall[(int)playerController], new Color());
+                }
+                else
+                {
+                    switch (matchType)
+                    {
+                        case MatchType.PvE:
+                            if (playerController == ControllerType.Player1)
+                            {
+                                UIBattleManager.Instance.PlayerA.gameObject.SetActive(true);
+                                UIBattleManager.Instance.PlayerA.Anim.SetBool("FadeInOut", true);
+                            }
+                            break;
+                        case MatchType.PvP:
+                            if (playerController == ControllerType.Player1)
+                            {
+                                UIBattleManager.Instance.PlayerA.gameObject.SetActive(true);
+                                UIBattleManager.Instance.PlayerA.Anim.SetBool("FadeInOut", true);
+                            }
 
+                            if (playerController == ControllerType.Player2)
+                            {
+                                UIBattleManager.Instance.PlayerB.gameObject.SetActive(true);
+                                UIBattleManager.Instance.PlayerB.Anim.SetBool("FadeInOut", true);
+                            }
+                            break;
+                        case MatchType.PPvE:
+
+                            if (playerController == ControllerType.Player1)
+                            {
+                                UIBattleManager.Instance.PlayerA.gameObject.SetActive(true);
+                                UIBattleManager.Instance.PlayerA.Anim.SetBool("FadeInOut", true);
+                            }
+
+                            if (playerController == ControllerType.Player2)
+                            {
+                                UIBattleManager.Instance.PlayerC.gameObject.SetActive(true);
+                                UIBattleManager.Instance.PlayerC.Anim.SetBool("FadeInOut", true);
+                            }
+                            break;
+                        case MatchType.PPvPP:
+                            if (playerController == ControllerType.Player1)
+                            {
+                                UIBattleManager.Instance.PlayerA.gameObject.SetActive(true);
+                                UIBattleManager.Instance.PlayerA.Anim.SetBool("FadeInOut", true);
+                            }
+
+                            if (playerController == ControllerType.Player2)
+                            {
+                                UIBattleManager.Instance.PlayerB.gameObject.SetActive(true);
+                                UIBattleManager.Instance.PlayerB.Anim.SetBool("FadeInOut", true);
+                            }
+
+                            if (playerController == ControllerType.Player3)
+                            {
+                                UIBattleManager.Instance.PlayerC.gameObject.SetActive(true);
+                                UIBattleManager.Instance.PlayerC.Anim.SetBool("FadeInOut", true);
+                            }
+
+                            if (playerController == ControllerType.Player4)
+                            {
+                                UIBattleManager.Instance.PlayerD.gameObject.SetActive(true);
+                                UIBattleManager.Instance.PlayerD.Anim.SetBool("FadeInOut", true);
+                            }
+                            break;
+                    }
                 }
                 CurrentSelectedCharacters[playerController] = currentCharacter;
                 UIBattleManager.Instance.CharacterSelected(playerController, currentCharacter);
@@ -307,6 +387,7 @@ public class BattleManagerScript : MonoBehaviour
 
             timer += Time.fixedDeltaTime;
         }
+
         SetCharOnBoardOnRandomPos(playerController, cName);
     }
     //Load char in a fixed pos
@@ -426,11 +507,11 @@ public class BattleManagerScript : MonoBehaviour
         {
             if(item.UMS.Side == SideType.RightSide)
             {
-                resRight.Add(new UIIconClass(item.CharInfo.CharacterIcon, item.CharInfo.CharacterSelection));
+                resRight.Add(new UIIconClass(item, item.CharInfo.CharacterSelection));
             }
             else 
             {
-                resLeft.Add(new UIIconClass(item.CharInfo.CharacterIcon, item.CharInfo.CharacterSelection));
+                resLeft.Add(new UIIconClass(item, item.CharInfo.CharacterSelection));
             }
         }
 

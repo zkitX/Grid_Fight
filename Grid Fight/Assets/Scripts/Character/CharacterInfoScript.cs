@@ -182,7 +182,7 @@ public class CharacterInfoScript : MonoBehaviour
     {
         get
         {
-            return HealthStats.Health;
+            return HealthStats.Health <= 0 ? 0 : HealthStats.Health;
         }
         set
         {

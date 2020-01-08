@@ -43,8 +43,6 @@ public class UIBattleManager : MonoBehaviour
     private void Start()
     {
         MatchType matchType = LoaderManagerScript.Instance != null ? LoaderManagerScript.Instance.MatchInfoType : BattleInfoManagerScript.Instance.MatchInfoType;
-
-
         switch (matchType)
         {
             case MatchType.PvE:
@@ -52,7 +50,6 @@ public class UIBattleManager : MonoBehaviour
                 PlayerB.CurrentCanvasGroup.alpha = 0;
                 PlayerC.CurrentCanvasGroup.alpha = 0;
                 PlayerD.CurrentCanvasGroup.alpha = 0;
-                UICharacterSelectionRight.gameObject.SetActive(false);
 
                 currentPlayers.Add(0, PlayerA);
                 currentPlayers.Add(4, PlayerB);
@@ -71,7 +68,6 @@ public class UIBattleManager : MonoBehaviour
                 PlayerC.SetupPlayer(1);
                 PlayerB.CurrentCanvasGroup.alpha = 0;
                 PlayerD.CurrentCanvasGroup.alpha = 0;
-                UICharacterSelectionRight.gameObject.SetActive(false);
                 currentPlayers.Add(0, PlayerA);
                 currentPlayers.Add(1, PlayerC);
                 currentPlayers.Add(4, PlayerB);
@@ -114,7 +110,6 @@ public class UIBattleManager : MonoBehaviour
         {
             StartCoroutine(TimeUpCoP2(duration, side));
         }
-      
     }
 
     private IEnumerator TimeUpCoP1(float duration, SideType side)
