@@ -11,6 +11,8 @@ public class SFXmanager : MonoBehaviour
     public AudioClip ArrivingSpawn;
 
 
+    public float vol;
+
     private void Awake()
     {
         Instance = this;
@@ -18,6 +20,6 @@ public class SFXmanager : MonoBehaviour
 
     public void PlayOnce(AudioClip clip)
     {
-        audioS.PlayOneShot(clip);
+        audioS.PlayOneShot(clip, vol);
     }
 }
