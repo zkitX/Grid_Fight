@@ -203,7 +203,7 @@ public class CharacterInfoScript : MonoBehaviour
     {
         get
         {
-            return StaminaStats.Stamina;
+            return StaminaStats.Stamina <= 0 ? 0 : StaminaStats.Stamina;
         }
         set
         {

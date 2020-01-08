@@ -121,6 +121,7 @@ public class Stage04_BossMonster_Script : BaseCharacter
 
     public override void SetCharDead()
     {
+        UIBattleManager.Instance.Win.gameObject.SetActive(true);
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         base.SetCharDead();
     }
