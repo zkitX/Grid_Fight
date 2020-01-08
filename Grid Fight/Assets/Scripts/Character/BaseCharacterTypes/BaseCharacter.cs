@@ -632,6 +632,14 @@ public class BaseCharacter : MonoBehaviour
 
     #region Animation
 
+    public void ArrivingEvent()
+    {
+        SFXmanager.Instance.PlayOnce(SFXmanager.Instance.ArrivingImpact);
+        UMS.ArrivingParticle.SetActive(true);
+    }
+
+
+
     public virtual void SetAnimation(CharacterAnimationStateType animState)
     {
         float AnimSpeed = 1;

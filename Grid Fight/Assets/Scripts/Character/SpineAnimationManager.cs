@@ -42,7 +42,10 @@ public class SpineAnimationManager : MonoBehaviour
     //Used to get spine event
     private void SpineAnimationState_Event(Spine.TrackEntry trackEntry, Spine.Event e)
     {
-
+        if (e.Data.Name.Contains("FireArrivingParticle"))
+        {
+            CharOwner.ArrivingEvent();
+        }
         if (e.Data.Name.Contains("FireCastParticle"))
         {
             CharOwner.FireCastParticles();
