@@ -16,9 +16,9 @@ public class BattleManagerScript : MonoBehaviour
         {
             return _CurrentBattleState;
         }
-        set 
+        set
         {
-            if(CurrentBattleStateChangedEvent != null)
+            if (CurrentBattleStateChangedEvent != null)
             {
                 CurrentBattleStateChangedEvent(value);
             }
@@ -59,7 +59,7 @@ public class BattleManagerScript : MonoBehaviour
     {
 
         CurrentBattleState = BattleState.Battle;
-       UIBattleManager.Instance.StartMatch.gameObject.SetActive(false);
+        UIBattleManager.Instance.StartMatch.gameObject.SetActive(false);
     }
 
     #region Unity Life Cycle
@@ -67,14 +67,10 @@ public class BattleManagerScript : MonoBehaviour
     {
         Instance = this;
     }
-    // Start is called before the first frame update
-    private void Start()
-    {
-        MCam = Camera.main;
-    }
     #endregion
 
     #region Events
+   
 
     #endregion
 

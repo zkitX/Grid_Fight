@@ -42,11 +42,6 @@ public class CharacterType_Script : BaseCharacter
         
     }
 
-    private void SetCamBack()
-    {
-        BattleManagerScript.Instance.MCam.GetComponent<Animator>().SetBool("Shake", false);
-    }
-
     #endregion
 
     #region Attack

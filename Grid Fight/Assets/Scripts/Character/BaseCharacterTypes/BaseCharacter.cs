@@ -311,7 +311,7 @@ public class BaseCharacter : MonoBehaviour
     {
         if (CharInfo.Health > 0 && !isMoving && CanAttack && IsOnField)
         {
-            if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1 && NextAttackLevel == CharacterLevelType.Novice)
+            if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1 && !isSpecialFired)
             {
                 return;
             }
@@ -637,10 +637,9 @@ public class BaseCharacter : MonoBehaviour
 
     public void ArrivingEvent()
     {
+        CameraManagerScript.Instance.CameraShake();
         SFXmanager.Instance.PlayOnce(SFXmanager.Instance.ArrivingImpact);
         UMS.ArrivingParticle.SetActive(true);
-        BattleManagerScript.Instance.MCam.GetComponent<Animator>().SetBool("Shake", true);
-        Invoke("SetCamBack", 0.1f);
     }
 
 

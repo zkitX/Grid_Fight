@@ -21,9 +21,12 @@ public class MinionType_Script : BaseCharacter
 
     public override void SetCharDead()
     {
+        CameraManagerScript.Instance.CameraShake();
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         base.SetCharDead();
     }
+
+   
 
     public virtual IEnumerator Move()
     {
