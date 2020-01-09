@@ -160,10 +160,60 @@ public class Stage04_BossGirl_Script : BaseCharacter
         base.SetCharDead();
     }
 
-   /* public override IEnumerator AttackAction()
+    public override IEnumerator AttackAction()
     {
-        yield return null;
-    }*/
+        while (true)
+        {
+            while (!CanAttack && !VFXTestMode)
+            {
+                yield return null;
+            }
+
+            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || !CanGetDamage))
+            {
+                yield return null;
+            }
+
+            isAttackStarted = false;
+            isAttackCompletetd = false;
+            isAttackGoing = false;
+            while (!isAttackCompletetd)
+            {
+                if (!isAttackStarted)
+                {
+                    isAttackStarted = true;
+                    isAttackGoing = true;
+                    SetAnimation(CharacterAnimationStateType.Atk);
+                }
+
+                if (isAttackStarted && !isAttackGoing && !isMoving)
+                {
+                    isAttackGoing = true;
+                    SetAnimation(CharacterAnimationStateType.Atk);
+                }
+                yield return null;
+            }
+
+
+            float timer = 0;
+            while (timer <= CharInfo.AttackSpeedRatio)
+            {
+                yield return new WaitForFixedUpdate();
+                while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
+                {
+                    yield return new WaitForEndOfFrame();
+                }
+
+                while (isSpecialLoading)
+                {
+                    yield return new WaitForEndOfFrame();
+                    timer = 0;
+                }
+
+                timer += Time.fixedDeltaTime;
+            }
+        }
+    }
 
     public override void SetDamage(float damage, ElementalType elemental)
     {
