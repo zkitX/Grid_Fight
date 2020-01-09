@@ -106,10 +106,10 @@ public class Stage04_BossMonster_Script : BaseCharacter
         GetComponentInChildren<LayerParticleSelection>(true).gameObject.SetActive(true);
     }
 
-    public override IEnumerator AttackAction()
+   /* public override IEnumerator AttackAction()
     {
         yield return null;
-    }
+    }*/
 
     public override void SetDamage(float damage, ElementalType elemental)
     {

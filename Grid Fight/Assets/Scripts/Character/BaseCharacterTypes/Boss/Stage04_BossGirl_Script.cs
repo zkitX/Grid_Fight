@@ -66,6 +66,7 @@ public class Stage04_BossGirl_Script : BaseCharacter
             TargetControllerList[i].Target = t;
             TargetControllerList[i].transform.localPosition = Vector3.zero;
         }
+        StartAttakCo();
     }
 
     private void Flower_CurrentCharIsRebornEvent(CharacterNameType cName, List<ControllerType> playerController, SideType side)
@@ -115,9 +116,10 @@ public class Stage04_BossGirl_Script : BaseCharacter
         {
             CameraManagerScript.Instance.CameraShake();
             BattleManagerScript.Instance.CurrentBattleState = BattleState.Pause;
+            ParticleManagerScript.Instance.AttackParticlesFired.ForEach(r => r.PS.SetActive(false));
+            ParticleManagerScript.Instance.ParticlesFired.ForEach(r => r.PS.SetActive(false));
             StartCoroutine(DeathStasy());
         }
-       
     }
 
     private IEnumerator DeathStasy()
@@ -158,10 +160,10 @@ public class Stage04_BossGirl_Script : BaseCharacter
         base.SetCharDead();
     }
 
-    public override IEnumerator AttackAction()
+   /* public override IEnumerator AttackAction()
     {
         yield return null;
-    }
+    }*/
 
     public override void SetDamage(float damage, ElementalType elemental)
     {
