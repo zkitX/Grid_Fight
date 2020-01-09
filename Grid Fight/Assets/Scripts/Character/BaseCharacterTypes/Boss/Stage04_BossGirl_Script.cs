@@ -113,6 +113,7 @@ public class Stage04_BossGirl_Script : BaseCharacter
     {
         if(SpineAnim.CurrentAnim != CharacterAnimationStateType.Death)
         {
+            CameraManagerScript.Instance.CameraShake();
             BattleManagerScript.Instance.CurrentBattleState = BattleState.Pause;
             StartCoroutine(DeathStasy());
         }
