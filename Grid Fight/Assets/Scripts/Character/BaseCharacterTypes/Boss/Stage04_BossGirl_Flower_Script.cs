@@ -8,6 +8,8 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
     public Vector2Int BasePos;
     private float StasyTime = 50;
     public bool CanRebirth = true;
+    public GameObject Smoke;
+
     public override void SetUpEnteringOnBattle()
     {
         StartCoroutine(base.MoveByTile(GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).transform.position, CharacterAnimationStateType.Growing, SpineAnim.UpMovementSpeed));
@@ -86,6 +88,13 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
     private IEnumerator DeathStasy()
     {
         float timer = 0;
+        if(Smoke == null)
+        {
+            Smoke = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage04FlowersSmoke);
+            Smoke.transform.parent = transform;
+            Smoke.transform.localPosition = Vector3.zero;
+        }
+        Smoke.SetActive(true);
         SetAnimation(CharacterAnimationStateType.Death);
         while (timer < StasyTime)
         {
@@ -105,6 +114,7 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
     {
         if(CanRebirth)
         {
+            Smoke.SetActive(false);
             SetAttackReady(true);
             SetAnimation(CharacterAnimationStateType.Idle);
             base.Call_CurrentCharIsRebirthEvent();

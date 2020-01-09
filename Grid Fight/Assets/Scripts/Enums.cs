@@ -345,6 +345,13 @@ public enum BaseCharType
     Stage04_BossMonster_Script = 5
 }
 
+
+public enum ParticlesType
+{
+    CharArrivingSmoke,
+    Stage04FlowersSmoke
+}
+
 public enum AttackParticleTypes
 {
     Stage00_Minion_Valley = 13,
@@ -372,7 +379,7 @@ public enum AttackParticleTypes
 }
 
 
-public enum ParticleTypes
+public enum AttackParticlePhaseTypes
 {
     Cast,
     Attack,

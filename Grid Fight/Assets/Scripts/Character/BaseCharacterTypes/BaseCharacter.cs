@@ -45,6 +45,7 @@ public class BaseCharacter : MonoBehaviour
     public GameObject BaseBullet;
     public CharacterLevelType NextAttackLevel = CharacterLevelType.Novice;
     public bool isSpecialLoading = false;
+    public bool isSpecialFired = false;
     public List<CurrentBuffsDebuffsClass> BuffsDebuffs = new List<CurrentBuffsDebuffsClass>();
     public bool VFXTestMode = false;
     public bool isAttackStarted = false;
@@ -218,7 +219,7 @@ public class BaseCharacter : MonoBehaviour
     //start the casting particlaes foe the attack
     public IEnumerator CastAttackParticles(CharacterLevelType clt)
     {
-        GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, ParticleTypes.Cast, clt == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, UMS.Side);
+        GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Cast, clt == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, UMS.Side);
         cast.GetComponent<DisableParticleScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
         LayerParticleSelection lps = cast.GetComponent<LayerParticleSelection>();
         if (lps != null)
@@ -243,7 +244,8 @@ public class BaseCharacter : MonoBehaviour
     //Create and set up the basic info for the bullet
     public void CreateBullet(BulletBehaviourInfoClass bulletBehaviourInfo)
     {
-        isSpecialLoading = false;
+        Debug.Log(isSpecialLoading);
+        isSpecialFired = false;
         GameObject bullet = Instantiate(BaseBullet, NextAttackLevel == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, Quaternion.identity);
         BulletScript bs = bullet.GetComponent<BulletScript>();
         bs.BulletEffectTiles = bulletBehaviourInfo.BulletEffectTiles;
@@ -259,7 +261,7 @@ public class BaseCharacter : MonoBehaviour
         bs.CharInfo = CharInfo;
        
         
-        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharInfo.ParticleID, ParticleTypes.Attack, bullet.transform, UMS.Side,
+        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharInfo.ParticleID, AttackParticlePhaseTypes.Attack, bullet.transform, UMS.Side,
             CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script ? true : false);
 
 
@@ -312,6 +314,11 @@ public class BaseCharacter : MonoBehaviour
     {
         if (CharInfo.Health > 0 && !isMoving && CanAttack && IsOnField)
         {
+            if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1 && NextAttackLevel == CharacterLevelType.Novice)
+            {
+                return;
+            }
+
             List<BattleTileScript> prevBattleTile = CurrentBattleTiles;
             List<BattleTileScript> CurrentBattleTilesToCheck = new List<BattleTileScript>();
             CharacterAnimationStateType AnimState = CharacterAnimationStateType.Idle;

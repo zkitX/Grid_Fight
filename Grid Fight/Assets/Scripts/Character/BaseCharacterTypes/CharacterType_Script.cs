@@ -55,7 +55,10 @@ public class CharacterType_Script : BaseCharacter
     //Load the special attack and fire it if the load is complete
     public IEnumerator LoadSpecialAttack()
     {
-        if (CharInfo.StaminaStats.Stamina - CharInfo.StaminaStats.Stamina_Cost_S_Atk01 >= 0 && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1 && !isSpecialLoading)
+
+        Debug.Log(SpineAnim.CurrentAnim.ToString() + isSpecialLoading);
+        if (CharInfo.StaminaStats.Stamina - CharInfo.StaminaStats.Stamina_Cost_S_Atk01 >= 0 &&
+            SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1 && !isSpecialLoading && !isSpecialFired)
         {
             isSpecialLoading = true;
             float timer = 0;
@@ -74,7 +77,7 @@ public class CharacterType_Script : BaseCharacter
                 {
                     yield return new WaitForEndOfFrame();
                 }
-                
+                isSpecialFired = true;
                 SpecialAttack(CharInfo.CharacterLevel);
             }
         }

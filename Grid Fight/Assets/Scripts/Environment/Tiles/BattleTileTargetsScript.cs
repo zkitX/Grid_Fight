@@ -43,7 +43,7 @@ public class BattleTileTargetsScript : MonoBehaviour
         }
         animToFire["ExclamationAnim"].speed = 1;
 
-        GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(atkPS, ParticleTypes.Effect, transform.position, SideType.LeftSide);
+        GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(atkPS, AttackParticlePhaseTypes.Effect, transform.position, SideType.LeftSide);
         LayerParticleSelection lps = effect.GetComponent<LayerParticleSelection>();
         if (lps != null)
         {

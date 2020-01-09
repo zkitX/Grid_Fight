@@ -56,7 +56,7 @@ public class BattleTileTargetScript : MonoBehaviour
 
             transform.localScale = new Vector3(1 - (timer > 0.9f ? 1 : timer) , 1 - (timer > 0.9f ? 1 : timer), 1);
         }
-        GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(atkPS, ParticleTypes.Effect, transform.position,  SideType.LeftSide);
+        GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(atkPS, AttackParticlePhaseTypes.Effect, transform.position,  SideType.LeftSide);
         LayerParticleSelection lps = effect.GetComponent<LayerParticleSelection>();
         if (lps != null)
         {
