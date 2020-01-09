@@ -13,6 +13,11 @@ public class UIWinLoseScript : MonoBehaviour
 
     private void OnEnable()
     {
+        Invoke("SetEnd", 3);
+    }
+
+    private void SetEnd()
+    {
         InputController.Instance.ButtonLeftUpEvent += ArrowPressed;
         InputController.Instance.ButtonRightUpEvent += ArrowPressed;
         InputController.Instance.ButtonAUpEvent += Selected;

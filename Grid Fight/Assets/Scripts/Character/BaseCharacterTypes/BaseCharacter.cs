@@ -67,9 +67,6 @@ public class BaseCharacter : MonoBehaviour
         
     }
 
-
-
-
     #region Setup Character
     public virtual void SetupCharacterSide()
     {
@@ -656,9 +653,13 @@ public class BaseCharacter : MonoBehaviour
             SpineAnimatorsetup();
         }
        // Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + NextAttackLevel.ToString());
-        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1 && NextAttackLevel == CharacterLevelType.Novice)
+        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1 && !isSpecialFired)
         {
             return;
+        }
+        else if(SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1 && isSpecialFired)
+        {
+            isSpecialFired = false;
         }
 
         if (animState != CharacterAnimationStateType.Atk && SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk)
