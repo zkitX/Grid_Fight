@@ -172,6 +172,10 @@ public class InputController : MonoBehaviour
         for (int i = 0; i < PlayersNumber; i++)
         {
             players.Add(ReInput.players.GetPlayer(i));
+            if (players[i].controllers.joystickCount > 0)
+            {
+                players[i].controllers.hasKeyboard = false;
+            }
         }
         
     }

@@ -155,7 +155,7 @@ public class UserInputManager : MonoBehaviour
             }
         }*/
 
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+     /*   if(Input.GetKeyDown(KeyCode.Alpha1))
         {
             Instance_ButtonDownDownEvent(0);
         }
@@ -274,7 +274,7 @@ public class UserInputManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.P))
         {
             Instance_ButtonMinusUpEvent(0);
-        }
+        }*/
     }
 
 

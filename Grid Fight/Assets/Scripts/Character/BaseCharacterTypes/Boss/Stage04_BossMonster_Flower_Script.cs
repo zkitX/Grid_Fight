@@ -9,6 +9,7 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
     private float StasyTime = 15;
     public bool CanRebirth = true;
     public MonsterFlowerType mfType;
+    public GameObject Smoke;
 
     public override void SetUpEnteringOnBattle()
     {
@@ -94,6 +95,13 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
     private IEnumerator DeathStasy()
     {
         float timer = 0;
+        if (Smoke == null)
+        {
+            Smoke = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage04FlowersSmoke);
+            Smoke.transform.parent = transform;
+            Smoke.transform.localPosition = Vector3.zero;
+        }
+        Smoke.SetActive(true);
         SetAnimation(CharacterAnimationStateType.Death);
         while (timer < StasyTime)
         {
@@ -105,7 +113,7 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
 
             timer += Time.fixedDeltaTime;
         }
-
+        Smoke.SetActive(false);
         SetAttackReady(true);
         SetAnimation(CharacterAnimationStateType.Idle);
         CharInfo.Health = CharInfo.HealthStats.Base;
