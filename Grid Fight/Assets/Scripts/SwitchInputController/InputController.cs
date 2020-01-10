@@ -168,6 +168,10 @@ public class InputController : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        if (ReInput.players.GetPlayer(0).controllers.joystickCount == 0)
+        {
+            PlayersNumber = 1;
+        }
         // Get the Rewired Player object for this player and keep it for the duration of the character's lifetime
         for (int i = 0; i < PlayersNumber; i++)
         {
@@ -176,6 +180,8 @@ public class InputController : MonoBehaviour
             {
                 players[i].controllers.hasKeyboard = false;
             }
+
+            
         }
         
     }
