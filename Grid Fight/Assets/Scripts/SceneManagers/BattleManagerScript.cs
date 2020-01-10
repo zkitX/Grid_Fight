@@ -285,7 +285,7 @@ public class BattleManagerScript : MonoBehaviour
     {
         if (CurrentCharactersLoadingInfo.Where(r=> r.CName == cName && r.PlayerController == playerController).ToList().Count > 0)
         {
-            StopCoroutine(CharacterLoadingCo);
+            CurrentCharactersLoadingInfo.Remove(CurrentCharactersLoadingInfo.Where(r=> r.PlayerController == playerController && r.CName == cName).First());
         }
     }
 
@@ -393,8 +393,10 @@ public class BattleManagerScript : MonoBehaviour
 
             timer += Time.fixedDeltaTime;
         }
-
-        SetCharOnBoardOnRandomPos(playerController, cName);
+        if (CurrentCharactersLoadingInfo.Where(r => r.CName == cName && r.PlayerController == playerController).ToList().Count > 0)
+        {
+            SetCharOnBoardOnRandomPos(playerController, cName);
+        }
     }
     //Load char in a fixed pos
     private IEnumerator CharacterLoadingInFixedPosition(CharacterNameType cName, ControllerType playerController, Vector2Int pos)
