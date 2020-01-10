@@ -146,7 +146,7 @@ public class WaveManagerScript : MonoBehaviour
         foreach (WavePhaseClass wavePhase in WavePhases)
         {
             CurrentWave++;
-            while (BattleManagerScript.Instance == null)
+            while (BattleManagerScript.Instance == null || GridManagerScript.Instance == null)
             {
                 yield return new WaitForEndOfFrame();
             }

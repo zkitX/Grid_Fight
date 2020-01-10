@@ -178,7 +178,8 @@ public enum BattleState
     Pause,
     Menu,
     End,
-    WinLose
+    WinLose,
+    Tutorial
 }
 
 public enum ElementalType

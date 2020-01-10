@@ -55,6 +55,6 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         Instantiate(FlowChart);
         yield return new WaitForSeconds(0.2f);
-        BattleManagerScript.Instance.CurrentBattleState = BattleState.Intro;
+        BattleManagerScript.Instance.CurrentBattleState = BattleState.Tutorial;
     }
 }

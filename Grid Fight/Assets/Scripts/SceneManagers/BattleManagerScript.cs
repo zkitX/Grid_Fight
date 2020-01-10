@@ -57,9 +57,12 @@ public class BattleManagerScript : MonoBehaviour
 
     public void SetupBattleState()
     {
-
-        CurrentBattleState = BattleState.Battle;
-        UIBattleManager.Instance.StartMatch.gameObject.SetActive(false);
+        if(CurrentBattleState == BattleState.Intro)
+        {
+            CurrentBattleState = BattleState.Battle;
+            UIBattleManager.Instance.StartMatch.gameObject.SetActive(false);
+        }
+        
     }
 
     #region Unity Life Cycle
@@ -490,8 +493,12 @@ public class BattleManagerScript : MonoBehaviour
 
     public void RestartScene()
     {
-        CurrentBattleState = BattleState.End;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        if(CurrentBattleState == BattleState.Battle)
+        {
+            CurrentBattleState = BattleState.End;
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        }
+        
     }
 
 
