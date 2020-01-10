@@ -176,7 +176,7 @@ public class BaseCharacter : MonoBehaviour
             isAttackStarted = false;
             isAttackCompletetd = false;
             isAttackGoing = false;
-            while (!isAttackCompletetd)
+            while (!isAttackCompletetd && !isSpecialLoading)
             {
                 if (!isAttackStarted)
                 {
@@ -248,7 +248,6 @@ public class BaseCharacter : MonoBehaviour
     public void CreateBullet(BulletBehaviourInfoClass bulletBehaviourInfo)
     {
         Debug.Log(isSpecialLoading);
-        isSpecialFired = false;
         GameObject bullet = Instantiate(BaseBullet, NextAttackLevel == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, Quaternion.identity);
         BulletScript bs = bullet.GetComponent<BulletScript>();
         bs.BulletEffectTiles = bulletBehaviourInfo.BulletEffectTiles;
@@ -271,6 +270,10 @@ public class BaseCharacter : MonoBehaviour
         LayerParticleSelection lps = bs.PS.GetComponent<LayerParticleSelection>();
         if (lps != null)
         {
+            if(NextAttackLevel > CharacterLevelType.Novice)
+            {
+                isSpecialFired = false;
+            }
             bs.attackLevel = NextAttackLevel;
             lps.Shot = NextAttackLevel;
             lps.SelectShotLevel();
