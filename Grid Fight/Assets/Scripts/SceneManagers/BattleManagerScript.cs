@@ -209,8 +209,8 @@ public class BattleManagerScript : MonoBehaviour
         characterBasePrefab = Instantiate(CharacterBasePrefab, new Vector3(100, 100, 100), Quaternion.identity, parent);
         GameObject child = Instantiate(soCharacterPrefab.CharacterPrefab, characterBasePrefab.transform.position, Quaternion.identity, characterBasePrefab.transform);
         BaseCharacter currentCharacter = (BaseCharacter)characterBasePrefab.AddComponent(System.Type.GetType(child.GetComponentInChildren<CharacterInfoScript>().BaseCharacterType.ToString()));
-
         currentCharacter.UMS = currentCharacter.GetComponent<UnitManagementScript>();
+        currentCharacter.UMS.CurrentAttackType = charInfo.CharAttackType;
         currentCharacter.UMS.CharOwner = currentCharacter;
         currentCharacter.UMS.PlayerController = charInfo.PlayerController;
         foreach (Vector2Int item in soCharacterPrefab.OccupiedTiles)

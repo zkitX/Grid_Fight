@@ -28,7 +28,7 @@ public class BattleTileTargetScript : MonoBehaviour
         {
             yield return new WaitForFixedUpdate();
 
-            while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
+            while (BattleManagerScript.Instance != null && BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
             {
                 yield return new WaitForEndOfFrame();
             }

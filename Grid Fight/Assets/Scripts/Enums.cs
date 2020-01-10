@@ -419,6 +419,13 @@ public enum FacingType
     Right
 }
 
+public enum AttackType
+{
+    Particles,
+    Tile
+}
+
+
 public enum RelationshipBetweenElements
 {
     Neutral = 0,

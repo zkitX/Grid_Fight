@@ -32,7 +32,7 @@ public class BattleTileTargetsScript : MonoBehaviour
         while (timer < duration)
         {
             yield return new WaitForFixedUpdate();
-            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+            while (BattleManagerScript.Instance != null && BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
             {
                 yield return new WaitForFixedUpdate();
                 animToFire["ExclamationAnim"].speed = 0;
@@ -51,11 +51,15 @@ public class BattleTileTargetsScript : MonoBehaviour
             lps.SelectShotLevel();
 
         }
-        BaseCharacter target;
-        target = BattleManagerScript.Instance.GetCharInPos(pos);
-        if (target != null)
+
+        if(BattleManagerScript.Instance != null)
         {
-            target.SetDamage(damage, ele);
+            BaseCharacter target;
+            target = BattleManagerScript.Instance.GetCharInPos(pos);
+            if (target != null)
+            {
+                target.SetDamage(damage, ele);
+            }
         }
 
         UpdateQueue(tc);

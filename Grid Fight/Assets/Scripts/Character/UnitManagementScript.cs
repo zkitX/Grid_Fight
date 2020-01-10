@@ -38,6 +38,7 @@ public class UnitManagementScript : MonoBehaviour
     public SideType Side;
     public WalkingSideType WalkingSide;
     public FacingType Facing;
+
     public bool isAIOn;
     public bool Test = false;
     public BaseCharacter CharOwner;
@@ -50,6 +51,7 @@ public class UnitManagementScript : MonoBehaviour
     public Animator IndicatorAnim;
     public GameObject ArrivingParticle;
     public GameObject DeathParticles;
+    public AttackType CurrentAttackType;
     //Used to decide the side
     public void SetupCharacterSide()
     {

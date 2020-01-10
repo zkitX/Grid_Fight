@@ -66,9 +66,11 @@ public class CharacterBaseInfoClass
     public List<ControllerType> PlayerController = new List<ControllerType>();
     public CharacterNameType CharacterName;
     public WalkingSideType WalkingSide;
+    public AttackType CharAttackType;
+
 
     public CharacterBaseInfoClass(string name, CharacterSelectionType characterSelection,
-        CharacterLevelType characterLevel, List<ControllerType> playerController, CharacterNameType characterName, WalkingSideType walkingSide)
+        CharacterLevelType characterLevel, List<ControllerType> playerController, CharacterNameType characterName, WalkingSideType walkingSide, AttackType charAttackType)
     {
         Name = name;
         CharacterSelection = characterSelection;
@@ -76,5 +78,6 @@ public class CharacterBaseInfoClass
         PlayerController = playerController;
         CharacterName = characterName;
         WalkingSide = walkingSide;
+        CharAttackType = charAttackType;
     }                             
 }                                

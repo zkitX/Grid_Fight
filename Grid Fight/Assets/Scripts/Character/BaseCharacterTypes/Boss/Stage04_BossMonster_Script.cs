@@ -61,7 +61,7 @@ public class Stage04_BossMonster_Script : BaseCharacter
         for (int i = 0; i < 4; i++)
         {
             Stage04_BossMonster_Flower_Script flower = (Stage04_BossMonster_Flower_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(CharacterNameType.Stage04_BossMonster_Minion.ToString(), CharacterSelectionType.A,
-                CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage04_BossMonster_Minion, WalkingSideType.RightSide), transform);
+                CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage04_BossMonster_Minion, WalkingSideType.RightSide, AttackType.Tile), transform);
             BattleManagerScript.Instance.AllCharactersOnField.Add(flower);
             flower.mfType = (MonsterFlowerType)i;
             flower.UMS.Pos = FlowersPos.GetRange(i, 1);
