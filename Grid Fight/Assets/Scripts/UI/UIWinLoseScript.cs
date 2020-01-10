@@ -21,6 +21,7 @@ public class UIWinLoseScript : MonoBehaviour
         InputController.Instance.ButtonLeftUpEvent += ArrowPressed;
         InputController.Instance.ButtonRightUpEvent += ArrowPressed;
         InputController.Instance.ButtonAUpEvent += Selected;
+        InputController.Instance.ButtonPlusUpEvent += Selected;
         InputController.Instance.LeftJoystickUsedEvent += JoystickUsedEvent;
         InputController.Instance.RightJoystickUsedEvent += JoystickUsedEvent;
     }
