@@ -58,7 +58,10 @@ public class BaseCharacter : MonoBehaviour
 
     protected virtual void Start()
     {
-        
+        if(VFXTestMode)
+        {
+            StartAttakCo();
+        }
         BaseBullet = (GameObject)Resources.Load("Prefabs/Bullet/Bullet");
     }
 
@@ -148,7 +151,10 @@ public class BaseCharacter : MonoBehaviour
 
     public void StartAttakCo()
     {
-        UIBattleFieldManager.Instance.SetUIBattleField(this);
+        if(!VFXTestMode)
+        {
+            UIBattleFieldManager.Instance.SetUIBattleField(this);
+        }
         StartCoroutine(AttackAction());
     }
 
@@ -291,7 +297,7 @@ public class BaseCharacter : MonoBehaviour
 
     public void CreateAttack()
     {
-        if(UMS.Facing == FacingType.Right)
+        if(UMS.CurrentAttackType == AttackType.Particles)
         {
             foreach (BulletBehaviourInfoClass item in CharInfo.CurrentParticlesAttackTypeInfo.BulletTrajectories)
             {

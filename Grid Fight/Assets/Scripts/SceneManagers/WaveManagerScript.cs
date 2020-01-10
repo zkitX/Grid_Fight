@@ -117,7 +117,7 @@ public class WaveManagerScript : MonoBehaviour
         {
 
             res = BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(character.CharacterName.ToString(), CharacterSelectionType.A,
-                CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, character.CharacterName, WalkingSideType.RightSide), parent);
+                CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, character.CharacterName, WalkingSideType.RightSide, AttackType.Tile), parent);
             BattleManagerScript.Instance.AllCharactersOnField.Add(res);
             WaveCharcters.Add(res);
         }

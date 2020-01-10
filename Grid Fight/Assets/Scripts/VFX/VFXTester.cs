@@ -15,6 +15,7 @@ public class VFXTester : MonoBehaviour
     public TMPro.TMP_Dropdown ParticleLevel;
     public TMPro.TMP_Dropdown ParticleType;
     public TMPro.TMP_Dropdown CharacterClass;
+    public TMPro.TMP_Dropdown Attack;
     public Slider AttackSpeed;
     public Slider SpeedOfBullets;
     public Slider MountainDelay;
@@ -53,6 +54,12 @@ public class VFXTester : MonoBehaviour
 
         }
 
+        for (int i = 0; i <= Enum.GetValues(typeof(AttackType)).Cast<int>().Last(); i++)
+        {
+            Attack.options.Add(new TMPro.TMP_Dropdown.OptionData(((AttackType)i).ToString()));
+
+        }
+
     }
 
     private void Update()
@@ -76,6 +83,7 @@ public class VFXTester : MonoBehaviour
         GameObject child = Instantiate(Characters.Where(r=> r.CharName.ToString() == CharToUse.options[CharToUse.value].text).First().Char, charOnScene.transform.position, Quaternion.identity, charOnScene.transform);
         BaseCharacter currentCharacter = (BaseCharacter)charOnScene.AddComponent(System.Type.GetType(child.GetComponentInChildren<CharacterInfoScript>().BaseCharacterType.ToString()));
         currentCharacter.UMS = currentCharacter.GetComponent<UnitManagementScript>();
+        currentCharacter.UMS.CurrentAttackType = (AttackType)Enum.Parse(typeof(AttackType), Attack.options[Attack.value].text);
         currentCharacter.UMS.CharOwner = currentCharacter;
         currentCharacter.VFXTestMode = true;
         currentCharacter.UMS.CurrentTilePos = bts.Pos;
