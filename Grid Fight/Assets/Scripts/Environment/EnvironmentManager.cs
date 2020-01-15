@@ -12,10 +12,6 @@ public class EnvironmentManager : MonoBehaviour
     public GridStructureType GridStructure;
     public Camera MainCamera;
     public bool isChangeGridStructure = false;
-    public GameObject ExclamationTarget;
-    public List<GameObject> AllExclamationTargets = new List<GameObject>();
-
-
 
     private void Awake()
     {
@@ -66,14 +62,7 @@ public class EnvironmentManager : MonoBehaviour
             ChangeGridStructure();
         }
     }
-
-
-    public GameObject CreateNewExclamationTarget()
-    {
-        GameObject exclamationT = Instantiate(ExclamationTarget, new Vector3(100,100,100), Quaternion.identity);
-        AllExclamationTargets.Add(exclamationT);
-        return exclamationT;
-    }
+   
 
     public void ChangeGridStructure()
     {

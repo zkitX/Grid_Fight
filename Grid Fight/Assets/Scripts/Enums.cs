@@ -180,6 +180,7 @@ public enum BattleState
     End,
     WinLose,
     Tutorial
+
 }
 
 public enum ElementalType
@@ -276,11 +277,13 @@ public enum BuffDebuffStatsType
 
 public enum WaveStatsType
 {
+    None,
     Health,
     Stamina,
     AttackSpeed,
     MovementSpeed,
     BaseSpeed
+
 }
 
 public enum ValueCheckerType
@@ -349,8 +352,13 @@ public enum BaseCharType
 
 public enum ParticlesType
 {
+    None,
     CharArrivingSmoke,
-    Stage04FlowersSmoke
+    Stage04FlowersSmoke,
+    PowerUp_Damage,
+    PowerUp_Health,
+    PowerUp_Stamina,
+    PowerUp_Speed
 }
 
 public enum AttackParticleTypes
@@ -375,7 +383,8 @@ public enum AttackParticleTypes
     Stage04_BossGirl_Minion = 9,
     Stage04_BossGirl = 10,
     Stage04_BossMonster_Minion = 11,
-    Stage04_BossMonster = 12
+    Stage04_BossMonster = 12,
+    Test_Mesh = 1000
     
 }
 

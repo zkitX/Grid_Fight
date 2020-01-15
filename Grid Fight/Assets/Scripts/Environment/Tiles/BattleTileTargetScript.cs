@@ -37,7 +37,7 @@ public class BattleTileTargetScript : MonoBehaviour
             transform.localScale = new Vector3(1 - timer, 1 - timer, 1);
         }
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private IEnumerator TargetAnim(float duration, AttackParticleTypes atkPS)
@@ -70,6 +70,6 @@ public class BattleTileTargetScript : MonoBehaviour
         {
             target.SetDamage(Damage, Elemental);
         }
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

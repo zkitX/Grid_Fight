@@ -42,7 +42,6 @@ public class BaseCharacter : MonoBehaviour
     public SpineAnimationManager SpineAnim;
     public bool IsOnField = false;
     public bool CanAttack = false;
-    public GameObject BaseBullet;
     public CharacterLevelType NextAttackLevel = CharacterLevelType.Novice;
     public bool isSpecialLoading = false;
     public bool isSpecialFired = false;
@@ -53,16 +52,13 @@ public class BaseCharacter : MonoBehaviour
     public bool isAttackCompletetd = false;
     public UnitManagementScript UMS;
     public BoxCollider CharBoxCollider;
-
-    
-
+    private ScriptableObjectAttackTypeOnBattlefield nextAttack;
     protected virtual void Start()
     {
         if(VFXTestMode)
         {
             StartAttakCo();
         }
-        BaseBullet = (GameObject)Resources.Load("Prefabs/Bullet/Bullet");
     }
 
     protected virtual void Update()
@@ -161,6 +157,7 @@ public class BaseCharacter : MonoBehaviour
     //Basic attack Action that will start the attack anim every x seconds
     public virtual IEnumerator AttackAction()
     {
+        float nextAttackRatioMultiplier = 1;
         while (true)
         {
             while (!CanAttack && !VFXTestMode)
@@ -172,7 +169,7 @@ public class BaseCharacter : MonoBehaviour
             {
                 yield return null;
             }
-
+            nextAttackRatioMultiplier = GetAttackRatio();
             isAttackStarted = false;
             isAttackCompletetd = false;
             isAttackGoing = false;
@@ -193,9 +190,10 @@ public class BaseCharacter : MonoBehaviour
                 yield return null;
             }
 
+            nextAttackRatioMultiplier = GetAttackRatio();
 
             float timer = 0;
-            while (timer <= CharInfo.AttackSpeedRatio)
+            while (timer <= CharInfo.AttackSpeedRatio * nextAttackRatioMultiplier)
             {
                 yield return new WaitForFixedUpdate();
                 while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
@@ -214,21 +212,98 @@ public class BaseCharacter : MonoBehaviour
         }
     }
 
+    private float GetAttackRatio()
+    {
+        if (UMS.CurrentAttackType == AttackType.Particles)
+        {
+            return 1;
+        }
+        else
+        {
+            foreach (ScriptableObjectAttackTypeOnBattlefield atk in CharInfo.CurrentOnBattleFieldAttackTypeInfo)
+            {
+                int chances = Random.Range(0, 101);
+
+                switch (atk.StatToCheck)
+                {
+                    case WaveStatsType.Health:
+                        switch (atk.ValueChecker)
+                        {
+                            case ValueCheckerType.LessThan:
+                                if (CharInfo.HealthPerc < atk.PercToCheck && chances < atk.Chances)
+                                {
+                                    nextAttack = atk;
+                                    return atk.AttackRatioMultiplier;
+                                }
+                                break;
+                            case ValueCheckerType.EqualTo:
+                                if (CharInfo.HealthPerc == atk.PercToCheck && chances < atk.Chances)
+                                {
+                                    nextAttack = atk;
+                                    return atk.AttackRatioMultiplier;
+                                }
+                                break;
+                            case ValueCheckerType.MoreThan:
+                                if (CharInfo.HealthPerc > atk.PercToCheck && chances < atk.Chances)
+                                {
+                                    nextAttack = atk;
+                                    return atk.AttackRatioMultiplier;
+                                }
+                                break;
+                        }
+                        break;
+                    case WaveStatsType.Stamina:
+                        switch (atk.ValueChecker)
+                        {
+                            case ValueCheckerType.LessThan:
+                                if (CharInfo.StaminaPerc < atk.PercToCheck && chances < atk.Chances)
+                                {
+                                    nextAttack = atk;
+                                    return atk.AttackRatioMultiplier;
+                                }
+                                break;
+                            case ValueCheckerType.EqualTo:
+                                if (CharInfo.StaminaPerc == atk.PercToCheck && chances < atk.Chances)
+                                {
+                                    nextAttack = atk;
+                                    return atk.AttackRatioMultiplier;
+                                }
+                                break;
+                            case ValueCheckerType.MoreThan:
+                                if (CharInfo.StaminaPerc > atk.PercToCheck && chances < atk.Chances)
+                                {
+                                    nextAttack = atk;
+                                    return atk.AttackRatioMultiplier;
+                                }
+                                break;
+                        }
+                        break;
+                    case WaveStatsType.None:
+                        nextAttack = atk;
+                        return atk.AttackRatioMultiplier;
+                }
+            }
+
+            return 1;
+        }
+    }
+
+
     public void FireCastParticles()
     {
-        StartCoroutine(CastAttackParticles(NextAttackLevel));
+        StartCoroutine(CastAttackParticles());
     }
 
     //start the casting particlaes foe the attack
-    public IEnumerator CastAttackParticles(CharacterLevelType clt)
+    public IEnumerator CastAttackParticles()
     {
-        GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Cast, clt == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, UMS.Side);
+        GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Cast, NextAttackLevel == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, UMS.Side);
         cast.GetComponent<DisableParticleScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
         LayerParticleSelection lps = cast.GetComponent<LayerParticleSelection>();
         if (lps != null)
         {
-            lps.Shot = clt;
-            if (clt > CharacterLevelType.Novice)
+            lps.Shot = NextAttackLevel;
+            if (NextAttackLevel > CharacterLevelType.Novice)
             {
                 CharInfo.Stamina -= CharInfo.StaminaStats.Stamina_Cost_S_Atk01;
             }
@@ -247,8 +322,9 @@ public class BaseCharacter : MonoBehaviour
     //Create and set up the basic info for the bullet
     public void CreateBullet(BulletBehaviourInfoClass bulletBehaviourInfo)
     {
-        Debug.Log(isSpecialLoading);
-        GameObject bullet = Instantiate(BaseBullet, NextAttackLevel == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, Quaternion.identity);
+       // Debug.Log(isSpecialLoading);
+        GameObject bullet = BulletManagerScript.Instance.GetBullet();
+        bullet.transform.position = NextAttackLevel == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position;
         BulletScript bs = bullet.GetComponent<BulletScript>();
         bs.BulletEffectTiles = bulletBehaviourInfo.BulletEffectTiles;
         bs.Trajectory_Y = bulletBehaviourInfo.Trajectory_Y;
@@ -261,12 +337,9 @@ public class BaseCharacter : MonoBehaviour
         bs.Side = UMS.Side;
         bs.VFXTestMode = VFXTestMode;
         bs.CharInfo = CharInfo;
-       
         
         bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharInfo.ParticleID, AttackParticlePhaseTypes.Attack, bullet.transform, UMS.Side,
             CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script ? true : false);
-
-
         LayerParticleSelection lps = bs.PS.GetComponent<LayerParticleSelection>();
         if (lps != null)
         {
@@ -279,7 +352,7 @@ public class BaseCharacter : MonoBehaviour
             lps.SelectShotLevel();
         }
 
-        if ((UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x > 5) || (UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x < 0))
+        if (!GridManagerScript.Instance.isPosOnFieldByHeight(UMS.CurrentTilePos + bulletBehaviourInfo.BulletDistanceInTile))
         {
             bs.gameObject.SetActive(false);
             return;
@@ -309,7 +382,7 @@ public class BaseCharacter : MonoBehaviour
         }
         else
         {
-            GridManagerScript.Instance.StartOnBattleFieldAttackCo(CharInfo, CharInfo.CurrentOnBattleFieldAttackTypeInfo, UMS.CurrentTilePos, CharInfo.ParticleID);
+            GridManagerScript.Instance.StartOnBattleFieldAttackCo(CharInfo, nextAttack, UMS.CurrentTilePos);
         }
     }
 
@@ -469,10 +542,12 @@ public class BaseCharacter : MonoBehaviour
 
         SetAnimation(CharacterAnimationStateType.Buff);
         GameObject ps = null;
-        if (bdClass.ParticlesToFire != null)
+        if (bdClass.ParticlesToFire != ParticlesType.None)
         {
-            ps = Instantiate(bdClass.ParticlesToFire, transform);
+            ps = ParticleManagerScript.Instance.GetParticle(bdClass.ParticlesToFire);
+            ps.transform.parent = transform;
             ps.transform.localPosition = Vector3.zero;
+            ps.SetActive(true);
         }
         
         float timer = 0;
@@ -604,7 +679,7 @@ public class BaseCharacter : MonoBehaviour
                 break;
         }
 
-        Destroy(ps);
+        ps.SetActive(false);
     }
 
 
@@ -655,12 +730,18 @@ public class BaseCharacter : MonoBehaviour
 
     public virtual void SetAnimation(CharacterAnimationStateType animState)
     {
+        // Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + NextAttackLevel.ToString());
+
+
         float AnimSpeed = 1;
         if (SpineAnim == null)
         {
             SpineAnimatorsetup();
         }
-       // Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + NextAttackLevel.ToString());
+        if (SpineAnim.CurrentAnim.ToString().Contains("Dash"))
+        {
+            return;
+        }
         if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1 && !isSpecialFired)
         {
             return;
@@ -852,11 +933,11 @@ public class Buff_DebuffClass
     public BuffDebuffStatsType Stat;
     public ElementalResistenceClass ElementalResistence;
     public ElementalType ElementalPower;
-    public GameObject ParticlesToFire;
+    public ParticlesType ParticlesToFire;
 
     public Buff_DebuffClass(float duration, float value, BuffDebuffStatsType stat
         , ElementalResistenceClass elementalResistence, ElementalType elementalPower
-        , CharacterAnimationStateType animToFire, GameObject particlesToFire = null)
+        , CharacterAnimationStateType animToFire, ParticlesType particlesToFire)
     {
         Duration = duration;
         Value = value;

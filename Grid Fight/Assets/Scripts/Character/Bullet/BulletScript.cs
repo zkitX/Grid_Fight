@@ -19,7 +19,6 @@ public class BulletScript : MonoBehaviour
     public bool Dead = false;
     public GameObject PS;
     public GameObject TargetIndicator;
-    public List<GameObject> UsedTargets = new List<GameObject>();
     public CharacterLevelType attackLevel;
     public bool VFXTestMode = false;
     public AnimationCurve Trajectory_Y;
@@ -32,44 +31,11 @@ public class BulletScript : MonoBehaviour
     //Private 
     private BattleTileScript bts;
 
-    private void Update()
-    {
-
-        //Stop the bullet when the match ended
-        /* if(BattleManagerScript.Instance.CurrentBattleState == BattleState.End)
-         {
-             StartCoroutine(SelfDeactivate(0));
-         }*/
-    }
-
-    //Self deactivation method with a delay parameter
-    public IEnumerator SelfDeactivate(float delay)
-	{
-		float timer = 0;
-		while (timer < delay && !Dead)
-        {
-			timer += Time.fixedDeltaTime;
-			yield return new WaitForFixedUpdate();
-            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.End)
-            {
-				yield return new WaitForFixedUpdate();
-            }
-        }
-        foreach (ParticleSystem item in GetComponentsInChildren<ParticleSystem>())
-        {
-            item.time = 0;
-        }
-		
-        Dead = true;
-        StopAllCoroutines();
-        gameObject.SetActive(false);
-    }
-
     private void OnEnable()
     {
         //On enabled setup the collision avoidance for determinated layers 
         Physics.IgnoreLayerCollision(Side == SideType.LeftSide ? 9 : 10, Side == SideType.LeftSide ? 11 : 12);
-        
+        Dead = false;
     }
 
     public void StartMoveToTile()
@@ -120,8 +86,8 @@ public class BulletScript : MonoBehaviour
             if (timer > 1)
             {
                 isMoving = false;
-                FireEffectParticles(bts.transform.position, BulletEffectTiles.Count == 1 ? true : false);
                 StartCoroutine(ChildExplosion(BulletEffectTiles.Where(r=> r != Vector2Int.zero).ToList()));
+                FireEffectParticles(bts.transform.position, BulletEffectTiles.Count == 1 ? true : false);
             }
         }
     }
@@ -132,8 +98,8 @@ public class BulletScript : MonoBehaviour
         if (CharInfo.ClassType != CharacterClassType.Mountain)
         {
             int startingYTile = Facing == FacingType.Left ? StartingTile.y - BulletGapStartingTile.y : StartingTile.y + BulletGapStartingTile.y;
-            GameObject go;
-            go = Instantiate(TargetIndicator, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position, Quaternion.identity);
+            GameObject go = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Particles);
+            go.transform.position = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position;
             go.GetComponent<BattleTileTargetScript>().StartTarget(
                 (Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position) * CharInfo.BulletSpeed) /
                 Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position));
@@ -153,9 +119,10 @@ public class BulletScript : MonoBehaviour
                     bts = GridManagerScript.Instance.GetBattleTile(DestinationTile + item, Facing == FacingType.Left ? WalkingSideType.LeftSide : WalkingSideType.RightSide);
                     if (bts != null)
                     {
-                        GameObject go = Instantiate(TargetIndicator, bts.transform.position, Quaternion.identity);
+
+                        GameObject go = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Particles);
+                        go.transform.position = bts.transform.position;
                         go.GetComponent<BattleTileTargetScript>().StartTarget(duration);
-                        UsedTargets.Add(go);
                     }
                 }
             }
@@ -200,10 +167,7 @@ public class BulletScript : MonoBehaviour
                 FireEffectParticles(GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position
                     + dest, i == bet.Count - 1 ? true : false);
             }
-
-            
         }
-
     }
 
 
@@ -219,47 +183,6 @@ public class BulletScript : MonoBehaviour
         }
     }
 
-
-    //Move the bullet on a straight movement 
-    public IEnumerator MoveToWorldPos()
-    {
-        vfx = GetComponentInChildren<VFXBulletSpeedController>();
-        if (vfx != null)
-        {
-            vfx.BulletTargetTime = CharInfo.BulletSpeed;
-            vfx.ApplyTargetTime();
-        }
-        //setup the base offset for the movement
-        Vector3 offset = transform.position;
-        //Timer used to set up the coroutine
-        float timer = 0;
-        Vector3 res;
-       // float Duration = Vector3.Distance(transform.position, DestinationWorld) / CharInfo.BulletSpeed;
-        while (!Dead)
-        {
-
-            yield return new WaitForFixedUpdate();
-            //In case the game ended or in pause I will block the movement
-            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.End))
-            {
-                yield return new WaitForFixedUpdate();
-            }
-            //Calutation for next world position of the bullet
-            res = Vector3.Lerp(offset, DestinationWorld, timer);
-
-            res.y = Trajectory_Y.Evaluate(timer) + res.y;
-            res.z = Trajectory_Z.Evaluate(timer) + res.z;
-
-            transform.position = res;
-            timer += Time.fixedDeltaTime / CharInfo.BulletSpeed;
-            //if timer ended the bullet fire the Effect
-            if (timer > 1)
-            {
-               
-                FireEffectParticles(transform.position, true);
-            }
-        }
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -288,16 +211,12 @@ public class BulletScript : MonoBehaviour
             }
             if(destroyBullet)
             {
-                foreach (GameObject item in UsedTargets)
-                {
-                    Destroy(item);
-                }
                 PS.GetComponent<DisableParticleScript>().ResetParticle();
                 PS.SetActive(false);
                 PS.transform.parent = null;
                 Dead = true;
                 StopAllCoroutines();
-                Destroy(this.gameObject);
+                gameObject.SetActive(false);
             }
                 
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class UIBattleFieldScript : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class UIBattleFieldScript : MonoBehaviour
     private Image CharacterStaminaBar;
     private Camera mCamera;
     public Canvas CanvasParent;
+    private Dictionary<int, GameObject> Damages = new Dictionary<int, GameObject>();
+    private Dictionary<int, GameObject> Healings = new Dictionary<int, GameObject>();
     public GameObject Damage;
     public GameObject Healing;
     // Start is called before the first frame update
@@ -53,10 +56,15 @@ public class UIBattleFieldScript : MonoBehaviour
 
     private IEnumerator HealingCo(float heal)
     {
-        GameObject h = Instantiate(Healing, transform);
+        GameObject h = Healings.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
+        if (h == null)
+        {
+            h = Instantiate(Healing, transform);
+        }
+        h.SetActive(true);
         h.GetComponent<TextMeshProUGUI>().text = ((int)(heal * 100)).ToString();
         yield return new WaitForSecondsRealtime(2);
-        Destroy(h);
+        h.SetActive(false);
     }
 
     private void CharOwner_DamageReceivedEvent(float damage)
@@ -66,9 +74,14 @@ public class UIBattleFieldScript : MonoBehaviour
 
     private IEnumerator DamageCo(float damage)
     {
-        GameObject d = Instantiate(Damage, transform);
+        GameObject d = Damages.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
+        if (d == null)
+        {
+            d = Instantiate(Damage, transform);
+        }
+        d.SetActive(true);
         d.GetComponent<TextMeshProUGUI>().text = ((int)(damage * 100)).ToString();
         yield return new WaitForSecondsRealtime(2);
-        Destroy(d);
+        d.SetActive(false);
     }
 }

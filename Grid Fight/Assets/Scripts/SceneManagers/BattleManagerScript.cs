@@ -257,8 +257,6 @@ public class BattleManagerScript : MonoBehaviour
                 UIBattleManager.Instance.StartTimeUp(15, side);
             }
         }
-       
-
     }
 
     #endregion
@@ -398,6 +396,7 @@ public class BattleManagerScript : MonoBehaviour
             SetCharOnBoardOnRandomPos(playerController, cName);
         }
     }
+
     //Load char in a fixed pos
     private IEnumerator CharacterLoadingInFixedPosition(CharacterNameType cName, ControllerType playerController, Vector2Int pos)
     {

@@ -71,7 +71,12 @@ public class GridManagerScript : MonoBehaviour
 
     public bool isPosOnField(Vector2Int pos)
     {
-        return BattleTiles.Where(r => r.Pos == pos).ToList().Count > 0 ? true : false;
+        return BattleTiles.Where(r => r.Pos == pos && r.BattleTileState > BattleTileStateType.Blocked).ToList().Count > 0 ? true : false;
+    }
+
+    public bool isPosOnFieldByHeight(Vector2Int pos)
+    {
+        return BattleTiles.Where(r => r.Pos.x == pos.x && r.BattleTileState != BattleTileStateType.Blocked).ToList().Count > 0 ? true : false;
     }
 
     public SideType GetSideTypeFromControllerType(ControllerType ct)
@@ -247,12 +252,10 @@ public class GridManagerScript : MonoBehaviour
         return null;
     }
 
-    public void StartOnBattleFieldAttackCo(CharacterInfoScript cInfo, ScriptableObjectAttackTypeOnBattlefield atk, Vector2Int basePos, AttackParticleTypes atkPS)
+    public void StartOnBattleFieldAttackCo(CharacterInfoScript cInfo, ScriptableObjectAttackTypeOnBattlefield atk, Vector2Int basePos)
     {
-        if (!atk.IsAttackStartingFromCharacter)
-        {
-            basePos.y = YGridSeparator;
-        }
+        basePos.y = YGridSeparator;
+        
         foreach (BulletBehaviourInfoClassOnBattleField item in atk.BulletTrajectories)
         {
             foreach (Vector2Int target in item.BulletEffectTiles)
@@ -262,25 +265,17 @@ public class GridManagerScript : MonoBehaviour
                     BattleTileScript bts = GetBattleTile(basePos - target);
                     if(bts._BattleTileState != BattleTileStateType.Blocked)
                     {
-                        bts.BattleTargetScript.SetAttack(item.Delay, atkPS, basePos - target, cInfo.DamageStats.CurrentDamage, cInfo.Elemental);
+                        bts.BattleTargetScript.SetAttack(item.Delay, atk.ParticlesID, basePos - target, cInfo.DamageStats.CurrentDamage * atk.DamageMultiplier, cInfo.Elemental);
                     }
-                   /* GameObject go;
-                    go = Instantiate(TargetIndicator, GetBattleTile(basePos - target).transform.position, Quaternion.identity);
-                    go.GetComponent<BattleTileTargetScript>().StartTarget(item.Delay, atkPS, basePos - target, cInfo.DamageStats.CurrentDamage, cInfo.Elemental);*/
                 }
             }
         }
-
-        //StartCoroutine(OnBattleFieldAttackCo(cInfo, atk, basePos, atkPS));
     }
 
 
     public IEnumerator OnBattleFieldAttackCo(CharacterInfoScript cInfo, ScriptableObjectAttackTypeOnBattlefield atk, Vector2Int basePos, AttackParticleTypes atkPS)
     {
-        if(!atk.IsAttackStartingFromCharacter)
-        {
-            basePos.y = YGridSeparator;
-        }
+        basePos.y = YGridSeparator;
         foreach (BulletBehaviourInfoClassOnBattleField item in atk.BulletTrajectories)
         {
             float timer = 0;

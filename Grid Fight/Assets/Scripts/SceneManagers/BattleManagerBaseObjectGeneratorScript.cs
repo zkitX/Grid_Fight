@@ -20,12 +20,6 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
         StartCoroutine(LevelLoader(LoaderManagerScript.Instance != null ? 1 : 0.2f));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private IEnumerator LevelLoader(float duration)
     {
         yield return new WaitForSecondsRealtime(duration);

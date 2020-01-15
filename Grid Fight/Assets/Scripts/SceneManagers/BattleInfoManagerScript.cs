@@ -12,7 +12,7 @@ public class BattleInfoManagerScript : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
     }
     /*
       PvE,

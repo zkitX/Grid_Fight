@@ -10,11 +10,7 @@ public class BattleTileTargetsScript : MonoBehaviour
 
     public void SetAttack(float duration, AttackParticleTypes atkPS, Vector2Int pos, float damage, ElementalType ele)
     {
-        GameObject nextT = EnvironmentManager.Instance.AllExclamationTargets.Where(r => !r.gameObject.activeInHierarchy).FirstOrDefault();
-        if(nextT == null)
-        {
-            nextT = EnvironmentManager.Instance.CreateNewExclamationTarget();
-        }
+        GameObject nextT = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Tile);
         nextT.SetActive(true);
         TargetClass tc = new TargetClass(duration, nextT);
         nextT.transform.parent = transform;

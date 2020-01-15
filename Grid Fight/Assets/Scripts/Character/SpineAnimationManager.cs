@@ -110,7 +110,7 @@ public class SpineAnimationManager : MonoBehaviour
         {
             SpineAnimationState.SetAnimation(1, anim.ToString(), anim == CharacterAnimationStateType.Death || anim.ToString().Contains("Idle") ? true : false).MixDuration = AnimationTransition;
         }
-        Debug.Log(CurrentAnim.ToString());
+        //Debug.Log(CurrentAnim.ToString());
         CurrentAnim = anim;
     }
 

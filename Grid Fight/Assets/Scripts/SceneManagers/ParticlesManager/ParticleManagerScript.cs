@@ -11,15 +11,49 @@ public class ParticleManagerScript : MonoBehaviour
     public List<FiredAttackParticle> AttackParticlesFired = new List<FiredAttackParticle>();
     public List<FiredParticle> ParticlesFired = new List<FiredParticle>();
     bool isTheGamePaused = false;
-
+    public Transform Container;
 
     private void Awake()
 	{
 		Instance = this;
 	}
 
-	public GameObject FireParticlesInPosition(AttackParticleTypes pType, AttackParticlePhaseTypes ParticleType, Vector3 pos, SideType side)
+    private void Start()
+    {
+        BattleManagerScript.Instance.CurrentBattleStateChangedEvent += Instance_CurrentBattleStateChangedEvent;
+    }
+
+    private void Instance_CurrentBattleStateChangedEvent(BattleState currentBattleState)
+    {
+        if (currentBattleState == BattleState.Pause && !isTheGamePaused)
+        {
+            isTheGamePaused = true;
+            foreach (var item in AttackParticlesFired.Where(r => r.PS.activeInHierarchy).ToList())
+            {
+                foreach (ParticleSystem ps in item.PS.GetComponentsInChildren<ParticleSystem>())
+                {
+                    var main = ps.main;
+                    main.simulationSpeed = 0;
+                }
+            }
+        }
+        else if (isTheGamePaused && currentBattleState == BattleState.Battle)
+        {
+            isTheGamePaused = false;
+            foreach (var item in AttackParticlesFired.Where(r => r.PS.activeInHierarchy).ToList())
+            {
+                foreach (ParticleSystem ps in item.PS.GetComponentsInChildren<ParticleSystem>())
+                {
+                    var main = ps.main;
+                    main.simulationSpeed = 1;
+                }
+            }
+        }
+    }
+
+    public GameObject FireParticlesInPosition(AttackParticleTypes pType, AttackParticlePhaseTypes ParticleType, Vector3 pos, SideType side)
 	{
+        //pType = AttackParticleTypes.Test_Mesh;
         FiredAttackParticle psToFire = AttackParticlesFired.Where(r => r.ParticleType == ParticleType && r.AttackParticle == pType && !r.PS.gameObject.activeInHierarchy).FirstOrDefault();
         if (psToFire != null)
 		{
@@ -43,7 +77,7 @@ public class ParticleManagerScript : MonoBehaviour
                     ps = ListOfAttckParticles.Where(r => r.PSType == pType).First().EffectPS;
                     break;
             }
-            GameObject go = Instantiate(ps, pos, Quaternion.identity);
+            GameObject go = Instantiate(ps, pos, Quaternion.identity, Container);
             go.transform.localScale = side == SideType.RightSide ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
             go.SetActive(true);
 			AttackParticlesFired.Add(new FiredAttackParticle(go, pType, ParticleType));
@@ -54,13 +88,14 @@ public class ParticleManagerScript : MonoBehaviour
 
     public GameObject FireParticlesInTransform(AttackParticleTypes pType, AttackParticlePhaseTypes ParticleType, Transform parent, SideType side, bool particlesVisible)
     {
+        //pType = AttackParticleTypes.Test_Mesh;
         FiredAttackParticle psToFire = AttackParticlesFired.Where(r => r.ParticleType == ParticleType && r.AttackParticle == pType && !r.PS.gameObject.activeInHierarchy).FirstOrDefault();
         if (psToFire != null)
         {
             psToFire.PS.transform.parent = parent;
             psToFire.PS.transform.localPosition = Vector3.zero;
             psToFire.PS.transform.localScale = side == SideType.RightSide ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
-            psToFire.PS.SetActive(particlesVisible);
+            psToFire.PS.SetActive(particlesVisible);//particlesVisible
             return psToFire.PS;
         }
         else
@@ -81,43 +116,11 @@ public class ParticleManagerScript : MonoBehaviour
             GameObject go = Instantiate(ps, parent.position, parent.rotation, parent);
             go.transform.localPosition = Vector3.zero;
             go.transform.localScale = side == SideType.RightSide ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
-            go.SetActive(particlesVisible);
+            go.SetActive(particlesVisible);//particlesVisible
             AttackParticlesFired.Add(new FiredAttackParticle(go, pType, ParticleType));
             return go;
         }
     }
-
-
-    private void Update()
-	{
-        if (BattleManagerScript.Instance != null)
-        {
-            if (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause && !isTheGamePaused)
-            {
-                isTheGamePaused = true;
-                foreach (var item in AttackParticlesFired.Where(r => r.PS.activeInHierarchy).ToList())
-                {
-                    foreach (ParticleSystem ps in item.PS.GetComponentsInChildren<ParticleSystem>())
-                    {
-                        var main = ps.main;
-                        main.simulationSpeed = 0;
-                    }
-                }
-            }
-            else if (isTheGamePaused && BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle)
-            {
-                isTheGamePaused = false;
-                foreach (var item in AttackParticlesFired.Where(r => r.PS.activeInHierarchy).ToList())
-                {
-                    foreach (ParticleSystem ps in item.PS.GetComponentsInChildren<ParticleSystem>())
-                    {
-                        var main = ps.main;
-                        main.simulationSpeed = 1;
-                    }
-                }
-            }
-        }
-	}
 
 
     public GameObject GetParticle(ParticlesType particle)
