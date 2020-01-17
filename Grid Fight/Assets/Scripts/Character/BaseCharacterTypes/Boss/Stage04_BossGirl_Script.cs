@@ -39,15 +39,25 @@ public class Stage04_BossGirl_Script : BaseCharacter
 
     private IEnumerator SetUpEnteringOnBattle_Co()
     {
+        BattleManagerScript.Instance.CurrentBattleState = BattleState.Event;
 
         foreach (VFXOffsetToTargetVOL item in GetComponentsInChildren<VFXOffsetToTargetVOL>())
         {
             TargetControllerList.Add(item);
         }
 
-        SetAnimation(CharacterAnimationStateType.Idle);
+        SetAnimation(CharacterAnimationStateType.Arriving);
         SetAttackReady(true);
-        yield return new WaitForSecondsRealtime(3);
+        float timer = 0;
+        while (timer <= 3)
+        {
+            yield return new WaitForFixedUpdate();
+            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Event))
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            timer += Time.fixedDeltaTime;
+        }
 
         for (int i = 0; i < 4; i++)
         {
@@ -67,6 +77,18 @@ public class Stage04_BossGirl_Script : BaseCharacter
             TargetControllerList[i].transform.localPosition = Vector3.zero;
         }
         StartAttakCo();
+        timer = 0;
+        while (timer <= 3)
+        {
+            yield return new WaitForFixedUpdate();
+            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Event))
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            timer += Time.fixedDeltaTime;
+        }
+
+        BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
     }
 
     private void Flower_CurrentCharIsRebornEvent(CharacterNameType cName, List<ControllerType> playerController, SideType side)
@@ -115,7 +137,7 @@ public class Stage04_BossGirl_Script : BaseCharacter
         if(SpineAnim.CurrentAnim != CharacterAnimationStateType.Death)
         {
             CameraManagerScript.Instance.CameraShake();
-            BattleManagerScript.Instance.CurrentBattleState = BattleState.Pause;
+            BattleManagerScript.Instance.CurrentBattleState = BattleState.Event;
             ParticleManagerScript.Instance.AttackParticlesFired.ForEach(r => r.PS.SetActive(false));
             ParticleManagerScript.Instance.ParticlesFired.ForEach(r => r.PS.SetActive(false));
             StartCoroutine(DeathStasy());
@@ -126,10 +148,10 @@ public class Stage04_BossGirl_Script : BaseCharacter
     {
         float timer = 0;
         SetAnimation(CharacterAnimationStateType.Death);
-        while (timer < 5)
+        while (timer < 7f)
         {
             yield return new WaitForFixedUpdate();
-            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Pause)
+            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Event)
             {
                 yield return new WaitForFixedUpdate();
             }
@@ -148,19 +170,18 @@ public class Stage04_BossGirl_Script : BaseCharacter
         while (timer < 3)
         {
             yield return new WaitForFixedUpdate();
-            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Pause)
+            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Event)
             {
                 yield return new WaitForFixedUpdate();
             }
 
             timer += Time.fixedDeltaTime;
         }
-        BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         base.SetCharDead();
     }
 
-    public override IEnumerator AttackAction()
+   /* public override IEnumerator AttackAction()
     {
         while (true)
         {
@@ -213,7 +234,7 @@ public class Stage04_BossGirl_Script : BaseCharacter
                 timer += Time.fixedDeltaTime;
             }
         }
-    }
+    }*/
 
     public override void SetDamage(float damage, ElementalType elemental)
     {

@@ -100,7 +100,7 @@ public class VFXTester : MonoBehaviour
         currentCharacter.CharInfo.ClassType = (CharacterClassType)Enum.Parse(typeof(CharacterClassType), CharacterClass.options[CharacterClass.value].text);
         currentCharacter.CharInfo.BulletSpeed = SpeedOfBullets.value;
         currentCharacter.CharInfo.ParticleID = currentCharacter.CharInfo.ParticleID;
-        currentCharacter.CharInfo.CurrentParticlesAttackTypeInfo = AttacksTypeInfo.Where(r => r.CharacterClass == currentCharacter.CharInfo.ClassType).First();
+        currentCharacter.CharInfo.CurrentParticlesAttackTypeInfo = AttacksTypeInfo.Where(r => r.CharacterClass == currentCharacter.CharInfo.ClassType).ToList();
         currentCharacter.CharInfo.DamageStats.ChildrenBulletDelay = MountainDelay.value;
     }
 }

@@ -89,12 +89,14 @@ public class ModeSelectionManager : MonoBehaviour
         InputController.Instance.LeftJoystickUsedEvent += Instance_LeftJoystickUsedEvent;
         InputController.Instance.RightJoystickUsedEvent += Instance_RightJoystickUsedEvent;
         #endregion
+
+
     }
     public void SetMode(int v)
     {
         
         BattleInfoManagerScript.Instance.MatchInfoType = (MatchType)v;
-        InputController.Instance.Applet((MatchType)v == MatchType.PvE ? 1 : (MatchType)v == MatchType.PPvPP ? 4 : 2);
+        InputController.Instance.Applet((MatchType)v == MatchType.PvE ? 1 : (MatchType)v == MatchType.PPvPP ? 4 : 2); 
     }
 
     public void GoToBattle()

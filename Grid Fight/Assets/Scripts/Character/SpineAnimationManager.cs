@@ -36,9 +36,6 @@ public class SpineAnimationManager : MonoBehaviour
         }
     }
 
-
-
-
     //Used to get spine event
     private void SpineAnimationState_Event(Spine.TrackEntry trackEntry, Spine.Event e)
     {
@@ -48,11 +45,26 @@ public class SpineAnimationManager : MonoBehaviour
         }
         if (e.Data.Name.Contains("FireCastParticle"))
         {
+            if (CurrentAnim == CharacterAnimationStateType.Atk)
+            {
+                CharOwner.currentAttackPhase = AttackPhasesType.Cast;
+            }
+            else
+            {
+                CharOwner.currentSpecialAttackPhase = AttackPhasesType.Cast;
+            }
             CharOwner.FireCastParticles();
         }
         if (e.Data.Name.Contains("FireBulletParticle"))
         {
-            CharOwner.isAttackCompletetd = true;
+            if(CurrentAnim == CharacterAnimationStateType.Atk)
+            {
+                CharOwner.currentAttackPhase = AttackPhasesType.Bullet;
+            }
+            else
+            {
+                CharOwner.currentSpecialAttackPhase = AttackPhasesType.Bullet;
+            }
             CharOwner.CharInfo.Stamina -= CharOwner.CharInfo.StaminaStats.Stamina_Cost_Atk;
             CharOwner.CreateAttack();
            
@@ -68,7 +80,7 @@ public class SpineAnimationManager : MonoBehaviour
     //Method fired when an animation is complete
     private void SpineAnimationState_Complete(Spine.TrackEntry trackEntry)
     {
-      // Debug.Log(skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name);
+       //Debug.Log(skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name + "   " + CurrentAnim.ToString());
         if (skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name == "<empty>")
         {
             return;
@@ -84,12 +96,53 @@ public class SpineAnimationManager : MonoBehaviour
             return;
         }
 
-        if(completedAnim != CharacterAnimationStateType.Idle)
+        if (completedAnim == CharacterAnimationStateType.Atk1_IdleToAtk && CurrentAnim == CharacterAnimationStateType.Atk1_IdleToAtk)
+        {
+            ((CharacterType_Script)CharOwner).SpecialAttackLoop();
+            return;
+        }
+      
+        if (completedAnim == CharacterAnimationStateType.Atk1_Loop &&
+                CurrentAnim == CharacterAnimationStateType.Atk1_Loop)
+        {
+            if(((CharacterType_Script)CharOwner).Atk1Queueing)
+            {
+                ((CharacterType_Script)CharOwner).SpecialAttackLoop();
+            }
+            else
+            {
+                SetAnim(CharacterAnimationStateType.Atk1_AtkToIdle);
+            }
+            return;
+        }
+
+        if (completedAnim == CharacterAnimationStateType.Atk)
+        {
+            CharOwner.currentAttackPhase = AttackPhasesType.End;
+        }
+        if (completedAnim == CharacterAnimationStateType.Atk1_AtkToIdle)
+        {
+            CharOwner.currentSpecialAttackPhase = AttackPhasesType.End;
+        }
+
+
+        if (completedAnim != CharacterAnimationStateType.Idle)
         {
             SetAnimationSpeed(CharOwner.CharInfo.BaseSpeed);
             SpineAnimationState.AddEmptyAnimation(1,AnimationTransition,0);
+            //Debug.Log("Idle --- ");
             CurrentAnim = CharacterAnimationStateType.Idle;
         }
+    }
+
+
+    public void SpeialAtkTest()
+    {
+        Debug.Log("Test");
+        float timer = skeletonAnimation.state.GetCurrent(1).AnimationTime;
+        SpineAnimationState.SetAnimation(1, CharacterAnimationStateType.Atk1_IdleToAtk.ToString(), false);
+        skeletonAnimation.state.GetCurrent(1).AnimationStart = timer;
+        CurrentAnim = CharacterAnimationStateType.Atk1_IdleToAtk;
     }
 
 
@@ -110,7 +163,7 @@ public class SpineAnimationManager : MonoBehaviour
         {
             SpineAnimationState.SetAnimation(1, anim.ToString(), anim == CharacterAnimationStateType.Death || anim.ToString().Contains("Idle") ? true : false).MixDuration = AnimationTransition;
         }
-        //Debug.Log(CurrentAnim.ToString());
+        //Debug.Log(CurrentAnim.ToString() + "  --- ");
         CurrentAnim = anim;
     }
 

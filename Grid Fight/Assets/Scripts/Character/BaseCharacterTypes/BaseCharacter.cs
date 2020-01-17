@@ -44,15 +44,16 @@ public class BaseCharacter : MonoBehaviour
     public bool CanAttack = false;
     public CharacterLevelType NextAttackLevel = CharacterLevelType.Novice;
     public bool isSpecialLoading = false;
-    public bool isSpecialFired = false;
+    public bool isSpecialQueueing = false;
     public List<CurrentBuffsDebuffsClass> BuffsDebuffs = new List<CurrentBuffsDebuffsClass>();
     public bool VFXTestMode = false;
-    public bool isAttackStarted = false;
-    public bool isAttackGoing = false;
-    public bool isAttackCompletetd = false;
     public UnitManagementScript UMS;
     public BoxCollider CharBoxCollider;
-    private ScriptableObjectAttackTypeOnBattlefield nextAttack;
+    private ScriptableObjectAttackBase nextAttack = null;
+    public AttackPhasesType currentAttackPhase = AttackPhasesType.End;
+    public AttackPhasesType currentSpecialAttackPhase = AttackPhasesType.End;
+
+
     protected virtual void Start()
     {
         if(VFXTestMode)
@@ -157,43 +158,37 @@ public class BaseCharacter : MonoBehaviour
     //Basic attack Action that will start the attack anim every x seconds
     public virtual IEnumerator AttackAction()
     {
-        float nextAttackRatioMultiplier = 1;
         while (true)
         {
-            while (!CanAttack && !VFXTestMode)
+            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || isSpecialLoading || !CanAttack || isMoving ||
+                (currentSpecialAttackPhase != AttackPhasesType.End))
             {
                 yield return null;
             }
-
-            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || isMoving || isSpecialLoading))
+            if(nextAttack == null)
             {
-                yield return null;
+                GetAttack(CharacterAnimationStateType.Atk);
             }
-            nextAttackRatioMultiplier = GetAttackRatio();
-            isAttackStarted = false;
-            isAttackCompletetd = false;
-            isAttackGoing = false;
-            while (!isAttackCompletetd && !isSpecialLoading)
-            {
-                if (!isAttackStarted)
-                {
-                    isAttackStarted = true;
-                    isAttackGoing = true;
-                    SetAnimation(CharacterAnimationStateType.Atk);
-                }
 
-                if (isAttackStarted && !isAttackGoing && !isMoving)
+            SetAnimation(nextAttack.Anim);
+
+            while (currentAttackPhase == AttackPhasesType.Start)
+            {
+                while (SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk)
                 {
-                    isAttackGoing = true;
-                    SetAnimation(CharacterAnimationStateType.Atk);
+                    yield return null;
+                    if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle && !isMoving)
+                    {
+                        SetAnimation(nextAttack.Anim);
+                    }
                 }
                 yield return null;
             }
 
-            nextAttackRatioMultiplier = GetAttackRatio();
+            GetAttack(CharacterAnimationStateType.Atk);
 
             float timer = 0;
-            while (timer <= CharInfo.AttackSpeedRatio * nextAttackRatioMultiplier)
+            while (timer <= CharInfo.AttackSpeedRatio * nextAttack.AttackRatioMultiplier)
             {
                 yield return new WaitForFixedUpdate();
                 while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
@@ -212,11 +207,19 @@ public class BaseCharacter : MonoBehaviour
         }
     }
 
-    private float GetAttackRatio()
+    private void GetAttack(CharacterAnimationStateType anim = CharacterAnimationStateType.NoMesh)
     {
         if (UMS.CurrentAttackType == AttackType.Particles)
         {
-            return 1;
+            switch (anim)
+            {
+                case CharacterAnimationStateType.Atk:
+                    nextAttack = CharInfo.CurrentParticlesAttackTypeInfo[0];
+                    break;
+                case CharacterAnimationStateType.Atk1:
+                    nextAttack = CharInfo.CurrentParticlesAttackTypeInfo[1];
+                    break;
+            }
         }
         else
         {
@@ -233,21 +236,18 @@ public class BaseCharacter : MonoBehaviour
                                 if (CharInfo.HealthPerc < atk.PercToCheck && chances < atk.Chances)
                                 {
                                     nextAttack = atk;
-                                    return atk.AttackRatioMultiplier;
                                 }
                                 break;
                             case ValueCheckerType.EqualTo:
                                 if (CharInfo.HealthPerc == atk.PercToCheck && chances < atk.Chances)
                                 {
                                     nextAttack = atk;
-                                    return atk.AttackRatioMultiplier;
                                 }
                                 break;
                             case ValueCheckerType.MoreThan:
                                 if (CharInfo.HealthPerc > atk.PercToCheck && chances < atk.Chances)
                                 {
                                     nextAttack = atk;
-                                    return atk.AttackRatioMultiplier;
                                 }
                                 break;
                         }
@@ -259,44 +259,40 @@ public class BaseCharacter : MonoBehaviour
                                 if (CharInfo.StaminaPerc < atk.PercToCheck && chances < atk.Chances)
                                 {
                                     nextAttack = atk;
-                                    return atk.AttackRatioMultiplier;
                                 }
                                 break;
                             case ValueCheckerType.EqualTo:
                                 if (CharInfo.StaminaPerc == atk.PercToCheck && chances < atk.Chances)
                                 {
                                     nextAttack = atk;
-                                    return atk.AttackRatioMultiplier;
                                 }
                                 break;
                             case ValueCheckerType.MoreThan:
                                 if (CharInfo.StaminaPerc > atk.PercToCheck && chances < atk.Chances)
                                 {
                                     nextAttack = atk;
-                                    return atk.AttackRatioMultiplier;
                                 }
                                 break;
                         }
                         break;
                     case WaveStatsType.None:
                         nextAttack = atk;
-                        return atk.AttackRatioMultiplier;
+                        break;
                 }
             }
-
-            return 1;
         }
     }
 
 
     public void FireCastParticles()
     {
-        StartCoroutine(CastAttackParticles());
+        CastAttackParticles();
     }
 
     //start the casting particlaes foe the attack
-    public IEnumerator CastAttackParticles()
+    public void CastAttackParticles()
     {
+        Debug.Log("Cast");
         GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Cast, NextAttackLevel == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, UMS.Side);
         cast.GetComponent<DisableParticleScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
         LayerParticleSelection lps = cast.GetComponent<LayerParticleSelection>();
@@ -309,11 +305,26 @@ public class BaseCharacter : MonoBehaviour
             }
             lps.SelectShotLevel();
         }
-        while (!isAttackCompletetd)
+
+        StartCoroutine(CastingLifeChecker(NextAttackLevel > CharacterLevelType.Novice ? true : false, cast));
+    }
+
+    private IEnumerator CastingLifeChecker(bool isASpecial, GameObject cast)
+    {
+        bool complete = false;
+
+        while (!complete)
         {
-            if (!isAttackGoing)
+            if ((currentAttackPhase == AttackPhasesType.Start && !isASpecial) ||
+                (currentSpecialAttackPhase == AttackPhasesType.Start && isASpecial))
             {
                 cast.GetComponentsInChildren<DisableParticleScript>().ToList().ForEach(r => r.ResetParticle());
+                complete = true;
+            }
+            else if((currentAttackPhase == AttackPhasesType.End && !isASpecial) ||
+                (currentSpecialAttackPhase == AttackPhasesType.End && isASpecial))
+            {
+                complete = true;
             }
             yield return null;
         }
@@ -343,10 +354,6 @@ public class BaseCharacter : MonoBehaviour
         LayerParticleSelection lps = bs.PS.GetComponent<LayerParticleSelection>();
         if (lps != null)
         {
-            if(NextAttackLevel > CharacterLevelType.Novice)
-            {
-                isSpecialFired = false;
-            }
             bs.attackLevel = NextAttackLevel;
             lps.Shot = NextAttackLevel;
             lps.SelectShotLevel();
@@ -375,14 +382,14 @@ public class BaseCharacter : MonoBehaviour
     {
         if(UMS.CurrentAttackType == AttackType.Particles)
         {
-            foreach (BulletBehaviourInfoClass item in CharInfo.CurrentParticlesAttackTypeInfo.BulletTrajectories)
+            foreach (BulletBehaviourInfoClass item in ((ScriptableObjectAttackType)nextAttack).BulletTrajectories)
             {
                 CreateBullet(item);
             }
         }
         else
         {
-            GridManagerScript.Instance.StartOnBattleFieldAttackCo(CharInfo, nextAttack, UMS.CurrentTilePos);
+            GridManagerScript.Instance.StartOnBattleFieldAttackCo(CharInfo, ((ScriptableObjectAttackTypeOnBattlefield)nextAttack), UMS.CurrentTilePos);
         }
     }
 
@@ -391,9 +398,9 @@ public class BaseCharacter : MonoBehaviour
     #region Move
     public virtual void MoveCharOnDirection(InputDirection nextDir)
     {
-        if (CharInfo.Health > 0 && !isMoving && CanAttack && IsOnField)
+        if (CharInfo.Health > 0 && !isMoving && IsOnField)
         {
-            if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1 && !isSpecialFired)
+            if (currentSpecialAttackPhase == AttackPhasesType.Cast && currentSpecialAttackPhase == AttackPhasesType.Bullet)
             {
                 return;
             }
@@ -731,29 +738,21 @@ public class BaseCharacter : MonoBehaviour
     public virtual void SetAnimation(CharacterAnimationStateType animState)
     {
         // Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + NextAttackLevel.ToString());
-
-
         float AnimSpeed = 1;
         if (SpineAnim == null)
         {
             SpineAnimatorsetup();
         }
-        if (SpineAnim.CurrentAnim.ToString().Contains("Dash"))
+
+
+        if (animState != CharacterAnimationStateType.Atk && SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk && currentAttackPhase <= AttackPhasesType.Cast)
         {
-            return;
-        }
-        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1 && !isSpecialFired)
-        {
-            return;
-        }
-        else if(SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1 && isSpecialFired)
-        {
-            isSpecialFired = false;
+            currentAttackPhase = AttackPhasesType.End;
         }
 
-        if (animState != CharacterAnimationStateType.Atk && SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk)
+        if (!animState.ToString().Contains("Atk1") && SpineAnim.CurrentAnim.ToString().Contains("Atk1"))
         {
-            isAttackGoing = false;
+            currentSpecialAttackPhase = AttackPhasesType.End;
         }
 
         if (animState == CharacterAnimationStateType.Atk || animState == CharacterAnimationStateType.Atk1)
@@ -787,7 +786,7 @@ public class BaseCharacter : MonoBehaviour
 
     public virtual void SetDamage(float damage, ElementalType elemental)
     {
-        if(!CanAttack)
+        if(!IsOnField)
         {
             return;
         }

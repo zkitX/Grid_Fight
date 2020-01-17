@@ -2,8 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public class ScriptableObjectAttackBase : ScriptableObject
+{
+    public float AttackRatioMultiplier = 1;
+    public float DamageMultiplier = 1;
+    public CharacterAnimationStateType Anim;
+}
+
+
+
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/AttackType")]
-public class ScriptableObjectAttackType : ScriptableObject
+public class ScriptableObjectAttackType : ScriptableObjectAttackBase
 {
     public List<BulletBehaviourInfoClass> BulletTrajectories = new List<BulletBehaviourInfoClass>();
     public CharacterClassType CharacterClass;

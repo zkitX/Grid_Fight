@@ -186,6 +186,11 @@ public class InputController : MonoBehaviour
         
     }
 
+    private void Start()
+    {
+        Applet(2);
+    }
+
     private void Update()
     {
         //Looking for all the possible players input
@@ -828,7 +833,7 @@ public class InputController : MonoBehaviour
     //Applet calling
     public void Applet(int playersNumber)
     {
-#if UNITY_SWITCH
+#if UNITY_SWITCH && !UNITY_EDITOR
         // Set the options to pass to the Controller Applet
         ControllerAppletOptions options = new ControllerAppletOptions();
         options.playerCountMax = playersNumber;

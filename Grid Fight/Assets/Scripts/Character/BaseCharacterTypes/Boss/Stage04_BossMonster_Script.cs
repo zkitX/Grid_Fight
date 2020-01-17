@@ -39,7 +39,6 @@ public class Stage04_BossMonster_Script : BaseCharacter
 
     private IEnumerator SetUpEnteringOnBattle_Co()
     {
-
         foreach (FabrikSolver2D item in GetComponentsInChildren<FabrikSolver2D>())
         {
             TargetControllerList.Add(item.transform.GetChild(0));
@@ -48,10 +47,10 @@ public class Stage04_BossMonster_Script : BaseCharacter
         SetAnimation(CharacterAnimationStateType.Arriving);
 
         float timer = 0;
-        while (timer <= 3)
+        while (timer <= 9)
         {
             yield return new WaitForFixedUpdate();
-            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
+            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Event))
             {
                 yield return new WaitForEndOfFrame();
             }
@@ -75,6 +74,18 @@ public class Stage04_BossMonster_Script : BaseCharacter
             TargetControllerList[i].parent = t;
             TargetControllerList[i].localPosition = Vector3.zero;
         }
+        timer = 0;
+        while (timer <= 4)
+        {
+            yield return new WaitForFixedUpdate();
+            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Event))
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            timer += Time.fixedDeltaTime;
+        }
+        GetComponentInChildren<LayerParticleSelection>(true).gameObject.SetActive(true);
+        BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
     }
 
 
@@ -106,7 +117,7 @@ public class Stage04_BossMonster_Script : BaseCharacter
         GetComponentInChildren<LayerParticleSelection>(true).gameObject.SetActive(true);
     }
 
-    public override IEnumerator AttackAction()
+   /* public override IEnumerator AttackAction()
     {
         while (true)
         {
@@ -159,7 +170,7 @@ public class Stage04_BossMonster_Script : BaseCharacter
                 timer += Time.fixedDeltaTime;
             }
         }
-    }
+    }*/
 
     public override void SetDamage(float damage, ElementalType elemental)
     {

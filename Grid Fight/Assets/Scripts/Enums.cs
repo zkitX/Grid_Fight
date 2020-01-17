@@ -206,6 +206,16 @@ public enum CharacterLevelType
     Godness
 }
 
+public enum AttackPhasesType
+{
+    Loading,
+    Start,
+    Cast,
+    Bullet,
+    End
+    
+}
+
 public enum RelationshipType
 {
     Strangers,
@@ -311,6 +321,9 @@ public enum CharacterAnimationStateType
     Idle,
     Atk,
     Atk1,
+    Atk1_AtkToIdle,
+    Atk1_IdleToAtk,
+    Atk1_Loop,
     Buff,
     Debuff,
     GettingHit,

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 957279772627243331}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.38, y: 0.81, z: 0}
+  m_LocalPosition: {x: -0.75, y: 0.625, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3771953301730849554}
@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5662575295879545953}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.38, y: 0.82, z: 0}
+  m_LocalPosition: {x: -0.75, y: 0.625, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3771953301730849554}
@@ -376,9 +376,10 @@ MonoBehaviour:
   CharacterIcon: {fileID: 21300000, guid: 1d0404ff4232ab044a093fae040d293c, type: 3}
   BaseCharacterType: 0
   CharacterID: 20
-  CurrentParticlesAttackTypeInfo: {fileID: 11400000, guid: 73c66a9d114b7ea4a86c401084c4d62f,
-    type: 2}
-  CurrentOnBattleFieldAttackTypeInfo: {fileID: 0}
+  CurrentParticlesAttackTypeInfo:
+  - {fileID: 11400000, guid: 73c66a9d114b7ea4a86c401084c4d62f, type: 2}
+  - {fileID: 11400000, guid: 9be942b31bf45c44bbac2da96191fe86, type: 2}
+  CurrentOnBattleFieldAttackTypeInfo: []
   ParticleID: 20
   Elemental: 6
   ClassType: 0
@@ -392,8 +393,8 @@ MonoBehaviour:
     LevelMultiplier: 15
   StaminaStats:
     Stamina: 35
-    Base: 35
-    Regeneration: 1
+    Base: 500
+    Regeneration: 50
     BaseStaminaRegeneration: 1
     Stamina_Cost_Atk: 0
     Stamina_Cost_S_Atk01: 3
