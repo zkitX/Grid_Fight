@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2345121399473744603}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0.625, z: 0}
+  m_LocalPosition: {x: -0.46000004, y: 1.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1845297267122555018}
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Donna
-  CharacterIcon: {fileID: 21300000, guid: 1d0404ff4232ab044a093fae040d293c, type: 3}
+  CharacterIcon: {fileID: 21300000, guid: f37a67c9a157ec4449390c33d3d79c06, type: 3}
   BaseCharacterType: 0
   CharacterID: 19
   CurrentParticlesAttackTypeInfo:
@@ -320,42 +320,42 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5271a803fa7312741ae6ab72fd388fd9, type: 2}
   CurrentOnBattleFieldAttackTypeInfo: []
   ParticleID: 18
-  Elemental: 6
-  ClassType: 0
+  Elemental: 0
+  ClassType: 1
   CharacterLevel: 0
   CharacterSelection: 0
   HealthStats:
-    Health: 50
-    Base: 50
-    Regeneration: 0.2
-    BaseHealthRegeneration: 0.2
-    LevelMultiplier: 15
+    Health: 105
+    Base: 105
+    Regeneration: 1
+    BaseHealthRegeneration: 1
+    LevelMultiplier: 40
   StaminaStats:
-    Stamina: 35
-    Base: 500
-    Regeneration: 50
+    Stamina: 12
+    Base: 12
+    Regeneration: 1
     BaseStaminaRegeneration: 1
     Stamina_Cost_Atk: 0
     Stamina_Cost_S_Atk01: 3
     Stamina_Cost_S_Atk02: 15
     Stamina_Cost_S_Atk03: 30
     Stamina_Cost_S_Atk04: 42
-    LevelMultiplier: 30
+    LevelMultiplier: 45
   SpeedStats:
     BaseSpeed: 1
-    MovementSpeed: 2.3
-    AttackSpeed: 2
-    AttackSpeedRatio: 1
-    BulletSpeed: 1.5
-    LevelMultiplier: 10
+    MovementSpeed: 1.1
+    AttackSpeed: 1
+    AttackSpeedRatio: 4
+    BulletSpeed: 4
+    LevelMultiplier: 5
   DamageStats:
-    BaseDamage: 2.2
+    BaseDamage: 12
     CurrentDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []
     CurrentElemental: 0
-    LevelMultiplier: 15
+    LevelMultiplier: 10
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
@@ -413,7 +413,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7158183156025933817}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0.625, z: 0}
+  m_LocalPosition: {x: -0.46, y: 1.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1845297267122555018}

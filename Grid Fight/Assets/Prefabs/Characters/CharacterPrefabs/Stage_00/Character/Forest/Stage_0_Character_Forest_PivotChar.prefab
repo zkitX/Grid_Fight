@@ -373,28 +373,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Donna
-  CharacterIcon: {fileID: 21300000, guid: 1d0404ff4232ab044a093fae040d293c, type: 3}
+  CharacterIcon: {fileID: 21300000, guid: 1fc666fee4d43c8489c09eda1d93c5cc, type: 3}
   BaseCharacterType: 0
   CharacterID: 21
   CurrentParticlesAttackTypeInfo:
   - {fileID: 11400000, guid: f074bc20913c2044095e9d7802768898, type: 2}
   - {fileID: 11400000, guid: 63e9759ac0d192348a45543f02929be7, type: 2}
   CurrentOnBattleFieldAttackTypeInfo: []
-  ParticleID: 18
-  Elemental: 6
-  ClassType: 0
+  ParticleID: 19
+  Elemental: 0
+  ClassType: 2
   CharacterLevel: 0
   CharacterSelection: 0
   HealthStats:
     Health: 50
     Base: 50
-    Regeneration: 0.2
-    BaseHealthRegeneration: 0.2
+    Regeneration: 0.5
+    BaseHealthRegeneration: 0.5
     LevelMultiplier: 15
   StaminaStats:
-    Stamina: 35
-    Base: 500
-    Regeneration: 50
+    Stamina: 25
+    Base: 25
+    Regeneration: 1
     BaseStaminaRegeneration: 1
     Stamina_Cost_Atk: 0
     Stamina_Cost_S_Atk01: 3
@@ -404,19 +404,19 @@ MonoBehaviour:
     LevelMultiplier: 30
   SpeedStats:
     BaseSpeed: 1
-    MovementSpeed: 2.3
-    AttackSpeed: 2
-    AttackSpeedRatio: 1
-    BulletSpeed: 1.5
-    LevelMultiplier: 10
+    MovementSpeed: 2.2
+    AttackSpeed: 2.5
+    AttackSpeedRatio: 2
+    BulletSpeed: 2
+    LevelMultiplier: 5
   DamageStats:
-    BaseDamage: 2.2
+    BaseDamage: 2
     CurrentDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []
     CurrentElemental: 0
-    LevelMultiplier: 15
+    LevelMultiplier: 5
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
