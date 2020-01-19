@@ -49,7 +49,7 @@ public class SpineAnimationManager : MonoBehaviour
             {
                 CharOwner.currentAttackPhase = AttackPhasesType.Cast;
             }
-            else
+            else if(CurrentAnim.ToString().Contains("Atk1"))
             {
                 CharOwner.currentSpecialAttackPhase = AttackPhasesType.Cast;
             }
@@ -61,7 +61,7 @@ public class SpineAnimationManager : MonoBehaviour
             {
                 CharOwner.currentAttackPhase = AttackPhasesType.Bullet;
             }
-            else
+            else if (CurrentAnim.ToString().Contains("Atk1"))
             {
                 CharOwner.currentSpecialAttackPhase = AttackPhasesType.Bullet;
             }
