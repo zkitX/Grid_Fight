@@ -340,9 +340,11 @@ MonoBehaviour:
   CharacterIcon: {fileID: 21300000, guid: 36ea2693c0daafd448326ccdcd319fb7, type: 3}
   BaseCharacterType: 1
   CharacterID: 2
-  CurrentParticlesAttackTypeInfo: {fileID: 0}
-  CurrentOnBattleFieldAttackTypeInfo: {fileID: 11400000, guid: 5245cecfda77e604d83f0c5ab4cbc945,
-    type: 2}
+  CurrentParticlesAttackTypeInfo:
+  - {fileID: 0}
+  CurrentOnBattleFieldAttackTypeInfo:
+  - {fileID: 11400000, guid: 5245cecfda77e604d83f0c5ab4cbc945, type: 2}
+  - {fileID: 11400000, guid: 3d664849e99b9274494f830c11c07691, type: 2}
   ParticleID: 1
   Elemental: 0
   ClassType: 2
@@ -380,6 +382,7 @@ MonoBehaviour:
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 0
+    SpecialMultiplier: 1
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0

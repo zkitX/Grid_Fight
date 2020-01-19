@@ -10815,9 +10815,7 @@ MonoBehaviour:
   CurrentParticlesAttackTypeInfo:
   - {fileID: 0}
   CurrentOnBattleFieldAttackTypeInfo:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: d8f6676106c2ce1419a4d94b3a15e486, type: 2}
   ParticleID: 12
   Elemental: 0
   ClassType: 1
@@ -10855,6 +10853,7 @@ MonoBehaviour:
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 0
+    SpecialMultiplier: 1
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
@@ -11270,21 +11269,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8765429856674785457}
     m_Modifications:
-    - target: {fileID: 5334249382901656016, guid: 6be6ba773f5013e46ac2da4b032fc219,
-        type: 3}
-      propertyPath: m_Name
-      value: stage04-boss-Shield-Loop
-      objectReference: {fileID: 0}
-    - target: {fileID: 5334249382901656016, guid: 6be6ba773f5013e46ac2da4b032fc219,
-        type: 3}
-      propertyPath: m_TagString
-      value: Shield
-      objectReference: {fileID: 0}
-    - target: {fileID: 5334249382901656016, guid: 6be6ba773f5013e46ac2da4b032fc219,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5334249382901656019, guid: 6be6ba773f5013e46ac2da4b032fc219,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11338,6 +11322,21 @@ PrefabInstance:
     - target: {fileID: 5334249382901656019, guid: 6be6ba773f5013e46ac2da4b032fc219,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334249382901656016, guid: 6be6ba773f5013e46ac2da4b032fc219,
+        type: 3}
+      propertyPath: m_Name
+      value: stage04-boss-Shield-Loop
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334249382901656016, guid: 6be6ba773f5013e46ac2da4b032fc219,
+        type: 3}
+      propertyPath: m_TagString
+      value: Shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334249382901656016, guid: 6be6ba773f5013e46ac2da4b032fc219,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

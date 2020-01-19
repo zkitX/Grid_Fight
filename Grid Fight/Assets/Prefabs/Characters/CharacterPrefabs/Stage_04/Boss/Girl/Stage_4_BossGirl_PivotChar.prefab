@@ -202,7 +202,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 405080a66d5093745a2d2d3305f533e6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -390,12 +390,10 @@ MonoBehaviour:
   CurrentParticlesAttackTypeInfo:
   - {fileID: 0}
   CurrentOnBattleFieldAttackTypeInfo:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: df71ecfc84eb14a438721752eb10448e, type: 2}
   ParticleID: 9
-  Elemental: 0
-  ClassType: 1
+  Elemental: 4
+  ClassType: 0
   CharacterLevel: 0
   CharacterSelection: 0
   HealthStats:
@@ -419,17 +417,18 @@ MonoBehaviour:
     BaseSpeed: 1
     MovementSpeed: 1
     AttackSpeed: 1
-    AttackSpeedRatio: 5
+    AttackSpeedRatio: 8
     BulletSpeed: 5
     LevelMultiplier: 0
   DamageStats:
-    BaseDamage: 10
+    BaseDamage: 8
     CurrentDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 0
+    SpecialMultiplier: 1
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0

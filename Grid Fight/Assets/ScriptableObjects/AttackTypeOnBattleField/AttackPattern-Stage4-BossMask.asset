@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aafb3c4b93ffa5d45b0be95204d570b3, type: 3}
   m_Name: AttackPattern-Stage4-BossMask
   m_EditorClassIdentifier: 
-  IsAttackStartingFromCharacter: 0
+  AttackRatioMultiplier: 1
+  DamageMultiplier: 0.5
+  Anim: 0
   BulletTrajectories:
   - Delay: 4
     BulletEffectTiles:
@@ -45,3 +47,8 @@ MonoBehaviour:
     - {x: 2, y: 3}
     - {x: 2, y: 2}
     - {x: 2, y: 1}
+  StatToCheck: 0
+  ValueChecker: 0
+  PercToCheck: 0
+  Chances: 0
+  ParticlesID: 0

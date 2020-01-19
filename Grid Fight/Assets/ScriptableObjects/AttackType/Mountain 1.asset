@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mountain 1
   m_EditorClassIdentifier: 
   AttackRatioMultiplier: 1
-  DamageMultiplier: 1
+  DamageMultiplier: 0.2
   Anim: 3
   BulletTrajectories:
   - BulletDistanceInTile: {x: 0, y: 4}
@@ -104,8 +104,8 @@ MonoBehaviour:
     BulletEffectTiles:
     - {x: 0, y: 0}
     - {x: 1, y: 0}
-    - {x: -1, y: 0}
-    - {x: 0, y: 1}
-    - {x: 0, y: -1}
-    BulletGapStartingTile: {x: 0, y: 0}
+    - {x: 2, y: 0}
+    - {x: 3, y: 0}
+    - {x: 4, y: 0}
+    BulletGapStartingTile: {x: 5, y: 0}
   CharacterClass: 1

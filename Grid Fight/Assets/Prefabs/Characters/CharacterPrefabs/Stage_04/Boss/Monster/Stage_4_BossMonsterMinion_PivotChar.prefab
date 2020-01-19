@@ -465,15 +465,16 @@ MonoBehaviour:
   CharacterIcon: {fileID: 21300000, guid: 305df1f998953104ab04eb3eba46ee09, type: 3}
   BaseCharacterType: 4
   CharacterID: 13
-  CurrentParticlesAttackTypeInfo: {fileID: 0}
-  CurrentOnBattleFieldAttackTypeInfo: {fileID: 11400000, guid: 5245cecfda77e604d83f0c5ab4cbc945,
-    type: 2}
+  CurrentParticlesAttackTypeInfo:
+  - {fileID: 0}
+  CurrentOnBattleFieldAttackTypeInfo:
+  - {fileID: 11400000, guid: b2af575d4175ca049ad22eba59d07063, type: 2}
+  - {fileID: 11400000, guid: 1d95f19bcd4e89b4086bfe70c785acc9, type: 2}
   ParticleID: 11
   Elemental: 0
   ClassType: 0
   CharacterLevel: 0
   CharacterSelection: 0
-  PlayerController: 
   HealthStats:
     Health: 100
     Base: 100
@@ -506,6 +507,7 @@ MonoBehaviour:
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 0
+    SpecialMultiplier: 0.3
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0

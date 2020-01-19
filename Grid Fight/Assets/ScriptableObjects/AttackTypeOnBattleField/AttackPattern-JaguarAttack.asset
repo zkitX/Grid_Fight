@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aafb3c4b93ffa5d45b0be95204d570b3, type: 3}
   m_Name: AttackPattern-JaguarAttack
   m_EditorClassIdentifier: 
-  IsAttackStartingFromCharacter: 0
+  AttackRatioMultiplier: 1
+  DamageMultiplier: 1
+  Anim: 2
   BulletTrajectories:
   - Delay: 2
     BulletEffectTiles:
@@ -62,3 +64,8 @@ MonoBehaviour:
     - {x: 0, y: 10}
     - {x: -4, y: 10}
     - {x: 4, y: 10}
+  StatToCheck: 0
+  ValueChecker: 0
+  PercToCheck: 0
+  Chances: 0
+  ParticlesID: 1

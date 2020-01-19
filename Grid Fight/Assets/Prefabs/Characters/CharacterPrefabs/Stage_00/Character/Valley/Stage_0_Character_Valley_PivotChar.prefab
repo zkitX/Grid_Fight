@@ -261,31 +261,40 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.014389038
-      value: 2.1668282
+      time: 0
+      value: 0
       inSlope: 0
       outSlope: 0
-      tangentMode: 136
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 1
     - serializedVersion: 3
-      time: 0.58610725
-      value: 1.206126
-      inSlope: -3.2079258
-      outSlope: -3.2079258
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.68984985
+      time: 0.1
       value: 0
-      inSlope: -11.62614
-      outSlope: -11.62614
-      tangentMode: 34
+      inSlope: 0
+      outSlope: 44.560085
+      tangentMode: 65
+      weightedMode: 0
+      inWeight: 0.09010934
+      outWeight: 0.11064476
+    - serializedVersion: 3
+      time: 0.15
+      value: 2.2280045
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
+      outWeight: 0.04577209
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0.11647741
+      outSlope: 0.11647741
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -327,31 +336,31 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.045833588
-      value: 1.503952
-      inSlope: -0.7121675
-      outSlope: -0.7121675
-      tangentMode: 34
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
+      outWeight: 0
     - serializedVersion: 3
-      time: 0.67500305
-      value: 0.9905956
-      inSlope: -1.8800913
-      outSlope: -1.8800913
-      tangentMode: 34
+      time: 0.6849148
+      value: 2
+      inSlope: 0.1458475
+      outSlope: 0.1458475
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: -3.048015
-      outSlope: -3.048015
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
+      inSlope: 0.001119431
+      outSlope: -0.044812556
+      tangentMode: 1
+      weightedMode: 1
+      inWeight: 0.47814596
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -373,7 +382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Donna
-  CharacterIcon: {fileID: 21300000, guid: 1d0404ff4232ab044a093fae040d293c, type: 3}
+  CharacterIcon: {fileID: 21300000, guid: a04432c544bdf4e488fb6c0d76438eac, type: 3}
   BaseCharacterType: 0
   CharacterID: 20
   CurrentParticlesAttackTypeInfo:
@@ -381,20 +390,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9be942b31bf45c44bbac2da96191fe86, type: 2}
   CurrentOnBattleFieldAttackTypeInfo: []
   ParticleID: 20
-  Elemental: 6
+  Elemental: 2
   ClassType: 0
   CharacterLevel: 0
   CharacterSelection: 0
   HealthStats:
-    Health: 50
-    Base: 50
-    Regeneration: 0.2
-    BaseHealthRegeneration: 0.2
+    Health: 30
+    Base: 30
+    Regeneration: 0.5
+    BaseHealthRegeneration: 0.5
     LevelMultiplier: 15
   StaminaStats:
     Stamina: 35
-    Base: 500
-    Regeneration: 50
+    Base: 35
+    Regeneration: 1
     BaseStaminaRegeneration: 1
     Stamina_Cost_Atk: 0
     Stamina_Cost_S_Atk01: 3
@@ -404,19 +413,20 @@ MonoBehaviour:
     LevelMultiplier: 30
   SpeedStats:
     BaseSpeed: 1
-    MovementSpeed: 2.3
+    MovementSpeed: 2
     AttackSpeed: 2
     AttackSpeedRatio: 1
     BulletSpeed: 1.5
     LevelMultiplier: 10
   DamageStats:
-    BaseDamage: 2.2
+    BaseDamage: 7
     CurrentDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 15
+    SpecialMultiplier: 0.5
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0

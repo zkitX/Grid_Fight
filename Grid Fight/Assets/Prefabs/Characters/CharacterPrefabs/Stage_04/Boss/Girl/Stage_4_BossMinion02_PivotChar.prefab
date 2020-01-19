@@ -251,9 +251,10 @@ MonoBehaviour:
   CharacterIcon: {fileID: 21300000, guid: a4b923570b948624b981763f6febbcad, type: 3}
   BaseCharacterType: 2
   CharacterID: 9
-  CurrentParticlesAttackTypeInfo: {fileID: 0}
-  CurrentOnBattleFieldAttackTypeInfo: {fileID: 11400000, guid: 5ae3bec7ac96e6e47a9cad6844476af8,
-    type: 2}
+  CurrentParticlesAttackTypeInfo:
+  - {fileID: 0}
+  CurrentOnBattleFieldAttackTypeInfo:
+  - {fileID: 11400000, guid: 6fce48bd5128f84408c5a494a21ef46d, type: 2}
   ParticleID: 9
   Elemental: 0
   ClassType: 0
@@ -284,13 +285,14 @@ MonoBehaviour:
     BulletSpeed: 5
     LevelMultiplier: 0
   DamageStats:
-    BaseDamage: 10
+    BaseDamage: 7
     CurrentDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 0
+    SpecialMultiplier: 1
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
