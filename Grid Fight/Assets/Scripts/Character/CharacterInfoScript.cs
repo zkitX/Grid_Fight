@@ -88,6 +88,8 @@ public class CharacterInfoScript : MonoBehaviour
         [HideInInspector]
         public ElementalType CurrentElemental;
         public float LevelMultiplier;
+
+        public float SpecialMultiplier = 1;
     }
 
     public float Special1LoadingDuration;

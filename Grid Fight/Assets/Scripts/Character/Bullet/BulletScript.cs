@@ -178,7 +178,7 @@ public class BulletScript : MonoBehaviour
             if (target.tag.Contains("Side") && target.tag != Side.ToString())
             {
                 //Set damage to the hitting character
-                target.SetDamage(attackLevel == CharacterLevelType.Novice ? CharInfo.DamageStats.CurrentDamage : CharInfo.DamageStats.CurrentDamage * 3, Elemental);
+                target.SetDamage(attackLevel == CharacterLevelType.Novice ? CharInfo.DamageStats.CurrentDamage : CharInfo.DamageStats.CurrentDamage * CharInfo.DamageStats.SpecialMultiplier, Elemental);
             }
         }
     }
