@@ -996,11 +996,12 @@
 		}
 	}
 ],
-"events": {
-	"FireArrivingParticle": {},
-	"FireCastParticle": {},
-	"FireParticles": {}
-},
+  "events": {
+    "FireArrivingParticle": {},
+    "FireCastParticle": {},
+    "FireBulletParticle": {}
+  },
+
 "animations": {
 	"Arriving": {
 		"slots": {
@@ -3196,8 +3197,15 @@
 			}
 		},
 		"events": [
-			{ "time": 0.65, "name": "FireParticles" }
-		]
+      {
+        "time": 0.65,
+        "name": "FireCastParticle"
+      },
+      {
+        "time": 0.66,
+        "name": "FireBulletParticle"
+      }
+    ]
 	},
 	"Atk1": {
 		"slots": {
@@ -4959,9 +4967,13 @@
 				]
 			}
 		},
-		"events": [
-			{ "time": 0.95, "name": "FireParticles" }
-		]
+    "events": [
+      { "name": "FireCastParticle" },
+      {
+        "time": 0.95,
+        "name": "FireBulletParticle"
+      }
+    ]
 	},
 	"Atk1_AtkToIdle": {
 		"slots": {
@@ -7413,7 +7425,7 @@
 		},
 		"events": [
 			{ "name": "FireCastParticle" },
-			{ "time": 0.5, "name": "FireParticles" }
+			{ "time": 0.5, "name": "FireBulletParticle" }
 		]
 	},
 	"Buff": {
