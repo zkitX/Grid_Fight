@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 322320278}
   - component: {fileID: 322320277}
   m_Layer: 0
-  m_Name: LightPurpleSpiral (2)
+  m_Name: PurpleWaves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1419,8 +1419,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -1538,7 +1538,8 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 3265131030602708117, guid: 9c863d371378fd3499a90fb65168cbe5,
+        type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -4784,8 +4785,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 98a94f0a6f867db4dbe6aba949f525c9, type: 2}
-  - {fileID: 2100000, guid: 4f092da82d8cbbc418b84ea02b9050be, type: 2}
+  - {fileID: 2100000, guid: b0c6d2f48e26b284382850227357c4a1, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4805,7 +4806,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 200
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -4841,7 +4842,7 @@ GameObject:
   - component: {fileID: 688547724}
   - component: {fileID: 688547723}
   m_Layer: 0
-  m_Name: LightPurpleSpiral (6)
+  m_Name: Muzzleflash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6248,8 +6249,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -6367,7 +6368,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 21300000, guid: 64f13eb4d14d52f45a75c9e741dbbf8e, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -7454,7 +7455,7 @@ ParticleSystem:
     inWorldSpace: 0
     multiplyDragByParticleSize: 1
     multiplyDragByParticleVelocity: 1
-    dampen: 0.3
+    dampen: 0.5
     drag:
       serializedVersion: 2
       minMaxState: 0
@@ -8764,7 +8765,7 @@ ParticleSystem:
         m_RotationOrder: 4
     maxLights: 20
   TrailModule:
-    enabled: 1
+    enabled: 0
     mode: 0
     ratio: 1
     lifetime:
@@ -9595,8 +9596,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0282117faa80d5542874b22e5fa88063, type: 2}
-  - {fileID: 2100000, guid: c78b5dacb6e1a8343bb1dfe2c4161830, type: 2}
+  - {fileID: 2100000, guid: 8725cd1a75d2a3943b62421b15dd2078, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9616,7 +9617,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 200
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -9652,7 +9653,7 @@ GameObject:
   - component: {fileID: 1477513924}
   - component: {fileID: 1477513923}
   m_Layer: 0
-  m_Name: CircleLights
+  m_Name: MuzzleFlashSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9861,8 +9862,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.7087778, g: 0.3301887, b: 1, a: 0.3137255}
-      maxColor: {r: 0.5454545, g: 0, b: 1, a: 0.42352942}
+      minColor: {r: 0.7087778, g: 0.3301887, b: 1, a: 0.16470589}
+      maxColor: {r: 0.5454545, g: 0, b: 1, a: 0.52156866}
       maxGradient:
         serializedVersion: 2
         key0: {r: 0.25783154, g: 0, b: 0.3962264, a: 1}
@@ -11059,8 +11060,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -11178,7 +11179,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 21300000, guid: f49e22d051dd27a429c90269e9bdf852, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -14415,8 +14416,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8d784517dc53a6f48a9ae9297190962d, type: 2}
-  - {fileID: 2100000, guid: 50a842583dbca054fa8abefcbf369822, type: 2}
+  - {fileID: 2100000, guid: 8725cd1a75d2a3943b62421b15dd2078, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14436,7 +14437,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 202
   m_RenderMode: 4
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -14472,7 +14473,7 @@ GameObject:
   - component: {fileID: 1675612160}
   - component: {fileID: 1675612159}
   m_Layer: 0
-  m_Name: LightPurpleSpiral (5)
+  m_Name: DynamicLinesBig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14575,7 +14576,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.3
+      scalar: 0.5
       minScalar: 0.1
       maxCurve:
         serializedVersion: 2
@@ -15879,8 +15880,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -15998,7 +15999,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 21300000, guid: 6cd8fde7cbafb6a448954e7110937242, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -16483,8 +16484,8 @@ ParticleSystem:
     radial:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 40
-      minScalar: 30
+      scalar: 15
+      minScalar: 20
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -19271,7 +19272,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f01387c5ddf3c1741aede9d1a2c2799b, type: 2}
+  - {fileID: 2100000, guid: b0c6d2f48e26b284382850227357c4a1, type: 2}
   - {fileID: 2100000, guid: 4d4ac0833eacda448a2fd830d17412b3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -19292,7 +19293,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 200
   m_RenderMode: 1
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -24081,7 +24082,7 @@ GameObject:
   - component: {fileID: 3578865133521624453}
   - component: {fileID: 3578865133521624452}
   m_Layer: 0
-  m_Name: LightPurpleSpiral (3)
+  m_Name: PurpleTentacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28946,8 +28947,8 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
-  m_RenderMode: 0
+  m_SortingOrder: 200
+  m_RenderMode: 5
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
@@ -28982,7 +28983,7 @@ GameObject:
   - component: {fileID: 3578865133633037665}
   - component: {fileID: 3578865133633037664}
   m_Layer: 0
-  m_Name: LightPurpleSpiral (2)
+  m_Name: PurpleCentre
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30389,8 +30390,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -30508,7 +30509,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 21300000, guid: 7d84a30476f82a148b4e2688af890afd, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -33754,8 +33755,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 101f1554cbaa3b24ca3caf4e0e76989d, type: 2}
-  - {fileID: 2100000, guid: 4f092da82d8cbbc418b84ea02b9050be, type: 2}
+  - {fileID: 2100000, guid: b0c6d2f48e26b284382850227357c4a1, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -33775,7 +33776,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 200
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -33811,7 +33812,7 @@ GameObject:
   - component: {fileID: 3578865133646945245}
   - component: {fileID: 3578865133646945244}
   m_Layer: 0
-  m_Name: LightPurpleSpiral (6)
+  m_Name: DynamicLinesSmal2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35218,8 +35219,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -35337,7 +35338,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 21300000, guid: 6cd8fde7cbafb6a448954e7110937242, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -38610,7 +38611,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f01387c5ddf3c1741aede9d1a2c2799b, type: 2}
+  - {fileID: 2100000, guid: b0c6d2f48e26b284382850227357c4a1, type: 2}
   - {fileID: 2100000, guid: 4d4ac0833eacda448a2fd830d17412b3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -38631,7 +38632,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 200
   m_RenderMode: 1
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -38667,7 +38668,7 @@ GameObject:
   - component: {fileID: 3578865133884356984}
   - component: {fileID: 3578865133884356987}
   m_Layer: 0
-  m_Name: CircleLights
+  m_Name: Shockwave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40075,7 +40076,7 @@ ParticleSystem:
   UVModule:
     serializedVersion: 2
     enabled: 1
-    mode: 0
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -40193,7 +40194,24 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: -7691623502191134109, guid: 9cc42a00498da1940afe6a3f05099fa5,
+        type: 3}
+    - sprite: {fileID: 6727296400431833735, guid: 9cc42a00498da1940afe6a3f05099fa5,
+        type: 3}
+    - sprite: {fileID: -3997416665603115310, guid: 9cc42a00498da1940afe6a3f05099fa5,
+        type: 3}
+    - sprite: {fileID: -2912672536726901321, guid: 9cc42a00498da1940afe6a3f05099fa5,
+        type: 3}
+    - sprite: {fileID: -7536497581241408443, guid: 9cc42a00498da1940afe6a3f05099fa5,
+        type: 3}
+    - sprite: {fileID: -3329592172843365539, guid: 9cc42a00498da1940afe6a3f05099fa5,
+        type: 3}
+    - sprite: {fileID: -5251576137514309048, guid: 9cc42a00498da1940afe6a3f05099fa5,
+        type: 3}
+    - sprite: {fileID: -6674042118088451186, guid: 9cc42a00498da1940afe6a3f05099fa5,
+        type: 3}
+    - sprite: {fileID: -6726589229683246268, guid: 9cc42a00498da1940afe6a3f05099fa5,
+        type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -43430,8 +43448,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 50a842583dbca054fa8abefcbf369822, type: 2}
-  - {fileID: 2100000, guid: 50a842583dbca054fa8abefcbf369822, type: 2}
+  - {fileID: 2100000, guid: b0c6d2f48e26b284382850227357c4a1, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -43451,7 +43469,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 200
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -43487,7 +43505,7 @@ GameObject:
   - component: {fileID: 3578865133986876600}
   - component: {fileID: 3578865133986876603}
   m_Layer: 0
-  m_Name: LightPurpleSpiral (5)
+  m_Name: DynamicLinesSmall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44894,8 +44912,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -45013,7 +45031,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 21300000, guid: 6cd8fde7cbafb6a448954e7110937242, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -48286,7 +48304,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f01387c5ddf3c1741aede9d1a2c2799b, type: 2}
+  - {fileID: 2100000, guid: b0c6d2f48e26b284382850227357c4a1, type: 2}
   - {fileID: 2100000, guid: 4d4ac0833eacda448a2fd830d17412b3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -48307,7 +48325,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 200
   m_RenderMode: 1
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -57860,7 +57878,7 @@ GameObject:
   - component: {fileID: 3578865134452804008}
   - component: {fileID: 3578865134452804011}
   m_Layer: 0
-  m_Name: LightPurpleSpiral (9)
+  m_Name: PurpleBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59267,8 +59285,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -59386,7 +59404,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 21300000, guid: 713012f1c8a1caf46b618e0831a6c04d, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -62632,8 +62650,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4f8eaaad1e3413b4aaf4acfff60c4c17, type: 2}
-  - {fileID: 2100000, guid: 4f8eaaad1e3413b4aaf4acfff60c4c17, type: 2}
+  - {fileID: 2100000, guid: b0c6d2f48e26b284382850227357c4a1, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -62653,7 +62671,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 200
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -67442,7 +67460,7 @@ GameObject:
   - component: {fileID: 3578865135010792501}
   - component: {fileID: 3578865135010792500}
   m_Layer: 0
-  m_Name: LightPurpleSpiral (1)
+  m_Name: LightSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68849,8 +68867,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -68968,7 +68986,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 21300000, guid: 1b2970a114ab1614d99a18ce46d4f458, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -72196,7 +72214,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 962588ea14a7d69488f7ce53ab616f2c, type: 2}
+  - {fileID: 2100000, guid: 8725cd1a75d2a3943b62421b15dd2078, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -72217,7 +72235,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 202
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
