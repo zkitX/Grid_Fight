@@ -1419,8 +1419,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -1538,7 +1538,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 21300000, guid: 9cecc83887ca4cc45be4bf93b2f50c30, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -4856,8 +4856,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c1254d407233159489f0bfdd68ac2975, type: 2}
-  - {fileID: 2100000, guid: 4d4ac0833eacda448a2fd830d17412b3, type: 2}
+  - {fileID: 2100000, guid: b0c6d2f48e26b284382850227357c4a1, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4877,7 +4877,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 8
+  m_SortingOrder: 200
   m_RenderMode: 0
   m_SortMode: 3
   m_MinParticleSize: 0
@@ -9667,7 +9667,7 @@ GameObject:
   - component: {fileID: 5871474396159909575}
   - component: {fileID: 5871474396159909574}
   m_Layer: 0
-  m_Name: BossMinionSmokeDisabled
+  m_Name: stage04-boss-flower-smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

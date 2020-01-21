@@ -1347,8 +1347,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -1448,7 +1448,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 21300000, guid: 6cd8fde7cbafb6a448954e7110937242, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -4676,7 +4676,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f01387c5ddf3c1741aede9d1a2c2799b, type: 2}
+  - {fileID: 2100000, guid: b0c6d2f48e26b284382850227357c4a1, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -4697,7 +4697,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 200
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -9670,7 +9670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 384b28258ef75d9498ed0e7b12639926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Delay: 0.7
+  Delay: 0
 --- !u!1 &2798907190336946126
 GameObject:
   m_ObjectHideFlags: 0
@@ -11144,8 +11144,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 120
     frameOverTime:
@@ -11263,7 +11263,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 21300000, guid: c929dd54b23641b49827f0143c4d7f4a, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -14515,8 +14515,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e1daac852f77b23439036e618c5628b5, type: 2}
-  - {fileID: 2100000, guid: e1daac852f77b23439036e618c5628b5, type: 2}
+  - {fileID: 2100000, guid: b0c6d2f48e26b284382850227357c4a1, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14536,7 +14536,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 200
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
