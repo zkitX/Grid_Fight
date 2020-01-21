@@ -28,10 +28,10 @@ Transform:
   m_LocalPosition: {x: 0.34, y: 0.382, z: 0}
   m_LocalScale: {x: 0.05, y: 0.05, z: 1}
   m_Children:
+  - {fileID: 1999603228567639537}
+  - {fileID: 3197885062722945416}
   - {fileID: 6213148949341384133}
   - {fileID: 5328009020081002985}
-  - {fileID: 3197885062722945416}
-  - {fileID: 1999603228567639537}
   m_Father: {fileID: 2236780381530750445}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -80,10 +80,10 @@ Transform:
   m_GameObject: {fileID: 2741704635351078743}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.25, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children: []
   m_Father: {fileID: 109818329}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5703359994970890030
 SpriteRenderer:
@@ -123,8 +123,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 102
-  m_Sprite: {fileID: 6141138565872867354, guid: 802d7ac9cd882124c92a4bf283975a96,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 907e98b0eb8938c4c8b304767920df22, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -164,7 +163,7 @@ Transform:
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children: []
   m_Father: {fileID: 109818329}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9113106449134778799
 SpriteRenderer:
@@ -327,7 +326,7 @@ Transform:
   m_Children:
   - {fileID: 8312123702567947964}
   m_Father: {fileID: 109818329}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -0.13100001, y: -0.666, z: 28.080002}
 --- !u!212 &7798132002929426215
 SpriteRenderer:
@@ -409,7 +408,7 @@ Transform:
   m_Children:
   - {fileID: 3679081243502322004}
   m_Father: {fileID: 109818329}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -0.13100001, y: -0.666, z: 28.080002}
 --- !u!212 &5266123609093950026
 SpriteRenderer:
@@ -538,6 +537,7 @@ MonoBehaviour:
   ArrivingParticle: {fileID: 6215609946791570949}
   DeathParticles: {fileID: 1318025210907858467, guid: d100617447acf7546bc776beadb85a77,
     type: 3}
+  CurrentAttackType: 0
 --- !u!1 &7793607243215578135
 GameObject:
   m_ObjectHideFlags: 0
