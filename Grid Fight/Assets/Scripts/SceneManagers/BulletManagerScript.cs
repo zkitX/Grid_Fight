@@ -24,7 +24,10 @@ public class BulletManagerScript : MonoBehaviour
             res = Instantiate(BulletGameObject, transform);
             Bullets.Add(Bullets.Count, res);
         }
-
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).parent = null;
+        }
         res.SetActive(true);
         return res;
     }

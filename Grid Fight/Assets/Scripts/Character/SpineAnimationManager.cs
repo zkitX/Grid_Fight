@@ -19,9 +19,11 @@ public class SpineAnimationManager : MonoBehaviour
     public CharacterAnimationStateType CurrentAnim;
     public float AnimationTransition = 0.1f;
 
+    private bool Loop = false;
+
 
 //initialize all the spine element
-    private void SetupSpineAnim()
+    public void SetupSpineAnim()
     {
         if(skeletonAnimation == null)
         {
@@ -86,6 +88,7 @@ public class SpineAnimationManager : MonoBehaviour
             return;
         }
         CharacterAnimationStateType completedAnim = (CharacterAnimationStateType)System.Enum.Parse(typeof(CharacterAnimationStateType), skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name);
+
         if (completedAnim == CharacterAnimationStateType.Arriving || completedAnim.ToString().Contains("Growing"))
         {
             CharOwner.SetAttackReady(true);
@@ -96,12 +99,22 @@ public class SpineAnimationManager : MonoBehaviour
             return;
         }
 
+
         if (completedAnim == CharacterAnimationStateType.Atk1_IdleToAtk && CurrentAnim == CharacterAnimationStateType.Atk1_IdleToAtk)
         {
-            ((CharacterType_Script)CharOwner).SpecialAttackLoop();
+            if(((CharacterType_Script)CharOwner).AtkCharging)
+            {
+                ((CharacterType_Script)CharOwner).SpecialAttackChargingLoop();
+            }
+            else
+            {
+                ((CharacterType_Script)CharOwner).SpecialAttackLoop();
+            }
+            
             return;
         }
-      
+
+     
         if (completedAnim == CharacterAnimationStateType.Atk1_Loop &&
                 CurrentAnim == CharacterAnimationStateType.Atk1_Loop)
         {
@@ -113,6 +126,7 @@ public class SpineAnimationManager : MonoBehaviour
             {
                 SetAnim(CharacterAnimationStateType.Atk1_AtkToIdle);
             }
+
             return;
         }
 
@@ -126,11 +140,11 @@ public class SpineAnimationManager : MonoBehaviour
         }
 
 
-        if (completedAnim != CharacterAnimationStateType.Idle)
+        if (completedAnim != CharacterAnimationStateType.Idle && !Loop)
         {
             SetAnimationSpeed(CharOwner.CharInfo.BaseSpeed);
+            SpineAnimationState.SetAnimation(0, CharacterAnimationStateType.Idle.ToString(), true);
             SpineAnimationState.AddEmptyAnimation(1,AnimationTransition,0);
-            //Debug.Log("Idle --- ");
             CurrentAnim = CharacterAnimationStateType.Idle;
         }
     }
@@ -138,7 +152,6 @@ public class SpineAnimationManager : MonoBehaviour
 
     public void SpeialAtkTest()
     {
-        Debug.Log("Test");
         float timer = skeletonAnimation.state.GetCurrent(1).AnimationTime;
         SpineAnimationState.SetAnimation(1, CharacterAnimationStateType.Atk1_IdleToAtk.ToString(), false);
         skeletonAnimation.state.GetCurrent(1).AnimationStart = timer;
@@ -157,15 +170,40 @@ public class SpineAnimationManager : MonoBehaviour
 
         if(anim == CharacterAnimationStateType.Arriving || anim.ToString().Contains("Growing"))
         {
-            SpineAnimationState.SetAnimation(1, anim.ToString(), false);
+            SetAnim(anim, false, 0);
         }
         else
         {
-            SpineAnimationState.SetAnimation(1, anim.ToString(), anim == CharacterAnimationStateType.Death || anim.ToString().Contains("Idle") ? true : false).MixDuration = AnimationTransition;
+            SetAnim(anim, anim == CharacterAnimationStateType.Death || anim == CharacterAnimationStateType.Idle ? true : false, AnimationTransition);
         }
-        //Debug.Log(CurrentAnim.ToString() + "  --- ");
+    }
+
+    public void SetAnim(CharacterAnimationStateType anim, bool loop, float transition)
+    {
+
+        Debug.Log(anim.ToString());
+        SetupSpineAnim();
+        Loop = loop;
+        SpineAnimationState.SetAnimation(1, anim.ToString(), loop).MixDuration = transition;
+        StartCoroutine(test(transition));
         CurrentAnim = anim;
     }
+
+    private IEnumerator test(float asdaf)
+    {
+        float timer = 0;
+        while (timer <= asdaf)
+        {
+            yield return new WaitForFixedUpdate();
+            while (!CharOwner.VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            timer += Time.fixedDeltaTime;
+        }
+        SpineAnimationState.SetEmptyAnimation(0, 0);
+    }
+
 
     public float GetAnimLenght(CharacterAnimationStateType anim)
     {

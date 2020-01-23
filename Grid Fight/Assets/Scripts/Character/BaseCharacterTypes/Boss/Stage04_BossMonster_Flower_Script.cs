@@ -6,7 +6,7 @@ using UnityEngine;
 public class Stage04_BossMonster_Flower_Script : MinionType_Script
 {
     public Vector2Int BasePos;
-    private float StasyTime = 15;
+    public float StasyTime = 15;
     public bool CanRebirth = true;
     public MonsterFlowerType mfType;
     public GameObject Smoke;

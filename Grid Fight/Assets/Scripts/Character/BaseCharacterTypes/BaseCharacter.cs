@@ -49,7 +49,7 @@ public class BaseCharacter : MonoBehaviour
     public bool VFXTestMode = false;
     public UnitManagementScript UMS;
     public BoxCollider CharBoxCollider;
-    private ScriptableObjectAttackBase nextAttack = null;
+    public ScriptableObjectAttackBase nextAttack = null;
     public AttackPhasesType currentAttackPhase = AttackPhasesType.End;
     public AttackPhasesType currentSpecialAttackPhase = AttackPhasesType.End;
 
@@ -110,7 +110,11 @@ public class BaseCharacter : MonoBehaviour
 
     public virtual void SetAttackReady(bool value)
     {
-        CharBoxCollider.enabled = value;
+        if(CharBoxCollider != null)
+        {
+            CharBoxCollider.enabled = value;
+        }
+        
         CanAttack = value;
         IsOnField = value;
     }
@@ -142,6 +146,13 @@ public class BaseCharacter : MonoBehaviour
     {
 
     }
+
+    public virtual void SetUpLeavingBattle()
+    {
+
+    }
+
+
     #endregion
     #region Attack
 
@@ -207,7 +218,7 @@ public class BaseCharacter : MonoBehaviour
         }
     }
 
-    private void GetAttack(CharacterAnimationStateType anim = CharacterAnimationStateType.NoMesh)
+    public void GetAttack(CharacterAnimationStateType anim = CharacterAnimationStateType.NoMesh)
     {
         if (UMS.CurrentAttackType == AttackType.Particles)
         {
@@ -292,7 +303,7 @@ public class BaseCharacter : MonoBehaviour
     //start the casting particlaes foe the attack
     public void CastAttackParticles()
     {
-        Debug.Log("Cast");
+        //Debug.Log("Cast");
         GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Cast, NextAttackLevel == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, UMS.Side);
         cast.GetComponent<DisableParticleScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
         LayerParticleSelection lps = cast.GetComponent<LayerParticleSelection>();
@@ -348,16 +359,6 @@ public class BaseCharacter : MonoBehaviour
         bs.Side = UMS.Side;
         bs.VFXTestMode = VFXTestMode;
         bs.CharInfo = CharInfo;
-        
-        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharInfo.ParticleID, AttackParticlePhaseTypes.Attack, bullet.transform, UMS.Side,
-            CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script ? true : false);
-        LayerParticleSelection lps = bs.PS.GetComponent<LayerParticleSelection>();
-        if (lps != null)
-        {
-            bs.attackLevel = NextAttackLevel;
-            lps.Shot = NextAttackLevel;
-            lps.SelectShotLevel();
-        }
 
         if (!GridManagerScript.Instance.isPosOnFieldByHeight(UMS.CurrentTilePos + bulletBehaviourInfo.BulletDistanceInTile))
         {
@@ -372,6 +373,16 @@ public class BaseCharacter : MonoBehaviour
         else
         {
             bs.DestinationTile = new Vector2Int(UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x, UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y < 0 ? 0 : UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y);
+        }
+        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharInfo.ParticleID, AttackParticlePhaseTypes.Attack, bullet.transform, UMS.Side,
+            CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script ? true : false);
+
+        LayerParticleSelection lps = bs.PS.GetComponent<LayerParticleSelection>();
+        if (lps != null)
+        {
+            bs.attackLevel = NextAttackLevel;
+            lps.Shot = NextAttackLevel;
+            lps.SelectShotLevel();
         }
         bs.gameObject.SetActive(true);
         bs.StartMoveToTile();
@@ -389,7 +400,7 @@ public class BaseCharacter : MonoBehaviour
         }
         else
         {
-            GridManagerScript.Instance.StartOnBattleFieldAttackCo(CharInfo, ((ScriptableObjectAttackTypeOnBattlefield)nextAttack), UMS.CurrentTilePos);
+            GridManagerScript.Instance.StartOnBattleFieldAttackCo(CharInfo, ((ScriptableObjectAttackTypeOnBattlefield)nextAttack), UMS.CurrentTilePos, UMS);
         }
     }
 
@@ -398,7 +409,7 @@ public class BaseCharacter : MonoBehaviour
     #region Move
     public virtual void MoveCharOnDirection(InputDirection nextDir)
     {
-        if (CharInfo.Health > 0 && !isMoving && IsOnField)
+        if ((CharInfo.Health > 0 && !isMoving && IsOnField) || BattleManagerScript.Instance.VFXScene)
         {
             if (currentSpecialAttackPhase == AttackPhasesType.Cast && currentSpecialAttackPhase == AttackPhasesType.Bullet)
             {
@@ -527,7 +538,10 @@ public class BaseCharacter : MonoBehaviour
         {
             TileMovementCompleteEvent(this);
         }
-        transform.position = nextPos;
+        if (IsOnField)
+        {
+            transform.position = nextPos;
+        }
         MoveCo = null;
     }
     #endregion
@@ -720,6 +734,7 @@ public class BaseCharacter : MonoBehaviour
                 timer += Time.fixedDeltaTime;
             }
         }
+
         BuffsDebuffs.Remove(newBuffDebuff);
     }
 
@@ -730,12 +745,13 @@ public class BaseCharacter : MonoBehaviour
     {
         CameraManagerScript.Instance.CameraShake();
         SFXmanager.Instance.PlayOnce(SFXmanager.Instance.ArrivingImpact);
+        UMS.ArrivingParticle.transform.position = transform.position;
         UMS.ArrivingParticle.SetActive(true);
     }
 
 
 
-    public virtual void SetAnimation(CharacterAnimationStateType animState)
+    public virtual void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
     {
         // Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + NextAttackLevel.ToString());
         float AnimSpeed = 1;
@@ -771,7 +787,7 @@ public class BaseCharacter : MonoBehaviour
             AnimSpeed = CharInfo.BaseSpeed;
         }
 
-        SpineAnim.SetAnim(animState);
+        SpineAnim.SetAnim(animState, loop, transition);
         SpineAnim.SetAnimationSpeed(AnimSpeed);
     }
 

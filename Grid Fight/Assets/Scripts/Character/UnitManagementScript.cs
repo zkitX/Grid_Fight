@@ -55,49 +55,56 @@ public class UnitManagementScript : MonoBehaviour
     //Used to decide the side
     public void SetupCharacterSide()
     {
-        MatchType matchType = LoaderManagerScript.Instance != null ? LoaderManagerScript.Instance.MatchInfoType : BattleInfoManagerScript.Instance.MatchInfoType;
-        switch (matchType)
+        if(BattleManagerScript.Instance.VFXScene)
         {
-            case MatchType.PvE:
-                if (PlayerController.Contains(ControllerType.Enemy))
-                {
-                    SetUnit(FacingType.Left, SideType.RightSide, UnitBehaviourType.NPC, true);
-                }
-                else
-                {
-                    SetUnit(FacingType.Right, SideType.LeftSide, UnitBehaviourType.ControlledByPlayer);
-                }
-                break;
-            case MatchType.PvP:
-                if (PlayerController.Contains(ControllerType.Player2))
-                {
-                    SetUnit(FacingType.Left, SideType.RightSide, UnitBehaviourType.ControlledByPlayer);
-                }
-                else
-                {
-                    SetUnit(FacingType.Right, SideType.LeftSide, UnitBehaviourType.ControlledByPlayer);
-                }
-                break;
-            case MatchType.PPvE:
-                if (PlayerController.Contains(ControllerType.Enemy))
-                {
-                    SetUnit(FacingType.Left, SideType.RightSide, UnitBehaviourType.NPC, true);
-                }
-                else
-                {
-                    SetUnit(FacingType.Right, SideType.LeftSide, UnitBehaviourType.ControlledByPlayer);
-                }
-                break;
-            case MatchType.PPvPP:
-                if (PlayerController.Contains(ControllerType.Player3) && PlayerController.Contains(ControllerType.Player4))
-                {
-                    SetUnit(FacingType.Left, SideType.RightSide, UnitBehaviourType.ControlledByPlayer);
-                }
-                else
-                {
-                    SetUnit(FacingType.Right, SideType.LeftSide, UnitBehaviourType.ControlledByPlayer);
-                }
-                break;
+            SetUnit(Facing, Side, UnitBehaviourType.ControlledByPlayer);
+        }
+        else
+        {
+            MatchType matchType = LoaderManagerScript.Instance != null ? LoaderManagerScript.Instance.MatchInfoType : BattleInfoManagerScript.Instance.MatchInfoType;
+            switch (matchType)
+            {
+                case MatchType.PvE:
+                    if (PlayerController.Contains(ControllerType.Enemy))
+                    {
+                        SetUnit(FacingType.Left, SideType.RightSide, UnitBehaviourType.NPC, true);
+                    }
+                    else
+                    {
+                        SetUnit(FacingType.Right, SideType.LeftSide, UnitBehaviourType.ControlledByPlayer);
+                    }
+                    break;
+                case MatchType.PvP:
+                    if (PlayerController.Contains(ControllerType.Player2))
+                    {
+                        SetUnit(FacingType.Left, SideType.RightSide, UnitBehaviourType.ControlledByPlayer);
+                    }
+                    else
+                    {
+                        SetUnit(FacingType.Right, SideType.LeftSide, UnitBehaviourType.ControlledByPlayer);
+                    }
+                    break;
+                case MatchType.PPvE:
+                    if (PlayerController.Contains(ControllerType.Enemy))
+                    {
+                        SetUnit(FacingType.Left, SideType.RightSide, UnitBehaviourType.NPC, true);
+                    }
+                    else
+                    {
+                        SetUnit(FacingType.Right, SideType.LeftSide, UnitBehaviourType.ControlledByPlayer);
+                    }
+                    break;
+                case MatchType.PPvPP:
+                    if (PlayerController.Contains(ControllerType.Player3) && PlayerController.Contains(ControllerType.Player4))
+                    {
+                        SetUnit(FacingType.Left, SideType.RightSide, UnitBehaviourType.ControlledByPlayer);
+                    }
+                    else
+                    {
+                        SetUnit(FacingType.Right, SideType.LeftSide, UnitBehaviourType.ControlledByPlayer);
+                    }
+                    break;
+            }
         }
     }
 

@@ -97,6 +97,7 @@ public class BulletScript : MonoBehaviour
     {
         if (CharInfo.ClassType != CharacterClassType.Mountain)
         {
+            GetComponent<BoxCollider>().enabled = true;
             int startingYTile = Facing == FacingType.Left ? StartingTile.y - BulletGapStartingTile.y : StartingTile.y + BulletGapStartingTile.y;
             GameObject go = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Particles);
             go.transform.position = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position;
@@ -212,8 +213,6 @@ public class BulletScript : MonoBehaviour
             if(destroyBullet)
             {
                 PS.GetComponent<DisableParticleScript>().ResetParticle();
-                PS.SetActive(false);
-                PS.transform.parent = null;
                 Dead = true;
                 StopAllCoroutines();
                 gameObject.SetActive(false);

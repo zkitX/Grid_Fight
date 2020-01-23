@@ -76,6 +76,12 @@ public class ParticleManagerScript : MonoBehaviour
                 case AttackParticlePhaseTypes.Effect:
                     ps = ListOfAttckParticles.Where(r => r.PSType == pType).First().EffectPS;
                     break;
+                case AttackParticlePhaseTypes.Charging:
+                    ps = ListOfAttckParticles.Where(r => r.PSType == pType).First().CastLoopPS;
+                    break;
+                case AttackParticlePhaseTypes.CastActivation:
+                    ps = ListOfAttckParticles.Where(r => r.PSType == pType).First().CastActivationPS;
+                    break;
             }
             GameObject go = Instantiate(ps, pos, Quaternion.identity, Container);
             go.transform.localScale = side == SideType.RightSide ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);

@@ -375,7 +375,7 @@ public class UserInputManager : MonoBehaviour
     {
         //Debug.Log(player + "  " + "A Up");
         //VibrationController.Instance.CustomVibration(player, VibrationType.a);
-        SelectedCharacterLoadingSpecialAttack(player);
+        //SelectedCharacterLoadingSpecialAttack(player);
 
         StopSelectedCharacterLoadingSpecialAttack(player);
     }
@@ -608,7 +608,7 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonADownEvent(int player)
     {
         //Debug.Log(player + "  " + "A Down");
-        //SelectedCharacterLoadingSpecialAttack(player);
+        SelectedCharacterLoadingSpecialAttack(player);
     }
 
     private void Instance_ButtonRightSRDownEvent(int player)

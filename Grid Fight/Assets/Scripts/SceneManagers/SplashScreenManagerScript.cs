@@ -23,7 +23,7 @@ public class SplashScreenManagerScript : MonoBehaviour
     {
 #if UNITY_SWITCH && !UNITY_EDITOR
         PlayerPrefsSwitch.PlayerPrefsSwitch.Init();
-        Invoke("GoToMainMenu", 2);
+      //  Invoke("GoToMainMenu", 2);
 #endif
         InputController.Instance.ButtonPlusUpEvent += Instance_ButtonPlusUpEvent;
 

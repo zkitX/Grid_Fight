@@ -6,7 +6,7 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
 {
 
     public Vector2Int BasePos;
-    private float StasyTime = 50;
+    public float StasyTime = 50;
     public bool CanRebirth = true;
     public GameObject Smoke;
 

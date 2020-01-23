@@ -46,17 +46,25 @@ public class CharacterType_Script : BaseCharacter
     #region Attack
 
     public bool Atk1Queueing = false;
+    public bool AtkCharging = false;
     //Load the special attack and fire it if the load is complete
     public IEnumerator LoadSpecialAttack()
     {
         //Debug.Log(SpineAnim.CurrentAnim.ToString() + isSpecialLoading);
         if (CharInfo.StaminaStats.Stamina - CharInfo.StaminaStats.Stamina_Cost_S_Atk01 >= 0 
-            && !isSpecialLoading)
+            && !isSpecialLoading && CanAttack)
         {
             isSpecialLoading = true;
+            AtkCharging = true;
             float timer = 0;
+            if(SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop)
+            {
+                SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
+            }
+            GameObject ps = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
             while (isSpecialLoading && !VFXTestMode && !isSpecialQueueing)
             {
+               
                 while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
                 {
                     yield return new WaitForEndOfFrame();
@@ -64,16 +72,34 @@ public class CharacterType_Script : BaseCharacter
                 yield return new WaitForFixedUpdate();
                 timer += Time.fixedDeltaTime;
             }
-            currentSpecialAttackPhase = AttackPhasesType.Loading;
-            if (IsOnField || VFXTestMode)
+
+            ps.SetActive(false);
+            ps = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.CastActivation, transform.position, UMS.Side);
+            if (timer > 3)
             {
-                while (isMoving)
+                currentSpecialAttackPhase = AttackPhasesType.Loading;
+                if (IsOnField || VFXTestMode)
                 {
-                    yield return new WaitForEndOfFrame();
+                    while (isMoving)
+                    {
+                        yield return new WaitForEndOfFrame();
+                    }
+                    
+                    SpecialAttack(CharInfo.CharacterLevel);
                 }
+            }
+            else if(timer < 0.5f)
+            {
                 Atk1Queueing = true;
                 SpecialAttack(CharInfo.CharacterLevel);
+                AtkCharging = false;
             }
+            else
+            {
+                SetAnimation(CharacterAnimationStateType.Idle);
+                AtkCharging = false;
+            }
+
         }
     }
 
@@ -81,18 +107,20 @@ public class CharacterType_Script : BaseCharacter
     public void SpecialAttack(CharacterLevelType attackLevel)
     {
         NextAttackLevel = attackLevel;
+
+        SetAnimation(CharacterAnimationStateType.Atk1_Loop);
         //Debug.Log(SpineAnim.CurrentAnim.ToString());
-        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1_AtkToIdle)
-        {
-            SpineAnim.SpeialAtkTest();
-        }
-        else if(currentSpecialAttackPhase == AttackPhasesType.Loading &&
-            SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop &&
-            SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_IdleToAtk)
-        {
-            currentSpecialAttackPhase = AttackPhasesType.Start;
-            SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
-        }
+        /* if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1_AtkToIdle)
+         {
+             SpineAnim.SpeialAtkTest();
+         }
+         else if(currentSpecialAttackPhase == AttackPhasesType.Loading &&
+             SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop &&
+             SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_IdleToAtk)
+         {
+             currentSpecialAttackPhase = AttackPhasesType.Start;
+             SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
+         }*/
     }
 
     public void SpecialAttackLoop()
@@ -100,6 +128,13 @@ public class CharacterType_Script : BaseCharacter
         Atk1Queueing = false;
         currentSpecialAttackPhase = AttackPhasesType.Start;
         SetAnimation(CharacterAnimationStateType.Atk1_Loop);
+    }
+
+    public void SpecialAttackChargingLoop()
+    {
+        Atk1Queueing = false;
+        currentSpecialAttackPhase = AttackPhasesType.Loading;
+        SetAnimation(CharacterAnimationStateType.Atk1_Charging, true);
     }
 
 

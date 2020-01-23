@@ -7,7 +7,6 @@ using System.Linq;
 
 public class UIBattleFieldScript : MonoBehaviour
 {
-
     public BaseCharacter CharOwner;
     [SerializeField]
     private Image CharacterHealthBar;
@@ -78,6 +77,7 @@ public class UIBattleFieldScript : MonoBehaviour
         if (d == null)
         {
             d = Instantiate(Damage, transform);
+            Damages.Add(Damages.Count, d);
         }
         d.SetActive(true);
         d.GetComponent<TextMeshProUGUI>().text = ((int)(damage * 100)).ToString();

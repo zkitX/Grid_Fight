@@ -324,6 +324,7 @@ public enum CharacterAnimationStateType
     Atk1_AtkToIdle,
     Atk1_IdleToAtk,
     Atk1_Loop,
+    Atk1_Charging,
     Buff,
     Debuff,
     GettingHit,
@@ -343,6 +344,7 @@ public enum CharacterAnimationStateType
     Victory,
     Defeat,
     Death
+
 }
 
 public enum PortalType
@@ -406,7 +408,9 @@ public enum AttackParticlePhaseTypes
 {
     Cast,
     Attack,
-    Effect
+    Effect,
+    Charging,
+    CastActivation
 }
 
 public enum SideType

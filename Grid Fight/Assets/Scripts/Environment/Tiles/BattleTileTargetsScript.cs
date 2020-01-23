@@ -28,7 +28,7 @@ public class BattleTileTargetsScript : MonoBehaviour
         while (timer < duration)
         {
             yield return new WaitForFixedUpdate();
-            while (BattleManagerScript.Instance != null && BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+            while (BattleManagerScript.Instance != null && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && !BattleManagerScript.Instance.VFXScene))
             {
                 yield return new WaitForFixedUpdate();
                 animToFire["ExclamationAnim"].speed = 0;

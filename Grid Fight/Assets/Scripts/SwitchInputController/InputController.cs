@@ -395,7 +395,7 @@ public class InputController : MonoBehaviour
         if (currentPlayer.GetButtonUp("Minus"))
         {
             //Debug.Log(player.GetButtonDown("Plus"));
-            if (ButtonPlusUpEvent != null)
+            if (ButtonMinusUpEvent != null)
             {
                 ButtonMinusUpEvent(currentPlayer.id);
             }
