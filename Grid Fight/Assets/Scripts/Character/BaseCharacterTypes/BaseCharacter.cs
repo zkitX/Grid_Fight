@@ -163,14 +163,17 @@ public class BaseCharacter : MonoBehaviour
         {
             UIBattleFieldManager.Instance.SetUIBattleField(this);
         }
-        StartCoroutine(AttackAction());
+        StartCoroutine(AttackAction(false));
     }
 
     //Basic attack Action that will start the attack anim every x seconds
-    public virtual IEnumerator AttackAction()
+    public virtual IEnumerator AttackAction(bool yieldBefore)
     {
         while (true)
         {
+            //Wait until next attack (if yielding before)
+            if (yieldBefore) yield return PauseAttack(CharInfo.AttackSpeedRatio * nextAttack.AttackRatioMultiplier);
+
             while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || isSpecialLoading || !CanAttack || isMoving ||
                 (currentSpecialAttackPhase != AttackPhasesType.End))
             {
@@ -198,23 +201,29 @@ public class BaseCharacter : MonoBehaviour
 
             GetAttack(CharacterAnimationStateType.Atk);
 
-            float timer = 0;
-            while (timer <= CharInfo.AttackSpeedRatio * nextAttack.AttackRatioMultiplier)
+            //Wait until next attack
+            if (!yieldBefore) yield return PauseAttack(CharInfo.AttackSpeedRatio * nextAttack.AttackRatioMultiplier);
+        }
+    }
+
+    IEnumerator PauseAttack(float duration)
+    {
+        float timer = 0;
+        while (timer <= duration)
+        {
+            yield return new WaitForFixedUpdate();
+            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
             {
-                yield return new WaitForFixedUpdate();
-                while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
-                {
-                    yield return new WaitForEndOfFrame();
-                }
-
-                while (isSpecialLoading)
-                {
-                    yield return new WaitForEndOfFrame();
-                    timer = 0;
-                }
-
-                timer += Time.fixedDeltaTime;
+                yield return new WaitForEndOfFrame();
             }
+
+            while (isSpecialLoading)
+            {
+                yield return new WaitForEndOfFrame();
+                timer = 0;
+            }
+
+            timer += Time.fixedDeltaTime;
         }
     }
 
@@ -781,6 +790,10 @@ public class BaseCharacter : MonoBehaviour
             animState == CharacterAnimationStateType.DashRight)
         {
             AnimSpeed = CharInfo.MovementSpeed * CharInfo.BaseSpeed;
+        }
+        else if(animState == CharacterAnimationStateType.Reverse_Arriving)
+        {
+            AnimSpeed = CharInfo.LeaveSpeed;
         }
         else
         {

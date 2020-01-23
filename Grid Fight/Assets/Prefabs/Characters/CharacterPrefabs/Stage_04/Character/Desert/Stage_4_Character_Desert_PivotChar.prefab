@@ -125,7 +125,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 213f1f20568ca344b977e12b8b1ab54c, type: 2}
+  - {fileID: 2100000, guid: ea1506567b2904d4ab0a6094761e10d8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: ed25eade5fec2e84b99f686dce63f726, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 2032f18257f153046927360c8bcd9295, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -450,6 +450,7 @@ MonoBehaviour:
     AttackSpeed: 1.4
     AttackSpeedRatio: 3
     BulletSpeed: 2.5
+    LeaveSpeed: 3
     LevelMultiplier: 5
   DamageStats:
     BaseDamage: 4
@@ -459,6 +460,7 @@ MonoBehaviour:
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 10
+    SpecialMultiplier: 1
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0

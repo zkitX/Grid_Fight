@@ -131,8 +131,7 @@ public class BattleManagerScript : MonoBehaviour
         currentCharacter.UMS.Pos = newPoses;
 
         currentCharacter.SetUpLeavingBattle();
-
-        yield return MoveCharToBoardWithDelay(0.1f, currentCharacter, new Vector3(100f, 100f, 100f));
+        yield return MoveCharToBoardWithDelay(0.3f, currentCharacter, new Vector3(100f, 100f, 100f));
 
         if (playerController == ControllerType.Player1)
         {

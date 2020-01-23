@@ -69,6 +69,7 @@ public class CharacterInfoScript : MonoBehaviour
         public float AttackSpeed = 1;
         public float AttackSpeedRatio;
         public float BulletSpeed = 5;
+        public float LeaveSpeed = 3;
         public float LevelMultiplier;
     }
 
@@ -123,6 +124,18 @@ public class CharacterInfoScript : MonoBehaviour
         set
         {
             SpeedStats.AttackSpeedRatio = value;
+        }
+    }
+
+    public float LeaveSpeed
+    {
+        get
+        {
+            return SpeedStats.LeaveSpeed;
+        }
+        set
+        {
+            SpeedStats.LeaveSpeed = value;
         }
     }
 

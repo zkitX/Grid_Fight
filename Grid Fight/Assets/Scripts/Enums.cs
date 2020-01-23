@@ -340,6 +340,7 @@ public enum CharacterAnimationStateType
     DashUp,
     Selection,
     PowerUp,
+    Reverse_Arriving,
     Speaking,
     Victory,
     Defeat,
