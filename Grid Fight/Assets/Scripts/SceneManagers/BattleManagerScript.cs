@@ -118,8 +118,37 @@ public class BattleManagerScript : MonoBehaviour
         PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == cName).First().isUsed = true;
         SelectCharacter(playerController, (CharacterType_Script)currentCharacter);
     }
-    
-   
+
+    public IEnumerator RemoveCharacterFromBaord(ControllerType playerController, BaseCharacter currentCharacter)
+    {
+        currentCharacter.SetAttackReady(false);
+
+        List<Vector2Int> newPoses = new List<Vector2Int>();
+        foreach (Vector2Int pos in currentCharacter.UMS.Pos)
+        {
+            newPoses.Add(Vector2Int.zero);
+        }
+        currentCharacter.UMS.Pos = newPoses;
+
+        currentCharacter.SetUpLeavingBattle();
+
+        yield return MoveCharToBoardWithDelay(0.1f, currentCharacter, new Vector3(100f, 100f, 100f));
+
+        if (playerController == ControllerType.Player1)
+        {
+            UIBattleManager.Instance.isLeftSidePlaying = false;
+
+        }
+        else if (playerController == ControllerType.Player2)
+        {
+            UIBattleManager.Instance.isRightSidePlaying = false;
+        }
+
+        if (PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == currentCharacter.CharInfo.CharacterID).First().isUsed)
+        {
+            PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == currentCharacter.CharInfo.CharacterID).First().isUsed = false;
+        }
+    }
 
     //Used to set the already created char on a fixed Position in the battlefield
     public void SetCharOnBoardOnFixedPos(ControllerType playerController, CharacterNameType cName, Vector2Int pos)
@@ -135,7 +164,7 @@ public class BattleManagerScript : MonoBehaviour
         for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)
         {
             currentCharacter.UMS.Pos[i] += bts.Pos;
-            GridManagerScript.Instance.SetBattleTileState(currentCharacter.UMS.Pos[i], BattleTileStateType.Occupied);
+            //GridManagerScript.Instance.SetBattleTileState(currentCharacter.UMS.Pos[i], BattleTileStateType.Occupied);
             BattleTileScript cbts = GridManagerScript.Instance.GetBattleTile(currentCharacter.UMS.Pos[i]);
             currentCharacter.CurrentBattleTiles.Add(cbts);
         }
@@ -264,11 +293,24 @@ public class BattleManagerScript : MonoBehaviour
     #region Loading_Selection Character
 
     //Used when the char is not in the battlefield to move it on the battlefield
-    public void LoadingNewCharacterInRandomPosition(CharacterNameType cName,SideType side, ControllerType playerController)
+    public void LoadingNewCharacterToGrid(CharacterNameType cName,SideType side, ControllerType playerController)
     {
-        if(!AllCharactersOnField.Where(r=> r.UMS.Side == side && r.CharInfo.CharacterID == cName).First().IsOnField)
+        //FOR TESTING PURPOSES:
+        bool singleUnitControls = true;
+        if (CharacterLoadingCo != null) StopCoroutine(CharacterLoadingCo);
+
+        if (!AllCharactersOnField.Where(r=> r.UMS.Side == side && r.CharInfo.CharacterID == cName).First().IsOnField)
         {
-            CharacterLoadingCo = CharacterLoadingInRandomPosition(cName, playerController);
+            if(CurrentSelectedCharacters[playerController] == null || !singleUnitControls)
+            {
+                //Spawn first character for player to a random position on the grid
+                CharacterLoadingCo = CharacterLoadingIn(cName, playerController);
+            }
+            else
+            {
+                //Swap the characters if the player already has one under their control
+                if(CurrentSelectedCharacters[playerController].CanAttack) CharacterLoadingCo = SwapCharacters(cName, playerController);
+            }
             CurrentCharactersLoadingInfo.Add(new CharacterLoadingInfoClass(cName, playerController, CharacterLoadingCo));
             StartCoroutine(CharacterLoadingCo);
         }
@@ -276,6 +318,19 @@ public class BattleManagerScript : MonoBehaviour
         {
             SelectCharacter(playerController, (CharacterType_Script)AllCharactersOnField.Where(r => r.UMS.Side == side && r.CharInfo.CharacterID == cName).First());
         }
+    }
+
+    IEnumerator SwapCharacters(CharacterNameType cName, ControllerType playerController)
+    {
+        yield return HoldPressTimer(playerController);
+
+        Vector2Int spawnPos = CurrentSelectedCharacters[playerController].UMS._CurrentTilePos;
+
+        yield return RemoveCharacterFromBaord(playerController, CurrentSelectedCharacters[playerController]);
+
+        //And drop the new character in
+        SetCharOnBoardOnFixedPos(playerController, cName, spawnPos);
+
     }
 
     //Stop the loading of a char
@@ -298,14 +353,18 @@ public class BattleManagerScript : MonoBehaviour
     {
         if(currentCharacter != null && currentCharacter.CharInfo.HealthPerc > 0)
         {
+            //If the character is not already selected by another player
             if (!CurrentSelectedCharacters.ContainsValue(currentCharacter))
             {
+                //If the player already has a character selected
                 if(CurrentSelectedCharacters[playerController] != null)
                 {
+                    //Deselect it
                     CurrentSelectedCharacters[playerController].SetCharSelected(false, playersNumberBig[(int)playerController], playersNumberSmall[(int)playerController], new Color());
                 }
                 else
                 {
+                    //Otherwise, Set the player's UI elements to active
                     switch (matchType)
                     {
                         case MatchType.PvE:
@@ -369,28 +428,22 @@ public class BattleManagerScript : MonoBehaviour
                             break;
                     }
                 }
+                //Change this player's character to the new character
                 CurrentSelectedCharacters[playerController] = currentCharacter;
+
+                //Change the player's UI to the new character
                 UIBattleManager.Instance.CharacterSelected(playerController, currentCharacter);
+
+                //Set the new character to selected by this player
                 currentCharacter.SetCharSelected(true, playersNumberBig[(int)playerController], playersNumberSmall[(int)playerController], playersColor[(int)playerController]);
             }
         }
     }
 
     //Load char in a random pos
-    private IEnumerator CharacterLoadingInRandomPosition(CharacterNameType cName, ControllerType playerController)
+    private IEnumerator CharacterLoadingIn(CharacterNameType cName, ControllerType playerController)
     {
-        //TODO Setup animation for the UI
-        float timer = 0;
-        while (timer <= 1)
-        {
-            yield return new WaitForFixedUpdate();
-            while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
-            {
-                yield return new WaitForEndOfFrame();
-            }
-
-            timer += Time.fixedDeltaTime;
-        }
+        yield return HoldPressTimer(playerController);
         if (CurrentCharactersLoadingInfo.Where(r => r.CName == cName && r.PlayerController == playerController).ToList().Count > 0)
         {
             SetCharOnBoardOnRandomPos(playerController, cName);
@@ -398,21 +451,36 @@ public class BattleManagerScript : MonoBehaviour
     }
 
     //Load char in a fixed pos
-    private IEnumerator CharacterLoadingInFixedPosition(CharacterNameType cName, ControllerType playerController, Vector2Int pos)
+    private IEnumerator CharacterLoadingIn(CharacterNameType cName, ControllerType playerController, Vector2Int pos)
+    {
+        yield return HoldPressTimer(playerController);
+        if (CurrentCharactersLoadingInfo.Where(r => r.CName == cName && r.PlayerController == playerController).ToList().Count > 0)
+        {
+            SetCharOnBoardOnRandomPos(playerController, cName);
+        }
+    }
+
+    //Handle the wait for a button hold (relating to spawning in)
+    IEnumerator HoldPressTimer(ControllerType playerController)
     {
         //TODO Setup animation for the UI
-        float timer = 0;
-        while (timer <= 1)
+        float timer = 0f;
+        while (timer <= 1f)
         {
             yield return new WaitForFixedUpdate();
             while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
             {
                 yield return new WaitForEndOfFrame();
             }
-
+            if(CurrentSelectedCharacters[playerController] != null)
+            {
+                while (CurrentSelectedCharacters[playerController].isMoving)
+                {
+                    yield return new WaitForEndOfFrame();
+                }
+            }
             timer += Time.fixedDeltaTime;
         }
-        SetCharOnBoardOnFixedPos(playerController, cName, pos);
     }
 
     #endregion
@@ -456,7 +524,7 @@ public class BattleManagerScript : MonoBehaviour
             BaseCharacter cb = AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == characterSelection && r.UMS.Side == side).FirstOrDefault();
             if (cb != null)
             {
-                LoadingNewCharacterInRandomPosition(cb.CharInfo.CharacterID, side, playerController);
+                LoadingNewCharacterToGrid(cb.CharInfo.CharacterID, side, playerController);
             }
         }
     }
@@ -465,15 +533,21 @@ public class BattleManagerScript : MonoBehaviour
     {
         if (CurrentBattleState == BattleState.Battle)
         {
-            CurrentSelectedCharacters[controllerType].isSpecialLoading = false;
+            if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null)
+            {
+                CurrentSelectedCharacters[controllerType].isSpecialLoading = false;
+            }
         }
     }
 
     public void Switch_LoadingSpecial(ControllerType controllerType)
     {
-        if(CurrentBattleState == BattleState.Battle)
+        if (CurrentBattleState == BattleState.Battle)
         {
-            StartCoroutine(CurrentSelectedCharacters[controllerType].LoadSpecialAttack());
+            if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null)
+            {
+                StartCoroutine(CurrentSelectedCharacters[controllerType].LoadSpecialAttack());
+            }
         }
     }
 
@@ -487,7 +561,7 @@ public class BattleManagerScript : MonoBehaviour
 
     public void Mobile_LoadingNewCharacterInRandomPosition(CharacterNameType cName, ControllerType playerController)
     {
-        LoadingNewCharacterInRandomPosition(cName, GetSideFromPlayer(new List<ControllerType> { playerController }), playerController);
+        LoadingNewCharacterToGrid(cName, GetSideFromPlayer(new List<ControllerType> { playerController }), playerController);
     }
 
     #endregion
