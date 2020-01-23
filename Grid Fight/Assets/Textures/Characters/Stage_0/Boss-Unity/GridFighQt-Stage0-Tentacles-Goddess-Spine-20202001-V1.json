@@ -1,0 +1,65 @@
+{
+"skeleton": { "hash": "oR+a0Bs2WKsE5bwJiNH7m8B+mgA", "spine": "3.8.79", "x": -1185.43, "y": -1096.09, "width": 2162.13, "height": 1903 },
+"bones": [
+	{ "name": "root" },
+	{ "name": "Tentacles", "parent": "root", "x": -134.22, "y": 524.4 }
+],
+"slots": [
+	{ "name": "Tentacle_4", "bone": "Tentacles", "attachment": "Tentacle_4" },
+	{ "name": "Ground-Shadow", "bone": "Tentacles", "attachment": "Ground-Shadow" },
+	{ "name": "Tail-Tentacle-end", "bone": "Tentacles", "attachment": "Tail-Tentacle-end" },
+	{ "name": "Tail_Tentacle", "bone": "Tentacles", "attachment": "Tail_Tentacle" },
+	{ "name": "Tail_Shield_1", "bone": "Tentacles", "attachment": "Tail_Shield_1" },
+	{ "name": "Tail_Shield_2", "bone": "Tentacles", "attachment": "Tail_Shield_2" },
+	{ "name": "Tentacle-3", "bone": "Tentacles", "attachment": "Tentacle-3" },
+	{ "name": "Tentacle-2", "bone": "Tentacles", "attachment": "Tentacle-2" },
+	{ "name": "Tentacle-1", "bone": "Tentacles", "attachment": "Tentacle-1" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"Ground-Shadow": {
+				"Ground-Shadow": { "x": 286.42, "y": -411.73, "width": 1585, "height": 481 }
+			},
+			"Tail-Tentacle-end": {
+				"Tail-Tentacle-end": { "x": 741.92, "y": -399.23, "width": 738, "height": 162 }
+			},
+			"Tail_Shield_1": {
+				"Tail_Shield_1": { "x": 906.92, "y": -139.23, "width": 320, "height": 194 }
+			},
+			"Tail_Shield_2": {
+				"Tail_Shield_2": { "x": 769.42, "y": -30.23, "width": 441, "height": 242 }
+			},
+			"Tail_Tentacle": {
+				"Tail_Tentacle": { "x": 589.42, "y": -133.23, "width": 823, "height": 536 }
+			},
+			"Tentacle-1": {
+				"Tentacle-1": { "x": -42.08, "y": -157.73, "width": 1036, "height": 775 }
+			},
+			"Tentacle-2": {
+				"Tentacle-2": { "x": 50.58, "y": -668.99, "width": 329, "height": 1903 }
+			},
+			"Tentacle-3": {
+				"Tentacle-3": { "x": -137.42, "y": -668.99, "width": 329, "height": 1903 }
+			},
+			"Tentacle_4": {
+				"Tentacle_4": { "x": -540.21, "y": -50.13, "width": 1022, "height": 409 }
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"bones": {
+			"Tentacles": {
+				"translate": [
+					{},
+					{ "time": 0.4167, "x": -130.02, "y": 163.46 },
+					{ "time": 0.8333 }
+				]
+			}
+		}
+	}
+}
+}

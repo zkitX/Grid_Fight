@@ -10,6 +10,8 @@ public class ScriptableObjectAttackParticle : ScriptableObject
     public GameObject CastPS;
     public GameObject AttackPS;
     public GameObject EffectPS;
+    public GameObject CastLoopPS;
+    public GameObject CastActivationPS;
 }
 
 
