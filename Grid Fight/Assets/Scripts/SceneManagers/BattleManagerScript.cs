@@ -53,7 +53,7 @@ public class BattleManagerScript : MonoBehaviour
     private List<Sprite> playersNumberSmall = new List<Sprite>();
     private MatchType matchType;
     public Camera MCam;
-
+    public bool VFXScene = false;
 
     public void SetupBattleState()
     {
