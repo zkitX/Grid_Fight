@@ -40,13 +40,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4783923572667252266}
   serializedVersion: 6
-  lengthInSec: 10
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -115,7 +115,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 0.1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -865,7 +865,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5073,6 +5073,7 @@ MonoBehaviour:
   Particle: 0
   BulletDuration: 3
   BulletOriginalDuration: 5
+  trailTimeCache: 0
 --- !u!1 &4783923572781598858
 GameObject:
   m_ObjectHideFlags: 0
@@ -5087,6 +5088,7 @@ GameObject:
   - component: {fileID: 4783923572781598857}
   - component: {fileID: 3887431008010543078}
   - component: {fileID: 1275054500}
+  - component: {fileID: 459675893}
   m_Layer: 0
   m_Name: stage04-desert-bullet
   m_TagString: Untagged
@@ -5123,7 +5125,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -9858,7 +9860,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4783923572781598858}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
   m_Name: 
@@ -9875,8 +9877,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba9e6c852f53ac7448afd635fab03e07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletTargetTime: 6
+  BulletTargetTime: 1
   BulletOriginalTime: 4
+--- !u!114 &459675893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4783923572781598858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2540eedaee99924438ce16aeff707ac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PSTime: 4
+  AutoUpdate: 1
 --- !u!1 &4783923573132391736
 GameObject:
   m_ObjectHideFlags: 0
@@ -9928,7 +9944,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -14692,13 +14708,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6228694358091025218}
   serializedVersion: 6
-  lengthInSec: 10
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -19366,6 +19382,7 @@ MonoBehaviour:
   Particle: 0
   BulletDuration: 3
   BulletOriginalDuration: 5
+  trailTimeCache: 0
 --- !u!1 &6228694358270860789
 GameObject:
   m_ObjectHideFlags: 0
@@ -19406,13 +19423,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6228694358270860789}
   serializedVersion: 6
-  lengthInSec: 10
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -24357,6 +24374,7 @@ MonoBehaviour:
   Particle: 0
   BulletDuration: 3
   BulletOriginalDuration: 5
+  trailTimeCache: 0
 --- !u!1 &6228694358682929258
 GameObject:
   m_ObjectHideFlags: 0
@@ -24528,6 +24546,7 @@ MonoBehaviour:
   Particle: 0
   BulletDuration: 3
   BulletOriginalDuration: 5
+  trailTimeCache: 0
 --- !u!1 &6228694358724228904
 GameObject:
   m_ObjectHideFlags: 0
@@ -24699,6 +24718,7 @@ MonoBehaviour:
   Particle: 0
   BulletDuration: 3
   BulletOriginalDuration: 5
+  trailTimeCache: 0
 --- !u!1 &6228694358740858681
 GameObject:
   m_ObjectHideFlags: 0
@@ -24739,13 +24759,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6228694358740858681}
   serializedVersion: 6
-  lengthInSec: 10
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -29551,13 +29571,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6228694358898948166}
   serializedVersion: 6
-  lengthInSec: 10
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -34372,13 +34392,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6228694358928316377}
   serializedVersion: 6
-  lengthInSec: 10
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -39046,6 +39066,7 @@ MonoBehaviour:
   Particle: 0
   BulletDuration: 3
   BulletOriginalDuration: 5
+  trailTimeCache: 0
 --- !u!1 &6228694359038695017
 GameObject:
   m_ObjectHideFlags: 0
@@ -39096,7 +39117,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -43974,6 +43995,7 @@ MonoBehaviour:
   Particle: 0
   BulletDuration: 3
   BulletOriginalDuration: 5
+  trailTimeCache: 0
 --- !u!1 &6228694359174669052
 GameObject:
   m_ObjectHideFlags: 0
@@ -44014,13 +44036,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6228694359174669052}
   serializedVersion: 6
-  lengthInSec: 10
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -44089,7 +44111,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 0.1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -44839,7 +44861,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -48927,7 +48949,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -53675,13 +53697,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6228694359289612381}
   serializedVersion: 6
-  lengthInSec: 10
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -58471,6 +58493,7 @@ MonoBehaviour:
   Particle: 0
   BulletDuration: 3
   BulletOriginalDuration: 5
+  trailTimeCache: 0
 --- !u!1 &6228694359539593312
 GameObject:
   m_ObjectHideFlags: 0
@@ -58642,6 +58665,7 @@ MonoBehaviour:
   Particle: 0
   BulletDuration: 3
   BulletOriginalDuration: 5
+  trailTimeCache: 0
 --- !u!1 &6228694359551477150
 GameObject:
   m_ObjectHideFlags: 0
@@ -58683,13 +58707,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6228694359551477150}
   serializedVersion: 6
-  lengthInSec: 10
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -63479,6 +63503,7 @@ MonoBehaviour:
   Particle: 0
   BulletDuration: 3
   BulletOriginalDuration: 5
+  trailTimeCache: 0
 --- !u!1 &6228694359713069032
 GameObject:
   m_ObjectHideFlags: 0
@@ -63520,13 +63545,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6228694359713069032}
   serializedVersion: 6
-  lengthInSec: 10
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -68316,6 +68341,7 @@ MonoBehaviour:
   Particle: 0
   BulletDuration: 3
   BulletOriginalDuration: 5
+  trailTimeCache: 0
 --- !u!1 &6228694359958427354
 GameObject:
   m_ObjectHideFlags: 0
@@ -68356,13 +68382,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6228694359958427354}
   serializedVersion: 6
-  lengthInSec: 10
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -68431,7 +68457,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 0.1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -69181,7 +69207,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -73270,7 +73296,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -78027,7 +78053,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -82774,13 +82800,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9084322917451859305}
   serializedVersion: 6
-  lengthInSec: 10
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -87595,13 +87621,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9084322918882190566}
   serializedVersion: 6
-  lengthInSec: 10
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -92391,3 +92417,4 @@ MonoBehaviour:
   Particle: 0
   BulletDuration: 3
   BulletOriginalDuration: 5
+  trailTimeCache: 0

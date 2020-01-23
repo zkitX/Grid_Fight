@@ -17,7 +17,8 @@ public class VFXBulletSpeedCalibration : MonoBehaviour
     //PRIVATE
     TrailRenderer trail;
     ParticleSystem particle;
-    float trailTimeCache;
+    [HideInInspector]
+    public float trailTimeCache;
     float gravityMultiplierCache;
     float noiseMultiplierCache;
     float startSpeedMultiplier;

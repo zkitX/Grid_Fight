@@ -14,26 +14,44 @@ public class PSTimeGroup : MonoBehaviour
     List<TrailRenderer> Trails = new List<TrailRenderer>();
     [Tooltip("Cache of trail initial information")]
     List<float> TrailInitialTime = new List<float>();
+    bool initialized = false;
 
     void Awake()
+    {
+        
+    }
+
+    private void Start()
     {
         //search and register the trails in the group
         foreach (TrailRenderer trail in GetComponentsInChildren<TrailRenderer>())
         {
             Trails.Add(trail);
-            TrailInitialTime.Add(trail.time);
+            if (trail.GetComponent<VFXBulletSpeedCalibration>())
+            {
+                VFXBulletSpeedCalibration vfx = trail.GetComponent<VFXBulletSpeedCalibration>();
+                TrailInitialTime.Add(vfx.trailTimeCache * (vfx.BulletDuration/ vfx.BulletOriginalDuration));
+            }
+            else
+            {
+                TrailInitialTime.Add(trail.time);
+            }
         }
+        initialized = true;
     }
-
     // Update is called once per frame
     void Update()
     {
-        //Activate only if the variable AutoUpdate is enable
-        if (AutoUpdate)
+        if (initialized)
         {
-            UpdatePSTime();
+            //Activate only if the variable AutoUpdate is enable
+            if (AutoUpdate)
+            {
+                UpdatePSTime();
+            }
+            TrailStateUpdate();
         }
-        TrailStateUpdate();
+        
     }
     /// <summary>
     /// Set the Particle Systems Time according to PSTime variable, if put to 0 it will stop immediately
@@ -44,12 +62,13 @@ public class PSTimeGroup : MonoBehaviour
         foreach (ParticleSystem PS in GetComponentsInChildren<ParticleSystem>())
         {
             var m = PS.main;
+            m.loop = false;
             //To change the duration the particle needs to pe paused
             PS.Pause();
             m.duration = PSTime * m.simulationSpeed;
             //check if the particle is finished
-            DisableTrail = !PS.isEmitting;
             PS.Play();
+            DisableTrail = (PS.time>=m.duration);
         }
     }
 
@@ -69,7 +88,7 @@ public class PSTimeGroup : MonoBehaviour
             for (int i = 0; i < Trails.Count; i++)
             {
                 TrailRenderer trail = Trails[i];
-                trail.time -= trail.time / 10;
+                trail.time = trail.time / 1.1f;
                 if (trail.time < 0.005f)
                 {
                     trail.time = 0;
@@ -82,6 +101,7 @@ public class PSTimeGroup : MonoBehaviour
             {
                 TrailRenderer trail = Trails[i];
                 trail.time = TrailInitialTime[i];
+
             }
         }
     }
