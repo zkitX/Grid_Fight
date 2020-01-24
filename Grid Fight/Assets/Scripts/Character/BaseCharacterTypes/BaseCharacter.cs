@@ -169,8 +169,13 @@ public class BaseCharacter : MonoBehaviour
     //Basic attack Action that will start the attack anim every x seconds
     public virtual IEnumerator AttackAction(bool yieldBefore)
     {
+        if (nextAttack == null)
+        {
+            GetAttack(CharacterAnimationStateType.Atk);
+        }
         while (true)
         {
+
             //Wait until next attack (if yielding before)
             if (yieldBefore) yield return PauseAttack(CharInfo.AttackSpeedRatio * nextAttack.AttackRatioMultiplier);
 
@@ -179,34 +184,38 @@ public class BaseCharacter : MonoBehaviour
             {
                 yield return null;
             }
-            if(nextAttack == null)
-            {
-                GetAttack(CharacterAnimationStateType.Atk);
-            }
-
-            SetAnimation(nextAttack.Anim);
-
-            while (currentAttackPhase == AttackPhasesType.Start)
-            {
-                while (SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk)
-                {
-                    yield return null;
-                    if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle && !isMoving)
-                    {
-                        SetAnimation(nextAttack.Anim);
-                    }
-                }
-                yield return null;
-            }
+            Debug.Log("Attack sequence jhappening ::DD");
+            yield return AttackSequence();
+            Debug.Log("Attack sequence jhappening xDDD");
 
             GetAttack(CharacterAnimationStateType.Atk);
 
             //Wait until next attack
             if (!yieldBefore) yield return PauseAttack(CharInfo.AttackSpeedRatio * nextAttack.AttackRatioMultiplier);
+
+        }
+
+    }
+
+    public virtual IEnumerator AttackSequence()
+    {
+        SetAnimation(nextAttack.Anim);
+
+        while (currentAttackPhase == AttackPhasesType.Start)
+        {
+            while (SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk)
+            {
+                yield return null;
+                if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle && !isMoving)
+                {
+                    SetAnimation(nextAttack.Anim);
+                }
+            }
+            yield return null;
         }
     }
 
-    IEnumerator PauseAttack(float duration)
+    public IEnumerator PauseAttack(float duration)
     {
         float timer = 0;
         while (timer <= duration)
@@ -409,7 +418,7 @@ public class BaseCharacter : MonoBehaviour
         }
         else
         {
-            GridManagerScript.Instance.StartOnBattleFieldAttackCo(CharInfo, ((ScriptableObjectAttackTypeOnBattlefield)nextAttack), UMS.CurrentTilePos, UMS);
+            GridManagerScript.Instance.StartOnBattleFieldAttackCo(CharInfo, ((ScriptableObjectAttackTypeOnBattlefield)nextAttack), UMS.CurrentTilePos, UMS, this);
         }
     }
 

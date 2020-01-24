@@ -51,7 +51,7 @@ public class SpineAnimationManager : MonoBehaviour
             {
                 CharOwner.currentAttackPhase = AttackPhasesType.Cast;
             }
-            else if(CurrentAnim.ToString().Contains("Atk1"))
+            else if(CurrentAnim.ToString().Contains("Atk1") || CurrentAnim.ToString().Contains("Atk1_Charging"))
             {
                 CharOwner.currentSpecialAttackPhase = AttackPhasesType.Cast;
             }
@@ -63,7 +63,7 @@ public class SpineAnimationManager : MonoBehaviour
             {
                 CharOwner.currentAttackPhase = AttackPhasesType.Bullet;
             }
-            else if (CurrentAnim.ToString().Contains("Atk1"))
+            else if (CurrentAnim.ToString().Contains("Atk1") || CurrentAnim.ToString().Contains("Atk1_Charging"))
             {
                 CharOwner.currentSpecialAttackPhase = AttackPhasesType.Bullet;
             }
@@ -100,45 +100,67 @@ public class SpineAnimationManager : MonoBehaviour
         }
 
 
-        if (completedAnim == CharacterAnimationStateType.Atk1_IdleToAtk && CurrentAnim == CharacterAnimationStateType.Atk1_IdleToAtk)
+        //Switch between character and minion unique attacking animation sequences
+        if (CharOwner._CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
         {
-            if(((CharacterType_Script)CharOwner).AtkCharging)
-            {
-                ((CharacterType_Script)CharOwner).SpecialAttackChargingLoop();
-            }
-            else
+            if (completedAnim == CharacterAnimationStateType.Atk1_IdleToAtk && CurrentAnim == CharacterAnimationStateType.Atk1_IdleToAtk)
             {
                 ((CharacterType_Script)CharOwner).SpecialAttackLoop();
+                return;
             }
-            
-            return;
-        }
 
-     
-        if (completedAnim == CharacterAnimationStateType.Atk1_Loop &&
-                CurrentAnim == CharacterAnimationStateType.Atk1_Loop)
-        {
-            if(((CharacterType_Script)CharOwner).Atk1Queueing)
+            if (completedAnim == CharacterAnimationStateType.Atk1_Loop &&
+               CurrentAnim == CharacterAnimationStateType.Atk1_Loop)
             {
-                ((CharacterType_Script)CharOwner).SpecialAttackLoop();
+
+                if (((CharacterType_Script)CharOwner).AtkCharging)
+                {
+                    ((CharacterType_Script)CharOwner).SpecialAttackChargingLoop();
+                }
+                else
+                {
+                    if (((CharacterType_Script)CharOwner).Atk1Queueing)
+                    {
+                        ((CharacterType_Script)CharOwner).SpecialAttackLoop();
+                    }
+                    else
+                    {
+                        SetAnim(CharacterAnimationStateType.Atk1_AtkToIdle);
+                    }
+                }
+                return;
             }
-            else
+
+            if (completedAnim == CharacterAnimationStateType.Atk)
             {
-                SetAnim(CharacterAnimationStateType.Atk1_AtkToIdle);
+                CharOwner.currentAttackPhase = AttackPhasesType.End;
+            }
+            if (completedAnim == CharacterAnimationStateType.Atk1_AtkToIdle)
+            {
+                CharOwner.currentSpecialAttackPhase = AttackPhasesType.End;
+            }
+        }
+        else if (CharOwner._CharInfo.BaseCharacterType == BaseCharType.MinionType_Script)
+        {
+            if (completedAnim == CharacterAnimationStateType.Atk1_IdleToAtk && CurrentAnim == CharacterAnimationStateType.Atk1_IdleToAtk)
+            {
+                SetAnim(CharacterAnimationStateType.Atk1_Charging, true, 0f);
             }
 
-            return;
+            if(completedAnim == CharacterAnimationStateType.Atk1_Loop && CurrentAnim == CharacterAnimationStateType.Atk1_Loop)
+            {
+                //If they can still attack, keep them in the charging loop
+                if(((MinionType_Script)CharOwner).shotsLeftInAttack > 0)
+                {
+                    SetAnim(CharacterAnimationStateType.Atk1_Charging);
+                }
+                //otherwise revert them to the idle postion
+                else
+                {
+                    SetAnim(CharacterAnimationStateType.Atk1_AtkToIdle);
+                }
+            }
         }
-
-        if (completedAnim == CharacterAnimationStateType.Atk)
-        {
-            CharOwner.currentAttackPhase = AttackPhasesType.End;
-        }
-        if (completedAnim == CharacterAnimationStateType.Atk1_AtkToIdle)
-        {
-            CharOwner.currentSpecialAttackPhase = AttackPhasesType.End;
-        }
-
 
         if (completedAnim != CharacterAnimationStateType.Idle && !Loop)
         {
@@ -185,7 +207,7 @@ public class SpineAnimationManager : MonoBehaviour
         SetupSpineAnim();
         Loop = loop;
         SpineAnimationState.SetAnimation(1, anim.ToString(), loop).MixDuration = transition;
-        StartCoroutine(test(transition));
+        //StartCoroutine(test(transition));
         CurrentAnim = anim;
     }
 

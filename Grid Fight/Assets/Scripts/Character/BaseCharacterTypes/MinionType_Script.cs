@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MinionType_Script : BaseCharacter
 {
-    
+    public float shotsLeftInAttack = 0f;
     protected bool MoveCoOn = true;
     private IEnumerator MoveActionCo;
     public override void SetUpEnteringOnBattle()
@@ -34,7 +34,7 @@ public class MinionType_Script : BaseCharacter
         {
             yield return new WaitForFixedUpdate();
         }
-        while (MoveCoOn)
+        while (MoveCoOn && currentAttackPhase == AttackPhasesType.End)
         {
             float timer = 0;
             float MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y);
@@ -53,6 +53,35 @@ public class MinionType_Script : BaseCharacter
                 MoveCharOnDirection((InputDirection)Random.Range(0, 4));
             }
         }
+    }
+
+    
+
+    //Basic attack sequence
+    public override IEnumerator AttackSequence()
+    {
+        shotsLeftInAttack = ((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories.Count;
+
+        if(nextAttack.Anim == CharacterAnimationStateType.Atk) base.AttackSequence();
+        //If it does have the correct animation setup, play that charged animation
+        else
+        {
+            SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
+        }
+
+        while(shotsLeftInAttack != 0)
+        {
+            yield return null;
+        }
+
+        currentAttackPhase = AttackPhasesType.End;
+        yield return null;
+    }
+
+    public void fireAttackAnimation()
+    {
+        shotsLeftInAttack--;
+        SetAnimation(CharacterAnimationStateType.Atk1_Loop);
     }
 
     public override void StopMoveCo()
