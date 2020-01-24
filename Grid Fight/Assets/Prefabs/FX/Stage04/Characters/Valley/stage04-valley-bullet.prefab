@@ -153,6 +153,7 @@ MonoBehaviour:
   Particle: 1
   BulletDuration: 5
   BulletOriginalDuration: 2
+  trailTimeCache: 0
 --- !u!1 &1761786660131571579
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,6 +169,7 @@ GameObject:
   - component: {fileID: 1761786660131571576}
   - component: {fileID: 480686962336963731}
   - component: {fileID: 6080427405533152995}
+  - component: {fileID: 3216252201848028201}
   m_Layer: 0
   m_Name: stage04-valley-bullet
   m_TagString: Untagged
@@ -223,7 +225,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -4977,6 +4979,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletTargetTime: 4
   BulletOriginalTime: 1
+--- !u!114 &3216252201848028201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761786660131571579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2540eedaee99924438ce16aeff707ac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PSTime: 10
+  AutoUpdate: 1
 --- !u!1 &1761786660183718601
 GameObject:
   m_ObjectHideFlags: 0
@@ -5184,6 +5200,7 @@ MonoBehaviour:
   Particle: 1
   BulletDuration: 5
   BulletOriginalDuration: 2
+  trailTimeCache: 0
 --- !u!1 &1761786660784910811
 GameObject:
   m_ObjectHideFlags: 0
@@ -14725,6 +14742,7 @@ MonoBehaviour:
   Particle: 1
   BulletDuration: 5
   BulletOriginalDuration: 1
+  trailTimeCache: 0
 --- !u!1 &2408613518442662664
 GameObject:
   m_ObjectHideFlags: 0
@@ -24461,6 +24479,7 @@ MonoBehaviour:
   Particle: 1
   BulletDuration: 5
   BulletOriginalDuration: 2
+  trailTimeCache: 0
 --- !u!1 &2594364853155445391
 GameObject:
   m_ObjectHideFlags: 0
@@ -34269,6 +34288,7 @@ MonoBehaviour:
   Particle: 1
   BulletDuration: 5
   BulletOriginalDuration: 2
+  trailTimeCache: 0
 --- !u!1 &2594364853591527437
 GameObject:
   m_ObjectHideFlags: 0
@@ -34422,6 +34442,7 @@ MonoBehaviour:
   Particle: 1
   BulletDuration: 5
   BulletOriginalDuration: 2
+  trailTimeCache: 0
 --- !u!1 &2594364853668920794
 GameObject:
   m_ObjectHideFlags: 0
@@ -39242,6 +39263,7 @@ MonoBehaviour:
   Particle: 1
   BulletDuration: 5
   BulletOriginalDuration: 2
+  trailTimeCache: 0
 --- !u!1 &2594364854452151359
 GameObject:
   m_ObjectHideFlags: 0
@@ -48899,6 +48921,7 @@ MonoBehaviour:
   Particle: 1
   BulletDuration: 5
   BulletOriginalDuration: 2
+  trailTimeCache: 0
 --- !u!1 &3330387055205277580
 GameObject:
   m_ObjectHideFlags: 0

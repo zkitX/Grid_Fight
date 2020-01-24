@@ -41,13 +41,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915285204305672081}
   serializedVersion: 6
-  lengthInSec: 1
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -1300,7 +1300,7 @@ ParticleSystem:
   UVModule:
     serializedVersion: 2
     enabled: 1
-    mode: 0
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -1418,7 +1418,24 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: -7360308439372288083, guid: c18d1a1e5915b68408b0fa5b5d8b91e0,
+        type: 3}
+    - sprite: {fileID: 5008641955960341733, guid: c18d1a1e5915b68408b0fa5b5d8b91e0,
+        type: 3}
+    - sprite: {fileID: -573763744171136287, guid: c18d1a1e5915b68408b0fa5b5d8b91e0,
+        type: 3}
+    - sprite: {fileID: -7161035684826373813, guid: c18d1a1e5915b68408b0fa5b5d8b91e0,
+        type: 3}
+    - sprite: {fileID: 2499787201410029902, guid: c18d1a1e5915b68408b0fa5b5d8b91e0,
+        type: 3}
+    - sprite: {fileID: -3832425560385189475, guid: c18d1a1e5915b68408b0fa5b5d8b91e0,
+        type: 3}
+    - sprite: {fileID: 8252275332357371798, guid: c18d1a1e5915b68408b0fa5b5d8b91e0,
+        type: 3}
+    - sprite: {fileID: 7181303448228851600, guid: c18d1a1e5915b68408b0fa5b5d8b91e0,
+        type: 3}
+    - sprite: {fileID: -6197726543269084248, guid: c18d1a1e5915b68408b0fa5b5d8b91e0,
+        type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -4667,7 +4684,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 200
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -4707,6 +4724,7 @@ MonoBehaviour:
   Particle: 1
   BulletDuration: 1
   BulletOriginalDuration: 1
+  trailTimeCache: 0
 --- !u!1 &1915285204450942449
 GameObject:
   m_ObjectHideFlags: 0
@@ -4776,7 +4794,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -9549,13 +9567,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7723996662766597278}
   serializedVersion: 6
-  lengthInSec: 0.25
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -9616,7 +9634,7 @@ ParticleSystem:
       m_RotationOrder: 4
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
-  scalingMode: 0
+  scalingMode: 2
   randomSeed: 0
   InitialModule:
     serializedVersion: 3
@@ -9757,8 +9775,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.4
-      minScalar: 0.25
+      scalar: 0.2
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -10799,7 +10817,7 @@ ParticleSystem:
   UVModule:
     serializedVersion: 2
     enabled: 1
-    mode: 0
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -10917,7 +10935,24 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: -7360308439372288083, guid: c18d1a1e5915b68408b0fa5b5d8b91e0,
+        type: 3}
+    - sprite: {fileID: 5008641955960341733, guid: c18d1a1e5915b68408b0fa5b5d8b91e0,
+        type: 3}
+    - sprite: {fileID: -573763744171136287, guid: c18d1a1e5915b68408b0fa5b5d8b91e0,
+        type: 3}
+    - sprite: {fileID: -7161035684826373813, guid: c18d1a1e5915b68408b0fa5b5d8b91e0,
+        type: 3}
+    - sprite: {fileID: 2499787201410029902, guid: c18d1a1e5915b68408b0fa5b5d8b91e0,
+        type: 3}
+    - sprite: {fileID: -3832425560385189475, guid: c18d1a1e5915b68408b0fa5b5d8b91e0,
+        type: 3}
+    - sprite: {fileID: 8252275332357371798, guid: c18d1a1e5915b68408b0fa5b5d8b91e0,
+        type: 3}
+    - sprite: {fileID: 7181303448228851600, guid: c18d1a1e5915b68408b0fa5b5d8b91e0,
+        type: 3}
+    - sprite: {fileID: -6197726543269084248, guid: c18d1a1e5915b68408b0fa5b5d8b91e0,
+        type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -14145,7 +14180,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 12b56d0b81e80e748b8129a9c1a582d9, type: 2}
+  - {fileID: 2100000, guid: 8725cd1a75d2a3943b62421b15dd2078, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -14166,14 +14201,14 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 200
   m_RenderMode: 1
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
-  m_LengthScale: 1.2
+  m_LengthScale: 2
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
@@ -14230,14 +14265,14 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7723996662896811755}
   serializedVersion: 6
-  lengthInSec: 1
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
-  prewarm: 1
+  looping: 0
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -15479,8 +15514,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -15598,7 +15633,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 21300000, guid: 6cd8fde7cbafb6a448954e7110937242, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -18826,7 +18861,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f01387c5ddf3c1741aede9d1a2c2799b, type: 2}
+  - {fileID: 2100000, guid: b0c6d2f48e26b284382850227357c4a1, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -18847,7 +18882,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 200
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -18917,7 +18952,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -23609,8 +23644,8 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_RenderMode: 0
+  m_SortingOrder: 200
+  m_RenderMode: 5
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
@@ -23678,14 +23713,14 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7723996663038618794}
   serializedVersion: 6
-  lengthInSec: 0.3
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 1
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
-  prewarm: 1
+  looping: 0
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -24963,8 +24998,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -25064,7 +25099,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 21300000, guid: 6cd8fde7cbafb6a448954e7110937242, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -28274,7 +28309,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dcb6bc81c0f86a043bbc97af66cdf938, type: 2}
+  - {fileID: 2100000, guid: 8725cd1a75d2a3943b62421b15dd2078, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -28295,7 +28330,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 200
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -28359,14 +28394,14 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7723996663403383478}
   serializedVersion: 6
-  lengthInSec: 1
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
-  prewarm: 1
+  looping: 0
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -29608,8 +29643,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -29727,7 +29762,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 21300000, guid: 7d84a30476f82a148b4e2688af890afd, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -32955,7 +32990,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a3706764c40746746934f5d22917b0a1, type: 2}
+  - {fileID: 2100000, guid: 8725cd1a75d2a3943b62421b15dd2078, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -32976,7 +33011,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 200
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0

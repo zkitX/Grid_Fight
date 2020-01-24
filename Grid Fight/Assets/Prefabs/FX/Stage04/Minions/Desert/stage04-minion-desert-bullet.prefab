@@ -14366,6 +14366,7 @@ MonoBehaviour:
   Particle: 1
   BulletDuration: 1
   BulletOriginalDuration: 1
+  trailTimeCache: 0
 --- !u!1 &4355568754781111775
 GameObject:
   m_ObjectHideFlags: 0
@@ -14468,7 +14469,7 @@ ParticleSystem:
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -19117,6 +19118,7 @@ GameObject:
   - component: {fileID: 4355568755106609250}
   - component: {fileID: -8696994915524856718}
   - component: {fileID: 5119673317164840641}
+  - component: {fileID: 2781781583539603845}
   m_Layer: 0
   m_Name: stage04-minion-desert-bullet
   m_TagString: Untagged
@@ -19172,7 +19174,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -23905,6 +23907,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletTargetTime: 1
   BulletOriginalTime: 1
+--- !u!114 &2781781583539603845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4355568755106609261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2540eedaee99924438ce16aeff707ac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PSTime: 10
+  AutoUpdate: 1
 --- !u!1 &4355568755177381863
 GameObject:
   m_ObjectHideFlags: 0
@@ -24058,3 +24074,4 @@ MonoBehaviour:
   Particle: 1
   BulletDuration: 1
   BulletOriginalDuration: 1
+  trailTimeCache: 0

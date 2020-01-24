@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2284594597646784501}
   - component: {fileID: 1698366254657596095}
   - component: {fileID: 1917894117}
+  - component: {fileID: 7454091057731880592}
   m_Layer: 0
   m_Name: stage04-minion-forest-bullet
   m_TagString: Untagged
@@ -4783,6 +4784,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletTargetTime: 1
   BulletOriginalTime: 3
+--- !u!114 &7454091057731880592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2284594597646784502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2540eedaee99924438ce16aeff707ac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PSTime: 10
+  AutoUpdate: 1
 --- !u!1 &2284594598185661192
 GameObject:
   m_ObjectHideFlags: 0
@@ -9507,6 +9522,7 @@ MonoBehaviour:
   Particle: 1
   BulletDuration: 1
   BulletOriginalDuration: 1
+  trailTimeCache: 0
 --- !u!1 &4626255140395310622
 GameObject:
   m_ObjectHideFlags: 0
@@ -9660,6 +9676,7 @@ MonoBehaviour:
   Particle: 1
   BulletDuration: 1
   BulletOriginalDuration: 1
+  trailTimeCache: 0
 --- !u!1 &4626255140522935334
 GameObject:
   m_ObjectHideFlags: 0
@@ -9847,6 +9864,7 @@ MonoBehaviour:
   Particle: 1
   BulletDuration: 1
   BulletOriginalDuration: 1
+  trailTimeCache: 0
 --- !u!1 &4626255141130948404
 GameObject:
   m_ObjectHideFlags: 0
@@ -19378,3 +19396,4 @@ MonoBehaviour:
   Particle: 1
   BulletDuration: 1
   BulletOriginalDuration: 1
+  trailTimeCache: 0
