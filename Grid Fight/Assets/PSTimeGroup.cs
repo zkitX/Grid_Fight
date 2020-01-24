@@ -93,6 +93,7 @@ public class PSTimeGroup : MonoBehaviour
                 if (trail.time < 0.005f)
                 {
                     trail.time = 0;
+                    trail.emitting = false;
                 }
             }
         }
@@ -101,6 +102,7 @@ public class PSTimeGroup : MonoBehaviour
             for (int i = 0; i < Trails.Count; i++)
             {
                 TrailRenderer trail = Trails[i];
+                trail.emitting = true;
                 trail.time = TrailInitialTime[i];
 
             }
