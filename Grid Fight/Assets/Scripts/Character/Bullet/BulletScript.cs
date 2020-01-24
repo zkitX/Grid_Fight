@@ -36,6 +36,8 @@ public class BulletScript : MonoBehaviour
         //On enabled setup the collision avoidance for determinated layers 
         Physics.IgnoreLayerCollision(Side == SideType.LeftSide ? 9 : 10, Side == SideType.LeftSide ? 11 : 12);
         Dead = false;
+
+        
     }
 
     public void StartMoveToTile()
@@ -59,13 +61,14 @@ public class BulletScript : MonoBehaviour
         Vector3 offset = transform.position;
         //Timer used to set up the coroutine
         float timer = 0;
-     
         //Destination position
         Vector3 destination = bts.transform.position;
         //Duration of the particles 
-       // float Duration = Vector3.Distance(transform.position, destination) / CharInfo.BulletSpeed;
+        PS.GetComponent<PSTimeGroup>().UpdatePSTime(CharInfo.BulletSpeed);
+        //float Duration = Vector3.Distance(transform.position, destination) / CharInfo.BulletSpeed;
         Vector3 res;
         bool isMoving = true;
+        float ti = 0;
         while (isMoving)
         {
             yield return new WaitForFixedUpdate();
@@ -82,6 +85,8 @@ public class BulletScript : MonoBehaviour
 
             transform.position = res;
             timer += Time.fixedDeltaTime / CharInfo.BulletSpeed;
+            ti += Time.fixedDeltaTime;
+            Debug.Log(ti);
             //if timer ended the bullet fire the Effect
             if (timer > 1)
             {
@@ -212,13 +217,21 @@ public class BulletScript : MonoBehaviour
             }
             if(destroyBullet)
             {
-                PS.GetComponent<DisableParticleScript>().ResetParticle();
+               // PS.GetComponent<DisableParticleScript>().ResetParticle();
                 Dead = true;
                 StopAllCoroutines();
-                gameObject.SetActive(false);
+                //gameObject.SetActive(false);
+
+                Invoke("test", 2);
             }
                 
         }
+    }
+
+
+    void test()
+    {
+        gameObject.SetActive(false);
     }
 
 }

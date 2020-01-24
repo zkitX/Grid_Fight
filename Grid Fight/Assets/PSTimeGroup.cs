@@ -77,6 +77,7 @@ public class PSTimeGroup : MonoBehaviour
     /// </summary>
     public void UpdatePSTime(float time)
     {
+        PSTime = time;
         UpdatePSTime();
     }
 
