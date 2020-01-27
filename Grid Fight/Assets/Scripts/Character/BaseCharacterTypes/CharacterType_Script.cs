@@ -41,6 +41,11 @@ public class CharacterType_Script : BaseCharacter
         
     }
 
+    public override void SetUpLeavingBattle()
+    {
+        SetAnimation(CharacterAnimationStateType.Reverse_Arriving);
+    }
+
     #endregion
 
     #region Attack
@@ -51,30 +56,46 @@ public class CharacterType_Script : BaseCharacter
     public IEnumerator LoadSpecialAttack()
     {
         //Debug.Log(SpineAnim.CurrentAnim.ToString() + isSpecialLoading);
+
+
         if (CharInfo.StaminaStats.Stamina - CharInfo.StaminaStats.Stamina_Cost_S_Atk01 >= 0 
             && !isSpecialLoading && CanAttack)
         {
+            GameObject ps = null;
+            bool isChargingParticlesOn = false;
             isSpecialLoading = true;
-            AtkCharging = true;
+            if(!Atk1Queueing)
+            {
+                AtkCharging = true;
+            }
             float timer = 0;
-            if(SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop)
+            if(SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_IdleToAtk)
             {
                 SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
+                SpineAnim.SetAnimationSpeed(2);
             }
-            GameObject ps = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
+            else if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1_Loop)
+            {
+                Atk1Queueing = true;
+            }
+
             while (isSpecialLoading && !VFXTestMode && !isSpecialQueueing)
             {
-               
                 while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
                 {
                     yield return new WaitForEndOfFrame();
                 }
                 yield return new WaitForFixedUpdate();
                 timer += Time.fixedDeltaTime;
+
+                if (timer > 3 && !isChargingParticlesOn)
+                {
+                    isChargingParticlesOn = true;
+                    ps = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
+                }
             }
 
-            ps.SetActive(false);
-            ps = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.CastActivation, transform.position, UMS.Side);
+            
             if (timer > 3)
             {
                 currentSpecialAttackPhase = AttackPhasesType.Loading;
@@ -84,21 +105,16 @@ public class CharacterType_Script : BaseCharacter
                     {
                         yield return new WaitForEndOfFrame();
                     }
-                    
+                    ps.SetActive(false);
+                    //ps = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.CastActivation, transform.position, UMS.Side);
                     SpecialAttack(CharInfo.CharacterLevel);
                 }
             }
-            else if(timer < 0.5f)
+            else if (timer > 0.5f)
             {
-                Atk1Queueing = true;
-                SpecialAttack(CharInfo.CharacterLevel);
-                AtkCharging = false;
+                SetAnimation(CharacterAnimationStateType.Idle, true, 0.1f);
             }
-            else
-            {
-                SetAnimation(CharacterAnimationStateType.Idle);
-                AtkCharging = false;
-            }
+            AtkCharging = false;
 
         }
     }

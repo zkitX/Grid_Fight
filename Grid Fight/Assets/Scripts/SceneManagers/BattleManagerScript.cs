@@ -41,7 +41,8 @@ public class BattleManagerScript : MonoBehaviour
     public List<ScriptableObjectCharacterPrefab> ListOfScriptableObjectCharacterPrefab = new List<ScriptableObjectCharacterPrefab>();
     public List<BaseCharacter> AllCharactersOnField = new List<BaseCharacter>();
     public List<CharacterLoadingInfoClass> CurrentCharactersLoadingInfo = new List<CharacterLoadingInfoClass>();
-    private IEnumerator CharacterLoadingCo;
+    private IEnumerator Player1LoadingCo;
+    private IEnumerator Player2LoadingCo;
     [SerializeField]
     private Transform CharactersContainer;
     private List<CharacterBaseInfoClass> PlayerBattleInfo = new List<CharacterBaseInfoClass>();
@@ -150,11 +151,11 @@ public class BattleManagerScript : MonoBehaviour
     }
 
     //Used to set the already created char on a fixed Position in the battlefield
-    public void SetCharOnBoardOnFixedPos(ControllerType playerController, CharacterNameType cName, Vector2Int pos)
+    public CharacterType_Script SetCharOnBoardOnFixedPos(ControllerType playerController, CharacterNameType cName, Vector2Int pos)
     {
         if (PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == cName).First().isUsed)
         {
-            return;
+            return null;
         }
 
         BaseCharacter currentCharacter = AllCharactersOnField.Where(r => r.UMS.PlayerController.Contains(playerController) && r.CharInfo.CharacterID == cName).First();
@@ -180,7 +181,7 @@ public class BattleManagerScript : MonoBehaviour
             UIBattleManager.Instance.isRightSidePlaying = true;
         }
         PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == cName).First().isUsed = true;
-        SelectCharacter(playerController, (CharacterType_Script)currentCharacter);
+        return (CharacterType_Script)currentCharacter;
     }
 
     public IEnumerator MoveCharToBoardWithDelay(float delay, BaseCharacter cb, Vector3 nextPos)
@@ -292,26 +293,47 @@ public class BattleManagerScript : MonoBehaviour
     #region Loading_Selection Character
 
     //Used when the char is not in the battlefield to move it on the battlefield
-    public void LoadingNewCharacterToGrid(CharacterNameType cName,SideType side, ControllerType playerController)
+    public IEnumerator LoadingNewCharacterToGrid(CharacterNameType cName,SideType side, ControllerType playerController)
     {
         //FOR TESTING PURPOSES:
         bool singleUnitControls = true;
-        if (CharacterLoadingCo != null) StopCoroutine(CharacterLoadingCo);
+        while ((Player1LoadingCo != null && playerController == ControllerType.Player1) || (Player2LoadingCo != null && playerController == ControllerType.Player2))
+        {
+            yield return null;
+        }
 
         if (!AllCharactersOnField.Where(r=> r.UMS.Side == side && r.CharInfo.CharacterID == cName).First().IsOnField)
         {
             if(CurrentSelectedCharacters[playerController] == null || !singleUnitControls)
             {
                 //Spawn first character for player to a random position on the grid
-                CharacterLoadingCo = CharacterLoadingIn(cName, playerController);
+                switch (playerController)
+                {
+                    case ControllerType.Player1:
+                        Player1LoadingCo = CharacterLoadingIn(cName, playerController);
+                        break;
+                    case ControllerType.Player2:
+                        Player2LoadingCo = CharacterLoadingIn(cName, playerController);
+                        break;
+                    case ControllerType.Player3:
+                        break;
+                    case ControllerType.Player4:
+                        break;
+                    case ControllerType.Enemy:
+                        break;
+                }
             }
             else
             {
                 //Swap the characters if the player already has one under their control
-                if(CurrentSelectedCharacters[playerController].CanAttack) CharacterLoadingCo = SwapCharacters(cName, playerController);
+                if(CurrentSelectedCharacters[playerController].CanAttack)
+                {
+
+                }
+                    Player1LoadingCo = SwapCharacters(cName, playerController);
             }
-            CurrentCharactersLoadingInfo.Add(new CharacterLoadingInfoClass(cName, playerController, CharacterLoadingCo));
-            StartCoroutine(CharacterLoadingCo);
+            CurrentCharactersLoadingInfo.Add(new CharacterLoadingInfoClass(cName, playerController, Player1LoadingCo));
+            StartCoroutine(Player1LoadingCo);
         }
         else
         {
@@ -321,14 +343,15 @@ public class BattleManagerScript : MonoBehaviour
 
     IEnumerator SwapCharacters(CharacterNameType cName, ControllerType playerController)
     {
-        yield return HoldPressTimer(playerController);
+       // yield return HoldPressTimer(playerController);
 
         Vector2Int spawnPos = CurrentSelectedCharacters[playerController].UMS._CurrentTilePos;
-
+        CharacterType_Script currentCharacter = SetCharOnBoardOnFixedPos(playerController, cName, spawnPos);
+        currentCharacter.SpineAnim.SetAnimationSpeed(2);
         yield return RemoveCharacterFromBaord(playerController, CurrentSelectedCharacters[playerController]);
-
+        SelectCharacter(playerController, currentCharacter);
         //And drop the new character in
-        SetCharOnBoardOnFixedPos(playerController, cName, spawnPos);
+
 
     }
 
@@ -442,21 +465,24 @@ public class BattleManagerScript : MonoBehaviour
     //Load char in a random pos
     private IEnumerator CharacterLoadingIn(CharacterNameType cName, ControllerType playerController)
     {
-        yield return HoldPressTimer(playerController);
+       // yield return HoldPressTimer(playerController);
         if (CurrentCharactersLoadingInfo.Where(r => r.CName == cName && r.PlayerController == playerController).ToList().Count > 0)
         {
             SetCharOnBoardOnRandomPos(playerController, cName);
         }
+        yield return null;
     }
 
     //Load char in a fixed pos
     private IEnumerator CharacterLoadingIn(CharacterNameType cName, ControllerType playerController, Vector2Int pos)
     {
-        yield return HoldPressTimer(playerController);
+        //yield return HoldPressTimer(playerController);
         if (CurrentCharactersLoadingInfo.Where(r => r.CName == cName && r.PlayerController == playerController).ToList().Count > 0)
         {
             SetCharOnBoardOnRandomPos(playerController, cName);
         }
+
+        yield return null;
     }
 
     //Handle the wait for a button hold (relating to spawning in)

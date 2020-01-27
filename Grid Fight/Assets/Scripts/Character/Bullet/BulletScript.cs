@@ -86,7 +86,6 @@ public class BulletScript : MonoBehaviour
             transform.position = res;
             timer += Time.fixedDeltaTime / CharInfo.BulletSpeed;
             ti += Time.fixedDeltaTime;
-            Debug.Log(ti);
             //if timer ended the bullet fire the Effect
             if (timer > 1)
             {
@@ -217,11 +216,8 @@ public class BulletScript : MonoBehaviour
             }
             if(destroyBullet)
             {
-               // PS.GetComponent<DisableParticleScript>().ResetParticle();
                 Dead = true;
                 StopAllCoroutines();
-                //gameObject.SetActive(false);
-
                 Invoke("test", 2);
             }
                 
@@ -231,6 +227,7 @@ public class BulletScript : MonoBehaviour
 
     void test()
     {
+        PS.GetComponent<DisableParticleScript>().ResetParticle();
         gameObject.SetActive(false);
     }
 
