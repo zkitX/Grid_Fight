@@ -55,12 +55,32 @@ public class MinionType_Script : BaseCharacter
         }
     }
 
+
+    private int GetHowManyAttackAreOnBattleField(List<BulletBehaviourInfoClassOnBattleField> bulTraj)
+    {
+        int res = 0;
+        Vector2Int basePos = new Vector2Int(0, GridManagerScript.Instance.YGridSeparator);
+        foreach (BulletBehaviourInfoClassOnBattleField item in bulTraj)
+        {
+            foreach (Vector2Int target in item.BulletEffectTiles)
+            {
+
+                Vector2Int posToCheck =  basePos - target;
+                if (GridManagerScript.Instance.isPosOnField(posToCheck))
+                {
+                    res++;
+                }
+            }
+        }
+
+        return res;
+    }
     
 
     //Basic attack sequence
     public override IEnumerator AttackSequence()
     {
-        shotsLeftInAttack = ((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories.Count;
+        shotsLeftInAttack = GetHowManyAttackAreOnBattleField(((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories);
 
         if(nextAttack.Anim == CharacterAnimationStateType.Atk) base.AttackSequence();
         //If it does have the correct animation setup, play that charged animation
@@ -80,7 +100,9 @@ public class MinionType_Script : BaseCharacter
 
     public void fireAttackAnimation()
     {
+        
         shotsLeftInAttack--;
+        Debug.Log("Entered   " + shotsLeftInAttack);
         SetAnimation(CharacterAnimationStateType.Atk1_Loop);
     }
 

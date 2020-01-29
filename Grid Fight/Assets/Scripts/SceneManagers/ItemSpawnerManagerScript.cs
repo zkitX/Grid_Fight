@@ -49,11 +49,7 @@ public class ItemSpawnerManagerScript : MonoBehaviour
 
             while (timer <= spawningTime)
             {
-                yield return new WaitForFixedUpdate();
-                while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
-                {
-                    yield return new WaitForEndOfFrame();
-                }
+                yield return BattleManagerScript.Instance.PauseUntil();
                 timer += Time.fixedDeltaTime;
             }
 

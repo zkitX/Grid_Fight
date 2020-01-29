@@ -44,11 +44,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
         float timer = 0;
         while (timer <= ItemPowerUpInfo.DurationOnField)
         {
-            yield return new WaitForFixedUpdate();
-            while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
-            {
-                yield return new WaitForEndOfFrame();
-            }
+            yield return BattleManagerScript.Instance.PauseUntil();
             timer += Time.fixedDeltaTime;
         }
         DurationOnBattleFieldCo = null;

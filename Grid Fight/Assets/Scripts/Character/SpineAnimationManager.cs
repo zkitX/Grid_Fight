@@ -47,26 +47,12 @@ public class SpineAnimationManager : MonoBehaviour
         }
         if (e.Data.Name.Contains("FireCastParticle"))
         {
-            if (CurrentAnim == CharacterAnimationStateType.Atk)
-            {
-                CharOwner.currentAttackPhase = AttackPhasesType.Cast;
-            }
-            else if(CurrentAnim.ToString().Contains("Atk1") || CurrentAnim.ToString().Contains("Atk1_Charging"))
-            {
-                CharOwner.currentSpecialAttackPhase = AttackPhasesType.Cast;
-            }
+            CharOwner.currentAttackPhase = AttackPhasesType.Cast;
             CharOwner.FireCastParticles();
         }
         if (e.Data.Name.Contains("FireBulletParticle"))
         {
-            if(CurrentAnim == CharacterAnimationStateType.Atk)
-            {
-                CharOwner.currentAttackPhase = AttackPhasesType.Bullet;
-            }
-            else if (CurrentAnim.ToString().Contains("Atk1") || CurrentAnim.ToString().Contains("Atk1_Charging"))
-            {
-                CharOwner.currentSpecialAttackPhase = AttackPhasesType.Bullet;
-            }
+            CharOwner.currentAttackPhase = AttackPhasesType.Bullet;
             CharOwner.CharInfo.Stamina -= CharOwner.CharInfo.StaminaStats.Stamina_Cost_Atk;
             CharOwner.CreateAttack();
            
@@ -91,37 +77,50 @@ public class SpineAnimationManager : MonoBehaviour
 
         if (completedAnim == CharacterAnimationStateType.Arriving || completedAnim.ToString().Contains("Growing"))
         {
+            Debug.Log("Arriving complete");
             CharOwner.SetAttackReady(true);
             CharOwner.StartAttakCo();
         }
-        if(CurrentAnim == CharacterAnimationStateType.Death)
+        if (CurrentAnim == CharacterAnimationStateType.Reverse_Arriving)
+        {
+            CharOwner.SetAttackReady(false);
+        }
+
+        if (CurrentAnim == CharacterAnimationStateType.Death)
         {
             return;
         }
 
 
         //Switch between character and minion unique attacking animation sequences
-        if (CharOwner._CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
+        if (CharOwner.UMS.CurrentAttackType == AttackType.Particles)
         {
             if (completedAnim == CharacterAnimationStateType.Atk1_IdleToAtk && CurrentAnim == CharacterAnimationStateType.Atk1_IdleToAtk)
             {
                 ((CharacterType_Script)CharOwner).SpecialAttackLoop();
+                ((CharacterType_Script)CharOwner).AtkCharging = true;
+                return;
+            }
+
+            if (completedAnim == CharacterAnimationStateType.Atk2_IdleToAtk && CurrentAnim == CharacterAnimationStateType.Atk2_IdleToAtk)
+            {
+                ((CharacterType_Script)CharOwner).SecondSpecialAttackChargingLoop();
                 return;
             }
 
             if (completedAnim == CharacterAnimationStateType.Atk1_Loop &&
                CurrentAnim == CharacterAnimationStateType.Atk1_Loop)
             {
-
-                if (((CharacterType_Script)CharOwner).AtkCharging)
+                if (((CharacterType_Script)CharOwner).Atk1Queueing)
                 {
-                    ((CharacterType_Script)CharOwner).SpecialAttackChargingLoop();
+                    ((CharacterType_Script)CharOwner).SpecialAttackLoop();
                 }
                 else
                 {
-                    if (((CharacterType_Script)CharOwner).Atk1Queueing)
+                    if (((CharacterType_Script)CharOwner).AtkCharging)
                     {
-                        ((CharacterType_Script)CharOwner).SpecialAttackLoop();
+                        
+                        ((CharacterType_Script)CharOwner).SecondSpecialAttackStarting();
                     }
                     else
                     {
@@ -130,17 +129,13 @@ public class SpineAnimationManager : MonoBehaviour
                 }
                 return;
             }
-
-            if (completedAnim == CharacterAnimationStateType.Atk)
+         
+            if (completedAnim == CharacterAnimationStateType.Atk1_AtkToIdle || completedAnim == CharacterAnimationStateType.Atk2_AtkToIdle || completedAnim == CharacterAnimationStateType.Atk)
             {
                 CharOwner.currentAttackPhase = AttackPhasesType.End;
             }
-            if (completedAnim == CharacterAnimationStateType.Atk1_AtkToIdle)
-            {
-                CharOwner.currentSpecialAttackPhase = AttackPhasesType.End;
-            }
         }
-        else if (CharOwner._CharInfo.BaseCharacterType == BaseCharType.MinionType_Script)
+        else if (CharOwner.UMS.CurrentAttackType == AttackType.Tile)
         {
             if (completedAnim == CharacterAnimationStateType.Atk1_IdleToAtk && CurrentAnim == CharacterAnimationStateType.Atk1_IdleToAtk)
             {
@@ -202,30 +197,16 @@ public class SpineAnimationManager : MonoBehaviour
 
     public void SetAnim(CharacterAnimationStateType anim, bool loop, float transition)
     {
-
-        Debug.Log(anim.ToString());
+        if(anim == CharacterAnimationStateType.Arriving)
+        {
+           // Debug.Log("Arriving");
+        }
+        Debug.Log(anim.ToString() +  "    " + CharOwner.CharInfo.CharacterID.ToString());
         SetupSpineAnim();
         Loop = loop;
         SpineAnimationState.SetAnimation(1, anim.ToString(), loop).MixDuration = transition;
-        //StartCoroutine(test(transition));
         CurrentAnim = anim;
     }
-
-    private IEnumerator test(float asdaf)
-    {
-        float timer = 0;
-        while (timer <= asdaf)
-        {
-            yield return new WaitForFixedUpdate();
-            while (!CharOwner.VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
-            {
-                yield return new WaitForEndOfFrame();
-            }
-            timer += Time.fixedDeltaTime;
-        }
-        SpineAnimationState.SetEmptyAnimation(0, 0);
-    }
-
 
     public float GetAnimLenght(CharacterAnimationStateType anim)
     {

@@ -162,6 +162,11 @@ public class GridManagerScript : MonoBehaviour
             {
                 pos.y = i;
                 res = BattleTiles.Where(r => r.Pos == pos).FirstOrDefault();
+                if(res == null)
+                {
+
+                }
+
                 if (res.BattleTileState != BattleTileStateType.Blocked)
                 {
                     return res;
@@ -301,11 +306,7 @@ public class GridManagerScript : MonoBehaviour
             }
             while (timer <= item.Delay)
             {
-                yield return new WaitForFixedUpdate();
-                while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
-                {
-                    yield return new WaitForEndOfFrame();
-                }
+                yield return BattleManagerScript.Instance.PauseUntil();
                 timer += Time.fixedDeltaTime;
             }
         }
