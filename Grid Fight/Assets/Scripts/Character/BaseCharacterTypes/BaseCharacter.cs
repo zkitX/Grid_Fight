@@ -183,9 +183,7 @@ public class BaseCharacter : MonoBehaviour
             {
                 yield return null;
             }
-            Debug.Log("Attack sequence jhappening ::DD");
             yield return AttackSequence();
-            Debug.Log("Attack sequence jhappening xDDD");
 
             GetAttack(CharacterAnimationStateType.Atk);
 
@@ -478,6 +476,7 @@ public class BaseCharacter : MonoBehaviour
                 CurrentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos) && r.BattleTileState == BattleTileStateType.Empty).ToList().Count ==
                 CurrentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos)).ToList().Count)
             {
+                SetAnimation(AnimState);
                 isMoving = true;
                 foreach (BattleTileScript item in prevBattleTile)
                 {
@@ -496,13 +495,7 @@ public class BaseCharacter : MonoBehaviour
                 {
                     StopCoroutine(MoveCo);
                 }
-
-                if(CurrentBattleTiles.Where(r => r.Pos == UMS.CurrentTilePos).FirstOrDefault() == null)
-                {
-
-                }
-
-                MoveCo = MoveByTile(CurrentBattleTiles.Where(r => r.Pos == UMS.CurrentTilePos).First().transform.position, AnimState, curve);
+                MoveCo = MoveByTile(CurrentBattleTiles.Where(r => r.Pos == UMS.CurrentTilePos).First().transform.position, curve, SpineAnim.GetAnimLenght(AnimState));
                 StartCoroutine(MoveCo);
             }
 
@@ -538,10 +531,8 @@ public class BaseCharacter : MonoBehaviour
 
 
     //Move the character on the determinated Tile position
-    protected virtual IEnumerator MoveByTile(Vector3 nextPos, CharacterAnimationStateType animState, AnimationCurve curve)
+    protected virtual IEnumerator MoveByTile(Vector3 nextPos, AnimationCurve curve, float animLength)
     {
-        SetAnimation(animState);
-        float AnimLength = SpineAnim.GetAnimLenght(animState);
         //  Debug.Log(AnimLength + "  AnimLenght   " + AnimLength / CharInfo.MovementSpeed + " Actual duration" );
         float timer = 0;
         float speedTimer = 0;
@@ -551,8 +542,8 @@ public class BaseCharacter : MonoBehaviour
         {
           
             yield return BattleManagerScript.Instance.PauseUntil();
-            float newAdd = (Time.fixedDeltaTime / (AnimLength / CharInfo.MovementSpeed));
-            timer += (Time.fixedDeltaTime / (AnimLength / CharInfo.MovementSpeed));
+            float newAdd = (Time.fixedDeltaTime / (animLength / CharInfo.MovementSpeed));
+            timer += (Time.fixedDeltaTime / (animLength / CharInfo.MovementSpeed));
             speedTimer += newAdd * curve.Evaluate(timer + newAdd);
             transform.position = Vector3.Lerp(offset, nextPos, speedTimer);
         }
@@ -771,6 +762,11 @@ public class BaseCharacter : MonoBehaviour
             SpineAnimatorsetup();
         }
 
+        if(isMoving)
+        {
+            return;
+        }
+   
         if(SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving || SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving)
         {
             return;
@@ -781,7 +777,7 @@ public class BaseCharacter : MonoBehaviour
             currentAttackPhase = AttackPhasesType.End;
         }
 
-        if (!animState.ToString().Contains("Atk") && SpineAnim.CurrentAnim.ToString().Contains("Atk"))
+        if (!animState.ToString().Contains("Atk"))
         {
             currentAttackPhase = AttackPhasesType.End;
         }

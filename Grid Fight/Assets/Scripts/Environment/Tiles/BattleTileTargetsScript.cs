@@ -45,7 +45,7 @@ public class BattleTileTargetsScript : MonoBehaviour
             if (tc.RemainingTime <= 0.2f/*value at which to fire the animation for the shot*/ && attacker.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script && !attackerFiredAttackAnim)
             {
                 attackerFiredAttackAnim = true;
-                ((MinionType_Script)attacker).fireAttackAnimation(); // trigger the shoot anim
+                //((MinionType_Script)attacker).fireAttackAnimation(); // trigger the shoot anim
             }
         }
         //animToFire["ExclamationAnim"].speed = 1;

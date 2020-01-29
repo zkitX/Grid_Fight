@@ -117,22 +117,36 @@ public class SpineAnimationManager : MonoBehaviour
                 }
                 else
                 {
-                    if (((CharacterType_Script)CharOwner).AtkCharging)
-                    {
-                        
-                        ((CharacterType_Script)CharOwner).SecondSpecialAttackStarting();
-                    }
-                    else
-                    {
-                        SetAnim(CharacterAnimationStateType.Atk1_AtkToIdle);
-                    }
+                    /* if (((CharacterType_Script)CharOwner).AtkCharging)
+                     {
+
+                         ((CharacterType_Script)CharOwner).SecondSpecialAttackStarting();
+                     }
+                     else
+                     {
+                         SetAnim(CharacterAnimationStateType.Atk1_AtkToIdle);
+                     }*/
+
+                    SetAnim(CharacterAnimationStateType.Atk1_AtkToIdle);
+
                 }
                 return;
             }
          
-            if (completedAnim == CharacterAnimationStateType.Atk1_AtkToIdle || completedAnim == CharacterAnimationStateType.Atk2_AtkToIdle || completedAnim == CharacterAnimationStateType.Atk)
+            if (completedAnim == CharacterAnimationStateType.Atk1_AtkToIdle || completedAnim == CharacterAnimationStateType.Atk2_AtkToIdle
+                || completedAnim == CharacterAnimationStateType.Atk || completedAnim == CharacterAnimationStateType.Atk1)
             {
-                CharOwner.currentAttackPhase = AttackPhasesType.End;
+                if(((CharacterType_Script)CharOwner).AtkCharging)
+                {
+                    SetAnim(CharacterAnimationStateType.Atk2_IdleToAtk);
+                    return;
+                }
+                else
+                {
+                    ((CharacterType_Script)CharOwner).GetAttack(CharacterAnimationStateType.Atk);
+                    CharOwner.currentAttackPhase = AttackPhasesType.End;
+                }
+               
             }
         }
         else if (CharOwner.UMS.CurrentAttackType == AttackType.Tile)
@@ -154,6 +168,12 @@ public class SpineAnimationManager : MonoBehaviour
                 {
                     SetAnim(CharacterAnimationStateType.Atk1_AtkToIdle);
                 }
+            }
+
+            if (completedAnim == CharacterAnimationStateType.Atk1_AtkToIdle || completedAnim == CharacterAnimationStateType.Atk2_AtkToIdle
+                || completedAnim == CharacterAnimationStateType.Atk || completedAnim == CharacterAnimationStateType.Atk1)
+            {
+                CharOwner.currentAttackPhase = AttackPhasesType.End;
             }
         }
 
@@ -201,7 +221,6 @@ public class SpineAnimationManager : MonoBehaviour
         {
            // Debug.Log("Arriving");
         }
-        Debug.Log(anim.ToString() +  "    " + CharOwner.CharInfo.CharacterID.ToString());
         SetupSpineAnim();
         Loop = loop;
         SpineAnimationState.SetAnimation(1, anim.ToString(), loop).MixDuration = transition;

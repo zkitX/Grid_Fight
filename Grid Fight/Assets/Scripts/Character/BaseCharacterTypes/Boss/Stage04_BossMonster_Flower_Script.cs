@@ -13,7 +13,9 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
 
     public override void SetUpEnteringOnBattle()
     {
-        StartCoroutine(base.MoveByTile(GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).transform.position, (CharacterAnimationStateType)System.Enum.Parse(typeof(CharacterAnimationStateType), CharacterAnimationStateType.Growing.ToString() + Random.Range(1, 3).ToString()), SpineAnim.UpMovementSpeed));
+        CharacterAnimationStateType animType = (CharacterAnimationStateType)System.Enum.Parse(typeof(CharacterAnimationStateType), CharacterAnimationStateType.Growing.ToString() + Random.Range(1, 3).ToString());
+        SetAnimation(animType);
+        StartCoroutine(base.MoveByTile(GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).transform.position, SpineAnim.UpMovementSpeed, SpineAnim.GetAnimLenght(animType)));
         Skin newSkin = new Skin("new-skin"); // 1. Create a new empty skin
         newSkin.AddSkin(SpineAnim.skeleton.Data.FindSkin(mfType.ToString())); // 2. Add items
         SpineAnim.skeleton.SetSkin(mfType.ToString());
@@ -70,9 +72,12 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
         }
     }
 
-    protected override IEnumerator MoveByTile(Vector3 nextPos, CharacterAnimationStateType animState, AnimationCurve curve)
+    protected override IEnumerator MoveByTile(Vector3 nextPos, AnimationCurve curve, float animLength)
     {
-        return base.MoveByTile(nextPos, CharacterAnimationStateType.Idle, curve);
+
+        
+        SetAnimation(CharacterAnimationStateType.Idle);
+        return base.MoveByTile(nextPos, curve, animLength);
     }
 
     public override void StopMoveCo()

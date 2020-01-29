@@ -78,25 +78,29 @@ public class MinionType_Script : BaseCharacter
     
 
     //Basic attack sequence
-    public override IEnumerator AttackSequence()
+  /*  public override IEnumerator AttackSequence()
     {
         shotsLeftInAttack = GetHowManyAttackAreOnBattleField(((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories);
 
-        if(nextAttack.Anim == CharacterAnimationStateType.Atk) base.AttackSequence();
-        //If it does have the correct animation setup, play that charged animation
-        else
-        {
-            SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
-        }
+          if (nextAttack.Anim == CharacterAnimationStateType.Atk)
+          {
+              base.AttackSequence();
+          }
+          //If it does have the correct animation setup, play that charged animation
+          else
+          {
+              SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
+          }
 
-        while(shotsLeftInAttack != 0)
+
+        while (shotsLeftInAttack != 0)
         {
             yield return null;
         }
 
         currentAttackPhase = AttackPhasesType.End;
         yield return null;
-    }
+    }*/
 
     public void fireAttackAnimation()
     {

@@ -109,10 +109,12 @@ public class CharacterType_Script : BaseCharacter
             {
                 SetAnimation(CharacterAnimationStateType.Idle, true, 0.1f);
             }
-
-           
         }
     }
+
+    
+
+
 
     private IEnumerator AtkHoldingCo()
     {
@@ -150,7 +152,7 @@ public class CharacterType_Script : BaseCharacter
     {
         Atk1Queueing = false;
         currentAttackPhase = AttackPhasesType.Start;
-        SetAnimation(CharacterAnimationStateType.Atk2_IdleToAtk, false);
+        SetAnimation(CharacterAnimationStateType.Atk1_AtkToIdle, false);
     }
 
 

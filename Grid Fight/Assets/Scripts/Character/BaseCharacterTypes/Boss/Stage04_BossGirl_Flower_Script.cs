@@ -12,7 +12,8 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
 
     public override void SetUpEnteringOnBattle()
     {
-        StartCoroutine(base.MoveByTile(GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).transform.position, CharacterAnimationStateType.Growing, SpineAnim.UpMovementSpeed));
+        SetAnimation(CharacterAnimationStateType.Growing);
+        StartCoroutine(base.MoveByTile(GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).transform.position, SpineAnim.UpMovementSpeed, SpineAnim.GetAnimLenght(CharacterAnimationStateType.Growing)));
     }
 
     public override void StartMoveCo()
@@ -65,9 +66,10 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
         }
     }
 
-    protected override IEnumerator MoveByTile(Vector3 nextPos, CharacterAnimationStateType animState, AnimationCurve curve)
+    protected override IEnumerator MoveByTile(Vector3 nextPos, AnimationCurve curve, float animLenght)
     {
-        return base.MoveByTile(nextPos,  CharacterAnimationStateType.Idle, curve);
+        SetAnimation(CharacterAnimationStateType.Idle);
+        return base.MoveByTile(nextPos, curve, animLenght);
     }
 
     public override void StopMoveCo()
