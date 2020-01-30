@@ -324,11 +324,13 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonZRUpEvent(int player)
     {
         //Debug.Log(player + "  " + "ZR Up");
+
     }
 
     private void Instance_ButtonRUpEvent(int player)
     {
         //Debug.Log(player + "  " + "R Up");
+        StopSelectedCharacterChargingAttack(player);
     }
 
     private void Instance_ButtonLeftUpEvent(int player)
@@ -374,10 +376,8 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonAUpEvent(int player)
     {
         //Debug.Log(player + "  " + "A Up");
-        //VibrationController.Instance.CustomVibration(player, VibrationType.a);
-        //SelectedCharacterLoadingSpecialAttack(player);
+       
 
-        StopSelectedCharacterLoadingSpecialAttack(player);
     }
 
     private void Instance_ButtonRightSRUpEvent(int player)
@@ -558,57 +558,64 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonZRDownEvent(int player)
     {
         //Debug.Log(player + "  " + "ZR Down");
+        SelectedCharacterStartQuickAttack(player);
+
     }
 
     private void Instance_ButtonRDownEvent(int player)
     {
         //Debug.Log(player + "  " + "R Down");
+        SelectedCharacterStartChargingAttack(player);
+
     }
 
     private void Instance_ButtonLeftDownEvent(int player)
     {
         //Debug.Log(player + "  " + "Left Down");
-        LoadSelectCharacter(CharacterSelectionType.Left, (ControllerType)player);
+        //LoadSelectCharacter(CharacterSelectionType.Left, (ControllerType)player);
 
     }
 
     private void Instance_ButtonRightDownEvent(int player)
     {
         //Debug.Log(player + "  " + "Right Down");
-        LoadSelectCharacter(CharacterSelectionType.Right, (ControllerType)player);
+        //LoadSelectCharacter(CharacterSelectionType.Right, (ControllerType)player);
     }
 
     private void Instance_ButtonDownDownEvent(int player)
     {
         //Debug.Log(player + "  " + "Down Down");
-        LoadSelectCharacter(CharacterSelectionType.Down, (ControllerType)player);
+        //LoadSelectCharacter(CharacterSelectionType.Down, (ControllerType)player);
     }
 
     private void Instance_ButtonUpDownEvent(int player)
     {
         //Debug.Log(player + "  " + "Up Down");
-        LoadSelectCharacter(CharacterSelectionType.Up, (ControllerType)player);
+        //LoadSelectCharacter(CharacterSelectionType.Up, (ControllerType)player);
     }
 
     private void Instance_ButtonYDownEvent(int player)
     {
         //Debug.Log(player + "  " + "Y Down");
+        LoadSelectCharacter(CharacterSelectionType.Left, (ControllerType)player);
     }
 
     private void Instance_ButtonXDownEvent(int player)
     {
         //Debug.Log(player + "  " + "X Down");
+        LoadSelectCharacter(CharacterSelectionType.Up, (ControllerType)player);
     }
 
     private void Instance_ButtonBDownEvent(int player)
     {
         //Debug.Log(player + "  " + "B Down");
+        LoadSelectCharacter(CharacterSelectionType.Down, (ControllerType)player);
     }
 
     private void Instance_ButtonADownEvent(int player)
     {
         //Debug.Log(player + "  " + "A Down");
-        SelectedCharacterLoadingSpecialAttack(player);
+        LoadSelectCharacter(CharacterSelectionType.Right, (ControllerType)player);
     }
 
     private void Instance_ButtonRightSRDownEvent(int player)
@@ -653,14 +660,19 @@ public class UserInputManager : MonoBehaviour
     #endregion
 
 
-    public void SelectedCharacterLoadingSpecialAttack(int player)
+    public void SelectedCharacterStartChargingAttack(int player)
     {
-        BattleManagerScript.Instance.Switch_LoadingSpecial((ControllerType)player);
+        BattleManagerScript.Instance.StartChargingAttack((ControllerType)player);
     }
 
-    public void StopSelectedCharacterLoadingSpecialAttack(int player)
+    public void SelectedCharacterStartQuickAttack(int player)
     {
-        BattleManagerScript.Instance.Switch_StopLoadingSpecial((ControllerType)player);
+        BattleManagerScript.Instance.StartQuickAttack((ControllerType)player);
+    }
+
+    public void StopSelectedCharacterChargingAttack(int player)
+    {
+        BattleManagerScript.Instance.StopChargingAttack((ControllerType)player);
     }
 
     public void UserInputJoystickHandler(int player, InputDirection dir)
@@ -682,6 +694,12 @@ public class UserInputManager : MonoBehaviour
     public void StopLoadSelectCharacter(CharacterSelectionType characterSelection, ControllerType controllerType)
     {
         BattleManagerScript.Instance.Switch_StopLoadingNewCharacter(characterSelection, controllerType);
+    }
+
+
+    public void BlockingStateForSelectedCharacter(int player)
+    {
+        BattleManagerScript.Instance.CurrentCharacterBlocking((ControllerType)player);
     }
 
 }

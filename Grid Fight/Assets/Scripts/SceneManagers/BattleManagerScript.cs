@@ -141,7 +141,6 @@ public class BattleManagerScript : MonoBehaviour
         if (playerController == ControllerType.Player1)
         {
             UIBattleManager.Instance.isLeftSidePlaying = false;
-
         }
         else if (playerController == ControllerType.Player2)
         {
@@ -520,7 +519,7 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
-    public void Switch_StopLoadingSpecial(ControllerType controllerType)
+    public void StopChargingAttack(ControllerType controllerType)
     {
         if (CurrentBattleState == BattleState.Battle)
         {
@@ -531,13 +530,23 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
-    public void Switch_LoadingSpecial(ControllerType controllerType)
+    public void StartChargingAttack(ControllerType controllerType)
     {
         if (CurrentBattleState == BattleState.Battle)
         {
             if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null)
             {
-                StartCoroutine(CurrentSelectedCharacters[controllerType].Character.LoadSpecialAttack());
+                StartCoroutine(CurrentSelectedCharacters[controllerType].Character.StartChargingAttack());
+            }
+        }
+    }
+    public void StartQuickAttack(ControllerType controllerType)
+    {
+        if (CurrentBattleState == BattleState.Battle)
+        {
+            if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null)
+            {
+                CurrentSelectedCharacters[controllerType].Character.StartQuickAttack();
             }
         }
     }
@@ -556,6 +565,13 @@ public class BattleManagerScript : MonoBehaviour
     }
 
     #endregion
+
+
+    public void CurrentCharacterBlocking(ControllerType playerController)
+    {
+        CurrentSelectedCharacters[playerController].Character = null;
+    }
+
 
     public void RestartScene()
     {

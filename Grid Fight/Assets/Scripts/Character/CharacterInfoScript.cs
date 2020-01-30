@@ -71,6 +71,8 @@ public class CharacterInfoScript : MonoBehaviour
         public float BulletSpeed = 5;
         public float LeaveSpeed = 3;
         public float LevelMultiplier;
+        public float IdleToAtkDuration = 0.2f;
+        public float AtkToIdleDuration = 0.2f;
     }
 
 
@@ -91,6 +93,15 @@ public class CharacterInfoScript : MonoBehaviour
         public float LevelMultiplier;
 
         public float SpecialMultiplier = 1;
+    }
+
+    public DefenceStastsClass DefenceStats;
+    [System.Serializable]
+    public class DefenceStastsClass
+    {
+        public float BaseDefence = 10;
+        [HideInInspector]
+        public float Invulnerability = 0.2f;
     }
 
     public float Special1LoadingDuration;

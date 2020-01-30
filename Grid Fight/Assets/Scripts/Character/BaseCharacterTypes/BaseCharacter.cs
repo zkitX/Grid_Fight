@@ -162,7 +162,13 @@ public class BaseCharacter : MonoBehaviour
         {
             UIBattleFieldManager.Instance.SetUIBattleField(this);
         }
-        StartCoroutine(AttackAction(false));
+
+        if(UMS.CurrentAttackType == AttackType.Tile)
+        {
+            StartCoroutine(AttackAction(false));
+
+        }
+
     }
 
     //Basic attack Action that will start the attack anim every x seconds
@@ -172,13 +178,20 @@ public class BaseCharacter : MonoBehaviour
         {
             GetAttack(CharacterAnimationStateType.Atk);
         }
+
+        // DOnt do anything until the unit is free to attack(otherwise attack anim gets interupted by the other ones)
+       while (SpineAnim.CurrentAnim != CharacterAnimationStateType.Idle)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+
         while (true)
         {
 
             //Wait until next attack (if yielding before)
             if (yieldBefore) yield return PauseAttack(CharInfo.AttackSpeedRatio * nextAttack.AttackRatioMultiplier);
 
-            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || isSpecialLoading || !CanAttack || isMoving ||
+            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || !CanAttack || isMoving ||
                 (currentAttackPhase != AttackPhasesType.End))
             {
                 yield return null;
@@ -423,11 +436,6 @@ public class BaseCharacter : MonoBehaviour
     public virtual void MoveCharOnDirection(InputDirection nextDir)
     {
 
-        if(currentAttackPhase != AttackPhasesType.End && currentAttackPhase != AttackPhasesType.Start)
-        {
-            return;
-        }
-
         if(SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving || SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving)
         {
             return;
@@ -537,7 +545,7 @@ public class BaseCharacter : MonoBehaviour
         float timer = 0;
         float speedTimer = 0;
         Vector3 offset = transform.position;
-       
+        bool isMovCheck = false;
         while (timer < 1)
         {
           
@@ -546,8 +554,14 @@ public class BaseCharacter : MonoBehaviour
             timer += (Time.fixedDeltaTime / (animLength / CharInfo.MovementSpeed));
             speedTimer += newAdd * curve.Evaluate(timer + newAdd);
             transform.position = Vector3.Lerp(offset, nextPos, speedTimer);
+
+            if(timer > 0.8f && !isMovCheck)
+            {
+                isMovCheck = true;
+                isMoving = false;
+            }
         }
-        isMoving = false;
+        
         if (TileMovementCompleteEvent != null)
         {
             TileMovementCompleteEvent(this);

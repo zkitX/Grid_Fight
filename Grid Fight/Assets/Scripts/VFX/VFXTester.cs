@@ -70,7 +70,7 @@ public class VFXTester : MonoBehaviour
 
         if(charOnScene != null && Input.GetKeyUp(KeyCode.V))
         {
-            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().LoadSpecialAttack());
+            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack());
         }
     }
 

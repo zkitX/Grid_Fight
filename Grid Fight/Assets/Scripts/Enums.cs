@@ -377,7 +377,9 @@ public enum ParticlesType
     PowerUp_Damage,
     PowerUp_Health,
     PowerUp_Stamina,
-    PowerUp_Speed
+    PowerUp_Speed,
+    ShieldNormal,
+    ShieldTotalDefence
 }
 
 public enum AttackParticleTypes

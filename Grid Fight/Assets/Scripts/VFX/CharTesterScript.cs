@@ -94,7 +94,7 @@ public class CharTesterScript : MonoBehaviour
         AnimationSpeedText.text = AnimationSpeed.value.ToString("F2");
         if (charOnScene != null && Input.GetKeyUp(KeyCode.V))
         {
-            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().LoadSpecialAttack());
+            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack());
         }
     }
 
