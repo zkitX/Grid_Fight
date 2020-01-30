@@ -42,12 +42,21 @@ public class BattleTileTargetsScript : MonoBehaviour
             anim.speed = 1 / duration;
             timer += Time.fixedDeltaTime;
             tc.RemainingTime = duration - timer;
-            if (tc.RemainingTime <= 0.2f/*value at which to fire the animation for the shot*/ && attacker.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script && !attackerFiredAttackAnim)
+            if ((attacker.gameObject.activeInHierarchy == false || ((MinionType_Script)attacker).shotsLeftInAttack == 0) && !attackerFiredAttackAnim)
+            {
+                //Stop the firing of the attacks to the tiles
+                ((MinionType_Script)attacker).shotsLeftInAttack = 0;
+                tc.RemainingTime = 0f;
+                UpdateQueue(tc);
+                yield break;
+            }
+            else if (tc.RemainingTime <= duration*0.1f && attacker.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script && !attackerFiredAttackAnim)
             {
                 attackerFiredAttackAnim = true;
-                //((MinionType_Script)attacker).fireAttackAnimation(); // trigger the shoot anim
+                ((MinionType_Script)attacker).fireAttackAnimation(); // trigger the shoot anim
             }
         }
+
         //animToFire["ExclamationAnim"].speed = 1;
         GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(atkPS, AttackParticlePhaseTypes.Effect, transform.position, SideType.LeftSide);
         LayerParticleSelection lps = effect.GetComponent<LayerParticleSelection>();

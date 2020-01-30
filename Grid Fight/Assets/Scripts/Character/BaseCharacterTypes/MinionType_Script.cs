@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MinionType_Script : BaseCharacter
 {
-    public float shotsLeftInAttack = 0f;
+    public int shotsLeftInAttack = 0;
     protected bool MoveCoOn = true;
     private IEnumerator MoveActionCo;
     public override void SetUpEnteringOnBattle()
@@ -34,7 +34,7 @@ public class MinionType_Script : BaseCharacter
         {
             yield return new WaitForFixedUpdate();
         }
-        while (MoveCoOn && currentAttackPhase == AttackPhasesType.End)
+        while (MoveCoOn && currentAttackPhase == AttackPhasesType.End && attacking == false)
         {
             float timer = 0;
             float MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y);
@@ -75,23 +75,32 @@ public class MinionType_Script : BaseCharacter
 
         return res;
     }
-    
 
+    // Temp variables to allow the minions without proper animations setup to charge attacks
+    public bool sequencedAttacker = false;
+    bool attacking = false;
+    GameObject chargeParticles = null;
     //Basic attack sequence
-  /*  public override IEnumerator AttackSequence()
+    public override IEnumerator AttackSequence()
     {
         shotsLeftInAttack = GetHowManyAttackAreOnBattleField(((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories);
 
-          if (nextAttack.Anim == CharacterAnimationStateType.Atk)
-          {
-              base.AttackSequence();
-          }
-          //If it does have the correct animation setup, play that charged animation
-          else
-          {
-              SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
-          }
-
+        if (nextAttack.Anim == CharacterAnimationStateType.Atk)
+        {
+            //Temporary until anims are added
+            attacking = true; 
+            sequencedAttacker = false;
+            chargeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
+            SetAnimation(CharacterAnimationStateType.Idle, true);
+            currentAttackPhase = AttackPhasesType.Cast;
+            CreateAttack();
+        }
+        //If it does have the correct animation setup, play that charged animation
+        else
+        {
+            sequencedAttacker = true; //Temporary until anims are added
+            SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
+        }
 
         while (shotsLeftInAttack != 0)
         {
@@ -99,15 +108,33 @@ public class MinionType_Script : BaseCharacter
         }
 
         currentAttackPhase = AttackPhasesType.End;
+        attacking = false; //Temporary until anims are added
         yield return null;
-    }*/
+    }
+
+
+    public void InteruptAttack()
+    {
+        shotsLeftInAttack = 0;
+        if (chargeParticles != null)
+        {
+            chargeParticles.SetActive(false);
+            chargeParticles = null;
+        }
+        attacking = false; //Temporary until anims are added
+    }
 
     public void fireAttackAnimation()
     {
-        
         shotsLeftInAttack--;
-        Debug.Log("Entered   " + shotsLeftInAttack);
-        SetAnimation(CharacterAnimationStateType.Atk1_Loop);
+        //Debug.Log("<b>Shots left in this charge of attacks: </b>" + shotsLeftInAttack);
+        if(sequencedAttacker)SetAnimation(CharacterAnimationStateType.Atk1_Loop);
+        else SetAnimation(CharacterAnimationStateType.Atk); //Temporary until anims are added
+        if (chargeParticles != null)
+        {
+            chargeParticles.SetActive(false);
+            chargeParticles = null;
+        }
     }
 
     public override void StopMoveCo()
@@ -125,6 +152,7 @@ public class MinionType_Script : BaseCharacter
         {
             return;
         }
+        if (animState == CharacterAnimationStateType.GettingHit) InteruptAttack();
         base.SetAnimation(animState, loop, transition);
     }
 }
