@@ -65,6 +65,7 @@ public class CharacterType_Script : BaseCharacter
             float timer = 0;
             currentAttackPhase = AttackPhasesType.Start;
             SetAnimation(CharacterAnimationStateType.Atk2_IdleToAtk);
+            SpineAnim.SetAnimationSpeed(SpineAnim.GetAnimLenght(CharacterAnimationStateType.Atk2_IdleToAtk) / CharInfo.SpeedStats.IdleToAtkDuration);
             while (isSpecialLoading && !VFXTestMode)
             {
                 yield return BattleManagerScript.Instance.PauseUntil();
@@ -73,6 +74,7 @@ public class CharacterType_Script : BaseCharacter
                 if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle)
                 {
                     SetAnimation(CharacterAnimationStateType.Atk2_IdleToAtk);
+                    SpineAnim.SetAnimationSpeed(SpineAnim.GetAnimLenght(CharacterAnimationStateType.Atk2_IdleToAtk) / CharInfo.SpeedStats.IdleToAtkDuration);
                 }
                 if (timer > 1 && !isChargingParticlesOn)
                 {
@@ -114,7 +116,7 @@ public class CharacterType_Script : BaseCharacter
             if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_IdleToAtk)
             {
                 SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
-                SpineAnim.SetAnimationSpeed(2);
+                SpineAnim.SetAnimationSpeed(SpineAnim.GetAnimLenght(CharacterAnimationStateType.Atk2_IdleToAtk) / CharInfo.SpeedStats.IdleToAtkDuration);
             }
             else if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1_Loop)
             {

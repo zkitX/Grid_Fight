@@ -116,7 +116,7 @@ public class SpineAnimationManager : MonoBehaviour
                 else
                 {
                     SetAnim(CharacterAnimationStateType.Atk1_AtkToIdle);
-                    SetAnimationSpeed(2);
+                    SetAnimationSpeed(GetAnimLenght(CharacterAnimationStateType.Atk2_IdleToAtk) / CharOwner.CharInfo.SpeedStats.IdleToAtkDuration);
                 }
                 return;
             }
