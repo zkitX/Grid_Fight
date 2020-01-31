@@ -347,7 +347,8 @@ public enum CharacterAnimationStateType
     Speaking,
     Victory,
     Defeat,
-    Death
+    Death,
+    Idle_Disable_Loop
 
 }
 

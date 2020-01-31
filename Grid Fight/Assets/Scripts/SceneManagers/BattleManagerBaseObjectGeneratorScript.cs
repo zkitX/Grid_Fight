@@ -41,7 +41,7 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
         Instantiate(UI_Battle);
         yield return BattleManagerScript.Instance.InstanciateAllChar();
         Instantiate(Wave);
-        yield return null;
+        yield return WaveManagerScript.Instance.WaveCharCreator();
         Instantiate(FlowChart);
         yield return null;
     }
