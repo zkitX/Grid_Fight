@@ -172,12 +172,14 @@ public class Stage04_BossMonster_Script : BaseCharacter
         }
     }*/
 
-    public override void SetDamage(float damage, ElementalType elemental)
+    public override bool SetDamage(float damage, ElementalType elemental)
     {
         if (CanGetDamage)
         {
-            base.SetDamage(damage, elemental);
+            return base.SetDamage(damage, elemental);
         }
+
+        return false;
     }
 
     public override void SetCharDead()

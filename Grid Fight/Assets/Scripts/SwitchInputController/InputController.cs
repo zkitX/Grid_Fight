@@ -186,11 +186,6 @@ public class InputController : MonoBehaviour
         
     }
 
-    private void Start()
-    {
-        Applet(2);
-    }
-
     private void Update()
     {
         //Looking for all the possible players input
@@ -831,7 +826,7 @@ public class InputController : MonoBehaviour
     }
 
     //Applet calling
-    public void Applet(int playersNumber)
+    public IEnumerator Applet(int playersNumber)
     {
 #if UNITY_SWITCH && !UNITY_EDITOR
         // Set the options to pass to the Controller Applet
@@ -868,6 +863,8 @@ public class InputController : MonoBehaviour
         SwitchInput.ControllerApplet.Show(options);
         UnityEngine.Switch.Applet.End();
 #endif
+
+        yield return null;
     }
 
 

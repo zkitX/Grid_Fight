@@ -33,6 +33,7 @@ public class CharacterType_Script : BaseCharacter
     public override void SetCharDead()
     {
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
+        BattleManagerScript.Instance.UpdateCurrentSelectedCharacters(this, null);
         base.SetCharDead();
     }
 
@@ -110,7 +111,7 @@ public class CharacterType_Script : BaseCharacter
     public void StartQuickAttack()
     {
         if (CharInfo.StaminaStats.Stamina - CharInfo.StaminaStats.Stamina_Cost_S_Atk01 >= 0
-           && !isSpecialLoading && CanAttack && !isMoving)
+           && CanAttack && !isMoving)
         {
 
             if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_IdleToAtk)

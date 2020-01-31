@@ -171,6 +171,7 @@ public class BaseCharacter : MonoBehaviour
 
     }
 
+
     //Basic attack Action that will start the attack anim every x seconds
     public virtual IEnumerator AttackAction(bool yieldBefore)
     {
@@ -430,7 +431,19 @@ public class BaseCharacter : MonoBehaviour
         }
     }
 
-  
+
+    #endregion
+    #region Defence
+    public void StartDefending()
+    {
+        SetAnimation(CharacterAnimationStateType.Defending, true, 0.1f);
+    }
+    public void StopDefending()
+    {
+        SetAnimation(CharacterAnimationStateType.Idle, true, 0.1f);
+    }
+
+
     #endregion
     #region Move
     public virtual void MoveCharOnDirection(InputDirection nextDir)
@@ -559,13 +572,14 @@ public class BaseCharacter : MonoBehaviour
             {
                 isMovCheck = true;
                 isMoving = false;
+                if (TileMovementCompleteEvent != null)
+                {
+                    TileMovementCompleteEvent(this);
+                }
             }
         }
         
-        if (TileMovementCompleteEvent != null)
-        {
-            TileMovementCompleteEvent(this);
-        }
+        
         if (IsOnField)
         {
             transform.position = nextPos;
@@ -584,11 +598,6 @@ public class BaseCharacter : MonoBehaviour
     //Used to Buff/Debuff the character
     public IEnumerator Buff_DebuffCoroutine(Buff_DebuffClass bdClass)
     {
-        while (SpineAnim.CurrentAnim != CharacterAnimationStateType.Idle)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-
         SetAnimation(CharacterAnimationStateType.Buff);
         GameObject ps = null;
         if (bdClass.ParticlesToFire != ParticlesType.None)
@@ -598,7 +607,6 @@ public class BaseCharacter : MonoBehaviour
             ps.transform.localPosition = Vector3.zero;
             ps.SetActive(true);
         }
-        
         float timer = 0;
         float valueOverDuration = bdClass.Value;
         switch (bdClass.Stat)
@@ -829,13 +837,46 @@ public class BaseCharacter : MonoBehaviour
     #endregion
 
 
-    public virtual void SetDamage(float damage, ElementalType elemental)
+    public virtual bool SetDamage(float damage, ElementalType elemental)
     {
         if(!IsOnField)
         {
-            return;
+            return false;
         }
-        ElementalWeaknessType ElaboratedWeakness;
+        bool res;
+        if(SpineAnim.CurrentAnim == CharacterAnimationStateType.Defending)
+        {
+            GameObject go;
+            if(SpineAnim.GetAnimTime() < CharInfo.DefenceStats.Invulnerability)
+            {
+                damage = 0;
+                go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldTotalDefence);
+                go.transform.position = transform.position;
+                
+            }
+            else
+            {
+                damage = damage - CharInfo.DefenceStats.BaseDefence;
+                go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldNormal);
+                go.transform.position = transform.position;
+            }
+            res = false;
+            if (UMS.Facing == FacingType.Left)
+            {
+                go.transform.localScale = Vector3.one;
+            }
+            else
+            {
+                go.transform.localScale = new Vector3(-1,1,1);
+            }
+        }
+        else
+        {
+            SetAnimation(CharacterAnimationStateType.GettingHit);
+            res = true;
+        }
+
+      /*  ElementalWeaknessType ElaboratedWeakness;
         CurrentBuffsDebuffsClass buffDebuffWeakness = BuffsDebuffs.Where(r => r.ElementalResistence.Elemental == elemental).FirstOrDefault();
 
         ElementalWeaknessType BaseWeakness = GetElementalMultiplier(CharInfo.DamageStats.ElementalsResistence, elemental);
@@ -848,7 +889,7 @@ public class BaseCharacter : MonoBehaviour
             ElaboratedWeakness = BaseWeakness + (int)buffDebuffWeakness.ElementalResistence.ElementalWeakness;
         }
 
-    /*    switch (ElaboratedWeakness)
+        switch (ElaboratedWeakness)
         {
             case ElementalWeaknessType.ExtremelyWeak:
                 damage = damage + (damage * 0.7f);
@@ -873,7 +914,7 @@ public class BaseCharacter : MonoBehaviour
         }*/
         CharInfo.Health -= damage;
         DamageReceivedEvent(damage);
-        SetAnimation(CharacterAnimationStateType.GettingHit);
+        return res;
     }
 
     public ElementalWeaknessType GetElementalMultiplier(List<ElementalResistenceClass> armorElelmntals, ElementalType elementalToCheck)

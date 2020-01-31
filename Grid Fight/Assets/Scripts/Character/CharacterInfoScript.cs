@@ -100,7 +100,6 @@ public class CharacterInfoScript : MonoBehaviour
     public class DefenceStastsClass
     {
         public float BaseDefence = 10;
-        [HideInInspector]
         public float Invulnerability = 0.2f;
     }
 

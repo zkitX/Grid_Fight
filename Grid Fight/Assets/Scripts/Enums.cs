@@ -503,6 +503,7 @@ public enum CharacterNameType
     Stage00_Character_Valley = 20,
     Stage00_Character_Forest = 21,
     Stage00_Character_Desert = 22,
+    Stage00_Boss = 27,
     Stage04_Minion_Mountain = 0,
     Stage04_Minion_Desert = 1,
     Stage04_Minion_Forest = 2,

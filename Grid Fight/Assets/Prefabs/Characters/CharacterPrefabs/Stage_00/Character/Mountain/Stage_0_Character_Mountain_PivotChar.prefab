@@ -94,7 +94,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4cc435f29d011224e93a2c18ffa3ecd5, type: 2}
+  - {fileID: 2100000, guid: 1f1acaa150b2bd0478691bbfe0e57b2f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 79d686ce0fb091442809b99dae4f7c7e, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 1bd0af334cb6e4346bd1e6f54ace4f59, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -349,6 +349,8 @@ MonoBehaviour:
     BulletSpeed: 4
     LeaveSpeed: 3
     LevelMultiplier: 5
+    IdleToAtkDuration: 0.2
+    AtkToIdleDuration: 0.2
   DamageStats:
     BaseDamage: 12
     CurrentDamage: 10
@@ -358,6 +360,9 @@ MonoBehaviour:
     CurrentElemental: 0
     LevelMultiplier: 10
     SpecialMultiplier: 0.4
+  DefenceStats:
+    BaseDefence: 10
+    Invulnerability: 0.2
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
@@ -415,7 +420,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7158183156025933817}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.46, y: 1.06, z: 0}
+  m_LocalPosition: {x: -0.71, y: 0.591, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1845297267122555018}

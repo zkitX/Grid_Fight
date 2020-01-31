@@ -12,7 +12,7 @@ public class WaveManagerScript : MonoBehaviour
 
     private WaveCharClass CurrentWaveChar;
     private List<ScriptableObjectWaveEvent> Events = new List<ScriptableObjectWaveEvent>();
-
+    public List<CharacterNameType> WavesCharacters = new List<CharacterNameType>();
     public int CurrentWave = 0;
 
     private IEnumerator Wave_Co;
@@ -108,18 +108,26 @@ public class WaveManagerScript : MonoBehaviour
     #endregion
 
 
+    public IEnumerator WaveCharCreator()
+    {
+        foreach (CharacterNameType waveChar in WavesCharacters)
+        {
+            CreateChar(waveChar);
+            CreateChar(waveChar);
+        }
+        yield return null;
+    }
 
-    public BaseCharacter GetWaveCharacter(WaveCharacterInfoClass character, Transform parent)
+
+
+    public BaseCharacter GetWaveCharacter(WaveCharacterInfoClass character)
     {
         BaseCharacter res;
         res = WaveCharcters.Where(r => r.CharInfo.CharacterID == character.CharacterName && !r.IsOnField && !r.gameObject.activeInHierarchy).FirstOrDefault();
         if (res == null)
         {
 
-            res = BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(character.CharacterName.ToString(), CharacterSelectionType.A,
-                CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, character.CharacterName, WalkingSideType.RightSide, AttackType.Tile), parent);
-            BattleManagerScript.Instance.AllCharactersOnField.Add(res);
-            WaveCharcters.Add(res);
+            res = CreateChar(character.CharacterName);
         }
         else
         {
@@ -140,6 +148,16 @@ public class WaveManagerScript : MonoBehaviour
     }
 
 
+    private BaseCharacter CreateChar(CharacterNameType characterID)
+    {
+        BaseCharacter res = BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(characterID.ToString(), CharacterSelectionType.A,
+                CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, characterID, WalkingSideType.RightSide, AttackType.Tile), transform);
+        BattleManagerScript.Instance.AllCharactersOnField.Add(res);
+        WaveCharcters.Add(res);
+        return res;
+    }
+
+
     private IEnumerator WaveCo()
     {
         float timer = 0;
@@ -151,7 +169,7 @@ public class WaveManagerScript : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
 
-            BaseCharacter newChar = GetWaveCharacter(wavePhase.IsRandom ? GetAvailableRandomWaveCharacter(wavePhase) : GetAvailableWaveCharacter(wavePhase), transform);
+            BaseCharacter newChar = GetWaveCharacter(wavePhase.IsRandom ? GetAvailableRandomWaveCharacter(wavePhase) : GetAvailableWaveCharacter(wavePhase));
             SpawChar(newChar);
             isWaveComplete = false;
 
@@ -178,7 +196,7 @@ public class WaveManagerScript : MonoBehaviour
                         break;
                     }
                     yield return new WaitForSecondsRealtime(0.1f);
-                    newChar = GetWaveCharacter(wavePhase.IsRandom ? GetAvailableRandomWaveCharacter(wavePhase) : GetAvailableWaveCharacter(wavePhase), transform);
+                    newChar = GetWaveCharacter(wavePhase.IsRandom ? GetAvailableRandomWaveCharacter(wavePhase) : GetAvailableWaveCharacter(wavePhase));
                     SpawChar(newChar);
                     timer = 0;
                    

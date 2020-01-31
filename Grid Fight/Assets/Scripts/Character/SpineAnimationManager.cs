@@ -45,16 +45,22 @@ public class SpineAnimationManager : MonoBehaviour
         {
             return; //Temporary until anims are added
         }
-        if (e.Data.Name.Contains("FireArrivingParticle"))
+
+
+        if (e.Data.Name.Contains("StopDefending"))
+        {
+            SetAnimationSpeed(0);
+        }
+        else if (e.Data.Name.Contains("FireArrivingParticle"))
         {
             CharOwner.ArrivingEvent();
         }
-        if (e.Data.Name.Contains("FireCastParticle"))
+        else if (e.Data.Name.Contains("FireCastParticle"))
         {
             CharOwner.currentAttackPhase = AttackPhasesType.Cast;
             CharOwner.FireCastParticles();
         }
-        if (e.Data.Name.Contains("FireBulletParticle"))
+        else if (e.Data.Name.Contains("FireBulletParticle"))
         {
             CharOwner.currentAttackPhase = AttackPhasesType.Bullet;
             CharOwner.CharInfo.Stamina -= CharOwner.CharInfo.StaminaStats.Stamina_Cost_Atk;
@@ -217,6 +223,11 @@ public class SpineAnimationManager : MonoBehaviour
         Loop = loop;
         SpineAnimationState.SetAnimation(1, anim.ToString(), loop).MixDuration = transition;
         CurrentAnim = anim;
+    }
+
+    public float GetAnimTime()
+    {
+        return skeletonAnimation.state.GetCurrent(1).TrackTime;
     }
 
     public float GetAnimLenght(CharacterAnimationStateType anim)

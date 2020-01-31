@@ -57,25 +57,30 @@ public class BattleTileTargetsScript : MonoBehaviour
             }
         }
 
-        //animToFire["ExclamationAnim"].speed = 1;
-        GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(atkPS, AttackParticlePhaseTypes.Effect, transform.position, SideType.LeftSide);
-        LayerParticleSelection lps = effect.GetComponent<LayerParticleSelection>();
-        if (lps != null)
-        {
-            lps.Shot = CharacterLevelType.Novice;
-            lps.SelectShotLevel();
-
-        }
-
-        if(BattleManagerScript.Instance != null)
+        bool effectOn = true;
+        if (BattleManagerScript.Instance != null)
         {
             BaseCharacter target;
             target = BattleManagerScript.Instance.GetCharInPos(pos);
             if (target != null)
             {
-                target.SetDamage(damage, ele);
+                effectOn = target.SetDamage(damage, ele);
             }
         }
+        if (effectOn)
+        {
+            //animToFire["ExclamationAnim"].speed = 1;
+            GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(atkPS, AttackParticlePhaseTypes.Effect, transform.position, SideType.LeftSide);
+            LayerParticleSelection lps = effect.GetComponent<LayerParticleSelection>();
+            if (lps != null)
+            {
+                lps.Shot = CharacterLevelType.Novice;
+                lps.SelectShotLevel();
+
+            }
+        }
+
+
         yield return new WaitForSecondsRealtime(0.5f);
         UpdateQueue(tc);
     }

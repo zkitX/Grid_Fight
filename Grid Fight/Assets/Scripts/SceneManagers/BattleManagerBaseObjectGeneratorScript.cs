@@ -6,7 +6,7 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
 {
 
     public GameObject Rewired;
-    public GameObject BAttleInfoManager;
+    public GameObject BattleInfoManager;
 
 
     public GameObject BattleManager;
@@ -14,41 +14,35 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
 
     public GameObject UI_Battle;
     public GameObject FlowChart;
+    public GameObject Wave;
+    public GameObject bosstest;
+
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(LevelLoader(LoaderManagerScript.Instance != null ? 1 : 0.2f));
+        StartCoroutine(SetupScene());
     }
 
-    private IEnumerator LevelLoader(float duration)
+    private IEnumerator SetupScene()
     {
-        yield return new WaitForSecondsRealtime(duration);
+        yield return InputController.Instance.Applet(2);
+        StartCoroutine(LevelLoader());
+    }
 
-       // Instantiate(Rewired);
-       // Instantiate(BAttleInfoManager);
-
-        yield return new WaitForSecondsRealtime(duration);
-
-        Instantiate(BaseEnvironment);
-
-        yield return new WaitForSecondsRealtime(duration);
-
-        GameObject battleManager = Instantiate(BattleManager);
-        StartCoroutine(battleManager.GetComponent<BattleManagerScript>().InstanciateAllChar(duration == 0 ? 0 : 0.2f));
-        yield return new WaitForSecondsRealtime(duration);
-
-        Instantiate(UI_Battle);
-
-        yield return new WaitForSecondsRealtime(duration);
-
-        
-        if(LoaderManagerScript.Instance != null)
+    private IEnumerator LevelLoader()
+    {
+        while (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "BattleScene")
         {
-            LoaderManagerScript.Instance.MainCanvasGroup.alpha = 0;
+            yield return null;
         }
-        yield return new WaitForSeconds(0.2f);
+        Instantiate(BaseEnvironment);
+        yield return null;
+        Instantiate(BattleManager);
+        Instantiate(UI_Battle);
+        yield return BattleManagerScript.Instance.InstanciateAllChar();
+        Instantiate(Wave);
+        yield return null;
         Instantiate(FlowChart);
-        yield return new WaitForSeconds(0.2f);
-        BattleManagerScript.Instance.CurrentBattleState = BattleState.Tutorial;
+        yield return null;
     }
 }

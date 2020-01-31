@@ -236,11 +236,12 @@ public class Stage04_BossGirl_Script : BaseCharacter
         }
     }*/
 
-    public override void SetDamage(float damage, ElementalType elemental)
+    public override bool SetDamage(float damage, ElementalType elemental)
     {
         if(CanGetDamage)
         {
-            base.SetDamage(damage, elemental);
+            return base.SetDamage(damage, elemental);
         }
+        return false;
     }
 }

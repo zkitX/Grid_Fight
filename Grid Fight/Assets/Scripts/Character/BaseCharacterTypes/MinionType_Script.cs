@@ -115,13 +115,13 @@ public class MinionType_Script : BaseCharacter
 
     public void InteruptAttack()
     {
-        shotsLeftInAttack = 0;
-        if (chargeParticles != null)
+     /*   shotsLeftInAttack = 0;
+        if (chargeParticles != null && shotsLeftInAttack == 0)
         {
             chargeParticles.SetActive(false);
             chargeParticles = null;
         }
-        attacking = false; //Temporary until anims are added
+        attacking = false; //Temporary until anims are added*/
     }
 
     public void fireAttackAnimation()
@@ -130,7 +130,7 @@ public class MinionType_Script : BaseCharacter
         //Debug.Log("<b>Shots left in this charge of attacks: </b>" + shotsLeftInAttack);
         if(sequencedAttacker)SetAnimation(CharacterAnimationStateType.Atk1_Loop);
         else SetAnimation(CharacterAnimationStateType.Atk); //Temporary until anims are added
-        if (chargeParticles != null)
+        if (chargeParticles != null && shotsLeftInAttack == 0)
         {
             chargeParticles.SetActive(false);
             chargeParticles = null;

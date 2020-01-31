@@ -56,20 +56,26 @@ public class BattleTileTargetScript : MonoBehaviour
 
             transform.localScale = new Vector3(1 - (timer > 0.9f ? 1 : timer) , 1 - (timer > 0.9f ? 1 : timer), 1);
         }
-        GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(atkPS, AttackParticlePhaseTypes.Effect, transform.position,  SideType.LeftSide);
-        LayerParticleSelection lps = effect.GetComponent<LayerParticleSelection>();
-        if (lps != null)
-        {
-            lps.Shot = CharacterLevelType.Novice;
-            lps.SelectShotLevel();
-
-        }
+       
         BaseCharacter target;
+        bool effectOn = true;
         target = BattleManagerScript.Instance.GetCharInPos(Pos);
         if (target != null)
         {
-            target.SetDamage(Damage, Elemental);
+            effectOn = target.SetDamage(Damage, Elemental);
         }
+        if(effectOn)
+        {
+            GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(atkPS, AttackParticlePhaseTypes.Effect, transform.position, SideType.LeftSide);
+            LayerParticleSelection lps = effect.GetComponent<LayerParticleSelection>();
+            if (lps != null)
+            {
+                lps.Shot = CharacterLevelType.Novice;
+                lps.SelectShotLevel();
+
+            }
+        }
+       
         gameObject.SetActive(false);
     }
 }

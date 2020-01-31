@@ -173,14 +173,13 @@ public class BattleManagerScript : MonoBehaviour
 
     #region Create Character
 
-    public IEnumerator InstanciateAllChar(float delay)
+    public IEnumerator InstanciateAllChar()
     {
         PlayerBattleInfo = LoaderManagerScript.Instance != null ? LoaderManagerScript.Instance.PlayerBattleInfo : BattleInfoManagerScript.Instance.PlayerBattleInfo;
         foreach (CharacterBaseInfoClass item in PlayerBattleInfo)
         {
             PlayablesCharOnScene.Add(new PlayableCharOnScene(item.CharacterName, item.PlayerController, false, GetSideFromPlayer(item.PlayerController)));
             AllCharactersOnField.Add(CreateChar(item, CharactersContainer));
-            yield return new WaitForSeconds(delay);
         }
         switch (matchType)
         {
@@ -199,7 +198,9 @@ public class BattleManagerScript : MonoBehaviour
                 UIBattleManager.Instance.UICharacterSelectionRight.gameObject.SetActive(true);
                 break;
         }
+        UserInputManager.Instance.StartUserInputManager();
         SetUICharacterSelectionIcons();
+        yield return null;
     }
 //Creation of the character with the basic info
     public BaseCharacter CreateChar(CharacterBaseInfoClass charInfo, Transform parent)
@@ -454,6 +455,11 @@ public class BattleManagerScript : MonoBehaviour
         yield return null;
     }
 
+    public void UpdateCurrentSelectedCharacters(CharacterType_Script oldChar, CharacterType_Script newChar)
+    {
+        CurrentSelectedCharacters.Where(r => r.Value.Character == oldChar).First().Value.Character = newChar;
+    }
+
     //Handle the wait for a button hold (relating to spawning in)
     IEnumerator HoldPressTimer(ControllerType playerController)
     {
@@ -567,10 +573,24 @@ public class BattleManagerScript : MonoBehaviour
     #endregion
 
 
-    public void CurrentCharacterBlocking(ControllerType playerController)
+    public void CurrentCharacterStartDefending(ControllerType playerController)
     {
-        CurrentSelectedCharacters[playerController].Character = null;
+        if(CurrentSelectedCharacters[playerController].Character != null)
+        {
+            CurrentSelectedCharacters[playerController].Character.StartDefending();
+        }
     }
+
+    public void CurrentCharacterStopDefending(ControllerType playerController)
+    {
+        if (CurrentSelectedCharacters[playerController].Character != null)
+        {
+            CurrentSelectedCharacters[playerController].Character.StopDefending();
+        }
+    }
+
+    
+
 
 
     public void RestartScene()

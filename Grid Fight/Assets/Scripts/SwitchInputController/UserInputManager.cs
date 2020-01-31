@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class UserInputManager : MonoBehaviour
 {
-    public List<RectTransform> PressableItems = new List<RectTransform>();
-    
-    private void Start()
-    {
-        StartCoroutine(StartUserInputManager());
 
+    public static UserInputManager Instance;
+
+    public List<RectTransform> PressableItems = new List<RectTransform>();
+
+
+    private void Awake()
+    {
+        Instance = this;
     }
 
-    private IEnumerator StartUserInputManager()
+    public void StartUserInputManager()
     {
-        while (InputController.Instance == null)
-        {
-            yield return null;
-        }
-
-
         #region Button Down
         InputController.Instance.ButtonADownEvent += Instance_ButtonADownEvent;
         InputController.Instance.ButtonBDownEvent += Instance_ButtonBDownEvent;
@@ -314,6 +311,7 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonZLUpEvent(int player)
     {
         //Debug.Log(player + "  " + "ZL Up");
+        StopDefendingForSelectedCharacter(player);
     }
 
     private void Instance_ButtonLUpEvent(int player)
@@ -548,6 +546,7 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonZLDownEvent(int player)
     {
         //Debug.Log(player + "  " + "ZL Down");
+        StartDefendingForSelectedCharacter(player);
     }
 
     private void Instance_ButtonLDownEvent(int player)
@@ -697,9 +696,14 @@ public class UserInputManager : MonoBehaviour
     }
 
 
-    public void BlockingStateForSelectedCharacter(int player)
+    public void StartDefendingForSelectedCharacter(int player)
     {
-        BattleManagerScript.Instance.CurrentCharacterBlocking((ControllerType)player);
+        BattleManagerScript.Instance.CurrentCharacterStartDefending((ControllerType)player);
+    }
+
+    public void StopDefendingForSelectedCharacter(int player)
+    {
+        BattleManagerScript.Instance.CurrentCharacterStopDefending((ControllerType)player);
     }
 
 }
