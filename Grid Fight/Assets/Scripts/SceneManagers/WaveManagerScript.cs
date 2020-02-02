@@ -126,7 +126,6 @@ public class WaveManagerScript : MonoBehaviour
         res = WaveCharcters.Where(r => r.CharInfo.CharacterID == character.CharacterName && !r.IsOnField && !r.gameObject.activeInHierarchy).FirstOrDefault();
         if (res == null)
         {
-
             res = CreateChar(character.CharacterName);
         }
         else
@@ -134,6 +133,7 @@ public class WaveManagerScript : MonoBehaviour
             res.gameObject.SetActive(true);
             res.StartAttakCo();
         }
+        res.gameObject.SetActive(true);
         res.CharInfo.HealthStats.Base = Random.Range(character.Health.x, character.Health.y);
         res.CharInfo.HealthStats.Regeneration = Random.Range(character.HealthRegeneration.x, character.HealthRegeneration.y);
         res.CharInfo.StaminaStats.Base = Random.Range(character.Stamina.x, character.Stamina.y);
@@ -153,6 +153,7 @@ public class WaveManagerScript : MonoBehaviour
         BaseCharacter res = BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(characterID.ToString(), CharacterSelectionType.A,
                 CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, characterID, WalkingSideType.RightSide, AttackType.Tile), transform);
         BattleManagerScript.Instance.AllCharactersOnField.Add(res);
+        res.gameObject.SetActive(false);
         WaveCharcters.Add(res);
         return res;
     }

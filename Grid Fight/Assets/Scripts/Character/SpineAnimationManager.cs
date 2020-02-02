@@ -160,6 +160,7 @@ public class SpineAnimationManager : MonoBehaviour
                 else
                 {
                     SetAnim(CharacterAnimationStateType.Atk1_AtkToIdle);
+                    CharOwner.currentAttackPhase = AttackPhasesType.End;
                 }
             }
 

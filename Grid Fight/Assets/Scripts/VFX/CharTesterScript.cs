@@ -147,7 +147,6 @@ public class CharTesterScript : MonoBehaviour
         if (nextAnim.ToString().Contains("Atk"))
         {
             currentCharacter.GetAttack(nextAnim);
-            
         }
 
         if (nextAnim.ToString().Contains("Dash"))
@@ -156,10 +155,7 @@ public class CharTesterScript : MonoBehaviour
             StartCoroutine(MoveCo);
             return;
         }
-        
-
         currentCharacter.SpineAnim.SetAnim(nextAnim, Loop.isOn, TransitionTime.value);
-        
     }
 
 
