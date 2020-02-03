@@ -21,7 +21,7 @@ public class GameSequenceEvent : EventTrigger
     [SerializeField] public bool canOverlap = false;
     [SerializeField] protected bool requireComplete = true;
     protected List<GameSequenceEvent> triggees = new List<GameSequenceEvent>();
-    [SerializeField] protected UnityEvent[] effects;
+    [SerializeField] protected EventEffect[] effects;
     //
 
     public void Trigger()
@@ -117,6 +117,11 @@ public class GameSequenceEvent : EventTrigger
         //Sequence through all the effects here
         if (!requireComplete) TriggerTriggees();
 
+        //NEEDS WORK
+        foreach(EventEffect effect in effects)
+        {
+            yield return effect.PlayEffect();
+        }
 
         Debug.Log("<i>Event Completed:</i> " + Name);
 
@@ -125,6 +130,8 @@ public class GameSequenceEvent : EventTrigger
         if (requireComplete) TriggerTriggees();
         yield return null;
     }
+
+
 
 
 }

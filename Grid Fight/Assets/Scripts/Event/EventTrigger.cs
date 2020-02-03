@@ -5,6 +5,6 @@ using UnityEngine;
 public class EventTrigger : ScriptableObject
 {
     public string Name;
-    public bool hasHappened = false;
+    [HideInInspector] public bool hasHappened = false;
 
 }
