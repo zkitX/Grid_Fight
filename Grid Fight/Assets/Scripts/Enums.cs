@@ -496,6 +496,7 @@ public enum CharacterClassType
 
 public enum CharacterNameType
 {
+    None = 1000,
     Stage00_Minion_Mountain = 23,
     Stage00_Minion_Desert = 24,
     Stage00_Minion_Forest = 25,

@@ -103,6 +103,7 @@ public class BaseCharacter : MonoBehaviour
     {
         if (IsOnField)
         {
+            EventManager.Instance.AddCharacterDeath(this);
             SetCharDead();
         }
     }

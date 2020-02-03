@@ -89,6 +89,7 @@ public class SpineAnimationManager : MonoBehaviour
             Debug.Log("Arriving complete");
             CharOwner.SetAttackReady(true);
             CharOwner.StartAttakCo();
+            EventManager.Instance.AddCharacterArrival(CharOwner);
         }
         if (CurrentAnim == CharacterAnimationStateType.Reverse_Arriving)
         {
