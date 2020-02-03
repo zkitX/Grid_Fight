@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Experimental.U2D.IK;
 
-public class Stage04_BossMonster_Script : BaseCharacter
+public class Stage04_BossMonster_Script : MinionType_Script
 {
 
     public GameObject Flower1;
@@ -180,6 +180,11 @@ public class Stage04_BossMonster_Script : BaseCharacter
         }
 
         return false;
+    }
+
+    public override IEnumerator Move()
+    {
+        yield return null;
     }
 
     public override void SetCharDead()

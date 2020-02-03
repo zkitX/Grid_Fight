@@ -50,7 +50,7 @@ public class BattleTileTargetsScript : MonoBehaviour
                 UpdateQueue(tc);
                 yield break;
             }
-            else if (tc.RemainingTime <= duration*0.1f && attacker.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script && !attackerFiredAttackAnim)
+            else if (tc.RemainingTime <= duration*0.1f && attacker.UMS.CurrentAttackType == AttackType.Tile && !attackerFiredAttackAnim)
             {
                 attackerFiredAttackAnim = true;
                 ((MinionType_Script)attacker).fireAttackAnimation(); // trigger the shoot anim

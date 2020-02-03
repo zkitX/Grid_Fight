@@ -103,7 +103,7 @@ public class BaseCharacter : MonoBehaviour
     {
         if (IsOnField)
         {
-            EventManager.Instance.AddCharacterDeath(this);
+           // EventManager.Instance.AddCharacterDeath(this);
             SetCharDead();
         }
     }
@@ -856,6 +856,7 @@ public class BaseCharacter : MonoBehaviour
             if(SpineAnim.GetAnimTime() < CharInfo.DefenceStats.Invulnerability)
             {
                 damage = 0;
+                SFXmanager.Instance.PlayOnce(SFXmanager.Instance.DefenceSpecial);
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldTotalDefence);
                 go.transform.position = transform.position;
                 
@@ -863,6 +864,7 @@ public class BaseCharacter : MonoBehaviour
             else
             {
                 damage = damage - CharInfo.DefenceStats.BaseDefence;
+                SFXmanager.Instance.PlayOnce(SFXmanager.Instance.DefenceNormal);
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldNormal);
                 go.transform.position = transform.position;
             }

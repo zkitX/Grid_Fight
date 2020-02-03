@@ -123,4 +123,14 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
         SetAnimation(CharacterAnimationStateType.Idle);
         CharInfo.Health = CharInfo.HealthStats.Base;
     }
+
+    public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
+    {
+        if (animState.ToString().Contains("Dash"))
+        {
+            animState = CharacterAnimationStateType.Idle;
+            loop = true;
+        }
+        base.SetAnimation(animState, loop, transition);
+    }
 }

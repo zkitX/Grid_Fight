@@ -68,7 +68,6 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
 
     protected override IEnumerator MoveByTile(Vector3 nextPos, AnimationCurve curve, float animLenght)
     {
-        SetAnimation(CharacterAnimationStateType.Idle);
         return base.MoveByTile(nextPos, curve, animLenght);
     }
 
@@ -123,6 +122,16 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
             base.Call_CurrentCharIsRebirthEvent();
             CharInfo.Health = CharInfo.HealthStats.Base;
         }
+    }
+
+    public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
+    {
+        if(animState.ToString().Contains("Dash"))
+        {
+            animState = CharacterAnimationStateType.Idle;
+            loop = true;
+        }
+        base.SetAnimation(animState, loop, transition);
     }
 }
 

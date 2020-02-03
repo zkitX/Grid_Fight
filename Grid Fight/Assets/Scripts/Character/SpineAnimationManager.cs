@@ -89,7 +89,7 @@ public class SpineAnimationManager : MonoBehaviour
             Debug.Log("Arriving complete");
             CharOwner.SetAttackReady(true);
             CharOwner.StartAttakCo();
-            EventManager.Instance.AddCharacterArrival(CharOwner);
+            //EventManager.Instance.AddCharacterArrival(CharOwner);
         }
         if (CurrentAnim == CharacterAnimationStateType.Reverse_Arriving)
         {
@@ -223,7 +223,10 @@ public class SpineAnimationManager : MonoBehaviour
         SetupSpineAnim();
         Loop = loop;
         SpineAnimationState.SetAnimation(1, anim.ToString(), loop).MixDuration = transition;
-        StartCoroutine(ClearAnim(transition));
+        if(transition > 0)
+        {
+            StartCoroutine(ClearAnim(transition));
+        }
         CurrentAnim = anim;
 
     }
@@ -250,7 +253,11 @@ public class SpineAnimationManager : MonoBehaviour
 
     public float GetAnimLenght(CharacterAnimationStateType anim)
     {
-        return skeletonAnimation.Skeleton.Data.FindAnimation(anim.ToString()).Duration;
+        if(skeletonAnimation.Skeleton.Data.FindAnimation(anim.ToString()) != null)
+        {
+            return skeletonAnimation.Skeleton.Data.FindAnimation(anim.ToString()).Duration;
+        }
+        return 1;
     }
 
     public void SetAnimationSpeed(float speed)

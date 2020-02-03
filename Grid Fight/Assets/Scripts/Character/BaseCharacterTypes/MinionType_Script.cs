@@ -4,9 +4,29 @@ using UnityEngine;
 
 public class MinionType_Script : BaseCharacter
 {
-    public int shotsLeftInAttack = 0;
+
+    public int shotsLeftInAttack
+    {
+        get
+        {
+            return _shotsLeftInAttack;
+        }
+        set
+        {
+            _shotsLeftInAttack = value;
+        }
+    }
+
+    public int _shotsLeftInAttack = 0;
     protected bool MoveCoOn = true;
     private IEnumerator MoveActionCo;
+
+    // Temp variables to allow the minions without proper animations setup to charge attacks
+    public bool sequencedAttacker = false;
+    bool attacking = false;
+    GameObject chargeParticles = null;
+
+
     public override void SetUpEnteringOnBattle()
     {
         SetAnimation(CharacterAnimationStateType.Arriving);
@@ -76,10 +96,7 @@ public class MinionType_Script : BaseCharacter
         return res;
     }
 
-    // Temp variables to allow the minions without proper animations setup to charge attacks
-    public bool sequencedAttacker = false;
-    bool attacking = false;
-    GameObject chargeParticles = null;
+
     //Basic attack sequence
     public override IEnumerator AttackSequence()
     {
@@ -133,6 +150,7 @@ public class MinionType_Script : BaseCharacter
         if (chargeParticles != null && shotsLeftInAttack == 0)
         {
             chargeParticles.SetActive(false);
+
             chargeParticles = null;
         }
     }

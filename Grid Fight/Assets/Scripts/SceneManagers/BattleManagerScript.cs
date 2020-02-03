@@ -541,7 +541,7 @@ public class BattleManagerScript : MonoBehaviour
     {
         if (CurrentBattleState == BattleState.Battle)
         {
-            if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null)
+            if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character.IsOnField)
             {
                 StartCoroutine(CurrentSelectedCharacters[controllerType].Character.StartChargingAttack());
             }
@@ -551,7 +551,7 @@ public class BattleManagerScript : MonoBehaviour
     {
         if (CurrentBattleState == BattleState.Battle)
         {
-            if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null)
+            if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character.IsOnField)
             {
                 CurrentSelectedCharacters[controllerType].Character.StartQuickAttack();
             }

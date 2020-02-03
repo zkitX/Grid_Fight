@@ -9,6 +9,8 @@ public class SFXmanager : MonoBehaviour
     private AudioSource audioS;
     public AudioClip ArrivingImpact;
     public AudioClip ArrivingSpawn;
+    public AudioClip DefenceNormal;
+    public AudioClip DefenceSpecial;
 
 
     public float vol;
