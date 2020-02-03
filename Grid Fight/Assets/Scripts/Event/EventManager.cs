@@ -20,6 +20,8 @@ public class EventManager : MonoBehaviour
     protected List<CharacterNameType> diedThisFrame = new List<CharacterNameType>();
     [SerializeField] protected List<CharacterEventInfoClass> charactersWhomstHaveArrived = new List<CharacterEventInfoClass>();
     protected List<CharacterNameType> arrivedThisFrame = new List<CharacterNameType>();
+    [SerializeField] protected List<CharacterEventInfoClass> characterVitalities = new List<CharacterEventInfoClass>();
+    protected List<CharacterEventInfoClass> healthChangedLastFrame = new List<CharacterEventInfoClass>();
 
     //[Tooltip("How many seconds between checks, increase for performance boost, decrease for accuracy")][SerializeField] protected float timeBetweenChecks = 1f;
 
@@ -271,6 +273,69 @@ public class EventManager : MonoBehaviour
     }
     #endregion
 
+    #region Health Management
+    public void UpdateHealth(BaseCharacter character)
+    {
+        foreach(CharacterEventInfoClass characterVitality in characterVitalities)
+        {
+            if(character == characterVitality.character)
+            {
+                characterVitality.healthPercentage = character.CharInfo.HealthPerc;
+                healthChangedLastFrame.Add(characterVitality);
+                StartCoroutine(ResetCharacterHealthChangesLastFrame(characterVitality));
+                return;
+            }
+        }
+        CharacterEventInfoClass charVitality = new CharacterEventInfoClass(character);
+        charVitality.healthPercentage = character.CharInfo.HealthPerc;
+        characterVitalities.Add(charVitality);
+        healthChangedLastFrame.Add(charVitality);
+        StartCoroutine(ResetCharacterHealthChangesLastFrame(charVitality));
+    }
+
+    IEnumerator ResetCharacterHealthChangesLastFrame(CharacterEventInfoClass character)
+    {
+        yield return null;
+        healthChangedLastFrame.Remove(character);
+    }
+
+    public float GetHealthPercentage(CharacterNameType charID)
+    {
+        float _healthPercentage = -10000f;
+        int numberOfMatchingVitalities = 0;
+        foreach (CharacterEventInfoClass characterVitality in characterVitalities)
+        {
+            if (charID == characterVitality.character.CharInfo.CharacterID)
+            {
+                numberOfMatchingVitalities++;
+                _healthPercentage = characterVitality.healthPercentage;
+            }
+        }
+        if(numberOfMatchingVitalities == 0)
+        {
+            Debug.Log("No matching vitalities on the board");
+            return 0;
+        }
+        else if(numberOfMatchingVitalities > 1)
+        {
+            Debug.Log("More than one vitality with a matching name, returning the last value");
+        }
+        return _healthPercentage;
+    }
+
+    public bool GetHealthUpdatedLastFrame(CharacterNameType charID)
+    {
+        foreach(CharacterEventInfoClass charHealthUpdatedLastFrame in healthChangedLastFrame)
+        {
+            if (charHealthUpdatedLastFrame.character.CharInfo.CharacterID == charID)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    #endregion
+
     #endregion
 
 
@@ -282,6 +347,7 @@ public class CharacterEventInfoClass
     public BaseCharacter character;
     public int deaths = 0;
     public int arrivals = 0;
+    public float healthPercentage = 100f;
 
     public CharacterEventInfoClass(BaseCharacter _character, int _deaths)
     {

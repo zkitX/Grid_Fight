@@ -17,5 +17,21 @@ MonoBehaviour:
   requirements:
   - {fileID: 11400000, guid: 0a7c06f52ac3b9b4a8fa5c684fc133bf, type: 2}
   canOverlap: 0
-  requireComplete: 1
-  effects: []
+  requireComplete: 0
+  effects:
+  - Name: Start Wait
+    effectType: 0
+    secondsToWait: 3
+    debugText: 
+  - Name: Print Message
+    effectType: 1
+    secondsToWait: 1
+    debugText: Ayy, forget about it for 2 more seconds
+  - Name: Wait again
+    effectType: 0
+    secondsToWait: 2
+    debugText: 
+  - Name: Print Message
+    effectType: 1
+    secondsToWait: 1
+    debugText: Ayy, remember it

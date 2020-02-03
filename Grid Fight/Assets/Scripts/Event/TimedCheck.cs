@@ -7,10 +7,10 @@ using MyBox;
 [CreateAssetMenu(fileName = "TIME_EventName", menuName = "ScriptableObjects/Events/Timed Event")]
 public class TimedCheck : EventTrigger
 {
-    public bool isHappening = false;
+    [HideInInspector] public bool isHappening = false;
 
     public EventManager.Check check;
-    public GameSequenceEvent checker;
+    [HideInInspector] public GameSequenceEvent checker;
     public bool ceaseOnHappened = false;
 
     public void StartChecking(GameSequenceEvent _checker)
@@ -45,6 +45,9 @@ public class TimedCheck : EventTrigger
 
             case (TimedCheckTypes.CharacterArrival):
                 check = CharacterArrival;
+                break;
+            case (TimedCheckTypes.CharacterHealthChange):
+                check = CharacterHealthChange;
                 break;
             default:
                 check = Default;
@@ -96,5 +99,31 @@ public class TimedCheck : EventTrigger
         {
             return EventManager.Instance.HasCharacterArrived(arrivalCharacterID);
         }
+    }
+
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.CharacterHealthChange)] public CharacterNameType healthChangeCharID = CharacterNameType.None;
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.CharacterHealthChange)] public HealthChangeType healthChange = HealthChangeType.None;
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.CharacterHealthChange)] public float healthChangeValue = 50;
+    bool CharacterHealthChange()
+    {
+        if (!EventManager.Instance.GetHealthUpdatedLastFrame(healthChangeCharID)) return false;
+        float currentHealthPercentage = EventManager.Instance.GetHealthPercentage(healthChangeCharID);
+
+        switch (healthChange)
+        {
+            case (HealthChangeType.IsEqualTo):
+                if(healthChangeValue == currentHealthPercentage) return true;
+                break;
+            case (HealthChangeType.LessThan):
+                if (healthChangeValue > currentHealthPercentage) return true;
+                break;
+            case (HealthChangeType.MoreThan):
+                if (healthChangeValue < currentHealthPercentage) return true;
+                break;
+            default:
+                Debug.Log("Health Change type is not set on timed check: " + Name);
+                break;
+        }
+        return false;
     }
 }
