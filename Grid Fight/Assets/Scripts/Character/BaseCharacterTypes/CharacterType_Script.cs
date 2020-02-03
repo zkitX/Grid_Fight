@@ -57,7 +57,7 @@ public class CharacterType_Script : BaseCharacter
     //Load the special attack and fire it if the load is complete
     public IEnumerator StartChargingAttack()
     {
-        if (CharInfo.StaminaStats.Stamina - CharInfo.StaminaStats.Stamina_Cost_S_Atk01 >= 0 
+        if (CharInfo.StaminaStats.Stamina - CharInfo.PowerfulAttac.Stamina_Cost_Atk >= 0 
            && CanAttack)
         {
             GameObject ps = null;
@@ -94,6 +94,7 @@ public class CharacterType_Script : BaseCharacter
                     {
                         yield return new WaitForEndOfFrame();
                     }
+                    CharInfo.DamageStats.CurrentDamage = CharInfo.PowerfulAttac.BaseDamage;
                     ps.transform.parent = null;
                     ps.SetActive(false);
                     SpecialAttack(CharInfo.CharacterLevel);
@@ -110,12 +111,13 @@ public class CharacterType_Script : BaseCharacter
 
     public void StartQuickAttack()
     {
-        if (CharInfo.StaminaStats.Stamina - CharInfo.StaminaStats.Stamina_Cost_S_Atk01 >= 0
+        if (CharInfo.StaminaStats.Stamina - CharInfo.RapidAttack.Stamina_Cost_Atk >= 0
            && CanAttack && !isMoving)
         {
 
             if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_IdleToAtk)
             {
+                CharInfo.DamageStats.CurrentDamage = CharInfo.RapidAttack.BaseDamage;
                 SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
                 SpineAnim.SetAnimationSpeed(SpineAnim.GetAnimLenght(CharacterAnimationStateType.Atk2_IdleToAtk) / CharInfo.SpeedStats.IdleToAtkDuration);
             }

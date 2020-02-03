@@ -32,8 +32,23 @@ public class CharacterInfoScript : MonoBehaviour
     public CharacterSelectionType CharacterSelection;
     // public List<CharactersRelationshipClass> CharacterRelationships = new List<CharactersRelationshipClass>();
 
-    public HealthStastsClass HealthStats;
+    public RapidAttackClass RapidAttack;
+    [System.Serializable]
+    public class RapidAttackClass
+    {
+        public float BaseDamage = 10;
+        public float Stamina_Cost_Atk;
+    }
 
+    public PowerfulAttackClass PowerfulAttac;
+    [System.Serializable]
+    public class PowerfulAttackClass
+    {
+        public float BaseDamage = 10;
+        public float Stamina_Cost_Atk;
+    }
+
+    public HealthStastsClass HealthStats;
     [System.Serializable]
     public class HealthStastsClass
     {
@@ -52,11 +67,6 @@ public class CharacterInfoScript : MonoBehaviour
         public float Base;
         public float Regeneration;
         public float BaseStaminaRegeneration;
-        public float Stamina_Cost_Atk;
-        public float Stamina_Cost_S_Atk01;
-        public float Stamina_Cost_S_Atk02;
-        public float Stamina_Cost_S_Atk03;
-        public float Stamina_Cost_S_Atk04;
         public float LevelMultiplier;
     }
 
@@ -80,7 +90,7 @@ public class CharacterInfoScript : MonoBehaviour
     [System.Serializable]
     public class DamageStastsClass
     {
-        public float BaseDamage = 10;
+       
         [HideInInspector]
         public float CurrentDamage = 10;
         [HideInInspector]
@@ -91,8 +101,6 @@ public class CharacterInfoScript : MonoBehaviour
         [HideInInspector]
         public ElementalType CurrentElemental;
         public float LevelMultiplier;
-
-        public float SpecialMultiplier = 1;
     }
 
     public DefenceStastsClass DefenceStats;
@@ -243,7 +251,7 @@ public class CharacterInfoScript : MonoBehaviour
 
     private void Awake()
     {
-        DamageStats.CurrentDamage = DamageStats.BaseDamage;
+        DamageStats.CurrentDamage = RapidAttack.BaseDamage;
     }
 
     private void FixedUpdate()

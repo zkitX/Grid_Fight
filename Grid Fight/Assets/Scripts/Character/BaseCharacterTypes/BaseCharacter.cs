@@ -339,13 +339,18 @@ public class BaseCharacter : MonoBehaviour
         if (lps != null)
         {
             lps.Shot = NextAttackLevel;
-            if (NextAttackLevel > CharacterLevelType.Novice)
-            {
-                CharInfo.Stamina -= CharInfo.StaminaStats.Stamina_Cost_S_Atk01;
-            }
             lps.SelectShotLevel();
         }
 
+        if(SpineAnim.CurrentAnim.ToString().Contains("Atk1"))
+        {
+            CharInfo.Stamina -= CharInfo.RapidAttack.Stamina_Cost_Atk;
+
+        }
+        else if (SpineAnim.CurrentAnim.ToString().Contains("Atk2"))
+        {
+            CharInfo.Stamina -= CharInfo.PowerfulAttac.Stamina_Cost_Atk;
+        }
         //StartCoroutine(CastingLifeChecker(NextAttackLevel > CharacterLevelType.Novice ? true : false, cast));
     }
 

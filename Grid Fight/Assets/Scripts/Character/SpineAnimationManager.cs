@@ -63,7 +63,6 @@ public class SpineAnimationManager : MonoBehaviour
         else if (e.Data.Name.Contains("FireBulletParticle"))
         {
             CharOwner.currentAttackPhase = AttackPhasesType.Bullet;
-            CharOwner.CharInfo.Stamina -= CharOwner.CharInfo.StaminaStats.Stamina_Cost_Atk;
             CharOwner.CreateAttack();
            
             if (!CharOwner.VFXTestMode)
@@ -223,7 +222,24 @@ public class SpineAnimationManager : MonoBehaviour
         SetupSpineAnim();
         Loop = loop;
         SpineAnimationState.SetAnimation(1, anim.ToString(), loop).MixDuration = transition;
+        StartCoroutine(ClearAnim(transition));
         CurrentAnim = anim;
+
+    }
+
+    private IEnumerator ClearAnim(float asdaf)
+    {
+        float timer = 0;
+        while (timer <= asdaf)
+        {
+            yield return new WaitForFixedUpdate();
+            while (!CharOwner.VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            timer += Time.fixedDeltaTime;
+        }
+        SpineAnimationState.SetEmptyAnimation(0, 0);
     }
 
     public float GetAnimTime()
