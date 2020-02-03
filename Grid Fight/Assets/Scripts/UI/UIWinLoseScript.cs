@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIWinLoseScript : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class UIWinLoseScript : MonoBehaviour
     public Button SplashScreen;
 
     private bool selectedBtn = false; //false play again     true splash screen
+    public float CoolDown = 0.5f;
+    public float Offset = 0;
 
 
     private void OnEnable()
@@ -28,8 +31,9 @@ public class UIWinLoseScript : MonoBehaviour
 
     private void JoystickUsedEvent(int player, InputDirection dir)
     {
-        if (dir == InputDirection.Left || dir == InputDirection.Right)
+        if ((dir == InputDirection.Left || dir == InputDirection.Right) && Time.time > Offset + CoolDown)
         {
+            Offset = Time.time;
             selectedBtn = !selectedBtn;
             UpdateBtn();
         }
@@ -45,11 +49,11 @@ public class UIWinLoseScript : MonoBehaviour
     {
         if (selectedBtn)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("SplashScreenDemo");
+            SceneManager.LoadScene("SplashScreenDemo");
         }
         else
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 

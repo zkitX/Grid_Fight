@@ -161,7 +161,9 @@ public class SpineAnimationManager : MonoBehaviour
                 {
                     SetAnim(CharacterAnimationStateType.Atk1_AtkToIdle);
                     CharOwner.currentAttackPhase = AttackPhasesType.End;
+                  
                 }
+                return;
             }
 
             if (completedAnim == CharacterAnimationStateType.GettingHit && CurrentAnim == CharacterAnimationStateType.GettingHit)

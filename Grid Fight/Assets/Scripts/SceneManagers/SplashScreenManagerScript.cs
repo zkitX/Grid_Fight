@@ -25,9 +25,9 @@ public class SplashScreenManagerScript : MonoBehaviour
         PlayerPrefsSwitch.PlayerPrefsSwitch.Init();
       //  Invoke("GoToMainMenu", 2);
 #endif
-        InputController.Instance.ButtonPlusUpEvent += Instance_ButtonPlusUpEvent;
 
-        Invoke("StartLoadingBattleScene", 1);
+        Invoke("StartInput", 2);
+        StartLoadingBattleScene();
     }
 
     private void Instance_ButtonPlusUpEvent(int player)
@@ -56,13 +56,19 @@ public class SplashScreenManagerScript : MonoBehaviour
         {
             yield return null;
         }
-        InputController.Instance.ButtonPlusUpEvent -= Instance_ButtonPlusUpEvent;
-       
-        asyncLoad.allowSceneActivation = true;
+        
 
         yield return new WaitForSecondsRealtime(0.5f);
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName("BattleScene"));
+        asyncLoad.allowSceneActivation = true;
+        yield return new WaitForSecondsRealtime(0.5f);
+        //SceneManager.SetActiveScene(SceneManager.GetSceneByName("BattleScene"));
         SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("SplashScreenDemo"));
+    }
+
+
+    private void StartInput()
+    {
+        InputController.Instance.ButtonPlusUpEvent += Instance_ButtonPlusUpEvent;
     }
 
 
@@ -74,6 +80,7 @@ public class SplashScreenManagerScript : MonoBehaviour
     public void ShowBattleScene()
     {
         ShowScene = true;
+        InputController.Instance.ButtonPlusUpEvent -= Instance_ButtonPlusUpEvent;
         Destroy(rewired);
     }
 

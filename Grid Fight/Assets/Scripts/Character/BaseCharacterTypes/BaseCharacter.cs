@@ -501,8 +501,9 @@ public class BaseCharacter : MonoBehaviour
 
             if (CurrentBattleTilesToCheck.Count > 0 && 
                 CurrentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos) && r.BattleTileState == BattleTileStateType.Empty).ToList().Count ==
-                CurrentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos)).ToList().Count)
+                CurrentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos)).ToList().Count && GridManagerScript.Instance.isPosOnField(UMS.CurrentTilePos + dir))
             {
+
                 SetAnimation(AnimState);
                 isMoving = true;
                 foreach (BattleTileScript item in prevBattleTile)
@@ -867,6 +868,8 @@ public class BaseCharacter : MonoBehaviour
                 SFXmanager.Instance.PlayOnce(SFXmanager.Instance.DefenceNormal);
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldNormal);
                 go.transform.position = transform.position;
+
+                damage = damage < 0 ? 1 : damage;
             }
             res = false;
             if (UMS.Facing == FacingType.Left)
@@ -884,42 +887,43 @@ public class BaseCharacter : MonoBehaviour
             res = true;
         }
 
-      /*  ElementalWeaknessType ElaboratedWeakness;
-        CurrentBuffsDebuffsClass buffDebuffWeakness = BuffsDebuffs.Where(r => r.ElementalResistence.Elemental == elemental).FirstOrDefault();
+        /*  ElementalWeaknessType ElaboratedWeakness;
+          CurrentBuffsDebuffsClass buffDebuffWeakness = BuffsDebuffs.Where(r => r.ElementalResistence.Elemental == elemental).FirstOrDefault();
 
-        ElementalWeaknessType BaseWeakness = GetElementalMultiplier(CharInfo.DamageStats.ElementalsResistence, elemental);
-        if (buffDebuffWeakness == null)
-        {
-            ElaboratedWeakness = BaseWeakness;
-        }
-        else
-        {
-            ElaboratedWeakness = BaseWeakness + (int)buffDebuffWeakness.ElementalResistence.ElementalWeakness;
-        }
+          ElementalWeaknessType BaseWeakness = GetElementalMultiplier(CharInfo.DamageStats.ElementalsResistence, elemental);
+          if (buffDebuffWeakness == null)
+          {
+              ElaboratedWeakness = BaseWeakness;
+          }
+          else
+          {
+              ElaboratedWeakness = BaseWeakness + (int)buffDebuffWeakness.ElementalResistence.ElementalWeakness;
+          }
 
-        switch (ElaboratedWeakness)
-        {
-            case ElementalWeaknessType.ExtremelyWeak:
-                damage = damage + (damage * 0.7f);
-                break;
-            case ElementalWeaknessType.VeryWeak:
-                damage = damage + (damage * 0.5f);
-                break;
-            case ElementalWeaknessType.Weak:
-                damage = damage + (damage * 0.3f);
-                break;
-            case ElementalWeaknessType.Neutral:
-                break;
-            case ElementalWeaknessType.Resistent:
-                damage = damage - (damage * 0.3f);
-                break;
-            case ElementalWeaknessType.VeryResistent:
-                damage = damage - (damage * 0.5f);
-                break;
-            case ElementalWeaknessType.ExtremelyResistent:
-                damage = damage - (damage * 0.7f);
-                break;
-        }*/
+          switch (ElaboratedWeakness)
+          {
+              case ElementalWeaknessType.ExtremelyWeak:
+                  damage = damage + (damage * 0.7f);
+                  break;
+              case ElementalWeaknessType.VeryWeak:
+                  damage = damage + (damage * 0.5f);
+                  break;
+              case ElementalWeaknessType.Weak:
+                  damage = damage + (damage * 0.3f);
+                  break;
+              case ElementalWeaknessType.Neutral:
+                  break;
+              case ElementalWeaknessType.Resistent:
+                  damage = damage - (damage * 0.3f);
+                  break;
+              case ElementalWeaknessType.VeryResistent:
+                  damage = damage - (damage * 0.5f);
+                  break;
+              case ElementalWeaknessType.ExtremelyResistent:
+                  damage = damage - (damage * 0.7f);
+                  break;
+          }*/
+        EventManager.Instance.UpdateHealth(this);
         CharInfo.Health -= damage;
         DamageReceivedEvent(damage);
         return res;

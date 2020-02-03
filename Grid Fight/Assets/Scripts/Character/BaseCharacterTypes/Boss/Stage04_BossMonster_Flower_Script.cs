@@ -122,6 +122,7 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
         SetAttackReady(true);
         SetAnimation(CharacterAnimationStateType.Idle);
         CharInfo.Health = CharInfo.HealthStats.Base;
+        EventManager.Instance.UpdateHealth(this);
     }
 
     public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)

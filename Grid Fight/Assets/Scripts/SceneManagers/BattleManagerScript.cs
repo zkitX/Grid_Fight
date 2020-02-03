@@ -199,7 +199,7 @@ public class BattleManagerScript : MonoBehaviour
                 UIBattleManager.Instance.UICharacterSelectionRight.gameObject.SetActive(true);
                 break;
         }
-        UserInputManager.Instance.StartUserInputManager();
+        
         SetUICharacterSelectionIcons();
         yield return null;
     }
@@ -530,7 +530,7 @@ public class BattleManagerScript : MonoBehaviour
     {
         if (CurrentBattleState == BattleState.Battle)
         {
-            if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null)
+            if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null)
             {
                 CurrentSelectedCharacters[controllerType].Character.isSpecialLoading = false;
             }
@@ -541,7 +541,7 @@ public class BattleManagerScript : MonoBehaviour
     {
         if (CurrentBattleState == BattleState.Battle)
         {
-            if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character.IsOnField)
+            if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null)
             {
                 StartCoroutine(CurrentSelectedCharacters[controllerType].Character.StartChargingAttack());
             }
@@ -551,7 +551,7 @@ public class BattleManagerScript : MonoBehaviour
     {
         if (CurrentBattleState == BattleState.Battle)
         {
-            if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character.IsOnField)
+            if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null)
             {
                 CurrentSelectedCharacters[controllerType].Character.StartQuickAttack();
             }

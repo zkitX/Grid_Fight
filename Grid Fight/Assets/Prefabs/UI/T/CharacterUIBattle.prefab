@@ -30,9 +30,9 @@ RectTransform:
   m_Children:
   - {fileID: 498419986826805058}
   - {fileID: 498419986741866302}
-  - {fileID: 1788227989}
-  - {fileID: 8946660713565600118}
-  - {fileID: 6280483385968443669}
+  - {fileID: 4625259865698055988}
+  - {fileID: 4861824871960156452}
+  - {fileID: 1664356085974157236}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -393,6 +393,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TextDefense
       objectReference: {fileID: 0}
+    - target: {fileID: 4625259867200527855, guid: 289137f089e98734e837c4810271576a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4625259867200527854, guid: 289137f089e98734e837c4810271576a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -510,7 +515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 289137f089e98734e837c4810271576a, type: 3}
---- !u!224 &6280483385968443669 stripped
+--- !u!224 &1664356085974157236 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4625259867200527854, guid: 289137f089e98734e837c4810271576a,
     type: 3}
@@ -527,6 +532,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TextDamage
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625259867200527855, guid: 289137f089e98734e837c4810271576a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4625259867200527854, guid: 289137f089e98734e837c4810271576a,
         type: 3}
@@ -645,7 +655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 289137f089e98734e837c4810271576a, type: 3}
---- !u!224 &1788227989 stripped
+--- !u!224 &4625259865698055988 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4625259867200527854, guid: 289137f089e98734e837c4810271576a,
     type: 3}
@@ -662,6 +672,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TextHeal
+      objectReference: {fileID: 0}
+    - target: {fileID: 6406502016854565657, guid: d6fe9806462623346a6787027bd63dfa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4562224978474122012, guid: d6fe9806462623346a6787027bd63dfa,
         type: 3}
@@ -775,7 +790,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6fe9806462623346a6787027bd63dfa, type: 3}
---- !u!224 &8946660713565600118 stripped
+--- !u!224 &4861824871960156452 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4562224978474122012, guid: d6fe9806462623346a6787027bd63dfa,
     type: 3}

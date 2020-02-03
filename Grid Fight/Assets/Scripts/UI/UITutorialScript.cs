@@ -18,7 +18,7 @@ public class UITutorialScript : MonoBehaviour
 
     private void Instance_ButtonMinusUpEvent(int player)
     {
-        if(BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+        if(BattleManagerScript.Instance != null && BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
         {
             InputController.Instance.ButtonMinusUpEvent -= Instance_ButtonMinusUpEvent;
             BattleManagerScript.Instance.CurrentBattleState = BattleState.Intro;
