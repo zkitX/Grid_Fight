@@ -1,0 +1,304 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class EventManager : MonoBehaviour
+{
+    public static EventManager Instance;
+
+    [Header("Stage Config")]
+    [SerializeField] protected StageEventTriggersProfile stageEventTriggersProfile;
+    public List<GameSequenceEvent> stageEventTriggers { get; private set; } = new List<GameSequenceEvent>();
+    public delegate bool Check();
+    protected List<TimedCheck> currentTimedChecks = new List<TimedCheck>();
+    IEnumerator timedCheckTicker = null;
+    List<GameSequenceEvent> queuedCompleteEvents = new List<GameSequenceEvent>();
+    IEnumerator completeEventSequencer = null;
+
+    [Header("Current Stage Info")]
+    [SerializeField] protected List<CharacterEventInfoClass> deadCharacters = new List<CharacterEventInfoClass>();
+    protected List<CharacterNameType> diedThisFrame = new List<CharacterNameType>();
+    [SerializeField] protected List<CharacterEventInfoClass> charactersWhomstHaveArrived = new List<CharacterEventInfoClass>();
+    protected List<CharacterNameType> arrivedThisFrame = new List<CharacterNameType>();
+
+    //[Tooltip("How many seconds between checks, increase for performance boost, decrease for accuracy")][SerializeField] protected float timeBetweenChecks = 1f;
+
+    #region Initialize
+    private void Awake()
+    {
+        Instance = this;
+        if (stageEventTriggersProfile != null)
+        {
+            foreach(GameSequenceEvent gameSeqEvent in stageEventTriggersProfile.stageEventTriggers)
+            {
+                stageEventTriggers.Add(Instantiate(gameSeqEvent));
+            }
+        }
+        InitialiseEvents();
+    }
+
+    void InitialiseEvents()
+    {
+        foreach(GameSequenceEvent gameEvent in stageEventTriggers)
+        {
+            gameEvent.Initialise();
+        }
+    }
+    #endregion
+
+    #region TimedCheck Handling
+    public void AddTimedCheckTicker(TimedCheck checker)
+    {
+        currentTimedChecks.Add(checker);
+        StartStop_TimedCheckTicker();
+    }
+
+    public void RemoveTimedCheckTicker(TimedCheck checker)
+    {
+        if (IsChecking(checker))
+        {
+            currentTimedChecks.Remove(checker);
+            Debug.Log("<i>Stopped Checking for</i> " + checker.Name);
+        }
+        StartStop_TimedCheckTicker();
+    }
+
+    public bool IsChecking(TimedCheck checker)
+    {
+        foreach (TimedCheck timedCheck in currentTimedChecks)
+        {
+            if (timedCheck == checker)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void StartStop_TimedCheckTicker()
+    {
+
+        if (timedCheckTicker == null)
+        {
+            timedCheckTicker = TimedCheckTick();
+            StartCoroutine(timedCheckTicker);
+        }
+        else if (currentTimedChecks.Count == 0)
+        {
+            StopCoroutine(timedCheckTicker);
+            timedCheckTicker = null;
+        }
+    }
+
+    IEnumerator TimedCheckTick()
+    {
+        //Go through each TimedCheck currently active and change their states depending on their delegates
+        //Wait a bit between checks to help with performance
+        while (true)
+        {
+            List<GameSequenceEvent> EventsChecking = new List<GameSequenceEvent>();
+
+            foreach (TimedCheck timedCheck in currentTimedChecks.ToArray())
+            {
+                timedCheck.isHappening = timedCheck.check();
+                if (timedCheck.check() && !timedCheck.hasHappened) timedCheck.hasHappened = true;
+                if (timedCheck.isHappening)
+                {
+                    //Add the event checking on this timer to a list of events to update their checks at the end, if it hasnt been added already
+                    bool checkerAlreadyChecking = false;
+                    foreach (GameSequenceEvent eventChecking in EventsChecking)
+                    {
+                        if (eventChecking == timedCheck.checker)
+                        {
+                            checkerAlreadyChecking = true;
+                            break;
+                        }
+                    }
+                    if (!checkerAlreadyChecking) EventsChecking.Add(timedCheck.checker);
+                }
+                if (timedCheck.hasHappened && timedCheck.ceaseOnHappened) timedCheck.CeaseChecking();
+            }
+
+            //Start the checks in the gameEvents that have had a timedCheck set to isHappening this frame
+            foreach(GameSequenceEvent gameEvent in EventsChecking)
+            {
+                gameEvent.CheckTimedRequirements();
+            }
+
+            // yield return new WaitForSecondsRealtime(timeBetweenChecks);
+            yield return null;
+        }
+    }
+    #endregion
+
+    #region Enquiries
+    public bool HasHappened(GameSequenceEvent gseqEvent)
+    {
+        foreach(GameSequenceEvent GSequenceEvent in stageEventTriggers)
+        {
+            if(GSequenceEvent.hasHappened && GSequenceEvent.Name == gseqEvent.Name)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    #endregion
+
+    #region Queuing Completed Events
+    public void AddCompletedGameEvent(GameSequenceEvent gameEvent)
+    {
+        queuedCompleteEvents.Add(gameEvent);
+        if(completeEventSequencer == null)
+        {
+            completeEventSequencer = CompleteEventSequence();
+            StartCoroutine(completeEventSequencer);
+        }
+    }
+
+    IEnumerator CompleteEventSequence()
+    {
+        while(queuedCompleteEvents.Count > 0)
+        {
+            yield return queuedCompleteEvents[0].CompleteEventSequence();
+            queuedCompleteEvents.Remove(queuedCompleteEvents[0]);
+            yield return null;
+        }
+        completeEventSequencer = null;
+    }
+    #endregion
+
+    #region Game Stats Updating
+
+    #region Character Deaths Handling
+    public void AddCharacterDeath(BaseCharacter character)
+    {
+        diedThisFrame.Add(character.CharInfo.CharacterID);
+        StartCoroutine(ResetCharacterDeathsLastFrame(character.CharInfo.CharacterID));
+
+        foreach(CharacterEventInfoClass deadCharacter in deadCharacters)
+        {
+            if(deadCharacter.character.CharInfo.CharacterID == character.CharInfo.CharacterID)
+            {
+                deadCharacter.deaths++;
+                return;
+            }
+        }
+        deadCharacters.Add(new CharacterEventInfoClass(character, 1));
+    }
+
+    IEnumerator ResetCharacterDeathsLastFrame(CharacterNameType charName)
+    {
+        yield return null;
+        diedThisFrame.Remove(charName);
+    }
+
+    public bool HasCharacterDiedThisFrame(CharacterNameType charID)
+    {
+        foreach(CharacterNameType charWhomstDied in diedThisFrame)
+        {
+            if (charWhomstDied == charID) return true;
+        }
+        return false;
+    }
+    public bool HasCharacterDied(CharacterNameType charID)
+    {
+        foreach (CharacterEventInfoClass deadChar in deadCharacters)
+        {
+            if (deadChar.character.CharInfo.CharacterID == charID) return true;
+        }
+        return false;
+    }
+    public int CharacterDeathCount(CharacterNameType charID)
+    {
+        foreach (CharacterEventInfoClass deadChar in deadCharacters)
+        {
+            if (deadChar.character.CharInfo.CharacterID == charID) return deadChar.deaths;
+        }
+        return 0;
+    }
+    #endregion
+
+    #region Character Arrival(Good movie) Handling
+    public void AddCharacterArrival(BaseCharacter character)
+    {
+        arrivedThisFrame.Add(character.CharInfo.CharacterID);
+        StartCoroutine(ResetCharacterArrivalsLastFrame(character.CharInfo.CharacterID));
+
+        foreach (CharacterEventInfoClass characterWhomstHasArrived in charactersWhomstHaveArrived)
+        {
+            if (characterWhomstHasArrived.character.CharInfo.CharacterID == character.CharInfo.CharacterID)
+            {
+                characterWhomstHasArrived.arrivals++;
+                return;
+            }
+        }
+        charactersWhomstHaveArrived.Add(new CharacterEventInfoClass(1, character));
+    }
+
+    IEnumerator ResetCharacterArrivalsLastFrame(CharacterNameType charName)
+    {
+        yield return null;
+        arrivedThisFrame.Remove(charName);
+    }
+
+    public bool HasCharacterArrivedThisFrame(CharacterNameType charID)
+    {
+        foreach(CharacterNameType characterWhomstHasArrived in arrivedThisFrame)
+        {
+            if (characterWhomstHasArrived == charID) return true;
+        }
+        return false;
+    }
+    public bool HasCharacterArrived(CharacterNameType charID)
+    {
+        foreach(CharacterEventInfoClass characterWhomstHasArrived in charactersWhomstHaveArrived)
+        {
+            if (characterWhomstHasArrived.character.CharInfo.CharacterID == charID) return true;
+        }
+        return false;
+    }
+    public int CharacterArrivalCount(CharacterNameType charID)
+    {
+        foreach(CharacterEventInfoClass characterWhomstHasArrived in charactersWhomstHaveArrived)
+        {
+            if(characterWhomstHasArrived.character.CharInfo.CharacterID == charID)
+            {
+                return characterWhomstHasArrived.arrivals;
+            }
+        }
+        return 0;
+    }
+    #endregion
+
+    #endregion
+
+
+}
+
+[System.Serializable]
+public class CharacterEventInfoClass
+{
+    public BaseCharacter character;
+    public int deaths = 0;
+    public int arrivals = 0;
+
+    public CharacterEventInfoClass(BaseCharacter _character, int _deaths)
+    {
+        character = _character;
+        deaths = _deaths;
+    }
+
+    public CharacterEventInfoClass(int _arrivals, BaseCharacter _character)
+    {
+        character = _character;
+        arrivals = _arrivals;
+    }
+
+    public CharacterEventInfoClass(BaseCharacter _character)
+    {
+        character = _character;
+    }
+
+
+}
