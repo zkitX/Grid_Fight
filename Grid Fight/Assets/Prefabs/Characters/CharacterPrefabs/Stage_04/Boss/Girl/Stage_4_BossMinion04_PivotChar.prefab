@@ -290,6 +290,12 @@ MonoBehaviour:
   ClassType: 0
   CharacterLevel: 0
   CharacterSelection: 0
+  RapidAttack:
+    BaseDamage: 10
+    Stamina_Cost_Atk: 0
+  PowerfulAttac:
+    BaseDamage: 10
+    Stamina_Cost_Atk: 0
   HealthStats:
     Health: 60
     Base: 60
@@ -301,28 +307,27 @@ MonoBehaviour:
     Base: 40
     Regeneration: 1
     BaseStaminaRegeneration: 1
-    Stamina_Cost_Atk: 0
-    Stamina_Cost_S_Atk01: 1
-    Stamina_Cost_S_Atk02: 1
-    Stamina_Cost_S_Atk03: 1
-    Stamina_Cost_S_Atk04: 0
     LevelMultiplier: 0
   SpeedStats:
     BaseSpeed: 2
     MovementSpeed: 1
     AttackSpeed: 1
-    AttackSpeedRatio: 5
+    AttackSpeedRatio: 8
     BulletSpeed: 5
+    LeaveSpeed: 3
     LevelMultiplier: 0
+    IdleToAtkDuration: 0.2
+    AtkToIdleDuration: 0.2
   DamageStats:
-    BaseDamage: 6
     CurrentDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 0
-    SpecialMultiplier: 1
+  DefenceStats:
+    BaseDefence: 10
+    Invulnerability: 0.2
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
