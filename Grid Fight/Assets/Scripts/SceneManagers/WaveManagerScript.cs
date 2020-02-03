@@ -12,7 +12,6 @@ public class WaveManagerScript : MonoBehaviour
 
     private WaveCharClass CurrentWaveChar;
     private List<ScriptableObjectWaveEvent> Events = new List<ScriptableObjectWaveEvent>();
-    public List<CharacterNameType> WavesCharacters = new List<CharacterNameType>();
     public int CurrentWave = 0;
 
     private IEnumerator Wave_Co;
@@ -110,10 +109,14 @@ public class WaveManagerScript : MonoBehaviour
 
     public IEnumerator WaveCharCreator()
     {
-        foreach (CharacterNameType waveChar in WavesCharacters)
+        foreach (WavePhaseClass wavePhase in WavePhases)
         {
-            CreateChar(waveChar);
-            CreateChar(waveChar);
+
+            foreach (WaveCharClass waveChar in wavePhase.ListOfEnemy)
+            {
+                CreateChar(waveChar.TypeOfCharacter.CharacterName);
+                CreateChar(waveChar.TypeOfCharacter.CharacterName);
+            }
         }
         yield return null;
     }
