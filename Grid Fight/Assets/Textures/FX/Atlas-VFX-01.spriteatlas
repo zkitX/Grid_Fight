@@ -33,6 +33,18 @@ SpriteAtlas:
       m_Overridden: 0
       m_AndroidETC2FallbackOverride: 0
       m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    - serializedVersion: 3
+      m_BuildTarget: Nintendo Switch
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 12
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
     packingSettings:
       serializedVersion: 2
       padding: 8
@@ -192,8 +204,12 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 5adfeae9440add7428d883c168878bb6, type: 3}
     - {fileID: 2800000, guid: 8226872b438e7324ab822708db4923e5, type: 3}
     - {fileID: 2800000, guid: 909a245172e987b429ea32e22c65512e, type: 3}
-    totalSpriteSurfaceArea: 10929776
+    - {fileID: 2800000, guid: f09ff6669c6ac9b47999edc0f99b4068, type: 3}
+    totalSpriteSurfaceArea: 10982972
     bindAsDefault: 1
+    storedHash:
+      serializedVersion: 2
+      Hash: 7efc84ca63388585032ec80e80dad4b3
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: -6726589229683246268, guid: 9cc42a00498da1940afe6a3f05099fa5, type: 3}
@@ -217,7 +233,10 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f49e22d051dd27a429c90269e9bdf852, type: 3}
   - {fileID: 21300000, guid: 54e8b6d062a8d7548bbc039b85fc25ec, type: 3}
   - {fileID: 21300000, guid: 391a79d0916dfeb459e5daafb9fbe41f, type: 3}
-  - {fileID: 21300000, guid: 459b8921c055b8f44b6884a9e46e80ac, type: 3}
+  - {fileID: -5190983480107634853, guid: 459b8921c055b8f44b6884a9e46e80ac, type: 3}
+  - {fileID: -3698171012002253028, guid: 459b8921c055b8f44b6884a9e46e80ac, type: 3}
+  - {fileID: -4071319232353388765, guid: 459b8921c055b8f44b6884a9e46e80ac, type: 3}
+  - {fileID: 4035190515438401889, guid: 459b8921c055b8f44b6884a9e46e80ac, type: 3}
   - {fileID: 21300000, guid: 961576313dba37442bae2709c1321841, type: 3}
   - {fileID: 21300000, guid: a1ec7631692b9ae468bb22b89fdc4abb, type: 3}
   - {fileID: 21300000, guid: 909a245172e987b429ea32e22c65512e, type: 3}
@@ -306,6 +325,9 @@ SpriteAtlas:
   - {fileID: -7507302030379415418, guid: 9fe71d5684df7ba428fc023c7106e399, type: 3}
   - {fileID: 21300000, guid: f7a22d56eb4318549a93c932a100895f, type: 3}
   - {fileID: 21300000, guid: c1969f56ca4638f4caa04c5c0b510d96, type: 3}
+  - {fileID: 8855007172956204954, guid: f09ff6669c6ac9b47999edc0f99b4068, type: 3}
+  - {fileID: 6461892038547782933, guid: f09ff6669c6ac9b47999edc0f99b4068, type: 3}
+  - {fileID: -4444017486344765855, guid: f09ff6669c6ac9b47999edc0f99b4068, type: 3}
   - {fileID: 21300000, guid: ff737a76ec9a4764bbd219e15274f3ce, type: 3}
   - {fileID: 21300000, guid: 93f8abb6df8f9f348910ec6328660560, type: 3}
   - {fileID: 21300000, guid: 0c0993d6840a01849a43c66f1af0cd82, type: 3}
@@ -378,7 +400,10 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e869689c3425dc145a51bd31c5eee138, type: 3}
   - {fileID: 21300000, guid: 13bee3ac63c3c1448bc99393d73936cc, type: 3}
   - {fileID: 21300000, guid: d91a7ceceb48b6d4eb7da66199435d99, type: 3}
-  - {fileID: 21300000, guid: ca6cafec51f1a8e4caf09a794e740523, type: 3}
+  - {fileID: 2112554957865573968, guid: ca6cafec51f1a8e4caf09a794e740523, type: 3}
+  - {fileID: 2795865818088190192, guid: ca6cafec51f1a8e4caf09a794e740523, type: 3}
+  - {fileID: -6810743619792493156, guid: ca6cafec51f1a8e4caf09a794e740523, type: 3}
+  - {fileID: -2108270582923979291, guid: ca6cafec51f1a8e4caf09a794e740523, type: 3}
   - {fileID: 21300000, guid: 747d716dbea89fc48b954a506c47b164, type: 3}
   - {fileID: 21300000, guid: 443b2b6d8bc649d4884f579288b4e806, type: 3}
   - {fileID: 21300000, guid: 12046b8dfeadff340a65d8849cc2f759, type: 3}
@@ -387,11 +412,22 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 8e688ded47aa134489453b7f3445dfed, type: 3}
   - {fileID: 21300000, guid: 155f67fd8750f8e4e83c8efb1731f3a0, type: 3}
   - {fileID: 21300000, guid: ac9db00e0b370a046bac7cdcd0128e91, type: 3}
-  - {fileID: 21300000, guid: c18d1a1e5915b68408b0fa5b5d8b91e0, type: 3}
+  - {fileID: 8252275332357371798, guid: c18d1a1e5915b68408b0fa5b5d8b91e0, type: 3}
+  - {fileID: 7181303448228851600, guid: c18d1a1e5915b68408b0fa5b5d8b91e0, type: 3}
+  - {fileID: 2499787201410029902, guid: c18d1a1e5915b68408b0fa5b5d8b91e0, type: 3}
+  - {fileID: -3832425560385189475, guid: c18d1a1e5915b68408b0fa5b5d8b91e0, type: 3}
+  - {fileID: -573763744171136287, guid: c18d1a1e5915b68408b0fa5b5d8b91e0, type: 3}
+  - {fileID: -7161035684826373813, guid: c18d1a1e5915b68408b0fa5b5d8b91e0, type: 3}
+  - {fileID: -7360308439372288083, guid: c18d1a1e5915b68408b0fa5b5d8b91e0, type: 3}
+  - {fileID: 5008641955960341733, guid: c18d1a1e5915b68408b0fa5b5d8b91e0, type: 3}
+  - {fileID: -6197726543269084248, guid: c18d1a1e5915b68408b0fa5b5d8b91e0, type: 3}
   - {fileID: 21300000, guid: c649c32e9a435234583865c47cd51623, type: 3}
   - {fileID: 21300000, guid: 575da03ed8a23504496f825402694e3d, type: 3}
   - {fileID: 21300000, guid: 0581723e14aaf31409521fd243dbaf00, type: 3}
-  - {fileID: 21300000, guid: 0bc2ca3e70d16064aab475ef194132b5, type: 3}
+  - {fileID: 107896450278153348, guid: 0bc2ca3e70d16064aab475ef194132b5, type: 3}
+  - {fileID: -7733106824488700351, guid: 0bc2ca3e70d16064aab475ef194132b5, type: 3}
+  - {fileID: 3251285651676193694, guid: 0bc2ca3e70d16064aab475ef194132b5, type: 3}
+  - {fileID: 9078123499070572820, guid: 0bc2ca3e70d16064aab475ef194132b5, type: 3}
   - {fileID: 21300000, guid: 2b02214ec64f085428a3cb3e44a6d374, type: 3}
   - {fileID: 21300000, guid: dee3cd5e2ce8cdc45b58d080dcdc717e, type: 3}
   - {fileID: -764547547501577839, guid: 93d5ea8e1a8d4314a9252e3fd8d5be63, type: 3}
@@ -429,7 +465,10 @@ SpriteAtlas:
   - aura_slam
   - ice_spikes
   - portal_glow
-  - portal_stripes_soft
+  - portal_stripes_soft_0
+  - portal_stripes_soft_1
+  - portal_stripes_soft_2
+  - portal_stripes_soft_3
   - lightning1
   - portal_stripes4
   - wave3
@@ -518,6 +557,9 @@ SpriteAtlas:
   - Geisha-Swortd-Effect_0
   - bubble_round2
   - fire_soft
+  - WhiteRocks-01_1
+  - WhiteRocks-01_0
+  - WhiteRocks-01_2
   - bullet
   - star
   - HardRing.01
@@ -590,7 +632,10 @@ SpriteAtlas:
   - etfx_shield
   - shield_magic
   - cloud_2x2_soft
-  - fire_soft_spiky
+  - fire_soft_spiky_0
+  - fire_soft_spiky_1
+  - fire_soft_spiky_2
+  - fire_soft_spiky_3
   - cloud_magic
   - rectangle
   - cloud
@@ -599,11 +644,22 @@ SpriteAtlas:
   - portal_stripes5
   - circle
   - talkbubble_4x4
-  - lightning_spritesheet_3x3
+  - lightning_spritesheet_3x3_6
+  - lightning_spritesheet_3x3_7
+  - lightning_spritesheet_3x3_4
+  - lightning_spritesheet_3x3_5
+  - lightning_spritesheet_3x3_2
+  - lightning_spritesheet_3x3_3
+  - lightning_spritesheet_3x3_0
+  - lightning_spritesheet_3x3_1
+  - lightning_spritesheet_3x3_8
   - star_outline
   - CannonBall_Fire.01
   - splat01
-  - cloud_2x2_hard
+  - cloud_2x2_hard_0
+  - cloud_2x2_hard_1
+  - cloud_2x2_hard_2
+  - cloud_2x2_hard_3
   - lightray2
   - fire_ground_soft3x3
   - stage01-valley-Bullets_3
