@@ -72,7 +72,7 @@ public class UIBattleFieldScript : MonoBehaviour
     {
         if(isDefended)
         {
-
+            StartCoroutine(DefendCo(damage));
         }
         else
         {

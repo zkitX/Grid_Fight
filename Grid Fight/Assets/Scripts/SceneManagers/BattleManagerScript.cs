@@ -102,6 +102,10 @@ public class BattleManagerScript : MonoBehaviour
         }
 
         BaseCharacter currentCharacter = AllCharactersOnField.Where(r => r.UMS.PlayerController.Contains(playerController) && r.CharInfo.CharacterID == cName).First();
+        if(currentCharacter.CharInfo.Health <= 0)
+        {
+            return null;
+        }
         BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(pos);
         currentCharacter.UMS.CurrentTilePos = bts.Pos;
         for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)

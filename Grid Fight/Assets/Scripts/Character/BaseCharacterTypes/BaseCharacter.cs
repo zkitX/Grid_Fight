@@ -126,6 +126,7 @@ public class BaseCharacter : MonoBehaviour
             GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
             UMS.Pos[i] = Vector2Int.zero;
         }
+        isMoving = false;
         SetAttackReady(false);
         Call_CurrentCharIsDeadEvent();
         transform.position = new Vector3(100,100,100);
@@ -455,7 +456,7 @@ public class BaseCharacter : MonoBehaviour
             return;
         }
 
-        if ((CharInfo.Health > 0 && !isMoving && IsOnField) || BattleManagerScript.Instance.VFXScene)
+        if ((CharInfo.Health > 0 && !isMoving && IsOnField && SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving) || BattleManagerScript.Instance.VFXScene)
         {
             if (currentAttackPhase == AttackPhasesType.Cast && currentAttackPhase == AttackPhasesType.Bullet)
             {
