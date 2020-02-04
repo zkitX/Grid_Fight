@@ -396,9 +396,15 @@ MonoBehaviour:
   ClassType: 0
   CharacterLevel: 0
   CharacterSelection: 0
+  RapidAttack:
+    BaseDamage: 10
+    Stamina_Cost_Atk: 0
+  PowerfulAttac:
+    BaseDamage: 10
+    Stamina_Cost_Atk: 0
   HealthStats:
-    Health: 100
-    Base: 100
+    Health: 150
+    Base: 150
     Regeneration: 2
     BaseHealthRegeneration: 2
     LevelMultiplier: 0
@@ -407,11 +413,6 @@ MonoBehaviour:
     Base: 40
     Regeneration: 1
     BaseStaminaRegeneration: 1
-    Stamina_Cost_Atk: 0
-    Stamina_Cost_S_Atk01: 1
-    Stamina_Cost_S_Atk02: 1
-    Stamina_Cost_S_Atk03: 1
-    Stamina_Cost_S_Atk04: 0
     LevelMultiplier: 0
   SpeedStats:
     BaseSpeed: 1
@@ -419,16 +420,20 @@ MonoBehaviour:
     AttackSpeed: 1
     AttackSpeedRatio: 8
     BulletSpeed: 5
+    LeaveSpeed: 3
     LevelMultiplier: 0
+    IdleToAtkDuration: 0.2
+    AtkToIdleDuration: 0.2
   DamageStats:
-    BaseDamage: 8
     CurrentDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 0
-    SpecialMultiplier: 1
+  DefenceStats:
+    BaseDefence: 10
+    Invulnerability: 0.2
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
@@ -626,11 +631,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2728665800076335582}
     m_Modifications:
-    - target: {fileID: 3677435223727270876, guid: a2ef8c0a6fda57b4d8a0e5ccd757f5a2,
-        type: 3}
-      propertyPath: m_Name
-      value: TentaclesBossGirl
-      objectReference: {fileID: 0}
     - target: {fileID: 3677435223727270873, guid: a2ef8c0a6fda57b4d8a0e5ccd757f5a2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -686,6 +686,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3677435223727270876, guid: a2ef8c0a6fda57b4d8a0e5ccd757f5a2,
+        type: 3}
+      propertyPath: m_Name
+      value: TentaclesBossGirl
+      objectReference: {fileID: 0}
     - target: {fileID: 8487456094111737662, guid: a2ef8c0a6fda57b4d8a0e5ccd757f5a2,
         type: 3}
       propertyPath: Adjustment.x
@@ -711,21 +716,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2728665800076335582}
     m_Modifications:
-    - target: {fileID: 6222024276423462515, guid: 74ea03eeb71618c4fb21a9bbdce4c2e3,
-        type: 3}
-      propertyPath: m_Name
-      value: stage04-boss-Lady-Shield-Loop
-      objectReference: {fileID: 0}
-    - target: {fileID: 6222024276423462515, guid: 74ea03eeb71618c4fb21a9bbdce4c2e3,
-        type: 3}
-      propertyPath: m_TagString
-      value: Shield
-      objectReference: {fileID: 0}
-    - target: {fileID: 6222024276423462515, guid: 74ea03eeb71618c4fb21a9bbdce4c2e3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6222024276423462512, guid: 74ea03eeb71618c4fb21a9bbdce4c2e3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -779,6 +769,21 @@ PrefabInstance:
     - target: {fileID: 6222024276423462512, guid: 74ea03eeb71618c4fb21a9bbdce4c2e3,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6222024276423462515, guid: 74ea03eeb71618c4fb21a9bbdce4c2e3,
+        type: 3}
+      propertyPath: m_Name
+      value: stage04-boss-Lady-Shield-Loop
+      objectReference: {fileID: 0}
+    - target: {fileID: 6222024276423462515, guid: 74ea03eeb71618c4fb21a9bbdce4c2e3,
+        type: 3}
+      propertyPath: m_TagString
+      value: Shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 6222024276423462515, guid: 74ea03eeb71618c4fb21a9bbdce4c2e3,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
