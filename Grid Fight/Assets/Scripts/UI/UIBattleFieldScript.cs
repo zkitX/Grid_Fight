@@ -15,8 +15,10 @@ public class UIBattleFieldScript : MonoBehaviour
     private Camera mCamera;
     public Canvas CanvasParent;
     private Dictionary<int, GameObject> Damages = new Dictionary<int, GameObject>();
+    private Dictionary<int, GameObject> Defends = new Dictionary<int, GameObject>();
     private Dictionary<int, GameObject> Healings = new Dictionary<int, GameObject>();
     public GameObject Damage;
+    public GameObject Defence;
     public GameObject Healing;
     // Start is called before the first frame update
     void Start()
@@ -66,9 +68,16 @@ public class UIBattleFieldScript : MonoBehaviour
         h.SetActive(false);
     }
 
-    private void CharOwner_DamageReceivedEvent(float damage)
+    private void CharOwner_DamageReceivedEvent(float damage, bool isDefended)
     {
-        StartCoroutine(DamageCo(damage));
+        if(isDefended)
+        {
+
+        }
+        else
+        {
+            StartCoroutine(DamageCo(damage));
+        }
     }
 
     private IEnumerator DamageCo(float damage)
@@ -78,6 +87,20 @@ public class UIBattleFieldScript : MonoBehaviour
         {
             d = Instantiate(Damage, transform);
             Damages.Add(Damages.Count, d);
+        }
+        d.SetActive(true);
+        d.GetComponent<TextMeshProUGUI>().text = ((int)(damage * 100)).ToString();
+        yield return new WaitForSecondsRealtime(2);
+        d.SetActive(false);
+    }
+
+    private IEnumerator DefendCo(float damage)
+    {
+        GameObject d = Defends.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
+        if (d == null)
+        {
+            d = Instantiate(Defence, transform);
+            Defends.Add(Defends.Count, d);
         }
         d.SetActive(true);
         d.GetComponent<TextMeshProUGUI>().text = ((int)(damage * 100)).ToString();

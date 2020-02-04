@@ -124,14 +124,7 @@ public class UnitManagementScript : MonoBehaviour
         gameObject.tag = Side.ToString();
         CharOwner.SpineAnim.gameObject.tag = Side.ToString();
         UnitBehaviour = ubt;
-        if (ai)
-        {
-            CharOwner.StartMoveCo();
-        }
-        else
-        {
-            CharOwner.StopMoveCo();
-        }
+      
     }
 
 

@@ -22,7 +22,7 @@ public class SpineAnimationManager : MonoBehaviour
     private bool Loop = false;
 
 
-//initialize all the spine element
+    //initialize all the spine element
     public void SetupSpineAnim()
     {
         if(skeletonAnimation == null)
@@ -72,7 +72,6 @@ public class SpineAnimationManager : MonoBehaviour
             }
         }
     }
-
 
     //Method fired when an animation is complete
     private void SpineAnimationState_Complete(Spine.TrackEntry trackEntry)
@@ -187,15 +186,13 @@ public class SpineAnimationManager : MonoBehaviour
         }
     }
 
-
-    public void SpeialAtkTest()
+    public void SpecialAtkTest()
     {
         float timer = skeletonAnimation.state.GetCurrent(1).AnimationTime;
         SpineAnimationState.SetAnimation(1, CharacterAnimationStateType.Atk1_IdleToAtk.ToString(), false);
         skeletonAnimation.state.GetCurrent(1).AnimationStart = timer;
         CurrentAnim = CharacterAnimationStateType.Atk1_IdleToAtk;
     }
-
 
     public void SetAnim(CharacterAnimationStateType anim)
     {
@@ -218,11 +215,11 @@ public class SpineAnimationManager : MonoBehaviour
 
     public void SetAnim(CharacterAnimationStateType anim, bool loop, float transition)
     {
+        SetupSpineAnim();
         if(anim == CharacterAnimationStateType.Arriving)
         {
-           // Debug.Log("Arriving");
+            Debug.Log("Arriving start");
         }
-        SetupSpineAnim();
         Loop = loop;
         SpineAnimationState.SetAnimation(1, anim.ToString(), loop).MixDuration = transition;
         if(transition > 0)
@@ -233,10 +230,10 @@ public class SpineAnimationManager : MonoBehaviour
 
     }
 
-    private IEnumerator ClearAnim(float asdaf)
+    private IEnumerator ClearAnim(float transition)
     {
         float timer = 0;
-        while (timer <= asdaf)
+        while (timer <= transition)
         {
             yield return new WaitForFixedUpdate();
             while (!CharOwner.VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))

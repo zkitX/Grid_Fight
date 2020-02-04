@@ -18,8 +18,8 @@ public class Stage04_BossGirl_Script : MinionType_Script
     private List<Vector2Int> FlowersPos = new List<Vector2Int>()
     {
         new Vector2Int(0,7),
-        new Vector2Int(1,11),
-        new Vector2Int(3,11),
+        new Vector2Int(1,10),
+        new Vector2Int(3,10),
         new Vector2Int(4,6)
     };
 
@@ -33,7 +33,6 @@ public class Stage04_BossGirl_Script : MinionType_Script
 
     public override void SetUpEnteringOnBattle()
     {
-        UIBattleFieldManager.Instance.SetUIBattleField(this);
         StartCoroutine(SetUpEnteringOnBattle_Co());
     }
 

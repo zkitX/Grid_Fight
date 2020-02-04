@@ -15,7 +15,6 @@ public class WaveManagerScript : MonoBehaviour
     public int CurrentWave = 0;
 
     private IEnumerator Wave_Co;
-    private IEnumerator Event_Co;
 
     private void Awake()
     {
@@ -164,60 +163,67 @@ public class WaveManagerScript : MonoBehaviour
 
     private IEnumerator WaveCo()
     {
-        float timer = 0;
+        while (BattleManagerScript.Instance == null || GridManagerScript.Instance == null)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
         foreach (WavePhaseClass wavePhase in WavePhases)
         {
-            CurrentWave++;
-            while (BattleManagerScript.Instance == null || GridManagerScript.Instance == null)
-            {
-                yield return new WaitForEndOfFrame();
-            }
+            yield return StartCoroutine(Wave(wavePhase));
+        }
+    }
 
-            BaseCharacter newChar = GetWaveCharacter(wavePhase.IsRandom ? GetAvailableRandomWaveCharacter(wavePhase) : GetAvailableWaveCharacter(wavePhase));
-            SpawChar(newChar);
-            isWaveComplete = false;
 
-            if(Event_Co != null)
+    private IEnumerator Wave(WavePhaseClass wavePhase)
+    {
+        float timer = 0;
+        BaseCharacter newChar;
+        WaveCharacterInfoClass waveCharacterInfoClass;
+
+        if (wavePhase.IsRandom)
+        {
+            waveCharacterInfoClass = GetAvailableRandomWaveCharacter(wavePhase);
+        }
+        else
+        {
+            waveCharacterInfoClass = GetAvailableWaveCharacter(wavePhase);
+        }
+        while (true)
+        {
+            timer += Time.fixedDeltaTime;
+            yield return BattleManagerScript.Instance.PauseUntil();
+            if (timer > CurrentWaveChar.DelayBetweenChars && WaveCharcters.Where(r => r.gameObject.activeInHierarchy).ToList().Count < wavePhase.MaxEnemyOnScreen)
             {
-                StopCoroutine(Event_Co);
-            }
-            Event_Co = EventCo();
-            StartCoroutine(Event_Co);
-            while (!isWaveComplete)
-            {
-                yield return new WaitForFixedUpdate();
-                timer += Time.fixedDeltaTime;
-                while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+               
+                newChar = GetWaveCharacter(waveCharacterInfoClass);
+                SpawChar(newChar);
+                timer = 0;
+
+                if (wavePhase.ListOfEnemy.Where(r => r.NumberOfCharacter > 0).ToList().Count == 0)
                 {
-                    yield return new WaitForEndOfFrame();
-                }
-
-                if(timer > CurrentWaveChar.DelayBetweenChars && WaveCharcters.Where(r=> r.gameObject.activeInHierarchy).ToList().Count < wavePhase.MaxEnemyOnScreen)
-                {
-                    if (wavePhase.ListOfEnemy.Where(r => r.NumberOfCharacter > 0).ToList().Count == 0)
+                    while (true)
                     {
-                        isWaveComplete = true;
-                        break;
-                    }
-                    yield return new WaitForSecondsRealtime(0.1f);
-                    newChar = GetWaveCharacter(wavePhase.IsRandom ? GetAvailableRandomWaveCharacter(wavePhase) : GetAvailableWaveCharacter(wavePhase));
-                    SpawChar(newChar);
-                    timer = 0;
-                   
-                }
-            }
+                        if(WaveCharcters.Where(r => r.gameObject.activeInHierarchy).ToList().Count == 0)
+                        {
+                            yield break;
 
-            while (isWaveComplete)
-            {
-                yield return null;
-                if(WaveCharcters.Where(r=> r.IsOnField).ToList().Count == 0)
+                        }
+                        yield return null;
+                    }
+
+                }
+
+                if (wavePhase.IsRandom)
                 {
-                    isWaveComplete = false;
+                    waveCharacterInfoClass = GetAvailableRandomWaveCharacter(wavePhase);
+                }
+                else
+                {
+                    waveCharacterInfoClass = GetAvailableWaveCharacter(wavePhase);
                 }
             }
         }
-
-        
     }
 
     private void SpawChar(BaseCharacter newChar)
@@ -248,7 +254,14 @@ public class WaveManagerScript : MonoBehaviour
         {
             GridManagerScript.Instance.SetBattleTileState(item, BattleTileStateType.Occupied);
         }
+
+
         currentCharacter.SetUpEnteringOnBattle();
+        if(currentCharacter.SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving)
+        {
+
+        }
+
         StartCoroutine(BattleManagerScript.Instance.MoveCharToBoardWithDelay(0.2f, currentCharacter, bts.transform.position));
     }
 

@@ -25,8 +25,8 @@ public class UIBattleFieldManager : MonoBehaviour
         }
         else
         {
-            uibattleField.SetActive(true);
             uibattleField.GetComponent<UIBattleFieldScript>().SetupCharOwner(cb);
+            uibattleField.SetActive(true);
         }
     }
 }

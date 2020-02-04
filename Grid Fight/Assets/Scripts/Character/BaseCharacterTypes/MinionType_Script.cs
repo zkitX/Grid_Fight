@@ -32,6 +32,13 @@ public class MinionType_Script : BaseCharacter
         SetAnimation(CharacterAnimationStateType.Arriving);
     }
 
+    public override void SetAttackReady(bool value)
+    {
+        StartMoveCo();
+        base.SetAttackReady(value);
+    }
+
+
     public override void StartMoveCo()
     {
         MoveCoOn = true;
@@ -43,6 +50,7 @@ public class MinionType_Script : BaseCharacter
     {
         CameraManagerScript.Instance.CameraShake();
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
+        StopAllCoroutines();
         base.SetCharDead();
     }
 
@@ -50,28 +58,32 @@ public class MinionType_Script : BaseCharacter
 
     public virtual IEnumerator Move()
     {
-        while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+        while (true)
         {
-            yield return new WaitForFixedUpdate();
-        }
-        while (MoveCoOn && currentAttackPhase == AttackPhasesType.End && attacking == false)
-        {
-            float timer = 0;
-            float MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y);
-            while (timer < 1)
+            if(MoveCoOn && currentAttackPhase == AttackPhasesType.End && attacking == false)
             {
-                yield return new WaitForFixedUpdate();
-                while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+                float timer = 0;
+                float MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y);
+                while (timer < MoveTime)
                 {
                     yield return new WaitForFixedUpdate();
-                }
+                    while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+                    {
+                        yield return new WaitForFixedUpdate();
+                    }
 
-                timer += Time.fixedDeltaTime / MoveTime;
+                    timer += Time.fixedDeltaTime;
+                }
+                if (CharInfo.Health > 0)
+                {
+                    MoveCharOnDirection((InputDirection)Random.Range(0, 4));
+                }
+                else
+                {
+                    timer = 0;
+                }
             }
-            if (CharInfo.Health > 0)
-            {
-                MoveCharOnDirection((InputDirection)Random.Range(0, 4));
-            }
+            yield return null;
         }
     }
 
