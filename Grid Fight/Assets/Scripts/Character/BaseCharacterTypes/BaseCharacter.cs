@@ -11,7 +11,7 @@ public class BaseCharacter : MonoBehaviour
     public delegate void TileMovementComplete(BaseCharacter movingChar);
     public event TileMovementComplete TileMovementCompleteEvent;
 
-    public delegate void DamageReceived(float damage);
+    public delegate void DamageReceived(float damage, bool isDefended);
     public event DamageReceived DamageReceivedEvent;
 
     public delegate void HealReceived(float heal);
@@ -159,10 +159,6 @@ public class BaseCharacter : MonoBehaviour
 
     public void StartAttakCo()
     {
-        if(!VFXTestMode)
-        {
-            UIBattleFieldManager.Instance.SetUIBattleField(this);
-        }
 
         if(UMS.CurrentAttackType == AttackType.Tile)
         {
@@ -454,8 +450,7 @@ public class BaseCharacter : MonoBehaviour
     #region Move
     public virtual void MoveCharOnDirection(InputDirection nextDir)
     {
-
-        if(SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving || SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving)
+        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving || SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving)
         {
             return;
         }
@@ -469,37 +464,15 @@ public class BaseCharacter : MonoBehaviour
 
             List<BattleTileScript> prevBattleTile = CurrentBattleTiles;
             List<BattleTileScript> CurrentBattleTilesToCheck = new List<BattleTileScript>();
-            CharacterAnimationStateType AnimState = CharacterAnimationStateType.Idle;
-            AnimationCurve curve = new AnimationCurve();
-            Vector2Int dir = Vector2Int.zero;
-            switch (nextDir)
-            {
-                case InputDirection.Up:
-                    dir = new Vector2Int(-1, 0);
-                    curve = SpineAnim.UpMovementSpeed;
-                    AnimState = CharacterAnimationStateType.DashUp;
-                    break;
-                case InputDirection.Down:
-                    dir = new Vector2Int(1, 0);
-                    curve = SpineAnim.DownMovementSpeed;
-                    AnimState = CharacterAnimationStateType.DashDown;
-                    break;
-                case InputDirection.Right:
-                    dir = new Vector2Int(0, 1);
-                    curve = SpineAnim.RightMovementSpeed;
-                    AnimState = UMS.Facing == FacingType.Left ? CharacterAnimationStateType.DashRight : CharacterAnimationStateType.DashLeft;
-                    break;
-                case InputDirection.Left:
-                    dir = new Vector2Int(0, -1);
-                    curve = SpineAnim.LeftMovementSpeed;
-                    AnimState = UMS.Facing == FacingType.Left ? CharacterAnimationStateType.DashLeft : CharacterAnimationStateType.DashRight;
-                    break;
-            }
+
+            CharacterAnimationStateType AnimState;
+            Vector2Int dir;
+            AnimationCurve curve;
+            GetDirectionVectorAndAnimationCurve(nextDir, out AnimState, out dir, out curve);
 
             CurrentBattleTilesToCheck = CheckTileAvailability(dir);
 
-
-            if (CurrentBattleTilesToCheck.Count > 0 && 
+            if (CurrentBattleTilesToCheck.Count > 0 &&
                 CurrentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos) && r.BattleTileState == BattleTileStateType.Empty).ToList().Count ==
                 CurrentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos)).ToList().Count && GridManagerScript.Instance.isPosOnField(UMS.CurrentTilePos + dir))
             {
@@ -526,6 +499,10 @@ public class BaseCharacter : MonoBehaviour
                 MoveCo = MoveByTile(CurrentBattleTiles.Where(r => r.Pos == UMS.CurrentTilePos).First().transform.position, curve, SpineAnim.GetAnimLenght(AnimState));
                 StartCoroutine(MoveCo);
             }
+            else
+            {
+                if (TileMovementCompleteEvent != null && TileMovementCompleteEvent.Target != null) TileMovementCompleteEvent(this);
+            }
 
             if (CurrentBattleTiles.Count > 0)
             {
@@ -535,6 +512,36 @@ public class BaseCharacter : MonoBehaviour
                 }
                 BattleManagerScript.Instance.OccupiedBattleTiles.AddRange(CurrentBattleTiles);
             }
+        }
+    }
+
+    public void GetDirectionVectorAndAnimationCurve(InputDirection nextDir, out CharacterAnimationStateType AnimState, out Vector2Int dir, out AnimationCurve curve)
+    {
+        AnimState = CharacterAnimationStateType.Idle;
+        curve = new AnimationCurve();
+        dir = Vector2Int.zero;
+        switch (nextDir)
+        {
+            case InputDirection.Up:
+                dir = new Vector2Int(-1, 0);
+                curve = SpineAnim.UpMovementSpeed;
+                AnimState = CharacterAnimationStateType.DashUp;
+                break;
+            case InputDirection.Down:
+                dir = new Vector2Int(1, 0);
+                curve = SpineAnim.DownMovementSpeed;
+                AnimState = CharacterAnimationStateType.DashDown;
+                break;
+            case InputDirection.Right:
+                dir = new Vector2Int(0, 1);
+                curve = SpineAnim.RightMovementSpeed;
+                AnimState = UMS.Facing == FacingType.Left ? CharacterAnimationStateType.DashRight : CharacterAnimationStateType.DashLeft;
+                break;
+            case InputDirection.Left:
+                dir = new Vector2Int(0, -1);
+                curve = SpineAnim.LeftMovementSpeed;
+                AnimState = UMS.Facing == FacingType.Left ? CharacterAnimationStateType.DashLeft : CharacterAnimationStateType.DashRight;
+                break;
         }
     }
 
@@ -559,7 +566,7 @@ public class BaseCharacter : MonoBehaviour
 
 
     //Move the character on the determinated Tile position
-    protected virtual IEnumerator MoveByTile(Vector3 nextPos, AnimationCurve curve, float animLength)
+    public virtual IEnumerator MoveByTile(Vector3 nextPos, AnimationCurve curve, float animLength)
     {
         //  Debug.Log(AnimLength + "  AnimLenght   " + AnimLength / CharInfo.MovementSpeed + " Actual duration" );
         float timer = 0;
@@ -621,7 +628,7 @@ public class BaseCharacter : MonoBehaviour
             case BuffDebuffStatsType.Health:
                 if(valueOverDuration < 0)
                 {
-                    DamageReceivedEvent(valueOverDuration);
+                    DamageReceivedEvent(valueOverDuration, false);
                 }
                 else
                 {
@@ -925,7 +932,7 @@ public class BaseCharacter : MonoBehaviour
           }*/
         EventManager.Instance.UpdateHealth(this);
         CharInfo.Health -= damage;
-        DamageReceivedEvent(damage);
+        DamageReceivedEvent(damage, !res);
         return res;
     }
 

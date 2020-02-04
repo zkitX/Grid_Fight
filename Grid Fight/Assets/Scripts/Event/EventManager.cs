@@ -15,13 +15,15 @@ public class EventManager : MonoBehaviour
     List<GameSequenceEvent> queuedCompleteEvents = new List<GameSequenceEvent>();
     IEnumerator completeEventSequencer = null;
 
-    [Header("Current Stage Info")]
+    [Header("Current Info")]
     [SerializeField] protected List<CharacterEventInfoClass> deadCharacters = new List<CharacterEventInfoClass>();
     protected List<CharacterNameType> diedThisFrame = new List<CharacterNameType>();
     [SerializeField] protected List<CharacterEventInfoClass> charactersWhomstHaveArrived = new List<CharacterEventInfoClass>();
     protected List<CharacterNameType> arrivedThisFrame = new List<CharacterNameType>();
     [SerializeField] protected List<CharacterEventInfoClass> characterVitalities = new List<CharacterEventInfoClass>();
     protected List<CharacterEventInfoClass> healthChangedLastFrame = new List<CharacterEventInfoClass>();
+    [SerializeField] protected List<string> eventsCalled = new List<string>();
+    protected List<string> eventDirectCallsLastFrame = new List<string>();
 
     //[Tooltip("How many seconds between checks, increase for performance boost, decrease for accuracy")][SerializeField] protected float timeBetweenChecks = 1f;
 
@@ -331,6 +333,43 @@ public class EventManager : MonoBehaviour
             {
                 return true;
             }
+        }
+        return false;
+    }
+    #endregion
+
+    #region Call Management
+    public void CallEventDirectly(string eventName)
+    {
+        ResetEventsCalledLastFrame(eventName);
+        if (!eventsCalled.Contains(eventName)) eventsCalled.Add(eventName); 
+        foreach (string eventCalledLastFrame in eventDirectCallsLastFrame)
+        {
+            if (eventCalledLastFrame == eventName) return;
+        }
+        eventDirectCallsLastFrame.Add(eventName);
+    }
+
+    IEnumerator ResetEventsCalledLastFrame(string eventName)
+    {
+        yield return null;
+        eventDirectCallsLastFrame.Remove(eventName);
+    }
+
+    public bool EventCalledLastFrame(string eventName)
+    {
+        foreach(string eventCalled in eventDirectCallsLastFrame)
+        {
+            if (eventCalled == eventName) return true;
+        }
+        return false;
+    }
+
+    public bool EventCalled(string eventName)
+    {
+        foreach (string eventCalled in eventsCalled)
+        {
+            if (eventCalled == eventName) return true;
         }
         return false;
     }

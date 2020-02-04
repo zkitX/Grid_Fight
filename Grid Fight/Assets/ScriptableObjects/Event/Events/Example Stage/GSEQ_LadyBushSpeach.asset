@@ -15,7 +15,8 @@ MonoBehaviour:
   Name: LadyBushSpeach
   hasHappened: 0
   requirements:
-  - {fileID: 11400000, guid: 0a7c06f52ac3b9b4a8fa5c684fc133bf, type: 2}
+  - {fileID: 11400000, guid: e628ccfded53dd84a9da3c32a008e47e, type: 2}
+  - {fileID: 11400000, guid: 3e8e0ca1a6122354c80eb55343f39ad5, type: 2}
   canOverlap: 0
   requireComplete: 0
   effects:
@@ -23,15 +24,19 @@ MonoBehaviour:
     effectType: 0
     secondsToWait: 3
     debugText: 
+    blockName: 
   - Name: Print Message
     effectType: 1
     secondsToWait: 1
     debugText: Ayy, forget about it for 2 more seconds
+    blockName: 
   - Name: Wait again
     effectType: 0
     secondsToWait: 2
     debugText: 
+    blockName: 
   - Name: Print Message
     effectType: 1
     secondsToWait: 1
     debugText: Ayy, remember it
+    blockName: 

@@ -49,6 +49,12 @@ public class TimedCheck : EventTrigger
             case (TimedCheckTypes.CharacterHealthChange):
                 check = CharacterHealthChange;
                 break;
+            case (TimedCheckTypes.ThisEventCalled):
+                check = ThisEventCalled;
+                break;
+            case (TimedCheckTypes.EventCalled):
+                check = EventCalled;
+                break;
             default:
                 check = Default;
                 break;
@@ -125,5 +131,18 @@ public class TimedCheck : EventTrigger
                 break;
         }
         return false;
+    }
+
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.ThisEventCalled)] public bool requireCalledDuringCheck = true;
+    bool ThisEventCalled()
+    {
+        return requireCalledDuringCheck ? EventManager.Instance.EventCalledLastFrame(checker.Name) : EventManager.Instance.EventCalled(checker.Name);
+    }
+
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.EventCalled)] public bool requireEventCalledDuringCheck = true;
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.EventCalled)] public GameSequenceEvent EventCallRequired;
+    bool EventCalled()
+    {
+        return requireEventCalledDuringCheck ? EventManager.Instance.EventCalledLastFrame(EventCallRequired.Name) : EventManager.Instance.EventCalled(EventCallRequired.Name);
     }
 }

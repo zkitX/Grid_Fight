@@ -66,7 +66,7 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
         }
     }
 
-    protected override IEnumerator MoveByTile(Vector3 nextPos, AnimationCurve curve, float animLenght)
+    public override IEnumerator MoveByTile(Vector3 nextPos, AnimationCurve curve, float animLenght)
     {
         return base.MoveByTile(nextPos, curve, animLenght);
     }

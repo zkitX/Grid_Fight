@@ -13,6 +13,8 @@ public enum TimedCheckTypes
     CharacterDeath,
     CharacterArrival,
     CharacterHealthChange,
+    ThisEventCalled,
+    EventCalled,
     None,
 }
 
@@ -28,5 +30,6 @@ public enum EventEffectTypes
 {
     WaitForSeconds,
     DebugLog,
+    TriggerFungusEvent,
     None,
 }

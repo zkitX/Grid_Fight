@@ -72,7 +72,7 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
         }
     }
 
-    protected override IEnumerator MoveByTile(Vector3 nextPos, AnimationCurve curve, float animLength)
+    public override IEnumerator MoveByTile(Vector3 nextPos, AnimationCurve curve, float animLength)
     {
 
         

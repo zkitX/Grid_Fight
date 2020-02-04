@@ -9,6 +9,9 @@ public class EventEffect
     public string Name;
     public EventEffectTypes effectType = EventEffectTypes.None;
 
+    public delegate void FungusEventTriggerAction(string blockName);
+    public static event FungusEventTriggerAction OnFungusEventTrigger;
+
     public IEnumerator PlayEffect()
     {
         switch (effectType)
@@ -21,6 +24,9 @@ public class EventEffect
                 break;
             case (EventEffectTypes.None):
                 yield return None();
+                break;
+            case (EventEffectTypes.TriggerFungusEvent):
+                yield return TriggerFungusEvent();
                 break;
             default:
                 yield return null;
@@ -41,9 +47,17 @@ public class EventEffect
         yield return null;
     }
 
+    [ConditionalField("effectType", false, EventEffectTypes.TriggerFungusEvent)] public string blockName = "";
+    IEnumerator TriggerFungusEvent()
+    {
+        if(OnFungusEventTrigger != null && OnFungusEventTrigger.Target != null) OnFungusEventTrigger(blockName);
+        yield return null;
+    }
+
     IEnumerator None()
     {
         yield return null;
     }
+
 
 }
