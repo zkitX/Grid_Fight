@@ -165,11 +165,6 @@ public class SpineAnimationManager : MonoBehaviour
                 return;
             }
 
-            if (completedAnim == CharacterAnimationStateType.GettingHit && CurrentAnim == CharacterAnimationStateType.GettingHit)
-            {
-                ((MinionType_Script)CharOwner).InteruptAttack();
-            }
-
             if (completedAnim == CharacterAnimationStateType.Atk1_AtkToIdle || completedAnim == CharacterAnimationStateType.Atk2_AtkToIdle
                 || completedAnim == CharacterAnimationStateType.Atk || completedAnim == CharacterAnimationStateType.Atk1)
             {

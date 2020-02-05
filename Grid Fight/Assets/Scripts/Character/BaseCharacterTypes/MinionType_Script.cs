@@ -127,6 +127,7 @@ public class MinionType_Script : BaseCharacter
         //If it does have the correct animation setup, play that charged animation
         else
         {
+            currentAttackPhase = AttackPhasesType.Start;
             sequencedAttacker = true; //Temporary until anims are added
             SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
         }
@@ -139,18 +140,6 @@ public class MinionType_Script : BaseCharacter
         currentAttackPhase = AttackPhasesType.End;
         attacking = false; //Temporary until anims are added
         yield return null;
-    }
-
-
-    public void InteruptAttack()
-    {
-     /*   shotsLeftInAttack = 0;
-        if (chargeParticles != null && shotsLeftInAttack == 0)
-        {
-            chargeParticles.SetActive(false);
-            chargeParticles = null;
-        }
-        attacking = false; //Temporary until anims are added*/
     }
 
     public void fireAttackAnimation()
@@ -182,7 +171,6 @@ public class MinionType_Script : BaseCharacter
         {
             return;
         }
-        if (animState == CharacterAnimationStateType.GettingHit) InteruptAttack();
         base.SetAnimation(animState, loop, transition);
     }
 }

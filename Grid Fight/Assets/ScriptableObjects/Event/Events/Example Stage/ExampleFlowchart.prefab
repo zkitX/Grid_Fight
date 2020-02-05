@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 1570865776272614966}
   - component: {fileID: -4661751979905469119}
   - component: {fileID: 5224558087935788863}
+  - component: {fileID: 2141971052}
   m_Layer: 0
   m_Name: ExampleFlowchart
   m_TagString: Untagged
@@ -72,8 +73,7 @@ MonoBehaviour:
     height: 859
   selectedBlocks:
   - {fileID: 1570865776272614974}
-  selectedCommands:
-  - {fileID: 5224558087935788863}
+  selectedCommands: []
   variables: []
   description: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
   stepPause: 0
@@ -142,6 +142,7 @@ MonoBehaviour:
   - {fileID: -4661751979905469119}
   - {fileID: 5224558087935788863}
   - {fileID: 1570865776272614965}
+  - {fileID: 2141971052}
   - {fileID: 1570865776272614966}
   - {fileID: 1570865776272614912}
   - {fileID: 1570865776272614975}
@@ -375,3 +376,22 @@ MonoBehaviour:
   itemId: 15
   indentLevel: 0
   characterID: 1
+  randomiseAttack: 1
+  attackType: {fileID: 0}
+--- !u!114 &2141971052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570865776272614913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a0b8b07b3f321f49a3c79e09ec3ad0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 16
+  indentLevel: 0
+  characterID: 19
+  randomiseAttack: 1
+  attackType: {fileID: 0}

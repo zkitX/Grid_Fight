@@ -180,7 +180,6 @@ public enum BattleState
     End,
     WinLose,
     Tutorial
-
 }
 
 public enum ElementalType

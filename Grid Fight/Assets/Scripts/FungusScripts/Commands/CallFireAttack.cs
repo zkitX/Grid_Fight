@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Fungus;
+using MyBox;
 
 [CommandInfo("Scripting",
                 "Call Fire Attacc",
@@ -11,6 +12,8 @@ using Fungus;
 public class CallFireAttack : Command
 {
     public CharacterNameType characterID;
+    public bool randomiseAttack = false;
+    [ConditionalField("randomiseAttack", true)] public ScriptableObjectAttackBase attackType;
 
     protected IEnumerator attack()
     {
@@ -24,8 +27,11 @@ public class CallFireAttack : Command
         }
         Debug.Log("Meant to attack");
 
-        StartCoroutine(character.AttackAction(false));
+        if (randomiseAttack || attackType == null) character.GetAttack();
+        else character.nextAttack = attackType;
 
+        StartCoroutine(character.AttackSequence());
+        yield return new WaitForSeconds(0.5f);
         while (character.currentAttackPhase != AttackPhasesType.End)
         {
             yield return null;
