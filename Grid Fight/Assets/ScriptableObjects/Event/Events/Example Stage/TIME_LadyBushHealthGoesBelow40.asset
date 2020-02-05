@@ -17,7 +17,7 @@ MonoBehaviour:
   isHappening: 0
   checker: {fileID: 0}
   ceaseOnHappened: 1
-  TimedCheckType: 3
+  TimedCheckType: 4
   deathCharacterID: 1000
   onlyOnDeath: 0
   deathsRequired: 1
@@ -25,6 +25,12 @@ MonoBehaviour:
   arrivalCharacterID: 1000
   onlyOnArrival: 0
   arrivalsRequired: 1
+  switchCharacterID: 1000
+  onlyOnSwitch: 0
+  switchesRequired: 1
   healthChangeCharID: 1
   healthChange: 1
   healthChangeValue: 40
+  requireCalledDuringCheck: 1
+  requireEventCalledDuringCheck: 1
+  EventCallRequired: {fileID: 0}

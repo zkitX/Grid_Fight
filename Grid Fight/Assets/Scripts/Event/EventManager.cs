@@ -24,6 +24,8 @@ public class EventManager : MonoBehaviour
     protected List<CharacterEventInfoClass> healthChangedLastFrame = new List<CharacterEventInfoClass>();
     [SerializeField] protected List<string> eventsCalled = new List<string>();
     protected List<string> eventDirectCallsLastFrame = new List<string>();
+    [SerializeField] protected List<CharacterEventInfoClass> charactersSwitched = new List<CharacterEventInfoClass>();
+    protected List<CharacterNameType> charactersSwitchedLastFrame = new List<CharacterNameType>();
 
     //[Tooltip("How many seconds between checks, increase for performance boost, decrease for accuracy")][SerializeField] protected float timeBetweenChecks = 1f;
 
@@ -31,9 +33,16 @@ public class EventManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        ResetEventsInManager();
+    }
+
+    public void ResetEventsInManager()
+    {
+        stageEventTriggers.Clear();
+        stageEventTriggers = new List<GameSequenceEvent>();
         if (stageEventTriggersProfile != null)
         {
-            foreach(GameSequenceEvent gameSeqEvent in stageEventTriggersProfile.stageEventTriggers)
+            foreach (GameSequenceEvent gameSeqEvent in stageEventTriggersProfile.stageEventTriggers)
             {
                 stageEventTriggers.Add(Instantiate(gameSeqEvent));
             }
@@ -375,6 +384,58 @@ public class EventManager : MonoBehaviour
     }
     #endregion
 
+    #region Character Switch Management
+    public void AddCharacterSwitched(BaseCharacter character)
+    {
+        charactersSwitchedLastFrame.Add(character.CharInfo.CharacterID);
+        StartCoroutine(ResetCharacterSwitchesLastFrame(character.CharInfo.CharacterID));
+
+        foreach (CharacterEventInfoClass characterSwitched in charactersSwitched)
+        {
+            if (characterSwitched.character.CharInfo.CharacterID == character.CharInfo.CharacterID)
+            {
+                characterSwitched.switches++;
+                return;
+            }
+        }
+        charactersSwitched.Add(new CharacterEventInfoClass(character));
+    }
+
+    IEnumerator ResetCharacterSwitchesLastFrame(CharacterNameType charName)
+    {
+        yield return null;
+        charactersSwitchedLastFrame.Remove(charName);
+    }
+
+    public bool HasCharacterSwitchedThisFrame(CharacterNameType charID)
+    {
+        foreach (CharacterNameType characterSwitchedLastFrame in charactersSwitchedLastFrame)
+        {
+            if (characterSwitchedLastFrame == charID) return true;
+        }
+        return false;
+    }
+    public bool HasCharacterSwitched(CharacterNameType charID)
+    {
+        foreach (CharacterEventInfoClass characterSwitched in charactersSwitched)
+        {
+            if (characterSwitched.character.CharInfo.CharacterID == charID) return true;
+        }
+        return false;
+    }
+    public int CharacterSwitchCount(CharacterNameType charID)
+    {
+        foreach (CharacterEventInfoClass characterSwitched in charactersSwitched)
+        {
+            if (characterSwitched.character.CharInfo.CharacterID == charID)
+            {
+                return characterSwitched.switches;
+            }
+        }
+        return 0;
+    }
+    #endregion
+
     #endregion
 
 
@@ -386,6 +447,7 @@ public class CharacterEventInfoClass
     public BaseCharacter character;
     public int deaths = 0;
     public int arrivals = 0;
+    public int switches = 0;
     public float healthPercentage = 100f;
 
     public CharacterEventInfoClass(BaseCharacter _character, int _deaths)
@@ -404,6 +466,4 @@ public class CharacterEventInfoClass
     {
         character = _character;
     }
-
-
 }

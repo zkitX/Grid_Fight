@@ -112,6 +112,10 @@ public class MinionType_Script : BaseCharacter
     //Basic attack sequence
     public override IEnumerator AttackSequence()
     {
+        /*shotsLeftInAttack = 0;
+        if (currentAttackPhase != AttackPhasesType.End) yield break;
+
+        yield return null;*/
         shotsLeftInAttack = GetHowManyAttackAreOnBattleField(((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories);
 
         if (nextAttack.Anim == CharacterAnimationStateType.Atk)
@@ -139,7 +143,7 @@ public class MinionType_Script : BaseCharacter
 
         currentAttackPhase = AttackPhasesType.End;
         attacking = false; //Temporary until anims are added
-        yield return null;
+        yield break;
     }
 
     public void fireAttackAnimation()

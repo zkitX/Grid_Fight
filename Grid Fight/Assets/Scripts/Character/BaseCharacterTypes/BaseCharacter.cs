@@ -51,6 +51,7 @@ public class BaseCharacter : MonoBehaviour
     public BoxCollider CharBoxCollider;
     public ScriptableObjectAttackBase nextAttack = null;
     public AttackPhasesType currentAttackPhase = AttackPhasesType.End;
+    IEnumerator attackCoroutine = null;
 
 
     protected virtual void Start()
@@ -160,15 +161,12 @@ public class BaseCharacter : MonoBehaviour
 
     public void StartAttakCo()
     {
-
-        if(UMS.CurrentAttackType == AttackType.Tile)
+        if(UMS.CurrentAttackType == AttackType.Tile && attackCoroutine == null)
         {
-            StartCoroutine(AttackAction(false));
-
+            attackCoroutine = AttackAction(true);
+            StartCoroutine(attackCoroutine);
         }
-
     }
-
 
     //Basic attack Action that will start the attack anim every x seconds
     public virtual IEnumerator AttackAction(bool yieldBefore)

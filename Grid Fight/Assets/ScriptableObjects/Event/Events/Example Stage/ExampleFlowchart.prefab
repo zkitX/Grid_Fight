@@ -23,9 +23,13 @@ GameObject:
   - component: {fileID: 1570865776272614967}
   - component: {fileID: 1570865776272614964}
   - component: {fileID: 1570865776272614966}
-  - component: {fileID: -4661751979905469119}
   - component: {fileID: 5224558087935788863}
-  - component: {fileID: 2141971052}
+  - component: {fileID: 521012730}
+  - component: {fileID: 521012732}
+  - component: {fileID: 521012748}
+  - component: {fileID: 521012749}
+  - component: {fileID: 521012750}
+  - component: {fileID: 521012751}
   m_Layer: 0
   m_Name: ExampleFlowchart
   m_TagString: Untagged
@@ -100,7 +104,7 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: 57
-    y: 72
+    y: 73.63934
     width: 246.72119
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -110,9 +114,14 @@ MonoBehaviour:
   description: 
   eventHandler: {fileID: 1570865776272614972}
   commandList:
-  - {fileID: 1570865776272614967}
   - {fileID: 1570865776272614915}
+  - {fileID: 1570865776272614967}
+  - {fileID: 521012750}
+  - {fileID: 521012751}
   - {fileID: 1570865776272614914}
+  - {fileID: 521012749}
+  - {fileID: 521012748}
+  - {fileID: 521012732}
   - {fileID: 1570865776272614973}
 --- !u!114 &1570865776272614974
 MonoBehaviour:
@@ -128,7 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 441
+    x: 439.36066
     y: 71
     width: 231.42065
     height: 40
@@ -139,11 +148,10 @@ MonoBehaviour:
   description: 
   eventHandler: {fileID: 0}
   commandList:
-  - {fileID: -4661751979905469119}
-  - {fileID: 5224558087935788863}
   - {fileID: 1570865776272614965}
-  - {fileID: 2141971052}
   - {fileID: 1570865776272614966}
+  - {fileID: 5224558087935788863}
+  - {fileID: 521012730}
   - {fileID: 1570865776272614912}
   - {fileID: 1570865776272614975}
   - {fileID: 1570865776272614964}
@@ -200,7 +208,7 @@ MonoBehaviour:
   indentLevel: 0
   _duration:
     floatRef: {fileID: 0}
-    floatVal: 5
+    floatVal: 2
   durationOLD: 0
 --- !u!114 &1570865776272614915
 MonoBehaviour:
@@ -279,7 +287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 9
   indentLevel: 0
-  storyText: Ayy Forget about it
+  storyText: NANI?!
   description: 
   character: {fileID: 0}
   portrait: {fileID: 0}
@@ -339,28 +347,9 @@ MonoBehaviour:
   characterID: 1
   moveDetails:
   - nextDir: 0
-    amount: 3
-  - nextDir: 3
-    amount: 2
+    amount: 1
   - nextDir: 1
-    amount: 3
-  - nextDir: 2
-    amount: 2
---- !u!114 &-4661751979905469119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1570865776272614913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 14
-  indentLevel: 0
-  battleState: 1
+    amount: 1
 --- !u!114 &5224558087935788863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,7 +367,7 @@ MonoBehaviour:
   characterID: 1
   randomiseAttack: 1
   attackType: {fileID: 0}
---- !u!114 &2141971052
+--- !u!114 &521012730
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -392,6 +381,110 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 16
   indentLevel: 0
-  characterID: 19
+  characterID: 21
   randomiseAttack: 1
   attackType: {fileID: 0}
+--- !u!114 &521012732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570865776272614913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a0b8b07b3f321f49a3c79e09ec3ad0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 20
+  indentLevel: 0
+  characterID: 21
+  randomiseAttack: 0
+  attackType: {fileID: 0}
+--- !u!114 &521012748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570865776272614913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 19
+  indentLevel: 0
+  storyText: Shindeiru
+  description: 1
+  character: {fileID: 0}
+  portrait: {fileID: 0}
+  voiceOverClip: {fileID: 0}
+  showAlways: 1
+  showCount: 1
+  extendPrevious: 0
+  fadeWhenDone: 1
+  waitForClick: 1
+  stopVoiceover: 1
+  waitForVO: 0
+  setSayDialog: {fileID: 0}
+--- !u!114 &521012749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570865776272614913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 18
+  indentLevel: 0
+  storyText: Omae wa mo...
+  description: 1
+  character: {fileID: 0}
+  portrait: {fileID: 0}
+  voiceOverClip: {fileID: 0}
+  showAlways: 1
+  showCount: 1
+  extendPrevious: 0
+  fadeWhenDone: 1
+  waitForClick: 1
+  stopVoiceover: 1
+  waitForVO: 0
+  setSayDialog: {fileID: 0}
+--- !u!114 &521012750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570865776272614913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35567ae0fbdff9447b617f78a1a914b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 17
+  indentLevel: 0
+  playerController: 0
+  cName: 21
+  pos: {x: 2, y: 1}
+--- !u!114 &521012751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570865776272614913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfc9867a2cc3b64e84b5c54117825d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 21
+  indentLevel: 0
+  playerController: 0
+  characterID: 21

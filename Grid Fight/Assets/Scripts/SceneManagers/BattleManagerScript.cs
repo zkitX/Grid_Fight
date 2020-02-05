@@ -55,11 +55,14 @@ public class BattleManagerScript : MonoBehaviour
     public Camera MCam;
     public bool VFXScene = false;
     [SerializeField]  private bool singleUnitControls = true;
+    bool matchStarted = false;
     public void SetupBattleState()
     {
-        if(CurrentBattleState == BattleState.Intro)
+        if (matchStarted) return;
+        matchStarted = true;
+        if (CurrentBattleState == BattleState.Intro)
         {
-            CurrentBattleState = BattleState.Battle;
+            //CurrentBattleState = BattleState.Battle;
             UIBattleManager.Instance.StartMatch.gameObject.SetActive(false);
         }
         
@@ -275,7 +278,9 @@ public class BattleManagerScript : MonoBehaviour
     //Used when the char is not in the battlefield to move it on the battlefield
     public void LoadingNewCharacterToGrid(CharacterNameType cName,SideType side, ControllerType playerController)
     {
-        if(CurrentSelectedCharacters[playerController].LoadCharCo != null)
+        if (CurrentBattleState != BattleState.Battle) return;
+
+        if (CurrentSelectedCharacters[playerController].LoadCharCo != null)
         {
             return;
         }
@@ -347,7 +352,7 @@ public class BattleManagerScript : MonoBehaviour
     //Used to select a char 
     public void SelectCharacter(ControllerType playerController, CharacterType_Script currentCharacter)
     {
-        if(currentCharacter != null && currentCharacter.CharInfo.HealthPerc > 0)
+        if (currentCharacter != null && currentCharacter.CharInfo.HealthPerc > 0)
         {
             //If the character is not already selected by another player
             if (CurrentSelectedCharacters.Where(r=> r.Value.Character == currentCharacter).ToList().Count == 0)
@@ -492,6 +497,8 @@ public class BattleManagerScript : MonoBehaviour
     //Move selected char under determinated player
     public void MoveSelectedCharacterInDirection(ControllerType playerController, InputDirection dir)
     {
+        if (CurrentBattleState != BattleState.Battle) return;
+
         if (CurrentSelectedCharacters[playerController].Character != null)
         {
             if(CurrentSelectedCharacters[playerController].Character.UMS.UnitBehaviour == UnitBehaviourType.ControlledByPlayer)
@@ -520,7 +527,7 @@ public class BattleManagerScript : MonoBehaviour
 
     public void Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType characterSelection, ControllerType playerController)
     {
-        if(CurrentBattleState == BattleState.Battle || CurrentBattleState == BattleState.Intro)
+        if (CurrentBattleState == BattleState.Battle || CurrentBattleState == BattleState.Intro)
         {
             SideType side = GetSideFromPlayer(new List<ControllerType> { playerController });
             BaseCharacter cb = AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == characterSelection && r.UMS.Side == side).FirstOrDefault();
@@ -558,7 +565,7 @@ public class BattleManagerScript : MonoBehaviour
         {
             if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null)
             {
-                CurrentSelectedCharacters[controllerType].Character.StartQuickAttack();
+                CurrentSelectedCharacters[controllerType].Character.StartQuickAttack(false);
             }
         }
     }
@@ -605,6 +612,7 @@ public class BattleManagerScript : MonoBehaviour
         {
             CurrentBattleState = BattleState.End;
             UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+            EventManager.Instance.ResetEventsInManager();
         }
         
     }

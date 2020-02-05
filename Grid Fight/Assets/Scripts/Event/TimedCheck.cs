@@ -46,6 +46,9 @@ public class TimedCheck : EventTrigger
             case (TimedCheckTypes.CharacterArrival):
                 check = CharacterArrival;
                 break;
+            case (TimedCheckTypes.CharacterSwitchOut):
+                check = CharacterSwitchOut;
+                break;
             case (TimedCheckTypes.CharacterHealthChange):
                 check = CharacterHealthChange;
                 break;
@@ -104,6 +107,23 @@ public class TimedCheck : EventTrigger
         else
         {
             return EventManager.Instance.HasCharacterArrived(arrivalCharacterID);
+        }
+    }
+
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.CharacterSwitchOut)] public CharacterNameType switchCharacterID = CharacterNameType.None;
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.CharacterSwitchOut)] public bool onlyOnSwitch = false;
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.CharacterSwitchOut)] public float switchesRequired = 1;
+    bool CharacterSwitchOut()
+    {
+        if (switchesRequired > EventManager.Instance.CharacterSwitchCount(switchCharacterID)) return false;
+
+        if (onlyOnSwitch)
+        {
+            return EventManager.Instance.HasCharacterSwitchedThisFrame(switchCharacterID);
+        }
+        else
+        {
+            return EventManager.Instance.HasCharacterSwitched(switchCharacterID);
         }
     }
 

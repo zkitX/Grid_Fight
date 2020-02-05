@@ -17,7 +17,8 @@ public class CallFireAttack : Command
 
     protected IEnumerator attack()
     {
-        Debug.Log("Meant to attack");
+        IEnumerator attackOnceCoroutine = null;
+
         BaseCharacter character = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == characterID).FirstOrDefault();
         if (character == null) character = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == characterID).FirstOrDefault();
         if (character == null)
@@ -25,18 +26,27 @@ public class CallFireAttack : Command
             Continue();
             yield break;
         }
-        Debug.Log("Meant to attack");
 
-        if (randomiseAttack || attackType == null) character.GetAttack();
-        else character.nextAttack = attackType;
+        if (character.GetType() == typeof(MinionType_Script))
+        {
+            if (randomiseAttack || attackType == null) character.GetAttack();
+            else character.nextAttack = attackType;
+            attackOnceCoroutine = character.AttackSequence();
+            StartCoroutine(attackOnceCoroutine);
+        }
+        else
+        {
+            ((CharacterType_Script)character).StartQuickAttack(true);
+        }
 
-        StartCoroutine(character.AttackSequence());
         yield return new WaitForSeconds(0.5f);
-        while (character.currentAttackPhase != AttackPhasesType.End)
+        while (character.currentAttackPhase != AttackPhasesType.End && character.SpineAnim.CurrentAnim != CharacterAnimationStateType.Idle)
         {
             yield return null;
         }
+        if(attackOnceCoroutine != null) StopCoroutine(attackOnceCoroutine);
         Continue();
+
     }
 
     #region Public members

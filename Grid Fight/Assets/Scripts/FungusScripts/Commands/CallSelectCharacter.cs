@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Fungus;
 
@@ -15,11 +16,12 @@ using Fungus;
 public class CallSelectCharacter : Command
 {
     public ControllerType playerController;
-    public CharacterType_Script characterToSelect;
+    public CharacterNameType characterID;
 
     protected virtual void CallTheMethod()
     {
-        BattleManagerScript.Instance.SelectCharacter(playerController, characterToSelect);
+        CharacterType_Script character = (CharacterType_Script)BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == characterID).FirstOrDefault();
+        BattleManagerScript.Instance.SelectCharacter(playerController, character);
     }
 
     #region Public members

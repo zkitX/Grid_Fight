@@ -12,6 +12,7 @@ public enum TimedCheckTypes
     WaitForButtonPress,
     CharacterDeath,
     CharacterArrival,
+    CharacterSwitchOut,
     CharacterHealthChange,
     ThisEventCalled,
     EventCalled,

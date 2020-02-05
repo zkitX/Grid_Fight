@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57b07e3a7d53ab849b6bc0d9a87386be, type: 3}
-  m_Name: TIME_WaitForSpace
+  m_Name: TIME_WaitForEnter
   m_EditorClassIdentifier: 
-  Name: WaitForSpace
+  Name: WaitForEnter
   hasHappened: 0
   isHappening: 0
   checker: {fileID: 0}
@@ -21,10 +21,13 @@ MonoBehaviour:
   deathCharacterID: 1000
   onlyOnDeath: 0
   deathsRequired: 1
-  keyToWaitFor: 32
+  keyToWaitFor: 13
   arrivalCharacterID: 1000
   onlyOnArrival: 0
   arrivalsRequired: 1
   healthChangeCharID: 1000
   healthChange: 1
   healthChangeValue: 50
+  requireCalledDuringCheck: 1
+  requireEventCalledDuringCheck: 1
+  EventCallRequired: {fileID: 0}

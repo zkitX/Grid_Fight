@@ -41,12 +41,13 @@ public class CharacterType_Script : BaseCharacter
     {
         SetAnimation(CharacterAnimationStateType.Arriving);
         SFXmanager.Instance.PlayOnce(SFXmanager.Instance.ArrivingSpawn);
-        
+        EventManager.Instance.AddCharacterArrival((BaseCharacter)this);
     }
 
     public override void SetUpLeavingBattle()
     {
         SetAnimation(CharacterAnimationStateType.Reverse_Arriving);
+        EventManager.Instance.AddCharacterSwitched((BaseCharacter)this);
     }
 
     #endregion
@@ -109,10 +110,10 @@ public class CharacterType_Script : BaseCharacter
 
 
 
-    public void StartQuickAttack()
+    public void StartQuickAttack(bool attackRegardless)
     {
-        if (CharInfo.StaminaStats.Stamina - CharInfo.RapidAttack.Stamina_Cost_Atk >= 0
-           && CanAttack && !isMoving)
+        if ((CharInfo.StaminaStats.Stamina - CharInfo.RapidAttack.Stamina_Cost_Atk >= 0
+           && CanAttack && !isMoving) || attackRegardless)
         {
 
             if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_IdleToAtk)
