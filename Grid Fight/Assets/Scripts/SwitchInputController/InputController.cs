@@ -180,8 +180,10 @@ public class InputController : MonoBehaviour
             {
                 players[i].controllers.hasKeyboard = false;
             }
+            players[i].AddInputEventDelegate(OnButtonDown, UpdateLoopType.Update, InputActionEventType.ButtonJustPressed);
+            players[i].AddInputEventDelegate(OnButtonPress, UpdateLoopType.Update, InputActionEventType.ButtonPressed);
+            players[i].AddInputEventDelegate(OnButtonUp, UpdateLoopType.Update, InputActionEventType.ButtonJustReleased);
 
-            
         }
         
     }
@@ -191,12 +193,241 @@ public class InputController : MonoBehaviour
         //Looking for all the possible players input
         foreach (Player item in players)
         {
-            ButtonsUp(item);
-            ButtonsPress(item);
-            ButtonsDown(item);
+            //ButtonsUp(item);
+            //ButtonsPress(item);
+            //ButtonsDown(item);
             JoystickMovement(item);
         }
     }
+
+    void OnButtonDown(InputActionEventData data)
+    {
+        InputButtonType buttonInput = (InputButtonType)System.Enum.Parse(typeof(InputButtonType), data.actionName);
+        switch (buttonInput)
+        {
+            case InputButtonType.A:
+                ButtonADownEvent(data.playerId);
+                break;
+            case InputButtonType.B:
+                ButtonBDownEvent(data.playerId);
+                break;
+            case InputButtonType.X:
+                ButtonXDownEvent(data.playerId);
+                break;
+            case InputButtonType.Y:
+                ButtonYDownEvent(data.playerId);
+                break;
+            case InputButtonType.Left:
+                ButtonLeftDownEvent(data.playerId);
+                break;
+            case InputButtonType.Right:
+                ButtonRightDownEvent(data.playerId);
+                break;
+            case InputButtonType.Up:
+                ButtonUpDownEvent(data.playerId);
+                break;
+            case InputButtonType.Down:
+                ButtonDownDownEvent(data.playerId);
+                break;
+            case InputButtonType.ZL:
+                ButtonZLDownEvent(data.playerId);
+                break;
+            case InputButtonType.L:
+                ButtonLDownEvent(data.playerId);
+                break;
+            case InputButtonType.ZR:
+                ButtonZRDownEvent(data.playerId);
+                break;
+            case InputButtonType.R:
+                ButtonRDownEvent(data.playerId);
+                break;
+            case InputButtonType.Plus:
+                ButtonPlusDownEvent(data.playerId);
+                break;
+            case InputButtonType.Minus:
+                ButtonMinusDownEvent(data.playerId);
+                break;
+            case InputButtonType.Home:
+                ButtonHomeDownEvent(data.playerId);
+                break;
+            case InputButtonType.Capture:
+                ButtonCaptureDownEvent(data.playerId);
+                break;
+            case InputButtonType.Left_SL:
+                ButtonLeftSLDownEvent(data.playerId);
+                break;
+            case InputButtonType.Right_SL:
+                ButtonRightSLDownEvent(data.playerId);
+                break;
+            case InputButtonType.Left_SR:
+                ButtonLeftSRDownEvent(data.playerId);
+                break;
+            case InputButtonType.Right_SR:
+                ButtonRightSRDownEvent(data.playerId);
+                break;
+            case InputButtonType.Left_Stick:
+                ButtonLeftStickDownEvent(data.playerId);
+                break;
+            case InputButtonType.Right_Stick:
+                ButtonRightStickDownEvent(data.playerId);
+                break;
+        }
+    }
+
+    void OnButtonPress(InputActionEventData data)
+    {
+        InputButtonType buttonInput = (InputButtonType)System.Enum.Parse(typeof(InputButtonType), data.actionName);
+
+        switch (buttonInput)
+        {
+            case InputButtonType.A:
+                ButtonAPressedEvent(data.playerId);
+                break;
+            case InputButtonType.B:
+                ButtonBPressedEvent(data.playerId);
+                break;
+            case InputButtonType.X:
+                ButtonXPressedEvent(data.playerId);
+                break;
+            case InputButtonType.Y:
+                ButtonYPressedEvent(data.playerId);
+                break;
+            case InputButtonType.Left:
+                ButtonLeftPressedEvent(data.playerId);
+                break;
+            case InputButtonType.Right:
+                ButtonRightPressedEvent(data.playerId);
+                break;
+            case InputButtonType.Up:
+                ButtonUpPressedEvent(data.playerId);
+                break;
+            case InputButtonType.Down:
+                ButtonDownPressedEvent(data.playerId);
+                break;
+            case InputButtonType.ZL:
+                ButtonZLPressedEvent(data.playerId);
+                break;
+            case InputButtonType.L:
+                ButtonLPressedEvent(data.playerId);
+                break;
+            case InputButtonType.ZR:
+                ButtonZRPressedEvent(data.playerId);
+                break;
+            case InputButtonType.R:
+                ButtonRPressedEvent(data.playerId);
+                break;
+            case InputButtonType.Plus:
+                ButtonPlusPressedEvent(data.playerId);
+                break;
+            case InputButtonType.Minus:
+                ButtonMinusPressedEvent(data.playerId);
+                break;
+            case InputButtonType.Home:
+                ButtonHomePressedEvent(data.playerId);
+                break;
+            case InputButtonType.Capture:
+                ButtonCapturePressedEvent(data.playerId);
+                break;
+            case InputButtonType.Left_SL:
+                ButtonLeftSLPressedEvent(data.playerId);
+                break;
+            case InputButtonType.Right_SL:
+                ButtonRightSLPressedEvent(data.playerId);
+                break;
+            case InputButtonType.Left_SR:
+                ButtonLeftSRPressedEvent(data.playerId);
+                break;
+            case InputButtonType.Right_SR:
+                ButtonRightSRPressedEvent(data.playerId);
+                break;
+            case InputButtonType.Left_Stick:
+                ButtonLeftStickPressedEvent(data.playerId);
+                break;
+            case InputButtonType.Right_Stick:
+                ButtonRightStickPressedEvent(data.playerId);
+                break;
+        }
+    }
+
+    void OnButtonUp(InputActionEventData data)
+    {
+        InputButtonType buttonInput = (InputButtonType)System.Enum.Parse(typeof(InputButtonType), data.actionName);
+
+
+        switch (buttonInput)
+        {
+            case InputButtonType.A:
+                ButtonAUpEvent(data.playerId);
+                break;
+            case InputButtonType.B:
+                ButtonBUpEvent(data.playerId);
+                break;
+            case InputButtonType.X:
+                ButtonXUpEvent(data.playerId);
+                break;
+            case InputButtonType.Y:
+                ButtonYUpEvent(data.playerId);
+                break;
+            case InputButtonType.Left:
+                ButtonLeftUpEvent(data.playerId);
+                break;
+            case InputButtonType.Right:
+                ButtonRightUpEvent(data.playerId);
+                break;
+            case InputButtonType.Up:
+                ButtonUpUpEvent(data.playerId);
+                break;
+            case InputButtonType.Down:
+                ButtonDownUpEvent(data.playerId);
+                break;
+            case InputButtonType.ZL:
+                ButtonZLUpEvent(data.playerId);
+                break;
+            case InputButtonType.L:
+                ButtonLUpEvent(data.playerId);
+                break;
+            case InputButtonType.ZR:
+                ButtonZRUpEvent(data.playerId);
+                break;
+            case InputButtonType.R:
+                ButtonRUpEvent(data.playerId);
+                break;
+            case InputButtonType.Plus:
+                ButtonPlusUpEvent(data.playerId);
+                break;
+            case InputButtonType.Minus:
+                ButtonMinusUpEvent(data.playerId);
+                break;
+            case InputButtonType.Home:
+                ButtonHomeUpEvent(data.playerId);
+                break;
+            case InputButtonType.Capture:
+                ButtonCaptureUpEvent(data.playerId);
+                break;
+            case InputButtonType.Left_SL:
+                ButtonLeftSLUpEvent(data.playerId);
+                break;
+            case InputButtonType.Right_SL:
+                ButtonRightSLUpEvent(data.playerId);
+                break;
+            case InputButtonType.Left_SR:
+                ButtonLeftSRUpEvent(data.playerId);
+                break;
+            case InputButtonType.Right_SR:
+                ButtonRightSRUpEvent(data.playerId);
+                break;
+            case InputButtonType.Left_Stick:
+                ButtonLeftStickUpEvent(data.playerId);
+                break;
+            case InputButtonType.Right_Stick:
+                ButtonRightStickUpEvent(data.playerId);
+                break;
+        }
+       
+
+    }
+
+
 
 
     /*private void Notification_notificationMessageReceived(Notification.Message obj)
@@ -218,7 +449,7 @@ public class InputController : MonoBehaviour
     //Check for Joysticks movement
     private void JoystickMovement(Player currentPlayer)
     {
-        LeftJoystic = new Vector2(currentPlayer.GetAxis("Left Move Horizontal"), currentPlayer.GetAxis("Left Move Vertical"));
+        LeftJoystic = new Vector2(currentPlayer.GetAxis("Left_Move_Horizontal"), currentPlayer.GetAxis("Left_Move_Vertical"));
         if (LeftJoystic != Vector2.zero)
         {
             //Debug.Log(player.GetButtonDown("Left Joystic"));
@@ -248,7 +479,7 @@ public class InputController : MonoBehaviour
                 }
             }
         }
-        RightJoystic = new Vector2(currentPlayer.GetAxis("Right Move Horizontal"), currentPlayer.GetAxis("Right Move Vertical"));
+        RightJoystic = new Vector2(currentPlayer.GetAxis("Right_Mov_ Horizontal"), currentPlayer.GetAxis("Right_Move_Vertical"));
         if (RightJoystic != Vector2.zero)
         {
             //Debug.Log(player.GetButtonDown("Right Joystic"));
@@ -280,6 +511,11 @@ public class InputController : MonoBehaviour
             }
         }
     }
+
+
+   
+
+
     //Check for Buttons Up
     private void ButtonsUp(Player currentPlayer)
     {
