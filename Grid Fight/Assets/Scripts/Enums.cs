@@ -531,8 +531,44 @@ public enum CharacterNameType
 public enum WavePhaseType
 {
     Combat,
-    Event
+    Event,
 }
+
+public enum InputAxisType
+{
+    Left_Move_Horizontal,
+    Right_Move_Horizontal,
+    Left_Move_Vertical,
+    Right_Move_Vertical
+}
+
+
+public enum InputButtonType
+{
+    A,
+    B,
+    X,
+    Y,
+    Left,
+    Right,
+    Up,
+    Down,
+    ZL,
+    L,
+    ZR,
+    R,
+    Plus,
+    Minus,
+    Home,
+    Capture,
+    Left_SL,
+    Right_SL,
+    Left_SR,
+    Right_SR,
+    Left_Stick,
+    Right_Stick
+}
+
 
 public enum MonsterFlowerType
 {
