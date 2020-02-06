@@ -18,7 +18,7 @@ public class GameSequenceEvent : EventTrigger
     //
 
     //Effects and triggees
-    [SerializeField] public bool canOverlap = false;
+    [SerializeField] public bool ceaseOnComplete = true;
     [SerializeField] protected bool requireComplete = true;
     protected List<GameSequenceEvent> triggees = new List<GameSequenceEvent>();
     [SerializeField] protected EventEffect[] effects;
@@ -26,6 +26,7 @@ public class GameSequenceEvent : EventTrigger
 
     public void Trigger()
     {
+        if (hasHappened && !ceaseOnComplete) return;
         Debug.Log("<i>Event Triggered:</i> " + Name);
         triggerRequests++;
         //If the event requirements aren't met, stop the method

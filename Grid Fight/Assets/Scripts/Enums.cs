@@ -152,7 +152,8 @@ public enum ControllerType
     Player2,
     Player3,
     Player4,
-    Enemy
+    Enemy,
+    None
 }
 
 public enum UnitBehaviourType

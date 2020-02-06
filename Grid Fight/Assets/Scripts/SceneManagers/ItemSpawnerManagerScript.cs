@@ -66,8 +66,20 @@ public class ItemSpawnerManagerScript : MonoBehaviour
     }
 
 
-    public void SpawnItem(ItemType item)
+    public void SpawnPowerUpAtGridPos(ScriptableObjectItemPowerUps powerUp, Vector2Int pos)
     {
+        ItemsPowerUPsInfoScript item = SpawnedItems.Where(r => !r.gameObject.activeInHierarchy).FirstOrDefault();
+        if (item == null)
+        {
+            item = Instantiate(ItemGO, transform).GetComponent<ItemsPowerUPsInfoScript>();
+            SpawnedItems.Add(item);
+        }
+        item.gameObject.SetActive(true);
+        item.SetItemPowerUp(powerUp, GridManagerScript.Instance.GetBattleTile(pos).transform.position);
+    }
 
+    public void SpawnPowerUpAtRandomPointOnSide(ScriptableObjectItemPowerUps powerUp, WalkingSideType side)
+    {
+        SpawnPowerUpAtGridPos(powerUp, GridManagerScript.Instance.GetFreeBattleTile(side).Pos);
     }
 }

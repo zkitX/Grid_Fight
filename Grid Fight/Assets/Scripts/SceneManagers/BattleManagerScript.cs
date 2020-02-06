@@ -133,8 +133,16 @@ public class BattleManagerScript : MonoBehaviour
         return (CharacterType_Script)currentCharacter;
     }
 
-    public IEnumerator RemoveCharacterFromBaord(ControllerType playerController, BaseCharacter currentCharacter)
+    public IEnumerator RemoveCharacterFromBaord(ControllerType playerController, BaseCharacter currentCharacter, bool leaveEmpty)
     {
+        if (leaveEmpty)
+        {
+            for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)
+            {
+                GridManagerScript.Instance.SetBattleTileState(currentCharacter.UMS.Pos[i], BattleTileStateType.Empty);
+                currentCharacter.UMS.Pos[i] = Vector2Int.zero;
+            }
+        }
 
         List<Vector2Int> newPoses = new List<Vector2Int>();
         foreach (Vector2Int pos in currentCharacter.UMS.Pos)
@@ -159,6 +167,11 @@ public class BattleManagerScript : MonoBehaviour
         {
             PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == currentCharacter.CharInfo.CharacterID).First().isUsed = false;
         }
+        if(playerController == ControllerType.None && PlayablesCharOnScene.Where(r => r.CName == currentCharacter.CharInfo.CharacterID).First().isUsed)
+        {
+            PlayablesCharOnScene.Where(r => r.CName == currentCharacter.CharInfo.CharacterID).First().isUsed = false;
+        }
+
     }
 
     //Used to set the already created char on a fixed Position in the battlefield
@@ -322,16 +335,45 @@ public class BattleManagerScript : MonoBehaviour
             if(currentCharacter != null)
             {
                 currentCharacter.SpineAnim.SetAnimationSpeed(2);
-                yield return RemoveCharacterFromBaord(playerController, CurrentSelectedCharacters[playerController].Character);
+                yield return RemoveCharacterFromBaord(playerController, CurrentSelectedCharacters[playerController].Character, false);
                 SelectCharacter(playerController, currentCharacter);
                 //And drop the new character in
             }
-
-
         }
-
         CurrentSelectedCharacters[playerController].LoadCharCo = null;
+    }
 
+    public void RemoveNamedCharacterFromBoard(CharacterNameType charToRemoveName)
+    {
+        /*if (CurrentSelectedCharacters.Values.Where(r => r.Character != null).FirstOrDefault() != null && CurrentSelectedCharacters.Values.Where(r => r.Character.CharInfo.CharacterID == charToRemoveName).FirstOrDefault() != null)
+        {
+            charToRemove = CurrentSelectedCharacters.Values.Where(r => r.Character.CharInfo.CharacterID == charToRemoveName).FirstOrDefault().Character;
+        }*/
+        CharacterType_Script charToRemove = (CharacterType_Script)AllCharactersOnField.Where(r => r.GetType() == typeof(CharacterType_Script) && r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
+        ControllerType controller;
+        if(CurrentSelectedCharacters.Values != null && CurrentSelectedCharacters.Where(r => r.Value.Character == charToRemove).FirstOrDefault().Key != ControllerType.None)
+        {
+            controller = CurrentSelectedCharacters.Where(r => r.Value.Character == charToRemove).FirstOrDefault().Key;
+        }
+        else
+        {
+            controller = ControllerType.None;
+        }
+        charToRemove.SpineAnim.SetAnimationSpeed(2);
+        StartCoroutine(RemoveCharacterFromBaord(controller, charToRemove, true));
+
+        /*
+        CharacterType_Script charToRemove = null;
+        ControllerType controller = ControllerType.None;
+        charToRemove = (CharacterType_Script)AllCharactersOnField.Where(r => r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
+        if (charToRemove == null) return;
+        charToRemove.SpineAnim.SetAnimationSpeed(2);
+        if (CurrentSelectedCharacters.Values.Where(r => r.Character != null).FirstOrDefault() != null && CurrentSelectedCharacters.Values.Where(r => r.Character.CharInfo.CharacterID == charToRemoveName).FirstOrDefault() != null)
+        {
+            controller = CurrentSelectedCharacters.Where(r => r.Value.Character == charToRemove).FirstOrDefault().Key;
+        }
+        StartCoroutine(RemoveCharacterFromBaord(controller, charToRemove));
+         */
     }
 
     //Stop the loading of a char
@@ -349,6 +391,30 @@ public class BattleManagerScript : MonoBehaviour
         SelectCharacter(playerController, (CharacterType_Script)AllCharactersOnField.Where(r=> r.CharInfo.CharacterSelection == characterSelection && r.UMS.PlayerController.Contains(playerController)).FirstOrDefault());
     }
 
+    public void DeselectCharacter(CharacterNameType charToDeselectName)
+    {
+        bool isSelected = false;
+        foreach (KeyValuePair<ControllerType, CurrentSelectedCharacterClass> characterSelector in CurrentSelectedCharacters)
+        {
+            if (characterSelector.Value.Character != null && characterSelector.Value.Character.CharInfo.CharacterID == charToDeselectName)
+            {
+                isSelected = true;
+                break;
+            }
+        }
+        if (!isSelected) return;
+
+        CharacterType_Script charToDeselect = CurrentSelectedCharacters.Values.Where(r => r.Character.CharInfo.CharacterID == charToDeselectName).FirstOrDefault().Character;
+        if (CurrentSelectedCharacters.Values.Where(r => r.Character == charToDeselect).FirstOrDefault() == null) return;
+        ControllerType controller = CurrentSelectedCharacters.Where(r => r.Value.Character == charToDeselect).FirstOrDefault().Key;
+        if (charToDeselect != null)
+        {
+            charToDeselect.SetCharSelected(false, playersNumberBig[(int)controller], playersNumberSmall[(int)controller], new Color());
+            CurrentSelectedCharacters[controller].Character = null;
+        }
+        else Debug.LogWarning("Character you are trying to deselect does not exist in the currently selected character");
+    }
+
     //Used to select a char 
     public void SelectCharacter(ControllerType playerController, CharacterType_Script currentCharacter)
     {
@@ -361,7 +427,7 @@ public class BattleManagerScript : MonoBehaviour
                 if(CurrentSelectedCharacters[playerController].Character != null)
                 {
                     //Deselect it
-                    CurrentSelectedCharacters[playerController].Character.SetCharSelected(false, playersNumberBig[(int)playerController], playersNumberSmall[(int)playerController], new Color());
+                    DeselectCharacter(CurrentSelectedCharacters[playerController].Character.CharInfo.CharacterID);
                 }
                 else
                 {
@@ -614,7 +680,6 @@ public class BattleManagerScript : MonoBehaviour
             UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
             EventManager.Instance.ResetEventsInManager();
         }
-        
     }
 
 
