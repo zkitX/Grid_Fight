@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BaseCharacter : MonoBehaviour
+public class BaseCharacter : MonoBehaviour, IDisposable
 {
     public delegate void CurrentCharIsDead(CharacterNameType cName, List<ControllerType> playerController, SideType side);
     public event CurrentCharIsDead CurrentCharIsDeadEvent;
@@ -259,9 +260,12 @@ public class BaseCharacter : MonoBehaviour
         }
         else
         {
+
+
+
             foreach (ScriptableObjectAttackTypeOnBattlefield atk in CharInfo.CurrentOnBattleFieldAttackTypeInfo)
             {
-                int chances = Random.Range(0, 101);
+                int chances = UnityEngine.Random.Range(0, 101);
 
                 switch (atk.StatToCheck)
                 {
@@ -412,8 +416,16 @@ public class BaseCharacter : MonoBehaviour
             lps.Shot = NextAttackLevel;
             lps.SelectShotLevel();
         }
-        bs.gameObject.SetActive(true);
-        bs.StartMoveToTile();
+        if(CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
+        {
+            bs.gameObject.SetActive(true);
+            bs.StartMoveToTile();
+        }
+        else
+        {
+            bs.gameObject.SetActive(false);
+        }
+      
     }
 
 
@@ -1005,6 +1017,11 @@ public class BaseCharacter : MonoBehaviour
         IsUsingAPortal = true;
         transform.position = outPortal.PortalPos.transform.position;
 
+    }
+
+    public void Dispose()
+    {
+        //throw new NotImplementedException();
     }
 }
 

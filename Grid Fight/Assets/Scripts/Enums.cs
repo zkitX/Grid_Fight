@@ -567,7 +567,11 @@ public enum InputButtonType
     Left_SR,
     Right_SR,
     Left_Stick,
-    Right_Stick
+    Right_Stick,
+    Left_Move_Horizontal,
+    Right_Move_Horizontal,
+    Left_Move_Vertical,
+    Right_Move_Vertical
 }
 
 

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(EventManager))]
 public class BattleManagerScript : MonoBehaviour
 {
 
@@ -106,33 +105,35 @@ public class BattleManagerScript : MonoBehaviour
             return null;
         }
 
-        BaseCharacter currentCharacter = AllCharactersOnField.Where(r => r.UMS.PlayerController.Contains(playerController) && r.CharInfo.CharacterID == cName).First();
-        if(currentCharacter.CharInfo.Health <= 0)
+        using (BaseCharacter currentCharacter = AllCharactersOnField.Where(r => r.UMS.PlayerController.Contains(playerController) && r.CharInfo.CharacterID == cName).First())
         {
-            return null;
-        }
-        BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(pos);
-        currentCharacter.UMS.CurrentTilePos = bts.Pos;
-        for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)
-        {
-            currentCharacter.UMS.Pos[i] += bts.Pos;
-            GridManagerScript.Instance.SetBattleTileState(currentCharacter.UMS.Pos[i], BattleTileStateType.Occupied);
-            BattleTileScript cbts = GridManagerScript.Instance.GetBattleTile(currentCharacter.UMS.Pos[i]);
-            currentCharacter.CurrentBattleTiles.Add(cbts);
-        }
-        currentCharacter.SetUpEnteringOnBattle();
-        StartCoroutine(MoveCharToBoardWithDelay(0.1f, currentCharacter, bts.transform.position));
-        if (playerController == ControllerType.Player1)
-        {
-            UIBattleManager.Instance.isLeftSidePlaying = true;
+            if (currentCharacter.CharInfo.Health <= 0)
+            {
+                return null;
+            }
+            BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(pos);
+            currentCharacter.UMS.CurrentTilePos = bts.Pos;
+            for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)
+            {
+                currentCharacter.UMS.Pos[i] += bts.Pos;
+                GridManagerScript.Instance.SetBattleTileState(currentCharacter.UMS.Pos[i], BattleTileStateType.Occupied);
+                BattleTileScript cbts = GridManagerScript.Instance.GetBattleTile(currentCharacter.UMS.Pos[i]);
+                currentCharacter.CurrentBattleTiles.Add(cbts);
+            }
+            currentCharacter.SetUpEnteringOnBattle();
+            StartCoroutine(MoveCharToBoardWithDelay(0.1f, currentCharacter, bts.transform.position));
+            if (playerController == ControllerType.Player1)
+            {
+                UIBattleManager.Instance.isLeftSidePlaying = true;
 
+            }
+            else if (playerController == ControllerType.Player2)
+            {
+                UIBattleManager.Instance.isRightSidePlaying = true;
+            }
+            PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == cName).First().isUsed = true;
+            return (CharacterType_Script)currentCharacter;
         }
-        else if (playerController == ControllerType.Player2)
-        {
-            UIBattleManager.Instance.isRightSidePlaying = true;
-        }
-        PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == cName).First().isUsed = true;
-        return (CharacterType_Script)currentCharacter;
     }
 
     public IEnumerator RemoveCharacterFromBaord(ControllerType playerController, BaseCharacter currentCharacter, bool leaveEmpty)
@@ -793,3 +794,22 @@ public class CurrentSelectedCharacterClass
     }
 }
 
+
+
+public class DisposableGameObjectClass : System.IDisposable
+{
+    public GameObject BaseGO;
+
+    public DisposableGameObjectClass()
+    {
+    }
+
+    public DisposableGameObjectClass(GameObject baseGO)
+    {
+        BaseGO = baseGO;
+    }
+
+    public void Dispose()
+    {
+    }
+}

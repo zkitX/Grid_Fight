@@ -170,7 +170,7 @@ public class WaveManagerScript : MonoBehaviour
 
         foreach (WavePhaseClass wavePhase in WavePhases)
         {
-            yield return StartCoroutine(Wave(wavePhase));
+            yield return Wave(wavePhase);
         }
     }
 
@@ -224,6 +224,10 @@ public class WaveManagerScript : MonoBehaviour
                 }
             }
         }
+
+
+
+
     }
 
     private void SpawChar(BaseCharacter newChar)
