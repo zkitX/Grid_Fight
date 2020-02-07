@@ -88,7 +88,7 @@ public class ParticleManagerScript : MonoBehaviour
                     using (DisposableGameObjectClass go = new DisposableGameObjectClass(null))
                     {
                         go.BaseGO = Instantiate(ps.BaseGO, pos, Quaternion.identity, Container);
-                        go.BaseGO.transform.localScale = side == SideType.RightSide ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
+                        //go.BaseGO.transform.localScale = side == SideType.RightSide ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
                         go.BaseGO.SetActive(true);
                         AttackParticlesFired.Add(new FiredAttackParticle(go.BaseGO, pType, ParticleType));
                         return go.BaseGO;
@@ -137,7 +137,7 @@ public class ParticleManagerScript : MonoBehaviour
 
                         go.BaseGO = Instantiate(ps.BaseGO, parent.position, parent.rotation, parent);
                         go.BaseGO.transform.localPosition = Vector3.zero;
-                        go.BaseGO.transform.localScale = side == SideType.RightSide ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
+                        //go.BaseGO.transform.localScale = side == SideType.RightSide ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
                         go.BaseGO.SetActive(particlesVisible);//particlesVisible
                         AttackParticlesFired.Add(new FiredAttackParticle(go.BaseGO, pType, ParticleType));
                         return go.BaseGO;
