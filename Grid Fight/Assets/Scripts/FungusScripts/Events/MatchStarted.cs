@@ -22,7 +22,7 @@ namespace Fungus
 
         private void Instance_CurrentBattleStateChangedEvent(BattleState currentBattleState)
         {
-            if(currentBattleState == BattleState.Intro)
+            if(currentBattleState == BattleState.FungusPuppets)
             {
                 ExecuteBlock();
             }

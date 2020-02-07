@@ -56,16 +56,18 @@ public class BattleManagerScript : MonoBehaviour
     public bool VFXScene = false;
     [SerializeField]  private bool singleUnitControls = true;
     bool matchStarted = false;
+    [SerializeField]
+    public bool usingFungus = false;
     public void SetupBattleState()
     {
         if (matchStarted) return;
         matchStarted = true;
-        if (CurrentBattleState == BattleState.Intro)
+        if (CurrentBattleState == BattleState.FungusPuppets || CurrentBattleState == BattleState.Intro)
         {
-            //CurrentBattleState = BattleState.Battle;
-            UIBattleManager.Instance.StartMatch.gameObject.SetActive(false);
+            CurrentBattleState = BattleState.Battle;
         }
-        
+        UIBattleManager.Instance.StartMatch.gameObject.SetActive(false);
+
     }
 
     #region Unity Life Cycle
@@ -291,7 +293,7 @@ public class BattleManagerScript : MonoBehaviour
     //Used when the char is not in the battlefield to move it on the battlefield
     public void LoadingNewCharacterToGrid(CharacterNameType cName,SideType side, ControllerType playerController)
     {
-        if (CurrentBattleState != BattleState.Battle) return;
+        if (CurrentBattleState != BattleState.Battle && CurrentBattleState != BattleState.Intro) return;
 
         if (CurrentSelectedCharacters[playerController].LoadCharCo != null)
         {
@@ -563,7 +565,7 @@ public class BattleManagerScript : MonoBehaviour
     //Move selected char under determinated player
     public void MoveSelectedCharacterInDirection(ControllerType playerController, InputDirection dir)
     {
-        if (CurrentBattleState != BattleState.Battle) return;
+        if (CurrentBattleState != BattleState.Battle && CurrentBattleState != BattleState.Intro) return;
 
         if (CurrentSelectedCharacters[playerController].Character != null)
         {
@@ -579,7 +581,7 @@ public class BattleManagerScript : MonoBehaviour
     #region Switch Input
     public void Switch_StopLoadingNewCharacter(CharacterSelectionType characterSelection, ControllerType playerController)
     {
-        if (CurrentBattleState == BattleState.Battle || CurrentBattleState == BattleState.Intro)
+        if (CurrentBattleState == BattleState.Battle || CurrentBattleState == BattleState.FungusPuppets || CurrentBattleState == BattleState.Intro)
         {
             SideType side = GetSideFromPlayer(new List<ControllerType> { playerController });
             BaseCharacter cb = AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == characterSelection && r.UMS.Side == side).FirstOrDefault();
@@ -593,7 +595,7 @@ public class BattleManagerScript : MonoBehaviour
 
     public void Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType characterSelection, ControllerType playerController)
     {
-        if (CurrentBattleState == BattleState.Battle || CurrentBattleState == BattleState.Intro)
+        if (CurrentBattleState == BattleState.Battle || CurrentBattleState == BattleState.FungusPuppets || CurrentBattleState == BattleState.Intro)
         {
             SideType side = GetSideFromPlayer(new List<ControllerType> { playerController });
             BaseCharacter cb = AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == characterSelection && r.UMS.Side == side).FirstOrDefault();

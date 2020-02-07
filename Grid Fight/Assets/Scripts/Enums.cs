@@ -172,7 +172,7 @@ public enum WalkingSideType
 public enum BattleState
 {
     Initialization,
-    Intro,
+    FungusPuppets,
     Talk,
     Event,
     Battle,
@@ -180,7 +180,8 @@ public enum BattleState
     Menu,
     End,
     WinLose,
-    Tutorial
+    Tutorial,
+    Intro
 }
 
 public enum ElementalType

@@ -26,6 +26,7 @@ public class EventManager : MonoBehaviour
     protected List<string> eventDirectCallsLastFrame = new List<string>();
     [SerializeField] protected List<CharacterEventInfoClass> charactersSwitched = new List<CharacterEventInfoClass>();
     protected List<CharacterNameType> charactersSwitchedLastFrame = new List<CharacterNameType>();
+    protected List<InputButtonType> buttonsPressedLastFrame = new List<InputButtonType>();
 
     //[Tooltip("How many seconds between checks, increase for performance boost, decrease for accuracy")][SerializeField] protected float timeBetweenChecks = 1f;
 
@@ -38,6 +39,7 @@ public class EventManager : MonoBehaviour
 
     public void ResetEventsInManager()
     {
+        if (!BattleManagerScript.Instance.usingFungus) return;
         stageEventTriggers.Clear();
         stageEventTriggers = new List<GameSequenceEvent>();
         if (stageEventTriggersProfile != null)
@@ -433,6 +435,33 @@ public class EventManager : MonoBehaviour
             }
         }
         return 0;
+    }
+    #endregion
+
+    #region Input Button Management
+    public void UpdateButtonPressed(InputButtonType buttonPressed)
+    {
+        foreach(InputButtonType button in buttonsPressedLastFrame)
+        {
+            if (buttonPressed == button) return;
+        }
+        buttonsPressedLastFrame.Add(buttonPressed);
+        StartCoroutine(RemoveButtonsPressedLastFrame(buttonPressed));
+    }
+
+    IEnumerator RemoveButtonsPressedLastFrame(InputButtonType buttonPressed)
+    {
+        yield return null;
+        buttonsPressedLastFrame.Remove(buttonPressed);
+    }
+
+    public bool GetButtonWasPressedLastFrame(InputButtonType buttonPressed)
+    {
+        foreach (InputButtonType button in buttonsPressedLastFrame)
+        {
+            if (buttonPressed == button) return true;
+        }
+        return false;
     }
     #endregion
 

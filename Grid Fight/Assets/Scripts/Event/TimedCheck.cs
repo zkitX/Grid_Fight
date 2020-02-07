@@ -87,10 +87,10 @@ public class TimedCheck : EventTrigger
         }
     }
 
-    [ConditionalField("TimedCheckType", false, TimedCheckTypes.WaitForButtonPress)] public KeyCode keyToWaitFor = KeyCode.None;
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.WaitForButtonPress)] public InputButtonType buttonToWaitFor;
     bool WaitForButtonPress()
     {
-        return Input.GetKeyDown(keyToWaitFor);
+        return EventManager.Instance.GetButtonWasPressedLastFrame(buttonToWaitFor);
     }
 
     [ConditionalField("TimedCheckType", false, TimedCheckTypes.CharacterArrival)] public CharacterNameType arrivalCharacterID = CharacterNameType.None;

@@ -21,7 +21,15 @@ public class UITutorialScript : MonoBehaviour
         if(BattleManagerScript.Instance != null && BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
         {
             InputController.Instance.ButtonMinusUpEvent -= Instance_ButtonMinusUpEvent;
-            BattleManagerScript.Instance.CurrentBattleState = BattleState.Intro;
+            if (BattleManagerScript.Instance.usingFungus)
+            {
+                BattleManagerScript.Instance.CurrentBattleState = BattleState.FungusPuppets;
+            }
+            else
+            {
+                BattleManagerScript.Instance.CurrentBattleState = BattleState.Intro;
+            }
+
             gameObject.SetActive(false);
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MyBox;
+using Fungus;
 
 [System.Serializable]
 public class EventEffect
@@ -28,6 +29,9 @@ public class EventEffect
             case (EventEffectTypes.TriggerFungusEvent):
                 yield return TriggerFungusEvent();
                 break;
+            case (EventEffectTypes.TriggerCommand):
+                yield return TriggerCommand();
+                break;
             default:
                 yield return null;
                 break;
@@ -51,6 +55,13 @@ public class EventEffect
     IEnumerator TriggerFungusEvent()
     {
         if(OnFungusEventTrigger != null && OnFungusEventTrigger.Target != null) OnFungusEventTrigger(blockName);
+        yield return null;
+    }
+
+    [ConditionalField("effectType", false, EventEffectTypes.TriggerCommand)] public Command command;
+    IEnumerator TriggerCommand()
+    {
+        command.OnEnter();
         yield return null;
     }
 

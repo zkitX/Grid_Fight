@@ -299,123 +299,142 @@ public class UserInputManager : MonoBehaviour
     {
         //Debug.Log(player + "  " + "Minus Up");
         BattleManagerScript.Instance.RestartScene();
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.Minus);
     }
 
     private void Instance_ButtonPlusUpEvent(int player)
     {
         //Debug.Log(player + "  " + "Plus Up");
         BattleManagerScript.Instance.SetupBattleState();
-
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.Plus);
     }
 
     private void Instance_ButtonZLUpEvent(int player)
     {
         //Debug.Log(player + "  " + "ZL Up");
         StopDefendingForSelectedCharacter(player);
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.ZL);
     }
 
     private void Instance_ButtonLUpEvent(int player)
     {
         //Debug.Log(player + "  " + "L Up");
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.L);
     }
 
     private void Instance_ButtonZRUpEvent(int player)
     {
         //Debug.Log(player + "  " + "ZR Up");
-
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.ZR);
     }
 
     private void Instance_ButtonRUpEvent(int player)
     {
         //Debug.Log(player + "  " + "R Up");
         StopSelectedCharacterChargingAttack(player);
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.R);
     }
 
     private void Instance_ButtonLeftUpEvent(int player)
     {
         //Debug.Log(player + "  " + "Left Up");
         StopLoadSelectCharacter(CharacterSelectionType.Left, (ControllerType)player);
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.Left);
     }
 
     private void Instance_ButtonRightUpEvent(int player)
     {
         //Debug.Log(player + "  " + "Right Up");
         StopLoadSelectCharacter(CharacterSelectionType.Right, (ControllerType)player);
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.Right);
     }
 
     private void Instance_ButtonDownUpEvent(int player)
     {
         //Debug.Log(player + "  " + "Down Up");
         StopLoadSelectCharacter(CharacterSelectionType.Down, (ControllerType)player);
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.Down);
     }
 
     private void Instance_ButtonUpUpEvent(int player)
     {
         //Debug.Log(player + "  " + "Up Up");
         StopLoadSelectCharacter(CharacterSelectionType.Up, (ControllerType)player);
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.Up);
     }
 
     private void Instance_ButtonYUpEvent(int player)
     {
         //Debug.Log(player + "  " + "Y Up");
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.Y);
     }
 
     private void Instance_ButtonXUpEvent(int player)
     {
         //Debug.Log(player + "  " + "X Up");
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.X);
     }
 
     private void Instance_ButtonBUpEvent(int player)
     {
         //Debug.Log(player + "  " + "B Up");
         //VibrationController.Instance.CustomVibration(player, VibrationType.b);
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.B);
     }
 
     private void Instance_ButtonAUpEvent(int player)
     {
         //Debug.Log(player + "  " + "A Up");
-       
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.A);
 
     }
 
     private void Instance_ButtonRightSRUpEvent(int player)
     {
         //Debug.Log(player + "  " + "Right SR Up");
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.Right_SR);
     }
 
     private void Instance_ButtonLeftSRUpEvent(int player)
     {
         //Debug.Log(player + "  " + "Left SR Up");
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.Left_SR);
     }
 
     private void Instance_ButtonLeftSLUpEvent(int player)
     {
         //Debug.Log(player + "  " + "Left SL Up");
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.Left_SL);
     }
 
     private void Instance_ButtonRightSLUpEvent(int player)
     {
         //Debug.Log(player + "  " + "Right SL Up");
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.Right_SL);
     }
 
     private void Instance_ButtonLeftStickUpEvent(int player)
     {
         //Debug.Log(player + "  " + "Left Stick Up");
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.Left_Stick);
     }
 
     private void Instance_ButtonRightStickUpEvent(int player)
     {
         //Debug.Log(player + "  " + "Right Stick Up");
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.Right_Stick);
     }
 
     private void Instance_ButtonCaptureUpEvent(int player)
     {
         //Debug.Log(player + "  " + "Capture Up");
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.Capture);
     }
 
     private void Instance_ButtonHomeUpEvent(int player)
     {
         BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
+        EventManager.Instance.UpdateButtonPressed(InputButtonType.Home);
         //Debug.Log(player + "  " + "Home Up");
     }
 
