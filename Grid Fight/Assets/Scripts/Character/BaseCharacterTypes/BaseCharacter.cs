@@ -627,11 +627,11 @@ public class BaseCharacter : MonoBehaviour
             case BuffDebuffStatsType.Health:
                 if(valueOverDuration < 0)
                 {
-                    DamageReceivedEvent(valueOverDuration, false);
+                    if(DamageReceivedEvent != null) DamageReceivedEvent(valueOverDuration, false);
                 }
                 else
                 {
-                    HealReceivedEvent(valueOverDuration);
+                    if (HealReceivedEvent != null) HealReceivedEvent(valueOverDuration);
                 }
                 CharInfo.Health += valueOverDuration;
                 break;
@@ -931,7 +931,10 @@ public class BaseCharacter : MonoBehaviour
           }*/
         EventManager.Instance.UpdateHealth(this);
         CharInfo.Health -= damage;
-        DamageReceivedEvent(damage, !res);
+        if (DamageReceivedEvent != null)
+        {
+            DamageReceivedEvent(damage, !res);
+        }
         return res;
     }
 

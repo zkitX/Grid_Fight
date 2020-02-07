@@ -64,7 +64,7 @@ public class BattleManagerScript : MonoBehaviour
         matchStarted = true;
         if (CurrentBattleState == BattleState.FungusPuppets || CurrentBattleState == BattleState.Intro)
         {
-            CurrentBattleState = BattleState.Battle;
+            if(!usingFungus) CurrentBattleState = BattleState.Battle;
         }
         UIBattleManager.Instance.StartMatch.gameObject.SetActive(false);
 
