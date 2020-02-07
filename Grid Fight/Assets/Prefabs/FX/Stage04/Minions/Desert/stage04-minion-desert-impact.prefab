@@ -5005,8 +5005,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 3
-      minScalar: 1.5
+      scalar: 4
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5758,7 +5758,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 25
+        scalar: 10
         minScalar: 25
         maxCurve:
           serializedVersion: 2
@@ -6312,7 +6312,8 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 21300000, guid: 4bafbb7c167570b47b87e1c0d22351fa, type: 3}
+    - sprite: {fileID: 1221825388772256122, guid: 0bc2ca3e70d16064aab475ef194132b5,
+        type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -9561,7 +9562,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 200
+  m_SortingOrder: 201
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -10506,7 +10507,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 10
+        scalar: 5
         minScalar: 26
         maxCurve:
           serializedVersion: 2
@@ -14385,13 +14386,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4494339038752402174}
-  m_LocalRotation: {x: 0.7071066, y: 0, z: 0, w: -0.70710695}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4494339038171647689}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -89.980194, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &4494339038752402173
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -14564,7 +14565,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.5411765}
+      maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -14626,7 +14627,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.5
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -15631,17 +15632,17 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0.54509807, b: 0, a: 1}
-        key1: {r: 1, g: 0.20392157, b: 0, a: 0}
-        key2: {r: 0, g: 0, b: 0, a: 1}
+        key0: {r: 1, g: 0.7898799, b: 0.5377358, a: 1}
+        key1: {r: 1, g: 0.4120564, b: 0.20283067, a: 0}
+        key2: {r: 1, g: 0.36914542, b: 0.20754719, a: 1}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 578
-        ctime1: 65341
-        ctime2: 0
+        ctime1: 54548
+        ctime2: 65341
         ctime3: 0
         ctime4: 0
         ctime5: 0
@@ -15656,7 +15657,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_NumColorKeys: 2
+        m_NumColorKeys: 3
         m_NumAlphaKeys: 2
       minGradient:
         serializedVersion: 2
@@ -15808,7 +15809,8 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 21300000, guid: 2d788eb1d2a7d6a4aa852b2985fd874c, type: 3}
+    - sprite: {fileID: 3265131030602708117, guid: 9c863d371378fd3499a90fb65168cbe5,
+        type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -19057,8 +19059,8 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 200
-  m_RenderMode: 4
+  m_SortingOrder: 201
+  m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
@@ -20002,7 +20004,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 26
+        scalar: 12
         minScalar: 26
         maxCurve:
           serializedVersion: 2
@@ -28543,7 +28545,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 200
+  m_SortingOrder: 201
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -28683,7 +28685,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 0.5
-      minScalar: 0.15
+      minScalar: 0.2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -29360,7 +29362,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 35
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -33273,7 +33275,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 200
+  m_SortingOrder: 201
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
