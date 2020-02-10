@@ -639,6 +639,24 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
+    public void CurrentCharacterStartDefending(ControllerType playerController)
+    {
+        if (CurrentSelectedCharacters[playerController].Character != null)
+        {
+            CurrentSelectedCharacters[playerController].Character.StartDefending();
+        }
+    }
+
+    public void CurrentCharacterStopDefending(ControllerType playerController)
+    {
+        if (CurrentSelectedCharacters[playerController].Character != null)
+        {
+            CurrentSelectedCharacters[playerController].Character.StopDefending();
+        }
+    }
+
+
+
     #endregion
 
     #region Mobile Input
@@ -655,25 +673,19 @@ public class BattleManagerScript : MonoBehaviour
     #endregion
 
 
-    public void CurrentCharacterStartDefending(ControllerType playerController)
+    public void RecruitCharFromWave(CharacterNameType characterID)
     {
-        if(CurrentSelectedCharacters[playerController].Character != null)
-        {
-            CurrentSelectedCharacters[playerController].Character.StartDefending();
-        }
+        CharacterType_Script recruitableChar = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == characterID).FirstOrDefault() as CharacterType_Script;
+        WaveManagerScript.Instance.WaveCharcters.Remove(recruitableChar);
+        AllCharactersOnField.Add(recruitableChar);
+        recruitableChar.UMS.Facing = FacingType.Right;
+        recruitableChar.UMS.isAIOn = false;
+        recruitableChar.UMS.PlayerController = AllCharactersOnField[0].UMS.PlayerController;
+        recruitableChar.UMS.Side = SideType.LeftSide;
+        recruitableChar.UMS.UnitBehaviour = UnitBehaviourType.ControlledByPlayer;
+        recruitableChar.UMS.WalkingSide = WalkingSideType.LeftSide;
+        recruitableChar.UMS.CurrentAttackType = AttackType.Particles;
     }
-
-    public void CurrentCharacterStopDefending(ControllerType playerController)
-    {
-        if (CurrentSelectedCharacters[playerController].Character != null)
-        {
-            CurrentSelectedCharacters[playerController].Character.StopDefending();
-        }
-    }
-
-    
-
-
 
     public void RestartScene()
     {
