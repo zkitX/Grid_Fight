@@ -52,9 +52,9 @@ public class ParticleManagerScript : MonoBehaviour
         }
     }
 
-    public GameObject FireParticlesInPosition(AttackParticleTypes pType, AttackParticlePhaseTypes ParticleType, Vector3 pos, SideType side)
+    public GameObject FireParticlesInPosition(AttackParticleTypes pType, AttackParticlePhaseTypes particleType, Vector3 pos, SideType side)
     {
-        using (FiredAttackParticle psToFire = AttackParticlesFired.Where(r => r.ParticleType == ParticleType && r.AttackParticle == pType && !r.PS.gameObject.activeInHierarchy).FirstOrDefault())
+        using (FiredAttackParticle psToFire = AttackParticlesFired.Where(r => r.ParticleType == particleType && r.AttackParticle == pType && !r.PS.gameObject.activeInHierarchy).FirstOrDefault())
         {
             if (psToFire != null)
             {
@@ -67,30 +67,12 @@ public class ParticleManagerScript : MonoBehaviour
             {
                 using (DisposableGameObjectClass ps = new DisposableGameObjectClass(null))
                 {
-                    switch (ParticleType)
-                    {
-                        case AttackParticlePhaseTypes.Cast:
-                            ps.BaseGO = ListOfAttckParticles.Where(r => r.PSType == pType).First().CastPS;
-                            break;
-                        case AttackParticlePhaseTypes.Attack:
-                            ps.BaseGO = ListOfAttckParticles.Where(r => r.PSType == pType).First().AttackPS;
-                            break;
-                        case AttackParticlePhaseTypes.Effect:
-                            ps.BaseGO = ListOfAttckParticles.Where(r => r.PSType == pType).First().EffectPS;
-                            break;
-                        case AttackParticlePhaseTypes.Charging:
-                            ps.BaseGO = ListOfAttckParticles.Where(r => r.PSType == pType).First().CastLoopPS;
-                            break;
-                        case AttackParticlePhaseTypes.CastActivation:
-                            ps.BaseGO = ListOfAttckParticles.Where(r => r.PSType == pType).First().CastActivationPS;
-                            break;
-                    }
+                    ps.BaseGO = GetParticleFromSO(particleType, pType);
                     using (DisposableGameObjectClass go = new DisposableGameObjectClass(null))
                     {
                         go.BaseGO = Instantiate(ps.BaseGO, pos, Quaternion.identity, Container);
-                        //go.BaseGO.transform.localScale = side == SideType.RightSide ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
                         go.BaseGO.SetActive(true);
-                        AttackParticlesFired.Add(new FiredAttackParticle(go.BaseGO, pType, ParticleType));
+                        AttackParticlesFired.Add(new FiredAttackParticle(go.BaseGO, pType, particleType));
                         return go.BaseGO;
                     }
 
@@ -103,10 +85,10 @@ public class ParticleManagerScript : MonoBehaviour
     }
 
 
-    public GameObject FireParticlesInTransform(AttackParticleTypes pType, AttackParticlePhaseTypes ParticleType, Transform parent, SideType side, bool particlesVisible)
+    public GameObject FireParticlesInTransform(AttackParticleTypes pType, AttackParticlePhaseTypes particleType, Transform parent, SideType side, bool particlesVisible)
     {
         //pType = AttackParticleTypes.Test_Mesh;
-        using (FiredAttackParticle psToFire = AttackParticlesFired.Where(r => r.ParticleType == ParticleType && r.AttackParticle == pType && !r.PS.gameObject.activeInHierarchy).FirstOrDefault())
+        using (FiredAttackParticle psToFire = AttackParticlesFired.Where(r => r.ParticleType == particleType && r.AttackParticle == pType && !r.PS.gameObject.activeInHierarchy).FirstOrDefault())
         {
             if (psToFire != null)
             {
@@ -120,37 +102,44 @@ public class ParticleManagerScript : MonoBehaviour
             {
                 using (DisposableGameObjectClass ps = new DisposableGameObjectClass(null))
                 {
-                    switch (ParticleType)
-                    {
-                        case AttackParticlePhaseTypes.Cast:
-                            ps.BaseGO = ListOfAttckParticles.Where(r => r.PSType == pType).First().CastPS;
-                            break;
-                        case AttackParticlePhaseTypes.Attack:
-                            ps.BaseGO = ListOfAttckParticles.Where(r => r.PSType == pType).First().AttackPS;
-                            break;
-                        case AttackParticlePhaseTypes.Effect:
-                            ps.BaseGO = ListOfAttckParticles.Where(r => r.PSType == pType).First().EffectPS;
-                            break;
-                    }
+                    ps.BaseGO = GetParticleFromSO(particleType, pType);
                     using (DisposableGameObjectClass go = new DisposableGameObjectClass(null))
                     {
 
                         go.BaseGO = Instantiate(ps.BaseGO, parent.position, parent.rotation, parent);
                         go.BaseGO.transform.localPosition = Vector3.zero;
-                        //go.BaseGO.transform.localScale = side == SideType.RightSide ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
                         go.BaseGO.SetActive(particlesVisible);//particlesVisible
-                        AttackParticlesFired.Add(new FiredAttackParticle(go.BaseGO, pType, ParticleType));
+                        AttackParticlesFired.Add(new FiredAttackParticle(go.BaseGO, pType, particleType));
                         return go.BaseGO;
                     }
                 }
             }
         }
-
-
-
-            
-       
     }
+
+
+    private GameObject GetParticleFromSO(AttackParticlePhaseTypes particleType, AttackParticleTypes pType)
+    {
+        switch (particleType)
+        {
+            case AttackParticlePhaseTypes.CastRight:
+                return ListOfAttckParticles.Where(r => r.PSType == pType).First().CastRightPS;
+            case AttackParticlePhaseTypes.EffectRight:
+                return ListOfAttckParticles.Where(r => r.PSType == pType).First().ImpactRightPS;
+            case AttackParticlePhaseTypes.CastLeft:
+                return ListOfAttckParticles.Where(r => r.PSType == pType).First().CastLeftPS;
+            case AttackParticlePhaseTypes.AttackLeft:
+                return ListOfAttckParticles.Where(r => r.PSType == pType).First().BulletLeftPS;
+            case AttackParticlePhaseTypes.EffectLeft:
+                return ListOfAttckParticles.Where(r => r.PSType == pType).First().ImpactLeftPS;
+            case AttackParticlePhaseTypes.Charging:
+                return ListOfAttckParticles.Where(r => r.PSType == pType).First().CastLoopPS;
+            case AttackParticlePhaseTypes.CastActivation:
+                return ListOfAttckParticles.Where(r => r.PSType == pType).First().CastActivationPS;
+        }
+        return null;
+    }
+
 
 
     public GameObject GetParticle(ParticlesType particle)

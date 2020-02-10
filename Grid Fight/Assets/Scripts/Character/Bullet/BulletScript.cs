@@ -249,7 +249,7 @@ public class BulletScript : MonoBehaviour
         if(!Dead)
         {
             //fire the Effect
-            GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Effect, pos, Side);
+            GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.EffectLeft, pos, Side);
             LayerParticleSelection lps = effect.GetComponent<LayerParticleSelection>();
             if (lps != null)
             {

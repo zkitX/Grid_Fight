@@ -31,7 +31,7 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
 
     private IEnumerator LevelLoader()
     {
-        while (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "BattleScene")
+        while (!UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Contains("BattleScene"))
         {
             yield return null;
         }

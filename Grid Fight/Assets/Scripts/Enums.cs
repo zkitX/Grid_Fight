@@ -369,7 +369,12 @@ public enum BaseCharType
     Stage04_BossGirl_Flower_Script = 2,
     Stage04_BossGirl_Script = 3,
     Stage04_BossMonster_Flower_Script = 4,
-    Stage04_BossMonster_Script = 5
+    Stage04_BossMonster_Script = 5,
+    Stage00_BossOctopus = 6,
+    Stage00_BossOctopus_Head = 7,
+    Stage00_BossOctopus_Tentacles = 8,
+    Stage00_BossOctopus_Girl = 9
+
 }
 
 
@@ -416,9 +421,11 @@ public enum AttackParticleTypes
 
 public enum AttackParticlePhaseTypes
 {
-    Cast,
-    Attack,
-    Effect,
+    CastRight,
+    EffectRight,
+    CastLeft,
+    AttackLeft,
+    EffectLeft,
     Charging,
     CastActivation
 }
@@ -475,8 +482,6 @@ public enum RelationshipBetweenElements
     VeryWeak_2 = 7,
     VeryWeak_3 = 8,
     ExtremelyWeak = 9,
-    
-   
 }
 
 
@@ -508,7 +513,10 @@ public enum CharacterNameType
     Stage00_Character_Valley = 20,
     Stage00_Character_Forest = 21,
     Stage00_Character_Desert = 22,
-    Stage00_Boss = 27,
+    Stage00_BossOctopus = 27,
+    Stage00_BossOctopus_Head = 28,
+    Stage00_BossOctopus_Tentacles = 29,
+    Stage00_BossOctopus_Girl = 30,
     Stage04_Minion_Mountain = 0,
     Stage04_Minion_Desert = 1,
     Stage04_Minion_Forest = 2,

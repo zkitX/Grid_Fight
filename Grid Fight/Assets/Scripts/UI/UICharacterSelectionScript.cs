@@ -57,7 +57,7 @@ public class UICharacterSelectionScript : MonoBehaviour
 
     public void SetupCharacterIcons(List<UIIconClass> listOfIcons)
     {
-        foreach (UIIconClass item in listOfIcons)
+     /*   foreach (UIIconClass item in listOfIcons)
         {
             item.CharIcon.CurrentCharIsDeadEvent += CharIcon_CurrentCharIsDeadEvent;
             switch (item.CharacterSelection)
@@ -92,7 +92,7 @@ public class UICharacterSelectionScript : MonoBehaviour
                     Left.sprite = item.CharIcon.CharInfo.CharacterIcon;
                     break;
             }
-        }
+        }*/
     }
 
     private void CharIcon_CurrentCharIsDeadEvent(CharacterNameType cName, List<ControllerType> playerController, SideType side)

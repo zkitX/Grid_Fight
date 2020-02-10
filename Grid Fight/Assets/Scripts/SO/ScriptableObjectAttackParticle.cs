@@ -7,9 +7,11 @@ using UnityEngine;
 public class ScriptableObjectAttackParticle : ScriptableObject
 {
     public AttackParticleTypes PSType;
-    public GameObject CastPS;
-    public GameObject AttackPS;
-    public GameObject EffectPS;
+    public GameObject CastRightPS;
+    public GameObject ImpactRightPS;
+    public GameObject CastLeftPS;
+    public GameObject BulletLeftPS;
+    public GameObject ImpactLeftPS;
     public GameObject CastLoopPS;
     public GameObject CastActivationPS;
 }
