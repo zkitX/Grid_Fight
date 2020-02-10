@@ -351,26 +351,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             CharInfo.Stamina -= CharInfo.PowerfulAttac.Stamina_Cost_Atk;
         }
-        //StartCoroutine(CastingLifeChecker(NextAttackLevel > CharacterLevelType.Novice ? true : false, cast));
-    }
-
-    private IEnumerator CastingLifeChecker(bool isASpecial, GameObject cast)
-    {
-        bool complete = false;
-
-        while (!complete)
-        {
-            if (currentAttackPhase != AttackPhasesType.Cast && currentAttackPhase != AttackPhasesType.Bullet)
-            {
-                cast.GetComponentsInChildren<DisableParticleScript>().ToList().ForEach(r => r.ResetParticle());
-                complete = true;
-            }
-            else if(currentAttackPhase == AttackPhasesType.End)
-            {
-                complete = true;
-            }
-            yield return null;
-        }
     }
 
     //Create and set up the basic info for the bullet
@@ -468,7 +448,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         if ((CharInfo.Health > 0 && !isMoving && IsOnField && SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving) || BattleManagerScript.Instance.VFXScene)
         {
-            if (currentAttackPhase == AttackPhasesType.Cast && currentAttackPhase == AttackPhasesType.Bullet)
+            if (currentAttackPhase == AttackPhasesType.Cast_Powerful && currentAttackPhase == AttackPhasesType.Bullet_Powerful)
             {
                 return;
             }
@@ -793,7 +773,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public void ArrivingEvent()
     {
         CameraManagerScript.Instance.CameraShake();
-        SFXmanager.Instance.PlayOnce(SFXmanager.Instance.ArrivingImpact);
         UMS.ArrivingParticle.transform.position = transform.position;
         UMS.ArrivingParticle.SetActive(true);
     }
@@ -819,9 +798,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             return;
         }
 
-        if (animState != CharacterAnimationStateType.Atk && SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk && currentAttackPhase <= AttackPhasesType.Cast)
+        if (currentAttackPhase == AttackPhasesType.Bullet_Powerful || currentAttackPhase == AttackPhasesType.Cast_Powerful)
         {
-            currentAttackPhase = AttackPhasesType.End;
+            return;
         }
 
         if (!animState.ToString().Contains("Atk"))
@@ -875,7 +854,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             if(SpineAnim.GetAnimTime() < CharInfo.DefenceStats.Invulnerability)
             {
                 damage = 0;
-                SFXmanager.Instance.PlayOnce(SFXmanager.Instance.DefenceSpecial);
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldTotalDefence);
                 go.transform.position = transform.position;
                 
@@ -883,7 +861,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             else
             {
                 damage = damage - CharInfo.DefenceStats.BaseDefence;
-                SFXmanager.Instance.PlayOnce(SFXmanager.Instance.DefenceNormal);
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldNormal);
                 go.transform.position = transform.position;
 

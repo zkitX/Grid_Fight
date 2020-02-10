@@ -164,7 +164,7 @@ public class InputController : MonoBehaviour
 
     public int PlayersNumber;
     public List<Player> players = new List<Player>(); // The Rewired Player
-    public Vector2 LeftJoystic, RightJoystic; //Joysticks movement 
+    public Vector2 Joystic; //Joysticks movement 
     void Awake()
     {
         Instance = this;
@@ -183,22 +183,44 @@ public class InputController : MonoBehaviour
             players[i].AddInputEventDelegate(OnButtonDown, UpdateLoopType.Update, InputActionEventType.ButtonJustPressed);
             players[i].AddInputEventDelegate(OnButtonPress, UpdateLoopType.Update, InputActionEventType.ButtonPressed);
             players[i].AddInputEventDelegate(OnButtonUp, UpdateLoopType.Update, InputActionEventType.ButtonJustReleased);
-
+            players[i].AddInputEventDelegate(OnButtonUp, UpdateLoopType.Update, InputActionEventType.AxisActive);
         }
         
     }
 
-    private void Update()
+    void OnAxisUpdate(InputActionEventData data)
     {
-        //Looking for all the possible players input
-        foreach (Player item in players)
+        InputButtonType buttonInput = (InputButtonType)System.Enum.Parse(typeof(InputButtonType), data.actionName);
+        float x = (buttonInput == InputButtonType.Left_Move_Horizontal || buttonInput == InputButtonType.Right_Move_Horizontal) ? data.GetAxis() : 0;
+        float y = (buttonInput == InputButtonType.Left_Move_Vertical || buttonInput == InputButtonType.Right_Move_Vertical) ? data.GetAxis() : 0;
+        Joystic = new Vector2(x,y);
+        if (LeftJoystickUsedEvent != null)
         {
-            //ButtonsUp(item);
-            //ButtonsPress(item);
-            //ButtonsDown(item);
-            JoystickMovement(item);
+            if (Mathf.Abs(Joystic.x) > Mathf.Abs(Joystic.y))
+            {
+                if (Joystic.x > 0)
+                {
+                    LeftJoystickUsedEvent(data.playerId, InputDirection.Right);
+                }
+                else
+                {
+                    LeftJoystickUsedEvent(data.playerId, InputDirection.Left);
+                }
+            }
+            else
+            {
+                if (Joystic.y > 0)
+                {
+                    LeftJoystickUsedEvent(data.playerId, InputDirection.Up);
+                }
+                else
+                {
+                    LeftJoystickUsedEvent(data.playerId, InputDirection.Down);
+                }
+            }
         }
     }
+
 
     void OnButtonDown(InputActionEventData data)
     {
@@ -206,70 +228,71 @@ public class InputController : MonoBehaviour
         switch (buttonInput)
         {
             case InputButtonType.A:
-                ButtonADownEvent(data.playerId);
+                ButtonADownEvent?.Invoke(data.playerId);
+
                 break;
             case InputButtonType.B:
-                ButtonBDownEvent(data.playerId);
+                ButtonBDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.X:
-                ButtonXDownEvent(data.playerId);
+                ButtonXDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Y:
-                ButtonYDownEvent(data.playerId);
+                ButtonYDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Left:
-                ButtonLeftDownEvent(data.playerId);
+                ButtonLeftDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Right:
-                ButtonRightDownEvent(data.playerId);
+                ButtonRightDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Up:
-                ButtonUpDownEvent(data.playerId);
+                ButtonUpDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Down:
-                ButtonDownDownEvent(data.playerId);
+                ButtonDownDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.ZL:
-                ButtonZLDownEvent(data.playerId);
+                ButtonZLDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.L:
-                ButtonLDownEvent(data.playerId);
+                ButtonLDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.ZR:
-                ButtonZRDownEvent(data.playerId);
+                ButtonZRDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.R:
-                ButtonRDownEvent(data.playerId);
+                ButtonRDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Plus:
-                ButtonPlusDownEvent(data.playerId);
+                ButtonPlusDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Minus:
-                ButtonMinusDownEvent(data.playerId);
+                ButtonMinusDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Home:
-                ButtonHomeDownEvent(data.playerId);
+                ButtonHomeDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Capture:
-                ButtonCaptureDownEvent(data.playerId);
+                ButtonCaptureDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Left_SL:
-                ButtonLeftSLDownEvent(data.playerId);
+                ButtonLeftSLDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Right_SL:
-                ButtonRightSLDownEvent(data.playerId);
+                ButtonRightSLDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Left_SR:
-                ButtonLeftSRDownEvent(data.playerId);
+                ButtonLeftSRDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Right_SR:
-                ButtonRightSRDownEvent(data.playerId);
+                ButtonRightSRDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Left_Stick:
-                ButtonLeftStickDownEvent(data.playerId);
+                ButtonLeftStickDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Right_Stick:
-                ButtonRightStickDownEvent(data.playerId);
+                ButtonRightStickDownEvent?.Invoke(data.playerId);
                 break;
         }
     }
@@ -281,70 +304,70 @@ public class InputController : MonoBehaviour
         switch (buttonInput)
         {
             case InputButtonType.A:
-                ButtonAPressedEvent(data.playerId);
+                ButtonAPressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.B:
-                ButtonBPressedEvent(data.playerId);
+                ButtonBPressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.X:
-                ButtonXPressedEvent(data.playerId);
+                ButtonXPressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Y:
-                ButtonYPressedEvent(data.playerId);
+                ButtonYPressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Left:
-                ButtonLeftPressedEvent(data.playerId);
+                ButtonLeftPressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Right:
-                ButtonRightPressedEvent(data.playerId);
+                ButtonRightPressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Up:
-                ButtonUpPressedEvent(data.playerId);
+                ButtonUpPressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Down:
-                ButtonDownPressedEvent(data.playerId);
+                ButtonDownPressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.ZL:
-                ButtonZLPressedEvent(data.playerId);
+                ButtonZLPressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.L:
-                ButtonLPressedEvent(data.playerId);
+                ButtonLPressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.ZR:
-                ButtonZRPressedEvent(data.playerId);
+                ButtonZRPressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.R:
-                ButtonRPressedEvent(data.playerId);
+                ButtonRPressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Plus:
-                ButtonPlusPressedEvent(data.playerId);
+                ButtonPlusPressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Minus:
-                ButtonMinusPressedEvent(data.playerId);
+                ButtonMinusPressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Home:
-                ButtonHomePressedEvent(data.playerId);
+                ButtonHomePressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Capture:
-                ButtonCapturePressedEvent(data.playerId);
+                ButtonCapturePressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Left_SL:
-                ButtonLeftSLPressedEvent(data.playerId);
+                ButtonLeftSLPressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Right_SL:
-                ButtonRightSLPressedEvent(data.playerId);
+                ButtonRightSLPressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Left_SR:
-                ButtonLeftSRPressedEvent(data.playerId);
+                ButtonLeftSRPressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Right_SR:
-                ButtonRightSRPressedEvent(data.playerId);
+                ButtonRightSRPressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Left_Stick:
-                ButtonLeftStickPressedEvent(data.playerId);
+                ButtonLeftStickPressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Right_Stick:
-                ButtonRightStickPressedEvent(data.playerId);
+                ButtonRightStickPressedEvent?.Invoke(data.playerId);
                 break;
         }
     }
@@ -357,70 +380,70 @@ public class InputController : MonoBehaviour
         switch (buttonInput)
         {
             case InputButtonType.A:
-                ButtonAUpEvent(data.playerId);
+                ButtonAUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.B:
-                ButtonBUpEvent(data.playerId);
+                ButtonBUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.X:
-                ButtonXUpEvent(data.playerId);
+                ButtonXUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Y:
-                ButtonYUpEvent(data.playerId);
+                ButtonYUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Left:
-                ButtonLeftUpEvent(data.playerId);
+                ButtonLeftUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Right:
-                ButtonRightUpEvent(data.playerId);
+                ButtonRightUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Up:
-                ButtonUpUpEvent(data.playerId);
+                ButtonUpUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Down:
-                ButtonDownUpEvent(data.playerId);
+                ButtonDownUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.ZL:
-                ButtonZLUpEvent(data.playerId);
+                ButtonZLUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.L:
-                ButtonLUpEvent(data.playerId);
+                ButtonLUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.ZR:
-                ButtonZRUpEvent(data.playerId);
+                ButtonZRUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.R:
-                ButtonRUpEvent(data.playerId);
+                ButtonRUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Plus:
-                ButtonPlusUpEvent(data.playerId);
+                ButtonPlusUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Minus:
-                ButtonMinusUpEvent(data.playerId);
+                ButtonMinusUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Home:
-                ButtonHomeUpEvent(data.playerId);
+                ButtonHomeUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Capture:
-                ButtonCaptureUpEvent(data.playerId);
+                ButtonCaptureUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Left_SL:
-                ButtonLeftSLUpEvent(data.playerId);
+                ButtonLeftSLUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Right_SL:
-                ButtonRightSLUpEvent(data.playerId);
+                ButtonRightSLUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Left_SR:
-                ButtonLeftSRUpEvent(data.playerId);
+                ButtonLeftSRUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Right_SR:
-                ButtonRightSRUpEvent(data.playerId);
+                ButtonRightSRUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Left_Stick:
-                ButtonLeftStickUpEvent(data.playerId);
+                ButtonLeftStickUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.Right_Stick:
-                ButtonRightStickUpEvent(data.playerId);
+                ButtonRightStickUpEvent?.Invoke(data.playerId);
                 break;
         }
        
@@ -445,621 +468,6 @@ public class InputController : MonoBehaviour
            // Operation.mode = Operation.OperationMode.Console
         }
     }*/
-
-    //Check for Joysticks movement
-    private void JoystickMovement(Player currentPlayer)
-    {
-        LeftJoystic = new Vector2(currentPlayer.GetAxis("Left_Move_Horizontal"), currentPlayer.GetAxis("Left_Move_Vertical"));
-        if (LeftJoystic != Vector2.zero)
-        {
-            //Debug.Log(player.GetButtonDown("Left Joystic"));
-            if (LeftJoystickUsedEvent != null)
-            {
-                if (Mathf.Abs(LeftJoystic.x) > Mathf.Abs(LeftJoystic.y))
-                {
-                    if (LeftJoystic.x > 0)
-                    {
-                        LeftJoystickUsedEvent(currentPlayer.id ,InputDirection.Right);
-                    }
-                    else
-                    {
-                        LeftJoystickUsedEvent(currentPlayer.id ,InputDirection.Left);
-                    }
-                }
-                else
-                {
-                    if (LeftJoystic.y > 0)
-                    {
-                        LeftJoystickUsedEvent(currentPlayer.id ,InputDirection.Up);
-                    }
-                    else
-                    {
-                        LeftJoystickUsedEvent(currentPlayer.id ,InputDirection.Down);
-                    }
-                }
-            }
-        }
-        RightJoystic = new Vector2(currentPlayer.GetAxis("Right_Mov_ Horizontal"), currentPlayer.GetAxis("Right_Move_Vertical"));
-        if (RightJoystic != Vector2.zero)
-        {
-            //Debug.Log(player.GetButtonDown("Right Joystic"));
-            if (RightJoystickUsedEvent != null)
-            {
-
-                if (Mathf.Abs(RightJoystic.x) > Mathf.Abs(RightJoystic.y))
-                {
-                    if (RightJoystic.x > 0)
-                    {
-                        RightJoystickUsedEvent(currentPlayer.id, InputDirection.Right);
-                    }
-                    else
-                    {
-                        RightJoystickUsedEvent(currentPlayer.id, InputDirection.Left);
-                    }
-                }
-                else
-                {
-                    if (RightJoystic.y > 0)
-                    {
-                        RightJoystickUsedEvent(currentPlayer.id, InputDirection.Up);
-                    }
-                    else
-                    {
-                        RightJoystickUsedEvent(currentPlayer.id, InputDirection.Down);
-                    }
-                }
-            }
-        }
-    }
-
-
-   
-
-
-    //Check for Buttons Up
-    private void ButtonsUp(Player currentPlayer)
-    {
-        if (currentPlayer.GetButtonUp("A"))
-        {
-            // Debug.Log("Up A");
-            if (ButtonAUpEvent != null)
-            {
-                ButtonAUpEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonUp("B"))
-        {
-            //Debug.Log(player.GetButtonDown("B"));
-            if (ButtonBUpEvent != null)
-            {
-                ButtonBUpEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonUp("X"))
-        {
-            //Debug.Log(player.GetButtonDown("X"));
-            if (ButtonXUpEvent != null)
-            {
-                ButtonXUpEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonUp("Y"))
-        {
-            //Debug.Log(player.GetButtonDown("Y"));
-            if (ButtonYUpEvent != null)
-            {
-                ButtonYUpEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonUp("R"))
-        {
-            //Debug.Log(player.GetButtonDown("R"));
-            if (ButtonRUpEvent != null)
-            {
-                ButtonRUpEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonUp("ZR"))
-        {
-            //Debug.Log(player.GetButtonDown("ZR"));
-            if (ButtonZRUpEvent != null)
-            {
-                ButtonZRUpEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonUp("L"))
-        {
-            //Debug.Log(player.GetButtonDown("L"));
-            if (ButtonLUpEvent != null)
-            {
-                ButtonLUpEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonUp("ZL"))
-        {
-            //Debug.Log(player.GetButtonDown("ZL"));
-            if (ButtonZLUpEvent != null)
-            {
-                ButtonZLUpEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonUp("Right"))
-        {
-            //Debug.Log(player.GetButtonDown("Right"));
-            if (ButtonRightUpEvent != null)
-            {
-                ButtonRightUpEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonUp("Up"))
-        {
-            //Debug.Log(player.GetButtonDown("Up"));
-            if (ButtonUpUpEvent != null)
-            {
-                ButtonUpUpEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonUp("Left"))
-        {
-            //Debug.Log(player.GetButtonDown("Left"));
-            if (ButtonLeftUpEvent != null)
-            {
-                ButtonLeftUpEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonUp("Down"))
-        {
-            //Debug.Log(player.GetButtonDown("Down"));
-            if (ButtonDownUpEvent != null)
-            {
-                ButtonDownUpEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonUp("Plus"))
-        {
-            //Debug.Log(player.GetButtonDown("Plus"));
-            if (ButtonPlusUpEvent != null)
-            {
-                ButtonPlusUpEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonUp("Minus"))
-        {
-            //Debug.Log(player.GetButtonDown("Plus"));
-            if (ButtonMinusUpEvent != null)
-            {
-                ButtonMinusUpEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonUp("Home"))
-        {
-            //Debug.Log(player.GetButtonDown("L"));
-            if (ButtonHomeUpEvent != null)
-            {
-                ButtonHomeUpEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonUp("Capture"))
-        {
-            //Debug.Log(player.GetButtonDown("ZL"));
-            if (ButtonCaptureUpEvent != null)
-            {
-                ButtonCaptureUpEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonUp("Right Stick"))
-        {
-            //Debug.Log(player.GetButtonDown("Right"));
-            if (ButtonRightStickUpEvent != null)
-            {
-                ButtonRightStickUpEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonUp("Left Stick"))
-        {
-            //Debug.Log(player.GetButtonDown("Up"));
-            if (ButtonLeftStickUpEvent != null)
-            {
-                ButtonLeftStickUpEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonUp("Left SL"))
-        {
-            //Debug.Log(player.GetButtonDown("Left"));
-            if (ButtonLeftSLUpEvent != null)
-            {
-                ButtonLeftSLUpEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonUp("Right SL"))
-        {
-            //Debug.Log(player.GetButtonDown("Down"));
-            if (ButtonRightSLUpEvent != null)
-            {
-                ButtonRightSLUpEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonUp("Left SR"))
-        {
-            //Debug.Log(player.GetButtonDown("Plus"));
-            if (ButtonLeftSRUpEvent != null)
-            {
-                ButtonLeftSRUpEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonUp("Right SR"))
-        {
-            //Debug.Log(player.GetButtonDown("Plus"));
-            if (ButtonRightSRUpEvent != null)
-            {
-                ButtonRightSRUpEvent(currentPlayer.id);
-            }
-        }
-    }
-    //Check for Buttons Press
-    private void ButtonsPress(Player currentPlayer)
-    {
-        if (currentPlayer.GetButton("A"))
-        {
-            // Debug.Log("A");
-            if (ButtonAPressedEvent != null)
-            {
-                ButtonAPressedEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButton("B"))
-        {
-            //Debug.Log(player.GetButtonDown("B"));
-            if (ButtonBPressedEvent != null)
-            {
-                ButtonBPressedEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButton("X"))
-        {
-            //Debug.Log(player.GetButtonDown("X"));
-            if (ButtonXPressedEvent != null)
-            {
-                ButtonXPressedEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButton("Y"))
-        {
-            //Debug.Log(player.GetButtonDown("Y"));
-            if (ButtonYPressedEvent != null)
-            {
-                ButtonYPressedEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButton("R"))
-        {
-            //Debug.Log(player.GetButtonDown("R"));
-            if (ButtonRPressedEvent != null)
-            {
-                ButtonRPressedEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButton("ZR"))
-        {
-            //Debug.Log(player.GetButtonDown("ZR"));
-            if (ButtonZRPressedEvent != null)
-            {
-                ButtonZRPressedEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButton("L"))
-        {
-            //Debug.Log(player.GetButtonDown("L"));
-            if (ButtonLPressedEvent != null)
-            {
-                ButtonLPressedEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButton("ZL"))
-        {
-            //Debug.Log(player.GetButtonDown("ZL"));
-            if (ButtonZLPressedEvent != null)
-            {
-                ButtonZLPressedEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButton("Right"))
-        {
-            //Debug.Log(player.GetButtonDown("Right"));
-            if (ButtonRightPressedEvent != null)
-            {
-                ButtonRightPressedEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButton("Up"))
-        {
-            //Debug.Log(player.GetButtonDown("Up"));
-            if (ButtonUpPressedEvent != null)
-            {
-                ButtonUpPressedEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButton("Left"))
-        {
-            //Debug.Log(player.GetButtonDown("Left"));
-            if (ButtonLeftPressedEvent != null)
-            {
-                ButtonLeftPressedEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButton("Down"))
-        {
-            //Debug.Log(player.GetButtonDown("Down"));
-            if (ButtonDownPressedEvent != null)
-            {
-                ButtonDownPressedEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButton("Plus"))
-        {
-            //Debug.Log(player.GetButtonDown("Plus"));
-            if (ButtonPlusPressedEvent != null)
-            {
-                ButtonPlusPressedEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButton("Minus"))
-        {
-            //Debug.Log(player.GetButtonDown("Plus"));
-            if (ButtonPlusPressedEvent != null)
-            {
-                ButtonMinusPressedEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButton("Home"))
-        {
-            //Debug.Log(player.GetButtonDown("L"));
-            if (ButtonHomePressedEvent != null)
-            {
-                ButtonHomePressedEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButton("Capture"))
-        {
-            //Debug.Log(player.GetButtonDown("ZL"));
-            if (ButtonCapturePressedEvent != null)
-            {
-                ButtonCapturePressedEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButton("Right Stick"))
-        {
-            //Debug.Log(player.GetButtonDown("Right"));
-            if (ButtonRightStickPressedEvent != null)
-            {
-                ButtonRightStickPressedEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButton("Left Stick"))
-        {
-            //Debug.Log(player.GetButtonDown("Up"));
-            if (ButtonLeftStickPressedEvent != null)
-            {
-                ButtonLeftStickPressedEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButton("Left SL"))
-        {
-            //Debug.Log(player.GetButtonDown("Left"));
-            if (ButtonLeftSLPressedEvent != null)
-            {
-                ButtonLeftSLPressedEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButton("Right SL"))
-        {
-            //Debug.Log(player.GetButtonDown("Down"));
-            if (ButtonRightSLPressedEvent != null)
-            {
-                ButtonRightSLPressedEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButton("Left SR"))
-        {
-            //Debug.Log(player.GetButtonDown("Plus"));
-            if (ButtonLeftSRPressedEvent != null)
-            {
-                ButtonLeftSRPressedEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButton("Right SR"))
-        {
-            //Debug.Log(player.GetButtonDown("Plus"));
-            if (ButtonRightSRPressedEvent != null)
-            {
-                ButtonRightSRPressedEvent(currentPlayer.id);
-            }
-        }
-
-
-    }
-    //Check for Buttons Down
-    private void ButtonsDown(Player currentPlayer)
-    {
-        if (currentPlayer.GetButtonDown("A"))
-        {
-            // Debug.Log("Down A");
-            if (ButtonADownEvent != null)
-            {
-                //ListOfButtons.Add(new ButtonStateClass("A", ButtonClickStateType.Down));
-                ButtonADownEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonDown("B"))
-        {
-            //Debug.Log(player.GetButtonDown("B"));
-            if (ButtonBDownEvent != null)
-            {
-                ButtonBDownEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonDown("X"))
-        {
-            //Debug.Log(player.GetButtonDown("X"));
-            if (ButtonXDownEvent != null)
-            {
-                ButtonXDownEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonDown("Y"))
-        {
-            //Debug.Log(player.GetButtonDown("Y"));
-            if (ButtonYDownEvent != null)
-            {
-                ButtonYDownEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonDown("R"))
-        {
-            //Debug.Log(player.GetButtonDown("R"));
-            if (ButtonRDownEvent != null)
-            {
-                ButtonRDownEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonDown("ZR"))
-        {
-            //Debug.Log(player.GetButtonDown("ZR"));
-            if (ButtonZRDownEvent != null)
-            {
-                ButtonZRDownEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonDown("L"))
-        {
-            //Debug.Log(player.GetButtonDown("L"));
-            if (ButtonLDownEvent != null)
-            {
-                ButtonLDownEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonDown("ZL"))
-        {
-            //Debug.Log(player.GetButtonDown("ZL"));
-            if (ButtonZLDownEvent != null)
-            {
-                ButtonZLDownEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonDown("Right"))
-        {
-            //Debug.Log(player.GetButtonDown("Right"));
-            if (ButtonRightDownEvent != null)
-            {
-                ButtonRightDownEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonDown("Up"))
-        {
-            //Debug.Log(player.GetButtonDown("Up"));
-            if (ButtonUpDownEvent != null)
-            {
-                ButtonUpDownEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonDown("Left"))
-        {
-            //Debug.Log(player.GetButtonDown("Left"));
-            if (ButtonLeftDownEvent != null)
-            {
-                ButtonLeftDownEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonDown("Down"))
-        {
-            //Debug.Log(player.GetButtonDown("Down"));
-            if (ButtonDownDownEvent != null)
-            {
-                ButtonDownDownEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonDown("Plus"))
-        {
-            //Debug.Log(player.GetButtonDown("Plus"));
-            if (ButtonPlusDownEvent != null)
-            {
-                ButtonPlusDownEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonDown("Minus"))
-        {
-            //Debug.Log(player.GetButtonDown("Plus"));
-            if (ButtonPlusDownEvent != null)
-            {
-                ButtonMinusDownEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonDown("Home"))
-        {
-            //Debug.Log(player.GetButtonDown("L"));
-            if (ButtonHomeDownEvent != null)
-            {
-                ButtonHomeDownEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonDown("Capture"))
-        {
-            //Debug.Log(player.GetButtonDown("ZL"));
-            if (ButtonCaptureDownEvent != null)
-            {
-                ButtonCaptureDownEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonDown("Right Stick"))
-        {
-            //Debug.Log(player.GetButtonDown("Right"));
-            if (ButtonRightStickDownEvent != null)
-            {
-                ButtonRightStickDownEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonDown("Left Stick"))
-        {
-            //Debug.Log(player.GetButtonDown("Up"));
-            if (ButtonLeftStickDownEvent != null)
-            {
-                ButtonLeftStickDownEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonDown("Left SL"))
-        {
-            //Debug.Log(player.GetButtonDown("Left"));
-            if (ButtonLeftSLDownEvent != null)
-            {
-                ButtonLeftSLDownEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonDown("Right SL"))
-        {
-            //Debug.Log(player.GetButtonDown("Down"));
-            if (ButtonRightSLDownEvent != null)
-            {
-                ButtonRightSLDownEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonDown("Left SR"))
-        {
-            //Debug.Log(player.GetButtonDown("Plus"));
-            if (ButtonLeftSRDownEvent != null)
-            {
-                ButtonLeftSRDownEvent(currentPlayer.id);
-            }
-        }
-        if (currentPlayer.GetButtonDown("Right SR"))
-        {
-            //Debug.Log(player.GetButtonDown("Plus"));
-            if (ButtonRightSRDownEvent != null)
-            {
-                ButtonRightSRDownEvent(currentPlayer.id);
-            }
-        }
-
-    }
 
     //Applet calling
     public IEnumerator Applet(int playersNumber)

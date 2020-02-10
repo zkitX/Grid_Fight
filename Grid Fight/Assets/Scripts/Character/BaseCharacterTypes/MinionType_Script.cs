@@ -125,7 +125,7 @@ public class MinionType_Script : BaseCharacter
             sequencedAttacker = false;
             chargeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
             SetAnimation(CharacterAnimationStateType.Idle, true);
-            currentAttackPhase = AttackPhasesType.Cast;
+            currentAttackPhase = AttackPhasesType.Cast_Powerful;
             CreateAttack();
         }
         //If it does have the correct animation setup, play that charged animation
