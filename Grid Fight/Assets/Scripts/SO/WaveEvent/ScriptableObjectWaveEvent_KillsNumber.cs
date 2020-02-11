@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Wave/WaveEvent/CharDied")]
-public class ScriptableObjectWaveEvent_CharDied : ScriptableObjectWaveEvent
+[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Wave/WaveEvent/KillsNumber")]
+public class ScriptableObjectWaveEvent_KillsNumber : ScriptableObjectWaveEvent
 {
-    public ScriptableObjectWaveEvent_CharDied()
+
+    public ScriptableObjectWaveEvent_KillsNumber()
     {
-        WaveEventType = WaveEventCheckType.CharDied;
+        WaveEventType = WaveEventCheckType.KillsNumber;
     }
-    public List<CharacterNameType> CharactersID;
+    public int KillsNum;
 }

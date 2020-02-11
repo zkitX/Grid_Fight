@@ -85,8 +85,7 @@ public class SpineAnimationManager : MonoBehaviour
 
         if (completedAnim == CharacterAnimationStateType.Arriving || completedAnim.ToString().Contains("Growing"))
         {
-            CharOwner.SetAttackReady(true);
-            //CharOwner.StartAttakCo();
+            CharOwner.CharArrivedOnBattleField();
         }
         if (CurrentAnim == CharacterAnimationStateType.Reverse_Arriving)
         {

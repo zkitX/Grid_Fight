@@ -198,6 +198,12 @@ namespace Fungus
             StartCoroutine(Execute());
         }
 
+        public IEnumerator WaitForExecutionComplete()
+        {
+            yield return Execute();
+        }
+
+
         /// <summary>
         /// A coroutine method that executes all commands in the Block. Only one running instance of each Block is permitted.
         /// </summary>
