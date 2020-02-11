@@ -169,6 +169,7 @@ public class NewICharacterVitality : MonoBehaviour
             vitality.fillAmount = Mathf.Lerp(startFloat, endFloat, 1f - duration / startDuration);
             yield return null;
         }
+        if (assignedCharDetails.HealthPerc == 0f) DeselectCharacter();
     }
 
 }
