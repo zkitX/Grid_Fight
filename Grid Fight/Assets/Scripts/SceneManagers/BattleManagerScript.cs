@@ -410,7 +410,7 @@ public class BattleManagerScript : MonoBehaviour
         }
         if (!isSelected) return;
 
-        CharacterType_Script charToDeselect = CurrentSelectedCharacters.Values.Where(r => r.Character.CharInfo.CharacterID == charToDeselectName).FirstOrDefault().Character;
+        CharacterType_Script charToDeselect = CurrentSelectedCharacters.Values.Where(r => r.Character != null && r.Character.CharInfo.CharacterID == charToDeselectName).FirstOrDefault().Character;
         if (CurrentSelectedCharacters.Values.Where(r => r.Character == charToDeselect).FirstOrDefault() == null) return;
         ControllerType controller = CurrentSelectedCharacters.Where(r => r.Value.Character == charToDeselect).FirstOrDefault().Key;
         if (charToDeselect != null)
