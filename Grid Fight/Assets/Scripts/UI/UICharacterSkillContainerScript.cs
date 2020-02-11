@@ -20,7 +20,7 @@ public class UICharacterSkillContainerScript : MonoBehaviour
         //BSkill.Anim.SetBool("Active", false);
         UICharSkillScript nextAnimAvailable = BSkill;
         //ASkill.Anim.SetBool("Active", true);
-        ASkill.SkillIcon.sprite = currentSelectedChar.CharInfo.CharacterIcon;
+        //ASkill.SkillIcon.sprite = currentSelectedChar.CharInfo.CharacterIcon[0];
         foreach (CharacterType_Script item in BattleManagerScript.Instance.AllCharactersOnField.Where(r=> r != currentSelectedChar && r.UMS.Side == currentSelectedChar.UMS.Side))
         {
 

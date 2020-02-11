@@ -40,7 +40,7 @@ public class CharacterType_Script : BaseCharacter
     public override void SetUpEnteringOnBattle()
     {
         SetAnimation(CharacterAnimationStateType.Arriving);
-        SFXmanager.Instance.PlayOnce(SFXmanager.Instance.ArrivingSpawn);
+        AudioManager.Instance.PlayGeneric("Arriving_Spawn_20200108_V5");
         EventManager.Instance.AddCharacterArrival((BaseCharacter)this);
     }
 
@@ -179,24 +179,9 @@ public class CharacterType_Script : BaseCharacter
     #endregion
 
     //Used to indicate the character that is selected in the battlefield
-    public void SetCharSelected(bool isSelected,Sprite big, Sprite small, Color selectionIndicatorColorSelected)
+    public void SetCharSelected(bool isSelected, ControllerType player)
     {
-        if(isSelected)
-        {
-            UMS.IndicatorAnim.SetBool("indicatorOn", true);
-            UMS.SelectionIndicatorSprite.color = selectionIndicatorColorSelected;
-            UMS.SelectionIndicatorPlayerSmall.color = selectionIndicatorColorSelected;
-            UMS.SelectionIndicatorPlayerNumberSmall.color = selectionIndicatorColorSelected;
-            UMS.SelectionIndicatorPlayerNumberBig.sprite = big;
-            UMS.SelectionIndicatorPlayerNumberSmall.sprite = small;
-        }
-        else
-        {
-            UMS.IndicatorAnim.SetBool("indicatorOn", false);
-            UMS.SelectionIndicatorSprite.color = UMS.SelectionIndicatorColorUnselected;
-        }
-
-        
+        NewIManager.Instance.SetSelected(isSelected, player, CharInfo.CharacterID);   
     }
 
 }

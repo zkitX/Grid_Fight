@@ -4735,7 +4735,7 @@ GameObject:
   - component: {fileID: 3784529509029601200}
   - component: {fileID: -4505068983572664028}
   - component: {fileID: 34722805}
-  - component: {fileID: 4269564671291366281}
+  - component: {fileID: -8372004092196993378}
   m_Layer: 0
   m_Name: stage04-forest-cast
   m_TagString: Untagged
@@ -9682,7 +9682,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &4269564671291366281
+--- !u!114 &-8372004092196993378
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9691,10 +9691,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3784529509029601206}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 384b28258ef75d9498ed0e7b12639926, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ccd0d279f0189941889036281dbd3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Delay: 0
+  audioEmitterProfile: {fileID: 0}
+  priority: 0
+  dampenToPercent: 1
+  baseVolume: 1
+  playOnEnabled: 0
 --- !u!1 &3784529509080966857
 GameObject:
   m_ObjectHideFlags: 0

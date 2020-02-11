@@ -46,7 +46,7 @@ public class UnitManagementScript : MonoBehaviour
     public SpriteRenderer SelectionIndicatorSprite;
     public SpriteRenderer SelectionIndicatorPlayerNumberBig;
     public SpriteRenderer SelectionIndicatorPlayerNumberSmall;
-    public SpriteRenderer SelectionIndicatorPlayerSmall;
+    public SpriteRenderer SelectionIndicatorPlayerSmall; //Potentially can be removed
     public Color SelectionIndicatorColorUnselected;
     public Animator IndicatorAnim;
     public GameObject ArrivingParticle;

@@ -3577,6 +3577,7 @@ GameObject:
   - component: {fileID: 5569497367568981985}
   - component: {fileID: 88955718594870344}
   - component: {fileID: 3235210667870738332}
+  - component: {fileID: 1970652359}
   m_Layer: 5
   m_Name: Ui-Chars-UI-Version2
   m_TagString: Untagged
@@ -3667,6 +3668,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1970652359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536789593506628290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8128cb2ae42b7fa4c8d1b4d2b6da468e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonTypeB: B
+  buttonTypeA: A
+  buttonTypeX: X
+  buttonTypeY: Y
 --- !u!1 &538375711007434638
 GameObject:
   m_ObjectHideFlags: 0
@@ -7234,7 +7251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5362065723967441267
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9782,7 +9799,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6927968110778222376
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15482,6 +15499,7 @@ GameObject:
   - component: {fileID: 8299606500189452917}
   - component: {fileID: 2617600786830628063}
   - component: {fileID: 360150660126741222}
+  - component: {fileID: 2023523046}
   m_Layer: 5
   m_Name: UI-Char-02
   m_TagString: Untagged
@@ -15569,6 +15587,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2023523046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4131291804825768489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0fc68ce020f2604c8cdb6a021ab12a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assignedButton: 0
+  mapSide: 0
+  healthBar: {fileID: 2179310103624210463}
+  staminaBar: {fileID: 3276396813815032446}
+  specialBar: {fileID: 1162001939322333104}
+  selectionDiamondText: {fileID: 5246130750690514242}
+  characterIconIdle: {fileID: 3086371078284255090}
+  characterIconSelected: {fileID: 1534463660646816176}
+  characterName: {fileID: 7457807658494105675}
+  backgroundImages:
+  - {fileID: 3878428847366833922}
+  - {fileID: 3652290113002975882}
+  colorToChange: {r: 0, g: 0, b: 0, a: 0}
+  animationDuration: 0.2
 --- !u!1 &4191507714939589142
 GameObject:
   m_ObjectHideFlags: 0
@@ -18550,6 +18594,7 @@ GameObject:
   - component: {fileID: 8688684794024542312}
   - component: {fileID: 9198457449978156476}
   - component: {fileID: 7117902758462572217}
+  - component: {fileID: 54240058}
   m_Layer: 5
   m_Name: UI-Char-01
   m_TagString: Untagged
@@ -18637,6 +18682,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &54240058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5072787807124339034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0fc68ce020f2604c8cdb6a021ab12a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assignedButton: 1
+  mapSide: 0
+  healthBar: {fileID: 1311493683}
+  staminaBar: {fileID: 6739529533793849569}
+  specialBar: {fileID: 8382144213458066797}
+  selectionDiamondText: {fileID: 4721237742424111899}
+  characterIconIdle: {fileID: 4569950535164710220}
+  characterIconSelected: {fileID: 91346544367946824}
+  characterName: {fileID: 846323088179772956}
+  backgroundImages:
+  - {fileID: 6465441606310930664}
+  - {fileID: 6119237072649093734}
+  colorToChange: {r: 0, g: 0, b: 0, a: 0}
+  animationDuration: 0.2
 --- !u!1 &5077401278908767387
 GameObject:
   m_ObjectHideFlags: 0
@@ -20043,7 +20114,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5440141044157023040}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fed9a3f38a3146d4bba325dcf47dbfa3, type: 3}
   m_Name: 
@@ -26609,6 +26680,7 @@ GameObject:
   - component: {fileID: 2350767007299805617}
   - component: {fileID: 5579697674901421190}
   - component: {fileID: 6233177003382525885}
+  - component: {fileID: 1930352405}
   m_Layer: 5
   m_Name: UI-Char-04
   m_TagString: Untagged
@@ -26696,6 +26768,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1930352405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7001542398829474722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0fc68ce020f2604c8cdb6a021ab12a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assignedButton: 3
+  mapSide: 0
+  healthBar: {fileID: 4049342675053705782}
+  staminaBar: {fileID: 7269633477955269411}
+  specialBar: {fileID: 7417667015529071397}
+  selectionDiamondText: {fileID: 1824117521963450854}
+  characterIconIdle: {fileID: 2239701033605700135}
+  characterIconSelected: {fileID: 6720777465306242687}
+  characterName: {fileID: 4574176960516210911}
+  backgroundImages:
+  - {fileID: 7351961910800344093}
+  - {fileID: 8694845744315313386}
+  colorToChange: {r: 0, g: 0, b: 0, a: 0}
+  animationDuration: 0.2
 --- !u!1 &7033409042158481783
 GameObject:
   m_ObjectHideFlags: 0
@@ -29198,7 +29296,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Donna
+  m_text: Larry
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 410767eb1e9a2ba458c57378d8533b2a, type: 2}
   m_sharedMaterial: {fileID: 8566412196547770612, guid: 410767eb1e9a2ba458c57378d8533b2a,
@@ -31590,6 +31688,7 @@ GameObject:
   - component: {fileID: 8870306621407582200}
   - component: {fileID: 6659972427410815423}
   - component: {fileID: 5467176714916375125}
+  - component: {fileID: 67060623}
   m_Layer: 5
   m_Name: UI-Char-03
   m_TagString: Untagged
@@ -31677,6 +31776,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &67060623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8048389415623311523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0fc68ce020f2604c8cdb6a021ab12a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assignedButton: 2
+  mapSide: 0
+  healthBar: {fileID: 690311945679076164}
+  staminaBar: {fileID: 7892032887003696895}
+  specialBar: {fileID: 8462256236385224386}
+  selectionDiamondText: {fileID: 5349555903331414244}
+  characterIconIdle: {fileID: 6192107889294546349}
+  characterIconSelected: {fileID: 6876090801790997461}
+  characterName: {fileID: 8781690153611945842}
+  backgroundImages:
+  - {fileID: 55228330205942027}
+  - {fileID: 8965812722328711985}
+  colorToChange: {r: 0, g: 0, b: 0, a: 0}
+  animationDuration: 0.2
 --- !u!1 &8053958552622353418
 GameObject:
   m_ObjectHideFlags: 0

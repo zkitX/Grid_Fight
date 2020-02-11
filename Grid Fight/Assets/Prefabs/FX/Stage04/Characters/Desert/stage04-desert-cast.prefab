@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8276618673116607310}
   - component: {fileID: -355355041717380713}
   - component: {fileID: 1204518055}
-  - component: {fileID: 880358173921793829}
+  - component: {fileID: 2411513717766778073}
   m_Layer: 0
   m_Name: stage04-desert-cast
   m_TagString: Untagged
@@ -4961,7 +4961,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &880358173921793829
+--- !u!114 &2411513717766778073
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4970,10 +4970,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1597727431493035549}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 384b28258ef75d9498ed0e7b12639926, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ccd0d279f0189941889036281dbd3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Delay: 0
+  audioEmitterProfile: {fileID: 0}
+  priority: 0
+  dampenToPercent: 1
+  baseVolume: 1
+  playOnEnabled: 0
 --- !u!1 &1597727431672762290
 GameObject:
   m_ObjectHideFlags: 0

@@ -9356,6 +9356,7 @@ GameObject:
   - component: {fileID: 19856440}
   - component: {fileID: 19941874}
   - component: {fileID: 8226984}
+  - component: {fileID: 4445011596427771010}
   m_Layer: 0
   m_Name: BulletSmallPink
   m_TagString: Untagged
@@ -9735,7 +9736,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -9788,7 +9789,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -14030,7 +14031,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c922c34f559ead440a273a13a924cfc7, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1.3
   Loop: 0
@@ -14115,3 +14116,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &4445011596427771010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ccd0d279f0189941889036281dbd3b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioEmitterProfile: {fileID: 0}
+  priority: 0
+  dampenToPercent: 1
+  baseVolume: 1
+  playOnEnabled: 1

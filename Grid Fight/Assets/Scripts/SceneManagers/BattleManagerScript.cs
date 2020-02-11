@@ -222,7 +222,10 @@ public class BattleManagerScript : MonoBehaviour
                 UIBattleManager.Instance.UICharacterSelectionRight.gameObject.SetActive(true);
                 break;
         }
-        
+        foreach (BaseCharacter playableCharOnScene in AllCharactersOnField)
+        {
+            NewIManager.Instance.SetUICharacterToButton((CharacterType_Script)playableCharOnScene, BattleInfoManagerScript.Instance.PlayerBattleInfo.Where(r => r.CharacterName == playableCharOnScene.CharInfo.CharacterID).FirstOrDefault().CharacterSelection);
+        }
         SetUICharacterSelectionIcons();
         yield return null;
     }
@@ -412,7 +415,7 @@ public class BattleManagerScript : MonoBehaviour
         ControllerType controller = CurrentSelectedCharacters.Where(r => r.Value.Character == charToDeselect).FirstOrDefault().Key;
         if (charToDeselect != null)
         {
-            charToDeselect.SetCharSelected(false, playersNumberBig[(int)controller], playersNumberSmall[(int)controller], new Color());
+            charToDeselect.SetCharSelected(false, ControllerType.None);
             CurrentSelectedCharacters[controller].Character = null;
         }
         else Debug.LogWarning("Character you are trying to deselect does not exist in the currently selected character");
@@ -502,10 +505,11 @@ public class BattleManagerScript : MonoBehaviour
                 CurrentSelectedCharacters[playerController].Character = currentCharacter;
 
                 //Change the player's UI to the new character
-                UIBattleManager.Instance.CharacterSelected(playerController, currentCharacter);
+                //UIBattleManager.Instance.CharacterSelected(playerController, currentCharacter);
+
 
                 //Set the new character to selected by this player
-                currentCharacter.SetCharSelected(true, playersNumberBig[(int)playerController], playersNumberSmall[(int)playerController], playersColor[(int)playerController]);
+                currentCharacter.SetCharSelected(true, playerController);
             }
         }
     }

@@ -19,7 +19,7 @@ public class CharacterInfoScript : MonoBehaviour
 
 
     public string Name;
-    public Sprite CharacterIcon;
+    public Sprite[] CharacterIcons;
     public BaseCharType BaseCharacterType;
     public CharacterNameType CharacterID;
     public List<ScriptableObjectAttackType> CurrentParticlesAttackTypeInfo = new List<ScriptableObjectAttackType>();
@@ -218,6 +218,7 @@ public class CharacterInfoScript : MonoBehaviour
         set
         {
             HealthStats.Health = value;
+            if(BaseCharacterType == BaseCharType.CharacterType_Script) NewIManager.Instance.UpdateVitalitiesOfCharacter(this);
             if (HealthStats.Health <= 0)
             {
                 if (DeathEvent != null)
@@ -241,7 +242,7 @@ public class CharacterInfoScript : MonoBehaviour
         set
         {
             StaminaStats.Stamina = value;
-            
+            if (BaseCharacterType == BaseCharType.CharacterType_Script) NewIManager.Instance.UpdateVitalitiesOfCharacter(this);
             if (StaminaStats.Stamina > StaminaStats.Base)
             {
                 Stamina = StaminaStats.Base;

@@ -42,7 +42,7 @@ public class UIPlayerSectionScript : MonoBehaviour
     {
         ClassText.text = currentSelectedCharacter.CharInfo.ClassType.ToString();
         CharacterNameText.text = currentSelectedCharacter.CharInfo.Name.ToString();
-        CharacterIcon.sprite = currentSelectedCharacter.CharInfo.CharacterIcon;
+       // CharacterIcon.sprite = currentSelectedCharacter.CharInfo.CharacterIcon;
         for (int i = 0; i < (int)currentSelectedCharacter.CharInfo.CharacterLevel - 1; i++)
         {
             //TODO level 

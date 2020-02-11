@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5578546342770293243}
   - component: {fileID: 4832569162577253713}
   - component: {fileID: 3474780188195671750}
+  - component: {fileID: -927080378737619437}
   m_Layer: 0
   m_Name: stage04-boss-phase2-main-impact
   m_TagString: Untagged
@@ -4754,7 +4755,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a8632ff59a38d43419c270dbf68e63f4, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.2
   m_Pitch: 1.2
   Loop: 0
@@ -4868,6 +4869,23 @@ MonoBehaviour:
   ShotDefiant: []
   ShotHeroine: []
   ShotGodness: []
+--- !u!114 &-927080378737619437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5578546342770293241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ccd0d279f0189941889036281dbd3b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioEmitterProfile: {fileID: 0}
+  priority: 0
+  dampenToPercent: 1
+  baseVolume: 1
+  playOnEnabled: 1
 --- !u!1 &5578546342780268798
 GameObject:
   m_ObjectHideFlags: 0

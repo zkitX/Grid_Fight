@@ -33544,6 +33544,7 @@ GameObject:
   - component: {fileID: 3836944263141871404}
   - component: {fileID: -813908548969935890}
   - component: {fileID: 1145989018}
+  - component: {fileID: -3951726221685607710}
   m_Layer: 0
   m_Name: stage04-Mountain-Impact
   m_TagString: Untagged
@@ -38334,7 +38335,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 59b18d149698f4647badc2e23258bfe5, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.3
   m_Pitch: 0.89
   Loop: 0
@@ -38419,6 +38420,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &-3951726221685607710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3836944263141871403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ccd0d279f0189941889036281dbd3b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioEmitterProfile: {fileID: 0}
+  priority: 0
+  dampenToPercent: 1
+  baseVolume: 1
+  playOnEnabled: 1
 --- !u!1 &3836944263194539448
 GameObject:
   m_ObjectHideFlags: 0

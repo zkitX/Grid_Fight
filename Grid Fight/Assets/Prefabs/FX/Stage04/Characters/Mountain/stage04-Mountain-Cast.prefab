@@ -19169,7 +19169,7 @@ GameObject:
   - component: {fileID: 6099532551147243758}
   - component: {fileID: -3957047215469909760}
   - component: {fileID: 706785672}
-  - component: {fileID: 1810646324149795383}
+  - component: {fileID: 4732956182354263040}
   m_Layer: 0
   m_Name: stage04-Mountain-Cast
   m_TagString: Untagged
@@ -24045,7 +24045,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &1810646324149795383
+--- !u!114 &4732956182354263040
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -24054,10 +24054,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4332801138131345544}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 384b28258ef75d9498ed0e7b12639926, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ccd0d279f0189941889036281dbd3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Delay: 0.5
+  audioEmitterProfile: {fileID: 0}
+  priority: 0
+  dampenToPercent: 1
+  baseVolume: 1
+  playOnEnabled: 0
 --- !u!1 &4332801138212066656
 GameObject:
   m_ObjectHideFlags: 0
