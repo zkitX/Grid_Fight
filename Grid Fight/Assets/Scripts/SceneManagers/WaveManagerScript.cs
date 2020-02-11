@@ -5,6 +5,12 @@ using System.Linq;
 
 public class WaveManagerScript : MonoBehaviour
 {
+
+    public delegate void WaveBossApper(MinionType_Script boss);
+    public event WaveBossApper WaveBossApperEvent;
+
+
+
     public static WaveManagerScript Instance;
     public List<WavePhaseClass> WavePhases = new List<WavePhaseClass>();
     public bool isWaveComplete = false;
@@ -172,6 +178,9 @@ public class WaveManagerScript : MonoBehaviour
         {
             yield return Wave(wavePhase);
         }
+
+
+
     }
 
 
@@ -211,7 +220,6 @@ public class WaveManagerScript : MonoBehaviour
                         }
                         yield return null;
                     }
-
                 }
 
                 if (wavePhase.IsRandom)
@@ -224,10 +232,6 @@ public class WaveManagerScript : MonoBehaviour
                 }
             }
         }
-
-
-
-
     }
 
     private void SpawChar(BaseCharacter newChar)
@@ -288,6 +292,16 @@ public class WaveManagerScript : MonoBehaviour
         Events = Events.Distinct().ToList();
         return CurrentWaveChar.TypeOfCharacter;
     }
+
+    #region WaveEvents
+
+    public void BossArrived(MinionType_Script boss)
+    {
+        WaveBossApperEvent?.Invoke(boss);
+    }
+
+    #endregion
+
 }
 
 [System.Serializable]

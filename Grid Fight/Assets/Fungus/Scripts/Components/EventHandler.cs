@@ -4,6 +4,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 using System;
+using System.Collections;
 
 namespace Fungus
 {
@@ -86,6 +87,28 @@ namespace Fungus
         public virtual string GetSummary()
         {
             return "";
+        }
+
+        public void BlockTriggered(string blockName)
+        {
+            Flowchart flowchart = ParentBlock.GetFlowchart();
+            Block block = flowchart.FindBlock(blockName);
+            if (block != null)
+            {
+                block.StartExecution();
+                Debug.Log(block.BlockName);
+            }
+        }
+
+        public IEnumerator BlockTriggeredWithCallBack(string blockName)
+        {
+            Flowchart flowchart = ParentBlock.GetFlowchart();
+            Block block = flowchart.FindBlock(blockName);
+            if (block != null)
+            {
+                yield return block.WaitForExecutionComplete();
+                Debug.Log(block.BlockName);
+            }
         }
 
         #endregion

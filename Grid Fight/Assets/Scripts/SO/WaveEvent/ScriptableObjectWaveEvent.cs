@@ -10,29 +10,3 @@ public class ScriptableObjectWaveEvent : ScriptableObject
     [HideInInspector]
     public bool isUsed;
 }
-
-
-
-
-
-
-
-[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Wave/WaveEvent/KillsNumber")]
-public class ScriptableObjectWaveEvent_KillsNumber : ScriptableObjectWaveEvent
-{
-
-    public ScriptableObjectWaveEvent_KillsNumber()
-    {
-        WaveEventType = WaveEventCheckType.KillsNumber;
-    }
-    public int KillsNum;
-}
-
-
-public enum WaveEventCheckType
-{
-    CharStatsCheckInPerc,
-    CharDied,
-    KillsNumber
-
-}

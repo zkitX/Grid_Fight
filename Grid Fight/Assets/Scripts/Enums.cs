@@ -592,3 +592,14 @@ public enum MonsterFlowerType
     Head3,
     Head4
 }
+
+
+
+
+public enum WaveEventCheckType
+{
+    CharStatsCheckInPerc,
+    CharDied,
+    KillsNumber
+
+}

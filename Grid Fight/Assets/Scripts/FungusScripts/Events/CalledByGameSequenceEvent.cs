@@ -20,15 +20,6 @@ namespace Fungus
             EventEffect.OnFungusEventTrigger += BlockTriggered;
         }
 
-        private void BlockTriggered(string blockName)
-        {
-            Flowchart flowchart = ParentBlock.GetFlowchart();
-            Block block = flowchart.FindBlock(blockName);
-            if (block != null)
-            {
-                block.StartExecution();
-                Debug.Log(block.BlockName);
-            }
-        }
+
     }
 }

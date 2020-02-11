@@ -155,6 +155,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     }
 
+    public virtual void CharArrivedOnBattleField()
+    {
+        SetAttackReady(true);
+    }
+
 
     #endregion
     #region Attack
@@ -993,6 +998,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         IsUsingAPortal = true;
         transform.position = outPortal.PortalPos.transform.position;
 
+    }
+
+
+    public void SetValueFromVariableName(string vName, object value)
+    {
+        GetType().GetField(vName).SetValue(this, value);
     }
 
     public void Dispose()
