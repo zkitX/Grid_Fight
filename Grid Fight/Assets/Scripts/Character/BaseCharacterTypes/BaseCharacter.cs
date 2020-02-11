@@ -802,7 +802,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             return;
         }
 
-        if (currentAttackPhase == AttackPhasesType.Bullet_Powerful || currentAttackPhase == AttackPhasesType.Cast_Powerful)
+        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle)
         {
             return;
         }
