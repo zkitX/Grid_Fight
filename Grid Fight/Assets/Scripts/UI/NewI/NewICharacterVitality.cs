@@ -91,16 +91,20 @@ public class NewICharacterVitality : MonoBehaviour
         switch (player)
         {
             case (ControllerType.Player1):
-                colorToChange = BattleManagerScript.Instance.playersColor[1];
+                colorToChange = BattleManagerScript.Instance.playersColor[0];
+                selectionDiamondText.text = "P1";
                 break;
             case (ControllerType.Player2):
-                colorToChange = BattleManagerScript.Instance.playersColor[2];
+                colorToChange = BattleManagerScript.Instance.playersColor[1];
+                selectionDiamondText.text = "P2";
                 break;
             case (ControllerType.Player3):
-                colorToChange = BattleManagerScript.Instance.playersColor[3];
+                colorToChange = BattleManagerScript.Instance.playersColor[2];
+                selectionDiamondText.text = "P3";
                 break;
             case (ControllerType.Player4):
-                colorToChange = BattleManagerScript.Instance.playersColor[4];
+                colorToChange = BattleManagerScript.Instance.playersColor[3];
+                selectionDiamondText.text = "P4";
                 break;
             default:
                 colorToChange = Color.white;
@@ -112,6 +116,7 @@ public class NewICharacterVitality : MonoBehaviour
     public void DeselectCharacter()
     {
         ToggleSelectChar(false, baseSelectionColors[0]);
+        selectionDiamondText.text = NewIManager.Instance.GetButtonTypeString(assignedButton);
     }
 
     public void ToggleSelectChar(bool state, Color changeUITo)
