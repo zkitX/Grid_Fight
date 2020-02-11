@@ -445,7 +445,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     #region Move
     public virtual void MoveCharOnDirection(InputDirection nextDir)
     {
-        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving || SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving)
+        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving || SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving || SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle)
         {
             return;
         }
