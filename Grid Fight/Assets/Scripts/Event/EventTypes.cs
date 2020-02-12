@@ -33,5 +33,6 @@ public enum EventEffectTypes
     DebugLog,
     TriggerFungusEvent,
     TriggerCommand,
+    RecruitCharacter,
     None,
 }

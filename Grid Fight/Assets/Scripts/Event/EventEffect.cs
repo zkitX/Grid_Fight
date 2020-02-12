@@ -33,6 +33,9 @@ public class EventEffect
             case (EventEffectTypes.TriggerCommand):
                 yield return TriggerCommand();
                 break;
+            case (EventEffectTypes.RecruitCharacter):
+                yield return RecruitCharacter();
+                break;
             default:
                 yield return null;
                 break;
@@ -67,6 +70,13 @@ public class EventEffect
     IEnumerator TriggerCommand()
     {
         command.OnEnter();
+        yield return null;
+    }
+
+    [ConditionalField("effectType", false, EventEffectTypes.RecruitCharacter)] public CharacterNameType characterToRecruit = CharacterNameType.None;
+    IEnumerator RecruitCharacter()
+    {
+        BattleManagerScript.Instance.RecruitCharFromWave(characterToRecruit);
         yield return null;
     }
 
