@@ -53,7 +53,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public ScriptableObjectAttackBase nextAttack = null;
     public AttackPhasesType currentAttackPhase = AttackPhasesType.End;
     IEnumerator attackCoroutine = null;
-
+    public SpecialAttackStatus StopPowerfulAtk;
 
     protected virtual void Start()
     {
@@ -65,13 +65,17 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     protected virtual void Update()
     {
-        
+        if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && UMS.CurrentAttackType == AttackType.Particles)
+        {
+            NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo);
+        }
     }
 
     #region Setup Character
     public virtual void SetupCharacterSide()
     {
-        if(UMS.PlayerController.Contains(ControllerType.Enemy))
+        EventManager.Instance.UpdateHealth(this);
+        if (UMS.PlayerController.Contains(ControllerType.Enemy))
         {
             UMS.SelectionIndicator.parent.gameObject.SetActive(false);
         }
@@ -452,10 +456,16 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         if ((CharInfo.Health > 0 && !isMoving && IsOnField && SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving) || BattleManagerScript.Instance.VFXScene)
         {
-            if (currentAttackPhase == AttackPhasesType.Cast_Powerful && currentAttackPhase == AttackPhasesType.Bullet_Powerful)
+            /*if(StopPowerfulAtk >= SpecialAttackStatus.Start)
+            {
+                StopPowerfulAtk++;
+            }*/
+
+            if(currentAttackPhase >= AttackPhasesType.Loading && currentAttackPhase != AttackPhasesType.End)
             {
                 return;
             }
+
 
             List<BattleTileScript> prevBattleTile = CurrentBattleTiles;
             List<BattleTileScript> CurrentBattleTilesToCheck = new List<BattleTileScript>();
@@ -630,6 +640,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     if (HealReceivedEvent != null) HealReceivedEvent(valueOverDuration);
                 }
                 CharInfo.Health += valueOverDuration;
+                EventManager.Instance.UpdateHealth(this);
                 break;
             case BuffDebuffStatsType.ElementalResistance:
                 CurrentBuffsDebuffsClass currentBuffDebuff = BuffsDebuffs.Where(r => r.ElementalResistence.Elemental == bdClass.ElementalResistence.Elemental).FirstOrDefault();
@@ -666,6 +677,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 break;
             case BuffDebuffStatsType.HealthRegeneration:
                 CharInfo.HealthStats.Regeneration += valueOverDuration;
+                EventManager.Instance.UpdateHealth(this);
                 break;
             case BuffDebuffStatsType.MovementSpeed:
                 CharInfo.MovementSpeed += valueOverDuration;
@@ -691,6 +703,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 CharInfo.SpeedStats.BaseSpeed += valueOverDuration;
                 break;
             case BuffDebuffStatsType.Damage:
+                EventManager.Instance.UpdateHealth(this);
                 CharInfo.DamageStats.CurrentDamage += valueOverDuration;
                 break;
         }
@@ -922,8 +935,14 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                   damage = damage - (damage * 0.7f);
                   break;
           }*/
-        EventManager.Instance.UpdateHealth(this);
+        
+
         CharInfo.Health -= damage;
+        if (CharInfo.Health == 0)
+        {
+            EventManager.Instance.AddCharacterDeath(this);
+        }
+        EventManager.Instance.UpdateHealth(this);
         if (DamageReceivedEvent != null)
         {
             DamageReceivedEvent(damage, !res);

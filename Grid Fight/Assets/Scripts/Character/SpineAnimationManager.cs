@@ -41,12 +41,6 @@ public class SpineAnimationManager : MonoBehaviour
     //Used to get spine event
     private void SpineAnimationState_Event(Spine.TrackEntry trackEntry, Spine.Event e)
     {
-        if (CharOwner.UMS.CurrentAttackType == AttackType.Tile && !((MinionType_Script)CharOwner).sequencedAttacker)
-        {
-            return; //Temporary until anims are added
-        }
-
-
         if (e.Data.Name.Contains("StopDefending"))
         {
             SetAnimationSpeed(0);

@@ -43,7 +43,7 @@ public class NewIManager : MonoBehaviour
 
     public NewICharacterVitality GetvitalityBoxOfCharacter(CharacterNameType charName)
     {
-        return vitalityBoxes.Where(r => r.assignedCharDetails.CharacterID == charName).FirstOrDefault();
+        return vitalityBoxes.Where(r =>r.assignedCharDetails != null && r.assignedCharDetails.CharacterID == charName).FirstOrDefault();
     }
 
     public NewICharacterVitality GetvitalityBoxOfAssignedButton(CharacterSelectionType inButton)

@@ -218,7 +218,6 @@ public class CharacterInfoScript : MonoBehaviour
         set
         {
             HealthStats.Health = value;
-            if(BaseCharacterType == BaseCharType.CharacterType_Script) NewIManager.Instance.UpdateVitalitiesOfCharacter(this);
             if (HealthStats.Health <= 0)
             {
                 if (DeathEvent != null)
@@ -242,7 +241,6 @@ public class CharacterInfoScript : MonoBehaviour
         set
         {
             StaminaStats.Stamina = value;
-            if (BaseCharacterType == BaseCharType.CharacterType_Script) NewIManager.Instance.UpdateVitalitiesOfCharacter(this);
             if (StaminaStats.Stamina > StaminaStats.Base)
             {
                 Stamina = StaminaStats.Base;
@@ -258,6 +256,6 @@ public class CharacterInfoScript : MonoBehaviour
     private void FixedUpdate()
     {
         Stamina += StaminaStats.Regeneration / 50;
-        Health = Health;
+        Health += HealthStats.Regeneration / 50;
     }
 }

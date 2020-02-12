@@ -209,8 +209,8 @@ public enum CharacterLevelType
 
 public enum AttackPhasesType
 {
-    Loading,
     Start,
+    Loading,
     Cast_Rapid,
     Bullet_Rapid,
     Cast_Powerful,
@@ -602,4 +602,13 @@ public enum WaveEventCheckType
     CharDied,
     KillsNumber
 
+}
+
+
+public enum SpecialAttackStatus
+{
+    None,
+    Start,
+    Move,
+    Stop
 }

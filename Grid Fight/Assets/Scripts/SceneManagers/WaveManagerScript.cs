@@ -9,6 +9,10 @@ public class WaveManagerScript : MonoBehaviour
     public delegate void WaveBossApper(MinionType_Script boss);
     public event WaveBossApper WaveBossApperEvent;
 
+    public delegate void WaveComplete(string startBlockName);
+    public event WaveComplete WaveCompleteEvent;
+
+
 
 
     public static WaveManagerScript Instance;
@@ -19,8 +23,11 @@ public class WaveManagerScript : MonoBehaviour
     private WaveCharClass CurrentWaveChar;
     private List<ScriptableObjectWaveEvent> Events = new List<ScriptableObjectWaveEvent>();
     public int CurrentWave = 0;
-
+    public bool StartWave = false;
     private IEnumerator Wave_Co;
+    public Dictionary<string, BaseCharacter> FungusSpawnedChars = new Dictionary<string, BaseCharacter>();
+
+
 
     private void Awake()
     {
@@ -127,6 +134,16 @@ public class WaveManagerScript : MonoBehaviour
     }
 
 
+    public void SpawnCharFromGivenWave(string waveName, CharacterNameType characterID, string charIdentifier, bool isRandom, Vector2Int pos)
+    {
+        WavePhaseClass wpc = WavePhases.Where(r => r.name == waveName).First();
+        CurrentWaveChar = wpc.ListOfEnemy.Where(a => a.TypeOfCharacter.CharacterName == characterID).First();
+        BaseCharacter newChar = GetWaveCharacter(CurrentWaveChar.TypeOfCharacter);
+        FungusSpawnedChars.Add(charIdentifier, newChar);
+        SpawChar(newChar, isRandom, pos);
+    }
+
+
 
     public BaseCharacter GetWaveCharacter(WaveCharacterInfoClass character)
     {
@@ -160,7 +177,6 @@ public class WaveManagerScript : MonoBehaviour
     {
         BaseCharacter res = BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(characterID.ToString(), CharacterSelectionType.A,
                 CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, characterID, WalkingSideType.RightSide, AttackType.Tile), transform);
-        BattleManagerScript.Instance.AllCharactersOnField.Add(res);
         res.gameObject.SetActive(false);
         WaveCharcters.Add(res);
         return res;
@@ -176,11 +192,15 @@ public class WaveManagerScript : MonoBehaviour
 
         foreach (WavePhaseClass wavePhase in WavePhases)
         {
+
+            while (!StartWave)
+            {
+                yield return null;
+            }
+           // WaveCompleteEvent(wavePhase.name);
+            StartWave = false;
             yield return Wave(wavePhase);
         }
-
-
-
     }
 
 
@@ -206,7 +226,7 @@ public class WaveManagerScript : MonoBehaviour
             {
                
                 newChar = GetWaveCharacter(waveCharacterInfoClass);
-                SpawChar(newChar);
+                SpawChar(newChar, CurrentWaveChar.IsFixedSpowiningTile, CurrentWaveChar.SpowningTile[Random.Range(0, CurrentWaveChar.SpowningTile.Count)]);
                 timer = 0;
 
                 if (wavePhase.ListOfEnemy.Where(r => r.NumberOfCharacter > 0).ToList().Count == 0)
@@ -215,6 +235,8 @@ public class WaveManagerScript : MonoBehaviour
                     {
                         if(WaveCharcters.Where(r => r.gameObject.activeInHierarchy).ToList().Count == 0)
                         {
+
+                            BattleManagerScript.Instance.RecruitCharFromWave(WaveCharcters[0].CharInfo.CharacterID);
                             yield break;
 
                         }
@@ -234,11 +256,11 @@ public class WaveManagerScript : MonoBehaviour
         }
     }
 
-    private void SpawChar(BaseCharacter newChar)
+    private void SpawChar(BaseCharacter newChar, bool isRandom, Vector2Int pos)
     {
-        if (CurrentWaveChar.IsFixedSpowiningTile)
+        if (!isRandom)
         {
-            SetCharInPos(newChar, GridManagerScript.Instance.GetBattleTile(CurrentWaveChar.SpowningTile[Random.Range(0, CurrentWaveChar.SpowningTile.Count)]));
+            SetCharInPos(newChar, GridManagerScript.Instance.GetBattleTile(pos));
         }
         else
         {

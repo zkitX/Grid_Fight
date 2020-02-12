@@ -8,6 +8,9 @@ public class CharacterType_Script : BaseCharacter
 
     private float atkHoldingTimer = 0;
 
+
+
+
     #region Unity Life Cycles
     protected override void Start()
     {
@@ -33,7 +36,11 @@ public class CharacterType_Script : BaseCharacter
     public override void SetCharDead()
     {
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
-        BattleManagerScript.Instance.UpdateCurrentSelectedCharacters(this, null);
+        if(UMS.CurrentAttackType == AttackType.Particles)
+        {
+            BattleManagerScript.Instance.UpdateCurrentSelectedCharacters(this, null);
+        }
+
         base.SetCharDead();
     }
 
@@ -83,17 +90,26 @@ public class CharacterType_Script : BaseCharacter
                     isChargingParticlesOn = true;
                     ps = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
                     ps.transform.parent = transform;
-                   
+                    
                 }
             }
             if (timer > 1)
             {
                 currentAttackPhase = AttackPhasesType.Loading;
+                StopPowerfulAtk = SpecialAttackStatus.Start;
                 if (IsOnField || VFXTestMode)
                 {
                     while (isMoving)
                     {
                         yield return new WaitForEndOfFrame();
+
+                        if(StopPowerfulAtk == SpecialAttackStatus.Stop)
+                        {
+                            StopPowerfulAtk = SpecialAttackStatus.None;
+                            ps.transform.parent = null;
+                            ps.SetActive(false);
+                            yield break;
+                        }
                     }
                     CharInfo.DamageStats.CurrentDamage = CharInfo.PowerfulAttac.BaseDamage;
                     ps.transform.parent = null;
@@ -160,7 +176,6 @@ public class CharacterType_Script : BaseCharacter
 
     public void ChargingLoop()
     {
-        currentAttackPhase = AttackPhasesType.Loading;
         SetAnimation(CharacterAnimationStateType.Atk2_Charging, true);
     }
 

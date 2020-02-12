@@ -60,7 +60,6 @@ public class ParticleManagerScript : MonoBehaviour
             {
                 psToFire.PS.transform.position = pos;
                 psToFire.PS.SetActive(true);
-                psToFire.PS.transform.localScale = side == SideType.RightSide ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
                 return psToFire.PS;
             }
             else
@@ -94,7 +93,6 @@ public class ParticleManagerScript : MonoBehaviour
             {
                 psToFire.PS.transform.parent = parent;
                 psToFire.PS.transform.localPosition = Vector3.zero;
-                psToFire.PS.transform.localScale = side == SideType.RightSide ? new Vector3Int(1, 1, 1) : new Vector3Int(-1, 1, 1);
                 psToFire.PS.SetActive(particlesVisible);//particlesVisible
                 return psToFire.PS;
             }

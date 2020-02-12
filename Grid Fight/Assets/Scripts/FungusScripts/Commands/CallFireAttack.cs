@@ -11,22 +11,56 @@ using MyBox;
 [AddComponentMenu("")]
 public class CallFireAttack : Command
 {
+    public bool IsPlayerCharacter = true;
+    //Player chars
     public CharacterNameType characterID;
+    //Wave
+    [ConditionalField("IsPlayerCharacter", true)] public bool IsRandomWaveChar;
+    [ConditionalField("IsPlayerCharacter", true)] public string Identifier;
+
+
     public bool randomiseAttack = false;
     [ConditionalField("randomiseAttack", true)] public ScriptableObjectAttackBase attackType;
 
     protected IEnumerator attack()
     {
-        IEnumerator attackOnceCoroutine = null;
 
-        BaseCharacter character = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == characterID).FirstOrDefault();
-        if (character == null) character = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == characterID).FirstOrDefault();
-        if (character == null)
+
+        IEnumerator attackOnceCoroutine = null;
+        BaseCharacter character;
+        if (IsPlayerCharacter)
         {
-            Continue();
-            yield break;
+            character = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == characterID).FirstOrDefault();
+            if (character == null)
+            {
+                Continue();
+                yield break;
+            }
+        }
+        else
+        {
+
+            if(IsRandomWaveChar)
+            {
+                List<BaseCharacter> res = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == characterID).ToList();
+                character = res[Random.Range(0, res.Count)];
+            }
+            else
+            {
+                if (!WaveManagerScript.Instance.FungusSpawnedChars.ContainsKey(Identifier))
+                {
+                    Continue();
+                    yield break;
+                }
+                character = WaveManagerScript.Instance.FungusSpawnedChars[Identifier];
+
+            }
         }
 
+        while (!character.CanAttack)
+        {
+            yield return null;
+        }
         if (character.GetType() == typeof(MinionType_Script))
         {
             if (randomiseAttack || attackType == null) character.GetAttack();

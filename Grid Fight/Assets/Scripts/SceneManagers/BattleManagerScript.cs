@@ -248,7 +248,6 @@ public class BattleManagerScript : MonoBehaviour
         currentCharacter.SetupCharacterSide();
         currentCharacter.UMS.WalkingSide = charInfo.WalkingSide;
         currentCharacter.CharInfo.CharacterSelection = charInfo.CharacterSelection;
-        currentCharacter.CharInfo.CharacterSelection = charInfo.CharacterSelection;
         currentCharacter.CharInfo.CharacterLevel = charInfo.CharacterLevel;
         currentCharacter.CurrentCharIsDeadEvent += CurrentCharacter_CurrentCharIsDeadEvent;
         UIBattleFieldManager.Instance.SetUIBattleField(currentCharacter);
@@ -689,6 +688,16 @@ public class BattleManagerScript : MonoBehaviour
         recruitableChar.UMS.UnitBehaviour = UnitBehaviourType.ControlledByPlayer;
         recruitableChar.UMS.WalkingSide = WalkingSideType.LeftSide;
         recruitableChar.UMS.CurrentAttackType = AttackType.Particles;
+        recruitableChar.CharInfo.CharacterSelection = CharacterSelectionType.Down;
+        recruitableChar.CharInfo.HealthStats.Health = recruitableChar.CharInfo.HealthStats.Base;
+        recruitableChar.gameObject.SetActive(true);
+        recruitableChar.SetupCharacterSide();
+        PlayablesCharOnScene.Add(new PlayableCharOnScene(recruitableChar.CharInfo.CharacterID, AllCharactersOnField[0].UMS.PlayerController, false, GetSideFromPlayer(recruitableChar.UMS.PlayerController)));
+        foreach (BaseCharacter playableCharOnScene in AllCharactersOnField)
+        {
+            NewIManager.Instance.SetUICharacterToButton((CharacterType_Script)playableCharOnScene, playableCharOnScene.CharInfo.CharacterSelection);
+        }
+        SetUICharacterSelectionIcons();
     }
 
     public void RestartScene()
