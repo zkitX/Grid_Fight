@@ -18,7 +18,10 @@ namespace Fungus
         private void Awake()
         {
             EventEffect.OnFungusEventTrigger += BlockTriggered;
+           // EventEffect.eventBlocksToTrigger.Add(ParentBlock);
         }
+        
+        
 
 
     }

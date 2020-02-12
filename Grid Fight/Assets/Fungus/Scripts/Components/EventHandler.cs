@@ -91,12 +91,16 @@ namespace Fungus
 
         public void BlockTriggered(string blockName)
         {
-            Flowchart flowchart = ParentBlock.GetFlowchart();
-            Block block = flowchart.FindBlock(blockName);
+            Debug.Log("Added start execution for " + blockName);
+            Block block = ParentBlock;
             if (block != null)
             {
-                block.StartExecution();
-                Debug.Log(block.BlockName);
+                Debug.Log("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+                if (block.BlockName == blockName)
+                {
+                    block.StartExecution();
+                }
+                    Debug.Log(block.BlockName);
             }
         }
 

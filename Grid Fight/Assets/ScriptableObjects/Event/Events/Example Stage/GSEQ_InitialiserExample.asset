@@ -16,7 +16,7 @@ MonoBehaviour:
   hasHappened: 0
   requirements:
   - {fileID: 11400000, guid: 2e90501814060904e84f5dc015502b2c, type: 2}
-  canOverlap: 0
+  ceaseOnComplete: 1
   requireComplete: 1
   effects:
   - Name: StartFungus
@@ -24,3 +24,4 @@ MonoBehaviour:
     secondsToWait: 0
     debugText: 
     blockName: ExecutedByGameSequenceEvent
+    command: {fileID: 0}

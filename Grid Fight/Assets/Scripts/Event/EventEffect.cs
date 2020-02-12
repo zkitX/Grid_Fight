@@ -12,6 +12,7 @@ public class EventEffect
 
     public delegate void FungusEventTriggerAction(string blockName);
     public static event FungusEventTriggerAction OnFungusEventTrigger;
+    public static List<Block> eventBlocksToTrigger = new List<Block>();
 
     public IEnumerator PlayEffect()
     {
@@ -54,7 +55,11 @@ public class EventEffect
     [ConditionalField("effectType", false, EventEffectTypes.TriggerFungusEvent)] public string blockName = "";
     IEnumerator TriggerFungusEvent()
     {
-        if(OnFungusEventTrigger != null && OnFungusEventTrigger.Target != null) OnFungusEventTrigger(blockName);
+       OnFungusEventTrigger?.Invoke(blockName);
+       // foreach(Block eventBlock in eventBlocksToTrigger)
+      //  {
+         //   if (eventBlock.name == blockName) eventBlock.StartExecution();
+       // }
         yield return null;
     }
 
