@@ -236,7 +236,7 @@ public class WaveManagerScript : MonoBehaviour
                         if(WaveCharcters.Where(r => r.gameObject.activeInHierarchy).ToList().Count == 0)
                         {
 
-                            BattleManagerScript.Instance.RecruitCharFromWave(WaveCharcters[0].CharInfo.CharacterID);
+                            //BattleManagerScript.Instance.RecruitCharFromWave(WaveCharcters[0].CharInfo.CharacterID);
                             yield break;
 
                         }
