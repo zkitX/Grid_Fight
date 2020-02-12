@@ -226,7 +226,7 @@ public class WaveManagerScript : MonoBehaviour
             {
                
                 newChar = GetWaveCharacter(waveCharacterInfoClass);
-                SpawChar(newChar, CurrentWaveChar.IsFixedSpowiningTile, CurrentWaveChar.SpowningTile[Random.Range(0, CurrentWaveChar.SpowningTile.Count)]);
+                SpawChar(newChar, CurrentWaveChar.IsFixedSpowiningTile, CurrentWaveChar.SpowningTile.Count > 0 ? CurrentWaveChar.SpowningTile[Random.Range(0, CurrentWaveChar.SpowningTile.Count)] : new Vector2Int());
                 timer = 0;
 
                 if (wavePhase.ListOfEnemy.Where(r => r.NumberOfCharacter > 0).ToList().Count == 0)
