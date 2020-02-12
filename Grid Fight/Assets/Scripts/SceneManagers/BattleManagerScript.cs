@@ -688,7 +688,7 @@ public class BattleManagerScript : MonoBehaviour
         recruitableChar.UMS.UnitBehaviour = UnitBehaviourType.ControlledByPlayer;
         recruitableChar.UMS.WalkingSide = WalkingSideType.LeftSide;
         recruitableChar.UMS.CurrentAttackType = AttackType.Particles;
-        recruitableChar.CharInfo.CharacterSelection = CharacterSelectionType.Down;
+        recruitableChar.CharInfo.CharacterSelection = (CharacterSelectionType)AllCharactersOnField.Count - 1;
         recruitableChar.CharInfo.HealthStats.Health = recruitableChar.CharInfo.HealthStats.Base;
         recruitableChar.gameObject.SetActive(true);
         recruitableChar.SetupCharacterSide();

@@ -35,11 +35,6 @@ public class WaveManagerScript : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
-    {
-        Wave_Co = WaveCo();
-        StartCoroutine(Wave_Co);
-    }
 
     private IEnumerator EventCo()
     {
@@ -124,14 +119,17 @@ public class WaveManagerScript : MonoBehaviour
     {
         foreach (WavePhaseClass wavePhase in WavePhases)
         {
-
             foreach (WaveCharClass waveChar in wavePhase.ListOfEnemy)
             {
-                CreateChar(waveChar.TypeOfCharacter.CharacterName);
-                CreateChar(waveChar.TypeOfCharacter.CharacterName);
+                BaseCharacter cb = CreateChar(waveChar.TypeOfCharacter.CharacterName);
+                if(cb.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script)
+                {
+                    CreateChar(waveChar.TypeOfCharacter.CharacterName);
+                }
             }
+            yield return null;
+
         }
-        yield return null;
     }
 
 
@@ -184,24 +182,9 @@ public class WaveManagerScript : MonoBehaviour
     }
 
 
-    private IEnumerator WaveCo()
+    public IEnumerator StartWaveByName(string waveName)
     {
-        while (BattleManagerScript.Instance == null || GridManagerScript.Instance == null)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-
-        foreach (WavePhaseClass wavePhase in WavePhases)
-        {
-
-            while (!StartWave)
-            {
-                yield return null;
-            }
-           // WaveCompleteEvent(wavePhase.name);
-            StartWave = false;
-            yield return Wave(wavePhase);
-        }
+        yield return Wave(WavePhases.Where(r=> r.name == waveName).First());
     }
 
 
@@ -236,10 +219,7 @@ public class WaveManagerScript : MonoBehaviour
                     {
                         if(WaveCharcters.Where(r => r.gameObject.activeInHierarchy).ToList().Count == 0)
                         {
-
-                            //BattleManagerScript.Instance.RecruitCharFromWave(WaveCharcters[0].CharInfo.CharacterID);
                             yield break;
-
                         }
                         yield return null;
                     }
@@ -255,6 +235,7 @@ public class WaveManagerScript : MonoBehaviour
                 }
             }
         }
+
     }
 
     private void SpawChar(BaseCharacter newChar, bool isRandom, Vector2Int pos)

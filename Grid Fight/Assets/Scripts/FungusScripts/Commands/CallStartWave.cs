@@ -11,12 +11,22 @@ using MyBox;
 [AddComponentMenu("")]
 public class CallStartWave : Command
 {
+
+
+    public string WaveName;
+    public string NextBlockToFire;
+
     #region Public members
 
     public override void OnEnter()
     {
-        WaveManagerScript.Instance.StartWave = true;
-        Continue();
+        StartCoroutine(Wave());
+    }
+
+    private IEnumerator Wave()
+    {
+        yield return WaveManagerScript.Instance.StartWaveByName(WaveName);
+        SetNextBlockFromName(NextBlockToFire);
     }
 
     public override Color GetButtonColor()

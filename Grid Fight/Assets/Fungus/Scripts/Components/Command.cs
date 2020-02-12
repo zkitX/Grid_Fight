@@ -318,6 +318,17 @@ namespace Fungus
             return localizationId;
         }
 
+
+        public virtual void SetNextBlockFromName(string NextBlockToFire)
+        {
+            Flowchart flowchart = ParentBlock.GetFlowchart();
+            Block block = flowchart.FindBlock(NextBlockToFire);
+            if (block != null)
+            {
+                block.StartExecution();
+            }
+        }
+
         #endregion
     }
 }
