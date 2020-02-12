@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using MyBox;
 
 public class WaveManagerScript : MonoBehaviour
 {
@@ -226,7 +227,7 @@ public class WaveManagerScript : MonoBehaviour
             {
                
                 newChar = GetWaveCharacter(waveCharacterInfoClass);
-                SpawChar(newChar, CurrentWaveChar.IsFixedSpowiningTile, CurrentWaveChar.SpowningTile.Count > 0 ? CurrentWaveChar.SpowningTile[Random.Range(0, CurrentWaveChar.SpowningTile.Count)] : new Vector2Int());
+                SpawChar(newChar, CurrentWaveChar.IsRandomSpowiningTile, CurrentWaveChar.IsRandomSpowiningTile ? new Vector2Int() : CurrentWaveChar.SpowningTile[Random.Range(0, CurrentWaveChar.SpowningTile.Count)]);
                 timer = 0;
 
                 if (wavePhase.ListOfEnemy.Where(r => r.NumberOfCharacter > 0).ToList().Count == 0)
@@ -258,13 +259,13 @@ public class WaveManagerScript : MonoBehaviour
 
     private void SpawChar(BaseCharacter newChar, bool isRandom, Vector2Int pos)
     {
-        if (!isRandom)
+        if (isRandom)
         {
-            SetCharInPos(newChar, GridManagerScript.Instance.GetBattleTile(pos));
+            SetCharInPos(newChar, GridManagerScript.Instance.GetFreeBattleTile(newChar.UMS.WalkingSide, newChar.UMS.Pos));
         }
         else
         {
-            SetCharInPos(newChar, GridManagerScript.Instance.GetFreeBattleTile(newChar.UMS.WalkingSide, newChar.UMS.Pos));
+            SetCharInPos(newChar, GridManagerScript.Instance.GetBattleTile(pos));
         }
     }
 
@@ -360,8 +361,8 @@ public class WaveCharClass
     public string name;
     public int NumberOfCharacter;
     public WaveCharacterInfoClass TypeOfCharacter;
-    public bool IsFixedSpowiningTile = false;
-    public List<Vector2Int> SpowningTile = new List<Vector2Int>();
+    public bool IsRandomSpowiningTile = true;
+    [ConditionalField("IsFixedRandomSpowiningTile", true)] public List<Vector2Int> SpowningTile = new List<Vector2Int>();
     public float DelayBetweenChars;
 
 }
