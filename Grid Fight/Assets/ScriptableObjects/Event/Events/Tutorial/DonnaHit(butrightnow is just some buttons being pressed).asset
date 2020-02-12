@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25d497aba9400d147aee0263a1f7ec6d, type: 3}
-  m_Name: GSEQ_EventName
+  m_Name: Event 2
   m_EditorClassIdentifier: 
-  Name: Start
+  Name: Donna hit
   hasHappened: 0
   requirements:
-  - {fileID: 11400000, guid: 2e90501814060904e84f5dc015502b2c, type: 2}
+  - {fileID: 11400000, guid: 63a7095ce9390c24aad83497d61ea5ba, type: 2}
+  - {fileID: 11400000, guid: bda58ff7357048948bf82f0debc91f93, type: 2}
   ceaseOnComplete: 1
   requireComplete: 1
   effects:
-  - Name: sdfgh
+  - Name: GUT
     effectType: 2
     secondsToWait: 0
     debugText: 
-    blockName: IntroAAAAAAAAAAAAAAAAAAAAAA
+    blockName: DONNA HIT
     command: {fileID: 0}
