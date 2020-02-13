@@ -363,21 +363,23 @@ public class BattleManagerScript : MonoBehaviour
     IEnumerator SwapCharacters(CharacterNameType cName, ControllerType playerController)
     {
         // yield return HoldPressTimer(playerController);
-        Vector2Int spawnPos = CurrentSelectedCharacters[playerController].Character.UMS._CurrentTilePos;
-
-        Debug.Log(CurrentSelectedCharacters[playerController].OffsetSwap + "    " + Time.time);
-        while (CurrentSelectedCharacters[playerController].OffsetSwap > Time.time || !CurrentSelectedCharacters[playerController].Character.IsOnField || CurrentSelectedCharacters[playerController].Character.isMoving ||
+        //Debug.Log(CurrentSelectedCharacters[playerController].OffsetSwap + "    " + Time.time);
+        while (CurrentSelectedCharacters[playerController].OffsetSwap > Time.time || !CurrentSelectedCharacters[playerController].Character.IsOnField ||
             CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle || CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving)
         {
             yield return null;
         }
-
-        
        
         if (CurrentSelectedCharacters[playerController].NextSelectionChar == AllCharactersOnField.Where(r=> r.CharInfo.CharacterID == cName).First().CharInfo.CharacterSelection)
         {
+            CurrentSelectedCharacters[playerController].Character.IsSwapping = true;
+            while (CurrentSelectedCharacters[playerController].Character.isMoving)
+            {
+                yield return null;
+            }
+            Vector2Int spawnPos = CurrentSelectedCharacters[playerController].Character.UMS._CurrentTilePos;
             CharacterType_Script currentCharacter = SetCharOnBoardOnFixedPos(playerController, cName, spawnPos);
-            Debug.Log("Exit  " + CurrentSelectedCharacters[playerController].OffsetSwap + "    " + Time.time + CurrentSelectedCharacters[playerController].NextSelectionChar + AllCharactersOnField.Where(r => r.CharInfo.CharacterID == cName).First().CharInfo.CharacterSelection);
+            //Debug.Log("Exit  " + CurrentSelectedCharacters[playerController].OffsetSwap + "    " + Time.time + CurrentSelectedCharacters[playerController].NextSelectionChar + AllCharactersOnField.Where(r => r.CharInfo.CharacterID == cName).First().CharInfo.CharacterSelection);
             if (currentCharacter != null)
             {
                 currentCharacter.SpineAnim.SetAnimationSpeed(2);
@@ -682,7 +684,10 @@ public class BattleManagerScript : MonoBehaviour
                 if (CurrentSelectedCharacters[playerController].Character == null)
                 {
                     cb = AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == characterSelection && r.UMS.Side == side && !r.IsOnField).FirstOrDefault();
-                    CurrentSelectedCharacters[playerController].NextSelectionChar = cb.CharInfo.CharacterSelection;
+                    if(cb != null)
+                    {
+                        CurrentSelectedCharacters[playerController].NextSelectionChar = cb.CharInfo.CharacterSelection;
+                    }
                 }
                 else
                 {
@@ -696,9 +701,9 @@ public class BattleManagerScript : MonoBehaviour
                         {
                             CharacterType_Script PrevCharacter = (CharacterType_Script)AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == CurrentSelectedCharacters[playerController].NextSelectionChar).First();
                             DeselectCharacter(PrevCharacter.CharInfo.CharacterID);
-                            Debug.Log("Prev " + CurrentSelectedCharacters[playerController].NextSelectionChar.ToString());
+                            //Debug.Log("Prev " + CurrentSelectedCharacters[playerController].NextSelectionChar.ToString());
                             CurrentSelectedCharacters[playerController].NextSelectionChar = cs;
-                            Debug.Log(cs.ToString());
+                            //Debug.Log(cs.ToString());
                             break;
                         }
                     }
