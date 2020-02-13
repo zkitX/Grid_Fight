@@ -355,7 +355,8 @@ public class BattleManagerScript : MonoBehaviour
             charToRemove = CurrentSelectedCharacters.Values.Where(r => r.Character.CharInfo.CharacterID == charToRemoveName).FirstOrDefault().Character;
         }*/
         CharacterType_Script charToRemove = (CharacterType_Script)AllCharactersOnField.Where(r => r.GetType() == typeof(CharacterType_Script) && r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
-        ControllerType controller;
+        if(charToRemove == null) charToRemove = (CharacterType_Script)WaveManagerScript.Instance.WaveCharcters.Where(r => r.GetType() == typeof(MinionType_Script) && r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
+	ControllerType controller;
         if(CurrentSelectedCharacters.Values != null && CurrentSelectedCharacters.Where(r => r.Value.Character == charToRemove).FirstOrDefault().Key != ControllerType.None)
         {
             controller = CurrentSelectedCharacters.Where(r => r.Value.Character == charToRemove).FirstOrDefault().Key;
@@ -364,6 +365,7 @@ public class BattleManagerScript : MonoBehaviour
         {
             controller = ControllerType.None;
         }
+	if(controller == null) controller = ControllerType.None;
         charToRemove.SpineAnim.SetAnimationSpeed(2);
         StartCoroutine(RemoveCharacterFromBaord(controller, charToRemove, true));
 
