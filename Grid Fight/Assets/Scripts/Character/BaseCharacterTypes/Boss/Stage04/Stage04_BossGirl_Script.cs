@@ -65,7 +65,7 @@ public class Stage04_BossGirl_Script : MinionType_Script
 
         for (int i = 0; i < 4; i++)
         {
-            Stage04_BossGirl_Flower_Script flower = (Stage04_BossGirl_Flower_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass((CharacterNameType.Stage04_BossGirl_Minion0 + i).ToString(), CharacterSelectionType.A,
+            Stage04_BossGirl_Flower_Script flower = (Stage04_BossGirl_Flower_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass((CharacterNameType.Stage04_BossGirl_Minion0 + i).ToString(), CharacterSelectionType.Up,
                 CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage04_BossGirl_Minion0 + i, WalkingSideType.RightSide, AttackType.Tile), transform);
             BattleManagerScript.Instance.AllCharactersOnField.Add(flower);
             flower.UMS.Pos = FlowersPos.GetRange(i, 1);
@@ -163,7 +163,7 @@ public class Stage04_BossGirl_Script : MinionType_Script
             timer += Time.fixedDeltaTime;
         }
 
-        Stage04_BossMonster_Script mask = (Stage04_BossMonster_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass((CharacterNameType.Stage04_BossMonster).ToString(), CharacterSelectionType.A,
+        Stage04_BossMonster_Script mask = (Stage04_BossMonster_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass((CharacterNameType.Stage04_BossMonster).ToString(), CharacterSelectionType.Up,
                 CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage04_BossMonster, WalkingSideType.RightSide, AttackType.Tile), WaveManagerScript.Instance.transform);
         BattleManagerScript.Instance.AllCharactersOnField.Add(mask);
         mask.UMS.Pos = UMS.Pos;

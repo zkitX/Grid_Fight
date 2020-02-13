@@ -26,7 +26,7 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
-    public bool CanISwap = false;
+   
     
 
 
@@ -340,11 +340,8 @@ public class BattleManagerScript : MonoBehaviour
     public void LoadingNewCharacterToGrid(CharacterNameType cName, SideType side, ControllerType playerController)
     {
         if (CurrentBattleState != BattleState.Battle && CurrentBattleState != BattleState.Intro) return;
-        CharacterType_Script PrevCharacter = (CharacterType_Script)AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == CurrentSelectedCharacters[playerController].NextSelectionChar).First();
-        DeselectCharacter(PrevCharacter.CharInfo.CharacterID);
         CharacterType_Script currentCharacter = (CharacterType_Script)AllCharactersOnField.Where(r=> r.CharInfo.CharacterID == cName).First();
         currentCharacter.SetCharSelected(true, playerController);
-
         if (CurrentSelectedCharacters[playerController].Character == null || !singleUnitControls)
         {
             //Spawn first character for player to a random position on the grid
@@ -392,7 +389,7 @@ public class BattleManagerScript : MonoBehaviour
         }*/
         CharacterType_Script charToRemove = (CharacterType_Script)AllCharactersOnField.Where(r => r.GetType() == typeof(CharacterType_Script) && r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
         if(charToRemove == null) charToRemove = (CharacterType_Script)WaveManagerScript.Instance.WaveCharcters.Where(r => r.GetType() == typeof(MinionType_Script) && r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
-	ControllerType controller;
+	    ControllerType controller;
         if(CurrentSelectedCharacters.Values != null && CurrentSelectedCharacters.Where(r => r.Value.Character == charToRemove).FirstOrDefault().Key != ControllerType.None)
         {
             controller = CurrentSelectedCharacters.Where(r => r.Value.Character == charToRemove).FirstOrDefault().Key;
@@ -401,7 +398,6 @@ public class BattleManagerScript : MonoBehaviour
         {
             controller = ControllerType.None;
         }
-	if(controller == null) controller = ControllerType.None;
         charToRemove.SpineAnim.SetAnimationSpeed(2);
         StartCoroutine(RemoveCharacterFromBaord(controller, charToRemove, true));
 
@@ -453,7 +449,7 @@ public class BattleManagerScript : MonoBehaviour
         if (charToDeselect != null)
         {
             charToDeselect.SetCharSelected(false, ControllerType.None);
-            CurrentSelectedCharacters[controller].Character = null;
+            //CurrentSelectedCharacters[controller].Character = null;
         }
         else Debug.LogWarning("Character you are trying to deselect does not exist in the currently selected character");
     }
@@ -672,6 +668,8 @@ public class BattleManagerScript : MonoBehaviour
                         cb = AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == cs && r.UMS.Side == side).FirstOrDefault();
                         if (cb != null && CurrentSelectedCharacters.Values.Where(r => r.Character != null && r.Character == cb).ToList().Count == 0)
                         {
+                            CharacterType_Script PrevCharacter = (CharacterType_Script)AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == CurrentSelectedCharacters[playerController].NextSelectionChar).First();
+                            DeselectCharacter(PrevCharacter.CharInfo.CharacterID);
                             Debug.Log("Prev " + CurrentSelectedCharacters[playerController].NextSelectionChar.ToString());
                             CurrentSelectedCharacters[playerController].NextSelectionChar = cs;
                             Debug.Log(cs.ToString());
@@ -888,7 +886,7 @@ public class CurrentSelectedCharacterClass
     public CharacterType_Script Character;
     public IEnumerator LoadCharCo;
     public CharacterSelectionType NextSelectionChar;
-
+    public float OffsetSwap;
 
     public CurrentSelectedCharacterClass()
     {

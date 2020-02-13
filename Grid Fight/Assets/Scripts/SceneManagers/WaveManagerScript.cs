@@ -35,86 +35,6 @@ public class WaveManagerScript : MonoBehaviour
         Instance = this;
     }
 
-
-    private IEnumerator EventCo()
-    {
-        while (true)
-        {
-            yield return null;
-            foreach (ScriptableObjectWaveEvent item in Events.Where(r=> !r.isUsed).ToList())
-            {
-                switch (item.WaveEventType)
-                {
-                    case WaveEventCheckType.CharStatsCheckInPerc:
-                        if(CharStatsCheckInPerc((ScriptableObjectWaveEvent_CharStatsCheckInPerc)item))
-                        {
-                            Debug.Log(item.FungusBlockName);
-                            item.isUsed = true;
-                        }
-                        break;
-                    case WaveEventCheckType.CharDied:
-                        break;
-                    case WaveEventCheckType.KillsNumber:
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-    }
-
-    #region Events
-
-    private bool CharStatsCheckInPerc(ScriptableObjectWaveEvent_CharStatsCheckInPerc so)
-    {
-        BaseCharacter target = null;
-        foreach (CharacterNameType item in so.CharactersID)
-        {
-            switch (so.StatToCheck)
-            {
-                case WaveStatsType.Health:
-                    switch (so.ValueChecker)
-                    {
-                        case ValueCheckerType.LessThan:
-                            target = WaveCharcters.Where(r => r.CharInfo.CharacterID == item && r.CharInfo.HealthPerc < so.PercToCheck).FirstOrDefault();
-
-                            break;
-                        case ValueCheckerType.EqualTo:
-                            target = WaveCharcters.Where(r => r.CharInfo.CharacterID == item && r.CharInfo.HealthPerc == so.PercToCheck).FirstOrDefault();
-
-                            break;
-                        case ValueCheckerType.MoreThan:
-                            target = WaveCharcters.Where(r => r.CharInfo.CharacterID == item && r.CharInfo.HealthPerc > so.PercToCheck).FirstOrDefault();
-
-                            break;
-                    }
-                    return target != null ? true : false;
-                case WaveStatsType.Stamina:
-                    switch (so.ValueChecker)
-                    {
-                        case ValueCheckerType.LessThan:
-                            target = WaveCharcters.Where(r => r.CharInfo.CharacterID == item && r.CharInfo.StaminaPerc < so.PercToCheck).FirstOrDefault();
-
-                            break;
-                        case ValueCheckerType.EqualTo:
-                            target = WaveCharcters.Where(r => r.CharInfo.CharacterID == item && r.CharInfo.StaminaPerc == so.PercToCheck).FirstOrDefault();
-
-                            break;
-                        case ValueCheckerType.MoreThan:
-                            target = WaveCharcters.Where(r => r.CharInfo.CharacterID == item && r.CharInfo.StaminaPerc > so.PercToCheck).FirstOrDefault();
-
-                            break;
-                    }
-                    return target != null ? true : false;
-            }
-        }
-
-        return true;
-    }
-
-    #endregion
-
-
     public IEnumerator WaveCharCreator()
     {
         foreach (WavePhaseClass wavePhase in WavePhases)
@@ -132,7 +52,6 @@ public class WaveManagerScript : MonoBehaviour
         }
     }
 
-
     public void SpawnCharFromGivenWave(string waveName, CharacterNameType characterID, string charIdentifier, bool isRandom, Vector2Int pos)
     {
         WavePhaseClass wpc = WavePhases.Where(r => r.name == waveName).First();
@@ -141,8 +60,6 @@ public class WaveManagerScript : MonoBehaviour
         FungusSpawnedChars.Add(charIdentifier, newChar);
         SpawChar(newChar, isRandom, pos);
     }
-
-
 
     public BaseCharacter GetWaveCharacter(WaveCharacterInfoClass character)
     {
@@ -171,44 +88,39 @@ public class WaveManagerScript : MonoBehaviour
         return res;
     }
 
-
     private BaseCharacter CreateChar(CharacterNameType characterID)
     {
-        BaseCharacter res = BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(characterID.ToString(), CharacterSelectionType.A,
+        BaseCharacter res = BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(characterID.ToString(), CharacterSelectionType.Up,
                 CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, characterID, WalkingSideType.RightSide, AttackType.Tile), transform);
         res.gameObject.SetActive(false);
         WaveCharcters.Add(res);
         return res;
     }
 
-
     public IEnumerator StartWaveByName(string waveName)
     {
         yield return Wave(WavePhases.Where(r=> r.name == waveName).First());
     }
-
 
     private IEnumerator Wave(WavePhaseClass wavePhase)
     {
         float timer = 0;
         BaseCharacter newChar;
         WaveCharacterInfoClass waveCharacterInfoClass;
-
-        if (wavePhase.IsRandom)
-        {
-            waveCharacterInfoClass = GetAvailableRandomWaveCharacter(wavePhase);
-        }
-        else
-        {
-            waveCharacterInfoClass = GetAvailableWaveCharacter(wavePhase);
-        }
         while (true)
         {
             timer += Time.fixedDeltaTime;
             yield return BattleManagerScript.Instance.PauseUntil();
             if (timer > CurrentWaveChar.DelayBetweenChars && WaveCharcters.Where(r => r.gameObject.activeInHierarchy).ToList().Count < wavePhase.MaxEnemyOnScreen)
             {
-               
+                if (wavePhase.IsRandom)
+                {
+                    waveCharacterInfoClass = GetAvailableRandomWaveCharacter(wavePhase);
+                }
+                else
+                {
+                    waveCharacterInfoClass = GetAvailableWaveCharacter(wavePhase);
+                }
                 newChar = GetWaveCharacter(waveCharacterInfoClass);
                 SpawChar(newChar, CurrentWaveChar.IsRandomSpowiningTile, CurrentWaveChar.IsRandomSpowiningTile ? new Vector2Int() : CurrentWaveChar.SpowningTile[Random.Range(0, CurrentWaveChar.SpowningTile.Count)]);
                 timer = 0;
@@ -224,18 +136,8 @@ public class WaveManagerScript : MonoBehaviour
                         yield return null;
                     }
                 }
-
-                if (wavePhase.IsRandom)
-                {
-                    waveCharacterInfoClass = GetAvailableRandomWaveCharacter(wavePhase);
-                }
-                else
-                {
-                    waveCharacterInfoClass = GetAvailableWaveCharacter(wavePhase);
-                }
             }
         }
-
     }
 
     private void SpawChar(BaseCharacter newChar, bool isRandom, Vector2Int pos)
@@ -276,7 +178,6 @@ public class WaveManagerScript : MonoBehaviour
 
         StartCoroutine(BattleManagerScript.Instance.MoveCharToBoardWithDelay(0.2f, currentCharacter, bts.transform.position));
     }
-
 
     private WaveCharacterInfoClass GetAvailableRandomWaveCharacter(WavePhaseClass wavePhase)
     {

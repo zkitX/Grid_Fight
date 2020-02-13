@@ -225,11 +225,11 @@ public class InputController : MonoBehaviour
     void OnButtonDown(InputActionEventData data)
     {
         InputButtonType buttonInput = (InputButtonType)System.Enum.Parse(typeof(InputButtonType), data.actionName);
+
         switch (buttonInput)
         {
             case InputButtonType.A:
                 ButtonADownEvent?.Invoke(data.playerId);
-
                 break;
             case InputButtonType.B:
                 ButtonBDownEvent?.Invoke(data.playerId);
@@ -375,7 +375,10 @@ public class InputController : MonoBehaviour
     void OnButtonUp(InputActionEventData data)
     {
         InputButtonType buttonInput = (InputButtonType)System.Enum.Parse(typeof(InputButtonType), data.actionName);
-
+        if(EventManager.Instance != null)
+        {
+            EventManager.Instance.UpdateButtonPressed(InputButtonType.Minus);
+        }
 
         switch (buttonInput)
         {

@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6909126972976731127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6909126972976731017}
+  - component: {fileID: 6909126972976731016}
+  m_Layer: 0
+  m_Name: WaveManager (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6909126972976731017
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6909126972976731127}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.2474627, y: 0.9679096, z: -3.4060545}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6909126972976731016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6909126972976731127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09b0c490261b08d4dbe285554c10a1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WavePhases:
+  - name: Wave1
+    IsRandom: 0
+    MaxEnemyOnScreen: 2
+    ListOfEnemy:
+    - name: Bush
+      NumberOfCharacter: 5
+      TypeOfCharacter:
+        CharacterName: 1
+        CharacterClass: 0
+        Health: {x: 20, y: 25}
+        HealthRegeneration: {x: 0.2, y: 0.2}
+        Damage: {x: 5, y: 6}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 5, y: 4}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 0
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+  - name: Wave2
+    IsRandom: 0
+    MaxEnemyOnScreen: 1
+    ListOfEnemy:
+    - name: Bush
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 2
+        CharacterClass: 0
+        Health: {x: 20, y: 25}
+        HealthRegeneration: {x: 0.2, y: 0.2}
+        Damage: {x: 5, y: 6}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 5, y: 4}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsFixedSpowiningTile: 0
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+  isWaveComplete: 0
+  WaveCharcters: []
+  CurrentWave: 0
+  StartWave: 0

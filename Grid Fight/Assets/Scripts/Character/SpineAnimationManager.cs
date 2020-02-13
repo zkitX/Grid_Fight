@@ -204,7 +204,7 @@ public class SpineAnimationManager : MonoBehaviour
         SetupSpineAnim();
         if(anim == CharacterAnimationStateType.Arriving)
         {
-            Debug.Log("Arriving start");
+            //Debug.Log("Arriving start");
         }
         Loop = loop;
         SpineAnimationState.SetAnimation(1, anim.ToString(), loop).MixDuration = transition;

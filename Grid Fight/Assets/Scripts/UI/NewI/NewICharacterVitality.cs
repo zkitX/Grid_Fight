@@ -6,7 +6,7 @@ using TMPro;
 
 public class NewICharacterVitality : MonoBehaviour
 {
-    [SerializeField] public CharacterSelectionType assignedButton = CharacterSelectionType.B;
+    [SerializeField] public CharacterSelectionType assignedButton = CharacterSelectionType.Up;
 
     [SerializeField] protected SideType mapSide = SideType.LeftSide;
     [SerializeField] protected Image healthBar;

@@ -23,10 +23,10 @@ public class UICharacterSelectionScript : MonoBehaviour
 
     private Dictionary<ControllerType, CharacterSelectionType> LastSelectedD = new Dictionary<ControllerType, CharacterSelectionType>()
     {
-        { ControllerType.Player1, CharacterSelectionType.A},
-        { ControllerType.Player2, CharacterSelectionType.B},
-        { ControllerType.Player3, CharacterSelectionType.X},
-        { ControllerType.Player4, CharacterSelectionType.Y}
+        { ControllerType.Player1, CharacterSelectionType.Down},
+        { ControllerType.Player2, CharacterSelectionType.Right},
+        { ControllerType.Player3, CharacterSelectionType.Left},
+        { ControllerType.Player4, CharacterSelectionType.Up}
     };
 
 
@@ -127,22 +127,6 @@ public class UICharacterSelectionScript : MonoBehaviour
             case CharacterSelectionType.Right:
                 RightAnim.SetBool("LoadSelect", status);
                 ChangeColorForSelection(RightImageToColor, status ? BattleManagerScript.Instance.playersColor[(int)playerController] : Color.white);
-                break;
-            case CharacterSelectionType.A:
-                RightAnim.SetBool("LoadSelect", status);
-              //  ChangeColorForSelection(UpImageToColor, status ? BattleManagerScript.Instance.playersColor[idColor] : Color.white);
-                break;
-            case CharacterSelectionType.B:
-                DownAnim.SetBool("LoadSelect", status);
-             //   ChangeColorForSelection(UpImageToColor, status ? BattleManagerScript.Instance.playersColor[idColor] : Color.white);
-                break;
-            case CharacterSelectionType.X:
-                UpAnim.SetBool("LoadSelect", status);
-             //   ChangeColorForSelection(UpImageToColor, status ? BattleManagerScript.Instance.playersColor[idColor] : Color.white);
-                break;
-            case CharacterSelectionType.Y:
-                LeftAnim.SetBool("LoadSelect", status);
-             //   ChangeColorForSelection(UpImageToColor, status ? BattleManagerScript.Instance.playersColor[idColor] : Color.white);
                 break;
         }
     }
