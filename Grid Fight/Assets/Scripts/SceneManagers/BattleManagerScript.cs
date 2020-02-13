@@ -26,6 +26,10 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
+    public bool CanISwap = false;
+    
+
+
 
     public static BattleManagerScript Instance;
     public BattleState _CurrentBattleState;
@@ -55,8 +59,12 @@ public class BattleManagerScript : MonoBehaviour
     public bool VFXScene = false;
     [SerializeField]  private bool singleUnitControls = true;
     bool matchStarted = false;
+    public InputControllerType InputControllerT;
     [SerializeField]
     public bool usingFungus = false;
+
+    
+
     public void SetupBattleState()
     {
         if (matchStarted) return;
@@ -294,57 +302,85 @@ public class BattleManagerScript : MonoBehaviour
     }
 
     //Used when the char is not in the battlefield to move it on the battlefield
-    public void LoadingNewCharacterToGrid(CharacterNameType cName,SideType side, ControllerType playerController)
+    /* public void LoadingNewCharacterToGrid(CharacterNameType cName,SideType side, ControllerType playerController)
+     {
+         if (CurrentBattleState != BattleState.Battle && CurrentBattleState != BattleState.Intro) return;
+
+         if (CurrentSelectedCharacters[playerController].LoadCharCo != null)
+         {
+             return;
+         }
+         if (!AllCharactersOnField.Where(r => r.UMS.Side == side && r.CharInfo.CharacterID == cName).First().IsOnField && 
+             (CurrentSelectedCharacters.Where(r=> r.Value.Character != null && r.Value.Character.CharInfo.CharacterID == cName).ToList().Count == 0))
+         {
+             if (CurrentSelectedCharacters[playerController].Character == null || !singleUnitControls)
+             {
+                 //Spawn first character for player to a random position on the grid
+                 CurrentSelectedCharacters[playerController].LoadCharCo = CharacterLoadingIn(cName, playerController);
+             }
+             else
+             {
+                 //Swap the characters if the player already has one under their control
+                 if(!CurrentSelectedCharacters[playerController].Character.IsOnField)
+                 {
+                     return;
+                 }
+
+                 CurrentSelectedCharacters[playerController].LoadCharCo = SwapCharacters(cName, playerController);
+             }
+             CurrentCharactersLoadingInfo.Add(new CharacterLoadingInfoClass(cName, playerController, CurrentSelectedCharacters[playerController].LoadCharCo));
+             StartCoroutine(CurrentSelectedCharacters[playerController].LoadCharCo);
+         }
+         else
+         {
+             //SelectCharacter(playerController, (CharacterType_Script)AllCharactersOnField.Where(r => r.UMS.Side == side && r.CharInfo.CharacterID == cName).First());
+         }
+     }*/
+
+    public void LoadingNewCharacterToGrid(CharacterNameType cName, SideType side, ControllerType playerController)
     {
         if (CurrentBattleState != BattleState.Battle && CurrentBattleState != BattleState.Intro) return;
+        CharacterType_Script PrevCharacter = (CharacterType_Script)AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == CurrentSelectedCharacters[playerController].NextSelectionChar).First();
+        DeselectCharacter(PrevCharacter.CharInfo.CharacterID);
+        CharacterType_Script currentCharacter = (CharacterType_Script)AllCharactersOnField.Where(r=> r.CharInfo.CharacterID == cName).First();
+        currentCharacter.SetCharSelected(true, playerController);
 
-        if (CurrentSelectedCharacters[playerController].LoadCharCo != null)
+        if (CurrentSelectedCharacters[playerController].Character == null || !singleUnitControls)
         {
-            return;
-        }
-        if (!AllCharactersOnField.Where(r => r.UMS.Side == side && r.CharInfo.CharacterID == cName).First().IsOnField && 
-            (CurrentSelectedCharacters.Where(r=> r.Value.Character != null && r.Value.Character.CharInfo.CharacterID == cName).ToList().Count == 0))
-        {
-            if (CurrentSelectedCharacters[playerController].Character == null || !singleUnitControls)
-            {
-                //Spawn first character for player to a random position on the grid
-                CurrentSelectedCharacters[playerController].LoadCharCo = CharacterLoadingIn(cName, playerController);
-            }
-            else
-            {
-                //Swap the characters if the player already has one under their control
-                if(!CurrentSelectedCharacters[playerController].Character.IsOnField)
-                {
-                    return;
-                }
-
-                CurrentSelectedCharacters[playerController].LoadCharCo = SwapCharacters(cName, playerController);
-            }
-            CurrentCharactersLoadingInfo.Add(new CharacterLoadingInfoClass(cName, playerController, CurrentSelectedCharacters[playerController].LoadCharCo));
-            StartCoroutine(CurrentSelectedCharacters[playerController].LoadCharCo);
+            //Spawn first character for player to a random position on the grid
+            CurrentSelectedCharacters[playerController].LoadCharCo = CharacterLoadingIn(cName, playerController);
         }
         else
         {
-            //SelectCharacter(playerController, (CharacterType_Script)AllCharactersOnField.Where(r => r.UMS.Side == side && r.CharInfo.CharacterID == cName).First());
+            CurrentSelectedCharacters[playerController].LoadCharCo = SwapCharacters(cName, playerController);
         }
+        CurrentCharactersLoadingInfo.Add(new CharacterLoadingInfoClass(currentCharacter.CharInfo.CharacterID, playerController, CurrentSelectedCharacters[playerController].LoadCharCo));
+        StartCoroutine(CurrentSelectedCharacters[playerController].LoadCharCo);
     }
+
+
 
     IEnumerator SwapCharacters(CharacterNameType cName, ControllerType playerController)
     {
-       // yield return HoldPressTimer(playerController);
-       if(CurrentSelectedCharacters.Where(r=> r.Value.Character != null && r.Value.Character.CharInfo.CharacterID == cName).ToList().Count == 0 ||
-            !CurrentSelectedCharacters[playerController].Character.isMoving)
-       {
-            Vector2Int spawnPos = CurrentSelectedCharacters[playerController].Character.UMS._CurrentTilePos;
+        // yield return HoldPressTimer(playerController);
+        Vector2Int spawnPos = CurrentSelectedCharacters[playerController].Character.UMS._CurrentTilePos;
+        while (!CanISwap || !CurrentSelectedCharacters[playerController].Character.IsOnField || CurrentSelectedCharacters[playerController].Character.isMoving ||
+            CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle)
+        {
+            yield return null;
+        }
+
+        if (CurrentSelectedCharacters[playerController].NextSelectionChar == AllCharactersOnField.Where(r=> r.CharInfo.CharacterID == cName).First().CharInfo.CharacterSelection)
+        {
             CharacterType_Script currentCharacter = SetCharOnBoardOnFixedPos(playerController, cName, spawnPos);
             if(currentCharacter != null)
             {
                 currentCharacter.SpineAnim.SetAnimationSpeed(2);
                 yield return RemoveCharacterFromBaord(playerController, CurrentSelectedCharacters[playerController].Character, false);
                 SelectCharacter(playerController, currentCharacter);
-                //And drop the new character in
             }
         }
+        //And drop the new character in
         CurrentSelectedCharacters[playerController].LoadCharCo = null;
     }
 
@@ -508,7 +544,7 @@ public class BattleManagerScript : MonoBehaviour
 
 
                 //Set the new character to selected by this player
-                currentCharacter.SetCharSelected(true, playerController);
+                //currentCharacter.SetCharSelected(true, playerController);
             }
         }
     }
@@ -599,12 +635,48 @@ public class BattleManagerScript : MonoBehaviour
 
     public void Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType characterSelection, ControllerType playerController)
     {
-        if (CurrentBattleState == BattleState.Battle || CurrentBattleState == BattleState.FungusPuppets || CurrentBattleState == BattleState.Intro)
+        SideType side = SideType.LeftSide;
+        BaseCharacter cb = new BaseCharacter();
+        if (InputControllerT == InputControllerType.SelectionOnABXY)
         {
-            SideType side = GetSideFromPlayer(new List<ControllerType> { playerController });
-            BaseCharacter cb = AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == characterSelection && r.UMS.Side == side).FirstOrDefault();
-            if (cb != null)
+            if (CurrentBattleState == BattleState.Battle || CurrentBattleState == BattleState.FungusPuppets || CurrentBattleState == BattleState.Intro)
             {
+                side = GetSideFromPlayer(new List<ControllerType> { playerController });
+                cb = AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == characterSelection && r.UMS.Side == side).FirstOrDefault();
+                if (cb != null)
+                {
+                    LoadingNewCharacterToGrid(cb.CharInfo.CharacterID, side, playerController);
+                }
+            }
+        }
+        else if (InputControllerT == InputControllerType.SelectionOnLR)
+        {
+            if (CurrentBattleState == BattleState.Battle || CurrentBattleState == BattleState.FungusPuppets || CurrentBattleState == BattleState.Intro)
+            {
+                side = GetSideFromPlayer(new List<ControllerType> { playerController });
+                cb = null;
+                if (CurrentSelectedCharacters[playerController].Character == null)
+                {
+                    cb = AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == characterSelection && r.UMS.Side == side && !r.IsOnField).FirstOrDefault();
+                    CurrentSelectedCharacters[playerController].NextSelectionChar = cb.CharInfo.CharacterSelection;
+                }
+                else
+                {
+                    CharacterSelectionType cs = CurrentSelectedCharacters[playerController].NextSelectionChar;
+                    for (int i = 0; i < AllCharactersOnField.Count; i++)
+                    {
+                        cs = cs + (characterSelection == CharacterSelectionType.Left ? -1 : 1);
+                        cs = (int)cs >= AllCharactersOnField.Count ? 0 : cs < 0 ? ((CharacterSelectionType)AllCharactersOnField.Count - 1) : cs;
+                        cb = AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == cs && r.UMS.Side == side).FirstOrDefault();
+                        if (cb != null && CurrentSelectedCharacters.Values.Where(r => r.Character != null && r.Character == cb).ToList().Count == 0)
+                        {
+                            Debug.Log("Prev " + CurrentSelectedCharacters[playerController].NextSelectionChar.ToString());
+                            CurrentSelectedCharacters[playerController].NextSelectionChar = cs;
+                            Debug.Log(cs.ToString());
+                            break;
+                        }
+                    }
+                }
                 LoadingNewCharacterToGrid(cb.CharInfo.CharacterID, side, playerController);
             }
         }
@@ -812,6 +884,8 @@ public class CurrentSelectedCharacterClass
 {
     public CharacterType_Script Character;
     public IEnumerator LoadCharCo;
+    public CharacterSelectionType NextSelectionChar;
+
 
     public CurrentSelectedCharacterClass()
     {
