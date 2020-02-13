@@ -27,6 +27,12 @@ public class MinionType_Script : BaseCharacter
     GameObject chargeParticles = null;
 
 
+    protected override void Start()
+    {
+        StartAttakCo();
+       
+    }
+
     public override void SetUpEnteringOnBattle()
     {
         SetAnimation(CharacterAnimationStateType.Arriving);
@@ -91,7 +97,7 @@ public class MinionType_Script : BaseCharacter
     private int GetHowManyAttackAreOnBattleField(List<BulletBehaviourInfoClassOnBattleField> bulTraj)
     {
         int res = 0;
-        Vector2Int basePos = new Vector2Int(0, GridManagerScript.Instance.YGridSeparator);
+        Vector2Int basePos = new Vector2Int(UMS.CurrentTilePos.x, GridManagerScript.Instance.YGridSeparator);
         foreach (BulletBehaviourInfoClassOnBattleField item in bulTraj)
         {
             foreach (Vector2Int target in item.BulletEffectTiles)

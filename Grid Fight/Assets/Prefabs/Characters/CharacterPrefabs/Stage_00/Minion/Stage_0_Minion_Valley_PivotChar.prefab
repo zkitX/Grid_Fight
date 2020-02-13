@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1241316947748258084
+--- !u!1 &260168556934790680
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4399767783384344103}
-  - component: {fileID: 3456208844727706458}
+  - component: {fileID: 6081836593374980024}
+  - component: {fileID: 4865203969697294701}
   m_Layer: 0
   m_Name: CandleHolder_Torso1
   m_TagString: Untagged
@@ -17,28 +17,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4399767783384344103
+--- !u!4 &6081836593374980024
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1241316947748258084}
+  m_GameObject: {fileID: 260168556934790680}
   m_LocalRotation: {x: 0, y: 0, z: 0.6727543, w: 0.739866}
   m_LocalPosition: {x: -0.0025199999, y: 0.02274, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 9201026820482807227}
-  m_Father: {fileID: 8699759849952533062}
+  - {fileID: 6821748102798546616}
+  m_Father: {fileID: 4820713715154763640}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3456208844727706458
+--- !u!114 &4865203969697294701
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1241316947748258084}
+  m_GameObject: {fileID: 260168556934790680}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b238dfcde8209044b97d23f62bcaadf6, type: 3}
@@ -46,13 +46,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boneName: CandleHolder_Torso1
   parentReference: {fileID: 0}
-  mode: 1
+  mode: 0
   position: 1
   rotation: 1
   scale: 1
   zPosition: 1
   overrideAlpha: 1
---- !u!1 &1445659145030868144
+--- !u!1 &923367570033666351
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,45 +60,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9031338903740854005}
-  - component: {fileID: 1710540475000793252}
+  - component: {fileID: 2535094796419014460}
+  - component: {fileID: 2562363915829865640}
   m_Layer: 0
-  m_Name: root
+  m_Name: CandleHolder_RightArm1
   m_TagString: Untagged
-  m_Icon: {fileID: 2800000, guid: d1de1604dfe4cb64c9d31246a8e43c78, type: 3}
+  m_Icon: {fileID: 2800000, guid: 97a43f11e00735147a9dc3dff6d68191, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9031338903740854005
+--- !u!4 &2535094796419014460
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1445659145030868144}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_GameObject: {fileID: 923367570033666351}
+  m_LocalRotation: {x: 0, y: 0, z: -0.10695821, w: 0.9942635}
+  m_LocalPosition: {x: 0.088485, y: -0.007245, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8699759849952533062}
-  m_Father: {fileID: 1335977517463784390}
+  - {fileID: 1248219591182752692}
+  m_Father: {fileID: 8683024463035791693}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1710540475000793252
+--- !u!114 &2562363915829865640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1445659145030868144}
+  m_GameObject: {fileID: 923367570033666351}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b238dfcde8209044b97d23f62bcaadf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boneName: root
+  boneName: CandleHolder_RightArm1
   parentReference: {fileID: 0}
-  mode: 1
+  mode: 0
   position: 1
   rotation: 1
   scale: 1
@@ -135,7 +135,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1821743293206290437
+--- !u!1 &2059796858171536389
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,45 +143,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8699759849952533062}
-  - component: {fileID: 2827920491403842718}
+  - component: {fileID: 1248219591182752692}
+  - component: {fileID: 7238578015845121869}
   m_Layer: 0
-  m_Name: CandleHolder_Body_Controler
+  m_Name: CandleHolder_RightArm2
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: d1de1604dfe4cb64c9d31246a8e43c78, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8699759849952533062
+--- !u!4 &1248219591182752692
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1821743293206290437}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.072435, y: 0.444195, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_GameObject: {fileID: 2059796858171536389}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: -0.00000004371139}
+  m_LocalPosition: {x: 0.118875004, y: -0.00069, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4399767783384344103}
-  m_Father: {fileID: 9031338903740854005}
+  - {fileID: 6769459929579612889}
+  m_Father: {fileID: 2535094796419014460}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2827920491403842718
+--- !u!114 &7238578015845121869
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1821743293206290437}
+  m_GameObject: {fileID: 2059796858171536389}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b238dfcde8209044b97d23f62bcaadf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boneName: CandleHolder_Body_Controler
+  boneName: CandleHolder_RightArm2
   parentReference: {fileID: 0}
-  mode: 1
+  mode: 0
   position: 1
   rotation: 1
   scale: 1
@@ -224,7 +224,7 @@ Transform:
   m_Children:
   - {fileID: 9223019439008863647}
   - {fileID: 2639910783238502110}
-  - {fileID: 1335977517463784390}
+  - {fileID: 1372274462073237573}
   m_Father: {fileID: 6655024931404578419}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -437,13 +437,13 @@ MonoBehaviour:
   Name: 
   CharacterIcons: []
   BaseCharacterType: 1
-  CharacterID: 24
+  CharacterID: 26
   CurrentParticlesAttackTypeInfo:
   - {fileID: 0}
   CurrentOnBattleFieldAttackTypeInfo:
   - {fileID: 11400000, guid: 16c71180a018bf044be5211ddac04e59, type: 2}
   - {fileID: 11400000, guid: 684b6eef33dd29544a051da2136eee1f, type: 2}
-  ParticleID: 3
+  ParticleID: 13
   Elemental: 0
   ClassType: 3
   CharacterLevel: 0
@@ -531,9 +531,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f726fb798ad621458c431cb9966d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boneRoot: {fileID: 1335977517463784390}
+  boneRoot: {fileID: 1372274462073237573}
   skeletonRenderer: {fileID: 8326784966174091738}
---- !u!1 &3364162165727811974
+--- !u!1 &2997886312417081499
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -541,8 +541,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9201026820482807227}
-  - component: {fileID: 3637515219238730993}
+  - component: {fileID: 6821748102798546616}
+  - component: {fileID: 7091774984795100144}
   m_Layer: 0
   m_Name: CandleHolder_Torso2
   m_TagString: Untagged
@@ -550,28 +550,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9201026820482807227
+--- !u!4 &6821748102798546616
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3364162165727811974}
+  m_GameObject: {fileID: 2997886312417081499}
   m_LocalRotation: {x: 0, y: 0, z: 0.062616326, w: 0.9980377}
   m_LocalPosition: {x: 0.07275, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8660321292809352468}
-  m_Father: {fileID: 4399767783384344103}
+  - {fileID: 8683024463035791693}
+  m_Father: {fileID: 6081836593374980024}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3637515219238730993
+--- !u!114 &7091774984795100144
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3364162165727811974}
+  m_GameObject: {fileID: 2997886312417081499}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b238dfcde8209044b97d23f62bcaadf6, type: 3}
@@ -579,163 +579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boneName: CandleHolder_Torso2
   parentReference: {fileID: 0}
-  mode: 1
-  position: 1
-  rotation: 1
-  scale: 1
-  zPosition: 1
-  overrideAlpha: 1
---- !u!1 &3490220515301801802
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8660321292809352468}
-  - component: {fileID: 1481121431738638252}
-  m_Layer: 0
-  m_Name: CandleHolder_RightArm
-  m_TagString: Untagged
-  m_Icon: {fileID: 2800000, guid: 97a43f11e00735147a9dc3dff6d68191, type: 3}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8660321292809352468
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3490220515301801802}
-  m_LocalRotation: {x: 0, y: 0, z: 0.76542705, w: 0.6435227}
-  m_LocalPosition: {x: 0.041640002, y: 0.02778, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
-  m_Children:
-  - {fileID: 5003805021986005914}
-  m_Father: {fileID: 9201026820482807227}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1481121431738638252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3490220515301801802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b238dfcde8209044b97d23f62bcaadf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boneName: CandleHolder_RightArm
-  parentReference: {fileID: 0}
-  mode: 1
-  position: 1
-  rotation: 1
-  scale: 1
-  zPosition: 1
-  overrideAlpha: 1
---- !u!1 &3907521247395053297
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1446059629602997132}
-  - component: {fileID: 3942312917318707943}
-  m_Layer: 0
-  m_Name: CandleHolder_RightArm2
-  m_TagString: Untagged
-  m_Icon: {fileID: 2800000, guid: d1de1604dfe4cb64c9d31246a8e43c78, type: 3}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1446059629602997132
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3907521247395053297}
-  m_LocalRotation: {x: 0, y: 0, z: -1, w: -0.00000004371139}
-  m_LocalPosition: {x: 0.118875004, y: -0.00069, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
-  m_Children:
-  - {fileID: 6769459929579612889}
-  m_Father: {fileID: 5003805021986005914}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3942312917318707943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3907521247395053297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b238dfcde8209044b97d23f62bcaadf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boneName: CandleHolder_RightArm2
-  parentReference: {fileID: 0}
-  mode: 1
-  position: 1
-  rotation: 1
-  scale: 1
-  zPosition: 1
-  overrideAlpha: 1
---- !u!1 &4825569632919964892
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5003805021986005914}
-  - component: {fileID: 13930565283065008}
-  m_Layer: 0
-  m_Name: CandleHolder_RightArm1
-  m_TagString: Untagged
-  m_Icon: {fileID: 2800000, guid: 97a43f11e00735147a9dc3dff6d68191, type: 3}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5003805021986005914
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4825569632919964892}
-  m_LocalRotation: {x: 0, y: 0, z: -0.10695821, w: 0.9942635}
-  m_LocalPosition: {x: 0.088485, y: -0.007245, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
-  m_Children:
-  - {fileID: 1446059629602997132}
-  m_Father: {fileID: 8660321292809352468}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &13930565283065008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4825569632919964892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b238dfcde8209044b97d23f62bcaadf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boneName: CandleHolder_RightArm1
-  parentReference: {fileID: 0}
-  mode: 1
+  mode: 0
   position: 1
   rotation: 1
   scale: 1
@@ -771,7 +615,7 @@ Transform:
   m_Father: {fileID: 9206514264086356922}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6908785464248176655
+--- !u!1 &6386160315600427522
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -779,29 +623,102 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1335977517463784390}
+  - component: {fileID: 8683024463035791693}
+  - component: {fileID: 5631943402654212642}
   m_Layer: 0
-  m_Name: SkeletonUtility-SkeletonRoot
+  m_Name: CandleHolder_RightArm
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2800000, guid: 97a43f11e00735147a9dc3dff6d68191, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1335977517463784390
+--- !u!4 &8683024463035791693
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6908785464248176655}
+  m_GameObject: {fileID: 6386160315600427522}
+  m_LocalRotation: {x: 0, y: 0, z: 0.76542705, w: 0.6435227}
+  m_LocalPosition: {x: 0.041640002, y: 0.02778, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2535094796419014460}
+  m_Father: {fileID: 6821748102798546616}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5631943402654212642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6386160315600427522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b238dfcde8209044b97d23f62bcaadf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneName: CandleHolder_RightArm
+  parentReference: {fileID: 0}
+  mode: 0
+  position: 1
+  rotation: 1
+  scale: 1
+  zPosition: 1
+  overrideAlpha: 1
+--- !u!1 &7804189257838458559
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5783044502017746688}
+  - component: {fileID: 3692765213976238643}
+  m_Layer: 0
+  m_Name: root
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: d1de1604dfe4cb64c9d31246a8e43c78, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5783044502017746688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7804189257838458559}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 9031338903740854005}
-  m_Father: {fileID: 9206514264086356922}
-  m_RootOrder: 2
+  - {fileID: 4820713715154763640}
+  m_Father: {fileID: 1372274462073237573}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3692765213976238643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7804189257838458559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b238dfcde8209044b97d23f62bcaadf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneName: root
+  parentReference: {fileID: 0}
+  mode: 0
+  position: 1
+  rotation: 1
+  scale: 1
+  zPosition: 1
+  overrideAlpha: 1
 --- !u!1 &8406504026633701616
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,12 +749,95 @@ Transform:
   m_Father: {fileID: 9206514264086356922}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8820870709224191443
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1372274462073237573}
+  m_Layer: 0
+  m_Name: SkeletonUtility-SkeletonRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1372274462073237573
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8820870709224191443}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5783044502017746688}
+  m_Father: {fileID: 9206514264086356922}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9072050035577024234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4820713715154763640}
+  - component: {fileID: 7324008103914007792}
+  m_Layer: 0
+  m_Name: CandleHolder_Body_Controler
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: d1de1604dfe4cb64c9d31246a8e43c78, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4820713715154763640
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9072050035577024234}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.072435, y: 0.444195, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6081836593374980024}
+  m_Father: {fileID: 5783044502017746688}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7324008103914007792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9072050035577024234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b238dfcde8209044b97d23f62bcaadf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneName: CandleHolder_Body_Controler
+  parentReference: {fileID: 0}
+  mode: 0
+  position: 1
+  rotation: 1
+  scale: 1
+  zPosition: 1
+  overrideAlpha: 1
 --- !u!1001 &263804173070652993
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1446059629602997132}
+    m_TransformParent: {fileID: 1248219591182752692}
     m_Modifications:
     - target: {fileID: 6798407456816970919, guid: 05eff284c5072744db1e5ff473748678,
         type: 3}
@@ -847,12 +847,12 @@ PrefabInstance:
     - target: {fileID: 6798407456816970904, guid: 05eff284c5072744db1e5ff473748678,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.17422521
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6798407456816970904, guid: 05eff284c5072744db1e5ff473748678,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.06241214
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6798407456816970904, guid: 05eff284c5072744db1e5ff473748678,
         type: 3}
@@ -872,12 +872,12 @@ PrefabInstance:
     - target: {fileID: 6798407456816970904, guid: 05eff284c5072744db1e5ff473748678,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.005672327
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6798407456816970904, guid: 05eff284c5072744db1e5ff473748678,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9999839
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6798407456816970904, guid: 05eff284c5072744db1e5ff473748678,
         type: 3}

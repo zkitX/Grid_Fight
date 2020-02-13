@@ -52,6 +52,10 @@ public class UnitManagementScript : MonoBehaviour
     public GameObject ArrivingParticle;
     public GameObject DeathParticles;
     public AttackType CurrentAttackType;
+
+    public Transform HPBar;
+    public Transform StaminaBar;
+
     //Used to decide the side
     public void SetupCharacterSide()
     {

@@ -213,13 +213,14 @@ public class CharacterInfoScript : MonoBehaviour
     {
         get
         {
-            return HealthStats.Health <= 0 ? 0 : HealthStats.Health;
+            return HealthStats.Health;
         }
         set
         {
             HealthStats.Health = value;
             if (HealthStats.Health <= 0)
             {
+                HealthStats.Health = HealthStats.Health <= 0 ? 0 : HealthStats.Health;
                 if (DeathEvent != null)
                 {
                     DeathEvent();

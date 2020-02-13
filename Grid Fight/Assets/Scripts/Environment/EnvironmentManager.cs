@@ -53,6 +53,10 @@ public class EnvironmentManager : MonoBehaviour
                 MainCamera.orthographicSize = 4;
                 MainCamera.transform.position = test;// new Vector3(0.6f, 1.75f, -8.5f);
                 break;
+            case GridStructureType.r5xc10Stage00:
+                MainCamera.orthographicSize = 4;
+                MainCamera.transform.position = test;// new Vector3(0.6f, 1.75f, -8.5f);
+                break;
         }
     }
 

@@ -59,7 +59,7 @@ public class GridManagerScript : MonoBehaviour
         bool AreInControlledArea = false;
         foreach (Vector2Int item in pos)
         {
-            AreInControlledArea = BattleTiles.Where(r => r.Pos == item && (r.WalkingSide == walkingSide || walkingSide == WalkingSideType.Both)).ToList().Count > 0 ? true : false;
+            AreInControlledArea = BattleTiles.Where(r => r.Pos == item && (r.WalkingSide == walkingSide || walkingSide == WalkingSideType.Both) && r._BattleTileState == BattleTileStateType.Empty).ToList().Count > 0 ? true : false;
             if (!AreInControlledArea)
             {
                 break;

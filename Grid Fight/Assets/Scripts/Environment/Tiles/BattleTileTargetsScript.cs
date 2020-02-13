@@ -7,7 +7,13 @@ public class BattleTileTargetsScript : MonoBehaviour
 {
     public List<Vector3> TargetsPosition = new List<Vector3>();
     public List<TargetClass> Targets = new List<TargetClass>();
+    public Transform Whiteline;
 
+
+    private void Awake()
+    {
+        Whiteline = transform.GetChild(0);
+    }
     public void SetAttack(float duration, AttackParticleTypes atkPS, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker)
     {
         GameObject nextT = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Tile);
@@ -23,6 +29,7 @@ public class BattleTileTargetsScript : MonoBehaviour
     private IEnumerator FireTarget(TargetClass tc, AttackParticleTypes atkPS, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker)
     {
         float timer = 0;
+        Whiteline.gameObject.SetActive(true);
         float duration = tc.Duration;
         bool attackerFiredAttackAnim = false;
         //Animation animToFire = tc.TargetIndicator.GetComponent<Animation>();
@@ -100,6 +107,7 @@ public class BattleTileTargetsScript : MonoBehaviour
                 return;
             }
         }
+       
     }
 
     public void UpdateQueue(TargetClass completedTarget)
@@ -107,6 +115,10 @@ public class BattleTileTargetsScript : MonoBehaviour
         completedTarget.TargetIndicator.SetActive(false);
         Targets.Remove(completedTarget);
         UpdateQueue();
+        if (Targets.Count == 0)
+        {
+            Whiteline.gameObject.SetActive(false);
+        }
     }
 
 }
