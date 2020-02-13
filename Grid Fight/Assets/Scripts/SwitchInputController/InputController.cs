@@ -377,7 +377,7 @@ public class InputController : MonoBehaviour
         InputButtonType buttonInput = (InputButtonType)System.Enum.Parse(typeof(InputButtonType), data.actionName);
         if(EventManager.Instance != null)
         {
-            EventManager.Instance.UpdateButtonPressed(InputButtonType.Minus);
+            EventManager.Instance.UpdateButtonPressed(buttonInput);
         }
 
         switch (buttonInput)

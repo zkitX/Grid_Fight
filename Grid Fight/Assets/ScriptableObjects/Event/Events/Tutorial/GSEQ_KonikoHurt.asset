@@ -10,11 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25d497aba9400d147aee0263a1f7ec6d, type: 3}
-  m_Name: GSEQ_konikojoins
+  m_Name: GSEQ_KonikoHurt
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Koniko Hurt
   hasHappened: 0
-  requirements: []
+  requirements:
+  - {fileID: 11400000, guid: 9adf41de62f60734fac0165f98b37229, type: 2}
   ceaseOnComplete: 1
   requireComplete: 1
-  effects: []
+  effects:
+  - Name: 
+    effectType: 2
+    secondsToWait: 0
+    debugText: 
+    blockName: Koniko joins
+    command: {fileID: 0}
+    characterToRecruit: 21

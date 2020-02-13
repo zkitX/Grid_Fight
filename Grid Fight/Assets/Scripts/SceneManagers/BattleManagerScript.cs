@@ -351,7 +351,10 @@ public class BattleManagerScript : MonoBehaviour
         }
         else
         {
-            
+            if (CurrentSelectedCharacters[playerController].Character.CharInfo.CharacterID == cName)
+            {
+                return;
+            }
             CurrentSelectedCharacters[playerController].LoadCharCo = SwapCharacters(cName, playerController);
         }
         CurrentCharactersLoadingInfo.Add(new CharacterLoadingInfoClass(currentCharacter.CharInfo.CharacterID, playerController, CurrentSelectedCharacters[playerController].LoadCharCo));
@@ -397,16 +400,12 @@ public class BattleManagerScript : MonoBehaviour
         {
             charToRemove = CurrentSelectedCharacters.Values.Where(r => r.Character.CharInfo.CharacterID == charToRemoveName).FirstOrDefault().Character;
         }*/
-        CharacterType_Script charToRemove = (CharacterType_Script)AllCharactersOnField.Where(r => r.GetType() == typeof(CharacterType_Script) && r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
-        if(charToRemove == null) charToRemove = (CharacterType_Script)WaveManagerScript.Instance.WaveCharcters.Where(r => r.GetType() == typeof(MinionType_Script) && r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
-	    ControllerType controller;
-        if(CurrentSelectedCharacters.Values != null && CurrentSelectedCharacters.Where(r => r.Value.Character == charToRemove).FirstOrDefault().Key != ControllerType.None)
+        BaseCharacter charToRemove = AllCharactersOnField.Where(r => r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
+        if (charToRemove == null) charToRemove = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
+        ControllerType controller = ControllerType.None;
+        if (CurrentSelectedCharacters.Values != null && CurrentSelectedCharacters.Where(r => r.Value.Character == charToRemove).FirstOrDefault().Key != ControllerType.None)
         {
             controller = CurrentSelectedCharacters.Where(r => r.Value.Character == charToRemove).FirstOrDefault().Key;
-        }
-        else
-        {
-            controller = ControllerType.None;
         }
         charToRemove.SpineAnim.SetAnimationSpeed(2);
         StartCoroutine(RemoveCharacterFromBaord(controller, charToRemove, true));
@@ -683,7 +682,7 @@ public class BattleManagerScript : MonoBehaviour
                 cb = null;
                 if (CurrentSelectedCharacters[playerController].Character == null)
                 {
-                    cb = AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == characterSelection && r.UMS.Side == side && !r.IsOnField).FirstOrDefault();
+                    cb = AllCharactersOnField.FirstOrDefault();
                     if(cb != null)
                     {
                         CurrentSelectedCharacters[playerController].NextSelectionChar = cb.CharInfo.CharacterSelection;

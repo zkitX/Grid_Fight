@@ -111,7 +111,9 @@ public class WaveManagerScript : MonoBehaviour
         {
             timer += Time.fixedDeltaTime;
             yield return BattleManagerScript.Instance.PauseUntil();
-            if (timer > CurrentWaveChar.DelayBetweenChars && WaveCharcters.Where(r => r.gameObject.activeInHierarchy).ToList().Count < wavePhase.MaxEnemyOnScreen)
+            if (CurrentWaveChar == null ||
+                timer > CurrentWaveChar.DelayBetweenChars && 
+                WaveCharcters.Where(r => r.gameObject.activeInHierarchy).ToList().Count < wavePhase.MaxEnemyOnScreen)
             {
                 if (wavePhase.IsRandom)
                 {

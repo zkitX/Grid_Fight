@@ -72,6 +72,8 @@ public class BulletScript : MonoBehaviour
         while (isMoving)
         {
             yield return new WaitForFixedUpdate();
+            if (BattleManagerScript.Instance.CurrentBattleState == BattleState.Intro) isMoving = false;
+
             //In case the game ended or in pause I will block the movement
             while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle &&
                 BattleManagerScript.Instance.CurrentBattleState != BattleState.FungusPuppets 
