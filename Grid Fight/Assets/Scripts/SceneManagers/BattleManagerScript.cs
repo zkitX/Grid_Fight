@@ -689,14 +689,15 @@ public class BattleManagerScript : MonoBehaviour
         recruitableChar.UMS.WalkingSide = WalkingSideType.LeftSide;
         recruitableChar.UMS.CurrentAttackType = AttackType.Particles;
         recruitableChar.CharInfo.CharacterSelection = (CharacterSelectionType)AllCharactersOnField.Count - 1;
+        NewIManager.Instance.SetUICharacterToButton(recruitableChar, recruitableChar.CharInfo.CharacterSelection);
         recruitableChar.CharInfo.HealthStats.Health = recruitableChar.CharInfo.HealthStats.Base;
         recruitableChar.gameObject.SetActive(true);
         recruitableChar.SetupCharacterSide();
         PlayablesCharOnScene.Add(new PlayableCharOnScene(recruitableChar.CharInfo.CharacterID, AllCharactersOnField[0].UMS.PlayerController, false, GetSideFromPlayer(recruitableChar.UMS.PlayerController)));
-        foreach (BaseCharacter playableCharOnScene in AllCharactersOnField)
+        /*foreach (BaseCharacter playableCharOnScene in AllCharactersOnField)
         {
             NewIManager.Instance.SetUICharacterToButton((CharacterType_Script)playableCharOnScene, playableCharOnScene.CharInfo.CharacterSelection);
-        }
+        }*/
         SetUICharacterSelectionIcons();
     }
 

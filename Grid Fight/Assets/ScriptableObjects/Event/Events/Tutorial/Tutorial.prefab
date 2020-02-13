@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: -2736389907883621790}
   - component: {fileID: 6901690273281247248}
   - component: {fileID: -5491183719656143246}
+  - component: {fileID: -6554245626715953707}
   m_Layer: 0
   m_Name: Tutorial
   m_TagString: Untagged
@@ -208,7 +209,7 @@ MonoBehaviour:
   scrollPos: {x: 3772.4216, y: 346.66434}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
-  blockViewHeight: 135
+  blockViewHeight: 200
   zoom: 0.66999984
   scrollViewRect:
     serializedVersion: 2
@@ -217,7 +218,7 @@ MonoBehaviour:
     width: 1114
     height: 859
   selectedBlocks:
-  - {fileID: 6427025554798635250}
+  - {fileID: -2736389907883621790}
   selectedCommands: []
   variables: []
   description: :)
@@ -4217,7 +4218,7 @@ MonoBehaviour:
   itemId: 418
   blockName: Koniko Enters but just the wave bit
   description: 
-  eventHandler: {fileID: 0}
+  eventHandler: {fileID: -6554245626715953707}
   commandList:
   - {fileID: -5491183719656143246}
   - {fileID: 6901690273281247248}
@@ -4258,6 +4259,19 @@ MonoBehaviour:
     stringVal: 
   startIndex: 0
   callMode: 1
+--- !u!114 &-6554245626715953707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6427025554798635227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6cabe3afe381684a8e88ee3273de786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentBlock: {fileID: -2736389907883621790}
 --- !u!1001 &2507041884985739173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4265,11 +4279,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6427025554798635230}
     m_Modifications:
-    - target: {fileID: 8480716473841285117, guid: 9db65b01af94e3948890b2e115e7e636,
-        type: 3}
-      propertyPath: m_Name
-      value: Controller
-      objectReference: {fileID: 0}
     - target: {fileID: 3032353371071915375, guid: 9db65b01af94e3948890b2e115e7e636,
         type: 3}
       propertyPath: m_IsActive
@@ -4279,6 +4288,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480716473841285117, guid: 9db65b01af94e3948890b2e115e7e636,
+        type: 3}
+      propertyPath: m_Name
+      value: Controller
       objectReference: {fileID: 0}
     - target: {fileID: 7887921087174628420, guid: 9db65b01af94e3948890b2e115e7e636,
         type: 3}
