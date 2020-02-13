@@ -10,18 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25d497aba9400d147aee0263a1f7ec6d, type: 3}
-  m_Name: Donna dies
+  m_Name: Potiondropsonminiondeath
   m_EditorClassIdentifier: 
-  Name: Donna dies
+  Name: Potiondropsonminiondeath
   hasHappened: 0
   requirements:
-  - {fileID: 11400000}
-  ceaseOnComplete: 0
+  - {fileID: 11400000, guid: 911486b4e65d68849b8e45b1125e2cb9, type: 2}
+  - {fileID: 11400000, guid: 4eeb6abbad9c04041afa542627278e4b, type: 2}
+  ceaseOnComplete: 1
   requireComplete: 1
   effects:
   - Name: 
     effectType: 2
     secondsToWait: 0
     debugText: 
-    blockName: DONNA DIES
+    blockName: HP Potion
     command: {fileID: 0}
+    characterToRecruit: 1000

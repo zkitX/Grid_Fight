@@ -391,7 +391,8 @@ public class BattleManagerScript : MonoBehaviour
             charToRemove = CurrentSelectedCharacters.Values.Where(r => r.Character.CharInfo.CharacterID == charToRemoveName).FirstOrDefault().Character;
         }*/
         CharacterType_Script charToRemove = (CharacterType_Script)AllCharactersOnField.Where(r => r.GetType() == typeof(CharacterType_Script) && r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
-        ControllerType controller;
+        if(charToRemove == null) charToRemove = (CharacterType_Script)WaveManagerScript.Instance.WaveCharcters.Where(r => r.GetType() == typeof(MinionType_Script) && r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
+	ControllerType controller;
         if(CurrentSelectedCharacters.Values != null && CurrentSelectedCharacters.Where(r => r.Value.Character == charToRemove).FirstOrDefault().Key != ControllerType.None)
         {
             controller = CurrentSelectedCharacters.Where(r => r.Value.Character == charToRemove).FirstOrDefault().Key;
@@ -400,6 +401,7 @@ public class BattleManagerScript : MonoBehaviour
         {
             controller = ControllerType.None;
         }
+	if(controller == null) controller = ControllerType.None;
         charToRemove.SpineAnim.SetAnimationSpeed(2);
         StartCoroutine(RemoveCharacterFromBaord(controller, charToRemove, true));
 
@@ -761,14 +763,15 @@ public class BattleManagerScript : MonoBehaviour
         recruitableChar.UMS.WalkingSide = WalkingSideType.LeftSide;
         recruitableChar.UMS.CurrentAttackType = AttackType.Particles;
         recruitableChar.CharInfo.CharacterSelection = (CharacterSelectionType)AllCharactersOnField.Count - 1;
+        NewIManager.Instance.SetUICharacterToButton(recruitableChar, recruitableChar.CharInfo.CharacterSelection);
         recruitableChar.CharInfo.HealthStats.Health = recruitableChar.CharInfo.HealthStats.Base;
         recruitableChar.gameObject.SetActive(true);
         recruitableChar.SetupCharacterSide();
         PlayablesCharOnScene.Add(new PlayableCharOnScene(recruitableChar.CharInfo.CharacterID, AllCharactersOnField[0].UMS.PlayerController, false, GetSideFromPlayer(recruitableChar.UMS.PlayerController)));
-        foreach (BaseCharacter playableCharOnScene in AllCharactersOnField)
+        /*foreach (BaseCharacter playableCharOnScene in AllCharactersOnField)
         {
             NewIManager.Instance.SetUICharacterToButton((CharacterType_Script)playableCharOnScene, playableCharOnScene.CharInfo.CharacterSelection);
-        }
+        }*/
         SetUICharacterSelectionIcons();
     }
 
