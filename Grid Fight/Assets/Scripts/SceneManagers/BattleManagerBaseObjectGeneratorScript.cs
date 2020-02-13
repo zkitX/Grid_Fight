@@ -21,6 +21,7 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
     [Header("Defaults")]
     [SerializeField] protected GameObject defaultWave;
     [SerializeField] protected GameObject defaultFlowChart;
+    [SerializeField] protected GameObject defaultBattleInfo;
     [SerializeField] protected StageEventTriggersProfile defaultEventProfile;
 
     public bool usingFungus = false;
@@ -45,8 +46,12 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
         }
         Instantiate(BaseEnvironment);
         yield return null;
+
+        if(!usingFungus) BattleInfoManager = defaultBattleInfo;
+        Instantiate(BattleInfoManager);
+
         BattleManagerScript bms = Instantiate(BattleManager).GetComponent<BattleManagerScript>();
-        bms.gameObject.GetComponent<EventManager>().stageEventTriggersProfile = defaultEventProfile;
+        if(!usingFungus)bms.gameObject.GetComponent<EventManager>().stageEventTriggersProfile = defaultEventProfile;
         bms.usingFungus = usingFungus;
 
         Instantiate(UI_Battle);
