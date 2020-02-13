@@ -144,6 +144,10 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonZRUpEvent(int player)
     {
         //Debug.Log(player + "  " + "ZR Up");
+        if (BattleManagerScript.Instance.InputControllerT == InputControllerType.SelectionOnLR)
+        {
+            StopSelectedCharacterChargingAttack(player);
+        }
     }
 
     private void Instance_ButtonRUpEvent(int player)
