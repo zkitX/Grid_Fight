@@ -61,7 +61,7 @@ public class BattleManagerScript : MonoBehaviour
     bool matchStarted = false;
     public InputControllerType InputControllerT;
     [SerializeField]
-    public bool usingFungus = false;
+    [HideInInspector] public bool usingFungus = false;
 
     
 
@@ -69,12 +69,17 @@ public class BattleManagerScript : MonoBehaviour
     {
         if (matchStarted) return;
         matchStarted = true;
+        ConfigureUsingFungus();
+        UIBattleManager.Instance.StartMatch.gameObject.SetActive(false);
+    }
+
+    void ConfigureUsingFungus()
+    {
         if (CurrentBattleState == BattleState.FungusPuppets || CurrentBattleState == BattleState.Intro)
         {
-            if(!usingFungus) CurrentBattleState = BattleState.Battle;
+            if (!usingFungus) CurrentBattleState = BattleState.Battle;
         }
-        UIBattleManager.Instance.StartMatch.gameObject.SetActive(false);
-
+        EventManager.Instance.StartEventManager();
     }
 
     #region Unity Life Cycle
@@ -108,7 +113,7 @@ public class BattleManagerScript : MonoBehaviour
         if (CurrentSelectedCharacters[playerController].Character != null && (PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == cName).First().isUsed ||
            (CurrentSelectedCharacters[playerController].Character.isMoving)
            || (!CurrentSelectedCharacters[playerController].Character.IsOnField)
-           || (CurrentSelectedCharacters[playerController].Character.currentAttackPhase != AttackPhasesType.End)))
+          || (CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle)))
         {
             return null;
         }

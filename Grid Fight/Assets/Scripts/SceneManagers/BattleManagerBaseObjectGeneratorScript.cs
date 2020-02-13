@@ -17,6 +17,13 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
     public GameObject Wave;
     public GameObject bosstest;
 
+    [Space(20)]
+    [Header("Defaults")]
+    [SerializeField] protected GameObject defaultFlowChart;
+    [SerializeField] protected StageEventTriggersProfile defaultEventProfile;
+
+    public bool usingFungus = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,11 +44,15 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
         }
         Instantiate(BaseEnvironment);
         yield return null;
-        Instantiate(BattleManager);
+        BattleManagerScript bms = Instantiate(BattleManager).GetComponent<BattleManagerScript>();
+        bms.gameObject.GetComponent<EventManager>().stageEventTriggersProfile = defaultEventProfile;
+        bms.usingFungus = usingFungus;
+
         Instantiate(UI_Battle);
         yield return BattleManagerScript.Instance.InstanciateAllChar();
         Instantiate(Wave);
         yield return WaveManagerScript.Instance.WaveCharCreator();
+        if (!usingFungus) FlowChart = defaultFlowChart;
         Instantiate(FlowChart);
         yield return null;
 

@@ -7,7 +7,7 @@ public class EventManager : MonoBehaviour
     public static EventManager Instance;
 
     [Header("Stage Config")]
-    [SerializeField] protected StageEventTriggersProfile stageEventTriggersProfile;
+    [SerializeField] public StageEventTriggersProfile stageEventTriggersProfile;
     public List<GameSequenceEvent> stageEventTriggers { get; private set; } = new List<GameSequenceEvent>();
     public delegate bool Check();
     protected List<TimedCheck> currentTimedChecks = new List<TimedCheck>();
@@ -34,12 +34,15 @@ public class EventManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    public void StartEventManager()
+    {
         ResetEventsInManager();
     }
 
     public void ResetEventsInManager()
     {
-        if (!BattleManagerScript.Instance.usingFungus) return;
         stageEventTriggers.Clear();
         stageEventTriggers = new List<GameSequenceEvent>();
         if (stageEventTriggersProfile != null)
