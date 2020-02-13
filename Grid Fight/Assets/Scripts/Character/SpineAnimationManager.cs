@@ -79,6 +79,7 @@ public class SpineAnimationManager : MonoBehaviour
 
         if (completedAnim == CharacterAnimationStateType.Arriving || completedAnim.ToString().Contains("Growing"))
         {
+            CharOwner.IsSwapping = false;
             CharOwner.CharArrivedOnBattleField();
         }
         if (CurrentAnim == CharacterAnimationStateType.Reverse_Arriving)

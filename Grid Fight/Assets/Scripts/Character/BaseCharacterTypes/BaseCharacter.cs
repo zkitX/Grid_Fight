@@ -55,6 +55,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     IEnumerator attackCoroutine = null;
     public SpecialAttackStatus StopPowerfulAtk;
 
+    public bool IsSwapping = false;
+
+
     protected virtual void Start()
     {
         if(VFXTestMode)
@@ -120,7 +123,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             CharBoxCollider.enabled = value;
         }
-        
         CanAttack = value;
         IsOnField = value;
     }
