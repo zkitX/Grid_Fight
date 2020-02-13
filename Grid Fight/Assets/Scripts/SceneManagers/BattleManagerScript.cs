@@ -361,7 +361,7 @@ public class BattleManagerScript : MonoBehaviour
     {
         // yield return HoldPressTimer(playerController);
         Vector2Int spawnPos = CurrentSelectedCharacters[playerController].Character.UMS._CurrentTilePos;
-        while (!CanISwap || !CurrentSelectedCharacters[playerController].Character.IsOnField || CurrentSelectedCharacters[playerController].Character.isMoving ||
+        while (CurrentSelectedCharacters[playerController].OffsetSwap < Time.time || !CurrentSelectedCharacters[playerController].Character.IsOnField || CurrentSelectedCharacters[playerController].Character.isMoving ||
             CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle)
         {
             yield return null;
