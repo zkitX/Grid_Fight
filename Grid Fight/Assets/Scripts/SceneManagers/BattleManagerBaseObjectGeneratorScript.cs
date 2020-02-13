@@ -19,6 +19,7 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
 
     [Space(20)]
     [Header("Defaults")]
+    [SerializeField] protected GameObject defaultWave;
     [SerializeField] protected GameObject defaultFlowChart;
     [SerializeField] protected StageEventTriggersProfile defaultEventProfile;
 
@@ -50,6 +51,7 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
 
         Instantiate(UI_Battle);
         yield return BattleManagerScript.Instance.InstanciateAllChar();
+        if(!usingFungus) Wave = defaultWave;
         Instantiate(Wave);
         yield return WaveManagerScript.Instance.WaveCharCreator();
         if (!usingFungus) FlowChart = defaultFlowChart;
