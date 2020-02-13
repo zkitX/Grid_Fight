@@ -212,6 +212,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
             yield return AttackSequence();
 
+            while (isMoving)
+            {
+                yield return null;
+
+            }
             GetAttack(CharacterAnimationStateType.Atk);
 
             //Wait until next attack
@@ -245,7 +250,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         while (timer <= duration)
         {
             yield return new WaitForFixedUpdate();
-            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
+            while ((!VFXTestMode && BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
             {
                 yield return new WaitForEndOfFrame();
             }
