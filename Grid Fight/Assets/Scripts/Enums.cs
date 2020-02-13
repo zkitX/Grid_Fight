@@ -263,12 +263,7 @@ public enum CharacterSelectionType
     Up,
     Down,
     Left,
-    Right,
-    A,
-    B,
-    X,
-    Y
-    
+    Right
 }
 
 public enum BuffDebuffStatsType
@@ -611,4 +606,11 @@ public enum SpecialAttackStatus
     Start,
     Move,
     Stop
+}
+
+
+public enum InputControllerType
+{
+    SelectionOnABXY,
+    SelectionOnLR
 }
