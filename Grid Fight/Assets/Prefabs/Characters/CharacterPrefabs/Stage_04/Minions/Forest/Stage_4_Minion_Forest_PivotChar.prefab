@@ -155,7 +155,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4987db592f118d349836ec5c71e31519, type: 2}
+  - {fileID: 2100000, guid: ff1d15f90d637b34ab1e92e60ef27aef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 184fbed36cded8d4ebd1da1366653c88, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 843f0f088d894cf4ab13af7c087098ce, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: 
-  CharacterIcon: {fileID: 21300000, guid: 36ea2693c0daafd448326ccdcd319fb7, type: 3}
+  CharacterIcons: []
   BaseCharacterType: 1
   CharacterID: 2
   CurrentParticlesAttackTypeInfo:
@@ -345,11 +345,17 @@ MonoBehaviour:
   CurrentOnBattleFieldAttackTypeInfo:
   - {fileID: 11400000, guid: 5245cecfda77e604d83f0c5ab4cbc945, type: 2}
   - {fileID: 11400000, guid: 3d664849e99b9274494f830c11c07691, type: 2}
-  ParticleID: 1
+  ParticleID: 11
   Elemental: 0
   ClassType: 2
   CharacterLevel: 0
   CharacterSelection: 0
+  RapidAttack:
+    BaseDamage: 10
+    Stamina_Cost_Atk: 0
+  PowerfulAttac:
+    BaseDamage: 10
+    Stamina_Cost_Atk: 0
   HealthStats:
     Health: 38
     Base: 38
@@ -361,11 +367,6 @@ MonoBehaviour:
     Base: 40
     Regeneration: 1
     BaseStaminaRegeneration: 1
-    Stamina_Cost_Atk: 0
-    Stamina_Cost_S_Atk01: 1
-    Stamina_Cost_S_Atk02: 1
-    Stamina_Cost_S_Atk03: 1
-    Stamina_Cost_S_Atk04: 0
     LevelMultiplier: 0
   SpeedStats:
     BaseSpeed: 1
@@ -375,15 +376,18 @@ MonoBehaviour:
     BulletSpeed: 5
     LeaveSpeed: 3
     LevelMultiplier: 0
+    IdleToAtkDuration: 0.2
+    AtkToIdleDuration: 0.2
   DamageStats:
-    BaseDamage: 2
     CurrentDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 0
-    SpecialMultiplier: 1
+  DefenceStats:
+    BaseDefence: 10
+    Invulnerability: 0.2
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
@@ -415,5 +419,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.9, z: 0.9}
-  m_Center: {x: -0.11, y: 0.43, z: 0}
+  m_Size: {x: 0.4, y: 1.8, z: 0.9}
+  m_Center: {x: -0.11, y: 0.74, z: 0}

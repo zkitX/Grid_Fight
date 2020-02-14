@@ -54,7 +54,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public AttackPhasesType currentAttackPhase = AttackPhasesType.End;
     IEnumerator attackCoroutine = null;
     public SpecialAttackStatus StopPowerfulAtk;
-
+    
     public bool IsSwapping = false;
 
 
@@ -72,6 +72,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo);
         }
+
+        UMS.HPBar.localScale = new Vector3((1f / 100f) * CharInfo.HealthPerc,1,1);
+
+        UMS.StaminaBar.localScale = new Vector3((1f / 100f) * CharInfo.StaminaPerc, 1, 1);
     }
 
     #region Setup Character
@@ -125,6 +129,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         CanAttack = value;
         IsOnField = value;
+        currentAttackPhase = AttackPhasesType.End;
     }
 
     public virtual void SetCharDead()
@@ -207,6 +212,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
             yield return AttackSequence();
 
+            while (isMoving)
+            {
+                yield return null;
+
+            }
             GetAttack(CharacterAnimationStateType.Atk);
 
             //Wait until next attack
@@ -240,7 +250,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         while (timer <= duration)
         {
             yield return new WaitForFixedUpdate();
-            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
+            while ((!VFXTestMode && BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
             {
                 yield return new WaitForEndOfFrame();
             }

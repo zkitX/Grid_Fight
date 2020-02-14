@@ -90,7 +90,18 @@ public class CharacterType_Script : BaseCharacter
                     isChargingParticlesOn = true;
                     ps = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
                     ps.transform.parent = transform;
-                    
+                   
+                }
+
+                if (!IsOnField)
+                {
+                    if(ps != null)
+                    {
+                        ps.transform.parent = null;
+                        ps.SetActive(false);
+                    }
+                   
+                    yield break;
                 }
             }
             if (timer > 1)
@@ -111,6 +122,8 @@ public class CharacterType_Script : BaseCharacter
                             yield break;
                         }
                     }
+
+
                     CharInfo.DamageStats.CurrentDamage = CharInfo.PowerfulAttac.BaseDamage;
                     ps.transform.parent = null;
                     ps.SetActive(false);

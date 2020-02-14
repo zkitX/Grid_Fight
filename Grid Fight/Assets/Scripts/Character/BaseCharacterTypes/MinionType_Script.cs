@@ -27,6 +27,12 @@ public class MinionType_Script : BaseCharacter
     GameObject chargeParticles = null;
 
 
+    protected override void Start()
+    {
+        StartAttakCo();
+       
+    }
+
     public override void SetUpEnteringOnBattle()
     {
         SetAnimation(CharacterAnimationStateType.Arriving);
@@ -60,14 +66,14 @@ public class MinionType_Script : BaseCharacter
     {
         while (true)
         {
-            if(MoveCoOn && currentAttackPhase == AttackPhasesType.End && attacking == false)
+            if(MoveCoOn && currentAttackPhase == AttackPhasesType.End && !attacking)
             {
                 float timer = 0;
                 float MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y);
                 while (timer < MoveTime)
                 {
                     yield return new WaitForFixedUpdate();
-                    while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+                    while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || attacking)
                     {
                         yield return new WaitForFixedUpdate();
                     }
@@ -76,6 +82,11 @@ public class MinionType_Script : BaseCharacter
                 }
                 if (CharInfo.Health > 0)
                 {
+                    while (currentAttackPhase != AttackPhasesType.End)
+                    {
+                        yield return null;
+                    }
+
                     MoveCharOnDirection((InputDirection)Random.Range(0, 4));
                 }
                 else
@@ -91,7 +102,7 @@ public class MinionType_Script : BaseCharacter
     private int GetHowManyAttackAreOnBattleField(List<BulletBehaviourInfoClassOnBattleField> bulTraj)
     {
         int res = 0;
-        Vector2Int basePos = new Vector2Int(0, GridManagerScript.Instance.YGridSeparator);
+        Vector2Int basePos = new Vector2Int(UMS.CurrentTilePos.x, GridManagerScript.Instance.YGridSeparator);
         foreach (BulletBehaviourInfoClassOnBattleField item in bulTraj)
         {
             foreach (Vector2Int target in item.BulletEffectTiles)

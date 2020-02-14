@@ -49,9 +49,9 @@ MonoBehaviour:
     MaxEnemyOnScreen: 2
     ListOfEnemy:
     - name: Bush
-      NumberOfCharacter: 5
+      NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 1
+        CharacterName: 23
         CharacterClass: 0
         Health: {x: 20, y: 25}
         HealthRegeneration: {x: 0.2, y: 0.2}
@@ -61,11 +61,95 @@ MonoBehaviour:
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
         Events: []
-      IsFixedSpowiningTile: 0
+      IsRandomSpowiningTile: 0
+      SpowningTile:
+      - {x: 1, y: 8}
+      DelayBetweenChars: 1
+  - name: Wave2
+    IsRandom: 0
+    MaxEnemyOnScreen: 1
+    ListOfEnemy:
+    - name: Bush
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 24
+        CharacterClass: 0
+        Health: {x: 20, y: 25}
+        HealthRegeneration: {x: 0.2, y: 0.2}
+        Damage: {x: 5, y: 6}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 5, y: 4}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
       SpowningTile:
       - {x: 2, y: 8}
       DelayBetweenChars: 1
-  - name: Wave2
+  - name: Wave3
+    IsRandom: 0
+    MaxEnemyOnScreen: 1
+    ListOfEnemy:
+    - name: Bush
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 25
+        CharacterClass: 0
+        Health: {x: 20, y: 25}
+        HealthRegeneration: {x: 0.2, y: 0.2}
+        Damage: {x: 5, y: 6}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 5, y: 4}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+  - name: Wave4
+    IsRandom: 0
+    MaxEnemyOnScreen: 1
+    ListOfEnemy:
+    - name: Bush
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 26
+        CharacterClass: 0
+        Health: {x: 20, y: 25}
+        HealthRegeneration: {x: 0.2, y: 0.2}
+        Damage: {x: 5, y: 6}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 5, y: 4}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+  - name: Wave5
+    IsRandom: 0
+    MaxEnemyOnScreen: 1
+    ListOfEnemy:
+    - name: Bush
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 22
+        CharacterClass: 0
+        Health: {x: 20, y: 25}
+        HealthRegeneration: {x: 0.2, y: 0.2}
+        Damage: {x: 5, y: 6}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 5, y: 4}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+  - name: Wave6
     IsRandom: 0
     MaxEnemyOnScreen: 1
     ListOfEnemy:
@@ -82,7 +166,7 @@ MonoBehaviour:
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
         Events: []
-      IsFixedSpowiningTile: 0
+      IsRandomSpowiningTile: 1
       SpowningTile:
       - {x: 2, y: 8}
       DelayBetweenChars: 1

@@ -48,8 +48,8 @@ public class SplashScreenManagerScript : MonoBehaviour
         // This is particularly good for creating loading screens.
         // You could also load the Scene by using sceneBuildIndex. In this case Scene2 has
         // a sceneBuildIndex of 1 as shown in Build Settings.
-        
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("BattleScene", LoadSceneMode.Additive);
+        yield return new WaitForSecondsRealtime(2f);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("BattleScene-00", LoadSceneMode.Additive);
         asyncLoad.allowSceneActivation = false;
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone && !ShowScene)
