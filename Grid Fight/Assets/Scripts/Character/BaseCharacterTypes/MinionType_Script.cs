@@ -159,7 +159,6 @@ public class MinionType_Script : BaseCharacter
 
     public void fireAttackAnimation()
     {
-        shotsLeftInAttack--;
         //Debug.Log("<b>Shots left in this charge of attacks: </b>" + shotsLeftInAttack);
         if(sequencedAttacker)SetAnimation(CharacterAnimationStateType.Atk1_Loop);
         else SetAnimation(CharacterAnimationStateType.Atk); //Temporary until anims are added
@@ -182,7 +181,12 @@ public class MinionType_Script : BaseCharacter
 
     public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
     {
-        if (animState == CharacterAnimationStateType.GettingHit && SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1_IdleToAtk)
+        if (SpineAnim == null)
+        {
+            SpineAnimatorsetup();
+        }
+
+        if (animState == CharacterAnimationStateType.GettingHit && attacking)
         {
             return;
         }

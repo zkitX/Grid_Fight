@@ -128,7 +128,6 @@ public class UIBattleManager : MonoBehaviour
         if(duration > 0 )
         {
             TimeToPlayLeftSide.SetActive(false);
-
             BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
         }
         else
@@ -155,7 +154,6 @@ public class UIBattleManager : MonoBehaviour
             yield return BattleManagerScript.Instance.PauseUntil();
             SecondsToPlayRightSide.text = ((int)duration).ToString();
             duration -= Time.fixedDeltaTime;
-
         }
 
         if (duration > 0)

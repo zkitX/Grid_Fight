@@ -54,7 +54,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public AttackPhasesType currentAttackPhase = AttackPhasesType.End;
     IEnumerator attackCoroutine = null;
     public SpecialAttackStatus StopPowerfulAtk;
-    
+    private float DefendingHoldingTimer = 0;
     public bool IsSwapping = false;
 
 
@@ -455,10 +455,32 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     #region Defence
     public void StartDefending()
     {
-        SetAnimation(CharacterAnimationStateType.Defending, true, 0.1f);
+        SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
+        SpineAnim.SetAnimationSpeed(5);
+        defe = true;
+        DefendingHoldingTimer = 0;
+        StartCoroutine(Defending_Co());
     }
+    bool defe = false;
+    private IEnumerator Defending_Co()
+    {
+        while (defe)
+        {
+            if((SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle) || (SpineAnim.CurrentAnim.ToString().Contains("Dash") && !isMoving))
+            {
+                SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
+                SpineAnim.SetAnimationSpeed(5);
+            }
+
+            yield return null;
+            DefendingHoldingTimer += Time.deltaTime;
+        }
+        DefendingHoldingTimer = 0;
+    }
+
     public void StopDefending()
     {
+        defe = false;
         SetAnimation(CharacterAnimationStateType.Idle, true, 0.1f);
     }
 
@@ -817,31 +839,20 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public virtual void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
     {
         // Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + NextAttackLevel.ToString());
+
+
+        if (isMoving)
+        {
+            return;
+        }
+
+        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving || SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving)
+        {
+            return;
+        }
+
+
         float AnimSpeed = 1;
-        if (SpineAnim == null)
-        {
-            SpineAnimatorsetup();
-        }
-
-        if(isMoving)
-        {
-            return;
-        }
-   
-        if(SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving || SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving)
-        {
-            return;
-        }
-
-        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle)
-        {
-            return;
-        }
-
-        if (!animState.ToString().Contains("Atk"))
-        {
-            currentAttackPhase = AttackPhasesType.End;
-        }
 
         if (animState == CharacterAnimationStateType.Atk || animState == CharacterAnimationStateType.Atk1)
         {
@@ -886,7 +897,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         if(SpineAnim.CurrentAnim == CharacterAnimationStateType.Defending)
         {
             GameObject go;
-            if(SpineAnim.GetAnimTime() < CharInfo.DefenceStats.Invulnerability)
+            if(DefendingHoldingTimer < CharInfo.DefenceStats.Invulnerability)
             {
                 damage = 0;
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldTotalDefence);

@@ -135,15 +135,7 @@ public class BattleManagerScript : MonoBehaviour
             }
             currentCharacter.SetUpEnteringOnBattle();
             StartCoroutine(MoveCharToBoardWithDelay(0.1f, currentCharacter, bts.transform.position));
-            if (playerController == ControllerType.Player1)
-            {
-                UIBattleManager.Instance.isLeftSidePlaying = true;
-
-            }
-            else if (playerController == ControllerType.Player2)
-            {
-                UIBattleManager.Instance.isRightSidePlaying = true;
-            }
+            UIBattleManager.Instance.isLeftSidePlaying = true;
             PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == cName).First().isUsed = true;
             return (CharacterType_Script)currentCharacter;
         }
@@ -689,7 +681,7 @@ public class BattleManagerScript : MonoBehaviour
                 cb = null;
                 if (CurrentSelectedCharacters[playerController].Character == null)
                 {
-                    cb = AllCharactersOnField.FirstOrDefault();
+                    cb = AllCharactersOnField.Where(r=>r.gameObject.activeInHierarchy && !r.IsOnField && !r.IsSwapping).FirstOrDefault();
                     if(cb != null)
                     {
                         CurrentSelectedCharacters[playerController].NextSelectionChar = cb.CharInfo.CharacterSelection;
@@ -702,7 +694,7 @@ public class BattleManagerScript : MonoBehaviour
                     {
                         cs = cs + (characterSelection == CharacterSelectionType.Left ? -1 : 1);
                         cs = (int)cs >= AllCharactersOnField.Count ? 0 : cs < 0 ? ((CharacterSelectionType)AllCharactersOnField.Count - 1) : cs;
-                        cb = AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == cs && r.UMS.Side == side).FirstOrDefault();
+                        cb = AllCharactersOnField.Where(r =>r.gameObject.activeInHierarchy && r.CharInfo.CharacterSelection == cs && r.UMS.Side == side).FirstOrDefault();
                         if (cb != null && CurrentSelectedCharacters.Where(r => r.Value.Character != null && r.Value.Character == cb && r.Key != playerController).ToList().Count == 0)
                         {
                             CharacterType_Script PrevCharacter = (CharacterType_Script)AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == CurrentSelectedCharacters[playerController].NextSelectionChar).First();

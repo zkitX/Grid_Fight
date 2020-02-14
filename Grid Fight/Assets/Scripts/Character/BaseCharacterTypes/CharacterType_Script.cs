@@ -212,5 +212,27 @@ public class CharacterType_Script : BaseCharacter
         NewIManager.Instance.SetSelected(isSelected, player, CharInfo.CharacterID);   
     }
 
+
+    public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
+    {
+        if (SpineAnim == null)
+        {
+            SpineAnimatorsetup();
+        }
+        
+
+        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle)
+        {
+            return;
+        }
+
+        if (!animState.ToString().Contains("Atk"))
+        {
+            currentAttackPhase = AttackPhasesType.End;
+        }
+
+        base.SetAnimation(animState, loop, transition);
+    }
+
 }
 

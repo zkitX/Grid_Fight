@@ -49,7 +49,7 @@ public class BattleTileTargetsScript : MonoBehaviour
             anim.speed = 1 / duration;
             timer += Time.fixedDeltaTime;
             tc.RemainingTime = duration - timer;
-            if ((attacker.gameObject.activeInHierarchy == false || ((MinionType_Script)attacker).shotsLeftInAttack == 0) && !attackerFiredAttackAnim)
+            if ((!attacker.gameObject.activeInHierarchy || ((MinionType_Script)attacker).shotsLeftInAttack == 0) && !attackerFiredAttackAnim)
             {
                 //Stop the firing of the attacks to the tiles
                 ((MinionType_Script)attacker).shotsLeftInAttack = 0;
@@ -74,6 +74,7 @@ public class BattleTileTargetsScript : MonoBehaviour
                 effectOn = target.SetDamage(damage, ele);
             }
         }
+        ((MinionType_Script)attacker).shotsLeftInAttack--;
         if (effectOn)
         {
             //animToFire["ExclamationAnim"].speed = 1;
@@ -83,12 +84,8 @@ public class BattleTileTargetsScript : MonoBehaviour
             {
                 lps.Shot = CharacterLevelType.Novice;
                 lps.SelectShotLevel();
-
             }
         }
-
-
-        yield return new WaitForSecondsRealtime(0.5f);
         UpdateQueue(tc);
     }
 
@@ -98,14 +95,9 @@ public class BattleTileTargetsScript : MonoBehaviour
         Targets = Targets.OrderByDescending(r => r.RemainingTime).ToList();
         for (int i = 0; i < Targets.Count; i++)
         {
-            if(i < 5)
-            {
-                Targets[i].TargetIndicator.transform.localPosition = TargetsPosition[i];
-            }
-            else
-            {
-                return;
-            }
+           
+            Targets[i].TargetIndicator.transform.localPosition = TargetsPosition[i];
+            return;
         }
        
     }
