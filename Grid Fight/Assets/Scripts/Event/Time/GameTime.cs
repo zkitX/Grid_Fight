@@ -71,7 +71,8 @@ public class GameTime
 
         while (true)
         {
-            timeInSeconds += Time.deltaTime * rate;
+            if (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle) break;
+            timeInSeconds = Mathf.Clamp(timeInSeconds + (Time.deltaTime * rate), 0f, 99999999999999999999999999999f);
             yield return null;
         }
     }

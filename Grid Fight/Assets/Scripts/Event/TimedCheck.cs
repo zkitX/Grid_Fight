@@ -58,6 +58,9 @@ public class TimedCheck : EventTrigger
             case (TimedCheckTypes.EventCalled):
                 check = EventCalled;
                 break;
+            case (TimedCheckTypes.BattleTimeCheck):
+                check = BattleTimeCheck;
+                break;
             default:
                 check = Default;
                 break;
@@ -128,7 +131,7 @@ public class TimedCheck : EventTrigger
     }
 
     [ConditionalField("TimedCheckType", false, TimedCheckTypes.CharacterHealthChange)] public CharacterNameType healthChangeCharID = CharacterNameType.None;
-    [ConditionalField("TimedCheckType", false, TimedCheckTypes.CharacterHealthChange)] public HealthChangeType healthChange = HealthChangeType.None;
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.CharacterHealthChange)] public CompareType healthChange = CompareType.None;
     [ConditionalField("TimedCheckType", false, TimedCheckTypes.CharacterHealthChange)] public float healthChangeValue = 50;
     bool CharacterHealthChange()
     {
@@ -137,13 +140,13 @@ public class TimedCheck : EventTrigger
 
         switch (healthChange)
         {
-            case (HealthChangeType.IsEqualTo):
+            case (CompareType.IsEqualTo):
                 if(healthChangeValue == currentHealthPercentage) return true;
                 break;
-            case (HealthChangeType.LessThan):
+            case (CompareType.LessThan):
                 if (healthChangeValue > currentHealthPercentage) return true;
                 break;
-            case (HealthChangeType.MoreThan):
+            case (CompareType.MoreThan):
                 if (healthChangeValue < currentHealthPercentage) return true;
                 break;
             default:
@@ -164,5 +167,28 @@ public class TimedCheck : EventTrigger
     bool EventCalled()
     {
         return requireEventCalledDuringCheck ? EventManager.Instance.EventCalledLastFrame(EventCallRequired.Name) : EventManager.Instance.EventCalled(EventCallRequired.Name);
+    }
+
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.BattleTimeCheck)] public GameTime timeToCompare = new GameTime(0, 0, 0f);
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.BattleTimeCheck)] public CompareType timeCompareType = CompareType.None;
+    bool BattleTimeCheck()
+    {
+        float timeComparing = WaveManagerScript.Instance.battleTime.timeInSeconds;
+        switch (timeCompareType)
+        {
+            case (CompareType.IsEqualTo):
+                if (timeComparing == timeToCompare.timeInSeconds) return true;
+                break;
+            case (CompareType.LessThan):
+                if (timeComparing > timeToCompare.timeInSeconds) return true;
+                break;
+            case (CompareType.MoreThan):
+                if (timeComparing < timeToCompare.timeInSeconds) return true;
+                break;
+            default:
+                Debug.Log("Health Change type is not set on timed check: " + Name);
+                break;
+        }
+        return false;
     }
 }

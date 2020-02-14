@@ -16,10 +16,11 @@ public enum TimedCheckTypes
     CharacterHealthChange,
     ThisEventCalled,
     EventCalled,
+    BattleTimeCheck,
     None,
 }
 
-public enum HealthChangeType
+public enum CompareType
 {
     MoreThan,
     LessThan,

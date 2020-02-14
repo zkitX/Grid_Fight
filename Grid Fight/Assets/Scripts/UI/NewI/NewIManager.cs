@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class NewIManager : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class NewIManager : MonoBehaviour
     [SerializeField] protected string buttonTypeX;
     [SerializeField] protected string buttonTypeY;
 
+    [SerializeField] protected TextMeshProUGUI timerText;
+    IEnumerator timeBoxUpdater;
+
     protected NewICharacterVitality[] vitalityBoxes;
 
     private void Awake()
@@ -22,6 +26,32 @@ public class NewIManager : MonoBehaviour
         foreach(NewICharacterVitality vitalityBox in vitalityBoxes)
         {
             vitalityBox.SetCharacter(null);
+        }
+
+        timeBoxUpdater = UpdateTimerText();
+        StartCoroutine(timeBoxUpdater);
+    }
+
+
+
+    IEnumerator UpdateTimerText()
+    {
+        while (WaveManagerScript.Instance == null) yield return null;
+        GameTime time;
+        while (true)
+        {
+            time = WaveManagerScript.Instance.battleTime;
+
+            string timerString = "";
+            if (time.minutes < 10) timerString += "0";
+            timerString += time.minutes.ToString();
+            timerString += ":";
+            if (time.seconds < 10) timerString += "0";
+            timerString += Mathf.FloorToInt(time.seconds).ToString();
+
+            timerText.text = timerString;
+
+            yield return null;
         }
     }
 
