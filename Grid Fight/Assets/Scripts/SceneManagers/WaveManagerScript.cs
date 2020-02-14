@@ -13,8 +13,7 @@ public class WaveManagerScript : MonoBehaviour
     public delegate void WaveComplete(string startBlockName);
     public event WaveComplete WaveCompleteEvent;
 
-
-
+    public GameTime battleTime = GameTime.zero;
 
     public static WaveManagerScript Instance;
     public List<WavePhaseClass> WavePhases = new List<WavePhaseClass>();
@@ -104,6 +103,7 @@ public class WaveManagerScript : MonoBehaviour
 
     private IEnumerator Wave(WavePhaseClass wavePhase)
     {
+        StartCoroutine(battleTime.standardReverseTicker);
         float timer = 0;
         BaseCharacter newChar;
         WaveCharacterInfoClass waveCharacterInfoClass;
@@ -115,6 +115,7 @@ public class WaveManagerScript : MonoBehaviour
                 timer > CurrentWaveChar.DelayBetweenChars && 
                 WaveCharcters.Where(r => r.gameObject.activeInHierarchy).ToList().Count < wavePhase.MaxEnemyOnScreen)
             {
+        yield return new WaitForSeconds(0.5f);
                 if (wavePhase.IsRandom)
                 {
                     waveCharacterInfoClass = GetAvailableRandomWaveCharacter(wavePhase);
@@ -257,4 +258,7 @@ public class WaveEventClass
     public string name;
     public WaveCharacterInfoClass TypeOfCharacter;
 }
+
+
+
 

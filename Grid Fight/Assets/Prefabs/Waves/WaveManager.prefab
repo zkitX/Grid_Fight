@@ -43,6 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b0c490261b08d4dbe285554c10a1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleTime:
+    hours: 0
+    minutes: 15
+    seconds: 0
   WavePhases:
   - name: Wave1
     IsRandom: 0
@@ -61,10 +65,11 @@ MonoBehaviour:
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
         Events: []
-      IsFixedSpowiningTile: 0
+      IsRandomSpowiningTile: 1
       SpowningTile:
       - {x: 2, y: 8}
       DelayBetweenChars: 1
   isWaveComplete: 0
   WaveCharcters: []
   CurrentWave: 0
+  StartWave: 0
