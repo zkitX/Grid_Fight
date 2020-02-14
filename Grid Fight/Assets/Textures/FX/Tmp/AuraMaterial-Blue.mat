@@ -20,10 +20,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material 1
+  m_Name: AuraMaterial-Blue
   m_Shader: {fileID: 4800000, guid: a36b7719ff0465b42ab1407d67672c5f, type: 3}
   m_ShaderKeywords: BLURISHD_ON DISTORT_ON ETC1_EXTERNAL_ALPHA GLOW_ON ROUNDWAVEUV_ON
-    TWISTUV_ON WAVEUV_ON ZOOMUV_ON _BLURHD_ON
+    WAVEUV_ON ZOOMUV_ON _BLURHD_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -70,7 +70,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: a13eddda97a1e9c4fb5537133e694f34, type: 3}
+        m_Texture: {fileID: 2800000, guid: 16312690028f77e479145b917f9b3035, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -121,7 +121,7 @@ Material:
     - _ColorSwapRedLuminosity: 0.5
     - _Cull: 2
     - _Cutoff: 0.5
-    - _DistortAmount: 1.47
+    - _DistortAmount: 0.642
     - _DistortTexXSpeed: 9.4
     - _DistortTexYSpeed: -6.6
     - _DstBlend: 0
@@ -140,7 +140,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Glow: 17
+    - _Glow: 5.8
     - _GlowTexUsed: 0
     - _GradBlend: 1
     - _GrassManualAnim: 1
@@ -201,7 +201,7 @@ Material:
     - _RectSize: 1
     - _RotateUvAmount: 0
     - _RoundWaveSpeed: 2.376
-    - _RoundWaveStrength: 0.035
+    - _RoundWaveStrength: 0.103
     - _ShadowAlpha: 0.5
     - _ShadowX: 0.1
     - _ShadowY: -0.05
@@ -215,22 +215,22 @@ Material:
     - _Surface: 0
     - _TextureScrollXSpeed: 1
     - _TextureScrollYSpeed: 0
-    - _TwistUvAmount: 0.114
+    - _TwistUvAmount: 0.429
     - _TwistUvPosX: 0.353
     - _TwistUvPosY: 0.598
-    - _TwistUvRadius: 0.225
-    - _WaveAmount: 5.52
+    - _TwistUvRadius: 0.204
+    - _WaveAmount: 25
     - _WaveSpeed: 10.26
     - _WaveStrength: 25
     - _WaveX: 0.564
     - _WaveY: 0.155
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _ZoomUvAmount: 2.581
+    - _ZoomUvAmount: 1.93
     m_Colors:
     - Color_DE6FEDE1: {r: 0.8541589, g: 1, b: 0.2169811, a: 1}
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _Color: {r: 1, g: 0.12187562, b: 0.05660379, a: 1}
+    - _Color: {r: 0, g: 0.32562923, b: 1, a: 1}
     - _ColorChangeNewCol: {r: 1, g: 1, b: 0, a: 1}
     - _ColorChangeTarget: {r: 1, g: 0, b: 0, a: 1}
     - _ColorSwapBlue: {r: 1, g: 1, b: 1, a: 1}
