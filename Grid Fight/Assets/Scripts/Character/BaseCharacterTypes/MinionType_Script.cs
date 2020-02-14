@@ -182,10 +182,11 @@ public class MinionType_Script : BaseCharacter
 
     public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
     {
-        if (animState == CharacterAnimationStateType.GettingHit && SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk)
+        if (animState == CharacterAnimationStateType.GettingHit && SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1_IdleToAtk)
         {
             return;
         }
+
         base.SetAnimation(animState, loop, transition);
     }
 }

@@ -390,9 +390,11 @@ public class BattleManagerScript : MonoBehaviour
             //Debug.Log("Exit  " + CurrentSelectedCharacters[playerController].OffsetSwap + "    " + Time.time + CurrentSelectedCharacters[playerController].NextSelectionChar + AllCharactersOnField.Where(r => r.CharInfo.CharacterID == cName).First().CharInfo.CharacterSelection);
             if (currentCharacter != null)
             {
+               // currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", false);
                 currentCharacter.SpineAnim.SetAnimationSpeed(2);
                 yield return RemoveCharacterFromBaord(playerController, CurrentSelectedCharacters[playerController].Character, false);
                 SelectCharacter(playerController, currentCharacter);
+               // currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", true);
             }
         }
         //And drop the new character in
@@ -821,7 +823,14 @@ public class BattleManagerScript : MonoBehaviour
 
     public BaseCharacter GetCharInPos(Vector2Int pos)
     {
-        return AllCharactersOnField.Where(r => r.IsOnField && r.UMS.Pos.Contains(pos)).FirstOrDefault();
+        BaseCharacter cb = AllCharactersOnField.Where(r => r.IsOnField && r.UMS.Pos.Contains(pos)).FirstOrDefault();
+
+        if(cb == null)
+        {
+            cb = WaveManagerScript.Instance.WaveCharcters.Where(r => r.IsOnField && r.UMS.Pos.Contains(pos)).FirstOrDefault();
+        }
+
+        return cb;
     }
 
    //Used to setup all the current char icons

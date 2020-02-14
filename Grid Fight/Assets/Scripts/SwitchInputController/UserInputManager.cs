@@ -126,7 +126,10 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonPlusUpEvent(int player)
     {
         //Debug.Log(player + "  " + "Plus Up");
-        BattleManagerScript.Instance.SetupBattleState();
+        if(BattleManagerScript.Instance.CurrentBattleState == BattleState.Intro)
+        {
+            BattleManagerScript.Instance.SetupBattleState();
+        }
     }
 
     private void Instance_ButtonZLUpEvent(int player)
@@ -250,7 +253,10 @@ public class UserInputManager : MonoBehaviour
 
     private void Instance_ButtonHomeUpEvent(int player)
     {
-        BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
+        if(BattleManagerScript.Instance.CurrentBattleState == BattleState.Intro)
+        {
+            BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
+        }
         //Debug.Log(player + "  " + "Home Up");
     }
 
