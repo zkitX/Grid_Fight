@@ -13,6 +13,7 @@ public class AudioEmitter : MonoBehaviour
     public AudioSource audioSource { get; private set; }
     public float baseVolume = 1f;
     public bool playOnEnabled = true;
+    public bool autoDisableOnComplete = false;
 
     void Awake()
     {
@@ -27,7 +28,6 @@ public class AudioEmitter : MonoBehaviour
         priority = Mathf.Clamp(priority, -100, 100);
         dampenToPercent = Mathf.Clamp(dampenToPercent, 0f, 1f);
         baseVolume = audioSource.volume;
-        AudioManager.Instance.AddAudio(this);
     }
 
     void SetupFromAudioTypeProfile()
@@ -38,7 +38,26 @@ public class AudioEmitter : MonoBehaviour
 
     public void PlayAudio()
     {
+        if (AudioManager.Instance.ClipPlayedThisFrame(audioSource.clip))
+        {
+            return;
+        }
+        AudioManager.Instance.AddClipPlayed(audioSource.clip);
+        AudioManager.Instance.AddAudio(gameObject);
         audioSource.Play();
+        if (autoDisableOnComplete && gameObject.activeInHierarchy)
+        {
+            StartCoroutine(AutoDisableChecker());
+        }
+    }
+
+    IEnumerator AutoDisableChecker()
+    {
+        while (audioSource.isPlaying)
+        {
+            yield return new WaitForSeconds(1f);
+        }
+        gameObject.SetActive(false);
     }
 
     public void PauseAudio()
@@ -58,12 +77,12 @@ public class AudioEmitter : MonoBehaviour
 
     private void OnDisable()
     {
-        AudioManager.Instance.RemoveAudio(this);
+        AudioManager.Instance.RemoveAudio(gameObject);
     }
 
     private void OnDestroy()
     {
-        AudioManager.Instance.RemoveAudio(this);
+        AudioManager.Instance.RemoveAudio(gameObject);
     }
 
     private void OnEnable()

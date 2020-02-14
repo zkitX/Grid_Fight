@@ -57821,7 +57821,7 @@ GameObject:
   - component: {fileID: 8782556913017969417}
   - component: {fileID: 8782556913017969416}
   - component: {fileID: 8779566177187537841}
-  - component: {fileID: 7408226486600101979}
+  - component: {fileID: -6318113338137861641}
   m_Layer: 0
   m_Name: Stage00-Mountain-Cast-Optimized
   m_TagString: Untagged
@@ -62612,7 +62612,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: bcf288e57c1bf44428f3c6af09798fed, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -62697,7 +62697,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7408226486600101979
+--- !u!114 &-6318113338137861641
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62706,7 +62706,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8782556913017969411}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 384b28258ef75d9498ed0e7b12639926, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ccd0d279f0189941889036281dbd3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Delay: 0
+  audioEmitterProfile: {fileID: 0}
+  priority: 0
+  dampenToPercent: 1
+  baseVolume: 1
+  playOnEnabled: 1
