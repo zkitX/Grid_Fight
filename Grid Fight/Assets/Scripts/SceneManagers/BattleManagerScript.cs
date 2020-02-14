@@ -380,7 +380,6 @@ public class BattleManagerScript : MonoBehaviour
        
         if (CurrentSelectedCharacters[playerController].NextSelectionChar == AllCharactersOnField.Where(r=> r.CharInfo.CharacterID == cName).First().CharInfo.CharacterSelection)
         {
-            CurrentSelectedCharacters[playerController].Character.IsSwapping = true;
             while (CurrentSelectedCharacters[playerController].Character.isMoving)
             {
                 yield return null;
@@ -390,7 +389,8 @@ public class BattleManagerScript : MonoBehaviour
             //Debug.Log("Exit  " + CurrentSelectedCharacters[playerController].OffsetSwap + "    " + Time.time + CurrentSelectedCharacters[playerController].NextSelectionChar + AllCharactersOnField.Where(r => r.CharInfo.CharacterID == cName).First().CharInfo.CharacterSelection);
             if (currentCharacter != null)
             {
-               // currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", false);
+                CurrentSelectedCharacters[playerController].Character.IsSwapping = true;
+                // currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", false);
                 currentCharacter.SpineAnim.SetAnimationSpeed(2);
                 yield return RemoveCharacterFromBaord(playerController, CurrentSelectedCharacters[playerController].Character, false);
                 SelectCharacter(playerController, currentCharacter);
