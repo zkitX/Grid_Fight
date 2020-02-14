@@ -139,6 +139,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
             UMS.Pos[i] = Vector2Int.zero;
         }
+        if(attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+            attackCoroutine = null;
+
+        }
         isMoving = false;
         SetAttackReady(false);
         Call_CurrentCharIsDeadEvent();
