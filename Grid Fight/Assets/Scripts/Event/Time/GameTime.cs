@@ -5,13 +5,13 @@ using UnityEngine;
 [System.Serializable]
 public class GameTime
 {
-    public int hours;
-    public int minutes;
-    public float seconds;
-    public GameTime startingTime;
-    public static GameTime zero = new GameTime(0, 0, 0f);
-    public IEnumerator standardTicker = null;
-    public IEnumerator standardReverseTicker = null;
+    [SerializeField] public int hours;
+    [SerializeField] public int minutes;
+    [SerializeField] public float seconds;
+    [HideInInspector] public GameTime startingTime;
+    [HideInInspector] public static GameTime zero = new GameTime(0, 0, 0f);
+    [HideInInspector] public IEnumerator standardTicker = null;
+    [HideInInspector] public IEnumerator standardReverseTicker = null;
 
     public GameTime()
     {

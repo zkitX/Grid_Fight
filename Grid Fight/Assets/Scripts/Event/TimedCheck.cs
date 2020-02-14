@@ -169,21 +169,24 @@ public class TimedCheck : EventTrigger
         return requireEventCalledDuringCheck ? EventManager.Instance.EventCalledLastFrame(EventCallRequired.Name) : EventManager.Instance.EventCalled(EventCallRequired.Name);
     }
 
-    [ConditionalField("TimedCheckType", false, TimedCheckTypes.BattleTimeCheck)] public GameTime timeToCompare = new GameTime(0, 0, 0f);
     [ConditionalField("TimedCheckType", false, TimedCheckTypes.BattleTimeCheck)] public CompareType timeCompareType = CompareType.None;
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.BattleTimeCheck)] public int hoursToCompare;
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.BattleTimeCheck)] public int minutesToCompare;
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.BattleTimeCheck)] public float secondsToCompare;
     bool BattleTimeCheck()
     {
+        GameTime time = new GameTime(hoursToCompare, minutesToCompare, secondsToCompare);
         float timeComparing = WaveManagerScript.Instance.battleTime.timeInSeconds;
         switch (timeCompareType)
         {
             case (CompareType.IsEqualTo):
-                if (timeComparing == timeToCompare.timeInSeconds) return true;
+                if (timeComparing == time.timeInSeconds) return true;
                 break;
             case (CompareType.LessThan):
-                if (timeComparing > timeToCompare.timeInSeconds) return true;
+                if (timeComparing > time.timeInSeconds) return true;
                 break;
             case (CompareType.MoreThan):
-                if (timeComparing < timeToCompare.timeInSeconds) return true;
+                if (timeComparing < time.timeInSeconds) return true;
                 break;
             default:
                 Debug.Log("Health Change type is not set on timed check: " + Name);

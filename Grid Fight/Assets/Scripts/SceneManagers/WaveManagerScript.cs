@@ -103,7 +103,6 @@ public class WaveManagerScript : MonoBehaviour
 
     private IEnumerator Wave(WavePhaseClass wavePhase)
     {
-        StartCoroutine(battleTime.standardReverseTicker);
         float timer = 0;
         BaseCharacter newChar;
         WaveCharacterInfoClass waveCharacterInfoClass;
