@@ -72,9 +72,9 @@ MonoBehaviour:
     width: 1114
     height: 859
   selectedBlocks:
-  - {fileID: 5562079149702115373}
+  - {fileID: -5852253165506477272}
   selectedCommands:
-  - {fileID: 265346165888687052}
+  - {fileID: -2975321282607786751}
   variables: []
   description: A default flowchart that simply cycles through the waves (specifically
     of a size 6 stage)
@@ -351,7 +351,7 @@ MonoBehaviour:
   itemId: 11
   indentLevel: 0
   WaveName: Wave6
-  NextBlockToFire: 
+  NextBlockToFire: Ya win
 --- !u!114 &5562079149702115373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,16 +505,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6481227703857458121}
     m_Modifications:
-    - target: {fileID: 7764918786800763677, guid: 710684f58655d6d498842a1877e6232e,
-        type: 3}
-      propertyPath: m_Name
-      value: Win
-      objectReference: {fileID: 0}
-    - target: {fileID: 7764918786800763677, guid: 710684f58655d6d498842a1877e6232e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7904399683586369145, guid: 710684f58655d6d498842a1877e6232e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -619,6 +609,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764918786800763677, guid: 710684f58655d6d498842a1877e6232e,
+        type: 3}
+      propertyPath: m_Name
+      value: Win
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764918786800763677, guid: 710684f58655d6d498842a1877e6232e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 710684f58655d6d498842a1877e6232e, type: 3}
