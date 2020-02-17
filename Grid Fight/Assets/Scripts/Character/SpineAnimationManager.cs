@@ -260,6 +260,11 @@ public class SpineAnimationManager : MonoBehaviour
             });
         }
     }
+
+    public void SetSkeletonOrderInLayer(int order)
+    {
+        GetComponent<MeshRenderer>().sortingOrder = order;
+    }
 }
 
 [System.Serializable]

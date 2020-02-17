@@ -19,13 +19,13 @@ public class CameraManagerScript : MonoBehaviour
 
     public IEnumerator CameraShakeCo()
     {
-        Anim.SetBool("Shake", false);
+        Anim.SetInteger("Shake", 1);
         yield return null;
-        Anim.SetBool("Shake", true);
+        //Anim.SetInteger("Shake", 0);
     }
 
     public void SetFalse()
     {
-        Anim.SetBool("Shake", false);
+        Anim.SetInteger("Shake", 0);
     }
 }

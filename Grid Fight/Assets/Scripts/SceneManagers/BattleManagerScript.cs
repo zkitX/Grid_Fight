@@ -337,8 +337,10 @@ public class BattleManagerScript : MonoBehaviour
 
     public void LoadingNewCharacterToGrid(CharacterNameType cName, SideType side, ControllerType playerController)
     {
-        if (CurrentBattleState != BattleState.Battle && CurrentBattleState != BattleState.Intro) return;
-
+        if (CurrentBattleState != BattleState.Battle)
+        {
+            return;
+        }
 
         CharacterType_Script currentCharacter = (CharacterType_Script)AllCharactersOnField.Where(r=> r.CharInfo.CharacterID == cName).First();
         currentCharacter.SetCharSelected(true, playerController);
@@ -349,10 +351,6 @@ public class BattleManagerScript : MonoBehaviour
         }
         else
         {
-            if (CurrentSelectedCharacters[playerController].Character.CharInfo.CharacterID == cName)
-            {
-                return;
-            }
             CurrentSelectedCharacters[playerController].LoadCharCo = SwapCharacters(cName, playerController);
         }
         CurrentCharactersLoadingInfo.Add(new CharacterLoadingInfoClass(currentCharacter.CharInfo.CharacterID, playerController, CurrentSelectedCharacters[playerController].LoadCharCo));
@@ -378,21 +376,30 @@ public class BattleManagerScript : MonoBehaviour
             {
                 yield return null;
             }
+
+            if(CurrentSelectedCharacters[playerController].NextSelectionChar == CurrentSelectedCharacters[playerController].Character.CharInfo.CharacterSelection)
+            {
+                yield break;
+            }
+
             Vector2Int spawnPos = CurrentSelectedCharacters[playerController].Character.UMS._CurrentTilePos;
             CharacterType_Script currentCharacter = SetCharOnBoardOnFixedPos(playerController, cName, spawnPos);
             //Debug.Log("Exit  " + CurrentSelectedCharacters[playerController].OffsetSwap + "    " + Time.time + CurrentSelectedCharacters[playerController].NextSelectionChar + AllCharactersOnField.Where(r => r.CharInfo.CharacterID == cName).First().CharInfo.CharacterSelection);
             if (currentCharacter != null)
             {
                 CurrentSelectedCharacters[playerController].Character.IsSwapping = true;
-                CurrentSelectedCharacters[playerController].Character.SwapWhenPossible = false;
+               
                 // currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", false);
                 currentCharacter.SpineAnim.SetAnimationSpeed(2);
                 yield return RemoveCharacterFromBaord(playerController, CurrentSelectedCharacters[playerController].Character, false);
 
                 SelectCharacter(playerController, currentCharacter);
-               // currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", true);
+                CurrentSelectedCharacters[playerController].Character.IsSwapping = true;
+                // currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", true);
             }
         }
+
+        CurrentSelectedCharacters[playerController].Character.SwapWhenPossible = false;
         //And drop the new character in
         CurrentSelectedCharacters[playerController].LoadCharCo = null;
     }
@@ -679,7 +686,7 @@ public class BattleManagerScript : MonoBehaviour
         BaseCharacter cb = new BaseCharacter();
         if (InputControllerT == InputControllerType.SelectionOnABXY)
         {
-            if (CurrentBattleState == BattleState.Battle || CurrentBattleState == BattleState.FungusPuppets || CurrentBattleState == BattleState.Intro)
+            if (CurrentBattleState == BattleState.Battle)
             {
                 side = GetSideFromPlayer(new List<ControllerType> { playerController });
                 cb = AllCharactersOnField.FirstOrDefault();
@@ -691,7 +698,7 @@ public class BattleManagerScript : MonoBehaviour
         }
         else if (InputControllerT == InputControllerType.SelectionOnLR)
         {
-            if (CurrentBattleState == BattleState.Battle || CurrentBattleState == BattleState.FungusPuppets || CurrentBattleState == BattleState.Intro)
+            if (CurrentBattleState == BattleState.Battle)
             {
                 side = GetSideFromPlayer(new List<ControllerType> { playerController });
                 cb = null;
@@ -705,6 +712,7 @@ public class BattleManagerScript : MonoBehaviour
                 }
                 else
                 {
+                  
                     CharacterSelectionType cs = CurrentSelectedCharacters[playerController].NextSelectionChar;
                     for (int i = 0; i < AllCharactersOnField.Count; i++)
                     {
