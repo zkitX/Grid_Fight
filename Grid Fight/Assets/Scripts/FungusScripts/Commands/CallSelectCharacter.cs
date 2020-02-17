@@ -22,6 +22,7 @@ public class CallSelectCharacter : Command
     {
         CharacterType_Script character = (CharacterType_Script)BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == characterID).FirstOrDefault();
         BattleManagerScript.Instance.SelectCharacter(playerController, character);
+        NewIManager.Instance.SetSelected(true, playerController, characterID);
     }
 
     #region Public members
