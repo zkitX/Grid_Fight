@@ -77,6 +77,7 @@ public class AudioEmitter : MonoBehaviour
 
     private void OnDisable()
     {
+        audioSource.volume = baseVolume;
         AudioManager.Instance.RemoveAudio(gameObject);
     }
 
@@ -87,7 +88,6 @@ public class AudioEmitter : MonoBehaviour
 
     private void OnEnable()
     {
-        SetupAudioEmitter();
         if (playOnEnabled) PlayAudio();
     }
 
