@@ -50,7 +50,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 371f464eca8b97a479db4534c496f2d0, type: 3}
   genericEmitters: []
   audioEmitters: []
+  dominant: {fileID: 0}
   musicClip: {fileID: 8300000, guid: b2d10ff64cb23f04c9bfbe947b219109, type: 3}
+  audioPlayedLastFrame: []
 --- !u!82 &932918548
 AudioSource:
   m_ObjectHideFlags: 0
@@ -63,7 +65,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.65
   m_Pitch: 1
   Loop: 1
   Mute: 0
