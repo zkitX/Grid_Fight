@@ -56,7 +56,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public SpecialAttackStatus StopPowerfulAtk;
     private float DefendingHoldingTimer = 0;
     public bool IsSwapping = false;
-
+    public bool SwapWhenPossible = false;
 
     protected virtual void Start()
     {
@@ -489,7 +489,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     #region Move
     public virtual void MoveCharOnDirection(InputDirection nextDir)
     {
-        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving || SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving || SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle || IsSwapping)
+        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving || SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving ||
+            SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle || IsSwapping || SwapWhenPossible)
         {
             return;
         }

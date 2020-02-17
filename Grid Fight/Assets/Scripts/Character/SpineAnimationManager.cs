@@ -84,6 +84,7 @@ public class SpineAnimationManager : MonoBehaviour
         }
         if (CurrentAnim == CharacterAnimationStateType.Reverse_Arriving)
         {
+            CharOwner.IsSwapping = false;
             CharOwner.SetAttackReady(false);
         }
 
