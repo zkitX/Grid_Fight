@@ -95,7 +95,6 @@ namespace Fungus
             Block block = ParentBlock;
             if (block != null)
             {
-                Debug.Log("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
                 if (block.BlockName == blockName)
                 {
                     block.StartExecution();

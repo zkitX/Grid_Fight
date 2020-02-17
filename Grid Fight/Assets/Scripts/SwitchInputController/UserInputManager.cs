@@ -126,7 +126,7 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonPlusUpEvent(int player)
     {
         //Debug.Log(player + "  " + "Plus Up");
-        if(BattleManagerScript.Instance.CurrentBattleState == BattleState.Intro)
+        if(BattleManagerScript.Instance.CurrentBattleState == BattleState.Intro || BattleManagerScript.Instance.CurrentBattleState == BattleState.FungusPuppets)
         {
             BattleManagerScript.Instance.SetupBattleState();
         }

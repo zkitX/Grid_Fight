@@ -51,6 +51,8 @@ public class NewICharacterVitality : MonoBehaviour
             return;
         }
 
+        ToggleVisible(true);
+
         assignedCharDetails = character;
         characterName.text = assignedCharDetails.Name;
         characterIconSelected.sprite = assignedCharDetails.CharacterIcons[1];
@@ -66,6 +68,20 @@ public class NewICharacterVitality : MonoBehaviour
         characterIconIdle.sprite = null;
         healthBar.fillAmount = 0f;
         staminaBar.fillAmount = 0f;
+
+        ToggleVisible(false);
+    }
+
+    void ToggleVisible(bool state)
+    {
+        foreach (Image img in GetComponentsInChildren<Image>())
+        {
+            img.enabled = state;
+        }
+        foreach (TextMeshProUGUI text in GetComponentsInChildren<TextMeshProUGUI>())
+        {
+            text.enabled = state;
+        }
     }
 
     public void UpdateVitalities()
