@@ -99,7 +99,6 @@ namespace Fungus
                 {
                     block.StartExecution();
                 }
-                    Debug.Log(block.BlockName);
             }
         }
 

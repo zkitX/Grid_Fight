@@ -60,6 +60,12 @@ public class GameSequenceEvent : EventTrigger
 
     void StartAllTimedRequirements()
     {
+        if(timedChecks.Count == 0)
+        {
+            CompleteEvent();
+            return;
+        }
+
         foreach(TimedCheck timedCheck in timedChecks)
         {
             timedCheck.StartChecking(this);

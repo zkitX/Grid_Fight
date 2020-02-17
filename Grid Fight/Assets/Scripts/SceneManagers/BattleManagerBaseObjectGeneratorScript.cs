@@ -64,5 +64,6 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
         yield return null;
 
         UserInputManager.Instance.StartUserInputManager();
+        bms.SetupBattleState();
     }
 }

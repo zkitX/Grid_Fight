@@ -73,10 +73,6 @@ public class BattleManagerScript : MonoBehaviour
 
     void ConfigureUsingFungus()
     {
-        if (CurrentBattleState == BattleState.FungusPuppets || CurrentBattleState == BattleState.Intro)
-        {
-            if (!usingFungus) CurrentBattleState = BattleState.Battle;
-        }
         EventManager.Instance.StartEventManager();
     }
 
@@ -448,6 +444,8 @@ public class BattleManagerScript : MonoBehaviour
 
     public void DeselectCharacter(CharacterNameType charToDeselectName)
     {
+
+
         /*bool isSelected = false;
         foreach (KeyValuePair<ControllerType, CurrentSelectedCharacterClass> characterSelector in CurrentSelectedCharacters)
         {
@@ -484,6 +482,8 @@ public class BattleManagerScript : MonoBehaviour
         {
             return;
         }
+
+        NewIManager.Instance.SetSelected(false, ControllerType.None, charToDeselectName);
 
         CharacterType_Script charToDeselect = (CharacterType_Script)AllCharactersOnField.Where(r => r.CharInfo.CharacterID == charToDeselectName).FirstOrDefault();
 
@@ -820,7 +820,7 @@ public class BattleManagerScript : MonoBehaviour
 
     public void RestartScene()
     {
-        if(CurrentBattleState == BattleState.Battle)
+        if(CurrentBattleState == BattleState.Pause)
         {
             CurrentBattleState = BattleState.End;
             UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);

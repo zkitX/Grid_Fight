@@ -119,17 +119,17 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonMinusUpEvent(int player)
     {
         //Debug.Log(player + "  " + "Minus Up");
-        BattleManagerScript.Instance.RestartScene();
+        //BattleManagerScript.Instance.RestartScene();
         
     }
 
     private void Instance_ButtonPlusUpEvent(int player)
     {
         //Debug.Log(player + "  " + "Plus Up");
-        if(BattleManagerScript.Instance.CurrentBattleState == BattleState.Intro || BattleManagerScript.Instance.CurrentBattleState == BattleState.FungusPuppets)
-        {
-            BattleManagerScript.Instance.SetupBattleState();
-        }
+        //if(BattleManagerScript.Instance.CurrentBattleState == BattleState.Intro || BattleManagerScript.Instance.CurrentBattleState == BattleState.FungusPuppets)
+        //{
+         //   BattleManagerScript.Instance.SetupBattleState();
+        //}
     }
 
     private void Instance_ButtonZLUpEvent(int player)
