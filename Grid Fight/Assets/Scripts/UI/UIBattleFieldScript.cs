@@ -8,10 +8,6 @@ using System.Linq;
 public class UIBattleFieldScript : MonoBehaviour
 {
     public BaseCharacter CharOwner;
-    [SerializeField]
-    private Image CharacterHealthBar;
-    [SerializeField]
-    private Image CharacterStaminaBar;
     private Camera mCamera;
     public Canvas CanvasParent;
     private Dictionary<int, GameObject> Damages = new Dictionary<int, GameObject>();
@@ -32,8 +28,6 @@ public class UIBattleFieldScript : MonoBehaviour
         if (CharOwner != null)
         {
             transform.position = mCamera.WorldToScreenPoint(CharOwner.transform.position);
-            CharacterHealthBar.rectTransform.anchoredPosition = new Vector2(CharacterHealthBar.rectTransform.rect.width - ((CharacterHealthBar.rectTransform.rect.width / 100) * CharOwner.CharInfo.HealthPerc), 0);
-            CharacterStaminaBar.rectTransform.anchoredPosition = new Vector2(CharacterStaminaBar.rectTransform.rect.width - ((CharacterStaminaBar.rectTransform.rect.width / 100) * CharOwner.CharInfo.StaminaPerc), 0);
         }
     }
 

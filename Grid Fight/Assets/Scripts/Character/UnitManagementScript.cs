@@ -56,6 +56,8 @@ public class UnitManagementScript : MonoBehaviour
     public Transform HPBar;
     public Transform StaminaBar;
 
+
+
     //Used to decide the side
     public void SetupCharacterSide()
     {
@@ -111,6 +113,16 @@ public class UnitManagementScript : MonoBehaviour
             }
         }
     }
+
+    public void SetBattleUISelection(ControllerType playerController)
+    {
+        SelectionIndicatorPlayerNumberSmall.color = BattleManagerScript.Instance.playersColor[(int)playerController];
+        SelectionIndicatorPlayerSmall.color = BattleManagerScript.Instance.playersColor[(int)playerController];
+
+        SelectionIndicatorPlayerNumberSmall.sprite = BattleManagerScript.Instance.playersNumberSmall[(int)playerController];
+        SelectionIndicatorPlayerNumberBig.sprite = BattleManagerScript.Instance.playersNumberSmall[(int)playerController];
+    }
+
 
     //Used to set the unit info for the facing,side,unitbehaviour, tag and AI
     public void SetUnit(FacingType facing, SideType side, UnitBehaviourType ubt, bool ai = false)

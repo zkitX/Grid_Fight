@@ -466,7 +466,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
         while (defe)
         {
-            if((SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle) || (SpineAnim.CurrentAnim.ToString().Contains("Dash") && !isMoving))
+            if(SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle)
             {
                 SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
                 SpineAnim.SetAnimationSpeed(5);
@@ -618,6 +618,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         float speedTimer = 0;
         Vector3 offset = transform.position;
         bool isMovCheck = false;
+        bool isDefe = false;
         while (timer < 1)
         {
           
@@ -631,6 +632,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             {
                 isMovCheck = true;
                 isMoving = false;
+                if(defe && !isDefe)
+                {
+                    isDefe = true;
+                    SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
+                    SpineAnim.SetAnimationSpeed(5);
+                }
                 if (TileMovementCompleteEvent != null)
                 {
                     TileMovementCompleteEvent(this);

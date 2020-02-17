@@ -23,7 +23,8 @@ public class MinionType_Script : BaseCharacter
 
     // Temp variables to allow the minions without proper animations setup to charge attacks
     public bool sequencedAttacker = false;
-    bool attacking = false;
+    [HideInInspector]
+    public bool Attacking = false;
     GameObject chargeParticles = null;
 
 
@@ -66,14 +67,14 @@ public class MinionType_Script : BaseCharacter
     {
         while (true)
         {
-            if(MoveCoOn && currentAttackPhase == AttackPhasesType.End && !attacking)
+            if(MoveCoOn && currentAttackPhase == AttackPhasesType.End && !Attacking)
             {
                 float timer = 0;
                 float MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y);
                 while (timer < MoveTime)
                 {
                     yield return new WaitForFixedUpdate();
-                    while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || attacking)
+                    while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || Attacking)
                     {
                         yield return new WaitForFixedUpdate();
                     }
@@ -132,7 +133,7 @@ public class MinionType_Script : BaseCharacter
         if (nextAttack.Anim == CharacterAnimationStateType.Atk)
         {
             //Temporary until anims are added
-            attacking = true; 
+            Attacking = true; 
             sequencedAttacker = false;
             chargeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
             SetAnimation(CharacterAnimationStateType.Idle, true);
@@ -153,7 +154,7 @@ public class MinionType_Script : BaseCharacter
         }
 
         currentAttackPhase = AttackPhasesType.End;
-        attacking = false; //Temporary until anims are added
+        //attacking = false; //Temporary until anims are added
         yield break;
     }
 
@@ -186,7 +187,7 @@ public class MinionType_Script : BaseCharacter
             SpineAnimatorsetup();
         }
 
-        if (animState == CharacterAnimationStateType.GettingHit && attacking)
+        if (animState == CharacterAnimationStateType.GettingHit && Attacking)
         {
             return;
         }

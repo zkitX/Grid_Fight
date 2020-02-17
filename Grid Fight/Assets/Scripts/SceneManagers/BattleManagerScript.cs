@@ -50,10 +50,8 @@ public class BattleManagerScript : MonoBehaviour
     private List<CharacterBaseInfoClass> PlayerBattleInfo = new List<CharacterBaseInfoClass>();
     private List<PlayableCharOnScene> PlayablesCharOnScene = new List<PlayableCharOnScene>();
     public List<Color> playersColor = new List<Color>();
-    [SerializeField]
-    private List<Sprite> playersNumberBig = new List<Sprite>();
-    [SerializeField]
-    private List<Sprite> playersNumberSmall = new List<Sprite>();
+    public List<Sprite> playersNumberBig = new List<Sprite>();
+    public List<Sprite> playersNumberSmall = new List<Sprite>();
     private MatchType matchType;
     public Camera MCam;
     public bool VFXScene = false;
@@ -105,7 +103,10 @@ public class BattleManagerScript : MonoBehaviour
     {
         BaseCharacter currentCharacter = AllCharactersOnField.Where(r=> r.UMS.PlayerController.Contains(playerController) && r.CharInfo.CharacterID == cName).FirstOrDefault();
         BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(currentCharacter.UMS.WalkingSide, currentCharacter.UMS.Pos);
-        if(currentCharacter != null) SelectCharacter(playerController, SetCharOnBoardOnFixedPos(playerController, cName, bts.Pos));
+        if (currentCharacter != null)
+        {
+            SelectCharacter(playerController, SetCharOnBoardOnFixedPos(playerController, cName, bts.Pos));
+        }
     }
 
     public CharacterType_Script SetCharOnBoardOnFixedPos(ControllerType playerController, CharacterNameType cName, Vector2Int pos)
@@ -135,6 +136,7 @@ public class BattleManagerScript : MonoBehaviour
             }
             currentCharacter.SetUpEnteringOnBattle();
             StartCoroutine(MoveCharToBoardWithDelay(0.1f, currentCharacter, bts.transform.position));
+            
             UIBattleManager.Instance.isLeftSidePlaying = true;
             PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == cName).First().isUsed = true;
             return (CharacterType_Script)currentCharacter;
@@ -158,7 +160,7 @@ public class BattleManagerScript : MonoBehaviour
             newPoses.Add(Vector2Int.zero);
         }
         currentCharacter.UMS.Pos = newPoses;
-
+        currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", false);
         currentCharacter.SetUpLeavingBattle();
         yield return MoveCharToBoardWithDelay(0.3f, currentCharacter, new Vector3(100f, 100f, 100f));
 
@@ -171,11 +173,14 @@ public class BattleManagerScript : MonoBehaviour
             UIBattleManager.Instance.isRightSidePlaying = false;
         }
 
-        if (PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == currentCharacter.CharInfo.CharacterID).First().isUsed)
+        if (PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == currentCharacter.CharInfo.CharacterID).FirstOrDefault() != null &&
+             PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == currentCharacter.CharInfo.CharacterID).First().isUsed)
         {
             PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == currentCharacter.CharInfo.CharacterID).First().isUsed = false;
         }
-        if(playerController == ControllerType.None && PlayablesCharOnScene.Where(r => r.CName == currentCharacter.CharInfo.CharacterID).First().isUsed)
+
+
+        if (playerController == ControllerType.None && PlayablesCharOnScene.Where(r => r.CName == currentCharacter.CharInfo.CharacterID).First().isUsed)
         {
             PlayablesCharOnScene.Where(r => r.CName == currentCharacter.CharInfo.CharacterID).First().isUsed = false;
         }
@@ -562,6 +567,8 @@ public class BattleManagerScript : MonoBehaviour
                 }
                 //Change this player's character to the new character
                 CurrentSelectedCharacters[playerController].Character = currentCharacter;
+                currentCharacter.UMS.SetBattleUISelection(playerController);
+                currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", true);
 
                 //Change the player's UI to the new character
                 //UIBattleManager.Instance.CharacterSelected(playerController, currentCharacter);
