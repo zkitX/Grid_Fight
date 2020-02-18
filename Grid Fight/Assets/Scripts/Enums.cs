@@ -577,7 +577,12 @@ public enum InputButtonType
     Left_Move_Horizontal,
     Right_Move_Horizontal,
     Left_Move_Vertical,
-    Right_Move_Vertical
+    Right_Move_Vertical,
+    KeyboardDown,
+    KeyboardUp,
+    KeyboardRight,
+    KeyboardLeft
+
 }
 
 
