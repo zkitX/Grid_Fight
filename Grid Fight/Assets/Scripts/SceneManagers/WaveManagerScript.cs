@@ -158,6 +158,7 @@ public class WaveManagerScript : MonoBehaviour
     {
         GridManagerScript.Instance.SetBattleTileState(bts.Pos, BattleTileStateType.Occupied);
         currentCharacter.UMS.CurrentTilePos = bts.Pos;
+        currentCharacter.CurrentBattleTiles = new List<BattleTileScript>();
         for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)
         {
             currentCharacter.UMS.Pos[i] += bts.Pos;

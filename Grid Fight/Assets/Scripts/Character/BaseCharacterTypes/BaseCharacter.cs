@@ -624,8 +624,14 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 CurrentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos)).ToList().Count && GridManagerScript.Instance.isPosOnField(UMS.CurrentTilePos + dir))
             {
 
+                
+
                 SetAnimation(AnimState);
                 isMoving = true;
+                if (prevBattleTile.Count > 1)
+                {
+
+                }
                 foreach (BattleTileScript item in prevBattleTile)
                 {
                     GridManagerScript.Instance.SetBattleTileState(item.Pos, BattleTileStateType.Empty);
