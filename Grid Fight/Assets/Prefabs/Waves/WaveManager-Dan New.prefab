@@ -415,18 +415,18 @@ MonoBehaviour:
       DelayBetweenChars: 1
   - name: Wave7
     IsRandom: 0
-    MaxEnemyOnScreen: 5
+    MaxEnemyOnScreen: 6
     ListOfEnemy:
     - name: The Jaguar
       NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 2
         CharacterClass: 0
-        Health: {x: 1500, y: 2000}
+        Health: {x: 1000, y: 1200}
         HealthRegeneration: {x: 2, y: 3}
-        Damage: {x: 20, y: 25}
-        BaseSpeed: {x: 1.7, y: 1.7}
-        AttackSpeedRatio: {x: 4, y: 4}
+        Damage: {x: 25, y: 26}
+        BaseSpeed: {x: 1.9, y: 1.9}
+        AttackSpeedRatio: {x: 3, y: 3}
         Stamina: {x: 100, y: 100}
         StaminaRegeneration: {x: 1, y: 1}
         Events: []
@@ -437,7 +437,7 @@ MonoBehaviour:
     - name: Flies
       NumberOfCharacter: 40
       TypeOfCharacter:
-        CharacterName: 2
+        CharacterName: 25
         CharacterClass: 0
         Health: {x: 15, y: 20}
         HealthRegeneration: {x: 0.3, y: 0.3}
@@ -454,7 +454,7 @@ MonoBehaviour:
     - name: Flies
       NumberOfCharacter: 40
       TypeOfCharacter:
-        CharacterName: 2
+        CharacterName: 25
         CharacterClass: 0
         Health: {x: 15, y: 20}
         HealthRegeneration: {x: 0.3, y: 0.3}
@@ -471,7 +471,7 @@ MonoBehaviour:
     - name: Flies
       NumberOfCharacter: 40
       TypeOfCharacter:
-        CharacterName: 2
+        CharacterName: 25
         CharacterClass: 0
         Health: {x: 15, y: 20}
         HealthRegeneration: {x: 0.3, y: 0.3}
@@ -488,7 +488,24 @@ MonoBehaviour:
     - name: Flies
       NumberOfCharacter: 40
       TypeOfCharacter:
-        CharacterName: 2
+        CharacterName: 25
+        CharacterClass: 0
+        Health: {x: 15, y: 20}
+        HealthRegeneration: {x: 0.3, y: 0.3}
+        Damage: {x: 1.5, y: 2}
+        BaseSpeed: {x: 1.5, y: 1.7}
+        AttackSpeedRatio: {x: 5, y: 6}
+        Stamina: {x: 20, y: 20}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+    - name: Flies
+      NumberOfCharacter: 40
+      TypeOfCharacter:
+        CharacterName: 25
         CharacterClass: 0
         Health: {x: 15, y: 20}
         HealthRegeneration: {x: 0.3, y: 0.3}
