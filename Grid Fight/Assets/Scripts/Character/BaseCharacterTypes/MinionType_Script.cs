@@ -93,10 +93,7 @@ public class MinionType_Script : BaseCharacter
             SpineAnimatorsetup();
         }
 
-        if (animState == CharacterAnimationStateType.GettingHit && Attacking)
-        {
-            return;
-        }
+        
 
         base.SetAnimation(animState, loop, transition);
     }
