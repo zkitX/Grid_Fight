@@ -38,7 +38,7 @@ public class NewIManager : MonoBehaviour
     {
         while (WaveManagerScript.Instance == null) yield return null;
         GameTime time;
-        while (true)
+        while (WaveManagerScript.Instance.battleTime.counting)
         {
             time = WaveManagerScript.Instance.battleTime;
 
@@ -53,6 +53,7 @@ public class NewIManager : MonoBehaviour
 
             yield return null;
         }
+        yield return null;
     }
 
     public void SetSelected(bool state, ControllerType controller, CharacterNameType charName)

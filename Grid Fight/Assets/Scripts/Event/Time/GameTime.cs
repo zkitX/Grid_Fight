@@ -12,6 +12,7 @@ public class GameTime
     [HideInInspector] public static GameTime zero = new GameTime(0, 0, 0f);
     [HideInInspector] public IEnumerator standardTicker = null;
     [HideInInspector] public IEnumerator standardReverseTicker = null;
+    [HideInInspector] public bool counting = false;
 
     public GameTime()
     {
@@ -67,6 +68,8 @@ public class GameTime
 
     IEnumerator TimeCounter(float rate)
     {
+        //Never unsets 
+        counting = true;
         startingTime = new GameTime(hours, minutes, seconds);
 
         while (true)
