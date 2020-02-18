@@ -256,7 +256,10 @@ public class CharacterInfoScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Stamina += StaminaStats.Regeneration / 50;
-        Health += HealthStats.Regeneration / 50;
+        if(Health > 0)
+        {
+            Stamina += StaminaStats.Regeneration / 50;
+            Health += HealthStats.Regeneration / 50;
+        }
     }
 }

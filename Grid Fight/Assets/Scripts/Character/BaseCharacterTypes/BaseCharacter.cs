@@ -1049,7 +1049,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             //Play getting hit sound only if the character is a playable one
             if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
             {
-                AudioManager.Instance.PlayGeneric("Get_Hit_20200217");
+               // AudioManager.Instance.PlayGeneric("Get_Hit_20200217");
             }
             SetAnimation(CharacterAnimationStateType.GettingHit);
             res = true;
