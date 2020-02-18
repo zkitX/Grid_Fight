@@ -47,6 +47,7 @@ MonoBehaviour:
     hours: 0
     minutes: 15
     seconds: 0
+    counting: 0
   WavePhases:
   - name: Wave1
     IsRandom: 1
@@ -414,7 +415,7 @@ MonoBehaviour:
       DelayBetweenChars: 1
   - name: Wave7
     IsRandom: 0
-    MaxEnemyOnScreen: 10
+    MaxEnemyOnScreen: 5
     ListOfEnemy:
     - name: The Jaguar
       NumberOfCharacter: 1
@@ -424,9 +425,77 @@ MonoBehaviour:
         Health: {x: 1500, y: 2000}
         HealthRegeneration: {x: 2, y: 3}
         Damage: {x: 20, y: 25}
+        BaseSpeed: {x: 1.7, y: 1.7}
+        AttackSpeedRatio: {x: 4, y: 4}
+        Stamina: {x: 100, y: 100}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+    - name: Flies
+      NumberOfCharacter: 40
+      TypeOfCharacter:
+        CharacterName: 2
+        CharacterClass: 0
+        Health: {x: 15, y: 20}
+        HealthRegeneration: {x: 0.3, y: 0.3}
+        Damage: {x: 1.5, y: 2}
         BaseSpeed: {x: 1.5, y: 1.7}
-        AttackSpeedRatio: {x: 4, y: 6}
-        Stamina: {x: 10, y: 10}
+        AttackSpeedRatio: {x: 5, y: 6}
+        Stamina: {x: 20, y: 20}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+    - name: Flies
+      NumberOfCharacter: 40
+      TypeOfCharacter:
+        CharacterName: 2
+        CharacterClass: 0
+        Health: {x: 15, y: 20}
+        HealthRegeneration: {x: 0.3, y: 0.3}
+        Damage: {x: 1.5, y: 2}
+        BaseSpeed: {x: 1.5, y: 1.7}
+        AttackSpeedRatio: {x: 5, y: 6}
+        Stamina: {x: 20, y: 20}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+    - name: Flies
+      NumberOfCharacter: 40
+      TypeOfCharacter:
+        CharacterName: 2
+        CharacterClass: 0
+        Health: {x: 15, y: 20}
+        HealthRegeneration: {x: 0.3, y: 0.3}
+        Damage: {x: 1.5, y: 2}
+        BaseSpeed: {x: 1.5, y: 1.7}
+        AttackSpeedRatio: {x: 5, y: 6}
+        Stamina: {x: 20, y: 20}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+    - name: Flies
+      NumberOfCharacter: 40
+      TypeOfCharacter:
+        CharacterName: 2
+        CharacterClass: 0
+        Health: {x: 15, y: 20}
+        HealthRegeneration: {x: 0.3, y: 0.3}
+        Damage: {x: 1.5, y: 2}
+        BaseSpeed: {x: 1.5, y: 1.7}
+        AttackSpeedRatio: {x: 5, y: 6}
+        Stamina: {x: 20, y: 20}
         StaminaRegeneration: {x: 1, y: 1}
         Events: []
       IsRandomSpowiningTile: 1
