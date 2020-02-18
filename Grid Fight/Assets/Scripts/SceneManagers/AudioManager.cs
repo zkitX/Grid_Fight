@@ -8,11 +8,12 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
     public GameObject genericAudioEmitterPrefab;
-    public AudioClip[] unboundClips;
+    public UnboundClipClass[] unboundClips;
     public List<AudioEmitter> genericEmitters = new List<AudioEmitter>();
     public List<GameObject> audioEmitters = new List<GameObject>();
     [SerializeField] protected AudioEmitter dominant = null;
 
+    [SerializeField] protected bool playLevelMusic = true;
     [Tooltip("The background music for the level")] public AudioClip musicClip;
     protected AudioSource musicSource;
 
@@ -23,6 +24,10 @@ public class AudioManager : MonoBehaviour
         Instance = this;
         musicSource = GetComponent<AudioSource>();
         PlayMusic();
+        for (int i = 0; i < 5; i++)
+        {
+            genericEmitters.Add(Instantiate(genericAudioEmitterPrefab, transform).GetComponent<AudioEmitter>());
+        }
     }
 
     public void AddAudio(GameObject audio)
@@ -34,7 +39,10 @@ public class AudioManager : MonoBehaviour
     public void PlayMusic()
     {
         musicSource.clip = musicClip;
-        musicSource.Play();
+        if (playLevelMusic)
+        {
+            musicSource.Play();
+        }
     }
 
     public void RemoveAudio(GameObject audio)
@@ -97,12 +105,11 @@ public class AudioManager : MonoBehaviour
     public void PlayGeneric(string unboundClipName)
     {
         if (unboundClips.Length == 0) return;
-        else if (unboundClips.Where(r => r.name == unboundClipName).FirstOrDefault() == null) return;
+        else if (unboundClips.Where(r => r.clip.name == unboundClipName).FirstOrDefault() == null) return;
         GameObject emitterObject;
         if (genericEmitters.Count != 0 && genericEmitters.Where(r => !r.gameObject.activeInHierarchy).FirstOrDefault() != null)
         {
             emitterObject = genericEmitters.Where(r => !r.gameObject.activeInHierarchy).FirstOrDefault().gameObject;
-            emitterObject.SetActive(true);
         }
         else
         {
@@ -110,7 +117,12 @@ public class AudioManager : MonoBehaviour
             genericEmitters.Add(emitterObject.GetComponent<AudioEmitter>());
         }
         AudioEmitter emitter = emitterObject.GetComponent<AudioEmitter>();
-        emitter.ChangeClip(unboundClips.Where(r => r.name == unboundClipName).FirstOrDefault());
+        UnboundClipClass unboundClipClass = unboundClips.Where(r => r.clip.name == unboundClipName).FirstOrDefault();
+        if (unboundClipClass == null) return;
+        emitter.ChangeClip(unboundClipClass.clip);
+        emitter.priority = unboundClipClass.priority;
+        emitter.dampenToPercent = unboundClipClass.dampenAmount;
+        emitterObject.SetActive(true);
         emitter.PlayAudio();
     }
 
@@ -139,4 +151,12 @@ public class AudioManager : MonoBehaviour
 
     }
 
+}
+
+[System.Serializable]
+public class UnboundClipClass
+{
+    public AudioClip clip;
+    [Range(0f, 1f)] public float dampenAmount = 1f;
+    [Range(-100, 100)] public int priority = 0;
 }

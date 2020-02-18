@@ -12,8 +12,11 @@ public class AudioEmitter : MonoBehaviour
     [Range(0f, 1f)] public float dampenToPercent = 1f;
     public AudioSource audioSource { get; private set; }
     public float baseVolume = 1f;
+    public float desiredVolume = 1f;
     public bool playOnEnabled = true;
     public bool autoDisableOnComplete = false;
+
+    IEnumerator SmoothRecoverer = null;
 
     void Awake()
     {
@@ -55,8 +58,9 @@ public class AudioEmitter : MonoBehaviour
     {
         while (audioSource.isPlaying)
         {
-            yield return new WaitForSeconds(1f);
+            yield return null;
         }
+        AudioManager.Instance.RemoveAudio(gameObject);
         gameObject.SetActive(false);
     }
 
@@ -67,7 +71,17 @@ public class AudioEmitter : MonoBehaviour
 
     public void UpdateVolume()
     {
-        audioSource.volume = baseVolume * AudioManager.Instance.GetMaxVolumeForPriority(priority);
+        float newVolume = baseVolume * AudioManager.Instance.GetMaxVolumeForPriority(priority);
+        if (newVolume < audioSource.volume)
+        {
+            audioSource.volume = newVolume;
+            desiredVolume = newVolume;
+        }
+        else
+        {
+            desiredVolume = newVolume;
+            StartSmoothRecovery();
+        }
     }
 
     public void SetVolume(float newVolume)
@@ -93,7 +107,30 @@ public class AudioEmitter : MonoBehaviour
 
     public void ChangeClip(AudioClip clip)
     {
+        if (audioSource == null) audioSource = GetComponent<AudioSource>();
         audioSource.clip = clip;
+    }
+
+    void StartSmoothRecovery()
+    {
+        if (SmoothRecoverer != null) StopCoroutine(SmoothRecoverer);
+        SmoothRecoverer = SmoothAFRecovery();
+        StartCoroutine(SmoothRecoverer);
+    }
+
+    IEnumerator SmoothAFRecovery()
+    {
+        while(audioSource.volume != desiredVolume)
+        {
+            audioSource.volume = Mathf.Lerp(audioSource.volume, desiredVolume, Time.deltaTime * 4f);
+            audioSource.volume = Mathf.Clamp(audioSource.volume, audioSource.volume, desiredVolume);
+            Debug.Log("Smoothly Recovering Sound");
+            if (Mathf.Abs(audioSource.volume - desiredVolume) < 0.05f)
+            {
+                audioSource.volume = desiredVolume;
+            }
+            yield return null;
+        }
     }
 
 }
