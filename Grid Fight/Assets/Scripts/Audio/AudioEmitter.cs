@@ -92,6 +92,7 @@ public class AudioEmitter : MonoBehaviour
     private void OnDisable()
     {
         audioSource.volume = baseVolume;
+        if (SmoothRecoverer != null) StopCoroutine(SmoothRecoverer);
         AudioManager.Instance.RemoveAudio(gameObject);
     }
 
@@ -124,7 +125,6 @@ public class AudioEmitter : MonoBehaviour
         {
             audioSource.volume = Mathf.Lerp(audioSource.volume, desiredVolume, Time.deltaTime * 4f);
             audioSource.volume = Mathf.Clamp(audioSource.volume, audioSource.volume, desiredVolume);
-            Debug.Log("Smoothly Recovering Sound");
             if (Mathf.Abs(audioSource.volume - desiredVolume) < 0.05f)
             {
                 audioSource.volume = desiredVolume;

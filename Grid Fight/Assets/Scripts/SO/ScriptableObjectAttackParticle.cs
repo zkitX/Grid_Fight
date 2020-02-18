@@ -14,6 +14,7 @@ public class ScriptableObjectAttackParticle : ScriptableObject
     public GameObject ImpactLeftPS;
     public GameObject CastLoopPS;
     public GameObject CastActivationPS;
+    //public GameObject 
 }
 
 

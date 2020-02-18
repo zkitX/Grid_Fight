@@ -95,7 +95,7 @@ public class CharacterType_Script : BaseCharacter
         {
             BattleManagerScript.Instance.UpdateCurrentSelectedCharacters(this, null);
         }
-
+        NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo);
         base.SetCharDead();
     }
 
@@ -234,6 +234,7 @@ public class CharacterType_Script : BaseCharacter
         NextAttackLevel = attackLevel;
         GetAttack(CharacterAnimationStateType.Atk1);
         SetAnimation(CharacterAnimationStateType.Atk2_AtkToIdle);
+        ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.CastActivation, transform.position, UMS.Side);
     }
 
     public void QuickAttack()

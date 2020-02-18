@@ -14,7 +14,6 @@ public class UITutorialScript : MonoBehaviour
             isSetup = true;
 
             InputController.Instance.ButtonMinusUpEvent += Instance_ButtonMinusUpEvent;
-            InputController.Instance.ButtonXUpEvent += Instance_ButtonXUpEvent;
             InputController.Instance.ButtonPlusUpEvent += Instance_ButtonPlusUpEvent;
             gameObject.SetActive(false);
         }
@@ -22,20 +21,21 @@ public class UITutorialScript : MonoBehaviour
 
     private void Instance_ButtonMinusUpEvent(int player)
     {
-        BattleManagerScript.Instance.CurrentBattleState = previousBattleState;
-        gameObject.SetActive(false);
-    }
-
-    private void Instance_ButtonXUpEvent(int player)
-    {
-        if(BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+        if (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.Pause)
         {
             return;
         }
-        previousBattleState = BattleManagerScript.Instance.CurrentBattleState;
-        BattleManagerScript.Instance.CurrentBattleState = BattleState.Pause;
-        gameObject.SetActive(true);
+        if (gameObject.activeInHierarchy)
+        {
+            BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
+        }
+        else
+        {
+            BattleManagerScript.Instance.CurrentBattleState = BattleState.Pause;
+        }
+        gameObject.SetActive(!gameObject.activeInHierarchy);
     }
+
     private void Instance_ButtonPlusUpEvent(int player)
     {
         if (gameObject.activeInHierarchy)

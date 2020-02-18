@@ -18,6 +18,7 @@ public class NewICharacterVitality : MonoBehaviour
     [SerializeField] protected Image characterIconIdle;
     [SerializeField] protected Image characterIconSelected;
     [SerializeField] protected TextMeshProUGUI characterName;
+    [SerializeField] protected TextMeshProUGUI deadText;
 
     protected Color[] baseSelectionColors;
     [SerializeField] protected Image[] backgroundImages;
@@ -50,8 +51,8 @@ public class NewICharacterVitality : MonoBehaviour
             SetDefault();
             return;
         }
-
         ToggleVisible(true);
+        ToggleDeathTextVisablity(false);
 
         assignedCharDetails = character;
         characterName.text = assignedCharDetails.Name;
@@ -70,6 +71,7 @@ public class NewICharacterVitality : MonoBehaviour
         staminaBar.fillAmount = 0f;
 
         ToggleVisible(false);
+        //ToggleDeathTextVisablity(false);
     }
 
     void ToggleVisible(bool state)
@@ -84,9 +86,22 @@ public class NewICharacterVitality : MonoBehaviour
         }
     }
 
+    void ToggleDeathTextVisablity(bool state)
+    {
+        deadText.enabled = state;
+    }
+
     public void UpdateVitalities()
     {
+
         if (assignedCharDetails == null) return;
+
+        if (assignedCharDetails.HealthPerc == 0f)
+        {
+            SetCharacter(null);
+            ToggleDeathTextVisablity(true);
+            return;
+        }
 
         if (assignedCharDetails.HealthPerc / 100f != healthBar.fillAmount)
         {
