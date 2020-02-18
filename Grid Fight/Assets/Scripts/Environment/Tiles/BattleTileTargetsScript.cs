@@ -50,10 +50,10 @@ public class BattleTileTargetsScript : MonoBehaviour
             anim.speed = 1 / duration;
             timer += Time.fixedDeltaTime;
             tc.RemainingTime = duration - timer;
-            if ((!attacker.gameObject.activeInHierarchy || ((MinionType_Script)attacker).shotsLeftInAttack == 0) && !attackerFiredAttackAnim)
+            if ((!attacker.gameObject.activeInHierarchy || attacker.shotsLeftInAttack == 0) && !attackerFiredAttackAnim)
             {
                 //Stop the firing of the attacks to the tiles
-                ((MinionType_Script)attacker).shotsLeftInAttack = 0;
+                attacker.shotsLeftInAttack = 0;
                 tc.RemainingTime = 0f;
                 UpdateQueue(tc);
                 yield break;
@@ -61,7 +61,7 @@ public class BattleTileTargetsScript : MonoBehaviour
             else if (tc.RemainingTime <= duration*0.1f && attacker.UMS.CurrentAttackType == AttackType.Tile && !attackerFiredAttackAnim)
             {
                 attackerFiredAttackAnim = true;
-                ((MinionType_Script)attacker).fireAttackAnimation(); // trigger the shoot anim
+                attacker.fireAttackAnimation(); // trigger the shoot anim
             }
         }
 
@@ -75,7 +75,7 @@ public class BattleTileTargetsScript : MonoBehaviour
                 effectOn = target.SetDamage(damage, ele);
             }
         }
-        ((MinionType_Script)attacker).shotsLeftInAttack--;
+        attacker.shotsLeftInAttack--;
         if (effectOn)
         {
             //animToFire["ExclamationAnim"].speed = 1;
@@ -88,7 +88,7 @@ public class BattleTileTargetsScript : MonoBehaviour
             }
         }
         //anim.speed = 1;
-        //yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length - 1);
+        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length - 1);
         UpdateQueue(tc);
     }
 

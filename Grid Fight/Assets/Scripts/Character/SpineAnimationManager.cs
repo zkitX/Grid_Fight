@@ -57,8 +57,19 @@ public class SpineAnimationManager : MonoBehaviour
         else if (e.Data.Name.Contains("FireBulletParticle"))
         {
             CharOwner.currentAttackPhase = CurrentAnim.ToString().Contains("Atk1") ? AttackPhasesType.Bullet_Rapid : AttackPhasesType.Bullet_Powerful;
-            CharOwner.CreateAttack();
+            CharOwner.CreateParticleAttack();
            
+            if (!CharOwner.VFXTestMode)
+            {
+                CharOwner.NextAttackLevel = CharacterLevelType.Novice;
+
+            }
+        }
+        else if(e.Data.Name.Contains("FireTileAttack"))
+        {
+            CharOwner.currentAttackPhase = CurrentAnim.ToString().Contains("Atk1") ? AttackPhasesType.Bullet_Rapid : AttackPhasesType.Bullet_Powerful;
+            CharOwner.CreateTileAttack();
+
             if (!CharOwner.VFXTestMode)
             {
                 CharOwner.NextAttackLevel = CharacterLevelType.Novice;
@@ -144,7 +155,7 @@ public class SpineAnimationManager : MonoBehaviour
             if(completedAnim == CharacterAnimationStateType.Atk1_Loop && CurrentAnim == CharacterAnimationStateType.Atk1_Loop)
             {
                 //If they can still attack, keep them in the charging loop
-                if(((MinionType_Script)CharOwner).shotsLeftInAttack > 0)
+                if(CharOwner.shotsLeftInAttack > 0)
                 {
                     SetAnim(CharacterAnimationStateType.Atk1_Charging, true, 0);
                 }
@@ -162,7 +173,7 @@ public class SpineAnimationManager : MonoBehaviour
                 || completedAnim == CharacterAnimationStateType.Atk || completedAnim == CharacterAnimationStateType.Atk1)
             {
                 CharOwner.currentAttackPhase = AttackPhasesType.End;
-                ((MinionType_Script)CharOwner).Attacking = false;
+                CharOwner.Attacking = false;
             }
         }
 

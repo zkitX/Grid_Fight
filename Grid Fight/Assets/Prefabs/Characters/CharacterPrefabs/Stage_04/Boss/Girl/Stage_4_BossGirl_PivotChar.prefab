@@ -202,7 +202,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 405080a66d5093745a2d2d3305f533e6, type: 2}
+  - {fileID: 2100000, guid: d7d4fca6197b68d44afc90ab3ab98bc8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 4aeb40cfef38e5445893bd3cfa5f0c82, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 52a44b1b4c2d58848b628955f1d335a3, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: 
-  CharacterIcon: {fileID: 21300000, guid: 305df1f998953104ab04eb3eba46ee09, type: 3}
+  CharacterIcons: []
   BaseCharacterType: 3
   CharacterID: 12
   CurrentParticlesAttackTypeInfo:
@@ -631,6 +631,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2728665800076335582}
     m_Modifications:
+    - target: {fileID: 3677435223727270876, guid: a2ef8c0a6fda57b4d8a0e5ccd757f5a2,
+        type: 3}
+      propertyPath: m_Name
+      value: TentaclesBossGirl
+      objectReference: {fileID: 0}
     - target: {fileID: 3677435223727270873, guid: a2ef8c0a6fda57b4d8a0e5ccd757f5a2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -686,11 +691,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3677435223727270876, guid: a2ef8c0a6fda57b4d8a0e5ccd757f5a2,
-        type: 3}
-      propertyPath: m_Name
-      value: TentaclesBossGirl
-      objectReference: {fileID: 0}
     - target: {fileID: 8487456094111737662, guid: a2ef8c0a6fda57b4d8a0e5ccd757f5a2,
         type: 3}
       propertyPath: Adjustment.x
@@ -716,6 +716,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2728665800076335582}
     m_Modifications:
+    - target: {fileID: 6222024276423462515, guid: 74ea03eeb71618c4fb21a9bbdce4c2e3,
+        type: 3}
+      propertyPath: m_Name
+      value: stage04-boss-Lady-Shield-Loop
+      objectReference: {fileID: 0}
+    - target: {fileID: 6222024276423462515, guid: 74ea03eeb71618c4fb21a9bbdce4c2e3,
+        type: 3}
+      propertyPath: m_TagString
+      value: Shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 6222024276423462515, guid: 74ea03eeb71618c4fb21a9bbdce4c2e3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6222024276423462512, guid: 74ea03eeb71618c4fb21a9bbdce4c2e3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -769,21 +784,6 @@ PrefabInstance:
     - target: {fileID: 6222024276423462512, guid: 74ea03eeb71618c4fb21a9bbdce4c2e3,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6222024276423462515, guid: 74ea03eeb71618c4fb21a9bbdce4c2e3,
-        type: 3}
-      propertyPath: m_Name
-      value: stage04-boss-Lady-Shield-Loop
-      objectReference: {fileID: 0}
-    - target: {fileID: 6222024276423462515, guid: 74ea03eeb71618c4fb21a9bbdce4c2e3,
-        type: 3}
-      propertyPath: m_TagString
-      value: Shield
-      objectReference: {fileID: 0}
-    - target: {fileID: 6222024276423462515, guid: 74ea03eeb71618c4fb21a9bbdce4c2e3,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

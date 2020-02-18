@@ -52,19 +52,41 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public BoxCollider CharBoxCollider;
     public ScriptableObjectAttackBase nextAttack = null;
     public AttackPhasesType currentAttackPhase = AttackPhasesType.End;
-    IEnumerator attackCoroutine = null;
+    private IEnumerator attackCoroutine = null;
     public SpecialAttackStatus StopPowerfulAtk;
     private float DefendingHoldingTimer = 0;
     public bool IsSwapping = false;
     public bool SwapWhenPossible = false;
+    private GameObject chargeParticles = null;
 
+
+
+    public int shotsLeftInAttack
+    {
+        get
+        {
+            return _shotsLeftInAttack;
+        }
+        set
+        {
+            _shotsLeftInAttack = value;
+        }
+    }
+
+    public int _shotsLeftInAttack = 0;
+
+    // Temp variables to allow the minions without proper animations setup to charge attacks
+    public bool sequencedAttacker = false;
+    [HideInInspector]
+    public bool Attacking = false;
     private int OredrInLayer = 0;
 
     protected virtual void Start()
     {
-        if(VFXTestMode)
+        if(VFXTestMode || UMS.CurrentAttackType == AttackType.Tile)
         {
             StartAttakCo();
+            StartMoveCo();
         }
     }
 
@@ -237,7 +259,79 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     }
 
+    //Basic attack sequence
     public virtual IEnumerator AttackSequence()
+    {
+        /*shotsLeftInAttack = 0;
+        if (currentAttackPhase != AttackPhasesType.End) yield break;
+
+        yield return null;*/
+        shotsLeftInAttack = GetHowManyAttackAreOnBattleField(((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories);
+
+        if (nextAttack.Anim == CharacterAnimationStateType.Atk)
+        {
+            //Temporary until anims are added
+            Attacking = true;
+            sequencedAttacker = false;
+            chargeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
+            SetAnimation(CharacterAnimationStateType.Idle, true);
+            currentAttackPhase = AttackPhasesType.Cast_Powerful;
+            CreateTileAttack();
+        }
+        //If it does have the correct animation setup, play that charged animation
+        else
+        {
+            currentAttackPhase = AttackPhasesType.Start;
+            sequencedAttacker = true; //Temporary until anims are added
+            SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
+        }
+
+        while (shotsLeftInAttack != 0)
+        {
+            yield return null;
+        }
+
+        currentAttackPhase = AttackPhasesType.End;
+        //attacking = false; //Temporary until anims are added
+        yield break;
+    }
+
+
+    public void fireAttackAnimation()
+    {
+        //Debug.Log("<b>Shots left in this charge of attacks: </b>" + shotsLeftInAttack);
+        if (sequencedAttacker) SetAnimation(CharacterAnimationStateType.Atk1_Loop);
+        else SetAnimation(CharacterAnimationStateType.Atk); //Temporary until anims are added
+        if (chargeParticles != null && shotsLeftInAttack == 0)
+        {
+            chargeParticles.SetActive(false);
+
+            chargeParticles = null;
+        }
+    }
+
+    private int GetHowManyAttackAreOnBattleField(List<BulletBehaviourInfoClassOnBattleField> bulTraj)
+    {
+        int res = 0;
+        Vector2Int basePos = new Vector2Int(UMS.CurrentTilePos.x, GridManagerScript.Instance.YGridSeparator);
+        foreach (BulletBehaviourInfoClassOnBattleField item in bulTraj)
+        {
+            foreach (Vector2Int target in item.BulletEffectTiles)
+            {
+
+                Vector2Int posToCheck = basePos - target;
+                if (GridManagerScript.Instance.isPosOnField(posToCheck))
+                {
+                    res++;
+                }
+            }
+        }
+
+        return res;
+    }
+
+
+    /*public virtual IEnumerator AttackSequence()
     {
         SetAnimation(nextAttack.Anim);
 
@@ -253,7 +347,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
             yield return null;
         }
-    }
+    }*/
 
     public IEnumerator PauseAttack(float duration)
     {
@@ -292,9 +386,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         else
         {
-
-
-
             foreach (ScriptableObjectAttackTypeOnBattlefield atk in CharInfo.CurrentOnBattleFieldAttackTypeInfo)
             {
                 int chances = UnityEngine.Random.Range(0, 101);
@@ -440,16 +531,21 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     }
 
 
-    public void CreateAttack()
+    public void CreateParticleAttack()
     {
-        if(UMS.CurrentAttackType == AttackType.Particles)
+        if (UMS.CurrentAttackType == AttackType.Particles)
         {
             foreach (BulletBehaviourInfoClass item in ((ScriptableObjectAttackType)nextAttack).BulletTrajectories)
             {
                 CreateBullet(item);
             }
         }
-        else
+       
+    }
+
+    public void CreateTileAttack()
+    {
+        if (UMS.CurrentAttackType == AttackType.Tile)
         {
             GridManagerScript.Instance.StartOnBattleFieldAttackCo(CharInfo, ((ScriptableObjectAttackTypeOnBattlefield)nextAttack), UMS.CurrentTilePos, UMS, this);
         }
@@ -857,6 +953,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         // Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + NextAttackLevel.ToString());
 
 
+        if(animState == CharacterAnimationStateType.GettingHit && currentAttackPhase != AttackPhasesType.End)
+        {
+            return;
+        }
+
         if (isMoving)
         {
             return;
@@ -866,7 +967,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             return;
         }
-
 
         float AnimSpeed = 1;
 
@@ -940,6 +1040,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         else
         {
+            //Play getting hit sound only if the character is a playable one
+            if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
+            {
+                AudioManager.Instance.PlayGeneric("Get_Hit_20200217");
+            }
             SetAnimation(CharacterAnimationStateType.GettingHit);
             res = true;
         }

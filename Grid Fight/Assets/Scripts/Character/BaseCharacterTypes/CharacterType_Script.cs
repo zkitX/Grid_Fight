@@ -7,10 +7,8 @@ public class CharacterType_Script : BaseCharacter
 {
 
     private float atkHoldingTimer = 0;
-
-
-
-
+    protected bool MoveCoOn = true;
+    private IEnumerator MoveActionCo;
     #region Unity Life Cycles
     protected override void Start()
     {
@@ -24,6 +22,63 @@ public class CharacterType_Script : BaseCharacter
     #endregion
 
     #region Setup Character
+
+
+    public override void StartMoveCo()
+    {
+        MoveCoOn = true;
+        MoveActionCo = Move();
+        StartCoroutine(MoveActionCo);
+    }
+
+    public virtual IEnumerator Move()
+    {
+        while (true)
+        {
+            if (MoveCoOn && currentAttackPhase == AttackPhasesType.End && !Attacking)
+            {
+                float timer = 0;
+                float MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y);
+                while (timer < MoveTime)
+                {
+                    yield return new WaitForFixedUpdate();
+                    while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || Attacking)
+                    {
+                        yield return new WaitForFixedUpdate();
+                    }
+
+                    timer += Time.fixedDeltaTime;
+                }
+                if (CharInfo.Health > 0)
+                {
+                    while (currentAttackPhase != AttackPhasesType.End)
+                    {
+                        yield return null;
+                    }
+
+                    MoveCharOnDirection((InputDirection)Random.Range(0, 4));
+                }
+                else
+                {
+                    timer = 0;
+                }
+            }
+            yield return null;
+        }
+    }
+
+
+    public override void StopMoveCo()
+    {
+        MoveCoOn = false;
+        if (MoveActionCo != null)
+        {
+            StopCoroutine(MoveActionCo);
+        }
+    }
+
+
+
     public override void SetupCharacterSide()
     {
         base.SetupCharacterSide();
@@ -85,7 +140,7 @@ public class CharacterType_Script : BaseCharacter
                     SetAnimation(CharacterAnimationStateType.Atk2_IdleToAtk);
                     SpineAnim.SetAnimationSpeed(SpineAnim.GetAnimLenght(CharacterAnimationStateType.Atk2_IdleToAtk) / CharInfo.SpeedStats.IdleToAtkDuration);
                 }
-                if (timer > 1 && !isChargingParticlesOn)
+                if (!isChargingParticlesOn)
                 {
                     isChargingParticlesOn = true;
                     ps = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
@@ -132,6 +187,8 @@ public class CharacterType_Script : BaseCharacter
             }
             else
             {
+                ps.transform.parent = null;
+                ps.SetActive(false);
                 SetAnimation(CharacterAnimationStateType.Idle, true, 0.1f);
             }
         }

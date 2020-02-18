@@ -155,7 +155,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ddf182a4f3939f645a17855e944dc688, type: 2}
+  - {fileID: 2100000, guid: 537fca46e269d71408453f7abb64499f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 07fc2c4588e204b4ebaf4cced1d4b318, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 27a49a6d44e0a264bbf344420748fbfc, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: 
-  CharacterIcon: {fileID: 21300000, guid: 305df1f998953104ab04eb3eba46ee09, type: 3}
+  CharacterIcons: []
   BaseCharacterType: 1
   CharacterID: 0
   CurrentParticlesAttackTypeInfo:
@@ -350,6 +350,12 @@ MonoBehaviour:
   ClassType: 1
   CharacterLevel: 0
   CharacterSelection: 0
+  RapidAttack:
+    BaseDamage: 10
+    Stamina_Cost_Atk: 0
+  PowerfulAttac:
+    BaseDamage: 10
+    Stamina_Cost_Atk: 0
   HealthStats:
     Health: 70
     Base: 70
@@ -361,11 +367,6 @@ MonoBehaviour:
     Base: 40
     Regeneration: 1
     BaseStaminaRegeneration: 1
-    Stamina_Cost_Atk: 0
-    Stamina_Cost_S_Atk01: 1
-    Stamina_Cost_S_Atk02: 1
-    Stamina_Cost_S_Atk03: 1
-    Stamina_Cost_S_Atk04: 0
     LevelMultiplier: 0
   SpeedStats:
     BaseSpeed: 1
@@ -378,14 +379,12 @@ MonoBehaviour:
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
   DamageStats:
-    BaseDamage: 7
     CurrentDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 0
-    SpecialMultiplier: 1
   DefenceStats:
     BaseDefence: 10
     Invulnerability: 0.2

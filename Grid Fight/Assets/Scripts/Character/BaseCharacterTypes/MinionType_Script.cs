@@ -5,34 +5,11 @@ using UnityEngine;
 public class MinionType_Script : BaseCharacter
 {
 
-    public int shotsLeftInAttack
-    {
-        get
-        {
-            return _shotsLeftInAttack;
-        }
-        set
-        {
-            _shotsLeftInAttack = value;
-        }
-    }
-
-    public int _shotsLeftInAttack = 0;
+    
     protected bool MoveCoOn = true;
     private IEnumerator MoveActionCo;
 
-    // Temp variables to allow the minions without proper animations setup to charge attacks
-    public bool sequencedAttacker = false;
-    [HideInInspector]
-    public bool Attacking = false;
-    GameObject chargeParticles = null;
-
-
-    protected override void Start()
-    {
-        StartAttakCo();
-       
-    }
+   
 
     public override void SetUpEnteringOnBattle()
     {
@@ -99,77 +76,6 @@ public class MinionType_Script : BaseCharacter
         }
     }
 
-
-    private int GetHowManyAttackAreOnBattleField(List<BulletBehaviourInfoClassOnBattleField> bulTraj)
-    {
-        int res = 0;
-        Vector2Int basePos = new Vector2Int(UMS.CurrentTilePos.x, GridManagerScript.Instance.YGridSeparator);
-        foreach (BulletBehaviourInfoClassOnBattleField item in bulTraj)
-        {
-            foreach (Vector2Int target in item.BulletEffectTiles)
-            {
-
-                Vector2Int posToCheck =  basePos - target;
-                if (GridManagerScript.Instance.isPosOnField(posToCheck))
-                {
-                    res++;
-                }
-            }
-        }
-
-        return res;
-    }
-
-
-    //Basic attack sequence
-    public override IEnumerator AttackSequence()
-    {
-        /*shotsLeftInAttack = 0;
-        if (currentAttackPhase != AttackPhasesType.End) yield break;
-
-        yield return null;*/
-        shotsLeftInAttack = GetHowManyAttackAreOnBattleField(((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories);
-
-        if (nextAttack.Anim == CharacterAnimationStateType.Atk)
-        {
-            //Temporary until anims are added
-            Attacking = true; 
-            sequencedAttacker = false;
-            chargeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
-            SetAnimation(CharacterAnimationStateType.Idle, true);
-            currentAttackPhase = AttackPhasesType.Cast_Powerful;
-            CreateAttack();
-        }
-        //If it does have the correct animation setup, play that charged animation
-        else
-        {
-            currentAttackPhase = AttackPhasesType.Start;
-            sequencedAttacker = true; //Temporary until anims are added
-            SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
-        }
-
-        while (shotsLeftInAttack != 0)
-        {
-            yield return null;
-        }
-
-        currentAttackPhase = AttackPhasesType.End;
-        //attacking = false; //Temporary until anims are added
-        yield break;
-    }
-
-    public void fireAttackAnimation()
-    {
-        //Debug.Log("<b>Shots left in this charge of attacks: </b>" + shotsLeftInAttack);
-        if(sequencedAttacker)SetAnimation(CharacterAnimationStateType.Atk1_Loop);
-        else SetAnimation(CharacterAnimationStateType.Atk); //Temporary until anims are added
-        if (chargeParticles != null && shotsLeftInAttack == 0)
-        {
-            chargeParticles.SetActive(false);
-
-            chargeParticles = null;
-        }
-    }
 
     public override void StopMoveCo()
     {
