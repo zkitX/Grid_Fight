@@ -13,102 +13,24 @@ MonoBehaviour:
   m_Name: AttackPattern-Stage0-FlyAttack2
   m_EditorClassIdentifier: 
   AttackRatioMultiplier: 2
-  DamageMultiplier: 0.8
+  DamageMultiplier: 1
   Anim: 5
   BulletTrajectories:
-  - Delay: 1.5
-    BulletEffectTiles:
-    - {x: 0, y: 1}
-    - {x: -1, y: 1}
-    - {x: -2, y: 1}
-    - {x: -3, y: 1}
-    - {x: -4, y: 1}
-    - {x: -5, y: 1}
-    - {x: 1, y: 1}
-    - {x: 2, y: 1}
-    - {x: 3, y: 1}
-    - {x: 4, y: 1}
-    - {x: 5, y: 1}
   - Delay: 2
     BulletEffectTiles:
+    - {x: 0, y: 1}
     - {x: 0, y: 2}
-    - {x: -1, y: 2}
-    - {x: -2, y: 2}
-    - {x: -3, y: 2}
-    - {x: -4, y: 2}
-    - {x: -5, y: 2}
-    - {x: 1, y: 2}
-    - {x: 2, y: 2}
-    - {x: 3, y: 2}
-    - {x: 4, y: 2}
-    - {x: 5, y: 2}
-  - Delay: 2.5
-    BulletEffectTiles:
     - {x: 0, y: 3}
-    - {x: -1, y: 3}
-    - {x: -2, y: 3}
-    - {x: -3, y: 3}
-    - {x: -4, y: 3}
-    - {x: -5, y: 3}
+    - {x: 0, y: 4}
+    - {x: 0, y: 5}
     - {x: 1, y: 3}
     - {x: 2, y: 3}
     - {x: 3, y: 3}
-    - {x: 4, y: 3}
-    - {x: 5, y: 3}
-  - Delay: 3
-    BulletEffectTiles:
-    - {x: 0, y: 4}
-    - {x: -1, y: 4}
-    - {x: -2, y: 4}
-    - {x: -3, y: 4}
-    - {x: -4, y: 4}
-    - {x: -5, y: 4}
-    - {x: 1, y: 4}
-    - {x: 2, y: 4}
-    - {x: 3, y: 4}
-    - {x: 4, y: 4}
-    - {x: 5, y: 4}
-  - Delay: 3.5
-    BulletEffectTiles:
-    - {x: 0, y: 5}
-    - {x: -1, y: 5}
-    - {x: -2, y: 5}
-    - {x: -3, y: 5}
-    - {x: -4, y: 5}
-    - {x: -5, y: 5}
-    - {x: 1, y: 5}
-    - {x: 2, y: 5}
-    - {x: 3, y: 5}
-    - {x: 4, y: 5}
-    - {x: 5, y: 5}
-  - Delay: 4
-    BulletEffectTiles:
-    - {x: 0, y: 6}
-    - {x: -1, y: 6}
-    - {x: -2, y: 6}
-    - {x: -3, y: 6}
-    - {x: -4, y: 6}
-    - {x: -5, y: 6}
-    - {x: 1, y: 6}
-    - {x: 2, y: 6}
-    - {x: 3, y: 6}
-    - {x: 4, y: 6}
-    - {x: 5, y: 6}
-  - Delay: 4.5
-    BulletEffectTiles:
-    - {x: 0, y: 7}
-    - {x: -1, y: 7}
-    - {x: -2, y: 7}
-    - {x: -3, y: 7}
-    - {x: -4, y: 7}
-    - {x: -5, y: 7}
-    - {x: 1, y: 7}
-    - {x: 2, y: 7}
-    - {x: 3, y: 7}
-    - {x: 4, y: 7}
-    - {x: 5, y: 7}
+    - {x: -1, y: 3}
+    - {x: -2, y: 3}
+    - {x: -3, y: 3}
   StatToCheck: 1
   ValueChecker: 0
-  PercToCheck: 50
-  Chances: 30
+  PercToCheck: 70
+  Chances: 50
   ParticlesID: 14

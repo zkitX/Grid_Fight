@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AttackPattern-Stage0-Bot-Attack2
   m_EditorClassIdentifier: 
   AttackRatioMultiplier: 1
-  DamageMultiplier: 1
+  DamageMultiplier: 1.3
   Anim: 5
   BulletTrajectories:
   - Delay: 2
@@ -22,32 +22,50 @@ MonoBehaviour:
   - Delay: 2.1
     BulletEffectTiles:
     - {x: 0, y: 2}
+    - {x: 1, y: 1}
+    - {x: -1, y: 1}
   - Delay: 2.2
     BulletEffectTiles:
     - {x: 0, y: 3}
+    - {x: 1, y: 2}
+    - {x: -1, y: 2}
   - Delay: 2.3
     BulletEffectTiles:
     - {x: 0, y: 4}
+    - {x: 1, y: 3}
+    - {x: -1, y: 3}
   - Delay: 2.4
     BulletEffectTiles:
     - {x: 0, y: 5}
+    - {x: 1, y: 4}
+    - {x: -1, y: 4}
   - Delay: 2.5
     BulletEffectTiles:
     - {x: 0, y: 6}
+    - {x: 1, y: 5}
+    - {x: -1, y: 5}
   - Delay: 2.6
     BulletEffectTiles:
     - {x: 0, y: 7}
+    - {x: 1, y: 6}
+    - {x: -1, y: 6}
   - Delay: 2.7
     BulletEffectTiles:
     - {x: 0, y: 8}
+    - {x: 1, y: 7}
+    - {x: -1, y: 7}
   - Delay: 2.8
     BulletEffectTiles:
     - {x: 0, y: 9}
+    - {x: 1, y: 8}
+    - {x: -1, y: 8}
   - Delay: 2.9
     BulletEffectTiles:
     - {x: 0, y: 10}
-  StatToCheck: 0
+    - {x: 1, y: 9}
+    - {x: -1, y: 9}
+  StatToCheck: 1
   ValueChecker: 0
-  PercToCheck: 0
-  Chances: 0
-  ParticlesID: 15
+  PercToCheck: 50
+  Chances: 80
+  ParticlesID: 18
