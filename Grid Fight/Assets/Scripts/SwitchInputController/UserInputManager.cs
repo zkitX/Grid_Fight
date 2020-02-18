@@ -159,7 +159,7 @@ public class UserInputManager : MonoBehaviour
 
         if (BattleManagerScript.Instance.InputControllerT == InputControllerType.SelectionOnLR)
         {
-            Debug.Log(Time.time);
+            //Debug.Log(Time.time);
 
             BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)player].OffsetSwap = Time.time + SwapDelay;
         }

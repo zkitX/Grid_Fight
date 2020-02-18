@@ -380,6 +380,7 @@ public class BattleManagerScript : MonoBehaviour
 
             if(CurrentSelectedCharacters[playerController].NextSelectionChar == CurrentSelectedCharacters[playerController].Character.CharInfo.CharacterSelection)
             {
+                CurrentSelectedCharacters[playerController].Character.SwapWhenPossible = false;
                 yield break;
             }
 
@@ -731,7 +732,13 @@ public class BattleManagerScript : MonoBehaviour
                         }
                     }
                 }
+                if(cb == null)
+                {
+
+                }
+
                 LoadingNewCharacterToGrid(cb.CharInfo.CharacterID, side, playerController);
+
             }
         }
     }
