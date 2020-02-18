@@ -964,6 +964,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             return;
         }
 
+        if (animState == CharacterAnimationStateType.GettingHit && Attacking)
+        {
+            return;
+        }
+
         if (isMoving)
         {
             return;
