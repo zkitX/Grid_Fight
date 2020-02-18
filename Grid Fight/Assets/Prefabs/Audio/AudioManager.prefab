@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7479873770767313007
+--- !u!1 &1251593967129298512
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7479873770767313001}
-  - component: {fileID: 7479873770767313006}
-  - component: {fileID: 932918548}
+  - component: {fileID: 9051379760905112393}
+  - component: {fileID: 5378387082076696716}
+  - component: {fileID: 4148530599999159393}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &7479873770767313001
+  m_IsActive: 1
+--- !u!4 &9051379760905112393
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7479873770767313007}
+  m_GameObject: {fileID: 1251593967129298512}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.0751693, y: 2.2035644, z: 16.452309}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,13 +32,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7479873770767313006
+--- !u!114 &5378387082076696716
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7479873770767313007}
+  m_GameObject: {fileID: 1251593967129298512}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40339b35074af4242a538fb3ba9aa11b, type: 3}
@@ -47,25 +47,34 @@ MonoBehaviour:
   genericAudioEmitterPrefab: {fileID: 630175079457558867, guid: c13aca5252cc19e4684be3562803d606,
     type: 3}
   unboundClips:
-  - {fileID: 8300000, guid: 371f464eca8b97a479db4534c496f2d0, type: 3}
+  - clip: {fileID: 8300000, guid: 371f464eca8b97a479db4534c496f2d0, type: 3}
+    dampenAmount: 1
+    priority: 0
+  - clip: {fileID: 8300000, guid: 4cbb0f99961a83f4dba387a5fcde7701, type: 3}
+    dampenAmount: 0.85
+    priority: 50
+  - clip: {fileID: 8300000, guid: 3b78c92fa7ab8da40a23b963b8b7d944, type: 3}
+    dampenAmount: 1
+    priority: 0
   genericEmitters: []
   audioEmitters: []
   dominant: {fileID: 0}
+  playLevelMusic: 0
   musicClip: {fileID: 8300000, guid: b2d10ff64cb23f04c9bfbe947b219109, type: 3}
   audioPlayedLastFrame: []
---- !u!82 &932918548
+--- !u!82 &4148530599999159393
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7479873770767313007}
+  m_GameObject: {fileID: 1251593967129298512}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.65
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
