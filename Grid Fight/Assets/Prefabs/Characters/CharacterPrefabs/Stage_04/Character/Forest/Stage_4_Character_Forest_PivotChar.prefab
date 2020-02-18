@@ -418,7 +418,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c8d8c32d27675b240b38ae9fafa03bbb, type: 2}
+  - {fileID: 2100000, guid: fcd61829382fa4f4ebd3fb23aa67d127, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -451,7 +451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 6d5829385e17a3d4cb6fb3bff04550ce, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 7a82afb1a80fa1b418d3b6ad85bb770c, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -708,17 +708,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Zeta
-  CharacterIcon: {fileID: 21300000, guid: 82c025bc13968e94fa7be66a0694a6bf, type: 3}
+  CharacterIcons: []
   BaseCharacterType: 0
   CharacterID: 7
-  CurrentParticlesAttackTypeInfo: {fileID: 11400000, guid: f074bc20913c2044095e9d7802768898,
-    type: 2}
-  CurrentOnBattleFieldAttackTypeInfo: {fileID: 0}
+  CurrentParticlesAttackTypeInfo:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  CurrentOnBattleFieldAttackTypeInfo:
+  - {fileID: 0}
   ParticleID: 7
   Elemental: 4
   ClassType: 2
   CharacterLevel: 0
   CharacterSelection: 3
+  RapidAttack:
+    BaseDamage: 10
+    Stamina_Cost_Atk: 0
+  PowerfulAttac:
+    BaseDamage: 10
+    Stamina_Cost_Atk: 0
   HealthStats:
     Health: 50
     Base: 50
@@ -730,11 +739,6 @@ MonoBehaviour:
     Base: 25
     Regeneration: 1
     BaseStaminaRegeneration: 1
-    Stamina_Cost_Atk: 0
-    Stamina_Cost_S_Atk01: 2
-    Stamina_Cost_S_Atk02: 15
-    Stamina_Cost_S_Atk03: 30
-    Stamina_Cost_S_Atk04: 42
     LevelMultiplier: 45
   SpeedStats:
     BaseSpeed: 1
@@ -742,15 +746,20 @@ MonoBehaviour:
     AttackSpeed: 2.2
     AttackSpeedRatio: 2
     BulletSpeed: 2
+    LeaveSpeed: 3
     LevelMultiplier: 5
+    IdleToAtkDuration: 0.2
+    AtkToIdleDuration: 0.2
   DamageStats:
-    BaseDamage: 2.5
     CurrentDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 5
+  DefenceStats:
+    BaseDefence: 10
+    Invulnerability: 0.2
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0

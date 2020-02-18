@@ -58,6 +58,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public bool IsSwapping = false;
     public bool SwapWhenPossible = false;
 
+    private int OredrInLayer = 0;
+
     protected virtual void Start()
     {
         if(VFXTestMode)
@@ -95,6 +97,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         UMS.SetupCharacterSide();
         int layer = UMS.Side == SideType.LeftSide ? 9 : 10;
         SpineAnim.gameObject.layer = layer;
+        
     }
 
     public virtual void StartMoveCo()
@@ -130,6 +133,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         CanAttack = value;
         IsOnField = value;
         currentAttackPhase = AttackPhasesType.End;
+        OredrInLayer = 101 + (UMS.CurrentTilePos.x * 10) + (UMS.Facing == FacingType.Right ? UMS.CurrentTilePos.y - 12 : UMS.CurrentTilePos.y);
+        SpineAnim.SetSkeletonOrderInLayer(OredrInLayer);
     }
 
     public virtual void SetCharDead()
@@ -530,6 +535,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     GridManagerScript.Instance.SetBattleTileState(item.Pos, BattleTileStateType.Empty);
                 }
                 UMS.CurrentTilePos += dir;
+                OredrInLayer = 101 + (dir.x * 10) + (UMS.Facing == FacingType.Right ? dir.y - 12 : dir.y);
+                SpineAnim.SetSkeletonOrderInLayer(OredrInLayer);
+                
                 CurrentBattleTiles = CurrentBattleTilesToCheck;
                 UMS.Pos = new List<Vector2Int>();
                 foreach (BattleTileScript item in CurrentBattleTilesToCheck)

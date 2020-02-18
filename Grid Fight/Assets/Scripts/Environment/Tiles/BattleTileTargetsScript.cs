@@ -21,6 +21,7 @@ public class BattleTileTargetsScript : MonoBehaviour
         nextT.SetActive(true);
         TargetClass tc = new TargetClass(duration, nextT);
         nextT.transform.parent = transform;
+        nextT.transform.localPosition = TargetsPosition[0];
         Targets.Add(tc);
         UpdateQueue();
         StartCoroutine(FireTarget(tc, atkPS, pos, damage, ele, attacker));
@@ -86,6 +87,8 @@ public class BattleTileTargetsScript : MonoBehaviour
                 lps.SelectShotLevel();
             }
         }
+        //anim.speed = 1;
+        //yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length - 1);
         UpdateQueue(tc);
     }
 
