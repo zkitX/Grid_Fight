@@ -78,7 +78,7 @@ MonoBehaviour:
         HealthRegeneration: {x: 0.2, y: 0.2}
         Damage: {x: 5, y: 6}
         BaseSpeed: {x: 1, y: 1.5}
-        AttackSpeedRatio: {x: 4, y: 6}
+        AttackSpeedRatio: {x: 3, y: 4}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
         Events: []
@@ -357,41 +357,62 @@ MonoBehaviour:
       SpowningTile:
       - {x: 2, y: 8}
       DelayBetweenChars: 2
-    - name: Gal
-      NumberOfCharacter: 4
-      TypeOfCharacter:
-        CharacterName: 26
-        CharacterClass: 0
-        Health: {x: 80, y: 90}
-        HealthRegeneration: {x: 0.7, y: 0.8}
-        Damage: {x: 12, y: 14}
-        BaseSpeed: {x: 1, y: 1.5}
-        AttackSpeedRatio: {x: 4, y: 8}
-        Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        Events: []
-      IsRandomSpowiningTile: 1
-      SpowningTile:
-      - {x: 2, y: 8}
-      DelayBetweenChars: 2
-    - name: Gal
-      NumberOfCharacter: 4
-      TypeOfCharacter:
-        CharacterName: 26
-        CharacterClass: 0
-        Health: {x: 80, y: 90}
-        HealthRegeneration: {x: 0.7, y: 0.8}
-        Damage: {x: 12, y: 14}
-        BaseSpeed: {x: 1, y: 1.5}
-        AttackSpeedRatio: {x: 4, y: 8}
-        Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        Events: []
-      IsRandomSpowiningTile: 1
-      SpowningTile:
-      - {x: 2, y: 8}
-      DelayBetweenChars: 2
   - name: Wave6
+    IsRandom: 0
+    MaxEnemyOnScreen: 3
+    ListOfEnemy:
+    - name: Rider
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 7
+        CharacterClass: 0
+        Health: {x: 300, y: 500}
+        HealthRegeneration: {x: 1, y: 1}
+        Damage: {x: 14, y: 15}
+        BaseSpeed: {x: 2, y: 2}
+        AttackSpeedRatio: {x: 3, y: 4}
+        Stamina: {x: 100, y: 100}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+    - name: Tank
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 7
+        CharacterClass: 0
+        Health: {x: 120, y: 150}
+        HealthRegeneration: {x: 1.5, y: 1.5}
+        Damage: {x: 10, y: 11}
+        BaseSpeed: {x: 1.5, y: 1.5}
+        AttackSpeedRatio: {x: 5, y: 5}
+        Stamina: {x: 100, y: 100}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+    - name: Tank
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 7
+        CharacterClass: 0
+        Health: {x: 120, y: 150}
+        HealthRegeneration: {x: 1.5, y: 1.5}
+        Damage: {x: 10, y: 11}
+        BaseSpeed: {x: 1.5, y: 1.5}
+        AttackSpeedRatio: {x: 5, y: 5}
+        Stamina: {x: 100, y: 100}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+  - name: Wave7
     IsRandom: 0
     MaxEnemyOnScreen: 10
     ListOfEnemy:
