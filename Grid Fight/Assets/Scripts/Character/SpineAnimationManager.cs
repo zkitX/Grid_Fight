@@ -181,19 +181,14 @@ public class SpineAnimationManager : MonoBehaviour
         if (completedAnim != CharacterAnimationStateType.Idle && !Loop)
         {
             SetAnimationSpeed(CharOwner.CharInfo.BaseSpeed);
+
+            Debug.Log("IDLE     " + completedAnim.ToString());
             SpineAnimationState.SetAnimation(0, CharacterAnimationStateType.Idle.ToString(), true);
             SpineAnimationState.AddEmptyAnimation(1,AnimationTransition,0);
             CurrentAnim = CharacterAnimationStateType.Idle;
         }
     }
 
-    public void SpecialAtkTest()
-    {
-        float timer = skeletonAnimation.state.GetCurrent(1).AnimationTime;
-        SpineAnimationState.SetAnimation(1, CharacterAnimationStateType.Atk1_IdleToAtk.ToString(), false);
-        skeletonAnimation.state.GetCurrent(1).AnimationStart = timer;
-        CurrentAnim = CharacterAnimationStateType.Atk1_IdleToAtk;
-    }
 
     public void SetAnim(CharacterAnimationStateType anim)
     {
@@ -222,6 +217,7 @@ public class SpineAnimationManager : MonoBehaviour
             //Debug.Log("Arriving start");
         }
         Loop = loop;
+        Debug.Log(anim.ToString());
         SpineAnimationState.SetAnimation(1, anim.ToString(), loop).MixDuration = transition;
         if(transition > 0)
         {
@@ -243,6 +239,7 @@ public class SpineAnimationManager : MonoBehaviour
             }
             timer += Time.fixedDeltaTime;
         }
+        Debug.Log("Clear");
         SpineAnimationState.SetEmptyAnimation(0, 0);
     }
 

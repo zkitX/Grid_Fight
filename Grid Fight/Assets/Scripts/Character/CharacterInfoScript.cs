@@ -219,15 +219,20 @@ public class CharacterInfoScript : MonoBehaviour
             if (HealthStats.Health <= 0)
             {
                 HealthStats.Health = HealthStats.Health <= 0 ? 0 : HealthStats.Health;
-                if (DeathEvent != null)
-                {
-                    DeathEvent();
-                }
+                Invoke("SetDeath", 0.5f);
             }
             if(HealthStats.Health > HealthStats.Base)
             {
                 Health = HealthStats.Base;
             }
+        }
+    }
+
+    public void SetDeath()
+    {
+        if (DeathEvent != null)
+        {
+            DeathEvent();
         }
     }
 

@@ -243,7 +243,7 @@ public class BattleManagerScript : MonoBehaviour
         ScriptableObjectCharacterPrefab soCharacterPrefab = ListOfScriptableObjectCharacterPrefab.Where(r => r.CharacterName == charInfo.CharacterName).First();
         characterBasePrefab = Instantiate(CharacterBasePrefab, new Vector3(100, 100, 100), Quaternion.identity, parent);
         GameObject child = Instantiate(soCharacterPrefab.CharacterPrefab, characterBasePrefab.transform.position, Quaternion.identity, characterBasePrefab.transform);
-        BaseCharacter currentCharacter = (BaseCharacter)characterBasePrefab.AddComponent(System.Type.GetType(child.GetComponentInChildren<CharacterInfoScript>().BaseCharacterType.ToString()));
+        BaseCharacter currentCharacter = (BaseCharacter)characterBasePrefab.AddComponent(System.Type.GetType(charInfo.BCharType == BaseCharType.None ? child.GetComponentInChildren<CharacterInfoScript>().BaseCharacterType.ToString() : charInfo.BCharType.ToString()));
         currentCharacter.UMS = currentCharacter.GetComponent<UnitManagementScript>();
         currentCharacter.UMS.CurrentAttackType = charInfo.CharAttackType;
         currentCharacter.UMS.CharOwner = currentCharacter;
@@ -804,9 +804,20 @@ public class BattleManagerScript : MonoBehaviour
 
     public void RecruitCharFromWave(CharacterNameType characterID)
     {
-        CharacterType_Script recruitableChar = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == characterID).FirstOrDefault() as CharacterType_Script;
-        WaveManagerScript.Instance.WaveCharcters.Remove(recruitableChar);
+        GameObject rC = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == characterID).FirstOrDefault().gameObject;
+        WaveManagerScript.Instance.WaveCharcters.Remove(rC.GetComponent<BaseCharacter>());
+        Destroy(rC.GetComponent<MinionType_Script>());
+        CharacterType_Script recruitableChar = rC.AddComponent<CharacterType_Script>();
         AllCharactersOnField.Add(recruitableChar);
+        recruitableChar.UMS = recruitableChar.GetComponent<UnitManagementScript>();
+        recruitableChar.UMS.CurrentAttackType = AttackType.Particles;
+        recruitableChar.UMS.CharOwner = recruitableChar;
+        ScriptableObjectCharacterPrefab soCharacterPrefab = ListOfScriptableObjectCharacterPrefab.Where(r => r.CharacterName == recruitableChar.CharInfo.CharacterID).First();
+        foreach (Vector2Int item in soCharacterPrefab.OccupiedTiles)
+        {
+            recruitableChar.UMS.Pos.Add(item);
+        }
+        recruitableChar.CharInfo.CharacterLevel = CharacterLevelType.Godness;
         recruitableChar.UMS.Facing = FacingType.Right;
         recruitableChar.UMS.isAIOn = false;
         recruitableChar.UMS.PlayerController = AllCharactersOnField[0].UMS.PlayerController;
@@ -824,6 +835,9 @@ public class BattleManagerScript : MonoBehaviour
         {
             NewIManager.Instance.SetUICharacterToButton((CharacterType_Script)playableCharOnScene, playableCharOnScene.CharInfo.CharacterSelection);
         }*/
+
+
+        recruitableChar.CurrentCharIsDeadEvent += CurrentCharacter_CurrentCharIsDeadEvent;
         SetUICharacterSelectionIcons();
     }
 

@@ -133,6 +133,7 @@ public class CharacterType_Script : BaseCharacter
             currentAttackPhase = AttackPhasesType.Start;
             SetAnimation(CharacterAnimationStateType.Atk2_IdleToAtk);
             SpineAnim.SetAnimationSpeed(SpineAnim.GetAnimLenght(CharacterAnimationStateType.Atk2_IdleToAtk) / CharInfo.SpeedStats.IdleToAtkDuration);
+            
             while (isSpecialLoading && !VFXTestMode)
             {
                 yield return BattleManagerScript.Instance.PauseUntil();

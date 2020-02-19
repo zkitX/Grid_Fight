@@ -243,6 +243,7 @@ public class BulletScript : MonoBehaviour
             BaseCharacter target = other.GetComponentInParent<BaseCharacter>();
             MakeDamage(target);
             //fire the Effect
+            
             FireEffectParticles(transform.position, CharInfo.ClassType == CharacterClassType.Desert ? false : true);
         }
     }
@@ -265,6 +266,7 @@ public class BulletScript : MonoBehaviour
                 Dead = true;
                 StopAllCoroutines();
                 Invoke("test", 2);
+                PS.GetComponent<PSTimeGroup>().UpdatePSTime(0.1f);
             }
                 
         }
@@ -273,6 +275,7 @@ public class BulletScript : MonoBehaviour
 
     void test()
     {
+        
         PS.GetComponent<DisableParticleScript>().ResetParticle();
         gameObject.SetActive(false);
     }
