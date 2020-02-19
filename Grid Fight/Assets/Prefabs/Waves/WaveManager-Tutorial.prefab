@@ -43,19 +43,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b0c490261b08d4dbe285554c10a1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleTime:
+    hours: 0
+    minutes: 15
+    seconds: 0
+    counting: 0
   WavePhases:
   - name: Wave1
     IsRandom: 1
     MaxEnemyOnScreen: 1
     ListOfEnemy:
-    - name: Bush
+    - name: robo
       NumberOfCharacter: 3
       TypeOfCharacter:
-        CharacterName: 1
+        CharacterName: 23
         CharacterClass: 0
         Health: {x: 20, y: 30}
         HealthRegeneration: {x: 0.2, y: 0.2}
-        Damage: {x: 5, y: 6}
+        BaseDamage: {x: 10, y: 15}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 1}
         AttackSpeedRatio: {x: 7, y: 12}
         Stamina: {x: 10, y: 10}
@@ -68,14 +75,16 @@ MonoBehaviour:
     IsRandom: 0
     MaxEnemyOnScreen: 2
     ListOfEnemy:
-    - name: Lady Bush
+    - name: robo
       NumberOfCharacter: 2
       TypeOfCharacter:
-        CharacterName: 1
+        CharacterName: 23
         CharacterClass: 0
         Health: {x: 20, y: 60}
         HealthRegeneration: {x: 1, y: 1}
-        Damage: {x: 5, y: 8}
+        BaseDamage: {x: 10, y: 15}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 1}
         AttackSpeedRatio: {x: 10, y: 14}
         Stamina: {x: 10, y: 10}
@@ -91,7 +100,9 @@ MonoBehaviour:
         CharacterClass: 0
         Health: {x: 15, y: 45}
         HealthRegeneration: {x: 0.5, y: 1}
-        Damage: {x: 7, y: 10}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 1}
         AttackSpeedRatio: {x: 7, y: 10}
         Stamina: {x: 10, y: 10}
@@ -112,7 +123,9 @@ MonoBehaviour:
         CharacterClass: 0
         Health: {x: 20, y: 15}
         HealthRegeneration: {x: 1, y: 1.5}
-        Damage: {x: 7, y: 9}
+        BaseDamage: {x: 20, y: 25}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 2}
         AttackSpeedRatio: {x: 7, y: 12}
         Stamina: {x: 10, y: 10}
@@ -124,16 +137,18 @@ MonoBehaviour:
       DelayBetweenChars: 2
   - name: Wave4
     IsRandom: 1
-    MaxEnemyOnScreen: 10
+    MaxEnemyOnScreen: 4
     ListOfEnemy:
     - name: Robotix
-      NumberOfCharacter: 5
+      NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 24
+        CharacterName: 25
         CharacterClass: 0
         Health: {x: 40, y: 50}
         HealthRegeneration: {x: 1, y: 1}
-        Damage: {x: 6, y: 10}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 1.5}
         AttackSpeedRatio: {x: 10, y: 15}
         Stamina: {x: 10, y: 10}
@@ -144,13 +159,15 @@ MonoBehaviour:
       - {x: 2, y: 8}
       DelayBetweenChars: 2
     - name: Llhama
-      NumberOfCharacter: 5
+      NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 0
         CharacterClass: 0
         Health: {x: 70, y: 100}
         HealthRegeneration: {x: 1, y: 3}
-        Damage: {x: 15, y: 18}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 1}
         AttackSpeedRatio: {x: 8, y: 12}
         Stamina: {x: 10, y: 10}
@@ -160,27 +177,48 @@ MonoBehaviour:
       SpowningTile:
       - {x: 2, y: 8}
       DelayBetweenChars: 2
-  - name: Wave5
-    IsRandom: 1
-    MaxEnemyOnScreen: 4
+  - name: birdandban
+    IsRandom: 0
+    MaxEnemyOnScreen: 10
     ListOfEnemy:
-    - name: octo boss
+    - name: bird
       NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 1
+        CharacterName: 19
         CharacterClass: 0
         Health: {x: 30, y: 40}
         HealthRegeneration: {x: 1, y: 1}
-        Damage: {x: 10, y: 12}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 1}
         AttackSpeedRatio: {x: 8, y: 10}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
         Events: []
-      IsRandomSpowiningTile: 1
+      IsRandomSpowiningTile: 0
       SpowningTile:
       - {x: 2, y: 8}
       DelayBetweenChars: 2
+    - name: ban
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 22
+        CharacterClass: 0
+        Health: {x: 30, y: 40}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 8, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 0
+      SpowningTile:
+      - {x: 3, y: 9}
+      DelayBetweenChars: 1
   isWaveComplete: 0
   WaveCharcters: []
   CurrentWave: 0
