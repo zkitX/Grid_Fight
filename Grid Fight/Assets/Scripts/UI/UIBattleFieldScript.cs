@@ -28,7 +28,7 @@ public class UIBattleFieldScript : MonoBehaviour
         if (CharOwner != null)
         {
             transform.position = mCamera.WorldToScreenPoint(CharOwner.transform.position);
-            if(CharOwner.CharInfo.HealthPerc <= 0)
+            if(!CharOwner.gameObject.activeInHierarchy)
             {
                 foreach (var item in Damages)
                 {

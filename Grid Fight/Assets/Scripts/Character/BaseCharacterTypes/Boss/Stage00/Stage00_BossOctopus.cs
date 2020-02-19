@@ -93,7 +93,7 @@ public class Stage00_BossOctopus : MinionType_Script
     private MinionType_Script CreatePiece(CharacterNameType pieceType)
     {
         MinionType_Script piece = (MinionType_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(pieceType.ToString(), CharacterSelectionType.Up,
-             CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, pieceType, WalkingSideType.RightSide, AttackType.Tile), transform);
+             CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, pieceType, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None), transform);
         piece.UMS.Pos = UMS.Pos;
         piece.UMS.CurrentTilePos = UMS.CurrentTilePos;
         piece.SetValueFromVariableName("BaseBoss", this);
@@ -143,7 +143,7 @@ public class Stage00_BossOctopus : MinionType_Script
         }
 
         Stage04_BossMonster_Script mask = (Stage04_BossMonster_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass((CharacterNameType.Stage04_BossMonster).ToString(), CharacterSelectionType.Up,
-                CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage04_BossMonster, WalkingSideType.RightSide, AttackType.Tile), WaveManagerScript.Instance.transform);
+                CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage04_BossMonster, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None), WaveManagerScript.Instance.transform);
         BattleManagerScript.Instance.AllCharactersOnField.Add(mask);
         mask.UMS.Pos = UMS.Pos;
         mask.UMS.CurrentTilePos = UMS.CurrentTilePos;

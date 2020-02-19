@@ -40,11 +40,21 @@ public class WaveManagerScript : MonoBehaviour
         {
             foreach (WaveCharClass waveChar in wavePhase.ListOfEnemy)
             {
-                BaseCharacter cb = CreateChar(waveChar.TypeOfCharacter.CharacterName);
-                if(cb.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script)
+                
+                if(waveChar.NPCType == WaveNPCTypes.Recruitable)
+                {
+                    CreateChar(waveChar.TypeOfCharacter.CharacterName, BaseCharType.MinionType_Script);
+                }
+                else if (waveChar.NPCType == WaveNPCTypes.Boss)
                 {
                     CreateChar(waveChar.TypeOfCharacter.CharacterName);
                 }
+                else
+                {
+                    CreateChar(waveChar.TypeOfCharacter.CharacterName);
+                    CreateChar(waveChar.TypeOfCharacter.CharacterName);
+                }
+                
             }
             yield return null;
 
@@ -88,14 +98,17 @@ public class WaveManagerScript : MonoBehaviour
         return res;
     }
 
-    private BaseCharacter CreateChar(CharacterNameType characterID)
+    private BaseCharacter CreateChar(CharacterNameType characterID, BaseCharType bCharType = BaseCharType.None)
     {
         BaseCharacter res = BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(characterID.ToString(), CharacterSelectionType.Up,
-                CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, characterID, WalkingSideType.RightSide, AttackType.Tile), transform);
+                CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, characterID, WalkingSideType.RightSide, AttackType.Tile, bCharType), transform);
         res.gameObject.SetActive(false);
         WaveCharcters.Add(res);
         return res;
     }
+
+
+
 
     public IEnumerator StartWaveByName(string waveName)
     {
@@ -247,6 +260,7 @@ public class WaveCharacterInfoClass
 public class WaveCharClass
 {
     public string name;
+    public WaveNPCTypes NPCType = WaveNPCTypes.Minion;
     public int NumberOfCharacter;
     public WaveCharacterInfoClass TypeOfCharacter;
     public bool IsRandomSpowiningTile = true;

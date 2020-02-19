@@ -564,8 +564,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 StopPowerfulAtk++;
             }*/
 
-          
-
+            if (currentAttackPhase == AttackPhasesType.Loading || currentAttackPhase == AttackPhasesType.Cast_Powerful || currentAttackPhase == AttackPhasesType.Bullet_Powerful)
+            {
+                return;
+            }
 
             List<BattleTileScript> prevBattleTile = CurrentBattleTiles;
             List<BattleTileScript> CurrentBattleTilesToCheck = new List<BattleTileScript>();
@@ -914,7 +916,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public virtual void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
     {
-        // Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + NextAttackLevel.ToString());
+         //Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + NextAttackLevel.ToString());
 
 
         if(animState == CharacterAnimationStateType.GettingHit && currentAttackPhase != AttackPhasesType.End)
@@ -928,6 +930,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
 
         if (isMoving)
+        {
+            return;
+        }
+
+        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle)
         {
             return;
         }

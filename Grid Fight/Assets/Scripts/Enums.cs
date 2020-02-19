@@ -357,8 +357,18 @@ public enum PortalType
 }
 
 
+public enum WaveNPCTypes
+{
+    Minion,
+    Recruitable,
+    Boss
+}
+
+
 public enum BaseCharType
 {
+
+    None = 10000,
     CharacterType_Script = 0,
     MinionType_Script = 1,
     Stage04_BossGirl_Flower_Script = 2,
@@ -531,7 +541,8 @@ public enum CharacterNameType
     Stage04_BossMonster_Minion0 = 15,
     Stage04_BossMonster_Minion1 = 16,
     Stage04_BossMonster_Minion2 = 17,
-    Stage04_BossMonster_Minion3 = 18
+    Stage04_BossMonster_Minion3 = 18,
+    Stage09_Character_Valley = 31
 }
 
 
