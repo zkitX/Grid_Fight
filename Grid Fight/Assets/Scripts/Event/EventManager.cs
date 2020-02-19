@@ -477,6 +477,7 @@ public class EventManager : MonoBehaviour
 public class CharacterEventInfoClass
 {
     public BaseCharacter character;
+    public string charName;
     public int deaths = 0;
     public int arrivals = 0;
     public int switches = 0;
@@ -486,16 +487,25 @@ public class CharacterEventInfoClass
     {
         character = _character;
         deaths = _deaths;
+        SetupOtherStuff();
     }
 
     public CharacterEventInfoClass(int _arrivals, BaseCharacter _character)
     {
         character = _character;
         arrivals = _arrivals;
+        SetupOtherStuff();
     }
 
     public CharacterEventInfoClass(BaseCharacter _character)
     {
         character = _character;
+        SetupOtherStuff();
+    }
+
+    public void SetupOtherStuff()
+    {
+        charName = character.CharInfo.CharacterID.ToString();
+        Debug.Log("Created " + charName);
     }
 }
