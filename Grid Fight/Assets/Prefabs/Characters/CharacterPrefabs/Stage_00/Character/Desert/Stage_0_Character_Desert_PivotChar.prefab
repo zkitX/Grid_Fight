@@ -228,31 +228,31 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.000015258789
-      value: -0.009696603
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
+      time: -0.0011825562
+      value: 1.0001987
+      inSlope: -0.25949168
+      outSlope: -0.25949168
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.091775164
     - serializedVersion: 3
-      time: 0.5362619
-      value: 2.7153525
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
+      time: 0.5193552
+      value: 2.001676
+      inSlope: -0.10990035
+      outSlope: -0.10990035
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.21352151
     - serializedVersion: 3
-      time: 1.0091075
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
+      time: 1.0015805
+      value: 0.009441869
+      inSlope: -14.406647
+      outSlope: -14.406647
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.04129926
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -296,29 +296,38 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: 0.8528592
-      outSlope: 0.8528592
+      inSlope: 1.2216065
+      outSlope: 1.2216065
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.48750407
-      value: 1.4157723
-      inSlope: 0.020794839
-      outSlope: 0.020794839
+      time: 0.31385905
+      value: 1.3834122
+      inSlope: 0.57905954
+      outSlope: 0.57905954
       tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8316359
+      value: 1.3505399
+      inSlope: -0.71564895
+      outSlope: -0.71564895
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: -0.8112695
-      outSlope: -0.8112695
-      tangentMode: 34
+      inSlope: -2.5045555
+      outSlope: -2.5045555
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.039725736
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -327,31 +336,40 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.045833588
-      value: 1.503952
-      inSlope: -0.7121675
-      outSlope: -0.7121675
+      time: 0
+      value: 1
+      inSlope: 1.2216065
+      outSlope: 1.2216065
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.67500305
-      value: 0.9905956
-      inSlope: -1.8800913
-      outSlope: -1.8800913
+      time: 0.31385905
+      value: 1.3834122
+      inSlope: 0.57905954
+      outSlope: 0.57905954
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -3.048015
-      outSlope: -3.048015
-      tangentMode: 34
+      time: 0.8316359
+      value: 1.3505399
+      inSlope: -0.71564895
+      outSlope: -0.71564895
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -2.5045555
+      outSlope: -2.5045555
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.039725736
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -388,10 +406,10 @@ MonoBehaviour:
   CharacterLevel: 3
   CharacterSelection: 0
   RapidAttack:
-    BaseDamage: 3
+    DamageMultiplier: 1
     Stamina_Cost_Atk: 1.4
   PowerfulAttac:
-    BaseDamage: 15
+    DamageMultiplier: 3
     Stamina_Cost_Atk: 4
   HealthStats:
     Health: 60
@@ -416,7 +434,7 @@ MonoBehaviour:
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
   DamageStats:
-    CurrentDamage: 10
+    BaseDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []

@@ -248,11 +248,11 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1.0091075
       value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
+      inSlope: -7.2896013
+      outSlope: -7.2896013
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.07922923
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -347,12 +347,12 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.6849148
       value: 2
-      inSlope: 0.1458475
-      outSlope: 0.1458475
+      inSlope: -2.7723913
+      outSlope: -2.7723913
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.1295956
     - serializedVersion: 3
       time: 1
       value: 0
@@ -398,10 +398,10 @@ MonoBehaviour:
   CharacterLevel: 0
   CharacterSelection: 0
   RapidAttack:
-    BaseDamage: 6
+    DamageMultiplier: 1
     Stamina_Cost_Atk: 1.2
   PowerfulAttac:
-    BaseDamage: 20
+    DamageMultiplier: 3
     Stamina_Cost_Atk: 6
   HealthStats:
     Health: 40
@@ -426,7 +426,7 @@ MonoBehaviour:
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
   DamageStats:
-    CurrentDamage: 10
+    BaseDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []
