@@ -143,7 +143,6 @@ public class SpineAnimationManager : MonoBehaviour
             if (completedAnim == CharacterAnimationStateType.Atk1_AtkToIdle || completedAnim == CharacterAnimationStateType.Atk2_AtkToIdle
                 || completedAnim == CharacterAnimationStateType.Atk || completedAnim == CharacterAnimationStateType.Atk1)
             {
-                ((CharacterType_Script)CharOwner).GetAttack(CharacterAnimationStateType.Atk);
                 CharOwner.currentAttackPhase = AttackPhasesType.End;
             }
         }

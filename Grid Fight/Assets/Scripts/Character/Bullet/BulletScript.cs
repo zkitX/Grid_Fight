@@ -28,6 +28,7 @@ public class BulletScript : MonoBehaviour
     public Vector2Int StartingTile;
     public float ChildrenExplosionDelay;
     private VFXBulletSpeedController vfx;
+    public float BulletDamage;
     //Private 
     private BattleTileScript bts;
 
@@ -228,7 +229,7 @@ public class BulletScript : MonoBehaviour
             if (target.tag.Contains("Side") && target.tag != Side.ToString())
             {
                 //Set damage to the hitting character
-                target.SetDamage(CharInfo.DamageStats.CurrentDamage, Elemental);
+                target.SetDamage(BulletDamage, Elemental);
             }
         }
     }

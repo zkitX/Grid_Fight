@@ -9,6 +9,10 @@ public class CharacterType_Script : BaseCharacter
     private float atkHoldingTimer = 0;
     protected bool MoveCoOn = true;
     private IEnumerator MoveActionCo;
+    public bool Atk1Queueing = false;
+
+
+
     #region Unity Life Cycles
     protected override void Start()
     {
@@ -116,7 +120,6 @@ public class CharacterType_Script : BaseCharacter
 
     #region Attack
 
-    public bool Atk1Queueing = false;
     //Load the special attack and fire it if the load is complete
     public IEnumerator StartChargingAttack()
     {
@@ -178,8 +181,6 @@ public class CharacterType_Script : BaseCharacter
                         }
                     }
 
-
-                    CharInfo.DamageStats.CurrentDamage = CharInfo.PowerfulAttac.BaseDamage;
                     ps.transform.parent = null;
                     ps.SetActive(false);
                     SpecialAttack(CharInfo.CharacterLevel);
@@ -204,7 +205,6 @@ public class CharacterType_Script : BaseCharacter
 
             if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_IdleToAtk)
             {
-                CharInfo.DamageStats.CurrentDamage = CharInfo.RapidAttack.BaseDamage;
                 SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
                 SpineAnim.SetAnimationSpeed(SpineAnim.GetAnimLenght(CharacterAnimationStateType.Atk2_IdleToAtk) / CharInfo.SpeedStats.IdleToAtkDuration);
             }
@@ -232,7 +232,6 @@ public class CharacterType_Script : BaseCharacter
     public void SpecialAttack(CharacterLevelType attackLevel)
     {
         NextAttackLevel = attackLevel;
-        GetAttack(CharacterAnimationStateType.Atk1);
         SetAnimation(CharacterAnimationStateType.Atk2_AtkToIdle);
         ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.CastActivation, transform.position, UMS.Side);
     }
@@ -240,7 +239,6 @@ public class CharacterType_Script : BaseCharacter
     public void QuickAttack()
     {
         Atk1Queueing = false;
-        GetAttack(CharacterAnimationStateType.Atk);
         currentAttackPhase = AttackPhasesType.Start;
         SetAnimation(CharacterAnimationStateType.Atk1_Loop);
     }

@@ -80,8 +80,9 @@ public class WaveManagerScript : MonoBehaviour
         res.CharInfo.StaminaStats.Regeneration = Random.Range(character.StaminaRegeneration.x, character.StaminaRegeneration.y);
         res.CharInfo.SpeedStats.BaseSpeed = Random.Range(character.BaseSpeed.x, character.BaseSpeed.y);
         res.CharInfo.SpeedStats.AttackSpeedRatio = Random.Range(character.AttackSpeedRatio.x, character.AttackSpeedRatio.y);
-        res.CharInfo.RapidAttack.BaseDamage = Random.Range(character.Damage.x, character.Damage.y);
-        res.CharInfo.DamageStats.CurrentDamage = res.CharInfo.RapidAttack.BaseDamage;
+        res.CharInfo.DamageStats.BaseDamage = Random.Range(character.BaseDamage.x, character.BaseDamage.y);
+        res.CharInfo.RapidAttack.DamageMultiplier = Random.Range(character.RapidAttackMultiplier.x, character.RapidAttackMultiplier.y);
+        res.CharInfo.PowerfulAttac.DamageMultiplier = Random.Range(character.PowerfulAttackMultiplier.x, character.PowerfulAttackMultiplier.y);
         res.CharInfo.Health = res.CharInfo.HealthStats.Base;
 
         return res;
@@ -229,7 +230,9 @@ public class WaveCharacterInfoClass
     public CharacterLevelType CharacterClass;
     public Vector2 Health;
     public Vector2 HealthRegeneration;
-    public Vector2 Damage;
+    public Vector2 BaseDamage;
+    public Vector2 RapidAttackMultiplier;
+    public Vector2 PowerfulAttackMultiplier;
     public Vector2 BaseSpeed;
     public Vector2 AttackSpeedRatio;
     public Vector2 Stamina;
