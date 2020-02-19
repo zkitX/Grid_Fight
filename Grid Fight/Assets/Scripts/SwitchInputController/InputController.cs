@@ -194,7 +194,7 @@ public class InputController : MonoBehaviour
         float x = (buttonInput == InputButtonType.Left_Move_Horizontal || buttonInput == InputButtonType.Right_Move_Horizontal) ? data.GetAxis() : 0;
         float y = (buttonInput == InputButtonType.Left_Move_Vertical || buttonInput == InputButtonType.Right_Move_Vertical) ? data.GetAxis() : 0;
         Joystic = new Vector2(x,y);
-        if (LeftJoystickUsedEvent != null && (x > 0.3f || x < -0.3f || y > 0.3f || y < -0.3f))
+        if (LeftJoystickUsedEvent != null && (x > 0.2f || x < -0.2f || y > 0.2f || y < -0.2f))
         {
             if (Mathf.Abs(Joystic.x) > Mathf.Abs(Joystic.y))
             {

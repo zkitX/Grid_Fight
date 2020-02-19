@@ -57,9 +57,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     private float DefendingHoldingTimer = 0;
     public bool IsSwapping = false;
     public bool SwapWhenPossible = false;
-    private GameObject chargeParticles = null;
-
-
+    public GameObject chargeParticles = null;
 
     public int shotsLeftInAttack
     {
@@ -119,7 +117,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         UMS.SetupCharacterSide();
         int layer = UMS.Side == SideType.LeftSide ? 9 : 10;
         SpineAnim.gameObject.layer = layer;
-        
     }
 
     public virtual void StartMoveCo()
@@ -227,7 +224,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
 
         // DOnt do anything until the unit is free to attack(otherwise attack anim gets interupted by the other ones)
-       while (SpineAnim.CurrentAnim != CharacterAnimationStateType.Idle)
+        while (SpineAnim.CurrentAnim != CharacterAnimationStateType.Idle)
         {
             yield return new WaitForSeconds(0.5f);
         }
@@ -259,58 +256,17 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     }
 
-    //Basic attack sequence
+
     public virtual IEnumerator AttackSequence()
     {
-        /*shotsLeftInAttack = 0;
-        if (currentAttackPhase != AttackPhasesType.End) yield break;
-
-        yield return null;*/
-        shotsLeftInAttack = GetHowManyAttackAreOnBattleField(((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories);
-
-        if (nextAttack.Anim == CharacterAnimationStateType.Atk)
-        {
-            //Temporary until anims are added
-            Attacking = true;
-            sequencedAttacker = false;
-            chargeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
-            SetAnimation(CharacterAnimationStateType.Idle, true);
-            currentAttackPhase = AttackPhasesType.Cast_Powerful;
-            CreateTileAttack();
-        }
-        //If it does have the correct animation setup, play that charged animation
-        else
-        {
-            currentAttackPhase = AttackPhasesType.Start;
-            sequencedAttacker = true; //Temporary until anims are added
-            SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
-        }
-
-        while (shotsLeftInAttack != 0)
-        {
-            yield return null;
-        }
-
-        currentAttackPhase = AttackPhasesType.End;
-        //attacking = false; //Temporary until anims are added
-        yield break;
+        yield return null;
     }
 
-
-    public void fireAttackAnimation()
+    public virtual void fireAttackAnimation()
     {
-        //Debug.Log("<b>Shots left in this charge of attacks: </b>" + shotsLeftInAttack);
-        if (sequencedAttacker) SetAnimation(CharacterAnimationStateType.Atk1_Loop);
-        else SetAnimation(CharacterAnimationStateType.Atk); //Temporary until anims are added
-        if (chargeParticles != null && shotsLeftInAttack == 0)
-        {
-            chargeParticles.SetActive(false);
-
-            chargeParticles = null;
-        }
     }
 
-    private int GetHowManyAttackAreOnBattleField(List<BulletBehaviourInfoClassOnBattleField> bulTraj)
+    public int GetHowManyAttackAreOnBattleField(List<BulletBehaviourInfoClassOnBattleField> bulTraj)
     {
         int res = 0;
         Vector2Int basePos = new Vector2Int(UMS.CurrentTilePos.x, GridManagerScript.Instance.YGridSeparator);
@@ -329,7 +285,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         return res;
     }
-
 
     /*public virtual IEnumerator AttackSequence()
     {
@@ -466,14 +421,19 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             lps.SelectShotLevel();
         }
 
-        if(SpineAnim.CurrentAnim.ToString().Contains("Atk1"))
+        if(UMS.CurrentAttackType == AttackType.Particles)
         {
-            CharInfo.Stamina -= CharInfo.RapidAttack.Stamina_Cost_Atk;
+            if (SpineAnim.CurrentAnim.ToString().Contains("Atk1"))
+            {
+                CharInfo.Stamina -= CharInfo.RapidAttack.Stamina_Cost_Atk;
+            }
+            else if (SpineAnim.CurrentAnim.ToString().Contains("Atk2"))
+            {
+                CharInfo.Stamina -= CharInfo.PowerfulAttac.Stamina_Cost_Atk;
+            }
         }
-        else if (SpineAnim.CurrentAnim.ToString().Contains("Atk2"))
-        {
-            CharInfo.Stamina -= CharInfo.PowerfulAttac.Stamina_Cost_Atk;
-        }
+
+        
     }
 
     //Create and set up the basic info for the bullet
@@ -487,6 +447,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         bs.Trajectory_Y = bulletBehaviourInfo.Trajectory_Y;
         bs.Trajectory_Z = bulletBehaviourInfo.Trajectory_Z;
         bs.Facing = UMS.Facing;
+        bs.BulletDamage = CharInfo.DamageStats.BaseDamage * (SpineAnim.CurrentAnim.ToString().Contains("1") ? CharInfo.RapidAttack.DamageMultiplier : CharInfo.PowerfulAttac.DamageMultiplier);
         bs.ChildrenExplosionDelay = CharInfo.DamageStats.ChildrenBulletDelay;
         bs.StartingTile = UMS.CurrentTilePos;
         bs.BulletGapStartingTile = bulletBehaviourInfo.BulletGapStartingTile;
@@ -535,7 +496,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
         if (UMS.CurrentAttackType == AttackType.Particles)
         {
-            foreach (BulletBehaviourInfoClass item in ((ScriptableObjectAttackType)nextAttack).BulletTrajectories)
+            foreach (BulletBehaviourInfoClass item in CharInfo.CurrentParticlesAttackTypeInfo[SpineAnim.CurrentAnim.ToString().Contains("1") ? 0 : 1].BulletTrajectories)
             {
                 CreateBullet(item);
             }
@@ -603,10 +564,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 StopPowerfulAtk++;
             }*/
 
-            if(currentAttackPhase >= AttackPhasesType.Loading && currentAttackPhase != AttackPhasesType.End)
-            {
-                return;
-            }
+          
 
 
             List<BattleTileScript> prevBattleTile = CurrentBattleTiles;
@@ -739,7 +697,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             speedTimer += newAdd * curve.Evaluate(timer + newAdd);
             transform.position = Vector3.Lerp(offset, nextPos, speedTimer);
 
-            if(timer > 0.8f && !isMovCheck)
+            if(timer > 0.7f && !isMovCheck)
             {
                 isMovCheck = true;
                 isMoving = false;
@@ -862,7 +820,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 break;
             case BuffDebuffStatsType.Damage:
                 EventManager.Instance.UpdateHealth(this);
-                CharInfo.DamageStats.CurrentDamage += valueOverDuration;
+                CharInfo.DamageStats.BaseDamage += valueOverDuration;
                 break;
         }
 
@@ -908,7 +866,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 CharInfo.SpeedStats.BaseSpeed -= valueOverDuration;
                 break;
             case BuffDebuffStatsType.Damage:
-                CharInfo.DamageStats.CurrentDamage -= valueOverDuration;
+                CharInfo.DamageStats.BaseDamage -= valueOverDuration;
                 break;
         }
 

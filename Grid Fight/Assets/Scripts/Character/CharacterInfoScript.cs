@@ -36,7 +36,7 @@ public class CharacterInfoScript : MonoBehaviour
     [System.Serializable]
     public class RapidAttackClass
     {
-        public float BaseDamage = 10;
+        public float DamageMultiplier = 1;
         public float Stamina_Cost_Atk;
     }
 
@@ -44,7 +44,7 @@ public class CharacterInfoScript : MonoBehaviour
     [System.Serializable]
     public class PowerfulAttackClass
     {
-        public float BaseDamage = 10;
+        public float DamageMultiplier = 3;
         public float Stamina_Cost_Atk;
     }
 
@@ -90,9 +90,7 @@ public class CharacterInfoScript : MonoBehaviour
     [System.Serializable]
     public class DamageStastsClass
     {
-       
-        [HideInInspector]
-        public float CurrentDamage = 10;
+        public float BaseDamage = 10;
         [HideInInspector]
         public int MultiBulletAttackNumberOfBullets = 3;
         public float ChildrenBulletDelay;
@@ -247,11 +245,6 @@ public class CharacterInfoScript : MonoBehaviour
                 Stamina = StaminaStats.Base;
             }
         }
-    }
-
-    private void Awake()
-    {
-        DamageStats.CurrentDamage = RapidAttack.BaseDamage;
     }
 
     private void FixedUpdate()

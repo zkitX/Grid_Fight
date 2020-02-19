@@ -272,7 +272,7 @@ public class GridManagerScript : MonoBehaviour
                     BattleTileScript bts = GetBattleTile(res);
                     if(bts._BattleTileState != BattleTileStateType.Blocked)
                     {
-                        bts.BattleTargetScript.SetAttack(item.Delay, BattleManagerScript.Instance.VFXScene ? cInfo.ParticleID : atk.ParticlesID, res, cInfo.DamageStats.CurrentDamage * atk.DamageMultiplier, cInfo.Elemental, character);
+                        bts.BattleTargetScript.SetAttack(item.Delay, BattleManagerScript.Instance.VFXScene ? cInfo.ParticleID : atk.ParticlesID, res, cInfo.DamageStats.BaseDamage * atk.DamageMultiplier, cInfo.Elemental, character);
                     }
 
                 }
@@ -296,7 +296,7 @@ public class GridManagerScript : MonoBehaviour
                 {
                     GameObject go;
                     go = Instantiate(TargetIndicator, GetBattleTile(basePos - target).transform.position, Quaternion.identity);
-                    go.GetComponent<BattleTileTargetScript>().StartTarget(item.Delay, atkPS, basePos - target, cInfo.DamageStats.CurrentDamage, cInfo.Elemental);
+                    go.GetComponent<BattleTileTargetScript>().StartTarget(item.Delay, atkPS, basePos - target, cInfo.DamageStats.BaseDamage, cInfo.Elemental);
                 }
             }
             while (timer <= item.Delay)

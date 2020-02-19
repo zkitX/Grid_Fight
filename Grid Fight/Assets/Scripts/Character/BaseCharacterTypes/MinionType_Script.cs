@@ -97,4 +97,57 @@ public class MinionType_Script : BaseCharacter
 
         base.SetAnimation(animState, loop, transition);
     }
+
+    //Basic attack sequence
+    public override IEnumerator AttackSequence()
+    {
+        /*shotsLeftInAttack = 0;
+        if (currentAttackPhase != AttackPhasesType.End) yield break;
+
+        yield return null;*/
+        shotsLeftInAttack = GetHowManyAttackAreOnBattleField(((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories);
+
+        if (nextAttack.Anim == CharacterAnimationStateType.Atk)
+        {
+            //Temporary until anims are added
+            Attacking = true;
+            sequencedAttacker = false;
+            chargeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
+            SetAnimation(CharacterAnimationStateType.Idle, true);
+            currentAttackPhase = AttackPhasesType.Cast_Powerful;
+            CreateTileAttack();
+        }
+        //If it does have the correct animation setup, play that charged animation
+        else
+        {
+            currentAttackPhase = AttackPhasesType.Start;
+            sequencedAttacker = true; //Temporary until anims are added
+            SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
+        }
+
+        while (shotsLeftInAttack != 0)
+        {
+            yield return null;
+        }
+
+        currentAttackPhase = AttackPhasesType.End;
+        //attacking = false; //Temporary until anims are added
+        yield break;
+    }
+
+
+    public override void fireAttackAnimation()
+    {
+        //Debug.Log("<b>Shots left in this charge of attacks: </b>" + shotsLeftInAttack);
+        if (sequencedAttacker) SetAnimation(CharacterAnimationStateType.Atk1_Loop);
+        else SetAnimation(CharacterAnimationStateType.Atk); //Temporary until anims are added
+        if (chargeParticles != null && shotsLeftInAttack == 0)
+        {
+            chargeParticles.SetActive(false);
+
+            chargeParticles = null;
+        }
+    }
+
+
 }
