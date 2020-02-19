@@ -54,51 +54,140 @@ MonoBehaviour:
     MaxEnemyOnScreen: 2
     ListOfEnemy:
     - name: Bot
-      NumberOfCharacter: 3
+      NPCType: 0
+      NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 23
         CharacterClass: 0
         Health: {x: 20, y: 30}
         HealthRegeneration: {x: 0.2, y: 0.2}
-        Damage: {x: 5, y: 6}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 1.5}
         AttackSpeedRatio: {x: 3, y: 4}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
         Events: []
-      IsRandomSpowiningTile: 1
+      IsRandomSpowiningTile: 0
       SpowningTile:
       - {x: 2, y: 8}
       DelayBetweenChars: 1
     - name: Bot
-      NumberOfCharacter: 3
+      NPCType: 0
+      NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 23
         CharacterClass: 0
         Health: {x: 20, y: 30}
         HealthRegeneration: {x: 0.2, y: 0.2}
-        Damage: {x: 5, y: 6}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 1.5}
         AttackSpeedRatio: {x: 3, y: 4}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
         Events: []
-      IsRandomSpowiningTile: 1
+      IsRandomSpowiningTile: 0
       SpowningTile:
-      - {x: 2, y: 8}
+      - {x: 2, y: 9}
+      DelayBetweenChars: 1
+    - name: Bot
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 23
+        CharacterClass: 0
+        Health: {x: 20, y: 30}
+        HealthRegeneration: {x: 0.2, y: 0.2}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1.5}
+        AttackSpeedRatio: {x: 3, y: 4}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 0
+      SpowningTile:
+      - {x: 2, y: 7}
+      DelayBetweenChars: 1
+    - name: Bot
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 23
+        CharacterClass: 0
+        Health: {x: 20, y: 30}
+        HealthRegeneration: {x: 0.2, y: 0.2}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1.5}
+        AttackSpeedRatio: {x: 3, y: 4}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 0
+      SpowningTile:
+      - {x: 3, y: 8}
+      DelayBetweenChars: 1
+    - name: Bot
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 23
+        CharacterClass: 0
+        Health: {x: 20, y: 30}
+        HealthRegeneration: {x: 0.2, y: 0.2}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1.5}
+        AttackSpeedRatio: {x: 3, y: 4}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 0
+      SpowningTile:
+      - {x: 3, y: 9}
+      DelayBetweenChars: 1
+    - name: Bot
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 23
+        CharacterClass: 0
+        Health: {x: 20, y: 30}
+        HealthRegeneration: {x: 0.2, y: 0.2}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1.5}
+        AttackSpeedRatio: {x: 3, y: 4}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 0
+      SpowningTile:
+      - {x: 3, y: 7}
       DelayBetweenChars: 1
   - name: Wave2
     IsRandom: 1
     MaxEnemyOnScreen: 3
     ListOfEnemy:
     - name: Lady
+      NPCType: 0
       NumberOfCharacter: 4
       TypeOfCharacter:
         CharacterName: 26
         CharacterClass: 0
         Health: {x: 30, y: 60}
         HealthRegeneration: {x: 0.5, y: 0.6}
-        Damage: {x: 5, y: 8}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 1}
         AttackSpeedRatio: {x: 3, y: 5}
         Stamina: {x: 10, y: 10}
@@ -109,13 +198,16 @@ MonoBehaviour:
       - {x: 2, y: 8}
       DelayBetweenChars: 1
     - name: Lady
+      NPCType: 0
       NumberOfCharacter: 4
       TypeOfCharacter:
         CharacterName: 26
         CharacterClass: 0
         Health: {x: 30, y: 60}
         HealthRegeneration: {x: 0.4, y: 0.5}
-        Damage: {x: 5, y: 8}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 1.5}
         AttackSpeedRatio: {x: 3, y: 5}
         Stamina: {x: 10, y: 10}
@@ -126,13 +218,16 @@ MonoBehaviour:
       - {x: 2, y: 8}
       DelayBetweenChars: 1
     - name: Lady
+      NPCType: 0
       NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 26
         CharacterClass: 0
         Health: {x: 100, y: 120}
         HealthRegeneration: {x: 1, y: 2}
-        Damage: {x: 12, y: 14}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 1}
         AttackSpeedRatio: {x: 3, y: 5}
         Stamina: {x: 10, y: 10}
@@ -147,13 +242,16 @@ MonoBehaviour:
     MaxEnemyOnScreen: 6
     ListOfEnemy:
     - name: Flies
+      NPCType: 0
       NumberOfCharacter: 3
       TypeOfCharacter:
         CharacterName: 25
         CharacterClass: 0
         Health: {x: 30, y: 40}
         HealthRegeneration: {x: 0.3, y: 0.4}
-        Damage: {x: 7, y: 9}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 2}
         AttackSpeedRatio: {x: 3, y: 6}
         Stamina: {x: 10, y: 10}
@@ -164,13 +262,16 @@ MonoBehaviour:
       - {x: 2, y: 8}
       DelayBetweenChars: 2
     - name: Flies
+      NPCType: 0
       NumberOfCharacter: 3
       TypeOfCharacter:
         CharacterName: 25
         CharacterClass: 0
         Health: {x: 30, y: 40}
         HealthRegeneration: {x: 0.3, y: 0.4}
-        Damage: {x: 7, y: 9}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 2}
         AttackSpeedRatio: {x: 3, y: 6}
         Stamina: {x: 10, y: 10}
@@ -181,13 +282,16 @@ MonoBehaviour:
       - {x: 2, y: 8}
       DelayBetweenChars: 2
     - name: Flies
+      NPCType: 0
       NumberOfCharacter: 3
       TypeOfCharacter:
         CharacterName: 25
         CharacterClass: 0
         Health: {x: 30, y: 40}
         HealthRegeneration: {x: 0.3, y: 0.4}
-        Damage: {x: 7, y: 9}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 2}
         AttackSpeedRatio: {x: 3, y: 6}
         Stamina: {x: 10, y: 10}
@@ -198,13 +302,16 @@ MonoBehaviour:
       - {x: 2, y: 8}
       DelayBetweenChars: 2
     - name: Flies
+      NPCType: 0
       NumberOfCharacter: 3
       TypeOfCharacter:
         CharacterName: 25
         CharacterClass: 0
         Health: {x: 30, y: 40}
         HealthRegeneration: {x: 0.3, y: 0.4}
-        Damage: {x: 7, y: 9}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 2}
         AttackSpeedRatio: {x: 3, y: 6}
         Stamina: {x: 10, y: 10}
@@ -215,13 +322,16 @@ MonoBehaviour:
       - {x: 2, y: 8}
       DelayBetweenChars: 2
     - name: Flies
+      NPCType: 0
       NumberOfCharacter: 3
       TypeOfCharacter:
         CharacterName: 25
         CharacterClass: 0
         Health: {x: 30, y: 40}
         HealthRegeneration: {x: 0.3, y: 0.4}
-        Damage: {x: 7, y: 9}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 2}
         AttackSpeedRatio: {x: 3, y: 6}
         Stamina: {x: 10, y: 10}
@@ -232,13 +342,16 @@ MonoBehaviour:
       - {x: 2, y: 8}
       DelayBetweenChars: 2
     - name: Flies
+      NPCType: 0
       NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 25
         CharacterClass: 0
         Health: {x: 60, y: 80}
         HealthRegeneration: {x: 0.7, y: 1}
-        Damage: {x: 10, y: 12}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 2}
         AttackSpeedRatio: {x: 3, y: 6}
         Stamina: {x: 10, y: 10}
@@ -253,13 +366,16 @@ MonoBehaviour:
     MaxEnemyOnScreen: 3
     ListOfEnemy:
     - name: Robotix
+      NPCType: 0
       NumberOfCharacter: 4
       TypeOfCharacter:
         CharacterName: 24
         CharacterClass: 0
         Health: {x: 80, y: 120}
         HealthRegeneration: {x: 0.5, y: 0.6}
-        Damage: {x: 6, y: 10}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 1.5}
         AttackSpeedRatio: {x: 4, y: 6}
         Stamina: {x: 10, y: 10}
@@ -270,13 +386,16 @@ MonoBehaviour:
       - {x: 2, y: 8}
       DelayBetweenChars: 2
     - name: Robotix
+      NPCType: 0
       NumberOfCharacter: 4
       TypeOfCharacter:
         CharacterName: 24
         CharacterClass: 0
         Health: {x: 80, y: 120}
         HealthRegeneration: {x: 0.6, y: 0.7}
-        Damage: {x: 12, y: 15}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 1.7}
         AttackSpeedRatio: {x: 3, y: 6}
         Stamina: {x: 10, y: 10}
@@ -291,13 +410,16 @@ MonoBehaviour:
     MaxEnemyOnScreen: 6
     ListOfEnemy:
     - name: Bot
+      NPCType: 0
       NumberOfCharacter: 4
       TypeOfCharacter:
         CharacterName: 23
         CharacterClass: 0
         Health: {x: 40, y: 100}
         HealthRegeneration: {x: 0.6, y: 0.8}
-        Damage: {x: 10, y: 12}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 1}
         AttackSpeedRatio: {x: 3, y: 6}
         Stamina: {x: 10, y: 10}
@@ -308,13 +430,16 @@ MonoBehaviour:
       - {x: 2, y: 8}
       DelayBetweenChars: 2
     - name: Torus
+      NPCType: 0
       NumberOfCharacter: 3
       TypeOfCharacter:
         CharacterName: 24
         CharacterClass: 0
         Health: {x: 130, y: 150}
         HealthRegeneration: {x: 1, y: 3}
-        Damage: {x: 10, y: 12}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 1}
         AttackSpeedRatio: {x: 4, y: 7}
         Stamina: {x: 10, y: 10}
@@ -325,13 +450,16 @@ MonoBehaviour:
       - {x: 2, y: 8}
       DelayBetweenChars: 2
     - name: Flies
+      NPCType: 0
       NumberOfCharacter: 6
       TypeOfCharacter:
         CharacterName: 25
         CharacterClass: 0
         Health: {x: 40, y: 50}
         HealthRegeneration: {x: 0.5, y: 0.5}
-        Damage: {x: 3, y: 6}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1.5, y: 2}
         AttackSpeedRatio: {x: 3, y: 4}
         Stamina: {x: 10, y: 10}
@@ -342,13 +470,16 @@ MonoBehaviour:
       - {x: 2, y: 8}
       DelayBetweenChars: 2
     - name: Gal
+      NPCType: 0
       NumberOfCharacter: 4
       TypeOfCharacter:
         CharacterName: 26
         CharacterClass: 0
         Health: {x: 80, y: 90}
         HealthRegeneration: {x: 0.7, y: 0.8}
-        Damage: {x: 12, y: 14}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 1.5}
         AttackSpeedRatio: {x: 4, y: 8}
         Stamina: {x: 10, y: 10}
@@ -363,13 +494,16 @@ MonoBehaviour:
     MaxEnemyOnScreen: 3
     ListOfEnemy:
     - name: Rider
+      NPCType: 0
       NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 7
         CharacterClass: 0
         Health: {x: 300, y: 500}
         HealthRegeneration: {x: 1, y: 1}
-        Damage: {x: 14, y: 15}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 2, y: 2}
         AttackSpeedRatio: {x: 3, y: 4}
         Stamina: {x: 100, y: 100}
@@ -380,13 +514,16 @@ MonoBehaviour:
       - {x: 2, y: 8}
       DelayBetweenChars: 1
     - name: Tank
+      NPCType: 0
       NumberOfCharacter: 2
       TypeOfCharacter:
         CharacterName: 24
         CharacterClass: 0
         Health: {x: 80, y: 100}
         HealthRegeneration: {x: 1.5, y: 1.5}
-        Damage: {x: 10, y: 11}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1.5, y: 1.5}
         AttackSpeedRatio: {x: 5, y: 5}
         Stamina: {x: 100, y: 100}
@@ -397,13 +534,16 @@ MonoBehaviour:
       - {x: 2, y: 8}
       DelayBetweenChars: 1
     - name: Tank
+      NPCType: 0
       NumberOfCharacter: 2
       TypeOfCharacter:
         CharacterName: 24
         CharacterClass: 0
         Health: {x: 80, y: 100}
         HealthRegeneration: {x: 1.5, y: 1.5}
-        Damage: {x: 10, y: 11}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1.5, y: 1.5}
         AttackSpeedRatio: {x: 5, y: 5}
         Stamina: {x: 100, y: 100}
@@ -418,13 +558,16 @@ MonoBehaviour:
     MaxEnemyOnScreen: 6
     ListOfEnemy:
     - name: The Jaguar
+      NPCType: 0
       NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 2
         CharacterClass: 0
         Health: {x: 1000, y: 1200}
         HealthRegeneration: {x: 2, y: 3}
-        Damage: {x: 25, y: 26}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1.9, y: 1.9}
         AttackSpeedRatio: {x: 3, y: 3}
         Stamina: {x: 100, y: 100}
@@ -435,13 +578,16 @@ MonoBehaviour:
       - {x: 2, y: 8}
       DelayBetweenChars: 1
     - name: Flies
+      NPCType: 0
       NumberOfCharacter: 10
       TypeOfCharacter:
         CharacterName: 25
         CharacterClass: 0
         Health: {x: 15, y: 20}
         HealthRegeneration: {x: 0.3, y: 0.3}
-        Damage: {x: 1.5, y: 2}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1.5, y: 1.7}
         AttackSpeedRatio: {x: 5, y: 6}
         Stamina: {x: 20, y: 20}
@@ -452,13 +598,16 @@ MonoBehaviour:
       - {x: 2, y: 8}
       DelayBetweenChars: 1
     - name: Flies
+      NPCType: 0
       NumberOfCharacter: 10
       TypeOfCharacter:
         CharacterName: 25
         CharacterClass: 0
         Health: {x: 15, y: 20}
         HealthRegeneration: {x: 0.3, y: 0.3}
-        Damage: {x: 1.5, y: 2}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1.5, y: 1.7}
         AttackSpeedRatio: {x: 5, y: 6}
         Stamina: {x: 20, y: 20}
@@ -469,13 +618,16 @@ MonoBehaviour:
       - {x: 2, y: 8}
       DelayBetweenChars: 1
     - name: Flies
+      NPCType: 0
       NumberOfCharacter: 10
       TypeOfCharacter:
         CharacterName: 25
         CharacterClass: 0
         Health: {x: 15, y: 20}
         HealthRegeneration: {x: 0.3, y: 0.3}
-        Damage: {x: 1.5, y: 2}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1.5, y: 1.7}
         AttackSpeedRatio: {x: 5, y: 6}
         Stamina: {x: 20, y: 20}
@@ -486,13 +638,16 @@ MonoBehaviour:
       - {x: 2, y: 8}
       DelayBetweenChars: 1
     - name: Flies
+      NPCType: 0
       NumberOfCharacter: 10
       TypeOfCharacter:
         CharacterName: 25
         CharacterClass: 0
         Health: {x: 15, y: 20}
         HealthRegeneration: {x: 0.3, y: 0.3}
-        Damage: {x: 1.5, y: 2}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1.5, y: 1.7}
         AttackSpeedRatio: {x: 5, y: 6}
         Stamina: {x: 20, y: 20}
@@ -503,13 +658,16 @@ MonoBehaviour:
       - {x: 2, y: 8}
       DelayBetweenChars: 1
     - name: Flies
+      NPCType: 0
       NumberOfCharacter: 10
       TypeOfCharacter:
         CharacterName: 25
         CharacterClass: 0
         Health: {x: 15, y: 20}
         HealthRegeneration: {x: 0.3, y: 0.3}
-        Damage: {x: 1.5, y: 2}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1.5, y: 1.7}
         AttackSpeedRatio: {x: 5, y: 6}
         Stamina: {x: 20, y: 20}
