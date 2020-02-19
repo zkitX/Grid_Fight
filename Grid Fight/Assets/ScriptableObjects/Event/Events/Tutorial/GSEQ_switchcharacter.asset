@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25d497aba9400d147aee0263a1f7ec6d, type: 3}
+  m_Name: GSEQ_switchcharacter
+  m_EditorClassIdentifier: 
+  Name: switchcharacter
+  hasHappened: 0
+  requirements:
+  - {fileID: 11400000, guid: 13ed564a0a278424e8cf58d964abfa31, type: 2}
+  - {fileID: 11400000, guid: dfaa8f25c412c9b4d997596a32fdeabb, type: 2}
+  ceaseOnComplete: 1
+  requireComplete: 1
+  effects:
+  - Name: 
+    effectType: 2
+    secondsToWait: 0
+    debugText: 
+    blockName: theplayerjustswitched
+    command: {fileID: 0}
+    characterToRecruit: 0
