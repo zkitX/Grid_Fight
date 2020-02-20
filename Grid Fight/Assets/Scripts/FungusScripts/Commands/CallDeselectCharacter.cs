@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Fungus;
 
@@ -9,25 +10,16 @@ using Fungus;
 /// a Send Message command for sending messages to trigger block execution.
 /// </summary>
 [CommandInfo("Scripting",
-                "Call SetCharOnBoardOnFixedPos",
+                "Call DeselectCharacter",
                 "Calls a named method on a GameObject using the GameObject.SendMessage() system.")]
-public class CallSetCharOnBoardOnFixedPos : Command
+[AddComponentMenu("")]
+public class CallDeselectCharacter : Command
 {
-    public ControllerType playerController;
-    public CharacterNameType cName;
-    public Vector2Int pos;
+    public CharacterNameType characterID;
 
     protected virtual void CallTheMethod()
     {
-        if(GridManagerScript.Instance.isPosFree(pos))
-        {
-            BattleManagerScript.Instance.SetCharOnBoardOnFixedPos(playerController, cName, pos);
-
-        }
-        else
-        {
-            BattleManagerScript.Instance.SetCharOnBoardOnRandomPos(playerController, cName);
-        }
+        BattleManagerScript.Instance.DeselectCharacter(characterID);
     }
 
     #region Public members
@@ -45,5 +37,3 @@ public class CallSetCharOnBoardOnFixedPos : Command
 
     #endregion
 }
-
-

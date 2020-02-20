@@ -487,7 +487,7 @@ public class BattleManagerScript : MonoBehaviour
         }*/
 
 
-        if (CurrentBattleState != BattleState.Battle && CurrentBattleState != BattleState.Intro)
+        if (CurrentBattleState != BattleState.Battle && CurrentBattleState != BattleState.Intro && CurrentBattleState != BattleState.FungusPuppets)
         {
             return;
         }
@@ -806,6 +806,7 @@ public class BattleManagerScript : MonoBehaviour
     {
         GameObject rC = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == characterID).FirstOrDefault().gameObject;
         WaveManagerScript.Instance.WaveCharcters.Remove(rC.GetComponent<BaseCharacter>());
+        rC.transform.parent = transform;
         Destroy(rC.GetComponent<MinionType_Script>());
         CharacterType_Script recruitableChar = rC.AddComponent<CharacterType_Script>();
         AllCharactersOnField.Add(recruitableChar);

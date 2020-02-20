@@ -140,6 +140,12 @@ public class GridManagerScript : MonoBehaviour
         return BattleTiles.Where(r => r.Pos == pos).FirstOrDefault();
     }
 
+
+    public bool isPosFree(Vector2Int pos)
+    {
+        return GetBattleTile(pos).BattleTileState == BattleTileStateType.Empty ? true : false;
+    }
+
     public BattleTileScript GetBattleBestTileInsideTheBattlefield(Vector2Int pos, FacingType facing)
     {
         BattleTileScript res = null;
