@@ -503,10 +503,12 @@ MonoBehaviour:
   CharacterLevel: 0
   CharacterSelection: 0
   RapidAttack:
-    BaseDamage: 10
+    DamageMultiplier: {x: 1, y: 1}
+    CriticalChance: {x: 2, y: 2}
     Stamina_Cost_Atk: 0
   PowerfulAttac:
-    BaseDamage: 10
+    DamageMultiplier: {x: 3, y: 3}
+    CriticalChance: {x: 3, y: 5}
     Stamina_Cost_Atk: 0
   HealthStats:
     Health: 30
@@ -531,7 +533,7 @@ MonoBehaviour:
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
   DamageStats:
-    CurrentDamage: 10
+    BaseDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []

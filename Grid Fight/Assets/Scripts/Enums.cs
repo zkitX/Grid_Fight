@@ -507,6 +507,14 @@ public enum CharacterClassType
     Desert
 }
 
+public enum HealthChangedType
+{
+    Damage,
+    Defend,
+    Heal,
+    CriticalHit
+}
+
 
 public enum CharacterNameType
 {

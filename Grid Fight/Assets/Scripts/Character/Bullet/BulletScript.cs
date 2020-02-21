@@ -27,9 +27,9 @@ public class BulletScript : MonoBehaviour
     public Vector2Int BulletGapStartingTile;
     public Vector2Int StartingTile;
     public float ChildrenExplosionDelay;
-    private VFXBulletSpeedController vfx;
-    public float BulletDamage;
+
     //Private 
+    private VFXBulletSpeedController vfx;
     private BattleTileScript bts;
 
     private void OnEnable()
@@ -228,8 +228,9 @@ public class BulletScript : MonoBehaviour
         {
             if (target.tag.Contains("Side") && target.tag != Side.ToString())
             {
+                bool iscritical = CharInfo.IsCritical(attackLevel == CharacterLevelType.Novice ? true : false);
                 //Set damage to the hitting character
-                target.SetDamage(BulletDamage, Elemental);
+                target.SetDamage(CharInfo.DamageStats.BaseDamage * (iscritical ? 2 : 1), Elemental, iscritical);
             }
         }
     }

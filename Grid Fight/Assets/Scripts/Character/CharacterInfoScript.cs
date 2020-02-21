@@ -19,7 +19,7 @@ public class CharacterInfoScript : MonoBehaviour
 
 
     public string Name;
-    public Sprite[] CharacterIcons;
+    [Tooltip("Should contain 2 for the HealthUI, one for deselected(0) and one for selected(1)")] public Sprite[] CharacterIcons;
     public BaseCharType BaseCharacterType;
     public CharacterNameType CharacterID;
     public List<ScriptableObjectAttackType> CurrentParticlesAttackTypeInfo = new List<ScriptableObjectAttackType>();
@@ -28,6 +28,8 @@ public class CharacterInfoScript : MonoBehaviour
     public ElementalType Elemental;
     public CharacterClassType ClassType;
     public CharacterLevelType CharacterLevel;
+    public bool UseLayeringSystem = true;
+
     [HideInInspector]
     public CharacterSelectionType CharacterSelection;
     // public List<CharactersRelationshipClass> CharacterRelationships = new List<CharactersRelationshipClass>();
@@ -36,7 +38,8 @@ public class CharacterInfoScript : MonoBehaviour
     [System.Serializable]
     public class RapidAttackClass
     {
-        public float DamageMultiplier = 1;
+        public Vector2 DamageMultiplier = new Vector2(1,1);
+        public Vector2 CriticalChance = new Vector2(2,2);
         public float Stamina_Cost_Atk;
     }
 
@@ -44,7 +47,8 @@ public class CharacterInfoScript : MonoBehaviour
     [System.Serializable]
     public class PowerfulAttackClass
     {
-        public float DamageMultiplier = 3;
+        public Vector2 DamageMultiplier = new Vector2(3,3);
+        public Vector2 CriticalChance = new Vector2(3, 5);
         public float Stamina_Cost_Atk;
     }
 
@@ -219,20 +223,15 @@ public class CharacterInfoScript : MonoBehaviour
             if (HealthStats.Health <= 0)
             {
                 HealthStats.Health = HealthStats.Health <= 0 ? 0 : HealthStats.Health;
-                Invoke("SetDeath", 0.5f);
+                if (DeathEvent != null)
+                {
+                    DeathEvent();
+                }
             }
             if(HealthStats.Health > HealthStats.Base)
             {
                 Health = HealthStats.Base;
             }
-        }
-    }
-
-    public void SetDeath()
-    {
-        if (DeathEvent != null)
-        {
-            DeathEvent();
         }
     }
 
@@ -258,6 +257,20 @@ public class CharacterInfoScript : MonoBehaviour
         {
             Stamina += StaminaStats.Regeneration / 50;
             Health += HealthStats.Regeneration / 50;
+        }
+    }
+
+    public bool IsCritical(bool rapidOrPowerful)
+    {
+        float chance = Random.Range(0, 100);
+        if (chance <= Random.Range(rapidOrPowerful ? RapidAttack.CriticalChance.x : PowerfulAttac.CriticalChance.x,
+            rapidOrPowerful ? RapidAttack.CriticalChance.y : PowerfulAttac.CriticalChance.y))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

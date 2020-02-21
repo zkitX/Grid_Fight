@@ -116,69 +116,69 @@ public class Stage04_BossMonster_Script : MinionType_Script
         GetComponentInChildren<LayerParticleSelection>(true).gameObject.SetActive(true);
     }
 
-   /* public override IEnumerator AttackAction()
-    {
-        while (true)
-        {
-            while (!CanAttack && !VFXTestMode)
-            {
-                yield return null;
-            }
+    /* public override IEnumerator AttackAction()
+     {
+         while (true)
+         {
+             while (!CanAttack && !VFXTestMode)
+             {
+                 yield return null;
+             }
 
-            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || !CanGetDamage))
-            {
-                yield return null;
-            }
+             while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || !CanGetDamage))
+             {
+                 yield return null;
+             }
 
-            isAttackStarted = false;
-            isAttackCompletetd = false;
-            isAttackGoing = false;
-            while (!isAttackCompletetd)
-            {
-                if (!isAttackStarted)
-                {
-                    isAttackStarted = true;
-                    isAttackGoing = true;
-                    SetAnimation(CharacterAnimationStateType.Atk);
-                }
+             isAttackStarted = false;
+             isAttackCompletetd = false;
+             isAttackGoing = false;
+             while (!isAttackCompletetd)
+             {
+                 if (!isAttackStarted)
+                 {
+                     isAttackStarted = true;
+                     isAttackGoing = true;
+                     SetAnimation(CharacterAnimationStateType.Atk);
+                 }
 
-                if (isAttackStarted && !isAttackGoing && !isMoving)
-                {
-                    isAttackGoing = true;
-                    SetAnimation(CharacterAnimationStateType.Atk);
-                }
-                yield return null;
-            }
+                 if (isAttackStarted && !isAttackGoing && !isMoving)
+                 {
+                     isAttackGoing = true;
+                     SetAnimation(CharacterAnimationStateType.Atk);
+                 }
+                 yield return null;
+             }
 
 
-            float timer = 0;
-            while (timer <= CharInfo.AttackSpeedRatio)
-            {
-                yield return new WaitForFixedUpdate();
-                while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
-                {
-                    yield return new WaitForEndOfFrame();
-                }
+             float timer = 0;
+             while (timer <= CharInfo.AttackSpeedRatio)
+             {
+                 yield return new WaitForFixedUpdate();
+                 while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
+                 {
+                     yield return new WaitForEndOfFrame();
+                 }
 
-                while (isSpecialLoading)
-                {
-                    yield return new WaitForEndOfFrame();
-                    timer = 0;
-                }
+                 while (isSpecialLoading)
+                 {
+                     yield return new WaitForEndOfFrame();
+                     timer = 0;
+                 }
 
-                timer += Time.fixedDeltaTime;
-            }
-        }
-    }*/
+                 timer += Time.fixedDeltaTime;
+             }
+         }
+     }*/
 
-    public override bool SetDamage(float damage, ElementalType elemental)
+    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical)
     {
         if (CanGetDamage)
         {
-            return base.SetDamage(damage, elemental);
+            return base.SetDamage(damage, elemental, isCritical);
         }
-
         return false;
+
     }
 
     public override IEnumerator Move()

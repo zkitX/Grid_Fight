@@ -12,11 +12,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public delegate void TileMovementComplete(BaseCharacter movingChar);
     public event TileMovementComplete TileMovementCompleteEvent;
 
-    public delegate void DamageReceived(float damage, bool isDefended);
-    public event DamageReceived DamageReceivedEvent;
-
-    public delegate void HealReceived(float heal);
-    public event HealReceived HealReceivedEvent;
+    public delegate void HealthStatsChanged(float value, HealthChangedType changeType, Transform charOwner);
+    public event HealthStatsChanged HealthStatsChangedEvent;
 
     public delegate void CurrentCharIsRebirth(CharacterNameType cName, List<ControllerType> playerController, SideType side);
     public event CurrentCharIsRebirth CurrentCharIsRebirthEvent;
@@ -95,6 +92,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo);
         }
 
+        if(transform.parent == null)
+        {
+
+        }
+
+
         UMS.HPBar.localScale = new Vector3((1f / 100f) * CharInfo.HealthPerc,1,1);
 
         UMS.StaminaBar.localScale = new Vector3((1f / 100f) * CharInfo.StaminaPerc, 1, 1);
@@ -112,11 +115,14 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             UMS.SelectionIndicator.parent.gameObject.SetActive(true);
         }
-        CharBoxCollider = GetComponentInChildren<BoxCollider>(true);
+        
         SpineAnimatorsetup();
         UMS.SetupCharacterSide();
         int layer = UMS.Side == SideType.LeftSide ? 9 : 10;
-        SpineAnim.gameObject.layer = layer;
+        if (CharInfo.UseLayeringSystem)
+        {
+            SpineAnim.gameObject.layer = layer;
+        }
     }
 
     public virtual void StartMoveCo()
@@ -153,7 +159,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         IsOnField = value;
         currentAttackPhase = AttackPhasesType.End;
         OredrInLayer = 101 + (UMS.CurrentTilePos.x * 10) + (UMS.Facing == FacingType.Right ? UMS.CurrentTilePos.y - 12 : UMS.CurrentTilePos.y);
-        SpineAnim.SetSkeletonOrderInLayer(OredrInLayer);
+        if (CharInfo.UseLayeringSystem)
+        {
+            SpineAnim.SetSkeletonOrderInLayer(OredrInLayer);
+        }
     }
 
     public virtual void SetCharDead()
@@ -447,7 +456,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         bs.Trajectory_Y = bulletBehaviourInfo.Trajectory_Y;
         bs.Trajectory_Z = bulletBehaviourInfo.Trajectory_Z;
         bs.Facing = UMS.Facing;
-        bs.BulletDamage = CharInfo.DamageStats.BaseDamage * (SpineAnim.CurrentAnim.ToString().Contains("1") ? CharInfo.RapidAttack.DamageMultiplier : CharInfo.PowerfulAttac.DamageMultiplier);
         bs.ChildrenExplosionDelay = CharInfo.DamageStats.ChildrenBulletDelay;
         bs.StartingTile = UMS.CurrentTilePos;
         bs.BulletGapStartingTile = bulletBehaviourInfo.BulletGapStartingTile;
@@ -508,6 +516,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
         if (UMS.CurrentAttackType == AttackType.Tile)
         {
+            CharInfo.RapidAttack.DamageMultiplier = ((ScriptableObjectAttackTypeOnBattlefield)nextAttack).DamageMultiplier;
             GridManagerScript.Instance.StartOnBattleFieldAttackCo(CharInfo, ((ScriptableObjectAttackTypeOnBattlefield)nextAttack), UMS.CurrentTilePos, UMS, this);
         }
     }
@@ -598,8 +607,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 }
                 UMS.CurrentTilePos += dir;
                 OredrInLayer = 101 + (dir.x * 10) + (UMS.Facing == FacingType.Right ? dir.y - 12 : dir.y);
-                SpineAnim.SetSkeletonOrderInLayer(OredrInLayer);
-                
+                if (CharInfo.UseLayeringSystem)
+                {
+                    SpineAnim.SetSkeletonOrderInLayer(OredrInLayer);
+                }
+
                 CurrentBattleTiles = CurrentBattleTilesToCheck;
                 UMS.Pos = new List<Vector2Int>();
                 foreach (BattleTileScript item in CurrentBattleTilesToCheck)
@@ -751,11 +763,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             case BuffDebuffStatsType.Health:
                 if(valueOverDuration < 0)
                 {
-                    if(DamageReceivedEvent != null) DamageReceivedEvent(valueOverDuration, false);
+                    HealthStatsChangedEvent?.Invoke(valueOverDuration, HealthChangedType.Damage, transform);
                 }
                 else
                 {
-                    if (HealReceivedEvent != null) HealReceivedEvent(valueOverDuration);
+                    HealthStatsChangedEvent?.Invoke(valueOverDuration, HealthChangedType.Heal, transform);
                 }
                 CharInfo.Health += valueOverDuration;
                 EventManager.Instance.UpdateHealth(this);
@@ -979,12 +991,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     #endregion
 
 
-    public virtual bool SetDamage(float damage, ElementalType elemental)
+    public virtual bool SetDamage(float damage, ElementalType elemental, bool isCritical)
     {
         if(!IsOnField)
         {
             return false;
         }
+        HealthChangedType healthCT = HealthChangedType.Damage;
         bool res;
         if(SpineAnim.CurrentAnim == CharacterAnimationStateType.Defending)
         {
@@ -1004,6 +1017,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
                 damage = damage < 0 ? 1 : damage;
             }
+            healthCT = HealthChangedType.Defend;
             res = false;
             if (UMS.Facing == FacingType.Left)
             {
@@ -1022,6 +1036,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                // AudioManager.Instance.PlayGeneric("Get_Hit_20200217");
             }
             SetAnimation(CharacterAnimationStateType.GettingHit);
+            healthCT = isCritical ? HealthChangedType.CriticalHit : HealthChangedType.Damage;
             res = true;
         }
 
@@ -1069,10 +1084,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             EventManager.Instance.AddCharacterDeath(this);
         }
         EventManager.Instance.UpdateHealth(this);
-        if (DamageReceivedEvent != null)
-        {
-            DamageReceivedEvent(damage, !res);
-        }
+        HealthStatsChangedEvent?.Invoke(damage, healthCT, transform);
         return res;
     }
 

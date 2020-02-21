@@ -9,6 +9,7 @@ public class BulletManagerScript : MonoBehaviour
     public static BulletManagerScript Instance;
     private Dictionary<int, GameObject> Bullets = new Dictionary<int, GameObject>();
     public GameObject BulletGameObject;
+    public Transform BulletContainer;
 
     private void Awake()
     {
@@ -21,12 +22,8 @@ public class BulletManagerScript : MonoBehaviour
         res = Bullets.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
         if (res == null)
         {
-            res = Instantiate(BulletGameObject, transform);
+            res = Instantiate(BulletGameObject, BulletContainer);
             Bullets.Add(Bullets.Count, res);
-        }
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            transform.GetChild(i).parent = null;
         }
         res.SetActive(true);
         return res;

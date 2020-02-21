@@ -6,7 +6,7 @@ using UnityEngine;
 public class ScriptableObjectAttackBase : ScriptableObject
 {
     public float AttackRatioMultiplier = 1;
-    public float DamageMultiplier = 1;
+    public Vector2 DamageMultiplier = new Vector2(1,1);
     public CharacterAnimationStateType Anim;
 }
 

@@ -25,6 +25,7 @@ public class MinionType_Script : BaseCharacter
     public override void SetAttackReady(bool value)
     {
         StartMoveCo();
+        CharInfo.DefenceStats.BaseDefence = Random.Range(0.7f, 1);
         base.SetAttackReady(value);
     }
 
@@ -112,11 +113,11 @@ public class MinionType_Script : BaseCharacter
 
         yield return null;*/
         shotsLeftInAttack = GetHowManyAttackAreOnBattleField(((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories);
-
+        Attacking = true;
         if (nextAttack.Anim == CharacterAnimationStateType.Atk)
         {
             //Temporary until anims are added
-            Attacking = true;
+            
             sequencedAttacker = false;
             chargeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
             SetAnimation(CharacterAnimationStateType.Idle, true);
@@ -156,4 +157,9 @@ public class MinionType_Script : BaseCharacter
     }
 
 
+    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical)
+    {
+        damage = damage * CharInfo.DefenceStats.BaseDefence;
+        return base.SetDamage(damage, elemental, isCritical);
+    }
 }

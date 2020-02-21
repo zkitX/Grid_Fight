@@ -259,7 +259,9 @@ public class BattleManagerScript : MonoBehaviour
         currentCharacter.CharInfo.CharacterSelection = charInfo.CharacterSelection;
         currentCharacter.CharInfo.CharacterLevel = charInfo.CharacterLevel;
         currentCharacter.CurrentCharIsDeadEvent += CurrentCharacter_CurrentCharIsDeadEvent;
-        UIBattleFieldManager.Instance.SetUIBattleField(currentCharacter);
+        currentCharacter.CharBoxCollider = currentCharacter.GetComponentInChildren<BoxCollider>(true);
+        currentCharacter.CharBoxCollider.enabled = false;
+        UIBattleFieldManager.Instance.SetupCharListener(currentCharacter);
         return currentCharacter;
     }
 

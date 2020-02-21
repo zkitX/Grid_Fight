@@ -57,12 +57,12 @@ public class BattleTileTargetScript : MonoBehaviour
             transform.localScale = new Vector3(1 - (timer > 0.9f ? 1 : timer) , 1 - (timer > 0.9f ? 1 : timer), 1);
         }
        
-        BaseCharacter target;
+       /* BaseCharacter target;
         bool effectOn = true;
         target = BattleManagerScript.Instance.GetCharInPos(Pos);
         if (target != null)
         {
-            effectOn = target.SetDamage(Damage, Elemental);
+            effectOn = target.SetDamage(Damage, Elemental,);
         }
         if(effectOn)
         {
@@ -74,7 +74,7 @@ public class BattleTileTargetScript : MonoBehaviour
                 lps.SelectShotLevel();
 
             }
-        }
+        }*/
        
         gameObject.SetActive(false);
     }

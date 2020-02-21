@@ -72,7 +72,9 @@ public class BattleTileTargetsScript : MonoBehaviour
             target = BattleManagerScript.Instance.GetCharInPos(pos);
             if (target != null)
             {
-                effectOn = target.SetDamage(damage, ele);
+                bool iscritical = attacker.CharInfo.IsCritical(true);
+                //Set damage to the hitting character
+                effectOn = target.SetDamage(damage * (iscritical ? 2 : 1), ele, iscritical);
             }
         }
         attacker.shotsLeftInAttack--;
