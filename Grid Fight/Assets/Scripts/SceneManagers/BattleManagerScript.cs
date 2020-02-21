@@ -182,6 +182,8 @@ public class BattleManagerScript : MonoBehaviour
             PlayablesCharOnScene.Where(r => r.CName == currentCharacter.CharInfo.CharacterID).First().isUsed = false;
         }
 
+        WaveManagerScript.Instance.RemoveWaveCharacterFromBoard(currentCharacter);
+
     }
 
     //Used to set the already created char on a fixed Position in the battlefield
@@ -414,6 +416,7 @@ public class BattleManagerScript : MonoBehaviour
         }*/
         BaseCharacter charToRemove = AllCharactersOnField.Where(r => r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
         if (charToRemove == null) charToRemove = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
+        Debug.Log("Character removed: " + charToRemove.CharInfo.CharacterID.ToString());
         ControllerType controller = ControllerType.None;
         if (CurrentSelectedCharacters.Values != null && CurrentSelectedCharacters.Where(r => r.Value.Character == charToRemove).FirstOrDefault().Key != ControllerType.None)
         {

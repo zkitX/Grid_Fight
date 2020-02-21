@@ -107,6 +107,14 @@ public class WaveManagerScript : MonoBehaviour
         return res;
     }
 
+    public void RemoveWaveCharacterFromBoard(BaseCharacter character)
+    {
+        if(WaveCharcters.Where(r => r.CharInfo.Name == character.CharInfo.Name).FirstOrDefault() != null)
+        {
+            WaveCharcters.Where(r => r.CharInfo.Name == character.CharInfo.Name).FirstOrDefault().IsOnField = false;
+            WaveCharcters.Where(r => r.CharInfo.Name == character.CharInfo.Name).FirstOrDefault().gameObject.SetActive(false);
+        }
+    }
 
 
 
