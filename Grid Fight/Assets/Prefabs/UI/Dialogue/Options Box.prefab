@@ -610,6 +610,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7204718465306210378}
   - component: {fileID: 8065505840580444975}
+  - component: {fileID: 1235840047098352974}
   m_Layer: 5
   m_Name: Options Box
   m_TagString: Untagged
@@ -645,6 +646,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5287308768735081805}
   m_CullTransparentMesh: 0
+--- !u!114 &1235840047098352974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5287308768735081805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafb3db48d8694144ae4bf1cf37ac413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BoxAnim: {fileID: 6435029033872375032}
+  ButtonAnim: {fileID: 2476233968019347507}
 --- !u!1 &6223247021447822051
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,7 +762,7 @@ Animator:
   m_GameObject: {fileID: 6323227783805136897}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: de0714b3651a4604fbfb710a2b858d70, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

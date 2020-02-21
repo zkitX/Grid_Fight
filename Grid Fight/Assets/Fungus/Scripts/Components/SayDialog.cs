@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using System.Linq;
 
 namespace Fungus
 {
@@ -24,7 +26,7 @@ namespace Fungus
         [SerializeField] protected Canvas dialogCanvas;
 
         [Tooltip("The name text UI object")]
-        [SerializeField] protected Text nameText;
+        [SerializeField] protected TextMeshProUGUI nameText;
         [Tooltip("TextAdapter will search for appropriate output on this GameObject if nameText is null")]
         [SerializeField] protected GameObject nameTextGO;
         protected TextAdapter nameTextAdapter = new TextAdapter();
@@ -41,7 +43,7 @@ namespace Fungus
         }
 
         [Tooltip("The story text UI object")]
-        [SerializeField] protected Text storyText;
+        [SerializeField] protected TextMeshProUGUI storyText;
         [Tooltip("TextAdapter will search for appropriate output on this GameObject if storyText is null")]
         [SerializeField] protected GameObject storyTextGO;
         protected TextAdapter storyTextAdapter = new TextAdapter();
@@ -282,6 +284,15 @@ namespace Fungus
             }
 
             return ActiveSayDialog;
+        }
+
+        /// <summary>
+        /// Returns a SayDialog by searching for one in the scene or creating one if none exists.
+        /// </summary>
+        public static SayDialog GetSayDialog(string tag)
+        {
+            SayDialog sd = activeSayDialogs.Where(r => r.gameObject.tag == tag).FirstOrDefault();
+            return sd;
         }
 
         /// <summary>

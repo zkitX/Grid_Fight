@@ -18,7 +18,9 @@ namespace Fungus
         /// <summary> Click anywhere on Say Dialog to advance. </summary>
         ClickOnDialog,
         /// <summary> Click on continue button to advance. </summary>
-        ClickOnButton
+        ClickOnButton,
+        /// <summary> Click on JoyPad button. </summary>
+        ClickOnJoyPad
     }
 
     /// <summary>
