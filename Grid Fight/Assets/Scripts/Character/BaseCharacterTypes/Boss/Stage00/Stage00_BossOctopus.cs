@@ -12,11 +12,10 @@ public class Stage00_BossOctopus : MinionType_Script
 
     private List<CharacterNameType> piecesType = new List<CharacterNameType>()
     {
-        CharacterNameType.Stage00_BossOctopus_Head,
         CharacterNameType.Stage00_BossOctopus_Tentacles,
+        CharacterNameType.Stage00_BossOctopus_Head,
         CharacterNameType.Stage00_BossOctopus_Girl
     };
-
 
 
     public override void SetUpEnteringOnBattle()
@@ -29,19 +28,20 @@ public class Stage00_BossOctopus : MinionType_Script
         yield return null;
     }
 
-    private IEnumerator SetUpEnteringOnBattle_Co()
+    void GenerateBoss()
     {
-        BattleManagerScript.Instance.CurrentBattleState = BattleState.Event;
-
-
-
-
         foreach (CharacterNameType piece in piecesType)
         {
             Pieces.Add(CreatePiece(piece));
-            
         }
+        ((Stage00_BossOctopus_Girl)GetPiece(CharacterNameType.Stage00_BossOctopus_Girl)).CenteringPoint = GetComponentsInChildren<Transform>().Where(r => r.CompareTag("CenteringPoint")).FirstOrDefault();
+    }
 
+    private IEnumerator SetUpEnteringOnBattle_Co()
+    {
+        //BattleManagerScript.Instance.CurrentBattleState = BattleState.Event;
+
+        GenerateBoss();
 
         SetAnimation(CharacterAnimationStateType.Arriving);
 
@@ -49,7 +49,6 @@ public class Stage00_BossOctopus : MinionType_Script
         {
             yield return null;
         }
-
 
         WaveManagerScript.Instance.BossArrived(this);
 
@@ -69,7 +68,6 @@ public class Stage00_BossOctopus : MinionType_Script
             }
             timer += Time.fixedDeltaTime;
         }
-
 
         foreach (MinionType_Script piece in Pieces)
         {
@@ -93,62 +91,48 @@ public class Stage00_BossOctopus : MinionType_Script
     private MinionType_Script CreatePiece(CharacterNameType pieceType)
     {
         MinionType_Script piece = (MinionType_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(pieceType.ToString(), CharacterSelectionType.Up,
-             CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, pieceType, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None), transform);
+        CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, pieceType, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None), transform);
         piece.UMS.Pos = UMS.Pos;
         piece.UMS.CurrentTilePos = UMS.CurrentTilePos;
         piece.SetValueFromVariableName("BaseBoss", this);
         return piece;
     }
 
-
-
-
-
-    private void Flower_CurrentCharIsRebornEvent(CharacterNameType cName, List<ControllerType> playerController, SideType side)
+    MinionType_Script GetPiece(CharacterNameType pieceName)
     {
-        
+        foreach (MinionType_Script piece in Pieces)
+        {
+            Debug.Log(piece.CharInfo.CharacterID.ToString());
+            if (piece.CharInfo.CharacterID == pieceName) return piece;
+        }
+        Debug.Log("Piece requested '" + pieceName.ToString() + "' does not exist in boss");
+        return null;
     }
-
-    private void Flower_CurrentCharIsDeadEvent(CharacterNameType cName, List<ControllerType> playerController, SideType side)
-    {
-    }
-
-    
 
     public override void SetCharDead()
     {
         if(SpineAnim.CurrentAnim != CharacterAnimationStateType.Death)
         {
             CameraManagerScript.Instance.CameraShake();
-            BattleManagerScript.Instance.CurrentBattleState = BattleState.Event;
             ParticleManagerScript.Instance.AttackParticlesFired.ForEach(r => r.PS.SetActive(false));
             ParticleManagerScript.Instance.ParticlesFired.ForEach(r => r.PS.SetActive(false));
-            StartCoroutine(DeathStasy());
+
         }
     }
 
-    private IEnumerator DeathStasy()
+    private IEnumerator PhaseOneEnd()
     {
         float timer = 0;
         SetAnimation(CharacterAnimationStateType.Death);
-        while (timer < 7f)
-        {
-            yield return new WaitForFixedUpdate();
-            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Event)
-            {
-                yield return new WaitForFixedUpdate();
-            }
 
-            timer += Time.fixedDeltaTime;
-        }
-
-        Stage04_BossMonster_Script mask = (Stage04_BossMonster_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass((CharacterNameType.Stage04_BossMonster).ToString(), CharacterSelectionType.Up,
-                CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage04_BossMonster, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None), WaveManagerScript.Instance.transform);
+        /*Stage04_BossMonster_Script mask = (Stage04_BossMonster_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass((CharacterNameType.Stage04_BossMonster).ToString(), CharacterSelectionType.Up,
+        CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage04_BossMonster, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None), WaveManagerScript.Instance.transform);
         BattleManagerScript.Instance.AllCharactersOnField.Add(mask);
         mask.UMS.Pos = UMS.Pos;
         mask.UMS.CurrentTilePos = UMS.CurrentTilePos;
         mask.transform.position = transform.position;
-        mask.SetUpEnteringOnBattle();
+        mask.SetUpEnteringOnBattle();*/
+
         timer = 0;
         while (timer < 3)
         {
@@ -157,25 +141,110 @@ public class Stage00_BossOctopus : MinionType_Script
             {
                 yield return new WaitForFixedUpdate();
             }
-
             timer += Time.fixedDeltaTime;
         }
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         base.SetCharDead();
     }
 
-    public override IEnumerator AttackAction(bool yieldBefore)
+    IEnumerator BirthOctopusGirl()
     {
-        yield break;
+        //The code for the moving into position of and the creation of the octopus girl
+
+        yield return ((Stage00_BossOctopus_Girl)GetPiece(CharacterNameType.Stage00_BossOctopus_Girl)).CenterCharacterToTile(5f);
     }
 
-    public override bool SetDamage(float damage, ElementalType elemental)
+    public override IEnumerator AttackAction(bool yieldBefore)
     {
-        if(CanGetDamage)
+        //Handles the attack for all of the components of the boss
+        while (GetPiece(CharacterNameType.Stage00_BossOctopus_Head) == null)
         {
-            return base.SetDamage(damage, elemental);
+            yield return null;
+        }
+        while(!GetPiece(CharacterNameType.Stage00_BossOctopus_Head).IsOnField)
+        {
+            yield return null;
+        }
+        IsOnField = true;
+
+        Vector2 blanketAttackTimings = new Vector2(15f, 25f);
+        Vector2 headAttackTimings = new Vector2(4f, 7f);
+        Vector2 tentacleAttackTimings = new Vector2(3f, 5f);
+        float blanketAttackCooldown = blanketAttackTimings.x;
+        float headAttackCooldown = headAttackTimings.x;
+        float tentacleAttackCooldown = tentacleAttackTimings.x;
+
+        while (true)
+        {
+            while(BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && 
+                BattleManagerScript.Instance.CurrentBattleState != BattleState.FungusPuppets)
+            {
+                yield return null;
+            }
+
+            Debug.Log(tentacleAttackCooldown.ToString());
+            Debug.Log(blanketAttackCooldown.ToString());
+            Debug.Log(headAttackCooldown.ToString());
+
+            blanketAttackCooldown = Mathf.Clamp(blanketAttackCooldown - Time.deltaTime, 0f, 10000f);
+            if(blanketAttackCooldown == 0f)
+            {
+                //If it gets here, launch an attack from the whole body
+                while (GetPiece(CharacterNameType.Stage00_BossOctopus_Head).Attacking && GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles).Attacking)
+                {
+                    yield return null;
+                }
+                ((Stage00_BossOctopus_Head)GetPiece(CharacterNameType.Stage00_BossOctopus_Head)).GetAttack(CharacterAnimationStateType.Atk);
+                StartCoroutine(((Stage00_BossOctopus_Head)GetPiece(CharacterNameType.Stage00_BossOctopus_Head)).AttackSequence());
+                ((Stage00_BossOctopus_Tentacles)GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles)).GetAttack(CharacterAnimationStateType.Atk);
+                StartCoroutine(((Stage00_BossOctopus_Tentacles)GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles)).AttackSequence());
+
+                while (GetPiece(CharacterNameType.Stage00_BossOctopus_Head).Attacking && GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles).Attacking)
+                {
+                    yield return null;
+                }
+                blanketAttackCooldown = Random.Range(blanketAttackTimings.x, blanketAttackTimings.y);
+                headAttackCooldown = Random.Range(headAttackTimings.x, headAttackTimings.y);
+                tentacleAttackCooldown = Random.Range(tentacleAttackTimings.x, tentacleAttackTimings.y);
+            }
+            else
+            {
+                headAttackCooldown = Mathf.Clamp(headAttackCooldown - Time.deltaTime, 0f, 10000f);
+                tentacleAttackCooldown = Mathf.Clamp(tentacleAttackCooldown - Time.deltaTime, 0f, 10000f);
+
+                if(headAttackCooldown == 0f)
+                {
+                    //If it gets here, launch an attack from the head
+                    if (!GetPiece(CharacterNameType.Stage00_BossOctopus_Head).Attacking)
+                    {
+                        ((Stage00_BossOctopus_Head)GetPiece(CharacterNameType.Stage00_BossOctopus_Head)).GetAttack(CharacterAnimationStateType.Atk);
+                        yield return ((Stage00_BossOctopus_Head)GetPiece(CharacterNameType.Stage00_BossOctopus_Head)).AttackSequence();
+                        headAttackCooldown = Random.Range(headAttackTimings.x, headAttackTimings.y);
+                    }
+                }
+                if(tentacleAttackCooldown == 0f)
+                {
+                    //If it gets here, launch an attack from the tentacles
+                    if (!GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles).Attacking)
+                    {
+                        ((Stage00_BossOctopus_Tentacles)GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles)).GetAttack(CharacterAnimationStateType.Atk);
+                        yield return ((Stage00_BossOctopus_Tentacles)GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles)).AttackSequence();
+                        tentacleAttackCooldown = Random.Range(tentacleAttackTimings.x, tentacleAttackTimings.y);
+                    }
+                }
+            }
+            yield return null;
+        }
+    }
+
+    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical)
+    {
+        if (CanGetDamage)
+        {
+            return base.SetDamage(damage, elemental, isCritical);
         }
         return false;
+
     }
 
 
@@ -186,7 +255,6 @@ public class Stage00_BossOctopus : MinionType_Script
             piece.SetAnimation(animState, loop, transition);
         }
     }
-
 
     private void SetAnimForSinglePiece()
     {
