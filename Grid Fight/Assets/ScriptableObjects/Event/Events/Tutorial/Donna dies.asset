@@ -12,9 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25d497aba9400d147aee0263a1f7ec6d, type: 3}
   m_Name: Donna dies
   m_EditorClassIdentifier: 
-  Name: 
+  Name: donnadies
   hasHappened: 0
-  requirements: []
-  ceaseOnComplete: 1
+  requirements:
+  - {fileID: 11400000, guid: 63a7095ce9390c24aad83497d61ea5ba, type: 2}
+  - {fileID: 11400000, guid: a35ab18b2ed1267428ba38fc23d78fbb, type: 2}
+  ceaseOnComplete: 0
   requireComplete: 1
-  effects: []
+  effects:
+  - Name: 
+    effectType: 2
+    secondsToWait: 0
+    debugText: 
+    blockName: 
+    command: {fileID: 0}
+    characterToRecruit: 0
