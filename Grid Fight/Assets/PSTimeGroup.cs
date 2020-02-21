@@ -45,10 +45,10 @@ public class PSTimeGroup : MonoBehaviour
         if (initialized)
         {
             //Activate only if the variable AutoUpdate is enable
-            if (AutoUpdate)
+            /*if (AutoUpdate)
             {
                 UpdatePSTime();
-            }
+            }*/
             TrailStateUpdate();
         }
         
