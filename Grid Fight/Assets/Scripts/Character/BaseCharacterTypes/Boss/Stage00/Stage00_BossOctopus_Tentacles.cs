@@ -5,10 +5,11 @@ using System.Linq;
 
 public class Stage00_BossOctopus_Tentacles : MinionType_Script
 {
-   
-    public bool CanGetDamage = false;
+    public Stage00_BossOctopus bossParent;
+    public bool CanGetDamage = true;
     private List<VFXOffsetToTargetVOL> TargetControllerList = new List<VFXOffsetToTargetVOL>();
     public Stage00_BossOctopus BaseBoss;
+    public bool disabled = false;
 
     public override void SetUpEnteringOnBattle()
     {
@@ -53,14 +54,13 @@ public class Stage00_BossOctopus_Tentacles : MinionType_Script
 
     public override void SetCharDead()
     {
-        if(SpineAnim.CurrentAnim != CharacterAnimationStateType.Death)
-        {
-            CameraManagerScript.Instance.CameraShake();
-            BattleManagerScript.Instance.CurrentBattleState = BattleState.Event;
-            ParticleManagerScript.Instance.AttackParticlesFired.ForEach(r => r.PS.SetActive(false));
-            ParticleManagerScript.Instance.ParticlesFired.ForEach(r => r.PS.SetActive(false));
-            StartCoroutine(DeathStasy());
-        }
+        if (disabled) return;
+        CameraManagerScript.Instance.CameraShake();
+        Debug.Log("Tentacles Disabled");
+        disabled = true;
+        CanGetDamage = false;
+        SetAnimation(CharacterAnimationStateType.Idle_Disable_Loop, true);
+        bossParent.SetCharDead();
     }
 
     private IEnumerator DeathStasy()
@@ -76,6 +76,34 @@ public class Stage00_BossOctopus_Tentacles : MinionType_Script
     public override IEnumerator AttackSequence()
     {
         yield return base.AttackSequence();
+    }
+
+    public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
+    {
+        switch (animState)
+        {
+            case (CharacterAnimationStateType.Idle):
+                transition = 1f;
+                break;
+            case (CharacterAnimationStateType.Atk1_IdleToAtk):
+                transition = 1f;
+                break;
+            case (CharacterAnimationStateType.Idle_Disable_Loop):
+                transition = 1f;
+                break;
+            case (CharacterAnimationStateType.Death_Prep):
+                transition = 1f;
+                break;
+            case (CharacterAnimationStateType.Atk1_AtkToIdle):
+                transition = 10f;
+                break;
+            case (CharacterAnimationStateType.Atk1_Charging):
+                transition = 1f;
+                break;
+            default:
+                break;
+        }
+        base.SetAnimation(animState, loop, transition);
     }
 
     public override bool SetDamage(float damage, ElementalType elemental, bool isCritical)

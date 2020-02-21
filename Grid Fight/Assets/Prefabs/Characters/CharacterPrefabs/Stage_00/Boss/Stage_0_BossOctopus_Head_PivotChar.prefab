@@ -178,7 +178,7 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  _animationName: animation
+  _animationName: Arriving
   loop: 0
   timeScale: 1
 --- !u!114 &5780729917183491174
@@ -306,25 +306,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
-  CharacterIcon: {fileID: 21300000, guid: f7007247efa4ba4429b39ff1ec58819d, type: 3}
+  Name: OctoBoss Head
+  CharacterIcons: []
   BaseCharacterType: 7
-  CharacterID: 24
-  CurrentParticlesAttackTypeInfo:
-  - {fileID: 0}
+  CharacterID: 28
+  CurrentParticlesAttackTypeInfo: []
   CurrentOnBattleFieldAttackTypeInfo:
-  - {fileID: 11400000, guid: 16c71180a018bf044be5211ddac04e59, type: 2}
-  - {fileID: 11400000, guid: 684b6eef33dd29544a051da2136eee1f, type: 2}
-  ParticleID: 3
+  - {fileID: 11400000, guid: ff71685c594067944ad3019523cfc414, type: 2}
+  ParticleID: 22
   Elemental: 0
   ClassType: 3
   CharacterLevel: 0
+  UseLayeringSystem: 0
   CharacterSelection: 0
   RapidAttack:
-    BaseDamage: 10
+    DamageMultiplier: {x: 1, y: 1}
+    CriticalChance: {x: 2, y: 2}
     Stamina_Cost_Atk: 0
   PowerfulAttac:
-    BaseDamage: 10
+    DamageMultiplier: {x: 3, y: 3}
+    CriticalChance: {x: 3, y: 5}
     Stamina_Cost_Atk: 0
   HealthStats:
     Health: 30
@@ -349,7 +350,7 @@ MonoBehaviour:
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
   DamageStats:
-    CurrentDamage: 10
+    BaseDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []
@@ -389,8 +390,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.9, z: 0.9}
-  m_Center: {x: -0.02, y: 0.28, z: 0}
+  m_Size: {x: 1.9492168, y: 3.5455313, z: 0.9}
+  m_Center: {x: -1.0509605, y: 4.0272536, z: 0}
 --- !u!1 &7680740090405527678
 GameObject:
   m_ObjectHideFlags: 0

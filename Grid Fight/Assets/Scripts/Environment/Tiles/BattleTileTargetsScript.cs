@@ -61,7 +61,7 @@ public class BattleTileTargetsScript : MonoBehaviour
             else if (tc.RemainingTime <= duration*0.1f && attacker.UMS.CurrentAttackType == AttackType.Tile && !attackerFiredAttackAnim)
             {
                 attackerFiredAttackAnim = true;
-                attacker.fireAttackAnimation(); // trigger the shoot anim
+                attacker.fireAttackAnimation(transform.position); // trigger the shoot anim
             }
         }
 

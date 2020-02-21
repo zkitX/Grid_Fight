@@ -51,13 +51,13 @@ MonoBehaviour:
   WavePhases:
   - name: Wave1
     IsRandom: 1
-    MaxEnemyOnScreen: 2
+    MaxEnemyOnScreen: 1
     ListOfEnemy:
     - name: Bot
-      NPCType: 0
-      NumberOfCharacter: 3
+      NPCType: 2
+      NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 23
+        CharacterName: 27
         CharacterClass: 0
         Health: {x: 20, y: 30}
         HealthRegeneration: {x: 0.2, y: 0.2}
@@ -69,29 +69,9 @@ MonoBehaviour:
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
         Events: []
-      IsRandomSpowiningTile: 1
+      IsRandomSpowiningTile: 0
       SpowningTile:
-      - {x: 2, y: 8}
-      DelayBetweenChars: 1
-    - name: Bot
-      NPCType: 0
-      NumberOfCharacter: 3
-      TypeOfCharacter:
-        CharacterName: 23
-        CharacterClass: 0
-        Health: {x: 20, y: 30}
-        HealthRegeneration: {x: 0.2, y: 0.2}
-        BaseDamage: {x: 3, y: 4}
-        RapidAttackMultiplier: {x: 1, y: 1}
-        PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 1, y: 1.5}
-        AttackSpeedRatio: {x: 3, y: 4}
-        Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        Events: []
-      IsRandomSpowiningTile: 1
-      SpowningTile:
-      - {x: 2, y: 8}
+      - {x: 4, y: 11}
       DelayBetweenChars: 1
   - name: Wave2
     IsRandom: 1

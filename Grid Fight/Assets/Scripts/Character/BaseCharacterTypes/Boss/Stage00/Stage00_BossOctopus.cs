@@ -95,6 +95,14 @@ public class Stage00_BossOctopus : MinionType_Script
         piece.UMS.Pos = UMS.Pos;
         piece.UMS.CurrentTilePos = UMS.CurrentTilePos;
         piece.SetValueFromVariableName("BaseBoss", this);
+        if(pieceType == CharacterNameType.Stage00_BossOctopus_Head)
+        {
+            ((Stage00_BossOctopus_Head)piece).bossParent = this;
+        }
+        else if(pieceType == CharacterNameType.Stage00_BossOctopus_Tentacles)
+        {
+            ((Stage00_BossOctopus_Tentacles)piece).bossParent = this;
+        }
         return piece;
     }
 
@@ -111,19 +119,21 @@ public class Stage00_BossOctopus : MinionType_Script
 
     public override void SetCharDead()
     {
-        if(SpineAnim.CurrentAnim != CharacterAnimationStateType.Death)
+        if(!((Stage00_BossOctopus_Head)GetPiece(CharacterNameType.Stage00_BossOctopus_Head)).disabled ||
+            !((Stage00_BossOctopus_Tentacles)GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles)).disabled)
         {
-            CameraManagerScript.Instance.CameraShake();
-            ParticleManagerScript.Instance.AttackParticlesFired.ForEach(r => r.PS.SetActive(false));
-            ParticleManagerScript.Instance.ParticlesFired.ForEach(r => r.PS.SetActive(false));
-
+            return;
         }
+        CameraManagerScript.Instance.CameraShake();
+        StopCoroutine(attackCoroutine);
+        Debug.Log("Octobos fully disabled");
     }
 
     private IEnumerator PhaseOneEnd()
     {
         float timer = 0;
-        SetAnimation(CharacterAnimationStateType.Death);
+        SetAnimation(CharacterAnimationStateType.Death_Prep);
+        yield return null;
 
         /*Stage04_BossMonster_Script mask = (Stage04_BossMonster_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass((CharacterNameType.Stage04_BossMonster).ToString(), CharacterSelectionType.Up,
         CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage04_BossMonster, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None), WaveManagerScript.Instance.transform);
@@ -133,7 +143,7 @@ public class Stage00_BossOctopus : MinionType_Script
         mask.transform.position = transform.position;
         mask.SetUpEnteringOnBattle();*/
 
-        timer = 0;
+        /*timer = 0;
         while (timer < 3)
         {
             yield return new WaitForFixedUpdate();
@@ -144,7 +154,7 @@ public class Stage00_BossOctopus : MinionType_Script
             timer += Time.fixedDeltaTime;
         }
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
-        base.SetCharDead();
+        base.SetCharDead();*/
     }
 
     IEnumerator BirthOctopusGirl()
@@ -182,12 +192,10 @@ public class Stage00_BossOctopus : MinionType_Script
                 yield return null;
             }
 
-            Debug.Log(tentacleAttackCooldown.ToString());
-            Debug.Log(blanketAttackCooldown.ToString());
-            Debug.Log(headAttackCooldown.ToString());
-
             blanketAttackCooldown = Mathf.Clamp(blanketAttackCooldown - Time.deltaTime, 0f, 10000f);
-            if(blanketAttackCooldown == 0f)
+            if(blanketAttackCooldown == 0f &&
+                !((Stage00_BossOctopus_Head)GetPiece(CharacterNameType.Stage00_BossOctopus_Head)).disabled &&
+                !((Stage00_BossOctopus_Tentacles)GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles)).disabled)
             {
                 //If it gets here, launch an attack from the whole body
                 while (GetPiece(CharacterNameType.Stage00_BossOctopus_Head).Attacking && GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles).Attacking)
@@ -212,7 +220,7 @@ public class Stage00_BossOctopus : MinionType_Script
                 headAttackCooldown = Mathf.Clamp(headAttackCooldown - Time.deltaTime, 0f, 10000f);
                 tentacleAttackCooldown = Mathf.Clamp(tentacleAttackCooldown - Time.deltaTime, 0f, 10000f);
 
-                if(headAttackCooldown == 0f)
+                if(headAttackCooldown == 0f && !((Stage00_BossOctopus_Head)GetPiece(CharacterNameType.Stage00_BossOctopus_Head)).disabled)
                 {
                     //If it gets here, launch an attack from the head
                     if (!GetPiece(CharacterNameType.Stage00_BossOctopus_Head).Attacking)
@@ -222,7 +230,7 @@ public class Stage00_BossOctopus : MinionType_Script
                         headAttackCooldown = Random.Range(headAttackTimings.x, headAttackTimings.y);
                     }
                 }
-                if(tentacleAttackCooldown == 0f)
+                if(tentacleAttackCooldown == 0f && !((Stage00_BossOctopus_Tentacles)GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles)).disabled)
                 {
                     //If it gets here, launch an attack from the tentacles
                     if (!GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles).Attacking)

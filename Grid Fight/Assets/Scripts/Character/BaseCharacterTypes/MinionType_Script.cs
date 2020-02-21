@@ -29,7 +29,6 @@ public class MinionType_Script : BaseCharacter
         base.SetAttackReady(value);
     }
 
-
     public override void StartMoveCo()
     {
         MoveCoOn = true;
@@ -100,8 +99,6 @@ public class MinionType_Script : BaseCharacter
             SpineAnimatorsetup();
         }
 
-        
-
         base.SetAnimation(animState, loop, transition);
     }
 
@@ -143,7 +140,7 @@ public class MinionType_Script : BaseCharacter
     }
 
 
-    public override void fireAttackAnimation()
+    public override void fireAttackAnimation(Vector3 pos)
     {
         //Debug.Log("<b>Shots left in this charge of attacks: </b>" + shotsLeftInAttack);
         if (sequencedAttacker) SetAnimation(CharacterAnimationStateType.Atk1_Loop);

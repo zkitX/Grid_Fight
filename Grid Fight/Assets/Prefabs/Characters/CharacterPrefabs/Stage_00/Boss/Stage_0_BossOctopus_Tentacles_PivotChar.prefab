@@ -175,7 +175,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 100
+  m_SortingOrder: 99
 --- !u!114 &8148182236474997241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,24 +337,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: 
-  CharacterIcon: {fileID: 21300000, guid: f7007247efa4ba4429b39ff1ec58819d, type: 3}
+  CharacterIcons: []
   BaseCharacterType: 8
-  CharacterID: 24
-  CurrentParticlesAttackTypeInfo:
-  - {fileID: 0}
+  CharacterID: 29
+  CurrentParticlesAttackTypeInfo: []
   CurrentOnBattleFieldAttackTypeInfo:
-  - {fileID: 11400000, guid: 16c71180a018bf044be5211ddac04e59, type: 2}
-  - {fileID: 11400000, guid: 684b6eef33dd29544a051da2136eee1f, type: 2}
-  ParticleID: 3
+  - {fileID: 11400000, guid: fcebe01613ca1b1469de948842b5654e, type: 2}
+  ParticleID: 21
   Elemental: 0
   ClassType: 3
   CharacterLevel: 0
+  UseLayeringSystem: 0
   CharacterSelection: 0
   RapidAttack:
-    BaseDamage: 10
+    DamageMultiplier: {x: 1, y: 1}
+    CriticalChance: {x: 2, y: 2}
     Stamina_Cost_Atk: 0
   PowerfulAttac:
-    BaseDamage: 10
+    DamageMultiplier: {x: 3, y: 3}
+    CriticalChance: {x: 3, y: 5}
     Stamina_Cost_Atk: 0
   HealthStats:
     Health: 30
@@ -379,7 +380,7 @@ MonoBehaviour:
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
   DamageStats:
-    CurrentDamage: 10
+    BaseDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []
@@ -419,5 +420,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.9, z: 0.9}
-  m_Center: {x: -0.02, y: 0.28, z: 0}
+  m_Size: {x: 4.2617736, y: 2.5083852, z: 0.9}
+  m_Center: {x: -0.3063624, y: 1.0841925, z: 0}

@@ -346,8 +346,10 @@ public enum CharacterAnimationStateType
     Victory,
     Defeat,
     Death,
-    Idle_Disable_Loop
-
+    Idle_Disable_Loop,
+    Death_Prep,
+    Death_Loop,
+    Death_Exit,
 }
 
 public enum PortalType
@@ -419,8 +421,9 @@ public enum AttackParticleTypes
     Stage04_BossGirl = 10,
     Stage04_BossMonster_Minion = 11,
     Stage04_BossMonster = 12,
-    Test_Mesh = 1000
-    
+    Test_Mesh = 1000,
+    Stage00_BossOctopus_Tentacle = 21,
+    Stage00_BossOctopus_Head = 22,
 }
 
 

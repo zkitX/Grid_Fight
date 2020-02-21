@@ -50,6 +50,7 @@ public class Stage00_BossOctopus_Girl : MinionType_Script
         }
     }
 
+
     private IEnumerator DeathStasy()
     {
         yield return null;

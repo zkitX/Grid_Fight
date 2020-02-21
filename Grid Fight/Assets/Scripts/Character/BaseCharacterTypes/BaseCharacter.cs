@@ -49,7 +49,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public BoxCollider CharBoxCollider;
     public ScriptableObjectAttackBase nextAttack = null;
     public AttackPhasesType currentAttackPhase = AttackPhasesType.End;
-    private IEnumerator attackCoroutine = null;
+    protected IEnumerator attackCoroutine = null;
     public SpecialAttackStatus StopPowerfulAtk;
     private float DefendingHoldingTimer = 0;
     public bool IsSwapping = false;
@@ -271,8 +271,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         yield return null;
     }
 
-    public virtual void fireAttackAnimation()
+    public virtual void fireAttackAnimation(Vector3 pos)
     {
+
     }
 
     public int GetHowManyAttackAreOnBattleField(List<BulletBehaviourInfoClassOnBattleField> bulTraj)
@@ -417,7 +418,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     }
 
     //start the casting particlaes foe the attack
-    public void CastAttackParticles()
+    public virtual void CastAttackParticles()
     {
         //Debug.Log("Cast");
         GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, UMS.CurrentAttackType == AttackType.Particles ? AttackParticlePhaseTypes.CastLeft : AttackParticlePhaseTypes.CastRight,

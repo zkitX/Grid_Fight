@@ -246,11 +246,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: 
-  CharacterIcon: {fileID: 21300000, guid: f7007247efa4ba4429b39ff1ec58819d, type: 3}
+  CharacterIcons: []
   BaseCharacterType: 9
-  CharacterID: 24
-  CurrentParticlesAttackTypeInfo:
-  - {fileID: 0}
+  CharacterID: 30
+  CurrentParticlesAttackTypeInfo: []
   CurrentOnBattleFieldAttackTypeInfo:
   - {fileID: 11400000, guid: 16c71180a018bf044be5211ddac04e59, type: 2}
   - {fileID: 11400000, guid: 684b6eef33dd29544a051da2136eee1f, type: 2}
@@ -259,11 +258,12 @@ MonoBehaviour:
   ClassType: 3
   CharacterLevel: 0
   CharacterSelection: 0
+  UseLayeringSystem: 0
   RapidAttack:
-    BaseDamage: 10
+    DamageMultiplier: 1
     Stamina_Cost_Atk: 0
   PowerfulAttac:
-    BaseDamage: 10
+    DamageMultiplier: 3
     Stamina_Cost_Atk: 0
   HealthStats:
     Health: 30
@@ -288,7 +288,7 @@ MonoBehaviour:
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
   DamageStats:
-    CurrentDamage: 10
+    BaseDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []
@@ -328,8 +328,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.9, z: 0.9}
-  m_Center: {x: -0.02, y: 0.28, z: 0}
+  m_Size: {x: 2.479823, y: 3.2352448, z: 0.9}
+  m_Center: {x: 1.7679181, y: 5.4248285, z: 0}
 --- !u!1 &6082634530435941918
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,7 +402,7 @@ GameObject:
   m_Layer: 0
   m_Name: Stage_0_BossOctopus_Girl_PivotChar
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
