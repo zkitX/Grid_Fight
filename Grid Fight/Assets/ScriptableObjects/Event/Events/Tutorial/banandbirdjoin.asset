@@ -12,9 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25d497aba9400d147aee0263a1f7ec6d, type: 3}
   m_Name: banandbirdjoin
   m_EditorClassIdentifier: 
-  Name: 
+  Name: banandbirdjoin
   hasHappened: 0
-  requirements: []
+  requirements:
+  - {fileID: 11400000, guid: 48c2ee6ab13f2c24f842d816993338c0, type: 2}
+  - {fileID: 11400000, guid: 3e8e0ca1a6122354c80eb55343f39ad5, type: 2}
   ceaseOnComplete: 1
   requireComplete: 1
-  effects: []
+  effects:
+  - Name: 
+    effectType: 4
+    secondsToWait: 0
+    debugText: 
+    blockName: 
+    command: {fileID: 0}
+    characterToRecruit: 19
+  - Name: 
+    effectType: 4
+    secondsToWait: 0
+    debugText: 
+    blockName: 
+    command: {fileID: 0}
+    characterToRecruit: 22

@@ -14,6 +14,7 @@ public class CallRemoveCharFromBoard : Command
     protected virtual void CallTheMethod()
     {
         BattleManagerScript.Instance.RemoveNamedCharacterFromBoard(charToRemove);
+	
     }
 
     #region Public members

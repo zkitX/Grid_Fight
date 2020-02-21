@@ -54,6 +54,7 @@ MonoBehaviour:
     MaxEnemyOnScreen: 1
     ListOfEnemy:
     - name: robo
+      NPCType: 0
       NumberOfCharacter: 3
       TypeOfCharacter:
         CharacterName: 23
@@ -76,6 +77,7 @@ MonoBehaviour:
     MaxEnemyOnScreen: 2
     ListOfEnemy:
     - name: robo
+      NPCType: 0
       NumberOfCharacter: 2
       TypeOfCharacter:
         CharacterName: 23
@@ -94,13 +96,14 @@ MonoBehaviour:
       SpowningTile: []
       DelayBetweenChars: 1
     - name: Monkeyna
+      NPCType: 0
       NumberOfCharacter: 4
       TypeOfCharacter:
         CharacterName: 3
         CharacterClass: 0
         Health: {x: 15, y: 45}
         HealthRegeneration: {x: 0.5, y: 1}
-        BaseDamage: {x: 0, y: 0}
+        BaseDamage: {x: 10, y: 15}
         RapidAttackMultiplier: {x: 0, y: 0}
         PowerfulAttackMultiplier: {x: 0, y: 0}
         BaseSpeed: {x: 1, y: 1}
@@ -117,6 +120,7 @@ MonoBehaviour:
     MaxEnemyOnScreen: 1
     ListOfEnemy:
     - name: Definitely Koniko
+      NPCType: 1
       NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 21
@@ -140,6 +144,7 @@ MonoBehaviour:
     MaxEnemyOnScreen: 4
     ListOfEnemy:
     - name: Robotix
+      NPCType: 0
       NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 25
@@ -159,6 +164,7 @@ MonoBehaviour:
       - {x: 2, y: 8}
       DelayBetweenChars: 2
     - name: Llhama
+      NPCType: 0
       NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 0
@@ -179,9 +185,10 @@ MonoBehaviour:
       DelayBetweenChars: 2
   - name: birdandban
     IsRandom: 0
-    MaxEnemyOnScreen: 10
+    MaxEnemyOnScreen: 2
     ListOfEnemy:
     - name: bird
+      NPCType: 1
       NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 19
@@ -201,6 +208,7 @@ MonoBehaviour:
       - {x: 2, y: 8}
       DelayBetweenChars: 2
     - name: ban
+      NPCType: 1
       NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 22
@@ -219,6 +227,74 @@ MonoBehaviour:
       SpowningTile:
       - {x: 3, y: 9}
       DelayBetweenChars: 1
+  - name: pre boss
+    IsRandom: 1
+    MaxEnemyOnScreen: 3
+    ListOfEnemy:
+    - name: 
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 26
+        CharacterClass: 0
+        Health: {x: 30, y: 40}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 8, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 2
+    - name: 
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 24
+        CharacterClass: 0
+        Health: {x: 30, y: 40}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 10, y: 15}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 8, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 0
+      SpowningTile:
+      - {x: 3, y: 9}
+      DelayBetweenChars: 1
+  - name: test
+    IsRandom: 1
+    MaxEnemyOnScreen: 1
+    ListOfEnemy:
+    - name: 
+      NPCType: 1
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 19
+        CharacterClass: 0
+        Health: {x: 30, y: 40}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 8, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 2}
+      DelayBetweenChars: 2
   isWaveComplete: 0
   WaveCharcters: []
   CurrentWave: 0
