@@ -230,7 +230,7 @@ public class BulletScript : MonoBehaviour
             {
                 bool iscritical = CharInfo.IsCritical(attackLevel == CharacterLevelType.Novice ? true : false);
                 //Set damage to the hitting character
-                target.SetDamage(CharInfo.DamageStats.BaseDamage * (iscritical ? 2 : 1), Elemental, iscritical);
+                target.SetDamage((CharInfo.DamageStats.BaseDamage * (attackLevel == CharacterLevelType.Novice ? CharInfo.RapidAttack.DamageMultiplier.x : CharInfo.PowerfulAttac.DamageMultiplier.x)) * (iscritical ? 2 : 1), Elemental, iscritical);
             }
         }
     }
