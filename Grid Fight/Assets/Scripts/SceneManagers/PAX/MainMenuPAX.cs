@@ -42,14 +42,16 @@ public class MainMenuPAX : MonoBehaviour
             {
                 case InputDirection.Up:
                     selectedButton--;
+                    TimeOffset = Time.time;
                     break;
                 case InputDirection.Down:
                     selectedButton++;
+                    TimeOffset = Time.time;
                     break;
             }
             selectedButton = selectedButton >= Buttons.Count ? 0 : selectedButton < 0 ? Buttons.Count - 1 : selectedButton;
             SelectButton();
-            TimeOffset = Time.time;
+            
         }
 
         
@@ -59,6 +61,7 @@ public class MainMenuPAX : MonoBehaviour
     private void SelectButton()
     {
         UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(Buttons[selectedButton].gameObject);
+        Debug.Log(Buttons[selectedButton].name);
         Buttons[selectedButton].Select();
     }
 
