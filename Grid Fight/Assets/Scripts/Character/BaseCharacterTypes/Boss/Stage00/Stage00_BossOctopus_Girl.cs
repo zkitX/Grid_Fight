@@ -42,7 +42,7 @@ public class Stage00_BossOctopus_Girl : MinionType_Script
     {
         if(SpineAnim.CurrentAnim != CharacterAnimationStateType.Death)
         {
-            CameraManagerScript.Instance.CameraShake();
+            CameraManagerScript.Instance.CameraShake(1);
             BattleManagerScript.Instance.CurrentBattleState = BattleState.Event;
             ParticleManagerScript.Instance.AttackParticlesFired.ForEach(r => r.PS.SetActive(false));
             ParticleManagerScript.Instance.ParticlesFired.ForEach(r => r.PS.SetActive(false));
@@ -81,4 +81,18 @@ public class Stage00_BossOctopus_Girl : MinionType_Script
             yield return null;
         }
     }
+
+    public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
+    {
+        switch (animState)
+        {
+            case (CharacterAnimationStateType.Idle):
+                transition = 4f;
+                break;
+            default:
+                break;
+        }
+        base.SetAnimation(animState, loop, transition);
+    }
+
 }

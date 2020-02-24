@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2538447970716225978}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.88, y: -4.14, z: 0}
+  m_LocalPosition: {x: -3.16, y: -0.86, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3259228387804682060}
@@ -346,12 +346,15 @@ MonoBehaviour:
   Elemental: 0
   ClassType: 3
   CharacterLevel: 0
+  UseLayeringSystem: 1
   CharacterSelection: 0
   RapidAttack:
-    DamageMultiplier: 1
+    DamageMultiplier: {x: 1, y: 1}
+    CriticalChance: {x: 2, y: 2}
     Stamina_Cost_Atk: 0
   PowerfulAttac:
-    DamageMultiplier: 3
+    DamageMultiplier: {x: 3, y: 3}
+    CriticalChance: {x: 3, y: 5}
     Stamina_Cost_Atk: 0
   HealthStats:
     Health: 30

@@ -350,6 +350,7 @@ public enum CharacterAnimationStateType
     Death_Prep,
     Death_Loop,
     Death_Exit,
+    Death_Born
 }
 
 public enum PortalType
@@ -641,4 +642,12 @@ public enum InputControllerType
 {
     SelectionOnABXY,
     SelectionOnLR
+}
+
+public enum DeathProcessStage
+{
+    None,
+    Start,
+    LoopDying,
+    End
 }

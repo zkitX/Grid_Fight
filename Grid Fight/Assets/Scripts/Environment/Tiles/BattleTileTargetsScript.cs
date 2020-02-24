@@ -81,6 +81,7 @@ public class BattleTileTargetsScript : MonoBehaviour
         if (effectOn)
         {
             //animToFire["ExclamationAnim"].speed = 1;
+            attacker.SpecialAttackImpactEffects();
             GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(atkPS, AttackParticlePhaseTypes.EffectRight, transform.position, attacker.UMS.Side);
             LayerParticleSelection lps = effect.GetComponent<LayerParticleSelection>();
             if (lps != null)

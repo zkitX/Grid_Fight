@@ -104,12 +104,19 @@ public class Stage00_BossOctopus_Head : MinionType_Script
     public override void SetCharDead()
     {
         if (disabled) return;
-        CameraManagerScript.Instance.CameraShake();
+        CameraManagerScript.Instance.CameraShake(2);
         Debug.Log("Head Disabled");
         disabled = true;
         CanGetDamage = false;
+        InteruptAttack();
         SetAnimation(CharacterAnimationStateType.Idle_Disable_Loop, true);
         bossParent.SetCharDead();
+    }
+
+    void InteruptAttack()
+    {
+        shotsLeftInAttack = 0;
+        currentAttackPhase = AttackPhasesType.End;
     }
 
     private IEnumerator DeathStasy()

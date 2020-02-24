@@ -309,7 +309,8 @@
 ],
 "events": {
 	"FireBulletParticle": {},
-	"FireCastParticle": {}
+	"FireCastParticle": {},
+	"FireTileAttack": {}
 },
 "animations": {
 	"Arriving": {
@@ -1595,7 +1596,7 @@
 			}
 		}
 	},
-	"Atk_AtkToIdle": {
+	"Atk1_AtkToIdle": {
 		"bones": {
 			"Goddess_Main_Controler": {
 				"rotate": [
@@ -1870,7 +1871,7 @@
 			}
 		}
 	},
-	"Atk_Charging": {
+	"Atk1_Charging": {
 		"bones": {
 			"Goddess_BigHair_6": {
 				"rotate": [
@@ -2216,7 +2217,7 @@
 			}
 		}
 	},
-	"Atk_IdleToAtk": {
+	"Atk1_IdleToAtk": {
 		"bones": {
 			"Goddess_Main_Controler": {
 				"rotate": [
@@ -2496,10 +2497,10 @@
 			}
 		},
 		"events": [
-			{ "time": 0.4667, "name": "FireBulletParticle" }
+			{ "time": 0.4667, "name": "FireTileAttack" }
 		]
 	},
-	"Atk_Loop": {
+	"Atk1_Loop": {
 		"bones": {
 			"Goddess_Main_Controler": {
 				"rotate": [

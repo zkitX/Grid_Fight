@@ -106,6 +106,26 @@ public class SpineAnimationManager : MonoBehaviour
             return;
         }
 
+        //DEATH
+        if (CurrentAnim == CharacterAnimationStateType.Death_Prep && completedAnim == CharacterAnimationStateType.Death_Prep)
+        {
+            CharOwner.currentDeathProcessPhase = DeathProcessStage.LoopDying;
+            return;
+        }
+        if (CurrentAnim == CharacterAnimationStateType.Death_Exit && completedAnim == CharacterAnimationStateType.Death_Exit)
+        {
+            CharOwner.currentDeathProcessPhase = DeathProcessStage.None;
+            CharOwner.gameObject.SetActive(false);
+            return;
+        }
+        /*if (CurrentAnim == CharacterAnimationStateType.Death_Loop && 
+            completedAnim == CharacterAnimationStateType.Death_Loop && 
+            CharOwner.currentDeathProcessPhase == DeathProcessStage.End)
+        {
+            SetAnim(CharacterAnimationStateType.Death_Loop, true, 0);
+            return;
+        }*/
+        //END DEATH
 
         //Switch between character and minion unique attacking animation sequences
         if (CharOwner.UMS.CurrentAttackType == AttackType.Particles)
@@ -165,7 +185,6 @@ public class SpineAnimationManager : MonoBehaviour
                 {
                     SetAnim(CharacterAnimationStateType.Atk1_AtkToIdle);
                     CharOwner.currentAttackPhase = AttackPhasesType.End;
-                  
                 }
                 return;
             }

@@ -9,6 +9,7 @@ public class Stage00_BossOctopus : MinionType_Script
     private List<MinionType_Script> Pieces = new List<MinionType_Script>();
     public bool IsCharArrived = false;
     public bool DialogueComplete = false;
+    
 
     private List<CharacterNameType> piecesType = new List<CharacterNameType>()
     {
@@ -124,15 +125,35 @@ public class Stage00_BossOctopus : MinionType_Script
         {
             return;
         }
-        CameraManagerScript.Instance.CameraShake();
+        CameraManagerScript.Instance.CameraShake(3);
         StopCoroutine(attackCoroutine);
+        StartCoroutine(PhaseOneEnd());
         Debug.Log("Octobos fully disabled");
     }
 
     private IEnumerator PhaseOneEnd()
     {
         float timer = 0;
+        Stage00_BossOctopus_Tentacles tentacles = (Stage00_BossOctopus_Tentacles)GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles);
+        foreach(MinionType_Script character in Pieces)
+        {
+        currentDeathProcessPhase = DeathProcessStage.Start;
+        }
         SetAnimation(CharacterAnimationStateType.Death_Prep);
+        while(tentacles.currentDeathProcessPhase == DeathProcessStage.Start)
+        {
+            yield return null;
+        }
+        GetPiece(CharacterNameType.Stage00_BossOctopus_Head).SetAnimation(CharacterAnimationStateType.Death_Loop, true);
+        GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles).SetAnimation(CharacterAnimationStateType.Death_Loop, true);
+        yield return BirthOctopusGirl();
+        yield return new WaitForSeconds(1f);
+        foreach (MinionType_Script character in Pieces)
+        {
+            currentDeathProcessPhase = DeathProcessStage.End;
+        }
+        GetPiece(CharacterNameType.Stage00_BossOctopus_Head).SetAnimation(CharacterAnimationStateType.Death_Exit);
+        GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles).SetAnimation(CharacterAnimationStateType.Death_Exit);
         yield return null;
 
         /*Stage04_BossMonster_Script mask = (Stage04_BossMonster_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass((CharacterNameType.Stage04_BossMonster).ToString(), CharacterSelectionType.Up,
@@ -160,7 +181,7 @@ public class Stage00_BossOctopus : MinionType_Script
     IEnumerator BirthOctopusGirl()
     {
         //The code for the moving into position of and the creation of the octopus girl
-
+        ((Stage00_BossOctopus_Girl)GetPiece(CharacterNameType.Stage00_BossOctopus_Girl)).SetAnimation(CharacterAnimationStateType.Death_Born);
         yield return ((Stage00_BossOctopus_Girl)GetPiece(CharacterNameType.Stage00_BossOctopus_Girl)).CenterCharacterToTile(5f);
     }
 

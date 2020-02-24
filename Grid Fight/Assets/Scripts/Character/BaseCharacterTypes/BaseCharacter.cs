@@ -49,6 +49,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public BoxCollider CharBoxCollider;
     public ScriptableObjectAttackBase nextAttack = null;
     public AttackPhasesType currentAttackPhase = AttackPhasesType.End;
+    public DeathProcessStage currentDeathProcessPhase = DeathProcessStage.None;
     protected IEnumerator attackCoroutine = null;
     public SpecialAttackStatus StopPowerfulAtk;
     private float DefendingHoldingTimer = 0;
@@ -214,6 +215,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     #endregion
     #region Attack
 
+    public virtual void SpecialAttackImpactEffects()
+    {
+
+    }
 
     public void StartAttakCo()
     {
@@ -920,7 +925,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public void ArrivingEvent()
     {
-        CameraManagerScript.Instance.CameraShake();
+        CameraManagerScript.Instance.CameraShake(1);
         UMS.ArrivingParticle.transform.position = transform.position;
         UMS.ArrivingParticle.SetActive(true);
     }

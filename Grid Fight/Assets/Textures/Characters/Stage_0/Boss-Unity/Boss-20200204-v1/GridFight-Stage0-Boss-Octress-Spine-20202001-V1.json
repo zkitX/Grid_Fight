@@ -378,7 +378,8 @@
 ],
 "events": {
 	"FireBulletParticle": {},
-	"FireCastParticle": {}
+	"FireCastParticle": {},
+	"FireTileAttack": {}
 },
 "animations": {
 	"Arriving": {
@@ -2270,7 +2271,7 @@
 			}
 		}
 	},
-	"Atk_AtktoIdle": {
+	"Atk1_AtkToIdle": {
 		"bones": {
 			"Octopus_Belt_Controler": {
 				"rotate": [
@@ -2524,7 +2525,7 @@
 			}
 		}
 	},
-	"Atk_Charging": {
+	"Atk1_Charging": {
 		"bones": {
 			"Octopus_LeftArrow": {
 				"rotate": [
@@ -2779,7 +2780,7 @@
 			}
 		}
 	},
-	"Atk_IdleToAtk": {
+	"Atk1_IdleToAtk": {
 		"bones": {
 			"Octopus_Belt_Controler": {
 				"rotate": [
@@ -3001,10 +3002,10 @@
 			}
 		},
 		"events": [
-			{ "time": 0.7833, "name": "FireBulletParticle" }
+			{ "time": 0.7833, "name": "FireTileAttack" }
 		]
 	},
-	"Atk_Loop": {
+	"Atk1_Loop": {
 		"bones": {
 			"Octopus_Main_Controler": {
 				"rotate": [

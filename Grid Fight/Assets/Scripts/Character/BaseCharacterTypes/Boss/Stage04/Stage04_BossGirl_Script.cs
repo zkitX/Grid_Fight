@@ -141,7 +141,7 @@ public class Stage04_BossGirl_Script : MinionType_Script
     {
         if(SpineAnim.CurrentAnim != CharacterAnimationStateType.Death)
         {
-            CameraManagerScript.Instance.CameraShake();
+            CameraManagerScript.Instance.CameraShake(1);
             BattleManagerScript.Instance.CurrentBattleState = BattleState.Event;
             ParticleManagerScript.Instance.AttackParticlesFired.ForEach(r => r.PS.SetActive(false));
             ParticleManagerScript.Instance.ParticlesFired.ForEach(r => r.PS.SetActive(false));
