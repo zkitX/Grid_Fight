@@ -22,8 +22,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: AuraMaterial-Blue
   m_Shader: {fileID: 4800000, guid: a36b7719ff0465b42ab1407d67672c5f, type: 3}
-  m_ShaderKeywords: BLURISHD_ON DISTORT_ON ETC1_EXTERNAL_ALPHA GLOW_ON ROUNDWAVEUV_ON
-    WAVEUV_ON ZOOMUV_ON _BLURHD_ON
+  m_ShaderKeywords: BLURISHD_ON BLUR_ON DISTORT_ON ETC1_EXTERNAL_ALPHA GLOW_ON OUTDIST_ON
+    ROUNDWAVEUV_ON WAVEUV_ON ZOOMUV_ON _BLURHD_ON _OUTLINEDISTORTTOGGLE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -50,8 +50,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DistortTex:
-        m_Texture: {fileID: 2800000, guid: 677cca399782dea41aedc1d292ecb67d, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 806e236bc12668e4da974bb8f536d28f, type: 3}
+        m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
@@ -70,7 +70,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 16312690028f77e479145b917f9b3035, type: 3}
+        m_Texture: {fileID: 2800000, guid: 75bd3a872d816c94c9add714352dcfbe, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -82,8 +82,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OutlineDistortTex:
-        m_Texture: {fileID: 2800000, guid: 7aad8c583ef292e48b06af0d1f2fab97, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 806e236bc12668e4da974bb8f536d28f, type: 3}
+        m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _OutlineTex:
         m_Texture: {fileID: 2800000, guid: 74087f6d03f233e4a8a142fa01f9e5cf, type: 3}
@@ -99,12 +99,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_E2931810: 0.03
-    - _Alpha: 1
+    - _Alpha: 0.295
     - _AlphaClip: 0
     - _AlphaCutoffValue: 0.25
     - _Blend: 0
     - _BlurHD: 1
-    - _BlurIntensity: 10
+    - _BlurIntensity: 12.5
     - _BumpScale: 1
     - _ChromAberrAlpha: 0.4
     - _ChromAberrAmount: 1
@@ -121,9 +121,9 @@ Material:
     - _ColorSwapRedLuminosity: 0.5
     - _Cull: 2
     - _Cutoff: 0.5
-    - _DistortAmount: 0.424
-    - _DistortTexXSpeed: 9.4
-    - _DistortTexYSpeed: -6.6
+    - _DistortAmount: 0.63
+    - _DistortTexXSpeed: 13.2
+    - _DistortTexYSpeed: -18.3
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _FadeAmount: -0.1
@@ -162,7 +162,7 @@ Material:
     - _HologramStripesSpeed: 5
     - _HsvBright: 1
     - _HsvSaturation: 1
-    - _HsvShift: 180
+    - _HsvShift: 107
     - _InnerOutlineAlpha: 1
     - _InnerOutlineGlow: 30.9
     - _InnerOutlineThickness: 1.59
@@ -180,17 +180,17 @@ Material:
     - _Outline8Directions: 0
     - _OutlineAlpha: 1
     - _OutlineDistortAmount: 0.5
-    - _OutlineDistortTexXSpeed: 5
-    - _OutlineDistortTexYSpeed: 5
-    - _OutlineDistortToggle: 0
-    - _OutlineGlow: 1.5
+    - _OutlineDistortTexXSpeed: 3.1
+    - _OutlineDistortTexYSpeed: -50
+    - _OutlineDistortToggle: 1
+    - _OutlineGlow: 1
     - _OutlineIsPixel: 0
     - _OutlinePixelWidth: 1
     - _OutlineTexGrey: 0
     - _OutlineTexToggle: 0
     - _OutlineTexXSpeed: 10
     - _OutlineTexYSpeed: 0
-    - _OutlineWidth: 0.0658
+    - _OutlineWidth: 0.06
     - _PinchUvAmount: 0.1666
     - _PixelateSize: 32
     - _PosterizeGamma: 0.75
@@ -230,7 +230,7 @@ Material:
     m_Colors:
     - Color_DE6FEDE1: {r: 0.8541589, g: 1, b: 0.2169811, a: 1}
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _Color: {r: 0.4339623, g: 0.61820203, b: 1, a: 1}
+    - _Color: {r: 0.8349056, g: 0.962938, b: 1, a: 1}
     - _ColorChangeNewCol: {r: 1, g: 1, b: 0, a: 1}
     - _ColorChangeTarget: {r: 1, g: 0, b: 0, a: 1}
     - _ColorSwapBlue: {r: 1, g: 1, b: 1, a: 1}
@@ -238,7 +238,7 @@ Material:
     - _ColorSwapRed: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FadeBurnColor: {r: 1, g: 1, b: 0, a: 1}
-    - _GlowColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0.11792451, g: 0.7146228, b: 1, a: 1}
     - _GradBotLeftCol: {r: 0, g: 0, b: 1, a: 1}
     - _GradBotRightCol: {r: 0, g: 0, b: 1, a: 1}
     - _GradTopLeftCol: {r: 1, g: 0, b: 0, a: 1}
@@ -246,6 +246,6 @@ Material:
     - _GreyscaleTintColor: {r: 1, g: 1, b: 1, a: 1}
     - _HitEffectColor: {r: 1, g: 1, b: 1, a: 1}
     - _InnerOutlineColor: {r: 1, g: 0.7075472, b: 0.7075472, a: 1}
-    - _OutlineColor: {r: 1, g: 0.92174745, b: 0, a: 1}
+    - _OutlineColor: {r: 0, g: 0.5888767, b: 1, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
