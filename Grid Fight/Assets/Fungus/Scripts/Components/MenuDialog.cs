@@ -20,7 +20,6 @@ namespace Fungus
         [SerializeField] protected bool autoSelectFirstButton = false;
 
         protected Button[] cachedButtons;
-        protected List<FungusMenuOptionBoxScript> Boxes = new List<FungusMenuOptionBoxScript>();
         protected Slider cachedSlider;
         protected int nextOptionIndex;
 
@@ -292,7 +291,7 @@ namespace Fungus
         /// <param name="interactable">If false, the option is displayed but is not selectable.</param>
         /// <param name="hideOption">If true, the option is not displayed but the menu knows that option can or did exist</param>
         /// <param name="action">Action attached to the button on the menu item</param>
-       /* private bool AddOption(string text, bool interactable, bool hideOption, UnityEngine.Events.UnityAction action)
+        protected virtual bool AddOption(string text, bool interactable, bool hideOption, UnityEngine.Events.UnityAction action)
         {
             if (nextOptionIndex >= CachedButtons.Length)
                 return false;
@@ -329,48 +328,10 @@ namespace Fungus
             button.onClick.AddListener(action);
             
             return true;
-        }*/
-
-
-        private bool AddOption(string text, bool interactable, bool hideOption, UnityEngine.Events.UnityAction action)
-        {
-            if (nextOptionIndex >= Boxes.Count)
-                return false;
-
-            //if first option notify that a menu has started
-            if (nextOptionIndex == 0)
-                MenuSignals.DoMenuStart(this);
-
-            var button = Boxes[nextOptionIndex];
-
-            //move forward for next call
-            nextOptionIndex++;
-
-            //don't need to set anything on it
-            if (hideOption)
-                return true;
-
-            button.gameObject.SetActive(true);
-
-            TextAdapter textAdapter = new TextAdapter();
-            textAdapter.InitFromGameObject(button.gameObject, true);
-            if (textAdapter.HasTextObject())
-            {
-                text = TextVariationHandler.SelectVariations(text);
-
-                textAdapter.Text = text;
-            }
-
-            return true;
         }
 
 
-
-
-
-
-
-
+        
 
         /// <summary>
         /// Show a timer during which the player can select an option. Calls a Block when the timer expires.

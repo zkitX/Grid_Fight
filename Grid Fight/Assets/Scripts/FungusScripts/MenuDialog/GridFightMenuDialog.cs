@@ -11,6 +11,7 @@ public class GridFightMenuDialog : MenuDialog
     private int SelectionIndex;
     public float TimeOffset = 0;
     public float CoolDown = 0.5f;
+    protected List<FungusMenuOptionBoxScript> Boxes = new List<FungusMenuOptionBoxScript>();
 
     protected int Options = 0;
 
@@ -50,6 +51,47 @@ public class GridFightMenuDialog : MenuDialog
         }
 
     }
+
+    protected override bool AddOption(string text, bool interactable, bool hideOption, UnityEngine.Events.UnityAction action)
+    {
+        if (nextOptionIndex >= Boxes.Count)
+            return false;
+        BattleManagerScript.Instance.FungusState = FungusDialogType.Menu;
+        //if first option notify that a menu has started
+        if (nextOptionIndex == 0)
+            MenuSignals.DoMenuStart(this);
+
+        var box = Boxes[nextOptionIndex];
+
+        //move forward for next call
+        nextOptionIndex++;
+
+        //don't need to set anything on it
+        if (hideOption)
+            return true;
+
+        box.gameObject.SetActive(true);
+
+
+        var a = action.Target;
+
+        if (!string.IsNullOrEmpty(text))
+        {
+            box.NextBlock = (Block)action.Target.GetType().GetField("block").GetValue(action.Target);
+        }
+        
+        TextAdapter textAdapter = new TextAdapter();
+        textAdapter.InitFromGameObject(box.gameObject, true);
+        if (textAdapter.HasTextObject())
+        {
+            text = TextVariationHandler.SelectVariations(text);
+
+            textAdapter.Text = text;
+        }
+
+        return true;
+    }
+
 
     public override int DisplayedOptionsCount
     {
@@ -130,5 +172,9 @@ public class GridFightMenuDialog : MenuDialog
 
     private void Instance_ButtonADownEvent(int player)
     {
+        if(BattleManagerScript.Instance.FungusState == FungusDialogType.Menu)
+        {
+            StartCoroutine(CallBlock(Boxes[SelectionIndex].NextBlock));
+        }
     }
 }

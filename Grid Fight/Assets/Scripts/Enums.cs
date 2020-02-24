@@ -15,6 +15,13 @@ public enum BattleTileStateType
     Occupied
 }
 
+public enum FungusDialogType
+{
+    Nonee,
+    Dialog,
+    Menu
+}
+
 public enum VibrationType
 {
     a,

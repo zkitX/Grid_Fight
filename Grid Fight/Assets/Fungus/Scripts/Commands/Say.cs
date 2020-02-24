@@ -108,7 +108,7 @@ namespace Fungus
             sayDialog.SetActive(true);
 
             sayDialog.SetCharacter(character);
-            sayDialog.SetCharacterImage(portrait);
+            sayDialog.SetCharacterImage(character.Portraits[0]); 
 
             string displayText = storyText;
 
@@ -127,7 +127,7 @@ namespace Fungus
 
             sayDialog.Say(subbedText, !extendPrevious, waitForClick, fadeWhenDone, stopVoiceover, waitForVO, voiceOverClip, delegate {
                 Continue();
-            });
+            }, character);
         }
 
         public override string GetSummary()

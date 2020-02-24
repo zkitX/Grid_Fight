@@ -33,6 +33,7 @@ public class BattleManagerScript : MonoBehaviour
 
     public static BattleManagerScript Instance;
     public BattleState _CurrentBattleState;
+    public FungusDialogType FungusState;
     public List<BattleTileScript> OccupiedBattleTiles = new List<BattleTileScript>();
     public GameObject CharacterBasePrefab;
     public Dictionary<ControllerType, CurrentSelectedCharacterClass> CurrentSelectedCharacters = new Dictionary<ControllerType, CurrentSelectedCharacterClass>()
