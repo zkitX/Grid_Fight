@@ -209,10 +209,10 @@ public class BulletScript : MonoBehaviour
             }
             else
             {
-                Vector3 dest = new Vector3(bet[i].y * GridManagerScript.Instance.GetWorldDistanceBetweenTiles() * (-1),
+               /* Vector3 dest = new Vector3(bet[i].y * GridManagerScript.Instance.GetWorldDistanceBetweenTiles() * (-1),
                     bet[i].x * GridManagerScript.Instance.GetWorldDistanceBetweenTiles() * (-1), 0);
                 FireEffectParticles(GridManagerScript.Instance.GetBattleTile(basePos).transform.position
-                    + dest, i == bet.Count - 1 ? true : false);
+                    + dest, i == bet.Count - 1 ? true : false);*/
             }
         }
     }
