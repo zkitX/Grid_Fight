@@ -225,7 +225,7 @@ public class CharacterInfoScript : MonoBehaviour
                 HealthStats.Health = HealthStats.Health <= 0 ? 0 : HealthStats.Health;
                 if (DeathEvent != null)
                 {
-                    DeathEvent();
+                    Invoke("SetCharDeath", 0.2f);
                 }
             }
             if(HealthStats.Health > HealthStats.Base)
@@ -233,6 +233,11 @@ public class CharacterInfoScript : MonoBehaviour
                 Health = HealthStats.Base;
             }
         }
+    }
+
+    private void SetCharDeath()
+    {
+        DeathEvent();
     }
 
     public float Stamina

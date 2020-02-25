@@ -72,7 +72,7 @@ public class Stage00_BossOctopus_Tentacles : MinionType_Script
 
     public override void SpecialAttackImpactEffects()
     {
-        CameraManagerScript.Instance.CameraShake(CameraShakeType.Powerfulattack);
+        CameraManagerScript.Instance.CameraShake(CameraShakeType.Octopus_Tentacle);
     }
 
     private IEnumerator DeathStasy()

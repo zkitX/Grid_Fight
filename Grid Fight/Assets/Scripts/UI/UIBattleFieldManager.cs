@@ -119,10 +119,7 @@ public class UIBattleFieldManager : MonoBehaviour
         }
         d.SetActive(true);
         d.GetComponentInChildren<TextMeshProUGUI>().text = ((int)(damage * 100)).ToString();
-        if(!charOwner.gameObject.activeInHierarchy)
-        {
-            d.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
-        }
+        d.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
         while (timer <= 0.8f)
         {
             if (charOwner.gameObject.activeInHierarchy && isAlive)

@@ -28,7 +28,8 @@ public enum CameraShakeType
     Arrival,
     GettingHit,
     Powerfulattack,
-    PowerfulAttackHit
+    PowerfulAttackHit,
+    Octopus_Tentacle
 }
 
 public enum VibrationType
