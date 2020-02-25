@@ -37,6 +37,7 @@ public class NewIManager : MonoBehaviour
     IEnumerator UpdateTimerText()
     {
         while (WaveManagerScript.Instance == null) yield return null;
+        while (WaveManagerScript.Instance.battleTime.counting == false) yield return null;
         GameTime time;
         while (WaveManagerScript.Instance.battleTime.counting)
         {

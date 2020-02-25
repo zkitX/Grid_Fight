@@ -17,8 +17,7 @@ public class CallStartBattleTimer : Command
 
     public override void OnEnter()
     {
-        if(timerState) StartCoroutine(WaveManagerScript.Instance.battleTime.standardReverseTicker);
-        else StopCoroutine(WaveManagerScript.Instance.battleTime.standardReverseTicker);
+        WaveManagerScript.Instance.ToggleBattleTimer(timerState);
         Continue();
     }
 

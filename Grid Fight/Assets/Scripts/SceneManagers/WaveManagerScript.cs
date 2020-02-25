@@ -34,6 +34,12 @@ public class WaveManagerScript : MonoBehaviour
         Instance = this;
     }
 
+    public void ToggleBattleTimer(bool timerState)
+    {
+        if (timerState) StartCoroutine(battleTime.standardReverseTicker);
+        else StopCoroutine(Instance.battleTime.standardReverseTicker);
+    }
+
     public IEnumerator WaveCharCreator()
     {
         foreach (WavePhaseClass wavePhase in WavePhases)

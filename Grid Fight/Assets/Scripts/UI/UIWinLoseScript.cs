@@ -49,7 +49,7 @@ public class UIWinLoseScript : MonoBehaviour
     {
         if (selectedBtn)
         {
-            SceneManager.LoadScene("SplashScreenDemo");
+            SceneManager.LoadScene("PaxMainMenu");
         }
         else
         {
