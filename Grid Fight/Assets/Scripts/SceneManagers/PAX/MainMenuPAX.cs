@@ -10,20 +10,20 @@ public class MainMenuPAX : MonoBehaviour
     public bool isloading = false;
     public bool ShowScene = false;
     public GameObject rewired;
-    public List<Button> Buttons = new List<Button>();
+    public List<Animator> Buttons = new List<Animator>();
 
-    public Image BlackFadeIn;
-
+    private Animator currentSelected;
     public float TimeOffset = 0;
     public float CoolDown = 0.5f;
     private int selectedButton = 0;
+
+    public Animator BlackCoverAnim;
 
     public float TimeToWaitBeforeInputEnabled = 2;
     // Start is called before the first frame update
     void Start()
     {
         Invoke("StartInput", TimeToWaitBeforeInputEnabled);
-        
     }
 
 
@@ -41,31 +41,35 @@ public class MainMenuPAX : MonoBehaviour
             Debug.Log(dir.ToString());
             switch (dir)
             {
-                case InputDirection.Left:
+                case InputDirection.Up:
                     selectedButton--;
                     TimeOffset = Time.time;
                     break;
-                case InputDirection.Right:
+                case InputDirection.Down:
                     selectedButton++;
                     TimeOffset = Time.time;
                     break;
             }
             selectedButton = selectedButton >= Buttons.Count ? Buttons.Count - 1 : selectedButton < 0 ? 0 : selectedButton;
+            SelectButton();
         }
     }
 
 
     private void SelectButton()
     {
-        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(Buttons[selectedButton].gameObject);
-        Debug.Log(Buttons[selectedButton].name);
-        Buttons[selectedButton].Select();
+        if(currentSelected != null)
+        {
+            currentSelected.SetBool("Active", false);
+        }
+        currentSelected = Buttons[selectedButton];
+        currentSelected.SetBool("Active", true);
     }
 
 
     private void Instance_ButtonADownEvent(int player)
     {
-        Buttons[selectedButton].onClick.Invoke();
+        GoToBattleScene(selectedButton == 0 ? "BattleScene-00-PAX" : selectedButton == 1 ? "BattleScene-04-PAX" : "SpeedRun-00-PAX");
     }
 
 
@@ -83,7 +87,7 @@ public class MainMenuPAX : MonoBehaviour
         // This is particularly good for creating loading screens.
         // You could also load the Scene by using sceneBuildIndex. In this case Scene2 has
         // a sceneBuildIndex of 1 as shown in Build Settings.
-        BlackFadeIn.gameObject.SetActive(true);
+        BlackCoverAnim.SetBool("InOut", false);
         Invoke("ShowBattleScene", 1);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         asyncLoad.allowSceneActivation = false;
