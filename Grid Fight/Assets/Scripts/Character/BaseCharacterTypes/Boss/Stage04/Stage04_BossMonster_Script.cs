@@ -188,7 +188,7 @@ public class Stage04_BossMonster_Script : MinionType_Script
 
     public override void SetCharDead()
     {
-        CameraManagerScript.Instance.CameraShake(1);
+        CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);
         UIBattleManager.Instance.Win.gameObject.SetActive(true);
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         base.SetCharDead();

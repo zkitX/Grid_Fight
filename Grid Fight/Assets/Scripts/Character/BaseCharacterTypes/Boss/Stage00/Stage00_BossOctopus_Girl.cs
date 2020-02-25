@@ -59,7 +59,7 @@ public class Stage00_BossOctopus_Girl : MinionType_Script
     {
         if(SpineAnim.CurrentAnim != CharacterAnimationStateType.Death)
         {
-            CameraManagerScript.Instance.CameraShake(1);
+            CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);
             BattleManagerScript.Instance.CurrentBattleState = BattleState.Event;
             ParticleManagerScript.Instance.AttackParticlesFired.ForEach(r => r.PS.SetActive(false));
             ParticleManagerScript.Instance.ParticlesFired.ForEach(r => r.PS.SetActive(false));

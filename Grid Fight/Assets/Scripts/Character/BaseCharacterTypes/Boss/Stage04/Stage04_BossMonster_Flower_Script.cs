@@ -90,7 +90,7 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
     {
         if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Death)
         {
-            CameraManagerScript.Instance.CameraShake(1);
+            CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);
             SetAttackReady(false);
             Call_CurrentCharIsDeadEvent();
             StartCoroutine(DeathStasy());

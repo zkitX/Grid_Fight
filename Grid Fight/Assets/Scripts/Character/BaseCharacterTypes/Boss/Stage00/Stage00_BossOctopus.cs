@@ -117,7 +117,7 @@ public class Stage00_BossOctopus : MinionType_Script
     {
         foreach (MinionType_Script piece in Pieces)
         {
-            Debug.Log(piece.CharInfo.CharacterID.ToString());
+            //Debug.Log(piece.CharInfo.CharacterID.ToString());
             if (piece.CharInfo.CharacterID == pieceName) return piece;
         }
         Debug.Log("Piece requested '" + pieceName.ToString() + "' does not exist in boss");
@@ -131,7 +131,7 @@ public class Stage00_BossOctopus : MinionType_Script
         {
             return;
         }
-        CameraManagerScript.Instance.CameraShake(3);
+        CameraManagerScript.Instance.CameraShake(CameraShakeType.GettingHit);
         StopCoroutine(attackCoroutine);
         StartCoroutine(PhaseOneEnd());
         Debug.Log("Octobos fully disabled");

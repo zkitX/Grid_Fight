@@ -388,7 +388,7 @@ MonoBehaviour:
   BaseCharacterType: 0
   CharacterID: 20
   CurrentParticlesAttackTypeInfo:
-  - {fileID: 11400000, guid: 73c66a9d114b7ea4a86c401084c4d62f, type: 2}
+  - {fileID: 11400000, guid: de8dcc1a1d34fe44e8b3056c024cf557, type: 2}
   - {fileID: 11400000, guid: 9be942b31bf45c44bbac2da96191fe86, type: 2}
   CurrentOnBattleFieldAttackTypeInfo:
   - {fileID: 11400000, guid: 16c71180a018bf044be5211ddac04e59, type: 2}
@@ -396,12 +396,15 @@ MonoBehaviour:
   Elemental: 2
   ClassType: 0
   CharacterLevel: 0
+  UseLayeringSystem: 1
   CharacterSelection: 0
   RapidAttack:
-    DamageMultiplier: 1
+    DamageMultiplier: {x: 1, y: 1}
+    CriticalChance: {x: 2, y: 2}
     Stamina_Cost_Atk: 1.2
   PowerfulAttac:
-    DamageMultiplier: 4
+    DamageMultiplier: {x: 3, y: 3}
+    CriticalChance: {x: 3, y: 5}
     Stamina_Cost_Atk: 6
   HealthStats:
     Health: 40

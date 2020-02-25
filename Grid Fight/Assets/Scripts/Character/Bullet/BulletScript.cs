@@ -95,8 +95,8 @@ public class BulletScript : MonoBehaviour
             if (timer > 1)
             {
                 isMoving = false;
-                StartCoroutine(ChildExplosion(BulletEffectTiles.Where(r=> r != Vector2Int.zero).ToList()));
-                FireEffectParticles(bts.transform.position, BulletEffectTiles.Count == 1 ? true : false);
+                //StartCoroutine(ChildExplosion(BulletEffectTiles.Where(r=> r != Vector2Int.zero).ToList()));
+                FireEffectParticles(bts.transform.position, true);//BulletEffectTiles.Count == 1 ? true : false
             }
         }
     }
@@ -181,15 +181,11 @@ public class BulletScript : MonoBehaviour
         }*/
     }
 
-    public IEnumerator ChildExplosion(List<Vector2Int> bet)
+    public IEnumerator ChildExplosion(List<Vector2Int> bet, Vector2Int basePos)
     {
         float timer = 0;
         BaseCharacter target;
-        if (!VFXTestMode)
-        {
-            target = BattleManagerScript.Instance.GetCharInPos(DestinationTile);
-            MakeDamage(target);
-        }
+       
         while (timer < ChildrenExplosionDelay)
         {
             timer += Time.fixedDeltaTime;
@@ -202,20 +198,20 @@ public class BulletScript : MonoBehaviour
        
         for (int i = 0; i < bet.Count; i++)
         {
-            if (GridManagerScript.Instance.isPosOnField(DestinationTile + bet[i]))
+            if (GridManagerScript.Instance.isPosOnField(basePos + bet[i]))
             {
                 if (!VFXTestMode)
                 {
-                    target = BattleManagerScript.Instance.GetCharInPos(DestinationTile + bet[i]);
+                    target = BattleManagerScript.Instance.GetCharInPos(basePos + bet[i]);
                     MakeDamage(target);
                 }
-                FireEffectParticles(GridManagerScript.Instance.GetBattleTile(DestinationTile + bet[i]).transform.position, i == bet.Count - 1 ? true : false);
+                FireEffectParticles(GridManagerScript.Instance.GetBattleTile(basePos + bet[i]).transform.position, i == bet.Count - 1 ? true : false);
             }
             else
             {
                 Vector3 dest = new Vector3(bet[i].y * GridManagerScript.Instance.GetWorldDistanceBetweenTiles() * (-1),
                     bet[i].x * GridManagerScript.Instance.GetWorldDistanceBetweenTiles() * (-1), 0);
-                FireEffectParticles(GridManagerScript.Instance.GetBattleTile(DestinationTile).transform.position
+                FireEffectParticles(GridManagerScript.Instance.GetBattleTile(basePos).transform.position
                     + dest, i == bet.Count - 1 ? true : false);
             }
         }
@@ -230,7 +226,13 @@ public class BulletScript : MonoBehaviour
             {
                 bool iscritical = CharInfo.IsCritical(attackLevel == CharacterLevelType.Novice ? true : false);
                 //Set damage to the hitting character
-                target.SetDamage((CharInfo.DamageStats.BaseDamage * (attackLevel == CharacterLevelType.Novice ? CharInfo.RapidAttack.DamageMultiplier.x : CharInfo.PowerfulAttac.DamageMultiplier.x)) * (iscritical ? 2 : 1), Elemental, iscritical);
+                if(attackLevel == CharacterLevelType.Novice)
+                {
+                    CameraManagerScript.Instance.CameraShake(CameraShakeType.PowerfulAttackHit);
+                }
+
+                target.SetDamage((CharInfo.DamageStats.BaseDamage * (attackLevel == CharacterLevelType.Novice ? CharInfo.RapidAttack.DamageMultiplier.x : CharInfo.PowerfulAttac.DamageMultiplier.x)) * (iscritical ? 2 : 1),
+                    Elemental, iscritical, CharInfo.ClassType == CharacterClassType.Desert && attackLevel == CharacterLevelType.Godness ? true : false);
             }
         }
     }
@@ -244,8 +246,8 @@ public class BulletScript : MonoBehaviour
             BaseCharacter target = other.GetComponentInParent<BaseCharacter>();
             MakeDamage(target);
             //fire the Effect
-            
-            FireEffectParticles(transform.position, CharInfo.ClassType == CharacterClassType.Desert ? false : true);
+            StartCoroutine(ChildExplosion(BulletEffectTiles.Where(r => r != Vector2Int.zero).ToList(), target.UMS.CurrentTilePos));
+            FireEffectParticles(transform.position, BulletEffectTiles.Count > 1 || (CharInfo.ClassType == CharacterClassType.Valley && attackLevel == CharacterLevelType.Godness)  ? false : true);
         }
     }
 

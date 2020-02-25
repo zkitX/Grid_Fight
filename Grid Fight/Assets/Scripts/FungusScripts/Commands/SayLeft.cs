@@ -16,4 +16,11 @@ public class SayLeft : Say
         setSayDialog = SayDialog.GetSayDialog("LeftDialog");
         base.OnEnter();
     }
+
+    public override void SayAndContinue(SayDialog sayDialog, string text)
+    {
+        sayDialog.Say(text, !extendPrevious, waitForClick, fadeWhenDone, stopVoiceover, waitForVO, voiceOverClip, delegate {
+            Continue();
+        }, character);
+    }
 }

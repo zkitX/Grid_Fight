@@ -231,12 +231,12 @@ public class SpineAnimationManager : MonoBehaviour
     public void SetAnim(CharacterAnimationStateType anim, bool loop, float transition)
     {
         SetupSpineAnim();
-        if(anim == CharacterAnimationStateType.Arriving)
+        if(anim == CharacterAnimationStateType.Atk1_IdleToAtk)
         {
             //Debug.Log("Arriving start");
         }
         Loop = loop;
-        Debug.Log(anim.ToString());
+        //Debug.Log(anim.ToString());
         SpineAnimationState.SetAnimation(1, anim.ToString(), loop).MixDuration = transition;
         if(transition > 0)
         {

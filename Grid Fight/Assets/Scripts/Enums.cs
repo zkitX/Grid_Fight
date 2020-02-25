@@ -22,6 +22,15 @@ public enum FungusDialogType
     Menu
 }
 
+public enum CameraShakeType
+{
+    None,
+    Arrival,
+    GettingHit,
+    Powerfulattack,
+    PowerfulAttackHit
+}
+
 public enum VibrationType
 {
     a,

@@ -25,12 +25,17 @@ public class GridFightSayDialog : SayDialog
 
         if(LastCharacter != null && LastCharacter.name != nextChar.name)
         {
-            SayDialogAnimatorController.SetBool("IsSelected", true);
+            //SayDialogAnimatorController.SetBool("InOut", false); 
+            //yield return 
         }
-        else
-        {
-            LastCharacter = nextChar;
-        }
+
+        SayDialogAnimatorController.SetBool("InOut", true);
+
+
+
+
+        SayDialogAnimatorController.SetBool("IsSelected", true);
+        LastCharacter = nextChar;
 
 
         BattleManagerScript.Instance.FungusState = FungusDialogType.Dialog;

@@ -125,9 +125,8 @@ namespace Fungus
 
             string subbedText = flowchart.SubstituteVariables(displayText);
 
-            sayDialog.Say(subbedText, !extendPrevious, waitForClick, fadeWhenDone, stopVoiceover, waitForVO, voiceOverClip, delegate {
-                Continue();
-            });
+
+            SayAndContinue(sayDialog, subbedText);
         }
 
         public virtual void SayAndContinue(SayDialog sayDialog, string text)

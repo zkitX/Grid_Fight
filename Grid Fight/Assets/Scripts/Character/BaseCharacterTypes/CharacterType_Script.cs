@@ -233,6 +233,7 @@ public class CharacterType_Script : BaseCharacter
     public void SpecialAttack(CharacterLevelType attackLevel)
     {
         NextAttackLevel = attackLevel;
+        CameraManagerScript.Instance.CameraShake(CameraShakeType.Powerfulattack);
         SetAnimation(CharacterAnimationStateType.Atk2_AtkToIdle);
         ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.CastActivation, transform.position, UMS.Side);
     }
@@ -289,6 +290,13 @@ public class CharacterType_Script : BaseCharacter
         }
 
         base.SetAnimation(animState, loop, transition);
+    }
+
+    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical)
+    {
+        CameraManagerScript.Instance.CameraShake(CameraShakeType.GettingHit);
+
+        return base.SetDamage(damage, elemental, isCritical);
     }
 
 }

@@ -38,23 +38,20 @@ public class MainMenuPAX : MonoBehaviour
     {
         if(Time.time > TimeOffset + CoolDown)
         {
+            Debug.Log(dir.ToString());
             switch (dir)
             {
-                case InputDirection.Up:
+                case InputDirection.Left:
                     selectedButton--;
                     TimeOffset = Time.time;
                     break;
-                case InputDirection.Down:
+                case InputDirection.Right:
                     selectedButton++;
                     TimeOffset = Time.time;
                     break;
             }
-            selectedButton = selectedButton >= Buttons.Count ? 0 : selectedButton < 0 ? Buttons.Count - 1 : selectedButton;
-            SelectButton();
-            
+            selectedButton = selectedButton >= Buttons.Count ? Buttons.Count - 1 : selectedButton < 0 ? 0 : selectedButton;
         }
-
-        
     }
 
 

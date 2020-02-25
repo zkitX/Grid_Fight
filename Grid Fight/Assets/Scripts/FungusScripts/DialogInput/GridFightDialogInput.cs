@@ -19,12 +19,12 @@ public class GridFightDialogInput : DialogInput
             yield return null;
         }
 
-        InputController.Instance.ButtonADownEvent += Instance_ButtonADownEvent;
+        InputController.Instance.ButtonAUpEvent += Instance_ButtonAUpEvent;
     }
 
-    private void Instance_ButtonADownEvent(int player)
+    private void Instance_ButtonAUpEvent(int player)
     {
-        if(BattleManagerScript.Instance.FungusState == FungusDialogType.Dialog)
+        if (BattleManagerScript.Instance.FungusState == FungusDialogType.Dialog)
         {
             SetNextLineFlag();
         }

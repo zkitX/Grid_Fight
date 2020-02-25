@@ -925,7 +925,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public void ArrivingEvent()
     {
-        CameraManagerScript.Instance.CameraShake(1);
+        CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);
         UMS.ArrivingParticle.transform.position = transform.position;
         UMS.ArrivingParticle.SetActive(true);
     }
@@ -996,6 +996,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     #endregion
 
+    public virtual bool SetDamage(float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
+    {
+        return true;
+    }
 
     public virtual bool SetDamage(float damage, ElementalType elemental, bool isCritical)
     {
@@ -1013,7 +1017,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 damage = 0;
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldTotalDefence);
                 go.transform.position = transform.position;
-                EventManager.Instance.AddBlock(this, BlockInfo.BlockType.full);
+                //TODO belt
+                //EventManager.Instance.AddBlock(this, BlockInfo.BlockType.full);
 
             }
             else
@@ -1021,7 +1026,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 damage = damage - CharInfo.DefenceStats.BaseDefence;
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldNormal);
                 go.transform.position = transform.position;
-                EventManager.Instance.AddBlock(this, BlockInfo.BlockType.partial);
+                //TODO belt
+                //EventManager.Instance.AddBlock(this, BlockInfo.BlockType.partial);
 
                 damage = damage < 0 ? 1 : damage;
             }

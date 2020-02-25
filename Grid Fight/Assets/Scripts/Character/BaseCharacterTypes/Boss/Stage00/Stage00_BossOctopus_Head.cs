@@ -105,7 +105,7 @@ public class Stage00_BossOctopus_Head : MinionType_Script
     public override void SetCharDead()
     {
         if (disabled) return;
-        CameraManagerScript.Instance.CameraShake(2);
+        CameraManagerScript.Instance.CameraShake(CameraShakeType.GettingHit);
         Debug.Log("Head Disabled");
         disabled = true;
         CanGetDamage = false;

@@ -38,7 +38,7 @@ public class MinionType_Script : BaseCharacter
 
     public override void SetCharDead()
     {
-        CameraManagerScript.Instance.CameraShake(1);
+        CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         StopAllCoroutines();
         base.SetCharDead();
@@ -151,6 +151,24 @@ public class MinionType_Script : BaseCharacter
 
             chargeParticles = null;
         }
+    }
+
+
+    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
+    {
+
+        if (isAttackBlocking)
+        {
+            int rand = UnityEngine.Random.Range(0, 100);
+
+            if (rand <= 200)
+            {
+                shotsLeftInAttack = 0;
+            }
+        }
+
+
+        return base.SetDamage(damage, elemental, isCritical);
     }
 
 

@@ -12,14 +12,14 @@ public class CameraManagerScript : MonoBehaviour
         Instance = this;
     }
 
-    public void CameraShake(int intensity)
+    public void CameraShake(CameraShakeType shakeType)
     {
-        StartCoroutine(CameraShakeCo(intensity));
+        StartCoroutine(CameraShakeCo(shakeType));
     }
 
-    public IEnumerator CameraShakeCo(int intensity)
+    public IEnumerator CameraShakeCo(CameraShakeType shakeType)
     {
-        Anim.SetInteger("Shake", intensity);
+        Anim.SetInteger("Shake", (int)shakeType);
         yield return null;
         //Anim.SetInteger("Shake", 0);
     }

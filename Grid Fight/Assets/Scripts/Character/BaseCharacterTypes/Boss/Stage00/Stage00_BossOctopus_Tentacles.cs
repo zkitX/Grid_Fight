@@ -55,7 +55,7 @@ public class Stage00_BossOctopus_Tentacles : MinionType_Script
     public override void SetCharDead()
     {
         if (disabled) return;
-        CameraManagerScript.Instance.CameraShake(2);
+        CameraManagerScript.Instance.CameraShake(CameraShakeType.GettingHit);
         Debug.Log("Tentacles Disabled");
         disabled = true;
         CanGetDamage = false;
@@ -72,7 +72,7 @@ public class Stage00_BossOctopus_Tentacles : MinionType_Script
 
     public override void SpecialAttackImpactEffects()
     {
-        CameraManagerScript.Instance.CameraShake(3);
+        CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);
     }
 
     private IEnumerator DeathStasy()
@@ -92,19 +92,22 @@ public class Stage00_BossOctopus_Tentacles : MinionType_Script
 
     public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
     {
+
+        Debug.Log(animState.ToString());
+        SpineAnim.AnimationTransition = 1;
         switch (animState)
         {
             case (CharacterAnimationStateType.Idle):
                 transition = 0.5f;
                 break;
             case (CharacterAnimationStateType.Atk1_IdleToAtk):
-                transition = 0.5f;
+                transition = 0.35f;
                 break;
             case (CharacterAnimationStateType.Idle_Disable_Loop):
-                transition = 1f;
+                transition = 4f;
                 break;
             case (CharacterAnimationStateType.Death_Prep):
-                transition = 1f;
+                transition = 4f;
                 break;
             case (CharacterAnimationStateType.Atk1_AtkToIdle):
                 transition = 0.5f;
