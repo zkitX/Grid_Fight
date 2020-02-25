@@ -155,7 +155,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 537fca46e269d71408453f7abb64499f, type: 2}
+  - {fileID: 2100000, guid: 6246d0e38e4b63e4dadd2983e4d8d563, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 27a49a6d44e0a264bbf344420748fbfc, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 613ea8af91df04844a92035c7d423cbc, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -324,6 +324,8 @@ MonoBehaviour:
   SpecialFiringPoint: {fileID: 2039596609466342844}
   CurrentAnim: 0
   AnimationTransition: 0.1
+  changeanim: 0
+  transition: 0.5
 --- !u!114 &7503454006303197653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,12 +351,15 @@ MonoBehaviour:
   Elemental: 0
   ClassType: 1
   CharacterLevel: 0
+  UseLayeringSystem: 1
   CharacterSelection: 0
   RapidAttack:
-    BaseDamage: 10
+    DamageMultiplier: {x: 1, y: 1}
+    CriticalChance: {x: 2, y: 2}
     Stamina_Cost_Atk: 0
   PowerfulAttac:
-    BaseDamage: 10
+    DamageMultiplier: {x: 3, y: 3}
+    CriticalChance: {x: 3, y: 5}
     Stamina_Cost_Atk: 0
   HealthStats:
     Health: 70
@@ -379,7 +384,7 @@ MonoBehaviour:
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
   DamageStats:
-    CurrentDamage: 10
+    BaseDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []
