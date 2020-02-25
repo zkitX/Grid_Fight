@@ -22,11 +22,16 @@ public class EventManager : MonoBehaviour
     protected List<CharacterNameType> arrivedThisFrame = new List<CharacterNameType>();
     [SerializeField] protected List<CharacterEventInfoClass> characterVitalities = new List<CharacterEventInfoClass>();
     protected List<CharacterEventInfoClass> healthChangedLastFrame = new List<CharacterEventInfoClass>();
+    protected List<CharacterEventInfoClass> staminaChangedLastFrame = new List<CharacterEventInfoClass>();
     [SerializeField] protected List<string> eventsCalled = new List<string>();
     protected List<string> eventDirectCallsLastFrame = new List<string>();
+    [SerializeField] protected List<string> eventsTriggered = new List<string>();
+    protected List<string> eventsTriggeredLastFrame = new List<string>();
     [SerializeField] protected List<CharacterEventInfoClass> charactersSwitched = new List<CharacterEventInfoClass>();
     protected List<CharacterNameType> charactersSwitchedLastFrame = new List<CharacterNameType>();
     protected List<InputButtonType> buttonsPressedLastFrame = new List<InputButtonType>();
+    [SerializeField] protected List<BlockInfo> blocks = new List<BlockInfo>();
+    protected List<BlockInfo> blocksLastFrame = new List<BlockInfo>();
 
     //[Tooltip("How many seconds between checks, increase for performance boost, decrease for accuracy")][SerializeField] protected float timeBetweenChecks = 1f;
 
@@ -352,6 +357,69 @@ public class EventManager : MonoBehaviour
     }
     #endregion
 
+    #region Character Stamina Management
+    public void UpdateStamina(BaseCharacter character)
+    {
+        foreach (CharacterEventInfoClass characterVitality in characterVitalities)
+        {
+            if (character == characterVitality.character)
+            {
+                characterVitality.staminaPercentage = character.CharInfo.StaminaPerc;
+                staminaChangedLastFrame.Add(characterVitality);
+                StartCoroutine(ResetCharacterStaminaChangesLastFrame(characterVitality));
+                return;
+            }
+        }
+        CharacterEventInfoClass charVitality = new CharacterEventInfoClass(character);
+        charVitality.staminaPercentage = character.CharInfo.StaminaPerc;
+        characterVitalities.Add(charVitality);
+        staminaChangedLastFrame.Add(charVitality);
+        StartCoroutine(ResetCharacterStaminaChangesLastFrame(charVitality));
+    }
+
+    IEnumerator ResetCharacterStaminaChangesLastFrame(CharacterEventInfoClass character)
+    {
+        yield return null;
+        staminaChangedLastFrame.Remove(character);
+    }
+
+    public float GetStaminaPercentage(CharacterNameType charID)
+    {
+        float _staminaPercentage = -10000f;
+        int numberOfMatchingVitalities = 0;
+        foreach (CharacterEventInfoClass characterVitality in characterVitalities)
+        {
+            if (charID == characterVitality.character.CharInfo.CharacterID)
+            {
+                numberOfMatchingVitalities++;
+                _staminaPercentage = characterVitality.staminaPercentage;
+            }
+        }
+        if (numberOfMatchingVitalities == 0)
+        {
+            Debug.Log("No matching vitalities on the board");
+            return 0;
+        }
+        else if (numberOfMatchingVitalities > 1)
+        {
+            Debug.Log("More than one vitality with a matching name, returning the last value");
+        }
+        return _staminaPercentage;
+    }
+
+    public bool GetStaminaUpdatedLastFrame(CharacterNameType charID)
+    {
+        foreach (CharacterEventInfoClass charStaminaUpdatedLastFrame in staminaChangedLastFrame)
+        {
+            if (charStaminaUpdatedLastFrame.character.CharInfo.CharacterID == charID)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    #endregion
+
     #region Call Management
     public void CallEventDirectly(string eventName)
     {
@@ -384,6 +452,43 @@ public class EventManager : MonoBehaviour
         foreach (string eventCalled in eventsCalled)
         {
             if (eventCalled == eventName) return true;
+        }
+        return false;
+    }
+    #endregion
+
+    #region Event Trigger Management
+    public void AddTriggeredEvent(string eventName)
+    {
+        ResetEventsTriggeredLastFrame(eventName);
+        if (!eventsCalled.Contains(eventName)) eventsTriggered.Add(eventName);
+        foreach (string eventTriggeredLastFrame in eventsTriggeredLastFrame)
+        {
+            if (eventTriggeredLastFrame == eventName) return;
+        }
+        eventsTriggeredLastFrame.Add(eventName);
+    }
+
+    IEnumerator ResetEventsTriggeredLastFrame(string eventName)
+    {
+        yield return null;
+        eventsTriggeredLastFrame.Remove(eventName);
+    }
+
+    public bool EventTriggeredLastFrame(string eventName)
+    {
+        foreach (string eventTriggered in eventsTriggeredLastFrame)
+        {
+            if (eventTriggered == eventName) return true;
+        }
+        return false;
+    }
+
+    public bool EventTriggered(string eventName)
+    {
+        foreach (string eventTriggered in eventsTriggered)
+        {
+            if (eventTriggered == eventName) return true;
         }
         return false;
     }
@@ -468,6 +573,94 @@ public class EventManager : MonoBehaviour
     }
     #endregion
 
+    #region Block Management
+    public void AddBlock(BaseCharacter charID, BlockInfo.BlockType blockType)
+    {
+        BlockInfo thisBlock = new BlockInfo(charID, blockType);
+        blocks.Add(thisBlock);
+        blocksLastFrame.Add(thisBlock);
+        StartCoroutine(ResetBlockFromLastFrame(thisBlock));
+    }
+
+    IEnumerator ResetBlockFromLastFrame(BlockInfo theBlock)
+    {
+        yield return null;
+        blocksLastFrame.Remove(theBlock);
+    }
+
+    public bool GetBlockHappenedLastFrame(BlockInfo.BlockType typeToCheck, int minRequired = 1)
+    {
+        int number = 0;
+        if (blocksLastFrame.Count != 0)
+        {
+            if(typeToCheck == BlockInfo.BlockType.either) number++;
+            else
+            {
+                foreach(BlockInfo blockInfo in blocksLastFrame)
+                {
+                    if(blockInfo.blockType == typeToCheck)
+                    {
+                        number++;
+                    }
+                }
+            }
+        }
+        if (number < minRequired) return false;
+        else return true;
+    }
+
+    public bool GetBlocksHappened(BlockInfo.BlockType typeToCheck, int minRequired = 1)
+    {
+        int number = 0;
+        if (blocks.Count != 0)
+        {
+            if (typeToCheck == BlockInfo.BlockType.either) number++;
+            else
+            {
+                foreach (BlockInfo blockInfo in blocks)
+                {
+                    if (blockInfo.blockType == typeToCheck)
+                    {
+                        number++;
+                    }
+                }
+            }
+        }
+        if (number < minRequired) return false;
+        else return true;
+    }
+
+    public bool GetCharacterBlockedLastFrame(CharacterNameType charID, BlockInfo.BlockType typeToCheck, int minRequired = 1)
+    {
+        int number = 0;
+        foreach(BlockInfo blockInfo in blocksLastFrame)
+        {
+            if(blockInfo.characterWhoBlocked.CharInfo.CharacterID == charID)
+            {
+                if(typeToCheck == BlockInfo.BlockType.either) number++;
+                else if(blockInfo.blockType == typeToCheck) number++;
+            }
+        }
+        if (number < minRequired) return false;
+        else return true;
+    }
+
+    public bool GetCharacterBlocked(CharacterNameType charID, BlockInfo.BlockType typeToCheck, int minRequired = 1)
+    {
+        int number = 0;
+        foreach (BlockInfo blockInfo in blocks)
+        {
+            if (blockInfo.characterWhoBlocked.CharInfo.CharacterID == charID)
+            {
+                if (typeToCheck == BlockInfo.BlockType.either) number++;
+                else if (blockInfo.blockType == typeToCheck) number++;
+            }
+        }
+        if (number < minRequired) return false;
+        else return true;
+    }
+    #endregion
+
     #endregion
 
 
@@ -480,8 +673,9 @@ public class CharacterEventInfoClass
     public string charName;
     public int deaths = 0;
     public int arrivals = 0;
-    public int switches = 0;
+    public int switches = 1;
     public float healthPercentage = 100f;
+    public float staminaPercentage = 100f;
 
     public CharacterEventInfoClass(BaseCharacter _character, int _deaths)
     {
@@ -507,5 +701,26 @@ public class CharacterEventInfoClass
     {
         charName = character.CharInfo.CharacterID.ToString();
         Debug.Log("Created " + charName);
+    }
+}
+
+[System.Serializable]
+public class BlockInfo
+{
+    public enum BlockType
+    {
+        partial,
+        full,
+        either
+    }
+    public BlockType blockType;
+    public BaseCharacter characterWhoBlocked;
+    public float timeBlocked;
+
+    public BlockInfo(BaseCharacter character, BlockType type)
+    {
+        blockType = type;
+        characterWhoBlocked = character;
+        timeBlocked = Time.time;
     }
 }

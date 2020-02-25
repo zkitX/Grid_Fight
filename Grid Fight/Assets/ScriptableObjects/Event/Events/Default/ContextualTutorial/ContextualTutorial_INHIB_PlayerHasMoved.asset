@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25d497aba9400d147aee0263a1f7ec6d, type: 3}
+  m_Name: ContextualTutorial_INHIB_PlayerHasMoved
+  m_EditorClassIdentifier: 
+  Name: ContextualTutorial_INHIB_PlayerHasMoved
+  hasHappened: 0
+  requirementRule: 1
+  timedCheckRule: 1
+  requirements:
+  - {fileID: 11400000, guid: 3c211f46e89b7dd45988911c634547c9, type: 2}
+  - {fileID: 11400000, guid: 5fadcd627aadcd0479f5e8c2215fe073, type: 2}
+  - {fileID: 11400000, guid: e1819e3cde3be1a42aeae061997bdc87, type: 2}
+  - {fileID: 11400000, guid: a271b9cb7f2c57644ae8d6d1ba44add2, type: 2}
+  - {fileID: 11400000, guid: e8e7759310bf6cc41b9647aa99a422d8, type: 2}
+  - {fileID: 11400000, guid: 8b0ab3db414f6b942b2b93384bebe046, type: 2}
+  - {fileID: 11400000, guid: fdf7df03786fab246b43d24c23d15684, type: 2}
+  - {fileID: 11400000, guid: 72de91019313b814a8950bf820045c62, type: 2}
+  - {fileID: 11400000, guid: 87c3b3068bdf0704aa14ed85358cf559, type: 2}
+  inhibitorRule: 1
+  inhibitors: []
+  ceaseOnComplete: 1
+  requireComplete: 1
+  effects: []

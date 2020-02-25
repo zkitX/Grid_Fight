@@ -8,7 +8,17 @@ using UnityEngine.Events;
 public class GameSequenceEvent : EventTrigger
 {
     //requirements as well as their sub divisions (timed/Non-timed)
-    [SerializeField] public EventTrigger[] requirements; 
+    public enum RequirementType { and, or }
+    [Header("Requirements")]
+    [SerializeField] protected RequirementType requirementRule = RequirementType.and;
+    [SerializeField] protected RequirementType timedCheckRule = RequirementType.and;
+    [Tooltip("A list of game sequence and timed events that enable the event to be completed")] [SerializeField] public EventTrigger[] requirements;
+
+    [Space(10)]
+    [Header("Inhibitors")]
+    [SerializeField] protected RequirementType inhibitorRule = RequirementType.or;
+    [Tooltip("A list of game sequence events that stop the event from being completed")][SerializeField] public List<GameSequenceEvent> inhibitors;
+
     protected List<TimedCheck> timedChecks = new List<TimedCheck>();
     [HideInInspector] public List<GameSequenceEvent> reqChecks { get; private set; } = new List<GameSequenceEvent>();
     //
@@ -17,6 +27,8 @@ public class GameSequenceEvent : EventTrigger
     protected int triggerRequests = 0;
     //
 
+    [Space(10)]
+    [Header("Completion and stuff")]
     //Effects and triggees
     [SerializeField] public bool ceaseOnComplete = true;
     [SerializeField] protected bool requireComplete = true;
@@ -28,9 +40,12 @@ public class GameSequenceEvent : EventTrigger
     {
         if (hasHappened && !ceaseOnComplete) return;
         Debug.Log("<i>Event Triggered:</i> " + Name);
+
+        EventManager.Instance.AddTriggeredEvent(Name);
         triggerRequests++;
         //If the event requirements aren't met, stop the method
-        if (!RequirementsFulfilled()) return;
+        if (inhibitors.Count > 0) if (RequirementsFulfilled(inhibitors, inhibitorRule)) return;
+        if (reqChecks.Count > 0) if (!RequirementsFulfilled(reqChecks, requirementRule)) return;
         //If they are met, move to start the timed 
         StartAllTimedRequirements();
     }
@@ -48,14 +63,25 @@ public class GameSequenceEvent : EventTrigger
         if (reqChecks.Count == 0) Trigger();
     }
 
-    bool RequirementsFulfilled()
+    bool RequirementsFulfilled(List<GameSequenceEvent> reqList, RequirementType reqRule)
     {
         //Check if the non-timed event trigger requirements have been fulfilled
-        foreach(GameSequenceEvent reqCheck in reqChecks)
+        if(reqRule == RequirementType.and)
         {
-            if(!EventManager.Instance.HasHappened(reqCheck)) return false;
+            foreach (GameSequenceEvent req in reqList)
+            {
+                if (!EventManager.Instance.HasHappened(req)) return false;
+            }
+            return true;
         }
-        return true;
+        else
+        {
+            foreach (GameSequenceEvent req in reqList)
+            {
+                if (EventManager.Instance.HasHappened(req)) return true;
+            }
+            return false;
+        }
     }
 
     void StartAllTimedRequirements()
@@ -91,10 +117,31 @@ public class GameSequenceEvent : EventTrigger
     public void CheckTimedRequirements()
     {
         //Check if all the timed check requirements are met
-        foreach(TimedCheck timedCheck in timedChecks)
+        if (timedCheckRule == RequirementType.and)
         {
-            if (timedCheck.ceaseOnHappened && !timedCheck.hasHappened) return;
-            else if (!timedCheck.isHappening) return;
+            foreach (TimedCheck timedCheck in timedChecks)
+            {
+                if (timedCheck.ceaseOnHappened && !timedCheck.hasHappened) return;
+                else if (!timedCheck.isHappening) return;
+            }
+        }
+        else
+        {
+            bool fulfilled = false;
+            foreach (TimedCheck timedCheck in timedChecks)
+            {
+                if (timedCheck.ceaseOnHappened && timedCheck.hasHappened)
+                {
+                    fulfilled = true;
+                    break;
+                }
+                else if (timedCheck.isHappening)
+                {
+                    fulfilled = true;
+                    break;
+                }
+            }
+            if (fulfilled == false) return;
         }
         //IF YOU GET TO THIS POINT, ALL REQUIREMENTS HAVE BEEN MET AND YOU CAN GO FORWARD WITH THE EFFECTS OF THE EVENT
         CompleteEvent();
@@ -122,7 +169,11 @@ public class GameSequenceEvent : EventTrigger
     public IEnumerator CompleteEventSequence()
     {
         //Sequence through all the effects here
-        if (!requireComplete) TriggerTriggees();
+        if (!requireComplete)
+        {
+            EventManager.Instance.AddTriggeredEvent(Name);
+            TriggerTriggees();
+        }
 
         //NEEDS WORK
         foreach(EventEffect effect in effects)
@@ -134,7 +185,12 @@ public class GameSequenceEvent : EventTrigger
 
 
 
-        if (requireComplete) TriggerTriggees();
+        if (requireComplete)
+        {
+            EventManager.Instance.AddTriggeredEvent(Name);
+            TriggerTriggees();
+        }
+
         yield return null;
     }
 

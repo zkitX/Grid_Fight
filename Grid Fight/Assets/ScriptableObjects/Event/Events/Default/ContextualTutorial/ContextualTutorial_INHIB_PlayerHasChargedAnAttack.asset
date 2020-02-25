@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25d497aba9400d147aee0263a1f7ec6d, type: 3}
+  m_Name: ContextualTutorial_INHIB_PlayerHasChargedAnAttack
+  m_EditorClassIdentifier: 
+  Name: ContextualTutorial_INHIB_PlayerHasChargedAnAttack
+  hasHappened: 0
+  requirementRule: 0
+  timedCheckRule: 0
+  requirements:
+  - {fileID: 11400000, guid: 3c211f46e89b7dd45988911c634547c9, type: 2}
+  - {fileID: 11400000, guid: a73218d84f455754ea9e38fa4773aab1, type: 2}
+  inhibitorRule: 1
+  inhibitors: []
+  ceaseOnComplete: 1
+  requireComplete: 1
+  effects: []

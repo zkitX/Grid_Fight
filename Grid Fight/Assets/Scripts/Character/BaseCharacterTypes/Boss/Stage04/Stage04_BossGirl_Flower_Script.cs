@@ -122,6 +122,7 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
             base.Call_CurrentCharIsRebirthEvent();
             CharInfo.Health = CharInfo.HealthStats.Base;
             EventManager.Instance.UpdateHealth(this);
+            EventManager.Instance.UpdateStamina(this);
         }
     }
 
