@@ -128,57 +128,6 @@ public class BulletScript : MonoBehaviour
                 }
             }
         }
-
-
-       /* if (CharInfo.ClassType != CharacterClassType.Mountain)
-        {
-            GetComponent<BoxCollider>().enabled = true;
-            int startingYTile = Facing == FacingType.Left ? StartingTile.y - BulletGapStartingTile.y : StartingTile.y + BulletGapStartingTile.y;
-            GameObject go = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Particles);
-            go.transform.position = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position;
-            go.GetComponent<BattleTileTargetScript>().StartTarget(
-                (Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position) * CharInfo.BulletSpeed) /
-                Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position));
-            bts = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing);
-            float duration = CharInfo.BulletSpeed;
-            foreach (Vector2Int item in BulletEffectTiles)
-            {
-                if (GridManagerScript.Instance.isPosOnField(DestinationTile + item))
-                {
-                    bts = GridManagerScript.Instance.GetBattleTile(DestinationTile + item, Facing == FacingType.Left ? WalkingSideType.LeftSide : WalkingSideType.RightSide);
-                    if (bts != null)
-                    {
-
-                        go = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Particles);
-                        go.transform.position = bts.transform.position;
-                        go.GetComponent<BattleTileTargetScript>().StartTarget(duration);
-                    }
-                }
-            }
-        }
-        else if (CharInfo.ClassType == CharacterClassType.Mountain)
-        {
-            GetComponent<BoxCollider>().enabled = false;
-            //int ran = Random.Range(0, 101);
-            //DestinationTile.y = ran < 25 ? DestinationTile.y - 1 : ran < 75 ? DestinationTile.y : DestinationTile.y + 1;
-            bts = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing);
-            float duration = CharInfo.BulletSpeed;
-            foreach (Vector2Int item in BulletEffectTiles)
-            {
-                if (GridManagerScript.Instance.isPosOnField(DestinationTile + item))
-                {
-                    bts = GridManagerScript.Instance.GetBattleTile(DestinationTile + item, Facing == FacingType.Left ? WalkingSideType.LeftSide : WalkingSideType.RightSide);
-                    if (bts != null)
-                    {
-
-                        GameObject go = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Particles);
-                        go.transform.position = bts.transform.position;
-                        go.GetComponent<BattleTileTargetScript>().StartTarget(duration);
-                    }
-                }
-            }
-            bts = GridManagerScript.Instance.GetBattleTile(DestinationTile);
-        }*/
     }
 
     public IEnumerator ChildExplosion(List<Vector2Int> bet, Vector2Int basePos)

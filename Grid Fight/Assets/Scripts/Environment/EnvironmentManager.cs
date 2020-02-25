@@ -7,7 +7,7 @@ public class EnvironmentManager : MonoBehaviour
 {
     public static EnvironmentManager Instance;
 
-    public Vector3 test = new Vector3(0, 1f, -8.5f);
+    public Vector3 CameraPosition = new Vector3(0, 1f, -8.5f);
     public Vector2Int BattleFieldSize;
     public List<ScriptableObjectGridStructure> GridStructures = new List<ScriptableObjectGridStructure>();
     public GridStructureType GridStructure;
@@ -35,11 +35,11 @@ public class EnvironmentManager : MonoBehaviour
         {
             case GridStructureType.r2xc4:
                 MainCamera.orthographicSize = 2f;
-                MainCamera.transform.position = test;//new Vector3(0,2f,-8.5f);
+                MainCamera.transform.position = CameraPosition;//new Vector3(0,2f,-8.5f);
                 break;
             case GridStructureType.r4xc8:
                 MainCamera.orthographicSize = 3f;
-                MainCamera.transform.position = test;//new Vector3(0, 1f, -8.5f);
+                MainCamera.transform.position = CameraPosition;//new Vector3(0, 1f, -8.5f);
                 break;
             case GridStructureType.r6xc12:
                 break;
@@ -47,15 +47,15 @@ public class EnvironmentManager : MonoBehaviour
                 break;
             case GridStructureType.r5xc8:
                 MainCamera.orthographicSize = 3.7f;
-                MainCamera.transform.position = test;//new Vector3(0, 1.4f, -8.5f);
+                MainCamera.transform.position = CameraPosition;//new Vector3(0, 1.4f, -8.5f);
                 break;
             case GridStructureType.r5xc10:
                 MainCamera.orthographicSize = 4;
-                MainCamera.transform.position = test;// new Vector3(0.6f, 1.75f, -8.5f);
+                MainCamera.transform.position = CameraPosition;// new Vector3(0.6f, 1.75f, -8.5f);
                 break;
             case GridStructureType.r5xc10Stage00:
                 MainCamera.orthographicSize = 4;
-                MainCamera.transform.position = test;// new Vector3(0.6f, 1.75f, -8.5f);
+                MainCamera.transform.position = CameraPosition;// new Vector3(0.6f, 1.75f, -8.5f);
                 break;
         }
     }
