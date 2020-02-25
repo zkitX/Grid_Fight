@@ -170,7 +170,7 @@ public class SpineAnimationManager : MonoBehaviour
         {
             if (completedAnim == CharacterAnimationStateType.Atk1_IdleToAtk && CurrentAnim == CharacterAnimationStateType.Atk1_IdleToAtk)
             {
-                SetAnim(CharacterAnimationStateType.Atk1_Charging, true, 0);
+                CharOwner.SetAnimation(CharacterAnimationStateType.Atk1_Charging, true, 0);
             }
 
             if(completedAnim == CharacterAnimationStateType.Atk1_Loop && CurrentAnim == CharacterAnimationStateType.Atk1_Loop)
@@ -178,12 +178,12 @@ public class SpineAnimationManager : MonoBehaviour
                 //If they can still attack, keep them in the charging loop
                 if(CharOwner.shotsLeftInAttack > 0)
                 {
-                    SetAnim(CharacterAnimationStateType.Atk1_Charging, true, 0);
+                    CharOwner.SetAnimation(CharacterAnimationStateType.Atk1_Charging, true, 0);
                 }
                 //otherwise revert them to the idle postion
                 else
                 {
-                    SetAnim(CharacterAnimationStateType.Atk1_AtkToIdle);
+                    CharOwner.SetAnimation(CharacterAnimationStateType.Atk1_AtkToIdle);
                     CharOwner.currentAttackPhase = AttackPhasesType.End;
                 }
                 return;

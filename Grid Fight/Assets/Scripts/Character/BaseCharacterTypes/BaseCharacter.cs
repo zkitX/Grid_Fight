@@ -1013,13 +1013,15 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 damage = 0;
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldTotalDefence);
                 go.transform.position = transform.position;
-                
+                EventManager.Instance.AddBlock(this, BlockInfo.BlockType.full);
+
             }
             else
             {
                 damage = damage - CharInfo.DefenceStats.BaseDefence;
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldNormal);
                 go.transform.position = transform.position;
+                EventManager.Instance.AddBlock(this, BlockInfo.BlockType.partial);
 
                 damage = damage < 0 ? 1 : damage;
             }

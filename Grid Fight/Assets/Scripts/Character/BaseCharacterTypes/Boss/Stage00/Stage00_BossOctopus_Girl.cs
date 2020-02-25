@@ -5,7 +5,7 @@ using System.Linq;
 
 public class Stage00_BossOctopus_Girl : MinionType_Script
 {
-   
+    public Stage00_BossOctopus bossParent;
     public bool CanGetDamage = false;
     private List<VFXOffsetToTargetVOL> TargetControllerList = new List<VFXOffsetToTargetVOL>();
     public Stage00_BossOctopus BaseBoss;
@@ -15,6 +15,23 @@ public class Stage00_BossOctopus_Girl : MinionType_Script
     public override void SetUpEnteringOnBattle()
     {
 
+    }
+
+    public override void SetUpLeavingBattle()
+    {
+        SetAnimation(CharacterAnimationStateType.Reverse_Arriving);
+        StartCoroutine(CheckHasLeftBattle());
+        EventManager.Instance.AddCharacterSwitched((BaseCharacter)this);
+    }
+
+    IEnumerator CheckHasLeftBattle()
+    {
+        while(SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving)
+        {
+            yield return null;
+        }
+        gameObject.SetActive(false);
+        bossParent.OctopusGirlLeaves();
     }
 
     public override IEnumerator Move()
@@ -74,10 +91,11 @@ public class Stage00_BossOctopus_Girl : MinionType_Script
     public IEnumerator CenterCharacterToTile(float duration)
     {
         float durationLeft = duration;
+        Vector3 StartPos = transform.position;
         while (durationLeft != 0f)
         {
             durationLeft = Mathf.Clamp(durationLeft - Time.deltaTime, 0f, 100f);
-            transform.position = Vector3.Lerp(transform.position, CenteringPoint.position, 1f - (durationLeft / duration));
+            transform.position = Vector3.Lerp(StartPos, CenteringPoint.position, 1f - (durationLeft / duration));
             yield return null;
         }
     }
@@ -87,7 +105,7 @@ public class Stage00_BossOctopus_Girl : MinionType_Script
         switch (animState)
         {
             case (CharacterAnimationStateType.Idle):
-                transition = 4f;
+                transition = 1f;
                 break;
             default:
                 break;

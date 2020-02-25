@@ -357,7 +357,12 @@ public enum CharacterAnimationStateType
     Death_Prep,
     Death_Loop,
     Death_Exit,
-    Death_Born
+    Death_Born,
+    Idle_Agressive,
+    Idle_AtkToIdle,
+    Idle_Charging,
+    Idle_IdleToAtk,
+    Idle_Loop,
 }
 
 public enum PortalType

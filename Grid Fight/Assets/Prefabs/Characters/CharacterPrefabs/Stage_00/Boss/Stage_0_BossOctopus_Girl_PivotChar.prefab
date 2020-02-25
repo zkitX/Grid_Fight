@@ -257,13 +257,15 @@ MonoBehaviour:
   Elemental: 0
   ClassType: 3
   CharacterLevel: 0
-  CharacterSelection: 0
   UseLayeringSystem: 0
+  CharacterSelection: 0
   RapidAttack:
-    DamageMultiplier: 1
+    DamageMultiplier: {x: 1, y: 1}
+    CriticalChance: {x: 2, y: 2}
     Stamina_Cost_Atk: 0
   PowerfulAttac:
-    DamageMultiplier: 3
+    DamageMultiplier: {x: 3, y: 3}
+    CriticalChance: {x: 3, y: 5}
     Stamina_Cost_Atk: 0
   HealthStats:
     Health: 30

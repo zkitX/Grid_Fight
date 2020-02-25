@@ -7,6 +7,7 @@ public class Stage00_BossOctopus_Head : MinionType_Script
 {
 
     public Stage00_BossOctopus bossParent;
+    public Stage00_BossOctopus_Girl bossLady;
     public bool CanGetDamage = true;
     private List<VFXOffsetToTargetVOL> TargetControllerList = new List<VFXOffsetToTargetVOL>();
     public Stage00_BossOctopus BaseBoss;
@@ -140,25 +141,40 @@ public class Stage00_BossOctopus_Head : MinionType_Script
 
     public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
     {
+
         switch (animState)
         {
             case (CharacterAnimationStateType.Idle):
-                transition = 1f;
+                transition = 0.2f;
+                bossLady.SetAnimation(CharacterAnimationStateType.Idle, loop, transition);
                 break;
             case (CharacterAnimationStateType.Atk1_IdleToAtk):
-                transition = 1f;
+                transition = 0.3f;
+                bossLady.SetAnimation(CharacterAnimationStateType.Idle_IdleToAtk, loop, transition);
                 break;
             case (CharacterAnimationStateType.Idle_Disable_Loop):
-                transition = 1f;
+                transition = 0.2f;
+                bossLady.SetAnimation(CharacterAnimationStateType.Idle_Disable_Loop, loop, transition);
                 break;
             case (CharacterAnimationStateType.Death_Prep):
                 transition = 1f;
+                bossLady.SetAnimation(CharacterAnimationStateType.Death_Prep, loop, transition);
                 break;
             case (CharacterAnimationStateType.Atk1_AtkToIdle):
-                transition = 10f;
+                transition = 0.3f;
+                bossLady.SetAnimation(CharacterAnimationStateType.Idle_AtkToIdle, loop, transition);
                 break;
             case (CharacterAnimationStateType.Atk1_Charging):
-                transition = 1f;
+                transition = 0.1f;
+                bossLady.SetAnimation(CharacterAnimationStateType.Idle_Charging, loop, transition);
+                break;
+            case (CharacterAnimationStateType.GettingHit):
+                transition = 0.2f;
+                bossLady.SetAnimation(CharacterAnimationStateType.GettingHit, loop, transition);
+                break;
+            case (CharacterAnimationStateType.Atk1_Loop):
+                transition = 0.1f;
+                bossLady.SetAnimation(CharacterAnimationStateType.Idle_Loop, loop, transition);
                 break;
             default:
                 break;

@@ -44,6 +44,8 @@ public class Stage00_BossOctopus : MinionType_Script
 
         GenerateBoss();
 
+        ((Stage00_BossOctopus_Head)GetPiece(CharacterNameType.Stage00_BossOctopus_Head)).bossLady = ((Stage00_BossOctopus_Girl)GetPiece(CharacterNameType.Stage00_BossOctopus_Girl));
+
         SetAnimation(CharacterAnimationStateType.Arriving);
 
         while(!IsCharArrived)
@@ -104,6 +106,10 @@ public class Stage00_BossOctopus : MinionType_Script
         {
             ((Stage00_BossOctopus_Tentacles)piece).bossParent = this;
         }
+        else if (pieceType == CharacterNameType.Stage00_BossOctopus_Girl)
+        {
+            ((Stage00_BossOctopus_Girl)piece).bossParent = this;
+        }
         return piece;
     }
 
@@ -155,7 +161,6 @@ public class Stage00_BossOctopus : MinionType_Script
         GetPiece(CharacterNameType.Stage00_BossOctopus_Head).SetAnimation(CharacterAnimationStateType.Death_Exit);
         GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles).SetAnimation(CharacterAnimationStateType.Death_Exit);
         yield return null;
-
         /*Stage04_BossMonster_Script mask = (Stage04_BossMonster_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass((CharacterNameType.Stage04_BossMonster).ToString(), CharacterSelectionType.Up,
         CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage04_BossMonster, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None), WaveManagerScript.Instance.transform);
         BattleManagerScript.Instance.AllCharactersOnField.Add(mask);
@@ -178,6 +183,21 @@ public class Stage00_BossOctopus : MinionType_Script
         base.SetCharDead();*/
     }
 
+    public void OctopusGirlLeaves()
+    {
+        if(!GetPiece(CharacterNameType.Stage00_BossOctopus_Girl).gameObject.activeInHierarchy &&
+            !GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles).gameObject.activeInHierarchy &&
+            !GetPiece(CharacterNameType.Stage00_BossOctopus_Head).gameObject.activeInHierarchy)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    void OctoBossDies()
+    {
+        gameObject.SetActive(false);
+    }
+
     IEnumerator BirthOctopusGirl()
     {
         //The code for the moving into position of and the creation of the octopus girl
@@ -196,7 +216,13 @@ public class Stage00_BossOctopus : MinionType_Script
         {
             yield return null;
         }
+
         IsOnField = true;
+
+        while(BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+        {
+            yield return null;
+        }
 
         Vector2 blanketAttackTimings = new Vector2(15f, 25f);
         Vector2 headAttackTimings = new Vector2(4f, 7f);
