@@ -10,33 +10,44 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aafb3c4b93ffa5d45b0be95204d570b3, type: 3}
-  m_Name: AttackPattern-Stage04-Forest-MaskedRider02
+  m_Name: AttackPattern_OctopusTentacles_2
   m_EditorClassIdentifier: 
   AttackRatioMultiplier: 1
-  DamageMultiplier: {x: 2, y: 3}
+  DamageMultiplier: {x: 1, y: 2}
   Anim: 5
   BulletTrajectories:
+  - Delay: 2
+    BulletEffectTiles:
+    - {x: 3, y: 1}
+    - {x: 2, y: 1}
+    - {x: 1, y: 1}
+    - {x: 0, y: 1}
+  - Delay: 2.2
+    BulletEffectTiles:
+    - {x: 3, y: 2}
+    - {x: 2, y: 2}
+    - {x: 1, y: 2}
+    - {x: 0, y: 2}
+  - Delay: 2.3
+    BulletEffectTiles:
+    - {x: 3, y: 3}
+    - {x: 2, y: 3}
+    - {x: 1, y: 3}
+    - {x: 0, y: 3}
+  - Delay: 2.4
+    BulletEffectTiles:
+    - {x: 3, y: 4}
+    - {x: 2, y: 4}
+    - {x: 1, y: 4}
+    - {x: 0, y: 4}
   - Delay: 2.5
     BulletEffectTiles:
-    - {x: 0, y: 1}
-    - {x: 0, y: 2}
-    - {x: 0, y: 3}
-    - {x: 0, y: 4}
+    - {x: 3, y: 5}
+    - {x: 2, y: 5}
+    - {x: 1, y: 5}
     - {x: 0, y: 5}
-  - Delay: 2.6
-    BulletEffectTiles:
-    - {x: 1, y: 2}
-    - {x: 1, y: 3}
-    - {x: 1, y: 4}
-    - {x: -1, y: 2}
-    - {x: -1, y: 3}
-    - {x: -1, y: 4}
-  - Delay: 2.7
-    BulletEffectTiles:
-    - {x: 2, y: 3}
-    - {x: -2, y: 3}
   StatToCheck: 1
   ValueChecker: 0
-  PercToCheck: 70
-  Chances: 50
-  ParticlesID: 7
+  PercToCheck: 90
+  Chances: 100
+  ParticlesID: 21
