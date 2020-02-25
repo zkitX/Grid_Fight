@@ -1,0 +1,459 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8521720016444427818
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8521720016444427860}
+  - component: {fileID: 8521720016444427861}
+  m_Layer: 0
+  m_Name: WaveManager-04-PAX-BackUp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8521720016444427860
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8521720016444427818}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.2474627, y: 0.9679096, z: -3.4060545}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8521720016444427861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8521720016444427818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09b0c490261b08d4dbe285554c10a1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  battleTime:
+    hours: 0
+    minutes: 15
+    seconds: 0
+    counting: 0
+  WavePhases:
+  - name: Wave1
+    IsRandom: 1
+    MaxEnemyOnScreen: 2
+    ListOfEnemy:
+    - name: Bush
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1
+        CharacterClass: 0
+        Health: {x: 20, y: 30}
+        HealthRegeneration: {x: 0.2, y: 0.2}
+        BaseDamage: {x: 4, y: 6}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 3}
+        BaseSpeed: {x: 1, y: 1.2}
+        AttackSpeedRatio: {x: 4, y: 5}
+        Stamina: {x: 30, y: 30}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+    - name: Bush
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1
+        CharacterClass: 0
+        Health: {x: 20, y: 30}
+        HealthRegeneration: {x: 0.2, y: 0.2}
+        BaseDamage: {x: 4, y: 6}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 3}
+        BaseSpeed: {x: 1, y: 1.2}
+        AttackSpeedRatio: {x: 4, y: 5}
+        Stamina: {x: 30, y: 30}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+  - name: Wave2
+    IsRandom: 0
+    MaxEnemyOnScreen: 3
+    ListOfEnemy:
+    - name: Llhama
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 0
+        CharacterClass: 0
+        Health: {x: 100, y: 130}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 7, y: 8}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1.2}
+        AttackSpeedRatio: {x: 4, y: 6}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+    - name: Llhama
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 0
+        CharacterClass: 0
+        Health: {x: 100, y: 120}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 7, y: 8}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1.2}
+        AttackSpeedRatio: {x: 4, y: 6}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+    - name: Llhama
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 0
+        CharacterClass: 0
+        Health: {x: 100, y: 120}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 7, y: 8}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1.2}
+        AttackSpeedRatio: {x: 4, y: 6}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+  - name: Wave3
+    IsRandom: 1
+    MaxEnemyOnScreen: 6
+    ListOfEnemy:
+    - name: Monkeyna
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 3
+        CharacterClass: 0
+        Health: {x: 20, y: 15}
+        HealthRegeneration: {x: 1, y: 1.5}
+        BaseDamage: {x: 5, y: 10}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 2}
+        AttackSpeedRatio: {x: 4, y: 5}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 2
+    - name: Monkeyna
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 3
+        CharacterClass: 0
+        Health: {x: 20, y: 15}
+        HealthRegeneration: {x: 1, y: 1.5}
+        BaseDamage: {x: 5, y: 10}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 2}
+        AttackSpeedRatio: {x: 4, y: 5}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 2
+    - name: Monkeyna
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 3
+        CharacterClass: 0
+        Health: {x: 20, y: 15}
+        HealthRegeneration: {x: 1, y: 1.5}
+        BaseDamage: {x: 5, y: 10}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 2}
+        AttackSpeedRatio: {x: 4, y: 5}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 2
+    - name: Monkeyna
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 3
+        CharacterClass: 0
+        Health: {x: 20, y: 15}
+        HealthRegeneration: {x: 1, y: 1.5}
+        BaseDamage: {x: 5, y: 10}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 2}
+        AttackSpeedRatio: {x: 4, y: 5}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 2
+    - name: Monkeyna
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 3
+        CharacterClass: 0
+        Health: {x: 20, y: 15}
+        HealthRegeneration: {x: 1, y: 1.5}
+        BaseDamage: {x: 5, y: 10}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 2}
+        AttackSpeedRatio: {x: 4, y: 5}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 2
+    - name: Monkeyna
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 3
+        CharacterClass: 0
+        Health: {x: 20, y: 15}
+        HealthRegeneration: {x: 1, y: 1.5}
+        BaseDamage: {x: 5, y: 10}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 2}
+        AttackSpeedRatio: {x: 4, y: 5}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 2
+  - name: Wave4
+    IsRandom: 1
+    MaxEnemyOnScreen: 3
+    ListOfEnemy:
+    - name: Llhama
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 0
+        CharacterClass: 0
+        Health: {x: 70, y: 100}
+        HealthRegeneration: {x: 1, y: 2}
+        BaseDamage: {x: 12, y: 15}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 6, y: 8}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 2
+    - name: Lady
+      NPCType: 0
+      NumberOfCharacter: 4
+      TypeOfCharacter:
+        CharacterName: 1
+        CharacterClass: 0
+        Health: {x: 80, y: 100}
+        HealthRegeneration: {x: 1, y: 2}
+        BaseDamage: {x: 12, y: 15}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1.3}
+        AttackSpeedRatio: {x: 4, y: 5}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 2
+    - name: Lady
+      NPCType: 0
+      NumberOfCharacter: 4
+      TypeOfCharacter:
+        CharacterName: 1
+        CharacterClass: 0
+        Health: {x: 80, y: 100}
+        HealthRegeneration: {x: 1, y: 2}
+        BaseDamage: {x: 12, y: 15}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1.3}
+        AttackSpeedRatio: {x: 4, y: 5}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 2
+  - name: Wave5
+    IsRandom: 1
+    MaxEnemyOnScreen: 4
+    ListOfEnemy:
+    - name: Lady Bush
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 1
+        CharacterClass: 0
+        Health: {x: 30, y: 40}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 8, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 2
+    - name: Mankeyna
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 3
+        CharacterClass: 0
+        Health: {x: 20, y: 25}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 9, y: 12}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 2
+    - name: Jaguar
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 2
+        CharacterClass: 0
+        Health: {x: 500, y: 700}
+        HealthRegeneration: {x: 1, y: 2}
+        BaseDamage: {x: 20, y: 25}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 1.2, y: 1.2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 6, y: 8}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 2
+    - name: Llhama
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 0
+        CharacterClass: 0
+        Health: {x: 60, y: 70}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 8, y: 12}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 2
+  - name: Wave6
+    IsRandom: 0
+    MaxEnemyOnScreen: 10
+    ListOfEnemy:
+    - name: Pristest
+      NPCType: 2
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 12
+        CharacterClass: 0
+        Health: {x: 800, y: 1200}
+        HealthRegeneration: {x: 2, y: 2}
+        BaseDamage: {x: 25, y: 28}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 1.2, y: 1.2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 8, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+      DelayBetweenChars: 1
+  isWaveComplete: 0
+  WaveCharcters: []
+  CurrentWave: 0
+  StartWave: 0
