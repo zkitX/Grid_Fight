@@ -371,6 +371,8 @@ MonoBehaviour:
   SpecialFiringPoint: {fileID: 7632219197683206320}
   CurrentAnim: 0
   AnimationTransition: 0.1
+  changeanim: 0
+  transition: 0.5
 --- !u!114 &7632219196605725028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,12 +397,15 @@ MonoBehaviour:
   Elemental: 4
   ClassType: 0
   CharacterLevel: 0
+  UseLayeringSystem: 1
   CharacterSelection: 0
   RapidAttack:
-    BaseDamage: 10
+    DamageMultiplier: {x: 1, y: 1}
+    CriticalChance: {x: 2, y: 2}
     Stamina_Cost_Atk: 0
   PowerfulAttac:
-    BaseDamage: 10
+    DamageMultiplier: {x: 3, y: 3}
+    CriticalChance: {x: 3, y: 5}
     Stamina_Cost_Atk: 0
   HealthStats:
     Health: 150
@@ -425,7 +430,7 @@ MonoBehaviour:
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
   DamageStats:
-    CurrentDamage: 10
+    BaseDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []
