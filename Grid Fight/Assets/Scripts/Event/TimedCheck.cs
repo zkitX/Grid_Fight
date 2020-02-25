@@ -61,6 +61,15 @@ public class TimedCheck : EventTrigger
             case (TimedCheckTypes.BattleTimeCheck):
                 check = BattleTimeCheck;
                 break;
+            case (TimedCheckTypes.BlockCheck):
+                check = BlockCheck;
+                break;
+            case (TimedCheckTypes.CharacterStaminaCheck):
+                check = CharacterStaminaCheck;
+                break;
+            case (TimedCheckTypes.EventTriggeredCheck):
+                check = EventTriggeredCheck;
+                break;
             default:
                 check = Default;
                 break;
@@ -193,5 +202,68 @@ public class TimedCheck : EventTrigger
                 break;
         }
         return false;
+    }
+
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.BlockCheck)] public BlockInfo.BlockType blockTypeToCheck = BlockInfo.BlockType.either;
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.BlockCheck)] public CharacterNameType characterToCheckWhichBlocked = CharacterNameType.None;
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.BlockCheck)] public int numberOfBlocksRequired = 1;
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.BlockCheck)] public bool requireBlockHappenedLastFrame = true;
+    bool BlockCheck()
+    {
+        if (requireBlockHappenedLastFrame)
+        {
+            if(characterToCheckWhichBlocked == CharacterNameType.None)
+            {
+                return EventManager.Instance.GetBlockHappenedLastFrame(blockTypeToCheck, numberOfBlocksRequired);
+            }
+            else
+            {
+                return EventManager.Instance.GetCharacterBlockedLastFrame(characterToCheckWhichBlocked, blockTypeToCheck, numberOfBlocksRequired);
+            }
+        }
+        else
+        {
+            if (characterToCheckWhichBlocked == CharacterNameType.None)
+            {
+                return EventManager.Instance.GetBlocksHappened(blockTypeToCheck, numberOfBlocksRequired);
+            }
+            else
+            {
+                return EventManager.Instance.GetCharacterBlocked(characterToCheckWhichBlocked, blockTypeToCheck, numberOfBlocksRequired);
+            }
+        }
+    }
+
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.CharacterStaminaCheck)] public CharacterNameType staminaChangeCharID = CharacterNameType.None;
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.CharacterStaminaCheck)] public CompareType staminaChange = CompareType.None;
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.CharacterStaminaCheck)] public float staminaChangeValue = 50;
+    bool CharacterStaminaCheck()
+    {
+        if (!EventManager.Instance.GetStaminaUpdatedLastFrame(staminaChangeCharID)) return false;
+        float currentStaminaPercentage = EventManager.Instance.GetStaminaPercentage(staminaChangeCharID);
+
+        switch (staminaChange)
+        {
+            case (CompareType.IsEqualTo):
+                if (staminaChangeValue == currentStaminaPercentage) return true;
+                break;
+            case (CompareType.LessThan):
+                if (staminaChangeValue > currentStaminaPercentage) return true;
+                break;
+            case (CompareType.MoreThan):
+                if (staminaChangeValue < currentStaminaPercentage) return true;
+                break;
+            default:
+                Debug.Log("Stamina Change type is not set on timed check: " + Name);
+                break;
+        }
+        return false;
+    }
+
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.EventTriggeredCheck)] public bool requireEventTriggerDuringCheck = true;
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.EventTriggeredCheck)] public GameSequenceEvent EventTriggerRequired;
+    bool EventTriggeredCheck()
+    {
+        return requireEventTriggerDuringCheck ? EventManager.Instance.EventTriggeredLastFrame(EventTriggerRequired.Name) : EventManager.Instance.EventTriggered(EventTriggerRequired.Name);
     }
 }

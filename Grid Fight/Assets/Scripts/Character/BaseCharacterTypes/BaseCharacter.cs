@@ -108,6 +108,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public virtual void SetupCharacterSide()
     {
         EventManager.Instance.UpdateHealth(this);
+        EventManager.Instance.UpdateStamina(this);
         if (UMS.PlayerController.Contains(ControllerType.Enemy))
         {
             UMS.SelectionIndicator.parent.gameObject.SetActive(false);
@@ -441,10 +442,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             if (SpineAnim.CurrentAnim.ToString().Contains("Atk1"))
             {
                 CharInfo.Stamina -= CharInfo.RapidAttack.Stamina_Cost_Atk;
+                EventManager.Instance.UpdateStamina(this);
             }
             else if (SpineAnim.CurrentAnim.ToString().Contains("Atk2"))
             {
                 CharInfo.Stamina -= CharInfo.PowerfulAttac.Stamina_Cost_Atk;
+                EventManager.Instance.UpdateStamina(this);
             }
         }
 
@@ -820,9 +823,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 break;
             case BuffDebuffStatsType.Stamina:
                 CharInfo.Stamina += valueOverDuration;
+                EventManager.Instance.UpdateStamina(this);
                 break;
             case BuffDebuffStatsType.StaminaRegeneration:
                 CharInfo.StaminaStats.Regeneration += valueOverDuration;
+                EventManager.Instance.UpdateStamina(this);
                 break;
             case BuffDebuffStatsType.AttackSpeed:
                 CharInfo.AttackSpeed += valueOverDuration;
@@ -867,9 +872,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 break;
             case BuffDebuffStatsType.Stamina:
                 CharInfo.Stamina -= valueOverDuration;
+                EventManager.Instance.UpdateStamina(this);
                 break;
             case BuffDebuffStatsType.StaminaRegeneration:
                 CharInfo.StaminaStats.Regeneration -= valueOverDuration;
+                EventManager.Instance.UpdateStamina(this);
                 break;
             case BuffDebuffStatsType.AttackSpeed:
                 CharInfo.AttackSpeed -= valueOverDuration;
@@ -1017,8 +1024,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 damage = 0;
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldTotalDefence);
                 go.transform.position = transform.position;
-                //TODO belt
-                //EventManager.Instance.AddBlock(this, BlockInfo.BlockType.full);
+                EventManager.Instance.AddBlock(this, BlockInfo.BlockType.full);
 
             }
             else
@@ -1026,8 +1032,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 damage = damage - CharInfo.DefenceStats.BaseDefence;
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldNormal);
                 go.transform.position = transform.position;
-                //TODO belt
-                //EventManager.Instance.AddBlock(this, BlockInfo.BlockType.partial);
+                EventManager.Instance.AddBlock(this, BlockInfo.BlockType.partial);
 
                 damage = damage < 0 ? 1 : damage;
             }
@@ -1098,6 +1103,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             EventManager.Instance.AddCharacterDeath(this);
         }
         EventManager.Instance.UpdateHealth(this);
+        EventManager.Instance.UpdateStamina(this);
         HealthStatsChangedEvent?.Invoke(damage, healthCT, transform);
         return res;
     }

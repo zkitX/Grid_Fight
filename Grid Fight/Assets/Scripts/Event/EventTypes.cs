@@ -17,6 +17,9 @@ public enum TimedCheckTypes
     ThisEventCalled,
     EventCalled,
     BattleTimeCheck,
+    BlockCheck,
+    CharacterStaminaCheck,
+    EventTriggeredCheck,
     None,
 }
 
