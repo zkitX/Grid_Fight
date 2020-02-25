@@ -447,6 +447,9 @@ public enum AttackParticleTypes
     Test_Mesh = 1000,
     Stage00_BossOctopus_Tentacle = 21,
     Stage00_BossOctopus_Head = 22,
+    Stage04_Desert_Goddess = 1005,
+    Stage04_Forest_Goddess = 1007,
+    Stage04_Valley_Goddess = 1008,
 }
 
 
