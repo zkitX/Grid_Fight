@@ -29,6 +29,29 @@ public class Stage00_BossOctopus : MinionType_Script
         yield return null;
     }
 
+    protected override void Update()
+    {
+        if(UIBattleManager.Instance != null)
+        {
+            if(!UIBattleManager.Instance.UIBoss.gameObject.activeInHierarchy)
+            {
+                UIBattleManager.Instance.UIBoss.gameObject.SetActive(true);
+            }
+
+            float totalHP = 0;
+            float currentHP = 0;
+
+            foreach (MinionType_Script item in Pieces.Where(r=> r.CharInfo.CharacterID != CharacterNameType.Stage00_BossOctopus_Girl))
+            {
+                totalHP += item.CharInfo.HealthStats.Base;
+                currentHP += item.CharInfo.HealthStats.Health;
+            }
+            UIBattleManager.Instance.UIBoss.UpdateHp((100f * currentHP) / totalHP);
+        }
+        
+    }
+
+
     void GenerateBoss()
     {
         foreach (CharacterNameType piece in piecesType)

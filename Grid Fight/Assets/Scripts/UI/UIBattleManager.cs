@@ -30,6 +30,9 @@ public class UIBattleManager : MonoBehaviour
     public CanvasGroup Win;
     public CanvasGroup Lose;
 
+
+    public NewIBoss UIBoss;
+
    // public TextMeshProUGUI LeftSide;
  //   public TextMeshProUGUI RightSide;
 

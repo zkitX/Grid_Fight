@@ -130,9 +130,12 @@ public class Stage00_BossOctopus_Head : MinionType_Script
         yield break;
     }
 
-    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical)
+    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
-        if (CanGetDamage)
+
+
+
+        if (CanGetDamage && CharInfo.Health > 0)
         {
             return base.SetDamage(damage, elemental, isCritical);
         }
@@ -157,7 +160,7 @@ public class Stage00_BossOctopus_Head : MinionType_Script
                 bossLady.SetAnimation(CharacterAnimationStateType.Idle_Disable_Loop, loop, transition);
                 break;
             case (CharacterAnimationStateType.Death_Prep):
-                transition = 1f;
+                transition = 0.1f;
                 bossLady.SetAnimation(CharacterAnimationStateType.Death_Prep, loop, transition);
                 break;
             case (CharacterAnimationStateType.Atk1_AtkToIdle):

@@ -104,10 +104,10 @@ public class Stage00_BossOctopus_Tentacles : MinionType_Script
                 transition = 0.35f;
                 break;
             case (CharacterAnimationStateType.Idle_Disable_Loop):
-                transition = 4f;
+                transition = 1f;
                 break;
             case (CharacterAnimationStateType.Death_Prep):
-                transition = 4f;
+                transition = 1f;
                 break;
             case (CharacterAnimationStateType.Atk1_AtkToIdle):
                 transition = 0.5f;
@@ -121,9 +121,9 @@ public class Stage00_BossOctopus_Tentacles : MinionType_Script
         base.SetAnimation(animState, loop, transition);
     }
 
-    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical)
+    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
-        if (CanGetDamage)
+        if (CanGetDamage && CharInfo.Health > 0)
         {
             return base.SetDamage(damage, elemental, isCritical);
         }

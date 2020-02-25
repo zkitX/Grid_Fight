@@ -2608,14 +2608,14 @@ GameObject:
   - component: {fileID: 6258233749909862519}
   - component: {fileID: 4118966177906399832}
   - component: {fileID: 8648259699193211479}
-  - component: {fileID: 5363534934336569044}
+  - component: {fileID: 6020664857743546261}
   m_Layer: 5
   m_Name: UI-Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6258233749909862519
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2669,7 +2669,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5363534934336569044
+--- !u!114 &6020664857743546261
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2678,23 +2678,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 307276096386294429}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0fc68ce020f2604c8cdb6a021ab12a2, type: 3}
+  m_Script: {fileID: 11500000, guid: 5faa5f9bea8cee94699d22bc28dbdd89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignedButton: 3
-  mapSide: 0
   healthBar: {fileID: 7908914534526031171}
-  staminaBar: {fileID: 7408380888628715478}
-  specialBar: {fileID: 686121288274422971}
-  selectionDiamondText: {fileID: 3778259271648080267}
-  characterIconIdle: {fileID: 990640304533559716}
-  characterIconSelected: {fileID: 2928867952943898746}
-  characterName: {fileID: 8152792219210192974}
-  deadText: {fileID: 7630127607163266341}
-  backgroundImages:
-  - {fileID: 4249075701374570308}
-  - {fileID: 3540682768667063026}
-  colorToChange: {r: 0, g: 0, b: 0, a: 0}
   animationDuration: 0.2
 --- !u!1 &308218853442696788
 GameObject:
@@ -21651,6 +21638,7 @@ MonoBehaviour:
   isRightSidePlaying: 0
   Win: {fileID: 154551745012062785}
   Lose: {fileID: 3286472206768194368}
+  UIBoss: {fileID: 6020664857743546261}
 --- !u!114 &6492524348440035479
 MonoBehaviour:
   m_ObjectHideFlags: 0
