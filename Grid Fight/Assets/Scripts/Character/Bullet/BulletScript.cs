@@ -226,7 +226,7 @@ public class BulletScript : MonoBehaviour
             {
                 bool iscritical = CharInfo.IsCritical(attackLevel == CharacterLevelType.Novice ? true : false);
                 //Set damage to the hitting character
-                if(attackLevel == CharacterLevelType.Novice)
+                if(attackLevel == CharacterLevelType.Godness)
                 {
                     CameraManagerScript.Instance.CameraShake(CameraShakeType.PowerfulAttackHit);
                 }
