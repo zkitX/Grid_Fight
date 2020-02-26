@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.1000977, y: -10.200073}
-  m_SizeDelta: {x: 503.7, y: 0.7}
+  m_AnchoredPosition: {x: -11, y: -113}
+  m_SizeDelta: {x: 533.18, y: 170.82}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2012575887947503531
 CanvasRenderer:
@@ -64,13 +64,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ' If your Stamina,
+  m_text: ' If your <color=#FF7E00>Stamina, orange bar</color>
 
-    <color=#FF7E00>orange bar</color> is depleted you cannot attack. Change characters
-    or wait until it recovers'
+    is depleted you cannot attack. Change characters or wait until it recovers'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 410767eb1e9a2ba458c57378d8533b2a, type: 2}
-  m_sharedMaterial: {fileID: 8566412196547770612, guid: 410767eb1e9a2ba458c57378d8533b2a,
+  m_fontAsset: {fileID: 11400000, guid: 7da1647b7446d374c90f7016917be00a, type: 2}
+  m_sharedMaterial: {fileID: -5583767980940927933, guid: 7da1647b7446d374c90f7016917be00a,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -102,18 +101,18 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 16
   m_textAlignment: 258
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_characterSpacing: 1
+  m_wordSpacing: 2
+  m_lineSpacing: -9
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 0
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -142,7 +141,7 @@ MonoBehaviour:
     spaceCount: 17
     wordCount: 18
     linkCount: 0
-    lineCount: 5
+    lineCount: 4
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
