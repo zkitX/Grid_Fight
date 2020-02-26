@@ -96,12 +96,14 @@ public class MinionType_Script : BaseCharacter
                         yield return null;
                     }
                     InputDirection dir = InputDirection.Up;
-                    for (int i = 0; i < 10; i++)
+
+                    foreach (var item in BattleManagerScript.Instance.AllCharactersOnField.OrderBy(r=> Mathf.Abs(r.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x)))
                     {
-                        int res = Random.Range(0, 100);
-                        dir = res < 25 ? InputDirection.Up : res < 50 ? InputDirection.Down : res < 75 ? InputDirection.Left : InputDirection.Right;
+                        dir = item.UMS.CurrentTilePos.x > UMS.CurrentTilePos.x ? InputDirection.Down :
+                            item.UMS.CurrentTilePos.x < UMS.CurrentTilePos.x ? InputDirection.Up :
+                            item.UMS.CurrentTilePos.y < UMS.CurrentTilePos.y ? InputDirection.Left : InputDirection.Right;
                         BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos + GridManagerScript.Instance.GetVectorFromDirection(dir));
-                        if(bts != null && bts.BattleTileState == BattleTileStateType.Empty)
+                        if (bts != null && bts.BattleTileState == BattleTileStateType.Empty)
                         {
                             break;
                         }
