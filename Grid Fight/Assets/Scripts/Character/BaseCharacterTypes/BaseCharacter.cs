@@ -79,7 +79,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     protected virtual void Start()
     {
-        if(VFXTestMode || UMS.CurrentAttackType == AttackType.Tile)
+        if(VFXTestMode)
         {
             StartAttakCo();
             StartMoveCo();
@@ -90,7 +90,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
         if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && UMS.CurrentAttackType == AttackType.Particles)
         {
-            NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo);
+            NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo, UMS.Side);
         }
 
         if(transform.parent == null)
@@ -605,9 +605,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 CurrentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos) && r.BattleTileState == BattleTileStateType.Empty).ToList().Count ==
                 CurrentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos)).ToList().Count && GridManagerScript.Instance.isPosOnField(UMS.CurrentTilePos + dir))
             {
-
-                
-
                 SetAnimation(AnimState);
                 isMoving = true;
                 if (prevBattleTile.Count > 1)
@@ -873,10 +870,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 break;
             case BuffDebuffStatsType.MovementSpeed:
                 CharInfo.MovementSpeed -= valueOverDuration;
-                break;
-            case BuffDebuffStatsType.Stamina:
-                CharInfo.Stamina -= valueOverDuration;
-                EventManager.Instance.UpdateStamina(this);
                 break;
             case BuffDebuffStatsType.StaminaRegeneration:
                 CharInfo.StaminaStats.Regeneration -= valueOverDuration;

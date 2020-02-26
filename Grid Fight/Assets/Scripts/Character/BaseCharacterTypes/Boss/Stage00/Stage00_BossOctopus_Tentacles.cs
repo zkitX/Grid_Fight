@@ -66,6 +66,7 @@ public class Stage00_BossOctopus_Tentacles : MinionType_Script
 
     void InteruptAttack()
     {
+        Attacking = false;
         shotsLeftInAttack = 0;
         currentAttackPhase = AttackPhasesType.End;
     }

@@ -8,7 +8,7 @@ public class NewICharacterVitality : MonoBehaviour
 {
     [SerializeField] public CharacterSelectionType assignedButton = CharacterSelectionType.Up;
 
-    [SerializeField] protected SideType mapSide = SideType.LeftSide;
+    public SideType mapSide = SideType.LeftSide;
     [SerializeField] protected Image healthBar;
     [SerializeField] protected Image staminaBar;
     [SerializeField] protected Image specialBar;
@@ -32,6 +32,7 @@ public class NewICharacterVitality : MonoBehaviour
     IEnumerator HealthLerper;
     IEnumerator StaminaLerper;
     IEnumerator SpecialLerper;
+
 
     private void Awake()
     {

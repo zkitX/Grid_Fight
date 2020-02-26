@@ -87,7 +87,6 @@ public class WaveManagerScript : MonoBehaviour
         else
         {
             res.gameObject.SetActive(true);
-            res.StartAttakCo();
         }
         res.gameObject.SetActive(true);
         res.CharInfo.HealthStats.Base = Random.Range(character.Health.x, character.Health.y);

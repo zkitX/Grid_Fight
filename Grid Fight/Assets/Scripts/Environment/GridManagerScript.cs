@@ -125,6 +125,23 @@ public class GridManagerScript : MonoBehaviour
         return SideType.LeftSide;
     }
 
+
+    public Vector2Int GetVectorFromDirection(InputDirection dir)
+    {
+        switch (dir)
+        {
+            case InputDirection.Up:
+                return new Vector2Int(-1, 0);
+            case InputDirection.Down:
+                return new Vector2Int(1, 0);
+            case InputDirection.Left:
+                return new Vector2Int(0, 1);
+            case InputDirection.Right:
+                return new Vector2Int(0, -1);
+        }
+        return new Vector2Int(0, -1);
+    }
+
     public List<BattleTileScript> GetBattleTiles(List<Vector2Int> pos, WalkingSideType walkingSide)
     {
         List<BattleTileScript> res = new List<BattleTileScript>();

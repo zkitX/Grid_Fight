@@ -330,6 +330,13 @@ public enum ElementalWeaknessType
 }
 
 
+public enum AIType
+{
+    GeneralAI,
+    AggressiveAI
+}
+
+
 public enum CharacterAnimationStateType
 {
     NoMesh,

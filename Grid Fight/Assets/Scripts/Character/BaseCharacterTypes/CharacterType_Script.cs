@@ -98,7 +98,7 @@ public class CharacterType_Script : BaseCharacter
         if(UMS.CurrentAttackType == AttackType.Particles)
         {
             BattleManagerScript.Instance.UpdateCurrentSelectedCharacters(this, null);
-            NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo);
+            NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo, UMS.Side);
         }
         base.SetCharDead();
     }

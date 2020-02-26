@@ -1,15 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MinionType_Script : BaseCharacter
 {
 
-    
+
     protected bool MoveCoOn = true;
     private IEnumerator MoveActionCo;
+    private float LastAttackTime;
 
-   
+    public AIType CurrentAI;
+
+    private bool UnderAttack
+    {
+        get
+        {
+            if (Time.time > LastAttackTime + 10f)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+    }
+    private bool AIMove = false;
 
     public override void SetUpEnteringOnBattle()
     {
@@ -24,6 +42,7 @@ public class MinionType_Script : BaseCharacter
 
     public override void SetAttackReady(bool value)
     {
+        StartAttakCo();
         StartMoveCo();
         CharInfo.DefenceStats.BaseDefence = Random.Range(0.7f, 1);
         base.SetAttackReady(value);
@@ -32,6 +51,11 @@ public class MinionType_Script : BaseCharacter
     public override void StartMoveCo()
     {
         MoveCoOn = true;
+        if(MoveActionCo != null)
+        {
+            StopCoroutine(MoveActionCo);
+
+        }
         MoveActionCo = Move();
         StartCoroutine(MoveActionCo);
     }
@@ -44,33 +68,45 @@ public class MinionType_Script : BaseCharacter
         base.SetCharDead();
     }
 
-   
+
 
     public virtual IEnumerator Move()
     {
-        Debug.Log("Minion move co started");
         while (true)
         {
-            if(MoveCoOn && currentAttackPhase == AttackPhasesType.End && !Attacking)
+            if (MoveCoOn && currentAttackPhase == AttackPhasesType.End && !Attacking)
             {
                 float timer = 0;
                 float MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y);
-                while (timer < MoveTime)
+                while (timer < MoveTime && !AIMove)
                 {
-                    yield return new WaitForFixedUpdate();
+                    yield return null;
                     while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || Attacking)
                     {
                         yield return new WaitForFixedUpdate();
                     }
-                    timer += Time.fixedDeltaTime;
+                    Debug.Log(timer + "    " + MoveTime);
+                    timer += Time.deltaTime;
                 }
+                AIMove = false;
                 if (CharInfo.Health > 0)
                 {
                     while (currentAttackPhase != AttackPhasesType.End)
                     {
                         yield return null;
                     }
-                    MoveCharOnDirection((InputDirection)Random.Range(0, 4));
+                    InputDirection dir = InputDirection.Up;
+                    for (int i = 0; i < 10; i++)
+                    {
+                        int res = Random.Range(0, 100);
+                        dir = res < 25 ? InputDirection.Up : res < 50 ? InputDirection.Down : res < 75 ? InputDirection.Left : InputDirection.Right;
+                        BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos + GridManagerScript.Instance.GetVectorFromDirection(dir));
+                        if(bts != null && bts.BattleTileState == BattleTileStateType.Empty)
+                        {
+                            break;
+                        }
+                    }
+                    MoveCharOnDirection(dir);
                 }
                 else
                 {
@@ -81,6 +117,10 @@ public class MinionType_Script : BaseCharacter
         }
     }
 
+    protected override void Update()
+    {
+        base.Update();
+    }
 
     public override void StopMoveCo()
     {
@@ -113,7 +153,7 @@ public class MinionType_Script : BaseCharacter
         if (nextAttack.Anim == CharacterAnimationStateType.Atk)
         {
             //Temporary until anims are added
-            
+
             sequencedAttacker = false;
             chargeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
             SetAnimation(CharacterAnimationStateType.Idle, true);
@@ -123,9 +163,29 @@ public class MinionType_Script : BaseCharacter
         //If it does have the correct animation setup, play that charged animation
         else
         {
-            currentAttackPhase = AttackPhasesType.Start;
-            sequencedAttacker = true; //Temporary until anims are added
-            SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
+            bool res = false;
+
+            switch (CurrentAI)
+            {
+                case AIType.GeneralAI:
+                    res = GeneralTestAI();
+                    break;
+                case AIType.AggressiveAI:
+                    res = AggressiveTestAI();
+                    break;
+            }
+            if (res)
+            {
+                currentAttackPhase = AttackPhasesType.Start;
+                sequencedAttacker = true; //Temporary until anims are added
+                SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
+            }
+            else
+            {
+                Attacking = false;
+                shotsLeftInAttack = 0;
+            }
+
         }
 
         while (shotsLeftInAttack != 0)
@@ -136,6 +196,60 @@ public class MinionType_Script : BaseCharacter
         currentAttackPhase = AttackPhasesType.End;
         //attacking = false; //Temporary until anims are added
         yield break;
+    }
+
+
+    public bool GeneralTestAI()
+    {
+        BaseCharacter cb = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x && r.IsOnField).FirstOrDefault();
+        if (cb != null)
+        {
+            if (UnderAttack)
+            {
+                if (CharInfo.HealthPerc > 40)
+                {
+                    return true;
+                }
+                else
+                {
+                    AIMove = false;
+                    return false;
+                }
+            }
+            else
+            {
+                return true;
+            }
+        }
+        else
+        {
+            AIMove = true;
+            return false;
+        }
+
+    }
+
+    public bool AggressiveTestAI()
+    {
+        BaseCharacter cb = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x).FirstOrDefault();
+        if (cb != null)
+        {
+            if (CharInfo.HealthPerc > 20)
+            {
+                return true;
+            }
+            else
+            {
+                AIMove = false;
+                return false;
+            }
+        }
+        else
+        {
+            AIMove = true;
+            return false;
+        }
+
     }
 
 
@@ -162,11 +276,12 @@ public class MinionType_Script : BaseCharacter
 
             if (rand <= 200)
             {
+                Attacking = false;
                 shotsLeftInAttack = 0;
             }
         }
 
-
+        LastAttackTime = Time.time;
         return base.SetDamage(damage, elemental, isCritical);
     }
 

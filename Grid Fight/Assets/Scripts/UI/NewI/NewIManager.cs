@@ -59,28 +59,36 @@ public class NewIManager : MonoBehaviour
 
     public void SetSelected(bool state, ControllerType controller, CharacterNameType charName)
     {
-        if (state) GetvitalityBoxOfCharacter(charName).SelectCharacter(controller);
-        else GetvitalityBoxOfCharacter(charName).DeselectCharacter();
+        SideType side = GridManagerScript.Instance.GetSideTypeFromControllerType(controller);
+        if (state)
+        {
+            GetvitalityBoxOfCharacter(charName, side).SelectCharacter(controller);
+        }
+        else
+        {
+            GetvitalityBoxOfCharacter(charName, side).DeselectCharacter();
+        }
     }
 
     public void SetUICharacterToButton(CharacterType_Script character, CharacterSelectionType buttonToAssignTo)
     {
-        GetvitalityBoxOfAssignedButton(buttonToAssignTo).SetCharacter(character.CharInfo);
+
+        GetvitalityBoxOfAssignedButton(buttonToAssignTo, character.UMS.Side).SetCharacter(character.CharInfo);
     }
 
-    public void UpdateVitalitiesOfCharacter(CharacterInfoScript character)
+    public void UpdateVitalitiesOfCharacter(CharacterInfoScript character, SideType side)
     {
-        GetvitalityBoxOfCharacter(character.CharacterID).UpdateVitalities();
+        GetvitalityBoxOfCharacter(character.CharacterID, side).UpdateVitalities();
     }
 
-    public NewICharacterVitality GetvitalityBoxOfCharacter(CharacterNameType charName)
+    public NewICharacterVitality GetvitalityBoxOfCharacter(CharacterNameType charName, SideType side)
     {
-        return vitalityBoxes.Where(r =>r.assignedCharDetails != null && r.assignedCharDetails.CharacterID == charName).FirstOrDefault();
+        return vitalityBoxes.Where(r =>r.assignedCharDetails != null && r.assignedCharDetails.CharacterID == charName && r.mapSide == side).FirstOrDefault();
     }
 
-    public NewICharacterVitality GetvitalityBoxOfAssignedButton(CharacterSelectionType inButton)
+    public NewICharacterVitality GetvitalityBoxOfAssignedButton(CharacterSelectionType inButton, SideType side)
     {
-        return vitalityBoxes.Where(r => r.assignedButton == inButton).FirstOrDefault();
+        return vitalityBoxes.Where(r => r.assignedButton == inButton && r.mapSide == side).FirstOrDefault();
     }
 
     public string GetButtonTypeString(CharacterSelectionType input)
