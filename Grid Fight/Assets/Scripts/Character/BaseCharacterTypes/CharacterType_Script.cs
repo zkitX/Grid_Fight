@@ -113,12 +113,22 @@ public class CharacterType_Script : BaseCharacter
     public override void SetUpLeavingBattle()
     {
         SetAnimation(CharacterAnimationStateType.Reverse_Arriving);
+        isDefending = false;
         EventManager.Instance.AddCharacterSwitched((BaseCharacter)this);
     }
 
     #endregion
 
     #region Attack
+
+    public void SetParticlesLayer(GameObject ps)
+    {
+        foreach (ParticleSystemRenderer item in ps.GetComponentsInChildren<ParticleSystemRenderer>())
+        {
+            item.sortingOrder = CharOredrInLayer;
+        }
+    }
+
 
     //Load the special attack and fire it if the load is complete
     public IEnumerator StartChargingAttack()
@@ -148,9 +158,15 @@ public class CharacterType_Script : BaseCharacter
                 {
                     isChargingParticlesOn = true;
                     ps = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
+                    
                     ps.transform.parent = transform;
                    
                 }
+                else
+                {
+                    SetParticlesLayer(ps);
+                }
+
 
                 if (!IsOnField)
                 {

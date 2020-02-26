@@ -737,7 +737,10 @@ public class BattleManagerScript : MonoBehaviour
                         }
                     }
                 }
-                LoadingNewCharacterToGrid(cb.CharInfo.CharacterID, side, playerController);
+                if(cb != null)
+                {
+                    LoadingNewCharacterToGrid(cb.CharInfo.CharacterID, side, playerController);
+                }
             }
         }
     }

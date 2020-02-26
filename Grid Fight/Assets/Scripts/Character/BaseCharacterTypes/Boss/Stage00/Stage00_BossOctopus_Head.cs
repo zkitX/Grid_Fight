@@ -185,7 +185,7 @@ public class Stage00_BossOctopus_Head : MinionType_Script
                 break;
         }
 
-        if(animState != CharacterAnimationStateType.Reverse_Arriving && SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle_Disable_Loop)
+        if(animState != CharacterAnimationStateType.Death_Exit && SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle_Disable_Loop)
         {
             return;
         }

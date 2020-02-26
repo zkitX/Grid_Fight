@@ -11,7 +11,8 @@ public class MainMenuPAX : MonoBehaviour
     public bool ShowScene = false;
     public GameObject rewired;
     public List<Animator> Buttons = new List<Animator>();
-
+    public AudioSource AudioS;
+    public AudioClip ButtonPressed;
     private Animator currentSelected;
     public float TimeOffset = 0;
     public float CoolDown = 0.5f;
@@ -75,6 +76,7 @@ public class MainMenuPAX : MonoBehaviour
 
     public void GoToBattleScene(string sceneName)
     {
+        AudioS.PlayOneShot(ButtonPressed);
         StartCoroutine(LoadYourAsyncScene(sceneName));
         InputController.Instance.ButtonADownEvent -= Instance_ButtonADownEvent;
         InputController.Instance.LeftJoystickUsedEvent -= Instance_LeftJoystickUsedEvent;

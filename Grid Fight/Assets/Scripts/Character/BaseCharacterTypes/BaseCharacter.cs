@@ -56,7 +56,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public bool IsSwapping = false;
     public bool SwapWhenPossible = false;
     public GameObject chargeParticles = null;
-
+    protected bool isDefending = false;
     public int shotsLeftInAttack
     {
         get
@@ -75,7 +75,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public bool sequencedAttacker = false;
     [HideInInspector]
     public bool Attacking = false;
-    private int OredrInLayer = 0;
+    protected int CharOredrInLayer = 0;
 
     protected virtual void Start()
     {
@@ -160,10 +160,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         CanAttack = value;
         IsOnField = value;
         currentAttackPhase = AttackPhasesType.End;
-        OredrInLayer = 101 + (UMS.CurrentTilePos.x * 10) + (UMS.Facing == FacingType.Right ? UMS.CurrentTilePos.y - 12 : UMS.CurrentTilePos.y);
+        CharOredrInLayer = 101 + (UMS.CurrentTilePos.x * 10) + (UMS.Facing == FacingType.Right ? UMS.CurrentTilePos.y - 12 : UMS.CurrentTilePos.y);
         if (CharInfo.UseLayeringSystem)
         {
-            SpineAnim.SetSkeletonOrderInLayer(OredrInLayer);
+            SpineAnim.SetSkeletonOrderInLayer(CharOredrInLayer);
         }
     }
 
@@ -537,14 +537,14 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
         SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
         SpineAnim.SetAnimationSpeed(5);
-        defe = true;
+        isDefending = true;
         DefendingHoldingTimer = 0;
         StartCoroutine(Defending_Co());
     }
-    bool defe = false;
+    
     private IEnumerator Defending_Co()
     {
-        while (defe)
+        while (isDefending)
         {
             if(SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle)
             {
@@ -560,8 +560,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public void StopDefending()
     {
-        defe = false;
-        SetAnimation(CharacterAnimationStateType.Idle, true, 0.1f);
+        if(isDefending)
+        {
+            isDefending = false;
+            SetAnimation(CharacterAnimationStateType.Idle, true, 0.1f);
+        }
+        
     }
 
 
@@ -615,10 +619,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     GridManagerScript.Instance.SetBattleTileState(item.Pos, BattleTileStateType.Empty);
                 }
                 UMS.CurrentTilePos += dir;
-                OredrInLayer = 101 + (dir.x * 10) + (UMS.Facing == FacingType.Right ? dir.y - 12 : dir.y);
+                CharOredrInLayer = 101 + (dir.x * 10) + (UMS.Facing == FacingType.Right ? dir.y - 12 : dir.y);
                 if (CharInfo.UseLayeringSystem)
                 {
-                    SpineAnim.SetSkeletonOrderInLayer(OredrInLayer);
+                    SpineAnim.SetSkeletonOrderInLayer(CharOredrInLayer);
                 }
 
                 CurrentBattleTiles = CurrentBattleTilesToCheck;
@@ -724,7 +728,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             {
                 isMovCheck = true;
                 isMoving = false;
-                if(defe && !isDefe)
+                if(isDefending && !isDefe)
                 {
                     isDefe = true;
                     SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
