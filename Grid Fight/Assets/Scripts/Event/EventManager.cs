@@ -700,7 +700,7 @@ public class CharacterEventInfoClass
     public void SetupOtherStuff()
     {
         charName = character.CharInfo.CharacterID.ToString();
-        Debug.Log("Created " + charName);
+        //Debug.Log("Created " + charName);
     }
 }
 

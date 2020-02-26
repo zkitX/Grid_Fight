@@ -21,16 +21,22 @@ public class UIBattleFieldManager : MonoBehaviour
     private Dictionary<int, GameObject> CriticalHits = new Dictionary<int, GameObject>();
 
     private Camera mCamera;
-
+    bool setupIsComplete = false;
 
     private void Awake()
     {
         Instance = this;
+        
     }
 
-    void Start()
+    private void Update()
     {
-        mCamera = Camera.main;
+
+        if(BattleManagerScript.Instance != null && !setupIsComplete)
+        {
+            mCamera = Camera.main;
+            setupIsComplete = true;
+        }
     }
 
     public void SetupCharListener(BaseCharacter charOwner)
