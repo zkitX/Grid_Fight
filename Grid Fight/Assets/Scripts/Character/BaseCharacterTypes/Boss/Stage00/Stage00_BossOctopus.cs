@@ -325,7 +325,6 @@ public class Stage00_BossOctopus : MinionType_Script
 
     }
 
-
     public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
     {
         foreach (MinionType_Script piece in Pieces)

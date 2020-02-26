@@ -48,6 +48,7 @@ public class MinionType_Script : BaseCharacter
 
     public virtual IEnumerator Move()
     {
+        Debug.Log("Minion move co started");
         while (true)
         {
             if(MoveCoOn && currentAttackPhase == AttackPhasesType.End && !Attacking)
@@ -61,7 +62,6 @@ public class MinionType_Script : BaseCharacter
                     {
                         yield return new WaitForFixedUpdate();
                     }
-
                     timer += Time.fixedDeltaTime;
                 }
                 if (CharInfo.Health > 0)
@@ -70,7 +70,6 @@ public class MinionType_Script : BaseCharacter
                     {
                         yield return null;
                     }
-
                     MoveCharOnDirection((InputDirection)Random.Range(0, 4));
                 }
                 else
