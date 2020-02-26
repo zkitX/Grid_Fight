@@ -69,7 +69,7 @@ public class MainMenuPAX : MonoBehaviour
 
     private void Instance_ButtonADownEvent(int player)
     {
-        GoToBattleScene(selectedButton == 0 ? "BattleScene-00-PAX" : selectedButton == 1 ? "BattleScene-04-PAX" : "SpeedRun-00-PAX");
+        GoToBattleScene(selectedButton == 0 ? "BattleScene-00-PAX" : selectedButton == 1 ? "BattleScene-04-PAX" : "BattleScene-00-Speedrun-PAX");
     }
 
 
