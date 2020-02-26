@@ -295,16 +295,16 @@ public class InputController : MonoBehaviour
                 ButtonRightStickDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.KeyboardDown:
-                LeftJoystickUsedEvent(data.playerId, InputDirection.Down);
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Down);
                 break;
             case InputButtonType.KeyboardLeft:
-                LeftJoystickUsedEvent(data.playerId, InputDirection.Left);
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Left);
                 break;
             case InputButtonType.KeyboardRight:
-                LeftJoystickUsedEvent(data.playerId, InputDirection.Right);
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Right);
                 break;
             case InputButtonType.KeyboardUp:
-                LeftJoystickUsedEvent(data.playerId, InputDirection.Up);
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Up);
                 break;
         }
     }
