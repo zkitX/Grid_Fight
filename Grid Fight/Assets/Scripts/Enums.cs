@@ -425,7 +425,8 @@ public enum ParticlesType
     PowerUp_Stamina,
     PowerUp_Speed,
     ShieldNormal,
-    ShieldTotalDefence
+    ShieldTotalDefence,
+    Stage00BossDeathSmoke
 }
 
 public enum AttackParticleTypes
