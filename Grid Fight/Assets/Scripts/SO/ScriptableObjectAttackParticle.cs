@@ -8,6 +8,7 @@ public class ScriptableObjectAttackParticle : ScriptableObject
 {
     public AttackParticleTypes PSType;
     public GameObject CastRightPS;
+    public GameObject BulletRightPS;
     public GameObject ImpactRightPS;
     public GameObject CastLeftPS;
     public GameObject BulletLeftPS;

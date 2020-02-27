@@ -25,8 +25,8 @@ public class GridFightSayDialog : SayDialog
 
         if(LastCharacter != null && LastCharacter.name != nextChar.name)
         {
-            //SayDialogAnimatorController.SetBool("InOut", false); 
-            //yield return 
+            SayDialogAnimatorController.SetBool("InOut", false);
+            yield return null; 
         }
 
         SayDialogAnimatorController.SetBool("InOut", true);

@@ -16,10 +16,10 @@ using Fungus;
 public class CallDeselectCharacter : Command
 {
     public CharacterNameType characterID;
-
+    public SideType Side;
     protected virtual void CallTheMethod()
     {
-        BattleManagerScript.Instance.DeselectCharacter(characterID);
+        BattleManagerScript.Instance.DeselectCharacter(characterID, Side, ControllerType.None);
     }
 
     #region Public members

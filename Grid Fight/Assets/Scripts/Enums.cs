@@ -468,7 +468,8 @@ public enum AttackParticlePhaseTypes
     AttackLeft,
     EffectLeft,
     Charging,
-    CastActivation
+    CastActivation,
+    AttackRight,
 }
 
 public enum SideType

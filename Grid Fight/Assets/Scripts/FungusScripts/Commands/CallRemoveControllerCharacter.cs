@@ -10,7 +10,7 @@ using Fungus;
 public class CallRemoveControllerCharacter : Command
 {
     public ControllerType[] controllers;
-
+    public SideType Side;
     protected virtual void CallTheMethod()
     {
         CharacterType_Script charToRemove = null;
@@ -20,7 +20,7 @@ public class CallRemoveControllerCharacter : Command
             if(charToRemove != new CharacterType_Script() || charToRemove != null)
             {
                 BattleManagerScript.Instance.RemoveNamedCharacterFromBoard(charToRemove.CharInfo.CharacterID);
-                BattleManagerScript.Instance.DeselectCharacter(charToRemove.CharInfo.CharacterID);
+                BattleManagerScript.Instance.DeselectCharacter(charToRemove.CharInfo.CharacterID, Side, controller);
             }
         }
     }

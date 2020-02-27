@@ -128,6 +128,8 @@ public class ParticleManagerScript : MonoBehaviour
                 return ListOfAttckParticles.Where(r => r.PSType == pType).First().CastLeftPS;
             case AttackParticlePhaseTypes.AttackLeft:
                 return ListOfAttckParticles.Where(r => r.PSType == pType).First().BulletLeftPS;
+            case AttackParticlePhaseTypes.AttackRight:
+                return ListOfAttckParticles.Where(r => r.PSType == pType).First().BulletRightPS;
             case AttackParticlePhaseTypes.EffectLeft:
                 return ListOfAttckParticles.Where(r => r.PSType == pType).First().ImpactLeftPS;
             case AttackParticlePhaseTypes.Charging:

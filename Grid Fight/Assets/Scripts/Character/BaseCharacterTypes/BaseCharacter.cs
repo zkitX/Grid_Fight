@@ -248,7 +248,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
 
             //Wait until next attack (if yielding before)
-            if (yieldBefore) yield return PauseAttack(CharInfo.AttackSpeedRatio * nextAttack.AttackRatioMultiplier);
+            if (yieldBefore) yield return PauseAttack((CharInfo.AttackSpeedRatio / 3) * nextAttack.AttackRatioMultiplier);
 
             while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || !CanAttack || isMoving ||
                 (currentAttackPhase != AttackPhasesType.End))
@@ -265,7 +265,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             GetAttack(CharacterAnimationStateType.Atk);
 
             //Wait until next attack
-            if (!yieldBefore) yield return PauseAttack(CharInfo.AttackSpeedRatio * nextAttack.AttackRatioMultiplier);
+            if (!yieldBefore) yield return PauseAttack((CharInfo.AttackSpeedRatio / 3) * nextAttack.AttackRatioMultiplier);
 
         }
 
@@ -427,7 +427,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public virtual void CastAttackParticles()
     {
         //Debug.Log("Cast");
-        GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, UMS.CurrentAttackType == AttackType.Particles ? AttackParticlePhaseTypes.CastLeft : AttackParticlePhaseTypes.CastRight,
+        GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, UMS.Side == SideType.LeftSide ? AttackParticlePhaseTypes.CastLeft : AttackParticlePhaseTypes.CastRight,
             NextAttackLevel == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, UMS.Side);
         cast.GetComponent<DisableParticleScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
         LayerParticleSelection lps = cast.GetComponent<LayerParticleSelection>();
@@ -487,7 +487,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             bs.DestinationTile = new Vector2Int(UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x, UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y < 0 ? 0 : UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y);
         }
-        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharInfo.ParticleID, AttackParticlePhaseTypes.AttackLeft, bullet.transform, UMS.Side,
+        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharInfo.ParticleID,UMS.Side == SideType.LeftSide ? AttackParticlePhaseTypes.AttackLeft : AttackParticlePhaseTypes.AttackRight, bullet.transform, UMS.Side,
             CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script ? true : false);
 
         LayerParticleSelection lps = bs.PS.GetComponent<LayerParticleSelection>();

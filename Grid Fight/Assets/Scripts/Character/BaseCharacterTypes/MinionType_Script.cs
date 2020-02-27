@@ -42,8 +42,11 @@ public class MinionType_Script : BaseCharacter
 
     public override void SetAttackReady(bool value)
     {
-        StartAttakCo();
-        StartMoveCo();
+        if (value)
+        {
+            StartAttakCo();
+            StartMoveCo();
+        }
         CharInfo.DefenceStats.BaseDefence = Random.Range(0.7f, 1);
         base.SetAttackReady(value);
     }
@@ -51,7 +54,7 @@ public class MinionType_Script : BaseCharacter
     public override void StartMoveCo()
     {
         MoveCoOn = true;
-        if(MoveActionCo != null)
+        if (MoveActionCo != null)
         {
             StopCoroutine(MoveActionCo);
 
@@ -77,7 +80,7 @@ public class MinionType_Script : BaseCharacter
             if (MoveCoOn && currentAttackPhase == AttackPhasesType.End && !Attacking)
             {
                 float timer = 0;
-                float MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y);
+                float MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y) / 3;
                 while (timer < MoveTime && !AIMove)
                 {
                     yield return null;
@@ -97,15 +100,28 @@ public class MinionType_Script : BaseCharacter
                     }
                     InputDirection dir = InputDirection.Up;
 
-                    foreach (var item in BattleManagerScript.Instance.AllCharactersOnField.Where(a=> a.IsOnField).OrderBy(r=> Mathf.Abs(r.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x)))
+                    foreach (var item in BattleManagerScript.Instance.AllCharactersOnField.Where(a => a.IsOnField).OrderBy(r => Mathf.Abs(r.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x)))
                     {
-                        dir = item.UMS.CurrentTilePos.x > UMS.CurrentTilePos.x ? InputDirection.Down :
-                            item.UMS.CurrentTilePos.x < UMS.CurrentTilePos.x ? InputDirection.Up :
-                            item.UMS.CurrentTilePos.y < UMS.CurrentTilePos.y ? InputDirection.Left : InputDirection.Right;
+                        dir = item.UMS.CurrentTilePos.x > UMS.CurrentTilePos.x ? InputDirection.Down : InputDirection.Up;
                         BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos + GridManagerScript.Instance.GetVectorFromDirection(dir));
                         if (bts != null && bts.BattleTileState == BattleTileStateType.Empty)
                         {
                             break;
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 2; i++)
+                            {
+                                bts = GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos + GridManagerScript.Instance.GetVectorFromDirection((InputDirection)1 + i));
+                                if (bts != null && bts.BattleTileState == BattleTileStateType.Empty)
+                                {
+                                    break;
+                                }
+                            }
+                            if (bts != null && bts.BattleTileState == BattleTileStateType.Empty)
+                            {
+                                break;
+                            }
                         }
                     }
 
@@ -185,7 +201,6 @@ public class MinionType_Script : BaseCharacter
             }
             else
             {
-                Attacking = false;
                 shotsLeftInAttack = 0;
             }
 
@@ -202,7 +217,7 @@ public class MinionType_Script : BaseCharacter
     }
 
 
-    public virtual bool GeneralTestAI()
+    /*public bool GeneralTestAI()
     {
         BaseCharacter cb = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x && r.IsOnField).FirstOrDefault();
         if (cb != null)
@@ -230,7 +245,41 @@ public class MinionType_Script : BaseCharacter
             return false;
         }
 
+    }*/
+
+
+    public virtual bool GeneralTestAI()
+    {
+        List<Vector2Int> tilesToCheck = new List<Vector2Int>();
+
+        foreach (BulletBehaviourInfoClassOnBattleField item in ((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories)
+        {
+            tilesToCheck.AddRange(item.BulletEffectTiles);
+        }
+        tilesToCheck = tilesToCheck.Distinct().ToList();
+        int chances = Random.Range(0, 100);
+        if (GridManagerScript.Instance.IsEnemyOnTileAttackRange(tilesToCheck, UMS.CurrentTilePos))
+        {
+            if (chances < 10)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        else
+        {
+            if (chances < 50)
+            {
+                return true;
+            }
+            AIMove = true;
+            return false;
+        }
+
     }
+
+
 
     public bool AggressiveTestAI()
     {
@@ -279,6 +328,7 @@ public class MinionType_Script : BaseCharacter
 
             if (rand <= 200)
             {
+                Attacking = false;
                 shotsLeftInAttack = 0;
             }
         }

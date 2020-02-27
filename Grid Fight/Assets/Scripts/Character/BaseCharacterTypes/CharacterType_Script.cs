@@ -283,7 +283,7 @@ public class CharacterType_Script : BaseCharacter
     //Used to indicate the character that is selected in the battlefield
     public void SetCharSelected(bool isSelected, ControllerType player)
     {
-        NewIManager.Instance.SetSelected(isSelected, player, CharInfo.CharacterID);   
+        NewIManager.Instance.SetSelected(isSelected, player, CharInfo.CharacterID, UMS.Side);   
     }
 
 

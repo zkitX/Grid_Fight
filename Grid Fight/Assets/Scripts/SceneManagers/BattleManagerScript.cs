@@ -183,7 +183,11 @@ public class BattleManagerScript : MonoBehaviour
             PlayablesCharOnScene.Where(r => r.CName == currentCharacter.CharInfo.CharacterID).First().isUsed = false;
         }
 
-        WaveManagerScript.Instance.RemoveWaveCharacterFromBoard(currentCharacter);
+        if (WaveManagerScript.Instance != null)
+        {
+            WaveManagerScript.Instance.RemoveWaveCharacterFromBoard(currentCharacter);
+
+        }
 
     }
 
@@ -348,7 +352,7 @@ public class BattleManagerScript : MonoBehaviour
             return;
         }
 
-        CharacterType_Script currentCharacter = (CharacterType_Script)AllCharactersOnField.Where(r=> r.CharInfo.CharacterID == cName).First();
+        CharacterType_Script currentCharacter = (CharacterType_Script)AllCharactersOnField.Where(r=> r.CharInfo.CharacterID == cName && r.UMS.Side == side).First();
         currentCharacter.SetCharSelected(true, playerController);
         if (CurrentSelectedCharacters[playerController].Character == null || !singleUnitControls)
         {
@@ -376,14 +380,15 @@ public class BattleManagerScript : MonoBehaviour
             yield return null;
         }
        
-        if (CurrentSelectedCharacters[playerController].NextSelectionChar == AllCharactersOnField.Where(r=> r.CharInfo.CharacterID == cName).First().CharInfo.CharacterSelection)
+        if (CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar == AllCharactersOnField.Where(r=> r.CharInfo.CharacterID == cName &&
+        CurrentSelectedCharacters[playerController].NextSelectionChar.Side == r.UMS.Side).First().CharInfo.CharacterSelection)
         {
             while (CurrentSelectedCharacters[playerController].Character.isMoving)
             {
                 yield return null;
             }
 
-            if(CurrentSelectedCharacters[playerController].NextSelectionChar == CurrentSelectedCharacters[playerController].Character.CharInfo.CharacterSelection)
+            if(CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar == CurrentSelectedCharacters[playerController].Character.CharInfo.CharacterSelection)
             {
                 CurrentSelectedCharacters[playerController].Character.SwapWhenPossible = false;
                 yield break;
@@ -457,7 +462,7 @@ public class BattleManagerScript : MonoBehaviour
         SelectCharacter(playerController, (CharacterType_Script)AllCharactersOnField.Where(r=> r.CharInfo.CharacterSelection == characterSelection && r.UMS.PlayerController.Contains(playerController)).FirstOrDefault());
     }
 
-    public void DeselectCharacter(CharacterNameType charToDeselectName)
+    public void DeselectCharacter(CharacterNameType charToDeselectName, SideType side, ControllerType playerController)
     {
 
 
@@ -498,13 +503,11 @@ public class BattleManagerScript : MonoBehaviour
             return;
         }
 
-        NewIManager.Instance.SetSelected(false, ControllerType.None, charToDeselectName);
-
-        CharacterType_Script charToDeselect = (CharacterType_Script)AllCharactersOnField.Where(r => r.CharInfo.CharacterID == charToDeselectName).FirstOrDefault();
+        CharacterType_Script charToDeselect = (CharacterType_Script)AllCharactersOnField.Where(r => r.CharInfo.CharacterID == charToDeselectName && r.UMS.Side == side).FirstOrDefault();
 
         if (charToDeselect != null)
         {
-            charToDeselect.SetCharSelected(false, ControllerType.None);
+            charToDeselect.SetCharSelected(false, playerController);
         }
     }
 
@@ -689,13 +692,13 @@ public class BattleManagerScript : MonoBehaviour
 
     public void Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType characterSelection, ControllerType playerController)
     {
-        SideType side = SideType.LeftSide;
+        SideType side = GetSideFromPlayer(new List<ControllerType> { playerController });
         BaseCharacter cb = new BaseCharacter();
         if (InputControllerT == InputControllerType.SelectionOnABXY)
         {
             if (CurrentBattleState == BattleState.Battle)
             {
-                side = GetSideFromPlayer(new List<ControllerType> { playerController });
+                
                 cb = AllCharactersOnField.FirstOrDefault();
                 if (cb != null)
                 {
@@ -707,31 +710,36 @@ public class BattleManagerScript : MonoBehaviour
         {
             if (CurrentBattleState == BattleState.Battle)
             {
-                side = GetSideFromPlayer(new List<ControllerType> { playerController });
                 cb = null;
                 if (CurrentSelectedCharacters[playerController].Character == null)
                 {
-                    cb = AllCharactersOnField.Where(r=>r.gameObject.activeInHierarchy && !r.IsOnField && !r.IsSwapping).FirstOrDefault();
+                    cb = AllCharactersOnField.Where(r=>r.gameObject.activeInHierarchy && !r.IsOnField && !r.IsSwapping && r.UMS.Side == side).FirstOrDefault();
                     if(cb != null)
                     {
-                        CurrentSelectedCharacters[playerController].NextSelectionChar = cb.CharInfo.CharacterSelection;
+                        CurrentSelectedCharacters[playerController].NextSelectionChar = new NextSelectionCharClass(cb.CharInfo.CharacterSelection, cb.UMS.Side);
                     }
                 }
                 else
                 {
                   
-                    CharacterSelectionType cs = CurrentSelectedCharacters[playerController].NextSelectionChar;
+                    CharacterSelectionType cs = CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar;
                     for (int i = 0; i < AllCharactersOnField.Count; i++)
                     {
                         cs = cs + (characterSelection == CharacterSelectionType.Left ? -1 : 1);
-                        cs = (int)cs >= AllCharactersOnField.Count ? 0 : cs < 0 ? ((CharacterSelectionType)AllCharactersOnField.Count - 1) : cs;
+                        int maxChars = AllCharactersOnField.Count > 4 ? 4 : AllCharactersOnField.Count;
+                        cs = (int)cs >= maxChars ? 0 : cs < 0 ? ((CharacterSelectionType)maxChars - 1) : cs;
+                        string t = cs.ToString();
+                        Debug.Log(t);
                         cb = AllCharactersOnField.Where(r =>r.gameObject.activeInHierarchy && r.CharInfo.CharacterSelection == cs && r.UMS.Side == side).FirstOrDefault();
-                        if (cb != null && CurrentSelectedCharacters.Where(r => r.Value.Character != null && ((r.Value.Character == cb) || ( r.Value.NextSelectionChar == cs)) && r.Key != playerController).ToList().Count == 0)
+
+                        t = cb.CharInfo.CharacterID.ToString() + "    " + cb.UMS.Side.ToString();
+                        Debug.Log(t);
+                        if (cb != null && CurrentSelectedCharacters.Where(r => r.Value.Character != null && ((r.Value.Character == cb) || ( r.Value.NextSelectionChar.NextSelectionChar == cs && r.Value.NextSelectionChar.Side == cb.UMS.Side)) && r.Key != playerController).ToList().Count == 0)
                         {
-                            CharacterType_Script PrevCharacter = (CharacterType_Script)AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == CurrentSelectedCharacters[playerController].NextSelectionChar).First();
-                            DeselectCharacter(PrevCharacter.CharInfo.CharacterID);
+                            CharacterType_Script PrevCharacter = (CharacterType_Script)AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar && r.UMS.Side == side).First();
+                            DeselectCharacter(PrevCharacter.CharInfo.CharacterID, side, playerController);
                             //Debug.Log("Prev " + CurrentSelectedCharacters[playerController].NextSelectionChar.ToString());
-                            CurrentSelectedCharacters[playerController].NextSelectionChar = cs;
+                            CurrentSelectedCharacters[playerController].NextSelectionChar = new NextSelectionCharClass(cs, side);
                             //Debug.Log(cs.ToString());
                             break;
                         }
@@ -971,12 +979,12 @@ public class CurrentSelectedCharacterClass
 {
     public CharacterType_Script Character;
     public IEnumerator LoadCharCo;
-    public CharacterSelectionType NextSelectionChar;
+    public NextSelectionCharClass NextSelectionChar;
     public float OffsetSwap;
 
     public CurrentSelectedCharacterClass()
     {
-
+        NextSelectionChar = new NextSelectionCharClass();
     }
 }
 
@@ -997,5 +1005,23 @@ public class DisposableGameObjectClass : System.IDisposable
 
     public void Dispose()
     {
+    }
+}
+
+
+public class NextSelectionCharClass
+{
+    public CharacterSelectionType NextSelectionChar;
+    public SideType Side;
+
+    public NextSelectionCharClass()
+    {
+
+    }
+
+    public NextSelectionCharClass(CharacterSelectionType nextSelectionChar, SideType side)
+    {
+        NextSelectionChar = nextSelectionChar;
+        Side = side;
     }
 }

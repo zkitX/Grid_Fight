@@ -57,9 +57,8 @@ public class NewIManager : MonoBehaviour
         yield return null;
     }
 
-    public void SetSelected(bool state, ControllerType controller, CharacterNameType charName)
+    public void SetSelected(bool state, ControllerType controller, CharacterNameType charName, SideType side = SideType.LeftSide)
     {
-        SideType side = GridManagerScript.Instance.GetSideTypeFromControllerType(controller);
         if (state)
         {
             GetvitalityBoxOfCharacter(charName, side).SelectCharacter(controller);

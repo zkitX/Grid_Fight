@@ -47,20 +47,39 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
         Instantiate(BaseEnvironment);
         yield return null;
 
-        if(!usingFungus) BattleInfoManager = defaultBattleInfo;
+        if (!usingFungus)
+        {
+            BattleInfoManager = defaultBattleInfo;
+        }
         Instantiate(BattleInfoManager);
 
         BattleManagerScript bms = Instantiate(BattleManager).GetComponent<BattleManagerScript>();
-        if(!usingFungus)bms.gameObject.GetComponent<EventManager>().stageEventTriggersProfile = defaultEventProfile;
+        if (!usingFungus && defaultEventProfile != null)
+        {
+            bms.gameObject.GetComponent<EventManager>().stageEventTriggersProfile = defaultEventProfile;
+        }
         bms.usingFungus = usingFungus;
 
         Instantiate(UI_Battle);
         yield return BattleManagerScript.Instance.InstanciateAllChar();
-        if(!usingFungus) Wave = defaultWave;
-        Instantiate(Wave);
-        yield return WaveManagerScript.Instance.WaveCharCreator();
-        if (!usingFungus) FlowChart = defaultFlowChart;
-        Instantiate(FlowChart);
+        if (!usingFungus)
+        {
+            Wave = defaultWave;
+        }
+        if(Wave != null)
+        {
+            Instantiate(Wave);
+            yield return WaveManagerScript.Instance.WaveCharCreator();
+        }
+        
+        if (!usingFungus)
+        {
+            FlowChart = defaultFlowChart;
+        }
+        if (FlowChart != null)
+        {
+            Instantiate(FlowChart);
+        }
         yield return null;
 
         UserInputManager.Instance.StartUserInputManager();

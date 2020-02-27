@@ -307,6 +307,32 @@ public class GridManagerScript : MonoBehaviour
     }
 
 
+    public bool IsEnemyOnTileAttackRange(List<Vector2Int> atkRange, Vector2Int basePos)
+    {
+        basePos.y = YGridSeparator;
+        bool res = false;
+        foreach (Vector2Int target in atkRange)
+        {
+            if (isPosOnField(basePos - target))
+            {
+                res = IsEnemyOnTile(basePos - target);
+                if(res)
+                {
+                    return true;
+                }
+            }
+
+        }
+        return res;
+    }
+
+    public bool IsEnemyOnTile(Vector2Int pos)
+    {
+        return GetBattleTile(pos)._BattleTileState == BattleTileStateType.Occupied ? true : false;
+    }
+
+
+
     public IEnumerator OnBattleFieldAttackCo(CharacterInfoScript cInfo, ScriptableObjectAttackTypeOnBattlefield atk, Vector2Int basePos, AttackParticleTypes atkPS)
     {
         basePos.y = YGridSeparator;
