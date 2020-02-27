@@ -202,7 +202,7 @@ public class SpineAnimationManager : MonoBehaviour
                 || completedAnim == CharacterAnimationStateType.Atk || completedAnim == CharacterAnimationStateType.Atk1)
             {
                 CharOwner.currentAttackPhase = AttackPhasesType.End;
-                CharOwner.Attacking = false;
+                CharOwner.shotsLeftInAttack = 0;
             }
         }
 

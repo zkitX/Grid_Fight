@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 2535995744392258262}
   - component: {fileID: 8368343092567488438}
   - component: {fileID: 2404465662642526120}
-  - component: {fileID: 484075261263935749}
   m_Layer: 0
   m_Name: Spine GameObject (New SkeletonDataAsset)
   m_TagString: Untagged
@@ -233,6 +232,8 @@ MonoBehaviour:
   SpecialFiringPoint: {fileID: 7995136941814269219}
   CurrentAnim: 0
   AnimationTransition: 0.1
+  changeanim: 0
+  transition: 0.5
 --- !u!114 &8368343092567488438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,19 +320,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
---- !u!65 &484075261263935749
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088403889639439206}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.479823, y: 3.2352448, z: 0.9}
-  m_Center: {x: 1.7679181, y: 5.4248285, z: 0}
 --- !u!1 &6082634530435941918
 GameObject:
   m_ObjectHideFlags: 0

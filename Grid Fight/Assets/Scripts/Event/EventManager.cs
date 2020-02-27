@@ -52,7 +52,7 @@ public class EventManager : MonoBehaviour
         stageEventTriggers = new List<GameSequenceEvent>();
         if (stageEventTriggersProfile != null)
         {
-            foreach (GameSequenceEvent gameSeqEvent in stageEventTriggersProfile.stageEventTriggers)
+            foreach (GameSequenceEvent gameSeqEvent in stageEventTriggersProfile.GetAllEventTriggersAndSubTriggers())
             {
                 stageEventTriggers.Add(Instantiate(gameSeqEvent));
             }

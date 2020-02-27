@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57b07e3a7d53ab849b6bc0d9a87386be, type: 3}
-  m_Name: TIME_TimerRunOut
+  m_Name: ContextualTutorial_PlayerPressedLeft
   m_EditorClassIdentifier: 
-  Name: tTimerRunOut
+  Name: ContextualTutorial_PlayerPressedLeft
   hasHappened: 0
   isHappening: 0
   checker: {fileID: 0}
   ceaseOnHappened: 0
-  TimedCheckType: 7
+  TimedCheckType: 0
   deathCharacterID: 1000
   onlyOnDeath: 0
   deathsRequired: 1
-  buttonToWaitFor: 0
+  buttonToWaitFor: 4
   arrivalCharacterID: 1000
   onlyOnArrival: 0
   arrivalsRequired: 1
@@ -34,7 +34,7 @@ MonoBehaviour:
   requireCalledDuringCheck: 1
   requireEventCalledDuringCheck: 1
   EventCallRequired: {fileID: 0}
-  timeCompareType: 2
+  timeCompareType: 3
   hoursToCompare: 0
   minutesToCompare: 0
   secondsToCompare: 0

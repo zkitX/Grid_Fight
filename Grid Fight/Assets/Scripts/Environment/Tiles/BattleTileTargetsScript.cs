@@ -53,7 +53,6 @@ public class BattleTileTargetsScript : MonoBehaviour
             if ((!attacker.gameObject.activeInHierarchy || attacker.shotsLeftInAttack == 0) && !attackerFiredAttackAnim)
             {
                 //Stop the firing of the attacks to the tiles
-                attacker.Attacking = false;
                 attacker.shotsLeftInAttack = 0;
                 tc.RemainingTime = 0f;
                 UpdateQueue(tc);

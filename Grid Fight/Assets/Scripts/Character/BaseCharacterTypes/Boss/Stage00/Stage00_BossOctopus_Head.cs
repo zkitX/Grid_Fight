@@ -194,4 +194,9 @@ public class Stage00_BossOctopus_Head : MinionType_Script
         base.SetAnimation(animState, loop, transition);
     }
 
+    public override bool GeneralTestAI()
+    {
+        return true;
+    }
+
 }

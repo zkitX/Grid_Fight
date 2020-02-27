@@ -13,7 +13,7 @@ public class MinionType_Script : BaseCharacter
 
     public AIType CurrentAI;
 
-    private bool UnderAttack
+    protected bool UnderAttack
     {
         get
         {
@@ -27,7 +27,7 @@ public class MinionType_Script : BaseCharacter
             }
         }
     }
-    private bool AIMove = false;
+    protected bool AIMove = false;
 
     public override void SetUpEnteringOnBattle()
     {
@@ -197,12 +197,12 @@ public class MinionType_Script : BaseCharacter
         }
 
         currentAttackPhase = AttackPhasesType.End;
-        //attacking = false; //Temporary until anims are added
+        Attacking = false; //Temporary until anims are added
         yield break;
     }
 
 
-    public bool GeneralTestAI()
+    public virtual bool GeneralTestAI()
     {
         BaseCharacter cb = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x && r.IsOnField).FirstOrDefault();
         if (cb != null)
@@ -279,7 +279,6 @@ public class MinionType_Script : BaseCharacter
 
             if (rand <= 200)
             {
-                Attacking = false;
                 shotsLeftInAttack = 0;
             }
         }

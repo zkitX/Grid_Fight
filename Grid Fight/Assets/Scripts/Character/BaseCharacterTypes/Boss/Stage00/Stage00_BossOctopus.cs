@@ -8,7 +8,7 @@ public class Stage00_BossOctopus : MinionType_Script
     public bool CanGetDamage = false;
     private List<MinionType_Script> Pieces = new List<MinionType_Script>();
     public bool IsCharArrived = false;
-    public bool DialogueComplete = false;
+    public bool DialogueComplete = true;
     
 
     private List<CharacterNameType> piecesType = new List<CharacterNameType>()
@@ -249,7 +249,7 @@ public class Stage00_BossOctopus : MinionType_Script
 
         Vector2 blanketAttackTimings = new Vector2(15f, 25f);
         Vector2 headAttackTimings = new Vector2(4f, 7f);
-        Vector2 tentacleAttackTimings = new Vector2(3f, 5f);
+        Vector2 tentacleAttackTimings = new Vector2(3f, 6f);
         float blanketAttackCooldown = blanketAttackTimings.x;
         float headAttackCooldown = headAttackTimings.x;
         float tentacleAttackCooldown = tentacleAttackTimings.x;
@@ -336,5 +336,10 @@ public class Stage00_BossOctopus : MinionType_Script
     private void SetAnimForSinglePiece()
     {
 
+    }
+
+    public override bool GeneralTestAI()
+    {
+        return true;
     }
 }

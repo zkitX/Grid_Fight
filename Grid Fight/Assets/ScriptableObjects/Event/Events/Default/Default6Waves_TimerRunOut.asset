@@ -10,21 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25d497aba9400d147aee0263a1f7ec6d, type: 3}
-  m_Name: ContextualTutorial_TRIG_PlayerStaminaGoesBelow30%
+  m_Name: Default6Waves_TimerRunOut
   m_EditorClassIdentifier: 
-  Name: ContextualTutorial_PlayerStaminaGoesBelow30%
+  Name: Default6Waves_TimerRunOut
   hasHappened: 0
   requirementRule: 0
-  timedCheckRule: 1
+  timedCheckRule: 0
   requirements:
   - {fileID: 11400000, guid: 85356c75abc7e2e4ab4e988b53b7e18a, type: 2}
-  - {fileID: 11400000, guid: 49bbc62da3535cd449d9728e7ce3efac, type: 2}
-  - {fileID: 11400000, guid: 1fa3ba2c10956fe428775b309c9e8797, type: 2}
-  - {fileID: 11400000, guid: f4536db138ab3df438336bb8b976c1cb, type: 2}
-  - {fileID: 11400000, guid: a3ddf3520094f21468d6e3d52666c271, type: 2}
+  - {fileID: 11400000, guid: b74d073f81c0bec40803b4c158757ee0, type: 2}
   inhibitorRule: 1
-  inhibitors:
-  - {fileID: 11400000}
+  inhibitors: []
   ceaseOnComplete: 1
   requireComplete: 1
-  effects: []
+  effects:
+  - Name: 
+    effectType: 2
+    secondsToWait: 0
+    debugText: 
+    blockName: Ya Lose
+    command: {fileID: 0}
+    characterToRecruit: 0
