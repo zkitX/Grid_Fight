@@ -108,6 +108,7 @@ public class MinionType_Script : BaseCharacter
                             break;
                         }
                     }
+
                     MoveCharOnDirection(dir);
                 }
                 else
