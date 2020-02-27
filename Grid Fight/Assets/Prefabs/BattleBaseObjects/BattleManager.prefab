@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _CurrentBattleState: 0
+  FungusState: 0
   OccupiedBattleTiles: []
   CharacterBasePrefab: {fileID: 6286762205357209611, guid: 8fcf2c7adbb50844c8b549242125f32d,
     type: 3}
@@ -244,6 +245,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 50dadfb7dae64e243b7b3dd673e9bb2e, type: 2}
   - {fileID: 11400000, guid: d9ddb22fb207ee644bd6efe05a4a33c9, type: 2}
   - {fileID: 11400000, guid: bc28abba93170e34ba0f43a642d95ae1, type: 2}
+  - {fileID: 11400000, guid: 6ad33e614bb72e847b8d6c80863ad90b, type: 2}
   Container: {fileID: 5210388407550452737}
 --- !u!114 &4927355652519203374
 MonoBehaviour:
@@ -278,7 +280,9 @@ MonoBehaviour:
   charactersWhomstHaveArrived: []
   characterVitalities: []
   eventsCalled: []
+  eventsTriggered: []
   charactersSwitched: []
+  blocks: []
 --- !u!1 &6911235830904615386
 GameObject:
   m_ObjectHideFlags: 0

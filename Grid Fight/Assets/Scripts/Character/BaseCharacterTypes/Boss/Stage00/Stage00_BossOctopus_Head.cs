@@ -48,7 +48,7 @@ public class Stage00_BossOctopus_Head : MinionType_Script
 
         for (int i = 0; i < eyeAttackTarget.Count; i++)
         {
-            cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, UMS.CurrentAttackType == AttackType.Particles ? AttackParticlePhaseTypes.CastLeft : AttackParticlePhaseTypes.CastRight,
+            cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.CastRight,
                 NextAttackLevel == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, UMS.Side);
             GOTarget = cast.GetComponentInChildren<ParticleLaserAiming>().Target.transform.gameObject;
             GOTarget.transform.position = eyeAttackTarget[i];
@@ -155,7 +155,7 @@ public class Stage00_BossOctopus_Head : MinionType_Script
                 bossLady.SetAnimation(CharacterAnimationStateType.Idle, loop, transition);
                 break;
             case (CharacterAnimationStateType.Atk1_IdleToAtk):
-                transition = 0.3f;
+                transition = 0f;
                 bossLady.SetAnimation(CharacterAnimationStateType.Idle_IdleToAtk, loop, transition);
                 break;
             case (CharacterAnimationStateType.Idle_Disable_Loop):
