@@ -153,4 +153,16 @@ public class UnitManagementScript : MonoBehaviour
         }
     }
 
+    public void EnableBattleBars(bool state)
+    {
+        foreach(SpriteRenderer sprenderer in HPBar.parent.GetComponentsInChildren<SpriteRenderer>())
+        {
+            sprenderer.enabled = state;
+        }
+        foreach (SpriteRenderer sprenderer in StaminaBar.parent.GetComponentsInChildren<SpriteRenderer>())
+        {
+            sprenderer.enabled = state;
+        }
+    }
+
 }

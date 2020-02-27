@@ -101,7 +101,7 @@ public class Stage00_BossOctopus_Tentacles : MinionType_Script
                 transition = 0.5f;
                 break;
             case (CharacterAnimationStateType.Atk1_IdleToAtk):
-                transition = 0.35f;
+                transition = 0f;
                 break;
             case (CharacterAnimationStateType.Idle_Disable_Loop):
                 transition = 1f;

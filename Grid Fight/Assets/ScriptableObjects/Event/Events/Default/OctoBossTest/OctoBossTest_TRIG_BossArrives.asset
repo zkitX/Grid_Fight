@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25d497aba9400d147aee0263a1f7ec6d, type: 3}
+  m_Name: OctoBossTest_TRIG_BossArrives
+  m_EditorClassIdentifier: 
+  Name: OctoBossTest_TRIG_BossArrives
+  hasHappened: 0
+  requirementRule: 0
+  timedCheckRule: 0
+  requirements:
+  - {fileID: 11400000, guid: 85356c75abc7e2e4ab4e988b53b7e18a, type: 2}
+  - {fileID: 11400000, guid: 9cf924ed27dfec140aa6fcb151dd17c0, type: 2}
+  inhibitorRule: 1
+  inhibitors: []
+  ceaseOnComplete: 1
+  requireComplete: 1
+  effects: []

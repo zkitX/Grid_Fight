@@ -179,6 +179,7 @@ public class WaveManagerScript : MonoBehaviour
         {
             SetCharInPos(newChar, GridManagerScript.Instance.GetBattleTile(pos));
         }
+        EventManager.Instance.AddCharacterArrival(newChar);
     }
 
     public void SetCharInPos(BaseCharacter currentCharacter, BattleTileScript bts)

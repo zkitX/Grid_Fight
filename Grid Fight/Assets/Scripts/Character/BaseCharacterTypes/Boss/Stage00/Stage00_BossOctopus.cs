@@ -9,7 +9,8 @@ public class Stage00_BossOctopus : MinionType_Script
     private List<MinionType_Script> Pieces = new List<MinionType_Script>();
     public bool IsCharArrived = false;
     public bool DialogueComplete = true;
-    
+
+    public Vector2 DeathExplosionRange = new Vector2(-3f,3f);
 
     private List<CharacterNameType> piecesType = new List<CharacterNameType>()
     {
@@ -22,6 +23,11 @@ public class Stage00_BossOctopus : MinionType_Script
     public override void SetUpEnteringOnBattle()
     {
         StartCoroutine(SetUpEnteringOnBattle_Co());
+    }
+
+    public override void SetUpLeavingBattle()
+    {
+        ((Stage00_BossOctopus_Girl)GetPiece(CharacterNameType.Stage00_BossOctopus_Girl)).SetUpLeavingBattle();
     }
 
     public override IEnumerator Move()
@@ -66,6 +72,8 @@ public class Stage00_BossOctopus : MinionType_Script
         //BattleManagerScript.Instance.CurrentBattleState = BattleState.Event;
 
         GenerateBoss();
+
+        UMS.EnableBattleBars(false);
 
         ((Stage00_BossOctopus_Head)GetPiece(CharacterNameType.Stage00_BossOctopus_Head)).bossLady = ((Stage00_BossOctopus_Girl)GetPiece(CharacterNameType.Stage00_BossOctopus_Girl));
 
@@ -119,6 +127,7 @@ public class Stage00_BossOctopus : MinionType_Script
         MinionType_Script piece = (MinionType_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(pieceType.ToString(), CharacterSelectionType.Up,
         CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, pieceType, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None), transform);
         piece.UMS.Pos = UMS.Pos;
+        piece.UMS.EnableBattleBars(false);
         piece.UMS.CurrentTilePos = UMS.CurrentTilePos;
         piece.SetValueFromVariableName("BaseBoss", this);
         if(pieceType == CharacterNameType.Stage00_BossOctopus_Head)
@@ -158,6 +167,14 @@ public class Stage00_BossOctopus : MinionType_Script
         StopCoroutine(attackCoroutine);
         StartCoroutine(PhaseOneEnd());
         Debug.Log("Octobos fully disabled");
+    }
+
+    private void TriggerRandomDeathExplosion()
+    {
+        GameObject boom = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage00BossDeathSmoke);
+        boom.transform.parent = transform;
+        boom.transform.localPosition = Vector3.zero;
+        boom.SetActive(true);
     }
 
     private IEnumerator PhaseOneEnd()
