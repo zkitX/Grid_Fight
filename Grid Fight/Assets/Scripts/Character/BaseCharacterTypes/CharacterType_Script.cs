@@ -100,8 +100,20 @@ public class CharacterType_Script : BaseCharacter
             BattleManagerScript.Instance.UpdateCurrentSelectedCharacters(this, null);
             NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo, UMS.Side);
         }
+        IsOnField = false;
+        BattleManagerScript.Instance.PlayablesCharOnScene.Where(r => r.CName == CharInfo.CharacterID).First().isUsed = false;
         base.SetCharDead();
+        Invoke("CharBackFromDeath", 180);
     }
+
+
+    public void CharBackFromDeath()
+    {
+        gameObject.SetActive(true);
+        CharInfo.HealthStats.Health = CharInfo.HealthStats.Base;
+        NewIManager.Instance.SetUICharacterToButton(this, CharInfo.CharacterSelection);
+    }
+
 
     public override void SetUpEnteringOnBattle()
     {
