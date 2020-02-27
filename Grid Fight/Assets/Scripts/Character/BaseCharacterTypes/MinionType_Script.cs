@@ -97,7 +97,7 @@ public class MinionType_Script : BaseCharacter
                     }
                     InputDirection dir = InputDirection.Up;
 
-                    foreach (var item in BattleManagerScript.Instance.AllCharactersOnField.OrderBy(r=> Mathf.Abs(r.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x)))
+                    foreach (var item in BattleManagerScript.Instance.AllCharactersOnField.Where(a=> a.IsOnField).OrderBy(r=> Mathf.Abs(r.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x)))
                     {
                         dir = item.UMS.CurrentTilePos.x > UMS.CurrentTilePos.x ? InputDirection.Down :
                             item.UMS.CurrentTilePos.x < UMS.CurrentTilePos.x ? InputDirection.Up :
