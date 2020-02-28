@@ -27,7 +27,7 @@ namespace Fungus
 
         [Tooltip("The name text UI object")]
         //[SerializeField] protected TextMeshProUGUI nameText;
-        [SerializeField] protected Text nameText;
+        [SerializeField] protected TextMeshProUGUI nameText;
         [Tooltip("TextAdapter will search for appropriate output on this GameObject if nameText is null")]
         [SerializeField] protected GameObject nameTextGO;
         protected TextAdapter nameTextAdapter = new TextAdapter();
@@ -484,6 +484,12 @@ namespace Fungus
             StartCoroutine(DoSay(text, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, voiceOverClip, onComplete, nextChar));
         }
 
+        public virtual IEnumerator Say(string text, bool clearPrevious, bool waitForInput, bool fadeWhenDone, bool stopVoiceover, bool waitForVO, AudioClip voiceOverClip, Character nextChar)
+        {
+            yield return DoSay(text, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, voiceOverClip, nextChar);
+        }
+
+
         /// <summary>
         /// Write a line of story text to the Say Dialog. Must be started as a coroutine.
         /// </summary>
@@ -542,6 +548,11 @@ namespace Fungus
 
 
         public virtual IEnumerator DoSay(string text, bool clearPrevious, bool waitForInput, bool fadeWhenDone, bool stopVoiceover, bool waitForVO, AudioClip voiceOverClip, Action onComplete, Character nextChar)
+        {
+            yield return null;
+        }
+
+        public virtual IEnumerator DoSay(string text, bool clearPrevious, bool waitForInput, bool fadeWhenDone, bool stopVoiceover, bool waitForVO, AudioClip voiceOverClip, Character nextChar)
         {
             yield return null;
         }

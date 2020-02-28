@@ -98,9 +98,9 @@ public class BattleManagerScript : MonoBehaviour
     //Used to set the already created char on a random Position in the battlefield
     public void SetCharOnBoardOnRandomPos(ControllerType playerController, CharacterNameType cName)
     {
-        BaseCharacter currentCharacter = AllCharactersOnField.Where(r=> r.UMS.PlayerController.Contains(playerController) && r.CharInfo.CharacterID == cName).FirstOrDefault();
+        BaseCharacter currentCharacter = AllCharactersOnField.Where(r=> r.UMS.PlayerController.Contains(playerController) && r.CharInfo.CharacterID == cName && !r.IsOnField).FirstOrDefault();
         BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(currentCharacter.UMS.WalkingSide, currentCharacter.UMS.Pos);
-        if (currentCharacter != null)
+        if (currentCharacter != null && bts != null)
         {
             SelectCharacter(playerController, SetCharOnBoardOnFixedPos(playerController, cName, bts.Pos));
         }
@@ -125,9 +125,16 @@ public class BattleManagerScript : MonoBehaviour
             BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(pos);
             currentCharacter.UMS.CurrentTilePos = bts.Pos;
             currentCharacter.CurrentBattleTiles = new List<BattleTileScript>();
+            currentCharacter.UMS.Pos = new List<Vector2Int>();
+            ScriptableObjectCharacterPrefab soCharacterPrefab = ListOfScriptableObjectCharacterPrefab.Where(r => r.CharacterName == currentCharacter.CharInfo.CharacterID).First();
+            foreach (Vector2Int item in soCharacterPrefab.OccupiedTiles)
+            {
+                currentCharacter.UMS.Pos.Add(item);
+            }
             for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)
             {
                 currentCharacter.UMS.Pos[i] += bts.Pos;
+                Debug.Log(currentCharacter.UMS.Pos[i].ToString());
                 GridManagerScript.Instance.SetBattleTileState(currentCharacter.UMS.Pos[i], BattleTileStateType.Occupied);
                 BattleTileScript cbts = GridManagerScript.Instance.GetBattleTile(currentCharacter.UMS.Pos[i]);
                 currentCharacter.CurrentBattleTiles.Add(cbts);
@@ -730,9 +737,11 @@ public class BattleManagerScript : MonoBehaviour
                         cs = (int)cs >= maxChars ? 0 : cs < 0 ? ((CharacterSelectionType)maxChars - 1) : cs;
                         string t = cs.ToString();
                         Debug.Log(t);
-                        cb = AllCharactersOnField.Where(r =>r.gameObject.activeInHierarchy && r.CharInfo.CharacterSelection == cs && r.UMS.Side == side).FirstOrDefault();
-
-                        t = cb.CharInfo.CharacterID.ToString() + "    " + cb.UMS.Side.ToString();
+                        cb = AllCharactersOnField.Where(r =>r.gameObject.activeInHierarchy && r.CharInfo.CharacterSelection == cs && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 && !r.IsOnField).FirstOrDefault();
+                        if(cb != null)
+                        {
+                            t = cb.CharInfo.CharacterID.ToString() + "    " + cb.UMS.Side.ToString();
+                        }
                         Debug.Log(t);
                         if (cb != null && CurrentSelectedCharacters.Where(r => r.Value.Character != null && ((r.Value.Character == cb) || ( r.Value.NextSelectionChar.NextSelectionChar == cs && r.Value.NextSelectionChar.Side == cb.UMS.Side)) && r.Key != playerController).ToList().Count == 0)
                         {

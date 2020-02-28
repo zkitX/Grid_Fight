@@ -185,6 +185,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         Call_CurrentCharIsDeadEvent();
         transform.position = new Vector3(100,100,100);
         gameObject.SetActive(false);
+       
     }
 
     protected virtual void Call_CurrentCharIsDeadEvent()
@@ -630,12 +631,21 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     UMS.Pos.Add(item.Pos);
                 }
 
-                if (MoveCo != null)
+                BattleTileScript resbts = CurrentBattleTiles.Where(r => r.Pos == UMS.CurrentTilePos).First();
+
+                if (resbts != null)
                 {
-                    StopCoroutine(MoveCo);
+                    if (MoveCo != null)
+                    {
+                        StopCoroutine(MoveCo);
+                    }
+                    MoveCo = MoveByTile(resbts.transform.position, curve, SpineAnim.GetAnimLenght(AnimState));
+                    StartCoroutine(MoveCo);
                 }
-                MoveCo = MoveByTile(CurrentBattleTiles.Where(r => r.Pos == UMS.CurrentTilePos).First().transform.position, curve, SpineAnim.GetAnimLenght(AnimState));
-                StartCoroutine(MoveCo);
+                else
+                {
+                    return;
+                }
             }
             else
             {
