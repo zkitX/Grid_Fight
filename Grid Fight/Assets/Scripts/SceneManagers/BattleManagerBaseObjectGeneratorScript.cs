@@ -1,88 +1,134 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MyBox;
 
 public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
 {
+    public float loadingTime = 5f;
+    public string selectedStageID = "";
+    protected StageProfile stage;
+    public StageProfile[] stages;
+    protected string currentStageID;
+    protected List<GameObject> StageObjects = new List<GameObject>();
+    protected GameObject Rewired;
+    protected GameObject AudioManager;
+    protected GameObject BattleInfoManager;
+    protected GameObject BattleManager;
+    protected GameObject BaseEnvironment;
+    protected GameObject Battle_UI;
+    protected GameObject EventManager;
+    protected GameObject Wave;
 
-    public GameObject Rewired;
-    public GameObject BattleInfoManager;
+    private void Start()
+    {
+        SelectStage();
+        LoadStage();
+    }
 
+    void SelectStage()
+    {
+        foreach(StageProfile stageP in stages)
+        {
+            if (stageP.ID == selectedStageID)
+            {
+                stage = stageP;
+                return;
+            }
+        }
+        Debug.LogError("Stage with StageID " + selectedStageID + " not found in Stages list");
+    }
 
-    public GameObject BattleManager;
-    public GameObject BaseEnvironment;
-
-    public GameObject UI_Battle;
-    public GameObject FlowChart;
-    public GameObject Wave;
-    public GameObject bosstest;
-
-    [Space(20)]
-    [Header("Defaults")]
-    [SerializeField] protected GameObject defaultWave;
-    [SerializeField] protected GameObject defaultFlowChart;
-    [SerializeField] protected GameObject defaultBattleInfo;
-    [SerializeField] protected StageEventTriggersProfile defaultEventProfile;
-
-    public bool usingFungus = false;
-
-    // Start is called before the first frame update
-    void Start()
+    public void LoadStage()
     {
         StartCoroutine(SetupScene());
     }
 
     private IEnumerator SetupScene()
     {
-        yield return InputController.Instance.Applet(2);
-        StartCoroutine(LevelLoader());
+        InfoUIManager.Instance.EnableLoadingScreen(true, false);
+        StartCoroutine(LevelLoadingSequence());
+        yield return new WaitForSeconds(loadingTime);
+        InfoUIManager.Instance.EnableLoadingScreen(false, true);
     }
 
-    private IEnumerator LevelLoader()
+    public void ChangeStage(string newStageID, bool loadAsWell = true)
     {
-        while (!UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Contains("BattleScene"))
-        {
-            yield return null;
-        }
-        Instantiate(BaseEnvironment);
+        StartCoroutine(ChangeStageSequence(newStageID, loadAsWell));
+    }
+
+    private IEnumerator ChangeStageSequence(string newStageID, bool loadAsWell)
+    {
+        if (stage.ID == newStageID) yield break;
+
+        selectedStageID = newStageID;
+        SelectStage();
+
+        if (!loadAsWell) yield break;
+
+        yield return DeloadSceneSequence();
+        yield return LevelLoadingSequence();
+    }
+
+    private IEnumerator DeloadSceneSequence()
+    {
+        foreach (GameObject stageObject in StageObjects) Destroy(stageObject);
+        StageObjects.Clear();
+        yield return null;
+    }
+
+    private IEnumerator LevelLoadingSequence()
+    {
+        Rewired = Instantiate(stage.Rewired);
+        StageObjects.Add(Rewired);
+        yield return InputController.Instance.Applet(2);
+
+        while (!UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Contains("BattleScene")) yield return null;
+
+        currentStageID = stage.ID;
+
+        AudioManager = Instantiate(stage.AudioManager);
+        StageObjects.Add(AudioManager);
+
+
+        BaseEnvironment = Instantiate(stage.BaseEnvironment);
+        StageObjects.Add(BaseEnvironment);
+
         yield return null;
 
-        if (!usingFungus)
+        if (stage.EventManager != null)
         {
-            BattleInfoManager = defaultBattleInfo;
+            EventManager = Instantiate(stage.EventManager);
+            StageObjects.Add(EventManager);
         }
-        Instantiate(BattleInfoManager);
 
-        BattleManagerScript bms = Instantiate(BattleManager).GetComponent<BattleManagerScript>();
-        if (!usingFungus && defaultEventProfile != null)
-        {
-            bms.gameObject.GetComponent<EventManager>().stageEventTriggersProfile = defaultEventProfile;
-        }
-        bms.usingFungus = usingFungus;
+        BattleInfoManager = Instantiate(stage.BattleInfoManager);
+        StageObjects.Add(BattleInfoManager);
 
-        Instantiate(UI_Battle);
+        AudioManager = Instantiate(stage.AudioManager);
+        StageObjects.Add(AudioManager);
+
+        BattleManager = Instantiate(stage.BattleManager);
+        StageObjects.Add(BattleManager);
+
+        Battle_UI = Instantiate(stage.UI_Battle);
+        StageObjects.Add(Battle_UI);
+
         yield return BattleManagerScript.Instance.InstanciateAllChar();
-        if (!usingFungus)
+
+        if (stage.Wave != null)
         {
-            Wave = defaultWave;
-        }
-        if(Wave != null)
-        {
-            Instantiate(Wave);
+            Wave = Instantiate(stage.Wave);
+            StageObjects.Add(Wave);
             yield return WaveManagerScript.Instance.WaveCharCreator();
         }
-        
-        if (!usingFungus)
-        {
-            FlowChart = defaultFlowChart;
-        }
-        if (FlowChart != null)
-        {
-            Instantiate(FlowChart);
-        }
+
         yield return null;
 
         UserInputManager.Instance.StartUserInputManager();
-        bms.SetupBattleState();
+        BattleManagerScript.Instance.SetupBattleState();
     }
+
 }
+
+

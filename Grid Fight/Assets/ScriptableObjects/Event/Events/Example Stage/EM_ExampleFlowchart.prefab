@@ -38,8 +38,9 @@ GameObject:
   - component: {fileID: 2119244667}
   - component: {fileID: 2119244668}
   - component: {fileID: 2119244647}
+  - component: {fileID: 8362914242675967306}
   m_Layer: 0
-  m_Name: ExampleFlowchart
+  m_Name: EM_ExampleFlowchart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -381,7 +382,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 15
   indentLevel: 0
+  IsPlayerCharacter: 1
   characterID: 1
+  IsRandomWaveChar: 0
+  Identifier: 
   randomiseAttack: 1
   attackType: {fileID: 0}
 --- !u!114 &521012730
@@ -398,7 +402,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 16
   indentLevel: 0
+  IsPlayerCharacter: 1
   characterID: 21
+  IsRandomWaveChar: 0
+  Identifier: 
   randomiseAttack: 1
   attackType: {fileID: 0}
 --- !u!114 &521012732
@@ -415,7 +422,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 20
   indentLevel: 0
+  IsPlayerCharacter: 1
   characterID: 21
+  IsRandomWaveChar: 0
+  Identifier: 
   randomiseAttack: 1
   attackType: {fileID: 0}
 --- !u!114 &521012748
@@ -655,3 +665,25 @@ MonoBehaviour:
     floatRef: {fileID: 0}
     floatVal: 1
   durationOLD: 0
+--- !u!114 &8362914242675967306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570865776272614913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51e46cd85c183d429847e6975901a1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageEventTriggersProfile: {fileID: 11400000, guid: 438e248e1838dc44babc427e9f845696,
+    type: 2}
+  showDebugInfo: 0
+  deadCharacters: []
+  charactersWhomstHaveArrived: []
+  characterVitalities: []
+  eventsCalled: []
+  eventsTriggered: []
+  charactersSwitched: []
+  blocks: []

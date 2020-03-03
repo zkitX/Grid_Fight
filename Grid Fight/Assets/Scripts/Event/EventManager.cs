@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fungus;
 
+[RequireComponent(typeof(Flowchart))]
 public class EventManager : MonoBehaviour
 {
     public static EventManager Instance;
@@ -15,7 +17,7 @@ public class EventManager : MonoBehaviour
     List<GameSequenceEvent> queuedCompleteEvents = new List<GameSequenceEvent>();
     IEnumerator completeEventSequencer = null;
 
-    [Header("Current Info")]
+    [Header("Debug Info")]
     [SerializeField] protected List<CharacterEventInfoClass> deadCharacters = new List<CharacterEventInfoClass>();
     protected List<CharacterNameType> diedThisFrame = new List<CharacterNameType>();
     [SerializeField] protected List<CharacterEventInfoClass> charactersWhomstHaveArrived = new List<CharacterEventInfoClass>();
@@ -100,7 +102,6 @@ public class EventManager : MonoBehaviour
 
     void StartStop_TimedCheckTicker()
     {
-
         if (timedCheckTicker == null)
         {
             timedCheckTicker = TimedCheckTick();
@@ -171,15 +172,21 @@ public class EventManager : MonoBehaviour
     #region Queuing Completed Events
     public void AddCompletedGameEvent(GameSequenceEvent gameEvent)
     {
+        if (gameEvent.ignoreQueue)
+        {
+            StartCoroutine(gameEvent.CompleteEventSequence());
+            return;
+        }
+
         queuedCompleteEvents.Add(gameEvent);
         if(completeEventSequencer == null)
         {
-            completeEventSequencer = CompleteEventSequence();
+            completeEventSequencer = CompleteEventSequenceQueue();
             StartCoroutine(completeEventSequencer);
         }
     }
 
-    IEnumerator CompleteEventSequence()
+    IEnumerator CompleteEventSequenceQueue()
     {
         while(queuedCompleteEvents.Count > 0)
         {

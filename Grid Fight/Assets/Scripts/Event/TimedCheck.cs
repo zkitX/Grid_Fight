@@ -42,7 +42,6 @@ public class TimedCheck : EventTrigger
             case (TimedCheckTypes.WaitForButtonPress):
                 check = WaitForButtonPress;
                 break;
-
             case (TimedCheckTypes.CharacterArrival):
                 check = CharacterArrival;
                 break;

@@ -111,7 +111,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         EventManager.Instance.UpdateStamina(this);
         if (UMS.PlayerController.Contains(ControllerType.Enemy))
         {
-            UMS.SelectionIndicator.parent.gameObject.SetActive(false);
+            if (CharInfo.CharacterID != CharacterNameType.Stage00_BossOctopus &&
+            CharInfo.CharacterID != CharacterNameType.Stage00_BossOctopus_Head &&
+            CharInfo.CharacterID != CharacterNameType.Stage00_BossOctopus_Tentacles &&
+            CharInfo.CharacterID != CharacterNameType.Stage00_BossOctopus_Girl)
+                UMS.SelectionIndicator.parent.gameObject.SetActive(false);
         }
         else
         {

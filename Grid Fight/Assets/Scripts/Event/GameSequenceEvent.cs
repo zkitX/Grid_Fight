@@ -30,6 +30,7 @@ public class GameSequenceEvent : EventTrigger
     [Space(10)]
     [Header("Completion and stuff")]
     //Effects and triggees
+    public bool ignoreQueue = false;
     [SerializeField] public bool ceaseOnComplete = true;
     [SerializeField] protected bool requireComplete = true;
     protected List<GameSequenceEvent> triggees = new List<GameSequenceEvent>();

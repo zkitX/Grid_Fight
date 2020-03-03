@@ -271,8 +271,9 @@ GameObject:
   - component: {fileID: -2413713766389316048}
   - component: {fileID: 953955151912561021}
   - component: {fileID: -7868026210666920571}
+  - component: {fileID: -5497297122434443178}
   m_Layer: 0
-  m_Name: Tutorial
+  m_Name: EM_Tutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4991,6 +4992,7 @@ MonoBehaviour:
   itemId: 542
   indentLevel: 0
   characterID: 21
+  Side: 0
 --- !u!114 &3586607848990769968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6284,6 +6286,27 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: BOSS
   NextBlockToFire: 
+--- !u!114 &-5497297122434443178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6427025554798635227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51e46cd85c183d429847e6975901a1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageEventTriggersProfile: {fileID: 11400000, guid: 14804566a9852f646b035dfe54e7bee6,
+    type: 2}
+  deadCharacters: []
+  charactersWhomstHaveArrived: []
+  characterVitalities: []
+  eventsCalled: []
+  eventsTriggered: []
+  charactersSwitched: []
+  blocks: []
 --- !u!1001 &2507041884985739173
 PrefabInstance:
   m_ObjectHideFlags: 0

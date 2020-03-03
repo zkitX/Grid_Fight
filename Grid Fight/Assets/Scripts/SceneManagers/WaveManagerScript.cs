@@ -79,7 +79,7 @@ public class WaveManagerScript : MonoBehaviour
     public BaseCharacter GetWaveCharacter(WaveCharacterInfoClass character)
     {
         BaseCharacter res;
-        res = WaveCharcters.Where(r => r.CharInfo.CharacterID == character.CharacterName && !r.IsOnField && !r.gameObject.activeInHierarchy).FirstOrDefault();
+        res = WaveCharcters.Where(r => r.CharInfo.CharacterID == character.CharacterName && !r.IsOnField/* && !r.gameObject.activeInHierarchy*/).FirstOrDefault();
         if (res == null)
         {
             res = CreateChar(character.CharacterName);
@@ -107,7 +107,10 @@ public class WaveManagerScript : MonoBehaviour
     {
         BaseCharacter res = BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(characterID.ToString(), CharacterSelectionType.Up,
                 CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, characterID, WalkingSideType.RightSide, AttackType.Tile, bCharType), transform);
-        res.gameObject.SetActive(false);
+        if(characterID != CharacterNameType.Stage00_BossOctopus &&
+            characterID != CharacterNameType.Stage00_BossOctopus_Head &&
+            characterID != CharacterNameType.Stage00_BossOctopus_Tentacles &&
+            characterID != CharacterNameType.Stage00_BossOctopus_Girl) res.gameObject.SetActive(false);
         WaveCharcters.Add(res);
         return res;
     }

@@ -10,7 +10,6 @@ public class Stage00_BossOctopus : MinionType_Script
     public bool IsCharArrived = false;
     public bool DialogueComplete = true;
 
-    public Vector2 DeathExplosionRange = new Vector2(-3f,3f);
 
     private List<CharacterNameType> piecesType = new List<CharacterNameType>()
     {
@@ -19,6 +18,10 @@ public class Stage00_BossOctopus : MinionType_Script
         CharacterNameType.Stage00_BossOctopus_Girl
     };
 
+    private void Start()
+    {
+        GenerateBoss();
+    }
 
     public override void SetUpEnteringOnBattle()
     {
@@ -37,7 +40,7 @@ public class Stage00_BossOctopus : MinionType_Script
 
     protected override void Update()
     {
-        if(UIBattleManager.Instance != null)
+        if (UIBattleManager.Instance != null && IsOnField)
         {
             if(!UIBattleManager.Instance.UIBoss.gameObject.activeInHierarchy)
             {
@@ -71,9 +74,7 @@ public class Stage00_BossOctopus : MinionType_Script
     {
         //BattleManagerScript.Instance.CurrentBattleState = BattleState.Event;
 
-        GenerateBoss();
-
-        UMS.EnableBattleBars(false);
+        UMS.EnableBattleBars(false); 
 
         ((Stage00_BossOctopus_Head)GetPiece(CharacterNameType.Stage00_BossOctopus_Head)).bossLady = ((Stage00_BossOctopus_Girl)GetPiece(CharacterNameType.Stage00_BossOctopus_Girl));
 
@@ -91,6 +92,14 @@ public class Stage00_BossOctopus : MinionType_Script
             yield return null;
         }
 
+
+        foreach (MinionType_Script piece in Pieces)
+        {
+            piece.UMS.Pos = UMS.Pos;
+            piece.UMS.CurrentTilePos = UMS.CurrentTilePos;
+            //piece.StartAttakCo();
+        }
+
         SetAttackReady(true);
         float timer = 0;
         while (timer <= 3)
@@ -103,10 +112,6 @@ public class Stage00_BossOctopus : MinionType_Script
             timer += Time.fixedDeltaTime;
         }
 
-        foreach (MinionType_Script piece in Pieces)
-        {
-            piece.StartAttakCo();
-        }
 
         timer = 0;
         while (timer <= 3)
@@ -173,17 +178,37 @@ public class Stage00_BossOctopus : MinionType_Script
     {
         GameObject boom = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage00BossDeathSmoke);
         boom.transform.parent = transform;
-        boom.transform.localPosition = Vector3.zero;
+        boom.transform.localPosition = Vector3.zero + new Vector3(Random.Range(0f, DeathExplosionRange.x), Random.Range(0f, DeathExplosionRange.y), 0f);
         boom.SetActive(true);
     }
 
+    IEnumerator DeathExplosionPacer(Vector2 paceRange, int number)
+    {
+        float timer;
+
+        for (int i = 0; i < number; i++)
+        {
+            timer = Random.Range(paceRange.x, paceRange.y);
+            TriggerRandomDeathExplosion();
+            while (timer != 0f)
+            {
+                timer = Mathf.Clamp(timer - Time.deltaTime, 0f, paceRange.y);
+                yield return null;
+            }
+        }
+    }
+
+    public Vector2 DeathExplosionRange = new Vector2(-2f, 4f);
     private IEnumerator PhaseOneEnd()
     {
         float timer = 0;
         Stage00_BossOctopus_Tentacles tentacles = (Stage00_BossOctopus_Tentacles)GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles);
+
+        StartCoroutine(DeathExplosionPacer(new Vector2(0.1f/5f, 0.3f/5f), 20*5));
+
         foreach(MinionType_Script character in Pieces)
         {
-        currentDeathProcessPhase = DeathProcessStage.Start;
+            currentDeathProcessPhase = DeathProcessStage.Start;
         }
         SetAnimation(CharacterAnimationStateType.Death_Prep);
         while(tentacles.currentDeathProcessPhase == DeathProcessStage.Start)
@@ -256,8 +281,6 @@ public class Stage00_BossOctopus : MinionType_Script
         {
             yield return null;
         }
-
-        IsOnField = true;
 
         while(BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
         {
