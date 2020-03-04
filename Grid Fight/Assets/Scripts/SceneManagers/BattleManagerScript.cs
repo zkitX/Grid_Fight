@@ -380,31 +380,29 @@ public class BattleManagerScript : MonoBehaviour
     {
         it++;
         int val = it;
+
+        if (CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar == CurrentSelectedCharacters[playerController].Character.CharInfo.CharacterSelection)
+        {
+            //Debug.Log(val + "   same char");
+            //CurrentSelectedCharacters[playerController].Character.SwapWhenPossible = false;
+            yield break;
+        }
+
         // yield return HoldPressTimer(playerController);
         //Debug.Log(CurrentSelectedCharacters[playerController].OffsetSwap + "    " + Time.time);
         CurrentSelectedCharacters[playerController].Character.SwapWhenPossible = true;
         while (CurrentSelectedCharacters[playerController].OffsetSwap > Time.time || !CurrentSelectedCharacters[playerController].Character.IsOnField ||
-            CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle || CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving)
+            CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle ||
+            CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving ||
+            CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving || CurrentSelectedCharacters[playerController].Character.isMoving)
         {
             //Debug.Log(val);
             yield return null;
         }
-       
+
         if (CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar == AllCharactersOnField.Where(r=> r.CharInfo.CharacterID == cName &&
         CurrentSelectedCharacters[playerController].NextSelectionChar.Side == r.UMS.Side).First().CharInfo.CharacterSelection)
         {
-            while (CurrentSelectedCharacters[playerController].Character.isMoving)
-            {
-                //Debug.Log(val + "   Moving");
-                yield return null;
-            }
-
-            if(CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar == CurrentSelectedCharacters[playerController].Character.CharInfo.CharacterSelection)
-            {
-                //Debug.Log(val + "   same char");
-                CurrentSelectedCharacters[playerController].Character.SwapWhenPossible = false;
-                yield break;
-            }
             if (!CurrentSelectedCharacters[playerController].Character.IsSwapping)
             {
                 Vector2Int spawnPos = CurrentSelectedCharacters[playerController].Character.UMS._CurrentTilePos;
@@ -412,7 +410,7 @@ public class BattleManagerScript : MonoBehaviour
                 //Debug.Log("Exit  " + CurrentSelectedCharacters[playerController].OffsetSwap + "    " + Time.time + CurrentSelectedCharacters[playerController].NextSelectionChar + AllCharactersOnField.Where(r => r.CharInfo.CharacterID == cName).First().CharInfo.CharacterSelection);
                 if (currentCharacter != null)
                 {
-                    Debug.Log(val + "   swapping char");
+                    //Debug.Log(val + "   swapping char");
                     CurrentSelectedCharacters[playerController].Character.IsSwapping = true;
 
                     // currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", false);
