@@ -386,7 +386,7 @@ public class BattleManagerScript : MonoBehaviour
         while (CurrentSelectedCharacters[playerController].OffsetSwap > Time.time || !CurrentSelectedCharacters[playerController].Character.IsOnField ||
             CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle || CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving)
         {
-            Debug.Log(val);
+            //Debug.Log(val);
             yield return null;
         }
        
@@ -395,32 +395,34 @@ public class BattleManagerScript : MonoBehaviour
         {
             while (CurrentSelectedCharacters[playerController].Character.isMoving)
             {
-                Debug.Log(val + "   Moving");
+                //Debug.Log(val + "   Moving");
                 yield return null;
             }
 
             if(CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar == CurrentSelectedCharacters[playerController].Character.CharInfo.CharacterSelection)
             {
-                Debug.Log(val + "   same char");
+                //Debug.Log(val + "   same char");
                 CurrentSelectedCharacters[playerController].Character.SwapWhenPossible = false;
                 yield break;
             }
-
-            Vector2Int spawnPos = CurrentSelectedCharacters[playerController].Character.UMS._CurrentTilePos;
-            CharacterType_Script currentCharacter = SetCharOnBoardOnFixedPos(playerController, cName, spawnPos);
-            //Debug.Log("Exit  " + CurrentSelectedCharacters[playerController].OffsetSwap + "    " + Time.time + CurrentSelectedCharacters[playerController].NextSelectionChar + AllCharactersOnField.Where(r => r.CharInfo.CharacterID == cName).First().CharInfo.CharacterSelection);
-            if (currentCharacter != null && !CurrentSelectedCharacters[playerController].Character.IsSwapping)
+            if (!CurrentSelectedCharacters[playerController].Character.IsSwapping)
             {
-                Debug.Log(val + "   swapping char");
-                CurrentSelectedCharacters[playerController].Character.IsSwapping = true;
-               
-                // currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", false);
-                currentCharacter.SpineAnim.SetAnimationSpeed(2);
-                yield return RemoveCharacterFromBaord(playerController, CurrentSelectedCharacters[playerController].Character, false);
+                Vector2Int spawnPos = CurrentSelectedCharacters[playerController].Character.UMS._CurrentTilePos;
+                CharacterType_Script currentCharacter = SetCharOnBoardOnFixedPos(playerController, cName, spawnPos);
+                //Debug.Log("Exit  " + CurrentSelectedCharacters[playerController].OffsetSwap + "    " + Time.time + CurrentSelectedCharacters[playerController].NextSelectionChar + AllCharactersOnField.Where(r => r.CharInfo.CharacterID == cName).First().CharInfo.CharacterSelection);
+                if (currentCharacter != null)
+                {
+                    Debug.Log(val + "   swapping char");
+                    CurrentSelectedCharacters[playerController].Character.IsSwapping = true;
 
-                SelectCharacter(playerController, currentCharacter);
-                CurrentSelectedCharacters[playerController].Character.IsSwapping = true;
-                // currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", true);
+                    // currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", false);
+                    currentCharacter.SpineAnim.SetAnimationSpeed(2);
+                    yield return RemoveCharacterFromBaord(playerController, CurrentSelectedCharacters[playerController].Character, false);
+
+                    SelectCharacter(playerController, currentCharacter);
+                    CurrentSelectedCharacters[playerController].Character.IsSwapping = true;
+                    // currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", true);
+                }
             }
         }
 
