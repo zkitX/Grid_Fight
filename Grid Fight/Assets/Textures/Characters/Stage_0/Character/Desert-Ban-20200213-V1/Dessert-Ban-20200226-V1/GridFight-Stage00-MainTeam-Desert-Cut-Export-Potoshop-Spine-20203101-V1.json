@@ -608,11 +608,12 @@
 		}
 	}
 ],
-"events": {
-	"FireArrivingParticle": {},
-	"FireBulletParticle": {},
-	"FireCastParticle": {}
-},
+  "events": {
+    "FireArrivingParticle": {},
+    "FireBulletParticle": {},
+    "FireCastParticle": {},
+    "StopDefending": {}
+  },
 "animations": {
 	"Arriving": {
 		"slots": {
@@ -11619,619 +11620,1323 @@
 			}
 		]
 	},
-	"Defending": {
-		"slots": {
-			"Closed-Eyes": {
-				"color": [
-					{ "color": "ffffff00", "curve": "stepped" },
-					{ "time": 0.0333, "color": "ffffff00" },
-					{ "time": 0.05, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 0.5833, "color": "ffffffff" },
-					{ "time": 0.6, "color": "ffffff00" }
-				]
-			}
-		},
-		"bones": {
-			"Desert_Neck": {
-				"rotate": [
-					{},
-					{ "time": 0.05, "angle": 2.84 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_LeftArm3": {
-				"rotate": [
-					{},
-					{ "time": 0.3833, "angle": -14.49 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_Pelvies": {
-				"rotate": [
-					{},
-					{ "time": 0.1333, "angle": -45.16, "curve": "stepped" },
-					{ "time": 0.2, "angle": -45.16 },
-					{ "time": 0.4167, "angle": -34.34 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_Chair": {
-				"rotate": [
-					{ "time": 0.0167 },
-					{ "time": 0.05, "angle": 11.37 },
-					{ "time": 0.6667 }
-				],
-				"translate": [
-					{ "time": 0.0167 },
-					{ "time": 0.05, "x": 120.4, "y": 3.1 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_LeftArm": {
-				"rotate": [
-					{},
-					{ "time": 0.05, "angle": -97.91 },
-					{ "time": 0.0833, "angle": -86.44 },
-					{ "time": 0.1167, "angle": -83.41 },
-					{ "time": 0.1667, "angle": -85.71 },
-					{ "time": 0.4167, "angle": -87.71 },
-					{ "time": 0.5, "angle": -96.19 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_LeftArm2": {
-				"rotate": [
-					{},
-					{ "time": 0.05, "angle": 46.46 },
-					{ "time": 0.1667, "angle": -9.13 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_RightArm": {
-				"rotate": [
-					{},
-					{ "time": 0.0833, "angle": 36.74 },
-					{ "time": 0.2333, "angle": 48.19 },
-					{ "time": 0.5333, "angle": 47.46 },
-					{ "time": 0.6667 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.0833, "x": 1.02, "y": -5.96, "curve": "stepped" },
-					{ "time": 0.2333, "x": 1.02, "y": -5.96 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_RightArm3": {
-				"rotate": [
-					{},
-					{ "time": 0.0833, "angle": 26.47 },
-					{ "time": 0.2333, "angle": 57.03 },
-					{ "time": 0.3833, "angle": 24.88 },
-					{ "time": 0.5333, "angle": 34.3 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_RightArm2": {
-				"rotate": [
-					{},
-					{ "time": 0.0833, "angle": -67.69 },
-					{ "time": 0.2333, "angle": -92.74 },
-					{ "time": 0.5333, "angle": -66.21 },
-					{ "time": 0.6667 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.0833, "x": 15.84, "y": -1.17 },
-					{ "time": 0.2333, "x": 15.72, "y": 1.64 },
-					{ "time": 0.5333, "x": 16.52, "y": -0.44 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_Face": {
-				"rotate": [
-					{},
-					{ "time": 0.05, "angle": 24.81 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_RightArm4": {
-				"rotate": [
-					{},
-					{ "time": 0.05, "angle": 41.88 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_RightArm5": {
-				"rotate": [
-					{},
-					{ "time": 0.05, "angle": -37.51 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_RightArm6": {
-				"rotate": [
-					{},
-					{ "time": 0.05, "angle": -40.61 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_RightArm7": {
-				"rotate": [
-					{},
-					{ "time": 0.05, "angle": -41.07 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_RightArm8": {
-				"rotate": [
-					{},
-					{ "time": 0.05, "angle": -0.52 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_RightArm9": {
-				"rotate": [
-					{},
-					{ "time": 0.05, "angle": 30.36 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_RightArm10": {
-				"rotate": [
-					{},
-					{ "time": 0.05, "angle": 0.2 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_RightArm11": {
-				"rotate": [
-					{},
-					{ "time": 0.05, "angle": 9.97 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_RightArm12": {
-				"rotate": [
-					{},
-					{ "time": 0.05, "angle": 19.95 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_RightArm13": {
-				"rotate": [
-					{},
-					{ "time": 0.05, "angle": 18.11 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_RightArm14": {
-				"rotate": [
-					{},
-					{ "time": 0.05, "angle": 4.46 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_Face4": {
-				"rotate": [
-					{},
-					{ "time": 0.1, "angle": 3.37 },
-					{ "time": 0.1333, "angle": 4.4 },
-					{ "time": 0.15, "angle": -1.81 },
-					{ "time": 0.3, "angle": 1.12 },
-					{ "time": 0.4333, "angle": 5.88 },
-					{ "time": 0.5833 }
-				]
-			},
-			"Desert_Torso": {
-				"rotate": [
-					{},
-					{ "time": 0.1333, "angle": 18.23, "curve": "stepped" },
-					{ "time": 0.2, "angle": 18.23 },
-					{ "time": 0.4167, "angle": 16.26 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_Face8": {
-				"rotate": [
-					{},
-					{ "time": 0.0667, "angle": -26.06 },
-					{ "time": 0.1167 },
-					{ "time": 0.1333, "angle": 1.33, "curve": "stepped" },
-					{ "time": 0.3, "angle": 1.33 },
-					{ "time": 0.4333, "angle": 23.56 },
-					{ "time": 0.5833 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.0667, "x": 6.23, "y": -12.69 },
-					{ "time": 0.1167 },
-					{ "time": 0.1333, "x": -31.66, "y": 21.23, "curve": "stepped" },
-					{ "time": 0.3, "x": -31.66, "y": 21.23 },
-					{ "time": 0.5833 }
-				]
-			},
-			"Desert_Face9": {
-				"rotate": [
-					{},
-					{ "time": 0.0667, "angle": -14.94 },
-					{ "time": 0.1167 },
-					{ "time": 0.3, "angle": 22.36 },
-					{ "time": 0.4333, "angle": 18.27 },
-					{ "time": 0.5833 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.0667, "x": 10.04, "y": -20.86 },
-					{ "time": 0.1167 },
-					{ "time": 0.1333, "x": 23, "y": -4.95, "curve": "stepped" },
-					{ "time": 0.3, "x": 23, "y": -4.95 },
-					{ "time": 0.5833 }
-				]
-			},
-			"Desert_Face12": {
-				"rotate": [
-					{},
-					{ "time": 0.1, "angle": -0.88 },
-					{ "time": 0.1333, "angle": -6.61 },
-					{ "time": 0.1667, "angle": 14.88 },
-					{ "time": 0.3, "angle": 17.74 },
-					{ "time": 0.4333, "angle": 37.76 },
-					{ "time": 0.5, "angle": 25.34 },
-					{ "time": 0.55, "angle": 2.24 },
-					{ "time": 0.5833, "angle": -4.79 },
-					{ "time": 0.6667 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.1667, "x": 2.26, "y": 4, "curve": "stepped" },
-					{ "time": 0.3, "x": 2.26, "y": 4 },
-					{ "time": 0.5833 }
-				]
-			},
-			"Desert_Face13": {
-				"rotate": [
-					{},
-					{ "time": 0.1, "angle": -27.82 },
-					{ "time": 0.1333, "angle": 8.97 },
-					{ "time": 0.1667, "angle": 8.25 },
-					{ "time": 0.3, "angle": 12.82 },
-					{ "time": 0.4333, "angle": 15.24 },
-					{ "time": 0.5, "angle": -14.12 },
-					{ "time": 0.55, "angle": 1.5 },
-					{ "time": 0.5833, "angle": -8.79 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_Face14": {
-				"rotate": [
-					{},
-					{ "time": 0.1, "angle": -5.29 },
-					{ "time": 0.1333, "angle": 14.33 },
-					{ "time": 0.1667, "angle": 8.86 },
-					{ "time": 0.3, "angle": 13.22 },
-					{ "time": 0.4333, "angle": 19.27 },
-					{ "time": 0.5, "angle": -10.3 },
-					{ "time": 0.55, "angle": 3.03 },
-					{ "time": 0.5833, "angle": 9.85 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_Face5": {
-				"rotate": [
-					{},
-					{ "time": 0.1, "angle": -11.2 },
-					{ "time": 0.1333, "angle": 0.47 },
-					{ "time": 0.15, "angle": -9.52 },
-					{ "time": 0.3, "angle": -14.59 },
-					{ "time": 0.4333, "angle": -25.04 },
-					{ "time": 0.5833 }
-				]
-			},
-			"Desert_Face15": {
-				"rotate": [
-					{},
-					{ "time": 0.1, "angle": -13.35 },
-					{ "time": 0.1333, "angle": 6.82 },
-					{ "time": 0.1667, "angle": -3.38 },
-					{ "time": 0.3, "angle": 8.73 },
-					{ "time": 0.4333, "angle": 7.26 },
-					{ "time": 0.5, "angle": -11.91 },
-					{ "time": 0.55, "angle": 2.39 },
-					{ "time": 0.5833, "angle": 9.85 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_Face6": {
-				"rotate": [
-					{},
-					{ "time": 0.1, "angle": -20.17 },
-					{ "time": 0.1333, "angle": -7.89 },
-					{ "time": 0.15, "angle": -0.1 },
-					{ "time": 0.3, "angle": 21.43 },
-					{ "time": 0.4333, "angle": -9.88 },
-					{ "time": 0.5833 }
-				]
-			},
-			"Desert_Face20": {
-				"rotate": [
-					{},
-					{ "time": 0.0667, "angle": -32.58 },
-					{ "time": 0.1667, "angle": -11.01 },
-					{ "time": 0.3, "angle": 28.26 },
-					{ "time": 0.4333, "angle": 24.21 },
-					{ "time": 0.5833 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.1, "x": 3.62, "y": 1.79 },
-					{ "time": 0.1667, "x": 25.99, "y": -3.81 },
-					{ "time": 0.3, "x": 19.78, "y": -0.6 },
-					{ "time": 0.4333, "x": 20.8, "y": -2.88 },
-					{ "time": 0.5833 }
-				]
-			},
-			"Desert_Face21": {
-				"rotate": [
-					{},
-					{ "time": 0.0667, "angle": -3.83 },
-					{ "time": 0.1667, "angle": 35.12 },
-					{ "time": 0.3, "angle": 37.72 },
-					{ "time": 0.4333, "angle": 30.13 },
-					{ "time": 0.5833 }
-				]
-			},
-			"Desert_Face23": {
-				"rotate": [
-					{},
-					{ "time": 0.1, "angle": -29.08 },
-					{ "time": 0.1167, "angle": -23.84 },
-					{ "time": 0.2, "angle": 14.3 },
-					{ "time": 0.3, "angle": 16.57 },
-					{ "time": 0.4333, "angle": 25.77 },
-					{ "time": 0.55, "angle": -6.33 },
-					{ "time": 0.5833, "angle": -13.97 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_Face24": {
-				"rotate": [
-					{},
-					{ "time": 0.1, "angle": -16.06 },
-					{ "time": 0.1167, "angle": 13.63 },
-					{ "time": 0.1333, "angle": 20.15 },
-					{ "time": 0.1667, "angle": 16.58 },
-					{ "time": 0.2, "angle": 20.22 },
-					{ "time": 0.3, "angle": 7.75 },
-					{ "time": 0.4333, "angle": 1.36 },
-					{ "time": 0.55, "angle": 12.58 },
-					{ "time": 0.5833, "angle": 6.39 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_Face25": {
-				"rotate": [
-					{},
-					{ "time": 0.1, "angle": -16.06 },
-					{ "time": 0.1167, "angle": 13.63 },
-					{ "time": 0.1333, "angle": 20.15 },
-					{ "time": 0.1667, "angle": 13.18 },
-					{ "time": 0.2, "angle": 21.81 },
-					{ "time": 0.3, "angle": 4.55 },
-					{ "time": 0.4333, "angle": -5.37 },
-					{ "time": 0.55, "angle": 11.08 },
-					{ "time": 0.5833, "angle": 6.39 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_Face26": {
-				"rotate": [
-					{},
-					{ "time": 0.1, "angle": -16.06 },
-					{ "time": 0.1333, "angle": 14.36 },
-					{ "time": 0.1667, "angle": 21.14 },
-					{ "time": 0.2, "angle": 20.77 },
-					{ "time": 0.3, "angle": 16.41 },
-					{ "time": 0.4333, "angle": 3.7 },
-					{ "time": 0.55, "angle": 13.1 },
-					{ "time": 0.5833, "angle": 6.39 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_LegR2": {
-				"rotate": [
-					{},
-					{ "time": 0.15, "angle": 17.25 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_LegR3": {
-				"rotate": [
-					{},
-					{ "time": 0.15, "angle": 17.25 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_LegL2": {
-				"rotate": [
-					{},
-					{ "time": 0.15, "angle": 17.25 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_LegL3": {
-				"rotate": [
-					{},
-					{ "time": 0.15, "angle": 17.25 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_Chair2": {
-				"rotate": [
-					{},
-					{ "time": 0.0667, "angle": 6.84 },
-					{ "time": 0.6667 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.0667, "x": 8.94, "y": 13.41 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_Face17": {
-				"rotate": [
-					{},
-					{ "time": 0.1, "angle": -10.58 },
-					{ "time": 0.1333, "angle": -3.82 },
-					{ "time": 0.1667, "angle": 11.22 },
-					{ "time": 0.3, "angle": 16.34 },
-					{ "time": 0.4333, "angle": 12.11 },
-					{ "time": 0.5, "angle": -17.06 },
-					{ "time": 0.55, "angle": 14.7 },
-					{ "time": 0.5833 }
-				]
-			},
-			"Desert_Chair8": {
-				"translate": [
-					{},
-					{ "time": 0.0667, "x": -17.56, "y": -4.41 },
-					{ "time": 0.6667 }
-				]
-			},
-			"shadow": {
-				"translate": [
-					{ "time": 0.0167 },
-					{ "time": 0.05, "x": 129.09 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_Face18": {
-				"rotate": [
-					{},
-					{ "time": 0.1, "angle": -12.81 },
-					{ "time": 0.1333, "angle": 1.53 },
-					{ "time": 0.1667, "angle": -10.44 },
-					{ "time": 0.3, "angle": 10.02 },
-					{ "time": 0.4333, "angle": -6.42 },
-					{ "time": 0.5, "angle": -18.52 },
-					{ "time": 0.55, "angle": -2.64 },
-					{ "time": 0.5833 }
-				]
-			},
-			"Desert_eyebrow1": {
-				"rotate": [
-					{},
-					{ "time": 0.05, "angle": 15.26 },
-					{ "time": 0.6667 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.05, "x": -1.55, "y": 0.6 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_eyebrow2": {
-				"rotate": [
-					{},
-					{ "time": 0.05, "angle": -4.22 },
-					{ "time": 0.6667 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.05, "x": -1.49, "y": -0.83 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_LegL": {
-				"rotate": [
-					{},
-					{ "time": 0.15, "angle": 1.9 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_LegR": {
-				"rotate": [
-					{},
-					{ "time": 0.15, "angle": -3.33 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_Face7": {
-				"rotate": [
-					{ "time": 0.1167 },
-					{ "time": 0.1333, "angle": 1.59, "curve": "stepped" },
-					{ "time": 0.3, "angle": 1.59 },
-					{ "time": 0.5833 }
-				],
-				"translate": [
-					{ "time": 0.1167 },
-					{ "time": 0.1333, "x": -0.58, "y": 10.73, "curve": "stepped" },
-					{ "time": 0.3, "x": -0.58, "y": 10.73 },
-					{ "time": 0.5833 }
-				]
-			},
-			"Desert_Main_controler": {
-				"translate": [
-					{ "time": 0.0667 },
-					{ "time": 0.2167, "x": 8.44, "y": -1.23 },
-					{ "time": 0.6667 }
-				]
-			},
-			"Desert_Chair9": {
-				"rotate": [
-					{ "time": 0.1333 },
-					{ "time": 0.15, "angle": -2.39 },
-					{ "time": 0.1833 }
-				]
-			}
-		},
-		"drawOrder": [
-			{
-				"offsets": [
-					{ "slot": "Belly", "offset": 9 },
-					{ "slot": "Front-Leg-P1", "offset": 9 },
-					{ "slot": "Foot-2", "offset": 9 },
-					{ "slot": "Front-Leg-2", "offset": 9 },
-					{ "slot": "Front-Seat", "offset": 9 },
-					{ "slot": "Back-Horn", "offset": 9 },
-					{ "slot": "Back-Jacket", "offset": 2 },
-					{ "slot": "Front-Chair-Horn", "offset": 4 },
-					{ "slot": "Hair-5", "offset": -9 }
-				]
-			},
-			{
-				"time": 0.5833,
-				"offsets": [
-					{ "slot": "Belly", "offset": 9 },
-					{ "slot": "Front-Leg-P1", "offset": 9 },
-					{ "slot": "Foot-2", "offset": 9 },
-					{ "slot": "Front-Leg-2", "offset": 9 },
-					{ "slot": "Front-Seat", "offset": 9 },
-					{ "slot": "Back-Horn", "offset": 9 },
-					{ "slot": "Back-Jacket", "offset": 2 },
-					{ "slot": "Hair-5", "offset": -9 },
-					{ "slot": "Neck", "offset": -9 },
-					{ "slot": "Face", "offset": -9 },
-					{ "slot": "Eyebrow-1", "offset": -9 },
-					{ "slot": "Eyebrow-2", "offset": -9 },
-					{ "slot": "Horn-2", "offset": -9 },
-					{ "slot": "Closed-Eyes", "offset": -9 }
-				]
-			},
-			{
-				"time": 0.6667,
-				"offsets": [
-					{ "slot": "Belly", "offset": 9 },
-					{ "slot": "Front-Leg-P1", "offset": 9 },
-					{ "slot": "Foot-2", "offset": 9 },
-					{ "slot": "Front-Leg-2", "offset": 9 },
-					{ "slot": "Front-Seat", "offset": 9 },
-					{ "slot": "Back-Horn", "offset": 9 },
-					{ "slot": "Back-Jacket", "offset": 2 }
-				]
-			}
-		]
-	},
+  "Defending": {
+    "slots": {
+      "Closed-Eyes": {
+        "color": [
+          {
+            "color": "ffffff00",
+            "curve": "stepped"
+          },
+          {
+            "time": 0.0333,
+            "color": "ffffff00"
+          },
+          {
+            "time": 0.05,
+            "color": "ffffffff",
+            "curve": "stepped"
+          },
+          {
+            "time": 0.5833,
+            "color": "ffffffff"
+          },
+          {
+            "time": 0.6,
+            "color": "ffffff00"
+          }
+        ]
+      }
+    },
+    "bones": {
+      "Desert_Neck": {
+        "rotate": [
+          {},
+          {
+            "time": 0.05,
+            "angle": 2.84
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_LeftArm3": {
+        "rotate": [
+          {},
+          {
+            "time": 0.3833,
+            "angle": -14.49
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_Pelvies": {
+        "rotate": [
+          {},
+          {
+            "time": 0.1333,
+            "angle": -45.16,
+            "curve": "stepped"
+          },
+          {
+            "time": 0.2,
+            "angle": -45.16
+          },
+          {
+            "time": 0.4167,
+            "angle": -34.34
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_Chair": {
+        "rotate": [
+          { "time": 0.0167 },
+          {
+            "time": 0.05,
+            "angle": 11.37
+          },
+          { "time": 0.6667 }
+        ],
+        "translate": [
+          { "time": 0.0167 },
+          {
+            "time": 0.05,
+            "x": 120.4,
+            "y": 3.1
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_LeftArm": {
+        "rotate": [
+          {},
+          {
+            "time": 0.05,
+            "angle": -97.91
+          },
+          {
+            "time": 0.0833,
+            "angle": -86.44
+          },
+          {
+            "time": 0.1167,
+            "angle": -83.41
+          },
+          {
+            "time": 0.1667,
+            "angle": -85.71
+          },
+          {
+            "time": 0.4167,
+            "angle": -87.71
+          },
+          {
+            "time": 0.5,
+            "angle": -96.19
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_LeftArm2": {
+        "rotate": [
+          {},
+          {
+            "time": 0.05,
+            "angle": 46.46
+          },
+          {
+            "time": 0.1667,
+            "angle": -9.13
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_RightArm": {
+        "rotate": [
+          {},
+          {
+            "time": 0.0833,
+            "angle": 36.74
+          },
+          {
+            "time": 0.2333,
+            "angle": 48.19
+          },
+          {
+            "time": 0.5333,
+            "angle": 47.46
+          },
+          { "time": 0.6667 }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.0833,
+            "x": 1.02,
+            "y": -5.96,
+            "curve": "stepped"
+          },
+          {
+            "time": 0.2333,
+            "x": 1.02,
+            "y": -5.96
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_RightArm3": {
+        "rotate": [
+          {},
+          {
+            "time": 0.0833,
+            "angle": 26.47
+          },
+          {
+            "time": 0.2333,
+            "angle": 57.03
+          },
+          {
+            "time": 0.3833,
+            "angle": 24.88
+          },
+          {
+            "time": 0.5333,
+            "angle": 34.3
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_RightArm2": {
+        "rotate": [
+          {},
+          {
+            "time": 0.0833,
+            "angle": -67.69
+          },
+          {
+            "time": 0.2333,
+            "angle": -92.74
+          },
+          {
+            "time": 0.5333,
+            "angle": -66.21
+          },
+          { "time": 0.6667 }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.0833,
+            "x": 15.84,
+            "y": -1.17
+          },
+          {
+            "time": 0.2333,
+            "x": 15.72,
+            "y": 1.64
+          },
+          {
+            "time": 0.5333,
+            "x": 16.52,
+            "y": -0.44
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_Face": {
+        "rotate": [
+          {},
+          {
+            "time": 0.05,
+            "angle": 24.81
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_RightArm4": {
+        "rotate": [
+          {},
+          {
+            "time": 0.05,
+            "angle": 41.88
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_RightArm5": {
+        "rotate": [
+          {},
+          {
+            "time": 0.05,
+            "angle": -37.51
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_RightArm6": {
+        "rotate": [
+          {},
+          {
+            "time": 0.05,
+            "angle": -40.61
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_RightArm7": {
+        "rotate": [
+          {},
+          {
+            "time": 0.05,
+            "angle": -41.07
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_RightArm8": {
+        "rotate": [
+          {},
+          {
+            "time": 0.05,
+            "angle": -0.52
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_RightArm9": {
+        "rotate": [
+          {},
+          {
+            "time": 0.05,
+            "angle": 30.36
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_RightArm10": {
+        "rotate": [
+          {},
+          {
+            "time": 0.05,
+            "angle": 0.2
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_RightArm11": {
+        "rotate": [
+          {},
+          {
+            "time": 0.05,
+            "angle": 9.97
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_RightArm12": {
+        "rotate": [
+          {},
+          {
+            "time": 0.05,
+            "angle": 19.95
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_RightArm13": {
+        "rotate": [
+          {},
+          {
+            "time": 0.05,
+            "angle": 18.11
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_RightArm14": {
+        "rotate": [
+          {},
+          {
+            "time": 0.05,
+            "angle": 4.46
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_Face4": {
+        "rotate": [
+          {},
+          {
+            "time": 0.1,
+            "angle": 3.37
+          },
+          {
+            "time": 0.1333,
+            "angle": 4.4
+          },
+          {
+            "time": 0.15,
+            "angle": -1.81
+          },
+          {
+            "time": 0.3,
+            "angle": 1.12
+          },
+          {
+            "time": 0.4333,
+            "angle": 5.88
+          },
+          { "time": 0.5833 }
+        ]
+      },
+      "Desert_Torso": {
+        "rotate": [
+          {},
+          {
+            "time": 0.1333,
+            "angle": 18.23,
+            "curve": "stepped"
+          },
+          {
+            "time": 0.2,
+            "angle": 18.23
+          },
+          {
+            "time": 0.4167,
+            "angle": 16.26
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_Face8": {
+        "rotate": [
+          {},
+          {
+            "time": 0.0667,
+            "angle": -26.06
+          },
+          { "time": 0.1167 },
+          {
+            "time": 0.1333,
+            "angle": 1.33,
+            "curve": "stepped"
+          },
+          {
+            "time": 0.3,
+            "angle": 1.33
+          },
+          {
+            "time": 0.4333,
+            "angle": 23.56
+          },
+          { "time": 0.5833 }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.0667,
+            "x": 6.23,
+            "y": -12.69
+          },
+          { "time": 0.1167 },
+          {
+            "time": 0.1333,
+            "x": -31.66,
+            "y": 21.23,
+            "curve": "stepped"
+          },
+          {
+            "time": 0.3,
+            "x": -31.66,
+            "y": 21.23
+          },
+          { "time": 0.5833 }
+        ]
+      },
+      "Desert_Face9": {
+        "rotate": [
+          {},
+          {
+            "time": 0.0667,
+            "angle": -14.94
+          },
+          { "time": 0.1167 },
+          {
+            "time": 0.3,
+            "angle": 22.36
+          },
+          {
+            "time": 0.4333,
+            "angle": 18.27
+          },
+          { "time": 0.5833 }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.0667,
+            "x": 10.04,
+            "y": -20.86
+          },
+          { "time": 0.1167 },
+          {
+            "time": 0.1333,
+            "x": 23,
+            "y": -4.95,
+            "curve": "stepped"
+          },
+          {
+            "time": 0.3,
+            "x": 23,
+            "y": -4.95
+          },
+          { "time": 0.5833 }
+        ]
+      },
+      "Desert_Face12": {
+        "rotate": [
+          {},
+          {
+            "time": 0.1,
+            "angle": -0.88
+          },
+          {
+            "time": 0.1333,
+            "angle": -6.61
+          },
+          {
+            "time": 0.1667,
+            "angle": 14.88
+          },
+          {
+            "time": 0.3,
+            "angle": 17.74
+          },
+          {
+            "time": 0.4333,
+            "angle": 37.76
+          },
+          {
+            "time": 0.5,
+            "angle": 25.34
+          },
+          {
+            "time": 0.55,
+            "angle": 2.24
+          },
+          {
+            "time": 0.5833,
+            "angle": -4.79
+          },
+          { "time": 0.6667 }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.1667,
+            "x": 2.26,
+            "y": 4,
+            "curve": "stepped"
+          },
+          {
+            "time": 0.3,
+            "x": 2.26,
+            "y": 4
+          },
+          { "time": 0.5833 }
+        ]
+      },
+      "Desert_Face13": {
+        "rotate": [
+          {},
+          {
+            "time": 0.1,
+            "angle": -27.82
+          },
+          {
+            "time": 0.1333,
+            "angle": 8.97
+          },
+          {
+            "time": 0.1667,
+            "angle": 8.25
+          },
+          {
+            "time": 0.3,
+            "angle": 12.82
+          },
+          {
+            "time": 0.4333,
+            "angle": 15.24
+          },
+          {
+            "time": 0.5,
+            "angle": -14.12
+          },
+          {
+            "time": 0.55,
+            "angle": 1.5
+          },
+          {
+            "time": 0.5833,
+            "angle": -8.79
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_Face14": {
+        "rotate": [
+          {},
+          {
+            "time": 0.1,
+            "angle": -5.29
+          },
+          {
+            "time": 0.1333,
+            "angle": 14.33
+          },
+          {
+            "time": 0.1667,
+            "angle": 8.86
+          },
+          {
+            "time": 0.3,
+            "angle": 13.22
+          },
+          {
+            "time": 0.4333,
+            "angle": 19.27
+          },
+          {
+            "time": 0.5,
+            "angle": -10.3
+          },
+          {
+            "time": 0.55,
+            "angle": 3.03
+          },
+          {
+            "time": 0.5833,
+            "angle": 9.85
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_Face5": {
+        "rotate": [
+          {},
+          {
+            "time": 0.1,
+            "angle": -11.2
+          },
+          {
+            "time": 0.1333,
+            "angle": 0.47
+          },
+          {
+            "time": 0.15,
+            "angle": -9.52
+          },
+          {
+            "time": 0.3,
+            "angle": -14.59
+          },
+          {
+            "time": 0.4333,
+            "angle": -25.04
+          },
+          { "time": 0.5833 }
+        ]
+      },
+      "Desert_Face15": {
+        "rotate": [
+          {},
+          {
+            "time": 0.1,
+            "angle": -13.35
+          },
+          {
+            "time": 0.1333,
+            "angle": 6.82
+          },
+          {
+            "time": 0.1667,
+            "angle": -3.38
+          },
+          {
+            "time": 0.3,
+            "angle": 8.73
+          },
+          {
+            "time": 0.4333,
+            "angle": 7.26
+          },
+          {
+            "time": 0.5,
+            "angle": -11.91
+          },
+          {
+            "time": 0.55,
+            "angle": 2.39
+          },
+          {
+            "time": 0.5833,
+            "angle": 9.85
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_Face6": {
+        "rotate": [
+          {},
+          {
+            "time": 0.1,
+            "angle": -20.17
+          },
+          {
+            "time": 0.1333,
+            "angle": -7.89
+          },
+          {
+            "time": 0.15,
+            "angle": -0.1
+          },
+          {
+            "time": 0.3,
+            "angle": 21.43
+          },
+          {
+            "time": 0.4333,
+            "angle": -9.88
+          },
+          { "time": 0.5833 }
+        ]
+      },
+      "Desert_Face20": {
+        "rotate": [
+          {},
+          {
+            "time": 0.0667,
+            "angle": -32.58
+          },
+          {
+            "time": 0.1667,
+            "angle": -11.01
+          },
+          {
+            "time": 0.3,
+            "angle": 28.26
+          },
+          {
+            "time": 0.4333,
+            "angle": 24.21
+          },
+          { "time": 0.5833 }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.1,
+            "x": 3.62,
+            "y": 1.79
+          },
+          {
+            "time": 0.1667,
+            "x": 25.99,
+            "y": -3.81
+          },
+          {
+            "time": 0.3,
+            "x": 19.78,
+            "y": -0.6
+          },
+          {
+            "time": 0.4333,
+            "x": 20.8,
+            "y": -2.88
+          },
+          { "time": 0.5833 }
+        ]
+      },
+      "Desert_Face21": {
+        "rotate": [
+          {},
+          {
+            "time": 0.0667,
+            "angle": -3.83
+          },
+          {
+            "time": 0.1667,
+            "angle": 35.12
+          },
+          {
+            "time": 0.3,
+            "angle": 37.72
+          },
+          {
+            "time": 0.4333,
+            "angle": 30.13
+          },
+          { "time": 0.5833 }
+        ]
+      },
+      "Desert_Face23": {
+        "rotate": [
+          {},
+          {
+            "time": 0.1,
+            "angle": -29.08
+          },
+          {
+            "time": 0.1167,
+            "angle": -23.84
+          },
+          {
+            "time": 0.2,
+            "angle": 14.3
+          },
+          {
+            "time": 0.3,
+            "angle": 16.57
+          },
+          {
+            "time": 0.4333,
+            "angle": 25.77
+          },
+          {
+            "time": 0.55,
+            "angle": -6.33
+          },
+          {
+            "time": 0.5833,
+            "angle": -13.97
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_Face24": {
+        "rotate": [
+          {},
+          {
+            "time": 0.1,
+            "angle": -16.06
+          },
+          {
+            "time": 0.1167,
+            "angle": 13.63
+          },
+          {
+            "time": 0.1333,
+            "angle": 20.15
+          },
+          {
+            "time": 0.1667,
+            "angle": 16.58
+          },
+          {
+            "time": 0.2,
+            "angle": 20.22
+          },
+          {
+            "time": 0.3,
+            "angle": 7.75
+          },
+          {
+            "time": 0.4333,
+            "angle": 1.36
+          },
+          {
+            "time": 0.55,
+            "angle": 12.58
+          },
+          {
+            "time": 0.5833,
+            "angle": 6.39
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_Face25": {
+        "rotate": [
+          {},
+          {
+            "time": 0.1,
+            "angle": -16.06
+          },
+          {
+            "time": 0.1167,
+            "angle": 13.63
+          },
+          {
+            "time": 0.1333,
+            "angle": 20.15
+          },
+          {
+            "time": 0.1667,
+            "angle": 13.18
+          },
+          {
+            "time": 0.2,
+            "angle": 21.81
+          },
+          {
+            "time": 0.3,
+            "angle": 4.55
+          },
+          {
+            "time": 0.4333,
+            "angle": -5.37
+          },
+          {
+            "time": 0.55,
+            "angle": 11.08
+          },
+          {
+            "time": 0.5833,
+            "angle": 6.39
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_Face26": {
+        "rotate": [
+          {},
+          {
+            "time": 0.1,
+            "angle": -16.06
+          },
+          {
+            "time": 0.1333,
+            "angle": 14.36
+          },
+          {
+            "time": 0.1667,
+            "angle": 21.14
+          },
+          {
+            "time": 0.2,
+            "angle": 20.77
+          },
+          {
+            "time": 0.3,
+            "angle": 16.41
+          },
+          {
+            "time": 0.4333,
+            "angle": 3.7
+          },
+          {
+            "time": 0.55,
+            "angle": 13.1
+          },
+          {
+            "time": 0.5833,
+            "angle": 6.39
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_LegR2": {
+        "rotate": [
+          {},
+          {
+            "time": 0.15,
+            "angle": 17.25
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_LegR3": {
+        "rotate": [
+          {},
+          {
+            "time": 0.15,
+            "angle": 17.25
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_LegL2": {
+        "rotate": [
+          {},
+          {
+            "time": 0.15,
+            "angle": 17.25
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_LegL3": {
+        "rotate": [
+          {},
+          {
+            "time": 0.15,
+            "angle": 17.25
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_Chair2": {
+        "rotate": [
+          {},
+          {
+            "time": 0.0667,
+            "angle": 6.84
+          },
+          { "time": 0.6667 }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.0667,
+            "x": 8.94,
+            "y": 13.41
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_Face17": {
+        "rotate": [
+          {},
+          {
+            "time": 0.1,
+            "angle": -10.58
+          },
+          {
+            "time": 0.1333,
+            "angle": -3.82
+          },
+          {
+            "time": 0.1667,
+            "angle": 11.22
+          },
+          {
+            "time": 0.3,
+            "angle": 16.34
+          },
+          {
+            "time": 0.4333,
+            "angle": 12.11
+          },
+          {
+            "time": 0.5,
+            "angle": -17.06
+          },
+          {
+            "time": 0.55,
+            "angle": 14.7
+          },
+          { "time": 0.5833 }
+        ]
+      },
+      "Desert_Chair8": {
+        "translate": [
+          {},
+          {
+            "time": 0.0667,
+            "x": -17.56,
+            "y": -4.41
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "shadow": {
+        "translate": [
+          { "time": 0.0167 },
+          {
+            "time": 0.05,
+            "x": 129.09
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_Face18": {
+        "rotate": [
+          {},
+          {
+            "time": 0.1,
+            "angle": -12.81
+          },
+          {
+            "time": 0.1333,
+            "angle": 1.53
+          },
+          {
+            "time": 0.1667,
+            "angle": -10.44
+          },
+          {
+            "time": 0.3,
+            "angle": 10.02
+          },
+          {
+            "time": 0.4333,
+            "angle": -6.42
+          },
+          {
+            "time": 0.5,
+            "angle": -18.52
+          },
+          {
+            "time": 0.55,
+            "angle": -2.64
+          },
+          { "time": 0.5833 }
+        ]
+      },
+      "Desert_eyebrow1": {
+        "rotate": [
+          {},
+          {
+            "time": 0.05,
+            "angle": 15.26
+          },
+          { "time": 0.6667 }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.05,
+            "x": -1.55,
+            "y": 0.6
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_eyebrow2": {
+        "rotate": [
+          {},
+          {
+            "time": 0.05,
+            "angle": -4.22
+          },
+          { "time": 0.6667 }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.05,
+            "x": -1.49,
+            "y": -0.83
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_LegL": {
+        "rotate": [
+          {},
+          {
+            "time": 0.15,
+            "angle": 1.9
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_LegR": {
+        "rotate": [
+          {},
+          {
+            "time": 0.15,
+            "angle": -3.33
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_Face7": {
+        "rotate": [
+          { "time": 0.1167 },
+          {
+            "time": 0.1333,
+            "angle": 1.59,
+            "curve": "stepped"
+          },
+          {
+            "time": 0.3,
+            "angle": 1.59
+          },
+          { "time": 0.5833 }
+        ],
+        "translate": [
+          { "time": 0.1167 },
+          {
+            "time": 0.1333,
+            "x": -0.58,
+            "y": 10.73,
+            "curve": "stepped"
+          },
+          {
+            "time": 0.3,
+            "x": -0.58,
+            "y": 10.73
+          },
+          { "time": 0.5833 }
+        ]
+      },
+      "Desert_Main_controler": {
+        "translate": [
+          { "time": 0.0667 },
+          {
+            "time": 0.2167,
+            "x": 8.44,
+            "y": -1.23
+          },
+          { "time": 0.6667 }
+        ]
+      },
+      "Desert_Chair9": {
+        "rotate": [
+          { "time": 0.1333 },
+          {
+            "time": 0.15,
+            "angle": -2.39
+          },
+          { "time": 0.1833 }
+        ]
+      }
+    },
+    "drawOrder": [
+      {
+        "offsets": [
+          {
+            "slot": "Belly",
+            "offset": 9
+          },
+          {
+            "slot": "Front-Leg-P1",
+            "offset": 9
+          },
+          {
+            "slot": "Foot-2",
+            "offset": 9
+          },
+          {
+            "slot": "Front-Leg-2",
+            "offset": 9
+          },
+          {
+            "slot": "Front-Seat",
+            "offset": 9
+          },
+          {
+            "slot": "Back-Horn",
+            "offset": 9
+          },
+          {
+            "slot": "Back-Jacket",
+            "offset": 2
+          },
+          {
+            "slot": "Front-Chair-Horn",
+            "offset": 4
+          },
+          {
+            "slot": "Hair-5",
+            "offset": -9
+          }
+        ]
+      },
+      {
+        "time": 0.5833,
+        "offsets": [
+          {
+            "slot": "Belly",
+            "offset": 9
+          },
+          {
+            "slot": "Front-Leg-P1",
+            "offset": 9
+          },
+          {
+            "slot": "Foot-2",
+            "offset": 9
+          },
+          {
+            "slot": "Front-Leg-2",
+            "offset": 9
+          },
+          {
+            "slot": "Front-Seat",
+            "offset": 9
+          },
+          {
+            "slot": "Back-Horn",
+            "offset": 9
+          },
+          {
+            "slot": "Back-Jacket",
+            "offset": 2
+          },
+          {
+            "slot": "Hair-5",
+            "offset": -9
+          },
+          {
+            "slot": "Neck",
+            "offset": -9
+          },
+          {
+            "slot": "Face",
+            "offset": -9
+          },
+          {
+            "slot": "Eyebrow-1",
+            "offset": -9
+          },
+          {
+            "slot": "Eyebrow-2",
+            "offset": -9
+          },
+          {
+            "slot": "Horn-2",
+            "offset": -9
+          },
+          {
+            "slot": "Closed-Eyes",
+            "offset": -9
+          }
+        ]
+      },
+      {
+        "time": 0.6667,
+        "offsets": [
+          {
+            "slot": "Belly",
+            "offset": 9
+          },
+          {
+            "slot": "Front-Leg-P1",
+            "offset": 9
+          },
+          {
+            "slot": "Foot-2",
+            "offset": 9
+          },
+          {
+            "slot": "Front-Leg-2",
+            "offset": 9
+          },
+          {
+            "slot": "Front-Seat",
+            "offset": 9
+          },
+          {
+            "slot": "Back-Horn",
+            "offset": 9
+          },
+          {
+            "slot": "Back-Jacket",
+            "offset": 2
+          }
+        ]
+      }
+    ],
+    "events": [
+      {
+        "time": 0.15,
+        "name": "StopDefending"
+      }
+    ]
+  },
 	"GettingHit": {
 		"slots": {
 			"Closed-Eyes": {
