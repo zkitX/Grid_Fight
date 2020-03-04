@@ -390,7 +390,6 @@ public class BattleManagerScript : MonoBehaviour
 
         // yield return HoldPressTimer(playerController);
         //Debug.Log(CurrentSelectedCharacters[playerController].OffsetSwap + "    " + Time.time);
-        CurrentSelectedCharacters[playerController].Character.SwapWhenPossible = true;
         while (CurrentSelectedCharacters[playerController].OffsetSwap > Time.time || !CurrentSelectedCharacters[playerController].Character.IsOnField ||
             CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle ||
             CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving ||
@@ -399,6 +398,7 @@ public class BattleManagerScript : MonoBehaviour
             //Debug.Log(val);
             yield return null;
         }
+        CurrentSelectedCharacters[playerController].Character.SwapWhenPossible = true;
 
         if (CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar == AllCharactersOnField.Where(r=> r.CharInfo.CharacterID == cName &&
         CurrentSelectedCharacters[playerController].NextSelectionChar.Side == r.UMS.Side).First().CharInfo.CharacterSelection)
