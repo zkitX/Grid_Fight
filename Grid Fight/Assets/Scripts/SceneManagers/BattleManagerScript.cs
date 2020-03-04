@@ -108,8 +108,7 @@ public class BattleManagerScript : MonoBehaviour
 
     public CharacterType_Script SetCharOnBoardOnFixedPos(ControllerType playerController, CharacterNameType cName, Vector2Int pos)
     {
-        if (CurrentSelectedCharacters[playerController].Character != null && (PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == cName).First().isUsed ||
-           (CurrentSelectedCharacters[playerController].Character.isMoving)
+        if (CurrentSelectedCharacters[playerController].Character != null && (PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == cName).First().isUsed 
            || (!CurrentSelectedCharacters[playerController].Character.IsOnField)
           || (CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle)))
         {
@@ -167,7 +166,7 @@ public class BattleManagerScript : MonoBehaviour
         currentCharacter.UMS.Pos = newPoses;
         currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", false);
         currentCharacter.SetUpLeavingBattle();
-        yield return MoveCharToBoardWithDelay(0.3f, currentCharacter, new Vector3(100f, 100f, 100f));
+        yield return MoveCharToBoardWithDelay(0.2f, currentCharacter, new Vector3(100f, 100f, 100f));
 
         if (playerController == ControllerType.Player1)
         {
@@ -390,15 +389,17 @@ public class BattleManagerScript : MonoBehaviour
 
         // yield return HoldPressTimer(playerController);
         //Debug.Log(CurrentSelectedCharacters[playerController].OffsetSwap + "    " + Time.time);
+
+        CurrentSelectedCharacters[playerController].Character.SwapWhenPossible = true;
+
         while (CurrentSelectedCharacters[playerController].OffsetSwap > Time.time || !CurrentSelectedCharacters[playerController].Character.IsOnField ||
             CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle ||
             CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving ||
-            CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving || CurrentSelectedCharacters[playerController].Character.isMoving)
+            CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving)
         {
             //Debug.Log(val);
             yield return null;
         }
-        CurrentSelectedCharacters[playerController].Character.SwapWhenPossible = true;
 
         if (CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar == AllCharactersOnField.Where(r=> r.CharInfo.CharacterID == cName &&
         CurrentSelectedCharacters[playerController].NextSelectionChar.Side == r.UMS.Side).First().CharInfo.CharacterSelection)

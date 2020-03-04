@@ -157,6 +157,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public virtual void SetAttackReady(bool value)
     {
+        //Debug.Log(CharInfo.CharacterID + "  " + value);
         if(CharBoxCollider != null)
         {
             CharBoxCollider.enabled = value;
@@ -579,7 +580,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public virtual void MoveCharOnDirection(InputDirection nextDir)
     {
         if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving || SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving ||
-            SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle || IsSwapping || SwapWhenPossible)
+            SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle || SwapWhenPossible)
         {
             return;
         }
@@ -745,10 +746,15 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
                     SpineAnim.SetAnimationSpeed(5);
                 }
-                if (TileMovementCompleteEvent != null)
-                {
-                    TileMovementCompleteEvent(this);
-                }
+                TileMovementCompleteEvent?.Invoke(this);
+            }
+
+            if(SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving)
+            {
+                isMoving = false;
+                TileMovementCompleteEvent?.Invoke(this);
+                MoveCo = null;
+                yield break;
             }
         }
         
@@ -952,8 +958,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public virtual void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
     {
-         //Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + NextAttackLevel.ToString());
-
+         Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + CharInfo.CharacterID.ToString());
+        if (animState == CharacterAnimationStateType.Reverse_Arriving)
+        {
+        }     
 
         if(animState == CharacterAnimationStateType.GettingHit && currentAttackPhase != AttackPhasesType.End)
         {
@@ -965,7 +973,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             return;
         }
 
-        if (isMoving)
+        if (isMoving && animState != CharacterAnimationStateType.Reverse_Arriving)
         {
             return;
         }
@@ -993,7 +1001,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             AnimSpeed = CharInfo.MovementSpeed * CharInfo.BaseSpeed;
         }
-        else if(animState == CharacterAnimationStateType.Reverse_Arriving)
+        else if(animState == CharacterAnimationStateType.Reverse_Arriving || animState == CharacterAnimationStateType.Arriving)
         {
             AnimSpeed = CharInfo.LeaveSpeed;
         }
