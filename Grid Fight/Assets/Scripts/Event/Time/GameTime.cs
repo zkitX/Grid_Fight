@@ -30,7 +30,7 @@ public class GameTime
         SetupBasics();
     }
 
-    void SetupBasics()
+    public void SetupBasics()
     {
         if (standardTicker == null) standardTicker = TimeCounter(1f);
         if (standardReverseTicker == null) standardReverseTicker = TimeCounter(-1f);

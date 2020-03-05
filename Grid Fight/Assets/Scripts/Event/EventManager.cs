@@ -26,7 +26,7 @@ public class EventManager : MonoBehaviour
     protected List<CharacterEventInfoClass> healthChangedLastFrame = new List<CharacterEventInfoClass>();
     protected List<CharacterEventInfoClass> staminaChangedLastFrame = new List<CharacterEventInfoClass>();
     [SerializeField] protected List<string> eventsCalled = new List<string>();
-    protected List<string> eventDirectCallsLastFrame = new List<string>();
+    [SerializeField] protected List<string> eventDirectCallsLastFrame = new List<string>();
     [SerializeField] protected List<string> eventsTriggered = new List<string>();
     protected List<string> eventsTriggeredLastFrame = new List<string>();
     [SerializeField] protected List<CharacterEventInfoClass> charactersSwitched = new List<CharacterEventInfoClass>();
@@ -43,11 +43,13 @@ public class EventManager : MonoBehaviour
         Instance = this;
     }
 
+    //Initialize the events for the first time
     public void StartEventManager()
     {
         ResetEventsInManager();
     }
 
+    //Reset all event checks, and repopulate current events from the event profile
     public void ResetEventsInManager()
     {
         stageEventTriggers.Clear();
@@ -62,6 +64,7 @@ public class EventManager : MonoBehaviour
         InitialiseEvents();
     }
 
+    //Start all events in the event profile
     void InitialiseEvents()
     {
         foreach(GameSequenceEvent gameEvent in stageEventTriggers)
@@ -161,6 +164,18 @@ public class EventManager : MonoBehaviour
         foreach(GameSequenceEvent GSequenceEvent in stageEventTriggers)
         {
             if(GSequenceEvent.hasHappened && GSequenceEvent.Name == gseqEvent.Name)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool HasConcluded(GameSequenceEvent gseqEvent)
+    {
+        foreach (GameSequenceEvent GSequenceEvent in stageEventTriggers)
+        {
+            if (GSequenceEvent.hasHappened && !GSequenceEvent.ceaseOnComplete && GSequenceEvent.Name == gseqEvent.Name)
             {
                 return true;
             }
@@ -430,19 +445,26 @@ public class EventManager : MonoBehaviour
     #region Call Management
     public void CallEventDirectly(string eventName)
     {
-        ResetEventsCalledLastFrame(eventName);
+        eventDirectCallsLastFrame.Add(eventName);
+        StartCoroutine(ResetEventsCalledLastFrame(eventName));
         if (!eventsCalled.Contains(eventName)) eventsCalled.Add(eventName); 
         foreach (string eventCalledLastFrame in eventDirectCallsLastFrame)
         {
             if (eventCalledLastFrame == eventName) return;
         }
-        eventDirectCallsLastFrame.Add(eventName);
     }
 
     IEnumerator ResetEventsCalledLastFrame(string eventName)
     {
         yield return null;
-        eventDirectCallsLastFrame.Remove(eventName);
+        for (int i = 0; i < eventDirectCallsLastFrame.Count; i++)
+        {
+            if(eventDirectCallsLastFrame[i] == eventName)
+            {
+                eventDirectCallsLastFrame.RemoveAt(i);
+                break;
+            }
+        }
     }
 
     public bool EventCalledLastFrame(string eventName)
@@ -621,7 +643,7 @@ public class EventManager : MonoBehaviour
         int number = 0;
         if (blocks.Count != 0)
         {
-            if (typeToCheck == BlockInfo.BlockType.either) number++;
+            if (typeToCheck == BlockInfo.BlockType.either) number = blocks.Count;
             else
             {
                 foreach (BlockInfo blockInfo in blocks)

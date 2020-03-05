@@ -15,12 +15,49 @@ MonoBehaviour:
   Name: Default6Waves_TimerRunOut
   hasHappened: 0
   requirementRule: 0
-  timedCheckRule: 0
-  requirements:
+  reqChecks:
   - {fileID: 11400000, guid: 85356c75abc7e2e4ab4e988b53b7e18a, type: 2}
-  - {fileID: 11400000, guid: b74d073f81c0bec40803b4c158757ee0, type: 2}
+  timedCheckRule: 0
+  timedChecks:
+  - Name: 
+    hasHappened: 0
+    isHappening: 0
+    checker: {fileID: 0}
+    ceaseOnHappened: 0
+    TimedCheckType: 7
+    deathCharacterID: 0
+    onlyOnDeath: 0
+    deathsRequired: 0
+    buttonToWaitFor: 0
+    arrivalCharacterID: 0
+    onlyOnArrival: 0
+    arrivalsRequired: 0
+    switchCharacterID: 0
+    onlyOnSwitch: 0
+    switchesRequired: 0
+    healthChangeCharID: 0
+    healthChange: 0
+    healthChangeValue: 0
+    requireCalledDuringCheck: 0
+    requireEventCalledDuringCheck: 0
+    EventCallRequired: {fileID: 0}
+    timeCompareType: 2
+    hoursToCompare: 0
+    minutesToCompare: 0
+    secondsToCompare: 0
+    blockTypeToCheck: 0
+    checkBlockForAnyCharacter: 0
+    characterToCheckWhichBlocked: 0
+    numberOfBlocksRequired: 0
+    requireBlockHappenedLastFrame: 0
+    staminaChangeCharID: 0
+    staminaChange: 0
+    staminaChangeValue: 0
+    requireEventTriggerDuringCheck: 0
+    EventTriggerRequired: {fileID: 0}
   inhibitorRule: 1
   inhibitors: []
+  ignoreQueue: 0
   ceaseOnComplete: 1
   requireComplete: 1
   effects:

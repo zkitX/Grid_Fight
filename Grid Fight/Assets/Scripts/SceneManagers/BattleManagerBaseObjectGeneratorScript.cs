@@ -90,11 +90,19 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
         AudioManager = Instantiate(stage.AudioManager);
         StageObjects.Add(AudioManager);
 
-
         BaseEnvironment = Instantiate(stage.BaseEnvironment);
         StageObjects.Add(BaseEnvironment);
 
         yield return null;
+
+        BattleManager = Instantiate(stage.BattleManager);
+        StageObjects.Add(BattleManager);
+
+        if (stage.Wave != null)
+        {
+            Wave = Instantiate(stage.Wave);
+            StageObjects.Add(Wave);
+        }
 
         if (stage.EventManager != null)
         {
@@ -108,20 +116,11 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
         AudioManager = Instantiate(stage.AudioManager);
         StageObjects.Add(AudioManager);
 
-        BattleManager = Instantiate(stage.BattleManager);
-        StageObjects.Add(BattleManager);
-
         Battle_UI = Instantiate(stage.UI_Battle);
         StageObjects.Add(Battle_UI);
 
         yield return BattleManagerScript.Instance.InstanciateAllChar();
-
-        if (stage.Wave != null)
-        {
-            Wave = Instantiate(stage.Wave);
-            StageObjects.Add(Wave);
-            yield return WaveManagerScript.Instance.WaveCharCreator();
-        }
+        if (Wave != null) yield return WaveManagerScript.Instance.WaveCharCreator();
 
         yield return null;
 

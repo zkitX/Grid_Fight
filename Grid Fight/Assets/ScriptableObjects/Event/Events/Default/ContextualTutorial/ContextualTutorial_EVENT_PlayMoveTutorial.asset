@@ -15,9 +15,10 @@ MonoBehaviour:
   Name: ContextualTutorial_EVENT_PlayMoveTutorial
   hasHappened: 0
   requirementRule: 1
-  timedCheckRule: 0
-  requirements:
+  reqChecks:
   - {fileID: 11400000, guid: e143da027617e9d43860407f63cca3e6, type: 2}
+  timedCheckRule: 0
+  timedChecks: []
   inhibitorRule: 1
   inhibitors:
   - {fileID: 11400000, guid: af990b1e7946fbc43946d4e16fac8b02, type: 2}
@@ -25,6 +26,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 05c8d7e2f57c145428df434125126a65, type: 2}
   - {fileID: 11400000, guid: 93ffa9a323e09804b8b2e81857ac6d08, type: 2}
   - {fileID: 11400000}
+  ignoreQueue: 0
   ceaseOnComplete: 1
   requireComplete: 1
   effects:

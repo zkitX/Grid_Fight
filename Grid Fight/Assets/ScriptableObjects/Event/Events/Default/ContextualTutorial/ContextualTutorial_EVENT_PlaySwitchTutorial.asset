@@ -15,15 +15,52 @@ MonoBehaviour:
   Name: ContextualTutorial_EVENT_PlaySwitchTutorial
   hasHappened: 0
   requirementRule: 1
-  timedCheckRule: 0
-  requirements:
+  reqChecks:
   - {fileID: 11400000, guid: 93ffa9a323e09804b8b2e81857ac6d08, type: 2}
   - {fileID: 11400000, guid: c871a40903109b94299f3213d2108396, type: 2}
-  - {fileID: 11400000, guid: 66905189107d5d344a138210772c5a67, type: 2}
+  timedCheckRule: 0
+  timedChecks:
+  - Name: 
+    hasHappened: 0
+    isHappening: 0
+    checker: {fileID: 0}
+    ceaseOnHappened: 1
+    TimedCheckType: 10
+    deathCharacterID: 0
+    onlyOnDeath: 0
+    deathsRequired: 0
+    buttonToWaitFor: 0
+    arrivalCharacterID: 0
+    onlyOnArrival: 0
+    arrivalsRequired: 0
+    switchCharacterID: 0
+    onlyOnSwitch: 0
+    switchesRequired: 0
+    healthChangeCharID: 0
+    healthChange: 0
+    healthChangeValue: 0
+    requireCalledDuringCheck: 0
+    requireEventCalledDuringCheck: 0
+    EventCallRequired: {fileID: 0}
+    timeCompareType: 0
+    hoursToCompare: 0
+    minutesToCompare: 0
+    secondsToCompare: 0
+    blockTypeToCheck: 0
+    checkBlockForAnyCharacter: 0
+    characterToCheckWhichBlocked: 0
+    numberOfBlocksRequired: 0
+    requireBlockHappenedLastFrame: 0
+    staminaChangeCharID: 0
+    staminaChange: 0
+    staminaChangeValue: 0
+    requireEventTriggerDuringCheck: 0
+    EventTriggerRequired: {fileID: 11400000}
   inhibitorRule: 1
   inhibitors:
   - {fileID: 11400000, guid: 663ac83cd68aaf64ba67d4777f69a5a2, type: 2}
   - {fileID: 11400000}
+  ignoreQueue: 0
   ceaseOnComplete: 1
   requireComplete: 1
   effects:

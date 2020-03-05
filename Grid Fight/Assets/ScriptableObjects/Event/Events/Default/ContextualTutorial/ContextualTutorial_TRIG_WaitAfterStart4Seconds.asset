@@ -15,12 +15,14 @@ MonoBehaviour:
   Name: ContextualTutorial_TRIG_WaitAfterStart4Seconds
   hasHappened: 0
   requirementRule: 0
-  timedCheckRule: 0
-  requirements:
+  reqChecks:
   - {fileID: 11400000, guid: 3c211f46e89b7dd45988911c634547c9, type: 2}
+  timedCheckRule: 0
+  timedChecks: []
   inhibitorRule: 1
   inhibitors:
   - {fileID: 11400000}
+  ignoreQueue: 0
   ceaseOnComplete: 1
   requireComplete: 1
   effects:

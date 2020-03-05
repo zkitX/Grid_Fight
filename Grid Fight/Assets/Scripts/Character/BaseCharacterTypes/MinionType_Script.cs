@@ -88,7 +88,7 @@ public class MinionType_Script : BaseCharacter
                     {
                         yield return new WaitForFixedUpdate();
                     }
-                    Debug.Log(timer + "    " + MoveTime);
+                   // Debug.Log(timer + "    " + MoveTime);
                     timer += Time.deltaTime;
                 }
                 AIMove = false;

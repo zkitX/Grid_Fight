@@ -5,22 +5,25 @@ using UnityEngine.Events;
 
 [System.Serializable]
 [CreateAssetMenu(fileName = "GSEQ_EventName", menuName = "ScriptableObjects/Events/Game Sequence Event")]
-public class GameSequenceEvent : EventTrigger
+public class GameSequenceEvent : ScriptableObject
 {
+    public string Name;
+    [HideInInspector] public bool hasHappened = false;
+
     //requirements as well as their sub divisions (timed/Non-timed)
     public enum RequirementType { and, or }
     [Header("Requirements")]
     [SerializeField] protected RequirementType requirementRule = RequirementType.and;
+    [SerializeField] public List<GameSequenceEvent> reqChecks = new List<GameSequenceEvent>();
+    [Space(10)]
     [SerializeField] protected RequirementType timedCheckRule = RequirementType.and;
-    [Tooltip("A list of game sequence and timed events that enable the event to be completed")] [SerializeField] public EventTrigger[] requirements;
+    [SerializeField] public List<TimedCheck> timedChecks = new List<TimedCheck>();
 
     [Space(10)]
     [Header("Inhibitors")]
     [SerializeField] protected RequirementType inhibitorRule = RequirementType.or;
     [Tooltip("A list of game sequence events that stop the event from being completed")][SerializeField] public List<GameSequenceEvent> inhibitors;
 
-    protected List<TimedCheck> timedChecks = new List<TimedCheck>();
-    [HideInInspector] public List<GameSequenceEvent> reqChecks { get; private set; } = new List<GameSequenceEvent>();
     //
 
     //Interaction information
@@ -39,7 +42,7 @@ public class GameSequenceEvent : EventTrigger
 
     public void Trigger()
     {
-        if (hasHappened && !ceaseOnComplete) return;
+        if (hasHappened && ceaseOnComplete) return;
         Debug.Log("<i>Event Triggered:</i> " + Name);
 
         EventManager.Instance.AddTriggeredEvent(Name);
@@ -51,19 +54,20 @@ public class GameSequenceEvent : EventTrigger
         StartAllTimedRequirements();
     }
 
+    //Setup the event
     public void Initialise()
     {
-        for(int i = 0; i < requirements.Length; i++)
+        //Instantiate all the requirement scriptableObjects
+        for(int i = 0; i < reqChecks.Count; i++)
         {
-            //Create a copy
-            requirements[i] = Instantiate(requirements[i]);
-            //Add the requirements to their different groups
-            if (requirements[i].GetType() == typeof(GameSequenceEvent)) reqChecks.Add((GameSequenceEvent)requirements[i]);
-            else if (requirements[i].GetType() == typeof(TimedCheck)) timedChecks.Add((TimedCheck)requirements[i]);
+            reqChecks[i] = Instantiate(reqChecks[i]);
         }
+
+        //Trigger the event if it has no requirements
         if (reqChecks.Count == 0) Trigger();
     }
 
+    //A check to see if all the requirements of any type (inhibitor, standard or otherwise) have been fulfilled based on their rule
     bool RequirementsFulfilled(List<GameSequenceEvent> reqList, RequirementType reqRule)
     {
         //Check if the non-timed event trigger requirements have been fulfilled
@@ -85,6 +89,7 @@ public class GameSequenceEvent : EventTrigger
         }
     }
 
+
     void StartAllTimedRequirements()
     {
         if(timedChecks.Count == 0)
@@ -102,6 +107,7 @@ public class GameSequenceEvent : EventTrigger
     void PopulateTriggees()
     {
         //GO through all the game events in this stage, see if this event is one of their requirements and if so, add to the list of triggees
+        triggees.Clear();
         foreach(GameSequenceEvent gameEvent in EventManager.Instance.stageEventTriggers)
         {
             foreach(GameSequenceEvent reqCheck in gameEvent.reqChecks)
@@ -170,31 +176,27 @@ public class GameSequenceEvent : EventTrigger
     public IEnumerator CompleteEventSequence()
     {
         //Sequence through all the effects here
-        if (!requireComplete)
-        {
-            EventManager.Instance.AddTriggeredEvent(Name);
-            TriggerTriggees();
-        }
+        if (!requireComplete) EventCompletion();
 
-        //NEEDS WORK
-        foreach(EventEffect effect in effects)
+
+        foreach (EventEffect effect in effects)
         {
             yield return effect.PlayEffect();
         }
 
+
+        if (requireComplete) EventCompletion();
+
         Debug.Log("<i>Event Completed:</i> " + Name);
-
-
-
-        if (requireComplete)
-        {
-            EventManager.Instance.AddTriggeredEvent(Name);
-            TriggerTriggees();
-        }
-
         yield return null;
     }
 
-
+    //Handle all the event resets and such, do not fuck with the effects in this method
+    void EventCompletion()
+    {
+        EventManager.Instance.AddTriggeredEvent(Name);
+        TriggerTriggees();
+        if (!ceaseOnComplete) Trigger();
+    }
 
 }

@@ -209,7 +209,7 @@ public class SpineAnimationManager : MonoBehaviour
         if (completedAnim != CharacterAnimationStateType.Idle && !Loop)
         {
             SetAnimationSpeed(CharOwner.CharInfo.BaseSpeed);
-            Debug.Log("IDLE     " + completedAnim.ToString());
+            //Debug.Log("IDLE     " + completedAnim.ToString());
             SpineAnimationState.SetAnimation(0, CharacterAnimationStateType.Idle.ToString(), true);
             //SpineAnimationState.AddEmptyAnimation(1,AnimationTransition,0);
             CurrentAnim = CharacterAnimationStateType.Idle;

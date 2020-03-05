@@ -71,8 +71,8 @@ public class Stage00_BossOctopus_Head : MinionType_Script
             }
             else if (SpineAnim.CurrentAnim.ToString().Contains("Atk2"))
             {
-                EventManager.Instance.UpdateStamina(this);
                 CharInfo.Stamina -= CharInfo.PowerfulAttac.Stamina_Cost_Atk;
+                EventManager.Instance.UpdateStamina(this);
             }
         }
 

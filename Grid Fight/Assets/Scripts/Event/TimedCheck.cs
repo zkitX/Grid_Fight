@@ -4,9 +4,10 @@ using UnityEngine;
 using MyBox;
 
 [System.Serializable]
-[CreateAssetMenu(fileName = "TIME_EventName", menuName = "ScriptableObjects/Events/Timed Event")]
-public class TimedCheck : EventTrigger
+public class TimedCheck
 {
+    public string Name;
+    [HideInInspector] public bool hasHappened = false;
     [HideInInspector] public bool isHappening = false;
 
     public EventManager.Check check;
@@ -191,10 +192,10 @@ public class TimedCheck : EventTrigger
                 if (timeComparing == time.timeInSeconds) return true;
                 break;
             case (CompareType.LessThan):
-                if (timeComparing > time.timeInSeconds) return true;
+                if (timeComparing < time.timeInSeconds) return true;
                 break;
             case (CompareType.MoreThan):
-                if (timeComparing < time.timeInSeconds) return true;
+                if (timeComparing > time.timeInSeconds) return true;
                 break;
             default:
                 Debug.Log("Health Change type is not set on timed check: " + Name);
@@ -204,6 +205,7 @@ public class TimedCheck : EventTrigger
     }
 
     [ConditionalField("TimedCheckType", false, TimedCheckTypes.BlockCheck)] public BlockInfo.BlockType blockTypeToCheck = BlockInfo.BlockType.either;
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.BlockCheck)] public bool checkBlockForAnyCharacter = false;
     [ConditionalField("TimedCheckType", false, TimedCheckTypes.BlockCheck)] public CharacterNameType characterToCheckWhichBlocked = CharacterNameType.None;
     [ConditionalField("TimedCheckType", false, TimedCheckTypes.BlockCheck)] public int numberOfBlocksRequired = 1;
     [ConditionalField("TimedCheckType", false, TimedCheckTypes.BlockCheck)] public bool requireBlockHappenedLastFrame = true;
@@ -211,7 +213,7 @@ public class TimedCheck : EventTrigger
     {
         if (requireBlockHappenedLastFrame)
         {
-            if(characterToCheckWhichBlocked == CharacterNameType.None)
+            if(characterToCheckWhichBlocked == CharacterNameType.None || checkBlockForAnyCharacter)
             {
                 return EventManager.Instance.GetBlockHappenedLastFrame(blockTypeToCheck, numberOfBlocksRequired);
             }
@@ -222,7 +224,7 @@ public class TimedCheck : EventTrigger
         }
         else
         {
-            if (characterToCheckWhichBlocked == CharacterNameType.None)
+            if (characterToCheckWhichBlocked == CharacterNameType.None || checkBlockForAnyCharacter)
             {
                 return EventManager.Instance.GetBlocksHappened(blockTypeToCheck, numberOfBlocksRequired);
             }

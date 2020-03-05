@@ -15,16 +15,158 @@ MonoBehaviour:
   Name: ContextualTutorial_PlayerHasSwitchedOut
   hasHappened: 0
   requirementRule: 0
-  timedCheckRule: 1
-  requirements:
-  - {fileID: 11400000, guid: 7bd7260d681a5ed4697edcb2a19855f7, type: 2}
-  - {fileID: 11400000, guid: cf84bf3aa677e894ca328dfb463eb883, type: 2}
-  - {fileID: 11400000, guid: a86c96556898d5f48bc067e20a216100, type: 2}
-  - {fileID: 11400000, guid: 1936aafb1fcae064ab65c4a75857f8ec, type: 2}
+  reqChecks:
   - {fileID: 11400000, guid: 3c211f46e89b7dd45988911c634547c9, type: 2}
+  timedCheckRule: 1
+  timedChecks:
+  - Name: 
+    hasHappened: 0
+    isHappening: 0
+    checker: {fileID: 0}
+    ceaseOnHappened: 1
+    TimedCheckType: 3
+    deathCharacterID: 0
+    onlyOnDeath: 0
+    deathsRequired: 0
+    buttonToWaitFor: 0
+    arrivalCharacterID: 0
+    onlyOnArrival: 0
+    arrivalsRequired: 0
+    switchCharacterID: 19
+    onlyOnSwitch: 0
+    switchesRequired: 1
+    healthChangeCharID: 0
+    healthChange: 0
+    healthChangeValue: 0
+    requireCalledDuringCheck: 0
+    requireEventCalledDuringCheck: 0
+    EventCallRequired: {fileID: 0}
+    timeCompareType: 0
+    hoursToCompare: 0
+    minutesToCompare: 0
+    secondsToCompare: 0
+    blockTypeToCheck: 0
+    checkBlockForAnyCharacter: 0
+    characterToCheckWhichBlocked: 0
+    numberOfBlocksRequired: 0
+    requireBlockHappenedLastFrame: 0
+    staminaChangeCharID: 0
+    staminaChange: 0
+    staminaChangeValue: 0
+    requireEventTriggerDuringCheck: 0
+    EventTriggerRequired: {fileID: 0}
+  - Name: 
+    hasHappened: 0
+    isHappening: 0
+    checker: {fileID: 0}
+    ceaseOnHappened: 1
+    TimedCheckType: 3
+    deathCharacterID: 0
+    onlyOnDeath: 0
+    deathsRequired: 0
+    buttonToWaitFor: 0
+    arrivalCharacterID: 0
+    onlyOnArrival: 0
+    arrivalsRequired: 0
+    switchCharacterID: 20
+    onlyOnSwitch: 0
+    switchesRequired: 1
+    healthChangeCharID: 0
+    healthChange: 0
+    healthChangeValue: 0
+    requireCalledDuringCheck: 0
+    requireEventCalledDuringCheck: 0
+    EventCallRequired: {fileID: 0}
+    timeCompareType: 0
+    hoursToCompare: 0
+    minutesToCompare: 0
+    secondsToCompare: 0
+    blockTypeToCheck: 0
+    checkBlockForAnyCharacter: 0
+    characterToCheckWhichBlocked: 0
+    numberOfBlocksRequired: 0
+    requireBlockHappenedLastFrame: 0
+    staminaChangeCharID: 0
+    staminaChange: 0
+    staminaChangeValue: 0
+    requireEventTriggerDuringCheck: 0
+    EventTriggerRequired: {fileID: 0}
+  - Name: 
+    hasHappened: 0
+    isHappening: 0
+    checker: {fileID: 0}
+    ceaseOnHappened: 1
+    TimedCheckType: 3
+    deathCharacterID: 0
+    onlyOnDeath: 0
+    deathsRequired: 0
+    buttonToWaitFor: 0
+    arrivalCharacterID: 0
+    onlyOnArrival: 0
+    arrivalsRequired: 0
+    switchCharacterID: 21
+    onlyOnSwitch: 0
+    switchesRequired: 1
+    healthChangeCharID: 0
+    healthChange: 0
+    healthChangeValue: 0
+    requireCalledDuringCheck: 0
+    requireEventCalledDuringCheck: 0
+    EventCallRequired: {fileID: 0}
+    timeCompareType: 0
+    hoursToCompare: 0
+    minutesToCompare: 0
+    secondsToCompare: 0
+    blockTypeToCheck: 0
+    checkBlockForAnyCharacter: 0
+    characterToCheckWhichBlocked: 0
+    numberOfBlocksRequired: 0
+    requireBlockHappenedLastFrame: 0
+    staminaChangeCharID: 0
+    staminaChange: 0
+    staminaChangeValue: 0
+    requireEventTriggerDuringCheck: 0
+    EventTriggerRequired: {fileID: 0}
+  - Name: 
+    hasHappened: 0
+    isHappening: 0
+    checker: {fileID: 0}
+    ceaseOnHappened: 1
+    TimedCheckType: 3
+    deathCharacterID: 0
+    onlyOnDeath: 0
+    deathsRequired: 0
+    buttonToWaitFor: 0
+    arrivalCharacterID: 0
+    onlyOnArrival: 0
+    arrivalsRequired: 0
+    switchCharacterID: 22
+    onlyOnSwitch: 0
+    switchesRequired: 1
+    healthChangeCharID: 0
+    healthChange: 0
+    healthChangeValue: 0
+    requireCalledDuringCheck: 0
+    requireEventCalledDuringCheck: 0
+    EventCallRequired: {fileID: 0}
+    timeCompareType: 0
+    hoursToCompare: 0
+    minutesToCompare: 0
+    secondsToCompare: 0
+    blockTypeToCheck: 0
+    checkBlockForAnyCharacter: 0
+    characterToCheckWhichBlocked: 0
+    numberOfBlocksRequired: 0
+    requireBlockHappenedLastFrame: 0
+    staminaChangeCharID: 0
+    staminaChange: 0
+    staminaChangeValue: 0
+    requireEventTriggerDuringCheck: 0
+    EventTriggerRequired: {fileID: 0}
   inhibitorRule: 1
   inhibitors:
   - {fileID: 11400000}
+  ignoreQueue: 0
   ceaseOnComplete: 1
   requireComplete: 1
   effects: []

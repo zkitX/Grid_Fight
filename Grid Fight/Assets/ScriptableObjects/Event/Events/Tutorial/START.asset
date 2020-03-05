@@ -14,7 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Start
   hasHappened: 0
-  requirements: []
+  requirementRule: 0
+  reqChecks: []
+  timedCheckRule: 0
+  timedChecks: []
+  inhibitorRule: 1
+  inhibitors: []
+  ignoreQueue: 0
   ceaseOnComplete: 1
   requireComplete: 1
   effects:
@@ -22,6 +28,6 @@ MonoBehaviour:
     effectType: 2
     secondsToWait: 0
     debugText: 
-    blockName: Intro
+    blockName: Koniko Enters but just the wave bit
     command: {fileID: 0}
     characterToRecruit: 1000

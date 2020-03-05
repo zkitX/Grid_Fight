@@ -15,11 +15,82 @@ MonoBehaviour:
   Name: OctoBossTest_TRIG_BossDefeated
   hasHappened: 0
   requirementRule: 0
-  timedCheckRule: 0
-  requirements:
-  - {fileID: 11400000, guid: 72aa38698f9090b4bbd9d1cd19f16a13, type: 2}
-  - {fileID: 11400000, guid: 6baa1a980c9b37c4c8969d71cf6e8897, type: 2}
+  reqChecks:
   - {fileID: 11400000, guid: 2b4bb782309a73247928ee47f20f4d7a, type: 2}
+  timedCheckRule: 0
+  timedChecks:
+  - Name: 
+    hasHappened: 0
+    isHappening: 0
+    checker: {fileID: 0}
+    ceaseOnHappened: 1
+    TimedCheckType: 1
+    deathCharacterID: 28
+    onlyOnDeath: 1
+    deathsRequired: 1
+    buttonToWaitFor: 0
+    arrivalCharacterID: 0
+    onlyOnArrival: 0
+    arrivalsRequired: 0
+    switchCharacterID: 0
+    onlyOnSwitch: 0
+    switchesRequired: 0
+    healthChangeCharID: 0
+    healthChange: 0
+    healthChangeValue: 0
+    requireCalledDuringCheck: 0
+    requireEventCalledDuringCheck: 0
+    EventCallRequired: {fileID: 0}
+    timeCompareType: 0
+    hoursToCompare: 0
+    minutesToCompare: 0
+    secondsToCompare: 0
+    blockTypeToCheck: 0
+    checkBlockForAnyCharacter: 0
+    characterToCheckWhichBlocked: 0
+    numberOfBlocksRequired: 0
+    requireBlockHappenedLastFrame: 0
+    staminaChangeCharID: 0
+    staminaChange: 0
+    staminaChangeValue: 0
+    requireEventTriggerDuringCheck: 0
+    EventTriggerRequired: {fileID: 0}
+  - Name: 
+    hasHappened: 0
+    isHappening: 0
+    checker: {fileID: 0}
+    ceaseOnHappened: 1
+    TimedCheckType: 1
+    deathCharacterID: 29
+    onlyOnDeath: 1
+    deathsRequired: 1
+    buttonToWaitFor: 0
+    arrivalCharacterID: 0
+    onlyOnArrival: 0
+    arrivalsRequired: 0
+    switchCharacterID: 0
+    onlyOnSwitch: 0
+    switchesRequired: 0
+    healthChangeCharID: 0
+    healthChange: 0
+    healthChangeValue: 0
+    requireCalledDuringCheck: 0
+    requireEventCalledDuringCheck: 0
+    EventCallRequired: {fileID: 0}
+    timeCompareType: 0
+    hoursToCompare: 0
+    minutesToCompare: 0
+    secondsToCompare: 0
+    blockTypeToCheck: 0
+    checkBlockForAnyCharacter: 0
+    characterToCheckWhichBlocked: 0
+    numberOfBlocksRequired: 0
+    requireBlockHappenedLastFrame: 0
+    staminaChangeCharID: 0
+    staminaChange: 0
+    staminaChangeValue: 0
+    requireEventTriggerDuringCheck: 0
+    EventTriggerRequired: {fileID: 0}
   inhibitorRule: 1
   inhibitors: []
   ignoreQueue: 1

@@ -36,6 +36,7 @@ public class WaveManagerScript : MonoBehaviour
 
     public void ToggleBattleTimer(bool timerState)
     {
+        if (battleTime.standardTicker == null) battleTime.SetupBasics();
         if (timerState) StartCoroutine(battleTime.standardReverseTicker);
         else StopCoroutine(Instance.battleTime.standardReverseTicker);
     }
