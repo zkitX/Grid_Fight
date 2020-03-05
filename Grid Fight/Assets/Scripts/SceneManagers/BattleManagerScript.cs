@@ -74,7 +74,7 @@ public class BattleManagerScript : MonoBehaviour
 
     void ConfigureUsingFungus()
     {
-        EventManager.Instance.StartEventManager();
+        EventManager.Instance?.StartEventManager();
     }
 
     #region Unity Life Cycle
@@ -267,6 +267,11 @@ public class BattleManagerScript : MonoBehaviour
             currentCharacter.UMS.Pos.Add(item);
         }
         currentCharacter.SetupCharacterSide();
+        if(EventManager.Instance != null)
+        {
+            EventManager.Instance.UpdateHealth(currentCharacter);
+            EventManager.Instance.UpdateStamina(currentCharacter);
+        }
         currentCharacter.UMS.WalkingSide = charInfo.WalkingSide;
         currentCharacter.CharInfo.CharacterSelection = charInfo.CharacterSelection;
         currentCharacter.CharInfo.CharacterLevel = charInfo.CharacterLevel;

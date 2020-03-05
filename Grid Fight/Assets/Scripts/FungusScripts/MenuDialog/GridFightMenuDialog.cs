@@ -61,8 +61,8 @@ public class GridFightMenuDialog : MenuDialog
         if (nextOptionIndex == 0)
             MenuSignals.DoMenuStart(this);
 
-        var box = Boxes[nextOptionIndex];
-
+        FungusMenuOptionBoxScript box = Boxes[nextOptionIndex];
+      
         //move forward for next call
         nextOptionIndex++;
 
@@ -71,8 +71,11 @@ public class GridFightMenuDialog : MenuDialog
             return true;
 
         box.gameObject.SetActive(true);
-
-
+        box.BoxAnim.SetBool("InOut", true);
+        if (SelectionIndex + 1 == nextOptionIndex)
+        {
+            Boxes[SelectionIndex].BoxAnim.SetBool("isSelected", true);
+        }
         var a = action.Target;
 
         if (!string.IsNullOrEmpty(text))
@@ -118,7 +121,7 @@ public class GridFightMenuDialog : MenuDialog
 
     protected override void OnEnable()
     {
-        SelectionIndex = -1;
+        SelectionIndex = 0;
         base.OnEnable();
     }
 
@@ -159,11 +162,6 @@ public class GridFightMenuDialog : MenuDialog
         }
     }
 
-    public override void HideSayDialog()
-    {
-        
-    }
-
     public void SelectMenu()
     {
         Boxes[SelectionIndex].BoxAnim.SetBool("isSelected", true);
@@ -174,7 +172,22 @@ public class GridFightMenuDialog : MenuDialog
     {
         if(BattleManagerScript.Instance.FungusState == FungusDialogType.Menu)
         {
-            StartCoroutine(CallBlock(Boxes[SelectionIndex].NextBlock));
+            Boxes[SelectionIndex].NextBlock.StartExecution();
+            BattleManagerScript.Instance.FungusState = FungusDialogType.Dialog;
+            
+            foreach (FungusMenuOptionBoxScript item in Boxes)
+            {
+                item.BoxAnim.SetBool("InOut", false);
+            }
+
+            StartCoroutine(ClearMenu(1));
         }
+    }
+
+    private IEnumerator ClearMenu(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        SelectionIndex = 0;
+        Clear();
     }
 }
