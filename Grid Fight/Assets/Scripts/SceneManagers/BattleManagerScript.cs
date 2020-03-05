@@ -261,6 +261,7 @@ public class BattleManagerScript : MonoBehaviour
         currentCharacter.UMS.CurrentAttackType = charInfo.CharAttackType;
         currentCharacter.UMS.CharOwner = currentCharacter;
         currentCharacter.UMS.PlayerController = charInfo.PlayerController;
+        currentCharacter.CharInfo.BaseCharacterType = charInfo.BCharType == BaseCharType.None ? child.GetComponentInChildren<CharacterInfoScript>().BaseCharacterType : charInfo.BCharType;
         foreach (Vector2Int item in soCharacterPrefab.OccupiedTiles)
         {
             currentCharacter.UMS.Pos.Add(item);
@@ -902,6 +903,7 @@ public class BattleManagerScript : MonoBehaviour
         recruitableChar.UMS.WalkingSide = WalkingSideType.LeftSide;
         recruitableChar.UMS.CurrentAttackType = AttackType.Particles;
         recruitableChar.CharInfo.CharacterSelection = (CharacterSelectionType)AllCharactersOnField.Count - 1;
+        recruitableChar.CharInfo.BaseCharacterType = BaseCharType.CharacterType_Script;
         NewIManager.Instance.SetUICharacterToButton(recruitableChar, recruitableChar.CharInfo.CharacterSelection);
         recruitableChar.CharInfo.HealthStats.Health = recruitableChar.CharInfo.HealthStats.Base;
         recruitableChar.gameObject.SetActive(true);
