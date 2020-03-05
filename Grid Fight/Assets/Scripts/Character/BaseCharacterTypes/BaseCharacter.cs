@@ -973,10 +973,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             return;
         }
 
-        if (isMoving && animState != CharacterAnimationStateType.Reverse_Arriving)
+     /*   if (isMoving && animState != CharacterAnimationStateType.Reverse_Arriving)
         {
             return;
-        }
+        }*/
 
         if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle)
         {
