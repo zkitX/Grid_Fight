@@ -142,7 +142,7 @@ public class WaveManagerScript : MonoBehaviour
             yield return BattleManagerScript.Instance.PauseUntil();
             if (CurrentWaveChar == null ||
                 timer > CurrentWaveChar.DelayBetweenChars && 
-                WaveCharcters.Where(r => r.gameObject.activeInHierarchy).ToList().Count < wavePhase.MaxEnemyOnScreen)
+                WaveCharcters.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script).ToList().Count < wavePhase.MaxEnemyOnScreen)
             {
         yield return new WaitForSeconds(0.5f);
                 if (wavePhase.IsRandom)
