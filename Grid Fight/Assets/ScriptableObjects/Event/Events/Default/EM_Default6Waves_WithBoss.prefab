@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 7955983679200332598}
   - component: {fileID: 7751436304778771030}
   m_Layer: 0
-  m_Name: Default6Waves_WithBoss
+  m_Name: EM_Default6Waves_WithBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,9 +183,9 @@ MonoBehaviour:
     width: 1114
     height: 859
   selectedBlocks:
-  - {fileID: 5101470944976133778}
+  - {fileID: 5900529909682489141}
   selectedCommands:
-  - {fileID: 7955983679200332598}
+  - {fileID: 2672667374835640787}
   variables: []
   description: A default flowchart that simply cycles through the waves (specifically
     of a size 6 stage)
@@ -685,7 +685,7 @@ MonoBehaviour:
   itemId: 26
   indentLevel: 0
   targetFlowchart: {fileID: 0}
-  targetBlock: {fileID: 1224365961655146658}
+  targetBlock: {fileID: 2727712618677634132}
   startLabel:
     stringRef: {fileID: 0}
     stringVal: 
@@ -1450,7 +1450,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 371.6049
     y: 60.79789
-    width: 125.000015
+    width: 131.57896
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1551,7 +1551,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 505.28604
     y: 62.77588
-    width: 128.94739
+    width: 139.4737
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1652,7 +1652,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 374.84686
     y: 105.08359
-    width: 173.68423
+    width: 186.84213
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1753,7 +1753,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 562.2158
     y: 105.598206
-    width: 134.21054
+    width: 141.22809
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1854,7 +1854,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 647.34735
     y: 63.974792
-    width: 130.26318
+    width: 140.35089
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1955,7 +1955,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 706.8422
     y: 106.83191
-    width: 125.000015
+    width: 131.57896
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -2056,7 +2056,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 374.6997
     y: 153.97478
-    width: 134.21054
+    width: 142.98248
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -2258,7 +2258,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 644.69934
     y: 152.54622
-    width: 139.47371
+    width: 147.36844
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -2509,6 +2509,7 @@ MonoBehaviour:
   charactersWhomstHaveArrived: []
   characterVitalities: []
   eventsCalled: []
+  eventDirectCallsLastFrame: []
   eventsTriggered: []
   charactersSwitched: []
   blocks: []
