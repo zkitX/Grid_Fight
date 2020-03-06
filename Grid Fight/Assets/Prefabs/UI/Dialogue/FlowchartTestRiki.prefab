@@ -287,6 +287,7 @@ GameObject:
   - component: {fileID: 220157863}
   - component: {fileID: 220157864}
   - component: {fileID: 220157865}
+  - component: {fileID: 220157866}
   m_Layer: 0
   m_Name: FlowchartTestRiki
   m_TagString: Untagged
@@ -337,8 +338,7 @@ MonoBehaviour:
     y: -340
     width: 1114
     height: 859
-  selectedBlocks:
-  - {fileID: 1080171053282896963}
+  selectedBlocks: []
   selectedCommands: []
   variables: []
   description: 
@@ -378,6 +378,7 @@ MonoBehaviour:
   commandList:
   - {fileID: 1080171053282896965}
   - {fileID: 1080171053282896964}
+  - {fileID: 220157866}
   - {fileID: 1080171053282896973}
   - {fileID: 1080171053282896972}
 --- !u!114 &1080171053282896962
@@ -906,3 +907,17 @@ MonoBehaviour:
   commandList:
   - {fileID: 220157864}
   - {fileID: 220157863}
+--- !u!114 &220157866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080171053282896967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc22472645a4c6f49be2acabadc84642, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 21
+  indentLevel: 0

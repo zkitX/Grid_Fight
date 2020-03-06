@@ -95,15 +95,15 @@ public class CharacterType_Script : BaseCharacter
     public override void SetCharDead(bool hasToDisappear = true)
     {
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
-        if(UMS.CurrentAttackType == AttackType.Particles)
-        {
-            BattleManagerScript.Instance.UpdateCurrentSelectedCharacters(this, null);
-            NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo, UMS.Side);
-        }
         SetAnimation(CharacterAnimationStateType.Defeat_ReverseArrive);
         IsOnField = false;
         BattleManagerScript.Instance.PlayablesCharOnScene.Where(r => r.CName == CharInfo.CharacterID).First().isUsed = false;
         base.SetCharDead(false);
+        if (UMS.CurrentAttackType == AttackType.Particles)
+        {
+            //BattleManagerScript.Instance.UpdateCurrentSelectedCharacters(this, null, UMS.Side);
+            NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo, UMS.Side);
+        }
         Invoke("CharBackFromDeath", 180);
     }
 

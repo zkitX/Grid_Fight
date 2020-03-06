@@ -115,6 +115,11 @@ public class BattleManagerScript : MonoBehaviour
             return null;
         }
 
+        return SetCharOnBoard(playerController, cName, pos);
+    }
+
+    public CharacterType_Script SetCharOnBoard(ControllerType playerController, CharacterNameType cName, Vector2Int pos)
+    {
         using (BaseCharacter currentCharacter = AllCharactersOnField.Where(r => r.UMS.PlayerController.Contains(playerController) && r.CharInfo.CharacterID == cName).First())
         {
             if (currentCharacter.CharInfo.Health <= 0)
@@ -140,7 +145,7 @@ public class BattleManagerScript : MonoBehaviour
             }
             currentCharacter.SetUpEnteringOnBattle();
             StartCoroutine(MoveCharToBoardWithDelay(0.1f, currentCharacter, bts.transform.position));
-            
+
             UIBattleManager.Instance.isLeftSidePlaying = true;
             PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == cName).First().isUsed = true;
             return (CharacterType_Script)currentCharacter;
@@ -305,10 +310,25 @@ public class BattleManagerScript : MonoBehaviour
                 return;
             }
 
-            if (res.Where(r => r.isUsed).ToList().Count == res.Where(r => !r.isAlive).ToList().Count)
+           /* if (res.Where(r => r.isUsed).ToList().Count == res.Where(r => !r.isAlive).ToList().Count)
             {
                 UIBattleManager.Instance.StartTimeUp(15, side);
+            }*/
+            List<BaseCharacter> cbs = AllCharactersOnField.Where(r => r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.UMS.IsCharControllableByPlayers(playerController)).ToList();
+
+            foreach (BaseCharacter item in cbs)
+            {
+                List<KeyValuePair<ControllerType, CurrentSelectedCharacterClass>> controllers = CurrentSelectedCharacters.Where(r => playerController.Contains(r.Key) && r.Value.NextSelectionChar.NextSelectionChar == item.CharInfo.CharacterSelection).ToList();
+                if (controllers.Count == 0)
+                {
+                    ControllerType ct = CurrentSelectedCharacters.Where(r => r.Value.Character.CharInfo.CharacterID == cName && r.Value.Character.UMS.Side == side).First().Key;
+                    SetCharOnBoard(ct, item.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeBattleTile(item.UMS.WalkingSide, item.UMS.Pos).Pos);
+                    SelectCharacter(ct, (CharacterType_Script)item);
+                    ((CharacterType_Script)item).SetCharSelected(true, ct);
+                    return;
+                }
             }
+            
         }
     }
 
@@ -651,9 +671,10 @@ public class BattleManagerScript : MonoBehaviour
         yield return null;
     }
 
-    public void UpdateCurrentSelectedCharacters(CharacterType_Script oldChar, CharacterType_Script newChar)
+    public void UpdateCurrentSelectedCharacters(CharacterType_Script oldChar, CharacterType_Script newChar, SideType side)
     {
-        CurrentSelectedCharacters.Where(r => r.Value.Character == oldChar).First().Value.Character = newChar;
+        CurrentSelectedCharacterClass cscc = CurrentSelectedCharacters.Where(r => r.Value.Character != null && r.Value.Character.CharInfo.CharacterID == oldChar.CharInfo.CharacterID && r.Value.Character.UMS.Side == side).First().Value;
+        cscc.Character = newChar;
     }
 
     //Handle the wait for a button hold (relating to spawning in)
@@ -940,7 +961,7 @@ public class BattleManagerScript : MonoBehaviour
     {
         BaseCharacter cb = AllCharactersOnField.Where(r => r.IsOnField && r.UMS.Pos.Contains(pos)).FirstOrDefault();
 
-        if(cb == null)
+        if(cb == null && WaveManagerScript.Instance != null)
         {
             cb = WaveManagerScript.Instance.WaveCharcters.Where(r => r.IsOnField && r.UMS.Pos.Contains(pos)).FirstOrDefault();
         }

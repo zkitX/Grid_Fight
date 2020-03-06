@@ -165,4 +165,17 @@ public class UnitManagementScript : MonoBehaviour
         }
     }
 
+
+    public bool IsCharControllableByPlayers(List<ControllerType> controllers)
+    {
+        foreach (ControllerType item in controllers)
+        {
+            if(!PlayerController.Contains(item))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

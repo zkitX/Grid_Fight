@@ -37,8 +37,6 @@ public class BulletScript : MonoBehaviour
         //On enabled setup the collision avoidance for determinated layers 
         Physics.IgnoreLayerCollision(Side == SideType.LeftSide ? 9 : 10, Side == SideType.LeftSide ? 11 : 12);
         Dead = false;
-
-        
     }
 
     public void StartMoveToTile()
@@ -147,14 +145,14 @@ public class BulletScript : MonoBehaviour
        
         for (int i = 0; i < bet.Count; i++)
         {
-            if (GridManagerScript.Instance.isPosOnField(basePos + bet[i]))
+            if (GridManagerScript.Instance.isPosOnField(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]))
             {
                 if (!VFXTestMode)
                 {
-                    target = BattleManagerScript.Instance.GetCharInPos(basePos + bet[i]);
+                    target = BattleManagerScript.Instance.GetCharInPos(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]);
                     MakeDamage(target);
                 }
-                FireEffectParticles(GridManagerScript.Instance.GetBattleTile(basePos + bet[i]).transform.position, i == bet.Count - 1 ? true : false);
+                FireEffectParticles(GridManagerScript.Instance.GetBattleTile(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]).transform.position, i == bet.Count - 1 ? true : false);
             }
             else
             {
@@ -220,7 +218,6 @@ public class BulletScript : MonoBehaviour
                 Invoke("test", 2);
                 PS.GetComponent<PSTimeGroup>().UpdatePSTime(0.1f);
             }
-                
         }
     }
 
