@@ -125,8 +125,6 @@ public class WaveManagerScript : MonoBehaviour
         }
     }
 
-
-
     public IEnumerator StartWaveByName(string waveName)
     {
         yield return Wave(WavePhases.Where(r=> r.name == waveName).First());
@@ -183,7 +181,7 @@ public class WaveManagerScript : MonoBehaviour
         {
             SetCharInPos(newChar, GridManagerScript.Instance.GetBattleTile(pos));
         }
-        EventManager.Instance.AddCharacterArrival(newChar);
+        EventManager.Instance?.AddCharacterArrival(newChar);
     }
 
     public void SetCharInPos(BaseCharacter currentCharacter, BattleTileScript bts)

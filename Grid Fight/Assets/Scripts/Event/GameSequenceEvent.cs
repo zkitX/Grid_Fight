@@ -89,7 +89,6 @@ public class GameSequenceEvent : ScriptableObject
         }
     }
 
-
     void StartAllTimedRequirements()
     {
         if(timedChecks.Count == 0)

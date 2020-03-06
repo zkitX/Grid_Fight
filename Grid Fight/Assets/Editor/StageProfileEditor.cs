@@ -33,6 +33,7 @@ public class StageProfileEditor : Editor
                 theTypeOfStage = "Player vs Enemy";
                 break;
             case (MatchType.PvP):
+                theTypeOfStage = "Player Vs Player";
                 break;
             default:
                 theTypeOfStage = origin.BattleInfoManager.GetComponent<BattleInfoManagerScript>().MatchInfoType.ToString();
@@ -40,7 +41,20 @@ public class StageProfileEditor : Editor
         }
         EditorGUILayout.LabelField("BATTLE TYPE: " + theTypeOfStage);
 
-
-
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        WaveManagerScript waveM = origin.Wave.GetComponent<WaveManagerScript>();
+        EditorGUILayout.LabelField("WAVES:");
+        EditorGUILayout.LabelField("Wave Count - " + waveM.WavePhases.Count.ToString());
+        foreach (WavePhaseClass wave in waveM.WavePhases)
+        {
+            EditorGUILayout.Space();
+            EditorGUILayout.BeginFoldoutHeaderGroup(true, wave.name.ToUpper());
+            foreach(WaveCharClass waveC in wave.ListOfEnemy)
+            {
+                EditorGUILayout.LabelField("     " + waveC.NumberOfCharacter + " " + waveC.name + (waveC.NumberOfCharacter > 1 && waveC.name[waveC.name.Length - 1].ToString() != "s" ? "s" : ""));
+            }
+            EditorGUILayout.EndFoldoutHeaderGroup();
+        }
     }
 }
