@@ -8,7 +8,7 @@ public class GridFightSayDialog : SayDialog
 {
     private Character LastCharacter = null;
     [SerializeField]
-    private Animator SayDialogAnimatorController;
+    public Animator SayDialogAnimatorController;
     private bool isAnimCompleted = false;
     private bool IsAlreadySubscribed = false;
 

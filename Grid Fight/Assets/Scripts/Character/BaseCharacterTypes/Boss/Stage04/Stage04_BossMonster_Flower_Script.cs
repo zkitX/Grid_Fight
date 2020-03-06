@@ -86,7 +86,7 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
     }
 
 
-    public override void SetCharDead()
+    public override void SetCharDead(bool hasToDisappear = true)
     {
         if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Death)
         {

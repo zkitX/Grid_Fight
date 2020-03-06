@@ -138,7 +138,7 @@ public class GridFightMenuDialog : MenuDialog
 
     private void Instance_LeftJoystickUsedEvent(int player, InputDirection dir)
     {
-        if (Time.time > TimeOffset + CoolDown)
+        if (Time.time > TimeOffset + CoolDown && BattleManagerScript.Instance.FungusState == FungusDialogType.Menu)
         {
             if(SelectionIndex >=0 && SelectionIndex <= Boxes.Where(r => r.gameObject.activeInHierarchy).ToList().Count)
             {

@@ -97,6 +97,12 @@ public class SpineAnimationManager : MonoBehaviour
             return;
         }
 
+        if(completedAnim == CharacterAnimationStateType.Defeat_ReverseArrive)
+        {
+            CharOwner.transform.position = new Vector3(100,100,100);
+            return;
+        }
+
         if (completedAnim == CharacterAnimationStateType.Arriving || completedAnim.ToString().Contains("Growing"))
         {
             CharOwner.IsSwapping = false;

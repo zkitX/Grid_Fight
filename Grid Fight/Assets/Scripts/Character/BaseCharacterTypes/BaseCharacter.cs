@@ -171,7 +171,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
     }
 
-    public virtual void SetCharDead()
+    public virtual void SetCharDead(bool hasToDisappear = true)
     {
         for (int i = 0; i < UMS.Pos.Count; i++)
         {
@@ -187,9 +187,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         isMoving = false;
         SetAttackReady(false);
         Call_CurrentCharIsDeadEvent();
-        transform.position = new Vector3(100,100,100);
-        gameObject.SetActive(false);
-       
+        if(hasToDisappear)
+        {
+            transform.position = new Vector3(100, 100, 100);
+            gameObject.SetActive(false);
+        }
     }
 
     protected virtual void Call_CurrentCharIsDeadEvent()
@@ -447,12 +449,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             if (SpineAnim.CurrentAnim.ToString().Contains("Atk1"))
             {
                 CharInfo.Stamina -= CharInfo.RapidAttack.Stamina_Cost_Atk;
-                EventManager.Instance.UpdateStamina(this);
+                EventManager.Instance?.UpdateStamina(this);
             }
             else if (SpineAnim.CurrentAnim.ToString().Contains("Atk2"))
             {
                 CharInfo.Stamina -= CharInfo.PowerfulAttac.Stamina_Cost_Atk;
-                EventManager.Instance.UpdateStamina(this);
+                EventManager.Instance?.UpdateStamina(this);
             }
         }
 
@@ -1023,7 +1025,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public virtual bool SetDamage(float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
-        return true;
+        return SetDamage(damage, elemental,isCritical);
     }
 
     public virtual bool SetDamage(float damage, ElementalType elemental, bool isCritical)
@@ -1118,10 +1120,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         CharInfo.Health -= damage;
         if (CharInfo.Health == 0)
         {
-            EventManager.Instance.AddCharacterDeath(this);
+            EventManager.Instance?.AddCharacterDeath(this);
         }
-        EventManager.Instance.UpdateHealth(this);
-        EventManager.Instance.UpdateStamina(this);
+        EventManager.Instance?.UpdateHealth(this);
+        EventManager.Instance?.UpdateStamina(this);
         HealthStatsChangedEvent?.Invoke(damage, healthCT, transform);
         return res;
     }

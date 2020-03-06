@@ -92,7 +92,7 @@ public class CharacterType_Script : BaseCharacter
     }
 
 
-    public override void SetCharDead()
+    public override void SetCharDead(bool hasToDisappear = true)
     {
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         if(UMS.CurrentAttackType == AttackType.Particles)
@@ -100,9 +100,10 @@ public class CharacterType_Script : BaseCharacter
             BattleManagerScript.Instance.UpdateCurrentSelectedCharacters(this, null);
             NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo, UMS.Side);
         }
+        SetAnimation(CharacterAnimationStateType.Defeat_ReverseArrive);
         IsOnField = false;
         BattleManagerScript.Instance.PlayablesCharOnScene.Where(r => r.CName == CharInfo.CharacterID).First().isUsed = false;
-        base.SetCharDead();
+        base.SetCharDead(false);
         Invoke("CharBackFromDeath", 180);
     }
 
@@ -119,14 +120,14 @@ public class CharacterType_Script : BaseCharacter
     {
         SetAnimation(CharacterAnimationStateType.Arriving);
         AudioManager.Instance.PlayGeneric("Arriving_Spawn_20200108_V5");
-        EventManager.Instance.AddCharacterArrival((BaseCharacter)this);
+        EventManager.Instance?.AddCharacterArrival((BaseCharacter)this);
     }
 
     public override void SetUpLeavingBattle()
     {
         SetAnimation(CharacterAnimationStateType.Reverse_Arriving);
         isDefending = false;
-        EventManager.Instance.AddCharacterSwitched((BaseCharacter)this);
+        EventManager.Instance?.AddCharacterSwitched((BaseCharacter)this);
     }
 
     #endregion

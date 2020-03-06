@@ -17,7 +17,7 @@ public enum BattleTileStateType
 
 public enum FungusDialogType
 {
-    Nonee,
+    None,
     Dialog,
     Menu
 }
@@ -380,6 +380,7 @@ public enum CharacterAnimationStateType
     Idle_Charging,
     Idle_IdleToAtk,
     Idle_Loop,
+    Defeat_ReverseArrive
 }
 
 public enum PortalType

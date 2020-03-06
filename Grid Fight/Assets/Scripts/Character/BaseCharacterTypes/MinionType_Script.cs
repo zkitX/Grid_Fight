@@ -63,7 +63,7 @@ public class MinionType_Script : BaseCharacter
         StartCoroutine(MoveActionCo);
     }
 
-    public override void SetCharDead()
+    public override void SetCharDead(bool hasToDisappear = true)
     {
         CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);

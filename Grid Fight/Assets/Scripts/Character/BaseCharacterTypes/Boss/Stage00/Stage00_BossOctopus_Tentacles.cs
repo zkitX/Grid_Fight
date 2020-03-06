@@ -52,7 +52,7 @@ public class Stage00_BossOctopus_Tentacles : MinionType_Script
         StartCoroutine(BattleManagerScript.Instance.MoveCharToBoardWithDelay(0.2f, currentCharacter, bts.transform.position));
     }
 
-    public override void SetCharDead()
+    public override void SetCharDead(bool hasToDisappear = true)
     {
         if (disabled) return;
         CameraManagerScript.Instance.CameraShake(CameraShakeType.GettingHit);
