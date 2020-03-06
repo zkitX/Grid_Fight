@@ -168,6 +168,7 @@ public class GameSequenceEvent : ScriptableObject
     void CompleteEvent()
     {
         //Remove the timedChecks from the checkTicker in case it hasnt been already
+        if (inhibitors.Count > 0) if (RequirementsFulfilled(inhibitors, inhibitorRule)) return;
         foreach (TimedCheck timedCheck in timedChecks) timedCheck.CeaseChecking();
         hasHappened = true;
         EventManager.Instance.AddCompletedGameEvent(this);
