@@ -107,8 +107,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     #region Setup Character
     public virtual void SetupCharacterSide()
     {
-        EventManager.Instance.UpdateHealth(this);
-        EventManager.Instance.UpdateStamina(this);
+       
         if (UMS.PlayerController.Contains(ControllerType.Enemy))
         {
             if (CharInfo.CharacterID != CharacterNameType.Stage00_BossOctopus &&
