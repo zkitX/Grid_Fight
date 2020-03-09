@@ -82,9 +82,14 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
         Rewired = Instantiate(stage.Rewired);
         StageObjects.Add(Rewired);
         yield return InputController.Instance.Applet(2);
-
-        while (!UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Contains("BattleScene")) yield return null;
-
+        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Character_Testing_Scene")
+        {
+            while (!UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Contains("BattleScene"))
+            {
+                yield return null;
+            }
+        }
+      
         currentStageID = stage.ID;
 
         AudioManager = Instantiate(stage.AudioManager);

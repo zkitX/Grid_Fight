@@ -459,6 +459,7 @@ public enum AttackParticleTypes
     Stage04_Desert_Goddess = 1005,
     Stage04_Forest_Goddess = 1007,
     Stage04_Valley_Goddess = 1008,
+    DummyCharParticles = 100000
 }
 
 
@@ -589,7 +590,8 @@ public enum CharacterNameType
     Stage04_BossMonster_Minion1 = 16,
     Stage04_BossMonster_Minion2 = 17,
     Stage04_BossMonster_Minion3 = 18,
-    Stage09_Character_Valley = 31
+    Stage09_Character_Valley = 31,
+    DummyChar = 10001
 }
 
 
