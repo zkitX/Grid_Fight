@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using MyBox;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,4 +21,6 @@ public class BulletBehaviourInfoClassOnBattleField
 {
     public float Delay;
     public List<Vector2Int> BulletEffectTiles = new List<Vector2Int>();
+    public bool HasEffect = false;
+    [ConditionalField("HasEffect", false)] public List<ScriptableObjectAttackEffect> Effects = new List<ScriptableObjectAttackEffect>();
 }

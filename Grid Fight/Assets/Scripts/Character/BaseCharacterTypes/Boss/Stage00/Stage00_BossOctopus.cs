@@ -18,7 +18,7 @@ public class Stage00_BossOctopus : MinionType_Script
         CharacterNameType.Stage00_BossOctopus_Girl
     };
 
-    private void Start()
+    public override void Start()
     {
         GenerateBoss();
     }
@@ -201,7 +201,7 @@ public class Stage00_BossOctopus : MinionType_Script
     public Vector2 DeathExplosionRange = new Vector2(-2f, 4f);
     private IEnumerator PhaseOneEnd()
     {
-        float timer = 0;
+        //float timer = 0;
         Stage00_BossOctopus_Tentacles tentacles = (Stage00_BossOctopus_Tentacles)GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles);
 
         StartCoroutine(DeathExplosionPacer(new Vector2(0.1f/5f, 0.3f/5f), 20*5));

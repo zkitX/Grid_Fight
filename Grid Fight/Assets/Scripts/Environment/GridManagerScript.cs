@@ -282,9 +282,7 @@ public class GridManagerScript : MonoBehaviour
 
     public void StartOnBattleFieldAttackCo(CharacterInfoScript cInfo, ScriptableObjectAttackTypeOnBattlefield atk, Vector2Int basePos, UnitManagementScript ums, BaseCharacter character)
     {
-
         basePos.y = ums.Facing == FacingType.Left ? YGridSeparator : YGridSeparator-1;
-
         foreach (BulletBehaviourInfoClassOnBattleField item in atk.BulletTrajectories)
         {
             foreach (Vector2Int target in item.BulletEffectTiles)
@@ -295,15 +293,12 @@ public class GridManagerScript : MonoBehaviour
                     BattleTileScript bts = GetBattleTile(res);
                     if(bts._BattleTileState != BattleTileStateType.Blocked)
                     {
-                        bts.BattleTargetScript.SetAttack(item.Delay, BattleManagerScript.Instance.VFXScene ? cInfo.ParticleID : atk.ParticlesID, res, cInfo.DamageStats.BaseDamage, cInfo.Elemental, character);
+                        bts.BattleTargetScript.SetAttack(item.Delay, BattleManagerScript.Instance.VFXScene ? cInfo.ParticleID : atk.ParticlesID, res, cInfo.DamageStats.BaseDamage, cInfo.Elemental, character,
+                            item.Effects);
                     }
-
                 }
-
             }
-
         }
-
     }
 
 

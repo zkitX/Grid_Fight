@@ -418,7 +418,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 63b9094afe61ef34e891175c39f8e2dd, type: 2}
+  - {fileID: 2100000, guid: d073009e2447e0f4086fd7d63dfc3667, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -451,7 +451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: e7814f5d93c78c943b1cc46f123857d5, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 7b1016fb7e3da454197479cb4fefe716, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -695,6 +695,8 @@ MonoBehaviour:
   SpecialFiringPoint: {fileID: 3628410086016936102}
   CurrentAnim: 0
   AnimationTransition: 0.3
+  changeanim: 0
+  transition: 0.5
 --- !u!114 &3255336730375575330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,25 +724,44 @@ MonoBehaviour:
   Elemental: 4
   ClassType: 2
   CharacterLevel: 0
+  UseLayeringSystem: 1
   CharacterSelection: 3
   RapidAttack:
-    BaseDamage: 10
+    DamageMultiplier: {x: 1, y: 1}
+    CriticalChance: {x: 2, y: 2}
     Stamina_Cost_Atk: 0
+    B_DamageMultiplier: {x: 1, y: 1}
+    B_CriticalChance: {x: 2, y: 2}
+    B_Stamina_Cost_Atk: 0
   PowerfulAttac:
-    BaseDamage: 10
+    DamageMultiplier: {x: 3, y: 3}
+    CriticalChance: {x: 3, y: 5}
     Stamina_Cost_Atk: 0
+    B_DamageMultiplier: {x: 3, y: 3}
+    B_CriticalChance: {x: 3, y: 5}
+    B_Stamina_Cost_Atk: 0
   HealthStats:
     Health: 50
     Base: 50
     Regeneration: 0.5
     BaseHealthRegeneration: 0.5
     LevelMultiplier: 25
+    B_Health: 0
+    B_Base: 0
+    B_Regeneration: 0
+    B_BaseHealthRegeneration: 0
+    B_LevelMultiplier: 0
   StaminaStats:
     Stamina: 25
     Base: 25
     Regeneration: 1
     BaseStaminaRegeneration: 1
     LevelMultiplier: 45
+    B_Stamina: 0
+    B_Base: 0
+    B_Regeneration: 0
+    B_BaseStaminaRegeneration: 0
+    B_LevelMultiplier: 0
   SpeedStats:
     BaseSpeed: 1
     MovementSpeed: 2.2
@@ -751,8 +772,17 @@ MonoBehaviour:
     LevelMultiplier: 5
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
+    B_BaseSpeed: 1
+    B_MovementSpeed: 1
+    B_AttackSpeed: 1
+    B_AttackSpeedRatio: 0
+    B_BulletSpeed: 5
+    B_LeaveSpeed: 3
+    B_LevelMultiplier: 0
+    B_IdleToAtkDuration: 0.2
+    B_AtkToIdleDuration: 0.2
   DamageStats:
-    CurrentDamage: 10
+    BaseDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0
     ElementalsResistence: []
@@ -846,6 +876,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 511344410}
     m_Modifications:
+    - target: {fileID: 5562750678310095410, guid: 5d3dc4ae7290bd341b353180d2f42dc5,
+        type: 3}
+      propertyPath: m_Name
+      value: Stage04-Forest-TaserIdleLeft
+      objectReference: {fileID: 0}
     - target: {fileID: 5562750678310095409, guid: 5d3dc4ae7290bd341b353180d2f42dc5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -901,11 +936,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5562750678310095410, guid: 5d3dc4ae7290bd341b353180d2f42dc5,
-        type: 3}
-      propertyPath: m_Name
-      value: Stage04-Forest-TaserIdleLeft
-      objectReference: {fileID: 0}
     - target: {fileID: 5562750678310095415, guid: 5d3dc4ae7290bd341b353180d2f42dc5,
         type: 3}
       propertyPath: moveWithTransform
@@ -926,6 +956,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1710861198}
     m_Modifications:
+    - target: {fileID: 8584568728308445732, guid: 57669622d06b3d94cbf9b172ca9d97f9,
+        type: 3}
+      propertyPath: m_Name
+      value: Stage04-Forest-TaserIdleRight
+      objectReference: {fileID: 0}
     - target: {fileID: 8584568728308445733, guid: 57669622d06b3d94cbf9b172ca9d97f9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -980,11 +1015,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8584568728308445732, guid: 57669622d06b3d94cbf9b172ca9d97f9,
-        type: 3}
-      propertyPath: m_Name
-      value: Stage04-Forest-TaserIdleRight
       objectReference: {fileID: 0}
     - target: {fileID: 8584568728308445735, guid: 57669622d06b3d94cbf9b172ca9d97f9,
         type: 3}

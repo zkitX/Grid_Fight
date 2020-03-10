@@ -29,10 +29,10 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
     {
         if (other.tag.Contains("Side"))
         {
-            other.GetComponentInParent<BaseCharacter>().Buff_DebuffCo(new Buff_DebuffClass(ItemPowerUpInfo.EffectDuration,
+            other.GetComponentInParent<BaseCharacter>().Buff_DebuffCo(new Buff_DebuffClass(ItemPowerUpInfo.Name, ItemPowerUpInfo.EffectDuration,
                 Random.Range(ItemPowerUpInfo.Value.x, ItemPowerUpInfo.Value.y),
-                ItemPowerUpInfo.StatsToAffect, new ElementalResistenceClass(),
-                ElementalType.Neutral, ItemPowerUpInfo.AnimToFire, ItemPowerUpInfo.ParticleToFire));
+                ItemPowerUpInfo.StatsToAffect, ItemPowerUpInfo.StatsChecker, new ElementalResistenceClass(),
+                ElementalType.Neutral, ItemPowerUpInfo.AnimToFire, ItemPowerUpInfo.Particles));
 
             gameObject.SetActive(false);
         }

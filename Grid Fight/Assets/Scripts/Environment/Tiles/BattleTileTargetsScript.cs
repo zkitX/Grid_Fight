@@ -14,7 +14,7 @@ public class BattleTileTargetsScript : MonoBehaviour
     {
         Whiteline = transform.GetChild(0);
     }
-    public void SetAttack(float duration, AttackParticleTypes atkPS, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker)
+    public void SetAttack(float duration, AttackParticleTypes atkPS, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, List<ScriptableObjectAttackEffect> atkEffects)
     {
         GameObject nextT = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Tile);
         
@@ -24,10 +24,10 @@ public class BattleTileTargetsScript : MonoBehaviour
         nextT.transform.localPosition = TargetsPosition[0];
         Targets.Add(tc);
         UpdateQueue();
-        StartCoroutine(FireTarget(tc, atkPS, pos, damage, ele, attacker));
+        StartCoroutine(FireTarget(tc, atkPS, pos, damage, ele, attacker, atkEffects));
     }
 
-    private IEnumerator FireTarget(TargetClass tc, AttackParticleTypes atkPS, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker)
+    private IEnumerator FireTarget(TargetClass tc, AttackParticleTypes atkPS, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, List<ScriptableObjectAttackEffect> atkEffects)
     {
         float timer = 0;
         Whiteline.gameObject.SetActive(true);
@@ -75,6 +75,10 @@ public class BattleTileTargetsScript : MonoBehaviour
                 bool iscritical = attacker.CharInfo.IsCritical(true);
                 //Set damage to the hitting character
                 effectOn = target.SetDamage(damage * (iscritical ? 2 : 1), ele, iscritical);
+                foreach (ScriptableObjectAttackEffect item in atkEffects)
+                {
+                    target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.Value.x, item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles));
+                }
             }
         }
         attacker.shotsLeftInAttack--;

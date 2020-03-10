@@ -283,21 +283,42 @@ public enum CharacterSelectionType
     Right
 }
 
+public enum StatsCheckerType
+{
+    Perc,
+    Value
+}
+
 public enum BuffDebuffStatsType
 {
-    Health,
-    HealthOverTime,
     ElementalResistance,
     ElementalPower,
-    HealthRegeneration,
-    MovementSpeed,
-    Stamina,
-    StaminaRegeneration,
-    AttackSpeed,
-    BulletSpeed,
     AttackType,
-    BaseSpeed,
-    Damage
+    RapidAttack_CriticalChance,
+    RapidAttack_DamageMultiplier,
+    RapidAttack_Stamina_Cost_Atk,
+    PowerfulAttac_CriticalChance,
+    PowerfulAttac_DamageMultiplier,
+    PowerfulAttac_Stamina_Cost_Atk,
+    HealthStats_Base,
+    HealthStats_BaseHealthRegeneration,
+    HealthStats_Health,
+    HealthStats_LevelMultiplier,
+    HealthStats_Regeneration,
+    StaminaStats_Base,
+    StaminaStats_BaseStaminaRegeneration,
+    StaminaStats_LevelMultiplier,
+    StaminaStats_Regeneration,
+    StaminaStats_Stamina,
+    SpeedStats_BaseSpeed,
+    SpeedStats_MovementSpeed,
+    SpeedStats_AttackSpeed,
+    SpeedStats_AttackSpeedRatio,
+    SpeedStats_BulletSpeed,
+    SpeedStats_LeaveSpeed,
+    SpeedStats_LevelMultiplier,
+    SpeedStats_IdleToAtkDuration,
+    SpeedStats_AtkToIdleDuration
 }
 
 public enum WaveStatsType

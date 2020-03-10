@@ -14,11 +14,10 @@ public class CharacterType_Script : BaseCharacter
 
 
     #region Unity Life Cycles
-    protected override void Start()
+    public override void Start()
     {
         base.Start();
     }
-
     protected override void Update()
     {
         base.Update();

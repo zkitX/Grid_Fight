@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using MyBox;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -27,6 +28,8 @@ public class BulletScript : MonoBehaviour
     public Vector2Int BulletGapStartingTile;
     public Vector2Int StartingTile;
     public float ChildrenExplosionDelay;
+
+    public List<ScriptableObjectAttackEffect> BulletEffects = new List<ScriptableObjectAttackEffect>();
 
     //Private 
     private VFXBulletSpeedController vfx;
@@ -177,9 +180,14 @@ public class BulletScript : MonoBehaviour
                 {
                     CameraManagerScript.Instance.CameraShake(CameraShakeType.PowerfulAttackHit);
                 }
-
+                
                 target.SetDamage((CharInfo.DamageStats.BaseDamage * (attackLevel == CharacterLevelType.Novice ? CharInfo.RapidAttack.DamageMultiplier.x : CharInfo.PowerfulAttac.DamageMultiplier.x)) * (iscritical ? 2 : 1),
                     Elemental, iscritical, CharInfo.ClassType == CharacterClassType.Desert && attackLevel == CharacterLevelType.Godness ? true : false);
+
+                foreach (ScriptableObjectAttackEffect item in BulletEffects)
+                {
+                    target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.Value.x, item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles));
+                }
             }
         }
     }

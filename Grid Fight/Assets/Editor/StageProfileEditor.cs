@@ -43,18 +43,23 @@ public class StageProfileEditor : Editor
 
         EditorGUILayout.Space();
         EditorGUILayout.Space();
-        WaveManagerScript waveM = origin.Wave.GetComponent<WaveManagerScript>();
-        EditorGUILayout.LabelField("WAVES:");
-        EditorGUILayout.LabelField("Wave Count - " + waveM.WavePhases.Count.ToString());
-        foreach (WavePhaseClass wave in waveM.WavePhases)
+        WaveManagerScript waveM ;
+        if (origin.Wave != null)
         {
-            EditorGUILayout.Space();
-            EditorGUILayout.BeginFoldoutHeaderGroup(true, wave.name.ToUpper());
-            foreach(WaveCharClass waveC in wave.ListOfEnemy)
+            waveM = origin.Wave.GetComponent<WaveManagerScript>();
+            EditorGUILayout.LabelField("WAVES:");
+            EditorGUILayout.LabelField("Wave Count - " + waveM.WavePhases.Count.ToString());
+
+            foreach (WavePhaseClass wave in waveM.WavePhases)
             {
-                EditorGUILayout.LabelField("     " + waveC.NumberOfCharacter + " " + waveC.name + (waveC.NumberOfCharacter > 1 && waveC.name[waveC.name.Length - 1].ToString() != "s" ? "s" : ""));
+                EditorGUILayout.Space();
+                EditorGUILayout.BeginFoldoutHeaderGroup(true, wave.name.ToUpper());
+                foreach (WaveCharClass waveC in wave.ListOfEnemy)
+                {
+                    EditorGUILayout.LabelField("     " + waveC.NumberOfCharacter + " " + waveC.name + (waveC.NumberOfCharacter > 1 && waveC.name[waveC.name.Length - 1].ToString() != "s" ? "s" : ""));
+                }
+                EditorGUILayout.EndFoldoutHeaderGroup();
             }
-            EditorGUILayout.EndFoldoutHeaderGroup();
         }
     }
 }

@@ -41,6 +41,10 @@ public class CharacterInfoScript : MonoBehaviour
         public Vector2 DamageMultiplier = new Vector2(1,1);
         public Vector2 CriticalChance = new Vector2(2,2);
         public float Stamina_Cost_Atk;
+
+        [HideInInspector] public Vector2 B_DamageMultiplier = new Vector2(1, 1);
+        [HideInInspector] public Vector2 B_CriticalChance = new Vector2(2, 2);
+        [HideInInspector] public float B_Stamina_Cost_Atk;
     }
 
     public PowerfulAttackClass PowerfulAttac;
@@ -50,6 +54,10 @@ public class CharacterInfoScript : MonoBehaviour
         public Vector2 DamageMultiplier = new Vector2(3,3);
         public Vector2 CriticalChance = new Vector2(3, 5);
         public float Stamina_Cost_Atk;
+
+        [HideInInspector] public Vector2 B_DamageMultiplier = new Vector2(3, 3);
+        [HideInInspector] public Vector2 B_CriticalChance = new Vector2(3, 5);
+        [HideInInspector] public float B_Stamina_Cost_Atk;
     }
 
     public HealthStastsClass HealthStats;
@@ -61,6 +69,12 @@ public class CharacterInfoScript : MonoBehaviour
         public float Regeneration;
         public float BaseHealthRegeneration;
         public float LevelMultiplier;
+
+        [HideInInspector] public float B_Health;
+        [HideInInspector] public float B_Base;
+        [HideInInspector] public float B_Regeneration;
+        [HideInInspector] public float B_BaseHealthRegeneration;
+        [HideInInspector] public float B_LevelMultiplier;
     }
 
     public StaminaStastsClass StaminaStats;
@@ -72,6 +86,12 @@ public class CharacterInfoScript : MonoBehaviour
         public float Regeneration;
         public float BaseStaminaRegeneration;
         public float LevelMultiplier;
+
+        [HideInInspector] public float B_Stamina;
+        [HideInInspector] public float B_Base;
+        [HideInInspector] public float B_Regeneration;
+        [HideInInspector] public float B_BaseStaminaRegeneration;
+        [HideInInspector] public float B_LevelMultiplier;
     }
 
     public SpeedStastsClass SpeedStats;
@@ -87,6 +107,16 @@ public class CharacterInfoScript : MonoBehaviour
         public float LevelMultiplier;
         public float IdleToAtkDuration = 0.2f;
         public float AtkToIdleDuration = 0.2f;
+
+        [HideInInspector] public float B_BaseSpeed = 1;
+        [HideInInspector] public float B_MovementSpeed = 1;
+        [HideInInspector] public float B_AttackSpeed = 1;
+        [HideInInspector] public float B_AttackSpeedRatio;
+        [HideInInspector] public float B_BulletSpeed = 5;
+        [HideInInspector] public float B_LeaveSpeed = 3;
+        [HideInInspector] public float B_LevelMultiplier;
+        [HideInInspector] public float B_IdleToAtkDuration = 0.2f;
+        [HideInInspector] public float B_AtkToIdleDuration = 0.2f;
     }
 
 
@@ -255,6 +285,47 @@ public class CharacterInfoScript : MonoBehaviour
             }
         }
     }
+
+
+    private void Awake()
+    {
+
+        //RapidAttack
+        RapidAttack.B_CriticalChance = RapidAttack.CriticalChance;
+        RapidAttack.B_DamageMultiplier = RapidAttack.DamageMultiplier;
+        RapidAttack.B_Stamina_Cost_Atk = RapidAttack.Stamina_Cost_Atk;
+
+        //PowerfulAttac
+        PowerfulAttac.B_CriticalChance = PowerfulAttac.CriticalChance;
+        PowerfulAttac.B_DamageMultiplier = PowerfulAttac.DamageMultiplier;
+        PowerfulAttac.B_Stamina_Cost_Atk = PowerfulAttac.Stamina_Cost_Atk;
+
+        //HealthStats
+        HealthStats.B_Base = HealthStats.Base;
+        HealthStats.B_BaseHealthRegeneration = HealthStats.BaseHealthRegeneration;
+        HealthStats.B_Health = HealthStats.Health;
+        HealthStats.B_LevelMultiplier = HealthStats.LevelMultiplier;
+        HealthStats.B_Regeneration = HealthStats.Regeneration;
+
+        //StaminaStats
+        StaminaStats.B_Base = StaminaStats.Base;
+        StaminaStats.B_BaseStaminaRegeneration = StaminaStats.BaseStaminaRegeneration;
+        StaminaStats.B_LevelMultiplier = StaminaStats.LevelMultiplier;
+        StaminaStats.B_Regeneration = StaminaStats.Regeneration;
+        StaminaStats.B_Stamina = StaminaStats.Stamina;
+
+        //SpeedStats
+        SpeedStats.B_BaseSpeed = SpeedStats.BaseSpeed;
+        SpeedStats.B_MovementSpeed = SpeedStats.MovementSpeed;
+        SpeedStats.B_AttackSpeed = SpeedStats.AttackSpeed;
+        SpeedStats.B_AttackSpeedRatio = SpeedStats.AttackSpeedRatio;
+        SpeedStats.B_BulletSpeed = SpeedStats.BulletSpeed;
+        SpeedStats.B_LeaveSpeed = SpeedStats.LeaveSpeed;
+        SpeedStats.B_LevelMultiplier = SpeedStats.LevelMultiplier;
+        SpeedStats.B_IdleToAtkDuration = SpeedStats.IdleToAtkDuration;
+        SpeedStats.B_AtkToIdleDuration = SpeedStats.AtkToIdleDuration;
+    }
+
 
     private void FixedUpdate()
     {

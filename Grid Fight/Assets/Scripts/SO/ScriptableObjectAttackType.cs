@@ -1,7 +1,13 @@
-﻿using System.Collections;
+﻿using MyBox;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+///   public bool IsRandomPos = true;
+//[ConditionalField("IsRandomPos", true)] public Vector2Int SpawningPos;
+/// </summary>
 
 public class ScriptableObjectAttackBase : ScriptableObject
 {
@@ -28,4 +34,9 @@ public class BulletBehaviourInfoClass
     public AnimationCurve Trajectory_Z;
     public List<Vector2Int> BulletEffectTiles = new List<Vector2Int>();
     public Vector2Int BulletGapStartingTile;
+
+    public bool HasEffect = false;
+    [ConditionalField("HasEffect", false)] public List<ScriptableObjectAttackEffect> Effects = new List<ScriptableObjectAttackEffect>();
 }
+
+
