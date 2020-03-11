@@ -21,7 +21,8 @@ public class CallClearSayDialogs : Command
 
         setSayLeftDialog.SayDialogAnimatorController.SetBool("InOut", false);
         setSayRightDialog.SayDialogAnimatorController.SetBool("InOut", false);
-
+        setSayLeftDialog.LastCharacter = null;
+        setSayRightDialog.LastCharacter = null;
         Continue();
     }
 

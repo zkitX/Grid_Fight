@@ -280,7 +280,7 @@ public class WaveCharClass
     public int NumberOfCharacter;
     public WaveCharacterInfoClass TypeOfCharacter;
     public bool IsRandomSpowiningTile = true;
-    [ConditionalField("IsFixedRandomSpowiningTile", true)] public List<Vector2Int> SpowningTile = new List<Vector2Int>();
+    [ConditionalField("IsRandomSpowiningTile", false)] public List<Vector2Int> SpowningTile = new List<Vector2Int>();
     public float DelayBetweenChars;
 
 }

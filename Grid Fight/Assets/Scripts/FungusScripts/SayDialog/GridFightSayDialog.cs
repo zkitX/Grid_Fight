@@ -6,7 +6,7 @@ using System;
 
 public class GridFightSayDialog : SayDialog
 {
-    private Character LastCharacter = null;
+    public Character LastCharacter = null;
     [SerializeField]
     public Animator SayDialogAnimatorController;
     private bool isAnimCompleted = false;
@@ -37,7 +37,11 @@ public class GridFightSayDialog : SayDialog
 
     public override IEnumerator DoSay(string text, bool clearPrevious, bool waitForInput, bool fadeWhenDone, bool stopVoiceover, bool waitForVO, AudioClip voiceOverClip, Character nextChar)
     {
+
+        Debug.Log(text);
         AnimSpeedChanger(1);
+        BattleManagerScript.Instance.FungusState = FungusDialogType.Dialog;
+
         if (!IsAlreadySubscribed)
         {
             IsAlreadySubscribed = true;
@@ -47,56 +51,82 @@ public class GridFightSayDialog : SayDialog
             }
         }
         GetCanvasGroup().alpha = 1f;
+
         while (BattleManagerScript.Instance == null)
         {
             yield return null;
         }
 
-        if(LastCharacter != null && LastCharacter.name != nextChar.name)
+        if (LastCharacter != null && LastCharacter.name != nextChar.name)
         {
-            SayDialogAnimatorController.SetBool("InOut", false);
-            while (!isAnimCompleted)
+            if (SayDialogAnimatorController.GetBool("InOut"))
             {
-                yield return null;
+                SayDialogAnimatorController.SetBool("IsSelected", false);
+                while (!isAnimCompleted)
+                {
+                    yield return null;
+                }
+                isAnimCompleted = false;
+
+                yield return base.DoSay("", clearPrevious, false, false, stopVoiceover, waitForVO, voiceOverClip, delegate { });
+                SayDialogAnimatorController.SetBool("InOut", false);
+                while (!isAnimCompleted)
+                {
+                    yield return null;
+                }
+                isAnimCompleted = false;
+
+                SayDialogAnimatorController.SetBool("InOut", true);
+                SetChar();
+                SetCharacterImage(currentChar.Portraits[0]);
+
+
+                while (!isAnimCompleted)
+                {
+                    yield return null;
+                }
+                isAnimCompleted = false;
+
+                SayDialogAnimatorController.SetBool("IsSelected", true);
+                LastCharacter = nextChar;
+
+                while (!isAnimCompleted)
+                {
+                    yield return null;
+                }
+                isAnimCompleted = false;
             }
-            isAnimCompleted = false;
-            
         }
         else if (LastCharacter != null && LastCharacter.name == nextChar.name)
         {
             isAnimCompleted = true;
         }
-       
-        SayDialogAnimatorController.SetBool("InOut", true);
-        SetChar();
-        SetCharacterImage(currentChar.Portraits[0]);
-
-
-        while (!isAnimCompleted)
+        else if (LastCharacter == null)
         {
-            yield return null;
+            SayDialogAnimatorController.SetBool("InOut", true);
+            SetChar();
+            SetCharacterImage(currentChar.Portraits[0]);
+
+
+            while (!isAnimCompleted)
+            {
+                yield return null;
+            }
+            isAnimCompleted = false;
+
+            SayDialogAnimatorController.SetBool("IsSelected", true);
+            LastCharacter = nextChar;
+
+            while (!isAnimCompleted)
+            {
+                yield return null;
+            }
+            isAnimCompleted = false;
         }
-        isAnimCompleted = false;
 
-        SayDialogAnimatorController.SetBool("IsSelected", true);
-        LastCharacter = nextChar;
-
-        while (!isAnimCompleted)
-        {
-            yield return null;
-        }
-        isAnimCompleted = false;
-
-        BattleManagerScript.Instance.FungusState = FungusDialogType.Dialog;
         yield return base.DoSay(text, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, voiceOverClip, delegate {});
 
-        SayDialogAnimatorController.SetBool("IsSelected", false);
-        while (!isAnimCompleted)
-        {
-            yield return null;
-        }
-        isAnimCompleted = false;
-        yield return base.DoSay("", clearPrevious, false, false, stopVoiceover, waitForVO, voiceOverClip, delegate { });
+       
     }
 
 
