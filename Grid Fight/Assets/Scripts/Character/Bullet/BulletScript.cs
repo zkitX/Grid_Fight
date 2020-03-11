@@ -53,7 +53,7 @@ public class BulletScript : MonoBehaviour
         vfx = GetComponentInChildren<VFXBulletSpeedController>();
         if (vfx != null)
         {
-            vfx.BulletTargetTime = CharInfo.BulletSpeed;
+            vfx.BulletTargetTime = CharInfo.SpeedStats.BulletSpeed;
             vfx.ApplyTargetTime();
         }
 
@@ -66,7 +66,7 @@ public class BulletScript : MonoBehaviour
         //Destination position
         Vector3 destination = bts.transform.position;
         //Duration of the particles 
-        PS.GetComponent<PSTimeGroup>().UpdatePSTime(CharInfo.BulletSpeed);
+        PS.GetComponent<PSTimeGroup>().UpdatePSTime(CharInfo.SpeedStats.BulletSpeed);
         //float Duration = Vector3.Distance(transform.position, destination) / CharInfo.BulletSpeed;
         Vector3 res;
         bool isMoving = true;
@@ -90,7 +90,7 @@ public class BulletScript : MonoBehaviour
             res.z = Trajectory_Z.Evaluate(timer) + res.z;
 
             transform.position = res;
-            timer += Time.fixedDeltaTime / CharInfo.BulletSpeed;
+            timer += Time.fixedDeltaTime / CharInfo.SpeedStats.BulletSpeed;
             ti += Time.fixedDeltaTime;
             //if timer ended the bullet fire the Effect
             if (timer > 1)
@@ -111,10 +111,10 @@ public class BulletScript : MonoBehaviour
         GameObject go = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Particles);
         go.transform.position = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position;
         go.GetComponent<BattleTileTargetScript>().StartTarget(
-            (Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position) * CharInfo.BulletSpeed) /
+            (Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position) * CharInfo.SpeedStats.BulletSpeed) /
             Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position));
         bts = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing);
-        float duration = CharInfo.BulletSpeed;
+        float duration = CharInfo.SpeedStats.BulletSpeed;
         foreach (Vector2Int item in BulletEffectTiles)
         {
             if (GridManagerScript.Instance.isPosOnField(DestinationTile + item))
