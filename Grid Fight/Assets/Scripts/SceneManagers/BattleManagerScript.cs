@@ -703,8 +703,8 @@ public class BattleManagerScript : MonoBehaviour
     //Move selected char under determinated player
     public void MoveSelectedCharacterInDirection(ControllerType playerController, InputDirection dir)
     {
-        if (CurrentBattleState != BattleState.Battle && CurrentBattleState != BattleState.Intro) return;
-
+        if (CurrentBattleState != BattleState.Battle) return;
+        
         if (CurrentSelectedCharacters[playerController].Character != null)
         {
             if(CurrentSelectedCharacters[playerController].Character.UMS.UnitBehaviour == UnitBehaviourType.ControlledByPlayer)
