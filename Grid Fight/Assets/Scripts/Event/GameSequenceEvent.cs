@@ -61,6 +61,7 @@ public class GameSequenceEvent : ScriptableObject
         for(int i = 0; i < reqChecks.Count; i++)
         {
             reqChecks[i] = Instantiate(reqChecks[i]);
+            //if an error is here, there is a missing requirement (as in the list is larger than the number of requirements in it)
         }
 
         //Trigger the event if it has no requirements
