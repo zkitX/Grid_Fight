@@ -50,7 +50,7 @@ MonoBehaviour:
     counting: 0
   WavePhases:
   - name: Wave1
-    IsRandom: 1
+    IsRandom: 0
     MaxEnemyOnScreen: 1
     ListOfEnemy:
     - name: robo
@@ -68,79 +68,19 @@ MonoBehaviour:
         AttackSpeedRatio: {x: 7, y: 12}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
-        Events:
-        - {fileID: 0}
+        Events: []
       IsRandomSpowiningTile: 1
-      SpowningTile: []
-      DelayBetweenChars: 1
-    - name: robo
-      NPCType: 0
-      NumberOfCharacter: 1
-      TypeOfCharacter:
-        CharacterName: 23
-        CharacterClass: 0
-        Health: {x: 20, y: 30}
-        HealthRegeneration: {x: 0.2, y: 0.2}
-        BaseDamage: {x: 10, y: 15}
-        RapidAttackMultiplier: {x: 0, y: 0}
-        PowerfulAttackMultiplier: {x: 0, y: 0}
-        BaseSpeed: {x: 1, y: 1}
-        AttackSpeedRatio: {x: 7, y: 12}
-        Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        Events:
-        - {fileID: 0}
-      IsRandomSpowiningTile: 1
-      SpowningTile: []
-      DelayBetweenChars: 1
-    - name: bob
-      NPCType: 0
-      NumberOfCharacter: 1
-      TypeOfCharacter:
-        CharacterName: 23
-        CharacterClass: 0
-        Health: {x: 20, y: 30}
-        HealthRegeneration: {x: 0.2, y: 0.2}
-        BaseDamage: {x: 10, y: 15}
-        RapidAttackMultiplier: {x: 0, y: 0}
-        PowerfulAttackMultiplier: {x: 0, y: 0}
-        BaseSpeed: {x: 1, y: 1}
-        AttackSpeedRatio: {x: 7, y: 12}
-        Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        Events:
-        - {fileID: 0}
-      IsRandomSpowiningTile: 0
       SpowningTile: []
       DelayBetweenChars: 1
   - name: Wave2
     IsRandom: 0
     MaxEnemyOnScreen: 1
     ListOfEnemy:
-    - name: doggo
+    - name: robo
       NPCType: 0
       NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 24
-        CharacterClass: 0
-        Health: {x: 15, y: 20}
-        HealthRegeneration: {x: 1, y: 1}
-        BaseDamage: {x: 10, y: 15}
-        RapidAttackMultiplier: {x: 0, y: 0}
-        PowerfulAttackMultiplier: {x: 0, y: 0}
-        BaseSpeed: {x: 1, y: 1}
-        AttackSpeedRatio: {x: 10, y: 14}
-        Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        Events: []
-      IsRandomSpowiningTile: 1
-      SpowningTile: []
-      DelayBetweenChars: 2
-    - name: doggo
-      NPCType: 0
-      NumberOfCharacter: 1
-      TypeOfCharacter:
-        CharacterName: 24
+        CharacterName: 23
         CharacterClass: 0
         Health: {x: 15, y: 20}
         HealthRegeneration: {x: 1, y: 1}
@@ -157,11 +97,50 @@ MonoBehaviour:
       DelayBetweenChars: 2
   - name: Wave3
     IsRandom: 0
-    MaxEnemyOnScreen: 1
+    MaxEnemyOnScreen: 2
     ListOfEnemy:
-    - name: bug
+    - name: doggo
       NPCType: 0
-      NumberOfCharacter: 3
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 24
+        CharacterClass: 0
+        Health: {x: 15, y: 20}
+        HealthRegeneration: {x: 1, y: 1.5}
+        BaseDamage: {x: 20, y: 25}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 2}
+        AttackSpeedRatio: {x: 7, y: 12}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile: []
+      DelayBetweenChars: 2
+    - name: robo
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 23
+        CharacterClass: 0
+        Health: {x: 15, y: 20}
+        HealthRegeneration: {x: 1, y: 1.5}
+        BaseDamage: {x: 20, y: 25}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 2}
+        AttackSpeedRatio: {x: 7, y: 12}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 0}
+      DelayBetweenChars: 2
+    - name: flyrob
+      NPCType: 0
+      NumberOfCharacter: 2
       TypeOfCharacter:
         CharacterName: 25
         CharacterClass: 0
@@ -198,11 +177,12 @@ MonoBehaviour:
         AttackSpeedRatio: {x: 10, y: 15}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
-        Events: []
+        Events:
+        - {fileID: 0}
       IsRandomSpowiningTile: 0
       SpowningTile:
       - {x: 3, y: 9}
-      DelayBetweenChars: 2
+      DelayBetweenChars: 1
   - name: Wave5
     IsRandom: 0
     MaxEnemyOnScreen: 2
@@ -247,7 +227,7 @@ MonoBehaviour:
       SpowningTile:
       - {x: 0, y: 0}
       DelayBetweenChars: 2
-  - name: birdandban
+  - name: Wave6
     IsRandom: 1
     MaxEnemyOnScreen: 2
     ListOfEnemy:
@@ -355,6 +335,54 @@ MonoBehaviour:
       SpowningTile:
       - {x: 0, y: 0}
       DelayBetweenChars: 1
+  - name: BOSS
+    IsRandom: 0
+    MaxEnemyOnScreen: 1
+    ListOfEnemy:
+    - name: BOSS
+      NPCType: 2
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 27
+        CharacterClass: 0
+        Health: {x: 30, y: 40}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 8, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 0
+      SpowningTile:
+      - {x: 4, y: 11}
+      DelayBetweenChars: 2
+  - name: BOSS
+    IsRandom: 0
+    MaxEnemyOnScreen: 1
+    ListOfEnemy:
+    - name: BOSS
+      NPCType: 2
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 27
+        CharacterClass: 0
+        Health: {x: 30, y: 40}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 8, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events: []
+      IsRandomSpowiningTile: 0
+      SpowningTile:
+      - {x: 4, y: 11}
+      DelayBetweenChars: 2
   - name: BOSS
     IsRandom: 0
     MaxEnemyOnScreen: 1
