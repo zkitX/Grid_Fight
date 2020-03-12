@@ -54,16 +54,6 @@ public enum ButtonClickStateType
     Up
 }
 
-public enum CameraBasePosType
-{
-    VeryClose,
-    Close,
-    Mid,
-    MidFar,
-    Far,
-    VeryFar
-}
-
 
 public enum BattleTileType
 {
@@ -512,19 +502,6 @@ public enum ItemType
     PowerUP_FullRecovery
 }
 
-
-
-public enum GridStructureType
-{
-    r2xc4,
-    r4xc8,
-    r6xc12,
-    r6xc12_8x4,
-    r5xc8,
-    r5xc10,
-    r5xc10Stage00
-
-}
 
 public enum FacingType
 {

@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class BaseCharacter : MonoBehaviour, IDisposable
 {
+  
     public delegate void CurrentCharIsDead(CharacterNameType cName, List<ControllerType> playerController, SideType side);
     public event CurrentCharIsDead CurrentCharIsDeadEvent;
 
@@ -820,12 +821,30 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             B_field = parentField.GetValue(CharInfo).GetType().GetField("B_" + statToCheck[1]);
             if(bdClass.StatsChecker == StatsCheckerType.Perc)
             {
-                field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? 0 : (float)field.GetValue(parentField.GetValue(CharInfo)) +
-                    ((float)B_field.GetValue(parentField.GetValue(CharInfo))) * bdClass.Value);
+                if (field.FieldType == typeof(Vector2))
+                {
+                    field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? Vector2.zero : (Vector2)field.GetValue(parentField.GetValue(CharInfo)) +
+                        ((Vector2)B_field.GetValue(parentField.GetValue(CharInfo))) * bdClass.Value);
+                }
+                else
+                {
+                    field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? 0 : (float)field.GetValue(parentField.GetValue(CharInfo)) +
+                        ((float)B_field.GetValue(parentField.GetValue(CharInfo))) * bdClass.Value);
+                }
             }
             else
             {
-                field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? 0 : (float)field.GetValue(parentField.GetValue(CharInfo)) + bdClass.Value);
+                if (field.FieldType == typeof(Vector2))
+                {
+                    field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? Vector2.zero : new Vector2(((Vector2)field.GetValue(parentField.GetValue(CharInfo))).x + bdClass.Value,
+                        ((Vector2)field.GetValue(parentField.GetValue(CharInfo))).y + bdClass.Value));
+                }
+                else
+                {
+                    field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? 0 : (float)field.GetValue(parentField.GetValue(CharInfo)) + bdClass.Value);
+                }
+
+                
             }
 
             if (statToCheck[1].Contains("Health"))
@@ -863,13 +882,32 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             if (bdClass.StatsChecker == StatsCheckerType.Perc)
             {
-                field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? (float)B_field.GetValue(parentField.GetValue(CharInfo)) :
+                if (field.FieldType == typeof(Vector2))
+                {
+                    field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? (Vector2)B_field.GetValue(parentField.GetValue(CharInfo)) :
+                   (Vector2)field.GetValue(parentField.GetValue(CharInfo)) - ((Vector2)B_field.GetValue(parentField.GetValue(CharInfo))) * bdClass.Value);
+                }
+                else
+                {
+                    field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? (float)B_field.GetValue(parentField.GetValue(CharInfo)) :
                     (float)field.GetValue(parentField.GetValue(CharInfo)) - ((float)B_field.GetValue(parentField.GetValue(CharInfo))) * bdClass.Value);
+                }
+
+               
             }
             else
             {
-                field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? (float)B_field.GetValue(parentField.GetValue(CharInfo)) :
+
+                if (field.FieldType == typeof(Vector2))
+                {
+                    field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? (Vector2)B_field.GetValue(parentField.GetValue(CharInfo)) :
+                    new Vector2(((Vector2)field.GetValue(parentField.GetValue(CharInfo))).x - bdClass.Value, ((Vector2)field.GetValue(parentField.GetValue(CharInfo))).y - bdClass.Value));
+                }
+                else
+                {
+                    field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? (float)B_field.GetValue(parentField.GetValue(CharInfo)) :
                     (float)field.GetValue(parentField.GetValue(CharInfo)) - bdClass.Value);
+                }
             }
         }
         BuffsDebuffsList.Remove(BuffsDebuffsList.Where(r=> r.Name == bdClass.Name).First());

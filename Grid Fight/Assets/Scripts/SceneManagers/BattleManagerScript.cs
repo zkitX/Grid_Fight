@@ -100,6 +100,12 @@ public class BattleManagerScript : MonoBehaviour
     {
         BaseCharacter currentCharacter = AllCharactersOnField.Where(r=> r.UMS.PlayerController.Contains(playerController) && r.CharInfo.CharacterID == cName && !r.IsOnField).FirstOrDefault();
         BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(currentCharacter.UMS.WalkingSide, currentCharacter.UMS.Pos);
+        if(bts == null)
+        {
+
+        }
+
+
         if (currentCharacter != null && bts != null)
         {
             SelectCharacter(playerController, SetCharOnBoardOnFixedPos(playerController, cName, bts.Pos));
