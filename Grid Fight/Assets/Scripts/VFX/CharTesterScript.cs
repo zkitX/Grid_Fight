@@ -127,8 +127,8 @@ public class CharTesterScript : MonoBehaviour
     {
         currentCharacter.CharInfo.CharacterLevel = (CharacterLevelType)Enum.Parse(typeof(CharacterLevelType), CharacterLevel.options[CharacterLevel.value].text);
         currentCharacter.CharInfo.ParticleID = (AttackParticleTypes)Enum.Parse(typeof(AttackParticleTypes), ParticleType.options[ParticleType.value].text);
-        currentCharacter.CharInfo.AttackSpeedRatio = AttackSpeed.value;
-        currentCharacter.CharInfo.BulletSpeed = SpeedOfBullets.value;
+        currentCharacter.CharInfo.SpeedStats.AttackSpeedRatio = AttackSpeed.value;
+        currentCharacter.CharInfo.SpeedStats.BulletSpeed = SpeedOfBullets.value;
         currentCharacter.CharInfo.CurrentParticlesAttackTypeInfo = AttacksTypeInfo.Where(r => r.CharacterClass == currentCharacter.CharInfo.ClassType).ToList();
         currentCharacter.CharInfo.DamageStats.ChildrenBulletDelay = MountainDelay.value;
     }

@@ -96,10 +96,10 @@ public class VFXTester : MonoBehaviour
         }
         currentCharacter.NextAttackLevel = (CharacterLevelType)Enum.Parse(typeof(CharacterLevelType), ParticleLevel.options[ParticleLevel.value].text);
         currentCharacter.CharInfo.ParticleID = (AttackParticleTypes)Enum.Parse(typeof(AttackParticleTypes), ParticleType.options[ParticleType.value].text);
-        currentCharacter.CharInfo.AttackSpeedRatio = AttackSpeed.value;
+        currentCharacter.CharInfo.SpeedStats.AttackSpeedRatio = AttackSpeed.value;
         currentCharacter.UMS.Side = SideType.RightSide;
         currentCharacter.CharInfo.ClassType = (CharacterClassType)Enum.Parse(typeof(CharacterClassType), CharacterClass.options[CharacterClass.value].text);
-        currentCharacter.CharInfo.BulletSpeed = SpeedOfBullets.value;
+        currentCharacter.CharInfo.SpeedStats.BulletSpeed = SpeedOfBullets.value;
         currentCharacter.CharInfo.ParticleID = currentCharacter.CharInfo.ParticleID;
         currentCharacter.CharInfo.CurrentParticlesAttackTypeInfo = AttacksTypeInfo.Where(r => r.CharacterClass == currentCharacter.CharInfo.ClassType).ToList();
         currentCharacter.CharInfo.DamageStats.ChildrenBulletDelay = MountainDelay.value;

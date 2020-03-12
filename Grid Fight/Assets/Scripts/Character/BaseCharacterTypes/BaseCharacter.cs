@@ -258,7 +258,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
 
             //Wait until next attack (if yielding before)
-            if (yieldBefore) yield return PauseAttack((CharInfo.AttackSpeedRatio / 3) * nextAttack.AttackRatioMultiplier);
+            if (yieldBefore) yield return PauseAttack((CharInfo.SpeedStats.AttackSpeedRatio / 3) * nextAttack.AttackRatioMultiplier);
 
             while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || !CanAttack || isMoving ||
                 (currentAttackPhase != AttackPhasesType.End))
@@ -275,7 +275,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             GetAttack(CharacterAnimationStateType.Atk);
 
             //Wait until next attack
-            if (!yieldBefore) yield return PauseAttack((CharInfo.AttackSpeedRatio / 3) * nextAttack.AttackRatioMultiplier);
+            if (!yieldBefore) yield return PauseAttack((CharInfo.SpeedStats.AttackSpeedRatio / 3) * nextAttack.AttackRatioMultiplier);
 
         }
 
@@ -585,7 +585,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public virtual void MoveCharOnDirection(InputDirection nextDir)
     {
         if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving || SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving ||
-            SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle || SwapWhenPossible || CharInfo.MovementSpeed <= 0)
+            SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle || SwapWhenPossible || CharInfo.SpeedStats.MovementSpeed <= 0)
         {
             return;
         }
@@ -732,7 +732,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         Vector3 offset = transform.position;
         bool isMovCheck = false;
         bool isDefe = false;
-        float moveValue = CharInfo.MovementSpeed;
+        float moveValue = CharInfo.SpeedStats.MovementSpeed;
         while (timer < 1)
         {
           
@@ -827,16 +827,36 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             {
                 field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? 0 : (float)field.GetValue(parentField.GetValue(CharInfo)) + bdClass.Value);
             }
+
+            if (statToCheck[1].Contains("Health"))
+            {
+                HealthStatsChangedEvent?.Invoke(bdClass.Value, bdClass.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, transform);
+            }
         }
        
 
         SetAnimation(bdClass.AnimToFire);
-
+        int iterator = 0;
         while (bdClass.Timer <= bdClass.Duration)
         {
             yield return BattleManagerScript.Instance.PauseUntil();
 
             bdClass.Timer += Time.fixedDeltaTime;
+
+            if (((int)bdClass.Timer) > iterator && statToCheck.Length == 3 && statToCheck[2].Contains("Overtime"))
+            {
+                iterator++;
+                if (bdClass.StatsChecker == StatsCheckerType.Perc)
+                {
+                    field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? 0 : (float)field.GetValue(parentField.GetValue(CharInfo)) +
+                        ((float)B_field.GetValue(parentField.GetValue(CharInfo))) * bdClass.Value);
+                }
+                else
+                {
+                    field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? 0 : (float)field.GetValue(parentField.GetValue(CharInfo)) + bdClass.Value);
+                }
+                HealthStatsChangedEvent?.Invoke(bdClass.Value, bdClass.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, transform);
+            }
         }
 
         if (bdClass.Stat != BuffDebuffStatsType.ElementalResistance)
@@ -967,18 +987,18 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         if (animState == CharacterAnimationStateType.Atk || animState == CharacterAnimationStateType.Atk1)
         {
-            AnimSpeed = CharInfo.AttackSpeed * CharInfo.BaseSpeed;
+            AnimSpeed = CharInfo.SpeedStats.AttackSpeed * CharInfo.BaseSpeed;
         }
         else if (animState == CharacterAnimationStateType.DashDown ||
             animState == CharacterAnimationStateType.DashUp ||
             animState == CharacterAnimationStateType.DashLeft ||
             animState == CharacterAnimationStateType.DashRight)
         {
-            AnimSpeed = CharInfo.MovementSpeed * CharInfo.BaseSpeed;
+            AnimSpeed = CharInfo.SpeedStats.MovementSpeed * CharInfo.BaseSpeed;
         }
         else if(animState == CharacterAnimationStateType.Reverse_Arriving || animState == CharacterAnimationStateType.Arriving)
         {
-            AnimSpeed = CharInfo.LeaveSpeed;
+            AnimSpeed = CharInfo.SpeedStats.LeaveSpeed;
         }
         else
         {

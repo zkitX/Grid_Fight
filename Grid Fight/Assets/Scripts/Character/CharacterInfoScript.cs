@@ -165,66 +165,6 @@ public class CharacterInfoScript : MonoBehaviour
         }
     }
 
-    public float AttackSpeedRatio
-    {
-        get
-        {
-            return SpeedStats.AttackSpeedRatio;
-        }
-        set
-        {
-            SpeedStats.AttackSpeedRatio = value;
-        }
-    }
-
-    public float LeaveSpeed
-    {
-        get
-        {
-            return SpeedStats.LeaveSpeed;
-        }
-        set
-        {
-            SpeedStats.LeaveSpeed = value;
-        }
-    }
-
-    public float BulletSpeed
-    {
-        get
-        {
-            return SpeedStats.BulletSpeed;
-        }
-        set
-        {
-            SpeedStats.BulletSpeed = value;
-        }
-    }
-
-    public float MovementSpeed
-    {
-        get
-        {
-            return SpeedStats.MovementSpeed * BaseSpeed;
-        }
-        set
-        {
-            SpeedStats.MovementSpeed = value;
-        }
-    }
-
-    public float AttackSpeed
-    {
-        get
-        {
-            return SpeedStats.AttackSpeed * BaseSpeed;
-        }
-        set
-        {
-            SpeedStats.AttackSpeed = value;
-        }
-    }
-
     public float BaseSpeed
     {
         get
@@ -331,8 +271,8 @@ public class CharacterInfoScript : MonoBehaviour
     {
         if(Health > 0)
         {
-            Stamina += StaminaStats.Regeneration / 50;
-            Health += HealthStats.Regeneration / 50;
+            Stamina = StaminaStats.Stamina + StaminaStats.Regeneration / 50;
+            Health = HealthStats.Health + HealthStats.Regeneration / 50;
         }
     }
 
