@@ -11,9 +11,12 @@ using Fungus;
 [AddComponentMenu("")]
 public class SayRight : Say
 {
+
+    GridFightSayDialog LeftSay;
     public override void OnEnter()
     {
         setSayDialog = SayDialog.GetSayDialog("RightDialog");
+        LeftSay = (GridFightSayDialog)SayDialog.GetSayDialog("LeftDialog");
         if (!showAlways && executionCount >= showCount)
         {
             Continue();
@@ -68,6 +71,7 @@ public class SayRight : Say
 
     private IEnumerator Say_Continue(SayDialog sayDialog, string text)
     {
+        LeftSay.SayDialogAnimatorController.SetBool("IsSelected", false);
         yield return sayDialog.Say(text, !extendPrevious, waitForClick, fadeWhenDone, stopVoiceover, waitForVO, voiceOverClip, character);
         Continue();
     }

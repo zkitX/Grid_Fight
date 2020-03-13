@@ -100,6 +100,7 @@ public class GridFightSayDialog : SayDialog
         else if (LastCharacter != null && LastCharacter.name == nextChar.name)
         {
             isAnimCompleted = true;
+            SayDialogAnimatorController.SetBool("IsSelected", true);
         }
         else if (LastCharacter == null)
         {
