@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: AttackPattern-JaguarAttack 2
   m_EditorClassIdentifier: 
   AttackRatioMultiplier: 2
-  DamageMultiplier: 1.2
-  Anim: 5
+  DamageMultiplier: {x: 1, y: 1}
+  AttackAnim: 1
   BulletTrajectories:
   - Delay: 5
     BulletEffectTiles:
@@ -86,6 +86,8 @@ MonoBehaviour:
     - {x: -3, y: 8}
     - {x: -3, y: 9}
     - {x: -3, y: 10}
+    HasEffect: 0
+    Effects: []
   StatToCheck: 1
   ValueChecker: 0
   PercToCheck: 20

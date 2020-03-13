@@ -12,35 +12,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aafb3c4b93ffa5d45b0be95204d570b3, type: 3}
   m_Name: AttackPattern-Stage4-Minion01
   m_EditorClassIdentifier: 
-  IsAttackStartingFromCharacter: 0
+  AttackRatioMultiplier: 1
+  DamageMultiplier: {x: 1, y: 1}
+  AttackAnim: 1
   BulletTrajectories:
   - Delay: 1
     BulletEffectTiles:
     - {x: 0, y: 1}
+    HasEffect: 0
+    Effects: []
   - Delay: 1
     BulletEffectTiles:
     - {x: -1, y: 2}
+    HasEffect: 0
+    Effects: []
   - Delay: 1
     BulletEffectTiles:
     - {x: 0, y: 3}
+    HasEffect: 0
+    Effects: []
   - Delay: 1
     BulletEffectTiles:
     - {x: 1, y: 4}
+    HasEffect: 0
+    Effects: []
   - Delay: 1
     BulletEffectTiles:
     - {x: 0, y: 5}
+    HasEffect: 0
+    Effects: []
   - Delay: 1
     BulletEffectTiles:
     - {x: -1, y: 6}
+    HasEffect: 0
+    Effects: []
   - Delay: 1
     BulletEffectTiles:
     - {x: 0, y: 7}
+    HasEffect: 0
+    Effects: []
   - Delay: 1
     BulletEffectTiles:
     - {x: 1, y: 8}
+    HasEffect: 0
+    Effects: []
   - Delay: 1
     BulletEffectTiles:
     - {x: 0, y: 9}
+    HasEffect: 0
+    Effects: []
   - Delay: 1
     BulletEffectTiles:
     - {x: -1, y: 10}
+    HasEffect: 0
+    Effects: []
+  StatToCheck: 0
+  ValueChecker: 0
+  PercToCheck: 0
+  Chances: 0
+  ParticlesID: 0

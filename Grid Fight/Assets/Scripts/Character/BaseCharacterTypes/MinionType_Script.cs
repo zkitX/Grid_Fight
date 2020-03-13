@@ -169,41 +169,56 @@ public class MinionType_Script : BaseCharacter
         yield return null;*/
         shotsLeftInAttack = GetHowManyAttackAreOnBattleField(((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories);
         Attacking = true;
-        if (nextAttack.Anim == CharacterAnimationStateType.Atk)
-        {
-            //Temporary until anims are added
 
-            sequencedAttacker = false;
-            chargeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
-            SetAnimation(CharacterAnimationStateType.Idle, true);
-            currentAttackPhase = AttackPhasesType.Cast_Powerful;
-            CreateTileAttack();
+        CharacterAnimationStateType animToFire = CharacterAnimationStateType.Atk;
+        bool isLooped = false;
+        switch (nextAttack.AttackAnim)
+        {
+            case AttackAnimType.Atk:
+                sequencedAttacker = false;
+                chargeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
+                animToFire = CharacterAnimationStateType.Idle;
+                isLooped = true;
+                currentAttackPhase = AttackPhasesType.Cast_Powerful;
+                CreateTileAttack();
+                break;
+            case AttackAnimType.RapidAtk:
+                animToFire = CharacterAnimationStateType.Atk1_IdleToAtk;
+                isLooped = false;
+                break;
+            case AttackAnimType.PowerfulAtk:
+                break;
+            case AttackAnimType.Special1:
+                break;
+            case AttackAnimType.Special2:
+                break;
+            case AttackAnimType.Special3:
+                break;
         }
-        //If it does have the correct animation setup, play that charged animation
+
+
+
+        bool res = false;
+
+        switch (CurrentAI)
+        {
+            case AIType.GeneralAI:
+                res = GeneralTestAI();
+                break;
+            case AIType.AggressiveAI:
+                res = AggressiveTestAI();
+                break;
+        }
+
+        if (res)
+        {
+            currentAttackPhase = AttackPhasesType.Start;
+            sequencedAttacker = true; //Temporary until anims are added
+            SetAnimation(animToFire,isLooped, 0f);
+        }
         else
         {
-            bool res = false;
-
-            switch (CurrentAI)
-            {
-                case AIType.GeneralAI:
-                    res = GeneralTestAI();
-                    break;
-                case AIType.AggressiveAI:
-                    res = AggressiveTestAI();
-                    break;
-            }
-            if (res)
-            {
-                currentAttackPhase = AttackPhasesType.Start;
-                sequencedAttacker = true; //Temporary until anims are added
-                SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
-            }
-            else
-            {
-                shotsLeftInAttack = 0;
-            }
-
+            shotsLeftInAttack = 0;
         }
 
         while (shotsLeftInAttack != 0)
