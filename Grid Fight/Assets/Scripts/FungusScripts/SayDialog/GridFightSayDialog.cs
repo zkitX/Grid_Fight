@@ -56,7 +56,7 @@ public class GridFightSayDialog : SayDialog
         {
             yield return null;
         }
-
+        yield return base.DoSay("", clearPrevious, false, false, stopVoiceover, waitForVO, voiceOverClip, delegate { });
         if (LastCharacter != null && LastCharacter.name != nextChar.name)
         {
             if (SayDialogAnimatorController.GetBool("InOut"))
@@ -68,7 +68,7 @@ public class GridFightSayDialog : SayDialog
                 }
                 isAnimCompleted = false;
 
-                yield return base.DoSay("", clearPrevious, false, false, stopVoiceover, waitForVO, voiceOverClip, delegate { });
+               
                 SayDialogAnimatorController.SetBool("InOut", false);
                 while (!isAnimCompleted)
                 {
