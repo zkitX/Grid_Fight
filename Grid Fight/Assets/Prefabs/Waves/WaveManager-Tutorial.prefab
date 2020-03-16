@@ -49,7 +49,7 @@ MonoBehaviour:
     seconds: 0
     counting: 0
   WavePhases:
-  - name: Wave1
+  - name: Jerry
     IsRandom: 0
     MaxEnemyOnScreen: 1
     ListOfEnemy:
@@ -211,7 +211,7 @@ MonoBehaviour:
       SpowningTile:
       - {x: 3, y: 9}
       DelayBetweenChars: 2
-    - name: bird
+    - name: ban
       NPCType: 1
       NumberOfCharacter: 1
       TypeOfCharacter:
@@ -319,15 +319,15 @@ MonoBehaviour:
       SpowningTile:
       - {x: 4, y: 11}
       DelayBetweenChars: 2
-  - name: BOSS
+  - name: Wave1
     IsRandom: 0
     MaxEnemyOnScreen: 1
     ListOfEnemy:
-    - name: BOSS
-      NPCType: 2
-      NumberOfCharacter: 2
+    - name: robo
+      NPCType: 0
+      NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 27
+        CharacterName: 23
         CharacterClass: 0
         Health: {x: 30, y: 40}
         HealthRegeneration: {x: 1, y: 1}

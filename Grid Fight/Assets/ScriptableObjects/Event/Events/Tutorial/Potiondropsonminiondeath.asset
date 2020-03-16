@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25d497aba9400d147aee0263a1f7ec6d, type: 3}
   m_Name: Potiondropsonminiondeath
   m_EditorClassIdentifier: 
-  Name: Potiondropsonminiondeath
+  Name: Potiondrop
   hasHappened: 0
   requirementRule: 0
   reqChecks:
@@ -24,10 +24,10 @@ MonoBehaviour:
     isHappening: 0
     checker: {fileID: 0}
     ceaseOnHappened: 1
-    TimedCheckType: 1
+    TimedCheckType: 11
     deathCharacterID: 24
     onlyOnDeath: 1
-    deathsRequired: 2
+    deathsRequired: 1
     buttonToWaitFor: 0
     arrivalCharacterID: 0
     onlyOnArrival: 0
@@ -55,6 +55,9 @@ MonoBehaviour:
     staminaChangeValue: 0
     requireEventTriggerDuringCheck: 0
     EventTriggerRequired: {fileID: 0}
+    potionType: 5
+    potionsRequired: 1
+    potionCollectedLastFrame: 1
   inhibitorRule: 1
   inhibitors: []
   ignoreQueue: 0
