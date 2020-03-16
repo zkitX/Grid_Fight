@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: AttackPattern-Stage0-FlyAttack2
   m_EditorClassIdentifier: 
   AttackRatioMultiplier: 2
-  DamageMultiplier: 1
-  Anim: 5
+  DamageMultiplier: {x: 1, y: 1}
+  AttackAnim: 1
   BulletTrajectories:
   - Delay: 2
     BulletEffectTiles:
@@ -29,6 +29,8 @@ MonoBehaviour:
     - {x: -1, y: 3}
     - {x: -2, y: 3}
     - {x: -3, y: 3}
+    HasEffect: 0
+    Effects: []
   StatToCheck: 1
   ValueChecker: 0
   PercToCheck: 70

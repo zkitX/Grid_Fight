@@ -284,6 +284,7 @@ public enum BuffDebuffStatsType
     ElementalResistance,
     ElementalPower,
     AttackType,
+    DamagePerc,
     RapidAttack_CriticalChance,
     RapidAttack_DamageMultiplier,
     RapidAttack_Stamina_Cost_Atk,
@@ -347,6 +348,16 @@ public enum AIType
 {
     GeneralAI,
     AggressiveAI
+}
+
+public enum AttackAnimType
+{
+    Atk,
+    RapidAtk,
+    PowerfulAtk,
+    Special1,
+    Special2,
+    Special3
 }
 
 

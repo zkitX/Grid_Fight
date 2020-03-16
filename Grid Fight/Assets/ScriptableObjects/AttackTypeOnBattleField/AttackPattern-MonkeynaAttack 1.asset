@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: AttackPattern-MonkeynaAttack 1
   m_EditorClassIdentifier: 
   AttackRatioMultiplier: 1
-  DamageMultiplier: 2
-  Anim: 5
+  DamageMultiplier: {x: 1, y: 1}
+  AttackAnim: 1
   BulletTrajectories:
   - Delay: 2
     BulletEffectTiles:
@@ -23,6 +23,8 @@ MonoBehaviour:
     - {x: 2, y: 1}
     - {x: -1, y: 1}
     - {x: -2, y: 1}
+    HasEffect: 0
+    Effects: []
   - Delay: 2
     BulletEffectTiles:
     - {x: 0, y: 2}
@@ -30,6 +32,8 @@ MonoBehaviour:
     - {x: 2, y: 2}
     - {x: -1, y: 2}
     - {x: -2, y: 2}
+    HasEffect: 0
+    Effects: []
   StatToCheck: 1
   ValueChecker: 0
   PercToCheck: 60

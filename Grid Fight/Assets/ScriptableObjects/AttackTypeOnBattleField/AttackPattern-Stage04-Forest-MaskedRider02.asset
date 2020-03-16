@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackRatioMultiplier: 1
   DamageMultiplier: {x: 2, y: 3}
-  Anim: 5
+  AttackAnim: 1
   BulletTrajectories:
   - Delay: 2.5
     BulletEffectTiles:
@@ -23,6 +23,8 @@ MonoBehaviour:
     - {x: 0, y: 3}
     - {x: 0, y: 4}
     - {x: 0, y: 5}
+    HasEffect: 0
+    Effects: []
   - Delay: 2.6
     BulletEffectTiles:
     - {x: 1, y: 2}
@@ -31,10 +33,14 @@ MonoBehaviour:
     - {x: -1, y: 2}
     - {x: -1, y: 3}
     - {x: -1, y: 4}
+    HasEffect: 0
+    Effects: []
   - Delay: 2.7
     BulletEffectTiles:
     - {x: 2, y: 3}
     - {x: -2, y: 3}
+    HasEffect: 0
+    Effects: []
   StatToCheck: 1
   ValueChecker: 0
   PercToCheck: 70
