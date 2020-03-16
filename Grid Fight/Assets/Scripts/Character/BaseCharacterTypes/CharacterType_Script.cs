@@ -10,6 +10,7 @@ public class CharacterType_Script : BaseCharacter
     protected bool MoveCoOn = true;
     private IEnumerator MoveActionCo;
     public bool Atk1Queueing = false;
+    [SerializeField] protected bool CharacterJumping = false;
 
 
 
@@ -289,6 +290,47 @@ public class CharacterType_Script : BaseCharacter
     #endregion
 
     #region Move
+
+    #endregion
+
+    #region Changing
+    IEnumerator GridJumpSequencer = null;
+    public void StartGridJump(float duration)
+    {
+        if (GridJumpSequencer != null) StopCoroutine(GridJumpSequencer);
+        GridJumpSequencer = GridJumpSequence(duration);
+        StartCoroutine(GridJumpSequencer);
+    }
+
+    IEnumerator GridJumpSequence(float duration) //WHEN REFACTORING: MAKE THIS CURVE BASED AND NOT 2 LERPS WITH A WEIRD WAIT IN BETWEEN
+    {
+        CharacterAnimationStateType jumpAnim = CharacterAnimationStateType.DashUp;
+        float jumpAnimLength = SpineAnim.GetAnimLenght(jumpAnim);
+        float jumpHeight = 2f;
+        //float jumpSlowAmount = 1.2f;
+
+        SetAnimation(jumpAnim);
+
+        Vector3 startPos = transform.position;
+        Vector3 endPos = transform.position + new Vector3(0, jumpHeight, 0);
+
+        float timeCounter = 0f;
+        float animProg = 0f;
+        float jumpProg = 0f;
+        while(timeCounter != duration)
+        {
+            timeCounter = Mathf.Clamp(timeCounter + Time.deltaTime, 0f, duration);
+
+            jumpProg = EnvironmentManager.Instance.characterJumpCurve.Evaluate(timeCounter / duration);
+            animProg = EnvironmentManager.Instance.jumpAnimationCurve.Evaluate(timeCounter / duration);
+
+            SpineAnim.SetAnimationSpeed(animProg);
+            transform.position = Vector3.Lerp(startPos, endPos, jumpProg);
+
+            yield return null;
+        }
+    }
+
 
     #endregion
 
