@@ -20,6 +20,7 @@ public enum TimedCheckTypes
     BlockCheck,
     CharacterStaminaCheck,
     EventTriggeredCheck,
+    PotionCollectionCheck,
     None,
 }
 

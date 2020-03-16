@@ -70,6 +70,9 @@ public class TimedCheck
             case (TimedCheckTypes.EventTriggeredCheck):
                 check = EventTriggeredCheck;
                 break;
+            case (TimedCheckTypes.PotionCollectionCheck):
+                check = PotionCollectionCheck;
+                break;
             default:
                 check = Default;
                 break;
@@ -266,5 +269,20 @@ public class TimedCheck
     bool EventTriggeredCheck()
     {
         return requireEventTriggerDuringCheck ? EventManager.Instance.EventTriggeredLastFrame(EventTriggerRequired.Name) : EventManager.Instance.EventTriggered(EventTriggerRequired.Name);
+    }
+
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.PotionCollectionCheck)] public ItemType potionType = ItemType.PowerUp_All;
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.PotionCollectionCheck)] public int potionsRequired = 1;
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.PotionCollectionCheck)] public bool potionCollectedLastFrame = true;
+    bool PotionCollectionCheck()
+    {
+        if (potionCollectedLastFrame)
+        {
+            return EventManager.Instance.GetPotionCollectedLastFrame(potionType, potionsRequired);
+        }
+        else
+        {
+            return EventManager.Instance.GetPotionCollected(potionType, potionsRequired);
+        }
     }
 }

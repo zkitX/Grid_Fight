@@ -34,6 +34,8 @@ public class EventManager : MonoBehaviour
     protected List<InputButtonType> buttonsPressedLastFrame = new List<InputButtonType>();
     [SerializeField] protected List<BlockInfo> blocks = new List<BlockInfo>();
     protected List<BlockInfo> blocksLastFrame = new List<BlockInfo>();
+    [SerializeField] protected List<PotionInfoClass> potionsCollected = new List<PotionInfoClass>();
+    protected List<PotionInfoClass> potionsCollectedLastFrame = new List<PotionInfoClass>();
 
     //[Tooltip("How many seconds between checks, increase for performance boost, decrease for accuracy")][SerializeField] protected float timeBetweenChecks = 1f;
 
@@ -690,9 +692,81 @@ public class EventManager : MonoBehaviour
     }
     #endregion
 
+    #region Potion Management
+
+    public void AddPotionCollected(ItemType potionType)
+    {
+        potionsCollectedLastFrame.Add(new PotionInfoClass(potionType, 1));
+        StartCoroutine(ResetPotionCollectedLastFrame(potionType));
+
+        foreach(PotionInfoClass bdb in potionsCollected)
+        {
+            if (bdb.type == potionType)
+            {
+                bdb.count++;
+                return;
+            }
+        }
+        potionsCollected.Add(new PotionInfoClass(potionType, 1));
+    }
+
+    IEnumerator ResetPotionCollectedLastFrame(ItemType potionNeedingReset)
+    {
+        yield return null;
+        foreach(PotionInfoClass buffdebuff in potionsCollectedLastFrame.ToArray())
+        {
+            if (buffdebuff.type == potionNeedingReset) potionsCollectedLastFrame.Remove(buffdebuff);
+        }
+    }
+
+    public bool GetPotionCollected(ItemType potionType, int minAmount)
+    {
+        if(potionType == ItemType.PowerUp_All)
+        {
+            if (minAmount <= potionsCollected.Count) return true;
+        }
+        foreach(PotionInfoClass potion in potionsCollected)
+        {
+            if(potion.type == potionType)
+            {
+                if (minAmount <= potion.count) return true;
+            }
+        }
+        return false;
+    }
+
+    public bool GetPotionCollectedLastFrame(ItemType potionType, int minAmount)
+    {
+        if (potionType == ItemType.PowerUp_All)
+        {
+            if (minAmount <= potionsCollectedLastFrame.Count) return true;
+        }
+        foreach (PotionInfoClass potion in potionsCollectedLastFrame)
+        {
+            if (potion.type == potionType)
+            {
+                if (minAmount <= potion.count) return true;
+            }
+        }
+        return false;
+    }
+
     #endregion
 
+    #endregion
+}
 
+[System.Serializable]
+public class PotionInfoClass
+{
+    public ItemType type;
+    public int count = 1;
+
+    public PotionInfoClass(ItemType _type, int _count)
+    {
+        type = _type;
+        count = _count;
+    }
 }
 
 [System.Serializable]

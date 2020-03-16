@@ -499,7 +499,9 @@ public enum ItemType
     PowerUp_Damage,
     PowerUp_Speed,
     PowerUP_Health,
-    PowerUP_FullRecovery
+    PowerUP_FullRecovery,
+    PowerUP_Stamina,
+    PowerUp_All
 }
 
 

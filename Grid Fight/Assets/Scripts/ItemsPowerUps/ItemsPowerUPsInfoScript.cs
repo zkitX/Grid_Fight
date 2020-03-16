@@ -34,6 +34,26 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
                 ItemPowerUpInfo.StatsToAffect, ItemPowerUpInfo.StatsChecker, new ElementalResistenceClass(),
                 ElementalType.Neutral, ItemPowerUpInfo.AnimToFire, ItemPowerUpInfo.Particles));
 
+            ItemType itemType = ItemType.PowerUP_FullRecovery;
+            switch (ItemPowerUpInfo.StatsToAffect)
+            {
+                case (BuffDebuffStatsType.HealthStats_Health_Overtime):
+                    itemType = ItemType.PowerUP_Health;
+                    break;
+                case (BuffDebuffStatsType.StaminaStats_Stamina_Overtime):
+                    itemType = ItemType.PowerUp_Speed;
+                    break;
+                case (BuffDebuffStatsType.StaminaStats_Regeneration):
+                    itemType = ItemType.PowerUP_Stamina;
+                    break;
+                case (BuffDebuffStatsType.RapidAttack_DamageMultiplier):
+                    itemType = ItemType.PowerUp_Damage;
+                    break;
+                default:
+                    Debug.LogError("Error with potion type in event collection");
+                    break;
+            }
+            EventManager.Instance?.AddPotionCollected(itemType);
             gameObject.SetActive(false);
         }
     }
