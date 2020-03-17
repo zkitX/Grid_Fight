@@ -40,7 +40,7 @@ public class Stage00_BossOctopus_Head : MinionType_Script
         base.fireAttackAnimation(pos);
     }
 
-    public override void CastAttackParticles()
+    public override void CastAttackParticles(CharacterLevelType nextAttackLevel)
     {
         GameObject cast;
         GameObject GOTarget;

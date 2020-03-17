@@ -52,7 +52,7 @@ public class SpineAnimationManager : MonoBehaviour
         else if (e.Data.Name.Contains("FireCastParticle"))
         {
             CharOwner.currentAttackPhase = CurrentAnim.ToString().Contains("Atk1") ? AttackPhasesType.Cast_Rapid : AttackPhasesType.Cast_Powerful;
-            CharOwner.FireCastParticles();
+            CharOwner.FireCastParticles(CurrentAnim.ToString().Contains("Atk1") ? CharacterLevelType.Novice : CharacterLevelType.Godness);
         }
         else if (e.Data.Name.Contains("FireBulletParticle"))
         {

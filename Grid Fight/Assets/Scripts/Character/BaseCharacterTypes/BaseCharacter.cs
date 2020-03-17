@@ -293,17 +293,14 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     }
 
-    public int GetHowManyAttackAreOnBattleField(List<BulletBehaviourInfoClassOnBattleField> bulTraj)
+    public int GetHowManyAttackAreOnBattleField(List<BulletBehaviourInfoClassOnBattleFieldClass> bulTraj)
     {
         int res = 0;
-        Vector2Int basePos = new Vector2Int(UMS.CurrentTilePos.x, GridManagerScript.Instance.YGridSeparator);
-        foreach (BulletBehaviourInfoClassOnBattleField item in bulTraj)
+        foreach (BulletBehaviourInfoClassOnBattleFieldClass item in bulTraj)
         {
-            foreach (Vector2Int target in item.BulletEffectTiles)
+            foreach (BattleFieldAttackTileClass target in item.BulletEffectTiles)
             {
-
-                Vector2Int posToCheck = basePos - target;
-                if (GridManagerScript.Instance.isPosOnField(posToCheck))
+                if (GridManagerScript.Instance.isPosOnField(target.Pos))
                 {
                     res++;
                 }
@@ -429,15 +426,16 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     }
 
 
-    public void FireCastParticles()
+    public void FireCastParticles(CharacterLevelType nextAttackLevel)
     {
-        CastAttackParticles();
+        CastAttackParticles(nextAttackLevel);
     }
 
     //start the casting particlaes foe the attack
-    public virtual void CastAttackParticles()
+    public virtual void CastAttackParticles(CharacterLevelType nextAttackLevel)
     {
         //Debug.Log("Cast");
+        NextAttackLevel = nextAttackLevel;
         GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, UMS.Side == SideType.LeftSide ? AttackParticlePhaseTypes.CastLeft : AttackParticlePhaseTypes.CastRight,
             NextAttackLevel == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, UMS.Side);
         cast.GetComponent<DisableParticleScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
@@ -538,7 +536,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         if (UMS.CurrentAttackType == AttackType.Tile)
         {
             CharInfo.RapidAttack.DamageMultiplier = ((ScriptableObjectAttackTypeOnBattlefield)nextAttack).DamageMultiplier;
-            GridManagerScript.Instance.StartOnBattleFieldAttackCo(CharInfo, ((ScriptableObjectAttackTypeOnBattlefield)nextAttack), UMS.CurrentTilePos, UMS, this);
+            GridManagerScript.Instance.StartOnBattleFieldAttackCo(CharInfo, ((ScriptableObjectAttackTypeOnBattlefield)nextAttack), UMS, this);
         }
     }
 
