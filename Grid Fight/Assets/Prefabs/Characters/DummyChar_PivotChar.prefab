@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 527817a92b6014142b46db4615aacc3f, type: 2}
+  - {fileID: 2100000, guid: 2b3d81fc5b4a86649b6fe89101bce481, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: c101902de444a474a9cb2e3300ffff8b, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: cbe6ef5958ed7654395add471d89f82d, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -300,45 +300,70 @@ MonoBehaviour:
   CharacterID: 10001
   CurrentParticlesAttackTypeInfo:
   - {fileID: 11400000, guid: de8dcc1a1d34fe44e8b3056c024cf557, type: 2}
-  - {fileID: 11400000, guid: 9be942b31bf45c44bbac2da96191fe86, type: 2}
+  - {fileID: 11400000, guid: 63e9759ac0d192348a45543f02929be7, type: 2}
   CurrentOnBattleFieldAttackTypeInfo:
   - {fileID: 11400000, guid: 16c71180a018bf044be5211ddac04e59, type: 2}
   ParticleID: 100000
   Elemental: 2
-  ClassType: 0
-  CharacterLevel: 0
+  ClassType: 2
+  CharacterLevel: 3
   UseLayeringSystem: 1
   CharacterSelection: 0
   RapidAttack:
     DamageMultiplier: {x: 1, y: 1}
     CriticalChance: {x: 2, y: 2}
     Stamina_Cost_Atk: 1.2
+    B_DamageMultiplier: {x: 1, y: 1}
+    B_CriticalChance: {x: 2, y: 2}
+    B_Stamina_Cost_Atk: 0
   PowerfulAttac:
     DamageMultiplier: {x: 3, y: 3}
     CriticalChance: {x: 3, y: 5}
     Stamina_Cost_Atk: 6
+    B_DamageMultiplier: {x: 3, y: 3}
+    B_CriticalChance: {x: 3, y: 5}
+    B_Stamina_Cost_Atk: 0
   HealthStats:
     Health: 40
     Base: 40
     Regeneration: 0.5
     BaseHealthRegeneration: 0.5
     LevelMultiplier: 15
+    B_Health: 0
+    B_Base: 0
+    B_Regeneration: 0
+    B_BaseHealthRegeneration: 0
+    B_LevelMultiplier: 0
   StaminaStats:
-    Stamina: 35
-    Base: 35
-    Regeneration: 1
+    Stamina: 1000
+    Base: 1000
+    Regeneration: 5
     BaseStaminaRegeneration: 1
     LevelMultiplier: 30
+    B_Stamina: 0
+    B_Base: 0
+    B_Regeneration: 0
+    B_BaseStaminaRegeneration: 0
+    B_LevelMultiplier: 0
   SpeedStats:
     BaseSpeed: 1
     MovementSpeed: 2
-    AttackSpeed: 2
+    AttackSpeed: 1
     AttackSpeedRatio: 1
-    BulletSpeed: 1.5
+    BulletSpeed: 3
     LeaveSpeed: 3
     LevelMultiplier: 10
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
+    B_BaseSpeed: 1
+    B_MovementSpeed: 1
+    B_AttackSpeed: 1
+    B_AttackSpeedRatio: 0
+    B_BulletSpeed: 5
+    B_LeaveSpeed: 3
+    B_LevelMultiplier: 0
+    B_IdleToAtkDuration: 0.2
+    B_AtkToIdleDuration: 0.2
   DamageStats:
     BaseDamage: 6
     MultiBulletAttackNumberOfBullets: 3
@@ -406,7 +431,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2691642992750233816}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0.625, z: 0}
+  m_LocalPosition: {x: -0.063, y: 0.96, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6888126693245386667}
@@ -467,7 +492,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7388104409367748090}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0.625, z: 0}
+  m_LocalPosition: {x: -0.511, y: 0.501, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6888126693245386667}

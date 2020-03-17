@@ -7,6 +7,9 @@ public class LayerParticleSelection : MonoBehaviour
     [Header("Select the level of Shot, Idle is the standard(character is not being pressed)")]
     public CharacterLevelType Shot = CharacterLevelType.Novice;
 
+    [Header("Select this to Isolate each level, usefull if the stages are different")]
+    [Tooltip("Isolate each level of shot")]
+    public bool Isolate = false;
     [Header("The objects the various levels of power")]
     [Tooltip("normal attack particle")]
     public List<Transform> ShotNovice;
@@ -24,23 +27,46 @@ public class LayerParticleSelection : MonoBehaviour
     {
         //close unnecessary layers
         CloseAllLayers();
-        //Select all necessary layers for playing the selected shot level
-        if (Shot >= CharacterLevelType.Novice)
+        if (Isolate)
         {
-            SelectLayer(ShotNovice);
+            if (Shot == CharacterLevelType.Novice)
+            {
+                SelectLayer(ShotNovice);
+            }
+            if (Shot == CharacterLevelType.Defiant)
+            {
+                SelectLayer(ShotDefiant);
+            }
+            if (Shot == CharacterLevelType.Heroine)
+            {
+                SelectLayer(ShotHeroine);
+            }
+            if (Shot == CharacterLevelType.Godness)
+            {
+                SelectLayer(ShotGodness);
+            }
         }
-        if (Shot >= CharacterLevelType.Defiant)
+        else
         {
-            SelectLayer(ShotDefiant);
+            //Select all necessary layers for playing the selected shot level
+            if (Shot >= CharacterLevelType.Novice)
+            {
+                SelectLayer(ShotNovice);
+            }
+            if (Shot >= CharacterLevelType.Defiant)
+            {
+                SelectLayer(ShotDefiant);
+            }
+            if (Shot >= CharacterLevelType.Heroine)
+            {
+                SelectLayer(ShotHeroine);
+            }
+            if (Shot >= CharacterLevelType.Godness)
+            {
+                SelectLayer(ShotGodness);
+            }
         }
-        if (Shot >= CharacterLevelType.Heroine)
-        {
-            SelectLayer(ShotHeroine);
-        }
-        if (Shot >= CharacterLevelType.Godness)
-        {
-            SelectLayer(ShotGodness);
-        }
+        
     }
 
     /// <summary>
