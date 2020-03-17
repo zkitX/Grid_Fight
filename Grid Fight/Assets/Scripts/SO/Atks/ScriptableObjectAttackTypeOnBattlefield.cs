@@ -24,7 +24,6 @@ public class BulletBehaviourInfoClassOnBattleFieldClass
 [System.Serializable]
 public class BattleFieldAttackTileClass
 {
-
     [HideInInspector] public Vector2Int Pos;
     public bool HasEffect = false;
     [ConditionalField("HasEffect", false)] public List<ScriptableObjectAttackEffect> Effects = new List<ScriptableObjectAttackEffect>();

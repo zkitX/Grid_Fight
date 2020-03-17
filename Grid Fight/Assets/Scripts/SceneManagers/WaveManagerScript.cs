@@ -140,6 +140,7 @@ public class WaveManagerScript : MonoBehaviour
         {
             if (waveChar.StartingEnemyNumber > 0)
             {
+                waveChar.NumberOfCharacter -= waveChar.StartingEnemyNumber;
                 StartingCharInWave.Add(new StartingCharactersForWaveClass(waveChar.StartingEnemyNumber, waveChar.TypeOfCharacter)); 
             }
         }

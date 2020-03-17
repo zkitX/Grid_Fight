@@ -342,12 +342,9 @@ MonoBehaviour:
   CharacterIcons: []
   BaseCharacterType: 1
   CharacterID: 2
-  CurrentParticlesAttackTypeInfo:
-  - {fileID: 0}
+  CurrentParticlesAttackTypeInfo: []
   CurrentOnBattleFieldAttackTypeInfo:
-  - {fileID: 11400000, guid: 5245cecfda77e604d83f0c5ab4cbc945, type: 2}
-  - {fileID: 11400000, guid: 3d664849e99b9274494f830c11c07691, type: 2}
-  - {fileID: 11400000, guid: cfb1b2751a3dc334d9a00397c708ea54, type: 2}
+  - {fileID: 11400000, guid: 0537aba9432af4d4e9ddc1d1dc5988c7, type: 2}
   ParticleID: 11
   Elemental: 0
   ClassType: 2
@@ -358,22 +355,38 @@ MonoBehaviour:
     DamageMultiplier: {x: 1, y: 1}
     CriticalChance: {x: 2, y: 2}
     Stamina_Cost_Atk: 0
+    B_DamageMultiplier: {x: 1, y: 1}
+    B_CriticalChance: {x: 2, y: 2}
+    B_Stamina_Cost_Atk: 0
   PowerfulAttac:
     DamageMultiplier: {x: 3, y: 3}
     CriticalChance: {x: 3, y: 5}
     Stamina_Cost_Atk: 0
+    B_DamageMultiplier: {x: 3, y: 3}
+    B_CriticalChance: {x: 3, y: 5}
+    B_Stamina_Cost_Atk: 0
   HealthStats:
     Health: 38
     Base: 38
     Regeneration: 1
     BaseHealthRegeneration: 1
     LevelMultiplier: 0
+    B_Health: 0
+    B_Base: 0
+    B_Regeneration: 0
+    B_BaseHealthRegeneration: 0
+    B_LevelMultiplier: 0
   StaminaStats:
     Stamina: 40
     Base: 40
     Regeneration: 1
     BaseStaminaRegeneration: 1
     LevelMultiplier: 0
+    B_Stamina: 0
+    B_Base: 0
+    B_Regeneration: 0
+    B_BaseStaminaRegeneration: 0
+    B_LevelMultiplier: 0
   SpeedStats:
     BaseSpeed: 1
     MovementSpeed: 1
@@ -384,6 +397,15 @@ MonoBehaviour:
     LevelMultiplier: 0
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
+    B_BaseSpeed: 1
+    B_MovementSpeed: 1
+    B_AttackSpeed: 1
+    B_AttackSpeedRatio: 0
+    B_BulletSpeed: 5
+    B_LeaveSpeed: 3
+    B_LevelMultiplier: 0
+    B_IdleToAtkDuration: 0.2
+    B_AtkToIdleDuration: 0.2
   DamageStats:
     BaseDamage: 10
     MultiBulletAttackNumberOfBullets: 3

@@ -73,7 +73,7 @@ namespace Fungus
         protected string colorText = "";
         protected bool sizeActive = false;
         protected float sizeValue = 16f;
-        protected bool inputFlag;
+        public bool inputFlag;
         protected bool exitFlag;
 
         protected List<IWriterListener> writerListeners = new List<IWriterListener>();
