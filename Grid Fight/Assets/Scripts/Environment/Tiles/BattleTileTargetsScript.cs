@@ -14,7 +14,7 @@ public class BattleTileTargetsScript : MonoBehaviour
     {
         Whiteline = transform.GetChild(0);
     }
-    public void SetAttack(float duration, AttackParticleTypes atkPS, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, List<ScriptableObjectAttackEffect> atkEffects)
+    public void SetAttack(float duration, AttackParticleType atkPS, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, List<ScriptableObjectAttackEffect> atkEffects)
     {
         GameObject nextT = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Tile);
         
@@ -27,7 +27,7 @@ public class BattleTileTargetsScript : MonoBehaviour
         StartCoroutine(FireTarget(tc, atkPS, pos, damage, ele, attacker, atkEffects));
     }
 
-    private IEnumerator FireTarget(TargetClass tc, AttackParticleTypes atkPS, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, List<ScriptableObjectAttackEffect> atkEffects)
+    private IEnumerator FireTarget(TargetClass tc, AttackParticleType atkPS, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, List<ScriptableObjectAttackEffect> atkEffects)
     {
         float timer = 0;
         Whiteline.gameObject.SetActive(true);

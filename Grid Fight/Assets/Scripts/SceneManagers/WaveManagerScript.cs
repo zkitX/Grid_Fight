@@ -27,7 +27,7 @@ public class WaveManagerScript : MonoBehaviour
     private IEnumerator Wave_Co;
     public Dictionary<string, BaseCharacter> FungusSpawnedChars = new Dictionary<string, BaseCharacter>();
 
-
+    public List<StartingCharactersForWaveClass> StartingCharInWave = new List<StartingCharactersForWaveClass>();
 
     private void Awake()
     {
@@ -80,7 +80,8 @@ public class WaveManagerScript : MonoBehaviour
     public BaseCharacter GetWaveCharacter(WaveCharacterInfoClass character)
     {
         BaseCharacter res;
-        res = WaveCharcters.Where(r => r.CharInfo.CharacterID == character.CharacterName && !r.IsOnField/* && !r.gameObject.activeInHierarchy*/).FirstOrDefault();
+        res = WaveCharcters.Where(r => r.CharInfo.CharacterID == character.CharacterName && !r.IsOnField && ((r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script && !r.gameObject.activeInHierarchy)
+        || (r.CharInfo.BaseCharacterType != BaseCharType.MinionType_Script))).FirstOrDefault();
         if (res == null)
         {
             res = CreateChar(character.CharacterName);
@@ -134,13 +135,30 @@ public class WaveManagerScript : MonoBehaviour
     {
         float timer = 0;
         BaseCharacter newChar;
+        StartingCharInWave = new List<StartingCharactersForWaveClass>();
+        foreach (WaveCharClass waveChar in wavePhase.ListOfEnemy)
+        {
+            if (waveChar.StartingEnemyNumber > 0)
+            {
+                StartingCharInWave.Add(new StartingCharactersForWaveClass(waveChar.StartingEnemyNumber, waveChar.TypeOfCharacter)); 
+            }
+        }
+
+        foreach (StartingCharactersForWaveClass startingCharacters in StartingCharInWave)
+        {
+            for (int i = 0; i < startingCharacters.Number; i++)
+            {
+                newChar = GetWaveCharacter(startingCharacters.TypeOfCharacter);
+                SpawChar(newChar, true, new Vector2Int());
+            }
+        }
+
         WaveCharacterInfoClass waveCharacterInfoClass;
         while (true)
         {
             timer += Time.fixedDeltaTime;
             yield return BattleManagerScript.Instance.PauseUntil();
-            if (CurrentWaveChar == null ||
-                timer > CurrentWaveChar.DelayBetweenChars && 
+            if (timer > wavePhase.DelayBetweenChars && 
                 WaveCharcters.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script).ToList().Count < wavePhase.MaxEnemyOnScreen)
             {
         yield return new WaitForSeconds(0.5f);
@@ -247,8 +265,9 @@ public class WavePhaseClass
 {
     public string name;
     public bool IsRandom = false;
-
     public int MaxEnemyOnScreen;
+    public float DelayBetweenChars;
+
     public List<WaveCharClass> ListOfEnemy = new List<WaveCharClass>();
 }
 
@@ -279,9 +298,9 @@ public class WaveCharClass
     public WaveNPCTypes NPCType = WaveNPCTypes.Minion;
     public int NumberOfCharacter;
     public WaveCharacterInfoClass TypeOfCharacter;
+    public int StartingEnemyNumber;
     public bool IsRandomSpowiningTile = true;
     [ConditionalField("IsRandomSpowiningTile", false)] public List<Vector2Int> SpowningTile = new List<Vector2Int>();
-    public float DelayBetweenChars;
 
 }
 
@@ -292,6 +311,16 @@ public class WaveEventClass
     public WaveCharacterInfoClass TypeOfCharacter;
 }
 
+public class StartingCharactersForWaveClass
+{
+    public int Number;
+    public WaveCharacterInfoClass TypeOfCharacter;
 
+    public StartingCharactersForWaveClass(int num, WaveCharacterInfoClass typeOfCharacter)
+    {
+        Number = num;
+        TypeOfCharacter = typeOfCharacter;
+    }
+}
 
 

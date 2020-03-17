@@ -24,7 +24,7 @@ public class CharacterInfoScript : MonoBehaviour
     public CharacterNameType CharacterID;
     public List<ScriptableObjectAttackType> CurrentParticlesAttackTypeInfo = new List<ScriptableObjectAttackType>();
     public List<ScriptableObjectAttackTypeOnBattlefield> CurrentOnBattleFieldAttackTypeInfo = new List<ScriptableObjectAttackTypeOnBattlefield>();
-    public AttackParticleTypes ParticleID;
+    public AttackParticleType ParticleID;
     public ElementalType Elemental;
     public CharacterClassType ClassType;
     public CharacterLevelType CharacterLevel;

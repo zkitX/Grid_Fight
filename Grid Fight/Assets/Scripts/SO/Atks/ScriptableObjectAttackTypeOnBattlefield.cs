@@ -6,21 +6,32 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/AttackTypeOnBattleField")]
 public class ScriptableObjectAttackTypeOnBattlefield : ScriptableObjectAttackBase
 {
-    public List<BulletBehaviourInfoClassOnBattleField> BulletTrajectories = new List<BulletBehaviourInfoClassOnBattleField>();
+    public BattleFieldAttackType AtkType;
+    public List<BulletBehaviourInfoClassOnBattleFieldClass> BulletTrajectories = new List<BulletBehaviourInfoClassOnBattleFieldClass>();
     public WaveStatsType StatToCheck;
     public ValueCheckerType ValueChecker;
     public float PercToCheck;
     public float Chances;
-    public AttackParticleTypes ParticlesID;
-    
 }
 
 
 [System.Serializable]
-public class BulletBehaviourInfoClassOnBattleField
+public class BulletBehaviourInfoClassOnBattleFieldClass
 {
     public float Delay;
-    public List<Vector2Int> BulletEffectTiles = new List<Vector2Int>();
+    public List<BattleFieldAttackTileClass> BulletEffectTiles = new List<BattleFieldAttackTileClass>();
+}
+[System.Serializable]
+public class BattleFieldAttackTileClass
+{
+    [HideInInspector] public Vector2Int Pos;
     public bool HasEffect = false;
     [ConditionalField("HasEffect", false)] public List<ScriptableObjectAttackEffect> Effects = new List<ScriptableObjectAttackEffect>();
+    public bool HasDifferentParticles = false;
+    [ConditionalField("HasDifferentParticles", false)] public AttackParticleType ParticlesID;
+
+    public BattleFieldAttackTileClass(Vector2Int pos)
+    {
+        Pos = pos;
+    }
 }

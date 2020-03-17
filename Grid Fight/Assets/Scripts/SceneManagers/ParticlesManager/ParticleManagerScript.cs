@@ -52,7 +52,7 @@ public class ParticleManagerScript : MonoBehaviour
         }
     }
 
-    public GameObject FireParticlesInPosition(AttackParticleTypes pType, AttackParticlePhaseTypes particleType, Vector3 pos, SideType side)
+    public GameObject FireParticlesInPosition(AttackParticleType pType, AttackParticlePhaseTypes particleType, Vector3 pos, SideType side)
     {
         using (FiredAttackParticle psToFire = AttackParticlesFired.Where(r => r.ParticleType == particleType && r.AttackParticle == pType && !r.PS.gameObject.activeInHierarchy).FirstOrDefault())
         {
@@ -84,7 +84,7 @@ public class ParticleManagerScript : MonoBehaviour
     }
 
 
-    public GameObject FireParticlesInTransform(AttackParticleTypes pType, AttackParticlePhaseTypes particleType, Transform parent, SideType side, bool particlesVisible)
+    public GameObject FireParticlesInTransform(AttackParticleType pType, AttackParticlePhaseTypes particleType, Transform parent, SideType side, bool particlesVisible)
     {
         //pType = AttackParticleTypes.Test_Mesh;
         using (FiredAttackParticle psToFire = AttackParticlesFired.Where(r => r.ParticleType == particleType && r.AttackParticle == pType && !r.PS.gameObject.activeInHierarchy).FirstOrDefault())
@@ -116,7 +116,7 @@ public class ParticleManagerScript : MonoBehaviour
     }
 
 
-    private GameObject GetParticleFromSO(AttackParticlePhaseTypes particleType, AttackParticleTypes pType)
+    private GameObject GetParticleFromSO(AttackParticlePhaseTypes particleType, AttackParticleType pType)
     {
         switch (particleType)
         {
@@ -176,7 +176,7 @@ public class FiredParticle
 public class FiredAttackParticle : IDisposable
 {
     public GameObject PS;
-    public AttackParticleTypes AttackParticle;
+    public AttackParticleType AttackParticle;
     public AttackParticlePhaseTypes ParticleType;
 
     public FiredAttackParticle()
@@ -184,7 +184,7 @@ public class FiredAttackParticle : IDisposable
 
     }
 
-    public FiredAttackParticle(GameObject ps, AttackParticleTypes attackParticle, AttackParticlePhaseTypes particleType)
+    public FiredAttackParticle(GameObject ps, AttackParticleType attackParticle, AttackParticlePhaseTypes particleType)
     {
         PS = ps;
         AttackParticle = attackParticle;

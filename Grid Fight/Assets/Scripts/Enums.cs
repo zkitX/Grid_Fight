@@ -176,6 +176,13 @@ public enum WalkingSideType
     Both
 }
 
+public enum BattleFieldAttackType
+{
+    AreaAttack,
+    OnTarget,
+    OnItSelf
+}
+
 public enum BattleState
 {
     Initialization,
@@ -325,6 +332,7 @@ public enum WaveStatsType
 
 }
 
+
 public enum ValueCheckerType
 {
     LessThan,
@@ -454,7 +462,7 @@ public enum ParticlesType
     Stage00BossDeathSmoke
 }
 
-public enum AttackParticleTypes
+public enum AttackParticleType
 {
     Stage00_Minion_Valley = 13,
     Stage00_Minion_Forest = 14,

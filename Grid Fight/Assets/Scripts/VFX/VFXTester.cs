@@ -42,9 +42,9 @@ public class VFXTester : MonoBehaviour
 
         }
 
-        for (int i = 0; i <= Enum.GetValues(typeof(AttackParticleTypes)).Cast<int>().Last(); i++)
+        for (int i = 0; i <= Enum.GetValues(typeof(AttackParticleType)).Cast<int>().Last(); i++)
         {
-            ParticleType.options.Add(new TMPro.TMP_Dropdown.OptionData(((AttackParticleTypes)i).ToString()));
+            ParticleType.options.Add(new TMPro.TMP_Dropdown.OptionData(((AttackParticleType)i).ToString()));
 
         }
 
@@ -95,7 +95,7 @@ public class VFXTester : MonoBehaviour
             currentCharacter.CurrentBattleTiles.Add(cbts);
         }
         currentCharacter.NextAttackLevel = (CharacterLevelType)Enum.Parse(typeof(CharacterLevelType), ParticleLevel.options[ParticleLevel.value].text);
-        currentCharacter.CharInfo.ParticleID = (AttackParticleTypes)Enum.Parse(typeof(AttackParticleTypes), ParticleType.options[ParticleType.value].text);
+        currentCharacter.CharInfo.ParticleID = (AttackParticleType)Enum.Parse(typeof(AttackParticleType), ParticleType.options[ParticleType.value].text);
         currentCharacter.CharInfo.SpeedStats.AttackSpeedRatio = AttackSpeed.value;
         currentCharacter.UMS.Side = SideType.RightSide;
         currentCharacter.CharInfo.ClassType = (CharacterClassType)Enum.Parse(typeof(CharacterClassType), CharacterClass.options[CharacterClass.value].text);

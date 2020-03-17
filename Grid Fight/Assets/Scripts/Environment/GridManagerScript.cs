@@ -280,21 +280,19 @@ public class GridManagerScript : MonoBehaviour
         return null;
     }
 
-    public void StartOnBattleFieldAttackCo(CharacterInfoScript cInfo, ScriptableObjectAttackTypeOnBattlefield atk, Vector2Int basePos, UnitManagementScript ums, BaseCharacter character)
+    public void StartOnBattleFieldAttackCo(CharacterInfoScript cInfo, ScriptableObjectAttackTypeOnBattlefield atk, UnitManagementScript ums, BaseCharacter character)
     {
-        basePos.y = ums.Facing == FacingType.Left ? YGridSeparator : YGridSeparator-1;
-        foreach (BulletBehaviourInfoClassOnBattleField item in atk.BulletTrajectories)
+        foreach (BulletBehaviourInfoClassOnBattleFieldClass item in atk.BulletTrajectories)
         {
-            foreach (Vector2Int target in item.BulletEffectTiles)
+            foreach (BattleFieldAttackTileClass target in item.BulletEffectTiles)
             {
-                Vector2Int res = ums.Facing == FacingType.Left ? basePos - target : basePos + target;
-                if (isPosOnField(res))
+                if (isPosOnField(target.Pos))
                 {
-                    BattleTileScript bts = GetBattleTile(res);
+                    BattleTileScript bts = GetBattleTile(target.Pos);
                     if(bts._BattleTileState != BattleTileStateType.Blocked)
                     {
-                        bts.BattleTargetScript.SetAttack(item.Delay, BattleManagerScript.Instance.VFXScene ? cInfo.ParticleID : atk.ParticlesID, res, cInfo.DamageStats.BaseDamage, cInfo.Elemental, character,
-                            item.Effects);
+                        bts.BattleTargetScript.SetAttack(item.Delay, BattleManagerScript.Instance.VFXScene ? cInfo.ParticleID : target.ParticlesID, target.Pos, cInfo.DamageStats.BaseDamage, cInfo.Elemental, character,
+                            target.Effects);
                     }
                 }
             }
@@ -321,6 +319,24 @@ public class GridManagerScript : MonoBehaviour
         return res;
     }
 
+    public bool IsEnemyOnTileAttackRange(List<BattleFieldAttackTileClass> atkRange, Vector2Int basePos)
+    {
+        bool res = false;
+        foreach (BattleFieldAttackTileClass target in atkRange)
+        {
+            if (isPosOnField(target.Pos))
+            {
+                res = IsEnemyOnTile(target.Pos);
+                if (res)
+                {
+                    return true;
+                }
+            }
+
+        }
+        return res;
+    }
+
     public bool IsEnemyOnTile(Vector2Int pos)
     {
         return GetBattleTile(pos)._BattleTileState == BattleTileStateType.Occupied ? true : false;
@@ -328,19 +344,18 @@ public class GridManagerScript : MonoBehaviour
 
 
 
-    public IEnumerator OnBattleFieldAttackCo(CharacterInfoScript cInfo, ScriptableObjectAttackTypeOnBattlefield atk, Vector2Int basePos, AttackParticleTypes atkPS)
+    public IEnumerator OnBattleFieldAttackCo(CharacterInfoScript cInfo, ScriptableObjectAttackTypeOnBattlefield atk, Vector2Int basePos, AttackParticleType atkPS)
     {
-        basePos.y = YGridSeparator;
-        foreach (BulletBehaviourInfoClassOnBattleField item in atk.BulletTrajectories)
+        foreach (BulletBehaviourInfoClassOnBattleFieldClass item in atk.BulletTrajectories)
         {
             float timer = 0;
-            foreach (Vector2Int target in item.BulletEffectTiles)
+            foreach (BattleFieldAttackTileClass target in item.BulletEffectTiles)
             {
-                if(isPosOnField(basePos - target))
+                if(isPosOnField(target.Pos))
                 {
                     GameObject go;
-                    go = Instantiate(TargetIndicator, GetBattleTile(basePos - target).transform.position, Quaternion.identity);
-                    go.GetComponent<BattleTileTargetScript>().StartTarget(item.Delay, atkPS, basePos - target, cInfo.DamageStats.BaseDamage, cInfo.Elemental);
+                    go = Instantiate(TargetIndicator, GetBattleTile(target.Pos).transform.position, Quaternion.identity);
+                    go.GetComponent<BattleTileTargetScript>().StartTarget(item.Delay, atkPS, target.Pos, cInfo.DamageStats.BaseDamage, cInfo.Elemental);
                 }
             }
             while (timer <= item.Delay)

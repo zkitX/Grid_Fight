@@ -40,6 +40,11 @@ public class GridFightSayDialog : SayDialog
 
         Debug.Log(text);
         AnimSpeedChanger(1);
+        while (BattleManagerScript.Instance == null)
+        {
+            yield return null;
+        }
+
         BattleManagerScript.Instance.FungusState = FungusDialogType.Dialog;
 
         if (!IsAlreadySubscribed)

@@ -59,9 +59,9 @@ public class CharTesterScript : MonoBehaviour
 
         }
 
-        for (int i = 0; i <= Enum.GetValues(typeof(AttackParticleTypes)).Cast<int>().Last(); i++)
+        for (int i = 0; i <= Enum.GetValues(typeof(AttackParticleType)).Cast<int>().Last(); i++)
         {
-            ParticleType.options.Add(new TMP_Dropdown.OptionData(((AttackParticleTypes)i).ToString()));
+            ParticleType.options.Add(new TMP_Dropdown.OptionData(((AttackParticleType)i).ToString()));
 
         }
 
@@ -126,7 +126,7 @@ public class CharTesterScript : MonoBehaviour
     public void ParticlesSetup()
     {
         currentCharacter.CharInfo.CharacterLevel = (CharacterLevelType)Enum.Parse(typeof(CharacterLevelType), CharacterLevel.options[CharacterLevel.value].text);
-        currentCharacter.CharInfo.ParticleID = (AttackParticleTypes)Enum.Parse(typeof(AttackParticleTypes), ParticleType.options[ParticleType.value].text);
+        currentCharacter.CharInfo.ParticleID = (AttackParticleType)Enum.Parse(typeof(AttackParticleType), ParticleType.options[ParticleType.value].text);
         currentCharacter.CharInfo.SpeedStats.AttackSpeedRatio = AttackSpeed.value;
         currentCharacter.CharInfo.SpeedStats.BulletSpeed = SpeedOfBullets.value;
         currentCharacter.CharInfo.CurrentParticlesAttackTypeInfo = AttacksTypeInfo.Where(r => r.CharacterClass == currentCharacter.CharInfo.ClassType).ToList();

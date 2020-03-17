@@ -265,9 +265,9 @@ public class MinionType_Script : BaseCharacter
 
     public virtual bool GeneralTestAI()
     {
-        List<Vector2Int> tilesToCheck = new List<Vector2Int>();
+        List<BattleFieldAttackTileClass> tilesToCheck = new List<BattleFieldAttackTileClass>();
 
-        foreach (BulletBehaviourInfoClassOnBattleField item in ((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories)
+        foreach (BulletBehaviourInfoClassOnBattleFieldClass item in ((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories)
         {
             tilesToCheck.AddRange(item.BulletEffectTiles);
         }

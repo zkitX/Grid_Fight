@@ -4,15 +4,15 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(BulletBehaviourInfoClassOnBattleField))]
+[CustomEditor(typeof(ScriptableObjectAttackTypeOnBattlefield))]
 public class ScriptableObjectAttackTypeOnBattlefieldEditor : Editor
 {
 
-    public Dictionary<GridTileInfo, bool> TilesInfo = new Dictionary<GridTileInfo, bool>();
+    public List<BattleFieldTileInfo> TilesInfo = new List<BattleFieldTileInfo>();
     bool firstOpen = true;
-    GridTileInfo differentGti = null;
+    BattleFieldAttackTileClass differentbfatc = null;
 
-
+    BattleFieldAttackTileClass[] selection;
     public override void OnInspectorGUI()
     {
         GUIStyle style = new GUIStyle();
@@ -20,62 +20,111 @@ public class ScriptableObjectAttackTypeOnBattlefieldEditor : Editor
         base.OnInspectorGUI();
         //test = false;
         ScriptableObjectAttackTypeOnBattlefield origin = (ScriptableObjectAttackTypeOnBattlefield)target;
-       
+        BattleFieldTileInfo bfti = null;
+        BattleFieldAttackTileClass bfatc;
+        
         if (origin.BulletTrajectories.Count > 0)
         {
-            EditorGUILayout.Space();
-            for (int x = 0; x < 6; x++)
+            if (firstOpen)
             {
-                EditorGUILayout.BeginHorizontal();
-                for (int y = 0; y < 12; y++)
-                {
-                    //Debug.Log(x + "   " + y);
-                   /* bti = origin.GridInfo.Where(r => r.Pos == new Vector2Int(x, y)).First();
-                    if (firstOpen)
-                    {
-                        gti = new GridTileInfo(new Vector2Int(x, y), bti);
-                        TilesInfo.Add(gti, bti.BattleTileState == BattleTileStateType.Empty ? true : false);
-                    }
-                    else
-                    {
-                        gti = TilesInfo.Where(r => r.Key.Pos == new Vector2Int(x, y)).First().Key;
-                    }*/
+                selection = new BattleFieldAttackTileClass[origin.BulletTrajectories.Count];
+            } 
 
-                    showClose = EditorGUILayout.ToggleLeft(x + "," + y, TilesInfo.Where(r => r.Key.Pos == new Vector2Int(x, y)).First().Value, GUILayout.Width(40));
-                    /*if (showClose != TilesInfo[gti])
+            for (int i = 0; i < origin.BulletTrajectories.Count; i++)
+            {
+                
+                EditorGUILayout.Space();
+                for (int x = 0; x < 6; x++)
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    for (int y = 0; y < 12; y++)
                     {
+                        //Debug.Log(x + "   " + y);
+                        bfatc = origin.BulletTrajectories[i].BulletEffectTiles.Where(r => r.Pos == new Vector2Int(x, y)).FirstOrDefault();
+                        if (firstOpen && bfatc != null)
+                        {
+                            bfti = new BattleFieldTileInfo(origin.BulletTrajectories[i], bfatc);
+                            TilesInfo.Add(bfti);
+                        }
+                        showClose = EditorGUILayout.ToggleLeft(x + "," + y, bfatc != null ? true : false, GUILayout.Width(40));
                         if (showClose)
                         {
-                            differentGti = gti;
+                            if (bfatc == null)
+                            {
+                                bfatc = new BattleFieldAttackTileClass(new Vector2Int(x, y));
+                                bfti = new BattleFieldTileInfo(origin.BulletTrajectories[i], bfatc);
+                                origin.BulletTrajectories[i].BulletEffectTiles.Add(bfatc);
+                                TilesInfo.Add(bfti);
+                            }
 
+                            differentbfatc = bfatc;
                         }
-                        else
+                        else if (!showClose && bfatc != null)
                         {
-                            differentGti = null;
-
+                            TilesInfo.Remove(bfti);
+                            origin.BulletTrajectories[i].BulletEffectTiles.Remove(bfatc);
                         }
                     }
-                    TilesInfo[gti] = showClose;
-                    bti.BattleTileState = showClose ? BattleTileStateType.Empty : BattleTileStateType.Blocked;
-                    //Debug.Log(showClose);*/
+                    EditorGUILayout.EndHorizontal();
                 }
-                EditorGUILayout.EndHorizontal();
-            }
 
-            if (differentGti != null)
-            {
-                ShowTileObject(ref differentGti.Tile);
+                if (differentbfatc != null)
+                {
+                    selection[i] = differentbfatc;
+                    ShowTileObject(ref differentbfatc);
+                }
+                else if(selection[i] != null)
+                {
+                    ShowTileObject(ref selection[i]);
+                }
+                differentbfatc = null;
+
+                
             }
+            
+
+           
             firstOpen = false;
         }
 
     }
 
 
-    private void ShowTileObject(ref BattleTileInfo bti)
+    private void ShowTileObject(ref BattleFieldAttackTileClass bfatc)
     {
-        bti.BattleTileT = (BattleTileType)EditorGUILayout.EnumPopup("BattleTileType", bti.BattleTileT);
-        bti.WalkingSide = (WalkingSideType)EditorGUILayout.EnumPopup("WalkingSideType", bti.WalkingSide);
-        bti.TileSprite = (Sprite)EditorGUILayout.ObjectField("Sprite", bti.TileSprite, typeof(Sprite), true, GUILayout.Width(512), GUILayout.Height(512));
+        bfatc.HasEffect = EditorGUILayout.ToggleLeft("HasEffect", bfatc.HasEffect);
+        if (bfatc.HasEffect)
+        {
+            var list = bfatc.Effects;
+            int newCount = Mathf.Max(0, EditorGUILayout.IntField("size", list.Count));
+            while (newCount < list.Count)
+                list.RemoveAt(list.Count - 1);
+            while (newCount > list.Count)
+                list.Add(null);
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                bfatc.Effects[i] = (ScriptableObjectAttackEffect)EditorGUILayout.ObjectField("Effect", bfatc.Effects[i], typeof(ScriptableObjectAttackEffect), false);   //"Effect", bfatc.Effects, typeof(ScriptableObjectAttackEffect), false
+            }
+        }
+
+        bfatc.HasDifferentParticles = EditorGUILayout.ToggleLeft("HasDifferentParticles", bfatc.HasDifferentParticles);
+        if (bfatc.HasDifferentParticles)
+        {
+            bfatc.ParticlesID = (AttackParticleType)EditorGUILayout.EnumPopup("AttackParticleType", bfatc.ParticlesID);
+        }
+
+    }
+}
+
+public class BattleFieldTileInfo
+{
+    public BulletBehaviourInfoClassOnBattleFieldClass Parent;
+    public BattleFieldAttackTileClass Tile;
+
+    public BattleFieldTileInfo(BulletBehaviourInfoClassOnBattleFieldClass parent, BattleFieldAttackTileClass tile)
+    {
+        Parent = parent;
+        Tile = tile;
     }
 }

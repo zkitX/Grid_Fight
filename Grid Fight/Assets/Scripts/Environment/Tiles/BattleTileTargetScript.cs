@@ -12,7 +12,7 @@ public class BattleTileTargetScript : MonoBehaviour
     {
         StartCoroutine(TargetAnim(duration));
     }
-    public void StartTarget(float duration, AttackParticleTypes atkPS, Vector2Int pos, float damage, ElementalType ele)
+    public void StartTarget(float duration, AttackParticleType atkPS, Vector2Int pos, float damage, ElementalType ele)
     {
         Pos = pos;
         Damage = damage;
@@ -40,7 +40,7 @@ public class BattleTileTargetScript : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private IEnumerator TargetAnim(float duration, AttackParticleTypes atkPS)
+    private IEnumerator TargetAnim(float duration, AttackParticleType atkPS)
     {
         float timer = 0;
         //  Debug.Log(duration);

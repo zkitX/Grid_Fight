@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Particles/AttackParticle")]
 public class ScriptableObjectAttackParticle : ScriptableObject
 {
-    public AttackParticleTypes PSType;
+    public AttackParticleType PSType;
     public GameObject CastRightPS;
     public GameObject BulletRightPS;
     public GameObject ImpactRightPS;
