@@ -30,6 +30,8 @@ public class CharacterInfoScript : MonoBehaviour
     public CharacterLevelType CharacterLevel;
     public bool UseLayeringSystem = true;
 
+    [Tooltip("Length of time, in seconds, that the character will take to respawn once killed")] public float CharacterRespawnLength = 180f;
+
     [HideInInspector]
     public CharacterSelectionType CharacterSelection;
     // public List<CharactersRelationshipClass> CharacterRelationships = new List<CharactersRelationshipClass>();
@@ -91,6 +93,23 @@ public class CharacterInfoScript : MonoBehaviour
         [HideInInspector] public float B_Base;
         [HideInInspector] public float B_Regeneration;
         [HideInInspector] public float B_BaseStaminaRegeneration;
+        [HideInInspector] public float B_LevelMultiplier;
+    }
+
+    public ShieldStastsClass ShieldStats;
+    [System.Serializable]
+    public class ShieldStastsClass
+    {
+        public float Shield = 50;
+        public float Base = 50;
+        public float Regeneration = 8;
+        public float BaseShieldRegeneration = 8;
+        public float LevelMultiplier = 50;
+
+        [HideInInspector] public float B_Shield;
+        [HideInInspector] public float B_Base;
+        [HideInInspector] public float B_Regeneration;
+        [HideInInspector] public float B_BaseShieldRegeneration;
         [HideInInspector] public float B_LevelMultiplier;
     }
 
@@ -165,6 +184,14 @@ public class CharacterInfoScript : MonoBehaviour
         }
     }
 
+    public float ShieldPerc
+    {
+        get
+        {
+            return (ShieldStats.Shield * 100) / ShieldStats.Base;
+        }
+    }
+
     public float BaseSpeed
     {
         get
@@ -226,6 +253,22 @@ public class CharacterInfoScript : MonoBehaviour
         }
     }
 
+    public float Shield
+    {
+        get
+        {
+            return ShieldStats.Shield <= 0 ? 0 : ShieldStats.Shield;
+        }
+        set
+        {
+            ShieldStats.Shield = Mathf.Clamp(value, 0f, ShieldStats.Base);
+            if (ShieldStats.Shield > ShieldStats.Base)
+            {
+                Shield = ShieldStats.Base;
+            }
+        }
+    }
+
 
     private void Awake()
     {
@@ -273,6 +316,7 @@ public class CharacterInfoScript : MonoBehaviour
         {
             Stamina = StaminaStats.Stamina + StaminaStats.Regeneration / 50;
             Health = HealthStats.Health + HealthStats.Regeneration / 50;
+            Shield = ShieldStats.Shield + ShieldStats.Regeneration / 50;
         }
     }
 

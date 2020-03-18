@@ -32,8 +32,6 @@ public class NewIManager : MonoBehaviour
         StartCoroutine(timeBoxUpdater);
     }
 
-
-
     IEnumerator UpdateTimerText()
     {
         while (WaveManagerScript.Instance == null) yield return null;
@@ -71,8 +69,12 @@ public class NewIManager : MonoBehaviour
 
     public void SetUICharacterToButton(CharacterType_Script character, CharacterSelectionType buttonToAssignTo)
     {
-
         GetvitalityBoxOfAssignedButton(buttonToAssignTo, character.UMS.Side).SetCharacter(character.CharInfo);
+    }
+
+    public void ToggleUICharacterDead(CharacterType_Script character, bool state)
+    {
+        GetvitalityBoxOfCharacter(character.CharInfo.CharacterID, character.UMS.Side).ToggleDead(state);
     }
 
     public void UpdateVitalitiesOfCharacter(CharacterInfoScript character, SideType side)
@@ -92,6 +94,10 @@ public class NewIManager : MonoBehaviour
 
     public string GetButtonTypeString(CharacterSelectionType input)
     {
+        return "";
+
+        //Use this bit if each selection should have unique text
+        
         switch (input)
         {
             case (CharacterSelectionType.Up):

@@ -37,20 +37,20 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
             ItemType itemType = ItemType.PowerUP_FullRecovery;
             switch (ItemPowerUpInfo.StatsToAffect)
             {
-                case (BuffDebuffStatsType.HealthStats_Health_Overtime):
+                case (BuffDebuffStatsType.HealthStats_BaseHealthRegeneration):
                     itemType = ItemType.PowerUP_Health;
                     break;
-                case (BuffDebuffStatsType.StaminaStats_Stamina_Overtime):
+                case (BuffDebuffStatsType.StaminaStats_Regeneration):
                     itemType = ItemType.PowerUp_Speed;
                     break;
-                case (BuffDebuffStatsType.StaminaStats_Regeneration):
+                case (BuffDebuffStatsType.StaminaStats_LevelMultiplier):
                     itemType = ItemType.PowerUP_Stamina;
                     break;
-                case (BuffDebuffStatsType.RapidAttack_DamageMultiplier):
+                case (BuffDebuffStatsType.RapidAttack_CriticalChance):
                     itemType = ItemType.PowerUp_Damage;
                     break;
                 default:
-                    Debug.LogError("Error with potion type in event collection");
+                    Debug.LogError("Error with potion type in event collection... Collected powerup effect is: " + ItemPowerUpInfo.StatsToAffect.ToString());
                     break;
             }
             EventManager.Instance?.AddPotionCollected(itemType);

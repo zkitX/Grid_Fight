@@ -330,6 +330,8 @@ public class BattleManagerScript : MonoBehaviour
                     ControllerType ct = CurrentSelectedCharacters.Where(r => r.Value.Character.CharInfo.CharacterID == cName && r.Value.Character.UMS.Side == side).First().Key;
                     SetCharOnBoard(ct, item.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeBattleTile(item.UMS.WalkingSide, item.UMS.Pos).Pos);
                     SelectCharacter(ct, (CharacterType_Script)item);
+
+                    CurrentSelectedCharacters[ct].NextSelectionChar.NextSelectionChar = item.CharInfo.CharacterSelection;
                     ((CharacterType_Script)item).SetCharSelected(true, ct);
                     return;
                 }
@@ -734,7 +736,6 @@ public class BattleManagerScript : MonoBehaviour
                 StopLoadingNewCharacter(cb.CharInfo.CharacterID, playerController);
             }
         }
-
     }
 
     public void Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType characterSelection, ControllerType playerController)
@@ -878,6 +879,8 @@ public class BattleManagerScript : MonoBehaviour
 
     public void CurrentCharacterStartDefending(ControllerType playerController)
     {
+        if (CurrentBattleState != BattleState.Battle) return;
+
         if (CurrentSelectedCharacters[playerController].Character != null)
         {
             CurrentSelectedCharacters[playerController].Character.StartDefending();
@@ -891,8 +894,6 @@ public class BattleManagerScript : MonoBehaviour
             CurrentSelectedCharacters[playerController].Character.StopDefending();
         }
     }
-
-
 
     #endregion
 

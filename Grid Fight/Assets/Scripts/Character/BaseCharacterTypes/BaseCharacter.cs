@@ -60,6 +60,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public bool IsSwapping = false;
     public bool SwapWhenPossible = false;
     public GameObject chargeParticles = null;
+    protected bool canDefend = true;
     protected bool isDefending = false;
     public int shotsLeftInAttack
     {
@@ -543,27 +544,64 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     #endregion
     #region Defence
+
+    protected float defenceCost = 20f;
+    protected float partialDefenceCost = 10f;
+    protected float defenceAnimSpeedMultiplier = 5f;
+    protected float staminaRegenOnPerfectBlock = 10f;
     public void StartDefending()
     {
         SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
-        SpineAnim.SetAnimationSpeed(5);
-        isDefending = true;
-        DefendingHoldingTimer = 0;
-        StartCoroutine(Defending_Co());
+        SpineAnim.SetAnimationSpeed(defenceAnimSpeedMultiplier);
+
+        if (canDefend && CharInfo.Shield >= defenceCost)
+        {
+            CharInfo.Shield -= defenceCost;
+            isDefending = true;
+            DefendingHoldingTimer = 0;
+            StartCoroutine(Defending_Co());
+        }
+        else
+        {
+            StartCoroutine(RejectDefending_Co());
+        }
+    }
+
+    private IEnumerator RejectDefending_Co()
+    {
+        float timer = (SpineAnim.GetAnimLenght(CharacterAnimationStateType.Defending) / defenceAnimSpeedMultiplier) * 0.25f;
+        while(timer != 0f)
+        {
+            timer = Mathf.Clamp(timer - Time.deltaTime, 0f, (SpineAnim.GetAnimLenght(CharacterAnimationStateType.Defending) / defenceAnimSpeedMultiplier) * 0.25f);
+            yield return null;
+        }
+        SetAnimation(CharacterAnimationStateType.Idle, true);
+        yield return null;
+    }
+
+    private IEnumerator ReloadDefending_Co()
+    {
+        StopDefending();
+        canDefend = false;
+        while (CharInfo.ShieldPerc != 100f)
+        {
+            yield return null;
+        }
+        canDefend = true;
     }
     
     private IEnumerator Defending_Co()
     {
-        while (isDefending)
+        while (isDefending && CharInfo.Shield > 0f && canDefend)
         {
             if(SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle)
             {
                 SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
                 SpineAnim.SetAnimationSpeed(5);
             }
-
             yield return null;
             DefendingHoldingTimer += Time.deltaTime;
+            if (CharInfo.ShieldPerc == 0) StartCoroutine(ReloadDefending_Co());
         }
         DefendingHoldingTimer = 0;
     }
@@ -575,9 +613,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             isDefending = false;
             SetAnimation(CharacterAnimationStateType.Idle, true, 0.1f);
         }
-        
-    }
 
+    }
 
     #endregion
     #region Move
@@ -1066,7 +1103,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         HealthChangedType healthCT = HealthChangedType.Damage;
         bool res;
-        if(SpineAnim.CurrentAnim == CharacterAnimationStateType.Defending)
+        if(isDefending)
         {
             GameObject go;
             if(DefendingHoldingTimer < CharInfo.DefenceStats.Invulnerability)
@@ -1074,14 +1111,15 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 damage = 0;
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldTotalDefence);
                 go.transform.position = transform.position;
+                CharInfo.Stamina += staminaRegenOnPerfectBlock;
                 EventManager.Instance.AddBlock(this, BlockInfo.BlockType.full);
-
             }
             else
             {
                 damage = damage - CharInfo.DefenceStats.BaseDefence;
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldNormal);
                 go.transform.position = transform.position;
+                CharInfo.Shield -= partialDefenceCost;
                 EventManager.Instance.AddBlock(this, BlockInfo.BlockType.partial);
 
                 damage = damage < 0 ? 1 : damage;

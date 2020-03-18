@@ -24,7 +24,7 @@ MonoBehaviour:
     isHappening: 0
     checker: {fileID: 0}
     ceaseOnHappened: 1
-    TimedCheckType: 0
+    TimedCheckType: 5
     deathCharacterID: 0
     onlyOnDeath: 0
     deathsRequired: 0
@@ -55,6 +55,9 @@ MonoBehaviour:
     staminaChangeValue: 0
     requireEventTriggerDuringCheck: 0
     EventTriggerRequired: {fileID: 0}
+    potionType: 5
+    potionsRequired: 1
+    potionCollectedLastFrame: 1
   - Name: wait until koniko dies
     hasHappened: 0
     isHappening: 0
@@ -91,6 +94,9 @@ MonoBehaviour:
     staminaChangeValue: 0
     requireEventTriggerDuringCheck: 0
     EventTriggerRequired: {fileID: 0}
+    potionType: 5
+    potionsRequired: 1
+    potionCollectedLastFrame: 1
   - Name: 3 lady bush spawn
     hasHappened: 0
     isHappening: 0
@@ -127,6 +133,9 @@ MonoBehaviour:
     staminaChangeValue: 0
     requireEventTriggerDuringCheck: 0
     EventTriggerRequired: {fileID: 0}
+    potionType: 5
+    potionsRequired: 1
+    potionCollectedLastFrame: 1
   inhibitorRule: 1
   inhibitors: []
   ignoreQueue: 0

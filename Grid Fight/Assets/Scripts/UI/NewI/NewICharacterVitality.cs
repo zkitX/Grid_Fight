@@ -10,15 +10,23 @@ public class NewICharacterVitality : MonoBehaviour
 
     public SideType mapSide = SideType.LeftSide;
     [SerializeField] protected Image healthBar;
+    protected float previousHealthChange;
     [SerializeField] protected Image staminaBar;
     [SerializeField] protected Image specialBar;
+    [SerializeField] protected Image shieldBar;
+    [SerializeField] protected Gradient shieldColors;
     protected Animator animator;
 
     [SerializeField] protected TextMeshProUGUI selectionDiamondText;
+    [SerializeField] protected Image deathIcon = null;
     [SerializeField] protected Image characterIconIdle;
     [SerializeField] protected Image characterIconSelected;
     [SerializeField] protected TextMeshProUGUI characterName;
     [SerializeField] protected TextMeshProUGUI deadText;
+    protected bool charDead = false;
+
+    protected Vector3 damageSliceOrigin;
+    [SerializeField] protected GameObject damageSlice;
 
     protected Color[] baseSelectionColors;
     [SerializeField] protected Image[] backgroundImages;
@@ -31,11 +39,12 @@ public class NewICharacterVitality : MonoBehaviour
 
     IEnumerator HealthLerper;
     IEnumerator StaminaLerper;
+    IEnumerator ShieldLerper;
     IEnumerator SpecialLerper;
-
 
     private void Awake()
     {
+        damageSliceOrigin = damageSlice.transform.position;
         selectionDiamondText.text = NewIManager.Instance.GetButtonTypeString(assignedButton);
         baseSelectionColors = new Color[backgroundImages.Length];
         for (int i = 0; i < backgroundImages.Length; i++)
@@ -53,9 +62,12 @@ public class NewICharacterVitality : MonoBehaviour
             return;
         }
         ToggleVisible(true);
-        ToggleDeathTextVisablity(false);
+        ToggleDead(false);
 
         assignedCharDetails = character;
+
+        previousHealthChange = assignedCharDetails.HealthPerc / 100f;
+        if(shieldBar != null) shieldBar.color = shieldColors.Evaluate(assignedCharDetails.ShieldPerc / 100f);
         characterName.text = assignedCharDetails.Name;
         characterIconSelected.sprite = assignedCharDetails.CharacterIcons[1];
         characterIconIdle.sprite = assignedCharDetails.CharacterIcons[0];
@@ -75,6 +87,68 @@ public class NewICharacterVitality : MonoBehaviour
         //ToggleDeathTextVisablity(false);
     }
 
+    public void ToggleDead(bool state)
+    {
+        charDead = state;
+        if (state)
+        {
+            DeselectCharacter();
+            ToggleDeathTextVisablity(true);
+            StartCoroutine(ReviveSequence());
+        }
+        else
+        {
+            ToggleDeathTextVisablity(false);
+        }
+    }
+
+    IEnumerator ReviveSequence()
+    {
+        float colorDampenAmount = 0.7f;
+        Color healthBarColor = healthBar.color;
+        Color staminaBarColor = staminaBar.color;
+        Color shieldBarColor = shieldBar.color;
+        healthBar.color *= colorDampenAmount;
+        staminaBar.color *= colorDampenAmount;
+        shieldBar.color *= colorDampenAmount;
+        float healthStart = healthBar.fillAmount;
+        float staminaStart = staminaBar.fillAmount;
+        float shieldStart = shieldBar.fillAmount;
+
+        float waitLeft = assignedCharDetails.CharacterRespawnLength;
+        float startingWait = waitLeft;
+        float prog = 0f;
+        while (waitLeft != 0f)
+        {
+            waitLeft = Mathf.Clamp(waitLeft - Time.deltaTime, 0f, 9999f);
+            prog = 1f - (waitLeft / startingWait);
+            healthBar.fillAmount = Mathf.Lerp(healthStart, 1f, prog);
+            staminaBar.fillAmount = Mathf.Lerp(staminaStart, 1f, prog);
+            shieldBar.fillAmount = Mathf.Lerp(shieldStart, 1f, prog);
+            yield return null;
+        }
+
+        healthBar.color = healthBarColor;
+        staminaBar.color = staminaBarColor;
+        shieldBar.color = shieldBarColor;
+    }
+
+    public void TakeDamageSlice()
+    {
+        if (DamageSliceSequencer != null) StopCoroutine(DamageSliceSequencer);
+        DamageSliceSequencer = DamageSliceSequence();
+        StartCoroutine(DamageSliceSequencer);
+    }
+
+    IEnumerator DamageSliceSequencer = null;
+    IEnumerator DamageSliceSequence()
+    {
+        Vector3 slicePos = damageSliceOrigin + new Vector3(healthBar.rectTransform.sizeDelta.x * (assignedCharDetails.HealthPerc / 100f), 0f);
+        damageSlice.transform.position = slicePos;
+        damageSlice.GetComponentInChildren<Animator>().SetTrigger("SliceDamage");
+        yield return null;
+    }
+
     void ToggleVisible(bool state)
     {
         foreach (Image img in GetComponentsInChildren<Image>())
@@ -89,23 +163,21 @@ public class NewICharacterVitality : MonoBehaviour
 
     void ToggleDeathTextVisablity(bool state)
     {
-        deadText.enabled = state;
+        deadText.enabled = /*state*/false; //Just set to false while it's not being used and the skull icon is
+        if (deathIcon != null) deathIcon.enabled = state;
     }
 
     public void UpdateVitalities()
     {
-
-        if (assignedCharDetails == null) return;
-
-        if (assignedCharDetails.HealthPerc == 0f)
-        {
-            SetCharacter(null);
-            ToggleDeathTextVisablity(true);
-            return;
-        }
+        if (assignedCharDetails == null || charDead) return;
 
         if (assignedCharDetails.HealthPerc / 100f != healthBar.fillAmount)
         {
+            if(assignedCharDetails.HealthPerc / 100f < healthBar.fillAmount && (previousHealthChange > assignedCharDetails.HealthPerc / 100f))
+            {
+                TakeDamageSlice();
+            }
+            previousHealthChange = assignedCharDetails.HealthPerc / 100f;
             if (HealthLerper != null) StopCoroutine(HealthLerper);
             HealthLerper = LerpVitality(healthBar, animationDuration, assignedCharDetails.HealthPerc / 100f);
             StartCoroutine(HealthLerper);
@@ -115,6 +187,21 @@ public class NewICharacterVitality : MonoBehaviour
             if (StaminaLerper != null) StopCoroutine(StaminaLerper);
             StaminaLerper = LerpVitality(staminaBar, animationDuration, assignedCharDetails.StaminaPerc / 100f);
             StartCoroutine(StaminaLerper);
+        }
+        if (assignedCharDetails.ShieldPerc / 100f != shieldBar.fillAmount)
+        {
+            if (ShieldLerper != null) StopCoroutine(ShieldLerper);
+            ShieldLerper = LerpVitality(shieldBar, animationDuration, assignedCharDetails.ShieldPerc / 100f, shieldColors);
+            StartCoroutine(ShieldLerper);
+        }
+
+        if (assignedCharDetails.HealthPerc == 0f)
+        {
+            ///SET UI OF THE CHARACTER TO DEAD HERE
+            ToggleDead(true);
+            //SetCharacter(null);
+            //ToggleDeathTextVisablity(true);
+            return;
         }
     }
 
@@ -191,7 +278,7 @@ public class NewICharacterVitality : MonoBehaviour
         }
     }
 
-    IEnumerator LerpVitality(Image vitality, float duration, float endFloat)
+    IEnumerator LerpVitality(Image vitality, float duration, float endFloat, Gradient colorChangeGradient = null)
     {
         float startFloat = vitality.fillAmount;
         float startDuration = duration;
@@ -199,6 +286,10 @@ public class NewICharacterVitality : MonoBehaviour
         {
             duration = Mathf.Clamp(duration - Time.deltaTime, 0f, 9999f);
             vitality.fillAmount = Mathf.Lerp(startFloat, endFloat, 1f - duration / startDuration);
+            if (colorChangeGradient != null)
+            {
+                vitality.color = colorChangeGradient.Evaluate(vitality.fillAmount);
+            }
             yield return null;
         }
         if (assignedCharDetails.HealthPerc == 0f) DeselectCharacter();

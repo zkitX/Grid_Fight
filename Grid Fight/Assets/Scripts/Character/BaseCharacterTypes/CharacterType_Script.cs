@@ -104,18 +104,38 @@ public class CharacterType_Script : BaseCharacter
             //BattleManagerScript.Instance.UpdateCurrentSelectedCharacters(this, null, UMS.Side);
             NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo, UMS.Side);
         }
-        Invoke("CharBackFromDeath", 180);
+
+        StartCoroutine(ReviveSequencer());
     }
 
+    IEnumerator ReviveSequencer()
+    {
+        float timeElapsed = 0f;
+        float timeToWait = CharInfo.CharacterRespawnLength;
+        while (timeElapsed != timeToWait)
+        {
+            if(BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle 
+                || BattleManagerScript.Instance.CurrentBattleState == BattleState.FungusPuppets)
+            {
+                timeElapsed = Mathf.Clamp(timeElapsed + Time.deltaTime, 0f, timeToWait);
+            }
+            yield return null;
+        }
+        CharBackFromDeath();
+    }
 
     public void CharBackFromDeath()
     {
         gameObject.SetActive(true);
         CharInfo.HealthStats.Health = CharInfo.HealthStats.Base;
-        NewIManager.Instance.SetUICharacterToButton(this, CharInfo.CharacterSelection);
+        CharInfo.ShieldStats.Shield = CharInfo.ShieldStats.Base;
+        CharInfo.StaminaStats.Stamina = CharInfo.StaminaStats.Base;
+        //SET UI OF THE CHARACTER TO ALIVE HERE
+        NewIManager.Instance.ToggleUICharacterDead(this, false);
+        //NewIManager.Instance.SetUICharacterToButton(this, CharInfo.CharacterSelection);
     }
 
-
+    
     public override void SetUpEnteringOnBattle()
     {
         SetAnimation(CharacterAnimationStateType.Arriving);
