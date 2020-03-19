@@ -264,9 +264,6 @@ public class CharacterType_Script : BaseCharacter
             }
         }
     }
-    
-
-
 
     private IEnumerator AtkHoldingCo()
     {
@@ -337,6 +334,7 @@ public class CharacterType_Script : BaseCharacter
         float timeCounter = 0f;
         float animProg = 0f;
         float jumpProg = 0f;
+        Vector3 newPos = Vector3.zero;
         while(timeCounter != duration)
         {
             timeCounter = Mathf.Clamp(timeCounter + Time.deltaTime, 0f, duration);
@@ -345,8 +343,8 @@ public class CharacterType_Script : BaseCharacter
             animProg = EnvironmentManager.Instance.jumpAnimationCurve.Evaluate(timeCounter / duration);
 
             SpineAnim.SetAnimationSpeed(animProg);
-            transform.position = Vector3.Lerp(startPos, endPos, jumpProg);
-
+            newPos = Vector3.Lerp(startPos, endPos, jumpProg);
+            transform.position = new Vector3(transform.position.x, newPos.y, transform.position.z);
             yield return null;
         }
     }

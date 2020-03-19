@@ -548,6 +548,7 @@ MonoBehaviour:
   isChangeGridStructure: 0
   defaultTransitionTime: 1
   fightGridMaster: {fileID: 0}
+  cameraToMove: {fileID: 0}
   currentGridIndex: 0
   fightGrids: []
   cameraTravelCurve:
@@ -572,8 +573,8 @@ MonoBehaviour:
       inWeight: 0.4513275
       outWeight: 0
     - serializedVersion: 3
-      time: 0.93611306
-      value: 0.9655486
+      time: 0.7902848
+      value: 0.9608374
       inSlope: 0.7796381
       outSlope: 0.7796381
       tangentMode: 0
@@ -605,25 +606,34 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.26912895
     - serializedVersion: 3
-      time: 0.13635573
-      value: 0.7169394
-      inSlope: 2.097408
-      outSlope: 2.097408
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.4688703
-      value: 0.9834123
-      inSlope: -0.3521358
-      outSlope: -0.3521358
+      time: 0.077753834
+      value: 0.62963474
+      inSlope: 2.601174
+      outSlope: 2.601174
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.80753124
+      outWeight: 0.10208023
     - serializedVersion: 3
-      time: 0.7
+      time: 0.49976987
+      value: 0.99814004
+      inSlope: 0.0016213584
+      outSlope: 0.0016213584
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.49110374
+    - serializedVersion: 3
+      time: 0.9289317
+      value: 0.64605826
+      inSlope: -2.6376877
+      outSlope: -2.6376877
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.21849483
+      outWeight: 0.589597
+    - serializedVersion: 3
+      time: 1
       value: 0
       inSlope: -6.0882745
       outSlope: -6.0882745
@@ -665,8 +675,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.73983
-      value: 0.58313096
+      time: 0.83358
+      value: 0.53573716
       inSlope: 7.8808002
       outSlope: 7.8808002
       tangentMode: 0

@@ -26,8 +26,19 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
-   
-    
+    public CharacterType_Script[] PlayerControlledCharacters
+    {
+        get
+        {
+            List<CharacterType_Script> chars = new List<CharacterType_Script>();
+            for (int i = 0; i < CurrentSelectedCharacters.Count; i++)
+            {
+                if (CurrentSelectedCharacters[(ControllerType)i].Character != null) chars.Add(CurrentSelectedCharacters[(ControllerType)i].Character);
+            }
+            return chars.ToArray();
+        }
+    }
+
 
 
 
@@ -722,6 +733,14 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
+    public void MoveToNewGrid(int gridIndex, float duration)
+    {
+        foreach(CharacterType_Script characterToMove in PlayerControlledCharacters)
+        {
+            characterToMove.StartGridJump(duration);
+        }
+        EnvironmentManager.Instance.MoveGridIntoFocus(EnvironmentManager.Instance.currentGridIndex == 0 ? 1 : 0, PlayerControlledCharacters, true, duration);
+    }
     #endregion
 
     #region Switch Input
@@ -909,7 +928,6 @@ public class BattleManagerScript : MonoBehaviour
     }
 
     #endregion
-
 
     public void RecruitCharFromWave(CharacterNameType characterID)
     {

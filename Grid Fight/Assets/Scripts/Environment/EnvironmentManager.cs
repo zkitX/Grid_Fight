@@ -15,6 +15,7 @@ public class EnvironmentManager : MonoBehaviour
 
     public float defaultTransitionTime = 3f;
     public Transform fightGridMaster;
+    public Transform cameraToMove;
     public int currentGridIndex = 0;
     public FightGrid[] fightGrids;
     public AnimationCurve cameraTravelCurve;
@@ -24,6 +25,8 @@ public class EnvironmentManager : MonoBehaviour
 
     private void Awake()
     {
+        MainCamera = Camera.main;
+        cameraToMove = MainCamera.transform;
         PopulateGrids();
         Instance = this;
     }
@@ -56,37 +59,44 @@ public class EnvironmentManager : MonoBehaviour
         }
     }
 
-    public void MoveGridIntoFocus(int destinationGridIndex, bool smoothMove = true, float transitionDuration = 1234.56789f)
+    public void MoveGridIntoFocus(int destinationGridIndex, CharacterType_Script[] charsToMove, bool smoothMove = true, float transitionDuration = 1234.56789f)
     {
-        MoveGridIntoFocus(fightGrids[destinationGridIndex], smoothMove, transitionDuration);
+        MoveGridIntoFocus(fightGrids[destinationGridIndex], charsToMove, smoothMove, transitionDuration);
     }
 
-    public void MoveGridIntoFocus(FightGrid destinationGrid, bool smoothMove = true, float transitionDuration = 1234.56789f)
+    public void MoveGridIntoFocus(FightGrid destinationGrid, CharacterType_Script[] charsToMove, bool smoothMove = true, float transitionDuration = 1234.56789f)
     {
         if (transitionDuration == 1234.56789f) transitionDuration = destinationGrid.hasBaseTransitionTime ? destinationGrid.baseTransitionDuration : defaultTransitionTime;
 
-        Vector3 translation = fightGrids[currentGridIndex].transform.position - destinationGrid.transform.position;
+        Vector3 translation = -(fightGrids[currentGridIndex].transform.position - destinationGrid.transform.position);
         currentGridIndex = destinationGrid.index;
 
         if (GridFocusSequencer != null) StopCoroutine(GridFocusSequencer);
-        GridFocusSequencer = FocusSequence(transitionDuration, translation);
+        GridFocusSequencer = FocusSequence(transitionDuration, charsToMove, translation);
         StartCoroutine(GridFocusSequencer);
     }
 
-    IEnumerator FocusSequence(float duration, Vector3 translation)
+    IEnumerator FocusSequence(float duration, CharacterType_Script[] charsToMove, Vector3 translation)
     {
-        Vector3 startPos = fightGridMaster.transform.position;
-        Vector3 endPos = startPos + translation;
+        Vector3 startPos = cameraToMove.transform.position;
+        List<Vector3> playerStartPoses = new List<Vector3>();
+        foreach (CharacterType_Script characterToMove in charsToMove) playerStartPoses.Add(characterToMove.transform.position);
 
         Vector3 acceleration = Vector3.zero;
         float timeRemaining = duration;
         float progress = 0;
+        Vector3 newPos = Vector3.zero;
         while (timeRemaining != 0)
         {
             Debug.Log(timeRemaining);
             timeRemaining = Mathf.Clamp(timeRemaining - Time.deltaTime, 0f, 9999f);
             progress = cameraTravelCurve.Evaluate(1f - (timeRemaining / duration));
-            fightGridMaster.transform.position = Vector3.Lerp(fightGridMaster.transform.position, endPos, progress);
+            cameraToMove.transform.position = Vector3.Lerp(startPos, startPos + translation, progress);
+            for (int i = 0; i < charsToMove.Length; i++)
+            {
+                newPos = Vector3.Lerp(playerStartPoses[i], playerStartPoses[i] + translation, progress);
+                charsToMove[i].transform.position = new Vector3(newPos.x, charsToMove[i].transform.position.y, newPos.z);
+            }
             yield return null;
         }
     }
@@ -95,7 +105,6 @@ public class EnvironmentManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MainCamera = Camera.main;
         ChangeGridStructure(GridStructures[0]);
 
     }
