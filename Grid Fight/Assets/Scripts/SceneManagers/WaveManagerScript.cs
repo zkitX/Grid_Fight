@@ -68,13 +68,13 @@ public class WaveManagerScript : MonoBehaviour
         }
     }
 
-    public void SpawnCharFromGivenWave(string waveName, CharacterNameType characterID, string charIdentifier, bool isRandom, Vector2Int pos)
+    public IEnumerator SpawnCharFromGivenWave(string waveName, CharacterNameType characterID, string charIdentifier, bool isRandom, Vector2Int pos)
     {
         WavePhaseClass wpc = WavePhases.Where(r => r.name == waveName).First();
         CurrentWaveChar = wpc.ListOfEnemy.Where(a => a.TypeOfCharacter.CharacterName == characterID).First();
         BaseCharacter newChar = GetWaveCharacter(CurrentWaveChar.TypeOfCharacter);
         FungusSpawnedChars.Add(charIdentifier, newChar);
-        SpawChar(newChar, isRandom, pos);
+        yield return SpawChar(newChar, isRandom, pos, true);
     }
 
     public BaseCharacter GetWaveCharacter(WaveCharacterInfoClass character)
@@ -150,7 +150,7 @@ public class WaveManagerScript : MonoBehaviour
             for (int i = 0; i < startingCharacters.Number; i++)
             {
                 newChar = GetWaveCharacter(startingCharacters.TypeOfCharacter);
-                SpawChar(newChar, true, new Vector2Int());
+                yield return SpawChar(newChar, true, new Vector2Int(), true);
             }
         }
 
@@ -172,7 +172,8 @@ public class WaveManagerScript : MonoBehaviour
                     waveCharacterInfoClass = GetAvailableWaveCharacter(wavePhase);
                 }
                 newChar = GetWaveCharacter(waveCharacterInfoClass);
-                SpawChar(newChar, CurrentWaveChar.IsRandomSpowiningTile, CurrentWaveChar.IsRandomSpowiningTile ? new Vector2Int() : CurrentWaveChar.SpowningTile[Random.Range(0, CurrentWaveChar.SpowningTile.Count)]);
+                yield return SpawChar(newChar, CurrentWaveChar.IsRandomSpowiningTile, 
+                    CurrentWaveChar.IsRandomSpowiningTile ? new Vector2Int() : CurrentWaveChar.SpowningTile[Random.Range(0, CurrentWaveChar.SpowningTile.Count)], false);
                 timer = 0;
 
                 if (wavePhase.ListOfEnemy.Where(r => r.NumberOfCharacter > 0).ToList().Count == 0)
@@ -190,20 +191,20 @@ public class WaveManagerScript : MonoBehaviour
         }
     }
 
-    private void SpawChar(BaseCharacter newChar, bool isRandom, Vector2Int pos)
+    private IEnumerator SpawChar(BaseCharacter newChar, bool isRandom, Vector2Int pos, bool withArrivingAnim)
     {
         if (isRandom)
         {
-            SetCharInPos(newChar, GridManagerScript.Instance.GetFreeBattleTile(newChar.UMS.WalkingSide, newChar.UMS.Pos));
+            yield return SetCharInPos(newChar, GridManagerScript.Instance.GetFreeBattleTile(newChar.UMS.WalkingSide, newChar.UMS.Pos), withArrivingAnim);
         }
         else
         {
-            SetCharInPos(newChar, GridManagerScript.Instance.GetBattleTile(pos));
+            yield return SetCharInPos(newChar, GridManagerScript.Instance.GetBattleTile(pos), withArrivingAnim);
         }
         EventManager.Instance?.AddCharacterArrival(newChar);
     }
 
-    public void SetCharInPos(BaseCharacter currentCharacter, BattleTileScript bts)
+    public IEnumerator SetCharInPos(BaseCharacter currentCharacter, BattleTileScript bts, bool withArrivingAnim)
     {
         GridManagerScript.Instance.SetBattleTileState(bts.Pos, BattleTileStateType.Occupied);
         currentCharacter.UMS.CurrentTilePos = bts.Pos;
@@ -221,14 +222,18 @@ public class WaveManagerScript : MonoBehaviour
             GridManagerScript.Instance.SetBattleTileState(item, BattleTileStateType.Occupied);
         }
 
-
-        currentCharacter.SetUpEnteringOnBattle();
-        if(currentCharacter.SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving)
+        if (withArrivingAnim)
+        {
+            currentCharacter.SetUpEnteringOnBattle();
+        }
+        if (currentCharacter.SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving)
         {
 
         }
 
-        StartCoroutine(BattleManagerScript.Instance.MoveCharToBoardWithDelay(0.2f, currentCharacter, bts.transform.position));
+        yield return BattleManagerScript.Instance.MoveCharToBoardWithDelay(withArrivingAnim  ? 0.2f : 0, currentCharacter, bts.transform.position);
+
+
     }
 
     private WaveCharacterInfoClass GetAvailableRandomWaveCharacter(WavePhaseClass wavePhase)

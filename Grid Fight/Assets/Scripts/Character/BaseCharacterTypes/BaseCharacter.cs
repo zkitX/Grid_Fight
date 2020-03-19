@@ -551,6 +551,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     protected float staminaRegenOnPerfectBlock = 10f;
     public void StartDefending()
     {
+        if (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+        {
+            return;
+        }
         SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
         SpineAnim.SetAnimationSpeed(defenceAnimSpeedMultiplier);
 
@@ -813,30 +817,41 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public void Buff_DebuffCo(Buff_DebuffClass bdClass)
     {
-        BuffDebuffClass item = BuffsDebuffsList.Where(r => r.Name == bdClass.Name).FirstOrDefault();
+        BuffDebuffClass item = BuffsDebuffsList.Where(r => r.Stat == bdClass.Stat).FirstOrDefault();
+        string[] newBuffDebuff = bdClass.Name.Split('_');
         if (item == null)
         {
-            item = new BuffDebuffClass(bdClass.Name, bdClass, Buff_DebuffCoroutine(bdClass), bdClass.Duration);
+            Debug.Log(bdClass.Name + "   " + newBuffDebuff.Last());
+            item = new BuffDebuffClass(bdClass.Name, bdClass.Stat, Convert.ToInt32(newBuffDebuff.Last()), bdClass, bdClass.Duration);
+            item.BuffDebuffCo = Buff_DebuffCoroutine(item);
             BuffsDebuffsList.Add(item);
             StartCoroutine(item.BuffDebuffCo);
         }
         else
         {
-            if(item.Duration - item.CurrentBuffDebuff.Timer < bdClass.Duration)
+            if (item.Level <= Convert.ToInt32(newBuffDebuff.Last()))
             {
-                item.Duration = bdClass.Duration;
-                item.CurrentBuffDebuff.Timer = 0;
+                string[] currentBuffDebuff = item.Name.Split('_');
+                if (newBuffDebuff[1] != currentBuffDebuff[1])
+                {
+                    StopCoroutine(item.BuffDebuffCo);
+                }
+                BuffsDebuffsList.Remove(item);
+                item = new BuffDebuffClass(bdClass.Name, bdClass.Stat, Convert.ToInt32(newBuffDebuff.Last()), bdClass, bdClass.Duration);
+                item.BuffDebuffCo = Buff_DebuffCoroutine(item);
+                BuffsDebuffsList.Add(item);
+                StartCoroutine(item.BuffDebuffCo);
             }
         }
     }
 
     //Used to Buff/Debuff the character
-    public IEnumerator Buff_DebuffCoroutine(Buff_DebuffClass bdClass)
+    public IEnumerator Buff_DebuffCoroutine(BuffDebuffClass bdClass)
     {
         GameObject ps = null;
-        if (bdClass.ParticlesToFire != ParticlesType.None)
+        if (bdClass.CurrentBuffDebuff.ParticlesToFire != ParticlesType.None)
         {
-            ps = ParticleManagerScript.Instance.GetParticle(bdClass.ParticlesToFire);
+            ps = ParticleManagerScript.Instance.GetParticle(bdClass.CurrentBuffDebuff.ParticlesToFire);
             ps.transform.parent = transform;
             ps.transform.localPosition = Vector3.zero;
             ps.SetActive(true);
@@ -844,9 +859,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         System.Reflection.FieldInfo parentField = null, field = null, B_field = null;
         string[] statToCheck = bdClass.Stat.ToString().Split('_');
 
-        if(bdClass.Stat == BuffDebuffStatsType.ElementalResistance)
+        if (bdClass.Stat == BuffDebuffStatsType.ElementalResistance)
         {
-            ElementalResistance(bdClass);
+            ElementalResistance(bdClass.CurrentBuffDebuff);
         }
         else
         {
@@ -854,98 +869,98 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             field = parentField.GetValue(CharInfo).GetType().GetField(statToCheck[1]);
 
             B_field = parentField.GetValue(CharInfo).GetType().GetField("B_" + statToCheck[1]);
-            if(bdClass.StatsChecker == StatsCheckerType.Perc)
+            if (bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Perc)
             {
                 if (field.FieldType == typeof(Vector2))
                 {
-                    field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? Vector2.zero : (Vector2)field.GetValue(parentField.GetValue(CharInfo)) +
-                        ((Vector2)B_field.GetValue(parentField.GetValue(CharInfo))) * bdClass.Value);
+                    field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? Vector2.zero : (Vector2)field.GetValue(parentField.GetValue(CharInfo)) +
+                        (((Vector2)B_field.GetValue(parentField.GetValue(CharInfo))) / 100) * bdClass.CurrentBuffDebuff.Value);
                 }
                 else
                 {
-                    field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? 0 : (float)field.GetValue(parentField.GetValue(CharInfo)) +
-                        ((float)B_field.GetValue(parentField.GetValue(CharInfo))) * bdClass.Value);
+                    field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? 0 : (float)field.GetValue(parentField.GetValue(CharInfo)) +
+                        (((float)B_field.GetValue(parentField.GetValue(CharInfo))) / 100) * bdClass.CurrentBuffDebuff.Value);
                 }
             }
             else
             {
                 if (field.FieldType == typeof(Vector2))
                 {
-                    field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? Vector2.zero : new Vector2(((Vector2)field.GetValue(parentField.GetValue(CharInfo))).x + bdClass.Value,
-                        ((Vector2)field.GetValue(parentField.GetValue(CharInfo))).y + bdClass.Value));
+                    field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? Vector2.zero : new Vector2(((Vector2)field.GetValue(parentField.GetValue(CharInfo))).x + bdClass.CurrentBuffDebuff.Value,
+                        ((Vector2)field.GetValue(parentField.GetValue(CharInfo))).y + bdClass.CurrentBuffDebuff.Value));
                 }
                 else
                 {
-                    field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? 0 : (float)field.GetValue(parentField.GetValue(CharInfo)) + bdClass.Value);
+                    field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? 0 : (float)field.GetValue(parentField.GetValue(CharInfo)) + bdClass.CurrentBuffDebuff.Value);
                 }
 
-                
+
             }
 
             if (statToCheck[1].Contains("Health"))
             {
-                HealthStatsChangedEvent?.Invoke(bdClass.Value, bdClass.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, transform);
+                HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, bdClass.CurrentBuffDebuff.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, transform);
             }
         }
-       
 
-        SetAnimation(bdClass.AnimToFire);
+
+        SetAnimation(bdClass.CurrentBuffDebuff.AnimToFire);
         int iterator = 0;
-        while (bdClass.Timer <= bdClass.Duration)
+        while (bdClass.CurrentBuffDebuff.Timer <= bdClass.Duration)
         {
             yield return BattleManagerScript.Instance.PauseUntil();
 
-            bdClass.Timer += Time.fixedDeltaTime;
+            bdClass.CurrentBuffDebuff.Timer += Time.fixedDeltaTime;
 
-            if (((int)bdClass.Timer) > iterator && statToCheck.Length == 3 && statToCheck[2].Contains("Overtime"))
+            if (((int)bdClass.CurrentBuffDebuff.Timer) > iterator && statToCheck.Length == 3 && statToCheck[2].Contains("Overtime"))
             {
                 iterator++;
-                if (bdClass.StatsChecker == StatsCheckerType.Perc)
+                if (bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Perc)
                 {
-                    field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? 0 : (float)field.GetValue(parentField.GetValue(CharInfo)) +
-                        ((float)B_field.GetValue(parentField.GetValue(CharInfo))) * bdClass.Value);
+                    field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? 0 : (float)field.GetValue(parentField.GetValue(CharInfo)) +
+                        (((float)B_field.GetValue(parentField.GetValue(CharInfo))) / 100) * bdClass.CurrentBuffDebuff.Value);
                 }
                 else
                 {
-                    field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? 0 : (float)field.GetValue(parentField.GetValue(CharInfo)) + bdClass.Value);
+                    field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? 0 : (float)field.GetValue(parentField.GetValue(CharInfo)) + bdClass.CurrentBuffDebuff.Value);
                 }
-                HealthStatsChangedEvent?.Invoke(bdClass.Value, bdClass.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, transform);
+                HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, bdClass.CurrentBuffDebuff.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, transform);
             }
         }
 
         if (bdClass.Stat != BuffDebuffStatsType.ElementalResistance)
         {
-            if (bdClass.StatsChecker == StatsCheckerType.Perc)
+            if (bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Perc)
             {
                 if (field.FieldType == typeof(Vector2))
                 {
-                    field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? (Vector2)B_field.GetValue(parentField.GetValue(CharInfo)) :
-                   (Vector2)field.GetValue(parentField.GetValue(CharInfo)) - ((Vector2)B_field.GetValue(parentField.GetValue(CharInfo))) * bdClass.Value);
+                    field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? (Vector2)B_field.GetValue(parentField.GetValue(CharInfo)) :
+                   (Vector2)field.GetValue(parentField.GetValue(CharInfo)) - (((Vector2)B_field.GetValue(parentField.GetValue(CharInfo))) / 100) * bdClass.CurrentBuffDebuff.Value);
                 }
                 else
                 {
-                    field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? (float)B_field.GetValue(parentField.GetValue(CharInfo)) :
-                    (float)field.GetValue(parentField.GetValue(CharInfo)) - ((float)B_field.GetValue(parentField.GetValue(CharInfo))) * bdClass.Value);
+                    field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? (float)B_field.GetValue(parentField.GetValue(CharInfo)) :
+                    (float)field.GetValue(parentField.GetValue(CharInfo)) - (((float)B_field.GetValue(parentField.GetValue(CharInfo))) / 100) * bdClass.CurrentBuffDebuff.Value);
                 }
 
-               
+
             }
             else
             {
 
                 if (field.FieldType == typeof(Vector2))
                 {
-                    field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? (Vector2)B_field.GetValue(parentField.GetValue(CharInfo)) :
-                    new Vector2(((Vector2)field.GetValue(parentField.GetValue(CharInfo))).x - bdClass.Value, ((Vector2)field.GetValue(parentField.GetValue(CharInfo))).y - bdClass.Value));
+                    field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? (Vector2)B_field.GetValue(parentField.GetValue(CharInfo)) :
+                    new Vector2(((Vector2)field.GetValue(parentField.GetValue(CharInfo))).x - bdClass.CurrentBuffDebuff.Value, ((Vector2)field.GetValue(parentField.GetValue(CharInfo))).y - bdClass.CurrentBuffDebuff.Value));
                 }
                 else
                 {
-                    field.SetValue(parentField.GetValue(CharInfo), bdClass.Value == 0 ? (float)B_field.GetValue(parentField.GetValue(CharInfo)) :
-                    (float)field.GetValue(parentField.GetValue(CharInfo)) - bdClass.Value);
+                    field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? (float)B_field.GetValue(parentField.GetValue(CharInfo)) :
+                    (float)field.GetValue(parentField.GetValue(CharInfo)) - bdClass.CurrentBuffDebuff.Value);
                 }
             }
         }
-        BuffsDebuffsList.Remove(BuffsDebuffsList.Where(r=> r.Name == bdClass.Name).First());
+        BuffsDebuffsList.Remove(bdClass);
         ps?.SetActive(false);
     }
 
@@ -1359,15 +1374,27 @@ public class BuffDebuffClass
     public Buff_DebuffClass CurrentBuffDebuff;
     public IEnumerator BuffDebuffCo;
     public float Duration;
+    public BuffDebuffStatsType Stat;
+    public int Level;
 
     public BuffDebuffClass()
     {
 
     }
-
-    public BuffDebuffClass(string name, Buff_DebuffClass currentCuffDebuff, IEnumerator buffDebuffCo, float duration)
+    public BuffDebuffClass(string name, BuffDebuffStatsType stat, int level, Buff_DebuffClass currentCuffDebuff, float duration)
     {
         Name = name;
+        Stat = stat;
+        Level = level;
+        CurrentBuffDebuff = currentCuffDebuff;
+        Duration = duration;
+    }
+
+    public BuffDebuffClass(string name, BuffDebuffStatsType stat, int level, Buff_DebuffClass currentCuffDebuff, IEnumerator buffDebuffCo, float duration)
+    {
+        Name = name;
+        Stat = stat;
+        Level = level;
         CurrentBuffDebuff = currentCuffDebuff;
         BuffDebuffCo = buffDebuffCo;
         Duration = duration;

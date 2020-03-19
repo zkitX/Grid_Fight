@@ -78,6 +78,7 @@ public class EnvironmentManager : MonoBehaviour
 
     IEnumerator FocusSequence(float duration, CharacterType_Script[] charsToMove, Vector3 translation)
     {
+        GridManagerScript.Instance.transform.position = translation;
         Vector3 startPos = cameraToMove.transform.position;
         List<Vector3> playerStartPoses = new List<Vector3>();
         foreach (CharacterType_Script characterToMove in charsToMove) playerStartPoses.Add(characterToMove.transform.position);

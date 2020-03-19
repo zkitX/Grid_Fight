@@ -77,8 +77,9 @@ public class ScriptableObjectGridStructureEditor : Editor
 
     private void ShowTileObject(ref BattleTileInfo bti)
     {
-        bti.BattleTileT = (BattleTileType)EditorGUILayout.EnumPopup("BattleTileType", bti.BattleTileT);
+        //bti.BattleTileT = (BattleTileType)EditorGUILayout.EnumPopup("BattleTileType", bti.BattleTileT);
         bti.WalkingSide = (WalkingSideType)EditorGUILayout.EnumPopup("WalkingSideType", bti.WalkingSide);
+        bti.Effect = (ScriptableObjectAttackEffect)EditorGUILayout.ObjectField("Effect", bti.Effect, typeof(ScriptableObjectAttackEffect), true);
         bti.TileSprite = (Sprite)EditorGUILayout.ObjectField("Sprite", bti.TileSprite, typeof(Sprite), true, GUILayout.Width(512), GUILayout.Height(512));
     }
 }

@@ -33,7 +33,10 @@ public class BattleManagerScript : MonoBehaviour
             List<CharacterType_Script> chars = new List<CharacterType_Script>();
             for (int i = 0; i < CurrentSelectedCharacters.Count; i++)
             {
-                if (CurrentSelectedCharacters[(ControllerType)i].Character != null) chars.Add(CurrentSelectedCharacters[(ControllerType)i].Character);
+                if (CurrentSelectedCharacters[(ControllerType)i].Character != null)
+                {
+                    chars.Add(CurrentSelectedCharacters[(ControllerType)i].Character);
+                }
             }
             return chars.ToArray();
         }

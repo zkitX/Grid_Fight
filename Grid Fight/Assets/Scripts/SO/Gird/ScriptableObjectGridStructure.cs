@@ -18,8 +18,9 @@ public class BattleTileInfo
 {
     public string name;
     public Vector2Int Pos;
+    public ScriptableObjectAttackEffect Effect;
     public BattleTileStateType _BattleTileState;
-    public BattleTileType BattleTileT;
+    //public BattleTileType BattleTileT;
     public WalkingSideType WalkingSide;
     public PortalType Portal;
     public int IDPortal;

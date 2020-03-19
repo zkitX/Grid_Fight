@@ -23,7 +23,12 @@ public class CallWaveMinionToSpawn : Command
 
     public override void OnEnter()
     {
-        WaveManagerScript.Instance.SpawnCharFromGivenWave(WaveName, characterID, CharIdentifier, IsRandomPos, SpawningPos);
+        StartCoroutine(WaveMinionToSpawn());
+    }
+
+    IEnumerator WaveMinionToSpawn()
+    {
+        yield return WaveManagerScript.Instance.SpawnCharFromGivenWave(WaveName, characterID, CharIdentifier, IsRandomPos, SpawningPos);
         Continue();
     }
 

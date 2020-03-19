@@ -23,18 +23,18 @@ public class BattleTileScript : MonoBehaviour
     }
     public Vector2Int Pos;
     public BattleTileStateType _BattleTileState;
-    public BattleTileType BattleTileT;
+    public ScriptableObjectAttackEffect Effect;
+    //public BattleTileType BattleTileT;
     public WalkingSideType WalkingSide;
     public SpriteRenderer SP;
     public PortalInfoClass PortalInfo;
 
     public BattleTileTargetsScript BattleTargetScript;
     //Private
-    private bool isMovingEventSubscribed = false;
 
 
 
-    #region Tile Variables
+   /* #region Tile Variables
     [Header("Buff_Health_Instant")]
     public Vector2 Buff_Health_Instant;
 
@@ -326,7 +326,7 @@ public class BattleTileScript : MonoBehaviour
     public Vector2 Duration_Debuff_Trap_ForTime;
 
 
-    #endregion
+    #endregion*/
 
 
 
@@ -338,13 +338,14 @@ public class BattleTileScript : MonoBehaviour
     public void SetupTileFromBattleTileInfo(BattleTileInfo info)
     {
         BattleTileState = info.BattleTileState;
-        BattleTileT = info.BattleTileT;
+        Effect = info.Effect;
+        //BattleTileT = info.BattleTileT;
         WalkingSide = info.WalkingSide;
-        if (BattleTileT == BattleTileType.Portal)
+        /*if (BattleTileT == BattleTileType.Portal)
         {
             PortalInfo = new PortalInfoClass(this, info.Portal, info.IDPortal);
             GridManagerScript.Instance.Portals.Add(PortalInfo);
-        }
+        }*/
         SetupTile();
     }
 
@@ -358,7 +359,7 @@ public class BattleTileScript : MonoBehaviour
     public void ResetTile()
     {
         BattleTileState =  BattleTileStateType.Blocked;
-        BattleTileT =  BattleTileType.Base;
+        //BattleTileT =  BattleTileType.Base;
         SP.color = Color.white;
     }
 
@@ -369,15 +370,14 @@ public class BattleTileScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //If collides with a character and the tile type is not base
-        if (other.tag.Contains("Character") && BattleTileT != BattleTileType.Base && BattleTileState == BattleTileStateType.Occupied)
+        if (other.tag.Contains("Side") && BattleTileState == BattleTileStateType.Occupied)//&& BattleTileT != BattleTileType.Base
         {
             BaseCharacter targetCharacter = other.GetComponentInParent<BaseCharacter>();
 
-            if(targetCharacter.UMS.Pos.Contains(Pos))
+            if(targetCharacter != null && targetCharacter.UMS.Pos.Contains(Pos))
             {
-                if (!isMovingEventSubscribed)
+                if (Effect != null)
                 {
-                    isMovingEventSubscribed = true;
                     //Subscribe to the TargetCharacter_TileMovementCompleteEvent event
                     targetCharacter.TileMovementCompleteEvent += TargetCharacter_TileMovementCompleteEvent;
 
@@ -389,8 +389,10 @@ public class BattleTileScript : MonoBehaviour
     //Setup the Tile effect
     private void TargetCharacter_TileMovementCompleteEvent(BaseCharacter movingChar)
     {
+
+        movingChar.TileMovementCompleteEvent -= TargetCharacter_TileMovementCompleteEvent;
         //If is a Portal-In
-        if (BattleTileT == BattleTileType.Portal && PortalInfo.Portal == PortalType.In)
+        /*if (BattleTileT == BattleTileType.Portal && PortalInfo.Portal == PortalType.In)
         {
             StartCoroutine(movingChar.UsePortal(GridManagerScript.Instance.Portals.Where(r => r.IDPortal == PortalInfo.IDPortal && r.Portal == PortalType.Out).First()));
             return;
@@ -413,22 +415,20 @@ public class BattleTileScript : MonoBehaviour
         {
 
         }
-
-        //Get Duration from the right variables
-        float BuffDebuffDuration = Random.Range(((Vector2)this.GetType().GetField("Duration_" + BattleTileT.ToString()).GetValue(this)).x, ((Vector2)this.GetType().GetField("Duration_" + BattleTileT.ToString()).GetValue(this)).y);
-        //Splitting the Enum name in order to have the right info 
-        string[] res = BattleTileT.ToString().Split('_');
-        //Getting the buff debuff value
-        float BuffDebuffValue = res.Length == 3 ?
-        Random.Range(((Vector2)this.GetType().GetField(BattleTileT.ToString()).GetValue(this)).x, ((Vector2)this.GetType().GetField(BattleTileT.ToString()).GetValue(this)).y) : 0;
+        
+                //Get Duration from the right variables
+                float BuffDebuffDuration = Random.Range(((Vector2)this.GetType().GetField("Duration_" + BattleTileT.ToString()).GetValue(this)).x, ((Vector2)this.GetType().GetField("Duration_" + BattleTileT.ToString()).GetValue(this)).y);
+                //Splitting the Enum name in order to have the right info 
+                string[] res = BattleTileT.ToString().Split('_');
+                //Getting the buff debuff value
+                float BuffDebuffValue = res.Length == 3 ?
+                Random.Range(((Vector2)this.GetType().GetField(BattleTileT.ToString()).GetValue(this)).x, ((Vector2)this.GetType().GetField(BattleTileT.ToString()).GetValue(this)).y) : 0;*/
 
         //Creation of the Buff/Debuff
-        Buff_DebuffClass bdClass = new Buff_DebuffClass();
-        bdClass.Duration = BuffDebuffDuration;
-        bdClass.Value = BuffDebuffValue;
-        bdClass.AnimToFire = (CharacterAnimationStateType)System.Enum.Parse(typeof(CharacterAnimationStateType), res[0]);
-        bdClass.Stat = (BuffDebuffStatsType)System.Enum.Parse(typeof(BuffDebuffStatsType), res[1]);
-        if ((BuffDebuffStatsType)System.Enum.Parse(typeof(BuffDebuffStatsType), res[1]) == BuffDebuffStatsType.ElementalResistance)
+        Buff_DebuffClass bdClass = new Buff_DebuffClass(Effect.Name, Effect.Duration.x, Effect.Value.x,
+            Effect.StatsToAffect, Effect.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, Effect.AnimToFire, Effect.Particles);
+        
+      /*  if ((BuffDebuffStatsType)System.Enum.Parse(typeof(BuffDebuffStatsType), res[1]) == BuffDebuffStatsType.ElementalResistance)
         {
             //deciding the type of elemental + weakness of that elemental
             ElementalWeaknessType ewt = bdClass.AnimToFire == CharacterAnimationStateType.Buff ? (ElementalWeaknessType)System.Convert.ToInt16(res[4]) : (ElementalWeaknessType)(-System.Convert.ToInt16(res[4]));
@@ -438,16 +438,16 @@ public class BattleTileScript : MonoBehaviour
         {
             //Set up the elemental type
             bdClass.ElementalPower = (ElementalType)System.Enum.Parse(typeof(ElementalType), res[1]);
-        }
+        }*/
         movingChar.Buff_DebuffCo(bdClass);
 
-        if (!BattleTileT.ToString().Contains("_OverTime"))
+     /*   if (!BattleTileT.ToString().Contains("_OverTime"))
         {
             movingChar.TileMovementCompleteEvent -= TargetCharacter_TileMovementCompleteEvent;
             BattleTileT = BattleTileType.Base;
             SetupTile();
             isMovingEventSubscribed = false;
-        }
+        }*/
        
     }
 }
