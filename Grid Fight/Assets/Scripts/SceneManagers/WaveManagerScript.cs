@@ -226,6 +226,10 @@ public class WaveManagerScript : MonoBehaviour
         {
             currentCharacter.SetUpEnteringOnBattle();
         }
+        else
+        {
+            currentCharacter.CharArrivedOnBattleField();
+        }
         if (currentCharacter.SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving)
         {
 
