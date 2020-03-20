@@ -183,11 +183,14 @@ public class BulletScript : MonoBehaviour
                 
                 target.SetDamage((CharInfo.DamageStats.BaseDamage * (attackLevel == CharacterLevelType.Novice ? CharInfo.RapidAttack.DamageMultiplier.x : CharInfo.PowerfulAttac.DamageMultiplier.x)) * (iscritical ? 2 : 1),
                     Elemental, iscritical, CharInfo.ClassType == CharacterClassType.Desert && attackLevel == CharacterLevelType.Godness ? true : false);
-
-                foreach (ScriptableObjectAttackEffect item in BulletEffects)
+                if (BulletEffects.)
                 {
-                    target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.Value.x, item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles));
+                    foreach (ScriptableObjectAttackEffect item in BulletEffects)
+                    {
+                        target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.Value.x, item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles));
+                    }
                 }
+               
             }
         }
     }
