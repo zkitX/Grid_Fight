@@ -10,35 +10,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25d497aba9400d147aee0263a1f7ec6d, type: 3}
-  m_Name: banandbirdjoin
+  m_Name: Stage00_Event_SwitchCharacter
   m_EditorClassIdentifier: 
-  Name: banandbirdjoin
+  Name: switchcharacter
   hasHappened: 0
   requirementRule: 0
   reqChecks:
-  - {fileID: 11400000, guid: 48c2ee6ab13f2c24f842d816993338c0, type: 2}
+  - {fileID: 11400000, guid: 13ed564a0a278424e8cf58d964abfa31, type: 2}
   timedCheckRule: 0
   timedChecks:
   - Name: 
     hasHappened: 0
     isHappening: 0
     checker: {fileID: 0}
-    ceaseOnHappened: 1
-    TimedCheckType: 5
+    ceaseOnHappened: 0
+    TimedCheckType: 2
     deathCharacterID: 0
     onlyOnDeath: 0
     deathsRequired: 0
     buttonToWaitFor: 0
-    arrivalCharacterID: 0
-    onlyOnArrival: 0
-    arrivalsRequired: 0
-    switchCharacterID: 0
-    onlyOnSwitch: 0
+    arrivalCharacterID: 21
+    onlyOnArrival: 1
+    arrivalsRequired: 1
+    switchCharacterID: 21
+    onlyOnSwitch: 1
     switchesRequired: 0
     healthChangeCharID: 0
     healthChange: 0
     healthChangeValue: 0
-    requireCalledDuringCheck: 1
+    requireCalledDuringCheck: 0
     requireEventCalledDuringCheck: 0
     EventCallRequired: {fileID: 0}
     timeCompareType: 0
@@ -55,6 +55,9 @@ MonoBehaviour:
     staminaChangeValue: 0
     requireEventTriggerDuringCheck: 0
     EventTriggerRequired: {fileID: 0}
+    potionType: 5
+    potionsRequired: 1
+    potionCollectedLastFrame: 1
   inhibitorRule: 1
   inhibitors: []
   ignoreQueue: 0
@@ -62,16 +65,9 @@ MonoBehaviour:
   requireComplete: 1
   effects:
   - Name: 
-    effectType: 4
+    effectType: 2
     secondsToWait: 0
     debugText: 
-    blockName: 
+    blockName: theplayerjustswitched
     command: {fileID: 0}
-    characterToRecruit: 19
-  - Name: 
-    effectType: 4
-    secondsToWait: 0
-    debugText: 
-    blockName: 
-    command: {fileID: 0}
-    characterToRecruit: 22
+    characterToRecruit: 0

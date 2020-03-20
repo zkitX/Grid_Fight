@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25d497aba9400d147aee0263a1f7ec6d, type: 3}
-  m_Name: Potiondropsonminiondeath
+  m_Name: Stage00_Event_Donnahit
   m_EditorClassIdentifier: 
-  Name: Potiondropsonminiondeath
+  Name: Donna hit
   hasHappened: 0
   requirementRule: 0
   reqChecks:
-  - {fileID: 11400000, guid: 911486b4e65d68849b8e45b1125e2cb9, type: 2}
+  - {fileID: 11400000, guid: 63a7095ce9390c24aad83497d61ea5ba, type: 2}
   timedCheckRule: 0
   timedChecks:
   - Name: 
@@ -24,10 +24,10 @@ MonoBehaviour:
     isHappening: 0
     checker: {fileID: 0}
     ceaseOnHappened: 1
-    TimedCheckType: 1
-    deathCharacterID: 24
-    onlyOnDeath: 1
-    deathsRequired: 2
+    TimedCheckType: 4
+    deathCharacterID: 0
+    onlyOnDeath: 0
+    deathsRequired: 0
     buttonToWaitFor: 0
     arrivalCharacterID: 0
     onlyOnArrival: 0
@@ -35,9 +35,9 @@ MonoBehaviour:
     switchCharacterID: 0
     onlyOnSwitch: 0
     switchesRequired: 0
-    healthChangeCharID: 0
-    healthChange: 0
-    healthChangeValue: 0
+    healthChangeCharID: 20
+    healthChange: 1
+    healthChangeValue: 100
     requireCalledDuringCheck: 0
     requireEventCalledDuringCheck: 0
     EventCallRequired: {fileID: 0}
@@ -55,16 +55,19 @@ MonoBehaviour:
     staminaChangeValue: 0
     requireEventTriggerDuringCheck: 0
     EventTriggerRequired: {fileID: 0}
-  inhibitorRule: 1
+    potionType: 5
+    potionsRequired: 1
+    potionCollectedLastFrame: 1
+  inhibitorRule: 0
   inhibitors: []
   ignoreQueue: 0
   ceaseOnComplete: 1
   requireComplete: 1
   effects:
-  - Name: 
+  - Name: GUT
     effectType: 2
     secondsToWait: 0
     debugText: 
-    blockName: HP Potion
+    blockName: DONNA HIT
     command: {fileID: 0}
     characterToRecruit: 1000

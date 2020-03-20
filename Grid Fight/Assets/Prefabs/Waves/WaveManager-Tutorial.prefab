@@ -52,6 +52,7 @@ MonoBehaviour:
   - name: Wave1
     IsRandom: 0
     MaxEnemyOnScreen: 1
+    DelayBetweenChars: 0
     ListOfEnemy:
     - name: robo
       NPCType: 0
@@ -69,12 +70,13 @@ MonoBehaviour:
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
         Events: []
+      StartingEnemyNumber: 0
       IsRandomSpowiningTile: 1
       SpowningTile: []
-      DelayBetweenChars: 1
   - name: Wave2
     IsRandom: 0
     MaxEnemyOnScreen: 1
+    DelayBetweenChars: 0
     ListOfEnemy:
     - name: robo
       NPCType: 0
@@ -92,16 +94,17 @@ MonoBehaviour:
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
         Events: []
+      StartingEnemyNumber: 0
       IsRandomSpowiningTile: 1
       SpowningTile: []
-      DelayBetweenChars: 2
   - name: Wave3
     IsRandom: 0
     MaxEnemyOnScreen: 1
+    DelayBetweenChars: 0
     ListOfEnemy:
     - name: doggo
       NPCType: 0
-      NumberOfCharacter: 2
+      NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 24
         CharacterClass: 0
@@ -115,12 +118,58 @@ MonoBehaviour:
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
         Events: []
+      StartingEnemyNumber: 0
       IsRandomSpowiningTile: 1
       SpowningTile: []
-      DelayBetweenChars: 5
   - name: Wave4
     IsRandom: 0
     MaxEnemyOnScreen: 1
+    DelayBetweenChars: 2
+    ListOfEnemy:
+    - name: doggo
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 24
+        CharacterClass: 0
+        Health: {x: 20, y: 15}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1.5}
+        AttackSpeedRatio: {x: 10, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events:
+        - {fileID: 0}
+      StartingEnemyNumber: 0
+      IsRandomSpowiningTile: 1
+      SpowningTile: []
+    - name: robo
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 25
+        CharacterClass: 0
+        Health: {x: 20, y: 15}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 0, y: 0}
+        RapidAttackMultiplier: {x: 0, y: 0}
+        PowerfulAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1.5}
+        AttackSpeedRatio: {x: 10, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        Events:
+        - {fileID: 0}
+      StartingEnemyNumber: 0
+      IsRandomSpowiningTile: 1
+      SpowningTile: []
+  - name: Wave5
+    IsRandom: 0
+    MaxEnemyOnScreen: 1
+    DelayBetweenChars: 2
     ListOfEnemy:
     - name: koniko
       NPCType: 1
@@ -139,13 +188,14 @@ MonoBehaviour:
         StaminaRegeneration: {x: 1, y: 1}
         Events:
         - {fileID: 0}
-      IsRandomSpowiningTile: 0
+      StartingEnemyNumber: 0
+      IsRandomSpowiningTile: 1
       SpowningTile:
       - {x: 3, y: 9}
-      DelayBetweenChars: 1
-  - name: Wave5
+  - name: Wave6
     IsRandom: 0
     MaxEnemyOnScreen: 2
+    DelayBetweenChars: 0
     ListOfEnemy:
     - name: bug
       NPCType: 0
@@ -163,10 +213,10 @@ MonoBehaviour:
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
         Events: []
+      StartingEnemyNumber: 0
       IsRandomSpowiningTile: 1
       SpowningTile:
       - {x: 3, y: 9}
-      DelayBetweenChars: 2
     - name: thing
       NPCType: 0
       NumberOfCharacter: 2
@@ -183,13 +233,14 @@ MonoBehaviour:
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
         Events: []
+      StartingEnemyNumber: 0
       IsRandomSpowiningTile: 1
       SpowningTile:
       - {x: 0, y: 0}
-      DelayBetweenChars: 2
-  - name: Wave6
+  - name: Wave7
     IsRandom: 1
     MaxEnemyOnScreen: 2
+    DelayBetweenChars: 0
     ListOfEnemy:
     - name: bird
       NPCType: 1
@@ -207,10 +258,10 @@ MonoBehaviour:
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
         Events: []
+      StartingEnemyNumber: 0
       IsRandomSpowiningTile: 0
       SpowningTile:
       - {x: 3, y: 9}
-      DelayBetweenChars: 2
     - name: bird
       NPCType: 1
       NumberOfCharacter: 1
@@ -227,13 +278,14 @@ MonoBehaviour:
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
         Events: []
+      StartingEnemyNumber: 0
       IsRandomSpowiningTile: 0
       SpowningTile:
       - {x: 2, y: 8}
-      DelayBetweenChars: 1
-  - name: Wave7
+  - name: Wave8
     IsRandom: 0
     MaxEnemyOnScreen: 2
+    DelayBetweenChars: 0
     ListOfEnemy:
     - name: doggo
       NPCType: 0
@@ -251,10 +303,10 @@ MonoBehaviour:
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
         Events: []
+      StartingEnemyNumber: 0
       IsRandomSpowiningTile: 1
       SpowningTile:
       - {x: 0, y: 0}
-      DelayBetweenChars: 2
     - name: bug
       NPCType: 0
       NumberOfCharacter: 2
@@ -271,10 +323,10 @@ MonoBehaviour:
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
         Events: []
+      StartingEnemyNumber: 0
       IsRandomSpowiningTile: 1
       SpowningTile:
       - {x: 0, y: 0}
-      DelayBetweenChars: 2
     - name: thing
       NPCType: 0
       NumberOfCharacter: 1
@@ -291,13 +343,14 @@ MonoBehaviour:
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
         Events: []
+      StartingEnemyNumber: 0
       IsRandomSpowiningTile: 1
       SpowningTile:
       - {x: 0, y: 0}
-      DelayBetweenChars: 1
-  - name: Wave8
+  - name: Wave9
     IsRandom: 0
     MaxEnemyOnScreen: 1
+    DelayBetweenChars: 0
     ListOfEnemy:
     - name: BOSS
       NPCType: 2
@@ -315,10 +368,10 @@ MonoBehaviour:
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
         Events: []
+      StartingEnemyNumber: 0
       IsRandomSpowiningTile: 0
       SpowningTile:
       - {x: 4, y: 11}
-      DelayBetweenChars: 2
   isWaveComplete: 0
   WaveCharcters: []
   CurrentWave: 0

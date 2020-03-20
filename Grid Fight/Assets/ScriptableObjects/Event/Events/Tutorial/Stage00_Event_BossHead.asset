@@ -10,22 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25d497aba9400d147aee0263a1f7ec6d, type: 3}
-  m_Name: banandbirdout
+  m_Name: Stage00_Event_BossHead
   m_EditorClassIdentifier: 
-  Name: banbirdout
+  Name: Bosshead
   hasHappened: 0
   requirementRule: 0
   reqChecks:
-  - {fileID: 11400000, guid: 27d87d0f862e0e34e91caaaa6bf33162, type: 2}
-  - {fileID: 11400000, guid: 535cf7a2791cda54b980b8863451bdad, type: 2}
+  - {fileID: 11400000, guid: 2309bc49896c8964bbce2a3a30aa6ffc, type: 2}
   timedCheckRule: 0
   timedChecks:
-  - Name: 
+  - Name: headdead
     hasHappened: 0
     isHappening: 0
     checker: {fileID: 0}
     ceaseOnHappened: 1
-    TimedCheckType: 5
+    TimedCheckType: 4
     deathCharacterID: 0
     onlyOnDeath: 0
     deathsRequired: 0
@@ -36,10 +35,10 @@ MonoBehaviour:
     switchCharacterID: 0
     onlyOnSwitch: 0
     switchesRequired: 0
-    healthChangeCharID: 0
-    healthChange: 0
+    healthChangeCharID: 28
+    healthChange: 2
     healthChangeValue: 0
-    requireCalledDuringCheck: 1
+    requireCalledDuringCheck: 0
     requireEventCalledDuringCheck: 0
     EventCallRequired: {fileID: 0}
     timeCompareType: 0
@@ -69,6 +68,6 @@ MonoBehaviour:
     effectType: 2
     secondsToWait: 0
     debugText: 
-    blockName: birdandbanrecruit
+    blockName: HEAD DESTROYED 1
     command: {fileID: 0}
     characterToRecruit: 0

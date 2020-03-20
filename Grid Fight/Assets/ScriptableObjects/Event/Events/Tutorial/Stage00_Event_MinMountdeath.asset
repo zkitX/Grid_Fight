@@ -10,30 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25d497aba9400d147aee0263a1f7ec6d, type: 3}
-  m_Name: GSEQ_switchcharacter
+  m_Name: Stage00_Event_MinMountdeath
   m_EditorClassIdentifier: 
-  Name: switchcharacter
+  Name: robodeath
   hasHappened: 0
   requirementRule: 0
   reqChecks:
-  - {fileID: 11400000, guid: 13ed564a0a278424e8cf58d964abfa31, type: 2}
+  - {fileID: 11400000, guid: 911486b4e65d68849b8e45b1125e2cb9, type: 2}
   timedCheckRule: 0
   timedChecks:
   - Name: 
     hasHappened: 0
     isHappening: 0
     checker: {fileID: 0}
-    ceaseOnHappened: 0
-    TimedCheckType: 2
-    deathCharacterID: 0
-    onlyOnDeath: 0
-    deathsRequired: 0
+    ceaseOnHappened: 1
+    TimedCheckType: 1
+    deathCharacterID: 23
+    onlyOnDeath: 1
+    deathsRequired: 1
     buttonToWaitFor: 0
-    arrivalCharacterID: 21
-    onlyOnArrival: 1
-    arrivalsRequired: 1
-    switchCharacterID: 21
-    onlyOnSwitch: 1
+    arrivalCharacterID: 0
+    onlyOnArrival: 0
+    arrivalsRequired: 0
+    switchCharacterID: 0
+    onlyOnSwitch: 0
     switchesRequired: 0
     healthChangeCharID: 0
     healthChange: 0
@@ -55,6 +55,9 @@ MonoBehaviour:
     staminaChangeValue: 0
     requireEventTriggerDuringCheck: 0
     EventTriggerRequired: {fileID: 0}
+    potionType: 5
+    potionsRequired: 1
+    potionCollectedLastFrame: 1
   inhibitorRule: 1
   inhibitors: []
   ignoreQueue: 0
@@ -65,6 +68,6 @@ MonoBehaviour:
     effectType: 2
     secondsToWait: 0
     debugText: 
-    blockName: theplayerjustswitched
+    blockName: Block
     command: {fileID: 0}
     characterToRecruit: 0
