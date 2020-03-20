@@ -178,7 +178,7 @@ public enum WalkingSideType
 
 public enum BattleFieldAttackType
 {
-    AreaAttack,
+    OnAreaAttack,
     OnTarget,
     OnItSelf
 }

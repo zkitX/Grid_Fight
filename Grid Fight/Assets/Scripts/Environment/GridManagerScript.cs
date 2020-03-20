@@ -280,24 +280,7 @@ public class GridManagerScript : MonoBehaviour
         return null;
     }
 
-    public void StartOnBattleFieldAttackCo(CharacterInfoScript cInfo, ScriptableObjectAttackTypeOnBattlefield atk, UnitManagementScript ums, BaseCharacter character)
-    {
-        foreach (BulletBehaviourInfoClassOnBattleFieldClass item in atk.BulletTrajectories)
-        {
-            foreach (BattleFieldAttackTileClass target in item.BulletEffectTiles)
-            {
-                if (isPosOnField(target.Pos))
-                {
-                    BattleTileScript bts = GetBattleTile(target.Pos);
-                    if(bts._BattleTileState != BattleTileStateType.Blocked)
-                    {
-                        bts.BattleTargetScript.SetAttack(item.Delay, BattleManagerScript.Instance.VFXScene ? cInfo.ParticleID : target.ParticlesID, target.Pos, cInfo.DamageStats.BaseDamage, cInfo.Elemental, character,
-                            target.Effects);
-                    }
-                }
-            }
-        }
-    }
+   
 
 
     public bool IsEnemyOnTileAttackRange(List<Vector2Int> atkRange, Vector2Int basePos)

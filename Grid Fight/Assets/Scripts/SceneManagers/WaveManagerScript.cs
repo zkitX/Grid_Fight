@@ -150,7 +150,7 @@ public class WaveManagerScript : MonoBehaviour
             for (int i = 0; i < startingCharacters.Number; i++)
             {
                 newChar = GetWaveCharacter(startingCharacters.TypeOfCharacter);
-                yield return SpawChar(newChar, true, new Vector2Int(), true);
+                yield return SpawChar(newChar, true, new Vector2Int(), false);
             }
         }
 
@@ -173,7 +173,7 @@ public class WaveManagerScript : MonoBehaviour
                 }
                 newChar = GetWaveCharacter(waveCharacterInfoClass);
                 yield return SpawChar(newChar, CurrentWaveChar.IsRandomSpowiningTile, 
-                    CurrentWaveChar.IsRandomSpowiningTile ? new Vector2Int() : CurrentWaveChar.SpowningTile[Random.Range(0, CurrentWaveChar.SpowningTile.Count)], false);
+                    CurrentWaveChar.IsRandomSpowiningTile ? new Vector2Int() : CurrentWaveChar.SpowningTile[Random.Range(0, CurrentWaveChar.SpowningTile.Count)], true);
                 timer = 0;
 
                 if (wavePhase.ListOfEnemy.Where(r => r.NumberOfCharacter > 0).ToList().Count == 0)

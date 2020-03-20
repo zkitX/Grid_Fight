@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using MyBox;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +19,8 @@ public class BattleTileInfo
 {
     public string name;
     public Vector2Int Pos;
-    public ScriptableObjectAttackEffect Effect;
+    public bool HasEffect = false;
+    [ConditionalField("HasEffect", false)] public List<ScriptableObjectAttackEffect> Effects = new List<ScriptableObjectAttackEffect>();
     public BattleTileStateType _BattleTileState;
     //public BattleTileType BattleTileT;
     public WalkingSideType WalkingSide;

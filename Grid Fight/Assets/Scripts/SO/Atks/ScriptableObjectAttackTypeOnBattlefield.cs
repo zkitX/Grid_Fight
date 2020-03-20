@@ -29,6 +29,9 @@ public class BattleFieldAttackTileClass
     [ConditionalField("HasEffect", false)] public List<ScriptableObjectAttackEffect> Effects = new List<ScriptableObjectAttackEffect>();
     public bool HasDifferentParticles = false;
     [ConditionalField("HasDifferentParticles", false)] public AttackParticleType ParticlesID;
+    [ConditionalField("HasDifferentParticles", false)] public bool IsEffectOnTile = false;
+    [ConditionalField("IsEffectOnTile", false)] public ParticlesType TileParticlesID;
+    [ConditionalField("IsEffectOnTile", false)] public float DurationOnTile;
 
     public BattleFieldAttackTileClass(Vector2Int pos)
     {

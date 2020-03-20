@@ -16,12 +16,10 @@ public class ScriptableObjectAttackTypeOnBattlefieldEditor : Editor
     public override void OnInspectorGUI()
     {
         GUIStyle style = new GUIStyle();
-        bool showClose = true;
         base.OnInspectorGUI();
         //test = false;
         ScriptableObjectAttackTypeOnBattlefield origin = (ScriptableObjectAttackTypeOnBattlefield)target;
-        BattleFieldTileInfo bfti = null;
-        BattleFieldAttackTileClass bfatc;
+        
         
         if (origin.BulletTrajectories.Count > 0)
         {
@@ -34,59 +32,200 @@ public class ScriptableObjectAttackTypeOnBattlefieldEditor : Editor
             {
                 
                 EditorGUILayout.Space();
-                for (int x = 0; x < 6; x++)
+                switch (origin.AtkType)
                 {
-                    EditorGUILayout.BeginHorizontal();
-                    for (int y = 0; y < 12; y++)
-                    {
-                        //Debug.Log(x + "   " + y);
-                        bfatc = origin.BulletTrajectories[i].BulletEffectTiles.Where(r => r.Pos == new Vector2Int(x, y)).FirstOrDefault();
-                        if (firstOpen && bfatc != null)
-                        {
-                            bfti = new BattleFieldTileInfo(origin.BulletTrajectories[i], bfatc);
-                            TilesInfo.Add(bfti);
-                        }
-                        showClose = EditorGUILayout.ToggleLeft(x + "," + y, bfatc != null ? true : false, GUILayout.Width(40));
-                        if (showClose)
-                        {
-                            if (bfatc == null)
-                            {
-                                bfatc = new BattleFieldAttackTileClass(new Vector2Int(x, y));
-                                bfti = new BattleFieldTileInfo(origin.BulletTrajectories[i], bfatc);
-                                origin.BulletTrajectories[i].BulletEffectTiles.Add(bfatc);
-                                TilesInfo.Add(bfti);
-                            }
-
-                            differentbfatc = bfatc;
-                        }
-                        else if (!showClose && bfatc != null)
-                        {
-                            TilesInfo.Remove(bfti);
-                            origin.BulletTrajectories[i].BulletEffectTiles.Remove(bfatc);
-                        }
-                    }
-                    EditorGUILayout.EndHorizontal();
+                    case BattleFieldAttackType.OnAreaAttack:
+                        OnAreaAtk(origin, i);
+                        break;
+                    case BattleFieldAttackType.OnTarget:
+                        OnTargetAtk(origin, i);
+                        break;
+                    case BattleFieldAttackType.OnItSelf:
+                        OnHerSelf(origin, i);
+                        break;
+                    default:
+                        break;
                 }
-
-                if (differentbfatc != null)
-                {
-                    selection[i] = differentbfatc;
-                    ShowTileObject(ref differentbfatc);
-                }
-                else if(selection[i] != null)
-                {
-                    ShowTileObject(ref selection[i]);
-                }
-                differentbfatc = null;
-
-                
             }
-            
-
-           
             firstOpen = false;
         }
 
+    }
+
+    public void OnAreaAtk(ScriptableObjectAttackTypeOnBattlefield origin, int i)
+    {
+        bool showClose = true;
+
+        BattleFieldTileInfo bfti = null;
+        BattleFieldAttackTileClass bfatc;
+        for (int x = 0; x < 6; x++)
+        {
+            EditorGUILayout.BeginHorizontal();
+            for (int y = 0; y < 12; y++)
+            {
+                //Debug.Log(x + "   " + y);
+                bfatc = origin.BulletTrajectories[i].BulletEffectTiles.Where(r => r.Pos == new Vector2Int(x, y)).FirstOrDefault();
+                if (firstOpen && bfatc != null)
+                {
+                    bfti = new BattleFieldTileInfo(origin.BulletTrajectories[i], bfatc);
+                    TilesInfo.Add(bfti);
+                }
+                showClose = EditorGUILayout.ToggleLeft(x + "," + y, bfatc != null ? true : false, GUILayout.Width(40));
+                if (showClose)
+                {
+                    if (bfatc == null)
+                    {
+                        bfatc = new BattleFieldAttackTileClass(new Vector2Int(x, y));
+                        bfti = new BattleFieldTileInfo(origin.BulletTrajectories[i], bfatc);
+                        origin.BulletTrajectories[i].BulletEffectTiles.Add(bfatc);
+                        TilesInfo.Add(bfti);
+                    }
+
+                    differentbfatc = bfatc;
+                }
+                else if (!showClose && bfatc != null)
+                {
+                    TilesInfo.Remove(bfti);
+                    origin.BulletTrajectories[i].BulletEffectTiles.Remove(bfatc);
+                }
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+
+        if (differentbfatc != null)
+        {
+            selection[i] = differentbfatc;
+            ShowTileObject(ref differentbfatc);
+        }
+        else if (selection[i] != null)
+        {
+            ShowTileObject(ref selection[i]);
+        }
+        differentbfatc = null;
+
+
+    }
+
+    public void OnTargetAtk(ScriptableObjectAttackTypeOnBattlefield origin, int i)
+    {
+        bool showClose = true;
+
+        BattleFieldTileInfo bfti = null;
+        BattleFieldAttackTileClass bfatc;
+        for (int x = -3; x < 4; x++)
+        {
+            EditorGUILayout.BeginHorizontal();
+            for (int y = -3; y < 4; y++)
+            {
+                //Debug.Log(x + "   " + y);
+              
+                bfatc = origin.BulletTrajectories[i].BulletEffectTiles.Where(r => r.Pos == new Vector2Int(x, y)).FirstOrDefault();
+                if (firstOpen && bfatc != null)
+                {
+                    bfti = new BattleFieldTileInfo(origin.BulletTrajectories[i], bfatc);
+                    TilesInfo.Add(bfti);
+                }
+                if (x == 0 && y == 0)
+                {
+                    showClose = EditorGUILayout.ToggleLeft("T", bfatc != null ? true : false, GUILayout.Width(30));
+                }
+                else
+                {
+                    showClose = EditorGUILayout.ToggleLeft("", bfatc != null ? true : false, GUILayout.Width(30));
+                }
+
+                if (showClose)
+                {
+                    if (bfatc == null)
+                    {
+                        bfatc = new BattleFieldAttackTileClass(new Vector2Int(x, y));
+                        bfti = new BattleFieldTileInfo(origin.BulletTrajectories[i], bfatc);
+                        origin.BulletTrajectories[i].BulletEffectTiles.Add(bfatc);
+                        TilesInfo.Add(bfti);
+                    }
+
+                    differentbfatc = bfatc;
+                }
+                else if (!showClose && bfatc != null)
+                {
+                    TilesInfo.Remove(bfti);
+                    origin.BulletTrajectories[i].BulletEffectTiles.Remove(bfatc);
+                }
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+
+        if (differentbfatc != null)
+        {
+            selection[i] = differentbfatc;
+            ShowTileObject(ref differentbfatc);
+        }
+        else if (selection[i] != null)
+        {
+            ShowTileObject(ref selection[i]);
+        }
+        differentbfatc = null;
+    }
+
+    public void OnHerSelf(ScriptableObjectAttackTypeOnBattlefield origin, int i)
+    {
+        bool showClose = true;
+
+        BattleFieldTileInfo bfti = null;
+        BattleFieldAttackTileClass bfatc;
+        for (int x = -3; x < 4; x++)
+        {
+            EditorGUILayout.BeginHorizontal();
+            for (int y = -3; y < 4; y++)
+            {
+                //Debug.Log(x + "   " + y);
+
+                bfatc = origin.BulletTrajectories[i].BulletEffectTiles.Where(r => r.Pos == new Vector2Int(x, y)).FirstOrDefault();
+                if (firstOpen && bfatc != null)
+                {
+                    bfti = new BattleFieldTileInfo(origin.BulletTrajectories[i], bfatc);
+                    TilesInfo.Add(bfti);
+                }
+                if (x == 0 && y == 0)
+                {
+                    showClose = EditorGUILayout.ToggleLeft("T", bfatc != null ? true : false, GUILayout.Width(30));
+                }
+                else
+                {
+                    showClose = EditorGUILayout.ToggleLeft("", bfatc != null ? true : false, GUILayout.Width(30));
+                }
+
+                if (showClose)
+                {
+                    if (bfatc == null)
+                    {
+                        bfatc = new BattleFieldAttackTileClass(new Vector2Int(x, y));
+                        bfti = new BattleFieldTileInfo(origin.BulletTrajectories[i], bfatc);
+                        origin.BulletTrajectories[i].BulletEffectTiles.Add(bfatc);
+                        TilesInfo.Add(bfti);
+                    }
+
+                    differentbfatc = bfatc;
+                }
+                else if (!showClose && bfatc != null)
+                {
+                    TilesInfo.Remove(bfti);
+                    origin.BulletTrajectories[i].BulletEffectTiles.Remove(bfatc);
+                }
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+
+        if (differentbfatc != null)
+        {
+            selection[i] = differentbfatc;
+            ShowTileObject(ref differentbfatc);
+        }
+        else if (selection[i] != null)
+        {
+            ShowTileObject(ref selection[i]);
+        }
+        differentbfatc = null;
     }
 
 
@@ -114,6 +253,12 @@ public class ScriptableObjectAttackTypeOnBattlefieldEditor : Editor
             bfatc.ParticlesID = (AttackParticleType)EditorGUILayout.EnumPopup("AttackParticleType", bfatc.ParticlesID);
         }
 
+        bfatc.IsEffectOnTile = EditorGUILayout.ToggleLeft("HasEffectOnTile", bfatc.IsEffectOnTile);
+        if (bfatc.IsEffectOnTile)
+        {
+            bfatc.TileParticlesID = (ParticlesType)EditorGUILayout.EnumPopup("ParticleType", bfatc.TileParticlesID);
+            bfatc.DurationOnTile = EditorGUILayout.FloatField("DurationOnTile", 0);
+        }
     }
 }
 

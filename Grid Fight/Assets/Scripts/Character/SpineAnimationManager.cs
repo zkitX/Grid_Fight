@@ -68,7 +68,7 @@ public class SpineAnimationManager : MonoBehaviour
         else if(e.Data.Name.Contains("FireTileAttack"))
         {
             CharOwner.currentAttackPhase = CurrentAnim.ToString().Contains("Atk1") ? AttackPhasesType.Bullet_Rapid : AttackPhasesType.Bullet_Powerful;
-            CharOwner.CreateTileAttack();
+            //CharOwner.CreateTileAttack();
 
             if (!CharOwner.VFXTestMode)
             {

@@ -79,7 +79,22 @@ public class ScriptableObjectGridStructureEditor : Editor
     {
         //bti.BattleTileT = (BattleTileType)EditorGUILayout.EnumPopup("BattleTileType", bti.BattleTileT);
         bti.WalkingSide = (WalkingSideType)EditorGUILayout.EnumPopup("WalkingSideType", bti.WalkingSide);
-        bti.Effect = (ScriptableObjectAttackEffect)EditorGUILayout.ObjectField("Effect", bti.Effect, typeof(ScriptableObjectAttackEffect), true);
+        bti.HasEffect = EditorGUILayout.ToggleLeft("HasEffect", bti.HasEffect);
+        if (bti.HasEffect)
+        {
+            var list = bti.Effects;
+            int newCount = Mathf.Max(0, EditorGUILayout.IntField("size", list.Count));
+            while (newCount < list.Count)
+                list.RemoveAt(list.Count - 1);
+            while (newCount > list.Count)
+                list.Add(null);
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                bti.Effects[i] = (ScriptableObjectAttackEffect)EditorGUILayout.ObjectField("Effect", bti.Effects[i], typeof(ScriptableObjectAttackEffect), false);   //"Effect", bfatc.Effects, typeof(ScriptableObjectAttackEffect), false
+            }
+        }
+
         bti.TileSprite = (Sprite)EditorGUILayout.ObjectField("Sprite", bti.TileSprite, typeof(Sprite), true, GUILayout.Width(512), GUILayout.Height(512));
     }
 }

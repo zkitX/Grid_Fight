@@ -167,7 +167,6 @@ public class MinionType_Script : BaseCharacter
         if (currentAttackPhase != AttackPhasesType.End) yield break;
 
         yield return null;*/
-        shotsLeftInAttack = GetHowManyAttackAreOnBattleField(((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories);
         Attacking = true;
 
         CharacterAnimationStateType animToFire = CharacterAnimationStateType.Atk;
@@ -198,9 +197,8 @@ public class MinionType_Script : BaseCharacter
 
 
 
-        bool res = false;
 
-        switch (CurrentAI)
+      /*  switch (CurrentAI)
         {
             case AIType.GeneralAI:
                 res = GeneralTestAI();
@@ -208,18 +206,14 @@ public class MinionType_Script : BaseCharacter
             case AIType.AggressiveAI:
                 res = AggressiveTestAI();
                 break;
-        }
+        }*/
+        //shotsLeftInAttack = GetHowManyAttackAreOnBattleField(((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories);
 
-        if (res)
-        {
-            currentAttackPhase = AttackPhasesType.Start;
-            sequencedAttacker = true; //Temporary until anims are added
-            SetAnimation(animToFire,isLooped, 0f);
-        }
-        else
-        {
-            shotsLeftInAttack = 0;
-        }
+        currentAttackPhase = AttackPhasesType.Start;
+        sequencedAttacker = true; //Temporary until anims are added
+        SetAnimation(animToFire,isLooped, 0f);
+        CreateTileAttack();
+
 
         while (shotsLeftInAttack != 0)
         {

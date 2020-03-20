@@ -482,7 +482,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         bs.Side = UMS.Side;
         bs.VFXTestMode = VFXTestMode;
         bs.CharInfo = CharInfo;
-        bs.BulletEffects = bulletBehaviourInfo.Effects;
+        if (bulletBehaviourInfo.HasEffect)
+        {
+            bs.BulletEffects = bulletBehaviourInfo.Effects;
+        }
 
         if (!GridManagerScript.Instance.isPosOnFieldByHeight(UMS.CurrentTilePos + bulletBehaviourInfo.BulletDistanceInTile))
         {
@@ -536,11 +539,51 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
         if (UMS.CurrentAttackType == AttackType.Tile)
         {
-            CharInfo.RapidAttack.DamageMultiplier = ((ScriptableObjectAttackTypeOnBattlefield)nextAttack).DamageMultiplier;
-            GridManagerScript.Instance.StartOnBattleFieldAttackCo(CharInfo, ((ScriptableObjectAttackTypeOnBattlefield)nextAttack), UMS, this);
+            ScriptableObjectAttackTypeOnBattlefield currentAtk = (ScriptableObjectAttackTypeOnBattlefield)nextAttack;
+            CharInfo.RapidAttack.DamageMultiplier = currentAtk.DamageMultiplier;
+            BaseCharacter charTar = null;
+            if (currentAtk.AtkType == BattleFieldAttackType.OnTarget)
+            {
+                charTar = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList().OrderBy(a => a.CharInfo.HealthPerc).FirstOrDefault();
+            }
+
+            foreach (BulletBehaviourInfoClassOnBattleFieldClass item in ((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories)
+            {
+                foreach (BattleFieldAttackTileClass target in item.BulletEffectTiles)
+                {
+                    Vector2Int res = currentAtk.AtkType == BattleFieldAttackType.OnTarget && charTar != null ? target.Pos + charTar.UMS.CurrentTilePos :
+                        currentAtk.AtkType == BattleFieldAttackType.OnItSelf ? target.Pos + UMS.CurrentTilePos : target.Pos;
+                    if (GridManagerScript.Instance.isPosOnField(res))
+                    {
+                        BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(res);
+                        if (target.IsEffectOnTile)
+                        {
+                            bts.SetupEffect(target.Effects, target.DurationOnTile, target.TileParticlesID);
+                        }
+                        else 
+                        {
+                            if (bts._BattleTileState != BattleTileStateType.Blocked)
+                            {
+                                shotsLeftInAttack++;
+
+                                if (currentAtk.AtkType == BattleFieldAttackType.OnItSelf)
+                                {
+
+                                }
+                                else
+                                {
+                                    bts.BattleTargetScript.SetAttack(item.Delay, BattleManagerScript.Instance.VFXScene ? CharInfo.ParticleID : target.ParticlesID, res,
+                                   CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
+                                   target.Effects);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
         }
     }
-
 
     #endregion
     #region Defence
