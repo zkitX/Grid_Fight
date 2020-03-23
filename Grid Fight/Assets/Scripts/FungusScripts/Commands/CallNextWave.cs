@@ -14,11 +14,11 @@ public class CallNextWave : Command
     public string WaveName;
 
     public bool HasADifferentStage = false;
-    [ConditionalField("HasADifferentStage", true)] public int StageToShow;
-    [ConditionalField("HasADifferentStage", true)] public float TransitionDuration = 2;
+    [ConditionalField("HasADifferentStage", false)] public int StageToShow;
+    [ConditionalField("HasADifferentStage", false)] public float TransitionDuration = 2;
 
     public bool HasADifferentGrid = false;
-    [ConditionalField("HasADifferentGrid", true)] public ScriptableObjectGridStructure Grid;
+    [ConditionalField("HasADifferentGrid", false)] public ScriptableObjectGridStructure Grid;
     public string NextBlockToFire;
 
     #region Public members

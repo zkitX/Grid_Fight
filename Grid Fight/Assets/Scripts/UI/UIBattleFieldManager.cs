@@ -13,10 +13,12 @@ public class UIBattleFieldManager : MonoBehaviour
 
     public GameObject Damage;
     public GameObject Defence;
+    public GameObject PartialDefend;
     public GameObject Healing;
     public GameObject CriticalHit;
     private Dictionary<int, GameObject> Damages = new Dictionary<int, GameObject>();
     private Dictionary<int, GameObject> Defends = new Dictionary<int, GameObject>();
+    private Dictionary<int, GameObject> PartialDefends = new Dictionary<int, GameObject>();
     private Dictionary<int, GameObject> Healings = new Dictionary<int, GameObject>();
     private Dictionary<int, GameObject> CriticalHits = new Dictionary<int, GameObject>();
 
@@ -147,12 +149,26 @@ public class UIBattleFieldManager : MonoBehaviour
     {
         float timer = 0;
         bool isAlive = true;
-        GameObject d = Defends.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
-        if (d == null)
+        GameObject d;
+        if (damage == 0)
         {
-            d = Instantiate(Defence, transform);
-            Defends.Add(Defends.Count, d);
+            d = Defends.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
+            if (d == null)
+            {
+                d = Instantiate(Defence, transform);
+                Defends.Add(Defends.Count, d);
+            }
         }
+        else
+        {
+            d = PartialDefends.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
+            if (d == null)
+            {
+                d = Instantiate(PartialDefend, transform);
+                PartialDefends.Add(PartialDefends.Count, d);
+            }
+        }
+        
         d.SetActive(true);
         d.GetComponentInChildren<TextMeshProUGUI>().text = ((int)(damage * 100)).ToString();
         if (!charOwner.gameObject.activeInHierarchy)

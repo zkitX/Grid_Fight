@@ -565,17 +565,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                             if (bts._BattleTileState != BattleTileStateType.Blocked)
                             {
                                 shotsLeftInAttack++;
-
-                                if (currentAtk.AtkType == BattleFieldAttackType.OnItSelf)
-                                {
-
-                                }
-                                else
-                                {
-                                    bts.BattleTargetScript.SetAttack(item.Delay, BattleManagerScript.Instance.VFXScene ? CharInfo.ParticleID : target.ParticlesID, res,
-                                   CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
-                                   target.Effects);
-                                }
+                                bts.BattleTargetScript.SetAttack(item.Delay, BattleManagerScript.Instance.VFXScene ? CharInfo.ParticleID : target.ParticlesID, res,
+                                currentAtk.AtkType == BattleFieldAttackType.OnItSelf ? 0 : CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
+                                target.Effects);
                             }
                         }
                     }

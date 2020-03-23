@@ -19,7 +19,8 @@ public class ScriptableObjectAttackTypeOnBattlefield : ScriptableObjectAttackBas
 public class BulletBehaviourInfoClassOnBattleFieldClass
 {
     public float Delay;
-    public List<BattleFieldAttackTileClass> BulletEffectTiles = new List<BattleFieldAttackTileClass>();
+    public bool Show = true;
+    [HideInInspector]public List<BattleFieldAttackTileClass> BulletEffectTiles = new List<BattleFieldAttackTileClass>();
 }
 [System.Serializable]
 public class BattleFieldAttackTileClass
@@ -36,5 +37,18 @@ public class BattleFieldAttackTileClass
     public BattleFieldAttackTileClass(Vector2Int pos)
     {
         Pos = pos;
+    }
+
+    public BattleFieldAttackTileClass(Vector2Int pos, bool hasEffect, List<ScriptableObjectAttackEffect> effects, bool hasDifferentParticles, AttackParticleType particlesID, bool isEffectOnTile,
+        ParticlesType tileParticlesID, float durationOnTile)
+    {
+        Pos = pos;
+        HasEffect = hasEffect;
+        Effects = effects;
+        HasDifferentParticles = hasDifferentParticles;
+        ParticlesID = particlesID;
+        IsEffectOnTile = isEffectOnTile;
+        TileParticlesID = tileParticlesID;
+        DurationOnTile = durationOnTile;
     }
 }
