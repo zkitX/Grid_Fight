@@ -660,7 +660,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public virtual void MoveCharOnDirection(InputDirection nextDir)
     {
         if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving || SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving ||
-            SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle || SwapWhenPossible || CharInfo.SpeedStats.MovementSpeed <= 0)
+            SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle || SwapWhenPossible || CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed <= 0)
         {
             return;
         }
@@ -807,7 +807,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         Vector3 offset = transform.position;
         bool isMovCheck = false;
         bool isDefe = false;
-        float moveValue = CharInfo.SpeedStats.MovementSpeed;
+        float moveValue = CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed;
         while (timer < 1)
         {
           
@@ -866,11 +866,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             if (item.Level <= Convert.ToInt32(newBuffDebuff.Last()))
             {
-                string[] currentBuffDebuff = item.Name.Split('_');
-                if (newBuffDebuff[1] != currentBuffDebuff[1])
-                {
-                    StopCoroutine(item.BuffDebuffCo);
-                }
+                string[] currentBuffDebuff = item.Name.ToString().Split('_');
+                StopCoroutine(item.BuffDebuffCo);
                 BuffsDebuffsList.Remove(item);
                 item = new BuffDebuffClass(bdClass.Name, bdClass.Stat, Convert.ToInt32(newBuffDebuff.Last()), bdClass, bdClass.Duration);
                 item.BuffDebuffCo = Buff_DebuffCoroutine(item);
@@ -936,12 +933,17 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             {
                 HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, bdClass.CurrentBuffDebuff.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, transform);
             }
+
+            if (statToCheck[1] == "BaseSpeed")
+            {
+                SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.BaseSpeed);
+            }
         }
 
 
         SetAnimation(bdClass.CurrentBuffDebuff.AnimToFire);
         int iterator = 0;
-        while (bdClass.CurrentBuffDebuff.Timer <= bdClass.Duration)
+        while (bdClass.CurrentBuffDebuff.Timer <= bdClass.Duration && !bdClass.CurrentBuffDebuff.Stop_Co)
         {
             yield return BattleManagerScript.Instance.PauseUntil();
 
@@ -961,6 +963,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 }
                 HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, bdClass.CurrentBuffDebuff.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, transform);
             }
+
+            
         }
 
         if (bdClass.Stat != BuffDebuffStatsType.ElementalResistance)
@@ -993,6 +997,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? (float)B_field.GetValue(parentField.GetValue(CharInfo)) :
                     (float)field.GetValue(parentField.GetValue(CharInfo)) - bdClass.CurrentBuffDebuff.Value);
                 }
+            }
+
+            if (statToCheck[1] == "BaseSpeed")
+            {
+                SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.BaseSpeed);
             }
         }
         BuffsDebuffsList.Remove(bdClass);
@@ -1076,7 +1085,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public virtual void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
     {
-         Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + CharInfo.CharacterID.ToString());
+
+        if (CharInfo.SpeedStats.BaseSpeed <= 0)
+        {
+            return;
+        }
+
+        Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + CharInfo.CharacterID.ToString());
         if (animState == CharacterAnimationStateType.Reverse_Arriving)
         {
         }     
@@ -1357,6 +1372,7 @@ public class Buff_DebuffClass
     public ElementalType ElementalPower;
     public ParticlesType ParticlesToFire;
     public float Timer;
+    public bool Stop_Co = false;
 
 
     public Buff_DebuffClass(string name, float duration, float value, BuffDebuffStatsType stat,
