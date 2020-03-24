@@ -620,6 +620,13 @@ public enum CharacterNameType
     Stage04_BossMonster_Minion2 = 17,
     Stage04_BossMonster_Minion3 = 18,
     Stage09_Character_Valley = 31,
+    Stage09_Character_Mountain = 32,
+    Stage09_Character_Desert = 33,
+    Stage09_Character_Forest = 34,
+    Stage09_Minion_Mountain = 35,
+    Stage09_Minion_Desert = 36,
+    Stage09_Minion_Forest = 37,
+    Stage09_Minion_Valley = 38,
     DummyChar = 10001
 }
 

@@ -33,8 +33,6 @@ public class BattleTileTargetsScript : MonoBehaviour
         Whiteline.gameObject.SetActive(true);
         float duration = tc.Duration;
         bool attackerFiredAttackAnim = false;
-        //Animation animToFire = tc.TargetIndicator.GetComponent<Animation>();
-        //animToFire["ExclamationAnim"].speed = 1 / duration;
         Animator anim = tc.TargetIndicator.GetComponent<Animator>();
         anim.speed = 1 / duration;
         while (timer < duration)
@@ -43,10 +41,8 @@ public class BattleTileTargetsScript : MonoBehaviour
             while (BattleManagerScript.Instance != null && ((BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.FungusPuppets) && !BattleManagerScript.Instance.VFXScene))
             {
                 yield return new WaitForFixedUpdate();
-                //animToFire["ExclamationAnim"].speed = 0;
                 anim.speed = 0;
             }
-            //animToFire["ExclamationAnim"].speed = 1 / duration;
             anim.speed = 1 / duration;
             timer += Time.fixedDeltaTime;
             tc.RemainingTime = duration - timer;
@@ -87,7 +83,6 @@ public class BattleTileTargetsScript : MonoBehaviour
         attacker.shotsLeftInAttack--;
         if (effectOn)
         {
-            //animToFire["ExclamationAnim"].speed = 1;
             attacker.SpecialAttackImpactEffects();
             GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(atkPS, AttackParticlePhaseTypes.EffectRight, transform.position, attacker.UMS.Side);
             LayerParticleSelection lps = effect.GetComponent<LayerParticleSelection>();
@@ -98,7 +93,6 @@ public class BattleTileTargetsScript : MonoBehaviour
             }
            
         }
-        //anim.speed = 1;
         yield return new WaitForSeconds(0.4f);
         UpdateQueue(tc);
     }
