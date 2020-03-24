@@ -864,6 +864,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         else
         {
+
             if (item.Level <= Convert.ToInt32(newBuffDebuff.Last()))
             {
                 string[] currentBuffDebuff = item.Name.ToString().Split('_');
