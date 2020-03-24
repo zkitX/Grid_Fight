@@ -75,9 +75,12 @@ public class BattleTileTargetsScript : MonoBehaviour
                 bool iscritical = attacker.CharInfo.IsCritical(true);
                 //Set damage to the hitting character
                 effectOn = target.SetDamage(damage * (iscritical ? 2 : 1), ele, iscritical);
-                foreach (ScriptableObjectAttackEffect item in atkEffects)
+                if (effectOn)
                 {
-                    target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.Value.x, item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles));
+                    foreach (ScriptableObjectAttackEffect item in atkEffects)
+                    {
+                        target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.Value.x, item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles));
+                    }
                 }
             }
         }
@@ -93,6 +96,7 @@ public class BattleTileTargetsScript : MonoBehaviour
                 lps.Shot = CharacterLevelType.Novice;
                 lps.SelectShotLevel();
             }
+           
         }
         //anim.speed = 1;
         yield return new WaitForSeconds(0.4f);
