@@ -867,7 +867,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             if (item.Level <= Convert.ToInt32(newBuffDebuff.Last()))
             {
                 string[] currentBuffDebuff = item.Name.ToString().Split('_');
-                StopCoroutine(item.BuffDebuffCo);
+                item.CurrentBuffDebuff.Stop_Co = true;
                 BuffsDebuffsList.Remove(item);
                 item = new BuffDebuffClass(bdClass.Name, bdClass.Stat, Convert.ToInt32(newBuffDebuff.Last()), bdClass, bdClass.Duration);
                 item.BuffDebuffCo = Buff_DebuffCoroutine(item);
