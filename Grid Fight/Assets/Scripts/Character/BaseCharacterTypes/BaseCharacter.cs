@@ -657,26 +657,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     #endregion
     #region Move
-    public virtual void MoveCharOnDirection(InputDirection nextDir)
-    {
-        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving || SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving ||
-            SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle || SwapWhenPossible || CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed <= 0)
-        {
-            return;
-        }
 
+    protected IEnumerator MoveCharOnDir_Co(InputDirection nextDir)
+    {
         if ((CharInfo.Health > 0 && !isMoving && IsOnField && SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving) || BattleManagerScript.Instance.VFXScene)
         {
-            /*if(StopPowerfulAtk >= SpecialAttackStatus.Start)
-            {
-                StopPowerfulAtk++;
-            }*/
-
-            if (currentAttackPhase == AttackPhasesType.Loading || currentAttackPhase == AttackPhasesType.Cast_Powerful || currentAttackPhase == AttackPhasesType.Bullet_Powerful)
-            {
-                return;
-            }
-
             List<BattleTileScript> prevBattleTile = CurrentBattleTiles;
             List<BattleTileScript> CurrentBattleTilesToCheck = new List<BattleTileScript>();
 
@@ -720,32 +705,48 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
                 if (resbts != null)
                 {
+                    foreach (BattleTileScript item in prevBattleTile)
+                    {
+                        BattleManagerScript.Instance.OccupiedBattleTiles.Remove(item);
+                    }
+                    BattleManagerScript.Instance.OccupiedBattleTiles.AddRange(CurrentBattleTiles);
                     if (MoveCo != null)
                     {
                         StopCoroutine(MoveCo);
                     }
                     MoveCo = MoveByTile(resbts.transform.position, curve, SpineAnim.GetAnimLenght(AnimState));
-                    StartCoroutine(MoveCo);
+                    yield return MoveCo;
                 }
                 else
                 {
-                    return;
+                    yield break;
                 }
             }
             else
             {
-                if (TileMovementCompleteEvent != null && TileMovementCompleteEvent.Target != null) TileMovementCompleteEvent(this);
-            }
-
-            if (CurrentBattleTiles.Count > 0)
-            {
-                foreach (BattleTileScript item in prevBattleTile)
+                if (TileMovementCompleteEvent != null && TileMovementCompleteEvent.Target != null)
                 {
-                    BattleManagerScript.Instance.OccupiedBattleTiles.Remove(item);
+                    TileMovementCompleteEvent(this);
                 }
-                BattleManagerScript.Instance.OccupiedBattleTiles.AddRange(CurrentBattleTiles);
             }
         }
+    }
+
+    public virtual void MoveCharOnDirection(InputDirection nextDir)
+    {
+        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving || SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving ||
+            SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle || SwapWhenPossible || CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed <= 0)
+        {
+            return;
+        }
+
+        if (currentAttackPhase == AttackPhasesType.Loading || currentAttackPhase == AttackPhasesType.Cast_Powerful || currentAttackPhase == AttackPhasesType.Bullet_Powerful)
+        {
+            return;
+        }
+
+        StartCoroutine(MoveCharOnDir_Co(nextDir));
+
     }
 
     public void GetDirectionVectorAndAnimationCurve(InputDirection nextDir, out CharacterAnimationStateType AnimState, out Vector2Int dir, out AnimationCurve curve)

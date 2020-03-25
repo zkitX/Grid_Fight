@@ -401,6 +401,8 @@ MonoBehaviour:
   SpecialFiringPoint: {fileID: 5059555823653031703}
   CurrentAnim: 1
   AnimationTransition: 0.1
+  changeanim: 0
+  transition: 0.5
 --- !u!114 &5059555823653035621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,7 +420,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c9eb5af2d9b875e4a9751e32071c0948, type: 3}
   - {fileID: 21300000, guid: f1018b669a56e5d4fb4ae27635c17fe7, type: 3}
   BaseCharacterType: 0
-  CharacterID: 31
+  CharacterID: 1184
   CurrentParticlesAttackTypeInfo:
   - {fileID: 11400000, guid: 73c66a9d114b7ea4a86c401084c4d62f, type: 2}
   CurrentOnBattleFieldAttackTypeInfo:
@@ -427,25 +429,56 @@ MonoBehaviour:
   Elemental: 6
   ClassType: 0
   CharacterLevel: 0
+  UseLayeringSystem: 1
+  CharacterRespawnLength: 180
   CharacterSelection: 0
   RapidAttack:
-    DamageMultiplier: 1
+    DamageMultiplier: {x: 1, y: 1}
+    CriticalChance: {x: 2, y: 2}
     Stamina_Cost_Atk: 0
+    B_DamageMultiplier: {x: 1, y: 1}
+    B_CriticalChance: {x: 2, y: 2}
+    B_Stamina_Cost_Atk: 0
   PowerfulAttac:
-    DamageMultiplier: 3
+    DamageMultiplier: {x: 3, y: 3}
+    CriticalChance: {x: 3, y: 5}
     Stamina_Cost_Atk: 0
+    B_DamageMultiplier: {x: 3, y: 3}
+    B_CriticalChance: {x: 3, y: 5}
+    B_Stamina_Cost_Atk: 0
   HealthStats:
     Health: 30
     Base: 30
     Regeneration: 0.5
     BaseHealthRegeneration: 0.5
     LevelMultiplier: 15
+    B_Health: 0
+    B_Base: 0
+    B_Regeneration: 0
+    B_BaseHealthRegeneration: 0
+    B_LevelMultiplier: 0
   StaminaStats:
     Stamina: 35
     Base: 35
     Regeneration: 1
     BaseStaminaRegeneration: 1
     LevelMultiplier: 30
+    B_Stamina: 0
+    B_Base: 0
+    B_Regeneration: 0
+    B_BaseStaminaRegeneration: 0
+    B_LevelMultiplier: 0
+  ShieldStats:
+    Shield: 50
+    Base: 50
+    Regeneration: 8
+    BaseShieldRegeneration: 8
+    LevelMultiplier: 50
+    B_Shield: 0
+    B_Base: 0
+    B_Regeneration: 0
+    B_BaseShieldRegeneration: 0
+    B_LevelMultiplier: 0
   SpeedStats:
     BaseSpeed: 1
     MovementSpeed: 2.3
@@ -456,6 +489,15 @@ MonoBehaviour:
     LevelMultiplier: 10
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
+    B_BaseSpeed: 1
+    B_MovementSpeed: 1
+    B_AttackSpeed: 1
+    B_AttackSpeedRatio: 0
+    B_BulletSpeed: 5
+    B_LeaveSpeed: 3
+    B_LevelMultiplier: 0
+    B_IdleToAtkDuration: 0.2
+    B_AtkToIdleDuration: 0.2
   DamageStats:
     BaseDamage: 10
     MultiBulletAttackNumberOfBullets: 3

@@ -101,7 +101,7 @@ public class WaveManagerScript : MonoBehaviour
         res.CharInfo.RapidAttack.DamageMultiplier = character.RapidAttackMultiplier;
         res.CharInfo.PowerfulAttac.DamageMultiplier = character.PowerfulAttackMultiplier;
         res.CharInfo.Health = res.CharInfo.HealthStats.Base;
-
+        ((MinionType_Script)res).UpDownPerc = character.UpDownPerc;
         return res;
     }
 
@@ -295,6 +295,8 @@ public class WaveCharacterInfoClass
     public Vector2 AttackSpeedRatio;
     public Vector2 Stamina;
     public Vector2 StaminaRegeneration;
+    public float UpDownPerc = 18;
+
 
     public List<ScriptableObjectWaveEvent> Events = new List<ScriptableObjectWaveEvent>();
 

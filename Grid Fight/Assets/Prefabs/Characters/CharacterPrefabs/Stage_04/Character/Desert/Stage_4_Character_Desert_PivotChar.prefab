@@ -421,7 +421,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d6d058ae0d9b32448962293ed7bae455, type: 3}
   - {fileID: 21300000, guid: ba7684dd620a5c44c904c5f27fd5c679, type: 3}
   BaseCharacterType: 0
-  CharacterID: 5
+  CharacterID: 1085
   CurrentParticlesAttackTypeInfo:
   - {fileID: 11400000, guid: 73c66a9d114b7ea4a86c401084c4d62f, type: 2}
   - {fileID: 11400000, guid: 8fb60940686eaa44dbae8a096628ded4, type: 2}
@@ -431,6 +431,7 @@ MonoBehaviour:
   ClassType: 3
   CharacterLevel: 0
   UseLayeringSystem: 1
+  CharacterRespawnLength: 180
   CharacterSelection: 1
   RapidAttack:
     DamageMultiplier: {x: 1, y: 1}
@@ -467,6 +468,17 @@ MonoBehaviour:
     B_Base: 0
     B_Regeneration: 0
     B_BaseStaminaRegeneration: 0
+    B_LevelMultiplier: 0
+  ShieldStats:
+    Shield: 50
+    Base: 50
+    Regeneration: 8
+    BaseShieldRegeneration: 8
+    LevelMultiplier: 50
+    B_Shield: 0
+    B_Base: 0
+    B_Regeneration: 0
+    B_BaseShieldRegeneration: 0
     B_LevelMultiplier: 0
   SpeedStats:
     BaseSpeed: 1

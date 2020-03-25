@@ -321,6 +321,8 @@ MonoBehaviour:
   SpecialFiringPoint: {fileID: 6179686115317653473}
   CurrentAnim: 0
   AnimationTransition: 0.1
+  changeanim: 0
+  transition: 0.5
 --- !u!114 &3843902669360439480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,7 +338,7 @@ MonoBehaviour:
   Name: 
   CharacterIcons: []
   BaseCharacterType: 6
-  CharacterID: 27
+  CharacterID: 1010
   CurrentParticlesAttackTypeInfo:
   - {fileID: 0}
   CurrentOnBattleFieldAttackTypeInfo:
@@ -347,27 +349,55 @@ MonoBehaviour:
   ClassType: 3
   CharacterLevel: 0
   UseLayeringSystem: 1
+  CharacterRespawnLength: 180
   CharacterSelection: 0
   RapidAttack:
     DamageMultiplier: {x: 1, y: 1}
     CriticalChance: {x: 2, y: 2}
     Stamina_Cost_Atk: 0
+    B_DamageMultiplier: {x: 1, y: 1}
+    B_CriticalChance: {x: 2, y: 2}
+    B_Stamina_Cost_Atk: 0
   PowerfulAttac:
     DamageMultiplier: {x: 3, y: 3}
     CriticalChance: {x: 3, y: 5}
     Stamina_Cost_Atk: 0
+    B_DamageMultiplier: {x: 3, y: 3}
+    B_CriticalChance: {x: 3, y: 5}
+    B_Stamina_Cost_Atk: 0
   HealthStats:
     Health: 30
     Base: 30
     Regeneration: 1
     BaseHealthRegeneration: 1
     LevelMultiplier: 0
+    B_Health: 0
+    B_Base: 0
+    B_Regeneration: 0
+    B_BaseHealthRegeneration: 0
+    B_LevelMultiplier: 0
   StaminaStats:
     Stamina: 40
     Base: 40
     Regeneration: 1
     BaseStaminaRegeneration: 1
     LevelMultiplier: 0
+    B_Stamina: 0
+    B_Base: 0
+    B_Regeneration: 0
+    B_BaseStaminaRegeneration: 0
+    B_LevelMultiplier: 0
+  ShieldStats:
+    Shield: 50
+    Base: 50
+    Regeneration: 8
+    BaseShieldRegeneration: 8
+    LevelMultiplier: 50
+    B_Shield: 0
+    B_Base: 0
+    B_Regeneration: 0
+    B_BaseShieldRegeneration: 0
+    B_LevelMultiplier: 0
   SpeedStats:
     BaseSpeed: 1
     MovementSpeed: 1
@@ -378,6 +408,15 @@ MonoBehaviour:
     LevelMultiplier: 0
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
+    B_BaseSpeed: 1
+    B_MovementSpeed: 1
+    B_AttackSpeed: 1
+    B_AttackSpeedRatio: 0
+    B_BulletSpeed: 5
+    B_LeaveSpeed: 3
+    B_LevelMultiplier: 0
+    B_IdleToAtkDuration: 0.2
+    B_AtkToIdleDuration: 0.2
   DamageStats:
     BaseDamage: 10
     MultiBulletAttackNumberOfBullets: 3

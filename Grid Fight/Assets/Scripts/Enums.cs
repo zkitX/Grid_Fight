@@ -587,49 +587,137 @@ public enum HealthChangedType
 
 public enum CharacterNameType
 {
-    None = 1000,
-    Stage00_Minion_Mountain = 23,
-    Stage00_Minion_Desert = 24,
-    Stage00_Minion_Forest = 25,
-    Stage00_Minion_Valley = 26,
-    Stage00_Character_Mountain = 19,
-    Stage00_Character_Valley = 20,
-    Stage00_Character_Forest = 21,
-    Stage00_Character_Desert = 22,
-    Stage00_BossOctopus = 27,
-    Stage00_BossOctopus_Head = 28,
-    Stage00_BossOctopus_Tentacles = 29,
-    Stage00_BossOctopus_Girl = 30,
-    Stage04_Minion_Mountain = 0,
-    Stage04_Minion_Desert = 1,
-    Stage04_Minion_Forest = 2,
-    Stage04_Minion_Valley = 3,
-    Stage04_Character_Valley = 4,
-    Stage04_Character_Desert = 5,
-    Stage04_Character_Mountain = 6,
-    Stage04_Character_Forest = 7,
-    Stage04_BossGirl_Minion0 = 8,
-    Stage04_BossGirl_Minion1 = 9,
-    Stage04_BossGirl_Minion2 = 10,
-    Stage04_BossGirl_Minion3 = 11,
-    Stage04_BossGirl = 12,
-    Stage04_BossMonster_Minion = 13,
-    Stage04_BossMonster = 14,
-    Stage04_BossMonster_Minion0 = 15,
-    Stage04_BossMonster_Minion1 = 16,
-    Stage04_BossMonster_Minion2 = 17,
-    Stage04_BossMonster_Minion3 = 18,
-    Stage09_Character_Valley = 31,
-    Stage09_Character_Mountain = 32,
-    Stage09_Character_Desert = 33,
-    Stage09_Character_Forest = 34,
-    Stage09_Minion_Mountain = 35,
-    Stage09_Minion_Desert = 36,
-    Stage09_Minion_Forest = 37,
-    Stage09_Minion_Valley = 38,
-    DummyChar = 10001
-}
+    #region CharacterNameType
+    None = 0,
+    //Stage 00
+    Stage00_Minion_Mountain = 1000,
+    Stage00_Minion_Desert = 1001,
+    Stage00_Minion_Forest = 1002,
+    Stage00_Minion_Valley = 1003,
+    Stage00_Character_Mountain = 1004,
+    Stage00_Character_Valley = 1005,
+    Stage00_Character_Forest = 1006,
+    Stage00_Character_Desert = 1007,
+    Stage00_BossOctopus = 1010,
+    Stage00_BossOctopus_Head = 1011,
+    Stage00_BossOctopus_Tentacles = 1012,
+    Stage00_BossOctopus_Girl = 1013,
 
+
+
+    //Stage 01
+    Stage01_Minion_Mountain = 1020,
+    Stage01_Minion_Desert = 1021,
+    Stage01_Minion_Forest = 1022,
+    Stage01_Minion_Valley = 1023,
+    Stage01_Character_Valley = 1024,
+    Stage01_Character_Desert = 1025,
+    Stage01_Character_Mountain = 1026,
+    Stage01_Character_Forest = 1027,
+
+
+    //Stage 02
+    Stage02_Minion_Mountain = 1040,
+    Stage02_Minion_Desert = 1041,
+    Stage02_Minion_Forest = 1042,
+    Stage02_Minion_Valley = 1043,
+    Stage02_Character_Valley = 1044,
+    Stage02_Character_Desert = 1045,
+    Stage02_Character_Mountain = 1046,
+    Stage02_Character_Forest = 1047,
+
+
+    //Stage 03
+    Stage03_Minion_Mountain = 1060,
+    Stage03_Minion_Desert = 1061,
+    Stage03_Minion_Forest = 1062,
+    Stage03_Minion_Valley = 1063,
+    Stage03_Character_Valley = 1064,
+    Stage03_Character_Desert = 1065,
+    Stage03_Character_Mountain = 1066,
+    Stage03_Character_Forest = 1067,
+
+
+    //Stage 04
+    Stage04_Minion_Mountain = 1080,
+    Stage04_Minion_Desert = 1081,
+    Stage04_Minion_Forest = 1082,
+    Stage04_Minion_Valley = 1083,
+    Stage04_Character_Valley = 1084,
+    Stage04_Character_Desert = 1085,
+    Stage04_Character_Mountain = 1086,
+    Stage04_Character_Forest = 1087,
+    Stage04_BossGirl = 1088,
+    Stage04_BossMonster = 1089,
+    Stage04_BossGirl_Minion0 = 1090,
+    Stage04_BossGirl_Minion1 = 1091,
+    Stage04_BossGirl_Minion2 = 1092,
+    Stage04_BossGirl_Minion3 = 1093,
+    Stage04_BossMonster_Minion = 1094,
+    Stage04_BossMonster_Minion0 = 1095,
+    Stage04_BossMonster_Minion1 = 1096,
+    Stage04_BossMonster_Minion2 = 1097,
+    Stage04_BossMonster_Minion3 = 1098,
+
+
+    //Stage 05
+    Stage05_Minion_Mountain = 1100,
+    Stage05_Minion_Desert = 1101,
+    Stage05_Minion_Forest = 1102,
+    Stage05_Minion_Valley = 1103,
+    Stage05_Character_Mountain = 1104,
+    Stage05_Character_Valley = 1105,
+    Stage05_Character_Forest = 1106,
+    Stage05_Character_Desert = 1107,
+
+
+    //Stage 06
+    Stage06_Minion_Mountain = 1120,
+    Stage06_Minion_Desert = 1121,
+    Stage06_Minion_Forest = 1122,
+    Stage06_Minion_Valley = 1123,
+    Stage06_Character_Valley = 1124,
+    Stage06_Character_Desert = 1125,
+    Stage06_Character_Mountain = 1126,
+    Stage06_Character_Forest = 1127,
+
+
+    //Stage 07
+    Stage07_Minion_Mountain = 1140,
+    Stage07_Minion_Desert = 1141,
+    Stage07_Minion_Forest = 1142,
+    Stage07_Minion_Valley = 1143,
+    Stage07_Character_Valley = 1144,
+    Stage07_Character_Desert = 1145,
+    Stage07_Character_Mountain = 1146,
+    Stage07_Character_Forest = 1147,
+
+
+    //Stage 08
+    Stage08_Minion_Mountain = 1160,
+    Stage08_Minion_Desert = 1161,
+    Stage08_Minion_Forest = 1162,
+    Stage08_Minion_Valley = 1163,
+    Stage08_Character_Valley = 1164,
+    Stage08_Character_Desert = 1165,
+    Stage08_Character_Mountain = 1166,
+    Stage08_Character_Forest = 1167,
+
+
+    //Stage 09
+    Stage09_Minion_Mountain = 1180,
+    Stage09_Minion_Desert = 1181,
+    Stage09_Minion_Forest = 1182,
+    Stage09_Minion_Valley = 1183,
+    Stage09_Character_Valley = 1184,
+    Stage09_Character_Mountain = 1185,
+    Stage09_Character_Desert = 1186,
+    Stage09_Character_Forest = 1187,
+    
+    DummyChar = 10001
+    #endregion
+
+}
 
 public enum WavePhaseType
 {

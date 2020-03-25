@@ -419,7 +419,7 @@ MonoBehaviour:
   Name: Alanda
   CharacterIcons: []
   BaseCharacterType: 0
-  CharacterID: 6
+  CharacterID: 1086
   CurrentParticlesAttackTypeInfo:
   - {fileID: 11400000, guid: 73c66a9d114b7ea4a86c401084c4d62f, type: 2}
   - {fileID: 11400000, guid: 5271a803fa7312741ae6ab72fd388fd9, type: 2}
@@ -430,6 +430,7 @@ MonoBehaviour:
   ClassType: 1
   CharacterLevel: 0
   UseLayeringSystem: 1
+  CharacterRespawnLength: 180
   CharacterSelection: 2
   RapidAttack:
     DamageMultiplier: {x: 1, y: 1}
@@ -466,6 +467,17 @@ MonoBehaviour:
     B_Base: 0
     B_Regeneration: 0
     B_BaseStaminaRegeneration: 0
+    B_LevelMultiplier: 0
+  ShieldStats:
+    Shield: 50
+    Base: 50
+    Regeneration: 8
+    BaseShieldRegeneration: 8
+    LevelMultiplier: 50
+    B_Shield: 0
+    B_Base: 0
+    B_Regeneration: 0
+    B_BaseShieldRegeneration: 0
     B_LevelMultiplier: 0
   SpeedStats:
     BaseSpeed: 1

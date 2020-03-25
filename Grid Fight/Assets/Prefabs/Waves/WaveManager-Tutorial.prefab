@@ -51,14 +51,14 @@ MonoBehaviour:
   WavePhases:
   - name: Wave1
     IsRandom: 0
-    MaxEnemyOnScreen: 1
+    MaxEnemyOnScreen: 2
     DelayBetweenChars: 0
     ListOfEnemy:
     - name: robo
       NPCType: 0
-      NumberOfCharacter: 1
+      NumberOfCharacter: 2
       TypeOfCharacter:
-        CharacterName: 23
+        CharacterName: 1000
         CharacterClass: 0
         Health: {x: 20, y: 30}
         HealthRegeneration: {x: 0.2, y: 0.2}
@@ -82,7 +82,7 @@ MonoBehaviour:
       NPCType: 0
       NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 23
+        CharacterName: 1000
         CharacterClass: 0
         Health: {x: 15, y: 20}
         HealthRegeneration: {x: 1, y: 1}
@@ -106,7 +106,7 @@ MonoBehaviour:
       NPCType: 0
       NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 24
+        CharacterName: 1001
         CharacterClass: 0
         Health: {x: 15, y: 20}
         HealthRegeneration: {x: 1, y: 1.5}
@@ -130,7 +130,7 @@ MonoBehaviour:
       NPCType: 0
       NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 24
+        CharacterName: 1001
         CharacterClass: 0
         Health: {x: 20, y: 15}
         HealthRegeneration: {x: 1, y: 1}
@@ -150,7 +150,7 @@ MonoBehaviour:
       NPCType: 0
       NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 25
+        CharacterName: 1000
         CharacterClass: 0
         Health: {x: 20, y: 15}
         HealthRegeneration: {x: 1, y: 1}
@@ -175,7 +175,7 @@ MonoBehaviour:
       NPCType: 1
       NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 21
+        CharacterName: 1006
         CharacterClass: 0
         Health: {x: 20, y: 15}
         HealthRegeneration: {x: 1, y: 1}
@@ -201,7 +201,7 @@ MonoBehaviour:
       NPCType: 0
       NumberOfCharacter: 2
       TypeOfCharacter:
-        CharacterName: 25
+        CharacterName: 1002
         CharacterClass: 0
         Health: {x: 15, y: 20}
         HealthRegeneration: {x: 1, y: 1}
@@ -221,7 +221,7 @@ MonoBehaviour:
       NPCType: 0
       NumberOfCharacter: 2
       TypeOfCharacter:
-        CharacterName: 26
+        CharacterName: 1003
         CharacterClass: 0
         Health: {x: 15, y: 20}
         HealthRegeneration: {x: 1, y: 1}
@@ -246,7 +246,7 @@ MonoBehaviour:
       NPCType: 1
       NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 19
+        CharacterName: 1004
         CharacterClass: 0
         Health: {x: 30, y: 40}
         HealthRegeneration: {x: 1, y: 1}
@@ -262,26 +262,6 @@ MonoBehaviour:
       IsRandomSpowiningTile: 0
       SpowningTile:
       - {x: 3, y: 9}
-    - name: bird
-      NPCType: 1
-      NumberOfCharacter: 1
-      TypeOfCharacter:
-        CharacterName: 22
-        CharacterClass: 0
-        Health: {x: 30, y: 40}
-        HealthRegeneration: {x: 1, y: 1}
-        BaseDamage: {x: 10, y: 15}
-        RapidAttackMultiplier: {x: 0, y: 0}
-        PowerfulAttackMultiplier: {x: 0, y: 0}
-        BaseSpeed: {x: 1, y: 1}
-        AttackSpeedRatio: {x: 8, y: 10}
-        Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        Events: []
-      StartingEnemyNumber: 0
-      IsRandomSpowiningTile: 0
-      SpowningTile:
-      - {x: 2, y: 8}
   - name: Wave8
     IsRandom: 0
     MaxEnemyOnScreen: 2
@@ -291,7 +271,7 @@ MonoBehaviour:
       NPCType: 0
       NumberOfCharacter: 2
       TypeOfCharacter:
-        CharacterName: 24
+        CharacterName: 1001
         CharacterClass: 0
         Health: {x: 15, y: 20}
         HealthRegeneration: {x: 1, y: 1}
@@ -311,7 +291,7 @@ MonoBehaviour:
       NPCType: 0
       NumberOfCharacter: 2
       TypeOfCharacter:
-        CharacterName: 25
+        CharacterName: 1000
         CharacterClass: 0
         Health: {x: 15, y: 20}
         HealthRegeneration: {x: 1, y: 1}
@@ -331,7 +311,7 @@ MonoBehaviour:
       NPCType: 0
       NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 24
+        CharacterName: 1002
         CharacterClass: 0
         Health: {x: 15, y: 20}
         HealthRegeneration: {x: 1, y: 1}
@@ -356,7 +336,7 @@ MonoBehaviour:
       NPCType: 2
       NumberOfCharacter: 2
       TypeOfCharacter:
-        CharacterName: 27
+        CharacterName: 1010
         CharacterClass: 0
         Health: {x: 30, y: 40}
         HealthRegeneration: {x: 1, y: 1}
