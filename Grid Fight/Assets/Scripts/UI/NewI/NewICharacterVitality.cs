@@ -14,6 +14,7 @@ public class NewICharacterVitality : MonoBehaviour
     [SerializeField] protected Image staminaBar;
     [SerializeField] protected Image specialBar;
     [SerializeField] protected Image shieldBar;
+    [SerializeField] protected Image shieldBackPlate;
     [SerializeField] protected Gradient shieldColors;
     protected Animator animator;
 
@@ -23,6 +24,7 @@ public class NewICharacterVitality : MonoBehaviour
     [SerializeField] protected Image characterIconSelected;
     [SerializeField] protected TextMeshProUGUI characterName;
     [SerializeField] protected TextMeshProUGUI deadText;
+    float colorDampenAmount = 0.7f;
     protected bool charDead = false;
 
     protected Vector3 damageSliceOrigin;
@@ -104,13 +106,16 @@ public class NewICharacterVitality : MonoBehaviour
 
     IEnumerator ReviveSequence()
     {
-        float colorDampenAmount = 0.7f;
         Color healthBarColor = healthBar.color;
         Color staminaBarColor = staminaBar.color;
         Color shieldBarColor = shieldBar.color;
+        Color shieldBarBackPlateColor = shieldBackPlate.color;
+        Color characterIconColor = characterIconIdle.color;
         healthBar.color *= colorDampenAmount;
         staminaBar.color *= colorDampenAmount;
         shieldBar.color *= colorDampenAmount;
+        shieldBackPlate.color *= colorDampenAmount;
+        characterIconIdle.color *= colorDampenAmount;
         float healthStart = healthBar.fillAmount;
         float staminaStart = staminaBar.fillAmount;
         float shieldStart = shieldBar.fillAmount;
@@ -131,6 +136,8 @@ public class NewICharacterVitality : MonoBehaviour
         healthBar.color = healthBarColor;
         staminaBar.color = staminaBarColor;
         shieldBar.color = shieldBarColor;
+        shieldBackPlate.color = shieldBarBackPlateColor;
+        characterIconIdle.color = characterIconColor;
     }
 
     public void TakeDamageSlice()
@@ -143,7 +150,7 @@ public class NewICharacterVitality : MonoBehaviour
     IEnumerator DamageSliceSequencer = null;
     IEnumerator DamageSliceSequence()
     {
-        Vector3 slicePos = damageSliceOrigin + new Vector3(healthBar.rectTransform.sizeDelta.x * (assignedCharDetails.HealthPerc / 100f), 0f);
+        Vector3 slicePos = damageSliceOrigin + (mapSide == SideType.LeftSide ? 1f : -1f) * (new Vector3(healthBar.rectTransform.sizeDelta.x * (assignedCharDetails.HealthPerc / 100f), 0f));
         damageSlice.transform.position = slicePos;
         damageSlice.GetComponentInChildren<Animator>().SetTrigger("SliceDamage");
         yield return null;
@@ -288,7 +295,7 @@ public class NewICharacterVitality : MonoBehaviour
             vitality.fillAmount = Mathf.Lerp(startFloat, endFloat, 1f - duration / startDuration);
             if (colorChangeGradient != null)
             {
-                vitality.color = colorChangeGradient.Evaluate(vitality.fillAmount);
+                vitality.color = colorChangeGradient.Evaluate(vitality.fillAmount) * (!charDead ? 1f : colorDampenAmount);
             }
             yield return null;
         }
