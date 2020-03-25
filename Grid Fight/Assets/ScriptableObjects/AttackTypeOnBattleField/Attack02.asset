@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aafb3c4b93ffa5d45b0be95204d570b3, type: 3}
+  m_Name: Attack02
+  m_EditorClassIdentifier: 
+  AttackRatioMultiplier: 1
+  DamageMultiplier: {x: 1, y: 1}
+  AttackAnim: 1
+  AtkType: 1
+  BulletTrajectories:
+  - Delay: 2
+    Show: 1
+    BulletEffectTiles:
+    - Pos: {x: 0, y: 1}
+      HasEffect: 1
+      Effects:
+      - {fileID: 11400000, guid: 0390dbef951c44b4c9a58662bb3e1562, type: 2}
+      HasDifferentParticles: 0
+      ParticlesID: 0
+      IsEffectOnTile: 0
+      TileParticlesID: 0
+      DurationOnTile: 0
+  - Delay: 2.1
+    Show: 1
+    BulletEffectTiles:
+    - Pos: {x: 0, y: 0}
+      HasEffect: 0
+      Effects: []
+      HasDifferentParticles: 0
+      ParticlesID: 0
+      IsEffectOnTile: 0
+      TileParticlesID: 0
+      DurationOnTile: 0
+  - Delay: 2.2
+    Show: 1
+    BulletEffectTiles:
+    - Pos: {x: 0, y: -1}
+      HasEffect: 0
+      Effects: []
+      HasDifferentParticles: 0
+      ParticlesID: 0
+      IsEffectOnTile: 0
+      TileParticlesID: 0
+      DurationOnTile: 0
+  StatToCheck: 0
+  ValueChecker: 0
+  PercToCheck: 0
+  Chances: 0
