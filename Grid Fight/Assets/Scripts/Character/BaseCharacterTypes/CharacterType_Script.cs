@@ -311,7 +311,7 @@ public class CharacterType_Script : BaseCharacter
     #endregion
 
     #region Changing
-    IEnumerator GridJumpSequencer = null;
+    /*IEnumerator GridJumpSequencer = null;
     public void StartGridJump(float duration)
     {
         if (GridJumpSequencer != null) StopCoroutine(GridJumpSequencer);
@@ -347,7 +347,7 @@ public class CharacterType_Script : BaseCharacter
             transform.position = new Vector3(transform.position.x, newPos.y, transform.position.z);
             yield return null;
         }
-    }
+    }*/
 
 
     #endregion

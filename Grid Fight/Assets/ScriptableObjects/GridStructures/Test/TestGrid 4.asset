@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ede280587bd405459b300c7ae873cb3, type: 3}
-  m_Name: 5x10Base
+  m_Name: TestGrid 4
   m_EditorClassIdentifier: 
   GridInfo:
   - name: 0,0
@@ -21,12 +21,12 @@ MonoBehaviour:
     WalkingSide: 0
     Portal: 0
     IDPortal: 0
-    TileSprite: {fileID: 0}
+    TileSprite: {fileID: 21300000, guid: d15437e030884c446bf2fff102c7dc9d, type: 3}
   - name: 0,1
     Pos: {x: 0, y: 1}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 1
+    _BattleTileState: 0
     WalkingSide: 0
     Portal: 0
     IDPortal: 0
@@ -35,7 +35,7 @@ MonoBehaviour:
     Pos: {x: 0, y: 2}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 1
+    _BattleTileState: 0
     WalkingSide: 0
     Portal: 0
     IDPortal: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
     Pos: {x: 0, y: 3}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 1
+    _BattleTileState: 0
     WalkingSide: 0
     Portal: 0
     IDPortal: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
     Pos: {x: 0, y: 4}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 1
+    _BattleTileState: 0
     WalkingSide: 0
     Portal: 0
     IDPortal: 0
@@ -62,7 +62,7 @@ MonoBehaviour:
     Pos: {x: 0, y: 5}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 1
+    _BattleTileState: 0
     WalkingSide: 0
     Portal: 0
     IDPortal: 0
@@ -71,7 +71,7 @@ MonoBehaviour:
     Pos: {x: 0, y: 6}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 1
+    _BattleTileState: 0
     WalkingSide: 1
     Portal: 0
     IDPortal: 0
@@ -80,7 +80,7 @@ MonoBehaviour:
     Pos: {x: 0, y: 7}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 1
+    _BattleTileState: 0
     WalkingSide: 1
     Portal: 0
     IDPortal: 0
@@ -89,7 +89,7 @@ MonoBehaviour:
     Pos: {x: 0, y: 8}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 1
+    _BattleTileState: 0
     WalkingSide: 1
     Portal: 0
     IDPortal: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
     Pos: {x: 0, y: 9}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 1
+    _BattleTileState: 0
     WalkingSide: 1
     Portal: 0
     IDPortal: 0
@@ -107,7 +107,7 @@ MonoBehaviour:
     Pos: {x: 0, y: 10}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 1
+    _BattleTileState: 0
     WalkingSide: 1
     Portal: 0
     IDPortal: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
     Pos: {x: 1, y: 0}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 0
+    _BattleTileState: 1
     WalkingSide: 0
     Portal: 0
     IDPortal: 0
@@ -179,7 +179,7 @@ MonoBehaviour:
     Pos: {x: 1, y: 6}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 1
+    _BattleTileState: 0
     WalkingSide: 1
     Portal: 0
     IDPortal: 0
@@ -215,7 +215,7 @@ MonoBehaviour:
     Pos: {x: 1, y: 10}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 1
+    _BattleTileState: 0
     WalkingSide: 1
     Portal: 0
     IDPortal: 0
@@ -233,7 +233,7 @@ MonoBehaviour:
     Pos: {x: 2, y: 0}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 0
+    _BattleTileState: 1
     WalkingSide: 0
     Portal: 0
     IDPortal: 0
@@ -287,7 +287,7 @@ MonoBehaviour:
     Pos: {x: 2, y: 6}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 1
+    _BattleTileState: 0
     WalkingSide: 1
     Portal: 0
     IDPortal: 0
@@ -297,7 +297,7 @@ MonoBehaviour:
     HasEffect: 0
     Effects: []
     _BattleTileState: 1
-    WalkingSide: 1
+    WalkingSide: 0
     Portal: 0
     IDPortal: 0
     TileSprite: {fileID: 0}
@@ -323,7 +323,7 @@ MonoBehaviour:
     Pos: {x: 2, y: 10}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 1
+    _BattleTileState: 0
     WalkingSide: 1
     Portal: 0
     IDPortal: 0
@@ -341,7 +341,7 @@ MonoBehaviour:
     Pos: {x: 3, y: 0}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 0
+    _BattleTileState: 1
     WalkingSide: 0
     Portal: 0
     IDPortal: 0
@@ -395,8 +395,8 @@ MonoBehaviour:
     Pos: {x: 3, y: 6}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 1
-    WalkingSide: 1
+    _BattleTileState: 0
+    WalkingSide: 0
     Portal: 0
     IDPortal: 0
     TileSprite: {fileID: 0}
@@ -431,7 +431,7 @@ MonoBehaviour:
     Pos: {x: 3, y: 10}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 1
+    _BattleTileState: 0
     WalkingSide: 1
     Portal: 0
     IDPortal: 0
@@ -449,7 +449,7 @@ MonoBehaviour:
     Pos: {x: 4, y: 0}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 0
+    _BattleTileState: 1
     WalkingSide: 0
     Portal: 0
     IDPortal: 0
@@ -503,7 +503,7 @@ MonoBehaviour:
     Pos: {x: 4, y: 6}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 1
+    _BattleTileState: 0
     WalkingSide: 1
     Portal: 0
     IDPortal: 0
@@ -539,7 +539,7 @@ MonoBehaviour:
     Pos: {x: 4, y: 10}
     HasEffect: 0
     Effects: []
-    _BattleTileState: 1
+    _BattleTileState: 0
     WalkingSide: 1
     Portal: 0
     IDPortal: 0
@@ -661,6 +661,6 @@ MonoBehaviour:
     Portal: 0
     IDPortal: 0
     TileSprite: {fileID: 0}
-  YGridSeparator: 6
-  CameraPosition: {x: 0, y: 0, z: 0}
-  OrthographicSize: 0
+  YGridSeparator: 7
+  CameraPosition: {x: -2, y: 0, z: -8.5}
+  OrthographicSize: 4

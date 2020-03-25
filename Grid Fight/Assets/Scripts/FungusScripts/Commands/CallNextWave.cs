@@ -13,9 +13,9 @@ public class CallNextWave : Command
 {
     public string WaveName;
 
+    public float TransitionDuration = 2;
     public bool HasADifferentStage = false;
-    [ConditionalField("HasADifferentStage", false)] public int StageToShow;
-    [ConditionalField("HasADifferentStage", false)] public float TransitionDuration = 2;
+    [ConditionalField("HasADifferentStage", false)] public int FightGridToShow;
 
     public bool HasADifferentGrid = false;
     [ConditionalField("HasADifferentGrid", false)] public ScriptableObjectGridStructure Grid;
@@ -35,14 +35,19 @@ public class CallNextWave : Command
             yield return null;
         }
 
-        if (HasADifferentStage)
+        if (HasADifferentStage && HasADifferentGrid)
         {
-            BattleManagerScript.Instance.MoveToNewGrid(StageToShow, TransitionDuration);
+            EnvironmentManager.Instance.ChangeGridStructure(Grid, false, TransitionDuration);
+            EnvironmentManager.Instance.MoveToNewGrid(FightGridToShow, TransitionDuration);
         }
-
-        if (HasADifferentGrid)
+        else if (HasADifferentStage)
         {
-            EnvironmentManager.Instance.ChangeGridStructure(Grid);
+            EnvironmentManager.Instance.MoveToNewGrid(FightGridToShow, TransitionDuration);
+        }
+        else if (HasADifferentGrid)
+        {
+            EnvironmentManager.Instance.ChangeGridStructure(Grid, true, TransitionDuration);
+            EnvironmentManager.Instance.MoveCharactersToFitNewGrid(TransitionDuration);
         }
 
         yield return WaveManagerScript.Instance.StartWaveByName(WaveName);

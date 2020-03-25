@@ -16,7 +16,7 @@ public class CharacterType_ScriptEditor : Editor
         EditorGUILayout.LabelField("DEBUG TOOLS");
         if(GUILayout.Button("Jump Character"))
         {
-            BattleManagerScript.Instance.MoveToNewGrid(EnvironmentManager.Instance.currentGridIndex == 0 ? 1 : 0, 1.5f);
+            EnvironmentManager.Instance.MoveToNewGrid(EnvironmentManager.Instance.currentGridIndex == 0 ? 1 : 0, 1.5f);
         }
     }
 }

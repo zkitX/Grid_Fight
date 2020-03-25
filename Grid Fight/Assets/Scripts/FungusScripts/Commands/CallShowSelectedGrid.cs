@@ -21,8 +21,8 @@ public class CallShowSelectedGrid : Command
 
     protected virtual void CallTheMethod()
     {
-        BattleManagerScript.Instance.MoveToNewGrid(StageToShow, 0);
-        EnvironmentManager.Instance.ChangeGridStructure(Grid);
+        EnvironmentManager.Instance.ChangeGridStructure(Grid, false);
+        EnvironmentManager.Instance.MoveToNewGrid(StageToShow, 0);
     }
 
     #region Public members

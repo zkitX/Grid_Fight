@@ -38,7 +38,8 @@ public class BattleManagerScript : MonoBehaviour
                     chars.Add(CurrentSelectedCharacters[(ControllerType)i].Character);
                 }
             }
-            return chars.ToArray();
+            if (chars.Count != 0) return chars.ToArray();
+            else return null;
         }
     }
 
@@ -734,15 +735,6 @@ public class BattleManagerScript : MonoBehaviour
                 CurrentSelectedCharacters[playerController].Character.MoveCharOnDirection(dir);
             }
         }
-    }
-
-    public void MoveToNewGrid(int gridIndex, float duration)
-    {
-        foreach(CharacterType_Script characterToMove in PlayerControlledCharacters)
-        {
-            characterToMove.StartGridJump(duration);
-        }
-        EnvironmentManager.Instance.MoveGridIntoFocus(EnvironmentManager.Instance.currentGridIndex == 0 ? 1 : 0, PlayerControlledCharacters, true, duration);
     }
     #endregion
 

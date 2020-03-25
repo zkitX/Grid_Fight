@@ -24,17 +24,10 @@ MonoBehaviour:
   ceaseOnComplete: 1
   requireComplete: 1
   effects:
-  - Name: Signal Completion
-    effectType: 1
-    secondsToWait: 0
-    debugText: 1.1 Complete
-    blockName: ExecutedByGameSequenceEvent
-    command: {fileID: 0}
-    characterToRecruit: 1000
-  - Name: StartGame
+  - Name: Start
     effectType: 2
     secondsToWait: 0
-    debugText: 1.1 Complete
+    debugText: 
     blockName: StartGame
     command: {fileID: 0}
-    characterToRecruit: 1000
+    characterToRecruit: 0

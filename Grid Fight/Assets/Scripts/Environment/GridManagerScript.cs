@@ -18,6 +18,7 @@ public class GridManagerScript : MonoBehaviour
     public GameObject TargetIndicator;
 
     public List<PortalInfoClass> Portals = new List<PortalInfoClass>();
+    public ScriptableObjectGridStructure currentGridStructureObject = null;
 
     private void Awake()
     {
@@ -38,10 +39,33 @@ public class GridManagerScript : MonoBehaviour
             //Debug.Log(tile.Pos + "   " + tile.BattleTileState.ToString());
             BattleTiles.Where(r => r.Pos == tile.Pos).First().SetupTileFromBattleTileInfo(tile);
         }
+        if(BattleManagerScript.Instance != null && BattleManagerScript.Instance.PlayerControlledCharacters != null)
+        {
+            foreach (CharacterType_Script character in BattleManagerScript.Instance.PlayerControlledCharacters)
+            {
+                if (BattleTiles.Where(r => r.Pos == character.UMS.CurrentTilePos).FirstOrDefault().BattleTileState != BattleTileStateType.Blocked)
+                {
+                    SetBattleTileState(character.UMS.CurrentTilePos, BattleTileStateType.Occupied);
+                }
+            }
+        }
         YGridSeparator = gridStructure.YGridSeparator;
-        if(InitializationCompleteEvent != null)
+
+        currentGridStructureObject = gridStructure;
+
+
+        if (InitializationCompleteEvent != null)
         {
             InitializationCompleteEvent();
+        }
+    }
+
+    public void MoveGrid_ToWorldPosition(Vector3 newGridPos)
+    {
+        transform.position = newGridPos;
+        foreach(BaseCharacter enemy in WaveManagerScript.Instance.WaveCharcters.Where(r => r.IsOnField == true))
+        {
+            enemy.transform.position = BattleTiles.Where(r => r.Pos == enemy.UMS.CurrentTilePos).First().transform.position;
         }
     }
 
@@ -204,6 +228,70 @@ public class GridManagerScript : MonoBehaviour
     public BattleTileScript GetBattleTile(Vector2Int pos, WalkingSideType walkingSide)//isEnemyOrPlayer = true/Player false/Enemy
     {
         return BattleTiles.Where(r => r.Pos == pos && (r.WalkingSide == walkingSide || walkingSide == WalkingSideType.Both)).FirstOrDefault();
+    }
+
+    public BattleTileScript[] GetTilesAdjacentTo(Vector2Int originPos, int withinRadius = 1, bool circularRadius = false, WalkingSideType side = WalkingSideType.Both)
+    {
+        BattleTileScript originTile = BattleTiles.Where(r => r.Pos == originPos).FirstOrDefault();
+        if (originTile == null) return null;
+
+        Vector2Int curTilePos = new Vector2Int();
+        BattleTileScript curTile = null;
+
+        List<BattleTileScript> adjTiles = new List<BattleTileScript>();
+        //WalkingSideType side = BattleTiles.Where(r => r.Pos == originPos).First().WalkingSide;
+        for (int x = -withinRadius; x <= withinRadius; x++)
+        {
+            for (int y = -withinRadius; y <= withinRadius; y++)
+            {
+                curTilePos = new Vector2Int(x, y) + originPos;
+                curTile = side != WalkingSideType.Both ? GetBattleTile(curTilePos, side) : BattleTiles.Where(r => r.Pos == originPos).FirstOrDefault();
+                if (curTile != null && curTilePos != originPos && (circularRadius ? Vector2Int.Distance(curTilePos, originPos) - 0.5f < withinRadius : true))
+                {
+                    adjTiles.Add(curTile);
+                }
+            }
+        }
+        if(adjTiles.Count == 0)
+        {
+            return null;
+        }
+        else
+        {
+            return adjTiles.ToArray();
+        }
+    }
+
+    public BattleTileScript[] GetFreeTilesAdjacentTo(Vector2Int originPos, int withinRadius = 1, bool circularRadius = false, WalkingSideType side = WalkingSideType.Both)
+    {
+        List<BattleTileScript> adjFreeTiles = new List<BattleTileScript>();
+        foreach(BattleTileScript tile in GetTilesAdjacentTo(originPos, withinRadius, circularRadius, side))
+        {
+            if(tile._BattleTileState == BattleTileStateType.Empty)
+            {
+                adjFreeTiles.Add(tile);
+            }
+        }
+        if (adjFreeTiles.Count == 0)
+        {
+            return null;
+        }
+        else
+        {
+            return adjFreeTiles.ToArray();
+        }
+    }
+
+    public BattleTileScript GetRandomFreeAdjacentTile(Vector2Int originPos, int withinRadius = 1, bool circularRadius = false, WalkingSideType side = WalkingSideType.Both)
+    {
+        BattleTileScript[] freeAdjTiles = GetFreeTilesAdjacentTo(originPos, withinRadius, circularRadius, side);
+        if (freeAdjTiles != null) return freeAdjTiles[Random.Range(0, freeAdjTiles.Length)];
+        else return null;
+    }
+
+    public static Vector3 GetTranslationBetweenTiles(BattleTileScript startTile, BattleTileScript endTile)
+    {
+        return endTile.transform.position - startTile.transform.position;
     }
 
     public List<BattleTileScript> GetBattleTileInARowToDestination(Vector2Int destPos, FacingType isEnemyOrPlayer, int startingColumn)
