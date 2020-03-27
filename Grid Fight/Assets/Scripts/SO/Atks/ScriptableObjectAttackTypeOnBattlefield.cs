@@ -28,6 +28,7 @@ public class BattleFieldAttackTileClass
     [HideInInspector] public Vector2Int Pos;
     public bool HasEffect = false;
     [ConditionalField("HasEffect", false)] public List<ScriptableObjectAttackEffect> Effects = new List<ScriptableObjectAttackEffect>();
+    [ConditionalField("HasEffect", false)] public float EffectChances = 100;
     public bool HasDifferentParticles = false;
     [ConditionalField("HasDifferentParticles", false)] public AttackParticleType ParticlesID;
     [ConditionalField("HasDifferentParticles", false)] public bool IsEffectOnTile = false;

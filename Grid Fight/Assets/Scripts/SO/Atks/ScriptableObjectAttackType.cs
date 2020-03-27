@@ -37,6 +37,8 @@ public class BulletBehaviourInfoClass
 
     public bool HasEffect = false;
     [ConditionalField("HasEffect", false)] public List<ScriptableObjectAttackEffect> Effects = new List<ScriptableObjectAttackEffect>();
+    [ConditionalField("HasEffect", false)] public float EffectChances = 100;
+
 }
 
 

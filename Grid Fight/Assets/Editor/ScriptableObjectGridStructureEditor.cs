@@ -83,7 +83,7 @@ public class ScriptableObjectGridStructureEditor : Editor
         if (bti.HasEffect)
         {
             var list = bti.Effects;
-            int newCount = Mathf.Max(0, EditorGUILayout.IntField("size", list.Count));
+            int newCount = Mathf.Max(0, EditorGUILayout.IntField("Number of Effects", list.Count));
             while (newCount < list.Count)
                 list.RemoveAt(list.Count - 1);
             while (newCount > list.Count)
@@ -91,7 +91,7 @@ public class ScriptableObjectGridStructureEditor : Editor
 
             for (int i = 0; i < list.Count; i++)
             {
-                bti.Effects[i] = (ScriptableObjectAttackEffect)EditorGUILayout.ObjectField("Effect", bti.Effects[i], typeof(ScriptableObjectAttackEffect), false);   //"Effect", bfatc.Effects, typeof(ScriptableObjectAttackEffect), false
+                bti.Effects[i] = (ScriptableObjectAttackEffect)EditorGUILayout.ObjectField("Effect " + i , bti.Effects[i], typeof(ScriptableObjectAttackEffect), false);   //"Effect", bfatc.Effects, typeof(ScriptableObjectAttackEffect), false
             }
         }
 

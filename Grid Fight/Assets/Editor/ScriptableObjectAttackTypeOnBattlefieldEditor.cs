@@ -137,8 +137,9 @@ public class ScriptableObjectAttackTypeOnBattlefieldEditor : Editor
         bfatc.HasEffect = EditorGUILayout.ToggleLeft("HasEffect", bfatc.HasEffect);
         if (bfatc.HasEffect)
         {
+            bfatc.EffectChances = EditorGUILayout.FloatField("EffectChances", bfatc.EffectChances);
             var list = bfatc.Effects;
-            int newCount = Mathf.Max(0, EditorGUILayout.IntField("size", list.Count));
+            int newCount = Mathf.Max(0, EditorGUILayout.IntField("Number of Effects", list.Count));
             while (newCount < list.Count)
                 list.RemoveAt(list.Count - 1);
             while (newCount > list.Count)
@@ -146,7 +147,7 @@ public class ScriptableObjectAttackTypeOnBattlefieldEditor : Editor
 
             for (int i = 0; i < list.Count; i++)
             {
-                bfatc.Effects[i] = (ScriptableObjectAttackEffect)EditorGUILayout.ObjectField("Effect", bfatc.Effects[i], typeof(ScriptableObjectAttackEffect), false);   //"Effect", bfatc.Effects, typeof(ScriptableObjectAttackEffect), false
+                bfatc.Effects[i] = (ScriptableObjectAttackEffect)EditorGUILayout.ObjectField("Effect " + i, bfatc.Effects[i], typeof(ScriptableObjectAttackEffect), false);   //"Effect", bfatc.Effects, typeof(ScriptableObjectAttackEffect), false
             }
         }
 
@@ -160,7 +161,7 @@ public class ScriptableObjectAttackTypeOnBattlefieldEditor : Editor
         if (bfatc.IsEffectOnTile)
         {
             bfatc.TileParticlesID = (ParticlesType)EditorGUILayout.EnumPopup("ParticleType", bfatc.TileParticlesID);
-            bfatc.DurationOnTile = EditorGUILayout.FloatField("DurationOnTile", 0);
+            bfatc.DurationOnTile = EditorGUILayout.FloatField("DurationOnTile", bfatc.DurationOnTile);
         }
     }
 }

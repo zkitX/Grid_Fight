@@ -567,7 +567,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                                 shotsLeftInAttack++;
                                 bts.BattleTargetScript.SetAttack(item.Delay, BattleManagerScript.Instance.VFXScene ? CharInfo.ParticleID : target.ParticlesID, res,
                                 currentAtk.AtkType == BattleFieldAttackType.OnItSelf ? 0 : CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
-                                target.Effects);
+                                target.Effects, target.EffectChances);
                             }
                         }
                     }
@@ -1093,7 +1093,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             return;
         }
 
-        Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + CharInfo.CharacterID.ToString());
+        //Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + CharInfo.CharacterID.ToString());
         if (animState == CharacterAnimationStateType.Reverse_Arriving)
         {
         }     

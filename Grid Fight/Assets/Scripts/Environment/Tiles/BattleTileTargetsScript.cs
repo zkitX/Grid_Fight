@@ -14,7 +14,7 @@ public class BattleTileTargetsScript : MonoBehaviour
     {
         Whiteline = transform.GetChild(0);
     }
-    public void SetAttack(float duration, AttackParticleType atkPS, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, List<ScriptableObjectAttackEffect> atkEffects)
+    public void SetAttack(float duration, AttackParticleType atkPS, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, List<ScriptableObjectAttackEffect> atkEffects, float effectChances)
     {
         GameObject nextT = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Tile);
         
@@ -24,10 +24,10 @@ public class BattleTileTargetsScript : MonoBehaviour
         nextT.transform.localPosition = TargetsPosition[0];
         Targets.Add(tc);
         UpdateQueue();
-        StartCoroutine(FireTarget(tc, atkPS, pos, damage, ele, attacker, atkEffects));
+        StartCoroutine(FireTarget(tc, atkPS, pos, damage, ele, attacker, atkEffects, effectChances));
     }
 
-    private IEnumerator FireTarget(TargetClass tc, AttackParticleType atkPS, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, List<ScriptableObjectAttackEffect> atkEffects)
+    private IEnumerator FireTarget(TargetClass tc, AttackParticleType atkPS, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, List<ScriptableObjectAttackEffect> atkEffects, float effectChances)
     {
         float timer = 0;
         Whiteline.gameObject.SetActive(true);
@@ -73,9 +73,13 @@ public class BattleTileTargetsScript : MonoBehaviour
                 effectOn = target.SetDamage(damage * (iscritical ? 2 : 1), ele, iscritical);
                 if (effectOn)
                 {
-                    foreach (ScriptableObjectAttackEffect item in atkEffects)
+                    int chances = Random.Range(0,100);
+                    if (chances < effectChances)
                     {
-                        target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.Value.x, item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles));
+                        foreach (ScriptableObjectAttackEffect item in atkEffects)
+                        {
+                            target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.Value.x, item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles));
+                        }
                     }
                 }
             }

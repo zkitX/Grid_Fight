@@ -6,7 +6,6 @@ using UnityEngine;
 public class ScriptableObjectAttackEffect : ScriptableObject
 {
     public string Name;
-    public bool HasEffect = false;
     public BuffDebuffStatsType StatsToAffect;
     public StatsCheckerType StatsChecker;
     public Vector2 Value;
