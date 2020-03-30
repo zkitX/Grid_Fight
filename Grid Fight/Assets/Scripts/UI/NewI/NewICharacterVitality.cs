@@ -71,8 +71,15 @@ public class NewICharacterVitality : MonoBehaviour
         previousHealthChange = assignedCharDetails.HealthPerc / 100f;
         if(shieldBar != null) shieldBar.color = shieldColors.Evaluate(assignedCharDetails.ShieldPerc / 100f);
         characterName.text = assignedCharDetails.Name;
-        characterIconSelected.sprite = assignedCharDetails.CharacterIcons[1];
-        characterIconIdle.sprite = assignedCharDetails.CharacterIcons[0];
+        if (assignedCharDetails.CharacterIcons.Length > 0)
+        {
+            characterIconIdle.sprite = assignedCharDetails.CharacterIcons[0];
+            if (assignedCharDetails.CharacterIcons.Length > 1)
+            {
+                characterIconSelected.sprite = assignedCharDetails.CharacterIcons[1];
+            }
+        }
+       
 
         UpdateVitalities();
     }
