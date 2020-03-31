@@ -46,7 +46,8 @@ public class UnitManagementScript : MonoBehaviour
     public SpriteRenderer SelectionIndicatorSprite;
     public SpriteRenderer SelectionIndicatorPlayerNumberBig;
     public SpriteRenderer SelectionIndicatorPlayerNumberSmall;
-    public SpriteRenderer SelectionIndicatorPlayerSmall; //Potentially can be removed
+    public SpriteRenderer SelectionIndicatorPlayerSmall;
+    public SpriteRenderer SelectionIndicatorPlayerBig;//Potentially can be removed
     public Color SelectionIndicatorColorUnselected;
     public Animator IndicatorAnim;
     public GameObject ArrivingParticle;
@@ -118,6 +119,8 @@ public class UnitManagementScript : MonoBehaviour
     {
         SelectionIndicatorPlayerNumberSmall.color = BattleManagerScript.Instance.playersColor[(int)playerController];
         SelectionIndicatorPlayerSmall.color = BattleManagerScript.Instance.playersColor[(int)playerController];
+        SelectionIndicatorPlayerNumberBig.color = BattleManagerScript.Instance.playersColor[(int)playerController];
+        SelectionIndicatorPlayerBig.color = BattleManagerScript.Instance.playersColor[(int)playerController];
 
         SelectionIndicatorPlayerNumberSmall.sprite = BattleManagerScript.Instance.playersNumberSmall[(int)playerController];
         SelectionIndicatorPlayerNumberBig.sprite = BattleManagerScript.Instance.playersNumberSmall[(int)playerController];

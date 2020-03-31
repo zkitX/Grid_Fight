@@ -19,7 +19,8 @@ public class CharacterInfoScript : MonoBehaviour
 
 
     public string Name;
-    [Tooltip("Should contain 2 for the HealthUI, one for deselected(0) and one for selected(1)")] public Sprite[] CharacterIcons;
+    [Tooltip("Should contain 2 for the HealthUI, one for deselected(0) and one for selected(1)")]
+    public Sprite[] CharacterIcons;
     public BaseCharType BaseCharacterType;
     public CharacterNameType CharacterID;
     public List<ScriptableObjectAttackType> CurrentParticlesAttackTypeInfo = new List<ScriptableObjectAttackType>();
@@ -30,7 +31,8 @@ public class CharacterInfoScript : MonoBehaviour
     public CharacterLevelType CharacterLevel;
     public bool UseLayeringSystem = true;
 
-    [Tooltip("Length of time, in seconds, that the character will take to respawn once killed")] public float CharacterRespawnLength = 180f;
+    [Tooltip("Length of time, in seconds, that the character will take to respawn once killed")]
+    public float CharacterRespawnLength = 180f;
 
     [HideInInspector]
     public CharacterSelectionType CharacterSelection;

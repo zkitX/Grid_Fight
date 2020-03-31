@@ -98,6 +98,7 @@ public class UIBattleFieldManager : MonoBehaviour
         }
         h.SetActive(true);
         h.GetComponentInChildren<TextMeshProUGUI>().text = ((int)(heal * 100)).ToString();
+        SetAnim(h.GetComponentInChildren<Animator>(), 5);
         while (timer <= 0.8f)
         {
             if(charOwner.gameObject.activeInHierarchy && isAlive)
@@ -128,6 +129,7 @@ public class UIBattleFieldManager : MonoBehaviour
         d.SetActive(true);
         d.GetComponentInChildren<TextMeshProUGUI>().text = ((int)(damage * 100)).ToString();
         d.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
+        SetAnim(d.GetComponentInChildren<Animator>(), 1);
         while (timer <= 0.8f)
         {
             if (charOwner.gameObject.activeInHierarchy && isAlive)
@@ -149,6 +151,7 @@ public class UIBattleFieldManager : MonoBehaviour
     {
         float timer = 0;
         bool isAlive = true;
+        string res = ((int)(damage * 100)).ToString();
         GameObject d;
         if (damage == 0)
         {
@@ -158,6 +161,7 @@ public class UIBattleFieldManager : MonoBehaviour
                 d = Instantiate(Defence, transform);
                 Defends.Add(Defends.Count, d);
             }
+            res = "DEF";
         }
         else
         {
@@ -170,11 +174,14 @@ public class UIBattleFieldManager : MonoBehaviour
         }
         
         d.SetActive(true);
-        d.GetComponentInChildren<TextMeshProUGUI>().text = ((int)(damage * 100)).ToString();
+        d.GetComponentInChildren<TextMeshProUGUI>().text = res;
         if (!charOwner.gameObject.activeInHierarchy)
         {
             d.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
         }
+
+        SetAnim(d.GetComponentInChildren<Animator>(), res == "DEF" ?  3 : 4);
+
         while (timer <= 0.8f)
         {
             if (charOwner.gameObject.activeInHierarchy && isAlive)
@@ -208,6 +215,9 @@ public class UIBattleFieldManager : MonoBehaviour
         {
             c.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
         }
+
+        SetAnim(c.GetComponentInChildren<Animator>(), 2);
+
         while (timer <= 0.8f)
         {
             if (charOwner.gameObject.activeInHierarchy && isAlive)
@@ -224,4 +234,11 @@ public class UIBattleFieldManager : MonoBehaviour
         }
         c.SetActive(false);
     }
+
+
+    private void SetAnim(Animator anim, int value)
+    {
+        anim.SetInteger("State", value);
+    }
+
 }

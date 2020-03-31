@@ -21,8 +21,18 @@ public class GridFightSayDialog : SayDialog
 
     protected override void Start()
     {
-        InputController.Instance.ButtonAUpEvent += Instance_ButtonAUpEvent;
+        
         base.Start();
+    }
+
+    private IEnumerator Initializer()
+    {
+        while (InputController.Instance == null)
+        {
+            yield return null;
+        }
+
+        InputController.Instance.ButtonAUpEvent += Instance_ButtonAUpEvent;
     }
 
     private void Instance_ButtonAUpEvent(int player)
@@ -38,7 +48,7 @@ public class GridFightSayDialog : SayDialog
     public override IEnumerator DoSay(string text, bool clearPrevious, bool waitForInput, bool fadeWhenDone, bool stopVoiceover, bool waitForVO, AudioClip voiceOverClip, Character nextChar)
     {
         writer.inputFlag = false;
-        Debug.Log(text);
+        //Debug.Log(text);
         AnimSpeedChanger(1);
         while (BattleManagerScript.Instance == null)
         {
