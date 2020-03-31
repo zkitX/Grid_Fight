@@ -87,6 +87,13 @@ public class MinionType_Script : BaseCharacter
             yield return null;
             if (IsOnField)
             {
+
+                while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+                {
+                    yield return null;
+                }
+
+
                 List<BaseCharacter> enemys = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList();
                 BaseCharacter targetChar = enemys.Where(r => r.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x).FirstOrDefault();
                 if (targetChar != null)
@@ -144,7 +151,7 @@ public class MinionType_Script : BaseCharacter
                     yield return null;
                     while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || Attacking)
                     {
-                        yield return new WaitForFixedUpdate();
+                        yield return null;
                     }
                    // Debug.Log(timer + "    " + MoveTime);
                     timer += Time.deltaTime;
