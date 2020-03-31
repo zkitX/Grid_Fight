@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8180080665421893243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7147962789751134089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 41
+  indentLevel: 0
+  battleState: 4
+--- !u!114 &-7803278226961808909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7147962789751134089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0d3235cf6c1c7b42b704c9380e2ce8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 43
+  indentLevel: 0
+  playerController: 0
+  cName: 1007
 --- !u!114 &-7149378653144744619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16,7 +47,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: Wave2
   TransitionDuration: 2
-  HasADifferentStage: 0
+  HasADifferentStage: 1
   FightGridToShow: 1
   HasADifferentGrid: 1
   Grid: {fileID: 11400000, guid: 200ea1a8b0ac93843b69061347a94234, type: 2}
@@ -57,19 +88,6 @@ MonoBehaviour:
   itemId: 35
   indentLevel: 0
   battleState: 4
---- !u!114 &-4482895381266504102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7147962789751134089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6cabe3afe381684a8e88ee3273de786, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: -4115575225570086771}
 --- !u!114 &-4248458923417335610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,12 +129,43 @@ MonoBehaviour:
   itemId: 5
   blockName: Jump
   description: 
-  eventHandler: {fileID: -4482895381266504102}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 4054899225210595812}
   - {fileID: 2006638958212209517}
   - {fileID: -348366683089733490}
   - {fileID: -7149378653144744619}
+--- !u!114 &-3243738552862486337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7147962789751134089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 42
+  indentLevel: 0
+  battleState: 1
+--- !u!114 &-2779477903631060234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7147962789751134089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfc9867a2cc3b64e84b5c54117825d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 44
+  indentLevel: 0
+  playerController: 0
+  characterID: 1007
 --- !u!114 &-1954585495553759191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +192,7 @@ MonoBehaviour:
   eventHandler: {fileID: 0}
   commandList:
   - {fileID: 4818886900943490807}
+  - {fileID: -3243738552862486337}
   - {fileID: -7095416950843842144}
 --- !u!114 &-1844001208228282442
 MonoBehaviour:
@@ -254,10 +304,27 @@ MonoBehaviour:
   eventHandler: {fileID: 4462115988743830856}
   commandList:
   - {fileID: 6926647869802279339}
+  - {fileID: -7803278226961808909}
+  - {fileID: -2779477903631060234}
   - {fileID: 6794536912848676217}
   - {fileID: 7860691493968268171}
   - {fileID: 2053151184739027140}
   - {fileID: 400958577316780412}
+--- !u!114 &2532861103990059858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7147962789751134089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 36
+  indentLevel: 0
+  battleState: 1
 --- !u!114 &2860517230038489435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,7 +346,7 @@ MonoBehaviour:
   HasADifferentGrid: 1
   Grid: {fileID: 11400000, guid: 232ad583ffc643f4caf0dd25c13ea998, type: 2}
   NextBlockToFire: Jump3
---- !u!114 &2942192140369436481
+--- !u!114 &3167830474993164428
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -288,23 +355,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7147962789751134089}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6cabe3afe381684a8e88ee3273de786, type: 3}
+  m_Script: {fileID: 11500000, guid: 3315ad2ebb85443909a1203d56d9344e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentBlock: {fileID: 4960385741143165873}
---- !u!114 &2951289647178544968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7147962789751134089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6cabe3afe381684a8e88ee3273de786, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 8998609690489746903}
+  itemId: 37
+  indentLevel: 0
+  _duration:
+    floatRef: {fileID: 0}
+    floatVal: 2
+  durationOLD: 0
 --- !u!114 &4054899225210595812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,7 +454,7 @@ MonoBehaviour:
   itemId: 16
   blockName: Jump2
   description: 
-  eventHandler: {fileID: 2942192140369436481}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2532861103990059858}
   - {fileID: 3167830474993164428}
@@ -424,7 +483,7 @@ MonoBehaviour:
   itemId: 17
   blockName: Jump1
   description: 
-  eventHandler: {fileID: 6844268839326001750}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: -1844001208228282442}
   - {fileID: -4248458923417335610}
@@ -469,19 +528,6 @@ MonoBehaviour:
     floatRef: {fileID: 0}
     floatVal: 3
   durationOLD: 0
---- !u!114 &6844268839326001750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7147962789751134089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6cabe3afe381684a8e88ee3273de786, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 5710198594571133030}
 --- !u!114 &6926647869802279339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,6 +544,39 @@ MonoBehaviour:
   indentLevel: 0
   StageToShow: 0
   Grid: {fileID: 11400000, guid: 90415d7b3cc075b4ba9c53c90c7b49de, type: 2}
+--- !u!114 &7046405411483915553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7147962789751134089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 39
+  indentLevel: 0
+  battleState: 1
+--- !u!114 &7169593274406677278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7147962789751134089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3315ad2ebb85443909a1203d56d9344e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 40
+  indentLevel: 0
+  _duration:
+    floatRef: {fileID: 0}
+    floatVal: 1.9
+  durationOLD: 0
 --- !u!114 &7860691493968268171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,6 +590,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemId: 2
+  indentLevel: 0
+  battleState: 4
+--- !u!114 &8794022289681681262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7147962789751134089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 38
   indentLevel: 0
   battleState: 4
 --- !u!114 &8998609690489746903
@@ -527,8 +621,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -224.06618
-    y: -207.48605
+    x: -222.69632
+    y: -208.85591
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -536,58 +630,12 @@ MonoBehaviour:
   itemId: 18
   blockName: Jump3
   description: 
-  eventHandler: {fileID: 2951289647178544968}
+  eventHandler: {fileID: 0}
   commandList:
-  - {fileID: 0}
+  - {fileID: 7046405411483915553}
+  - {fileID: 7169593274406677278}
+  - {fileID: -8180080665421893243}
   - {fileID: 4905883336259271094}
---- !u!114 &2532861103990059858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7147962789751134089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 36
-  indentLevel: 0
-  battleState: 1
---- !u!114 &3167830474993164428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7147962789751134089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3315ad2ebb85443909a1203d56d9344e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 37
-  indentLevel: 0
-  _duration:
-    floatRef: {fileID: 0}
-    floatVal: 2
-  durationOLD: 0
---- !u!114 &8794022289681681262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7147962789751134089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 38
-  indentLevel: 0
-  battleState: 4
 --- !u!1001 &5051400719554334882
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -640,12 +688,12 @@ PrefabInstance:
         type: 3}
       propertyPath: selectedBlocks.Array.data[0]
       value: 
-      objectReference: {fileID: 8998609690489746903}
+      objectReference: {fileID: -4115575225570086771}
     - target: {fileID: 2677535637017708306, guid: 8718c6fea7df37f419be6a245a651994,
         type: 3}
       propertyPath: selectedCommands.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: -7149378653144744619}
     - target: {fileID: 2677535637017708306, guid: 8718c6fea7df37f419be6a245a651994,
         type: 3}
       propertyPath: blockViewHeight

@@ -40,10 +40,10 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
                 case (BuffDebuffStatsType.HealthStats_BaseHealthRegeneration):
                     itemType = ItemType.PowerUP_Health;
                     break;
-                case (BuffDebuffStatsType.StaminaStats_Regeneration):
+                case (BuffDebuffStatsType.SpeedStats_BaseSpeed):
                     itemType = ItemType.PowerUp_Speed;
                     break;
-                case (BuffDebuffStatsType.StaminaStats_LevelMultiplier):
+                case (BuffDebuffStatsType.StaminaStats_Stamina):
                     itemType = ItemType.PowerUP_Stamina;
                     break;
                 case (BuffDebuffStatsType.RapidAttack_CriticalChance):

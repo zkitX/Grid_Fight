@@ -312,7 +312,7 @@ public class WaveCharClass
     public WaveCharacterInfoClass TypeOfCharacter;
     public int StartingEnemyNumber;
     public bool IsRandomSpowiningTile = true;
-    [ConditionalField("IsRandomSpowiningTile", false)] public List<Vector2Int> SpowningTile = new List<Vector2Int>();
+    [ConditionalField("IsRandomSpowiningTile", true)] public List<Vector2Int> SpowningTile = new List<Vector2Int>();
 
 }
 

@@ -118,10 +118,11 @@ MonoBehaviour:
         StaminaRegeneration: {x: 1, y: 1}
         UpDownPerc: 18
         Events: []
-      StartingEnemyNumber: 0
-      IsRandomSpowiningTile: 1
+      StartingEnemyNumber: 2
+      IsRandomSpowiningTile: 0
       SpowningTile:
-      - {x: 4, y: 11}
+      - {x: 4, y: 8}
+      - {x: 2, y: 7}
     - name: Bot
       NPCType: 0
       NumberOfCharacter: 2
@@ -142,7 +143,8 @@ MonoBehaviour:
       StartingEnemyNumber: 0
       IsRandomSpowiningTile: 1
       SpowningTile:
-      - {x: 4, y: 11}
+      - {x: 2, y: 7}
+      - {x: 4, y: 8}
   - name: Wave3
     IsRandom: 1
     MaxEnemyOnScreen: 2
