@@ -1,10 +1,9 @@
-﻿using System.Collections;
+﻿using Fungus;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using Fungus;
 using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class GridFightMenuDialog : MenuDialog
 {
@@ -12,12 +11,13 @@ public class GridFightMenuDialog : MenuDialog
     public float TimeOffset = 0;
     public float CoolDown = 0.5f;
     protected List<FungusMenuOptionBoxScript> Boxes = new List<FungusMenuOptionBoxScript>();
-
+    bool isMenuReady = false;
     protected int Options = 0;
 
     protected override void Awake()
     {
         Boxes = GetComponentsInChildren<FungusMenuOptionBoxScript>().ToList();
+      
         Slider timeoutSlider = GetComponentInChildren<Slider>();
         cachedSlider = timeoutSlider;
         if (Application.isPlaying)
@@ -28,6 +28,11 @@ public class GridFightMenuDialog : MenuDialog
 
         
         CheckEventSystem();
+    }
+
+    private void Item_AnimationInfoScriptAnimationCompletedEvent()
+    {
+        isMenuReady = true;
     }
 
     public override void Clear()
@@ -41,6 +46,7 @@ public class GridFightMenuDialog : MenuDialog
 
         for (int i = 0; i < Boxes.Count; i++)
         {
+            Debug.Log("dea");
             Boxes[i].gameObject.SetActive(false);
         }
 
@@ -56,7 +62,9 @@ public class GridFightMenuDialog : MenuDialog
     {
         if (nextOptionIndex >= Boxes.Count)
             return false;
+       
         BattleManagerScript.Instance.FungusState = FungusDialogType.Menu;
+        isMenuReady = false;
         //if first option notify that a menu has started
         if (nextOptionIndex == 0)
             MenuSignals.DoMenuStart(this);
@@ -69,15 +77,19 @@ public class GridFightMenuDialog : MenuDialog
         //don't need to set anything on it
         if (hideOption)
             return true;
-
         box.gameObject.SetActive(true);
         box.BoxAnim.SetBool("InOut", true);
+        AnimationInfoScript[] anims = box.BoxAnim.GetBehaviours<AnimationInfoScript>();
+        for (int i = 0; i < anims.Length; i++)
+        {
+            anims[i].AnimationInfoScriptAnimationCompletedEvent += Item_AnimationInfoScriptAnimationCompletedEvent;
+        }
+
+       
         if (SelectionIndex + 1 == nextOptionIndex)
         {
             Boxes[SelectionIndex].BoxAnim.SetBool("isSelected", true);
         }
-        var a = action.Target;
-
         if (!string.IsNullOrEmpty(text))
         {
             box.NextBlock = (Block)action.Target.GetType().GetField("block").GetValue(action.Target);
@@ -138,7 +150,7 @@ public class GridFightMenuDialog : MenuDialog
 
     private void Instance_LeftJoystickUsedEvent(int player, InputDirection dir)
     {
-        if (Time.time > TimeOffset + CoolDown && BattleManagerScript.Instance.FungusState == FungusDialogType.Menu)
+        if (Time.time > TimeOffset + CoolDown && BattleManagerScript.Instance.FungusState == FungusDialogType.Menu && isMenuReady)
         {
             if(SelectionIndex >=0 && SelectionIndex <= Boxes.Where(r => r.gameObject.activeInHierarchy).ToList().Count)
             {
@@ -170,14 +182,23 @@ public class GridFightMenuDialog : MenuDialog
 
     private void Instance_ButtonADownEvent(int player)
     {
-        if(BattleManagerScript.Instance.FungusState == FungusDialogType.Menu)
+        if(BattleManagerScript.Instance.FungusState == FungusDialogType.Menu && isMenuReady)
         {
             Boxes[SelectionIndex].NextBlock.StartExecution();
+            isMenuReady = false;
             BattleManagerScript.Instance.FungusState = FungusDialogType.Dialog;
             
             foreach (FungusMenuOptionBoxScript item in Boxes)
             {
                 item.BoxAnim.SetBool("InOut", false);
+                for (int a = 0; a < Boxes.Count; a++)
+                {
+                    AnimationInfoScript[] anims = Boxes[a].BoxAnim.GetBehaviours<AnimationInfoScript>();
+                    for (int i = 0; i < anims.Length; i++)
+                    {
+                        anims[i].AnimationInfoScriptAnimationCompletedEvent -= Item_AnimationInfoScriptAnimationCompletedEvent;
+                    }
+                }
             }
 
             StartCoroutine(ClearMenu(1));
