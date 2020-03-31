@@ -88,7 +88,7 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
 
     public override void SetCharDead(bool hasToDisappear = true)
     {
-        if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Death)
+        if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Death.ToString())
         {
             CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);
             SetAttackReady(false);

@@ -139,7 +139,7 @@ public class Stage04_BossGirl_Script : MinionType_Script
 
     public override void SetCharDead(bool hasToDisappear = true)
     {
-        if(SpineAnim.CurrentAnim != CharacterAnimationStateType.Death)
+        if(SpineAnim.CurrentAnim != CharacterAnimationStateType.Death.ToString())
         {
             CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);
             BattleManagerScript.Instance.CurrentBattleState = BattleState.Event;

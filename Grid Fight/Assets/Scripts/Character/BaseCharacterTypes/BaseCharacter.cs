@@ -251,7 +251,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
 
         // DOnt do anything until the unit is free to attack(otherwise attack anim gets interupted by the other ones)
-        while (SpineAnim.CurrentAnim != CharacterAnimationStateType.Idle)
+        while (SpineAnim.CurrentAnim != CharacterAnimationStateType.Idle.ToString())
         {
             yield return new WaitForSeconds(0.5f);
         }
@@ -449,12 +449,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         if(UMS.CurrentAttackType == AttackType.Particles)
         {
-            if (SpineAnim.CurrentAnim.ToString().Contains("Atk1"))
+            if (SpineAnim.CurrentAnim.Contains("Atk1"))
             {
                 CharInfo.Stamina -= CharInfo.RapidAttack.Stamina_Cost_Atk;
                 EventManager.Instance?.UpdateStamina(this);
             }
-            else if (SpineAnim.CurrentAnim.ToString().Contains("Atk2"))
+            else if (SpineAnim.CurrentAnim.Contains("Atk2"))
             {
                 CharInfo.Stamina -= CharInfo.PowerfulAttac.Stamina_Cost_Atk;
                 EventManager.Instance?.UpdateStamina(this);
@@ -633,7 +633,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
         while (isDefending && CharInfo.Shield > 0f && canDefend)
         {
-            if(SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle)
+            if(SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle.ToString())
             {
                 SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
                 SpineAnim.SetAnimationSpeed(5);
@@ -658,9 +658,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     #endregion
     #region Move
 
-    protected IEnumerator MoveCharOnDir_Co(InputDirection nextDir)
+    protected virtual IEnumerator MoveCharOnDir_Co(InputDirection nextDir)
     {
-        if ((CharInfo.Health > 0 && !isMoving && IsOnField && SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving) || BattleManagerScript.Instance.VFXScene)
+        if ((CharInfo.Health > 0 && !isMoving && IsOnField && SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving.ToString()) || BattleManagerScript.Instance.VFXScene)
         {
             List<BattleTileScript> prevBattleTile = CurrentBattleTiles;
             List<BattleTileScript> CurrentBattleTilesToCheck = new List<BattleTileScript>();
@@ -734,8 +734,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public virtual void MoveCharOnDirection(InputDirection nextDir)
     {
-        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving || SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving ||
-            SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle || SwapWhenPossible || CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed <= 0)
+        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving.ToString() || SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving.ToString() ||
+            SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle.ToString() || SwapWhenPossible || CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed <= 0)
         {
             return;
         }
@@ -831,7 +831,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 TileMovementCompleteEvent?.Invoke(this);
             }
 
-            if(SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving)
+            if(SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving.ToString())
             {
                 isMoving = false;
                 TileMovementCompleteEvent?.Invoke(this);
@@ -1083,9 +1083,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         UMS.ArrivingParticle.SetActive(true);
     }
 
-
-
     public virtual void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
+    {
+        SetAnimation(animState.ToString(), loop, transition);
+    }
+
+    public virtual void SetAnimation(string animState, bool loop = false, float transition = 0)
     {
 
         if (CharInfo.SpeedStats.BaseSpeed <= 0)
@@ -1094,16 +1097,16 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
 
         //Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + CharInfo.CharacterID.ToString());
-        if (animState == CharacterAnimationStateType.Reverse_Arriving)
+        if (animState == CharacterAnimationStateType.Reverse_Arriving.ToString())
         {
         }     
 
-        if(animState == CharacterAnimationStateType.GettingHit && currentAttackPhase != AttackPhasesType.End)
+        if(animState == CharacterAnimationStateType.GettingHit.ToString() && currentAttackPhase != AttackPhasesType.End)
         {
             return;
         }
 
-        if (animState == CharacterAnimationStateType.GettingHit && Attacking)
+        if (animState == CharacterAnimationStateType.GettingHit.ToString() && Attacking)
         {
             return;
         }
@@ -1113,30 +1116,30 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             return;
         }*/
 
-        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle)
+        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle.ToString())
         {
             return;
         }
 
-        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving || SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving)
+        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving.ToString() || SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving.ToString())
         {
             return;
         }
 
         float AnimSpeed = 1;
 
-        if (animState == CharacterAnimationStateType.Atk || animState == CharacterAnimationStateType.Atk1)
+        if (animState == CharacterAnimationStateType.Atk.ToString() || animState == CharacterAnimationStateType.Atk1.ToString())
         {
             AnimSpeed = CharInfo.SpeedStats.AttackSpeed * CharInfo.BaseSpeed;
         }
-        else if (animState == CharacterAnimationStateType.DashDown ||
-            animState == CharacterAnimationStateType.DashUp ||
-            animState == CharacterAnimationStateType.DashLeft ||
-            animState == CharacterAnimationStateType.DashRight)
+        else if (animState == CharacterAnimationStateType.DashDown.ToString() ||
+            animState == CharacterAnimationStateType.DashUp.ToString() ||
+            animState == CharacterAnimationStateType.DashLeft.ToString() ||
+            animState == CharacterAnimationStateType.DashRight.ToString())
         {
             AnimSpeed = CharInfo.SpeedStats.MovementSpeed * CharInfo.BaseSpeed;
         }
-        else if(animState == CharacterAnimationStateType.Reverse_Arriving || animState == CharacterAnimationStateType.Arriving)
+        else if(animState == CharacterAnimationStateType.Reverse_Arriving.ToString() || animState == CharacterAnimationStateType.Arriving.ToString())
         {
             AnimSpeed = CharInfo.SpeedStats.LeaveSpeed;
         }

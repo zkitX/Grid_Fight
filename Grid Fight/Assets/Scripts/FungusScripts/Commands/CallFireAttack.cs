@@ -74,7 +74,7 @@ public class CallFireAttack : Command
         }
 
         yield return new WaitForSeconds(0.5f);
-        while (character.currentAttackPhase != AttackPhasesType.End && character.SpineAnim.CurrentAnim != CharacterAnimationStateType.Idle)
+        while (character.currentAttackPhase != AttackPhasesType.End && character.SpineAnim.CurrentAnim != CharacterAnimationStateType.Idle.ToString())
         {
             yield return null;
         }

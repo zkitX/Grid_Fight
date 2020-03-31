@@ -23,6 +23,38 @@ public class Stage00_BossOctopus : MinionType_Script
         GenerateBoss();
     }
 
+    void GenerateBoss()
+    {
+        foreach (CharacterNameType piece in piecesType)
+        {
+            Pieces.Add(CreatePiece(piece));
+        }
+        ((Stage00_BossOctopus_Girl)GetPiece(CharacterNameType.Stage00_BossOctopus_Girl)).CenteringPoint = GetComponentsInChildren<Transform>().Where(r => r.CompareTag("CenteringPoint")).FirstOrDefault();
+    }
+
+    private MinionType_Script CreatePiece(CharacterNameType pieceType)
+    {
+        MinionType_Script piece = (MinionType_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(pieceType.ToString(), CharacterSelectionType.Up,
+        CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, pieceType, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None), transform);
+        piece.UMS.Pos = UMS.Pos;
+        piece.UMS.EnableBattleBars(false);
+        piece.UMS.CurrentTilePos = UMS.CurrentTilePos;
+        piece.SetValueFromVariableName("BaseBoss", this);
+        if (pieceType == CharacterNameType.Stage00_BossOctopus_Head)
+        {
+            ((Stage00_BossOctopus_Head)piece).bossParent = this;
+        }
+        else if (pieceType == CharacterNameType.Stage00_BossOctopus_Tentacles)
+        {
+            ((Stage00_BossOctopus_Tentacles)piece).bossParent = this;
+        }
+        else if (pieceType == CharacterNameType.Stage00_BossOctopus_Girl)
+        {
+            ((Stage00_BossOctopus_Girl)piece).bossParent = this;
+        }
+        return piece;
+    }
+
     public override void SetUpEnteringOnBattle()
     {
         StartCoroutine(SetUpEnteringOnBattle_Co());
@@ -61,14 +93,6 @@ public class Stage00_BossOctopus : MinionType_Script
     }
 
 
-    void GenerateBoss()
-    {
-        foreach (CharacterNameType piece in piecesType)
-        {
-            Pieces.Add(CreatePiece(piece));
-        }
-        ((Stage00_BossOctopus_Girl)GetPiece(CharacterNameType.Stage00_BossOctopus_Girl)).CenteringPoint = GetComponentsInChildren<Transform>().Where(r => r.CompareTag("CenteringPoint")).FirstOrDefault();
-    }
 
     private IEnumerator SetUpEnteringOnBattle_Co()
     {
@@ -125,29 +149,6 @@ public class Stage00_BossOctopus : MinionType_Script
         }
 
         BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
-    }
-
-    private MinionType_Script CreatePiece(CharacterNameType pieceType)
-    {
-        MinionType_Script piece = (MinionType_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(pieceType.ToString(), CharacterSelectionType.Up,
-        CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, pieceType, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None), transform);
-        piece.UMS.Pos = UMS.Pos;
-        piece.UMS.EnableBattleBars(false);
-        piece.UMS.CurrentTilePos = UMS.CurrentTilePos;
-        piece.SetValueFromVariableName("BaseBoss", this);
-        if(pieceType == CharacterNameType.Stage00_BossOctopus_Head)
-        {
-            ((Stage00_BossOctopus_Head)piece).bossParent = this;
-        }
-        else if(pieceType == CharacterNameType.Stage00_BossOctopus_Tentacles)
-        {
-            ((Stage00_BossOctopus_Tentacles)piece).bossParent = this;
-        }
-        else if (pieceType == CharacterNameType.Stage00_BossOctopus_Girl)
-        {
-            ((Stage00_BossOctopus_Girl)piece).bossParent = this;
-        }
-        return piece;
     }
 
     MinionType_Script GetPiece(CharacterNameType pieceName)

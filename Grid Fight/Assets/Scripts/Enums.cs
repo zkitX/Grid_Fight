@@ -443,7 +443,9 @@ public enum BaseCharType
     Stage00_BossOctopus = 6,
     Stage00_BossOctopus_Head = 7,
     Stage00_BossOctopus_Tentacles = 8,
-    Stage00_BossOctopus_Girl = 9
+    Stage00_BossOctopus_Girl = 9,
+    Stage09_Boss_Geisha = 10,
+    Stage09_Boss_NoFace = 11,
 
 }
 
@@ -713,6 +715,8 @@ public enum CharacterNameType
     Stage09_Character_Mountain = 1185,
     Stage09_Character_Desert = 1186,
     Stage09_Character_Forest = 1187,
+    Stage09_Boss_Geisha = 1188,
+    Stage09_Boss_NoFace = 1189,
     
     DummyChar = 10001
     #endregion

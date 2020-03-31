@@ -230,7 +230,7 @@ public class WaveManagerScript : MonoBehaviour
         {
             currentCharacter.CharArrivedOnBattleField();
         }
-        if (currentCharacter.SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving)
+        if (currentCharacter.SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving.ToString())
         {
 
         }

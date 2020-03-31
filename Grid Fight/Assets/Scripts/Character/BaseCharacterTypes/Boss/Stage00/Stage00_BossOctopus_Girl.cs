@@ -26,7 +26,7 @@ public class Stage00_BossOctopus_Girl : MinionType_Script
 
     IEnumerator CheckHasLeftBattle()
     {
-        while(SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving)
+        while(SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving.ToString())
         {
             yield return null;
         }

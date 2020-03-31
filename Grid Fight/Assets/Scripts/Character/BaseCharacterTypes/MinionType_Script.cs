@@ -8,8 +8,8 @@ public class MinionType_Script : BaseCharacter
 
 
     protected bool MoveCoOn = true;
-    private IEnumerator MoveActionCo;
-    private float LastAttackTime;
+    protected IEnumerator MoveActionCo;
+    protected float LastAttackTime;
     public float UpDownPerc = 18;
     public AIType CurrentAI;
 
@@ -74,7 +74,7 @@ public class MinionType_Script : BaseCharacter
     }
 
 
-    private IEnumerator AI()
+    protected IEnumerator AI()
     {
         bool val = true;
         while (val)
@@ -203,7 +203,7 @@ public class MinionType_Script : BaseCharacter
         }
     }
 
-    public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
+    public override void SetAnimation(string animState, bool loop = false, float transition = 0)
     {
         if (SpineAnim == null)
         {
@@ -211,6 +211,11 @@ public class MinionType_Script : BaseCharacter
         }
 
         base.SetAnimation(animState, loop, transition);
+    }
+
+    public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
+    {
+        SetAnimation(animState.ToString(), loop, transition);
     }
 
     //Basic attack sequence

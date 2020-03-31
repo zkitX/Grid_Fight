@@ -182,7 +182,7 @@ public class CharacterType_Script : BaseCharacter
                 yield return BattleManagerScript.Instance.PauseUntil();
                 timer += Time.fixedDeltaTime;
 
-                if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle)
+                if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle.ToString())
                 {
                     SetAnimation(CharacterAnimationStateType.Atk2_IdleToAtk);
                     SpineAnim.SetAnimationSpeed(SpineAnim.GetAnimLenght(CharacterAnimationStateType.Atk2_IdleToAtk) / CharInfo.SpeedStats.IdleToAtkDuration);
@@ -253,12 +253,12 @@ public class CharacterType_Script : BaseCharacter
            && CanAttack && !isMoving) || attackRegardless)
         {
 
-            if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_IdleToAtk)
+            if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop.ToString() && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_IdleToAtk.ToString())
             {
                 SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
                 SpineAnim.SetAnimationSpeed(SpineAnim.GetAnimLenght(CharacterAnimationStateType.Atk2_IdleToAtk) / CharInfo.SpeedStats.IdleToAtkDuration);
             }
-            else if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1_Loop)
+            else if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1_Loop.ToString())
             {
                 Atk1Queueing = true;
             }
@@ -367,7 +367,7 @@ public class CharacterType_Script : BaseCharacter
         }
         
 
-        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle)
+        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle.ToString())
         {
             return;
         }
