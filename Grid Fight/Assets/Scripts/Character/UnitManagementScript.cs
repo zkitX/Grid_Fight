@@ -123,7 +123,7 @@ public class UnitManagementScript : MonoBehaviour
         SelectionIndicatorPlayerBig.color = BattleManagerScript.Instance.playersColor[(int)playerController];
 
         SelectionIndicatorPlayerNumberSmall.sprite = BattleManagerScript.Instance.playersNumberSmall[(int)playerController];
-        SelectionIndicatorPlayerNumberBig.sprite = BattleManagerScript.Instance.playersNumberSmall[(int)playerController];
+        SelectionIndicatorPlayerNumberBig.sprite = BattleManagerScript.Instance.playersNumberBig[(int)playerController];
     }
 
 
