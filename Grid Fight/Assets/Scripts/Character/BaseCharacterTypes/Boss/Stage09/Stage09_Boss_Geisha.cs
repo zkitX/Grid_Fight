@@ -9,7 +9,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
     bool oniFormeActive = false;
     Collider hitbox;
     Stage09_Boss_NoFace oniForme;
-
+    public bossPhasesType BossPhase;
     #region Initial Setup
 
     public override void Start()
@@ -152,15 +152,28 @@ public class Stage09_Boss_Geisha : MinionType_Script
 
     public override void SetAnimation(string animState, bool loop = false, float transition = 0)
     {
-        base.SetAnimation(oniFormeActive && animState != "Transformation" ? "Monster_" : "Phase1_" + animState.ToString(), loop, transition);
+        base.SetAnimation(animState != "Transformation" ?  BossPhase.ToString() + animState.ToString() : animState, loop, transition);
     }
 
     #endregion
 
     //NULLIFIED FIELDS
-
+    public bool changeAnim = false;
+    public CharacterAnimationStateType NextAnimToFire;
+    public bool Loop = true;
     protected override void Update()
     {
+        if (changeAnim)
+        {
+            changeAnim = false;
+            SetAnimation(NextAnimToFire, Loop, 0);
+        }
+    }
 
+
+    public enum bossPhasesType
+    {
+        Monster_,
+        Phase1_
     }
 }
