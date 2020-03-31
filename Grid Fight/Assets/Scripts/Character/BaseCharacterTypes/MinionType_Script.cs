@@ -95,37 +95,41 @@ public class MinionType_Script : BaseCharacter
 
 
                 List<BaseCharacter> enemys = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList();
-                BaseCharacter targetChar = enemys.Where(r => r.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x).FirstOrDefault();
-                if (targetChar != null)
+                if (enemys.Count > 0)
                 {
-                    GetAttack(CharacterAnimationStateType.Atk);
-                    yield return AttackSequence();
-                }
-                else
-                {
-                    
-                    int randomizer = Random.Range(0, 100);
-                    if (randomizer < UpDownPerc)
+                    BaseCharacter targetChar = enemys.Where(r => r.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x).FirstOrDefault();
+                    if (targetChar != null)
                     {
-                        yield return MoveCharOnDir_Co(InputDirection.Left);
-                    }
-                    else if (randomizer > (100 - UpDownPerc))
-                    {
-                        yield return MoveCharOnDir_Co(InputDirection.Right);
+                        GetAttack(CharacterAnimationStateType.Atk);
+                        yield return AttackSequence();
                     }
                     else
                     {
-                        targetChar = GetTargetChar(enemys);
-                        if (targetChar.UMS.CurrentTilePos.x < UMS.CurrentTilePos.x)
+
+                        int randomizer = Random.Range(0, 100);
+                        if (randomizer < UpDownPerc)
                         {
-                            yield return MoveCharOnDir_Co(InputDirection.Up);
+                            yield return MoveCharOnDir_Co(InputDirection.Left);
                         }
-                        else 
+                        else if (randomizer > (100 - UpDownPerc))
                         {
-                            yield return MoveCharOnDir_Co(InputDirection.Down);
+                            yield return MoveCharOnDir_Co(InputDirection.Right);
+                        }
+                        else
+                        {
+                            targetChar = GetTargetChar(enemys);
+                            if (targetChar.UMS.CurrentTilePos.x < UMS.CurrentTilePos.x)
+                            {
+                                yield return MoveCharOnDir_Co(InputDirection.Up);
+                            }
+                            else
+                            {
+                                yield return MoveCharOnDir_Co(InputDirection.Down);
+                            }
                         }
                     }
                 }
+                
             }
         }
     }
