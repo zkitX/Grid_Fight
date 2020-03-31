@@ -49,7 +49,7 @@ public class ScriptableObjectAttackTypeOnBattlefieldEditor : Editor
             }
             firstOpen = false;
         }
-
+        EditorUtility.SetDirty(origin);
     }
 
     

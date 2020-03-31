@@ -71,7 +71,9 @@ public class ScriptableObjectGridStructureEditor : Editor
             }
             firstOpen = false;
         }
-        
+
+        EditorUtility.SetDirty(origin);
+
     }
 
 
