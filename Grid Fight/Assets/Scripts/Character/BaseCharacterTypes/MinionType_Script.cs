@@ -129,7 +129,7 @@ public class MinionType_Script : BaseCharacter
                         }
                     }
                 }
-                
+                yield return null;
             }
         }
     }
