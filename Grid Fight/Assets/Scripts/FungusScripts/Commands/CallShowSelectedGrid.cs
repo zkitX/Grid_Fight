@@ -21,8 +21,8 @@ public class CallShowSelectedGrid : Command
 
     protected virtual void CallTheMethod()
     {
-        EnvironmentManager.Instance.ChangeGridStructure(Grid, false);
-        EnvironmentManager.Instance.MoveToNewGrid(StageToShow, 0);
+        EnvironmentManager.Instance.ChangeGridStructure(Grid, StageToShow, false);
+        StartCoroutine(EnvironmentManager.Instance.MoveToNewGrid(StageToShow, 0, false));
     }
 
     #region Public members

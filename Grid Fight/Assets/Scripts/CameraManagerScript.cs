@@ -31,7 +31,7 @@ public class CameraManagerScript : MonoBehaviour
         Anim.SetInteger("Shake", 0);
     }
 
-    public void ChangeFocusToNewGrid(ScriptableObjectGridStructure newGrid, float duration, bool moveCameraInternally)
+    public void ChangeFocusToNewGrid(CameraInfoClass newGrid, float duration, bool moveCameraInternally)
     {
         if (GridManagerScript.Instance.currentGridStructureObject == null)
         {
@@ -40,11 +40,14 @@ public class CameraManagerScript : MonoBehaviour
             CurrentCameraOffset = newGrid.CameraPosition;
             return;
         }
-        if(moveCameraInternally) StartCoroutine(CameraFocusSequence(newGrid.CameraPosition - CurrentCameraOffset, duration, newGrid.OrthographicSize, newGrid));
+        if (moveCameraInternally)
+        {
+            StartCoroutine(CameraFocusSequence(newGrid.CameraPosition - CurrentCameraOffset, duration, newGrid.OrthographicSize, newGrid));
+        }
 
     }
 
-    IEnumerator CameraFocusSequence(Vector3 translation, float duration, float endOrtho, ScriptableObjectGridStructure newGrid)
+    IEnumerator CameraFocusSequence(Vector3 translation, float duration, float endOrtho, CameraInfoClass newGrid)
     {
         bool hasStarted = false;
         float startingOrtho = GetComponent<Camera>().orthographicSize;

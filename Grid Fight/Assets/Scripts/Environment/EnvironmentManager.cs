@@ -23,6 +23,8 @@ public class EnvironmentManager : MonoBehaviour
     public AnimationCurve jumpAnimationCurve;
     IEnumerator GridLeapSequencer = null;
 
+    public CameraStageInfoScript CameraStage;
+
     private void Awake()
     {
         MainCamera = Camera.main;
@@ -59,9 +61,9 @@ public class EnvironmentManager : MonoBehaviour
         }
     }
 
-    public void MoveToNewGrid(int gridIndex, float duration)
+    public IEnumerator MoveToNewGrid(int gridIndex, float duration, bool moveChars = true)
     {
-        FightGrid destinationGrid = fightGrids[gridIndex];
+        FightGrid destinationGrid = fightGrids[gridIndex != -1 ? gridIndex : currentGridIndex];
 
         GridManagerScript.Instance.MoveGrid_ToWorldPosition(destinationGrid.pivot);
 
@@ -69,38 +71,54 @@ public class EnvironmentManager : MonoBehaviour
 
         Vector3 translation = -(fightGrids[currentGridIndex].transform.position - destinationGrid.transform.position);
 
-        if (GridLeapSequencer != null) StopCoroutine(GridLeapSequencer);
-        GridLeapSequencer = GridLeapSequence(duration, translation);
-        StartCoroutine(GridLeapSequencer);
-        currentGridIndex = gridIndex;
+        if (GridLeapSequencer != null)
+        {
+            StopCoroutine(GridLeapSequencer);
+        }
+
+        currentGridIndex = gridIndex != -1 ? gridIndex : currentGridIndex;
+        GridLeapSequencer = GridLeapSequence(duration, translation, moveChars);
+        yield return GridLeapSequencer;
     }
 
-    IEnumerator GridLeapSequence(float duration, Vector3 translation)
+
+
+    CharacterType_Script[] chars;
+    List<CharacterType_Script> jumpingchars = new List<CharacterType_Script>();
+    IEnumerator GridLeapSequence(float duration, Vector3 translation, bool moveChars = true)
     {
         //Ensure new grid is set and moved to correct position before everything
 
         float jumpHeight = 2f;
         CharacterAnimationStateType jumpAnim = CharacterAnimationStateType.DashUp;
 
-        Vector3 cameraStartPos = Camera.main.transform.position;
-        Vector3 cameraOffsetChange = GridManagerScript.Instance.currentGridStructureObject.CameraPosition - CameraManagerScript.Instance.CurrentCameraOffset;
-        float cameraStartOrtho = Camera.main.orthographicSize;
-        float cameraEndOrtho = GridManagerScript.Instance.currentGridStructureObject.OrthographicSize;
-        //DONT FORGET TO ADD CAMERA OFFSET ADJUSTMENT
+        Vector3 cameraStartPos = MainCamera.transform.position;
+        CameraInfoClass cic = CameraStage.CameraInfo.Where(r => r.StageIndex == currentGridIndex && !r.used).First();
 
-        CharacterType_Script[] chars = BattleManagerScript.Instance.PlayerControlledCharacters;
+        Vector3 cameraOffsetChange = cic.CameraPosition - CameraManagerScript.Instance.CurrentCameraOffset;
+        float cameraStartOrtho = MainCamera.orthographicSize;
+        float cameraEndOrtho = cic.OrthographicSize;
+        cic.used = true;
+        //DONT FORGET TO ADD CAMERA OFFSET ADJUSTMENT
+        if (moveChars)
+        {
+            chars = System.Array.ConvertAll(BattleManagerScript.Instance.AllCharactersOnField.ToArray(), item => (CharacterType_Script)item);
+        }
+        else
+        {
+            chars = new CharacterType_Script[0];
+        }
         Vector3[] charStartPositions = new Vector3[chars != null ? chars.Length : 0];
         Vector3[] charGridPosOffsets = new Vector3[chars != null ? chars.Length : 0];
         for (int i = 0; i < (chars != null ? chars.Length : 0); i++)
         {
-            chars[i].SetAnimation(jumpAnim);
-
             charStartPositions[i] = chars[i].transform.position;
-
-            if (GridManagerScript.Instance.BattleTiles.Where(r => r.Pos == chars[i].UMS.CurrentTilePos).FirstOrDefault().BattleTileState == BattleTileStateType.Blocked 
-                || chars[i].UMS.WalkingSide != GridManagerScript.Instance.BattleTiles.Where(r => r.Pos == chars[i].UMS.CurrentTilePos).FirstOrDefault().WalkingSide)
+            BattleTileScript bts = GridManagerScript.Instance.BattleTiles.Where(r => r.Pos == chars[i].UMS.CurrentTilePos).FirstOrDefault();
+            if (bts.BattleTileState != BattleTileStateType.Empty
+                || chars[i].UMS.WalkingSide != bts.WalkingSide)
             {
                 BattleTileScript newGridTile = GridManagerScript.Instance.GetRandomFreeAdjacentTile(chars[i].UMS.CurrentTilePos, 5, false, chars[i].UMS.WalkingSide);
+                Debug.Log(newGridTile.Pos);
                 charGridPosOffsets[i] = GridManagerScript.GetTranslationBetweenTiles(GridManagerScript.Instance.BattleTiles.Where(r => r.Pos == chars[i].UMS.CurrentTilePos).First(), newGridTile);
                 GridManagerScript.Instance.SetBattleTileState(newGridTile.Pos, BattleTileStateType.Occupied);
                 chars[i].CurrentBattleTiles = new List<BattleTileScript>() { newGridTile };
@@ -109,9 +127,18 @@ public class EnvironmentManager : MonoBehaviour
             }
             else
             {
+                GridManagerScript.Instance.SetBattleTileState(bts.Pos, BattleTileStateType.Occupied);
                 charGridPosOffsets[i] = Vector3.zero;
             }
             chars[i].SetAttackReady(false);
+
+            if (translation == Vector3.zero && charGridPosOffsets[i] == Vector3.zero)
+            {
+                continue;
+            }
+            jumpingchars.Add(chars[i]);
+            chars[i].SetAnimation(jumpAnim);
+
         }
 
         float timeRemaining = duration;
@@ -119,29 +146,30 @@ public class EnvironmentManager : MonoBehaviour
         float xPos = 0f;
         float yPos = 0f;
         bool hasStarted = false;
+
         while (timeRemaining != 0 || !hasStarted)
         {
             hasStarted = true;
             timeRemaining = Mathf.Clamp(timeRemaining - Time.deltaTime, 0f, 9999f);
             progress = 1f - (timeRemaining / (duration != 0f ? duration : 1f));
 
-            Camera.main.transform.position = Vector3.Lerp(cameraStartPos, cameraStartPos + translation + cameraOffsetChange, cameraTravelCurve.Evaluate(progress));
-            Camera.main.orthographicSize = Mathf.Lerp(cameraStartOrtho, cameraEndOrtho, progress);
+            MainCamera.transform.position = Vector3.Lerp(cameraStartPos, cameraStartPos + translation + cameraOffsetChange, cameraTravelCurve.Evaluate(progress));
+            MainCamera.orthographicSize = Mathf.Lerp(cameraStartOrtho, cameraEndOrtho, progress);
 
 
-            for (int i = 0; i < (chars != null ? chars.Length : 0); i++)
+            for (int i = 0; i < (jumpingchars != null ? jumpingchars.Count : 0); i++)
             {
                 xPos = Mathf.Lerp(charStartPositions[i].x, charStartPositions[i].x + translation.x + charGridPosOffsets[i].x, cameraTravelCurve.Evaluate(progress));
                 yPos = Mathf.Lerp(charStartPositions[i].y, charStartPositions[i].y + translation.y + charGridPosOffsets[i].y, cameraTravelCurve.Evaluate(progress));
                 yPos += jumpHeight * characterJumpCurve.Evaluate(progress);
-                chars[i].transform.position = new Vector3(xPos, yPos, chars[i].transform.position.z);
-                chars[i].SpineAnim.SetAnimationSpeed(jumpAnimationCurve.Evaluate(progress));
+                jumpingchars[i].transform.position = new Vector3(xPos, yPos, jumpingchars[i].transform.position.z);
+                jumpingchars[i].SpineAnim.SetAnimationSpeed(jumpAnimationCurve.Evaluate(progress));
             }
             yield return null;
         }
-        CameraManagerScript.Instance.CurrentCameraOffset = GridManagerScript.Instance.currentGridStructureObject.CameraPosition;
+        CameraManagerScript.Instance.CurrentCameraOffset = cic.CameraPosition;
 
-        if (chars != null)
+        if (chars.Length != 0)
         {
             foreach (CharacterType_Script character in chars)
             {
@@ -220,15 +248,15 @@ public class EnvironmentManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ChangeGridStructure(GridStructures[0], true);
+      //  ChangeGridStructure(GridStructures[0], true);
     }
 
     //Setting up the camera position and new grid stuff
-    public void ChangeGridStructure(ScriptableObjectGridStructure gridStructure, bool moveCameraInternally, float cameraChangeDuration = 0f)
+    public void ChangeGridStructure(ScriptableObjectGridStructure gridStructure,int stageIndex, bool moveCameraInternally, float cameraChangeDuration = 0f)
     {
         GridManagerScript.Instance.ResetGrid();
         isChangeGridStructure = false;
-        CameraManagerScript.Instance.ChangeFocusToNewGrid(gridStructure, cameraChangeDuration, moveCameraInternally);
+        CameraManagerScript.Instance.ChangeFocusToNewGrid(CameraStage.CameraInfo.Where(r=> r.StageIndex == (stageIndex != -1 ? stageIndex : currentGridIndex)).First(), cameraChangeDuration, moveCameraInternally);
         GridManagerScript.Instance.SetupGrid(gridStructure);
     }
 }

@@ -19,7 +19,6 @@ public class GridManagerScript : MonoBehaviour
 
     public List<PortalInfoClass> Portals = new List<PortalInfoClass>();
     public ScriptableObjectGridStructure currentGridStructureObject = null;
-
     private void Awake()
     {
         Instance = this;
@@ -34,29 +33,19 @@ public class GridManagerScript : MonoBehaviour
     //Setup each single tiles of the grid
     public void SetupGrid(ScriptableObjectGridStructure gridStructure)
     {
-        foreach (BattleTileInfo tile in gridStructure.GridInfo)
+
+        if (currentGridStructureObject != gridStructure)
         {
-            //Debug.Log(tile.Pos + "   " + tile.BattleTileState.ToString());
-            BattleTiles.Where(r => r.Pos == tile.Pos).First().SetupTileFromBattleTileInfo(tile);
-        }
-        if(BattleManagerScript.Instance != null && BattleManagerScript.Instance.PlayerControlledCharacters != null)
-        {
-            foreach (CharacterType_Script character in BattleManagerScript.Instance.PlayerControlledCharacters)
+            foreach (BattleTileInfo tile in gridStructure.GridInfo)
             {
-                if (BattleTiles.Where(r => r.Pos == character.UMS.CurrentTilePos).FirstOrDefault().BattleTileState != BattleTileStateType.Blocked)
-                {
-                    SetBattleTileState(character.UMS.CurrentTilePos, BattleTileStateType.Occupied);
-                }
+                //Debug.Log(tile.Pos + "   " + tile.BattleTileState.ToString());
+                BattleTiles.Where(r => r.Pos == tile.Pos).First().SetupTileFromBattleTileInfo(tile);
             }
-        }
-        YGridSeparator = gridStructure.YGridSeparator;
+            YGridSeparator = gridStructure.YGridSeparator;
 
-        currentGridStructureObject = gridStructure;
+            currentGridStructureObject = gridStructure;
 
-
-        if (InitializationCompleteEvent != null)
-        {
-            InitializationCompleteEvent();
+            InitializationCompleteEvent?.Invoke();
         }
     }
 

@@ -13,7 +13,7 @@ public class Stage04_BossMonster_Script : MinionType_Script
 
     private List<Vector2Int> FlowersPos = new List<Vector2Int>()
     {
-        new Vector2Int(0,7),
+        new Vector2Int(1,7),
         new Vector2Int(1,10),
         new Vector2Int(3,10),
         new Vector2Int(4,6)
@@ -60,7 +60,7 @@ public class Stage04_BossMonster_Script : MinionType_Script
         {
             Stage04_BossMonster_Flower_Script flower = (Stage04_BossMonster_Flower_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(CharacterNameType.Stage04_BossMonster_Minion.ToString(), CharacterSelectionType.Up,
                 CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage04_BossMonster_Minion, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None), transform);
-            BattleManagerScript.Instance.AllCharactersOnField.Add(flower);
+            //BattleManagerScript.Instance.AllCharactersOnField.Add(flower);
             flower.mfType = (MonsterFlowerType)i;
             flower.UMS.Pos = FlowersPos.GetRange(i, 1);
             flower.BasePos = FlowersPos[i];

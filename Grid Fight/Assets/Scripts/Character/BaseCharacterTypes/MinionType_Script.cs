@@ -74,7 +74,7 @@ public class MinionType_Script : BaseCharacter
     }
 
 
-    protected IEnumerator AI()
+    public virtual IEnumerator AI()
     {
         while(BattleManagerScript.Instance.PlayerControlledCharacters.Length == 0)
         {
@@ -238,9 +238,9 @@ public class MinionType_Script : BaseCharacter
     public override IEnumerator AttackSequence()
     {
         /*shotsLeftInAttack = 0;
-        if (currentAttackPhase != AttackPhasesType.End) yield break;
+        if (currentAttackPhase != AttackPhasesType.End) yield break;*/
 
-        yield return null;*/
+        //yield return null;
         Attacking = true;
 
         CharacterAnimationStateType animToFire = CharacterAnimationStateType.Atk;

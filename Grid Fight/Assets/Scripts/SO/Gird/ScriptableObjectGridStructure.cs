@@ -7,11 +7,26 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/GridStructure")]
 public class ScriptableObjectGridStructure : ScriptableObject
 {
-    [HideInInspector] public List<BattleTileInfo> GridInfo = new List<BattleTileInfo>();
+    public List<BattleTileInfo> GridInfo = new List<BattleTileInfo>();
     public int YGridSeparator;
-    public Vector3 CameraPosition;
-    public float OrthographicSize;
+   /* public Vector3 CameraPosition;
+    public float OrthographicSize;*/
 
+
+    private void OnEnable()
+    {
+        if (GridInfo.Count == 0)
+        {
+            for (int x = 0; x < 6; x++)
+            {
+                for (int y = 0; y < 12; y++)
+                {
+                    GridInfo.Add(new BattleTileInfo(new Vector2Int(x, y)));
+                }
+            }
+        }
+     
+    }
 }
 
 [System.Serializable]
@@ -38,5 +53,10 @@ public class BattleTileInfo
         {
             _BattleTileState = value;
         }
+    }
+
+    public BattleTileInfo(Vector2Int pos)
+    {
+        Pos = pos;
     }
 }

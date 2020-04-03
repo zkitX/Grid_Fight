@@ -9,62 +9,86 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
     public float StasyTime = 50;
     public bool CanRebirth = true;
     public GameObject Smoke;
-
     public override void SetUpEnteringOnBattle()
     {
         SetAnimation(CharacterAnimationStateType.Growing);
+        GridManagerScript.Instance.SetBattleTileState(UMS.Pos[0], BattleTileStateType.Occupied);
         StartCoroutine(base.MoveByTile(GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).transform.position, SpineAnim.UpMovementSpeed, SpineAnim.GetAnimLenght(CharacterAnimationStateType.Growing)));
     }
 
-    public override void StartMoveCo()
+    public override IEnumerator AI()
     {
-        base.StartMoveCo();
-    }
-
-    public override IEnumerator Move()
-    {
-
-        while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+        while (BattleManagerScript.Instance.PlayerControlledCharacters.Length == 0)
         {
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
-        while (MoveCoOn)
+        int times = 0;
+        int MoveTime = 0;
+        bool val = true;
+        InputDirection dir = InputDirection.Down;
+        bool goBack = false;
+        while (val)
         {
-            float timer = 0;
-            InputDirection dir = (InputDirection)Random.Range(0, 4);
-            float MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y);
-            while (timer < 1)
+            yield return null;
+            if (IsOnField)
             {
-                yield return new WaitForFixedUpdate();
+                
                 while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
                 {
-                    yield return new WaitForFixedUpdate();
+                    yield return null;
                 }
 
-                timer += Time.fixedDeltaTime / MoveTime;
-            }
-            if (CharInfo.Health > 0)
-            {
-                MoveCharOnDirection(dir);
-            }
-            timer = 0;
-            MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y);
-            while (timer < 1)
-            {
-                yield return new WaitForFixedUpdate();
-                while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+                if (MoveTime == 0)
                 {
-                    yield return new WaitForFixedUpdate();
+                    MoveTime = Random.Range(1, 2);
                 }
+                else
+                {
+                    times++;
+                    if (times == MoveTime)
+                    {
+                        yield return new WaitForSecondsRealtime(1);
+                        if (goBack)
+                        {
+                            if (CharInfo.Health > 0)
+                            {
+                                yield return MoveCharOnDir_Co(dir == InputDirection.Down ? InputDirection.Up : dir == InputDirection.Up ? InputDirection.Down : dir == InputDirection.Left ? InputDirection.Right : InputDirection.Left);
+                                goBack = false;
+                            }
 
-                timer += Time.fixedDeltaTime / MoveTime;
-            }
-            if (CharInfo.Health > 0)
-            {
-                MoveCharOnDirection(dir == InputDirection.Down ? InputDirection.Up : dir == InputDirection.Up ? InputDirection.Down : dir == InputDirection.Left ? InputDirection.Right : InputDirection.Left);
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 10; i++)
+                            {
+                                dir = (InputDirection)Random.Range(0, 4);
+                                BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos + (dir == InputDirection.Down ? new Vector2Int(1, 0) :
+                                    dir == InputDirection.Up ? new Vector2Int(-1, 0) : dir == InputDirection.Left ? new Vector2Int(0, -1) : new Vector2Int(0, 1)));
+                                if (bts.BattleTileState == BattleTileStateType.Empty && bts.WalkingSide == UMS.WalkingSide)
+                                {
+                                    break;
+                                }
+                            }
+                            
+                            goBack = true;
+                            if (CharInfo.Health > 0)
+                            {
+                                yield return MoveCharOnDir_Co(dir);
+                            }
+                        }
+
+                        times = 0;
+                        MoveTime = 0;
+                    }
+                }
+                GetAttack(CharacterAnimationStateType.Atk);
+                yield return AttackSequence();
+                yield return null;
             }
         }
     }
+
+  
 
     public override IEnumerator MoveByTile(Vector3 nextPos, AnimationCurve curve, float animLenght)
     {

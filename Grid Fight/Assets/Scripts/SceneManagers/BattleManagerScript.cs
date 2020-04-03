@@ -127,6 +127,23 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
+
+    public IEnumerator SetAllNonUsedCharOnBattlefield()
+    {
+        foreach (BaseCharacter currentCharacter in AllCharactersOnField.Where(r=> !r.IsOnField).ToList())
+        {
+            BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(currentCharacter.UMS.WalkingSide, currentCharacter.UMS.Pos);
+
+            SetCharOnBoardOnFixedPos(currentCharacter.UMS.PlayerController[0], currentCharacter.CharInfo.CharacterID, bts.Pos);
+        }
+
+
+        while (AllCharactersOnField.Where(r => !r.IsOnField && r.CharInfo.HealthPerc > 0).ToList().Count != 0)
+        {
+            yield return null;
+        }
+    }
+
     public CharacterType_Script SetCharOnBoardOnFixedPos(ControllerType playerController, CharacterNameType cName, Vector2Int pos)
     {
         if (CurrentSelectedCharacters[playerController].Character != null && (PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == cName).First().isUsed 
@@ -339,7 +356,7 @@ public class BattleManagerScript : MonoBehaviour
 
             foreach (BaseCharacter item in cbs)
             {
-                List<KeyValuePair<ControllerType, CurrentSelectedCharacterClass>> controllers = CurrentSelectedCharacters.Where(r => playerController.Contains(r.Key) && r.Value.NextSelectionChar.NextSelectionChar == item.CharInfo.CharacterSelection).ToList();
+                List<KeyValuePair<ControllerType, CurrentSelectedCharacterClass>> controllers = CurrentSelectedCharacters.Where(r => playerController.Contains(r.Key) && r.Value.Character != null && r.Value.NextSelectionChar.NextSelectionChar == item.CharInfo.CharacterSelection).ToList();
                 if (controllers.Count == 0)
                 {
                     ControllerType ct = CurrentSelectedCharacters.Where(r => r.Value.Character.CharInfo.CharacterID == cName && r.Value.Character.UMS.Side == side).First().Key;
@@ -479,6 +496,27 @@ public class BattleManagerScript : MonoBehaviour
         CurrentSelectedCharacters[playerController].LoadCharCo = null;
     }
 
+
+    public void RemoveAllNonUsedCharFromBoard()
+    {
+        for (int i = 0; i < AllCharactersOnField.Count; i++)
+        {
+            bool isIn = false;
+            for (int a = 0; a < CurrentSelectedCharacters.Count; a++)
+            {
+                if (CurrentSelectedCharacters[(ControllerType)a].Character != null && CurrentSelectedCharacters[(ControllerType)a].Character == AllCharactersOnField[i])
+                {
+                    isIn = true;
+                }
+            }
+
+            if (!isIn)
+            {
+                RemoveNamedCharacterFromBoard(AllCharactersOnField[i].CharInfo.CharacterID);
+            }
+        }
+    }
+
     public void RemoveNamedCharacterFromBoard(CharacterNameType charToRemoveName)
     {
         /*if (CurrentSelectedCharacters.Values.Where(r => r.Character != null).FirstOrDefault() != null && CurrentSelectedCharacters.Values.Where(r => r.Character.CharInfo.CharacterID == charToRemoveName).FirstOrDefault() != null)
@@ -527,40 +565,6 @@ public class BattleManagerScript : MonoBehaviour
 
     public void DeselectCharacter(CharacterNameType charToDeselectName, SideType side, ControllerType playerController)
     {
-
-
-        /*bool isSelected = false;
-        foreach (KeyValuePair<ControllerType, CurrentSelectedCharacterClass> characterSelector in CurrentSelectedCharacters)
-        {
-            if (characterSelector.Value.Character != null && characterSelector.Value.Character.CharInfo.CharacterID == charToDeselectName)
-            {
-                isSelected = true;
-                break;
-            }
-        }
-        if (!isSelected)
-        {
-            return;
-        }
-        
-        CharacterType_Script charToDeselect = CurrentSelectedCharacters.Values.Where(r => r.Character != null && r.Character.CharInfo.CharacterID == charToDeselectName).FirstOrDefault().Character;
-        if (CurrentSelectedCharacters.Values.Where(r => r.Character == charToDeselect).FirstOrDefault() == null)
-        {
-            return;
-
-        }
-        ControllerType controller = CurrentSelectedCharacters.Where(r => r.Value.Character == charToDeselect).FirstOrDefault().Key;
-        if (charToDeselect != null)
-        {
-            charToDeselect.SetCharSelected(false, ControllerType.None);
-            //CurrentSelectedCharacters[controller].Character = null;
-        }
-        else
-        {
-            Debug.LogWarning("Character you are trying to deselect does not exist in the currently selected character");
-        }*/
-
-
         if (CurrentBattleState != BattleState.Battle && CurrentBattleState != BattleState.Intro && CurrentBattleState != BattleState.FungusPuppets)
         {
             return;
@@ -656,6 +660,7 @@ public class BattleManagerScript : MonoBehaviour
                 }
                 //Change this player's character to the new character
                 CurrentSelectedCharacters[playerController].Character = currentCharacter;
+                CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar = currentCharacter.CharInfo.CharacterSelection;
                 currentCharacter.UMS.SetBattleUISelection(playerController);
                 currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", true);
 
@@ -808,7 +813,7 @@ public class BattleManagerScript : MonoBehaviour
                             DeselectCharacter(PrevCharacter.CharInfo.CharacterID, side, playerController);
                         }
                         //Debug.Log("Prev " + CurrentSelectedCharacters[playerController].NextSelectionChar.ToString());
-                        CurrentSelectedCharacters[playerController].NextSelectionChar = new NextSelectionCharClass(cs, side);
+                        CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar = cs;
                         //Debug.Log(cs.ToString());
                         break;
                     }
@@ -1036,7 +1041,7 @@ public class BattleManagerScript : MonoBehaviour
 
         while (CurrentBattleState == BattleState.Pause)
         {
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
     }
 

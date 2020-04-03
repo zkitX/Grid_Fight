@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using Fungus;
+﻿using Fungus;
 using MyBox;
+using System.Collections;
+using UnityEngine;
 
 [CommandInfo("Scripting",
                 "Call CallNextWave",
@@ -14,11 +12,15 @@ public class CallNextWave : Command
     public string WaveName;
 
     public float TransitionDuration = 2;
-    public bool HasADifferentStage = false;
-    [ConditionalField("HasADifferentStage", false)] public int FightGridToShow;
+    public bool HasAStageUpdate = false;
+    [ConditionalField("HasAStageUpdate", false)] public int FightGridToShow;
 
     public bool HasADifferentGrid = false;
     [ConditionalField("HasADifferentGrid", false)] public ScriptableObjectGridStructure Grid;
+
+    public bool CallAllAlly = true;
+
+
     public string NextBlockToFire;
 
     #region Public members
@@ -35,22 +37,45 @@ public class CallNextWave : Command
             yield return null;
         }
 
-        if (HasADifferentStage && HasADifferentGrid)
+        //GridManagerScript.Instance.BattleTiles.ForEach(r=> r.BattleTargetScript.StopAllCoroutines());
+
+        if (CallAllAlly)
         {
-            EnvironmentManager.Instance.ChangeGridStructure(Grid, false, TransitionDuration);
-            EnvironmentManager.Instance.MoveToNewGrid(FightGridToShow, TransitionDuration);
+            yield return BattleManagerScript.Instance.SetAllNonUsedCharOnBattlefield();
+
+            yield return new WaitForSecondsRealtime(3f);
         }
-        else if (HasADifferentStage)
+
+
+        if (HasAStageUpdate && HasADifferentGrid)
         {
-            EnvironmentManager.Instance.MoveToNewGrid(FightGridToShow, TransitionDuration);
+            EnvironmentManager.Instance.ChangeGridStructure(Grid, FightGridToShow, false, TransitionDuration);
         }
         else if (HasADifferentGrid)
         {
-            EnvironmentManager.Instance.ChangeGridStructure(Grid, true, TransitionDuration);
-            EnvironmentManager.Instance.MoveCharactersToFitNewGrid(TransitionDuration);
+            EnvironmentManager.Instance.ChangeGridStructure(Grid, -1, true, TransitionDuration);
         }
 
+        yield return new WaitForSecondsRealtime(0.5f);
+        yield return WaveManagerScript.Instance.SettingUpWave(WaveName);
+        if (HasAStageUpdate)
+        {
+            yield return EnvironmentManager.Instance.MoveToNewGrid(HasAStageUpdate ? FightGridToShow : -1, TransitionDuration);
+        }
+
+        if (CallAllAlly)
+        {
+            yield return new WaitForSecondsRealtime(3f);
+
+            BattleManagerScript.Instance.RemoveAllNonUsedCharFromBoard();
+        }
+        // yield return new WaitForSecondsRealtime(30f);
+        BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
+        
         yield return WaveManagerScript.Instance.StartWaveByName(WaveName);
+
+        yield return new WaitForSecondsRealtime(2);
+
         SetNextBlockFromName(NextBlockToFire);
     }
 

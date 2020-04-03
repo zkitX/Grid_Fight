@@ -25,13 +25,28 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             if (_CharInfo == null)
             {
-                _CharInfo = this.GetComponentInChildren<CharacterInfoScript>(true);
+                _CharInfo = GetComponentInChildren<CharacterInfoScript>(true);
                 _CharInfo.BaseSpeedChangedEvent += _CharInfo_BaseSpeedChangedEvent;
                 _CharInfo.DeathEvent += _CharInfo_DeathEvent;
             }
             return _CharInfo;
         }
     }
+
+
+    public bool IsOnField
+    {
+        get
+        {
+            return _IsOnField;
+        }
+        set
+        {
+            _IsOnField = value;
+        }
+    }
+
+
     public CharacterInfoScript _CharInfo;
     public bool isMoving = false;
     public bool IsUsingAPortal = false;
@@ -39,7 +54,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     [HideInInspector]
     public List<BattleTileScript> CurrentBattleTiles = new List<BattleTileScript>();
     public SpineAnimationManager SpineAnim;
-    public bool IsOnField = false;
+    public bool _IsOnField = false;
     public bool CanAttack = false;
     public CharacterLevelType NextAttackLevel = CharacterLevelType.Novice;
     public bool isSpecialLoading = false;
@@ -192,7 +207,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         isMoving = false;
         SetAttackReady(false);
         Call_CurrentCharIsDeadEvent();
-        if(hasToDisappear)
+        shotsLeftInAttack = 0;
+        if (hasToDisappear)
         {
             transform.position = new Vector3(100, 100, 100);
             gameObject.SetActive(false);
@@ -564,10 +580,22 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                         {
                             if (bts._BattleTileState != BattleTileStateType.Blocked)
                             {
-                                shotsLeftInAttack++;
-                                bts.BattleTargetScript.SetAttack(item.Delay, BattleManagerScript.Instance.VFXScene ? CharInfo.ParticleID : target.ParticlesID, res,
-                                currentAtk.AtkType == BattleFieldAttackType.OnItSelf ? 0 : CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
-                                target.Effects, target.EffectChances);
+                                if (currentAtk.AtkType == BattleFieldAttackType.OnItSelf && bts.WalkingSide == UMS.WalkingSide)
+                                {
+                                    shotsLeftInAttack++;
+
+                                    bts.BattleTargetScript.SetAttack(item.Delay, BattleManagerScript.Instance.VFXScene ? CharInfo.ParticleID : target.ParticlesID, res,
+                                    0 , CharInfo.Elemental, this,
+                                    target.Effects, target.EffectChances);
+                                }
+                                else if (currentAtk.AtkType != BattleFieldAttackType.OnItSelf && bts.WalkingSide != UMS.WalkingSide)
+                                {
+                                    shotsLeftInAttack++;
+
+                                    bts.BattleTargetScript.SetAttack(item.Delay, BattleManagerScript.Instance.VFXScene ? CharInfo.ParticleID : target.ParticlesID, res,
+                                    CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
+                                    target.Effects, target.EffectChances);
+                                }
                             }
                         }
                     }
@@ -1097,8 +1125,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
 
         //Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + CharInfo.CharacterID.ToString());
-        if (animState == CharacterAnimationStateType.Reverse_Arriving.ToString())
+        if (animState == CharacterAnimationStateType.Arriving.ToString())
         {
+
         }     
 
         if(animState == CharacterAnimationStateType.GettingHit.ToString() && currentAttackPhase != AttackPhasesType.End)
@@ -1111,10 +1140,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             return;
         }
 
-     /*   if (isMoving && animState != CharacterAnimationStateType.Reverse_Arriving)
-        {
-            return;
-        }*/
+   
 
         if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle.ToString())
         {

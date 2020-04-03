@@ -188,7 +188,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4e03387e0ce72544abfa25ba0230c296, type: 2}
+  - {fileID: 2100000, guid: 59f8cdacaa0d2ee4c8f40a9d4fcf928a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 828986280c681b04c853387025961b57, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: f4775ab6e59b4fd44ae2364ed6f3d17f, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -355,7 +355,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   FiringPoint: {fileID: 6062112801844554826}
   SpecialFiringPoint: {fileID: 7786448912444143104}
-  CurrentAnim: 1
+  CurrentAnim: 
   AnimationTransition: 0.1
   changeanim: 0
   transition: 0.5
@@ -375,10 +375,9 @@ MonoBehaviour:
   CharacterIcons: []
   BaseCharacterType: 2
   CharacterID: 1092
-  CurrentParticlesAttackTypeInfo:
-  - {fileID: 0}
+  CurrentParticlesAttackTypeInfo: []
   CurrentOnBattleFieldAttackTypeInfo:
-  - {fileID: 11400000, guid: a0eb1b07bf91a0742bac2a5d5d8344b1, type: 2}
+  - {fileID: 11400000, guid: 0537aba9432af4d4e9ddc1d1dc5988c7, type: 2}
   ParticleID: 9
   Elemental: 0
   ClassType: 0
@@ -401,8 +400,8 @@ MonoBehaviour:
     B_CriticalChance: {x: 3, y: 5}
     B_Stamina_Cost_Atk: 0
   HealthStats:
-    Health: 90
-    Base: 90
+    Health: 1
+    Base: 1
     Regeneration: 1
     BaseHealthRegeneration: 1
     LevelMultiplier: 0
@@ -453,7 +452,7 @@ MonoBehaviour:
     B_IdleToAtkDuration: 0.2
     B_AtkToIdleDuration: 0.2
   DamageStats:
-    BaseDamage: 10
+    BaseDamage: 0
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []

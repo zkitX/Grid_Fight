@@ -29,6 +29,11 @@ public class WaveManagerScript : MonoBehaviour
 
     public List<StartingCharactersForWaveClass> StartingCharInWave = new List<StartingCharactersForWaveClass>();
 
+
+
+    BaseCharacter newChar;
+
+
     private void Awake()
     {
         Instance = this;
@@ -126,6 +131,31 @@ public class WaveManagerScript : MonoBehaviour
         }
     }
 
+
+    public IEnumerator SettingUpWave(string waveName)
+    {
+        WavePhaseClass wavePhase = WavePhases.Where(r => r.name == waveName).First();
+        StartingCharInWave = new List<StartingCharactersForWaveClass>();
+        foreach (WaveCharClass waveChar in wavePhase.ListOfEnemy)
+        {
+            if (waveChar.AreThereStartingEnemy)
+            {
+                waveChar.NumberOfCharacter -= waveChar.StartingEnemyTiles.Count;
+                StartingCharInWave.Add(new StartingCharactersForWaveClass(waveChar.inRandomPos, waveChar.StartingEnemyTiles, waveChar.TypeOfCharacter));
+            }
+        }
+
+        foreach (StartingCharactersForWaveClass startingCharacters in StartingCharInWave)
+        {
+            for (int i = 0; i < startingCharacters.Pos.Count; i++)
+            {
+                newChar = GetWaveCharacter(startingCharacters.TypeOfCharacter);
+                yield return SpawChar(newChar, startingCharacters.InRandomPos, startingCharacters.Pos[i], false);
+            }
+        }
+    }
+
+
     public IEnumerator StartWaveByName(string waveName)
     {
         yield return Wave(WavePhases.Where(r=> r.name == waveName).First());
@@ -134,26 +164,6 @@ public class WaveManagerScript : MonoBehaviour
     private IEnumerator Wave(WavePhaseClass wavePhase)
     {
         float timer = 0;
-        BaseCharacter newChar;
-        StartingCharInWave = new List<StartingCharactersForWaveClass>();
-        foreach (WaveCharClass waveChar in wavePhase.ListOfEnemy)
-        {
-            if (waveChar.StartingEnemyNumber > 0)
-            {
-                waveChar.NumberOfCharacter -= waveChar.StartingEnemyNumber;
-                StartingCharInWave.Add(new StartingCharactersForWaveClass(waveChar.StartingEnemyNumber, waveChar.TypeOfCharacter)); 
-            }
-        }
-
-        foreach (StartingCharactersForWaveClass startingCharacters in StartingCharInWave)
-        {
-            for (int i = 0; i < startingCharacters.Number; i++)
-            {
-                newChar = GetWaveCharacter(startingCharacters.TypeOfCharacter);
-                yield return SpawChar(newChar, true, new Vector2Int(), false);
-            }
-        }
-
         WaveCharacterInfoClass waveCharacterInfoClass;
         while (true)
         {
@@ -180,7 +190,7 @@ public class WaveManagerScript : MonoBehaviour
                 {
                     while (true)
                     {
-                        if(WaveCharcters.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script).ToList().Count == 0)
+                        if(WaveCharcters.Where(r => r.gameObject.activeInHierarchy && (r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script || (r.IsOnField && r.CharInfo.BaseCharacterType != BaseCharType.MinionType_Script))).ToList().Count == 0)
                         {
                             yield break;
                         }
@@ -310,9 +320,15 @@ public class WaveCharClass
     public WaveNPCTypes NPCType = WaveNPCTypes.Minion;
     public int NumberOfCharacter;
     public WaveCharacterInfoClass TypeOfCharacter;
-    public int StartingEnemyNumber;
+    [Header("STARTING CHARACTERS")]
+    public bool AreThereStartingEnemy = false;
+    [ConditionalField("AreThereStartingEnemy", false)] public bool inRandomPos = true;
+    public List<Vector2Int> StartingEnemyTiles = new List<Vector2Int>();
+
+    [Header("WAVE CHARACTERS")]
+    [Tooltip("Random spawnning for wave characters")]
     public bool IsRandomSpowiningTile = true;
-    [ConditionalField("IsRandomSpowiningTile", true)] public List<Vector2Int> SpowningTile = new List<Vector2Int>();
+    public List<Vector2Int> SpowningTile = new List<Vector2Int>();
 
 }
 
@@ -325,12 +341,14 @@ public class WaveEventClass
 
 public class StartingCharactersForWaveClass
 {
-    public int Number;
+    public List<Vector2Int> Pos = new List<Vector2Int>();
     public WaveCharacterInfoClass TypeOfCharacter;
+    public bool InRandomPos;
 
-    public StartingCharactersForWaveClass(int num, WaveCharacterInfoClass typeOfCharacter)
+    public StartingCharactersForWaveClass(bool inRandomPos, List<Vector2Int> pos, WaveCharacterInfoClass typeOfCharacter)
     {
-        Number = num;
+        InRandomPos = inRandomPos;
+        Pos = pos;
         TypeOfCharacter = typeOfCharacter;
     }
 }

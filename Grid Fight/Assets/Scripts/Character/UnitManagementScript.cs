@@ -18,9 +18,7 @@ public class UnitManagementScript : MonoBehaviour
     }
     public List<Vector2Int> _Pos = new List<Vector2Int>();
 
-    public
-
-        Vector2Int CurrentTilePos
+    public Vector2Int CurrentTilePos
     {
         get
         {

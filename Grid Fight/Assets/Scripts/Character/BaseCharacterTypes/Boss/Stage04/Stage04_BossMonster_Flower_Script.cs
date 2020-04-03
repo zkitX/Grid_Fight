@@ -25,7 +25,7 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
 
     public override void StartMoveCo()
     {
-        base.StartMoveCo();
+       // base.StartMoveCo();
     }
 
     public override IEnumerator Move()
@@ -74,8 +74,6 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
 
     public override IEnumerator MoveByTile(Vector3 nextPos, AnimationCurve curve, float animLength)
     {
-
-        
         SetAnimation(CharacterAnimationStateType.Idle);
         return base.MoveByTile(nextPos, curve, animLength);
     }

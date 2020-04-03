@@ -84,7 +84,6 @@ public class BattleTileTargetsScript : MonoBehaviour
                 }
             }
         }
-        attacker.shotsLeftInAttack--;
         if (effectOn)
         {
             attacker.SpecialAttackImpactEffects();
@@ -98,6 +97,8 @@ public class BattleTileTargetsScript : MonoBehaviour
            
         }
         yield return new WaitForSeconds(0.4f);
+        attacker.shotsLeftInAttack--;
+
         UpdateQueue(tc);
     }
 

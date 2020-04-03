@@ -17,7 +17,7 @@ public class Stage04_BossGirl_Script : MinionType_Script
 
     private List<Vector2Int> FlowersPos = new List<Vector2Int>()
     {
-        new Vector2Int(0,7),
+        new Vector2Int(1,7),
         new Vector2Int(1,10),
         new Vector2Int(3,10),
         new Vector2Int(4,6)
@@ -43,12 +43,12 @@ public class Stage04_BossGirl_Script : MinionType_Script
 
     private IEnumerator SetUpEnteringOnBattle_Co()
     {
-        BattleManagerScript.Instance.CurrentBattleState = BattleState.Event;
 
         foreach (VFXOffsetToTargetVOL item in GetComponentsInChildren<VFXOffsetToTargetVOL>())
         {
             TargetControllerList.Add(item);
         }
+        BattleManagerScript.Instance.CurrentBattleState = BattleState.FungusPuppets;
 
         SetAnimation(CharacterAnimationStateType.Arriving);
         SetAttackReady(true);
@@ -56,7 +56,7 @@ public class Stage04_BossGirl_Script : MinionType_Script
         while (timer <= 3)
         {
             yield return new WaitForFixedUpdate();
-            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Event))
+            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.FungusPuppets))
             {
                 yield return new WaitForEndOfFrame();
             }
@@ -67,7 +67,7 @@ public class Stage04_BossGirl_Script : MinionType_Script
         {
             Stage04_BossGirl_Flower_Script flower = (Stage04_BossGirl_Flower_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass((CharacterNameType.Stage04_BossGirl_Minion0 + i).ToString(), CharacterSelectionType.Up,
                 CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage04_BossGirl_Minion0 + i, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None), transform);
-            BattleManagerScript.Instance.AllCharactersOnField.Add(flower);
+            //BattleManagerScript.Instance.AllCharactersOnField.Add(flower);
             flower.UMS.Pos = FlowersPos.GetRange(i, 1);
             flower.BasePos = FlowersPos[i];
             flower.UMS.CurrentTilePos = FlowersPos[i];
@@ -80,12 +80,12 @@ public class Stage04_BossGirl_Script : MinionType_Script
             TargetControllerList[i].Target = t;
             TargetControllerList[i].transform.localPosition = Vector3.zero;
         }
-        StartAttakCo();
+        //StartAttakCo();
         timer = 0;
-        while (timer <= 3)
+        while (timer <= 5)
         {
             yield return new WaitForFixedUpdate();
-            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Event))
+            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.FungusPuppets))
             {
                 yield return new WaitForEndOfFrame();
             }
@@ -166,10 +166,11 @@ public class Stage04_BossGirl_Script : MinionType_Script
 
         Stage04_BossMonster_Script mask = (Stage04_BossMonster_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass((CharacterNameType.Stage04_BossMonster).ToString(), CharacterSelectionType.Up,
                 CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage04_BossMonster, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None), WaveManagerScript.Instance.transform);
-        BattleManagerScript.Instance.AllCharactersOnField.Add(mask);
+        WaveManagerScript.Instance.WaveCharcters.Add(mask);
         mask.UMS.Pos = UMS.Pos;
         mask.UMS.CurrentTilePos = UMS.CurrentTilePos;
         mask.transform.position = transform.position;
+        mask.SetAttackReady(true);
         mask.SetUpEnteringOnBattle();
         timer = 0;
         while (timer < 3)
@@ -186,62 +187,8 @@ public class Stage04_BossGirl_Script : MinionType_Script
         base.SetCharDead();
     }
 
-    /* public override IEnumerator AttackAction()
-     {
-         while (true)
-         {
-             while (!CanAttack && !VFXTestMode)
-             {
-                 yield return null;
-             }
 
-             while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || !CanGetDamage))
-             {
-                 yield return null;
-             }
-
-             isAttackStarted = false;
-             isAttackCompletetd = false;
-             isAttackGoing = false;
-             while (!isAttackCompletetd)
-             {
-                 if (!isAttackStarted)
-                 {
-                     isAttackStarted = true;
-                     isAttackGoing = true;
-                     SetAnimation(CharacterAnimationStateType.Atk);
-                 }
-
-                 if (isAttackStarted && !isAttackGoing && !isMoving)
-                 {
-                     isAttackGoing = true;
-                     SetAnimation(CharacterAnimationStateType.Atk);
-                 }
-                 yield return null;
-             }
-
-
-             float timer = 0;
-             while (timer <= CharInfo.AttackSpeedRatio)
-             {
-                 yield return new WaitForFixedUpdate();
-                 while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
-                 {
-                     yield return new WaitForEndOfFrame();
-                 }
-
-                 while (isSpecialLoading)
-                 {
-                     yield return new WaitForEndOfFrame();
-                     timer = 0;
-                 }
-
-                 timer += Time.fixedDeltaTime;
-             }
-         }
-     }*/
-
-    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical)
+    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
         if (CanGetDamage)
         {
@@ -249,5 +196,36 @@ public class Stage04_BossGirl_Script : MinionType_Script
         }
         return false;
 
+    }
+
+
+    public override IEnumerator AI()
+    {
+        while (BattleManagerScript.Instance.PlayerControlledCharacters.Length == 0)
+        {
+            yield return null;
+        }
+
+        bool val = true;
+        while (val)
+        {
+            yield return null;
+            if (IsOnField)
+            {
+
+                while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+                {
+                    yield return null;
+                }
+
+
+                List<BaseCharacter> enemys = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList();
+                if (enemys.Count > 0)
+                {
+                    //GetAttack(CharacterAnimationStateType.Atk);
+                }
+                yield return null;
+            }
+        }
     }
 }

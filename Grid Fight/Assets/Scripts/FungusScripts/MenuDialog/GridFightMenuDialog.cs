@@ -46,7 +46,6 @@ public class GridFightMenuDialog : MenuDialog
 
         for (int i = 0; i < Boxes.Count; i++)
         {
-            Debug.Log("dea");
             Boxes[i].gameObject.SetActive(false);
         }
 
