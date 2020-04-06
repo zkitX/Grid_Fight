@@ -35,7 +35,7 @@ public class SpineAnimationManager : MonoBehaviour
             skeleton = skeletonAnimation.Skeleton;
             SpineAnimationState.Complete += SpineAnimationState_Complete;
             SpineAnimationState.Event += SpineAnimationState_Event;
-            SpineAnimationState.SetAnimation(0, CharacterAnimationStateType.Idle.ToString(), true);
+            //SpineAnimationState.SetAnimation(0, CharacterAnimationStateType.Idle.ToString(), true);
             //SpineAnimationState.SetEmptyAnimation(1, 0);
         }
     }
@@ -135,6 +135,11 @@ public class SpineAnimationManager : MonoBehaviour
             CharOwner.gameObject.SetActive(false);
             return;
         }
+        if(CurrentAnim == "Monster_Death" && completedAnim == "Monster_Death")
+        {
+            CharOwner.SetAnimation("Idle", true, 1f);
+            return;
+        }
         /*if (CurrentAnim == CharacterAnimationStateType.Death_Loop && 
             completedAnim == CharacterAnimationStateType.Death_Loop && 
             CharOwner.currentDeathProcessPhase == DeathProcessStage.End)
@@ -188,12 +193,17 @@ public class SpineAnimationManager : MonoBehaviour
             if (completedAnim.Contains("IdleToAtk") && CurrentAnim.Contains("IdleToAtk"))
             {
                 Char atkNum = 'a';
-                foreach (Char letter in completedAnim.ToCharArray())
+                Char[] charArray = completedAnim.ToCharArray();
+                for (int i = 0; i < charArray.Length; i++)
                 {
-                    if (Char.IsDigit(letter))
+                    if (Char.IsDigit(charArray[i]))
                     {
-                        atkNum = letter;
-                        break;
+                        string atkString = charArray[i - 3].ToString() + charArray[i - 2].ToString() + charArray[i - 1].ToString();
+                        if (atkString == "Atk")
+                        {
+                            atkNum = charArray[i];
+                            break;
+                        }
                     }
                 }
                 if (atkNum == 'a')
@@ -207,12 +217,17 @@ public class SpineAnimationManager : MonoBehaviour
             if(completedAnim.Contains("_Loop") && CurrentAnim.Contains("_Loop"))
             {
                 Char atkNum = 'a';
-                foreach(Char letter in completedAnim.ToCharArray())
+                Char[] charArray = completedAnim.ToCharArray();
+                for (int i = 0; i < charArray.Length; i++)
                 {
-                    if(Char.IsDigit(letter))
+                    if(Char.IsDigit(charArray[i]))
                     {
-                        atkNum = letter;
-                        break;
+                        string atkString = charArray[i - 3].ToString() + charArray[i - 2].ToString() + charArray[i - 1].ToString();
+                        if(atkString == "Atk")
+                        {
+                            atkNum = charArray[i];
+                            break;
+                        }
                     }
                 }
                 if(atkNum == 'a')
@@ -246,7 +261,7 @@ public class SpineAnimationManager : MonoBehaviour
         {
             SetAnimationSpeed(CharOwner.CharInfo.BaseSpeed);
             //Debug.Log("IDLE     " + completedAnim.ToString());
-            SpineAnimationState.SetAnimation(0, CharacterAnimationStateType.Idle.ToString(), true);
+            CharOwner.SetAnimation(CharacterAnimationStateType.Idle.ToString(), true, 0);
             //SpineAnimationState.AddEmptyAnimation(1,AnimationTransition,0);
             CurrentAnim = CharacterAnimationStateType.Idle.ToString();
         }

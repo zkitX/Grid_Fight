@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackRatioMultiplier: 1
   DamageMultiplier: {x: 1, y: 1}
-  AttackAnim: 0
+  AttackAnim: 2
   AtkType: 1
   BulletTrajectories:
   - Delay: 2
@@ -24,12 +24,13 @@ MonoBehaviour:
       HasEffect: 0
       Effects:
       - {fileID: 0}
+      EffectChances: 0
       HasDifferentParticles: 0
       ParticlesID: 0
       IsEffectOnTile: 0
       TileParticlesID: 0
       DurationOnTile: 0
-  StatToCheck: 0
-  ValueChecker: 0
+  StatToCheck: 1
+  ValueChecker: 2
   PercToCheck: 0
-  Chances: 1
+  Chances: 50

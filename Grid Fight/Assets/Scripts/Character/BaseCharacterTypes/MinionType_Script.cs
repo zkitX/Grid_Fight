@@ -135,7 +135,7 @@ public class MinionType_Script : BaseCharacter
     }
 
 
-    private BaseCharacter GetTargetChar(List<BaseCharacter> enemys)
+    protected BaseCharacter GetTargetChar(List<BaseCharacter> enemys)
     {
         return enemys.OrderBy(r => (r.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x)).First();
     }

@@ -95,7 +95,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public bool sequencedAttacker = false;
     [HideInInspector]
     public bool Attacking = false;
-    protected int CharOredrInLayer = 0;
+    [HideInInspector] public int CharOredrInLayer = 0;
 
     public virtual void Start()
     {
@@ -385,6 +385,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             foreach (ScriptableObjectAttackTypeOnBattlefield atk in CharInfo.CurrentOnBattleFieldAttackTypeInfo)
             {
                 int chances = UnityEngine.Random.Range(0, 101);
+                Debug.Log(chances);
 
                 switch (atk.StatToCheck)
                 {
@@ -395,18 +396,21 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                                 if (CharInfo.HealthPerc < atk.PercToCheck && chances < atk.Chances)
                                 {
                                     nextAttack = atk;
+                                    return;
                                 }
                                 break;
                             case ValueCheckerType.EqualTo:
                                 if (CharInfo.HealthPerc == atk.PercToCheck && chances < atk.Chances)
                                 {
                                     nextAttack = atk;
+                                    return;
                                 }
                                 break;
                             case ValueCheckerType.MoreThan:
                                 if (CharInfo.HealthPerc > atk.PercToCheck && chances < atk.Chances)
                                 {
                                     nextAttack = atk;
+                                    return;
                                 }
                                 break;
                         }
@@ -418,25 +422,28 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                                 if (CharInfo.StaminaPerc < atk.PercToCheck && chances < atk.Chances)
                                 {
                                     nextAttack = atk;
+                                    return;
                                 }
                                 break;
                             case ValueCheckerType.EqualTo:
                                 if (CharInfo.StaminaPerc == atk.PercToCheck && chances < atk.Chances)
                                 {
                                     nextAttack = atk;
+                                    return;
                                 }
                                 break;
                             case ValueCheckerType.MoreThan:
                                 if (CharInfo.StaminaPerc > atk.PercToCheck && chances < atk.Chances)
                                 {
                                     nextAttack = atk;
+                                    return;
                                 }
                                 break;
                         }
-                        break;
+                        return;
                     case WaveStatsType.None:
                         nextAttack = atk;
-                        break;
+                        return;
                 }
             }
         }
@@ -686,7 +693,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     #endregion
     #region Move
 
-    protected virtual IEnumerator MoveCharOnDir_Co(InputDirection nextDir)
+    public virtual IEnumerator MoveCharOnDir_Co(InputDirection nextDir)
     {
         if ((CharInfo.Health > 0 && !isMoving && IsOnField && SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving.ToString()) || BattleManagerScript.Instance.VFXScene)
         {
@@ -1128,26 +1135,29 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         if (animState == CharacterAnimationStateType.Arriving.ToString())
         {
 
-        }     
+        }
 
-        if(animState == CharacterAnimationStateType.GettingHit.ToString() && currentAttackPhase != AttackPhasesType.End)
+        if (animState.Contains(CharacterAnimationStateType.GettingHit.ToString()) && currentAttackPhase != AttackPhasesType.End)
         {
             return;
         }
 
-        if (animState == CharacterAnimationStateType.GettingHit.ToString() && Attacking)
+        if (animState.Contains(CharacterAnimationStateType.GettingHit.ToString()) && Attacking)
         {
             return;
         }
 
-   
+        /*   if (isMoving && animState != CharacterAnimationStateType.Reverse_Arriving)
+           {
+               return;
+           }*/
 
-        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle.ToString())
+        if (SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Atk2_AtkToIdle.ToString()))
         {
             return;
         }
 
-        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving.ToString() || SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving.ToString())
+        if (SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Arriving.ToString()) || SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Reverse_Arriving.ToString()))
         {
             return;
         }
@@ -1165,7 +1175,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             AnimSpeed = CharInfo.SpeedStats.MovementSpeed * CharInfo.BaseSpeed;
         }
-        else if(animState == CharacterAnimationStateType.Reverse_Arriving.ToString() || animState == CharacterAnimationStateType.Arriving.ToString())
+        else if (animState.Contains(CharacterAnimationStateType.Reverse_Arriving.ToString()) || animState.Contains(CharacterAnimationStateType.Arriving.ToString()))
         {
             AnimSpeed = CharInfo.SpeedStats.LeaveSpeed;
         }

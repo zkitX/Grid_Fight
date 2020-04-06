@@ -258,6 +258,7 @@ public class EnvironmentManager : MonoBehaviour
         isChangeGridStructure = false;
         CameraManagerScript.Instance.ChangeFocusToNewGrid(CameraStage.CameraInfo.Where(r=> r.StageIndex == (stageIndex != -1 ? stageIndex : currentGridIndex)).First(), cameraChangeDuration, moveCameraInternally);
         GridManagerScript.Instance.SetupGrid(gridStructure);
+        
     }
 }
 

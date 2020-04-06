@@ -73,7 +73,7 @@ namespace Spine {
 		/// than mixing from the setup pose.
 		internal const int NotLast = 4;
 
-		protected AnimationStateData data;
+		public AnimationStateData data;
 		private readonly ExposedList<TrackEntry> tracks = new ExposedList<TrackEntry>();
 		private readonly ExposedList<Event> events = new ExposedList<Event>();
 
