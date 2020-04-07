@@ -5,9 +5,11 @@ using System.Linq;
 
 public class Stage09_Boss_NoFace : MinionType_Script
 {
+    public Stage09_BossInfo bossInfo = null;
     public Stage09_Boss_Geisha baseForme;
     public bool isImmune = true;
     public bool isDead = false;
+    public int intensityLevel = -1;
 
     public void TransformToNoFace()
     {
@@ -28,13 +30,15 @@ public class Stage09_Boss_NoFace : MinionType_Script
             yield return null;
         }
         SetAnimation("Transformation", false, 0.0f);
-        SpineAnim.SetAnimationSpeed(4f);
+        SpineAnim.SetAnimationSpeed(bossInfo.demonFormeIntensityLevels[intensityLevel].transformationSpeedMultiplier);
         while (!baseForme.SpineAnim.CurrentAnim.Contains("Idle"))
         {
             yield return null;
         }
+        CharInfo.HealthStats.Base = bossInfo.demonFormeIntensityLevels[intensityLevel].healthAmount;
         CharInfo.Health = CharInfo.HealthStats.Base;
-        CharInfo.HealthStats.Regeneration = CharInfo.HealthStats.BaseHealthRegeneration;
+        CharInfo.HealthStats.BaseHealthRegeneration = bossInfo.demonFormeIntensityLevels[intensityLevel].healthDrainRate;
+        CharInfo.HealthStats.Regeneration = bossInfo.demonFormeIntensityLevels[intensityLevel].healthDrainRate; ;
         isImmune = false;
         CanAttack = true;
     }
@@ -90,7 +94,8 @@ public class Stage09_Boss_NoFace : MinionType_Script
                     Debug.Log("NOFACE ATTACK");
                     GetAttack(CharacterAnimationStateType.Atk);
                     yield return AttackSequence();
-                    yield return new WaitForSeconds(Random.Range(1f, 3f));
+                    yield return new WaitForSeconds(Random.Range(bossInfo.demonFormeIntensityLevels[intensityLevel].attackRateRange.x,
+                        bossInfo.demonFormeIntensityLevels[intensityLevel].attackRateRange.y));
                 }
             }
         }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 55710729243261581}
   - component: {fileID: 55710729243261946}
   - component: {fileID: 55710729243247762}
+  - component: {fileID: 7632262843867096643}
   - component: {fileID: 55710729243249281}
   - component: {fileID: 55710729243249141}
   m_Layer: 0
@@ -452,6 +453,49 @@ MonoBehaviour:
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
   MovementTimer: {x: 5, y: 8}
+--- !u!114 &7632262843867096643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55710729243251399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ab4ccc32494066439b40af74ec93930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maidenFormeAttackCoolDown: {x: 3, y: 5}
+  moonlightBlessCastCoolDown: {x: 0.5, y: 2}
+  moonlightBlessDuration: {x: 10, y: 20}
+  moonlightBlessOdds: 20
+  moonlightBlessRegenMultiplier: 5
+  moonlightBlessAttackDampener: 0.3
+  demonFormeIntensityLevels:
+  - Name: Stage 1 @80% Health
+    evocationHealthLevel: 80
+    healthDrainRate: -1
+    healthAmount: 40
+    attackRateRange: {x: 2, y: 4}
+    transformationSpeedMultiplier: 1
+  - Name: Stage 2 @40% Health
+    evocationHealthLevel: 40
+    healthDrainRate: -2
+    healthAmount: 80
+    attackRateRange: {x: 1.5, y: 3}
+    transformationSpeedMultiplier: 3
+  - Name: Stage 3 @20% Health
+    evocationHealthLevel: 20
+    healthDrainRate: -3
+    healthAmount: 120
+    attackRateRange: {x: 1.25, y: 2}
+    transformationSpeedMultiplier: 6
+  - Name: Stage 4 @0% Health
+    evocationHealthLevel: 0
+    healthDrainRate: -5
+    healthAmount: 200
+    attackRateRange: {x: 0.75, y: 1.5}
+    transformationSpeedMultiplier: 10
 --- !u!54 &55710729243249281
 Rigidbody:
   m_ObjectHideFlags: 0

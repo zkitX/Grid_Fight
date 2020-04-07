@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class Stage09_Boss_Geisha : MinionType_Script
 {
+    Stage09_BossInfo bossInfo = null;
     bool IsCharArrived = false;
     bool oniFormeActive = false;
     Stage09_Boss_NoFace oniForme;
     public bossPhasesType BossPhase = bossPhasesType.Phase1_;
-    float[] healthPercsToTransformAt = new float[] { 80f, 40f, 20f, 0f };
-    bool[] healthPercTransformsTriggered = new bool[] { false, false, false, false };
     bool shielded = false;
     GameObject shieldParticles = null;
     public bool isImmune = false;
@@ -19,15 +18,25 @@ public class Stage09_Boss_Geisha : MinionType_Script
 
     public override void Start()
     {
-        if(oniForme == null) GenerateBoss();
+        if(bossInfo == null)SetupFromBossInfo();
+
+        if (oniForme == null) GenerateBoss();
 
         StartCoroutine(DelayedSetupSequence());
+    }
+
+    void SetupFromBossInfo()
+    {
+        bossInfo = GetComponentInChildren<Stage09_BossInfo>();
+        bossInfo.InitialiseBossInfo();
+        if (oniForme != null && oniForme.bossInfo == null) oniForme.bossInfo = bossInfo;
     }
 
     void GenerateBoss()
     {
         oniForme = (Stage09_Boss_NoFace)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(CharacterNameType.Stage09_Boss_NoFace.ToString(), CharacterSelectionType.Up,
         CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage09_Boss_NoFace, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None), transform);
+        oniForme.bossInfo = bossInfo;
         oniForme.UMS.Pos = UMS.Pos;
         oniForme.UMS.EnableBattleBars(false);
         oniForme.UMS.CurrentTilePos = UMS.CurrentTilePos;
@@ -70,6 +79,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
     private IEnumerator SetUpEnteringOnBattle_Co()
     {
         if (oniForme == null) GenerateBoss();
+        if (bossInfo == null) SetupFromBossInfo();
         SetAnimation("Idle", true);
 
         UMS.EnableBattleBars(false);
@@ -145,11 +155,11 @@ public class Stage09_Boss_Geisha : MinionType_Script
             if (IsOnField && CanAttack && BossPhase == bossPhasesType.Phase1_ && !isImmune)
             {
                 int randomiser = Random.Range(0, 100);
-                if (randomiser < 20 && !shielded)
+                if (randomiser < bossInfo.moonlightBlessOdds && !shielded)
                 {
                     Debug.Log("GEISHA Defence");
                     yield return StartShieldSequence();
-                    yield return new WaitForSeconds(Random.Range(0.5f, 2f));
+                    yield return new WaitForSeconds(Random.Range(bossInfo.moonlightBlessCastCoolDown.x, bossInfo.moonlightBlessCastCoolDown.y));
                 }
                 else
                 {
@@ -160,7 +170,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
                         Debug.Log("GEISHA ATTACK");
                         GetAttack(CharacterAnimationStateType.Atk);
                         yield return AttackSequence();
-                        yield return new WaitForSeconds(6f);
+                        yield return new WaitForSeconds(Random.Range(bossInfo.maidenFormeAttackCoolDown.x, bossInfo.maidenFormeAttackCoolDown.y));
                     }
                 }
             }
@@ -230,18 +240,21 @@ public class Stage09_Boss_Geisha : MinionType_Script
     IEnumerator ShieldedSequencer = null;
     IEnumerator ShieldedSequence()
     {
+        CharInfo.HealthStats.Regeneration = CharInfo.HealthStats.BaseHealthRegeneration * bossInfo.moonlightBlessRegenMultiplier;
+
         if (shieldParticles == null)
         {
             shieldParticles = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
-            shieldParticles.transform.localScale *= 3f;
+            shieldParticles.transform.localScale *= 3f; //remove when actual particles added
         }
         else
         {
             shieldParticles.SetActive(true);
         }
         
-        yield return new WaitForSeconds(Random.Range(10f, 20f));
+        yield return new WaitForSeconds(Random.Range(bossInfo.moonlightBlessDuration.x, bossInfo.moonlightBlessDuration.y));
 
+        CharInfo.HealthStats.Regeneration = CharInfo.HealthStats.BaseHealthRegeneration;
         shielded = false;
         shieldParticles.SetActive(false);
 
@@ -251,6 +264,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
     void InteruptShield()
     {
         if (ShieldedSequencer != null) StopCoroutine(ShieldedSequencer);
+        CharInfo.HealthStats.Regeneration = CharInfo.HealthStats.BaseHealthRegeneration;
         shielded = false;
         shieldParticles?.SetActive(false);
         Debug.Log("GEISHA Defence Interrupted");
@@ -261,32 +275,30 @@ public class Stage09_Boss_Geisha : MinionType_Script
         if(BossPhase == bossPhasesType.Phase1_ && !isImmune)
         {
             float prevHealthPerc = CharInfo.HealthPerc;
-            bool boolToReturn = base.SetDamage(shielded ? damage * 0.3f : damage, elemental, isCritical, isAttackBlocking);
+            bool boolToReturn = base.SetDamage(shielded ? damage * bossInfo.moonlightBlessAttackDampener : damage, elemental, isCritical, isAttackBlocking);
             CheckIfCanTransform(prevHealthPerc);
             return boolToReturn;
         }
         else
         {
-            oniForme.SetDamage(shielded ? damage * 0.3f : damage, elemental, isCritical, isAttackBlocking);
+            oniForme.SetDamage(damage, elemental, isCritical, isAttackBlocking);
         }
         return false;
     }
 
     void CheckIfCanTransform(float prevHealthPerc)
     {
-        for(int i = 0; i < healthPercsToTransformAt.Length; i++)
+        if(oniForme.intensityLevel >= bossInfo.divineEvocationLevels.Count - 1)
         {
-            if(prevHealthPerc > healthPercsToTransformAt[i])
-            {
-                if(CharInfo.HealthPerc <= healthPercsToTransformAt[i] && !healthPercTransformsTriggered[i])
-                {
-                    healthPercTransformsTriggered[i] = true;
-                    InteruptAttack();
-                    isImmune = true;
-                    SetOniForme(true);
-                    return;
-                }
-            }
+            return;
+        }
+
+        if(CharInfo.HealthPerc <= bossInfo.divineEvocationLevels[oniForme.intensityLevel + 1])
+        {
+            InteruptAttack();
+            isImmune = true;
+            SetOniForme(true);
+            return;
         }
     }
 
@@ -305,6 +317,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
 
         if (state)
         {
+            oniForme.intensityLevel++;
             CharInfo.HealthStats.Regeneration = 0f;
             InteruptShield();
             BossPhase = bossPhasesType.Monster_;
