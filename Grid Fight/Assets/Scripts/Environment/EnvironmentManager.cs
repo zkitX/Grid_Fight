@@ -88,7 +88,7 @@ public class EnvironmentManager : MonoBehaviour
     IEnumerator GridLeapSequence(float duration, Vector3 translation, bool moveChars = true)
     {
         //Ensure new grid is set and moved to correct position before everything
-
+        jumpingchars.Clear();
         float jumpHeight = 2f;
         CharacterAnimationStateType jumpAnim = CharacterAnimationStateType.DashUp;
 
