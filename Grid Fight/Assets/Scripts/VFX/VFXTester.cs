@@ -24,7 +24,7 @@ public class VFXTester : MonoBehaviour
     public TextMeshProUGUI SpeedOfBulletsText;
     public TextMeshProUGUI MountainDelayText;
 
-    public List<ScriptableObjectAttackType> AttacksTypeInfo = new List<ScriptableObjectAttackType>();
+    public List<ScriptableObjectAttackBase> AttacksTypeInfo = new List<ScriptableObjectAttackBase>();
 
 
     private void Start()
@@ -68,9 +68,19 @@ public class VFXTester : MonoBehaviour
         SpeedOfBulletsText.text = SpeedOfBullets.value.ToString("F2");
         MountainDelayText.text = MountainDelay.value.ToString("F2");
 
-        if(charOnScene != null && Input.GetKeyUp(KeyCode.V))
+        if (charOnScene != null && Input.GetKeyUp(KeyCode.O))
         {
-            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack());
+            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack(AttackAnimType.Powerful_Atk));
+        }
+
+        if (charOnScene != null && Input.GetKeyUp(KeyCode.B))
+        {
+            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack(AttackAnimType.Skill1));
+        }
+
+        if (charOnScene != null && Input.GetKeyUp(KeyCode.V))
+        {
+            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack(AttackAnimType.Skill2));
         }
     }
 
@@ -101,7 +111,7 @@ public class VFXTester : MonoBehaviour
         currentCharacter.CharInfo.ClassType = (CharacterClassType)Enum.Parse(typeof(CharacterClassType), CharacterClass.options[CharacterClass.value].text);
         currentCharacter.CharInfo.SpeedStats.BulletSpeed = SpeedOfBullets.value;
         currentCharacter.CharInfo.ParticleID = currentCharacter.CharInfo.ParticleID;
-        currentCharacter.CharInfo.CurrentParticlesAttackTypeInfo = AttacksTypeInfo.Where(r => r.CharacterClass == currentCharacter.CharInfo.ClassType).ToList();
+        currentCharacter.CharInfo.CurrentAttackTypeInfo = AttacksTypeInfo.Where(r => r.ParticlesAtk.CharacterClass == currentCharacter.CharInfo.ClassType).ToList();
         currentCharacter.CharInfo.DamageStats.ChildrenBulletDelay = MountainDelay.value;
     }
 }

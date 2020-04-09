@@ -94,7 +94,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ddb97e4b6281c6b45a24631bb4d3ed7c, type: 2}
+  - {fileID: 2100000, guid: 24f285065ab728449a14fd226d7b3364, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 16089711c4d0a774eb640d298b8eff6c, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: ba5a2e4a38c3731448b20444ae24f042, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -297,8 +297,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   FiringPoint: {fileID: 8917603947787662500}
   SpecialFiringPoint: {fileID: 7148047336986765888}
-  CurrentAnim: 0
+  CurrentAnim: 
   AnimationTransition: 0.1
+  Loop: 0
   changeanim: 0
   transition: 0.5
 --- !u!114 &2479229267877372599
@@ -319,11 +320,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3d1a2a7be4793fc4eb1f0a25165c0cf4, type: 3}
   BaseCharacterType: 0
   CharacterID: 1004
-  CurrentParticlesAttackTypeInfo:
-  - {fileID: 11400000, guid: de8dcc1a1d34fe44e8b3056c024cf557, type: 2}
-  - {fileID: 11400000, guid: 5271a803fa7312741ae6ab72fd388fd9, type: 2}
-  CurrentOnBattleFieldAttackTypeInfo:
-  - {fileID: 11400000, guid: 0537aba9432af4d4e9ddc1d1dc5988c7, type: 2}
+  CurrentAttackTypeInfo:
+  - {fileID: 11400000, guid: c82ba3c28f203064a99cacbfc38525b2, type: 2}
+  - {fileID: 11400000, guid: 4669da4fb9b31a7488d17bd04fc8deee, type: 2}
+  - {fileID: 11400000, guid: 3010dcce3071cdf47a82d1a6aaf2e59c, type: 2}
+  - {fileID: 11400000, guid: bcc70cd3089c1a74889bc9ef4abea65e, type: 2}
   ParticleID: 18
   Elemental: 0
   ClassType: 1

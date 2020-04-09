@@ -21,7 +21,7 @@ public class SpineAnimationManager : MonoBehaviour
     public string CurrentAnim;
     public float AnimationTransition = 0.1f;
 
-    private bool Loop = false;
+    public bool Loop = false;
 
 
     //initialize all the spine element
@@ -33,7 +33,7 @@ public class SpineAnimationManager : MonoBehaviour
             skeletonAnimation.enabled = true;
             SpineAnimationState = skeletonAnimation.AnimationState;
             skeleton = skeletonAnimation.Skeleton;
-            SpineAnimationState.Complete += SpineAnimationState_Complete;
+            //SpineAnimationState.Complete += SpineAnimationState_Complete;
             SpineAnimationState.Event += SpineAnimationState_Event;
             //SpineAnimationState.SetAnimation(0, CharacterAnimationStateType.Idle.ToString(), true);
             //SpineAnimationState.SetEmptyAnimation(1, 0);
@@ -79,194 +79,6 @@ public class SpineAnimationManager : MonoBehaviour
             }
         }
     }
-
-    //Method fired when an animation is complete
-    private void SpineAnimationState_Complete(Spine.TrackEntry trackEntry)
-    {
-       //Debug.Log(skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name + "   " + CurrentAnim.ToString());
-        if (skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name == "<empty>")
-        {
-            return;
-        }
-
-
-
-        string completedAnim = skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name;
-
-
-        if (CurrentAnim == CharacterAnimationStateType.Idle.ToString())
-        {
-            return;
-        }
-
-        if(completedAnim == CharacterAnimationStateType.Defeat_ReverseArrive.ToString())
-        {
-            CharOwner.transform.position = new Vector3(100,100,100);
-            return;
-        }
-
-        if (completedAnim == CharacterAnimationStateType.Arriving.ToString() || completedAnim.Contains("Growing"))
-        {
-            CharOwner.IsSwapping = false;
-            CharOwner.SwapWhenPossible = false;
-            CharOwner.CharArrivedOnBattleField();
-        }
-        if (CurrentAnim == CharacterAnimationStateType.Reverse_Arriving.ToString())
-        {
-            CharOwner.IsSwapping = false;
-            CharOwner.SwapWhenPossible = false;
-            CharOwner.SetAttackReady(false);
-        }
-
-        if (CurrentAnim == CharacterAnimationStateType.Death.ToString())
-        {
-            return;
-        }
-
-        //DEATH
-        if (CurrentAnim == CharacterAnimationStateType.Death_Prep.ToString() && completedAnim == CharacterAnimationStateType.Death_Prep.ToString())
-        {
-            CharOwner.currentDeathProcessPhase = DeathProcessStage.LoopDying;
-            return;
-        }
-        if (CurrentAnim == CharacterAnimationStateType.Death_Exit.ToString() && completedAnim == CharacterAnimationStateType.Death_Exit.ToString())
-        {
-            CharOwner.currentDeathProcessPhase = DeathProcessStage.None;
-            CharOwner.gameObject.SetActive(false);
-            return;
-        }
-        if(CurrentAnim == "Monster_Death" && completedAnim == "Monster_Death")
-        {
-            CharOwner.SetAnimation("Idle", true, 1f);
-            return;
-        }
-        /*if (CurrentAnim == CharacterAnimationStateType.Death_Loop && 
-            completedAnim == CharacterAnimationStateType.Death_Loop && 
-            CharOwner.currentDeathProcessPhase == DeathProcessStage.End)
-        {
-            SetAnim(CharacterAnimationStateType.Death_Loop, true, 0);
-            return;
-        }*/
-        //END DEATH
-
-        //Switch between character and minion unique attacking animation sequences
-        if (CharOwner.UMS.CurrentAttackType == AttackType.Particles)
-        {
-            #region QuickAttack
-
-            if (completedAnim == CharacterAnimationStateType.Atk1_IdleToAtk.ToString() && CurrentAnim == CharacterAnimationStateType.Atk1_IdleToAtk.ToString())
-            {
-                ((CharacterType_Script)CharOwner).QuickAttack();
-                return;
-            }
-            if (completedAnim == CharacterAnimationStateType.Atk1_Loop.ToString() &&
-             CurrentAnim == CharacterAnimationStateType.Atk1_Loop.ToString())
-            {
-                if (((CharacterType_Script)CharOwner).Atk1Queueing)
-                {
-                    ((CharacterType_Script)CharOwner).QuickAttack();
-                }
-                else
-                {
-                    SetAnim(CharacterAnimationStateType.Atk1_AtkToIdle);
-                    SetAnimationSpeed(GetAnimLenght(CharacterAnimationStateType.Atk2_IdleToAtk) / CharOwner.CharInfo.SpeedStats.IdleToAtkDuration);
-                }
-                return;
-            }
-
-            #endregion
-            #region ChargingAttack
-            if (completedAnim == CharacterAnimationStateType.Atk2_IdleToAtk.ToString() && CurrentAnim == CharacterAnimationStateType.Atk2_IdleToAtk.ToString())
-            {
-                ((CharacterType_Script)CharOwner).ChargingLoop();
-                return;
-            }
-            #endregion
-            if (completedAnim == CharacterAnimationStateType.Atk1_AtkToIdle.ToString() || completedAnim == CharacterAnimationStateType.Atk2_AtkToIdle.ToString()
-                || completedAnim == CharacterAnimationStateType.Atk.ToString() || completedAnim == CharacterAnimationStateType.Atk1.ToString())
-            {
-                CharOwner.currentAttackPhase = AttackPhasesType.End;
-            }
-        }
-        else if (CharOwner.UMS.CurrentAttackType == AttackType.Tile)
-        {
-            if (completedAnim.Contains("IdleToAtk") && CurrentAnim.Contains("IdleToAtk"))
-            {
-                Char atkNum = 'a';
-                Char[] charArray = completedAnim.ToCharArray();
-                for (int i = 0; i < charArray.Length; i++)
-                {
-                    if (Char.IsDigit(charArray[i]))
-                    {
-                        string atkString = charArray[i - 3].ToString() + charArray[i - 2].ToString() + charArray[i - 1].ToString();
-                        if (atkString == "Atk")
-                        {
-                            atkNum = charArray[i];
-                            break;
-                        }
-                    }
-                }
-                if (atkNum == 'a')
-                {
-                    atkNum = '\0';
-                    Debug.LogError("THE ATTACK ANIM PASSED DOES NOT CONTAIN A NUMERIC ID, defaulting to basic");
-                }
-                CharOwner.SetAnimation("Atk" + atkNum.ToString() + "_Charging", true, 0);
-            }
-
-            if(completedAnim.Contains("_Loop") && CurrentAnim.Contains("_Loop"))
-            {
-                Char atkNum = 'a';
-                Char[] charArray = completedAnim.ToCharArray();
-                for (int i = 0; i < charArray.Length; i++)
-                {
-                    if(Char.IsDigit(charArray[i]))
-                    {
-                        string atkString = charArray[i - 3].ToString() + charArray[i - 2].ToString() + charArray[i - 1].ToString();
-                        if(atkString == "Atk")
-                        {
-                            atkNum = charArray[i];
-                            break;
-                        }
-                    }
-                }
-                if(atkNum == 'a')
-                {
-                    atkNum = '\0';
-                    Debug.LogError("THE ATTACK ANIM PASSED DOES NOT CONTAIN A NUMERIC ID, defaulting to basic");
-                }
-
-                //If they can still attack, keep them in the charging loop
-                if(CharOwner.shotsLeftInAttack > 0)
-                {
-                    CharOwner.SetAnimation("Atk" + atkNum.ToString() + "_Charging", true, 0);
-                }
-                //otherwise revert them to the idle postion
-                else
-                {
-                    CharOwner.SetAnimation("Atk" + atkNum.ToString() + "_AtkToIdle");
-                    CharOwner.currentAttackPhase = AttackPhasesType.End;
-                }
-                return;
-            }
-
-            if (completedAnim.Contains("AtkToIdle") || completedAnim == CharacterAnimationStateType.Atk.ToString() || completedAnim == CharacterAnimationStateType.Atk1.ToString())
-            {
-                CharOwner.currentAttackPhase = AttackPhasesType.End;
-                CharOwner.shotsLeftInAttack = 0;
-            }
-        }
-
-        if (completedAnim != CharacterAnimationStateType.Idle.ToString() && !Loop)
-        {
-            SetAnimationSpeed(CharOwner.CharInfo.BaseSpeed);
-            //Debug.Log("IDLE     " + completedAnim.ToString());
-            CharOwner.SetAnimation(CharacterAnimationStateType.Idle.ToString(), true, 0);
-            //SpineAnimationState.AddEmptyAnimation(1,AnimationTransition,0);
-            CurrentAnim = CharacterAnimationStateType.Idle.ToString();
-        }
-    }
-
 
     public void SetAnim(CharacterAnimationStateType anim)
     {

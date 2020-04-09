@@ -139,6 +139,10 @@ public class UnitManagementScript : MonoBehaviour
         }
         Side = side;
         gameObject.tag = Side.ToString();
+        if (CharOwner.SpineAnim == null)
+        {
+            CharOwner.SpineAnimatorsetup();
+        }
         CharOwner.SpineAnim.gameObject.tag = Side.ToString();
         UnitBehaviour = ubt;
       

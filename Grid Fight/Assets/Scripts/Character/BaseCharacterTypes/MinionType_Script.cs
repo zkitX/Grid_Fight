@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Spine;
 using UnityEngine;
 
 public class MinionType_Script : BaseCharacter
@@ -70,6 +71,11 @@ public class MinionType_Script : BaseCharacter
         CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         StopAllCoroutines();
+        for (int i = 0; i < UMS.Pos.Count; i++)
+        {
+            GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
+            UMS.Pos[i] = Vector2Int.zero;
+        }
         base.SetCharDead();
     }
 
@@ -100,7 +106,6 @@ public class MinionType_Script : BaseCharacter
                     BaseCharacter targetChar = enemys.Where(r => r.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x).FirstOrDefault();
                     if (targetChar != null)
                     {
-                        GetAttack(CharacterAnimationStateType.Atk);
                         yield return AttackSequence();
                     }
                     else
@@ -235,7 +240,7 @@ public class MinionType_Script : BaseCharacter
     }
 
     //Basic attack sequence
-    public override IEnumerator AttackSequence()
+    public override IEnumerator AttackSequence(ScriptableObjectAttackBase atk = null)
     {
         /*shotsLeftInAttack = 0;
         if (currentAttackPhase != AttackPhasesType.End) yield break;*/
@@ -245,27 +250,35 @@ public class MinionType_Script : BaseCharacter
 
         CharacterAnimationStateType animToFire = CharacterAnimationStateType.Atk;
         bool isLooped = false;
+        if (atk != null)
+        {
+            nextAttack = atk;
+        }
+        else
+        {
+            GetAttack();
+        }
         switch (nextAttack.AttackAnim)
         {
-            case AttackAnimType.Atk:
+          /*  case AttackAnimPrefixType.Atk:
                 sequencedAttacker = false;
                 chargeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
                 animToFire = CharacterAnimationStateType.Idle;
                 isLooped = true;
                 currentAttackPhase = AttackPhasesType.Cast_Powerful;
                 CreateTileAttack();
-                break;
-            case AttackAnimType.RapidAtk:
+                break;*/
+            case AttackAnimType.Rapid_Atk:
                 animToFire = CharacterAnimationStateType.Atk1_IdleToAtk;
                 isLooped = false;
                 break;
-            case AttackAnimType.PowerfulAtk:
+            case AttackAnimType.Powerful_Atk:
+                animToFire = CharacterAnimationStateType.Atk2_IdleToAtk;
+                isLooped = false;
                 break;
-            case AttackAnimType.Special1:
+            case AttackAnimType.Skill1:
                 break;
-            case AttackAnimType.Special2:
-                break;
-            case AttackAnimType.Special3:
+            case AttackAnimType.Skill2:
                 break;
         }
 
@@ -335,7 +348,7 @@ public class MinionType_Script : BaseCharacter
     {
         List<BattleFieldAttackTileClass> tilesToCheck = new List<BattleFieldAttackTileClass>();
 
-        foreach (BulletBehaviourInfoClassOnBattleFieldClass item in ((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories)
+        foreach (BulletBehaviourInfoClassOnBattleFieldClass item in nextAttack.TilesAtk.BulletTrajectories)
         {
             tilesToCheck.AddRange(item.BulletEffectTiles);
         }
@@ -426,4 +439,46 @@ public class MinionType_Script : BaseCharacter
         damage = damage * CharInfo.DefenceStats.BaseDefence;
         return base.SetDamage(damage, elemental, isCritical);
     }
+
+
+    public override void SpineAnimationState_Complete(TrackEntry trackEntry)
+    {
+        if (trackEntry.Animation.Name == "<empty>" || SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle.ToString()
+         || SpineAnim.CurrentAnim == CharacterAnimationStateType.Death.ToString())
+        {
+            return;
+        }
+        string completedAnim = trackEntry.Animation.Name;
+
+        if (completedAnim.Contains("IdleToAtk") && SpineAnim.CurrentAnim.Contains("IdleToAtk"))
+        {
+            SetAnimation(nextAttack.PrefixAnim + "_Charging", true, 0);
+        }
+
+        if (completedAnim.Contains("_Loop") && SpineAnim.CurrentAnim.Contains("_Loop"))
+        {
+
+            //If they can still attack, keep them in the charging loop
+            if (shotsLeftInAttack > 0)
+            {
+                SetAnimation(nextAttack.PrefixAnim + "_Charging", true, 0);
+            }
+            //otherwise revert them to the idle postion
+            else
+            {
+                SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
+                currentAttackPhase = AttackPhasesType.End;
+            }
+            return;
+        }
+
+        if (completedAnim.Contains("AtkToIdle") || completedAnim == CharacterAnimationStateType.Atk.ToString() || completedAnim == CharacterAnimationStateType.Atk1.ToString())
+        {
+            currentAttackPhase = AttackPhasesType.End;
+            shotsLeftInAttack = 0;
+        }
+
+        base.SpineAnimationState_Complete(trackEntry);
+    }
+
 }

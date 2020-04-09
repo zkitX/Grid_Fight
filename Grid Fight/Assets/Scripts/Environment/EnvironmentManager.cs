@@ -102,7 +102,7 @@ public class EnvironmentManager : MonoBehaviour
         //DONT FORGET TO ADD CAMERA OFFSET ADJUSTMENT
         if (moveChars)
         {
-            chars = System.Array.ConvertAll(BattleManagerScript.Instance.AllCharactersOnField.ToArray(), item => (CharacterType_Script)item);
+            chars = System.Array.ConvertAll(BattleManagerScript.Instance.AllCharactersOnField.Where(r=> r.IsOnField).ToArray(), item => (CharacterType_Script)item);
         }
         else
         {
@@ -171,7 +171,7 @@ public class EnvironmentManager : MonoBehaviour
 
         if (chars.Length != 0)
         {
-            foreach (CharacterType_Script character in chars)
+            foreach (CharacterType_Script character in BattleManagerScript.Instance.PlayerControlledCharacters)
             {
                 character.SetAttackReady(true);
             }

@@ -875,13 +875,13 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
-    public void StartChargingAttack(ControllerType controllerType)
+    public void StartChargingAttack(ControllerType controllerType, AttackAnimType atk)
     {
         if (CurrentBattleState == BattleState.Battle)
         {
             if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null)
             {
-                StartCoroutine(CurrentSelectedCharacters[controllerType].Character.StartChargingAttack());
+                CurrentSelectedCharacters[controllerType].Character.StartChargingAtk(atk);
             }
         }
     }

@@ -81,7 +81,6 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
                         MoveTime = 0;
                     }
                 }
-                GetAttack(CharacterAnimationStateType.Atk);
                 yield return AttackSequence();
                 yield return null;
             }

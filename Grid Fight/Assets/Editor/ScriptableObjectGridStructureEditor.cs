@@ -34,6 +34,7 @@ public class ScriptableObjectGridStructureEditor : Editor
                 {
                     //Debug.Log(x + "   " + y);
                     bti = origin.GridInfo.Where(r => r.Pos == new Vector2Int(x, y)).First();
+                    bti.name = x + "," + y;
                     if (firstOpen)
                     {
                         gti = new GridTileInfo(new Vector2Int(x, y), bti);

@@ -404,9 +404,9 @@ public class GridManagerScript : MonoBehaviour
 
 
 
-    public IEnumerator OnBattleFieldAttackCo(CharacterInfoScript cInfo, ScriptableObjectAttackTypeOnBattlefield atk, Vector2Int basePos, AttackParticleType atkPS)
+    public IEnumerator OnBattleFieldAttackCo(CharacterInfoScript cInfo, ScriptableObjectAttackBase atk, Vector2Int basePos, AttackParticleType atkPS)
     {
-        foreach (BulletBehaviourInfoClassOnBattleFieldClass item in atk.BulletTrajectories)
+        foreach (BulletBehaviourInfoClassOnBattleFieldClass item in atk.TilesAtk.BulletTrajectories)
         {
             float timer = 0;
             foreach (BattleFieldAttackTileClass target in item.BulletEffectTiles)

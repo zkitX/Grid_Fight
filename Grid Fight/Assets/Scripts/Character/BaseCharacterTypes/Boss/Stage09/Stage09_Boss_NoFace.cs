@@ -92,7 +92,6 @@ public class Stage09_Boss_NoFace : MinionType_Script
                 if (targetChar != null)
                 {
                     Debug.Log("NOFACE ATTACK");
-                    GetAttack(CharacterAnimationStateType.Atk);
                     yield return AttackSequence();
                     yield return new WaitForSeconds(Random.Range(bossInfo.demonFormeIntensityLevels[intensityLevel].attackRateRange.x,
                         bossInfo.demonFormeIntensityLevels[intensityLevel].attackRateRange.y));
@@ -106,20 +105,29 @@ public class Stage09_Boss_NoFace : MinionType_Script
         yield break; //char doesnt move
         yield return baseForme.MoveCharOnDir_Co(nextDir);
     }
-    public override IEnumerator AttackSequence()
+    public override IEnumerator AttackSequence(ScriptableObjectAttackBase atk = null)
     {
         Attacking = true;
+
+        if (atk != null)
+        {
+            nextAttack = atk;
+        }
+        else
+        {
+            GetAttack();
+        }
 
         string animToFire = "bippidi boppidi";
         switch (nextAttack.AttackAnim)
         {
-            case AttackAnimType.Atk:
+            case AttackAnimType.Rapid_Atk:
                 animToFire = "Atk1_IdleToAtk";
                 break;
-            case AttackAnimType.RapidAtk:
+            case AttackAnimType.Powerful_Atk:
                 animToFire = "Atk2_IdleToAtk";
                 break;
-            case AttackAnimType.PowerfulAtk:
+            case AttackAnimType.Skill1:
                 animToFire = "Atk3_IdleToAtk";
                 break;
             default:

@@ -191,6 +191,7 @@ public class Stage04_BossMonster_Script : MinionType_Script
         CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);
         UIBattleManager.Instance.Win.gameObject.SetActive(true);
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
+
         base.SetCharDead();
     }
 }

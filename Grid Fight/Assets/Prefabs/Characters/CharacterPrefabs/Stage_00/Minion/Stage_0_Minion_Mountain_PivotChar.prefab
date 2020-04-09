@@ -370,6 +370,7 @@ MonoBehaviour:
   SpecialFiringPoint: {fileID: 2639910783238502110}
   CurrentAnim: 0
   AnimationTransition: 0.1
+  Loop: 0
   changeanim: 0
   transition: 0.5
 --- !u!114 &4915738391350135175
@@ -388,9 +389,9 @@ MonoBehaviour:
   CharacterIcons: []
   BaseCharacterType: 1
   CharacterID: 1000
-  CurrentParticlesAttackTypeInfo: []
-  CurrentOnBattleFieldAttackTypeInfo:
-  - {fileID: 11400000, guid: 0537aba9432af4d4e9ddc1d1dc5988c7, type: 2}
+  CurrentAttackTypeInfo:
+  - {fileID: 11400000, guid: ba799f854706c7b44be0099d4b05530f, type: 2}
+  - {fileID: 11400000, guid: 978902d287a80f54388c95d774249f29, type: 2}
   ParticleID: 15
   Elemental: 0
   ClassType: 3

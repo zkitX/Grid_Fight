@@ -163,6 +163,9 @@ public enum ControllerType
     None
 }
 
+
+
+
 public enum UnitBehaviourType
 {
     ControlledByPlayer,
@@ -358,15 +361,25 @@ public enum AIType
     AggressiveAI
 }
 
+
+public enum AttackAnimPrefixType
+{
+    Atk1,
+    Atk2,
+    Atk3,
+    S_Buff,
+    S_DeBuff
+}
+
+
 public enum AttackAnimType
 {
-    Atk,
-    RapidAtk,
-    PowerfulAtk,
-    Special1,
-    Special2,
-    Special3
+    Rapid_Atk,
+    Powerful_Atk,
+    Skill1,
+    Skill2,
 }
+
 
 
 public enum CharacterAnimationStateType

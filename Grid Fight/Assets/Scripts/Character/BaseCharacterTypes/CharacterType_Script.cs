@@ -163,19 +163,44 @@ public class CharacterType_Script : BaseCharacter
     }
 
 
+    IEnumerator charging_Co = null;
+    public void StartChargingAtk(AttackAnimType atkType)
+    {
+        if (charging_Co != null)
+        {
+            StopCoroutine(charging_Co);
+        }
+
+        charging_Co = StartChargingAttack(atkType);
+        StartCoroutine(charging_Co);
+    }
+
     //Load the special attack and fire it if the load is complete
-    public IEnumerator StartChargingAttack()
+    public IEnumerator StartChargingAttack(AttackAnimType nextAtkType)
     {
         if (CharInfo.StaminaStats.Stamina - CharInfo.PowerfulAttac.Stamina_Cost_Atk >= 0 
            && CanAttack)
         {
+            AttackAnimPrefixType atkType = AttackAnimPrefixType.Atk2;
+            switch (nextAtkType)
+            {
+
+                case AttackAnimType.Powerful_Atk:
+                    atkType = AttackAnimPrefixType.Atk2;
+                    break;
+                case AttackAnimType.Skill1:
+                    atkType = AttackAnimPrefixType.S_Buff;
+                    break;
+                case AttackAnimType.Skill2:
+                    atkType = AttackAnimPrefixType.S_DeBuff;
+                    break;
+            }
             GameObject ps = null;
             bool isChargingParticlesOn = false;
             isSpecialLoading = true;
             float timer = 0;
             currentAttackPhase = AttackPhasesType.Start;
-            SetAnimation(CharacterAnimationStateType.Atk2_IdleToAtk);
-            SpineAnim.SetAnimationSpeed(SpineAnim.GetAnimLenght(CharacterAnimationStateType.Atk2_IdleToAtk) / CharInfo.SpeedStats.IdleToAtkDuration);
+            SetAnimation(atkType + "_IdleToAtk");
             
             while (isSpecialLoading && !VFXTestMode)
             {
@@ -184,8 +209,7 @@ public class CharacterType_Script : BaseCharacter
 
                 if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle.ToString())
                 {
-                    SetAnimation(CharacterAnimationStateType.Atk2_IdleToAtk);
-                    SpineAnim.SetAnimationSpeed(SpineAnim.GetAnimLenght(CharacterAnimationStateType.Atk2_IdleToAtk) / CharInfo.SpeedStats.IdleToAtkDuration);
+                    SetAnimation(atkType + "_IdleToAtk");
                 }
                 if (!isChargingParticlesOn)
                 {
@@ -233,7 +257,7 @@ public class CharacterType_Script : BaseCharacter
 
                     ps.transform.parent = null;
                     ps.SetActive(false);
-                    SpecialAttack(CharInfo.CharacterLevel);
+                    SpecialAttack(CharInfo.CharacterLevel, nextAtkType);
                 }
             }
             else
@@ -276,24 +300,28 @@ public class CharacterType_Script : BaseCharacter
 
 
     //Set ste special attack
-    public void SpecialAttack(CharacterLevelType attackLevel)
+    public void SpecialAttack(CharacterLevelType attackLevel, AttackAnimType atkType)
     {
         NextAttackLevel = attackLevel;
+        nextAttack = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackAnim == atkType).First();
         CameraManagerScript.Instance.CameraShake(CameraShakeType.Powerfulattack);
-        SetAnimation(CharacterAnimationStateType.Atk2_AtkToIdle);
+
+        SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
+
         ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.CastActivation, transform.position, UMS.Side);
     }
 
     public void QuickAttack()
     {
         Atk1Queueing = false;
+        nextAttack = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackAnim == AttackAnimType.Rapid_Atk).First();
         currentAttackPhase = AttackPhasesType.Start;
         SetAnimation(CharacterAnimationStateType.Atk1_Loop);
     }
 
-    public void ChargingLoop()
+    public void ChargingLoop(string atk)
     {
-        SetAnimation(CharacterAnimationStateType.Atk2_Charging, true);
+        SetAnimation(atk + "_Charging", true);
     }
 
     public void SecondSpecialAttackStarting()
@@ -352,12 +380,86 @@ public class CharacterType_Script : BaseCharacter
 
     #endregion
 
+
+
+
+
     //Used to indicate the character that is selected in the battlefield
     public void SetCharSelected(bool isSelected, ControllerType player)
     {
         NewIManager.Instance.SetSelected(isSelected, player, CharInfo.CharacterID, UMS.Side);   
     }
 
+    public override void SpineAnimationState_Complete(Spine.TrackEntry trackEntry)
+    {
+        //Debug.Log(skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name + "   " + CurrentAnim.ToString());
+        if (trackEntry.Animation.Name == "<empty>" || SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle.ToString()
+           || SpineAnim.CurrentAnim == CharacterAnimationStateType.Death.ToString())
+        {
+            return;
+        }
+        string completedAnim = trackEntry.Animation.Name;
+
+
+        if (completedAnim == CharacterAnimationStateType.Defeat_ReverseArrive.ToString())
+        {
+            IsSwapping = false;
+            SwapWhenPossible = false;
+            for (int i = 0; i < UMS.Pos.Count; i++)
+            {
+                GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
+                UMS.Pos[i] = Vector2Int.zero;
+            }
+            SetAttackReady(false);
+            transform.position = new Vector3(100, 100, 100);
+            return;
+        }
+
+      
+        if (completedAnim == CharacterAnimationStateType.Reverse_Arriving.ToString())
+        {
+            IsSwapping = false;
+            SwapWhenPossible = false;
+            SetAttackReady(false);
+        }
+
+
+        if (completedAnim == CharacterAnimationStateType.Atk1_IdleToAtk.ToString() && SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1_IdleToAtk.ToString())
+        {
+            QuickAttack();
+            return;
+        }
+        if (completedAnim == CharacterAnimationStateType.Atk1_Loop.ToString() &&
+            SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1_Loop.ToString())
+        {
+            if (Atk1Queueing)
+            {
+                QuickAttack();
+            }
+            else
+            {
+                SetAnimation(CharacterAnimationStateType.Atk1_AtkToIdle);
+                SpineAnim.SetAnimationSpeed(SpineAnim.GetAnimLenght(CharacterAnimationStateType.Atk1_IdleToAtk) / CharInfo.SpeedStats.IdleToAtkDuration);
+            }
+            return;
+        }
+        if (completedAnim.Contains("Atk2") || completedAnim.Contains("S_Buff") || completedAnim.Contains("S_Debuff") || completedAnim.Contains("Atk3"))
+        {
+            if (completedAnim.Contains("IdleToAtk") && SpineAnim.CurrentAnim.ToString().Contains("IdleToAtk"))
+            {
+                string[] res = completedAnim.Split('_');
+                ChargingLoop(res.Length == 2 ? res.First() : res[0] + "_" + res[1]);
+                return;
+            }
+        }
+       
+        if (completedAnim.Contains("AtkToIdle") || completedAnim == CharacterAnimationStateType.Atk.ToString() || completedAnim == CharacterAnimationStateType.Atk1.ToString())
+        {
+            currentAttackPhase = AttackPhasesType.End;
+        }
+
+        base.SpineAnimationState_Complete(trackEntry);
+    }
 
     public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
     {

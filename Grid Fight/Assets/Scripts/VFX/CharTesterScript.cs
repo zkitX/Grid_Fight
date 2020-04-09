@@ -41,7 +41,7 @@ public class CharTesterScript : MonoBehaviour
 
     private IEnumerator MoveCo;
     private float CurrentSpeed = 1;
-    public List<ScriptableObjectAttackType> AttacksTypeInfo = new List<ScriptableObjectAttackType>();
+    public List<ScriptableObjectAttackBase> AttacksTypeInfo = new List<ScriptableObjectAttackBase>();
 
 
     private void Start()
@@ -92,9 +92,19 @@ public class CharTesterScript : MonoBehaviour
         MountainDelayText.text = MountainDelay.value.ToString("F2");
         TransitionTimeText.text = TransitionTime.value.ToString("F2");
         AnimationSpeedText.text = AnimationSpeed.value.ToString("F2");
+        if (charOnScene != null && Input.GetKeyUp(KeyCode.O))
+        {
+            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack( AttackAnimType.Powerful_Atk));
+        }
+
+        if (charOnScene != null && Input.GetKeyUp(KeyCode.B))
+        {
+            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack(AttackAnimType.Skill1));
+        }
+
         if (charOnScene != null && Input.GetKeyUp(KeyCode.V))
         {
-            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack());
+            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack(AttackAnimType.Skill2));
         }
     }
 
@@ -129,7 +139,7 @@ public class CharTesterScript : MonoBehaviour
         currentCharacter.CharInfo.ParticleID = (AttackParticleType)Enum.Parse(typeof(AttackParticleType), ParticleType.options[ParticleType.value].text);
         currentCharacter.CharInfo.SpeedStats.AttackSpeedRatio = AttackSpeed.value;
         currentCharacter.CharInfo.SpeedStats.BulletSpeed = SpeedOfBullets.value;
-        currentCharacter.CharInfo.CurrentParticlesAttackTypeInfo = AttacksTypeInfo.Where(r => r.CharacterClass == currentCharacter.CharInfo.ClassType).ToList();
+        currentCharacter.CharInfo.CurrentAttackTypeInfo = AttacksTypeInfo.Where(r => r.ParticlesAtk.CharacterClass == currentCharacter.CharInfo.ClassType).ToList();
         currentCharacter.CharInfo.DamageStats.ChildrenBulletDelay = MountainDelay.value;
     }
 
@@ -146,7 +156,7 @@ public class CharTesterScript : MonoBehaviour
         currentCharacter.CharInfo.BaseSpeed = CurrentSpeed;
         if (nextAnim.ToString().Contains("Atk"))
         {
-            currentCharacter.GetAttack(nextAnim);
+            currentCharacter.GetAttack();
         }
 
         if (nextAnim.ToString().Contains("Dash"))

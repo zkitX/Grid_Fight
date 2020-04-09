@@ -155,7 +155,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1a4e0a3f151b379409175766b95132b8, type: 2}
+  - {fileID: 2100000, guid: bd19c445e171e544e8d0750c276b1151, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: ebc05887e7fb8184ea85944f88e16b98, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: ec471c14ecd8e1f4286f1022b82a75f1, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -432,6 +432,7 @@ MonoBehaviour:
   SpecialFiringPoint: {fileID: 5349249721967260197}
   CurrentAnim: 1
   AnimationTransition: 0.1
+  Loop: 0
   changeanim: 0
   transition: 0.5
 --- !u!114 &822276967971158738
@@ -450,10 +451,11 @@ MonoBehaviour:
   CharacterIcons: []
   BaseCharacterType: 0
   CharacterID: 1084
-  CurrentParticlesAttackTypeInfo:
-  - {fileID: 11400000, guid: 73c66a9d114b7ea4a86c401084c4d62f, type: 2}
-  - {fileID: 11400000, guid: 8fb60940686eaa44dbae8a096628ded4, type: 2}
-  CurrentOnBattleFieldAttackTypeInfo: []
+  CurrentAttackTypeInfo:
+  - {fileID: 11400000, guid: eab8ad69c6a129e45aefa1e67d6c05cd, type: 2}
+  - {fileID: 11400000, guid: f7b93152800b37a4cab90fece5596a66, type: 2}
+  - {fileID: 11400000, guid: a4d97a6da21b5274bafc85b673756357, type: 2}
+  - {fileID: 11400000, guid: b3056224fbfb4894f9b009166d7d7ea9, type: 2}
   ParticleID: 8
   Elemental: 6
   ClassType: 0

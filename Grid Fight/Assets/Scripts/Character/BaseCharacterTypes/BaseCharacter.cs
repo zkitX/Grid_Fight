@@ -193,11 +193,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public virtual void SetCharDead(bool hasToDisappear = true)
     {
-        for (int i = 0; i < UMS.Pos.Count; i++)
-        {
-            GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
-            UMS.Pos[i] = Vector2Int.zero;
-        }
+      
         if(attackCoroutine != null)
         {
             StopCoroutine(attackCoroutine);
@@ -261,11 +257,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     //Basic attack Action that will start the attack anim every x seconds
     public virtual IEnumerator AttackAction(bool yieldBefore)
     {
-        if (nextAttack == null)
-        {
-            GetAttack(CharacterAnimationStateType.Atk);
-        }
-
         // DOnt do anything until the unit is free to attack(otherwise attack anim gets interupted by the other ones)
         while (SpineAnim.CurrentAnim != CharacterAnimationStateType.Idle.ToString())
         {
@@ -290,8 +281,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 yield return null;
 
             }
-            GetAttack(CharacterAnimationStateType.Atk);
-
             //Wait until next attack
             if (!yieldBefore) yield return PauseAttack((CharInfo.SpeedStats.AttackSpeedRatio / 3) * nextAttack.AttackRatioMultiplier);
 
@@ -300,7 +289,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     }
 
 
-    public virtual IEnumerator AttackSequence()
+    public virtual IEnumerator AttackSequence(ScriptableObjectAttackBase atk = null)
     {
         yield return null;
     }
@@ -366,85 +355,87 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
     }
 
-    public void GetAttack(CharacterAnimationStateType anim = CharacterAnimationStateType.NoMesh)
+
+    List<ScriptableObjectAttackBase> availableAtks = new List<ScriptableObjectAttackBase>();
+    ScriptableObjectAttackBase atkToCheck;
+    public void GetAttack()
     {
-        if (UMS.CurrentAttackType == AttackType.Particles)
+
+        availableAtks.Clear();
+        for (int i = 0; i < CharInfo.CurrentAttackTypeInfo.Count; i++)
         {
-            switch (anim)
+            atkToCheck = CharInfo.CurrentAttackTypeInfo[i];
+            switch (atkToCheck.TilesAtk.StatToCheck)
             {
-                case CharacterAnimationStateType.Atk:
-                    nextAttack = CharInfo.CurrentParticlesAttackTypeInfo[0];
+                case WaveStatsType.Health:
+                    switch (atkToCheck.TilesAtk.ValueChecker)
+                    {
+                        case ValueCheckerType.LessThan:
+                            if (CharInfo.HealthPerc < atkToCheck.TilesAtk.PercToCheck)
+                            {
+
+                                availableAtks.Add(atkToCheck);
+                            }
+                            break;
+                        case ValueCheckerType.EqualTo:
+                            if (CharInfo.HealthPerc == atkToCheck.TilesAtk.PercToCheck)
+                            {
+                                availableAtks.Add(atkToCheck);
+                            }
+                            break;
+                        case ValueCheckerType.MoreThan:
+                            if (CharInfo.HealthPerc > atkToCheck.TilesAtk.PercToCheck)
+                            {
+                                availableAtks.Add(atkToCheck);
+                            }
+                            break;
+                    }
                     break;
-                case CharacterAnimationStateType.Atk1:
-                    nextAttack = CharInfo.CurrentParticlesAttackTypeInfo[1];
-                    break;
+                case WaveStatsType.Stamina:
+                    switch (atkToCheck.TilesAtk.ValueChecker)
+                    {
+                        case ValueCheckerType.LessThan:
+                            if (CharInfo.StaminaPerc < atkToCheck.TilesAtk.PercToCheck)
+                            {
+                                availableAtks.Add(atkToCheck);
+                            }
+                            break;
+                        case ValueCheckerType.EqualTo:
+                            if (CharInfo.StaminaPerc == atkToCheck.TilesAtk.PercToCheck)
+                            {
+                                availableAtks.Add(atkToCheck);
+                            }
+                            break;
+                        case ValueCheckerType.MoreThan:
+                            if (CharInfo.StaminaPerc > atkToCheck.TilesAtk.PercToCheck)
+                            {
+                                availableAtks.Add(atkToCheck);
+                            }
+                            break;
+                    }
+                    return;
+                case WaveStatsType.None:
+                    nextAttack = atkToCheck;
+                    availableAtks.Add(atkToCheck);
+                    return;
             }
         }
-        else
-        {
-            foreach (ScriptableObjectAttackTypeOnBattlefield atk in CharInfo.CurrentOnBattleFieldAttackTypeInfo)
-            {
-                int chances = UnityEngine.Random.Range(0, 101);
-                Debug.Log(chances);
 
-                switch (atk.StatToCheck)
-                {
-                    case WaveStatsType.Health:
-                        switch (atk.ValueChecker)
-                        {
-                            case ValueCheckerType.LessThan:
-                                if (CharInfo.HealthPerc < atk.PercToCheck && chances < atk.Chances)
-                                {
-                                    nextAttack = atk;
-                                    return;
-                                }
-                                break;
-                            case ValueCheckerType.EqualTo:
-                                if (CharInfo.HealthPerc == atk.PercToCheck && chances < atk.Chances)
-                                {
-                                    nextAttack = atk;
-                                    return;
-                                }
-                                break;
-                            case ValueCheckerType.MoreThan:
-                                if (CharInfo.HealthPerc > atk.PercToCheck && chances < atk.Chances)
-                                {
-                                    nextAttack = atk;
-                                    return;
-                                }
-                                break;
-                        }
-                        break;
-                    case WaveStatsType.Stamina:
-                        switch (atk.ValueChecker)
-                        {
-                            case ValueCheckerType.LessThan:
-                                if (CharInfo.StaminaPerc < atk.PercToCheck && chances < atk.Chances)
-                                {
-                                    nextAttack = atk;
-                                    return;
-                                }
-                                break;
-                            case ValueCheckerType.EqualTo:
-                                if (CharInfo.StaminaPerc == atk.PercToCheck && chances < atk.Chances)
-                                {
-                                    nextAttack = atk;
-                                    return;
-                                }
-                                break;
-                            case ValueCheckerType.MoreThan:
-                                if (CharInfo.StaminaPerc > atk.PercToCheck && chances < atk.Chances)
-                                {
-                                    nextAttack = atk;
-                                    return;
-                                }
-                                break;
-                        }
-                        return;
-                    case WaveStatsType.None:
-                        nextAttack = atk;
-                        return;
-                }
+        int totalchances = 0;
+        availableAtks.ForEach(r =>
+        {
+            totalchances += r.TilesAtk.Chances;
+        });
+        int chances = UnityEngine.Random.Range(0, totalchances);
+        int sumc = 0;
+        for (int i = 0; i < availableAtks.Count; i++)
+        {
+            sumc += availableAtks[i].TilesAtk.Chances;
+            
+            if (chances < sumc)
+            {
+                nextAttack = availableAtks[i];
+                return;
             }
         }
     }
@@ -548,34 +539,37 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public void CreateParticleAttack()
     {
-        if (UMS.CurrentAttackType == AttackType.Particles)
+        if (nextAttack.CurrentAttackType == AttackType.Particles)
         {
-            foreach (BulletBehaviourInfoClass item in CharInfo.CurrentParticlesAttackTypeInfo[SpineAnim.CurrentAnim.ToString().Contains("1") ? 0 : 1].BulletTrajectories)
+            foreach (BulletBehaviourInfoClass item in nextAttack.ParticlesAtk.BulletTrajectories)
             {
                 CreateBullet(item);
             }
         }
-       
+        else
+        {
+            CreateTileAttack();
+        }
     }
 
     public void CreateTileAttack()
     {
-        if (UMS.CurrentAttackType == AttackType.Tile)
+        if (nextAttack.CurrentAttackType == AttackType.Tile)
         {
-            ScriptableObjectAttackTypeOnBattlefield currentAtk = (ScriptableObjectAttackTypeOnBattlefield)nextAttack;
-            CharInfo.RapidAttack.DamageMultiplier = currentAtk.DamageMultiplier;
+            
+            CharInfo.RapidAttack.DamageMultiplier = nextAttack.DamageMultiplier;
             BaseCharacter charTar = null;
-            if (currentAtk.AtkType == BattleFieldAttackType.OnTarget)
+            if (nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnTarget)
             {
                 charTar = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList().OrderBy(a => a.CharInfo.HealthPerc).FirstOrDefault();
             }
 
-            foreach (BulletBehaviourInfoClassOnBattleFieldClass item in ((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories)
+            foreach (BulletBehaviourInfoClassOnBattleFieldClass item in nextAttack.TilesAtk.BulletTrajectories)
             {
                 foreach (BattleFieldAttackTileClass target in item.BulletEffectTiles)
                 {
-                    Vector2Int res = currentAtk.AtkType == BattleFieldAttackType.OnTarget && charTar != null ? target.Pos + charTar.UMS.CurrentTilePos :
-                        currentAtk.AtkType == BattleFieldAttackType.OnItSelf ? target.Pos + UMS.CurrentTilePos : target.Pos;
+                    Vector2Int res = nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnTarget && charTar != null ? target.Pos + charTar.UMS.CurrentTilePos :
+                        nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnItSelf ? target.Pos + UMS.CurrentTilePos : target.Pos;
                     if (GridManagerScript.Instance.isPosOnField(res))
                     {
                         BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(res);
@@ -587,7 +581,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                         {
                             if (bts._BattleTileState != BattleTileStateType.Blocked)
                             {
-                                if (currentAtk.AtkType == BattleFieldAttackType.OnItSelf && bts.WalkingSide == UMS.WalkingSide)
+                                if (nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnItSelf && bts.WalkingSide == UMS.WalkingSide)
                                 {
                                     shotsLeftInAttack++;
 
@@ -595,7 +589,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                                     0 , CharInfo.Elemental, this,
                                     target.Effects, target.EffectChances);
                                 }
-                                else if (currentAtk.AtkType != BattleFieldAttackType.OnItSelf && bts.WalkingSide != UMS.WalkingSide)
+                                else if (nextAttack.TilesAtk.AtkType != BattleFieldAttackType.OnItSelf && bts.WalkingSide != UMS.WalkingSide)
                                 {
                                     shotsLeftInAttack++;
 
@@ -1191,7 +1185,31 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public void SpineAnimatorsetup()
     {
         SpineAnim = GetComponentInChildren<SpineAnimationManager>(true);
+        SpineAnim.SetupSpineAnim();
+        SpineAnim.SpineAnimationState.Complete += SpineAnimationState_Complete; ;
         SpineAnim.CharOwner = this;
+    }
+
+    public virtual void SpineAnimationState_Complete(Spine.TrackEntry trackEntry)
+    {
+
+        string completedAnim = trackEntry.Animation.Name;
+
+        if (completedAnim == CharacterAnimationStateType.Arriving.ToString() || completedAnim.Contains("Growing"))
+        {
+            IsSwapping = false;
+            SwapWhenPossible = false;
+            CharArrivedOnBattleField();
+        }
+
+        if (completedAnim != CharacterAnimationStateType.Idle.ToString() && !SpineAnim.Loop)
+        {
+            SpineAnim.SetAnimationSpeed(CharInfo.BaseSpeed);
+            //Debug.Log("IDLE     " + completedAnim.ToString());
+            SpineAnim.SpineAnimationState.SetAnimation(0, CharacterAnimationStateType.Idle.ToString(), true);
+            //SpineAnimationState.AddEmptyAnimation(1,AnimationTransition,0);
+            SpineAnim.CurrentAnim = CharacterAnimationStateType.Idle.ToString();
+        }
     }
 
     #endregion

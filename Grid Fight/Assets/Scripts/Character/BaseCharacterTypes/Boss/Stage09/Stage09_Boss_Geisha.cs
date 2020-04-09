@@ -168,7 +168,6 @@ public class Stage09_Boss_Geisha : MinionType_Script
                     if (targetChar != null)
                     {
                         Debug.Log("GEISHA ATTACK");
-                        GetAttack(CharacterAnimationStateType.Atk);
                         yield return AttackSequence();
                         yield return new WaitForSeconds(Random.Range(bossInfo.maidenFormeAttackCoolDown.x, bossInfo.maidenFormeAttackCoolDown.y));
                     }
@@ -189,17 +188,24 @@ public class Stage09_Boss_Geisha : MinionType_Script
         oniForme.UMS.CurrentTilePos = UMS.CurrentTilePos;
     }
 
-    public override IEnumerator AttackSequence()
+    public override IEnumerator AttackSequence(ScriptableObjectAttackBase atk = null)
     {
         Attacking = true;
-
+        if (atk != null)
+        {
+            nextAttack = atk;
+        }
+        else
+        {
+            GetAttack();
+        }
         string animToFire = "bippidi boppidi";
         switch (nextAttack.AttackAnim)
         {
-            case AttackAnimType.Atk:
+            case AttackAnimType.Rapid_Atk:
                 animToFire = "Atk1_IdleToAtk";
                 break;
-            case AttackAnimType.RapidAtk:
+            case AttackAnimType.Powerful_Atk:
                 animToFire = "Atk2_IdleToAtk";
                 break;
             default:

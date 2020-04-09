@@ -23,8 +23,7 @@ public class CharacterInfoScript : MonoBehaviour
     public Sprite[] CharacterIcons;
     public BaseCharType BaseCharacterType;
     public CharacterNameType CharacterID;
-    public List<ScriptableObjectAttackType> CurrentParticlesAttackTypeInfo = new List<ScriptableObjectAttackType>();
-    public List<ScriptableObjectAttackTypeOnBattlefield> CurrentOnBattleFieldAttackTypeInfo = new List<ScriptableObjectAttackTypeOnBattlefield>();
+    public List<ScriptableObjectAttackBase> CurrentAttackTypeInfo = new List<ScriptableObjectAttackBase>();
     public AttackParticleType ParticleID;
     public ElementalType Elemental;
     public CharacterClassType ClassType;

@@ -39,7 +39,7 @@ public class Stage00_BossOctopus_Girl : MinionType_Script
         yield return null;
     }
 
-    public override IEnumerator AttackSequence()
+    public override IEnumerator AttackSequence(ScriptableObjectAttackBase atk = null)
     {
         yield return null;
     }

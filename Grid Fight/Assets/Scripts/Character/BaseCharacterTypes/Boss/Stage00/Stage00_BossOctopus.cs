@@ -313,9 +313,7 @@ public class Stage00_BossOctopus : MinionType_Script
                 {
                     yield return null;
                 }
-                ((Stage00_BossOctopus_Head)GetPiece(CharacterNameType.Stage00_BossOctopus_Head)).GetAttack(CharacterAnimationStateType.Atk);
                 StartCoroutine(((Stage00_BossOctopus_Head)GetPiece(CharacterNameType.Stage00_BossOctopus_Head)).AttackSequence());
-                ((Stage00_BossOctopus_Tentacles)GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles)).GetAttack(CharacterAnimationStateType.Atk);
                 StartCoroutine(((Stage00_BossOctopus_Tentacles)GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles)).AttackSequence());
 
                 while (GetPiece(CharacterNameType.Stage00_BossOctopus_Head).Attacking && GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles).Attacking)
@@ -336,7 +334,6 @@ public class Stage00_BossOctopus : MinionType_Script
                     //If it gets here, launch an attack from the head
                     if (!GetPiece(CharacterNameType.Stage00_BossOctopus_Head).Attacking)
                     {
-                        ((Stage00_BossOctopus_Head)GetPiece(CharacterNameType.Stage00_BossOctopus_Head)).GetAttack(CharacterAnimationStateType.Atk);
                         yield return ((Stage00_BossOctopus_Head)GetPiece(CharacterNameType.Stage00_BossOctopus_Head)).AttackSequence();
                         headAttackCooldown = Random.Range(headAttackTimings.x, headAttackTimings.y);
                     }
@@ -346,7 +343,6 @@ public class Stage00_BossOctopus : MinionType_Script
                     //If it gets here, launch an attack from the tentacles
                     if (!GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles).Attacking)
                     {
-                        ((Stage00_BossOctopus_Tentacles)GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles)).GetAttack(CharacterAnimationStateType.Atk);
                         yield return ((Stage00_BossOctopus_Tentacles)GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles)).AttackSequence();
                         tentacleAttackCooldown = Random.Range(tentacleAttackTimings.x, tentacleAttackTimings.y);
                     }
