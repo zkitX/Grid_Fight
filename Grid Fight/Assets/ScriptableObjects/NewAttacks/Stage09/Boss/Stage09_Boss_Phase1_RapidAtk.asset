@@ -15,9 +15,9 @@ MonoBehaviour:
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
   DamageMultiplier: {x: 1, y: 1}
-  AttackAnim: 0
-  PrefixAnim: 0
-  TrajectoriesNumber: 3
+  AttackAnim: 1
+  PrefixAnim: 1
+  TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories:
     - Show: 1
@@ -43,7 +43,7 @@ MonoBehaviour:
   TilesAtk:
     AtkType: 1
     BulletTrajectories:
-    - Delay: 2
+    - Delay: 1
       Show: 0
       BulletEffectTiles:
       - Pos: {x: -1, y: -1}
@@ -101,30 +101,6 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
       - Pos: {x: 1, y: 1}
-        HasEffect: 0
-        Effects: []
-        EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-    - Delay: 0
-      Show: 1
-      BulletEffectTiles:
-      - Pos: {x: 0, y: -1}
-        HasEffect: 0
-        Effects: []
-        EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-    - Delay: 0
-      Show: 1
-      BulletEffectTiles:
-      - Pos: {x: -2, y: -1}
         HasEffect: 0
         Effects: []
         EffectChances: 100

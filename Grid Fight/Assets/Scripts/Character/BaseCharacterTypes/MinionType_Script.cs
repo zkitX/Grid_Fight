@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class MinionType_Script : BaseCharacter
 {
-
-
     protected bool MoveCoOn = true;
     protected IEnumerator MoveActionCo;
     protected float LastAttackTime;

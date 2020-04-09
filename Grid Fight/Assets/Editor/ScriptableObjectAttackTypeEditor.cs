@@ -28,6 +28,9 @@ public class ScriptableObjectAttackTypeEditor : Editor
             case AttackAnimType.Powerful_Atk:
                 origin.PrefixAnim = AttackAnimPrefixType.Atk2;
                 break;
+            case AttackAnimType.Boss_Atk3:
+                origin.PrefixAnim = AttackAnimPrefixType.Atk3;
+                break;
             case AttackAnimType.Skill1:
                 origin.PrefixAnim = AttackAnimPrefixType.S_Buff;
                 break;

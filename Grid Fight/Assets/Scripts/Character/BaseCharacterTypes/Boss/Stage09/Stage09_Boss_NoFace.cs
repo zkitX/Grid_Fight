@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Spine;
 
 public class Stage09_Boss_NoFace : MinionType_Script
 {
@@ -127,7 +128,7 @@ public class Stage09_Boss_NoFace : MinionType_Script
             case AttackAnimType.Powerful_Atk:
                 animToFire = "Atk2_IdleToAtk";
                 break;
-            case AttackAnimType.Skill1:
+            case AttackAnimType.Boss_Atk3:
                 animToFire = "Atk3_IdleToAtk";
                 break;
             default:
@@ -165,8 +166,10 @@ public class Stage09_Boss_NoFace : MinionType_Script
         return false;
     }
 
-
-
+    public override void SpineAnimationState_Complete(TrackEntry trackEntry)
+    {
+        baseForme.SpineAnimationState_Complete(trackEntry);
+    }
 
     public override void StopMoveCo()
     {

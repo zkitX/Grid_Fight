@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Spine;
 using UnityEngine;
 
 public class Stage09_Boss_Geisha : MinionType_Script
@@ -482,6 +483,69 @@ public class Stage09_Boss_Geisha : MinionType_Script
             ((100f * CharInfo.HealthStats.Health) / CharInfo.HealthStats.Base) :
             ((100f * oniForme.CharInfo.HealthStats.Health) / oniForme.CharInfo.HealthStats.Base));
     }
+
+    public override void SpineAnimationState_Complete(TrackEntry trackEntry)
+    {
+        if (trackEntry.Animation.Name == "<empty>" || SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle.ToString()
+         || SpineAnim.CurrentAnim == CharacterAnimationStateType.Death.ToString())
+        {
+            return;
+        }
+        string completedAnim = trackEntry.Animation.Name;
+
+        if (completedAnim.Contains("IdleToAtk") && SpineAnim.CurrentAnim.Contains("IdleToAtk"))
+        {
+            SetAnimation(nextAttack.PrefixAnim + "_Charging", true, 0);
+            return;
+        }
+
+        if (completedAnim.Contains("_Loop") && SpineAnim.CurrentAnim.Contains("_Loop"))
+        {
+
+            //If they can still attack, keep them in the charging loop
+            if (shotsLeftInAttack > 0)
+            {
+                SetAnimation(nextAttack.PrefixAnim + "_Charging", true, 0);
+            }
+            //otherwise revert them to the idle postion
+            else
+            {
+                SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
+                currentAttackPhase = AttackPhasesType.End;
+            }
+            return;
+        }
+
+        if (completedAnim.Contains("AtkToIdle") || completedAnim == CharacterAnimationStateType.Atk.ToString() || completedAnim == CharacterAnimationStateType.Atk1.ToString())
+        {
+            currentAttackPhase = AttackPhasesType.End;
+            shotsLeftInAttack = 0;
+        }
+
+        if (completedAnim == CharacterAnimationStateType.Arriving.ToString() || completedAnim.Contains("Growing"))
+        {
+            IsSwapping = false;
+            SwapWhenPossible = false;
+            CharArrivedOnBattleField();
+        }
+
+        if (completedAnim.Contains("Charging"))
+        {
+
+        }
+
+
+        if (completedAnim.Contains(CharacterAnimationStateType.Idle.ToString()) && !SpineAnim.Loop)
+        {
+            SpineAnim.SetAnimationSpeed(CharInfo.BaseSpeed);
+            //Debug.Log("IDLE     " + completedAnim.ToString());
+            SpineAnim.SpineAnimationState.SetAnimation(0, BossPhase.ToString() + CharacterAnimationStateType.Idle.ToString(), true);
+            //SpineAnimationState.AddEmptyAnimation(1,AnimationTransition,0);
+            SpineAnim.CurrentAnim = CharacterAnimationStateType.Idle.ToString();
+        }
+    }
+
+
 
     public enum bossPhasesType
     {

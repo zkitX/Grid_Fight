@@ -378,6 +378,7 @@ public enum AttackAnimType
     Powerful_Atk,
     Skill1,
     Skill2,
+    Boss_Atk3,
 }
 
 
@@ -828,4 +829,21 @@ public enum DeathProcessStage
     Start,
     LoopDying,
     End
+}
+
+public enum AudioSourceType
+{
+    Any,
+    Music,
+    Ambience,
+    Ui,
+    Game,
+}
+
+public enum AudioBus
+{
+    Music,
+    LowPriority,
+    MediumPriority,
+    HighPriority,
 }
