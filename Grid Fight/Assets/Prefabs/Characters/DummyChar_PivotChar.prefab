@@ -117,7 +117,7 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  _animationName: Atk1_Loop
+  _animationName: 
   loop: 1
   timeScale: 1
 --- !u!114 &8621161994541828592
@@ -276,8 +276,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   FiringPoint: {fileID: 4453474158781727621}
   SpecialFiringPoint: {fileID: 2683773209195961697}
-  CurrentAnim: 0
+  CurrentAnim: 
   AnimationTransition: 0.1
+  Loop: 0
   changeanim: 0
   transition: 0.5
 --- !u!114 &7236061187627357590
@@ -298,11 +299,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f1018b669a56e5d4fb4ae27635c17fe7, type: 3}
   BaseCharacterType: 0
   CharacterID: 10001
-  CurrentParticlesAttackTypeInfo:
-  - {fileID: 11400000, guid: de8dcc1a1d34fe44e8b3056c024cf557, type: 2}
-  - {fileID: 11400000, guid: 8fb60940686eaa44dbae8a096628ded4, type: 2}
-  CurrentOnBattleFieldAttackTypeInfo:
-  - {fileID: 11400000, guid: 16c71180a018bf044be5211ddac04e59, type: 2}
+  CurrentAttackTypeInfo:
+  - {fileID: 11400000, guid: 65a09297ba0fb53489ee08e0b3073627, type: 2}
+  - {fileID: 11400000, guid: 8bc4fecadfcbc7348b62322ae7387c3a, type: 2}
+  - {fileID: 11400000, guid: 2504bea9d7e9c844f916ea07eb6505d8, type: 2}
+  - {fileID: 11400000, guid: bf304f7dc499264448bbdd38db7b5d75, type: 2}
   ParticleID: 100000
   Elemental: 2
   ClassType: 1

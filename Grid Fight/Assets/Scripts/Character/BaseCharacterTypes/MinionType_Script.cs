@@ -82,11 +82,6 @@ public class MinionType_Script : BaseCharacter
 
     public virtual IEnumerator AI()
     {
-        while(BattleManagerScript.Instance.PlayerControlledCharacters.Length == 0)
-        {
-            yield return null;
-        }
-
         bool val = true;
         while (val)
         {
