@@ -1186,8 +1186,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
         SpineAnim = GetComponentInChildren<SpineAnimationManager>(true);
         SpineAnim.SetupSpineAnim();
-        SpineAnim.SpineAnimationState.Complete += SpineAnimationState_Complete; ;
-        SpineAnim.CharOwner = this;
+
+        if (SpineAnim.SpineAnimationState != null)
+        {
+            SpineAnim.CharOwner = this;
+            SpineAnim.SpineAnimationState.Complete += SpineAnimationState_Complete; 
+        }
+        
     }
 
     public virtual void SpineAnimationState_Complete(Spine.TrackEntry trackEntry)

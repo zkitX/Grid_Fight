@@ -34,7 +34,10 @@ public class SpineAnimationManager : MonoBehaviour
             SpineAnimationState = skeletonAnimation.AnimationState;
             skeleton = skeletonAnimation.Skeleton;
             //SpineAnimationState.Complete += SpineAnimationState_Complete;
-            SpineAnimationState.Event += SpineAnimationState_Event;
+            if (SpineAnimationState != null)
+            {
+                SpineAnimationState.Event += SpineAnimationState_Event;
+            }
             //SpineAnimationState.SetAnimation(0, CharacterAnimationStateType.Idle.ToString(), true);
             //SpineAnimationState.SetEmptyAnimation(1, 0);
         }
@@ -82,7 +85,6 @@ public class SpineAnimationManager : MonoBehaviour
 
     public void SetAnim(CharacterAnimationStateType anim)
     {
-        SetupSpineAnim();
 
         if(CurrentAnim == CharacterAnimationStateType.Death.ToString() && anim.ToString() != CharacterAnimationStateType.Idle.ToString())
         {
@@ -101,7 +103,6 @@ public class SpineAnimationManager : MonoBehaviour
 
      public void SetAnim(CharacterAnimationStateType anim, bool loop, float transition)
      {
-         SetupSpineAnim();
          if(anim == CharacterAnimationStateType.Atk1_IdleToAtk)
          {
              //Debug.Log("Arriving start");
@@ -116,7 +117,6 @@ public class SpineAnimationManager : MonoBehaviour
 
     public void SetAnim(string anim, bool loop, float transition)
     {
-        SetupSpineAnim();
         if (anim == CharacterAnimationStateType.Atk1_IdleToAtk.ToString())
         {
             //Debug.Log("Arriving start");

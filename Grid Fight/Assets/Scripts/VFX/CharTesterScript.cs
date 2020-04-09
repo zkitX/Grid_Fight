@@ -128,7 +128,6 @@ public class CharTesterScript : MonoBehaviour
         currentCharacter.UMS.Pos.Add(bts.Pos);
         currentCharacter.SetupCharacterSide();
         currentCharacter.SpineAnimatorsetup();
-        currentCharacter.SpineAnim.SetupSpineAnim();
         
     }
 
