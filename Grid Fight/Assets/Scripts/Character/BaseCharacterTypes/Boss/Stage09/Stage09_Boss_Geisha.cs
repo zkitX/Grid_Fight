@@ -1,7 +1,7 @@
-﻿using System.Collections;
+﻿using Spine;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Spine;
 using UnityEngine;
 
 public class Stage09_Boss_Geisha : MinionType_Script
@@ -165,12 +165,15 @@ public class Stage09_Boss_Geisha : MinionType_Script
                 else
                 {
                     List<BaseCharacter> enemys = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList();
-                    BaseCharacter targetChar = enemys[Random.Range(0, enemys.Count)];
-                    if (targetChar != null)
+                    if (enemys.Count > 0)
                     {
-                        Debug.Log("GEISHA ATTACK");
-                        yield return AttackSequence();
-                        yield return new WaitForSeconds(Random.Range(bossInfo.maidenFormeAttackCoolDown.x, bossInfo.maidenFormeAttackCoolDown.y));
+                        BaseCharacter targetChar = enemys[Random.Range(0, enemys.Count)];
+                        if (targetChar != null)
+                        {
+                            Debug.Log("GEISHA ATTACK");
+                            yield return AttackSequence();
+                            yield return new WaitForSeconds(Random.Range(bossInfo.maidenFormeAttackCoolDown.x, bossInfo.maidenFormeAttackCoolDown.y));
+                        }
                     }
                 }
             }
@@ -215,17 +218,13 @@ public class Stage09_Boss_Geisha : MinionType_Script
         }
 
         currentAttackPhase = AttackPhasesType.Start;
-        sequencedAttacker = true;
         SetAnimation(animToFire, false, 0f);
-        CreateTileAttack();
+       // CreateTileAttack();
 
-        while (shotsLeftInAttack != 0)
+        while (shotsLeftInAttack != 0 && Attacking)
         {
             yield return null;
         }
-
-        currentAttackPhase = AttackPhasesType.End;
-        Attacking = false;
         yield break;
     }
 
@@ -233,15 +232,15 @@ public class Stage09_Boss_Geisha : MinionType_Script
     {
         shielded = true;
         Attacking = true;
-        SetAnimation("Atk2_IdleToAtk", false, 0.3f);
-        while (!SpineAnim.CurrentAnim.Contains("Idle"))
+        nextAttack = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackAnim == AttackAnimType.Skill1).First();
+        SetAnimation("S_Buff_IdleToAtk", false, 0.3f);
+        while (Attacking)
         {
             yield return null;
         }
         if (ShieldedSequencer != null) StopCoroutine(ShieldedSequencer);
         ShieldedSequencer = ShieldedSequence();
         StartCoroutine(ShieldedSequencer);
-        Attacking = false;
     }
 
     IEnumerator ShieldedSequencer = null;
@@ -420,11 +419,17 @@ public class Stage09_Boss_Geisha : MinionType_Script
         {
             return;
         }
-        if(animState == "Idle")
+
+        transition = 0.2f;
+        if (animState == "Idle")
         {
             transition = 1f;
         }
 
+
+        if (animState.Contains("IdleToAtk") && !Attacking)
+        {
+        }
 
         if(!animState.Contains("Monster_") && !animState.Contains("Phase1_"))
         {
@@ -436,21 +441,42 @@ public class Stage09_Boss_Geisha : MinionType_Script
             animState = bossPhasesType.Phase1_.ToString() + "Atk2_AtkToIdle";
             loop = false;
         }
-        if(animState == bossPhasesType.Phase1_.ToString() + "Atk2_Loop")
+
+       
+
+        if (animState == bossPhasesType.Phase1_.ToString() + "Atk2_Loop")
         {
             animState = bossPhasesType.Phase1_.ToString() + "Atk2_AtkToIdle";
             loop = false;
         }
-        if(animState == bossPhasesType.Monster_.ToString() + "Atk1_Loop")
+
+        if (animState == bossPhasesType.Phase1_.ToString() + "S_Buff_IdleToAtk")
         {
-            animState = bossPhasesType.Monster_.ToString() + "Atk1_AtkToIdle";
+            animState = bossPhasesType.Phase1_.ToString() + "Atk2_IdleToAtk";
             loop = false;
         }
-        if (animState == bossPhasesType.Monster_.ToString() + "Atk3_Loop")
+        if (animState == bossPhasesType.Phase1_.ToString() + "S_Buff_Charging")
         {
-            animState = bossPhasesType.Monster_.ToString() + "Atk3_AtkToIdle";
+            animState = bossPhasesType.Phase1_.ToString() + "Atk2_Charging";
+            loop = true;
+        }
+        if (animState == bossPhasesType.Phase1_.ToString() + "S_Buff_Loop")
+        {
+            animState = bossPhasesType.Phase1_.ToString() + "Atk2_AtkToIdle";
             loop = false;
         }
+
+          if(animState == bossPhasesType.Monster_.ToString() + "Atk2_Loop")
+          {
+              animState = bossPhasesType.Monster_.ToString() + "Atk2_AtkToIdle";
+              loop = false;
+          }
+          if (animState == bossPhasesType.Monster_.ToString() + "Atk3_Loop")
+          {
+              animState = bossPhasesType.Monster_.ToString() + "Atk3_AtkToIdle";
+              loop = false;
+          }
+        Debug.Log("new    " + animState);
 
         base.SetAnimation(animState, loop, transition);
     }
@@ -484,6 +510,19 @@ public class Stage09_Boss_Geisha : MinionType_Script
             ((100f * oniForme.CharInfo.HealthStats.Health) / oniForme.CharInfo.HealthStats.Base));
     }
 
+    public enum bossPhasesType
+    {
+        Monster_,
+        Phase1_
+    }
+
+    public override void SetAttackReady(bool value)
+    {
+        CharBoxCollider.enabled = value;
+        return;
+    }
+
+
     public override void SpineAnimationState_Complete(TrackEntry trackEntry)
     {
         if (trackEntry.Animation.Name == "<empty>" || SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle.ToString()
@@ -493,9 +532,12 @@ public class Stage09_Boss_Geisha : MinionType_Script
         }
         string completedAnim = trackEntry.Animation.Name;
 
+        Debug.Log("Complete_    "  + completedAnim);
+
         if (completedAnim.Contains("IdleToAtk") && SpineAnim.CurrentAnim.Contains("IdleToAtk"))
         {
-            SetAnimation(nextAttack.PrefixAnim + "_Charging", true, 0);
+
+            SetAnimation((nextAttack == null ? AttackAnimPrefixType.Atk2 : nextAttack.PrefixAnim) + "_Charging", true, 0);
             return;
         }
 
@@ -519,43 +561,21 @@ public class Stage09_Boss_Geisha : MinionType_Script
         if (completedAnim.Contains("AtkToIdle") || completedAnim == CharacterAnimationStateType.Atk.ToString() || completedAnim == CharacterAnimationStateType.Atk1.ToString())
         {
             currentAttackPhase = AttackPhasesType.End;
-            shotsLeftInAttack = 0;
+           
+            if (shotsLeftInAttack == 0)
+            {
+                Attacking = false;
+            }
         }
-
-        if (completedAnim == CharacterAnimationStateType.Arriving.ToString() || completedAnim.Contains("Growing"))
-        {
-            IsSwapping = false;
-            SwapWhenPossible = false;
-            CharArrivedOnBattleField();
-        }
-
-        if (completedAnim.Contains("Charging"))
-        {
-
-        }
-
-
-        if (completedAnim.Contains(CharacterAnimationStateType.Idle.ToString()) && !SpineAnim.Loop)
+        string[] res = completedAnim.Split('_');
+        if (res.Last() != CharacterAnimationStateType.Idle.ToString() && !SpineAnim.Loop && !Attacking)
         {
             SpineAnim.SetAnimationSpeed(CharInfo.BaseSpeed);
-            //Debug.Log("IDLE     " + completedAnim.ToString());
+            Debug.Log("IDLE     " + completedAnim.ToString());
             SpineAnim.SpineAnimationState.SetAnimation(0, BossPhase.ToString() + CharacterAnimationStateType.Idle.ToString(), true);
             //SpineAnimationState.AddEmptyAnimation(1,AnimationTransition,0);
             SpineAnim.CurrentAnim = CharacterAnimationStateType.Idle.ToString();
         }
-    }
 
-
-
-    public enum bossPhasesType
-    {
-        Monster_,
-        Phase1_
-    }
-
-    public override void SetAttackReady(bool value)
-    {
-        CharBoxCollider.enabled = value;
-        return;
     }
 }

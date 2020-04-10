@@ -91,8 +91,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public int _shotsLeftInAttack = 0;
 
-    // Temp variables to allow the minions without proper animations setup to charge attacks
-    public bool sequencedAttacker = false;
     [HideInInspector]
     public bool Attacking = false;
     [HideInInspector] public int CharOredrInLayer = 0;
@@ -413,11 +411,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                             }
                             break;
                     }
-                    return;
+                    break;
                 case WaveStatsType.None:
                     nextAttack = atkToCheck;
                     availableAtks.Add(atkToCheck);
-                    return;
+                    break;
             }
         }
 
@@ -539,6 +537,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public void CreateParticleAttack()
     {
+
         if (nextAttack.CurrentAttackType == AttackType.Particles)
         {
             foreach (BulletBehaviourInfoClass item in nextAttack.ParticlesAtk.BulletTrajectories)
@@ -554,9 +553,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public void CreateTileAttack()
     {
+
         if (nextAttack.CurrentAttackType == AttackType.Tile)
         {
-            
             CharInfo.RapidAttack.DamageMultiplier = nextAttack.DamageMultiplier;
             BaseCharacter charTar = null;
             if (nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnTarget)

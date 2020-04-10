@@ -61,24 +61,30 @@ public class SpineAnimationManager : MonoBehaviour
         }
         else if (e.Data.Name.Contains("FireBulletParticle"))
         {
-            CharOwner.currentAttackPhase = CurrentAnim.Contains("Atk1") ? AttackPhasesType.Bullet_Rapid : AttackPhasesType.Bullet_Powerful;
-            CharOwner.CreateParticleAttack();
-           
-            if (!CharOwner.VFXTestMode)
+            if (CharOwner.CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
             {
-                CharOwner.NextAttackLevel = CharacterLevelType.Novice;
+                CharOwner.currentAttackPhase = CurrentAnim.Contains("Atk1") ? AttackPhasesType.Bullet_Rapid : AttackPhasesType.Bullet_Powerful;
+                CharOwner.CreateParticleAttack();
 
+                if (!CharOwner.VFXTestMode)
+                {
+                    CharOwner.NextAttackLevel = CharacterLevelType.Novice;
+
+                }
             }
         }
         else if(e.Data.Name.Contains("FireTileAttack"))
         {
-            CharOwner.currentAttackPhase = CurrentAnim.Contains("Atk1") ? AttackPhasesType.Bullet_Rapid : AttackPhasesType.Bullet_Powerful;
-            //CharOwner.CreateTileAttack();
-
-            if (!CharOwner.VFXTestMode)
+            if (CharOwner.CharInfo.BaseCharacterType != BaseCharType.CharacterType_Script)
             {
-                CharOwner.NextAttackLevel = CharacterLevelType.Novice;
+                CharOwner.currentAttackPhase = CurrentAnim.Contains("Atk1") ? AttackPhasesType.Bullet_Rapid : AttackPhasesType.Bullet_Powerful;
+                CharOwner.CreateTileAttack();
 
+                if (!CharOwner.VFXTestMode)
+                {
+                    CharOwner.NextAttackLevel = CharacterLevelType.Novice;
+
+                }
             }
         }
     }

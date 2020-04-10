@@ -13,6 +13,19 @@ public class ScriptableObjectAttackParticle : ScriptableObject
     public GameObject CastLeftPS;
     public GameObject BulletLeftPS;
     public GameObject ImpactLeftPS;
+    public GameObject Skill1CastRightPS;
+    public GameObject Skill1BulletRightPS;
+    public GameObject Skill1ImpactRightPS;
+    public GameObject Skill1CastLeftPS;
+    public GameObject Skill1BulletLeftPS;
+    public GameObject Skill1ImpactLeftPS;
+    public GameObject Skill2CastRightPS;
+    public GameObject Skill2BulletRightPS;
+    public GameObject Skill2ImpactRightPS;
+    public GameObject Skill2CastLeftPS;
+    public GameObject Skill2BulletLeftPS;
+    public GameObject Skill2ImpactLeftPS;
+
     public GameObject CastLoopPS;
     public GameObject CastActivationPS;
     //public GameObject 

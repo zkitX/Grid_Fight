@@ -509,6 +509,8 @@ public enum AttackParticleType
     Stage09_Mountain = 28,
     Stage09_Forest = 29,
     Stage09_Valley = 30,
+    Stage09_Boss_Phase1 = 31,
+    Stage09_Boss_Monster = 32,
     Test_Mesh = 1000,
     Stage00_BossOctopus_Tentacle = 21,
     Stage00_BossOctopus_Head = 22,

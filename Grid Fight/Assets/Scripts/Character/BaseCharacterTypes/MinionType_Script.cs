@@ -290,18 +290,15 @@ public class MinionType_Script : BaseCharacter
         //shotsLeftInAttack = GetHowManyAttackAreOnBattleField(((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories);
 
         currentAttackPhase = AttackPhasesType.Start;
-        sequencedAttacker = true; //Temporary until anims are added
         SetAnimation(animToFire,isLooped, 0f);
         CreateTileAttack();
 
 
-        while (shotsLeftInAttack != 0)
+        while (shotsLeftInAttack != 0 && !Attacking)
         {
             yield return null;
         }
 
-        currentAttackPhase = AttackPhasesType.End;
-        Attacking = false; //Temporary until anims are added
         yield break;
     }
 
@@ -396,9 +393,11 @@ public class MinionType_Script : BaseCharacter
 
     public override void fireAttackAnimation(Vector3 pos)
     {
-        //Debug.Log("<b>Shots left in this charge of attacks: </b>" + shotsLeftInAttack);
-        if (sequencedAttacker) SetAnimation(CharacterAnimationStateType.Atk1_Loop);
-        else SetAnimation(CharacterAnimationStateType.Atk); //Temporary until anims are added
+        if (!SpineAnim.CurrentAnim.Contains("Loop"))
+        {
+            SetAnimation(nextAttack.PrefixAnim + "_Loop");
+        }
+
         if (chargeParticles != null && shotsLeftInAttack == 0)
         {
             chargeParticles.SetActive(false);
@@ -446,6 +445,7 @@ public class MinionType_Script : BaseCharacter
         if (completedAnim.Contains("IdleToAtk") && SpineAnim.CurrentAnim.Contains("IdleToAtk"))
         {
             SetAnimation(nextAttack.PrefixAnim + "_Charging", true, 0);
+            return;
         }
 
         if (completedAnim.Contains("_Loop") && SpineAnim.CurrentAnim.Contains("_Loop"))
@@ -468,7 +468,10 @@ public class MinionType_Script : BaseCharacter
         if (completedAnim.Contains("AtkToIdle") || completedAnim == CharacterAnimationStateType.Atk.ToString() || completedAnim == CharacterAnimationStateType.Atk1.ToString())
         {
             currentAttackPhase = AttackPhasesType.End;
-            shotsLeftInAttack = 0;
+            if (shotsLeftInAttack == 0)
+            {
+                Attacking = false;
+            }
         }
 
         base.SpineAnimationState_Complete(trackEntry);

@@ -137,17 +137,15 @@ public class Stage09_Boss_NoFace : MinionType_Script
         }
 
         currentAttackPhase = AttackPhasesType.Start;
-        sequencedAttacker = true;
         SetAnimation(animToFire, false, 0f);
         CreateTileAttack();
 
-        while (shotsLeftInAttack != 0)
+        while (shotsLeftInAttack != 0 && !Attacking)
         {
             yield return null;
         }
 
-        currentAttackPhase = AttackPhasesType.End;
-        Attacking = false;
+    
         yield break;
     }
 

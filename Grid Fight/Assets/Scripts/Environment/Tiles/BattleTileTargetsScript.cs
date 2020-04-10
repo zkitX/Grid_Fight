@@ -46,7 +46,7 @@ public class BattleTileTargetsScript : MonoBehaviour
             anim.speed = 1 / duration;
             timer += Time.fixedDeltaTime;
             tc.RemainingTime = duration - timer;
-            if ((!attacker.gameObject.activeInHierarchy || attacker.shotsLeftInAttack == 0) && !attackerFiredAttackAnim)
+            if ((!attacker.gameObject.activeInHierarchy || attacker.shotsLeftInAttack == 0) && !attackerFiredAttackAnim && !attacker.Attacking)
             {
                 //Stop the firing of the attacks to the tiles
                 attacker.shotsLeftInAttack = 0;
@@ -57,6 +57,7 @@ public class BattleTileTargetsScript : MonoBehaviour
             else if (tc.RemainingTime <= duration*0.1f && attacker.UMS.CurrentAttackType == AttackType.Tile && !attackerFiredAttackAnim)
             {
                 attackerFiredAttackAnim = true;
+                attacker.shotsLeftInAttack--;
                 attacker.fireAttackAnimation(transform.position); // trigger the shoot anim
             }
         }
@@ -96,8 +97,7 @@ public class BattleTileTargetsScript : MonoBehaviour
             }
            
         }
-        yield return new WaitForSeconds(0.4f);
-        attacker.shotsLeftInAttack--;
+        yield return new WaitForSeconds(0.2f);
 
         UpdateQueue(tc);
     }
