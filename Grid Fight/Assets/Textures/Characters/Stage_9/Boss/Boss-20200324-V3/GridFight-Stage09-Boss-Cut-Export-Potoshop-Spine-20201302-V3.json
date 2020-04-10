@@ -957,7 +957,7 @@
 	"StopDefending": {}
 },
 "animations": {
-	"Monster_Atk1_AtkToIdle": {
+	"Monster_Atk2_AtkToIdle": {
 		"slots": {
 			"Bird-S-1": {
 				"color": [
@@ -3175,7 +3175,7 @@
 			{ "time": 0.1833, "name": "FireBulletParticle" }
 		]
 	},
-	"Monster_Atk1_Charging": {
+	"Monster_Atk2_Charging": {
 		"slots": {
 			"Bird-S-1": {
 				"color": [
@@ -4975,1043 +4975,1747 @@
 			}
 		]
 	},
-	"Monster_Atk1_IdleToAtk": {
-		"slots": {
-			"Bird-S-1": {
-				"color": [
-					{ "color": "ffffff00" }
-				]
-			},
-			"Bird-S-2": {
-				"color": [
-					{ "color": "ffffff00" }
-				]
-			},
-			"Entire-Piece-H": {
-				"color": [
-					{ "color": "ffffff00" }
-				]
-			},
-			"Face": {
-				"color": [
-					{ "color": "ffffff00" }
-				]
-			},
-			"Original-Tongue": {
-				"color": [
-					{ "color": "ffffff00" }
-				]
-			}
-		},
-		"bones": {
-			"Ki_Stripe32": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -5.38 }
-				]
-			},
-			"Ki_Monster_Horns": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -6.26 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.5, "x": -6.29, "y": 13.83 }
-				],
-				"scale": [
-					{},
-					{ "time": 0.5, "x": 0.88, "y": 1.295 }
-				]
-			},
-			"Ki_Monster_Mouth3": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 6.97 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.5, "x": 107.16, "y": -8.85 }
-				],
-				"scale": [
-					{},
-					{ "time": 0.5, "y": 0.934 }
-				],
-				"shear": [
-					{},
-					{ "time": 0.5, "x": 7.94 }
-				]
-			},
-			"Ki_Stripe31": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -5.38 }
-				]
-			},
-			"Ki_Monster_control": {
-				"translate": [
-					{ "x": -98.87, "y": 27.59 },
-					{ "time": 0.5, "x": -149.52, "y": -9.9 }
-				]
-			},
-			"Ki_Monster_Horns2": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -6.26 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.5, "x": -23.69, "y": -7.73 }
-				],
-				"scale": [
-					{},
-					{ "time": 0.5, "x": 0.88, "y": 1.295 }
-				]
-			},
-			"Ki_Monster_tounge7": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -10.56 }
-				]
-			},
-			"Ki_Monster_Mouth4": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 4.8 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.5, "x": -28.2, "y": 49.47 }
-				],
-				"scale": [
-					{},
-					{ "time": 0.5, "x": 1.065, "y": 0.739 }
-				],
-				"shear": [
-					{},
-					{ "time": 0.5, "x": -1.86, "y": -2.77 }
-				]
-			},
-			"Ki_Head2": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -5.81 }
-				],
-				"translate": [
-					{ "x": -215.59, "y": -308.83 },
-					{ "time": 0.5, "x": -296.47, "y": -311.94 }
-				]
-			},
-			"Ki_Monster_tounge": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 56.69 }
-				],
-				"translate": [
-					{ "x": -59.15, "y": -20.05 },
-					{ "time": 0.5, "x": -29.32, "y": 84.38 }
-				]
-			},
-			"Ki_Stripe83": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 17.42 }
-				]
-			},
-			"Ki_Stripe85": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -4.83 }
-				]
-			},
-			"Ki_Monster_tounge2": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -14.72 }
-				]
-			},
-			"Ki_Stripe84": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -4.83 }
-				]
-			},
-			"Ki_Monster_tounge6": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -10.56 }
-				]
-			},
-			"Ki_Main_Body_control2": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -3.87 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.5, "x": 13.48 }
-				]
-			},
-			"Ki_Monster_tounge5": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -14.72 }
-				]
-			},
-			"Ki_Head": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -2.11 }
-				]
-			},
-			"Ki_Stick_1": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -7.92 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.5, "x": 13.22, "y": 26.65 }
-				]
-			},
-			"Ki_Monster_tounge9": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -20.03 }
-				]
-			},
-			"Ki_Stripe87": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -4.83 }
-				]
-			},
-			"Ki_Monster": {
-				"translate": [
-					{},
-					{ "time": 0.5, "x": -50.65, "y": -37.49 }
-				]
-			},
-			"Ki_Stripe79": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -10.31 }
-				]
-			},
-			"Ki_Stripe80": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -10.31 }
-				]
-			},
-			"Ki_Stripe86": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -4.83 }
-				]
-			},
-			"Ki_Monster_tounge3": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -14.72 }
-				]
-			},
-			"Ki_Head4": {
-				"translate": [
-					{ "x": -332.21, "y": -27.6 }
-				]
-			},
-			"Ki_Head3": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -3.26 }
-				],
-				"translate": [
-					{ "x": -238.78, "y": 278.14 },
-					{ "time": 0.5, "x": -319.66, "y": 275.02 }
-				]
-			},
-			"Ki_Monster_Mouth5": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -3.1 }
-				],
-				"scale": [
-					{},
-					{ "time": 0.5, "x": 0.856 }
-				],
-				"shear": [
-					{},
-					{ "time": 0.5, "x": -1.86, "y": -2.77 }
-				]
-			},
-			"Ki_Main_Body_control3": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 3.85 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.5, "x": 2.27, "y": -33.63 }
-				]
-			},
-			"Ki_Main_Body_control": {
-				"translate": [
-					{},
-					{ "time": 0.5, "y": 51.66 }
-				]
-			},
-			"Ki_Monster_tounge4": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -14.72 }
-				]
-			},
-			"Ki_Head11": {
-				"rotate": [
-					{ "angle": 4.81 }
-				],
-				"translate": [
-					{ "x": 315.37, "y": 85.9 },
-					{ "time": 0.5, "x": 289.41, "y": 54.02 }
-				]
-			},
-			"Ki_Head12": {
-				"rotate": [
-					{ "angle": -3.15 },
-					{ "time": 0.5, "angle": -10.56 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.5, "x": -26.87, "y": -2.21 }
-				]
-			},
-			"Ki_Monster_tounge8": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -20.03 }
-				]
-			},
-			"bone": {
-				"rotate": [
-					{ "angle": -3.15 },
-					{ "time": 0.5, "angle": 2.12 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.5, "x": -32.71, "y": -2.66 }
-				]
-			},
-			"Ki_Monster_Hair1": {
-				"rotate": [
-					{ "angle": -2.04 },
-					{ "time": 0.5, "angle": 0.36 }
-				],
-				"translate": [
-					{ "x": 256.73, "y": 474.88 },
-					{ "time": 0.5, "x": 228.49, "y": 383.95 }
-				]
-			},
-			"Ki_Stick": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -7.92 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.5, "x": 11.25, "y": -27.54 }
-				]
-			},
-			"Ki_Blue_stick2": {
-				"rotate": [
-					{ "angle": 47.14 },
-					{ "time": 0.2333, "angle": 86.11 },
-					{ "time": 0.4833, "angle": 141.04 },
-					{ "time": 0.5, "angle": 141.1 }
-				],
-				"translate": [
-					{ "x": 487.63, "y": 189.43 },
-					{ "time": 0.4833, "x": 508.49, "y": 198.58 },
-					{ "time": 0.5, "x": 508.67, "y": 200.55 }
-				]
-			},
-			"Ki_Blue_Stick1": {
-				"rotate": [
-					{ "angle": -36.57 },
-					{ "time": 0.25, "angle": 6.24 },
-					{ "time": 0.5, "angle": 56.51 }
-				],
-				"translate": [
-					{ "x": 331.84, "y": -229.5 },
-					{ "time": 0.5, "x": 230.48, "y": -86.87 }
-				]
-			},
-			"Ki_Main_Body_control5": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -6.71 }
-				]
-			},
-			"Ki_Main_Body_control6": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 9.94 }
-				]
-			},
-			"Ki_Ban": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -2.31 }
-				],
-				"translate": [
-					{ "x": 404.12, "y": -4.81 },
-					{ "time": 0.5, "x": 256.44, "y": -47.61 }
-				],
-				"scale": [
-					{},
-					{ "time": 0.5, "x": 0.778, "y": 0.972 }
-				],
-				"shear": [
-					{},
-					{ "time": 0.5, "x": -7.69, "y": -3.56 }
-				]
-			},
-			"Ki_Monster_Hair4": {
-				"rotate": [
-					{ "angle": -0.71 }
-				]
-			},
-			"Ki_tree2": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 3.92 }
-				]
-			},
-			"Ki_stripe": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -5.38 }
-				]
-			},
-			"Ki_stripe22": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -13.3 }
-				]
-			},
-			"Ki_Stripe39": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -6.55 }
-				]
-			},
-			"Ki_Monster2": {
-				"rotate": [
-					{ "angle": 53.99 },
-					{ "time": 0.2333, "angle": 110.9 },
-					{ "time": 0.4833, "angle": 147.88 },
-					{ "time": 0.5, "angle": 147.95 }
-				],
-				"translate": [
-					{ "x": 445.38, "y": 440 },
-					{ "time": 0.4833, "x": 459.86, "y": 457.58 },
-					{ "time": 0.5, "x": 460.62, "y": 456.89 }
-				]
-			},
-			"Ki_Monster3": {
-				"rotate": [
-					{ "angle": -63.22 },
-					{ "time": 0.4833, "angle": 29.86 }
-				],
-				"translate": [
-					{ "x": 280.63, "y": -276.42 },
-					{ "time": 0.4833, "x": 268, "y": -164.69 },
-					{ "time": 0.5, "x": 265.3, "y": -164.91 }
-				]
-			},
-			"Shadow": {
-				"scale": [
-					{},
-					{ "time": 0.5, "x": 0.929, "y": 0.929 }
-				]
-			},
-			"Ki_stripe2": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -5.38 }
-				]
-			},
-			"Ki_stripe3": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -5.38 }
-				]
-			},
-			"Ki_stripe4": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -5.38 }
-				]
-			},
-			"Ki_Stripe6": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -6.55 }
-				]
-			},
-			"Ki_Stripe7": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -6.55 }
-				]
-			},
-			"Ki_Stripe8": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -6.55 }
-				]
-			},
-			"Ki_Stripe9": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -51.03 }
-				]
-			},
-			"Ki_Stripe10": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -18.53 }
-				]
-			},
-			"Ki_tree8": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -4.79 }
-				]
-			},
-			"Ki_Stripe11": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -24.93 }
-				]
-			},
-			"Ki_Stripe12": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -16.61 }
-				]
-			},
-			"Ki_Stripe13": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -7.12 }
-				]
-			},
-			"Ki_Stripe14": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 22.24 }
-				]
-			},
-			"Ki_Stripe15": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 22.24 }
-				]
-			},
-			"Ki_Stripe16": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -8.05 }
-				]
-			},
-			"Ki_Stripe17": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 6.44 }
-				]
-			},
-			"Ki_Stripe18": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 6.44 }
-				]
-			},
-			"Ki_Stripe19": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -9.42 }
-				]
-			},
-			"Ki_Stripe20": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 9.42 }
-				]
-			},
-			"Ki_Stripe21": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 9.42 }
-				]
-			},
-			"Ki_Stripe22": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -5.93 }
-				]
-			},
-			"Ki_Stripe23": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 11.89 }
-				]
-			},
-			"Ki_Stripe24": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -21.11 }
-				]
-			},
-			"Ki_Stripe27": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -5.38 }
-				]
-			},
-			"Ki_Stripe28": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -5.38 }
-				]
-			},
-			"Ki_stripe24": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 12.14 }
-				]
-			},
-			"Ki_stripe25": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 12.14 }
-				]
-			},
-			"Ki_Monster_Hair2": {
-				"rotate": [
-					{ "angle": 0.54 },
-					{ "time": 0.5, "angle": -2.83 }
-				],
-				"translate": [
-					{ "x": 261.79, "y": -328.52 },
-					{ "time": 0.5, "x": 214.28, "y": -346.69 }
-				]
-			},
-			"Ki_stripe26": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -11.33 }
-				]
-			},
-			"Ki_stripe23": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -12.05 }
-				]
-			},
-			"Ki_Stripe29": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -5.38 }
-				]
-			},
-			"Ki_stripe27": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 12.38 }
-				]
-			},
-			"Ki_Stripe30": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -5.38 }
-				]
-			},
-			"Ki_tree3": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 3.92 }
-				]
-			},
-			"Ki_Stripe26": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -5.38 }
-				]
-			},
-			"Ki_Stripe35": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -6.55 }
-				]
-			},
-			"Ki_Stripe36": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -6.55 }
-				]
-			},
-			"Ki_Stripe37": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -6.55 }
-				]
-			},
-			"Ki_Stripe38": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -6.55 }
-				]
-			},
-			"Ki_Stripe40": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -6.55 }
-				]
-			},
-			"Ki_Stripe41": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -6.55 }
-				]
-			},
-			"Ki_Stripe42": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -6.55 }
-				]
-			},
-			"Ki_Stripe43": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -4.32 }
-				]
-			},
-			"Ki_Stripe44": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -30.55 }
-				]
-			},
-			"Ki_Stripe45": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -0.92 }
-				]
-			},
-			"Ki_Stripe46": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 6.95 }
-				]
-			},
-			"Ki_Stripe47": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 6.95 }
-				]
-			},
-			"Ki_Stripe48": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 6.95 }
-				]
-			},
-			"Ki_Stripe49": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 6.95 }
-				]
-			},
-			"Ki_Stripe50": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -9.68 }
-				]
-			},
-			"Ki_Stripe53": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -9.68 }
-				]
-			},
-			"Ki_Stripe51": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -9.68 }
-				]
-			},
-			"Ki_Stripe52": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -9.68 }
-				]
-			},
-			"Ki_Stripe54": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -1.98 }
-				]
-			},
-			"Ki_Stripe55": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -21.51 }
-				]
-			},
-			"Ki_Stripe56": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 6.15 }
-				]
-			},
-			"Ki_Stripe57": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 6.15 }
-				]
-			},
-			"Ki_Stripe58": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 6.15 }
-				]
-			},
-			"Ki_Stripe59": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 6.15 }
-				]
-			},
-			"Ki_Stripe60": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 6.15 }
-				]
-			},
-			"Ki_Stripe61": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 6.15 }
-				]
-			},
-			"Ki_Stripe62": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 16.65 }
-				]
-			},
-			"Ki_Stripe63": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -9.63 }
-				]
-			},
-			"Ki_Stripe64": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -9.63 }
-				]
-			},
-			"Ki_Stripe65": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -9.63 }
-				]
-			},
-			"Ki_Stripe66": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -9.63 }
-				]
-			},
-			"Ki_Stripe67": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 26.32 }
-				]
-			},
-			"Ki_Stripe68": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -8.66 }
-				]
-			},
-			"Ki_Stripe69": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -8.66 }
-				]
-			},
-			"Ki_Stripe70": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -8.66 }
-				]
-			},
-			"Ki_Stripe71": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -8.66 }
-				]
-			},
-			"Ki_Stripe72": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 33.26 }
-				]
-			},
-			"Ki_Stripe73": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -6.67 }
-				]
-			},
-			"Ki_Stripe74": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -6.67 }
-				]
-			},
-			"Ki_Stripe75": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -6.67 }
-				]
-			},
-			"Ki_Stripe76": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -6.67 }
-				]
-			},
-			"Ki_Stripe77": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -6.67 }
-				]
-			},
-			"Ki_Stripe78": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 21.31 }
-				]
-			},
-			"Ki_Stripe82": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": 3.08 }
-				]
-			},
-			"Ki_Monster_Hair3": {
-				"rotate": [
-					{ "angle": -2.04 }
-				]
-			},
-			"Ki_Stripe81": {
-				"rotate": [
-					{},
-					{ "time": 0.5, "angle": -10.31 }
-				]
-			},
-			"Ki_Monster_Eye": {
-				"translate": [
-					{},
-					{ "time": 0.5, "x": 6.9, "y": 22.53 }
-				]
-			},
-			"Ki_Monster_Eye2": {
-				"translate": [
-					{},
-					{ "time": 0.5, "x": 6.92, "y": 22.53 }
-				]
-			}
-		},
-		"deform": {
-			"default": {
-				"Demon-Musk-Upper-Part": {
-					"Demon-Musk-Upper-Part": [
-						{
-							"offset": 28,
-							"vertices": [ -22.90918, -0.14429 ]
-						}
-					]
-				},
-				"Demon-Teeth": {
-					"Demon-Teeth": [
-						{
-							"vertices": [ 17.07239, -21.03931, 17.07239, -21.03931, 17.07239, -21.03931, 17.07239, -21.03931, 17.07239, -21.03931, 17.07239, -21.03931 ]
-						}
-					]
-				},
-				"Demon Gums": {
-					"Demon Gums": [
-						{},
-						{
-							"time": 0.5,
-							"vertices": [ 1.36328, 0.05931, 1.36328, 0.05931, 1.36328, 0.05931, 1.36328, 0.05931, 1.36328, 0.05931, 1.36328, 0.05931, 1.36328, 0.05931, 1.36328, 0.05931, 1.36328, 0.05931, 1.36328, 0.05931, 1.36328, 0.05931, 1.36328, 0.05931 ]
-						}
-					]
-				}
-			}
-		},
-		"drawOrder": [
-			{
-				"offsets": [
-					{ "slot": "WP-2-Stripe-Back", "offset": 44 },
-					{ "slot": "WP-25i", "offset": 44 },
-					{ "slot": "Bun", "offset": 44 },
-					{ "slot": "Hair-Stripe-1", "offset": 43 },
-					{ "slot": "WP-2-Stripe", "offset": 43 },
-					{ "slot": "WP-1-0", "offset": 0 },
-					{ "slot": "Blue-Stick-2", "offset": 42 },
-					{ "slot": "Blue-Stick-1", "offset": 42 },
-					{ "slot": "Red-Stick-2", "offset": 42 },
-					{ "slot": "Red-Stick-1", "offset": 42 },
-					{ "slot": "Bird-Stick-2", "offset": 42 },
-					{ "slot": "Bird-Beast-2", "offset": 42 },
-					{ "slot": "Bird-S-2", "offset": 42 },
-					{ "slot": "Bird-Stick-1", "offset": 42 },
-					{ "slot": "Bird-Beast-1", "offset": 42 },
-					{ "slot": "Bird-S-1", "offset": 42 },
-					{ "slot": "BH-1", "offset": 41 },
-					{ "slot": "Demon-Mask-Jaw", "offset": 41 },
-					{ "slot": "Original-Tongue", "offset": 41 },
-					{ "slot": "Strict Tongue", "offset": 41 },
-					{ "slot": "Demon Gums", "offset": 41 },
-					{ "slot": "Demon-Teeth", "offset": 41 },
-					{ "slot": "Blsck-Bacl-Head", "offset": 41 },
-					{ "slot": "Pupil-2", "offset": 41 },
-					{ "slot": "Pupil-1", "offset": 41 },
-					{ "slot": "Demon-Musk-Upper-Part", "offset": 41 },
-					{ "slot": "Dem-Hair-Piece", "offset": 41 },
-					{ "slot": "Demon-Horn-1", "offset": 44 },
-					{ "slot": "Hair-Stripe-2", "offset": 40 },
-					{ "slot": "Demon-Horn-2", "offset": 43 },
-					{ "slot": "BH-2", "offset": 39 },
-					{ "slot": "Folding Fan", "offset": 39 },
-					{ "slot": "Hair-P-1", "offset": 4 },
-					{ "slot": "Hair-P2", "offset": 4 },
-					{ "slot": "Entire-Piece-H", "offset": -32 },
-					{ "slot": "Hair-Piece-1", "offset": -3 },
-					{ "slot": "Face-p-1", "offset": -4 },
-					{ "slot": "Face-P2", "offset": -5 },
-					{ "slot": "Hair-Piece-2", "offset": -5 }
-				]
-			}
-		]
-	},
-	"Monster_Atk2_AtkToIdle": {
+  "Monster_Atk2_IdleToAtk": {
+    "slots": {
+      "Bird-S-1": {
+        "color": [
+          { "color": "ffffff00" }
+        ]
+      },
+      "Bird-S-2": {
+        "color": [
+          { "color": "ffffff00" }
+        ]
+      },
+      "Entire-Piece-H": {
+        "color": [
+          { "color": "ffffff00" }
+        ]
+      },
+      "Face": {
+        "color": [
+          { "color": "ffffff00" }
+        ]
+      },
+      "Original-Tongue": {
+        "color": [
+          { "color": "ffffff00" }
+        ]
+      }
+    },
+    "bones": {
+      "Ki_Stripe32": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -5.38
+          }
+        ]
+      },
+      "Ki_Monster_Horns": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -6.26
+          }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.5,
+            "x": -6.29,
+            "y": 13.83
+          }
+        ],
+        "scale": [
+          {},
+          {
+            "time": 0.5,
+            "x": 0.88,
+            "y": 1.295
+          }
+        ]
+      },
+      "Ki_Monster_Mouth3": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 6.97
+          }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.5,
+            "x": 107.16,
+            "y": -8.85
+          }
+        ],
+        "scale": [
+          {},
+          {
+            "time": 0.5,
+            "y": 0.934
+          }
+        ],
+        "shear": [
+          {},
+          {
+            "time": 0.5,
+            "x": 7.94
+          }
+        ]
+      },
+      "Ki_Stripe31": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -5.38
+          }
+        ]
+      },
+      "Ki_Monster_control": {
+        "translate": [
+          {
+            "x": -98.87,
+            "y": 27.59
+          },
+          {
+            "time": 0.5,
+            "x": -149.52,
+            "y": -9.9
+          }
+        ]
+      },
+      "Ki_Monster_Horns2": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -6.26
+          }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.5,
+            "x": -23.69,
+            "y": -7.73
+          }
+        ],
+        "scale": [
+          {},
+          {
+            "time": 0.5,
+            "x": 0.88,
+            "y": 1.295
+          }
+        ]
+      },
+      "Ki_Monster_tounge7": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -10.56
+          }
+        ]
+      },
+      "Ki_Monster_Mouth4": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 4.8
+          }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.5,
+            "x": -28.2,
+            "y": 49.47
+          }
+        ],
+        "scale": [
+          {},
+          {
+            "time": 0.5,
+            "x": 1.065,
+            "y": 0.739
+          }
+        ],
+        "shear": [
+          {},
+          {
+            "time": 0.5,
+            "x": -1.86,
+            "y": -2.77
+          }
+        ]
+      },
+      "Ki_Head2": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -5.81
+          }
+        ],
+        "translate": [
+          {
+            "x": -215.59,
+            "y": -308.83
+          },
+          {
+            "time": 0.5,
+            "x": -296.47,
+            "y": -311.94
+          }
+        ]
+      },
+      "Ki_Monster_tounge": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 56.69
+          }
+        ],
+        "translate": [
+          {
+            "x": -59.15,
+            "y": -20.05
+          },
+          {
+            "time": 0.5,
+            "x": -29.32,
+            "y": 84.38
+          }
+        ]
+      },
+      "Ki_Stripe83": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 17.42
+          }
+        ]
+      },
+      "Ki_Stripe85": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -4.83
+          }
+        ]
+      },
+      "Ki_Monster_tounge2": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -14.72
+          }
+        ]
+      },
+      "Ki_Stripe84": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -4.83
+          }
+        ]
+      },
+      "Ki_Monster_tounge6": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -10.56
+          }
+        ]
+      },
+      "Ki_Main_Body_control2": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -3.87
+          }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.5,
+            "x": 13.48
+          }
+        ]
+      },
+      "Ki_Monster_tounge5": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -14.72
+          }
+        ]
+      },
+      "Ki_Head": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -2.11
+          }
+        ]
+      },
+      "Ki_Stick_1": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -7.92
+          }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.5,
+            "x": 13.22,
+            "y": 26.65
+          }
+        ]
+      },
+      "Ki_Monster_tounge9": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -20.03
+          }
+        ]
+      },
+      "Ki_Stripe87": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -4.83
+          }
+        ]
+      },
+      "Ki_Monster": {
+        "translate": [
+          {},
+          {
+            "time": 0.5,
+            "x": -50.65,
+            "y": -37.49
+          }
+        ]
+      },
+      "Ki_Stripe79": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -10.31
+          }
+        ]
+      },
+      "Ki_Stripe80": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -10.31
+          }
+        ]
+      },
+      "Ki_Stripe86": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -4.83
+          }
+        ]
+      },
+      "Ki_Monster_tounge3": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -14.72
+          }
+        ]
+      },
+      "Ki_Head4": {
+        "translate": [
+          {
+            "x": -332.21,
+            "y": -27.6
+          }
+        ]
+      },
+      "Ki_Head3": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -3.26
+          }
+        ],
+        "translate": [
+          {
+            "x": -238.78,
+            "y": 278.14
+          },
+          {
+            "time": 0.5,
+            "x": -319.66,
+            "y": 275.02
+          }
+        ]
+      },
+      "Ki_Monster_Mouth5": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -3.1
+          }
+        ],
+        "scale": [
+          {},
+          {
+            "time": 0.5,
+            "x": 0.856
+          }
+        ],
+        "shear": [
+          {},
+          {
+            "time": 0.5,
+            "x": -1.86,
+            "y": -2.77
+          }
+        ]
+      },
+      "Ki_Main_Body_control3": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 3.85
+          }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.5,
+            "x": 2.27,
+            "y": -33.63
+          }
+        ]
+      },
+      "Ki_Main_Body_control": {
+        "translate": [
+          {},
+          {
+            "time": 0.5,
+            "y": 51.66
+          }
+        ]
+      },
+      "Ki_Monster_tounge4": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -14.72
+          }
+        ]
+      },
+      "Ki_Head11": {
+        "rotate": [
+          { "angle": 4.81 }
+        ],
+        "translate": [
+          {
+            "x": 315.37,
+            "y": 85.9
+          },
+          {
+            "time": 0.5,
+            "x": 289.41,
+            "y": 54.02
+          }
+        ]
+      },
+      "Ki_Head12": {
+        "rotate": [
+          { "angle": -3.15 },
+          {
+            "time": 0.5,
+            "angle": -10.56
+          }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.5,
+            "x": -26.87,
+            "y": -2.21
+          }
+        ]
+      },
+      "Ki_Monster_tounge8": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -20.03
+          }
+        ]
+      },
+      "bone": {
+        "rotate": [
+          { "angle": -3.15 },
+          {
+            "time": 0.5,
+            "angle": 2.12
+          }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.5,
+            "x": -32.71,
+            "y": -2.66
+          }
+        ]
+      },
+      "Ki_Monster_Hair1": {
+        "rotate": [
+          { "angle": -2.04 },
+          {
+            "time": 0.5,
+            "angle": 0.36
+          }
+        ],
+        "translate": [
+          {
+            "x": 256.73,
+            "y": 474.88
+          },
+          {
+            "time": 0.5,
+            "x": 228.49,
+            "y": 383.95
+          }
+        ]
+      },
+      "Ki_Stick": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -7.92
+          }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.5,
+            "x": 11.25,
+            "y": -27.54
+          }
+        ]
+      },
+      "Ki_Blue_stick2": {
+        "rotate": [
+          { "angle": 47.14 },
+          {
+            "time": 0.2333,
+            "angle": 86.11
+          },
+          {
+            "time": 0.4833,
+            "angle": 141.04
+          },
+          {
+            "time": 0.5,
+            "angle": 141.1
+          }
+        ],
+        "translate": [
+          {
+            "x": 487.63,
+            "y": 189.43
+          },
+          {
+            "time": 0.4833,
+            "x": 508.49,
+            "y": 198.58
+          },
+          {
+            "time": 0.5,
+            "x": 508.67,
+            "y": 200.55
+          }
+        ]
+      },
+      "Ki_Blue_Stick1": {
+        "rotate": [
+          { "angle": -36.57 },
+          {
+            "time": 0.25,
+            "angle": 6.24
+          },
+          {
+            "time": 0.5,
+            "angle": 56.51
+          }
+        ],
+        "translate": [
+          {
+            "x": 331.84,
+            "y": -229.5
+          },
+          {
+            "time": 0.5,
+            "x": 230.48,
+            "y": -86.87
+          }
+        ]
+      },
+      "Ki_Main_Body_control5": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -6.71
+          }
+        ]
+      },
+      "Ki_Main_Body_control6": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 9.94
+          }
+        ]
+      },
+      "Ki_Ban": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -2.31
+          }
+        ],
+        "translate": [
+          {
+            "x": 404.12,
+            "y": -4.81
+          },
+          {
+            "time": 0.5,
+            "x": 256.44,
+            "y": -47.61
+          }
+        ],
+        "scale": [
+          {},
+          {
+            "time": 0.5,
+            "x": 0.778,
+            "y": 0.972
+          }
+        ],
+        "shear": [
+          {},
+          {
+            "time": 0.5,
+            "x": -7.69,
+            "y": -3.56
+          }
+        ]
+      },
+      "Ki_Monster_Hair4": {
+        "rotate": [
+          { "angle": -0.71 }
+        ]
+      },
+      "Ki_tree2": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 3.92
+          }
+        ]
+      },
+      "Ki_stripe": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -5.38
+          }
+        ]
+      },
+      "Ki_stripe22": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -13.3
+          }
+        ]
+      },
+      "Ki_Stripe39": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -6.55
+          }
+        ]
+      },
+      "Ki_Monster2": {
+        "rotate": [
+          { "angle": 53.99 },
+          {
+            "time": 0.2333,
+            "angle": 110.9
+          },
+          {
+            "time": 0.4833,
+            "angle": 147.88
+          },
+          {
+            "time": 0.5,
+            "angle": 147.95
+          }
+        ],
+        "translate": [
+          {
+            "x": 445.38,
+            "y": 440
+          },
+          {
+            "time": 0.4833,
+            "x": 459.86,
+            "y": 457.58
+          },
+          {
+            "time": 0.5,
+            "x": 460.62,
+            "y": 456.89
+          }
+        ]
+      },
+      "Ki_Monster3": {
+        "rotate": [
+          { "angle": -63.22 },
+          {
+            "time": 0.4833,
+            "angle": 29.86
+          }
+        ],
+        "translate": [
+          {
+            "x": 280.63,
+            "y": -276.42
+          },
+          {
+            "time": 0.4833,
+            "x": 268,
+            "y": -164.69
+          },
+          {
+            "time": 0.5,
+            "x": 265.3,
+            "y": -164.91
+          }
+        ]
+      },
+      "Shadow": {
+        "scale": [
+          {},
+          {
+            "time": 0.5,
+            "x": 0.929,
+            "y": 0.929
+          }
+        ]
+      },
+      "Ki_stripe2": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -5.38
+          }
+        ]
+      },
+      "Ki_stripe3": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -5.38
+          }
+        ]
+      },
+      "Ki_stripe4": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -5.38
+          }
+        ]
+      },
+      "Ki_Stripe6": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -6.55
+          }
+        ]
+      },
+      "Ki_Stripe7": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -6.55
+          }
+        ]
+      },
+      "Ki_Stripe8": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -6.55
+          }
+        ]
+      },
+      "Ki_Stripe9": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -51.03
+          }
+        ]
+      },
+      "Ki_Stripe10": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -18.53
+          }
+        ]
+      },
+      "Ki_tree8": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -4.79
+          }
+        ]
+      },
+      "Ki_Stripe11": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -24.93
+          }
+        ]
+      },
+      "Ki_Stripe12": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -16.61
+          }
+        ]
+      },
+      "Ki_Stripe13": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -7.12
+          }
+        ]
+      },
+      "Ki_Stripe14": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 22.24
+          }
+        ]
+      },
+      "Ki_Stripe15": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 22.24
+          }
+        ]
+      },
+      "Ki_Stripe16": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -8.05
+          }
+        ]
+      },
+      "Ki_Stripe17": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 6.44
+          }
+        ]
+      },
+      "Ki_Stripe18": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 6.44
+          }
+        ]
+      },
+      "Ki_Stripe19": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -9.42
+          }
+        ]
+      },
+      "Ki_Stripe20": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 9.42
+          }
+        ]
+      },
+      "Ki_Stripe21": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 9.42
+          }
+        ]
+      },
+      "Ki_Stripe22": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -5.93
+          }
+        ]
+      },
+      "Ki_Stripe23": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 11.89
+          }
+        ]
+      },
+      "Ki_Stripe24": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -21.11
+          }
+        ]
+      },
+      "Ki_Stripe27": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -5.38
+          }
+        ]
+      },
+      "Ki_Stripe28": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -5.38
+          }
+        ]
+      },
+      "Ki_stripe24": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 12.14
+          }
+        ]
+      },
+      "Ki_stripe25": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 12.14
+          }
+        ]
+      },
+      "Ki_Monster_Hair2": {
+        "rotate": [
+          { "angle": 0.54 },
+          {
+            "time": 0.5,
+            "angle": -2.83
+          }
+        ],
+        "translate": [
+          {
+            "x": 261.79,
+            "y": -328.52
+          },
+          {
+            "time": 0.5,
+            "x": 214.28,
+            "y": -346.69
+          }
+        ]
+      },
+      "Ki_stripe26": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -11.33
+          }
+        ]
+      },
+      "Ki_stripe23": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -12.05
+          }
+        ]
+      },
+      "Ki_Stripe29": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -5.38
+          }
+        ]
+      },
+      "Ki_stripe27": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 12.38
+          }
+        ]
+      },
+      "Ki_Stripe30": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -5.38
+          }
+        ]
+      },
+      "Ki_tree3": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 3.92
+          }
+        ]
+      },
+      "Ki_Stripe26": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -5.38
+          }
+        ]
+      },
+      "Ki_Stripe35": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -6.55
+          }
+        ]
+      },
+      "Ki_Stripe36": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -6.55
+          }
+        ]
+      },
+      "Ki_Stripe37": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -6.55
+          }
+        ]
+      },
+      "Ki_Stripe38": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -6.55
+          }
+        ]
+      },
+      "Ki_Stripe40": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -6.55
+          }
+        ]
+      },
+      "Ki_Stripe41": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -6.55
+          }
+        ]
+      },
+      "Ki_Stripe42": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -6.55
+          }
+        ]
+      },
+      "Ki_Stripe43": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -4.32
+          }
+        ]
+      },
+      "Ki_Stripe44": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -30.55
+          }
+        ]
+      },
+      "Ki_Stripe45": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -0.92
+          }
+        ]
+      },
+      "Ki_Stripe46": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 6.95
+          }
+        ]
+      },
+      "Ki_Stripe47": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 6.95
+          }
+        ]
+      },
+      "Ki_Stripe48": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 6.95
+          }
+        ]
+      },
+      "Ki_Stripe49": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 6.95
+          }
+        ]
+      },
+      "Ki_Stripe50": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -9.68
+          }
+        ]
+      },
+      "Ki_Stripe53": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -9.68
+          }
+        ]
+      },
+      "Ki_Stripe51": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -9.68
+          }
+        ]
+      },
+      "Ki_Stripe52": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -9.68
+          }
+        ]
+      },
+      "Ki_Stripe54": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -1.98
+          }
+        ]
+      },
+      "Ki_Stripe55": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -21.51
+          }
+        ]
+      },
+      "Ki_Stripe56": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 6.15
+          }
+        ]
+      },
+      "Ki_Stripe57": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 6.15
+          }
+        ]
+      },
+      "Ki_Stripe58": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 6.15
+          }
+        ]
+      },
+      "Ki_Stripe59": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 6.15
+          }
+        ]
+      },
+      "Ki_Stripe60": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 6.15
+          }
+        ]
+      },
+      "Ki_Stripe61": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 6.15
+          }
+        ]
+      },
+      "Ki_Stripe62": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 16.65
+          }
+        ]
+      },
+      "Ki_Stripe63": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -9.63
+          }
+        ]
+      },
+      "Ki_Stripe64": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -9.63
+          }
+        ]
+      },
+      "Ki_Stripe65": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -9.63
+          }
+        ]
+      },
+      "Ki_Stripe66": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -9.63
+          }
+        ]
+      },
+      "Ki_Stripe67": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 26.32
+          }
+        ]
+      },
+      "Ki_Stripe68": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -8.66
+          }
+        ]
+      },
+      "Ki_Stripe69": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -8.66
+          }
+        ]
+      },
+      "Ki_Stripe70": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -8.66
+          }
+        ]
+      },
+      "Ki_Stripe71": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -8.66
+          }
+        ]
+      },
+      "Ki_Stripe72": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 33.26
+          }
+        ]
+      },
+      "Ki_Stripe73": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -6.67
+          }
+        ]
+      },
+      "Ki_Stripe74": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -6.67
+          }
+        ]
+      },
+      "Ki_Stripe75": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -6.67
+          }
+        ]
+      },
+      "Ki_Stripe76": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -6.67
+          }
+        ]
+      },
+      "Ki_Stripe77": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -6.67
+          }
+        ]
+      },
+      "Ki_Stripe78": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 21.31
+          }
+        ]
+      },
+      "Ki_Stripe82": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": 3.08
+          }
+        ]
+      },
+      "Ki_Monster_Hair3": {
+        "rotate": [
+          { "angle": -2.04 }
+        ]
+      },
+      "Ki_Stripe81": {
+        "rotate": [
+          {},
+          {
+            "time": 0.5,
+            "angle": -10.31
+          }
+        ]
+      },
+      "Ki_Monster_Eye": {
+        "translate": [
+          {},
+          {
+            "time": 0.5,
+            "x": 6.9,
+            "y": 22.53
+          }
+        ]
+      },
+      "Ki_Monster_Eye2": {
+        "translate": [
+          {},
+          {
+            "time": 0.5,
+            "x": 6.92,
+            "y": 22.53
+          }
+        ]
+      }
+    },
+    "deform": {
+      "default": {
+        "Demon-Musk-Upper-Part": {
+          "Demon-Musk-Upper-Part": [
+            {
+              "offset": 28,
+              "vertices": [ -22.90918, -0.14429 ]
+            }
+          ]
+        },
+        "Demon-Teeth": {
+          "Demon-Teeth": [
+            {
+              "vertices": [ 17.07239, -21.03931, 17.07239, -21.03931, 17.07239, -21.03931, 17.07239, -21.03931, 17.07239, -21.03931, 17.07239, -21.03931 ]
+            }
+          ]
+        },
+        "Demon Gums": {
+          "Demon Gums": [
+            {},
+            {
+              "time": 0.5,
+              "vertices": [ 1.36328, 0.05931, 1.36328, 0.05931, 1.36328, 0.05931, 1.36328, 0.05931, 1.36328, 0.05931, 1.36328, 0.05931, 1.36328, 0.05931, 1.36328, 0.05931, 1.36328, 0.05931, 1.36328, 0.05931, 1.36328, 0.05931, 1.36328, 0.05931 ]
+            }
+          ]
+        }
+      }
+    },
+    "drawOrder": [
+      {
+        "offsets": [
+          {
+            "slot": "WP-2-Stripe-Back",
+            "offset": 44
+          },
+          {
+            "slot": "WP-25i",
+            "offset": 44
+          },
+          {
+            "slot": "Bun",
+            "offset": 44
+          },
+          {
+            "slot": "Hair-Stripe-1",
+            "offset": 43
+          },
+          {
+            "slot": "WP-2-Stripe",
+            "offset": 43
+          },
+          {
+            "slot": "WP-1-0",
+            "offset": 0
+          },
+          {
+            "slot": "Blue-Stick-2",
+            "offset": 42
+          },
+          {
+            "slot": "Blue-Stick-1",
+            "offset": 42
+          },
+          {
+            "slot": "Red-Stick-2",
+            "offset": 42
+          },
+          {
+            "slot": "Red-Stick-1",
+            "offset": 42
+          },
+          {
+            "slot": "Bird-Stick-2",
+            "offset": 42
+          },
+          {
+            "slot": "Bird-Beast-2",
+            "offset": 42
+          },
+          {
+            "slot": "Bird-S-2",
+            "offset": 42
+          },
+          {
+            "slot": "Bird-Stick-1",
+            "offset": 42
+          },
+          {
+            "slot": "Bird-Beast-1",
+            "offset": 42
+          },
+          {
+            "slot": "Bird-S-1",
+            "offset": 42
+          },
+          {
+            "slot": "BH-1",
+            "offset": 41
+          },
+          {
+            "slot": "Demon-Mask-Jaw",
+            "offset": 41
+          },
+          {
+            "slot": "Original-Tongue",
+            "offset": 41
+          },
+          {
+            "slot": "Strict Tongue",
+            "offset": 41
+          },
+          {
+            "slot": "Demon Gums",
+            "offset": 41
+          },
+          {
+            "slot": "Demon-Teeth",
+            "offset": 41
+          },
+          {
+            "slot": "Blsck-Bacl-Head",
+            "offset": 41
+          },
+          {
+            "slot": "Pupil-2",
+            "offset": 41
+          },
+          {
+            "slot": "Pupil-1",
+            "offset": 41
+          },
+          {
+            "slot": "Demon-Musk-Upper-Part",
+            "offset": 41
+          },
+          {
+            "slot": "Dem-Hair-Piece",
+            "offset": 41
+          },
+          {
+            "slot": "Demon-Horn-1",
+            "offset": 44
+          },
+          {
+            "slot": "Hair-Stripe-2",
+            "offset": 40
+          },
+          {
+            "slot": "Demon-Horn-2",
+            "offset": 43
+          },
+          {
+            "slot": "BH-2",
+            "offset": 39
+          },
+          {
+            "slot": "Folding Fan",
+            "offset": 39
+          },
+          {
+            "slot": "Hair-P-1",
+            "offset": 4
+          },
+          {
+            "slot": "Hair-P2",
+            "offset": 4
+          },
+          {
+            "slot": "Entire-Piece-H",
+            "offset": -32
+          },
+          {
+            "slot": "Hair-Piece-1",
+            "offset": -3
+          },
+          {
+            "slot": "Face-p-1",
+            "offset": -4
+          },
+          {
+            "slot": "Face-P2",
+            "offset": -5
+          },
+          {
+            "slot": "Hair-Piece-2",
+            "offset": -5
+          }
+        ]
+      }
+    ],
+    "events": [
+      {
+        "time": 0.3,
+        "name": "FireTileAttack"
+      }
+    ]
+  },
+	"Monster_Atk1_AtkToIdle": {
 		"slots": {
 			"Bird-S-1": {
 				"color": [
@@ -7114,7 +7818,7 @@
 			}
 		]
 	},
-	"Monster_Atk2_Charging": {
+	"Monster_Atk1_Charging": {
 		"slots": {
 			"Bird-S-1": {
 				"color": [
@@ -9090,7 +9794,7 @@
 			}
 		]
 	},
-	"Monster_Atk2_IdleToAtk": {
+	"Monster_Atk1_IdleToAtk": {
 		"slots": {
 			"Bird-S-1": {
 				"color": [
@@ -10231,7 +10935,7 @@
 			{ "time": 0.5, "name": "FireTileAttack" }
 		]
 	},
-	"Monster_Atk2_Loop": {
+	"Monster_Atk1_Loop": {
 		"slots": {
 			"Bird-S-1": {
 				"color": [
@@ -41512,578 +42216,838 @@
 			}
 		}
 	},
-	"Phase1_Atk2_IdleToAtk": {
-		"slots": {
-			"Bird-Beast-1": {
-				"color": [
-					{ "color": "ffffff00" }
-				]
-			},
-			"Bird-Beast-2": {
-				"color": [
-					{ "color": "ffffff00" }
-				]
-			},
-			"Blsck-Bacl-Head": {
-				"color": [
-					{ "color": "ffffff00" }
-				]
-			},
-			"Dem-Hair-Piece": {
-				"color": [
-					{ "color": "ffffff00" }
-				]
-			},
-			"Demon-Horn-1": {
-				"color": [
-					{ "color": "ffffff00" }
-				]
-			},
-			"Demon-Horn-2": {
-				"color": [
-					{ "color": "ffffff00" }
-				]
-			},
-			"Demon-Mask-Jaw": {
-				"color": [
-					{ "color": "ffffff00" }
-				]
-			},
-			"Demon-Musk-Upper-Part": {
-				"color": [
-					{ "color": "ffffff00" }
-				]
-			},
-			"Demon-Teeth": {
-				"color": [
-					{ "color": "ffffff00" }
-				]
-			},
-			"Demon Gums": {
-				"color": [
-					{ "color": "ffffff00" }
-				]
-			},
-			"Original-Tongue": {
-				"color": [
-					{ "color": "ffffff00" }
-				]
-			},
-			"Pupil-1": {
-				"color": [
-					{ "color": "ffffff00" }
-				]
-			},
-			"Pupil-2": {
-				"color": [
-					{ "color": "ffffff00" }
-				]
-			},
-			"Strict Tongue": {
-				"color": [
-					{ "color": "ffffff00" }
-				]
-			}
-		},
-		"bones": {
-			"Ki_tree8": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -1.93 }
-				]
-			},
-			"Ki_Stripe35": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 1.2 }
-				]
-			},
-			"Ki_Stripe17": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 1.19 }
-				]
-			},
-			"Ki_Stripe7": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -0.17 }
-				]
-			},
-			"Ki_stripe22": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -1.93 }
-				]
-			},
-			"Ki_Stripe18": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -10.85 }
-				]
-			},
-			"Ki_Stripe36": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 1.2 }
-				]
-			},
-			"Ki_Stripe22": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 0.94 }
-				]
-			},
-			"Ki_Stripe16": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 1.26 }
-				]
-			},
-			"Ki_Stripe20": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 1.33 }
-				]
-			},
-			"Ki_Main_Body_control7": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 0.06 }
-				]
-			},
-			"Ki_Stripe23": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 6.31 }
-				]
-			},
-			"Ki_Stripe10": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -1.93 }
-				]
-			},
-			"Ki_Stripe6": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -2.27 }
-				]
-			},
-			"Ki_Stripe14": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 1.62 }
-				]
-			},
-			"Ki_stripe4": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -0.17 }
-				]
-			},
-			"Ki_stripe27": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 7.74 }
-				]
-			},
-			"Ki_Stripe11": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -0.23 }
-				]
-			},
-			"Ki_Stick": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 0.56 }
-				]
-			},
-			"Ki_Stripe5": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -1.12 }
-				]
-			},
-			"Ki_Stripe8": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -0.17 }
-				]
-			},
-			"Ki_tree7": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -1.93 }
-				]
-			},
-			"Ki_Stripe13": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -2 }
-				]
-			},
-			"Ki_Blue_stick2": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 0.56 }
-				]
-			},
-			"Ki_Stripe21": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -7.44 }
-				]
-			},
-			"Ki_Stripe81": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 8.56 }
-				]
-			},
-			"Ki_Stripe19": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -3.19 }
-				]
-			},
-			"Ki_Stripe15": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -9.92 }
-				]
-			},
-			"Ki_stripe25": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -11.5 }
-				]
-			},
-			"Ki_Stripe12": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -3.16 }
-				]
-			},
-			"Ki_Stripe83": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -2.07 }
-				]
-			},
-			"Ki_stripe24": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -0.48 }
-				]
-			},
-			"Ki_Stripe24": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 3.3 }
-				]
-			},
-			"Ki_Stripe68": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -2.74 }
-				]
-			},
-			"Ki_stripe": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -3.14 }
-				]
-			},
-			"Ki_Stripe9": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 1.68 }
-				]
-			},
-			"Ki_Stripe86": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -4.63 }
-				]
-			},
-			"Ki_Main_Body_control": {
-				"translate": [
-					{},
-					{ "time": 0.6667, "y": -14.99 }
-				]
-			},
-			"Ki_Main_Body_control2": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -2.01 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.6667, "x": -12.58, "y": -39.47 }
-				]
-			},
-			"Ki_Main_Body_control3": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 9.64 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.6667, "x": -5.71, "y": -0.86 }
-				]
-			},
-			"Ki_Head12": {
-				"shear": [
-					{},
-					{ "time": 0.6667, "x": -1.96 }
-				]
-			},
-			"bone": {
-				"shear": [
-					{},
-					{ "time": 0.6667, "x": 3.46 }
-				]
-			},
-			"Ki_Main_Tree": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 0.83 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.6667, "y": -18.03 }
-				]
-			},
-			"Ki_Main_Body_control5": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 2.14 }
-				]
-			},
-			"Ki_Main_Body_control6": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -2.34 }
-				]
-			},
-			"Ki_tree": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -2.25 }
-				],
-				"translate": [
-					{},
-					{ "time": 0.6667, "y": -18.03 }
-				]
-			},
-			"Ki_tree2": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -0.75 }
-				]
-			},
-			"Ki_tree3": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 7.12 }
-				]
-			},
-			"Ki_Monster2": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 0.56 }
-				]
-			},
-			"Shadow": {
-				"scale": [
-					{},
-					{ "time": 0.6667, "x": 1.029 }
-				]
-			},
-			"Ki_stripe2": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -0.17 }
-				]
-			},
-			"Ki_stripe3": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -0.17 }
-				]
-			},
-			"Ki_stripe23": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -0.41 }
-				]
-			},
-			"Ki_stripe26": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -2 }
-				]
-			},
-			"Ki_Stripe26": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -6.11 }
-				]
-			},
-			"Ki_Stripe30": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -7.05 }
-				]
-			},
-			"Ki_Stripe34": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -4.43 }
-				]
-			},
-			"Ki_Stripe39": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -4.41 }
-				]
-			},
-			"Ki_Stripe37": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 1.2 }
-				]
-			},
-			"Ki_Stripe38": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 1.2 }
-				]
-			},
-			"Ki_Stripe40": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 1.09 }
-				]
-			},
-			"Ki_Stripe41": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 1.09 }
-				]
-			},
-			"Ki_Stripe42": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 1.09 }
-				]
-			},
-			"Ki_Stripe48": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -5.08 }
-				]
-			},
-			"Ki_Stripe49": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -5.08 }
-				]
-			},
-			"Ki_Stripe51": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 4.1 }
-				]
-			},
-			"Ki_Stripe52": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 4.1 }
-				]
-			},
-			"Ki_Stripe55": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -3.14 }
-				]
-			},
-			"Ki_Stripe60": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -4.68 }
-				]
-			},
-			"Ki_Stripe61": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -4.68 }
-				]
-			},
-			"Ki_Stripe62": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -3.07 }
-				]
-			},
-			"Ki_Stripe65": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 6.36 }
-				]
-			},
-			"Ki_Stripe66": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 6.36 }
-				]
-			},
-			"Ki_Stripe71": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -8.47 }
-				]
-			},
-			"Ki_Stripe72": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -3.18 }
-				]
-			},
-			"Ki_Stripe76": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 7.47 }
-				]
-			},
-			"Ki_Stripe77": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 7.47 }
-				]
-			},
-			"Ki_Stripe82": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -3.01 }
-				]
-			},
-			"Ki_Stripe80": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": 8.56 }
-				]
-			},
-			"Ki_Stripe87": {
-				"rotate": [
-					{},
-					{ "time": 0.6667, "angle": -4.63 }
-				]
-			}
-		}
-	},
+  "Phase1_Atk2_IdleToAtk": {
+    "slots": {
+      "Bird-Beast-1": {
+        "color": [
+          { "color": "ffffff00" }
+        ]
+      },
+      "Bird-Beast-2": {
+        "color": [
+          { "color": "ffffff00" }
+        ]
+      },
+      "Blsck-Bacl-Head": {
+        "color": [
+          { "color": "ffffff00" }
+        ]
+      },
+      "Dem-Hair-Piece": {
+        "color": [
+          { "color": "ffffff00" }
+        ]
+      },
+      "Demon-Horn-1": {
+        "color": [
+          { "color": "ffffff00" }
+        ]
+      },
+      "Demon-Horn-2": {
+        "color": [
+          { "color": "ffffff00" }
+        ]
+      },
+      "Demon-Mask-Jaw": {
+        "color": [
+          { "color": "ffffff00" }
+        ]
+      },
+      "Demon-Musk-Upper-Part": {
+        "color": [
+          { "color": "ffffff00" }
+        ]
+      },
+      "Demon-Teeth": {
+        "color": [
+          { "color": "ffffff00" }
+        ]
+      },
+      "Demon Gums": {
+        "color": [
+          { "color": "ffffff00" }
+        ]
+      },
+      "Original-Tongue": {
+        "color": [
+          { "color": "ffffff00" }
+        ]
+      },
+      "Pupil-1": {
+        "color": [
+          { "color": "ffffff00" }
+        ]
+      },
+      "Pupil-2": {
+        "color": [
+          { "color": "ffffff00" }
+        ]
+      },
+      "Strict Tongue": {
+        "color": [
+          { "color": "ffffff00" }
+        ]
+      }
+    },
+    "bones": {
+      "Ki_tree8": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -1.93
+          }
+        ]
+      },
+      "Ki_Stripe35": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 1.2
+          }
+        ]
+      },
+      "Ki_Stripe17": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 1.19
+          }
+        ]
+      },
+      "Ki_Stripe7": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -0.17
+          }
+        ]
+      },
+      "Ki_stripe22": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -1.93
+          }
+        ]
+      },
+      "Ki_Stripe18": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -10.85
+          }
+        ]
+      },
+      "Ki_Stripe36": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 1.2
+          }
+        ]
+      },
+      "Ki_Stripe22": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 0.94
+          }
+        ]
+      },
+      "Ki_Stripe16": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 1.26
+          }
+        ]
+      },
+      "Ki_Stripe20": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 1.33
+          }
+        ]
+      },
+      "Ki_Main_Body_control7": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 0.06
+          }
+        ]
+      },
+      "Ki_Stripe23": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 6.31
+          }
+        ]
+      },
+      "Ki_Stripe10": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -1.93
+          }
+        ]
+      },
+      "Ki_Stripe6": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -2.27
+          }
+        ]
+      },
+      "Ki_Stripe14": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 1.62
+          }
+        ]
+      },
+      "Ki_stripe4": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -0.17
+          }
+        ]
+      },
+      "Ki_stripe27": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 7.74
+          }
+        ]
+      },
+      "Ki_Stripe11": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -0.23
+          }
+        ]
+      },
+      "Ki_Stick": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 0.56
+          }
+        ]
+      },
+      "Ki_Stripe5": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -1.12
+          }
+        ]
+      },
+      "Ki_Stripe8": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -0.17
+          }
+        ]
+      },
+      "Ki_tree7": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -1.93
+          }
+        ]
+      },
+      "Ki_Stripe13": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -2
+          }
+        ]
+      },
+      "Ki_Blue_stick2": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 0.56
+          }
+        ]
+      },
+      "Ki_Stripe21": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -7.44
+          }
+        ]
+      },
+      "Ki_Stripe81": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 8.56
+          }
+        ]
+      },
+      "Ki_Stripe19": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -3.19
+          }
+        ]
+      },
+      "Ki_Stripe15": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -9.92
+          }
+        ]
+      },
+      "Ki_stripe25": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -11.5
+          }
+        ]
+      },
+      "Ki_Stripe12": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -3.16
+          }
+        ]
+      },
+      "Ki_Stripe83": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -2.07
+          }
+        ]
+      },
+      "Ki_stripe24": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -0.48
+          }
+        ]
+      },
+      "Ki_Stripe24": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 3.3
+          }
+        ]
+      },
+      "Ki_Stripe68": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -2.74
+          }
+        ]
+      },
+      "Ki_stripe": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -3.14
+          }
+        ]
+      },
+      "Ki_Stripe9": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 1.68
+          }
+        ]
+      },
+      "Ki_Stripe86": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -4.63
+          }
+        ]
+      },
+      "Ki_Main_Body_control": {
+        "translate": [
+          {},
+          {
+            "time": 0.6667,
+            "y": -14.99
+          }
+        ]
+      },
+      "Ki_Main_Body_control2": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -2.01
+          }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.6667,
+            "x": -12.58,
+            "y": -39.47
+          }
+        ]
+      },
+      "Ki_Main_Body_control3": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 9.64
+          }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.6667,
+            "x": -5.71,
+            "y": -0.86
+          }
+        ]
+      },
+      "Ki_Head12": {
+        "shear": [
+          {},
+          {
+            "time": 0.6667,
+            "x": -1.96
+          }
+        ]
+      },
+      "bone": {
+        "shear": [
+          {},
+          {
+            "time": 0.6667,
+            "x": 3.46
+          }
+        ]
+      },
+      "Ki_Main_Tree": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 0.83
+          }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.6667,
+            "y": -18.03
+          }
+        ]
+      },
+      "Ki_Main_Body_control5": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 2.14
+          }
+        ]
+      },
+      "Ki_Main_Body_control6": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -2.34
+          }
+        ]
+      },
+      "Ki_tree": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -2.25
+          }
+        ],
+        "translate": [
+          {},
+          {
+            "time": 0.6667,
+            "y": -18.03
+          }
+        ]
+      },
+      "Ki_tree2": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -0.75
+          }
+        ]
+      },
+      "Ki_tree3": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 7.12
+          }
+        ]
+      },
+      "Ki_Monster2": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 0.56
+          }
+        ]
+      },
+      "Shadow": {
+        "scale": [
+          {},
+          {
+            "time": 0.6667,
+            "x": 1.029
+          }
+        ]
+      },
+      "Ki_stripe2": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -0.17
+          }
+        ]
+      },
+      "Ki_stripe3": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -0.17
+          }
+        ]
+      },
+      "Ki_stripe23": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -0.41
+          }
+        ]
+      },
+      "Ki_stripe26": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -2
+          }
+        ]
+      },
+      "Ki_Stripe26": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -6.11
+          }
+        ]
+      },
+      "Ki_Stripe30": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -7.05
+          }
+        ]
+      },
+      "Ki_Stripe34": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -4.43
+          }
+        ]
+      },
+      "Ki_Stripe39": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -4.41
+          }
+        ]
+      },
+      "Ki_Stripe37": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 1.2
+          }
+        ]
+      },
+      "Ki_Stripe38": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 1.2
+          }
+        ]
+      },
+      "Ki_Stripe40": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 1.09
+          }
+        ]
+      },
+      "Ki_Stripe41": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 1.09
+          }
+        ]
+      },
+      "Ki_Stripe42": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 1.09
+          }
+        ]
+      },
+      "Ki_Stripe48": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -5.08
+          }
+        ]
+      },
+      "Ki_Stripe49": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -5.08
+          }
+        ]
+      },
+      "Ki_Stripe51": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 4.1
+          }
+        ]
+      },
+      "Ki_Stripe52": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 4.1
+          }
+        ]
+      },
+      "Ki_Stripe55": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -3.14
+          }
+        ]
+      },
+      "Ki_Stripe60": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -4.68
+          }
+        ]
+      },
+      "Ki_Stripe61": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -4.68
+          }
+        ]
+      },
+      "Ki_Stripe62": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -3.07
+          }
+        ]
+      },
+      "Ki_Stripe65": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 6.36
+          }
+        ]
+      },
+      "Ki_Stripe66": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 6.36
+          }
+        ]
+      },
+      "Ki_Stripe71": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -8.47
+          }
+        ]
+      },
+      "Ki_Stripe72": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -3.18
+          }
+        ]
+      },
+      "Ki_Stripe76": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 7.47
+          }
+        ]
+      },
+      "Ki_Stripe77": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 7.47
+          }
+        ]
+      },
+      "Ki_Stripe82": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -3.01
+          }
+        ]
+      },
+      "Ki_Stripe80": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": 8.56
+          }
+        ]
+      },
+      "Ki_Stripe87": {
+        "rotate": [
+          {},
+          {
+            "time": 0.6667,
+            "angle": -4.63
+          }
+        ]
+      }
+    },
+    "events": [
+      {
+        "time": 0.3,
+        "name": "FireTileAttack"
+      }
+    ]
+  },
 	"Phase1_GettingHit": {
 		"slots": {
 			"Bird-Beast-1": {
