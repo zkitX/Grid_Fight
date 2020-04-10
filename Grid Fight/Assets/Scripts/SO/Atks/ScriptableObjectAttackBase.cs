@@ -19,6 +19,31 @@ public class ScriptableObjectAttackBase : ScriptableObject
     public int TrajectoriesNumber;
     [HideInInspector]public ParticlesAttackTypeClass ParticlesAtk;
     [HideInInspector]public TilesAttackTypeClass TilesAtk;
+
+
+    private void OnEnable()
+    {
+        switch (AttackAnim)
+        {
+            case AttackAnimType.Rapid_Atk:
+                PrefixAnim = AttackAnimPrefixType.Atk1;
+                break;
+            case AttackAnimType.Powerful_Atk:
+                PrefixAnim = AttackAnimPrefixType.Atk2;
+                break;
+            case AttackAnimType.Boss_Atk3:
+                PrefixAnim = AttackAnimPrefixType.Atk3;
+                break;
+            case AttackAnimType.Skill1:
+                PrefixAnim = AttackAnimPrefixType.S_Buff;
+                break;
+            case AttackAnimType.Skill2:
+                PrefixAnim = AttackAnimPrefixType.S_DeBuff;
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 

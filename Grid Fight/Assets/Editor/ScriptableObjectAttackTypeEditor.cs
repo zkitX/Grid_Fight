@@ -20,26 +20,7 @@ public class ScriptableObjectAttackTypeEditor : Editor
         origin = (ScriptableObjectAttackBase)target;
 
 
-        switch (origin.AttackAnim)
-        {
-            case AttackAnimType.Rapid_Atk:
-                origin.PrefixAnim = AttackAnimPrefixType.Atk1;
-                break;
-            case AttackAnimType.Powerful_Atk:
-                origin.PrefixAnim = AttackAnimPrefixType.Atk2;
-                break;
-            case AttackAnimType.Boss_Atk3:
-                origin.PrefixAnim = AttackAnimPrefixType.Atk3;
-                break;
-            case AttackAnimType.Skill1:
-                origin.PrefixAnim = AttackAnimPrefixType.S_Buff;
-                break;
-            case AttackAnimType.Skill2:
-                origin.PrefixAnim = AttackAnimPrefixType.S_DeBuff;
-                break;
-            default:
-                break;
-        }
+        
 
         if (origin.CurrentAttackType == AttackType.Particles)
         {
