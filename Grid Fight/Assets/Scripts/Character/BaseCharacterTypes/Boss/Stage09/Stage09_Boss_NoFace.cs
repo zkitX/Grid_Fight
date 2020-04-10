@@ -39,9 +39,12 @@ public class Stage09_Boss_NoFace : MinionType_Script
         CharInfo.HealthStats.Base = bossInfo.demonFormeIntensityLevels[intensityLevel].healthAmount;
         CharInfo.Health = CharInfo.HealthStats.Base;
         CharInfo.HealthStats.BaseHealthRegeneration = bossInfo.demonFormeIntensityLevels[intensityLevel].healthDrainRate;
-        CharInfo.HealthStats.Regeneration = bossInfo.demonFormeIntensityLevels[intensityLevel].healthDrainRate; ;
+        CharInfo.HealthStats.Regeneration = bossInfo.demonFormeIntensityLevels[intensityLevel].healthDrainRate;
         isImmune = false;
         CanAttack = true;
+
+        baseForme.CharInfo.HealthStats.Regeneration = 0f;
+        baseForme.BossPhase = Stage09_Boss_Geisha.bossPhasesType.Monster_;
     }
 
     public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
@@ -81,6 +84,11 @@ public class Stage09_Boss_NoFace : MinionType_Script
         {
             yield return null;
         }
+        while (baseForme.BossPhase != Stage09_Boss_Geisha.bossPhasesType.Monster_)
+        {
+            yield return null;
+        }
+        yield return new WaitForSeconds(2f);
 
         bool val = true;
         while (val)
@@ -117,7 +125,10 @@ public class Stage09_Boss_NoFace : MinionType_Script
         else
         {
             GetAttack();
+            baseForme.nextAttack = nextAttack;
         }
+
+        //CreateTileAttack();
 
         string animToFire = "bippidi boppidi";
         switch (nextAttack.AttackAnim)
@@ -138,9 +149,8 @@ public class Stage09_Boss_NoFace : MinionType_Script
 
         currentAttackPhase = AttackPhasesType.Start;
         SetAnimation(animToFire, false, 0f);
-        CreateTileAttack();
 
-        while (shotsLeftInAttack != 0 && !Attacking)
+        while (Attacking)
         {
             yield return null;
         }

@@ -479,6 +479,12 @@ public class CharacterType_Script : BaseCharacter
             currentAttackPhase = AttackPhasesType.End;
         }
 
+        if (SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Atk2_AtkToIdle.ToString()))
+        {
+            return;
+        }
+
+
         base.SetAnimation(animState, loop, transition);
     }
 

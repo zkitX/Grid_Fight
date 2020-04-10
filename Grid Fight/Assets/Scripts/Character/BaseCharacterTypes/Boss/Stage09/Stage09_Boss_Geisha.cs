@@ -116,6 +116,11 @@ public class Stage09_Boss_Geisha : MinionType_Script
 
     public override void SetCharDead(bool hasToDisappear = true)
     {
+        return;
+    }
+
+    public void GeishaFinalDeath()
+    {
         if (!oniForme.isDead)
         {
             return;
@@ -129,6 +134,8 @@ public class Stage09_Boss_Geisha : MinionType_Script
         EventManager.Instance.AddCharacterDeath(oniForme);
         StopCoroutine(oniForme.ActiveAI);
         StopCoroutine(ActiveAI);
+
+        BossPhase = bossPhasesType.Phase1_;
         SetAnimation("Idle", true);
         SpineAnim.SetAnimationSpeed(0.6f);
     }
@@ -148,6 +155,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
         {
             yield return null;
         }
+        yield return new WaitForSeconds(2f);
 
         bool val = true;
         while (val)
@@ -324,17 +332,14 @@ public class Stage09_Boss_Geisha : MinionType_Script
         if (state)
         {
             oniForme.intensityLevel++;
-            CharInfo.HealthStats.Regeneration = 0f;
             InteruptShield();
-            BossPhase = bossPhasesType.Monster_;
+            CharInfo.HealthStats.Regeneration = 0f;
             oniForme.TransformToNoFace();
         }
         else
         {
             oniForme.CharInfo.HealthStats.Regeneration = 0f;
-            SetAnimation(CharacterAnimationStateType.Death, false);
             TransformFromNoFace();
-            BossPhase = bossPhasesType.Phase1_;
         }
 
         if(CharInfo.Health > 0f || state)
@@ -357,7 +362,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
         oniForme.CanAttack = false;
 
         CanAttack = false;
-        SetAnimation("Death", false, 0.5f);
+        SetAnimation("Monster_Death", false, 0.5f);
         while (!SpineAnim.CurrentAnim.Contains("Idle"))
         {
             yield return null;
@@ -366,7 +371,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
         if (CharInfo.Health <= 0f)
         {
             oniForme.isDead = true;
-            SetCharDead();
+            GeishaFinalDeath();
         }
         else
         {
@@ -374,6 +379,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
             isImmune = false;
             CanAttack = true;
         }
+        BossPhase = bossPhasesType.Phase1_;
     }
 
     protected void SetFormeAttackReady(MinionType_Script forme, bool state)
@@ -411,11 +417,11 @@ public class Stage09_Boss_Geisha : MinionType_Script
 
     public override void SetAnimation(string animState, bool loop = false, float transition = 0)
     {
-        if(animState == "GettingHit" && (Attacking || oniForme.Attacking))
+        if(animState.Contains("GettingHit") && (Attacking || oniForme.Attacking))
         {
             return;
         }
-        if (animState != "Idle" && (SpineAnim.CurrentAnim.Contains("Death") || SpineAnim.CurrentAnim.Contains("Transformation")))
+        if (animState != "Idle" && animState != "Monster_Idle" && (SpineAnim.CurrentAnim.Contains("Death") || SpineAnim.CurrentAnim.Contains("Transformation")))
         {
             return;
         }
@@ -562,11 +568,19 @@ public class Stage09_Boss_Geisha : MinionType_Script
         {
             currentAttackPhase = AttackPhasesType.End;
            
-            if (shotsLeftInAttack == 0)
+            if (BossPhase == bossPhasesType.Phase1_ ? shotsLeftInAttack == 0 : oniForme.shotsLeftInAttack == 0)
             {
-                Attacking = false;
+                if (BossPhase == bossPhasesType.Phase1_) Attacking = false;
+                else if (BossPhase == bossPhasesType.Monster_) oniForme.Attacking = false;
             }
         }
+
+        if(completedAnim == "Transformation")
+        {
+            SetAnimation("Monster_Idle", true);
+            return;
+        }
+
         string[] res = completedAnim.Split('_');
         if (res.Last() != CharacterAnimationStateType.Idle.ToString() && !SpineAnim.Loop && !Attacking)
         {

@@ -1145,10 +1145,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                return;
            }*/
 
-        if (SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Atk2_AtkToIdle.ToString()))
-        {
-            return;
-        }
 
         if (SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Arriving.ToString()) || SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Reverse_Arriving.ToString()))
         {
