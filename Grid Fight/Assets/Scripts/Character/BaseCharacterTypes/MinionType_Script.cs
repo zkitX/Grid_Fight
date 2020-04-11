@@ -294,7 +294,7 @@ public class MinionType_Script : BaseCharacter
         CreateTileAttack();
 
 
-        while (shotsLeftInAttack != 0 && !Attacking)
+        while (Attacking)
         {
             yield return null;
         }
