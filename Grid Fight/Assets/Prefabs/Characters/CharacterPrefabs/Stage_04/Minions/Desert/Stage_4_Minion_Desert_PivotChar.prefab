@@ -324,6 +324,7 @@ MonoBehaviour:
   SpecialFiringPoint: {fileID: 6631632765616799733}
   CurrentAnim: 0
   AnimationTransition: 0.1
+  Loop: 0
   changeanim: 0
   transition: 0.5
 --- !u!114 &854567406706916904
@@ -338,13 +339,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Lady Bush
   CharacterIcons: []
   BaseCharacterType: 1
   CharacterID: 1081
-  CurrentParticlesAttackTypeInfo: []
-  CurrentOnBattleFieldAttackTypeInfo:
-  - {fileID: 11400000, guid: 0537aba9432af4d4e9ddc1d1dc5988c7, type: 2}
+  CurrentAttackTypeInfo:
+  - {fileID: 11400000, guid: ff17c29dc8930b4468b2b83d072b7604, type: 2}
+  - {fileID: 11400000, guid: 6edd6103916158b43ba93447b10b6b24, type: 2}
+  - {fileID: 11400000, guid: 271f9b72a4b43c2409dcd4d4f7bcbab0, type: 2}
   ParticleID: 2
   Elemental: 0
   ClassType: 3

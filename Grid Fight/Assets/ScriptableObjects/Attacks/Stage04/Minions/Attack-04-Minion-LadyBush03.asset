@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
+  m_Name: Attack-04-Minion-LadyBush03
+  m_EditorClassIdentifier: 
+  CurrentAttackType: 1
+  AttackRatioMultiplier: 0.8
+  DamageMultiplier: {x: 1, y: 1}
+  AttackAnim: 0
+  PrefixAnim: 0
+  TrajectoriesNumber: 1
+  ParticlesAtk:
+    BulletTrajectories: []
+    CharacterClass: 0
+  TilesAtk:
+    AtkType: 1
+    BulletTrajectories:
+    - Delay: 3
+      Show: 1
+      BulletEffectTiles:
+      - Pos: {x: 0, y: 0}
+        HasEffect: 0
+        Effects: []
+        EffectChances: 100
+        HasDifferentParticles: 1
+        ParticlesID: 19
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 0, y: 1}
+        HasEffect: 0
+        Effects: []
+        EffectChances: 100
+        HasDifferentParticles: 1
+        ParticlesID: 19
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 0, y: -1}
+        HasEffect: 0
+        Effects: []
+        EffectChances: 100
+        HasDifferentParticles: 1
+        ParticlesID: 19
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: -1, y: 0}
+        HasEffect: 0
+        Effects: []
+        EffectChances: 100
+        HasDifferentParticles: 1
+        ParticlesID: 19
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 1, y: 0}
+        HasEffect: 0
+        Effects: []
+        EffectChances: 100
+        HasDifferentParticles: 1
+        ParticlesID: 19
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+    StatToCheck: 1
+    ValueChecker: 0
+    PercToCheck: 10
+    Chances: 100
