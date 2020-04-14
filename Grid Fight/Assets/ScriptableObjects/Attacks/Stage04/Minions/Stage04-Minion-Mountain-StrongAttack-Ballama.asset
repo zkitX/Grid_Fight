@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Attack-04-Minion-LadyBush03
+  m_Name: Stage04-Minion-Mountain-StrongAttack-Ballama
   m_EditorClassIdentifier: 
   CurrentAttackType: 1
-  AttackRatioMultiplier: 0.8
-  DamageMultiplier: {x: 1, y: 1}
+  AttackRatioMultiplier: 2
+  DamageMultiplier: {x: 0.8, y: 0.9}
   AttackAnim: 0
   PrefixAnim: 0
   TrajectoriesNumber: 1
@@ -24,55 +24,60 @@ MonoBehaviour:
   TilesAtk:
     AtkType: 1
     BulletTrajectories:
-    - Delay: 3
+    - Delay: 2
       Show: 1
       BulletEffectTiles:
       - Pos: {x: 0, y: 0}
-        HasEffect: 0
-        Effects: []
-        EffectChances: 100
+        HasEffect: 1
+        Effects:
+        - {fileID: 11400000, guid: 28c22cbdfe9a42140abc7f5a59100c12, type: 2}
+        EffectChances: 50
         HasDifferentParticles: 1
-        ParticlesID: 19
+        ParticlesID: 8
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
       - Pos: {x: 0, y: 1}
-        HasEffect: 0
-        Effects: []
+        HasEffect: 1
+        Effects:
+        - {fileID: 11400000, guid: 28c22cbdfe9a42140abc7f5a59100c12, type: 2}
         EffectChances: 100
         HasDifferentParticles: 1
-        ParticlesID: 19
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-      - Pos: {x: 0, y: -1}
-        HasEffect: 0
-        Effects: []
-        EffectChances: 100
-        HasDifferentParticles: 1
-        ParticlesID: 19
+        ParticlesID: 8
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
       - Pos: {x: -1, y: 0}
-        HasEffect: 0
-        Effects: []
+        HasEffect: 1
+        Effects:
+        - {fileID: 11400000, guid: 28c22cbdfe9a42140abc7f5a59100c12, type: 2}
         EffectChances: 100
         HasDifferentParticles: 1
-        ParticlesID: 19
+        ParticlesID: 8
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 0, y: -1}
+        HasEffect: 1
+        Effects:
+        - {fileID: 11400000, guid: 28c22cbdfe9a42140abc7f5a59100c12, type: 2}
+        EffectChances: 100
+        HasDifferentParticles: 1
+        ParticlesID: 8
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
       - Pos: {x: 1, y: 0}
-        HasEffect: 0
-        Effects: []
+        HasEffect: 1
+        Effects:
+        - {fileID: 11400000, guid: 28c22cbdfe9a42140abc7f5a59100c12, type: 2}
         EffectChances: 100
         HasDifferentParticles: 1
-        ParticlesID: 19
+        ParticlesID: 8
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
     StatToCheck: 1
     ValueChecker: 0
-    PercToCheck: 10
+    PercToCheck: 30
     Chances: 100

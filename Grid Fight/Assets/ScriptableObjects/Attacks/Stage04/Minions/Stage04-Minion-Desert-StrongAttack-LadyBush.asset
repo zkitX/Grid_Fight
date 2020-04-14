@@ -10,57 +10,69 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: TigerAttack01
+  m_Name: Stage04-Minion-Desert-StrongAttack-LadyBush
   m_EditorClassIdentifier: 
   CurrentAttackType: 1
-  AttackRatioMultiplier: 1
+  AttackRatioMultiplier: 2
   DamageMultiplier: {x: 1, y: 1}
   AttackAnim: 0
   PrefixAnim: 0
-  TrajectoriesNumber: 3
+  TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories: []
     CharacterClass: 0
   TilesAtk:
     AtkType: 1
     BulletTrajectories:
-    - Delay: 1
-      Show: 1
-      BulletEffectTiles:
-      - Pos: {x: 0, y: 1}
-        HasEffect: 0
-        Effects: []
-        EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-    - Delay: 1.2
+    - Delay: 3
       Show: 1
       BulletEffectTiles:
       - Pos: {x: 0, y: 0}
         HasEffect: 0
         Effects: []
         EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
+        HasDifferentParticles: 1
+        ParticlesID: 11
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
-    - Delay: 1.4
-      Show: 1
-      BulletEffectTiles:
+      - Pos: {x: 1, y: 0}
+        HasEffect: 0
+        Effects: []
+        EffectChances: 100
+        HasDifferentParticles: 1
+        ParticlesID: 11
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: -1, y: 0}
+        HasEffect: 0
+        Effects: []
+        EffectChances: 100
+        HasDifferentParticles: 1
+        ParticlesID: 11
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 0, y: 1}
+        HasEffect: 0
+        Effects: []
+        EffectChances: 100
+        HasDifferentParticles: 1
+        ParticlesID: 11
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
       - Pos: {x: 0, y: -1}
         HasEffect: 0
         Effects: []
         EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
+        HasDifferentParticles: 1
+        ParticlesID: 11
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
     StatToCheck: 1
-    ValueChecker: 2
+    ValueChecker: 0
     PercToCheck: 30
     Chances: 100
