@@ -106,6 +106,8 @@ public class WaveManagerScript : MonoBehaviour
         res.CharInfo.RapidAttack.DamageMultiplier = character.RapidAttackMultiplier;
         res.CharInfo.PowerfulAttac.DamageMultiplier = character.PowerfulAttackMultiplier;
         res.CharInfo.Health = res.CharInfo.HealthStats.Base;
+        res.CharInfo.SpeedStats.MovementSpeed = Random.Range(character.MovementSpeed.x, character.MovementSpeed.y);
+        res.CharInfo.MovementTimer = character.MovementTimer;
         ((MinionType_Script)res).UpDownPerc = character.UpDownPerc;
         return res;
     }
@@ -295,9 +297,9 @@ public class WavePhaseClass
 public class WaveCharacterInfoClass
 {
     public CharacterNameType CharacterName;
-    public CharacterLevelType CharacterClass;
     public Vector2 Health;
     public Vector2 HealthRegeneration;
+    public CharacterLevelType CharacterClass;
     public Vector2 BaseDamage;
     public Vector2 RapidAttackMultiplier;
     public Vector2 PowerfulAttackMultiplier;
@@ -305,6 +307,9 @@ public class WaveCharacterInfoClass
     public Vector2 AttackSpeedRatio;
     public Vector2 Stamina;
     public Vector2 StaminaRegeneration;
+    public Vector2 MovementSpeed;
+    public Vector2 MovementTimer;
+
     public float UpDownPerc = 18;
 
 
