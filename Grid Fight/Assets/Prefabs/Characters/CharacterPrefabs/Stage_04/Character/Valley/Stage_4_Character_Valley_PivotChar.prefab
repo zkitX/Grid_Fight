@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5349249721967260197}
   m_Layer: 0
-  m_Name: SpecialFiringPoint
+  m_Name: FiringPointStrongAtk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,6 +30,36 @@ Transform:
   m_Father: {fileID: 3500842273751699695}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1040677278702744295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2374867627862029282}
+  m_Layer: 0
+  m_Name: FiringPointSkill2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2374867627862029282
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040677278702744295}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.38, y: 0.81, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3500842273751699695}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5357125001007785884
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5967019790457629889}
   m_Layer: 0
-  m_Name: FiringPoint
+  m_Name: FiringPointWeakAtk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,6 +121,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6952251356035396064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8826788847262032472}
+  m_Layer: 0
+  m_Name: FiringPointSkill1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8826788847262032472
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6952251356035396064}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.38, y: 0.82, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3500842273751699695}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7726986824631989208
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,6 +187,8 @@ Transform:
   m_Children:
   - {fileID: 5967019790457629889}
   - {fileID: 5349249721967260197}
+  - {fileID: 8826788847262032472}
+  - {fileID: 2374867627862029282}
   m_Father: {fileID: 1371912765735161126}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -428,8 +490,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  FiringPoint: {fileID: 5967019790457629889}
-  SpecialFiringPoint: {fileID: 5349249721967260197}
+  AtkFiringPoints:
+  - {fileID: 5967019790457629889}
+  - {fileID: 5349249721967260197}
+  - {fileID: 8826788847262032472}
+  - {fileID: 2374867627862029282}
   CurrentAnim: 1
   AnimationTransition: 0.1
   Loop: 0
@@ -456,21 +521,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f7b93152800b37a4cab90fece5596a66, type: 2}
   - {fileID: 11400000, guid: a4d97a6da21b5274bafc85b673756357, type: 2}
   - {fileID: 11400000, guid: b3056224fbfb4894f9b009166d7d7ea9, type: 2}
-  ParticleID: 8
   Elemental: 6
   ClassType: 0
-  CharacterLevel: 0
   UseLayeringSystem: 1
   CharacterRespawnLength: 180
   CharacterSelection: 0
-  RapidAttack:
+  WeakAttack:
     DamageMultiplier: {x: 1, y: 1}
     CriticalChance: {x: 2, y: 2}
     Stamina_Cost_Atk: 0
     B_DamageMultiplier: {x: 1, y: 1}
     B_CriticalChance: {x: 2, y: 2}
     B_Stamina_Cost_Atk: 0
-  PowerfulAttac:
+  StrongAttac:
     DamageMultiplier: {x: 3, y: 3}
     CriticalChance: {x: 3, y: 5}
     Stamina_Cost_Atk: 0
