@@ -291,7 +291,6 @@ public class MinionType_Script : BaseCharacter
 
         currentAttackPhase = AttackPhasesType.Start;
         SetAnimation(animToFire,isLooped, 0f);
-        CreateTileAttack();
 
 
         while (Attacking)
