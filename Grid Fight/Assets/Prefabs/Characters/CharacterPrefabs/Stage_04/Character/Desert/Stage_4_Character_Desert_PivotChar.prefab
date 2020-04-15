@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4309818954905305788}
   m_Layer: 0
-  m_Name: FiringPointWeakAtk
+  m_Name: FiringPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,36 +29,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5488154605279807359}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4235284541071334087
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6288773908458764288}
-  m_Layer: 0
-  m_Name: FiringPointSkill1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6288773908458764288
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4235284541071334087}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.017, y: 0.6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5488154605279807359}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5488154604845932127
 GameObject:
@@ -127,8 +97,6 @@ Transform:
   m_Children:
   - {fileID: 4309818954905305788}
   - {fileID: 1334044471087185710}
-  - {fileID: 6288773908458764288}
-  - {fileID: 6481986132200450765}
   m_Father: {fileID: 5488154604845932126}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -430,8 +398,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  FiringPoint: {fileID: 0}
-  SpecialFiringPoint: {fileID: 0}
+  FiringPoint: {fileID: 4309818954905305788}
+  SpecialFiringPoint: {fileID: 1334044471087185710}
   CurrentAnim: 1
   AnimationTransition: 0.1
   Loop: 0
@@ -453,7 +421,6 @@ MonoBehaviour:
   CharacterIcons:
   - {fileID: 21300000, guid: d6d058ae0d9b32448962293ed7bae455, type: 3}
   - {fileID: 21300000, guid: ba7684dd620a5c44c904c5f27fd5c679, type: 3}
-  AudioProfile: {fileID: 11400000, guid: d8dfd2f7b183121418b86b2e6d294e83, type: 2}
   BaseCharacterType: 0
   CharacterID: 1085
   CurrentAttackTypeInfo:
@@ -461,7 +428,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 00447d1d5b72f114191827172b280ded, type: 2}
   - {fileID: 11400000, guid: d54446c3c0e438a4195829ebd85df8b1, type: 2}
   - {fileID: 11400000, guid: d7384a24206da1346ae8a143fafaeb8b, type: 2}
-  ParticleID: 0
+  ParticleID: 5
   Elemental: 4
   ClassType: 3
   CharacterLevel: 0
@@ -471,14 +438,14 @@ MonoBehaviour:
   RapidAttack:
     DamageMultiplier: {x: 1, y: 1}
     CriticalChance: {x: 2, y: 2}
-    Stamina_Cost_Atk: 0
+    Stamina_Cost_Atk: 1.4
     B_DamageMultiplier: {x: 1, y: 1}
     B_CriticalChance: {x: 2, y: 2}
     B_Stamina_Cost_Atk: 0
   PowerfulAttac:
     DamageMultiplier: {x: 3, y: 3}
     CriticalChance: {x: 3, y: 5}
-    Stamina_Cost_Atk: 0
+    Stamina_Cost_Atk: 5
     B_DamageMultiplier: {x: 3, y: 3}
     B_CriticalChance: {x: 3, y: 5}
     B_Stamina_Cost_Atk: 0
@@ -587,7 +554,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1334044471087185710}
   m_Layer: 0
-  m_Name: FiringPointStrongAtk
+  m_Name: SpecialFiringPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -606,34 +573,4 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5488154605279807359}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7647442144233264957
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6481986132200450765}
-  m_Layer: 0
-  m_Name: FiringPointSkill2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6481986132200450765
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7647442144233264957}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.011, y: 0.45, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5488154605279807359}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
