@@ -31,6 +31,7 @@ public class MinionType_Script : BaseCharacter
     public override void SetUpEnteringOnBattle()
     {
         SetAnimation(CharacterAnimationStateType.Arriving);
+        shotsLeftInAttack = 0;
     }
 
     public override void SetUpLeavingBattle()
@@ -68,6 +69,7 @@ public class MinionType_Script : BaseCharacter
     {
         CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
+        Attacking = false;
         StopAllCoroutines();
         for (int i = 0; i < UMS.Pos.Count; i++)
         {
@@ -99,6 +101,7 @@ public class MinionType_Script : BaseCharacter
                     BaseCharacter targetChar = enemys.Where(r => r.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x).FirstOrDefault();
                     if (targetChar != null)
                     {
+                        nextAttackPos = targetChar.UMS.CurrentTilePos;
                         yield return AttackSequence();
                     }
                     else
@@ -397,7 +400,7 @@ public class MinionType_Script : BaseCharacter
             SetAnimation(nextAttack.PrefixAnim + "_Loop");
         }
 
-        if (chargeParticles != null && shotsLeftInAttack == 0)
+        if (chargeParticles != null && shotsLeftInAttack <= 0)
         {
             chargeParticles.SetActive(false);
 

@@ -46,7 +46,7 @@ public class BattleTileTargetsScript : MonoBehaviour
             anim.speed = 1 / duration;
             timer += Time.fixedDeltaTime;
             tc.RemainingTime = duration - timer;
-            if ((!attacker.gameObject.activeInHierarchy || attacker.shotsLeftInAttack == 0) && !attackerFiredAttackAnim && !attacker.Attacking)
+            if (!attacker.Attacking)
             {
                 //Stop the firing of the attacks to the tiles
                 attacker.shotsLeftInAttack = 0;

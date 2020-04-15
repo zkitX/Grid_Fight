@@ -20,8 +20,8 @@ public class AudioEmitter : MonoBehaviour
 
     void Awake()
     {
-        SetupAudioEmitter();
-        if (playOnEnabled) PlayAudio();
+       // SetupAudioEmitter();
+        //if (playOnEnabled) PlayAudio();
     }
 
     void SetupAudioEmitter()
@@ -41,7 +41,7 @@ public class AudioEmitter : MonoBehaviour
 
     public void PlayAudio()
     {
-        if (AudioManager.Instance.ClipPlayedThisFrame(audioSource.clip))
+       /* if (AudioManager.Instance.ClipPlayedThisFrame(audioSource.clip))
         {
             return;
         }
@@ -51,7 +51,7 @@ public class AudioEmitter : MonoBehaviour
         if (autoDisableOnComplete && gameObject.activeInHierarchy)
         {
             StartCoroutine(AutoDisableChecker());
-        }
+        }*/
     }
 
     IEnumerator AutoDisableChecker()
@@ -91,14 +91,14 @@ public class AudioEmitter : MonoBehaviour
 
     private void OnDisable()
     {
-        audioSource.volume = baseVolume;
+        /*audioSource.volume = baseVolume;
         if (SmoothRecoverer != null) StopCoroutine(SmoothRecoverer);
-        AudioManager.Instance.RemoveAudio(gameObject);
+        AudioManager.Instance.RemoveAudio(gameObject);*/
     }
 
     private void OnDestroy()
     {
-        AudioManager.Instance.RemoveAudio(gameObject);
+       // AudioManager.Instance.RemoveAudio(gameObject);
     }
 
     private void OnEnable()

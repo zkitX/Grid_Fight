@@ -45,6 +45,7 @@ public class ManagedAudioSource : MonoBehaviour
         parent = _parent;
         transform.SetParent(parent);
         transform.localPosition = Vector3.zero;
+        enabled = false;
     }
 
     public void SetAudioClipInfo(AudioClipInfoClass _audioClipInfo)
@@ -65,6 +66,23 @@ public class ManagedAudioSource : MonoBehaviour
         source.loop = looped;
         UpdateVolume();
         source.Play();
+        if (!looped)
+        {
+            if (ResetAfterCompleteSequencer != null) StopCoroutine(ResetAfterCompleteSequencer);
+            ResetAfterCompleteSequencer = ResetAfterCompleteSequence();
+            StartCoroutine(ResetAfterCompleteSequencer);
+        }
+    }
+
+    IEnumerator ResetAfterCompleteSequencer = null;
+    IEnumerator ResetAfterCompleteSequence()
+    {
+        while (source.isPlaying)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+        ResetAfterCompleteSequencer = null;
+        ResetSource();
     }
 
     public void ResetSource()
@@ -77,8 +95,7 @@ public class ManagedAudioSource : MonoBehaviour
 
     private void OnDisable()
     {
-        Debug.Log("Audio Source Parent Disabled");
-        ResetSource();
+        Debug.Log("Audio Source Disabled");
     }
 }
 

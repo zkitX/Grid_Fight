@@ -21,6 +21,15 @@ public class AudioManagerMk2 : MonoBehaviour
         GenerateSources();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Debug.Log("EEEEE");
+            PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.ArrivalSpawn, AudioBus.MediumPriority);
+        }
+    }
+
     void GenerateSources()
     {
         for (int i = 0; i < musicSourcesNum; i++) CreateSource(AudioSourceType.Music, AudioBus.Music);
@@ -57,10 +66,10 @@ public class AudioManagerMk2 : MonoBehaviour
     {
         ManagedAudioSource source = GetFreeSource(priority, sourceType);
 
-        if(sourceOrigin != null) source.SetParent(sourceOrigin);
+        source.gameObject.SetActive(true);
+        if (sourceOrigin != null) source.SetParent(sourceOrigin);
         source.SetAudioClipInfo(clipInfo);
         source.bus = priority;
-        source.gameObject.SetActive(true);
         source.PlaySound(false);
     }
 
