@@ -53,19 +53,19 @@ public class AudioManagerMk2 : MonoBehaviour
         return source;
     }
 
-    void PlaySound(AudioSourceType sourceType, AudioClipInfoClass clipInfo, AudioBus priority, Transform sourceOrigin)
+    public void PlaySound(AudioSourceType sourceType, AudioClipInfoClass clipInfo, AudioBus priority, Transform sourceOrigin = null, bool loop = false)
     {
         ManagedAudioSource source = GetFreeSource(priority, sourceType);
 
-        source.SetParent(sourceOrigin);
+        if(sourceOrigin != null) source.SetParent(sourceOrigin);
         source.SetAudioClipInfo(clipInfo);
         source.bus = priority;
         source.gameObject.SetActive(true);
-        source.PlaySound();
+        source.PlaySound(false);
     }
 
-    public float GetDampener(AudioSourceType type)
+    public float GetDampener(AudioSourceType type, AudioBus priorityToCompare)
     {
-        return sources.Where(r => r.bus == AudioBus.HighPriority && r.type == type).FirstOrDefault() == null ? 1f : 0.5f;
+        return sources.Where(r => r.bus == AudioBus.HighPriority && r.type == type && priorityToCompare != AudioBus.HighPriority).FirstOrDefault() == null ? 1f : 0.5f;
     }
 }

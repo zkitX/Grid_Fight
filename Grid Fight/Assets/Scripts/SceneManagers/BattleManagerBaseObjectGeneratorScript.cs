@@ -118,9 +118,6 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
         BattleInfoManager = Instantiate(stage.BattleInfoManager);
         StageObjects.Add(BattleInfoManager);
 
-        AudioManager = Instantiate(stage.AudioManager);
-        StageObjects.Add(AudioManager);
-
         Battle_UI = Instantiate(stage.UI_Battle);
         StageObjects.Add(Battle_UI);
 
@@ -128,6 +125,19 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
         if (Wave != null) yield return WaveManagerScript.Instance.WaveCharCreator();
 
         yield return null;
+
+        AudioManager = Instantiate(stage.AudioManager);
+        StageObjects.Add(AudioManager);
+
+        yield return null;
+
+        if (AudioManager.GetComponent<AudioManagerMk2>() != null && stage.StageAudioProfile != null)
+        {
+            if(stage.StageAudioProfile.music != null)
+                AudioManager.GetComponent<AudioManagerMk2>().PlaySound(AudioSourceType.Music, stage.StageAudioProfile.music, AudioBus.Music, loop: true);
+            if(stage.StageAudioProfile.ambience != null)
+                AudioManager.GetComponent<AudioManagerMk2>().PlaySound(AudioSourceType.Ambience, stage.StageAudioProfile.ambience, AudioBus.Music, loop: true);
+        }   
 
         UserInputManager.Instance.StartUserInputManager();
         BattleManagerScript.Instance.SetupBattleState();

@@ -21,6 +21,7 @@ public class CharacterInfoScript : MonoBehaviour
     public string Name;
     [Tooltip("Should contain 2 for the HealthUI, one for deselected(0) and one for selected(1)")]
     public Sprite[] CharacterIcons;
+    public CharacterAudioProfileSO AudioProfile;
     public BaseCharType BaseCharacterType;
     public CharacterNameType CharacterID;
     public List<ScriptableObjectAttackBase> CurrentAttackTypeInfo = new List<ScriptableObjectAttackBase>();

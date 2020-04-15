@@ -339,11 +339,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  AtkFiringPoints:
-  - {fileID: 201865410233344019}
-  - {fileID: 201865410233344439}
-  - {fileID: 3032862655507421618}
-  - {fileID: 5199064903750702468}
+  FiringPoint: {fileID: 0}
+  SpecialFiringPoint: {fileID: 0}
   CurrentAnim: 1
   AnimationTransition: 0.1
   Loop: 0
@@ -365,22 +362,25 @@ MonoBehaviour:
   CharacterIcons:
   - {fileID: 21300000, guid: c9eb5af2d9b875e4a9751e32071c0948, type: 3}
   - {fileID: 21300000, guid: f1018b669a56e5d4fb4ae27635c17fe7, type: 3}
+  AudioProfile: {fileID: 11400000, guid: 62704e04b9bdc01458fb4fc6aa7ece85, type: 2}
   BaseCharacterType: 0
   CharacterID: 1186
   CurrentAttackTypeInfo: []
+  ParticleID: 0
   Elemental: 6
   ClassType: 0
+  CharacterLevel: 0
   UseLayeringSystem: 1
   CharacterRespawnLength: 180
   CharacterSelection: 0
-  WeakAttack:
+  RapidAttack:
     DamageMultiplier: {x: 1, y: 1}
     CriticalChance: {x: 2, y: 2}
     Stamina_Cost_Atk: 0
     B_DamageMultiplier: {x: 1, y: 1}
     B_CriticalChance: {x: 2, y: 2}
     B_Stamina_Cost_Atk: 0
-  StrongAttac:
+  PowerfulAttac:
     DamageMultiplier: {x: 3, y: 3}
     CriticalChance: {x: 3, y: 5}
     Stamina_Cost_Atk: 0

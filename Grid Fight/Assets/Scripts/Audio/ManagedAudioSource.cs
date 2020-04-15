@@ -56,12 +56,13 @@ public class ManagedAudioSource : MonoBehaviour
 
     public void UpdateVolume()
     {
-        source.volume = audioClipInfo.baseVolume;
+        source.volume = audioClipInfo.baseVolume * AudioManagerMk2.Instance.GetDampener(type, bus);
         //SET THE VOLUME BASED ON THE BASE VOLUME OF THE CLIP INFO AND WHETHER THERE ARE DAMPENERS APPLIED BY THE MANAGER
     }
 
-    public void PlaySound()
+    public void PlaySound(bool looped = false)
     {
+        source.loop = looped;
         UpdateVolume();
         source.Play();
     }
@@ -76,6 +77,7 @@ public class ManagedAudioSource : MonoBehaviour
 
     private void OnDisable()
     {
+        Debug.Log("Audio Source Parent Disabled");
         ResetSource();
     }
 }

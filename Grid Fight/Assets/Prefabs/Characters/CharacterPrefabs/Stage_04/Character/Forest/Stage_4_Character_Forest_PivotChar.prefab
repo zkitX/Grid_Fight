@@ -693,11 +693,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  AtkFiringPoints:
-  - {fileID: 3492613307251382856}
-  - {fileID: 3628410086016936102}
-  - {fileID: 6682462187498447984}
-  - {fileID: 1443029392478563778}
+  FiringPoint: {fileID: 0}
+  SpecialFiringPoint: {fileID: 0}
   CurrentAnim: 0
   AnimationTransition: 0.3
   Loop: 0
@@ -717,6 +714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Zeta
   CharacterIcons: []
+  AudioProfile: {fileID: 11400000, guid: 3d15c8565d2de914ea71df49c7c86153, type: 2}
   BaseCharacterType: 0
   CharacterID: 1087
   CurrentAttackTypeInfo:
@@ -724,19 +722,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bf53f9d24713f3f41a8bb6d452f52ac6, type: 2}
   - {fileID: 11400000, guid: 0dff8195d39bf3c4cb7340158c3e5d14, type: 2}
   - {fileID: 11400000, guid: e973ccde116019a469479b2aaf773375, type: 2}
+  ParticleID: 0
   Elemental: 4
   ClassType: 2
+  CharacterLevel: 0
   UseLayeringSystem: 1
   CharacterRespawnLength: 180
   CharacterSelection: 3
-  WeakAttack:
+  RapidAttack:
     DamageMultiplier: {x: 1, y: 1}
     CriticalChance: {x: 2, y: 2}
     Stamina_Cost_Atk: 0
     B_DamageMultiplier: {x: 1, y: 1}
     B_CriticalChance: {x: 2, y: 2}
     B_Stamina_Cost_Atk: 0
-  StrongAttac:
+  PowerfulAttac:
     DamageMultiplier: {x: 3, y: 3}
     CriticalChance: {x: 3, y: 5}
     Stamina_Cost_Atk: 0

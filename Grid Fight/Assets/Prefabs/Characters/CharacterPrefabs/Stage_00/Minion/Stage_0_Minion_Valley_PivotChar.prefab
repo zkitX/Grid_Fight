@@ -476,6 +476,7 @@ MonoBehaviour:
   SpecialFiringPoint: {fileID: 2639910783238502110}
   CurrentAnim: 0
   AnimationTransition: 0.1
+  Loop: 0
   changeanim: 0
   transition: 0.5
 --- !u!114 &4915738391350135175
@@ -492,11 +493,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   CharacterIcons: []
+  AudioProfile: {fileID: 11400000, guid: 8aff3648b6bc5524bb91916999b33dec, type: 2}
   BaseCharacterType: 1
   CharacterID: 1003
-  CurrentParticlesAttackTypeInfo: []
-  CurrentOnBattleFieldAttackTypeInfo:
-  - {fileID: 11400000, guid: 0537aba9432af4d4e9ddc1d1dc5988c7, type: 2}
+  CurrentAttackTypeInfo: []
   ParticleID: 13
   Elemental: 0
   ClassType: 3
