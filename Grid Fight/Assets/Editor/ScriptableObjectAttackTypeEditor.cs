@@ -105,7 +105,7 @@ public class ScriptableObjectAttackTypeEditor : Editor
             particlesTrajectory.BulletGapStartingTile = EditorGUILayout.Vector2IntField("BulletGapStartingTile", particlesTrajectory.BulletGapStartingTile);
 
             var list = particlesTrajectory.BulletEffectTiles;
-            int newCount = Mathf.Max(0, EditorGUILayout.IntField("Number of Effects", particlesTrajectory.BulletEffectTiles.Count));
+            int newCount = Mathf.Max(0, EditorGUILayout.IntField("TileAffectedByExplosion", particlesTrajectory.BulletEffectTiles.Count));
 
             while (newCount < list.Count)
                 list.RemoveAt(list.Count - 1);
@@ -123,7 +123,7 @@ public class ScriptableObjectAttackTypeEditor : Editor
             {
                 particlesTrajectory.EffectChances = EditorGUILayout.FloatField("EffectChances", particlesTrajectory.EffectChances);
                 var listEffect = particlesTrajectory.Effects;
-                int newCountEffect = Mathf.Max(0, EditorGUILayout.IntField("Number of Effects", list.Count));
+                int newCountEffect = Mathf.Max(0, EditorGUILayout.IntField("TileAffectedByEffect", particlesTrajectory.Effects.Count));
                 while (newCountEffect < listEffect.Count)
                     listEffect.RemoveAt(listEffect.Count - 1);
                 while (newCountEffect > listEffect.Count)
