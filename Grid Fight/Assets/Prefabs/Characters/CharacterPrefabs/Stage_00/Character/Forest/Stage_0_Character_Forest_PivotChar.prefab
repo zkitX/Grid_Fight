@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5015482196435460474}
   m_Layer: 0
-  m_Name: FiringPointStrongAtk
+  m_Name: SpecialFiringPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,66 +30,6 @@ Transform:
   m_Father: {fileID: 4554182952917386160}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2776165211056724062
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6579141506464887346}
-  m_Layer: 0
-  m_Name: FiringPointSkill1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6579141506464887346
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2776165211056724062}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0.625, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4554182952917386160}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3608921857095556858
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6293933936372710634}
-  m_Layer: 0
-  m_Name: FiringPointSkill2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6293933936372710634
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3608921857095556858}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0.625, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4554182952917386160}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5043641212222649539
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6731145147940093854}
   m_Layer: 0
-  m_Name: FiringPointWeakAtk
+  m_Name: FiringPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -187,8 +127,6 @@ Transform:
   m_Children:
   - {fileID: 6731145147940093854}
   - {fileID: 5015482196435460474}
-  - {fileID: 6579141506464887346}
-  - {fileID: 6293933936372710634}
   m_Father: {fileID: 2066249940540333689}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -418,8 +356,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  FiringPoint: {fileID: 0}
-  SpecialFiringPoint: {fileID: 0}
+  FiringPoint: {fileID: 6731145147940093854}
+  SpecialFiringPoint: {fileID: 5015482196435460474}
   CurrentAnim: 
   AnimationTransition: 0.1
   Loop: 0
@@ -441,7 +379,6 @@ MonoBehaviour:
   CharacterIcons:
   - {fileID: 21300000, guid: 395154bd4e1bbdf489dd9903af25d46b, type: 3}
   - {fileID: 21300000, guid: 2671fb6cc8a2aa14e8a026eeae17d7c7, type: 3}
-  AudioProfile: {fileID: 11400000, guid: 18079379e5337084286a38b915064869, type: 2}
   BaseCharacterType: 0
   CharacterID: 1006
   CurrentAttackTypeInfo:
@@ -449,7 +386,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0661223646bb79e408554a6755c05d77, type: 2}
   - {fileID: 11400000, guid: 4a224ea82bce0a047945566833daa995, type: 2}
   - {fileID: 11400000, guid: a7704c9b700c4b847a48ebef449c8745, type: 2}
-  ParticleID: 0
+  ParticleID: 19
   Elemental: 0
   ClassType: 2
   CharacterLevel: 0
@@ -459,14 +396,14 @@ MonoBehaviour:
   RapidAttack:
     DamageMultiplier: {x: 1, y: 1}
     CriticalChance: {x: 2, y: 2}
-    Stamina_Cost_Atk: 0
+    Stamina_Cost_Atk: 1.3
     B_DamageMultiplier: {x: 1, y: 1}
     B_CriticalChance: {x: 2, y: 2}
     B_Stamina_Cost_Atk: 0
   PowerfulAttac:
     DamageMultiplier: {x: 3, y: 3}
     CriticalChance: {x: 3, y: 5}
-    Stamina_Cost_Atk: 0
+    Stamina_Cost_Atk: 3
     B_DamageMultiplier: {x: 3, y: 3}
     B_CriticalChance: {x: 3, y: 5}
     B_Stamina_Cost_Atk: 0

@@ -81,7 +81,7 @@ Transform:
   m_Children:
   - {fileID: 19269112}
   m_Father: {fileID: 1644212395701353759}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &511344409
 GameObject:
@@ -302,7 +302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3492613307251382856}
   m_Layer: 0
-  m_Name: FiringPointWeakAtk
+  m_Name: FiringPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -332,7 +332,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3628410086016936102}
   m_Layer: 0
-  m_Name: FiringPointStrongAtk
+  m_Name: SpecialFiringPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -389,8 +389,6 @@ Transform:
   m_Children:
   - {fileID: 3492613307251382856}
   - {fileID: 3628410086016936102}
-  - {fileID: 6682462187498447984}
-  - {fileID: 1443029392478563778}
   - {fileID: 101414458}
   m_Father: {fileID: 3841029993811501270}
   m_RootOrder: 0
@@ -693,8 +691,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  FiringPoint: {fileID: 0}
-  SpecialFiringPoint: {fileID: 0}
+  FiringPoint: {fileID: 3492613307251382856}
+  SpecialFiringPoint: {fileID: 3628410086016936102}
   CurrentAnim: 0
   AnimationTransition: 0.3
   Loop: 0
@@ -714,7 +712,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Zeta
   CharacterIcons: []
-  AudioProfile: {fileID: 11400000, guid: 3d15c8565d2de914ea71df49c7c86153, type: 2}
   BaseCharacterType: 0
   CharacterID: 1087
   CurrentAttackTypeInfo:
@@ -722,7 +719,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bf53f9d24713f3f41a8bb6d452f52ac6, type: 2}
   - {fileID: 11400000, guid: 0dff8195d39bf3c4cb7340158c3e5d14, type: 2}
   - {fileID: 11400000, guid: e973ccde116019a469479b2aaf773375, type: 2}
-  ParticleID: 0
+  ParticleID: 7
   Elemental: 4
   ClassType: 2
   CharacterLevel: 0
@@ -852,66 +849,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boneRoot: {fileID: 101414458}
   skeletonRenderer: {fileID: 1917371569703958399}
---- !u!1 &7052550634712564434
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1443029392478563778}
-  m_Layer: 0
-  m_Name: FiringPointSkill2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1443029392478563778
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7052550634712564434}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.291, y: 0.267, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1644212395701353759}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7807112525977870550
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6682462187498447984}
-  m_Layer: 0
-  m_Name: FiringPointSkill1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6682462187498447984
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7807112525977870550}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.291, y: 0.267, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1644212395701353759}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9126922399256309366
 GameObject:
   m_ObjectHideFlags: 0

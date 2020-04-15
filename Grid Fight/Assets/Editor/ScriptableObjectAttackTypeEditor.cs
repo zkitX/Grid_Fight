@@ -11,6 +11,8 @@ public class ScriptableObjectAttackTypeEditor : Editor
     public List<BattleFieldTileInfo> TilesInfo = new List<BattleFieldTileInfo>();
     bool firstOpen = true;
     ScriptableObjectAttackBase origin;
+    public GameObject ChargingPs;
+    public GameObject ChargingLoopPs;
 
     public override void OnInspectorGUI()
     {
@@ -19,8 +21,16 @@ public class ScriptableObjectAttackTypeEditor : Editor
         //test = false;
         origin = (ScriptableObjectAttackBase)target;
 
+      /*  if (origin.ChargingCastActivationPs == null)
+        {
+            origin.ChargingCastActivationPs = ChargingPs;
+        }
 
-        
+        if (origin.ChargingLoopPs == null)
+        {
+            origin.ChargingLoopPs = ChargingLoopPs;
+        }
+        */
 
         if (origin.CurrentAttackType == AttackType.Particles)
         {
@@ -95,7 +105,8 @@ public class ScriptableObjectAttackTypeEditor : Editor
             particlesTrajectory.BulletGapStartingTile = EditorGUILayout.Vector2IntField("BulletGapStartingTile", particlesTrajectory.BulletGapStartingTile);
 
             var list = particlesTrajectory.BulletEffectTiles;
-            int newCount = Mathf.Max(0, EditorGUILayout.IntField("Number of Effects", list.Count));
+            int newCount = Mathf.Max(0, EditorGUILayout.IntField("TileAffectedByExplosion", particlesTrajectory.BulletEffectTiles.Count));
+
             while (newCount < list.Count)
                 list.RemoveAt(list.Count - 1);
             while (newCount > list.Count)
@@ -112,7 +123,7 @@ public class ScriptableObjectAttackTypeEditor : Editor
             {
                 particlesTrajectory.EffectChances = EditorGUILayout.FloatField("EffectChances", particlesTrajectory.EffectChances);
                 var listEffect = particlesTrajectory.Effects;
-                int newCountEffect = Mathf.Max(0, EditorGUILayout.IntField("Number of Effects", list.Count));
+                int newCountEffect = Mathf.Max(0, EditorGUILayout.IntField("TileAffectedByEffect", particlesTrajectory.Effects.Count));
                 while (newCountEffect < listEffect.Count)
                     listEffect.RemoveAt(listEffect.Count - 1);
                 while (newCountEffect > listEffect.Count)

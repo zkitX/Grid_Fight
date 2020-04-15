@@ -1,65 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2634851092274919140
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2699191721284645526}
-  m_Layer: 0
-  m_Name: FiringPointSkill2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2699191721284645526
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2634851092274919140}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.38, y: 0.81, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5059555823653031283}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3933312377375942163
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3055131820609435068}
-  m_Layer: 0
-  m_Name: FiringPointSkill1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3055131820609435068
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3933312377375942163}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.38, y: 0.82, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5059555823653031283}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5059555823653028382
 GameObject:
   m_ObjectHideFlags: 0
@@ -70,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5059555823653031703}
   m_Layer: 0
-  m_Name: FiringPointStrongAtk
+  m_Name: SpecialFiringPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5059555823653031603}
   m_Layer: 0
-  m_Name: FiringPointWeakAtk
+  m_Name: FiringPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,8 +96,6 @@ Transform:
   m_Children:
   - {fileID: 5059555823653031603}
   - {fileID: 5059555823653031703}
-  - {fileID: 3055131820609435068}
-  - {fileID: 2699191721284645526}
   m_Father: {fileID: 5059555823653030441}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -459,11 +397,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  FiringPoint: {fileID: 0}
-  SpecialFiringPoint: {fileID: 0}
+  FiringPoint: {fileID: 5059555823653031603}
+  SpecialFiringPoint: {fileID: 5059555823653031703}
   CurrentAnim: 1
   AnimationTransition: 0.1
-  Loop: 0
   changeanim: 0
   transition: 0.5
 --- !u!114 &5059555823653035621
@@ -482,11 +419,13 @@ MonoBehaviour:
   CharacterIcons:
   - {fileID: 21300000, guid: c9eb5af2d9b875e4a9751e32071c0948, type: 3}
   - {fileID: 21300000, guid: f1018b669a56e5d4fb4ae27635c17fe7, type: 3}
-  AudioProfile: {fileID: 11400000, guid: 02f058fc5856d7545aab8dc95beb867b, type: 2}
   BaseCharacterType: 0
   CharacterID: 1184
-  CurrentAttackTypeInfo: []
-  ParticleID: 0
+  CurrentParticlesAttackTypeInfo:
+  - {fileID: 11400000, guid: 73c66a9d114b7ea4a86c401084c4d62f, type: 2}
+  CurrentOnBattleFieldAttackTypeInfo:
+  - {fileID: 0}
+  ParticleID: 8
   Elemental: 6
   ClassType: 0
   CharacterLevel: 0
