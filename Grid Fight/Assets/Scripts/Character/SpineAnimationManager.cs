@@ -46,6 +46,8 @@ public class SpineAnimationManager : MonoBehaviour
     //Used to get spine event
     private void SpineAnimationState_Event(Spine.TrackEntry trackEntry, Spine.Event e)
     {
+        CastLoopImpactAudioClipInfoClass attackTypeAudioInfo = CharOwner.GetAttackAudio();
+
         if (e.Data.Name.Contains("StopDefending"))
         {
             SetAnimationSpeed(0);
@@ -56,6 +58,7 @@ public class SpineAnimationManager : MonoBehaviour
         }
         else if (e.Data.Name.Contains("FireCastParticle"))
         {
+            if(attackTypeAudioInfo != null) AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackTypeAudioInfo.Cast, AudioBus.HighPriority, CharOwner.transform);
             CharOwner.currentAttackPhase = CurrentAnim.Contains("Atk1") ? AttackPhasesType.Cast_Rapid : AttackPhasesType.Cast_Powerful;
             CharOwner.FireCastParticles(CurrentAnim.Contains("Atk1") ? CharacterLevelType.Novice : CharacterLevelType.Godness);
         }

@@ -529,6 +529,17 @@ public class Stage09_Boss_Geisha : MinionType_Script
     }
 
 
+    public override CastLoopImpactAudioClipInfoClass GetAttackAudio()
+    {
+        if (nextAttack == null) return null;
+
+        if(nextAttack.AttackAnim == AttackAnimType.Boss_Atk3)
+        {
+            return ((Boss_Stage09AudioProfileSO)CharInfo.AudioProfile).BossAttack3;
+        }
+        return base.GetAttackAudio();
+    }
+
     public override void SpineAnimationState_Complete(TrackEntry trackEntry)
     {
         if (trackEntry.Animation.Name == "<empty>" || SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle.ToString()

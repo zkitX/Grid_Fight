@@ -10,7 +10,7 @@ public class CharacterAudioProfileSO : ScriptableObject
     [Header("Attacks and such")]
     public CastLoopImpactAudioClipInfoClass RapidAttack;
     public CastLoopImpactAudioClipInfoClass PowerfulAttack;
-    public CastLoopImpactAudioClipInfoClass PowerfulAttackChargingLoop;
+    public AudioClipInfoClass PowerfulAttackChargingLoop;
     public CastLoopImpactAudioClipInfoClass Skill1;
     public CastLoopImpactAudioClipInfoClass Skill2;
     public CastLoopImpactAudioClipInfoClass Skill3;

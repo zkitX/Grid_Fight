@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 1356531903299505062}
   - component: {fileID: 1356531903299505063}
   - component: {fileID: 4927355652519203374}
+  - component: {fileID: 660104921473958960}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -145,6 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffaee637ee62fa4099cb0dc5741cd66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AudioProfile: {fileID: 11400000, guid: e4c945714024d6246ab04129e035279c, type: 2}
   _CurrentBattleState: 0
   FungusState: 0
   OccupiedBattleTiles: []
@@ -265,6 +267,18 @@ MonoBehaviour:
   BulletGameObject: {fileID: 476742215486157040, guid: d6ceee7a1661975488e26a9d78d22567,
     type: 3}
   BulletContainer: {fileID: 6952598345498502452}
+--- !u!114 &660104921473958960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356531903299505067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4f3478c06fcd5e428c969cc31a0954a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6911235830904615386
 GameObject:
   m_ObjectHideFlags: 0

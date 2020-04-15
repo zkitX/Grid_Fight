@@ -608,10 +608,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     #endregion
     #region Defence
 
-    protected float defenceCost = 20f;
-    protected float partialDefenceCost = 10f;
     protected float defenceAnimSpeedMultiplier = 5f;
-    protected float staminaRegenOnPerfectBlock = 10f;
     public void StartDefending()
     {
         if (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
@@ -621,9 +618,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
         SpineAnim.SetAnimationSpeed(defenceAnimSpeedMultiplier);
 
-        if (canDefend && CharInfo.Shield >= defenceCost)
+        if (canDefend && CharInfo.Shield >= UniversalGameBalancer.Instance.defenceCost)
         {
-            CharInfo.Shield -= defenceCost;
+            CharInfo.Shield -= UniversalGameBalancer.Instance.defenceCost;
             isDefending = true;
             DefendingHoldingTimer = 0;
             StartCoroutine(Defending_Co());
@@ -1107,6 +1104,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public void ArrivingEvent()
     {
         CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);
+
+        if(CharInfo.AudioProfile.ArrivingCry != null) AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, CharInfo.AudioProfile.ArrivingCry, AudioBus.MediumPriority, transform);
+        AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.ArrivalImpact, AudioBus.MediumPriority, transform);
+
         UMS.ArrivingParticle.transform.position = transform.position;
         UMS.ArrivingParticle.SetActive(true);
     }
@@ -1234,16 +1235,18 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             {
                 damage = 0;
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldTotalDefence);
+                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.BasicShield, AudioBus.MediumPriority);
                 go.transform.position = transform.position;
-                CharInfo.Stamina += staminaRegenOnPerfectBlock;
+                CharInfo.Stamina += UniversalGameBalancer.Instance.staminaRegenOnPerfectBlock;
                 EventManager.Instance.AddBlock(this, BlockInfo.BlockType.full);
             }
             else
             {
                 damage = damage - CharInfo.DefenceStats.BaseDefence;
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldNormal);
+                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.MegaShield, AudioBus.HighPriority);
                 go.transform.position = transform.position;
-                CharInfo.Shield -= partialDefenceCost;
+                CharInfo.Shield -= UniversalGameBalancer.Instance.partialDefenceCost;
                 EventManager.Instance.AddBlock(this, BlockInfo.BlockType.partial);
 
                 damage = damage < 0 ? 1 : damage;
@@ -1398,6 +1401,25 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public void Dispose()
     {
         //throw new NotImplementedException();
+    }
+
+    public virtual CastLoopImpactAudioClipInfoClass GetAttackAudio()
+    {
+        if (nextAttack == null) return null;
+
+        switch (nextAttack.AttackAnim)
+        {
+            case (AttackAnimType.Powerful_Atk):
+                return CharInfo.AudioProfile.PowerfulAttack;
+            case (AttackAnimType.Rapid_Atk):
+                return CharInfo.AudioProfile.RapidAttack;
+            case (AttackAnimType.Skill1):
+                return CharInfo.AudioProfile.Skill1;
+            case (AttackAnimType.Skill2):
+                return CharInfo.AudioProfile.Skill2;
+        }
+
+        return null;
     }
 }
 

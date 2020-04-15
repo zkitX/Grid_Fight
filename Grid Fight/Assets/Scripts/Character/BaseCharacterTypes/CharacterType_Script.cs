@@ -139,7 +139,8 @@ public class CharacterType_Script : BaseCharacter
     public override void SetUpEnteringOnBattle()
     {
         SetAnimation(CharacterAnimationStateType.Arriving);
-        AudioManager.Instance.PlayGeneric("Arriving_Spawn_20200108_V5");
+        AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.ArrivalSpawn, AudioBus.MediumPriority);
+        //AudioManager.Instance.PlayGeneric("Arriving_Spawn_20200108_V5");
         EventManager.Instance?.AddCharacterArrival((BaseCharacter)this);
     }
 

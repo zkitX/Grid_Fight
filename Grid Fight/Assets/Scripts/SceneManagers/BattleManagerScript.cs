@@ -8,6 +8,7 @@ public class BattleManagerScript : MonoBehaviour
 
     public delegate void CurrentBattleStateChanged(BattleState currentBattleState);
     public event CurrentBattleStateChanged CurrentBattleStateChangedEvent;
+    public UniversalAudioProfileSO AudioProfile;
 
 
     public BattleState CurrentBattleState
