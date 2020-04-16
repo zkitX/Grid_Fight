@@ -92,9 +92,6 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
       
         currentStageID = stage.ID;
 
-        AudioManager = Instantiate(stage.AudioManager);
-        StageObjects.Add(AudioManager);
-
         BaseEnvironment = Instantiate(stage.BaseEnvironment);
         StageObjects.Add(BaseEnvironment);
 

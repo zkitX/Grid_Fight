@@ -844,8 +844,8 @@ public enum AudioSourceType
 
 public enum AudioBus
 {
-    Music,
-    LowPriority,
-    MediumPriority,
-    HighPriority,
+    Music = 1000,
+    LowPriority = 0,
+    MediumPriority = 50,
+    HighPriority = 100,
 }

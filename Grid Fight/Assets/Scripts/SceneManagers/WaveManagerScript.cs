@@ -73,6 +73,16 @@ public class WaveManagerScript : MonoBehaviour
         }
     }
 
+    public int GetMaxEnemiesOnScreenAcrossAllWaves()
+    {
+        int mostEnemiesPossible = 0;
+        foreach(WavePhaseClass wavePhase in WavePhases)
+        {
+            if (wavePhase.MaxEnemyOnScreen > mostEnemiesPossible) mostEnemiesPossible = wavePhase.MaxEnemyOnScreen;
+        }
+        return mostEnemiesPossible;
+    }
+
     public IEnumerator SpawnCharFromGivenWave(string waveName, CharacterNameType characterID, string charIdentifier, bool isRandom, Vector2Int pos)
     {
         WavePhaseClass wpc = WavePhases.Where(r => r.name == waveName).First();

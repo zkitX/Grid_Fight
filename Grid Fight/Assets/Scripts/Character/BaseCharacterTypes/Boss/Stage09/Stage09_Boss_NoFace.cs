@@ -100,6 +100,8 @@ public class Stage09_Boss_NoFace : MinionType_Script
                 BaseCharacter targetChar = enemys[Random.Range(0, enemys.Count)];
                 if (targetChar != null)
                 {
+                    nextAttackPos = targetChar.UMS.CurrentTilePos;
+                    baseForme.nextAttackPos = targetChar.UMS.CurrentTilePos;
                     Debug.Log("NOFACE ATTACK");
                     yield return AttackSequence();
                     yield return new WaitForSeconds(Random.Range(bossInfo.demonFormeIntensityLevels[intensityLevel].attackRateRange.x,
@@ -192,5 +194,16 @@ public class Stage09_Boss_NoFace : MinionType_Script
     public override void SetAttackReady(bool value)
     {
         return;
+    }
+
+    public override CastLoopImpactAudioClipInfoClass GetAttackAudio()
+    {
+        if (nextAttack == null) return null;
+
+        if (nextAttack.AttackAnim == AttackAnimType.Boss_Atk3)
+        {
+            return ((Boss_Stage09AudioProfileSO)CharInfo.AudioProfile).BossAttack3;
+        }
+        return base.GetAttackAudio();
     }
 }
