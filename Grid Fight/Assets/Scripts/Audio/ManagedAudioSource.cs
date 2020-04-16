@@ -88,6 +88,7 @@ public class ManagedAudioSource : MonoBehaviour
     public void ResetSource()
     {
         bus = AudioBus.LowPriority;
+        source.loop = false;
         SetParent(AudioManagerMk2.Instance.transform);
         SetAudioClipInfo(new AudioClipInfoClass());
         gameObject.SetActive(false);

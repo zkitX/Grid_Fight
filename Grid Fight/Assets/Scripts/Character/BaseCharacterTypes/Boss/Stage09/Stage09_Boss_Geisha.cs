@@ -6,6 +6,19 @@ using UnityEngine;
 
 public class Stage09_Boss_Geisha : MinionType_Script
 {
+    public override bool Attacking
+    {
+        get
+        {
+            if (oniFormeActive) return oniForme.Attacking;
+            else return _Attacking;
+        }
+        set
+        {
+            if (oniFormeActive) oniForme.Attacking = value;
+            else _Attacking = value;
+        }
+    }
     Stage09_BossInfo bossInfo = null;
     bool IsCharArrived = false;
     bool oniFormeActive = false;
@@ -178,6 +191,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
                         BaseCharacter targetChar = enemys[Random.Range(0, enemys.Count)];
                         if (targetChar != null)
                         {
+                            nextAttackPos = targetChar.UMS.CurrentTilePos;
                             Debug.Log("GEISHA ATTACK");
                             yield return AttackSequence();
                             yield return new WaitForSeconds(Random.Range(bossInfo.maidenFormeAttackCoolDown.x, bossInfo.maidenFormeAttackCoolDown.y));

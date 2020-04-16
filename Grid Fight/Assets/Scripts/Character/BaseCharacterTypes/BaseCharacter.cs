@@ -92,7 +92,18 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public int _shotsLeftInAttack = 0;
 
     [HideInInspector]
-    public bool Attacking = false;
+    public bool _Attacking = false;
+    public virtual bool Attacking
+    {
+        get
+        {
+            return _Attacking;
+        }
+        set
+        {
+            _Attacking = value;
+        }
+    }
     [HideInInspector] public int CharOredrInLayer = 0;
 
     public virtual void Start()
@@ -494,6 +505,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         bs.Side = UMS.Side;
         bs.VFXTestMode = VFXTestMode;
         bs.CharInfo = CharInfo;
+        bs.attackAudioType = GetAttackAudio();
         if (bulletBehaviourInfo.HasEffect)
         {
             bs.BulletEffects = bulletBehaviourInfo.Effects;

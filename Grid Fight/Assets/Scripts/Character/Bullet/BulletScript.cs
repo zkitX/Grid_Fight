@@ -29,6 +29,8 @@ public class BulletScript : MonoBehaviour
     public Vector2Int StartingTile;
     public float ChildrenExplosionDelay;
     public float EffectChances;
+    public CastLoopImpactAudioClipInfoClass attackAudioType;
+    ManagedAudioSource bulletSoundSource = null;
     public List<ScriptableObjectAttackEffect> BulletEffects = new List<ScriptableObjectAttackEffect>();
 
     //Private 
@@ -50,6 +52,10 @@ public class BulletScript : MonoBehaviour
     //Move the bullet on a determinated tile using the BulletInfo.Trajectory
     public IEnumerator MoveToTile()
 	{
+        if(attackAudioType.Loop.clip != null)
+        {
+            bulletSoundSource = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Loop, AudioBus.LowPriority, transform, true);
+        }
         vfx = GetComponentInChildren<VFXBulletSpeedController>();
         if (vfx != null)
         {
@@ -135,7 +141,9 @@ public class BulletScript : MonoBehaviour
     {
         float timer = 0;
         BaseCharacter target;
-       
+
+        bulletSoundSource = null;
+
         while (timer < ChildrenExplosionDelay)
         {
             timer += Time.fixedDeltaTime;
@@ -206,8 +214,13 @@ public class BulletScript : MonoBehaviour
             MakeDamage(target);
             //fire the Effect
             StartCoroutine(ChildExplosion(BulletEffectTiles.Where(r => r != Vector2Int.zero).ToList(), target.UMS.CurrentTilePos));
+            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Impact, AudioBus.HighPriority,
+                GridManagerScript.Instance.GetBattleTile(target.UMS.CurrentTilePos).transform);
+            if (bulletSoundSource != null) bulletSoundSource.ResetSource();
             FireEffectParticles(transform.position, BulletEffectTiles.Count > 1 || (CharInfo.ClassType == CharacterClassType.Valley && attackLevel == CharacterLevelType.Godness)  ? false : true);
+        
         }
+
     }
 
     public void FireEffectParticles(Vector3 pos, bool destroyBullet)
@@ -229,6 +242,8 @@ public class BulletScript : MonoBehaviour
                 StopAllCoroutines();
                 Invoke("test", 2);
                 PS.GetComponent<PSTimeGroup>().UpdatePSTime(0.1f);
+                if (bulletSoundSource != null) bulletSoundSource.ResetSource();
+                bulletSoundSource = null;
             }
         }
     }
