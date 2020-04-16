@@ -193,7 +193,7 @@ public class BulletScript : MonoBehaviour
                     Elemental, iscritical, CharInfo.ClassType == CharacterClassType.Desert && attackLevel == CharacterLevelType.Godness ? true : false);
 
                 int chances = Random.Range(0, 100);
-                if (chances < EffectChances)
+                if (chances < 100) //TODO: Setup actual chances calculations
                 {
                     foreach (ScriptableObjectAttackEffect item in BulletEffects)
                     {

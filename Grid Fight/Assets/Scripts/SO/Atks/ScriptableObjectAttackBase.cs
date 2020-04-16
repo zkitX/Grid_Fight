@@ -11,6 +11,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/atkbase")]
 public class ScriptableObjectAttackBase : ScriptableObject
 {
+    public int Chances = 100;
     public AttackType CurrentAttackType;
     public float AttackRatioMultiplier = 1;
     public Vector2 DamageMultiplier = new Vector2(1,1);

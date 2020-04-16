@@ -366,14 +366,17 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
 
     List<ScriptableObjectAttackBase> availableAtks = new List<ScriptableObjectAttackBase>();
+    List<ScriptableObjectAttackBase> currentTileAtks = new List<ScriptableObjectAttackBase>();
     ScriptableObjectAttackBase atkToCheck;
     public void GetAttack()
     {
+        currentTileAtks.Clear();
+        currentTileAtks = CharInfo.CurrentAttackTypeInfo.Where(r => r.CurrentAttackType == AttackType.Tile).ToList();
 
         availableAtks.Clear();
-        for (int i = 0; i < CharInfo.CurrentAttackTypeInfo.Count; i++)
+        for (int i = 0; i < currentTileAtks.Count; i++)
         {
-            atkToCheck = CharInfo.CurrentAttackTypeInfo[i];
+            atkToCheck = currentTileAtks[i];
             switch (atkToCheck.TilesAtk.StatToCheck)
             {
                 case WaveStatsType.Health:
@@ -506,6 +509,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         bs.VFXTestMode = VFXTestMode;
         bs.CharInfo = CharInfo;
         bs.attackAudioType = GetAttackAudio();
+
         if (bulletBehaviourInfo.HasEffect)
         {
             bs.BulletEffects = bulletBehaviourInfo.Effects;

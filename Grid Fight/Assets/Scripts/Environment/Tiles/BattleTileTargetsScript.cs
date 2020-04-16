@@ -43,8 +43,8 @@ public class BattleTileTargetsScript : MonoBehaviour
                 yield return new WaitForFixedUpdate();
                 anim.speed = 0;
             }
-            anim.speed = 1 / duration;
-            timer += Time.fixedDeltaTime;
+            anim.speed = (1 / duration) * (attacker.CharInfo.BaseSpeed / attacker.CharInfo.SpeedStats.B_BaseSpeed);
+            timer += Time.fixedDeltaTime * (attacker.CharInfo.BaseSpeed / attacker.CharInfo.SpeedStats.B_BaseSpeed);
             tc.RemainingTime = duration - timer;
             if (!attacker.Attacking)
             {
