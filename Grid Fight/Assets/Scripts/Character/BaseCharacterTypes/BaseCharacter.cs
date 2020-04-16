@@ -1238,6 +1238,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldTotalDefence);
                 AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.BasicShield, AudioBus.MediumPriority);
                 go.transform.position = transform.position;
+                CharInfo.Shield -= UniversalGameBalancer.Instance.fullDefenceCost;
                 CharInfo.Stamina += UniversalGameBalancer.Instance.staminaRegenOnPerfectBlock;
                 EventManager.Instance.AddBlock(this, BlockInfo.BlockType.full);
             }
