@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage04-Minion-Desert-WeakAttack-Monkena
+  m_Name: Stage04-Minion-Desert-StrongAttack-Monkena
   m_EditorClassIdentifier: 
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
@@ -36,6 +36,24 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
+      - Pos: {x: -1, y: 1}
+        HasEffect: 0
+        Effects: []
+        EffectChances: 100
+        HasDifferentParticles: 0
+        ParticlesID: 0
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 1, y: 1}
+        HasEffect: 0
+        Effects: []
+        EffectChances: 100
+        HasDifferentParticles: 0
+        ParticlesID: 0
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
     - Delay: 1.6
       Show: 1
       BulletEffectTiles:
@@ -48,7 +66,25 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
-    StatToCheck: 0
+      - Pos: {x: -1, y: 0}
+        HasEffect: 0
+        Effects: []
+        EffectChances: 100
+        HasDifferentParticles: 0
+        ParticlesID: 0
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 1, y: 0}
+        HasEffect: 0
+        Effects: []
+        EffectChances: 100
+        HasDifferentParticles: 0
+        ParticlesID: 0
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+    StatToCheck: 1
     ValueChecker: 0
-    PercToCheck: 0
+    PercToCheck: 20
     Chances: 100
