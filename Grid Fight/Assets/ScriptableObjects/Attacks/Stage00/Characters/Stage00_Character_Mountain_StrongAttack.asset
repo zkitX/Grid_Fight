@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage00_Character_Mountain_StrongAttack
   m_EditorClassIdentifier: 
+  Chances: 100
   CurrentAttackType: 0
   AttackRatioMultiplier: 1
   DamageMultiplier: {x: 3, y: 4}
@@ -28,17 +29,26 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 1
-          outSlope: 1
+          inSlope: 1.0058577
+          outSlope: 1.0058577
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.5
-          value: 0.5
-          inSlope: 0
-          outSlope: 0
+          time: 0.33178294
+          value: 0.3337264
+          inSlope: 0.20064798
+          outSlope: 0.20064798
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.73952186
+          value: 0.08722304
+          inSlope: -0.46970958
+          outSlope: -0.46970958
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
@@ -46,8 +56,8 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 1
           value: 0
-          inSlope: -1
-          outSlope: -1
+          inSlope: -0.33485743
+          outSlope: -0.33485743
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334

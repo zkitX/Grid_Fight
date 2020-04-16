@@ -244,7 +244,7 @@ public class MinionType_Script : BaseCharacter
         //yield return null;
         Attacking = true;
 
-        CharacterAnimationStateType animToFire = CharacterAnimationStateType.Atk;
+        CharacterAnimationStateType animToFire = CharacterAnimationStateType.Atk1_IdleToAtk;
         bool isLooped = false;
         if (atk != null)
         {
