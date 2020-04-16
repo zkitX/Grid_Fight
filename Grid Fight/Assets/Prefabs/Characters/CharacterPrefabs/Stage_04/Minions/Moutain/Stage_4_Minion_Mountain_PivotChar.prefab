@@ -405,32 +405,32 @@ MonoBehaviour:
     B_CriticalChance: {x: 3, y: 5}
     B_Stamina_Cost_Atk: 0
   HealthStats:
-    Health: 70
-    Base: 70
+    Health: 90
+    Base: 90
     Regeneration: 1
     BaseHealthRegeneration: 1
-    LevelMultiplier: 0
+    LevelMultiplier: 20
     B_Health: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseHealthRegeneration: 0
     B_LevelMultiplier: 0
   StaminaStats:
-    Stamina: 40
-    Base: 40
-    Regeneration: 1
-    BaseStaminaRegeneration: 1
-    LevelMultiplier: 0
+    Stamina: 10
+    Base: 10
+    Regeneration: 0.1
+    BaseStaminaRegeneration: 0.1
+    LevelMultiplier: 20
     B_Stamina: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseStaminaRegeneration: 0
     B_LevelMultiplier: 0
   ShieldStats:
-    Shield: 50
-    Base: 50
-    Regeneration: 8
-    BaseShieldRegeneration: 8
+    Shield: 3
+    Base: 3
+    Regeneration: 0.2
+    BaseShieldRegeneration: 0.2
     LevelMultiplier: 50
     B_Shield: 0
     B_Base: 0
@@ -443,7 +443,7 @@ MonoBehaviour:
     AttackSpeed: 1
     AttackSpeedRatio: 5
     BulletSpeed: 5
-    LeaveSpeed: 3
+    LeaveSpeed: 1.2
     LevelMultiplier: 0
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
@@ -464,7 +464,7 @@ MonoBehaviour:
     CurrentElemental: 0
     LevelMultiplier: 0
   DefenceStats:
-    BaseDefence: 10
+    BaseDefence: 5
     Invulnerability: 0.2
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0

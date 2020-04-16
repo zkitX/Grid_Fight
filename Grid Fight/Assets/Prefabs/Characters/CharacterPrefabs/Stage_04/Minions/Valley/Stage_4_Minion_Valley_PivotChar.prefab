@@ -229,21 +229,21 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -339,12 +339,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Monkena
   CharacterIcons: []
   AudioProfile: {fileID: 11400000, guid: 58052c0522a404942b04e51ca2269605, type: 2}
   BaseCharacterType: 1
   CharacterID: 1083
-  CurrentAttackTypeInfo: []
+  CurrentAttackTypeInfo:
+  - {fileID: 11400000, guid: 70465f759c585d248a59266a3ee01b47, type: 2}
+  - {fileID: 11400000, guid: c950c97bf4e1d234aa8d9ce8191c6365, type: 2}
   ParticleID: 3
   Elemental: 0
   ClassType: 0
@@ -367,10 +369,10 @@ MonoBehaviour:
     B_CriticalChance: {x: 3, y: 5}
     B_Stamina_Cost_Atk: 0
   HealthStats:
-    Health: 30
-    Base: 30
-    Regeneration: 1
-    BaseHealthRegeneration: 1
+    Health: 45
+    Base: 45
+    Regeneration: 0.3
+    BaseHealthRegeneration: 0.3
     LevelMultiplier: 0
     B_Health: 0
     B_Base: 0
@@ -378,22 +380,22 @@ MonoBehaviour:
     B_BaseHealthRegeneration: 0
     B_LevelMultiplier: 0
   StaminaStats:
-    Stamina: 40
-    Base: 40
-    Regeneration: 1
-    BaseStaminaRegeneration: 1
-    LevelMultiplier: 0
+    Stamina: 10
+    Base: 10
+    Regeneration: 0.1
+    BaseStaminaRegeneration: 0.1
+    LevelMultiplier: 20
     B_Stamina: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseStaminaRegeneration: 0
     B_LevelMultiplier: 0
   ShieldStats:
-    Shield: 50
-    Base: 50
-    Regeneration: 8
-    BaseShieldRegeneration: 8
-    LevelMultiplier: 50
+    Shield: 3
+    Base: 3
+    Regeneration: 0.13
+    BaseShieldRegeneration: 0.13
+    LevelMultiplier: 10
     B_Shield: 0
     B_Base: 0
     B_Regeneration: 0
@@ -406,7 +408,7 @@ MonoBehaviour:
     AttackSpeedRatio: 5
     BulletSpeed: 5
     LeaveSpeed: 3
-    LevelMultiplier: 0
+    LevelMultiplier: 10
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
     B_BaseSpeed: 1
@@ -419,14 +421,14 @@ MonoBehaviour:
     B_IdleToAtkDuration: 0.2
     B_AtkToIdleDuration: 0.2
   DamageStats:
-    BaseDamage: 10
+    BaseDamage: 7
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 0
   DefenceStats:
-    BaseDefence: 10
+    BaseDefence: 2
     Invulnerability: 0.2
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0

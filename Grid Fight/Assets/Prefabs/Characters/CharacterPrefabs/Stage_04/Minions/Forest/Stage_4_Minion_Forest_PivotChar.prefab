@@ -339,7 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Daggar
   CharacterIcons: []
   AudioProfile: {fileID: 11400000, guid: 98d03c359c0ecca43bf2759b81c96a0c, type: 2}
   BaseCharacterType: 1
@@ -369,33 +369,33 @@ MonoBehaviour:
     B_CriticalChance: {x: 3, y: 5}
     B_Stamina_Cost_Atk: 0
   HealthStats:
-    Health: 38
-    Base: 38
-    Regeneration: 1
-    BaseHealthRegeneration: 1
-    LevelMultiplier: 0
+    Health: 60
+    Base: 60
+    Regeneration: 0.5
+    BaseHealthRegeneration: 0.5
+    LevelMultiplier: 20
     B_Health: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseHealthRegeneration: 0
     B_LevelMultiplier: 0
   StaminaStats:
-    Stamina: 40
-    Base: 40
-    Regeneration: 1
-    BaseStaminaRegeneration: 1
-    LevelMultiplier: 0
+    Stamina: 10
+    Base: 10
+    Regeneration: 0.1
+    BaseStaminaRegeneration: 0.1
+    LevelMultiplier: 20
     B_Stamina: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseStaminaRegeneration: 0
     B_LevelMultiplier: 0
   ShieldStats:
-    Shield: 50
-    Base: 50
-    Regeneration: 8
-    BaseShieldRegeneration: 8
-    LevelMultiplier: 50
+    Shield: 2
+    Base: 2
+    Regeneration: 0.17
+    BaseShieldRegeneration: 0.17
+    LevelMultiplier: 10
     B_Shield: 0
     B_Base: 0
     B_Regeneration: 0
@@ -407,7 +407,7 @@ MonoBehaviour:
     AttackSpeed: 1
     AttackSpeedRatio: 5
     BulletSpeed: 5
-    LeaveSpeed: 3
+    LeaveSpeed: 1
     LevelMultiplier: 0
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
@@ -421,7 +421,7 @@ MonoBehaviour:
     B_IdleToAtkDuration: 0.2
     B_AtkToIdleDuration: 0.2
   DamageStats:
-    BaseDamage: 10
+    BaseDamage: 5
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []

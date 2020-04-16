@@ -384,7 +384,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ff17c29dc8930b4468b2b83d072b7604, type: 2}
   - {fileID: 11400000, guid: 271f9b72a4b43c2409dcd4d4f7bcbab0, type: 2}
   ParticleID: 2
-  Elemental: 0
+  Elemental: 6
   ClassType: 3
   CharacterLevel: 0
   UseLayeringSystem: 1
@@ -416,10 +416,10 @@ MonoBehaviour:
     B_BaseHealthRegeneration: 0
     B_LevelMultiplier: 0
   StaminaStats:
-    Stamina: 40
-    Base: 40
-    Regeneration: 1
-    BaseStaminaRegeneration: 1
+    Stamina: 10
+    Base: 10
+    Regeneration: 0.1
+    BaseStaminaRegeneration: 0.1
     LevelMultiplier: 0
     B_Stamina: 0
     B_Base: 0
@@ -427,11 +427,11 @@ MonoBehaviour:
     B_BaseStaminaRegeneration: 0
     B_LevelMultiplier: 0
   ShieldStats:
-    Shield: 50
-    Base: 50
-    Regeneration: 8
-    BaseShieldRegeneration: 8
-    LevelMultiplier: 50
+    Shield: 2
+    Base: 2
+    Regeneration: 0.15
+    BaseShieldRegeneration: 0.15
+    LevelMultiplier: 10
     B_Shield: 0
     B_Base: 0
     B_Regeneration: 0
@@ -443,7 +443,7 @@ MonoBehaviour:
     AttackSpeed: 1
     AttackSpeedRatio: 5
     BulletSpeed: 5
-    LeaveSpeed: 3
+    LeaveSpeed: 1.2
     LevelMultiplier: 0
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
@@ -464,7 +464,7 @@ MonoBehaviour:
     CurrentElemental: 0
     LevelMultiplier: 0
   DefenceStats:
-    BaseDefence: 10
+    BaseDefence: 3
     Invulnerability: 0.2
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
