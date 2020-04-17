@@ -238,7 +238,7 @@ public class CharacterType_Script : BaseCharacter
                     yield break;
                 }
             }
-            if (chargingAttackTimer > 1)
+            if (chargingAttackTimer > 1f && CharInfo.Health > 0f)
             {
                 currentAttackPhase = AttackPhasesType.Loading;
                 StopPowerfulAtk = SpecialAttackStatus.Start;

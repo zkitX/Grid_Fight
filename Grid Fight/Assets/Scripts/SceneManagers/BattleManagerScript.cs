@@ -465,6 +465,11 @@ public class BattleManagerScript : MonoBehaviour
             CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving.ToString())
         {
             //Debug.Log(val);
+            if(CurrentSelectedCharacters[playerController].Character.CharInfo.Health <= 0f)
+            {
+                DeselectCharacter(cName, CurrentSelectedCharacters[playerController].Character.UMS.Side, playerController);
+                yield break;
+            }
             yield return null;
         }
 
