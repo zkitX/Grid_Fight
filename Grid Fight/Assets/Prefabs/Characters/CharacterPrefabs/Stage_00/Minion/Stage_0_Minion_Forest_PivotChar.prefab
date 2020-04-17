@@ -387,12 +387,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Waspe
   CharacterIcons: []
   AudioProfile: {fileID: 11400000, guid: 31b8d92f46d622d4eb9cbc26a9c8778e, type: 2}
   BaseCharacterType: 1
   CharacterID: 1002
-  CurrentAttackTypeInfo: []
+  CurrentAttackTypeInfo:
+  - {fileID: 11400000, guid: 6732eb1582c27754b87167243eabf8e2, type: 2}
   ParticleID: 14
   Elemental: 0
   ClassType: 3
@@ -437,8 +438,8 @@ MonoBehaviour:
     B_BaseStaminaRegeneration: 0
     B_LevelMultiplier: 0
   ShieldStats:
-    Shield: 50
-    Base: 50
+    Shield: 2
+    Base: 2
     Regeneration: 8
     BaseShieldRegeneration: 8
     LevelMultiplier: 50
@@ -453,7 +454,7 @@ MonoBehaviour:
     AttackSpeed: 1
     AttackSpeedRatio: 5
     BulletSpeed: 5
-    LeaveSpeed: 3
+    LeaveSpeed: 2
     LevelMultiplier: 0
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2

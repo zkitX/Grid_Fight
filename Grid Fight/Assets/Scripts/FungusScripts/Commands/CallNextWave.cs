@@ -76,7 +76,7 @@ public class CallNextWave : Command
         
         yield return WaveManagerScript.Instance.StartWaveByName(WaveName);
 
-        yield return new WaitForSecondsRealtime(2);
+       // yield return new WaitForSecondsRealtime(2);
 
         SetNextBlockFromName(NextBlockToFire);
     }

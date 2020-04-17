@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage04-Minion-Desert-WeakAttack-Daggar
   m_EditorClassIdentifier: 
-  CurrentAttackType: 0
+  Chances: 100
+  CurrentAttackType: 1
   AttackRatioMultiplier: 1
   DamageMultiplier: {x: 1, y: 1}
   AttackAnim: 0
@@ -49,6 +50,15 @@ MonoBehaviour:
     - Delay: 2
       Show: 1
       BulletEffectTiles:
+      - Pos: {x: 0, y: 1}
+        HasEffect: 0
+        Effects: []
+        EffectChances: 100
+        HasDifferentParticles: 0
+        ParticlesID: 0
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
       - Pos: {x: 0, y: 0}
         HasEffect: 0
         Effects: []
@@ -58,7 +68,70 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
-    StatToCheck: 0
-    ValueChecker: 0
+      - Pos: {x: 0, y: -1}
+        HasEffect: 0
+        Effects: []
+        EffectChances: 100
+        HasDifferentParticles: 0
+        ParticlesID: 0
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: -1, y: 0}
+        HasEffect: 0
+        Effects: []
+        EffectChances: 100
+        HasDifferentParticles: 0
+        ParticlesID: 0
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: -1, y: 1}
+        HasEffect: 0
+        Effects: []
+        EffectChances: 100
+        HasDifferentParticles: 0
+        ParticlesID: 0
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: -1, y: -1}
+        HasEffect: 0
+        Effects: []
+        EffectChances: 100
+        HasDifferentParticles: 0
+        ParticlesID: 0
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 1, y: -1}
+        HasEffect: 0
+        Effects: []
+        EffectChances: 100
+        HasDifferentParticles: 0
+        ParticlesID: 0
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 1, y: 0}
+        HasEffect: 0
+        Effects: []
+        EffectChances: 100
+        HasDifferentParticles: 0
+        ParticlesID: 0
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 1, y: 1}
+        HasEffect: 0
+        Effects: []
+        EffectChances: 100
+        HasDifferentParticles: 0
+        ParticlesID: 0
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+    StatToCheck: 1
+    ValueChecker: 2
     PercToCheck: 0
     Chances: 100
