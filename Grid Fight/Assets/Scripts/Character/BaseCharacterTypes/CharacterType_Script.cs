@@ -478,19 +478,13 @@ public class CharacterType_Script : BaseCharacter
         {
             SpineAnimatorsetup();
         }
-        
-
-        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle.ToString())
-        {
-            return;
-        }
 
         if (!animState.ToString().Contains("Atk"))
         {
             currentAttackPhase = AttackPhasesType.End;
         }
 
-        if (SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Atk2_AtkToIdle.ToString()))
+        if (SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Atk2_AtkToIdle.ToString()) && animState != CharacterAnimationStateType.Defeat_ReverseArrive)
         {
             return;
         }
