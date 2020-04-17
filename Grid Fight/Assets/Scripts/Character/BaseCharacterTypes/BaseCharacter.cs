@@ -895,8 +895,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public void Buff_DebuffCo(Buff_DebuffClass bdClass)
     {
-        return;
-
         BuffDebuffClass item = BuffsDebuffsList.Where(r => r.Stat == bdClass.Stat).FirstOrDefault();
         string[] newBuffDebuff = bdClass.Name.Split('_');
         if (item == null)

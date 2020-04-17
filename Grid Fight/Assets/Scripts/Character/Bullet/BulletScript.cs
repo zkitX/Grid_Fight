@@ -166,6 +166,7 @@ public class BulletScript : MonoBehaviour
                     MakeDamage(target);
                 }
                 FireEffectParticles(GridManagerScript.Instance.GetBattleTile(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]).transform.position, i == bet.Count - 1 ? true : false);
+                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Impact, AudioBus.HighPriority, GridManagerScript.Instance.GetBattleTile(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]).transform);
             }
             else
             {

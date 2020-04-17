@@ -8,6 +8,8 @@ public class UniversalAudioProfileSO : ScriptableObject
     [Header("Battle General")]
     public AudioClipInfoClass ArrivalSpawn;
     public AudioClipInfoClass ArrivalImpact;
+    public AudioClipInfoClass SpecialAttackChargingLoop;
+    public AudioClipInfoClass SpecialAttackChargingRelease;
 
     [Header("Shielding")]
     public AudioClipInfoClass BasicShield;

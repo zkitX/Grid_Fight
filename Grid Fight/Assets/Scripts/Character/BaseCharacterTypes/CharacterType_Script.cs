@@ -308,6 +308,13 @@ public class CharacterType_Script : BaseCharacter
         nextAttack = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackAnim == atkType).First();
         CameraManagerScript.Instance.CameraShake(CameraShakeType.Powerfulattack);
 
+        if (chargingAudio != null)
+        {
+            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingRelease, AudioBus.LowPriority, transform);
+            chargingAudio.ResetSource();
+            chargingAudio = null;
+        }
+
         SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
 
         ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.CastActivation, transform.position, UMS.Side);
@@ -321,8 +328,10 @@ public class CharacterType_Script : BaseCharacter
         SetAnimation(CharacterAnimationStateType.Atk1_Loop);
     }
 
+    public ManagedAudioSource chargingAudio = null;
     public void ChargingLoop(string atk)
     {
+        if(chargingAudio == null) chargingAudio = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoop, AudioBus.MediumPriority, transform, true);
         SetAnimation(atk + "_Charging", true);
     }
 

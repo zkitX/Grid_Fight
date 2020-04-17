@@ -15,6 +15,8 @@ public class AudioManagerMk2 : MonoBehaviour
     public int uiSourcesNum = 1;
     public int sourcesPerChar = 3;
 
+    protected List<AudioClip> audioPlayedLastFrame = new List<AudioClip>();
+
     private void Awake()
     {
         Instance = this;
@@ -56,6 +58,8 @@ public class AudioManagerMk2 : MonoBehaviour
 
     public ManagedAudioSource PlaySound(AudioSourceType sourceType, AudioClipInfoClass clipInfo, AudioBus priority, Transform sourceOrigin = null, bool loop = false)
     {
+        if (ClipPlayedThisFrame(clipInfo.clip)) return null;
+
         ManagedAudioSource source = GetFreeSource(priority, sourceType);
 
         source.gameObject.SetActive(true);
@@ -63,12 +67,40 @@ public class AudioManagerMk2 : MonoBehaviour
         source.SetAudioClipInfo(clipInfo);
         source.bus = priority;
         source.PlaySound(loop);
-
+        AddClipPlayedLastFrame(clipInfo.clip);
         return source;
     }
 
     public float GetDampener(AudioSourceType type, AudioBus priorityToCompare)
     {
         return sources.Where(r => r.bus == AudioBus.HighPriority && r.type == type && priorityToCompare != AudioBus.HighPriority).FirstOrDefault() == null ? 1f : 0.5f;
+    }
+
+
+
+
+    public bool ClipPlayedThisFrame(AudioClip clip)
+    {
+        if (audioPlayedLastFrame.Where(r => r == clip).FirstOrDefault() != null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void AddClipPlayedLastFrame(AudioClip clip)
+    {
+        audioPlayedLastFrame.Add(clip);
+        StartCoroutine(ManageClipsPlayedLastFrame(clip));
+    }
+
+    IEnumerator ManageClipsPlayedLastFrame(AudioClip clip)
+    {
+        yield return null;
+        audioPlayedLastFrame.Remove(clip);
+
     }
 }
