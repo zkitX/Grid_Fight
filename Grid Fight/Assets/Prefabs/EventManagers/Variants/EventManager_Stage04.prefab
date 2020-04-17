@@ -186,7 +186,7 @@ MonoBehaviour:
   Grid: {fileID: 11400000, guid: fb84e7f9cc566e442b76a3588c2b3325, type: 2}
   CallAllAlly: 1
   UseWave: 0
-  NextBlockToFire: Jump
+  NextBlockToFire: Zeta
 --- !u!114 &619542043094756592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -749,7 +749,7 @@ MonoBehaviour:
   Grid: {fileID: 11400000, guid: fb84e7f9cc566e442b76a3588c2b3325, type: 2}
   CallAllAlly: 0
   UseWave: 1
-  NextBlockToFire: Jump
+  NextBlockToFire: Miranda
 --- !u!114 &3711573440047877284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1044,6 +1044,33 @@ MonoBehaviour:
   description: Masked Girl
   character: {fileID: 1189469300503018256}
   portrait: {fileID: 21300000, guid: 9e6775b7fd16b624eb659df780a94506, type: 3}
+  voiceOverClip: {fileID: 0}
+  showAlways: 1
+  showCount: 1
+  extendPrevious: 0
+  fadeWhenDone: 1
+  waitForClick: 1
+  stopVoiceover: 1
+  waitForVO: 0
+  setSayDialog: {fileID: 0}
+--- !u!114 &5069447625585344234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7147962789751134089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ddce62b0543adb43adb095306606da6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 150
+  indentLevel: 0
+  storyText: '...'
+  description: Donna
+  character: {fileID: 7774980881361508783}
+  portrait: {fileID: 21300000, guid: 6ab46d3be6d74fe4f8d759d19700050d, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1730,33 +1757,6 @@ MonoBehaviour:
     floatRef: {fileID: 0}
     floatVal: 0.5
   durationOLD: 0
---- !u!114 &5069447625585344234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7147962789751134089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ddce62b0543adb43adb095306606da6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 150
-  indentLevel: 0
-  storyText: '...'
-  description: Donna
-  character: {fileID: 7774980881361508783}
-  portrait: {fileID: 21300000, guid: 6ab46d3be6d74fe4f8d759d19700050d, type: 3}
-  voiceOverClip: {fileID: 0}
-  showAlways: 1
-  showCount: 1
-  extendPrevious: 0
-  fadeWhenDone: 1
-  waitForClick: 1
-  stopVoiceover: 1
-  waitForVO: 0
-  setSayDialog: {fileID: 0}
 --- !u!1001 &5051400719554334882
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1884,10 +1884,20 @@ PrefabInstance:
       propertyPath: commandList.Array.data[20]
       value: 
       objectReference: {fileID: 3639853734720380910}
+    - target: {fileID: -4115575225570086771, guid: 8718c6fea7df37f419be6a245a651994,
+        type: 3}
+      propertyPath: blockName
+      value: Zeta
+      objectReference: {fileID: 0}
+    - target: {fileID: 5710198594571133030, guid: 8718c6fea7df37f419be6a245a651994,
+        type: 3}
+      propertyPath: blockName
+      value: Miranda
+      objectReference: {fileID: 0}
     - target: {fileID: 5761374260461654462, guid: 8718c6fea7df37f419be6a245a651994,
         type: 3}
       propertyPath: WaveName
-      value: WaveAlanda
+      value: WaveMiranda
       objectReference: {fileID: 0}
     - target: {fileID: 5761374260461654462, guid: 8718c6fea7df37f419be6a245a651994,
         type: 3}
@@ -1945,13 +1955,13 @@ PrefabInstance:
     - target: {fileID: 2677535637017708306, guid: 8718c6fea7df37f419be6a245a651994,
         type: 3}
       propertyPath: selectedCommands.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2677535637017708306, guid: 8718c6fea7df37f419be6a245a651994,
         type: 3}
       propertyPath: selectedBlocks.Array.data[0]
       value: 
-      objectReference: {fileID: 69986199398211631}
+      objectReference: {fileID: 658824544653979844}
     - target: {fileID: 2677535637017708306, guid: 8718c6fea7df37f419be6a245a651994,
         type: 3}
       propertyPath: selectedCommands.Array.data[0]
@@ -2597,6 +2607,18 @@ PrefabInstance:
     - {fileID: 8998609690489746903, guid: 8718c6fea7df37f419be6a245a651994, type: 3}
     - {fileID: -7149378653144744619, guid: 8718c6fea7df37f419be6a245a651994, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8718c6fea7df37f419be6a245a651994, type: 3}
+--- !u!114 &7167517714044313190 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2693730173527658180, guid: 8718c6fea7df37f419be6a245a651994,
+    type: 3}
+  m_PrefabInstance: {fileID: 5051400719554334882}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7147962789751134089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35567ae0fbdff9447b617f78a1a914b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6756294103606135759 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2006638958212209517, guid: 8718c6fea7df37f419be6a245a651994,
@@ -2633,18 +2655,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4409152025521727532 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -348366683089733490, guid: 8718c6fea7df37f419be6a245a651994,
-    type: 3}
-  m_PrefabInstance: {fileID: 5051400719554334882}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7147962789751134089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3102108732945439529 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7860691493968268171, guid: 8718c6fea7df37f419be6a245a651994,
@@ -2663,16 +2673,16 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5051400719554334882}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7167517714044313190 stripped
+--- !u!114 &658824544653979844 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2693730173527658180, guid: 8718c6fea7df37f419be6a245a651994,
+  m_CorrespondingSourceObject: {fileID: 5710198594571133030, guid: 8718c6fea7df37f419be6a245a651994,
     type: 3}
   m_PrefabInstance: {fileID: 5051400719554334882}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7147962789751134089}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35567ae0fbdff9447b617f78a1a914b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2188783270286187199 stripped
@@ -2681,16 +2691,16 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5051400719554334882}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &69986199398211631 stripped
+--- !u!114 &4409152025521727532 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -4115575225570086771, guid: 8718c6fea7df37f419be6a245a651994,
+  m_CorrespondingSourceObject: {fileID: -348366683089733490, guid: 8718c6fea7df37f419be6a245a651994,
     type: 3}
   m_PrefabInstance: {fileID: 5051400719554334882}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7147962789751134089}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &7443680168355362514 stripped
