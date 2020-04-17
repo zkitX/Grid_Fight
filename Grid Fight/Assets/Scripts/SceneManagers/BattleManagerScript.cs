@@ -525,7 +525,10 @@ public class BattleManagerScript : MonoBehaviour
             charToRemove = CurrentSelectedCharacters.Values.Where(r => r.Character.CharInfo.CharacterID == charToRemoveName).FirstOrDefault().Character;
         }*/
         BaseCharacter charToRemove = AllCharactersOnField.Where(r => r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
-        if (charToRemove == null) charToRemove = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
+        if (charToRemove == null)
+        {
+            charToRemove = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
+        }
         Debug.Log("Character removed: " + charToRemove.CharInfo.CharacterID.ToString());
         ControllerType controller = ControllerType.None;
         if (CurrentSelectedCharacters.Values != null && CurrentSelectedCharacters.Where(r => r.Value.Character == charToRemove).FirstOrDefault().Key != ControllerType.None)
@@ -547,6 +550,17 @@ public class BattleManagerScript : MonoBehaviour
         }
         StartCoroutine(RemoveCharacterFromBaord(controller, charToRemove));
          */
+    }
+
+    public void ResetAllActiveChars()
+    {
+        foreach (CharacterType_Script item in AllCharactersOnField.Where(r => r.IsOnField).ToList())
+        {
+            item.isMoving = false;
+            item.isDefending = false;
+            item.isSpecialLoading = false;
+            item.chargingAttackTimer = 0f;
+        }
     }
 
     //Stop the loading of a char

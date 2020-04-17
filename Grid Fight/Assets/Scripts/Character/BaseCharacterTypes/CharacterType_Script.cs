@@ -177,6 +177,7 @@ public class CharacterType_Script : BaseCharacter
     }
 
     //Load the special attack and fire it if the load is complete
+    public float chargingAttackTimer = 0;
     public IEnumerator StartChargingAttack(AttackAnimType nextAtkType)
     {
         if (CharInfo.StaminaStats.Stamina - CharInfo.PowerfulAttac.Stamina_Cost_Atk >= 0 
@@ -199,14 +200,14 @@ public class CharacterType_Script : BaseCharacter
             GameObject ps = null;
             bool isChargingParticlesOn = false;
             isSpecialLoading = true;
-            float timer = 0;
             currentAttackPhase = AttackPhasesType.Start;
             SetAnimation(atkType + "_IdleToAtk");
-            
+            chargingAttackTimer = 0;
+
             while (isSpecialLoading && !VFXTestMode)
             {
                 yield return BattleManagerScript.Instance.PauseUntil();
-                timer += Time.fixedDeltaTime;
+                chargingAttackTimer += Time.fixedDeltaTime;
 
                 if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle.ToString())
                 {
@@ -237,7 +238,7 @@ public class CharacterType_Script : BaseCharacter
                     yield break;
                 }
             }
-            if (timer > 1)
+            if (chargingAttackTimer > 1)
             {
                 currentAttackPhase = AttackPhasesType.Loading;
                 StopPowerfulAtk = SpecialAttackStatus.Start;

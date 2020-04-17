@@ -38,6 +38,8 @@ public class CallNextWave : Command
         }
 
         //GridManagerScript.Instance.BattleTiles.ForEach(r=> r.BattleTargetScript.StopAllCoroutines());
+        BattleManagerScript.Instance.ResetAllActiveChars();
+        yield return new WaitForSecondsRealtime(1f);
         BattleManagerScript.Instance.CurrentBattleState = BattleState.FungusPuppets;
         if (CallAllAlly)
         {

@@ -83,11 +83,15 @@ public class WaveManagerScript : MonoBehaviour
         return mostEnemiesPossible;
     }
 
-    public IEnumerator SpawnCharFromGivenWave(string waveName, CharacterNameType characterID, string charIdentifier, bool isRandom, Vector2Int pos)
+    public IEnumerator SpawnCharFromGivenWave(string waveName, CharacterNameType characterID, string charIdentifier, bool isRandom, Vector2Int pos, bool removeFromWave)
     {
         WavePhaseClass wpc = WavePhases.Where(r => r.name == waveName).First();
         CurrentWaveChar = wpc.ListOfEnemy.Where(a => a.TypeOfCharacter.CharacterName == characterID).First();
         BaseCharacter newChar = GetWaveCharacter(CurrentWaveChar.TypeOfCharacter);
+        if (removeFromWave)
+        {
+            CurrentWaveChar.NumberOfCharacter--;
+        }
         FungusSpawnedChars.Add(charIdentifier, newChar);
         yield return SpawChar(newChar, isRandom, pos, true);
     }

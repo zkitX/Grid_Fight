@@ -76,7 +76,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public bool SwapWhenPossible = false;
     public GameObject chargeParticles = null;
     protected bool canDefend = true;
-    protected bool isDefending = false;
+    public bool isDefending = false;
     public int shotsLeftInAttack
     {
         get

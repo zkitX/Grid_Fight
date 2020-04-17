@@ -17,6 +17,7 @@ public class CallWaveMinionToSpawn : Command
 
     public string WaveName;
     public bool IsRandomPos = true;
+    public bool removeFromWave = false;
     [ConditionalField("IsRandomPos", true)] public Vector2Int SpawningPos;
 
     #region Public members
@@ -28,7 +29,7 @@ public class CallWaveMinionToSpawn : Command
 
     IEnumerator WaveMinionToSpawn()
     {
-        yield return WaveManagerScript.Instance.SpawnCharFromGivenWave(WaveName, characterID, CharIdentifier, IsRandomPos, SpawningPos);
+        yield return WaveManagerScript.Instance.SpawnCharFromGivenWave(WaveName, characterID, CharIdentifier, IsRandomPos, SpawningPos, removeFromWave);
         Continue();
     }
 

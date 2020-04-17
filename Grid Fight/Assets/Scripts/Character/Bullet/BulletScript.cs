@@ -29,6 +29,8 @@ public class BulletScript : MonoBehaviour
     public Vector2Int StartingTile;
     public float ChildrenExplosionDelay;
     public float EffectChances;
+
+    bool isMoving = false;
     public CastLoopImpactAudioClipInfoClass attackAudioType;
     ManagedAudioSource bulletSoundSource = null;
     public List<ScriptableObjectAttackEffect> BulletEffects = new List<ScriptableObjectAttackEffect>();
@@ -52,7 +54,7 @@ public class BulletScript : MonoBehaviour
     //Move the bullet on a determinated tile using the BulletInfo.Trajectory
     public IEnumerator MoveToTile()
 	{
-        if(attackAudioType.Loop.clip != null)
+        if (attackAudioType.Loop.clip != null)
         {
             bulletSoundSource = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Loop, AudioBus.LowPriority, transform, true);
         }
@@ -75,7 +77,7 @@ public class BulletScript : MonoBehaviour
         PS.GetComponent<PSTimeGroup>().UpdatePSTime(CharInfo.SpeedStats.BulletSpeed);
         //float Duration = Vector3.Distance(transform.position, destination) / CharInfo.BulletSpeed;
         Vector3 res;
-        bool isMoving = true;
+        isMoving = true;
         float ti = 0;
         while (isMoving)
         {
@@ -208,8 +210,9 @@ public class BulletScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //If the bullet collide with a character 
-        if(other.tag.Contains("Side") && other.tag != Side.ToString() && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script) 
+        if(other.tag.Contains("Side") && other.tag != Side.ToString() && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && isMoving) 
         {
+            isMoving = false;
             BaseCharacter target = other.GetComponentInParent<BaseCharacter>();
             MakeDamage(target);
             //fire the Effect

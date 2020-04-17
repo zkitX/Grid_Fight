@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage00_Character_Forest_StrongAttack
   m_EditorClassIdentifier: 
+  Chances: 100
   CurrentAttackType: 0
   AttackRatioMultiplier: 1
   DamageMultiplier: {x: 2, y: 3}
@@ -21,36 +22,45 @@ MonoBehaviour:
   ParticlesAtk:
     BulletTrajectories:
     - Show: 1
-      BulletDistanceInTile: {x: 0, y: 15}
+      BulletDistanceInTile: {x: -1, y: 15}
       Trajectory_Y:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: -0.0031013489
+          time: 0
           value: 0
-          inSlope: 6.531621
-          outSlope: 6.531621
+          inSlope: 8.910054
+          outSlope: 8.910054
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.15
-          value: 1
-          inSlope: 0.0059642494
-          outSlope: 0.0059642494
+          time: 0.110362284
+          value: 0.98333395
+          inSlope: -0.37353307
+          outSlope: -0.37353307
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.046490446
+          outWeight: 0.2865271
         - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
+          time: 0.272086
+          value: 0.6714571
+          inSlope: -1.4300805
+          outSlope: -1.4300805
+          tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
+          outWeight: 0.07855719
+        - serializedVersion: 3
+          time: 1
+          value: 0.4
+          inSlope: -0.009148113
+          outSlope: -0.009148113
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.14944394
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -85,43 +95,70 @@ MonoBehaviour:
       Effects: []
       EffectChances: 100
     - Show: 1
-      BulletDistanceInTile: {x: 0, y: 15}
+      BulletDistanceInTile: {x: 1, y: 15}
       Trajectory_Y:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: -6.6666665
-          outSlope: -6.6666665
+          inSlope: -8.910052
+          outSlope: -8.910052
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0
+          inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.15
-          value: -1
-          inSlope: 0.08853817
-          outSlope: 0.08853817
+          time: 0.1103623
+          value: -0.9833339
+          inSlope: -0.37353307
+          outSlope: -0.37353307
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.07568309
+          outWeight: 0.2865271
         - serializedVersion: 3
-          time: 1
-          value: -1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
+          time: 0.4007283
+          value: -0.4253596
+          inSlope: 1.3701237
+          outSlope: 1.3701237
+          tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
+          outWeight: 0.15483284
+        - serializedVersion: 3
+          time: 0.9940239
+          value: 0.0077803433
+          inSlope: -0.009148113
+          outSlope: -0.009148113
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.14944394
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
       Trajectory_Z:
         serializedVersion: 2
-        m_Curve: []
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -134,13 +171,49 @@ MonoBehaviour:
       BulletDistanceInTile: {x: 0, y: 15}
       Trajectory_Y:
         serializedVersion: 2
-        m_Curve: []
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
       Trajectory_Z:
         serializedVersion: 2
-        m_Curve: []
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
