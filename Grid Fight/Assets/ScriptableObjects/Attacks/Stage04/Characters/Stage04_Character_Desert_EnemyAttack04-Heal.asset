@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage04_Character_Desert_Skill2
+  m_Name: Stage04_Character_Desert_EnemyAttack04-Heal
   m_EditorClassIdentifier: 
   Chances: 100
-  CurrentAttackType: 0
-  AttackRatioMultiplier: 1
-  DamageMultiplier: {x: 1, y: 1}
-  AttackAnim: 4
-  PrefixAnim: 2
+  CurrentAttackType: 1
+  AttackRatioMultiplier: 0
+  DamageMultiplier: {x: 2, y: 2}
+  AttackAnim: 0
+  PrefixAnim: 0
   TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories:
@@ -78,9 +78,42 @@ MonoBehaviour:
       EffectChances: 100
     CharacterClass: 0
   TilesAtk:
-    AtkType: 0
-    BulletTrajectories: []
-    StatToCheck: 0
+    AtkType: 2
+    BulletTrajectories:
+    - Delay: 4
+      Show: 1
+      BulletEffectTiles:
+      - Pos: {x: 0, y: 0}
+        HasEffect: 1
+        Effects:
+        - {fileID: 11400000, guid: 01550045e1a3af44d934eb4bef73fb1e, type: 2}
+        EffectChances: 100
+        HasDifferentParticles: 1
+        ParticlesID: 6
+        IsEffectOnTile: 1
+        TileParticlesID: 4
+        DurationOnTile: 2
+      - Pos: {x: -1, y: 0}
+        HasEffect: 1
+        Effects:
+        - {fileID: 11400000, guid: 01550045e1a3af44d934eb4bef73fb1e, type: 2}
+        EffectChances: 100
+        HasDifferentParticles: 1
+        ParticlesID: 6
+        IsEffectOnTile: 1
+        TileParticlesID: 4
+        DurationOnTile: 2
+      - Pos: {x: 1, y: 0}
+        HasEffect: 1
+        Effects:
+        - {fileID: 11400000, guid: 01550045e1a3af44d934eb4bef73fb1e, type: 2}
+        EffectChances: 100
+        HasDifferentParticles: 1
+        ParticlesID: 6
+        IsEffectOnTile: 1
+        TileParticlesID: 4
+        DurationOnTile: 2
+    StatToCheck: 1
     ValueChecker: 0
-    PercToCheck: 0
-    Chances: 0
+    PercToCheck: 60
+    Chances: 100
