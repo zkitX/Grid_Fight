@@ -52,7 +52,7 @@ MonoBehaviour:
   - name: Wave1
     IsRandom: 1
     MaxEnemyOnScreen: 2
-    DelayBetweenChars: 1
+    DelayBetweenChars: 0
     ListOfEnemy:
     - name: Lady Bush
       NPCType: 0
@@ -104,32 +104,66 @@ MonoBehaviour:
       IsRandomSpowiningTile: 1
       SpowningTile:
       - {x: 4, y: 11}
-    - name: Lady Bush
+  - name: Wave2
+    IsRandom: 0
+    MaxEnemyOnScreen: 3
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Rose
       NPCType: 1
-      NumberOfCharacter: 3
+      NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 1085
-        Health: {x: 40, y: 45}
-        HealthRegeneration: {x: 0.1, y: 0.2}
+        Health: {x: 300, y: 300}
+        HealthRegeneration: {x: 1, y: 1}
         CharacterClass: 0
-        BaseDamage: {x: 8, y: 9}
+        BaseDamage: {x: 14, y: 14}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 0.8, y: 1}
-        AttackSpeedRatio: {x: 7, y: 8}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 12, y: 15}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 1, y: 1}
-        MovementTimer: {x: 1, y: 1}
-        UpDownPerc: 35
+        MovementSpeed: {x: 1.2, y: 1.2}
+        MovementTimer: {x: 0, y: 0}
+        UpDownPerc: 20
         Events: []
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
       IsRandomSpowiningTile: 1
       SpowningTile:
-      - {x: 4, y: 11}
-  - name: Wave2
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Lady Bush
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1081
+        Health: {x: 60, y: 80}
+        HealthRegeneration: {x: 1, y: 1}
+        CharacterClass: 0
+        BaseDamage: {x: 8, y: 9}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.2, y: 1.2}
+        MovementTimer: {x: 0, y: 0}
+        UpDownPerc: 25
+        Events: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+  - name: Wave3
     IsRandom: 0
     MaxEnemyOnScreen: 4
     DelayBetweenChars: 1
@@ -217,7 +251,7 @@ MonoBehaviour:
       - {x: 4, y: 6}
     - name: Monkena
       NPCType: 0
-      NumberOfCharacter: 4
+      NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 1083
         Health: {x: 50, y: 55}
@@ -242,146 +276,6 @@ MonoBehaviour:
       - {x: 0, y: 6}
       - {x: 2, y: 6}
       - {x: 4, y: 6}
-  - name: Wave3
-    IsRandom: 0
-    MaxEnemyOnScreen: 3
-    DelayBetweenChars: 0
-    ListOfEnemy:
-    - name: Monkena
-      NPCType: 0
-      NumberOfCharacter: 4
-      TypeOfCharacter:
-        CharacterName: 1083
-        Health: {x: 45, y: 50}
-        HealthRegeneration: {x: 0.2, y: 0.2}
-        CharacterClass: 0
-        BaseDamage: {x: 8, y: 12}
-        RapidAttackMultiplier: {x: 1, y: 1}
-        PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 1, y: 1.5}
-        AttackSpeedRatio: {x: 6, y: 10}
-        Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 0.8, y: 1.2}
-        MovementTimer: {x: 1, y: 1}
-        UpDownPerc: 18
-        Events: []
-      AreThereStartingEnemy: 0
-      inRandomPos: 1
-      StartingEnemyTiles: []
-      IsRandomSpowiningTile: 1
-      SpowningTile:
-      - {x: 4, y: 11}
-    - name: Rose
-      NPCType: 1
-      NumberOfCharacter: 1
-      TypeOfCharacter:
-        CharacterName: 1085
-        Health: {x: 300, y: 350}
-        HealthRegeneration: {x: 1, y: 1}
-        CharacterClass: 0
-        BaseDamage: {x: 15, y: 19}
-        RapidAttackMultiplier: {x: 1, y: 1}
-        PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 1, y: 1.5}
-        AttackSpeedRatio: {x: 6, y: 10}
-        Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 0.8, y: 1.2}
-        MovementTimer: {x: 1, y: 1}
-        UpDownPerc: 20
-        Events: []
-      AreThereStartingEnemy: 0
-      inRandomPos: 1
-      StartingEnemyTiles: []
-      IsRandomSpowiningTile: 1
-      SpowningTile:
-      - {x: 4, y: 11}
-    - name: Monkena
-      NPCType: 0
-      NumberOfCharacter: 8
-      TypeOfCharacter:
-        CharacterName: 1083
-        Health: {x: 45, y: 50}
-        HealthRegeneration: {x: 0.2, y: 0.2}
-        CharacterClass: 0
-        BaseDamage: {x: 8, y: 12}
-        RapidAttackMultiplier: {x: 1, y: 1}
-        PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 1, y: 1.5}
-        AttackSpeedRatio: {x: 6, y: 10}
-        Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 0.8, y: 1.2}
-        MovementTimer: {x: 1, y: 1}
-        UpDownPerc: 18
-        Events: []
-      AreThereStartingEnemy: 0
-      inRandomPos: 1
-      StartingEnemyTiles: []
-      IsRandomSpowiningTile: 1
-      SpowningTile:
-      - {x: 4, y: 11}
-  - name: Wave4
-    IsRandom: 1
-    MaxEnemyOnScreen: 1
-    DelayBetweenChars: 0
-    ListOfEnemy:
-    - name: Lady Bush
-      NPCType: 0
-      NumberOfCharacter: 4
-      TypeOfCharacter:
-        CharacterName: 1081
-        Health: {x: 5, y: 5}
-        HealthRegeneration: {x: 0.2, y: 0.2}
-        CharacterClass: 0
-        BaseDamage: {x: 5, y: 6}
-        RapidAttackMultiplier: {x: 1, y: 1}
-        PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 1, y: 1.5}
-        AttackSpeedRatio: {x: 3, y: 4}
-        Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 0, y: 0}
-        MovementTimer: {x: 0, y: 0}
-        UpDownPerc: 18
-        Events: []
-      AreThereStartingEnemy: 0
-      inRandomPos: 1
-      StartingEnemyTiles: []
-      IsRandomSpowiningTile: 1
-      SpowningTile:
-      - {x: 4, y: 11}
-  - name: Wave5
-    IsRandom: 1
-    MaxEnemyOnScreen: 1
-    DelayBetweenChars: 0
-    ListOfEnemy:
-    - name: Lady Bush
-      NPCType: 0
-      NumberOfCharacter: 1
-      TypeOfCharacter:
-        CharacterName: 1081
-        Health: {x: 5, y: 5}
-        HealthRegeneration: {x: 0.2, y: 0.2}
-        CharacterClass: 0
-        BaseDamage: {x: 5, y: 6}
-        RapidAttackMultiplier: {x: 1, y: 1}
-        PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 1, y: 1.5}
-        AttackSpeedRatio: {x: 3, y: 4}
-        Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 0, y: 0}
-        MovementTimer: {x: 0, y: 0}
-        UpDownPerc: 18
-        Events: []
-      AreThereStartingEnemy: 0
-      inRandomPos: 1
-      StartingEnemyTiles: []
-      IsRandomSpowiningTile: 1
-      SpowningTile:
-      - {x: 4, y: 11}
   isWaveComplete: 0
   WaveCharcters: []
   CurrentWave: 0
