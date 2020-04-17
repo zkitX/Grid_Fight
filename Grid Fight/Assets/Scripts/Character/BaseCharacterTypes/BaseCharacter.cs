@@ -585,7 +585,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 foreach (BattleFieldAttackTileClass target in item.BulletEffectTiles)
                 {
                     Vector2Int res = nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnTarget && charTar != null ? target.Pos + nextAttackPos :
-                        nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnItSelf ? target.Pos + UMS.CurrentTilePos : target.Pos;
+                        nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnItSelf ? target.Pos + UMS.CurrentTilePos : target.Pos + nextAttackPos;
                     if (GridManagerScript.Instance.isPosOnField(res))
                     {
                         BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(res);
@@ -895,6 +895,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public void Buff_DebuffCo(Buff_DebuffClass bdClass)
     {
+        return;
+
         BuffDebuffClass item = BuffsDebuffsList.Where(r => r.Stat == bdClass.Stat).FirstOrDefault();
         string[] newBuffDebuff = bdClass.Name.Split('_');
         if (item == null)
