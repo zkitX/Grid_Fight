@@ -18,7 +18,7 @@ MonoBehaviour:
   DamageMultiplier: {x: 1, y: 1}
   AttackAnim: 0
   PrefixAnim: 0
-  TrajectoriesNumber: 3
+  TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories:
     - Show: 1
@@ -83,63 +83,12 @@ MonoBehaviour:
     - Delay: 2
       Show: 1
       BulletEffectTiles:
-      - Pos: {x: -1, y: 0}
-        HasEffect: 0
-        Effects: []
-        EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
       - Pos: {x: 0, y: 0}
         HasEffect: 0
         Effects: []
         EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-      - Pos: {x: 1, y: 0}
-        HasEffect: 0
-        Effects: []
-        EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-    - Delay: 2.5
-      Show: 1
-      BulletEffectTiles:
-      - Pos: {x: -1, y: -1}
-        HasEffect: 0
-        Effects: []
-        EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-      - Pos: {x: 1, y: -1}
-        HasEffect: 0
-        Effects: []
-        EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-    - Delay: 3
-      Show: 1
-      BulletEffectTiles:
-      - Pos: {x: 0, y: -2}
-        HasEffect: 0
-        Effects: []
-        EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
+        HasDifferentParticles: 1
+        ParticlesID: 6
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
