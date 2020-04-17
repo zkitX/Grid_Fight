@@ -20,6 +20,7 @@ public class CallNextWave : Command
 
     public bool CallAllAlly = true;
 
+    public bool UseWave = true;
 
     public string NextBlockToFire;
 
@@ -59,7 +60,8 @@ public class CallNextWave : Command
         }
 
         yield return new WaitForSecondsRealtime(0.5f);
-        yield return WaveManagerScript.Instance.SettingUpWave(WaveName);
+        if (UseWave)
+            yield return WaveManagerScript.Instance.SettingUpWave(WaveName);
         if (HasAStageUpdate)
         {
             yield return EnvironmentManager.Instance.MoveToNewGrid(HasAStageUpdate ? FightGridToShow : -1, TransitionDuration);
@@ -73,10 +75,13 @@ public class CallNextWave : Command
         }
         // yield return new WaitForSecondsRealtime(30f);
         BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
-        
+
+        if (UseWave)  
         yield return WaveManagerScript.Instance.StartWaveByName(WaveName);
 
-       // yield return new WaitForSecondsRealtime(2);
+        BattleManagerScript.Instance.CurrentBattleState = BattleState.FungusPuppets;
+
+        yield return new WaitForSecondsRealtime(.5f);
 
         SetNextBlockFromName(NextBlockToFire);
     }
