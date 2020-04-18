@@ -204,7 +204,8 @@ public class CharacterType_Script : BaseCharacter
             }
             GameObject ps = null;
             isSpecialLoading = true;
-           
+            chargingAttackTimer = 0;
+
             currentAttackPhase = AttackPhasesType.Start;
             SetAnimation(atkType + "_IdleToAtk", false, 0);
 

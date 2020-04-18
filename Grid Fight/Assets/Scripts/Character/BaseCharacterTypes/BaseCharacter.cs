@@ -371,7 +371,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public void GetAttack()
     {
         currentTileAtks.Clear();
-        currentTileAtks = CharInfo.CurrentAttackTypeInfo.Where(r => r.CurrentAttackType == AttackType.Tile).ToList();
+        currentTileAtks = CharInfo.CurrentAttackTypeInfo.Where(r => r != null && r.CurrentAttackType == AttackType.Tile).ToList();
 
         availableAtks.Clear();
         for (int i = 0; i < currentTileAtks.Count; i++)
@@ -628,7 +628,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     protected float defenceAnimSpeedMultiplier = 5f;
     public void StartDefending()
     {
-        if (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+        if (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || isMoving)
         {
             return;
         }
@@ -1138,6 +1138,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
 
         if (CharInfo.SpeedStats.BaseSpeed <= 0)
+        {
+            return;
+        }
+
+        if (isMoving)
         {
             return;
         }
