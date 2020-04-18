@@ -825,7 +825,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     private List<BattleTileScript> CheckTileAvailability(Vector2Int dir)
     {
         List<Vector2Int> nextPos = CalculateNextPos(dir);
-        if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, UMS.WalkingSide))
+        if (GridManagerScript.Instance.AreBattleTilesInControllerArea(UMS.Pos, nextPos, UMS.WalkingSide))
         {
             return GridManagerScript.Instance.GetBattleTiles(nextPos, UMS.WalkingSide);
         }
