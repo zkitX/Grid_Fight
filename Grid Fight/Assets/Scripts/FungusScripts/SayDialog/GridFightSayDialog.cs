@@ -37,7 +37,7 @@ public class GridFightSayDialog : SayDialog
 
     private void Instance_ButtonAUpEvent(int player)
     {
-        AnimSpeedChanger(5);
+        AnimSpeedChanger(10);
     }
 
     private void Item_AnimationInfoScriptAnimationCompletedEvent()
@@ -49,7 +49,7 @@ public class GridFightSayDialog : SayDialog
     {
         writer.inputFlag = false;
         //Debug.Log(text);
-        AnimSpeedChanger(1);
+        AnimSpeedChanger(2);
         while (BattleManagerScript.Instance == null)
         {
             yield return null;

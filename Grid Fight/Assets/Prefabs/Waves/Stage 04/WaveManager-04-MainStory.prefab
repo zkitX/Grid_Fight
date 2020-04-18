@@ -237,7 +237,7 @@ MonoBehaviour:
         AttackSpeedRatio: {x: 12, y: 15}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 1.4, y: 1.4}
+        MovementSpeed: {x: 1.3, y: 1.3}
         MovementTimer: {x: 0, y: 0}
         UpDownPerc: 17
         Events: []
@@ -364,7 +364,7 @@ MonoBehaviour:
       - {x: 4, y: 6}
   - name: WaveAlanda
     IsRandom: 0
-    MaxEnemyOnScreen: 4
+    MaxEnemyOnScreen: 6
     DelayBetweenChars: 1
     ListOfEnemy:
     - name: Alanda
@@ -475,6 +475,33 @@ MonoBehaviour:
       - {x: 0, y: 6}
       - {x: 2, y: 6}
       - {x: 4, y: 6}
+    - name: Lady Bush
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1081
+        Health: {x: 60, y: 60}
+        HealthRegeneration: {x: 1, y: 1}
+        CharacterClass: 0
+        BaseDamage: {x: 10, y: 12}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.1, y: 1.2}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.1, y: 1}
+        MovementTimer: {x: 0, y: 0}
+        UpDownPerc: 20
+        Events: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
   - name: WaveDaggar
     IsRandom: 0
     MaxEnemyOnScreen: 4
@@ -509,7 +536,7 @@ MonoBehaviour:
       - {x: 4, y: 6}
     - name: Waspe
       NPCType: 0
-      NumberOfCharacter: 7
+      NumberOfCharacter: 9
       TypeOfCharacter:
         CharacterName: 1002
         Health: {x: 20, y: 25}
@@ -551,7 +578,7 @@ MonoBehaviour:
         StaminaRegeneration: {x: 1, y: 1}
         MovementSpeed: {x: 1.2, y: 1.4}
         MovementTimer: {x: 0, y: 0}
-        UpDownPerc: 40
+        UpDownPerc: 20
         Events: []
       AreThereStartingEnemy: 0
       inRandomPos: 1

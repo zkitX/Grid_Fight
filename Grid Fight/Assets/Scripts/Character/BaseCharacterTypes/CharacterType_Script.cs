@@ -167,21 +167,26 @@ public class CharacterType_Script : BaseCharacter
     IEnumerator charging_Co = null;
     public void StartChargingAtk(AttackAnimType atkType)
     {
-        if (charging_Co != null)
-        {
-            StopCoroutine(charging_Co);
-        }
+        /*  if (charging_Co != null)
+          {
+              StopCoroutine(charging_Co);
+          }
 
-        charging_Co = StartChargingAttack(atkType);
-        StartCoroutine(charging_Co);
+          charging_Co = StartChargingAttack(atkType);
+          StartCoroutine(charging_Co);*/
+
+
+        StartCoroutine(StartChargingAttack(atkType));
     }
 
     //Load the special attack and fire it if the load is complete
     public float chargingAttackTimer = 0;
+    bool isChargingParticlesOn = false;
+
     public IEnumerator StartChargingAttack(AttackAnimType nextAtkType)
     {
-        if (CharInfo.StaminaStats.Stamina - CharInfo.PowerfulAttac.Stamina_Cost_Atk >= 0 
-           && CanAttack)
+        if (CharInfo.StaminaStats.Stamina - CharInfo.PowerfulAttac.Stamina_Cost_Atk >= 0
+           && CanAttack && !isMoving && !isSpecialLoading)
         {
             AttackAnimPrefixType atkType = AttackAnimPrefixType.Atk2;
             switch (nextAtkType)
@@ -198,11 +203,10 @@ public class CharacterType_Script : BaseCharacter
                     break;
             }
             GameObject ps = null;
-            bool isChargingParticlesOn = false;
             isSpecialLoading = true;
+           
             currentAttackPhase = AttackPhasesType.Start;
-            SetAnimation(atkType + "_IdleToAtk");
-            chargingAttackTimer = 0;
+            SetAnimation(atkType + "_IdleToAtk", false, 0);
 
             while (isSpecialLoading && !VFXTestMode)
             {
@@ -213,13 +217,12 @@ public class CharacterType_Script : BaseCharacter
                 {
                     SetAnimation(atkType + "_IdleToAtk");
                 }
-                if (!isChargingParticlesOn)
+                if (!isChargingParticlesOn || ps == null)
                 {
                     isChargingParticlesOn = true;
                     ps = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
-                    
                     ps.transform.parent = transform;
-                   
+
                 }
                 else
                 {
@@ -229,16 +232,16 @@ public class CharacterType_Script : BaseCharacter
 
                 if (!IsOnField)
                 {
-                    if(ps != null)
+                    if (ps != null)
                     {
                         ps.transform.parent = null;
                         ps.SetActive(false);
                     }
-                   
+
                     yield break;
                 }
             }
-            if (chargingAttackTimer > 1f && CharInfo.Health > 0f)
+            if (chargingAttackTimer > 1)
             {
                 currentAttackPhase = AttackPhasesType.Loading;
                 StopPowerfulAtk = SpecialAttackStatus.Start;
@@ -248,7 +251,7 @@ public class CharacterType_Script : BaseCharacter
                     {
                         yield return new WaitForEndOfFrame();
 
-                        if(StopPowerfulAtk == SpecialAttackStatus.Stop)
+                        if (StopPowerfulAtk == SpecialAttackStatus.Stop)
                         {
                             StopPowerfulAtk = SpecialAttackStatus.None;
                             ps.transform.parent = null;
@@ -256,18 +259,15 @@ public class CharacterType_Script : BaseCharacter
                             yield break;
                         }
                     }
-
-                    ps.transform.parent = null;
-                    ps.SetActive(false);
                     SpecialAttack(CharInfo.CharacterLevel, nextAtkType);
                 }
             }
             else
             {
-                ps.transform.parent = null;
-                ps.SetActive(false);
                 SetAnimation(CharacterAnimationStateType.Idle, true, 0.1f);
             }
+            ps.transform.parent = null;
+            ps.SetActive(false);
         }
     }
 
@@ -472,7 +472,7 @@ public class CharacterType_Script : BaseCharacter
         base.SpineAnimationState_Complete(trackEntry);
     }
 
-    public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
+    public override void SetAnimation(string animState, bool loop = false, float transition = 0)
     {
         if (SpineAnim == null)
         {
@@ -484,7 +484,7 @@ public class CharacterType_Script : BaseCharacter
             currentAttackPhase = AttackPhasesType.End;
         }
 
-        if (SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Atk2_AtkToIdle.ToString()) && animState != CharacterAnimationStateType.Defeat_ReverseArrive)
+        if (SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Atk2_AtkToIdle.ToString()) && !animState.Contains(CharacterAnimationStateType.Defeat_ReverseArrive.ToString()))
         {
             return;
         }

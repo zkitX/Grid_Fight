@@ -67,6 +67,8 @@ public class BulletScript : MonoBehaviour
 
         BulletTarget();
 
+        float bulletDuration = (CharInfo.SpeedStats.BulletSpeed / 12) * (bts.Pos.y - StartingTile.y);
+
         //setup the base offset for the movement
         Vector3 offset = transform.position;
         //Timer used to set up the coroutine
@@ -98,7 +100,7 @@ public class BulletScript : MonoBehaviour
             res.z = Trajectory_Z.Evaluate(timer) + res.z;
 
             transform.position = res;
-            timer += Time.fixedDeltaTime / CharInfo.SpeedStats.BulletSpeed;
+            timer += Time.fixedDeltaTime / bulletDuration;
             ti += Time.fixedDeltaTime;
             //if timer ended the bullet fire the Effect
             if (timer > 1)
