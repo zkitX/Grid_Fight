@@ -12,16 +12,17 @@ public class UITutorialScript : MonoBehaviour
         if(!isSetup && InputController.Instance != null)
         {
             isSetup = true;
+            Debug.Log("entrato");
 
             InputController.Instance.ButtonMinusUpEvent += Instance_ButtonMinusUpEvent;
             InputController.Instance.ButtonPlusUpEvent += Instance_ButtonPlusUpEvent;
-            gameObject.SetActive(false);
         }
     }
 
     private void Instance_ButtonMinusUpEvent(int player)
     {
-        if (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.Pause)
+        Debug.Log("entrato2");
+        if (BattleManagerScript.Instance.CurrentBattleState == BattleState.FungusPuppets)
         {
             return;
         }
