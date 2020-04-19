@@ -186,7 +186,7 @@ public class CharacterType_Script : BaseCharacter
     public IEnumerator StartChargingAttack(AttackAnimType nextAtkType)
     {
         if (CharInfo.StaminaStats.Stamina - CharInfo.PowerfulAttac.Stamina_Cost_Atk >= 0
-           && CanAttack && !isMoving && !isSpecialLoading)
+           && CanAttack && !isSpecialLoading)
         {
             AttackAnimPrefixType atkType = AttackAnimPrefixType.Atk2;
             switch (nextAtkType)

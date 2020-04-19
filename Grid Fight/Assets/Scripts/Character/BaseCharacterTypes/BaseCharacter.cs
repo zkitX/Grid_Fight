@@ -628,7 +628,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     protected float defenceAnimSpeedMultiplier = 5f;
     public void StartDefending()
     {
-        if (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || isMoving)
+        if (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
         {
             return;
         }
@@ -1142,6 +1142,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             return;
         }
 
+        if (isMoving && animState.ToString() != CharacterAnimationStateType.Reverse_Arriving.ToString())
+        {
+            return;
+        }
+
         //Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + CharInfo.CharacterID.ToString());
         if (animState == CharacterAnimationStateType.Arriving.ToString())
         {
@@ -1212,6 +1217,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
 
         string completedAnim = trackEntry.Animation.Name;
+
+        
 
         if (completedAnim == CharacterAnimationStateType.Arriving.ToString() || completedAnim.Contains("Growing"))
         {
