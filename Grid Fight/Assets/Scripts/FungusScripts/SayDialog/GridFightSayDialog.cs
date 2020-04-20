@@ -53,6 +53,8 @@ public class GridFightSayDialog : SayDialog
     public override IEnumerator DoSay(string text, bool clearPrevious, bool waitForInput, bool fadeWhenDone, bool stopVoiceover, bool waitForVO, AudioClip voiceOverClip, Character nextChar)
     {
         writer.inputFlag = false;
+
+        InputController.Instance.ButtonAUpEvent += Instance_ButtonAUpEvent;
         //Debug.Log(text);
         AnimSpeedChanger(2);
         while (BattleManagerScript.Instance == null)
@@ -78,6 +80,7 @@ public class GridFightSayDialog : SayDialog
         }
         //yield return base.DoSay("", clearPrevious, false, false, stopVoiceover, waitForVO, voiceOverClip, delegate { });
         storyText.text = "";
+
         if (LastCharacter != null && LastCharacter.name != nextChar.name)
         {
             if (SayDialogAnimatorController.GetBool("InOut"))
@@ -148,7 +151,7 @@ public class GridFightSayDialog : SayDialog
 
         yield return base.DoSay(text, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, voiceOverClip, delegate {});
 
-       
+        InputController.Instance.ButtonAUpEvent -= Instance_ButtonAUpEvent;
     }
 
 
