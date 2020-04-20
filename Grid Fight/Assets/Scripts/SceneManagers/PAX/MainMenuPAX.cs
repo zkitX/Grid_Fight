@@ -103,7 +103,7 @@ public class MainMenuPAX : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
         asyncLoad.allowSceneActivation = true;
         yield return new WaitForSecondsRealtime(1f);
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName("BattleScene_Stage04"));
+        //SceneManager.SetActiveScene(SceneManager.GetSceneByName("BattleScene_Stage04"));
         SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("SplashPage202004"));
     }
 
