@@ -73,8 +73,8 @@ public class BulletScript : MonoBehaviour
         Vector3 offset = transform.position;
         //Timer used to set up the coroutine
         float timer = 0;
-        //Destination position
-        Vector3 destination = bts.transform.position;
+        //Destination position, works also for PvP
+        Vector3 destination = bts.transform.position + new Vector3(Side == SideType.LeftSide ? 0.2f : -0.2f, 0 , 0);
         //Duration of the particles 
         PS.GetComponent<PSTimeGroup>().UpdatePSTime(CharInfo.SpeedStats.BulletSpeed);
         //float Duration = Vector3.Distance(transform.position, destination) / CharInfo.BulletSpeed;
