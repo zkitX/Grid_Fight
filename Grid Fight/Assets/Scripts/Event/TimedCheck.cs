@@ -73,6 +73,9 @@ public class TimedCheck
             case (TimedCheckTypes.PotionCollectionCheck):
                 check = PotionCollectionCheck;
                 break;
+            case (TimedCheckTypes.AvailableCharacterCountCheck):
+                check = AvailableCharacterCountCheck;
+                break;
             default:
                 check = Default;
                 break;
@@ -284,5 +287,33 @@ public class TimedCheck
         {
             return EventManager.Instance.GetPotionCollected(potionType, potionsRequired);
         }
+    }
+
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.AvailableCharacterCountCheck)] public int availableCharactersToCheckFor = 0;
+    [ConditionalField("TimedCheckType", false, TimedCheckTypes.AvailableCharacterCountCheck)] public CompareType avilableCharacterCheckRule = CompareType.IsEqualTo;
+    bool AvailableCharacterCountCheck()
+    {
+        int charsAlive = 0;
+        foreach(CharacterType_Script character in BattleManagerScript.Instance.AllCharactersOnField)
+        {
+            if (character.CharInfo.Health > 0) charsAlive++;
+        }
+
+        switch (avilableCharacterCheckRule)
+        {
+            case (CompareType.IsEqualTo):
+                if (charsAlive == availableCharactersToCheckFor) return true;
+                break;
+            case (CompareType.LessThan):
+                if (charsAlive > availableCharactersToCheckFor) return true;
+                break;
+            case (CompareType.MoreThan):
+                if (charsAlive < availableCharactersToCheckFor) return true;
+                break;
+            default:
+                Debug.Log("Health Change type is not set on timed check: " + Name);
+                break;
+        }
+        return false;
     }
 }

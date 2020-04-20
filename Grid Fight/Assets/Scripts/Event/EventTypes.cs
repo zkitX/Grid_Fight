@@ -21,7 +21,8 @@ public enum TimedCheckTypes
     CharacterStaminaCheck,
     EventTriggeredCheck,
     PotionCollectionCheck,
-    None,
+    AvailableCharacterCountCheck,
+    None = 1000000,
 }
 
 public enum CompareType

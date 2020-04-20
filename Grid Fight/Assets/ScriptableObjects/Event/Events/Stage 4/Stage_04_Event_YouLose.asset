@@ -10,32 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25d497aba9400d147aee0263a1f7ec6d, type: 3}
-  m_Name: Stage4_start
+  m_Name: Stage_04_Event_YouLose
   m_EditorClassIdentifier: 
-  Name: Stage4_start
+  Name: Stage_04_Event_YouLose
   hasHappened: 0
   requirementRule: 0
-  reqChecks: []
+  reqChecks:
+  - {fileID: 11400000, guid: 7157943aec625134cb985f4e65ecc21d, type: 2}
   timedCheckRule: 0
   timedChecks:
-  - Name: 
+  - Name: AllDead
     hasHappened: 0
     isHappening: 0
     checker: {fileID: 0}
-    ceaseOnHappened: 0
-    TimedCheckType: 0
-    deathCharacterID: 0
-    onlyOnDeath: 0
+    ceaseOnHappened: 1
+    TimedCheckType: 12
+    deathCharacterID: 1007
+    onlyOnDeath: 1
     deathsRequired: 0
-    buttonToWaitFor: 12
+    buttonToWaitFor: 0
     arrivalCharacterID: 0
     onlyOnArrival: 0
     arrivalsRequired: 0
     switchCharacterID: 0
     onlyOnSwitch: 0
     switchesRequired: 0
-    healthChangeCharID: 0
-    healthChange: 0
+    healthChangeCharID: 1007
+    healthChange: 2
     healthChangeValue: 0
     requireCalledDuringCheck: 0
     requireEventCalledDuringCheck: 0
@@ -54,16 +55,21 @@ MonoBehaviour:
     staminaChangeValue: 0
     requireEventTriggerDuringCheck: 0
     EventTriggerRequired: {fileID: 0}
+    potionType: 0
+    potionsRequired: 0
+    potionCollectedLastFrame: 0
+    availableCharactersToCheckFor: 0
+    avilableCharacterCheckRule: 2
   inhibitorRule: 1
   inhibitors: []
   ignoreQueue: 0
   ceaseOnComplete: 1
   requireComplete: 1
   effects:
-  - Name: 
+  - Name: GameOver
     effectType: 2
     secondsToWait: 0
     debugText: 
-    blockName: EVENT DIALOGUE 1
+    blockName: LOSE
     command: {fileID: 0}
-    characterToRecruit: 1000
+    characterToRecruit: 0

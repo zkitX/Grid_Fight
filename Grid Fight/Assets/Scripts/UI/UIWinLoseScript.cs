@@ -49,11 +49,11 @@ public class UIWinLoseScript : MonoBehaviour
     {
         if (selectedBtn)
         {
-            SceneManager.LoadScene("SplashPage202004");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         else
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene("SplashPage202004");
         }
     }
 
