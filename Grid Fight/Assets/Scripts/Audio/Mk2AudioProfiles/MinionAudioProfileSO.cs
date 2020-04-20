@@ -6,4 +6,8 @@ using UnityEngine;
 public class MinionAudioProfileSO : CharacterAudioProfileSO
 {
     //add stuff here as needed later
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+    }
 }

@@ -58,7 +58,7 @@ public class AudioManagerMk2 : MonoBehaviour
 
     public ManagedAudioSource PlaySound(AudioSourceType sourceType, AudioClipInfoClass clipInfo, AudioBus priority, Transform sourceOrigin = null, bool loop = false)
     {
-        if (ClipPlayedThisFrame(clipInfo.clip)) return null;
+        if (ClipPlayedThisFrame(clipInfo.Clip)) return null;
 
         ManagedAudioSource source = GetFreeSource(priority, sourceType);
 
@@ -67,7 +67,7 @@ public class AudioManagerMk2 : MonoBehaviour
         source.SetAudioClipInfo(clipInfo);
         source.bus = priority;
         source.PlaySound(loop);
-        AddClipPlayedLastFrame(clipInfo.clip);
+        AddClipPlayedLastFrame(clipInfo.Clip);
         return source;
     }
 

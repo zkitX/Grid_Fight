@@ -8,4 +8,12 @@ public class Boss_Stage09AudioProfileSO : MinionAudioProfileSO
     [Header("Boss Specific")]
     public CastLoopImpactAudioClipInfoClass BossAttack3;
     //add stuff here as needed later
+
+    protected override void OnEnable()
+    {
+        allAudioClips.Add(BossAttack3.Cast);
+        allAudioClips.Add(BossAttack3.Loop);
+        allAudioClips.Add(BossAttack3.Impact);
+        base.OnEnable();
+    }
 }

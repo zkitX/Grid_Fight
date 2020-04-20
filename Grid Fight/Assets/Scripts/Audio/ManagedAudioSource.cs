@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MyBox;
 
 [RequireComponent(typeof(AudioSource))]
 public class ManagedAudioSource : MonoBehaviour
@@ -51,7 +52,7 @@ public class ManagedAudioSource : MonoBehaviour
     public void SetAudioClipInfo(AudioClipInfoClass _audioClipInfo)
     {
         audioClipInfo = _audioClipInfo;
-        source.clip = audioClipInfo.clip;
+        source.clip = audioClipInfo.ClipAndPlay;
         UpdateVolume();
     }
 
@@ -103,6 +104,59 @@ public class ManagedAudioSource : MonoBehaviour
 [System.Serializable]
 public class AudioClipInfoClass
 {
-    public AudioClip clip = null;
+    [HideInInspector] public AudioClip clip = null;
+    public AudioClip[] clips = null;
+    int lastPlayedClip = 0;
+    [HideInInspector] public AudioClip ClipAndPlay
+    {
+        get
+        {
+            if (clips != null && clips.Length > 0)
+            {
+                if (randomiseOrder)
+                {
+                    return clips[Random.Range(0, clips.Length)];
+                }
+                else
+                {
+                    AudioClip clipToReturn = clips[lastPlayedClip];
+                    lastPlayedClip = (lastPlayedClip + 1) % (clips.Length);
+                    return clipToReturn;
+                }
+            }
+            else return clip;
+        }
+        set
+        {
+            
+        }
+    }
+    [HideInInspector] public AudioClip Clip
+    {
+        get
+        {
+            if (clips != null && clips.Length > 0)
+            {
+                if (randomiseOrder)
+                {
+                    return clips[Random.Range(0, clips.Length)];
+                }
+                else
+                {
+                    AudioClip clipToReturn = clips[lastPlayedClip];
+                    return clipToReturn;
+                }
+            }
+            else return clip;
+        }
+        set
+        {
+
+        }
+    }
+
+    [ConditionalField("moreThanOneClip", false)] public bool randomiseOrder = false;
+    [HideInInspector] public bool moreThanOneClip = false;
+
     [Range(0f,1f)]public float baseVolume = 1f;
 }
