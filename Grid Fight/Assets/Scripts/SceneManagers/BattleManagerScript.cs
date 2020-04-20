@@ -997,7 +997,7 @@ public class BattleManagerScript : MonoBehaviour
         if(CurrentBattleState == BattleState.Pause)
         {
             CurrentBattleState = BattleState.End;
-            UnityEngine.SceneManagement.SceneManager.LoadScene("PaxMainMenu");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("SplashPage202004");
             //UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
             EventManager.Instance.ResetEventsInManager();
         }

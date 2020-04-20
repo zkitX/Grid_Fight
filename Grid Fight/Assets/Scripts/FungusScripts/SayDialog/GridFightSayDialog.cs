@@ -37,6 +37,11 @@ public class GridFightSayDialog : SayDialog
 
     private void Instance_ButtonAUpEvent(int player)
     {
+        if (!isAnimCompleted)
+        {
+            isAnimCompleted = true;
+        }
+
         AnimSpeedChanger(10);
     }
 

@@ -254,52 +254,58 @@ public class MinionType_Script : BaseCharacter
         {
             GetAttack();
         }
-        switch (nextAttack.AttackAnim)
+        if (nextAttack != null)
         {
-          /*  case AttackAnimPrefixType.Atk:
-                sequencedAttacker = false;
-                chargeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
-                animToFire = CharacterAnimationStateType.Idle;
-                isLooped = true;
-                currentAttackPhase = AttackPhasesType.Cast_Powerful;
-                CreateTileAttack();
-                break;*/
-            case AttackAnimType.Rapid_Atk:
-                animToFire = CharacterAnimationStateType.Atk1_IdleToAtk;
-                isLooped = false;
-                break;
-            case AttackAnimType.Powerful_Atk:
-                animToFire = CharacterAnimationStateType.Atk2_IdleToAtk;
-                isLooped = false;
-                break;
-            case AttackAnimType.Skill1:
-                break;
-            case AttackAnimType.Skill2:
-                break;
+
+            switch (nextAttack.AttackAnim)
+            {
+                /*  case AttackAnimPrefixType.Atk:
+                      sequencedAttacker = false;
+                      chargeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
+                      animToFire = CharacterAnimationStateType.Idle;
+                      isLooped = true;
+                      currentAttackPhase = AttackPhasesType.Cast_Powerful;
+                      CreateTileAttack();
+                      break;*/
+                case AttackAnimType.Rapid_Atk:
+                    animToFire = CharacterAnimationStateType.Atk1_IdleToAtk;
+                    isLooped = false;
+                    break;
+                case AttackAnimType.Powerful_Atk:
+                    animToFire = CharacterAnimationStateType.Atk2_IdleToAtk;
+                    isLooped = false;
+                    break;
+                case AttackAnimType.Skill1:
+                    break;
+                case AttackAnimType.Skill2:
+                    break;
+            }
+
+
+
+
+            /*  switch (CurrentAI)
+              {
+                  case AIType.GeneralAI:
+                      res = GeneralTestAI();
+                      break;
+                  case AIType.AggressiveAI:
+                      res = AggressiveTestAI();
+                      break;
+              }*/
+            //shotsLeftInAttack = GetHowManyAttackAreOnBattleField(((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories);
+
+            currentAttackPhase = AttackPhasesType.Start;
+            SetAnimation(animToFire, isLooped, 0f);
+
+
+            while (Attacking)
+            {
+                yield return null;
+            }
+
         }
-
-
-
-
-      /*  switch (CurrentAI)
-        {
-            case AIType.GeneralAI:
-                res = GeneralTestAI();
-                break;
-            case AIType.AggressiveAI:
-                res = AggressiveTestAI();
-                break;
-        }*/
-        //shotsLeftInAttack = GetHowManyAttackAreOnBattleField(((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories);
-
-        currentAttackPhase = AttackPhasesType.Start;
-        SetAnimation(animToFire,isLooped, 0f);
-
-
-        while (Attacking)
-        {
-            yield return null;
-        }
+        
 
         yield break;
     }
