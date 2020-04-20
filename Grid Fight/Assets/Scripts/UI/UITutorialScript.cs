@@ -28,10 +28,11 @@ public class UITutorialScript : MonoBehaviour
         }
         if (gameObject.activeInHierarchy)
         {
-            BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
+            BattleManagerScript.Instance.CurrentBattleState = previousBattleState;
         }
         else
         {
+            previousBattleState = BattleManagerScript.Instance.CurrentBattleState;
             BattleManagerScript.Instance.CurrentBattleState = BattleState.Pause;
         }
         gameObject.SetActive(!gameObject.activeInHierarchy);
