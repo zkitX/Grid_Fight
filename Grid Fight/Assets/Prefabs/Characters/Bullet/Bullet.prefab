@@ -73,6 +73,18 @@ MonoBehaviour:
   BulletGapStartingTile: {x: 0, y: 0}
   StartingTile: {x: 0, y: 0}
   ChildrenExplosionDelay: 0
+  EffectChances: 0
+  attackAudioType:
+    Cast:
+      clip: {fileID: 0}
+      baseVolume: 1
+    Loop:
+      clip: {fileID: 0}
+      baseVolume: 1
+    Impact:
+      clip: {fileID: 0}
+      baseVolume: 1
+  BulletEffects: []
 --- !u!65 &7833339530506051404
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -84,5 +96,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.02, z: 0.2}
+  m_Size: {x: 0.2, y: 0.5, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}

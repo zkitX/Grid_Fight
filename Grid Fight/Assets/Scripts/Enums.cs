@@ -321,7 +321,8 @@ public enum BuffDebuffStatsType
     SpeedStats_LeaveSpeed,
     SpeedStats_LevelMultiplier,
     SpeedStats_IdleToAtkDuration,
-    SpeedStats_AtkToIdleDuration
+    SpeedStats_AtkToIdleDuration,
+    DamageStats_BaseDamage
 }
 
 public enum WaveStatsType

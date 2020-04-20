@@ -65,14 +65,15 @@ public class GridManagerScript : MonoBehaviour
             BattleTiles.Where(r => r.Pos == tile.Pos).First().ResetTile();
         }
     }
-  
+
     //Checking if the given positions are part of the desired movent area
-    public bool AreBattleTilesInControllerArea(List<Vector2Int> pos, WalkingSideType walkingSide)
+    public bool AreBattleTilesInControllerArea(List<Vector2Int> oldPos, List<Vector2Int> newPos, WalkingSideType walkingSide)
     {
         bool AreInControlledArea = false;
-        foreach (Vector2Int item in pos)
+        foreach (Vector2Int item in newPos)
         {
-            AreInControlledArea = BattleTiles.Where(r => r.Pos == item && (r.WalkingSide == walkingSide || walkingSide == WalkingSideType.Both) && r._BattleTileState == BattleTileStateType.Empty).ToList().Count > 0 ? true : false;
+            AreInControlledArea = BattleTiles.Where(r => r.Pos == item && (r.WalkingSide == walkingSide || walkingSide == WalkingSideType.Both) && (r._BattleTileState == BattleTileStateType.Empty ||
+            (r._BattleTileState == BattleTileStateType.Occupied && oldPos.Contains(item)))).ToList().Count > 0 ? true : false;
             if (!AreInControlledArea)
             {
                 break;

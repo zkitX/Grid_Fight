@@ -147,6 +147,8 @@ public class CharacterInfoScript : MonoBehaviour
     {
         public float BaseDamage = 10;
         [HideInInspector]
+        public float B_BaseDamage = 10f;
+        [HideInInspector]
         public int MultiBulletAttackNumberOfBullets = 3;
         public float ChildrenBulletDelay;
         [HideInInspector]
@@ -309,6 +311,7 @@ public class CharacterInfoScript : MonoBehaviour
         SpeedStats.B_LevelMultiplier = SpeedStats.LevelMultiplier;
         SpeedStats.B_IdleToAtkDuration = SpeedStats.IdleToAtkDuration;
         SpeedStats.B_AtkToIdleDuration = SpeedStats.AtkToIdleDuration;
+        DamageStats.B_BaseDamage = DamageStats.BaseDamage;
     }
 
 

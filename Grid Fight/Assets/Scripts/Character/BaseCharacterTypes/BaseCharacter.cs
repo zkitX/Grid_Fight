@@ -371,7 +371,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public void GetAttack()
     {
         currentTileAtks.Clear();
-        currentTileAtks = CharInfo.CurrentAttackTypeInfo.Where(r => r.CurrentAttackType == AttackType.Tile).ToList();
+        currentTileAtks = CharInfo.CurrentAttackTypeInfo.Where(r => r != null && r.CurrentAttackType == AttackType.Tile).ToList();
 
         availableAtks.Clear();
         for (int i = 0; i < currentTileAtks.Count; i++)
@@ -825,7 +825,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     private List<BattleTileScript> CheckTileAvailability(Vector2Int dir)
     {
         List<Vector2Int> nextPos = CalculateNextPos(dir);
-        if (GridManagerScript.Instance.AreBattleTilesInControllerArea(nextPos, UMS.WalkingSide))
+        if (GridManagerScript.Instance.AreBattleTilesInControllerArea(UMS.Pos, nextPos, UMS.WalkingSide))
         {
             return GridManagerScript.Instance.GetBattleTiles(nextPos, UMS.WalkingSide);
         }
@@ -1142,6 +1142,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             return;
         }
 
+        if (isMoving && animState.ToString() != CharacterAnimationStateType.Reverse_Arriving.ToString())
+        {
+            return;
+        }
+
         //Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + CharInfo.CharacterID.ToString());
         if (animState == CharacterAnimationStateType.Arriving.ToString())
         {
@@ -1212,6 +1217,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
 
         string completedAnim = trackEntry.Animation.Name;
+
+        
 
         if (completedAnim == CharacterAnimationStateType.Arriving.ToString() || completedAnim.Contains("Growing"))
         {
