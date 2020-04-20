@@ -32,7 +32,7 @@ public class MainMenuPAX : MonoBehaviour
     {
         SelectButton();
         InputController.Instance.ButtonADownEvent += Instance_ButtonADownEvent;
-        InputController.Instance.LeftJoystickUsedEvent += Instance_LeftJoystickUsedEvent;
+        //InputController.Instance.LeftJoystickUsedEvent += Instance_LeftJoystickUsedEvent;
     }
 
     private void Instance_LeftJoystickUsedEvent(int player, InputDirection dir)
@@ -70,7 +70,7 @@ public class MainMenuPAX : MonoBehaviour
 
     private void Instance_ButtonADownEvent(int player)
     {
-        GoToBattleScene(selectedButton == 0 ? "BattleScene-00-PAX" : selectedButton == 1 ? "BattleScene-04-PAX" : "BattleScene-00-Speedrun-PAX");
+        GoToBattleScene(selectedButton == 0 ? "BattleScene_Stage04" : selectedButton == 1 ? "BattleScene_Stage04" : "BattleScene_Stage04");
     }
 
 
@@ -100,11 +100,11 @@ public class MainMenuPAX : MonoBehaviour
         }
 
 
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(1f);
         asyncLoad.allowSceneActivation = true;
-        yield return new WaitForSecondsRealtime(0.5f);
-        //SceneManager.SetActiveScene(SceneManager.GetSceneByName("BattleScene"));
-        SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("PaxMainMenu"));
+        yield return new WaitForSecondsRealtime(1f);
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("BattleScene_Stage04"));
+        SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("SplashPage202004"));
     }
 
     public void ShowBattleScene()
