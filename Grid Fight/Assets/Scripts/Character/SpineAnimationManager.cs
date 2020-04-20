@@ -58,7 +58,7 @@ public class SpineAnimationManager : MonoBehaviour
         }
         else if (e.Data.Name.Contains("FireCastParticle"))
         {
-            if(attackTypeAudioInfo != null) AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackTypeAudioInfo.Cast, AudioBus.HighPriority, CharOwner.transform);
+            if(attackTypeAudioInfo != null) AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackTypeAudioInfo.Cast, AudioBus.LowPriority, CharOwner.transform);
             CharOwner.currentAttackPhase = CurrentAnim.Contains("Atk1") ? AttackPhasesType.Cast_Rapid : AttackPhasesType.Cast_Powerful;
             CharOwner.FireCastParticles(CurrentAnim.Contains("Atk1") ? CharacterLevelType.Novice : CharacterLevelType.Godness);
         }

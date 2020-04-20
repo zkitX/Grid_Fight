@@ -985,7 +985,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
 
 
-        SetAnimation(bdClass.CurrentBuffDebuff.AnimToFire);
+        //SetAnimation(bdClass.CurrentBuffDebuff.AnimToFire); //TODO READD THIS LATER
         int iterator = 0;
         while (bdClass.CurrentBuffDebuff.Timer <= bdClass.Duration && !bdClass.CurrentBuffDebuff.Stop_Co)
         {

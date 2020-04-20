@@ -68,6 +68,8 @@ public class AudioManagerMk2 : MonoBehaviour
         source.bus = priority;
         source.PlaySound(loop);
         AddClipPlayedLastFrame(clipInfo.Clip);
+
+        UpdateActiveAudioVolumes();
         return source;
     }
 
@@ -76,7 +78,13 @@ public class AudioManagerMk2 : MonoBehaviour
         return sources.Where(r => r.bus == AudioBus.HighPriority && r.type == type && priorityToCompare != AudioBus.HighPriority).FirstOrDefault() == null ? 1f : 0.5f;
     }
 
-
+    void UpdateActiveAudioVolumes()
+    {
+        foreach (ManagedAudioSource audioSource in sources.Where(r => r.gameObject.activeInHierarchy).ToList())
+        {
+            audioSource.UpdateVolume();
+        }
+    }
 
 
     public bool ClipPlayedThisFrame(AudioClip clip)

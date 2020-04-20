@@ -44,8 +44,8 @@ namespace Fungus
         }
 
         [Tooltip("The story text UI object")]
-       // [SerializeField] protected TextMeshProUGUI storyText;
-        [SerializeField] protected Text storyText;
+        [SerializeField] protected TextMeshProUGUI storyText;
+      //  [SerializeField] protected Text storyText;
         [Tooltip("TextAdapter will search for appropriate output on this GameObject if storyText is null")]
         [SerializeField] protected GameObject storyTextGO;
         protected TextAdapter storyTextAdapter = new TextAdapter();

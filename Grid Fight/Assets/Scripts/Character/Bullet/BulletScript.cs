@@ -168,7 +168,7 @@ public class BulletScript : MonoBehaviour
                     MakeDamage(target);
                 }
                 FireEffectParticles(GridManagerScript.Instance.GetBattleTile(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]).transform.position, i == bet.Count - 1 ? true : false);
-                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Impact, AudioBus.HighPriority, GridManagerScript.Instance.GetBattleTile(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]).transform);
+                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Impact, AudioBus.MediumPriority, GridManagerScript.Instance.GetBattleTile(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]).transform);
             }
             else
             {
@@ -220,7 +220,7 @@ public class BulletScript : MonoBehaviour
             MakeDamage(target);
             //fire the Effect
             StartCoroutine(ChildExplosion(BulletEffectTiles.Where(r => r != Vector2Int.zero).ToList(), target.UMS.CurrentTilePos));
-            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Impact, AudioBus.HighPriority,
+            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Impact, AudioBus.MediumPriority,
                 GridManagerScript.Instance.GetBattleTile(target.UMS.CurrentTilePos).transform);
             if (bulletSoundSource != null) bulletSoundSource.ResetSource();
             FireEffectParticles(transform.position, BulletEffectTiles.Count > 1 || (CharInfo.ClassType == CharacterClassType.Valley && attackLevel == CharacterLevelType.Godness)  ? false : true);
