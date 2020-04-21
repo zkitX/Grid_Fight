@@ -79,6 +79,9 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
 
     private IEnumerator LevelLoadingSequence()
     {
+        Rewired = Instantiate(stage.Rewired);
+        StageObjects.Add(Rewired);
+
         yield return InputController.Instance.Applet(2);
 
         if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Character_Testing_Scene")
@@ -89,8 +92,11 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
             }
         }
 
-        Rewired = Instantiate(stage.Rewired);
-        StageObjects.Add(Rewired);
+        if (Rewired == null)
+        {
+            Rewired = Instantiate(stage.Rewired);
+            StageObjects.Add(Rewired);
+        }
         yield return null;
 
         currentStageID = stage.ID;
