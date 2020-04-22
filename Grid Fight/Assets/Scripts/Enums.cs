@@ -382,7 +382,14 @@ public enum AttackAnimType
     Boss_Atk3,
 }
 
-
+public enum AttackInputType
+{
+    Weak,
+    Strong,
+    Skill1,
+    Skill2,
+    Skill3
+}
 
 public enum CharacterAnimationStateType
 {
@@ -849,4 +856,20 @@ public enum AudioBus
     LowPriority = 0,
     MediumPriority = 50,
     HighPriority = 100,
+}
+
+public enum InputActionType
+{
+    None = 0,
+    Weak,
+    Strong,
+    Skill1,
+    Skill2,
+    Skill3,
+    Defend,
+    Defend_Stop,
+    Move_Up,
+    Move_Down,
+    Move_Left,
+    Move_Right,
 }

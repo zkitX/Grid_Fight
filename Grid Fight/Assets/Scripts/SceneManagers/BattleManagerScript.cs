@@ -897,13 +897,13 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
-    public void StartChargingAttack(ControllerType controllerType, AttackAnimType atk)
+    public void StartChargingAttack(ControllerType controllerType, AttackInputType atk)
     {
         if (CurrentBattleState == BattleState.Battle)
         {
             if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null)
             {
-                CurrentSelectedCharacters[controllerType].Character.StartChargingAtk(atk);
+                CurrentSelectedCharacters[controllerType].Character.CharacterInputHandler((InputActionType)System.Enum.Parse(typeof(InputActionType), atk.ToString()));
             }
         }
     }
@@ -913,7 +913,7 @@ public class BattleManagerScript : MonoBehaviour
         {
             if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null)
             {
-                CurrentSelectedCharacters[controllerType].Character.StartQuickAttack(false);
+                CurrentSelectedCharacters[controllerType].Character.CharacterInputHandler(InputActionType.Weak);
             }
         }
     }
@@ -924,7 +924,7 @@ public class BattleManagerScript : MonoBehaviour
 
         if (CurrentSelectedCharacters[playerController].Character != null)
         {
-            CurrentSelectedCharacters[playerController].Character.StartDefending();
+            CurrentSelectedCharacters[playerController].Character.CharacterInputHandler(InputActionType.Defend);
         }
     }
 
@@ -932,7 +932,7 @@ public class BattleManagerScript : MonoBehaviour
     {
         if (CurrentSelectedCharacters[playerController].Character != null)
         {
-            CurrentSelectedCharacters[playerController].Character.StopDefending();
+            CurrentSelectedCharacters[playerController].Character.CharacterInputHandler(InputActionType.Defend_Stop);
         }
     }
 

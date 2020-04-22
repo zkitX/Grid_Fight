@@ -94,8 +94,8 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
 
         if (Rewired == null)
         {
-            Rewired = Instantiate(stage.Rewired);
-            StageObjects.Add(Rewired);
+           Rewired = Instantiate(stage.Rewired);
+           StageObjects.Add(Rewired);
         }
         yield return null;
 

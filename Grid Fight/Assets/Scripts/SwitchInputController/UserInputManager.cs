@@ -419,7 +419,7 @@ public class UserInputManager : MonoBehaviour
         }
         else if (BattleManagerScript.Instance.InputControllerT == InputControllerType.SelectionOnLR)
         {
-            SelectedCharacterStartChargingAttack(player, AttackAnimType.Powerful_Atk);
+            SelectedCharacterStartChargingAttack(player, AttackInputType.Strong);
         }
     }
 
@@ -428,7 +428,7 @@ public class UserInputManager : MonoBehaviour
         //Debug.Log(player + "  " + "R Down");
         if (BattleManagerScript.Instance.InputControllerT == InputControllerType.SelectionOnABXY)
         {
-            SelectedCharacterStartChargingAttack(player, AttackAnimType.Powerful_Atk);
+            SelectedCharacterStartChargingAttack(player, AttackInputType.Strong);
         }
         else if (BattleManagerScript.Instance.InputControllerT == InputControllerType.SelectionOnLR)
         {
@@ -554,7 +554,7 @@ public class UserInputManager : MonoBehaviour
     #endregion
 
 
-    public void SelectedCharacterStartChargingAttack(int player, AttackAnimType atk)
+    public void SelectedCharacterStartChargingAttack(int player, AttackInputType atk)
     {
         BattleManagerScript.Instance.StartChargingAttack((ControllerType)player, atk);
     }

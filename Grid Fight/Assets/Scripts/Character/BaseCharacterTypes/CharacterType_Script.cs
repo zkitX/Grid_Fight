@@ -28,6 +28,56 @@ public class CharacterType_Script : BaseCharacter
     #region Setup Character
 
 
+    public void CharacterInputHandler(InputActionType action)
+    {
+        if (CharacterInputQueuer != null) StopCoroutine(CharacterInputQueuer);
+        CharacterInputQueuer = CharacterInputQueue(action);
+        StartCoroutine(CharacterInputQueuer);
+    }
+
+    IEnumerator CharacterInputQueuer = null;
+    IEnumerator CharacterInputQueue(InputActionType action)
+    {
+        while (isMoving)
+        {
+            yield return null;
+        }
+
+        switch (action)
+        {
+            case InputActionType.Weak:
+                StartQuickAttack(false);
+                break;
+            case InputActionType.Strong:
+                StartChargingAtk(AttackAnimType.Powerful_Atk);
+                break;
+            case InputActionType.Skill1:
+                StartChargingAtk(AttackAnimType.Skill1);
+                break;
+            case InputActionType.Skill2:
+                StartChargingAtk(AttackAnimType.Skill2);
+                break;
+            case InputActionType.Skill3:
+                break;
+            case InputActionType.Defend:
+                StartDefending();
+                break;
+            case InputActionType.Defend_Stop:
+                if(isDefending)StopDefending();
+                break;
+            case InputActionType.Move_Up:
+                break;
+            case InputActionType.Move_Down:
+                break;
+            case InputActionType.Move_Left:
+                break;
+            case InputActionType.Move_Right:
+                break;
+            default:
+                break;
+        }
+    }
+
     public override void StartMoveCo()
     {
         MoveCoOn = true;
@@ -275,21 +325,7 @@ public class CharacterType_Script : BaseCharacter
     public void StartQuickAttack(bool attackRegardless)
     {
         if ((CharInfo.StaminaStats.Stamina - CharInfo.RapidAttack.Stamina_Cost_Atk >= 0
-           && CanAttack) || attackRegardless)
-        {
-            StartCoroutine(QuickAttack_Co(attackRegardless));
-        }
-    }
-
-    IEnumerator QuickAttack_Co(bool attackRegardless)
-    {
-        while (isMoving)
-        {
-            yield return null;
-        }
-
-        if ((CharInfo.StaminaStats.Stamina - CharInfo.RapidAttack.Stamina_Cost_Atk >= 0
-           && CanAttack) || attackRegardless)
+              && CanAttack /*&& isMoving*/) || attackRegardless)
         {
             if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop.ToString() && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_IdleToAtk.ToString())
             {
@@ -301,8 +337,6 @@ public class CharacterType_Script : BaseCharacter
                 Atk1Queueing = true;
             }
         }
-
-            
     }
 
     private IEnumerator AtkHoldingCo()
@@ -424,6 +458,8 @@ public class CharacterType_Script : BaseCharacter
             return;
         }
         string completedAnim = trackEntry.Animation.Name;
+
+        if (PlayQueuedAnim()) return;
 
 
         if (completedAnim == CharacterAnimationStateType.Defeat_ReverseArrive.ToString())

@@ -618,7 +618,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     }
                 }
             }
-
         }
     }
 
@@ -714,7 +713,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     //        yield return null;
     //    }
     //}
-
 
     public virtual IEnumerator MoveCharOnDir_Co(InputDirection nextDir)
     {
@@ -1154,6 +1152,31 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         SetAnimation(animState.ToString(), loop, transition);
     }
 
+
+    string queuedAnim_Name = "";
+    bool queuedAnim_Loop = false;
+    float queuedAnim_Transition = 0f;
+    float queuedAnim_Speed = 1f;
+    public void QueueAnimation(string animState, bool loop = false, float transition = 0, float speed = 1f)
+    {
+        queuedAnim_Name = animState;
+        queuedAnim_Loop = loop;
+        queuedAnim_Transition = transition;
+        queuedAnim_Speed = speed;
+    }
+    public bool PlayQueuedAnim()
+    {
+        if(queuedAnim_Name != "")
+        {
+            SetAnimation(queuedAnim_Name, queuedAnim_Loop, queuedAnim_Transition);
+            SpineAnim.SetAnimationSpeed(queuedAnim_Speed);
+            QueueAnimation("", false, 0f, 1f);
+            return true;
+        }
+        return false;
+    }
+
+
     public virtual void SetAnimation(string animState, bool loop = false, float transition = 0)
     {
 
@@ -1238,7 +1261,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         string completedAnim = trackEntry.Animation.Name;
 
-        
+        //Play queued anim and then return if there is one
+        if (PlayQueuedAnim()) return;
 
         if (completedAnim == CharacterAnimationStateType.Arriving.ToString() || completedAnim.Contains("Growing"))
         {
