@@ -220,6 +220,18 @@ public class SpineAnimationManager : MonoBehaviour
         }
     }
 
+    public float GetAnimationSpeed()
+    {
+        if (SpineAnimationState != null)
+        {
+            if(SpineAnimationState.Tracks.Where(r => r != null).FirstOrDefault() != null)
+            {
+                return SpineAnimationState.Tracks.Where(r => r != null).FirstOrDefault().TimeScale;
+            }
+        }
+        return 1f;
+    }
+
     public void SetSkeletonOrderInLayer(int order)
     {
         GetComponent<MeshRenderer>().sortingOrder = order;

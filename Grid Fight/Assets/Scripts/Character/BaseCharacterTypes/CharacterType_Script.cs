@@ -272,14 +272,25 @@ public class CharacterType_Script : BaseCharacter
         }
     }
 
-
-
     public void StartQuickAttack(bool attackRegardless)
     {
         if ((CharInfo.StaminaStats.Stamina - CharInfo.RapidAttack.Stamina_Cost_Atk >= 0
-           && CanAttack && !isMoving) || attackRegardless)
+           && CanAttack) || attackRegardless)
         {
+            StartCoroutine(QuickAttack_Co(attackRegardless));
+        }
+    }
 
+    IEnumerator QuickAttack_Co(bool attackRegardless)
+    {
+        while (isMoving)
+        {
+            yield return null;
+        }
+
+        if ((CharInfo.StaminaStats.Stamina - CharInfo.RapidAttack.Stamina_Cost_Atk >= 0
+           && CanAttack) || attackRegardless)
+        {
             if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop.ToString() && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_IdleToAtk.ToString())
             {
                 SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
@@ -290,6 +301,8 @@ public class CharacterType_Script : BaseCharacter
                 Atk1Queueing = true;
             }
         }
+
+            
     }
 
     private IEnumerator AtkHoldingCo()

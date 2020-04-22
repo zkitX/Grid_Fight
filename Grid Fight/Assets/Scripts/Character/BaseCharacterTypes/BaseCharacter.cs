@@ -700,6 +700,22 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     #endregion
     #region Move
 
+    //public float moveProgress = 0f;
+    //IEnumerator MoveCounter = null;
+    //IEnumerator MoveCount(float moveLength)
+    //{
+    //    float moveTimer = 0f;
+    //    moveProgress = 0f;
+    //    while (moveTimer < moveLength)
+    //    {
+    //        moveTimer += Time.deltaTime;
+    //        moveProgress = SpineAnim.GetAnimTime();//moveTimer / moveLength;
+    //        Debug.Log("Movetime: <b>" + moveTimer + "</b>");
+    //        yield return null;
+    //    }
+    //}
+
+
     public virtual IEnumerator MoveCharOnDir_Co(InputDirection nextDir)
     {
         if ((CharInfo.Health > 0 && !isMoving && IsOnField && SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving.ToString()) || BattleManagerScript.Instance.VFXScene)
@@ -720,6 +736,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             {
                 SetAnimation(AnimState);
                 isMoving = true;
+                //if (MoveCounter != null) StopCoroutine(MoveCounter);
+                //MoveCounter = MoveCount(SpineAnim.GetAnimLenght(AnimState) / SpineAnim.GetAnimationSpeed());
+                //StartCoroutine(MoveCounter);
+
                 if (prevBattleTile.Count > 1)
                 {
 
@@ -1538,6 +1558,7 @@ public class BuffDebuffClass
     {
 
     }
+
     public BuffDebuffClass(string name, BuffDebuffStatsType stat, int level, Buff_DebuffClass currentCuffDebuff, float duration)
     {
         Name = name;
