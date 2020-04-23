@@ -18,9 +18,6 @@ public class EnvironmentManager : MonoBehaviour
     public Transform cameraToMove;
     public int currentGridIndex = 0;
     public FightGrid[] fightGrids;
-    public AnimationCurve cameraTravelCurve;
-    public AnimationCurve characterJumpCurve;
-    public AnimationCurve jumpAnimationCurve;
     IEnumerator GridLeapSequencer = null;
 
     public CameraStageInfoScript CameraStage;
@@ -153,17 +150,17 @@ public class EnvironmentManager : MonoBehaviour
             timeRemaining = Mathf.Clamp(timeRemaining - Time.deltaTime, 0f, 9999f);
             progress = 1f - (timeRemaining / (duration != 0f ? duration : 1f));
 
-            MainCamera.transform.position = Vector3.Lerp(cameraStartPos, cameraStartPos + translation + cameraOffsetChange, cameraTravelCurve.Evaluate(progress));
+            MainCamera.transform.position = Vector3.Lerp(cameraStartPos, cameraStartPos + translation + cameraOffsetChange, UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
             MainCamera.orthographicSize = Mathf.Lerp(cameraStartOrtho, cameraEndOrtho, progress);
 
 
             for (int i = 0; i < (jumpingchars != null ? jumpingchars.Count : 0); i++)
             {
-                xPos = Mathf.Lerp(charStartPositions[i].x, charStartPositions[i].x + translation.x + charGridPosOffsets[i].x, cameraTravelCurve.Evaluate(progress));
-                yPos = Mathf.Lerp(charStartPositions[i].y, charStartPositions[i].y + translation.y + charGridPosOffsets[i].y, cameraTravelCurve.Evaluate(progress));
-                yPos += jumpHeight * characterJumpCurve.Evaluate(progress);
+                xPos = Mathf.Lerp(charStartPositions[i].x, charStartPositions[i].x + translation.x + charGridPosOffsets[i].x, UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
+                yPos = Mathf.Lerp(charStartPositions[i].y, charStartPositions[i].y + translation.y + charGridPosOffsets[i].y, UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
+                yPos += jumpHeight * UniversalGameBalancer.Instance.characterJumpCurve.Evaluate(progress);
                 jumpingchars[i].transform.position = new Vector3(xPos, yPos, jumpingchars[i].transform.position.z);
-                jumpingchars[i].SpineAnim.SetAnimationSpeed(jumpAnimationCurve.Evaluate(progress));
+                jumpingchars[i].SpineAnim.SetAnimationSpeed(UniversalGameBalancer.Instance.jumpAnimationCurve.Evaluate(progress));
             }
             yield return null;
         }
@@ -228,11 +225,11 @@ public class EnvironmentManager : MonoBehaviour
 
             for (int i = 0; i < (charsToMove != null ? charsToMove.Count : 0); i++)
             {
-                xPos = Mathf.Lerp(charStartPositions[i].x, charStartPositions[i].x + charGridPosOffsets[i].x, cameraTravelCurve.Evaluate(progress));
-                yPos = Mathf.Lerp(charStartPositions[i].y, charStartPositions[i].y + charGridPosOffsets[i].y, cameraTravelCurve.Evaluate(progress));
-                yPos += jumpHeight * characterJumpCurve.Evaluate(progress);
+                xPos = Mathf.Lerp(charStartPositions[i].x, charStartPositions[i].x + charGridPosOffsets[i].x, UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
+                yPos = Mathf.Lerp(charStartPositions[i].y, charStartPositions[i].y + charGridPosOffsets[i].y, UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
+                yPos += jumpHeight * UniversalGameBalancer.Instance.characterJumpCurve.Evaluate(progress);
                 charsToMove[i].transform.position = new Vector3(xPos, yPos, charsToMove[i].transform.position.z);
-                charsToMove[i].SpineAnim.SetAnimationSpeed(jumpAnimationCurve.Evaluate(progress));
+                charsToMove[i].SpineAnim.SetAnimationSpeed(UniversalGameBalancer.Instance.jumpAnimationCurve.Evaluate(progress));
             }
             yield return null;
         }

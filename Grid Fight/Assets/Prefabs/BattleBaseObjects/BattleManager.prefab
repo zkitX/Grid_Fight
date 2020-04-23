@@ -217,30 +217,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0681df0f498a0a40995a743673d6972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ListOfAttckParticles:
-  - {fileID: 11400000, guid: 0ac191f0fb14cab4db17235b9bcb37fc, type: 2}
-  - {fileID: 11400000, guid: 7c5110cbb806c664fa1325786e7d2327, type: 2}
-  - {fileID: 11400000, guid: 4bcb8bd01a9503b418582b2e47ad5c6f, type: 2}
-  - {fileID: 11400000, guid: 9bde7e7b85d982e44897402dea81d201, type: 2}
-  - {fileID: 11400000, guid: 8606ac45d81def14b95b218e91d03765, type: 2}
-  - {fileID: 11400000, guid: 34eb549db3ccc034c8854d60dd03cfdd, type: 2}
-  - {fileID: 11400000, guid: 842178424724c3c40a6446b8a07a80ee, type: 2}
-  - {fileID: 11400000, guid: 5a56afe2a21ef144b96a65855fb11bef, type: 2}
-  - {fileID: 11400000, guid: 2ae03f6f288d0f544aaa3b274bfe1f5c, type: 2}
-  - {fileID: 11400000, guid: f8da7ccf8ef53774a94b39a6c482fa68, type: 2}
-  - {fileID: 11400000, guid: ce12804fc8dbfdc4ea36fe82b2a0aa26, type: 2}
-  - {fileID: 11400000, guid: 51d461b78e24fe6479a7b03e4d9e3dfd, type: 2}
-  - {fileID: 11400000, guid: 05d1598234e78d84aa4d3815eff56d28, type: 2}
-  - {fileID: 11400000, guid: 76f2139753a51e5479c2a0f7a37163b2, type: 2}
-  - {fileID: 11400000, guid: c1d8f691405218c4499c3d30d645f10a, type: 2}
-  - {fileID: 11400000, guid: db1fbe34bd64ed0408a8dc547910128f, type: 2}
-  - {fileID: 11400000, guid: b169a4beb3b2f1347839bf21bf71958d, type: 2}
-  - {fileID: 11400000, guid: 8fcdbe12034fd74429327df70fc1d674, type: 2}
-  - {fileID: 11400000, guid: dc8df7d280c29384babbb91c38813da3, type: 2}
-  - {fileID: 11400000, guid: d8c68e4ad63533448bcff11918ecab17, type: 2}
-  - {fileID: 11400000, guid: 11ab5ce2fd930ad41a961ccdfc344b46, type: 2}
-  - {fileID: 11400000, guid: 186e1315c62fbe1459c645d18240d94f, type: 2}
-  - {fileID: 11400000, guid: d35a587d01679a646afbbd66ddbc869d, type: 2}
   ListOfParticles:
   - {fileID: 11400000, guid: 50f05f987ec28bd45843d208bc71a365, type: 2}
   - {fileID: 11400000, guid: e4b8d2d8c6dd66d4c98dcd288e7475f8, type: 2}
@@ -283,6 +259,159 @@ MonoBehaviour:
   partialDefenceCost: 0.7
   fullDefenceCost: 1
   staminaRegenOnPerfectBlock: 5
+  cameraTravelCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.02220983
+      outSlope: 0.02220983
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.6808758
+    - serializedVersion: 3
+      time: 0.10001354
+      value: 0.012675673
+      inSlope: 0.4191122
+      outSlope: 0.4191122
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.4513275
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.7902848
+      value: 0.9608374
+      inSlope: 0.7796381
+      outSlope: 0.7796381
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.44403103
+      outWeight: 1
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.009599542
+      outSlope: 0.009599542
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.8770761
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  characterJumpCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 4.530805
+      outSlope: 4.530805
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.26912895
+    - serializedVersion: 3
+      time: 0.077753834
+      value: 0.62963474
+      inSlope: 2.601174
+      outSlope: 2.601174
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.10208023
+    - serializedVersion: 3
+      time: 0.49976987
+      value: 0.99814004
+      inSlope: 0.0016213584
+      outSlope: 0.0016213584
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.49110374
+    - serializedVersion: 3
+      time: 0.9289317
+      value: 0.64605826
+      inSlope: -2.6376877
+      outSlope: -2.6376877
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.21849483
+      outWeight: 0.589597
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -6.0882745
+      outSlope: -6.0882745
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15530764
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jumpAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.118026026
+      value: 0.9247688
+      inSlope: -11.685148
+      outSlope: -11.685148
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.18918675
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.35
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7844162
+      value: 0.44525254
+      inSlope: 7.8808002
+      outSlope: 7.8808002
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.18757847
+    - serializedVersion: 3
+      time: 0.9
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6911235830904615386
 GameObject:
   m_ObjectHideFlags: 0
