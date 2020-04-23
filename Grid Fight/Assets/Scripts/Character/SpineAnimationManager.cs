@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 public class SpineAnimationManager : MonoBehaviour
 {
@@ -16,8 +17,7 @@ public class SpineAnimationManager : MonoBehaviour
     public AnimationCurve LeftMovementSpeed;
     public AnimationCurve RightMovementSpeed;
 
-    public Transform FiringPoint;
-    public Transform SpecialFiringPoint;
+    public List<Transform> FiringPints = new List<Transform>();
     public string CurrentAnim;
     public float AnimationTransition = 0.1f;
 
@@ -27,7 +27,7 @@ public class SpineAnimationManager : MonoBehaviour
     //initialize all the spine element
     public void SetupSpineAnim()
     {
-        if(skeletonAnimation == null)
+        if (skeletonAnimation == null)
         {
             skeletonAnimation = GetComponent<SkeletonAnimation>();
             skeletonAnimation.enabled = true;
@@ -47,7 +47,6 @@ public class SpineAnimationManager : MonoBehaviour
     private void SpineAnimationState_Event(Spine.TrackEntry trackEntry, Spine.Event e)
     {
         CastLoopImpactAudioClipInfoClass attackTypeAudioInfo = CharOwner.GetAttackAudio();
-
         if (e.Data.Name.Contains("StopDefending"))
         {
             SetAnimationSpeed(0);
@@ -58,9 +57,12 @@ public class SpineAnimationManager : MonoBehaviour
         }
         else if (e.Data.Name.Contains("FireCastParticle"))
         {
-            if(attackTypeAudioInfo != null) AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackTypeAudioInfo.Cast, AudioBus.LowPriority, CharOwner.transform);
+            if (attackTypeAudioInfo != null)
+            {
+                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackTypeAudioInfo.Cast, AudioBus.LowPriority, CharOwner.transform);
+            }
             CharOwner.currentAttackPhase = CurrentAnim.Contains("Atk1") ? AttackPhasesType.Cast_Rapid : AttackPhasesType.Cast_Powerful;
-            CharOwner.FireCastParticles(CurrentAnim.Contains("Atk1") ? CharacterLevelType.Novice : CharacterLevelType.Godness);
+            CharOwner.FireCastParticles();
         }
         else if (e.Data.Name.Contains("FireBulletParticle"))
         {
@@ -69,25 +71,16 @@ public class SpineAnimationManager : MonoBehaviour
                 CharOwner.currentAttackPhase = CurrentAnim.Contains("Atk1") ? AttackPhasesType.Bullet_Rapid : AttackPhasesType.Bullet_Powerful;
                 CharOwner.CreateParticleAttack();
 
-                if (!CharOwner.VFXTestMode)
-                {
-                    CharOwner.NextAttackLevel = CharacterLevelType.Novice;
-
-                }
             }
         }
-        else if(e.Data.Name.Contains("FireTileAttack"))
+        else if (e.Data.Name.Contains("FireTileAttack"))
         {
             if (CharOwner.CharInfo.BaseCharacterType != BaseCharType.CharacterType_Script)
             {
                 CharOwner.currentAttackPhase = CurrentAnim.Contains("Atk1") ? AttackPhasesType.Bullet_Rapid : AttackPhasesType.Bullet_Powerful;
                 CharOwner.CreateTileAttack();
 
-                if (!CharOwner.VFXTestMode)
-                {
-                    CharOwner.NextAttackLevel = CharacterLevelType.Novice;
 
-                }
             }
         }
     }
@@ -95,12 +88,12 @@ public class SpineAnimationManager : MonoBehaviour
     public void SetAnim(CharacterAnimationStateType anim)
     {
 
-        if(CurrentAnim == CharacterAnimationStateType.Death.ToString() && anim.ToString() != CharacterAnimationStateType.Idle.ToString())
+        if (CurrentAnim == CharacterAnimationStateType.Death.ToString() && anim.ToString() != CharacterAnimationStateType.Idle.ToString())
         {
             return;
         }
 
-        if(anim == CharacterAnimationStateType.Arriving || anim.ToString().Contains("Growing"))
+        if (anim == CharacterAnimationStateType.Arriving || anim.ToString().Contains("Growing"))
         {
             SetAnim(anim, false, 0);
         }
@@ -110,19 +103,19 @@ public class SpineAnimationManager : MonoBehaviour
         }
     }
 
-     public void SetAnim(CharacterAnimationStateType anim, bool loop, float transition)
-     {
-         if(anim == CharacterAnimationStateType.Atk1_IdleToAtk)
-         {
-             //Debug.Log("Arriving start");
-         }
-         Loop = loop;
-         //Debug.Log(anim.ToString());
+    public void SetAnim(CharacterAnimationStateType anim, bool loop, float transition)
+    {
+        if (anim == CharacterAnimationStateType.Atk1_IdleToAtk)
+        {
+            //Debug.Log("Arriving start");
+        }
+        Loop = loop;
+        //Debug.Log(anim.ToString());
 
-         SpineAnimationState.SetAnimation(0, anim.ToString(), loop).MixDuration = transition;
-         //StartCoroutine(ClearAnim(transition));
-         CurrentAnim = anim.ToString();
-     }
+        SpineAnimationState.SetAnimation(0, anim.ToString(), loop).MixDuration = transition;
+        //StartCoroutine(ClearAnim(transition));
+        CurrentAnim = anim.ToString();
+    }
 
     public void SetAnim(string anim, bool loop, float transition)
     {
@@ -139,37 +132,9 @@ public class SpineAnimationManager : MonoBehaviour
     }
 
     private IEnumerator ClearAnim(float transition)
-     {
-         float timer = 0;
-         while (timer <= transition)
-         {
-             yield return new WaitForFixedUpdate();
-             while (!CharOwner.VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
-             {
-                 yield return new WaitForEndOfFrame();
-             }
-             timer += Time.fixedDeltaTime;
-         }
-         Debug.Log("Clear");
-         SpineAnimationState.SetEmptyAnimation(0, 0);
-     }
-
-
-   /* public void SetAnim(CharacterAnimationStateType anim, bool loop, float transition)
-    {
-
-        Debug.Log(anim.ToString());
-        SetupSpineAnim();
-        Loop = loop;
-        SpineAnimationState.SetAnimation(1, anim.ToString(), loop).MixDuration = transition;
-        StartCoroutine(test(transition));
-        CurrentAnim = anim;
-    }
-
-    private IEnumerator test(float asdaf)
     {
         float timer = 0;
-        while (timer <= asdaf)
+        while (timer <= transition)
         {
             yield return new WaitForFixedUpdate();
             while (!CharOwner.VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
@@ -178,8 +143,36 @@ public class SpineAnimationManager : MonoBehaviour
             }
             timer += Time.fixedDeltaTime;
         }
+        Debug.Log("Clear");
         SpineAnimationState.SetEmptyAnimation(0, 0);
-    }*/
+    }
+
+
+    /* public void SetAnim(CharacterAnimationStateType anim, bool loop, float transition)
+     {
+
+         Debug.Log(anim.ToString());
+         SetupSpineAnim();
+         Loop = loop;
+         SpineAnimationState.SetAnimation(1, anim.ToString(), loop).MixDuration = transition;
+         StartCoroutine(test(transition));
+         CurrentAnim = anim;
+     }
+
+     private IEnumerator test(float asdaf)
+     {
+         float timer = 0;
+         while (timer <= asdaf)
+         {
+             yield return new WaitForFixedUpdate();
+             while (!CharOwner.VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
+             {
+                 yield return new WaitForEndOfFrame();
+             }
+             timer += Time.fixedDeltaTime;
+         }
+         SpineAnimationState.SetEmptyAnimation(0, 0);
+     }*/
 
 
 
@@ -190,7 +183,7 @@ public class SpineAnimationManager : MonoBehaviour
 
     public float GetAnimLenght(CharacterAnimationStateType anim)
     {
-        if(skeletonAnimation.Skeleton.Data.FindAnimation(anim.ToString()) != null)
+        if (skeletonAnimation.Skeleton.Data.FindAnimation(anim.ToString()) != null)
         {
             return skeletonAnimation.Skeleton.Data.FindAnimation(anim.ToString()).Duration;
         }
@@ -200,7 +193,7 @@ public class SpineAnimationManager : MonoBehaviour
     public float transition = 0.5f;
     private void Update()
     {
-        if(changeanim)
+        if (changeanim)
         {
             changeanim = false;
             SetAnim(CurrentAnim, false, transition);
@@ -209,7 +202,7 @@ public class SpineAnimationManager : MonoBehaviour
 
     public void SetAnimationSpeed(float speed)
     {
-        if(SpineAnimationState != null)
+        if (SpineAnimationState != null)
         {
             SpineAnimationState.Tracks.ForEach(r => {
                 if (r != null)
@@ -224,7 +217,7 @@ public class SpineAnimationManager : MonoBehaviour
     {
         if (SpineAnimationState != null)
         {
-            if(SpineAnimationState.Tracks.Where(r => r != null).FirstOrDefault() != null)
+            if (SpineAnimationState.Tracks.Where(r => r != null).FirstOrDefault() != null)
             {
                 return SpineAnimationState.Tracks.Where(r => r != null).FirstOrDefault().TimeScale;
             }

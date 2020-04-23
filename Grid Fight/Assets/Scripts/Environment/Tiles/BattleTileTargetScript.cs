@@ -12,12 +12,12 @@ public class BattleTileTargetScript : MonoBehaviour
     {
         StartCoroutine(TargetAnim(duration));
     }
-    public void StartTarget(float duration, AttackParticleType atkPS, Vector2Int pos, float damage, ElementalType ele)
+    public void StartTarget(float duration, Vector2Int pos, float damage, ElementalType ele)
     {
         Pos = pos;
         Damage = damage;
         Elemental = ele;
-        StartCoroutine(TargetAnim(duration, atkPS));
+        StartCoroutine(TargetAnim(duration));
     }
 
     private IEnumerator TargetAnim(float duration)
@@ -37,45 +37,6 @@ public class BattleTileTargetScript : MonoBehaviour
             transform.localScale = new Vector3(1 - timer, 1 - timer, 1);
         }
 
-        gameObject.SetActive(false);
-    }
-
-    private IEnumerator TargetAnim(float duration, AttackParticleType atkPS)
-    {
-        float timer = 0;
-        //  Debug.Log(duration);
-        while (timer < 1)
-        {
-            yield return new WaitForFixedUpdate();
-
-            while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
-            {
-                yield return new WaitForEndOfFrame();
-            }
-            timer += Time.fixedDeltaTime / duration;
-
-            transform.localScale = new Vector3(1 - (timer > 0.9f ? 1 : timer) , 1 - (timer > 0.9f ? 1 : timer), 1);
-        }
-       
-       /* BaseCharacter target;
-        bool effectOn = true;
-        target = BattleManagerScript.Instance.GetCharInPos(Pos);
-        if (target != null)
-        {
-            effectOn = target.SetDamage(Damage, Elemental,);
-        }
-        if(effectOn)
-        {
-            GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(atkPS, AttackParticlePhaseTypes.EffectRight, transform.position, SideType.LeftSide);
-            LayerParticleSelection lps = effect.GetComponent<LayerParticleSelection>();
-            if (lps != null)
-            {
-                lps.Shot = CharacterLevelType.Novice;
-                lps.SelectShotLevel();
-
-            }
-        }*/
-       
         gameObject.SetActive(false);
     }
 }

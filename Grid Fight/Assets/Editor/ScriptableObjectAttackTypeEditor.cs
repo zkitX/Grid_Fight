@@ -11,8 +11,10 @@ public class ScriptableObjectAttackTypeEditor : Editor
     public List<BattleFieldTileInfo> TilesInfo = new List<BattleFieldTileInfo>();
     bool firstOpen = true;
     ScriptableObjectAttackBase origin;
-    public GameObject ChargingPs;
+    public GameObject ChargingActivationPs;
     public GameObject ChargingLoopPs;
+    public GameObject PlaceHolder;
+
 
     public override void OnInspectorGUI()
     {
@@ -21,16 +23,46 @@ public class ScriptableObjectAttackTypeEditor : Editor
         //test = false;
         origin = (ScriptableObjectAttackBase)target;
 
-      /*  if (origin.ChargingCastActivationPs == null)
+
+        if (origin.Particles.Left.Cast == null)
         {
-            origin.ChargingCastActivationPs = ChargingPs;
+            origin.Particles.Left.Cast = PlaceHolder;
+        }
+        if (origin.Particles.Left.Bullet == null)
+        {
+            origin.Particles.Left.Bullet = PlaceHolder;
+        }
+        if (origin.Particles.Left.Hit == null)
+        {
+            origin.Particles.Left.Hit = PlaceHolder;
         }
 
-        if (origin.ChargingLoopPs == null)
+        if (origin.Particles.Right.Cast == null)
         {
-            origin.ChargingLoopPs = ChargingLoopPs;
+            origin.Particles.Right.Cast = PlaceHolder;
         }
-        */
+        if (origin.Particles.Right.Bullet == null)
+        {
+            origin.Particles.Right.Bullet = PlaceHolder;
+        }
+        if (origin.Particles.Right.Hit == null)
+        {
+            origin.Particles.Right.Hit = PlaceHolder;
+        }
+
+
+
+
+        if (origin.Particles.CastActivationPS == null)
+        {
+            origin.Particles.CastActivationPS = ChargingActivationPs;
+        }
+
+        if (origin.Particles.CastLoopPS == null)
+        {
+            origin.Particles.CastLoopPS = ChargingLoopPs;
+        }
+        
 
         if (origin.CurrentAttackType == AttackType.Particles)
         {
@@ -123,7 +155,7 @@ public class ScriptableObjectAttackTypeEditor : Editor
             {
                 particlesTrajectory.EffectChances = EditorGUILayout.FloatField("EffectChances", particlesTrajectory.EffectChances);
                 var listEffect = particlesTrajectory.Effects;
-                int newCountEffect = Mathf.Max(0, EditorGUILayout.IntField("TileAffectedByEffect", particlesTrajectory.Effects.Count));
+                int newCountEffect = Mathf.Max(0, EditorGUILayout.IntField("Effects", particlesTrajectory.Effects.Count));
                 while (newCountEffect < listEffect.Count)
                     listEffect.RemoveAt(listEffect.Count - 1);
                 while (newCountEffect > listEffect.Count)
@@ -177,7 +209,7 @@ public class ScriptableObjectAttackTypeEditor : Editor
                             ScriptableObjectAttackEffect[] copyOfEffects = new ScriptableObjectAttackEffect[TilesInfo[TilesInfo.Count - 1].Tile.Effects.Count];
                             TilesInfo[TilesInfo.Count - 1].Tile.Effects.CopyTo(copyOfEffects);
                             bfatc = new BattleFieldAttackTileClass(new Vector2Int(x, y), TilesInfo[TilesInfo.Count -1].Tile.HasEffect, copyOfEffects.ToList(),
-                                TilesInfo[TilesInfo.Count - 1].Tile.HasDifferentParticles, TilesInfo[TilesInfo.Count - 1].Tile.ParticlesID, TilesInfo[TilesInfo.Count - 1].Tile.IsEffectOnTile,
+                                TilesInfo[TilesInfo.Count - 1].Tile.IsEffectOnTile,
                                 TilesInfo[TilesInfo.Count - 1].Tile.TileParticlesID, TilesInfo[TilesInfo.Count - 1].Tile.DurationOnTile);
                         }
                         bfti = new BattleFieldTileInfo(BattleTileTrajectory, bfatc);
@@ -235,12 +267,6 @@ public class ScriptableObjectAttackTypeEditor : Editor
             {
                 bfatc.Effects[i] = (ScriptableObjectAttackEffect)EditorGUILayout.ObjectField("Effect " + i, bfatc.Effects[i], typeof(ScriptableObjectAttackEffect), false);   //"Effect", bfatc.Effects, typeof(ScriptableObjectAttackEffect), false
             }
-        }
-
-        bfatc.HasDifferentParticles = EditorGUILayout.ToggleLeft("HasDifferentParticles", bfatc.HasDifferentParticles);
-        if (bfatc.HasDifferentParticles)
-        {
-            bfatc.ParticlesID = (AttackParticleType)EditorGUILayout.EnumPopup("AttackParticleType", bfatc.ParticlesID);
         }
 
         bfatc.IsEffectOnTile = EditorGUILayout.ToggleLeft("HasEffectOnTile", bfatc.IsEffectOnTile);

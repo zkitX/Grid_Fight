@@ -93,7 +93,7 @@ public class Stage09_Boss_NoFace : MinionType_Script
         bool val = true;
         while (val)
         {
-            yield return null;     
+            yield return null;
             if (IsOnField && CanAttack && baseForme.BossPhase == Stage09_Boss_Geisha.bossPhasesType.Monster_ && !isImmune)
             {
                 List<BaseCharacter> enemys = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList();
@@ -135,10 +135,10 @@ public class Stage09_Boss_NoFace : MinionType_Script
         string animToFire = "bippidi boppidi";
         switch (nextAttack.AttackAnim)
         {
-            case AttackAnimType.Rapid_Atk:
+            case AttackAnimType.Weak_Atk:
                 animToFire = "Atk1_IdleToAtk";
                 break;
-            case AttackAnimType.Powerful_Atk:
+            case AttackAnimType.Strong_Atk:
                 animToFire = "Atk2_IdleToAtk";
                 break;
             case AttackAnimType.Boss_Atk3:
@@ -157,7 +157,7 @@ public class Stage09_Boss_NoFace : MinionType_Script
             yield return null;
         }
 
-    
+
         yield break;
     }
 

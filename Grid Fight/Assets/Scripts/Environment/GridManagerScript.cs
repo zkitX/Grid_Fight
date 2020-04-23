@@ -27,7 +27,7 @@ public class GridManagerScript : MonoBehaviour
         {
             BattleTiles.Add(item);
         }
-      
+
     }
 
     //Setup each single tiles of the grid
@@ -52,7 +52,7 @@ public class GridManagerScript : MonoBehaviour
     public void MoveGrid_ToWorldPosition(Vector3 newGridPos)
     {
         transform.position = newGridPos;
-        foreach(BaseCharacter enemy in WaveManagerScript.Instance.WaveCharcters.Where(r => r.IsOnField == true))
+        foreach (BaseCharacter enemy in WaveManagerScript.Instance.WaveCharcters.Where(r => r.IsOnField == true))
         {
             enemy.transform.position = BattleTiles.Where(r => r.Pos == enemy.UMS.CurrentTilePos).First().transform.position;
         }
@@ -199,7 +199,7 @@ public class GridManagerScript : MonoBehaviour
             {
                 pos.y = i;
                 res = BattleTiles.Where(r => r.Pos == pos).FirstOrDefault();
-                if(res == null)
+                if (res == null)
                 {
 
                 }
@@ -242,7 +242,7 @@ public class GridManagerScript : MonoBehaviour
                 }
             }
         }
-        if(adjTiles.Count == 0)
+        if (adjTiles.Count == 0)
         {
             return null;
         }
@@ -255,9 +255,9 @@ public class GridManagerScript : MonoBehaviour
     public BattleTileScript[] GetFreeTilesAdjacentTo(Vector2Int originPos, int withinRadius = 1, bool circularRadius = false, WalkingSideType side = WalkingSideType.Both)
     {
         List<BattleTileScript> adjFreeTiles = new List<BattleTileScript>();
-        foreach(BattleTileScript tile in GetTilesAdjacentTo(originPos, withinRadius, circularRadius, side))
+        foreach (BattleTileScript tile in GetTilesAdjacentTo(originPos, withinRadius, circularRadius, side))
         {
-            if(tile._BattleTileState == BattleTileStateType.Empty)
+            if (tile._BattleTileState == BattleTileStateType.Empty)
             {
                 adjFreeTiles.Add(tile);
             }
@@ -287,7 +287,7 @@ public class GridManagerScript : MonoBehaviour
     public List<BattleTileScript> GetBattleTileInARowToDestination(Vector2Int destPos, FacingType isEnemyOrPlayer, int startingColumn)
     {
         List<BattleTileScript> res = new List<BattleTileScript>();
-        if(isEnemyOrPlayer == FacingType.Right)
+        if (isEnemyOrPlayer == FacingType.Right)
         {
             for (int i = YGridSeparator <= startingColumn ? startingColumn : YGridSeparator; i <= destPos.y; i++)
             {
@@ -348,9 +348,9 @@ public class GridManagerScript : MonoBehaviour
                         areOccupiedTileFree = false;
                         break;
                     }
-                } 
+                }
             }
-            if(areOccupiedTileFree)
+            if (areOccupiedTileFree)
             {
                 return emptyTile;
             }
@@ -358,7 +358,7 @@ public class GridManagerScript : MonoBehaviour
         return null;
     }
 
-   
+
 
 
     public bool IsEnemyOnTileAttackRange(List<Vector2Int> atkRange, Vector2Int basePos)
@@ -370,7 +370,7 @@ public class GridManagerScript : MonoBehaviour
             if (isPosOnField(basePos - target))
             {
                 res = IsEnemyOnTile(basePos - target);
-                if(res)
+                if (res)
                 {
                     return true;
                 }
@@ -405,18 +405,18 @@ public class GridManagerScript : MonoBehaviour
 
 
 
-    public IEnumerator OnBattleFieldAttackCo(CharacterInfoScript cInfo, ScriptableObjectAttackBase atk, Vector2Int basePos, AttackParticleType atkPS)
+    public IEnumerator OnBattleFieldAttackCo(CharacterInfoScript cInfo, ScriptableObjectAttackBase atk, Vector2Int basePos)
     {
         foreach (BulletBehaviourInfoClassOnBattleFieldClass item in atk.TilesAtk.BulletTrajectories)
         {
             float timer = 0;
             foreach (BattleFieldAttackTileClass target in item.BulletEffectTiles)
             {
-                if(isPosOnField(target.Pos))
+                if (isPosOnField(target.Pos))
                 {
                     GameObject go;
                     go = Instantiate(TargetIndicator, GetBattleTile(target.Pos).transform.position, Quaternion.identity);
-                    go.GetComponent<BattleTileTargetScript>().StartTarget(item.Delay, atkPS, target.Pos, cInfo.DamageStats.BaseDamage, cInfo.Elemental);
+                    go.GetComponent<BattleTileTargetScript>().StartTarget(item.Delay, target.Pos, cInfo.DamageStats.BaseDamage, cInfo.Elemental);
                 }
             }
             while (timer <= item.Delay)

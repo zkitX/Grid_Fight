@@ -314,8 +314,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  FiringPoint: {fileID: 8718984644333450195}
-  SpecialFiringPoint: {fileID: 2475970271791976594}
+  FiringPints:
+  - {fileID: 8718984644333450195}
+  - {fileID: 2475970271791976594}
   CurrentAnim: 0
   AnimationTransition: 0.1
   Loop: 0
@@ -339,10 +340,8 @@ MonoBehaviour:
   BaseCharacterType: 1
   CharacterID: 1001
   CurrentAttackTypeInfo: []
-  ParticleID: 16
   Elemental: 0
   ClassType: 3
-  CharacterLevel: 0
   UseLayeringSystem: 1
   CharacterRespawnLength: 180
   CharacterSelection: 0
@@ -414,6 +413,7 @@ MonoBehaviour:
     B_AtkToIdleDuration: 0.2
   DamageStats:
     BaseDamage: 10
+    B_BaseDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []
@@ -426,6 +426,7 @@ MonoBehaviour:
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
   MovementTimer: {x: 5, y: 8}
+  B_MovementTimer: {x: 5, y: 8}
 --- !u!54 &7881344236016434490
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -465,7 +466,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2475970271791976594}
   m_Layer: 0
-  m_Name: SpecialFiringPoint
+  m_Name: FiringPointStrong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -495,7 +496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8718984644333450195}
   m_Layer: 0
-  m_Name: FiringPoint
+  m_Name: FiringPointWeak
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

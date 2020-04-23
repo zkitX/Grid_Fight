@@ -15,7 +15,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
         ItemPowerUpInfo = itemPowerUpInfo;
         Icon.sprite = itemPowerUpInfo.Icon;
         transform.position = pos;
-        if(DurationOnBattleFieldCo != null)
+        if (DurationOnBattleFieldCo != null)
         {
             StopCoroutine(DurationOnBattleFieldCo);
         }
@@ -33,7 +33,6 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
                 Random.Range(ItemPowerUpInfo.Value.x, ItemPowerUpInfo.Value.y),
                 ItemPowerUpInfo.StatsToAffect, ItemPowerUpInfo.StatsChecker, new ElementalResistenceClass(),
                 ElementalType.Neutral, ItemPowerUpInfo.AnimToFire, ItemPowerUpInfo.Particles));
-
             AudioClipInfoClass powerUpAudio = null;
             ItemType itemType = ItemType.PowerUP_FullRecovery;
             switch (ItemPowerUpInfo.StatsToAffect)
@@ -62,7 +61,6 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
                     Debug.LogError("Error with potion type in event collection... Collected powerup effect is: " + ItemPowerUpInfo.StatsToAffect.ToString());
                     break;
             }
-            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, powerUpAudio, AudioBus.MediumPriority, other.transform);
             EventManager.Instance?.AddPotionCollected(itemType);
             gameObject.SetActive(false);
         }

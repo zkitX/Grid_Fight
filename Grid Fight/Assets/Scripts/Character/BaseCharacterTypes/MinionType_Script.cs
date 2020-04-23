@@ -158,7 +158,7 @@ public class MinionType_Script : BaseCharacter
                     {
                         yield return null;
                     }
-                   // Debug.Log(timer + "    " + MoveTime);
+                    // Debug.Log(timer + "    " + MoveTime);
                     timer += Time.deltaTime;
                 }
                 AIMove = false;
@@ -254,9 +254,8 @@ public class MinionType_Script : BaseCharacter
         {
             GetAttack();
         }
-        if (nextAttack != null)
+        if(nextAttack != null)
         {
-
             switch (nextAttack.AttackAnim)
             {
                 /*  case AttackAnimPrefixType.Atk:
@@ -267,22 +266,19 @@ public class MinionType_Script : BaseCharacter
                       currentAttackPhase = AttackPhasesType.Cast_Powerful;
                       CreateTileAttack();
                       break;*/
-                case AttackAnimType.Rapid_Atk:
+                case AttackAnimType.Weak_Atk:
                     animToFire = CharacterAnimationStateType.Atk1_IdleToAtk;
                     isLooped = false;
                     break;
-                case AttackAnimType.Powerful_Atk:
+                case AttackAnimType.Strong_Atk:
                     animToFire = CharacterAnimationStateType.Atk2_IdleToAtk;
                     isLooped = false;
                     break;
-                case AttackAnimType.Skill1:
+                case AttackAnimType.Buff:
                     break;
-                case AttackAnimType.Skill2:
+                case AttackAnimType.Debuff:
                     break;
             }
-
-
-
 
             /*  switch (CurrentAI)
               {
@@ -303,11 +299,7 @@ public class MinionType_Script : BaseCharacter
             {
                 yield return null;
             }
-
         }
-        
-
-        yield break;
     }
 
 

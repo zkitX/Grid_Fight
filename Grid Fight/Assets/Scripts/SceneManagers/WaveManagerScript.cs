@@ -52,8 +52,8 @@ public class WaveManagerScript : MonoBehaviour
         {
             foreach (WaveCharClass waveChar in wavePhase.ListOfEnemy)
             {
-                
-                if(waveChar.NPCType == WaveNPCTypes.Recruitable)
+
+                if (waveChar.NPCType == WaveNPCTypes.Recruitable)
                 {
                     CreateChar(waveChar.TypeOfCharacter.CharacterName, BaseCharType.MinionType_Script);
                 }
@@ -66,7 +66,7 @@ public class WaveManagerScript : MonoBehaviour
                     CreateChar(waveChar.TypeOfCharacter.CharacterName);
                     CreateChar(waveChar.TypeOfCharacter.CharacterName);
                 }
-                
+
             }
             yield return null;
 
@@ -76,7 +76,7 @@ public class WaveManagerScript : MonoBehaviour
     public int GetMaxEnemiesOnScreenAcrossAllWaves()
     {
         int mostEnemiesPossible = 0;
-        foreach(WavePhaseClass wavePhase in WavePhases)
+        foreach (WavePhaseClass wavePhase in WavePhases)
         {
             if (wavePhase.MaxEnemyOnScreen > mostEnemiesPossible) mostEnemiesPossible = wavePhase.MaxEnemyOnScreen;
         }
@@ -122,6 +122,21 @@ public class WaveManagerScript : MonoBehaviour
         res.CharInfo.Health = res.CharInfo.HealthStats.Base;
         res.CharInfo.SpeedStats.MovementSpeed = Random.Range(character.MovementSpeed.x, character.MovementSpeed.y);
         res.CharInfo.MovementTimer = character.MovementTimer;
+
+
+        res.CharInfo.HealthStats.B_Base = res.CharInfo.HealthStats.Base;
+        res.CharInfo.HealthStats.B_Regeneration = res.CharInfo.HealthStats.Regeneration;
+        res.CharInfo.StaminaStats.B_Base = res.CharInfo.StaminaStats.Base;
+        res.CharInfo.StaminaStats.B_Regeneration = res.CharInfo.StaminaStats.Regeneration;
+        res.CharInfo.SpeedStats.B_BaseSpeed = res.CharInfo.SpeedStats.BaseSpeed;
+        res.CharInfo.SpeedStats.B_AttackSpeedRatio = res.CharInfo.SpeedStats.AttackSpeedRatio;
+        res.CharInfo.DamageStats.B_BaseDamage = res.CharInfo.DamageStats.BaseDamage;
+        res.CharInfo.RapidAttack.B_DamageMultiplier = res.CharInfo.RapidAttack.DamageMultiplier;
+        res.CharInfo.PowerfulAttac.B_DamageMultiplier = res.CharInfo.PowerfulAttac.DamageMultiplier;
+        res.CharInfo.SpeedStats.B_MovementSpeed = res.CharInfo.SpeedStats.MovementSpeed;
+        res.CharInfo.B_MovementTimer = res.CharInfo.MovementTimer;
+
+
         ((MinionType_Script)res).UpDownPerc = character.UpDownPerc;
         return res;
     }
@@ -129,8 +144,8 @@ public class WaveManagerScript : MonoBehaviour
     private BaseCharacter CreateChar(CharacterNameType characterID, BaseCharType bCharType = BaseCharType.None)
     {
         BaseCharacter res = BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(characterID.ToString(), CharacterSelectionType.Up,
-                CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, characterID, WalkingSideType.RightSide, AttackType.Tile, bCharType), transform);
-        if(characterID != CharacterNameType.Stage00_BossOctopus &&
+        new List<ControllerType> { ControllerType.Enemy }, characterID, WalkingSideType.RightSide, AttackType.Tile, bCharType), transform);
+        if (characterID != CharacterNameType.Stage00_BossOctopus &&
             characterID != CharacterNameType.Stage00_BossOctopus_Head &&
             characterID != CharacterNameType.Stage00_BossOctopus_Tentacles &&
             characterID != CharacterNameType.Stage00_BossOctopus_Girl) res.gameObject.SetActive(false);
@@ -140,7 +155,7 @@ public class WaveManagerScript : MonoBehaviour
 
     public void RemoveWaveCharacterFromBoard(BaseCharacter character)
     {
-        if(WaveCharcters.Where(r => r.CharInfo.Name == character.CharInfo.Name).FirstOrDefault() != null)
+        if (WaveCharcters.Where(r => r.CharInfo.Name == character.CharInfo.Name).FirstOrDefault() != null)
         {
             WaveCharcters.Where(r => r.CharInfo.Name == character.CharInfo.Name).FirstOrDefault().IsOnField = false;
             WaveCharcters.Where(r => r.CharInfo.Name == character.CharInfo.Name).FirstOrDefault().gameObject.SetActive(false);
@@ -174,7 +189,7 @@ public class WaveManagerScript : MonoBehaviour
 
     public IEnumerator StartWaveByName(string waveName)
     {
-        yield return Wave(WavePhases.Where(r=> r.name == waveName).First());
+        yield return Wave(WavePhases.Where(r => r.name == waveName).First());
     }
 
     private IEnumerator Wave(WavePhaseClass wavePhase)
@@ -185,10 +200,10 @@ public class WaveManagerScript : MonoBehaviour
         {
             timer += Time.fixedDeltaTime;
             yield return BattleManagerScript.Instance.PauseUntil();
-            if (timer > wavePhase.DelayBetweenChars && 
+            if (timer > wavePhase.DelayBetweenChars &&
                 WaveCharcters.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script).ToList().Count < wavePhase.MaxEnemyOnScreen)
             {
-        yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.5f);
                 if (wavePhase.IsRandom)
                 {
                     waveCharacterInfoClass = GetAvailableRandomWaveCharacter(wavePhase);
@@ -198,7 +213,7 @@ public class WaveManagerScript : MonoBehaviour
                     waveCharacterInfoClass = GetAvailableWaveCharacter(wavePhase);
                 }
                 newChar = GetWaveCharacter(waveCharacterInfoClass);
-                yield return SpawChar(newChar, CurrentWaveChar.IsRandomSpowiningTile, 
+                yield return SpawChar(newChar, CurrentWaveChar.IsRandomSpowiningTile,
                     CurrentWaveChar.IsRandomSpowiningTile ? new Vector2Int() : CurrentWaveChar.SpowningTile[Random.Range(0, CurrentWaveChar.SpowningTile.Count)], true);
                 timer = 0;
 
@@ -206,7 +221,7 @@ public class WaveManagerScript : MonoBehaviour
                 {
                     while (true)
                     {
-                        if(WaveCharcters.Where(r => r.gameObject.activeInHierarchy && (r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script || (r.IsOnField && r.CharInfo.BaseCharacterType != BaseCharType.MinionType_Script))).ToList().Count == 0)
+                        if (WaveCharcters.Where(r => r.gameObject.activeInHierarchy && (r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script || (r.IsOnField && r.CharInfo.BaseCharacterType != BaseCharType.MinionType_Script))).ToList().Count == 0)
                         {
                             yield break;
                         }
@@ -261,7 +276,7 @@ public class WaveManagerScript : MonoBehaviour
 
         }
 
-        yield return BattleManagerScript.Instance.MoveCharToBoardWithDelay(withArrivingAnim  ? 0.2f : 0, currentCharacter, bts.transform.position);
+        yield return BattleManagerScript.Instance.MoveCharToBoardWithDelay(withArrivingAnim ? 0.2f : 0, currentCharacter, bts.transform.position);
 
 
     }
@@ -313,7 +328,6 @@ public class WaveCharacterInfoClass
     public CharacterNameType CharacterName;
     public Vector2 Health;
     public Vector2 HealthRegeneration;
-    public CharacterLevelType CharacterClass;
     public Vector2 BaseDamage;
     public Vector2 RapidAttackMultiplier;
     public Vector2 PowerfulAttackMultiplier;

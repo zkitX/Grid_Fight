@@ -14,20 +14,20 @@ public class BattleTileTargetsScript : MonoBehaviour
     {
         Whiteline = transform.GetChild(0);
     }
-    public void SetAttack(float duration, AttackParticleType atkPS, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, List<ScriptableObjectAttackEffect> atkEffects, float effectChances)
+    public void SetAttack(float duration, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, List<ScriptableObjectAttackEffect> atkEffects, float effectChances)
     {
         GameObject nextT = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Tile);
-        
+
         nextT.SetActive(true);
         TargetClass tc = new TargetClass(duration, nextT);
         nextT.transform.parent = transform;
         nextT.transform.localPosition = TargetsPosition[0];
         Targets.Add(tc);
         UpdateQueue();
-        StartCoroutine(FireTarget(tc, atkPS, pos, damage, ele, attacker, atkEffects, effectChances));
+        StartCoroutine(FireTarget(tc, pos, damage, ele, attacker, atkEffects, effectChances));
     }
 
-    private IEnumerator FireTarget(TargetClass tc, AttackParticleType atkPS, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, List<ScriptableObjectAttackEffect> atkEffects, float effectChances)
+    private IEnumerator FireTarget(TargetClass tc, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, List<ScriptableObjectAttackEffect> atkEffects, float effectChances)
     {
         float timer = 0;
         Whiteline.gameObject.SetActive(true);
@@ -54,7 +54,7 @@ public class BattleTileTargetsScript : MonoBehaviour
                 UpdateQueue(tc);
                 yield break;
             }
-            else if (tc.RemainingTime <= duration*0.1f && attacker.UMS.CurrentAttackType == AttackType.Tile && !attackerFiredAttackAnim)
+            else if (tc.RemainingTime <= duration * 0.1f && attacker.UMS.CurrentAttackType == AttackType.Tile && !attackerFiredAttackAnim)
             {
                 attackerFiredAttackAnim = true;
                 attacker.shotsLeftInAttack--;
@@ -74,7 +74,7 @@ public class BattleTileTargetsScript : MonoBehaviour
                 effectOn = target.SetDamage(damage * (iscritical ? 2 : 1), ele, iscritical);
                 if (effectOn)
                 {
-                    int chances = Random.Range(0,100);
+                    int chances = Random.Range(0, 100);
                     if (chances < effectChances)
                     {
                         foreach (ScriptableObjectAttackEffect item in atkEffects)
@@ -85,21 +85,21 @@ public class BattleTileTargetsScript : MonoBehaviour
                 }
             }
         }
-        if (effectOn)
+
+
+        if (attacker.CharInfo.Health > 0 && attacker.Attacking)
         {
-            attacker.SpecialAttackImpactEffects();
-            GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(atkPS, AttackParticlePhaseTypes.EffectRight, transform.position, attacker.UMS.Side);
-            LayerParticleSelection lps = effect.GetComponent<LayerParticleSelection>();
-            if (lps != null)
+            if (effectOn)
             {
-                lps.Shot = CharacterLevelType.Novice;
-                lps.SelectShotLevel();
+                attacker.SpecialAttackImpactEffects();
+                GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(attacker.nextAttack.Particles.Right.Hit, attacker.CharInfo.CharacterID, AttackParticlePhaseTypes.Hit, transform.position, attacker.UMS.Side, attacker.nextAttack.AttackInput);
             }
-            if(attacker.GetAttackAudio() != null) AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attacker.GetAttackAudio().Impact, AudioBus.MediumPriority, transform);
-           
+            if (attacker.GetAttackAudio() != null)
+            {
+                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attacker.GetAttackAudio().Impact, AudioBus.MediumPriority, transform);
+            }
         }
         yield return new WaitForSeconds(0.2f);
-
         UpdateQueue(tc);
     }
 
@@ -109,11 +109,11 @@ public class BattleTileTargetsScript : MonoBehaviour
         Targets = Targets.OrderByDescending(r => r.RemainingTime).ToList();
         for (int i = 0; i < Targets.Count; i++)
         {
-           
+
             Targets[i].TargetIndicator.transform.localPosition = TargetsPosition[i];
             return;
         }
-       
+
     }
 
     public void UpdateQueue(TargetClass completedTarget)

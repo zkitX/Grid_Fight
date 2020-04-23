@@ -36,18 +36,6 @@ public class VFXTester : MonoBehaviour
 
         }
 
-        for (int i = 0; i <= Enum.GetValues(typeof(CharacterLevelType)).Cast<int>().Last(); i++)
-        {
-            ParticleLevel.options.Add(new TMPro.TMP_Dropdown.OptionData(((CharacterLevelType)i).ToString()));
-
-        }
-
-        for (int i = 0; i <= Enum.GetValues(typeof(AttackParticleType)).Cast<int>().Last(); i++)
-        {
-            ParticleType.options.Add(new TMPro.TMP_Dropdown.OptionData(((AttackParticleType)i).ToString()));
-
-        }
-
         for (int i = 0; i <= Enum.GetValues(typeof(CharacterClassType)).Cast<int>().Last(); i++)
         {
             CharacterClass.options.Add(new TMPro.TMP_Dropdown.OptionData(((CharacterClassType)i).ToString()));
@@ -70,17 +58,17 @@ public class VFXTester : MonoBehaviour
 
         if (charOnScene != null && Input.GetKeyUp(KeyCode.O))
         {
-            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack(AttackAnimType.Powerful_Atk));
+            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack(AttackInputType.Strong));
         }
 
         if (charOnScene != null && Input.GetKeyUp(KeyCode.B))
         {
-            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack(AttackAnimType.Skill1));
+            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack(AttackInputType.Skill1));
         }
 
         if (charOnScene != null && Input.GetKeyUp(KeyCode.V))
         {
-            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack(AttackAnimType.Skill2));
+            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack(AttackInputType.Skill2));
         }
     }
 
@@ -104,13 +92,10 @@ public class VFXTester : MonoBehaviour
             BattleTileScript cbts = GridManagerScript.Instance.GetBattleTile(currentCharacter.UMS.Pos[i]);
             currentCharacter.CurrentBattleTiles.Add(cbts);
         }
-        currentCharacter.NextAttackLevel = (CharacterLevelType)Enum.Parse(typeof(CharacterLevelType), ParticleLevel.options[ParticleLevel.value].text);
-        currentCharacter.CharInfo.ParticleID = (AttackParticleType)Enum.Parse(typeof(AttackParticleType), ParticleType.options[ParticleType.value].text);
         currentCharacter.CharInfo.SpeedStats.AttackSpeedRatio = AttackSpeed.value;
         currentCharacter.UMS.Side = SideType.RightSide;
         currentCharacter.CharInfo.ClassType = (CharacterClassType)Enum.Parse(typeof(CharacterClassType), CharacterClass.options[CharacterClass.value].text);
         currentCharacter.CharInfo.SpeedStats.BulletSpeed = SpeedOfBullets.value;
-        currentCharacter.CharInfo.ParticleID = currentCharacter.CharInfo.ParticleID;
         currentCharacter.CharInfo.CurrentAttackTypeInfo = AttacksTypeInfo.Where(r => r.ParticlesAtk.CharacterClass == currentCharacter.CharInfo.ClassType).ToList();
         currentCharacter.CharInfo.DamageStats.ChildrenBulletDelay = MountainDelay.value;
     }

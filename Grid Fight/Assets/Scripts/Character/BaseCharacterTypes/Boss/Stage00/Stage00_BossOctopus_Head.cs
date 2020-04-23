@@ -40,7 +40,7 @@ public class Stage00_BossOctopus_Head : MinionType_Script
         base.fireAttackAnimation(pos);
     }
 
-    public override void CastAttackParticles(CharacterLevelType nextAttackLevel)
+    public override void CastAttackParticles()
     {
         GameObject cast;
         GameObject GOTarget;
@@ -48,18 +48,12 @@ public class Stage00_BossOctopus_Head : MinionType_Script
 
         for (int i = 0; i < eyeAttackTarget.Count; i++)
         {
-            cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.CastRight,
-                NextAttackLevel == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, UMS.Side);
+            cast = ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.Right.Cast, CharInfo.CharacterID, AttackParticlePhaseTypes.Cast,
+                SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position, UMS.Side, nextAttack.AttackInput);
             GOTarget = cast.GetComponentInChildren<ParticleLaserAiming>().Target.transform.gameObject;
             GOTarget.transform.position = eyeAttackTarget[i];
             cast.GetComponent<DisableParticleScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
-            LayerParticleSelection lps = cast.GetComponent<LayerParticleSelection>();
-
-            if (lps != null)
-            {
-                lps.Shot = NextAttackLevel;
-                lps.SelectShotLevel();
-            }
+            
         }
 
         if (UMS.CurrentAttackType == AttackType.Particles)

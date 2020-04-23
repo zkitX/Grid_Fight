@@ -53,18 +53,6 @@ public class CharTesterScript : MonoBehaviour
 
         }
 
-        for (int i = 0; i <= Enum.GetValues(typeof(CharacterLevelType)).Cast<int>().Last(); i++)
-        {
-            CharacterLevel.options.Add(new TMP_Dropdown.OptionData(((CharacterLevelType)i).ToString()));
-
-        }
-
-        for (int i = 0; i <= Enum.GetValues(typeof(AttackParticleType)).Cast<int>().Last(); i++)
-        {
-            ParticleType.options.Add(new TMP_Dropdown.OptionData(((AttackParticleType)i).ToString()));
-
-        }
-
         for (int i = 0; i <= Enum.GetValues(typeof(CharacterClassType)).Cast<int>().Last(); i++)
         {
             CharacterClass.options.Add(new TMP_Dropdown.OptionData(((CharacterClassType)i).ToString()));
@@ -94,17 +82,17 @@ public class CharTesterScript : MonoBehaviour
         AnimationSpeedText.text = AnimationSpeed.value.ToString("F2");
         if (charOnScene != null && Input.GetKeyUp(KeyCode.O))
         {
-            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack( AttackAnimType.Powerful_Atk));
+            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack(AttackInputType.Strong));
         }
 
         if (charOnScene != null && Input.GetKeyUp(KeyCode.B))
         {
-            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack(AttackAnimType.Skill1));
+            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack(AttackInputType.Skill1));
         }
 
         if (charOnScene != null && Input.GetKeyUp(KeyCode.V))
         {
-            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack(AttackAnimType.Skill2));
+            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack(AttackInputType.Skill2));
         }
     }
 
@@ -134,8 +122,6 @@ public class CharTesterScript : MonoBehaviour
 
     public void ParticlesSetup()
     {
-        currentCharacter.CharInfo.CharacterLevel = (CharacterLevelType)Enum.Parse(typeof(CharacterLevelType), CharacterLevel.options[CharacterLevel.value].text);
-        currentCharacter.CharInfo.ParticleID = (AttackParticleType)Enum.Parse(typeof(AttackParticleType), ParticleType.options[ParticleType.value].text);
         currentCharacter.CharInfo.SpeedStats.AttackSpeedRatio = AttackSpeed.value;
         currentCharacter.CharInfo.SpeedStats.BulletSpeed = SpeedOfBullets.value;
         currentCharacter.CharInfo.CurrentAttackTypeInfo = AttacksTypeInfo.Where(r => r.ParticlesAtk.CharacterClass == currentCharacter.CharInfo.ClassType).ToList();

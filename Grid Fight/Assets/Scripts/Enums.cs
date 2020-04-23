@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enums
 {
-   
+
 }
 
 
@@ -198,7 +198,8 @@ public enum BattleState
     End,
     WinLose,
     Tutorial,
-    Intro
+    Intro,
+    Jump
 }
 
 public enum ElementalType
@@ -216,14 +217,6 @@ public enum ElementalType
 }
 
 
-public enum CharacterLevelType
-{
-    Novice,
-    Defiant,
-    Heroine,
-    Godness
-}
-
 public enum AttackPhasesType
 {
     Start,
@@ -233,7 +226,7 @@ public enum AttackPhasesType
     Cast_Powerful,
     Bullet_Powerful,
     End
-    
+
 }
 
 public enum RelationshipType
@@ -375,10 +368,10 @@ public enum AttackAnimPrefixType
 
 public enum AttackAnimType
 {
-    Rapid_Atk,
-    Powerful_Atk,
-    Skill1,
-    Skill2,
+    Weak_Atk,
+    Strong_Atk,
+    Buff,
+    Debuff,
     Boss_Atk3,
 }
 
@@ -486,59 +479,14 @@ public enum ParticlesType
     Stage00BossDeathSmoke
 }
 
-public enum AttackParticleType
-{
-    Stage00_Minion_Valley = 13,
-    Stage00_Minion_Forest = 14,
-    Stage00_Minion_Mountain = 15,
-    Stage00_Minion_Desert = 16,
-    Stage00_Desert = 17,
-    Stage00_Mountain = 18,
-    Stage00_Forest = 19,
-    Stage00_Valley = 20,
-    Stage03_Minion_Desert = 4,
-    Stage04_Minion_Mountain = 0,
-    Stage04_Minion_Forest = 1,
-    Stage04_Minion_Desert = 2,
-    Stage04_Minion_Valley = 3,
-    Stage04_Desert = 5,
-    Stage04_Mountain = 6,
-    Stage04_Forest = 7,
-    Stage04_Valley = 8,
-    Stage04_BossGirl_Minion = 9,
-    Stage04_BossGirl = 10,
-    Stage04_BossMonster_Minion = 11,
-    Stage04_BossMonster = 12,
-    Stage09_Minion_Valley = 23,
-    Stage09_Minion_Forest = 24,
-    Stage09_Minion_Mountain = 25,
-    Stage09_Minion_Desert = 26,
-    Stage09_Desert = 27,
-    Stage09_Mountain = 28,
-    Stage09_Forest = 29,
-    Stage09_Valley = 30,
-    Stage09_Boss_Phase1 = 31,
-    Stage09_Boss_Monster = 32,
-    Test_Mesh = 1000,
-    Stage00_BossOctopus_Tentacle = 21,
-    Stage00_BossOctopus_Head = 22,
-    Stage04_Desert_Goddess = 1005,
-    Stage04_Forest_Goddess = 1007,
-    Stage04_Valley_Goddess = 1008,
-    DummyCharParticles = 100000
-}
-
 
 public enum AttackParticlePhaseTypes
 {
-    CastRight,
-    EffectRight,
-    CastLeft,
-    AttackLeft,
-    EffectLeft,
+    Cast,
+    Bullet,
+    Hit,
     Charging,
     CastActivation,
-    AttackRight,
 }
 
 public enum SideType
@@ -741,7 +689,7 @@ public enum CharacterNameType
     Stage09_Character_Forest = 1187,
     Stage09_Boss_Geisha = 1188,
     Stage09_Boss_NoFace = 1189,
-    
+
     DummyChar = 10001
     #endregion
 
@@ -759,6 +707,22 @@ public enum InputAxisType
     Right_Move_Horizontal,
     Left_Move_Vertical,
     Right_Move_Vertical
+}
+
+public enum InputActionType
+{
+    None = 0,
+    Weak,
+    Strong,
+    Skill1,
+    Skill2,
+    Skill3,
+    Defend,
+    Defend_Stop,
+    Move_Up,
+    Move_Down,
+    Move_Left,
+    Move_Right,
 }
 
 
@@ -856,20 +820,4 @@ public enum AudioBus
     LowPriority = 0,
     MediumPriority = 50,
     HighPriority = 100,
-}
-
-public enum InputActionType
-{
-    None = 0,
-    Weak,
-    Strong,
-    Skill1,
-    Skill2,
-    Skill3,
-    Defend,
-    Defend_Stop,
-    Move_Up,
-    Move_Down,
-    Move_Left,
-    Move_Right,
 }

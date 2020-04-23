@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class BaseCharacter : MonoBehaviour, IDisposable
 {
-  
+
     public delegate void CurrentCharIsDead(CharacterNameType cName, List<ControllerType> playerController, SideType side);
     public event CurrentCharIsDead CurrentCharIsDeadEvent;
 
@@ -56,7 +56,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public SpineAnimationManager SpineAnim;
     public bool _IsOnField = false;
     public bool CanAttack = false;
-    public CharacterLevelType NextAttackLevel = CharacterLevelType.Novice;
     public bool isSpecialLoading = false;
     public bool isSpecialQueueing = false;
     public List<CurrentBuffsDebuffsClass> BuffsDebuffs = new List<CurrentBuffsDebuffsClass>();
@@ -108,7 +107,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public virtual void Start()
     {
-        if(VFXTestMode)
+        if (VFXTestMode)
         {
             StartAttakCo();
             StartMoveCo();
@@ -122,13 +121,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo, UMS.Side);
         }
 
-        if(transform.parent == null)
+        if (transform.parent == null)
         {
 
         }
 
 
-        UMS.HPBar.localScale = new Vector3((1f / 100f) * CharInfo.HealthPerc,1,1);
+        UMS.HPBar.localScale = new Vector3((1f / 100f) * CharInfo.HealthPerc, 1, 1);
 
         UMS.StaminaBar.localScale = new Vector3((1f / 100f) * CharInfo.StaminaPerc, 1, 1);
     }
@@ -136,7 +135,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     #region Setup Character
     public virtual void SetupCharacterSide()
     {
-       
+
         if (UMS.PlayerController.Contains(ControllerType.Enemy))
         {
             if (CharInfo.CharacterID != CharacterNameType.Stage00_BossOctopus &&
@@ -149,7 +148,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             UMS.SelectionIndicator.parent.gameObject.SetActive(true);
         }
-        
+
         SpineAnimatorsetup();
         UMS.SetupCharacterSide();
         int layer = UMS.Side == SideType.LeftSide ? 9 : 10;
@@ -166,7 +165,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public virtual void StopMoveCo()
     {
-       
+
     }
 
     private void _CharInfo_BaseSpeedChangedEvent(float baseSpeed)
@@ -178,7 +177,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
         if (IsOnField)
         {
-           // EventManager.Instance.AddCharacterDeath(this);
+            // EventManager.Instance.AddCharacterDeath(this);
             SetCharDead();
         }
     }
@@ -186,7 +185,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public virtual void SetAttackReady(bool value)
     {
         //Debug.Log(CharInfo.CharacterID + "  " + value);
-        if(CharBoxCollider != null)
+        if (CharBoxCollider != null)
         {
             CharBoxCollider.enabled = value;
         }
@@ -202,8 +201,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public virtual void SetCharDead(bool hasToDisappear = true)
     {
-      
-        if(attackCoroutine != null)
+
+        if (attackCoroutine != null)
         {
             StopCoroutine(attackCoroutine);
             attackCoroutine = null;
@@ -256,7 +255,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public void StartAttakCo()
     {
-        if(UMS.CurrentAttackType == AttackType.Tile && attackCoroutine == null)
+        if (UMS.CurrentAttackType == AttackType.Tile && attackCoroutine == null)
         {
             attackCoroutine = AttackAction(true);
             StartCoroutine(attackCoroutine);
@@ -370,9 +369,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     ScriptableObjectAttackBase atkToCheck;
     public void GetAttack()
     {
-        currentTileAtks.Clear();
         currentTileAtks = CharInfo.CurrentAttackTypeInfo.Where(r => r != null && r.CurrentAttackType == AttackType.Tile).ToList();
-
         availableAtks.Clear();
         for (int i = 0; i < currentTileAtks.Count; i++)
         {
@@ -443,7 +440,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         for (int i = 0; i < availableAtks.Count; i++)
         {
             sumc += availableAtks[i].TilesAtk.Chances;
-            
+
             if (chances < sumc)
             {
                 nextAttack = availableAtks[i];
@@ -453,27 +450,21 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     }
 
 
-    public void FireCastParticles(CharacterLevelType nextAttackLevel)
+    public void FireCastParticles()
     {
-        CastAttackParticles(nextAttackLevel);
+        CastAttackParticles();
     }
 
     //start the casting particlaes foe the attack
-    public virtual void CastAttackParticles(CharacterLevelType nextAttackLevel)
+    public virtual void CastAttackParticles()
     {
         //Debug.Log("Cast");
-        NextAttackLevel = nextAttackLevel;
-        GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, UMS.Side == SideType.LeftSide ? AttackParticlePhaseTypes.CastLeft : AttackParticlePhaseTypes.CastRight,
-            NextAttackLevel == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position, UMS.Side);
-        cast.GetComponent<DisableParticleScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
-        LayerParticleSelection lps = cast.GetComponent<LayerParticleSelection>();
-        if (lps != null)
-        {
-            lps.Shot = NextAttackLevel;
-            lps.SelectShotLevel();
-        }
 
-        if(UMS.CurrentAttackType == AttackType.Particles)
+        GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(UMS.Side == SideType.LeftSide ? nextAttack.Particles.Left.Cast : nextAttack.Particles.Right.Cast, CharInfo.CharacterID, AttackParticlePhaseTypes.Cast,
+            SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position, UMS.Side, nextAttack.AttackInput);
+        cast.GetComponent<DisableParticleScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
+
+        if (UMS.CurrentAttackType == AttackType.Particles)
         {
             if (SpineAnim.CurrentAnim.Contains("Atk1"))
             {
@@ -487,15 +478,15 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
         }
 
-        
+
     }
 
     //Create and set up the basic info for the bullet
     public void CreateBullet(BulletBehaviourInfoClass bulletBehaviourInfo)
     {
-       // Debug.Log(isSpecialLoading);
+        // Debug.Log(isSpecialLoading);
         GameObject bullet = BulletManagerScript.Instance.GetBullet();
-        bullet.transform.position = NextAttackLevel == CharacterLevelType.Novice ? SpineAnim.FiringPoint.position : SpineAnim.SpecialFiringPoint.position;
+        bullet.transform.position = SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position;
         BulletScript bs = bullet.GetComponent<BulletScript>();
         bs.BulletEffectTiles = bulletBehaviourInfo.BulletEffectTiles;
         bs.Trajectory_Y = bulletBehaviourInfo.Trajectory_Y;
@@ -509,7 +500,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         bs.VFXTestMode = VFXTestMode;
         bs.CharInfo = CharInfo;
         bs.attackAudioType = GetAttackAudio();
-
+        bs.EffectChances = 100;
+        bs.HitPs = UMS.Side == SideType.LeftSide ? nextAttack.Particles.Left.Hit : nextAttack.Particles.Right.Hit;
+        bs.AttackInput = nextAttack.AttackInput;
+        bs.AtkType = nextAttack.AttackAnim;
         if (bulletBehaviourInfo.HasEffect)
         {
             bs.BulletEffects = bulletBehaviourInfo.Effects;
@@ -529,17 +523,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             bs.DestinationTile = new Vector2Int(UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x, UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y < 0 ? 0 : UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y);
         }
-        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharInfo.ParticleID,UMS.Side == SideType.LeftSide ? AttackParticlePhaseTypes.AttackLeft : AttackParticlePhaseTypes.AttackRight, bullet.transform, UMS.Side,
-            CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script ? true : false);
+        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(UMS.Side == SideType.LeftSide ? nextAttack.Particles.Left.Bullet : nextAttack.Particles.Right.Bullet, CharInfo.CharacterID, AttackParticlePhaseTypes.Bullet, bullet.transform, UMS.Side,
+            nextAttack.AttackInput, CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script ? true : false);
 
-        LayerParticleSelection lps = bs.PS.GetComponent<LayerParticleSelection>();
-        if (lps != null)
-        {
-            bs.attackLevel = NextAttackLevel;
-            lps.Shot = NextAttackLevel;
-            lps.SelectShotLevel();
-        }
-        if(CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
+
+        if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
         {
             bs.gameObject.SetActive(true);
             bs.StartMoveToTile();
@@ -567,6 +555,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
     }
 
+
     public Vector2Int nextAttackPos;
     public void CreateTileAttack()
     {
@@ -585,7 +574,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 foreach (BattleFieldAttackTileClass target in item.BulletEffectTiles)
                 {
                     Vector2Int res = nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnTarget && charTar != null ? target.Pos + nextAttackPos :
-                        nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnItSelf ? target.Pos + UMS.CurrentTilePos : target.Pos + nextAttackPos;
+                    nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnItSelf ? target.Pos + UMS.CurrentTilePos : target.Pos + nextAttackPos;
                     if (GridManagerScript.Instance.isPosOnField(res))
                     {
                         BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(res);
@@ -593,7 +582,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                         {
                             bts.SetupEffect(target.Effects, target.DurationOnTile, target.TileParticlesID);
                         }
-                        else 
+                        else
                         {
                             if (bts._BattleTileState != BattleTileStateType.Blocked)
                             {
@@ -601,15 +590,15 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                                 {
                                     shotsLeftInAttack++;
 
-                                    bts.BattleTargetScript.SetAttack(item.Delay, BattleManagerScript.Instance.VFXScene ? CharInfo.ParticleID : target.ParticlesID, res,
-                                    0 , CharInfo.Elemental, this,
+                                    bts.BattleTargetScript.SetAttack(item.Delay, res,
+                                    0, CharInfo.Elemental, this,
                                     target.Effects, target.EffectChances);
                                 }
                                 else if (nextAttack.TilesAtk.AtkType != BattleFieldAttackType.OnItSelf && bts.WalkingSide != UMS.WalkingSide)
                                 {
                                     shotsLeftInAttack++;
 
-                                    bts.BattleTargetScript.SetAttack(item.Delay, BattleManagerScript.Instance.VFXScene ? CharInfo.ParticleID : target.ParticlesID, res,
+                                    bts.BattleTargetScript.SetAttack(item.Delay, res,
                                     CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
                                     target.Effects, target.EffectChances);
                                 }
@@ -618,13 +607,17 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     }
                 }
             }
+
         }
     }
 
     #endregion
     #region Defence
 
+
+
     protected float defenceAnimSpeedMultiplier = 5f;
+
     public void StartDefending()
     {
         if (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
@@ -650,7 +643,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     private IEnumerator RejectDefending_Co()
     {
         float timer = (SpineAnim.GetAnimLenght(CharacterAnimationStateType.Defending) / defenceAnimSpeedMultiplier) * 0.25f;
-        while(timer != 0f)
+        while (timer != 0f)
         {
             timer = Mathf.Clamp(timer - Time.deltaTime, 0f, (SpineAnim.GetAnimLenght(CharacterAnimationStateType.Defending) / defenceAnimSpeedMultiplier) * 0.25f);
             yield return null;
@@ -669,12 +662,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         canDefend = true;
     }
-    
+
     private IEnumerator Defending_Co()
     {
         while (isDefending && CharInfo.Shield > 0f && canDefend)
         {
-            if(SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle.ToString())
+            if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle.ToString())
             {
                 SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
                 SpineAnim.SetAnimationSpeed(5);
@@ -688,7 +681,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public void StopDefending()
     {
-        if(isDefending)
+        if (isDefending)
         {
             isDefending = false;
             SetAnimation(CharacterAnimationStateType.Idle, true, 0.1f);
@@ -698,21 +691,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     #endregion
     #region Move
-
-    //public float moveProgress = 0f;
-    //IEnumerator MoveCounter = null;
-    //IEnumerator MoveCount(float moveLength)
-    //{
-    //    float moveTimer = 0f;
-    //    moveProgress = 0f;
-    //    while (moveTimer < moveLength)
-    //    {
-    //        moveTimer += Time.deltaTime;
-    //        moveProgress = SpineAnim.GetAnimTime();//moveTimer / moveLength;
-    //        Debug.Log("Movetime: <b>" + moveTimer + "</b>");
-    //        yield return null;
-    //    }
-    //}
 
     public virtual IEnumerator MoveCharOnDir_Co(InputDirection nextDir)
     {
@@ -734,10 +712,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             {
                 SetAnimation(AnimState);
                 isMoving = true;
-                //if (MoveCounter != null) StopCoroutine(MoveCounter);
-                //MoveCounter = MoveCount(SpineAnim.GetAnimLenght(AnimState) / SpineAnim.GetAnimationSpeed());
-                //StartCoroutine(MoveCounter);
-
                 if (prevBattleTile.Count > 1)
                 {
 
@@ -871,18 +845,18 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         float moveValue = CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed;
         while (timer < 1)
         {
-          
+
             yield return BattleManagerScript.Instance.PauseUntil();
             float newAdd = (Time.fixedDeltaTime / (animLength / moveValue));
             timer += (Time.fixedDeltaTime / (animLength / moveValue));
             speedTimer += newAdd * curve.Evaluate(timer + newAdd);
             transform.position = Vector3.Lerp(offset, nextPos, speedTimer);
 
-            if(timer > 0.7f && !isMovCheck)
+            if (timer > 0.7f && !isMovCheck)
             {
                 isMovCheck = true;
                 isMoving = false;
-                if(isDefending && !isDefe)
+                if (isDefending && !isDefe)
                 {
                     isDefe = true;
                     SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
@@ -891,7 +865,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 TileMovementCompleteEvent?.Invoke(this);
             }
 
-            if(SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving.ToString())
+            if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving.ToString())
             {
                 isMoving = false;
                 TileMovementCompleteEvent?.Invoke(this);
@@ -899,8 +873,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 yield break;
             }
         }
-        
-        
+
+
         if (IsOnField)
         {
             transform.position = nextPos;
@@ -1003,7 +977,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
 
 
-        //SetAnimation(bdClass.CurrentBuffDebuff.AnimToFire); //TODO READD THIS LATER
+        //SetAnimation(bdClass.CurrentBuffDebuff.AnimToFire);
         int iterator = 0;
         while (bdClass.CurrentBuffDebuff.Timer <= bdClass.Duration && !bdClass.CurrentBuffDebuff.Stop_Co)
         {
@@ -1026,7 +1000,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, bdClass.CurrentBuffDebuff.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, transform);
             }
 
-            
+
         }
 
         if (bdClass.Stat != BuffDebuffStatsType.ElementalResistance)
@@ -1139,17 +1113,14 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public void ArrivingEvent()
     {
         CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);
+        if (CharInfo.AudioProfile.ArrivingCry != null)
+        {
+            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, CharInfo.AudioProfile.ArrivingCry, AudioBus.MediumPriority, transform);
+        }
 
-        if(CharInfo.AudioProfile.ArrivingCry != null) AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, CharInfo.AudioProfile.ArrivingCry, AudioBus.MediumPriority, transform);
         AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.ArrivalImpact, AudioBus.MediumPriority, transform);
-
         UMS.ArrivingParticle.transform.position = transform.position;
         UMS.ArrivingParticle.SetActive(true);
-    }
-
-    public virtual void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
-    {
-        SetAnimation(animState.ToString(), loop, transition);
     }
 
 
@@ -1166,7 +1137,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     }
     public bool PlayQueuedAnim()
     {
-        if(queuedAnim_Name != "")
+        if (queuedAnim_Name != "")
         {
             SetAnimation(queuedAnim_Name, queuedAnim_Loop, queuedAnim_Transition);
             SpineAnim.SetAnimationSpeed(queuedAnim_Speed);
@@ -1176,6 +1147,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         return false;
     }
 
+    public virtual void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
+    {
+        SetAnimation(animState.ToString(), loop, transition);
+    }
+
+
+
 
     public virtual void SetAnimation(string animState, bool loop = false, float transition = 0)
     {
@@ -1184,12 +1162,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             return;
         }
-
-        if (isMoving && animState.ToString() != CharacterAnimationStateType.Reverse_Arriving.ToString())
-        {
-            return;
-        }
-
         //Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + CharInfo.CharacterID.ToString());
         if (animState == CharacterAnimationStateType.Arriving.ToString())
         {
@@ -1206,10 +1178,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             return;
         }
 
-        /*   if (isMoving && animState != CharacterAnimationStateType.Reverse_Arriving)
-           {
-               return;
-           }*/
+
+        if (isMoving && animState.ToString() != CharacterAnimationStateType.Reverse_Arriving.ToString())
+        {
+            return;
+        }
 
 
         if (SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Arriving.ToString()) || SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Reverse_Arriving.ToString()))
@@ -1251,18 +1224,17 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         if (SpineAnim.SpineAnimationState != null)
         {
             SpineAnim.CharOwner = this;
-            SpineAnim.SpineAnimationState.Complete += SpineAnimationState_Complete; 
+            SpineAnim.SpineAnimationState.Complete += SpineAnimationState_Complete;
         }
-        
+
     }
 
     public virtual void SpineAnimationState_Complete(Spine.TrackEntry trackEntry)
     {
 
-        string completedAnim = trackEntry.Animation.Name;
-
-        //Play queued anim and then return if there is one
         if (PlayQueuedAnim()) return;
+
+        string completedAnim = trackEntry.Animation.Name;
 
         if (completedAnim == CharacterAnimationStateType.Arriving.ToString() || completedAnim.Contains("Growing"))
         {
@@ -1285,21 +1257,21 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public virtual bool SetDamage(float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
-        return SetDamage(damage, elemental,isCritical);
+        return SetDamage(damage, elemental, isCritical);
     }
 
     public virtual bool SetDamage(float damage, ElementalType elemental, bool isCritical)
     {
-        if(!IsOnField)
+        if (!IsOnField)
         {
             return false;
         }
         HealthChangedType healthCT = HealthChangedType.Damage;
         bool res;
-        if(isDefending)
+        if (isDefending)
         {
             GameObject go;
-            if(DefendingHoldingTimer < CharInfo.DefenceStats.Invulnerability)
+            if (DefendingHoldingTimer < CharInfo.DefenceStats.Invulnerability)
             {
                 damage = 0;
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldTotalDefence);
@@ -1328,7 +1300,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
             else
             {
-                go.transform.localScale = new Vector3(-1,1,1);
+                go.transform.localScale = new Vector3(-1, 1, 1);
             }
         }
         else
@@ -1336,7 +1308,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             //Play getting hit sound only if the character is a playable one
             if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
             {
-               // AudioManager.Instance.PlayGeneric("Get_Hit_20200217");
+                // AudioManager.Instance.PlayGeneric("Get_Hit_20200217");
             }
             SetAnimation(CharacterAnimationStateType.GettingHit);
             healthCT = isCritical ? HealthChangedType.CriticalHit : HealthChangedType.Damage;
@@ -1379,7 +1351,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                   damage = damage - (damage * 0.7f);
                   break;
           }*/
-        
+
 
         CharInfo.Health -= damage;
         if (CharInfo.Health == 0)
@@ -1476,16 +1448,18 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
         if (nextAttack == null) return null;
 
-        switch (nextAttack.AttackAnim)
+        switch (nextAttack.AttackInput)
         {
-            case (AttackAnimType.Powerful_Atk):
+            case (AttackInputType.Strong):
                 return CharInfo.AudioProfile.PowerfulAttack;
-            case (AttackAnimType.Rapid_Atk):
+            case (AttackInputType.Weak):
                 return CharInfo.AudioProfile.RapidAttack;
-            case (AttackAnimType.Skill1):
+            case (AttackInputType.Skill1):
                 return CharInfo.AudioProfile.Skill1;
-            case (AttackAnimType.Skill2):
+            case (AttackInputType.Skill2):
                 return CharInfo.AudioProfile.Skill2;
+            case (AttackInputType.Skill3):
+                return CharInfo.AudioProfile.Skill3;
         }
 
         return null;
@@ -1582,7 +1556,6 @@ public class BuffDebuffClass
     {
 
     }
-
     public BuffDebuffClass(string name, BuffDebuffStatsType stat, int level, Buff_DebuffClass currentCuffDebuff, float duration)
     {
         Name = name;

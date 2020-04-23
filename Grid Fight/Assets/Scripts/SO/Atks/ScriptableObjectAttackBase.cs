@@ -14,31 +14,52 @@ public class ScriptableObjectAttackBase : ScriptableObject
     public int Chances = 100;
     public AttackType CurrentAttackType;
     public float AttackRatioMultiplier = 1;
-    public Vector2 DamageMultiplier = new Vector2(1,1);
+    public Vector2 DamageMultiplier = new Vector2(1, 1);
+    public AttackInputType AttackInput;
     public AttackAnimType AttackAnim;
     [HideInInspector] public AttackAnimPrefixType PrefixAnim;
+
+    public AttackParticlesClass Particles;
+    [System.Serializable]
+    public class AttackParticlesClass
+    {
+        public AttackParticlesSideClass Left;
+        public AttackParticlesSideClass Right;
+        [System.Serializable]
+        public class AttackParticlesSideClass
+        {
+            public GameObject Cast;
+            public GameObject Bullet;
+            public GameObject Hit;
+        }
+
+        public GameObject CastLoopPS;
+        public GameObject CastActivationPS;
+    }
+
+
     public int TrajectoriesNumber;
-    [HideInInspector]public ParticlesAttackTypeClass ParticlesAtk;
-    [HideInInspector]public TilesAttackTypeClass TilesAtk;
+    [HideInInspector] public ParticlesAttackTypeClass ParticlesAtk;
+    [HideInInspector] public TilesAttackTypeClass TilesAtk;
 
 
     private void OnEnable()
     {
         switch (AttackAnim)
         {
-            case AttackAnimType.Rapid_Atk:
+            case AttackAnimType.Weak_Atk:
                 PrefixAnim = AttackAnimPrefixType.Atk1;
                 break;
-            case AttackAnimType.Powerful_Atk:
+            case AttackAnimType.Strong_Atk:
                 PrefixAnim = AttackAnimPrefixType.Atk2;
                 break;
             case AttackAnimType.Boss_Atk3:
                 PrefixAnim = AttackAnimPrefixType.Atk3;
                 break;
-            case AttackAnimType.Skill1:
+            case AttackAnimType.Buff:
                 PrefixAnim = AttackAnimPrefixType.S_Buff;
                 break;
-            case AttackAnimType.Skill2:
+            case AttackAnimType.Debuff:
                 PrefixAnim = AttackAnimPrefixType.S_DeBuff;
                 break;
             default:
@@ -77,9 +98,7 @@ public class BattleFieldAttackTileClass
     public bool HasEffect = false;
     [ConditionalField("HasEffect", false)] public List<ScriptableObjectAttackEffect> Effects = new List<ScriptableObjectAttackEffect>();
     [ConditionalField("HasEffect", false)] public float EffectChances = 100;
-    public bool HasDifferentParticles = false;
-    [ConditionalField("HasDifferentParticles", false)] public AttackParticleType ParticlesID;
-    [ConditionalField("HasDifferentParticles", false)] public bool IsEffectOnTile = false;
+    public bool IsEffectOnTile = false;
     [ConditionalField("IsEffectOnTile", false)] public ParticlesType TileParticlesID;
     [ConditionalField("IsEffectOnTile", false)] public float DurationOnTile;
 
@@ -88,14 +107,12 @@ public class BattleFieldAttackTileClass
         Pos = pos;
     }
 
-    public BattleFieldAttackTileClass(Vector2Int pos, bool hasEffect, List<ScriptableObjectAttackEffect> effects, bool hasDifferentParticles, AttackParticleType particlesID, bool isEffectOnTile,
+    public BattleFieldAttackTileClass(Vector2Int pos, bool hasEffect, List<ScriptableObjectAttackEffect> effects, bool isEffectOnTile,
         ParticlesType tileParticlesID, float durationOnTile)
     {
         Pos = pos;
         HasEffect = hasEffect;
         Effects = effects;
-        HasDifferentParticles = hasDifferentParticles;
-        ParticlesID = particlesID;
         IsEffectOnTile = isEffectOnTile;
         TileParticlesID = tileParticlesID;
         DurationOnTile = durationOnTile;
@@ -104,22 +121,10 @@ public class BattleFieldAttackTileClass
 
 #endregion
 
-
-
-
-
-
-
-
-
-
-
-
-
 #region Particles
 
 [System.Serializable]
-public class ParticlesAttackTypeClass 
+public class ParticlesAttackTypeClass
 {
     public List<BulletBehaviourInfoClass> BulletTrajectories = new List<BulletBehaviourInfoClass>();
     public CharacterClassType CharacterClass;

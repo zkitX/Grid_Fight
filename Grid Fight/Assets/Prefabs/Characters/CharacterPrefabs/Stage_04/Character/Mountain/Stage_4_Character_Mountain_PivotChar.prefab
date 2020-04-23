@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8659343190194565731}
   m_Layer: 0
-  m_Name: SpecialFiringPoint
+  m_Name: FiringPointStrong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,6 +97,8 @@ Transform:
   m_Children:
   - {fileID: 7181111785635420892}
   - {fileID: 8659343190194565731}
+  - {fileID: 2922965072941508794}
+  - {fileID: 1224371574246847848}
   m_Father: {fileID: 6282435025610719642}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -398,8 +400,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  FiringPoint: {fileID: 7181111785635420892}
-  SpecialFiringPoint: {fileID: 8659343190194565731}
+  FiringPints:
+  - {fileID: 7181111785635420892}
+  - {fileID: 8659343190194565731}
+  - {fileID: 2922965072941508794}
+  - {fileID: 1224371574246847848}
   CurrentAnim: 0
   AnimationTransition: 0.1
   Loop: 0
@@ -427,10 +432,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9916d1b5876d59745b356090a5fd577f, type: 2}
   - {fileID: 11400000, guid: 636998dbc7ef168488665fc2bbee2de7, type: 2}
   - {fileID: 11400000, guid: a05163c2099ca654b8005d104b9d9206, type: 2}
-  ParticleID: 6
   Elemental: 4
   ClassType: 1
-  CharacterLevel: 0
   UseLayeringSystem: 1
   CharacterRespawnLength: 180
   CharacterSelection: 2
@@ -502,6 +505,7 @@ MonoBehaviour:
     B_AtkToIdleDuration: 0.2
   DamageStats:
     BaseDamage: 10
+    B_BaseDamage: 10
     MultiBulletAttackNumberOfBullets: 3
     ChildrenBulletDelay: 0.5
     ElementalsResistence: []
@@ -514,6 +518,7 @@ MonoBehaviour:
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
   MovementTimer: {x: 5, y: 8}
+  B_MovementTimer: {x: 5, y: 8}
 --- !u!54 &6983479253197530271
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -553,7 +558,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7181111785635420892}
   m_Layer: 0
-  m_Name: FiringPoint
+  m_Name: FiringPointWeak
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -572,4 +577,64 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8408448400033061971}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4713440020439380894
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2922965072941508794}
+  m_Layer: 0
+  m_Name: FiringPointBuff
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2922965072941508794
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4713440020439380894}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.53, y: 0.775, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8408448400033061971}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4786277170151384234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1224371574246847848}
+  m_Layer: 0
+  m_Name: FiringPointDebuff
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1224371574246847848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4786277170151384234}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.13, y: 0.482, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8408448400033061971}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

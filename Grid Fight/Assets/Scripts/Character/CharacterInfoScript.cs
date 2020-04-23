@@ -25,10 +25,8 @@ public class CharacterInfoScript : MonoBehaviour
     public BaseCharType BaseCharacterType;
     public CharacterNameType CharacterID;
     public List<ScriptableObjectAttackBase> CurrentAttackTypeInfo = new List<ScriptableObjectAttackBase>();
-    public AttackParticleType ParticleID;
     public ElementalType Elemental;
     public CharacterClassType ClassType;
-    public CharacterLevelType CharacterLevel;
     public bool UseLayeringSystem = true;
 
     [Tooltip("Length of time, in seconds, that the character will take to respawn once killed")]
@@ -42,8 +40,8 @@ public class CharacterInfoScript : MonoBehaviour
     [System.Serializable]
     public class RapidAttackClass
     {
-        public Vector2 DamageMultiplier = new Vector2(1,1);
-        public Vector2 CriticalChance = new Vector2(2,2);
+        public Vector2 DamageMultiplier = new Vector2(1, 1);
+        public Vector2 CriticalChance = new Vector2(2, 2);
         public float Stamina_Cost_Atk;
 
         [HideInInspector] public Vector2 B_DamageMultiplier = new Vector2(1, 1);
@@ -55,7 +53,7 @@ public class CharacterInfoScript : MonoBehaviour
     [System.Serializable]
     public class PowerfulAttackClass
     {
-        public Vector2 DamageMultiplier = new Vector2(3,3);
+        public Vector2 DamageMultiplier = new Vector2(3, 3);
         public Vector2 CriticalChance = new Vector2(3, 5);
         public float Stamina_Cost_Atk;
 
@@ -171,7 +169,7 @@ public class CharacterInfoScript : MonoBehaviour
     public float Special3LoadingDuration;
 
     public Vector2 MovementTimer = new Vector2(5, 8);
-
+    [HideInInspector] public Vector2 B_MovementTimer = new Vector2(5, 8);
     public float HealthPerc
     {
         get
@@ -204,7 +202,7 @@ public class CharacterInfoScript : MonoBehaviour
         }
         set
         {
-            if(BaseSpeedChangedEvent != null)
+            if (BaseSpeedChangedEvent != null)
             {
                 BaseSpeedChangedEvent(value);
             }
@@ -229,7 +227,7 @@ public class CharacterInfoScript : MonoBehaviour
                     Invoke("SetCharDeath", 0.2f);
                 }
             }
-            if(HealthStats.Health > HealthStats.Base)
+            if (HealthStats.Health > HealthStats.Base)
             {
                 Health = HealthStats.Base;
             }
@@ -311,13 +309,14 @@ public class CharacterInfoScript : MonoBehaviour
         SpeedStats.B_LevelMultiplier = SpeedStats.LevelMultiplier;
         SpeedStats.B_IdleToAtkDuration = SpeedStats.IdleToAtkDuration;
         SpeedStats.B_AtkToIdleDuration = SpeedStats.AtkToIdleDuration;
+
         DamageStats.B_BaseDamage = DamageStats.BaseDamage;
     }
 
 
     private void FixedUpdate()
     {
-        if(Health > 0)
+        if (Health > 0)
         {
             Stamina = StaminaStats.Stamina + StaminaStats.Regeneration / 50;
             Health = HealthStats.Health + HealthStats.Regeneration / 50;

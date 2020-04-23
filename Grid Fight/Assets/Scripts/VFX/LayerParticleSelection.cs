@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class LayerParticleSelection : MonoBehaviour
 {
-    [Header("Select the level of Shot, Idle is the standard(character is not being pressed)")]
-    public CharacterLevelType Shot = CharacterLevelType.Novice;
-
     [Header("Select this to Isolate each level, usefull if the stages are different")]
     [Tooltip("Isolate each level of shot")]
     public bool Isolate = false;
@@ -27,7 +24,7 @@ public class LayerParticleSelection : MonoBehaviour
     {
         //close unnecessary layers
         CloseAllLayers();
-        if (Isolate)
+       /* if (Isolate)
         {
             if (Shot == CharacterLevelType.Novice)
             {
@@ -65,7 +62,7 @@ public class LayerParticleSelection : MonoBehaviour
             {
                 SelectLayer(ShotGodness);
             }
-        }
+        }*/
         
     }
 
