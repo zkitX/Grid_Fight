@@ -62,7 +62,6 @@ public class Stage09_Boss_NoFace : MinionType_Script
         CameraManagerScript.Instance.CameraShake(CameraShakeType.GettingHit);
         InteruptAttack();
         baseForme.SetOniForme(false);
-
     }
 
     public void InteruptAttack()

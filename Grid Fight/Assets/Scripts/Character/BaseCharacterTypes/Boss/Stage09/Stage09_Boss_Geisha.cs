@@ -207,6 +207,41 @@ public class Stage09_Boss_Geisha : MinionType_Script
     #endregion
 
     #region Combat
+    bool creatingShield = false;
+    public override void CreateTileAttack()
+    {
+        base.CreateTileAttack();
+    }
+
+
+    public override void CastAttackParticles()
+    {
+        //Debug.Log("Cast");
+        if (creatingShield)
+        {
+            creatingShield = false;
+            return;
+        }
+
+
+        GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(UMS.Side == SideType.LeftSide ? nextAttack.Particles.Left.Cast : nextAttack.Particles.Right.Cast, CharInfo.CharacterID, AttackParticlePhaseTypes.Cast,
+            SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position, UMS.Side, nextAttack.AttackInput);
+        cast.GetComponent<DisableParticleScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
+
+        if (UMS.CurrentAttackType == AttackType.Particles)
+        {
+            if (SpineAnim.CurrentAnim.Contains("Atk1"))
+            {
+                CharInfo.Stamina -= CharInfo.RapidAttack.Stamina_Cost_Atk;
+                EventManager.Instance?.UpdateStamina(this);
+            }
+            else if (SpineAnim.CurrentAnim.Contains("Atk2"))
+            {
+                CharInfo.Stamina -= CharInfo.PowerfulAttac.Stamina_Cost_Atk;
+                EventManager.Instance?.UpdateStamina(this);
+            }
+        }
+    }
 
     public override IEnumerator MoveCharOnDir_Co(InputDirection nextDir)
     {
@@ -255,6 +290,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
     IEnumerator StartShieldSequence()
     {
         shielded = true;
+        creatingShield = true;
         Attacking = true;
         nextAttack = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackAnim == AttackAnimType.Buff).First();
         SetAnimation("S_Buff_IdleToAtk", false, 0.3f);
@@ -274,8 +310,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
 
         if (shieldParticles == null)
         {
-            shieldParticles = Instantiate(nextAttack.Particles.CastLoopPS, Vector3.zero, Quaternion.identity, transform);
-            shieldParticles.transform.localScale *= 3f; //remove when actual particles added
+            shieldParticles = Instantiate(nextAttack.Particles.CastLoopPS, transform);
         }
         else
         {

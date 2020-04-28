@@ -477,8 +477,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 EventManager.Instance?.UpdateStamina(this);
             }
         }
-
-
     }
 
     //Create and set up the basic info for the bullet
@@ -557,7 +555,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
 
     public Vector2Int nextAttackPos;
-    public void CreateTileAttack()
+    public virtual void CreateTileAttack()
     {
 
         if (nextAttack.CurrentAttackType == AttackType.Tile)
