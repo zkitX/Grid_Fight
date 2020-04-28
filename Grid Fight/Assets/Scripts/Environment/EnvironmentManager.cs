@@ -89,6 +89,8 @@ public class EnvironmentManager : MonoBehaviour
         float jumpHeight = 2f;
         CharacterAnimationStateType jumpAnim = CharacterAnimationStateType.DashUp;
 
+       // CharacterAnimationStateType jumpAnim = CharacterAnimationStateType.JumpTransition_OUT;
+
         Vector3 cameraStartPos = MainCamera.transform.position;
         CameraInfoClass cic = CameraStage.CameraInfo.Where(r => r.StageIndex == currentGridIndex && !r.used).First();
 
@@ -138,6 +140,8 @@ public class EnvironmentManager : MonoBehaviour
 
         }
 
+       // yield return new WaitForSecondsRealtime(2);
+
         float timeRemaining = duration;
         float progress = 0;
         float xPos = 0f;
@@ -166,6 +170,13 @@ public class EnvironmentManager : MonoBehaviour
         }
         CameraManagerScript.Instance.CurrentCameraOffset = cic.CameraPosition;
 
+
+     /*   for (int i = 0; i < (jumpingchars != null ? jumpingchars.Count : 0); i++)
+        {
+            chars[i].transform.position = chars[i].CurrentBattleTiles[0].transform.position;
+            chars[i].SetAnimation(CharacterAnimationStateType.JumpTransition_IN);
+        }
+        */
         if (chars.Length != 0)
         {
             foreach (CharacterType_Script character in BattleManagerScript.Instance.PlayerControlledCharacters)

@@ -427,7 +427,9 @@ public enum CharacterAnimationStateType
     Idle_Charging,
     Idle_IdleToAtk,
     Idle_Loop,
-    Defeat_ReverseArrive
+    Defeat_ReverseArrive,
+    JumpTransition_IN,
+    JumpTransition_OUT
 }
 
 public enum PortalType

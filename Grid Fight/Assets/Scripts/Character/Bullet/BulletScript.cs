@@ -34,9 +34,12 @@ public class BulletScript : MonoBehaviour
     public AttackInputType AttackInput;
     public AttackAnimType AtkType;
     public GameObject HitPs;
+    public bool isColliding = true;
+    public float BulletDuration;
     //Private 
     private VFXBulletSpeedController vfx;
     private BattleTileScript bts;
+    
 
     private void OnEnable()
     {
@@ -72,7 +75,10 @@ public class BulletScript : MonoBehaviour
         float timer = 0;
         //Destination position
         Vector3 destination = bts.transform.position + new Vector3(Side == SideType.LeftSide ? 0.2f : -0.2f, 0, 0);
-        float bulletDuration = (CharInfo.SpeedStats.BulletSpeed / 12) * (bts.Pos.y - StartingTile.y);
+        if (isColliding)
+        {
+            BulletDuration = (CharInfo.SpeedStats.BulletSpeed / 12) * (bts.Pos.y - StartingTile.y);
+        }
         //Duration of the particles 
         PSTimeGroup pstg = PS.GetComponent<PSTimeGroup>();
         if (pstg != null)
@@ -109,47 +115,58 @@ public class BulletScript : MonoBehaviour
             res.z = Trajectory_Z.Evaluate(timer) + res.z;
 
             transform.position = res;
-            timer += Time.fixedDeltaTime / bulletDuration;
+            timer += Time.fixedDeltaTime / BulletDuration;
             ti += Time.fixedDeltaTime;
             //if timer ended the bullet fire the Effect
             if (timer > 1)
             {
                 isMoving = false;
-                //StartCoroutine(ChildExplosion(BulletEffectTiles.Where(r=> r != Vector2Int.zero).ToList()));
-                FireEffectParticles(bts.transform.position);//BulletEffectTiles.Count == 1 ? true : false
+
+                if(isColliding)
+                {
+                    //StartCoroutine(ChildExplosion(BulletEffectTiles.Where(r=> r != Vector2Int.zero).ToList()));
+                    FireEffectParticles(bts.transform.position);//BulletEffectTiles.Count == 1 ? true : false
+                }
+                
             }
         }
 
         EndBullet(0.5f);
     }
 
-
+    GameObject go;
     public void BulletTarget()
     {
 
-        GetComponent<BoxCollider>().enabled = true;
+        GetComponent<BoxCollider>().enabled = isColliding;
         int startingYTile = Facing == FacingType.Left ? StartingTile.y - BulletGapStartingTile.y : StartingTile.y + BulletGapStartingTile.y;
-        GameObject go = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Particles);
-        go.transform.position = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position;
-        go.GetComponent<BattleTileTargetScript>().StartTarget(
-            (Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position) * CharInfo.SpeedStats.BulletSpeed) /
-            Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position));
-        bts = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing);
-        float duration = CharInfo.SpeedStats.BulletSpeed;
-        foreach (Vector2Int item in BulletEffectTiles)
-        {
-            if (GridManagerScript.Instance.isPosOnField(DestinationTile + item))
-            {
-                BattleTileScript btsT = GridManagerScript.Instance.GetBattleTile(DestinationTile + item, Facing == FacingType.Left ? WalkingSideType.LeftSide : WalkingSideType.RightSide);
-                if (btsT != null)
-                {
 
-                    go = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Particles);
-                    go.transform.position = btsT.transform.position;
-                    go.GetComponent<BattleTileTargetScript>().StartTarget(duration);
+        if(isColliding)
+        {
+            go = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Particles);
+            go.transform.position = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position;
+            go.GetComponent<BattleTileTargetScript>().StartTarget(
+                (Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position) * CharInfo.SpeedStats.BulletSpeed) /
+                Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position));
+            float duration = CharInfo.SpeedStats.BulletSpeed;
+            foreach (Vector2Int item in BulletEffectTiles)
+            {
+                if (GridManagerScript.Instance.isPosOnField(DestinationTile + item))
+                {
+                    BattleTileScript btsT = GridManagerScript.Instance.GetBattleTile(DestinationTile + item, Facing == FacingType.Left ? WalkingSideType.LeftSide : WalkingSideType.RightSide);
+                    if (btsT != null)
+                    {
+
+                        go = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Particles);
+                        go.transform.position = btsT.transform.position;
+                        go.GetComponent<BattleTileTargetScript>().StartTarget(duration);
+                    }
                 }
             }
         }
+       
+        bts = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing);
+        
     }
 
     public IEnumerator ChildExplosion(List<Vector2Int> bet, Vector2Int basePos)
@@ -222,7 +239,7 @@ public class BulletScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //If the bullet collide with a character 
-        if (other.tag.Contains("Side") && other.tag != Side.ToString() && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && isMoving)
+        if (other.tag.Contains("Side") && other.tag != Side.ToString() && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && isMoving && isColliding)
         {
             isMoving = false;
             BaseCharacter target = other.GetComponentInParent<BaseCharacter>();
