@@ -16,8 +16,26 @@ MonoBehaviour:
   CurrentAttackType: 1
   AttackRatioMultiplier: 0
   DamageMultiplier: {x: 2, y: 2}
+  AttackInput: 0
   AttackAnim: 0
   PrefixAnim: 0
+  Particles:
+    Left:
+      Cast: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+        type: 3}
+      Bullet: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+        type: 3}
+      Hit: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73, type: 3}
+    Right:
+      Cast: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+        type: 3}
+      Bullet: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+        type: 3}
+      Hit: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73, type: 3}
+    CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
+      type: 3}
+    CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
+      type: 3}
   TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories:
@@ -88,8 +106,6 @@ MonoBehaviour:
         Effects:
         - {fileID: 11400000, guid: 01550045e1a3af44d934eb4bef73fb1e, type: 2}
         EffectChances: 100
-        HasDifferentParticles: 1
-        ParticlesID: 6
         IsEffectOnTile: 1
         TileParticlesID: 4
         DurationOnTile: 2
@@ -98,8 +114,6 @@ MonoBehaviour:
         Effects:
         - {fileID: 11400000, guid: 01550045e1a3af44d934eb4bef73fb1e, type: 2}
         EffectChances: 100
-        HasDifferentParticles: 1
-        ParticlesID: 6
         IsEffectOnTile: 1
         TileParticlesID: 4
         DurationOnTile: 2
@@ -108,8 +122,6 @@ MonoBehaviour:
         Effects:
         - {fileID: 11400000, guid: 01550045e1a3af44d934eb4bef73fb1e, type: 2}
         EffectChances: 100
-        HasDifferentParticles: 1
-        ParticlesID: 6
         IsEffectOnTile: 1
         TileParticlesID: 4
         DurationOnTile: 2
