@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage04-Minion-Forest-WeakAttack-Daggar
+  m_Name: Stage04-Minion-Valley-StrongAttack-Monkena
   m_EditorClassIdentifier: 
   Chances: 100
   CurrentAttackType: 1
@@ -21,75 +21,30 @@ MonoBehaviour:
   PrefixAnim: 0
   Particles:
     Left:
-      Cast: {fileID: 4574823664227575482, guid: 3e1bb15e264dc6047a281a4cb53918c6,
+      Cast: {fileID: 633958985479583800, guid: 07478d4a045377f4cb6660477e310c6d, type: 3}
+      Bullet: {fileID: 1915285204450942449, guid: bd5a53d655b059044b6b9443f3942a19,
         type: 3}
-      Bullet: {fileID: 2284594597646784502, guid: 3f17b9c6c808b44448942cc420dd307b,
-        type: 3}
-      Hit: {fileID: 8560142267415743371, guid: a928f3a964b8c214db175f49cb28d8f9, type: 3}
+      Hit: {fileID: 7846973069066144318, guid: 4228bf6d4795b77449323fa63ebd880f, type: 3}
     Right:
-      Cast: {fileID: 4574823664227575482, guid: 3e1bb15e264dc6047a281a4cb53918c6,
+      Cast: {fileID: 633958985479583800, guid: 07478d4a045377f4cb6660477e310c6d, type: 3}
+      Bullet: {fileID: 1915285204450942449, guid: bd5a53d655b059044b6b9443f3942a19,
         type: 3}
-      Bullet: {fileID: 2284594597646784502, guid: 3f17b9c6c808b44448942cc420dd307b,
-        type: 3}
-      Hit: {fileID: 8560142267415743371, guid: a928f3a964b8c214db175f49cb28d8f9, type: 3}
+      Hit: {fileID: 7846973069066144318, guid: 4228bf6d4795b77449323fa63ebd880f, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
-  TrajectoriesNumber: 1
+  TrajectoriesNumber: 2
   ParticlesAtk:
-    BulletTrajectories:
-    - Show: 1
-      BulletDistanceInTile: {x: 0, y: -15}
-      Trajectory_Y:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      Trajectory_Z:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      BulletEffectTiles:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      - {x: 1, y: 0}
-      BulletGapStartingTile: {x: 0, y: 0}
-      HasEffect: 0
-      Effects: []
-      EffectChances: 100
+    BulletTrajectories: []
     CharacterClass: 0
   TilesAtk:
     AtkType: 1
     BulletTrajectories:
-    - Delay: 2
+    - Delay: 1.5
       Show: 1
       BulletEffectTiles:
       - Pos: {x: 0, y: 1}
-        HasEffect: 0
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-      - Pos: {x: 0, y: 0}
-        HasEffect: 0
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-      - Pos: {x: 0, y: -1}
-        HasEffect: 0
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-      - Pos: {x: -1, y: 0}
         HasEffect: 0
         Effects: []
         EffectChances: 100
@@ -103,14 +58,24 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
-      - Pos: {x: -1, y: -1}
+      - Pos: {x: 1, y: 1}
         HasEffect: 0
         Effects: []
         EffectChances: 100
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
-      - Pos: {x: 1, y: -1}
+    - Delay: 1.6
+      Show: 1
+      BulletEffectTiles:
+      - Pos: {x: 0, y: 0}
+        HasEffect: 0
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: -1, y: 0}
         HasEffect: 0
         Effects: []
         EffectChances: 100
@@ -124,14 +89,7 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
-      - Pos: {x: 1, y: 1}
-        HasEffect: 0
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
     StatToCheck: 1
-    ValueChecker: 2
-    PercToCheck: 0
+    ValueChecker: 0
+    PercToCheck: 20
     Chances: 100
