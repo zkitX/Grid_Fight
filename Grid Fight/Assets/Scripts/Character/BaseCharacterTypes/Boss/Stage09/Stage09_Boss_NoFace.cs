@@ -93,10 +93,15 @@ public class Stage09_Boss_NoFace : MinionType_Script
         while (val)
         {
             yield return null;
+            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+            {
+                yield return null;
+            }
+
             if (IsOnField && CanAttack && baseForme.BossPhase == Stage09_Boss_Geisha.bossPhasesType.Monster_ && !isImmune)
             {
                 List<BaseCharacter> enemys = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList();
-                BaseCharacter targetChar = enemys[Random.Range(0, enemys.Count)];
+                BaseCharacter targetChar = enemys.Count != 0 ? enemys[Random.Range(0, enemys.Count)] : null;
                 if (targetChar != null)
                 {
                     nextAttackPos = targetChar.UMS.CurrentTilePos;

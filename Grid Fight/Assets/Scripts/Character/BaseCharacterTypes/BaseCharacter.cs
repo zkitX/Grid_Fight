@@ -19,7 +19,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public delegate void CurrentCharIsRebirth(CharacterNameType cName, List<ControllerType> playerController, SideType side);
     public event CurrentCharIsRebirth CurrentCharIsRebirthEvent;
 
-    public CharacterInfoScript CharInfo
+    public virtual CharacterInfoScript CharInfo
     {
         get
         {
@@ -65,7 +65,18 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public bool VFXTestMode = false;
     public UnitManagementScript UMS;
     public BoxCollider CharBoxCollider;
-    public ScriptableObjectAttackBase nextAttack = null;
+    public ScriptableObjectAttackBase _nextAttack = null;
+    public virtual ScriptableObjectAttackBase nextAttack
+    {
+        get
+        {
+            return _nextAttack;
+        }
+        set
+        {
+            _nextAttack = value;
+        }
+    }
     public AttackPhasesType currentAttackPhase = AttackPhasesType.End;
     public DeathProcessStage currentDeathProcessPhase = DeathProcessStage.None;
     protected IEnumerator attackCoroutine = null;
@@ -168,12 +179,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     }
 
-    private void _CharInfo_BaseSpeedChangedEvent(float baseSpeed)
+    protected void _CharInfo_BaseSpeedChangedEvent(float baseSpeed)
     {
         SpineAnim.SetAnimationSpeed(baseSpeed);
     }
 
-    private void _CharInfo_DeathEvent()
+    protected void _CharInfo_DeathEvent()
     {
         if (IsOnField)
         {
@@ -248,9 +259,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     #endregion
     #region Attack
 
-    public virtual void SpecialAttackImpactEffects()
+    public virtual void SpecialAttackImpactEffects(Vector3 tilePos)
     {
-
+        GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.Right.Hit, CharInfo.CharacterID, AttackParticlePhaseTypes.Hit, tilePos, UMS.Side, nextAttack.AttackInput);
     }
 
     public void StartAttakCo()

@@ -12,11 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage09_Boss_Phase1_RapidAtk
   m_EditorClassIdentifier: 
+  Chances: 100
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
   DamageMultiplier: {x: 1, y: 1}
+  AttackInput: 0
   AttackAnim: 0
   PrefixAnim: 0
+  Particles:
+    Left:
+      Cast: {fileID: 3117352062583232394, guid: 7f98c4f9600627b4fa1e64428f13238c,
+        type: 3}
+      Bullet: {fileID: 3117352062583232394, guid: 7f98c4f9600627b4fa1e64428f13238c,
+        type: 3}
+      Hit: {fileID: 1530410238201660536, guid: 6169994e229afca4faa7a7fb60f7a594, type: 3}
+    Right:
+      Cast: {fileID: 3117352062583232394, guid: 7f98c4f9600627b4fa1e64428f13238c,
+        type: 3}
+      Bullet: {fileID: 3117352062583232394, guid: 7f98c4f9600627b4fa1e64428f13238c,
+        type: 3}
+      Hit: {fileID: 1530410238201660536, guid: 6169994e229afca4faa7a7fb60f7a594, type: 3}
+    CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
+      type: 3}
+    CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
+      type: 3}
   TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories:
@@ -48,19 +67,17 @@ MonoBehaviour:
       BulletEffectTiles:
       - Pos: {x: 0, y: -1}
         HasEffect: 0
+        showImpact: 0
         Effects: []
         EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
       - Pos: {x: 0, y: 1}
         HasEffect: 0
+        showImpact: 0
         Effects: []
         EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0

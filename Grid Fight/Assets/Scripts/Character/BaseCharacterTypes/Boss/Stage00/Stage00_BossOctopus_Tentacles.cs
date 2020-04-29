@@ -70,9 +70,10 @@ public class Stage00_BossOctopus_Tentacles : MinionType_Script
         currentAttackPhase = AttackPhasesType.End;
     }
 
-    public override void SpecialAttackImpactEffects()
+    public override void SpecialAttackImpactEffects(Vector3 tilePos)
     {
         CameraManagerScript.Instance.CameraShake(CameraShakeType.Octopus_Tentacle);
+        GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.Right.Hit, CharInfo.CharacterID, AttackParticlePhaseTypes.Hit, tilePos, UMS.Side, nextAttack.AttackInput);
     }
 
     private IEnumerator DeathStasy()
