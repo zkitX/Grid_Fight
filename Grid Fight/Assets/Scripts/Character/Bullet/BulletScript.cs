@@ -48,7 +48,7 @@ public class BulletScript : MonoBehaviour
     {
         StartCoroutine(MoveToTile());
     }
-
+    StatisticInfoClass sic;
     //Move the bullet on a determinated tile using the BulletInfo.Trajectory
     public IEnumerator MoveToTile()
     {
@@ -57,6 +57,9 @@ public class BulletScript : MonoBehaviour
             bulletSoundSource = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Loop, AudioBus.LowPriority, transform, true);
         }
 
+        sic = StatisticInfoManagerScript.Instance.CharaterStats.Where(r => r.CharacterId == CharInfo.CharacterID && r.PlayerController.Equals(PlayerController)).First();
+        sic.BulletFired++;
+        Debug.Log(sic.BulletFired);
         vfx = GetComponentInChildren<VFXBulletSpeedController>();
         if (vfx != null)
         {
@@ -196,6 +199,7 @@ public class BulletScript : MonoBehaviour
         {
             if (target.tag.Contains("Side") && target.tag != Side.ToString())
             {
+                sic.BulletHits++;
                 bool iscritical = CharInfo.IsCritical(AtkType == AttackAnimType.Weak_Atk ? true : false);
                 //Set damage to the hitting character
                 if (AtkType != AttackAnimType.Weak_Atk)

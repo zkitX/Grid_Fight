@@ -76,6 +76,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public GameObject chargeParticles = null;
     protected bool canDefend = true;
     public bool isDefending = false;
+    public StatisticInfoClass Sic;
     public int shotsLeftInAttack
     {
         get
@@ -492,6 +493,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         bs.Trajectory_Y = bulletBehaviourInfo.Trajectory_Y;
         bs.Trajectory_Z = bulletBehaviourInfo.Trajectory_Z;
         bs.Facing = UMS.Facing;
+        bs.PlayerController = UMS.PlayerController;
         bs.ChildrenExplosionDelay = CharInfo.DamageStats.ChildrenBulletDelay;
         bs.StartingTile = UMS.CurrentTilePos;
         bs.BulletGapStartingTile = bulletBehaviourInfo.BulletGapStartingTile;
@@ -1360,6 +1362,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         EventManager.Instance?.UpdateHealth(this);
         EventManager.Instance?.UpdateStamina(this);
+        if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
+        {
+            Sic.DamageReceived += damage;
+        }
+
         HealthStatsChangedEvent?.Invoke(damage, healthCT, transform);
         return res;
     }

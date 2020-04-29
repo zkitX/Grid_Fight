@@ -288,6 +288,7 @@ public class BattleManagerScript : MonoBehaviour
         }
         foreach (BaseCharacter playableCharOnScene in AllCharactersOnField)
         {
+            StatisticInfoManagerScript.Instance.CharaterStats.Add(new StatisticInfoClass(playableCharOnScene.CharInfo.CharacterID, playableCharOnScene.UMS.PlayerController));
             NewIManager.Instance.SetUICharacterToButton((CharacterType_Script)playableCharOnScene, BattleInfoManagerScript.Instance.PlayerBattleInfo.Where(r => r.CharacterName == playableCharOnScene.CharInfo.CharacterID).FirstOrDefault().CharacterSelection);
         }
         SetUICharacterSelectionIcons();
