@@ -1015,6 +1015,14 @@ public class BattleManagerScript : MonoBehaviour
         return cb;
     }
 
+    public BaseCharacter GetActiveCharNamed(CharacterNameType _name)
+    {
+        BaseCharacter chara = AllCharactersOnField.Where(r => r.CharInfo.CharacterID == _name).FirstOrDefault();
+        if (chara == null) chara = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == _name).FirstOrDefault();
+        if (chara == null) Debug.LogError("Character with ID: " + _name.ToString() + " does not exist in the scene");
+        return chara;
+    }
+
     //Used to setup all the current char icons
     public void SetUICharacterSelectionIcons()
     {
