@@ -52,9 +52,9 @@ public class Stage09_Boss_NoFace : MinionType_Script
         SetAnimation(animState.ToString(), loop, transition);
     }
 
-    public override void SetAnimation(string animState, bool loop = false, float transition = 0)
+    public override void SetAnimation(string animState, bool loop = false, float transition = 0, bool _pauseOnLastFrame = false)
     {
-        baseForme.SetAnimation(animState, loop, transition);
+        baseForme.SetAnimation(animState, loop, transition, _pauseOnLastFrame);
     }
 
     public override void SetCharDead(bool hasToDisappear = true)

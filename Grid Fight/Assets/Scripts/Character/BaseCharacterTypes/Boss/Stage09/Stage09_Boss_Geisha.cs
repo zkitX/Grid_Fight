@@ -496,7 +496,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
         SetAnimation(animState.ToString(), loop, transition);
     }
 
-    public override void SetAnimation(string animState, bool loop = false, float transition = 0)
+    public override void SetAnimation(string animState, bool loop = false, float transition = 0, bool _pauseOnLastFrame = false)
     {
         if (animState.Contains("GettingHit") && (Attacking || oniForme.Attacking))
         {
@@ -565,7 +565,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
         }
         Debug.Log("new    " + animState);
 
-        base.SetAnimation(animState, loop, transition);
+        base.SetAnimation(animState, loop, transition, _pauseOnLastFrame);
     }
 
     void InteruptAttack()

@@ -220,14 +220,14 @@ public class MinionType_Script : BaseCharacter
         }
     }
 
-    public override void SetAnimation(string animState, bool loop = false, float transition = 0)
+    public override void SetAnimation(string animState, bool loop = false, float transition = 0, bool _pauseOnLastFrame = false)
     {
         if (SpineAnim == null)
         {
             SpineAnimatorsetup();
         }
 
-        base.SetAnimation(animState, loop, transition);
+        base.SetAnimation(animState, loop, transition, _pauseOnLastFrame);
     }
 
     public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
