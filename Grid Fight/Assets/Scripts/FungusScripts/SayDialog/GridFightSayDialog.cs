@@ -12,6 +12,7 @@ public class GridFightSayDialog : SayDialog
     private bool isAnimCompleted = false;
     private bool IsAlreadySubscribed = false;
 
+    public GameObject bButton = null;
     private Character currentChar;
     protected override void Awake()
     {
@@ -19,10 +20,22 @@ public class GridFightSayDialog : SayDialog
         base.Awake();
     }
 
+    public void FungusChanged(FungusDialogType funDiag)
+    {
+        if(funDiag == FungusDialogType.Menu)
+        {
+            bButton.SetActive(false);
+        }
+        else if (funDiag == FungusDialogType.Dialog)
+        {
+            bButton.SetActive(true);
+        }
+    }
+
     protected override void Start()
     {
-        
         base.Start();
+        BattleManagerScript.Instance.CurrentFungusStateChangedEvent += FungusChanged;
     }
 
     private IEnumerator Initializer()
