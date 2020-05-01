@@ -157,7 +157,8 @@ public class CharacterType_Script : BaseCharacter
             //BattleManagerScript.Instance.UpdateCurrentSelectedCharacters(this, null, UMS.Side);
             NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo, UMS.Side);
         }
-
+        chargingAudio.ResetSource();
+        chargingAudio = null;
         StartCoroutine(ReviveSequencer());
     }
 
