@@ -309,6 +309,9 @@ public class CharacterType_Script : BaseCharacter
             ps.transform.parent = null;
             ps.SetActive(false);
         }
+
+        chargingAudio.ResetSource();
+        chargingAudio = null;
     }
 
 
@@ -350,8 +353,8 @@ public class CharacterType_Script : BaseCharacter
         if (chargingAudio != null)
         {
             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingRelease, AudioBus.LowPriority, transform);
-            chargingAudio.ResetSource();
-            chargingAudio = null;
+           // chargingAudio.ResetSource();
+           // chargingAudio = null;
         }
 
         SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
