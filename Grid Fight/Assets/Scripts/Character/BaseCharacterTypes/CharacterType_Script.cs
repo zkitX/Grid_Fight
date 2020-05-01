@@ -243,7 +243,10 @@ public class CharacterType_Script : BaseCharacter
             chargingAttackTimer = 0;
             currentAttackPhase = AttackPhasesType.Start;
             SetAnimation(nxtAtk.PrefixAnim + "_IdleToAtk", false, 0);
-
+            if (chargingAudio == null)
+            {
+                chargingAudio = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoop, AudioBus.MediumPriority, transform, true);
+            }
             while (isSpecialLoading && !VFXTestMode)
             {
                 yield return BattleManagerScript.Instance.PauseUntil();
@@ -368,10 +371,7 @@ public class CharacterType_Script : BaseCharacter
 
     public void ChargingLoop(string atk)
     {
-        if (chargingAudio == null)
-        {
-            chargingAudio = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoop, AudioBus.MediumPriority, transform, true);
-        }
+      
 
         SetAnimation(atk + "_Charging", true);
     }
