@@ -20,7 +20,20 @@ public class Stage09_Boss_Geisha : MinionType_Script
             else _Attacking = value;
         }
     }
-
+    public override CharacterInfoScript CharInfo
+    {
+        get
+        {
+            if (_CharInfo == null)
+            {
+                _CharInfo = GetComponentInChildren<CharacterInfoScript>(true);
+                _CharInfo.BaseSpeedChangedEvent += _CharInfo_BaseSpeedChangedEvent;
+                _CharInfo.DeathEvent += _CharInfo_DeathEvent;
+            }
+            if (BossPhase == bossPhasesType.Phase1_) return _CharInfo;
+            else return oniForme.CharInfo;
+        }
+    }
     Stage09_BossInfo bossInfo = null;
     bool IsCharArrived = false;
     bool oniFormeActive = false;
@@ -29,6 +42,18 @@ public class Stage09_Boss_Geisha : MinionType_Script
     bool shielded = false;
     GameObject shieldParticles = null;
     public bool isImmune = false;
+    public override ScriptableObjectAttackBase nextAttack
+    {
+        get
+        {
+            return BossPhase == bossPhasesType.Phase1_ ? _nextAttack : oniForme.nextAttack;
+        }
+        set
+        {
+            if (BossPhase == bossPhasesType.Phase1_) _nextAttack = value;
+            else oniForme.nextAttack = value;
+        }
+    }
 
     #region Initial Setup
 
@@ -75,7 +100,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
         {
             UIBattleManager.Instance.UIBoss.gameObject.SetActive(true);
         }
-        UIBattleManager.Instance.UIBoss.UpdateHp((100f * CharInfo.HealthStats.Health) / CharInfo.HealthStats.Base);
+        UIBattleManager.Instance.UIBoss.UpdateHp((100f * _CharInfo.HealthStats.Health) / _CharInfo.HealthStats.Base);
     }
 
     #endregion
@@ -176,6 +201,11 @@ public class Stage09_Boss_Geisha : MinionType_Script
         while (val)
         {
             yield return null;
+            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+            {
+                yield return null;
+            }
+
             if (IsOnField && CanAttack && BossPhase == bossPhasesType.Phase1_ && !isImmune)
             {
                 int randomiser = Random.Range(0, 100);
@@ -190,7 +220,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
                     List<BaseCharacter> enemys = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList();
                     if (enemys.Count > 0)
                     {
-                        BaseCharacter targetChar = enemys[Random.Range(0, enemys.Count)];
+                        BaseCharacter targetChar = enemys.Count != 0 ? enemys[Random.Range(0, enemys.Count)] : null;
                         if (targetChar != null)
                         {
                             nextAttackPos = targetChar.UMS.CurrentTilePos;
@@ -207,6 +237,43 @@ public class Stage09_Boss_Geisha : MinionType_Script
     #endregion
 
     #region Combat
+    bool creatingShield = false;
+    public override void CreateTileAttack()
+    {
+        base.CreateTileAttack();
+    }
+
+
+    public override void CastAttackParticles()
+    {
+        //Debug.Log("Cast");
+        if (creatingShield)
+        {
+            creatingShield = false;
+            return;
+        }
+
+
+        GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(UMS.Side == SideType.LeftSide ? nextAttack.Particles.Left.Cast : nextAttack.Particles.Right.Cast, 
+            BossPhase == bossPhasesType.Phase1_? CharInfo.CharacterID : oniForme.CharInfo.CharacterID, AttackParticlePhaseTypes.Cast,
+            BossPhase == bossPhasesType.Phase1_ ? SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position : 
+            oniForme.SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position, UMS.Side, nextAttack.AttackInput);
+        cast.GetComponent<DisableParticleScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
+
+        if (UMS.CurrentAttackType == AttackType.Particles)
+        {
+            if (SpineAnim.CurrentAnim.Contains("Atk1"))
+            {
+                _CharInfo.Stamina -= _CharInfo.RapidAttack.Stamina_Cost_Atk;
+                EventManager.Instance?.UpdateStamina(this);
+            }
+            else if (SpineAnim.CurrentAnim.Contains("Atk2"))
+            {
+                _CharInfo.Stamina -= _CharInfo.PowerfulAttac.Stamina_Cost_Atk;
+                EventManager.Instance?.UpdateStamina(this);
+            }
+        }
+    }
 
     public override IEnumerator MoveCharOnDir_Co(InputDirection nextDir)
     {
@@ -254,28 +321,25 @@ public class Stage09_Boss_Geisha : MinionType_Script
 
     IEnumerator StartShieldSequence()
     {
-        shielded = true;
+        creatingShield = true;
         Attacking = true;
-        nextAttack = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackAnim == AttackAnimType.Buff).First();
+        nextAttack = _CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackAnim == AttackAnimType.Buff).First();
         SetAnimation("S_Buff_IdleToAtk", false, 0.3f);
         while (Attacking)
         {
             yield return null;
         }
-        if (ShieldedSequencer != null) StopCoroutine(ShieldedSequencer);
-        ShieldedSequencer = ShieldedSequence();
-        StartCoroutine(ShieldedSequencer);
     }
 
     IEnumerator ShieldedSequencer = null;
     IEnumerator ShieldedSequence()
     {
-        CharInfo.HealthStats.Regeneration = CharInfo.HealthStats.BaseHealthRegeneration * bossInfo.moonlightBlessRegenMultiplier;
+        shielded = true;
+        _CharInfo.HealthStats.Regeneration = _CharInfo.HealthStats.BaseHealthRegeneration * bossInfo.moonlightBlessRegenMultiplier;
 
         if (shieldParticles == null)
         {
-            shieldParticles = Instantiate(nextAttack.Particles.CastLoopPS, Vector3.zero, Quaternion.identity, transform);
-            shieldParticles.transform.localScale *= 3f; //remove when actual particles added
+            shieldParticles = Instantiate(nextAttack.Particles.CastLoopPS, transform);
         }
         else
         {
@@ -284,7 +348,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
 
         yield return new WaitForSeconds(Random.Range(bossInfo.moonlightBlessDuration.x, bossInfo.moonlightBlessDuration.y));
 
-        CharInfo.HealthStats.Regeneration = CharInfo.HealthStats.BaseHealthRegeneration;
+        _CharInfo.HealthStats.Regeneration = _CharInfo.HealthStats.BaseHealthRegeneration;
         shielded = false;
         shieldParticles.SetActive(false);
 
@@ -294,7 +358,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
     void InteruptShield()
     {
         if (ShieldedSequencer != null) StopCoroutine(ShieldedSequencer);
-        CharInfo.HealthStats.Regeneration = CharInfo.HealthStats.BaseHealthRegeneration;
+        _CharInfo.HealthStats.Regeneration = _CharInfo.HealthStats.BaseHealthRegeneration;
         shielded = false;
         shieldParticles?.SetActive(false);
         Debug.Log("GEISHA Defence Interrupted");
@@ -304,7 +368,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
     {
         if (BossPhase == bossPhasesType.Phase1_ && !isImmune)
         {
-            float prevHealthPerc = CharInfo.HealthPerc;
+            float prevHealthPerc = _CharInfo.HealthPerc;
             bool boolToReturn = base.SetDamage(shielded ? damage * bossInfo.moonlightBlessAttackDampener : damage, elemental, isCritical, isAttackBlocking);
             CheckIfCanTransform(prevHealthPerc);
             return boolToReturn;
@@ -323,7 +387,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
             return;
         }
 
-        if (CharInfo.HealthPerc <= bossInfo.divineEvocationLevels[oniForme.intensityLevel + 1])
+        if (_CharInfo.HealthPerc <= bossInfo.divineEvocationLevels[oniForme.intensityLevel + 1])
         {
             InteruptAttack();
             isImmune = true;
@@ -349,7 +413,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
         {
             oniForme.intensityLevel++;
             InteruptShield();
-            CharInfo.HealthStats.Regeneration = 0f;
+            _CharInfo.HealthStats.Regeneration = 0f;
             oniForme.TransformToNoFace();
         }
         else
@@ -358,7 +422,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
             TransformFromNoFace();
         }
 
-        if (CharInfo.Health > 0f || state)
+        if (_CharInfo.Health > 0f || state)
         {
             SetFormeAttackReady(this, !state);
             SetFormeAttackReady(oniForme, state);
@@ -372,6 +436,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
 
     IEnumerator GeishaTransformation()
     {
+        _Attacking = false;
         Attacking = false;
         isImmune = true;
         oniForme.isImmune = true;
@@ -384,14 +449,14 @@ public class Stage09_Boss_Geisha : MinionType_Script
             yield return null;
         }
 
-        if (CharInfo.Health <= 0f)
+        if (_CharInfo.Health <= 0f)
         {
             oniForme.isDead = true;
             GeishaFinalDeath();
         }
         else
         {
-            CharInfo.HealthStats.Regeneration = CharInfo.HealthStats.BaseHealthRegeneration;
+            _CharInfo.HealthStats.Regeneration = _CharInfo.HealthStats.BaseHealthRegeneration;
             isImmune = false;
             CanAttack = true;
         }
@@ -400,7 +465,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
 
     protected void SetFormeAttackReady(MinionType_Script forme, bool state)
     {
-        if (forme.CharInfo.CharacterID == CharacterNameType.Stage09_Boss_NoFace)
+        if (forme._CharInfo.CharacterID == CharacterNameType.Stage09_Boss_NoFace)
         {
             if (oniForme.ActiveAI == null)
             {
@@ -420,7 +485,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
         }
         forme.currentAttackPhase = AttackPhasesType.End;
         forme.CharOredrInLayer = 101 + (UMS.CurrentTilePos.x * 10) + (UMS.Facing == FacingType.Right ? UMS.CurrentTilePos.y - 12 : UMS.CurrentTilePos.y);
-        if (forme.CharInfo.UseLayeringSystem)
+        if (forme._CharInfo.UseLayeringSystem)
         {
             forme.SpineAnim.SetSkeletonOrderInLayer(forme.CharOredrInLayer);
         }
@@ -431,7 +496,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
         SetAnimation(animState.ToString(), loop, transition);
     }
 
-    public override void SetAnimation(string animState, bool loop = false, float transition = 0)
+    public override void SetAnimation(string animState, bool loop = false, float transition = 0, bool _pauseOnLastFrame = false)
     {
         if (animState.Contains("GettingHit") && (Attacking || oniForme.Attacking))
         {
@@ -500,7 +565,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
         }
         Debug.Log("new    " + animState);
 
-        base.SetAnimation(animState, loop, transition);
+        base.SetAnimation(animState, loop, transition, _pauseOnLastFrame);
     }
 
     void InteruptAttack()
@@ -528,7 +593,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
             SetAnimation(NextAnimToFire, Loop, 0);
         }
         UIBattleManager.Instance.UIBoss.UpdateHp(BossPhase == bossPhasesType.Phase1_ ?
-            ((100f * CharInfo.HealthStats.Health) / CharInfo.HealthStats.Base) :
+            ((100f * _CharInfo.HealthStats.Health) / _CharInfo.HealthStats.Base) :
             ((100f * oniForme.CharInfo.HealthStats.Health) / oniForme.CharInfo.HealthStats.Base));
     }
 
@@ -550,7 +615,7 @@ public class Stage09_Boss_Geisha : MinionType_Script
 
         if (nextAttack.AttackAnim == AttackAnimType.Boss_Atk3)
         {
-            return ((Boss_Stage09AudioProfileSO)CharInfo.AudioProfile).BossAttack3;
+            return ((Boss_Stage09AudioProfileSO)_CharInfo.AudioProfile).BossAttack3;
         }
         return base.GetAttackAudio();
     }
@@ -611,12 +676,24 @@ public class Stage09_Boss_Geisha : MinionType_Script
         string[] res = completedAnim.Split('_');
         if (res.Last() != CharacterAnimationStateType.Idle.ToString() && !SpineAnim.Loop && !Attacking)
         {
-            SpineAnim.SetAnimationSpeed(CharInfo.BaseSpeed);
+            SpineAnim.SetAnimationSpeed(_CharInfo.BaseSpeed);
             Debug.Log("IDLE     " + completedAnim.ToString());
             SpineAnim.SpineAnimationState.SetAnimation(0, BossPhase.ToString() + CharacterAnimationStateType.Idle.ToString(), true);
             //SpineAnimationState.AddEmptyAnimation(1,AnimationTransition,0);
             SpineAnim.CurrentAnim = CharacterAnimationStateType.Idle.ToString();
         }
 
+    }
+
+    public override void SpecialAttackImpactEffects(Vector3 tilePos)
+    {
+        if(nextAttack.AttackAnim == AttackAnimType.Buff)
+        {
+            if (ShieldedSequencer != null) StopCoroutine(ShieldedSequencer);
+            ShieldedSequencer = ShieldedSequence();
+            StartCoroutine(ShieldedSequencer);
+            return;
+        }
+        GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.Right.Hit, CharInfo.CharacterID, AttackParticlePhaseTypes.Hit, tilePos, UMS.Side, nextAttack.AttackInput);
     }
 }

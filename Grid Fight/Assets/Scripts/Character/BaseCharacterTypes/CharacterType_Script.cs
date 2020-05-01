@@ -516,7 +516,7 @@ public class CharacterType_Script : BaseCharacter
         base.SpineAnimationState_Complete(trackEntry);
     }
 
-    public override void SetAnimation(string animState, bool loop = false, float transition = 0)
+    public override void SetAnimation(string animState, bool loop = false, float transition = 0, bool _pauseOnLastFrame = false)
     {
         if (SpineAnim == null)
         {
@@ -535,7 +535,7 @@ public class CharacterType_Script : BaseCharacter
         }
 
 
-        base.SetAnimation(animState, loop, transition);
+        base.SetAnimation(animState, loop, transition, _pauseOnLastFrame);
     }
 
     public override bool SetDamage(float damage, ElementalType elemental, bool isCritical)

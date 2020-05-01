@@ -19,7 +19,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public delegate void CurrentCharIsRebirth(CharacterNameType cName, List<ControllerType> playerController, SideType side);
     public event CurrentCharIsRebirth CurrentCharIsRebirthEvent;
 
-    public CharacterInfoScript CharInfo
+    public virtual CharacterInfoScript CharInfo
     {
         get
         {
@@ -65,7 +65,18 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public bool VFXTestMode = false;
     public UnitManagementScript UMS;
     public BoxCollider CharBoxCollider;
-    public ScriptableObjectAttackBase nextAttack = null;
+    public ScriptableObjectAttackBase _nextAttack = null;
+    public virtual ScriptableObjectAttackBase nextAttack
+    {
+        get
+        {
+            return _nextAttack;
+        }
+        set
+        {
+            _nextAttack = value;
+        }
+    }
     public AttackPhasesType currentAttackPhase = AttackPhasesType.End;
     public DeathProcessStage currentDeathProcessPhase = DeathProcessStage.None;
     protected IEnumerator attackCoroutine = null;
@@ -168,12 +179,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     }
 
-    private void _CharInfo_BaseSpeedChangedEvent(float baseSpeed)
+    protected void _CharInfo_BaseSpeedChangedEvent(float baseSpeed)
     {
         SpineAnim.SetAnimationSpeed(baseSpeed);
     }
 
-    private void _CharInfo_DeathEvent()
+    protected void _CharInfo_DeathEvent()
     {
         if (IsOnField)
         {
@@ -248,9 +259,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     #endregion
     #region Attack
 
-    public virtual void SpecialAttackImpactEffects()
+    public virtual void SpecialAttackImpactEffects(Vector3 tilePos)
     {
-
+        GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.Right.Hit, CharInfo.CharacterID, AttackParticlePhaseTypes.Hit, tilePos, UMS.Side, nextAttack.AttackInput);
     }
 
     public void StartAttakCo()
@@ -477,8 +488,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 EventManager.Instance?.UpdateStamina(this);
             }
         }
-
-
     }
 
     //Create and set up the basic info for the bullet
@@ -557,7 +566,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
 
     public Vector2Int nextAttackPos;
-    public void CreateTileAttack()
+    public virtual void CreateTileAttack()
     {
 
         if (nextAttack.CurrentAttackType == AttackType.Tile)
@@ -1147,17 +1156,35 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         return false;
     }
 
+    protected bool isPuppeting = false;
+    protected int puppetAnimCompleteTick = 0;
+    public IEnumerator PuppetAnimation(string animState, int loops, bool _pauseOnEndFrame = false, float animSpeed = 1f)
+    {
+        isPuppeting = true;
+        puppetAnimCompleteTick = 0;
+        int currentAnimPlay = 0;
+        while(currentAnimPlay < loops)
+        {
+            SetAnimation(animState, _pauseOnLastFrame: (currentAnimPlay + 1 == loops && _pauseOnEndFrame));
+            SpineAnim.SetAnimationSpeed(animSpeed);
+            while(currentAnimPlay == puppetAnimCompleteTick)
+            {
+                yield return null;
+            }
+            currentAnimPlay++;
+        }
+        isPuppeting = false;
+    }
+
     public virtual void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
     {
         SetAnimation(animState.ToString(), loop, transition);
     }
 
-
-
-
-    public virtual void SetAnimation(string animState, bool loop = false, float transition = 0)
+    protected bool pauseOnLastFrame = false;
+    public virtual void SetAnimation(string animState, bool loop = false, float transition = 0, bool _pauseOnLastFrame = false)
     {
-
+        
         if (CharInfo.SpeedStats.BaseSpeed <= 0)
         {
             return;
@@ -1212,6 +1239,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             AnimSpeed = CharInfo.BaseSpeed;
         }
 
+        pauseOnLastFrame = _pauseOnLastFrame;
         SpineAnim.SetAnim(animState, loop, transition);
         SpineAnim.SetAnimationSpeed(AnimSpeed);
     }
@@ -1231,7 +1259,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public virtual void SpineAnimationState_Complete(Spine.TrackEntry trackEntry)
     {
-
+        if (isPuppeting) puppetAnimCompleteTick++;
+        if (pauseOnLastFrame) return;
         if (PlayQueuedAnim()) return;
 
         string completedAnim = trackEntry.Animation.Name;

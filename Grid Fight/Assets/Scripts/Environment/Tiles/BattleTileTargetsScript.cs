@@ -91,8 +91,7 @@ public class BattleTileTargetsScript : MonoBehaviour
         {
             if (effectOn)
             {
-                attacker.SpecialAttackImpactEffects();
-                GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(attacker.nextAttack.Particles.Right.Hit, attacker.CharInfo.CharacterID, AttackParticlePhaseTypes.Hit, transform.position, attacker.UMS.Side, attacker.nextAttack.AttackInput);
+                attacker.SpecialAttackImpactEffects(transform.position);
             }
             if (attacker.GetAttackAudio() != null)
             {

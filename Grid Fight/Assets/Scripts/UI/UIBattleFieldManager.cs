@@ -51,6 +51,7 @@ public class UIBattleFieldManager : MonoBehaviour
         switch (changeType)
         {
             case HealthChangedType.Damage:
+                if (value == 0) return;
                 CharOwner_DamageReceivedEvent(value, charOwner);
                 break;
             case HealthChangedType.Defend:

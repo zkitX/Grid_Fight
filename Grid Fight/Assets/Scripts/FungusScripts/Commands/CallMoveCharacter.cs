@@ -12,12 +12,14 @@ public class CallMoveCharacter : Command
 {
     public CharacterNameType characterID;
     public MoveDetailsClass[] moveDetails;
+    public bool holdForCompletedMove = true;
 
     private int comeBackCount;
 
+    
+
     IEnumerator move()
     {
-        Debug.Log("Meant to move");
         BaseCharacter character = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == characterID).FirstOrDefault();
         if(character == null) character = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == characterID).FirstOrDefault();
         if(character == null)
@@ -25,7 +27,6 @@ public class CallMoveCharacter : Command
             Continue();
             yield break;
         }
-        Debug.Log("Meant to move");
         character.TileMovementCompleteEvent += ContinueMoves;
 
         foreach (MoveDetailsClass moveDetail in moveDetails)
@@ -42,7 +43,7 @@ public class CallMoveCharacter : Command
         }
 
         character.TileMovementCompleteEvent -= ContinueMoves;
-        Continue();
+        if(holdForCompletedMove) Continue();
     }
 
     private void ContinueMoves(BaseCharacter movingChar)
@@ -55,6 +56,7 @@ public class CallMoveCharacter : Command
     public override void OnEnter()
     {
         StartCoroutine(move());
+        if (!holdForCompletedMove) Continue();
     }
 
     public override Color GetButtonColor()
@@ -62,12 +64,21 @@ public class CallMoveCharacter : Command
         return new Color32(235, 191, 217, 255);
     }
 
+    public override void OnValidate()
+    {
+        foreach (MoveDetailsClass moveDetail in moveDetails)
+        {
+            moveDetail.Name = "Move " + moveDetail.nextDir.ToString() + " " + moveDetail.amount.ToString() + (moveDetail.amount == 1 ? " time" : " times");
+        }
+        base.OnValidate();
+    }
     #endregion
 }
 
 [System.Serializable]
 public class MoveDetailsClass
 {
+    [HideInInspector] public string Name = "";
     public InputDirection nextDir;
     public int amount = 0;
 }
