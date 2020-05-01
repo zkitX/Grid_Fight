@@ -113,6 +113,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             StartAttakCo();
             StartMoveCo();
         }
+        Sic = new StatisticInfoClass(CharInfo.CharacterID, UMS.PlayerController);
     }
 
     protected virtual void Update()
@@ -500,7 +501,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         bs.Elemental = CharInfo.DamageStats.CurrentElemental;
         bs.Side = UMS.Side;
         bs.VFXTestMode = VFXTestMode;
-        bs.CharInfo = CharInfo;
+        bs.CharOwner = this;
         bs.attackAudioType = GetAttackAudio();
         bs.EffectChances = 100;
         bs.HitPs = UMS.Side == SideType.LeftSide ? nextAttack.Particles.Left.Hit : nextAttack.Particles.Right.Hit;
@@ -1257,12 +1258,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     #endregion
 
-    public virtual bool SetDamage(float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
+    public virtual bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
-        return SetDamage(damage, elemental, isCritical);
+        return SetDamage(attacker, damage, elemental, isCritical);
     }
 
-    public virtual bool SetDamage(float damage, ElementalType elemental, bool isCritical)
+    public virtual bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical)
     {
         if (!IsOnField)
         {
@@ -1355,21 +1356,25 @@ public class BaseCharacter : MonoBehaviour, IDisposable
           }*/
 
 
-        CharInfo.Health -= damage;
+       
         if (CharInfo.Health == 0)
         {
             EventManager.Instance?.AddCharacterDeath(this);
         }
         EventManager.Instance?.UpdateHealth(this);
         EventManager.Instance?.UpdateStamina(this);
-        if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
-        {
-            Sic.DamageReceived += damage;
-        }
+
+        SetFinalDamage(attacker ,damage);
 
         HealthStatsChangedEvent?.Invoke(damage, healthCT, transform);
         return res;
     }
+
+    public virtual void SetFinalDamage(BaseCharacter attacker, float damage)
+    {
+        CharInfo.Health -= damage;
+    }
+
 
     public ElementalWeaknessType GetElementalMultiplier(List<ElementalResistenceClass> armorElelmntals, ElementalType elementalToCheck)
     {

@@ -13,11 +13,16 @@ public class CharacterType_Script : BaseCharacter
     [SerializeField] protected bool CharacterJumping = false;
     public ManagedAudioSource chargingAudio = null;
     public float chargingAttackTimer = 0;
+    public GameTime battleTime;
 
 
     #region Unity Life Cycles
     public override void Start()
     {
+        battleTime = new GameTime();
+        battleTime.SetupBasics();
+        battleTime.isStopped = true;
+        StartCoroutine(battleTime.standardTicker);
         base.Start();
     }
     protected override void Update()
@@ -150,6 +155,7 @@ public class CharacterType_Script : BaseCharacter
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         SetAnimation(CharacterAnimationStateType.Defeat_ReverseArrive);
         IsOnField = false;
+        battleTime.isStopped = true;
         BattleManagerScript.Instance.PlayablesCharOnScene.Where(r => r.CName == CharInfo.CharacterID).First().isUsed = false;
         base.SetCharDead(false);
         if (UMS.CurrentAttackType == AttackType.Particles)
@@ -191,14 +197,17 @@ public class CharacterType_Script : BaseCharacter
 
     public override void SetUpEnteringOnBattle()
     {
+        battleTime.isStopped = false;
         SetAnimation(CharacterAnimationStateType.Arriving);
         AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.ArrivalSpawn, AudioBus.MediumPriority);
         //AudioManager.Instance.PlayGeneric("Arriving_Spawn_20200108_V5");
         EventManager.Instance?.AddCharacterArrival((BaseCharacter)this);
+       
     }
 
     public override void SetUpLeavingBattle()
     {
+        battleTime.isStopped = true;
         SetAnimation(CharacterAnimationStateType.Reverse_Arriving);
         isDefending = false;
         EventManager.Instance?.AddCharacterSwitched((BaseCharacter)this);
@@ -337,6 +346,12 @@ public class CharacterType_Script : BaseCharacter
         }
     }
 
+
+    public override void SetFinalDamage(BaseCharacter attacker, float damage)
+    {
+        Sic.DamageReceived += damage;
+        base.SetFinalDamage(attacker, damage);
+    }
 
     //Set ste special attack
     public void SpecialAttack(ScriptableObjectAttackBase atkType)
@@ -538,11 +553,11 @@ public class CharacterType_Script : BaseCharacter
         base.SetAnimation(animState, loop, transition);
     }
 
-    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical)
+    public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical)
     {
         CameraManagerScript.Instance.CameraShake(CameraShakeType.GettingHit);
 
-        return base.SetDamage(damage, elemental, isCritical);
+        return base.SetDamage(attacker ,damage, elemental, isCritical);
     }
 
 }

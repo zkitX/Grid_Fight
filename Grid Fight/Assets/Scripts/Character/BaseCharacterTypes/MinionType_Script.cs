@@ -11,6 +11,10 @@ public class MinionType_Script : BaseCharacter
     protected float LastAttackTime;
     public float UpDownPerc = 18;
     public AIType CurrentAI;
+    List<HitInfoClass> HittedByList = new List<HitInfoClass>();
+    float totDamage = 0;
+
+
 
     protected bool UnderAttack
     {
@@ -48,6 +52,7 @@ public class MinionType_Script : BaseCharacter
              StartMoveCo();*/
 
             StartCoroutine(AI());
+            HittedByList.Clear();
         }
         CharInfo.DefenceStats.BaseDefence = Random.Range(0.7f, 1);
         base.SetAttackReady(value);
@@ -76,6 +81,13 @@ public class MinionType_Script : BaseCharacter
             GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
             UMS.Pos[i] = Vector2Int.zero;
         }
+        for (int i = 0; i < HittedByList.Count; i++)
+        {
+            StatisticInfoClass sic = StatisticInfoManagerScript.Instance.CharaterStats.Where(r => r.CharacterId == HittedByList[i].CharacterId).First();
+            sic.Exp += (HittedByList[i].Damage / totDamage) * CharInfo.ExperienceValue; 
+        }
+        totDamage = 0;
+
         base.SetCharDead();
     }
 
@@ -407,7 +419,7 @@ public class MinionType_Script : BaseCharacter
     }
 
 
-    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
+    public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
 
         if (isAttackBlocking)
@@ -422,17 +434,32 @@ public class MinionType_Script : BaseCharacter
         }
 
         LastAttackTime = Time.time;
-        return base.SetDamage(damage, elemental, isCritical);
+        return base.SetDamage(attacker, damage, elemental, isCritical);
     }
 
 
-    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical)
+    public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical)
     {
         damage = damage * CharInfo.DefenceStats.BaseDefence;
-        return base.SetDamage(damage, elemental, isCritical);
+        return base.SetDamage(attacker, damage, elemental, isCritical);
     }
 
 
+    public override void SetFinalDamage(BaseCharacter attacker, float damage)
+    {
+        HitInfoClass hic = HittedByList.Where(r => r.CharacterId == attacker.CharInfo.CharacterID).FirstOrDefault();
+        if (hic == null)
+        {
+            HittedByList.Add(new HitInfoClass(attacker.CharInfo.CharacterID, damage));
+        }
+        else
+        {
+            hic.Damage += damage;
+        }
+        attacker.Sic.DamageMade += damage;
+        totDamage += damage;
+        base.SetFinalDamage(attacker, damage);
+    }
     public override void SpineAnimationState_Complete(TrackEntry trackEntry)
     {
         if (trackEntry.Animation.Name == "<empty>" || SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle.ToString()
@@ -477,4 +504,22 @@ public class MinionType_Script : BaseCharacter
         base.SpineAnimationState_Complete(trackEntry);
     }
 
+}
+
+
+public class HitInfoClass
+{
+    public CharacterNameType CharacterId;
+    public float Damage;
+
+    public HitInfoClass()
+    {
+
+    }
+
+    public HitInfoClass(CharacterNameType characterId, float damage)
+    {
+        CharacterId = characterId;
+        Damage = damage;
+    }
 }

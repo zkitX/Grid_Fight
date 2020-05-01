@@ -29,6 +29,7 @@ public class StatisticInfoClass
     public float HPGotBySkill;
     public float HPHealed;
     public int PotionPicked;
+    public float Exp;
 
     public StatisticInfoClass()
     {
@@ -57,6 +58,7 @@ public class GlobalCharacterStatisticInfoClass
     public float TotalHPGotBySkill;
     public float TotalHPHealed;
     public int TotalPotionPicked;
+    public float TotalExp;
 
     public GlobalCharacterStatisticInfoClass()
     {

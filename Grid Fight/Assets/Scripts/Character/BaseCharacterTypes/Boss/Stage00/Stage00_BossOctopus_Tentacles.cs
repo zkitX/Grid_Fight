@@ -121,11 +121,11 @@ public class Stage00_BossOctopus_Tentacles : MinionType_Script
         base.SetAnimation(animState, loop, transition);
     }
 
-    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
+    public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
         if (CanGetDamage && CharInfo.Health > 0)
         {
-            return base.SetDamage(damage, elemental, isCritical);
+            return base.SetDamage(attacker, damage, elemental, isCritical);
         }
         return false;
 

@@ -168,6 +168,10 @@ public class CharacterInfoScript : MonoBehaviour
     public float Special2LoadingDuration;
     public float Special3LoadingDuration;
 
+
+    public float ExperienceValue;
+
+
     public Vector2 MovementTimer = new Vector2(5, 8);
     [HideInInspector] public Vector2 B_MovementTimer = new Vector2(5, 8);
     public float HealthPerc

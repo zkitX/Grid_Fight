@@ -188,11 +188,11 @@ public class Stage04_BossGirl_Script : MinionType_Script
     }
 
 
-    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
+    public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
         if (CanGetDamage)
         {
-            return base.SetDamage(damage, elemental, isCritical);
+            return base.SetDamage(attacker, damage, elemental, isCritical);
         }
         return false;
 

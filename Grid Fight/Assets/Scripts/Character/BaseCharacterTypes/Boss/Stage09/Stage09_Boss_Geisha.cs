@@ -300,18 +300,18 @@ public class Stage09_Boss_Geisha : MinionType_Script
         Debug.Log("GEISHA Defence Interrupted");
     }
 
-    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
+    public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
         if (BossPhase == bossPhasesType.Phase1_ && !isImmune)
         {
             float prevHealthPerc = CharInfo.HealthPerc;
-            bool boolToReturn = base.SetDamage(shielded ? damage * bossInfo.moonlightBlessAttackDampener : damage, elemental, isCritical, isAttackBlocking);
+            bool boolToReturn = base.SetDamage(attacker, shielded ? damage * bossInfo.moonlightBlessAttackDampener : damage, elemental, isCritical, isAttackBlocking);
             CheckIfCanTransform(prevHealthPerc);
             return boolToReturn;
         }
         else
         {
-            oniForme.SetDamage(damage, elemental, isCritical, isAttackBlocking);
+            oniForme.SetDamage(attacker, damage, elemental, isCritical, isAttackBlocking);
         }
         return false;
     }

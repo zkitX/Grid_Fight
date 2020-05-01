@@ -166,11 +166,11 @@ public class Stage09_Boss_NoFace : MinionType_Script
         return base.AttackAction(yieldBefore);
     }
 
-    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
+    public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
         if (baseForme.BossPhase == Stage09_Boss_Geisha.bossPhasesType.Monster_ && !isImmune)
         {
-            bool boolToReturn = base.SetDamage(damage, elemental, isCritical, isAttackBlocking);
+            bool boolToReturn = base.SetDamage(attacker ,damage, elemental, isCritical, isAttackBlocking);
             return boolToReturn;
         }
         return false;
