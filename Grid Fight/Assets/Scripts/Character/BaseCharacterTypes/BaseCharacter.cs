@@ -158,6 +158,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             SpineAnim.gameObject.layer = layer;
         }
+
+        CharInfo.SetupChar();
+
     }
 
     public virtual void StartMoveCo()
@@ -1283,6 +1286,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 CharInfo.Shield -= UniversalGameBalancer.Instance.fullDefenceCost;
                 CharInfo.Stamina += UniversalGameBalancer.Instance.staminaRegenOnPerfectBlock;
                 EventManager.Instance.AddBlock(this, BlockInfo.BlockType.full);
+                Sic.CompleteDefences++;
             }
             else
             {
@@ -1292,7 +1296,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 go.transform.position = transform.position;
                 CharInfo.Shield -= UniversalGameBalancer.Instance.partialDefenceCost;
                 EventManager.Instance.AddBlock(this, BlockInfo.BlockType.partial);
-
+                Sic.Defences++;
                 damage = damage < 0 ? 1 : damage;
             }
             healthCT = HealthChangedType.Defend;

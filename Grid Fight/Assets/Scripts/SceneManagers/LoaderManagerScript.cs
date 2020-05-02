@@ -67,11 +67,12 @@ public class CharacterBaseInfoClass
     public WalkingSideType WalkingSide;
     public AttackType CharAttackType;
     public BaseCharType BCharType = BaseCharType.None;
+    public LevelType CharaterLevel = LevelType.Novice;
 
 
     public CharacterBaseInfoClass(string name, CharacterSelectionType characterSelection,
         List<ControllerType> playerController, CharacterNameType characterName,
-        WalkingSideType walkingSide, AttackType charAttackType, BaseCharType bCharType)
+        WalkingSideType walkingSide, AttackType charAttackType, BaseCharType bCharType, LevelType charaterLevel)
     {
         Name = name;
         CharacterSelection = characterSelection;
@@ -80,5 +81,6 @@ public class CharacterBaseInfoClass
         WalkingSide = walkingSide;
         CharAttackType = charAttackType;
         BCharType = bCharType;
+        CharaterLevel = charaterLevel;
     }                             
 }                                

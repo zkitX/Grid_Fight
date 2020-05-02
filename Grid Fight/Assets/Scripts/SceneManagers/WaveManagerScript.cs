@@ -135,7 +135,7 @@ public class WaveManagerScript : MonoBehaviour
         res.CharInfo.PowerfulAttac.B_DamageMultiplier = res.CharInfo.PowerfulAttac.DamageMultiplier;
         res.CharInfo.SpeedStats.B_MovementSpeed = res.CharInfo.SpeedStats.MovementSpeed;
         res.CharInfo.B_MovementTimer = res.CharInfo.MovementTimer;
-
+        res.CharInfo.ExperienceValue = character.Exp;
 
         ((MinionType_Script)res).UpDownPerc = character.UpDownPerc;
         return res;
@@ -144,7 +144,7 @@ public class WaveManagerScript : MonoBehaviour
     private BaseCharacter CreateChar(CharacterNameType characterID, BaseCharType bCharType = BaseCharType.None)
     {
         BaseCharacter res = BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(characterID.ToString(), CharacterSelectionType.Up,
-        new List<ControllerType> { ControllerType.Enemy }, characterID, WalkingSideType.RightSide, AttackType.Tile, bCharType), transform);
+        new List<ControllerType> { ControllerType.Enemy }, characterID, WalkingSideType.RightSide, AttackType.Tile, bCharType, LevelType.Novice), transform);
         if (characterID != CharacterNameType.Stage00_BossOctopus &&
             characterID != CharacterNameType.Stage00_BossOctopus_Head &&
             characterID != CharacterNameType.Stage00_BossOctopus_Tentacles &&
@@ -337,7 +337,7 @@ public class WaveCharacterInfoClass
     public Vector2 StaminaRegeneration;
     public Vector2 MovementSpeed;
     public Vector2 MovementTimer;
-
+    public float Exp;
     public float UpDownPerc = 18;
 
 

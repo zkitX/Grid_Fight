@@ -556,7 +556,7 @@ public class CharacterType_Script : BaseCharacter
     public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical)
     {
         CameraManagerScript.Instance.CameraShake(CameraShakeType.GettingHit);
-
+        Sic.HitReceived++;
         return base.SetDamage(attacker ,damage, elemental, isCritical);
     }
 

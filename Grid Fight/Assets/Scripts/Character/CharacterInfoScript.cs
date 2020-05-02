@@ -27,6 +27,7 @@ public class CharacterInfoScript : MonoBehaviour
     public List<ScriptableObjectAttackBase> CurrentAttackTypeInfo = new List<ScriptableObjectAttackBase>();
     public ElementalType Elemental;
     public CharacterClassType ClassType;
+    public LevelType CharaterLevel;
     public bool UseLayeringSystem = true;
 
     [Tooltip("Length of time, in seconds, that the character will take to respawn once killed")]
@@ -279,6 +280,50 @@ public class CharacterInfoScript : MonoBehaviour
     private void Awake()
     {
 
+       
+    }
+
+
+    private void FixedUpdate()
+    {
+        if (Health > 0)
+        {
+            Stamina = StaminaStats.Stamina + StaminaStats.Regeneration / 50;
+            Health = HealthStats.Health + HealthStats.Regeneration / 50;
+            Shield = ShieldStats.Shield + ShieldStats.Regeneration / 50;
+        }
+    }
+
+    public bool IsCritical(bool rapidOrPowerful)
+    {
+        float chance = Random.Range(0, 100);
+        if (chance <= Random.Range(rapidOrPowerful ? RapidAttack.CriticalChance.x : PowerfulAttac.CriticalChance.x,
+            rapidOrPowerful ? RapidAttack.CriticalChance.y : PowerfulAttac.CriticalChance.y))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+    public void SetupChar()
+    {
+        for (int i = 0; i < (int)CharaterLevel; i++)
+        {
+            HealthStats.Base *= HealthStats.LevelMultiplier;
+            HealthStats.Health *= HealthStats.LevelMultiplier;
+            HealthStats.Regeneration *= HealthStats.LevelMultiplier;
+            HealthStats.BaseHealthRegeneration *= HealthStats.LevelMultiplier;
+
+
+            DamageStats.BaseDamage *= DamageStats.LevelMultiplier;
+
+        }
+
+
         //RapidAttack
         RapidAttack.B_CriticalChance = RapidAttack.CriticalChance;
         RapidAttack.B_DamageMultiplier = RapidAttack.DamageMultiplier;
@@ -315,30 +360,5 @@ public class CharacterInfoScript : MonoBehaviour
         SpeedStats.B_AtkToIdleDuration = SpeedStats.AtkToIdleDuration;
 
         DamageStats.B_BaseDamage = DamageStats.BaseDamage;
-    }
-
-
-    private void FixedUpdate()
-    {
-        if (Health > 0)
-        {
-            Stamina = StaminaStats.Stamina + StaminaStats.Regeneration / 50;
-            Health = HealthStats.Health + HealthStats.Regeneration / 50;
-            Shield = ShieldStats.Shield + ShieldStats.Regeneration / 50;
-        }
-    }
-
-    public bool IsCritical(bool rapidOrPowerful)
-    {
-        float chance = Random.Range(0, 100);
-        if (chance <= Random.Range(rapidOrPowerful ? RapidAttack.CriticalChance.x : PowerfulAttac.CriticalChance.x,
-            rapidOrPowerful ? RapidAttack.CriticalChance.y : PowerfulAttac.CriticalChance.y))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 }

@@ -311,6 +311,7 @@ public class BattleManagerScript : MonoBehaviour
         {
             currentCharacter.UMS.Pos.Add(item);
         }
+        currentCharacter.CharInfo.CharaterLevel = charInfo.CharaterLevel;
         currentCharacter.SetupCharacterSide();
         if (EventManager.Instance != null)
         {

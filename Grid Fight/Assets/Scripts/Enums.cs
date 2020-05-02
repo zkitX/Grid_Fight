@@ -821,3 +821,13 @@ public enum AudioBus
     MediumPriority = 50,
     HighPriority = 100,
 }
+
+
+
+public enum LevelType
+{
+    Novice,
+    Defiant,
+    Heroine,
+    Goddess
+}
