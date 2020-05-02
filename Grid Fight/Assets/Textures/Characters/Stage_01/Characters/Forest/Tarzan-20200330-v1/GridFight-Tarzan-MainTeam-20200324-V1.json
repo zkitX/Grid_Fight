@@ -747,7 +747,7 @@
 ],
 "events": {
 	"FireArrivingParticle": {},
-	"FireAttackTile": {},
+	"FireTileAttack": {},
 	"FireBulletParticle": {},
 	"FireCastParticle": {},
 	"StopDefending": {}
@@ -5048,7 +5048,7 @@
 			}
 		],
 		"events": [
-			{ "time": 0.5, "name": "FireAttackTile" }
+			{ "time": 0.5, "name": "FireTileAttack" }
 		]
 	},
 	"Atk1_Loop": {
@@ -10251,7 +10251,10 @@
 					{ "time": 0.5 }
 				]
 			}
-		}
+		},
+		"events": [
+			{ "time": 0.5, "name": "FireTileAttack" }
+		]
 	},
 	"Buff": {
 		"slots": {

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage01_Character_Valley_Powerful
+  m_Name: Stage01_Character_Forest_Skill1_Pai
   m_EditorClassIdentifier: 
   Chances: 100
-  CurrentAttackType: 0
+  CurrentAttackType: 1
   AttackRatioMultiplier: 1
   DamageMultiplier: {x: 1, y: 1}
   AttackInput: 0
-  AttackAnim: 1
-  PrefixAnim: 1
+  AttackAnim: 3
+  PrefixAnim: 4
   Particles:
     Left:
       Cast: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
@@ -46,21 +46,21 @@ MonoBehaviour:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
+          value: 1
           inSlope: 0
           outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 0
+          value: 1
           inSlope: 0
           outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -96,8 +96,83 @@ MonoBehaviour:
       EffectChances: 100
     CharacterClass: 0
   TilesAtk:
-    AtkType: 0
-    BulletTrajectories: []
+    AtkType: 2
+    BulletTrajectories:
+    - Delay: 0
+      Show: 1
+      BulletEffectTiles:
+      - Pos: {x: 0, y: 0}
+        HasEffect: 0
+        showImpact: 0
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 0, y: -1}
+        HasEffect: 0
+        showImpact: 0
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: -1, y: -1}
+        HasEffect: 0
+        showImpact: 0
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: -1, y: 0}
+        HasEffect: 0
+        showImpact: 0
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: -1, y: 1}
+        HasEffect: 0
+        showImpact: 0
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 0, y: 1}
+        HasEffect: 0
+        showImpact: 0
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 1, y: 1}
+        HasEffect: 0
+        showImpact: 0
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 1, y: 0}
+        HasEffect: 0
+        showImpact: 0
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 1, y: -1}
+        HasEffect: 0
+        showImpact: 0
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
     StatToCheck: 0
     ValueChecker: 0
     PercToCheck: 0

@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage01_Character_Mountain_Powerful
+  m_Name: Stage01_Character_Valley_EnemyAttack02_Epa
   m_EditorClassIdentifier: 
   Chances: 100
-  CurrentAttackType: 0
+  CurrentAttackType: 1
   AttackRatioMultiplier: 1
   DamageMultiplier: {x: 1, y: 1}
   AttackInput: 0
-  AttackAnim: 1
-  PrefixAnim: 1
+  AttackAnim: 0
+  PrefixAnim: 0
   Particles:
     Left:
-      Cast: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Cast: {fileID: 4927253743441866815, guid: 355957e9d893d044ca15511ef14861b6,
         type: 3}
-      Bullet: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Bullet: {fileID: 8662512498320452954, guid: 3f0bb1fd0ed2d3241ba2e0f231c0c96d,
         type: 3}
-      Hit: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73, type: 3}
+      Hit: {fileID: 8602130236460923310, guid: 9de439602c4b058469a8720feb04beea, type: 3}
     Right:
-      Cast: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Cast: {fileID: 3465501561076678791, guid: 539d49d98e7043d4a808944229c233fa,
         type: 3}
-      Bullet: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Bullet: {fileID: 6344266208631520687, guid: 71909928b8851374ca5b1f2f287bb2d8,
         type: 3}
-      Hit: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73, type: 3}
+      Hit: {fileID: 6289738693630632087, guid: 8c0469648c4a1b642974cabe0506d205, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
@@ -96,9 +96,44 @@ MonoBehaviour:
       EffectChances: 100
     CharacterClass: 0
   TilesAtk:
-    AtkType: 0
-    BulletTrajectories: []
+    AtkType: 1
+    BulletTrajectories:
+    - Delay: 0
+      Show: 1
+      BulletEffectTiles:
+      - Pos: {x: 1, y: 1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 1, y: 2}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 1, y: 0}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 1, y: -1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
     StatToCheck: 0
     ValueChecker: 0
-    PercToCheck: 0
+    PercToCheck: 50
     Chances: 0
