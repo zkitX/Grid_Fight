@@ -866,9 +866,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
 
             yield return BattleManagerScript.Instance.PauseUntil();
-            float newAdd = (Time.fixedDeltaTime / (animLength / moveValue));
             timer += (Time.fixedDeltaTime / (animLength / moveValue));
-            spaceTimer += curve.Evaluate(timer);
+            spaceTimer = curve.Evaluate(timer);
             transform.position = Vector3.Lerp(offset, nextPos, spaceTimer);
 
             if (timer > 0.7f && !isMovCheck)
