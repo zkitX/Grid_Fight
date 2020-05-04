@@ -249,6 +249,6 @@ public class AnimationMovementCurveClass
 {
     public AnimationCurve UpMovement;
     public AnimationCurve DownMovement;
-    public AnimationCurve ForwardMovement;
     public AnimationCurve BackwardMovement;
+    public AnimationCurve ForwardMovement;
 }
