@@ -42,3 +42,13 @@ public enum EventEffectTypes
     RecruitCharacter,
     None,
 }
+
+//UI STUFF HERE
+
+public enum UI_ActionTypes
+{
+    None,
+    Pause,
+    ChangeColor,
+    PlayAnimation,
+}

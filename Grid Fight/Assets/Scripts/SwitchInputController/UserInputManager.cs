@@ -440,25 +440,28 @@ public class UserInputManager : MonoBehaviour
 
     private void Instance_ButtonLeftDownEvent(int player)
     {
+        //if (Grid_UINavigator.Instance != null) Grid_UINavigator.Instance.ButtonChangeInput(InputDirection.Left);
         //Debug.Log(player + "  " + "Left Down");
         //LoadSelectCharacter(CharacterSelectionType.Left, (ControllerType)player);
-
     }
 
     private void Instance_ButtonRightDownEvent(int player)
     {
+        //if (Grid_UINavigator.Instance != null) Grid_UINavigator.Instance.ButtonChangeInput(InputDirection.Right);
         //Debug.Log(player + "  " + "Right Down");
         //LoadSelectCharacter(CharacterSelectionType.Right, (ControllerType)player);
     }
 
     private void Instance_ButtonDownDownEvent(int player)
     {
+        //if (Grid_UINavigator.Instance != null) Grid_UINavigator.Instance.ButtonChangeInput(InputDirection.Down);
         //Debug.Log(player + "  " + "Down Down");
         //LoadSelectCharacter(CharacterSelectionType.Down, (ControllerType)player);
     }
 
     private void Instance_ButtonUpDownEvent(int player)
     {
+        //if (Grid_UINavigator.Instance != null) Grid_UINavigator.Instance.ButtonChangeInput(InputDirection.Up);
         //Debug.Log(player + "  " + "Up Down");
         //LoadSelectCharacter(CharacterSelectionType.Up, (ControllerType)player);
     }
