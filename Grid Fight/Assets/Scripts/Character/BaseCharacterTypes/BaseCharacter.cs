@@ -757,7 +757,17 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     {
                         StopCoroutine(MoveCo);
                     }
-                    MoveCo = MoveByTile(resbts.transform.position, curve, SpineAnim.GetAnimLenght(AnimState));
+
+                    if(SpineAnim.CurveType == MovementCurveType.Speed_Time)
+                    {
+                        MoveCo = MoveByTileSpeed(resbts.transform.position, curve, SpineAnim.GetAnimLenght(AnimState));
+                    }
+                    else
+                    {
+                        MoveCo = MoveByTileSpace(resbts.transform.position, curve, SpineAnim.GetAnimLenght(AnimState));
+                    }
+
+                   
                     yield return MoveCo;
                 }
                 else
@@ -801,22 +811,22 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             case InputDirection.Up:
                 dir = new Vector2Int(-1, 0);
-                curve = SpineAnim.UpMovementSpeed;
+                curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.UpMovement : SpineAnim.Speed_Time_Curves.UpMovement;
                 AnimState = CharacterAnimationStateType.DashUp;
                 break;
             case InputDirection.Down:
                 dir = new Vector2Int(1, 0);
-                curve = SpineAnim.DownMovementSpeed;
+                curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.DownMovement : SpineAnim.Speed_Time_Curves.DownMovement;
                 AnimState = CharacterAnimationStateType.DashDown;
                 break;
             case InputDirection.Right:
                 dir = new Vector2Int(0, 1);
-                curve = SpineAnim.RightMovementSpeed;
+                curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.BackwardMovement : SpineAnim.Speed_Time_Curves.BackwardMovement;
                 AnimState = UMS.Facing == FacingType.Left ? CharacterAnimationStateType.DashRight : CharacterAnimationStateType.DashLeft;
                 break;
             case InputDirection.Left:
                 dir = new Vector2Int(0, -1);
-                curve = SpineAnim.LeftMovementSpeed;
+                curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.ForwardMovement : SpineAnim.Speed_Time_Curves.ForwardMovement;
                 AnimState = UMS.Facing == FacingType.Left ? CharacterAnimationStateType.DashLeft : CharacterAnimationStateType.DashRight;
                 break;
         }
@@ -842,8 +852,57 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     }
 
 
+    
+    public virtual IEnumerator MoveByTileSpace(Vector3 nextPos, AnimationCurve curve, float animLength)
+    {
+        //  Debug.Log(AnimLength + "  AnimLenght   " + AnimLength / CharInfo.MovementSpeed + " Actual duration" );
+        float timer = 0;
+        float spaceTimer = 0;
+        Vector3 offset = transform.position;
+        bool isMovCheck = false;
+        bool isDefe = false;
+        float moveValue = CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed;
+        while (timer < 1)
+        {
+
+            yield return BattleManagerScript.Instance.PauseUntil();
+            float newAdd = (Time.fixedDeltaTime / (animLength / moveValue));
+            timer += (Time.fixedDeltaTime / (animLength / moveValue));
+            spaceTimer += curve.Evaluate(timer);
+            transform.position = Vector3.Lerp(offset, nextPos, spaceTimer);
+
+            if (timer > 0.7f && !isMovCheck)
+            {
+                isMovCheck = true;
+                isMoving = false;
+                if (isDefending && !isDefe)
+                {
+                    isDefe = true;
+                    SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
+                    SpineAnim.SetAnimationSpeed(5);
+                }
+                TileMovementCompleteEvent?.Invoke(this);
+            }
+
+            if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving.ToString())
+            {
+                isMoving = false;
+                TileMovementCompleteEvent?.Invoke(this);
+                MoveCo = null;
+                yield break;
+            }
+        }
+
+
+        if (IsOnField)
+        {
+            transform.position = nextPos;
+        }
+        MoveCo = null;
+    }
+
     //Move the character on the determinated Tile position
-    public virtual IEnumerator MoveByTile(Vector3 nextPos, AnimationCurve curve, float animLength)
+    public virtual IEnumerator MoveByTileSpeed(Vector3 nextPos, AnimationCurve curve, float animLength)
     {
         //  Debug.Log(AnimLength + "  AnimLenght   " + AnimLength / CharInfo.MovementSpeed + " Actual duration" );
         float timer = 0;
