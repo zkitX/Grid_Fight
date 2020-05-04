@@ -73,7 +73,7 @@ public class SpineAnimationManager : MonoBehaviour
 
             }
         }
-        else if (e.Data.Name.Contains("FireTileAttack"))
+        else if (e.Data.Name.Contains("FireTileAttack") && !trackEntry.Animation.Name.Contains("Loop"))
         {
             if (CharOwner.CharInfo.BaseCharacterType != BaseCharType.CharacterType_Script)
             {
@@ -191,12 +191,13 @@ public class SpineAnimationManager : MonoBehaviour
     }
     public bool changeanim = false;
     public float transition = 0.5f;
+    public CharacterAnimationStateType NextAnim = CharacterAnimationStateType.Arriving;
     private void Update()
     {
         if (changeanim)
         {
             changeanim = false;
-            SetAnim(CurrentAnim, false, transition);
+            SetAnim(NextAnim.ToString(), false, transition);
         }
     }
 
