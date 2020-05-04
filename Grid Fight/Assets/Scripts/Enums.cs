@@ -821,3 +821,10 @@ public enum AudioBus
     MediumPriority = 50,
     HighPriority = 100,
 }
+
+
+public enum MovementCurveType
+{
+    Space_Time,
+    Speed_Time
+}
