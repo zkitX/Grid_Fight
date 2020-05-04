@@ -475,7 +475,9 @@ public class UserInputManager : MonoBehaviour
         }
         else
         {
-           // SelectedCharacterStartChargingAttack(player, AttackAnimType.Skill1);
+#if UNITY_EDITOR
+            SelectedCharacterStartChargingAttack(player, AttackInputType.Skill1);
+#endif
         }
 
     }
@@ -489,7 +491,9 @@ public class UserInputManager : MonoBehaviour
         }
         else
         {
-           // SelectedCharacterStartChargingAttack(player, AttackAnimType.Skill2);
+#if UNITY_EDITOR
+            SelectedCharacterStartChargingAttack(player, AttackInputType.Skill2);
+#endif
         }
     }
 
