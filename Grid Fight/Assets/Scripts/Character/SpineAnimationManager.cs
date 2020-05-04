@@ -12,10 +12,10 @@ public class SpineAnimationManager : MonoBehaviour
     public Spine.Skeleton skeleton;
     public BaseCharacter CharOwner;
 
-    public AnimationCurve UpMovementSpeed;
-    public AnimationCurve DownMovementSpeed;
-    public AnimationCurve LeftMovementSpeed;
-    public AnimationCurve RightMovementSpeed;
+    public MovementCurveType CurveType = MovementCurveType.Speed_Time;
+    [HideInInspector]public AnimationMovementCurveClass Speed_Time_Curves;
+    [HideInInspector]public AnimationMovementCurveClass Space_Time_Curves;
+
 
     public List<Transform> FiringPints = new List<Transform>();
     public string CurrentAnim;
@@ -244,3 +244,11 @@ public class CurrentAnimClass
     }
 }
 
+[System.Serializable]
+public class AnimationMovementCurveClass
+{
+    public AnimationCurve UpMovement;
+    public AnimationCurve DownMovement;
+    public AnimationCurve ForwardMovement;
+    public AnimationCurve BackwardMovement;
+}
