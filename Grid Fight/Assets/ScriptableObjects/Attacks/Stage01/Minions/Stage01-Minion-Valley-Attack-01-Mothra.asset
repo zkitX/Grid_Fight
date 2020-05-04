@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage01_Character_Valley_Weak_Epa
+  m_Name: Stage01-Minion-Valley-Attack-01-Mothra
   m_EditorClassIdentifier: 
-  Chances: 0
-  CurrentAttackType: 0
+  Chances: 100
+  CurrentAttackType: 1
   AttackRatioMultiplier: 1
   DamageMultiplier: {x: 1, y: 1}
   AttackInput: 0
@@ -21,16 +21,17 @@ MonoBehaviour:
   PrefixAnim: 0
   Particles:
     Left:
-      Cast: {fileID: 2369344560945655527, guid: 94c2b516957d8af469f24101b8cad700,
+      Cast: {fileID: 8663874836865528596, guid: ae2ddffb2be687f478c5b7e7036b8b3b,
         type: 3}
-      Bullet: {fileID: 6896179298618375286, guid: ec84b56aea289d34eae387aa96153ec1,
+      Bullet: {fileID: 8773861652959946843, guid: a95ea07bab283af489bde6ebf86b50f9,
         type: 3}
-      Hit: {fileID: 2736302193542763339, guid: 510a3e1f8fc31204d932357a2c91ef00, type: 3}
+      Hit: {fileID: 7869748828995932644, guid: 7540812ecfeb64345bc9342315a170eb, type: 3}
     Right:
-      Cast: {fileID: 437897473126573471, guid: 88c3935ae26538f4f9173d6b0aaef39d, type: 3}
-      Bullet: {fileID: 5013437844238899515, guid: 22aaf4cafd6fff74e9625cac0b73a6af,
+      Cast: {fileID: 6688847027648736973, guid: 10f2baa017fe2c04d85f812c2cda9282,
         type: 3}
-      Hit: {fileID: 898906333033761559, guid: 056310a7aa70f9641af39dfdbc4365f8, type: 3}
+      Bullet: {fileID: 429632109303455114, guid: 6a85efc994ea25d459dd09e422ccc948,
+        type: 3}
+      Hit: {fileID: 3570947680343292820, guid: 3d15b641709fc4f4ea37384e00931569, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
@@ -95,9 +96,20 @@ MonoBehaviour:
       EffectChances: 100
     CharacterClass: 0
   TilesAtk:
-    AtkType: 0
-    BulletTrajectories: []
+    AtkType: 1
+    BulletTrajectories:
+    - Delay: 1.5
+      Show: 1
+      BulletEffectTiles:
+      - Pos: {x: 0, y: 0}
+        HasEffect: 0
+        showImpact: 0
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
     StatToCheck: 0
     ValueChecker: 0
     PercToCheck: 0
-    Chances: 0
+    Chances: 100

@@ -15,7 +15,7 @@ MonoBehaviour:
   Chances: 100
   CurrentAttackType: 0
   AttackRatioMultiplier: 2
-  DamageMultiplier: {x: 1, y: 1}
+  DamageMultiplier: {x: 0.5, y: 0.5}
   AttackInput: 0
   AttackAnim: 0
   PrefixAnim: 0
@@ -107,11 +107,16 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      BulletEffectTiles: []
+      BulletEffectTiles:
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: 0, y: -1}
+      - {x: 0, y: 1}
       BulletGapStartingTile: {x: 0, y: 0}
-      HasEffect: 0
-      Effects: []
-      EffectChances: 100
+      HasEffect: 1
+      Effects:
+      - {fileID: 11400000, guid: 0390dbef951c44b4c9a58662bb3e1562, type: 2}
+      EffectChances: 80
     CharacterClass: 0
   TilesAtk:
     AtkType: 1

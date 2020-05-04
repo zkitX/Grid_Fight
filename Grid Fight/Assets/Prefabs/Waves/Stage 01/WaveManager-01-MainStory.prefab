@@ -51,27 +51,122 @@ MonoBehaviour:
   WavePhases:
   - name: Wave1
     IsRandom: 1
-    MaxEnemyOnScreen: 2
+    MaxEnemyOnScreen: 7
     DelayBetweenChars: 0
     ListOfEnemy:
     - name: Lady Bush
       NPCType: 0
       NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 1081
+        CharacterName: 1021
         Health: {x: 30, y: 35}
         HealthRegeneration: {x: 0.1, y: 0.2}
-        CharacterClass: 0
         BaseDamage: {x: 5, y: 6}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
         BaseSpeed: {x: 1, y: 1.2}
-        AttackSpeedRatio: {x: 5, y: 6}
+        AttackSpeedRatio: {x: 10, y: 10}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
         MovementSpeed: {x: 1, y: 1}
         MovementTimer: {x: 1, y: 1}
-        UpDownPerc: 30
+        UpDownPerc: 15
+        Events: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    - name: Lady Bush
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1022
+        Health: {x: 30, y: 35}
+        HealthRegeneration: {x: 0.1, y: 0.2}
+        BaseDamage: {x: 5, y: 6}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        UpDownPerc: 15
+        Events: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    - name: Lady Bush
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1023
+        Health: {x: 30, y: 35}
+        HealthRegeneration: {x: 0.1, y: 0.2}
+        BaseDamage: {x: 5, y: 6}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        UpDownPerc: 15
+        Events: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    - name: Lady Bush
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1024
+        Health: {x: 30, y: 35}
+        HealthRegeneration: {x: 0.1, y: 0.2}
+        BaseDamage: {x: 5, y: 6}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        UpDownPerc: 15
+        Events: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    - name: Lady Bush
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1027
+        Health: {x: 30, y: 35}
+        HealthRegeneration: {x: 0.1, y: 0.2}
+        BaseDamage: {x: 5, y: 6}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        UpDownPerc: 15
         Events: []
       AreThereStartingEnemy: 0
       inRandomPos: 1
@@ -91,7 +186,6 @@ MonoBehaviour:
         CharacterName: 1085
         Health: {x: 300, y: 300}
         HealthRegeneration: {x: 1, y: 1}
-        CharacterClass: 0
         BaseDamage: {x: 14, y: 14}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
@@ -118,7 +212,6 @@ MonoBehaviour:
         CharacterName: 1081
         Health: {x: 60, y: 80}
         HealthRegeneration: {x: 1, y: 1}
-        CharacterClass: 0
         BaseDamage: {x: 8, y: 9}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
@@ -150,7 +243,6 @@ MonoBehaviour:
         CharacterName: 1080
         Health: {x: 80, y: 100}
         HealthRegeneration: {x: 0.2, y: 0.2}
-        CharacterClass: 0
         BaseDamage: {x: 10, y: 12}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
@@ -177,7 +269,6 @@ MonoBehaviour:
         CharacterName: 1080
         Health: {x: 80, y: 100}
         HealthRegeneration: {x: 0.2, y: 0.2}
-        CharacterClass: 0
         BaseDamage: {x: 10, y: 12}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
@@ -204,7 +295,6 @@ MonoBehaviour:
         CharacterName: 1087
         Health: {x: 300, y: 300}
         HealthRegeneration: {x: 1, y: 1}
-        CharacterClass: 0
         BaseDamage: {x: 12, y: 15}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
@@ -236,7 +326,6 @@ MonoBehaviour:
         CharacterName: 1083
         Health: {x: 40, y: 45}
         HealthRegeneration: {x: 0.2, y: 0.2}
-        CharacterClass: 0
         BaseDamage: {x: 6, y: 7}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
@@ -263,7 +352,6 @@ MonoBehaviour:
         CharacterName: 1080
         Health: {x: 80, y: 100}
         HealthRegeneration: {x: 0.2, y: 0.2}
-        CharacterClass: 0
         BaseDamage: {x: 10, y: 12}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
@@ -290,7 +378,6 @@ MonoBehaviour:
         CharacterName: 1083
         Health: {x: 50, y: 55}
         HealthRegeneration: {x: 0.2, y: 0.2}
-        CharacterClass: 0
         BaseDamage: {x: 8, y: 12}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
@@ -317,7 +404,6 @@ MonoBehaviour:
         CharacterName: 1084
         Health: {x: 250, y: 250}
         HealthRegeneration: {x: 1, y: 1}
-        CharacterClass: 0
         BaseDamage: {x: 15, y: 12}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
@@ -349,7 +435,6 @@ MonoBehaviour:
         CharacterName: 1086
         Health: {x: 250, y: 250}
         HealthRegeneration: {x: 1, y: 1}
-        CharacterClass: 0
         BaseDamage: {x: 12, y: 12}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
@@ -376,7 +461,6 @@ MonoBehaviour:
         CharacterName: 1085
         Health: {x: 200, y: 200}
         HealthRegeneration: {x: 1, y: 1}
-        CharacterClass: 0
         BaseDamage: {x: 15, y: 15}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
@@ -403,7 +487,6 @@ MonoBehaviour:
         CharacterName: 1087
         Health: {x: 230, y: 230}
         HealthRegeneration: {x: 1, y: 1}
-        CharacterClass: 0
         BaseDamage: {x: 17, y: 16}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
@@ -430,7 +513,6 @@ MonoBehaviour:
         CharacterName: 1084
         Health: {x: 250, y: 250}
         HealthRegeneration: {x: 1, y: 1}
-        CharacterClass: 0
         BaseDamage: {x: 18, y: 18}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
@@ -457,7 +539,6 @@ MonoBehaviour:
         CharacterName: 1081
         Health: {x: 60, y: 60}
         HealthRegeneration: {x: 1, y: 1}
-        CharacterClass: 0
         BaseDamage: {x: 10, y: 12}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
@@ -489,7 +570,6 @@ MonoBehaviour:
         CharacterName: 1082
         Health: {x: 600, y: 600}
         HealthRegeneration: {x: 1, y: 1}
-        CharacterClass: 0
         BaseDamage: {x: 22, y: 23}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
@@ -516,7 +596,6 @@ MonoBehaviour:
         CharacterName: 1002
         Health: {x: 20, y: 25}
         HealthRegeneration: {x: 1, y: 1}
-        CharacterClass: 0
         BaseDamage: {x: 6, y: 8}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
@@ -543,7 +622,6 @@ MonoBehaviour:
         CharacterName: 1002
         Health: {x: 20, y: 25}
         HealthRegeneration: {x: 1, y: 1}
-        CharacterClass: 0
         BaseDamage: {x: 6, y: 6}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
@@ -575,7 +653,6 @@ MonoBehaviour:
         CharacterName: 1082
         Health: {x: 600, y: 600}
         HealthRegeneration: {x: 1, y: 1}
-        CharacterClass: 0
         BaseDamage: {x: 22, y: 23}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
@@ -602,7 +679,6 @@ MonoBehaviour:
         CharacterName: 1002
         Health: {x: 20, y: 25}
         HealthRegeneration: {x: 1, y: 1}
-        CharacterClass: 0
         BaseDamage: {x: 6, y: 8}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
@@ -629,7 +705,6 @@ MonoBehaviour:
         CharacterName: 1002
         Health: {x: 20, y: 25}
         HealthRegeneration: {x: 1, y: 1}
-        CharacterClass: 0
         BaseDamage: {x: 6, y: 6}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
