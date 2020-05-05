@@ -134,6 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SwapDelay: 0.15
   PressableItems: []
+  IsReadyToBeSetUp: 0
 --- !u!114 &1356531903299505062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioProfile: {fileID: 11400000, guid: 9c7f93ca9d4ed0d43a6918dd9d582962, type: 2}
   _CurrentBattleState: 0
-  FungusState: 0
+  _FungusState: 0
   OccupiedBattleTiles: []
   CharacterBasePrefab: {fileID: 6286762205357209611, guid: 8fcf2c7adbb50844c8b549242125f32d,
     type: 3}
@@ -183,6 +184,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3c41a2233e1f09d4c8ef06b54ec04ac5, type: 2}
   - {fileID: 11400000, guid: 63fcbc3005e680443895112ae32266df, type: 2}
   - {fileID: 11400000, guid: 182ec74be3cb7a145be165d51cd5ab80, type: 2}
+  - {fileID: 11400000, guid: e8a3aed9a38516e449a052881ed310b9, type: 2}
+  - {fileID: 11400000, guid: 4ffdf2d5efaf6a0459867c3fe0f31296, type: 2}
+  - {fileID: 11400000, guid: c0159b033551a8341b33f0ac57ac2dce, type: 2}
+  - {fileID: 11400000, guid: c848fda8ae3e2bb498a598a14d280708, type: 2}
   AllCharactersOnField: []
   CharactersContainer: {fileID: 1356531903299505061}
   playersColor:
