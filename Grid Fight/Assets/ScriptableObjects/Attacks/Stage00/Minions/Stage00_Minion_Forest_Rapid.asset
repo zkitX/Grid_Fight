@@ -16,8 +16,26 @@ MonoBehaviour:
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
   DamageMultiplier: {x: 1, y: 1}
+  AttackInput: 0
   AttackAnim: 0
   PrefixAnim: 0
+  Particles:
+    Left:
+      Cast: {fileID: 6273701697582727659, guid: d9365058cf6f0e14d85b285c2da54f36,
+        type: 3}
+      Bullet: {fileID: 7522349934412526519, guid: ef20516c0c698e14f980d5cb5207b8ff,
+        type: 3}
+      Hit: {fileID: 3075029191658618131, guid: 10dea9f89c18ff9438ab85903c110db0, type: 3}
+    Right:
+      Cast: {fileID: 6273701697582727659, guid: d9365058cf6f0e14d85b285c2da54f36,
+        type: 3}
+      Bullet: {fileID: 7522349934412526519, guid: ef20516c0c698e14f980d5cb5207b8ff,
+        type: 3}
+      Hit: {fileID: 3075029191658618131, guid: 10dea9f89c18ff9438ab85903c110db0, type: 3}
+    CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
+      type: 3}
+    CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
+      type: 3}
   TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories: []
@@ -30,10 +48,41 @@ MonoBehaviour:
       BulletEffectTiles:
       - Pos: {x: 0, y: 0}
         HasEffect: 0
+        showImpact: 0
         Effects: []
         EffectChances: 100
-        HasDifferentParticles: 1
-        ParticlesID: 14
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: -1, y: 1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: -1, y: -1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 1, y: -1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 1, y: 1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0

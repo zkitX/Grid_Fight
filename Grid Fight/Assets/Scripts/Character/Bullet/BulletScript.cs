@@ -34,6 +34,7 @@ public class BulletScript : MonoBehaviour
     public AttackInputType AttackInput;
     public AttackAnimType AtkType;
     public GameObject HitPs;
+    IEnumerator movingCo;
     //Private 
     private VFXBulletSpeedController vfx;
     private BattleTileScript bts;
@@ -46,7 +47,14 @@ public class BulletScript : MonoBehaviour
 
     public void StartMoveToTile()
     {
-        StartCoroutine(MoveToTile());
+        StopAllCoroutines();
+        if (movingCo != null)
+        {
+            StopCoroutine(movingCo);
+        }
+
+        movingCo = MoveToTile();
+        StartCoroutine(movingCo);
     }
 
     //Move the bullet on a determinated tile using the BulletInfo.Trajectory
@@ -77,7 +85,7 @@ public class BulletScript : MonoBehaviour
         PSTimeGroup pstg = PS.GetComponent<PSTimeGroup>();
         if (pstg != null)
         {
-            pstg.UpdatePSTime(CharInfo.SpeedStats.BulletSpeed);
+            pstg.UpdatePSTime(bulletDuration + 2);
 
         }
         else
@@ -251,6 +259,7 @@ public class BulletScript : MonoBehaviour
     private void EndBullet(float timer)
     {
         Invoke("RestoreBullet", timer);
+        PS.transform.parent = null;
         PS.GetComponent<PSTimeGroup>().UpdatePSTime(0.1f);
     }
 
@@ -262,7 +271,8 @@ public class BulletScript : MonoBehaviour
             bulletSoundSource.ResetSource();
         }
         bulletSoundSource = null;
-        PS.GetComponent<DisableParticleScript>().ResetParticle();
+        //PS.GetComponent<DisableParticleScript>().ResetParticle();
+        CancelInvoke("RestoreBullet");
         StopAllCoroutines();
         gameObject.SetActive(false);
     }
