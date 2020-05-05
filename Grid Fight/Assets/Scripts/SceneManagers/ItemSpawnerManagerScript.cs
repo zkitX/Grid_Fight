@@ -11,6 +11,7 @@ public class ItemSpawnerManagerScript : MonoBehaviour
     public Vector2 SpawningTimeRange;
     public List<ItemsPowerUPsInfoScript> SpawnedItems = new List<ItemsPowerUPsInfoScript>();
     public bool CoStopper = false;
+    private bool spawningCoPaused = false;
     private IEnumerator SpawningCo;
     private void Awake()
     {
@@ -20,6 +21,16 @@ public class ItemSpawnerManagerScript : MonoBehaviour
     private void Start()
     {
         StartSpawningCo(SpawningTimeRange);
+    }
+
+    public void PauseSpawning()
+    {
+        spawningCoPaused = true;
+    }
+
+    public void PlaySpawning()
+    {
+        spawningCoPaused = false;
     }
 
     public void StartSpawningCo(Vector2 spawningTimeRange)
@@ -49,6 +60,10 @@ public class ItemSpawnerManagerScript : MonoBehaviour
 
             while (timer <= spawningTime)
             {
+                while (spawningCoPaused)
+                {
+                    yield return null;
+                }
                 yield return BattleManagerScript.Instance.PauseUntil();
                 timer += Time.fixedDeltaTime;
             }
