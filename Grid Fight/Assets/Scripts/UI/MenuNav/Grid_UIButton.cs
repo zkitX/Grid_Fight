@@ -9,12 +9,30 @@ using MyBox;
 
 public class Grid_UIButton : MonoBehaviour
 {
+    [HideInInspector] public Grid_UIPanel parentPanel = null;
+    public Grid_UIPanel ParentPanel
+    {
+        get
+        {
+            if (parentPanel == null) parentPanel = Grid_UINavigator.Instance.genericPanel;
+            return parentPanel;
+        }
+        set
+        {
+            parentPanel = value;
+        }
+    }
+
     [HideInInspector] public TextMeshProUGUI buttonText;
     [HideInInspector] public Image buttonImage;
+
     public UI_ActionsClass[] PressActions;
     public UI_ActionsClass[] SelectActions;
     public UI_ActionsClass[] DeselectActions;
+
     [HideInInspector] public bool selected = false;
+    [HideInInspector] public bool visuallySelected = false;
+
     [HideInInspector] public Vector2 buffers = Vector2.zero;
     public Vector2 Dimentions
     {
@@ -37,25 +55,48 @@ public class Grid_UIButton : MonoBehaviour
 
     public virtual void PressAction()
     {
-        StartCoroutine(SequenceEvents(PressActions));
+        if (PressEventsSequencer != null) StopCoroutine(PressEventsSequencer);
+        PressEventsSequencer = SequenceEvents(PressActions);
+        StartCoroutine(PressEventsSequencer);
     }
 
-    public virtual void SelectAction()
+    public virtual bool SelectAction()
     {
-        //buttonText.color = Color.white;
-        //buttonImage.color = Color.red;
-        StartCoroutine(SequenceEvents(SelectActions));
+        if (selected) return false;
+
+        if (!visuallySelected)
+        {
+            if (SelectionEventsSequencer != null) StopCoroutine(SelectionEventsSequencer);
+            SelectionEventsSequencer = SequenceEvents(SelectActions);
+            StartCoroutine(SelectionEventsSequencer);
+
+            visuallySelected = true;
+        }
+
+
         selected = true;
+        return true;
     }
 
-    public virtual void DeselectAction()
+    public virtual bool DeselectAction(bool playDeselectEffects)
     {
-        //buttonText.color = Color.black;
-        //buttonImage.color = Color.white;
-        StartCoroutine(SequenceEvents(DeselectActions));
+        if (!selected) return false;
+
+        if (playDeselectEffects && visuallySelected)
+        {
+            if (SelectionEventsSequencer != null) StopCoroutine(SelectionEventsSequencer);
+            SelectionEventsSequencer = SequenceEvents(DeselectActions);
+            StartCoroutine(SelectionEventsSequencer);
+
+            visuallySelected = false;
+        }
+
         selected = false;
+        return true;
     }
 
+    IEnumerator PressEventsSequencer = null;
+    IEnumerator SelectionEventsSequencer = null;
     IEnumerator SequenceEvents(UI_ActionsClass[] events)
     {
         yield return null;
@@ -112,13 +153,19 @@ public class Grid_UIButton : MonoBehaviour
 
             foreach(Grid_UIActions uiAction in uiAcCla.uiActions)
             {
-                uiAction.Name = uiAction.GetName();
                 //Assign image and text if autofill enabled
                 if (uiAction.changeThingColorOnThisObject)
                 {
                     uiAction.changeColorText = GetComponentInChildren<TextMeshProUGUI>() == null ? null : GetComponentInChildren<TextMeshProUGUI>();
                     uiAction.changeColorImage = GetComponentInChildren<Image>() == null ? null : GetComponentInChildren<Image>();
                 }
+                if (uiAction.setSelectionForThisButtom)
+                {
+                    uiAction.setSelectionButton = this;
+                }
+
+                uiAction.parentButton = this;
+                uiAction.Name = uiAction.GetName();
             }
         }
     }

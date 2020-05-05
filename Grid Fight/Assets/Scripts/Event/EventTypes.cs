@@ -51,4 +51,13 @@ public enum UI_ActionTypes
     Pause,
     ChangeColor,
     PlayAnimation,
+    SetButtonSelection,
+    SetPanelFocus,
+}
+
+public enum UI_FocusTypes
+{
+    None,
+    Focused,
+    Defocused,
 }

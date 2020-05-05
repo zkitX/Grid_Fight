@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Linq;
 using MyBox;
 
@@ -20,11 +21,35 @@ public class Grid_UINavigator : MonoBehaviour
     {
         get
         {
-            return buttons.Where(r => r.gameObject.activeInHierarchy).ToArray();
+            return buttons.Where(r => r.gameObject.activeInHierarchy && r.parentPanel.focusState == UI_FocusTypes.Focused).ToArray();
         }
-        set
-        {
+    }
 
+    protected Grid_UIPanel[] panels
+    {
+        get
+        {
+            return FindObjectsOfType<Grid_UIPanel>();
+        }
+    }
+    public Grid_UIPanel genericPanel
+    {
+        get
+        {
+            if (panels.Where(r => r.isGenericPanel).FirstOrDefault() == null)
+            {
+                Debug.LogError("No generic fallback panel is setup, please create one");
+                return null;
+            }
+            else if(panels.Where(r => r.isGenericPanel).ToArray().Length != 1)
+            {
+                Debug.LogError("More than one generic fallback panel is setup, please ensure there is only 1");
+                return panels.Where(r => r.isGenericPanel).FirstOrDefault();
+            }
+            else
+            {
+                return panels.Where(r => r.isGenericPanel).FirstOrDefault();
+            }
         }
     }
 
@@ -39,7 +64,11 @@ public class Grid_UINavigator : MonoBehaviour
         {
             for (int i = 0; i < buttons.Length; i++)
             {
-                if (value.name == buttons[i].name) selectedButtonIndex = i;
+                if (value.name == buttons[i].name)
+                {
+                    Debug.Log("Current selected button: " + buttons[i].name);
+                    selectedButtonIndex = i;
+                }
             }
         }
     }
@@ -50,7 +79,9 @@ public class Grid_UINavigator : MonoBehaviour
         if(InputController.Instance != null)
         {
             InputController.Instance.LeftJoystickUsedEvent += ButtonChangeInput;
+            InputController.Instance.ButtonAUpEvent += ButtonPressInput;
         }
+        SetupButtonPanels();
     }
 
     private void Start()
@@ -70,8 +101,23 @@ public class Grid_UINavigator : MonoBehaviour
             offset = Time.time;
         }
         //if (BattleManagerScript.Instance.CurrentBattleState != BattleState.Menu) return;
-        
     }
+
+    public void ButtonPressInput(int player)
+    {
+        if (selectedButton != null) selectedButton.PressAction();
+    }
+
+
+
+    public void SetupButtonPanels()
+    {
+        foreach (Grid_UIPanel panel in panels)
+        {
+            panel.SetupChildButtonPanelInfo();
+        }
+    }
+
 
 
 
@@ -88,39 +134,48 @@ public class Grid_UINavigator : MonoBehaviour
         SelectButtonByName(GetButtonFurthestInDirection(startingDirection).name);
     }
 
-    public void SelectButton(Grid_UIButton btn)
+    int GetButtonIndex(Grid_UIButton btn)
     {
-        if (btn == null) return;
+        if (btn == null) return -1;
         for (int i = 0; i < buttons.Length; i++)
         {
             if (buttons[i].name == btn.name)
             {
-                SelectButton(i);
-                break;
+                return i;
             }
         }
+        return -1;
     }
 
-    public void SelectButton(int index)
+    public void SelectButton(Grid_UIButton btn, bool playDeselectEventsForOtherButtons = true)
     {
-        if (buttons[index].selected) return;
+        if (btn == null) return;
+        SelectButton(GetButtonIndex(btn), playDeselectEventsForOtherButtons);
+    }
 
-        DeselectAllButtons();
-        buttons[index].SelectAction();
+    public void SelectButton(int index, bool playDeselectEventsForOtherButtons = true)
+    {
+        if (!buttons[index].SelectAction()) return;
+
         selectedButton = buttons[index];
+        DeselectAllButtons(playDeselectEventsForOtherButtons);
     }
 
-    public void DeselectButton(int index)
+    public void DeselectButton(Grid_UIButton btn, bool playDeselectEvents = true)
     {
-        if (!buttons[index].selected) return;
-        buttons[index].DeselectAction();
+        DeselectButton(GetButtonIndex(btn), playDeselectEvents);
     }
 
-    public void DeselectAllButtons()
+    public void DeselectButton(int index, bool playDeselectEvents = true)
+    {
+        if (!buttons[index].DeselectAction(playDeselectEvents)) return;
+    }
+
+    public void DeselectAllButtons(bool playDeselectEventsForOtherButtons = true)
     {
         for(int i = 0; i < buttons.Length; i++)
         {
-            DeselectButton(i);
+            if(!(selectedButtonIndex == i)) DeselectButton(i, playDeselectEventsForOtherButtons);
         }
     }
 
@@ -158,7 +213,22 @@ public class Grid_UINavigator : MonoBehaviour
                 else if (Compare.DistanceInDirection(selectedButton.transform.position, activeUnselectedButtons[i].transform.position, direction, selectedButton.buffers) <
                     Compare.DistanceInDirection(selectedButton.transform.position, closestInDirection.transform.position, direction, selectedButton.buffers))
                 {
-                    closestInDirection = activeUnselectedButtons[i];
+                    if(Compare.IsInlineImage(closestInDirection.transform.position, closestInDirection.Dimentions, 
+                        activeUnselectedButtons[i].transform.position, activeUnselectedButtons[i].Dimentions,
+                        (direction == InputDirection.Up  || direction == InputDirection.Down) ? InputDirection.Right : InputDirection.Up))
+                    {
+                        //if(direction == InputDirection.Up || direction == InputDirection.Down ?
+                        //(Mathf.Abs(selectedButton.transform.position.x - activeUnselectedButtons[i].transform.position.x) <
+                        //Mathf.Abs(selectedButton.transform.position.x - closestInDirection.transform.position.x)) :
+                        //(Mathf.Abs(selectedButton.transform.position.y - activeUnselectedButtons[i].transform.position.y) <
+                        //Mathf.Abs(selectedButton.transform.position.y - closestInDirection.transform.position.y)))
+                        //{
+                        if(Vector2.Distance(closestInDirection.transform.position, selectedButton.transform.position) >
+                            Vector2.Distance(activeUnselectedButtons[i].transform.position, selectedButton.transform.position))
+                        closestInDirection = activeUnselectedButtons[i];
+                        // }
+                    }
+                    else closestInDirection = activeUnselectedButtons[i];
                 }
             }
         }
@@ -212,5 +282,26 @@ public class Compare
         }
         Debug.LogError("Returning a default length, please fix the switch error");
         return 0f;
+    }
+
+    public static bool IsInlineImage(Vector2 obj1Pos, Vector2 obj1Dim, Vector2 obj2Pos, Vector2 obj2Dim, InputDirection direction, float bufferPercentage = 0.5f)
+    {
+        Vector2 compareLine = Vector2.zero;
+        if(direction == InputDirection.Down || direction == InputDirection.Up) compareLine = Vector2.up;
+        else compareLine = Vector2.right;
+
+        if (compareLine == Vector2.up &&
+            ((Mathf.Abs(DistanceInDirection(obj1Pos, obj2Pos, InputDirection.Right)) < obj1Dim.y * (bufferPercentage / 2f)) ||
+            (Mathf.Abs(DistanceInDirection(obj1Pos, obj2Pos, InputDirection.Right)) < obj2Dim.y * (bufferPercentage / 2f))))
+        {
+            return true;
+        }
+        else if(compareLine == Vector2.right &&
+            ((Mathf.Abs(DistanceInDirection(obj1Pos, obj2Pos, InputDirection.Up)) < obj1Dim.x * (bufferPercentage / 2f)) ||
+            (Mathf.Abs(DistanceInDirection(obj1Pos, obj2Pos, InputDirection.Up)) < obj2Dim.x * (bufferPercentage / 2f))))
+        {
+            return true;
+        }
+        return false;
     }
 }
