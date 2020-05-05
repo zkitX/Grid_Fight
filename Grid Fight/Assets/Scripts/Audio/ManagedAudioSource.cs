@@ -12,6 +12,7 @@ public class ManagedAudioSource : MonoBehaviour
     protected AudioClipInfoClass audioClipInfo;
 
     public Transform parent = null;
+    public AudioClip fallbackSound = null;
 
     public AudioClip CurrentClip
     {
@@ -52,7 +53,7 @@ public class ManagedAudioSource : MonoBehaviour
     public void SetAudioClipInfo(AudioClipInfoClass _audioClipInfo)
     {
         audioClipInfo = _audioClipInfo;
-        source.clip = audioClipInfo.ClipAndPlay;
+        source.clip = audioClipInfo.Clip == null ? fallbackSound : audioClipInfo.ClipAndPlay;
         UpdateVolume();
     }
 
@@ -159,4 +160,15 @@ public class AudioClipInfoClass
     [HideInInspector] public bool moreThanOneClip = false;
 
     [Range(0f,1f)]public float baseVolume = 1f;
+
+    public AudioClipInfoClass()
+    {
+
+    }
+
+    public AudioClipInfoClass(AudioClip _clip, float _volume = 1f)
+    {
+        clip = _clip;
+        baseVolume = _volume;
+    }
 }
