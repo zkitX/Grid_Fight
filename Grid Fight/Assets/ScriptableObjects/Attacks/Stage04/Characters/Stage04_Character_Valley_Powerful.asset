@@ -16,8 +16,26 @@ MonoBehaviour:
   CurrentAttackType: 0
   AttackRatioMultiplier: 1
   DamageMultiplier: {x: 1, y: 1}
+  AttackInput: 1
   AttackAnim: 1
   PrefixAnim: 1
+  Particles:
+    Left:
+      Cast: {fileID: 1091210815158133637, guid: 23e15875451058e4c99fd61b07d8d31d,
+        type: 3}
+      Bullet: {fileID: 1761786660131571579, guid: 5dbb015908d415b429b8706fb0876353,
+        type: 3}
+      Hit: {fileID: 1091210815158133637, guid: d1232c80de2f9e64ca559293720ae71f, type: 3}
+    Right:
+      Cast: {fileID: 7912764352820388823, guid: c5e6942bdafe04e48b4f4f61c100e193,
+        type: 3}
+      Bullet: {fileID: 1761786660131571579, guid: 174dea35c62ee9143971c611ab671383,
+        type: 3}
+      Hit: {fileID: 1091210815158133637, guid: f994f138f6781ff4d84dfb2c0cb15c86, type: 3}
+    CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
+      type: 3}
+    CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
+      type: 3}
   TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories:

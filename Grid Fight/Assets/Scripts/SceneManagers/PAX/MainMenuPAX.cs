@@ -90,20 +90,43 @@ public class MainMenuPAX : MonoBehaviour
         // You could also load the Scene by using sceneBuildIndex. In this case Scene2 has
         // a sceneBuildIndex of 1 as shown in Build Settings.
         BlackCoverAnim.SetBool("InOut", false);
+       // Debug.LogError("1");
         Invoke("ShowBattleScene", 1);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         asyncLoad.allowSceneActivation = false;
+        asyncLoad.completed += AsyncLoad_completed;
+
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone && !ShowScene)
         {
+       //     Debug.LogError("2");
             yield return null;
         }
 
 
-        yield return new WaitForSecondsRealtime(1f);
         asyncLoad.allowSceneActivation = true;
+
+        /*    Debug.LogError("3");
+            yield return new WaitForSecondsRealtime(1f);
+            yield return new WaitForSecondsRealtime(1f);
+            Debug.LogError("4");
+            SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("SplashPage202004"));*/
+        //UnityEngine.SceneManagement.SceneManager.SetActiveScene(UnityEngine.SceneManagement.SceneManager.GetSceneByName("BattleScene_Stage04"));
+
+    }
+
+    private void AsyncLoad_completed(AsyncOperation obj)
+    {
+        StartCoroutine(a(obj));
+    }
+
+    IEnumerator a(AsyncOperation obj)
+    {
+    //    Debug.LogError("3");
         yield return new WaitForSecondsRealtime(1f);
-        //SceneManager.SetActiveScene(SceneManager.GetSceneByName("BattleScene_Stage04"));
+        obj.allowSceneActivation = true;
+        yield return new WaitForSecondsRealtime(1f);
+    //    Debug.LogError("4");
         SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("SplashPage202004"));
     }
 

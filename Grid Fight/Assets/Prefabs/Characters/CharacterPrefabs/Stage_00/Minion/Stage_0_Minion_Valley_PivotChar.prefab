@@ -497,7 +497,8 @@ MonoBehaviour:
   AudioProfile: {fileID: 11400000, guid: 8aff3648b6bc5524bb91916999b33dec, type: 2}
   BaseCharacterType: 1
   CharacterID: 1003
-  CurrentAttackTypeInfo: []
+  CurrentAttackTypeInfo:
+  - {fileID: 11400000, guid: 48a1077c4ed7c754c99b5230a6263d7c, type: 2}
   Elemental: 0
   ClassType: 3
   UseLayeringSystem: 1
@@ -934,11 +935,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1248219591182752692}
     m_Modifications:
-    - target: {fileID: 6798407456816970919, guid: 05eff284c5072744db1e5ff473748678,
-        type: 3}
-      propertyPath: m_Name
-      value: stage00-minion-valley-loop
-      objectReference: {fileID: 0}
     - target: {fileID: 6798407456816970904, guid: 05eff284c5072744db1e5ff473748678,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -998,6 +994,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798407456816970919, guid: 05eff284c5072744db1e5ff473748678,
+        type: 3}
+      propertyPath: m_Name
+      value: stage00-minion-valley-loop
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05eff284c5072744db1e5ff473748678, type: 3}
