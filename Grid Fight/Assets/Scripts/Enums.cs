@@ -430,7 +430,7 @@ public enum CharacterAnimationStateType
     Defeat_ReverseArrive,
     Dialogue_Confused,
     Dialogue_Disappointed,
-    Dialogue_Engry,
+    Dialogue_Angry,
     Dialogue_Happy,
     Dialogue_Sad,
     Dialogue_Standard,
