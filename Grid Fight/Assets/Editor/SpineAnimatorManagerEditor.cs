@@ -12,13 +12,13 @@ public class SpineAnimatorManagerEditor : Editor
 
     public GameObject Space_Time_Curves_UpMovement;
     public GameObject Space_Time_Curves_DownMovement;
-    public GameObject Space_Time_Curves_ForwardMovement;
     public GameObject Space_Time_Curves_BackwardMovement;
+    public GameObject Space_Time_Curves_ForwardMovement;
 
     public GameObject Speed_Time_Curves_UpMovement;
     public GameObject Speed_Time_Curves_DownMovement;
-    public GameObject Speed_Time_Curves_ForwardMovement;
     public GameObject Speed_Time_Curves_BackwardMovement;
+    public GameObject Speed_Time_Curves_ForwardMovement;
 
 
     public override void OnInspectorGUI()
@@ -29,15 +29,15 @@ public class SpineAnimatorManagerEditor : Editor
         origin = (SpineAnimationManager)target;
         if(origin.Speed_Time_Curves.ForwardMovement == null)
         {
-            origin.Speed_Time_Curves.ForwardMovement = Speed_Time_Curves_BackwardMovement.GetComponent<Base_MovementSpeedScript>().Curve;
-            origin.Speed_Time_Curves.BackwardMovement = Speed_Time_Curves_ForwardMovement.GetComponent<Base_MovementSpeedScript>().Curve;
+            origin.Speed_Time_Curves.ForwardMovement = Speed_Time_Curves_ForwardMovement.GetComponent<Base_MovementSpeedScript>().Curve;
+            origin.Speed_Time_Curves.BackwardMovement = Speed_Time_Curves_BackwardMovement.GetComponent<Base_MovementSpeedScript>().Curve;
             origin.Speed_Time_Curves.UpMovement = Speed_Time_Curves_UpMovement.GetComponent<Base_MovementSpeedScript>().Curve;
             origin.Speed_Time_Curves.DownMovement = Speed_Time_Curves_DownMovement.GetComponent<Base_MovementSpeedScript>().Curve;
         }
         if (origin.Space_Time_Curves.ForwardMovement == null)
         {
-            origin.Space_Time_Curves.ForwardMovement = Space_Time_Curves_BackwardMovement.GetComponent<Base_MovementSpeedScript>().Curve;
-            origin.Space_Time_Curves.BackwardMovement = Space_Time_Curves_ForwardMovement.GetComponent<Base_MovementSpeedScript>().Curve;
+            origin.Space_Time_Curves.ForwardMovement = Space_Time_Curves_ForwardMovement.GetComponent<Base_MovementSpeedScript>().Curve;
+            origin.Space_Time_Curves.BackwardMovement = Space_Time_Curves_BackwardMovement.GetComponent<Base_MovementSpeedScript>().Curve;
             origin.Space_Time_Curves.UpMovement = Space_Time_Curves_UpMovement.GetComponent<Base_MovementSpeedScript>().Curve;
             origin.Space_Time_Curves.DownMovement = Space_Time_Curves_DownMovement.GetComponent<Base_MovementSpeedScript>().Curve;
         }

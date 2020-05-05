@@ -821,13 +821,28 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 break;
             case InputDirection.Right:
                 dir = new Vector2Int(0, 1);
-                curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.ForwardMovement : SpineAnim.Speed_Time_Curves.ForwardMovement;
                 AnimState = UMS.Facing == FacingType.Left ? CharacterAnimationStateType.DashRight : CharacterAnimationStateType.DashLeft;
+                if (AnimState == CharacterAnimationStateType.DashLeft)
+                {
+                    curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.BackwardMovement : SpineAnim.Speed_Time_Curves.BackwardMovement;
+                }
+                else
+                {
+                    curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.ForwardMovement : SpineAnim.Speed_Time_Curves.ForwardMovement;
+                }
                 break;
             case InputDirection.Left:
                 dir = new Vector2Int(0, -1);
-                curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.BackwardMovement : SpineAnim.Speed_Time_Curves.BackwardMovement;
                 AnimState = UMS.Facing == FacingType.Left ? CharacterAnimationStateType.DashLeft : CharacterAnimationStateType.DashRight;
+                if(AnimState == CharacterAnimationStateType.DashLeft)
+                {
+                    curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.BackwardMovement : SpineAnim.Speed_Time_Curves.BackwardMovement;
+                }
+                else
+                {
+                    curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.ForwardMovement : SpineAnim.Speed_Time_Curves.ForwardMovement;
+                }
+
                 break;
         }
     }
@@ -858,17 +873,21 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         //  Debug.Log(AnimLength + "  AnimLenght   " + AnimLength / CharInfo.MovementSpeed + " Actual duration" );
         float timer = 0;
         float spaceTimer = 0;
-        Vector3 offset = transform.position;
         bool isMovCheck = false;
         bool isDefe = false;
         float moveValue = CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed;
+        Transform spineT = SpineAnim.transform;
+        Vector3 offset = spineT.position;
+        transform.position = nextPos;
+        nextPos += spineT.localPosition;
+        spineT.position = offset;
         while (timer < 1)
         {
 
             yield return BattleManagerScript.Instance.PauseUntil();
             timer += (Time.fixedDeltaTime / (animLength / moveValue));
             spaceTimer = curve.Evaluate(timer);
-            transform.position = Vector3.Lerp(offset, nextPos, spaceTimer);
+            spineT.position = Vector3.Lerp(offset, nextPos, spaceTimer);
 
             if (timer > 0.7f && !isMovCheck)
             {
@@ -893,9 +912,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
 
 
-        if (IsOnField)
+        if (IsOnField && !isMoving)
         {
-            transform.position = nextPos;
+            spineT.position = nextPos;
         }
         MoveCo = null;
     }
