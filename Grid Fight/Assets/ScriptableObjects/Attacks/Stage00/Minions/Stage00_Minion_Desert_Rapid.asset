@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage00_Minion_Mountain 1
+  m_Name: Stage00_Minion_Desert_Rapid
   m_EditorClassIdentifier: 
   Chances: 100
   CurrentAttackType: 1
@@ -21,20 +21,22 @@ MonoBehaviour:
   PrefixAnim: 0
   Particles:
     Left:
-      Cast: {fileID: 617747160601696100, guid: 590b26e11ea51e04abd692c356c1ac3a, type: 3}
-      Bullet: {fileID: 2134814086212475692, guid: 7e628f473a06b114ab4f44cd04ae3059,
+      Cast: {fileID: 7644002096359388931, guid: 120e9ddc9b7c68e4c8ae63dc3c74f863,
         type: 3}
-      Hit: {fileID: 8961455232675709962, guid: 93d7481472a7a7f419cc26cee032d187, type: 3}
+      Bullet: {fileID: 6276928451774876125, guid: f21c8c8d6577869449263b5635738686,
+        type: 3}
+      Hit: {fileID: 1362503501609663271, guid: f348c614a478c344eb1d339fc1b5ce30, type: 3}
     Right:
-      Cast: {fileID: 617747160601696100, guid: 590b26e11ea51e04abd692c356c1ac3a, type: 3}
-      Bullet: {fileID: 2134814086212475692, guid: 7e628f473a06b114ab4f44cd04ae3059,
+      Cast: {fileID: 7644002096359388931, guid: 120e9ddc9b7c68e4c8ae63dc3c74f863,
         type: 3}
-      Hit: {fileID: 8961455232675709962, guid: 93d7481472a7a7f419cc26cee032d187, type: 3}
+      Bullet: {fileID: 6276928451774876125, guid: f21c8c8d6577869449263b5635738686,
+        type: 3}
+      Hit: {fileID: 1362503501609663271, guid: f348c614a478c344eb1d339fc1b5ce30, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
-  TrajectoriesNumber: 2
+  TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories: []
     CharacterClass: 0
@@ -42,49 +44,6 @@ MonoBehaviour:
     AtkType: 1
     BulletTrajectories:
     - Delay: 2
-      Show: 0
-      BulletEffectTiles:
-      - Pos: {x: 0, y: 0}
-        HasEffect: 0
-        showImpact: 0
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-      - Pos: {x: -2, y: -2}
-        HasEffect: 0
-        showImpact: 0
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-      - Pos: {x: 2, y: -2}
-        HasEffect: 0
-        showImpact: 0
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-      - Pos: {x: 2, y: 2}
-        HasEffect: 0
-        showImpact: 0
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-      - Pos: {x: -2, y: 2}
-        HasEffect: 0
-        showImpact: 0
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-    - Delay: 5
       Show: 1
       BulletEffectTiles:
       - Pos: {x: 0, y: 0}
@@ -95,7 +54,31 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
+      - Pos: {x: 0, y: -1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: -1, y: 0}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 1, y: 0}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
     StatToCheck: 1
-    ValueChecker: 0
-    PercToCheck: 40
+    ValueChecker: 2
+    PercToCheck: 0
     Chances: 100
