@@ -16,8 +16,26 @@ MonoBehaviour:
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
   DamageMultiplier: {x: 1, y: 1}
+  AttackInput: 0
   AttackAnim: 0
   PrefixAnim: 0
+  Particles:
+    Left:
+      Cast: {fileID: 4574823664227575482, guid: 3e1bb15e264dc6047a281a4cb53918c6,
+        type: 3}
+      Bullet: {fileID: 2284594597646784502, guid: 3f17b9c6c808b44448942cc420dd307b,
+        type: 3}
+      Hit: {fileID: 8560142267415743371, guid: a928f3a964b8c214db175f49cb28d8f9, type: 3}
+    Right:
+      Cast: {fileID: 4574823664227575482, guid: 3e1bb15e264dc6047a281a4cb53918c6,
+        type: 3}
+      Bullet: {fileID: 2284594597646784502, guid: 3f17b9c6c808b44448942cc420dd307b,
+        type: 3}
+      Hit: {fileID: 8560142267415743371, guid: a928f3a964b8c214db175f49cb28d8f9, type: 3}
+    CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
+      type: 3}
+    CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
+      type: 3}
   TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories:
@@ -54,8 +72,6 @@ MonoBehaviour:
         HasEffect: 0
         Effects: []
         EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
@@ -63,8 +79,6 @@ MonoBehaviour:
         HasEffect: 0
         Effects: []
         EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
@@ -72,8 +86,6 @@ MonoBehaviour:
         HasEffect: 0
         Effects: []
         EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
@@ -81,8 +93,6 @@ MonoBehaviour:
         HasEffect: 0
         Effects: []
         EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
@@ -90,8 +100,6 @@ MonoBehaviour:
         HasEffect: 0
         Effects: []
         EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
@@ -99,8 +107,6 @@ MonoBehaviour:
         HasEffect: 0
         Effects: []
         EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
@@ -108,8 +114,6 @@ MonoBehaviour:
         HasEffect: 0
         Effects: []
         EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
@@ -117,8 +121,6 @@ MonoBehaviour:
         HasEffect: 0
         Effects: []
         EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
@@ -126,8 +128,6 @@ MonoBehaviour:
         HasEffect: 0
         Effects: []
         EffectChances: 100
-        HasDifferentParticles: 0
-        ParticlesID: 0
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0

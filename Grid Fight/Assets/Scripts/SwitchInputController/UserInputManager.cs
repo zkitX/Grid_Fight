@@ -8,6 +8,7 @@ public class UserInputManager : MonoBehaviour
     public static UserInputManager Instance;
     public float SwapDelay = 0.15f;
     public List<RectTransform> PressableItems = new List<RectTransform>();
+    public bool IsReadyToBeSetUp = false;
 
 
     private void Awake()
@@ -17,6 +18,7 @@ public class UserInputManager : MonoBehaviour
 
     public void StartUserInputManager()
     {
+        IsReadyToBeSetUp = true;
         #region Button Down
         InputController.Instance.ButtonADownEvent += Instance_ButtonADownEvent;
         InputController.Instance.ButtonBDownEvent += Instance_ButtonBDownEvent;

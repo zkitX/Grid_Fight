@@ -9,7 +9,7 @@ public class UITutorialScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isSetup && InputController.Instance != null)
+        if (!isSetup && InputController.Instance != null && UserInputManager.Instance != null && UserInputManager.Instance.IsReadyToBeSetUp)
         {
             isSetup = true;
             Debug.Log("entrato");
