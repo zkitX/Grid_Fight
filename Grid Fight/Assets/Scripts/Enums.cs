@@ -427,7 +427,16 @@ public enum CharacterAnimationStateType
     Idle_Charging,
     Idle_IdleToAtk,
     Idle_Loop,
-    Defeat_ReverseArrive
+    Defeat_ReverseArrive,
+    Dialogue_Confused,
+    Dialogue_Disappointed,
+    Dialogue_Engry,
+    Dialogue_Happy,
+    Dialogue_Sad,
+    Dialogue_Standard,
+    Dialogue_Surprise,
+    Dialogue_To_Idle,
+    Idle_To_Dialogue,
 }
 
 public enum PortalType
@@ -821,7 +830,6 @@ public enum AudioBus
     MediumPriority = 50,
     HighPriority = 100,
 }
-
 
 public enum MovementCurveType
 {
