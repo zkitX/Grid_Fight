@@ -36,7 +36,7 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
-  TrajectoriesNumber: 1
+  TrajectoriesNumber: 3
   ParticlesAtk:
     BulletTrajectories:
     - Show: 1
@@ -98,10 +98,10 @@ MonoBehaviour:
   TilesAtk:
     AtkType: 1
     BulletTrajectories:
-    - Delay: 0
+    - Delay: 1
       Show: 1
       BulletEffectTiles:
-      - Pos: {x: 1, y: 1}
+      - Pos: {x: 0, y: 1}
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -109,7 +109,10 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
-      - Pos: {x: 1, y: 2}
+    - Delay: 1.1
+      Show: 1
+      BulletEffectTiles:
+      - Pos: {x: 0, y: 0}
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -117,15 +120,10 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
-      - Pos: {x: 1, y: 0}
-        HasEffect: 0
-        showImpact: 1
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-      - Pos: {x: 1, y: -1}
+    - Delay: 1.2
+      Show: 1
+      BulletEffectTiles:
+      - Pos: {x: 0, y: -1}
         HasEffect: 0
         showImpact: 1
         Effects: []
