@@ -755,15 +755,19 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     BattleManagerScript.Instance.OccupiedBattleTiles.AddRange(CurrentBattleTiles);
                     if (MoveCo != null)
                     {
-                        StopCoroutine(MoveCo);
+                        Debug.Log("StopMoveCo");
+                        //StopCoroutine(MoveCo);
                     }
 
-                    if(SpineAnim.CurveType == MovementCurveType.Speed_Time)
+                    stopCo = true;
+
+                    if (SpineAnim.CurveType == MovementCurveType.Speed_Time)
                     {
                         MoveCo = MoveByTileSpeed(resbts.transform.position, curve, SpineAnim.GetAnimLenght(AnimState));
                     }
                     else
                     {
+
                         MoveCo = MoveByTileSpace(resbts.transform.position, curve, SpineAnim.GetAnimLenght(AnimState));
                     }
 
@@ -867,11 +871,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     }
 
 
-    
+    bool stopCo = false;
     public virtual IEnumerator MoveByTileSpace(Vector3 nextPos, AnimationCurve curve, float animLength)
     {
         //  Debug.Log(AnimLength + "  AnimLenght   " + AnimLength / CharInfo.MovementSpeed + " Actual duration" );
+        Debug.Log("StartMoveCo  " + Time.time);
         float timer = 0;
+        stopCo = false;
         float spaceTimer = 0;
         bool isMovCheck = false;
         bool isDefe = false;
@@ -879,15 +885,16 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         Transform spineT = SpineAnim.transform;
         Vector3 offset = spineT.position;
         transform.position = nextPos;
-        nextPos += spineT.localPosition;
+        nextPos = spineT.localPosition;
         spineT.position = offset;
-        while (timer < 1)
+        Vector3 localoffset = spineT.localPosition; 
+        while (timer < 1 && !stopCo)
         {
 
             yield return BattleManagerScript.Instance.PauseUntil();
             timer += (Time.fixedDeltaTime / (animLength / moveValue));
             spaceTimer = curve.Evaluate(timer);
-            spineT.position = Vector3.Lerp(offset, nextPos, spaceTimer);
+            spineT.localPosition = Vector3.Lerp(localoffset, nextPos, spaceTimer);
 
             if (timer > 0.7f && !isMovCheck)
             {
@@ -911,12 +918,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
         }
 
+      //  spineT.position = nextPos;
 
         if (IsOnField && !isMoving)
         {
-            spineT.position = nextPos;
+            //spineT.position = nextPos;
         }
-        MoveCo = null;
+        Debug.Log("EndMoveCo");
     }
 
     //Move the character on the determinated Tile position
@@ -1330,8 +1338,14 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             SpineAnim.CharOwner = this;
             SpineAnim.SpineAnimationState.Complete += SpineAnimationState_Complete;
-        }
 
+            if (SpineAnim.CurveType == MovementCurveType.Space_Time)
+            {
+                UMS.HpBarContainer.parent = SpineAnim.transform;
+                UMS.StaminaBarContainer.parent = SpineAnim.transform;
+                UMS.IndicatorContainer.parent = SpineAnim.transform;
+            }
+        }
     }
 
     public virtual void SpineAnimationState_Complete(Spine.TrackEntry trackEntry)
