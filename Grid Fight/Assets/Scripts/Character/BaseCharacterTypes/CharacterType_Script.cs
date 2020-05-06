@@ -136,6 +136,7 @@ public class CharacterType_Script : BaseCharacter
 
 
 
+
     public override void SetupCharacterSide()
     {
         base.SetupCharacterSide();
