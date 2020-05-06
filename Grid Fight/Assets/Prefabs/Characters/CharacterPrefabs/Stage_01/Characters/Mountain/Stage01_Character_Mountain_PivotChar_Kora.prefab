@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0ab2d89b109399b46989e1c83e04f02d, type: 2}
+  - {fileID: 2100000, guid: 38309c5eba6d59e46896c2ce91e2f44b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 0}
+  skeletonDataAsset: {fileID: 11400000, guid: c09673958365c0f4086382b869363742, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -398,20 +398,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Pai
+  Name: Kora
   CharacterIcons:
   - {fileID: 21300000, guid: 395154bd4e1bbdf489dd9903af25d46b, type: 3}
   - {fileID: 21300000, guid: 2671fb6cc8a2aa14e8a026eeae17d7c7, type: 3}
-  AudioProfile: {fileID: 11400000, guid: 18079379e5337084286a38b915064869, type: 2}
+  AudioProfile: {fileID: 11400000, guid: 927ca41a96732be4384f057665d55d5e, type: 2}
   BaseCharacterType: 0
   CharacterID: 1026
   CurrentAttackTypeInfo:
-  - {fileID: 11400000, guid: 301bd9cad1082d84e8847af31c5b28ed, type: 2}
+  - {fileID: 11400000, guid: d52a938a0faee7c49b7230e0765c93dc, type: 2}
   - {fileID: 11400000, guid: 93af337a280d18643a962d684551568b, type: 2}
-  - {fileID: 11400000, guid: cbaa5d093f8f84c4193942445f39143f, type: 2}
-  - {fileID: 11400000, guid: ca5244418a17e5843b5f4def6b1aa92d, type: 2}
+  - {fileID: 11400000, guid: aa84e2fed3d2ad3489abc4df65545443, type: 2}
+  - {fileID: 11400000, guid: 9f162706892117c45a54c0fe469b6d1f, type: 2}
   Elemental: 0
-  ClassType: 2
+  ClassType: 1
   UseLayeringSystem: 1
   CharacterRespawnLength: 180
   CharacterSelection: 0
@@ -467,7 +467,7 @@ MonoBehaviour:
     MovementSpeed: 2.2
     AttackSpeed: 2.5
     AttackSpeedRatio: 2
-    BulletSpeed: 1
+    BulletSpeed: 4
     LeaveSpeed: 3
     LevelMultiplier: 5
     IdleToAtkDuration: 0.2
@@ -536,7 +536,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7848723866681254696}
   m_Layer: 0
-  m_Name: Stage01_Character_Mountain_PivotChar_Pai
+  m_Name: Stage01_Character_Mountain_PivotChar_Kora
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -581,7 +581,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3872554101001914770}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0.625, z: 0}
+  m_LocalPosition: {x: -0.53, y: 0.351, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5724984276885798625}
@@ -671,7 +671,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8530769547398159536}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0.625, z: 0}
+  m_LocalPosition: {x: -0.667, y: 0.405, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5724984276885798625}
