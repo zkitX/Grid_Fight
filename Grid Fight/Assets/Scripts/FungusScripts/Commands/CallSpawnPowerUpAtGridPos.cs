@@ -11,6 +11,8 @@ using MyBox;
 public class CallSpawnPowerUpAtGridPos : Command
 {
     public ScriptableObjectItemPowerUps powerUp;
+    public bool hasGenericDuration = true;
+    [ConditionalField("hasGenericDuration", true, false)] public float durationOnField = 10f;
     public bool randomisePosition = true;
     [ConditionalField("randomisePosition", true, false)] public Vector2Int[] spawnGridPos;
     [ConditionalField("randomisePosition", false)] public WalkingSideType sideToSpawnOn = WalkingSideType.Both;
@@ -21,12 +23,12 @@ public class CallSpawnPowerUpAtGridPos : Command
         if (randomisePosition)
         {
             for (int i = 0; i < amountToSpawnRandomly; i++)
-                ItemSpawnerManagerScript.Instance.SpawnPowerUpAtRandomPointOnSide(powerUp, sideToSpawnOn);
+                ItemSpawnerManagerScript.Instance.SpawnPowerUpAtRandomPointOnSide(powerUp, sideToSpawnOn, hasGenericDuration ? 0f : durationOnField);
         }
         else
         {
             foreach (Vector2Int gridPos in spawnGridPos)
-                ItemSpawnerManagerScript.Instance.SpawnPowerUpAtGridPos(powerUp, gridPos);
+                ItemSpawnerManagerScript.Instance.SpawnPowerUpAtGridPos(powerUp, gridPos, hasGenericDuration ? 0f : durationOnField);
         }
     }
 

@@ -18,8 +18,16 @@ public class Grid_UIPanel : MonoBehaviour
 
     private void Awake()
     {
+        Grid_UINavigator.Instance.SetupButtonPanelInfo(this);
         SetupChildButtonPanelInfo();
     }
+
+    private void OnDestroy()
+    {
+        Grid_UINavigator.Instance.RemoveButtonPanelInfo(this);
+    }
+
+
 
     public void SetupChildButtonPanelInfo()
     {

@@ -16,7 +16,7 @@ public class Grid_UINavigator : MonoBehaviour
 
     [HideInInspector] public float buttonBufferPercentage = 0.5f;
 
-    protected Grid_UIButton[] buttons = null;
+    protected Grid_UIButton[] buttons = { };
     protected Grid_UIButton[] ActiveButtons
     {
         get
@@ -25,13 +25,7 @@ public class Grid_UINavigator : MonoBehaviour
         }
     }
 
-    protected Grid_UIPanel[] panels
-    {
-        get
-        {
-            return FindObjectsOfType<Grid_UIPanel>();
-        }
-    }
+    protected Grid_UIPanel[] panels = { };
     public Grid_UIPanel genericPanel
     {
         get
@@ -64,9 +58,9 @@ public class Grid_UINavigator : MonoBehaviour
         {
             for (int i = 0; i < buttons.Length; i++)
             {
-                if (value.name == buttons[i].name)
+                if (value.ID == buttons[i].ID)
                 {
-                    Debug.Log("Current selected button: " + buttons[i].name);
+                    Debug.Log("Current selected button: <b>" + buttons[i].name + "</b> with ID <b>" + buttons[i].ID + "</b> on panel <b>" + buttons[i].ParentPanel.panelID + "</b>");
                     selectedButtonIndex = i;
                 }
             }
@@ -81,14 +75,53 @@ public class Grid_UINavigator : MonoBehaviour
             InputController.Instance.LeftJoystickUsedEvent += ButtonChangeInput;
             InputController.Instance.ButtonAUpEvent += ButtonPressInput;
         }
-        SetupButtonPanels();
     }
 
     private void Start()
     {
-        buttons = GameObject.FindObjectsOfType<Grid_UIButton>();
-        if (startingButton != null) SelectButtonByName(startingButton.name);
+        StartCoroutine(SelectFirstButton());
+    }
+
+    IEnumerator SelectFirstButton()
+    {
+        while(buttons.Length == 0)
+        {
+            yield return null;
+        }
+        if (startingButton != null) SelectButton(startingButton);
         else SelectTopButtonInStartingDirection();
+    }
+
+    int IDIndex = 0;
+    public int SetupNewButtonInfo(Grid_UIButton btn)
+    {
+        int btnID = IDIndex;
+        IDIndex++;
+        List<Grid_UIButton> btns = buttons.ToList();
+        btns.Add(btn);
+        buttons = btns.ToArray();
+        return btnID;
+    }
+
+    public void RemoveButtonInfo(Grid_UIButton btn)
+    {
+        List<Grid_UIButton> btns = buttons.ToList();
+        btns.Remove(btn);
+        buttons = btns.ToArray();
+    }
+
+    public void SetupButtonPanelInfo(Grid_UIPanel panel)
+    {
+        List<Grid_UIPanel> pnls = panels.ToList();
+        pnls.Add(panel);
+        panels = pnls.ToArray();
+    }
+
+    public void RemoveButtonPanelInfo(Grid_UIPanel panel)
+    {
+        List<Grid_UIPanel> pnls = panels.ToList();
+        pnls.Remove(panel);
+        panels = pnls.ToArray();
     }
 
 
@@ -110,28 +143,18 @@ public class Grid_UINavigator : MonoBehaviour
 
 
 
-    public void SetupButtonPanels()
-    {
-        foreach (Grid_UIPanel panel in panels)
-        {
-            panel.SetupChildButtonPanelInfo();
-        }
-    }
 
-
-
-
-    public void SelectButtonByName(string buttonName)
+    public void SelectButtonByID(int buttonID)
     {
         for (int i = 0; i < buttons.Length; i++)
         {
-            if (buttonName == buttons[i].name) SelectButton(i);
+            if (buttonID == buttons[i].ID) SelectButton(i);
         }
     }
 
     public void SelectTopButtonInStartingDirection()
     {
-        SelectButtonByName(GetButtonFurthestInDirection(startingDirection).name);
+        SelectButton(GetButtonFurthestInDirection(startingDirection));
     }
 
     int GetButtonIndex(Grid_UIButton btn)
@@ -139,7 +162,7 @@ public class Grid_UINavigator : MonoBehaviour
         if (btn == null) return -1;
         for (int i = 0; i < buttons.Length; i++)
         {
-            if (buttons[i].name == btn.name)
+            if (buttons[i].ID == btn.ID)
             {
                 return i;
             }
@@ -198,7 +221,7 @@ public class Grid_UINavigator : MonoBehaviour
 
     public Grid_UIButton GetButtonClosestInDirectionFromSelected(InputDirection direction)
     {
-        Grid_UIButton[] activeUnselectedButtons = ActiveButtons.Where(r => r.name != selectedButton.name).ToArray();
+        Grid_UIButton[] activeUnselectedButtons = ActiveButtons.Where(r => r.ID != selectedButton.ID).ToArray();
         if (activeUnselectedButtons.Length == 0) return null;
 
         Grid_UIButton closestInDirection = null;
@@ -207,7 +230,7 @@ public class Grid_UINavigator : MonoBehaviour
             if (Compare.DistanceInDirection(selectedButton.transform.position, activeUnselectedButtons[i].transform.position, direction, selectedButton.buffers) > 0f &&
                 Mathf.Abs(Compare.DistanceInDirection(selectedButton.transform.position, activeUnselectedButtons[i].transform.position,
                 (direction == InputDirection.Down || direction == InputDirection.Up) ? InputDirection.Right : InputDirection.Up)) < (
-                 (direction == InputDirection.Down || direction == InputDirection.Up) ? selectedButton.Dimentions.x * 1.3f : selectedButton.Dimentions.y * 1.3f))
+                 (direction == InputDirection.Down || direction == InputDirection.Up) ? selectedButton.Dimentions.x * 0.6f : selectedButton.Dimentions.y * 0.6f))
             {
                 if (closestInDirection == null) closestInDirection = activeUnselectedButtons[i];
                 else if (Compare.DistanceInDirection(selectedButton.transform.position, activeUnselectedButtons[i].transform.position, direction, selectedButton.buffers) <
@@ -217,16 +240,11 @@ public class Grid_UINavigator : MonoBehaviour
                         activeUnselectedButtons[i].transform.position, activeUnselectedButtons[i].Dimentions,
                         (direction == InputDirection.Up  || direction == InputDirection.Down) ? InputDirection.Right : InputDirection.Up))
                     {
-                        //if(direction == InputDirection.Up || direction == InputDirection.Down ?
-                        //(Mathf.Abs(selectedButton.transform.position.x - activeUnselectedButtons[i].transform.position.x) <
-                        //Mathf.Abs(selectedButton.transform.position.x - closestInDirection.transform.position.x)) :
-                        //(Mathf.Abs(selectedButton.transform.position.y - activeUnselectedButtons[i].transform.position.y) <
-                        //Mathf.Abs(selectedButton.transform.position.y - closestInDirection.transform.position.y)))
-                        //{
                         if(Vector2.Distance(closestInDirection.transform.position, selectedButton.transform.position) >
                             Vector2.Distance(activeUnselectedButtons[i].transform.position, selectedButton.transform.position))
-                        closestInDirection = activeUnselectedButtons[i];
-                        // }
+                        {
+                            closestInDirection = activeUnselectedButtons[i];
+                        }
                     }
                     else closestInDirection = activeUnselectedButtons[i];
                 }

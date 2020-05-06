@@ -47,18 +47,20 @@ public class Grid_UIActions
             case (UI_ActionTypes.ChangeColor):
                 return "Change color of the " + changeColorOf.ToString() + (changeThingColorOnThisObject ? " in this gameObject" : " assigned");
             case (UI_ActionTypes.PlayAnimation):
-                return "NOT YET IMPLEMENTED";
+                return "Play " + (animationClipToPlay == null ? "unset animation" : animationClipToPlay.name) + " on " + (thingToAnimate == null ? "unset object" : animateThis ? "this button" : thingToAnimate.name);
             case (UI_ActionTypes.SetButtonSelection):
                 if(setSelectionButton != null) return "Set " + (setSelectionForThisButtom ? "this" : setSelectionButton.name) + " button to " + setSelectionType.ToString();
                 else return "Set button to " + setSelectionType.ToString();
             case (UI_ActionTypes.SetPanelFocus):
-                return "NOT YET IMPLEMENTED";
+                return "Set " + (setFocusForThisPanel ? "this panel" : "panel: " + setFocusedPanel) + 
+                    (setPanelFocusType == SetPanelFocusType.SetFocused ? " to be in focus" : 
+                    setPanelFocusType == SetPanelFocusType.SetUnfocused ? " to be out of focus" : " to the opposite focus");
             default:
                 return actionType.ToString();
         }
     }
 
-    [ConditionalField("actionType", compareValues: UI_ActionTypes.Pause)] public float pauseTime = 0f;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.Pause)] public float pauseTime = 1f;
     IEnumerator Pause()
     {
         yield return new WaitForSeconds(pauseTime);
@@ -77,8 +79,21 @@ public class Grid_UIActions
         yield return null;
     }
 
+
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.PlayAnimation)] public Animation thingToAnimate = null;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.PlayAnimation)] public bool animateThis = true;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.PlayAnimation)] public AnimationClip animationClipToPlay = null;
     IEnumerator PlayAnimation()
     {
+        if(thingToAnimate == null || animationClipToPlay == null)
+        {
+            Debug.LogError("Animation for button not correctly setup");
+            yield break;
+        }
+
+        if(thingToAnimate.isPlaying) thingToAnimate.Stop();
+        thingToAnimate.clip = animationClipToPlay;
+        thingToAnimate.Play();
         yield return null;
     }
 

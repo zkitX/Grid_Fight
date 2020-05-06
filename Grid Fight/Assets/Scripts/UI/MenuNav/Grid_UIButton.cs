@@ -7,8 +7,11 @@ using UnityEngine.Events;
 using TMPro;
 using MyBox;
 
+[RequireComponent(typeof(Animation), typeof(Image))]
 public class Grid_UIButton : MonoBehaviour
 {
+    [HideInInspector] public int ID;
+
     [HideInInspector] public Grid_UIPanel parentPanel = null;
     public Grid_UIPanel ParentPanel
     {
@@ -40,6 +43,16 @@ public class Grid_UIButton : MonoBehaviour
         {
             return new Vector2(buttonImage.rectTransform.rect.width, buttonImage.rectTransform.rect.height);
         }
+    }
+
+    private void Awake()
+    {
+        ID = Grid_UINavigator.Instance.SetupNewButtonInfo(this);
+    }
+
+    private void OnDestroy()
+    {
+        Grid_UINavigator.Instance.RemoveButtonInfo(this);
     }
 
     private void Start()
@@ -162,6 +175,10 @@ public class Grid_UIButton : MonoBehaviour
                 if (uiAction.setSelectionForThisButtom)
                 {
                     uiAction.setSelectionButton = this;
+                }
+                if (uiAction.animateThis)
+                {
+                    uiAction.thingToAnimate = GetComponent<Animation>();
                 }
 
                 uiAction.parentButton = this;

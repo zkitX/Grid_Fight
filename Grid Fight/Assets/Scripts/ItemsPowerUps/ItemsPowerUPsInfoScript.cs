@@ -10,7 +10,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
     public Animator Anim;
 
 
-    public void SetItemPowerUp(ScriptableObjectItemPowerUps itemPowerUpInfo, Vector3 pos)
+    public void SetItemPowerUp(ScriptableObjectItemPowerUps itemPowerUpInfo, Vector3 pos, float duration = 0f)
     {
         ItemPowerUpInfo = itemPowerUpInfo;
         Icon.sprite = itemPowerUpInfo.Icon;
@@ -20,7 +20,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
             StopCoroutine(DurationOnBattleFieldCo);
         }
 
-        DurationOnBattleFieldCo = DurationOnBattleField_Co();
+        DurationOnBattleFieldCo = DurationOnBattleField_Co(duration);
         StartCoroutine(DurationOnBattleFieldCo);
         Anim.SetBool("FadeInOut", true);
     }
@@ -68,10 +68,11 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
     }
 
 
-    private IEnumerator DurationOnBattleField_Co()
+    private IEnumerator DurationOnBattleField_Co(float duration = 0f)
     {
+        if (duration == 0f) duration = ItemPowerUpInfo.DurationOnField;
         float timer = 0;
-        while (timer <= ItemPowerUpInfo.DurationOnField)
+        while (timer <= duration)
         {
             yield return BattleManagerScript.Instance.PauseUntil();
             timer += Time.fixedDeltaTime;

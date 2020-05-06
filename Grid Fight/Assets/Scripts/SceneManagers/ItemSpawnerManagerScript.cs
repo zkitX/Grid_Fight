@@ -81,7 +81,7 @@ public class ItemSpawnerManagerScript : MonoBehaviour
     }
 
 
-    public void SpawnPowerUpAtGridPos(ScriptableObjectItemPowerUps powerUp, Vector2Int pos)
+    public void SpawnPowerUpAtGridPos(ScriptableObjectItemPowerUps powerUp, Vector2Int pos, float duration = 0f)
     {
         ItemsPowerUPsInfoScript item = SpawnedItems.Where(r => !r.gameObject.activeInHierarchy).FirstOrDefault();
         if (item == null)
@@ -90,11 +90,11 @@ public class ItemSpawnerManagerScript : MonoBehaviour
             SpawnedItems.Add(item);
         }
         item.gameObject.SetActive(true);
-        item.SetItemPowerUp(powerUp, GridManagerScript.Instance.GetBattleTile(pos).transform.position);
+        item.SetItemPowerUp(powerUp, GridManagerScript.Instance.GetBattleTile(pos).transform.position, duration);
     }
 
-    public void SpawnPowerUpAtRandomPointOnSide(ScriptableObjectItemPowerUps powerUp, WalkingSideType side)
+    public void SpawnPowerUpAtRandomPointOnSide(ScriptableObjectItemPowerUps powerUp, WalkingSideType side, float duration = 0f)
     {
-        SpawnPowerUpAtGridPos(powerUp, GridManagerScript.Instance.GetFreeBattleTile(side).Pos);
+        SpawnPowerUpAtGridPos(powerUp, GridManagerScript.Instance.GetFreeBattleTile(side).Pos, duration);
     }
 }

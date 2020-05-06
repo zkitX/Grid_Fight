@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 8113543811668662553}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 300878606658845980}
   m_RootOrder: 0
@@ -168,6 +168,7 @@ GameObject:
   - component: {fileID: 7561451101610815438}
   - component: {fileID: 1318412959214382097}
   - component: {fileID: 3628973206760732799}
+  - component: {fileID: 6289703564361953374}
   m_Layer: 5
   m_Name: StandardButton
   m_TagString: Untagged
@@ -184,16 +185,16 @@ RectTransform:
   m_GameObject: {fileID: 8901005874492778725}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.9133, y: 1.9133, z: 1.9133}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3575497720436151357}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 153}
-  m_SizeDelta: {x: -200, y: 35}
+  m_SizeDelta: {x: 400, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7561451101610815438
 CanvasRenderer:
@@ -243,6 +244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5f302bc08167c4d85942496ed42ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 0
+  parentPanel: {fileID: 0}
   buttonText: {fileID: 225226017587229883}
   buttonImage: {fileID: 0}
   PressActions:
@@ -255,32 +258,28 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   SelectActions:
-  - Name: 2 Ui Actions
+  - Name: 1 Ui Actions
     uiActions:
-    - Name: Change color of the text in this gameObject
-      actionType: 2
+    - Name: Play GridButton_SelectGrow on this button
+      parentButton: {fileID: 3628973206760732799}
+      actionType: 3
       pauseTime: 0
       changeColorOf: 0
       changeColorText: {fileID: 225226017587229883}
       changeColorImage: {fileID: 1318412959214382097}
       changeThingColorOnThisObject: 1
       colorToChangeTo: {r: 1, g: 1, b: 1, a: 1}
+      thingToAnimate: {fileID: 6289703564361953374}
+      animateThis: 1
+      animationClipToPlay: {fileID: 7400000, guid: 4fd49f8c173bf244d89050c9b3e78eaa,
+        type: 2}
       setSelectionButton: {fileID: 3628973206760732799}
       setSelectionForThisButtom: 1
       setSelectionType: 0
       ignoreDeselectEventsForAllOtherButtons: 0
-    - Name: Change color of the image in this gameObject
-      actionType: 2
-      pauseTime: 0
-      changeColorOf: 1
-      changeColorText: {fileID: 225226017587229883}
-      changeColorImage: {fileID: 1318412959214382097}
-      changeThingColorOnThisObject: 1
-      colorToChangeTo: {r: 1, g: 0, b: 0, a: 1}
-      setSelectionButton: {fileID: 3628973206760732799}
-      setSelectionForThisButtom: 1
-      setSelectionType: 0
-      ignoreDeselectEventsForAllOtherButtons: 0
+      setFocusedPanel: {fileID: 0}
+      setFocusForThisPanel: 0
+      setPanelFocusType: 2
     useStandardUnityEventsInstead: 0
     waitBefore: 0
     waitAfter: 0
@@ -288,32 +287,28 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   DeselectActions:
-  - Name: 2 Ui Actions
+  - Name: 1 Ui Actions
     uiActions:
-    - Name: Change color of the text in this gameObject
-      actionType: 2
+    - Name: Play GridButton_DeselectShrink on this button
+      parentButton: {fileID: 3628973206760732799}
+      actionType: 3
       pauseTime: 0
       changeColorOf: 0
       changeColorText: {fileID: 225226017587229883}
       changeColorImage: {fileID: 1318412959214382097}
       changeThingColorOnThisObject: 1
       colorToChangeTo: {r: 0, g: 0, b: 0, a: 1}
+      thingToAnimate: {fileID: 6289703564361953374}
+      animateThis: 1
+      animationClipToPlay: {fileID: 7400000, guid: 6964b7acbd5148a4e8973ae935c58e2f,
+        type: 2}
       setSelectionButton: {fileID: 3628973206760732799}
       setSelectionForThisButtom: 1
       setSelectionType: 0
       ignoreDeselectEventsForAllOtherButtons: 0
-    - Name: Change color of the image in this gameObject
-      actionType: 2
-      pauseTime: 0
-      changeColorOf: 1
-      changeColorText: {fileID: 225226017587229883}
-      changeColorImage: {fileID: 1318412959214382097}
-      changeThingColorOnThisObject: 1
-      colorToChangeTo: {r: 1, g: 1, b: 1, a: 1}
-      setSelectionButton: {fileID: 3628973206760732799}
-      setSelectionForThisButtom: 1
-      setSelectionType: 0
-      ignoreDeselectEventsForAllOtherButtons: 0
+      setFocusedPanel: {fileID: 0}
+      setFocusForThisPanel: 0
+      setPanelFocusType: 2
     useStandardUnityEventsInstead: 0
     waitBefore: 0
     waitAfter: 0
@@ -323,3 +318,20 @@ MonoBehaviour:
   selected: 0
   visuallySelected: 0
   buffers: {x: 0, y: 0}
+--- !u!111 &6289703564361953374
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8901005874492778725}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 4fd49f8c173bf244d89050c9b3e78eaa, type: 2}
+  - {fileID: 7400000, guid: 6964b7acbd5148a4e8973ae935c58e2f, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
