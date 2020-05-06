@@ -917,13 +917,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 yield break;
             }
         }
-
-      //  spineT.position = nextPos;
-
-        if (IsOnField && !isMoving)
-        {
-            //spineT.position = nextPos;
-        }
         Debug.Log("EndMoveCo");
     }
 
@@ -1014,7 +1007,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         if (bdClass.CurrentBuffDebuff.ParticlesToFire != ParticlesType.None)
         {
             ps = ParticleManagerScript.Instance.GetParticle(bdClass.CurrentBuffDebuff.ParticlesToFire);
-            ps.transform.parent = transform;
+            ps.transform.parent = SpineAnim.transform;
             ps.transform.localPosition = Vector3.zero;
             ps.SetActive(true);
         }

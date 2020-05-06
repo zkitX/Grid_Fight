@@ -279,7 +279,7 @@ public class CharacterType_Script : BaseCharacter
                     isChargingParticlesOn = true;
                     //Check
                     ps = ParticleManagerScript.Instance.FireParticlesInPosition(nxtAtk.Particles.CastLoopPS, CharInfo.CharacterID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side, nxtAtk.AttackInput);
-                    ps.transform.parent = transform;
+                    ps.transform.parent = SpineAnim.transform;
 
                 }
                 else
