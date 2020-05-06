@@ -325,6 +325,7 @@ public class BattleManagerScript : MonoBehaviour
         currentCharacter.UMS.CurrentAttackType = charInfo.CharAttackType;
         currentCharacter.UMS.CharOwner = currentCharacter;
         currentCharacter.UMS.PlayerController = charInfo.PlayerController;
+        currentCharacter.CharActionlist = charInfo.CharActionlist;
         currentCharacter.CharInfo.BaseCharacterType = charInfo.BCharType == BaseCharType.None ? child.GetComponentInChildren<CharacterInfoScript>().BaseCharacterType : charInfo.BCharType;
         foreach (Vector2Int item in soCharacterPrefab.OccupiedTiles)
         {

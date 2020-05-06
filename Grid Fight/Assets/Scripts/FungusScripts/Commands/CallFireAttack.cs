@@ -70,7 +70,7 @@ public class CallFireAttack : Command
         }
         else
         {
-            ((CharacterType_Script)character).StartQuickAttack(true);
+            ((CharacterType_Script)character).StartWeakAttack(true);
         }
 
         yield return new WaitForSeconds(0.5f);

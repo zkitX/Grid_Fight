@@ -48,7 +48,7 @@ public class CharacterType_Script : BaseCharacter
         switch (action)
         {
             case InputActionType.Weak:
-                StartQuickAttack(false);
+                StartWeakAttack(false);
                 break;
             case InputActionType.Strong:
                 StartChargingAtk(AttackInputType.Strong);
@@ -217,17 +217,37 @@ public class CharacterType_Script : BaseCharacter
         }
     }
 
-
-    IEnumerator charging_Co = null;
     public void StartChargingAtk(AttackInputType atkType)
     {
-        /*  if (charging_Co != null)
-          {
-              StopCoroutine(charging_Co);
-          }
-
-          charging_Co = StartChargingAttack(atkType);
-          StartCoroutine(charging_Co);*/
+        switch (atkType)
+        {
+            case AttackInputType.Strong:
+                if(!CharActionlist.Contains(CharacterActionType.StrongAttack))
+                {
+                    return;
+                }
+                break;
+            case AttackInputType.Skill1:
+                if (!CharActionlist.Contains(CharacterActionType.Skill1))
+                {
+                    return;
+                }
+                break;
+            case AttackInputType.Skill2:
+                if (!CharActionlist.Contains(CharacterActionType.Skill2))
+                {
+                    return;
+                }
+                break;
+            case AttackInputType.Skill3:
+                if (!CharActionlist.Contains(CharacterActionType.Skill3))
+                {
+                    return;
+                }
+                break;
+            default:
+                break;
+        }
         StartCoroutine(StartChargingAttack(atkType));
     }
 
@@ -311,8 +331,12 @@ public class CharacterType_Script : BaseCharacter
 
 
 
-    public void StartQuickAttack(bool attackRegardless)
+    public void StartWeakAttack(bool attackRegardless)
     {
+        if (!CharActionlist.Contains(CharacterActionType.WeakAttack))
+        {
+            return;
+        }
         if ((CharInfo.StaminaStats.Stamina - CharInfo.RapidAttack.Stamina_Cost_Atk >= 0
            && CanAttack) || attackRegardless)
         {

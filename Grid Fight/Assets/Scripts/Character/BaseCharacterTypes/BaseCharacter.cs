@@ -61,7 +61,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public List<CurrentBuffsDebuffsClass> BuffsDebuffs = new List<CurrentBuffsDebuffsClass>();
 
     public List<BuffDebuffClass> BuffsDebuffsList = new List<BuffDebuffClass>();
-
+    public List<CharacterActionType> CharActionlist = new List<CharacterActionType>();
     public bool VFXTestMode = false;
     public UnitManagementScript UMS;
     public BoxCollider CharBoxCollider;
@@ -629,7 +629,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public void StartDefending()
     {
-        if (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+        if (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || !CharActionlist.Contains( CharacterActionType.Defence))
         {
             return;
         }
@@ -703,7 +703,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public virtual IEnumerator MoveCharOnDir_Co(InputDirection nextDir)
     {
-        if ((CharInfo.Health > 0 && !isMoving && IsOnField && SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving.ToString()) || BattleManagerScript.Instance.VFXScene)
+        if ((CharInfo.Health > 0 && !isMoving && IsOnField && SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving.ToString() && CharActionlist.Contains(CharacterActionType.Move)) || BattleManagerScript.Instance.VFXScene)
         {
             List<BattleTileScript> prevBattleTile = CurrentBattleTiles;
             List<BattleTileScript> CurrentBattleTilesToCheck = new List<BattleTileScript>();

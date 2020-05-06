@@ -138,13 +138,15 @@ public class WaveManagerScript : MonoBehaviour
 
 
         ((MinionType_Script)res).UpDownPerc = character.UpDownPerc;
+        res.CharActionlist.Add(CharacterActionType.Move);
+
         return res;
     }
 
     private BaseCharacter CreateChar(CharacterNameType characterID, BaseCharType bCharType = BaseCharType.None)
     {
         BaseCharacter res = BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(characterID.ToString(), CharacterSelectionType.Up,
-        new List<ControllerType> { ControllerType.Enemy }, characterID, WalkingSideType.RightSide, AttackType.Tile, bCharType), transform);
+        new List<ControllerType> { ControllerType.Enemy }, characterID, WalkingSideType.RightSide, AttackType.Tile, bCharType, new List<CharacterActionType>()), transform);
         if (characterID != CharacterNameType.Stage00_BossOctopus &&
             characterID != CharacterNameType.Stage00_BossOctopus_Head &&
             characterID != CharacterNameType.Stage00_BossOctopus_Tentacles &&

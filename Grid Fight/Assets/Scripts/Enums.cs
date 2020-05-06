@@ -186,6 +186,17 @@ public enum BattleFieldAttackType
     OnItSelf
 }
 
+public enum CharacterActionType
+{
+    Move,
+    WeakAttack,
+    StrongAttack,
+    Skill1,
+    Skill2,
+    Skill3,
+    Defence
+}
+
 public enum BattleState
 {
     Initialization,

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UITutorialScript : MonoBehaviour
 {
-    private BattleState previousBattleState;    
+    private BattleState previousBattleState = BattleState.Battle;    
     private bool isSetup = false;
     // Update is called once per frame
     void Update()
