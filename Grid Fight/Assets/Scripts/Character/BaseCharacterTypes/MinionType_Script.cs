@@ -395,7 +395,7 @@ public class MinionType_Script : BaseCharacter
     {
         if (!SpineAnim.CurrentAnim.Contains("Loop"))
         {
-            SetAnimation(nextAttack.PrefixAnim + "_Loop");
+            SetAnimation(nextAttack.PrefixAnim + (nextAttack.PrefixAnim == AttackAnimPrefixType.Atk1 ? "_Loop" : "_AtkToIdle"));
         }
 
         if (chargeParticles != null && shotsLeftInAttack <= 0)
