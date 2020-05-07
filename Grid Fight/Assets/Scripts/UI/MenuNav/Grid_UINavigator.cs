@@ -21,7 +21,7 @@ public class Grid_UINavigator : MonoBehaviour
     {
         get
         {
-            return buttons.Where(r => r.gameObject.activeInHierarchy && r.parentPanel.focusState == UI_FocusTypes.Focused).ToArray();
+            return buttons.Where(r => r.gameObject.activeInHierarchy && r.ParentPanel.focusState == UI_FocusTypes.Focused).ToArray();
         }
     }
 
@@ -219,6 +219,7 @@ public class Grid_UINavigator : MonoBehaviour
         return furthestInDirection;
     }
 
+    [Tooltip("The zones scale based on the button image wherein other buttons can be selected inLine")][Range(0.1f, 2f)]public float inLineBuffer = 0.6f;
     public Grid_UIButton GetButtonClosestInDirectionFromSelected(InputDirection direction)
     {
         Grid_UIButton[] activeUnselectedButtons = ActiveButtons.Where(r => r.ID != selectedButton.ID).ToArray();
@@ -230,14 +231,14 @@ public class Grid_UINavigator : MonoBehaviour
             if (Compare.DistanceInDirection(selectedButton.transform.position, activeUnselectedButtons[i].transform.position, direction, selectedButton.buffers) > 0f &&
                 Mathf.Abs(Compare.DistanceInDirection(selectedButton.transform.position, activeUnselectedButtons[i].transform.position,
                 (direction == InputDirection.Down || direction == InputDirection.Up) ? InputDirection.Right : InputDirection.Up)) < (
-                 (direction == InputDirection.Down || direction == InputDirection.Up) ? selectedButton.Dimentions.x * 0.6f : selectedButton.Dimentions.y * 0.6f))
+                 (direction == InputDirection.Down || direction == InputDirection.Up) ? selectedButton.DimentionsInScreenSpace.x * 0.5f * inLineBuffer : selectedButton.DimentionsInScreenSpace.y * 0.5f * inLineBuffer))
             {
                 if (closestInDirection == null) closestInDirection = activeUnselectedButtons[i];
                 else if (Compare.DistanceInDirection(selectedButton.transform.position, activeUnselectedButtons[i].transform.position, direction, selectedButton.buffers) <
                     Compare.DistanceInDirection(selectedButton.transform.position, closestInDirection.transform.position, direction, selectedButton.buffers))
                 {
-                    if(Compare.IsInlineImage(closestInDirection.transform.position, closestInDirection.Dimentions, 
-                        activeUnselectedButtons[i].transform.position, activeUnselectedButtons[i].Dimentions,
+                    if(Compare.IsInlineImage(closestInDirection.transform.position, closestInDirection.DimentionsInScreenSpace, 
+                        activeUnselectedButtons[i].transform.position, activeUnselectedButtons[i].DimentionsInScreenSpace,
                         (direction == InputDirection.Up  || direction == InputDirection.Down) ? InputDirection.Right : InputDirection.Up))
                     {
                         if(Vector2.Distance(closestInDirection.transform.position, selectedButton.transform.position) >

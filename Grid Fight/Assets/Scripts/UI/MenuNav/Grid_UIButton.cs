@@ -37,11 +37,20 @@ public class Grid_UIButton : MonoBehaviour
     [HideInInspector] public bool visuallySelected = false;
 
     [HideInInspector] public Vector2 buffers = Vector2.zero;
-    public Vector2 Dimentions
+    public Vector2 DimentionsInScreenSpace
     {
         get
         {
-            return new Vector2(buttonImage.rectTransform.rect.width, buttonImage.rectTransform.rect.height);
+            return new Vector2(buttonImage.rectTransform.rect.width / transform.localScale.x, buttonImage.rectTransform.rect.height / transform.localScale.y);
+        }
+    }
+    public Vector2 DimentionsInWorldSpace
+    {
+        get
+        {
+            Vector2 topRight = Camera.main.ScreenToWorldPoint(Camera.main.WorldToScreenPoint(transform.position) + new Vector3(buttonImage.rectTransform.rect.width / transform.localScale.x * 0.5f, buttonImage.rectTransform.rect.height / transform.localScale.y * 0.5f, 0f));
+            Vector2 botLeft = Camera.main.ScreenToWorldPoint(Camera.main.WorldToScreenPoint(transform.position) - new Vector3(buttonImage.rectTransform.rect.width / transform.localScale.x * 0.5f, buttonImage.rectTransform.rect.height / transform.localScale.y * 0.5f, 0f));
+            return topRight - botLeft;
         }
     }
 
