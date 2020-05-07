@@ -30,6 +30,14 @@ public class CharacterInfoScript : MonoBehaviour
     public LevelType CharaterLevel;
     public bool UseLayeringSystem = true;
 
+    public List<LevelsInfoClass> Levels = new List<LevelsInfoClass>
+    {
+        new LevelsInfoClass(LevelType.Novice, 0),
+        new LevelsInfoClass(LevelType.Defiant, 1000),
+        new LevelsInfoClass(LevelType.Heroine, 3600),
+        new LevelsInfoClass(LevelType.Goddess, 9850)
+    };
+
     [Tooltip("Length of time, in seconds, that the character will take to respawn once killed")]
     public float CharacterRespawnLength = 180f;
 
@@ -163,6 +171,9 @@ public class CharacterInfoScript : MonoBehaviour
     {
         public float BaseDefence = 10;
         public float Invulnerability = 0.2f;
+        [HideInInspector]public float B_BaseDefence = 10;
+        [HideInInspector]public float B_Invulnerability = 0.2f;
+        public float LevelMultiplier;
     }
 
     public float Special1LoadingDuration;
@@ -277,13 +288,6 @@ public class CharacterInfoScript : MonoBehaviour
     }
 
 
-    private void Awake()
-    {
-
-       
-    }
-
-
     private void FixedUpdate()
     {
         if (Health > 0)
@@ -360,5 +364,26 @@ public class CharacterInfoScript : MonoBehaviour
         SpeedStats.B_AtkToIdleDuration = SpeedStats.AtkToIdleDuration;
 
         DamageStats.B_BaseDamage = DamageStats.BaseDamage;
+
+        DefenceStats.B_BaseDefence = DefenceStats.BaseDefence;
+        DefenceStats.B_Invulnerability = DefenceStats.Invulnerability;
+    }
+}
+
+
+public class LevelsInfoClass
+{
+    public LevelType Level;
+    public float ExpNeeded;
+
+    public LevelsInfoClass()
+    {
+
+    }
+
+    public LevelsInfoClass(LevelType level, float expNeeded)
+    {
+        Level = level;
+        ExpNeeded = expNeeded;
     }
 }
