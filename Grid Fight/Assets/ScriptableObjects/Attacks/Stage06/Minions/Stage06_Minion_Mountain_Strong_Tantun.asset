@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage06_Minion_Mountain_EnemyAttack
+  m_Name: Stage06_Minion_Mountain_Strong_Tantun
   m_EditorClassIdentifier: 
   Chances: 100
-  CurrentAttackType: 1
+  CurrentAttackType: 0
   AttackRatioMultiplier: 1
   DamageMultiplier: {x: 1, y: 1}
   AttackInput: 0
-  AttackAnim: 1
-  PrefixAnim: 1
+  AttackAnim: 0
+  PrefixAnim: 0
   Particles:
     Left:
-      Cast: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Cast: {fileID: 3683079869333624786, guid: 4ed2b3a972ea8ab40978440279e5f034,
         type: 3}
-      Bullet: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Bullet: {fileID: 1891848302839730640, guid: 09a1eb13f503dda4987880293724f12e,
         type: 3}
-      Hit: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73, type: 3}
+      Hit: {fileID: 4605681341999042564, guid: 42aabb33098515140aca4044455014c7, type: 3}
     Right:
-      Cast: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Cast: {fileID: 1418812257518188453, guid: 2715c2c2ce2ee114390c781d3b057fb5,
         type: 3}
-      Bullet: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Bullet: {fileID: 1776409715355025183, guid: a0cd4ae2bc389404087498daa5395822,
         type: 3}
-      Hit: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73, type: 3}
+      Hit: {fileID: 4595421271165474601, guid: dd19d3b85f2935343926b8d7470c583f, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
@@ -98,10 +98,18 @@ MonoBehaviour:
   TilesAtk:
     AtkType: 1
     BulletTrajectories:
-    - Delay: 2
+    - Delay: 1.5
       Show: 1
       BulletEffectTiles:
-      - Pos: {x: 0, y: 0}
+      - Pos: {x: 0, y: -1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 0, y: 1}
         HasEffect: 0
         showImpact: 1
         Effects: []
