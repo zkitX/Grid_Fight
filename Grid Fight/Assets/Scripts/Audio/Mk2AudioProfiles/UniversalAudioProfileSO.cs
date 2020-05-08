@@ -8,6 +8,8 @@ public class UniversalAudioProfileSO : BaseAudioProfileSO
     [Header("Battle General")]
     public AudioClipInfoClass ArrivalSpawn;
     public AudioClipInfoClass ArrivalImpact;
+    public AudioClipInfoClass ExitBattleJump;
+    public AudioClipInfoClass StageSwitchSound;
     public AudioClipInfoClass SpecialAttackChargingLoop;
     public AudioClipInfoClass SpecialAttackChargingRelease;
 
@@ -20,6 +22,19 @@ public class UniversalAudioProfileSO : BaseAudioProfileSO
     public AudioClipInfoClass PowerUp_Speed;
     public AudioClipInfoClass PowerUp_Stamina;
     public AudioClipInfoClass PowerUp_Damage;
+
+    [Header("UI")]
+    public AudioClipInfoClass Dialogue_Entering;
+    public AudioClipInfoClass Dialogue_Exiting;
+    public AudioClipInfoClass Dialogue_TextStart;
+    public AudioClipInfoClass Dialogue_TextEnd;
+    public AudioClipInfoClass Dialogue_CharacterSwap;
+    public AudioClipInfoClass Menus_SelectButton;
+    public AudioClipInfoClass Menus_PressButton;
+
+    [Header("Loading !!NOT YET IMPLEMENTED!!")]
+    public AudioClipInfoClass Loading_Start;
+    public AudioClipInfoClass Loading_Stop;
 
     protected override void OnEnable()
     {

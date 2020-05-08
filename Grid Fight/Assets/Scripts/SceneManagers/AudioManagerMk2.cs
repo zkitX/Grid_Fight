@@ -15,6 +15,8 @@ public class AudioManagerMk2 : MonoBehaviour
     public int uiSourcesNum = 1;
     public int sourcesPerChar = 3;
 
+    public bool useLegacySoundsWhenPossible = true;
+
     protected List<AudioClip> audioPlayedLastFrame = new List<AudioClip>();
 
     private void Awake()

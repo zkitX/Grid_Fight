@@ -98,6 +98,8 @@ public class GridFightSayDialog : SayDialog
         {
             if (SayDialogAnimatorController.GetBool("InOut"))
             {
+                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_CharacterSwap, AudioBus.MediumPriority);
+
                 SayDialogAnimatorController.SetBool("IsSelected", false);
                 while (!isAnimCompleted)
                 {
@@ -162,7 +164,12 @@ public class GridFightSayDialog : SayDialog
             isAnimCompleted = false;
         }
 
+        ManagedAudioSource textAudio = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_TextStart, AudioBus.MediumPriority, loop:true);
+
         yield return base.DoSay(text, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, voiceOverClip, delegate {});
+
+        textAudio.ResetSource();
+        AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_TextEnd, AudioBus.MediumPriority);
 
         InputController.Instance.ButtonAUpEvent -= Instance_ButtonAUpEvent;
     }

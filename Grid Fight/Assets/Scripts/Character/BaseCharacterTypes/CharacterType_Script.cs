@@ -202,6 +202,8 @@ public class CharacterType_Script : BaseCharacter
     {
         SetAnimation(CharacterAnimationStateType.Reverse_Arriving);
         isDefending = false;
+
+        AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.ExitBattleJump, AudioBus.MediumPriority);
         EventManager.Instance?.AddCharacterSwitched((BaseCharacter)this);
     }
 

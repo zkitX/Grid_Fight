@@ -22,7 +22,10 @@ namespace Fungus
         {
             menuDialog.Clear();
 
+            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_Exiting, AudioBus.MediumPriority);
+
             Continue();
+
         }
 
         public override string GetSummary()

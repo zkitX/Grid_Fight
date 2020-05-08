@@ -125,7 +125,7 @@ public class AudioClipInfoClass
                     return clipToReturn;
                 }
             }
-            else return clip;
+            else return AudioManagerMk2.Instance.useLegacySoundsWhenPossible ? clip : null;
         }
         set
         {
@@ -148,7 +148,7 @@ public class AudioClipInfoClass
                     return clipToReturn;
                 }
             }
-            else return clip;
+            else return AudioManagerMk2.Instance.useLegacySoundsWhenPossible ? clip : null;
         }
         set
         {

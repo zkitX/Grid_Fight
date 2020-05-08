@@ -23,6 +23,7 @@ public class CallClearSayDialogs : Command
         setSayRightDialog.SayDialogAnimatorController.SetBool("InOut", false);
         setSayLeftDialog.LastCharacter = null;
         setSayRightDialog.LastCharacter = null;
+        AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_Exiting, AudioBus.MediumPriority);
         Continue();
     }
 

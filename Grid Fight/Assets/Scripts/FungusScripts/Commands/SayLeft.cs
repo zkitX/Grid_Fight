@@ -24,6 +24,11 @@ public class SayLeft : Say
 
         executionCount++;
 
+        if (setSayDialog == null && RightSay == null)
+        {
+            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_Entering, AudioBus.MediumPriority);
+        }
+
         // Override the active say dialog if needed
         if (character != null && character.SetSayDialog != null)
         {
