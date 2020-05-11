@@ -560,7 +560,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                                 else if (nextAttack.TilesAtk.AtkType != BattleFieldAttackType.OnItSelf && bts.WalkingSide != UMS.WalkingSide)
                                 {
                                     shotsLeftInAttack++;
-                                    CreateBullet(target, bts.Pos, item.Delay);
+                                   // CreateBullet(target, bts.Pos, item.Delay);
                                     bts.BattleTargetScript.SetAttack(item.Delay, res,
                                     CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
                                     target.Effects, target.EffectChances);

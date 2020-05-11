@@ -91,7 +91,7 @@ public class BulletScript : MonoBehaviour
         PSTimeGroup pstg = PS.GetComponent<PSTimeGroup>();
         if (pstg != null)
         {
-            pstg.UpdatePSTime(bulletDuration + 2);
+            pstg.UpdatePSTime(BulletDuration + 2);
 
         }
         else
