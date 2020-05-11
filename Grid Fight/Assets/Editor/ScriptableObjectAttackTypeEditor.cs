@@ -252,6 +252,10 @@ public class ScriptableObjectAttackTypeEditor : Editor
 
     private void ShowTileObject(ref BattleFieldAttackTileClass bfatc)
     {
+
+        bfatc.Trajectory_Y = EditorGUILayout.CurveField("Trajectory_Y", bfatc.Trajectory_Y);
+        bfatc.Trajectory_Z = EditorGUILayout.CurveField("Trajectory_Z", bfatc.Trajectory_Z);
+
         bfatc.HasEffect = EditorGUILayout.ToggleLeft("HasEffect", bfatc.HasEffect);
         if (bfatc.HasEffect)
         {

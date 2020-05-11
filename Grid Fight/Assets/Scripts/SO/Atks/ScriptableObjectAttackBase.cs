@@ -95,6 +95,11 @@ public class BulletBehaviourInfoClassOnBattleFieldClass
 public class BattleFieldAttackTileClass
 {
     [HideInInspector] public Vector2Int Pos;
+
+    public AnimationCurve Trajectory_Y;
+    public AnimationCurve Trajectory_Z;
+
+
     public bool HasEffect = false;
     public bool showImpact = true;
     [ConditionalField("HasEffect", false)] public List<ScriptableObjectAttackEffect> Effects = new List<ScriptableObjectAttackEffect>();

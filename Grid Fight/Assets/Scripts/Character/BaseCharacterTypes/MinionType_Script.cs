@@ -391,6 +391,27 @@ public class MinionType_Script : BaseCharacter
     }
 
 
+    public override void CreateBullet(BattleFieldAttackTileClass bulletBehaviourInfo, Vector2Int pos, float delay)
+    {
+        // Debug.Log(isSpecialLoading);
+        GameObject bullet = BulletManagerScript.Instance.GetBullet();
+        bullet.transform.position = SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position;
+        BulletScript bs = bullet.GetComponent<BulletScript>();
+        bs.Trajectory_Y = bulletBehaviourInfo.Trajectory_Y;
+        bs.Trajectory_Z = bulletBehaviourInfo.Trajectory_Z;
+        bs.isColliding = false;
+        bs.attackAudioType = GetAttackAudio();
+        bs.CharInfo = CharInfo;
+        bs.DestinationTile = pos;
+        bs.BulletEffectTiles.Clear();
+        bs.BulletDuration = delay;
+        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(nextAttack.Particles.Right.Bullet, CharInfo.CharacterID, AttackParticlePhaseTypes.Bullet, bullet.transform, UMS.Side,
+            nextAttack.AttackInput, CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script ? true : false);
+        bs.PS.SetActive(true);
+        bs.gameObject.SetActive(true);
+        bs.StartMoveToTile();
+    }
+
     public override void fireAttackAnimation(Vector3 pos)
     {
         if (!SpineAnim.CurrentAnim.Contains("Loop"))

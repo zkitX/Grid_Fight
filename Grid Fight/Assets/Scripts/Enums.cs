@@ -448,6 +448,8 @@ public enum CharacterAnimationStateType
     Dialogue_Surprise,
     Dialogue_To_Idle,
     Idle_To_Dialogue,
+	JumpTransition_IN,
+    JumpTransition_OUT
 }
 
 public enum PortalType

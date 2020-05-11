@@ -490,63 +490,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
     }
 
-    //Create and set up the basic info for the bullet
-    public void CreateBullet(BulletBehaviourInfoClass bulletBehaviourInfo)
-    {
-        // Debug.Log(isSpecialLoading);
-        GameObject bullet = BulletManagerScript.Instance.GetBullet();
-        bullet.transform.position = SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position;
-        BulletScript bs = bullet.GetComponent<BulletScript>();
-        bs.BulletEffectTiles = bulletBehaviourInfo.BulletEffectTiles;
-        bs.Trajectory_Y = bulletBehaviourInfo.Trajectory_Y;
-        bs.Trajectory_Z = bulletBehaviourInfo.Trajectory_Z;
-        bs.Facing = UMS.Facing;
-        bs.ChildrenExplosionDelay = CharInfo.DamageStats.ChildrenBulletDelay;
-        bs.StartingTile = UMS.CurrentTilePos;
-        bs.BulletGapStartingTile = bulletBehaviourInfo.BulletGapStartingTile;
-        bs.Elemental = CharInfo.DamageStats.CurrentElemental;
-        bs.Side = UMS.Side;
-        bs.VFXTestMode = VFXTestMode;
-        bs.CharInfo = CharInfo;
-        bs.attackAudioType = GetAttackAudio();
-        bs.EffectChances = 100;
-        bs.HitPs = UMS.Side == SideType.LeftSide ? nextAttack.Particles.Left.Hit : nextAttack.Particles.Right.Hit;
-        bs.AttackInput = nextAttack.AttackInput;
-        bs.AtkType = nextAttack.AttackAnim;
-        if (bulletBehaviourInfo.HasEffect)
-        {
-            bs.BulletEffects = bulletBehaviourInfo.Effects;
-        }
-
-        if (!GridManagerScript.Instance.isPosOnFieldByHeight(UMS.CurrentTilePos + bulletBehaviourInfo.BulletDistanceInTile))
-        {
-            bs.gameObject.SetActive(false);
-            return;
-        }
-
-        if (UMS.Facing == FacingType.Right)
-        {
-            bs.DestinationTile = new Vector2Int(UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x, UMS.CurrentTilePos.y + bulletBehaviourInfo.BulletDistanceInTile.y > 11 ? 11 : UMS.CurrentTilePos.y + bulletBehaviourInfo.BulletDistanceInTile.y);
-        }
-        else
-        {
-            bs.DestinationTile = new Vector2Int(UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x, UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y < 0 ? 0 : UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y);
-        }
-        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(UMS.Side == SideType.LeftSide ? nextAttack.Particles.Left.Bullet : nextAttack.Particles.Right.Bullet, CharInfo.CharacterID, AttackParticlePhaseTypes.Bullet, bullet.transform, UMS.Side,
-            nextAttack.AttackInput, CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script ? true : false);
-
-
-        if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
-        {
-            bs.gameObject.SetActive(true);
-            bs.StartMoveToTile();
-        }
-        else
-        {
-            bs.gameObject.SetActive(false);
-        }
-    }
-
+   
 
     public void CreateParticleAttack()
     {
@@ -564,6 +508,16 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
     }
 
+    public virtual void CreateBullet(BulletBehaviourInfoClass bulletBehaviourInfo)
+    {
+    }
+
+    public virtual void CreateBullet(BattleFieldAttackTileClass bulletBehaviourInfo, Vector2Int pos, float delay)
+    {
+    }
+
+
+    
 
     public Vector2Int nextAttackPos;
     public virtual void CreateTileAttack()
@@ -606,7 +560,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                                 else if (nextAttack.TilesAtk.AtkType != BattleFieldAttackType.OnItSelf && bts.WalkingSide != UMS.WalkingSide)
                                 {
                                     shotsLeftInAttack++;
-
+                                    CreateBullet(target, bts.Pos, item.Delay);
                                     bts.BattleTargetScript.SetAttack(item.Delay, res,
                                     CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
                                     target.Effects, target.EffectChances);
