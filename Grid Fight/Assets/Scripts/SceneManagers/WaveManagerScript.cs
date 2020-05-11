@@ -28,7 +28,7 @@ public class WaveManagerScript : MonoBehaviour
     public Dictionary<string, BaseCharacter> FungusSpawnedChars = new Dictionary<string, BaseCharacter>();
 
     public List<StartingCharactersForWaveClass> StartingCharInWave = new List<StartingCharactersForWaveClass>();
-
+    WavePhaseClass currentWavePhase;
 
 
     BaseCharacter newChar;
@@ -195,6 +195,7 @@ public class WaveManagerScript : MonoBehaviour
     private IEnumerator Wave(WavePhaseClass wavePhase)
     {
         float timer = 0;
+        currentWavePhase = wavePhase;
         WaveCharacterInfoClass waveCharacterInfoClass;
         while (true)
         {
@@ -212,10 +213,15 @@ public class WaveManagerScript : MonoBehaviour
                 {
                     waveCharacterInfoClass = GetAvailableWaveCharacter(wavePhase);
                 }
-                newChar = GetWaveCharacter(waveCharacterInfoClass);
-                yield return SpawChar(newChar, CurrentWaveChar.IsRandomSpowiningTile,
-                    CurrentWaveChar.IsRandomSpowiningTile ? new Vector2Int() : CurrentWaveChar.SpowningTile[Random.Range(0, CurrentWaveChar.SpowningTile.Count)], true);
-                timer = 0;
+
+                if(waveCharacterInfoClass != null)
+                {
+                    newChar = GetWaveCharacter(waveCharacterInfoClass);
+                    yield return SpawChar(newChar, CurrentWaveChar.IsRandomSpowiningTile,
+                        CurrentWaveChar.IsRandomSpowiningTile ? new Vector2Int() : CurrentWaveChar.SpowningTile[Random.Range(0, CurrentWaveChar.SpowningTile.Count)], true);
+                    timer = 0;
+                }
+               
 
                 if (wavePhase.ListOfEnemy.Where(r => r.NumberOfCharacter > 0).ToList().Count == 0)
                 {
@@ -277,27 +283,35 @@ public class WaveManagerScript : MonoBehaviour
         }
 
         yield return BattleManagerScript.Instance.MoveCharToBoardWithDelay(withArrivingAnim ? 0.2f : 0, currentCharacter, bts.transform.position);
-
-
     }
 
     private WaveCharacterInfoClass GetAvailableRandomWaveCharacter(WavePhaseClass wavePhase)
     {
         List<WaveCharClass> ListOfEnemy = wavePhase.ListOfEnemy.Where(r => r.NumberOfCharacter > 0).ToList();
-        CurrentWaveChar = ListOfEnemy[Random.Range(0, ListOfEnemy.Count)];
-        CurrentWaveChar.NumberOfCharacter--;
-        Events.AddRange(CurrentWaveChar.TypeOfCharacter.Events);
-        Events = Events.Distinct().ToList();
-        return CurrentWaveChar.TypeOfCharacter;
+        if(ListOfEnemy.Count > 0)
+        {
+            CurrentWaveChar = ListOfEnemy[Random.Range(0, ListOfEnemy.Count)];
+            CurrentWaveChar.NumberOfCharacter--;
+            Events.AddRange(CurrentWaveChar.TypeOfCharacter.Events);
+            Events = Events.Distinct().ToList();
+            return CurrentWaveChar.TypeOfCharacter;
+        }
+
+        return null;
+       
     }
 
     private WaveCharacterInfoClass GetAvailableWaveCharacter(WavePhaseClass wavePhase)
     {
-        CurrentWaveChar = wavePhase.ListOfEnemy.Where(r => r.NumberOfCharacter > 0).First();
-        CurrentWaveChar.NumberOfCharacter--;
-        Events.AddRange(CurrentWaveChar.TypeOfCharacter.Events);
-        Events = Events.Distinct().ToList();
-        return CurrentWaveChar.TypeOfCharacter;
+        CurrentWaveChar = wavePhase.ListOfEnemy.Where(r => r.NumberOfCharacter > 0).FirstOrDefault();
+        if (CurrentWaveChar != null)
+        {
+            CurrentWaveChar.NumberOfCharacter--;
+            Events.AddRange(CurrentWaveChar.TypeOfCharacter.Events);
+            Events = Events.Distinct().ToList();
+            return CurrentWaveChar.TypeOfCharacter;
+        }
+        return null;
     }
 
     #region WaveEvents
@@ -309,6 +323,23 @@ public class WaveManagerScript : MonoBehaviour
 
     #endregion
 
+
+
+    private void Update()
+    {
+        if(Input.GetKey(KeyCode.G) && BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle)
+        {
+            foreach (WaveCharClass item in currentWavePhase.ListOfEnemy)
+            {
+                item.NumberOfCharacter = 0;
+            }
+
+            foreach (BaseCharacter item in WaveCharcters.Where(r => r.gameObject.activeInHierarchy && (r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script || (r.IsOnField && r.CharInfo.BaseCharacterType != BaseCharType.MinionType_Script))).ToList())
+            {
+                item.CharInfo.Health = -5;
+            }
+        }
+    }
 }
 
 [System.Serializable]
