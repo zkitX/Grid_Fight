@@ -65,4 +65,9 @@ public class Grid_UIPanel : MonoBehaviour
             panelID = "Universal";
         }
     }
+
+    public void EDebug()
+    {
+        Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAA");
+    }
 }

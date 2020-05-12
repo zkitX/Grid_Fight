@@ -11,11 +11,34 @@ public class GridManagerScript : MonoBehaviour
 
     public static GridManagerScript Instance;
 
+    public static Pathfinding Pathfinding = new Pathfinding();
 
     public List<BattleTileScript> BattleTiles = new List<BattleTileScript>();
-    public Vector2Int BattleFieldSize;
+    public Vector2Int BattleFieldSize = new Vector2Int(6,12);
     public int YGridSeparator;
     public GameObject TargetIndicator;
+
+    public bool[,] GetWalkableTilesLayout(WalkingSideType side)
+    {
+        bool[,] tilesGrid = new bool[/*BattleFieldSize.x, BattleFieldSize.y*/ 6,12];
+        for (int x = 0; x < /*tilesGrid.GetLength(0)*/ 6; x++)
+        {
+            for (int y = 0; y < /*tilesGrid.GetLength(1)*/ 12; y++)
+            {
+                BattleTileScript curTile = BattleTiles.Where(r => r.Pos == new Vector2Int(x, y)).First();
+                if (curTile.BattleTileState == BattleTileStateType.Empty && (curTile.WalkingSide == side || curTile.WalkingSide == WalkingSideType.Both))
+                {
+                    tilesGrid[x, y] = true;
+                }
+                else
+                {
+                    tilesGrid[x, y] = false;
+                }
+            }
+        }
+        return tilesGrid;
+    }
+
 
     public List<PortalInfoClass> Portals = new List<PortalInfoClass>();
     public ScriptableObjectGridStructure currentGridStructureObject = null;
@@ -47,6 +70,7 @@ public class GridManagerScript : MonoBehaviour
 
             InitializationCompleteEvent?.Invoke();
         }
+
     }
 
     public void MoveGrid_ToWorldPosition(Vector3 newGridPos)

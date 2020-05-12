@@ -81,4 +81,10 @@ public class MoveDetailsClass
     [HideInInspector] public string Name = "";
     public InputDirection nextDir;
     public int amount = 0;
+
+    public MoveDetailsClass(InputDirection dir, int moves = 1)
+    {
+        amount = moves;
+        nextDir = dir;
+    }
 }

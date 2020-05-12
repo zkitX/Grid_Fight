@@ -9,7 +9,7 @@ public class Grid_UINavigator : MonoBehaviour
 {
     public static Grid_UINavigator Instance;
 
-    public bool loopAround = false;
+    //public bool loopAround = false;
     public bool specificStartingButton = true;
     [ConditionalField("specificStartingButton")] public Grid_UIButton startingButton = null;
     [ConditionalField("specificStartingButton", true)] public InputDirection startingDirection = InputDirection.Up;

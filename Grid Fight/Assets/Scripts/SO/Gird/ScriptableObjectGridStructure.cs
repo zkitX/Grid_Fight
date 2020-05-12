@@ -17,7 +17,7 @@ public class ScriptableObjectGridStructure : ScriptableObject
     {
         if (GridInfo.Count == 0)
         {
-            for (int x = 0; x < 6; x++)
+            for (int x = 0; x < 6; x++) //replace this in the future with a variable used by gridmanager script
             {
                 for (int y = 0; y < 12; y++)
                 {
