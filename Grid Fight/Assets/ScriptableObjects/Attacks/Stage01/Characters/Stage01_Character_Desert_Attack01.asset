@@ -10,27 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage01_Character_Desert_StrongAttack
+  m_Name: Stage01_Character_Desert_Attack01
   m_EditorClassIdentifier: 
   Chances: 100
-  CurrentAttackType: 0
+  CurrentAttackType: 1
   AttackRatioMultiplier: 1
   DamageMultiplier: {x: 1, y: 1}
-  AttackInput: 1
-  AttackAnim: 1
-  PrefixAnim: 1
+  AttackInput: 0
+  AttackAnim: 0
+  PrefixAnim: 0
   Particles:
     Left:
-      Cast: {fileID: 822955250899428374, guid: 134213d8baf0a79408eba546f27c33f7, type: 3}
-      Bullet: {fileID: 5431117957904207779, guid: 1cd7ff05af1a67240a601fb1bac636b1,
+      Cast: {fileID: 8475831192976336511, guid: 1e8ef8ebf705c014588589cbaca832a4,
         type: 3}
-      Hit: {fileID: 6714087524478499567, guid: 1155082d02603094faa0c8f5ec6aab5a, type: 3}
+      Bullet: {fileID: 8945333287784678293, guid: 636782ff322dbc949b0e1fb7796fdbcf,
+        type: 3}
+      Hit: {fileID: 3252666646786503415, guid: e0cae8861a4c2b0479576920ce0232ec, type: 3}
     Right:
-      Cast: {fileID: 6877616292416455941, guid: 95926fe62e6d29f4bb732911da8d2580,
+      Cast: {fileID: 8475831192976336511, guid: 89578693ba1d15b4cb9b1b359e8f92e0,
         type: 3}
-      Bullet: {fileID: 8785537635775378163, guid: 22197d2b30acd4a4b84125cfc3b387c9,
+      Bullet: {fileID: 8945333287784678293, guid: 1eb17166e12c99a4d91027a9886540f1,
         type: 3}
-      Hit: {fileID: 7964856499210549533, guid: 1971cf23c4759a54d96da6dda107979f, type: 3}
+      Hit: {fileID: 3252666646786503415, guid: 3d623d87ae0c7df4f95fa5df7c3f93cc, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
@@ -95,9 +96,52 @@ MonoBehaviour:
       EffectChances: 100
     CharacterClass: 0
   TilesAtk:
-    AtkType: 0
-    BulletTrajectories: []
-    StatToCheck: 0
-    ValueChecker: 0
+    AtkType: 1
+    BulletTrajectories:
+    - Delay: 1.4
+      Show: 1
+      BulletEffectTiles:
+      - Pos: {x: 0, y: -1}
+        Trajectory_Y:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        Trajectory_Z:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 0, y: 1}
+        Trajectory_Y:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        Trajectory_Z:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+    StatToCheck: 1
+    ValueChecker: 2
     PercToCheck: 0
-    Chances: 0
+    Chances: 100

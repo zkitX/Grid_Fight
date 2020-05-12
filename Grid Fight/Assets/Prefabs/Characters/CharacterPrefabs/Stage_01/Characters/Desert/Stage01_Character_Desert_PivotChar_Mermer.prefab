@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1055097369435223003}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0.625, z: 0}
+  m_LocalPosition: {x: -1.14, y: 0.30599996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1627969824127532253}
@@ -96,7 +96,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 33c38e5e42c3a9f4db72cf6ae1a39384, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 0}
+  skeletonDataAsset: {fileID: 11400000, guid: 2d16b8221e801e14590a23a65a1f5cf0, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -149,7 +149,7 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  _animationName: Animation
+  _animationName: Atk2_IdleToAtk
   loop: 1
   timeScale: 1
 --- !u!114 &7972272254630320993
@@ -415,7 +415,7 @@ MonoBehaviour:
   Loop: 0
   changeanim: 0
   transition: 0.5
-  NextAnim: 16
+  NextAnim: 8
 --- !u!114 &6846348253443315204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,10 +438,10 @@ MonoBehaviour:
   CurrentAttackTypeInfo:
   - {fileID: 11400000, guid: 520115dc48630a24d95621abc35a282d, type: 2}
   - {fileID: 11400000, guid: 6267fd6c0dd9986439ef6d923459de3e, type: 2}
-  - {fileID: 11400000, guid: cbaa5d093f8f84c4193942445f39143f, type: 2}
-  - {fileID: 11400000, guid: ca5244418a17e5843b5f4def6b1aa92d, type: 2}
+  - {fileID: 11400000, guid: baaa11f1be48ada418326fd1f62b4f29, type: 2}
+  - {fileID: 11400000, guid: 967cace0e5777644c92700c8af20c995, type: 2}
   Elemental: 0
-  ClassType: 2
+  ClassType: 3
   UseLayeringSystem: 1
   CharacterRespawnLength: 180
   CharacterSelection: 0
@@ -596,7 +596,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3130091654117201862}
   m_Layer: 0
-  m_Name: Stage01_Character_Desert_PivotChar_
+  m_Name: Stage01_Character_Desert_PivotChar_Mermer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -641,7 +641,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6857555822528230163}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0.625, z: 0}
+  m_LocalPosition: {x: -0.93, y: 0.48, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1627969824127532253}
