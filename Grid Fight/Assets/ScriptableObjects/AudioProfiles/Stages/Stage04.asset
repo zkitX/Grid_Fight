@@ -14,7 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   music:
     clip: {fileID: 8300000, guid: 93625b7ff44c3c34e9f1e6522a276ba9, type: 3}
+    clips: []
+    randomiseOrder: 0
+    moreThanOneClip: 0
     baseVolume: 0.55
   ambience:
     clip: {fileID: 8300000, guid: 93625b7ff44c3c34e9f1e6522a276ba9, type: 3}
-    baseVolume: 0
+    clips:
+    - {fileID: 8300000, guid: a83c0503fbed9f8469f8c91facb3a11e, type: 3}
+    randomiseOrder: 0
+    moreThanOneClip: 0
+    baseVolume: 0.5

@@ -21,10 +21,17 @@ MonoBehaviour:
   RapidAttack:
     Cast:
       clip: {fileID: 8300000, guid: 35387bc3c5c8d0048a1cb0fc7549d090, type: 3}
-      clips: []
+      clips:
+      - {fileID: 8300000, guid: 41679b56f27d23b4a8345242c318deae, type: 3}
+      - {fileID: 8300000, guid: 0ec9ae7acdef5034fbb288ec0aeff56b, type: 3}
+      - {fileID: 8300000, guid: f87a89508f09b1748ba9b129b7600372, type: 3}
+      - {fileID: 8300000, guid: 4d4c9f5150a550841b862dbdce37dff7, type: 3}
+      - {fileID: 8300000, guid: 65a58749264743b40a8fc48502753078, type: 3}
+      - {fileID: 8300000, guid: 7bb920ce935bdbb46b7f38958bd7a757, type: 3}
+      - {fileID: 8300000, guid: 0de641627650741469b7542d2adf9d7a, type: 3}
       randomiseOrder: 1
-      moreThanOneClip: 0
-      baseVolume: 0.85
+      moreThanOneClip: 1
+      baseVolume: 0.5
     Loop:
       clip: {fileID: 0}
       clips: []
@@ -40,9 +47,13 @@ MonoBehaviour:
   PowerfulAttack:
     Cast:
       clip: {fileID: 8300000, guid: 0245ff511b17c5a48b8f3968f5c7b0bc, type: 3}
-      clips: []
+      clips:
+      - {fileID: 8300000, guid: 971c3d575ce9f5e409775420738584e8, type: 3}
+      - {fileID: 8300000, guid: 76d96768308c83b4191e13327fdb3a68, type: 3}
+      - {fileID: 8300000, guid: 82ddc3b46c1863742b975321719e1c3d, type: 3}
+      - {fileID: 8300000, guid: a02d4ea6da0057d4faf81f34fa2acd9b, type: 3}
       randomiseOrder: 0
-      moreThanOneClip: 0
+      moreThanOneClip: 1
       baseVolume: 1
     Loop:
       clip: {fileID: 0}

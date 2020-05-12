@@ -14,12 +14,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArrivalSpawn:
     clip: {fileID: 8300000, guid: 371f464eca8b97a479db4534c496f2d0, type: 3}
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: bd11c20e200ce134a85c9748224ef25e, type: 3}
+    - {fileID: 8300000, guid: 10a7ed2481ddae949b052f433ac8bcf8, type: 3}
+    - {fileID: 8300000, guid: 1f56024a410db674eaa2c67560a81a19, type: 3}
+    - {fileID: 8300000, guid: 3298215c650cc8c43a49ffe86cd9cb32, type: 3}
     randomiseOrder: 0
-    moreThanOneClip: 0
+    moreThanOneClip: 1
     baseVolume: 0.6
   ArrivalImpact:
     clip: {fileID: 8300000, guid: 6b78bfb6d539b2340a33426a78da6af6, type: 3}
+    clips:
+    - {fileID: 8300000, guid: 77ed0a62dfca6ae4fb8c8dd080b7f186, type: 3}
+    - {fileID: 8300000, guid: f48918fe1f4f7a044989198c9b137ac4, type: 3}
+    randomiseOrder: 0
+    moreThanOneClip: 1
+    baseVolume: 1
+  ExitBattleJump:
+    clip: {fileID: 0}
+    clips: []
+    randomiseOrder: 0
+    moreThanOneClip: 0
+    baseVolume: 1
+  StageSwitchSound:
+    clip: {fileID: 0}
     clips: []
     randomiseOrder: 0
     moreThanOneClip: 0
@@ -38,36 +56,135 @@ MonoBehaviour:
     baseVolume: 1
   BasicShield:
     clip: {fileID: 8300000, guid: c6616da05c632a64d8ad1fadd9bfdd06, type: 3}
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: d0c81e99757ced347becb88e665f25b8, type: 3}
+    - {fileID: 8300000, guid: 9a1eec0f3d6f9954b957d6379b4104f9, type: 3}
+    - {fileID: 8300000, guid: ca82fab3f352ced499cc997c9352df5e, type: 3}
+    - {fileID: 8300000, guid: a0ffb8b1818785c4797146aaeefbc9cb, type: 3}
+    - {fileID: 8300000, guid: e8c4619e23fc6324492d9c9e76eb79a8, type: 3}
+    - {fileID: 8300000, guid: a08f945bb21b47948ac264a4aba01dcc, type: 3}
     randomiseOrder: 0
-    moreThanOneClip: 0
+    moreThanOneClip: 1
     baseVolume: 1
   MegaShield:
     clip: {fileID: 8300000, guid: b3adcbfaac1d6584c8c18e0de889f0a0, type: 3}
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: 9588943837f202146a1197c0f9d5e0e3, type: 3}
+    - {fileID: 8300000, guid: c6e73417c90c4244994905b54be40acd, type: 3}
+    - {fileID: 8300000, guid: cd6c80e89572ee642a06b20e922df878, type: 3}
+    - {fileID: 8300000, guid: 99db23376a26b0d4586dc7f620485cac, type: 3}
+    - {fileID: 8300000, guid: e14b1b54514086a4aace774c108c42c0, type: 3}
+    - {fileID: 8300000, guid: 537652e9bfe5e954ba9e9fd7e65be7f6, type: 3}
     randomiseOrder: 0
-    moreThanOneClip: 0
+    moreThanOneClip: 1
     baseVolume: 1
   PowerUp_Health:
     clip: {fileID: 8300000, guid: 2d69012a355927049930ecd424ab1d23, type: 3}
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: 158bc4d939470a1418c4da8ef9e26a78, type: 3}
+    - {fileID: 8300000, guid: f3074d6fef2f5e74a9d9ecb2a00ede93, type: 3}
+    - {fileID: 8300000, guid: 5ca9cf24db4c0bf49aefb99547158d34, type: 3}
+    - {fileID: 8300000, guid: 7b1f93557f6fda346b428e324b4ba3ac, type: 3}
     randomiseOrder: 0
-    moreThanOneClip: 0
+    moreThanOneClip: 1
     baseVolume: 1
   PowerUp_Speed:
     clip: {fileID: 8300000, guid: 40276967bdfd77d4b85d00abd170a1aa, type: 3}
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: 1e3522aa1a987db4bad1b92347a1a036, type: 3}
+    - {fileID: 8300000, guid: ee10ea69f1e8e3d41b6f3ffc5d65b802, type: 3}
+    - {fileID: 8300000, guid: 2261fd65b53d04f41accaba85b53db30, type: 3}
+    - {fileID: 8300000, guid: fd4070fda915cf14b883da773e4c9f16, type: 3}
     randomiseOrder: 0
-    moreThanOneClip: 0
+    moreThanOneClip: 1
     baseVolume: 1
   PowerUp_Stamina:
     clip: {fileID: 8300000, guid: 196a29d467e0cb740832ba4af835801a, type: 3}
+    clips:
+    - {fileID: 8300000, guid: 919b6dda0f86e99458c9f47b51d809b0, type: 3}
+    - {fileID: 8300000, guid: 9d0f54d59d851cf4e8ab180f7c842631, type: 3}
+    - {fileID: 8300000, guid: 77d0f2b39a9cda94fb2ffc96cb354447, type: 3}
+    - {fileID: 8300000, guid: 91ed9cf23e8aa934a979b685c0a1aa87, type: 3}
+    randomiseOrder: 0
+    moreThanOneClip: 1
+    baseVolume: 1
+  PowerUp_Damage:
+    clip: {fileID: 8300000, guid: 6860afff86ae948459212d2466b34c78, type: 3}
+    clips:
+    - {fileID: 8300000, guid: 7a7ad6e8675ccab4da5dd39d43223c1a, type: 3}
+    - {fileID: 8300000, guid: 162d28ea1a5d02b408c99c4ffe8a2068, type: 3}
+    - {fileID: 8300000, guid: b32757c8477f0e14899db9405c78cbfa, type: 3}
+    - {fileID: 8300000, guid: b946c9527744e8e40a92f6ed747ee849, type: 3}
+    randomiseOrder: 0
+    moreThanOneClip: 1
+    baseVolume: 1
+  Dialogue_Entering:
+    clip: {fileID: 0}
+    clips:
+    - {fileID: 8300000, guid: a691165e94ce3da4a8baddac424b7d5d, type: 3}
+    - {fileID: 8300000, guid: c388d11918d3e904da157b51da621dde, type: 3}
+    - {fileID: 8300000, guid: ca2ee04df2a0ed645822321d7946c786, type: 3}
+    - {fileID: 8300000, guid: beb1bdad47c55b64598578e6f4f80d8a, type: 3}
+    - {fileID: 8300000, guid: 23f0ff1f5f2054c4a8f4bc96d197b613, type: 3}
+    randomiseOrder: 0
+    moreThanOneClip: 0
+    baseVolume: 1
+  Dialogue_Exiting:
+    clip: {fileID: 0}
+    clips:
+    - {fileID: 8300000, guid: dca00484b27c1114b904819e5cd7359f, type: 3}
+    - {fileID: 8300000, guid: 522cfd73390523f479abae17a810227f, type: 3}
+    - {fileID: 8300000, guid: c2516ec1af3488c48a3304b5d004f0a5, type: 3}
+    - {fileID: 8300000, guid: ccf4b961c57b72846810d08a6b40ebd7, type: 3}
+    - {fileID: 8300000, guid: 8ed6efff2ced8d9408a342e6ccb6de46, type: 3}
+    randomiseOrder: 0
+    moreThanOneClip: 0
+    baseVolume: 1
+  Dialogue_TextStart:
+    clip: {fileID: 0}
     clips: []
     randomiseOrder: 0
     moreThanOneClip: 0
     baseVolume: 1
-  PowerUp_Damage:
-    clip: {fileID: 8300000, guid: 6860afff86ae948459212d2466b34c78, type: 3}
+  Dialogue_TextEnd:
+    clip: {fileID: 0}
+    clips:
+    - {fileID: 8300000, guid: 43b1a916f5f37e64dae097a2b336face, type: 3}
+    - {fileID: 8300000, guid: 3dbcf77e3febebb419969d87736074f9, type: 3}
+    - {fileID: 8300000, guid: 844501bf8603ed84e88754358256db2c, type: 3}
+    - {fileID: 8300000, guid: b18174013ced3b94c8f9a8ae420a238b, type: 3}
+    - {fileID: 8300000, guid: 363c414096db494458694a552adc1fbe, type: 3}
+    - {fileID: 8300000, guid: 3f2dcc9d7544a7f47b1193dd474bbf4b, type: 3}
+    randomiseOrder: 0
+    moreThanOneClip: 0
+    baseVolume: 1
+  Dialogue_CharacterSwap:
+    clip: {fileID: 0}
+    clips: []
+    randomiseOrder: 0
+    moreThanOneClip: 0
+    baseVolume: 1
+  Menus_SelectButton:
+    clip: {fileID: 0}
+    clips:
+    - {fileID: 8300000, guid: 3f09169bf3d7ba443b7624b227dee461, type: 3}
+    randomiseOrder: 0
+    moreThanOneClip: 0
+    baseVolume: 1
+  Menus_PressButton:
+    clip: {fileID: 0}
+    clips: []
+    randomiseOrder: 0
+    moreThanOneClip: 0
+    baseVolume: 1
+  Loading_Start:
+    clip: {fileID: 0}
+    clips: []
+    randomiseOrder: 0
+    moreThanOneClip: 0
+    baseVolume: 1
+  Loading_Stop:
+    clip: {fileID: 0}
     clips: []
     randomiseOrder: 0
     moreThanOneClip: 0

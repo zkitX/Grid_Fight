@@ -14,69 +14,122 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Footsteps:
     clip: {fileID: 0}
+    clips: []
+    randomiseOrder: 0
+    moreThanOneClip: 0
     baseVolume: 1
   RapidAttack:
     Cast:
       clip: {fileID: 8300000, guid: bcf288e57c1bf44428f3c6af09798fed, type: 3}
-      baseVolume: 0.85
+      clips:
+      - {fileID: 8300000, guid: 0f70946b98a97124bb2281dcff4e1897, type: 3}
+      - {fileID: 8300000, guid: 9bff8a40c4bd2e947af8159d2d054c21, type: 3}
+      - {fileID: 8300000, guid: f1836d84bfc4cf540afe97f4d5b90332, type: 3}
+      - {fileID: 8300000, guid: 20bc88b028bb06240900ad096e7f0b09, type: 3}
+      randomiseOrder: 0
+      moreThanOneClip: 1
+      baseVolume: 0.5
     Loop:
       clip: {fileID: 0}
+      clips: []
+      randomiseOrder: 0
+      moreThanOneClip: 0
       baseVolume: 1
     Impact:
       clip: {fileID: 8300000, guid: 59b18d149698f4647badc2e23258bfe5, type: 3}
+      clips: []
+      randomiseOrder: 0
+      moreThanOneClip: 0
       baseVolume: 1
   PowerfulAttack:
     Cast:
       clip: {fileID: 8300000, guid: 7fa143f1576eaf045b2b88f4d15cafbf, type: 3}
+      clips:
+      - {fileID: 8300000, guid: 8854673a88cf1c1439b691b5d60b7d97, type: 3}
+      - {fileID: 8300000, guid: 95830a63cf6a3e1409c16be719b672c4, type: 3}
+      - {fileID: 8300000, guid: 38a331fd3fc640449a865a0b7dbe4638, type: 3}
+      - {fileID: 8300000, guid: 69f09bafe178f744ca63c4933cc65432, type: 3}
+      randomiseOrder: 0
+      moreThanOneClip: 1
       baseVolume: 1
     Loop:
       clip: {fileID: 0}
+      clips: []
+      randomiseOrder: 0
+      moreThanOneClip: 0
       baseVolume: 1
     Impact:
       clip: {fileID: 8300000, guid: 59b18d149698f4647badc2e23258bfe5, type: 3}
+      clips: []
+      randomiseOrder: 0
+      moreThanOneClip: 0
       baseVolume: 1
-  PowerfulAttackChargingLoop:
-    clip: {fileID: 8300000, guid: 48992f5000032d647aa165f09bb845cb, type: 3}
-    baseVolume: 1
   Skill1:
     Cast:
       clip: {fileID: 0}
+      clips: []
+      randomiseOrder: 0
+      moreThanOneClip: 0
       baseVolume: 1
     Loop:
       clip: {fileID: 0}
+      clips: []
+      randomiseOrder: 0
+      moreThanOneClip: 0
       baseVolume: 1
     Impact:
       clip: {fileID: 0}
+      clips: []
+      randomiseOrder: 0
+      moreThanOneClip: 0
       baseVolume: 1
   Skill2:
     Cast:
       clip: {fileID: 0}
+      clips: []
+      randomiseOrder: 0
+      moreThanOneClip: 0
       baseVolume: 1
     Loop:
       clip: {fileID: 0}
+      clips: []
+      randomiseOrder: 0
+      moreThanOneClip: 0
       baseVolume: 1
     Impact:
       clip: {fileID: 0}
+      clips: []
+      randomiseOrder: 0
+      moreThanOneClip: 0
       baseVolume: 1
   Skill3:
     Cast:
       clip: {fileID: 0}
+      clips: []
+      randomiseOrder: 0
+      moreThanOneClip: 0
       baseVolume: 1
     Loop:
       clip: {fileID: 0}
+      clips: []
+      randomiseOrder: 0
+      moreThanOneClip: 0
       baseVolume: 1
     Impact:
       clip: {fileID: 0}
+      clips: []
+      randomiseOrder: 0
+      moreThanOneClip: 0
       baseVolume: 1
   ArrivingCry:
     clip: {fileID: 0}
+    clips: []
+    randomiseOrder: 0
+    moreThanOneClip: 0
     baseVolume: 1
   Death:
     clip: {fileID: 0}
-    baseVolume: 1
-  MinorShield:
-    clip: {fileID: 0}
-    baseVolume: 1
-  MajorShield:
-    clip: {fileID: 0}
+    clips: []
+    randomiseOrder: 0
+    moreThanOneClip: 0
     baseVolume: 1
