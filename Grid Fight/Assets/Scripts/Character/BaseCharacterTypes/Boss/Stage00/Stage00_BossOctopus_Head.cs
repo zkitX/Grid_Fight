@@ -58,16 +58,7 @@ public class Stage00_BossOctopus_Head : MinionType_Script
 
         if (UMS.CurrentAttackType == AttackType.Particles)
         {
-            if (SpineAnim.CurrentAnim.Contains("Atk1"))
-            {
-                CharInfo.Stamina -= CharInfo.RapidAttack.Stamina_Cost_Atk;
-                EventManager.Instance.UpdateStamina(this);
-            }
-            else if (SpineAnim.CurrentAnim.Contains("Atk2"))
-            {
-                CharInfo.Stamina -= CharInfo.PowerfulAttac.Stamina_Cost_Atk;
-                EventManager.Instance.UpdateStamina(this);
-            }
+            CharInfo.Stamina -= nextAttack.StaminaCost;
         }
 
         eyeAttackTarget.Clear();

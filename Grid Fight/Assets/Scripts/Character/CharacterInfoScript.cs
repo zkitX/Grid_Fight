@@ -51,11 +51,10 @@ public class CharacterInfoScript : MonoBehaviour
     {
         public Vector2 DamageMultiplier = new Vector2(1, 1);
         public Vector2 CriticalChance = new Vector2(2, 2);
-        public float Stamina_Cost_Atk;
+        public float LevelMultiplier;
 
         [HideInInspector] public Vector2 B_DamageMultiplier = new Vector2(1, 1);
         [HideInInspector] public Vector2 B_CriticalChance = new Vector2(2, 2);
-        [HideInInspector] public float B_Stamina_Cost_Atk;
     }
 
     public PowerfulAttackClass PowerfulAttac;
@@ -64,11 +63,10 @@ public class CharacterInfoScript : MonoBehaviour
     {
         public Vector2 DamageMultiplier = new Vector2(3, 3);
         public Vector2 CriticalChance = new Vector2(3, 5);
-        public float Stamina_Cost_Atk;
+        public float LevelMultiplier;
 
         [HideInInspector] public Vector2 B_DamageMultiplier = new Vector2(3, 3);
         [HideInInspector] public Vector2 B_CriticalChance = new Vector2(3, 5);
-        [HideInInspector] public float B_Stamina_Cost_Atk;
     }
 
     public HealthStastsClass HealthStats;
@@ -85,7 +83,6 @@ public class CharacterInfoScript : MonoBehaviour
         [HideInInspector] public float B_Base;
         [HideInInspector] public float B_Regeneration;
         [HideInInspector] public float B_BaseHealthRegeneration;
-        [HideInInspector] public float B_LevelMultiplier;
     }
 
     public StaminaStastsClass StaminaStats;
@@ -102,7 +99,6 @@ public class CharacterInfoScript : MonoBehaviour
         [HideInInspector] public float B_Base;
         [HideInInspector] public float B_Regeneration;
         [HideInInspector] public float B_BaseStaminaRegeneration;
-        [HideInInspector] public float B_LevelMultiplier;
     }
 
     public ShieldStastsClass ShieldStats;
@@ -119,7 +115,6 @@ public class CharacterInfoScript : MonoBehaviour
         [HideInInspector] public float B_Base;
         [HideInInspector] public float B_Regeneration;
         [HideInInspector] public float B_BaseShieldRegeneration;
-        [HideInInspector] public float B_LevelMultiplier;
     }
 
     public SpeedStastsClass SpeedStats;
@@ -132,7 +127,8 @@ public class CharacterInfoScript : MonoBehaviour
         public float AttackSpeedRatio;
         public float BulletSpeed = 5;
         public float LeaveSpeed = 3;
-        public float LevelMultiplier;
+        public float BaseSpeed_LevelMultiplier;
+        public float MovementSpeed_LevelMultiplier;
         public float IdleToAtkDuration = 0.2f;
         public float AtkToIdleDuration = 0.2f;
 
@@ -142,7 +138,6 @@ public class CharacterInfoScript : MonoBehaviour
         [HideInInspector] public float B_AttackSpeedRatio;
         [HideInInspector] public float B_BulletSpeed = 5;
         [HideInInspector] public float B_LeaveSpeed = 3;
-        [HideInInspector] public float B_LevelMultiplier;
         [HideInInspector] public float B_IdleToAtkDuration = 0.2f;
         [HideInInspector] public float B_AtkToIdleDuration = 0.2f;
     }
@@ -153,15 +148,9 @@ public class CharacterInfoScript : MonoBehaviour
     public class DamageStastsClass
     {
         public float BaseDamage = 10;
-        [HideInInspector]
-        public float B_BaseDamage = 10f;
-        [HideInInspector]
-        public int MultiBulletAttackNumberOfBullets = 3;
-        public float ChildrenBulletDelay;
-        [HideInInspector]
-        public List<ElementalResistenceClass> ElementalsResistence = new List<ElementalResistenceClass>();
-        [HideInInspector]
-        public ElementalType CurrentElemental;
+        [HideInInspector] public float B_BaseDamage = 10f;
+        [HideInInspector] public List<ElementalResistenceClass> ElementalsResistence = new List<ElementalResistenceClass>();
+        [HideInInspector] public ElementalType CurrentElemental;
         public float LevelMultiplier;
     }
 
@@ -180,12 +169,11 @@ public class CharacterInfoScript : MonoBehaviour
     public float Special2LoadingDuration;
     public float Special3LoadingDuration;
 
-
-    public float ExperienceValue;
-
-
-    public Vector2 MovementTimer = new Vector2(5, 8);
+    [HideInInspector] public float ExperienceValue;
+    [HideInInspector] public Vector2 MovementTimer = new Vector2(5, 8);
     [HideInInspector] public Vector2 B_MovementTimer = new Vector2(5, 8);
+
+
     public float HealthPerc
     {
         get
@@ -322,33 +310,42 @@ public class CharacterInfoScript : MonoBehaviour
             HealthStats.Regeneration *= HealthStats.LevelMultiplier;
             HealthStats.BaseHealthRegeneration *= HealthStats.LevelMultiplier;
 
+            StaminaStats.Base *= StaminaStats.LevelMultiplier;
+            StaminaStats.Regeneration *= StaminaStats.LevelMultiplier;
+            StaminaStats.Stamina *= StaminaStats.LevelMultiplier;
+            StaminaStats.BaseStaminaRegeneration *= StaminaStats.LevelMultiplier;
+
+            ShieldStats.Base *= ShieldStats.LevelMultiplier;
+            ShieldStats.Regeneration *= ShieldStats.LevelMultiplier;
+            ShieldStats.Shield *= ShieldStats.LevelMultiplier;
+            ShieldStats.BaseShieldRegeneration *= ShieldStats.LevelMultiplier;
+
+            SpeedStats.BaseSpeed *= SpeedStats.BaseSpeed_LevelMultiplier;
+            SpeedStats.MovementSpeed *= SpeedStats.MovementSpeed_LevelMultiplier;
+
+            DefenceStats.BaseDefence *= DefenceStats.LevelMultiplier;
 
             DamageStats.BaseDamage *= DamageStats.LevelMultiplier;
-
         }
 
 
         //RapidAttack
         RapidAttack.B_CriticalChance = RapidAttack.CriticalChance;
         RapidAttack.B_DamageMultiplier = RapidAttack.DamageMultiplier;
-        RapidAttack.B_Stamina_Cost_Atk = RapidAttack.Stamina_Cost_Atk;
 
         //PowerfulAttac
         PowerfulAttac.B_CriticalChance = PowerfulAttac.CriticalChance;
         PowerfulAttac.B_DamageMultiplier = PowerfulAttac.DamageMultiplier;
-        PowerfulAttac.B_Stamina_Cost_Atk = PowerfulAttac.Stamina_Cost_Atk;
 
         //HealthStats
         HealthStats.B_Base = HealthStats.Base;
         HealthStats.B_BaseHealthRegeneration = HealthStats.BaseHealthRegeneration;
         HealthStats.B_Health = HealthStats.Health;
-        HealthStats.B_LevelMultiplier = HealthStats.LevelMultiplier;
         HealthStats.B_Regeneration = HealthStats.Regeneration;
 
         //StaminaStats
         StaminaStats.B_Base = StaminaStats.Base;
         StaminaStats.B_BaseStaminaRegeneration = StaminaStats.BaseStaminaRegeneration;
-        StaminaStats.B_LevelMultiplier = StaminaStats.LevelMultiplier;
         StaminaStats.B_Regeneration = StaminaStats.Regeneration;
         StaminaStats.B_Stamina = StaminaStats.Stamina;
 
@@ -359,7 +356,6 @@ public class CharacterInfoScript : MonoBehaviour
         SpeedStats.B_AttackSpeedRatio = SpeedStats.AttackSpeedRatio;
         SpeedStats.B_BulletSpeed = SpeedStats.BulletSpeed;
         SpeedStats.B_LeaveSpeed = SpeedStats.LeaveSpeed;
-        SpeedStats.B_LevelMultiplier = SpeedStats.LevelMultiplier;
         SpeedStats.B_IdleToAtkDuration = SpeedStats.IdleToAtkDuration;
         SpeedStats.B_AtkToIdleDuration = SpeedStats.AtkToIdleDuration;
 

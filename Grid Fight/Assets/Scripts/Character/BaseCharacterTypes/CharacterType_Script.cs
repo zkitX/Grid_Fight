@@ -243,10 +243,13 @@ public class CharacterType_Script : BaseCharacter
     bool isChargingParticlesOn = false;
     public IEnumerator StartChargingAttack(AttackInputType nextAtkType)
     {
-        if (CharInfo.StaminaStats.Stamina - CharInfo.PowerfulAttac.Stamina_Cost_Atk >= 0
-           && CanAttack && !isSpecialLoading)
+        if (CanAttack && !isSpecialLoading)
         {
             ScriptableObjectAttackBase nxtAtk = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackInput == nextAtkType).First();
+            if(CharInfo.StaminaStats.Stamina - nxtAtk.StaminaCost < 0)
+            {
+                yield break;
+            }
             GameObject ps = null;
             isSpecialLoading = true;
             chargingAttackTimer = 0;
@@ -321,9 +324,14 @@ public class CharacterType_Script : BaseCharacter
 
     public void StartQuickAttack(bool attackRegardless)
     {
-        if ((CharInfo.StaminaStats.Stamina - CharInfo.RapidAttack.Stamina_Cost_Atk >= 0
-           && CanAttack) || attackRegardless)
+        if (CanAttack || attackRegardless)
         {
+
+            ScriptableObjectAttackBase nxtAtk = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackInput == AttackInputType.Weak).First();
+            if (CharInfo.StaminaStats.Stamina - nxtAtk.StaminaCost < 0)
+            {
+                return;
+            }
 
             if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop.ToString() && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_IdleToAtk.ToString())
             {

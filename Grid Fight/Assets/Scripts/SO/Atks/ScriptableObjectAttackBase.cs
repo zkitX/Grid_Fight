@@ -17,6 +17,8 @@ public class ScriptableObjectAttackBase : ScriptableObject
     public Vector2 DamageMultiplier = new Vector2(1, 1);
     public AttackInputType AttackInput;
     public AttackAnimType AttackAnim;
+    public float StaminaCost = 10;
+    [HideInInspector] public float ExperiencePoints = 10;
     [HideInInspector] public AttackAnimPrefixType PrefixAnim;
 
     public AttackParticlesClass Particles;
@@ -138,6 +140,7 @@ public class BulletBehaviourInfoClass
     public Vector2Int BulletDistanceInTile;
     public AnimationCurve Trajectory_Y;
     public AnimationCurve Trajectory_Z;
+    public float ChildrenBulletDelay = 0.5f;
     public List<Vector2Int> BulletEffectTiles = new List<Vector2Int>();
     public Vector2Int BulletGapStartingTile;
 
