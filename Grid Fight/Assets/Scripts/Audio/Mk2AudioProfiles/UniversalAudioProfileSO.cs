@@ -14,8 +14,8 @@ public class UniversalAudioProfileSO : BaseAudioProfileSO
     public AudioClipInfoClass SpecialAttackChargingRelease;
 
     [Header("Shielding")]
-    public AudioClipInfoClass BasicShield;
-    public AudioClipInfoClass MegaShield;
+    public AudioClipInfoClass Shield_Full;
+    public AudioClipInfoClass Shield_Partial;
 
     [Header("Power Ups")]
     public AudioClipInfoClass PowerUp_Health;
@@ -42,8 +42,8 @@ public class UniversalAudioProfileSO : BaseAudioProfileSO
         allAudioClips.Add(ArrivalImpact);
         allAudioClips.Add(SpecialAttackChargingLoop);
         allAudioClips.Add(SpecialAttackChargingRelease);
-        allAudioClips.Add(BasicShield);
-        allAudioClips.Add(MegaShield);
+        allAudioClips.Add(Shield_Full);
+        allAudioClips.Add(Shield_Partial);
         allAudioClips.Add(PowerUp_Health);
         allAudioClips.Add(PowerUp_Speed);
         allAudioClips.Add(PowerUp_Stamina);

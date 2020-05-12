@@ -69,7 +69,7 @@ public class AudioManagerMk2 : MonoBehaviour
         source.SetAudioClipInfo(clipInfo);
         source.bus = priority;
         source.PlaySound(loop);
-        AddClipPlayedLastFrame(clipInfo.Clip);
+        AddClipPlayedLastFrame(clipInfo);
 
         UpdateActiveAudioVolumes();
         return source;
@@ -101,16 +101,16 @@ public class AudioManagerMk2 : MonoBehaviour
         }
     }
 
-    public void AddClipPlayedLastFrame(AudioClip clip)
+    public void AddClipPlayedLastFrame(AudioClipInfoClass clip)
     {
-        audioPlayedLastFrame.Add(clip);
-        StartCoroutine(ManageClipsPlayedLastFrame(clip));
+        audioPlayedLastFrame.Add(clip.clip);
+        StartCoroutine(ManageClipsPlayedLastFrame(clip.clip, clip.cooldownPeriod, clip.cooldownType));
     }
 
-    IEnumerator ManageClipsPlayedLastFrame(AudioClip clip)
+    IEnumerator ManageClipsPlayedLastFrame(AudioClip clip, float waitTime, AudioClipInfoClass.AudioCooldownType cdType)
     {
-        yield return null;
+        if (cdType == AudioClipInfoClass.AudioCooldownType.SecondWait) yield return new WaitForSeconds(waitTime);
+        else yield return null;
         audioPlayedLastFrame.Remove(clip);
-
     }
 }

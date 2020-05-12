@@ -212,6 +212,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public virtual void SetCharDead(bool hasToDisappear = true)
     {
+        foreach(ManagedAudioSource audioSource in GetComponentsInChildren<ManagedAudioSource>())
+        {
+            audioSource.gameObject.transform.parent = AudioManagerMk2.Instance.transform;
+        }
 
         if (attackCoroutine != null)
         {
@@ -1342,7 +1346,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             {
                 damage = 0;
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldTotalDefence);
-                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.BasicShield, AudioBus.MediumPriority);
+                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.Shield_Full, AudioBus.MediumPriority);
                 go.transform.position = transform.position;
                 CharInfo.Shield -= UniversalGameBalancer.Instance.fullDefenceCost;
                 CharInfo.Stamina += UniversalGameBalancer.Instance.staminaRegenOnPerfectBlock;
@@ -1352,7 +1356,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             {
                 damage = damage - CharInfo.DefenceStats.BaseDefence;
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldNormal);
-                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.MegaShield, AudioBus.HighPriority);
+                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.Shield_Partial, AudioBus.HighPriority);
                 go.transform.position = transform.position;
                 CharInfo.Shield -= UniversalGameBalancer.Instance.partialDefenceCost;
                 EventManager.Instance.AddBlock(this, BlockInfo.BlockType.partial);

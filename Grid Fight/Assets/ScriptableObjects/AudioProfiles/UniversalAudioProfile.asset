@@ -21,6 +21,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 3298215c650cc8c43a49ffe86cd9cb32, type: 3}
     randomiseOrder: 0
     moreThanOneClip: 1
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 0.6
   ArrivalImpact:
     clip: {fileID: 8300000, guid: 6b78bfb6d539b2340a33426a78da6af6, type: 3}
@@ -29,33 +31,43 @@ MonoBehaviour:
     - {fileID: 8300000, guid: f48918fe1f4f7a044989198c9b137ac4, type: 3}
     randomiseOrder: 0
     moreThanOneClip: 1
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   ExitBattleJump:
     clip: {fileID: 0}
     clips: []
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   StageSwitchSound:
     clip: {fileID: 0}
     clips: []
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   SpecialAttackChargingLoop:
     clip: {fileID: 8300000, guid: 48992f5000032d647aa165f09bb845cb, type: 3}
     clips: []
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   SpecialAttackChargingRelease:
     clip: {fileID: 8300000, guid: 3b78c92fa7ab8da40a23b963b8b7d944, type: 3}
     clips: []
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
-  BasicShield:
-    clip: {fileID: 8300000, guid: c6616da05c632a64d8ad1fadd9bfdd06, type: 3}
+  Shield_Full:
+    clip: {fileID: 0}
     clips:
     - {fileID: 8300000, guid: d0c81e99757ced347becb88e665f25b8, type: 3}
     - {fileID: 8300000, guid: 9a1eec0f3d6f9954b957d6379b4104f9, type: 3}
@@ -65,9 +77,11 @@ MonoBehaviour:
     - {fileID: 8300000, guid: a08f945bb21b47948ac264a4aba01dcc, type: 3}
     randomiseOrder: 0
     moreThanOneClip: 1
+    cooldownType: 0
+    cooldownPeriod: 3.79
     baseVolume: 1
-  MegaShield:
-    clip: {fileID: 8300000, guid: b3adcbfaac1d6584c8c18e0de889f0a0, type: 3}
+  Shield_Partial:
+    clip: {fileID: 0}
     clips:
     - {fileID: 8300000, guid: 9588943837f202146a1197c0f9d5e0e3, type: 3}
     - {fileID: 8300000, guid: c6e73417c90c4244994905b54be40acd, type: 3}
@@ -77,6 +91,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 537652e9bfe5e954ba9e9fd7e65be7f6, type: 3}
     randomiseOrder: 0
     moreThanOneClip: 1
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   PowerUp_Health:
     clip: {fileID: 8300000, guid: 2d69012a355927049930ecd424ab1d23, type: 3}
@@ -87,6 +103,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 7b1f93557f6fda346b428e324b4ba3ac, type: 3}
     randomiseOrder: 0
     moreThanOneClip: 1
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   PowerUp_Speed:
     clip: {fileID: 8300000, guid: 40276967bdfd77d4b85d00abd170a1aa, type: 3}
@@ -97,6 +115,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: fd4070fda915cf14b883da773e4c9f16, type: 3}
     randomiseOrder: 0
     moreThanOneClip: 1
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   PowerUp_Stamina:
     clip: {fileID: 8300000, guid: 196a29d467e0cb740832ba4af835801a, type: 3}
@@ -107,6 +127,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 91ed9cf23e8aa934a979b685c0a1aa87, type: 3}
     randomiseOrder: 0
     moreThanOneClip: 1
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   PowerUp_Damage:
     clip: {fileID: 8300000, guid: 6860afff86ae948459212d2466b34c78, type: 3}
@@ -117,6 +139,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: b946c9527744e8e40a92f6ed747ee849, type: 3}
     randomiseOrder: 0
     moreThanOneClip: 1
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   Dialogue_Entering:
     clip: {fileID: 0}
@@ -128,6 +152,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 23f0ff1f5f2054c4a8f4bc96d197b613, type: 3}
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   Dialogue_Exiting:
     clip: {fileID: 0}
@@ -139,12 +165,16 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 8ed6efff2ced8d9408a342e6ccb6de46, type: 3}
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   Dialogue_TextStart:
     clip: {fileID: 0}
     clips: []
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   Dialogue_TextEnd:
     clip: {fileID: 0}
@@ -157,12 +187,16 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 3f2dcc9d7544a7f47b1193dd474bbf4b, type: 3}
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   Dialogue_CharacterSwap:
     clip: {fileID: 0}
     clips: []
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   Menus_SelectButton:
     clip: {fileID: 0}
@@ -170,22 +204,30 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 3f09169bf3d7ba443b7624b227dee461, type: 3}
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   Menus_PressButton:
     clip: {fileID: 0}
     clips: []
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   Loading_Start:
     clip: {fileID: 0}
     clips: []
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   Loading_Stop:
     clip: {fileID: 0}
     clips: []
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1

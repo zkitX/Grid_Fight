@@ -108,6 +108,7 @@ public class AudioClipInfoClass
     [HideInInspector] public AudioClip clip = null;
     public AudioClip[] clips = null;
     int lastPlayedClip = 0;
+
     [HideInInspector] public AudioClip ClipAndPlay
     {
         get
@@ -159,6 +160,10 @@ public class AudioClipInfoClass
     [ConditionalField("moreThanOneClip", false)] public bool randomiseOrder = false;
     [HideInInspector] public bool moreThanOneClip = false;
 
+    [HideInInspector] public enum AudioCooldownType { FrameWait, SecondWait }
+    public AudioCooldownType cooldownType = AudioCooldownType.FrameWait;
+    [ConditionalField("cooldownType", false, AudioCooldownType.SecondWait)] public float cooldownPeriod = 1f;
+
     [Range(0f,1f)]public float baseVolume = 1f;
 
     public AudioClipInfoClass()
@@ -166,9 +171,11 @@ public class AudioClipInfoClass
 
     }
 
-    public AudioClipInfoClass(AudioClip _clip, float _volume = 1f)
+    public AudioClipInfoClass(AudioClip _clip, float _volume = 1f, AudioCooldownType cdType = AudioCooldownType.FrameWait, int cdPeriod = 1)
     {
         clip = _clip;
         baseVolume = _volume;
+        cooldownType = cdType;
+        cooldownPeriod = cdPeriod;
     }
 }
