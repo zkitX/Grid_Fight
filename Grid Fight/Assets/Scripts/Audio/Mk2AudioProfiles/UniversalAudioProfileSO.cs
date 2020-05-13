@@ -36,6 +36,9 @@ public class UniversalAudioProfileSO : BaseAudioProfileSO
     public AudioClipInfoClass Loading_Start;
     public AudioClipInfoClass Loading_Stop;
 
+    [Header("Other...")]
+    public AudioClipInfoClass GetReadyFight;
+
     protected override void OnEnable()
     {
         allAudioClips.Add(ArrivalSpawn);

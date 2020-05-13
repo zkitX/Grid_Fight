@@ -31,7 +31,7 @@ public class BattleTileScript : MonoBehaviour
     private IEnumerator Effect_Co = null;
     public BattleTileTargetsScript BattleTargetScript;
     private GameObject ParticleGo;
-    private bool destroyEffectOnCollection = true;
+    private bool destroyEffectOnCollection = false;
 
     //Private
 

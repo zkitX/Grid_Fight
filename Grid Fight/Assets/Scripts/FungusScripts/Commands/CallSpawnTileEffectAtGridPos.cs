@@ -58,7 +58,7 @@ public class CallSpawnTileEffectAtGridPos : Command
 
         foreach (AffectTile aT in affectedTiles)
         {
-            GridManagerScript.Instance.GetBattleTile(aT.pos).SetupEffect(new List<ScriptableObjectAttackEffect> { aT.effect }, duration, aT.particleEffectToPlay);
+            GridManagerScript.Instance.GetBattleTile(aT.pos).SetupEffect(new List<ScriptableObjectAttackEffect> { aT.effect }, duration, aT.particleEffectToPlay, destroyOnCollection);
         }
     }
 
