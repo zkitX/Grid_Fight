@@ -489,6 +489,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             else if (SpineAnim.CurrentAnim.Contains("Atk2"))
             {
                 CharInfo.Stamina -= CharInfo.PowerfulAttac.Stamina_Cost_Atk;
+                CameraManagerScript.Instance.CameraShake(CameraShakeType.Powerfulattack);
                 EventManager.Instance?.UpdateStamina(this);
             }
         }

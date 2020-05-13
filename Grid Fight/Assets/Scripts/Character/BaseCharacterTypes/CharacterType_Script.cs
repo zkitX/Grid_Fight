@@ -369,7 +369,6 @@ public class CharacterType_Script : BaseCharacter
     public void SpecialAttack(ScriptableObjectAttackBase atkType)
     {
         nextAttack = atkType;
-        CameraManagerScript.Instance.CameraShake(CameraShakeType.Powerfulattack);
 
         if (chargingAudio != null)
         {
