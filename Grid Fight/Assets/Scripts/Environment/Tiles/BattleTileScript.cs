@@ -28,9 +28,10 @@ public class BattleTileScript : MonoBehaviour
     public WalkingSideType WalkingSide;
     public SpriteRenderer SP;
     public PortalInfoClass PortalInfo;
-    private IEnumerator Effect_Co;
+    private IEnumerator Effect_Co = null;
     public BattleTileTargetsScript BattleTargetScript;
     private GameObject ParticleGo;
+    private bool destroyEffectOnCollection = true;
 
     //Private
 
@@ -355,8 +356,10 @@ public Vector2 Duration_Debuff_Trap_ForTime;
         }*/
     }
 
-    public void SetupEffect(List<ScriptableObjectAttackEffect> effect, float duration, ParticlesType tileParticlesID)
+    public void SetupEffect(List<ScriptableObjectAttackEffect> effect, float duration, ParticlesType tileParticlesID, bool destroyOnCollection = true)
     {
+        destroyEffectOnCollection = destroyOnCollection;
+
         Effects = effect;
         if (Effect_Co != null)
         {
@@ -407,6 +410,12 @@ public Vector2 Duration_Debuff_Trap_ForTime;
                     //Subscribe to the TargetCharacter_TileMovementCompleteEvent event
                     targetCharacter.TileMovementCompleteEvent += TargetCharacter_TileMovementCompleteEvent;
 
+                }
+                if(Effect_Co != null)
+                {
+                    StopCoroutine(Effect_Co);
+                    Effect_Co = null;
+                    ParticleGo.SetActive(false);
                 }
             }
         }
