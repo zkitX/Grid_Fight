@@ -109,6 +109,7 @@ public class GridFightSayDialog : SayDialog
 
                
                 SayDialogAnimatorController.SetBool("InOut", false);
+                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_Exiting, AudioBus.MidPrio);
                 while (!isAnimCompleted)
                 {
                     yield return null;
@@ -116,6 +117,7 @@ public class GridFightSayDialog : SayDialog
                 isAnimCompleted = false;
 
                 SayDialogAnimatorController.SetBool("InOut", true);
+                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_Entering, AudioBus.MidPrio);
                 SetChar();
                 SetCharacterImage(currentChar.Portraits[0]);
 
@@ -144,6 +146,7 @@ public class GridFightSayDialog : SayDialog
         else if (LastCharacter == null)
         {
             SayDialogAnimatorController.SetBool("InOut", true);
+            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_Entering, AudioBus.MidPrio);
             SetChar();
             SetCharacterImage(currentChar.Portraits[0]);
 

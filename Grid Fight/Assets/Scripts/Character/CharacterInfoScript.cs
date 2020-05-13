@@ -316,7 +316,7 @@ public class CharacterInfoScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Health > 0)
+        if (Health > 0 && BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle)
         {
             Stamina = StaminaStats.Stamina + StaminaStats.Regeneration / 50;
             Health = HealthStats.Health + HealthStats.Regeneration / 50;

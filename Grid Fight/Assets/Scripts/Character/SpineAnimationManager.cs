@@ -61,16 +61,35 @@ public class SpineAnimationManager : MonoBehaviour
             {
                 AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackTypeAudioInfo.Cast, AudioBus.LowPrio, CharOwner.transform);
             }
-            CharOwner.currentAttackPhase = CurrentAnim.Contains("Atk1") ? AttackPhasesType.Cast_Rapid : AttackPhasesType.Cast_Powerful;
+
+            if (CurrentAnim.Contains("Atk1"))
+            {
+                CharOwner.currentAttackPhase = AttackPhasesType.Cast_Rapid;
+                if (CharOwner.CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
+                {
+                    CharOwner.CreateParticleAttack();
+                }
+            }
+            else
+            {
+                CharOwner.currentAttackPhase = AttackPhasesType.Cast_Powerful;
+
+            }
             CharOwner.FireCastParticles();
         }
         else if (e.Data.Name.Contains("FireBulletParticle"))
         {
             if (CharOwner.CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
             {
-                CharOwner.currentAttackPhase = CurrentAnim.Contains("Atk1") ? AttackPhasesType.Bullet_Rapid : AttackPhasesType.Bullet_Powerful;
-                CharOwner.CreateParticleAttack();
-
+                if (CurrentAnim.Contains("Atk1"))
+                {
+                    CharOwner.currentAttackPhase = AttackPhasesType.Cast_Rapid;
+                }
+                else
+                {
+                    CharOwner.currentAttackPhase = AttackPhasesType.Cast_Powerful;
+                    CharOwner.CreateParticleAttack();
+                }
             }
         }
         else if (e.Data.Name.Contains("FireTileAttack") && !trackEntry.Animation.Name.Contains("Loop"))
