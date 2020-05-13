@@ -65,7 +65,7 @@ public class BulletScript : MonoBehaviour
     {
         if (attackAudioType.Loop.clip != null)
         {
-            bulletSoundSource = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Loop, AudioBus.LowPriority, transform, true);
+            bulletSoundSource = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Loop, AudioBus.LowPrio, transform, true);
         }
 
         vfx = GetComponentInChildren<VFXBulletSpeedController>();
@@ -201,7 +201,7 @@ public class BulletScript : MonoBehaviour
                     target = BattleManagerScript.Instance.GetCharInPos(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]);
                     MakeDamage(target, (CharInfo.DamageStats.BaseDamage * (AtkType == AttackAnimType.Weak_Atk ? CharInfo.RapidAttack.DamageMultiplier.x : CharInfo.PowerfulAttac.DamageMultiplier.x)) * 0.3f);
                 }
-                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Impact, AudioBus.HighPriority, GridManagerScript.Instance.GetBattleTile(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]).transform);
+                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Impact, AudioBus.HighPrio, GridManagerScript.Instance.GetBattleTile(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]).transform);
                 FireEffectParticles(GridManagerScript.Instance.GetBattleTile(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]).transform.position);
             }
             else
@@ -254,7 +254,7 @@ public class BulletScript : MonoBehaviour
             MakeDamage(target, CharInfo.DamageStats.BaseDamage * (AtkType == AttackAnimType.Weak_Atk ? CharInfo.RapidAttack.DamageMultiplier.x : CharInfo.PowerfulAttac.DamageMultiplier.x));
             //fire the Effect
             StartCoroutine(ChildExplosion(BulletEffectTiles.Where(r => r != Vector2Int.zero).ToList(), target.UMS.CurrentTilePos));
-            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Impact, AudioBus.MediumPriority,
+            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Impact, AudioBus.MidPrio,
             GridManagerScript.Instance.GetBattleTile(target.UMS.CurrentTilePos).transform);
             if (bulletSoundSource != null)
             {

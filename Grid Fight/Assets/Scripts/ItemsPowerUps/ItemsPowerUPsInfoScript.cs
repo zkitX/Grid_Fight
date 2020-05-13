@@ -61,7 +61,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
                     Debug.LogError("Error with potion type in event collection... Collected powerup effect is: " + ItemPowerUpInfo.StatsToAffect.ToString());
                     break;
             }
-            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, powerUpAudio, AudioBus.MediumPriority, other.gameObject.transform);
+            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, powerUpAudio, AudioBus.MidPrio, other.gameObject.transform);
             EventManager.Instance?.AddPotionCollected(itemType);
             gameObject.SetActive(false);
         }

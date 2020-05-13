@@ -176,7 +176,7 @@ public class GridFightMenuDialog : MenuDialog
     public void SelectMenu()
     {
 
-        AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Menus_SelectButton, AudioBus.MediumPriority);
+        AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Menus_SelectButton, AudioBus.MidPrio);
         Boxes[SelectionIndex].BoxAnim.SetBool("isSelected", true);
     }
 
@@ -192,7 +192,7 @@ public class GridFightMenuDialog : MenuDialog
             foreach (FungusMenuOptionBoxScript item in Boxes)
             {
                 item.BoxAnim.SetBool("InOut", false);
-                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Menus_PressButton, AudioBus.MediumPriority);
+                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Menus_PressButton, AudioBus.MidPrio);
 
                 for (int a = 0; a < Boxes.Count; a++)
                 {
@@ -210,7 +210,7 @@ public class GridFightMenuDialog : MenuDialog
 
     private IEnumerator ClearMenu(float delay)
     {
-        AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_Exiting, AudioBus.MediumPriority);
+        AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_Exiting, AudioBus.MidPrio);
         yield return new WaitForSecondsRealtime(delay);
         SelectionIndex = 0;
         Clear();

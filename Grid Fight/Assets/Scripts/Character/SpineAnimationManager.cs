@@ -59,7 +59,7 @@ public class SpineAnimationManager : MonoBehaviour
         {
             if (attackTypeAudioInfo != null)
             {
-                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackTypeAudioInfo.Cast, AudioBus.LowPriority, CharOwner.transform);
+                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackTypeAudioInfo.Cast, AudioBus.LowPrio, CharOwner.transform);
             }
             CharOwner.currentAttackPhase = CurrentAnim.Contains("Atk1") ? AttackPhasesType.Cast_Rapid : AttackPhasesType.Cast_Powerful;
             CharOwner.FireCastParticles();

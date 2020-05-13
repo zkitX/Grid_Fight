@@ -7,7 +7,22 @@ using MyBox;
 public class ManagedAudioSource : MonoBehaviour
 {
     public AudioSourceType type = AudioSourceType.Any;
-    public AudioBus bus = AudioBus.LowPriority;
+    protected AudioBus bus = AudioBus.LowPrio;
+    public AudioBus Bus
+    {
+        get
+        {
+            return bus;
+        }
+        set
+        {
+            bus = value;
+            if(AudioManagerMk2.Instance.mixer.FindMatchingGroups(bus.ToString()).Length != 0)
+            {
+                source.outputAudioMixerGroup = AudioManagerMk2.Instance.mixer.FindMatchingGroups(bus.ToString())[0];
+            }
+        }
+    }
     protected AudioSource source = null;
     protected AudioClipInfoClass audioClipInfo;
 
@@ -59,7 +74,7 @@ public class ManagedAudioSource : MonoBehaviour
 
     public void UpdateVolume()
     {
-        source.volume = audioClipInfo.baseVolume * AudioManagerMk2.Instance.GetDampener(type, bus);
+        source.volume = audioClipInfo.baseVolume * AudioManagerMk2.Instance.GetDampener(type, Bus);
         //SET THE VOLUME BASED ON THE BASE VOLUME OF THE CLIP INFO AND WHETHER THERE ARE DAMPENERS APPLIED BY THE MANAGER
     }
 
@@ -89,7 +104,7 @@ public class ManagedAudioSource : MonoBehaviour
 
     public void ResetSource()
     {
-        bus = AudioBus.LowPriority;
+        Bus = AudioBus.LowPrio;
         source.loop = false;
         SetParent(AudioManagerMk2.Instance.transform);
         SetAudioClipInfo(new AudioClipInfoClass());

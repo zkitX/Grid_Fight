@@ -193,7 +193,7 @@ public class CharacterType_Script : BaseCharacter
     public override void SetUpEnteringOnBattle()
     {
         SetAnimation(CharacterAnimationStateType.Arriving);
-        AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.ArrivalSpawn, AudioBus.MediumPriority);
+        AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.ArrivalSpawn, AudioBus.MidPrio);
         //AudioManager.Instance.PlayGeneric("Arriving_Spawn_20200108_V5");
         EventManager.Instance?.AddCharacterArrival((BaseCharacter)this);
     }
@@ -203,7 +203,7 @@ public class CharacterType_Script : BaseCharacter
         SetAnimation(CharacterAnimationStateType.Reverse_Arriving);
         isDefending = false;
 
-        AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.ExitBattleJump, AudioBus.MediumPriority);
+        AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.ExitBattleJump, AudioBus.MidPrio);
         EventManager.Instance?.AddCharacterSwitched((BaseCharacter)this);
     }
 
@@ -373,7 +373,7 @@ public class CharacterType_Script : BaseCharacter
 
         if (chargingAudio != null)
         {
-            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingRelease, AudioBus.LowPriority, transform);
+            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingRelease, AudioBus.LowPrio, transform);
             chargingAudio.ResetSource();
             chargingAudio = null;
         }
@@ -397,7 +397,7 @@ public class CharacterType_Script : BaseCharacter
     {
         if (chargingAudio == null)
         {
-            chargingAudio = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoop, AudioBus.MediumPriority, transform, true);
+            chargingAudio = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoop, AudioBus.MidPrio, transform, true);
         }
 
         SetAnimation(atk + "_Charging", true);

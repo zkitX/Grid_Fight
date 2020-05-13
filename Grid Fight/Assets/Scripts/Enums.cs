@@ -839,9 +839,9 @@ public enum AudioSourceType
 public enum AudioBus
 {
     Music = 1000,
-    LowPriority = 0,
-    MediumPriority = 50,
-    HighPriority = 100,
+    LowPrio = 0,
+    MidPrio = 50,
+    HighPrio = 100,
 }
 
 public enum MovementCurveType

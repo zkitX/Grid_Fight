@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using System.Linq;
 
 public class AudioManagerMk2 : MonoBehaviour
@@ -8,6 +9,8 @@ public class AudioManagerMk2 : MonoBehaviour
     public static AudioManagerMk2 Instance = null;
     [SerializeField] protected List<ManagedAudioSource> sources = new List<ManagedAudioSource>();
     public GameObject sourceObjectPrefab;
+
+    public AudioMixer mixer;
 
     [Header("Source Type Configuration")]
     public int musicSourcesNum = 3;
@@ -28,10 +31,10 @@ public class AudioManagerMk2 : MonoBehaviour
     void GenerateSources()
     {
         for (int i = 0; i < musicSourcesNum; i++) CreateSource(AudioSourceType.Music, AudioBus.Music);
-        for (int i = 0; i < ambienceSourcesNum; i++) CreateSource(AudioSourceType.Ambience, AudioBus.LowPriority);
-        for (int i = 0; i < uiSourcesNum; i++) CreateSource(AudioSourceType.Ui, AudioBus.LowPriority);
+        for (int i = 0; i < ambienceSourcesNum; i++) CreateSource(AudioSourceType.Ambience, AudioBus.LowPrio);
+        for (int i = 0; i < uiSourcesNum; i++) CreateSource(AudioSourceType.Ui, AudioBus.LowPrio);
         for (int i = 0; i < sourcesPerChar * (WaveManagerScript.Instance.GetMaxEnemiesOnScreenAcrossAllWaves() +
-            BattleInfoManagerScript.Instance.PlayerBattleInfo.Count); i++) CreateSource(AudioSourceType.Game, AudioBus.LowPriority);
+            BattleInfoManagerScript.Instance.PlayerBattleInfo.Count); i++) CreateSource(AudioSourceType.Game, AudioBus.LowPrio);
     }
 
     void CreateSource(AudioSourceType type, AudioBus bus)
@@ -39,7 +42,7 @@ public class AudioManagerMk2 : MonoBehaviour
         ManagedAudioSource tempSource;
         tempSource = Instantiate(sourceObjectPrefab, transform).GetComponent<ManagedAudioSource>();
         tempSource.type = type;
-        tempSource.bus = bus;
+        tempSource.Bus = bus;
         tempSource.SetParent(transform);
         tempSource.gameObject.SetActive(false);
         sources.Add(tempSource);
@@ -48,10 +51,10 @@ public class AudioManagerMk2 : MonoBehaviour
     ManagedAudioSource GetFreeSource(AudioBus priority, AudioSourceType sourceType)
     {
         ManagedAudioSource source = sources.Where(r => !r.gameObject.activeInHierarchy && r.type == sourceType).FirstOrDefault();
-        if (source == null) source = sources.Where(r => r.bus < priority && r.type == sourceType).FirstOrDefault();
+        if (source == null) source = sources.Where(r => r.Bus < priority && r.type == sourceType).FirstOrDefault();
         if (source == null)
         {
-            source = sources.Where(r => !r.gameObject.activeInHierarchy && r.bus != AudioBus.Music).FirstOrDefault();
+            source = sources.Where(r => !r.gameObject.activeInHierarchy && r.Bus != AudioBus.Music).FirstOrDefault();
             source.type = sourceType;
         }
         if (source == null) Debug.LogError("Insufficient Sources");
@@ -67,7 +70,7 @@ public class AudioManagerMk2 : MonoBehaviour
         source.gameObject.SetActive(true);
         if (sourceOrigin != null) source.SetParent(sourceOrigin);
         source.SetAudioClipInfo(clipInfo);
-        source.bus = priority;
+        source.Bus = priority;
         source.PlaySound(loop);
         AddClipPlayedLastFrame(clipInfo);
 
@@ -77,7 +80,7 @@ public class AudioManagerMk2 : MonoBehaviour
 
     public float GetDampener(AudioSourceType type, AudioBus priorityToCompare)
     {
-        return sources.Where(r => r.bus == AudioBus.HighPriority && r.type == type && priorityToCompare != AudioBus.HighPriority).FirstOrDefault() == null ? 1f : 0.5f;
+        return sources.Where(r => r.Bus == AudioBus.HighPrio && r.type == type && priorityToCompare != AudioBus.HighPrio).FirstOrDefault() == null ? 1f : 0.5f;
     }
 
     void UpdateActiveAudioVolumes()

@@ -95,7 +95,7 @@ public class BattleTileTargetsScript : MonoBehaviour
             }
             if (attacker.GetAttackAudio() != null)
             {
-                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attacker.GetAttackAudio().Impact, AudioBus.MediumPriority, transform);
+                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attacker.GetAttackAudio().Impact, AudioBus.MidPrio, transform);
             }
         }
         yield return new WaitForSeconds(0.2f);
