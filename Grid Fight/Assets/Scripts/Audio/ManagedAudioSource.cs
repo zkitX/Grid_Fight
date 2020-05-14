@@ -25,6 +25,15 @@ public class ManagedAudioSource : MonoBehaviour
     }
     protected AudioSource source = null;
     protected AudioClipInfoClass audioClipInfo;
+    public bool isPlaying
+    {
+        get
+        {
+            return source.isPlaying;
+        }
+    }
+
+    public bool removeNamedOnComplete = false;
 
     public Transform parent = null;
     public AudioClip fallbackSound = null;

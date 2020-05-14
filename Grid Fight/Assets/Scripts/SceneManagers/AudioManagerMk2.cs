@@ -12,6 +12,8 @@ public class AudioManagerMk2 : MonoBehaviour
 
     public AudioMixer mixer;
 
+    public List<NamedManagedAudioSource> namedSources = new List<NamedManagedAudioSource>();
+
     [Header("Source Type Configuration")]
     public int musicSourcesNum = 3;
     public int ambienceSourcesNum = 2;
@@ -61,12 +63,30 @@ public class AudioManagerMk2 : MonoBehaviour
         return source;
     }
 
+    public ManagedAudioSource PlayNamedSource(string name, AudioSourceType sourceType, AudioClipInfoClass clipInfo, AudioBus priority, Transform sourceOrigin = null, bool loop = false)
+    {
+        ManagedAudioSource audioSource = PlaySound(sourceType, clipInfo, priority, sourceOrigin, loop);
+        if (name == "") return null;
+        namedSources.Add(new NamedManagedAudioSource(name, audioSource));
+        audioSource.removeNamedOnComplete = true;
+        return audioSource;
+    }
+
+    public void StopNamedSource(string name)
+    {
+        NamedManagedAudioSource audioSource = namedSources.Where(r => r.name == name).FirstOrDefault();
+        if (audioSource == null) return;
+        namedSources.Remove(audioSource);
+        audioSource.source.ResetSource();
+    }
+
     public ManagedAudioSource PlaySound(AudioSourceType sourceType, AudioClipInfoClass clipInfo, AudioBus priority, Transform sourceOrigin = null, bool loop = false)
     {
         if (ClipPlayedThisFrame(clipInfo.Clip)) return null;
 
         ManagedAudioSource source = GetFreeSource(priority, sourceType);
 
+        source.removeNamedOnComplete = false;
         source.gameObject.SetActive(true);
         if (sourceOrigin != null) source.SetParent(sourceOrigin);
         source.SetAudioClipInfo(clipInfo);
@@ -115,5 +135,17 @@ public class AudioManagerMk2 : MonoBehaviour
         if (cdType == AudioClipInfoClass.AudioCooldownType.SecondWait) yield return new WaitForSeconds(waitTime);
         else yield return null;
         audioPlayedLastFrame.Remove(clip);
+    }
+}
+
+public class NamedManagedAudioSource
+{
+    public string name = "";
+    public ManagedAudioSource source;
+
+    public NamedManagedAudioSource(string _name, ManagedAudioSource _source)
+    {
+        name = _name;
+        source = _source;
     }
 }
