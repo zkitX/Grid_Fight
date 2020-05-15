@@ -7,7 +7,6 @@ public class CameraManagerScript : MonoBehaviour
 
     public static CameraManagerScript Instance;
     public Animator Anim;
-    public Vector3 CurrentCameraOffset;
     private void Awake()
     {
         CurrentCameraOffset = transform.position;
@@ -38,12 +37,11 @@ public class CameraManagerScript : MonoBehaviour
             GetComponent<Camera>().orthographicSize = newGrid.OrthographicSize;
 
             transform.position = newGrid.CameraPosition;
-            CurrentCameraOffset = newGrid.CameraPosition;
             return;
         }
         if (moveCameraInternally)
         {
-            StartCoroutine(CameraFocusSequence(CurrentCameraOffset + newGrid.CameraPosition, duration, newGrid.OrthographicSize, newGrid));
+            StartCoroutine(CameraFocusSequence(newGrid.CameraPosition, duration, newGrid.OrthographicSize, newGrid));
         }
 
     }
@@ -51,22 +49,19 @@ public class CameraManagerScript : MonoBehaviour
     IEnumerator CameraFocusSequence(Vector3 translation, float duration, float endOrtho, CameraInfoClass newGrid)
     {
         bool hasStarted = false;
-        float startingOrtho = GetComponent<Camera>().orthographicSize;
+        Camera cam = GetComponent<Camera>();
+        float startingOrtho = cam.orthographicSize;
         Vector3 cameraStartingPosition = transform.position;
-
-        float durationLeft = duration;
         float progress = 0f;
-        while(durationLeft != 0 || !hasStarted)
+        while(progress < 1 || !hasStarted)
         {
             hasStarted = true;
-
-            durationLeft = Mathf.Clamp(durationLeft - Time.deltaTime, 0f, 999f);
-            progress = 1f - (durationLeft / (duration != 0f ? duration : 1f));
-            GetComponent<Camera>().orthographicSize = Mathf.Lerp(startingOrtho, endOrtho, progress);
-            transform.position = Vector3.Lerp(cameraStartingPosition, cameraStartingPosition + translation, progress);
+            progress += Time.fixedDeltaTime / duration;
+            cam.orthographicSize = Mathf.Lerp(startingOrtho, endOrtho, progress);
+            transform.position = Vector3.Lerp(cameraStartingPosition, translation, progress);
             yield return null;
         }
 
-        CurrentCameraOffset = newGrid.CameraPosition;
+        transform.position = newGrid.CameraPosition;
     }
 }
