@@ -1647,3 +1647,41 @@ public class BuffDebuffClass
         Duration = duration;
     }
 }
+
+
+
+[System.Serializable]
+public class RelationshipClass
+{
+    public string name;
+    [HideInInspector] public CharacterNameType CharOwnerId = CharacterNameType.None;
+    public CharacterNameType CharacterId = CharacterNameType.None;
+
+    [SerializeField] private int BasicValue;
+    public int _CurrentValue;
+
+
+    public int CurrentValue
+    {
+        get
+        {
+            return BasicValue + _CurrentValue;
+        }
+        set
+        {
+            _CurrentValue = value - BasicValue;
+        }
+    }
+
+    public RelationshipClass()
+    {
+
+    }
+
+    public RelationshipClass(CharacterNameType charOwnerId, CharacterNameType characterId, int basicValue)
+    {
+        CharOwnerId = charOwnerId;
+        CharacterId = characterId;
+        BasicValue = basicValue;
+    }
+}

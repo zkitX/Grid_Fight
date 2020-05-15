@@ -342,6 +342,24 @@ public class WaveManagerScript : MonoBehaviour
             }
         }
     }
+
+    public List<CharacterNameType> GetAllIdOfType(WaveNPCTypes NPCtype)
+    {
+        List<CharacterNameType> res = new List<CharacterNameType>();
+        foreach (WavePhaseClass wave in WavePhases)
+        {
+            foreach (WaveCharClass wavechar in wave.ListOfEnemy)
+            {
+                if(wavechar.NPCType == NPCtype)
+                {
+                    res.Add(wavechar.TypeOfCharacter.CharacterName);
+                }
+            }
+        }
+
+        return res.Distinct().ToList();
+    }
+
 }
 
 [System.Serializable]

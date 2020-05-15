@@ -36,13 +36,14 @@ public class CameraManagerScript : MonoBehaviour
         if (GridManagerScript.Instance.currentGridStructureObject == null)
         {
             GetComponent<Camera>().orthographicSize = newGrid.OrthographicSize;
+
             transform.position = newGrid.CameraPosition;
             CurrentCameraOffset = newGrid.CameraPosition;
             return;
         }
         if (moveCameraInternally)
         {
-            StartCoroutine(CameraFocusSequence(newGrid.CameraPosition - CurrentCameraOffset, duration, newGrid.OrthographicSize, newGrid));
+            StartCoroutine(CameraFocusSequence(CurrentCameraOffset + newGrid.CameraPosition, duration, newGrid.OrthographicSize, newGrid));
         }
 
     }
