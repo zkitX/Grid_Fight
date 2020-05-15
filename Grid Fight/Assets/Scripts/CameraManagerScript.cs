@@ -57,7 +57,7 @@ public class CameraManagerScript : MonoBehaviour
             hasStarted = true;
             progress += Time.fixedDeltaTime / duration;
             cam.orthographicSize = Mathf.Lerp(startingOrtho, endOrtho, progress);
-            transform.position = Vector3.Lerp(cameraStartingPosition, translation, progress);
+            //transform.position = Vector3.Lerp(cameraStartingPosition, translation, progress);
             yield return null;
         }
 

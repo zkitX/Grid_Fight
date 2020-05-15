@@ -70,9 +70,8 @@ public class EnvironmentManager : MonoBehaviour
         {
             StopCoroutine(GridLeapSequencer);
         }
-
         currentGridIndex = gridIndex != -1 ? gridIndex : currentGridIndex;
-        GridLeapSequencer = GridLeapSequence(duration, destinationGrid.transform.position, moveChars);
+        GridLeapSequencer = GridLeapSequence(duration, CameraStage.CameraInfo.Where(r => r.StageIndex == (gridIndex != -1 ? gridIndex : currentGridIndex)).First().CameraPosition, moveChars);
         yield return GridLeapSequencer;
     }
 
@@ -85,6 +84,7 @@ public class EnvironmentManager : MonoBehaviour
         //Ensure new grid is set and moved to correct position before everything
         jumpingchars.Clear();
         float jumpHeight = 2f;
+        translation.z = -8.5f;
         CharacterAnimationStateType jumpAnim = CharacterAnimationStateType.DashUp;
 
        // CharacterAnimationStateType jumpAnim = CharacterAnimationStateType.JumpTransition_OUT;
@@ -115,7 +115,7 @@ public class EnvironmentManager : MonoBehaviour
             {
                 BattleTileScript newGridTile = GridManagerScript.Instance.GetRandomFreeAdjacentTile(chars[i].UMS.CurrentTilePos, 5, false, chars[i].UMS.WalkingSide);
                 Debug.Log(newGridTile.Pos);
-                charGridPosOffsets[i] = GridManagerScript.GetTranslationBetweenTiles(GridManagerScript.Instance.BattleTiles.Where(r => r.Pos == chars[i].UMS.CurrentTilePos).First(), newGridTile);
+                charGridPosOffsets[i] = GridManagerScript.Instance.BattleTiles.Where(r => r.Pos == chars[i].UMS.CurrentTilePos).First().transform.position;
                 GridManagerScript.Instance.SetBattleTileState(newGridTile.Pos, BattleTileStateType.Occupied);
                 chars[i].CurrentBattleTiles = new List<BattleTileScript>() { newGridTile };
                 chars[i].UMS.CurrentTilePos = newGridTile.Pos;
@@ -141,8 +141,6 @@ public class EnvironmentManager : MonoBehaviour
 
         float timeRemaining = duration;
         float progress = 0;
-        float xPos = 0f;
-        float yPos = 0f;
         bool hasStarted = false;
 
         while (timeRemaining != 0 || !hasStarted)
@@ -157,10 +155,8 @@ public class EnvironmentManager : MonoBehaviour
 
             for (int i = 0; i < (jumpingchars != null ? jumpingchars.Count : 0); i++)
             {
-                xPos = Mathf.Lerp(charStartPositions[i].x, translation.x, UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
-                yPos = Mathf.Lerp(charStartPositions[i].y, translation.y, UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
-                yPos += jumpHeight * UniversalGameBalancer.Instance.characterJumpCurve.Evaluate(progress);
-                jumpingchars[i].transform.position = new Vector3(xPos, yPos, jumpingchars[i].transform.position.z);
+                jumpingchars[i].transform.position = Vector3.Lerp(charStartPositions[i], charGridPosOffsets[i], UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
+                jumpingchars[i].transform.position += new Vector3(0, jumpHeight * UniversalGameBalancer.Instance.characterJumpCurve.Evaluate(progress), 0);
                 jumpingchars[i].SpineAnim.SetAnimationSpeed(UniversalGameBalancer.Instance.jumpAnimationCurve.Evaluate(progress));
             }
             yield return null;
