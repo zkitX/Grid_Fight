@@ -25,7 +25,7 @@ namespace Fungus
 
         [FormerlySerializedAs("targetSequence")]
         [Tooltip("Block to execute when this option is selected")]
-        [SerializeField] protected Block targetBlock;
+        [HideInInspector]public Block targetBlock;
 
         [Tooltip("Hide this option if the target block has been executed previously")]
         [SerializeField] protected bool hideIfVisited;

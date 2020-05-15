@@ -19,7 +19,7 @@ public class CallChangeCharActionList : Command
     public bool Skill2Action;
     public bool Skill3Action;
     public bool DefenceAction;
-
+    public bool SwitchCharacterAction;
 
 
 
@@ -68,6 +68,10 @@ public class CallChangeCharActionList : Command
         if (DefenceAction)
         {
             res.Add(CharacterActionType.Defence);
+        }
+        if (SwitchCharacterAction)
+        {
+            res.Add(CharacterActionType.SwitchCharacter);
         }
 
         selectedChar.CharActionlist = res;

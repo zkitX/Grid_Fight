@@ -170,6 +170,12 @@ public class CharacterInfoScript : MonoBehaviour
 
     public Vector2 MovementTimer = new Vector2(5, 8);
     [HideInInspector] public Vector2 B_MovementTimer = new Vector2(5, 8);
+
+
+    [Header("Relationship")]
+    public List<RelationshipClass> RelationshipList = new List<RelationshipClass>();
+
+
     public float HealthPerc
     {
         get

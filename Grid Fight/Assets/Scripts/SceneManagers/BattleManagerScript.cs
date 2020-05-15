@@ -99,6 +99,8 @@ public class BattleManagerScript : MonoBehaviour
     [HideInInspector] public bool usingFungus = false;
 
 
+    [Header("CharsRelationship")]
+    public List<RelationshipClass> TeamRelationship = new List<RelationshipClass>();
 
     public void SetupBattleState()
     {
@@ -311,6 +313,15 @@ public class BattleManagerScript : MonoBehaviour
             NewIManager.Instance.SetUICharacterToButton((CharacterType_Script)playableCharOnScene, BattleInfoManagerScript.Instance.PlayerBattleInfo.Where(r => r.CharacterName == playableCharOnScene.CharInfo.CharacterID).FirstOrDefault().CharacterSelection);
         }
         SetUICharacterSelectionIcons();
+
+        foreach (CharacterNameType item in WaveManagerScript.Instance.GetAllIdOfType(WaveNPCTypes.Recruitable))
+        {
+            foreach (BaseCharacter mainChars in AllCharactersOnField)
+            {
+                TeamRelationship.Add(new RelationshipClass(mainChars.CharInfo.CharacterID, item, mainChars.CharInfo.RelationshipList.Where(r => r.CharacterId == item).FirstOrDefault().CurrentValue));
+            }
+        }
+
         yield return null;
     }
     //Creation of the character with the basic info
@@ -802,6 +813,11 @@ public class BattleManagerScript : MonoBehaviour
 
     public void Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType characterSelection, ControllerType playerController)
     {
+        if(!CurrentSelectedCharacters[playerController].Character.CharActionlist.Contains(CharacterActionType.SwitchCharacter))
+        {
+            return;
+        }
+
         SideType side = GetSideFromPlayer(new List<ControllerType> { playerController });
         BaseCharacter cb = new BaseCharacter();
         if (InputControllerT == InputControllerType.SelectionOnABXY)
@@ -1092,6 +1108,31 @@ public class BattleManagerScript : MonoBehaviour
         while (CurrentBattleState == BattleState.Pause)
         {
             yield return null;
+        }
+    }
+
+
+    public void UpdateCharactersRelationship(bool allTeam, List<CharacterNameType> playerChars, List<CharacterNameType> recruitableChars, int value)
+    {
+        if(allTeam)
+        {
+            foreach (CharacterNameType recruitableChar in recruitableChars)
+            {
+                foreach (RelationshipClass item in TeamRelationship.Where(r => r.CharacterId == recruitableChar).ToList())
+                {
+                    item.CurrentValue += value;
+                }
+            }
+        }
+        else
+        {
+            foreach (CharacterNameType recruitableChar in recruitableChars)
+            {
+                foreach (RelationshipClass item in TeamRelationship.Where(r => r.CharacterId == recruitableChar && playerChars.Contains(r.CharOwnerId)).ToList())
+                {
+                    item.CurrentValue += value;
+                }
+            }
         }
     }
 

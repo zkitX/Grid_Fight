@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class GridFightMenuDialog : MenuDialog
@@ -57,7 +58,34 @@ public class GridFightMenuDialog : MenuDialog
 
     }
 
-    protected override bool AddOption(string text, bool interactable, bool hideOption, UnityEngine.Events.UnityAction action)
+    public bool AddOption(string text, bool interactable, bool hideOption, Block targetBlock, MenuRelationshipInfoClass relationshipInfo)
+    {
+        var block = targetBlock;
+        UnityEngine.Events.UnityAction action = delegate
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            StopAllCoroutines();
+            // Stop timeout
+            Clear();
+            HideSayDialog();
+            if (block != null)
+            {
+                var flowchart = block.GetFlowchart();
+#if UNITY_EDITOR
+                // Select the new target block in the Flowchart window
+                flowchart.SelectedBlock = block;
+#endif
+                gameObject.SetActive(false);
+                // Use a coroutine to call the block on the next frame
+                // Have to use the Flowchart gameobject as the MenuDialog is now inactive
+                flowchart.StartCoroutine(CallBlock(block));
+            }
+        };
+
+        return AddOption(text, interactable, hideOption, action, relationshipInfo);
+    }
+
+    protected bool AddOption(string text, bool interactable, bool hideOption, UnityEngine.Events.UnityAction action, MenuRelationshipInfoClass relationshipInfo)
     {
         if (nextOptionIndex >= Boxes.Count)
             return false;
@@ -91,6 +119,7 @@ public class GridFightMenuDialog : MenuDialog
         }
         if (!string.IsNullOrEmpty(text))
         {
+            box.RelationshipInfo = relationshipInfo;
             box.NextBlock = (Block)action.Target.GetType().GetField("block").GetValue(action.Target);
         }
         
@@ -186,6 +215,16 @@ public class GridFightMenuDialog : MenuDialog
         if(BattleManagerScript.Instance.FungusState == FungusDialogType.Menu && isMenuReady)
         {
             Boxes[SelectionIndex].NextBlock.StartExecution();
+
+            if (Boxes[SelectionIndex].RelationshipInfo.IsRelationshipUpdateForTheWholeTeam)
+            {
+                BattleManagerScript.Instance.UpdateCharactersRelationship(true, new List<CharacterNameType>(), Boxes[SelectionIndex].RelationshipInfo.CharTargetRecruitableIDs, Boxes[SelectionIndex].RelationshipInfo.Value);
+            }
+            else if (Boxes[SelectionIndex].RelationshipInfo.CharTarget.Count > 0)
+            {
+                BattleManagerScript.Instance.UpdateCharactersRelationship(false, Boxes[SelectionIndex].RelationshipInfo.CharTarget, Boxes[SelectionIndex].RelationshipInfo.CharTargetRecruitableIDs, Boxes[SelectionIndex].RelationshipInfo.Value);
+            }
+
             isMenuReady = false;
             BattleManagerScript.Instance.FungusState = FungusDialogType.Dialog;
             

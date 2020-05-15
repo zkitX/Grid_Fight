@@ -23,7 +23,7 @@ namespace Fungus.EditorUtils
 
             textProp = serializedObject.FindProperty("text");
             descriptionProp = serializedObject.FindProperty("description");
-            targetBlockProp = serializedObject.FindProperty("targetBlock");
+            targetBlockProp = serializedObject.FindProperty("_targetBlock");
             hideIfVisitedProp = serializedObject.FindProperty("hideIfVisited");
             interactableProp = serializedObject.FindProperty("interactable");
             setMenuDialogProp = serializedObject.FindProperty("setMenuDialog");
