@@ -22,7 +22,7 @@ public class Pathfinding
         List<PathNode> nodes = new List<PathNode> { new PathNode(start, 0, GetHeuristic(start, destination), null) };
         PathNode curNode = nodes[0];
 
-        while(nodes.Where(r => !r.closed).FirstOrDefault() != null && curNode.pos != destination)
+        while (nodes.Where(r => !r.closed).FirstOrDefault() != null && curNode.pos != destination && navGrid[destination.x, destination.y] != false)
         {
             //Get the next least weighted node that isnt closed off
             nodes.OrderBy(r => r.weight);
