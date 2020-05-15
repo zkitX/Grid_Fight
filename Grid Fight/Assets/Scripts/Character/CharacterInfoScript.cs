@@ -188,7 +188,7 @@ public class CharacterInfoScript : MonoBehaviour
     {
         get
         {
-            return (StaminaStats.Stamina * 100) / StaminaStats.Base;
+            return (Stamina * 100) / StaminaStats.Base;
         }
     }
 
@@ -235,7 +235,7 @@ public class CharacterInfoScript : MonoBehaviour
             }
             if (HealthStats.Health > HealthStats.Base)
             {
-                Health = HealthStats.Base;
+                HealthStats.Health = HealthStats.Base;
             }
         }
     }
@@ -256,7 +256,7 @@ public class CharacterInfoScript : MonoBehaviour
             StaminaStats.Stamina = value;
             if (StaminaStats.Stamina > StaminaStats.Base)
             {
-                Stamina = StaminaStats.Base;
+                StaminaStats.Stamina = StaminaStats.Base;
             }
         }
     }
@@ -322,11 +322,11 @@ public class CharacterInfoScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Health > 0 && BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle)
+        if (Health > 0)
         {
-            Stamina = StaminaStats.Stamina + StaminaStats.Regeneration / 50;
-            Health = HealthStats.Health + HealthStats.Regeneration / 50;
-            Shield = ShieldStats.Shield + ShieldStats.Regeneration / 50;
+            Stamina = BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle ? StaminaStats.Stamina + StaminaStats.Regeneration / 50 : StaminaStats.Stamina;
+            Health = BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle ? HealthStats.Health + HealthStats.Regeneration / 50 : HealthStats.Health;
+            Shield = BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle ? ShieldStats.Shield + ShieldStats.Regeneration / 50 : ShieldStats.Shield;
         }
     }
 
