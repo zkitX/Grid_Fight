@@ -66,15 +66,13 @@ public class EnvironmentManager : MonoBehaviour
 
         if (duration == 1234.56789f) duration = destinationGrid.hasBaseTransitionTime ? destinationGrid.baseTransitionDuration : defaultTransitionTime;
 
-        Vector3 translation = -(fightGrids[currentGridIndex].transform.position - destinationGrid.transform.position);
-
         if (GridLeapSequencer != null)
         {
             StopCoroutine(GridLeapSequencer);
         }
 
         currentGridIndex = gridIndex != -1 ? gridIndex : currentGridIndex;
-        GridLeapSequencer = GridLeapSequence(duration, translation, moveChars);
+        GridLeapSequencer = GridLeapSequence(duration, destinationGrid.transform.position, moveChars);
         yield return GridLeapSequencer;
     }
 
@@ -94,7 +92,6 @@ public class EnvironmentManager : MonoBehaviour
         Vector3 cameraStartPos = MainCamera.transform.position;
         CameraInfoClass cic = CameraStage.CameraInfo.Where(r => r.StageIndex == currentGridIndex && !r.used).First();
 
-        Vector3 cameraOffsetChange = cic.CameraPosition - CameraManagerScript.Instance.CurrentCameraOffset;
         float cameraStartOrtho = MainCamera.orthographicSize;
         float cameraEndOrtho = cic.OrthographicSize;
         cic.used = true;
@@ -154,22 +151,20 @@ public class EnvironmentManager : MonoBehaviour
             timeRemaining = Mathf.Clamp(timeRemaining - Time.deltaTime, 0f, 9999f);
             progress = 1f - (timeRemaining / (duration != 0f ? duration : 1f));
 
-            MainCamera.transform.position = Vector3.Lerp(cameraStartPos, cameraStartPos + translation + cameraOffsetChange, UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
+            MainCamera.transform.position = Vector3.Lerp(cameraStartPos, translation, UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
             MainCamera.orthographicSize = Mathf.Lerp(cameraStartOrtho, cameraEndOrtho, progress);
 
 
             for (int i = 0; i < (jumpingchars != null ? jumpingchars.Count : 0); i++)
             {
-                xPos = Mathf.Lerp(charStartPositions[i].x, charStartPositions[i].x + translation.x + charGridPosOffsets[i].x, UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
-                yPos = Mathf.Lerp(charStartPositions[i].y, charStartPositions[i].y + translation.y + charGridPosOffsets[i].y, UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
+                xPos = Mathf.Lerp(charStartPositions[i].x, translation.x, UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
+                yPos = Mathf.Lerp(charStartPositions[i].y, translation.y, UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
                 yPos += jumpHeight * UniversalGameBalancer.Instance.characterJumpCurve.Evaluate(progress);
                 jumpingchars[i].transform.position = new Vector3(xPos, yPos, jumpingchars[i].transform.position.z);
                 jumpingchars[i].SpineAnim.SetAnimationSpeed(UniversalGameBalancer.Instance.jumpAnimationCurve.Evaluate(progress));
             }
             yield return null;
         }
-        CameraManagerScript.Instance.CurrentCameraOffset = cic.CameraPosition;
-
 
      /*   for (int i = 0; i < (jumpingchars != null ? jumpingchars.Count : 0); i++)
         {

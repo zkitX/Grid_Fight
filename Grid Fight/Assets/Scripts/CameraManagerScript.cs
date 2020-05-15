@@ -9,7 +9,6 @@ public class CameraManagerScript : MonoBehaviour
     public Animator Anim;
     private void Awake()
     {
-        CurrentCameraOffset = transform.position;
         Instance = this;
     }
 
