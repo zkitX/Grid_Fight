@@ -115,7 +115,7 @@ public class EnvironmentManager : MonoBehaviour
             {
                 BattleTileScript newGridTile = GridManagerScript.Instance.GetRandomFreeAdjacentTile(chars[i].UMS.CurrentTilePos, 5, false, chars[i].UMS.WalkingSide);
                 Debug.Log(newGridTile.Pos);
-                charGridPosOffsets[i] = GridManagerScript.Instance.BattleTiles.Where(r => r.Pos == chars[i].UMS.CurrentTilePos).First().transform.position;
+                charGridPosOffsets[i] = GridManagerScript.Instance.BattleTiles.Where(r => r.Pos == newGridTile.Pos).First().transform.position;
                 GridManagerScript.Instance.SetBattleTileState(newGridTile.Pos, BattleTileStateType.Occupied);
                 chars[i].CurrentBattleTiles = new List<BattleTileScript>() { newGridTile };
                 chars[i].UMS.CurrentTilePos = newGridTile.Pos;
@@ -124,7 +124,7 @@ public class EnvironmentManager : MonoBehaviour
             else
             {
                 GridManagerScript.Instance.SetBattleTileState(bts.Pos, BattleTileStateType.Occupied);
-                charGridPosOffsets[i] = Vector3.zero;
+                charGridPosOffsets[i] = bts.transform.position;
             }
             chars[i].SetAttackReady(false);
 
