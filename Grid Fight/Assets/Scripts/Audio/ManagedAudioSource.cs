@@ -202,4 +202,12 @@ public class AudioClipInfoClass
         cooldownType = cdType;
         cooldownPeriod = cdPeriod;
     }
+
+    public AudioClipInfoClass(AudioClip[] _clips, float _volume = 1f, AudioCooldownType cdType = AudioCooldownType.FrameWait, int cdPeriod = 1)
+    {
+        clips = _clips;
+        baseVolume = _volume;
+        cooldownType = cdType;
+        cooldownPeriod = cdPeriod;
+    }
 }

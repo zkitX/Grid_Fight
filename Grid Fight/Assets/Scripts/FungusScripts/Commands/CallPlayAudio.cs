@@ -23,7 +23,7 @@ public class CallPlayAudio : Command
 
     protected void TheMethod()
     {
-        audioSource = AudioManagerMk2.Instance.PlayNamedSource(audioID, type, new AudioClipInfoClass(clip, volume), bus, loop: loopSound);
+        audioSource = AudioManagerMk2.Instance.PlayNamedSource(audioID, type, new AudioClipInfoClass(new AudioClip[] { clip }, volume), bus, loop: loopSound);
         StartCoroutine(WaitForSoundToEnd());
     }
 
