@@ -314,13 +314,13 @@ public class BattleManagerScript : MonoBehaviour
         }
         SetUICharacterSelectionIcons();
 
-        foreach (CharacterNameType item in WaveManagerScript.Instance.GetAllIdOfType(WaveNPCTypes.Recruitable))
+     /*   foreach (CharacterNameType item in WaveManagerScript.Instance.GetAllIdOfType(WaveNPCTypes.Recruitable))
         {
             foreach (BaseCharacter mainChars in AllCharactersOnField)
             {
                 TeamRelationship.Add(new RelationshipClass(mainChars.CharInfo.CharacterID, item, mainChars.CharInfo.RelationshipList.Where(r => r.CharacterId == item).FirstOrDefault().CurrentValue));
             }
-        }
+        }*/
 
         yield return null;
     }
