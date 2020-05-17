@@ -20,7 +20,7 @@ public class CallSwapCharacter : Command
     public ControllerType playerController;
     public bool isRandomChar = false;
     [ConditionalField("isRandomChar", true)] public CharacterNameType characterID;
-
+    //Call the swap of the selected player character with the char we set or with a random one
     protected virtual void CallTheMethod()
     {
         if(isRandomChar)
