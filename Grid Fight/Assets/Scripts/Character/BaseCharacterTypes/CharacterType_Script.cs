@@ -334,6 +334,10 @@ public class CharacterType_Script : BaseCharacter
             {
                 SetAnimation(CharacterAnimationStateType.Idle, true, 0.1f);
             }
+            if (chargingAudio != null)
+            {
+                chargingAudio.ResetSource();
+            }
             ps.transform.parent = null;
             ps.SetActive(false);
         }
