@@ -158,7 +158,11 @@ public class CharacterType_Script : BaseCharacter
             //BattleManagerScript.Instance.UpdateCurrentSelectedCharacters(this, null, UMS.Side);
             NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo, UMS.Side);
         }
-
+        if(chargingAudio != null)
+        {
+            chargingAudio.ResetSource();
+            chargingAudio = null;
+        }
         StartCoroutine(ReviveSequencer());
     }
 
@@ -266,7 +270,11 @@ public class CharacterType_Script : BaseCharacter
             chargingAttackTimer = 0;
             currentAttackPhase = AttackPhasesType.Start;
             SetAnimation(nxtAtk.PrefixAnim + "_IdleToAtk", false, 0);
-
+            if(chargingAudio != null)
+            {
+                chargingAudio.ResetSource();
+            }
+            chargingAudio = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoop, AudioBus.MidPrio, transform, true);
             while (isSpecialLoading && !VFXTestMode)
             {
                 yield return BattleManagerScript.Instance.PauseUntil();
@@ -373,8 +381,6 @@ public class CharacterType_Script : BaseCharacter
         if (chargingAudio != null)
         {
             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingRelease, AudioBus.LowPrio, transform);
-            chargingAudio.ResetSource();
-            chargingAudio = null;
         }
 
         SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
@@ -394,11 +400,6 @@ public class CharacterType_Script : BaseCharacter
 
     public void ChargingLoop(string atk)
     {
-        if (chargingAudio == null)
-        {
-            chargingAudio = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoop, AudioBus.MidPrio, transform, true);
-        }
-
         SetAnimation(atk + "_Charging", true);
     }
 
