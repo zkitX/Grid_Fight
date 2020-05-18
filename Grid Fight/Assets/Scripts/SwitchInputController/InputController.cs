@@ -234,10 +234,9 @@ public class InputController : MonoBehaviour
 
         PreviousVals = Joystic;
 
-        if (XValuesDescendingAndOverThreshhold) Joystic.x = 0f;
-        if (YValuesDescendingAndOverThreshhold) Joystic.y = 0f;
+        //if (XValuesDescendingAndOverThreshhold) Joystic.x = 0f;
+        //if (YValuesDescendingAndOverThreshhold) Joystic.y = 0f;
 
-        Debug.Log(previousVals[0].ToString() + " " + previousVals[1].ToString() + " " + previousVals[2].ToString() + "    " + XValuesDescendingAndOverThreshhold.ToString() + "     " + YValuesDescendingAndOverThreshhold.ToString());
 
         if (LeftJoystickUsedEvent != null && (Joystic.x > 0.2f || Joystic.x < -0.2f || Joystic.y > 0.2f || Joystic.y < -0.2f))
         {
