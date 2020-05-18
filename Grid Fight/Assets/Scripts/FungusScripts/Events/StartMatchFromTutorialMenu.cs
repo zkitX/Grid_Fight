@@ -24,6 +24,7 @@ namespace Fungus
         {
             if(currentBattleState != BattleState.Tutorial)
             {
+                BattleManagerScript.Instance.CurrentBattleStateChangedEvent -= Instance_CurrentBattleStateChangedEvent;
                 ExecuteBlock();
             }
         }
