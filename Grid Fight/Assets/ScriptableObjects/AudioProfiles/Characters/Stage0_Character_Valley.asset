@@ -17,6 +17,8 @@ MonoBehaviour:
     clips: []
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   RapidAttack:
     Cast:
@@ -31,18 +33,30 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 0de641627650741469b7542d2adf9d7a, type: 3}
       randomiseOrder: 1
       moreThanOneClip: 1
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 0.5
     Loop:
       clip: {fileID: 0}
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Impact:
       clip: {fileID: 8300000, guid: 9b504f26ee7ce6a4c9408914e386f0ea, type: 3}
-      clips: []
+      clips:
+      - {fileID: 8300000, guid: afd501dead15e214aa58339e81035502, type: 3}
+      - {fileID: 8300000, guid: 789764960bd251e4a9de79cd4f171538, type: 3}
+      - {fileID: 8300000, guid: 2f563e40ccf43494192f80a1f2dbe660, type: 3}
+      - {fileID: 8300000, guid: ab014b866dc179a4fa0db5418f618fe9, type: 3}
+      - {fileID: 8300000, guid: 0c152e5f7e0323e4d81fd505f0cbd3a4, type: 3}
+      - {fileID: 8300000, guid: dd48c361ec547c44f8d2cca8a6a3a684, type: 3}
       randomiseOrder: 0
-      moreThanOneClip: 0
+      moreThanOneClip: 1
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
   PowerfulAttack:
     Cast:
@@ -54,37 +68,52 @@ MonoBehaviour:
       - {fileID: 8300000, guid: a02d4ea6da0057d4faf81f34fa2acd9b, type: 3}
       randomiseOrder: 0
       moreThanOneClip: 1
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Loop:
       clip: {fileID: 0}
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Impact:
       clip: {fileID: 8300000, guid: 9b504f26ee7ce6a4c9408914e386f0ea, type: 3}
-      clips: []
+      clips:
+      - {fileID: 8300000, guid: 143b80259c742f44d96f1eb0329957dc, type: 3}
+      - {fileID: 8300000, guid: fd27e7a71c7304a48995fc6041263743, type: 3}
+      - {fileID: 8300000, guid: 204f16c9b88864549ad642b0f9f6756b, type: 3}
       randomiseOrder: 0
-      moreThanOneClip: 0
-      baseVolume: 1
+      moreThanOneClip: 1
+      cooldownType: 1
+      cooldownPeriod: 1
+      baseVolume: 0.5
   Skill1:
     Cast:
       clip: {fileID: 0}
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Loop:
       clip: {fileID: 0}
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Impact:
       clip: {fileID: 0}
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
   Skill2:
     Cast:
@@ -92,18 +121,24 @@ MonoBehaviour:
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Loop:
       clip: {fileID: 0}
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Impact:
       clip: {fileID: 0}
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
   Skill3:
     Cast:
@@ -111,28 +146,38 @@ MonoBehaviour:
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Loop:
       clip: {fileID: 0}
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Impact:
       clip: {fileID: 0}
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
   ArrivingCry:
     clip: {fileID: 0}
     clips: []
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   Death:
     clip: {fileID: 0}
     clips: []
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1

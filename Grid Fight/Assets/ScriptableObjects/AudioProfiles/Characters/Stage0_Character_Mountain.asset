@@ -17,6 +17,8 @@ MonoBehaviour:
     clips: []
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   RapidAttack:
     Cast:
@@ -28,18 +30,28 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 20bc88b028bb06240900ad096e7f0b09, type: 3}
       randomiseOrder: 0
       moreThanOneClip: 1
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 0.5
     Loop:
       clip: {fileID: 0}
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Impact:
       clip: {fileID: 8300000, guid: 59b18d149698f4647badc2e23258bfe5, type: 3}
-      clips: []
+      clips:
+      - {fileID: 8300000, guid: 27d2762ef7b78424eabddc01fa5517e5, type: 3}
+      - {fileID: 8300000, guid: 85e77528e1fedc2478eaa797d7fc9c30, type: 3}
+      - {fileID: 8300000, guid: 6c77d6bd60460a54aa474378c371c9f3, type: 3}
+      - {fileID: 8300000, guid: 8ca7be8656e4adb4a8f238eff632ffa3, type: 3}
       randomiseOrder: 0
-      moreThanOneClip: 0
+      moreThanOneClip: 1
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
   PowerfulAttack:
     Cast:
@@ -51,37 +63,53 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 69f09bafe178f744ca63c4933cc65432, type: 3}
       randomiseOrder: 0
       moreThanOneClip: 1
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Loop:
       clip: {fileID: 0}
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Impact:
       clip: {fileID: 8300000, guid: 59b18d149698f4647badc2e23258bfe5, type: 3}
-      clips: []
+      clips:
+      - {fileID: 8300000, guid: b01c3c39e1adc554c8e16e5b8411fd97, type: 3}
+      - {fileID: 8300000, guid: 9f13a5777bc132f40810e5883d409366, type: 3}
+      - {fileID: 8300000, guid: 4490cb333b3dfb54a886dc9fa54eadaf, type: 3}
+      - {fileID: 8300000, guid: ca3402ebb980b414c854e10d011b5c89, type: 3}
       randomiseOrder: 0
-      moreThanOneClip: 0
-      baseVolume: 1
+      moreThanOneClip: 1
+      cooldownType: 0
+      cooldownPeriod: 1
+      baseVolume: 0.5
   Skill1:
     Cast:
       clip: {fileID: 0}
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Loop:
       clip: {fileID: 0}
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Impact:
       clip: {fileID: 0}
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
   Skill2:
     Cast:
@@ -89,18 +117,24 @@ MonoBehaviour:
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Loop:
       clip: {fileID: 0}
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Impact:
       clip: {fileID: 0}
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
   Skill3:
     Cast:
@@ -108,28 +142,38 @@ MonoBehaviour:
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Loop:
       clip: {fileID: 0}
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Impact:
       clip: {fileID: 0}
       clips: []
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
   ArrivingCry:
     clip: {fileID: 0}
     clips: []
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   Death:
     clip: {fileID: 0}
     clips: []
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
