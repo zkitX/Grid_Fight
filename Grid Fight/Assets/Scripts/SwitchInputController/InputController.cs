@@ -188,13 +188,58 @@ public class InputController : MonoBehaviour
         
     }
 
+    float threshold = 0.05f;
+    List<Vector2> previousVals = new List<Vector2> { Vector2.zero, Vector2.zero, Vector2.zero };
+    Vector2 PreviousVals
+    {
+        get
+        {
+            return previousVals[2];
+        }
+        set
+        {
+            previousVals.Insert(0, value);
+            previousVals.RemoveAt(3);
+        }
+    }
+    bool XValuesDescendingAndOverThreshhold
+    {
+        get
+        {
+            for (int i = 0; i < previousVals.Count - 1; i++)
+            {
+                if (Mathf.Abs(previousVals[i].x) > Mathf.Abs(previousVals[i + 1].x)) return false;
+            }
+            if (Mathf.Abs(previousVals[2].x - previousVals[0].x) < threshold) return false;
+            return true;
+        }
+    }
+    bool YValuesDescendingAndOverThreshhold
+    {
+        get
+        {
+            for (int i = 0; i < previousVals.Count - 1; i++)
+            {
+                if (Mathf.Abs(previousVals[i].y) > Mathf.Abs(previousVals[i + 1].y)) return false;
+            }
+            if (Mathf.Abs(previousVals[2].y - previousVals[0].y) < threshold) return false;
+            return true;
+        }
+    }
     void OnAxisUpdate(InputActionEventData data)
     {
         InputButtonType buttonInput = (InputButtonType)System.Enum.Parse(typeof(InputButtonType), data.actionName);
-        float x = (buttonInput == InputButtonType.Left_Move_Horizontal || buttonInput == InputButtonType.Right_Move_Horizontal) ? data.GetAxis() : 0;
-        float y = (buttonInput == InputButtonType.Left_Move_Vertical || buttonInput == InputButtonType.Right_Move_Vertical) ? data.GetAxis() : 0;
-        Joystic = new Vector2(x,y);
-        if (LeftJoystickUsedEvent != null && (x > 0.2f || x < -0.2f || y > 0.2f || y < -0.2f))
+        if (buttonInput == InputButtonType.Left_Move_Horizontal || buttonInput == InputButtonType.Right_Move_Horizontal) Joystic.x = data.GetAxis();
+        if (buttonInput == InputButtonType.Left_Move_Vertical || buttonInput == InputButtonType.Right_Move_Vertical) Joystic.y = data.GetAxis();
+
+        PreviousVals = Joystic;
+
+        if (XValuesDescendingAndOverThreshhold) Joystic.x = 0f;
+        if (YValuesDescendingAndOverThreshhold) Joystic.y = 0f;
+
+        Debug.Log(previousVals[0].ToString() + " " + previousVals[1].ToString() + " " + previousVals[2].ToString() + "    " + XValuesDescendingAndOverThreshhold.ToString() + "     " + YValuesDescendingAndOverThreshhold.ToString());
+
+        if (LeftJoystickUsedEvent != null && (Joystic.x > 0.2f || Joystic.x < -0.2f || Joystic.y > 0.2f || Joystic.y < -0.2f))
         {
             if (Mathf.Abs(Joystic.x) > Mathf.Abs(Joystic.y))
             {
