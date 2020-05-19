@@ -24,6 +24,7 @@ public class CharacterInfoScript : MonoBehaviour
     public CharacterAudioProfileSO AudioProfile;
     public BaseCharType BaseCharacterType;
     public CharacterNameType CharacterID;
+    [Tooltip("Attacks must follow this sequence (particles attack)  WEAK/STRONG/Skills (enemy attack) no order")]
     public List<ScriptableObjectAttackBase> CurrentAttackTypeInfo = new List<ScriptableObjectAttackBase>();
     public ElementalType Elemental;
     public CharacterClassType ClassType;
