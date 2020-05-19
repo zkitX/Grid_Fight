@@ -243,7 +243,7 @@ public class GridFightMenuDialog : MenuDialog
                 }
             }
 
-            StartCoroutine(ClearMenu(1));
+            StartCoroutine(ClearMenu(0.3f));
         }
     }
 

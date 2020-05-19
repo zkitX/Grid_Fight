@@ -811,7 +811,7 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
-    public void Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType characterSelection, ControllerType playerController, bool isRandom = false)
+    public void Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType characterSelection, ControllerType playerController, bool isRandom = false, bool worksOnFungusPappets = false)
     {
         if(CurrentSelectedCharacters[playerController].Character != null && !CurrentSelectedCharacters[playerController].Character.CharActionlist.Contains(CharacterActionType.SwitchCharacter))
         {
@@ -836,7 +836,7 @@ public class BattleManagerScript : MonoBehaviour
         }
         else if (InputControllerT == InputControllerType.SelectionOnLR)
         {
-            if (CurrentBattleState == BattleState.Battle && !CurrentSelectedCharacters[playerController].isSwapping)
+            if ((CurrentBattleState == BattleState.Battle && !CurrentSelectedCharacters[playerController].isSwapping) || worksOnFungusPappets)
             {
                 cb = null;
                 if (CurrentSelectedCharacters[playerController].Character == null)
@@ -855,7 +855,7 @@ public class BattleManagerScript : MonoBehaviour
                     while(!found)
                     {
                         cs = (CharacterSelectionType)Random.Range(0, 4);
-                        cb = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.CharacterSelection == cs && r.UMS.Side == side && r.CharInfo.HealthPerc > 0).FirstOrDefault();
+                        cb = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.CharacterSelection == cs && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 && !r.IsOnField).FirstOrDefault();
                      
                         if (cb != null && CurrentSelectedCharacters.Where(r => r.Value.Character != null && ((r.Value.Character == cb)
                         || (r.Value.NextSelectionChar.NextSelectionChar == cs && r.Value.NextSelectionChar.Side == cb.UMS.Side && r.Value.Character != null)) && r.Key != playerController).ToList().Count == 0)
@@ -900,7 +900,7 @@ public class BattleManagerScript : MonoBehaviour
 
             if(cb != null)
             {
-                SetNextChar(deselction, cb, side, playerController, cs);
+                SetNextChar(deselction, cb, side, playerController, cs, worksOnFungusPappets);
             }
         }
     }

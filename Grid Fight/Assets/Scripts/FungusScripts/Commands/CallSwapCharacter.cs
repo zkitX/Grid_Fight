@@ -25,7 +25,7 @@ public class CallSwapCharacter : Command
     {
         if(isRandomChar)
         {
-            BattleManagerScript.Instance.Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType.Down, playerController, isRandomChar);
+            BattleManagerScript.Instance.Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType.Down, playerController, isRandomChar, true);
         }
         else
         {
