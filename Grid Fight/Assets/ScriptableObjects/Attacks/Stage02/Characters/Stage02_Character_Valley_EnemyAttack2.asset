@@ -102,6 +102,18 @@ MonoBehaviour:
       Show: 1
       BulletEffectTiles:
       - Pos: {x: 0, y: 0}
+        Trajectory_Y:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        Trajectory_Z:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -110,6 +122,6 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
     StatToCheck: 1
-    ValueChecker: 2
+    ValueChecker: 0
     PercToCheck: 0
     Chances: 100

@@ -96,7 +96,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 8a43595db0d054e46a78395fc608d896, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 0}
+  skeletonDataAsset: {fileID: 11400000, guid: 3179d9ee412766c4996c3ab9e3f8be49, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -428,7 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Pai
+  Name: Switch
   CharacterIcons:
   - {fileID: 21300000, guid: 395154bd4e1bbdf489dd9903af25d46b, type: 3}
   - {fileID: 21300000, guid: 2671fb6cc8a2aa14e8a026eeae17d7c7, type: 3}
@@ -438,10 +438,8 @@ MonoBehaviour:
   CurrentAttackTypeInfo:
   - {fileID: 11400000, guid: eaa5acd4d9f7d8242a406d09aaea32fa, type: 2}
   - {fileID: 11400000, guid: d2f89e5e5e3c36b4d87a2aa63d137953, type: 2}
-  - {fileID: 11400000, guid: 9eba4ac75fdc4be41bd0f908137efe86, type: 2}
-  - {fileID: 11400000, guid: 01e81e8f76eef094887904cf8d0a360a, type: 2}
-  - {fileID: 11400000, guid: 5e709fbf670d845438f7da9e4a397fab, type: 2}
   - {fileID: 11400000, guid: 95bdf12ed802cc94eb50eaa76d11d62d, type: 2}
+  - {fileID: 11400000, guid: 5e709fbf670d845438f7da9e4a397fab, type: 2}
   Elemental: 0
   ClassType: 0
   UseLayeringSystem: 1
@@ -529,6 +527,7 @@ MonoBehaviour:
   Special3LoadingDuration: 0
   MovementTimer: {x: 5, y: 8}
   B_MovementTimer: {x: 5, y: 8}
+  RelationshipList: []
 --- !u!54 &4716521134749289832
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -568,7 +567,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6869221497287856638}
   m_Layer: 0
-  m_Name: Stage02_Character_Valley_PivotChar_
+  m_Name: Stage02_Character_Valley_PivotChar_Switch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
