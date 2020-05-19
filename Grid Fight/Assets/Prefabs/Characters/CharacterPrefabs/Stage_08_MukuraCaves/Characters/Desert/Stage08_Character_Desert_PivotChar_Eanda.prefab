@@ -285,18 +285,18 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -309,18 +309,18 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -333,18 +333,18 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -357,18 +357,18 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -398,20 +398,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Pai
+  Name: Eanda
   CharacterIcons:
   - {fileID: 21300000, guid: 395154bd4e1bbdf489dd9903af25d46b, type: 3}
   - {fileID: 21300000, guid: 2671fb6cc8a2aa14e8a026eeae17d7c7, type: 3}
-  AudioProfile: {fileID: 11400000, guid: 18079379e5337084286a38b915064869, type: 2}
+  AudioProfile: {fileID: 11400000, guid: dc7551d64479e4f4bb7e8a1d926c9a0f, type: 2}
   BaseCharacterType: 0
   CharacterID: 1165
   CurrentAttackTypeInfo:
-  - {fileID: 11400000, guid: 65f7ca04e1b32964a87e68a0f1243cdd, type: 2}
-  - {fileID: 11400000, guid: 9f41e7751d4510047a9188c9ec92e426, type: 2}
-  - {fileID: 11400000, guid: c5a64a43f4064384a91cf0a3ab3ff9ff, type: 2}
   - {fileID: 11400000, guid: 641d1123d30b8dc47b11a4e7036f307f, type: 2}
+  - {fileID: 11400000, guid: c5a64a43f4064384a91cf0a3ab3ff9ff, type: 2}
   - {fileID: 11400000, guid: 6801dcd2fb349d64fbbfc50dae3aa4eb, type: 2}
   - {fileID: 11400000, guid: 69cf0308a8683324c8f2b40f9fd4106e, type: 2}
+  - {fileID: 11400000, guid: 65f7ca04e1b32964a87e68a0f1243cdd, type: 2}
+  - {fileID: 11400000, guid: 9f41e7751d4510047a9188c9ec92e426, type: 2}
   Elemental: 0
   ClassType: 3
   UseLayeringSystem: 1
@@ -499,6 +499,7 @@ MonoBehaviour:
   Special3LoadingDuration: 0
   MovementTimer: {x: 5, y: 8}
   B_MovementTimer: {x: 5, y: 8}
+  RelationshipList: []
 --- !u!54 &648517177987228501
 Rigidbody:
   m_ObjectHideFlags: 0
