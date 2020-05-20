@@ -148,7 +148,7 @@ public class BattleManagerScript : MonoBehaviour
 
         if (currentCharacter != null && bts != null)
         {
-            SelectCharacter(playerController, SetCharOnBoardOnFixedPos(playerController, cName, bts.Pos));
+            SelectCharacter(playerController, SetCharOnBoard(playerController, cName, bts.Pos));
         }
     }
 
