@@ -81,11 +81,13 @@ public class BattleManagerScript : MonoBehaviour
     };
     public List<ScriptableObjectCharacterPrefab> ListOfScriptableObjectCharacterPrefab = new List<ScriptableObjectCharacterPrefab>();
     public List<BaseCharacter> AllCharactersOnField = new List<BaseCharacter>();
+
+    public List<BaseCharacter> CharsForTalkingPart = new List<BaseCharacter>();
+
     public List<CharacterLoadingInfoClass> CurrentCharactersLoadingInfo = new List<CharacterLoadingInfoClass>();
     [SerializeField]
     private Transform CharactersContainer;
     private List<CharacterBaseInfoClass> PlayerBattleInfo = new List<CharacterBaseInfoClass>();
-    public List<PlayableCharOnScene> PlayablesCharOnScene = new List<PlayableCharOnScene>();
     public List<Color> playersColor = new List<Color>();
     public List<Sprite> playersNumberBig = new List<Sprite>();
     public List<Sprite> playersNumberSmall = new List<Sprite>();
@@ -153,15 +155,19 @@ public class BattleManagerScript : MonoBehaviour
 
     public IEnumerator SetAllNonUsedCharOnBattlefield()
     {
-        foreach (BaseCharacter currentCharacter in AllCharactersOnField.Where(r => !r.IsOnField).ToList())
+        List<BaseCharacter> res = new List<BaseCharacter>();
+        BattleTileScript bts;
+
+        res.AddRange(AllCharactersOnField.Where(r => !r.IsOnField).ToList());
+        foreach (BaseCharacter currentCharacter in res)
         {
-            BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(currentCharacter.UMS.WalkingSide, currentCharacter.UMS.Pos);
+            bts = GridManagerScript.Instance.GetFreeBattleTile(currentCharacter.UMS.WalkingSide, currentCharacter.UMS.Pos);
 
             SetCharOnBoardOnFixedPos(currentCharacter.UMS.PlayerController[0], currentCharacter.CharInfo.CharacterID, bts.Pos);
         }
 
-
-        while (AllCharactersOnField.Where(r => !r.IsOnField && r.CharInfo.HealthPerc > 0).ToList().Count != 0)
+        
+        while (res.Where(r => !r.IsOnField && r.CharInfo.HealthPerc > 0).ToList().Count != 0)
         {
             yield return null;
         }
@@ -169,8 +175,7 @@ public class BattleManagerScript : MonoBehaviour
 
     public CharacterType_Script SetCharOnBoardOnFixedPos(ControllerType playerController, CharacterNameType cName, Vector2Int pos)
     {
-        if (CurrentSelectedCharacters[playerController].Character != null && (PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == cName).First().isUsed
-           || (!CurrentSelectedCharacters[playerController].Character.IsOnField)
+        if (CurrentSelectedCharacters[playerController].Character != null && (!CurrentSelectedCharacters[playerController].Character.IsOnField
           || (CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle.ToString())))
         {
             return null;
@@ -179,9 +184,10 @@ public class BattleManagerScript : MonoBehaviour
         return SetCharOnBoard(playerController, cName, pos);
     }
 
-    public CharacterType_Script SetCharOnBoard(ControllerType playerController, CharacterNameType cName, Vector2Int pos)
+    public CharacterType_Script SetCharOnBoard(ControllerType playerController, CharacterNameType cName, Vector2Int pos, bool isPlayer = true)
     {
-        using (BaseCharacter currentCharacter = AllCharactersOnField.Where(r => r.UMS.PlayerController.Contains(playerController) && r.CharInfo.CharacterID == cName).First())
+        using (BaseCharacter currentCharacter = isPlayer ? AllCharactersOnField.Where(r => r.UMS.PlayerController.Contains(playerController) && r.CharInfo.CharacterID == cName).First() :
+            CharsForTalkingPart.Where(r => r.CharInfo.CharacterID == cName).First())
         {
             if (currentCharacter.CharInfo.Health <= 0)
             {
@@ -208,7 +214,6 @@ public class BattleManagerScript : MonoBehaviour
             StartCoroutine(MoveCharToBoardWithDelay(0.1f, currentCharacter, bts.transform.position));
 
             UIBattleManager.Instance.isLeftSidePlaying = true;
-            PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == cName).First().isUsed = true;
             return (CharacterType_Script)currentCharacter;
         }
     }
@@ -243,18 +248,6 @@ public class BattleManagerScript : MonoBehaviour
             UIBattleManager.Instance.isRightSidePlaying = false;
         }
 
-        if (PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == currentCharacter.CharInfo.CharacterID).FirstOrDefault() != null &&
-             PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == currentCharacter.CharInfo.CharacterID).First().isUsed)
-        {
-            PlayablesCharOnScene.Where(r => r.PlayerController.Contains(playerController) && r.CName == currentCharacter.CharInfo.CharacterID).First().isUsed = false;
-        }
-
-
-        if (playerController == ControllerType.None && PlayablesCharOnScene.Where(r => r.CName == currentCharacter.CharInfo.CharacterID).First().isUsed)
-        {
-            PlayablesCharOnScene.Where(r => r.CName == currentCharacter.CharInfo.CharacterID).First().isUsed = false;
-        }
-
         if (WaveManagerScript.Instance != null)
         {
             WaveManagerScript.Instance.RemoveWaveCharacterFromBoard(currentCharacter);
@@ -283,12 +276,30 @@ public class BattleManagerScript : MonoBehaviour
 
     #region Create Character
 
+    public BaseCharacter CreateTalkingChar(CharacterNameType characterID)
+    {
+        CharsForTalkingPart.Add(CreateChar(new CharacterBaseInfoClass(characterID.ToString(), CharacterSelectionType.Up,
+        new List<ControllerType> { ControllerType.Player1 }, characterID, WalkingSideType.LeftSide, AttackType.Tile, BaseCharType.CharacterType_Script, 
+        new List<CharacterActionType> {
+            CharacterActionType.Defence,
+            CharacterActionType.Move,
+            CharacterActionType.WeakAttack,
+            CharacterActionType.StrongAttack,
+            CharacterActionType.Skill1,
+            CharacterActionType.Skill2,
+            CharacterActionType.Skill3,
+            CharacterActionType.SwitchCharacter}), transform));
+
+        return CharsForTalkingPart.Last();
+    }
+
+
+
     public IEnumerator InstanciateAllChar()
     {
         PlayerBattleInfo = LoaderManagerScript.Instance != null ? LoaderManagerScript.Instance.PlayerBattleInfo : BattleInfoManagerScript.Instance.PlayerBattleInfo;
         foreach (CharacterBaseInfoClass item in PlayerBattleInfo)
         {
-            PlayablesCharOnScene.Add(new PlayableCharOnScene(item.CharacterName, item.PlayerController, false, GetSideFromPlayer(item.PlayerController)));
             AllCharactersOnField.Add(CreateChar(item, CharactersContainer));
         }
         switch (matchType)
@@ -361,19 +372,8 @@ public class BattleManagerScript : MonoBehaviour
     {
         if (!playerController.Contains(ControllerType.Enemy))
         {
-            PlayablesCharOnScene.Where(r => r.Side == side && r.CName == cName).First().isAlive = false;
 
-            List<PlayableCharOnScene> res = new List<PlayableCharOnScene>();
-
-            PlayablesCharOnScene.ForEach(r =>
-            {
-                if (r.PlayerController.Intersect(playerController).Count() == playerController.Count)
-                {
-                    res.Add(r);
-                }
-            });
-
-            if (res.Where(r => !r.isAlive && r.isUsed).ToList().Count == res.Count)
+            if (AllCharactersOnField.Where(r => r.CharInfo.Health > 0).ToList().Count == 0)
             {
                 UIBattleManager.Instance.Lose.gameObject.SetActive(true);
                 CurrentBattleState = BattleState.End;
@@ -536,8 +536,9 @@ public class BattleManagerScript : MonoBehaviour
     }
 
 
-    public void RemoveAllNonUsedCharFromBoard()
+    public void RemoveAllNonUsedCharFromBoard(List<CharacterNameType> KeepCharOnBattlefield)
     {
+       
         for (int i = 0; i < AllCharactersOnField.Count; i++)
         {
             bool isIn = false;
@@ -549,23 +550,31 @@ public class BattleManagerScript : MonoBehaviour
                 }
             }
 
-            if (!isIn)
+            if (!isIn && !KeepCharOnBattlefield.Contains(AllCharactersOnField[i].CharInfo.CharacterID))
             {
                 RemoveNamedCharacterFromBoard(AllCharactersOnField[i].CharInfo.CharacterID);
+            }
+        }
+       
+        for (int i = 0; i < CharsForTalkingPart.Count; i++)
+        {
+            if(CharsForTalkingPart[i].IsOnField && !KeepCharOnBattlefield.Contains(CharsForTalkingPart[i].CharInfo.CharacterID))
+            {
+                RemoveNamedCharacterFromBoard(CharsForTalkingPart[i].CharInfo.CharacterID);
             }
         }
     }
 
     public void RemoveNamedCharacterFromBoard(CharacterNameType charToRemoveName)
     {
-        /*if (CurrentSelectedCharacters.Values.Where(r => r.Character != null).FirstOrDefault() != null && CurrentSelectedCharacters.Values.Where(r => r.Character.CharInfo.CharacterID == charToRemoveName).FirstOrDefault() != null)
-        {
-            charToRemove = CurrentSelectedCharacters.Values.Where(r => r.Character.CharInfo.CharacterID == charToRemoveName).FirstOrDefault().Character;
-        }*/
         BaseCharacter charToRemove = AllCharactersOnField.Where(r => r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
         if (charToRemove == null)
         {
             charToRemove = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
+        }
+        if (charToRemove == null)
+        {
+            charToRemove = CharsForTalkingPart.Where(r => r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
         }
         Debug.Log("Character removed: " + charToRemove.CharInfo.CharacterID.ToString());
         ControllerType controller = ControllerType.None;
@@ -575,19 +584,6 @@ public class BattleManagerScript : MonoBehaviour
         }
         charToRemove.SpineAnim.SetAnimationSpeed(2);
         StartCoroutine(RemoveCharacterFromBaord(controller, charToRemove, true));
-
-        /*
-        CharacterType_Script charToRemove = null;
-        ControllerType controller = ControllerType.None;
-        charToRemove = (CharacterType_Script)AllCharactersOnField.Where(r => r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
-        if (charToRemove == null) return;
-        charToRemove.SpineAnim.SetAnimationSpeed(2);
-        if (CurrentSelectedCharacters.Values.Where(r => r.Character != null).FirstOrDefault() != null && CurrentSelectedCharacters.Values.Where(r => r.Character.CharInfo.CharacterID == charToRemoveName).FirstOrDefault() != null)
-        {
-            controller = CurrentSelectedCharacters.Where(r => r.Value.Character == charToRemove).FirstOrDefault().Key;
-        }
-        StartCoroutine(RemoveCharacterFromBaord(controller, charToRemove));
-         */
     }
 
 
@@ -1015,7 +1011,6 @@ public class BattleManagerScript : MonoBehaviour
         recruitableChar.CharInfo.HealthStats.Health = recruitableChar.CharInfo.HealthStats.Base;
         recruitableChar.gameObject.SetActive(true);
         recruitableChar.SetupCharacterSide();
-        PlayablesCharOnScene.Add(new PlayableCharOnScene(recruitableChar.CharInfo.CharacterID, AllCharactersOnField[0].UMS.PlayerController, false, GetSideFromPlayer(recruitableChar.UMS.PlayerController)));
         /*foreach (BaseCharacter playableCharOnScene in AllCharactersOnField)
         {
             NewIManager.Instance.SetUICharacterToButton((CharacterType_Script)playableCharOnScene, playableCharOnScene.CharInfo.CharacterSelection);
@@ -1110,25 +1105,25 @@ public class BattleManagerScript : MonoBehaviour
     }
 
 
-    public void UpdateCharactersRelationship(bool allTeam, List<CharacterNameType> playerChars, List<CharacterNameType> recruitableChars, int value)
+    public void UpdateCharactersRelationship(bool allTeam, List<CharacterNameType> playerChars, List<TargetRecruitableClass> recruitableChars)
     {
         if(allTeam)
         {
-            foreach (CharacterNameType recruitableChar in recruitableChars)
+            foreach (TargetRecruitableClass recruitableChar in recruitableChars)
             {
-                foreach (RelationshipClass item in TeamRelationship.Where(r => r.CharacterId == recruitableChar).ToList())
+                foreach (RelationshipClass item in TeamRelationship.Where(r => r.CharacterId == recruitableChar.CharTargetRecruitableID).ToList())
                 {
-                    item.CurrentValue += value;
+                    item.CurrentValue += recruitableChar.Value;
                 }
             }
         }
         else
         {
-            foreach (CharacterNameType recruitableChar in recruitableChars)
+            foreach (TargetRecruitableClass recruitableChar in recruitableChars)
             {
-                foreach (RelationshipClass item in TeamRelationship.Where(r => r.CharacterId == recruitableChar && playerChars.Contains(r.CharOwnerId)).ToList())
+                foreach (RelationshipClass item in TeamRelationship.Where(r => r.CharacterId == recruitableChar.CharTargetRecruitableID && playerChars.Contains(r.CharOwnerId)).ToList())
                 {
-                    item.CurrentValue += value;
+                    item.CurrentValue += recruitableChar.Value;
                 }
             }
         }

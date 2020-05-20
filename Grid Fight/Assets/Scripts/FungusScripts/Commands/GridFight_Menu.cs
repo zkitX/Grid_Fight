@@ -53,12 +53,18 @@ namespace Fungus
 public class MenuRelationshipInfoClass
 {
     public bool IsRelationshipUpdateForTheWholeTeam = true;
-    public List<CharacterNameType> CharTargetRecruitableIDs = new List<CharacterNameType>();
-    public int Value;
+    public List<TargetRecruitableClass> CharTargetRecruitable = new List<TargetRecruitableClass>();
     public List<CharacterNameType> CharTarget = new List<CharacterNameType>();
 
     public MenuRelationshipInfoClass()
     {
 
     }
+}
+
+[System.Serializable]
+public class TargetRecruitableClass
+{
+    public CharacterNameType CharTargetRecruitableID;
+    public int Value;
 }

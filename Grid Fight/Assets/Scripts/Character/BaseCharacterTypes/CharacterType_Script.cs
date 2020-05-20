@@ -151,7 +151,6 @@ public class CharacterType_Script : BaseCharacter
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         SetAnimation(CharacterAnimationStateType.Defeat_ReverseArrive);
         IsOnField = false;
-        BattleManagerScript.Instance.PlayablesCharOnScene.Where(r => r.CName == CharInfo.CharacterID).First().isUsed = false;
         base.SetCharDead(false);
         if (UMS.CurrentAttackType == AttackType.Particles)
         {

@@ -22,7 +22,7 @@ public class CallShowSelectedGrid : Command
     protected virtual void CallTheMethod()
     {
         EnvironmentManager.Instance.ChangeGridStructure(Grid, StageToShow, false);
-        StartCoroutine(EnvironmentManager.Instance.MoveToNewGrid(StageToShow, 0, false));
+        StartCoroutine(EnvironmentManager.Instance.MoveToNewGrid(StageToShow, 0, new List<TalkingTeamClass>(),false, false));
     }
 
     #region Public members

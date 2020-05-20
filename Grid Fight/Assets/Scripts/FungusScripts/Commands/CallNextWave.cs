@@ -1,6 +1,7 @@
 ﻿using Fungus;
 using MyBox;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CommandInfo("Scripting",
@@ -18,7 +19,11 @@ public class CallNextWave : Command
     public bool HasADifferentGrid = false;
     [ConditionalField("HasADifferentGrid", false)] public ScriptableObjectGridStructure Grid;
 
-    public bool CallAllAlly = true;
+
+    public bool CallPool = true;
+    public List<TalkingTeamClass> TalkingTeam = new List<TalkingTeamClass>();
+
+    public bool JumpUp = false;
 
     public bool UseWave = true;
 
@@ -42,7 +47,7 @@ public class CallNextWave : Command
         BattleManagerScript.Instance.ResetAllActiveChars();
         yield return new WaitForSecondsRealtime(1f);
         BattleManagerScript.Instance.CurrentBattleState = BattleState.FungusPuppets;
-        if (CallAllAlly)
+        if (CallPool)
         {
             yield return BattleManagerScript.Instance.SetAllNonUsedCharOnBattlefield();
 
@@ -60,20 +65,14 @@ public class CallNextWave : Command
         }
 
         yield return new WaitForSecondsRealtime(0.5f);
+
         if (UseWave)
             yield return WaveManagerScript.Instance.SettingUpWave(WaveName);
         if (HasAStageUpdate)
         {
-            yield return EnvironmentManager.Instance.MoveToNewGrid(HasAStageUpdate ? FightGridToShow : -1, TransitionDuration);
+            yield return EnvironmentManager.Instance.MoveToNewGrid(HasAStageUpdate ? FightGridToShow : -1, TransitionDuration, TalkingTeam, JumpUp);
         }
 
-        if (CallAllAlly)
-        {
-            yield return new WaitForSecondsRealtime(3f);
-
-            BattleManagerScript.Instance.RemoveAllNonUsedCharFromBoard();
-        }
-        // yield return new WaitForSecondsRealtime(30f);
         BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
 
         if (UseWave)  
@@ -94,3 +93,15 @@ public class CallNextWave : Command
     #endregion
 }
 
+[System.Serializable]
+public class TalkingTeamClass
+{
+    public CharacterNameType CharacterId;
+    public bool isRandomPos = true;
+    [ConditionalField("isRandomPos", true)] public Vector2Int Pos;
+
+    public TalkingTeamClass()
+    {
+            
+    }
+}

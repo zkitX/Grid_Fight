@@ -218,11 +218,11 @@ public class GridFightMenuDialog : MenuDialog
 
             if (Boxes[SelectionIndex].RelationshipInfo.IsRelationshipUpdateForTheWholeTeam)
             {
-                BattleManagerScript.Instance.UpdateCharactersRelationship(true, new List<CharacterNameType>(), Boxes[SelectionIndex].RelationshipInfo.CharTargetRecruitableIDs, Boxes[SelectionIndex].RelationshipInfo.Value);
+                BattleManagerScript.Instance.UpdateCharactersRelationship(true, new List<CharacterNameType>(), Boxes[SelectionIndex].RelationshipInfo.CharTargetRecruitable);
             }
             else if (Boxes[SelectionIndex].RelationshipInfo.CharTarget.Count > 0)
             {
-                BattleManagerScript.Instance.UpdateCharactersRelationship(false, Boxes[SelectionIndex].RelationshipInfo.CharTarget, Boxes[SelectionIndex].RelationshipInfo.CharTargetRecruitableIDs, Boxes[SelectionIndex].RelationshipInfo.Value);
+                BattleManagerScript.Instance.UpdateCharactersRelationship(false, Boxes[SelectionIndex].RelationshipInfo.CharTarget, Boxes[SelectionIndex].RelationshipInfo.CharTargetRecruitable);
             }
 
             isMenuReady = false;

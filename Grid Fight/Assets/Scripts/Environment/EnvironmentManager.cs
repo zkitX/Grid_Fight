@@ -58,7 +58,7 @@ public class EnvironmentManager : MonoBehaviour
         }
     }
 
-    public IEnumerator MoveToNewGrid(int gridIndex, float duration, bool moveChars = true)
+    public IEnumerator MoveToNewGrid(int gridIndex, float duration, List<TalkingTeamClass> arrivingChar, bool jumpUp = false, bool moveChars = true)
     {
         FightGrid destinationGrid = fightGrids[gridIndex != -1 ? gridIndex : currentGridIndex];
 
@@ -71,7 +71,7 @@ public class EnvironmentManager : MonoBehaviour
             StopCoroutine(GridLeapSequencer);
         }
         currentGridIndex = gridIndex != -1 ? gridIndex : currentGridIndex;
-        GridLeapSequencer = GridLeapSequence(duration, CameraStage.CameraInfo.Where(r => r.StageIndex == (gridIndex != -1 ? gridIndex : currentGridIndex)).First().CameraPosition, moveChars);
+        GridLeapSequencer = GridLeapSequence(duration, CameraStage.CameraInfo.Where(r => r.StageIndex == (gridIndex != -1 ? gridIndex : currentGridIndex)).First().CameraPosition, arrivingChar, jumpUp, moveChars);
         yield return GridLeapSequencer;
     }
 
@@ -79,19 +79,15 @@ public class EnvironmentManager : MonoBehaviour
 
     CharacterType_Script[] chars;
     List<CharacterType_Script> jumpingchars = new List<CharacterType_Script>();
-    IEnumerator GridLeapSequence(float duration, Vector3 translation, bool moveChars = true)
+    IEnumerator GridLeapSequence(float duration, Vector3 translation, List<TalkingTeamClass> arrivingChar, bool jumpUp = false, bool moveChars = true)
     {
         //Ensure new grid is set and moved to correct position before everything
         jumpingchars.Clear();
         float jumpHeight = 2f;
         translation.z = -8.5f;
-        CharacterAnimationStateType jumpAnim = CharacterAnimationStateType.DashUp;
-
-       // CharacterAnimationStateType jumpAnim = CharacterAnimationStateType.JumpTransition_OUT;
-
+        CharacterAnimationStateType jumpAnim = jumpUp ? CharacterAnimationStateType.Reverse_Arriving : CharacterAnimationStateType.JumpTransition_OUT;
         Vector3 cameraStartPos = MainCamera.transform.position;
         CameraInfoClass cic = CameraStage.CameraInfo.Where(r => r.StageIndex == currentGridIndex && !r.used).First();
-
         float cameraStartOrtho = MainCamera.orthographicSize;
         float cameraEndOrtho = cic.OrthographicSize;
         cic.used = true;
@@ -108,40 +104,54 @@ public class EnvironmentManager : MonoBehaviour
         Vector3[] charGridPosOffsets = new Vector3[chars != null ? chars.Length : 0];
         for (int i = 0; i < (chars != null ? chars.Length : 0); i++)
         {
-            charStartPositions[i] = chars[i].transform.position;
-            BattleTileScript bts = GridManagerScript.Instance.BattleTiles.Where(r => r.Pos == chars[i].UMS.CurrentTilePos).FirstOrDefault();
-            if (bts.BattleTileState != BattleTileStateType.Empty
-                || chars[i].UMS.WalkingSide != bts.WalkingSide)
+            if(false)
             {
-                BattleTileScript newGridTile = GridManagerScript.Instance.GetRandomFreeAdjacentTile(chars[i].UMS.CurrentTilePos, 5, false, chars[i].UMS.WalkingSide);
-                Debug.Log(newGridTile.Pos);
-                charGridPosOffsets[i] = GridManagerScript.Instance.BattleTiles.Where(r => r.Pos == newGridTile.Pos).First().transform.position;
-                GridManagerScript.Instance.SetBattleTileState(newGridTile.Pos, BattleTileStateType.Occupied);
-                chars[i].CurrentBattleTiles = new List<BattleTileScript>() { newGridTile };
-                chars[i].UMS.CurrentTilePos = newGridTile.Pos;
-                chars[i].UMS.Pos = new List<Vector2Int>() { newGridTile.Pos };
-            }
-            else
-            {
-                GridManagerScript.Instance.SetBattleTileState(bts.Pos, BattleTileStateType.Occupied);
-                charGridPosOffsets[i] = bts.transform.position;
-            }
-            chars[i].SetAttackReady(false);
+                charStartPositions[i] = chars[i].transform.position;
+                BattleTileScript bts = GridManagerScript.Instance.BattleTiles.Where(r => r.Pos == chars[i].UMS.CurrentTilePos).FirstOrDefault();
+                if (bts.BattleTileState != BattleTileStateType.Empty
+                    || chars[i].UMS.WalkingSide != bts.WalkingSide)
+                {
+                    BattleTileScript newGridTile = GridManagerScript.Instance.GetRandomFreeAdjacentTile(chars[i].UMS.CurrentTilePos, 5, false, chars[i].UMS.WalkingSide);
+                    Debug.Log(newGridTile.Pos);
+                    charGridPosOffsets[i] = GridManagerScript.Instance.BattleTiles.Where(r => r.Pos == newGridTile.Pos).First().transform.position;
+                    GridManagerScript.Instance.SetBattleTileState(newGridTile.Pos, BattleTileStateType.Occupied);
+                    chars[i].CurrentBattleTiles = new List<BattleTileScript>() { newGridTile };
+                    chars[i].UMS.CurrentTilePos = newGridTile.Pos;
+                    chars[i].UMS.Pos = new List<Vector2Int>() { newGridTile.Pos };
+                }
+                else
+                {
+                    GridManagerScript.Instance.SetBattleTileState(bts.Pos, BattleTileStateType.Occupied);
+                    charGridPosOffsets[i] = bts.transform.position;
+                }
 
-            if (translation == Vector3.zero && charGridPosOffsets[i] == Vector3.zero)
-            {
-                continue;
+
+                if (translation == Vector3.zero && charGridPosOffsets[i] == Vector3.zero)
+                {
+                    continue;
+                }
             }
+           
+            chars[i].SetAttackReady(false);
             jumpingchars.Add(chars[i]);
             chars[i].SetAnimation(jumpAnim);
 
         }
 
-       // yield return new WaitForSecondsRealtime(2);
+
+        yield return new WaitForSecondsRealtime(0.3f);
+
+        foreach (BaseCharacter item in chars)
+        {
+            item.transform.position = new Vector3(100, 100, 100);
+        }
+
+        yield return new WaitForSecondsRealtime(1f);
 
         float timeRemaining = duration;
         float progress = 0;
         bool hasStarted = false;
+
 
         while (timeRemaining != 0 || !hasStarted)
         {
@@ -152,22 +162,75 @@ public class EnvironmentManager : MonoBehaviour
             MainCamera.transform.position = Vector3.Lerp(cameraStartPos, translation, UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
             MainCamera.orthographicSize = Mathf.Lerp(cameraStartOrtho, cameraEndOrtho, progress);
 
-
-            for (int i = 0; i < (jumpingchars != null ? jumpingchars.Count : 0); i++)
+            if(jumpUp)
             {
-                jumpingchars[i].transform.position = Vector3.Lerp(charStartPositions[i], charGridPosOffsets[i], UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
-                jumpingchars[i].transform.position += new Vector3(0, jumpHeight * UniversalGameBalancer.Instance.characterJumpCurve.Evaluate(progress), 0);
-                jumpingchars[i].SpineAnim.SetAnimationSpeed(UniversalGameBalancer.Instance.jumpAnimationCurve.Evaluate(progress));
+               /* for (int i = 0; i < (jumpingchars != null ? jumpingchars.Count : 0); i++)
+                {
+                    jumpingchars[i].transform.position = Vector3.Lerp(charStartPositions[i], charGridPosOffsets[i], UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
+                    jumpingchars[i].transform.position += new Vector3(0, jumpHeight * UniversalGameBalancer.Instance.characterJumpCurve.Evaluate(progress), 0);
+                    jumpingchars[i].SpineAnim.SetAnimationSpeed(UniversalGameBalancer.Instance.jumpAnimationCurve.Evaluate(progress));
+                }*/
             }
+          
             yield return null;
         }
 
-     /*   for (int i = 0; i < (jumpingchars != null ? jumpingchars.Count : 0); i++)
+        List<BaseCharacter> charsToLand = new List<BaseCharacter>();
+
+        for (int i = 0; i < BattleManagerScript.Instance.AllCharactersOnField.Count; i++)
         {
-            chars[i].transform.position = chars[i].CurrentBattleTiles[0].transform.position;
-            chars[i].SetAnimation(CharacterAnimationStateType.JumpTransition_IN);
+            bool isIn = false;
+            for (int a = 0; a < BattleManagerScript.Instance.CurrentSelectedCharacters.Count; a++)
+            {
+                if (BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)a].Character != null && BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)a].Character == BattleManagerScript.Instance.AllCharactersOnField[i])
+                {
+                    isIn = true;
+                }
+            }
+
+            if (isIn)
+            {
+                charsToLand.Add(BattleManagerScript.Instance.AllCharactersOnField[i]);
+            }
         }
-        */
+
+
+        
+        for (int i = 0; i < arrivingChar.Count; i++)
+        {
+            BaseCharacter cb = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == arrivingChar[i].CharacterId).FirstOrDefault();
+            if(cb == null)
+            {
+                cb = BattleManagerScript.Instance.CharsForTalkingPart.Where(r => r.CharInfo.CharacterID == arrivingChar[i].CharacterId).FirstOrDefault();
+                if(cb == null)
+                {
+                    cb = BattleManagerScript.Instance.CreateTalkingChar(arrivingChar[i].CharacterId);
+                }
+               
+            }
+            BattleTileScript nextBts = arrivingChar[i].isRandomPos ? GridManagerScript.Instance.GetFreeBattleTile(WalkingSideType.LeftSide) : GridManagerScript.Instance.GetBattleTile(arrivingChar[i].Pos);
+            GridManagerScript.Instance.SetBattleTileState(nextBts.Pos, BattleTileStateType.Occupied);
+            cb.UMS.CurrentTilePos = nextBts.Pos;
+            cb.CurrentBattleTiles.Clear();
+            cb.CurrentBattleTiles.Add(nextBts);
+            charsToLand.Add(cb);
+
+        }
+
+
+        foreach (BaseCharacter item in charsToLand)
+        {
+            item.SetAnimation(CharacterAnimationStateType.JumpTransition_IN);
+        }
+
+        yield return new WaitForSeconds(0.1f);
+
+        foreach (BaseCharacter item in charsToLand)
+        {
+            item.transform.position = item.CurrentBattleTiles.Last().transform.position;
+
+        }
+
         if (chars.Length != 0)
         {
             foreach (CharacterType_Script character in BattleManagerScript.Instance.PlayerControlledCharacters)
