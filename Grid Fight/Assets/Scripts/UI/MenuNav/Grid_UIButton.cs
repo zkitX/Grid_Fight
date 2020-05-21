@@ -12,7 +12,7 @@ public class Grid_UIButton : MonoBehaviour
 {
     [HideInInspector] public int ID;
 
-    [HideInInspector] public Grid_UIPanel parentPanel = null;
+    public Grid_UIPanel parentPanel = null;
     public Grid_UIPanel ParentPanel
     {
         get
@@ -33,6 +33,17 @@ public class Grid_UIButton : MonoBehaviour
     public UI_ActionsClass[] SelectActions;
     public UI_ActionsClass[] DeselectActions;
 
+    //public List<UI_ActionsClass> PressActionsL = new List<UI_ActionsClass>();
+    //public List<UI_ActionsClass> SelectActionsL = new List<UI_ActionsClass>();
+    //public List<UI_ActionsClass> DeselectActionsL = new List<UI_ActionsClass>();
+
+    public bool Active
+    {
+        get
+        {
+            return ParentPanel.focusState == UI_FocusTypes.Focused && gameObject.activeInHierarchy;
+        }
+    }
     [HideInInspector] public bool selected = false;
     [HideInInspector] public bool visuallySelected = false;
 
@@ -57,6 +68,32 @@ public class Grid_UIButton : MonoBehaviour
     private void Awake()
     {
         ID = Grid_UINavigator.Instance.SetupNewButtonInfo(this);
+        GetComponent<BoxCollider2D>().size = GetComponent<Image>().rectTransform.rect.size;
+
+        /*PressActionsL = PressActions.ToList();
+        SelectActionsL = SelectActions.ToList();
+        DeselectActionsL = DeselectActions.ToList();
+        foreach(UI_ActionsClass uac in PressActionsL)
+        {
+            foreach(Grid_UIActions act in uac.uiActions)
+            {
+                uac.uiActionsL.Add(act);
+            }
+        }
+        foreach (UI_ActionsClass uac in SelectActionsL)
+        {
+            foreach (Grid_UIActions act in uac.uiActions)
+            {
+                uac.uiActionsL.Add(act);
+            }
+        }
+        foreach (UI_ActionsClass uac in DeselectActionsL)
+        {
+            foreach (Grid_UIActions act in uac.uiActions)
+            {
+                uac.uiActionsL.Add(act);
+            }
+        }*/
     }
 
     private void OnDestroy()
@@ -140,6 +177,43 @@ public class Grid_UIButton : MonoBehaviour
         }
     }
 
+    public void RefreshCursorCheck()
+    {
+        if (Grid_UINavigator.Instance.navType != MenuNavigationType.Cursor) return;
+
+        if (GetComponent<Collider2D>().IsTouching(Grid_UINavigator.Instance.cursor.GetComponent<Collider2D>()))
+        {
+            if (!selected) Grid_UINavigator.Instance.SelectButtonByID(ID);
+        }
+        else if (selected)
+        {
+            Grid_UINavigator.Instance.DeselectButton(this);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("UICursor")) CursorEnter(true);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("UICursor")) CursorEnter(false);
+    }
+
+    void CursorEnter(bool state)
+    {
+        if (Grid_UINavigator.Instance.navType != MenuNavigationType.Cursor || !Active) return;
+
+        if (state)
+        {
+            Grid_UINavigator.Instance.SelectButtonByID(ID);
+        }
+        else
+        {
+            Grid_UINavigator.Instance.DeselectButton(this);
+        }
+    }
 
 
     #region Actions
@@ -202,6 +276,8 @@ public class UI_ActionsClass
 {
     [HideInInspector] public string Name;
     public Grid_UIActions[] uiActions;
+    //public List<Grid_UIActions> uiActionsL = new List<Grid_UIActions>();
+
     public bool useStandardUnityEventsInstead = false;
     [ConditionalField("useStandardUnityEventsInstead")] [Tooltip("Time in seconds to wait before triggering the event")] public float waitBefore = 0f;
     [ConditionalField("useStandardUnityEventsInstead")] [Tooltip("Time in seconds to wait after triggering the event")] public float waitAfter = 0f;

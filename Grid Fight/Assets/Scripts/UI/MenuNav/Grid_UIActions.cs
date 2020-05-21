@@ -31,6 +31,15 @@ public class Grid_UIActions
             case (UI_ActionTypes.SetPanelFocus):
                 yield return SetPanelFocus();
                 break;
+            case (UI_ActionTypes.SetObjectActive):
+                yield return SetObjectActive();
+                break;
+            case (UI_ActionTypes.SetNavigationSystem):
+                yield return SetNavigationSystem();
+                break;
+            case (UI_ActionTypes.SetBriefingInfo):
+                yield return SetBriefingInfo();
+                break;
             default:
                 break;
         }
@@ -52,9 +61,17 @@ public class Grid_UIActions
                 if(setSelectionButton != null) return "Set " + (setSelectionForThisButtom ? "this" : setSelectionButton.name) + " button to " + setSelectionType.ToString();
                 else return "Set button to " + setSelectionType.ToString();
             case (UI_ActionTypes.SetPanelFocus):
-                return "Set " + (setFocusForThisPanel ? "this panel" : "panel: " + setFocusedPanel) + 
+                return "Set " + (setFocusForPreviousPanel ? "previous panel" : setFocusForThisPanel ? "this panel" : "panel: " + setFocusedPanel) + 
                     (setPanelFocusType == SetPanelFocusType.SetFocused ? " to be in focus" : 
                     setPanelFocusType == SetPanelFocusType.SetUnfocused ? " to be out of focus" : " to the opposite focus");
+            case (UI_ActionTypes.SetObjectActive):
+                return activationObject == null ? "NO OBJECT SET" : "Set " + activationObject.name + " to " + (setActiveState == true ? "active" : "deactivated") +
+                    (activationPauseBefore != 0 ? " after " + activationPauseBefore.ToString() + (activationPauseBefore != 1 ? " seconds" : " second") : "") +
+                    (activationPauseAfter != 0 ? " and wait " + activationPauseAfter.ToString() + (activationPauseAfter != 1 ? " seconds" : " second") + " afterward" : "");
+            case (UI_ActionTypes.SetNavigationSystem):
+                return "Set navigation to " + navigationType.ToString();
+            case (UI_ActionTypes.SetBriefingInfo):
+                return "Set briefing for " + (stageForBriefing != null ? stageForBriefing.Name : "undetermined stage");
             default:
                 return actionType.ToString();
         }
@@ -83,6 +100,7 @@ public class Grid_UIActions
     [ConditionalField("actionType", compareValues: UI_ActionTypes.PlayAnimation)] public Animation thingToAnimate = null;
     [ConditionalField("actionType", compareValues: UI_ActionTypes.PlayAnimation)] public bool animateThis = true;
     [ConditionalField("actionType", compareValues: UI_ActionTypes.PlayAnimation)] public AnimationClip animationClipToPlay = null;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.PlayAnimation)] public bool holdForAnimation = false;
     IEnumerator PlayAnimation()
     {
         if(thingToAnimate == null || animationClipToPlay == null)
@@ -94,6 +112,10 @@ public class Grid_UIActions
         if(thingToAnimate.isPlaying) thingToAnimate.Stop();
         thingToAnimate.clip = animationClipToPlay;
         thingToAnimate.Play();
+        while (holdForAnimation && thingToAnimate.isPlaying)
+        {
+            yield return null;
+        }
         yield return null;
     }
 
@@ -104,18 +126,29 @@ public class Grid_UIActions
     [ConditionalField("actionType", compareValues: UI_ActionTypes.SetButtonSelection)] public bool ignoreDeselectEventsForAllOtherButtons = false;
     IEnumerator SetButtonSelection()
     {
-        if (setSelectionType == SelectionType.Selected) Grid_UINavigator.Instance.SelectButton(setSelectionButton, !ignoreDeselectEventsForAllOtherButtons);
-        if (setSelectionType == SelectionType.Deselected) Grid_UINavigator.Instance.DeselectButton(setSelectionButton);
+        if (setSelectionType == SelectionType.Selected)
+        {
+            if (Grid_UINavigator.Instance.navType == MenuNavigationType.Cursor) yield break;
+            Grid_UINavigator.Instance.SelectButton(setSelectionButton, !ignoreDeselectEventsForAllOtherButtons);
+        }
+        if (setSelectionType == SelectionType.Deselected) Grid_UINavigator.Instance.DeselectButton(setSelectionButton, Grid_UINavigator.Instance.navType == MenuNavigationType.Cursor ? true : !ignoreDeselectEventsForAllOtherButtons);
         yield return null;
     }
 
     public enum SetPanelFocusType { SetFocused, SetUnfocused, ToggleBetween }
     [ConditionalField("actionType", compareValues: UI_ActionTypes.SetPanelFocus)] public Grid_UIPanel setFocusedPanel = null;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetPanelFocus)] public bool setFocusForPreviousPanel = false;
     [ConditionalField("actionType", compareValues: UI_ActionTypes.SetPanelFocus)] public bool setFocusForThisPanel = false;
     [ConditionalField("actionType", compareValues: UI_ActionTypes.SetPanelFocus)] public SetPanelFocusType setPanelFocusType = SetPanelFocusType.ToggleBetween;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetPanelFocus)] public bool setPanelActiveStateAswell = false;
     IEnumerator SetPanelFocus()
     {
-        if (setFocusForThisPanel) setFocusedPanel = parentButton.parentPanel;
+        if (setFocusForPreviousPanel)
+        {
+            setFocusedPanel = parentButton.parentPanel.lastActivateCallPanel;
+        }
+        else if (setFocusForThisPanel) setFocusedPanel = parentButton.parentPanel;
+
         if (setFocusedPanel == null) yield break;
         switch (setPanelFocusType)
         {
@@ -129,6 +162,39 @@ public class Grid_UIActions
                 setFocusedPanel.focusState = UI_FocusTypes.Focused;
                 break;
         }
+        if (setFocusedPanel.focusState == UI_FocusTypes.Focused)
+        {
+            setFocusedPanel.lastActivateCallPanel = parentButton.parentPanel;
+            Grid_UINavigator.Instance.RefreshCursorCheck();
+        }
+        if (setPanelActiveStateAswell) setFocusedPanel.gameObject.SetActive(setFocusedPanel.focusState == UI_FocusTypes.Focused ? true : false);
         yield return null;
     }
+
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetObjectActive)] public float activationPauseBefore = 0f;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetObjectActive)] public float activationPauseAfter = 0f;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetObjectActive)] public GameObject activationObject = null;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetObjectActive)] public bool setActiveState = false;
+    IEnumerator SetObjectActive()
+    {
+        yield return new WaitForSeconds(activationPauseBefore);
+        activationObject.SetActive(setActiveState);
+        yield return new WaitForSeconds(activationPauseAfter);
+    }
+
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetNavigationSystem)] public MenuNavigationType navigationType = MenuNavigationType.Relative;
+    IEnumerator SetNavigationSystem()
+    {
+        Grid_UINavigator.Instance.SetNavigation(navigationType);
+        yield return null;
+    }
+
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetBriefingInfo)] public Grid_UIBriefing briefing = null;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetBriefingInfo)] public StageProfile stageForBriefing = null;
+    IEnumerator SetBriefingInfo()
+    {
+        if (briefing == null || stageForBriefing == null) yield break;
+        briefing.SetupBriefing(stageForBriefing);
+    }
+
 }

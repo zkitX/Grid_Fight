@@ -9,7 +9,6 @@ public class Grid_UINavigator : MonoBehaviour
 {
     public static Grid_UINavigator Instance;
 
-    //public bool loopAround = false;
     public bool specificStartingButton = true;
     [ConditionalField("specificStartingButton")] public Grid_UIButton startingButton = null;
     [ConditionalField("specificStartingButton", true)] public InputDirection startingDirection = InputDirection.Up;
@@ -17,11 +16,11 @@ public class Grid_UINavigator : MonoBehaviour
     [HideInInspector] public float buttonBufferPercentage = 0.5f;
 
     protected Grid_UIButton[] buttons = { };
-    protected Grid_UIButton[] ActiveButtons
+    public Grid_UIButton[] ActiveButtons
     {
         get
         {
-            return buttons.Where(r => r.gameObject.activeInHierarchy && r.ParentPanel.focusState == UI_FocusTypes.Focused).ToArray();
+            return buttons.Where(r => r.Active).ToArray();
         }
     }
 
@@ -48,15 +47,17 @@ public class Grid_UINavigator : MonoBehaviour
     }
 
     protected int selectedButtonIndex = 0;
-    protected Grid_UIButton selectedButton
+    public Grid_UIButton selectedButton
     {
         get
         {
+            if (selectedButtonIndex == -1) return null;
             return buttons[selectedButtonIndex];
         }
         set
         {
-            for (int i = 0; i < buttons.Length; i++)
+            if (value == null) selectedButtonIndex = -1;
+            else for (int i = 0; i < buttons.Length; i++)
             {
                 if (value.ID == buttons[i].ID)
                 {
@@ -67,19 +68,42 @@ public class Grid_UINavigator : MonoBehaviour
         }
     }
 
+    [SerializeField] protected GameObject cursorPrefab = null;
+    [HideInInspector] public Grid_UICursor cursor = null;
+    [HideInInspector] public MenuNavigationType navType = MenuNavigationType.Unassigned;
+
     private void Awake()
     {
         Instance = this;
-        if(InputController.Instance != null)
-        {
-            InputController.Instance.LeftJoystickUsedEvent += ButtonChangeInput;
-            InputController.Instance.ButtonAUpEvent += ButtonPressInput;
-        }
+        cursor = Instantiate(cursorPrefab, transform).GetComponent<Grid_UICursor>();
+        cursor.EnableCursor(false);
     }
 
     private void Start()
     {
         StartCoroutine(SelectFirstButton());
+        SetNavigation(MenuNavigationType.Relative);
+        InputController.Instance.ButtonAUpEvent += ButtonPressInput;
+    }
+
+    public void SetNavigation(MenuNavigationType nav, Grid_UIButton buttonToFocusOn = null)
+    {
+        if (navType == nav) return;
+        navType = nav;
+
+        if (InputController.Instance != null)
+        {
+            if(nav == MenuNavigationType.Relative)
+            {
+                cursor.EnableCursor(false);
+                InputController.Instance.LeftJoystickUsedEvent += ButtonChangeInput;
+            }
+            else
+            {
+                cursor.EnableCursor(true, buttonToFocusOn == null ? selectedButton : buttonToFocusOn) ;
+                InputController.Instance.LeftJoystickUsedEvent -= ButtonChangeInput;
+            }
+        }
     }
 
     IEnumerator SelectFirstButton()
@@ -138,8 +162,24 @@ public class Grid_UINavigator : MonoBehaviour
 
     public void ButtonPressInput(int player)
     {
-        if (selectedButton != null) selectedButton.PressAction();
+        if (selectedButton != null)
+        {
+            selectedButton.PressAction();
+        }
+        if (navType == MenuNavigationType.Cursor) cursor.PlayPressAnimation();
     }
+
+
+    public void RefreshCursorCheck()
+    {
+        foreach(Grid_UIButton button in ActiveButtons)
+        {
+            button.RefreshCursorCheck();
+        }
+        cursor.SnapToClosestActiveButton();
+    }
+
+
 
 
 
@@ -191,6 +231,7 @@ public class Grid_UINavigator : MonoBehaviour
 
     public void DeselectButton(int index, bool playDeselectEvents = true)
     {
+        if (index == selectedButtonIndex) selectedButton = null;
         if (!buttons[index].DeselectAction(playDeselectEvents)) return;
     }
 
@@ -200,6 +241,19 @@ public class Grid_UINavigator : MonoBehaviour
         {
             if(!(selectedButtonIndex == i)) DeselectButton(i, playDeselectEventsForOtherButtons);
         }
+    }
+
+    public Grid_UIButton GetClosestButtonFromArray(Vector2 originPos, Grid_UIButton[] btnsToCheck)
+    {
+        Grid_UIButton closest = null;
+        foreach(Grid_UIButton btn in btnsToCheck)
+        {
+            if(closest == null || Vector2.Distance(originPos, btn.transform.position) < Vector2.Distance(originPos, closest.transform.position))
+            {
+                closest = btn;
+            }
+        }
+        return closest;
     }
 
     public Grid_UIButton GetButtonFurthestInDirection(InputDirection comparison)

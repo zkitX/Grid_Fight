@@ -850,3 +850,10 @@ public enum MovementCurveType
     Space_Time,
     Speed_Time
 }
+
+public enum MenuNavigationType
+{
+    Unassigned = 0,
+    Relative = 1,
+    Cursor = 2,
+}

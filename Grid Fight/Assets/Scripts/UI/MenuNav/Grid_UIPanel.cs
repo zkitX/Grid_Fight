@@ -15,6 +15,7 @@ public class Grid_UIPanel : MonoBehaviour
         }
     }
     [HideInInspector] public bool setup = false;
+    [HideInInspector] public Grid_UIPanel lastActivateCallPanel = null;
 
     private void Awake()
     {

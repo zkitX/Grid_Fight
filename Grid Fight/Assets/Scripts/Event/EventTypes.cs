@@ -53,6 +53,9 @@ public enum UI_ActionTypes
     PlayAnimation,
     SetButtonSelection,
     SetPanelFocus,
+    SetObjectActive,
+    SetNavigationSystem,
+    SetBriefingInfo,
 }
 
 public enum UI_FocusTypes
