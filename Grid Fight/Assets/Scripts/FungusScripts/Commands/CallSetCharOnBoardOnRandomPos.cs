@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Fungus;
+using System.Linq;
 
 /// <summary>
 /// Calls a named method on a GameObject using the GameObject.SendMessage() system.
@@ -18,7 +19,11 @@ public class CallSetCharOnBoardOnRandomPos : Command
 
     protected virtual void CallTheMethod()
     {
-        BattleManagerScript.Instance.SetCharOnBoardOnRandomPos(playerController, cName);
+        BaseCharacter cb = BattleManagerScript.Instance.AllCharactersOnField.Where(r => !r.IsOnField && r.CharInfo.CharacterID == cName).FirstOrDefault();
+        if (cb != null)
+        {
+            BattleManagerScript.Instance.SetCharOnBoardOnRandomPos(playerController, cName);
+        }
     }
 
     #region Public members

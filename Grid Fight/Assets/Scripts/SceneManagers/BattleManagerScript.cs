@@ -136,20 +136,17 @@ public class BattleManagerScript : MonoBehaviour
 
     #region SetCharacterOnBoard
     //Used to set the already created char on a random Position in the battlefield
-    public void SetCharOnBoardOnRandomPos(ControllerType playerController, CharacterNameType cName)
+    public CharacterType_Script SetCharOnBoardOnRandomPos(ControllerType playerController, CharacterNameType cName)
     {
         BaseCharacter currentCharacter = AllCharactersOnField.Where(r => r.UMS.PlayerController.Contains(playerController) && r.CharInfo.CharacterID == cName && !r.IsOnField).FirstOrDefault();
         BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(currentCharacter.UMS.WalkingSide, currentCharacter.UMS.Pos);
-        if (bts == null)
-        {
-
-        }
-
-
+       
         if (currentCharacter != null && bts != null)
         {
-            SelectCharacter(playerController, SetCharOnBoard(playerController, cName, bts.Pos));
+            return SetCharOnBoard(playerController, cName, bts.Pos);
         }
+
+        return null;
     }
 
 
@@ -161,7 +158,7 @@ public class BattleManagerScript : MonoBehaviour
         res.AddRange(AllCharactersOnField.Where(r => !r.IsOnField).ToList());
         foreach (BaseCharacter currentCharacter in res)
         {
-            bts = GridManagerScript.Instance.GetFreeBattleTile(currentCharacter.UMS.WalkingSide, currentCharacter.UMS.Pos);
+            bts = GridManagerScript.Instance.GetFreeTilesAdjacentTo(CurrentSelectedCharacters[ControllerType.Player1].Character.UMS.CurrentTilePos, 3, true, WalkingSideType.LeftSide).First();
 
             SetCharOnBoardOnFixedPos(currentCharacter.UMS.PlayerController[0], currentCharacter.CharInfo.CharacterID, bts.Pos);
         }
@@ -730,7 +727,11 @@ public class BattleManagerScript : MonoBehaviour
         // yield return HoldPressTimer(playerController);
         if (CurrentCharactersLoadingInfo.Where(r => r.CName == cName && r.PlayerController == playerController).ToList().Count > 0)
         {
-            SetCharOnBoardOnRandomPos(playerController, cName);
+            CharacterType_Script cb = SetCharOnBoardOnRandomPos(playerController, cName);
+            if (cb != null)
+            {
+                SelectCharacter(playerController, cb);
+            }
         }
         yield return null;
 
@@ -743,7 +744,11 @@ public class BattleManagerScript : MonoBehaviour
         //yield return HoldPressTimer(playerController);
         if (CurrentCharactersLoadingInfo.Where(r => r.CName == cName && r.PlayerController == playerController).ToList().Count > 0)
         {
-            SetCharOnBoardOnRandomPos(playerController, cName);
+            CharacterType_Script cb = SetCharOnBoardOnRandomPos(playerController, cName);
+            if (cb != null)
+            {
+                SelectCharacter(playerController, cb);
+            }
         }
 
         yield return null;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Fungus;
+using System.Linq;
 
 /// <summary>
 /// Calls a named method on a GameObject using the GameObject.SendMessage() system.
@@ -19,14 +20,19 @@ public class CallSetCharOnBoardOnFixedPos : Command
 
     protected virtual void CallTheMethod()
     {
-        if(GridManagerScript.Instance.isPosFree(pos))
-        {
-            BattleManagerScript.Instance.SetCharOnBoard(playerController, cName, pos);
 
-        }
-        else
+        BaseCharacter cb = BattleManagerScript.Instance.AllCharactersOnField.Where(r => !r.IsOnField && r.CharInfo.CharacterID == cName).FirstOrDefault();
+        if(cb != null)
         {
-            BattleManagerScript.Instance.SetCharOnBoardOnRandomPos(playerController, cName);
+            if (GridManagerScript.Instance.isPosFree(pos))
+            {
+                BattleManagerScript.Instance.SetCharOnBoard(playerController, cName, pos);
+
+            }
+            else
+            {
+                BattleManagerScript.Instance.SetCharOnBoardOnRandomPos(playerController, cName);
+            }
         }
     }
 

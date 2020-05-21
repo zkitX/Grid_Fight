@@ -1308,7 +1308,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         string completedAnim = trackEntry.Animation.Name;
 
-        if (completedAnim == CharacterAnimationStateType.Arriving.ToString() || completedAnim.Contains("Growing"))
+        if (completedAnim == CharacterAnimationStateType.Arriving.ToString() || completedAnim == CharacterAnimationStateType.JumpTransition_IN.ToString() || completedAnim.Contains("Growing") )
         {
             IsSwapping = false;
             SwapWhenPossible = false;

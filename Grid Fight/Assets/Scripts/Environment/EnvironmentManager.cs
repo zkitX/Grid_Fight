@@ -139,14 +139,8 @@ public class EnvironmentManager : MonoBehaviour
         }
 
 
-        yield return new WaitForSecondsRealtime(0.3f);
+        yield return new WaitForSeconds(2f);
 
-        foreach (BaseCharacter item in chars)
-        {
-            item.transform.position = new Vector3(100, 100, 100);
-        }
-
-        yield return new WaitForSecondsRealtime(1f);
 
         float timeRemaining = duration;
         float progress = 0;
@@ -180,9 +174,10 @@ public class EnvironmentManager : MonoBehaviour
         for (int i = 0; i < BattleManagerScript.Instance.AllCharactersOnField.Count; i++)
         {
             bool isIn = false;
+            BaseCharacter cb = BattleManagerScript.Instance.AllCharactersOnField[i];
             for (int a = 0; a < BattleManagerScript.Instance.CurrentSelectedCharacters.Count; a++)
             {
-                if (BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)a].Character != null && BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)a].Character == BattleManagerScript.Instance.AllCharactersOnField[i])
+                if (BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)a].Character != null && BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)a].Character == cb)
                 {
                     isIn = true;
                 }
@@ -190,7 +185,12 @@ public class EnvironmentManager : MonoBehaviour
 
             if (isIn)
             {
-                charsToLand.Add(BattleManagerScript.Instance.AllCharactersOnField[i]);
+                BattleTileScript nextBts = GridManagerScript.Instance.GetRandomFreeAdjacentTile(cb.UMS.CurrentTilePos, 5, false, cb.UMS.WalkingSide);
+                GridManagerScript.Instance.SetBattleTileState(nextBts.Pos, BattleTileStateType.Occupied);
+                cb.UMS.CurrentTilePos = nextBts.Pos;
+                cb.CurrentBattleTiles.Clear();
+                cb.CurrentBattleTiles.Add(nextBts);
+                charsToLand.Add(cb);
             }
         }
 

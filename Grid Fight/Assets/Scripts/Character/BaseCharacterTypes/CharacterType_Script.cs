@@ -569,6 +569,13 @@ public class CharacterType_Script : BaseCharacter
             SetAttackReady(false);
         }
 
+        if (completedAnim == CharacterAnimationStateType.JumpTransition_OUT.ToString())
+        {
+            transform.position = new Vector3(100, 100, 100);
+            return;
+        }
+
+
 
         if (completedAnim == CharacterAnimationStateType.Atk1_IdleToAtk.ToString() && SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1_IdleToAtk.ToString())
         {
