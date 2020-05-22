@@ -138,16 +138,18 @@ public class BattleManagerScript : MonoBehaviour
     //Used to set the already created char on a random Position in the battlefield
     public CharacterType_Script SetCharOnBoardOnRandomPos(ControllerType playerController, CharacterNameType cName)
     {
+        bool isPlayer = true;
         BaseCharacter currentCharacter = AllCharactersOnField.Where(r => r.UMS.PlayerController.Contains(playerController) && r.CharInfo.CharacterID == cName && !r.IsOnField).FirstOrDefault();
         if(currentCharacter == null)
         {
             currentCharacter = CharsForTalkingPart.Where(r => r.CharInfo.CharacterID == cName).FirstOrDefault();
+            isPlayer = false;
         }
         BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(currentCharacter.UMS.WalkingSide, currentCharacter.UMS.Pos);
        
         if (currentCharacter != null && bts != null)
         {
-            return SetCharOnBoard(playerController, cName, bts.Pos);
+            return SetCharOnBoard(playerController, cName, bts.Pos, isPlayer);
         }
 
         return null;

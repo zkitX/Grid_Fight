@@ -44,7 +44,7 @@ public class CallSetCharOnBoardOnFixedPos : Command
 
             if (GridManagerScript.Instance.isPosFree(pos))
             {
-                BattleManagerScript.Instance.SetCharOnBoard(playerController, cName, pos);
+                BattleManagerScript.Instance.SetCharOnBoard(playerController, cName, pos, false);
 
             }
             else
