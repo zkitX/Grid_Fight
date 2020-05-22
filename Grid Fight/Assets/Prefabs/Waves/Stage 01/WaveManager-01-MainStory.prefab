@@ -102,6 +102,30 @@ MonoBehaviour:
       IsRandomSpowiningTile: 1
       SpowningTile:
       - {x: 4, y: 11}
+    - name: Mothra
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 1023
+        Health: {x: 30, y: 35}
+        HealthRegeneration: {x: 0.1, y: 0.2}
+        BaseDamage: {x: 5, y: 6}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        UpDownPerc: 15
+        Events: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
   - name: PaiWave
     IsRandom: 0
     MaxEnemyOnScreen: 3
