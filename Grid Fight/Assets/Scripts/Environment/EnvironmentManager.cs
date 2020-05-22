@@ -191,6 +191,8 @@ public class EnvironmentManager : MonoBehaviour
                 BattleTileScript nextBts = GridManagerScript.Instance.GetRandomFreeAdjacentTile(cb.UMS.CurrentTilePos, 5, false, cb.UMS.WalkingSide);
                 GridManagerScript.Instance.SetBattleTileState(nextBts.Pos, BattleTileStateType.Occupied);
                 cb.UMS.CurrentTilePos = nextBts.Pos;
+                cb.UMS.Pos.Clear();
+                cb.UMS.Pos.Add(nextBts.Pos);
                 cb.CurrentBattleTiles.Clear();
                 cb.CurrentBattleTiles.Add(nextBts);
                 charsToLand.Add(cb);
@@ -214,6 +216,8 @@ public class EnvironmentManager : MonoBehaviour
             BattleTileScript nextBts = arrivingChar[i].isRandomPos ? GridManagerScript.Instance.GetFreeBattleTile(WalkingSideType.LeftSide) : GridManagerScript.Instance.GetBattleTile(arrivingChar[i].Pos);
             GridManagerScript.Instance.SetBattleTileState(nextBts.Pos, BattleTileStateType.Occupied);
             cb.UMS.CurrentTilePos = nextBts.Pos;
+            cb.UMS.Pos.Clear();
+            cb.UMS.Pos.Add(nextBts.Pos);
             cb.CurrentBattleTiles.Clear();
             cb.CurrentBattleTiles.Add(nextBts);
             charsToLand.Add(cb);
