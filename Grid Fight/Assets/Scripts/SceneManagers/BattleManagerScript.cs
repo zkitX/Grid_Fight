@@ -158,7 +158,7 @@ public class BattleManagerScript : MonoBehaviour
         res.AddRange(AllCharactersOnField.Where(r => !r.IsOnField).ToList());
         foreach (BaseCharacter currentCharacter in res)
         {
-            bts = GridManagerScript.Instance.GetFreeTilesAdjacentTo(CurrentSelectedCharacters[ControllerType.Player1].Character.UMS.CurrentTilePos, 3, true, WalkingSideType.LeftSide).First();
+            bts = GridManagerScript.Instance.GetFreeTilesAdjacentTo(CurrentSelectedCharacters[ControllerType.Player1].Character.UMS.CurrentTilePos, 2, true, WalkingSideType.LeftSide).First();
 
             SetCharOnBoardOnFixedPos(currentCharacter.UMS.PlayerController[0], currentCharacter.CharInfo.CharacterID, bts.Pos);
         }

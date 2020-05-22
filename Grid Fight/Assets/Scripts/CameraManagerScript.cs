@@ -7,6 +7,11 @@ public class CameraManagerScript : MonoBehaviour
 
     public static CameraManagerScript Instance;
     public Animator Anim;
+    public AnimationCurve ZoomIn;
+    public AnimationCurve ZoomOut;
+    public float TransitionINZoomValue = 2;
+    public float Duration = 1;
+
     private void Awake()
     {
         Instance = this;
@@ -22,6 +27,19 @@ public class CameraManagerScript : MonoBehaviour
         Anim.SetInteger("Shake", (int)shakeType);
         yield return null;
         //Anim.SetInteger("Shake", 0);
+    }
+
+    public void CameraJumpInOut(int jumpInOut)
+    {
+        StartCoroutine(CameraJumpInOutCo(jumpInOut));
+    }
+
+
+    public IEnumerator CameraJumpInOutCo(int jumpInOut)
+    {
+        Anim.SetInteger("JumpInOut", jumpInOut);
+        yield return new WaitForSeconds(0.2f);
+        Anim.SetInteger("JumpInOut", 0);
     }
 
     public void SetFalse()
@@ -40,27 +58,31 @@ public class CameraManagerScript : MonoBehaviour
         }
         if (moveCameraInternally)
         {
-            StartCoroutine(CameraFocusSequence(newGrid.CameraPosition, duration, newGrid.OrthographicSize, newGrid));
+          //  StartCoroutine(CameraFocusSequence(newGrid.CameraPosition, duration, newGrid.OrthographicSize, newGrid));
         }
-
     }
 
-    IEnumerator CameraFocusSequence(Vector3 translation, float duration, float endOrtho, CameraInfoClass newGrid)
+    public void CameraFocusSequence(float duration, float endOrtho, AnimationCurve animCurve, Vector3 playerPos)
+    {
+        StartCoroutine(CameraFocusSequence_Co(duration, endOrtho, animCurve, playerPos));
+    }
+
+    IEnumerator CameraFocusSequence_Co(float duration, float endOrtho, AnimationCurve animCurve, Vector3 playerPos)
     {
         bool hasStarted = false;
         Camera cam = GetComponent<Camera>();
         float startingOrtho = cam.orthographicSize;
         Vector3 cameraStartingPosition = transform.position;
+        Vector3 finalPos = new Vector3(playerPos.x, playerPos.y, cameraStartingPosition.z);
         float progress = 0f;
         while(progress < 1 || !hasStarted)
         {
             hasStarted = true;
             progress += Time.fixedDeltaTime / duration;
-            cam.orthographicSize = Mathf.Lerp(startingOrtho, endOrtho, progress);
-            //transform.position = Vector3.Lerp(cameraStartingPosition, translation, progress);
+            transform.position = Vector3.Lerp(cameraStartingPosition, finalPos, progress);
+            cam.orthographicSize = Mathf.Lerp(startingOrtho, endOrtho, animCurve.Evaluate(progress));
             yield return null;
         }
 
-        transform.position = newGrid.CameraPosition;
     }
 }

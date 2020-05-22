@@ -138,8 +138,11 @@ public class EnvironmentManager : MonoBehaviour
 
         }
 
+        if(chars.Length > 0)
+        {
+            yield return new WaitForSeconds(2f);
 
-        yield return new WaitForSeconds(2f);
+        }
 
 
         float timeRemaining = duration;
@@ -154,7 +157,7 @@ public class EnvironmentManager : MonoBehaviour
             progress = 1f - (timeRemaining / (duration != 0f ? duration : 1f));
 
             MainCamera.transform.position = Vector3.Lerp(cameraStartPos, translation, UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
-            MainCamera.orthographicSize = Mathf.Lerp(cameraStartOrtho, cameraEndOrtho, progress);
+           // MainCamera.orthographicSize = Mathf.Lerp(cameraStartOrtho, cameraEndOrtho, progress);
 
             if(jumpUp)
             {
@@ -238,6 +241,8 @@ public class EnvironmentManager : MonoBehaviour
                 character.SetAttackReady(true);
             }
         }
+
+
     }
 
     public void MoveCharactersToFitNewGrid(float duration)
@@ -318,7 +323,7 @@ public class EnvironmentManager : MonoBehaviour
     {
         GridManagerScript.Instance.ResetGrid();
         isChangeGridStructure = false;
-        CameraManagerScript.Instance.ChangeFocusToNewGrid(CameraStage.CameraInfo.Where(r=> r.StageIndex == (stageIndex != -1 ? stageIndex : currentGridIndex)).First(), cameraChangeDuration, moveCameraInternally);
+       // CameraManagerScript.Instance.ChangeFocusToNewGrid(CameraStage.CameraInfo.Where(r=> r.StageIndex == (stageIndex != -1 ? stageIndex : currentGridIndex)).First(), cameraChangeDuration, moveCameraInternally);
         GridManagerScript.Instance.SetupGrid(gridStructure);
         
     }

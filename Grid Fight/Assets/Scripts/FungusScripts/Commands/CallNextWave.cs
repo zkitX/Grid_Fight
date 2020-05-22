@@ -15,7 +15,6 @@ public class CallNextWave : Command
     public float TransitionDuration = 2;
     public bool HasAStageUpdate = false;
     [ConditionalField("HasAStageUpdate", false)] public int FightGridToShow;
-
     public bool HasADifferentGrid = false;
     [ConditionalField("HasADifferentGrid", false)] public ScriptableObjectGridStructure Grid;
 
@@ -47,6 +46,13 @@ public class CallNextWave : Command
         BattleManagerScript.Instance.ResetAllActiveChars();
         yield return new WaitForSecondsRealtime(1f);
         BattleManagerScript.Instance.CurrentBattleState = BattleState.FungusPuppets;
+        if (HasAStageUpdate)
+        {
+            CameraManagerScript.Instance.CameraFocusSequence(CameraManagerScript.Instance.Duration,
+                CameraManagerScript.Instance.TransitionINZoomValue, CameraManagerScript.Instance.ZoomIn, BattleManagerScript.Instance.CurrentSelectedCharacters[ControllerType.Player1].Character.transform.position);
+            CameraManagerScript.Instance.CameraJumpInOut(1);
+        }
+
         if (CallPool)
         {
             yield return BattleManagerScript.Instance.SetAllNonUsedCharOnBattlefield();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fungus;
 
-[RequireComponent(typeof(Flowchart))]
+[RequireComponent(typeof(Flowchart), typeof(FlowChartVariablesManagerScript))]
 public class EventManager : MonoBehaviour
 {
     public static EventManager Instance;
