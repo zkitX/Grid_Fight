@@ -13,11 +13,7 @@ public class CallSpawnTileEffectAtGridPos : Command
     public bool randomisePosition = true;
     [ConditionalField("randomisePosition")] public int tilesEffected = 1;
     [ConditionalField("randomisePosition")] public WalkingSideType gridSide = WalkingSideType.Both;
-    [ConditionalField("randomisePosition", inverse: true)] public List<AffectTile> affectedTiles = new List<AffectTile>();
-    public bool shareSameParticleEffect = true;
-    [ConditionalField("shareSameParticleEffect")] public ParticlesType particleEffectToPlay = ParticlesType.None;
-    public bool shareSameEffect = true;
-    [ConditionalField("shareSameEffect")] public ScriptableObjectAttackEffect effect = null; 
+    public List<AffectTile> affectedTiles = new List<AffectTile>();
     public float duration = 5f;
     public bool destroyOnCollection = false;
     
@@ -53,12 +49,16 @@ public class CallSpawnTileEffectAtGridPos : Command
             }
         }
 
-        if (shareSameParticleEffect) foreach (AffectTile affectTile in affectedTiles) affectTile.particleEffectToPlay = particleEffectToPlay;
-        if (shareSameEffect) foreach (AffectTile affectTile in affectedTiles) affectTile.effect = effect;
-
         foreach (AffectTile aT in affectedTiles)
         {
-            GridManagerScript.Instance.GetBattleTile(aT.pos).SetupEffect(new List<ScriptableObjectAttackEffect> { aT.effect }, duration, aT.particleEffectToPlay, destroyOnCollection);
+            if (!aT.playFromPrefab)
+                GridManagerScript.Instance.GetBattleTile(aT.pos).SetupEffect(
+                    new List<ScriptableObjectAttackEffect> { aT.overrideEffect }, duration, aT.particleEffectToPlay, destroyOnCollection
+                    );
+            else ParticleManagerScript.Instance.FireParticlesInPosition(aT.particlePrefabToFire, CharacterNameType.None, 
+                AttackParticlePhaseTypes.Cast, GridManagerScript.Instance.GetBattleTile(aT.pos, WalkingSideType.Both).transform.position, 
+                SideType.LeftSide, AttackInputType.Skill1);
+
         }
     }
 
@@ -77,27 +77,16 @@ public class CallSpawnTileEffectAtGridPos : Command
 
     #endregion
 
-    private void OnValidate()
-    {
-        if (randomisePosition)
-        {
-            shareSameParticleEffect = true;
-            shareSameEffect = true;
-        }
-        else
-        {
-            if (shareSameParticleEffect) foreach (AffectTile affectTile in affectedTiles) affectTile.particleEffectToPlay = particleEffectToPlay;
-            if (shareSameEffect) foreach (AffectTile affectTile in affectedTiles) affectTile.effect = effect;
-        }
-    }
 }
 
 [System.Serializable]
 public class AffectTile
 {
     public Vector2Int pos = new Vector2Int(0,0);
-    public ParticlesType particleEffectToPlay = ParticlesType.None;
-    public ScriptableObjectAttackEffect effect = null;
+    public bool playFromPrefab = false;
+    [ConditionalField("playFromPrefab", true)] public ParticlesType particleEffectToPlay = ParticlesType.None;
+    [ConditionalField("playFromPrefab")] public GameObject particlePrefabToFire = null;
+    public ScriptableObjectAttackEffect overrideEffect = null;
 
     public AffectTile()
     {

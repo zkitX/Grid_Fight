@@ -63,7 +63,7 @@ public class CursorParalax : MonoBehaviour
         if (!paralaxObjects[0].setup) yield break;
 
         float timeRemaining = snapbackTime;
-        while (true)
+        while (timeRemaining != 0f)
         {
             timeRemaining = Mathf.Clamp(timeRemaining - Time.deltaTime, 0f, 1000f);
             foreach (ParalaxEffectClass paraObj in paralaxObjects)

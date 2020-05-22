@@ -34,7 +34,7 @@ public class CallPauseForButtonPress : Command
             timePassed += Time.deltaTime;
             yield return null;
         }
-        Continue();
+        ElseAction();
     }
 
     void IfAction()
