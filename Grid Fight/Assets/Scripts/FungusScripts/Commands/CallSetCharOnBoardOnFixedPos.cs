@@ -20,10 +20,28 @@ public class CallSetCharOnBoardOnFixedPos : Command
 
     protected virtual void CallTheMethod()
     {
-
         BaseCharacter cb = BattleManagerScript.Instance.AllCharactersOnField.Where(r => !r.IsOnField && r.CharInfo.CharacterID == cName).FirstOrDefault();
         if(cb != null)
         {
+            if (GridManagerScript.Instance.isPosFree(pos))
+            {
+                BattleManagerScript.Instance.SetCharOnBoard(playerController, cName, pos);
+
+            }
+            else
+            {
+                BattleManagerScript.Instance.SetCharOnBoardOnRandomPos(playerController, cName);
+            }
+        }
+        else
+        {
+            cb = BattleManagerScript.Instance.CharsForTalkingPart.Where(r => !r.IsOnField && r.CharInfo.CharacterID == cName).FirstOrDefault();
+
+            if (cb == null)
+            {
+                cb = BattleManagerScript.Instance.CreateTalkingChar(cName);
+            }
+
             if (GridManagerScript.Instance.isPosFree(pos))
             {
                 BattleManagerScript.Instance.SetCharOnBoard(playerController, cName, pos);

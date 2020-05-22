@@ -139,6 +139,10 @@ public class BattleManagerScript : MonoBehaviour
     public CharacterType_Script SetCharOnBoardOnRandomPos(ControllerType playerController, CharacterNameType cName)
     {
         BaseCharacter currentCharacter = AllCharactersOnField.Where(r => r.UMS.PlayerController.Contains(playerController) && r.CharInfo.CharacterID == cName && !r.IsOnField).FirstOrDefault();
+        if(currentCharacter == null)
+        {
+            currentCharacter = CharsForTalkingPart.Where(r => r.CharInfo.CharacterID == cName).FirstOrDefault();
+        }
         BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(currentCharacter.UMS.WalkingSide, currentCharacter.UMS.Pos);
        
         if (currentCharacter != null && bts != null)

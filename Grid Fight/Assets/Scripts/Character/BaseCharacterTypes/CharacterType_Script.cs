@@ -572,6 +572,7 @@ public class CharacterType_Script : BaseCharacter
         if (completedAnim == CharacterAnimationStateType.JumpTransition_OUT.ToString())
         {
             transform.position = new Vector3(100, 100, 100);
+            SetAttackReady(false);
             return;
         }
 
