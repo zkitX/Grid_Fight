@@ -46,7 +46,7 @@ public class CursorParalax : MonoBehaviour
         {
             foreach(ParalaxEffectClass paraObj in paralaxObjects)
             {
-                paraObj.targetPosition = paraObj.startingPos + 
+                paraObj.targetPosition = paraObj.startingPos -
                     new Vector3(
                         Screen.width/2f * -Grid_UINavigator.Instance.cursor.CursorScreenNormalised.x,
                         Screen.height/2f * -Grid_UINavigator.Instance.cursor.CursorScreenNormalised.y

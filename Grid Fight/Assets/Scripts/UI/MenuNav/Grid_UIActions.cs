@@ -40,6 +40,9 @@ public class Grid_UIActions
             case (UI_ActionTypes.SetBriefingInfo):
                 yield return SetBriefingInfo();
                 break;
+            case (UI_ActionTypes.SetWorldMapFocus):
+                yield return SetWorldMapFocus();
+                break;
             default:
                 break;
         }
@@ -72,6 +75,10 @@ public class Grid_UIActions
                 return "Set navigation to " + navigationType.ToString();
             case (UI_ActionTypes.SetBriefingInfo):
                 return "Set briefing for " + (stageForBriefing != null ? stageForBriefing.Name : "undetermined stage");
+            case (UI_ActionTypes.SetWorldMapFocus):
+                return thingToFocusMapOn == null ? "Reset Map Focus" : "Set world map to focus on " + thingToFocusMapOn.name +
+                    (focusMapZoom != 1 ? " with a zoom of " + focusMapZoom.ToString() + "x" :
+                    "") + " over " + focusMapTiming.ToString() + (focusMapTiming == 1 ? " second" : " seconds");
             default:
                 return actionType.ToString();
         }
@@ -195,6 +202,21 @@ public class Grid_UIActions
     {
         if (briefing == null || stageForBriefing == null) yield break;
         briefing.SetupBriefing(stageForBriefing);
+    }
+
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetWorldMapFocus)] public WorldMenuExtras worldMenuRef = null;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetWorldMapFocus)] public float focusMapTiming = 1f;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetWorldMapFocus)] public Transform thingToFocusMapOn = null;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetWorldMapFocus)] public float focusMapZoom = 1f;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetWorldMapFocus)] public bool focusMapOnScreenCentre = true;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetWorldMapFocus)] public Vector2 screenPositionOffset;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetWorldMapFocus)] public bool pauseTillEndOfFocus = false;
+    IEnumerator SetWorldMapFocus()
+    {
+        if (worldMenuRef == null) yield break;
+        if (pauseTillEndOfFocus) yield return worldMenuRef.FocusLerp((focusMapOnScreenCentre ? new Vector2(0.5f, 0.5f) : screenPositionOffset), focusMapTiming, thingToFocusMapOn, focusMapZoom);
+        else worldMenuRef.SetFocusToObject((focusMapOnScreenCentre ? new Vector2(0.5f, 0.5f) : screenPositionOffset), focusMapTiming, thingToFocusMapOn, focusMapZoom);
+        yield return null;
     }
 
 }

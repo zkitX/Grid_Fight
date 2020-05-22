@@ -74,13 +74,13 @@ public class Grid_UICursor : MonoBehaviour
         }
     }
 
+
     bool cursorMoving = false;
     void MoveCursor(int player, InputDirection direction)
     {
-        if (!cursorMoving)
-        {
-            StartCoroutine(CheckMoving());
-        }
+        if (MoveEnder != null) StopCoroutine(MoveEnder);
+        MoveEnder = EndMove();
+        StartCoroutine(MoveEnder);
 
         Vector2 currentPos = transform.position;
 
@@ -93,18 +93,14 @@ public class Grid_UICursor : MonoBehaviour
         transform.position += new Vector3(move.x, move.y);
     }
 
-    IEnumerator CheckMoving()
+    IEnumerator MoveEnder = null;
+    IEnumerator EndMove()
     {
         cursorMoving = true;
-        while(Mathf.Abs(InputController.Instance.Joystic.x) > 0.1f || Mathf.Abs(InputController.Instance.Joystic.y) > 0.1f)
-        {
-            Debug.Log("Still moving     " + InputController.Instance.Joystic.ToString());
-            yield return null;
-        }
+        yield return new WaitForSeconds(0.05f);
         cursorMoving = false;
         SnapToClosestActiveButton();
     }
-    
 
     public void SnapToClosestActiveButton()
     {

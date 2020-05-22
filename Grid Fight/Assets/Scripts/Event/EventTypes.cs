@@ -56,6 +56,7 @@ public enum UI_ActionTypes
     SetObjectActive,
     SetNavigationSystem,
     SetBriefingInfo,
+    SetWorldMapFocus,
 }
 
 public enum UI_FocusTypes
