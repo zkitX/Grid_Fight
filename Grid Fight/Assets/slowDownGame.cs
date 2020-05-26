@@ -19,10 +19,13 @@ public class slowDownGame : MonoBehaviour
         if (Input.GetKeyDown(keySlow))
         {
             Time.timeScale = Speed;
+            Time.fixedDeltaTime = Speed;
         }
         if (Input.GetKeyDown(keyNormal))
         {
             Time.timeScale = 1;
+            Time.fixedDeltaTime = 1;
+
         }
     }
 }

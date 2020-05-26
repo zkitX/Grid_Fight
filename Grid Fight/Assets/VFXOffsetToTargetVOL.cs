@@ -39,8 +39,8 @@ public class VFXOffsetToTargetVOL : MonoBehaviour
     void FixedUpdate()
     {
         var VOL = PS.velocityOverLifetime;
-        VOL.orbitalOffsetXMultiplier = Target.position.x - transform.position.x;
-        VOL.orbitalOffsetYMultiplier = Target.position.y - transform.position.y;
+        VOL.orbitalOffsetXMultiplier = Target.position.x - transform.position.x - Adjustment.x;
+        VOL.orbitalOffsetYMultiplier = Target.position.y - transform.position.y - Adjustment.y;
         if (IncludeChildren)
         {
             foreach (ParticleSystem pS in PSChildren)
