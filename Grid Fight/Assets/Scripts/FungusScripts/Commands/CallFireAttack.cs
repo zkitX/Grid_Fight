@@ -22,6 +22,8 @@ public class CallFireAttack : Command
     public bool randomiseAttack = false;
     [ConditionalField("randomiseAttack", true)] public ScriptableObjectAttackBase attackType;
 
+    public Vector2Int TargetPosition = Vector2Int.zero;
+
     protected IEnumerator attack()
     {
 
@@ -63,8 +65,15 @@ public class CallFireAttack : Command
         }
         if (character.GetType() == typeof(MinionType_Script))
         {
-            if (randomiseAttack || attackType == null) character.GetAttack();
-            else character.nextAttack = attackType;
+            if (randomiseAttack || attackType == null)
+            {
+                character.GetAttack();
+            }
+            else
+            {
+                character.nextAttack = attackType;
+            }
+            character.nextAttackPos = TargetPosition;
             attackOnceCoroutine = character.AttackSequence();
             StartCoroutine(attackOnceCoroutine);
         }
