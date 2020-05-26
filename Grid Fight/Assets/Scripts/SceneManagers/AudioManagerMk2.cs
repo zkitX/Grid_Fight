@@ -11,6 +11,10 @@ public class AudioManagerMk2 : MonoBehaviour
     public GameObject sourceObjectPrefab;
 
     public AudioMixer mixer;
+    public AudioMixerGroup mg_music;
+    public AudioMixerGroup mg_high;
+    public AudioMixerGroup mg_mid;
+    public AudioMixerGroup mg_low;
 
     public List<NamedManagedAudioSource> namedSources = new List<NamedManagedAudioSource>();
 
@@ -80,22 +84,39 @@ public class AudioManagerMk2 : MonoBehaviour
         audioSource.source.ResetSource();
     }
 
-    public ManagedAudioSource PlaySound(AudioSourceType sourceType, AudioClipInfoClass clipInfo, AudioBus priority, Transform sourceOrigin = null, bool loop = false)
+    public ManagedAudioSource PlaySound(AudioSourceType sourceType, AudioClipInfoClass clipInfo, AudioBus priorityObsolete, Transform sourceOrigin = null, bool loop = false, float fadeInDuration = 0.0f)
     {
         if (ClipPlayedThisFrame(clipInfo.Clip)) return null;
 
-        ManagedAudioSource source = GetFreeSource(priority, sourceType);
+        ManagedAudioSource source = GetFreeSource(clipInfo.audioBus, sourceType);
 
         source.removeNamedOnComplete = false;
         source.gameObject.SetActive(true);
         if (sourceOrigin != null) source.SetParent(sourceOrigin);
         source.SetAudioClipInfo(clipInfo);
-        source.Bus = priority;
-        source.PlaySound(loop);
+        //source.Bus = priority;
+        source.PlaySound(loop, fadeInDuration, clipInfo.audioBus);
         AddClipPlayedLastFrame(clipInfo);
 
-        UpdateActiveAudioVolumes();
+        if (fadeInDuration == 0.0f) UpdateActiveAudioVolumes();
         return source;
+    }
+
+    public AudioMixerGroup AssignMixerGroupPriority (AudioBus _priority)
+    {
+        switch (_priority)
+        {
+            case AudioBus.HighPrio:
+                return mg_high;
+            case AudioBus.MidPrio:
+                return mg_mid;
+            case AudioBus.LowPrio:
+                return mg_low;
+            case AudioBus.Music:
+                return mg_music;
+            default:
+                return mg_low;
+        }
     }
 
     public float GetDampener(AudioSourceType type, AudioBus priorityToCompare)

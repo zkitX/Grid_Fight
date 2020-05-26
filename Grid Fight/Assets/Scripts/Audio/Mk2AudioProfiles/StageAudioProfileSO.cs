@@ -13,5 +13,9 @@ public class StageAudioProfileSO : BaseAudioProfileSO
     {
         allAudioClips.Add(ambience);
         allAudioClips.Add(music);
+
+        //Default AudioBus
+        ambience.audioBus = AudioBus.LowPrio;
+        music.audioBus = AudioBus.Music;
     }
 }

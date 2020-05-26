@@ -51,5 +51,33 @@ public class UniversalAudioProfileSO : BaseAudioProfileSO
         allAudioClips.Add(PowerUp_Speed);
         allAudioClips.Add(PowerUp_Stamina);
         allAudioClips.Add(PowerUp_Damage);
+
+        ArrivalSpawn.audioBus = AudioBus.HighPrio;
+        ArrivalImpact.audioBus = AudioBus.HighPrio;
+        ExitBattleJump.audioBus = AudioBus.HighPrio;
+        StageSwitchSound.audioBus = AudioBus.HighPrio;
+        SpecialAttackChargingLoop.audioBus = AudioBus.MidPrio;
+        SpecialAttackChargingRelease.audioBus = AudioBus.LowPrio;
+
+        Shield_Full.audioBus = AudioBus.MidPrio;
+        Shield_Partial.audioBus = AudioBus.HighPrio;
+
+        PowerUp_Health.audioBus = AudioBus.MidPrio;
+        PowerUp_Speed.audioBus = AudioBus.MidPrio;
+        PowerUp_Stamina.audioBus = AudioBus.MidPrio;
+        PowerUp_Damage.audioBus = AudioBus.MidPrio;
+
+        Dialogue_Entering.audioBus = AudioBus.HighPrio;
+        Dialogue_Exiting.audioBus = AudioBus.HighPrio;
+        Dialogue_TextStart.audioBus = AudioBus.HighPrio;
+        Dialogue_TextEnd.audioBus = AudioBus.HighPrio;
+        Dialogue_CharacterSwap.audioBus = AudioBus.HighPrio;
+        Menus_SelectButton.audioBus = AudioBus.HighPrio;
+        Menus_PressButton.audioBus = AudioBus.HighPrio;
+
+        Loading_Start.audioBus = AudioBus.HighPrio;
+        Loading_Stop.audioBus = AudioBus.HighPrio;
+
+        GetReadyFight.audioBus = AudioBus.HighPrio;
     }
 }

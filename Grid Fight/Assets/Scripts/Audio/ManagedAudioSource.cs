@@ -87,11 +87,24 @@ public class ManagedAudioSource : MonoBehaviour
         //SET THE VOLUME BASED ON THE BASE VOLUME OF THE CLIP INFO AND WHETHER THERE ARE DAMPENERS APPLIED BY THE MANAGER
     }
 
-    public void PlaySound(bool looped = false)
+    public void PlaySound(bool looped = false, float fadeInDuration = 0.0f, AudioBus priority = AudioBus.LowPrio)
     {
         source.loop = looped;
-        UpdateVolume();
-        source.Play();
+        source.outputAudioMixerGroup = AudioManagerMk2.Instance.AssignMixerGroupPriority(priority);
+
+        if (fadeInDuration == 0.0f)
+        {
+            UpdateVolume();
+            source.Play();
+        }
+        else
+        {
+            source.volume = 0.0f;
+            StartCoroutine(StartFade(source, fadeInDuration, audioClipInfo.baseVolume * AudioManagerMk2.Instance.GetDampener(type, Bus)));
+            source.Play();
+            
+        }
+            
         if (!looped)
         {
             if (ResetAfterCompleteSequencer != null) StopCoroutine(ResetAfterCompleteSequencer);
@@ -100,6 +113,20 @@ public class ManagedAudioSource : MonoBehaviour
         }
     }
 
+    public static IEnumerator StartFade(AudioSource audioSource, float duration, float targetVolume)
+    {
+        float currentTime = 0;
+        float start = audioSource.volume;
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            audioSource.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
+            yield return null;
+        }
+        yield break;
+    }
+    
     IEnumerator ResetAfterCompleteSequencer = null;
     IEnumerator ResetAfterCompleteSequence()
     {
@@ -180,6 +207,8 @@ public class AudioClipInfoClass
 
         }
     }
+
+    [HideInInspector] public AudioBus audioBus = AudioBus.LowPrio;
 
     [ConditionalField("moreThanOneClip", false)] public bool randomiseOrder = false;
     [HideInInspector] public bool moreThanOneClip = false;

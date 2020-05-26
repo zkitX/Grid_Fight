@@ -40,6 +40,27 @@ public class CharacterAudioProfileSO : BaseAudioProfileSO
         allAudioClips.Add(Skill3.Impact);
         allAudioClips.Add(ArrivingCry);
         allAudioClips.Add(Death);
+
+        //Default AudioBus
+        Footsteps.audioBus = AudioBus.LowPrio;
+        RapidAttack.Cast.audioBus = AudioBus.MidPrio;
+        RapidAttack.Loop.audioBus = AudioBus.MidPrio;
+        RapidAttack.Impact.audioBus = AudioBus.MidPrio;
+        PowerfulAttack.Cast.audioBus = AudioBus.MidPrio;
+        PowerfulAttack.Loop.audioBus = AudioBus.MidPrio;
+        PowerfulAttack.Impact.audioBus = AudioBus.MidPrio;
+        Skill1.Cast.audioBus = AudioBus.MidPrio;
+        Skill1.Loop.audioBus = AudioBus.MidPrio;
+        Skill1.Impact.audioBus = AudioBus.MidPrio;
+        Skill2.Cast.audioBus = AudioBus.MidPrio;
+        Skill2.Loop.audioBus = AudioBus.MidPrio;
+        Skill2.Impact.audioBus = AudioBus.MidPrio;
+        Skill3.Cast.audioBus = AudioBus.MidPrio;
+        Skill3.Loop.audioBus = AudioBus.MidPrio;
+        Skill3.Impact.audioBus = AudioBus.MidPrio;
+        ArrivingCry.audioBus = AudioBus.HighPrio;
+        Death.audioBus = AudioBus.HighPrio;
+
         base.OnEnable();
     }
 }
