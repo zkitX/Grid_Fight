@@ -328,7 +328,9 @@ public enum BuffDebuffStatsType
     SpeedStats_IdleToAtkDuration,
     SpeedStats_AtkToIdleDuration,
     DamageStats_BaseDamage,
-    Damage_Cure
+    Damage_Cure,
+    Zombification
+
 }
 
 public enum WaveStatsType

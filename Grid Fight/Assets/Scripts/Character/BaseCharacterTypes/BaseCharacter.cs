@@ -58,7 +58,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public bool CanAttack = false;
     public bool isSpecialLoading = false;
     public bool isSpecialQueueing = false;
-    public List<CurrentBuffsDebuffsClass> BuffsDebuffs = new List<CurrentBuffsDebuffsClass>();
     public List<BuffDebuffClass> BuffsDebuffsList = new List<BuffDebuffClass>();
     public List<CharacterActionType> CharActionlist = new List<CharacterActionType>();
     public bool VFXTestMode = false;
@@ -980,12 +979,16 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         if (bdClass.Stat == BuffDebuffStatsType.ElementalResistance)
         {
-            ElementalResistance(bdClass.CurrentBuffDebuff);
+            //ElementalResistance(bdClass.CurrentBuffDebuff);
         }
-        if(bdClass.Stat == BuffDebuffStatsType.Damage_Cure)
+        else if(bdClass.Stat == BuffDebuffStatsType.Damage_Cure)
         {
             HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, bdClass.CurrentBuffDebuff.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, bdClass.EffectMaker.transform);
             bdClass.EffectMaker.CharInfo.Health += bdClass.CurrentBuffDebuff.Value;
+        }
+        else if (bdClass.Stat == BuffDebuffStatsType.Zombification)
+        {
+            BattleManagerScript.Instance.Zombification(this);
         }
         else
         {
@@ -1060,7 +1063,15 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
             }
 
-            if (bdClass.Stat != BuffDebuffStatsType.ElementalResistance)
+            if (bdClass.Stat == BuffDebuffStatsType.ElementalResistance)
+            {
+              
+            }
+            else if(bdClass.Stat == BuffDebuffStatsType.Zombification)
+            {
+
+            }
+            else
             {
                 if (bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Perc)
                 {
@@ -1110,7 +1121,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     private void ElementalResistance(Buff_DebuffClass bdClass)
     {
-        CurrentBuffsDebuffsClass currentBuffDebuff = BuffsDebuffs.Where(r => r.ElementalResistence.Elemental == bdClass.ElementalResistence.Elemental).FirstOrDefault();
+        /*CurrentBuffsDebuffsClass currentBuffDebuff = BuffsDebuffs.Where(r => r.ElementalResistence.Elemental == bdClass.ElementalResistence.Elemental).FirstOrDefault();
         ElementalWeaknessType BaseWeakness = GetElementalMultiplier(CharInfo.DamageStats.ElementalsResistence, bdClass.ElementalResistence.Elemental);
         CurrentBuffsDebuffsClass newBuffDebuff = new CurrentBuffsDebuffsClass();
         newBuffDebuff.ElementalResistence = bdClass.ElementalResistence;
@@ -1140,34 +1151,36 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 bdClass.ElementalResistence.ElementalWeakness + (int)BaseWeakness;
             BuffsDebuffs.Add(newBuffDebuff);
             StartCoroutine(newBuffDebuff.BuffDebuffCo);
-        }
+        }*/
     }
 
 
 
     private IEnumerator ElementalBuffDebuffCo(CurrentBuffsDebuffsClass newBuffDebuff)
     {
-        float timer = 0;
-        float newDuration = newBuffDebuff.Duration - Mathf.Abs((int)newBuffDebuff.ElementalResistence.ElementalWeakness);
-        while (timer <= newDuration)
-        {
-            yield return BattleManagerScript.Instance.PauseUntil();
+        /*float timer = 0;
+         float newDuration = newBuffDebuff.Duration - Mathf.Abs((int)newBuffDebuff.ElementalResistence.ElementalWeakness);
+         while (timer <= newDuration)
+         {
+             yield return BattleManagerScript.Instance.PauseUntil();
 
-            timer += Time.fixedDeltaTime;
-        }
+             timer += Time.fixedDeltaTime;
+         }
 
-        for (int i = 0; i < Mathf.Abs((int)newBuffDebuff.ElementalResistence.ElementalWeakness); i++)
-        {
-            timer = 0;
-            while (timer <= 1)
-            {
-                yield return BattleManagerScript.Instance.PauseUntil();
+         for (int i = 0; i < Mathf.Abs((int)newBuffDebuff.ElementalResistence.ElementalWeakness); i++)
+         {
+             timer = 0;
+             while (timer <= 1)
+             {
+                 yield return BattleManagerScript.Instance.PauseUntil();
 
-                timer += Time.fixedDeltaTime;
-            }
-        }
+                 timer += Time.fixedDeltaTime;
+             }
+         }
 
-        BuffsDebuffs.Remove(newBuffDebuff);
+         BuffsDebuffs.Remove(newBuffDebuff);*/
+
+        yield return null;
     }
 
     #endregion
