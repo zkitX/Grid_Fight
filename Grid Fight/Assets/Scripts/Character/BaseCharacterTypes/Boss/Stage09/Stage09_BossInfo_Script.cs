@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEditor;
 
-public class Stage09_BossInfo : MonoBehaviour
+public class Stage09_BossInfo_Script : MonoBehaviour
 {
     public Vector2 maidenFormeAttackCoolDown = new Vector2(3f, 5f);
     public Vector2 moonlightBlessCastCoolDown = new Vector2(0.5f, 2f);

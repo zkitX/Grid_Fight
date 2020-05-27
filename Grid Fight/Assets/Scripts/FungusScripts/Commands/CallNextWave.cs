@@ -48,9 +48,9 @@ public class CallNextWave : Command
         BattleManagerScript.Instance.CurrentBattleState = BattleState.FungusPuppets;
         if (HasAStageUpdate)
         {
-            CameraManagerScript.Instance.CameraFocusSequence(CameraManagerScript.Instance.Duration,
+            CameraManagerScript.Instance.CameraFocusSequence(CameraManagerScript.Instance.DurationIn,
                 CameraManagerScript.Instance.TransitionINZoomValue, CameraManagerScript.Instance.ZoomIn, BattleManagerScript.Instance.CurrentSelectedCharacters[ControllerType.Player1].Character.transform.position);
-            CameraManagerScript.Instance.CameraJumpInOut(1);
+            //CameraManagerScript.Instance.CameraJumpInOut(2);
         }
 
         if (CallPool)

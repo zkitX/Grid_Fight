@@ -285,6 +285,11 @@ public class WaveManagerScript : MonoBehaviour
         }
 
         yield return BattleManagerScript.Instance.MoveCharToBoardWithDelay(withArrivingAnim ? 0.2f : 0, currentCharacter, bts.transform.position);
+
+        while (!currentCharacter.IsOnField)
+        {
+            yield return null;
+        }
     }
 
     private WaveCharacterInfoClass GetAvailableRandomWaveCharacter(WavePhaseClass wavePhase)

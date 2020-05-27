@@ -433,7 +433,7 @@ public class CharacterType_Script : BaseCharacter
         bs.Elemental = CharInfo.DamageStats.CurrentElemental;
         bs.Side = UMS.Side;
         bs.VFXTestMode = VFXTestMode;
-        bs.CharInfo = CharInfo;
+        bs.CharOwner = this;
         bs.attackAudioType = GetAttackAudio();
         bs.EffectChances = 100;
         bs.HitPs = UMS.Side == SideType.LeftSide ? nextAttack.Particles.Left.Hit : nextAttack.Particles.Right.Hit;

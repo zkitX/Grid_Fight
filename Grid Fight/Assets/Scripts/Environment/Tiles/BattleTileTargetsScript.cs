@@ -35,6 +35,7 @@ public class BattleTileTargetsScript : MonoBehaviour
         bool attackerFiredAttackAnim = false;
         Animator anim = tc.TargetIndicator.GetComponent<Animator>();
         anim.speed = 1 / duration;
+        ScriptableObjectAttackBase nextAttack = attacker.nextAttack;
         while (timer < duration)
         {
             yield return new WaitForFixedUpdate();
@@ -63,15 +64,16 @@ public class BattleTileTargetsScript : MonoBehaviour
         }
 
         bool effectOn = true;
+        BaseCharacter target = null;
         if (BattleManagerScript.Instance != null)
         {
-            BaseCharacter target;
             target = BattleManagerScript.Instance.GetCharInPos(pos);
             if (target != null)
             {
                 bool iscritical = attacker.CharInfo.IsCritical(true);
                 //Set damage to the hitting character
-                effectOn = target.SetDamage(damage * (iscritical ? 2 : 1), ele, iscritical);
+                float dmg = damage * (iscritical ? 2 : 1);
+                effectOn = target.SetDamage(dmg, ele, iscritical);
                 if (effectOn)
                 {
                     int chances = Random.Range(0, 100);
@@ -79,7 +81,7 @@ public class BattleTileTargetsScript : MonoBehaviour
                     {
                         foreach (ScriptableObjectAttackEffect item in atkEffects)
                         {
-                            target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.Value.x, item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles));
+                            target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.StatsToAffect == BuffDebuffStatsType.Damage_Cure ? item.Value.x *2 : item.Value.x, item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles, attacker));
                         }
                     }
                 }
@@ -91,7 +93,19 @@ public class BattleTileTargetsScript : MonoBehaviour
         {
             if (effectOn)
             {
-                attacker.SpecialAttackImpactEffects(transform.position);
+                GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.Right.Hit, attacker.CharInfo.CharacterID, AttackParticlePhaseTypes.Hit, transform.position, attacker.UMS.Side, nextAttack.AttackInput);
+                foreach (VFXOffsetToTargetVOL item in effect.GetComponentsInChildren<VFXOffsetToTargetVOL>())
+                {
+                    if (target != null)
+                    {
+                        item.gameObject.SetActive(true);
+                        item.Target = attacker.transform;
+                    }
+                    else
+                    {
+                        item.gameObject.SetActive(false);
+                    }
+                }  
             }
             if (attacker.GetAttackAudio() != null)
             {

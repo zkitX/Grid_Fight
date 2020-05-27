@@ -238,13 +238,9 @@ public class MinionType_Script : BaseCharacter
     //Basic attack sequence
     public override IEnumerator AttackSequence(ScriptableObjectAttackBase atk = null)
     {
-        /*shotsLeftInAttack = 0;
-        if (currentAttackPhase != AttackPhasesType.End) yield break;*/
-
-        //yield return null;
         Attacking = true;
 
-        CharacterAnimationStateType animToFire = CharacterAnimationStateType.Atk1_IdleToAtk;
+        string animToFire;
         bool isLooped = false;
         if (atk != null)
         {
@@ -256,44 +252,10 @@ public class MinionType_Script : BaseCharacter
         }
         if(nextAttack != null)
         {
-            switch (nextAttack.AttackAnim)
-            {
-                /*  case AttackAnimPrefixType.Atk:
-                      sequencedAttacker = false;
-                      chargeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(CharInfo.ParticleID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side);
-                      animToFire = CharacterAnimationStateType.Idle;
-                      isLooped = true;
-                      currentAttackPhase = AttackPhasesType.Cast_Powerful;
-                      CreateTileAttack();
-                      break;*/
-                case AttackAnimType.Weak_Atk:
-                    animToFire = CharacterAnimationStateType.Atk1_IdleToAtk;
-                    isLooped = false;
-                    break;
-                case AttackAnimType.Strong_Atk:
-                    animToFire = CharacterAnimationStateType.Atk2_IdleToAtk;
-                    isLooped = false;
-                    break;
-                case AttackAnimType.Buff:
-                    break;
-                case AttackAnimType.Debuff:
-                    break;
-            }
-
-            /*  switch (CurrentAI)
-              {
-                  case AIType.GeneralAI:
-                      res = GeneralTestAI();
-                      break;
-                  case AIType.AggressiveAI:
-                      res = AggressiveTestAI();
-                      break;
-              }*/
-            //shotsLeftInAttack = GetHowManyAttackAreOnBattleField(((ScriptableObjectAttackTypeOnBattlefield)nextAttack).BulletTrajectories);
-
+            isLooped = false;
+            animToFire = nextAttack.PrefixAnim + "_IdleToAtk";
             currentAttackPhase = AttackPhasesType.Start;
             SetAnimation(animToFire, isLooped, 0f);
-
 
             while (Attacking)
             {
@@ -301,38 +263,6 @@ public class MinionType_Script : BaseCharacter
             }
         }
     }
-
-
-    /*public bool GeneralTestAI()
-    {
-        BaseCharacter cb = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x && r.IsOnField).FirstOrDefault();
-        if (cb != null)
-        {
-            if (UnderAttack)
-            {
-                if (CharInfo.HealthPerc > 40)
-                {
-                    return true;
-                }
-                else
-                {
-                    AIMove = false;
-                    return false;
-                }
-            }
-            else
-            {
-                return true;
-            }
-        }
-        else
-        {
-            AIMove = true;
-            return false;
-        }
-
-    }*/
-
 
     public virtual bool GeneralTestAI()
     {
@@ -362,10 +292,7 @@ public class MinionType_Script : BaseCharacter
             AIMove = true;
             return false;
         }
-
     }
-
-
 
     public bool AggressiveTestAI()
     {
@@ -401,7 +328,7 @@ public class MinionType_Script : BaseCharacter
         bs.Trajectory_Z = bulletBehaviourInfo.Trajectory_Z;
         bs.isColliding = false;
         bs.attackAudioType = GetAttackAudio();
-        bs.CharInfo = CharInfo;
+        bs.CharOwner = this;
         bs.DestinationTile = pos;
         bs.BulletEffectTiles.Clear();
         bs.BulletDuration = delay;

@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class Stage00_BossOctopus_Head : MinionType_Script
+public class Stage00_BossOctopus_Head_Script : MinionType_Script
 {
 
-    public Stage00_BossOctopus bossParent;
-    public Stage00_BossOctopus_Girl bossLady;
+    public Stage00_BossOctopus_Script bossParent;
+    public Stage00_BossOctopus_Girl_Script bossLady;
     public bool CanGetDamage = true;
     private List<VFXOffsetToTargetVOL> TargetControllerList = new List<VFXOffsetToTargetVOL>();
-    public Stage00_BossOctopus BaseBoss;
+    public Stage00_BossOctopus_Script BaseBoss;
     public List<Vector3> eyeAttackTarget = new List<Vector3>();
     public bool disabled = false;
 

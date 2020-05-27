@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Stage09_Boss_Geisha : MinionType_Script
+public class Stage09_Boss_Geisha_Script : MinionType_Script
 {
 
     public override bool Attacking
@@ -34,10 +34,10 @@ public class Stage09_Boss_Geisha : MinionType_Script
             else return oniForme.CharInfo;
         }
     }
-    Stage09_BossInfo bossInfo = null;
+    Stage09_BossInfo_Script bossInfo = null;
     bool IsCharArrived = false;
     bool oniFormeActive = false;
-    Stage09_Boss_NoFace oniForme;
+    Stage09_Boss_NoFace_Script oniForme;
     public bossPhasesType BossPhase = bossPhasesType.Phase1_;
     bool shielded = false;
     GameObject shieldParticles = null;
@@ -68,14 +68,14 @@ public class Stage09_Boss_Geisha : MinionType_Script
 
     void SetupFromBossInfo()
     {
-        bossInfo = GetComponentInChildren<Stage09_BossInfo>();
+        bossInfo = GetComponentInChildren<Stage09_BossInfo_Script>();
         bossInfo.InitialiseBossInfo();
         if (oniForme != null && oniForme.bossInfo == null) oniForme.bossInfo = bossInfo;
     }
 
     void GenerateBoss()
     {
-        oniForme = (Stage09_Boss_NoFace)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(CharacterNameType.Stage09_Boss_NoFace.ToString(), CharacterSelectionType.Up,
+        oniForme = (Stage09_Boss_NoFace_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(CharacterNameType.Stage09_Boss_NoFace.ToString(), CharacterSelectionType.Up,
         new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage09_Boss_NoFace, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None, new List<CharacterActionType>()), transform);
         oniForme.bossInfo = bossInfo;
         oniForme.UMS.Pos = UMS.Pos;

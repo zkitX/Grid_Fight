@@ -4,10 +4,10 @@ using UnityEngine;
 using System.Linq;
 using Spine;
 
-public class Stage09_Boss_NoFace : MinionType_Script
+public class Stage09_Boss_NoFace_Script : MinionType_Script
 {
-    public Stage09_BossInfo bossInfo = null;
-    public Stage09_Boss_Geisha baseForme;
+    public Stage09_BossInfo_Script bossInfo = null;
+    public Stage09_Boss_Geisha_Script baseForme;
     public bool isImmune = true;
     public bool isDead = false;
     public int intensityLevel = -1;
@@ -44,7 +44,7 @@ public class Stage09_Boss_NoFace : MinionType_Script
         CanAttack = true;
 
         baseForme.CharInfo.HealthStats.Regeneration = 0f;
-        baseForme.BossPhase = Stage09_Boss_Geisha.bossPhasesType.Monster_;
+        baseForme.BossPhase = Stage09_Boss_Geisha_Script.bossPhasesType.Monster_;
     }
 
     public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
@@ -83,7 +83,7 @@ public class Stage09_Boss_NoFace : MinionType_Script
         {
             yield return null;
         }
-        while (baseForme.BossPhase != Stage09_Boss_Geisha.bossPhasesType.Monster_)
+        while (baseForme.BossPhase != Stage09_Boss_Geisha_Script.bossPhasesType.Monster_)
         {
             yield return null;
         }
@@ -98,7 +98,7 @@ public class Stage09_Boss_NoFace : MinionType_Script
                 yield return null;
             }
 
-            if (IsOnField && CanAttack && baseForme.BossPhase == Stage09_Boss_Geisha.bossPhasesType.Monster_ && !isImmune)
+            if (IsOnField && CanAttack && baseForme.BossPhase == Stage09_Boss_Geisha_Script.bossPhasesType.Monster_ && !isImmune)
             {
                 List<BaseCharacter> enemys = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList();
                 BaseCharacter targetChar = enemys.Count != 0 ? enemys[Random.Range(0, enemys.Count)] : null;
@@ -172,7 +172,7 @@ public class Stage09_Boss_NoFace : MinionType_Script
 
     public override bool SetDamage(float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
-        if (baseForme.BossPhase == Stage09_Boss_Geisha.bossPhasesType.Monster_ && !isImmune)
+        if (baseForme.BossPhase == Stage09_Boss_Geisha_Script.bossPhasesType.Monster_ && !isImmune)
         {
             bool boolToReturn = base.SetDamage(damage, elemental, isCritical, isAttackBlocking);
             return boolToReturn;

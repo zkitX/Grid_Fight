@@ -253,26 +253,33 @@ public class GridManagerScript : MonoBehaviour
         BattleTileScript curTile = null;
 
         List<BattleTileScript> adjTiles = new List<BattleTileScript>();
-        //WalkingSideType side = BattleTiles.Where(r => r.Pos == originPos).First().WalkingSide;
-        for (int x = -withinRadius; x <= withinRadius; x++)
+
+
+        for (int i = 1; i < withinRadius + 1; i++)
         {
-            for (int y = -withinRadius; y <= withinRadius; y++)
+            for (int x = -i; x <= i; x++)
             {
-                curTilePos = new Vector2Int(x, y) + originPos;
-                curTile = side != WalkingSideType.Both ? GetBattleTile(curTilePos, side) : BattleTiles.Where(r => r.Pos == originPos).FirstOrDefault();
-                if (curTile != null && curTilePos != originPos && (circularRadius ? Vector2Int.Distance(curTilePos, originPos) - 0.5f < withinRadius : true))
+                for (int y = -i; y <= i; y++)
                 {
-                    adjTiles.Add(curTile);
+                    curTilePos = new Vector2Int(x, y) + originPos;
+                    curTile = GetBattleTile(curTilePos);
+                    if (curTile != null && curTile.WalkingSide == side)
+                    {
+                        adjTiles.Add(curTile);
+                    }
                 }
             }
         }
+
+        //WalkingSideType side = BattleTiles.Where(r => r.Pos == originPos).First().WalkingSide;
+       
         if (adjTiles.Count == 0)
         {
             return null;
         }
         else
         {
-            return adjTiles.ToArray();
+            return adjTiles.Distinct().ToArray();
         }
     }
 
