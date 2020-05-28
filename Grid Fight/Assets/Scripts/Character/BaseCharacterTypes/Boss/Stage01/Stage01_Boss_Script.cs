@@ -111,8 +111,8 @@ public class Stage01_Boss_Script : MinionType_Script
                     CurrentPhase = Stage01_Boss_MaskType.WarDrums;
                     break;
                 case AttackInputType.Strong:
-                    CurrentPhase = Stage01_Boss_MaskType.CrystalTomb;
-                    break;
+                    base.SetAnimation(Stage01_Boss_MaskType.CrystalTomb.ToString() + "_" + animState, loop, transition, _pauseOnLastFrame);
+                    return;
                 case AttackInputType.Skill1:
                     CurrentPhase = Stage01_Boss_MaskType.LifeDrums;
                     break;
