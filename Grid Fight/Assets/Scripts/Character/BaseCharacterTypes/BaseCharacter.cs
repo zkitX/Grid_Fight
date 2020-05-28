@@ -877,9 +877,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 isMoving = false;
                 TileMovementCompleteEvent?.Invoke(this);
                 MoveCo = null;
+                spineT.localPosition = nextPos;
                 yield break;
             }
         }
+
+        spineT.localPosition = nextPos;
         Debug.Log("EndMoveCo");
     }
 

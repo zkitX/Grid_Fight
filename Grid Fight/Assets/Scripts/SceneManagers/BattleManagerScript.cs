@@ -605,14 +605,11 @@ public class BattleManagerScript : MonoBehaviour
 
         if (CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar == CurrentSelectedCharacters[playerController].Character.CharInfo.CharacterSelection)
         {
-            Debug.Log(val + "   same char");
             //CurrentSelectedCharacters[playerController].Character.SwapWhenPossible = false;
             yield break;
         }
 
         // yield return HoldPressTimer(playerController);
-        Debug.Log(CurrentSelectedCharacters[playerController].OffsetSwap + "    " + Time.time);
-
         CurrentSelectedCharacters[playerController].Character.SwapWhenPossible = true;
 
         while (CurrentSelectedCharacters[playerController].OffsetSwap > Time.time || !CurrentSelectedCharacters[playerController].Character.IsOnField ||
@@ -625,7 +622,6 @@ public class BattleManagerScript : MonoBehaviour
                 DeselectCharacter(cName, CurrentSelectedCharacters[playerController].Character.UMS.Side, playerController);
                 yield break;
             }
-            Debug.Log(val);
             yield return null;
         }
 
