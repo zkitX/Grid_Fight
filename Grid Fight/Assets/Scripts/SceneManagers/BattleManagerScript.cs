@@ -665,13 +665,24 @@ public class BattleManagerScript : MonoBehaviour
     public void RemoveNamedCharacterFromBoard(CharacterNameType charToRemoveName)
     {
         BaseCharacter charToRemove = AllCharactersOnField.Where(r => r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
-        if (charToRemove == null)
+        if (charToRemove != null)
         {
-            charToRemove = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
+            foreach (KeyValuePair<ControllerType, CurrentSelectedCharacterClass> item in CurrentSelectedCharacters)
+            {
+                if (item.Value.Character != null && item.Value.Character == charToRemove)
+                {
+                    DeselectCharacter(charToRemove.CharInfo.CharacterID, charToRemove.UMS.Side, item.Key);
+                    item.Value.Character = null;
+                }
+            }
+        }
+        else
+        {
+            charToRemove = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == charToRemoveName && r.IsOnField).FirstOrDefault();
         }
         if (charToRemove == null)
         {
-            charToRemove = CharsForTalkingPart.Where(r => r.CharInfo.CharacterID == charToRemoveName).FirstOrDefault();
+            charToRemove = CharsForTalkingPart.Where(r => r.CharInfo.CharacterID == charToRemoveName && r.IsOnField).FirstOrDefault();
         }
         Debug.Log("Character removed: " + charToRemove.CharInfo.CharacterID.ToString());
         ControllerType controller = ControllerType.None;

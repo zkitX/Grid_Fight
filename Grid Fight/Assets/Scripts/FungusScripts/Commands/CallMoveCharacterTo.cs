@@ -24,7 +24,7 @@ public class CallMoveCharacterTo : Command
     IEnumerator Move()
     {
         yield return BattleManagerScript.Instance.MoveCharOnPos(characterID, destination, holdForCompletedMove);
-        if (!holdForCompletedMove) Continue();
+        Continue();
     }
 
     public override Color GetButtonColor()
