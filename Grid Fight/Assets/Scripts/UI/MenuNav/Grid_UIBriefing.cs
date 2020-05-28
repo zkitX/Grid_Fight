@@ -14,5 +14,6 @@ public class Grid_UIBriefing : MonoBehaviour
     {
         title.text = stageInfo.Name;
         description.text = stageInfo.Description;
+        SceneLoadManager.Instance.stagePrimedToLoad = stageInfo;
     }
 }

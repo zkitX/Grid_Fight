@@ -5,6 +5,8 @@ using MyBox;
 
 public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
 {
+    public static BattleManagerBaseObjectGeneratorScript Instance;
+    bool loadFromGameScene = false;
     public float loadingTime = 5f;
     public string selectedStageID = "";
     protected StageProfile stage;
@@ -22,34 +24,37 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
 
     private void Start()
     {
-        SelectStage();
-        LoadStage();
+        Instance = this;
+        loadFromGameScene = SceneLoadManager.Instance != null;
+        if (loadFromGameScene) return;
+        StartCoroutine(ConfigureBattleScene(selectedStageID));
     }
 
-    void SelectStage()
+    public IEnumerator ConfigureBattleScene(string stageName)
     {
-        foreach(StageProfile stageP in stages)
+        SelectStage(stageName);
+        yield return SetupScene();
+    }
+
+    void SelectStage(string stageName)
+    {
+        foreach (StageProfile stageP in stages)
         {
-            if (stageP.ID == selectedStageID)
+            if (stageP.ID == stageName)
             {
                 stage = stageP;
                 return;
             }
         }
-        Debug.LogError("Stage with StageID " + selectedStageID + " not found in Stages list");
-    }
-
-    public void LoadStage()
-    {
-        StartCoroutine(SetupScene());
+        Debug.LogError("Stage with StageID " + stageName + " not found in Stages list");
     }
 
     private IEnumerator SetupScene()
     {
-        InfoUIManager.Instance.EnableLoadingScreen(true, false);
-        StartCoroutine(LevelLoadingSequence());
+        InfoUIManager.Instance.EnableLoadingScreen(!loadFromGameScene, false);
+        yield return LevelLoadingSequence();
         yield return new WaitForSeconds(loadingTime);
-        InfoUIManager.Instance.EnableLoadingScreen(false, true);
+        if (!loadFromGameScene) InfoUIManager.Instance.EnableLoadingScreen(false, true);
     }
 
     public void ChangeStage(string newStageID, bool loadAsWell = true)
@@ -61,8 +66,7 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
     {
         if (stage.ID == newStageID) yield break;
 
-        selectedStageID = newStageID;
-        SelectStage();
+        SelectStage(newStageID);
 
         if (!loadAsWell) yield break;
 
@@ -84,7 +88,7 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
 
         yield return InputController.Instance.Applet(2);
 
-        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Character_Testing_Scene")
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Character_Testing_Scene")
         {
             while (!UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Contains("BattleScene"))
             {
@@ -94,8 +98,8 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
 
         if (Rewired == null)
         {
-           Rewired = Instantiate(stage.Rewired);
-           StageObjects.Add(Rewired);
+            Rewired = Instantiate(stage.Rewired);
+            StageObjects.Add(Rewired);
         }
         yield return null;
 
@@ -114,11 +118,13 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
             Wave = Instantiate(stage.Wave);
             StageObjects.Add(Wave);
         }
+
         if (stage.EventManager != null)
         {
             EventManager = Instantiate(stage.EventManager);
             StageObjects.Add(EventManager);
         }
+
         BattleInfoManager = Instantiate(stage.BattleInfoManager);
         StageObjects.Add(BattleInfoManager);
 
@@ -137,11 +143,11 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
 
         if (AudioManager.GetComponent<AudioManagerMk2>() != null && stage.StageAudioProfile != null)
         {
-            if(stage.StageAudioProfile.music != null)
+            if (stage.StageAudioProfile.music != null)
                 AudioManager.GetComponent<AudioManagerMk2>().PlaySound(AudioSourceType.Music, stage.StageAudioProfile.music, AudioBus.Music, loop: true);
-            if(stage.StageAudioProfile.ambience != null)
+            if (stage.StageAudioProfile.ambience != null)
                 AudioManager.GetComponent<AudioManagerMk2>().PlaySound(AudioSourceType.Ambience, stage.StageAudioProfile.ambience, AudioBus.Music, loop: true);
-        }   
+        }
 
         UserInputManager.Instance.StartUserInputManager();
         BattleManagerScript.Instance.SetupBattleState();

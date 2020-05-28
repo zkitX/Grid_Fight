@@ -863,6 +863,8 @@ public enum MovementCurveType
 public enum MenuNavigationType
 {
     Unassigned = 0,
+    None = 0,
     Relative = 1,
     Cursor = 2,
 }
+

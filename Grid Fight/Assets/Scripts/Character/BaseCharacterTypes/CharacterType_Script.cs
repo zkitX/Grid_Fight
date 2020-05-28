@@ -11,7 +11,8 @@ public class CharacterType_Script : BaseCharacter
     private IEnumerator MoveActionCo;
     public bool Atk1Queueing = false;
     [SerializeField] protected bool CharacterJumping = false;
-    public ManagedAudioSource chargingAudio = null;
+    ManagedAudioSource chargingAudio = null;
+    ManagedAudioSource chargingAudioStrong = null;
     public float chargingAttackTimer = 0;
 
 
@@ -157,7 +158,7 @@ public class CharacterType_Script : BaseCharacter
             //BattleManagerScript.Instance.UpdateCurrentSelectedCharacters(this, null, UMS.Side);
             NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo, UMS.Side);
         }
-        if(chargingAudio != null)
+        if (chargingAudio != null)
         {
             chargingAudio.ResetSource();
             chargingAudio = null;
@@ -227,7 +228,7 @@ public class CharacterType_Script : BaseCharacter
         switch (atkType)
         {
             case AttackInputType.Strong:
-                if(!CharActionlist.Contains(CharacterActionType.StrongAttack))
+                if (!CharActionlist.Contains(CharacterActionType.StrongAttack))
                 {
                     return;
                 }
@@ -269,15 +270,18 @@ public class CharacterType_Script : BaseCharacter
             chargingAttackTimer = 0;
             currentAttackPhase = AttackPhasesType.Start;
             SetAnimation(nxtAtk.PrefixAnim + "_IdleToAtk", false, 0);
-            if(chargingAudio != null)
-            {
-                chargingAudio.ResetSource();
-            }
-            chargingAudio = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoop, AudioBus.MidPrio, transform, true);
+            if (chargingAudio != null) chargingAudio.ResetSource();
+            if (chargingAudioStrong != null) chargingAudioStrong.ResetSource();
+            chargingAudio = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoop, AudioBus.MidPrio, transform, true, 1f);
             while (isSpecialLoading && !VFXTestMode)
             {
                 yield return BattleManagerScript.Instance.PauseUntil();
                 chargingAttackTimer += Time.fixedDeltaTime;
+
+                if(chargingAttackTimer >= 1.5f)
+                {
+                    chargingAudioStrong = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoopStrong, AudioBus.MidPrio, transform, true, 1f);
+                }
 
                 if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle.ToString())
                 {

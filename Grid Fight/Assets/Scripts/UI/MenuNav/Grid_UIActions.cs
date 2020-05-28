@@ -43,6 +43,12 @@ public class Grid_UIActions
             case (UI_ActionTypes.SetWorldMapFocus):
                 yield return SetWorldMapFocus();
                 break;
+            case (UI_ActionTypes.EnableCollection):
+                yield return EnableCollection();
+                break;
+            case (UI_ActionTypes.SwitchScene):
+                yield return SwitchScene();
+                break;
             default:
                 break;
         }
@@ -79,6 +85,11 @@ public class Grid_UIActions
                 return thingToFocusMapOn == null ? "Reset Map Focus" : "Set world map to focus on " + thingToFocusMapOn.name +
                     (focusMapZoom != 1 ? " with a zoom of " + focusMapZoom.ToString() + "x" :
                     "") + " over " + focusMapTiming.ToString() + (focusMapTiming == 1 ? " second" : " seconds");
+            case (UI_ActionTypes.EnableCollection):
+                return enablingCollectionID == "" ? "NO COLLECTION SPECIFIED" : "Set collection: '" + enablingCollectionID + "' to " +
+                    (collectionEnableState ? "enabled" : "disabled");
+            case (UI_ActionTypes.SwitchScene):
+                return "Switch scene to " + sceneSwitchType.ToString();
             default:
                 return actionType.ToString();
         }
@@ -219,4 +230,26 @@ public class Grid_UIActions
         yield return null;
     }
 
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.EnableCollection)] public string enablingCollectionID = "";
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.EnableCollection)] public bool collectionEnableState = false;
+    IEnumerator EnableCollection()
+    {
+        Grid_UINavigator.Instance.EnableCollection(enablingCollectionID, collectionEnableState);
+        yield return null;
+    }
+
+    public enum SceneSwitchType { MenuScene, BattleScene }
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SwitchScene)] public SceneSwitchType sceneSwitchType = SceneSwitchType.BattleScene;
+    IEnumerator SwitchScene()
+    {
+        if(sceneSwitchType == SceneSwitchType.BattleScene)
+        {
+            SceneLoadManager.Instance.LoadScene("BattleSceneDefault");
+        }
+        else
+        {
+            SceneLoadManager.Instance.LoadScene("MenuScene");
+        }
+        yield return null;
+    }
 }

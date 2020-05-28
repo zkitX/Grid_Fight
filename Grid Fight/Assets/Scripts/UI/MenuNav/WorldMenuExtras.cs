@@ -12,7 +12,7 @@ public class WorldMenuExtras : MonoBehaviour
 
     private void Awake()
     {
-        startingPos = transform.position;
+        startingPos = transform.localPosition;
         startingScale = transform.localScale;
     }
 
@@ -37,11 +37,11 @@ public class WorldMenuExtras : MonoBehaviour
         float progress = 0f;
         while (timeLeft != 0)
         {
-            endMove = focus == null ? startingPos : transform.position + VectorToCentre(focus);
+            endMove = focus == null ? startingPos : transform.localPosition + VectorToCentre(focus);
             timeLeft = Mathf.Clamp(timeLeft - Time.deltaTime, 0f, 1000f);
             progress = 1f - timeLeft / duration;
             transform.localScale = Vector3.Lerp(transform.localScale, endScale, progress);
-            transform.position = Vector3.Lerp(transform.position, endMove, progress);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, endMove, progress);
             yield return null;
         }
     }

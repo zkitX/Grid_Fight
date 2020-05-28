@@ -74,7 +74,6 @@ public class ParticleManagerScript : MonoBehaviour
 
     }
 
-
     public GameObject FireParticlesInTransform(GameObject ps, CharacterNameType characterId, AttackParticlePhaseTypes particleType, Transform parent, SideType side, AttackInputType attackInput, bool particlesVisible)
     {
         //pType = AttackParticleTypes.Test_Mesh;

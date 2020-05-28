@@ -9,6 +9,28 @@ public class Grid_UINavigator : MonoBehaviour
 {
     public static Grid_UINavigator Instance;
 
+    public GameObject[] Collections = { };
+    public string startingCollectionID = "MainMenu";
+    public Grid_UICollection[] ActiveCollections
+    {
+        get
+        {
+            return GameObject.FindObjectsOfType<Grid_UICollection>();
+        }
+    }
+    public bool IsCollectionActive(string collectionID)
+    {
+        foreach (Grid_UICollection collection in ActiveCollections) if (collection.CollectionID == collectionID) return true;
+        return false;
+    }
+    public GameObject GetCollectionObjectByID(string collectionID, bool fromActive = false)
+    {
+        if (fromActive && ActiveCollections.Where(r => r.GetComponent<Grid_UICollection>().CollectionID == collectionID).FirstOrDefault() != null)
+            return ActiveCollections.Where(r => r.GetComponent<Grid_UICollection>().CollectionID == collectionID).FirstOrDefault().gameObject;
+        else if (!fromActive) return Collections.Where(r => r.GetComponent<Grid_UICollection>().CollectionID == collectionID).FirstOrDefault();
+        else return null;
+    }
+
     public bool specificStartingButton = true;
     [ConditionalField("specificStartingButton")] public Grid_UIButton startingButton = null;
     [ConditionalField("specificStartingButton", true)] public InputDirection startingDirection = InputDirection.Up;
@@ -70,10 +92,11 @@ public class Grid_UINavigator : MonoBehaviour
 
     [SerializeField] protected GameObject cursorPrefab = null;
     [HideInInspector] public Grid_UICursor cursor = null;
-    [HideInInspector] public MenuNavigationType navType = MenuNavigationType.Unassigned;
+    [HideInInspector] public MenuNavigationType navType = MenuNavigationType.None;
 
     private void Awake()
     {
+        DontDestroyOnLoad(this);
         Instance = this;
         cursor = Instantiate(cursorPrefab, transform).GetComponent<Grid_UICursor>();
         cursor.EnableCursor(false);
@@ -81,9 +104,24 @@ public class Grid_UINavigator : MonoBehaviour
 
     private void Start()
     {
+        EnableCollection(startingCollectionID, true);
         StartCoroutine(SelectFirstButton());
         SetNavigation(MenuNavigationType.Relative);
         InputController.Instance.ButtonAUpEvent += ButtonPressInput;
+    }
+
+    public void EnableCollection(string collectionID, bool state)
+    {
+        if (IsCollectionActive(collectionID) == state) return;
+
+        if (state)
+        {
+            Instantiate(GetCollectionObjectByID(collectionID));
+        }
+        else
+        {
+            if(GetCollectionObjectByID(collectionID, true) != null) Destroy(GetCollectionObjectByID(collectionID, true));
+        }
     }
 
     public void SetNavigation(MenuNavigationType nav, Grid_UIButton buttonToFocusOn = null)
@@ -98,9 +136,14 @@ public class Grid_UINavigator : MonoBehaviour
                 cursor.EnableCursor(false);
                 InputController.Instance.LeftJoystickUsedEvent += ButtonChangeInput;
             }
-            else
+            else if(nav == MenuNavigationType.Cursor)
             {
                 cursor.EnableCursor(true, buttonToFocusOn == null ? selectedButton : buttonToFocusOn) ;
+                InputController.Instance.LeftJoystickUsedEvent -= ButtonChangeInput;
+            }
+            else if(nav == MenuNavigationType.None)
+            {
+                cursor.EnableCursor(false);
                 InputController.Instance.LeftJoystickUsedEvent -= ButtonChangeInput;
             }
         }
@@ -307,6 +350,12 @@ public class Grid_UINavigator : MonoBehaviour
         }
 
         return closestInDirection;
+    }
+
+    private void OnDestroy()
+    {
+        InputController.Instance.ButtonAUpEvent -= ButtonPressInput;
+        SetNavigation(MenuNavigationType.None);
     }
 }
 

@@ -147,8 +147,11 @@ public class AudioManagerMk2 : MonoBehaviour
 
     public void AddClipPlayedLastFrame(AudioClipInfoClass clip)
     {
-        audioPlayedLastFrame.Add(clip.clip);
-        StartCoroutine(ManageClipsPlayedLastFrame(clip.clip, clip.cooldownPeriod, clip.cooldownType));
+        foreach(AudioClip aClip in clip.clips)
+        {
+            audioPlayedLastFrame.Add(aClip);
+            StartCoroutine(ManageClipsPlayedLastFrame(aClip, clip.cooldownPeriod, clip.cooldownType));
+        }
     }
 
     IEnumerator ManageClipsPlayedLastFrame(AudioClip clip, float waitTime, AudioClipInfoClass.AudioCooldownType cdType)

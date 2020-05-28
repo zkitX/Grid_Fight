@@ -6,6 +6,7 @@ public class Grid_UIPanel : MonoBehaviour
 {
     public bool isGenericPanel = false;
     public string panelID = "Unassigned";
+    [SerializeField] protected bool startDeactivated = false;
     public UI_FocusTypes focusState = UI_FocusTypes.Focused;
     public Grid_UIButton[] ChildButtons
     {
@@ -21,6 +22,7 @@ public class Grid_UIPanel : MonoBehaviour
     {
         Grid_UINavigator.Instance.SetupButtonPanelInfo(this);
         SetupChildButtonPanelInfo();
+        gameObject.SetActive(!startDeactivated);
     }
 
     private void OnDestroy()
@@ -65,10 +67,5 @@ public class Grid_UIPanel : MonoBehaviour
         {
             panelID = "Universal";
         }
-    }
-
-    public void EDebug()
-    {
-        Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAA");
     }
 }

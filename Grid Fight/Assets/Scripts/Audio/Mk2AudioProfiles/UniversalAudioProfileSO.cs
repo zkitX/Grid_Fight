@@ -11,6 +11,7 @@ public class UniversalAudioProfileSO : BaseAudioProfileSO
     public AudioClipInfoClass ExitBattleJump;
     public AudioClipInfoClass StageSwitchSound;
     public AudioClipInfoClass SpecialAttackChargingLoop;
+    public AudioClipInfoClass SpecialAttackChargingLoopStrong;
     public AudioClipInfoClass SpecialAttackChargingRelease;
 
     [Header("Shielding")]
