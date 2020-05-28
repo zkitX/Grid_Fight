@@ -43,8 +43,12 @@ public class CallNextWave : Command
         }
 
         //GridManagerScript.Instance.BattleTiles.ForEach(r=> r.BattleTargetScript.StopAllCoroutines());
-        BattleManagerScript.Instance.ResetAllActiveChars();
-        yield return new WaitForSecondsRealtime(1f);
+        if(TransitionDuration == 0)
+        {
+            BattleManagerScript.Instance.ResetAllActiveChars();
+            yield return new WaitForSecondsRealtime(1f);
+        }
+        
         BattleManagerScript.Instance.CurrentBattleState = BattleState.FungusPuppets;
         if (HasAStageUpdate)
         {
@@ -64,13 +68,16 @@ public class CallNextWave : Command
         if (HasAStageUpdate && HasADifferentGrid)
         {
             EnvironmentManager.Instance.ChangeGridStructure(Grid, FightGridToShow, false, TransitionDuration);
+            yield return new WaitForSecondsRealtime(0.5f);
+
         }
         else if (HasADifferentGrid)
         {
             EnvironmentManager.Instance.ChangeGridStructure(Grid, -1, true, TransitionDuration);
+            yield return new WaitForSecondsRealtime(0.5f);
+
         }
 
-        yield return new WaitForSecondsRealtime(0.5f);
 
         if (UseWave)
             yield return WaveManagerScript.Instance.SettingUpWave(WaveName);
