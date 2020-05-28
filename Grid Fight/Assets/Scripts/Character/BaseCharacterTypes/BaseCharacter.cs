@@ -988,7 +988,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         else if (bdClass.Stat == BuffDebuffStatsType.Zombification)
         {
-            BattleManagerScript.Instance.Zombification(this);
+            if(CharInfo.Health > 0)
+            {
+                BattleManagerScript.Instance.Zombification(this);
+            }
         }
         else
         {

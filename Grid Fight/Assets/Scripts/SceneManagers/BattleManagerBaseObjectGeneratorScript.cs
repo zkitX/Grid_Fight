@@ -114,13 +114,11 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
             Wave = Instantiate(stage.Wave);
             StageObjects.Add(Wave);
         }
-
         if (stage.EventManager != null)
         {
             EventManager = Instantiate(stage.EventManager);
             StageObjects.Add(EventManager);
         }
-
         BattleInfoManager = Instantiate(stage.BattleInfoManager);
         StageObjects.Add(BattleInfoManager);
 

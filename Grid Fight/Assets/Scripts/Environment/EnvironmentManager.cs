@@ -140,8 +140,6 @@ public class EnvironmentManager : MonoBehaviour
                 CameraManagerScript.Instance.TransitionOutZoomValue, CameraManagerScript.Instance.ZoomOut, Vector3.zero);
             }
 
-
-
             List<BaseCharacter> charsToLand = new List<BaseCharacter>();
             for (int i = 0; i < BattleManagerScript.Instance.AllCharactersOnField.Count; i++)
             {
@@ -188,7 +186,6 @@ public class EnvironmentManager : MonoBehaviour
                 cb.CurrentBattleTiles.Clear();
                 cb.CurrentBattleTiles.Add(nextBts);
                 charsToLand.Add(cb);
-
             }
 
             float timeRemaining = duration;

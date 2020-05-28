@@ -503,7 +503,9 @@ public enum ParticlesType
     PowerUp_Speed,
     ShieldNormal,
     ShieldTotalDefence,
-    Stage00BossDeathSmoke
+    Stage00BossDeathSmoke,
+    Stage00_Boss_MoonDrums_Loop,
+    Stage00_Boss_MoonDrums_LoopCrumble
 }
 
 
