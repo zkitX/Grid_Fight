@@ -96,7 +96,9 @@ public class SceneLoadManager : MonoBehaviour
 
         yield return null;
 
-        foreach(string scene in scenesToLoad)
+        yield return new WaitForSecondsRealtime(gracePeriod);
+
+        foreach (string scene in scenesToLoad)
         {
             if (scene.Contains("BattleScene"))
             {

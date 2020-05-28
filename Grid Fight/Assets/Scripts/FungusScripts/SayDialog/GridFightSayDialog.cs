@@ -22,7 +22,7 @@ public class GridFightSayDialog : SayDialog
 
     public void FungusChanged(FungusDialogType funDiag)
     {
-        if(funDiag == FungusDialogType.Menu)
+        if (funDiag == FungusDialogType.Menu)
         {
             bButton.SetActive(false);
         }
@@ -63,6 +63,7 @@ public class GridFightSayDialog : SayDialog
         isAnimCompleted = true;
     }
 
+    ManagedAudioSource textAudio;
     public override IEnumerator DoSay(string text, bool clearPrevious, bool waitForInput, bool fadeWhenDone, bool stopVoiceover, bool waitForVO, AudioClip voiceOverClip, Character nextChar)
     {
         writer.inputFlag = false;
@@ -107,7 +108,7 @@ public class GridFightSayDialog : SayDialog
                 }
                 isAnimCompleted = false;
 
-               
+
                 SayDialogAnimatorController.SetBool("InOut", false);
                 AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_Exiting, AudioBus.MidPrio);
                 while (!isAnimCompleted)
@@ -167,15 +168,14 @@ public class GridFightSayDialog : SayDialog
             isAnimCompleted = false;
         }
 
-        ManagedAudioSource textAudio = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_TextStart, AudioBus.MidPrio, loop:true);
+        textAudio = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_TextStart, AudioBus.MidPrio, loop: true);
 
-        yield return base.DoSay(text, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, voiceOverClip, delegate {});
-
-        textAudio.ResetSource();
-        AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_TextEnd, AudioBus.MidPrio);
+        yield return base.DoSay(text, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, voiceOverClip, delegate { });
 
         InputController.Instance.ButtonAUpEvent -= Instance_ButtonAUpEvent;
     }
+
+
 
 
     private void AnimSpeedChanger(float speed)
