@@ -15,8 +15,8 @@ MonoBehaviour:
   Chances: 100
   CurrentAttackType: 1
   AttackRatioMultiplier: 2
-  DamageMultiplier: {x: 1, y: 1}
-  AttackInput: 0
+  DamageMultiplier: {x: 1.1, y: 1.1}
+  AttackInput: 1
   AttackAnim: 0
   PrefixAnim: 0
   Particles:
@@ -124,10 +124,22 @@ MonoBehaviour:
   TilesAtk:
     AtkType: 1
     BulletTrajectories:
-    - Delay: 3
+    - Delay: 1.6
       Show: 1
       BulletEffectTiles:
       - Pos: {x: 1, y: 0}
+        Trajectory_Y:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        Trajectory_Z:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
         HasEffect: 0
         showImpact: 0
         Effects: []
@@ -136,6 +148,18 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
       - Pos: {x: -1, y: 0}
+        Trajectory_Y:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        Trajectory_Z:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
         HasEffect: 0
         showImpact: 0
         Effects: []
@@ -143,7 +167,87 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
+      - Pos: {x: 0, y: 0}
+        Trajectory_Y:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        Trajectory_Z:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: -1, y: -1}
+        Trajectory_Y:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        Trajectory_Z:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 0, y: -1}
+        Trajectory_Y:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        Trajectory_Z:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 1, y: -1}
+        Trajectory_Y:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        Trajectory_Z:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
     StatToCheck: 1
     ValueChecker: 2
-    PercToCheck: 0
+    PercToCheck: 40
     Chances: 100
