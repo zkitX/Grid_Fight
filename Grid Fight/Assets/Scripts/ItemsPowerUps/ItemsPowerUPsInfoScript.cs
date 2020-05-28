@@ -32,7 +32,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
             other.GetComponentInParent<BaseCharacter>().Buff_DebuffCo(new Buff_DebuffClass(ItemPowerUpInfo.Name, ItemPowerUpInfo.EffectDuration,
                 Random.Range(ItemPowerUpInfo.Value.x, ItemPowerUpInfo.Value.y),
                 ItemPowerUpInfo.StatsToAffect, ItemPowerUpInfo.StatsChecker, new ElementalResistenceClass(),
-                ElementalType.Neutral, ItemPowerUpInfo.AnimToFire, ItemPowerUpInfo.Particles));
+                ElementalType.Neutral, ItemPowerUpInfo.AnimToFire, ItemPowerUpInfo.Particles, other.GetComponentInParent<BaseCharacter>()));
             AudioClipInfoClass powerUpAudio = null;
             ItemType itemType = ItemType.PowerUP_FullRecovery;
             switch (ItemPowerUpInfo.StatsToAffect)

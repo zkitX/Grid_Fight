@@ -7,15 +7,12 @@ public class EnvironmentManager : MonoBehaviour
 {
     public static EnvironmentManager Instance;
 
-    public Vector3 CameraPosition = new Vector3(0, 1f, -8.5f);
     public Vector2Int BattleFieldSize;
     public List<ScriptableObjectGridStructure> GridStructures = new List<ScriptableObjectGridStructure>();
-    public Camera MainCamera;
     public bool isChangeGridStructure = false;
 
     public float defaultTransitionTime = 3f;
     public Transform fightGridMaster;
-    public Transform cameraToMove;
     public int currentGridIndex = 0;
     public FightGrid[] fightGrids;
     IEnumerator GridLeapSequencer = null;
@@ -24,8 +21,6 @@ public class EnvironmentManager : MonoBehaviour
 
     private void Awake()
     {
-        MainCamera = Camera.main;
-        cameraToMove = MainCamera.transform;
         PopulateGrids();
         Instance = this;
     }
@@ -82,113 +77,110 @@ public class EnvironmentManager : MonoBehaviour
     IEnumerator GridLeapSequence(float duration, Vector3 translation, List<TalkingTeamClass> arrivingChar, bool jumpUp = false, bool moveChars = true)
     {
         //Ensure new grid is set and moved to correct position before everything
-        jumpingchars.Clear();
-        float jumpHeight = 2f;
-        translation.z = -8.5f;
-        CharacterAnimationStateType jumpAnim = jumpUp ? CharacterAnimationStateType.Reverse_Arriving : CharacterAnimationStateType.JumpTransition_OUT;
-        Vector3 cameraStartPos = MainCamera.transform.position;
         CameraInfoClass cic = CameraStage.CameraInfo.Where(r => r.StageIndex == currentGridIndex && !r.used).First();
-        float cameraStartOrtho = MainCamera.orthographicSize;
-        float cameraEndOrtho = cic.OrthographicSize;
-        cic.used = true;
-        //DONT FORGET TO ADD CAMERA OFFSET ADJUSTMENT
-        if (moveChars)
+
+        if (duration > 0)
         {
-            chars = System.Array.ConvertAll(BattleManagerScript.Instance.AllCharactersOnField.Where(r=> r.IsOnField).ToArray(), item => (CharacterType_Script)item);
-        }
-        else
-        {
-            chars = new CharacterType_Script[0];
-        }
-        Vector3[] charStartPositions = new Vector3[chars != null ? chars.Length : 0];
-        Vector3[] charGridPosOffsets = new Vector3[chars != null ? chars.Length : 0];
-        for (int i = 0; i < (chars != null ? chars.Length : 0); i++)
-        {
-            if(false)
+            jumpingchars.Clear();
+            float jumpHeight = 2f;
+            CharacterAnimationStateType jumpAnim = jumpUp ? CharacterAnimationStateType.Reverse_Arriving : CharacterAnimationStateType.JumpTransition_OUT;
+            cic.used = true;
+            //DONT FORGET TO ADD CAMERA OFFSET ADJUSTMENT
+            if (moveChars)
             {
-                charStartPositions[i] = chars[i].transform.position;
-                BattleTileScript bts = GridManagerScript.Instance.BattleTiles.Where(r => r.Pos == chars[i].UMS.CurrentTilePos).FirstOrDefault();
-                if (bts.BattleTileState != BattleTileStateType.Empty
-                    || chars[i].UMS.WalkingSide != bts.WalkingSide)
-                {
-                    BattleTileScript newGridTile = GridManagerScript.Instance.GetRandomFreeAdjacentTile(chars[i].UMS.CurrentTilePos, 5, false, chars[i].UMS.WalkingSide);
-                    Debug.Log(newGridTile.Pos);
-                    charGridPosOffsets[i] = GridManagerScript.Instance.BattleTiles.Where(r => r.Pos == newGridTile.Pos).First().transform.position;
-                    GridManagerScript.Instance.SetBattleTileState(newGridTile.Pos, BattleTileStateType.Occupied);
-                    chars[i].CurrentBattleTiles = new List<BattleTileScript>() { newGridTile };
-                    chars[i].UMS.CurrentTilePos = newGridTile.Pos;
-                    chars[i].UMS.Pos = new List<Vector2Int>() { newGridTile.Pos };
-                }
-                else
-                {
-                    GridManagerScript.Instance.SetBattleTileState(bts.Pos, BattleTileStateType.Occupied);
-                    charGridPosOffsets[i] = bts.transform.position;
-                }
-
-
-                if (translation == Vector3.zero && charGridPosOffsets[i] == Vector3.zero)
-                {
-                    continue;
-                }
+                chars = System.Array.ConvertAll(BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToArray(), item => (CharacterType_Script)item);
             }
-           
-            chars[i].SetAttackReady(false);
-            jumpingchars.Add(chars[i]);
-            chars[i].SetAnimation(jumpAnim);
-
-        }
-
-        if(chars.Length > 0)
-        {
-            yield return new WaitForSeconds(2f);
-
-        }
-
-
-        float timeRemaining = duration;
-        float progress = 0;
-        bool hasStarted = false;
-
-
-        while (timeRemaining != 0 || !hasStarted)
-        {
-            hasStarted = true;
-            timeRemaining = Mathf.Clamp(timeRemaining - Time.deltaTime, 0f, 9999f);
-            progress = 1f - (timeRemaining / (duration != 0f ? duration : 1f));
-
-            MainCamera.transform.position = Vector3.Lerp(cameraStartPos, translation, UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
-           // MainCamera.orthographicSize = Mathf.Lerp(cameraStartOrtho, cameraEndOrtho, progress);
-
-            if(jumpUp)
+            else
             {
-               /* for (int i = 0; i < (jumpingchars != null ? jumpingchars.Count : 0); i++)
-                {
-                    jumpingchars[i].transform.position = Vector3.Lerp(charStartPositions[i], charGridPosOffsets[i], UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
-                    jumpingchars[i].transform.position += new Vector3(0, jumpHeight * UniversalGameBalancer.Instance.characterJumpCurve.Evaluate(progress), 0);
-                    jumpingchars[i].SpineAnim.SetAnimationSpeed(UniversalGameBalancer.Instance.jumpAnimationCurve.Evaluate(progress));
-                }*/
+                chars = new CharacterType_Script[0];
             }
-          
-            yield return null;
-        }
-
-        List<BaseCharacter> charsToLand = new List<BaseCharacter>();
-
-        for (int i = 0; i < BattleManagerScript.Instance.AllCharactersOnField.Count; i++)
-        {
-            bool isIn = false;
-            BaseCharacter cb = BattleManagerScript.Instance.AllCharactersOnField[i];
-            for (int a = 0; a < BattleManagerScript.Instance.CurrentSelectedCharacters.Count; a++)
+            Vector3[] charStartPositions = new Vector3[chars != null ? chars.Length : 0];
+            Vector3[] charGridPosOffsets = new Vector3[chars != null ? chars.Length : 0];
+            for (int i = 0; i < (chars != null ? chars.Length : 0); i++)
             {
-                if (BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)a].Character != null && BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)a].Character == cb)
+                if (false)
                 {
-                    isIn = true;
+                    charStartPositions[i] = chars[i].transform.position;
+                    BattleTileScript bts = GridManagerScript.Instance.BattleTiles.Where(r => r.Pos == chars[i].UMS.CurrentTilePos).FirstOrDefault();
+                    if (bts.BattleTileState != BattleTileStateType.Empty
+                        || chars[i].UMS.WalkingSide != bts.WalkingSide)
+                    {
+                        BattleTileScript newGridTile = GridManagerScript.Instance.GetRandomFreeAdjacentTile(chars[i].UMS.CurrentTilePos, 5, false, chars[i].UMS.WalkingSide);
+                        Debug.Log(newGridTile.Pos);
+                        charGridPosOffsets[i] = GridManagerScript.Instance.BattleTiles.Where(r => r.Pos == newGridTile.Pos).First().transform.position;
+                        GridManagerScript.Instance.SetBattleTileState(newGridTile.Pos, BattleTileStateType.Occupied);
+                        chars[i].CurrentBattleTiles = new List<BattleTileScript>() { newGridTile };
+                        chars[i].UMS.CurrentTilePos = newGridTile.Pos;
+                        chars[i].UMS.Pos = new List<Vector2Int>() { newGridTile.Pos };
+                    }
+                    else
+                    {
+                        GridManagerScript.Instance.SetBattleTileState(bts.Pos, BattleTileStateType.Occupied);
+                        charGridPosOffsets[i] = bts.transform.position;
+                    }
+
+
+                    if (translation == Vector3.zero && charGridPosOffsets[i] == Vector3.zero)
+                    {
+                        continue;
+                    }
+                }
+                jumpingchars.Add(chars[i]);
+                chars[i].SetAnimation(jumpAnim);
+            }
+
+            while (chars.Where(r => !r.IsOnField).ToList().Count != chars.Length)
+            {
+                yield return null;
+
+            }
+            if (duration > 0)
+            {
+                CameraManagerScript.Instance.CameraFocusSequence(CameraManagerScript.Instance.DurationOut,
+                CameraManagerScript.Instance.TransitionOutZoomValue, CameraManagerScript.Instance.ZoomOut, Vector3.zero);
+            }
+
+
+
+            List<BaseCharacter> charsToLand = new List<BaseCharacter>();
+            for (int i = 0; i < BattleManagerScript.Instance.AllCharactersOnField.Count; i++)
+            {
+                bool isIn = false;
+                BaseCharacter cb = BattleManagerScript.Instance.AllCharactersOnField[i];
+                for (int a = 0; a < BattleManagerScript.Instance.CurrentSelectedCharacters.Count; a++)
+                {
+                    if (BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)a].Character != null && BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)a].Character == cb)
+                    {
+                        isIn = true;
+                    }
+                }
+
+                if (isIn)
+                {
+                    BattleTileScript nextBts = GridManagerScript.Instance.GetRandomFreeAdjacentTile(cb.UMS.CurrentTilePos, 5, false, cb.UMS.WalkingSide);
+                    GridManagerScript.Instance.SetBattleTileState(nextBts.Pos, BattleTileStateType.Occupied);
+                    cb.UMS.CurrentTilePos = nextBts.Pos;
+                    cb.UMS.Pos.Clear();
+                    cb.UMS.Pos.Add(nextBts.Pos);
+                    cb.CurrentBattleTiles.Clear();
+                    cb.CurrentBattleTiles.Add(nextBts);
+                    charsToLand.Add(cb);
                 }
             }
 
-            if (isIn)
+            for (int i = 0; i < arrivingChar.Count; i++)
             {
-                BattleTileScript nextBts = GridManagerScript.Instance.GetRandomFreeAdjacentTile(cb.UMS.CurrentTilePos, 5, false, cb.UMS.WalkingSide);
+                BaseCharacter cb = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == arrivingChar[i].CharacterId).FirstOrDefault();
+                if (cb == null)
+                {
+                    cb = BattleManagerScript.Instance.CharsForTalkingPart.Where(r => r.CharInfo.CharacterID == arrivingChar[i].CharacterId).FirstOrDefault();
+                    if (cb == null)
+                    {
+                        cb = BattleManagerScript.Instance.CreateTalkingChar(arrivingChar[i].CharacterId);
+                    }
+
+                }
+                BattleTileScript nextBts = arrivingChar[i].isRandomPos ? GridManagerScript.Instance.GetFreeBattleTile(WalkingSideType.LeftSide) : GridManagerScript.Instance.GetBattleTile(arrivingChar[i].Pos);
                 GridManagerScript.Instance.SetBattleTileState(nextBts.Pos, BattleTileStateType.Occupied);
                 cb.UMS.CurrentTilePos = nextBts.Pos;
                 cb.UMS.Pos.Clear();
@@ -196,56 +188,62 @@ public class EnvironmentManager : MonoBehaviour
                 cb.CurrentBattleTiles.Clear();
                 cb.CurrentBattleTiles.Add(nextBts);
                 charsToLand.Add(cb);
+
             }
-        }
 
-
-        
-        for (int i = 0; i < arrivingChar.Count; i++)
-        {
-            BaseCharacter cb = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == arrivingChar[i].CharacterId).FirstOrDefault();
-            if(cb == null)
+            float timeRemaining = duration;
+            float progress = 0;
+            bool hasStarted = false;
+            Vector3 cameraStartPos = CameraManagerScript.Instance.transform.position;
+            Vector3 cameraFinalPos = BattleManagerScript.Instance.CurrentSelectedCharacters[ControllerType.Player1].Character.CurrentBattleTiles.First().transform.position;
+            cameraFinalPos.z = cameraStartPos.z;
+            while (timeRemaining >= 0 || !hasStarted)
             {
-                cb = BattleManagerScript.Instance.CharsForTalkingPart.Where(r => r.CharInfo.CharacterID == arrivingChar[i].CharacterId).FirstOrDefault();
-                if(cb == null)
+                hasStarted = true;
+                timeRemaining -= Time.deltaTime;
+                progress = 1f - (timeRemaining / (duration != 0f ? duration : 1f));
+                CameraManagerScript.Instance.transform.position = Vector3.Lerp(cameraStartPos, cameraFinalPos, UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
+                // MainCamera.orthographicSize = Mathf.Lerp(cameraStartOrtho, cameraEndOrtho, progress);
+
+                if (jumpUp)
                 {
-                    cb = BattleManagerScript.Instance.CreateTalkingChar(arrivingChar[i].CharacterId);
+                    /* for (int i = 0; i < (jumpingchars != null ? jumpingchars.Count : 0); i++)
+                     {
+                         jumpingchars[i].transform.position = Vector3.Lerp(charStartPositions[i], charGridPosOffsets[i], UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
+                         jumpingchars[i].transform.position += new Vector3(0, jumpHeight * UniversalGameBalancer.Instance.characterJumpCurve.Evaluate(progress), 0);
+                         jumpingchars[i].SpineAnim.SetAnimationSpeed(UniversalGameBalancer.Instance.jumpAnimationCurve.Evaluate(progress));
+                     }*/
                 }
-               
+
+                yield return null;
             }
-            BattleTileScript nextBts = arrivingChar[i].isRandomPos ? GridManagerScript.Instance.GetFreeBattleTile(WalkingSideType.LeftSide) : GridManagerScript.Instance.GetBattleTile(arrivingChar[i].Pos);
-            GridManagerScript.Instance.SetBattleTileState(nextBts.Pos, BattleTileStateType.Occupied);
-            cb.UMS.CurrentTilePos = nextBts.Pos;
-            cb.UMS.Pos.Clear();
-            cb.UMS.Pos.Add(nextBts.Pos);
-            cb.CurrentBattleTiles.Clear();
-            cb.CurrentBattleTiles.Add(nextBts);
-            charsToLand.Add(cb);
-
-        }
 
 
-        foreach (BaseCharacter item in charsToLand)
-        {
-            item.SetAnimation(CharacterAnimationStateType.JumpTransition_IN);
-        }
 
-        yield return new WaitForSeconds(0.1f);
+            yield return CameraManagerScript.Instance.CameraFocusSequence_Co(CameraManagerScript.Instance.DurationIn, CameraManagerScript.Instance.TransitionINZoomValue, CameraManagerScript.Instance.ZoomIn);
 
-        foreach (BaseCharacter item in charsToLand)
-        {
-            item.transform.position = item.CurrentBattleTiles.Last().transform.position;
-
-        }
-
-        if (chars.Length != 0)
-        {
-            foreach (CharacterType_Script character in BattleManagerScript.Instance.PlayerControlledCharacters)
+            foreach (BaseCharacter item in charsToLand)
             {
-                character.SetAttackReady(true);
+                item.SetAnimation(CharacterAnimationStateType.JumpTransition_IN);
+            }
+
+            yield return new WaitForSeconds(0.1f);
+
+            foreach (BaseCharacter item in charsToLand)
+            {
+                item.transform.position = item.CurrentBattleTiles.Last().transform.position;
+
+            }
+
+            while (charsToLand.Where(r => r.IsOnField).ToList().Count != charsToLand.Count)
+            {
+                yield return null;
             }
         }
+       
 
+        CameraManagerScript.Instance.CameraFocusSequence(duration >= 0 ? 1f : 0,
+         cic.OrthographicSize, CameraManagerScript.Instance.ZoomOut, cic.CameraPosition);
 
     }
 

@@ -96,8 +96,8 @@ public class BattleFieldAttackTileClass
 {
     [HideInInspector] public Vector2Int Pos;
 
-    public AnimationCurve Trajectory_Y;
-    public AnimationCurve Trajectory_Z;
+    public AnimationCurve Trajectory_Y = new AnimationCurve();
+    public AnimationCurve Trajectory_Z = new AnimationCurve();
 
 
     public bool HasEffect = false;
@@ -142,8 +142,8 @@ public class BulletBehaviourInfoClass
 {
     [HideInInspector] public bool Show;
     public Vector2Int BulletDistanceInTile;
-    public AnimationCurve Trajectory_Y;
-    public AnimationCurve Trajectory_Z;
+    public AnimationCurve Trajectory_Y = new AnimationCurve();
+    public AnimationCurve Trajectory_Z = new AnimationCurve();
     public List<Vector2Int> BulletEffectTiles = new List<Vector2Int>();
     public Vector2Int BulletGapStartingTile;
 

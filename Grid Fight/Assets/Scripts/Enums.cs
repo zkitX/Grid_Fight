@@ -327,7 +327,10 @@ public enum BuffDebuffStatsType
     SpeedStats_LevelMultiplier,
     SpeedStats_IdleToAtkDuration,
     SpeedStats_AtkToIdleDuration,
-    DamageStats_BaseDamage
+    DamageStats_BaseDamage,
+    Damage_Cure,
+    Zombification
+
 }
 
 public enum WaveStatsType
@@ -478,12 +481,13 @@ public enum BaseCharType
     Stage04_BossGirl_Script = 3,
     Stage04_BossMonster_Flower_Script = 4,
     Stage04_BossMonster_Script = 5,
-    Stage00_BossOctopus = 6,
-    Stage00_BossOctopus_Head = 7,
-    Stage00_BossOctopus_Tentacles = 8,
-    Stage00_BossOctopus_Girl = 9,
-    Stage09_Boss_Geisha = 10,
-    Stage09_Boss_NoFace = 11,
+    Stage00_BossOctopus_Script = 6,
+    Stage00_BossOctopus_Head_Script = 7,
+    Stage00_BossOctopus_Tentacles_Script = 8,
+    Stage00_BossOctopus_Girl_Script = 9,
+    Stage09_Boss_Geisha_Script = 10,
+    Stage09_Boss_NoFace_Script = 11,
+    Stage01_Boss_Script = 12
 
 }
 
@@ -611,6 +615,7 @@ public enum CharacterNameType
     Stage01_Character_Desert = 1025,
     Stage01_Character_Mountain = 1026,
     Stage01_Character_Forest = 1027,
+    Stage01_Boss = 1028,
 
 
     //Stage 02
