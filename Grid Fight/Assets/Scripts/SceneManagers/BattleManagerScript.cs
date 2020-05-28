@@ -437,14 +437,17 @@ public class BattleManagerScript : MonoBehaviour
         CurrentSelectedCharacters[playerController].Character = null;
         DeselectCharacter(zombie.CharInfo.CharacterID, zombie.UMS.Side, playerController);
         Switch_LoadingNewCharacterInRandomPosition(zombie.CharInfo.CharacterSelection, playerController, true);
+        zombie.IsOnField = false;
 
         GameObject zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage00_Boss_MoonDrums_Loop);
         zombiePs.SetActive(true);
         zombiePs.transform.parent = zombie.SpineAnim.transform;
+        zombiePs.transform.localPosition = Vector3.zero;
+        zombiePs.transform.localRotation = Quaternion.Euler(zombie.UMS.Side == SideType.LeftSide ? Vector3.zero : zombiePs.transform.eulerAngles);
         yield return new WaitForSeconds(1);
 
         yield return RemoveCharacterFromBaord(playerController, zombie, true);
-
+        zombie.CharActionlist.Remove(CharacterActionType.SwitchCharacter);
         yield return new WaitForSeconds(1);
         zombiePs.transform.parent = null;
         zombiePs.SetActive(false);
@@ -456,16 +459,41 @@ public class BattleManagerScript : MonoBehaviour
         new List<ControllerType> { ControllerType.Enemy }, zombie.CharInfo.CharacterID, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.MinionType_Script, new List<CharacterActionType>()), transform);
             zombiesList.Add(zombiefied);
         }
-
+        zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage00_Boss_MoonDrums_Loop);
+        zombiePs.transform.parent = zombiefied.SpineAnim.transform;
+        zombiePs.transform.localPosition = Vector3.zero;
+        zombiePs.SetActive(true);
+      
         StartCoroutine(WaveManagerScript.Instance.SetCharInPos(zombiefied, GridManagerScript.Instance.GetFreeBattleTile(zombiefied.UMS.WalkingSide, zombiefied.UMS.Pos), true));
         zombiefied.CharActionlist.Add(CharacterActionType.Move);
         while (zombie.BuffsDebuffsList.Where(r=> r.Stat == BuffDebuffStatsType.Zombification).ToList().Count > 0)
         {
             yield return null;
         }
+        zombiefied.IsOnField = false;
+        while (zombiefied.isMoving || zombiefied.currentAttackPhase != AttackPhasesType.End)
+        {
+            yield return null;
+        }
 
-        StartCoroutine(RemoveZombieFromBaord(zombiesList.Where(r => r.CharInfo.CharacterID == zombie.CharInfo.CharacterID).First()));
+        zombiePs.transform.parent = null;
+        zombiePs.SetActive(false);
+        zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage00_Boss_MoonDrums_LoopCrumble);
+        zombiePs.SetActive(true);
+        zombiePs.transform.parent = zombiefied.SpineAnim.transform;
+        zombiePs.transform.localPosition = Vector3.zero;
+
+        yield return new WaitForSeconds(1);
+
+        yield return RemoveZombieFromBaord(zombiesList.Where(r => r.CharInfo.CharacterID == zombie.CharInfo.CharacterID).First());
+        zombiePs.transform.parent = null;
+        zombiePs.SetActive(false);
+        zombie.CharActionlist.Add(CharacterActionType.SwitchCharacter);
+
     }
+
+
+
 
     //Used when the char is not in the battlefield to move it on the battlefield
     /* public void LoadingNewCharacterToGrid(CharacterNameType cName,SideType side, ControllerType playerController)
@@ -967,7 +995,7 @@ public class BattleManagerScript : MonoBehaviour
                     while(!found)
                     {
                         cs = (CharacterSelectionType)Random.Range(0, 4);
-                        cb = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.CharacterSelection == cs && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.BuffsDebuffsList.Where(a => a.Stat == BuffDebuffStatsType.Zombification).ToList().Count == 0).FirstOrDefault();
+                        cb = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.CharacterSelection == cs && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).FirstOrDefault();
                      
                         if (cb != null && CurrentSelectedCharacters.Where(r => r.Value.Character != null && ((r.Value.Character == cb)
                         || (r.Value.NextSelectionChar.NextSelectionChar == cs && r.Value.NextSelectionChar.Side == cb.UMS.Side && r.Value.Character != null)) && r.Key != playerController).ToList().Count == 0)
@@ -986,7 +1014,7 @@ public class BattleManagerScript : MonoBehaviour
                         cs = (int)cs >= maxChars ? 0 : cs < 0 ? ((CharacterSelectionType)maxChars - 1) : cs;
                         string t = cs.ToString();
                         //Debug.Log(t);
-                        cb = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.CharacterSelection == cs && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 && r.BuffsDebuffsList.Where(a => a.Stat == BuffDebuffStatsType.Zombification).ToList().Count == 0).FirstOrDefault();
+                        cb = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.CharacterSelection == cs && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).FirstOrDefault();
                         if (cb != null)
                         {
                             t = cb.CharInfo.CharacterID.ToString() + "    " + cb.UMS.Side.ToString();

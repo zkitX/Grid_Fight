@@ -505,7 +505,9 @@ public enum ParticlesType
     ShieldTotalDefence,
     Stage00BossDeathSmoke,
     Stage00_Boss_MoonDrums_Loop,
-    Stage00_Boss_MoonDrums_LoopCrumble
+    Stage00_Boss_MoonDrums_LoopCrumble,
+    Stage00_Boss_Movement,
+    Stage00_Boss_FaceChanging
 }
 
 

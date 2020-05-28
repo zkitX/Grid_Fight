@@ -23,7 +23,8 @@ public class CallNextWave : Command
     public List<TalkingTeamClass> TalkingTeam = new List<TalkingTeamClass>();
 
     public bool JumpUp = false;
-
+    [Range(0, 5)]
+    public float JumpAnimSpeed = 1;
     public bool UseWave = true;
 
     public string NextBlockToFire;
@@ -83,7 +84,7 @@ public class CallNextWave : Command
             yield return WaveManagerScript.Instance.SettingUpWave(WaveName);
         if (HasAStageUpdate)
         {
-            yield return EnvironmentManager.Instance.MoveToNewGrid(HasAStageUpdate ? FightGridToShow : -1, TransitionDuration, TalkingTeam, JumpUp);
+            yield return EnvironmentManager.Instance.MoveToNewGrid(HasAStageUpdate ? FightGridToShow : -1, TransitionDuration, TalkingTeam, JumpAnimSpeed, JumpUp);
         }
 
         BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;

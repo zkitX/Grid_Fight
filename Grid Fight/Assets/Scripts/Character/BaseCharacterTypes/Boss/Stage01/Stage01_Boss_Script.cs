@@ -17,7 +17,7 @@ public class Stage01_Boss_Script : MinionType_Script
 
     public Stage01_Boss_MaskType CurrentPhase;
     public List<BattleTileScript> AttackedTilesList = new List<BattleTileScript>();
-
+    public GameObject MovementPs;
     public override IEnumerator AI()
     {
         bool val = true;
@@ -36,7 +36,13 @@ public class Stage01_Boss_Script : MinionType_Script
                 List<BaseCharacter> enemys = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList();
                 if (enemys.Count > 0)
                 {
-                    BaseCharacter targetChar = enemys.Where(r => r.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x).FirstOrDefault();
+                    BaseCharacter targetChar = null;
+                    List<BaseCharacter> possibleTargets = enemys.Where(r => Mathf.Abs(r.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x) <= 1).ToList();
+                    if(possibleTargets.Count > 0)
+                    {
+                        targetChar = possibleTargets[Random.Range(0, possibleTargets.Count)];
+                    }
+
                     if (targetChar != null)
                     {
                         nextAttackPos = targetChar.UMS.CurrentTilePos;
@@ -75,6 +81,19 @@ public class Stage01_Boss_Script : MinionType_Script
                 yield return null;
             }
         }
+    }
+
+    public override IEnumerator MoveByTileSpace(Vector3 nextPos, AnimationCurve curve, float animLength)
+    {
+        if(MovementPs == null)
+        {
+            MovementPs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage00_Boss_Movement);
+            MovementPs.transform.parent = SpineAnim.transform;
+            MovementPs.transform.localPosition = Vector3.zero;
+        }
+        MovementPs.SetActive(true);
+
+        return base.MoveByTileSpace(nextPos, curve, animLength);
     }
 
     public override void SetAnimation(string animState, bool loop = false, float transition = 0, bool _pauseOnLastFrame = false)
@@ -157,8 +176,8 @@ public class Stage01_Boss_Script : MinionType_Script
 
         if (completedAnim != CharacterAnimationStateType.Idle.ToString() && !SpineAnim.Loop)
         {
-            SetAnimation(CharacterAnimationStateType.Idle.ToString(), true);
             SpineAnim.CurrentAnim = CharacterAnimationStateType.Idle.ToString();
+            SetAnimation(CharacterAnimationStateType.Idle.ToString(), true);
         }
     }
 

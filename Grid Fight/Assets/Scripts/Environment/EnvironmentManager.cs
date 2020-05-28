@@ -53,7 +53,7 @@ public class EnvironmentManager : MonoBehaviour
         }
     }
 
-    public IEnumerator MoveToNewGrid(int gridIndex, float duration, List<TalkingTeamClass> arrivingChar, bool jumpUp = false, bool moveChars = true)
+    public IEnumerator MoveToNewGrid(int gridIndex, float duration, List<TalkingTeamClass> arrivingChar, float jumpAnimSpeed, bool jumpUp = false, bool moveChars = true)
     {
         FightGrid destinationGrid = fightGrids[gridIndex != -1 ? gridIndex : currentGridIndex];
 
@@ -66,7 +66,7 @@ public class EnvironmentManager : MonoBehaviour
             StopCoroutine(GridLeapSequencer);
         }
         currentGridIndex = gridIndex != -1 ? gridIndex : currentGridIndex;
-        GridLeapSequencer = GridLeapSequence(duration, CameraStage.CameraInfo.Where(r => r.StageIndex == (gridIndex != -1 ? gridIndex : currentGridIndex)).First().CameraPosition, arrivingChar, jumpUp, moveChars);
+        GridLeapSequencer = GridLeapSequence(duration, CameraStage.CameraInfo.Where(r => r.StageIndex == (gridIndex != -1 ? gridIndex : currentGridIndex)).First().CameraPosition, arrivingChar,jumpAnimSpeed, jumpUp, moveChars);
         yield return GridLeapSequencer;
     }
 
@@ -74,7 +74,7 @@ public class EnvironmentManager : MonoBehaviour
 
     CharacterType_Script[] chars;
     List<CharacterType_Script> jumpingchars = new List<CharacterType_Script>();
-    IEnumerator GridLeapSequence(float duration, Vector3 translation, List<TalkingTeamClass> arrivingChar, bool jumpUp = false, bool moveChars = true)
+    IEnumerator GridLeapSequence(float duration, Vector3 translation, List<TalkingTeamClass> arrivingChar, float jumpAnimSpeed, bool jumpUp = false, bool moveChars = true)
     {
         //Ensure new grid is set and moved to correct position before everything
         CameraInfoClass cic = CameraStage.CameraInfo.Where(r => r.StageIndex == currentGridIndex && !r.used).First();
@@ -126,7 +126,9 @@ public class EnvironmentManager : MonoBehaviour
                     }
                 }
                 jumpingchars.Add(chars[i]);
+                
                 chars[i].SetAnimation(jumpAnim);
+                chars[i].SpineAnim.SetAnimationSpeed(jumpAnimSpeed);
             }
 
             while (chars.Where(r => !r.IsOnField).ToList().Count != chars.Length)

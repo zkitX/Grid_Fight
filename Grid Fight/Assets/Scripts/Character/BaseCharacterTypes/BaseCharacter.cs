@@ -1035,6 +1035,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             if (statToCheck[1] == "BaseSpeed")
             {
                 SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.BaseSpeed);
+                if(CharInfo.SpeedStats.BaseSpeed == 0)
+                {
+                    ControllerType playerController = BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == this).First().Key;
+                    BattleManagerScript.Instance.DeselectCharacter(CharInfo.CharacterID, UMS.Side, playerController);
+                    BattleManagerScript.Instance.CurrentSelectedCharacters[playerController].Character = null;
+                    BattleManagerScript.Instance.Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType.Down, playerController, true);
+                }
             }
         }
 
@@ -1109,6 +1116,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 if (statToCheck[1] == "BaseSpeed")
                 {
                     SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.BaseSpeed);
+                    if(bdClass.CurrentBuffDebuff.Value == 0)
+                    {
+                        yield return BattleManagerScript.Instance.RemoveCharacterFromBaord(ControllerType.Player1, this, true);
+                    }
                 }
             }
         }
