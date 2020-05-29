@@ -446,6 +446,11 @@ namespace Fungus
                     break;
                 }
 
+                if(i == tokens.Count - 2)
+                {
+                    AudioManagerMk2.Instance.StopNamedSource("TextAudio");
+                }
+
                 previousTokenType = token.type;
 
                 if (exitFlag)
