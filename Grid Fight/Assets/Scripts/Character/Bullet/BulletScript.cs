@@ -234,13 +234,26 @@ public class BulletScript : MonoBehaviour
                 int chances = Random.Range(0, 100);
                 if (chances < 100)
                 {
-                    foreach (ScriptableObjectAttackEffect item in BulletEffects)
+                    foreach (ScriptableObjectAttackEffect item in BulletEffects.Where(r=> !r.StatsToAffect.ToString().Contains("Tile")).ToList())
                     {
                         target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.Value.x, item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles, CharOwner));
                     }
                 }
             }
         }
+    }
+
+    private IEnumerator BlockTileForTime(float duration, Vector2Int pos)
+    {
+        BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(pos);
+        float timer = 0;
+        bts.BattleTileState = BattleTileStateType.Blocked;
+        while (timer < duration)
+        {
+            yield return null;
+            timer += Time.deltaTime;
+        }
+        bts.BattleTileState = BattleTileStateType.Empty;
     }
 
 

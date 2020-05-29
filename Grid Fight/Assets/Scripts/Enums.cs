@@ -329,7 +329,8 @@ public enum BuffDebuffStatsType
     SpeedStats_AtkToIdleDuration,
     DamageStats_BaseDamage,
     Damage_Cure,
-    Zombification
+    Zombification,
+    BlockTile
 
 }
 

@@ -79,11 +79,20 @@ public class BattleTileTargetsScript : MonoBehaviour
                     int chances = Random.Range(0, 100);
                     if (chances < effectChances)
                     {
-                        foreach (ScriptableObjectAttackEffect item in atkEffects)
+                        foreach (ScriptableObjectAttackEffect item in atkEffects.Where(r => !r.StatsToAffect.ToString().Contains("Tile")).ToList())
                         {
                             target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.StatsToAffect == BuffDebuffStatsType.Damage_Cure ? item.Value.x *2 : item.Value.x, item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles, attacker));
                         }
                     }
+                }
+            }
+            else
+            {
+
+                ScriptableObjectAttackEffect soAE = atkEffects.Where(r => r.StatsToAffect == BuffDebuffStatsType.BlockTile).FirstOrDefault();
+                if (soAE != null)
+                {
+                    StartCoroutine(BlockTileForTime(soAE.Duration.x, pos));
                 }
             }
         }
@@ -114,6 +123,20 @@ public class BattleTileTargetsScript : MonoBehaviour
         }
         yield return new WaitForSeconds(0.2f);
         UpdateQueue(tc);
+    }
+
+
+    private IEnumerator BlockTileForTime(float duration, Vector2Int pos)
+    {
+        BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(pos);
+        float timer = 0;
+        bts.BattleTileState = BattleTileStateType.Blocked;
+        while (timer < duration)
+        {
+            yield return null;
+            timer += Time.deltaTime;
+        }
+        bts.BattleTileState = BattleTileStateType.Empty;
     }
 
 
