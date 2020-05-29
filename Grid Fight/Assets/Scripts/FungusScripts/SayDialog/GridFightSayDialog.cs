@@ -172,7 +172,7 @@ public class GridFightSayDialog : SayDialog
 
         yield return base.DoSay(text, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, voiceOverClip, delegate { });
 
-        if (textAudio.enabled) textAudio.ResetSource(); //TODO Ensure this isnt breaking
+        if (textAudio != null && textAudio.enabled) textAudio.ResetSource(); //TODO Ensure this isnt breaking
 
         InputController.Instance.ButtonAUpEvent -= Instance_ButtonAUpEvent;
     }

@@ -71,6 +71,7 @@ public class AudioManagerMk2 : MonoBehaviour
     {
         ManagedAudioSource audioSource = PlaySound(sourceType, clipInfo, priority, sourceOrigin, loop);
         if (name == "") return null;
+        if (audioSource == null) return null;
         namedSources.Add(new NamedManagedAudioSource(name, audioSource));
         audioSource.removeNamedOnComplete = true;
         return audioSource;
