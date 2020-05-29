@@ -278,7 +278,7 @@ public class CharacterType_Script : BaseCharacter
                 yield return BattleManagerScript.Instance.PauseUntil();
                 chargingAttackTimer += Time.fixedDeltaTime;
 
-                if(chargingAttackTimer >= 1.5f)
+                if(chargingAudioStrong == null && chargingAttackTimer >= 1.5f)
                 {
                     chargingAudioStrong = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoopStrong, AudioBus.MidPrio, transform, true, 1f);
                 }

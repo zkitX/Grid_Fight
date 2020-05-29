@@ -64,6 +64,15 @@ MonoBehaviour:
     cooldownType: 0
     cooldownPeriod: 1
     baseVolume: 0.3
+  SpecialAttackChargingLoopStrong:
+    clip: {fileID: 0}
+    clips: []
+    audioBus: 0
+    randomiseOrder: 0
+    moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
+    baseVolume: 1
   SpecialAttackChargingRelease:
     clip: {fileID: 8300000, guid: 3b78c92fa7ab8da40a23b963b8b7d944, type: 3}
     clips: []
@@ -185,7 +194,8 @@ MonoBehaviour:
     baseVolume: 0.3
   Dialogue_TextStart:
     clip: {fileID: 0}
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: 0ba842be3239247c2b8006f427a5a3be, type: 3}
     audioBus: 100
     randomiseOrder: 0
     moreThanOneClip: 0
