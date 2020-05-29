@@ -506,7 +506,8 @@ public enum ParticlesType
     Stage00BossDeathSmoke,
     Stage00_Boss_MoonDrums_Loop,
     Stage00_Boss_MoonDrums_LoopCrumble,
-    Stage00_Boss_Movement,
+    Stage00_Boss_TeleportationIn,
+    Stage00_Boss_TeleportationOut,
     Stage00_Boss_FaceChanging
 }
 

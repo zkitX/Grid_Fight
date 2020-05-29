@@ -877,9 +877,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 isMoving = false;
                 TileMovementCompleteEvent?.Invoke(this);
                 MoveCo = null;
+                spineT.localPosition = nextPos;
                 yield break;
             }
         }
+
+        spineT.localPosition = nextPos;
         Debug.Log("EndMoveCo");
     }
 
@@ -1035,7 +1038,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             if (statToCheck[1] == "BaseSpeed")
             {
                 SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.BaseSpeed);
-                if(CharInfo.SpeedStats.BaseSpeed == 0)
+                if(CharInfo.SpeedStats.BaseSpeed == 0 && BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.UMS.Side == UMS.Side && r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).ToList().Count > 0)
                 {
                     ControllerType playerController = BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == this).First().Key;
                     BattleManagerScript.Instance.DeselectCharacter(CharInfo.CharacterID, UMS.Side, playerController);
@@ -1116,7 +1119,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 if (statToCheck[1] == "BaseSpeed")
                 {
                     SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.BaseSpeed);
-                    if(bdClass.CurrentBuffDebuff.Value == 0)
+                    if(bdClass.CurrentBuffDebuff.Value == 0 && BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.UMS.Side == UMS.Side && r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).ToList().Count > 0)
                     {
                         yield return BattleManagerScript.Instance.RemoveCharacterFromBaord(ControllerType.Player1, this, true);
                     }

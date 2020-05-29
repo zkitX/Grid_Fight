@@ -208,7 +208,7 @@ public class BattleManagerScript : MonoBehaviour
             for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)
             {
                 currentCharacter.UMS.Pos[i] += bts.Pos;
-                Debug.Log(currentCharacter.UMS.Pos[i].ToString());
+                //Debug.Log(currentCharacter.UMS.Pos[i].ToString());
                 GridManagerScript.Instance.SetBattleTileState(currentCharacter.UMS.Pos[i], BattleTileStateType.Occupied);
                 BattleTileScript cbts = GridManagerScript.Instance.GetBattleTile(currentCharacter.UMS.Pos[i]);
                 currentCharacter.CurrentBattleTiles.Add(cbts);
@@ -605,14 +605,11 @@ public class BattleManagerScript : MonoBehaviour
 
         if (CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar == CurrentSelectedCharacters[playerController].Character.CharInfo.CharacterSelection)
         {
-            //Debug.Log(val + "   same char");
             //CurrentSelectedCharacters[playerController].Character.SwapWhenPossible = false;
             yield break;
         }
 
         // yield return HoldPressTimer(playerController);
-        //Debug.Log(CurrentSelectedCharacters[playerController].OffsetSwap + "    " + Time.time);
-
         CurrentSelectedCharacters[playerController].Character.SwapWhenPossible = true;
 
         while (CurrentSelectedCharacters[playerController].OffsetSwap > Time.time || !CurrentSelectedCharacters[playerController].Character.IsOnField ||
@@ -625,14 +622,13 @@ public class BattleManagerScript : MonoBehaviour
                 DeselectCharacter(cName, CurrentSelectedCharacters[playerController].Character.UMS.Side, playerController);
                 yield break;
             }
-            //Debug.Log(val);
             yield return null;
         }
 
         if (CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar == AllCharactersOnField.Where(r => r.CharInfo.CharacterID == cName &&
         CurrentSelectedCharacters[playerController].NextSelectionChar.Side == r.UMS.Side).First().CharInfo.CharacterSelection)
         {
-            if (!CurrentSelectedCharacters[playerController].Character.IsSwapping)
+            if (!CurrentSelectedCharacters[playerController].Character.IsSwapping && CurrentSelectedCharacters[playerController].Character.CharInfo.CharacterID != cName)
             {
                 CurrentSelectedCharacters[playerController].isSwapping = true;
                 Vector2Int spawnPos = CurrentSelectedCharacters[playerController].Character.UMS._CurrentTilePos;
@@ -992,18 +988,23 @@ public class BattleManagerScript : MonoBehaviour
                 if(isRandom)
                 {
                     bool found = false;
-                    while(!found)
+                    List<BaseCharacter> res = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).ToList();
+                    if(res.Count > 0)
                     {
-                        cs = (CharacterSelectionType)Random.Range(0, 4);
-                        cb = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.CharacterSelection == cs && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).FirstOrDefault();
-                     
+                        while (!found)
+                        {
+                            cs = (CharacterSelectionType)Random.Range(0, 4);
+                            cb = res.Where(r => r.CharInfo.CharacterSelection == cs).FirstOrDefault();
+
                         if (cb != null && CurrentSelectedCharacters.Where(r => r.Value.Character != null && ((r.Value.Character == cb)
                         || (r.Value.NextSelectionChar.NextSelectionChar == cs && r.Value.NextSelectionChar.Side == cb.UMS.Side && r.Value.Character != null)) && r.Key != playerController).ToList().Count == 0)
-                        {
-                            
-                            found = true;
+                            {
+
+                                found = true;
+                            }
                         }
                     }
+                    
                 }
                 else
                 {
@@ -1040,6 +1041,7 @@ public class BattleManagerScript : MonoBehaviour
 
             if(cb != null)
             {
+                Debug.Log(cb.CharInfo.CharacterID);
                 SetNextChar(deselction, cb, side, playerController, cs, worksOnFungusPappets);
             }
         }
@@ -1056,7 +1058,7 @@ public class BattleManagerScript : MonoBehaviour
         }
         //Debug.Log("Prev " + CurrentSelectedCharacters[playerController].NextSelectionChar.ToString());
         CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar = cs;
-        //Debug.Log(cs.ToString());
+        Debug.Log(cs.ToString());
 
         LoadingNewCharacterToGrid(cb.CharInfo.CharacterID, side, playerController, worksOnFungusPappets);
     }

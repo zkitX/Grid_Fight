@@ -570,6 +570,7 @@ public class CharacterType_Script : BaseCharacter
         {
             IsSwapping = false;
             SwapWhenPossible = false;
+            transform.position = new Vector3(100, 100, 100);
             SetAttackReady(false);
         }
 
@@ -625,7 +626,7 @@ public class CharacterType_Script : BaseCharacter
         {
             SpineAnimatorsetup();
         }
-        Debug.Log(animState.ToString());
+        //Debug.Log(animState.ToString());
 
         if (!animState.ToString().Contains("Atk"))
         {

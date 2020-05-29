@@ -87,7 +87,7 @@ public class Stage01_Boss_Script : MinionType_Script
     {
         if(MovementPs == null)
         {
-            MovementPs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage00_Boss_Movement);
+            MovementPs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage00_Boss_TeleportationOut);
             MovementPs.transform.parent = SpineAnim.transform;
             MovementPs.transform.localPosition = Vector3.zero;
         }
@@ -111,8 +111,8 @@ public class Stage01_Boss_Script : MinionType_Script
                     CurrentPhase = Stage01_Boss_MaskType.WarDrums;
                     break;
                 case AttackInputType.Strong:
-                    CurrentPhase = Stage01_Boss_MaskType.CrystalTomb;
-                    break;
+                    base.SetAnimation(Stage01_Boss_MaskType.CrystalTomb.ToString() + "_" + animState, loop, transition, _pauseOnLastFrame);
+                    return;
                 case AttackInputType.Skill1:
                     CurrentPhase = Stage01_Boss_MaskType.LifeDrums;
                     break;
