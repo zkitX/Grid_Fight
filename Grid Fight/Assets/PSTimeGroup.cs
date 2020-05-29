@@ -75,7 +75,7 @@ public class PSTimeGroup : MonoBehaviour
         }
         foreach(ParticleSystem p in LongParticles)
         {
-            p.Stop();
+            p.Pause();
             //p.gameObject.SetActive(false);
             var m = p.main;
             m.startLifetime = m.duration;
