@@ -17,7 +17,11 @@ public class Stage01_Boss_Script : MinionType_Script
 
     public Stage01_Boss_MaskType CurrentPhase;
     public List<BattleTileScript> AttackedTilesList = new List<BattleTileScript>();
-    public GameObject MovementPs;
+    public GameObject MovementPsIn;
+    public GameObject MovementPsOut;
+    public GameObject FaceChangingWarDrums;
+    public GameObject FaceChangingLifeDrums;
+    public GameObject FaceChangingMoonDrums;
     public override IEnumerator AI()
     {
         bool val = true;
@@ -50,32 +54,9 @@ public class Stage01_Boss_Script : MinionType_Script
                     }
                     else
                     {
-
-                        int randomizer = Random.Range(0, 100);
-                        if (randomizer < UpDownPerc)
-                        {
-                            yield return MoveCharOnDir_Co(InputDirection.Left);
-                            yield return new WaitForSeconds(1);
-                        }
-                        else if (randomizer > (100 - UpDownPerc))
-                        {
-                            yield return MoveCharOnDir_Co(InputDirection.Right);
-                            yield return new WaitForSeconds(1);
-                        }
-                        else
-                        {
-                            targetChar = GetTargetChar(enemys);
-                            if (targetChar.UMS.CurrentTilePos.x < UMS.CurrentTilePos.x)
-                            {
-                                yield return MoveCharOnDir_Co(InputDirection.Up);
-                                yield return new WaitForSeconds(1);
-                            }
-                            else
-                            {
-                                yield return MoveCharOnDir_Co(InputDirection.Down);
-                                yield return new WaitForSeconds(1);
-                            }
-                        }
+                        targetChar = GetTargetChar(enemys);
+                        yield return Teleport_Co(targetChar);
+                        yield return new WaitForSeconds(1);
                     }
                 }
                 yield return null;
@@ -83,17 +64,108 @@ public class Stage01_Boss_Script : MinionType_Script
         }
     }
 
+
+    public IEnumerator Teleport_Co(BaseCharacter targetChar)
+    {
+        if ((CharInfo.Health > 0 && !isMoving && IsOnField && SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving.ToString() && CharActionlist.Contains(CharacterActionType.Move)) || BattleManagerScript.Instance.VFXScene)
+        {
+            List<BattleTileScript> prevBattleTile = CurrentBattleTiles;
+            List<BattleTileScript> CurrentBattleTilesToCheck = new List<BattleTileScript>();
+            Vector2Int nextPos = Vector2Int.left;
+
+            while (CurrentBattleTilesToCheck.Count == 0)
+            {
+                nextPos = new Vector2Int(Random.Range(targetChar.UMS.CurrentTilePos.x - 1, targetChar.UMS.CurrentTilePos.x + 2), Random.Range(0, 12));
+                CurrentBattleTilesToCheck = CheckTileAvailabilityUsingPos(nextPos);
+            }
+
+            if (CurrentBattleTilesToCheck.Count > 0 &&
+                CurrentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos) && r.BattleTileState == BattleTileStateType.Empty).ToList().Count ==
+                CurrentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos)).ToList().Count && GridManagerScript.Instance.isPosOnField(nextPos))
+            {
+                isMoving = true;
+                foreach (BattleTileScript item in prevBattleTile)
+                {
+                    GridManagerScript.Instance.SetBattleTileState(item.Pos, BattleTileStateType.Empty);
+                }
+                UMS.CurrentTilePos = nextPos;
+                CharOredrInLayer = 101 + (nextPos.x * 10) + (nextPos.y - 12);
+                if (CharInfo.UseLayeringSystem)
+                {
+                    SpineAnim.SetSkeletonOrderInLayer(CharOredrInLayer);
+                }
+
+                CurrentBattleTiles = CurrentBattleTilesToCheck;
+                UMS.Pos = new List<Vector2Int>();
+                foreach (BattleTileScript item in CurrentBattleTilesToCheck)
+                {
+                    GridManagerScript.Instance.SetBattleTileState(item.Pos, BattleTileStateType.Occupied);
+                    UMS.Pos.Add(item.Pos);
+                }
+
+                BattleTileScript resbts = CurrentBattleTiles.Where(r => r.Pos == UMS.CurrentTilePos).First();
+
+                if (resbts != null)
+                {
+                    foreach (BattleTileScript item in prevBattleTile)
+                    {
+                        BattleManagerScript.Instance.OccupiedBattleTiles.Remove(item);
+                    }
+                    BattleManagerScript.Instance.OccupiedBattleTiles.AddRange(CurrentBattleTiles);
+
+                    MoveCo = MoveByTileSpace(resbts.transform.position, new AnimationCurve(), 0);
+                    yield return MoveCo;
+                }
+                else
+                {
+                    yield break;
+                }
+            }
+        }
+    }
+
+
+
     public override IEnumerator MoveByTileSpace(Vector3 nextPos, AnimationCurve curve, float animLength)
     {
-        if(MovementPs == null)
+        if(MovementPsOut == null)
         {
-            MovementPs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage00_Boss_TeleportationOut);
-            MovementPs.transform.parent = SpineAnim.transform;
-            MovementPs.transform.localPosition = Vector3.zero;
+            MovementPsOut = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage00_Boss_TeleportationOut);
+            
         }
-        MovementPs.SetActive(true);
+        MovementPsOut.transform.position = transform.position;
+        MovementPsOut.SetActive(true);
+        float timer = 0;
+        bool inOut = false;
+        while (MovementPsOut.activeInHierarchy)
+        {
+            yield return null;
+            timer += Time.deltaTime;
+            if(timer > 0.2f && !inOut)
+            {
+                inOut = true;
+                transform.position = new Vector3(100, 100, 100);
+            }
+        }
+        timer = 0;
+        if (MovementPsIn == null)
+        {
+            MovementPsIn = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage00_Boss_TeleportationIn);
+        }
+        MovementPsIn.transform.position = nextPos;
+        MovementPsIn.SetActive(true);
 
-        return base.MoveByTileSpace(nextPos, curve, animLength);
+        while (MovementPsIn.activeInHierarchy)
+        {
+            yield return null;
+            timer += Time.deltaTime;
+            if (timer > 0.2f && inOut)
+            {
+                inOut = false;
+                transform.position = nextPos;
+            }
+        }
+        isMoving = false;
     }
 
     public override void SetAnimation(string animState, bool loop = false, float transition = 0, bool _pauseOnLastFrame = false)
@@ -108,16 +180,61 @@ public class Stage01_Boss_Script : MinionType_Script
             switch (nextAttack.AttackInput)
             {
                 case AttackInputType.Weak:
-                    CurrentPhase = Stage01_Boss_MaskType.WarDrums;
+                    if (CurrentPhase != Stage01_Boss_MaskType.WarDrums)
+                    {
+                        if(FaceChangingWarDrums == null)
+                        {
+                            FaceChangingWarDrums = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage00_Boss_FaceChanging_WarDrums);
+                           
+                        }
+                        FaceChangingWarDrums.transform.parent = SpineAnim.transform;
+                        FaceChangingWarDrums.transform.localPosition = Vector3.zero;
+                        FaceChangingWarDrums.SetActive(true);
+                        CurrentPhase = Stage01_Boss_MaskType.WarDrums;
+                    } 
                     break;
                 case AttackInputType.Strong:
+                    if (CurrentPhase != Stage01_Boss_MaskType.WarDrums)
+                    {
+                        if (FaceChangingWarDrums == null)
+                        {
+                            FaceChangingWarDrums = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage00_Boss_FaceChanging_WarDrums);
+                          
+                        }
+                        FaceChangingWarDrums.transform.parent = SpineAnim.transform;
+                        FaceChangingWarDrums.transform.localPosition = Vector3.zero;
+                        FaceChangingWarDrums.SetActive(true);
+                        CurrentPhase = Stage01_Boss_MaskType.WarDrums;
+                    }
                     base.SetAnimation(Stage01_Boss_MaskType.CrystalTomb.ToString() + "_" + animState, loop, transition, _pauseOnLastFrame);
                     return;
                 case AttackInputType.Skill1:
-                    CurrentPhase = Stage01_Boss_MaskType.LifeDrums;
+                    if (CurrentPhase != Stage01_Boss_MaskType.LifeDrums)
+                    {
+                        if (FaceChangingLifeDrums == null)
+                        {
+                            FaceChangingLifeDrums = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage00_Boss_FaceChanging_LifeDrums);
+                          
+                        }
+                        FaceChangingLifeDrums.transform.parent = SpineAnim.transform;
+                        FaceChangingLifeDrums.transform.localPosition = Vector3.zero;
+                        FaceChangingLifeDrums.SetActive(true);
+                        CurrentPhase = Stage01_Boss_MaskType.LifeDrums;
+                    }
                     break;
                 case AttackInputType.Skill2:
-                    CurrentPhase = Stage01_Boss_MaskType.MoonDrums;
+                    if (CurrentPhase != Stage01_Boss_MaskType.MoonDrums)
+                    {
+                        if (FaceChangingMoonDrums == null)
+                        {
+                            FaceChangingMoonDrums = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage00_Boss_FaceChanging_MoonDrums);
+                         
+                        }
+                        FaceChangingMoonDrums.transform.parent = SpineAnim.transform;
+                        FaceChangingMoonDrums.transform.localPosition = Vector3.zero;
+                        FaceChangingMoonDrums.SetActive(true);
+                        CurrentPhase = Stage01_Boss_MaskType.MoonDrums;
+                    }
                     break;
             }
 

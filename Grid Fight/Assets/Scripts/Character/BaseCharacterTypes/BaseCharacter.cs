@@ -676,7 +676,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             AnimationCurve curve;
             GetDirectionVectorAndAnimationCurve(nextDir, out AnimState, out dir, out curve);
 
-            CurrentBattleTilesToCheck = CheckTileAvailability(dir);
+            CurrentBattleTilesToCheck = CheckTileAvailabilityUsingDir(dir);
 
             if (CurrentBattleTilesToCheck.Count > 0 &&
                 CurrentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos) && r.BattleTileState == BattleTileStateType.Empty).ToList().Count ==
@@ -733,8 +733,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
                         MoveCo = MoveByTileSpace(resbts.transform.position, curve, SpineAnim.GetAnimLenght(AnimState));
                     }
-
-                   
                     yield return MoveCo;
                 }
                 else
@@ -751,6 +749,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
         }
     }
+
+
+
 
     public virtual void MoveCharOnDirection(InputDirection nextDir)
     {
@@ -815,9 +816,19 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     }
 
 
-    private List<BattleTileScript> CheckTileAvailability(Vector2Int dir)
+    protected List<BattleTileScript> CheckTileAvailabilityUsingDir(Vector2Int dir)
     {
-        List<Vector2Int> nextPos = CalculateNextPos(dir);
+        List<Vector2Int> nextPos = CalculateNextPosUsingDir(dir);
+        if (GridManagerScript.Instance.AreBattleTilesInControllerArea(UMS.Pos, nextPos, UMS.WalkingSide))
+        {
+            return GridManagerScript.Instance.GetBattleTiles(nextPos, UMS.WalkingSide);
+        }
+        return new List<BattleTileScript>();
+    }
+
+    protected List<BattleTileScript> CheckTileAvailabilityUsingPos(Vector2Int dir)
+    {
+        List<Vector2Int> nextPos = CalculateNextPosUsinPos(dir);
         if (GridManagerScript.Instance.AreBattleTilesInControllerArea(UMS.Pos, nextPos, UMS.WalkingSide))
         {
             return GridManagerScript.Instance.GetBattleTiles(nextPos, UMS.WalkingSide);
@@ -826,13 +837,20 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     }
 
     //Calculate the next position fro the actual 
-    public List<Vector2Int> CalculateNextPos(Vector2Int direction)
+    public List<Vector2Int> CalculateNextPosUsingDir(Vector2Int direction)
     {
         List<Vector2Int> res = new List<Vector2Int>();
         UMS.Pos.ForEach(r => res.Add(r + direction));
         return res;
     }
 
+    //Calculate the next position fro the actual 
+    public List<Vector2Int> CalculateNextPosUsinPos(Vector2Int direction)
+    {
+        List<Vector2Int> res = new List<Vector2Int>();
+        UMS.Pos.ForEach(r => res.Add((UMS.CurrentTilePos - r) + direction));
+        return res;
+    }
 
     bool stopCo = false;
     public virtual IEnumerator MoveByTileSpace(Vector3 nextPos, AnimationCurve curve, float animLength)

@@ -206,7 +206,6 @@ public class WaveManagerScript : MonoBehaviour
             if (timer > wavePhase.DelayBetweenChars &&
                 WaveCharcters.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script).ToList().Count < wavePhase.MaxEnemyOnScreen)
             {
-                yield return new WaitForSeconds(0.5f);
                 if (wavePhase.IsRandom)
                 {
                     waveCharacterInfoClass = GetAvailableRandomWaveCharacter(wavePhase);
@@ -236,6 +235,9 @@ public class WaveManagerScript : MonoBehaviour
                         yield return null;
                     }
                 }
+
+                yield return new WaitForSeconds(0.5f);
+
             }
         }
     }
