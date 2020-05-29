@@ -988,18 +988,23 @@ public class BattleManagerScript : MonoBehaviour
                 if(isRandom)
                 {
                     bool found = false;
-                    while(!found)
+                    List<BaseCharacter> res = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).ToList();
+                    if(res.Count > 0)
                     {
-                        cs = (CharacterSelectionType)Random.Range(0, 4);
-                        cb = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.CharacterSelection == cs && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).FirstOrDefault();
-                     
+                        while (!found)
+                        {
+                            cs = (CharacterSelectionType)Random.Range(0, 4);
+                            cb = res.Where(r => r.CharInfo.CharacterSelection == cs).FirstOrDefault();
+
                         if (cb != null && CurrentSelectedCharacters.Where(r => r.Value.Character != null && ((r.Value.Character == cb)
                         || (r.Value.NextSelectionChar.NextSelectionChar == cs && r.Value.NextSelectionChar.Side == cb.UMS.Side && r.Value.Character != null)) && r.Key != playerController).ToList().Count == 0)
-                        {
-                            
-                            found = true;
+                            {
+
+                                found = true;
+                            }
                         }
                     }
+                    
                 }
                 else
                 {
@@ -1038,10 +1043,6 @@ public class BattleManagerScript : MonoBehaviour
             {
                 Debug.Log(cb.CharInfo.CharacterID);
                 SetNextChar(deselction, cb, side, playerController, cs, worksOnFungusPappets);
-            }
-            else
-            {
-
             }
         }
     }
