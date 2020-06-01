@@ -56,7 +56,6 @@ public class CallNextWave : Command
         if(TransitionDuration == 0)
         {
             BattleManagerScript.Instance.ResetAllActiveChars();
-            yield return new WaitForSecondsRealtime(1f);
         }
         
         BattleManagerScript.Instance.CurrentBattleState = BattleState.FungusPuppets;
@@ -78,13 +77,10 @@ public class CallNextWave : Command
         if (HasAStageUpdate && HasADifferentGrid)
         {
             EnvironmentManager.Instance.ChangeGridStructure(Grid, FightGridToShow, false, TransitionDuration);
-            yield return new WaitForSecondsRealtime(0.5f);
-
         }
         else if (HasADifferentGrid)
         {
             EnvironmentManager.Instance.ChangeGridStructure(Grid, -1, true, TransitionDuration);
-            yield return new WaitForSecondsRealtime(0.5f);
 
         }
 
@@ -102,9 +98,6 @@ public class CallNextWave : Command
         yield return WaveManagerScript.Instance.StartWaveByName(WaveName);
 
         BattleManagerScript.Instance.CurrentBattleState = BattleState.FungusPuppets;
-
-        yield return new WaitForSecondsRealtime(.5f);
-
         SetNextBlockFromName(NextBlockToFire);
         Continue();
     }
