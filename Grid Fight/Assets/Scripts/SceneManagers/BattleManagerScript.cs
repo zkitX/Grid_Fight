@@ -164,7 +164,7 @@ public class BattleManagerScript : MonoBehaviour
         res.AddRange(AllCharactersOnField.Where(r => !r.IsOnField).ToList());
         foreach (BaseCharacter currentCharacter in res)
         {
-            bts = GridManagerScript.Instance.GetFreeTilesAdjacentTo(CurrentSelectedCharacters[ControllerType.Player1].Character.UMS.CurrentTilePos, 1, true, WalkingSideType.LeftSide).First();
+            bts = GridManagerScript.Instance.GetFreeTilesAdjacentTo(CurrentSelectedCharacters[ControllerType.Player1].Character.UMS.CurrentTilePos, 2, true, WalkingSideType.LeftSide).First();
 
             SetCharOnBoardOnFixedPos(currentCharacter.UMS.PlayerController[0], currentCharacter.CharInfo.CharacterID, bts.Pos);
         }
@@ -397,22 +397,28 @@ public class BattleManagerScript : MonoBehaviour
              {
                  UIBattleManager.Instance.StartTimeUp(15, side);
              }*/
-            List<BaseCharacter> cbs = AllCharactersOnField.Where(r => r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.UMS.IsCharControllableByPlayers(playerController)).ToList();
 
-            foreach (BaseCharacter item in cbs)
+            if (CurrentSelectedCharacters.Where(r => r.Value.Character != null && r.Value.Character.CharInfo.CharacterID == cName && r.Value.Character.UMS.Side == side).ToList().Count > 0)
             {
-                List<KeyValuePair<ControllerType, CurrentSelectedCharacterClass>> controllers = CurrentSelectedCharacters.Where(r => playerController.Contains(r.Key) && r.Value.Character != null && r.Value.NextSelectionChar.NextSelectionChar == item.CharInfo.CharacterSelection).ToList();
-                if (controllers.Count == 0)
-                {
-                    ControllerType ct = CurrentSelectedCharacters.Where(r => r.Value.Character.CharInfo.CharacterID == cName && r.Value.Character.UMS.Side == side).First().Key;
-                    SetCharOnBoard(ct, item.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeBattleTile(item.UMS.WalkingSide, item.UMS.Pos).Pos);
-                    SelectCharacter(ct, (CharacterType_Script)item);
+                KeyValuePair<ControllerType, CurrentSelectedCharacterClass> currentPlayer = CurrentSelectedCharacters.Where(r => r.Value.Character != null && r.Value.Character.CharInfo.CharacterID == cName && r.Value.Character.UMS.Side == side).First();
+                List<BaseCharacter> cbs = AllCharactersOnField.Where(r => r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.UMS.IsCharControllableByPlayers(playerController)).ToList();
 
-                    CurrentSelectedCharacters[ct].NextSelectionChar.NextSelectionChar = item.CharInfo.CharacterSelection;
-                    ((CharacterType_Script)item).SetCharSelected(true, ct);
-                    return;
+                foreach (BaseCharacter item in cbs)
+                {
+                    List<KeyValuePair<ControllerType, CurrentSelectedCharacterClass>> controllers = CurrentSelectedCharacters.Where(r => playerController.Contains(r.Key) && r.Value.Character != null && r.Value.NextSelectionChar.NextSelectionChar == item.CharInfo.CharacterSelection).ToList();
+                    if (controllers.Count == 0)
+                    {
+                        SetCharOnBoard(currentPlayer.Key, item.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeBattleTile(item.UMS.WalkingSide, item.UMS.Pos).Pos);
+                        SelectCharacter(currentPlayer.Key, (CharacterType_Script)item);
+
+                        CurrentSelectedCharacters[currentPlayer.Key].NextSelectionChar.NextSelectionChar = item.CharInfo.CharacterSelection;
+                        ((CharacterType_Script)item).SetCharSelected(true, currentPlayer.Key);
+                        return;
+                    }
                 }
             }
+
+           
 
         }
     }

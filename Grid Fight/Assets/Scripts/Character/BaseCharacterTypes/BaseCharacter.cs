@@ -1014,6 +1014,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 BattleManagerScript.Instance.Zombification(this);
             }
         }
+        else if (bdClass.Stat == BuffDebuffStatsType.Health || bdClass.Stat == BuffDebuffStatsType.Health_Overtime)
+        {
+            CharInfo.Health += bdClass.CurrentBuffDebuff.Value;
+        }
         else
         {
             parentField = CharInfo.GetType().GetField(statToCheck[0]);
@@ -1076,10 +1080,14 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
                 bdClass.CurrentBuffDebuff.Timer += Time.fixedDeltaTime;
 
-                if (((int)bdClass.CurrentBuffDebuff.Timer) > iterator && statToCheck.Length == 3 && statToCheck[2].Contains("Overtime"))
+                if (((int)bdClass.CurrentBuffDebuff.Timer) > iterator && bdClass.Stat.ToString().Contains("Overtime"))
                 {
                     iterator++;
-                    if (bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Perc)
+                    if (bdClass.Stat == BuffDebuffStatsType.Health || bdClass.Stat == BuffDebuffStatsType.Health_Overtime)
+                    {
+                        CharInfo.Health += bdClass.CurrentBuffDebuff.Value;
+                    }
+                    else if (bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Perc)
                     {
                         field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? 0 : (float)field.GetValue(parentField.GetValue(CharInfo)) +
                             (((float)B_field.GetValue(parentField.GetValue(CharInfo))) / 100) * bdClass.CurrentBuffDebuff.Value);
@@ -1101,6 +1109,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             else if(bdClass.Stat == BuffDebuffStatsType.Zombification)
             {
 
+            }
+            else if (bdClass.Stat == BuffDebuffStatsType.Health || bdClass.Stat == BuffDebuffStatsType.Health_Overtime)
+            {
+                
             }
             else
             {

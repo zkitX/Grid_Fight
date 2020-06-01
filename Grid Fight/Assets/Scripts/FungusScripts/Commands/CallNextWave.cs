@@ -97,6 +97,7 @@ public class CallNextWave : Command
         yield return new WaitForSecondsRealtime(.5f);
 
         SetNextBlockFromName(NextBlockToFire);
+        Continue();
     }
 
     public override Color GetButtonColor()
