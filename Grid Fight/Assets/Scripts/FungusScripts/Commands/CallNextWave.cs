@@ -20,6 +20,13 @@ public class CallNextWave : Command
 
 
     public bool CallPool = true;
+    public List<PlayersCurrentSelectedCharClass> PlayersCurrentSelectedChars = new List<PlayersCurrentSelectedCharClass>
+    {
+        new PlayersCurrentSelectedCharClass(ControllerType.Player1, Vector2Int.zero),
+        new PlayersCurrentSelectedCharClass(ControllerType.Player2, Vector2Int.zero),
+        new PlayersCurrentSelectedCharClass(ControllerType.Player3, Vector2Int.zero),
+        new PlayersCurrentSelectedCharClass(ControllerType.Player4, Vector2Int.zero)
+    };
     public List<TalkingTeamClass> TalkingTeam = new List<TalkingTeamClass>();
 
     public bool JumpUp = false;
@@ -84,7 +91,7 @@ public class CallNextWave : Command
             yield return WaveManagerScript.Instance.SettingUpWave(WaveName);
         if (HasAStageUpdate)
         {
-            yield return EnvironmentManager.Instance.MoveToNewGrid(HasAStageUpdate ? FightGridToShow : -1, TransitionDuration, TalkingTeam, JumpAnimSpeed, JumpUp);
+            yield return EnvironmentManager.Instance.MoveToNewGrid(HasAStageUpdate ? FightGridToShow : -1, TransitionDuration, PlayersCurrentSelectedChars, TalkingTeam, JumpAnimSpeed, JumpUp);
         }
 
         BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
@@ -118,5 +125,18 @@ public class TalkingTeamClass
     public TalkingTeamClass()
     {
             
+    }
+}
+
+[System.Serializable]
+public class PlayersCurrentSelectedCharClass
+{
+    public ControllerType PlayerController;
+    public Vector2Int Pos;
+
+    public PlayersCurrentSelectedCharClass(ControllerType playerController, Vector2Int pos)
+    {
+        PlayerController = playerController;
+        Pos = pos;
     }
 }

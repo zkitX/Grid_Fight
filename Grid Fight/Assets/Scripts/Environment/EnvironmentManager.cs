@@ -53,7 +53,7 @@ public class EnvironmentManager : MonoBehaviour
         }
     }
 
-    public IEnumerator MoveToNewGrid(int gridIndex, float duration, List<TalkingTeamClass> arrivingChar, float jumpAnimSpeed, bool jumpUp = false, bool moveChars = true)
+    public IEnumerator MoveToNewGrid(int gridIndex, float duration, List<PlayersCurrentSelectedCharClass> playersCurrentSelectedChars, List<TalkingTeamClass> arrivingChar, float jumpAnimSpeed, bool jumpUp = false, bool moveChars = true)
     {
         FightGrid destinationGrid = fightGrids[gridIndex != -1 ? gridIndex : currentGridIndex];
 
@@ -66,7 +66,7 @@ public class EnvironmentManager : MonoBehaviour
             StopCoroutine(GridLeapSequencer);
         }
         currentGridIndex = gridIndex != -1 ? gridIndex : currentGridIndex;
-        GridLeapSequencer = GridLeapSequence(duration, CameraStage.CameraInfo.Where(r => r.StageIndex == (gridIndex != -1 ? gridIndex : currentGridIndex)).First().CameraPosition, arrivingChar,jumpAnimSpeed, jumpUp, moveChars);
+        GridLeapSequencer = GridLeapSequence(duration, CameraStage.CameraInfo.Where(r => r.StageIndex == (gridIndex != -1 ? gridIndex : currentGridIndex)).First().CameraPosition, playersCurrentSelectedChars, arrivingChar, jumpAnimSpeed, jumpUp, moveChars);
         yield return GridLeapSequencer;
     }
 
@@ -74,7 +74,7 @@ public class EnvironmentManager : MonoBehaviour
 
     CharacterType_Script[] chars;
     List<CharacterType_Script> jumpingchars = new List<CharacterType_Script>();
-    IEnumerator GridLeapSequence(float duration, Vector3 translation, List<TalkingTeamClass> arrivingChar, float jumpAnimSpeed, bool jumpUp = false, bool moveChars = true)
+    IEnumerator GridLeapSequence(float duration, Vector3 translation, List<PlayersCurrentSelectedCharClass> playersCurrentSelectedChars, List<TalkingTeamClass> arrivingChar, float jumpAnimSpeed, bool jumpUp = false, bool moveChars = true)
     {
         //Ensure new grid is set and moved to correct position before everything
         CameraInfoClass cic = CameraStage.CameraInfo.Where(r => r.StageIndex == currentGridIndex && !r.used).First();
@@ -151,20 +151,16 @@ public class EnvironmentManager : MonoBehaviour
                 {
                     if (BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)a].Character != null && BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)a].Character == cb)
                     {
-                        isIn = true;
+                        BattleTileScript nextBts = GridManagerScript.Instance.GetBattleTile(playersCurrentSelectedChars.Where(r=> r.PlayerController == (ControllerType)a).First().Pos);
+                        GridManagerScript.Instance.SetBattleTileState(nextBts.Pos, BattleTileStateType.Occupied);
+                        cb.UMS.CurrentTilePos = nextBts.Pos;
+                        cb.UMS.Pos.Clear();
+                        cb.UMS.Pos.Add(nextBts.Pos);
+                        cb.CurrentBattleTiles.Clear();
+                        cb.CurrentBattleTiles.Add(nextBts);
+                        charsToLand.Add(cb);
+                        break;
                     }
-                }
-
-                if (isIn)
-                {
-                    BattleTileScript nextBts = GridManagerScript.Instance.GetRandomFreeAdjacentTile(cb.UMS.CurrentTilePos, 5, false, cb.UMS.WalkingSide);
-                    GridManagerScript.Instance.SetBattleTileState(nextBts.Pos, BattleTileStateType.Occupied);
-                    cb.UMS.CurrentTilePos = nextBts.Pos;
-                    cb.UMS.Pos.Clear();
-                    cb.UMS.Pos.Add(nextBts.Pos);
-                    cb.CurrentBattleTiles.Clear();
-                    cb.CurrentBattleTiles.Add(nextBts);
-                    charsToLand.Add(cb);
                 }
             }
 
