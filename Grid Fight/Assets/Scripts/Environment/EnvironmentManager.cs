@@ -53,7 +53,7 @@ public class EnvironmentManager : MonoBehaviour
         }
     }
 
-    public IEnumerator MoveToNewGrid(int gridIndex, float duration, List<PlayersCurrentSelectedCharClass> playersCurrentSelectedChars, List<TalkingTeamClass> arrivingChar, float jumpAnimSpeed, bool jumpUp = false, bool moveChars = true)
+    public IEnumerator MoveToNewGrid(int gridIndex, float duration, List<PlayersCurrentSelectedCharClass> playersCurrentSelectedChars, List<TalkingTeamClass> arrivingChar, float jumpAnimSpeed, bool jumpUp = false, bool moveChars = true, float wt = 0.5f)
     {
         FightGrid destinationGrid = fightGrids[gridIndex != -1 ? gridIndex : currentGridIndex];
 
@@ -66,7 +66,7 @@ public class EnvironmentManager : MonoBehaviour
             StopCoroutine(GridLeapSequencer);
         }
         currentGridIndex = gridIndex != -1 ? gridIndex : currentGridIndex;
-        GridLeapSequencer = GridLeapSequence(duration, CameraStage.CameraInfo.Where(r => r.StageIndex == (gridIndex != -1 ? gridIndex : currentGridIndex)).First().CameraPosition, playersCurrentSelectedChars, arrivingChar, jumpAnimSpeed, jumpUp, moveChars);
+        GridLeapSequencer = GridLeapSequence(duration, CameraStage.CameraInfo.Where(r => r.StageIndex == (gridIndex != -1 ? gridIndex : currentGridIndex)).First().CameraPosition, playersCurrentSelectedChars, arrivingChar, jumpAnimSpeed, jumpUp, moveChars, wt);
         yield return GridLeapSequencer;
     }
 
@@ -74,7 +74,7 @@ public class EnvironmentManager : MonoBehaviour
 
     CharacterType_Script[] chars;
     List<CharacterType_Script> jumpingchars = new List<CharacterType_Script>();
-    IEnumerator GridLeapSequence(float duration, Vector3 translation, List<PlayersCurrentSelectedCharClass> playersCurrentSelectedChars, List<TalkingTeamClass> arrivingChar, float jumpAnimSpeed, bool jumpUp = false, bool moveChars = true)
+    IEnumerator GridLeapSequence(float duration, Vector3 translation, List<PlayersCurrentSelectedCharClass> playersCurrentSelectedChars, List<TalkingTeamClass> arrivingChar, float jumpAnimSpeed, bool jumpUp = false, bool moveChars = true, float wt = 0.5f)
     {
         //Ensure new grid is set and moved to correct position before everything
         CameraInfoClass cic = CameraStage.CameraInfo.Where(r => r.StageIndex == currentGridIndex && !r.used).First();
@@ -131,11 +131,20 @@ public class EnvironmentManager : MonoBehaviour
                 chars[i].SpineAnim.SetAnimationSpeed(jumpAnimSpeed);
             }
 
-            while (chars.Where(r => !r.IsOnField).ToList().Count != chars.Length)
-            {
-                yield return null;
+            /*    while (chars.Where(r => !r.IsOnField).ToList().Count != chars.Length)
+                {
+                    yield return null;
 
+                }*/
+
+            float waitingTime = 0;
+            while (waitingTime < wt)
+            {
+                waitingTime += Time.time;
+                yield return null;
             }
+
+
             if (duration > 0)
             {
                 CameraManagerScript.Instance.CameraFocusSequence(CameraManagerScript.Instance.DurationOut,

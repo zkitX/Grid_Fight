@@ -188,10 +188,10 @@ public class GridFightMenuDialog : MenuDialog
             switch (dir)
             {
                 case InputDirection.Up:
-                    SelectionIndex--;
+                    SelectionIndex++;
                     break;
                 case InputDirection.Down:
-                    SelectionIndex++;
+                    SelectionIndex--;
                     break;
             }
 

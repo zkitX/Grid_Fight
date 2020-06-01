@@ -32,6 +32,7 @@ public class CallNextWave : Command
     public bool JumpUp = false;
     [Range(0, 5)]
     public float JumpAnimSpeed = 1;
+    public float DelayBeforeJump = 0.5f;
     public bool UseWave = true;
 
     public string NextBlockToFire;
@@ -91,7 +92,7 @@ public class CallNextWave : Command
             yield return WaveManagerScript.Instance.SettingUpWave(WaveName);
         if (HasAStageUpdate)
         {
-            yield return EnvironmentManager.Instance.MoveToNewGrid(HasAStageUpdate ? FightGridToShow : -1, TransitionDuration, PlayersCurrentSelectedChars, TalkingTeam, JumpAnimSpeed, JumpUp);
+            yield return EnvironmentManager.Instance.MoveToNewGrid(HasAStageUpdate ? FightGridToShow : -1, TransitionDuration, PlayersCurrentSelectedChars, TalkingTeam, JumpAnimSpeed, JumpUp, wt: DelayBeforeJump);
         }
 
         BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;

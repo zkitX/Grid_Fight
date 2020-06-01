@@ -511,7 +511,8 @@ public enum ParticlesType
     Stage00_Boss_TeleportationOut,
     Stage00_Boss_FaceChanging_WarDrums,
     Stage00_Boss_FaceChanging_LifeDrums,
-    Stage00_Boss_FaceChanging_MoonDrums
+    Stage00_Boss_FaceChanging_MoonDrums,
+    Stage01_Boss_CrystalTomb_Effect
 }
 
 
