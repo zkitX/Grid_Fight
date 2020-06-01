@@ -170,24 +170,27 @@ public class EnvironmentManager : MonoBehaviour
 
             for (int i = 0; i < arrivingChar.Count; i++)
             {
-                BaseCharacter cb = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == arrivingChar[i].CharacterId).FirstOrDefault();
-                if (cb == null)
+                if(charsToLand.Where(r=> r.CharInfo.CharacterID == arrivingChar[i].CharacterId).ToList().Count == 0)
                 {
-                    cb = BattleManagerScript.Instance.CharsForTalkingPart.Where(r => r.CharInfo.CharacterID == arrivingChar[i].CharacterId).FirstOrDefault();
+                    BaseCharacter cb = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == arrivingChar[i].CharacterId).FirstOrDefault();
                     if (cb == null)
                     {
-                        cb = BattleManagerScript.Instance.CreateTalkingChar(arrivingChar[i].CharacterId);
-                    }
+                        cb = BattleManagerScript.Instance.CharsForTalkingPart.Where(r => r.CharInfo.CharacterID == arrivingChar[i].CharacterId).FirstOrDefault();
+                        if (cb == null)
+                        {
+                            cb = BattleManagerScript.Instance.CreateTalkingChar(arrivingChar[i].CharacterId);
+                        }
 
+                    }
+                    BattleTileScript nextBts = arrivingChar[i].isRandomPos ? GridManagerScript.Instance.GetFreeBattleTile(WalkingSideType.LeftSide) : GridManagerScript.Instance.GetBattleTile(arrivingChar[i].Pos);
+                    GridManagerScript.Instance.SetBattleTileState(nextBts.Pos, BattleTileStateType.Occupied);
+                    cb.UMS.CurrentTilePos = nextBts.Pos;
+                    cb.UMS.Pos.Clear();
+                    cb.UMS.Pos.Add(nextBts.Pos);
+                    cb.CurrentBattleTiles.Clear();
+                    cb.CurrentBattleTiles.Add(nextBts);
+                    charsToLand.Add(cb);
                 }
-                BattleTileScript nextBts = arrivingChar[i].isRandomPos ? GridManagerScript.Instance.GetFreeBattleTile(WalkingSideType.LeftSide) : GridManagerScript.Instance.GetBattleTile(arrivingChar[i].Pos);
-                GridManagerScript.Instance.SetBattleTileState(nextBts.Pos, BattleTileStateType.Occupied);
-                cb.UMS.CurrentTilePos = nextBts.Pos;
-                cb.UMS.Pos.Clear();
-                cb.UMS.Pos.Add(nextBts.Pos);
-                cb.CurrentBattleTiles.Clear();
-                cb.CurrentBattleTiles.Add(nextBts);
-                charsToLand.Add(cb);
             }
 
             float timeRemaining = duration;
