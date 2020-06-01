@@ -33,6 +33,7 @@ public class CallNextWave : Command
     [Range(0, 5)]
     public float JumpAnimSpeed = 1;
     public float DelayBeforeJump = 0.5f;
+    public float PoolDelay = 3;
     public bool UseWave = true;
 
     public string NextBlockToFire;
@@ -70,7 +71,7 @@ public class CallNextWave : Command
         {
             yield return BattleManagerScript.Instance.SetAllNonUsedCharOnBattlefield();
 
-            yield return new WaitForSecondsRealtime(3f);
+            yield return new WaitForSecondsRealtime(PoolDelay);
         }
 
 
