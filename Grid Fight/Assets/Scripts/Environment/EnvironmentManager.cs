@@ -224,6 +224,7 @@ public class EnvironmentManager : MonoBehaviour
             foreach (BaseCharacter item in charsToLand)
             {
                 item.SetAnimation(jumpUp ? CharacterAnimationStateType.Arriving : CharacterAnimationStateType.JumpTransition_IN);
+                item.SpineAnim.SetAnimationSpeed(jumpAnimSpeed);
             }
 
             yield return new WaitForSeconds(0.1f);

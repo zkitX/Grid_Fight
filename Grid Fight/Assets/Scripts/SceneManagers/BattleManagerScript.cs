@@ -240,7 +240,6 @@ public class BattleManagerScript : MonoBehaviour
         currentCharacter.UMS.Pos = newPoses;
         currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", false);
         currentCharacter.SetUpLeavingBattle();
-        yield return MoveCharToBoardWithDelay(0.2f, currentCharacter, new Vector3(100f, 100f, 100f));
 
         if (playerController == ControllerType.Player1)
         {
@@ -256,7 +255,7 @@ public class BattleManagerScript : MonoBehaviour
             WaveManagerScript.Instance.RemoveWaveCharacterFromBoard(currentCharacter);
 
         }
-
+        yield return null;
     }
 
     public IEnumerator RemoveZombieFromBaord(BaseCharacter zombie)
@@ -640,7 +639,7 @@ public class BattleManagerScript : MonoBehaviour
                     CurrentSelectedCharacters[playerController].Character.IsSwapping = true;
 
                     // currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", false);
-                    currentCharacter.SpineAnim.SetAnimationSpeed(2);
+                    //currentCharacter.SpineAnim.SetAnimationSpeed(2);
                     yield return RemoveCharacterFromBaord(playerController, CurrentSelectedCharacters[playerController].Character, false);
 
                     SelectCharacter(playerController, currentCharacter);

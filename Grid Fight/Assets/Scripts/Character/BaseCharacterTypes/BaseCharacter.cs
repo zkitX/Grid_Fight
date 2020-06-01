@@ -1332,7 +1332,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             AnimSpeed = CharInfo.SpeedStats.MovementSpeed * CharInfo.BaseSpeed;
         }
-        else if (animState.Contains(CharacterAnimationStateType.Reverse_Arriving.ToString()) || animState.Contains(CharacterAnimationStateType.Arriving.ToString()))
+        else if (animState.Contains("JumpTransition") || animState.Contains("Arriv"))
         {
             AnimSpeed = CharInfo.SpeedStats.LeaveSpeed;
         }
