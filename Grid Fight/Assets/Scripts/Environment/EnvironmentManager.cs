@@ -140,7 +140,7 @@ public class EnvironmentManager : MonoBehaviour
             float waitingTime = 0;
             while (waitingTime < wt)
             {
-                waitingTime += Time.time;
+                waitingTime += Time.deltaTime;
                 yield return null;
             }
 
