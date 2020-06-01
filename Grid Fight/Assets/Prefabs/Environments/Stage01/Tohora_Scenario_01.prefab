@@ -1450,10 +1450,10 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   RotationModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -1506,7 +1506,7 @@ ParticleSystem:
         m_RotationOrder: 4
     y:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -1559,9 +1559,9 @@ ParticleSystem:
         m_RotationOrder: 4
     curve:
       serializedVersion: 2
-      minMaxState: 1
-      scalar: 0.7853981
-      minScalar: -0.7853981
+      minMaxState: 3
+      scalar: 0.6981317
+      minScalar: 0.17453292
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3642,7 +3642,7 @@ ParticleSystem:
     range: {x: 0, y: 1}
     separateAxes: 0
   RotationBySpeedModule:
-    enabled: 1
+    enabled: 0
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -57101,10 +57101,10 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   RotationModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -57157,7 +57157,7 @@ ParticleSystem:
         m_RotationOrder: 4
     y:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -57210,9 +57210,9 @@ ParticleSystem:
         m_RotationOrder: 4
     curve:
       serializedVersion: 2
-      minMaxState: 1
-      scalar: 0.7853981
-      minScalar: -0.7853981
+      minMaxState: 3
+      scalar: 0.6981317
+      minScalar: 0.17453292
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -59293,7 +59293,7 @@ ParticleSystem:
     range: {x: 0, y: 1}
     separateAxes: 0
   RotationBySpeedModule:
-    enabled: 1
+    enabled: 0
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -73984,10 +73984,10 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   RotationModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -74040,7 +74040,7 @@ ParticleSystem:
         m_RotationOrder: 4
     y:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -74093,9 +74093,9 @@ ParticleSystem:
         m_RotationOrder: 4
     curve:
       serializedVersion: 2
-      minMaxState: 1
-      scalar: 0.7853981
-      minScalar: -0.7853981
+      minMaxState: 3
+      scalar: 0.6981317
+      minScalar: 0.17453292
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -76176,7 +76176,7 @@ ParticleSystem:
     range: {x: 0, y: 1}
     separateAxes: 0
   RotationBySpeedModule:
-    enabled: 1
+    enabled: 0
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -90061,10 +90061,10 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   RotationModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -90117,7 +90117,7 @@ ParticleSystem:
         m_RotationOrder: 4
     y:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -90170,9 +90170,9 @@ ParticleSystem:
         m_RotationOrder: 4
     curve:
       serializedVersion: 2
-      minMaxState: 1
-      scalar: 0.7853981
-      minScalar: -0.7853981
+      minMaxState: 3
+      scalar: 0.6981317
+      minScalar: 0.17453292
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -92253,7 +92253,7 @@ ParticleSystem:
     range: {x: 0, y: 1}
     separateAxes: 0
   RotationBySpeedModule:
-    enabled: 1
+    enabled: 0
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -103174,11 +103174,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6349486405344586317}
     m_Modifications:
-    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
-        type: 3}
-      propertyPath: m_Name
-      value: Tohora-Clouds (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 4620389500399249534, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -103234,6 +103229,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
+        type: 3}
+      propertyPath: m_Name
+      value: Tohora-Clouds (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 6660926024055593871, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -103280,11 +103280,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6349486405344586317}
     m_Modifications:
-    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
-        type: 3}
-      propertyPath: m_Name
-      value: Tohora-Clouds (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 4620389500399249534, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -103340,6 +103335,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
+        type: 3}
+      propertyPath: m_Name
+      value: Tohora-Clouds (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 6660926024055593871, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -103386,11 +103386,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8521111469500847686}
     m_Modifications:
-    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
-        type: 3}
-      propertyPath: m_Name
-      value: Tohora-Clouds (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 4620389500399249534, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -103446,6 +103441,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
+        type: 3}
+      propertyPath: m_Name
+      value: Tohora-Clouds (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 6660926024055593871, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -103492,11 +103492,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6349486405344586317}
     m_Modifications:
-    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
-        type: 3}
-      propertyPath: m_Name
-      value: Tohora-Clouds
-      objectReference: {fileID: 0}
     - target: {fileID: 4620389500399249534, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -103552,6 +103547,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
+        type: 3}
+      propertyPath: m_Name
+      value: Tohora-Clouds
+      objectReference: {fileID: 0}
     - target: {fileID: 6660926024055593871, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -103592,11 +103592,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8521111469500847686}
     m_Modifications:
-    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
-        type: 3}
-      propertyPath: m_Name
-      value: Tohora-Clouds
-      objectReference: {fileID: 0}
     - target: {fileID: 4620389500399249534, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -103652,6 +103647,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
+        type: 3}
+      propertyPath: m_Name
+      value: Tohora-Clouds
+      objectReference: {fileID: 0}
     - target: {fileID: 6660926024055593871, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -103692,11 +103692,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6349486405344586317}
     m_Modifications:
-    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
-        type: 3}
-      propertyPath: m_Name
-      value: Tohora-Clouds (6)
-      objectReference: {fileID: 0}
     - target: {fileID: 4620389500399249534, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -103752,6 +103747,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
+        type: 3}
+      propertyPath: m_Name
+      value: Tohora-Clouds (6)
+      objectReference: {fileID: 0}
     - target: {fileID: 6660926024055593871, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -103798,11 +103798,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6349486405344586317}
     m_Modifications:
-    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
-        type: 3}
-      propertyPath: m_Name
-      value: Tohora-Clouds (9)
-      objectReference: {fileID: 0}
     - target: {fileID: 4620389500399249534, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -103858,6 +103853,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
+        type: 3}
+      propertyPath: m_Name
+      value: Tohora-Clouds (9)
+      objectReference: {fileID: 0}
     - target: {fileID: 6660926024055593871, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -103904,11 +103904,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8521111469500847686}
     m_Modifications:
-    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
-        type: 3}
-      propertyPath: m_Name
-      value: Tohora-Clouds (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 4620389500399249534, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -103964,6 +103959,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
+        type: 3}
+      propertyPath: m_Name
+      value: Tohora-Clouds (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 6660926024055593871, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -104005,11 +104005,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6349486405344586317}
     m_Modifications:
-    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
-        type: 3}
-      propertyPath: m_Name
-      value: Tohora-Clouds (5)
-      objectReference: {fileID: 0}
     - target: {fileID: 4620389500399249534, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -104065,6 +104060,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
+        type: 3}
+      propertyPath: m_Name
+      value: Tohora-Clouds (5)
+      objectReference: {fileID: 0}
     - target: {fileID: 6660926024055593871, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -104105,11 +104105,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8521111469500847686}
     m_Modifications:
-    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
-        type: 3}
-      propertyPath: m_Name
-      value: Tohora-Clouds (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 4620389500399249534, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -104165,6 +104160,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
+        type: 3}
+      propertyPath: m_Name
+      value: Tohora-Clouds (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 6660926024055593871, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -104211,11 +104211,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6349486405344586317}
     m_Modifications:
-    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
-        type: 3}
-      propertyPath: m_Name
-      value: Tohora-Clouds (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 4620389500399249534, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -104271,6 +104266,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
+        type: 3}
+      propertyPath: m_Name
+      value: Tohora-Clouds (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 6660926024055593871, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -104317,11 +104317,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6349486405344586317}
     m_Modifications:
-    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
-        type: 3}
-      propertyPath: m_Name
-      value: Tohora-Clouds (8)
-      objectReference: {fileID: 0}
     - target: {fileID: 4620389500399249534, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -104377,6 +104372,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
+        type: 3}
+      propertyPath: m_Name
+      value: Tohora-Clouds (8)
+      objectReference: {fileID: 0}
     - target: {fileID: 6660926024055593871, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -104423,11 +104423,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6349486405344586317}
     m_Modifications:
-    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
-        type: 3}
-      propertyPath: m_Name
-      value: Tohora-Clouds (7)
-      objectReference: {fileID: 0}
     - target: {fileID: 4620389500399249534, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -104483,6 +104478,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
+        type: 3}
+      propertyPath: m_Name
+      value: Tohora-Clouds (7)
+      objectReference: {fileID: 0}
     - target: {fileID: 6660926024055593871, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -104529,11 +104529,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8521111469500847686}
     m_Modifications:
-    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
-        type: 3}
-      propertyPath: m_Name
-      value: Tohora-Clouds (4)
-      objectReference: {fileID: 0}
     - target: {fileID: 4620389500399249534, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -104589,6 +104584,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
+        type: 3}
+      propertyPath: m_Name
+      value: Tohora-Clouds (4)
+      objectReference: {fileID: 0}
     - target: {fileID: 6660926024055593871, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -104630,11 +104630,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6349486405344586317}
     m_Modifications:
-    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
-        type: 3}
-      propertyPath: m_Name
-      value: Tohora-Clouds (4)
-      objectReference: {fileID: 0}
     - target: {fileID: 4620389500399249534, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -104689,6 +104684,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2423820579463619678, guid: 6a00d280747e4384ebec6809cc69dc35,
+        type: 3}
+      propertyPath: m_Name
+      value: Tohora-Clouds (4)
       objectReference: {fileID: 0}
     - target: {fileID: 6660926024055593871, guid: 6a00d280747e4384ebec6809cc69dc35,
         type: 3}
