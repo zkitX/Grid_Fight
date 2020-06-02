@@ -871,6 +871,7 @@ public enum MenuNavigationType
     None = 0,
     Relative = 1,
     Cursor = 2,
+    DirectButton = 3,
 }
 
 public enum LevelType
