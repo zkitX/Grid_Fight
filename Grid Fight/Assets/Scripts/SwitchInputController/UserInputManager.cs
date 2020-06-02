@@ -201,7 +201,7 @@ public class UserInputManager : MonoBehaviour
         //Debug.Log(player + "  " + "Y Up");
         if (BattleManagerScript.Instance.InputControllerT == InputControllerType.SelectionOnLR)
         {
-            //StopSelectedCharacterChargingAttack(player);
+            StopSelectedCharacterChargingAttack(player);
         }
     }
 
@@ -210,7 +210,7 @@ public class UserInputManager : MonoBehaviour
         //Debug.Log(player + "  " + "X Up");
         if (BattleManagerScript.Instance.InputControllerT == InputControllerType.SelectionOnLR)
         {
-           // StopSelectedCharacterChargingAttack(player);
+            StopSelectedCharacterChargingAttack(player);
         }
     }
 

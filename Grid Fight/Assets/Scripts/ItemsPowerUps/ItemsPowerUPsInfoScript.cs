@@ -9,7 +9,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
     private IEnumerator DurationOnBattleFieldCo;
     public Animator Anim;
 
-
+    private BaseCharacter CharHitted;
     public void SetItemPowerUp(ScriptableObjectItemPowerUps itemPowerUpInfo, Vector3 pos, float duration = 0f)
     {
         ItemPowerUpInfo = itemPowerUpInfo;
@@ -29,10 +29,12 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
     {
         if (other.tag.Contains("Side"))
         {
-            other.GetComponentInParent<BaseCharacter>().Buff_DebuffCo(new Buff_DebuffClass(ItemPowerUpInfo.Name, ItemPowerUpInfo.EffectDuration,
+            CharHitted = other.GetComponentInParent<BaseCharacter>();
+            CharHitted.Buff_DebuffCo(new Buff_DebuffClass(ItemPowerUpInfo.Name, ItemPowerUpInfo.EffectDuration,
                 Random.Range(ItemPowerUpInfo.Value.x, ItemPowerUpInfo.Value.y),
                 ItemPowerUpInfo.StatsToAffect, ItemPowerUpInfo.StatsChecker, new ElementalResistenceClass(),
                 ElementalType.Neutral, ItemPowerUpInfo.AnimToFire, ItemPowerUpInfo.Particles, other.GetComponentInParent<BaseCharacter>()));
+            CharHitted.Sic.PotionPicked++;
             AudioClipInfoClass powerUpAudio = null;
             ItemType itemType = ItemType.PowerUP_FullRecovery;
             switch (ItemPowerUpInfo.StatsToAffect)

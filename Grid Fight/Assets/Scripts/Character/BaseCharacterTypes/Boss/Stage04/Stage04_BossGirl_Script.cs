@@ -66,7 +66,7 @@ public class Stage04_BossGirl_Script : MinionType_Script
         for (int i = 0; i < 4; i++)
         {
             Stage04_BossGirl_Flower_Script flower = (Stage04_BossGirl_Flower_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass((CharacterNameType.Stage04_BossGirl_Minion0 + i).ToString(), CharacterSelectionType.Up,
-            new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage04_BossGirl_Minion0 + i, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None, new List<CharacterActionType>()), transform);
+            new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage04_BossGirl_Minion0 + i, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None, new List<CharacterActionType>(), LevelType.Novice), transform);
             //BattleManagerScript.Instance.AllCharactersOnField.Add(flower);
             flower.UMS.Pos = FlowersPos.GetRange(i, 1);
             flower.BasePos = FlowersPos[i];
@@ -165,7 +165,7 @@ public class Stage04_BossGirl_Script : MinionType_Script
         }
 
         Stage04_BossMonster_Script mask = (Stage04_BossMonster_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass((CharacterNameType.Stage04_BossMonster).ToString(), CharacterSelectionType.Up,
-        new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage04_BossMonster, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None, new List<CharacterActionType>()), WaveManagerScript.Instance.transform);
+        new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage04_BossMonster, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None, new List<CharacterActionType>(), LevelType.Novice), WaveManagerScript.Instance.transform);
         WaveManagerScript.Instance.WaveCharcters.Add(mask);
         mask.UMS.Pos = UMS.Pos;
         mask.UMS.CurrentTilePos = UMS.CurrentTilePos;
@@ -188,11 +188,11 @@ public class Stage04_BossGirl_Script : MinionType_Script
     }
 
 
-    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
+    public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
         if (CanGetDamage)
         {
-            return base.SetDamage(damage, elemental, isCritical);
+            return base.SetDamage(attacker, damage, elemental, isCritical);
         }
         return false;
 

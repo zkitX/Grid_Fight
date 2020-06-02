@@ -28,7 +28,16 @@ public class CharacterInfoScript : MonoBehaviour
     public List<ScriptableObjectAttackBase> CurrentAttackTypeInfo = new List<ScriptableObjectAttackBase>();
     public ElementalType Elemental;
     public CharacterClassType ClassType;
+    public LevelType CharaterLevel;
     public bool UseLayeringSystem = true;
+
+    public List<LevelsInfoClass> Levels = new List<LevelsInfoClass>
+    {
+        new LevelsInfoClass(LevelType.Novice, 0),
+        new LevelsInfoClass(LevelType.Defiant, 1000),
+        new LevelsInfoClass(LevelType.Heroine, 3600),
+        new LevelsInfoClass(LevelType.Goddess, 9850)
+    };
 
     [Tooltip("Length of time, in seconds, that the character will take to respawn once killed")]
     public float CharacterRespawnLength = 180f;
@@ -43,11 +52,10 @@ public class CharacterInfoScript : MonoBehaviour
     {
         public Vector2 DamageMultiplier = new Vector2(1, 1);
         public Vector2 CriticalChance = new Vector2(2, 2);
-        public float Stamina_Cost_Atk;
+        public float LevelMultiplier;
 
         [HideInInspector] public Vector2 B_DamageMultiplier = new Vector2(1, 1);
         [HideInInspector] public Vector2 B_CriticalChance = new Vector2(2, 2);
-        [HideInInspector] public float B_Stamina_Cost_Atk;
     }
 
     public PowerfulAttackClass PowerfulAttac;
@@ -56,11 +64,10 @@ public class CharacterInfoScript : MonoBehaviour
     {
         public Vector2 DamageMultiplier = new Vector2(3, 3);
         public Vector2 CriticalChance = new Vector2(3, 5);
-        public float Stamina_Cost_Atk;
+        public float LevelMultiplier;
 
         [HideInInspector] public Vector2 B_DamageMultiplier = new Vector2(3, 3);
         [HideInInspector] public Vector2 B_CriticalChance = new Vector2(3, 5);
-        [HideInInspector] public float B_Stamina_Cost_Atk;
     }
 
     public HealthStastsClass HealthStats;
@@ -77,7 +84,6 @@ public class CharacterInfoScript : MonoBehaviour
         [HideInInspector] public float B_Base;
         [HideInInspector] public float B_Regeneration;
         [HideInInspector] public float B_BaseHealthRegeneration;
-        [HideInInspector] public float B_LevelMultiplier;
     }
 
     public StaminaStastsClass StaminaStats;
@@ -94,7 +100,6 @@ public class CharacterInfoScript : MonoBehaviour
         [HideInInspector] public float B_Base;
         [HideInInspector] public float B_Regeneration;
         [HideInInspector] public float B_BaseStaminaRegeneration;
-        [HideInInspector] public float B_LevelMultiplier;
     }
 
     public ShieldStastsClass ShieldStats;
@@ -111,7 +116,6 @@ public class CharacterInfoScript : MonoBehaviour
         [HideInInspector] public float B_Base;
         [HideInInspector] public float B_Regeneration;
         [HideInInspector] public float B_BaseShieldRegeneration;
-        [HideInInspector] public float B_LevelMultiplier;
     }
 
     public SpeedStastsClass SpeedStats;
@@ -124,7 +128,8 @@ public class CharacterInfoScript : MonoBehaviour
         public float AttackSpeedRatio;
         public float BulletSpeed = 5;
         public float LeaveSpeed = 3;
-        public float LevelMultiplier;
+        public float BaseSpeed_LevelMultiplier;
+        public float MovementSpeed_LevelMultiplier;
         public float IdleToAtkDuration = 0.2f;
         public float AtkToIdleDuration = 0.2f;
 
@@ -134,7 +139,6 @@ public class CharacterInfoScript : MonoBehaviour
         [HideInInspector] public float B_AttackSpeedRatio;
         [HideInInspector] public float B_BulletSpeed = 5;
         [HideInInspector] public float B_LeaveSpeed = 3;
-        [HideInInspector] public float B_LevelMultiplier;
         [HideInInspector] public float B_IdleToAtkDuration = 0.2f;
         [HideInInspector] public float B_AtkToIdleDuration = 0.2f;
     }
@@ -145,15 +149,9 @@ public class CharacterInfoScript : MonoBehaviour
     public class DamageStastsClass
     {
         public float BaseDamage = 10;
-        [HideInInspector]
-        public float B_BaseDamage = 10f;
-        [HideInInspector]
-        public int MultiBulletAttackNumberOfBullets = 3;
-        public float ChildrenBulletDelay;
-        [HideInInspector]
-        public List<ElementalResistenceClass> ElementalsResistence = new List<ElementalResistenceClass>();
-        [HideInInspector]
-        public ElementalType CurrentElemental;
+        [HideInInspector] public float B_BaseDamage = 10f;
+        [HideInInspector] public List<ElementalResistenceClass> ElementalsResistence = new List<ElementalResistenceClass>();
+        [HideInInspector] public ElementalType CurrentElemental;
         public float LevelMultiplier;
     }
 
@@ -163,13 +161,17 @@ public class CharacterInfoScript : MonoBehaviour
     {
         public float BaseDefence = 10;
         public float Invulnerability = 0.2f;
+        [HideInInspector]public float B_BaseDefence = 10;
+        [HideInInspector]public float B_Invulnerability = 0.2f;
+        public float LevelMultiplier;
     }
 
     public float Special1LoadingDuration;
     public float Special2LoadingDuration;
     public float Special3LoadingDuration;
 
-    public Vector2 MovementTimer = new Vector2(5, 8);
+    [HideInInspector] public float ExperienceValue;
+    [HideInInspector] public Vector2 MovementTimer = new Vector2(5, 8);
     [HideInInspector] public Vector2 B_MovementTimer = new Vector2(5, 8);
 
 
@@ -343,5 +345,88 @@ public class CharacterInfoScript : MonoBehaviour
         {
             return false;
         }
+    }
+
+
+    public void SetupChar()
+    {
+        for (int i = 0; i < (int)CharaterLevel; i++)
+        {
+            HealthStats.Base *= HealthStats.LevelMultiplier;
+            HealthStats.Health *= HealthStats.LevelMultiplier;
+            HealthStats.Regeneration *= HealthStats.LevelMultiplier;
+            HealthStats.BaseHealthRegeneration *= HealthStats.LevelMultiplier;
+
+            StaminaStats.Base *= StaminaStats.LevelMultiplier;
+            StaminaStats.Regeneration *= StaminaStats.LevelMultiplier;
+            StaminaStats.Stamina *= StaminaStats.LevelMultiplier;
+            StaminaStats.BaseStaminaRegeneration *= StaminaStats.LevelMultiplier;
+
+            ShieldStats.Base *= ShieldStats.LevelMultiplier;
+            ShieldStats.Regeneration *= ShieldStats.LevelMultiplier;
+            ShieldStats.Shield *= ShieldStats.LevelMultiplier;
+            ShieldStats.BaseShieldRegeneration *= ShieldStats.LevelMultiplier;
+
+            SpeedStats.BaseSpeed *= SpeedStats.BaseSpeed_LevelMultiplier;
+            SpeedStats.MovementSpeed *= SpeedStats.MovementSpeed_LevelMultiplier;
+
+            DefenceStats.BaseDefence *= DefenceStats.LevelMultiplier;
+
+            DamageStats.BaseDamage *= DamageStats.LevelMultiplier;
+        }
+
+
+        //RapidAttack
+        RapidAttack.B_CriticalChance = RapidAttack.CriticalChance;
+        RapidAttack.B_DamageMultiplier = RapidAttack.DamageMultiplier;
+
+        //PowerfulAttac
+        PowerfulAttac.B_CriticalChance = PowerfulAttac.CriticalChance;
+        PowerfulAttac.B_DamageMultiplier = PowerfulAttac.DamageMultiplier;
+
+        //HealthStats
+        HealthStats.B_Base = HealthStats.Base;
+        HealthStats.B_BaseHealthRegeneration = HealthStats.BaseHealthRegeneration;
+        HealthStats.B_Health = HealthStats.Health;
+        HealthStats.B_Regeneration = HealthStats.Regeneration;
+
+        //StaminaStats
+        StaminaStats.B_Base = StaminaStats.Base;
+        StaminaStats.B_BaseStaminaRegeneration = StaminaStats.BaseStaminaRegeneration;
+        StaminaStats.B_Regeneration = StaminaStats.Regeneration;
+        StaminaStats.B_Stamina = StaminaStats.Stamina;
+
+        //SpeedStats
+        SpeedStats.B_BaseSpeed = SpeedStats.BaseSpeed;
+        SpeedStats.B_MovementSpeed = SpeedStats.MovementSpeed;
+        SpeedStats.B_AttackSpeed = SpeedStats.AttackSpeed;
+        SpeedStats.B_AttackSpeedRatio = SpeedStats.AttackSpeedRatio;
+        SpeedStats.B_BulletSpeed = SpeedStats.BulletSpeed;
+        SpeedStats.B_LeaveSpeed = SpeedStats.LeaveSpeed;
+        SpeedStats.B_IdleToAtkDuration = SpeedStats.IdleToAtkDuration;
+        SpeedStats.B_AtkToIdleDuration = SpeedStats.AtkToIdleDuration;
+
+        DamageStats.B_BaseDamage = DamageStats.BaseDamage;
+
+        DefenceStats.B_BaseDefence = DefenceStats.BaseDefence;
+        DefenceStats.B_Invulnerability = DefenceStats.Invulnerability;
+    }
+}
+
+
+public class LevelsInfoClass
+{
+    public LevelType Level;
+    public float ExpNeeded;
+
+    public LevelsInfoClass()
+    {
+
+    }
+
+    public LevelsInfoClass(LevelType level, float expNeeded)
+    {
+        Level = level;
+        ExpNeeded = expNeeded;
     }
 }

@@ -63,6 +63,11 @@ public class ScriptableObjectAttackTypeEditor : Editor
             origin.Particles.CastLoopPS = ChargingLoopPs;
         }
         
+        if(origin.AttackInput > AttackInputType.Strong)
+        {
+            origin.ExperiencePoints = EditorGUILayout.FloatField("ExperiencePoints", origin.ExperiencePoints);
+        }
+
 
         if (origin.CurrentAttackType == AttackType.Particles)
         {

@@ -14,11 +14,16 @@ public class CharacterType_Script : BaseCharacter
     ManagedAudioSource chargingAudio = null;
     ManagedAudioSource chargingAudioStrong = null;
     public float chargingAttackTimer = 0;
+    public GameTime battleTime;
 
 
     #region Unity Life Cycles
     public override void Start()
     {
+        battleTime = new GameTime();
+        battleTime.SetupBasics();
+        battleTime.isStopped = true;
+        StartCoroutine(battleTime.standardTicker);
         base.Start();
     }
     protected override void Update()
@@ -152,6 +157,7 @@ public class CharacterType_Script : BaseCharacter
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         SetAnimation(CharacterAnimationStateType.Defeat_ReverseArrive);
         IsOnField = false;
+        battleTime.isStopped = true;
         base.SetCharDead(false);
         if (UMS.CurrentAttackType == AttackType.Particles)
         {
@@ -196,14 +202,17 @@ public class CharacterType_Script : BaseCharacter
 
     public override void SetUpEnteringOnBattle()
     {
+        battleTime.isStopped = false;
         SetAnimation(CharacterAnimationStateType.Arriving);
         AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.ArrivalSpawn, AudioBus.MidPrio);
         //AudioManager.Instance.PlayGeneric("Arriving_Spawn_20200108_V5");
         EventManager.Instance?.AddCharacterArrival((BaseCharacter)this);
+       
     }
 
     public override void SetUpLeavingBattle()
     {
+        battleTime.isStopped = true;
         SetAnimation(CharacterAnimationStateType.Reverse_Arriving);
         isDefending = false;
 
@@ -261,10 +270,13 @@ public class CharacterType_Script : BaseCharacter
     bool isChargingParticlesOn = false;
     public IEnumerator StartChargingAttack(AttackInputType nextAtkType)
     {
-        if (CharInfo.StaminaStats.Stamina - CharInfo.PowerfulAttac.Stamina_Cost_Atk >= 0
-           && CanAttack && !isSpecialLoading)
+        if (CanAttack && !isSpecialLoading)
         {
             ScriptableObjectAttackBase nxtAtk = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackInput == nextAtkType).First();
+            if(CharInfo.StaminaStats.Stamina - nxtAtk.StaminaCost < 0)
+            {
+                yield break;
+            }
             GameObject ps = null;
             isSpecialLoading = true;
             chargingAttackTimer = 0;
@@ -354,9 +366,14 @@ public class CharacterType_Script : BaseCharacter
         {
             return;
         }
-        if ((CharInfo.StaminaStats.Stamina - CharInfo.RapidAttack.Stamina_Cost_Atk >= 0
-           && CanAttack) || attackRegardless)
+        if (CanAttack || attackRegardless)
         {
+
+            ScriptableObjectAttackBase nxtAtk = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackInput == AttackInputType.Weak).First();
+            if (CharInfo.StaminaStats.Stamina - nxtAtk.StaminaCost < 0)
+            {
+                return;
+            }
 
             if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop.ToString() && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_IdleToAtk.ToString())
             {
@@ -379,6 +396,12 @@ public class CharacterType_Script : BaseCharacter
         }
     }
 
+
+    public override void SetFinalDamage(BaseCharacter attacker, float damage)
+    {
+        Sic.DamageReceived += damage;
+        base.SetFinalDamage(attacker, damage);
+    }
 
     //Set ste special attack
     public void SpecialAttack(ScriptableObjectAttackBase atkType)
@@ -642,11 +665,11 @@ public class CharacterType_Script : BaseCharacter
         base.SetAnimation(animState, loop, transition, _pauseOnLastFrame);
     }
 
-    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical)
+    public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical)
     {
         CameraManagerScript.Instance.CameraShake(CameraShakeType.GettingHit);
-
-        return base.SetDamage(damage, elemental, isCritical);
+        Sic.HitReceived++;
+        return base.SetDamage(attacker ,damage, elemental, isCritical);
     }
 
 }

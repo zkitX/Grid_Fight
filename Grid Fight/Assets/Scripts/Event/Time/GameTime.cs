@@ -13,7 +13,7 @@ public class GameTime
     [HideInInspector] public IEnumerator standardTicker = null;
     [HideInInspector] public IEnumerator standardReverseTicker = null;
     [HideInInspector] public bool counting = false;
-
+    public bool isStopped = false;
     public GameTime()
     {
         hours = 0;
@@ -74,8 +74,10 @@ public class GameTime
 
         while (true)
         {
-            if (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle) break;
-            timeInSeconds = Mathf.Clamp(timeInSeconds + (Time.deltaTime * rate), 0f, 99999999999999999999999999999f);
+            if (BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle && !isStopped)
+            {
+                timeInSeconds = Mathf.Clamp(timeInSeconds + (Time.deltaTime * rate), 0f, 99999999999999999999999999999f);
+            }
             yield return null;
         }
     }

@@ -873,3 +873,11 @@ public enum MenuNavigationType
     Cursor = 2,
 }
 
+public enum LevelType
+{
+    Novice,
+    Defiant,
+    Heroine,
+    Goddess
+}
+

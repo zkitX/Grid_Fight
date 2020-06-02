@@ -85,6 +85,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public GameObject chargeParticles = null;
     protected bool canDefend = true;
     public bool isDefending = false;
+    public StatisticInfoClass Sic;
     public int shotsLeftInAttack
     {
         get
@@ -121,6 +122,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             StartAttakCo();
             StartMoveCo();
         }
+        Sic = new StatisticInfoClass(CharInfo.CharacterID, UMS.PlayerController);
     }
 
     protected virtual void Update()
@@ -165,6 +167,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             SpineAnim.gameObject.layer = layer;
         }
+
+        CharInfo.SetupChar();
+
     }
 
     public virtual void StartMoveCo()
@@ -479,21 +484,62 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         if (UMS.CurrentAttackType == AttackType.Particles)
         {
-            if (SpineAnim.CurrentAnim.Contains("Atk1"))
-            {
-                CharInfo.Stamina -= CharInfo.RapidAttack.Stamina_Cost_Atk;
-                EventManager.Instance?.UpdateStamina(this);
-            }
-            else if (SpineAnim.CurrentAnim.Contains("Atk2"))
-            {
-                CharInfo.Stamina -= CharInfo.PowerfulAttac.Stamina_Cost_Atk;
+            CharInfo.Stamina -= nextAttack.StaminaCost;
+            EventManager.Instance?.UpdateStamina(this);
                 CameraManagerScript.Instance.CameraShake(CameraShakeType.Powerfulattack);
-                EventManager.Instance?.UpdateStamina(this);
-            }
         }
     }
 
-   
+    //Create and set up the basic info for the bullet
+    public void CreateBullet(BulletBehaviourInfoClass bulletBehaviourInfo)
+    {
+        // Debug.Log(isSpecialLoading);
+        GameObject bullet = BulletManagerScript.Instance.GetBullet();
+        bullet.transform.position = SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position;
+        BulletScript bs = bullet.GetComponent<BulletScript>();
+        bs.SOAttack = nextAttack;
+        bs.BulletBehaviourInfo = bulletBehaviourInfo;
+        bs.Facing = UMS.Facing;
+        bs.PlayerController = UMS.PlayerController;
+        bs.Elemental = CharInfo.DamageStats.CurrentElemental;
+        bs.Side = UMS.Side;
+        bs.VFXTestMode = VFXTestMode;
+        bs.CharOwner = this;
+        bs.attackAudioType = GetAttackAudio();
+        if (bulletBehaviourInfo.HasEffect)
+        {
+          //  bs.BulletEffects = bulletBehaviourInfo.Effects;
+        }
+
+        if (!GridManagerScript.Instance.isPosOnFieldByHeight(UMS.CurrentTilePos + bulletBehaviourInfo.BulletDistanceInTile))
+        {
+            bs.gameObject.SetActive(false);
+            return;
+        }
+
+        if (UMS.Facing == FacingType.Right)
+        {
+            bs.DestinationTile = new Vector2Int(UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x, UMS.CurrentTilePos.y + bulletBehaviourInfo.BulletDistanceInTile.y > 11 ? 11 : UMS.CurrentTilePos.y + bulletBehaviourInfo.BulletDistanceInTile.y);
+        }
+        else
+        {
+            bs.DestinationTile = new Vector2Int(UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x, UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y < 0 ? 0 : UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y);
+        }
+        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(UMS.Side == SideType.LeftSide ? nextAttack.Particles.Left.Bullet : nextAttack.Particles.Right.Bullet, CharInfo.CharacterID, AttackParticlePhaseTypes.Bullet, bullet.transform, UMS.Side,
+            nextAttack.AttackInput, CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script ? true : false);
+
+
+        if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
+        {
+            bs.gameObject.SetActive(true);
+            bs.StartMoveToTile();
+        }
+        else
+        {
+            bs.gameObject.SetActive(false);
+        }
+    }
+
 
     public void CreateParticleAttack()
     {
@@ -533,6 +579,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             if (nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnTarget)
             {
                 charTar = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList().OrderBy(a => a.CharInfo.HealthPerc).FirstOrDefault();
+            }
+
+            if(nextAttack.AttackInput > AttackInputType.Strong)
+            {
+                StatisticInfoClass sic = StatisticInfoManagerScript.Instance.CharaterStats.Where(r => r.CharacterId == CharInfo.CharacterID).First();
+                sic.Exp += nextAttack.ExperiencePoints;
             }
 
             foreach (BulletBehaviourInfoClassOnBattleFieldClass item in nextAttack.TilesAtk.BulletTrajectories)
@@ -1404,12 +1456,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     #endregion
 
-    public virtual bool SetDamage(float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
+    public virtual bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
-        return SetDamage(damage, elemental, isCritical);
+        return SetDamage(attacker, damage, elemental, isCritical);
     }
 
-    public virtual bool SetDamage(float damage, ElementalType elemental, bool isCritical)
+    public virtual bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical)
     {
         if (!IsOnField)
         {
@@ -1429,6 +1481,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 CharInfo.Shield -= UniversalGameBalancer.Instance.fullDefenceCost;
                 CharInfo.Stamina += UniversalGameBalancer.Instance.staminaRegenOnPerfectBlock;
                 EventManager.Instance.AddBlock(this, BlockInfo.BlockType.full);
+                Sic.CompleteDefences++;
             }
             else
             {
@@ -1438,7 +1491,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 go.transform.position = transform.position;
                 CharInfo.Shield -= UniversalGameBalancer.Instance.partialDefenceCost;
                 EventManager.Instance.AddBlock(this, BlockInfo.BlockType.partial);
-
+                Sic.Defences++;
                 damage = damage < 0 ? 1 : damage;
             }
             healthCT = HealthChangedType.Defend;
@@ -1502,16 +1555,25 @@ public class BaseCharacter : MonoBehaviour, IDisposable
           }*/
 
 
-        CharInfo.Health -= damage;
+       
         if (CharInfo.Health == 0)
         {
             EventManager.Instance?.AddCharacterDeath(this);
         }
         EventManager.Instance?.UpdateHealth(this);
         EventManager.Instance?.UpdateStamina(this);
+
+        SetFinalDamage(attacker ,damage);
+
         HealthStatsChangedEvent?.Invoke(damage, healthCT, transform);
         return res;
     }
+
+    public virtual void SetFinalDamage(BaseCharacter attacker, float damage)
+    {
+        CharInfo.Health -= damage;
+    }
+
 
     public ElementalWeaknessType GetElementalMultiplier(List<ElementalResistenceClass> armorElelmntals, ElementalType elementalToCheck)
     {
