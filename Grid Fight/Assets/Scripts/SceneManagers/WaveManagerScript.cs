@@ -229,7 +229,7 @@ public class WaveManagerScript : MonoBehaviour
                     while (true)
                     {
                         if (WaveCharcters.Where(r => r.gameObject.activeInHierarchy && (r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script || (r.IsOnField && r.CharInfo.BaseCharacterType != BaseCharType.MinionType_Script))).ToList().Count == 0 ||
-                            WaveCharcters.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script && r.CharInfo.Health <= 0).ToList().Count > 0)
+                            WaveCharcters.Where(r => r.IsOnField && r.gameObject.activeInHierarchy && r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script && r.CharInfo.Health <= 0).ToList().Count == WaveCharcters.Where(r => r.gameObject.activeInHierarchy).ToList().Count)
                         {
                             yield break;
                         }
