@@ -439,7 +439,7 @@ public class MinionType_Script : BaseCharacter
     }
     public override void SpineAnimationState_Complete(TrackEntry trackEntry)
     {
-        if (trackEntry.Animation.Name == "<empty>" || SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle.ToString()
+        if (trackEntry.Animation.Name == "<empty>" 
          || SpineAnim.CurrentAnim == CharacterAnimationStateType.Death.ToString() )
         {
             return;

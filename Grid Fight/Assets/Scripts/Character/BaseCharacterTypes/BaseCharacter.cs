@@ -581,7 +581,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 charTar = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList().OrderBy(a => a.CharInfo.HealthPerc).FirstOrDefault();
             }
 
-            if(nextAttack.AttackInput > AttackInputType.Strong)
+            if(nextAttack.AttackInput > AttackInputType.Strong && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
             {
                 StatisticInfoClass sic = StatisticInfoManagerScript.Instance.CharaterStats.Where(r => r.CharacterId == CharInfo.CharacterID).First();
                 sic.Exp += nextAttack.ExperiencePoints;
@@ -1324,14 +1324,14 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     protected bool isPuppeting = false;
     protected int puppetAnimCompleteTick = 0;
-    public IEnumerator PuppetAnimation(string animState, int loops, bool _pauseOnEndFrame = false, float animSpeed = 1f)
+    public IEnumerator PuppetAnimation(string animState, int loops, bool _pauseOnEndFrame = false, float animSpeed = 1f, bool loop = false)
     {
         isPuppeting = true;
         puppetAnimCompleteTick = 0;
         int currentAnimPlay = 0;
         while(currentAnimPlay < loops)
         {
-            SetAnimation(animState, _pauseOnLastFrame: (currentAnimPlay + 1 == loops && _pauseOnEndFrame));
+            SetAnimation(animState, loop, _pauseOnLastFrame: (currentAnimPlay + 1 == loops && _pauseOnEndFrame));
             SpineAnim.SetAnimationSpeed(animSpeed);
             while(currentAnimPlay == puppetAnimCompleteTick)
             {
