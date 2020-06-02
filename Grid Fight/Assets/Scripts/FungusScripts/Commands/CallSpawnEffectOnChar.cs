@@ -19,13 +19,13 @@ public class CallSpawnEffectOnChar : Command
     {
         foreach (CharacterNameType item in AffectedChars)
         {
-            BaseCharacter cb = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == item).First();
+            BaseCharacter cb = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == item).FirstOrDefault();
             if(cb == null)
             {
-                cb = BattleManagerScript.Instance.CharsForTalkingPart.Where(r => r.CharInfo.CharacterID == item).First();
+                cb = BattleManagerScript.Instance.CharsForTalkingPart.Where(r => r.CharInfo.CharacterID == item).FirstOrDefault();
                 if (cb == null)
                 {
-                    cb = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == item).First();
+                    cb = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == item).FirstOrDefault();
                 }
             }
 
