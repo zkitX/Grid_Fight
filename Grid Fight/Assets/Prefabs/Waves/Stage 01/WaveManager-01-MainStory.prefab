@@ -714,14 +714,14 @@ MonoBehaviour:
       - {x: 4, y: 6}
   - name: Tikaka
     IsRandom: 0
-    MaxEnemyOnScreen: 4
+    MaxEnemyOnScreen: 1
     DelayBetweenChars: 1
     ListOfEnemy:
-    - name: Daggar
-      NPCType: 0
+    - name: Tikaka
+      NPCType: 2
       NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 1082
+        CharacterName: 1028
         Health: {x: 600, y: 600}
         HealthRegeneration: {x: 1, y: 1}
         BaseDamage: {x: 22, y: 23}
@@ -734,58 +734,6 @@ MonoBehaviour:
         MovementSpeed: {x: 0.8, y: 0.8}
         MovementTimer: {x: 0, y: 0}
         UpDownPerc: 10
-        Events: []
-      AreThereStartingEnemy: 0
-      inRandomPos: 1
-      StartingEnemyTiles: []
-      IsRandomSpowiningTile: 1
-      SpowningTile:
-      - {x: 0, y: 6}
-      - {x: 2, y: 6}
-      - {x: 4, y: 6}
-    - name: Waspe
-      NPCType: 0
-      NumberOfCharacter: 9
-      TypeOfCharacter:
-        CharacterName: 1002
-        Health: {x: 20, y: 25}
-        HealthRegeneration: {x: 1, y: 1}
-        BaseDamage: {x: 6, y: 8}
-        RapidAttackMultiplier: {x: 1, y: 1}
-        PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 1.2, y: 1.5}
-        AttackSpeedRatio: {x: 12, y: 15}
-        Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 1.2, y: 1.4}
-        MovementTimer: {x: 0, y: 0}
-        UpDownPerc: 40
-        Events: []
-      AreThereStartingEnemy: 0
-      inRandomPos: 1
-      StartingEnemyTiles: []
-      IsRandomSpowiningTile: 1
-      SpowningTile:
-      - {x: 0, y: 6}
-      - {x: 2, y: 6}
-      - {x: 4, y: 6}
-    - name: Waspe
-      NPCType: 0
-      NumberOfCharacter: 7
-      TypeOfCharacter:
-        CharacterName: 1002
-        Health: {x: 20, y: 25}
-        HealthRegeneration: {x: 1, y: 1}
-        BaseDamage: {x: 6, y: 6}
-        RapidAttackMultiplier: {x: 1, y: 1}
-        PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 1.2, y: 1.5}
-        AttackSpeedRatio: {x: 12, y: 15}
-        Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 1.2, y: 1.4}
-        MovementTimer: {x: 0, y: 0}
-        UpDownPerc: 20
         Events: []
       AreThereStartingEnemy: 0
       inRandomPos: 1
