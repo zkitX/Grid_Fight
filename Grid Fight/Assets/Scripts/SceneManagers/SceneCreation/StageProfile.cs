@@ -10,6 +10,12 @@ public class StageProfile : ScriptableObject
     [SerializeField] public string Name;
     [SerializeField] public string ID = "S0_XMPL";
     [TextArea(15, 20)] [SerializeField] public string Description;
+    [SerializeField] public float bestAccuracyRating = 1f;
+    [SerializeField] public float bestReflexRating = 1f;
+    [SerializeField] public float bestDamageRating = 1f;
+
+    [Space(5)]
+    [Header("StageObjects")]
     [SerializeField] public GameObject Rewired;
     [SerializeField] public GameObject BattleInfoManager;
     [SerializeField] public GameObject BattleManager;

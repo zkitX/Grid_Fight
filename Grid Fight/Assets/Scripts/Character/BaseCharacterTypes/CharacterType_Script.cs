@@ -353,6 +353,10 @@ public class CharacterType_Script : BaseCharacter
             {
                 chargingAudio.ResetSource();
             }
+            if (chargingAudioStrong != null)
+            {
+                chargingAudioStrong.ResetSource();
+            }
             ps.transform.parent = null;
             ps.SetActive(false);
         }

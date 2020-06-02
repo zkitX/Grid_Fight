@@ -9,7 +9,7 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
     bool loadFromGameScene = false;
     public float loadingTime = 5f;
     public string selectedStageID = "";
-    protected StageProfile stage;
+    [HideInInspector] public StageProfile stage;
     public StageProfile[] stages;
     protected string currentStageID;
     protected List<GameObject> StageObjects = new List<GameObject>();

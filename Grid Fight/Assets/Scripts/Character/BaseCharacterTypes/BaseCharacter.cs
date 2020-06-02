@@ -584,7 +584,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             if(nextAttack.AttackInput > AttackInputType.Strong && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
             {
                 StatisticInfoClass sic = StatisticInfoManagerScript.Instance.CharaterStats.Where(r => r.CharacterId == CharInfo.CharacterID).First();
-                sic.Exp += nextAttack.ExperiencePoints;
+                sic.DamageExp += nextAttack.ExperiencePoints;
             }
 
             foreach (BulletBehaviourInfoClassOnBattleFieldClass item in nextAttack.TilesAtk.BulletTrajectories)

@@ -234,7 +234,7 @@ public class BulletScript : MonoBehaviour
                 {
                     SkillHit = true;
                     StatisticInfoClass sic = StatisticInfoManagerScript.Instance.CharaterStats.Where(r => r.CharacterId == CharOwner.CharInfo.CharacterID).First();
-                    sic.Exp += SOAttack.ExperiencePoints;
+                    sic.DamageExp += SOAttack.ExperiencePoints;
                 }
                 int chances = Random.Range(0, 100);
                 if (chances < 100)
