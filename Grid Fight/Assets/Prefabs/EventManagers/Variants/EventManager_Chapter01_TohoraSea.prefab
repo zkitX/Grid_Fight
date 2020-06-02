@@ -33840,6 +33840,9 @@ GameObject:
   - component: {fileID: 2838215724357575791}
   - component: {fileID: 1470719398290304440}
   - component: {fileID: 2995861862669265680}
+  - component: {fileID: 6213569172279787440}
+  - component: {fileID: 11028099280410546}
+  - component: {fileID: 8817067215020229486}
   m_Layer: 0
   m_Name: EventManager_Chapter01_TohoraSea
   m_TagString: Untagged
@@ -33897,7 +33900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 1194.4806, y: 927.4183}
+  scrollPos: {x: 786.88574, y: 879.31714}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 562
@@ -33909,9 +33912,9 @@ MonoBehaviour:
     width: 0
     height: 0
   selectedBlocks:
-  - {fileID: 2716068771626620858}
+  - {fileID: 6818782368769250927}
   selectedCommands:
-  - {fileID: 3429666735003473202}
+  - {fileID: 11028099280410546}
   variables: []
   description: 
   stepPause: 0
@@ -37336,7 +37339,7 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: -605.0537
-    y: 67.469604
+    y: 66.20378
     width: 215.82277
     height: 40
   tint: {r: 0.03137255, g: 0.7137255, b: 1, a: 1}
@@ -37364,7 +37367,10 @@ MonoBehaviour:
   - {fileID: 326998658517244085}
   - {fileID: 1937983933865096448}
   - {fileID: 276295837258947228}
+  - {fileID: 6213569172279787440}
   - {fileID: 8426404711320163120}
+  - {fileID: 11028099280410546}
+  - {fileID: 8817067215020229486}
   - {fileID: 2113524015956884295}
   - {fileID: 132253313660024594}
   - {fileID: 6442364431268758725}
@@ -45420,6 +45426,7 @@ MonoBehaviour:
   type: 4
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: DIALOGUE
   pausedUntilPlayed: 0
 --- !u!114 &8675619952594062272
@@ -45441,6 +45448,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: RISER
   pausedUntilPlayed: 0
 --- !u!114 &2896035517391940513
@@ -45495,6 +45503,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: IMPACT
   pausedUntilPlayed: 0
 --- !u!114 &3219399933968636532
@@ -45516,6 +45525,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: WAVE
   pausedUntilPlayed: 0
 --- !u!114 &4750085179531560881
@@ -45537,6 +45547,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: BELLS
   pausedUntilPlayed: 0
 --- !u!114 &8308060864060390539
@@ -45609,6 +45620,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: DIALOGUE
   pausedUntilPlayed: 0
 --- !u!114 &7614203540388593601
@@ -45630,6 +45642,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: BELLS
   pausedUntilPlayed: 0
 --- !u!114 &4108790773818763233
@@ -45702,6 +45715,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: DIALOGUE
   pausedUntilPlayed: 0
 --- !u!114 &7057733509018425617
@@ -45723,6 +45737,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: BELLS
   pausedUntilPlayed: 0
 --- !u!114 &4451245335555991571
@@ -45795,6 +45810,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: DIALOGUE
   pausedUntilPlayed: 0
 --- !u!114 &8627929915402991613
@@ -45816,6 +45832,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: BELLS
   pausedUntilPlayed: 0
 --- !u!114 &9180883516318115725
@@ -45888,6 +45905,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: DIALOGUE
   pausedUntilPlayed: 0
 --- !u!114 &1757570344565466512
@@ -45909,6 +45927,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: BELLS
   pausedUntilPlayed: 0
 --- !u!114 &3281482944067650910
@@ -45981,6 +46000,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: DIALOGUE
   pausedUntilPlayed: 0
 --- !u!114 &699099610853754634
@@ -46002,6 +46022,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: BELLS
   pausedUntilPlayed: 0
 --- !u!114 &3897797913648921598
@@ -46074,6 +46095,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: DIALOGUE
   pausedUntilPlayed: 0
 --- !u!114 &2080233493678663645
@@ -46095,6 +46117,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: BELLS
   pausedUntilPlayed: 0
 --- !u!114 &5383622159194226553
@@ -46167,6 +46190,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: EMO
   pausedUntilPlayed: 0
 --- !u!114 &7074841497720683049
@@ -46188,6 +46212,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: BELLS
   pausedUntilPlayed: 0
 --- !u!114 &5877793011207148932
@@ -46260,6 +46285,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: DIALOGUE
   pausedUntilPlayed: 0
 --- !u!114 &1712476833390906890
@@ -46332,6 +46358,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: IMPACT
   pausedUntilPlayed: 0
 --- !u!114 &6824989813079754091
@@ -46353,6 +46380,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: WAVE
   pausedUntilPlayed: 0
 --- !u!114 &3429666735003473202
@@ -46374,6 +46402,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: RISER
   pausedUntilPlayed: 0
 --- !u!114 &786981212175571733
@@ -46464,6 +46493,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: IMPACT
   pausedUntilPlayed: 0
 --- !u!114 &6857501479582223264
@@ -46485,6 +46515,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: WAVE
   pausedUntilPlayed: 0
 --- !u!114 &3183343370456369147
@@ -46506,6 +46537,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: RISER
   pausedUntilPlayed: 0
 --- !u!114 &6985082305050788655
@@ -46596,6 +46628,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: IMPACT
   pausedUntilPlayed: 0
 --- !u!114 &3040596606012292328
@@ -46617,6 +46650,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: WAVE
   pausedUntilPlayed: 0
 --- !u!114 &5081618335764589814
@@ -46638,6 +46672,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: RISER
   pausedUntilPlayed: 0
 --- !u!114 &6026565360813241955
@@ -46677,6 +46712,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: RISER
   pausedUntilPlayed: 0
 --- !u!114 &6648795192569454725
@@ -46767,6 +46803,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: IMPACT
   pausedUntilPlayed: 0
 --- !u!114 &5781871846621860189
@@ -46788,6 +46825,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: WAVE
   pausedUntilPlayed: 0
 --- !u!114 &6042965335438287274
@@ -46860,6 +46898,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: IMPACT
   pausedUntilPlayed: 0
 --- !u!114 &5958529699818109732
@@ -46881,6 +46920,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: WAVE
   pausedUntilPlayed: 0
 --- !u!114 &4402788838386013037
@@ -46902,6 +46942,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: BELLS
   pausedUntilPlayed: 0
 --- !u!114 &5220167325407218807
@@ -46941,6 +46982,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: BELLS
   pausedUntilPlayed: 0
 --- !u!114 &2204938390688966744
@@ -47031,6 +47073,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: IMPACT
   pausedUntilPlayed: 0
 --- !u!114 &5269584793939892013
@@ -47052,6 +47095,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: WAVE
   pausedUntilPlayed: 0
 --- !u!114 &4835865178311517622
@@ -47073,6 +47117,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: BELLS
   pausedUntilPlayed: 0
 --- !u!114 &6127453853773728867
@@ -47163,6 +47208,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: IMPACT
   pausedUntilPlayed: 0
 --- !u!114 &9001228732343036239
@@ -47184,6 +47230,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: WAVE
   pausedUntilPlayed: 0
 --- !u!114 &625285229009912774
@@ -47256,6 +47303,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: IMPACT
   pausedUntilPlayed: 0
 --- !u!114 &2157665177782945353
@@ -47277,6 +47325,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: WAVE
   pausedUntilPlayed: 0
 --- !u!114 &5353549550432667417
@@ -47298,6 +47347,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: BELLS
   pausedUntilPlayed: 0
 --- !u!114 &4149322666926492238
@@ -49164,6 +49214,7 @@ MonoBehaviour:
   type: 3
   bus: 100
   loopSound: 0
+  fadeInTime: 0
   audioID: CURE
   pausedUntilPlayed: 0
 --- !u!114 &1937983933865096448
@@ -49263,7 +49314,7 @@ MonoBehaviour:
   indentLevel: 0
   _duration:
     floatRef: {fileID: 0}
-    floatVal: 1.5
+    floatVal: 0.5
   durationOLD: 0
 --- !u!114 &326998658517244085
 MonoBehaviour:
@@ -49311,6 +49362,7 @@ MonoBehaviour:
   type: 3
   bus: 50
   loopSound: 0
+  fadeInTime: 0
   audioID: Attack
   pausedUntilPlayed: 0
 --- !u!114 &5037884777996782549
@@ -49481,6 +49533,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: IMPACT
   pausedUntilPlayed: 0
 --- !u!114 &2573283179880408681
@@ -49502,6 +49555,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: EMO
   pausedUntilPlayed: 0
 --- !u!114 &7641567775737833754
@@ -49553,6 +49607,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: IMPACT
   pausedUntilPlayed: 0
 --- !u!114 &5301132480225345149
@@ -49589,6 +49644,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: EMO
   pausedUntilPlayed: 0
 --- !u!114 &683973960933249013
@@ -49625,6 +49681,7 @@ MonoBehaviour:
   type: 3
   bus: 50
   loopSound: 0
+  fadeInTime: 0
   audioID: BossPan
   pausedUntilPlayed: 0
 --- !u!114 &1567024284835176877
@@ -49661,6 +49718,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: EMO
   pausedUntilPlayed: 0
 --- !u!114 &8839975223591272400
@@ -49697,6 +49755,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: IMPACT
   pausedUntilPlayed: 0
 --- !u!114 &991793257347942312
@@ -49733,6 +49792,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: DIALOGUE
   pausedUntilPlayed: 0
 --- !u!114 &1400632419366578498
@@ -49769,6 +49829,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: IMPACT
   pausedUntilPlayed: 0
 --- !u!114 &655082527477544957
@@ -49805,6 +49866,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: DIALOGUE
   pausedUntilPlayed: 0
 --- !u!114 &1340404753432423540
@@ -49826,6 +49888,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: IMPACT
   pausedUntilPlayed: 0
 --- !u!114 &2662522860963709175
@@ -49862,6 +49925,7 @@ MonoBehaviour:
   type: 3
   bus: 100
   loopSound: 1
+  fadeInTime: 0
   audioID: Destruction
   pausedUntilPlayed: 0
 --- !u!114 &6611355787394727032
@@ -49898,6 +49962,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: BELLS
   pausedUntilPlayed: 0
 --- !u!114 &-4672039822335065454
@@ -53417,6 +53482,7 @@ MonoBehaviour:
   type: 3
   bus: 50
   loopSound: 0
+  fadeInTime: 0
   audioID: Voice
   pausedUntilPlayed: 1
 --- !u!114 &3452661612077656418
@@ -55159,6 +55225,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: IMPACT
   pausedUntilPlayed: 0
 --- !u!114 &430681307757833826
@@ -55180,6 +55247,7 @@ MonoBehaviour:
   type: 3
   bus: 50
   loopSound: 0
+  fadeInTime: 0
   audioID: BossPan
   pausedUntilPlayed: 0
 --- !u!114 &7893866610829796996
@@ -56828,6 +56896,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: EMO
   pausedUntilPlayed: 0
 --- !u!114 &3048794007891785541
@@ -57521,6 +57590,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: IMPACT
   pausedUntilPlayed: 0
 --- !u!114 &7045603498232594990
@@ -57557,6 +57627,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: EMO
   pausedUntilPlayed: 0
 --- !u!114 &6921454427729499556
@@ -57611,6 +57682,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: IMPACT
   pausedUntilPlayed: 0
 --- !u!114 &3995145986896292409
@@ -57647,6 +57719,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: EMO
   pausedUntilPlayed: 0
 --- !u!114 &170748280373084456
@@ -57700,6 +57773,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 0
+  fadeInTime: 0
   audioID: BELLS
   pausedUntilPlayed: 0
 --- !u!114 &6308034277377299672
@@ -57754,6 +57828,7 @@ MonoBehaviour:
   type: 1
   bus: 1000
   loopSound: 1
+  fadeInTime: 0
   audioID: DIALOGUE
   pausedUntilPlayed: 0
 --- !u!114 &2838215724357575791
@@ -57812,6 +57887,64 @@ MonoBehaviour:
   _duration:
     floatRef: {fileID: 0}
     floatVal: 2
+  durationOLD: 0
+--- !u!114 &6213569172279787440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7201212296390213037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a81c758e913c4b4e9f152e45185a6ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1659
+  indentLevel: 0
+  AffectedChars: 03040000
+  Effect: {fileID: 11400000, guid: 8bf68703c6cfa3c4098000213785d5c8, type: 2}
+--- !u!114 &11028099280410546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7201212296390213037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b0d666cfbe88d241affc0667796b59d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1660
+  indentLevel: 0
+  characterID: 1027
+  animDetails:
+  - Name: Play Idle 100 times
+    animFromPreset: 1
+    animClipToPlay: Idle
+    animClipPreset: 1
+    plays: 100
+    animationSpeed: 1
+    pauseOnLastFrame: 0
+  holdForCompletedAnimation: 0
+--- !u!114 &8817067215020229486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7201212296390213037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3315ad2ebb85443909a1203d56d9344e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1661
+  indentLevel: 0
+  _duration:
+    floatRef: {fileID: 0}
+    floatVal: 1
   durationOLD: 0
 --- !u!1 &7282234787482492273
 GameObject:
