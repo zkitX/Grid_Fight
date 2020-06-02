@@ -356,6 +356,7 @@ public class CharacterType_Script : BaseCharacter
             if (chargingAudioStrong != null)
             {
                 chargingAudioStrong.ResetSource();
+                chargingAudioStrong = null;
             }
             ps.transform.parent = null;
             ps.SetActive(false);
