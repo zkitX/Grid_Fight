@@ -20,6 +20,15 @@ public class CallSpawnEffectOnChar : Command
         foreach (CharacterNameType item in AffectedChars)
         {
             BaseCharacter cb = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == item).First();
+            if(cb == null)
+            {
+                cb = BattleManagerScript.Instance.CharsForTalkingPart.Where(r => r.CharInfo.CharacterID == item).First();
+                if (cb == null)
+                {
+                    cb = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == item).First();
+                }
+            }
+
             cb.Buff_DebuffCo(new Buff_DebuffClass(Effect.Name, Effect.Duration.x, Effect.StatsToAffect == BuffDebuffStatsType.Damage_Cure ? Effect.Value.x * 2 : Effect.Value.x,
                 Effect.StatsToAffect, Effect.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, Effect.AnimToFire, Effect.Particles, new BaseCharacter()));
         }
