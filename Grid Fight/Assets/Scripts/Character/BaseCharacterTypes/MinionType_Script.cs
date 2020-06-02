@@ -77,11 +77,7 @@ public class MinionType_Script : BaseCharacter
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         Attacking = false;
         StopAllCoroutines();
-        for (int i = 0; i < UMS.Pos.Count; i++)
-        {
-            GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
-            UMS.Pos[i] = Vector2Int.zero;
-        }
+     
  		for (int i = 0; i < HittedByList.Count; i++)
         {
             StatisticInfoClass sic = StatisticInfoManagerScript.Instance.CharaterStats.Where(r => r.CharacterId == HittedByList[i].CharacterId).First();
@@ -89,16 +85,27 @@ public class MinionType_Script : BaseCharacter
         }
         totDamage = 0;
 
-        if (SpineAnim.skeleton.Data.Animations.Where(r => r.Name == CharacterAnimationStateType.Defeat.ToString()).ToList().Count == 1)
+    /*    if (SpineAnim.skeleton.Data.Animations.Where(r => r.Name == CharacterAnimationStateType.Defeat.ToString()).ToList().Count == 1)
         {
             SetAnimation(CharacterAnimationStateType.Defeat);
             CharBoxCollider.enabled = false;
-            base.SetCharDead(false);
+            foreach (ManagedAudioSource audioSource in GetComponentsInChildren<ManagedAudioSource>())
+            {
+                audioSource.gameObject.transform.parent = AudioManagerMk2.Instance.transform;
+            }
+            isMoving = false;
+            Call_CurrentCharIsDeadEvent();
+            shotsLeftInAttack = 0;
         }
         else
-        {
+        {*/
+            for (int i = 0; i < UMS.Pos.Count; i++)
+            {
+                GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
+                UMS.Pos[i] = Vector2Int.zero;
+            }
             base.SetCharDead();
-        }
+       // }
       
     }
 
