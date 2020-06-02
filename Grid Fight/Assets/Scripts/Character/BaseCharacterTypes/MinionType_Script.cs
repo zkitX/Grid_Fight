@@ -68,6 +68,7 @@ public class MinionType_Script : BaseCharacter
     public override void SetCharDead(bool hasToDisappear = true)
     {
         CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);
+     
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         Attacking = false;
         StopAllCoroutines();
@@ -76,7 +77,19 @@ public class MinionType_Script : BaseCharacter
             GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
             UMS.Pos[i] = Vector2Int.zero;
         }
-        base.SetCharDead();
+
+
+        if (SpineAnim.skeleton.Data.Animations.Where(r => r.Name == CharacterAnimationStateType.Defeat.ToString()).ToList().Count == 1)
+        {
+            SetAnimation(CharacterAnimationStateType.Defeat);
+            CharBoxCollider.enabled = false;
+            base.SetCharDead(false);
+        }
+        else
+        {
+            base.SetCharDead();
+        }
+      
     }
 
 
@@ -384,11 +397,17 @@ public class MinionType_Script : BaseCharacter
     public override void SpineAnimationState_Complete(TrackEntry trackEntry)
     {
         if (trackEntry.Animation.Name == "<empty>" || SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle.ToString()
-         || SpineAnim.CurrentAnim == CharacterAnimationStateType.Death.ToString())
+         || SpineAnim.CurrentAnim == CharacterAnimationStateType.Death.ToString() )
         {
             return;
         }
         string completedAnim = trackEntry.Animation.Name;
+
+        if (completedAnim == CharacterAnimationStateType.Defeat.ToString())
+        {
+            return;
+        }
+
 
         if (completedAnim.Contains("IdleToAtk") && SpineAnim.CurrentAnim.Contains("IdleToAtk"))
         {
