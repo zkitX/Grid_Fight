@@ -486,7 +486,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             CharInfo.Stamina -= nextAttack.StaminaCost;
             EventManager.Instance?.UpdateStamina(this);
+            if(nextAttack.AttackInput > AttackInputType.Weak)
+            {
                 CameraManagerScript.Instance.CameraShake(CameraShakeType.Powerfulattack);
+            }
         }
     }
 
