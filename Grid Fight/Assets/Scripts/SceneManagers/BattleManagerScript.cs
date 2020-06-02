@@ -301,7 +301,7 @@ public class BattleManagerScript : MonoBehaviour
             CharacterActionType.Skill1,
             CharacterActionType.Skill2,
             CharacterActionType.Skill3,
-            CharacterActionType.SwitchCharacter}), transform));
+            CharacterActionType.SwitchCharacter}, LevelType.Novice), transform));
 
         return CharsForTalkingPart.Last();
     }
@@ -446,7 +446,7 @@ public class BattleManagerScript : MonoBehaviour
         Switch_LoadingNewCharacterInRandomPosition(zombie.CharInfo.CharacterSelection, playerController, true);
         zombie.IsOnField = false;
 
-        GameObject zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage00_Boss_MoonDrums_Loop);
+        GameObject zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_MoonDrums_Loop);
         zombiePs.SetActive(true);
         zombiePs.transform.parent = zombie.SpineAnim.transform;
         zombiePs.transform.localPosition = Vector3.zero;
@@ -463,10 +463,10 @@ public class BattleManagerScript : MonoBehaviour
         if(zombiefied == null)
         {
             zombiefied = (MinionType_Script)CreateChar(new CharacterBaseInfoClass(zombie.CharInfo.CharacterID.ToString(), CharacterSelectionType.Up,
-        new List<ControllerType> { ControllerType.Enemy }, zombie.CharInfo.CharacterID, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.MinionType_Script, new List<CharacterActionType>()), transform);
+        new List<ControllerType> { ControllerType.Enemy }, zombie.CharInfo.CharacterID, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.MinionType_Script, new List<CharacterActionType>(), LevelType.Novice), transform);
             zombiesList.Add(zombiefied);
         }
-        zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage00_Boss_MoonDrums_Loop);
+        zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_MoonDrums_Loop);
         zombiePs.transform.parent = zombiefied.SpineAnim.transform;
         zombiePs.transform.localPosition = Vector3.zero;
         zombiePs.SetActive(true);
@@ -485,7 +485,7 @@ public class BattleManagerScript : MonoBehaviour
 
         zombiePs.transform.parent = null;
         zombiePs.SetActive(false);
-        zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage00_Boss_MoonDrums_LoopCrumble);
+        zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_MoonDrums_LoopCrumble);
         zombiePs.SetActive(true);
         zombiePs.transform.parent = zombiefied.SpineAnim.transform;
         zombiePs.transform.localPosition = Vector3.zero;

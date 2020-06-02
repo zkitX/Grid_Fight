@@ -281,48 +281,6 @@ public class CharacterInfoScript : MonoBehaviour
     }
 
 
-    private void Awake()
-    {
-
-        //RapidAttack
-        RapidAttack.B_CriticalChance = RapidAttack.CriticalChance;
-        RapidAttack.B_DamageMultiplier = RapidAttack.DamageMultiplier;
-        RapidAttack.B_Stamina_Cost_Atk = RapidAttack.Stamina_Cost_Atk;
-
-        //PowerfulAttac
-        PowerfulAttac.B_CriticalChance = PowerfulAttac.CriticalChance;
-        PowerfulAttac.B_DamageMultiplier = PowerfulAttac.DamageMultiplier;
-        PowerfulAttac.B_Stamina_Cost_Atk = PowerfulAttac.Stamina_Cost_Atk;
-
-        //HealthStats
-        HealthStats.B_Base = HealthStats.Base;
-        HealthStats.B_BaseHealthRegeneration = HealthStats.BaseHealthRegeneration;
-        HealthStats.B_Health = HealthStats.Health;
-        HealthStats.B_LevelMultiplier = HealthStats.LevelMultiplier;
-        HealthStats.B_Regeneration = HealthStats.Regeneration;
-
-        //StaminaStats
-        StaminaStats.B_Base = StaminaStats.Base;
-        StaminaStats.B_BaseStaminaRegeneration = StaminaStats.BaseStaminaRegeneration;
-        StaminaStats.B_LevelMultiplier = StaminaStats.LevelMultiplier;
-        StaminaStats.B_Regeneration = StaminaStats.Regeneration;
-        StaminaStats.B_Stamina = StaminaStats.Stamina;
-
-        //SpeedStats
-        SpeedStats.B_BaseSpeed = SpeedStats.BaseSpeed;
-        SpeedStats.B_MovementSpeed = SpeedStats.MovementSpeed;
-        SpeedStats.B_AttackSpeed = SpeedStats.AttackSpeed;
-        SpeedStats.B_AttackSpeedRatio = SpeedStats.AttackSpeedRatio;
-        SpeedStats.B_BulletSpeed = SpeedStats.BulletSpeed;
-        SpeedStats.B_LeaveSpeed = SpeedStats.LeaveSpeed;
-        SpeedStats.B_LevelMultiplier = SpeedStats.LevelMultiplier;
-        SpeedStats.B_IdleToAtkDuration = SpeedStats.IdleToAtkDuration;
-        SpeedStats.B_AtkToIdleDuration = SpeedStats.AtkToIdleDuration;
-
-        DamageStats.B_BaseDamage = DamageStats.BaseDamage;
-    }
-
-
     private void FixedUpdate()
     {
         if (Health > 0)

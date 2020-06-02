@@ -154,6 +154,17 @@ public class BulletBehaviourInfoClass
     public List<ScriptableObjectAttackEffect> Effects = new List<ScriptableObjectAttackEffect>();
     public float EffectChances = 100;
 
+    public BulletBehaviourInfoClass()
+    {
+
+    }
+
+
+    public BulletBehaviourInfoClass(Vector2Int BulletDistanceInTile, AnimationCurve Trajectory_Y, AnimationCurve Trajectory_Z, float ChildrenBulletDelay, List<Vector2Int> BulletEffectTiles, Vector2Int BulletGapStartingTile, bool HasEffect,
+        List<ScriptableObjectAttackEffect> Effects, float EffectChances)
+    {
+
+    }
 }
 #endregion
 

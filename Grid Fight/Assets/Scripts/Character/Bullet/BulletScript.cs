@@ -26,7 +26,6 @@ public class BulletScript : MonoBehaviour
     bool isMoving = false;
     public AttackInputType AttackInput;
     public AttackAnimType AtkType;
-    public GameObject HitPs;
     public bool isColliding = true;
     public float BulletDuration;
 	 IEnumerator movingCo;
@@ -147,7 +146,7 @@ public class BulletScript : MonoBehaviour
     {
 
         GetComponent<BoxCollider>().enabled = isColliding;
-        int startingYTile = Facing == FacingType.Left ? StartingTile.y - BulletGapStartingTile.y : StartingTile.y + BulletGapStartingTile.y;
+        int startingYTile = Facing == FacingType.Left ? StartingTile.y - BulletBehaviourInfo.BulletGapStartingTile.y : StartingTile.y + BulletBehaviourInfo.BulletGapStartingTile.y;
 
         if(isColliding)
         {
@@ -157,7 +156,7 @@ public class BulletScript : MonoBehaviour
                 (Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position) * CharOwner.CharInfo.SpeedStats.BulletSpeed) /
                 Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position));
             float duration = CharOwner.CharInfo.SpeedStats.BulletSpeed;
-            foreach (Vector2Int item in BulletEffectTiles)
+            foreach (Vector2Int item in BulletBehaviourInfo.BulletEffectTiles)
             {
                 if (GridManagerScript.Instance.isPosOnField(DestinationTile + item))
                 {
@@ -199,7 +198,7 @@ public class BulletScript : MonoBehaviour
                 if (!VFXTestMode)
                 {
                     target = BattleManagerScript.Instance.GetCharInPos(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]);
-                    MakeDamage(target, (CharInfo.DamageStats.BaseDamage * (AtkType == AttackAnimType.Weak_Atk ? CharInfo.RapidAttack.DamageMultiplier.x : CharInfo.PowerfulAttac.DamageMultiplier.x)) * 0.3f);
+                    MakeDamage(target, (CharOwner.CharInfo.DamageStats.BaseDamage * (AtkType == AttackAnimType.Weak_Atk ? CharOwner.CharInfo.RapidAttack.DamageMultiplier.x : CharOwner.CharInfo.PowerfulAttac.DamageMultiplier.x)) * 0.3f);
                 }
                 AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Impact, AudioBus.HighPrio, GridManagerScript.Instance.GetBattleTile(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]).transform);
                 FireEffectParticles(GridManagerScript.Instance.GetBattleTile(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]).transform.position);
@@ -222,7 +221,7 @@ public class BulletScript : MonoBehaviour
             if (target.tag.Contains("Side") && target.tag != Side.ToString())
             {
                 CharOwner.Sic.BulletHits++;
-                bool iscritical = CharInfo.IsCritical(AtkType == AttackAnimType.Weak_Atk ? true : false);
+                bool iscritical = CharOwner.CharInfo.IsCritical(AtkType == AttackAnimType.Weak_Atk ? true : false);
                 //Set damage to the hitting character
                 if (SOAttack.AttackInput != AttackInputType.Weak)
                 {
@@ -230,7 +229,7 @@ public class BulletScript : MonoBehaviour
                 }
 
                 target.SetDamage(CharOwner, (baseDamage) * (iscritical ? 2 : 1),
-                    Elemental, iscritical, CharInfo.ClassType == CharacterClassType.Desert && AtkType != AttackAnimType.Weak_Atk ? true : false);
+                    Elemental, iscritical, CharOwner.CharInfo.ClassType == CharacterClassType.Desert && AtkType != AttackAnimType.Weak_Atk ? true : false);
                 if(!SkillHit && SOAttack.AttackInput > AttackInputType.Strong)
                 {
                     SkillHit = true;
@@ -266,11 +265,11 @@ public class BulletScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //If the bullet collide with a character 
-        if (other.tag.Contains("Side") && other.tag != Side.ToString() && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && isMoving)
+        if (other.tag.Contains("Side") && other.tag != Side.ToString() && CharOwner.CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && isMoving)
         {
             isMoving = false;
             BaseCharacter target = other.GetComponentInParent<BaseCharacter>();
-            MakeDamage(target, CharInfo.DamageStats.BaseDamage * (AtkType == AttackAnimType.Weak_Atk ? CharInfo.RapidAttack.DamageMultiplier.x : CharInfo.PowerfulAttac.DamageMultiplier.x));
+            MakeDamage(target, CharOwner.CharInfo.DamageStats.BaseDamage * (AtkType == AttackAnimType.Weak_Atk ? CharOwner.CharInfo.RapidAttack.DamageMultiplier.x : CharOwner.CharInfo.PowerfulAttac.DamageMultiplier.x));
             //fire the Effect
             StartCoroutine(ChildExplosion(BulletBehaviourInfo.BulletEffectTiles.Where(r => r != Vector2Int.zero).ToList(), target.UMS.CurrentTilePos));
             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Impact, AudioBus.MidPrio,
@@ -289,7 +288,7 @@ public class BulletScript : MonoBehaviour
     public void FireEffectParticles(Vector3 pos)
     {
         //fire the Effect
-        GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(HitPs, CharInfo.CharacterID, AttackParticlePhaseTypes.Hit, pos, Side, AttackInput);
+        GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(Side == SideType.LeftSide ? SOAttack.Particles.Left.Hit : SOAttack.Particles.Right.Hit, CharOwner.CharInfo.CharacterID, AttackParticlePhaseTypes.Hit, pos, Side, AttackInput);
     }
 
     private void EndBullet(float timer)

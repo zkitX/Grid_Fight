@@ -490,7 +490,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
     }
 
-    //Create and set up the basic info for the bullet
+   /* //Create and set up the basic info for the bullet
     public void CreateBullet(BulletBehaviourInfoClass bulletBehaviourInfo)
     {
         // Debug.Log(isSpecialLoading);
@@ -538,7 +538,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             bs.gameObject.SetActive(false);
         }
-    }
+    }*/
 
 
     public void CreateParticleAttack()

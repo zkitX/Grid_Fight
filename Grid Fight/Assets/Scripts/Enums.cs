@@ -505,13 +505,13 @@ public enum ParticlesType
     ShieldNormal,
     ShieldTotalDefence,
     Stage00BossDeathSmoke,
-    Stage00_Boss_MoonDrums_Loop,
-    Stage00_Boss_MoonDrums_LoopCrumble,
-    Stage00_Boss_TeleportationIn,
-    Stage00_Boss_TeleportationOut,
-    Stage00_Boss_FaceChanging_WarDrums,
-    Stage00_Boss_FaceChanging_LifeDrums,
-    Stage00_Boss_FaceChanging_MoonDrums,
+    Stage01_Boss_MoonDrums_Loop,
+    Stage01_Boss_MoonDrums_LoopCrumble,
+    Stage01_Boss_TeleportationIn,
+    Stage01_Boss_TeleportationOut,
+    Stage01_Boss_FaceChanging_WarDrums,
+    Stage01_Boss_FaceChanging_LifeDrums,
+    Stage01_Boss_FaceChanging_MoonDrums,
     Stage01_Boss_CrystalTomb_Effect
 }
 

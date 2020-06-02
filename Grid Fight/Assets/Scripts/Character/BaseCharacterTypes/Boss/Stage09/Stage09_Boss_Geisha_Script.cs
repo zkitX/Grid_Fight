@@ -76,7 +76,7 @@ public class Stage09_Boss_Geisha_Script : MinionType_Script
     void GenerateBoss()
     {
         oniForme = (Stage09_Boss_NoFace_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(CharacterNameType.Stage09_Boss_NoFace.ToString(), CharacterSelectionType.Up,
-        new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage09_Boss_NoFace, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None, new List<CharacterActionType>()), transform);
+        new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage09_Boss_NoFace, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None, new List<CharacterActionType>(), LevelType.Novice), transform);
         oniForme.bossInfo = bossInfo;
         oniForme.UMS.Pos = UMS.Pos;
         oniForme.UMS.EnableBattleBars(false);
@@ -264,12 +264,12 @@ public class Stage09_Boss_Geisha_Script : MinionType_Script
         {
             if (SpineAnim.CurrentAnim.Contains("Atk1"))
             {
-                _CharInfo.Stamina -= _CharInfo.RapidAttack.Stamina_Cost_Atk;
+                //_CharInfo.Stamina -= _CharInfo.RapidAttack.Stamina_Cost_Atk;
                 EventManager.Instance?.UpdateStamina(this);
             }
             else if (SpineAnim.CurrentAnim.Contains("Atk2"))
             {
-                _CharInfo.Stamina -= _CharInfo.PowerfulAttac.Stamina_Cost_Atk;
+                //_CharInfo.Stamina -= _CharInfo.PowerfulAttac.Stamina_Cost_Atk;
                 EventManager.Instance?.UpdateStamina(this);
             }
         }
@@ -364,18 +364,18 @@ public class Stage09_Boss_Geisha_Script : MinionType_Script
         Debug.Log("GEISHA Defence Interrupted");
     }
 
-    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
+    public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
         if (BossPhase == bossPhasesType.Phase1_ && !isImmune)
         {
             float prevHealthPerc = _CharInfo.HealthPerc;
-            bool boolToReturn = base.SetDamage(shielded ? damage * bossInfo.moonlightBlessAttackDampener : damage, elemental, isCritical, isAttackBlocking);
+            bool boolToReturn = base.SetDamage(attacker, shielded ? damage * bossInfo.moonlightBlessAttackDampener : damage, elemental, isCritical, isAttackBlocking);
             CheckIfCanTransform(prevHealthPerc);
             return boolToReturn;
         }
         else
         {
-            oniForme.SetDamage(damage, elemental, isCritical, isAttackBlocking);
+            oniForme.SetDamage(attacker, damage, elemental, isCritical, isAttackBlocking);
         }
         return false;
     }

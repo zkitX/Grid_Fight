@@ -341,9 +341,27 @@ public class MinionType_Script : BaseCharacter
     }
 
 
-    public override void CreateBullet(BattleFieldAttackTileClass bulletBehaviourInfo, Vector2Int pos, float delay)
+   /* public override void CreateBullet(BattleFieldAttackTileClass bulletBehaviourInfo, Vector2Int pos, float delay)
     {
         // Debug.Log(isSpecialLoading);
+
+        GameObject bullet = BulletManagerScript.Instance.GetBullet();
+        bullet.transform.position = SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position;
+        BulletScript bs = bullet.GetComponent<BulletScript>();
+        bs.SOAttack = nextAttack;
+        bs.BulletBehaviourInfo = new BulletBehaviourInfoClass(bulletBehaviourInfo.Pos, bulletBehaviourInfo.Trajectory_Y, bulletBehaviourInfo.Trajectory_Z, )
+        bs.Facing = UMS.Facing;
+        bs.PlayerController = UMS.PlayerController;
+        bs.Elemental = CharInfo.DamageStats.CurrentElemental;
+        bs.Side = UMS.Side;
+        bs.VFXTestMode = VFXTestMode;
+        bs.CharOwner = this;
+        bs.attackAudioType = GetAttackAudio();
+
+
+
+
+
         GameObject bullet = BulletManagerScript.Instance.GetBullet();
         bullet.transform.position = SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position;
         BulletScript bs = bullet.GetComponent<BulletScript>();
@@ -360,7 +378,7 @@ public class MinionType_Script : BaseCharacter
         bs.PS.SetActive(true);
         bs.gameObject.SetActive(true);
         bs.StartMoveToTile();
-    }
+    }*/
 
     public override void fireAttackAnimation(Vector3 pos)
     {

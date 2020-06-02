@@ -35,7 +35,7 @@ public class Stage00_BossOctopus_Script : MinionType_Script
     private MinionType_Script CreatePiece(CharacterNameType pieceType)
     {
         MinionType_Script piece = (MinionType_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(pieceType.ToString(), CharacterSelectionType.Up,
-        new List<ControllerType> { ControllerType.Enemy }, pieceType, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None, new List<CharacterActionType>()), transform);
+        new List<ControllerType> { ControllerType.Enemy }, pieceType, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None, new List<CharacterActionType>(), LevelType.Novice), transform);
         piece.UMS.Pos = UMS.Pos;
         piece.UMS.EnableBattleBars(false);
         piece.UMS.CurrentTilePos = UMS.CurrentTilePos;
@@ -352,11 +352,11 @@ public class Stage00_BossOctopus_Script : MinionType_Script
         }
     }
 
-    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical)
+    public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical)
     {
         if (CanGetDamage)
         {
-            return base.SetDamage(damage, elemental, isCritical);
+            return base.SetDamage(attacker ,damage, elemental, isCritical);
         }
         return false;
 

@@ -68,13 +68,13 @@ public class CharacterBaseInfoClass
     public AttackType CharAttackType;
     public BaseCharType BCharType = BaseCharType.None;
     public List<CharacterActionType> CharActionlist = new List<CharacterActionType>();
-public LevelType CharaterLevel = LevelType.Novice;
+    public LevelType CharaterLevel = LevelType.Novice;
 
 
     public CharacterBaseInfoClass(string name, CharacterSelectionType characterSelection,
         List<ControllerType> playerController, CharacterNameType characterName,
         WalkingSideType walkingSide, AttackType charAttackType, BaseCharType bCharType,
-        List<CharacterActionType> charActionlist, , LevelType charaterLevel)
+        List<CharacterActionType> charActionlist, LevelType charaterLevel)
     {
         Name = name;
         CharacterSelection = characterSelection;

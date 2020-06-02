@@ -73,7 +73,7 @@ public class BattleTileTargetsScript : MonoBehaviour
                 bool iscritical = attacker.CharInfo.IsCritical(true);
                 //Set damage to the hitting character
                 float dmg = damage * (iscritical ? 2 : 1);
-                effectOn = target.SetDamage(dmg, ele, iscritical);
+                effectOn = target.SetDamage(attacker, dmg, ele, iscritical);
                 if (effectOn)
                 {
                     int chances = Random.Range(0, 100);
@@ -81,7 +81,8 @@ public class BattleTileTargetsScript : MonoBehaviour
                     {
                         foreach (ScriptableObjectAttackEffect item in atkEffects.Where(r => !r.StatsToAffect.ToString().Contains("Tile")).ToList())
                         {
-                            target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.StatsToAffect == BuffDebuffStatsType.Damage_Cure ? item.Value.x *2 : item.Value.x, item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles, attacker));
+                            target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.StatsToAffect == BuffDebuffStatsType.Damage_Cure ? item.Value.x *2 : item.Value.x,
+                                item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles, attacker));
                         }
                     }
                 }

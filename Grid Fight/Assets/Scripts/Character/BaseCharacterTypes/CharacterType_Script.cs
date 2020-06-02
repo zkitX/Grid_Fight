@@ -449,23 +449,15 @@ public class CharacterType_Script : BaseCharacter
         GameObject bullet = BulletManagerScript.Instance.GetBullet();
         bullet.transform.position = SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position;
         BulletScript bs = bullet.GetComponent<BulletScript>();
-        bs.BulletEffectTiles = bulletBehaviourInfo.BulletEffectTiles;
-        bs.Trajectory_Y = bulletBehaviourInfo.Trajectory_Y;
-        bs.Trajectory_Z = bulletBehaviourInfo.Trajectory_Z;
+        bs.SOAttack = nextAttack;
+        bs.BulletBehaviourInfo = bulletBehaviourInfo;
         bs.Facing = UMS.Facing;
-        bs.isColliding = true;
-        bs.ChildrenExplosionDelay = CharInfo.DamageStats.ChildrenBulletDelay;
-        bs.StartingTile = UMS.CurrentTilePos;
-        bs.BulletGapStartingTile = bulletBehaviourInfo.BulletGapStartingTile;
+        bs.PlayerController = UMS.PlayerController;
         bs.Elemental = CharInfo.DamageStats.CurrentElemental;
         bs.Side = UMS.Side;
         bs.VFXTestMode = VFXTestMode;
         bs.CharOwner = this;
         bs.attackAudioType = GetAttackAudio();
-        bs.EffectChances = 100;
-        bs.HitPs = UMS.Side == SideType.LeftSide ? nextAttack.Particles.Left.Hit : nextAttack.Particles.Right.Hit;
-        bs.AttackInput = nextAttack.AttackInput;
-        bs.AtkType = nextAttack.AttackAnim;
         if (bulletBehaviourInfo.HasEffect)
         {
             bs.BulletEffects = bulletBehaviourInfo.Effects;

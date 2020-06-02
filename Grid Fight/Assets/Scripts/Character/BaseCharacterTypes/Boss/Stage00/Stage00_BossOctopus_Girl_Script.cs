@@ -71,11 +71,11 @@ public class Stage00_BossOctopus_Girl_Script : MinionType_Script
          yield break;
      }
 
-    public override bool SetDamage(float damage, ElementalType elemental, bool isCritical)
+    public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
         if (CanGetDamage)
         {
-            return base.SetDamage(damage, elemental, isCritical);
+            return base.SetDamage(attacker, damage, elemental, isCritical, isAttackBlocking);
         }
         return false;
 
