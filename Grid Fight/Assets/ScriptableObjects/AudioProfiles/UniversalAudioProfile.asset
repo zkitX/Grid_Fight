@@ -66,7 +66,11 @@ MonoBehaviour:
     baseVolume: 0.3
   SpecialAttackChargingLoopStrong:
     clip: {fileID: 0}
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: 2eb09e9ad57a19c419d2151e6e1c494c, type: 3}
+    - {fileID: 8300000, guid: 1eb228ca0368f774bb158ebe988cd548, type: 3}
+    - {fileID: 8300000, guid: 267478d17e8423f42938eaadf6f81b40, type: 3}
+    - {fileID: 8300000, guid: 654cba367a158774fb18f5cf9e591082, type: 3}
     audioBus: 0
     randomiseOrder: 0
     moreThanOneClip: 0
@@ -75,10 +79,14 @@ MonoBehaviour:
     baseVolume: 1
   SpecialAttackChargingRelease:
     clip: {fileID: 8300000, guid: 3b78c92fa7ab8da40a23b963b8b7d944, type: 3}
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: 7a7ad6e8675ccab4da5dd39d43223c1a, type: 3}
+    - {fileID: 8300000, guid: 162d28ea1a5d02b408c99c4ffe8a2068, type: 3}
+    - {fileID: 8300000, guid: b32757c8477f0e14899db9405c78cbfa, type: 3}
+    - {fileID: 8300000, guid: b946c9527744e8e40a92f6ed747ee849, type: 3}
     audioBus: 0
     randomiseOrder: 0
-    moreThanOneClip: 0
+    moreThanOneClip: 1
     cooldownType: 0
     cooldownPeriod: 1
     baseVolume: 1
@@ -195,7 +203,7 @@ MonoBehaviour:
   Dialogue_TextStart:
     clip: {fileID: 0}
     clips:
-    - {fileID: 8300000, guid: f637c5ce9d10e45c7855ed89bfc6b97e, type: 3}
+    - {fileID: 8300000, guid: 14a396b1562834718b2d52b9c4639264, type: 3}
     audioBus: 100
     randomiseOrder: 0
     moreThanOneClip: 0
