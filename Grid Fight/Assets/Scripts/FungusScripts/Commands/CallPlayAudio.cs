@@ -18,12 +18,13 @@ public class CallPlayAudio : Command
 
     [Space(10)]
     public bool loopSound = false;
+    public float fadeInTime = 0f;
     public string audioID = "";
     [ConditionalField("loopSound", inverse: true)] public bool pausedUntilPlayed = false;
 
     protected void TheMethod()
     {
-        audioSource = AudioManagerMk2.Instance.PlayNamedSource(audioID, type, new AudioClipInfoClass(new AudioClip[] { clip }, volume), bus, loop: loopSound);
+        audioSource = AudioManagerMk2.Instance.PlayNamedSource(audioID, type, new AudioClipInfoClass(new AudioClip[] { clip }, volume, bus: bus), bus, loop: loopSound, fadeIn: fadeInTime);
         StartCoroutine(WaitForSoundToEnd());
     }
 

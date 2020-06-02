@@ -67,9 +67,9 @@ public class AudioManagerMk2 : MonoBehaviour
         return source;
     }
 
-    public ManagedAudioSource PlayNamedSource(string name, AudioSourceType sourceType, AudioClipInfoClass clipInfo, AudioBus priority, Transform sourceOrigin = null, bool loop = false)
+    public ManagedAudioSource PlayNamedSource(string name, AudioSourceType sourceType, AudioClipInfoClass clipInfo, AudioBus priority, Transform sourceOrigin = null, bool loop = false, float fadeIn = 0f)
     {
-        ManagedAudioSource audioSource = PlaySound(sourceType, clipInfo, priority, sourceOrigin, loop);
+        ManagedAudioSource audioSource = PlaySound(sourceType, clipInfo, priority, sourceOrigin, loop, fadeIn);
         if (name == "") return null;
         if (audioSource == null) return null;
         namedSources.Add(new NamedManagedAudioSource(name, audioSource));
@@ -91,6 +91,7 @@ public class AudioManagerMk2 : MonoBehaviour
 
         ManagedAudioSource source = GetFreeSource(clipInfo.audioBus, sourceType);
 
+        source.ResetSource();
         source.removeNamedOnComplete = false;
         source.gameObject.SetActive(true);
         if (sourceOrigin != null) source.SetParent(sourceOrigin);

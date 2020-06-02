@@ -232,11 +232,12 @@ public class AudioClipInfoClass
         cooldownPeriod = cdPeriod;
     }
 
-    public AudioClipInfoClass(AudioClip[] _clips, float _volume = 1f, AudioCooldownType cdType = AudioCooldownType.FrameWait, int cdPeriod = 1)
+    public AudioClipInfoClass(AudioClip[] _clips, float _volume = 1f, AudioCooldownType cdType = AudioCooldownType.FrameWait, int cdPeriod = 1, AudioBus bus = AudioBus.LowPrio)
     {
         clips = _clips;
         baseVolume = _volume;
         cooldownType = cdType;
         cooldownPeriod = cdPeriod;
+        audioBus = bus;
     }
 }
