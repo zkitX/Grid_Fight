@@ -16,8 +16,10 @@ MonoBehaviour:
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
   DamageMultiplier: {x: 2, y: 2}
-  AttackInput: 0
+  AttackInput: 1
   AttackAnim: 1
+  StaminaCost: 10
+  ExperiencePoints: 10
   PrefixAnim: 1
   Particles:
     Left:
@@ -89,6 +91,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+      ChildrenBulletDelay: 0.5
       BulletEffectTiles: []
       BulletGapStartingTile: {x: 0, y: 0}
       HasEffect: 0
