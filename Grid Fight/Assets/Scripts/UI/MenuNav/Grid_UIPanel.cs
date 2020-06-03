@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Grid_UIPanel : MonoBehaviour
 {
     public bool isGenericPanel = false;

@@ -33,7 +33,7 @@ public class StatisticInfoClass
     {
         get
         {
-            return BulletHits / BulletFired;
+            return BulletHits / (BulletFired != 0 ? BulletFired : 1);
         }
     }
     public int HitReceived;
@@ -43,7 +43,7 @@ public class StatisticInfoClass
     {
         get
         {
-            return ((Defences / HitReceived) + (CompleteDefences / Defences)) / 2f;
+            return ((Defences / (HitReceived != 0 ? HitReceived : 1)) + (CompleteDefences / (Defences != 0 ? Defences : 1))) / 2f;
         }
     }
     public float HPGotBySkill;

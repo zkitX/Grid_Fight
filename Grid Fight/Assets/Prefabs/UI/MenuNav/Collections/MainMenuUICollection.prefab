@@ -1478,6 +1478,7 @@ GameObject:
   - component: {fileID: 339754059231548211}
   - component: {fileID: 339754059231548212}
   - component: {fileID: 339754059231548209}
+  - component: {fileID: 8820455975388547694}
   m_Layer: 5
   m_Name: MainMenuUICollection
   m_TagString: Untagged
@@ -1582,6 +1583,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollectionID: MainMenu
+  UIActivators: {fileID: 0}
+--- !u!114 &8820455975388547694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339754059231548214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 472694f2c1d023f4e850912e8ddfba70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activators: []
 --- !u!1 &339754059235658480
 GameObject:
   m_ObjectHideFlags: 0
@@ -10617,17 +10632,17 @@ PrefabInstance:
     - target: {fileID: 3628973206760732799, guid: 2862111b193b5844c85b07a7e7ad258a,
         type: 3}
       propertyPath: PressActions.Array.data[0].uiActions.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3628973206760732799, guid: 2862111b193b5844c85b07a7e7ad258a,
         type: 3}
       propertyPath: PressActions.Array.data[0].Name
-      value: 3 Ui Actions
+      value: 4 Ui Actions
       objectReference: {fileID: 0}
     - target: {fileID: 3628973206760732799, guid: 2862111b193b5844c85b07a7e7ad258a,
         type: 3}
       propertyPath: PressActions.Array.data[0].uiActions.Array.data[0].Name
-      value: Set navigation to None
+      value: Set navigation to Unassigned
       objectReference: {fileID: 0}
     - target: {fileID: 3628973206760732799, guid: 2862111b193b5844c85b07a7e7ad258a,
         type: 3}
@@ -10647,7 +10662,7 @@ PrefabInstance:
     - target: {fileID: 3628973206760732799, guid: 2862111b193b5844c85b07a7e7ad258a,
         type: 3}
       propertyPath: PressActions.Array.data[0].uiActions.Array.data[2].Name
-      value: 'Set collection: ''MainMenu'' to disabled'
+      value: 'Set collection: ''GameMenu'' to enabled'
       objectReference: {fileID: 0}
     - target: {fileID: 3628973206760732799, guid: 2862111b193b5844c85b07a7e7ad258a,
         type: 3}
@@ -10682,12 +10697,12 @@ PrefabInstance:
     - target: {fileID: 3628973206760732799, guid: 2862111b193b5844c85b07a7e7ad258a,
         type: 3}
       propertyPath: PressActions.Array.data[0].uiActions.Array.data[2].enablingCollectionID
-      value: MainMenu
+      value: GameMenu
       objectReference: {fileID: 0}
     - target: {fileID: 3628973206760732799, guid: 2862111b193b5844c85b07a7e7ad258a,
         type: 3}
       propertyPath: PressActions.Array.data[0].uiActions.Array.data[3].Name
-      value: Switch scene to BattleScene
+      value: 'Set collection: ''MainMenu'' to disabled'
       objectReference: {fileID: 0}
     - target: {fileID: 3628973206760732799, guid: 2862111b193b5844c85b07a7e7ad258a,
         type: 3}
@@ -10697,16 +10712,26 @@ PrefabInstance:
     - target: {fileID: 3628973206760732799, guid: 2862111b193b5844c85b07a7e7ad258a,
         type: 3}
       propertyPath: PressActions.Array.data[0].uiActions.Array.data[3].actionType
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3628973206760732799, guid: 2862111b193b5844c85b07a7e7ad258a,
         type: 3}
       propertyPath: PressActions.Array.data[0].uiActions.Array.data[3].sceneSwitchType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3628973206760732799, guid: 2862111b193b5844c85b07a7e7ad258a,
         type: 3}
       propertyPath: PressActions.Array.data[0].uiActions.Array.data[1].sceneSwitchType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3628973206760732799, guid: 2862111b193b5844c85b07a7e7ad258a,
+        type: 3}
+      propertyPath: PressActions.Array.data[0].uiActions.Array.data[3].enablingCollectionID
+      value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3628973206760732799, guid: 2862111b193b5844c85b07a7e7ad258a,
+        type: 3}
+      propertyPath: PressActions.Array.data[0].uiActions.Array.data[2].collectionEnableState
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 225226017587229883, guid: 2862111b193b5844c85b07a7e7ad258a,

@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 4740608177786434233}
   - component: {fileID: 4740608177786434232}
   - component: {fileID: 4740608177786434213}
+  - component: {fileID: 6705551694445695824}
+  - component: {fileID: -3319527304370054389}
   m_Layer: 5
   m_Name: Navigator
   m_TagString: Untagged
@@ -114,11 +116,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Collections:
   - {fileID: 339754059231548214, guid: 40b49148401782148ae7a76a735fc321, type: 3}
+  - {fileID: 2765915710230384616, guid: 6ffc5d7eb87f507459c2e3be1ae7bb91, type: 3}
   startingCollectionID: MainMenu
   specificStartingButton: 0
   startingButton: {fileID: 0}
   startingDirection: 0
   buttonBufferPercentage: 0.5
+  panels: []
   cursorPrefab: {fileID: 9196782182255773399, guid: 86fc8dd836242f9479421e73009b6a23,
     type: 3}
   cursor: {fileID: 0}
@@ -142,3 +146,30 @@ MonoBehaviour:
   focusState: 1
   setup: 0
   lastActivateCallPanel: {fileID: 0}
+--- !u!114 &6705551694445695824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4740608177786434239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fa805ffcc08bd742af8f272d1f8c6c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollectionID: Universal
+  UIActivators: {fileID: 0}
+--- !u!114 &-3319527304370054389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4740608177786434239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 472694f2c1d023f4e850912e8ddfba70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activators: []

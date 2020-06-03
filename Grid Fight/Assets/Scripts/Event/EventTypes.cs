@@ -59,6 +59,7 @@ public enum UI_ActionTypes
     SetWorldMapFocus,
     EnableCollection,
     SwitchScene,
+    ResolutionMenuChange,
 }
 
 public enum UI_FocusTypes

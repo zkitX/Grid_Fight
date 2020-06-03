@@ -46,7 +46,7 @@ public class Grid_UINavigator : MonoBehaviour
         }
     }
 
-    protected Grid_UIPanel[] panels = { };
+    public Grid_UIPanel[] panels = { };
     public Grid_UIPanel genericPanel
     {
         get
@@ -351,6 +351,26 @@ public class Grid_UINavigator : MonoBehaviour
 
         return closestInDirection;
     }
+
+
+
+
+
+
+
+
+    public void TriggerUIActivator(string identifier)
+    {
+        foreach(Grid_UICollection col in ActiveCollections)
+        {
+            col.UIActivators.DoActionByName(identifier);
+        }
+    }
+
+
+
+
+
 
     private void OnDestroy()
     {

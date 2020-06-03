@@ -49,6 +49,9 @@ public class Grid_UIActions
             case (UI_ActionTypes.SwitchScene):
                 yield return SwitchScene();
                 break;
+            case (UI_ActionTypes.ResolutionMenuChange):
+                yield return ResolutionMenuChange();
+                break;
             default:
                 break;
         }
@@ -90,6 +93,8 @@ public class Grid_UIActions
                     (collectionEnableState ? "enabled" : "disabled");
             case (UI_ActionTypes.SwitchScene):
                 return "Switch scene to " + sceneSwitchType.ToString();
+            case (UI_ActionTypes.ResolutionMenuChange):
+                return resolutionMenuChange.ToString() + " the resolution";
             default:
                 return actionType.ToString();
         }
@@ -182,7 +187,7 @@ public class Grid_UIActions
         }
         if (setFocusedPanel.focusState == UI_FocusTypes.Focused)
         {
-            setFocusedPanel.lastActivateCallPanel = parentButton.parentPanel;
+            setFocusedPanel.lastActivateCallPanel = parentButton == null ? null : parentButton.parentPanel;
             Grid_UINavigator.Instance.RefreshCursorCheck();
         }
         if (setPanelActiveStateAswell) setFocusedPanel.gameObject.SetActive(setFocusedPanel.focusState == UI_FocusTypes.Focused ? true : false);
@@ -249,6 +254,28 @@ public class Grid_UIActions
         else
         {
             SceneLoadManager.Instance.LoadScene("MenuScene");
+        }
+        yield return null;
+    }
+
+    public enum ResolutionMenuChangeType { Configure, Reveal, Resolve }
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.ResolutionMenuChange)] public ResolutionExtras ResolutionMenu = null;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.ResolutionMenuChange)] public ResolutionMenuChangeType resolutionMenuChange = ResolutionMenuChangeType.Configure;
+    IEnumerator ResolutionMenuChange()
+    {
+        switch (resolutionMenuChange)
+        {
+            case ResolutionMenuChangeType.Configure:
+                ResolutionMenu.SetupResolution();
+                break;
+            case ResolutionMenuChangeType.Reveal:
+                yield return ResolutionMenu.TallyRevealer();
+                break;
+            case ResolutionMenuChangeType.Resolve:
+                yield return ResolutionMenu.TallyResolver();
+                break;
+            default:
+                break;
         }
         yield return null;
     }

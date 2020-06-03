@@ -517,6 +517,7 @@ MonoBehaviour:
   CharacterIcons:
   - {fileID: 21300000, guid: c9eb5af2d9b875e4a9751e32071c0948, type: 3}
   - {fileID: 21300000, guid: f1018b669a56e5d4fb4ae27635c17fe7, type: 3}
+  - {fileID: 21300000, guid: 784d8cb6429e68346b9ae54fd3188878, type: 3}
   AudioProfile: {fileID: 11400000, guid: 93f6bf070be4af24fb8dbc3dea6f6df7, type: 2}
   BaseCharacterType: 0
   CharacterID: 1024
@@ -527,23 +528,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 63514f1dc0dee7045957ef660c441b39, type: 2}
   Elemental: 2
   ClassType: 0
+  CharaterLevel: 0
   UseLayeringSystem: 1
   CharacterRespawnLength: 180
   CharacterSelection: 0
   RapidAttack:
     DamageMultiplier: {x: 1, y: 1}
     CriticalChance: {x: 2, y: 2}
-    Stamina_Cost_Atk: 1.2
+    LevelMultiplier: 0
     B_DamageMultiplier: {x: 1, y: 1}
     B_CriticalChance: {x: 2, y: 2}
-    B_Stamina_Cost_Atk: 0
   PowerfulAttac:
     DamageMultiplier: {x: 3, y: 3}
     CriticalChance: {x: 3, y: 5}
-    Stamina_Cost_Atk: 6
+    LevelMultiplier: 0
     B_DamageMultiplier: {x: 3, y: 3}
     B_CriticalChance: {x: 3, y: 5}
-    B_Stamina_Cost_Atk: 0
   HealthStats:
     Health: 40
     Base: 40
@@ -554,7 +554,6 @@ MonoBehaviour:
     B_Base: 0
     B_Regeneration: 0
     B_BaseHealthRegeneration: 0
-    B_LevelMultiplier: 0
   StaminaStats:
     Stamina: 35
     Base: 35
@@ -565,7 +564,6 @@ MonoBehaviour:
     B_Base: 0
     B_Regeneration: 0
     B_BaseStaminaRegeneration: 0
-    B_LevelMultiplier: 0
   ShieldStats:
     Shield: 5
     Base: 5
@@ -576,7 +574,6 @@ MonoBehaviour:
     B_Base: 0
     B_Regeneration: 0
     B_BaseShieldRegeneration: 0
-    B_LevelMultiplier: 0
   SpeedStats:
     BaseSpeed: 1
     MovementSpeed: 2
@@ -584,7 +581,8 @@ MonoBehaviour:
     AttackSpeedRatio: 1
     BulletSpeed: 1.5
     LeaveSpeed: 3
-    LevelMultiplier: 10
+    BaseSpeed_LevelMultiplier: 0
+    MovementSpeed_LevelMultiplier: 0
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
     B_BaseSpeed: 1
@@ -593,23 +591,24 @@ MonoBehaviour:
     B_AttackSpeedRatio: 0
     B_BulletSpeed: 5
     B_LeaveSpeed: 3
-    B_LevelMultiplier: 0
     B_IdleToAtkDuration: 0.2
     B_AtkToIdleDuration: 0.2
   DamageStats:
     BaseDamage: 6
     B_BaseDamage: 10
-    MultiBulletAttackNumberOfBullets: 3
-    ChildrenBulletDelay: 0.5
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 15
   DefenceStats:
     BaseDefence: 3
     Invulnerability: 0.2
+    B_BaseDefence: 10
+    B_Invulnerability: 0.2
+    LevelMultiplier: 0
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
+  ExperienceValue: 0
   MovementTimer: {x: 5, y: 8}
   B_MovementTimer: {x: 5, y: 8}
   RelationshipList: []
