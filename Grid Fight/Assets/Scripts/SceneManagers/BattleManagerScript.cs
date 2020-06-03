@@ -667,7 +667,7 @@ public class BattleManagerScript : MonoBehaviour
     public void RemoveAllNonUsedCharFromBoard(List<CharacterNameType> KeepCharOnBattlefield)
     {
        
-        for (int i = 0; i < AllCharactersOnField.Count; i++)
+        for (int i = 0; i < AllCharactersOnField.Where(r=> r.IsOnField).ToList().Count; i++)
         {
             bool isIn = false;
             for (int a = 0; a < CurrentSelectedCharacters.Count; a++)
