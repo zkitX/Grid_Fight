@@ -686,7 +686,7 @@ public class BattleManagerScript : MonoBehaviour
             bool isIn = false;
             for (int a = 0; a < CurrentSelectedCharacters.Count; a++)
             {
-                if (CurrentSelectedCharacters[(ControllerType)a].Character != null && CurrentSelectedCharacters[(ControllerType)a].Character == AllCharactersOnField[i])
+                if (CurrentSelectedCharacters[(ControllerType)a].Character != null && CurrentSelectedCharacters[(ControllerType)a].Character == cbs[i])
                 {
                     isIn = true;
                 }
