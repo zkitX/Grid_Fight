@@ -734,6 +734,7 @@ public class BattleManagerScript : MonoBehaviour
             item.isDefending = false;
             item.isSpecialLoading = false;
             item.chargingAttackTimer = 0f;
+            item.ResetAudioManager();
         }
     }
 

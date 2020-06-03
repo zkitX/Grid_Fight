@@ -53,11 +53,8 @@ public class CallNextWave : Command
         }
 
         //GridManagerScript.Instance.BattleTiles.ForEach(r=> r.BattleTargetScript.StopAllCoroutines());
-        if(TransitionDuration == 0)
-        {
-            BattleManagerScript.Instance.ResetAllActiveChars();
-        }
-        
+        BattleManagerScript.Instance.ResetAllActiveChars();
+
         BattleManagerScript.Instance.CurrentBattleState = BattleState.FungusPuppets;
         if (HasAStageUpdate)
         {

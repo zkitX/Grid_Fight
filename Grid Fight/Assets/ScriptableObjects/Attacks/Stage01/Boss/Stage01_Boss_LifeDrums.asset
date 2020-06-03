@@ -66,7 +66,7 @@ MonoBehaviour:
     AtkType: 1
     BulletTrajectories:
     - Delay: 1
-      Show: 1
+      Show: 0
       BulletEffectTiles:
       - Pos: {x: 0, y: 0}
         Trajectory_Y:
@@ -89,10 +89,136 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
-    - Delay: 2
+      - Pos: {x: -1, y: 0}
+        Trajectory_Y:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        Trajectory_Z:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 1, y: 0}
+        Trajectory_Y:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        Trajectory_Z:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+    - Delay: 1.5
       Show: 1
-      BulletEffectTiles: []
+      BulletEffectTiles:
+      - Pos: {x: -1, y: -1}
+        Trajectory_Y:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        Trajectory_Z:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: -1, y: 1}
+        Trajectory_Y:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        Trajectory_Z:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 1, y: -1}
+        Trajectory_Y:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        Trajectory_Z:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+      - Pos: {x: 1, y: 1}
+        Trajectory_Y:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        Trajectory_Z:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
     StatToCheck: 1
-    ValueChecker: 2
-    PercToCheck: 0
+    ValueChecker: 0
+    PercToCheck: 65
     Chances: 100

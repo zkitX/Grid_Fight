@@ -164,12 +164,23 @@ public class CharacterType_Script : BaseCharacter
             //BattleManagerScript.Instance.UpdateCurrentSelectedCharacters(this, null, UMS.Side);
             NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo, UMS.Side);
         }
+        ResetAudioManager();
+        StartCoroutine(ReviveSequencer());
+    }
+
+
+    public void ResetAudioManager()
+    {
         if (chargingAudio != null)
         {
             chargingAudio.ResetSource();
             chargingAudio = null;
         }
-        StartCoroutine(ReviveSequencer());
+        if (chargingAudioStrong != null)
+        {
+            chargingAudioStrong.ResetSource();
+            chargingAudioStrong = null;
+        }
     }
 
     IEnumerator ReviveSequencer()
@@ -282,8 +293,14 @@ public class CharacterType_Script : BaseCharacter
             chargingAttackTimer = 0;
             currentAttackPhase = AttackPhasesType.Start;
             SetAnimation(nxtAtk.PrefixAnim + "_IdleToAtk", false, 0);
-            if (chargingAudio != null) chargingAudio.ResetSource();
-            if (chargingAudioStrong != null) chargingAudioStrong.ResetSource();
+            if (chargingAudio != null)
+            {
+                chargingAudio.ResetSource();
+            }
+            if (chargingAudioStrong != null)
+            {
+                chargingAudioStrong.ResetSource();
+            }
             chargingAudio = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoop, AudioBus.MidPrio, transform, true, 1f);
             while (isSpecialLoading && !VFXTestMode)
             {
@@ -349,15 +366,7 @@ public class CharacterType_Script : BaseCharacter
             {
                 SetAnimation(CharacterAnimationStateType.Idle, true, 0.1f);
             }
-            if (chargingAudio != null)
-            {
-                chargingAudio.ResetSource();
-            }
-            if (chargingAudioStrong != null)
-            {
-                chargingAudioStrong.ResetSource();
-                chargingAudioStrong = null;
-            }
+            ResetAudioManager();
             ps.transform.parent = null;
             ps.SetActive(false);
         }
@@ -651,6 +660,11 @@ public class CharacterType_Script : BaseCharacter
         if (!animState.ToString().Contains("Atk"))
         {
             currentAttackPhase = AttackPhasesType.End;
+        }
+
+        if(animState.Contains("rriv") || animState.Contains("Transition"))
+        {
+            ResetAudioManager();
         }
 
         if (SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Atk2_AtkToIdle.ToString()) && !animState.Contains(CharacterAnimationStateType.Defeat_ReverseArrive.ToString()))
