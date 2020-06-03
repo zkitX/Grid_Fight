@@ -57,13 +57,13 @@ MonoBehaviour:
   SpecialAttackChargingLoop:
     clip: {fileID: 8300000, guid: 48992f5000032d647aa165f09bb845cb, type: 3}
     clips:
-    - {fileID: 8300000, guid: 91799c9d745b4dc4897390f6433b980d, type: 3}
+    - {fileID: 8300000, guid: 48992f5000032d647aa165f09bb845cb, type: 3}
     audioBus: 50
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0
     cooldownPeriod: 1
-    baseVolume: 0.25
+    baseVolume: 0.55
   SpecialAttackChargingLoopStrong:
     clip: {fileID: 0}
     clips:
@@ -76,16 +76,17 @@ MonoBehaviour:
     moreThanOneClip: 0
     cooldownType: 0
     cooldownPeriod: 1
-    baseVolume: 1
+    baseVolume: 0.55
   SpecialAttackChargingRelease:
     clip: {fileID: 8300000, guid: 3b78c92fa7ab8da40a23b963b8b7d944, type: 3}
-    clips: []
+    clips:
+    - {fileID: 8300000, guid: 3b78c92fa7ab8da40a23b963b8b7d944, type: 3}
     audioBus: 0
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0
     cooldownPeriod: 1
-    baseVolume: 1
+    baseVolume: 0.85
   Shield_Full:
     clip: {fileID: 0}
     clips:
