@@ -1122,11 +1122,15 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.BaseSpeed);
                 if(CharInfo.SpeedStats.BaseSpeed == 0 && BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.UMS.Side == UMS.Side && r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).ToList().Count > 0)
                 {
-                    CharActionlist.Remove(CharacterActionType.SwitchCharacter);
-                    ControllerType playerController = BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == this).First().Key;
-                    BattleManagerScript.Instance.DeselectCharacter(CharInfo.CharacterID, UMS.Side, playerController);
-                    BattleManagerScript.Instance.CurrentSelectedCharacters[playerController].Character = null;
-                    BattleManagerScript.Instance.Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType.Down, playerController, true);
+
+                    if(BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == this).ToList().Count > 0)
+                    {
+                        CharActionlist.Remove(CharacterActionType.SwitchCharacter);
+                        ControllerType playerController = BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == this).First().Key;
+                        BattleManagerScript.Instance.DeselectCharacter(CharInfo.CharacterID, UMS.Side, playerController);
+                        BattleManagerScript.Instance.CurrentSelectedCharacters[playerController].Character = null;
+                        BattleManagerScript.Instance.Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType.Down, playerController, true);
+                    }
                 }
             }
         }
