@@ -645,7 +645,7 @@ public class BattleManagerScript : MonoBehaviour
                 Vector2Int spawnPos = CurrentSelectedCharacters[playerController].Character.UMS._CurrentTilePos;
 
                 CharacterType_Script currentCharacter = null;
-                if(GridManagerScript.Instance.isPosFree(spawnPos))
+                if(GridManagerScript.Instance.GetBattleTile(spawnPos).BattleTileState != BattleTileStateType.Blocked)
                 {
                     currentCharacter = SetCharOnBoardOnFixedPos(playerController, cName, spawnPos);
                 }
