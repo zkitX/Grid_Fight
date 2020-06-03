@@ -27,6 +27,10 @@ public class BattleManagerScript : MonoBehaviour
             {
                 CurrentBattleStateChangedEvent(value);
             }
+            if(value == BattleState.FungusPuppets)
+            {
+                ResetAllActiveChars();
+            }
             _CurrentBattleState = value;
         }
     }

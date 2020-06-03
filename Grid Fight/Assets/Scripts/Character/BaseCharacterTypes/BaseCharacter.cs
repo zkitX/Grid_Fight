@@ -597,7 +597,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 foreach (BattleFieldAttackTileClass target in item.BulletEffectTiles)
                 {
                     Vector2Int res = nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnTarget && charTar != null ? target.Pos + nextAttackPos :
-                    nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnItSelf ? target.Pos + UMS.CurrentTilePos : target.Pos + nextAttackPos;
+                    nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnItSelf ? target.Pos + UMS.CurrentTilePos : target.Pos;
                     if (GridManagerScript.Instance.isPosOnField(res))
                     {
                         BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(res);

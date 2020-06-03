@@ -52,9 +52,6 @@ public class CallNextWave : Command
             yield return null;
         }
 
-        //GridManagerScript.Instance.BattleTiles.ForEach(r=> r.BattleTargetScript.StopAllCoroutines());
-        BattleManagerScript.Instance.ResetAllActiveChars();
-
         BattleManagerScript.Instance.CurrentBattleState = BattleState.FungusPuppets;
         if (HasAStageUpdate)
         {
