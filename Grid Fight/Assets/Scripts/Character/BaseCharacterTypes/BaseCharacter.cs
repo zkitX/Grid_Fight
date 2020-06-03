@@ -613,7 +613,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
                                     bts.BattleTargetScript.SetAttack(item.Delay, res,
                                     0, CharInfo.Elemental, this,
-                                    target.Effects, target.EffectChances);
+                                    target.HasEffect ? target.Effects : new List<ScriptableObjectAttackEffect>(), target.EffectChances);
                                 }
                                 else if (nextAttack.TilesAtk.AtkType != BattleFieldAttackType.OnItSelf && bts.WalkingSide != UMS.WalkingSide)
                                 {
@@ -622,7 +622,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                                    // CreateBullet(target, bts.Pos, item.Delay);
                                     bts.BattleTargetScript.SetAttack(item.Delay, res,
                                     CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
-                                    target.Effects, target.EffectChances);
+                                    target.HasEffect ? target.Effects : new List<ScriptableObjectAttackEffect>(), target.EffectChances);
                                 }
                             }
                         }
@@ -701,7 +701,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
             yield return null;
             DefendingHoldingTimer += Time.deltaTime;
-            if (CharInfo.ShieldPerc == 0) StartCoroutine(ReloadDefending_Co());
+            if (CharInfo.ShieldPerc == 0)
+            {
+                StartCoroutine(ReloadDefending_Co());
+            }
         }
         DefendingHoldingTimer = 0;
     }
