@@ -128,13 +128,13 @@ public class MinionType_Script : BaseCharacter
                 List<BaseCharacter> enemys = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList();
                 if (enemys.Count > 0)
                 {
-                    //BaseCharacter targetChar = enemys.Where(r => r.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x).FirstOrDefault();
-                    BaseCharacter targetChar = null;
+                    BaseCharacter targetChar = enemys.Where(r => r.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x).FirstOrDefault();
+                    /*BaseCharacter targetChar = null;
                     List<BaseCharacter> possibleTargets = enemys.Where(r => Mathf.Abs(r.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x) <= 1).ToList();
                     if (possibleTargets.Count > 0)
                     {
                         targetChar = possibleTargets[Random.Range(0, possibleTargets.Count)];
-                    }
+                    }*/
                     if (targetChar != null)
                     {
                         nextAttackPos = targetChar.UMS.CurrentTilePos;
