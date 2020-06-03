@@ -643,7 +643,17 @@ public class BattleManagerScript : MonoBehaviour
             {
                 CurrentSelectedCharacters[playerController].isSwapping = true;
                 Vector2Int spawnPos = CurrentSelectedCharacters[playerController].Character.UMS._CurrentTilePos;
-                CharacterType_Script currentCharacter = SetCharOnBoardOnFixedPos(playerController, cName, spawnPos);
+
+                CharacterType_Script currentCharacter = null;
+                if(GridManagerScript.Instance.isPosFree(spawnPos))
+                {
+                    currentCharacter = SetCharOnBoardOnFixedPos(playerController, cName, spawnPos);
+                }
+                else
+                {
+                    currentCharacter = SetCharOnBoardOnRandomPos(playerController, cName);
+                }
+
                 //Debug.Log("Exit  " + CurrentSelectedCharacters[playerController].OffsetSwap + "    " + Time.time + CurrentSelectedCharacters[playerController].NextSelectionChar + AllCharactersOnField.Where(r => r.CharInfo.CharacterID == cName).First().CharInfo.CharacterSelection);
                 if (currentCharacter != null)
                 {
@@ -670,8 +680,8 @@ public class BattleManagerScript : MonoBehaviour
 
     public void RemoveAllNonUsedCharFromBoard(List<CharacterNameType> KeepCharOnBattlefield)
     {
-       
-        for (int i = 0; i < AllCharactersOnField.Where(r=> r.IsOnField).ToList().Count; i++)
+        List<BaseCharacter> cbs = AllCharactersOnField.Where(r => r.IsOnField).ToList();
+        for (int i = 0; i < cbs.Count; i++)
         {
             bool isIn = false;
             for (int a = 0; a < CurrentSelectedCharacters.Count; a++)
@@ -682,9 +692,9 @@ public class BattleManagerScript : MonoBehaviour
                 }
             }
 
-            if (!isIn && !KeepCharOnBattlefield.Contains(AllCharactersOnField[i].CharInfo.CharacterID))
+            if (!isIn && !KeepCharOnBattlefield.Contains(cbs[i].CharInfo.CharacterID))
             {
-                RemoveNamedCharacterFromBoard(AllCharactersOnField[i].CharInfo.CharacterID);
+                RemoveNamedCharacterFromBoard(cbs[i].CharInfo.CharacterID);
             }
         }
        
