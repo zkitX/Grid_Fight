@@ -735,6 +735,7 @@ public class BattleManagerScript : MonoBehaviour
             item.isSpecialLoading = false;
             item.chargingAttackTimer = 0f;
             item.ResetAudioManager();
+            item.SpineAnim.transform.localPosition = item.LocalSpinePosoffset;
         }
     }
 

@@ -86,6 +86,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     protected bool canDefend = true;
     public bool isDefending = false;
     public StatisticInfoClass Sic;
+    public Vector3 LocalSpinePosoffset;
     public int shotsLeftInAttack
     {
         get
@@ -161,6 +162,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
 
         SpineAnimatorsetup();
+        LocalSpinePosoffset = SpineAnim.transform.localPosition;
         UMS.SetupCharacterSide();
         int layer = UMS.Side == SideType.LeftSide ? 9 : 10;
         if (CharInfo.UseLayeringSystem)
@@ -751,7 +753,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     GridManagerScript.Instance.SetBattleTileState(item.Pos, BattleTileStateType.Empty);
                 }
                 UMS.CurrentTilePos += dir;
-                CharOredrInLayer = 101 + (dir.x * 10) + (UMS.Facing == FacingType.Right ? dir.y - 12 : dir.y);
+                CharOredrInLayer = 101 + (UMS.CurrentTilePos.x * 10) + (UMS.Facing == FacingType.Right ? UMS.CurrentTilePos.y - 12 : UMS.CurrentTilePos.y);
                 if (CharInfo.UseLayeringSystem)
                 {
                     SpineAnim.SetSkeletonOrderInLayer(CharOredrInLayer);
@@ -924,16 +926,16 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         Transform spineT = SpineAnim.transform;
         Vector3 offset = spineT.position;
         transform.position = nextPos;
-        nextPos = spineT.localPosition;
         spineT.position = offset;
-        Vector3 localoffset = spineT.localPosition; 
+        Vector3 localoffset = spineT.localPosition;
+
         while (timer < 1 && !stopCo)
         {
 
             yield return BattleManagerScript.Instance.PauseUntil();
             timer += (Time.fixedDeltaTime / (animLength / moveValue));
             spaceTimer = curve.Evaluate(timer);
-            spineT.localPosition = Vector3.Lerp(localoffset, nextPos, spaceTimer);
+            spineT.localPosition = Vector3.Lerp(localoffset, LocalSpinePosoffset, spaceTimer);
 
             if (timer > 0.7f && !isMovCheck)
             {
@@ -953,12 +955,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 isMoving = false;
                 TileMovementCompleteEvent?.Invoke(this);
                 MoveCo = null;
-                spineT.localPosition = nextPos;
+                spineT.localPosition = LocalSpinePosoffset;
                 yield break;
             }
         }
 
-        spineT.localPosition = nextPos;
+        spineT.localPosition = LocalSpinePosoffset;
         Debug.Log("EndMoveCo");
     }
 

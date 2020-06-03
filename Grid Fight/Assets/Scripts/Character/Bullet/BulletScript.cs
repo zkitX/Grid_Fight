@@ -269,7 +269,7 @@ public class BulletScript : MonoBehaviour
             BaseCharacter target = other.GetComponentInParent<BaseCharacter>();
             MakeDamage(target, CharOwner.CharInfo.DamageStats.BaseDamage * (SOAttack.AttackInput == AttackInputType.Weak ? CharOwner.CharInfo.RapidAttack.DamageMultiplier.x : CharOwner.CharInfo.PowerfulAttac.DamageMultiplier.x));
             //fire the Effect
-            StartCoroutine(ChildExplosion(BulletBehaviourInfo.BulletEffectTiles.Where(r => r != Vector2Int.zero).ToList(), target.UMS.CurrentTilePos));
+            StartCoroutine(ChildExplosion(BulletBehaviourInfo.BulletEffectTiles.Where(r => r != Vector2Int.zero).ToList(), new Vector2Int(DestinationTile.x, target.UMS.CurrentTilePos.y)));
             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Impact, AudioBus.MidPrio,
             GridManagerScript.Instance.GetBattleTile(target.UMS.CurrentTilePos).transform);
             if (bulletSoundSource != null)
