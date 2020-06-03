@@ -310,19 +310,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 506, y: 242}
+  scrollPos: {x: 594.49994, y: 293.40906}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 400
-  zoom: 1
+  zoom: 0.8800001
   scrollViewRect:
     serializedVersion: 2
     x: -343
     y: -340
     width: 1114
     height: 859
-  selectedBlocks:
-  - {fileID: 4265110198629089720}
+  selectedBlocks: []
   selectedCommands: []
   variables: []
   description: 
@@ -397,7 +396,10 @@ MonoBehaviour:
   FightGridToShow: 0
   HasADifferentGrid: 0
   Grid: {fileID: 0}
-  CallAllAlly: 0
+  CallPool: 0
+  TalkingTeam: []
+  JumpUp: 0
+  JumpAnimSpeed: 1
   UseWave: 1
   NextBlockToFire: End
 --- !u!114 &8729947904815534577
@@ -415,7 +417,7 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: 252
-    y: 71
+    y: 71.00003
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
