@@ -1001,7 +1001,8 @@ public class BattleManagerScript : MonoBehaviour
                 if(isRandom)
                 {
                     bool found = false;
-                    List<BaseCharacter> res = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).ToList();
+                    List<BaseCharacter> res = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 && !r.IsOnField &&
+                    r.BuffsDebuffsList.Where(a=> a.Stat == BuffDebuffStatsType.Zombification).ToList().Count == 0 && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).ToList();
                     if(res.Count > 0)
                     {
                         while (!found)
@@ -1028,7 +1029,8 @@ public class BattleManagerScript : MonoBehaviour
                         cs = (int)cs >= maxChars ? 0 : cs < 0 ? ((CharacterSelectionType)maxChars - 1) : cs;
                         string t = cs.ToString();
                         //Debug.Log(t);
-                        cb = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.CharacterSelection == cs && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).FirstOrDefault();
+                        cb = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.CharacterSelection == cs && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 &&
+                        r.BuffsDebuffsList.Where(a => a.Stat == BuffDebuffStatsType.Zombification).ToList().Count == 0 && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).FirstOrDefault();
                         if (cb != null)
                         {
                             t = cb.CharInfo.CharacterID.ToString() + "    " + cb.UMS.Side.ToString();
