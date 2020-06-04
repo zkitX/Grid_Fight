@@ -17,7 +17,7 @@ public class BattleTileScript : MonoBehaviour
         }
         set
         {
-            //Debug.Log(Pos + "   " + value);
+            Debug.Log(Pos + "   " + value);
             _BattleTileState = value;
         }
     }
@@ -28,11 +28,9 @@ public class BattleTileScript : MonoBehaviour
     public WalkingSideType WalkingSide;
     public SpriteRenderer SP;
     public PortalInfoClass PortalInfo;
-    private IEnumerator Effect_Co = null;
     public BattleTileTargetsScript BattleTargetScript;
-    private GameObject ParticleGo;
     private bool destroyEffectOnCollection = false;
-
+    private bool isColliding = false;
     //Private
 
     #region Tile Variables
@@ -359,39 +357,40 @@ public Vector2 Duration_Debuff_Trap_ForTime;
     public void SetupEffect(List<ScriptableObjectAttackEffect> effect, float duration, ParticlesType tileParticlesID, bool destroyOnCollection = true)
     {
         destroyEffectOnCollection = destroyOnCollection;
-
-        Effects = effect;
-        if (Effect_Co != null)
-        {
-            ParticleGo.SetActive(false);
-            StopCoroutine(Effect_Co);
-        }
-
-        Effect_Co = EffectCo(duration, tileParticlesID);
-
-        StartCoroutine(Effect_Co);
+        isColliding = false;
+        Effects.AddRange(effect);
+        StartCoroutine(EffectCo(duration, tileParticlesID, effect));
     }
 
-    private IEnumerator EffectCo(float duration, ParticlesType tileParticlesID)
+    private IEnumerator EffectCo(float duration, ParticlesType tileParticlesID, List<ScriptableObjectAttackEffect> effect)
     {
-        ParticleGo = ParticleManagerScript.Instance.GetParticle(tileParticlesID);
-        ParticleGo.transform.position = transform.position;
-        ParticleGo.SetActive(true);
+        GameObject particleGo = null;
+
+        if(tileParticlesID != ParticlesType.None)
+        {
+            particleGo = ParticleManagerScript.Instance.GetParticle(tileParticlesID);
+            particleGo.transform.position = transform.position;
+            particleGo.SetActive(true);
+        }
+        
         float timer = 0;
-        while (timer <= duration)
+        while (timer <= duration && !isColliding)
         {
             yield return BattleManagerScript.Instance.PauseUntil();
 
             timer += Time.fixedDeltaTime;
         }
-        Effect_Co = null;
-        ParticleGo.SetActive(false);
+        foreach (ScriptableObjectAttackEffect item in effect)
+        {
+            Effects.Remove(item);
+        }
+        particleGo?.SetActive(false);
     }
 
     //Reset the tile to the default values
     public void ResetTile()
     {
-        BattleTileState =  BattleTileStateType.Blocked;
+        BattleTileState =  BattleTileStateType.NonUsable;
         //BattleTileT =  BattleTileType.Base;
         SP.color = Color.white;
     }
@@ -399,24 +398,19 @@ public Vector2 Duration_Debuff_Trap_ForTime;
     private void OnTriggerEnter(Collider other)
     {
         //If collides with a character and the tile type is not base
-        if (other.tag.Contains("Side") && BattleTileState == BattleTileStateType.Occupied)//&& BattleTileT != BattleTileType.Base
+        if (other.tag.Contains("Side"))//&& BattleTileT != BattleTileType.Base
         {
             BaseCharacter targetCharacter = other.GetComponentInParent<BaseCharacter>();
 
-            if(targetCharacter != null && targetCharacter.UMS.Pos.Contains(Pos))
+            if(targetCharacter != null && targetCharacter.UMS.Pos.Contains(Pos) && targetCharacter.isMoving)
             {
-                if (Effects != null)
-                {
-                    //Subscribe to the TargetCharacter_TileMovementCompleteEvent event
-                    targetCharacter.TileMovementCompleteEvent += TargetCharacter_TileMovementCompleteEvent;
-
-                }
-                if(Effect_Co != null)
-                {
-                    StopCoroutine(Effect_Co);
-                    Effect_Co = null;
-                    ParticleGo.SetActive(false);
-                }
+                //Subscribe to the TargetCharacter_TileMovementCompleteEvent event
+                targetCharacter.TileMovementCompleteEvent += TargetCharacter_TileMovementCompleteEvent;
+                isColliding = true;
+            }
+            else if(targetCharacter != null && targetCharacter.UMS.Pos.Contains(Pos) && targetCharacter.SpineAnim.CurrentAnim.Contains("Idle"))
+            {
+                TargetCharacter_TileMovementCompleteEvent(targetCharacter);
             }
         }
     }

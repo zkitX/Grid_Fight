@@ -14,7 +14,7 @@ public class BattleTileTargetsScript : MonoBehaviour
     {
         Whiteline = transform.GetChild(0);
     }
-    public void SetAttack(float duration, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, List<ScriptableObjectAttackEffect> atkEffects, float effectChances)
+    public void SetAttack(float duration, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances)
     {
         GameObject nextT = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Tile);
 
@@ -27,7 +27,7 @@ public class BattleTileTargetsScript : MonoBehaviour
         StartCoroutine(FireTarget(tc, pos, damage, ele, attacker, atkEffects, effectChances));
     }
 
-    private IEnumerator FireTarget(TargetClass tc, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, List<ScriptableObjectAttackEffect> atkEffects, float effectChances)
+    private IEnumerator FireTarget(TargetClass tc, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances)
     {
         float timer = 0;
         Whiteline.gameObject.SetActive(true);
@@ -79,7 +79,7 @@ public class BattleTileTargetsScript : MonoBehaviour
                     int chances = Random.Range(0, 100);
                     if (chances < effectChances)
                     {
-                        foreach (ScriptableObjectAttackEffect item in atkEffects.Where(r => !r.StatsToAffect.ToString().Contains("Tile")).ToList())
+                        foreach (ScriptableObjectAttackEffect item in atkEffects.Effects.Where(r => !r.StatsToAffect.ToString().Contains("Tile")).ToList())
                         {
                             target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.StatsToAffect == BuffDebuffStatsType.Damage_Cure ? item.Value.x *2 : item.Value.x,
                                 item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles, attacker));
@@ -90,13 +90,21 @@ public class BattleTileTargetsScript : MonoBehaviour
             else
             {
 
-                ScriptableObjectAttackEffect soAE = atkEffects.Where(r => r.StatsToAffect == BuffDebuffStatsType.BlockTile).FirstOrDefault();
+                ScriptableObjectAttackEffect soAE = atkEffects.Effects.Where(r => r.StatsToAffect == BuffDebuffStatsType.BlockTile).FirstOrDefault();
                 if (soAE != null)
                 {
                     StartCoroutine(BlockTileForTime(soAE.Duration.x, pos, ParticleManagerScript.Instance.GetParticle(soAE.Particles)));
                 }
             }
+            if(atkEffects.IsEffectOnTile)
+            {
+                BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(pos);
+                bts.SetupEffect(atkEffects.EffectsOnTile, atkEffects.DurationOnTile, atkEffects.TileParticlesID);
+            }
+
         }
+
+
 
 
         if (attacker.CharInfo.Health > 0 && attacker.Attacking)
@@ -134,6 +142,11 @@ public class BattleTileTargetsScript : MonoBehaviour
         bts.BattleTileState = BattleTileStateType.Blocked;
         ps.transform.position = transform.position;
         ps.SetActive(true);
+        PSTimeGroup pstg = ps.GetComponent<PSTimeGroup>();
+        if (pstg != null)
+        {
+            pstg.UpdatePSTime(duration);
+        }
         while (timer < duration)
         {
             yield return null;

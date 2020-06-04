@@ -60,7 +60,7 @@ public class ScriptableObjectGridStructureEditor : Editor
                         }
                     }
                     TilesInfo[gti] = showClose;
-                    bti.BattleTileState = showClose ? BattleTileStateType.Empty : BattleTileStateType.Blocked;
+                    bti.BattleTileState = showClose ? BattleTileStateType.Empty : BattleTileStateType.NonUsable;
                     //Debug.Log(showClose);
                 }
                 EditorGUILayout.EndHorizontal();

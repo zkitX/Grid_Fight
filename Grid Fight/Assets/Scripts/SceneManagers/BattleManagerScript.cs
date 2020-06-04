@@ -643,17 +643,7 @@ public class BattleManagerScript : MonoBehaviour
             {
                 CurrentSelectedCharacters[playerController].isSwapping = true;
                 Vector2Int spawnPos = CurrentSelectedCharacters[playerController].Character.UMS._CurrentTilePos;
-
-                CharacterType_Script currentCharacter = null;
-                if(GridManagerScript.Instance.GetBattleTile(spawnPos).BattleTileState != BattleTileStateType.Blocked)
-                {
-                    currentCharacter = SetCharOnBoardOnFixedPos(playerController, cName, spawnPos);
-                }
-                else
-                {
-                    currentCharacter = SetCharOnBoardOnRandomPos(playerController, cName);
-                }
-
+                CharacterType_Script currentCharacter = SetCharOnBoardOnFixedPos(playerController, cName, spawnPos);
                 //Debug.Log("Exit  " + CurrentSelectedCharacters[playerController].OffsetSwap + "    " + Time.time + CurrentSelectedCharacters[playerController].NextSelectionChar + AllCharactersOnField.Where(r => r.CharInfo.CharacterID == cName).First().CharInfo.CharacterSelection);
                 if (currentCharacter != null)
                 {

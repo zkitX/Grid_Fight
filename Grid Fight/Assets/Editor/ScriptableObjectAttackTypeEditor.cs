@@ -214,8 +214,8 @@ public class ScriptableObjectAttackTypeEditor : Editor
                             ScriptableObjectAttackEffect[] copyOfEffects = new ScriptableObjectAttackEffect[TilesInfo[TilesInfo.Count - 1].Tile.Effects.Count];
                             TilesInfo[TilesInfo.Count - 1].Tile.Effects.CopyTo(copyOfEffects);
                             bfatc = new BattleFieldAttackTileClass(new Vector2Int(x, y), TilesInfo[TilesInfo.Count -1].Tile.HasEffect, copyOfEffects.ToList(),
-                                TilesInfo[TilesInfo.Count - 1].Tile.IsEffectOnTile,
-                                TilesInfo[TilesInfo.Count - 1].Tile.TileParticlesID, TilesInfo[TilesInfo.Count - 1].Tile.DurationOnTile);
+                                TilesInfo[TilesInfo.Count - 1].Tile.IsEffectOnTile, TilesInfo[TilesInfo.Count - 1].Tile.TileParticlesID, TilesInfo[TilesInfo.Count - 1].Tile.DurationOnTile,
+                            TilesInfo[TilesInfo.Count - 1].Tile.EffectsOnTile);
                         }
                         bfti = new BattleFieldTileInfo(BattleTileTrajectory, bfatc);
                         BattleTileTrajectory.BulletEffectTiles.Add(bfatc);
@@ -283,6 +283,17 @@ public class ScriptableObjectAttackTypeEditor : Editor
         {
             bfatc.TileParticlesID = (ParticlesType)EditorGUILayout.EnumPopup("ParticleType", bfatc.TileParticlesID);
             bfatc.DurationOnTile = EditorGUILayout.FloatField("DurationOnTile", bfatc.DurationOnTile);
+            var list = bfatc.EffectsOnTile;
+            int newCount = Mathf.Max(0, EditorGUILayout.IntField("Number of Effects", list.Count));
+            while (newCount < list.Count)
+                list.RemoveAt(list.Count - 1);
+            while (newCount > list.Count)
+                list.Add(null);
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                bfatc.EffectsOnTile[i] = (ScriptableObjectAttackEffect)EditorGUILayout.ObjectField("Effect " + i, bfatc.EffectsOnTile[i], typeof(ScriptableObjectAttackEffect), false);   //"Effect", bfatc.Effects, typeof(ScriptableObjectAttackEffect), false
+            }
         }
     }
 }

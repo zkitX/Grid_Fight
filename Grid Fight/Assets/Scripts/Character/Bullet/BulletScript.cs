@@ -250,7 +250,7 @@ public class BulletScript : MonoBehaviour
     {
         BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(pos);
         float timer = 0;
-        bts.BattleTileState = BattleTileStateType.Blocked;
+        bts.BattleTileState = BattleTileStateType.NonUsable;
         while (timer < duration)
         {
             yield return null;

@@ -109,12 +109,12 @@ public class GridManagerScript : MonoBehaviour
 
     public bool isPosOnField(Vector2Int pos)
     {
-        return BattleTiles.Where(r => r.Pos == pos && r.BattleTileState > BattleTileStateType.Blocked).ToList().Count > 0 ? true : false;
+        return BattleTiles.Where(r => r.Pos == pos && r.BattleTileState > BattleTileStateType.NonUsable).ToList().Count > 0 ? true : false;
     }
 
     public bool isPosOnFieldByHeight(Vector2Int pos)
     {
-        return BattleTiles.Where(r => r.Pos.x == pos.x && r.BattleTileState != BattleTileStateType.Blocked).ToList().Count > 0 ? true : false;
+        return BattleTiles.Where(r => r.Pos.x == pos.x && r.BattleTileState != BattleTileStateType.NonUsable).ToList().Count > 0 ? true : false;
     }
 
     public SideType GetSideTypeFromControllerType(ControllerType ct)
@@ -211,7 +211,7 @@ public class GridManagerScript : MonoBehaviour
             {
                 pos.y = i;
                 res = BattleTiles.Where(r => r.Pos == new Vector2Int(pos.x, i)).FirstOrDefault();
-                if (res.BattleTileState != BattleTileStateType.Blocked)
+                if (res.BattleTileState != BattleTileStateType.NonUsable)
                 {
                     return res;
                 }
@@ -228,7 +228,7 @@ public class GridManagerScript : MonoBehaviour
 
                 }
 
-                if (res.BattleTileState != BattleTileStateType.Blocked)
+                if (res.BattleTileState != BattleTileStateType.NonUsable)
                 {
                     return res;
                 }

@@ -109,6 +109,7 @@ public class BattleFieldAttackTileClass
     public bool IsEffectOnTile = false;
     [ConditionalField("IsEffectOnTile", false)] public ParticlesType TileParticlesID;
     [ConditionalField("IsEffectOnTile", false)] public float DurationOnTile;
+    public List<ScriptableObjectAttackEffect> EffectsOnTile = new List<ScriptableObjectAttackEffect>();
 
     public BattleFieldAttackTileClass(Vector2Int pos)
     {
@@ -116,7 +117,7 @@ public class BattleFieldAttackTileClass
     }
 
     public BattleFieldAttackTileClass(Vector2Int pos, bool hasEffect, List<ScriptableObjectAttackEffect> effects, bool isEffectOnTile,
-        ParticlesType tileParticlesID, float durationOnTile)
+                ParticlesType tileParticlesID, float durationOnTile, List<ScriptableObjectAttackEffect> effectsOnTile)
     {
         Pos = pos;
         HasEffect = hasEffect;
@@ -124,6 +125,7 @@ public class BattleFieldAttackTileClass
         IsEffectOnTile = isEffectOnTile;
         TileParticlesID = tileParticlesID;
         DurationOnTile = durationOnTile;
+        EffectsOnTile = effectsOnTile;
     }
 }
 

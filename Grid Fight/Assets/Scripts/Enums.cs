@@ -10,9 +10,10 @@ public class Enums
 
 public enum BattleTileStateType
 {
-    Blocked,
+    NonUsable,
     Empty,
-    Occupied
+    Occupied,
+    Blocked
 }
 
 public enum FungusDialogType

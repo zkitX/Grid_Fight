@@ -579,7 +579,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         if (nextAttack.CurrentAttackType == AttackType.Tile)
         {
-            CharInfo.RapidAttack.DamageMultiplier = nextAttack.DamageMultiplier;
+            CharInfo.RapidAttack.DamageMultiplier = CharInfo.RapidAttack.B_DamageMultiplier * nextAttack.DamageMultiplier;
+            CharInfo.PowerfulAttac.DamageMultiplier = CharInfo.PowerfulAttac.B_DamageMultiplier * nextAttack.DamageMultiplier;
             BaseCharacter charTar = null;
             if (nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnTarget)
             {
@@ -601,37 +602,34 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     if (GridManagerScript.Instance.isPosOnField(res))
                     {
                         BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(res);
-                        if (target.IsEffectOnTile)
+                        if (bts._BattleTileState != BattleTileStateType.NonUsable)
                         {
-                            bts.SetupEffect(target.Effects, target.DurationOnTile, target.TileParticlesID);
-                        }
-                        else
-                        {
-                            if (bts._BattleTileState != BattleTileStateType.Blocked)
+                            if (nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnItSelf && bts.WalkingSide == UMS.WalkingSide)
                             {
-                                if (nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnItSelf && bts.WalkingSide == UMS.WalkingSide)
-                                {
-                                    shotsLeftInAttack++;
+                                shotsLeftInAttack++;
 
-                                    bts.BattleTargetScript.SetAttack(item.Delay, res,
-                                    0, CharInfo.Elemental, this,
-                                    target.HasEffect ? target.Effects : new List<ScriptableObjectAttackEffect>(), target.EffectChances);
-                                }
-                                else if (nextAttack.TilesAtk.AtkType != BattleFieldAttackType.OnItSelf && bts.WalkingSide != UMS.WalkingSide)
-                                {
-                                    shotsLeftInAttack++;
-                                    AttackedTiles(bts);
-                                   // CreateBullet(target, bts.Pos, item.Delay);
-                                    bts.BattleTargetScript.SetAttack(item.Delay, res,
-                                    CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
-                                    target.HasEffect ? target.Effects : new List<ScriptableObjectAttackEffect>(), target.EffectChances);
-                                }
+                                bts.BattleTargetScript.SetAttack(item.Delay, res,
+                                0, CharInfo.Elemental, this,
+                                target, target.EffectChances);
+                            }
+                            else if (nextAttack.TilesAtk.AtkType != BattleFieldAttackType.OnItSelf && bts.WalkingSide != UMS.WalkingSide)
+                            {
+                                shotsLeftInAttack++;
+                                AttackedTiles(bts);
+                                // CreateBullet(target, bts.Pos, item.Delay);
+                                bts.BattleTargetScript.SetAttack(item.Delay, res,
+                                CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
+                                target, target.EffectChances);
                             }
                         }
                     }
                 }
             }
-
+            if(shotsLeftInAttack == 0)
+            {
+                Attacking = false;
+                currentAttackPhase = AttackPhasesType.End;
+            }
         }
     }
 
@@ -1030,7 +1028,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         else
         {
-
             if (item.Level <= Convert.ToInt32(newBuffDebuff.Last()))
             {
                 string[] currentBuffDebuff = item.Name.ToString().Split('_');
@@ -1069,7 +1066,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         else if(bdClass.Stat == BuffDebuffStatsType.Damage_Cure)
         {
-            HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, bdClass.CurrentBuffDebuff.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, bdClass.EffectMaker.transform);
+            HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, HealthChangedType.Heal, bdClass.EffectMaker.transform);
             bdClass.EffectMaker.CharInfo.Health += bdClass.CurrentBuffDebuff.Value;
         }
         else if (bdClass.Stat == BuffDebuffStatsType.Zombification)
@@ -1216,7 +1213,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     }
                 }
 
-                if (statToCheck[1] == "BaseSpeed")
+                if (statToCheck[1] == "BaseSpeed" && !bdClass.CurrentBuffDebuff.Stop_Co)
                 {
                     SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.BaseSpeed);
                     if(bdClass.CurrentBuffDebuff.Value == 0)
@@ -1377,7 +1374,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         //Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + CharInfo.CharacterID.ToString());
         if (animState == CharacterAnimationStateType.Arriving.ToString())
         {
-
         }
 
         if (animState.Contains(CharacterAnimationStateType.GettingHit.ToString()) && currentAttackPhase != AttackPhasesType.End)
