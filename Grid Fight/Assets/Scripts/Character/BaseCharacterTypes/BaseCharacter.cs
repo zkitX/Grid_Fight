@@ -1054,6 +1054,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             ps.transform.parent = SpineAnim.transform;
             ps.transform.localPosition = Vector3.zero;
             ps.SetActive(true);
+            PSTimeGroup pstg = ps.GetComponent<PSTimeGroup>();
+            if(pstg != null)
+            {
+                pstg.UpdatePSTime(bdClass.Duration);
+            }
         }
         System.Reflection.FieldInfo parentField = null, field = null, B_field = null;
         string[] statToCheck = bdClass.Stat.ToString().Split('_');
