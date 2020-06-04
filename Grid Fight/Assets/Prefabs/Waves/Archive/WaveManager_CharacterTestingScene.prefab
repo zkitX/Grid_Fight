@@ -48,6 +48,7 @@ MonoBehaviour:
     minutes: 15
     seconds: 0
     counting: 0
+    isStopped: 0
   WavePhases:
   - name: Wave1
     IsRandom: 0
@@ -55,10 +56,10 @@ MonoBehaviour:
     DelayBetweenChars: 0
     ListOfEnemy:
     - name: Bush
-      NPCType: 2
+      NPCType: 1
       NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 1028
+        CharacterName: 1026
         Health: {x: 10000, y: 1}
         HealthRegeneration: {x: 0.2, y: 0.2}
         BaseDamage: {x: 1, y: 1}
@@ -70,6 +71,7 @@ MonoBehaviour:
         StaminaRegeneration: {x: 1, y: 1}
         MovementSpeed: {x: 1, y: 1}
         MovementTimer: {x: 1, y: 1}
+        Exp: 0
         UpDownPerc: 18
         Events: []
       AreThereStartingEnemy: 0

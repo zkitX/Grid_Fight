@@ -321,7 +321,8 @@ MonoBehaviour:
     y: -340
     width: 1114
     height: 859
-  selectedBlocks: []
+  selectedBlocks:
+  - {fileID: 4265110198629089720}
   selectedCommands: []
   variables: []
   description: 
@@ -397,9 +398,20 @@ MonoBehaviour:
   HasADifferentGrid: 0
   Grid: {fileID: 0}
   CallPool: 0
+  PlayersCurrentSelectedChars:
+  - PlayerController: 0
+    Pos: {x: 0, y: 0}
+  - PlayerController: 1
+    Pos: {x: 0, y: 0}
+  - PlayerController: 2
+    Pos: {x: 0, y: 0}
+  - PlayerController: 3
+    Pos: {x: 0, y: 0}
   TalkingTeam: []
   JumpUp: 0
   JumpAnimSpeed: 1
+  DelayBeforeJump: 0.5
+  PoolDelay: 3
   UseWave: 1
   NextBlockToFire: End
 --- !u!114 &8729947904815534577
