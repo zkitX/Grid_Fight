@@ -9,7 +9,7 @@ public class MinionType_Script : BaseCharacter
     protected bool MoveCoOn = true;
     protected IEnumerator MoveActionCo;
     protected float LastAttackTime;
-    public float UpDownPerc = 18;
+    public float UpDownPerc = 13;
     public AIType CurrentAI;
     List<HitInfoClass> HittedByList = new List<HitInfoClass>();
     float totDamage = 0;
