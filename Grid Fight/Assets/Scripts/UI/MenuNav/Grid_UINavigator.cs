@@ -107,7 +107,6 @@ public class Grid_UINavigator : MonoBehaviour
         EnableCollection(startingCollectionID, true);
         StartCoroutine(SelectFirstButton());
         SetNavigation(MenuNavigationType.Relative);
-        InputController.Instance.ButtonAUpEvent += ButtonPressInput;
     }
 
     public void EnableCollection(string collectionID, bool state)
@@ -120,14 +119,23 @@ public class Grid_UINavigator : MonoBehaviour
         }
         else
         {
-            if(GetCollectionObjectByID(collectionID, true) != null) Destroy(GetCollectionObjectByID(collectionID, true));
+            if (GetCollectionObjectByID(collectionID, true) != null)
+            {
+                Destroy(GetCollectionObjectByID(collectionID, true));
+            }
         }
     }
 
+    //Sets the navigation when the button action is called
     public void SetNavigation(MenuNavigationType nav, Grid_UIButton buttonToFocusOn = null)
     {
-        if (navType == nav) return;
+        if (navType == nav)
+        {
+            return;
+        }
+
         navType = nav;
+        InputController.Instance.ButtonAUpEvent -= ButtonPressInput;
 
         if (InputController.Instance != null)
         {
@@ -147,9 +155,11 @@ public class Grid_UINavigator : MonoBehaviour
                 InputController.Instance.LeftJoystickUsedEvent -= ButtonChangeInput;
             }
         }
+
+        InputController.Instance.ButtonAUpEvent += ButtonPressInput;
     }
 
-    IEnumerator SelectFirstButton()
+    public IEnumerator SelectFirstButton()
     {
         while(buttons.Length == 0)
         {
@@ -170,11 +180,26 @@ public class Grid_UINavigator : MonoBehaviour
         return btnID;
     }
 
-    public void RemoveButtonInfo(Grid_UIButton btn)
+    public void RemoveButtonInfo(Grid_UIButton btn, bool refreshSelected = true)
     {
         List<Grid_UIButton> btns = buttons.ToList();
+        int selectedBtnID = selectedButton != null ? selectedButton.ID : -1;
         btns.Remove(btn);
         buttons = btns.ToArray();
+        if (refreshSelected)
+        {
+            int count = 0;
+            foreach (Grid_UIButton btno in buttons)
+            {
+                if (selectedBtnID == btno.ID)
+                {
+                    selectedButtonIndex = count;
+                    break;
+                }
+                count++;
+            }
+            if (btn.selected) selectedButtonIndex = -1;
+        }
     }
 
     public void SetupButtonPanelInfo(Grid_UIPanel panel)
@@ -319,7 +344,13 @@ public class Grid_UINavigator : MonoBehaviour
     [Tooltip("The zones scale based on the button image wherein other buttons can be selected inLine")][Range(0.1f, 2f)]public float inLineBuffer = 0.6f;
     public Grid_UIButton GetButtonClosestInDirectionFromSelected(InputDirection direction)
     {
-        Grid_UIButton[] activeUnselectedButtons = ActiveButtons.Where(r => r.ID != selectedButton.ID).ToArray();
+        if(selectedButton == null)
+        {
+            SelectTopButtonInStartingDirection();
+            return null;
+        }
+
+        Grid_UIButton[] activeUnselectedButtons = ActiveButtons.Where(r => r.ID != selectedButton.ID) != null ? ActiveButtons.Where(r => r.ID != selectedButton.ID).ToArray() : new Grid_UIButton[0];
         if (activeUnselectedButtons.Length == 0) return null;
 
         Grid_UIButton closestInDirection = null;

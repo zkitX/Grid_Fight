@@ -167,7 +167,15 @@ public class InputController : MonoBehaviour
     public Vector2 Joystic; //Joysticks movement 
     void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(this);
+            return;
+        }
+
         Instance = this;
+        DontDestroyOnLoad(gameObject);
+
         if (ReInput.players.GetPlayer(0).controllers.joystickCount == 0)
         {
             PlayersNumber = 1;

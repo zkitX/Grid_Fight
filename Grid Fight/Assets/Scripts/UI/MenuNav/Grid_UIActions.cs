@@ -70,8 +70,7 @@ public class Grid_UIActions
             case (UI_ActionTypes.PlayAnimation):
                 return "Play " + (animationClipToPlay == null ? "unset animation" : animationClipToPlay.name) + " on " + (thingToAnimate == null ? "unset object" : animateThis ? "this button" : thingToAnimate.name);
             case (UI_ActionTypes.SetButtonSelection):
-                if(setSelectionButton != null) return "Set " + (setSelectionForThisButtom ? "this" : setSelectionButton.name) + " button to " + setSelectionType.ToString();
-                else return "Set button to " + setSelectionType.ToString();
+                return "Set " + (reselectButtonFromStartingDirection ? "starting" : setSelectionForThisButtom ? "this" : setSelectionButton == null ? "NO SPECIFIC" : setSelectionButton.name) + " button to " + setSelectionType.ToString();
             case (UI_ActionTypes.SetPanelFocus):
                 return "Set " + (setFocusForPreviousPanel ? "previous panel" : setFocusForThisPanel ? "this panel" : "panel: " + setFocusedPanel) + 
                     (setPanelFocusType == SetPanelFocusType.SetFocused ? " to be in focus" : 
@@ -143,12 +142,19 @@ public class Grid_UIActions
     }
 
     public enum SelectionType { Selected, Deselected }
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetButtonSelection)] public bool reselectButtonFromStartingDirection = false;
     [ConditionalField("actionType", compareValues: UI_ActionTypes.SetButtonSelection)] public Grid_UIButton setSelectionButton = null;
     [ConditionalField("actionType", compareValues: UI_ActionTypes.SetButtonSelection)] public bool setSelectionForThisButtom = true;
     [ConditionalField("actionType", compareValues: UI_ActionTypes.SetButtonSelection)] public SelectionType setSelectionType = SelectionType.Selected;
     [ConditionalField("actionType", compareValues: UI_ActionTypes.SetButtonSelection)] public bool ignoreDeselectEventsForAllOtherButtons = false;
     IEnumerator SetButtonSelection()
     {
+        if (reselectButtonFromStartingDirection)
+        {
+            yield return Grid_UINavigator.Instance.SelectFirstButton();
+            yield break;
+        }
+
         if (setSelectionType == SelectionType.Selected)
         {
             if (Grid_UINavigator.Instance.navType == MenuNavigationType.Cursor) yield break;

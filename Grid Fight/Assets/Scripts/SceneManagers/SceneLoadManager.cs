@@ -8,6 +8,8 @@ public class SceneLoadManager : MonoBehaviour
 {
     public static SceneLoadManager Instance;
     public GameObject NavigatorPrefab = null;
+    public GameObject RewiredPrefab = null;
+
     protected string startingSceneID = "";
     [SerializeField] protected const float loadingFadeTime = 2f;
     public CanvasGroup canv = null;
@@ -16,8 +18,14 @@ public class SceneLoadManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(this);
+        if (Instance != null)
+        { 
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        if (InputController.Instance == null) Instantiate(RewiredPrefab).name = RewiredPrefab.name;
         DontDestroyOnLoad(this);
 
         startingSceneID = SceneManager.GetActiveScene().name;
@@ -38,7 +46,7 @@ public class SceneLoadManager : MonoBehaviour
         yield return null;
 
         yield return FadeLoadingInOut(true, 0f);
-        if(Grid_UINavigator.Instance == null) Instantiate(NavigatorPrefab).name = NavigatorPrefab.name;
+        if (Grid_UINavigator.Instance == null) Instantiate(NavigatorPrefab).name = NavigatorPrefab.name;
         yield return new WaitForSecondsRealtime(1f);
         yield return FadeLoadingInOut(false);
     }

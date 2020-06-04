@@ -13,9 +13,16 @@ public class StatisticInfoManagerScript : MonoBehaviour
         Instance = this;
     }
 
-    public StatisticInfoClass CharacterStatsFor(CharacterNameType ID)
+    //Return a combination of the xp stats class on the gameobject and the actual stats on the character
+    public StatisticInfoClass GetCharacterStatsFor(CharacterNameType ID)
     {
-        return CharaterStats.Where(r => r.CharacterId == ID).FirstOrDefault();
+        StatisticInfoClass returnable = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == ID).FirstOrDefault().Sic;
+        StatisticInfoClass additive = CharaterStats.Where(r => r.CharacterId == ID).FirstOrDefault();
+        returnable.StartExp += additive.StartExp;
+        returnable.AccuracyExp += additive.AccuracyExp;
+        returnable.DamageExp += additive.DamageExp;
+        returnable.ReflexExp += additive.ReflexExp;
+        return returnable;
     }
 }
 
@@ -33,7 +40,7 @@ public class StatisticInfoClass
     {
         get
         {
-            return BulletHits / (BulletFired != 0 ? BulletFired : 1);
+            return (float)BulletHits / ((float)BulletFired != 0f ? (float)BulletFired : 1f);
         }
     }
     public int HitReceived;
@@ -43,7 +50,7 @@ public class StatisticInfoClass
     {
         get
         {
-            return ((Defences / (HitReceived != 0 ? HitReceived : 1)) + (CompleteDefences / (Defences != 0 ? Defences : 1))) / 2f;
+            return (((float)Defences / ((float)HitReceived != 0f ? (float)HitReceived : 1f)) + ((float)CompleteDefences / ((float)Defences != 0f ? (float)Defences : 1f))) / 2f;
         }
     }
     public float HPGotBySkill;
@@ -56,9 +63,45 @@ public class StatisticInfoClass
             return AccuracyExp + DamageExp + ReflexExp;
         }
     }
-    public float AccuracyExp;
-    public float DamageExp;
-    public float ReflexExp;
+    protected float accuracyExp;
+    public float AccuracyExp
+    {
+        get
+        {
+            return BattleManagerBaseObjectGeneratorScript.Instance.stage.bestAccuracyRating.UseMaximumRewardSystem ?
+                Mathf.Clamp(accuracyExp, 0f, BattleManagerBaseObjectGeneratorScript.Instance.stage.bestAccuracyRating.MaximumReward) : accuracyExp;
+        }
+        set
+        {
+            accuracyExp = value;
+        }
+    }
+    protected float damageExp;
+    public float DamageExp
+    {
+        get
+        {
+            return BattleManagerBaseObjectGeneratorScript.Instance.stage.bestDamageRating.UseMaximumRewardSystem ?
+                Mathf.Clamp(damageExp, 0f, BattleManagerBaseObjectGeneratorScript.Instance.stage.bestDamageRating.MaximumReward) : damageExp;
+        }
+        set
+        {
+            damageExp = value;
+        }
+    }
+    protected float reflexExp;
+    public float ReflexExp
+    {
+        get
+        {
+            return BattleManagerBaseObjectGeneratorScript.Instance.stage.bestReflexRating.UseMaximumRewardSystem ?
+                Mathf.Clamp(reflexExp, 0f, BattleManagerBaseObjectGeneratorScript.Instance.stage.bestReflexRating.MaximumReward) : reflexExp;
+        }
+        set
+        {
+            reflexExp = value;
+        }
+    }
     public float StartExp;
 
     public StatisticInfoClass()

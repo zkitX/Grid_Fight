@@ -50,7 +50,7 @@ public class Grid_UITally : MonoBehaviour
         if (!resolved) return;
         resolved = false;
 
-        info = StatisticInfoManagerScript.Instance.CharacterStatsFor(character);
+        info = StatisticInfoManagerScript.Instance.GetCharacterStatsFor(character);
 
         if(BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == character).FirstOrDefault().CharInfo.CharacterIcons[2] != null)
         {
@@ -90,28 +90,28 @@ public class Grid_UITally : MonoBehaviour
 
         StartCoroutine(GrowShrink(accuracyXPText.transform));
         StopCoroutine(ValueShufflers[0]);
-        accuracyXPText.text = info.AccuracyExp.ToString();
-        accuracyXPStars.SetStarRanking(info.Accuracy / BattleManagerBaseObjectGeneratorScript.Instance.stage.bestAccuracyRating);
+        accuracyXPText.text = Mathf.Round(info.AccuracyExp).ToString();
+        accuracyXPStars.SetStarRanking(info.Accuracy / BattleManagerBaseObjectGeneratorScript.Instance.stage.bestAccuracyRating.ValueToAchieve);
 
         yield return new WaitForSecondsRealtime(waitBetweenResults);
 
         StartCoroutine(GrowShrink(reflexXPText.transform));
         StopCoroutine(ValueShufflers[1]);
-        reflexXPText.text = info.ReflexExp.ToString();
-        reflexXPStars.SetStarRanking(info.Reflexes / BattleManagerBaseObjectGeneratorScript.Instance.stage.bestReflexRating);
+        reflexXPText.text = Mathf.Round(info.ReflexExp).ToString();
+        reflexXPStars.SetStarRanking(info.Reflexes / BattleManagerBaseObjectGeneratorScript.Instance.stage.bestReflexRating.ValueToAchieve);
 
         yield return new WaitForSecondsRealtime(waitBetweenResults);
 
         StartCoroutine(GrowShrink(damageXPText.transform));
         StopCoroutine(ValueShufflers[2]);
-        damageXPText.text = info.DamageExp.ToString();
-        damageXPStars.SetStarRanking(info.DamageMade / BattleManagerBaseObjectGeneratorScript.Instance.stage.bestDamageRating);
+        damageXPText.text = Mathf.Round(info.DamageExp).ToString();
+        damageXPStars.SetStarRanking(info.DamageMade / BattleManagerBaseObjectGeneratorScript.Instance.stage.bestDamageRating.ValueToAchieve);
 
         yield return new WaitForSecondsRealtime(waitBetweenResults * 2f);
 
         StartCoroutine(GrowShrink(totalXPText.transform));
         StopCoroutine(ValueShufflers[3]);
-        totalXPText.text = (info.StartExp + info.Exp).ToString();
+        totalXPText.text = Mathf.Round(info.StartExp + info.Exp).ToString();
     }
 
     IEnumerator GrowShrink(Transform tran)
