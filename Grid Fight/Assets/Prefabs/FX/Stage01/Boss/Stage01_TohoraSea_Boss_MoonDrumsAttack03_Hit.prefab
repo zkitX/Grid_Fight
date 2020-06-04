@@ -29362,9 +29362,9 @@ GameObject:
   - component: {fileID: 6044654591012699916}
   - component: {fileID: 6044654591012699921}
   - component: {fileID: 1755483095895024483}
-  - component: {fileID: 6044654591012699922}
   - component: {fileID: 6044654591012699923}
   - component: {fileID: 1239690080947726360}
+  - component: {fileID: -9075500792615043011}
   m_Layer: 0
   m_Name: Stage01_TohoraSea_Boss_MoonDrumsAttack03_Hit
   m_TagString: Untagged
@@ -34065,27 +34065,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &6044654591012699922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6044654591012699917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6b4f6a2e73fe8f428a4d552f0a13adf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Isolate: 1
-  ShotNovice:
-  - {fileID: 0}
-  ShotDefiant:
-  - {fileID: 0}
-  ShotHeroine:
-  - {fileID: 0}
-  ShotGodness:
-  - {fileID: 0}
 --- !u!114 &6044654591012699923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34163,6 +34142,18 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-9075500792615043011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6044654591012699917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7059901143803174608
 GameObject:
   m_ObjectHideFlags: 0

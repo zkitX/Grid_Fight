@@ -9705,10 +9705,9 @@ GameObject:
   - component: {fileID: 2998608218866264351}
   - component: {fileID: 2998608218866264322}
   - component: {fileID: 7071607481556759920}
-  - component: {fileID: 2998608218866264321}
   - component: {fileID: 2998608218866264320}
-  - component: {fileID: 2998608218866264325}
   - component: {fileID: 7731445352420556299}
+  - component: {fileID: 5499785290758515492}
   m_Layer: 0
   m_Name: Stage01_TohoraSea_Boss_WardrumAttack01_Hit
   m_TagString: Untagged
@@ -14406,27 +14405,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &2998608218866264321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2998608218866264350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6b4f6a2e73fe8f428a4d552f0a13adf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Isolate: 1
-  ShotNovice:
-  - {fileID: 0}
-  ShotDefiant:
-  - {fileID: 0}
-  ShotHeroine:
-  - {fileID: 0}
-  ShotGodness:
-  - {fileID: 0}
 --- !u!114 &2998608218866264320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14441,21 +14419,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletTargetTime: 1
   BulletOriginalTime: 1
---- !u!114 &2998608218866264325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2998608218866264350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2540eedaee99924438ce16aeff707ac9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PSTime: 10
-  AutoUpdate: 1
-  LongParticles: []
 --- !u!199 &7731445352420556299
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -14519,6 +14482,18 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &5499785290758515492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2998608218866264350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4210464467671745009
 GameObject:
   m_ObjectHideFlags: 0
