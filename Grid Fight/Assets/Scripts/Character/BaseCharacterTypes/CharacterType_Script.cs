@@ -20,10 +20,6 @@ public class CharacterType_Script : BaseCharacter
     #region Unity Life Cycles
     public override void Start()
     {
-        battleTime = new GameTime();
-        battleTime.SetupBasics();
-        battleTime.isStopped = true;
-        StartCoroutine(battleTime.standardTicker);
         base.Start();
     }
     protected override void Update()
@@ -34,7 +30,16 @@ public class CharacterType_Script : BaseCharacter
 
     #region Setup Character
 
-
+    /// <summary>
+    /// Must be called to set up the battleTime Variable
+    /// </summary>
+    public void SetBattleTime()
+    {
+        battleTime = new GameTime();
+        battleTime.SetupBasics();
+        battleTime.isStopped = true;
+        StartCoroutine(battleTime.standardTicker);
+    }
 
     public void CharacterInputHandler(InputActionType action)
     {
@@ -213,6 +218,10 @@ public class CharacterType_Script : BaseCharacter
 
     public override void SetUpEnteringOnBattle()
     {
+        if(battleTime == null)
+        {
+            SetBattleTime();
+        }
         battleTime.isStopped = false;
         SetAnimation(CharacterAnimationStateType.Arriving);
         AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.ArrivalSpawn, AudioBus.MidPrio);
