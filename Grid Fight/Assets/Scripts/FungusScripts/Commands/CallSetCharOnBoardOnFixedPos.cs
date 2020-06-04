@@ -58,7 +58,7 @@ public class CallSetCharOnBoardOnFixedPos : Command
                 yield return BattleManagerScript.Instance.MoveCharOnPos(cbOnPos.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeTilesAdjacentTo(pos, 1, true, cbOnPos.UMS.WalkingSide).First().Pos, true);
             }
 
-            BattleManagerScript.Instance.SetCharOnBoard(playerController, cName, pos);
+            BattleManagerScript.Instance.SetCharOnBoard(playerController, cName, pos, false);
            
         }
     }
