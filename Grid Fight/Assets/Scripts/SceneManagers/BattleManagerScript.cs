@@ -494,9 +494,12 @@ public class BattleManagerScript : MonoBehaviour
         zombiePs.transform.parent = zombiefied.SpineAnim.transform;
         zombiePs.transform.localPosition = Vector3.zero;
 
-        yield return new WaitForSeconds(1);
+        yield return RemoveZombieFromBaord(zombiefied);
+        while (zombiefied.IsOnField)
+        {
+            yield return null;
+        }
 
-        yield return RemoveZombieFromBaord(zombiesList.Where(r => r.CharInfo.CharacterID == zombie.CharInfo.CharacterID).First());
         zombiePs.transform.parent = null;
         zombiePs.SetActive(false);
         zombie.CharActionlist.Add(CharacterActionType.SwitchCharacter);
