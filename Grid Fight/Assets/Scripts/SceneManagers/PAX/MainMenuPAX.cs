@@ -32,6 +32,7 @@ public class MainMenuPAX : MonoBehaviour
     {
         SelectButton();
         InputController.Instance.ButtonADownEvent += Instance_ButtonADownEvent;
+        InputController.Instance.ButtonBDownEvent += Instance_ButtonBDownEvent;
         //InputController.Instance.LeftJoystickUsedEvent += Instance_LeftJoystickUsedEvent;
     }
 
@@ -69,6 +70,11 @@ public class MainMenuPAX : MonoBehaviour
 
 
     private void Instance_ButtonADownEvent(int player)
+    {
+        GoToBattleScene(selectedButton == 0 ? "BattleScene_Stage01" : selectedButton == 1 ? "BattleScene_Stage01" : "BattleScene_Stage01");
+    }
+
+    private void Instance_ButtonBDownEvent(int player)
     {
         GoToBattleScene(selectedButton == 0 ? "BattleScene_Stage04" : selectedButton == 1 ? "BattleScene_Stage04" : "BattleScene_Stage04");
     }
