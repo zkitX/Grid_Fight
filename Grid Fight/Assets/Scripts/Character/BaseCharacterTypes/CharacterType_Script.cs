@@ -286,9 +286,23 @@ public class CharacterType_Script : BaseCharacter
         StartCoroutine(StartChargingAttack(atkType));
     }
 
+    IEnumerator StartChargingAttack(AttackInputType nextAtkType)
+    {
+        yield return StartChargingAttack_Co(nextAtkType);
+        if (chargingPs != null)
+        {
+            chargingPs.transform.parent = null;
+            chargingPs.SetActive(false);
+            chargingPs = null;
+        }
+        isChargingParticlesOn = false;
+        ResetAudioManager();
+    }
+
     //Load the special attack and fire it if the load is complete
     bool isChargingParticlesOn = false;
-    public IEnumerator StartChargingAttack(AttackInputType nextAtkType)
+    GameObject chargingPs = null;
+    public IEnumerator StartChargingAttack_Co(AttackInputType nextAtkType)
     {
         if (CanAttack && !isSpecialLoading)
         {
@@ -297,7 +311,6 @@ public class CharacterType_Script : BaseCharacter
             {
                 yield break;
             }
-            GameObject ps = null;
             isSpecialLoading = true;
             chargingAttackTimer = 0;
             currentAttackPhase = AttackPhasesType.Start;
@@ -313,9 +326,8 @@ public class CharacterType_Script : BaseCharacter
             chargingAudio = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoop, AudioBus.MidPrio, transform, true, 1f);
             while (isSpecialLoading && !VFXTestMode)
             {
-                yield return BattleManagerScript.Instance.PauseUntil();
+                yield return BattleManagerScript.Instance.WaitUpdate();
                 chargingAttackTimer += Time.fixedDeltaTime;
-
                 if(chargingAudioStrong == null && chargingAttackTimer >= 1.5f)
                 {
                     chargingAudioStrong = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoopStrong, AudioBus.MidPrio, transform, true, 1f);
@@ -325,28 +337,21 @@ public class CharacterType_Script : BaseCharacter
                 {
                     SetAnimation(nxtAtk.PrefixAnim + "_IdleToAtk");
                 }
-                if (!isChargingParticlesOn || ps == null)
+                if (!isChargingParticlesOn || chargingPs == null)
                 {
                     isChargingParticlesOn = true;
                     //Check
-                    ps = ParticleManagerScript.Instance.FireParticlesInPosition(nxtAtk.Particles.CastLoopPS, CharInfo.CharacterID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side, nxtAtk.AttackInput);
-                    ps.transform.parent = SpineAnim.transform;
+                    chargingPs = ParticleManagerScript.Instance.FireParticlesInPosition(nxtAtk.Particles.CastLoopPS, CharInfo.CharacterID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side, nxtAtk.AttackInput);
+                    chargingPs.transform.parent = SpineAnim.transform;
 
                 }
                 else
                 {
-                    SetParticlesLayer(ps);
+                    SetParticlesLayer(chargingPs);
                 }
-
 
                 if (!IsOnField)
                 {
-                    if (ps != null)
-                    {
-                        ps.transform.parent = null;
-                        ps.SetActive(false);
-                    }
-                    ResetAudioManager();
                     yield break;
                 }
             }
@@ -363,9 +368,6 @@ public class CharacterType_Script : BaseCharacter
                         if (StopPowerfulAtk == SpecialAttackStatus.Stop)
                         {
                             StopPowerfulAtk = SpecialAttackStatus.None;
-                            ps.transform.parent = null;
-                            ps.SetActive(false);
-                            ResetAudioManager();
                             yield break;
                         }
                     }
@@ -376,9 +378,6 @@ public class CharacterType_Script : BaseCharacter
             {
                 SetAnimation(CharacterAnimationStateType.Idle, true, 0.1f);
             }
-            ResetAudioManager();
-            ps.transform.parent = null;
-            ps.SetActive(false);
         }
     }
 
@@ -415,7 +414,7 @@ public class CharacterType_Script : BaseCharacter
     {
         while (true)
         {
-            yield return BattleManagerScript.Instance.PauseUntil();
+            yield return BattleManagerScript.Instance.WaitUpdate();
             atkHoldingTimer += Time.fixedDeltaTime;
         }
     }
@@ -482,10 +481,7 @@ public class CharacterType_Script : BaseCharacter
         bs.VFXTestMode = VFXTestMode;
         bs.CharOwner = this;
         bs.attackAudioType = GetAttackAudio();
-        if (bulletBehaviourInfo.HasEffect)
-        {
-            bs.BulletEffects = bulletBehaviourInfo.Effects;
-        }
+        bs.BulletEffects = bulletBehaviourInfo.Effects;
 
         if (!GridManagerScript.Instance.isPosOnFieldByHeight(UMS.CurrentTilePos + bulletBehaviourInfo.BulletDistanceInTile))
         {

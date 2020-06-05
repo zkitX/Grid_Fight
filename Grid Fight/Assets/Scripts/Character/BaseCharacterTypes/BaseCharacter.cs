@@ -930,7 +930,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         while (timer < 1 && !stopCo)
         {
 
-            yield return BattleManagerScript.Instance.PauseUntil();
+            yield return BattleManagerScript.Instance.WaitFixedUpdate();
             timer += (Time.fixedDeltaTime / (animLength / moveValue));
             spaceTimer = curve.Evaluate(timer);
             spineT.localPosition = Vector3.Lerp(localoffset, LocalSpinePosoffset, spaceTimer);
@@ -975,7 +975,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         while (timer < 1)
         {
 
-            yield return BattleManagerScript.Instance.PauseUntil();
+            yield return BattleManagerScript.Instance.WaitFixedUpdate();
             float newAdd = (Time.fixedDeltaTime / (animLength / moveValue));
             timer += (Time.fixedDeltaTime / (animLength / moveValue));
             speedTimer += newAdd * curve.Evaluate(timer + newAdd);
@@ -1152,7 +1152,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             int iterator = 0;
             while (bdClass.CurrentBuffDebuff.Timer <= bdClass.Duration && !bdClass.CurrentBuffDebuff.Stop_Co)
             {
-                yield return BattleManagerScript.Instance.PauseUntil();
+                yield return BattleManagerScript.Instance.WaitUpdate();
 
                 bdClass.CurrentBuffDebuff.Timer += Time.fixedDeltaTime;
 
@@ -1659,7 +1659,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         float timer = 0;
         while (timer <= duration)
         {
-            yield return BattleManagerScript.Instance.PauseUntil();
+            yield return BattleManagerScript.Instance.WaitUpdate();
 
             timer += Time.fixedDeltaTime;
         }

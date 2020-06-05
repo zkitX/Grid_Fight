@@ -58,17 +58,17 @@ public class VFXTester : MonoBehaviour
 
         if (charOnScene != null && Input.GetKeyUp(KeyCode.O))
         {
-            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack(AttackInputType.Strong));
+            charOnScene.GetComponent<CharacterType_Script>().StartChargingAtk(AttackInputType.Strong);
         }
 
         if (charOnScene != null && Input.GetKeyUp(KeyCode.B))
         {
-            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack(AttackInputType.Skill1));
+            charOnScene.GetComponent<CharacterType_Script>().StartChargingAtk(AttackInputType.Skill1);
         }
 
         if (charOnScene != null && Input.GetKeyUp(KeyCode.V))
         {
-            StartCoroutine(charOnScene.GetComponent<CharacterType_Script>().StartChargingAttack(AttackInputType.Skill2));
+            charOnScene.GetComponent<CharacterType_Script>().StartChargingAtk(AttackInputType.Skill2);
         }
     }
 

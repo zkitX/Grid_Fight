@@ -122,7 +122,7 @@ public class UIBattleManager : MonoBehaviour
         isLeftSidePlaying = false;
         while (duration > 0 && !isLeftSidePlaying)
         {
-            yield return BattleManagerScript.Instance.PauseUntil();
+            yield return BattleManagerScript.Instance.WaitUpdate();
             SecondsToPlayLeftSide.text = ((int)duration).ToString();
             duration -= Time.fixedDeltaTime;
 
@@ -154,7 +154,7 @@ public class UIBattleManager : MonoBehaviour
         isRightSidePlaying = false;
         while (duration > 0 && !isRightSidePlaying)
         {
-            yield return BattleManagerScript.Instance.PauseUntil();
+            yield return BattleManagerScript.Instance.WaitUpdate();
             SecondsToPlayRightSide.text = ((int)duration).ToString();
             duration -= Time.fixedDeltaTime;
         }

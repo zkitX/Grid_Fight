@@ -64,7 +64,7 @@ public class ItemSpawnerManagerScript : MonoBehaviour
                 {
                     yield return null;
                 }
-                yield return BattleManagerScript.Instance.PauseUntil();
+                yield return BattleManagerScript.Instance.WaitUpdate();
                 timer += Time.fixedDeltaTime;
             }
 

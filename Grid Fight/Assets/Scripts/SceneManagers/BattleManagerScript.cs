@@ -281,7 +281,7 @@ public class BattleManagerScript : MonoBehaviour
         float timer = 0;
         while (timer <= delay)
         {
-            yield return PauseUntil();
+            yield return WaitUpdate();
 
             timer += Time.fixedDeltaTime;
         }
@@ -918,7 +918,7 @@ public class BattleManagerScript : MonoBehaviour
         float timer = 0f;
         while (timer <= 1f)
         {
-            yield return PauseUntil();
+            yield return WaitUpdate();
             if (CurrentSelectedCharacters[playerController].Character != null)
             {
                 while (CurrentSelectedCharacters[playerController].Character.isMoving)
@@ -1258,7 +1258,17 @@ public class BattleManagerScript : MonoBehaviour
     }
 
 
-    public IEnumerator PauseUntil()
+    public IEnumerator WaitUpdate()
+    {
+        yield return null;
+
+        while (CurrentBattleState == BattleState.Pause)
+        {
+            yield return null;
+        }
+    }
+
+    public IEnumerator WaitFixedUpdate()
     {
         yield return new WaitForFixedUpdate();
 

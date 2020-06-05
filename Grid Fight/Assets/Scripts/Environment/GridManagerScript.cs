@@ -452,7 +452,7 @@ public class GridManagerScript : MonoBehaviour
             }
             while (timer <= item.Delay)
             {
-                yield return BattleManagerScript.Instance.PauseUntil();
+                yield return BattleManagerScript.Instance.WaitUpdate();
                 timer += Time.fixedDeltaTime;
             }
         }
