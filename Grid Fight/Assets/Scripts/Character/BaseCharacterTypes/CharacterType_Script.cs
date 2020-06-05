@@ -347,7 +347,7 @@ public class CharacterType_Script : BaseCharacter
                     //Check
                     chargingPs = ParticleManagerScript.Instance.FireParticlesInPosition(nxtAtk.Particles.CastLoopPS, CharInfo.CharacterID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side, nxtAtk.AttackInput);
                     chargingPs.transform.parent = SpineAnim.transform;
-                    chargingPs.transform.position = transform.position;
+                    chargingPs.transform.localPosition = Vector3.zero;
                 }
                 else
                 {
@@ -677,7 +677,7 @@ public class CharacterType_Script : BaseCharacter
             ResetAudioManager();
         }
 
-        if (SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Atk2_AtkToIdle.ToString()) && (!animState.Contains(CharacterAnimationStateType.Defeat_ReverseArrive.ToString()) || !animState.Contains("JumpTransition")))
+        if (SpineAnim.CurrentAnim.Contains("AtkToIdle") && (!animState.Contains(CharacterAnimationStateType.Defeat_ReverseArrive.ToString()) || !animState.Contains("JumpTransition")))
         {
             return;
         }
