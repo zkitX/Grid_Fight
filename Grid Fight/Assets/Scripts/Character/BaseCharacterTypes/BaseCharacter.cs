@@ -1066,6 +1066,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         else if(bdClass.Stat == BuffDebuffStatsType.Damage_Cure)
         {
+
             HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, HealthChangedType.Heal, bdClass.EffectMaker.transform);
             bdClass.EffectMaker.CharInfo.Health += bdClass.CurrentBuffDebuff.Value;
         }
@@ -1078,7 +1079,15 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         else if (bdClass.Stat == BuffDebuffStatsType.Health || bdClass.Stat == BuffDebuffStatsType.Health_Overtime)
         {
-            CharInfo.Health += bdClass.CurrentBuffDebuff.Value;
+            
+            if (bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Perc)
+            {
+                CharInfo.Health +=  (CharInfo.Health / 100f) * bdClass.CurrentBuffDebuff.Value;
+            }
+            else if (bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Value)
+            {
+                CharInfo.Health += bdClass.CurrentBuffDebuff.Value;
+            }
         }
         else
         {
@@ -1152,7 +1161,14 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     iterator++;
                     if (bdClass.Stat == BuffDebuffStatsType.Health || bdClass.Stat == BuffDebuffStatsType.Health_Overtime)
                     {
-                        CharInfo.Health += bdClass.CurrentBuffDebuff.Value;
+                        if (bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Perc)
+                        {
+                            CharInfo.Health += (CharInfo.Health / 100f) * bdClass.CurrentBuffDebuff.Value;
+                        }
+                        else if (bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Value)
+                        {
+                            CharInfo.Health += bdClass.CurrentBuffDebuff.Value;
+                        }
                     }
                     else if (bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Perc)
                     {
@@ -1180,6 +1196,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             else if (bdClass.Stat == BuffDebuffStatsType.Health || bdClass.Stat == BuffDebuffStatsType.Health_Overtime)
             {
                 
+            }
+            else if (bdClass.Stat == BuffDebuffStatsType.Damage_Cure)
+            {
+
             }
             else
             {
@@ -1714,7 +1734,15 @@ public class Buff_DebuffClass
 {
     public string Name;
     public float Duration;
-    public float Value;
+    public float Value
+    {
+        get
+        {
+            return UnityEngine.Random.Range(_Value.x, _Value.y);
+        }
+    }
+
+    public Vector2 _Value;
     public CharacterAnimationStateType AnimToFire;
     public BuffDebuffStatsType Stat;
     public StatsCheckerType StatsChecker;
@@ -1726,13 +1754,13 @@ public class Buff_DebuffClass
     public BaseCharacter EffectMaker;
 
 
-    public Buff_DebuffClass(string name, float duration, float value, BuffDebuffStatsType stat,
+    public Buff_DebuffClass(string name, float duration, Vector2 value, BuffDebuffStatsType stat,
         StatsCheckerType statsChecker, ElementalResistenceClass elementalResistence, ElementalType elementalPower
         , CharacterAnimationStateType animToFire, ParticlesType particlesToFire, BaseCharacter effectMaker)
     {
         Name = name;
         Duration = duration;
-        Value = value;
+        _Value = value;
         Stat = stat;
         StatsChecker = statsChecker;
         //AttackT = attackT;

@@ -31,7 +31,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
         {
             CharHitted = other.GetComponentInParent<BaseCharacter>();
             CharHitted.Buff_DebuffCo(new Buff_DebuffClass(ItemPowerUpInfo.Name, ItemPowerUpInfo.EffectDuration,
-                Random.Range(ItemPowerUpInfo.Value.x, ItemPowerUpInfo.Value.y),
+                ItemPowerUpInfo.Value,
                 ItemPowerUpInfo.StatsToAffect, ItemPowerUpInfo.StatsChecker, new ElementalResistenceClass(),
                 ElementalType.Neutral, ItemPowerUpInfo.AnimToFire, ItemPowerUpInfo.Particles, other.GetComponentInParent<BaseCharacter>()));
             CharHitted.Sic.PotionPicked++;

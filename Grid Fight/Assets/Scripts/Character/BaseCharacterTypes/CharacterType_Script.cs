@@ -346,7 +346,7 @@ public class CharacterType_Script : BaseCharacter
                         ps.transform.parent = null;
                         ps.SetActive(false);
                     }
-
+                    ResetAudioManager();
                     yield break;
                 }
             }
@@ -365,6 +365,7 @@ public class CharacterType_Script : BaseCharacter
                             StopPowerfulAtk = SpecialAttackStatus.None;
                             ps.transform.parent = null;
                             ps.SetActive(false);
+                            ResetAudioManager();
                             yield break;
                         }
                     }

@@ -423,7 +423,7 @@ public Vector2 Duration_Debuff_Trap_ForTime;
         foreach (var Effect in Effects)
         {
             //Creation of the Buff/Debuff
-            Buff_DebuffClass bdClass = new Buff_DebuffClass(Effect.Name, Effect.Duration.x, Effect.Value.x,
+            Buff_DebuffClass bdClass = new Buff_DebuffClass(Effect.Name, Effect.Duration.x, Effect.Value,
                 Effect.StatsToAffect, Effect.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, Effect.AnimToFire, Effect.Particles, movingChar);
 
             movingChar.Buff_DebuffCo(bdClass);

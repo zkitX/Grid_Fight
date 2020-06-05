@@ -239,7 +239,7 @@ public class BulletScript : MonoBehaviour
                 {
                     foreach (ScriptableObjectAttackEffect item in BulletEffects)
                     {
-                        target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.Value.x, item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles, CharOwner));
+                        target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.Value, item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles, CharOwner));
                     }
                 }
             }
