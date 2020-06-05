@@ -111,7 +111,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: S
+  m_text: D
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7da1647b7446d374c90f7016917be00a, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: c06346e2c5025c7468b09774982c6ad2, type: 2}
@@ -926,6 +926,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6581044320134047783}
+  - component: {fileID: 5087555822729791139}
+  - component: {fileID: 2058453353319348235}
   m_Layer: 0
   m_Name: Potion-Template
   m_TagString: Untagged
@@ -948,6 +950,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5087555822729791139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6581044320134047782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07aa95c07b4154545863ed40168b831d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemPowerUpInfo: {fileID: 0}
+  color: 0
+  puText: {fileID: 6383433807686818619}
+  Anim: {fileID: 6581044318409826549}
+--- !u!65 &2058453353319348235
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6581044320134047782}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8751642, y: 0.8548939, z: 1}
+  m_Center: {x: -0.006241828, y: -0.07725036, z: 0}
 --- !u!1 &6581044320248101289
 GameObject:
   m_ObjectHideFlags: 0

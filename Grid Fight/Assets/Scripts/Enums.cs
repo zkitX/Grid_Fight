@@ -331,8 +331,8 @@ public enum BuffDebuffStatsType
     DamageStats_BaseDamage,
     Damage_Cure,
     Zombification,
-    BlockTile
-
+    BlockTile,
+    ShieldStats_BaseShieldRegeneration
 }
 
 public enum WaveStatsType
@@ -513,7 +513,8 @@ public enum ParticlesType
     Stage01_Boss_FaceChanging_WarDrums,
     Stage01_Boss_FaceChanging_LifeDrums,
     Stage01_Boss_FaceChanging_MoonDrums,
-    Stage01_Boss_CrystalTomb_Effect
+    Stage01_Boss_CrystalTomb_Effect,
+    PowerUp_Shield
 }
 
 
@@ -539,7 +540,8 @@ public enum ItemType
     PowerUP_Health,
     PowerUP_FullRecovery,
     PowerUP_Stamina,
-    PowerUp_All
+    PowerUp_All,
+    PowerUp_Shield,
 }
 
 
@@ -883,3 +885,12 @@ public enum LevelType
     Goddess
 }
 
+public enum PowerUpColorTypes
+{
+    White = 0,
+    Red = 1,
+    Blue = 2,
+    Purple = 3,
+    Green = 4,
+    Orange = 5,
+}

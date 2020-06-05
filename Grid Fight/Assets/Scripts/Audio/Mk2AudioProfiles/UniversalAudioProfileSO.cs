@@ -23,6 +23,7 @@ public class UniversalAudioProfileSO : BaseAudioProfileSO
     public AudioClipInfoClass PowerUp_Speed;
     public AudioClipInfoClass PowerUp_Stamina;
     public AudioClipInfoClass PowerUp_Damage;
+    public AudioClipInfoClass PowerUp_Shield;
 
     [Header("UI")]
     public AudioClipInfoClass Dialogue_Entering;

@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ItemsPowerUPsInfoScript : MonoBehaviour
 {
     public ScriptableObjectItemPowerUps ItemPowerUpInfo;
-    public SpriteRenderer Icon;
+    //public SpriteRenderer Icon;
+    public PowerUpColorTypes color = PowerUpColorTypes.White;
+    public TextMeshPro puText = null;
     private IEnumerator DurationOnBattleFieldCo;
     public Animator Anim;
 
@@ -13,8 +16,12 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
     public void SetItemPowerUp(ScriptableObjectItemPowerUps itemPowerUpInfo, Vector3 pos, float duration = 0f)
     {
         ItemPowerUpInfo = itemPowerUpInfo;
-        Icon.sprite = itemPowerUpInfo.Icon;
+        //Icon.sprite = itemPowerUpInfo.Icon;
+        puText.text = itemPowerUpInfo.powerUpText;
+        color = itemPowerUpInfo.color;
         transform.position = pos;
+        Anim.SetInteger("Color", (int)color);
+        Anim.SetBool("FadeInOut", true);
         if (DurationOnBattleFieldCo != null)
         {
             StopCoroutine(DurationOnBattleFieldCo);
@@ -22,7 +29,6 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
 
         DurationOnBattleFieldCo = DurationOnBattleField_Co(duration);
         StartCoroutine(DurationOnBattleFieldCo);
-        Anim.SetBool("FadeInOut", true);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -58,6 +64,10 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
                 case (BuffDebuffStatsType.DamageStats_BaseDamage):
                     itemType = ItemType.PowerUp_Damage;
                     powerUpAudio = BattleManagerScript.Instance.AudioProfile.PowerUp_Damage;
+                    break;
+                case (BuffDebuffStatsType.ShieldStats_BaseShieldRegeneration):
+                    itemType = ItemType.PowerUp_Shield;
+                    powerUpAudio = BattleManagerScript.Instance.AudioProfile.PowerUp_Shield;
                     break;
                 default:
                     Debug.LogError("Error with potion type in event collection... Collected powerup effect is: " + ItemPowerUpInfo.StatsToAffect.ToString());
