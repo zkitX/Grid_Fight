@@ -314,6 +314,7 @@ public class CharacterType_Script : BaseCharacter
                 yield break;
             }
             isSpecialLoading = true;
+            isSpecialStop = false;
             chargingAttackTimer = 0;
             currentAttackPhase = AttackPhasesType.Start;
             SetAnimation(nxtAtk.PrefixAnim + "_IdleToAtk", false, 0);
