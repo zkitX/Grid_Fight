@@ -440,6 +440,12 @@ public class BattleManagerScript : MonoBehaviour
         {
             StartCoroutine(Zombification_Co(zombie));
         }
+        else
+        {
+            UIBattleManager.Instance.Lose.gameObject.SetActive(true);
+            CurrentBattleState = BattleState.End;
+            return;
+        }
     }
 
     IEnumerator Zombification_Co(BaseCharacter zombie)
