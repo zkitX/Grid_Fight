@@ -53,7 +53,7 @@ public class UIWinLoseScript : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("SplashPage202004");
+            SceneManager.LoadScene("SplashPage_GIO");
         }
     }
 

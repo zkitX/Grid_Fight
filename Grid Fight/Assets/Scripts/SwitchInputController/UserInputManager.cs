@@ -297,6 +297,7 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonZRPressedEvent(int player)
     {
         //Debug.Log(player + "  " + "ZR Press");
+        //ChargedAttackStillPressing(player);
     }
 
     private void Instance_ButtonRPressedEvent(int player)

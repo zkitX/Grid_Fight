@@ -56,7 +56,20 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public SpineAnimationManager SpineAnim;
     public bool _IsOnField = false;
     public bool CanAttack = false;
-    public bool isSpecialLoading = false;
+    public bool isSpecialLoading
+    {
+        get
+        {
+            return isSpecialStop ? false : _isSpecialLoading;
+        }
+        set
+        {
+            _isSpecialLoading = value;
+        }
+    }
+
+    public bool _isSpecialLoading = false;
+    public bool isSpecialStop = false;
     public bool isSpecialQueueing = false;
     public List<BuffDebuffClass> BuffsDebuffsList = new List<BuffDebuffClass>();
     public List<CharacterActionType> CharActionlist = new List<CharacterActionType>();
