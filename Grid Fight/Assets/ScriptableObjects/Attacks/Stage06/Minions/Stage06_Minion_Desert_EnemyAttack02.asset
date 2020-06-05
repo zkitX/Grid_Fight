@@ -18,6 +18,8 @@ MonoBehaviour:
   DamageMultiplier: {x: 1, y: 1}
   AttackInput: 1
   AttackAnim: 0
+  StaminaCost: 10
+  ExperiencePoints: 10
   PrefixAnim: 0
   Particles:
     Left:
@@ -88,6 +90,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+      ChildrenBulletDelay: 0.5
       BulletEffectTiles: []
       BulletGapStartingTile: {x: 0, y: 0}
       HasEffect: 0
@@ -101,6 +104,18 @@ MonoBehaviour:
       Show: 1
       BulletEffectTiles:
       - Pos: {x: -1, y: 0}
+        Trajectory_Y:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        Trajectory_Z:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -109,6 +124,18 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
       - Pos: {x: 1, y: 0}
+        Trajectory_Y:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        Trajectory_Z:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
         HasEffect: 0
         showImpact: 1
         Effects: []

@@ -10,30 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage06_Minion_Desert_EnemyAttack01
+  m_Name: Stage06_Minion_Forest_EnemyAttack2_Kabuto
   m_EditorClassIdentifier: 
   Chances: 100
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
   DamageMultiplier: {x: 1, y: 1}
-  AttackInput: 0
+  AttackInput: 1
   AttackAnim: 0
   StaminaCost: 10
   ExperiencePoints: 10
   PrefixAnim: 0
   Particles:
     Left:
-      Cast: {fileID: 2767444965936388806, guid: d7bbc84c846af864f8f1df7e5d6bfacd,
+      Cast: {fileID: 5695902861117657926, guid: 7ccb7f8e9bdd7e64bb1d30448c5d0d28,
         type: 3}
-      Bullet: {fileID: 3348475837081534812, guid: 49def5344fbc5a94abb70880874518f8,
+      Bullet: {fileID: 4755172846363096840, guid: 816182e4a32955940b67af7759293028,
         type: 3}
-      Hit: {fileID: 4602912456739269625, guid: e062812cb24a05246b731fe1b2655526, type: 3}
+      Hit: {fileID: 4439312280833311939, guid: 015a9a10581a59544997c134ecbe30df, type: 3}
     Right:
-      Cast: {fileID: 2767444965936388806, guid: 6b4ddd1ff3e272f4dbe368fcf44dd110,
+      Cast: {fileID: 5695902861117657926, guid: 1a7b993f0f5626f47bdcfa0fa7fa0d61,
         type: 3}
-      Bullet: {fileID: 3348475837081534812, guid: 81602cb7fad8d7c4f879d25abc6f6031,
+      Bullet: {fileID: 4755172846363096840, guid: 1c1fbe4379da2ce40b78c72c9a215d76,
         type: 3}
-      Hit: {fileID: 4602912456739269625, guid: 19c713fcba6c1c141b462c5649c787b0, type: 3}
+      Hit: {fileID: 4439312280833311939, guid: 0e58004a8b5fa2c45b9a466e46f05bd1, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
@@ -104,7 +104,7 @@ MonoBehaviour:
     - Delay: 2
       Show: 1
       BulletEffectTiles:
-      - Pos: {x: 0, y: -1}
+      - Pos: {x: -1, y: 0}
         Trajectory_Y:
           serializedVersion: 2
           m_Curve: []
@@ -124,7 +124,7 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
-      - Pos: {x: 0, y: 1}
+      - Pos: {x: 1, y: 0}
         Trajectory_Y:
           serializedVersion: 2
           m_Curve: []
@@ -146,5 +146,5 @@ MonoBehaviour:
         DurationOnTile: 0
     StatToCheck: 1
     ValueChecker: 2
-    PercToCheck: 0
+    PercToCheck: -9.01
     Chances: 100

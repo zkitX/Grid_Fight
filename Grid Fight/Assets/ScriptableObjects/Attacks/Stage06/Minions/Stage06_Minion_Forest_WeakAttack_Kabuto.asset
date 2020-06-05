@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage06_Minion_Desert_EnemyAttack01
+  m_Name: Stage06_Minion_Forest_WeakAttack_Kabuto
   m_EditorClassIdentifier: 
   Chances: 100
-  CurrentAttackType: 1
+  CurrentAttackType: 0
   AttackRatioMultiplier: 1
   DamageMultiplier: {x: 1, y: 1}
   AttackInput: 0
@@ -23,17 +23,15 @@ MonoBehaviour:
   PrefixAnim: 0
   Particles:
     Left:
-      Cast: {fileID: 2767444965936388806, guid: d7bbc84c846af864f8f1df7e5d6bfacd,
+      Cast: {fileID: 178302540402327453, guid: 773676afe6e9d034ba7fa761dfda8787, type: 3}
+      Bullet: {fileID: 4118577229431664198, guid: add510253839b8d41ba150166540c337,
         type: 3}
-      Bullet: {fileID: 3348475837081534812, guid: 49def5344fbc5a94abb70880874518f8,
-        type: 3}
-      Hit: {fileID: 4602912456739269625, guid: e062812cb24a05246b731fe1b2655526, type: 3}
+      Hit: {fileID: 7894086743769815557, guid: 569a245d9713a5e4487df6e53415f482, type: 3}
     Right:
-      Cast: {fileID: 2767444965936388806, guid: 6b4ddd1ff3e272f4dbe368fcf44dd110,
+      Cast: {fileID: 178302540402327453, guid: cd43ac0085c2f9743a2fca1895f9ccf3, type: 3}
+      Bullet: {fileID: 4118577229431664198, guid: 01fd151cda923ab43ac206220cee26a2,
         type: 3}
-      Bullet: {fileID: 3348475837081534812, guid: 81602cb7fad8d7c4f879d25abc6f6031,
-        type: 3}
-      Hit: {fileID: 4602912456739269625, guid: 19c713fcba6c1c141b462c5649c787b0, type: 3}
+      Hit: {fileID: 7894086743769815557, guid: 7ef6bf741af501c43b47b3c663ce8822, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
