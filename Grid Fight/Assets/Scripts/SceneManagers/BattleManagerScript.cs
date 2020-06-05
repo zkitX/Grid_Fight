@@ -231,7 +231,10 @@ public class BattleManagerScript : MonoBehaviour
         {
             for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)
             {
-                GridManagerScript.Instance.SetBattleTileState(currentCharacter.UMS.Pos[i], BattleTileStateType.Empty);
+                if(GridManagerScript.Instance.isPosOnField(currentCharacter.UMS.Pos[i]))
+                {
+                    GridManagerScript.Instance.SetBattleTileState(currentCharacter.UMS.Pos[i], BattleTileStateType.Empty);
+                }
                 currentCharacter.UMS.Pos[i] = Vector2Int.zero;
             }
         }
