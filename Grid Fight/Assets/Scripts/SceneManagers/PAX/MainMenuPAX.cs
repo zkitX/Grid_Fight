@@ -133,7 +133,7 @@ public class MainMenuPAX : MonoBehaviour
         obj.allowSceneActivation = true;
         yield return new WaitForSecondsRealtime(1f);
     //    Debug.LogError("4");
-        SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("SplashPage202004"));
+        SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("SplashPage_GIO"));
     }
 
     public void ShowBattleScene()
