@@ -295,6 +295,8 @@ public class CharacterType_Script : BaseCharacter
             chargingPs.SetActive(false);
             chargingPs = null;
         }
+        isSpecialStop = false;
+        isSpecialLoading = false;
         isChargingParticlesOn = false;
         ResetAudioManager();
     }
@@ -343,6 +345,7 @@ public class CharacterType_Script : BaseCharacter
                     //Check
                     chargingPs = ParticleManagerScript.Instance.FireParticlesInPosition(nxtAtk.Particles.CastLoopPS, CharInfo.CharacterID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side, nxtAtk.AttackInput);
                     chargingPs.transform.parent = SpineAnim.transform;
+                    chargingPs.transform.localPosition = Vector3.zero;
                 }
                 else
                 {

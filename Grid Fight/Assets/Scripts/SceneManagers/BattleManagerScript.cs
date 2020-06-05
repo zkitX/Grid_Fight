@@ -1093,10 +1093,11 @@ public class BattleManagerScript : MonoBehaviour
         {
             if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null)
             {
-                CurrentSelectedCharacters[controllerType].Character.isSpecialLoading = false;
+                CurrentSelectedCharacters[controllerType].Character.isSpecialStop = true;
             }
         }
     }
+    
 
     public void StartChargingAttack(ControllerType controllerType, AttackInputType atk)
     {
@@ -1196,7 +1197,7 @@ public class BattleManagerScript : MonoBehaviour
         if (CurrentBattleState == BattleState.Pause)
         {
             CurrentBattleState = BattleState.End;
-            UnityEngine.SceneManagement.SceneManager.LoadScene("SplashPage202004");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("SplashPage_GIO");
             //UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
             EventManager.Instance.ResetEventsInManager();
         }
