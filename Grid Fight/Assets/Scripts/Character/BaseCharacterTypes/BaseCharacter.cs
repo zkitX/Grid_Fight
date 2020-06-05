@@ -1066,8 +1066,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         else if(bdClass.Stat == BuffDebuffStatsType.Damage_Cure)
         {
-
-            HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, HealthChangedType.Heal, bdClass.EffectMaker.transform);
+            HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, HealthChangedType.Heal, bdClass.EffectMaker.SpineAnim.transform);
             bdClass.EffectMaker.CharInfo.Health += bdClass.CurrentBuffDebuff.Value;
         }
         else if (bdClass.Stat == BuffDebuffStatsType.Zombification)
@@ -1125,7 +1124,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
             if (statToCheck[1].Contains("Health"))
             {
-                HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, bdClass.CurrentBuffDebuff.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, transform);
+                HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, bdClass.CurrentBuffDebuff.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, SpineAnim.transform);
             }
 
             if (statToCheck[1] == "BaseSpeed")
@@ -1179,7 +1178,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     {
                         field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? 0 : (float)field.GetValue(parentField.GetValue(CharInfo)) + bdClass.CurrentBuffDebuff.Value);
                     }
-                    HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, bdClass.CurrentBuffDebuff.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, transform);
+                    HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, bdClass.CurrentBuffDebuff.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, SpineAnim.transform);
                 }
 
 
@@ -1600,7 +1599,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         SetFinalDamage(attacker ,damage);
 
-        HealthStatsChangedEvent?.Invoke(damage, healthCT, transform);
+
+        HealthStatsChangedEvent?.Invoke(damage, healthCT, SpineAnim.transform);
         return res;
     }
 
