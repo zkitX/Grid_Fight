@@ -12,8 +12,6 @@ public class UITutorialScript : MonoBehaviour
         if (!isSetup && InputController.Instance != null && UserInputManager.Instance != null && UserInputManager.Instance.IsReadyToBeSetUp)
         {
             isSetup = true;
-            Debug.Log("entrato");
-
             InputController.Instance.ButtonMinusUpEvent += Instance_ButtonMinusUpEvent;
             InputController.Instance.ButtonPlusUpEvent += Instance_ButtonPlusUpEvent;
         }
@@ -21,7 +19,8 @@ public class UITutorialScript : MonoBehaviour
 
     private void Instance_ButtonMinusUpEvent(int player)
     {
-        Debug.Log("entrato2");
+        AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Menus_SelectButton, AudioBus.MidPrio);
+
         if (BattleManagerScript.Instance.CurrentBattleState == BattleState.FungusPuppets)
         {
             return;

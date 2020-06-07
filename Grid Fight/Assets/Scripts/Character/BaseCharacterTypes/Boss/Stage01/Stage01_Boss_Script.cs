@@ -133,6 +133,7 @@ public class Stage01_Boss_Script : MinionType_Script
             MovementPsOut = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_TeleportationOut);
             
         }
+        AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, CharInfo.AudioProfile.Footsteps, AudioBus.LowPrio, SpineAnim.transform);
         MovementPsOut.transform.position = transform.position;
         MovementPsOut.SetActive(true);
         float timer = 0;
