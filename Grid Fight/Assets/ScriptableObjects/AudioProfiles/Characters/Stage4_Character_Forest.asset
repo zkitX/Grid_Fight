@@ -15,8 +15,13 @@ MonoBehaviour:
   Footsteps:
     clip: {fileID: 0}
     clips: []
+    audioPriority: 0
+    audioBus: {fileID: -4375652097201345804, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   RapidAttack:
     Cast:
@@ -27,14 +32,24 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 4818362890b32c54abbd21aa91cc34db, type: 3}
       - {fileID: 8300000, guid: 3bcf8ce0f704d5844aea69c08e387439, type: 3}
       - {fileID: 8300000, guid: fe6acce64db4db84692d8f1ada2c51ed, type: 3}
+      audioPriority: 50
+      audioBus: {fileID: -5916989765543191300, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 1
-      baseVolume: 0.2
+      cooldownType: 0
+      cooldownPeriod: 1
+      baseVolume: 0.5
     Loop:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: -5916989765543191300, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Impact:
       clip: {fileID: 8300000, guid: 3f979cbbf53dc7245a4f21c70d87946d, type: 3}
@@ -43,8 +58,13 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 6cdfdedce20296f47b7178147fa44f40, type: 3}
       - {fileID: 8300000, guid: 0d5bccc951f4d7246be897fe2cbb364e, type: 3}
       - {fileID: 8300000, guid: 865dc25b453bbcd45ba120d9d3335d2d, type: 3}
+      audioPriority: 50
+      audioBus: {fileID: -5916989765543191300, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 1
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 0.4
   PowerfulAttack:
     Cast:
@@ -55,14 +75,24 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 4818362890b32c54abbd21aa91cc34db, type: 3}
       - {fileID: 8300000, guid: 3bcf8ce0f704d5844aea69c08e387439, type: 3}
       - {fileID: 8300000, guid: fe6acce64db4db84692d8f1ada2c51ed, type: 3}
+      audioPriority: 50
+      audioBus: {fileID: -5916989765543191300, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 1
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 0.4
     Loop:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: -5916989765543191300, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Impact:
       clip: {fileID: 8300000, guid: 3f979cbbf53dc7245a4f21c70d87946d, type: 3}
@@ -71,75 +101,135 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 88d0d42fc86aa134f9d89c4b584b60c4, type: 3}
       - {fileID: 8300000, guid: 2323cdc73dab514449d1756b8fb85fe4, type: 3}
       - {fileID: 8300000, guid: 05c4cd760f342034c9752003660ecec8, type: 3}
+      audioPriority: 50
+      audioBus: {fileID: -5916989765543191300, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 1
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 0.4
   Skill1:
     Cast:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: -5916989765543191300, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Loop:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: -5916989765543191300, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Impact:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: -5916989765543191300, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
   Skill2:
     Cast:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: -5916989765543191300, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Loop:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: -5916989765543191300, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Impact:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: -5916989765543191300, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
   Skill3:
     Cast:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: -5916989765543191300, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Loop:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: -5916989765543191300, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
     Impact:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: -5916989765543191300, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
+      cooldownType: 0
+      cooldownPeriod: 1
       baseVolume: 1
   ArrivingCry:
     clip: {fileID: 0}
     clips: []
+    audioPriority: 100
+    audioBus: {fileID: 1451753757969713243, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1
   Death:
     clip: {fileID: 0}
     clips: []
+    audioPriority: 100
+    audioBus: {fileID: 1451753757969713243, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
     baseVolume: 1

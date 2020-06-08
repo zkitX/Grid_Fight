@@ -186,7 +186,7 @@ public class Stage01_Boss_Script : MinionType_Script
                         if(FaceChangingWarDrums == null)
                         {
                             FaceChangingWarDrums = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_FaceChanging_WarDrums);
-                           
+                            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, CharInfo.AudioProfile.Skill3.Cast, AudioBus.MidPrio, transform);
                         }
                         FaceChangingWarDrums.transform.parent = SpineAnim.transform;
                         FaceChangingWarDrums.transform.localPosition = Vector3.zero;
@@ -195,17 +195,17 @@ public class Stage01_Boss_Script : MinionType_Script
                     } 
                     break;
                 case AttackInputType.Strong:
-                    if (CurrentPhase != Stage01_Boss_MaskType.WarDrums)
+                    if (CurrentPhase != Stage01_Boss_MaskType.CrystalTomb)
                     {
                         if (FaceChangingWarDrums == null)
                         {
-                            FaceChangingWarDrums = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_FaceChanging_WarDrums);
-                          
+                            FaceChangingWarDrums = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_CrystalTomb_Effect);
+                            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, CharInfo.AudioProfile.Skill3.Cast, AudioBus.MidPrio, transform);
                         }
                         FaceChangingWarDrums.transform.parent = SpineAnim.transform;
                         FaceChangingWarDrums.transform.localPosition = Vector3.zero;
                         FaceChangingWarDrums.SetActive(true);
-                        CurrentPhase = Stage01_Boss_MaskType.WarDrums;
+                        CurrentPhase = Stage01_Boss_MaskType.CrystalTomb;
                     }
                     base.SetAnimation(Stage01_Boss_MaskType.CrystalTomb.ToString() + "_" + animState, loop, transition, _pauseOnLastFrame);
                     return;
@@ -215,7 +215,7 @@ public class Stage01_Boss_Script : MinionType_Script
                         if (FaceChangingLifeDrums == null)
                         {
                             FaceChangingLifeDrums = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_FaceChanging_LifeDrums);
-                          
+                            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, CharInfo.AudioProfile.Skill3.Cast, AudioBus.MidPrio, transform);
                         }
                         FaceChangingLifeDrums.transform.parent = SpineAnim.transform;
                         FaceChangingLifeDrums.transform.localPosition = Vector3.zero;
@@ -229,7 +229,7 @@ public class Stage01_Boss_Script : MinionType_Script
                         if (FaceChangingMoonDrums == null)
                         {
                             FaceChangingMoonDrums = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_FaceChanging_MoonDrums);
-                         
+                            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, CharInfo.AudioProfile.Skill3.Cast, AudioBus.MidPrio, transform);
                         }
                         FaceChangingMoonDrums.transform.parent = SpineAnim.transform;
                         FaceChangingMoonDrums.transform.localPosition = Vector3.zero;

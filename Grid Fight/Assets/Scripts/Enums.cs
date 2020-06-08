@@ -860,6 +860,7 @@ public enum AudioBus
     LowPrio = 0,
     MidPrio = 50,
     HighPrio = 100,
+    NonSilenced = 500,
 }
 
 public enum MovementCurveType

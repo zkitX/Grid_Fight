@@ -53,6 +53,7 @@ public class GridFightSayDialog : SayDialog
         if (!isAnimCompleted)
         {
             isAnimCompleted = true;
+            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Music, BattleManagerScript.Instance.AudioProfile.Dialogue_TextEnd, AudioBus.HighPrio); //GIORGIO: AudioSourceType is Music because Fungus would kill it when stopping text loop
         }
 
         AnimSpeedChanger(10);

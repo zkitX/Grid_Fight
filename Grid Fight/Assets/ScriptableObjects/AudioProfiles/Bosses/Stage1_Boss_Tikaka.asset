@@ -14,13 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Footsteps:
     clip: {fileID: 0}
-    clips: []
-    audioBus: 0
-    randomiseOrder: 0
-    moreThanOneClip: 0
+    clips:
+    - {fileID: 8300000, guid: fedb60a798a794d46ba949b755330afb, type: 3}
+    - {fileID: 8300000, guid: 4a45d8e2eebbac949b86f1ab62539137, type: 3}
+    - {fileID: 8300000, guid: 7be3b3f6954482f4d824eb21d80f8079, type: 3}
+    - {fileID: 8300000, guid: f0b34c31ca0dbef46a304deb981870a8, type: 3}
+    - {fileID: 8300000, guid: 95ce32fe3eeb1d746a484878cea4cf4d, type: 3}
+    - {fileID: 8300000, guid: 417d521a75fdc624b9b8812aa112ee49, type: 3}
+    audioPriority: 0
+    audioBus: {fileID: 6386204551002632490, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
+    randomiseOrder: 1
+    moreThanOneClip: 1
     cooldownType: 0
     cooldownPeriod: 1
-    baseVolume: 1
+    baseVolume: 0.8
   RapidAttack:
     Cast:
       clip: {fileID: 0}
@@ -29,16 +37,20 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 8bc59a06bcda60744b88c4c3d9a4eef2, type: 3}
       - {fileID: 8300000, guid: 6d5bbf745d310e4428bfca3fc950e059, type: 3}
       - {fileID: 8300000, guid: 5e79b86d73c144e49ba66158e1d27e48, type: 3}
-      audioBus: 50
+      audioPriority: 50
+      audioBus: {fileID: 6386204551002632490, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 1
       cooldownType: 0
       cooldownPeriod: 1
-      baseVolume: 1
+      baseVolume: 0.6
     Loop:
       clip: {fileID: 0}
       clips: []
-      audioBus: 50
+      audioPriority: 50
+      audioBus: {fileID: 6386204551002632490, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
       cooldownType: 0
@@ -47,7 +59,9 @@ MonoBehaviour:
     Impact:
       clip: {fileID: 0}
       clips: []
-      audioBus: 50
+      audioPriority: 50
+      audioBus: {fileID: 6386204551002632490, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
       cooldownType: 0
@@ -57,20 +71,23 @@ MonoBehaviour:
     Cast:
       clip: {fileID: 0}
       clips:
-      - {fileID: 8300000, guid: 8600283e3f5236a44aa3e468ab60542f, type: 3}
-      - {fileID: 8300000, guid: 6214e89455b279542a5eb5ac936441e4, type: 3}
-      - {fileID: 8300000, guid: 77eb0b9f226081e41a4b6479701dddd3, type: 3}
-      - {fileID: 8300000, guid: bc584422efab1034fa96ff59ac620412, type: 3}
-      audioBus: 50
+      - {fileID: 8300000, guid: a4299da3eaf705b4bbc931403995aec9, type: 3}
+      - {fileID: 8300000, guid: 1079c4f0865922e44ab70304a629039c, type: 3}
+      - {fileID: 8300000, guid: eaa7f399a6f17a7469cbb331fbb2e219, type: 3}
+      audioPriority: 50
+      audioBus: {fileID: 6386204551002632490, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 1
       cooldownType: 0
       cooldownPeriod: 1
-      baseVolume: 1
+      baseVolume: 0.7
     Loop:
       clip: {fileID: 0}
       clips: []
-      audioBus: 50
+      audioPriority: 50
+      audioBus: {fileID: 6386204551002632490, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
       cooldownType: 0
@@ -79,7 +96,9 @@ MonoBehaviour:
     Impact:
       clip: {fileID: 0}
       clips: []
-      audioBus: 50
+      audioPriority: 50
+      audioBus: {fileID: 6386204551002632490, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
       cooldownType: 0
@@ -93,16 +112,20 @@ MonoBehaviour:
       - {fileID: 8300000, guid: ff96dcbb37bcafe4a81fd535269b594f, type: 3}
       - {fileID: 8300000, guid: 68aa39cc050a9154297bde375081ca78, type: 3}
       - {fileID: 8300000, guid: b481a358be5af25458a00a2aa5de575b, type: 3}
-      audioBus: 50
+      audioPriority: 50
+      audioBus: {fileID: 6386204551002632490, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 1
       cooldownType: 0
       cooldownPeriod: 1
-      baseVolume: 1
+      baseVolume: 0.5
     Loop:
       clip: {fileID: 0}
       clips: []
-      audioBus: 50
+      audioPriority: 50
+      audioBus: {fileID: 6386204551002632490, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
       cooldownType: 0
@@ -111,7 +134,9 @@ MonoBehaviour:
     Impact:
       clip: {fileID: 0}
       clips: []
-      audioBus: 50
+      audioPriority: 50
+      audioBus: {fileID: 6386204551002632490, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
       cooldownType: 0
@@ -125,16 +150,20 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 6214e89455b279542a5eb5ac936441e4, type: 3}
       - {fileID: 8300000, guid: 77eb0b9f226081e41a4b6479701dddd3, type: 3}
       - {fileID: 8300000, guid: bc584422efab1034fa96ff59ac620412, type: 3}
-      audioBus: 50
+      audioPriority: 50
+      audioBus: {fileID: 6386204551002632490, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 1
       cooldownType: 0
       cooldownPeriod: 1
-      baseVolume: 1
+      baseVolume: 0.5
     Loop:
       clip: {fileID: 0}
       clips: []
-      audioBus: 50
+      audioPriority: 50
+      audioBus: {fileID: 6386204551002632490, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
       cooldownType: 0
@@ -143,7 +172,9 @@ MonoBehaviour:
     Impact:
       clip: {fileID: 0}
       clips: []
-      audioBus: 50
+      audioPriority: 50
+      audioBus: {fileID: 6386204551002632490, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
       cooldownType: 0
@@ -153,11 +184,12 @@ MonoBehaviour:
     Cast:
       clip: {fileID: 0}
       clips:
-      - {fileID: 8300000, guid: 8600283e3f5236a44aa3e468ab60542f, type: 3}
-      - {fileID: 8300000, guid: 6214e89455b279542a5eb5ac936441e4, type: 3}
-      - {fileID: 8300000, guid: 77eb0b9f226081e41a4b6479701dddd3, type: 3}
-      - {fileID: 8300000, guid: bc584422efab1034fa96ff59ac620412, type: 3}
-      audioBus: 50
+      - {fileID: 8300000, guid: d1cca2e5681e10f4293439b900574226, type: 3}
+      - {fileID: 8300000, guid: cac6773e2535c284bb8be7c1b8f76280, type: 3}
+      - {fileID: 8300000, guid: 472aa40bbe3b59f4987f8aa714a31a71, type: 3}
+      audioPriority: 50
+      audioBus: {fileID: 6386204551002632490, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 1
       cooldownType: 0
@@ -166,7 +198,9 @@ MonoBehaviour:
     Loop:
       clip: {fileID: 0}
       clips: []
-      audioBus: 50
+      audioPriority: 50
+      audioBus: {fileID: 6386204551002632490, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
       cooldownType: 0
@@ -175,7 +209,9 @@ MonoBehaviour:
     Impact:
       clip: {fileID: 0}
       clips: []
-      audioBus: 50
+      audioPriority: 50
+      audioBus: {fileID: 6386204551002632490, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
       cooldownType: 0
@@ -184,7 +220,9 @@ MonoBehaviour:
   ArrivingCry:
     clip: {fileID: 0}
     clips: []
-    audioBus: 100
+    audioPriority: 100
+    audioBus: {fileID: -2435897246237370743, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0
@@ -193,7 +231,9 @@ MonoBehaviour:
   Death:
     clip: {fileID: 0}
     clips: []
-    audioBus: 100
+    audioPriority: 100
+    audioBus: {fileID: -2435897246237370743, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0

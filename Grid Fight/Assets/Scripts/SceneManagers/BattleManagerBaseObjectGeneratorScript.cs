@@ -146,7 +146,7 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
             if (stage.StageAudioProfile.music != null)
                 AudioManager.GetComponent<AudioManagerMk2>().PlaySound(AudioSourceType.Music, stage.StageAudioProfile.music, AudioBus.Music, loop: true);
             if (stage.StageAudioProfile.ambience != null)
-                AudioManager.GetComponent<AudioManagerMk2>().PlaySound(AudioSourceType.Ambience, stage.StageAudioProfile.ambience, AudioBus.Music, loop: true);
+                AudioManager.GetComponent<AudioManagerMk2>().PlaySound(AudioSourceType.Ambience, stage.StageAudioProfile.ambience, AudioBus.Music, loop: true, fadeInDuration: 1f);
         }
 
         UserInputManager.Instance.StartUserInputManager();

@@ -23,7 +23,7 @@ public class ManagedAudioSource : MonoBehaviour
             }
         }
     }
-    protected AudioSource source = null;
+    [HideInInspector] public AudioSource source = null; //GIORGIO: from protected to public, check if it's ok.
     protected AudioClipInfoClass audioClipInfo;
     public bool isPlaying
     {
@@ -87,10 +87,14 @@ public class ManagedAudioSource : MonoBehaviour
         //SET THE VOLUME BASED ON THE BASE VOLUME OF THE CLIP INFO AND WHETHER THERE ARE DAMPENERS APPLIED BY THE MANAGER
     }
 
-    public void PlaySound(bool looped = false, float fadeInDuration = 0.0f, AudioBus priority = AudioBus.LowPrio)
+    public void PlaySound(UnityEngine.Audio.AudioMixerGroup audioBus, AudioBus priority, bool looped = false, float fadeInDuration = 0.0f)
     {
         source.loop = looped;
-        source.outputAudioMixerGroup = AudioManagerMk2.Instance.AssignMixerGroupPriority(priority);
+        //source.outputAudioMixerGroup = AudioManagerMk2.Instance.AssignMixerGroupPriority(priority);
+        if (audioBus != null)
+            source.outputAudioMixerGroup = audioBus;
+        else
+            source.outputAudioMixerGroup = AudioManagerMk2.Instance.AssignMixerGroupPriority(priority);
 
         if (fadeInDuration == 0.0f)
         {
@@ -124,6 +128,7 @@ public class ManagedAudioSource : MonoBehaviour
             audioSource.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
             yield return null;
         }
+        
         yield break;
     }
     
@@ -136,6 +141,15 @@ public class ManagedAudioSource : MonoBehaviour
         }
         ResetAfterCompleteSequencer = null;
         ResetSource();
+    }
+
+    public static IEnumerator ResetAfterFadeOut(ManagedAudioSource source)
+    {
+        while (source.Volume > 0.01f)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+        source.ResetSource();
     }
 
     public void ResetSource()
@@ -208,7 +222,8 @@ public class AudioClipInfoClass
         }
     }
 
-    [HideInInspector] public AudioBus audioBus = AudioBus.LowPrio;
+    [HideInInspector][UnityEngine.Serialization.FormerlySerializedAs("audioBus")] public AudioBus audioPriority = AudioBus.LowPrio;
+    public UnityEngine.Audio.AudioMixerGroup audioBus;
 
     [ConditionalField("moreThanOneClip", false)] public bool randomiseOrder = false;
     [HideInInspector] public bool moreThanOneClip = false;
@@ -238,6 +253,6 @@ public class AudioClipInfoClass
         baseVolume = _volume;
         cooldownType = cdType;
         cooldownPeriod = cdPeriod;
-        audioBus = bus;
+        audioPriority = bus;
     }
 }

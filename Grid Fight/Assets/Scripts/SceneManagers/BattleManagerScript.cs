@@ -392,6 +392,8 @@ public class BattleManagerScript : MonoBehaviour
 
     private void CurrentCharacter_CurrentCharIsDeadEvent(CharacterNameType cName, List<ControllerType> playerController, SideType side)
     {
+        AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Death, AudioBus.HighPrio, transform);
+
         if (!playerController.Contains(ControllerType.Enemy))
         {
 
@@ -426,9 +428,6 @@ public class BattleManagerScript : MonoBehaviour
                     }
                 }
             }
-
-           
-
         }
     }
 

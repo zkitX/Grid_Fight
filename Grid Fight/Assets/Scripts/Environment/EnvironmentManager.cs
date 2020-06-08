@@ -130,7 +130,7 @@ public class EnvironmentManager : MonoBehaviour
                 chars[i].SetAnimation(jumpAnim);
                 chars[i].SpineAnim.SetAnimationSpeed(jumpAnimSpeed);
             }
-            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ambience, BattleManagerScript.Instance.AudioProfile.ExitBattleJump, AudioBus.MidPrio);
+            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.StageSwitchSound, AudioBus.HighPrio);
             /*    while (chars.Where(r => !r.IsOnField).ToList().Count != chars.Length)
                 {
                     yield return null;

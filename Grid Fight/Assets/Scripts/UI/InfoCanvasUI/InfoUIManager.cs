@@ -25,6 +25,7 @@ public class InfoUIManager : MonoBehaviour
         float lerpProg = 0f;
         while (duration >= 0f)
         {
+            //GIORGIO: fadeout audio
             duration = Mathf.Clamp(duration - Time.deltaTime, 0, startingDuration);
             if (duration != 0f) lerpProg = 1f - (duration / startingDuration);
             else lerpProg = 1f;

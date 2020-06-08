@@ -15,6 +15,9 @@ MonoBehaviour:
   Footsteps:
     clip: {fileID: 0}
     clips: []
+    audioPriority: 0
+    audioBus: {fileID: -2303157646054863412, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0
@@ -31,14 +34,20 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 65a58749264743b40a8fc48502753078, type: 3}
       - {fileID: 8300000, guid: 7bb920ce935bdbb46b7f38958bd7a757, type: 3}
       - {fileID: 8300000, guid: 0de641627650741469b7542d2adf9d7a, type: 3}
+      audioPriority: 50
+      audioBus: {fileID: 8237912067696711543, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 1
       moreThanOneClip: 1
       cooldownType: 0
       cooldownPeriod: 1
-      baseVolume: 0.5
+      baseVolume: 0.6
     Loop:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: 8237912067696711543, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
       cooldownType: 0
@@ -53,11 +62,14 @@ MonoBehaviour:
       - {fileID: 8300000, guid: ab014b866dc179a4fa0db5418f618fe9, type: 3}
       - {fileID: 8300000, guid: 0c152e5f7e0323e4d81fd505f0cbd3a4, type: 3}
       - {fileID: 8300000, guid: dd48c361ec547c44f8d2cca8a6a3a684, type: 3}
+      audioPriority: 50
+      audioBus: {fileID: 8237912067696711543, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 1
       cooldownType: 0
       cooldownPeriod: 1
-      baseVolume: 1
+      baseVolume: 0.4
   PowerfulAttack:
     Cast:
       clip: {fileID: 8300000, guid: 0245ff511b17c5a48b8f3968f5c7b0bc, type: 3}
@@ -66,6 +78,9 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 76d96768308c83b4191e13327fdb3a68, type: 3}
       - {fileID: 8300000, guid: 82ddc3b46c1863742b975321719e1c3d, type: 3}
       - {fileID: 8300000, guid: a02d4ea6da0057d4faf81f34fa2acd9b, type: 3}
+      audioPriority: 50
+      audioBus: {fileID: 8237912067696711543, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 1
       cooldownType: 0
@@ -74,6 +89,9 @@ MonoBehaviour:
     Loop:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: 8237912067696711543, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
       cooldownType: 0
@@ -85,15 +103,21 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 143b80259c742f44d96f1eb0329957dc, type: 3}
       - {fileID: 8300000, guid: fd27e7a71c7304a48995fc6041263743, type: 3}
       - {fileID: 8300000, guid: 204f16c9b88864549ad642b0f9f6756b, type: 3}
+      audioPriority: 50
+      audioBus: {fileID: 8237912067696711543, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 1
       cooldownType: 1
       cooldownPeriod: 1
-      baseVolume: 0.5
+      baseVolume: 0.6
   Skill1:
     Cast:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: 8237912067696711543, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
       cooldownType: 0
@@ -102,6 +126,9 @@ MonoBehaviour:
     Loop:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: 8237912067696711543, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
       cooldownType: 0
@@ -110,6 +137,9 @@ MonoBehaviour:
     Impact:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: 8237912067696711543, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
       cooldownType: 0
@@ -119,6 +149,9 @@ MonoBehaviour:
     Cast:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: 8237912067696711543, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
       cooldownType: 0
@@ -127,6 +160,9 @@ MonoBehaviour:
     Loop:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: 8237912067696711543, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
       cooldownType: 0
@@ -135,6 +171,9 @@ MonoBehaviour:
     Impact:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: 8237912067696711543, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
       cooldownType: 0
@@ -144,6 +183,9 @@ MonoBehaviour:
     Cast:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: 8237912067696711543, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
       cooldownType: 0
@@ -152,6 +194,9 @@ MonoBehaviour:
     Loop:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: 8237912067696711543, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
       cooldownType: 0
@@ -160,6 +205,9 @@ MonoBehaviour:
     Impact:
       clip: {fileID: 0}
       clips: []
+      audioPriority: 50
+      audioBus: {fileID: 8237912067696711543, guid: 3778e2e6543dd0f4380203029dba3a7c,
+        type: 2}
       randomiseOrder: 0
       moreThanOneClip: 0
       cooldownType: 0
@@ -168,6 +216,9 @@ MonoBehaviour:
   ArrivingCry:
     clip: {fileID: 0}
     clips: []
+    audioPriority: 100
+    audioBus: {fileID: 6855848905830085699, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0
@@ -176,6 +227,9 @@ MonoBehaviour:
   Death:
     clip: {fileID: 0}
     clips: []
+    audioPriority: 100
+    audioBus: {fileID: 6855848905830085699, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0

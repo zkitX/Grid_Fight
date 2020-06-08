@@ -42,24 +42,24 @@ public class CharacterAudioProfileSO : BaseAudioProfileSO
         allAudioClips.Add(Death);
 
         //Default AudioBus
-        Footsteps.audioBus = AudioBus.LowPrio;
-        RapidAttack.Cast.audioBus = AudioBus.MidPrio;
-        RapidAttack.Loop.audioBus = AudioBus.MidPrio;
-        RapidAttack.Impact.audioBus = AudioBus.MidPrio;
-        PowerfulAttack.Cast.audioBus = AudioBus.MidPrio;
-        PowerfulAttack.Loop.audioBus = AudioBus.MidPrio;
-        PowerfulAttack.Impact.audioBus = AudioBus.MidPrio;
-        Skill1.Cast.audioBus = AudioBus.MidPrio;
-        Skill1.Loop.audioBus = AudioBus.MidPrio;
-        Skill1.Impact.audioBus = AudioBus.MidPrio;
-        Skill2.Cast.audioBus = AudioBus.MidPrio;
-        Skill2.Loop.audioBus = AudioBus.MidPrio;
-        Skill2.Impact.audioBus = AudioBus.MidPrio;
-        Skill3.Cast.audioBus = AudioBus.MidPrio;
-        Skill3.Loop.audioBus = AudioBus.MidPrio;
-        Skill3.Impact.audioBus = AudioBus.MidPrio;
-        ArrivingCry.audioBus = AudioBus.HighPrio;
-        Death.audioBus = AudioBus.HighPrio;
+        Footsteps.audioPriority = AudioBus.LowPrio;
+        RapidAttack.Cast.audioPriority = AudioBus.MidPrio;
+        RapidAttack.Loop.audioPriority = AudioBus.MidPrio;
+        RapidAttack.Impact.audioPriority = AudioBus.MidPrio;
+        PowerfulAttack.Cast.audioPriority = AudioBus.MidPrio;
+        PowerfulAttack.Loop.audioPriority = AudioBus.MidPrio;
+        PowerfulAttack.Impact.audioPriority = AudioBus.MidPrio;
+        Skill1.Cast.audioPriority = AudioBus.MidPrio;
+        Skill1.Loop.audioPriority = AudioBus.MidPrio;
+        Skill1.Impact.audioPriority = AudioBus.MidPrio;
+        Skill2.Cast.audioPriority = AudioBus.MidPrio;
+        Skill2.Loop.audioPriority = AudioBus.MidPrio;
+        Skill2.Impact.audioPriority = AudioBus.MidPrio;
+        Skill3.Cast.audioPriority = AudioBus.MidPrio;
+        Skill3.Loop.audioPriority = AudioBus.MidPrio;
+        Skill3.Impact.audioPriority = AudioBus.MidPrio;
+        ArrivingCry.audioPriority = AudioBus.HighPrio;
+        Death.audioPriority = AudioBus.HighPrio;
 
         base.OnEnable();
     }

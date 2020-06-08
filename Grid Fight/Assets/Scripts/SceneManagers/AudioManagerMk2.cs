@@ -15,6 +15,7 @@ public class AudioManagerMk2 : MonoBehaviour
     public AudioMixerGroup mg_high;
     public AudioMixerGroup mg_mid;
     public AudioMixerGroup mg_low;
+    public AudioMixerGroup mg_non_silenced;
 
     public List<NamedManagedAudioSource> namedSources = new List<NamedManagedAudioSource>();
 
@@ -77,19 +78,33 @@ public class AudioManagerMk2 : MonoBehaviour
         return audioSource;
     }
 
-    public void StopNamedSource(string name)
+    public void StopNamedSource(string name, float fadeOutTime = 0.0f)
     {
         NamedManagedAudioSource audioSource = namedSources.Where(r => r.name == name).FirstOrDefault();
         if (audioSource == null) return;
         namedSources.Remove(audioSource);
-        audioSource.source.ResetSource();
+        if (fadeOutTime > 0f)
+        {
+            StartCoroutine(ManagedAudioSource.StartFade(audioSource.source.source, fadeOutTime, 0));
+            StartCoroutine(ManagedAudioSource.ResetAfterFadeOut(audioSource.source));
+        }
+        else    
+            audioSource.source.ResetSource();
+    }
+
+    public void SetAudioVolume(string name, float volume = 1f, float transitionTime = 0f)
+    {
+        NamedManagedAudioSource audioSource = namedSources.Where(r => r.name == name).FirstOrDefault();
+        if (audioSource == null) return;
+
+        StartCoroutine(ManagedAudioSource.StartFade(audioSource.source.source, transitionTime, volume));
     }
 
     public ManagedAudioSource PlaySound(AudioSourceType sourceType, AudioClipInfoClass clipInfo, AudioBus priorityObsolete, Transform sourceOrigin = null, bool loop = false, float fadeInDuration = 0.0f)
     {
         if (ClipPlayedThisFrame(clipInfo.Clip)) return null;
 
-        ManagedAudioSource source = GetFreeSource(clipInfo.audioBus, sourceType);
+        ManagedAudioSource source = GetFreeSource(clipInfo.audioPriority, sourceType);
 
         source.ResetSource();
         source.removeNamedOnComplete = false;
@@ -97,10 +112,14 @@ public class AudioManagerMk2 : MonoBehaviour
         if (sourceOrigin != null) source.SetParent(sourceOrigin);
         source.SetAudioClipInfo(clipInfo);
         //source.Bus = priority;
-        source.PlaySound(loop, fadeInDuration, clipInfo.audioBus);
+        source.PlaySound(clipInfo.audioBus, clipInfo.audioPriority, loop, fadeInDuration);
         AddClipPlayedLastFrame(clipInfo);
 
-        if (fadeInDuration == 0.0f) UpdateActiveAudioVolumes();
+        if (fadeInDuration == 0.0f)
+            source.UpdateVolume();
+            //UpdateActiveAudioVolumes(); GIORGIO: why update ALL sources?
+
+
         return source;
     }
 
@@ -116,6 +135,8 @@ public class AudioManagerMk2 : MonoBehaviour
                 return mg_low;
             case AudioBus.Music:
                 return mg_music;
+            case AudioBus.NonSilenced:
+                return mg_non_silenced;
             default:
                 return mg_low;
         }

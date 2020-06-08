@@ -15,17 +15,21 @@ MonoBehaviour:
   music:
     clip: {fileID: 8300000, guid: 93625b7ff44c3c34e9f1e6522a276ba9, type: 3}
     clips: []
-    audioBus: 1000
+    audioPriority: 1000
+    audioBus: {fileID: -5181945448375339016, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0
     cooldownPeriod: 1
-    baseVolume: 0.55
+    baseVolume: 0.4
   ambience:
     clip: {fileID: 8300000, guid: 93625b7ff44c3c34e9f1e6522a276ba9, type: 3}
     clips:
     - {fileID: 8300000, guid: a83c0503fbed9f8469f8c91facb3a11e, type: 3}
-    audioBus: 0
+    audioPriority: 0
+    audioBus: {fileID: 5600944808491506892, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0

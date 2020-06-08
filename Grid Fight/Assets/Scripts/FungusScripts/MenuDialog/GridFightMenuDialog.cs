@@ -227,11 +227,10 @@ public class GridFightMenuDialog : MenuDialog
 
             isMenuReady = false;
             BattleManagerScript.Instance.FungusState = FungusDialogType.Dialog;
-            
+
             foreach (FungusMenuOptionBoxScript item in Boxes)
             {
                 item.BoxAnim.SetBool("InOut", false);
-                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Menus_PressButton, AudioBus.MidPrio);
 
                 for (int a = 0; a < Boxes.Count; a++)
                 {
@@ -244,6 +243,8 @@ public class GridFightMenuDialog : MenuDialog
             }
 
             StartCoroutine(ClearMenu(0.3f));
+
+            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Menus_PressButton, AudioBus.HighPrio);
         }
     }
 

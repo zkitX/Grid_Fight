@@ -12,10 +12,11 @@ using MyBox;
 public class CallStopAudio : Command
 {
     public string audioID = "";
+    [SerializeField] float fadeoutTime = 0.0f;
 
     protected void TheMethod()
     {
-        AudioManagerMk2.Instance.StopNamedSource(audioID);
+        AudioManagerMk2.Instance.StopNamedSource(audioID, fadeoutTime);
         Continue();
     }
 

@@ -19,7 +19,9 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 10a7ed2481ddae949b052f433ac8bcf8, type: 3}
     - {fileID: 8300000, guid: 1f56024a410db674eaa2c67560a81a19, type: 3}
     - {fileID: 8300000, guid: 3298215c650cc8c43a49ffe86cd9cb32, type: 3}
-    audioBus: 100
+    audioPriority: 100
+    audioBus: {fileID: 5811590031482804292, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 1
     cooldownType: 0
@@ -30,25 +32,45 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 77ed0a62dfca6ae4fb8c8dd080b7f186, type: 3}
     - {fileID: 8300000, guid: f48918fe1f4f7a044989198c9b137ac4, type: 3}
-    audioBus: 100
+    audioPriority: 100
+    audioBus: {fileID: 5811590031482804292, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 1
     cooldownType: 0
     cooldownPeriod: 1
-    baseVolume: 1
+    baseVolume: 0.8
   ExitBattleJump:
     clip: {fileID: 0}
-    clips: []
-    audioBus: 100
+    clips:
+    - {fileID: 8300000, guid: e9e439c1603da1e4291e4e90eb5e2ee7, type: 3}
+    - {fileID: 8300000, guid: 5749e18d2afc2b341a7e1a2a3d72a977, type: 3}
+    - {fileID: 8300000, guid: 828f98f3b342ff34890ac313b8e8679e, type: 3}
+    - {fileID: 8300000, guid: b183be91301dec64fb5dc932a369ecf6, type: 3}
+    - {fileID: 8300000, guid: f4a2e94ef5230bb488c2f67188475aa1, type: 3}
+    - {fileID: 8300000, guid: 4e53d1033ac40aa47b1688a600029bb6, type: 3}
+    - {fileID: 8300000, guid: 7c693e5a504adef43bc20297ea502d75, type: 3}
+    audioPriority: 100
+    audioBus: {fileID: 5811590031482804292, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0
     cooldownPeriod: 1
-    baseVolume: 1
+    baseVolume: 0.8
   StageSwitchSound:
     clip: {fileID: 0}
-    clips: []
-    audioBus: 100
+    clips:
+    - {fileID: 8300000, guid: 17153a5a6cbf85a4fb9cfc273adbfaf7, type: 3}
+    - {fileID: 8300000, guid: 4713a646473b2f64f834c959d7a7230a, type: 3}
+    - {fileID: 8300000, guid: 532a366bf93c40a4a8237bba0eb99cb1, type: 3}
+    - {fileID: 8300000, guid: db9c318fc3a2a3b428cbbaf8dfec6730, type: 3}
+    - {fileID: 8300000, guid: 08bcf0bc5110c7841a1f8975ea2cac9a, type: 3}
+    - {fileID: 8300000, guid: 1db4cc85a3f4d7e4db4de4ed45f8b445, type: 3}
+    - {fileID: 8300000, guid: d90cda1ff45b955429df9b3bff20d280, type: 3}
+    audioPriority: 100
+    audioBus: {fileID: 5811590031482804292, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0
@@ -58,12 +80,14 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 48992f5000032d647aa165f09bb845cb, type: 3}
     clips:
     - {fileID: 8300000, guid: 48992f5000032d647aa165f09bb845cb, type: 3}
-    audioBus: 50
+    audioPriority: 50
+    audioBus: {fileID: 2605687378453707245, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0
     cooldownPeriod: 1
-    baseVolume: 0.55
+    baseVolume: 0.8
   SpecialAttackChargingLoopStrong:
     clip: {fileID: 0}
     clips:
@@ -71,22 +95,42 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 1eb228ca0368f774bb158ebe988cd548, type: 3}
     - {fileID: 8300000, guid: 267478d17e8423f42938eaadf6f81b40, type: 3}
     - {fileID: 8300000, guid: 654cba367a158774fb18f5cf9e591082, type: 3}
-    audioBus: 0
+    audioPriority: 0
+    audioBus: {fileID: 2605687378453707245, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0
     cooldownPeriod: 1
-    baseVolume: 0.55
+    baseVolume: 0.8
   SpecialAttackChargingRelease:
     clip: {fileID: 8300000, guid: 3b78c92fa7ab8da40a23b963b8b7d944, type: 3}
     clips:
     - {fileID: 8300000, guid: 3b78c92fa7ab8da40a23b963b8b7d944, type: 3}
-    audioBus: 0
+    audioPriority: 0
+    audioBus: {fileID: 2798496686075611968, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0
     cooldownPeriod: 1
     baseVolume: 0.85
+  Death:
+    clip: {fileID: 0}
+    clips:
+    - {fileID: 8300000, guid: d9cdc0c6aef58a74490415ff5fc67082, type: 3}
+    - {fileID: 8300000, guid: 2f37d6abecb64dd4ead0ac51ad86b217, type: 3}
+    - {fileID: 8300000, guid: fe9f44bcfc0d7da47a44784bfea5c27e, type: 3}
+    - {fileID: 8300000, guid: 46d0f4d189ad00247930dade299c2534, type: 3}
+    - {fileID: 8300000, guid: fbb22e999947ee447a2932db3164b403, type: 3}
+    audioPriority: 100
+    audioBus: {fileID: 5811590031482804292, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
+    randomiseOrder: 1
+    moreThanOneClip: 1
+    cooldownType: 0
+    cooldownPeriod: 1
+    baseVolume: 1
   Shield_Full:
     clip: {fileID: 0}
     clips:
@@ -96,7 +140,9 @@ MonoBehaviour:
     - {fileID: 8300000, guid: a0ffb8b1818785c4797146aaeefbc9cb, type: 3}
     - {fileID: 8300000, guid: e8c4619e23fc6324492d9c9e76eb79a8, type: 3}
     - {fileID: 8300000, guid: a08f945bb21b47948ac264a4aba01dcc, type: 3}
-    audioBus: 50
+    audioPriority: 50
+    audioBus: {fileID: 5811590031482804292, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 1
     cooldownType: 0
@@ -111,7 +157,9 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 99db23376a26b0d4586dc7f620485cac, type: 3}
     - {fileID: 8300000, guid: e14b1b54514086a4aace774c108c42c0, type: 3}
     - {fileID: 8300000, guid: 537652e9bfe5e954ba9e9fd7e65be7f6, type: 3}
-    audioBus: 100
+    audioPriority: 100
+    audioBus: {fileID: 5811590031482804292, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 1
     cooldownType: 0
@@ -124,12 +172,14 @@ MonoBehaviour:
     - {fileID: 8300000, guid: f3074d6fef2f5e74a9d9ecb2a00ede93, type: 3}
     - {fileID: 8300000, guid: 5ca9cf24db4c0bf49aefb99547158d34, type: 3}
     - {fileID: 8300000, guid: 7b1f93557f6fda346b428e324b4ba3ac, type: 3}
-    audioBus: 50
+    audioPriority: 100
+    audioBus: {fileID: 5811590031482804292, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 1
     cooldownType: 0
     cooldownPeriod: 1
-    baseVolume: 1
+    baseVolume: 0.6
   PowerUp_Speed:
     clip: {fileID: 8300000, guid: 40276967bdfd77d4b85d00abd170a1aa, type: 3}
     clips:
@@ -137,12 +187,14 @@ MonoBehaviour:
     - {fileID: 8300000, guid: ee10ea69f1e8e3d41b6f3ffc5d65b802, type: 3}
     - {fileID: 8300000, guid: 2261fd65b53d04f41accaba85b53db30, type: 3}
     - {fileID: 8300000, guid: fd4070fda915cf14b883da773e4c9f16, type: 3}
-    audioBus: 50
+    audioPriority: 100
+    audioBus: {fileID: 5811590031482804292, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 1
     cooldownType: 0
     cooldownPeriod: 1
-    baseVolume: 1
+    baseVolume: 0.6
   PowerUp_Stamina:
     clip: {fileID: 8300000, guid: 196a29d467e0cb740832ba4af835801a, type: 3}
     clips:
@@ -150,12 +202,14 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 9d0f54d59d851cf4e8ab180f7c842631, type: 3}
     - {fileID: 8300000, guid: 77d0f2b39a9cda94fb2ffc96cb354447, type: 3}
     - {fileID: 8300000, guid: 91ed9cf23e8aa934a979b685c0a1aa87, type: 3}
-    audioBus: 50
+    audioPriority: 100
+    audioBus: {fileID: 5811590031482804292, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 1
     cooldownType: 0
     cooldownPeriod: 1
-    baseVolume: 1
+    baseVolume: 0.6
   PowerUp_Damage:
     clip: {fileID: 8300000, guid: 6860afff86ae948459212d2466b34c78, type: 3}
     clips:
@@ -163,12 +217,29 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 162d28ea1a5d02b408c99c4ffe8a2068, type: 3}
     - {fileID: 8300000, guid: b32757c8477f0e14899db9405c78cbfa, type: 3}
     - {fileID: 8300000, guid: b946c9527744e8e40a92f6ed747ee849, type: 3}
-    audioBus: 50
+    audioPriority: 100
+    audioBus: {fileID: 5811590031482804292, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 1
     cooldownType: 0
     cooldownPeriod: 1
-    baseVolume: 1
+    baseVolume: 0.6
+  PowerUp_Shield:
+    clip: {fileID: 0}
+    clips:
+    - {fileID: 8300000, guid: aab3aac6a1507924dbbe31dacf33648f, type: 3}
+    - {fileID: 8300000, guid: e45cff5a690303d45a0c262b30429656, type: 3}
+    - {fileID: 8300000, guid: b62a3cf645b3c20419c8e46c68c1e7d3, type: 3}
+    - {fileID: 8300000, guid: fda8b7d21f73b76479afa13963c6b510, type: 3}
+    audioPriority: 0
+    audioBus: {fileID: 5811590031482804292, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
+    randomiseOrder: 0
+    moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
+    baseVolume: 0.6
   Dialogue_Entering:
     clip: {fileID: 0}
     clips:
@@ -177,12 +248,14 @@ MonoBehaviour:
     - {fileID: 8300000, guid: ca2ee04df2a0ed645822321d7946c786, type: 3}
     - {fileID: 8300000, guid: beb1bdad47c55b64598578e6f4f80d8a, type: 3}
     - {fileID: 8300000, guid: 23f0ff1f5f2054c4a8f4bc96d197b613, type: 3}
-    audioBus: 100
+    audioPriority: 100
+    audioBus: {fileID: 5811590031482804292, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0
     cooldownPeriod: 1
-    baseVolume: 0.3
+    baseVolume: 0.2
   Dialogue_Exiting:
     clip: {fileID: 0}
     clips:
@@ -191,22 +264,30 @@ MonoBehaviour:
     - {fileID: 8300000, guid: c2516ec1af3488c48a3304b5d004f0a5, type: 3}
     - {fileID: 8300000, guid: ccf4b961c57b72846810d08a6b40ebd7, type: 3}
     - {fileID: 8300000, guid: 8ed6efff2ced8d9408a342e6ccb6de46, type: 3}
-    audioBus: 100
+    audioPriority: 100
+    audioBus: {fileID: 5811590031482804292, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0
     cooldownPeriod: 1
-    baseVolume: 0.3
+    baseVolume: 0.2
   Dialogue_TextStart:
     clip: {fileID: 0}
     clips:
-    - {fileID: 8300000, guid: 14a396b1562834718b2d52b9c4639264, type: 3}
-    audioBus: 100
+    - {fileID: 8300000, guid: f333586ef7c4c434d906bf5cd758239b, type: 3}
+    - {fileID: 8300000, guid: f1971de2b4b1ad74d89f26aebd51450d, type: 3}
+    - {fileID: 8300000, guid: ec2b2542187b96846b15cdcf89f049a9, type: 3}
+    - {fileID: 8300000, guid: 69a5b47b0a6d67543a4fbcefd02607d1, type: 3}
+    - {fileID: 8300000, guid: 1244c94eb186c044594c3b5989cacc2b, type: 3}
+    audioPriority: 100
+    audioBus: {fileID: 2605687378453707245, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 1
     cooldownPeriod: 0.2
-    baseVolume: 1
+    baseVolume: 0.5
   Dialogue_TextEnd:
     clip: {fileID: 0}
     clips:
@@ -216,7 +297,9 @@ MonoBehaviour:
     - {fileID: 8300000, guid: b18174013ced3b94c8f9a8ae420a238b, type: 3}
     - {fileID: 8300000, guid: 363c414096db494458694a552adc1fbe, type: 3}
     - {fileID: 8300000, guid: 3f2dcc9d7544a7f47b1193dd474bbf4b, type: 3}
-    audioBus: 100
+    audioPriority: 100
+    audioBus: {fileID: 5811590031482804292, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0
@@ -225,7 +308,9 @@ MonoBehaviour:
   Dialogue_CharacterSwap:
     clip: {fileID: 0}
     clips: []
-    audioBus: 100
+    audioPriority: 100
+    audioBus: {fileID: 5811590031482804292, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0
@@ -235,25 +320,32 @@ MonoBehaviour:
     clip: {fileID: 0}
     clips:
     - {fileID: 8300000, guid: 3f09169bf3d7ba443b7624b227dee461, type: 3}
-    audioBus: 100
+    audioPriority: 100
+    audioBus: {fileID: 5811590031482804292, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0
     cooldownPeriod: 1
-    baseVolume: 1
+    baseVolume: 0.5
   Menus_PressButton:
     clip: {fileID: 0}
-    clips: []
-    audioBus: 100
+    clips:
+    - {fileID: 8300000, guid: 96b3785a55f0fd04d84bc566953413b8, type: 3}
+    audioPriority: 100
+    audioBus: {fileID: 5811590031482804292, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0
-    cooldownPeriod: 1
-    baseVolume: 1
+    cooldownPeriod: 0.01
+    baseVolume: 0.5
   Loading_Start:
     clip: {fileID: 0}
     clips: []
-    audioBus: 100
+    audioPriority: 100
+    audioBus: {fileID: 5811590031482804292, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0
@@ -262,7 +354,9 @@ MonoBehaviour:
   Loading_Stop:
     clip: {fileID: 0}
     clips: []
-    audioBus: 100
+    audioPriority: 100
+    audioBus: {fileID: 5811590031482804292, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0
@@ -270,8 +364,14 @@ MonoBehaviour:
     baseVolume: 1
   GetReadyFight:
     clip: {fileID: 0}
-    clips: []
-    audioBus: 100
+    clips:
+    - {fileID: 8300000, guid: 7baf94dde23d89340a7501e803dac0b0, type: 3}
+    - {fileID: 8300000, guid: 1e884f01aa8ecd6438dc292570e3b8b7, type: 3}
+    - {fileID: 8300000, guid: 375f3b993352c304f988016893d56cb6, type: 3}
+    - {fileID: 8300000, guid: c9215f2b0299b2b43b07d9a0d21ef8b5, type: 3}
+    audioPriority: 100
+    audioBus: {fileID: 5811590031482804292, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
     randomiseOrder: 0
     moreThanOneClip: 0
     cooldownType: 0
