@@ -1064,11 +1064,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             ps.transform.parent = SpineAnim.transform;
             ps.transform.localPosition = Vector3.zero;
             ps.SetActive(true);
-            PSTimeGroup pstg = ps.GetComponent<PSTimeGroup>();
-            if(pstg != null)
-            {
-                pstg.UpdatePSTime(bdClass.Duration);
-            }
+            //pstimegroup pstg = ps.getcomponent<pstimegroup>();
+            //if(pstg != null)
+            //{
+            //    pstg.updatepstime(bdclass.duration);
+            //}
         }
         System.Reflection.FieldInfo parentField = null, field = null, B_field = null;
         string[] statToCheck = bdClass.Stat.ToString().Split('_');
@@ -1196,6 +1196,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
 
             }
+
+            ps?.SetActive(false);
 
             if (bdClass.Stat == BuffDebuffStatsType.ElementalResistance)
             {
