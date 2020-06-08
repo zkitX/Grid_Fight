@@ -56,7 +56,7 @@ public class ParticleManagerScript : MonoBehaviour
         using (FiredAttackParticle psToFire = AttackParticlesFired.Where(r => r.ParticleType == particleType && r.CharaterId == characterId &&
         !r.PS.gameObject.activeInHierarchy && r.Side == side && r.AttackInput == attackInput).FirstOrDefault())
         {
-            if (psToFire != null)
+            if (psToFire != null && (ps == null || psToFire.PS.name.Contains(ps.name)))
             {
                 psToFire.PS.transform.position = pos;
                 psToFire.PS.SetActive(true);

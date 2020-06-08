@@ -26,6 +26,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
         transform.position = pos;
 
         activeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(ItemPowerUpInfo.activeParticles, CharacterNameType.None, AttackParticlePhaseTypes.Bullet, pos, SideType.LeftSide, AttackInputType.Skill1);
+        activeParticles.transform.position -= new Vector3(0f, 0.25f, 0f);
 
         Anim.SetInteger("Color", (int)color);
         Anim.SetBool("FadeInOut", true);
