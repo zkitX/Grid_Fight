@@ -120,7 +120,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
         get
         {
-            return _Attacking;
+            return shotsLeftInAttack > 0 ? true : _Attacking;
         }
         set
         {
@@ -610,29 +610,33 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             {
                 foreach (BattleFieldAttackTileClass target in item.BulletEffectTiles)
                 {
-                    Vector2Int res = nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnTarget && charTar != null ? target.Pos + nextAttackPos :
-                    nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnItSelf ? target.Pos + UMS.CurrentTilePos : target.Pos;
-                    if (GridManagerScript.Instance.isPosOnField(res))
+                    int rand = UnityEngine.Random.Range(0, 100);
+                    if (rand <= item.ExplosionChances)
                     {
-                        BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(res);
-                        if (bts._BattleTileState != BattleTileStateType.NonUsable)
+                        Vector2Int res = nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnTarget && charTar != null ? target.Pos + nextAttackPos :
+                        nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnItSelf ? target.Pos + UMS.CurrentTilePos : target.Pos;
+                        if (GridManagerScript.Instance.isPosOnField(res))
                         {
-                            if (nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnItSelf && bts.WalkingSide == UMS.WalkingSide)
+                            BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(res);
+                            if (bts._BattleTileState != BattleTileStateType.NonUsable)
                             {
-                                shotsLeftInAttack++;
+                                if (nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnItSelf && bts.WalkingSide == UMS.WalkingSide)
+                                {
+                                    shotsLeftInAttack++;
 
-                                bts.BattleTargetScript.SetAttack(item.Delay, res,
-                                0, CharInfo.Elemental, this,
-                                target, target.EffectChances);
-                            }
-                            else if (nextAttack.TilesAtk.AtkType != BattleFieldAttackType.OnItSelf && bts.WalkingSide != UMS.WalkingSide)
-                            {
-                                shotsLeftInAttack++;
-                                AttackedTiles(bts);
-                                // CreateBullet(target, bts.Pos, item.Delay);
-                                bts.BattleTargetScript.SetAttack(item.Delay, res,
-                                CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
-                                target, target.EffectChances);
+                                    bts.BattleTargetScript.SetAttack(item.Delay, res,
+                                    0, CharInfo.Elemental, this,
+                                    target, target.EffectChances);
+                                }
+                                else if (nextAttack.TilesAtk.AtkType != BattleFieldAttackType.OnItSelf && bts.WalkingSide != UMS.WalkingSide)
+                                {
+                                    shotsLeftInAttack++;
+                                    AttackedTiles(bts);
+                                    // CreateBullet(target, bts.Pos, item.Delay);
+                                    bts.BattleTargetScript.SetAttack(item.Delay, res,
+                                    CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
+                                    target, target.EffectChances);
+                                }
                             }
                         }
                     }

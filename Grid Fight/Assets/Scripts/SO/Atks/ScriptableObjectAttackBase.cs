@@ -90,6 +90,7 @@ public class TilesAttackTypeClass
 public class BulletBehaviourInfoClassOnBattleFieldClass
 {
     public float Delay;
+    public int ExplosionChances = 100;
     public bool Show = true;
     [HideInInspector] public List<BattleFieldAttackTileClass> BulletEffectTiles = new List<BattleFieldAttackTileClass>();
 }

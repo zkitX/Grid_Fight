@@ -94,7 +94,12 @@ public class ScriptableObjectAttackTypeEditor : Editor
                 for (int i = 0; i < origin.TrajectoriesNumber; i++)
                 {
                     EditorGUILayout.Space();
+                    if(i == 0)
+                    {
+                        origin.TilesAtk.BulletTrajectories[i].ExplosionChances = 100;
+                    }
                     origin.TilesAtk.BulletTrajectories[i].Delay = EditorGUILayout.FloatField("Delay", origin.TilesAtk.BulletTrajectories[i].Delay);
+                    origin.TilesAtk.BulletTrajectories[i].ExplosionChances = EditorGUILayout.IntField("ExplosionChances", origin.TilesAtk.BulletTrajectories[i].ExplosionChances);
                     switch (origin.TilesAtk.AtkType)
                     {
                         case BattleFieldAttackType.OnAreaAttack:

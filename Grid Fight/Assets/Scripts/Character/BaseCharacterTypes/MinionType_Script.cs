@@ -503,10 +503,7 @@ public class MinionType_Script : BaseCharacter
         if (completedAnim.Contains("AtkToIdle") || completedAnim == CharacterAnimationStateType.Atk.ToString() || completedAnim == CharacterAnimationStateType.Atk1.ToString())
         {
             currentAttackPhase = AttackPhasesType.End;
-            if (shotsLeftInAttack == 0)
-            {
-                Attacking = false;
-            }
+            Attacking = false;
         }
 
         base.SpineAnimationState_Complete(trackEntry);
