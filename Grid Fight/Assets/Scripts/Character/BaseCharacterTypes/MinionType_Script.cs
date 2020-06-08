@@ -13,7 +13,7 @@ public class MinionType_Script : BaseCharacter
     public AIType CurrentAI;
     List<HitInfoClass> HittedByList = new List<HitInfoClass>();
     float totDamage = 0;
-
+    bool strongAnimDone = false;
 
 
     protected bool UnderAttack
@@ -290,6 +290,7 @@ public class MinionType_Script : BaseCharacter
         {
             isLooped = false;
             animToFire = nextAttack.PrefixAnim + "_IdleToAtk";
+            strongAnimDone = false;
             currentAttackPhase = AttackPhasesType.Start;
             SetAnimation(animToFire, isLooped, 0f);
 
@@ -397,7 +398,18 @@ public class MinionType_Script : BaseCharacter
     {
         if (!SpineAnim.CurrentAnim.Contains("Loop"))
         {
-            SetAnimation(nextAttack.PrefixAnim + (nextAttack.PrefixAnim == AttackAnimPrefixType.Atk1 ? "_Loop" : "_AtkToIdle"));
+            if(nextAttack.PrefixAnim != AttackAnimPrefixType.Atk1)
+            {
+                if(!strongAnimDone)
+                {
+                    strongAnimDone = true;
+                    SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
+                }
+            }
+            else
+            {
+                SetAnimation(nextAttack.PrefixAnim + "_Loop");
+            }
         }
 
         if (chargeParticles != null && shotsLeftInAttack <= 0)
