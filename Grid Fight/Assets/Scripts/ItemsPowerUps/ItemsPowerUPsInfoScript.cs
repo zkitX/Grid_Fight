@@ -26,7 +26,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
         transform.position = pos;
 
         activeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(ItemPowerUpInfo.activeParticles, CharacterNameType.None, AttackParticlePhaseTypes.Bullet, pos, SideType.LeftSide, AttackInputType.Skill1);
-        activeParticles.transform.position -= new Vector3(0f, 0.25f, 0f);
+        activeParticles.transform.position -= new Vector3(0f, 0.6f, 0f);
 
         Anim.SetInteger("Color", (int)color);
         Anim.SetBool("FadeInOut", true);
@@ -94,10 +94,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
         ParticleManagerScript.Instance.FireParticlesInPosition(ItemPowerUpInfo.terminationParticles, CharacterNameType.None, AttackParticlePhaseTypes.Bullet, position, SideType.LeftSide, AttackInputType.Skill1);
         yield return null;
 
-        while (Anim.GetCurrentAnimatorStateInfo(0).IsName("PotionPick"))
-        {
-            yield return null;
-        }
+        yield return new WaitForSeconds(Anim.GetCurrentAnimatorStateInfo(0).length + Anim.GetCurrentAnimatorStateInfo(0).normalizedTime - 0.2f);
 
         gameObject.SetActive(false);
     }
@@ -117,6 +114,9 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
 
         activeParticles.SetActive(false);
         Anim.SetBool("FadeInOut", false);
+        yield return null;
+        yield return new WaitForSeconds(Anim.GetCurrentAnimatorStateInfo(0).length + Anim.GetCurrentAnimatorStateInfo(0).normalizedTime - 0.2f);
+        gameObject.SetActive(false);
     }
 
     public void DisablePowerUp()
