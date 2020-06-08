@@ -25,7 +25,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
         color = itemPowerUpInfo.color;
         transform.position = pos;
 
-        activeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(ItemPowerUpInfo.activeParticles, CharacterNameType.None, AttackParticlePhaseTypes.Bullet, pos, SideType.LeftSide, AttackInputType.Skill1);
+        //activeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(ItemPowerUpInfo.activeParticles, CharacterNameType.None, AttackParticlePhaseTypes.Bullet, pos, SideType.LeftSide, AttackInputType.Skill1);
 
         Anim.SetInteger("Color", (int)color);
         Anim.SetBool("FadeInOut", true);
@@ -88,7 +88,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
 
     IEnumerator CollectedCo()
     {
-        activeParticles.SetActive(false);
+        //activeParticles.SetActive(false);
         Anim.SetBool("FadeInOut", false);
         ParticleManagerScript.Instance.FireParticlesInPosition(ItemPowerUpInfo.terminationParticles, CharacterNameType.None, AttackParticlePhaseTypes.Bullet, position, SideType.LeftSide, AttackInputType.Skill1);
         yield return null;
@@ -114,7 +114,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
         DurationOnBattleFieldCo = null;
 
 
-        activeParticles.SetActive(false);
+        //activeParticles.SetActive(false);
         Anim.SetBool("FadeInOut", false);
     }
 
