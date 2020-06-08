@@ -256,12 +256,6 @@ public class BattleManagerScript : MonoBehaviour
         {
             UIBattleManager.Instance.isRightSidePlaying = false;
         }
-
-        if (WaveManagerScript.Instance != null)
-        {
-            WaveManagerScript.Instance.RemoveWaveCharacterFromBoard(currentCharacter);
-
-        }
         yield return null;
     }
 
@@ -1068,7 +1062,8 @@ public class BattleManagerScript : MonoBehaviour
 
             if(cb != null)
             {
-                Debug.Log(cb.CharInfo.CharacterID);
+
+                Debug.LogError(cb.CharInfo.CharacterID);
                 SetNextChar(deselction, cb, side, playerController, cs, worksOnFungusPappets);
             }
         }

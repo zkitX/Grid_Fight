@@ -77,6 +77,10 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
                     itemType = ItemType.PowerUp_Shield;
                     powerUpAudio = BattleManagerScript.Instance.AudioProfile.PowerUp_Shield;
                     break;
+                case (BuffDebuffStatsType.Health):
+                    itemType = ItemType.PowerUP_Health;
+                    powerUpAudio = BattleManagerScript.Instance.AudioProfile.PowerUp_Health;
+                    break;
                 default:
                     Debug.LogError("Error with potion type in event collection... Collected powerup effect is: " + ItemPowerUpInfo.StatsToAffect.ToString());
                     break;

@@ -1411,7 +1411,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             return;
         }
         //Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + CharInfo.CharacterID.ToString());
-        if (animState == CharacterAnimationStateType.Arriving.ToString())
+        if (animState == CharacterAnimationStateType.Reverse_Arriving.ToString())
         {
         }
 
