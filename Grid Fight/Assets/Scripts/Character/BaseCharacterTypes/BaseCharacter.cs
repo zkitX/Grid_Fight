@@ -1096,15 +1096,18 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         else if (bdClass.Stat == BuffDebuffStatsType.Health || bdClass.Stat == BuffDebuffStatsType.Health_Overtime)
         {
-            
+            float val = 0;
             if (bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Perc)
             {
-                CharInfo.Health +=  (CharInfo.Health / 100f) * bdClass.CurrentBuffDebuff.Value;
+                val = (CharInfo.Health / 100f) * bdClass.CurrentBuffDebuff.Value;
             }
             else if (bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Value)
             {
-                CharInfo.Health += bdClass.CurrentBuffDebuff.Value;
+                val = bdClass.CurrentBuffDebuff.Value;
             }
+
+            CharInfo.Health += val;
+            HealthStatsChangedEvent?.Invoke(val, HealthChangedType.Heal, bdClass.EffectMaker.SpineAnim.transform);
         }
         else
         {
