@@ -303,6 +303,14 @@ public class CharacterType_Script : BaseCharacter
         ResetAudioManager();
     }
 
+    public bool GetCanUseStamina(float valueRequired)
+    {
+        if (CharInfo.StaminaStats.Stamina - valueRequired >= 0) return true;
+
+        UMS.StaminaBarContainer.GetComponentInChildren<Animation>().Play();
+        return false;
+    }
+
     //Load the special attack and fire it if the load is complete
     bool isChargingParticlesOn = false;
     GameObject chargingPs = null;
@@ -311,7 +319,7 @@ public class CharacterType_Script : BaseCharacter
         if (CanAttack && !isSpecialLoading)
         {
             ScriptableObjectAttackBase nxtAtk = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackInput == nextAtkType).First();
-            if(CharInfo.StaminaStats.Stamina - nxtAtk.StaminaCost < 0)
+            if(!GetCanUseStamina(nxtAtk.StaminaCost))
             {
                 yield break;
             }
@@ -397,7 +405,7 @@ public class CharacterType_Script : BaseCharacter
         {
 
             ScriptableObjectAttackBase nxtAtk = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackInput == AttackInputType.Weak).First();
-            if (CharInfo.StaminaStats.Stamina - nxtAtk.StaminaCost < 0)
+            if (!GetCanUseStamina(nxtAtk.StaminaCost))
             {
                 return;
             }

@@ -272,6 +272,11 @@ public class NewICharacterVitality : MonoBehaviour
         }
     }
 
+    public void PlayLowShieldAnimation()
+    {
+        shieldBackPlate.GetComponent<Animation>().Play();
+    }
+
     IEnumerator LerpBackgroundColors(float duration, Color endColor)
     {
         float startDuration = duration;

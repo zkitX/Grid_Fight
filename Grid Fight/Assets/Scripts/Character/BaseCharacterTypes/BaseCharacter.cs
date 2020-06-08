@@ -682,6 +682,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     private IEnumerator RejectDefending_Co()
     {
+        NewIManager.Instance.PlayLowShieldIndicatorForCharacter(CharInfo.CharacterID, UMS.Side);
         float timer = (SpineAnim.GetAnimLenght(CharacterAnimationStateType.Defending) / defenceAnimSpeedMultiplier) * 0.25f;
         while (timer != 0f)
         {
