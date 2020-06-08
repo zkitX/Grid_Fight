@@ -12,14 +12,21 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
     private IEnumerator DurationOnBattleFieldCo;
     public Animator Anim;
 
+    protected Vector3 position;
+    protected GameObject activeParticles = null;
+
     private BaseCharacter CharHitted;
     public void SetItemPowerUp(ScriptableObjectItemPowerUps itemPowerUpInfo, Vector3 pos, float duration = 0f)
     {
+        position = pos;
         ItemPowerUpInfo = itemPowerUpInfo;
         //Icon.sprite = itemPowerUpInfo.Icon;
         puText.text = itemPowerUpInfo.powerUpText;
         color = itemPowerUpInfo.color;
         transform.position = pos;
+
+        activeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(ItemPowerUpInfo.activeParticles, CharacterNameType.None, AttackParticlePhaseTypes.Bullet, pos, SideType.LeftSide, AttackInputType.Skill1);
+
         Anim.SetInteger("Color", (int)color);
         Anim.SetBool("FadeInOut", true);
         if (DurationOnBattleFieldCo != null)
@@ -75,8 +82,23 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
             }
             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, powerUpAudio, AudioBus.MidPrio, other.gameObject.transform);
             EventManager.Instance?.AddPotionCollected(itemType);
-            gameObject.SetActive(false);
+            StartCoroutine(CollectedCo());
         }
+    }
+
+    IEnumerator CollectedCo()
+    {
+        activeParticles.SetActive(false);
+        Anim.SetBool("FadeInOut", false);
+        ParticleManagerScript.Instance.FireParticlesInPosition(ItemPowerUpInfo.terminationParticles, CharacterNameType.None, AttackParticlePhaseTypes.Bullet, position, SideType.LeftSide, AttackInputType.Skill1);
+        yield return null;
+
+        while (Anim.GetCurrentAnimatorStateInfo(0).IsName("PotionPick"))
+        {
+            yield return null;
+        }
+
+        gameObject.SetActive(false);
     }
 
 
@@ -90,6 +112,9 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
             timer += Time.fixedDeltaTime;
         }
         DurationOnBattleFieldCo = null;
+
+
+        activeParticles.SetActive(false);
         Anim.SetBool("FadeInOut", false);
     }
 
