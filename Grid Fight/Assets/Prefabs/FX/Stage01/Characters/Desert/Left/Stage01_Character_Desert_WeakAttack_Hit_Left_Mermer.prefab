@@ -9,12 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3252666646786503414}
-  - component: {fileID: 3252666646786503403}
   - component: {fileID: 7394238600868540057}
-  - component: {fileID: 3252666646786503400}
-  - component: {fileID: 3252666646786503401}
-  - component: {fileID: 3252666646786503404}
   - component: {fileID: 8067466219775616482}
+  - component: {fileID: 7703961793261198159}
   m_Layer: 0
   m_Name: Stage01_Character_Desert_WeakAttack_Hit_Left_Mermer
   m_TagString: Untagged
@@ -42,18 +39,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3252666646786503403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3252666646786503415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!198 &7394238600868540057
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4712,55 +4697,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &3252666646786503400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3252666646786503415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6b4f6a2e73fe8f428a4d552f0a13adf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Isolate: 1
-  ShotNovice:
-  - {fileID: 0}
-  ShotDefiant:
-  - {fileID: 0}
-  ShotHeroine:
-  - {fileID: 0}
-  ShotGodness:
-  - {fileID: 0}
---- !u!114 &3252666646786503401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3252666646786503415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba9e6c852f53ac7448afd635fab03e07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BulletTargetTime: 1
-  BulletOriginalTime: 1
---- !u!114 &3252666646786503404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3252666646786503415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2540eedaee99924438ce16aeff707ac9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PSTime: 10
-  AutoUpdate: 1
 --- !u!199 &8067466219775616482
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -4824,6 +4760,18 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &7703961793261198159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3252666646786503415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3481235236556124326
 GameObject:
   m_ObjectHideFlags: 0

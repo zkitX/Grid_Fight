@@ -12,9 +12,6 @@ GameObject:
   - component: {fileID: 822955250899428364}
   - component: {fileID: 822955250899428363}
   - component: {fileID: 822955250899428362}
-  - component: {fileID: 822955250899428361}
-  - component: {fileID: 822955250899428360}
-  - component: {fileID: 822955250899428365}
   m_Layer: 0
   m_Name: Stage01_Character_Desert_StrongAttack_Cast_Left_Mermer
   m_TagString: Untagged
@@ -4777,55 +4774,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &822955250899428361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 822955250899428374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6b4f6a2e73fe8f428a4d552f0a13adf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Isolate: 1
-  ShotNovice:
-  - {fileID: 7019341793927955741}
-  ShotDefiant:
-  - {fileID: 7019341793927955741}
-  ShotHeroine:
-  - {fileID: 7019341793927955741}
-  ShotGodness:
-  - {fileID: 7019341793927955741}
---- !u!114 &822955250899428360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 822955250899428374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba9e6c852f53ac7448afd635fab03e07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BulletTargetTime: 1
-  BulletOriginalTime: 1
---- !u!114 &822955250899428365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 822955250899428374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2540eedaee99924438ce16aeff707ac9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PSTime: 10
-  AutoUpdate: 1
 --- !u!1 &1640882743116768346
 GameObject:
   m_ObjectHideFlags: 0
