@@ -47,7 +47,7 @@ public class BattleTileTargetsScript : MonoBehaviour
             anim.speed = (1 / duration) * (attacker.CharInfo.BaseSpeed / attacker.CharInfo.SpeedStats.B_BaseSpeed);
             timer += Time.fixedDeltaTime * (attacker.CharInfo.BaseSpeed / attacker.CharInfo.SpeedStats.B_BaseSpeed);
             tc.RemainingTime = duration - timer;
-            if (!attacker.Attacking)
+            if (!attacker.Attacking && tc.RemainingTime > duration * 0.1f)
             {
                 //Stop the firing of the attacks to the tiles
                 attacker.shotsLeftInAttack = 0;
@@ -105,9 +105,7 @@ public class BattleTileTargetsScript : MonoBehaviour
         }
 
 
-
-
-        if (attacker.CharInfo.Health > 0 && attacker.Attacking)
+        if (attacker.CharInfo.Health > 0)
         {
             if (effectOn)
             {
