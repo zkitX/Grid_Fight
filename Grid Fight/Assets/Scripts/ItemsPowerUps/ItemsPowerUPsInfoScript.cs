@@ -40,8 +40,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
         yield return DurationOnBattleField_Co();
         activeParticles.SetActive(false);
         Anim.SetBool("FadeInOut", false);
-        yield return null;
-        yield return new WaitForSeconds(Anim.GetCurrentAnimatorStateInfo(0).length + Anim.GetCurrentAnimatorStateInfo(0).normalizedTime - 0.2f);
+        yield return new WaitForSeconds(0.5f);
         gameObject.SetActive(false);
     }
 
