@@ -1068,17 +1068,16 @@ public class BattleManagerScript : MonoBehaviour
                         }
                     }                    
                 }
-            }
+                if (cb != null)
+                {
 
-            if(cb != null)
-            {
-
-                //Debug.LogError(cb.CharInfo.CharacterID);
-                SetNextChar(deselction, cb, side, playerController, cs, worksOnFungusPappets);
-            }
-            else
-            {
-                CurrentSelectedCharacters[playerController].Character = null;
+                    //Debug.LogError(cb.CharInfo.CharacterID);
+                    SetNextChar(deselction, cb, side, playerController, cs, worksOnFungusPappets);
+                }
+                else
+                {
+                    CurrentSelectedCharacters[playerController].Character = null;
+                }
             }
         }
     }
@@ -1365,7 +1364,21 @@ public class PlayableCharOnScene
 
 public class CurrentSelectedCharacterClass
 {
-    public CharacterType_Script Character;
+    public CharacterType_Script _Character;
+
+    public CharacterType_Script Character
+    {
+        get
+        {
+            return _Character;
+        }
+        set
+        {
+            _Character = value;
+        }
+    }
+
+
     public IEnumerator LoadCharCo;
     public NextSelectionCharClass NextSelectionChar;
     public bool isSwapping = false;
