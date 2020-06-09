@@ -316,6 +316,11 @@ public class CharacterType_Script : BaseCharacter
     GameObject chargingPs = null;
     public IEnumerator StartChargingAttack_Co(AttackInputType nextAtkType)
     {
+
+        while (currentAttackPhase != AttackPhasesType.End)
+        {
+            yield return null;
+        }
         if (CanAttack && !isSpecialLoading)
         {
             ScriptableObjectAttackBase nxtAtk = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackInput == nextAtkType).First();
