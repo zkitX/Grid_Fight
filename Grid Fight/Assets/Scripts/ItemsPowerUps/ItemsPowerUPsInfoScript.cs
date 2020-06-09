@@ -9,35 +9,42 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
     //public SpriteRenderer Icon;
     public PowerUpColorTypes color = PowerUpColorTypes.White;
     public TextMeshPro puText = null;
-    private IEnumerator DurationOnBattleFieldCo;
     public Animator Anim;
-
+    public Vector2Int Pos;
     protected Vector3 position;
     protected GameObject activeParticles = null;
 
     private BaseCharacter CharHitted;
-    public void SetItemPowerUp(ScriptableObjectItemPowerUps itemPowerUpInfo, Vector3 pos, float duration = 0f)
+    float Duration;
+
+
+    public void SetItemPowerUp(ScriptableObjectItemPowerUps itemPowerUpInfo, Vector3 worldPos, Vector2Int gridPos, float duration = 0f)
     {
-        position = pos;
+        position = worldPos;
+        Pos = gridPos;
         ItemPowerUpInfo = itemPowerUpInfo;
         //Icon.sprite = itemPowerUpInfo.Icon;
         puText.text = itemPowerUpInfo.powerUpText;
         color = itemPowerUpInfo.color;
-        transform.position = pos;
-
-        activeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(ItemPowerUpInfo.activeParticles, CharacterNameType.None, AttackParticlePhaseTypes.Bullet, pos, SideType.LeftSide, AttackInputType.Skill1);
+        transform.position = worldPos;
+        Duration = duration;
+        activeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(ItemPowerUpInfo.activeParticles, CharacterNameType.None, AttackParticlePhaseTypes.Bullet, worldPos, SideType.LeftSide, AttackInputType.Skill1);
         activeParticles.transform.position -= new Vector3(0f, 0.3f, 0f);
-
         Anim.SetInteger("Color", (int)color);
         Anim.SetBool("FadeInOut", true);
-        if (DurationOnBattleFieldCo != null)
-        {
-            StopCoroutine(DurationOnBattleFieldCo);
-        }
-
-        DurationOnBattleFieldCo = DurationOnBattleField_Co(duration);
-        StartCoroutine(DurationOnBattleFieldCo);
+        StartCoroutine(spawn_Co());
     }
+
+    private IEnumerator spawn_Co()
+    {
+        yield return DurationOnBattleField_Co();
+        activeParticles.SetActive(false);
+        Anim.SetBool("FadeInOut", false);
+        yield return null;
+        yield return new WaitForSeconds(Anim.GetCurrentAnimatorStateInfo(0).length + Anim.GetCurrentAnimatorStateInfo(0).normalizedTime - 0.2f);
+        gameObject.SetActive(false);
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -87,44 +94,21 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
             }
             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, powerUpAudio, AudioBus.MidPrio, other.gameObject.transform);
             EventManager.Instance?.AddPotionCollected(itemType);
-            StartCoroutine(CollectedCo());
+            Duration = 0;
         }
     }
 
-    IEnumerator CollectedCo()
+    private IEnumerator DurationOnBattleField_Co()
     {
-        activeParticles.SetActive(false);
-        Anim.SetBool("FadeInOut", false);
-        ParticleManagerScript.Instance.FireParticlesInPosition(ItemPowerUpInfo.terminationParticles, CharacterNameType.None, AttackParticlePhaseTypes.Bullet, position, SideType.LeftSide, AttackInputType.Skill1);
-        yield return null;
-
-        yield return new WaitForSeconds(Anim.GetCurrentAnimatorStateInfo(0).length + Anim.GetCurrentAnimatorStateInfo(0).normalizedTime - 0.2f);
-
-        gameObject.SetActive(false);
-    }
-
-
-    private IEnumerator DurationOnBattleField_Co(float duration = 0f)
-    {
-        if (duration == 0f) duration = ItemPowerUpInfo.DurationOnField;
+        if (Duration == 0f)
+        {
+            Duration = ItemPowerUpInfo.DurationOnField;
+        }
         float timer = 0;
-        while (timer <= duration)
+        while (timer <= Duration)
         {
             yield return BattleManagerScript.Instance.WaitUpdate();
             timer += Time.fixedDeltaTime;
         }
-        DurationOnBattleFieldCo = null;
-
-
-        activeParticles.SetActive(false);
-        Anim.SetBool("FadeInOut", false);
-        yield return null;
-        yield return new WaitForSeconds(Anim.GetCurrentAnimatorStateInfo(0).length + Anim.GetCurrentAnimatorStateInfo(0).normalizedTime - 0.2f);
-        gameObject.SetActive(false);
-    }
-
-    public void DisablePowerUp()
-    {
-        gameObject.SetActive(false);
     }
 }

@@ -1063,7 +1063,7 @@ public class BattleManagerScript : MonoBehaviour
             if(cb != null)
             {
 
-                Debug.LogError(cb.CharInfo.CharacterID);
+                //Debug.LogError(cb.CharInfo.CharacterID);
                 SetNextChar(deselction, cb, side, playerController, cs, worksOnFungusPappets);
             }
         }

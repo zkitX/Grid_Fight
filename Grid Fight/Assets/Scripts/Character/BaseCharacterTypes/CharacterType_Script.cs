@@ -685,12 +685,6 @@ public class CharacterType_Script : BaseCharacter
             ResetAudioManager();
         }
 
-        if (SpineAnim.CurrentAnim.Contains("AtkToIdle") && (!animState.Contains(CharacterAnimationStateType.Defeat_ReverseArrive.ToString()) || !animState.Contains("JumpTransition")))
-        {
-            return;
-        }
-
-
         base.SetAnimation(animState, loop, transition, _pauseOnLastFrame);
     }
 
