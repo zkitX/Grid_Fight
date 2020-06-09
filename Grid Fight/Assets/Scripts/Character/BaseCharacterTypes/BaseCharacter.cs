@@ -702,7 +702,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     private IEnumerator RejectDefending_Co()
     {
-        NewIManager.Instance.PlayLowShieldIndicatorForCharacter(CharInfo.CharacterID, UMS.Side);
         float timer = (SpineAnim.GetAnimLenght(CharacterAnimationStateType.Defending) / defenceAnimSpeedMultiplier) * 0.25f;
         while (timer != 0f)
         {
@@ -715,12 +714,16 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     private IEnumerator ReloadDefending_Co()
     {
+        NewIManager.Instance.PlayLowShieldIndicatorForCharacter(CharInfo.CharacterID, UMS.Side);
+
         StopDefending();
         canDefend = false;
         while (CharInfo.ShieldPerc != 100f)
         {
             yield return null;
         }
+
+        NewIManager.Instance.StopLowShieldIndicatorForCharacter(CharInfo.CharacterID, UMS.Side);
         canDefend = true;
     }
 

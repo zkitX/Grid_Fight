@@ -87,6 +87,11 @@ public class NewIManager : MonoBehaviour
         GetvitalityBoxOfCharacter(charName, side).PlayLowShieldAnimation();
     }
 
+    public void StopLowShieldIndicatorForCharacter(CharacterNameType charName, SideType side)
+    {
+        GetvitalityBoxOfCharacter(charName, side).StopLowShieldAnimation();
+    }
+
     public NewICharacterVitality GetvitalityBoxOfCharacter(CharacterNameType charName, SideType side)
     {
         return vitalityBoxes.Where(r =>r.assignedCharDetails != null && r.assignedCharDetails.CharacterID == charName && r.mapSide == side).FirstOrDefault();
