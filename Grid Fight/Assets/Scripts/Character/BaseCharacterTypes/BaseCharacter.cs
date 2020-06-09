@@ -732,7 +732,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         if (isDefending)
         {
             isDefending = false;
-            SetAnimation(CharacterAnimationStateType.Idle, true, 0.1f);
+            if(SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Defending.ToString()))
+            {
+                SetAnimation(CharacterAnimationStateType.Idle, true, 0.1f);
+            }
         }
 
     }

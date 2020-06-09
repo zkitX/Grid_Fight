@@ -280,10 +280,7 @@ public class Stage01_Boss_Script : MinionType_Script
         if (completedAnim.Contains("AtkToIdle") || completedAnim == CharacterAnimationStateType.Atk.ToString() || completedAnim == CharacterAnimationStateType.Atk1.ToString())
         {
             currentAttackPhase = AttackPhasesType.End;
-            if (shotsLeftInAttack == 0)
-            {
-                Attacking = false;
-            }
+            Attacking = false;
         }
 
         if (completedAnim.Contains(CharacterAnimationStateType.Arriving.ToString()))
