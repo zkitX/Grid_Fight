@@ -92,7 +92,54 @@ public class Grid_UINavigator : MonoBehaviour
 
     [SerializeField] protected GameObject cursorPrefab = null;
     [HideInInspector] public Grid_UICursor cursor = null;
-    [HideInInspector] public MenuNavigationType navType = MenuNavigationType.None;
+    [HideInInspector] public List<MenuNavigationType> navTypes = new List<MenuNavigationType>();
+    public bool CanNavigate(MenuNavigationType navType)
+    {
+        foreach (MenuNavigationType navT in navTypes) if (navType == navT) return true;
+        return false;
+    }
+    public bool CanNavigate(MenuNavigationType[] navs)
+    {
+        bool canNav = true;
+        foreach (MenuNavigationType nav in navs) if (!CanNavigate(nav)) canNav = false;
+        return canNav;
+    }
+    public void SetNavigation(MenuNavigationType navType, bool state)
+    {
+        if (navType == MenuNavigationType.None || navType == MenuNavigationType.Unassigned) return;
+
+        foreach(MenuNavigationType nav in navTypes.ToArray())
+        {
+            if (nav == navType)
+            {
+                if (state) return;
+                else
+                {
+                    navTypes.Remove(nav);
+                    UpdateNavigationInput();
+                    return;
+                }
+            }
+        }
+        if (state)
+        {
+            navTypes.Add(navType);
+            UpdateNavigationInput();
+        }
+    }
+    public void SetNavigationAbsolute(MenuNavigationType type1 = MenuNavigationType.None, 
+        MenuNavigationType type2 = MenuNavigationType.None, MenuNavigationType type3 = MenuNavigationType.None, 
+        MenuNavigationType type4 = MenuNavigationType.None, MenuNavigationType type5 = MenuNavigationType.None)
+    {
+        navTypes = new List<MenuNavigationType>();
+        if (type1 != MenuNavigationType.None) navTypes.Add(type1);
+        if (type2 != MenuNavigationType.None) navTypes.Add(type2);
+        if (type3 != MenuNavigationType.None) navTypes.Add(type3);
+        if (type4 != MenuNavigationType.None) navTypes.Add(type4);
+        if (type5 != MenuNavigationType.None) navTypes.Add(type5);
+        UpdateNavigationInput();
+    }
+   // [HideInInspector] public MenuNavigationType navType = MenuNavigationType.None;
 
     private void Awake()
     {
@@ -106,7 +153,7 @@ public class Grid_UINavigator : MonoBehaviour
     {
         EnableCollection(startingCollectionID, true);
         StartCoroutine(SelectFirstButton());
-        SetNavigation(MenuNavigationType.Relative);
+        SetNavigationAbsolute(MenuNavigationType.Relative);
     }
 
     public void EnableCollection(string collectionID, bool state)
@@ -127,33 +174,30 @@ public class Grid_UINavigator : MonoBehaviour
     }
 
     //Sets the navigation when the button action is called
-    public void SetNavigation(MenuNavigationType nav, Grid_UIButton buttonToFocusOn = null)
+    public void UpdateNavigationInput(Grid_UIButton buttonToFocusOn = null)
     {
-        if (navType == nav)
+        if (InputController.Instance == null)
         {
+            Debug.LogError("NO INSTANCE OF INPUT CONTROLLER, CANNOT CONFIGURE MENU NAVIGATION");
             return;
         }
 
-        navType = nav;
         InputController.Instance.ButtonAUpEvent -= ButtonPressInput;
 
-        if (InputController.Instance != null)
+
+        InputController.Instance.LeftJoystickUsedEvent -= ButtonChangeInput;
+        if (CanNavigate(MenuNavigationType.Relative))
         {
-            if(nav == MenuNavigationType.Relative)
-            {
-                cursor.EnableCursor(false);
-                InputController.Instance.LeftJoystickUsedEvent += ButtonChangeInput;
-            }
-            else if(nav == MenuNavigationType.Cursor)
-            {
-                cursor.EnableCursor(true, buttonToFocusOn == null ? selectedButton : buttonToFocusOn) ;
-                InputController.Instance.LeftJoystickUsedEvent -= ButtonChangeInput;
-            }
-            else if(nav == MenuNavigationType.None)
-            {
-                cursor.EnableCursor(false);
-                InputController.Instance.LeftJoystickUsedEvent -= ButtonChangeInput;
-            }
+            InputController.Instance.LeftJoystickUsedEvent += ButtonChangeInput;
+        }
+
+        if (CanNavigate(MenuNavigationType.Cursor) && !cursor.state)
+        {
+            cursor.EnableCursor(true, buttonToFocusOn == null ? selectedButton : buttonToFocusOn);
+        }
+        else if(cursor.state)
+        {
+            cursor.EnableCursor(false);
         }
 
         InputController.Instance.ButtonAUpEvent += ButtonPressInput;
@@ -234,7 +278,7 @@ public class Grid_UINavigator : MonoBehaviour
         {
             selectedButton.PressAction();
         }
-        if (navType == MenuNavigationType.Cursor) cursor.PlayPressAnimation();
+        if (CanNavigate(MenuNavigationType.Cursor)) cursor.PlayPressAnimation();
     }
 
 
@@ -406,7 +450,7 @@ public class Grid_UINavigator : MonoBehaviour
     private void OnDestroy()
     {
         InputController.Instance.ButtonAUpEvent -= ButtonPressInput;
-        SetNavigation(MenuNavigationType.None);
+        SetNavigationAbsolute();
     }
 }
 

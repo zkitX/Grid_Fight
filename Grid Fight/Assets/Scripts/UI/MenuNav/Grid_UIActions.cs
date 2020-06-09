@@ -80,7 +80,7 @@ public class Grid_UIActions
                     (activationPauseBefore != 0 ? " after " + activationPauseBefore.ToString() + (activationPauseBefore != 1 ? " seconds" : " second") : "") +
                     (activationPauseAfter != 0 ? " and wait " + activationPauseAfter.ToString() + (activationPauseAfter != 1 ? " seconds" : " second") + " afterward" : "");
             case (UI_ActionTypes.SetNavigationSystem):
-                return "Set navigation to " + navigationType.ToString();
+                return "Set navigation"; //NEED TO EXPAND THIS
             case (UI_ActionTypes.SetBriefingInfo):
                 return "Set briefing for " + (stageForBriefing != null ? stageForBriefing.Name : "undetermined stage");
             case (UI_ActionTypes.SetWorldMapFocus):
@@ -157,10 +157,10 @@ public class Grid_UIActions
 
         if (setSelectionType == SelectionType.Selected)
         {
-            if (Grid_UINavigator.Instance.navType == MenuNavigationType.Cursor) yield break;
+            if (Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.Cursor)) yield break;
             Grid_UINavigator.Instance.SelectButton(setSelectionButton, !ignoreDeselectEventsForAllOtherButtons);
         }
-        if (setSelectionType == SelectionType.Deselected) Grid_UINavigator.Instance.DeselectButton(setSelectionButton, Grid_UINavigator.Instance.navType == MenuNavigationType.Cursor ? true : !ignoreDeselectEventsForAllOtherButtons);
+        if (setSelectionType == SelectionType.Deselected) Grid_UINavigator.Instance.DeselectButton(setSelectionButton, Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.Cursor) ? true : !ignoreDeselectEventsForAllOtherButtons);
         yield return null;
     }
 
@@ -211,10 +211,35 @@ public class Grid_UIActions
         yield return new WaitForSeconds(activationPauseAfter);
     }
 
-    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetNavigationSystem)] public MenuNavigationType navigationType = MenuNavigationType.Relative;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetNavigationSystem)] public MenuNavigationType navigationType1 = MenuNavigationType.None;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetNavigationSystem)] public bool navigationState1 = false;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetNavigationSystem)] public MenuNavigationType navigationType2 = MenuNavigationType.None;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetNavigationSystem)] public bool navigationState2 = false;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetNavigationSystem)] public MenuNavigationType navigationType3 = MenuNavigationType.None;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetNavigationSystem)] public bool navigationState3 = false;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetNavigationSystem)] public bool setNavigationAbsolute = false;
     IEnumerator SetNavigationSystem()
     {
-        Grid_UINavigator.Instance.SetNavigation(navigationType);
+        if (setNavigationAbsolute)
+        {
+            if(navigationType1 == MenuNavigationType.None && navigationType2 == MenuNavigationType.None && navigationType3 == MenuNavigationType.None)
+            {
+                Grid_UINavigator.Instance.SetNavigationAbsolute();
+                yield break;
+            }
+
+            Grid_UINavigator.Instance.SetNavigationAbsolute(
+                navigationState1 ? navigationType1 : MenuNavigationType.None,
+                navigationState2 ? navigationType2 : MenuNavigationType.None,
+                navigationState3 ? navigationType3 : MenuNavigationType.None
+                );
+            yield break;
+        }
+
+        Grid_UINavigator.Instance.SetNavigation(navigationType1, navigationState1);
+        Grid_UINavigator.Instance.SetNavigation(navigationType2, navigationState2);
+        Grid_UINavigator.Instance.SetNavigation(navigationType3, navigationState3);
+
         yield return null;
     }
 
@@ -284,5 +309,18 @@ public class Grid_UIActions
                 break;
         }
         yield return null;
+    }
+}
+
+[System.Serializable]
+public class SetNavigationInfoClass
+{
+    public MenuNavigationType navType = MenuNavigationType.None;
+    public bool state = false;
+
+    public SetNavigationInfoClass()
+    {
+        navType = MenuNavigationType.None;
+        state = false;
     }
 }
