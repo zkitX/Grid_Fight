@@ -179,7 +179,7 @@ public class Grid_UIButton : MonoBehaviour
 
     public void RefreshCursorCheck()
     {
-        if (Grid_UINavigator.Instance.navType != MenuNavigationType.Cursor) return;
+        if (!Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.Cursor)) return;
 
         if (GetComponent<Collider2D>().IsTouching(Grid_UINavigator.Instance.cursor.GetComponent<Collider2D>()))
         {
@@ -203,7 +203,7 @@ public class Grid_UIButton : MonoBehaviour
 
     void CursorEnter(bool state)
     {
-        if (Grid_UINavigator.Instance.navType != MenuNavigationType.Cursor || !Active) return;
+        if (!Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.Cursor) || !Active) return;
 
         if (state)
         {

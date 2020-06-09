@@ -16,7 +16,7 @@ public class CursorParalax : MonoBehaviour
 
     public void EnableParalax(bool state)
     {
-        if (state && (Grid_UINavigator.Instance == null || Grid_UINavigator.Instance.navType != MenuNavigationType.Cursor))
+        if (state && (Grid_UINavigator.Instance == null || !Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.Cursor)))
         {
             return;
         }
