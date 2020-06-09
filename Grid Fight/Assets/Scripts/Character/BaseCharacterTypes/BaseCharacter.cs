@@ -70,7 +70,24 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public bool _isSpecialLoading = false;
     public bool isSpecialStop = false;
-    public bool isSpecialQueueing = false;
+
+    public bool isDefending
+    {
+        get
+        {
+            return isDefendingStop ? false : _isDefending;
+        }
+        set
+        {
+            _isDefending = value;
+        }
+    }
+
+
+    public bool _isDefending = false;
+    public bool isDefendingStop = false;
+
+
     public List<BuffDebuffClass> BuffsDebuffsList = new List<BuffDebuffClass>();
     public List<CharacterActionType> CharActionlist = new List<CharacterActionType>();
     public bool VFXTestMode = false;
@@ -97,7 +114,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public bool SwapWhenPossible = false;
     public GameObject chargeParticles = null;
     protected bool canDefend = true;
-    public bool isDefending = false;
     public StatisticInfoClass Sic;
     public Vector3 LocalSpinePosoffset;
     public int shotsLeftInAttack
@@ -670,10 +686,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
         SpineAnim.SetAnimationSpeed(defenceAnimSpeedMultiplier);
-
         if (canDefend && CharInfo.Shield >= UniversalGameBalancer.Instance.defenceCost)
         {
             CharInfo.Shield -= UniversalGameBalancer.Instance.defenceCost;
+            isDefendingStop = false;
             isDefending = true;
             DefendingHoldingTimer = 0;
             StartCoroutine(Defending_Co());
@@ -731,7 +747,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
         if (isDefending)
         {
-            isDefending = false;
+            isDefendingStop = true;
             if(SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Defending.ToString()))
             {
                 SetAnimation(CharacterAnimationStateType.Idle, true, 0.1f);

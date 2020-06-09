@@ -78,7 +78,7 @@ public class CharacterType_Script : BaseCharacter
                 StartDefending();
                 break;
             case InputActionType.Defend_Stop:
-                if (isDefending) StopDefending();
+                StopDefending();
                 break;
             case InputActionType.Move_Up:
                 break;
