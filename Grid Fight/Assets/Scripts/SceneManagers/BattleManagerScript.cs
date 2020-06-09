@@ -407,19 +407,25 @@ public class BattleManagerScript : MonoBehaviour
             {
                 KeyValuePair<ControllerType, CurrentSelectedCharacterClass> currentPlayer = CurrentSelectedCharacters.Where(r => r.Value.Character != null && r.Value.Character.CharInfo.CharacterID == cName && r.Value.Character.UMS.Side == side).First();
                 List<BaseCharacter> cbs = AllCharactersOnField.Where(r => r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.UMS.IsCharControllableByPlayers(playerController)).ToList();
-
-                foreach (BaseCharacter item in cbs)
+                if(cbs.Count > 0)
                 {
-                    List<KeyValuePair<ControllerType, CurrentSelectedCharacterClass>> controllers = CurrentSelectedCharacters.Where(r => playerController.Contains(r.Key) && r.Value.Character != null && r.Value.NextSelectionChar.NextSelectionChar == item.CharInfo.CharacterSelection).ToList();
-                    if (controllers.Count == 0)
+                    foreach (BaseCharacter item in cbs)
                     {
-                        SetCharOnBoard(currentPlayer.Key, item.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeBattleTile(item.UMS.WalkingSide, item.UMS.Pos).Pos);
-                        SelectCharacter(currentPlayer.Key, (CharacterType_Script)item);
+                        List<KeyValuePair<ControllerType, CurrentSelectedCharacterClass>> controllers = CurrentSelectedCharacters.Where(r => playerController.Contains(r.Key) && r.Value.Character != null && r.Value.NextSelectionChar.NextSelectionChar == item.CharInfo.CharacterSelection).ToList();
+                        if (controllers.Count == 0)
+                        {
+                            SetCharOnBoard(currentPlayer.Key, item.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeBattleTile(item.UMS.WalkingSide, item.UMS.Pos).Pos);
+                            SelectCharacter(currentPlayer.Key, (CharacterType_Script)item);
 
-                        CurrentSelectedCharacters[currentPlayer.Key].NextSelectionChar.NextSelectionChar = item.CharInfo.CharacterSelection;
-                        ((CharacterType_Script)item).SetCharSelected(true, currentPlayer.Key);
-                        return;
+                            CurrentSelectedCharacters[currentPlayer.Key].NextSelectionChar.NextSelectionChar = item.CharInfo.CharacterSelection;
+                            ((CharacterType_Script)item).SetCharSelected(true, currentPlayer.Key);
+                            return;
+                        }
                     }
+                }
+                else
+                {
+                    currentPlayer.Value.Character = null;
                 }
             }
         }
@@ -1024,6 +1030,10 @@ public class BattleManagerScript : MonoBehaviour
                             }
                         }
                     }
+                    else
+                    {
+
+                    }
                     
                 }
                 else
@@ -1065,6 +1075,10 @@ public class BattleManagerScript : MonoBehaviour
 
                 //Debug.LogError(cb.CharInfo.CharacterID);
                 SetNextChar(deselction, cb, side, playerController, cs, worksOnFungusPappets);
+            }
+            else
+            {
+                CurrentSelectedCharacters[playerController].Character = null;
             }
         }
     }

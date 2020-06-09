@@ -93,6 +93,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
             }
             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, powerUpAudio, AudioBus.MidPrio, other.gameObject.transform);
             EventManager.Instance?.AddPotionCollected(itemType);
+            ParticleManagerScript.Instance.FireParticlesInPosition(ItemPowerUpInfo.terminationParticles, CharacterNameType.None, AttackParticlePhaseTypes.Bullet, position, SideType.LeftSide, AttackInputType.Skill1);
             Duration = 0;
         }
     }
