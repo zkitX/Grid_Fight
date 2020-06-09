@@ -280,7 +280,7 @@ public class BattleManagerScript : MonoBehaviour
         {
             yield return WaitUpdate();
 
-            timer += Time.fixedDeltaTime;
+            timer += Time.deltaTime;
         }
 
         cb.transform.position = nextPos;
@@ -747,6 +747,7 @@ public class BattleManagerScript : MonoBehaviour
         {
             item.isMoving = false;
             item.isDefending = false;
+            item.isDefendingStop = false;
             item.isSpecialLoading = false;
             item.isSpecialStop = false;
             item.chargingAttackTimer = 0f;
@@ -935,7 +936,7 @@ public class BattleManagerScript : MonoBehaviour
                     yield return new WaitForEndOfFrame();
                 }
             }
-            timer += Time.fixedDeltaTime;
+            timer += Time.deltaTime;
         }
     }
 
