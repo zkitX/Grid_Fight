@@ -344,7 +344,7 @@ public class CharacterType_Script : BaseCharacter
             while (isSpecialLoading && !VFXTestMode)
             {
                 yield return BattleManagerScript.Instance.WaitUpdate();
-                chargingAttackTimer += Time.fixedDeltaTime;
+                chargingAttackTimer += Time.deltaTime;
                 if(chargingAudioStrong == null && chargingAttackTimer >= 1.5f)
                 {
                     chargingAudioStrong = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoopStrong, AudioBus.MidPrio, transform, true, 1f);
