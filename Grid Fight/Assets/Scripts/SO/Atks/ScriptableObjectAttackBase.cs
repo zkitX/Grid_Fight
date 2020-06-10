@@ -90,7 +90,10 @@ public class TilesAttackTypeClass
 public class BulletBehaviourInfoClassOnBattleFieldClass
 {
     public float Delay;
+    public float BulletTravelDuration;
     public int ExplosionChances = 100;
+    public AnimationCurve Trajectory_Y = new AnimationCurve();
+    public AnimationCurve Trajectory_Z = new AnimationCurve();
     public bool Show = true;
     [HideInInspector] public List<BattleFieldAttackTileClass> BulletEffectTiles = new List<BattleFieldAttackTileClass>();
 }
@@ -99,8 +102,7 @@ public class BattleFieldAttackTileClass
 {
     [HideInInspector] public Vector2Int Pos;
 
-    public AnimationCurve Trajectory_Y = new AnimationCurve();
-    public AnimationCurve Trajectory_Z = new AnimationCurve();
+   
 
 
     public bool HasEffect = false;

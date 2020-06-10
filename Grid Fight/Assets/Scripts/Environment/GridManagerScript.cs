@@ -203,15 +203,19 @@ public class GridManagerScript : MonoBehaviour
 
     public BattleTileScript GetBattleBestTileInsideTheBattlefield(Vector2Int pos, FacingType facing)
     {
-        BattleTileScript res = null;
+        BattleTileScript res = BattleTiles.Where(r => r.Pos == pos).FirstOrDefault();
+        if(res.BattleTileState != BattleTileStateType.NonUsable)
+        {
+            return res;
+        }
         int startValue = pos.y;
         if (facing == FacingType.Left)
         {
-            for (int i = startValue; i < YGridSeparator; i++)
+            for (int i = pos.y; i < 11; i++)
             {
-                pos.y = i;
+                
                 res = BattleTiles.Where(r => r.Pos == new Vector2Int(pos.x, i)).FirstOrDefault();
-                if (res.BattleTileState != BattleTileStateType.NonUsable)
+                if (res.BattleTileState != BattleTileStateType.NonUsable && res.WalkingSide != WalkingSideType.RightSide)
                 {
                     return res;
                 }
@@ -219,16 +223,10 @@ public class GridManagerScript : MonoBehaviour
         }
         else
         {
-            for (int i = startValue; i >= YGridSeparator; i--)
+            for (int i = pos.y; i > 0; i--)
             {
-                pos.y = i;
-                res = BattleTiles.Where(r => r.Pos == pos).FirstOrDefault();
-                if (res == null)
-                {
-
-                }
-
-                if (res.BattleTileState != BattleTileStateType.NonUsable)
+                res = BattleTiles.Where(r => r.Pos == new Vector2Int(pos.x, i)).FirstOrDefault();
+                if (res.BattleTileState != BattleTileStateType.NonUsable && res.WalkingSide != WalkingSideType.LeftSide)
                 {
                     return res;
                 }

@@ -124,7 +124,7 @@ public class UIBattleManager : MonoBehaviour
         {
             yield return BattleManagerScript.Instance.WaitUpdate();
             SecondsToPlayLeftSide.text = ((int)duration).ToString();
-            duration -= Time.fixedDeltaTime;
+            duration -= Time.deltaTime;
 
         }
 
@@ -156,7 +156,7 @@ public class UIBattleManager : MonoBehaviour
         {
             yield return BattleManagerScript.Instance.WaitUpdate();
             SecondsToPlayRightSide.text = ((int)duration).ToString();
-            duration -= Time.fixedDeltaTime;
+            duration -= Time.deltaTime;
         }
 
         if (duration > 0)

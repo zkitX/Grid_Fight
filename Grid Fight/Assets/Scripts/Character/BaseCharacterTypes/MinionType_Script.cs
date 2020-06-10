@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Spine;
 using UnityEngine;
 
 public class MinionType_Script : BaseCharacter
@@ -355,48 +354,34 @@ public class MinionType_Script : BaseCharacter
     }
 
 
-   /* public override void CreateBullet(BattleFieldAttackTileClass bulletBehaviourInfo, Vector2Int pos, float delay)
+    public override void CreateBullet(BulletBehaviourInfoClassOnBattleFieldClass bulletBehaviourInfo)
     {
-        // Debug.Log(isSpecialLoading);
-
+           // Debug.Log(isSpecialLoading);
         GameObject bullet = BulletManagerScript.Instance.GetBullet();
         bullet.transform.position = SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position;
         BulletScript bs = bullet.GetComponent<BulletScript>();
         bs.SOAttack = nextAttack;
-        bs.BulletBehaviourInfo = new BulletBehaviourInfoClass(bulletBehaviourInfo.Pos, bulletBehaviourInfo.Trajectory_Y, bulletBehaviourInfo.Trajectory_Z, )
+        bs.BulletBehaviourInfo = null; 
+        bs.BulletBehaviourInfoTile = bulletBehaviourInfo;
         bs.Facing = UMS.Facing;
-        bs.PlayerController = UMS.PlayerController;
         bs.Elemental = CharInfo.DamageStats.CurrentElemental;
         bs.Side = UMS.Side;
+        bs.isColliding = false;
         bs.VFXTestMode = VFXTestMode;
         bs.CharOwner = this;
         bs.attackAudioType = GetAttackAudio();
-
-
-
-
-
-        GameObject bullet = BulletManagerScript.Instance.GetBullet();
-        bullet.transform.position = SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position;
-        BulletScript bs = bullet.GetComponent<BulletScript>();
-        bs.Trajectory_Y = bulletBehaviourInfo.Trajectory_Y;
-        bs.Trajectory_Z = bulletBehaviourInfo.Trajectory_Z;
-        bs.isColliding = false;
-        bs.attackAudioType = GetAttackAudio();
-        bs.CharOwner = this;
-        bs.DestinationTile = pos;
-        bs.BulletEffectTiles.Clear();
-        bs.BulletDuration = delay;
+        bs.BulletEffects.Clear();
+        bs.DestinationTile = bulletBehaviourInfo.BulletEffectTiles[0].Pos + nextAttackPos;
+        bs.BulletDuration = bulletBehaviourInfo.BulletTravelDuration;
         bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(nextAttack.Particles.Right.Bullet, CharInfo.CharacterID, AttackParticlePhaseTypes.Bullet, bullet.transform, UMS.Side,
-            nextAttack.AttackInput, CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script ? true : false);
-        bs.PS.SetActive(true);
+            nextAttack.AttackInput, true);
         bs.gameObject.SetActive(true);
         bs.StartMoveToTile();
-    }*/
+    }
 
     public override void fireAttackAnimation(Vector3 pos)
     {
-        if (!SpineAnim.CurrentAnim.Contains("Loop"))
+      /*  if (!SpineAnim.CurrentAnim.Contains("Loop"))
         {
             if(nextAttack.PrefixAnim != AttackAnimPrefixType.Atk1)
             {
@@ -417,9 +402,25 @@ public class MinionType_Script : BaseCharacter
             chargeParticles.SetActive(false);
 
             chargeParticles = null;
-        }
+        }*/
     }
 
+
+    public override void FireAttackAnimAndBullet(Vector3 pos)
+    {
+        if (nextAttack.AttackInput != AttackInputType.Weak)
+        {
+            if (!strongAnimDone)
+            {
+                strongAnimDone = true;
+                SetAnimation(nextAttack.PrefixAnim + "_Loop");
+            }
+        }
+        else
+        {
+            SetAnimation(nextAttack.PrefixAnim + "_Loop");
+        }
+    }
 
     public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
@@ -462,7 +463,69 @@ public class MinionType_Script : BaseCharacter
         totDamage += damage;
         base.SetFinalDamage(attacker, damage);
     }
-    public override void SpineAnimationState_Complete(TrackEntry trackEntry)
+
+
+    public override void SpineAnimationState_Event(Spine.TrackEntry trackEntry, Spine.Event e)
+    {
+        CastLoopImpactAudioClipInfoClass attackTypeAudioInfo = GetAttackAudio();
+        if (e.Data.Name.Contains("FireArrivingParticle"))
+        {
+            ArrivingEvent();
+        }
+        else if (e.Data.Name.Contains("FireCastParticle"))
+        {
+            if (attackTypeAudioInfo != null)
+            {
+                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackTypeAudioInfo.Cast, AudioBus.LowPrio, transform);
+            }
+
+            if (SpineAnim.CurrentAnim.Contains("Atk1"))
+            {
+                currentAttackPhase = AttackPhasesType.Cast_Rapid;
+            }
+            else
+            {
+                currentAttackPhase = AttackPhasesType.Cast_Powerful;
+
+            }
+            FireCastParticles();
+        }
+        else if (e.Data.Name.Contains("FireBulletParticle"))
+        {
+            if (SpineAnim.CurrentAnim.Contains("Atk1"))
+            {
+                currentAttackPhase = AttackPhasesType.Cast_Rapid;
+            }
+            else
+            {
+                currentAttackPhase = AttackPhasesType.Cast_Powerful;
+                    
+            }
+            BulletAttack();
+        }
+        else if (e.Data.Name.Contains("FireTileAttack") && !trackEntry.Animation.Name.Contains("Loop"))
+        {
+            currentAttackPhase = SpineAnim.CurrentAnim.Contains("Atk1") ? AttackPhasesType.Bullet_Rapid : AttackPhasesType.Bullet_Powerful;
+            CreateTileAttack();
+        }
+    }
+
+
+    public void BulletAttack()
+    {
+        if(nextAttack.AttackInput == AttackInputType.Strong)
+        {
+            CreateBullet(nextAttack.TilesAtk.BulletTrajectories[0]);
+
+        }
+        else if(nextAttack.AttackInput == AttackInputType.Weak)
+        {
+            shotsLeftInAttack--;
+            CreateBullet(nextAttack.TilesAtk.BulletTrajectories[nextAttack.TilesAtk.BulletTrajectories.Count - shotsLeftInAttack - 1]);
+        }
+    }
+
+    public override void SpineAnimationState_Complete(Spine.TrackEntry trackEntry)
     {
         if (trackEntry.Animation.Name == "<empty>" 
          || SpineAnim.CurrentAnim == CharacterAnimationStateType.Death.ToString() )
@@ -487,7 +550,7 @@ public class MinionType_Script : BaseCharacter
         {
 
             //If they can still attack, keep them in the charging loop
-            if (shotsLeftInAttack > 0)
+            if (shotsLeftInAttack > 0 && nextAttack.AttackInput == AttackInputType.Weak)
             {
                 SetAnimation(nextAttack.PrefixAnim + "_Charging", true, 0);
             }

@@ -356,6 +356,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     }
 
+    public virtual void FireAttackAnimAndBullet(Vector3 pos)
+    {
+
+    }
+
     public int GetHowManyAttackAreOnBattleField(List<BulletBehaviourInfoClassOnBattleFieldClass> bulTraj)
     {
         int res = 0;
@@ -524,57 +529,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
     }
 
-   /* //Create and set up the basic info for the bullet
-    public void CreateBullet(BulletBehaviourInfoClass bulletBehaviourInfo)
-    {
-        // Debug.Log(isSpecialLoading);
-        GameObject bullet = BulletManagerScript.Instance.GetBullet();
-        bullet.transform.position = SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position;
-        BulletScript bs = bullet.GetComponent<BulletScript>();
-        bs.SOAttack = nextAttack;
-        bs.BulletBehaviourInfo = bulletBehaviourInfo;
-        bs.Facing = UMS.Facing;
-        bs.PlayerController = UMS.PlayerController;
-        bs.Elemental = CharInfo.DamageStats.CurrentElemental;
-        bs.Side = UMS.Side;
-        bs.VFXTestMode = VFXTestMode;
-        bs.CharOwner = this;
-        bs.attackAudioType = GetAttackAudio();
-        if (bulletBehaviourInfo.HasEffect)
-        {
-          //  bs.BulletEffects = bulletBehaviourInfo.Effects;
-        }
-
-        if (!GridManagerScript.Instance.isPosOnFieldByHeight(UMS.CurrentTilePos + bulletBehaviourInfo.BulletDistanceInTile))
-        {
-            bs.gameObject.SetActive(false);
-            return;
-        }
-
-        if (UMS.Facing == FacingType.Right)
-        {
-            bs.DestinationTile = new Vector2Int(UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x, UMS.CurrentTilePos.y + bulletBehaviourInfo.BulletDistanceInTile.y > 11 ? 11 : UMS.CurrentTilePos.y + bulletBehaviourInfo.BulletDistanceInTile.y);
-        }
-        else
-        {
-            bs.DestinationTile = new Vector2Int(UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x, UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y < 0 ? 0 : UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y);
-        }
-        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(UMS.Side == SideType.LeftSide ? nextAttack.Particles.Left.Bullet : nextAttack.Particles.Right.Bullet, CharInfo.CharacterID, AttackParticlePhaseTypes.Bullet, bullet.transform, UMS.Side,
-            nextAttack.AttackInput, CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script ? true : false);
-
-
-        if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
-        {
-            bs.gameObject.SetActive(true);
-            bs.StartMoveToTile();
-        }
-        else
-        {
-            bs.gameObject.SetActive(false);
-        }
-    }*/
-
-
     public void CreateParticleAttack()
     {
 
@@ -595,12 +549,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
     }
 
-    public virtual void CreateBullet(BattleFieldAttackTileClass bulletBehaviourInfo, Vector2Int pos, float delay)
+    public virtual void CreateBullet(BulletBehaviourInfoClassOnBattleFieldClass bulletBehaviourInfo)
     {
     }
-
-
-    
 
     public Vector2Int nextAttackPos;
     public virtual void CreateTileAttack()
@@ -622,12 +573,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 sic.DamageExp += nextAttack.ExperiencePoints;
             }
 
-            foreach (BulletBehaviourInfoClassOnBattleFieldClass item in nextAttack.TilesAtk.BulletTrajectories)
+
+            for (int i = 0; i < nextAttack.TilesAtk.BulletTrajectories.Count; i++)
             {
-                foreach (BattleFieldAttackTileClass target in item.BulletEffectTiles)
+                foreach (BattleFieldAttackTileClass target in nextAttack.TilesAtk.BulletTrajectories[i].BulletEffectTiles)
                 {
                     int rand = UnityEngine.Random.Range(0, 100);
-                    if (rand <= item.ExplosionChances)
+                    if (rand <= nextAttack.TilesAtk.BulletTrajectories[i].ExplosionChances)
                     {
                         Vector2Int res = nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnTarget && charTar != null ? target.Pos + nextAttackPos :
                         nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnItSelf ? target.Pos + UMS.CurrentTilePos : target.Pos;
@@ -640,18 +592,44 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                                 {
                                     shotsLeftInAttack++;
 
-                                    bts.BattleTargetScript.SetAttack(item.Delay, res,
+                                    bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, res,
                                     0, CharInfo.Elemental, this,
                                     target, target.EffectChances);
                                 }
                                 else if (nextAttack.TilesAtk.AtkType != BattleFieldAttackType.OnItSelf && bts.WalkingSide != UMS.WalkingSide)
                                 {
+                                    //new way
                                     shotsLeftInAttack++;
                                     AttackedTiles(bts);
-                                    // CreateBullet(target, bts.Pos, item.Delay);
-                                    bts.BattleTargetScript.SetAttack(item.Delay, res,
+                                    if (nextAttack.AttackInput > AttackInputType.Weak && i == 0)
+                                    {
+                                        bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, res,
+                                    CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
+                                    target, target.EffectChances, nextAttack.TilesAtk.BulletTrajectories[i].BulletTravelDuration);
+                                    }
+                                    else if(nextAttack.AttackInput == AttackInputType.Weak)
+                                    {
+                                        bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, res,
+                                    CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
+                                    target, target.EffectChances, nextAttack.TilesAtk.BulletTrajectories[i].BulletTravelDuration);
+                                    }
+                                    else
+                                    {
+                                        bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, res,
+                                   CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
+                                   target, target.EffectChances);
+                                    }
+
+
+
+                                    /*
+                                  OLD Way
+                                  
+                                bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, res,
                                     CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
                                     target, target.EffectChances);
+                                 */
+
                                 }
                             }
                         }
@@ -1498,6 +1476,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             SpineAnim.CharOwner = this;
             SpineAnim.SpineAnimationState.Complete += SpineAnimationState_Complete;
+            SpineAnim.SpineAnimationState.Event += SpineAnimationState_Event;
 
             if (SpineAnim.CurveType == MovementCurveType.Space_Time)
             {
@@ -1506,6 +1485,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 UMS.IndicatorContainer.parent = SpineAnim.transform;
             }
         }
+    }
+
+    public virtual void SpineAnimationState_Event(Spine.TrackEntry trackEntry, Spine.Event e)
+    {
+
     }
 
     public virtual void SpineAnimationState_Complete(Spine.TrackEntry trackEntry)

@@ -65,7 +65,7 @@ public class ItemSpawnerManagerScript : MonoBehaviour
                     yield return null;
                 }
                 yield return BattleManagerScript.Instance.WaitUpdate();
-                timer += Time.fixedDeltaTime;
+                timer += Time.deltaTime;
             }
 
             ScriptableObjectItemPowerUps nextItemPowerUp = SOItemsPowerUps[Random.Range(0,SOItemsPowerUps.Count)];

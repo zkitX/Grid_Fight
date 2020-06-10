@@ -492,9 +492,9 @@ public class CharacterType_Script : BaseCharacter
         bs.SOAttack = nextAttack;
         bs.BulletBehaviourInfo = bulletBehaviourInfo;
         bs.Facing = UMS.Facing;
-        bs.PlayerController = UMS.PlayerController;
         bs.Elemental = CharInfo.DamageStats.CurrentElemental;
         bs.Side = UMS.Side;
+        bs.isColliding = true;
         bs.VFXTestMode = VFXTestMode;
         bs.CharOwner = this;
         bs.attackAudioType = GetAttackAudio();
@@ -587,6 +587,55 @@ public class CharacterType_Script : BaseCharacter
     public void SetCharSelected(bool isSelected, ControllerType player)
     {
         NewIManager.Instance.SetSelected(isSelected, player, CharInfo.CharacterID, UMS.Side);
+    }
+
+
+    public override void SpineAnimationState_Event(Spine.TrackEntry trackEntry, Spine.Event e)
+    {
+        CastLoopImpactAudioClipInfoClass attackTypeAudioInfo = GetAttackAudio();
+        if (e.Data.Name.Contains("StopDefending"))
+        {
+            SpineAnim.SetAnimationSpeed(0);
+        }
+        else if (e.Data.Name.Contains("FireArrivingParticle"))
+        {
+            ArrivingEvent();
+        }
+        else if (e.Data.Name.Contains("FireCastParticle"))
+        {
+            if (attackTypeAudioInfo != null)
+            {
+                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackTypeAudioInfo.Cast, AudioBus.LowPrio, transform);
+            }
+
+            if (SpineAnim.CurrentAnim.Contains("Atk1"))
+            {
+                currentAttackPhase = AttackPhasesType.Cast_Rapid;
+                CreateParticleAttack();
+            }
+            else
+            {
+                currentAttackPhase = AttackPhasesType.Cast_Powerful;
+
+            }
+            FireCastParticles();
+        }
+        else if (e.Data.Name.Contains("FireBulletParticle"))
+        {
+            if (SpineAnim.CurrentAnim.Contains("Atk1"))
+            {
+                currentAttackPhase = AttackPhasesType.Cast_Rapid;
+            }
+            else
+            {
+                currentAttackPhase = AttackPhasesType.Cast_Powerful;
+                CreateParticleAttack();
+            }
+        }
+        else if (e.Data.Name.Contains("FireTileAttack") && !trackEntry.Animation.Name.Contains("Loop"))
+        {
+            
+        }
     }
 
     public override void SpineAnimationState_Complete(Spine.TrackEntry trackEntry)

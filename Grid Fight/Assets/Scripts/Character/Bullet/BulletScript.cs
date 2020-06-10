@@ -16,7 +16,6 @@ public class BulletScript : MonoBehaviour
     public SideType Side;
     public FacingType Facing;
     public ElementalType Elemental;
-    public List<ControllerType> PlayerController = new List<ControllerType>();
     public GameObject PS;
     public GameObject TargetIndicator;
     public bool VFXTestMode = false;
@@ -26,9 +25,10 @@ public class BulletScript : MonoBehaviour
     bool isMoving = false;
     public bool isColliding = true;
     public float BulletDuration;
-	 IEnumerator movingCo;
-	  public ScriptableObjectAttackBase SOAttack;
+	IEnumerator movingCo;
+	public ScriptableObjectAttackBase SOAttack;
     public BulletBehaviourInfoClass BulletBehaviourInfo;
+    public BulletBehaviourInfoClassOnBattleFieldClass BulletBehaviourInfoTile;
     private bool SkillHit = false;
 	 
     //Private 
@@ -88,7 +88,7 @@ public class BulletScript : MonoBehaviour
         PSTimeGroup pstg = PS.GetComponent<PSTimeGroup>();
         if (pstg != null)
         {
-            pstg.UpdatePSTime(BulletDuration + 2);
+            pstg.UpdatePSTime(BulletDuration + 0.5f);
 
         }
         else
@@ -116,8 +116,8 @@ public class BulletScript : MonoBehaviour
             //Calutation for next world position of the bullet
             res = Vector3.Lerp(offset, destination, timer);
 
-            res.y = BulletBehaviourInfo.Trajectory_Y.Evaluate(timer) + res.y;
-            res.z = BulletBehaviourInfo.Trajectory_Z.Evaluate(timer) + res.z;
+            res.y = BulletBehaviourInfo != null ? BulletBehaviourInfo.Trajectory_Y.Evaluate(timer) + res.y : BulletBehaviourInfoTile.Trajectory_Y.Evaluate(timer) + res.y;
+            res.z = BulletBehaviourInfo != null ? BulletBehaviourInfo.Trajectory_Z.Evaluate(timer) + res.z : BulletBehaviourInfoTile.Trajectory_Z.Evaluate(timer) + res.y;
 
             transform.position = res;
             timer += Time.fixedDeltaTime / BulletDuration;
@@ -142,11 +142,18 @@ public class BulletScript : MonoBehaviour
     GameObject go;
     public void BulletTarget()
     {
-
         GetComponent<BoxCollider>().enabled = isColliding;
-        int startingYTile = Facing == FacingType.Left ? StartingTile.y - BulletBehaviourInfo.BulletGapStartingTile.y : StartingTile.y + BulletBehaviourInfo.BulletGapStartingTile.y;
+        int startingYTile = 0;
+        if (BulletBehaviourInfo != null)
+        {
+            startingYTile = Facing == FacingType.Left ? StartingTile.y - BulletBehaviourInfo.BulletGapStartingTile.y : StartingTile.y + BulletBehaviourInfo.BulletGapStartingTile.y;
+        }
+        else
+        {
+            startingYTile = StartingTile.y;
+        }
 
-        if(isColliding)
+        if (isColliding)
         {
             go = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Particles);
             go.transform.position = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position;
@@ -293,7 +300,7 @@ public class BulletScript : MonoBehaviour
     {
         Invoke("RestoreBullet", timer);
         PS.transform.parent = null;
-        //PS.GetComponent<PSTimeGroup>().UpdatePSTime(0.1f);
+        PS.GetComponent<PSTimeGroup>().UpdatePSTime(0.1f);
     }
 
 

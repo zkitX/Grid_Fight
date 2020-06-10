@@ -99,6 +99,12 @@ public class ScriptableObjectAttackTypeEditor : Editor
                         origin.TilesAtk.BulletTrajectories[i].ExplosionChances = 100;
                     }
                     origin.TilesAtk.BulletTrajectories[i].Delay = EditorGUILayout.FloatField("Delay", origin.TilesAtk.BulletTrajectories[i].Delay);
+                    if((i == 0 && origin.AttackInput == AttackInputType.Strong) || origin.AttackInput == AttackInputType.Weak)
+                    {
+                        origin.TilesAtk.BulletTrajectories[i].BulletTravelDuration = EditorGUILayout.FloatField("BulletTravelDuration", origin.TilesAtk.BulletTrajectories[i].BulletTravelDuration);
+                        origin.TilesAtk.BulletTrajectories[i].Trajectory_Y = EditorGUILayout.CurveField("Trajectory_Y", origin.TilesAtk.BulletTrajectories[i].Trajectory_Y);
+                        origin.TilesAtk.BulletTrajectories[i].Trajectory_Z = EditorGUILayout.CurveField("Trajectory_Z", origin.TilesAtk.BulletTrajectories[i].Trajectory_Z);
+                    }
                     origin.TilesAtk.BulletTrajectories[i].ExplosionChances = EditorGUILayout.IntField("ExplosionChances", origin.TilesAtk.BulletTrajectories[i].ExplosionChances);
                     switch (origin.TilesAtk.AtkType)
                     {
@@ -263,8 +269,7 @@ public class ScriptableObjectAttackTypeEditor : Editor
     private void ShowTileObject(ref BattleFieldAttackTileClass bfatc)
     {
 
-        bfatc.Trajectory_Y = EditorGUILayout.CurveField("Trajectory_Y", bfatc.Trajectory_Y);
-        bfatc.Trajectory_Z = EditorGUILayout.CurveField("Trajectory_Z", bfatc.Trajectory_Z);
+       
 
         bfatc.HasEffect = EditorGUILayout.ToggleLeft("HasEffect", bfatc.HasEffect);
         if (bfatc.HasEffect)

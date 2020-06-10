@@ -108,7 +108,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
         while (timer <= Duration)
         {
             yield return BattleManagerScript.Instance.WaitUpdate();
-            timer += Time.fixedDeltaTime;
+            timer += Time.deltaTime;
         }
     }
 }
