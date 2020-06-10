@@ -101,8 +101,8 @@ MonoBehaviour:
   TilesAtk:
     AtkType: 1
     BulletTrajectories:
-    - Delay: 0.5
-      BulletTravelDuration: 0.3
+    - Delay: 1
+      BulletTravelDuration: 0.2
       ExplosionChances: 100
       Trajectory_Y:
         serializedVersion: 2
@@ -163,8 +163,8 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-    - Delay: 0.8
-      BulletTravelDuration: 0.3
+    - Delay: 1.2
+      BulletTravelDuration: 0.2
       ExplosionChances: 100
       Trajectory_Y:
         serializedVersion: 2
@@ -216,7 +216,7 @@ MonoBehaviour:
         m_RotationOrder: 4
       Show: 1
       BulletEffectTiles:
-      - Pos: {x: 0, y: -1}
+      - Pos: {x: 0, y: 0}
         HasEffect: 0
         showImpact: 1
         Effects: []
