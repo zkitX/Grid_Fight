@@ -15064,7 +15064,6 @@ GameObject:
   - component: {fileID: 8554847417788358007}
   - component: {fileID: 8554847417788358000}
   - component: {fileID: 8554847417788358001}
-  - component: {fileID: 8554847417788358002}
   - component: {fileID: 8554847417788358003}
   - component: {fileID: 8554847417788358006}
   m_Layer: 0
@@ -19826,27 +19825,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8554847417788358002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8554847417788357997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6b4f6a2e73fe8f428a4d552f0a13adf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Isolate: 1
-  ShotNovice:
-  - {fileID: 0}
-  ShotDefiant:
-  - {fileID: 0}
-  ShotHeroine:
-  - {fileID: 0}
-  ShotGodness:
-  - {fileID: 0}
 --- !u!114 &8554847417788358003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19875,6 +19853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PSTime: 10
   AutoUpdate: 1
+  LongParticles: []
 --- !u!1 &8742123698115341224
 GameObject:
   m_ObjectHideFlags: 0

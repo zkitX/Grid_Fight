@@ -11,12 +11,9 @@ GameObject:
   - component: {fileID: 437897473126573470}
   - component: {fileID: 437897473126573445}
   - component: {fileID: 437897473126573442}
-  - component: {fileID: 437897473126573443}
-  - component: {fileID: 437897473126573440}
-  - component: {fileID: 437897473126573441}
-  - component: {fileID: 437897473126573444}
+  - component: {fileID: 4839958383211175445}
   m_Layer: 0
-  m_Name: Stage01_Character_Valley_WeakAttack_Cast_Right
+  m_Name: Stage01_Character_Valley_WeakAttack_Cast_Right_Epa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4760,7 +4757,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &437897473126573443
+--- !u!114 &4839958383211175445
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4772,56 +4769,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &437897473126573440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 437897473126573471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6b4f6a2e73fe8f428a4d552f0a13adf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Shot: 0
-  Isolate: 1
-  ShotNovice:
-  - {fileID: 3216109482036602890}
-  ShotDefiant:
-  - {fileID: 3216109482036602890}
-  ShotHeroine:
-  - {fileID: 3216109482036602890}
-  ShotGodness:
-  - {fileID: 3216109482036602890}
---- !u!114 &437897473126573441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 437897473126573471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba9e6c852f53ac7448afd635fab03e07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BulletTargetTime: 1
-  BulletOriginalTime: 1
---- !u!114 &437897473126573444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 437897473126573471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2540eedaee99924438ce16aeff707ac9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PSTime: 10
-  AutoUpdate: 1
 --- !u!1 &2349048654769541145
 GameObject:
   m_ObjectHideFlags: 0

@@ -25572,11 +25572,10 @@ GameObject:
   - component: {fileID: 8662512498320452928}
   - component: {fileID: 8662512498320452935}
   - component: {fileID: 8662512498320452934}
-  - component: {fileID: 8662512498320452933}
   - component: {fileID: 8662512498320452932}
   - component: {fileID: 8662512498320452929}
   m_Layer: 0
-  m_Name: Stage01_Character_Valley_StrongAttack_Bullet_Left
+  m_Name: Stage01_Character_Valley_StrongAttack_Bullet_Left_Epa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30331,28 +30330,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8662512498320452933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8662512498320452954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6b4f6a2e73fe8f428a4d552f0a13adf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Shot: 0
-  Isolate: 1
-  ShotNovice:
-  - {fileID: 1403942296552404628}
-  ShotDefiant:
-  - {fileID: 1403942296552404628}
-  ShotHeroine:
-  - {fileID: 1403942296552404628}
-  ShotGodness:
-  - {fileID: 1403942296552404628}
 --- !u!114 &8662512498320452932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30381,6 +30358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PSTime: 10
   AutoUpdate: 1
+  LongParticles: []
 --- !u!1 &8821988771324459013
 GameObject:
   m_ObjectHideFlags: 0

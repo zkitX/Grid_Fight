@@ -9984,10 +9984,8 @@ GameObject:
   - component: {fileID: 3686911784099046795}
   - component: {fileID: 3686911784099046806}
   - component: {fileID: 8688813105655101924}
-  - component: {fileID: 3686911784099046805}
-  - component: {fileID: 3686911784099046804}
-  - component: {fileID: 3686911784099046801}
   - component: {fileID: 8213479847971058335}
+  - component: {fileID: 5772742235228165774}
   m_Layer: 0
   m_Name: StageMukuruCaves_Character_Desert_StrongAttack_Hit_Right_Eanda
   m_TagString: Untagged
@@ -10041,7 +10039,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -14685,55 +14683,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &3686911784099046805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3686911784099046794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6b4f6a2e73fe8f428a4d552f0a13adf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Isolate: 1
-  ShotNovice:
-  - {fileID: 0}
-  ShotDefiant:
-  - {fileID: 0}
-  ShotHeroine:
-  - {fileID: 0}
-  ShotGodness:
-  - {fileID: 0}
---- !u!114 &3686911784099046804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3686911784099046794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba9e6c852f53ac7448afd635fab03e07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BulletTargetTime: 1
-  BulletOriginalTime: 1
---- !u!114 &3686911784099046801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3686911784099046794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2540eedaee99924438ce16aeff707ac9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PSTime: 10
-  AutoUpdate: 1
 --- !u!199 &8213479847971058335
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -14797,6 +14746,18 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &5772742235228165774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3686911784099046794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3948012935668447931
 GameObject:
   m_ObjectHideFlags: 0

@@ -4734,10 +4734,10 @@ GameObject:
   - component: {fileID: 5207390305531216109}
   - component: {fileID: 5207390305531216098}
   - component: {fileID: 5207390305531216099}
-  - component: {fileID: -7321783397382784497}
   - component: {fileID: -348257702450627431}
   - component: {fileID: -5928388227089114393}
   - component: {fileID: 4770883706157432204}
+  - component: {fileID: -4287084035521528656}
   m_Layer: 0
   m_Name: Stage04_Character_Desert_WeakAttack_Hit_Right
   m_TagString: Untagged
@@ -9565,18 +9565,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &-7321783397382784497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5207390305531216102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-348257702450627431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9711,6 +9699,18 @@ MonoBehaviour:
   desiredVolume: 1
   playOnEnabled: 1
   autoDisableOnComplete: 0
+--- !u!114 &-4287084035521528656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5207390305531216102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5207390305995566875
 GameObject:
   m_ObjectHideFlags: 0

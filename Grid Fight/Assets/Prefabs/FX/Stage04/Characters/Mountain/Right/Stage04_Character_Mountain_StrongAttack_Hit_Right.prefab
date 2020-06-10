@@ -14349,12 +14349,11 @@ GameObject:
   - component: {fileID: 1895954644148086395}
   - component: {fileID: 1895954644148086394}
   - component: {fileID: 1895954644148086393}
-  - component: {fileID: 1895954644148086392}
-  - component: {fileID: 6612465897196479162}
   - component: {fileID: 3418329759320886990}
   - component: {fileID: 7374922832883260342}
+  - component: {fileID: -7632930591111875120}
   m_Layer: 0
-  m_Name: stage04-Mountain-Impact-Right
+  m_Name: Stage04_Character_Mountain_StrongAttack_Hit_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19099,40 +19098,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &1895954644148086392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1895954644148086399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6b4f6a2e73fe8f428a4d552f0a13adf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Shot: 0
-  Isolate: 0
-  ShotNovice:
-  - {fileID: 1895954644114708715}
-  ShotDefiant:
-  - {fileID: 1895954643975140561}
-  ShotHeroine:
-  - {fileID: 1895954644230167789}
-  ShotGodness:
-  - {fileID: 1895954644604923623}
---- !u!114 &6612465897196479162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1895954644148086399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &3418329759320886990
 AudioSource:
   m_ObjectHideFlags: 0
@@ -19248,6 +19213,18 @@ MonoBehaviour:
   desiredVolume: 1
   playOnEnabled: 1
   autoDisableOnComplete: 0
+--- !u!114 &-7632930591111875120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895954644148086399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1895954644230167788
 GameObject:
   m_ObjectHideFlags: 0

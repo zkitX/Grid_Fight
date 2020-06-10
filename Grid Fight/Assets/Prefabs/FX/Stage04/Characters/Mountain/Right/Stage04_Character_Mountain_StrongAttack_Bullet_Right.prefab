@@ -9600,11 +9600,10 @@ GameObject:
   - component: {fileID: 2288445283362292973}
   - component: {fileID: 2288445283362292972}
   - component: {fileID: 2288445283362292971}
-  - component: {fileID: 2288445283362292970}
   - component: {fileID: 7800766653063638517}
   - component: {fileID: 3555701943423435051}
   m_Layer: 0
-  m_Name: stage04-Mountain-Bullet-Right
+  m_Name: Stage04_Character_Mountain_StrongAttack_Bullet_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14349,28 +14348,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &2288445283362292970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2288445283362292969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6b4f6a2e73fe8f428a4d552f0a13adf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Shot: 0
-  Isolate: 1
-  ShotNovice:
-  - {fileID: 2288445283950222861}
-  ShotDefiant:
-  - {fileID: 2288445283535227997}
-  ShotHeroine:
-  - {fileID: 2288445284170315836}
-  ShotGodness:
-  - {fileID: 2288445282212959740}
 --- !u!114 &7800766653063638517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14397,6 +14374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PSTime: 5
   AutoUpdate: 1
+  LongParticles: []
 --- !u!1 &2288445283508349267
 GameObject:
   m_ObjectHideFlags: 0

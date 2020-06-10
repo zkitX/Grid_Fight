@@ -62919,11 +62919,11 @@ GameObject:
   - component: {fileID: 7636851893957382547}
   - component: {fileID: 7636851893957382545}
   - component: {fileID: 7636851893957382546}
-  - component: {fileID: 7636851893957382550}
   - component: {fileID: 7154795822734052487}
   - component: {fileID: -2966590295248279561}
+  - component: {fileID: 4940658660348258040}
   m_Layer: 0
-  m_Name: Stage00_Character_Mountain_StrongAttack_Impact_Left
+  m_Name: Stage00_Character_Mountain_StrongAttack_Hit_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67677,18 +67677,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &7636851893957382550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7636851893957382556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &7154795822734052487
 AudioSource:
   m_ObjectHideFlags: 0
@@ -67804,3 +67792,15 @@ MonoBehaviour:
   desiredVolume: 1
   playOnEnabled: 1
   autoDisableOnComplete: 0
+--- !u!114 &4940658660348258040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7636851893957382556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

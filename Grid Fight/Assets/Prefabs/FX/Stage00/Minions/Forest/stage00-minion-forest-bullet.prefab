@@ -153,6 +153,7 @@ MonoBehaviour:
   Particle: 1
   BulletDuration: 1
   BulletOriginalDuration: 1
+  trailTimeCache: 0
 --- !u!1 &3211231521222676236
 GameObject:
   m_ObjectHideFlags: 0
@@ -14528,7 +14529,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -19247,7 +19248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6b4f6a2e73fe8f428a4d552f0a13adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Shot: 0
+  Isolate: 0
   ShotNovice:
   - {fileID: 3211231523219602570}
   - {fileID: 3211231521222676243}

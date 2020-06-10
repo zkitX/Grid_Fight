@@ -4849,9 +4849,9 @@ GameObject:
   - component: {fileID: 3836944263141871407}
   - component: {fileID: 3836944263141871406}
   - component: {fileID: 3836944263141871405}
-  - component: {fileID: -813908548969935890}
   - component: {fileID: 1145989018}
   - component: {fileID: -3951726221685607710}
+  - component: {fileID: 4212241148108590852}
   m_Layer: 0
   m_Name: Stage04_Character_Mountain_WeakAttack_Hit_Left
   m_TagString: Untagged
@@ -9599,18 +9599,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &-813908548969935890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3836944263141871403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &1145989018
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9726,6 +9714,18 @@ MonoBehaviour:
   desiredVolume: 1
   playOnEnabled: 1
   autoDisableOnComplete: 0
+--- !u!114 &4212241148108590852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3836944263141871403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4625671859007192536
 GameObject:
   m_ObjectHideFlags: 0

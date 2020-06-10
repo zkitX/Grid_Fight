@@ -19318,9 +19318,9 @@ GameObject:
   - component: {fileID: 6597935749219660313}
   - component: {fileID: 6597935749219660319}
   - component: {fileID: 6597935749219660318}
-  - component: {fileID: 6597935749219660317}
   - component: {fileID: 7188347499772374601}
   - component: {fileID: 8023213443724834821}
+  - component: {fileID: -3791773808465704306}
   m_Layer: 0
   m_Name: Stage00_Character_Valley_WeakAttack_Hit_Left
   m_TagString: Untagged
@@ -24073,18 +24073,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &6597935749219660317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6597935749219660312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &7188347499772374601
 AudioSource:
   m_ObjectHideFlags: 0
@@ -24200,6 +24188,18 @@ MonoBehaviour:
   desiredVolume: 1
   playOnEnabled: 1
   autoDisableOnComplete: 0
+--- !u!114 &-3791773808465704306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6597935749219660312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6597935749374192836
 GameObject:
   m_ObjectHideFlags: 0

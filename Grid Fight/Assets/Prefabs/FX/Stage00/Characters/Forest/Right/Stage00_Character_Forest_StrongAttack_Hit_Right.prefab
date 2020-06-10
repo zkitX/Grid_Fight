@@ -9694,9 +9694,9 @@ GameObject:
   - component: {fileID: 2033049066042293481}
   - component: {fileID: 2033049066042293483}
   - component: {fileID: 2033049066042293480}
-  - component: {fileID: 2033049066042293484}
   - component: {fileID: 4227863914085635815}
   - component: {fileID: 783578848368686600}
+  - component: {fileID: -46631487920527681}
   m_Layer: 0
   m_Name: Stage00_Character_Forest_StrongAttack_Hit_Right
   m_TagString: Untagged
@@ -14454,18 +14454,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &2033049066042293484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2033049066042293478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &4227863914085635815
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14581,6 +14569,18 @@ MonoBehaviour:
   desiredVolume: 1
   playOnEnabled: 1
   autoDisableOnComplete: 0
+--- !u!114 &-46631487920527681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033049066042293478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2749775078345452481
 GameObject:
   m_ObjectHideFlags: 0
