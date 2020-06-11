@@ -372,7 +372,7 @@ public class MinionType_Script : BaseCharacter
         bs.attackAudioType = GetAttackAudio();
         bs.BulletEffects.Clear();
         bs.DestinationTile = bulletBehaviourInfo.BulletEffectTiles[0].Pos + nextAttackPos;
-        bs.BulletDuration = bulletBehaviourInfo.BulletTravelDuration;
+        bs.BulletDuration = bulletBehaviourInfo.BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y));
         bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(nextAttack.Particles.Right.Bullet, CharInfo.CharacterID, AttackParticlePhaseTypes.Bullet, bullet.transform, UMS.Side,
             nextAttack.AttackInput, true);
         bs.gameObject.SetActive(true);

@@ -101,7 +101,7 @@ public class ScriptableObjectAttackTypeEditor : Editor
                     origin.TilesAtk.BulletTrajectories[i].Delay = EditorGUILayout.FloatField("Delay", origin.TilesAtk.BulletTrajectories[i].Delay);
                     if((i == 0 && origin.AttackInput == AttackInputType.Strong) || origin.AttackInput == AttackInputType.Weak)
                     {
-                        origin.TilesAtk.BulletTrajectories[i].BulletTravelDuration = EditorGUILayout.FloatField("BulletTravelDuration", origin.TilesAtk.BulletTrajectories[i].BulletTravelDuration);
+                        origin.TilesAtk.BulletTrajectories[i].BulletTravelDurationPerTile = EditorGUILayout.FloatField("BulletTravelDurationPerTile", origin.TilesAtk.BulletTrajectories[i].BulletTravelDurationPerTile);
                         origin.TilesAtk.BulletTrajectories[i].Trajectory_Y = EditorGUILayout.CurveField("Trajectory_Y", origin.TilesAtk.BulletTrajectories[i].Trajectory_Y);
                         origin.TilesAtk.BulletTrajectories[i].Trajectory_Z = EditorGUILayout.CurveField("Trajectory_Z", origin.TilesAtk.BulletTrajectories[i].Trajectory_Z);
                     }

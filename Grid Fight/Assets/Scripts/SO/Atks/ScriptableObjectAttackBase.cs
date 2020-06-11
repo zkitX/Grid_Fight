@@ -90,7 +90,7 @@ public class TilesAttackTypeClass
 public class BulletBehaviourInfoClassOnBattleFieldClass
 {
     public float Delay;
-    public float BulletTravelDuration;
+    public float BulletTravelDurationPerTile;
     public int ExplosionChances = 100;
     public AnimationCurve Trajectory_Y = new AnimationCurve();
     public AnimationCurve Trajectory_Z = new AnimationCurve();
