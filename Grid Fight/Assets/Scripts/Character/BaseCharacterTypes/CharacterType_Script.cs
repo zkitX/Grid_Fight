@@ -432,7 +432,7 @@ public class CharacterType_Script : BaseCharacter
         while (true)
         {
             yield return BattleManagerScript.Instance.WaitUpdate();
-            atkHoldingTimer += Time.fixedDeltaTime;
+            atkHoldingTimer += Time.deltaTime;
         }
     }
 

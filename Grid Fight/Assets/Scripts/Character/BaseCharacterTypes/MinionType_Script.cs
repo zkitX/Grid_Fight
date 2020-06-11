@@ -373,7 +373,7 @@ public class MinionType_Script : BaseCharacter
         bs.BulletEffects.Clear();
         bs.DestinationTile = bulletBehaviourInfo.BulletEffectTiles[0].Pos + nextAttackPos;
         float duration = bulletBehaviourInfo.BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y));
-        bs.BulletDuration = duration > bulletBehaviourInfo.Delay ? bulletBehaviourInfo.Delay : duration;
+        bs.BulletDuration = duration > bulletBehaviourInfo.Delay ? bulletBehaviourInfo.Delay - 0.5f: duration;
         bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(nextAttack.Particles.Right.Bullet, CharInfo.CharacterID, AttackParticlePhaseTypes.Bullet, bullet.transform, UMS.Side,
             nextAttack.AttackInput, true);
         bs.gameObject.SetActive(true);

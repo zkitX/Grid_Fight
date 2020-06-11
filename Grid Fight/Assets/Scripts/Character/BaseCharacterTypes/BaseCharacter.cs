@@ -317,7 +317,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         // DOnt do anything until the unit is free to attack(otherwise attack anim gets interupted by the other ones)
         while (SpineAnim.CurrentAnim != CharacterAnimationStateType.Idle.ToString())
         {
-            yield return new WaitForSeconds(0.5f);
+            float timer = 0;
+            while (timer <= 0.5f)
+            {
+                yield return BattleManagerScript.Instance.WaitUpdate();
+
+                timer += Time.deltaTime;
+            }
         }
 
         while (true)
@@ -1174,7 +1180,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             {
                 yield return BattleManagerScript.Instance.WaitUpdate();
 
-                bdClass.CurrentBuffDebuff.Timer += Time.fixedDeltaTime;
+                bdClass.CurrentBuffDebuff.Timer += Time.deltaTime;
 
                 if (((int)bdClass.CurrentBuffDebuff.Timer) > iterator && bdClass.Stat.ToString().Contains("Overtime"))
                 {
@@ -1268,7 +1274,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         else
         {
-            yield return new WaitForSeconds(2);
+            float timer = 0;
+            while (timer <= 2)
+            {
+                yield return BattleManagerScript.Instance.WaitUpdate();
+
+                timer += Time.deltaTime;
+            }
         }
       
         BuffsDebuffsList.Remove(bdClass);
@@ -1690,7 +1702,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             yield return BattleManagerScript.Instance.WaitUpdate();
 
-            timer += Time.fixedDeltaTime;
+            timer += Time.deltaTime;
         }
 
         SpineAnim.SetAnimationSpeed(CharInfo.BaseSpeed);

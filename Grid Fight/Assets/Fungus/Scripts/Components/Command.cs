@@ -327,6 +327,10 @@ namespace Fungus
             {
                 block.StartExecution();
             }
+            else
+            {
+                Debug.LogError("Selected Block with name:" + NextBlockToFire +  " has not been found");
+            }
         }
 
         #endregion

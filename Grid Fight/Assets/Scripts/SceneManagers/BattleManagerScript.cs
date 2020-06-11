@@ -463,11 +463,23 @@ public class BattleManagerScript : MonoBehaviour
         zombiePs.transform.parent = zombie.SpineAnim.transform;
         zombiePs.transform.localPosition = Vector3.zero;
         zombiePs.transform.localRotation = Quaternion.Euler(zombie.UMS.Side == SideType.LeftSide ? Vector3.zero : zombiePs.transform.eulerAngles);
-        yield return new WaitForSeconds(1);
+        float timer = 0;
+        while (timer <= 1)
+        {
+            yield return WaitUpdate();
+
+            timer += Time.deltaTime;
+        }
 
         yield return RemoveCharacterFromBaord(playerController, zombie, true);
         zombie.CharActionlist.Remove(CharacterActionType.SwitchCharacter);
-        yield return new WaitForSeconds(1);
+        timer = 0;
+        while (timer <= 2)
+        {
+            yield return WaitUpdate();
+
+            timer += Time.deltaTime;
+        }
         zombiePs.transform.parent = null;
         zombiePs.SetActive(false);
 
@@ -933,7 +945,7 @@ public class BattleManagerScript : MonoBehaviour
             {
                 while (CurrentSelectedCharacters[playerController].Character.isMoving)
                 {
-                    yield return new WaitForEndOfFrame();
+                    yield return WaitUpdate();
                 }
             }
             timer += Time.deltaTime;
