@@ -102,7 +102,7 @@ MonoBehaviour:
     AtkType: 1
     BulletTrajectories:
     - Delay: 3
-      BulletTravelDuration: 2
+      BulletTravelDurationPerTile: 0.2
       ExplosionChances: 100
       Trajectory_Y:
         serializedVersion: 2
@@ -117,31 +117,22 @@ MonoBehaviour:
           inWeight: 0.33333334
           outWeight: 0.26912895
         - serializedVersion: 3
-          time: 0.077753834
-          value: 0.62963474
-          inSlope: 2.601174
-          outSlope: 2.601174
+          time: 0.5
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.10208023
+          outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.49976987
-          value: 0.99814004
-          inSlope: 0.0016213584
-          outSlope: 0.0016213584
+          time: 1
+          value: 0
+          inSlope: -4.648086
+          outSlope: -4.648086
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.49110374
-        - serializedVersion: 3
-          time: 1.0096819
-          value: 0.6671967
-          inSlope: -2.2327282
-          outSlope: -2.2327282
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.03933112
+          inWeight: 0.05269456
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -182,7 +173,7 @@ MonoBehaviour:
         DurationOnTile: 0
         EffectsOnTile: []
     - Delay: 3.5
-      BulletTravelDuration: 0
+      BulletTravelDurationPerTile: 0
       ExplosionChances: 100
       Trajectory_Y:
         serializedVersion: 2
