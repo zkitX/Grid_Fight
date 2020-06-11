@@ -143,7 +143,15 @@ public class BattleTileTargetsScript : MonoBehaviour
         nextT.transform.localPosition = TargetsPosition[0];
         Targets.Add(tc);
         UpdateQueue();
-        StartCoroutine(FireTarget(tc, pos, damage, ele, attacker, atkEffects, effectChances, bulletTravelDuration));
+        StartCoroutine(FireTarget_co(tc, pos, damage, ele, attacker, atkEffects, effectChances, bulletTravelDuration));
+    }
+
+    private IEnumerator FireTarget_co(TargetClass tc, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances, float bulletTravelDuration)
+    {
+        yield return FireTarget(tc, pos, damage, ele, attacker, atkEffects, effectChances, bulletTravelDuration);
+        tc.RemainingTime = 0f;
+        UpdateQueue(tc);
+        attacker.shotsLeftInAttack--;
     }
 
     private IEnumerator FireTarget(TargetClass tc, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances, float bulletTravelDuration)
@@ -166,20 +174,14 @@ public class BattleTileTargetsScript : MonoBehaviour
             anim.speed = (1 / duration) * (attacker.CharInfo.BaseSpeed / attacker.CharInfo.SpeedStats.B_BaseSpeed);
             timer += Time.fixedDeltaTime * (attacker.CharInfo.BaseSpeed / attacker.CharInfo.SpeedStats.B_BaseSpeed);
             tc.RemainingTime = duration - timer;
-            if (!attacker.Attacking && !attackerFiredAttackAnim)
+            if (!attacker.Attacking && !attacker.bulletFired)
             {
                 //Stop the firing of the attacks to the tiles
-                tc.RemainingTime = 0f;
-                UpdateQueue(tc);
                 yield break;
             }
             else if (tc.RemainingTime <= bulletTravelDuration && attacker.UMS.CurrentAttackType == AttackType.Tile && !attackerFiredAttackAnim)
             {
                 attackerFiredAttackAnim = true;
-                if(nextAttack.AttackInput == AttackInputType.Strong)
-                {
-                    attacker.shotsLeftInAttack--;
-                }
                 attacker.FireAttackAnimAndBullet(transform.position); // trigger the shoot anim
             }
         }
@@ -222,9 +224,7 @@ public class BattleTileTargetsScript : MonoBehaviour
                 BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(pos);
                 bts.SetupEffect(atkEffects.EffectsOnTile, atkEffects.DurationOnTile, atkEffects.TileParticlesID);
             }
-
         }
-
 
         if (attacker.CharInfo.Health > 0)
         {
@@ -249,8 +249,6 @@ public class BattleTileTargetsScript : MonoBehaviour
                 AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attacker.GetAttackAudio().Impact, AudioBus.MidPrio, transform);
             }
         }
-        yield return new WaitForSeconds(0.2f);
-        UpdateQueue(tc);
     }
 
 

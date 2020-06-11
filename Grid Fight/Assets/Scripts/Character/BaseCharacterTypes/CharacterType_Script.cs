@@ -610,12 +610,12 @@ public class CharacterType_Script : BaseCharacter
 
             if (SpineAnim.CurrentAnim.Contains("Atk1"))
             {
-                currentAttackPhase = AttackPhasesType.Cast_Rapid;
+                currentAttackPhase = AttackPhasesType.Cast_Weak;
                 CreateParticleAttack();
             }
             else
             {
-                currentAttackPhase = AttackPhasesType.Cast_Powerful;
+                currentAttackPhase = AttackPhasesType.Cast_Strong;
 
             }
             FireCastParticles();
@@ -624,11 +624,11 @@ public class CharacterType_Script : BaseCharacter
         {
             if (SpineAnim.CurrentAnim.Contains("Atk1"))
             {
-                currentAttackPhase = AttackPhasesType.Cast_Rapid;
+                currentAttackPhase = AttackPhasesType.Cast_Weak;
             }
             else
             {
-                currentAttackPhase = AttackPhasesType.Cast_Powerful;
+                currentAttackPhase = AttackPhasesType.Cast_Strong;
                 CreateParticleAttack();
             }
         }

@@ -234,10 +234,10 @@ public enum AttackPhasesType
 {
     Start,
     Loading,
-    Cast_Rapid,
-    Bullet_Rapid,
-    Cast_Powerful,
-    Bullet_Powerful,
+    Cast_Weak,
+    Cast_Strong,
+    Bullet_Weak,
+    Bullet_Strong,
     End
 
 }

@@ -123,7 +123,7 @@ public class Stage09_Boss_NoFace_Script : MinionType_Script
     public override IEnumerator AttackSequence(ScriptableObjectAttackBase atk = null)
     {
         Attacking = true;
-
+        bulletFired = false;
         if (atk != null)
         {
             nextAttack = atk;

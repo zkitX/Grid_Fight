@@ -274,7 +274,7 @@ public class MinionType_Script : BaseCharacter
     public override IEnumerator AttackSequence(ScriptableObjectAttackBase atk = null)
     {
         Attacking = true;
-
+        bulletFired = false;
         string animToFire;
         bool isLooped = false;
         if (atk != null)
@@ -373,7 +373,7 @@ public class MinionType_Script : BaseCharacter
         bs.BulletEffects.Clear();
         bs.DestinationTile = bulletBehaviourInfo.BulletEffectTiles[0].Pos + nextAttackPos;
         float duration = bulletBehaviourInfo.BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y));
-        bs.BulletDuration = duration > bulletBehaviourInfo.Delay ? bulletBehaviourInfo.Delay - 0.5f: duration;
+        bs.BulletDuration = duration > bulletBehaviourInfo.Delay ? bulletBehaviourInfo.Delay - SpineAnim.SpineAnimationState.GetCurrent(0).TrackTime : duration;
         bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(nextAttack.Particles.Right.Bullet, CharInfo.CharacterID, AttackParticlePhaseTypes.Bullet, bullet.transform, UMS.Side,
             nextAttack.AttackInput, true);
         bs.gameObject.SetActive(true);
@@ -482,11 +482,11 @@ public class MinionType_Script : BaseCharacter
 
             if (SpineAnim.CurrentAnim.Contains("Atk1"))
             {
-                currentAttackPhase = AttackPhasesType.Cast_Rapid;
+                currentAttackPhase = AttackPhasesType.Cast_Weak;
             }
             else
             {
-                currentAttackPhase = AttackPhasesType.Cast_Powerful;
+                currentAttackPhase = AttackPhasesType.Cast_Strong;
 
             }
             FireCastParticles();
@@ -495,18 +495,18 @@ public class MinionType_Script : BaseCharacter
         {
             if (SpineAnim.CurrentAnim.Contains("Atk1"))
             {
-                currentAttackPhase = AttackPhasesType.Cast_Rapid;
+                currentAttackPhase = AttackPhasesType.Cast_Weak;
             }
             else
             {
-                currentAttackPhase = AttackPhasesType.Cast_Powerful;
+                currentAttackPhase = AttackPhasesType.Cast_Strong;
                     
             }
             BulletAttack();
         }
         else if (e.Data.Name.Contains("FireTileAttack") && !trackEntry.Animation.Name.Contains("Loop"))
         {
-            currentAttackPhase = SpineAnim.CurrentAnim.Contains("Atk1") ? AttackPhasesType.Bullet_Rapid : AttackPhasesType.Bullet_Powerful;
+            currentAttackPhase = SpineAnim.CurrentAnim.Contains("Atk1") ? AttackPhasesType.Bullet_Weak : AttackPhasesType.Bullet_Strong;
             CreateTileAttack();
         }
     }
@@ -514,15 +514,15 @@ public class MinionType_Script : BaseCharacter
 
     public void BulletAttack()
     {
-        if(nextAttack.AttackInput == AttackInputType.Strong)
+        bulletFired = true;
+        if (nextAttack.AttackInput == AttackInputType.Strong)
         {
             CreateBullet(nextAttack.TilesAtk.BulletTrajectories[0]);
-
         }
         else if(nextAttack.AttackInput == AttackInputType.Weak)
         {
-            shotsLeftInAttack--;
-            CreateBullet(nextAttack.TilesAtk.BulletTrajectories[nextAttack.TilesAtk.BulletTrajectories.Count - shotsLeftInAttack - 1]);
+            Debug.Log(nextAttack.TilesAtk.BulletTrajectories.Count - shotsLeftInAttack - 1);
+            CreateBullet(nextAttack.TilesAtk.BulletTrajectories[0]);
         }
     }
 
@@ -549,18 +549,8 @@ public class MinionType_Script : BaseCharacter
 
         if (completedAnim.Contains("_Loop") && SpineAnim.CurrentAnim.Contains("_Loop"))
         {
-
-            //If they can still attack, keep them in the charging loop
-            if (shotsLeftInAttack > 0 && nextAttack.AttackInput == AttackInputType.Weak)
-            {
-                SetAnimation(nextAttack.PrefixAnim + "_Charging", true, 0);
-            }
-            //otherwise revert them to the idle postion
-            else
-            {
-                SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
-                currentAttackPhase = AttackPhasesType.End;
-            }
+            SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
+            currentAttackPhase = AttackPhasesType.End;
             return;
         }
 

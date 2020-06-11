@@ -286,6 +286,7 @@ public class Stage09_Boss_Geisha_Script : MinionType_Script
     public override IEnumerator AttackSequence(ScriptableObjectAttackBase atk = null)
     {
         Attacking = true;
+        bulletFired = false;
         if (atk != null)
         {
             nextAttack = atk;

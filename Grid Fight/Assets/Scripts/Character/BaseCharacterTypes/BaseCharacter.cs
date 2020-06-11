@@ -86,7 +86,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public bool _isDefending = false;
     public bool isDefendingStop = false;
-
+    [HideInInspector]
+    public bool bulletFired = false;
 
     public List<BuffDebuffClass> BuffsDebuffsList = new List<BuffDebuffClass>();
     public List<CharacterActionType> CharActionlist = new List<CharacterActionType>();
@@ -843,7 +844,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             return;
         }
 
-        if (currentAttackPhase == AttackPhasesType.Loading || currentAttackPhase == AttackPhasesType.Cast_Powerful || currentAttackPhase == AttackPhasesType.Bullet_Powerful)
+        if (currentAttackPhase == AttackPhasesType.Loading || currentAttackPhase == AttackPhasesType.Cast_Strong || currentAttackPhase == AttackPhasesType.Bullet_Strong)
         {
             return;
         }
