@@ -9670,8 +9670,9 @@ GameObject:
   - component: {fileID: 1061202688339080746}
   - component: {fileID: 1061202688339080745}
   - component: {fileID: 1061202688339080743}
+  - component: {fileID: 1557620662169632952}
   m_Layer: 0
-  m_Name: Stage01_Minion_Desert_StrongAttack_Bullet_Left_Bubble
+  m_Name: Stage01_Minion_Desert_StrongAttack_Bullet_Left_Bubble_Fishylla
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14442,6 +14443,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletTargetTime: 1
   BulletOriginalTime: 1
+--- !u!114 &1557620662169632952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061202688339080741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2540eedaee99924438ce16aeff707ac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PSTime: 10
+  AutoUpdate: 1
+  LongParticles: []
 --- !u!1 &2982546415699606704
 GameObject:
   m_ObjectHideFlags: 0
