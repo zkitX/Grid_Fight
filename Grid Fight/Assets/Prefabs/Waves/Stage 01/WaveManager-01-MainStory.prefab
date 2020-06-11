@@ -52,12 +52,12 @@ MonoBehaviour:
   WavePhases:
   - name: Wave1
     IsRandom: 1
-    MaxEnemyOnScreen: 3
+    MaxEnemyOnScreen: 2
     DelayBetweenChars: 0
     ListOfEnemy:
     - name: Mothra
       NPCType: 0
-      NumberOfCharacter: 2
+      NumberOfCharacter: 6
       TypeOfCharacter:
         CharacterName: 1023
         Health: {x: 30, y: 35}
@@ -82,9 +82,9 @@ MonoBehaviour:
       - {x: 4, y: 11}
     - name: Mothra
       NPCType: 0
-      NumberOfCharacter: 3
+      NumberOfCharacter: 6
       TypeOfCharacter:
-        CharacterName: 1023
+        CharacterName: 1022
         Health: {x: 30, y: 35}
         HealthRegeneration: {x: 0.3, y: 0.3}
         BaseDamage: {x: 3, y: 5}
@@ -107,9 +107,34 @@ MonoBehaviour:
       - {x: 4, y: 11}
     - name: Mothra
       NPCType: 0
-      NumberOfCharacter: 3
+      NumberOfCharacter: 6
       TypeOfCharacter:
-        CharacterName: 1023
+        CharacterName: 1021
+        Health: {x: 30, y: 35}
+        HealthRegeneration: {x: 0.3, y: 0.3}
+        BaseDamage: {x: 3, y: 5}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        Exp: 0
+        UpDownPerc: 18
+        Events: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    - name: Mothra
+      NPCType: 0
+      NumberOfCharacter: 6
+      TypeOfCharacter:
+        CharacterName: 1020
         Health: {x: 30, y: 35}
         HealthRegeneration: {x: 0.3, y: 0.3}
         BaseDamage: {x: 3, y: 5}
