@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4237660525658530105
+--- !u!1 &4202543586015703228
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4237660525658530119}
-  - component: {fileID: 4237660525658530118}
+  - component: {fileID: 4202543586015703234}
+  - component: {fileID: 4202543586015703235}
   m_Layer: 0
-  m_Name: WaveManager-01-MainStory
+  m_Name: WaveManager-01-MainStory-BulletTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4237660525658530119
+--- !u!4 &4202543586015703234
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4237660525658530105}
+  m_GameObject: {fileID: 4202543586015703228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.2474627, y: 0.9679096, z: -3.4060545}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,13 +31,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4237660525658530118
+--- !u!114 &4202543586015703235
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4237660525658530105}
+  m_GameObject: {fileID: 4202543586015703228}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09b0c490261b08d4dbe285554c10a1e3, type: 3}
@@ -52,12 +52,12 @@ MonoBehaviour:
   WavePhases:
   - name: Wave1
     IsRandom: 1
-    MaxEnemyOnScreen: 3
+    MaxEnemyOnScreen: 2
     DelayBetweenChars: 0
     ListOfEnemy:
     - name: Mothra
       NPCType: 0
-      NumberOfCharacter: 2
+      NumberOfCharacter: 5
       TypeOfCharacter:
         CharacterName: 1023
         Health: {x: 30, y: 35}
@@ -82,9 +82,9 @@ MonoBehaviour:
       - {x: 4, y: 11}
     - name: Mothra
       NPCType: 0
-      NumberOfCharacter: 3
+      NumberOfCharacter: 5
       TypeOfCharacter:
-        CharacterName: 1023
+        CharacterName: 1022
         Health: {x: 30, y: 35}
         HealthRegeneration: {x: 0.3, y: 0.3}
         BaseDamage: {x: 3, y: 5}
@@ -107,9 +107,34 @@ MonoBehaviour:
       - {x: 4, y: 11}
     - name: Mothra
       NPCType: 0
-      NumberOfCharacter: 3
+      NumberOfCharacter: 5
       TypeOfCharacter:
-        CharacterName: 1023
+        CharacterName: 1021
+        Health: {x: 30, y: 35}
+        HealthRegeneration: {x: 0.3, y: 0.3}
+        BaseDamage: {x: 3, y: 5}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        Exp: 0
+        UpDownPerc: 18
+        Events: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    - name: Mothra
+      NPCType: 0
+      NumberOfCharacter: 5
+      TypeOfCharacter:
+        CharacterName: 1020
         Health: {x: 30, y: 35}
         HealthRegeneration: {x: 0.3, y: 0.3}
         BaseDamage: {x: 3, y: 5}
