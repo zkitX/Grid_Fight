@@ -18,6 +18,8 @@ MonoBehaviour:
   DamageMultiplier: {x: 1, y: 1}
   AttackInput: 0
   AttackAnim: 0
+  StaminaCost: 10
+  ExperiencePoints: 10
   PrefixAnim: 0
   Particles:
     Left:
@@ -106,6 +108,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+      ChildrenBulletDelay: 0.5
       BulletEffectTiles: []
       BulletGapStartingTile: {x: 0, y: 0}
       HasEffect: 0
@@ -116,6 +119,20 @@ MonoBehaviour:
     AtkType: 1
     BulletTrajectories:
     - Delay: 3
+      BulletTravelDuration: 0
+      ExplosionChances: 100
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
       Show: 1
       BulletEffectTiles:
       - Pos: {x: 0, y: 0}
@@ -126,6 +143,7 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
+        EffectsOnTile: []
       - Pos: {x: 1, y: 0}
         HasEffect: 0
         showImpact: 0
@@ -134,6 +152,7 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
+        EffectsOnTile: []
       - Pos: {x: -1, y: 0}
         HasEffect: 0
         showImpact: 0
@@ -142,6 +161,7 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
+        EffectsOnTile: []
       - Pos: {x: 0, y: 1}
         HasEffect: 0
         showImpact: 0
@@ -150,6 +170,7 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
+        EffectsOnTile: []
       - Pos: {x: 0, y: -1}
         HasEffect: 0
         showImpact: 0
@@ -158,6 +179,7 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
+        EffectsOnTile: []
     StatToCheck: 1
     ValueChecker: 0
     PercToCheck: 30

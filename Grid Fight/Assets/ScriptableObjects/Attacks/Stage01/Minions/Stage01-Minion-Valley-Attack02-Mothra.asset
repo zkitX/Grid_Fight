@@ -128,57 +128,48 @@ MonoBehaviour:
   TilesAtk:
     AtkType: 1
     BulletTrajectories:
-    - Delay: 2
-      BulletTravelDuration: 1.5
+    - Delay: 1.2
+      BulletTravelDuration: 0.6
       ExplosionChances: 100
       Trajectory_Y:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
-          inSlope: 4.530805
-          outSlope: 4.530805
+          value: 1
+          inSlope: 1.3313769
+          outSlope: 1.3313769
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.24799077
+          value: 1.3301692
+          inSlope: 0.6688484
+          outSlope: 0.6688484
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.7753484
+          value: 1.333502
+          inSlope: -0.71564895
+          outSlope: -0.71564895
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.26912895
-        - serializedVersion: 3
-          time: 0.077753834
-          value: 0.62963474
-          inSlope: 2.601174
-          outSlope: 2.601174
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.10208023
-        - serializedVersion: 3
-          time: 0.49976987
-          value: 0.99814004
-          inSlope: 0.0016213584
-          outSlope: 0.0016213584
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.49110374
-        - serializedVersion: 3
-          time: 0.9289317
-          value: 0.64605826
-          inSlope: -2.6376877
-          outSlope: -2.6376877
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.21849483
-          outWeight: 0.589597
+          outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 0
-          inSlope: -6.0882745
-          outSlope: -6.0882745
+          value: 1
+          inSlope: -2.5045555
+          outSlope: -2.5045555
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.15530764
-          outWeight: 0.33333334
+          inWeight: 0.039725736
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -217,7 +208,7 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-    - Delay: 2.3
+    - Delay: 1.5
       BulletTravelDuration: 0
       ExplosionChances: 100
       Trajectory_Y:
@@ -234,7 +225,7 @@ MonoBehaviour:
         m_RotationOrder: 4
       Show: 1
       BulletEffectTiles:
-      - Pos: {x: 0, y: -1}
+      - Pos: {x: -1, y: -1}
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -243,25 +234,7 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-      - Pos: {x: 0, y: 1}
-        HasEffect: 0
-        showImpact: 1
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: -1, y: 0}
-        HasEffect: 0
-        showImpact: 1
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: 1, y: 0}
+      - Pos: {x: 1, y: -1}
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -271,6 +244,6 @@ MonoBehaviour:
         DurationOnTile: 0
         EffectsOnTile: []
     StatToCheck: 1
-    ValueChecker: 2
+    ValueChecker: 0
     PercToCheck: 80
-    Chances: 80
+    Chances: 100
