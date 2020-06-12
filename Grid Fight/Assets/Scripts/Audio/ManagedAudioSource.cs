@@ -137,7 +137,7 @@ public class ManagedAudioSource : MonoBehaviour
     {
         while (source.isPlaying)
         {
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
         ResetAfterCompleteSequencer = null;
         ResetSource();
@@ -147,7 +147,7 @@ public class ManagedAudioSource : MonoBehaviour
     {
         while (source.Volume > 0.01f)
         {
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
         source.ResetSource();
     }

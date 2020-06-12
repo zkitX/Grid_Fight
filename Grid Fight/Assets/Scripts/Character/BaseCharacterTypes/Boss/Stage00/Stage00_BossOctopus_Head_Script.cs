@@ -122,16 +122,8 @@ public class Stage00_BossOctopus_Head_Script : MinionType_Script
         yield return null;
     }
 
-    public override IEnumerator AttackAction(bool yieldBefore)
-    {
-        yield break;
-    }
-
     public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
-
-
-
         if (CanGetDamage && CharInfo.Health > 0)
         {
             return base.SetDamage(attacker, damage, elemental, isCritical, isAttackBlocking);

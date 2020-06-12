@@ -125,29 +125,10 @@ public class Stage00_BossOctopus_Script : MinionType_Script
         }
 
         SetAttackReady(true);
-        float timer = 0;
-        while (timer <= 3)
-        {
-            yield return new WaitForFixedUpdate();
-            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Event))
-            {
-                yield return new WaitForEndOfFrame();
-            }
-            timer += Time.fixedDeltaTime;
-        }
+        yield return BattleManagerScript.Instance.WaitFor(3, ()=> !VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Event));
 
 
-        timer = 0;
-        while (timer <= 3)
-        {
-            yield return new WaitForFixedUpdate();
-            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Event))
-            {
-                yield return new WaitForEndOfFrame();
-            }
-            timer += Time.fixedDeltaTime;
-        }
-
+     
         BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
     }
 
@@ -271,7 +252,7 @@ public class Stage00_BossOctopus_Script : MinionType_Script
         yield return ((Stage00_BossOctopus_Girl_Script)GetPiece(CharacterNameType.Stage00_BossOctopus_Girl)).CenterCharacterToTile(5f);
     }
 
-    public override IEnumerator AttackAction(bool yieldBefore)
+ /*   public override IEnumerator AttackAction(bool yieldBefore)
     {
         //Handles the attack for all of the components of the boss
         while (GetPiece(CharacterNameType.Stage00_BossOctopus_Head) == null)
@@ -350,7 +331,7 @@ public class Stage00_BossOctopus_Script : MinionType_Script
             }
             yield return null;
         }
-    }
+    }*/
 
     public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical)
     {

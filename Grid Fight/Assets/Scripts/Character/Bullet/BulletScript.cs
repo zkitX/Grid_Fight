@@ -111,7 +111,7 @@ public class BulletScript : MonoBehaviour
                 BattleManagerScript.Instance.CurrentBattleState != BattleState.FungusPuppets
                 && BattleManagerScript.Instance.CurrentBattleState != BattleState.End))
             {
-                yield return new WaitForFixedUpdate();
+                yield return null;
             }
             //Calutation for next world position of the bullet
             res = Vector3.Lerp(offset, destination, timer);
@@ -183,18 +183,10 @@ public class BulletScript : MonoBehaviour
 
     public IEnumerator ChildExplosion(List<Vector2Int> bet, Vector2Int basePos)
     {
-        float timer = 0;
         BaseCharacter target;
         bulletSoundSource = null;
-        while (timer < BulletBehaviourInfo.ChildrenBulletDelay)
-        {
-            timer += Time.fixedDeltaTime;
-            yield return new WaitForFixedUpdate();
-            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.End))
-            {
-                yield return new WaitForFixedUpdate();
-            }
-        }
+
+        yield return BattleManagerScript.Instance.WaitFor(BulletBehaviourInfo.ChildrenBulletDelay, () => !VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.End));
 
         for (int i = 0; i < bet.Count; i++)
         {

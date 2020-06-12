@@ -92,11 +92,7 @@ public class Stage09_Boss_NoFace_Script : MinionType_Script
         bool val = true;
         while (val)
         {
-            yield return null;
-            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
-            {
-                yield return null;
-            }
+            yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
 
             if (IsOnField && CanAttack && baseForme.BossPhase == Stage09_Boss_Geisha_Script.bossPhasesType.Monster_ && !isImmune)
             {
@@ -163,11 +159,6 @@ public class Stage09_Boss_NoFace_Script : MinionType_Script
 
 
         yield break;
-    }
-
-    public override IEnumerator AttackAction(bool yieldBefore)
-    {
-        return base.AttackAction(yieldBefore);
     }
 
     public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)

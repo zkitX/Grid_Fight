@@ -431,30 +431,6 @@ public class GridManagerScript : MonoBehaviour
     {
         return GetBattleTile(pos)._BattleTileState == BattleTileStateType.Occupied ? true : false;
     }
-
-
-
-    public IEnumerator OnBattleFieldAttackCo(CharacterInfoScript cInfo, ScriptableObjectAttackBase atk, Vector2Int basePos)
-    {
-        foreach (BulletBehaviourInfoClassOnBattleFieldClass item in atk.TilesAtk.BulletTrajectories)
-        {
-            float timer = 0;
-            foreach (BattleFieldAttackTileClass target in item.BulletEffectTiles)
-            {
-                if (isPosOnField(target.Pos))
-                {
-                    GameObject go;
-                    go = Instantiate(TargetIndicator, GetBattleTile(target.Pos).transform.position, Quaternion.identity);
-                    go.GetComponent<BattleTileTargetScript>().StartTarget(item.Delay, target.Pos, cInfo.DamageStats.BaseDamage, cInfo.Elemental);
-                }
-            }
-            while (timer <= item.Delay)
-            {
-                yield return BattleManagerScript.Instance.WaitUpdate();
-                timer += Time.deltaTime;
-            }
-        }
-    }
 }
 
 

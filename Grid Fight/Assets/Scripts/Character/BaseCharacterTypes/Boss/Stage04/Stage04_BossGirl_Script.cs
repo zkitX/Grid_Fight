@@ -212,12 +212,7 @@ public class Stage04_BossGirl_Script : MinionType_Script
             yield return null;
             if (IsOnField)
             {
-
-                while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
-                {
-                    yield return null;
-                }
-
+                yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
 
                 List<BaseCharacter> enemys = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList();
                 if (enemys.Count > 0)

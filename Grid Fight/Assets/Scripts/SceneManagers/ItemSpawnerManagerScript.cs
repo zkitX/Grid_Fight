@@ -47,10 +47,7 @@ public class ItemSpawnerManagerScript : MonoBehaviour
     private IEnumerator Spawning_Co()
     {
 
-        while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
-        {
-            yield return new WaitForEndOfFrame();
-        }
+        yield return BattleManagerScript.Instance.WaitUpdate(()=> BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
 
         while (!CoStopper)
         {
@@ -64,7 +61,7 @@ public class ItemSpawnerManagerScript : MonoBehaviour
                 {
                     yield return null;
                 }
-                yield return BattleManagerScript.Instance.WaitUpdate();
+                yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
                 timer += Time.deltaTime;
             }
 

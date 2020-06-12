@@ -30,41 +30,22 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
 
     public override IEnumerator Move()
     {
-        while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
-        {
-            yield return new WaitForFixedUpdate();
-        }
+
+        yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
         while (MoveCoOn)
         {
-            float timer = 0;
             InputDirection dir = (InputDirection)Random.Range(0, 4);
             float MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y);
-            while (timer < 1)
-            {
-                yield return new WaitForFixedUpdate();
-                while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
-                {
-                    yield return new WaitForFixedUpdate();
-                }
+            yield return BattleManagerScript.Instance.WaitFor(1, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
 
-                timer += Time.fixedDeltaTime / MoveTime;
-            }
             if (CharInfo.Health > 0)
             {
                 MoveCharOnDirection(dir);
             }
-            timer = 0;
             MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y);
-            while (timer < 1)
-            {
-                yield return new WaitForFixedUpdate();
-                while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
-                {
-                    yield return new WaitForFixedUpdate();
-                }
 
-                timer += Time.fixedDeltaTime / MoveTime;
-            }
+            yield return BattleManagerScript.Instance.WaitFor(1, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
+
             if (CharInfo.Health > 0)
             {
                 MoveCharOnDirection(dir == InputDirection.Down ? InputDirection.Up : dir == InputDirection.Up ? InputDirection.Down : dir == InputDirection.Left ? InputDirection.Right : InputDirection.Left);
@@ -97,7 +78,6 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
 
     private IEnumerator DeathStasy()
     {
-        float timer = 0;
         if (Smoke == null)
         {
             Smoke = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage04FlowersSmoke);
@@ -106,16 +86,7 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
         }
         Smoke.SetActive(true);
         SetAnimation(CharacterAnimationStateType.Death);
-        while (timer < StasyTime)
-        {
-            yield return new WaitForFixedUpdate();
-            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
-            {
-                yield return new WaitForFixedUpdate();
-            }
-
-            timer += Time.fixedDeltaTime;
-        }
+        yield return BattleManagerScript.Instance.WaitFor(StasyTime, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
         Smoke.SetActive(false);
         SetAttackReady(true);
         SetAnimation(CharacterAnimationStateType.Idle);

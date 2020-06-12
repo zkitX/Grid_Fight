@@ -49,7 +49,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public CharacterInfoScript _CharInfo;
     public bool isMoving = false;
-    public bool IsUsingAPortal = false;
     protected IEnumerator MoveCo;
     [HideInInspector]
     public List<BattleTileScript> CurrentBattleTiles = new List<BattleTileScript>();
@@ -148,11 +147,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public virtual void Start()
     {
-        if (VFXTestMode)
-        {
-            StartAttakCo();
-            StartMoveCo();
-        }
         Sic = new StatisticInfoClass(CharInfo.CharacterID, UMS.PlayerController);
     }
 
@@ -302,56 +296,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
         GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.Right.Hit, CharInfo.CharacterID, AttackParticlePhaseTypes.Hit, tilePos, UMS.Side, nextAttack.AttackInput);
     }
-
-    public void StartAttakCo()
-    {
-        if (UMS.CurrentAttackType == AttackType.Tile && attackCoroutine == null)
-        {
-            attackCoroutine = AttackAction(true);
-            StartCoroutine(attackCoroutine);
-        }
-    }
-
-    //Basic attack Action that will start the attack anim every x seconds
-    public virtual IEnumerator AttackAction(bool yieldBefore)
-    {
-        // DOnt do anything until the unit is free to attack(otherwise attack anim gets interupted by the other ones)
-        while (SpineAnim.CurrentAnim != CharacterAnimationStateType.Idle.ToString())
-        {
-            float timer = 0;
-            while (timer <= 0.5f)
-            {
-                yield return BattleManagerScript.Instance.WaitUpdate();
-
-                timer += Time.deltaTime;
-            }
-        }
-
-        while (true)
-        {
-
-            //Wait until next attack (if yielding before)
-            if (yieldBefore) yield return PauseAttack((CharInfo.SpeedStats.AttackSpeedRatio / 3) * nextAttack.AttackRatioMultiplier);
-
-            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || !CanAttack || isMoving ||
-                (currentAttackPhase != AttackPhasesType.End))
-            {
-                yield return null;
-            }
-            yield return AttackSequence();
-
-            while (isMoving)
-            {
-                yield return null;
-
-            }
-            //Wait until next attack
-            if (!yieldBefore) yield return PauseAttack((CharInfo.SpeedStats.AttackSpeedRatio / 3) * nextAttack.AttackRatioMultiplier);
-
-        }
-
-    }
-
 
     public virtual IEnumerator AttackSequence(ScriptableObjectAttackBase atk = null)
     {
@@ -955,7 +899,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         while (timer < 1 && !stopCo)
         {
 
-            yield return BattleManagerScript.Instance.WaitFixedUpdate();
+            yield return BattleManagerScript.Instance.WaitFixedUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
             timer += (Time.fixedDeltaTime / (animLength / moveValue));
             spaceTimer = curve.Evaluate(timer);
             spineT.localPosition = Vector3.Lerp(localoffset, LocalSpinePosoffset, spaceTimer);
@@ -1000,7 +944,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         while (timer < 1)
         {
 
-            yield return BattleManagerScript.Instance.WaitFixedUpdate();
+            yield return BattleManagerScript.Instance.WaitFixedUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
             float newAdd = (Time.fixedDeltaTime / (animLength / moveValue));
             timer += (Time.fixedDeltaTime / (animLength / moveValue));
             speedTimer += newAdd * curve.Evaluate(timer + newAdd);
@@ -1179,7 +1123,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             int iterator = 0;
             while (bdClass.CurrentBuffDebuff.Timer <= bdClass.Duration && !bdClass.CurrentBuffDebuff.Stop_Co)
             {
-                yield return BattleManagerScript.Instance.WaitUpdate();
+                yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
 
                 bdClass.CurrentBuffDebuff.Timer += Time.deltaTime;
 
@@ -1275,13 +1219,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         else
         {
-            float timer = 0;
-            while (timer <= 2)
-            {
-                yield return BattleManagerScript.Instance.WaitUpdate();
-
-                timer += Time.deltaTime;
-            }
+            yield return BattleManagerScript.Instance.WaitFor(2, () => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
         }
       
         BuffsDebuffsList.Remove(bdClass);
@@ -1416,6 +1354,16 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public virtual void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
     {
         SetAnimation(animState.ToString(), loop, transition);
+    }
+
+    public IEnumerator SlowDownAnimation(float perc, Func<bool> condition)
+    {
+        yield return BattleManagerScript.Instance.WaitUpdate(()=>
+        {
+            SpineAnim.SetAnimationSpeed(CharInfo.BaseSpeed * perc);
+        }, condition);
+
+        SpineAnim.SetAnimationSpeed(CharInfo.BaseSpeed);
     }
 
     protected bool pauseOnLastFrame = false;
@@ -1677,50 +1625,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         return (ElementalWeaknessType)(resVal);
     }
-
-    public IEnumerator UsePortal(PortalInfoClass outPortal)
-    {
-        while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause || isMoving)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        StopCoroutine(MoveCo);
-        IsUsingAPortal = true;
-        transform.position = outPortal.PortalPos.transform.position;
-
-    }
-
-    public IEnumerator Freeze(float duration, float speed)
-    {
-
-        while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause || isMoving)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        SpineAnim.SetAnimationSpeed(speed);
-        float timer = 0;
-        while (timer <= duration)
-        {
-            yield return BattleManagerScript.Instance.WaitUpdate();
-
-            timer += Time.deltaTime;
-        }
-
-        SpineAnim.SetAnimationSpeed(CharInfo.BaseSpeed);
-    }
-
-    public IEnumerator Trap(PortalInfoClass outPortal)
-    {
-        while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause || isMoving)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        StopCoroutine(MoveCo);
-        IsUsingAPortal = true;
-        transform.position = outPortal.PortalPos.transform.position;
-
-    }
-
 
     public void SetValueFromVariableName(string vName, object value)
     {

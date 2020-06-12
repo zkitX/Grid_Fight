@@ -100,15 +100,6 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
 
     private IEnumerator DurationOnBattleField_Co()
     {
-        if (Duration == 0f)
-        {
-            Duration = ItemPowerUpInfo.DurationOnField;
-        }
-        float timer = 0;
-        while (timer <= Duration)
-        {
-            yield return BattleManagerScript.Instance.WaitUpdate();
-            timer += Time.deltaTime;
-        }
+        yield return BattleManagerScript.Instance.WaitFor(ItemPowerUpInfo.DurationOnField, () => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
     }
 }

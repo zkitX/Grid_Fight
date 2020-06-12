@@ -31,10 +31,7 @@ public class Stage01_Boss_Script : MinionType_Script
             if (IsOnField)
             {
 
-                while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
-                {
-                    yield return null;
-                }
+                yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
 
                 AttackedTilesList.Clear();
                 List<BaseCharacter> enemys = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList();
@@ -262,18 +259,8 @@ public class Stage01_Boss_Script : MinionType_Script
 
         if (completedAnim.Contains("_Loop") && SpineAnim.CurrentAnim.Contains("_Loop"))
         {
-
-            //If they can still attack, keep them in the charging loop
-            if (shotsLeftInAttack > 0)
-            {
-                SetAnimation(nextAttack.PrefixAnim + "_Charging", true, 0);
-            }
-            //otherwise revert them to the idle postion
-            else
-            {
-                SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
-                currentAttackPhase = AttackPhasesType.End;
-            }
+            SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
+            currentAttackPhase = AttackPhasesType.End;
             return;
         }
 

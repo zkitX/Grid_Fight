@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class CharacterType_Script : BaseCharacter
 {
-
-    private float atkHoldingTimer = 0;
     protected bool MoveCoOn = true;
     private IEnumerator MoveActionCo;
     public bool Atk1Queueing = false;
@@ -114,7 +112,7 @@ public class CharacterType_Script : BaseCharacter
                     yield return new WaitForFixedUpdate();
                     while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || Attacking)
                     {
-                        yield return new WaitForFixedUpdate();
+                        yield return null;
                     }
 
                     timer += Time.fixedDeltaTime;
@@ -343,7 +341,7 @@ public class CharacterType_Script : BaseCharacter
             chargingAudio = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoop, AudioBus.MidPrio, transform, true, 1f);
             while (isSpecialLoading && !VFXTestMode)
             {
-                yield return BattleManagerScript.Instance.WaitUpdate();
+                yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
                 chargingAttackTimer += Time.deltaTime;
                 if(chargingAudioStrong == null && chargingAttackTimer >= 1.5f)
                 {
@@ -426,16 +424,6 @@ public class CharacterType_Script : BaseCharacter
             }
         }
     }
-
-    private IEnumerator AtkHoldingCo()
-    {
-        while (true)
-        {
-            yield return BattleManagerScript.Instance.WaitUpdate();
-            atkHoldingTimer += Time.deltaTime;
-        }
-    }
-
 
     public override void SetFinalDamage(BaseCharacter attacker, float damage)
     {

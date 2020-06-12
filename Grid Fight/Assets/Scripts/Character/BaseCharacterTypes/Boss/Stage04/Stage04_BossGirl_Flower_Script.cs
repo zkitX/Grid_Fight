@@ -32,11 +32,8 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
             yield return null;
             if (IsOnField)
             {
-                
-                while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
-                {
-                    yield return null;
-                }
+
+                yield return BattleManagerScript.Instance.WaitUpdate(() =>BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
 
                 if (MoveTime == 0)
                 {
@@ -112,7 +109,6 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
 
     private IEnumerator DeathStasy()
     {
-        float timer = 0;
         if(Smoke == null)
         {
             Smoke = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage04FlowersSmoke);
@@ -121,16 +117,7 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
         }
         Smoke.SetActive(true);
         SetAnimation(CharacterAnimationStateType.Death);
-        while (timer < StasyTime)
-        {
-            yield return new WaitForFixedUpdate();
-            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
-            {
-                yield return new WaitForFixedUpdate();
-            }
-
-            timer += Time.fixedDeltaTime;
-        }
+        yield return BattleManagerScript.Instance.WaitFor(StasyTime, () =>BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
 
         Call_CurrentCharIsRebirthEvent();
     }

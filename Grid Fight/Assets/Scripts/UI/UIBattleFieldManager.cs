@@ -110,7 +110,7 @@ public class UIBattleFieldManager : MonoBehaviour
             {
                 isAlive = false;
             }
-            yield return BattleManagerScript.Instance.WaitUpdate();
+            yield return BattleManagerScript.Instance.WaitUpdate(()=> BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
 
             timer += Time.deltaTime;
         }
@@ -141,7 +141,7 @@ public class UIBattleFieldManager : MonoBehaviour
             {
                 isAlive = false;
             }
-            yield return BattleManagerScript.Instance.WaitUpdate();
+            yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
 
             timer += Time.deltaTime;
         }
@@ -193,7 +193,7 @@ public class UIBattleFieldManager : MonoBehaviour
             {
                 isAlive = false;
             }
-            yield return BattleManagerScript.Instance.WaitUpdate();
+            yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
 
             timer += Time.deltaTime;
         }
@@ -229,7 +229,7 @@ public class UIBattleFieldManager : MonoBehaviour
             {
                 isAlive = false;
             }
-            yield return BattleManagerScript.Instance.WaitUpdate();
+            yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
 
             timer += Time.deltaTime;
         }

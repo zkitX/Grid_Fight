@@ -376,7 +376,7 @@ public Vector2 Duration_Debuff_Trap_ForTime;
         float timer = 0;
         while (timer <= duration && !isColliding)
         {
-            yield return BattleManagerScript.Instance.WaitUpdate();
+            yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
 
             timer += Time.deltaTime;
         }

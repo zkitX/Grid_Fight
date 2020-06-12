@@ -356,7 +356,6 @@ public class MinionType_Script : BaseCharacter
 
     public override void CreateBullet(BulletBehaviourInfoClassOnBattleFieldClass bulletBehaviourInfo)
     {
-           // Debug.Log(isSpecialLoading);
         GameObject bullet = BulletManagerScript.Instance.GetBullet();
         bullet.transform.position = SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position;
         BulletScript bs = bullet.GetComponent<BulletScript>();
@@ -414,7 +413,7 @@ public class MinionType_Script : BaseCharacter
             if (!strongAnimDone)
             {
                 strongAnimDone = true;
-                SetAnimation(nextAttack.PrefixAnim + "_Loop");
+                SetAnimation(nextAttack.PrefixAnim == AttackAnimPrefixType.Atk1 ? nextAttack.PrefixAnim + "_Loop" : nextAttack.PrefixAnim + "_AtkToIdle");
             }
         }
         else

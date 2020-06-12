@@ -31,6 +31,12 @@ public class BattleManagerScript : MonoBehaviour
             {
                 ResetAllActiveChars();
             }
+            else if(value == BattleState.Pause)
+            {
+                AllCharactersOnField.ForEach(r => StartCoroutine(r.SlowDownAnimation(0, () => CurrentBattleState == BattleState.Pause)));
+                WaveManagerScript.Instance.WaveCharcters.Where(a=> a.gameObject.activeInHierarchy).ToList().ForEach(r => StartCoroutine(r.SlowDownAnimation(0, () => CurrentBattleState == BattleState.Pause)));
+            }
+           
             _CurrentBattleState = value;
         }
     }
@@ -259,6 +265,8 @@ public class BattleManagerScript : MonoBehaviour
         yield return null;
     }
 
+
+
     public IEnumerator RemoveZombieFromBaord(BaseCharacter zombie)
     {
         for (int i = 0; i < zombie.UMS.Pos.Count; i++)
@@ -273,16 +281,11 @@ public class BattleManagerScript : MonoBehaviour
     }
 
 
+
+
     public IEnumerator MoveCharToBoardWithDelay(float delay, BaseCharacter cb, Vector3 nextPos)
     {
-        float timer = 0;
-        while (timer <= delay)
-        {
-            yield return WaitUpdate();
-
-            timer += Time.deltaTime;
-        }
-
+        yield return WaitFor(delay, () => CurrentBattleState == BattleState.Pause);
         cb.transform.position = nextPos;
     }
 
@@ -463,23 +466,14 @@ public class BattleManagerScript : MonoBehaviour
         zombiePs.transform.parent = zombie.SpineAnim.transform;
         zombiePs.transform.localPosition = Vector3.zero;
         zombiePs.transform.localRotation = Quaternion.Euler(zombie.UMS.Side == SideType.LeftSide ? Vector3.zero : zombiePs.transform.eulerAngles);
-        float timer = 0;
-        while (timer <= 1)
-        {
-            yield return WaitUpdate();
 
-            timer += Time.deltaTime;
-        }
+        yield return WaitFor(1, () => CurrentBattleState != BattleState.Battle);
 
         yield return RemoveCharacterFromBaord(playerController, zombie, true);
         zombie.CharActionlist.Remove(CharacterActionType.SwitchCharacter);
-        timer = 0;
-        while (timer <= 2)
-        {
-            yield return WaitUpdate();
 
-            timer += Time.deltaTime;
-        }
+
+        yield return WaitFor(2, () => CurrentBattleState != BattleState.Battle);
         zombiePs.transform.parent = null;
         zombiePs.SetActive(false);
 
@@ -933,25 +927,6 @@ public class BattleManagerScript : MonoBehaviour
         cscc.Character = newChar;
     }
 
-    //Handle the wait for a button hold (relating to spawning in)
-    IEnumerator HoldPressTimer(ControllerType playerController)
-    {
-        //TODO Setup animation for the UI
-        float timer = 0f;
-        while (timer <= 1f)
-        {
-            yield return WaitUpdate();
-            if (CurrentSelectedCharacters[playerController].Character != null)
-            {
-                while (CurrentSelectedCharacters[playerController].Character.isMoving)
-                {
-                    yield return WaitUpdate();
-                }
-            }
-            timer += Time.deltaTime;
-        }
-    }
-
     #endregion
 
     #region Move Character
@@ -1289,23 +1264,56 @@ public class BattleManagerScript : MonoBehaviour
     }
 
 
-    public IEnumerator WaitUpdate()
+    public IEnumerator WaitUpdate(System.Func<bool> condition)
     {
         yield return null;
 
-        while (CurrentBattleState == BattleState.Pause)
+        while (condition())
         {
             yield return null;
         }
     }
 
-    public IEnumerator WaitFixedUpdate()
+    public IEnumerator WaitUpdate(System.Action action, System.Func<bool> condition)
+    {
+        yield return null;
+
+        while (condition())
+        {
+            action();
+            yield return null;
+        }
+    }
+
+    public IEnumerator WaitFor(float duration, System.Func<bool> condition)
+    {
+        float timer = 0;
+        while (timer < duration)
+        {
+            yield return WaitUpdate(condition);
+            timer += Time.deltaTime;
+        }
+    }
+
+    public IEnumerator WaitFixedUpdate(System.Func<bool> condition)
     {
         yield return new WaitForFixedUpdate();
 
-        while (CurrentBattleState == BattleState.Pause)
+        while (condition())
         {
             yield return null;
+        }
+    }
+
+
+    public IEnumerator WaitFixedUpdate(System.Action action, System.Func<bool> condition)
+    {
+        yield return new WaitForFixedUpdate();
+
+        while (condition())
+        {
+            yield return null;
+            action();
         }
     }
 

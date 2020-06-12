@@ -81,11 +81,6 @@ public class Stage00_BossOctopus_Tentacles_Script : MinionType_Script
         yield return null;
     }
 
-    public override IEnumerator AttackAction(bool yieldBefore)
-    {
-        yield break;
-    }
-
     public override IEnumerator AttackSequence(ScriptableObjectAttackBase atk = null)
     {
         yield return base.AttackSequence();

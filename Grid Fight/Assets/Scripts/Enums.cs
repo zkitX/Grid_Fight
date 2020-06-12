@@ -201,18 +201,16 @@ public enum CharacterActionType
 
 public enum BattleState
 {
-    Initialization,
-    FungusPuppets,
-    Talk,
-    Event,
-    Battle,
-    Pause,
-    Menu,
-    End,
-    WinLose,
-    Tutorial,
-    Intro,
-    Jump
+    Initialization = 0,
+    FungusPuppets = 1,
+    Event = 3,
+    Battle = 4,
+    Pause = 5,
+    Menu = 6,
+    End = 7,
+    WinLose = 8,
+    Tutorial = 9,
+    Intro = 10
 }
 
 public enum ElementalType
