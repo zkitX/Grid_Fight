@@ -147,7 +147,14 @@ public class BattleTileTargetsScript : MonoBehaviour
         yield return FireTarget(tc, pos, damage, ele, attacker, atkEffects, effectChances, bulletTravelDuration);
         tc.RemainingTime = 0f;
         UpdateQueue(tc);
-        attacker.shotsLeftInAttack--;
+        if(attacker.IsOnField)
+        {
+            attacker.shotsLeftInAttack--;
+        }
+        else
+        {
+
+        }
     }
 
     private IEnumerator FireTarget(TargetClass tc, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances, float bulletTravelDuration)
