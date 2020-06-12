@@ -37632,6 +37632,12 @@ GameObject:
   - component: {fileID: 8181808504655997670}
   - component: {fileID: 1849958623966627527}
   - component: {fileID: 859779688342801363}
+  - component: {fileID: 8993885207538271826}
+  - component: {fileID: 6709576077490668163}
+  - component: {fileID: 2577286759344727392}
+  - component: {fileID: 3298308545219811872}
+  - component: {fileID: 888913704488689346}
+  - component: {fileID: 8813772334982245645}
   m_Layer: 0
   m_Name: EventManager_Chapter02_TheBurg
   m_TagString: Untagged
@@ -37690,11 +37696,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 2077.8342, y: -1839.4108}
+  scrollPos: {x: 1100.2446, y: -1972.1233}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 476
-  zoom: 0.31000015
+  zoom: 0.76
   scrollViewRect:
     serializedVersion: 2
     x: 0
@@ -37856,7 +37862,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -460.2768
     y: 2484.6582
-    width: 124.19351
+    width: 127.63158
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -42098,7 +42104,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -615.58716
     y: 1942.4684
-    width: 133.87093
+    width: 139.4737
     height: 40
   tint: {r: 1, g: 0, b: 0, a: 1}
   useCustomTint: 1
@@ -42258,7 +42264,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -336.46613
     y: 2304.6099
-    width: 120.967705
+    width: 121.052635
     height: 40
   tint: {r: 0, g: 1, b: 0.14901961, a: 1}
   useCustomTint: 1
@@ -42725,7 +42731,7 @@ MonoBehaviour:
 
     <size=35><color=#F1F4C9>< FIGHT ></color></size>'
   description: Donna
-  targetBlock: {fileID: 7968897132150979374}
+  targetBlock: {fileID: 2813063335982096863}
   hideIfVisited: 0
   interactable:
     booleanRef: {fileID: 0}
@@ -45759,7 +45765,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -1242.5259
     y: 2044.293
-    width: 146.77414
+    width: 152.63158
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -46030,6 +46036,7 @@ MonoBehaviour:
   - {fileID: 1526394937346887261}
   - {fileID: 9103057427218729434}
   - {fileID: 2042233080088521499}
+  - {fileID: 8813772334982245645}
   - {fileID: 9011310687413510977}
 --- !u!114 &1526394937346887261
 MonoBehaviour:
@@ -46129,8 +46136,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -928.6527
-    y: 2311.8665
+    x: -929.8722
+    y: 2313.086
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -46269,7 +46276,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -1092.6057
     y: 2389.4426
-    width: 133.87093
+    width: 136.8421
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -46291,6 +46298,7 @@ MonoBehaviour:
   - {fileID: 5651119245878879598}
   - {fileID: 5135217647165978672}
   - {fileID: 6432622537990964157}
+  - {fileID: 2577286759344727392}
   - {fileID: 1710865618534523171}
 --- !u!114 &5260173781805343842
 MonoBehaviour:
@@ -46671,7 +46679,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -961.801
     y: 2437.4888
-    width: 179.0322
+    width: 188.1579
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -46680,6 +46688,8 @@ MonoBehaviour:
   description: 
   eventHandler: {fileID: 0}
   commandList:
+  - {fileID: 8993885207538271826}
+  - {fileID: 3298308545219811872}
   - {fileID: 2721247276296242840}
 --- !u!114 &2721247276296242840
 MonoBehaviour:
@@ -46717,7 +46727,7 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: -764.9902
-    y: 2248.0762
+    y: 2249.446
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -46727,6 +46737,8 @@ MonoBehaviour:
   description: 
   eventHandler: {fileID: 0}
   commandList:
+  - {fileID: 6709576077490668163}
+  - {fileID: 888913704488689346}
   - {fileID: 791321556991416002}
 --- !u!114 &791321556991416002
 MonoBehaviour:
@@ -47407,7 +47419,7 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: -392.16608
-    y: 2900.0447
+    y: 2901.4731
     width: 120
     height: 40
   tint: {r: 1, g: 0, b: 0, a: 1}
@@ -47866,6 +47878,118 @@ MonoBehaviour:
     varvalue: OFF
   Pass_BlockName: Grid4
   NotPass_BlockName: GridMinion4
+--- !u!114 &8993885207538271826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8388188415199824812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b12e04f9c14ac964eaa9d005fb961339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 2403
+  indentLevel: 0
+  storyText: Hello Dan!!!
+  description: Donna
+  character: {fileID: 8988121945960236426}
+  portrait: {fileID: 0}
+  voiceOverClip: {fileID: 0}
+  showAlways: 1
+  showCount: 1
+  extendPrevious: 0
+  fadeWhenDone: 1
+  waitForClick: 1
+  stopVoiceover: 1
+  waitForVO: 0
+  setSayDialog: {fileID: 0}
+  Side: 0
+--- !u!114 &6709576077490668163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8388188415199824812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b12e04f9c14ac964eaa9d005fb961339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 2404
+  indentLevel: 0
+  storyText: HAHAHHA It's Empty
+  description: Donna
+  character: {fileID: 8988121945960236426}
+  portrait: {fileID: 0}
+  voiceOverClip: {fileID: 0}
+  showAlways: 1
+  showCount: 1
+  extendPrevious: 0
+  fadeWhenDone: 1
+  waitForClick: 1
+  stopVoiceover: 1
+  waitForVO: 0
+  setSayDialog: {fileID: 0}
+  Side: 0
+--- !u!114 &2577286759344727392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8388188415199824812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc22472645a4c6f49be2acabadc84642, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 2405
+  indentLevel: 0
+--- !u!114 &3298308545219811872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8388188415199824812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc22472645a4c6f49be2acabadc84642, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 2406
+  indentLevel: 0
+--- !u!114 &888913704488689346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8388188415199824812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc22472645a4c6f49be2acabadc84642, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 2407
+  indentLevel: 0
+--- !u!114 &8813772334982245645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8388188415199824812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc22472645a4c6f49be2acabadc84642, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 2408
+  indentLevel: 0
 --- !u!1 &8418563584349228055
 GameObject:
   m_ObjectHideFlags: 0
