@@ -304,4 +304,8 @@ public class Stage01_Boss_Script : MinionType_Script
         }
     }
 
+    public override string GetAttackAnimName()
+    {
+        return CurrentPhase.ToString() + "_" +  nextAttack.PrefixAnim + (nextAttack.PrefixAnim == AttackAnimPrefixType.Atk1 ? "_Loop" : "_AtkToIdle");
+    }
 }
