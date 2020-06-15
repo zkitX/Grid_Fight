@@ -76,7 +76,7 @@ public class GameTime
         {
             if (BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle && !isStopped)
             {
-                timeInSeconds = Mathf.Clamp(timeInSeconds + (Time.deltaTime * rate), 0f, 99999999999999999999999999999f);
+                timeInSeconds = Mathf.Clamp(timeInSeconds + (BattleManagerScript.Instance.DeltaTime * rate), 0f, 99999999999999999999999999999f);
             }
             yield return null;
         }

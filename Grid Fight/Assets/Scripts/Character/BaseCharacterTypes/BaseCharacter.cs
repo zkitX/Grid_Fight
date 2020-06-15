@@ -198,16 +198,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     }
 
-    public virtual void StartMoveCo()
-    {
-
-    }
-
-    public virtual void StopMoveCo()
-    {
-
-    }
-
     protected void _CharInfo_BaseSpeedChangedEvent(float baseSpeed)
     {
         SpineAnim.SetAnimationSpeed(baseSpeed);
@@ -346,27 +336,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             yield return null;
         }
     }*/
-
-    public IEnumerator PauseAttack(float duration)
-    {
-        float timer = 0;
-        while (timer <= duration)
-        {
-            yield return new WaitForFixedUpdate();
-            while ((!VFXTestMode && BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
-            {
-                yield return new WaitForEndOfFrame();
-            }
-
-            while (isSpecialLoading)
-            {
-                yield return new WaitForEndOfFrame();
-                timer = 0;
-            }
-
-            timer += Time.fixedDeltaTime;
-        }
-    }
 
 
     List<ScriptableObjectAttackBase> availableAtks = new List<ScriptableObjectAttackBase>();
@@ -551,7 +520,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                                 {
                                     //new way
 
-                                    string animName = nextAttack.PrefixAnim + (nextAttack.AttackInput == AttackInputType.Weak ? "_Loop" : "_AtkToIdle");
+                                    string animName = GetAttackAnimName();
                                     Spine.Animation anim = SpineAnim.skeleton.Data.FindAnimation(animName);
 
                                     List<Spine.Timeline> evs = anim.Timelines.Items.Where(r => r is Spine.EventTimeline).ToList();
@@ -604,6 +573,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
     }
 
+    public virtual string GetAttackAnimName()
+    {
+        return nextAttack.PrefixAnim + (nextAttack.PrefixAnim == AttackAnimPrefixType.Atk1 ? "_Loop" : "_AtkToIdle");
+    }
+
     public virtual void AttackedTiles(BattleTileScript bts)
     {
 
@@ -643,7 +617,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         float timer = (SpineAnim.GetAnimLenght(CharacterAnimationStateType.Defending) / defenceAnimSpeedMultiplier) * 0.25f;
         while (timer != 0f)
         {
-            timer = Mathf.Clamp(timer - Time.deltaTime, 0f, (SpineAnim.GetAnimLenght(CharacterAnimationStateType.Defending) / defenceAnimSpeedMultiplier) * 0.25f);
+            timer = Mathf.Clamp(timer - BattleManagerScript.Instance.DeltaTime, 0f, (SpineAnim.GetAnimLenght(CharacterAnimationStateType.Defending) / defenceAnimSpeedMultiplier) * 0.25f);
             yield return null;
         }
         SetAnimation(CharacterAnimationStateType.Idle, true);
@@ -675,7 +649,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 SpineAnim.SetAnimationSpeed(5);
             }
             yield return null;
-            DefendingHoldingTimer += Time.deltaTime;
+            DefendingHoldingTimer += BattleManagerScript.Instance.DeltaTime;
             if (CharInfo.ShieldPerc == 0)
             {
                 StartCoroutine(ReloadDefending_Co());
@@ -909,7 +883,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
 
             yield return BattleManagerScript.Instance.WaitFixedUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-            timer += (Time.fixedDeltaTime / (animLength / moveValue));
+            timer += (BattleManagerScript.Instance.FixedDeltaTime / (animLength / moveValue));
             spaceTimer = curve.Evaluate(timer);
             spineT.localPosition = Vector3.Lerp(localoffset, LocalSpinePosoffset, spaceTimer);
 
@@ -954,8 +928,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
 
             yield return BattleManagerScript.Instance.WaitFixedUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-            float newAdd = (Time.fixedDeltaTime / (animLength / moveValue));
-            timer += (Time.fixedDeltaTime / (animLength / moveValue));
+            float newAdd = (BattleManagerScript.Instance.FixedDeltaTime / (animLength / moveValue));
+            timer += (BattleManagerScript.Instance.FixedDeltaTime / (animLength / moveValue));
             speedTimer += newAdd * curve.Evaluate(timer + newAdd);
             transform.position = Vector3.Lerp(offset, nextPos, speedTimer);
 
@@ -1134,7 +1108,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             {
                 yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
 
-                bdClass.CurrentBuffDebuff.Timer += Time.deltaTime;
+                bdClass.CurrentBuffDebuff.Timer += BattleManagerScript.Instance.DeltaTime;
 
                 if (((int)bdClass.CurrentBuffDebuff.Timer) > iterator && bdClass.Stat.ToString().Contains("Overtime"))
                 {

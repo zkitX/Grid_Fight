@@ -20,36 +20,17 @@ public class ParticleManagerScript : MonoBehaviour
 
     private void Start()
     {
-        BattleManagerScript.Instance.CurrentBattleStateChangedEvent += Instance_CurrentBattleStateChangedEvent;
+        BattleManagerScript.Instance.CurrentBattleSpeedChangedEvent += Instance_CurrentBattleSpeedChangedEvent;
     }
 
-    private void Instance_CurrentBattleStateChangedEvent(BattleState currentBattleState)
+    private void Instance_CurrentBattleSpeedChangedEvent(float currentBattleSpeed)
     {
-        if (currentBattleState == BattleState.Pause && !isTheGamePaused)
+        foreach (FiredAttackParticle item in AttackParticlesFired.Where(r => r.PS.activeInHierarchy).ToList())
         {
-            isTheGamePaused = true;
-            foreach (var item in AttackParticlesFired.Where(r => r.PS.activeInHierarchy).ToList())
-            {
-                foreach (ParticleSystem ps in item.PS.GetComponentsInChildren<ParticleSystem>())
-                {
-                    var main = ps.main;
-                    main.simulationSpeed = 0;
-                }
-            }
-        }
-        else if (isTheGamePaused && currentBattleState == BattleState.Battle)
-        {
-            isTheGamePaused = false;
-            foreach (var item in AttackParticlesFired.Where(r => r.PS.activeInHierarchy).ToList())
-            {
-                foreach (ParticleSystem ps in item.PS.GetComponentsInChildren<ParticleSystem>())
-                {
-                    var main = ps.main;
-                    main.simulationSpeed = 1;
-                }
-            }
+            ChangePsSpeed(item.PS, currentBattleSpeed);
         }
     }
+
 
     public GameObject FireParticlesInPosition(GameObject ps,CharacterNameType characterId, AttackParticlePhaseTypes particleType, Vector3 pos, SideType side, AttackInputType attackInput)
     {
@@ -60,6 +41,7 @@ public class ParticleManagerScript : MonoBehaviour
             {
                 psToFire.PS.transform.position = pos;
                 psToFire.PS.SetActive(true);
+                ChangePsSpeed(psToFire.PS, BattleManagerScript.Instance.BattleSpeed);
                 return psToFire.PS;
             }
             else
@@ -67,11 +49,22 @@ public class ParticleManagerScript : MonoBehaviour
                 GameObject res = Instantiate(ps, pos, Quaternion.identity, Container);
                 res.SetActive(true);
                 AttackParticlesFired.Add(new FiredAttackParticle(res, characterId, particleType, side, attackInput));
+                ChangePsSpeed(res, BattleManagerScript.Instance.BattleSpeed);
                 return res;
             }
         }
 
 
+    }
+
+
+    public void ChangePsSpeed(GameObject psG, float speed)
+    {
+        foreach (ParticleSystem ps in psG.GetComponentsInChildren<ParticleSystem>())
+        {
+            var main = ps.main;
+            main.simulationSpeed = speed;
+        }
     }
 
     public GameObject FireParticlesInTransform(GameObject ps, CharacterNameType characterId, AttackParticlePhaseTypes particleType, Transform parent, SideType side, AttackInputType attackInput, bool particlesVisible)
@@ -85,6 +78,7 @@ public class ParticleManagerScript : MonoBehaviour
                 psToFire.PS.transform.parent = parent;
                 psToFire.PS.transform.localPosition = Vector3.zero;
                 psToFire.PS.SetActive(particlesVisible);//particlesVisible
+                ChangePsSpeed(psToFire.PS, BattleManagerScript.Instance.BattleSpeed);
                 return psToFire.PS;
             }
             else
@@ -93,6 +87,7 @@ public class ParticleManagerScript : MonoBehaviour
                 res.transform.localPosition = Vector3.zero;
                 res.SetActive(particlesVisible);//particlesVisible
                 AttackParticlesFired.Add(new FiredAttackParticle(res, characterId, particleType, side, attackInput));
+                ChangePsSpeed(res, BattleManagerScript.Instance.BattleSpeed);
                 return res;
             }
         }
@@ -105,6 +100,7 @@ public class ParticleManagerScript : MonoBehaviour
         {
             ps = new FiredParticle(Instantiate(ListOfParticles.Where(r => r.PSType == particle).First().PS), particle);
         }
+        ChangePsSpeed(ps.PS, BattleManagerScript.Instance.BattleSpeed);
         return ps.PS;
     }
 }

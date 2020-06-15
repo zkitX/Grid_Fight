@@ -91,63 +91,6 @@ public class CharacterType_Script : BaseCharacter
         }
     }
 
-
-    public override void StartMoveCo()
-    {
-        MoveCoOn = true;
-        MoveActionCo = Move();
-        StartCoroutine(MoveActionCo);
-    }
-
-    public virtual IEnumerator Move()
-    {
-        while (true)
-        {
-            if (MoveCoOn && currentAttackPhase == AttackPhasesType.End && !Attacking)
-            {
-                float timer = 0;
-                float MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y);
-                while (timer < MoveTime)
-                {
-                    yield return new WaitForFixedUpdate();
-                    while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || Attacking)
-                    {
-                        yield return null;
-                    }
-
-                    timer += Time.fixedDeltaTime;
-                }
-                if (CharInfo.Health > 0)
-                {
-                    while (currentAttackPhase != AttackPhasesType.End)
-                    {
-                        yield return null;
-                    }
-
-                    MoveCharOnDirection((InputDirection)Random.Range(0, 4));
-                }
-                else
-                {
-                    timer = 0;
-                }
-            }
-            yield return null;
-        }
-    }
-
-
-    public override void StopMoveCo()
-    {
-        MoveCoOn = false;
-        if (MoveActionCo != null)
-        {
-            StopCoroutine(MoveActionCo);
-        }
-    }
-
-
-
-
     public override void SetupCharacterSide()
     {
         base.SetupCharacterSide();
@@ -197,7 +140,7 @@ public class CharacterType_Script : BaseCharacter
             if (BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle
                 || BattleManagerScript.Instance.CurrentBattleState == BattleState.FungusPuppets)
             {
-                timeElapsed = Mathf.Clamp(timeElapsed + Time.deltaTime, 0f, timeToWait);
+                timeElapsed = Mathf.Clamp(timeElapsed + BattleManagerScript.Instance.DeltaTime, 0f, timeToWait);
             }
             yield return null;
         }
@@ -261,29 +204,32 @@ public class CharacterType_Script : BaseCharacter
                 {
                     return;
                 }
+                StartCoroutine(StartChargingAttack(atkType));
                 break;
             case AttackInputType.Skill1:
                 if (!CharActionlist.Contains(CharacterActionType.Skill1))
                 {
                     return;
                 }
+                StartCoroutine(StartSkillAttack());
+
                 break;
             case AttackInputType.Skill2:
                 if (!CharActionlist.Contains(CharacterActionType.Skill2))
                 {
                     return;
                 }
+                StartCoroutine(StartSkillAttack());
                 break;
             case AttackInputType.Skill3:
                 if (!CharActionlist.Contains(CharacterActionType.Skill3))
                 {
                     return;
                 }
+                StartCoroutine(StartSkillAttack());
                 break;
-            default:
-                break;
+                
         }
-        StartCoroutine(StartChargingAttack(atkType));
     }
 
     IEnumerator StartChargingAttack(AttackInputType nextAtkType)
@@ -342,7 +288,7 @@ public class CharacterType_Script : BaseCharacter
             while (isSpecialLoading && !VFXTestMode)
             {
                 yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-                chargingAttackTimer += Time.deltaTime;
+                chargingAttackTimer += BattleManagerScript.Instance.DeltaTime;
                 if(chargingAudioStrong == null && chargingAttackTimer >= 1.5f)
                 {
                     chargingAudioStrong = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoopStrong, AudioBus.MidPrio, transform, true, 1f);
@@ -396,8 +342,6 @@ public class CharacterType_Script : BaseCharacter
         }
     }
 
-
-
     public void StartWeakAttack(bool attackRegardless)
     {
         if (!CharActionlist.Contains(CharacterActionType.WeakAttack))
@@ -424,6 +368,13 @@ public class CharacterType_Script : BaseCharacter
             }
         }
     }
+
+    public IEnumerator StartSkillAttack()
+    {
+        yield return null;
+        BattleManagerScript.Instance.BattleSpeed = 0.2f;
+    }
+
 
     public override void SetFinalDamage(BaseCharacter attacker, float damage)
     {

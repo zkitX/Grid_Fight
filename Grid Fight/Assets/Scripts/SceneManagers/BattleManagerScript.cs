@@ -9,6 +9,9 @@ public class BattleManagerScript : MonoBehaviour
     public delegate void CurrentBattleStateChanged(BattleState currentBattleState);
     public event CurrentBattleStateChanged CurrentBattleStateChangedEvent;
 
+    public delegate void CurrentBattleSpeedChanged(float currentBattleSpeed);
+    public event CurrentBattleSpeedChanged CurrentBattleSpeedChangedEvent;
+
     public UniversalAudioProfileSO AudioProfile;
 
     public delegate void CurrentFungusStateChanged(FungusDialogType currentFungusState);
@@ -23,20 +26,21 @@ public class BattleManagerScript : MonoBehaviour
         }
         set
         {
-            if (CurrentBattleStateChangedEvent != null)
-            {
-                CurrentBattleStateChangedEvent(value);
-            }
+            CurrentBattleStateChangedEvent?.Invoke(value);
             if(value == BattleState.FungusPuppets)
             {
                 ResetAllActiveChars();
             }
             else if(value == BattleState.Pause)
             {
-                AllCharactersOnField.ForEach(r => StartCoroutine(r.SlowDownAnimation(0, () => CurrentBattleState == BattleState.Pause)));
-                WaveManagerScript.Instance.WaveCharcters.Where(a=> a.gameObject.activeInHierarchy).ToList().ForEach(r => StartCoroutine(r.SlowDownAnimation(0, () => CurrentBattleState == BattleState.Pause)));
+                BattleSpeed = 0;
             }
-           
+            else if (value == BattleState.Battle)
+            {
+                BattleSpeed = 1;
+            }
+
+
             _CurrentBattleState = value;
         }
     }
@@ -49,10 +53,7 @@ public class BattleManagerScript : MonoBehaviour
         }
         set
         {
-            if (CurrentFungusStateChangedEvent != null)
-            {
-                CurrentFungusStateChangedEvent(value);
-            }
+            CurrentFungusStateChangedEvent?.Invoke(value);
             _FungusState = value;
         }
     }
@@ -74,6 +75,41 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
+    public float BattleSpeed
+    {
+        get
+        {
+            return _BattleSpeed;
+        }
+        set
+        {
+            _BattleSpeed = value;
+            CurrentBattleSpeedChangedEvent?.Invoke(_BattleSpeed);
+            if(_BattleSpeed != 1)
+            {
+                AllCharactersOnField.ForEach(r => StartCoroutine(r.SlowDownAnimation(_BattleSpeed, () => _BattleSpeed != 1)));
+                WaveManagerScript.Instance.WaveCharcters.Where(a => a.gameObject.activeInHierarchy).ToList().ForEach(r => StartCoroutine(r.SlowDownAnimation(_BattleSpeed, () => _BattleSpeed != 1)));
+            }
+        }
+    }
+    public float _BattleSpeed;
+
+
+    public float FixedDeltaTime
+    {
+        get
+        {
+            return Time.fixedDeltaTime * BattleSpeed;
+        }
+    }
+
+    public float DeltaTime
+    {
+        get
+        {
+            return Time.deltaTime * BattleSpeed;
+        }
+    }
 
 
 
@@ -1291,7 +1327,7 @@ public class BattleManagerScript : MonoBehaviour
         while (timer < duration)
         {
             yield return WaitUpdate(condition);
-            timer += Time.deltaTime;
+            timer += DeltaTime;
         }
     }
 

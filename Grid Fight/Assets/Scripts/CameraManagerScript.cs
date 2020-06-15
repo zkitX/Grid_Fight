@@ -96,7 +96,7 @@ public class CameraManagerScript : MonoBehaviour
         while (progress < 1 || !hasStarted)
         {
             hasStarted = true;
-            progress += Time.fixedDeltaTime / duration;
+            progress += Time.deltaTime / duration;
             Cam.orthographicSize = Mathf.Lerp(startingOrtho, endOrtho, animCurve.Evaluate(progress));
             yield return null;
         }
@@ -113,7 +113,7 @@ public class CameraManagerScript : MonoBehaviour
         while (progress < 1 || !hasStarted)
         {
             hasStarted = true;
-            progress += Time.fixedDeltaTime / duration;
+            progress += Time.deltaTime / duration;
             transform.position = Vector3.Lerp(cameraStartingPosition, finalPos, progress);
             yield return null;
         }

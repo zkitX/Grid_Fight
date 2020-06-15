@@ -210,7 +210,7 @@ public enum BattleState
     End = 7,
     WinLose = 8,
     Tutorial = 9,
-    Intro = 10
+    Intro = 10,
 }
 
 public enum ElementalType

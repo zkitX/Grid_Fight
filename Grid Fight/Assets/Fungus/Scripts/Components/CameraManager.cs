@@ -104,7 +104,7 @@ namespace Fungus
                 while (timer < fadeDuration)
                 {
                     float t = timer / fadeDuration;
-                    timer += Time.deltaTime;
+                    timer += BattleManagerScript.Instance.DeltaTime;
                     
                     t = Mathf.Clamp01(t);   
                     
@@ -140,7 +140,7 @@ namespace Fungus
             bool arrived = false;
             while (!arrived)
             {
-                timer += Time.deltaTime;
+                timer += BattleManagerScript.Instance.DeltaTime;
                 if (timer > duration)
                 {
                     arrived = true;
@@ -185,7 +185,7 @@ namespace Fungus
             
             while (timer < duration)
             {
-                timer += Time.deltaTime;
+                timer += BattleManagerScript.Instance.DeltaTime;
                 timer = Mathf.Min(timer, duration);
                 float percent = timer / duration;
                 

@@ -378,7 +378,7 @@ public Vector2 Duration_Debuff_Trap_ForTime;
         {
             yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
 
-            timer += Time.deltaTime;
+            timer += BattleManagerScript.Instance.DeltaTime;
         }
         foreach (ScriptableObjectAttackEffect item in effect)
         {

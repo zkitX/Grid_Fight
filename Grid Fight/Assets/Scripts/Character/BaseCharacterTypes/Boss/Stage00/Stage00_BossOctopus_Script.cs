@@ -174,7 +174,7 @@ public class Stage00_BossOctopus_Script : MinionType_Script
             TriggerRandomDeathExplosion();
             while (timer != 0f)
             {
-                timer = Mathf.Clamp(timer - Time.deltaTime, 0f, paceRange.y);
+                timer = Mathf.Clamp(timer - BattleManagerScript.Instance.DeltaTime, 0f, paceRange.y);
                 yield return null;
             }
         }

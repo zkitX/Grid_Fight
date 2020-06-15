@@ -138,7 +138,7 @@ public class Stage01_Boss_Script : MinionType_Script
         while (MovementPsOut.activeInHierarchy)
         {
             yield return null;
-            timer += Time.deltaTime;
+            timer += BattleManagerScript.Instance.DeltaTime;
             if(timer > 0.2f && !inOut)
             {
                 inOut = true;
@@ -156,7 +156,7 @@ public class Stage01_Boss_Script : MinionType_Script
         while (MovementPsIn.activeInHierarchy)
         {
             yield return null;
-            timer += Time.deltaTime;
+            timer += BattleManagerScript.Instance.DeltaTime;
             if (timer > 0.2f && inOut)
             {
                 inOut = false;

@@ -57,17 +57,6 @@ public class MinionType_Script : BaseCharacter
         base.SetAttackReady(value);
     }
 
-    public override void StartMoveCo()
-    {
-        MoveCoOn = true;
-        if (MoveActionCo != null)
-        {
-            StopCoroutine(MoveActionCo);
-
-        }
-        MoveActionCo = Move();
-        StartCoroutine(MoveActionCo);
-    }
 
     public override void SetCharDead(bool hasToDisappear = true)
     {
@@ -194,7 +183,7 @@ public class MinionType_Script : BaseCharacter
                         yield return null;
                     }
                     // Debug.Log(timer + "    " + MoveTime);
-                    timer += Time.deltaTime;
+                    timer += BattleManagerScript.Instance.DeltaTime;
                 }
                 AIMove = false;
                 if (CharInfo.Health > 0)
@@ -244,15 +233,6 @@ public class MinionType_Script : BaseCharacter
     protected override void Update()
     {
         base.Update();
-    }
-
-    public override void StopMoveCo()
-    {
-        MoveCoOn = false;
-        if (MoveActionCo != null)
-        {
-            StopCoroutine(MoveActionCo);
-        }
     }
 
     public override void SetAnimation(string animState, bool loop = false, float transition = 0, bool _pauseOnLastFrame = false)

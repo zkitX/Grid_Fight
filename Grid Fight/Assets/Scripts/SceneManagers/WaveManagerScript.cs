@@ -201,7 +201,7 @@ public class WaveManagerScript : MonoBehaviour
         WaveCharacterInfoClass waveCharacterInfoClass;
         while (true)
         {
-            timer += Time.deltaTime;
+            timer += BattleManagerScript.Instance.DeltaTime;
             yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
             if (timer > wavePhase.DelayBetweenChars &&
                 WaveCharcters.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script).ToList().Count < wavePhase.MaxEnemyOnScreen)

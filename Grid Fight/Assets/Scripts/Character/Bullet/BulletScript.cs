@@ -120,8 +120,8 @@ public class BulletScript : MonoBehaviour
             res.z = BulletBehaviourInfo != null ? BulletBehaviourInfo.Trajectory_Z.Evaluate(timer) + res.z : BulletBehaviourInfoTile.Trajectory_Z.Evaluate(timer) + res.y;
 
             transform.position = res;
-            timer += Time.fixedDeltaTime / BulletDuration;
-            ti += Time.fixedDeltaTime;
+            timer += BattleManagerScript.Instance.FixedDeltaTime / BulletDuration;
+            ti += BattleManagerScript.Instance.FixedDeltaTime;
             //if timer ended the bullet fire the Effect
             if (timer > 1)
             {
@@ -253,7 +253,7 @@ public class BulletScript : MonoBehaviour
         while (timer < duration)
         {
             yield return null;
-            timer += Time.deltaTime;
+            timer += BattleManagerScript.Instance.DeltaTime;
         }
         bts.BattleTileState = BattleTileStateType.Empty;
     }

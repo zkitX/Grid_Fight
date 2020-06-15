@@ -82,7 +82,7 @@ public class Stage00_BossOctopus_Girl_Script : MinionType_Script
         Vector3 StartPos = transform.position;
         while (durationLeft != 0f)
         {
-            durationLeft = Mathf.Clamp(durationLeft - Time.deltaTime, 0f, 100f);
+            durationLeft = Mathf.Clamp(durationLeft - BattleManagerScript.Instance.DeltaTime, 0f, 100f);
             transform.position = Vector3.Lerp(StartPos, CenteringPoint.position, 1f - (durationLeft / duration));
             yield return null;
         }

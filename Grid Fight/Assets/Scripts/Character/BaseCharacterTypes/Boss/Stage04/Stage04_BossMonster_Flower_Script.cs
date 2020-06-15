@@ -23,11 +23,6 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
         SpineAnim.SpineAnimationState.Apply(SpineAnim.skeleton);
     }
 
-    public override void StartMoveCo()
-    {
-       // base.StartMoveCo();
-    }
-
     public override IEnumerator Move()
     {
 
@@ -58,12 +53,6 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
         SetAnimation(CharacterAnimationStateType.Idle);
         return base.MoveByTileSpeed(nextPos, curve, animLength);
     }
-
-    public override void StopMoveCo()
-    {
-        base.StopMoveCo();
-    }
-
 
     public override void SetCharDead(bool hasToDisappear = true)
     {

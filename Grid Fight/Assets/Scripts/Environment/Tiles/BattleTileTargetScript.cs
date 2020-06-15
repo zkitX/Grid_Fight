@@ -32,7 +32,7 @@ public class BattleTileTargetScript : MonoBehaviour
             {
                 yield return new WaitForEndOfFrame();
             }
-            timer += Time.fixedDeltaTime / duration;
+            timer += BattleManagerScript.Instance.FixedDeltaTime / duration;
 
             transform.localScale = new Vector3(1 - timer, 1 - timer, 1);
         }

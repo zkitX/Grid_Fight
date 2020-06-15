@@ -112,7 +112,7 @@ public class UIBattleFieldManager : MonoBehaviour
             }
             yield return BattleManagerScript.Instance.WaitUpdate(()=> BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
 
-            timer += Time.deltaTime;
+            timer += BattleManagerScript.Instance.DeltaTime;
         }
         h.SetActive(false);
     }

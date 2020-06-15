@@ -176,11 +176,6 @@ public class Stage09_Boss_NoFace_Script : MinionType_Script
         baseForme.SpineAnimationState_Complete(trackEntry);
     }
 
-    public override void StopMoveCo()
-    {
-        return;
-    }
-
     public override IEnumerator Move()
     {
         yield break;

@@ -140,7 +140,7 @@ public class EnvironmentManager : MonoBehaviour
             float waitingTime = 0;
             while (waitingTime < wt)
             {
-                waitingTime += Time.deltaTime;
+                waitingTime += BattleManagerScript.Instance.DeltaTime;
                 yield return null;
             }
 
@@ -207,7 +207,7 @@ public class EnvironmentManager : MonoBehaviour
             while (timeRemaining >= 0 || !hasStarted)
             {
                 hasStarted = true;
-                timeRemaining -= Time.deltaTime;
+                timeRemaining -= BattleManagerScript.Instance.DeltaTime;
                 progress = 1f - (timeRemaining / (duration != 0f ? duration : 1f));
                 CameraManagerScript.Instance.transform.position = Vector3.Lerp(cameraStartPos, cameraFinalPos, UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
                 // MainCamera.orthographicSize = Mathf.Lerp(cameraStartOrtho, cameraEndOrtho, progress);
@@ -300,7 +300,7 @@ public class EnvironmentManager : MonoBehaviour
         while (timeRemaining != 0 || !hasStarted)
         {
             hasStarted = true;
-            timeRemaining = Mathf.Clamp(timeRemaining - Time.deltaTime, 0f, 9999f);
+            timeRemaining = Mathf.Clamp(timeRemaining - BattleManagerScript.Instance.DeltaTime, 0f, 9999f);
             progress = 1f - (timeRemaining / (duration != 0f ? duration : 1f));
 
             for (int i = 0; i < (charsToMove != null ? charsToMove.Count : 0); i++)
