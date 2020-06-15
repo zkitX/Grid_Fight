@@ -556,13 +556,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                                     {
                                         bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, res,
                                     CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
-                                    target, target.EffectChances, nextAttack.TilesAtk.BulletTrajectories[i].BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y)));//
+                                    target, target.EffectChances, (nextAttack.TilesAtk.BulletTrajectories[i].BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y))) - nextAttack.TilesAtk.BulletTrajectories[i].Delay * 0.1f);//
                                     }
                                     else if(nextAttack.AttackInput == AttackInputType.Weak)
                                     {
                                         bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, res,
                                     CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
-                                    target, target.EffectChances, nextAttack.TilesAtk.BulletTrajectories[i].BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y))); // 
+                                    target, target.EffectChances, (nextAttack.TilesAtk.BulletTrajectories[i].BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y))) - nextAttack.TilesAtk.BulletTrajectories[i].Delay * 0.1f); // 
                                     }
                                     else
                                     {
