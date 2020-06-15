@@ -550,19 +550,28 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                                 else if (nextAttack.TilesAtk.AtkType != BattleFieldAttackType.OnItSelf && bts.WalkingSide != UMS.WalkingSide)
                                 {
                                     //new way
+
+                                    string animName = nextAttack.PrefixAnim + (nextAttack.AttackInput == AttackInputType.Weak ? "_Loop" : "_AtkToIdle");
+                                    Spine.Animation anim = SpineAnim.skeleton.Data.FindAnimation(animName);
+
+                                    List<Spine.Timeline> evs = anim.Timelines.Items.Where(r => r is Spine.EventTimeline).ToList();
+                                    Spine.EventTimeline ev = evs.Where(r => ((Spine.EventTimeline)r).Events.Where(p => p.Data.Name == "FireBulletParticle").ToList().Count > 0).First() as Spine.EventTimeline;
+
+                                    float animDelay = ev.Events.Where(r => r.Data.Name == "FireBulletParticle").First().Time;
+
                                     shotsLeftInAttack++;
                                     AttackedTiles(bts);
                                     if (nextAttack.AttackInput > AttackInputType.Weak && i == 0)
                                     {
                                         bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, res,
                                     CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
-                                    target, target.EffectChances, (nextAttack.TilesAtk.BulletTrajectories[i].BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y))) - nextAttack.TilesAtk.BulletTrajectories[i].Delay * 0.1f);//
+                                    target, target.EffectChances, (nextAttack.TilesAtk.BulletTrajectories[i].BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y))) + animDelay);//(nextAttack.TilesAtk.BulletTrajectories[i].Delay * 0.1f)
                                     }
                                     else if(nextAttack.AttackInput == AttackInputType.Weak)
                                     {
                                         bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, res,
                                     CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
-                                    target, target.EffectChances, (nextAttack.TilesAtk.BulletTrajectories[i].BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y))) - nextAttack.TilesAtk.BulletTrajectories[i].Delay * 0.1f); // 
+                                    target, target.EffectChances, (nextAttack.TilesAtk.BulletTrajectories[i].BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y))) + animDelay); // 
                                     }
                                     else
                                     {
