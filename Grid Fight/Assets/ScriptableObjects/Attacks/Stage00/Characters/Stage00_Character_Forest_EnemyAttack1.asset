@@ -250,21 +250,140 @@ MonoBehaviour:
     AtkType: 1
     BulletTrajectories:
     - Delay: 1
+      BulletTravelDurationPerTile: 0.2
+      ExplosionChances: 100
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0.99873626
+          outSlope: 0.99873626
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.100126535
+          value: 0.1
+          inSlope: -0.001265347
+          outSlope: -0.001265347
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.2
+          value: 0
+          inSlope: -1.0006335
+          outSlope: -1.0006335
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.3
+          value: -0.1
+          inSlope: 0.00000008940697
+          outSlope: 0.00000008940697
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.4
+          value: 0
+          inSlope: 1.0033587
+          outSlope: 1.0033587
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.49933276
+          value: 0.1
+          inSlope: 0.0006926656
+          outSlope: 0.0006926656
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.5988024
+          value: 0
+          inSlope: -0.99674886
+          outSlope: -0.99674886
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.7
+          value: -0.1
+          inSlope: 0.0059170127
+          outSlope: 0.0059170127
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.8
+          value: 0
+          inSlope: 1.0176947
+          outSlope: 1.0176947
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.896582
+          value: 0.1
+          inSlope: 0.03421995
+          outSlope: 0.03421995
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: -0.96694976
+          outSlope: -0.96694976
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
       Show: 1
       BulletEffectTiles:
       - Pos: {x: 0, y: 0}
-        Trajectory_Y:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        Trajectory_Z:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -272,19 +391,8 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
+        EffectsOnTile: []
       - Pos: {x: -1, y: -1}
-        Trajectory_Y:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        Trajectory_Z:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -292,19 +400,8 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
+        EffectsOnTile: []
       - Pos: {x: 1, y: -1}
-        Trajectory_Y:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        Trajectory_Z:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -312,19 +409,8 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
+        EffectsOnTile: []
       - Pos: {x: 0, y: -1}
-        Trajectory_Y:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        Trajectory_Z:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -332,19 +418,8 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
+        EffectsOnTile: []
       - Pos: {x: -1, y: 0}
-        Trajectory_Y:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        Trajectory_Z:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -352,19 +427,8 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
+        EffectsOnTile: []
       - Pos: {x: 1, y: 0}
-        Trajectory_Y:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        Trajectory_Z:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -372,7 +436,8 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
+        EffectsOnTile: []
     StatToCheck: 1
     ValueChecker: 0
     PercToCheck: 80
-    Chances: 100
+    Chances: 10000000
