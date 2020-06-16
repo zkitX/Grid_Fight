@@ -46,21 +46,59 @@ MonoBehaviour:
     AtkType: 1
     BulletTrajectories:
     - Delay: 1.5
+      BulletTravelDurationPerTile: 0.2
+      ExplosionChances: 100
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
       Show: 1
       BulletEffectTiles:
       - Pos: {x: 0, y: 0}
-        Trajectory_Y:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        Trajectory_Z:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
         HasEffect: 1
         showImpact: 1
         Effects:
@@ -75,18 +113,6 @@ MonoBehaviour:
         - {fileID: 11400000, guid: f64a8b73fee01794cb7be9f95f99f239, type: 2}
         - {fileID: 11400000, guid: 15dcea26e2d95254bb951d5e15ede6c0, type: 2}
       - Pos: {x: 1, y: -1}
-        Trajectory_Y:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        Trajectory_Z:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
         HasEffect: 1
         showImpact: 1
         Effects:
@@ -101,18 +127,6 @@ MonoBehaviour:
         - {fileID: 11400000, guid: 15dcea26e2d95254bb951d5e15ede6c0, type: 2}
         - {fileID: 11400000, guid: f64a8b73fee01794cb7be9f95f99f239, type: 2}
       - Pos: {x: 1, y: 0}
-        Trajectory_Y:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        Trajectory_Z:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
         HasEffect: 1
         showImpact: 1
         Effects:
@@ -127,18 +141,6 @@ MonoBehaviour:
         - {fileID: 11400000, guid: 15dcea26e2d95254bb951d5e15ede6c0, type: 2}
         - {fileID: 11400000, guid: f64a8b73fee01794cb7be9f95f99f239, type: 2}
       - Pos: {x: -1, y: -1}
-        Trajectory_Y:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        Trajectory_Z:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
         HasEffect: 1
         showImpact: 1
         Effects:
@@ -153,18 +155,6 @@ MonoBehaviour:
         - {fileID: 11400000, guid: f64a8b73fee01794cb7be9f95f99f239, type: 2}
         - {fileID: 11400000, guid: 15dcea26e2d95254bb951d5e15ede6c0, type: 2}
       - Pos: {x: -1, y: 0}
-        Trajectory_Y:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        Trajectory_Z:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
         HasEffect: 1
         showImpact: 1
         Effects:
@@ -179,18 +169,6 @@ MonoBehaviour:
         - {fileID: 11400000, guid: f64a8b73fee01794cb7be9f95f99f239, type: 2}
         - {fileID: 11400000, guid: 15dcea26e2d95254bb951d5e15ede6c0, type: 2}
       - Pos: {x: 0, y: -1}
-        Trajectory_Y:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        Trajectory_Z:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
         HasEffect: 1
         showImpact: 1
         Effects:
@@ -207,4 +185,4 @@ MonoBehaviour:
     StatToCheck: 1
     ValueChecker: 0
     PercToCheck: 48
-    Chances: 100
+    Chances: 1000000
