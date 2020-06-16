@@ -37280,7 +37280,6 @@ GameObject:
   - component: {fileID: 865972107310735749}
   - component: {fileID: 7789281203412835097}
   - component: {fileID: 1857775418723767635}
-  - component: {fileID: 2695904059665696146}
   - component: {fileID: 2945266736356882744}
   - component: {fileID: 2189404219626508546}
   - component: {fileID: 469121637687978551}
@@ -37744,6 +37743,7 @@ GameObject:
   - component: {fileID: 7020953079532950721}
   - component: {fileID: 8023142158897727284}
   - component: {fileID: 7027627020510346343}
+  - component: {fileID: -9029564679112704646}
   m_Layer: 0
   m_Name: EventManager_Chapter02_TheBurg
   m_TagString: Untagged
@@ -37803,18 +37803,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 1388.676, y: -1909.3369}
+  scrollPos: {x: 3008.2578, y: -3000.9792}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 455
-  zoom: 0.66999984
+  zoom: 0.25
   scrollViewRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 0
     height: 0
-  selectedBlocks: []
+  selectedBlocks:
+  - {fileID: 3490205662734295981}
   selectedCommands: []
   variables:
   - {fileID: 6895823845661821541}
@@ -37971,7 +37972,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -456.19513
     y: 2766.291
-    width: 123.134346
+    width: 124.666664
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -38695,7 +38696,7 @@ MonoBehaviour:
   itemId: 239
   blockName: LOSE
   description: 
-  eventHandler: {fileID: 2695904059665696146}
+  eventHandler: {fileID: -9029564679112704646}
   commandList:
   - {fileID: 865972107310735749}
   - {fileID: 7789281203412835097}
@@ -38755,19 +38756,6 @@ MonoBehaviour:
     booleanRef: {fileID: 0}
     booleanVal: 1
   targetGameObjectOLD: {fileID: 0}
---- !u!114 &2695904059665696146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8388188415199824812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6cabe3afe381684a8e88ee3273de786, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 3490205662734295981}
 --- !u!114 &2945266736356882744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42213,7 +42201,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -625.38165
     y: 1955.0294
-    width: 138.05972
+    width: 140.66666
     height: 40
   tint: {r: 1, g: 0, b: 0, a: 1}
   useCustomTint: 1
@@ -42738,7 +42726,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -314.94604
     y: 3044.1672
-    width: 120
+    width: 122
     height: 40
   tint: {r: 0, g: 1, b: 0.14901961, a: 1}
   useCustomTint: 1
@@ -45874,7 +45862,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -1246.7871
     y: 2045.5107
-    width: 144.02988
+    width: 148.66666
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -46304,7 +46292,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -986.3138
     y: 2378.313
-    width: 132.08957
+    width: 135.33334
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -48138,7 +48126,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -1008.5972
     y: 2505.274
-    width: 172.38809
+    width: 180.66667
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -49444,6 +49432,19 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
+--- !u!114 &-9029564679112704646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8388188415199824812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95b2e358a2e66a8478e00a89826441c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentBlock: {fileID: 3490205662734295981}
 --- !u!1 &8418563584349228055
 GameObject:
   m_ObjectHideFlags: 0
