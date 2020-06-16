@@ -13,7 +13,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
     public Vector2Int Pos;
     protected Vector3 position;
     protected GameObject activeParticles = null;
-
+    private IEnumerator OnField_Co;
     private BaseCharacter CharHitted;
     float Duration;
 
@@ -37,11 +37,9 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
 
     private IEnumerator spawn_Co()
     {
-        yield return DurationOnBattleField_Co();
-        activeParticles.SetActive(false);
-        Anim.SetBool("FadeInOut", false);
-        yield return new WaitForSeconds(0.5f);
-        gameObject.SetActive(false);
+        OnField_Co = DurationOnBattleField_Co();
+        yield return OnField_Co;
+        yield return StopItem_Co();
     }
 
 
@@ -94,9 +92,20 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, powerUpAudio, AudioBus.MidPrio, other.gameObject.transform);
             EventManager.Instance?.AddPotionCollected(itemType);
             ParticleManagerScript.Instance.FireParticlesInPosition(ItemPowerUpInfo.terminationParticles, CharacterNameType.None, AttackParticlePhaseTypes.Bullet, position, SideType.LeftSide, AttackInputType.Skill1);
-            Duration = 0;
+            StopCoroutine(OnField_Co);
+            StartCoroutine(StopItem_Co());
         }
     }
+
+
+    private IEnumerator StopItem_Co()
+    {
+        activeParticles.SetActive(false);
+        Anim.SetBool("FadeInOut", false);
+        yield return new WaitForSeconds(0.5f);
+        gameObject.SetActive(false);
+    }
+
 
     private IEnumerator DurationOnBattleField_Co()
     {

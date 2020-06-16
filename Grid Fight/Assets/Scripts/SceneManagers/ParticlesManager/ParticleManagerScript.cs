@@ -53,17 +53,20 @@ public class ParticleManagerScript : MonoBehaviour
                 return res;
             }
         }
-
-
     }
 
 
     public void ChangePsSpeed(GameObject psG, float speed)
     {
-        foreach (ParticleSystem ps in psG.GetComponentsInChildren<ParticleSystem>())
+        if(speed == 1)
         {
-            var main = ps.main;
-            main.simulationSpeed = speed;
+            psG.GetComponent<DisableParticleScript>().SetSimulationSpeedToBase();
+
+        }
+        else
+        {
+            psG.GetComponent<DisableParticleScript>().SetSimulationSpeed(speed);
+
         }
     }
 

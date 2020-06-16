@@ -68,7 +68,7 @@ public class PSTimeGroup : MonoBehaviour
             m.loop = false;
             //To change the duration the particle needs to pe paused
             PS.Pause();
-            m.duration = PSTime * m.simulationSpeed;
+            m.duration = PSTime / m.simulationSpeed;
             //check if the particle is finished
             PS.Play();
             DisableTrail = (PS.time>=m.duration);
