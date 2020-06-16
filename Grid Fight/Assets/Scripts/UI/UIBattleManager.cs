@@ -27,14 +27,8 @@ public class UIBattleManager : MonoBehaviour
     public GameObject TimeToPlayRightSide;
     public TextMeshProUGUI SecondsToPlayRightSide;
     public bool isRightSidePlaying = false;
-    public CanvasGroup Win;
-    public CanvasGroup Lose;
-
 
     public NewIBoss UIBoss;
-
-   // public TextMeshProUGUI LeftSide;
- //   public TextMeshProUGUI RightSide;
 
     private Dictionary<int, UIPlayerSectionScript> currentPlayers = new Dictionary<int, UIPlayerSectionScript>();
    
@@ -102,87 +96,4 @@ public class UIBattleManager : MonoBehaviour
             UICharacterSelectionRight.SetCharSelected(playerController, currentCharacter.CharInfo.CharacterSelection);
         }
     }
-
-
-    public void StartTimeUp(float duration, SideType side)
-    {
-        if (side == SideType.LeftSide)
-        {
-            StartCoroutine(TimeUpCoP1(duration, side));
-        }
-        else if (side == SideType.RightSide)
-        {
-            StartCoroutine(TimeUpCoP2(duration, side));
-        }
-    }
-
-    private IEnumerator TimeUpCoP1(float duration, SideType side)
-    {
-        TimeToPlayLeftSide.SetActive(true);
-        isLeftSidePlaying = false;
-        while (duration > 0 && !isLeftSidePlaying)
-        {
-            yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-            SecondsToPlayLeftSide.text = ((int)duration).ToString();
-            duration -= Time.deltaTime;
-
-        }
-
-        if(duration > 0 )
-        {
-            TimeToPlayLeftSide.SetActive(false);
-            BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
-        }
-        else
-        {
-            if (side == SideType.LeftSide)
-            {
-                Lose.gameObject.SetActive(true);
-            }
-            else
-            {
-                Win.gameObject.SetActive(true);
-            }
-            // Winner(side == SideType.LeftSide ? "Lost" : "Win", side == SideType.RightSide ? "Lost" : "Win");
-            BattleManagerScript.Instance.CurrentBattleState = BattleState.End;
-        }
-    }
-
-    private IEnumerator TimeUpCoP2(float duration, SideType side)
-    {
-        TimeToPlayRightSide.SetActive(true);
-        isRightSidePlaying = false;
-        while (duration > 0 && !isRightSidePlaying)
-        {
-            yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-            SecondsToPlayRightSide.text = ((int)duration).ToString();
-            duration -= Time.deltaTime;
-        }
-
-        if (duration > 0)
-        {
-            TimeToPlayRightSide.SetActive(false);
-
-            BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
-        }
-        else
-        {
-            BattleManagerScript.Instance.CurrentBattleState = BattleState.End;
-            if(side == SideType.LeftSide)
-            {
-
-            }
-            else
-            {
-
-            }
-           // Winner(side == SideType.LeftSide ? "Lost" : "Win", side == SideType.RightSide ? "Lost" : "Win");
-        }
-    }
- /*   public void Winner(string p1, string p2)
-    {
-        Win.alpha = 1;
-       // LeftSide.text = p1;
-      //  RightSide.text = p2;
-    }*/
 }

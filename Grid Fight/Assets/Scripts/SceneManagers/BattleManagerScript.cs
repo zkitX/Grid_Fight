@@ -17,6 +17,9 @@ public class BattleManagerScript : MonoBehaviour
     public delegate void CurrentFungusStateChanged(FungusDialogType currentFungusState);
     public event CurrentFungusStateChanged CurrentFungusStateChangedEvent;
 
+    public delegate void MatchLost();
+    public event MatchLost MatchLostEvent;
+
 
     public BattleState CurrentBattleState
     {
@@ -432,7 +435,7 @@ public class BattleManagerScript : MonoBehaviour
 
             if (AllCharactersOnField.Where(r => r.CharInfo.Health > 0).ToList().Count == 0)
             {
-                UIBattleManager.Instance.Lose.gameObject.SetActive(true);
+                MatchLostEvent();
                 CurrentBattleState = BattleState.End;
                 return;
             }
@@ -483,7 +486,7 @@ public class BattleManagerScript : MonoBehaviour
         }
         else
         {
-            UIBattleManager.Instance.Lose.gameObject.SetActive(true);
+            MatchLostEvent();
             CurrentBattleState = BattleState.End;
             return;
         }

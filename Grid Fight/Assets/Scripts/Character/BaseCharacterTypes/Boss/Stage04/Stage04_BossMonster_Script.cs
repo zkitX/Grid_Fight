@@ -189,9 +189,7 @@ public class Stage04_BossMonster_Script : MinionType_Script
     public override void SetCharDead(bool hasToDisappear = true)
     {
         CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);
-        UIBattleManager.Instance.Win.gameObject.SetActive(true);
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
-
         base.SetCharDead();
     }
 }
