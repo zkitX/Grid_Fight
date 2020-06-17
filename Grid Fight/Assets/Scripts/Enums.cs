@@ -893,3 +893,16 @@ public enum PowerUpColorTypes
     Green = 4,
     Orange = 5,
 }
+
+public enum MaskTypes
+{
+    Stage1 = 0,
+    Stage2 = 1,
+    Stage3 = 2,
+    Stage4 = 3,
+    Stage5 = 4,
+    Stage6 = 5,
+    Stage7 = 6,
+    Stage8 = 7,
+    Stage9 = 8,
+}
