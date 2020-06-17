@@ -2,21 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class Grid_UIInputActivators : MonoBehaviour
+[RequireComponent(typeof(Grid_UICollection))]
+public class Grid_UIActivators : MonoBehaviour
 {
     public UIActivator[] activators = new UIActivator[0];
-    Grid_UIPanel parentPanel = null;
+    protected Grid_UICollection parentCollection;
 
     private void Awake()
     {
-        parentPanel = GetComponentInParent<Grid_UIPanel>();
-        if (parentPanel != null) Debug.Log(parentPanel.panelID);
-    }
+        parentCollection = GetComponent<Grid_UICollection>();
 
-    private void OnEnable()
-    {
-        InputController.Instance.ButtonAUpEvent += Instance_ButtonAUpEvent;
+       /* InputController.Instance.ButtonAUpEvent += Instance_ButtonAUpEvent;
         InputController.Instance.ButtonBUpEvent += Instance_ButtonBUpEvent;
         InputController.Instance.ButtonXUpEvent += Instance_ButtonXUpEvent;
         InputController.Instance.ButtonYUpEvent += Instance_ButtonYUpEvent;
@@ -37,10 +33,10 @@ public class Grid_UIInputActivators : MonoBehaviour
         InputController.Instance.ButtonRightSLUpEvent += Instance_ButtonRightSLUpEvent;
         InputController.Instance.ButtonLeftSLUpEvent += Instance_ButtonLeftSLUpEvent;
         InputController.Instance.ButtonLeftSRUpEvent += Instance_ButtonLeftSRUpEvent;
-        InputController.Instance.ButtonRightSRUpEvent += Instance_ButtonRightSRUpEvent;
+        InputController.Instance.ButtonRightSRUpEvent += Instance_ButtonRightSRUpEvent; */
     }
 
-    void Instance_ButtonAUpEvent(int player) { DoActionByButton(InputButtonType.A); }
+  /*  void Instance_ButtonAUpEvent(int player) { DoActionByButton(InputButtonType.A); }
     void Instance_ButtonBUpEvent(int player) { DoActionByButton(InputButtonType.B); }
     void Instance_ButtonXUpEvent(int player) { DoActionByButton(InputButtonType.X); }
     void Instance_ButtonYUpEvent(int player) { DoActionByButton(InputButtonType.Y); }
@@ -65,14 +61,14 @@ public class Grid_UIInputActivators : MonoBehaviour
 
     void DoActionByButton(InputButtonType btn)
     {
-        //if (!Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.DirectButton)) return; //UNDO AFTER TESTING
-       // if (BattleManagerScript.Instance == null) return;
+        if (Grid_UINavigator.Instance.navType != MenuNavigationType.DirectButton) return;
+        if (BattleManagerScript.Instance == null) return;
         if (parentPanel.focusState != UI_FocusTypes.Focused) return;
 
         List<UI_ActionsClass> actions = new List<UI_ActionsClass>();
         foreach(UIActivator act in activators)
         {
-            if (act.Activated(btn, false))
+            if (act.Activated(btn))
             {
                 foreach(UI_ActionsClass action in act.actions)
                 {
@@ -80,7 +76,26 @@ public class Grid_UIInputActivators : MonoBehaviour
                 }
             }
         }
-        if(actions.Count != 0) StartCoroutine(SequenceEvents(actions.ToArray()));
+
+        StartCoroutine(SequenceEvents(actions.ToArray()));
+    } */
+
+    public void DoActionByName(string identifier)
+    {
+        List<UI_ActionsClass> actions = new List<UI_ActionsClass>();
+
+        foreach (UIActivator activ in activators)
+        {
+            if(activ.ID == identifier)
+            {
+                foreach (UI_ActionsClass action in activ.actions)
+                {
+                    actions.Add(action);
+                }
+            }
+        }
+
+        StartCoroutine(SequenceEvents(actions.ToArray()));
     }
 
     IEnumerator SequenceEvents(UI_ActionsClass[] events)
@@ -104,9 +119,9 @@ public class Grid_UIInputActivators : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-        InputController.Instance.ButtonAUpEvent -= Instance_ButtonAUpEvent;
+      /*  InputController.Instance.ButtonAUpEvent -= Instance_ButtonAUpEvent;
         InputController.Instance.ButtonBUpEvent -= Instance_ButtonBUpEvent;
         InputController.Instance.ButtonXUpEvent -= Instance_ButtonXUpEvent;
         InputController.Instance.ButtonYUpEvent -= Instance_ButtonYUpEvent;
@@ -127,12 +142,12 @@ public class Grid_UIInputActivators : MonoBehaviour
         InputController.Instance.ButtonRightSLUpEvent -= Instance_ButtonRightSLUpEvent;
         InputController.Instance.ButtonLeftSLUpEvent -= Instance_ButtonLeftSLUpEvent;
         InputController.Instance.ButtonLeftSRUpEvent -= Instance_ButtonLeftSRUpEvent;
-        InputController.Instance.ButtonRightSRUpEvent -= Instance_ButtonRightSRUpEvent; 
+        InputController.Instance.ButtonRightSRUpEvent -= Instance_ButtonRightSRUpEvent; */
     }
 
     private void OnValidate()
     {
-        foreach (UIActivator activator in activators)
+        foreach(UIActivator activator in activators)
         {
             int actions = 0;
 
@@ -148,7 +163,46 @@ public class Grid_UIInputActivators : MonoBehaviour
                     uiAction.Name = uiAction.GetName();
                 }
             }
-            activator.Name = activator.ID + " >  " + actions.ToString() + " actions triggred by " + activator.input.Length.ToString() + (activator.input.Length != 1 ? " input" : " inputs");
+
+            activator.Name = actions.ToString() + " actions triggred by " + activator.input.Length.ToString() + (activator.input.Length != 1 ? " input" : " inputs");
         }
+    }
+}
+
+[System.Serializable]
+public class UIActivator
+{
+    [HideInInspector] public string Name;
+    public string ID = "";
+    public InputButtonType[] input = { InputButtonType.Capture };
+    public BattleState[] workingStates = new BattleState[0];
+    public UI_ActionsClass[] actions;
+
+    bool InputMatch(InputButtonType btn)
+    {
+        foreach (InputButtonType inp in input)
+        {
+            if (btn == inp) return true;
+        }
+        return false;
+    }
+
+    bool StateMatch()
+    {
+        BattleState curState = BattleManagerScript.Instance.CurrentBattleState;
+        foreach (BattleState state in workingStates)
+        {
+            if (state == curState) return true;
+        }
+        return false;
+    }
+
+    public bool Activated(InputButtonType btn, bool requireStateMatch = true)
+    {
+        if(InputMatch(btn) && (requireStateMatch ? StateMatch() : true))
+        {
+            return true;
+        }
+        return false;
     }
 }

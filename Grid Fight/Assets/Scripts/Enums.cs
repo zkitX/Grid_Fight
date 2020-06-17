@@ -896,13 +896,15 @@ public enum PowerUpColorTypes
 
 public enum MaskTypes
 {
-    Stage1 = 0,
-    Stage2 = 1,
-    Stage3 = 2,
-    Stage4 = 3,
-    Stage5 = 4,
-    Stage6 = 5,
-    Stage7 = 6,
-    Stage8 = 7,
-    Stage9 = 8,
+    None = 0,
+    Stage1 = 1,
+    Stage2 = 2,
+    Stage3 = 3,
+    Stage4 = 4,
+    Stage5 = 5,
+    Stage6 = 6,
+    Stage7 = 7,
+    Stage8 = 8,
+    Stage9 = 9,
+    Stage10 = 10,
 }

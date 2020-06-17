@@ -41,7 +41,7 @@ public class Grid_UIButton : MonoBehaviour
     {
         get
         {
-            return ParentPanel.focusState == UI_FocusTypes.Focused && gameObject.activeInHierarchy;
+            return ParentPanel.focusState == UI_FocusTypes.Focused && gameObject.activeInHierarchy && enabled;
         }
     }
     [HideInInspector] public bool selected = false;
@@ -141,7 +141,7 @@ public class Grid_UIButton : MonoBehaviour
     {
         if (!selected) return false;
 
-        if (playDeselectEffects && visuallySelected)
+        if (playDeselectEffects && visuallySelected && isActiveAndEnabled)
         {
             if (SelectionEventsSequencer != null) StopCoroutine(SelectionEventsSequencer);
             SelectionEventsSequencer = SequenceEvents(DeselectActions);
@@ -235,13 +235,13 @@ public class Grid_UIButton : MonoBehaviour
     private void OnEnable()
     {
         if (buttonText == null) buttonText = GetComponentInChildren<TextMeshProUGUI>();
-        if (buttonText.text == "ButtonText" || buttonText.text == "StandardButton") buttonText.text = gameObject.name;
+        if (buttonText != null && (buttonText.text == "ButtonText" || buttonText.text == "StandardButton")) buttonText.text = gameObject.name;
     }
 
     private void OnValidate()
     {
         if(buttonText == null) buttonText = GetComponentInChildren<TextMeshProUGUI>();
-        if(buttonText.text == "ButtonText" || buttonText.text == "StandardButton") buttonText.text = gameObject.name;
+        if(buttonText != null && (buttonText.text == "ButtonText" || buttonText.text == "StandardButton")) buttonText.text = gameObject.name;
         foreach(UI_ActionsClass uiAcCla in PressActions.Concat(SelectActions).Concat(DeselectActions))
         {
             uiAcCla.Name = (uiAcCla.useStandardUnityEventsInstead ? uiAcCla.events.GetPersistentEventCount().ToString() : uiAcCla.uiActions.Length.ToString()) +
