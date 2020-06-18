@@ -327,10 +327,11 @@ public enum BuffDebuffStatsType
     SpeedStats_IdleToAtkDuration,
     SpeedStats_AtkToIdleDuration,
     DamageStats_BaseDamage,
-    Damage_Cure,
+    Drain,
     Zombification,
     BlockTile,
-    ShieldStats_BaseShieldRegeneration
+    ShieldStats_BaseShieldRegeneration,
+    Drain_Overtime
 }
 
 public enum WaveStatsType
@@ -512,7 +513,8 @@ public enum ParticlesType
     Stage01_Boss_FaceChanging_LifeDrums,
     Stage01_Boss_FaceChanging_MoonDrums,
     Stage01_Boss_CrystalTomb_Effect,
-    PowerUp_Shield
+    PowerUp_Shield,
+    Skill_Darkening
 }
 
 

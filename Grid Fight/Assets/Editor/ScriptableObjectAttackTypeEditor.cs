@@ -66,8 +66,8 @@ public class ScriptableObjectAttackTypeEditor : Editor
         if(origin.AttackInput > AttackInputType.Strong)
         {
             origin.ExperiencePoints = EditorGUILayout.FloatField("ExperiencePoints", origin.ExperiencePoints);
+            origin.CoolDown = EditorGUILayout.FloatField("CoolDown", origin.CoolDown);
         }
-
 
         if (origin.CurrentAttackType == AttackType.Particles)
         {

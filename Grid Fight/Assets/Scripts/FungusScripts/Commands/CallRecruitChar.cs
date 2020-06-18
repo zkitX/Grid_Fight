@@ -18,6 +18,7 @@ public class CallRecruitChar : Command
     public override void OnEnter()
     {
         BattleManagerScript.Instance.RecruitCharFromWave(CharacterId);
+        Continue();
     }
 
     

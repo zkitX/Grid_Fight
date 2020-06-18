@@ -14,6 +14,14 @@ public class CharacterType_Script : BaseCharacter
     public float chargingAttackTimer = 0;
     public GameTime battleTime;
 
+    private List<SkillCoolDownClass> skillCoolDown = new List<SkillCoolDownClass>()
+    {
+        new SkillCoolDownClass(AttackInputType.Skill1, false),
+        new SkillCoolDownClass(AttackInputType.Skill2, false),
+        new SkillCoolDownClass(AttackInputType.Skill3, false)
+    };
+
+
 
     #region Unity Life Cycles
     public override void Start()
@@ -211,7 +219,7 @@ public class CharacterType_Script : BaseCharacter
                 {
                     return;
                 }
-                StartCoroutine(StartSkillAttack());
+                StartCoroutine(StartSkillAttack(AttackInputType.Skill1));
 
                 break;
             case AttackInputType.Skill2:
@@ -219,14 +227,14 @@ public class CharacterType_Script : BaseCharacter
                 {
                     return;
                 }
-                StartCoroutine(StartSkillAttack());
+                StartCoroutine(StartSkillAttack(AttackInputType.Skill2));
                 break;
             case AttackInputType.Skill3:
                 if (!CharActionlist.Contains(CharacterActionType.Skill3))
                 {
                     return;
                 }
-                StartCoroutine(StartSkillAttack());
+                StartCoroutine(StartSkillAttack(AttackInputType.Skill3));
                 break;
                 
         }
@@ -261,10 +269,7 @@ public class CharacterType_Script : BaseCharacter
     public IEnumerator StartChargingAttack_Co(AttackInputType nextAtkType)
     {
 
-        while (currentAttackPhase != AttackPhasesType.End)
-        {
-            yield return null;
-        }
+        yield return BattleManagerScript.Instance.WaitUpdate(() => currentAttackPhase != AttackPhasesType.End);
         if (CanAttack && !isSpecialLoading)
         {
             ScriptableObjectAttackBase nxtAtk = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackInput == nextAtkType).First();
@@ -369,10 +374,31 @@ public class CharacterType_Script : BaseCharacter
         }
     }
 
-    public IEnumerator StartSkillAttack()
+    public IEnumerator StartSkillAttack(AttackInputType inputSkill)
     {
-        yield return null;
+        ScriptableObjectAttackBase nxtAtk = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackInput == inputSkill).First();
+        SkillCoolDownClass  scdc = skillCoolDown.Where(r => r.Skill == inputSkill).First();
+        if (!GetCanUseStamina(nxtAtk.StaminaCost) || scdc.IsCoGoing)
+        {
+            yield break;
+        }
+        nextAttack = nxtAtk;
+        scdc.IsCoGoing = true;
+        //GameObject go = ParticleManagerScript.Instance.GetParticle(ParticlesType.Skill_Darkening);
+        //go.transform.position = SpineAnim.FiringPints[(int)inputSkill].transform.position;
+        //go.SetActive(true);
+        yield return BattleManagerScript.Instance.WaitUpdate(() => currentAttackPhase != AttackPhasesType.End);
         BattleManagerScript.Instance.BattleSpeed = 0.2f;
+        SpineAnim.SetSkeletonOrderInLayer(300);
+        SetAnimation(nxtAtk.PrefixAnim + "_IdleToAtk", false, 0);
+        currentAttackPhase = AttackPhasesType.Start;
+        yield return BattleManagerScript.Instance.WaitFor(1.8f, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
+        SetAnimation(nxtAtk.PrefixAnim + "_AtkToIdle", false, 0);
+        yield return BattleManagerScript.Instance.WaitUpdate(() => currentAttackPhase != AttackPhasesType.End);
+        BattleManagerScript.Instance.BattleSpeed = 1;
+        SpineAnim.SetSkeletonOrderInLayer(CharOredrInLayer);
+        yield return BattleManagerScript.Instance.WaitFor(nxtAtk.CoolDown, ()=> BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
+        scdc.IsCoGoing = false;
     }
 
 
@@ -622,7 +648,6 @@ public class CharacterType_Script : BaseCharacter
         }
 
 
-
         if (completedAnim == CharacterAnimationStateType.Atk1_IdleToAtk.ToString() && SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1_IdleToAtk.ToString())
         {
             QuickAttack();
@@ -642,7 +667,7 @@ public class CharacterType_Script : BaseCharacter
             }
             return;
         }
-        if (completedAnim.Contains("Atk2") || completedAnim.Contains("S_Buff") || completedAnim.Contains("S_Debuff") || completedAnim.Contains("Atk3"))
+        if (completedAnim.Contains("Atk2") || completedAnim.Contains("S_Buff") || completedAnim.Contains("S_DeBuff") || completedAnim.Contains("Atk3"))
         {
             if (completedAnim.Contains("IdleToAtk") && SpineAnim.CurrentAnim.ToString().Contains("IdleToAtk"))
             {
@@ -673,6 +698,11 @@ public class CharacterType_Script : BaseCharacter
             currentAttackPhase = AttackPhasesType.End;
         }
 
+        if((SpineAnim.CurrentAnim.Contains("S_Buff") && !animState.Contains("S_Buff")) || (SpineAnim.CurrentAnim.Contains("S_DeBuff") && !animState.Contains("S_DeBuff")))
+        {
+            return;
+        }
+
         if(animState.Contains("rriv") || animState.Contains("Transition"))
         {
             ResetAudioManager();
@@ -690,3 +720,19 @@ public class CharacterType_Script : BaseCharacter
 
 }
 
+public class SkillCoolDownClass
+{
+    public AttackInputType Skill;
+    public bool IsCoGoing;
+
+    public SkillCoolDownClass()
+    {
+
+    }
+
+    public SkillCoolDownClass(AttackInputType skill, bool isCoGoing)
+    {
+        Skill = skill;
+        IsCoGoing = isCoGoing;
+    }
+}

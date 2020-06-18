@@ -479,20 +479,28 @@ public class BattleManagerScript : MonoBehaviour
     public List<MinionType_Script> zombiesList = new List<MinionType_Script>();
     public void Zombification(BaseCharacter zombie)
     {
-        List<BaseCharacter> res = AllCharactersOnField.Where(r => !r.IsOnField && r.CharInfo.HealthPerc > 0 && r.BuffsDebuffsList.Where(a => a.Stat == BuffDebuffStatsType.Zombification).ToList().Count == 0).ToList();
-        if (res.Count > 0)
+        if(zombie.CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
         {
-            StartCoroutine(Zombification_Co(zombie));
+            List<BaseCharacter> res = AllCharactersOnField.Where(r => !r.IsOnField && r.CharInfo.HealthPerc > 0 && r.BuffsDebuffsList.Where(a => a.Stat == BuffDebuffStatsType.Zombification).ToList().Count == 0).ToList();
+            if (res.Count > 0)
+            {
+                StartCoroutine(CharacterType_Zombification_Co(zombie));
+            }
+            else
+            {
+                MatchLostEvent();
+                CurrentBattleState = BattleState.End;
+                return;
+            }
         }
-        else
+        else if (zombie.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script)
         {
-            MatchLostEvent();
-            CurrentBattleState = BattleState.End;
-            return;
+            StartCoroutine(MinionType_Zombification_Co(zombie));
         }
+
     }
 
-    IEnumerator Zombification_Co(BaseCharacter zombie)
+    IEnumerator CharacterType_Zombification_Co(BaseCharacter zombie)
     {
         ControllerType playerController = CurrentSelectedCharacters.Where(r => r.Value.Character == zombie).First().Key;
         CurrentSelectedCharacters[playerController].Character = null;
@@ -559,6 +567,70 @@ public class BattleManagerScript : MonoBehaviour
 
     }
 
+
+    IEnumerator MinionType_Zombification_Co(BaseCharacter zombie)
+    {
+
+        GameObject zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_MoonDrums_Loop);
+        zombiePs.SetActive(true);
+        zombiePs.transform.parent = zombie.SpineAnim.transform;
+        zombiePs.transform.localPosition = Vector3.zero;
+        zombiePs.transform.localRotation = Quaternion.Euler(zombie.UMS.Side == SideType.LeftSide ? Vector3.zero : zombiePs.transform.eulerAngles);
+
+        yield return WaitFor(1, () => CurrentBattleState != BattleState.Battle);
+        BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(zombie.UMS.WalkingSide == WalkingSideType.LeftSide ? WalkingSideType.RightSide : WalkingSideType.LeftSide);
+
+        zombie.transform.position = bts.transform.position;
+        zombie.UMS.Side = zombie.UMS.Side == SideType.LeftSide ? SideType.RightSide : SideType.LeftSide;
+        zombie.SetupCharacterSide();
+
+
+        yield return WaitFor(2, () => CurrentBattleState != BattleState.Battle);
+        zombiePs.transform.parent = null;
+        zombiePs.SetActive(false);
+
+        MinionType_Script zombiefied = zombiesList.Where(r => r.CharInfo.CharacterID == zombie.CharInfo.CharacterID).FirstOrDefault();
+        if (zombiefied == null)
+        {
+            zombiefied = (MinionType_Script)CreateChar(new CharacterBaseInfoClass(zombie.CharInfo.CharacterID.ToString(), CharacterSelectionType.Up,
+        new List<ControllerType> { ControllerType.Enemy }, zombie.CharInfo.CharacterID, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.MinionType_Script, new List<CharacterActionType>(), LevelType.Novice), transform);
+            zombiesList.Add(zombiefied);
+        }
+        zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_MoonDrums_Loop);
+        zombiePs.transform.parent = zombiefied.SpineAnim.transform;
+        zombiePs.transform.localPosition = Vector3.zero;
+        zombiePs.SetActive(true);
+
+        StartCoroutine(WaveManagerScript.Instance.SetCharInPos(zombiefied, GridManagerScript.Instance.GetFreeBattleTile(zombiefied.UMS.WalkingSide, zombiefied.UMS.Pos), true));
+        zombiefied.CharActionlist.Add(CharacterActionType.Move);
+        while (zombie.BuffsDebuffsList.Where(r => r.Stat == BuffDebuffStatsType.Zombification).ToList().Count > 0)
+        {
+            yield return null;
+        }
+        zombiefied.IsOnField = false;
+        while (zombiefied.isMoving || zombiefied.currentAttackPhase != AttackPhasesType.End)
+        {
+            yield return null;
+        }
+
+        zombiePs.transform.parent = null;
+        zombiePs.SetActive(false);
+        zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_MoonDrums_LoopCrumble);
+        zombiePs.SetActive(true);
+        zombiePs.transform.parent = zombiefied.SpineAnim.transform;
+        zombiePs.transform.localPosition = Vector3.zero;
+
+        yield return RemoveZombieFromBaord(zombiefied);
+        while (zombiefied.IsOnField)
+        {
+            yield return null;
+        }
+
+        zombiePs.transform.parent = null;
+        zombiePs.SetActive(false);
+        zombie.CharActionlist.Add(CharacterActionType.SwitchCharacter);
+
+    }
 
 
 
@@ -1220,6 +1292,7 @@ public class BattleManagerScript : MonoBehaviour
         recruitableChar.CharInfo.HealthStats.Health = recruitableChar.CharInfo.HealthStats.Base;
         recruitableChar.gameObject.SetActive(true);
         recruitableChar.SetupCharacterSide();
+        recruitableChar.CharInfo.SetupChar();
         /*foreach (BaseCharacter playableCharOnScene in AllCharactersOnField)
         {
             NewIManager.Instance.SetUICharacterToButton((CharacterType_Script)playableCharOnScene, playableCharOnScene.CharInfo.CharacterSelection);
@@ -1303,11 +1376,11 @@ public class BattleManagerScript : MonoBehaviour
     }
 
 
-    public IEnumerator WaitUpdate(System.Func<bool> condition)
+    public IEnumerator WaitUpdate(System.Func<bool> pauseCondition)
     {
         yield return null;
 
-        while (condition())
+        while (pauseCondition())
         {
             yield return null;
         }
@@ -1324,12 +1397,12 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
-    public IEnumerator WaitFor(float duration, System.Func<bool> condition)
+    public IEnumerator WaitFor(float duration, System.Func<bool> pauseCondition)
     {
         float timer = 0;
         while (timer < duration)
         {
-            yield return WaitUpdate(condition);
+            yield return WaitUpdate(pauseCondition);
             timer += DeltaTime;
         }
     }

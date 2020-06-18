@@ -172,15 +172,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public virtual void SetupCharacterSide()
     {
 
-        if (UMS.PlayerController.Contains(ControllerType.Enemy))
-        {
-            if (CharInfo.CharacterID != CharacterNameType.Stage00_BossOctopus &&
-            CharInfo.CharacterID != CharacterNameType.Stage00_BossOctopus_Head &&
-            CharInfo.CharacterID != CharacterNameType.Stage00_BossOctopus_Tentacles &&
-            CharInfo.CharacterID != CharacterNameType.Stage00_BossOctopus_Girl)
-                UMS.SelectionIndicator.parent.gameObject.SetActive(false);
-        }
-        else
+        if (!UMS.PlayerController.Contains(ControllerType.Enemy))
         {
             UMS.SelectionIndicator.parent.gameObject.SetActive(true);
         }
@@ -771,7 +763,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             return;
         }
 
-        if (currentAttackPhase == AttackPhasesType.Loading || currentAttackPhase == AttackPhasesType.Cast_Strong || currentAttackPhase == AttackPhasesType.Bullet_Strong)
+        if (currentAttackPhase == AttackPhasesType.Loading || currentAttackPhase == AttackPhasesType.Cast_Strong || currentAttackPhase == AttackPhasesType.Bullet_Strong ||
+             SpineAnim.CurrentAnim.Contains("S_Buff") || SpineAnim.CurrentAnim.Contains("S_DeBuff"))
         {
             return;
         }
@@ -1016,10 +1009,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             //ElementalResistance(bdClass.CurrentBuffDebuff);
         }
-        else if(bdClass.Stat == BuffDebuffStatsType.Damage_Cure)
+        else if(bdClass.Stat == BuffDebuffStatsType.Drain || bdClass.Stat == BuffDebuffStatsType.Drain_Overtime)
         {
             HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, HealthChangedType.Heal, bdClass.EffectMaker.SpineAnim.transform);
-            bdClass.EffectMaker.CharInfo.Health += bdClass.CurrentBuffDebuff.Value;
+            bdClass.EffectMaker.CharInfo.Health += bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Value ? bdClass.CurrentBuffDebuff.Value : (CharInfo.HealthStats.Base / 100) * bdClass.CurrentBuffDebuff.Value;
         }
         else if (bdClass.Stat == BuffDebuffStatsType.Zombification)
         {
@@ -1085,9 +1078,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             if (statToCheck[1] == "BaseSpeed")
             {
                 SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.BaseSpeed);
-                if(CharInfo.SpeedStats.BaseSpeed == 0 && BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.UMS.Side == UMS.Side && r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).ToList().Count > 0)
+                if(CharInfo.SpeedStats.BaseSpeed == 0 && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.UMS.Side == UMS.Side && r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).ToList().Count > 0)
                 {
-
                     if(BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == this).ToList().Count > 0)
                     {
                         CharActionlist.Remove(CharacterActionType.SwitchCharacter);
@@ -1115,28 +1107,18 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     iterator++;
                     if (bdClass.Stat == BuffDebuffStatsType.Health || bdClass.Stat == BuffDebuffStatsType.Health_Overtime)
                     {
-                        if (bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Perc)
-                        {
-                            CharInfo.Health += (CharInfo.Health / 100f) * bdClass.CurrentBuffDebuff.Value;
-                        }
-                        else if (bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Value)
-                        {
-                            CharInfo.Health += bdClass.CurrentBuffDebuff.Value;
-                        }
+                        CharInfo.Health += bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Value ? bdClass.CurrentBuffDebuff.Value : (bdClass.CurrentBuffDebuff.Value / 100) * bdClass.CurrentBuffDebuff.Value;
+                        HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, bdClass.CurrentBuffDebuff.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, SpineAnim.transform);
                     }
-                    else if (bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Perc)
+                    if (bdClass.Stat == BuffDebuffStatsType.Drain_Overtime)
                     {
-                        field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? 0 : (float)field.GetValue(parentField.GetValue(CharInfo)) +
-                            (((float)B_field.GetValue(parentField.GetValue(CharInfo))) / 100) * bdClass.CurrentBuffDebuff.Value);
+                        float val = bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Value ? bdClass.CurrentBuffDebuff.Value : (CharInfo.HealthStats.Base / 100) * bdClass.CurrentBuffDebuff.Value;
+                        HealthStatsChangedEvent?.Invoke(val, HealthChangedType.Heal, bdClass.EffectMaker.SpineAnim.transform);
+                        HealthStatsChangedEvent?.Invoke(val, HealthChangedType.Damage, SpineAnim.transform);
+                        bdClass.EffectMaker.CharInfo.Health += val;
+                        CharInfo.Health -= val;
                     }
-                    else
-                    {
-                        field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? 0 : (float)field.GetValue(parentField.GetValue(CharInfo)) + bdClass.CurrentBuffDebuff.Value);
-                    }
-                    HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, bdClass.CurrentBuffDebuff.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, SpineAnim.transform);
                 }
-
-
             }
 
             ps?.SetActive(false);
@@ -1153,7 +1135,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             {
                 
             }
-            else if (bdClass.Stat == BuffDebuffStatsType.Damage_Cure)
+            else if (bdClass.Stat == BuffDebuffStatsType.Drain || bdClass.Stat == BuffDebuffStatsType.Drain_Overtime)
             {
 
             }
@@ -1171,12 +1153,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                         field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? (float)B_field.GetValue(parentField.GetValue(CharInfo)) :
                         (float)field.GetValue(parentField.GetValue(CharInfo)) - (((float)B_field.GetValue(parentField.GetValue(CharInfo))) / 100) * bdClass.CurrentBuffDebuff.Value);
                     }
-
-
                 }
                 else
                 {
-
                     if (field.FieldType == typeof(Vector2))
                     {
                         field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? (Vector2)B_field.GetValue(parentField.GetValue(CharInfo)) :
@@ -1192,7 +1171,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 if (statToCheck[1] == "BaseSpeed" && !bdClass.CurrentBuffDebuff.Stop_Co)
                 {
                     SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.BaseSpeed);
-                    if(bdClass.CurrentBuffDebuff.Value == 0)
+                    if(bdClass.CurrentBuffDebuff.Value == 0 && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
                     {
                         CharActionlist.Add(CharacterActionType.SwitchCharacter);
                         yield return BattleManagerScript.Instance.RemoveCharacterFromBaord(ControllerType.Player1, this, true);
