@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
+  m_Name: Skill_Mind_3_Enemy
+  m_EditorClassIdentifier: 
+  Chances: 100
+  CurrentAttackType: 1
+  AttackRatioMultiplier: 1
+  DamageMultiplier: {x: -1, y: -1}
+  AttackInput: 4
+  AttackAnim: 2
+  StaminaCost: 10
+  ExperiencePoints: 10
+  CoolDown: 10
+  PrefixAnim: 3
+  Particles:
+    Left:
+      Cast: {fileID: 758783860074276158, guid: 28ae2a26ceaebf04a995c78784eea616, type: 3}
+      Bullet: {fileID: 8221541275114765690, guid: a4bb11e71194aac48a75e0e73c81a0a2,
+        type: 3}
+      Hit: {fileID: 3524607279964993379, guid: df9c06cb1ea69d949bcfe80c5bf0d9e0, type: 3}
+    Right:
+      Cast: {fileID: 758783860074276158, guid: f77d72810c9e8c54a8296996dfdaa1e7, type: 3}
+      Bullet: {fileID: 8221541275114765690, guid: dc7a77c6a5d26f144b87a59a0747abea,
+        type: 3}
+      Hit: {fileID: 3524607279964993379, guid: 384183637c814d24f9d2e0fe36e5cb44, type: 3}
+    CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
+      type: 3}
+    CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
+      type: 3}
+  TrajectoriesNumber: 1
+  ParticlesAtk:
+    BulletTrajectories: []
+    CharacterClass: 0
+  TilesAtk:
+    AtkType: 1
+    BulletTrajectories:
+    - Delay: 0
+      BulletTravelDurationPerTile: 0
+      ExplosionChances: 100
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Show: 1
+      BulletEffectTiles:
+      - Pos: {x: 0, y: 0}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+    StatToCheck: 0
+    ValueChecker: 0
+    PercToCheck: 0
+    Chances: 0

@@ -37,7 +37,6 @@ public class UnitManagementScript : MonoBehaviour
     public WalkingSideType WalkingSide;
     public FacingType Facing;
 
-    public bool isAIOn;
     public bool Test = false;
     public BaseCharacter CharOwner;
     public Transform SelectionIndicator;
@@ -50,7 +49,6 @@ public class UnitManagementScript : MonoBehaviour
     public Animator IndicatorAnim;
     public GameObject ArrivingParticle;
     public GameObject DeathParticles;
-    public AttackType CurrentAttackType;
 
     public Transform HPBar;
     public Transform StaminaBar;
@@ -59,60 +57,7 @@ public class UnitManagementScript : MonoBehaviour
     public Transform HpBarContainer;
     public Transform StaminaBarContainer;
     //Used to decide the side
-    public void SetupCharacterSide()
-    {
-        if(BattleManagerScript.Instance.VFXScene)
-        {
-            SetUnit(Facing, Side, UnitBehaviourType.ControlledByPlayer);
-        }
-        else
-        {
-            MatchType matchType = LoaderManagerScript.Instance != null ? LoaderManagerScript.Instance.MatchInfoType : BattleInfoManagerScript.Instance.MatchInfoType;
-            switch (matchType)
-            {
-                case MatchType.PvE:
-                    if (PlayerController.Contains(ControllerType.Enemy))
-                    {
-                        SetUnit(FacingType.Left, SideType.RightSide, UnitBehaviourType.NPC, true);
-                    }
-                    else
-                    {
-                        SetUnit(FacingType.Right, SideType.LeftSide, UnitBehaviourType.ControlledByPlayer);
-                    }
-                    break;
-                case MatchType.PvP:
-                    if (PlayerController.Contains(ControllerType.Player2))
-                    {
-                        SetUnit(FacingType.Left, SideType.RightSide, UnitBehaviourType.ControlledByPlayer);
-                    }
-                    else
-                    {
-                        SetUnit(FacingType.Right, SideType.LeftSide, UnitBehaviourType.ControlledByPlayer);
-                    }
-                    break;
-                case MatchType.PPvE:
-                    if (PlayerController.Contains(ControllerType.Enemy))
-                    {
-                        SetUnit(FacingType.Left, SideType.RightSide, UnitBehaviourType.NPC, true);
-                    }
-                    else
-                    {
-                        SetUnit(FacingType.Right, SideType.LeftSide, UnitBehaviourType.ControlledByPlayer);
-                    }
-                    break;
-                case MatchType.PPvPP:
-                    if (PlayerController.Contains(ControllerType.Player3) && PlayerController.Contains(ControllerType.Player4))
-                    {
-                        SetUnit(FacingType.Left, SideType.RightSide, UnitBehaviourType.ControlledByPlayer);
-                    }
-                    else
-                    {
-                        SetUnit(FacingType.Right, SideType.LeftSide, UnitBehaviourType.ControlledByPlayer);
-                    }
-                    break;
-            }
-        }
-    }
+   
 
     public void SetBattleUISelection(ControllerType playerController)
     {
@@ -127,10 +72,9 @@ public class UnitManagementScript : MonoBehaviour
 
 
     //Used to set the unit info for the facing,side,unitbehaviour, tag and AI
-    public void SetUnit(FacingType facing, SideType side, UnitBehaviourType ubt, bool ai = false)
+    public void SetUnit(UnitBehaviourType ubt)
     {
-        Facing = facing;
-        if(facing == FacingType.Right)
+        if(Facing == FacingType.Right)
         {
             transform.eulerAngles = new Vector3(0, 180, 0);
         }
@@ -138,7 +82,6 @@ public class UnitManagementScript : MonoBehaviour
         {
             transform.eulerAngles = Vector3.zero;
         }
-        Side = side;
         gameObject.tag = Side.ToString();
         if (CharOwner.SpineAnim == null)
         {
@@ -146,7 +89,6 @@ public class UnitManagementScript : MonoBehaviour
         }
         CharOwner.SpineAnim.gameObject.tag = Side.ToString();
         UnitBehaviour = ubt;
-      
     }
 
 
@@ -155,7 +97,7 @@ public class UnitManagementScript : MonoBehaviour
         if(Test)
         {
             Test = false;
-            SetUnit(Facing, Side, UnitBehaviour, isAIOn);
+            SetUnit(UnitBehaviour);
         }
     }
 

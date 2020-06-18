@@ -105,7 +105,6 @@ public class CharTesterScript : MonoBehaviour
         GameObject child = Instantiate(Characters.Where(r => r.CharName.ToString() == CharToUse.options[CharToUse.value].text).First().Char, charOnScene.transform.position, Quaternion.identity, charOnScene.transform);
         currentCharacter = (BaseCharacter)charOnScene.AddComponent(Type.GetType(child.GetComponentInChildren<CharacterInfoScript>().BaseCharacterType.ToString()));
         currentCharacter.UMS = currentCharacter.GetComponent<UnitManagementScript>();
-        currentCharacter.UMS.CurrentAttackType = (AttackType)Enum.Parse(typeof(AttackType), CharacterAttackType.options[CharacterAttackType.value].text);
         currentCharacter.UMS.CharOwner = currentCharacter;
         currentCharacter.UMS.Facing = FacingType.Right;
         currentCharacter.UMS.WalkingSide = WalkingSideType.LeftSide;

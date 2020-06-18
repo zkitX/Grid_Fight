@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class MinionType_Script : BaseCharacter
+public class PlayerMinionType_Script : BaseCharacter
 {
     protected bool MoveCoOn = true;
     protected IEnumerator MoveActionCo;
@@ -113,7 +113,7 @@ public class MinionType_Script : BaseCharacter
                 }
 
 
-                List<BaseCharacter> enemys = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList();
+                List<BaseCharacter> enemys = WaveManagerScript.Instance.WaveCharcters.Where(r => r.IsOnField).ToList();
                 if (enemys.Count > 0)
                 {
                     BaseCharacter targetChar = enemys.Where(r => r.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x).FirstOrDefault();
@@ -548,22 +548,4 @@ public class MinionType_Script : BaseCharacter
         base.SpineAnimationState_Complete(trackEntry);
     }
 
-}
-
-
-public class HitInfoClass
-{
-    public CharacterNameType CharacterId;
-    public float Damage;
-
-    public HitInfoClass()
-    {
-
-    }
-
-    public HitInfoClass(CharacterNameType characterId, float damage)
-    {
-        CharacterId = characterId;
-        Damage = damage;
-    }
 }

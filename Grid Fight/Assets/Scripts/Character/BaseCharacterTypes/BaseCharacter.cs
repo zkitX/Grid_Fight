@@ -152,16 +152,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     protected virtual void Update()
     {
-        if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && UMS.CurrentAttackType == AttackType.Particles)
-        {
-            NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo, UMS.Side);
-        }
-
-        if (transform.parent == null)
-        {
-
-        }
-
 
         UMS.HPBar.localScale = new Vector3((1f / 100f) * CharInfo.HealthPerc, 1, 1);
 
@@ -179,7 +169,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         SpineAnimatorsetup();
         LocalSpinePosoffset = SpineAnim.transform.localPosition;
-        UMS.SetupCharacterSide();
         int layer = UMS.Side == SideType.LeftSide ? 9 : 10;
         if (CharInfo.UseLayeringSystem)
         {
@@ -430,7 +419,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position, UMS.Side, nextAttack.AttackInput);
         cast.GetComponent<DisableParticleScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
 
-        if (UMS.CurrentAttackType == AttackType.Particles)
+        if (nextAttack.CurrentAttackType == AttackType.Particles)
         {
             CharInfo.Stamina -= nextAttack.StaminaCost;
             EventManager.Instance?.UpdateStamina(this);

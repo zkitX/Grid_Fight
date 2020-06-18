@@ -76,7 +76,7 @@ public class Stage09_Boss_Geisha_Script : MinionType_Script
     void GenerateBoss()
     {
         oniForme = (Stage09_Boss_NoFace_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(CharacterNameType.Stage09_Boss_NoFace.ToString(), CharacterSelectionType.Up,
-        new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage09_Boss_NoFace, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None, new List<CharacterActionType>(), LevelType.Novice), transform);
+        new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage09_Boss_NoFace, WalkingSideType.RightSide, SideType.RightSide, FacingType.Left, AttackType.Tile, BaseCharType.None, new List<CharacterActionType>(), LevelType.Novice), transform);
         oniForme.bossInfo = bossInfo;
         oniForme.UMS.Pos = UMS.Pos;
         oniForme.UMS.EnableBattleBars(false);
@@ -260,7 +260,7 @@ public class Stage09_Boss_Geisha_Script : MinionType_Script
             oniForme.SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position, UMS.Side, nextAttack.AttackInput);
         cast.GetComponent<DisableParticleScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
 
-        if (UMS.CurrentAttackType == AttackType.Particles)
+        if (nextAttack.CurrentAttackType == AttackType.Particles)
         {
             if (SpineAnim.CurrentAnim.Contains("Atk1"))
             {

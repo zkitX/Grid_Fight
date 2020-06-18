@@ -146,7 +146,7 @@ public class WaveManagerScript : MonoBehaviour
     private BaseCharacter CreateChar(CharacterNameType characterID, BaseCharType bCharType = BaseCharType.None)
     {
         BaseCharacter res = BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(characterID.ToString(), CharacterSelectionType.Up,
-        new List<ControllerType> { ControllerType.Enemy }, characterID, WalkingSideType.RightSide, AttackType.Tile, bCharType, new List<CharacterActionType>(), LevelType.Novice), transform);
+        new List<ControllerType> { ControllerType.Enemy }, characterID, WalkingSideType.RightSide, SideType.RightSide, FacingType.Left, AttackType.Tile, bCharType, new List<CharacterActionType>(), LevelType.Novice), transform);
         if (characterID != CharacterNameType.Stage00_BossOctopus &&
             characterID != CharacterNameType.Stage00_BossOctopus_Head &&
             characterID != CharacterNameType.Stage00_BossOctopus_Tentacles &&

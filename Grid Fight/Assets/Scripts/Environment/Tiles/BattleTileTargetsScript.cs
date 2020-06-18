@@ -51,7 +51,7 @@ public class BattleTileTargetsScript : MonoBehaviour
                 UpdateQueue(tc);
                 yield break;
             }
-            else if (tc.RemainingTime <= duration * 0.1f && attacker.UMS.CurrentAttackType == AttackType.Tile && !attackerFiredAttackAnim)
+            else if (tc.RemainingTime <= duration * 0.1f && !attackerFiredAttackAnim)
             {
                 attackerFiredAttackAnim = true;
                 attacker.shotsLeftInAttack--;
@@ -179,7 +179,7 @@ public class BattleTileTargetsScript : MonoBehaviour
                 //Stop the firing of the attacks to the tiles
                 yield break;
             }
-            else if (tc.RemainingTime <= bulletTravelDuration && attacker.UMS.CurrentAttackType == AttackType.Tile && !attackerFiredAttackAnim)
+            else if (tc.RemainingTime <= bulletTravelDuration && !attackerFiredAttackAnim)
             {
                 attackerFiredAttackAnim = true;
                 attacker.FireAttackAnimAndBullet(transform.position); // trigger the shoot anim

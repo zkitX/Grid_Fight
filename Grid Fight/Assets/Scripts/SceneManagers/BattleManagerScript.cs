@@ -335,7 +335,7 @@ public class BattleManagerScript : MonoBehaviour
     public BaseCharacter CreateTalkingChar(CharacterNameType characterID)
     {
         CharsForTalkingPart.Add(CreateChar(new CharacterBaseInfoClass(characterID.ToString(), CharacterSelectionType.Up,
-        new List<ControllerType> { ControllerType.Player1 }, characterID, WalkingSideType.LeftSide, AttackType.Tile, BaseCharType.CharacterType_Script, 
+        new List<ControllerType> { ControllerType.Player1 }, characterID, WalkingSideType.LeftSide, SideType.LeftSide, FacingType.Right, AttackType.Tile, BaseCharType.CharacterType_Script, 
         new List<CharacterActionType> {
             CharacterActionType.Defence,
             CharacterActionType.Move,
@@ -401,10 +401,12 @@ public class BattleManagerScript : MonoBehaviour
         GameObject child = Instantiate(soCharacterPrefab.CharacterPrefab, characterBasePrefab.transform.position, Quaternion.identity, characterBasePrefab.transform);
         BaseCharacter currentCharacter = (BaseCharacter)characterBasePrefab.AddComponent(System.Type.GetType(charInfo.BCharType == BaseCharType.None ? child.GetComponentInChildren<CharacterInfoScript>().BaseCharacterType.ToString() : charInfo.BCharType.ToString()));
         currentCharacter.UMS = currentCharacter.GetComponent<UnitManagementScript>();
-        currentCharacter.UMS.CurrentAttackType = charInfo.CharAttackType;
         currentCharacter.UMS.CharOwner = currentCharacter;
         currentCharacter.UMS.PlayerController = charInfo.PlayerController;
         currentCharacter.CharActionlist = charInfo.CharActionlist;
+        currentCharacter.UMS.WalkingSide = charInfo.WalkingSide;
+        currentCharacter.UMS.Side = charInfo.Side;
+        currentCharacter.UMS.Facing = charInfo.Facing;
         currentCharacter.CharInfo.BaseCharacterType = charInfo.BCharType == BaseCharType.None ? child.GetComponentInChildren<CharacterInfoScript>().BaseCharacterType : charInfo.BCharType;
         foreach (Vector2Int item in soCharacterPrefab.OccupiedTiles)
         {
@@ -417,7 +419,6 @@ public class BattleManagerScript : MonoBehaviour
             EventManager.Instance.UpdateHealth(currentCharacter);
             EventManager.Instance.UpdateStamina(currentCharacter);
         }
-        currentCharacter.UMS.WalkingSide = charInfo.WalkingSide;
         currentCharacter.CharInfo.CharacterSelection = charInfo.CharacterSelection;
         currentCharacter.CurrentCharIsDeadEvent += CurrentCharacter_CurrentCharIsDeadEvent;
         currentCharacter.CharBoxCollider = currentCharacter.GetComponentInChildren<BoxCollider>(true);
@@ -528,7 +529,11 @@ public class BattleManagerScript : MonoBehaviour
         if(zombiefied == null)
         {
             zombiefied = (MinionType_Script)CreateChar(new CharacterBaseInfoClass(zombie.CharInfo.CharacterID.ToString(), CharacterSelectionType.Up,
-        new List<ControllerType> { ControllerType.Enemy }, zombie.CharInfo.CharacterID, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.MinionType_Script, new List<CharacterActionType>(), LevelType.Novice), transform);
+        new List<ControllerType> { ControllerType.Enemy }, zombie.CharInfo.CharacterID, 
+        zombie.UMS.WalkingSide == WalkingSideType.LeftSide ? WalkingSideType.RightSide : WalkingSideType.LeftSide,
+        zombie.UMS.Side == SideType.LeftSide ? SideType.RightSide : SideType.LeftSide,
+        zombie.UMS.Facing == FacingType.Left ? FacingType.Right : FacingType.Left,
+        AttackType.Tile, BaseCharType.MinionType_Script, new List<CharacterActionType>(), LevelType.Novice), transform);
             zombiesList.Add(zombiefied);
         }
         zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_MoonDrums_Loop);
@@ -536,7 +541,7 @@ public class BattleManagerScript : MonoBehaviour
         zombiePs.transform.localPosition = Vector3.zero;
         zombiePs.SetActive(true);
       
-        StartCoroutine(WaveManagerScript.Instance.SetCharInPos(zombiefied, GridManagerScript.Instance.GetFreeBattleTile(zombiefied.UMS.WalkingSide, zombiefied.UMS.Pos), true));
+        yield return WaveManagerScript.Instance.SetCharInPos(zombiefied, GridManagerScript.Instance.GetFreeBattleTile(zombiefied.UMS.WalkingSide, zombiefied.UMS.Pos), true);
         zombiefied.CharActionlist.Add(CharacterActionType.Move);
         while (zombie.BuffsDebuffsList.Where(r=> r.Stat == BuffDebuffStatsType.Zombification).ToList().Count > 0)
         {
@@ -576,14 +581,49 @@ public class BattleManagerScript : MonoBehaviour
         zombiePs.transform.parent = zombie.SpineAnim.transform;
         zombiePs.transform.localPosition = Vector3.zero;
         zombiePs.transform.localRotation = Quaternion.Euler(zombie.UMS.Side == SideType.LeftSide ? Vector3.zero : zombiePs.transform.eulerAngles);
+        zombie.SetAnimation(CharacterAnimationStateType.Idle);
 
         yield return WaitFor(1, () => CurrentBattleState != BattleState.Battle);
-        BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(zombie.UMS.WalkingSide == WalkingSideType.LeftSide ? WalkingSideType.RightSide : WalkingSideType.LeftSide);
+
+        yield return MoveCharToBoardWithDelay(0.1f, zombie, new Vector3(-100, -100, -100));
+
+        zombie.transform.parent = transform;
+        zombie.SpineAnim.SpineAnimationState.Event -= zombie.SpineAnimationState_Event;
+        zombie.SpineAnim.SpineAnimationState.Complete -= zombie.SpineAnimationState_Complete;
+        WaveManagerScript.Instance.WaveCharcters.Remove(zombie);
+        PlayerMinionType_Script playerZombie = zombie.gameObject.AddComponent<PlayerMinionType_Script>();
+        playerZombie.UMS = playerZombie.GetComponent<UnitManagementScript>();
+        playerZombie.UMS.CharOwner = playerZombie;
+        playerZombie.UMS.Side = zombie.UMS.Side == SideType.LeftSide ? SideType.RightSide : SideType.LeftSide;
+        playerZombie.UMS.WalkingSide = zombie.UMS.WalkingSide == WalkingSideType.LeftSide ? WalkingSideType.RightSide : WalkingSideType.LeftSide;
+        playerZombie.UMS.Facing = zombie.UMS.Facing == FacingType.Left ? FacingType.Right : FacingType.Left;
+        playerZombie.UMS.PlayerController = AllCharactersOnField[0].UMS.PlayerController;
+        playerZombie.UMS.UnitBehaviour = UnitBehaviourType.NPC;
+        playerZombie.CharInfo.CharacterSelection = (CharacterSelectionType)AllCharactersOnField.Count - 1;
+        playerZombie.CharInfo.BaseCharacterType = BaseCharType.CharacterType_Script;
+        playerZombie.CharActionlist.Add(CharacterActionType.Move);
+        Destroy(zombie.GetComponent<MinionType_Script>());
+        playerZombie.CharInfo.SetupChar();
+        playerZombie.CharInfo.HealthStats.Health = playerZombie.CharInfo.HealthStats.Base;
+        playerZombie.SetupCharacterSide();
+        BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(playerZombie.UMS.WalkingSide);
+        playerZombie.UMS.Pos.Clear();
+        ScriptableObjectCharacterPrefab soCharacterPrefab = ListOfScriptableObjectCharacterPrefab.Where(r => r.CharacterName == playerZombie.CharInfo.CharacterID).First();
+        foreach (Vector2Int item in soCharacterPrefab.OccupiedTiles)
+        {
+            playerZombie.UMS.Pos.Add(item);
+        }
+        yield return WaveManagerScript.Instance.SetCharInPos(playerZombie, bts, false);
+
+
+        yield return WaitFor(200, () => CurrentBattleState != BattleState.Battle);
+
 
         zombie.transform.position = bts.transform.position;
         zombie.UMS.Side = zombie.UMS.Side == SideType.LeftSide ? SideType.RightSide : SideType.LeftSide;
+        zombie.UMS.WalkingSide = zombie.UMS.WalkingSide == WalkingSideType.LeftSide ? WalkingSideType.RightSide : WalkingSideType.LeftSide;
+        zombie.UMS.Facing = zombie.UMS.Facing == FacingType.Left ? FacingType.Right : FacingType.Left;
         zombie.SetupCharacterSide();
-
 
         yield return WaitFor(2, () => CurrentBattleState != BattleState.Battle);
         zombiePs.transform.parent = null;
@@ -593,7 +633,11 @@ public class BattleManagerScript : MonoBehaviour
         if (zombiefied == null)
         {
             zombiefied = (MinionType_Script)CreateChar(new CharacterBaseInfoClass(zombie.CharInfo.CharacterID.ToString(), CharacterSelectionType.Up,
-        new List<ControllerType> { ControllerType.Enemy }, zombie.CharInfo.CharacterID, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.MinionType_Script, new List<CharacterActionType>(), LevelType.Novice), transform);
+        new List<ControllerType> { ControllerType.Enemy }, zombie.CharInfo.CharacterID,
+        zombie.UMS.WalkingSide == WalkingSideType.LeftSide ? WalkingSideType.RightSide : WalkingSideType.LeftSide,
+        zombie.UMS.Side == SideType.LeftSide ? SideType.RightSide : SideType.LeftSide,
+        zombie.UMS.Facing == FacingType.Left ? FacingType.Right : FacingType.Left,
+        AttackType.Tile, BaseCharType.MinionType_Script, new List<CharacterActionType>(), LevelType.Novice), transform);
             zombiesList.Add(zombiefied);
         }
         zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_MoonDrums_Loop);
@@ -1269,15 +1313,15 @@ public class BattleManagerScript : MonoBehaviour
         WaveManagerScript.Instance.WaveCharcters.Remove(rC.GetComponent<BaseCharacter>());
         rC.transform.parent = transform;
         rC.SetActive(true);
-        rC.GetComponent<MinionType_Script>().SpineAnim.SpineAnimationState.Event -= rC.GetComponent<MinionType_Script>().SpineAnimationState_Event;
-        rC.GetComponent<MinionType_Script>().SpineAnim.SpineAnimationState.Complete -= rC.GetComponent<MinionType_Script>().SpineAnimationState_Complete;
+        MinionType_Script m = rC.GetComponent<MinionType_Script>();
+        m.SpineAnim.SpineAnimationState.Event -= m.SpineAnimationState_Event;
+        m.SpineAnim.SpineAnimationState.Complete -= m.SpineAnimationState_Complete;
         rC.SetActive(false);
         Destroy(rC.GetComponent<MinionType_Script>());
         CharacterType_Script recruitableChar = rC.AddComponent<CharacterType_Script>();
         AllCharactersOnField.Add(recruitableChar);
         
         recruitableChar.UMS = recruitableChar.GetComponent<UnitManagementScript>();
-        recruitableChar.UMS.CurrentAttackType = AttackType.Particles;
         recruitableChar.UMS.CharOwner = recruitableChar;
         ScriptableObjectCharacterPrefab soCharacterPrefab = ListOfScriptableObjectCharacterPrefab.Where(r => r.CharacterName == recruitableChar.CharInfo.CharacterID).First();
         foreach (Vector2Int item in soCharacterPrefab.OccupiedTiles)
@@ -1285,12 +1329,10 @@ public class BattleManagerScript : MonoBehaviour
             recruitableChar.UMS.Pos.Add(item);
         }
         recruitableChar.UMS.Facing = FacingType.Right;
-        recruitableChar.UMS.isAIOn = false;
         recruitableChar.UMS.PlayerController = AllCharactersOnField[0].UMS.PlayerController;
         recruitableChar.UMS.Side = SideType.LeftSide;
         recruitableChar.UMS.UnitBehaviour = UnitBehaviourType.ControlledByPlayer;
         recruitableChar.UMS.WalkingSide = WalkingSideType.LeftSide;
-        recruitableChar.UMS.CurrentAttackType = AttackType.Particles;
         recruitableChar.CharInfo.CharacterSelection = (CharacterSelectionType)AllCharactersOnField.Count - 1;
         recruitableChar.CharInfo.BaseCharacterType = BaseCharType.CharacterType_Script;
         recruitableChar.CharInfo.SetupChar();

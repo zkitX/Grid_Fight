@@ -30,6 +30,7 @@ public class CharacterType_Script : BaseCharacter
     }
     protected override void Update()
     {
+        NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo, UMS.Side);
         base.Update();
     }
     #endregion
@@ -102,6 +103,36 @@ public class CharacterType_Script : BaseCharacter
     public override void SetupCharacterSide()
     {
         base.SetupCharacterSide();
+            MatchType matchType = LoaderManagerScript.Instance != null ? LoaderManagerScript.Instance.MatchInfoType : BattleInfoManagerScript.Instance.MatchInfoType;
+            switch (matchType)
+            {
+                case MatchType.PvE:
+                    UMS.SetUnit(UnitBehaviourType.ControlledByPlayer);
+                    break;
+                case MatchType.PvP:
+                    if (UMS.PlayerController.Contains(ControllerType.Player2))
+                    {
+                        UMS.SetUnit(UnitBehaviourType.ControlledByPlayer);
+                    }
+                    else
+                    {
+                        UMS.SetUnit(UnitBehaviourType.ControlledByPlayer);
+                    }
+                    break;
+                case MatchType.PPvE:
+                    UMS.SetUnit(UnitBehaviourType.ControlledByPlayer);
+                    break;
+                case MatchType.PPvPP:
+                    if (UMS.PlayerController.Contains(ControllerType.Player3) && UMS.PlayerController.Contains(ControllerType.Player4))
+                    {
+                        UMS.SetUnit(UnitBehaviourType.ControlledByPlayer);
+                    }
+                    else
+                    {
+                        UMS.SetUnit(UnitBehaviourType.ControlledByPlayer);
+                    }
+                    break;
+            }
         UMS.SelectionIndicator.eulerAngles = new Vector3(0, 0, CharInfo.CharacterSelection == CharacterSelectionType.Up ? 90 :
             CharInfo.CharacterSelection == CharacterSelectionType.Down ? -90 :
             CharInfo.CharacterSelection == CharacterSelectionType.Left ? 180 : 0);
@@ -115,11 +146,7 @@ public class CharacterType_Script : BaseCharacter
         IsOnField = false;
         battleTime.isStopped = true;
         base.SetCharDead(false);
-        if (UMS.CurrentAttackType == AttackType.Particles)
-        {
-            //BattleManagerScript.Instance.UpdateCurrentSelectedCharacters(this, null, UMS.Side);
-            NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo, UMS.Side);
-        }
+        NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo, UMS.Side);
         ResetAudioManager();
         StartCoroutine(ReviveSequencer());
     }
@@ -463,8 +490,9 @@ public class CharacterType_Script : BaseCharacter
         bs.VFXTestMode = VFXTestMode;
         bs.CharOwner = this;
         bs.attackAudioType = GetAttackAudio();
-        bs.BulletEffects = bulletBehaviourInfo.Effects;
-
+        ScriptableObjectAttackEffect[] abAtkBase = new ScriptableObjectAttackEffect[bulletBehaviourInfo.Effects.Count];
+        bulletBehaviourInfo.Effects.CopyTo(abAtkBase);
+        bs.BulletEffects = abAtkBase.ToList();
         if (!GridManagerScript.Instance.isPosOnFieldByHeight(UMS.CurrentTilePos + bulletBehaviourInfo.BulletDistanceInTile))
         {
             bs.gameObject.SetActive(false);

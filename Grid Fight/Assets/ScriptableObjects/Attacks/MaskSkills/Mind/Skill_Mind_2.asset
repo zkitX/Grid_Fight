@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
+  m_Name: Skill_Mind_2
+  m_EditorClassIdentifier: 
+  Chances: 100
+  CurrentAttackType: 0
+  AttackRatioMultiplier: 1
+  DamageMultiplier: {x: 1, y: 1}
+  AttackInput: 3
+  AttackAnim: 3
+  StaminaCost: 10
+  ExperiencePoints: 10
+  CoolDown: 10
+  PrefixAnim: 4
+  Particles:
+    Left:
+      Cast: {fileID: 380187571353964568, guid: 2297d571aac281546b4c1afcd059f975, type: 3}
+      Bullet: {fileID: 4300825704086881289, guid: ecbb48c243f7c2b47bc5faf7947619af,
+        type: 3}
+      Hit: {fileID: 2222846166806493521, guid: 564fbbe8ca6246848a18988dba62fb4c, type: 3}
+    Right:
+      Cast: {fileID: 380187571353964568, guid: d263b8b41d3f65f409f6339ebce05331, type: 3}
+      Bullet: {fileID: 4300825704086881289, guid: 31d3d98f139eab940ab8f0095daa8f9d,
+        type: 3}
+      Hit: {fileID: 2222846166806493521, guid: ad5d72a647cf21642a90c5e6463f2c47, type: 3}
+    CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
+      type: 3}
+    CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
+      type: 3}
+  TrajectoriesNumber: 1
+  ParticlesAtk:
+    BulletTrajectories:
+    - Show: 1
+      BulletDistanceInTile: {x: 0, y: 12}
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      ChildrenBulletDelay: 0.5
+      BulletEffectTiles: []
+      BulletGapStartingTile: {x: 0, y: 0}
+      HasEffect: 1
+      Effects:
+      - {fileID: 11400000, guid: 2f472cd94904899419863eba0adc1995, type: 2}
+      EffectChances: 100
+    CharacterClass: 0
+  TilesAtk:
+    AtkType: 0
+    BulletTrajectories: []
+    StatToCheck: 0
+    ValueChecker: 0
+    PercToCheck: 0
+    Chances: 0

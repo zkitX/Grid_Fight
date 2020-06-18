@@ -81,7 +81,6 @@ public class VFXTester : MonoBehaviour
         GameObject child = Instantiate(Characters.Where(r=> r.CharName.ToString() == CharToUse.options[CharToUse.value].text).First().Char, charOnScene.transform.position, Quaternion.identity, charOnScene.transform);
         BaseCharacter currentCharacter = (BaseCharacter)charOnScene.AddComponent(System.Type.GetType(child.GetComponentInChildren<CharacterInfoScript>().BaseCharacterType.ToString()));
         currentCharacter.UMS = currentCharacter.GetComponent<UnitManagementScript>();
-        currentCharacter.UMS.CurrentAttackType = (AttackType)Enum.Parse(typeof(AttackType), Attack.options[Attack.value].text);
         currentCharacter.UMS.CharOwner = currentCharacter;
         currentCharacter.VFXTestMode = true;
         currentCharacter.UMS.CurrentTilePos = bts.Pos;
