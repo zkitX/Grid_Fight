@@ -1268,9 +1268,14 @@ public class BattleManagerScript : MonoBehaviour
         GameObject rC = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == characterID).FirstOrDefault().gameObject;
         WaveManagerScript.Instance.WaveCharcters.Remove(rC.GetComponent<BaseCharacter>());
         rC.transform.parent = transform;
+        rC.SetActive(true);
+        rC.GetComponent<MinionType_Script>().SpineAnim.SpineAnimationState.Event -= rC.GetComponent<MinionType_Script>().SpineAnimationState_Event;
+        rC.GetComponent<MinionType_Script>().SpineAnim.SpineAnimationState.Complete -= rC.GetComponent<MinionType_Script>().SpineAnimationState_Complete;
+        rC.SetActive(false);
         Destroy(rC.GetComponent<MinionType_Script>());
         CharacterType_Script recruitableChar = rC.AddComponent<CharacterType_Script>();
         AllCharactersOnField.Add(recruitableChar);
+        
         recruitableChar.UMS = recruitableChar.GetComponent<UnitManagementScript>();
         recruitableChar.UMS.CurrentAttackType = AttackType.Particles;
         recruitableChar.UMS.CharOwner = recruitableChar;
@@ -1288,11 +1293,11 @@ public class BattleManagerScript : MonoBehaviour
         recruitableChar.UMS.CurrentAttackType = AttackType.Particles;
         recruitableChar.CharInfo.CharacterSelection = (CharacterSelectionType)AllCharactersOnField.Count - 1;
         recruitableChar.CharInfo.BaseCharacterType = BaseCharType.CharacterType_Script;
+        recruitableChar.CharInfo.SetupChar();
         NewIManager.Instance.SetUICharacterToButton(recruitableChar, recruitableChar.CharInfo.CharacterSelection);
         recruitableChar.CharInfo.HealthStats.Health = recruitableChar.CharInfo.HealthStats.Base;
         recruitableChar.gameObject.SetActive(true);
         recruitableChar.SetupCharacterSide();
-        recruitableChar.CharInfo.SetupChar();
         /*foreach (BaseCharacter playableCharOnScene in AllCharactersOnField)
         {
             NewIManager.Instance.SetUICharacterToButton((CharacterType_Script)playableCharOnScene, playableCharOnScene.CharInfo.CharacterSelection);

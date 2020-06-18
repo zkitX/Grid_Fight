@@ -344,6 +344,7 @@ public class CharacterInfoScript : MonoBehaviour
 
         //HealthStats
         HealthStats.B_Base = HealthStats.Base;
+        HealthStats.Health = HealthStats.Base;
         HealthStats.B_BaseHealthRegeneration = HealthStats.BaseHealthRegeneration;
         HealthStats.B_Health = HealthStats.Health;
         HealthStats.B_Regeneration = HealthStats.Regeneration;
