@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3289253780366653687}
   - component: {fileID: 122284754164436976}
   - component: {fileID: 3274538319649053573}
+  - component: {fileID: 1933200519308901294}
   m_Layer: 0
   m_Name: Stage00_Minion_Mountain_WeakAttack_Bullet_Right
   m_TagString: Untagged
@@ -4784,6 +4785,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletTargetTime: 1
   BulletOriginalTime: 1
+--- !u!114 &1933200519308901294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2134814086212475692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2540eedaee99924438ce16aeff707ac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PSTime: 10
+  AutoUpdate: 1
+  LongParticles: []
 --- !u!1 &7662386351823263178
 GameObject:
   m_ObjectHideFlags: 0
