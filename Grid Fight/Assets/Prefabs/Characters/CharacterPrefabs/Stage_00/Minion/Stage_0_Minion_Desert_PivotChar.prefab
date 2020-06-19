@@ -62,7 +62,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2491636401832650433}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.39, z: 0}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8718984644333450195}
@@ -95,7 +95,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0f409228f5a719443ba5d05024c075c8, type: 2}
+  - {fileID: 2100000, guid: 6a7d66f4ae94b4c47a32112084df5b4c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: e5731b6aab54d6741b3c8abffc957335, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: cf6ceb8ac661f31429fb69530c90b0cb, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharOwner: {fileID: 0}
-  CurveType: 1
+  CurveType: 0
   Speed_Time_Curves:
     UpMovement:
       serializedVersion: 2
@@ -314,20 +314,38 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 1
-        outSlope: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.2
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.60479045
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.7
+        value: 1
+        inSlope: 0.041555207
+        outSlope: 0.041555207
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 1
-        outSlope: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -338,20 +356,38 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 1
-        outSlope: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.1
+        value: 0
+        inSlope: 0.15598729
+        outSlope: 0.15598729
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.60479045
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.7
+        value: 1
+        inSlope: 0.041555207
+        outSlope: 0.041555207
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 1
-        outSlope: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -362,20 +398,38 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 1
-        outSlope: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.1
+        value: 0
+        inSlope: 0.15598729
+        outSlope: 0.15598729
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.60479045
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.7
+        value: 1
+        inSlope: 0.041555207
+        outSlope: 0.041555207
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 1
-        outSlope: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -386,20 +440,29 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 1
-        outSlope: 1
+        inSlope: 1.4285715
+        outSlope: 1.4285715
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.7
+        value: 1
+        inSlope: 0.041555207
+        outSlope: 0.041555207
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 1
-        outSlope: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -432,25 +495,25 @@ MonoBehaviour:
   CharacterID: 1001
   CurrentAttackTypeInfo:
   - {fileID: 11400000, guid: 6a91919b3ab99f945b2e4b0d30cf5f83, type: 2}
+  - {fileID: 11400000, guid: 0ffc593b1854ce94faad1d7366e2180a, type: 2}
   Elemental: 0
   ClassType: 3
+  CharaterLevel: 0
   UseLayeringSystem: 1
   CharacterRespawnLength: 180
   CharacterSelection: 0
   RapidAttack:
     DamageMultiplier: {x: 1, y: 1}
     CriticalChance: {x: 2, y: 2}
-    Stamina_Cost_Atk: 0
+    LevelMultiplier: 0
     B_DamageMultiplier: {x: 1, y: 1}
     B_CriticalChance: {x: 2, y: 2}
-    B_Stamina_Cost_Atk: 0
   PowerfulAttac:
     DamageMultiplier: {x: 3, y: 3}
     CriticalChance: {x: 3, y: 5}
-    Stamina_Cost_Atk: 0
+    LevelMultiplier: 0
     B_DamageMultiplier: {x: 3, y: 3}
     B_CriticalChance: {x: 3, y: 5}
-    B_Stamina_Cost_Atk: 0
   HealthStats:
     Health: 30
     Base: 30
@@ -461,7 +524,6 @@ MonoBehaviour:
     B_Base: 0
     B_Regeneration: 0
     B_BaseHealthRegeneration: 0
-    B_LevelMultiplier: 0
   StaminaStats:
     Stamina: 40
     Base: 40
@@ -472,7 +534,6 @@ MonoBehaviour:
     B_Base: 0
     B_Regeneration: 0
     B_BaseStaminaRegeneration: 0
-    B_LevelMultiplier: 0
   ShieldStats:
     Shield: 50
     Base: 50
@@ -483,7 +544,6 @@ MonoBehaviour:
     B_Base: 0
     B_Regeneration: 0
     B_BaseShieldRegeneration: 0
-    B_LevelMultiplier: 0
   SpeedStats:
     BaseSpeed: 1
     MovementSpeed: 1
@@ -491,7 +551,8 @@ MonoBehaviour:
     AttackSpeedRatio: 5
     BulletSpeed: 5
     LeaveSpeed: 3
-    LevelMultiplier: 0
+    BaseSpeed_LevelMultiplier: 0
+    MovementSpeed_LevelMultiplier: 0
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
     B_BaseSpeed: 1
@@ -500,25 +561,27 @@ MonoBehaviour:
     B_AttackSpeedRatio: 0
     B_BulletSpeed: 5
     B_LeaveSpeed: 3
-    B_LevelMultiplier: 0
     B_IdleToAtkDuration: 0.2
     B_AtkToIdleDuration: 0.2
   DamageStats:
     BaseDamage: 10
     B_BaseDamage: 10
-    MultiBulletAttackNumberOfBullets: 3
-    ChildrenBulletDelay: 0.5
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 0
   DefenceStats:
     BaseDefence: 10
     Invulnerability: 0.2
+    B_BaseDefence: 10
+    B_Invulnerability: 0.2
+    LevelMultiplier: 0
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
+  ExperienceValue: 0
   MovementTimer: {x: 5, y: 8}
   B_MovementTimer: {x: 5, y: 8}
+  RelationshipList: []
 --- !u!54 &7881344236016434490
 Rigidbody:
   m_ObjectHideFlags: 0
