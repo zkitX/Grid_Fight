@@ -58,7 +58,7 @@ public class PlayerMinionType_Script : BaseCharacter
     }
 
 
-    public override void SetCharDead(bool hasToDisappear = true)
+    public override void SetCharDead()
     {
         CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);
      

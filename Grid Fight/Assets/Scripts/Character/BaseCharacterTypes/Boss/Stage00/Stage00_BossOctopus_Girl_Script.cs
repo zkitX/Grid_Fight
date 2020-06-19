@@ -55,7 +55,7 @@ public class Stage00_BossOctopus_Girl_Script : MinionType_Script
         base.CharArrivedOnBattleField();
     }
 
-    public override void SetCharDead(bool hasToDisappear = true)
+    public override void SetCharDead()
     {
 
     }

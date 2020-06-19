@@ -91,7 +91,7 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
         return base.MoveByTileSpeed(nextPos, curve, animLenght);
     }
 
-    public override void SetCharDead(bool hasToDisappear = true)
+    public override void SetCharDead()
     {
         if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Death.ToString())
         {

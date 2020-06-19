@@ -209,24 +209,19 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
     }
 
-    public virtual void SetCharDead(bool hasToDisappear = true)
+    public virtual void SetCharDead()
     {
         foreach(ManagedAudioSource audioSource in GetComponentsInChildren<ManagedAudioSource>())
         {
             audioSource.gameObject.transform.parent = AudioManagerMk2.Instance.transform;
         }
-
-       
         isMoving = false;
         SetAttackReady(false);
         Call_CurrentCharIsDeadEvent();
         shotsLeftInAttack = 0;
-        if (hasToDisappear)
-        {
-            transform.position = new Vector3(100, 100, 100);
-            gameObject.SetActive(false);
-        }
     }
+
+   
 
     protected virtual void Call_CurrentCharIsDeadEvent()
     {
@@ -252,7 +247,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
         SetAttackReady(true);
     }
-
 
     #endregion
     #region Attack
@@ -426,17 +420,19 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public void CreateParticleAttack()
     {
-
-        if (nextAttack.CurrentAttackType == AttackType.Particles)
+        if(nextAttack != null)
         {
-            foreach (BulletBehaviourInfoClass item in nextAttack.ParticlesAtk.BulletTrajectories)
+            if (nextAttack.CurrentAttackType == AttackType.Particles)
             {
-                CreateBullet(item);
+                foreach (BulletBehaviourInfoClass item in nextAttack.ParticlesAtk.BulletTrajectories)
+                {
+                    CreateBullet(item);
+                }
             }
-        }
-        else
-        {
-            CreateTileAttack();
+            else
+            {
+                CreateTileAttack();
+            }
         }
     }
 
@@ -1069,7 +1065,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
         }
 
-        if(bdClass.Duration > 0 && CharInfo.Health > 0)
+        if(bdClass.Duration > 0)
         {
             //SetAnimation(bdClass.CurrentBuffDebuff.AnimToFire);
             int iterator = 0;

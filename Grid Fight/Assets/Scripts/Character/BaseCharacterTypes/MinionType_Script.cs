@@ -58,13 +58,19 @@ public class MinionType_Script : BaseCharacter
     }
 
 
-    public override void SetCharDead(bool hasToDisappear = true)
+    public override void SetCharDead()
     {
         CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);
      
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         Attacking = false;
-        BuffsDebuffsList.ForEach(r => r.Duration = 0);
+        BuffsDebuffsList.ForEach(r =>
+        {
+            r.Duration = 0;
+            r.CurrentBuffDebuff.Duration = 0;
+            r.CurrentBuffDebuff.Stop_Co = true;
+        }
+        );
 
      
  		for (int i = 0; i < HittedByList.Count; i++)
@@ -74,30 +80,20 @@ public class MinionType_Script : BaseCharacter
         }
         totDamage = 0;
 
-    /*    if (SpineAnim.skeleton.Data.Animations.Where(r => r.Name == CharacterAnimationStateType.Defeat.ToString()).ToList().Count == 1)
+        for (int i = 0; i < UMS.Pos.Count; i++)
         {
-            SetAnimation(CharacterAnimationStateType.Defeat);
-            CharBoxCollider.enabled = false;
-            foreach (ManagedAudioSource audioSource in GetComponentsInChildren<ManagedAudioSource>())
-            {
-                audioSource.gameObject.transform.parent = AudioManagerMk2.Instance.transform;
-            }
-            isMoving = false;
-            Call_CurrentCharIsDeadEvent();
-            shotsLeftInAttack = 0;
+            GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
+            UMS.Pos[i] = Vector2Int.zero;
         }
-        else
-        {*/
-            for (int i = 0; i < UMS.Pos.Count; i++)
-            {
-                GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
-                UMS.Pos[i] = Vector2Int.zero;
-            }
-            base.SetCharDead();
-       // }
-      
+        base.SetCharDead();
+        transform.position = new Vector3(100, 100, 100);
+        Invoke("DisableChar", 0.5f);
     }
+    private void DisableChar()
+    {
+        gameObject.SetActive(false);
 
+    }
 
     public virtual IEnumerator AI()
     {

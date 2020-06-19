@@ -137,7 +137,7 @@ public class Stage04_BossGirl_Script : MinionType_Script
         StartCoroutine(BattleManagerScript.Instance.MoveCharToBoardWithDelay(0.2f, currentCharacter, bts.transform.position));
     }
 
-    public override void SetCharDead(bool hasToDisappear = true)
+    public override void SetCharDead()
     {
         if(SpineAnim.CurrentAnim != CharacterAnimationStateType.Death.ToString())
         {

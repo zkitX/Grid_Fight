@@ -143,7 +143,7 @@ public class Stage00_BossOctopus_Script : MinionType_Script
         return null;
     }
 
-    public override void SetCharDead(bool hasToDisappear = true)
+    public override void SetCharDead()
     {
         if(!((Stage00_BossOctopus_Head_Script)GetPiece(CharacterNameType.Stage00_BossOctopus_Head)).disabled ||
             !((Stage00_BossOctopus_Tentacles_Script)GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles)).disabled)

@@ -476,6 +476,7 @@ public enum BaseCharType
 {
 
     None = 10000,
+    TalkingCharacterType_Script = 9999,
     CharacterType_Script = 0,
     MinionType_Script = 1,
     Stage04_BossGirl_Flower_Script = 2,
@@ -514,7 +515,8 @@ public enum ParticlesType
     Stage01_Boss_FaceChanging_MoonDrums,
     Stage01_Boss_CrystalTomb_Effect,
     PowerUp_Shield,
-    Skill_Darkening
+    Skill_Darkening,
+    Skill_Mind_1_Loop
 }
 
 

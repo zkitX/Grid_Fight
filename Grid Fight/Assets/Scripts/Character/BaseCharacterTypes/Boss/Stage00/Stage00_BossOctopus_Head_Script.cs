@@ -95,7 +95,7 @@ public class Stage00_BossOctopus_Head_Script : MinionType_Script
         StartCoroutine(BattleManagerScript.Instance.MoveCharToBoardWithDelay(0.2f, currentCharacter, bts.transform.position));
     }
 
-    public override void SetCharDead(bool hasToDisappear = true)
+    public override void SetCharDead()
     {
         if (disabled) return;
         CameraManagerScript.Instance.CameraShake(CameraShakeType.GettingHit);

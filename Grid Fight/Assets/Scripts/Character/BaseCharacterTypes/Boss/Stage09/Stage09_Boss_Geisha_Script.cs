@@ -154,7 +154,7 @@ public class Stage09_Boss_Geisha_Script : MinionType_Script
         return;
     }
 
-    public override void SetCharDead(bool hasToDisappear = true)
+    public override void SetCharDead()
     {
         return;
     }

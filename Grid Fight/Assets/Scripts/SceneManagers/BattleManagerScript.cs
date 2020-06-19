@@ -335,7 +335,7 @@ public class BattleManagerScript : MonoBehaviour
     public BaseCharacter CreateTalkingChar(CharacterNameType characterID)
     {
         CharsForTalkingPart.Add(CreateChar(new CharacterBaseInfoClass(characterID.ToString(), CharacterSelectionType.Up,
-        new List<ControllerType> { ControllerType.Player1 }, characterID, WalkingSideType.LeftSide, SideType.LeftSide, FacingType.Right, AttackType.Tile, BaseCharType.CharacterType_Script, 
+        new List<ControllerType> { ControllerType.Player1 }, characterID, WalkingSideType.LeftSide, SideType.LeftSide, FacingType.Right, AttackType.Tile, BaseCharType.TalkingCharacterType_Script, 
         new List<CharacterActionType> {
             CharacterActionType.Defence,
             CharacterActionType.Move,
@@ -794,8 +794,8 @@ public class BattleManagerScript : MonoBehaviour
 
         // yield return HoldPressTimer(playerController);
         CurrentSelectedCharacters[playerController].Character.SwapWhenPossible = true;
-
-        while (CurrentSelectedCharacters[playerController].OffsetSwap > Time.time || !CurrentSelectedCharacters[playerController].Character.IsOnField ||
+        BaseCharacter cb = AllCharactersOnField.Where(r => r.UMS.PlayerController.Contains(playerController) && r.CharInfo.CharacterID == cName).First();
+        while (CurrentSelectedCharacters[playerController].OffsetSwap > Time.time || !CurrentSelectedCharacters[playerController].Character.IsOnField || cb.IsOnField ||
             CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle.ToString() ||
             CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving.ToString() ||
             CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving.ToString())
@@ -1237,8 +1237,9 @@ public class BattleManagerScript : MonoBehaviour
         //Debug.Log("Prev " + CurrentSelectedCharacters[playerController].NextSelectionChar.ToString());
         CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar = cs;
         Debug.Log(cs.ToString());
-
+       
         LoadingNewCharacterToGrid(cb.CharInfo.CharacterID, side, playerController, worksOnFungusPappets);
+        
     }
 
     public void StopChargingAttack(ControllerType controllerType)

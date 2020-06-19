@@ -6,7 +6,6 @@ using UnityEngine;
 public class CharacterType_Script : BaseCharacter
 {
     protected bool MoveCoOn = true;
-    private IEnumerator MoveActionCo;
     public bool Atk1Queueing = false;
     [SerializeField] protected bool CharacterJumping = false;
     ManagedAudioSource chargingAudio = null;
@@ -139,13 +138,13 @@ public class CharacterType_Script : BaseCharacter
     }
 
 
-    public override void SetCharDead(bool hasToDisappear = true)
+    public override void SetCharDead()
     {
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         SetAnimation(CharacterAnimationStateType.Defeat_ReverseArrive);
         IsOnField = false;
         battleTime.isStopped = true;
-        base.SetCharDead(false);
+        base.SetCharDead();
         NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo, UMS.Side);
         ResetAudioManager();
         StartCoroutine(ReviveSequencer());
@@ -413,7 +412,7 @@ public class CharacterType_Script : BaseCharacter
         scdc.IsCoGoing = true;
         yield return BattleManagerScript.Instance.WaitUpdate(() => currentAttackPhase != AttackPhasesType.End);
         CharInfo.BaseSpeed *= 100;
-        BattleManagerScript.Instance.BattleSpeed = 1f;
+        BattleManagerScript.Instance.BattleSpeed = 0.01f;
         SpineAnim.SetSkeletonOrderInLayer(300);
         SetAnimation(nxtAtk.PrefixAnim + "_IdleToAtk", false, 0);
         currentAttackPhase = AttackPhasesType.Start;

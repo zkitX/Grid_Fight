@@ -57,7 +57,7 @@ public class Stage09_Boss_NoFace_Script : MinionType_Script
         baseForme.SetAnimation(animState, loop, transition, _pauseOnLastFrame);
     }
 
-    public override void SetCharDead(bool hasToDisappear = true)
+    public override void SetCharDead()
     {
         CameraManagerScript.Instance.CameraShake(CameraShakeType.GettingHit);
         InteruptAttack();
