@@ -151,7 +151,6 @@ public class Stage00_BossOctopus_Script : MinionType_Script
             return;
         }
         CameraManagerScript.Instance.CameraShake(CameraShakeType.GettingHit);
-        StopCoroutine(attackCoroutine);
         StartCoroutine(PhaseOneEnd());
         Debug.Log("Octobos fully disabled");
     }

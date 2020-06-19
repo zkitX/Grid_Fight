@@ -107,7 +107,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     }
     public AttackPhasesType currentAttackPhase = AttackPhasesType.End;
     public DeathProcessStage currentDeathProcessPhase = DeathProcessStage.None;
-    protected IEnumerator attackCoroutine = null;
     public SpecialAttackStatus StopPowerfulAtk;
     private float DefendingHoldingTimer = 0;
     public bool IsSwapping = false;
@@ -217,12 +216,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             audioSource.gameObject.transform.parent = AudioManagerMk2.Instance.transform;
         }
 
-        if (attackCoroutine != null)
-        {
-            StopCoroutine(attackCoroutine);
-            attackCoroutine = null;
-
-        }
+       
         isMoving = false;
         SetAttackReady(false);
         Call_CurrentCharIsDeadEvent();
@@ -707,12 +701,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                         BattleManagerScript.Instance.OccupiedBattleTiles.Remove(item);
                     }
                     BattleManagerScript.Instance.OccupiedBattleTiles.AddRange(CurrentBattleTiles);
-                    if (MoveCo != null)
-                    {
-                        Debug.Log("StopMoveCo");
-                        //StopCoroutine(MoveCo);
-                    }
-
                     stopCo = true;
 
                     if (SpineAnim.CurveType == MovementCurveType.Speed_Time)
@@ -1081,7 +1069,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
         }
 
-        if(bdClass.Duration > 0)
+        if(bdClass.Duration > 0 && CharInfo.Health > 0)
         {
             //SetAnimation(bdClass.CurrentBuffDebuff.AnimToFire);
             int iterator = 0;

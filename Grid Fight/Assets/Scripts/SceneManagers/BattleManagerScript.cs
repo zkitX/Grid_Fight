@@ -1338,6 +1338,14 @@ public class BattleManagerScript : MonoBehaviour
         recruitableChar.CharInfo.SetupChar();
         NewIManager.Instance.SetUICharacterToButton(recruitableChar, recruitableChar.CharInfo.CharacterSelection);
         recruitableChar.CharInfo.HealthStats.Health = recruitableChar.CharInfo.HealthStats.Base;
+        recruitableChar.CharActionlist.Add(CharacterActionType.Move);
+        recruitableChar.CharActionlist.Add(CharacterActionType.Defence);
+        recruitableChar.CharActionlist.Add(CharacterActionType.Skill1);
+        recruitableChar.CharActionlist.Add(CharacterActionType.Skill2);
+        recruitableChar.CharActionlist.Add(CharacterActionType.Skill3);
+        recruitableChar.CharActionlist.Add(CharacterActionType.StrongAttack);
+        recruitableChar.CharActionlist.Add(CharacterActionType.SwitchCharacter);
+        recruitableChar.CharActionlist.Add(CharacterActionType.WeakAttack);
         recruitableChar.gameObject.SetActive(true);
         recruitableChar.SetupCharacterSide();
         /*foreach (BaseCharacter playableCharOnScene in AllCharactersOnField)
@@ -1451,6 +1459,20 @@ public class BattleManagerScript : MonoBehaviour
         {
             yield return WaitUpdate(pauseCondition);
             timer += DeltaTime;
+        }
+    }
+
+    public IEnumerator WaitFor(float duration, System.Func<bool> pauseCondition, System.Func<bool> stopCondition)
+    {
+        float timer = 0;
+        while (timer < duration)
+        {
+            yield return WaitUpdate(pauseCondition);
+            timer += DeltaTime;
+            if(stopCondition())
+            {
+                yield break;
+            }
         }
     }
 

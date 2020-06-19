@@ -411,19 +411,21 @@ public class CharacterType_Script : BaseCharacter
         }
         nextAttack = nxtAtk;
         scdc.IsCoGoing = true;
-        //GameObject go = ParticleManagerScript.Instance.GetParticle(ParticlesType.Skill_Darkening);
-        //go.transform.position = SpineAnim.FiringPints[(int)inputSkill].transform.position;
-        //go.SetActive(true);
         yield return BattleManagerScript.Instance.WaitUpdate(() => currentAttackPhase != AttackPhasesType.End);
-        BattleManagerScript.Instance.BattleSpeed = 0.2f;
+        CharInfo.BaseSpeed *= 100;
+        BattleManagerScript.Instance.BattleSpeed = 1f;
         SpineAnim.SetSkeletonOrderInLayer(300);
         SetAnimation(nxtAtk.PrefixAnim + "_IdleToAtk", false, 0);
         currentAttackPhase = AttackPhasesType.Start;
-        yield return BattleManagerScript.Instance.WaitFor(1.8f, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
-        SetAnimation(nxtAtk.PrefixAnim + "_AtkToIdle", false, 0);
-        yield return BattleManagerScript.Instance.WaitUpdate(() => currentAttackPhase != AttackPhasesType.End);
+        yield return BattleManagerScript.Instance.WaitFor(0.018f, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle, ()=> CharInfo.HealthPerc <= 0);
+        if(CharInfo.HealthPerc > 0)
+        {
+            SetAnimation(nxtAtk.PrefixAnim + "_AtkToIdle", false, 0);
+        }
+        yield return BattleManagerScript.Instance.WaitUpdate(() => (currentAttackPhase != AttackPhasesType.End || CharInfo.HealthPerc <= 0));
         BattleManagerScript.Instance.BattleSpeed = 1;
         SpineAnim.SetSkeletonOrderInLayer(CharOredrInLayer);
+        CharInfo.BaseSpeed /= 100;
         yield return BattleManagerScript.Instance.WaitFor(nxtAtk.CoolDown, ()=> BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
         scdc.IsCoGoing = false;
     }
@@ -721,12 +723,12 @@ public class CharacterType_Script : BaseCharacter
         }
         //Debug.Log(animState.ToString());
 
-        if (!animState.ToString().Contains("Atk"))
+        if (!animState.ToString().Contains("Atk") && !animState.ToString().Contains("S_DeBuff") && !animState.ToString().Contains("S_Buff"))
         {
             currentAttackPhase = AttackPhasesType.End;
         }
 
-        if((SpineAnim.CurrentAnim.Contains("S_Buff") && !animState.Contains("S_Buff")) || (SpineAnim.CurrentAnim.Contains("S_DeBuff") && !animState.Contains("S_DeBuff")))
+        if(((SpineAnim.CurrentAnim.Contains("S_Buff") && !animState.Contains("S_Buff")) || (SpineAnim.CurrentAnim.Contains("S_DeBuff") && !animState.Contains("S_DeBuff"))) && !animState.Contains("Reverse"))
         {
             return;
         }

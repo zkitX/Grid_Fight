@@ -64,7 +64,8 @@ public class MinionType_Script : BaseCharacter
      
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         Attacking = false;
-        StopAllCoroutines();
+        BuffsDebuffsList.ForEach(r => r.Duration = 0);
+
      
  		for (int i = 0; i < HittedByList.Count; i++)
         {

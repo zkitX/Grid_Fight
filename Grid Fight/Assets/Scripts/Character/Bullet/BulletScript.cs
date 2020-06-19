@@ -1,5 +1,4 @@
-﻿using MyBox;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -233,12 +232,16 @@ public class BulletScript : MonoBehaviour
                     StatisticInfoClass sic = StatisticInfoManagerScript.Instance.CharaterStats.Where(r => r.CharacterId == CharOwner.CharInfo.CharacterID).First();
                     sic.DamageExp += SOAttack.ExperiencePoints;
                 }
-                int chances = Random.Range(0, 100);
-                if (chances < 100)
+
+                if(target.CharInfo.Health > 0)
                 {
-                    foreach (ScriptableObjectAttackEffect item in BulletEffects)
+                    int chances = Random.Range(0, 100);
+                    if (chances < 100)
                     {
-                        target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.Value, item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles, CharOwner));
+                        foreach (ScriptableObjectAttackEffect item in BulletEffects)
+                        {
+                            target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.Value, item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles, CharOwner));
+                        }
                     }
                 }
             }
