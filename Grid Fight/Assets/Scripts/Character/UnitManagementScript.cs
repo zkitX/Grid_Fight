@@ -83,10 +83,6 @@ public class UnitManagementScript : MonoBehaviour
             transform.eulerAngles = Vector3.zero;
         }
         gameObject.tag = Side.ToString();
-        if (CharOwner.SpineAnim == null)
-        {
-            CharOwner.SpineAnimatorsetup();
-        }
         CharOwner.SpineAnim.gameObject.tag = Side.ToString();
         UnitBehaviour = ubt;
     }

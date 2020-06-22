@@ -124,6 +124,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         set
         {
             _shotsLeftInAttack = value;
+            _shotsLeftInAttack =_shotsLeftInAttack < 0 ? 0 : _shotsLeftInAttack;
         }
     }
 
