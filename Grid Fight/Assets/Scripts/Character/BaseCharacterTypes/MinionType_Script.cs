@@ -10,9 +10,9 @@ public class MinionType_Script : BaseCharacter
     protected float LastAttackTime;
     public float UpDownPerc = 13;
     public AIType CurrentAI;
-    List<HitInfoClass> HittedByList = new List<HitInfoClass>();
-    float totDamage = 0;
-    bool strongAnimDone = false;
+    protected List<HitInfoClass> HittedByList = new List<HitInfoClass>();
+    protected float totDamage = 0;
+    protected bool strongAnimDone = false;
 
 
     protected bool UnderAttack
@@ -40,7 +40,7 @@ public class MinionType_Script : BaseCharacter
     public override void SetUpLeavingBattle()
     {
         SetAnimation(CharacterAnimationStateType.Reverse_Arriving);
-        EventManager.Instance.AddCharacterSwitched((BaseCharacter)this);
+        EventManager.Instance.AddCharacterSwitched(this);
     }
 
     public override void SetAttackReady(bool value)
@@ -75,8 +75,11 @@ public class MinionType_Script : BaseCharacter
      
  		for (int i = 0; i < HittedByList.Count; i++)
         {
-            StatisticInfoClass sic = StatisticInfoManagerScript.Instance.CharaterStats.Where(r => r.CharacterId == HittedByList[i].CharacterId).First();
-            sic.DamageExp += (HittedByList[i].Damage / totDamage) * CharInfo.ExperienceValue;
+            StatisticInfoClass sic = StatisticInfoManagerScript.Instance.CharaterStats.Where(r => r.CharacterId == HittedByList[i].CharacterId).FirstOrDefault();
+            if(sic != null)
+            {
+                sic.DamageExp += (HittedByList[i].Damage / totDamage) * CharInfo.ExperienceValue;
+            }
         }
         totDamage = 0;
 
@@ -89,10 +92,9 @@ public class MinionType_Script : BaseCharacter
         transform.position = new Vector3(100, 100, 100);
         Invoke("DisableChar", 0.5f);
     }
-    private void DisableChar()
+    public void DisableChar()
     {
         gameObject.SetActive(false);
-
     }
 
     public virtual IEnumerator AI()
@@ -111,6 +113,7 @@ public class MinionType_Script : BaseCharacter
 
 
                 List<BaseCharacter> enemys = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList();
+                enemys.AddRange(BattleManagerScript.Instance.AllPlayersMinionOnField);
                 if (enemys.Count > 0)
                 {
                     BaseCharacter targetChar = enemys.Where(r => r.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x).FirstOrDefault();

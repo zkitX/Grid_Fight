@@ -6,7 +6,7 @@ using Fungus;
 using MyBox;
 
 [CommandInfo("Scripting",
-                "Call Fire Attacc",
+                "Call Fire Attack",
                 "Fires a single attack")]
 [AddComponentMenu("")]
 public class CallFireAttack : Command
@@ -26,8 +26,6 @@ public class CallFireAttack : Command
 
     protected IEnumerator attack()
     {
-
-
         IEnumerator attackOnceCoroutine = null;
         BaseCharacter character;
         if (IsPlayerCharacter)

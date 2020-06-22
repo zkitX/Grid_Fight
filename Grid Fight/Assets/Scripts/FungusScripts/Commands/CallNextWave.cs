@@ -35,6 +35,10 @@ public class CallNextWave : Command
     public float DelayBeforeJump = 0.5f;
     public float PoolDelay = 3;
     public bool UseWave = true;
+    [ConditionalField("UseWave", false)] public bool UseTimer;
+    [ConditionalField("UseTimer", false)] public float Timer;
+    [ConditionalField("UseTimer", false)] public string VariableName;
+
 
     public string NextBlockToFire;
 
