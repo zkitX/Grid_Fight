@@ -104,6 +104,8 @@ public class Grid_UICursor : MonoBehaviour
 
     public void SnapToClosestActiveButton()
     {
+        if (Grid_UINavigator.Instance.ActiveButtons.Length == 0) return;
+
         StartCoroutine(SnapCoroutine(
             Grid_UINavigator.Instance.GetClosestButtonFromArray(transform.position, Grid_UINavigator.Instance.ActiveButtons.ToArray()).transform.position)
             );

@@ -252,6 +252,23 @@ public class CharacterLoadInformation
             return SceneLoadManager.Instance.charLevelThresholds.Length + 1;
         }
     }
+    public float XPInLevel
+    {
+        get
+        {
+            int levelIndex = Mathf.Clamp(Level - 2, 0, SceneLoadManager.Instance.charLevelThresholds.Length);
+            if (levelIndex == Level - 1) return xp;
+            return xp - SceneLoadManager.Instance.charLevelThresholds[levelIndex];
+        }
+    }
+    public float ProgressToNextLevel
+    {
+        get
+        {
+            if (Level > SceneLoadManager.Instance.charLevelThresholds.Length) return 1;
+            return XPInLevel / (SceneLoadManager.Instance.charLevelThresholds[Level - 1] - (Level - 2 < 0 ? 0 : SceneLoadManager.Instance.charLevelThresholds[Level - 2]));
+        }
+    }
     public float attackDamage;
     public float attackSpeed;
     public float stamina;

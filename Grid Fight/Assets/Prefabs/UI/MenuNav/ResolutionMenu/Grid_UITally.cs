@@ -28,6 +28,12 @@ public class Grid_UITally : MonoBehaviour
 
     public TextMeshProUGUI totalXPText;
 
+    public Image XPBarFill;
+    public Grid_UIStarRanking levelDisplay;
+    public TextMeshProUGUI levelProgressionText;
+    public Image levelProgressionBox;
+    public Color filledProgressBarColor = Color.yellow;
+
     protected Transform startPortraitTransform;
 
     protected bool resolved = true;
@@ -56,15 +62,18 @@ public class Grid_UITally : MonoBehaviour
         {
             portrait.sprite = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == character).FirstOrDefault().CharInfo.CharacterIcons[2];
         }
-        if (outDented) portrait.transform.position = startPortraitTransform.position - new Vector3((portrait.rectTransform.sizeDelta.x / 2f), 0f);
+       // if (outDented) portrait.transform.position = startPortraitTransform.position - new Vector3((portrait.rectTransform.sizeDelta.x / 2f), 0f);
 
-        baseXPText.text = info.StartExp.ToString();
+        baseXPText.text = info.BaseExp.ToString();
         ValueShufflers = new List<IEnumerator>();
+        ValueShufflers.Add(ShuffleValue(baseXPText, Mathf.RoundToInt(info.BaseExp)));
         ValueShufflers.Add(ShuffleValue(accuracyXPText, Mathf.RoundToInt(info.AccuracyExp), accuracyXPStars));
         ValueShufflers.Add(ShuffleValue(reflexXPText, Mathf.RoundToInt(info.ReflexExp), reflexXPStars));
         ValueShufflers.Add(ShuffleValue(damageXPText, Mathf.RoundToInt(info.DamageExp), damageXPStars));
-        ValueShufflers.Add(ShuffleValue(totalXPText, Mathf.RoundToInt(info.StartExp + info.Exp)));
+        ValueShufflers.Add(ShuffleValue(totalXPText, Mathf.RoundToInt(info.BaseExp + info.Exp)));
         foreach (IEnumerator shuffler in ValueShufflers) StartCoroutine(shuffler);
+
+        SetLevelStarSystem();
     }
 
 
@@ -88,30 +97,38 @@ public class Grid_UITally : MonoBehaviour
     {
         resolved = true;
 
-        StartCoroutine(GrowShrink(accuracyXPText.transform));
+        StartCoroutine(GrowShrink(baseXPText.transform));
         StopCoroutine(ValueShufflers[0]);
+        baseXPText.text = Mathf.Round(info.BaseExp).ToString();
+
+        yield return new WaitForSecondsRealtime(waitBetweenResults);
+
+        StartCoroutine(GrowShrink(accuracyXPText.transform));
+        StopCoroutine(ValueShufflers[1]);
         accuracyXPText.text = Mathf.Round(info.AccuracyExp).ToString();
         accuracyXPStars.SetStarRanking(info.Accuracy / BattleManagerBaseObjectGeneratorScript.Instance.stage.bestAccuracyRating.ValueToAchieve);
 
         yield return new WaitForSecondsRealtime(waitBetweenResults);
 
         StartCoroutine(GrowShrink(reflexXPText.transform));
-        StopCoroutine(ValueShufflers[1]);
+        StopCoroutine(ValueShufflers[2]);
         reflexXPText.text = Mathf.Round(info.ReflexExp).ToString();
         reflexXPStars.SetStarRanking(info.Reflexes / BattleManagerBaseObjectGeneratorScript.Instance.stage.bestReflexRating.ValueToAchieve);
 
         yield return new WaitForSecondsRealtime(waitBetweenResults);
 
         StartCoroutine(GrowShrink(damageXPText.transform));
-        StopCoroutine(ValueShufflers[2]);
+        StopCoroutine(ValueShufflers[3]);
         damageXPText.text = Mathf.Round(info.DamageExp).ToString();
         damageXPStars.SetStarRanking(info.DamageMade / BattleManagerBaseObjectGeneratorScript.Instance.stage.bestDamageRating.ValueToAchieve);
 
         yield return new WaitForSecondsRealtime(waitBetweenResults * 2f);
 
         StartCoroutine(GrowShrink(totalXPText.transform));
-        StopCoroutine(ValueShufflers[3]);
-        totalXPText.text = Mathf.Round(info.StartExp + info.Exp).ToString();
+        StopCoroutine(ValueShufflers[4]);
+        totalXPText.text = Mathf.Round(info.BaseExp + info.Exp).ToString();
+
+        yield return AddXP(info.BaseExp + info.Exp, 3f);
     }
 
     IEnumerator GrowShrink(Transform tran)
@@ -134,6 +151,44 @@ public class Grid_UITally : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    bool masteredDisplayed = false;
+    void SetLevelStarSystem()
+    {
+        if (masteredDisplayed) return;
+
+        CharacterLoadInformation charInfo = SceneLoadManager.Instance.loadedCharacters.Where(r => r.characterID == info.CharacterId).FirstOrDefault();
+
+        XPBarFill.fillAmount = charInfo.ProgressToNextLevel;
+        levelDisplay.SetStarRanking((float)charInfo.Level / ((float)SceneLoadManager.Instance.charLevelThresholds.Length + 1f));
+
+        if (charInfo.Level > SceneLoadManager.Instance.charLevelThresholds.Length)
+        {
+            masteredDisplayed = true;
+            levelProgressionText.text = "MASTERED!";
+            levelProgressionText.color = filledProgressBarColor;
+            XPBarFill.color = filledProgressBarColor;
+            levelProgressionBox.color = Color.black;
+            return;
+        }
+
+        levelProgressionText.text = Mathf.FloorToInt(charInfo.xp).ToString() + "/" + SceneLoadManager.Instance.charLevelThresholds[charInfo.Level - 1].ToString();
+    }
+
+
+    IEnumerator AddXP(float XPToAdd, float duration)
+    {
+        float timeLeft = duration;
+        float startXP = SceneLoadManager.Instance.loadedCharacters.Where(r => r.characterID == info.CharacterId).FirstOrDefault().xp;
+        float endXP = XPToAdd + startXP;
+        while (SceneLoadManager.Instance.loadedCharacters.Where(r => r.characterID == info.CharacterId).FirstOrDefault().xp != endXP)
+        {
+            timeLeft = Mathf.Clamp(timeLeft - Time.deltaTime, 0f, duration);
+            SceneLoadManager.Instance.loadedCharacters.Where(r => r.characterID == info.CharacterId).FirstOrDefault().xp = Mathf.Lerp(startXP, endXP,  1f - (timeLeft/duration));
+            SetLevelStarSystem();
+            yield return null;
+        }
     }
 
 

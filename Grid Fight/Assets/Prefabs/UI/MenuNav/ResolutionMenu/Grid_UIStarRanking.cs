@@ -23,7 +23,7 @@ public class Grid_UIStarRanking : MonoBehaviour
         float divNum = 1f / stars.Length;
         foreach(Grid_UIStar star in stars)
         {
-            star.SetStarValue(curVal > divNum ? 1 : (curVal % divNum) / divNum);
+            star.SetStarValue(curVal >= divNum ? 1 : (curVal % divNum) / divNum);
             curVal -= divNum;
         }
     }

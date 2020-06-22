@@ -18,7 +18,7 @@ public class StatisticInfoManagerScript : MonoBehaviour
     {
         StatisticInfoClass returnable = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == ID).FirstOrDefault().Sic;
         StatisticInfoClass additive = CharaterStats.Where(r => r.CharacterId == ID).FirstOrDefault();
-        returnable.StartExp += additive.StartExp;
+        returnable.BaseExp += additive.BaseExp;
         returnable.AccuracyExp += additive.AccuracyExp;
         returnable.DamageExp += additive.DamageExp;
         returnable.ReflexExp += additive.ReflexExp;
@@ -102,7 +102,18 @@ public class StatisticInfoClass
             reflexExp = value;
         }
     }
-    public float StartExp;
+    public float baseExp;
+    public float BaseExp
+    {
+        get
+        {
+            return baseExp;
+        }
+        set
+        {
+            baseExp = value;
+        }
+    }
 
     public StatisticInfoClass()
     {
@@ -113,7 +124,7 @@ public class StatisticInfoClass
     {
         CharacterId = characterId;
         PlayerController = playerController;
-        StartExp = startingExperience;
+        BaseExp = startingExperience;
     }
 }
 

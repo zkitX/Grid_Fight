@@ -5,11 +5,14 @@ using UnityEngine.UI;
 
 public class Grid_UIStar : MonoBehaviour
 {
-    public Image starFill = null;
+    public Image[] starFills = new Image[1];
 
 
     public void SetStarValue(float percentage)
     {
-        starFill.fillAmount = percentage;
+        foreach (Image starFill in starFills)
+        {
+            starFill.fillAmount = percentage;
+        }
     }
 }
