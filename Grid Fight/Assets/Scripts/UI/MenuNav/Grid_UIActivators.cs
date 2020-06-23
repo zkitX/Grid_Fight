@@ -98,6 +98,24 @@ public class Grid_UIActivators : MonoBehaviour
         StartCoroutine(SequenceEvents(actions.ToArray()));
     }
 
+    public IEnumerator DoActionByNameCo(string identifier)
+    {
+        List<UI_ActionsClass> actions = new List<UI_ActionsClass>();
+
+        foreach (UIActivator activ in activators)
+        {
+            if (activ.ID == identifier)
+            {
+                foreach (UI_ActionsClass action in activ.actions)
+                {
+                    actions.Add(action);
+                }
+            }
+        }
+
+        yield return SequenceEvents(actions.ToArray());
+    }
+
     IEnumerator SequenceEvents(UI_ActionsClass[] events)
     {
         yield return null;

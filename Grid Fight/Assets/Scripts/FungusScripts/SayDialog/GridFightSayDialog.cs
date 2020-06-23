@@ -35,7 +35,7 @@ public class GridFightSayDialog : SayDialog
     protected override void Start()
     {
         base.Start();
-        BattleManagerScript.Instance.CurrentFungusStateChangedEvent += FungusChanged;
+        if(BattleManagerScript.Instance != null) BattleManagerScript.Instance.CurrentFungusStateChangedEvent += FungusChanged;
     }
 
     private IEnumerator Initializer()
@@ -53,7 +53,7 @@ public class GridFightSayDialog : SayDialog
         if (!isAnimCompleted)
         {
             isAnimCompleted = true;
-            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Music, BattleManagerScript.Instance.AudioProfile.Dialogue_TextEnd, AudioBus.HighPrio); //GIORGIO: AudioSourceType is Music because Fungus would kill it when stopping text loop
+            AudioManagerMk2.Instance?.PlaySound(AudioSourceType.Music, BattleManagerScript.Instance.AudioProfile.Dialogue_TextEnd, AudioBus.HighPrio); //GIORGIO: AudioSourceType is Music because Fungus would kill it when stopping text loop
         }
 
         AnimSpeedChanger(10);
@@ -72,12 +72,15 @@ public class GridFightSayDialog : SayDialog
         InputController.Instance.ButtonAUpEvent += Instance_ButtonAUpEvent;
         //Debug.Log(text);
         AnimSpeedChanger(2);
-        while (BattleManagerScript.Instance == null)
-        {
-            yield return null;
-        }
+        //while (BattleManagerScript.Instance == null)
+        //{
+        //    yield return null;
+        //}
 
-        BattleManagerScript.Instance.FungusState = FungusDialogType.Dialog;
+        if (BattleManagerScript.Instance != null)
+        {
+            BattleManagerScript.Instance.FungusState = FungusDialogType.Dialog;
+        }
 
         if (!IsAlreadySubscribed)
         {
@@ -89,10 +92,6 @@ public class GridFightSayDialog : SayDialog
         }
         GetCanvasGroup().alpha = 1f;
 
-        while (BattleManagerScript.Instance == null)
-        {
-            yield return null;
-        }
         //yield return base.DoSay("", clearPrevious, false, false, stopVoiceover, waitForVO, voiceOverClip, delegate { });
         storyText.text = "";
 
@@ -100,7 +99,7 @@ public class GridFightSayDialog : SayDialog
         {
             if (SayDialogAnimatorController.GetBool("InOut"))
             {
-                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_CharacterSwap, AudioBus.MidPrio);
+                AudioManagerMk2.Instance?.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_CharacterSwap, AudioBus.MidPrio);
 
                 SayDialogAnimatorController.SetBool("IsSelected", false);
                 while (!isAnimCompleted)
@@ -111,7 +110,7 @@ public class GridFightSayDialog : SayDialog
 
 
                 SayDialogAnimatorController.SetBool("InOut", false);
-                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_Exiting, AudioBus.MidPrio);
+                AudioManagerMk2.Instance?.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_Exiting, AudioBus.MidPrio);
                 while (!isAnimCompleted)
                 {
                     yield return null;
@@ -119,7 +118,7 @@ public class GridFightSayDialog : SayDialog
                 isAnimCompleted = false;
 
                 SayDialogAnimatorController.SetBool("InOut", true);
-                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_Entering, AudioBus.MidPrio);
+                AudioManagerMk2.Instance?.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_Entering, AudioBus.MidPrio);
                 SetChar();
                 SetCharacterImage(currentChar.Portraits[0]);
 
@@ -148,7 +147,7 @@ public class GridFightSayDialog : SayDialog
         else if (LastCharacter == null)
         {
             SayDialogAnimatorController.SetBool("InOut", true);
-            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_Entering, AudioBus.MidPrio);
+            AudioManagerMk2.Instance?.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_Entering, AudioBus.MidPrio);
             SetChar();
             SetCharacterImage(currentChar.Portraits[0]);
 
@@ -169,7 +168,7 @@ public class GridFightSayDialog : SayDialog
             isAnimCompleted = false;
         }
 
-        textAudio = AudioManagerMk2.Instance.PlayNamedSource("TextAudio", AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_TextStart, AudioBus.MidPrio, loop: true);
+        textAudio = AudioManagerMk2.Instance == null ? null : AudioManagerMk2.Instance.PlayNamedSource("TextAudio", AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_TextStart, AudioBus.MidPrio, loop: true);
 
         yield return base.DoSay(text, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, voiceOverClip, delegate { });
 

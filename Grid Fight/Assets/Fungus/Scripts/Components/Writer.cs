@@ -448,7 +448,7 @@ namespace Fungus
 
                 if(i == tokens.Count - 2)
                 {
-                    AudioManagerMk2.Instance.StopNamedSource("TextAudio");
+                    AudioManagerMk2.Instance?.StopNamedSource("TextAudio");
                 }
 
                 previousTokenType = token.type;

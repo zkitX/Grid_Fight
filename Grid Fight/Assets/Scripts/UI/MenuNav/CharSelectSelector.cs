@@ -7,6 +7,9 @@ using System.Linq;
 
 public class CharSelectSelector : MonoBehaviour
 {
+    public delegate void FungusEventTriggerAction(string blockName);
+    public static event FungusEventTriggerAction OnFungusEventTrigger;
+
     public bool visible = false;
     [SerializeField] protected TextMeshProUGUI NameText;
     [SerializeField] protected TextMeshProUGUI SquadBonusText;
@@ -64,7 +67,7 @@ public class CharSelectSelector : MonoBehaviour
             SelectText.text = "DESELECT";
         }
 
-        if (ChatDisplayed != (loadInfo != null && loadInfo.availableChats.Length != 0 && loadInfo.encounterState == CharacterLoadInformation.EncounterState.Recruited))
+        if (ChatDisplayed != (loadInfo != null && loadInfo.availableChats.Count != 0 && loadInfo.encounterState == CharacterLoadInformation.EncounterState.Recruited && parentBox.selectionMode == CharSelectBox.SelectionMode.Units))
         {
             ChatDisplayed = !ChatDisplayed;
             DisplayOption(ChatDisplay, ChatDisplayed);
@@ -169,6 +172,28 @@ public class CharSelectSelector : MonoBehaviour
 
         UpdateSelection(curSelectedChar, transform.position, 0f);
         curButton.RefreshButton();
+    }
+
+    public void TalkToCurrent()
+    {
+        if (!visible || moving) return;
+        if (curSelectedChar == CharacterNameType.None) return;
+
+        CharacterLoadInformation loadInfo = SceneLoadManager.Instance.loadedCharacters.Where(r => r.characterID == curSelectedChar).FirstOrDefault();
+
+        if (!ChatDisplayed) return;
+        if (loadInfo.availableChats.Count <= 0) return;
+
+        StartCoroutine(TalkToCurrentCo(loadInfo.availableChats[0]));
+        loadInfo.availableChats.RemoveAt(0);
+        curButton.UpdateSelection();
+    }
+
+    public IEnumerator TalkToCurrentCo(string blockName)
+    {
+        yield return Grid_UINavigator.Instance.TriggerUIActivatorCo("MenuChatTransition");
+
+        OnFungusEventTrigger?.Invoke(blockName);
     }
 
 }

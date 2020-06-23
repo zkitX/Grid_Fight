@@ -239,7 +239,7 @@ public class CharacterLoadInformation
     public string squadBonusDetails = ""; //Replace this with an actual class in the future, that contains this display info
     public CharacterNameType characterID = CharacterNameType.None;
     public CharacterClassType charClass = CharacterClassType.Desert;
-    public Conversation[] availableChats = new Conversation[0];
+    public List<string> availableChats = new List<string>();
     public float xp = 0f;
     public int Level
     {

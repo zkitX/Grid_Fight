@@ -202,5 +202,11 @@ public class CharSelectBox : MonoBehaviour
         selector?.SelectCurrent();
     }
 
+    public void SelectorChatAction()
+    {
+        if (selectionMode == SelectionMode.Squad) return;
+        selector?.TalkToCurrent();
+    }
+
     
 }

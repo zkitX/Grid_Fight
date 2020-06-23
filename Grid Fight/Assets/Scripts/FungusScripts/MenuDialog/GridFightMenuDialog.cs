@@ -178,7 +178,7 @@ public class GridFightMenuDialog : MenuDialog
 
     private void Instance_LeftJoystickUsedEvent(int player, InputDirection dir)
     {
-        if (Time.time > TimeOffset + CoolDown && BattleManagerScript.Instance.FungusState == FungusDialogType.Menu && isMenuReady)
+        if (Time.time > TimeOffset + CoolDown && isMenuReady && (BattleManagerScript.Instance == null || BattleManagerScript.Instance.FungusState == FungusDialogType.Menu))
         {
             if(SelectionIndex >=0 && SelectionIndex <= Boxes.Where(r => r.gameObject.activeInHierarchy).ToList().Count)
             {
@@ -205,14 +205,14 @@ public class GridFightMenuDialog : MenuDialog
     public void SelectMenu()
     {
 
-        AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Menus_SelectButton, AudioBus.MidPrio);
+        AudioManagerMk2.Instance?.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Menus_SelectButton, AudioBus.MidPrio);
         Boxes[SelectionIndex].BoxAnim.SetBool("isSelected", true);
     }
 
 
     private void Instance_ButtonADownEvent(int player)
     {
-        if(BattleManagerScript.Instance.FungusState == FungusDialogType.Menu && isMenuReady)
+        if(isMenuReady && (BattleManagerScript.Instance == null || BattleManagerScript.Instance.FungusState == FungusDialogType.Menu))
         {
             Boxes[SelectionIndex].NextBlock.StartExecution();
 
@@ -250,7 +250,7 @@ public class GridFightMenuDialog : MenuDialog
 
     private IEnumerator ClearMenu(float delay)
     {
-        AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_Exiting, AudioBus.MidPrio);
+        AudioManagerMk2.Instance?.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_Exiting, AudioBus.MidPrio);
         yield return new WaitForSecondsRealtime(delay);
         SelectionIndex = 0;
         Clear();

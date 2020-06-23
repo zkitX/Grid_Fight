@@ -1752,6 +1752,7 @@ RectTransform:
   - {fileID: 339754058414661028}
   - {fileID: 339754058227048672}
   - {fileID: 4942271344182846081}
+  - {fileID: 7355968903279128911}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1846,7 +1847,267 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 472694f2c1d023f4e850912e8ddfba70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activators: []
+  activators:
+  - Name: 3 actions triggred by 0 input
+    ID: MenuChatTransition
+    input: 
+    workingStates: 
+    actions:
+    - Name: 1 Unity Events
+      uiActions: []
+      useStandardUnityEventsInstead: 1
+      waitBefore: 0
+      waitAfter: 0
+      events:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 6789355152591133307}
+            m_MethodName: SetActive
+            m_Mode: 6
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 1
+            m_CallState: 2
+    - Name: 2 Ui Actions
+      uiActions:
+      - Name: Set navigation
+        parentButton: {fileID: 0}
+        actionType: 7
+        pauseTime: 0
+        changeColorOf: 0
+        changeColorText: {fileID: 0}
+        changeColorImage: {fileID: 0}
+        changeThingColorOnThisObject: 0
+        colorToChangeTo: {r: 0, g: 0, b: 0, a: 0}
+        thingToAnimate: {fileID: 191127915579467623}
+        animateThis: 0
+        animationClipToPlay: {fileID: 7400000, guid: 119969efda3eea84292a424f9ea9cdf6,
+          type: 2}
+        holdForAnimation: 0
+        reselectButtonFromStartingDirection: 0
+        setSelectionButton: {fileID: 0}
+        setSelectionForThisButtom: 0
+        setSelectionType: 0
+        ignoreDeselectEventsForAllOtherButtons: 0
+        setFocusedPanel: {fileID: 0}
+        setFocusForPreviousPanel: 0
+        setFocusForThisPanel: 0
+        setPanelFocusType: 0
+        setPanelActiveStateAswell: 0
+        activationPauseBefore: 0
+        activationPauseAfter: 0
+        activationObject: {fileID: 0}
+        setActiveState: 0
+        navigationType1: 0
+        navigationState1: 0
+        navigationType2: 0
+        navigationState2: 0
+        navigationType3: 0
+        navigationState3: 0
+        setNavigationAbsolute: 1
+        briefing: {fileID: 0}
+        stageForBriefing: {fileID: 0}
+        worldMenuRef: {fileID: 0}
+        focusMapTiming: 0
+        thingToFocusMapOn: {fileID: 0}
+        focusMapZoom: 0
+        focusMapOnScreenCentre: 0
+        screenPositionOffset: {x: 0, y: 0}
+        pauseTillEndOfFocus: 0
+        enablingCollectionID: 
+        collectionEnableState: 0
+        sceneSwitchType: 0
+        ResolutionMenu: {fileID: 0}
+        resolutionMenuChange: 0
+      - Name: Play WhiteOutEnter on WhiteOut
+        parentButton: {fileID: 0}
+        actionType: 3
+        pauseTime: 0
+        changeColorOf: 0
+        changeColorText: {fileID: 0}
+        changeColorImage: {fileID: 0}
+        changeThingColorOnThisObject: 0
+        colorToChangeTo: {r: 0, g: 0, b: 0, a: 0}
+        thingToAnimate: {fileID: 191127915579467623}
+        animateThis: 0
+        animationClipToPlay: {fileID: 7400000, guid: 119969efda3eea84292a424f9ea9cdf6,
+          type: 2}
+        holdForAnimation: 1
+        reselectButtonFromStartingDirection: 0
+        setSelectionButton: {fileID: 0}
+        setSelectionForThisButtom: 0
+        setSelectionType: 0
+        ignoreDeselectEventsForAllOtherButtons: 0
+        setFocusedPanel: {fileID: 0}
+        setFocusForPreviousPanel: 0
+        setFocusForThisPanel: 0
+        setPanelFocusType: 0
+        setPanelActiveStateAswell: 0
+        activationPauseBefore: 0
+        activationPauseAfter: 0
+        activationObject: {fileID: 0}
+        setActiveState: 0
+        navigationType1: 0
+        navigationState1: 0
+        navigationType2: 0
+        navigationState2: 0
+        navigationType3: 0
+        navigationState3: 0
+        setNavigationAbsolute: 0
+        briefing: {fileID: 0}
+        stageForBriefing: {fileID: 0}
+        worldMenuRef: {fileID: 0}
+        focusMapTiming: 0
+        thingToFocusMapOn: {fileID: 0}
+        focusMapZoom: 0
+        focusMapOnScreenCentre: 0
+        screenPositionOffset: {x: 0, y: 0}
+        pauseTillEndOfFocus: 0
+        enablingCollectionID: 
+        collectionEnableState: 0
+        sceneSwitchType: 0
+        ResolutionMenu: {fileID: 0}
+        resolutionMenuChange: 0
+      useStandardUnityEventsInstead: 0
+      waitBefore: 0
+      waitAfter: 0
+      events:
+        m_PersistentCalls:
+          m_Calls: []
+  - Name: 3 actions triggred by 0 input
+    ID: ChatMenuTransition
+    input: 
+    workingStates: 
+    actions:
+    - Name: 2 Ui Actions
+      uiActions:
+      - Name: Play WhiteOutExit on WhiteOut
+        parentButton: {fileID: 0}
+        actionType: 3
+        pauseTime: 0
+        changeColorOf: 0
+        changeColorText: {fileID: 0}
+        changeColorImage: {fileID: 0}
+        changeThingColorOnThisObject: 0
+        colorToChangeTo: {r: 0, g: 0, b: 0, a: 0}
+        thingToAnimate: {fileID: 191127915579467623}
+        animateThis: 0
+        animationClipToPlay: {fileID: 7400000, guid: a4795379ac58dfb4d9937f3fb7c0373a,
+          type: 2}
+        holdForAnimation: 1
+        reselectButtonFromStartingDirection: 0
+        setSelectionButton: {fileID: 0}
+        setSelectionForThisButtom: 0
+        setSelectionType: 0
+        ignoreDeselectEventsForAllOtherButtons: 0
+        setFocusedPanel: {fileID: 0}
+        setFocusForPreviousPanel: 0
+        setFocusForThisPanel: 0
+        setPanelFocusType: 0
+        setPanelActiveStateAswell: 0
+        activationPauseBefore: 0
+        activationPauseAfter: 0
+        activationObject: {fileID: 0}
+        setActiveState: 0
+        navigationType1: 0
+        navigationState1: 0
+        navigationType2: 0
+        navigationState2: 0
+        navigationType3: 0
+        navigationState3: 0
+        setNavigationAbsolute: 0
+        briefing: {fileID: 0}
+        stageForBriefing: {fileID: 0}
+        worldMenuRef: {fileID: 0}
+        focusMapTiming: 0
+        thingToFocusMapOn: {fileID: 0}
+        focusMapZoom: 0
+        focusMapOnScreenCentre: 0
+        screenPositionOffset: {x: 0, y: 0}
+        pauseTillEndOfFocus: 0
+        enablingCollectionID: 
+        collectionEnableState: 0
+        sceneSwitchType: 0
+        ResolutionMenu: {fileID: 0}
+        resolutionMenuChange: 0
+      - Name: Set navigation
+        parentButton: {fileID: 0}
+        actionType: 7
+        pauseTime: 0
+        changeColorOf: 0
+        changeColorText: {fileID: 0}
+        changeColorImage: {fileID: 0}
+        changeThingColorOnThisObject: 0
+        colorToChangeTo: {r: 0, g: 0, b: 0, a: 0}
+        thingToAnimate: {fileID: 191127915579467623}
+        animateThis: 0
+        animationClipToPlay: {fileID: 7400000, guid: 119969efda3eea84292a424f9ea9cdf6,
+          type: 2}
+        holdForAnimation: 1
+        reselectButtonFromStartingDirection: 0
+        setSelectionButton: {fileID: 0}
+        setSelectionForThisButtom: 0
+        setSelectionType: 0
+        ignoreDeselectEventsForAllOtherButtons: 0
+        setFocusedPanel: {fileID: 0}
+        setFocusForPreviousPanel: 0
+        setFocusForThisPanel: 0
+        setPanelFocusType: 0
+        setPanelActiveStateAswell: 0
+        activationPauseBefore: 0
+        activationPauseAfter: 0
+        activationObject: {fileID: 0}
+        setActiveState: 0
+        navigationType1: 1
+        navigationState1: 1
+        navigationType2: 3
+        navigationState2: 1
+        navigationType3: 0
+        navigationState3: 0
+        setNavigationAbsolute: 1
+        briefing: {fileID: 0}
+        stageForBriefing: {fileID: 0}
+        worldMenuRef: {fileID: 0}
+        focusMapTiming: 0
+        thingToFocusMapOn: {fileID: 0}
+        focusMapZoom: 0
+        focusMapOnScreenCentre: 0
+        screenPositionOffset: {x: 0, y: 0}
+        pauseTillEndOfFocus: 0
+        enablingCollectionID: 
+        collectionEnableState: 0
+        sceneSwitchType: 0
+        ResolutionMenu: {fileID: 0}
+        resolutionMenuChange: 0
+      useStandardUnityEventsInstead: 0
+      waitBefore: 0
+      waitAfter: 0
+      events:
+        m_PersistentCalls:
+          m_Calls: []
+    - Name: 1 Unity Events
+      uiActions: []
+      useStandardUnityEventsInstead: 1
+      waitBefore: 0
+      waitAfter: 0
+      events:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 6789355152591133307}
+            m_MethodName: SetActive
+            m_Mode: 6
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
 --- !u!1 &339754059235658480
 GameObject:
   m_ObjectHideFlags: 0
@@ -5860,6 +6121,30 @@ MonoBehaviour:
           m_Calls:
           - m_Target: {fileID: 1331992245163055657}
             m_MethodName: SelectorSelectAction
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: -1
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+  - Name: CharSelect_TalkAction >  1 actions triggred by 1 inputs
+    ID: CharSelect_TalkAction
+    input: 03000000
+    workingStates: 
+    actions:
+    - Name: 1 Unity Events
+      uiActions: []
+      useStandardUnityEventsInstead: 1
+      waitBefore: 0
+      waitAfter: 0
+      events:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 1331992245163055657}
+            m_MethodName: SelectorChatAction
             m_Mode: 1
             m_Arguments:
               m_ObjectArgument: {fileID: 0}
@@ -11066,6 +11351,110 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &6789355152591133307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7355968903279128911}
+  - component: {fileID: 7634271447873541224}
+  - component: {fileID: 4792854394520681851}
+  - component: {fileID: 3976817784613758658}
+  - component: {fileID: 191127915579467623}
+  m_Layer: 5
+  m_Name: WhiteOut
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &7355968903279128911
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6789355152591133307}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 339754059231548213}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7634271447873541224
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6789355152591133307}
+  m_CullTransparentMesh: 0
+--- !u!114 &4792854394520681851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6789355152591133307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!225 &3976817784613758658
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6789355152591133307}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!111 &191127915579467623
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6789355152591133307}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 119969efda3eea84292a424f9ea9cdf6, type: 2}
+  - {fileID: 7400000, guid: a4795379ac58dfb4d9937f3fb7c0373a, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &6847839498159375154
 GameObject:
   m_ObjectHideFlags: 0
@@ -14901,6 +15290,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2862111b193b5844c85b07a7e7ad258a, type: 3}
+--- !u!224 &43879291314063852 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 300878606658845980, guid: 2862111b193b5844c85b07a7e7ad258a,
+    type: 3}
+  m_PrefabInstance: {fileID: 339754058060362992}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3957467131876822159 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3628973206760732799, guid: 2862111b193b5844c85b07a7e7ad258a,
@@ -14913,12 +15308,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5f302bc08167c4d85942496ed42ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &43879291314063852 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 300878606658845980, guid: 2862111b193b5844c85b07a7e7ad258a,
-    type: 3}
-  m_PrefabInstance: {fileID: 339754058060362992}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &339754058121769540
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17294,6 +17683,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2862111b193b5844c85b07a7e7ad258a, type: 3}
+--- !u!224 &43879290845951936 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 300878606658845980, guid: 2862111b193b5844c85b07a7e7ad258a,
+    type: 3}
+  m_PrefabInstance: {fileID: 339754058530441948}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3957467132347183779 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3628973206760732799, guid: 2862111b193b5844c85b07a7e7ad258a,
@@ -17306,12 +17701,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5f302bc08167c4d85942496ed42ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &43879290845951936 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 300878606658845980, guid: 2862111b193b5844c85b07a7e7ad258a,
-    type: 3}
-  m_PrefabInstance: {fileID: 339754058530441948}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &339754058686924763
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20370,6 +20759,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2862111b193b5844c85b07a7e7ad258a, type: 3}
+--- !u!224 &43879292538687561 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 300878606658845980, guid: 2862111b193b5844c85b07a7e7ad258a,
+    type: 3}
+  m_PrefabInstance: {fileID: 339754059217612117}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3957467132765902122 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3628973206760732799, guid: 2862111b193b5844c85b07a7e7ad258a,
@@ -20382,12 +20777,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5f302bc08167c4d85942496ed42ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &43879292538687561 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 300878606658845980, guid: 2862111b193b5844c85b07a7e7ad258a,
-    type: 3}
-  m_PrefabInstance: {fileID: 339754059217612117}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &339754059473499505
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22556,6 +22945,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2862111b193b5844c85b07a7e7ad258a, type: 3}
+--- !u!224 &43879292775479636 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 300878606658845980, guid: 2862111b193b5844c85b07a7e7ad258a,
+    type: 3}
+  m_PrefabInstance: {fileID: 339754059517559880}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3957467133069802551 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3628973206760732799, guid: 2862111b193b5844c85b07a7e7ad258a,
@@ -22568,12 +22963,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5f302bc08167c4d85942496ed42ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &43879292775479636 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 300878606658845980, guid: 2862111b193b5844c85b07a7e7ad258a,
-    type: 3}
-  m_PrefabInstance: {fileID: 339754059517559880}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &339754059522454363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22863,6 +23252,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2862111b193b5844c85b07a7e7ad258a, type: 3}
+--- !u!224 &43879292773273159 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 300878606658845980, guid: 2862111b193b5844c85b07a7e7ad258a,
+    type: 3}
+  m_PrefabInstance: {fileID: 339754059522454363}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3957467133066545956 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3628973206760732799, guid: 2862111b193b5844c85b07a7e7ad258a,
@@ -22875,12 +23270,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5f302bc08167c4d85942496ed42ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &43879292773273159 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 300878606658845980, guid: 2862111b193b5844c85b07a7e7ad258a,
-    type: 3}
-  m_PrefabInstance: {fileID: 339754059522454363}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &339754059542177685
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25474,11 +25863,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 230987002977126872}
     m_Modifications:
-    - target: {fileID: 7892016541654350328, guid: 5937afcec2d250d4bbee00a0acbef2e2,
-        type: 3}
-      propertyPath: maskType
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 6625667673025461398, guid: 5937afcec2d250d4bbee00a0acbef2e2,
         type: 3}
       propertyPath: m_Name
@@ -25589,6 +25973,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7892016541654350328, guid: 5937afcec2d250d4bbee00a0acbef2e2,
+        type: 3}
+      propertyPath: maskType
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5937afcec2d250d4bbee00a0acbef2e2, type: 3}
 --- !u!224 &5976310369416793933 stripped
@@ -25604,11 +25993,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 230987002977126872}
     m_Modifications:
-    - target: {fileID: 7892016541654350328, guid: 5937afcec2d250d4bbee00a0acbef2e2,
-        type: 3}
-      propertyPath: maskType
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6625667673025461398, guid: 5937afcec2d250d4bbee00a0acbef2e2,
         type: 3}
       propertyPath: m_Name
@@ -25719,6 +26103,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7892016541654350328, guid: 5937afcec2d250d4bbee00a0acbef2e2,
+        type: 3}
+      propertyPath: maskType
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5937afcec2d250d4bbee00a0acbef2e2, type: 3}
 --- !u!224 &5917290782837002758 stripped
@@ -25734,11 +26123,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 230987002977126872}
     m_Modifications:
-    - target: {fileID: 7892016541654350328, guid: 5937afcec2d250d4bbee00a0acbef2e2,
-        type: 3}
-      propertyPath: maskType
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 6625667673025461398, guid: 5937afcec2d250d4bbee00a0acbef2e2,
         type: 3}
       propertyPath: m_Name
@@ -25848,6 +26232,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892016541654350328, guid: 5937afcec2d250d4bbee00a0acbef2e2,
+        type: 3}
+      propertyPath: maskType
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5937afcec2d250d4bbee00a0acbef2e2, type: 3}
@@ -26124,11 +26513,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 230987002977126872}
     m_Modifications:
-    - target: {fileID: 7892016541654350328, guid: 5937afcec2d250d4bbee00a0acbef2e2,
-        type: 3}
-      propertyPath: maskType
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 6625667673025461398, guid: 5937afcec2d250d4bbee00a0acbef2e2,
         type: 3}
       propertyPath: m_Name
@@ -26238,6 +26622,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892016541654350328, guid: 5937afcec2d250d4bbee00a0acbef2e2,
+        type: 3}
+      propertyPath: maskType
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5937afcec2d250d4bbee00a0acbef2e2, type: 3}
@@ -26774,11 +27163,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 230987002977126872}
     m_Modifications:
-    - target: {fileID: 7892016541654350328, guid: 5937afcec2d250d4bbee00a0acbef2e2,
-        type: 3}
-      propertyPath: maskType
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 6625667673025461398, guid: 5937afcec2d250d4bbee00a0acbef2e2,
         type: 3}
       propertyPath: m_Name
@@ -26888,6 +27272,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892016541654350328, guid: 5937afcec2d250d4bbee00a0acbef2e2,
+        type: 3}
+      propertyPath: maskType
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5937afcec2d250d4bbee00a0acbef2e2, type: 3}
@@ -27034,11 +27423,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 230987002977126872}
     m_Modifications:
-    - target: {fileID: 7892016541654350328, guid: 5937afcec2d250d4bbee00a0acbef2e2,
-        type: 3}
-      propertyPath: maskType
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 6625667673025461398, guid: 5937afcec2d250d4bbee00a0acbef2e2,
         type: 3}
       propertyPath: m_Name
@@ -27148,6 +27532,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892016541654350328, guid: 5937afcec2d250d4bbee00a0acbef2e2,
+        type: 3}
+      propertyPath: maskType
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5937afcec2d250d4bbee00a0acbef2e2, type: 3}
@@ -27459,11 +27848,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 230987002977126872}
     m_Modifications:
-    - target: {fileID: 7892016541654350328, guid: 5937afcec2d250d4bbee00a0acbef2e2,
-        type: 3}
-      propertyPath: maskType
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6625667673025461398, guid: 5937afcec2d250d4bbee00a0acbef2e2,
         type: 3}
       propertyPath: m_Name
@@ -27573,6 +27957,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892016541654350328, guid: 5937afcec2d250d4bbee00a0acbef2e2,
+        type: 3}
+      propertyPath: maskType
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5937afcec2d250d4bbee00a0acbef2e2, type: 3}
@@ -27979,11 +28368,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 230987002977126872}
     m_Modifications:
-    - target: {fileID: 7892016541654350328, guid: 5937afcec2d250d4bbee00a0acbef2e2,
-        type: 3}
-      propertyPath: maskType
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 6625667673025461398, guid: 5937afcec2d250d4bbee00a0acbef2e2,
         type: 3}
       propertyPath: m_Name
@@ -28093,6 +28477,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892016541654350328, guid: 5937afcec2d250d4bbee00a0acbef2e2,
+        type: 3}
+      propertyPath: maskType
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5937afcec2d250d4bbee00a0acbef2e2, type: 3}
@@ -28239,11 +28628,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 230987002977126872}
     m_Modifications:
-    - target: {fileID: 7892016541654350328, guid: 5937afcec2d250d4bbee00a0acbef2e2,
-        type: 3}
-      propertyPath: maskType
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 6625667673025461398, guid: 5937afcec2d250d4bbee00a0acbef2e2,
         type: 3}
       propertyPath: m_Name
@@ -28353,6 +28737,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892016541654350328, guid: 5937afcec2d250d4bbee00a0acbef2e2,
+        type: 3}
+      propertyPath: maskType
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5937afcec2d250d4bbee00a0acbef2e2, type: 3}
@@ -28499,11 +28888,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 230987002977126872}
     m_Modifications:
-    - target: {fileID: 7892016541654350328, guid: 5937afcec2d250d4bbee00a0acbef2e2,
-        type: 3}
-      propertyPath: maskType
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6625667673025461398, guid: 5937afcec2d250d4bbee00a0acbef2e2,
         type: 3}
       propertyPath: m_Name
@@ -28614,8 +28998,19 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7892016541654350328, guid: 5937afcec2d250d4bbee00a0acbef2e2,
+        type: 3}
+      propertyPath: maskType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5937afcec2d250d4bbee00a0acbef2e2, type: 3}
+--- !u!224 &2546934574661815891 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6537669977752255568, guid: 5937afcec2d250d4bbee00a0acbef2e2,
+    type: 3}
+  m_PrefabInstance: {fileID: 8782863374943285763}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4733013735746222659 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4057168624253323328, guid: 5937afcec2d250d4bbee00a0acbef2e2,
@@ -28628,12 +29023,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5f302bc08167c4d85942496ed42ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &2546934574661815891 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6537669977752255568, guid: 5937afcec2d250d4bbee00a0acbef2e2,
-    type: 3}
-  m_PrefabInstance: {fileID: 8782863374943285763}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9117941323651148228
 PrefabInstance:
   m_ObjectHideFlags: 0

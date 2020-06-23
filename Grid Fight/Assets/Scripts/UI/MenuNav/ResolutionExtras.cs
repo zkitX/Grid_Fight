@@ -20,7 +20,8 @@ public class ResolutionExtras : MonoBehaviour
         bool indent = true;
         for (int i = 0; i < BattleInfoManagerScript.Instance.PlayerBattleInfo.Count; i++)
         {
-            Tallies.Add(Instantiate(tallyPrefab, spawnPoint, Quaternion.identity, transform).GetComponent<Grid_UITally>());
+            Tallies.Add(Instantiate(tallyPrefab, spawnPoint, Quaternion.identity, tallyStartPoint).GetComponent<Grid_UITally>());
+            Tallies[i].transform.SetAsFirstSibling();
             Tallies[i].SetupTally(BattleInfoManagerScript.Instance.PlayerBattleInfo[i].CharacterName, indent);
             Tallies[i].GetComponent<CanvasGroup>().alpha = 0;
 

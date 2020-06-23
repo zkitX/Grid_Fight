@@ -442,7 +442,13 @@ public class Grid_UINavigator : MonoBehaviour
         }
     }
 
-
+    public IEnumerator TriggerUIActivatorCo(string identifier)
+    {
+        foreach (Grid_UICollection col in ActiveCollections)
+        {
+            yield return col.UIActivators.DoActionByNameCo(identifier);
+        }
+    }
 
 
 
