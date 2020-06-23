@@ -353,7 +353,17 @@ public class BattleManagerScript : MonoBehaviour
 
     public IEnumerator InstanciateAllChar()
     {
-        PlayerBattleInfo = LoaderManagerScript.Instance != null ? LoaderManagerScript.Instance.PlayerBattleInfo : BattleInfoManagerScript.Instance.PlayerBattleInfo;
+        //Temporary way of loading characters into the squad from the char selection menu system
+        if (SceneLoadManager.Instance != null)
+        {
+            for (int i = 0; i < BattleInfoManagerScript.Instance.PlayerBattleInfo.Count; i++)
+            {
+                BattleInfoManagerScript.Instance.PlayerBattleInfo[i].CharacterName = SceneLoadManager.Instance.squad[i].characterID;
+            }
+        }
+        PlayerBattleInfo = BattleInfoManagerScript.Instance.PlayerBattleInfo;
+        //
+
         foreach (CharacterBaseInfoClass item in PlayerBattleInfo)
         {
             AllCharactersOnField.Add(CreateChar(item, CharactersContainer));
