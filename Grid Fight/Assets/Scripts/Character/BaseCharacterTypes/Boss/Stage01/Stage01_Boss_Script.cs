@@ -48,12 +48,13 @@ public class Stage01_Boss_Script : MinionType_Script
                     {
                         nextAttackPos = targetChar.UMS.CurrentTilePos;
                         yield return AttackSequence();
+                        yield return BattleManagerScript.Instance.WaitFor(1, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
                     }
                     else
                     {
                         targetChar = GetTargetChar(enemys);
                         yield return Teleport_Co(targetChar);
-                        yield return new WaitForSeconds(1);
+                        yield return BattleManagerScript.Instance.WaitFor(1, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
                     }
                 }
                 yield return null;
@@ -235,8 +236,6 @@ public class Stage01_Boss_Script : MinionType_Script
                     }
                     break;
             }
-
-
         }
 
         base.SetAnimation(CurrentPhase.ToString() + "_" + animState, loop, transition, _pauseOnLastFrame);
@@ -268,6 +267,18 @@ public class Stage01_Boss_Script : MinionType_Script
         {
             currentAttackPhase = AttackPhasesType.End;
             Attacking = false;
+            if(completedAnim.Contains("Atk2_AtkToIdle"))
+            {
+                if (FaceChangingWarDrums == null)
+                {
+                    FaceChangingWarDrums = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_FaceChanging_WarDrums);
+                    AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, CharInfo.AudioProfile.Skill3.Cast, AudioBus.MidPrio, transform);
+                }
+                FaceChangingWarDrums.transform.parent = SpineAnim.transform;
+                FaceChangingWarDrums.transform.localPosition = Vector3.zero;
+                FaceChangingWarDrums.SetActive(true);
+                CurrentPhase = Stage01_Boss_MaskType.WarDrums;
+            }
         }
 
         if (completedAnim.Contains(CharacterAnimationStateType.Arriving.ToString()))
