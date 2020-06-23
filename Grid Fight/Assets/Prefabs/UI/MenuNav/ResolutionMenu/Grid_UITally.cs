@@ -58,9 +58,9 @@ public class Grid_UITally : MonoBehaviour
 
         info = StatisticInfoManagerScript.Instance.GetCharacterStatsFor(character);
 
-        if(BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == character).FirstOrDefault().CharInfo.CharacterIcons[2] != null)
+        if(BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == character).FirstOrDefault().CharInfo.CharacterIcon != null)
         {
-            portrait.sprite = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == character).FirstOrDefault().CharInfo.CharacterIcons[2];
+            portrait.sprite = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == character).FirstOrDefault().CharInfo.CharacterIcon;
         }
        // if (outDented) portrait.transform.position = startPortraitTransform.position - new Vector3((portrait.rectTransform.sizeDelta.x / 2f), 0f);
 

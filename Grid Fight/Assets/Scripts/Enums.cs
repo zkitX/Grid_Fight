@@ -271,12 +271,14 @@ public enum WeaponType
 }
 
 
+
 public enum MatchType
 {
     PvE,
     PvP,
     PPvE,
-    PPvPP
+    PPvPP,
+    PPPPvE
 }
 
 public enum CharacterSelectionType
@@ -516,7 +518,10 @@ public enum ParticlesType
     Stage01_Boss_CrystalTomb_Effect,
     PowerUp_Shield,
     Skill_Darkening,
-    Skill_Mind_1_Loop
+    Skill_Mind_1_Loop,
+    Skill_Mind_2_Loop,
+    Skill_Mind_2_Teleporting
+
 }
 
 

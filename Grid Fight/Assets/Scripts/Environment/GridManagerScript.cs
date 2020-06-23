@@ -158,6 +158,15 @@ public class GridManagerScript : MonoBehaviour
                 {
                     return SideType.LeftSide;
                 }
+            case MatchType.PPPPvE:
+                if (ct == ControllerType.Enemy)
+                {
+                    return SideType.RightSide;
+                }
+                else
+                {
+                    return SideType.LeftSide;
+                }
         }
 
         return SideType.LeftSide;

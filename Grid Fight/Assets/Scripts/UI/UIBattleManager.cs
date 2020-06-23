@@ -81,6 +81,15 @@ public class UIBattleManager : MonoBehaviour
                 currentPlayers.Add(2, PlayerC);
                 currentPlayers.Add(3, PlayerD);
                 break;
+            case MatchType.PPPPvE:
+                PlayerA.SetupPlayer(0);
+                PlayerC.SetupPlayer(1);
+                PlayerB.CurrentCanvasGroup.alpha = 0;
+                PlayerD.CurrentCanvasGroup.alpha = 0;
+                currentPlayers.Add(0, PlayerA);
+                currentPlayers.Add(1, PlayerC);
+                currentPlayers.Add(4, PlayerB);
+                break;
         }
     }
 

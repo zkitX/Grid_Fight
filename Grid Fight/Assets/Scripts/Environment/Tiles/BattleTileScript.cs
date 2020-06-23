@@ -17,7 +17,6 @@ public class BattleTileScript : MonoBehaviour
         }
         set
         {
-            Debug.Log(Pos + "   " + value);
             _BattleTileState = value;
         }
     }

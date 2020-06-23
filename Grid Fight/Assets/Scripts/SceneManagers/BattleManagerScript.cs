@@ -130,7 +130,7 @@ public class BattleManagerScript : MonoBehaviour
     };
     public List<ScriptableObjectCharacterPrefab> ListOfScriptableObjectCharacterPrefab = new List<ScriptableObjectCharacterPrefab>();
     public List<BaseCharacter> AllCharactersOnField = new List<BaseCharacter>();
-
+    public List<BaseCharacter> AllPlayersMinionOnField = new List<BaseCharacter>();
     public List<BaseCharacter> CharsForTalkingPart = new List<BaseCharacter>();
 
     public List<CharacterLoadingInfoClass> CurrentCharactersLoadingInfo = new List<CharacterLoadingInfoClass>();
@@ -374,6 +374,9 @@ public class BattleManagerScript : MonoBehaviour
                 UIBattleManager.Instance.UICharacterSelectionLeft.gameObject.SetActive(true);
                 UIBattleManager.Instance.UICharacterSelectionRight.gameObject.SetActive(true);
                 break;
+            case MatchType.PPPPvE:
+                UIBattleManager.Instance.UICharacterSelectionLeft.gameObject.SetActive(true);
+                break;
         }
         foreach (BaseCharacter playableCharOnScene in AllCharactersOnField)
         {
@@ -575,37 +578,72 @@ public class BattleManagerScript : MonoBehaviour
 
     IEnumerator MinionType_Zombification_Co(BaseCharacter zombie)
     {
-
-        GameObject zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_MoonDrums_Loop);
+        //Set up the PS and reset the anim
+        GameObject zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Skill_Mind_2_Teleporting);
         zombiePs.SetActive(true);
-        zombiePs.transform.parent = zombie.SpineAnim.transform;
-        zombiePs.transform.localPosition = Vector3.zero;
-        zombiePs.transform.localRotation = Quaternion.Euler(zombie.UMS.Side == SideType.LeftSide ? Vector3.zero : zombiePs.transform.eulerAngles);
-        zombie.SetAnimation(CharacterAnimationStateType.Idle);
+        zombiePs.transform.position = zombie.SpineAnim.transform.position;
+        zombie.SpineAnim.SetAnim(CharacterAnimationStateType.Idle);
+        zombie.SetAttackReady(false);
 
+        //Wait for 1 sec
         yield return WaitFor(1, () => CurrentBattleState != BattleState.Battle);
-
         yield return MoveCharToBoardWithDelay(0.1f, zombie, new Vector3(-100, -100, -100));
 
-        zombie.transform.parent = transform;
+        //Emptying the occupied tiles
+        foreach (Vector2Int item in zombie.UMS.Pos)
+        {
+            GridManagerScript.Instance.SetBattleTileState(item, BattleTileStateType.Empty);
+        }
+
+        //Set up animation to be clear and with the idle anim
+        zombie.SpineAnim.SpineAnimationState.ClearTracks();
+        zombie.SpineAnim.SetAnim(CharacterAnimationStateType.Idle);
+
+        //Set up attack
+        zombie.Attacking = false;
+        zombie.shotsLeftInAttack = 0;
+
+        //Delete subscription to events
         zombie.SpineAnim.SpineAnimationState.Event -= zombie.SpineAnimationState_Event;
         zombie.SpineAnim.SpineAnimationState.Complete -= zombie.SpineAnimationState_Complete;
+        zombie.CharInfo.BaseSpeedChangedEvent -= zombie._CharInfo_BaseSpeedChangedEvent;
+        zombie.CharInfo.DeathEvent -= zombie._CharInfo_DeathEvent;
+
+        // remove char from Wave
         WaveManagerScript.Instance.WaveCharcters.Remove(zombie);
-        PlayerMinionType_Script playerZombie = zombie.gameObject.AddComponent<PlayerMinionType_Script>();
+
+
+        //Getting char
+        PlayerMinionType_Script playerZombie = zombie.GetComponent<PlayerMinionType_Script>();
+        if(playerZombie == null)
+        {
+            playerZombie = zombie.gameObject.AddComponent<PlayerMinionType_Script>();
+        }
+        
+        AllPlayersMinionOnField.Add(playerZombie);
+        zombie.enabled = false;
+
+        //Set up charinfo and events
+        playerZombie._CharInfo = zombie.CharInfo;
+        playerZombie.CharInfo.BaseSpeedChangedEvent += playerZombie._CharInfo_BaseSpeedChangedEvent;
+        playerZombie.CharInfo.DeathEvent += playerZombie._CharInfo_DeathEvent;
+        playerZombie.CharInfo.CharacterSelection = (CharacterSelectionType)AllCharactersOnField.Count - 1;
+        playerZombie.CharInfo.BaseCharacterType = BaseCharType.CharacterType_Script;
+
+
+        //Set up UMS and side
         playerZombie.UMS = playerZombie.GetComponent<UnitManagementScript>();
         playerZombie.UMS.CharOwner = playerZombie;
         playerZombie.UMS.Side = zombie.UMS.Side == SideType.LeftSide ? SideType.RightSide : SideType.LeftSide;
         playerZombie.UMS.WalkingSide = zombie.UMS.WalkingSide == WalkingSideType.LeftSide ? WalkingSideType.RightSide : WalkingSideType.LeftSide;
         playerZombie.UMS.Facing = zombie.UMS.Facing == FacingType.Left ? FacingType.Right : FacingType.Left;
-        playerZombie.UMS.PlayerController = AllCharactersOnField[0].UMS.PlayerController;
-        playerZombie.UMS.UnitBehaviour = UnitBehaviourType.NPC;
-        playerZombie.CharInfo.CharacterSelection = (CharacterSelectionType)AllCharactersOnField.Count - 1;
-        playerZombie.CharInfo.BaseCharacterType = BaseCharType.CharacterType_Script;
+
+
+       
         playerZombie.CharActionlist.Add(CharacterActionType.Move);
-        Destroy(zombie.GetComponent<MinionType_Script>());
-        playerZombie.CharInfo.SetupChar();
-        playerZombie.CharInfo.HealthStats.Health = playerZombie.CharInfo.HealthStats.Base;
         playerZombie.SetupCharacterSide();
+
+        //Set up playerzombie position
         BattleTileScript bts = GridManagerScript.Instance.GetFreeBattleTile(playerZombie.UMS.WalkingSide);
         playerZombie.UMS.Pos.Clear();
         ScriptableObjectCharacterPrefab soCharacterPrefab = ListOfScriptableObjectCharacterPrefab.Where(r => r.CharacterName == playerZombie.CharInfo.CharacterID).First();
@@ -613,67 +651,88 @@ public class BattleManagerScript : MonoBehaviour
         {
             playerZombie.UMS.Pos.Add(item);
         }
+
+        zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Skill_Mind_2_Teleporting);
+        zombiePs.SetActive(true);
+        zombiePs.transform.position = bts.transform.position;
         yield return WaveManagerScript.Instance.SetCharInPos(playerZombie, bts, false);
 
+        //Duration on field 
+        yield return WaitFor(2, () => CurrentBattleState != BattleState.Battle, ()=> playerZombie.CharInfo.HealthPerc <= 0);
 
-        yield return WaitFor(200, () => CurrentBattleState != BattleState.Battle);
+
+        //Set up previous sides and charinfo
+        playerZombie.UMS.CharOwner = zombie;
+        playerZombie.UMS.Side = playerZombie.UMS.Side == SideType.LeftSide ? SideType.RightSide : SideType.LeftSide;
+        playerZombie.UMS.WalkingSide = playerZombie.UMS.WalkingSide == WalkingSideType.LeftSide ? WalkingSideType.RightSide : WalkingSideType.LeftSide;
+        playerZombie.UMS.Facing = playerZombie.UMS.Facing == FacingType.Left ? FacingType.Right : FacingType.Left;
+       
+        //Emptying previous position 
+        foreach (Vector2Int item in playerZombie.UMS.Pos)
+        {
+            GridManagerScript.Instance.SetBattleTileState(item, BattleTileStateType.Empty);
+        }
+
+        //resetting pos on char
+        playerZombie.UMS.Pos.Clear();
+        foreach (Vector2Int item in soCharacterPrefab.OccupiedTiles)
+        {
+            playerZombie.UMS.Pos.Add(item);
+        }
 
 
-        zombie.transform.position = bts.transform.position;
-        zombie.UMS.Side = zombie.UMS.Side == SideType.LeftSide ? SideType.RightSide : SideType.LeftSide;
-        zombie.UMS.WalkingSide = zombie.UMS.WalkingSide == WalkingSideType.LeftSide ? WalkingSideType.RightSide : WalkingSideType.LeftSide;
-        zombie.UMS.Facing = zombie.UMS.Facing == FacingType.Left ? FacingType.Right : FacingType.Left;
+
+        if (playerZombie.CharInfo.Health > 0)
+        {
+            //Wait 1 sec
+            zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Skill_Mind_2_Teleporting);
+            zombiePs.SetActive(true);
+            zombiePs.transform.position = playerZombie.SpineAnim.transform.position;
+            bts = GridManagerScript.Instance.GetFreeBattleTile(zombie.UMS.WalkingSide);
+            playerZombie.SpineAnim.SetAnim(CharacterAnimationStateType.Idle);
+            yield return WaitFor(1, () => CurrentBattleState != BattleState.Battle);
+            yield return MoveCharToBoardWithDelay(0.1f, playerZombie, new Vector3(-100, -100, -100));
+            //Restore char events + anims
+            playerZombie.SpineAnim.SpineAnimationState.ClearTracks();
+            playerZombie.SpineAnim.SetAnim(CharacterAnimationStateType.Idle);
+            playerZombie.SpineAnim.SpineAnimationState.Event -= playerZombie.SpineAnimationState_Event;
+            playerZombie.SpineAnim.SpineAnimationState.Complete -= playerZombie.SpineAnimationState_Complete;
+            playerZombie.CharInfo.BaseSpeedChangedEvent -= playerZombie._CharInfo_BaseSpeedChangedEvent;
+            playerZombie.CharInfo.DeathEvent -= playerZombie._CharInfo_DeathEvent;
+            playerZombie.gameObject.SetActive(false);
+        }
+
+        AllPlayersMinionOnField.Remove(playerZombie);
+
+        //Wait until char is disabled
+        yield return WaitUntil(() => CurrentBattleState != BattleState.Battle, ()=> !playerZombie.gameObject.activeInHierarchy);
+
+        //Set up zombie char to previous state
+        playerZombie.SetAttackReady(false);
+        playerZombie.enabled = false;
+        zombie.enabled = true;
+        zombie.SpineAnim.SpineAnimationState.ClearTracks();
+        zombie.SpineAnim.SetAnim(CharacterAnimationStateType.Idle);
+        zombie.Attacking = false;
+        zombie.shotsLeftInAttack = 0;
         zombie.SetupCharacterSide();
-
-        yield return WaitFor(2, () => CurrentBattleState != BattleState.Battle);
-        zombiePs.transform.parent = null;
-        zombiePs.SetActive(false);
-
-        MinionType_Script zombiefied = zombiesList.Where(r => r.CharInfo.CharacterID == zombie.CharInfo.CharacterID).FirstOrDefault();
-        if (zombiefied == null)
+        zombie.CharInfo.BaseSpeedChangedEvent += zombie._CharInfo_BaseSpeedChangedEvent;
+        zombie.CharInfo.DeathEvent += zombie._CharInfo_DeathEvent;
+        zombie.UMS.Pos.Clear();
+        foreach (Vector2Int item in soCharacterPrefab.OccupiedTiles)
         {
-            zombiefied = (MinionType_Script)CreateChar(new CharacterBaseInfoClass(zombie.CharInfo.CharacterID.ToString(), CharacterSelectionType.Up,
-        new List<ControllerType> { ControllerType.Enemy }, zombie.CharInfo.CharacterID,
-        zombie.UMS.WalkingSide == WalkingSideType.LeftSide ? WalkingSideType.RightSide : WalkingSideType.LeftSide,
-        zombie.UMS.Side == SideType.LeftSide ? SideType.RightSide : SideType.LeftSide,
-        zombie.UMS.Facing == FacingType.Left ? FacingType.Right : FacingType.Left,
-        AttackType.Tile, BaseCharType.MinionType_Script, new List<CharacterActionType>(), LevelType.Novice), transform);
-            zombiesList.Add(zombiefied);
+            zombie.UMS.Pos.Add(item);
         }
-        zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_MoonDrums_Loop);
-        zombiePs.transform.parent = zombiefied.SpineAnim.transform;
-        zombiePs.transform.localPosition = Vector3.zero;
-        zombiePs.SetActive(true);
+        WaveManagerScript.Instance.WaveCharcters.Add(zombie);
 
-        StartCoroutine(WaveManagerScript.Instance.SetCharInPos(zombiefied, GridManagerScript.Instance.GetFreeBattleTile(zombiefied.UMS.WalkingSide, zombiefied.UMS.Pos), true));
-        zombiefied.CharActionlist.Add(CharacterActionType.Move);
-        while (zombie.BuffsDebuffsList.Where(r => r.Stat == BuffDebuffStatsType.Zombification).ToList().Count > 0)
+        if(zombie.CharInfo.Health > 0)
         {
-            yield return null;
+            zombie.gameObject.SetActive(true);
+            zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Skill_Mind_2_Teleporting);
+            zombiePs.SetActive(true);
+            zombiePs.transform.position = bts.transform.position;
+            yield return WaveManagerScript.Instance.SetCharInPos(zombie, bts, false);
         }
-        zombiefied.IsOnField = false;
-        while (zombiefied.isMoving || zombiefied.currentAttackPhase != AttackPhasesType.End)
-        {
-            yield return null;
-        }
-
-        zombiePs.transform.parent = null;
-        zombiePs.SetActive(false);
-        zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_MoonDrums_LoopCrumble);
-        zombiePs.SetActive(true);
-        zombiePs.transform.parent = zombiefied.SpineAnim.transform;
-        zombiePs.transform.localPosition = Vector3.zero;
-
-        yield return RemoveZombieFromBaord(zombiefied);
-        while (zombiefied.IsOnField)
-        {
-            yield return null;
-        }
-
-        zombiePs.transform.parent = null;
-        zombiePs.SetActive(false);
-        zombie.CharActionlist.Add(CharacterActionType.SwitchCharacter);
-
     }
 
 
@@ -713,6 +772,7 @@ public class BattleManagerScript : MonoBehaviour
              //SelectCharacter(playerController, (CharacterType_Script)AllCharactersOnField.Where(r => r.UMS.Side == side && r.CharInfo.CharacterID == cName).First());
          }
      }*/
+
 
 
     public IEnumerator MoveCharOnPos(CharacterNameType characterID, Vector2Int destination, bool holdForCompletedMove = true)
@@ -1001,6 +1061,31 @@ public class BattleManagerScript : MonoBehaviour
                             }
                             break;
                         case MatchType.PPvPP:
+                            if (playerController == ControllerType.Player1)
+                            {
+                                UIBattleManager.Instance.PlayerA.gameObject.SetActive(true);
+                                UIBattleManager.Instance.PlayerA.Anim.SetBool("FadeInOut", true);
+                            }
+
+                            if (playerController == ControllerType.Player2)
+                            {
+                                UIBattleManager.Instance.PlayerB.gameObject.SetActive(true);
+                                UIBattleManager.Instance.PlayerB.Anim.SetBool("FadeInOut", true);
+                            }
+
+                            if (playerController == ControllerType.Player3)
+                            {
+                                UIBattleManager.Instance.PlayerC.gameObject.SetActive(true);
+                                UIBattleManager.Instance.PlayerC.Anim.SetBool("FadeInOut", true);
+                            }
+
+                            if (playerController == ControllerType.Player4)
+                            {
+                                UIBattleManager.Instance.PlayerD.gameObject.SetActive(true);
+                                UIBattleManager.Instance.PlayerD.Anim.SetBool("FadeInOut", true);
+                            }
+                            break;
+                        case MatchType.PPPPvE:
                             if (playerController == ControllerType.Player1)
                             {
                                 UIBattleManager.Instance.PlayerA.gameObject.SetActive(true);
@@ -1317,6 +1402,8 @@ public class BattleManagerScript : MonoBehaviour
         MinionType_Script m = rC.GetComponent<MinionType_Script>();
         m.SpineAnim.SpineAnimationState.Event -= m.SpineAnimationState_Event;
         m.SpineAnim.SpineAnimationState.Complete -= m.SpineAnimationState_Complete;
+        m.CharInfo.BaseSpeedChangedEvent -= m._CharInfo_BaseSpeedChangedEvent;
+        m.CharInfo.DeathEvent -= m._CharInfo_DeathEvent;
         rC.SetActive(false);
         Destroy(rC.GetComponent<MinionType_Script>());
         CharacterType_Script recruitableChar = rC.AddComponent<CharacterType_Script>();
@@ -1375,6 +1462,11 @@ public class BattleManagerScript : MonoBehaviour
     {
         BaseCharacter cb = AllCharactersOnField.Where(r => r.IsOnField && r.UMS.Pos.Contains(pos)).FirstOrDefault();
 
+        if (cb == null)
+        {
+            cb = AllPlayersMinionOnField.Where(r => r.IsOnField && r.UMS.Pos.Contains(pos)).FirstOrDefault();
+        }
+
         if (cb == null && WaveManagerScript.Instance != null)
         {
             cb = WaveManagerScript.Instance.WaveCharcters.Where(r => r.IsOnField && r.UMS.Pos.Contains(pos)).FirstOrDefault();
@@ -1427,6 +1519,9 @@ public class BattleManagerScript : MonoBehaviour
                 return ct.Contains(ControllerType.Player1) || ct.Contains(ControllerType.Player2) ? SideType.LeftSide : SideType.RightSide;
             case MatchType.PPvPP:
                 return ct.Contains(ControllerType.Player1) || ct.Contains(ControllerType.Player2) ? SideType.LeftSide : SideType.RightSide;
+            case MatchType.PPPPvE:
+                return !ct.Contains(ControllerType.Enemy) ? SideType.LeftSide : SideType.RightSide;
+
         }
         return SideType.LeftSide;
     }
@@ -1474,6 +1569,14 @@ public class BattleManagerScript : MonoBehaviour
             {
                 yield break;
             }
+        }
+    }
+
+    public IEnumerator WaitUntil(System.Func<bool> pauseCondition, System.Func<bool> stopCondition)
+    {
+        while (!stopCondition())
+        {
+            yield return WaitUpdate(pauseCondition);
         }
     }
 

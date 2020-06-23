@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class CharacterType_Script : BaseCharacter
 {
+
+
+    public delegate void CurrentCharSkillCompleted(AttackInputType inputSkill, float duration);
+    public event CurrentCharSkillCompleted CurrentCharSkillCompletedEvent;
+
     protected bool MoveCoOn = true;
     public bool Atk1Queueing = false;
     [SerializeField] protected bool CharacterJumping = false;
@@ -49,12 +54,9 @@ public class CharacterType_Script : BaseCharacter
 
     public void CharacterInputHandler(InputActionType action)
     {
-        if (CharacterInputQueuer != null) StopCoroutine(CharacterInputQueuer);
-        CharacterInputQueuer = CharacterInputQueue(action);
-        StartCoroutine(CharacterInputQueuer);
+        StartCoroutine(CharacterInputQueue(action));
     }
 
-    IEnumerator CharacterInputQueuer = null;
     IEnumerator CharacterInputQueue(InputActionType action)
     {
         isSpecialStop = false;
@@ -131,10 +133,15 @@ public class CharacterType_Script : BaseCharacter
                         UMS.SetUnit(UnitBehaviourType.ControlledByPlayer);
                     }
                     break;
-            }
+            case MatchType.PPPPvE:
+                UMS.SetUnit(UnitBehaviourType.ControlledByPlayer);
+                break;
+        }
         UMS.SelectionIndicator.eulerAngles = new Vector3(0, 0, CharInfo.CharacterSelection == CharacterSelectionType.Up ? 90 :
             CharInfo.CharacterSelection == CharacterSelectionType.Down ? -90 :
             CharInfo.CharacterSelection == CharacterSelectionType.Left ? 180 : 0);
+        CharInfo.SetupChar();
+
     }
 
 
@@ -241,7 +248,7 @@ public class CharacterType_Script : BaseCharacter
                 StartCoroutine(StartChargingAttack(atkType));
                 break;
             case AttackInputType.Skill1:
-                if (!CharActionlist.Contains(CharacterActionType.Skill1))
+                if (!CharActionlist.Contains(CharacterActionType.Skill1) || CharInfo.Mask == null)
                 {
                     return;
                 }
@@ -249,14 +256,14 @@ public class CharacterType_Script : BaseCharacter
 
                 break;
             case AttackInputType.Skill2:
-                if (!CharActionlist.Contains(CharacterActionType.Skill2))
+                if (!CharActionlist.Contains(CharacterActionType.Skill2) || CharInfo.Mask == null)
                 {
                     return;
                 }
                 StartCoroutine(StartSkillAttack(AttackInputType.Skill2));
                 break;
             case AttackInputType.Skill3:
-                if (!CharActionlist.Contains(CharacterActionType.Skill3))
+                if (!CharActionlist.Contains(CharacterActionType.Skill3) || CharInfo.Mask == null)
                 {
                     return;
                 }
@@ -355,8 +362,8 @@ public class CharacterType_Script : BaseCharacter
                 {
                     while (isMoving)
                     {
-                        yield return new WaitForEndOfFrame();
-
+                        yield return null;
+                        Debug.Log("Moving");
                         if (StopPowerfulAtk == SpecialAttackStatus.Stop)
                         {
                             StopPowerfulAtk = SpecialAttackStatus.None;
@@ -402,12 +409,27 @@ public class CharacterType_Script : BaseCharacter
 
     public IEnumerator StartSkillAttack(AttackInputType inputSkill)
     {
-        ScriptableObjectAttackBase nxtAtk = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackInput == inputSkill).First();
+        ScriptableObjectAttackBase nxtAtk = null;
+
+        switch (inputSkill)
+        {
+            case AttackInputType.Skill1:
+                nxtAtk = CharInfo.Mask.Skill1;
+                break;
+            case AttackInputType.Skill2:
+                nxtAtk = CharInfo.Mask.Skill2;
+                break;
+            case AttackInputType.Skill3:
+                nxtAtk = CharInfo.Mask.Skill3;
+                break;
+        }
+
         SkillCoolDownClass  scdc = skillCoolDown.Where(r => r.Skill == inputSkill).First();
         if (!GetCanUseStamina(nxtAtk.StaminaCost) || scdc.IsCoGoing)
         {
             yield break;
         }
+
         nextAttack = nxtAtk;
         scdc.IsCoGoing = true;
         yield return BattleManagerScript.Instance.WaitUpdate(() => currentAttackPhase != AttackPhasesType.End);
@@ -425,6 +447,7 @@ public class CharacterType_Script : BaseCharacter
         BattleManagerScript.Instance.BattleSpeed = 1;
         SpineAnim.SetSkeletonOrderInLayer(CharOredrInLayer);
         CharInfo.BaseSpeed /= 100;
+        CurrentCharSkillCompletedEvent?.Invoke(inputSkill, nxtAtk.CoolDown);
         yield return BattleManagerScript.Instance.WaitFor(nxtAtk.CoolDown, ()=> BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
         scdc.IsCoGoing = false;
     }
@@ -727,7 +750,9 @@ public class CharacterType_Script : BaseCharacter
             currentAttackPhase = AttackPhasesType.End;
         }
 
-        if(((SpineAnim.CurrentAnim.Contains("S_Buff") && !animState.Contains("S_Buff")) || (SpineAnim.CurrentAnim.Contains("S_DeBuff") && !animState.Contains("S_DeBuff"))) && !animState.Contains("Reverse"))
+        if((SpineAnim.CurrentAnim.Contains("Atk2_AtkToIdle") || 
+            (SpineAnim.CurrentAnim.Contains("S_Buff") && !animState.Contains("S_Buff")) ||
+            (SpineAnim.CurrentAnim.Contains("S_DeBuff") && !animState.Contains("S_DeBuff"))) && !animState.Contains("Reverse"))
         {
             return;
         }

@@ -46,7 +46,7 @@ public class Stage00_BossOctopus_Girl_Script : MinionType_Script
 
     private IEnumerator SetUpEnteringOnBattle_Co()
     {
-        yield return new WaitForFixedUpdate();
+        yield return null;
     }
 
     public override void CharArrivedOnBattleField()

@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &390336813620140516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 390336813620140514}
+  - component: {fileID: 390336813620140517}
+  m_Layer: 0
+  m_Name: BattleInfoManagerPPPPvE - 4 Char Setup 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &390336813620140514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390336813620140516}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.542286, y: -0.109479904, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &390336813620140517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390336813620140516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce3848cecc12c964185142d667db2abf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MatchInfoType: 4
+  PlayerBattleInfo:
+  - Name: c1
+    CharacterSelection: 0
+    PlayerController: 00000000010000000200000003000000
+    CharacterName: 1005
+    WalkingSide: 0
+    Side: 0
+    Facing: 1
+    CharAttackType: 0
+    BCharType: 0
+    CharActionlist: 00000000010000000200000006000000070000000300000004000000
+    CharaterLevel: 0
+  - Name: c2
+    CharacterSelection: 1
+    PlayerController: 00000000010000000200000003000000
+    CharacterName: 1006
+    WalkingSide: 0
+    Side: 0
+    Facing: 1
+    CharAttackType: 0
+    BCharType: 0
+    CharActionlist: 000000000100000002000000060000000700000003000000
+    CharaterLevel: 0
+  - Name: c3
+    CharacterSelection: 2
+    PlayerController: 00000000010000000200000003000000
+    CharacterName: 1004
+    WalkingSide: 0
+    Side: 0
+    Facing: 1
+    CharAttackType: 0
+    BCharType: 0
+    CharActionlist: 000000000100000002000000060000000700000003000000
+    CharaterLevel: 0
+  - Name: c4
+    CharacterSelection: 3
+    PlayerController: 00000000010000000200000003000000
+    CharacterName: 1007
+    WalkingSide: 0
+    Side: 0
+    Facing: 1
+    CharAttackType: 0
+    BCharType: 0
+    CharActionlist: 000000000100000002000000060000000700000003000000
+    CharaterLevel: 0
