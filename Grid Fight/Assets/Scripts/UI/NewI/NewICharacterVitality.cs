@@ -39,6 +39,8 @@ public class NewICharacterVitality : MonoBehaviour
     IEnumerator ColorLerper;
     [SerializeField] protected float animationDuration = 0.2f;
 
+
+    public GameObject SkillContainer;
     public Image Skill1;
     public Image Skill2;
     public Image Skill3;
@@ -71,7 +73,14 @@ public class NewICharacterVitality : MonoBehaviour
         ToggleDead(false);
 
         assignedCharDetails = character;
-        ((CharacterType_Script)assignedCharDetails).CurrentCharSkillCompletedEvent += RefillSkills;
+        if(character.CharInfo.Mask != null)
+        {
+            ((CharacterType_Script)assignedCharDetails).CurrentCharSkillCompletedEvent += RefillSkills;
+        }
+        else
+        {
+            SkillContainer.SetActive(false);
+        }
 
         previousHealthChange = assignedCharDetails.CharInfo.HealthPerc / 100f;
         if(shieldBar != null) shieldBar.color = shieldColors.Evaluate(assignedCharDetails.CharInfo.ShieldPerc / 100f);
