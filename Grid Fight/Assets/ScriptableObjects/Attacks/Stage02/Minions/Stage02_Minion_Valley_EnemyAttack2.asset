@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage02_Minion_Valley_EnemyAttack1
+  m_Name: Stage02_Minion_Valley_EnemyAttack2
   m_EditorClassIdentifier: 
   Chances: 100
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
   DamageMultiplier: {x: 1, y: 1}
-  AttackInput: 0
+  AttackInput: 1
   AttackAnim: 0
   StaminaCost: 10
   ExperiencePoints: 10
@@ -24,17 +24,17 @@ MonoBehaviour:
   PrefixAnim: 0
   Particles:
     Left:
-      Cast: {fileID: 2096913222553555314, guid: 0bec96c1ec734254eaa9e23598fe674c,
+      Cast: {fileID: 1046888022041989425, guid: 7c32cce3b7fa07a48934cf2c39b029d4,
         type: 3}
-      Bullet: {fileID: 5968541040436473459, guid: 647bbbfa361dc9c41b1e00d2e8102309,
+      Bullet: {fileID: 1046888022041989425, guid: 7c32cce3b7fa07a48934cf2c39b029d4,
         type: 3}
-      Hit: {fileID: 8439747142768439481, guid: fc815408b93e694498fed2f17929f43f, type: 3}
+      Hit: {fileID: 384215532246118164, guid: c8379e00e45931b4dab57a35f8ded2a8, type: 3}
     Right:
-      Cast: {fileID: 2966453722484575927, guid: 5f9a14048ce9f29419bb800947706e4c,
+      Cast: {fileID: 3296455617983029366, guid: f4048ecdb9b24fd488c12e15705b5376,
         type: 3}
-      Bullet: {fileID: 1166971286623433801, guid: 7ce53a4e6a729bf4dacf7b5a5a47887a,
+      Bullet: {fileID: 1046888022041989425, guid: f98732a069f75c445a6401b40488b8b4,
         type: 3}
-      Hit: {fileID: 7923638571608762482, guid: b2911f63b59e192428e3dbd372388a65, type: 3}
+      Hit: {fileID: 384215532246118164, guid: 4a8681c87b5d01b43be71fda2bf26d66, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
@@ -119,7 +119,7 @@ MonoBehaviour:
         m_RotationOrder: 4
       Show: 1
       BulletEffectTiles:
-      - Pos: {x: 0, y: -1}
+      - Pos: {x: -1, y: 0}
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -128,7 +128,7 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-      - Pos: {x: 0, y: 1}
+      - Pos: {x: 1, y: 0}
         HasEffect: 0
         showImpact: 1
         Effects: []
