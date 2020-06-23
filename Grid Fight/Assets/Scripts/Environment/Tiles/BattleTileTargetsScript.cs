@@ -172,7 +172,7 @@ public class BattleTileTargetsScript : MonoBehaviour
             yield return BattleManagerScript.Instance.WaitFixedUpdate(new System.Action(() => { anim.speed = 0; }), () => BattleManagerScript.Instance != null && ((BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.FungusPuppets) && !BattleManagerScript.Instance.VFXScene));
 
             anim.speed = (1 / duration) * (attacker.CharInfo.BaseSpeed / attacker.CharInfo.SpeedStats.B_BaseSpeed) * BattleManagerScript.Instance.BattleSpeed;
-            timer += BattleManagerScript.Instance.FixedDeltaTime * (attacker.CharInfo.BaseSpeed / attacker.CharInfo.SpeedStats.B_BaseSpeed);
+            timer += BattleManagerScript.Instance.FixedDeltaTime;
             tc.RemainingTime = duration - timer;
             if (!attacker.Attacking && !attacker.bulletFired)
             {

@@ -873,7 +873,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
 
         spineT.localPosition = LocalSpinePosoffset;
-        Debug.Log("EndMoveCo");
+        //Debug.Log("EndMoveCo");
     }
 
     #endregion
@@ -886,7 +886,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         string[] newBuffDebuff = bdClass.Name.Split('_');
         if (item == null)
         {
-            Debug.Log(bdClass.Name + "   " + newBuffDebuff.Last());
+            //Debug.Log(bdClass.Name + "   " + newBuffDebuff.Last());
             item = new BuffDebuffClass(bdClass.Name, bdClass.Stat, Convert.ToInt32(newBuffDebuff.Last()), bdClass, bdClass.Duration, bdClass.EffectMaker);
             item.BuffDebuffCo = Buff_DebuffCoroutine(item);
             BuffsDebuffsList.Add(item);
@@ -939,7 +939,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             if(CharInfo.Health > 0)
             {
-                BattleManagerScript.Instance.Zombification(this);
+                BattleManagerScript.Instance.Zombification(this, bdClass.Duration);
             }
         }
         else if (bdClass.Stat == BuffDebuffStatsType.Health || bdClass.Stat == BuffDebuffStatsType.Health_Overtime)

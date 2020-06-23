@@ -63,7 +63,7 @@ public class BulletScript : MonoBehaviour
         SkillHit = false;
         StartingTile = CharOwner.UMS.CurrentTilePos;
         CharOwner.Sic.BulletFired++;
-        Debug.Log(CharOwner.Sic.BulletFired);
+       // Debug.Log(CharOwner.Sic.BulletFired);
         vfx = GetComponentInChildren<VFXBulletSpeedController>();
         if (vfx != null)
         {

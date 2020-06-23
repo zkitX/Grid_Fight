@@ -491,14 +491,14 @@ public class BattleManagerScript : MonoBehaviour
 
     #region Loading_Selection Character
     public List<MinionType_Script> zombiesList = new List<MinionType_Script>();
-    public void Zombification(BaseCharacter zombie)
+    public void Zombification(BaseCharacter zombie, float duration)
     {
         if(zombie.CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
         {
             List<BaseCharacter> res = AllCharactersOnField.Where(r => !r.IsOnField && r.CharInfo.HealthPerc > 0 && r.BuffsDebuffsList.Where(a => a.Stat == BuffDebuffStatsType.Zombification).ToList().Count == 0).ToList();
             if (res.Count > 0)
             {
-                StartCoroutine(CharacterType_Zombification_Co(zombie));
+                StartCoroutine(CharacterType_Zombification_Co(zombie, duration));
             }
             else
             {
@@ -509,12 +509,12 @@ public class BattleManagerScript : MonoBehaviour
         }
         else if (zombie.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script)
         {
-            StartCoroutine(MinionType_Zombification_Co(zombie));
+            StartCoroutine(MinionType_Zombification_Co(zombie, duration));
         }
 
     }
 
-    IEnumerator CharacterType_Zombification_Co(BaseCharacter zombie)
+    IEnumerator CharacterType_Zombification_Co(BaseCharacter zombie, float duration)
     {
         ControllerType playerController = CurrentSelectedCharacters.Where(r => r.Value.Character == zombie).First().Key;
         CurrentSelectedCharacters[playerController].Character = null;
@@ -534,7 +534,7 @@ public class BattleManagerScript : MonoBehaviour
         zombie.CharActionlist.Remove(CharacterActionType.SwitchCharacter);
 
 
-        yield return WaitFor(2, () => CurrentBattleState != BattleState.Battle);
+        yield return WaitFor(duration, () => CurrentBattleState != BattleState.Battle);
         zombiePs.transform.parent = null;
         zombiePs.SetActive(false);
 
@@ -586,7 +586,7 @@ public class BattleManagerScript : MonoBehaviour
     }
 
 
-    IEnumerator MinionType_Zombification_Co(BaseCharacter zombie)
+    IEnumerator MinionType_Zombification_Co(BaseCharacter zombie, float duration)
     {
         //Set up the PS and reset the anim
         GameObject zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Skill_Mind_2_Teleporting);
@@ -668,7 +668,7 @@ public class BattleManagerScript : MonoBehaviour
         yield return WaveManagerScript.Instance.SetCharInPos(playerZombie, bts, false);
 
         //Duration on field 
-        yield return WaitFor(2, () => CurrentBattleState != BattleState.Battle, ()=> playerZombie.CharInfo.HealthPerc <= 0);
+        yield return WaitFor(duration, () => CurrentBattleState != BattleState.Battle, ()=> playerZombie.CharInfo.HealthPerc <= 0);
 
 
         //Set up previous sides and charinfo
