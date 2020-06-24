@@ -29,10 +29,10 @@ public class WaveManagerScript : MonoBehaviour
 
     public List<StartingCharactersForWaveClass> StartingCharInWave = new List<StartingCharactersForWaveClass>();
     WavePhaseClass currentWavePhase;
-
+    bool isWaveOn = false;
 
     BaseCharacter newChar;
-
+    bool leadCharDie = false;
 
     private void Awake()
     {
@@ -110,6 +110,10 @@ public class WaveManagerScript : MonoBehaviour
             res.gameObject.SetActive(true);
         }
         res.gameObject.SetActive(true);
+        if(character.KillWaveIfCharDie)
+        {
+            res.CurrentCharIsDeadEvent += Res_CurrentCharIsDeadEvent;
+        }
         res.CharInfo.HealthStats.Base = Random.Range(character.Health.x, character.Health.y);
         res.CharInfo.HealthStats.Regeneration = Random.Range(character.HealthRegeneration.x, character.HealthRegeneration.y);
         res.CharInfo.StaminaStats.Base = Random.Range(character.Stamina.x, character.Stamina.y);
@@ -141,6 +145,20 @@ public class WaveManagerScript : MonoBehaviour
         res.CharActionlist.Add(CharacterActionType.Move);
 
         return res;
+    }
+
+    private void Res_CurrentCharIsDeadEvent(CharacterNameType cName, List<ControllerType> playerController, SideType side)
+    {
+        leadCharDie = true;
+        foreach (WaveCharClass item in currentWavePhase.ListOfEnemy)
+        {
+            item.NumberOfCharacter = 0;
+        }
+
+        foreach (BaseCharacter item in WaveCharcters.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script).ToList())
+        {
+            item.CharInfo.Health = -50;
+        }
     }
 
     private BaseCharacter CreateChar(CharacterNameType characterID, BaseCharType bCharType = BaseCharType.None)
@@ -189,17 +207,19 @@ public class WaveManagerScript : MonoBehaviour
     }
 
 
-    public IEnumerator StartWaveByName(string waveName)
+    public IEnumerator StartWaveByName(string waveName, string variableName, float duration = 0)
     {
-        yield return Wave(WavePhases.Where(r => r.name == waveName).First());
+        yield return duration == 0 ? Wave(WavePhases.Where(r => r.name == waveName).First()) : Wave(WavePhases.Where(r => r.name == waveName).First(), duration, variableName);
     }
 
     private IEnumerator Wave(WavePhaseClass wavePhase)
     {
+        isWaveOn = true;
+        leadCharDie = false;
         float timer = 0;
         currentWavePhase = wavePhase;
         WaveCharacterInfoClass waveCharacterInfoClass;
-        while (true)
+        while (!leadCharDie)
         {
             timer += BattleManagerScript.Instance.DeltaTime;
             yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
@@ -228,8 +248,9 @@ public class WaveManagerScript : MonoBehaviour
                 {
                     while (true)
                     {
-                        if (WaveCharcters.Where(r => r.gameObject.activeInHierarchy && (r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script || (r.IsOnField && r.CharInfo.BaseCharacterType != BaseCharType.MinionType_Script))).ToList().Count == 0)
+                        if (leadCharDie || WaveCharcters.Where(r => r.gameObject.activeInHierarchy && (r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script || (r.IsOnField && r.CharInfo.BaseCharacterType != BaseCharType.MinionType_Script))).ToList().Count == 0)
                         {
+                            isWaveOn = false;
                             yield break;
                         }
                         yield return null;
@@ -239,6 +260,23 @@ public class WaveManagerScript : MonoBehaviour
                 yield return new WaitForSeconds(0.5f);
 
             }
+        }
+    }
+
+    private IEnumerator Wave(WavePhaseClass wavePhase, float duration, string variableName)
+    {
+        IEnumerator wave = Wave(wavePhase);
+        StartCoroutine(wave);
+
+        yield return BattleManagerScript.Instance.WaitFor(duration, ()=> BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle, ()=> !isWaveOn);
+
+        if(isWaveOn)
+        {
+            FlowChartVariablesManagerScript.instance.Variables.Where(r => r.name == variableName).First().Value = "OFF";
+        }
+        else
+        {
+            FlowChartVariablesManagerScript.instance.Variables.Where(r => r.name == variableName).First().Value = "ON";
         }
     }
 
@@ -345,7 +383,7 @@ public class WaveManagerScript : MonoBehaviour
 
             foreach (BaseCharacter item in WaveCharcters.Where(r => r.gameObject.activeInHierarchy && (r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script || (r.IsOnField && r.CharInfo.BaseCharacterType != BaseCharType.MinionType_Script))).ToList())
             {
-                item.CharInfo.Health = -5;
+                item.CharInfo.Health = -50;
             }
         }
     }
@@ -384,6 +422,7 @@ public class WavePhaseClass
 public class WaveCharacterInfoClass
 {
     public CharacterNameType CharacterName;
+    public bool KillWaveIfCharDie = false;
     public Vector2 Health;
     public Vector2 HealthRegeneration;
     public Vector2 BaseDamage;

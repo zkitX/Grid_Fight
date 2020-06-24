@@ -35,6 +35,10 @@ public class CallNextWave : Command
     public float DelayBeforeJump = 0.5f;
     public float PoolDelay = 3;
     public bool UseWave = true;
+    [ConditionalField("UseWave", false)] public bool UseTimer;
+    [ConditionalField("UseTimer", false)] public float Timer;
+    [ConditionalField("UseTimer", false)] public string VariableName;
+
 
     public string NextBlockToFire;
 
@@ -89,7 +93,7 @@ public class CallNextWave : Command
         BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
 
         if (UseWave)  
-        yield return WaveManagerScript.Instance.StartWaveByName(WaveName);
+        yield return WaveManagerScript.Instance.StartWaveByName(WaveName, VariableName, Timer);
 
         BattleManagerScript.Instance.CurrentBattleState = BattleState.FungusPuppets;
         SetNextBlockFromName(NextBlockToFire);

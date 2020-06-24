@@ -188,11 +188,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public void _CharInfo_DeathEvent()
     {
-        if (IsOnField)
-        {
-            // EventManager.Instance.AddCharacterDeath(this);
-            SetCharDead();
-        }
+        SetCharDead();
     }
 
     public virtual void SetAttackReady(bool value)
@@ -223,8 +219,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         Call_CurrentCharIsDeadEvent();
         shotsLeftInAttack = 0;
     }
-
-   
 
     protected virtual void Call_CurrentCharIsDeadEvent()
     {
@@ -452,7 +446,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public virtual void CreateTileAttack()
     {
 
-        if (nextAttack != null && nextAttack.CurrentAttackType == AttackType.Tile)
+        if (nextAttack != null && nextAttack.CurrentAttackType == AttackType.Tile && CharInfo.Health > 0 && IsOnField)
         {
             CharInfo.RapidAttack.DamageMultiplier = CharInfo.RapidAttack.B_DamageMultiplier * nextAttack.DamageMultiplier;
             CharInfo.PowerfulAttac.DamageMultiplier = CharInfo.PowerfulAttac.B_DamageMultiplier * nextAttack.DamageMultiplier;

@@ -87,10 +87,12 @@ public class MinionType_Script : BaseCharacter
         }
         base.SetCharDead();
         transform.position = new Vector3(100, 100, 100);
+        SpineAnim.SpineAnimationState.ClearTracks();
         Invoke("DisableChar", 0.5f);
     }
     private void DisableChar()
     {
+
         gameObject.SetActive(false);
 
     }
