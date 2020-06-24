@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 108d8dbc8c15041418299302b627cfb5, type: 2}
+  - {fileID: 2100000, guid: 474186ed9e3c45e45ae467f316c52c9a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: cf5a48d42d1ac394d8368d001efae464, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 803cacf09031ef84683e814ceaaa3b09, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -248,13 +248,65 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
+        value: 1
+        inSlope: 0.8528592
+        outSlope: 0.8528592
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.48750407
+        value: 1.4157723
+        inSlope: 0.020794839
+        outSlope: 0.020794839
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: -0.8112695
+        outSlope: -0.8112695
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  Space_Time_Curves:
+    UpMovement:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
+      - serializedVersion: 3
+        time: 0.24903512
+        value: 0.010477209
+        inSlope: 0.15351214
+        outSlope: 0.15351214
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.17618085
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.7
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
         value: 1
@@ -267,49 +319,42 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  Space_Time_Curves:
-    UpMovement:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
     DownMovement:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
+        time: 0.31386593
+        value: 0.03338623
+        inSlope: 0.22366388
+        outSlope: 0.22366388
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.17819536
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.7
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -322,18 +367,36 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
+        time: 0.30327633
+        value: 0.04384145
+        inSlope: 0.40930632
+        outSlope: 0.40930632
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.20183854
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.7
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -346,18 +409,36 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
+        time: 0.36940792
+        value: -0.0020751953
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.7
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -366,6 +447,8 @@ MonoBehaviour:
       m_RotationOrder: 4
   FiringPints:
   - {fileID: 4453474158781727621}
+  - {fileID: 2683773209195961697}
+  - {fileID: 2683773209195961697}
   - {fileID: 2683773209195961697}
   CurrentAnim: 
   AnimationTransition: 0.1
@@ -386,19 +469,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Tantun
-  CharacterIcons:
-  - {fileID: 21300000, guid: c9eb5af2d9b875e4a9751e32071c0948, type: 3}
-  - {fileID: 21300000, guid: f1018b669a56e5d4fb4ae27635c17fe7, type: 3}
+  CharacterIcon: {fileID: 0}
+  Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 1d1ac6e0e6dc2f247b00f4003d59f304, type: 2}
-  BaseCharacterType: 0
+  BaseCharacterType: 1
   CharacterID: 10001
   CurrentAttackTypeInfo:
-  - {fileID: 11400000, guid: d52a938a0faee7c49b7230e0765c93dc, type: 2}
-  - {fileID: 11400000, guid: 5e709fbf670d845438f7da9e4a397fab, type: 2}
+  - {fileID: 11400000, guid: 57cc6486f284d47409b7b4e6b49c971e, type: 2}
+  - {fileID: 11400000, guid: cf6ed41e59b2874448b62a9ab0f26c2f, type: 2}
+  - {fileID: 11400000, guid: bbd466251179aad44b1e756ff560384f, type: 2}
   Elemental: 2
   ClassType: 0
   CharaterLevel: 0
-  UseLayeringSystem: 1
+  UseLayeringSystem: 0
   CharacterRespawnLength: 180
   CharacterSelection: 0
   RapidAttack:
@@ -534,7 +617,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2691642992750233816}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.55, y: 0.3, z: 0}
+  m_LocalPosition: {x: -0.887, y: 0.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6888126693245386667}
@@ -595,7 +678,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7388104409367748090}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5500537, y: 0.29999816, z: 0}
+  m_LocalPosition: {x: -0.887, y: 0.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6888126693245386667}
