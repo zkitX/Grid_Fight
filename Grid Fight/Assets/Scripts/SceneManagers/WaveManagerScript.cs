@@ -37,6 +37,10 @@ public class WaveManagerScript : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        foreach (WavePhaseClass wavePhase in WavePhases)
+        {
+            if (wavePhase.AbsoluteMaxEnemyOnScreen < wavePhase.MaxEnemyOnScreen) wavePhase.AbsoluteMaxEnemyOnScreen = Mathf.RoundToInt((float)wavePhase.MaxEnemyOnScreen * UniversalGameBalancer.Instance.difficulty.enemySpawnScaler);
+        }
     }
 
     public void ToggleBattleTimer(bool timerState)
@@ -220,7 +224,7 @@ public class WaveManagerScript : MonoBehaviour
         currentWavePhase = wavePhase;
 
         //Wave scaling
-        currentWavePhase.MaxEnemyOnScreen = Mathf.RoundToInt((float)currentWavePhase.MaxEnemyOnScreen * UniversalGameBalancer.Instance.difficulty.enemySpawnScaler);
+        currentWavePhase.MaxEnemyOnScreen = Mathf.Clamp(Mathf.RoundToInt((float)currentWavePhase.MaxEnemyOnScreen * UniversalGameBalancer.Instance.difficulty.enemySpawnScaler), 0, currentWavePhase.AbsoluteMaxEnemyOnScreen);
         foreach (WaveCharClass waveChar in currentWavePhase.ListOfEnemy)
         {
             waveChar.NumberOfCharacter = Mathf.RoundToInt((float)waveChar.NumberOfCharacter * UniversalGameBalancer.Instance.difficulty.enemySpawnScaler);
@@ -414,6 +418,7 @@ public class WaveManagerScript : MonoBehaviour
         return res.Distinct().ToList();
     }
 
+
 }
 
 [System.Serializable]
@@ -422,6 +427,7 @@ public class WavePhaseClass
     public string name;
     public bool IsRandom = false;
     public int MaxEnemyOnScreen;
+    public int AbsoluteMaxEnemyOnScreen = 0;
     public float DelayBetweenChars;
 
     public List<WaveCharClass> ListOfEnemy = new List<WaveCharClass>();
