@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 1356531903299505062}
   - component: {fileID: 1356531903299505063}
   - component: {fileID: 4927355652519203374}
-  - component: {fileID: 660104921473958960}
+  - component: {fileID: -8985237103817132708}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -322,7 +322,7 @@ MonoBehaviour:
   BulletGameObject: {fileID: 476742215486157040, guid: d6ceee7a1661975488e26a9d78d22567,
     type: 3}
   BulletContainer: {fileID: 6952598345498502452}
---- !u!114 &660104921473958960
+--- !u!114 &-8985237103817132708
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -509,6 +509,35 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  difficultyScales:
+  - Name: 1 Player
+    enemySpawnScaler: 1
+    enemyDamageScaler: 1
+    enemyAttackCooldownScaler: 1
+    enemyMoveDurationScaler: 1
+    enemyHealthScaler: 1
+    waveDurationScaler: 1
+  - Name: 2 Players
+    enemySpawnScaler: 1.77
+    enemyDamageScaler: 1.185
+    enemyAttackCooldownScaler: 0.669
+    enemyMoveDurationScaler: 0.859
+    enemyHealthScaler: 1.62
+    waveDurationScaler: 0.832
+  - Name: 3 Players
+    enemySpawnScaler: 2.39
+    enemyDamageScaler: 1.441
+    enemyAttackCooldownScaler: 0.553
+    enemyMoveDurationScaler: 0.707
+    enemyHealthScaler: 2.39
+    waveDurationScaler: 0.661
+  - Name: 4 Players
+    enemySpawnScaler: 3.16
+    enemyDamageScaler: 1.818
+    enemyAttackCooldownScaler: 0.367
+    enemyMoveDurationScaler: 0.471
+    enemyHealthScaler: 2.97
+    waveDurationScaler: 0.476
 --- !u!1 &6911235830904615386
 GameObject:
   m_ObjectHideFlags: 0

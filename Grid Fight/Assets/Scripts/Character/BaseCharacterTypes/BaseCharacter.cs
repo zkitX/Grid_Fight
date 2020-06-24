@@ -828,7 +828,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         float spaceTimer = 0;
         bool isMovCheck = false;
         bool isDefe = false;
-        float moveValue = CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed;
+        float moveValue = CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed * (CharInfo.BaseCharacterType != BaseCharType.CharacterType_Script ? UniversalGameBalancer.Instance.difficulty.enemyMoveDurationScaler : 1f);
         Transform spineT = SpineAnim.transform;
         Vector3 offset = spineT.position;
         transform.position = nextPos;

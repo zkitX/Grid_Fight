@@ -128,6 +128,7 @@ public class BattleManagerScript : MonoBehaviour
         { ControllerType.Player3, new CurrentSelectedCharacterClass() },
         { ControllerType.Player4, new CurrentSelectedCharacterClass() }
     };
+
     public List<ScriptableObjectCharacterPrefab> ListOfScriptableObjectCharacterPrefab = new List<ScriptableObjectCharacterPrefab>();
     public List<BaseCharacter> AllCharactersOnField = new List<BaseCharacter>();
     public List<BaseCharacter> AllPlayersMinionOnField = new List<BaseCharacter>();

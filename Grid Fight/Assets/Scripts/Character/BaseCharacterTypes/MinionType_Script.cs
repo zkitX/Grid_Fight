@@ -97,6 +97,7 @@ public class MinionType_Script : BaseCharacter
 
     }
 
+    float lastAttackTime = 0;
     public virtual IEnumerator AI()
     {
         bool val = true;
@@ -122,8 +123,9 @@ public class MinionType_Script : BaseCharacter
                     {
                         targetChar = possibleTargets[Random.Range(0, possibleTargets.Count)];
                     }*/
-                    if (targetChar != null)
+                    if (targetChar != null && (nextAttack == null || (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler)))
                     {
+                        lastAttackTime = Time.time;
                         nextAttackPos = targetChar.UMS.CurrentTilePos;
                         yield return AttackSequence();
                     }

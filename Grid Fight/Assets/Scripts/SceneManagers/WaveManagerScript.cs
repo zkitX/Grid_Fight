@@ -78,7 +78,7 @@ public class WaveManagerScript : MonoBehaviour
         int mostEnemiesPossible = 0;
         foreach (WavePhaseClass wavePhase in WavePhases)
         {
-            if (wavePhase.MaxEnemyOnScreen > mostEnemiesPossible) mostEnemiesPossible = wavePhase.MaxEnemyOnScreen;
+            if (Mathf.RoundToInt((float)wavePhase.MaxEnemyOnScreen * UniversalGameBalancer.Instance.difficulty.enemySpawnScaler) > mostEnemiesPossible) mostEnemiesPossible = Mathf.RoundToInt((float)wavePhase.MaxEnemyOnScreen * UniversalGameBalancer.Instance.difficulty.enemySpawnScaler);
         }
         return mostEnemiesPossible;
     }
@@ -114,7 +114,7 @@ public class WaveManagerScript : MonoBehaviour
         {
             res.CurrentCharIsDeadEvent += Res_CurrentCharIsDeadEvent;
         }
-        res.CharInfo.HealthStats.Base = Random.Range(character.Health.x, character.Health.y);
+        res.CharInfo.HealthStats.Base = Random.Range(character.Health.x, character.Health.y) * UniversalGameBalancer.Instance.difficulty.enemyHealthScaler;
         res.CharInfo.HealthStats.Regeneration = Random.Range(character.HealthRegeneration.x, character.HealthRegeneration.y);
         res.CharInfo.StaminaStats.Base = Random.Range(character.Stamina.x, character.Stamina.y);
         res.CharInfo.StaminaStats.Regeneration = Random.Range(character.StaminaRegeneration.x, character.StaminaRegeneration.y);
@@ -218,6 +218,15 @@ public class WaveManagerScript : MonoBehaviour
         leadCharDie = false;
         float timer = 0;
         currentWavePhase = wavePhase;
+
+        //Wave scaling
+        currentWavePhase.MaxEnemyOnScreen = Mathf.RoundToInt((float)currentWavePhase.MaxEnemyOnScreen * UniversalGameBalancer.Instance.difficulty.enemySpawnScaler);
+        foreach (WaveCharClass waveChar in currentWavePhase.ListOfEnemy)
+        {
+            waveChar.NumberOfCharacter = Mathf.RoundToInt((float)waveChar.NumberOfCharacter * UniversalGameBalancer.Instance.difficulty.enemySpawnScaler);
+        }
+        //
+
         WaveCharacterInfoClass waveCharacterInfoClass;
         while (!leadCharDie)
         {
@@ -268,7 +277,7 @@ public class WaveManagerScript : MonoBehaviour
         IEnumerator wave = Wave(wavePhase);
         StartCoroutine(wave);
 
-        yield return BattleManagerScript.Instance.WaitFor(duration, ()=> BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle, ()=> !isWaveOn);
+        yield return BattleManagerScript.Instance.WaitFor(duration * UniversalGameBalancer.Instance.difficulty.waveDurationScaler, ()=> BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle, ()=> !isWaveOn);
 
         if(isWaveOn)
         {

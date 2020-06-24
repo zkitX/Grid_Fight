@@ -769,6 +769,9 @@ public class CharacterType_Script : BaseCharacter
     {
         CameraManagerScript.Instance.CameraShake(CameraShakeType.GettingHit);
         Sic.HitReceived++;
+
+        damage *= UniversalGameBalancer.Instance.difficulty.enemyDamageScaler;
+
         return base.SetDamage(attacker ,damage, elemental, isCritical);
     }
 

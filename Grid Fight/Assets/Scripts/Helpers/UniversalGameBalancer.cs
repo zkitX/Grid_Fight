@@ -18,8 +18,59 @@ public class UniversalGameBalancer : MonoBehaviour
     [Tooltip("A curve that determines the jump height of the characters throughout the stage movement")] public AnimationCurve characterJumpCurve;
     [Tooltip("A curve that determines the animation playback speed of the jump animation across the duration of the jump")] public AnimationCurve jumpAnimationCurve;
 
+    [Header("Difficulty Scaling")]
+    public DifficultyScalingProfile[] difficultyScales =
+        new DifficultyScalingProfile[] {
+            new DifficultyScalingProfile(),
+            new DifficultyScalingProfile(),
+            new DifficultyScalingProfile(),
+            new DifficultyScalingProfile()
+        };
+
+    public DifficultyScalingProfile difficulty
+    {
+        get
+        {
+            if (InputController.Instance == null) return null;
+            return difficultyScales[InputController.Instance.PlayersNumber <= 0 ? 0 : InputController.Instance.PlayersNumber - 1];
+        }
+    }
+
     private void Awake()
     {
         Instance = this;
     }
+
+
+    private void OnValidate()
+    {
+        for (int i = 0; i < difficultyScales.Length; i++)
+        {
+            difficultyScales[i].Name = (i + 1).ToString() + " Player" + (i == 0 ? "" : "s");
+        }
+    }
+}
+
+
+[System.Serializable]
+public class DifficultyScalingProfile
+{
+    [HideInInspector] public string Name;
+    [Tooltip("The amount of enemies in each wave should increase as the players will be able to kill them sooner, NOTE: This will also increase the number of enemies allowed on the board at any moment")]
+    [Range(1f, 5f)] public float enemySpawnScaler = 1f;
+
+    [Tooltip("Enemy attacks should have more damage as the amount of health pool on the allied side of the board is now much larger")]
+    [Range(1f, 3f)] public float enemyDamageScaler = 1f;
+
+    [Tooltip("Enemy attacks should have less of a cooldown as the amount of health pool on the allied side of the board is now much larger")]
+    [Range(0.01f, 1f)] public float enemyAttackCooldownScaler = 1f;
+
+    [Tooltip("Enemy move speed should be lessened with more players, to allow them to dodge/move into place quicker, avoiding the barrage of bullets coming from 2 or more attackers")]
+    [Range(0.01f, 1f)] public float enemyMoveDurationScaler = 1f;
+
+    [Tooltip("The Health of Bosses and Enemies should increase depending on how many players there are, so enemies aren't instantly wiped off of the board by 2 or more attackers")]
+    [Range(1f,5f)] public float enemyHealthScaler = 1f;
+
+    [Tooltip("Higher player counts should be able to complete waves in less time IF the enemy spawn scaler is less than number of players (ie. 2x players, with 1.3x enemies spawning means the wave will die sooner)")]
+    [Range(0f,2f)] public float waveDurationScaler = 1f;
 }
