@@ -38871,6 +38871,10 @@ GameObject:
   - component: {fileID: 3353305422460992247}
   - component: {fileID: 1117426424759439498}
   - component: {fileID: 5956765364323638313}
+  - component: {fileID: 7064175594381342045}
+  - component: {fileID: 2512095804222137425}
+  - component: {fileID: 8968727875236519302}
+  - component: {fileID: 4374635398612885040}
   m_Layer: 0
   m_Name: EventManager_Chapter02_TheBurg
   m_TagString: Untagged
@@ -38936,19 +38940,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 476.00793, y: -7632.818}
+  scrollPos: {x: 1115.8782, y: -4499.0664}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 578
-  zoom: 0.6099999
+  zoom: 0.63999987
   scrollViewRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 0
     height: 0
-  selectedBlocks: []
-  selectedCommands: []
+  selectedBlocks:
+  - {fileID: 7763797550696224570}
+  selectedCommands:
+  - {fileID: 783994732208893002}
   variables:
   - {fileID: 6895823845661821541}
   - {fileID: 3907407763562551776}
@@ -39126,7 +39132,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -403.73615
     y: 2778.7668
-    width: 130.32788
+    width: 126.562515
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -39243,6 +39249,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.5
   PoolDelay: 3
   UseWave: 0
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: JumpWave2
 --- !u!114 &5285352333383796689
 MonoBehaviour:
@@ -39327,6 +39336,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.5
   PoolDelay: 3
   UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: LoudDial
 --- !u!114 &459516542099081903
 MonoBehaviour:
@@ -39344,7 +39356,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -925.1207
     y: 5360.1123
-    width: 120.49181
+    width: 120
     height: 40
   tint: {r: 0, g: 1, b: 0.14901961, a: 1}
   useCustomTint: 1
@@ -39412,6 +39424,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.5
   PoolDelay: 3
   UseWave: 1
+  UseTimer: 1
+  Timer: 300
+  VariableName: Deedra Defeated
   NextBlockToFire: CheckTimer
 --- !u!114 &819016869465636662
 MonoBehaviour:
@@ -39429,7 +39444,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -109.93661
     y: 7523.0244
-    width: 143.44264
+    width: 139.06252
     height: 40
   tint: {r: 0, g: 1, b: 0.14901961, a: 1}
   useCustomTint: 1
@@ -39496,6 +39511,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.5
   PoolDelay: 3
   UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: Mask
 --- !u!114 &4041404273073167499
 MonoBehaviour:
@@ -40095,6 +40113,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.75
   PoolDelay: 0
   UseWave: 0
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: DialogueRoom
 --- !u!114 &8359703356833786327
 MonoBehaviour:
@@ -40182,6 +40203,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.75
   PoolDelay: 0
   UseWave: 0
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: Wave2 Dialogue
 --- !u!114 &2053816907642672819
 MonoBehaviour:
@@ -40240,7 +40264,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -478.0786
     y: 4424.427
-    width: 125.40985
+    width: 121.875015
     height: 40
   tint: {r: 0.26666668, g: 0.26666668, b: 0.26666668, a: 1}
   useCustomTint: 1
@@ -40302,6 +40326,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.75
   PoolDelay: 0
   UseWave: 0
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: ElevatorCheck
 --- !u!114 &7673325257793963568
 MonoBehaviour:
@@ -41611,6 +41638,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.5
   PoolDelay: 3
   UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: JumpGrid2
 --- !u!114 &5476606195120506632
 MonoBehaviour:
@@ -41789,7 +41819,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -629.77716
     y: 1955.0294
-    width: 133.60657
+    width: 129.68752
     height: 40
   tint: {r: 1, g: 0, b: 0, a: 1}
   useCustomTint: 1
@@ -41938,7 +41968,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -310.9903
     y: 2511.438
-    width: 141.80328
+    width: 137.50002
     height: 40
   tint: {r: 0, g: 1, b: 0.14901961, a: 1}
   useCustomTint: 1
@@ -42225,6 +42255,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.5
   PoolDelay: 3
   UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: JumpGrid2
 --- !u!114 &979582719294477438
 MonoBehaviour:
@@ -42294,7 +42327,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 77.49101
     y: 3316.409
-    width: 143.44264
+    width: 139.06252
     height: 40
   tint: {r: 0, g: 1, b: 0.14901961, a: 1}
   useCustomTint: 1
@@ -44903,7 +44936,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -1297.1896
     y: 2252.8457
-    width: 123.77051
+    width: 120.312515
     height: 40
   tint: {r: 0.9150943, g: 0.10791205, b: 0.7821833, a: 1}
   useCustomTint: 1
@@ -45244,6 +45277,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.5
   PoolDelay: 3
   UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: Congrats
 --- !u!114 &1894928918250412124
 MonoBehaviour:
@@ -45430,7 +45466,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -1246.7871
     y: 2045.5107
-    width: 153.27872
+    width: 148.43753
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -45860,7 +45896,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -986.3138
     y: 2378.313
-    width: 140.16394
+    width: 135.93752
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -46571,6 +46607,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.5
   PoolDelay: 3
   UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: JumpElevator
 --- !u!114 &8027053727268037552
 MonoBehaviour:
@@ -46588,7 +46627,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -860.4812
     y: 5117.0913
-    width: 123.77051
+    width: 120.312515
     height: 40
   tint: {r: 1, g: 0, b: 0, a: 1}
   useCustomTint: 1
@@ -46649,7 +46688,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -90.84242
     y: 3107.5159
-    width: 141.80328
+    width: 137.50002
     height: 40
   tint: {r: 0, g: 0.5372549, b: 1, a: 1}
   useCustomTint: 1
@@ -46696,7 +46735,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -779.5647
     y: 5198.442
-    width: 130.32788
+    width: 126.562515
     height: 40
   tint: {r: 0, g: 0.5372549, b: 1, a: 1}
   useCustomTint: 1
@@ -47375,7 +47414,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -1008.5972
     y: 2505.274
-    width: 184.42625
+    width: 178.12503
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -49151,6 +49190,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.5
   PoolDelay: 3
   UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: CheckLoud
 --- !u!114 &6425066186681113062
 MonoBehaviour:
@@ -49168,7 +49210,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -409.39398
     y: 2921.7632
-    width: 138.5246
+    width: 134.37502
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -50101,7 +50143,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -918.0598
     y: 3561.2751
-    width: 136.88525
+    width: 132.81252
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -50427,7 +50469,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -923.3429
     y: 3694.03
-    width: 141.80328
+    width: 137.50002
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -51308,7 +51350,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -916.0426
     y: 3762.1218
-    width: 123.77051
+    width: 120.312515
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -51863,7 +51905,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -918.52216
     y: 3904.8486
-    width: 123.77051
+    width: 120.312515
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -53655,7 +53697,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -929.2356
     y: 4128.7695
-    width: 143.44264
+    width: 139.06252
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -53907,7 +53949,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -699.35266
     y: 3560.5764
-    width: 138.5246
+    width: 134.37502
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 1
@@ -54843,6 +54885,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.5
   PoolDelay: 3
   UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: CryptoCheck
 --- !u!114 &4017209060133965917
 MonoBehaviour:
@@ -55186,6 +55231,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.5
   PoolDelay: 3
   UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: Got it
 --- !u!114 &2587174163361648390
 MonoBehaviour:
@@ -55366,7 +55414,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -916.13495
     y: 4388.0625
-    width: 125.40985
+    width: 121.875015
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -56005,7 +56053,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -253.39389
     y: 3397.342
-    width: 122.13116
+    width: 120
     height: 40
   tint: {r: 0, g: 0.5372549, b: 1, a: 1}
   useCustomTint: 1
@@ -56050,7 +56098,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -328.9148
     y: 3572.1235
-    width: 123.77051
+    width: 120.312515
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -56092,7 +56140,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -159.47778
     y: 3571.6265
-    width: 125.40985
+    width: 121.875015
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -56135,7 +56183,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 6.4382563
     y: 3574.3132
-    width: 158.19675
+    width: 153.12503
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -56710,7 +56758,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -95.56289
     y: 3454.5637
-    width: 128.68854
+    width: 125.000015
     height: 40
   tint: {r: 0, g: 0.5372549, b: 1, a: 1}
   useCustomTint: 1
@@ -56847,7 +56895,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -445.23422
     y: 4500.3604
-    width: 130.32788
+    width: 126.562515
     height: 40
   tint: {r: 0, g: 0.5372549, b: 1, a: 1}
   useCustomTint: 1
@@ -56892,7 +56940,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -715.29504
     y: 4635.7144
-    width: 154.91806
+    width: 150.00003
     height: 40
   tint: {r: 0, g: 0.5372549, b: 1, a: 1}
   useCustomTint: 1
@@ -56919,7 +56967,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -710.28937
     y: 4703.563
-    width: 141.80328
+    width: 137.50002
     height: 40
   tint: {r: 0, g: 0.5372549, b: 1, a: 1}
   useCustomTint: 1
@@ -56982,7 +57030,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -106.267975
     y: 5508.605
-    width: 146.72133
+    width: 142.18753
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -57033,7 +57081,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -880.2785
     y: 4804.302
-    width: 168.0328
+    width: 162.50003
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -57410,7 +57458,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -866.44495
     y: 4887.087
-    width: 140.16394
+    width: 135.93752
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -57592,7 +57640,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 124.81676
     y: 5616.5938
-    width: 128.68854
+    width: 125.000015
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -58112,7 +58160,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 130.52571
     y: 5787.4644
-    width: 127.049194
+    width: 123.437515
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -58209,7 +58257,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 118.68506
     y: 5858.7705
-    width: 159.83609
+    width: 154.68753
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -58787,7 +58835,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 382.13882
     y: 5863.249
-    width: 143.44264
+    width: 139.06252
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -59696,7 +59744,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -865.8504
     y: 5051.499
-    width: 140.16394
+    width: 135.93752
     height: 40
   tint: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 1}
   useCustomTint: 1
@@ -59753,11 +59801,14 @@ MonoBehaviour:
   - PlayerController: 0
     Pos: {x: 3, y: 5}
   TalkingTeam: []
-  JumpUp: 0
+  JumpUp: 1
   JumpAnimSpeed: 0.9
   DelayBeforeJump: 0.75
   PoolDelay: 0
   UseWave: 0
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: CheckDeedra
 --- !u!114 &65233752149033844
 MonoBehaviour:
@@ -59775,7 +59826,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -625.572
     y: 5355.902
-    width: 156.5574
+    width: 151.56253
     height: 40
   tint: {r: 0, g: 1, b: 0.14901961, a: 1}
   useCustomTint: 1
@@ -60352,6 +60403,8 @@ MonoBehaviour:
   - {fileID: 2291921415701275590}
   - {fileID: 7242345445557149008}
   - {fileID: 2295507566991096913}
+  - {fileID: 7064175594381342045}
+  - {fileID: 8968727875236519302}
   - {fileID: 4526030893821155090}
 --- !u!114 &1208807706470612598
 MonoBehaviour:
@@ -60389,6 +60442,8 @@ MonoBehaviour:
   - {fileID: 4186591881873685601}
   - {fileID: 4893538326949902691}
   - {fileID: 2084998957954002441}
+  - {fileID: 2512095804222137425}
+  - {fileID: 4374635398612885040}
   - {fileID: 7061435785923050730}
 --- !u!114 &3730058306911987549
 MonoBehaviour:
@@ -60928,7 +60983,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -111.630424
     y: 6177.086
-    width: 123.77051
+    width: 120.312515
     height: 40
   tint: {r: 1, g: 0, b: 0, a: 1}
   useCustomTint: 1
@@ -60973,7 +61028,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -262.97372
     y: 6504.3223
-    width: 120.49181
+    width: 120
     height: 40
   tint: {r: 0, g: 1, b: 0.14901961, a: 1}
   useCustomTint: 1
@@ -61279,6 +61334,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.5
   PoolDelay: 3
   UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: Switch
 --- !u!114 &376793990961450369
 MonoBehaviour:
@@ -61296,7 +61354,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 219.84425
     y: 6252.132
-    width: 130.32788
+    width: 126.562515
     height: 40
   tint: {r: 0, g: 0.5372549, b: 1, a: 1}
   useCustomTint: 1
@@ -61343,7 +61401,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 87.40981
     y: 6421.255
-    width: 127.049194
+    width: 123.437515
     height: 40
   tint: {r: 0, g: 1, b: 0.14901961, a: 1}
   useCustomTint: 1
@@ -61649,6 +61707,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.5
   PoolDelay: 3
   UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: Fight2
 --- !u!114 &1604192102351311901
 MonoBehaviour:
@@ -61666,7 +61727,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 335.39047
     y: 6354.208
-    width: 156.5574
+    width: 151.56253
     height: 40
   tint: {r: 0, g: 1, b: 0.14901961, a: 1}
   useCustomTint: 1
@@ -61972,6 +62033,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.5
   PoolDelay: 3
   UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: Jump to Boss
 --- !u!114 &5281508154003222306
 MonoBehaviour:
@@ -61989,7 +62053,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -576.6724
     y: 5546.8447
-    width: 131.96722
+    width: 128.12502
     height: 40
   tint: {r: 0.26666668, g: 0.26666668, b: 0.26666668, a: 1}
   useCustomTint: 1
@@ -62051,6 +62115,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.75
   PoolDelay: 0
   UseWave: 0
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: "DON\u2019T LIKE THIS"
 --- !u!114 &7061435785923050730
 MonoBehaviour:
@@ -62216,7 +62283,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -268.0098
     y: 6308.317
-    width: 130.32788
+    width: 126.562515
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -64544,6 +64611,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.5
   PoolDelay: 3
   UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: SwitchSurvive
 --- !u!114 &4161834120561086738
 MonoBehaviour:
@@ -64582,7 +64652,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -258.80817
     y: 6894.2603
-    width: 131.96722
+    width: 128.12502
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 1
@@ -64862,7 +64932,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -417.3017
     y: 7039.6943
-    width: 131.96722
+    width: 128.12502
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -64948,7 +65018,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 87.384605
     y: 7102.1777
-    width: 125.40985
+    width: 121.875015
     height: 40
   tint: {r: 0.26666668, g: 0.26666668, b: 0.26666668, a: 1}
   useCustomTint: 1
@@ -66374,6 +66444,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.75
   PoolDelay: 0
   UseWave: 0
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: CheckBoss
 --- !u!114 &7637316629173965806
 MonoBehaviour:
@@ -66436,7 +66509,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -10.184117
     y: 7217.834
-    width: 140.16394
+    width: 135.93752
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -66785,7 +66858,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -10.55075
     y: 7285.5645
-    width: 135.24591
+    width: 131.25002
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -67968,7 +68041,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -17.59053
     y: 7435.4917
-    width: 151.63936
+    width: 146.87503
     height: 40
   tint: {r: 0, g: 0.5372549, b: 1, a: 1}
   useCustomTint: 1
@@ -68013,7 +68086,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 85.57831
     y: 7523.056
-    width: 182.78691
+    width: 176.56253
     height: 40
   tint: {r: 0, g: 1, b: 0.14901961, a: 1}
   useCustomTint: 1
@@ -68319,6 +68392,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.5
   PoolDelay: 3
   UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: Mask
 --- !u!114 &4137131469106681400
 MonoBehaviour:
@@ -68506,7 +68582,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -23.089323
     y: 7788.446
-    width: 163.11478
+    width: 157.81253
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 1
@@ -68784,7 +68860,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -16.884705
     y: 8003.829
-    width: 164.75412
+    width: 159.37503
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 1
@@ -69152,7 +69228,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -12.479916
     y: 8209.046
-    width: 177.86887
+    width: 171.87503
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 1
@@ -69495,7 +69571,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -7.7732267
     y: 8421.502
-    width: 177.86887
+    width: 171.87503
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 1
@@ -69905,7 +69981,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -16.467964
     y: 7706.447
-    width: 156.5574
+    width: 151.56253
     height: 40
   tint: {r: 0, g: 0.5372549, b: 1, a: 1}
   useCustomTint: 1
@@ -69950,7 +70026,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -21.037703
     y: 7917.44
-    width: 158.19675
+    width: 153.12503
     height: 40
   tint: {r: 0, g: 0.5372549, b: 1, a: 1}
   useCustomTint: 1
@@ -70016,7 +70092,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -21.799774
     y: 8141.295
-    width: 171.3115
+    width: 165.62503
     height: 40
   tint: {r: 0, g: 0.5372549, b: 1, a: 1}
   useCustomTint: 1
@@ -70082,7 +70158,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -7.938116
     y: 8351.663
-    width: 171.3115
+    width: 165.62503
     height: 40
   tint: {r: 0, g: 0.5372549, b: 1, a: 1}
   useCustomTint: 1
@@ -70543,6 +70619,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.5
   PoolDelay: 3
   UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: JumpElevator2SOUND
 --- !u!114 &356361090321914388
 MonoBehaviour:
@@ -71775,7 +71854,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -336.29065
     y: 4422.199
-    width: 168.0328
+    width: 162.50003
     height: 40
   tint: {r: 0.26666668, g: 0.26666668, b: 0.26666668, a: 1}
   useCustomTint: 1
@@ -71957,6 +72036,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.75
   PoolDelay: 0
   UseWave: 0
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: ElevatorCheck
 --- !u!114 &4212812784275323263
 MonoBehaviour:
@@ -72109,7 +72191,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -503.86356
     y: 5433.618
-    width: 174.59018
+    width: 168.75003
     height: 40
   tint: {r: 0.26666668, g: 0.26666668, b: 0.26666668, a: 1}
   useCustomTint: 1
@@ -72291,6 +72373,9 @@ MonoBehaviour:
   DelayBeforeJump: 0.75
   PoolDelay: 0
   UseWave: 0
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
   NextBlockToFire: "DON\u2019T LIKE THIS"
 --- !u!114 &6947304716084433670
 MonoBehaviour:
@@ -72420,6 +72505,72 @@ MonoBehaviour:
   indentLevel: 0
   VarName: Switch_Recruitable
   VarValue: ON
+--- !u!114 &7064175594381342045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8388188415199824812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 165492d18f7f7f249936db5fe1a3c232, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 3769
+  indentLevel: 0
+  charToRemove: 1024
+--- !u!114 &2512095804222137425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8388188415199824812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 165492d18f7f7f249936db5fe1a3c232, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 3770
+  indentLevel: 0
+  charToRemove: 1024
+--- !u!114 &8968727875236519302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8388188415199824812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3315ad2ebb85443909a1203d56d9344e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 3771
+  indentLevel: 0
+  _duration:
+    floatRef: {fileID: 0}
+    floatVal: 1
+  durationOLD: 0
+--- !u!114 &4374635398612885040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8388188415199824812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3315ad2ebb85443909a1203d56d9344e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 3772
+  indentLevel: 0
+  _duration:
+    floatRef: {fileID: 0}
+    floatVal: 1
+  durationOLD: 0
 --- !u!1 &8418563584349228055
 GameObject:
   m_ObjectHideFlags: 0
