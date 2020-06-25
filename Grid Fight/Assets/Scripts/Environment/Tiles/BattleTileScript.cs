@@ -30,6 +30,7 @@ public class BattleTileScript : MonoBehaviour
     public BattleTileTargetsScript BattleTargetScript;
     private bool destroyEffectOnCollection = false;
     private bool isColliding = false;
+    public Vector2 TileADStats = Vector2.one;
     //Private
 
     #region Tile Variables
@@ -336,6 +337,7 @@ public Vector2 Duration_Debuff_Trap_ForTime;
     {
         BattleTileState = info.BattleTileState;
         WalkingSide = info.WalkingSide;
+        TileADStats = info.TileADStats;
         if(info.HasEffect)
         {
             foreach (var item in info.Effects)

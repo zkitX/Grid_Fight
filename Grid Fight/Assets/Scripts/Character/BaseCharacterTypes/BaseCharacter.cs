@@ -514,7 +514,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                                     else
                                     {
                                         bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, res,
-                                   CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
+                                   CharInfo.DamageStats.BaseDamage * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.x, CharInfo.Elemental, this,
                                    target, target.EffectChances);
                                     }
 
@@ -1464,7 +1464,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         EventManager.Instance?.UpdateHealth(this);
         EventManager.Instance?.UpdateStamina(this);
 
-        SetFinalDamage(attacker ,damage);
+        SetFinalDamage(attacker , damage * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.y);
 
 
         HealthStatsChangedEvent?.Invoke(damage, healthCT, SpineAnim.transform);

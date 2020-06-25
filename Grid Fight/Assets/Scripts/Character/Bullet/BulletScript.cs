@@ -194,7 +194,8 @@ public class BulletScript : MonoBehaviour
                 if (!VFXTestMode)
                 {
                     target = BattleManagerScript.Instance.GetCharInPos(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]);
-                    MakeDamage(target, (CharOwner.CharInfo.DamageStats.BaseDamage * (SOAttack.AttackInput == AttackInputType.Weak ? CharOwner.CharInfo.RapidAttack.DamageMultiplier.x : CharOwner.CharInfo.PowerfulAttac.DamageMultiplier.x)) * 0.3f);
+                    MakeDamage(target, (CharOwner.CharInfo.DamageStats.BaseDamage * GridManagerScript.Instance.GetBattleTile(CharOwner.UMS.Pos[0]).TileADStats.x
+                        * (SOAttack.AttackInput == AttackInputType.Weak ? CharOwner.CharInfo.RapidAttack.DamageMultiplier.x : CharOwner.CharInfo.PowerfulAttac.DamageMultiplier.x)) * 0.3f);
                 }
                 AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Impact, AudioBus.HighPrio, GridManagerScript.Instance.GetBattleTile(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]).transform);
                 FireEffectParticles(GridManagerScript.Instance.GetBattleTile(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]).transform.position);
