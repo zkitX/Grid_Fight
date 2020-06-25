@@ -526,6 +526,12 @@ public class MinionType_Script : BaseCharacter
             return;
         }
 
+        if (completedAnim == CharacterAnimationStateType.Reverse_Arriving.ToString())
+        {
+            transform.position = new Vector3(100, 100, 100);
+            gameObject.SetActive(false);
+            return;
+        }
 
         if (completedAnim.Contains("IdleToAtk") && SpineAnim.CurrentAnim.Contains("IdleToAtk"))
         {
