@@ -15,7 +15,7 @@ public class FlowChartVariablesManagerScriptEditor : Editor
         new FlowChartVariablesClass("BIRD_IN_SQUAD", "OFF"),
         new FlowChartVariablesClass("PAI_IN_SQUAD", "OFF"),
         new FlowChartVariablesClass("MERMER_IN_SQUAD", "OFF"),
-        new FlowChartVariablesClass("DONNA_IN_SQUAD", "OFF"),
+        new FlowChartVariablesClass("KORA_IN_SQUAD", "OFF"),
         new FlowChartVariablesClass("DONNA_IN_SQUAD", "OFF"),
         new FlowChartVariablesClass("DONNA_IN_SQUAD", "OFF"),
 
