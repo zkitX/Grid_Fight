@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Linq;
 
-/*[CustomEditor(typeof(FlowChartVariablesManagerScript))]
+[CustomEditor(typeof(FlowChartVariablesManagerScript))]
 public class FlowChartVariablesManagerScriptEditor : Editor
 {
     List<FlowChartVariablesClass> BaseChars = new List<FlowChartVariablesClass>
@@ -36,4 +36,4 @@ public class FlowChartVariablesManagerScriptEditor : Editor
         }
         EditorUtility.SetDirty(origin);
     }
-}*/
+}

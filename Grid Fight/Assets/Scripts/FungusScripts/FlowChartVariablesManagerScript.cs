@@ -28,5 +28,5 @@ public class FlowChartVariablesClass
     {
         Name = name;
         Value = value;
-    }    
+    }   
 }
