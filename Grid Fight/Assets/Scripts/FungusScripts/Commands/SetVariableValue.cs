@@ -19,7 +19,7 @@ public class SetVariableValue : Command
     public string VarValue;
     protected virtual void CallTheMethod()
     {
-        FlowChartVariablesManagerScript.instance.Variables.Where(r => r.name == VarName).First().Value = VarValue;
+        FlowChartVariablesManagerScript.instance.Variables.Where(r => r.Name == VarName).First().Value = VarValue;
     }
 
     #region Public members

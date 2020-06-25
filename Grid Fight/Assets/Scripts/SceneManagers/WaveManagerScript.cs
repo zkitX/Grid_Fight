@@ -285,11 +285,11 @@ public class WaveManagerScript : MonoBehaviour
 
         if(isWaveOn)
         {
-            FlowChartVariablesManagerScript.instance.Variables.Where(r => r.name == variableName).First().Value = "OFF";
+            FlowChartVariablesManagerScript.instance.Variables.Where(r => r.Name == variableName).First().Value = "OFF";
         }
         else
         {
-            FlowChartVariablesManagerScript.instance.Variables.Where(r => r.name == variableName).First().Value = "ON";
+            FlowChartVariablesManagerScript.instance.Variables.Where(r => r.Name == variableName).First().Value = "ON";
         }
     }
 

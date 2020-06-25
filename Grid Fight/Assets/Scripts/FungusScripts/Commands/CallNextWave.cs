@@ -92,8 +92,19 @@ public class CallNextWave : Command
 
         BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
 
-        if (UseWave)  
-        yield return WaveManagerScript.Instance.StartWaveByName(WaveName, VariableName, Timer);
+        if (UseWave)
+        {
+            if (UseTimer)
+            {
+                yield return WaveManagerScript.Instance.StartWaveByName(WaveName, VariableName, Timer);
+
+            }
+            else
+            {
+                yield return WaveManagerScript.Instance.StartWaveByName(WaveName ,"");
+            }
+
+        }
 
         BattleManagerScript.Instance.CurrentBattleState = BattleState.FungusPuppets;
         SetNextBlockFromName(NextBlockToFire);

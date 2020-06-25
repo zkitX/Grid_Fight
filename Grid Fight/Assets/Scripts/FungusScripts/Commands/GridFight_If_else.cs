@@ -26,7 +26,7 @@ public class GridFight_If_else : Command
         foreach (CheckClass item in Checks)
         {
 
-            FlowChartVariablesClass res = variables.Where(r => r.name == item.varname).First();
+            FlowChartVariablesClass res = variables.Where(r => r.Name == item.varname).First();
             if (res.Value != item.varvalue)
             {
                 pass = false;

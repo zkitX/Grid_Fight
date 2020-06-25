@@ -110,14 +110,11 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
 
         yield return null;
 
+      
+
+
         BattleManager = Instantiate(stage.BattleManager);
         StageObjects.Add(BattleManager);
-
-        if (stage.Wave != null)
-        {
-            Wave = Instantiate(stage.Wave);
-            StageObjects.Add(Wave);
-        }
 
         if (stage.EventManager != null)
         {
@@ -125,11 +122,20 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
             StageObjects.Add(EventManager);
         }
 
+        if (stage.Wave != null)
+        {
+            Wave = Instantiate(stage.Wave);
+            StageObjects.Add(Wave);
+        }
+
+        
         BattleInfoManager = Instantiate(stage.BattleInfoManager);
         StageObjects.Add(BattleInfoManager);
 
         Battle_UI = Instantiate(stage.UI_Battle);
         StageObjects.Add(Battle_UI);
+
+        yield return null;
 
         yield return BattleManagerScript.Instance.InstanciateAllChar();
         if (Wave != null) yield return WaveManagerScript.Instance.WaveCharCreator();

@@ -7,20 +7,26 @@ public class FlowChartVariablesManagerScript : MonoBehaviour
     public static FlowChartVariablesManagerScript instance;
 
     public List<FlowChartVariablesClass> Variables = new List<FlowChartVariablesClass>();
-
-
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         instance = this;
     }
-
-   
 }
 
 [System.Serializable]
 public class FlowChartVariablesClass
 {
-    public string name;
+    public string Name;
     public string Value;
+
+    public FlowChartVariablesClass()
+    {
+
+    }
+
+    public FlowChartVariablesClass(string name, string value)
+    {
+        Name = name;
+        Value = value;
+    }    
 }
