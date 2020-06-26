@@ -1380,6 +1380,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             GameObject go;
             if (DefendingHoldingTimer < CharInfo.DefenceStats.Invulnerability)
             {
+                Sic.ReflexExp += damage;
                 damage = 0;
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldTotalDefence);
                 AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.Shield_Full, AudioBus.MidPrio);
@@ -1391,6 +1392,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
             else
             {
+                Sic.ReflexExp += damage  * 0.5f;
                 damage = damage - CharInfo.DefenceStats.BaseDefence;
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldNormal);
                 AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.Shield_Partial, AudioBus.HighPrio);

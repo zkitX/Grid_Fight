@@ -141,7 +141,7 @@ public class WaveManagerScript : MonoBehaviour
         res.CharInfo.DamageStats.B_BaseDamage = res.CharInfo.DamageStats.BaseDamage;
         res.CharInfo.RapidAttack.B_DamageMultiplier = res.CharInfo.RapidAttack.DamageMultiplier;
         res.CharInfo.PowerfulAttac.B_DamageMultiplier = res.CharInfo.PowerfulAttac.DamageMultiplier;
-        res.CharInfo.SpeedStats.B_MovementSpeed = res.CharInfo.SpeedStats.MovementSpeed;
+        res.CharInfo.SpeedStats.B_MovementSpeed = res.CharInfo.SpeedStats.MovementSpeed / UniversalGameBalancer.Instance.difficulty.enemyMoveDurationScaler;
         res.CharInfo.B_MovementTimer = res.CharInfo.MovementTimer;
         res.CharInfo.ExperienceValue = character.Exp;
 

@@ -217,6 +217,7 @@ public class BulletScript : MonoBehaviour
         {
             if (target.tag.Contains("Side") && target.tag != Side.ToString())
             {
+                CharOwner.Sic.AccuracyExp += 1f;
                 CharOwner.Sic.BulletHits++;
                 bool iscritical = CharOwner.CharInfo.IsCritical(SOAttack.AttackInput == AttackInputType.Weak ? true : false);
                 //Set damage to the hitting character
@@ -227,11 +228,11 @@ public class BulletScript : MonoBehaviour
 
                 target.SetDamage(CharOwner, (baseDamage) * (iscritical ? 2 : 1),
                     Elemental, iscritical, CharOwner.CharInfo.ClassType == CharacterClassType.Desert && SOAttack.AttackInput != AttackInputType.Weak ? true : false);
-                if(!SkillHit && SOAttack.AttackInput > AttackInputType.Strong)
+                CharOwner.Sic.DamageExp += baseDamage;
+                if (!SkillHit && SOAttack.AttackInput > AttackInputType.Strong)
                 {
                     SkillHit = true;
                     StatisticInfoClass sic = StatisticInfoManagerScript.Instance.CharaterStats.Where(r => r.CharacterId == CharOwner.CharInfo.CharacterID).First();
-                    sic.DamageExp += SOAttack.ExperiencePoints;
                 }
 
                 if(target.CharInfo.Health > 0)
@@ -297,6 +298,7 @@ public class BulletScript : MonoBehaviour
     {
         Invoke("RestoreBullet", timer);
         PS.transform.parent = null;
+        CharOwner.Sic.AccuracyExp -= 1f;
         PS.GetComponent<PSTimeGroup>().UpdatePSTime(0.1f);
     }
 

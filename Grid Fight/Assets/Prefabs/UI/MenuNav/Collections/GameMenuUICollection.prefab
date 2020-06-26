@@ -1782,9 +1782,9 @@ GameObject:
   - component: {fileID: 6567317642048400635}
   - component: {fileID: 6567317642048400634}
   - component: {fileID: 6567317642048400637}
-  - component: {fileID: 6567317642048400636}
   - component: {fileID: 6567317642048400639}
   - component: {fileID: 5900208831390983799}
+  - component: {fileID: 3578656156830570449}
   m_Layer: 5
   m_Name: ResultsPanel
   m_TagString: Untagged
@@ -1874,418 +1874,6 @@ MonoBehaviour:
   focusState: 2
   setup: 0
   lastActivateCallPanel: {fileID: 0}
---- !u!114 &6567317642048400636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6567317642048400625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 472694f2c1d023f4e850912e8ddfba70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activators:
-  - Name: 8 actions triggred by 0 input
-    ID: ShowResolution
-    input: 
-    workingStates: 
-    actions:
-    - Name: 8 Ui Actions
-      uiActions:
-      - Name: Set ResultsPanel to active and wait 0.01 seconds afterward
-        parentButton: {fileID: 0}
-        actionType: 6
-        pauseTime: 0
-        changeColorOf: 0
-        changeColorText: {fileID: 0}
-        changeColorImage: {fileID: 0}
-        changeThingColorOnThisObject: 0
-        colorToChangeTo: {r: 0, g: 0, b: 0, a: 0}
-        thingToAnimate: {fileID: 0}
-        animateThis: 0
-        animationClipToPlay: {fileID: 0}
-        holdForAnimation: 0
-        reselectButtonFromStartingDirection: 0
-        setSelectionButton: {fileID: 0}
-        setSelectionForThisButtom: 0
-        setSelectionType: 0
-        ignoreDeselectEventsForAllOtherButtons: 0
-        setFocusedPanel: {fileID: 0}
-        setFocusForPreviousPanel: 0
-        setFocusForThisPanel: 0
-        setPanelFocusType: 0
-        setPanelActiveStateAswell: 0
-        activationPauseBefore: 0
-        activationPauseAfter: 0.01
-        activationObject: {fileID: 6567317642048400625}
-        setActiveState: 1
-        navigationType1: 0
-        navigationState1: 0
-        navigationType2: 0
-        navigationState2: 0
-        navigationType3: 0
-        navigationState3: 0
-        setNavigationAbsolute: 0
-        briefing: {fileID: 0}
-        stageForBriefing: {fileID: 0}
-        worldMenuRef: {fileID: 0}
-        focusMapTiming: 0
-        thingToFocusMapOn: {fileID: 0}
-        focusMapZoom: 0
-        focusMapOnScreenCentre: 0
-        screenPositionOffset: {x: 0, y: 0}
-        pauseTillEndOfFocus: 0
-        enablingCollectionID: 
-        collectionEnableState: 0
-        sceneSwitchType: 0
-        ResolutionMenu: {fileID: 0}
-        resolutionMenuChange: 0
-      - Name: Configure the resolution
-        parentButton: {fileID: 0}
-        actionType: 12
-        pauseTime: 0
-        changeColorOf: 0
-        changeColorText: {fileID: 0}
-        changeColorImage: {fileID: 0}
-        changeThingColorOnThisObject: 0
-        colorToChangeTo: {r: 0, g: 0, b: 0, a: 0}
-        thingToAnimate: {fileID: 6567317642048400639}
-        animateThis: 0
-        animationClipToPlay: {fileID: 7400000, guid: 9ed41ef2db498b9468ec9b2e3a8c3d5a,
-          type: 2}
-        holdForAnimation: 1
-        reselectButtonFromStartingDirection: 0
-        setSelectionButton: {fileID: 0}
-        setSelectionForThisButtom: 0
-        setSelectionType: 0
-        ignoreDeselectEventsForAllOtherButtons: 0
-        setFocusedPanel: {fileID: 0}
-        setFocusForPreviousPanel: 0
-        setFocusForThisPanel: 0
-        setPanelFocusType: 0
-        setPanelActiveStateAswell: 0
-        activationPauseBefore: 0
-        activationPauseAfter: 0
-        activationObject: {fileID: 0}
-        setActiveState: 0
-        navigationType1: 0
-        navigationState1: 0
-        navigationType2: 0
-        navigationState2: 0
-        navigationType3: 0
-        navigationState3: 0
-        setNavigationAbsolute: 0
-        briefing: {fileID: 0}
-        stageForBriefing: {fileID: 0}
-        worldMenuRef: {fileID: 0}
-        focusMapTiming: 0
-        thingToFocusMapOn: {fileID: 0}
-        focusMapZoom: 0
-        focusMapOnScreenCentre: 0
-        screenPositionOffset: {x: 0, y: 0}
-        pauseTillEndOfFocus: 0
-        enablingCollectionID: 
-        collectionEnableState: 0
-        sceneSwitchType: 0
-        ResolutionMenu: {fileID: 5900208831390983799}
-        resolutionMenuChange: 0
-      - Name: Play GridPanel_mainMenu_FlyInFromTop on ResultsPanel
-        parentButton: {fileID: 0}
-        actionType: 3
-        pauseTime: 0
-        changeColorOf: 0
-        changeColorText: {fileID: 0}
-        changeColorImage: {fileID: 0}
-        changeThingColorOnThisObject: 0
-        colorToChangeTo: {r: 0, g: 0, b: 0, a: 0}
-        thingToAnimate: {fileID: 6567317642048400639}
-        animateThis: 0
-        animationClipToPlay: {fileID: 7400000, guid: 9ed41ef2db498b9468ec9b2e3a8c3d5a,
-          type: 2}
-        holdForAnimation: 1
-        reselectButtonFromStartingDirection: 0
-        setSelectionButton: {fileID: 0}
-        setSelectionForThisButtom: 0
-        setSelectionType: 0
-        ignoreDeselectEventsForAllOtherButtons: 0
-        setFocusedPanel: {fileID: 0}
-        setFocusForPreviousPanel: 0
-        setFocusForThisPanel: 0
-        setPanelFocusType: 0
-        setPanelActiveStateAswell: 0
-        activationPauseBefore: 0
-        activationPauseAfter: 0
-        activationObject: {fileID: 0}
-        setActiveState: 0
-        navigationType1: 0
-        navigationState1: 0
-        navigationType2: 0
-        navigationState2: 0
-        navigationType3: 0
-        navigationState3: 0
-        setNavigationAbsolute: 0
-        briefing: {fileID: 0}
-        stageForBriefing: {fileID: 0}
-        worldMenuRef: {fileID: 0}
-        focusMapTiming: 0
-        thingToFocusMapOn: {fileID: 0}
-        focusMapZoom: 0
-        focusMapOnScreenCentre: 0
-        screenPositionOffset: {x: 0, y: 0}
-        pauseTillEndOfFocus: 0
-        enablingCollectionID: 
-        collectionEnableState: 0
-        sceneSwitchType: 0
-        ResolutionMenu: {fileID: 0}
-        resolutionMenuChange: 0
-      - Name: Reveal the resolution
-        parentButton: {fileID: 0}
-        actionType: 12
-        pauseTime: 0
-        changeColorOf: 0
-        changeColorText: {fileID: 0}
-        changeColorImage: {fileID: 0}
-        changeThingColorOnThisObject: 0
-        colorToChangeTo: {r: 0, g: 0, b: 0, a: 0}
-        thingToAnimate: {fileID: 0}
-        animateThis: 0
-        animationClipToPlay: {fileID: 0}
-        holdForAnimation: 0
-        reselectButtonFromStartingDirection: 0
-        setSelectionButton: {fileID: 0}
-        setSelectionForThisButtom: 0
-        setSelectionType: 0
-        ignoreDeselectEventsForAllOtherButtons: 0
-        setFocusedPanel: {fileID: 0}
-        setFocusForPreviousPanel: 0
-        setFocusForThisPanel: 0
-        setPanelFocusType: 0
-        setPanelActiveStateAswell: 0
-        activationPauseBefore: 0
-        activationPauseAfter: 0
-        activationObject: {fileID: 0}
-        setActiveState: 0
-        navigationType1: 0
-        navigationState1: 0
-        navigationType2: 0
-        navigationState2: 0
-        navigationType3: 0
-        navigationState3: 0
-        setNavigationAbsolute: 0
-        briefing: {fileID: 0}
-        stageForBriefing: {fileID: 0}
-        worldMenuRef: {fileID: 0}
-        focusMapTiming: 0
-        thingToFocusMapOn: {fileID: 0}
-        focusMapZoom: 0
-        focusMapOnScreenCentre: 0
-        screenPositionOffset: {x: 0, y: 0}
-        pauseTillEndOfFocus: 0
-        enablingCollectionID: 
-        collectionEnableState: 0
-        sceneSwitchType: 0
-        ResolutionMenu: {fileID: 5900208831390983799}
-        resolutionMenuChange: 1
-      - Name: Pause for 1 seconds...
-        parentButton: {fileID: 0}
-        actionType: 1
-        pauseTime: 1
-        changeColorOf: 0
-        changeColorText: {fileID: 0}
-        changeColorImage: {fileID: 0}
-        changeThingColorOnThisObject: 0
-        colorToChangeTo: {r: 0, g: 0, b: 0, a: 0}
-        thingToAnimate: {fileID: 0}
-        animateThis: 0
-        animationClipToPlay: {fileID: 0}
-        holdForAnimation: 0
-        reselectButtonFromStartingDirection: 0
-        setSelectionButton: {fileID: 0}
-        setSelectionForThisButtom: 0
-        setSelectionType: 0
-        ignoreDeselectEventsForAllOtherButtons: 0
-        setFocusedPanel: {fileID: 0}
-        setFocusForPreviousPanel: 0
-        setFocusForThisPanel: 0
-        setPanelFocusType: 0
-        setPanelActiveStateAswell: 0
-        activationPauseBefore: 0
-        activationPauseAfter: 0
-        activationObject: {fileID: 0}
-        setActiveState: 0
-        navigationType1: 0
-        navigationState1: 0
-        navigationType2: 0
-        navigationState2: 0
-        navigationType3: 0
-        navigationState3: 0
-        setNavigationAbsolute: 0
-        briefing: {fileID: 0}
-        stageForBriefing: {fileID: 0}
-        worldMenuRef: {fileID: 0}
-        focusMapTiming: 0
-        thingToFocusMapOn: {fileID: 0}
-        focusMapZoom: 0
-        focusMapOnScreenCentre: 0
-        screenPositionOffset: {x: 0, y: 0}
-        pauseTillEndOfFocus: 0
-        enablingCollectionID: 
-        collectionEnableState: 0
-        sceneSwitchType: 0
-        ResolutionMenu: {fileID: 0}
-        resolutionMenuChange: 0
-      - Name: Resolve the resolution
-        parentButton: {fileID: 0}
-        actionType: 12
-        pauseTime: 0
-        changeColorOf: 0
-        changeColorText: {fileID: 0}
-        changeColorImage: {fileID: 0}
-        changeThingColorOnThisObject: 0
-        colorToChangeTo: {r: 0, g: 0, b: 0, a: 0}
-        thingToAnimate: {fileID: 0}
-        animateThis: 0
-        animationClipToPlay: {fileID: 0}
-        holdForAnimation: 0
-        reselectButtonFromStartingDirection: 0
-        setSelectionButton: {fileID: 0}
-        setSelectionForThisButtom: 0
-        setSelectionType: 0
-        ignoreDeselectEventsForAllOtherButtons: 0
-        setFocusedPanel: {fileID: 0}
-        setFocusForPreviousPanel: 0
-        setFocusForThisPanel: 0
-        setPanelFocusType: 0
-        setPanelActiveStateAswell: 0
-        activationPauseBefore: 0
-        activationPauseAfter: 0
-        activationObject: {fileID: 0}
-        setActiveState: 0
-        navigationType1: 0
-        navigationState1: 0
-        navigationType2: 0
-        navigationState2: 0
-        navigationType3: 0
-        navigationState3: 0
-        setNavigationAbsolute: 0
-        briefing: {fileID: 0}
-        stageForBriefing: {fileID: 0}
-        worldMenuRef: {fileID: 0}
-        focusMapTiming: 0
-        thingToFocusMapOn: {fileID: 0}
-        focusMapZoom: 0
-        focusMapOnScreenCentre: 0
-        screenPositionOffset: {x: 0, y: 0}
-        pauseTillEndOfFocus: 0
-        enablingCollectionID: 
-        collectionEnableState: 0
-        sceneSwitchType: 0
-        ResolutionMenu: {fileID: 5900208831390983799}
-        resolutionMenuChange: 2
-      - Name: 'Set panel: ResultsPanel (Grid_UIPanel) to be in focus'
-        parentButton: {fileID: 0}
-        actionType: 5
-        pauseTime: 0
-        changeColorOf: 0
-        changeColorText: {fileID: 0}
-        changeColorImage: {fileID: 0}
-        changeThingColorOnThisObject: 0
-        colorToChangeTo: {r: 0, g: 0, b: 0, a: 0}
-        thingToAnimate: {fileID: 0}
-        animateThis: 0
-        animationClipToPlay: {fileID: 0}
-        holdForAnimation: 0
-        reselectButtonFromStartingDirection: 0
-        setSelectionButton: {fileID: 0}
-        setSelectionForThisButtom: 0
-        setSelectionType: 0
-        ignoreDeselectEventsForAllOtherButtons: 0
-        setFocusedPanel: {fileID: 6567317642048400637}
-        setFocusForPreviousPanel: 0
-        setFocusForThisPanel: 0
-        setPanelFocusType: 0
-        setPanelActiveStateAswell: 0
-        activationPauseBefore: 0
-        activationPauseAfter: 0
-        activationObject: {fileID: 0}
-        setActiveState: 0
-        navigationType1: 0
-        navigationState1: 0
-        navigationType2: 0
-        navigationState2: 0
-        navigationType3: 0
-        navigationState3: 0
-        setNavigationAbsolute: 0
-        briefing: {fileID: 0}
-        stageForBriefing: {fileID: 0}
-        worldMenuRef: {fileID: 0}
-        focusMapTiming: 0
-        thingToFocusMapOn: {fileID: 0}
-        focusMapZoom: 0
-        focusMapOnScreenCentre: 0
-        screenPositionOffset: {x: 0, y: 0}
-        pauseTillEndOfFocus: 0
-        enablingCollectionID: 
-        collectionEnableState: 0
-        sceneSwitchType: 0
-        ResolutionMenu: {fileID: 0}
-        resolutionMenuChange: 0
-      - Name: Set navigation
-        parentButton: {fileID: 0}
-        actionType: 7
-        pauseTime: 0
-        changeColorOf: 0
-        changeColorText: {fileID: 0}
-        changeColorImage: {fileID: 0}
-        changeThingColorOnThisObject: 0
-        colorToChangeTo: {r: 0, g: 0, b: 0, a: 0}
-        thingToAnimate: {fileID: 0}
-        animateThis: 0
-        animationClipToPlay: {fileID: 0}
-        holdForAnimation: 0
-        reselectButtonFromStartingDirection: 0
-        setSelectionButton: {fileID: 0}
-        setSelectionForThisButtom: 0
-        setSelectionType: 0
-        ignoreDeselectEventsForAllOtherButtons: 0
-        setFocusedPanel: {fileID: 0}
-        setFocusForPreviousPanel: 0
-        setFocusForThisPanel: 0
-        setPanelFocusType: 0
-        setPanelActiveStateAswell: 0
-        activationPauseBefore: 0
-        activationPauseAfter: 0
-        activationObject: {fileID: 0}
-        setActiveState: 0
-        navigationType1: 0
-        navigationState1: 0
-        navigationType2: 0
-        navigationState2: 0
-        navigationType3: 0
-        navigationState3: 0
-        setNavigationAbsolute: 0
-        briefing: {fileID: 0}
-        stageForBriefing: {fileID: 0}
-        worldMenuRef: {fileID: 0}
-        focusMapTiming: 0
-        thingToFocusMapOn: {fileID: 0}
-        focusMapZoom: 0
-        focusMapOnScreenCentre: 0
-        screenPositionOffset: {x: 0, y: 0}
-        pauseTillEndOfFocus: 0
-        enablingCollectionID: 
-        collectionEnableState: 0
-        sceneSwitchType: 0
-        ResolutionMenu: {fileID: 0}
-        resolutionMenuChange: 0
-      useStandardUnityEventsInstead: 0
-      waitBefore: 0
-      waitAfter: 0
-      events:
-        m_PersistentCalls:
-          m_Calls: []
 --- !u!111 &6567317642048400639
 Animation:
   m_ObjectHideFlags: 0
@@ -2318,6 +1906,224 @@ MonoBehaviour:
   tallySpacing: 213
   tallyPrefab: {fileID: 2805633781803892508, guid: f9b24448570735a44a82e85023e6eb77,
     type: 3}
+--- !u!114 &3578656156830570449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6567317642048400625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f20f2e9e924854a984298916d41e23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activators:
+  - Name: BackToMainMenu >  4 actions triggred by 1 inputs
+    ID: BackToMainMenu
+    input: 00000000
+    workingStates: 
+    actions:
+    - Name: 4 Ui Actions
+      uiActions:
+      - Name: Set navigation
+        parentButton: {fileID: 0}
+        actionType: 7
+        pauseTime: 0
+        changeColorOf: 0
+        changeColorText: {fileID: 0}
+        changeColorImage: {fileID: 0}
+        changeThingColorOnThisObject: 0
+        colorToChangeTo: {r: 0, g: 0, b: 0, a: 0}
+        thingToAnimate: {fileID: 0}
+        animateThis: 0
+        animationClipToPlay: {fileID: 0}
+        holdForAnimation: 0
+        reselectButtonFromStartingDirection: 0
+        setSelectionButton: {fileID: 0}
+        setSelectionForThisButtom: 0
+        setSelectionType: 0
+        ignoreDeselectEventsForAllOtherButtons: 0
+        setFocusedPanel: {fileID: 0}
+        setFocusForPreviousPanel: 0
+        setFocusForThisPanel: 0
+        setPanelFocusType: 0
+        setPanelActiveStateAswell: 0
+        activationPauseBefore: 0
+        activationPauseAfter: 0
+        activationObject: {fileID: 0}
+        setActiveState: 0
+        navigationType1: 1
+        navigationState1: 1
+        navigationType2: 0
+        navigationState2: 0
+        navigationType3: 0
+        navigationState3: 0
+        setNavigationAbsolute: 1
+        briefing: {fileID: 0}
+        stageForBriefing: {fileID: 0}
+        worldMenuRef: {fileID: 0}
+        focusMapTiming: 0
+        thingToFocusMapOn: {fileID: 0}
+        focusMapZoom: 0
+        focusMapOnScreenCentre: 0
+        screenPositionOffset: {x: 0, y: 0}
+        pauseTillEndOfFocus: 0
+        enablingCollectionID: 
+        collectionEnableState: 0
+        sceneSwitchType: 0
+        ResolutionMenu: {fileID: 0}
+        resolutionMenuChange: 0
+      - Name: Switch scene to MenuScene
+        parentButton: {fileID: 0}
+        actionType: 11
+        pauseTime: 0
+        changeColorOf: 0
+        changeColorText: {fileID: 0}
+        changeColorImage: {fileID: 0}
+        changeThingColorOnThisObject: 0
+        colorToChangeTo: {r: 0, g: 0, b: 0, a: 0}
+        thingToAnimate: {fileID: 0}
+        animateThis: 0
+        animationClipToPlay: {fileID: 0}
+        holdForAnimation: 0
+        reselectButtonFromStartingDirection: 0
+        setSelectionButton: {fileID: 0}
+        setSelectionForThisButtom: 0
+        setSelectionType: 0
+        ignoreDeselectEventsForAllOtherButtons: 0
+        setFocusedPanel: {fileID: 0}
+        setFocusForPreviousPanel: 0
+        setFocusForThisPanel: 0
+        setPanelFocusType: 0
+        setPanelActiveStateAswell: 0
+        activationPauseBefore: 0
+        activationPauseAfter: 0
+        activationObject: {fileID: 0}
+        setActiveState: 0
+        navigationType1: 0
+        navigationState1: 0
+        navigationType2: 0
+        navigationState2: 0
+        navigationType3: 0
+        navigationState3: 0
+        setNavigationAbsolute: 0
+        briefing: {fileID: 0}
+        stageForBriefing: {fileID: 0}
+        worldMenuRef: {fileID: 0}
+        focusMapTiming: 0
+        thingToFocusMapOn: {fileID: 0}
+        focusMapZoom: 0
+        focusMapOnScreenCentre: 0
+        screenPositionOffset: {x: 0, y: 0}
+        pauseTillEndOfFocus: 0
+        enablingCollectionID: 
+        collectionEnableState: 0
+        sceneSwitchType: 0
+        ResolutionMenu: {fileID: 0}
+        resolutionMenuChange: 0
+      - Name: 'Set collection: ''MainMenu'' to enabled'
+        parentButton: {fileID: 0}
+        actionType: 10
+        pauseTime: 0
+        changeColorOf: 0
+        changeColorText: {fileID: 0}
+        changeColorImage: {fileID: 0}
+        changeThingColorOnThisObject: 0
+        colorToChangeTo: {r: 0, g: 0, b: 0, a: 0}
+        thingToAnimate: {fileID: 0}
+        animateThis: 0
+        animationClipToPlay: {fileID: 0}
+        holdForAnimation: 0
+        reselectButtonFromStartingDirection: 0
+        setSelectionButton: {fileID: 0}
+        setSelectionForThisButtom: 0
+        setSelectionType: 0
+        ignoreDeselectEventsForAllOtherButtons: 0
+        setFocusedPanel: {fileID: 0}
+        setFocusForPreviousPanel: 0
+        setFocusForThisPanel: 0
+        setPanelFocusType: 0
+        setPanelActiveStateAswell: 0
+        activationPauseBefore: 0
+        activationPauseAfter: 0
+        activationObject: {fileID: 0}
+        setActiveState: 0
+        navigationType1: 0
+        navigationState1: 0
+        navigationType2: 0
+        navigationState2: 0
+        navigationType3: 0
+        navigationState3: 0
+        setNavigationAbsolute: 0
+        briefing: {fileID: 0}
+        stageForBriefing: {fileID: 0}
+        worldMenuRef: {fileID: 0}
+        focusMapTiming: 0
+        thingToFocusMapOn: {fileID: 0}
+        focusMapZoom: 0
+        focusMapOnScreenCentre: 0
+        screenPositionOffset: {x: 0, y: 0}
+        pauseTillEndOfFocus: 0
+        enablingCollectionID: MainMenu
+        collectionEnableState: 1
+        sceneSwitchType: 0
+        ResolutionMenu: {fileID: 0}
+        resolutionMenuChange: 0
+      - Name: 'Set collection: ''GameMenu'' to disabled'
+        parentButton: {fileID: 0}
+        actionType: 10
+        pauseTime: 0
+        changeColorOf: 0
+        changeColorText: {fileID: 0}
+        changeColorImage: {fileID: 0}
+        changeThingColorOnThisObject: 0
+        colorToChangeTo: {r: 0, g: 0, b: 0, a: 0}
+        thingToAnimate: {fileID: 0}
+        animateThis: 0
+        animationClipToPlay: {fileID: 0}
+        holdForAnimation: 0
+        reselectButtonFromStartingDirection: 0
+        setSelectionButton: {fileID: 0}
+        setSelectionForThisButtom: 0
+        setSelectionType: 0
+        ignoreDeselectEventsForAllOtherButtons: 0
+        setFocusedPanel: {fileID: 0}
+        setFocusForPreviousPanel: 0
+        setFocusForThisPanel: 0
+        setPanelFocusType: 0
+        setPanelActiveStateAswell: 0
+        activationPauseBefore: 0
+        activationPauseAfter: 0
+        activationObject: {fileID: 0}
+        setActiveState: 0
+        navigationType1: 0
+        navigationState1: 0
+        navigationType2: 0
+        navigationState2: 0
+        navigationType3: 0
+        navigationState3: 0
+        setNavigationAbsolute: 0
+        briefing: {fileID: 0}
+        stageForBriefing: {fileID: 0}
+        worldMenuRef: {fileID: 0}
+        focusMapTiming: 0
+        thingToFocusMapOn: {fileID: 0}
+        focusMapZoom: 0
+        focusMapOnScreenCentre: 0
+        screenPositionOffset: {x: 0, y: 0}
+        pauseTillEndOfFocus: 0
+        enablingCollectionID: GameMenu
+        collectionEnableState: 0
+        sceneSwitchType: 0
+        ResolutionMenu: {fileID: 0}
+        resolutionMenuChange: 0
+      useStandardUnityEventsInstead: 0
+      waitBefore: 0
+      waitAfter: 0
+      events:
+        m_PersistentCalls:
+          m_Calls: []
 --- !u!1 &6567317642759146426
 GameObject:
   m_ObjectHideFlags: 0
@@ -2541,22 +2347,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 181
       objectReference: {fileID: 0}
-    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.characterCount
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.wordCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.lineCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
@@ -2581,22 +2387,22 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.characterCount
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.wordCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.lineCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
@@ -2617,26 +2423,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4732586315330243406, guid: f9b24448570735a44a82e85023e6eb77,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
@@ -2657,6 +2443,26 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5966275959533577001, guid: f9b24448570735a44a82e85023e6eb77,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
@@ -2746,22 +2552,22 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.characterCount
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.wordCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.lineCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
@@ -2786,22 +2592,22 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.characterCount
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.wordCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.lineCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
@@ -2822,26 +2628,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4732586315330243406, guid: f9b24448570735a44a82e85023e6eb77,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
@@ -2862,6 +2648,26 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5966275959533577001, guid: f9b24448570735a44a82e85023e6eb77,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
@@ -2951,22 +2757,22 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.characterCount
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.wordCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.lineCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
@@ -2991,22 +2797,22 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.characterCount
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.wordCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.lineCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
@@ -3027,26 +2833,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4732586315330243406, guid: f9b24448570735a44a82e85023e6eb77,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
@@ -3067,6 +2853,26 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5966275959533577001, guid: f9b24448570735a44a82e85023e6eb77,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
@@ -3266,15 +3072,30 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 256
       objectReference: {fileID: 0}
+    - target: {fileID: 4738559692546412747, guid: 7c120e4c8a981ad479f3fbb6e56e0d0d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5102652044793826337, guid: 7c120e4c8a981ad479f3fbb6e56e0d0d,
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 256
       objectReference: {fileID: 0}
+    - target: {fileID: 3824239822154267429, guid: 7c120e4c8a981ad479f3fbb6e56e0d0d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4252667358521398060, guid: 7c120e4c8a981ad479f3fbb6e56e0d0d,
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 5102652044793826367, guid: 7c120e4c8a981ad479f3fbb6e56e0d0d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8372217480818861201, guid: 7c120e4c8a981ad479f3fbb6e56e0d0d,
         type: 3}
@@ -3285,21 +3106,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 256
-      objectReference: {fileID: 0}
-    - target: {fileID: 4738559692546412747, guid: 7c120e4c8a981ad479f3fbb6e56e0d0d,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3824239822154267429, guid: 7c120e4c8a981ad479f3fbb6e56e0d0d,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5102652044793826367, guid: 7c120e4c8a981ad479f3fbb6e56e0d0d,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4252667358521398066, guid: 7c120e4c8a981ad479f3fbb6e56e0d0d,
         type: 3}
@@ -3366,22 +3172,22 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.characterCount
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.wordCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.lineCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
@@ -3406,22 +3212,22 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.characterCount
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.wordCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.lineCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+    - target: {fileID: 4461957166582563641, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
@@ -3442,26 +3248,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4732586315330243406, guid: f9b24448570735a44a82e85023e6eb77,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2311116317170302365, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
@@ -3482,6 +3268,26 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5966275959533577001, guid: f9b24448570735a44a82e85023e6eb77,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338493045536118551, guid: f9b24448570735a44a82e85023e6eb77,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1

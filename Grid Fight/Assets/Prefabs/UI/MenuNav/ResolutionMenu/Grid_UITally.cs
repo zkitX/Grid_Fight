@@ -56,6 +56,9 @@ public class Grid_UITally : MonoBehaviour
         if (!resolved) return;
         resolved = false;
 
+        InputController.Instance.ButtonADownEvent += SpeedUpTime;
+        InputController.Instance.ButtonAUpEvent += ResetTimeSpeedUp;
+
         info = StatisticInfoManagerScript.Instance.GetCharacterStatsFor(character);
 
         if(BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == character).FirstOrDefault().CharInfo.CharacterIcon != null)
@@ -92,7 +95,21 @@ public class Grid_UITally : MonoBehaviour
         }
     }
 
+    float timeMultiplier = 1f;
+    public void SpeedUpTime(int player)
+    {
+        timeMultiplier = 4f;
+    }
+
+    public void ResetTimeSpeedUp(int player)
+    {
+        timeMultiplier = 1f;
+    }
+
+
+
     float waitBetweenResults = 0.3f;
+    float timeLeft = 0f;
     public IEnumerator ResolveTally()
     {
         resolved = true;
@@ -101,28 +118,48 @@ public class Grid_UITally : MonoBehaviour
         StopCoroutine(ValueShufflers[0]);
         baseXPText.text = Mathf.Round(info.BaseExp).ToString();
 
-        yield return new WaitForSecondsRealtime(waitBetweenResults);
+        timeLeft = waitBetweenResults;
+        while (timeLeft != 0)
+        {
+            timeLeft = Mathf.Clamp(timeLeft - (Time.deltaTime * timeMultiplier), 0f, 100f);
+            yield return null;
+        }
 
         StartCoroutine(GrowShrink(accuracyXPText.transform));
         StopCoroutine(ValueShufflers[1]);
         accuracyXPText.text = Mathf.Round(info.AccuracyExp).ToString();
         accuracyXPStars.SetStarRanking(info.Accuracy / BattleManagerBaseObjectGeneratorScript.Instance.stage.bestAccuracyRating.ValueToAchieve);
 
-        yield return new WaitForSecondsRealtime(waitBetweenResults);
+        timeLeft = waitBetweenResults;
+        while (timeLeft != 0)
+        {
+            timeLeft = Mathf.Clamp(timeLeft - (Time.deltaTime * timeMultiplier), 0f, 100f);
+            yield return null;
+        }
 
         StartCoroutine(GrowShrink(reflexXPText.transform));
         StopCoroutine(ValueShufflers[2]);
         reflexXPText.text = Mathf.Round(info.ReflexExp).ToString();
         reflexXPStars.SetStarRanking(info.Reflexes / BattleManagerBaseObjectGeneratorScript.Instance.stage.bestReflexRating.ValueToAchieve);
 
-        yield return new WaitForSecondsRealtime(waitBetweenResults);
+        timeLeft = waitBetweenResults;
+        while (timeLeft != 0)
+        {
+            timeLeft = Mathf.Clamp(timeLeft - (Time.deltaTime * timeMultiplier), 0f, 100f);
+            yield return null;
+        }
 
         StartCoroutine(GrowShrink(damageXPText.transform));
         StopCoroutine(ValueShufflers[3]);
         damageXPText.text = Mathf.Round(info.DamageExp).ToString();
         damageXPStars.SetStarRanking(info.DamageMade / BattleManagerBaseObjectGeneratorScript.Instance.stage.bestDamageRating.ValueToAchieve);
 
-        yield return new WaitForSecondsRealtime(waitBetweenResults * 2f);
+        timeLeft = waitBetweenResults * 2f;
+        while (timeLeft != 0)
+        {
+            timeLeft = Mathf.Clamp(timeLeft - (Time.deltaTime * timeMultiplier), 0f, 100f);
+            yield return null;
+        }
 
         StartCoroutine(GrowShrink(totalXPText.transform));
         StopCoroutine(ValueShufflers[4]);
@@ -139,14 +176,14 @@ public class Grid_UITally : MonoBehaviour
         float timeRemaining = timing * 0.8f;
         while (timeRemaining != 0f)
         {
-            timeRemaining = Mathf.Clamp(timeRemaining - Time.deltaTime, 0f, 99f);
+            timeRemaining = Mathf.Clamp(timeRemaining - (Time.deltaTime * timeMultiplier), 0f, 99f);
             tran.localScale = Vector3.Lerp(tran.localScale, growScale, 1f - (timeRemaining / (timing * 0.8f)));
             yield return null;
         }
         timeRemaining = timing;
         while (timeRemaining != 0f)
         {
-            timeRemaining = Mathf.Clamp(timeRemaining - Time.deltaTime, 0f, 99f);
+            timeRemaining = Mathf.Clamp(timeRemaining - (Time.deltaTime * timeMultiplier), 0f, 99f);
             tran.localScale = Vector3.Lerp(tran.localScale, startingScale, 1f - (timeRemaining / timing));
             yield return null;
         }
@@ -189,6 +226,9 @@ public class Grid_UITally : MonoBehaviour
             SetLevelStarSystem();
             yield return null;
         }
+
+        InputController.Instance.ButtonADownEvent -= SpeedUpTime;
+        InputController.Instance.ButtonAUpEvent -= ResetTimeSpeedUp;
     }
 
 
