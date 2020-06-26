@@ -51,10 +51,10 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
 
     private IEnumerator SetupScene()
     {
-        InfoUIManager.Instance.EnableLoadingScreen(!loadFromGameScene, false);
+        InfoUIManager.Instance?.EnableLoadingScreen(!loadFromGameScene, false);
         yield return LevelLoadingSequence();
         yield return new WaitForSeconds(loadingTime);
-        if (!loadFromGameScene) InfoUIManager.Instance.EnableLoadingScreen(false, true);
+        if (!loadFromGameScene) InfoUIManager.Instance?.EnableLoadingScreen(false, true);
     }
 
     public void ChangeStage(string newStageID, bool loadAsWell = true)
