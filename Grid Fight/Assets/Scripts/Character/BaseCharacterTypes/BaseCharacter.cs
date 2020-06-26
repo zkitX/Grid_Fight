@@ -502,13 +502,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                                     if (nextAttack.AttackInput > AttackInputType.Weak && i == 0)
                                     {
                                         bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, res,
-                                    CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
+                                    CharInfo.DamageStats.BaseDamage * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.x, CharInfo.Elemental, this,
                                     target, target.EffectChances, (nextAttack.TilesAtk.BulletTrajectories[i].BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y))) + animDelay);//(nextAttack.TilesAtk.BulletTrajectories[i].Delay * 0.1f)
                                     }
                                     else if(nextAttack.AttackInput == AttackInputType.Weak)
                                     {
                                         bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, res,
-                                    CharInfo.DamageStats.BaseDamage, CharInfo.Elemental, this,
+                                    CharInfo.DamageStats.BaseDamage * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.x, CharInfo.Elemental, this,
                                     target, target.EffectChances, (nextAttack.TilesAtk.BulletTrajectories[i].BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y))) + animDelay); // 
                                     }
                                     else
@@ -1464,7 +1464,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         EventManager.Instance?.UpdateHealth(this);
         EventManager.Instance?.UpdateStamina(this);
 
-        SetFinalDamage(attacker , damage * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.y);
+        SetFinalDamage(attacker , damage / GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos).TileADStats.y);
 
 
         HealthStatsChangedEvent?.Invoke(damage, healthCT, SpineAnim.transform);
