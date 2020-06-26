@@ -828,7 +828,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         float spaceTimer = 0;
         bool isMovCheck = false;
         bool isDefe = false;
-        float moveValue = CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed * (CharInfo.BaseCharacterType != BaseCharType.CharacterType_Script ? UniversalGameBalancer.Instance.difficulty.enemyMoveDurationScaler : 1f);
         Transform spineT = SpineAnim.transform;
         Vector3 offset = spineT.position;
         transform.position = nextPos;
@@ -837,9 +836,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         while (timer < 1 && !stopCo)
         {
-
             yield return BattleManagerScript.Instance.WaitFixedUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-            timer += (BattleManagerScript.Instance.FixedDeltaTime / (animLength / moveValue));
+            timer += (BattleManagerScript.Instance.FixedDeltaTime / (animLength / (CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed)));
             spaceTimer = curve.Evaluate(timer);
             spineT.localPosition = Vector3.Lerp(localoffset, LocalSpinePosoffset, spaceTimer);
 
@@ -928,6 +926,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, HealthChangedType.Heal, bdClass.EffectMaker.SpineAnim.transform);
             bdClass.EffectMaker.CharInfo.Health += bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Value ? bdClass.CurrentBuffDebuff.Value : (CharInfo.HealthStats.Base / 100) * bdClass.CurrentBuffDebuff.Value;
+            EventManager.Instance?.UpdateHealth(this);
+            EventManager.Instance?.UpdateHealth(bdClass.EffectMaker);
         }
         else if (bdClass.Stat == BuffDebuffStatsType.Zombification)
         {
@@ -950,6 +950,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
             CharInfo.Health += val;
             HealthStatsChangedEvent?.Invoke(val, HealthChangedType.Heal, bdClass.EffectMaker.SpineAnim.transform);
+            EventManager.Instance?.UpdateHealth(this);
         }
         else
         {
@@ -988,6 +989,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             if (statToCheck[1].Contains("Health"))
             {
                 HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, bdClass.CurrentBuffDebuff.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, SpineAnim.transform);
+
             }
 
             if (statToCheck[1] == "BaseSpeed")
@@ -1022,8 +1024,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     iterator++;
                     if (bdClass.Stat == BuffDebuffStatsType.Health || bdClass.Stat == BuffDebuffStatsType.Health_Overtime)
                     {
-                        CharInfo.Health += bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Value ? bdClass.CurrentBuffDebuff.Value : (bdClass.CurrentBuffDebuff.Value / 100) * bdClass.CurrentBuffDebuff.Value;
+                        CharInfo.Health += bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Value ? bdClass.CurrentBuffDebuff.Value : (CharInfo.HealthStats.Base / 100) * bdClass.CurrentBuffDebuff.Value;
                         HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, bdClass.CurrentBuffDebuff.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, SpineAnim.transform);
+                        EventManager.Instance?.UpdateHealth(this);
                     }
                     if (bdClass.Stat == BuffDebuffStatsType.Drain_Overtime)
                     {
@@ -1032,6 +1035,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                         HealthStatsChangedEvent?.Invoke(val, HealthChangedType.Damage, SpineAnim.transform);
                         bdClass.EffectMaker.CharInfo.Health += val;
                         CharInfo.Health -= val;
+                        EventManager.Instance?.UpdateHealth(bdClass.EffectMaker);
+                        EventManager.Instance?.UpdateHealth(this);
                     }
                 }
             }

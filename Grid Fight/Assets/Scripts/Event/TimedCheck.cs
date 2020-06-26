@@ -150,7 +150,7 @@ public class TimedCheck
     [ConditionalField("TimedCheckType", false, TimedCheckTypes.CharacterHealthChange)] public float healthChangeValue = 50;
     bool CharacterHealthChange()
     {
-        if (!EventManager.Instance.GetHealthUpdatedLastFrame(healthChangeCharID)) return false;
+        //if (!EventManager.Instance.GetHealthUpdatedLastFrame(healthChangeCharID)) return false;
         float currentHealthPercentage = EventManager.Instance.GetHealthPercentage(healthChangeCharID);
 
         switch (healthChange)
