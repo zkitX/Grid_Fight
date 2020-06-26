@@ -342,7 +342,7 @@ public Vector2 Duration_Debuff_Trap_ForTime;
         {
             foreach (var item in info.Effects)
             {
-
+                Effects.Add(item);
             }
         }
 
