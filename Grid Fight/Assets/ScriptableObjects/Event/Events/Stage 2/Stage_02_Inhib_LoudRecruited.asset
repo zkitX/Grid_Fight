@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25d497aba9400d147aee0263a1f7ec6d, type: 3}
-  m_Name: Stage_02_Event_WaitForLoudDeath
+  m_Name: Stage_02_Inhib_LoudRecruited
   m_EditorClassIdentifier: 
-  Name: Stage_02_Event_WaitForLoudDeath
+  Name: Stage_02_Inhib_LoudRecruited
   hasHappened: 0
   requirementRule: 0
-  reqChecks: []
+  reqChecks:
+  - {fileID: 11400000, guid: 722f41019be3af84c8d6862fcfd4e031, type: 2}
   timedCheckRule: 0
   timedChecks:
-  - Name: Event Called By Fungus Command
+  - Name: 
     hasHappened: 0
     isHappening: 0
     checker: {fileID: 0}
@@ -36,47 +37,6 @@ MonoBehaviour:
     switchesRequired: 0
     healthChangeCharID: 0
     healthChange: 0
-    healthChangeValue: 0
-    requireCalledDuringCheck: 0
-    requireEventCalledDuringCheck: 0
-    EventCallRequired: {fileID: 0}
-    timeCompareType: 0
-    hoursToCompare: 0
-    minutesToCompare: 0
-    secondsToCompare: 0
-    blockTypeToCheck: 0
-    checkBlockForAnyCharacter: 0
-    characterToCheckWhichBlocked: 0
-    numberOfBlocksRequired: 0
-    requireBlockHappenedLastFrame: 0
-    staminaChangeCharID: 0
-    staminaChange: 0
-    staminaChangeValue: 0
-    requireEventTriggerDuringCheck: 0
-    EventTriggerRequired: {fileID: 0}
-    potionType: 0
-    potionsRequired: 0
-    potionCollectedLastFrame: 0
-    availableCharactersToCheckFor: 0
-    avilableCharacterCheckRule: 0
-  - Name: Loud Dies
-    hasHappened: 0
-    isHappening: 0
-    checker: {fileID: 0}
-    ceaseOnHappened: 1
-    TimedCheckType: 1
-    deathCharacterID: 1045
-    onlyOnDeath: 1
-    deathsRequired: 1
-    buttonToWaitFor: 0
-    arrivalCharacterID: 0
-    onlyOnArrival: 0
-    arrivalsRequired: 0
-    switchCharacterID: 0
-    onlyOnSwitch: 0
-    switchesRequired: 0
-    healthChangeCharID: 0
-    healthChange: 2
     healthChangeValue: 0
     requireCalledDuringCheck: 1
     requireEventCalledDuringCheck: 0
@@ -101,16 +61,8 @@ MonoBehaviour:
     availableCharactersToCheckFor: 0
     avilableCharacterCheckRule: 0
   inhibitorRule: 1
-  inhibitors:
-  - {fileID: 11400000, guid: 5ffb69d8c43431d48bb432c4cb096bdf, type: 2}
+  inhibitors: []
   ignoreQueue: 0
   ceaseOnComplete: 1
   requireComplete: 1
-  effects:
-  - Name: Trigger Fungus
-    effectType: 2
-    secondsToWait: 0
-    debugText: 
-    blockName: LoudDies
-    command: {fileID: 0}
-    characterToRecruit: 0
+  effects: []
