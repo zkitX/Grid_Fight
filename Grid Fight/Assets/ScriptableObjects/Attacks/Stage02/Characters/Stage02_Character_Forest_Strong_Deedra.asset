@@ -10,28 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage02_Character_Forest_Strong
+  m_Name: Stage02_Character_Forest_Strong_Deedra
   m_EditorClassIdentifier: 
   Chances: 100
   CurrentAttackType: 0
   AttackRatioMultiplier: 1
   DamageMultiplier: {x: 1, y: 1}
-  AttackInput: 0
+  AttackInput: 1
   AttackAnim: 1
+  StaminaCost: 10
+  ExperiencePoints: 10
+  CoolDown: 10
   PrefixAnim: 1
   Particles:
     Left:
-      Cast: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Cast: {fileID: 1417508066968679184, guid: 37877f005cf28bf44931c578de6bafee,
         type: 3}
-      Bullet: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Bullet: {fileID: 8474284568554238284, guid: 7f17d7e797456d54ca232bc355b9a27f,
         type: 3}
-      Hit: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73, type: 3}
+      Hit: {fileID: 5325056520692002021, guid: 0f23059c5cbbd354c864749e15a06af5, type: 3}
     Right:
-      Cast: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Cast: {fileID: 1417508066968679184, guid: 929cccfcc03cdbb46910a87f995159f1,
         type: 3}
-      Bullet: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Bullet: {fileID: 8474284568554238284, guid: 7c4cb2536eab7c840a6d24cfe69e0e95,
         type: 3}
-      Hit: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73, type: 3}
+      Hit: {fileID: 5325056520692002021, guid: b421020a93c5b4f46a67f6618199f8b5, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
@@ -89,6 +92,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+      ChildrenBulletDelay: 0.5
       BulletEffectTiles: []
       BulletGapStartingTile: {x: 0, y: 0}
       HasEffect: 0
