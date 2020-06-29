@@ -20,6 +20,7 @@ MonoBehaviour:
   AttackAnim: 0
   StaminaCost: 10
   ExperiencePoints: 10
+  CoolDown: 10
   PrefixAnim: 0
   Particles:
     Left:
@@ -127,7 +128,7 @@ MonoBehaviour:
   TilesAtk:
     AtkType: 1
     BulletTrajectories:
-    - Delay: 3
+    - Delay: 1.5
       BulletTravelDurationPerTile: 0.25
       ExplosionChances: 100
       Trajectory_Y:
@@ -198,7 +199,7 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-    - Delay: 3.1
+    - Delay: 2.1
       BulletTravelDurationPerTile: 0
       ExplosionChances: 100
       Trajectory_Y:
@@ -263,4 +264,4 @@ MonoBehaviour:
     StatToCheck: 1
     ValueChecker: 0
     PercToCheck: 40
-    Chances: 100
+    Chances: 100000
