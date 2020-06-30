@@ -91,6 +91,8 @@ public class UIBattleFieldManager : MonoBehaviour
         cI.transform.localScale = Vector3.one * (1f + Mathf.Clamp(((float)combo) / StatisticInfoManagerScript.Instance.maxIntensityCombo, 0f, 1f));
         cI.transform.position = Camera.main.WorldToScreenPoint(position);
 
+        cI.GetComponent<Animation>().clip = cI.GetComponent<Animation>().GetClip("ComboSplash");
+
         cI.SetActive(true);
         StartCoroutine(DisplayCombo_CO(cI, type, combo, position, flavorText));
     }
@@ -133,6 +135,8 @@ public class UIBattleFieldManager : MonoBehaviour
         cI.transform.localScale = Vector3.one * (1f + Mathf.Clamp(((float)combo) / StatisticInfoManagerScript.Instance.maxIntensityCombo, 0f, 1f));
         cI.transform.position = Camera.main.WorldToScreenPoint(position + new Vector3(0f,0.5f,0f));
 
+        cI.GetComponent<Animation>().clip = cI.GetComponent<Animation>().GetClip("ComboSplash_Long");
+
         cI.SetActive(true);
         StartCoroutine(DisplayCombo_CO(cI, type, combo, position));
     }
@@ -144,7 +148,7 @@ public class UIBattleFieldManager : MonoBehaviour
 
         yield return anim.clip.length * 0.6f;
 
-        if(flavorText != "")
+        if (flavorText != "")
         {
             DisplayComboText(type, combo, position, flavorText);
         }
