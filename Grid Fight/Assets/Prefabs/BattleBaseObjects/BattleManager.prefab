@@ -127,6 +127,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharaterStats: []
+  useComboGroupings: 0
+  comboGroups:
+  - Name: Red Team
+    playerIndexes: 0000000001000000
+  - Name: Blue Team
+    playerIndexes: 0200000003000000
+  comboInfo: []
+  comboThresholds:
+  - Name: 5
+    val: 5
+    texts:
+    - Ok!
+    - Alright!
+    - Nice!
+  - Name: 10
+    val: 10
+    texts:
+    - Sweet!
+    - Awesome!
+    - Yeeees!
+  - Name: 20
+    val: 20
+    texts:
+    - Oh yeah!
+    - Epic!
+    - NOICE!
+  - Name: 30
+    val: 30
+    texts:
+    - WOW WOW WEE WOW WAH
+    - INSANITY
+    - WOOOOOOOOOO
+  - Name: 50
+    val: 50
+    texts:
+    - PERFECTION!
+    - KILLER!
+    - LEGENDARY!
+  maxIntensityCombo: 25
 --- !u!1 &1356531903299505067
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,6 +547,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  attackComboDuration: 5
+  defenceComboDuration: 15
   difficultyScales:
   - Name: 1 Player
     enemySpawnScaler: 1

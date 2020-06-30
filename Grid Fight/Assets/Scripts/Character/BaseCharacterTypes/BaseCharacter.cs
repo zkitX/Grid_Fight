@@ -1389,6 +1389,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 CharInfo.Stamina += UniversalGameBalancer.Instance.staminaRegenOnPerfectBlock;
                 EventManager.Instance.AddBlock(this, BlockInfo.BlockType.full);
                 Sic.CompleteDefences++;
+                StatisticInfoManagerScript.Instance.TriggerComboForCharacter(CharInfo.CharacterID, ComboType.Defence, true, transform);
             }
             else
             {
@@ -1400,6 +1401,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 CharInfo.Shield -= UniversalGameBalancer.Instance.partialDefenceCost;
                 EventManager.Instance.AddBlock(this, BlockInfo.BlockType.partial);
                 Sic.Defences++;
+                StatisticInfoManagerScript.Instance.TriggerComboForCharacter(CharInfo.CharacterID, ComboType.Defence, false);
                 damage = damage < 0 ? 1 : damage;
             }
             healthCT = HealthChangedType.Defend;

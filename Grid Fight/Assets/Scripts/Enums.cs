@@ -917,3 +917,10 @@ public enum MaskTypes
     Stage9 = 9,
     Stage10 = 10,
 }
+
+public enum ComboType
+{
+    None,
+    Attack,
+    Defence,
+}

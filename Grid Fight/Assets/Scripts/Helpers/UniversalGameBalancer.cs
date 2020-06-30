@@ -18,6 +18,10 @@ public class UniversalGameBalancer : MonoBehaviour
     [Tooltip("A curve that determines the jump height of the characters throughout the stage movement")] public AnimationCurve characterJumpCurve;
     [Tooltip("A curve that determines the animation playback speed of the jump animation across the duration of the jump")] public AnimationCurve jumpAnimationCurve;
 
+    [Header("Combo Handling")]
+    [Tooltip("The amount of time a combo must be retriggered (shot landing, shield used, etc.) in to avoid it resetting to 0")] public float attackComboDuration = 5f;
+    [Tooltip("The amount of time a combo must be retriggered (shot landing, shield used, etc.) in to avoid it resetting to 0")] public float defenceComboDuration = 15f;
+
     [Header("Difficulty Scaling")]
     public DifficultyScalingProfile[] difficultyScales =
         new DifficultyScalingProfile[] {

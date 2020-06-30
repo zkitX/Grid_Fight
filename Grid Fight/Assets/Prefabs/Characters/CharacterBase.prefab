@@ -735,7 +735,6 @@ MonoBehaviour:
   Side: 0
   WalkingSide: 0
   Facing: 0
-  isAIOn: 0
   Test: 0
   CharOwner: {fileID: 0}
   SelectionIndicator: {fileID: 5328009020081002985}
@@ -749,12 +748,17 @@ MonoBehaviour:
   ArrivingParticle: {fileID: 5425106868033024672}
   DeathParticles: {fileID: 1318025210907858467, guid: d100617447acf7546bc776beadb85a77,
     type: 3}
-  CurrentAttackType: 0
   HPBar: {fileID: 7086416835586428147}
   StaminaBar: {fileID: 4015708614223198380}
   IndicatorContainer: {fileID: 109818329}
   HpBarContainer: {fileID: 5347608638349823105}
   StaminaBarContainer: {fileID: 5861345221484680860}
+  ComboIndicators:
+  - {fileID: 0}
+  - {fileID: 0}
+  ComboAnimations:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &6698911643991842522
 GameObject:
   m_ObjectHideFlags: 0

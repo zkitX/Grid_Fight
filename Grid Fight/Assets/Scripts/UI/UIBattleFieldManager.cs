@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class UIBattleFieldManager : MonoBehaviour
 {
@@ -16,11 +17,16 @@ public class UIBattleFieldManager : MonoBehaviour
     public GameObject PartialDefend;
     public GameObject Healing;
     public GameObject CriticalHit;
+    public GameObject ComboIndicator;
     private Dictionary<int, GameObject> Damages = new Dictionary<int, GameObject>();
     private Dictionary<int, GameObject> Defends = new Dictionary<int, GameObject>();
     private Dictionary<int, GameObject> PartialDefends = new Dictionary<int, GameObject>();
     private Dictionary<int, GameObject> Healings = new Dictionary<int, GameObject>();
     private Dictionary<int, GameObject> CriticalHits = new Dictionary<int, GameObject>();
+    private Dictionary<int, GameObject> ComboIndicators = new Dictionary<int, GameObject>();
+
+    public Color AttackComboColor = Color.red;
+    public Color DefenceComboColor = Color.blue;
 
     private Camera mCamera;
     bool setupIsComplete = false;
@@ -45,6 +51,111 @@ public class UIBattleFieldManager : MonoBehaviour
     {
         charOwner.HealthStatsChangedEvent += CharOwner_HealthStatsChangedEvent;
     }
+
+
+    public void DisplayCombo(ComboType type, int combo, Vector3 position, string flavorText = "")
+    {
+        GameObject cI = ComboIndicators.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
+        if(cI == null)
+        {
+            cI = Instantiate(ComboIndicator, transform);
+        }
+
+        List<Color> colors = new List<Color>();
+        switch (type)
+        {
+            case ComboType.None:
+                colors.Add(Color.white);
+                colors.Add(Color.white);
+                break;
+            case ComboType.Attack:
+                colors.Add(AttackComboColor);
+                colors.Add(AttackComboColor);
+                break;
+            case ComboType.Defence:
+                colors.Add(DefenceComboColor);
+                colors.Add(DefenceComboColor);
+                break;
+            default:
+                break;
+        }
+        colors[0] *= 0.3f;
+
+        TextMeshProUGUI[] thaScaredtexts = cI.GetComponentsInChildren<TextMeshProUGUI>();
+        for (int i = 0; i < thaScaredtexts.Length; i++)
+        {
+            thaScaredtexts[i].color = colors[i];
+            thaScaredtexts[i].text = "x" + combo.ToString();
+        }
+
+        cI.transform.localScale = Vector3.one * (1f + Mathf.Clamp(((float)combo) / StatisticInfoManagerScript.Instance.maxIntensityCombo, 0f, 1f));
+        cI.transform.position = Camera.main.WorldToScreenPoint(position);
+
+        cI.SetActive(true);
+        StartCoroutine(DisplayCombo_CO(cI, type, combo, position, flavorText));
+    }
+
+    public void DisplayComboText(ComboType type, int combo, Vector3 position, string texto)
+    {
+        GameObject cI = ComboIndicators.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
+        if (cI == null)
+        {
+            cI = Instantiate(ComboIndicator, transform);
+        }
+
+        List<Color> colors = new List<Color>();
+        switch (type)
+        {
+            case ComboType.None:
+                colors.Add(Color.white);
+                colors.Add(Color.white);
+                break;
+            case ComboType.Attack:
+                colors.Add(AttackComboColor);
+                colors.Add(AttackComboColor);
+                break;
+            case ComboType.Defence:
+                colors.Add(DefenceComboColor);
+                colors.Add(DefenceComboColor);
+                break;
+            default:
+                break;
+        }
+        colors[0] *= 0.3f;
+
+        TextMeshProUGUI[] thaScaredtexts = cI.GetComponentsInChildren<TextMeshProUGUI>();
+        for (int i = 0; i < thaScaredtexts.Length; i++)
+        {
+            thaScaredtexts[i].color = colors[i];
+            thaScaredtexts[i].text = texto;
+        }
+
+        cI.transform.localScale = Vector3.one * (1f + Mathf.Clamp(((float)combo) / StatisticInfoManagerScript.Instance.maxIntensityCombo, 0f, 1f));
+        cI.transform.position = Camera.main.WorldToScreenPoint(position + new Vector3(0f,0.5f,0f));
+
+        cI.SetActive(true);
+        StartCoroutine(DisplayCombo_CO(cI, type, combo, position));
+    }
+
+    private IEnumerator DisplayCombo_CO(GameObject obj, ComboType type, int combo, Vector3 position, string flavorText = "")
+    {
+        Animation anim = obj.GetComponent<Animation>();
+        anim.Play();
+
+        yield return anim.clip.length * 0.6f;
+
+        if(flavorText != "")
+        {
+            DisplayComboText(type, combo, position, flavorText);
+        }
+
+        while (anim.isPlaying)
+        {
+            yield return null;
+        }
+        obj.SetActive(false);
+    }
+
 
     private void CharOwner_HealthStatsChangedEvent(float value, HealthChangedType changeType, Transform charOwner)
     {
@@ -88,6 +199,7 @@ public class UIBattleFieldManager : MonoBehaviour
         StartCoroutine(CriticalHitCo(damage, charOwner));
     }
     
+
     private IEnumerator HealingCo(float heal, Transform charOwner)
     {
         float timer = 0;

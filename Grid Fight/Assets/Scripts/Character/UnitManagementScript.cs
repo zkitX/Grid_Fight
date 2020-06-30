@@ -56,8 +56,9 @@ public class UnitManagementScript : MonoBehaviour
     public Transform IndicatorContainer;
     public Transform HpBarContainer;
     public Transform StaminaBarContainer;
+
     //Used to decide the side
-   
+
 
     public void SetBattleUISelection(ControllerType playerController)
     {

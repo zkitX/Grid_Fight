@@ -43,6 +43,7 @@ public class BulletScript : MonoBehaviour
 
     public void StartMoveToTile()
     {
+        hitTarget = false;
         StopAllCoroutines();
         if (movingCo != null)
         {
@@ -134,7 +135,6 @@ public class BulletScript : MonoBehaviour
                 
             }
         }
-
         EndBullet(0.5f);
     }
 
@@ -210,15 +210,17 @@ public class BulletScript : MonoBehaviour
         }
     }
 
-
+    bool hitTarget = false;
     public void MakeDamage(BaseCharacter target, float baseDamage)
     {
         if (target != null)
         {
             if (target.tag.Contains("Side") && target.tag != Side.ToString())
             {
+                hitTarget = true;
                 CharOwner.Sic.AccuracyExp += 1f;
                 CharOwner.Sic.BulletHits++;
+                StatisticInfoManagerScript.Instance.TriggerComboForCharacter(CharOwner.CharInfo.CharacterID, ComboType.Attack, true, target.transform);
                 bool iscritical = CharOwner.CharInfo.IsCritical(SOAttack.AttackInput == AttackInputType.Weak ? true : false);
                 //Set damage to the hitting character
                 if (SOAttack.AttackInput != AttackInputType.Weak)
@@ -298,8 +300,12 @@ public class BulletScript : MonoBehaviour
     {
         Invoke("RestoreBullet", timer);
         PS.transform.parent = null;
-        CharOwner.Sic.AccuracyExp -= 1f;
+        //CharOwner.Sic.AccuracyExp -= 1f;
         PS.GetComponent<PSTimeGroup>().UpdatePSTime(0.1f);
+        if (!hitTarget)
+        {
+            StatisticInfoManagerScript.Instance.TriggerComboForCharacter(CharOwner.CharInfo.CharacterID, ComboType.Attack, false);
+        }
     }
 
 

@@ -2,15 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using MyBox;
 
 public class StatisticInfoManagerScript : MonoBehaviour
 {
     public static StatisticInfoManagerScript Instance;
     public List<StatisticInfoClass> CharaterStats = new List<StatisticInfoClass>();
 
+    [Header("Comboing")]
+    [SerializeField] protected bool useComboGroupings = false;
+    [SerializeField] protected List<ComboGroupInspectorClass> comboGroups = new List<ComboGroupInspectorClass>();
+    public List<PlayerComboInfoGroupClass> comboInfo = new List<PlayerComboInfoGroupClass>();
+    public ComboThresholdTextsClass[] comboThresholds = new ComboThresholdTextsClass[0];
+    public float maxIntensityCombo = 25f;
+
     private void Awake()
     {
         Instance = this;
+        SetupComboInfo();
     }
 
     //Return a combination of the xp stats class on the gameobject and the actual stats on the character
@@ -24,6 +33,74 @@ public class StatisticInfoManagerScript : MonoBehaviour
         returnable.ReflexExp += additive.ReflexExp;
         return returnable;
     }
+
+    void SetupComboInfo()
+    {
+        for (int i = 0; i < (useComboGroupings ?  comboGroups.Count : InputController.Instance.PlayersNumber); i++)
+        {
+            comboInfo.Add(new PlayerComboInfoGroupClass(useComboGroupings ? comboGroups[i].playerIndexes : new int[] { i }));
+        }
+    }
+
+    public void TriggerComboForCharacter(CharacterNameType charName, ComboType combo, bool hit, Transform displayTarget = null)
+    {
+        if(BattleManagerScript.Instance.CurrentSelectedCharacters.Values.Where(r => r.Character != null && r.Character.CharInfo.CharacterID == charName).FirstOrDefault() != null)
+        {
+            TriggerComboForPlayer((int)BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character != null && r.Value.Character.CharInfo.CharacterID == charName).FirstOrDefault().Key, combo, hit, displayTarget);
+        }
+    }
+
+    protected void TriggerComboForPlayer(int playerIndex, ComboType combo, bool hit, Transform displayTarget = null)
+    {
+        int comboNum = comboInfo.Where(r => r.ContainsPlayer(playerIndex)).FirstOrDefault().TriggerCombo(combo, hit);
+        if (displayTarget == null)
+        {
+            return;
+        }
+
+        string text = "";
+        foreach(ComboThresholdTextsClass combT in comboThresholds)
+        {
+            if (comboNum == combT.val) text = combT.Text;
+        }
+
+        UIBattleFieldManager.Instance.DisplayCombo(combo, comboNum, displayTarget.position, text) ;
+    }
+
+    public void TriggerComboInfoClass(ComboInfoClass combo)
+    {
+        StartCoroutine(combo.comboCountDown);
+    }
+
+    private void OnValidate()
+    {
+        foreach (ComboThresholdTextsClass combT in comboThresholds)
+        {
+            combT.Name = combT.val.ToString() + (combT.texts.Length == 0 ? " NO TEXTS ASSIGNED!!!!" : "");
+        }
+    }
+}
+
+[System.Serializable]
+public class ComboThresholdTextsClass
+{
+    [HideInInspector] public string Name;
+    public int val;
+    public string[] texts;
+    public string Text
+    {
+        get
+        {
+           return texts[Random.Range(0, texts.Length)];
+        }
+    }
+}
+
+[System.Serializable]
+public class ComboGroupInspectorClass
+{
+    public string Name;
+    public int[] playerIndexes = new int[0];
 }
 
 [System.Serializable]
@@ -152,3 +229,76 @@ public class GlobalCharacterStatisticInfoClass
 
 }
 
+[System.Serializable]
+public class PlayerComboInfoGroupClass
+{
+    public List<int> playerIndexes = new List<int>();
+    public Dictionary<ComboType, ComboInfoClass> comboInfo = new Dictionary<ComboType, ComboInfoClass>
+    {
+        { ComboType.Attack, new ComboInfoClass(UniversalGameBalancer.Instance.attackComboDuration) },
+        { ComboType.Defence, new ComboInfoClass(UniversalGameBalancer.Instance.defenceComboDuration) },
+    };
+
+    public PlayerComboInfoGroupClass(int[] playerIndex)
+    {
+        playerIndexes = playerIndex.ToList();
+        comboInfo = new Dictionary<ComboType, ComboInfoClass>
+        {
+            { ComboType.Attack, new ComboInfoClass(UniversalGameBalancer.Instance.attackComboDuration) },
+            { ComboType.Defence, new ComboInfoClass(UniversalGameBalancer.Instance.defenceComboDuration) },
+        };
+    }
+
+    public bool ContainsPlayer(int playerIndex)
+    {
+        if (playerIndexes.Contains(playerIndex)) return true;
+        return false;
+    }
+
+    public int TriggerCombo(ComboType combo, bool hit)
+    {
+        comboInfo[combo].TriggerCombo(hit);
+        return comboInfo[combo].comboCount;
+    }
+}
+
+[System.Serializable]
+public class ComboInfoClass
+{
+    public int comboCount = 0;
+    protected float resetTime = 0f;
+    public float timeRemaining = 0f;
+    public IEnumerator comboCountDown = null;
+
+    public ComboInfoClass(float resetTiming)
+    {
+        resetTime = resetTiming;
+        comboCount = 0;
+        timeRemaining = 0f;
+        comboCountDown = null;
+    }
+
+
+    public void TriggerCombo(bool hit)
+    {
+        bool timeBelowZero = timeRemaining <= 0f;
+        comboCount = hit ? comboCount + 1 : 0;
+        Debug.Log("<b>" + comboCount.ToString() + "</b> with seconds remaining: " + timeRemaining.ToString());
+        timeRemaining = hit ? resetTime : 0f;
+        if (timeBelowZero && hit)
+        {
+            comboCountDown = CountComboDown();
+            StatisticInfoManagerScript.Instance.TriggerComboInfoClass(this);
+        }
+    }
+
+    IEnumerator CountComboDown()
+    {
+        while (timeRemaining > 0f)
+        {
+            timeRemaining -= Time.unscaledDeltaTime;
+            yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.FungusPuppets);
+        }
+        comboCount = 0;
+    }
+}
