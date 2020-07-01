@@ -25,8 +25,6 @@ public class UIBattleFieldManager : MonoBehaviour
     private Dictionary<int, GameObject> CriticalHits = new Dictionary<int, GameObject>();
     private Dictionary<int, GameObject> ComboIndicators = new Dictionary<int, GameObject>();
 
-    public Color AttackComboColor = Color.red;
-    public Color DefenceComboColor = Color.blue;
 
     private Camera mCamera;
     bool setupIsComplete = false;
@@ -53,7 +51,7 @@ public class UIBattleFieldManager : MonoBehaviour
     }
 
 
-    public void DisplayCombo(ComboType type, int combo, Vector3 position, string flavorText = "")
+    public void DisplayCombo(ComboType type, int combo, Vector3 position, string flavorText = "", Color thaColor = new Color())
     {
         GameObject cI = ComboIndicators.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
         if(cI == null)
@@ -62,23 +60,8 @@ public class UIBattleFieldManager : MonoBehaviour
         }
 
         List<Color> colors = new List<Color>();
-        switch (type)
-        {
-            case ComboType.None:
-                colors.Add(Color.white);
-                colors.Add(Color.white);
-                break;
-            case ComboType.Attack:
-                colors.Add(AttackComboColor);
-                colors.Add(AttackComboColor);
-                break;
-            case ComboType.Defence:
-                colors.Add(DefenceComboColor);
-                colors.Add(DefenceComboColor);
-                break;
-            default:
-                break;
-        }
+        colors.Add(thaColor);
+        colors.Add(thaColor);
         colors[0] *= 0.3f;
 
         TextMeshProUGUI[] thaScaredtexts = cI.GetComponentsInChildren<TextMeshProUGUI>();
@@ -94,10 +77,10 @@ public class UIBattleFieldManager : MonoBehaviour
         cI.GetComponent<Animation>().clip = cI.GetComponent<Animation>().GetClip("ComboSplash");
 
         cI.SetActive(true);
-        StartCoroutine(DisplayCombo_CO(cI, type, combo, position, flavorText));
+        StartCoroutine(DisplayCombo_CO(cI, type, combo, position, flavorText, thaColor));
     }
 
-    public void DisplayComboText(ComboType type, int combo, Vector3 position, string texto)
+    public void DisplayComboText(ComboType type, int combo, Vector3 position, string texto, Color thaColor = new Color())
     {
         GameObject cI = ComboIndicators.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
         if (cI == null)
@@ -106,23 +89,8 @@ public class UIBattleFieldManager : MonoBehaviour
         }
 
         List<Color> colors = new List<Color>();
-        switch (type)
-        {
-            case ComboType.None:
-                colors.Add(Color.white);
-                colors.Add(Color.white);
-                break;
-            case ComboType.Attack:
-                colors.Add(AttackComboColor);
-                colors.Add(AttackComboColor);
-                break;
-            case ComboType.Defence:
-                colors.Add(DefenceComboColor);
-                colors.Add(DefenceComboColor);
-                break;
-            default:
-                break;
-        }
+        colors.Add(thaColor);
+        colors.Add(thaColor);
         colors[0] *= 0.3f;
 
         TextMeshProUGUI[] thaScaredtexts = cI.GetComponentsInChildren<TextMeshProUGUI>();
@@ -141,7 +109,7 @@ public class UIBattleFieldManager : MonoBehaviour
         StartCoroutine(DisplayCombo_CO(cI, type, combo, position));
     }
 
-    private IEnumerator DisplayCombo_CO(GameObject obj, ComboType type, int combo, Vector3 position, string flavorText = "")
+    private IEnumerator DisplayCombo_CO(GameObject obj, ComboType type, int combo, Vector3 position, string flavorText = "", Color thaColor = new Color())
     {
         Animation anim = obj.GetComponent<Animation>();
         anim.Play();
@@ -150,7 +118,7 @@ public class UIBattleFieldManager : MonoBehaviour
 
         if (flavorText != "")
         {
-            DisplayComboText(type, combo, position, flavorText);
+            DisplayComboText(type, combo, position, flavorText, thaColor);
         }
 
         while (anim.isPlaying)

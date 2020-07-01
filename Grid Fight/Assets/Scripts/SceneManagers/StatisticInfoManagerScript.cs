@@ -13,8 +13,10 @@ public class StatisticInfoManagerScript : MonoBehaviour
     [SerializeField] protected bool useComboGroupings = false;
     [SerializeField] protected List<ComboGroupInspectorClass> comboGroups = new List<ComboGroupInspectorClass>();
     public List<PlayerComboInfoGroupClass> comboInfo = new List<PlayerComboInfoGroupClass>();
-    public ComboThresholdTextsClass[] comboThresholds = new ComboThresholdTextsClass[0];
+    public ComboThresholInfoClass[] comboThresholds = new ComboThresholInfoClass[0];
     public float maxIntensityCombo = 25f;
+    public Color AttackComboColor = Color.red;
+    public Color DefenceComboColor = Color.blue;
 
     private void Awake()
     {
@@ -59,12 +61,25 @@ public class StatisticInfoManagerScript : MonoBehaviour
         }
 
         string text = "";
-        foreach(ComboThresholdTextsClass combT in comboThresholds)
+        Color displayColor = combo == ComboType.Attack ? AttackComboColor : combo == ComboType.Defence ? DefenceComboColor : Color.white;
+        bool finalColorFound = false;
+        int lastThresholdVal = 0;
+        for(int i = 0; i < comboThresholds.Length; i++)
         {
-            if (comboNum == combT.val) text = combT.Text;
+            if(comboThresholds[i].val <= comboNum)
+            {
+                lastThresholdVal = comboThresholds[i].val;
+                displayColor = combo == ComboType.Attack ? comboThresholds[i].attackColor : combo == ComboType.Defence ? comboThresholds[i].defenceColor : Color.white;
+            }
+            else if (!finalColorFound)
+            {
+                finalColorFound = true;
+                displayColor = Color.Lerp(displayColor, combo == ComboType.Attack ? comboThresholds[i].attackColor : combo == ComboType.Defence ? comboThresholds[i].defenceColor : Color.white, (float)(comboNum - lastThresholdVal) / (float)(comboThresholds[i].val - lastThresholdVal));
+            }
+            if (comboNum == comboThresholds[i].val) text = comboThresholds[i].Text;
         }
 
-        UIBattleFieldManager.Instance.DisplayCombo(combo, comboNum, displayTarget.position, text) ;
+        UIBattleFieldManager.Instance.DisplayCombo(combo, comboNum, displayTarget.position, text, displayColor) ;
     }
 
     public void TriggerComboInfoClass(ComboInfoClass combo)
@@ -74,7 +89,7 @@ public class StatisticInfoManagerScript : MonoBehaviour
 
     private void OnValidate()
     {
-        foreach (ComboThresholdTextsClass combT in comboThresholds)
+        foreach (ComboThresholInfoClass combT in comboThresholds)
         {
             combT.Name = combT.val.ToString() + (combT.texts.Length == 0 ? " NO TEXTS ASSIGNED!!!!" : "");
         }
@@ -82,11 +97,13 @@ public class StatisticInfoManagerScript : MonoBehaviour
 }
 
 [System.Serializable]
-public class ComboThresholdTextsClass
+public class ComboThresholInfoClass
 {
     [HideInInspector] public string Name;
     public int val;
     public string[] texts;
+    public Color attackColor;
+    public Color defenceColor;
     public string Text
     {
         get
