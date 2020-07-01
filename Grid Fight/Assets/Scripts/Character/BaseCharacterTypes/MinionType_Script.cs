@@ -99,7 +99,7 @@ public class MinionType_Script : BaseCharacter
     }
 
     float lastAttackTime = 0;
-    public virtual IEnumerator AI()
+    public virtual IEnumerator AI_Old()
     {
         bool val = true;
         while (val)
@@ -162,7 +162,7 @@ public class MinionType_Script : BaseCharacter
     }
 
 
-    public virtual IEnumerator AI_New()
+    public virtual IEnumerator AI()
     {
         bool val = true;
         while (val)
