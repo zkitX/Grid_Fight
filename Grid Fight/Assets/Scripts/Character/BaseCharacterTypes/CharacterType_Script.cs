@@ -24,7 +24,7 @@ public class CharacterType_Script : BaseCharacter
         new SkillCoolDownClass(AttackInputType.Skill2, false),
         new SkillCoolDownClass(AttackInputType.Skill3, false)
     };
-
+    public IEnumerator SkillActivation = null;
 
 
     #region Unity Life Cycles
@@ -249,26 +249,29 @@ public class CharacterType_Script : BaseCharacter
                 StartCoroutine(StartChargingAttack(atkType));
                 break;
             case AttackInputType.Skill1:
-                if (!CharActionlist.Contains(CharacterActionType.Skill1) || CharInfo.Mask == null)
+                if (!CharActionlist.Contains(CharacterActionType.Skill1) || CharInfo.Mask == null || SkillActivation != null)
                 {
                     return;
                 }
-                StartCoroutine(StartSkillAttack(AttackInputType.Skill1));
+                SkillActivation = StartSkillAttack(AttackInputType.Skill1);
+                StartCoroutine(SkillActivation);
 
                 break;
             case AttackInputType.Skill2:
-                if (!CharActionlist.Contains(CharacterActionType.Skill2) || CharInfo.Mask == null)
+                if (!CharActionlist.Contains(CharacterActionType.Skill2) || CharInfo.Mask == null || SkillActivation != null)
                 {
                     return;
                 }
-                StartCoroutine(StartSkillAttack(AttackInputType.Skill2));
+                SkillActivation = StartSkillAttack(AttackInputType.Skill2);
+                StartCoroutine(SkillActivation);
                 break;
             case AttackInputType.Skill3:
-                if (!CharActionlist.Contains(CharacterActionType.Skill3) || CharInfo.Mask == null)
+                if (!CharActionlist.Contains(CharacterActionType.Skill3) || CharInfo.Mask == null || SkillActivation != null)
                 {
                     return;
                 }
-                StartCoroutine(StartSkillAttack(AttackInputType.Skill3));
+                SkillActivation = StartSkillAttack(AttackInputType.Skill3);
+                StartCoroutine(SkillActivation);
                 break;
                 
         }
@@ -324,7 +327,7 @@ public class CharacterType_Script : BaseCharacter
                 chargingAudioStrong.ResetSource();
             }
             chargingAudio = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoop, AudioBus.MidPrio, transform, true, 1f);
-            while (isSpecialLoading && !VFXTestMode)
+            while (isSpecialLoading)
             {
                 yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
                 chargingAttackTimer += BattleManagerScript.Instance.DeltaTime;
@@ -359,7 +362,7 @@ public class CharacterType_Script : BaseCharacter
             {
                 currentAttackPhase = AttackPhasesType.Loading;
                 StopPowerfulAtk = SpecialAttackStatus.Start;
-                if (IsOnField || VFXTestMode)
+                if (IsOnField)
                 {
                     while (isMoving)
                     {
@@ -449,6 +452,7 @@ public class CharacterType_Script : BaseCharacter
         SpineAnim.SetSkeletonOrderInLayer(CharOredrInLayer);
         CharInfo.BaseSpeed /= 100;
         CurrentCharSkillCompletedEvent?.Invoke(inputSkill, nxtAtk.CoolDown);
+        SkillActivation = null;
         yield return BattleManagerScript.Instance.WaitFor(nxtAtk.CoolDown, ()=> BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
         scdc.IsCoGoing = false;
     }

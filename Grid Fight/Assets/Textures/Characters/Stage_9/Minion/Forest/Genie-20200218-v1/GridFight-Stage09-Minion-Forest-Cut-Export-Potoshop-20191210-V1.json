@@ -234,10 +234,11 @@
 		}
 	}
 ],
-"events": {
-	"FireCastParticle": {},
-	"FireTileAttack": {}
-},
+  "events": {
+    "FireCastParticle": {},
+    "FireBulletParticle": {},
+    "FireTileAttack": {}
+  },
 "animations": {
 	"Arriving": {
 		"bones": {
@@ -2746,9 +2747,16 @@
 				]
 			}
 		},
-		"events": [
-			{ "time": 0.2333, "name": "FireCastParticle" }
-		]
+    "events": [
+      {
+        "time": 0.2333,
+        "name": "FireCastParticle"
+      },
+      {
+        "time": 0.3,
+        "name": "FireBulletParticle"
+      }
+    ]
 	},
 	"Atk2": {
 		"bones": {

@@ -125,7 +125,7 @@ public class Stage00_BossOctopus_Script : MinionType_Script
         }
 
         SetAttackReady(true);
-        yield return BattleManagerScript.Instance.WaitFor(3, ()=> !VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Event));
+        yield return BattleManagerScript.Instance.WaitFor(3, ()=> BattleManagerScript.Instance.CurrentBattleState != BattleState.Event);
 
 
      

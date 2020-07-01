@@ -14353,7 +14353,6 @@
 			}
 		],
 		"events": [
-			{ "name": "FireCastParticle" },
 			{ "time": 0.2333, "name": "FireBulletParticle" }
 		]
 	},
@@ -15356,9 +15355,13 @@
 				]
 			}
 		],
-		"events": [
-			{ "time": 0.5, "name": "FireTileAttack" }
-		]
+    "events": [
+      { "name": "FireCastParticle" },
+      {
+        "time": 0.5,
+        "name": "FireTileAttack"
+      }
+    ]
 	},
 	"S_DeBuff_AtkToIdle": {
 		"bones": {
@@ -15975,7 +15978,6 @@
 			}
 		],
 		"events": [
-			{ "name": "FireCastParticle" },
 			{ "time": 0.15, "name": "FireBulletParticle" }
 		]
 	},
@@ -16842,9 +16844,13 @@
 				]
 			}
 		],
-		"events": [
-			{ "time": 0.5, "name": "FireTileAttack" }
-		]
+    "events": [
+      { "name": "FireCastParticle" },
+      {
+        "time": 0.5,
+        "name": "FireTileAttack"
+      }
+    ]
 	},
 	"Selection": {
 		"bones": {

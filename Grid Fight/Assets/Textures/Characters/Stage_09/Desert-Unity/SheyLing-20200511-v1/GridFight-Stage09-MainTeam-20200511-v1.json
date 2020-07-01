@@ -23095,7 +23095,6 @@
 			}
 		],
 		"events": [
-			{ "time": 0.25, "name": "FireCastParticle" },
 			{ "time": 0.55, "name": "FireBulletParticle" }
 		]
 	},
@@ -24576,9 +24575,16 @@
 				]
 			}
 		],
-		"events": [
-			{ "time": 0.5, "name": "FireTileAttack" }
-		]
+    "events": [
+      {
+        "time": 0,
+        "name": "FireCastParticle"
+      },
+      {
+        "time": 0.5,
+        "name": "FireTileAttack"
+      }
+    ]
 	},
 	"S_Debuff": {
 		"slots": {
@@ -27108,7 +27114,6 @@
 			}
 		],
 		"events": [
-			{ "time": 1.1833, "name": "FireCastParticle" },
 			{ "time": 1.4333, "name": "FireBulletParticle" }
 		]
 	},
@@ -28072,9 +28077,16 @@
 				]
 			}
 		],
-		"events": [
-			{ "time": 0.5, "name": "FireTileAttack" }
-		]
+    "events": [
+      {
+        "time": 0,
+        "name": "FireCastParticle"
+      },
+      {
+        "time": 0.5,
+        "name": "FireTileAttack"
+      }
+    ]
 	},
 	"Selection": {
 		"slots": {

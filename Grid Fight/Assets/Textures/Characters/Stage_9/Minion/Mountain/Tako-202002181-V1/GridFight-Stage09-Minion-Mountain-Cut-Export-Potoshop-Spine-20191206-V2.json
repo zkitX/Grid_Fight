@@ -195,10 +195,11 @@
 		}
 	}
 ],
-"events": {
-	"FireCastParticle": {},
-	"FireTileAttack": {}
-},
+  "events": {
+    "FireCastParticle": {},
+    "FireTileAttack": {},
+    "FireBulletParticle": {}
+  },
 "animations": {
 	"Arriving": {
 		"slots": {
@@ -1418,9 +1419,16 @@
 				]
 			}
 		},
-		"events": [
-			{ "time": 0.1333, "name": "FireCastParticle" }
-		]
+    "events": [
+      {
+        "time": 0.1333,
+        "name": "FireCastParticle"
+      },
+      {
+        "time": 0.2,
+        "name": "FireBulletParticle"
+      }
+    ]
 	},
 	"Buff": {
 		"bones": {

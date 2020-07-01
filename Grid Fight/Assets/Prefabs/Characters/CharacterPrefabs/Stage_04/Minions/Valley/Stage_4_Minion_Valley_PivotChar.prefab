@@ -60,6 +60,36 @@ Transform:
   m_Father: {fileID: 3623265193277078122}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4244428379229155205
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 319441369211233490}
+  m_Layer: 0
+  m_Name: Head
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &319441369211233490
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4244428379229155205}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3623265193277078122}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6498783983046355203
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,6 +157,7 @@ Transform:
   m_Children:
   - {fileID: 3635188707542912079}
   - {fileID: 7579187981707734798}
+  - {fileID: 319441369211233490}
   m_Father: {fileID: 1285516442321741731}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -486,7 +517,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Monkena
-  CharacterIcons: []
+  CharacterIcon: {fileID: 0}
+  Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 58052c0522a404942b04e51ca2269605, type: 2}
   BaseCharacterType: 1
   CharacterID: 1083
@@ -495,23 +527,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c950c97bf4e1d234aa8d9ce8191c6365, type: 2}
   Elemental: 0
   ClassType: 0
+  CharaterLevel: 0
   UseLayeringSystem: 1
+  Head: {fileID: 319441369211233490}
+  AIs: []
   CharacterRespawnLength: 180
   CharacterSelection: 0
   RapidAttack:
     DamageMultiplier: {x: 1, y: 1}
     CriticalChance: {x: 2, y: 2}
-    Stamina_Cost_Atk: 0
+    LevelMultiplier: 0
     B_DamageMultiplier: {x: 1, y: 1}
     B_CriticalChance: {x: 2, y: 2}
-    B_Stamina_Cost_Atk: 0
   PowerfulAttac:
     DamageMultiplier: {x: 3, y: 3}
     CriticalChance: {x: 3, y: 5}
-    Stamina_Cost_Atk: 0
+    LevelMultiplier: 0
     B_DamageMultiplier: {x: 3, y: 3}
     B_CriticalChance: {x: 3, y: 5}
-    B_Stamina_Cost_Atk: 0
   HealthStats:
     Health: 45
     Base: 45
@@ -522,7 +555,6 @@ MonoBehaviour:
     B_Base: 0
     B_Regeneration: 0
     B_BaseHealthRegeneration: 0
-    B_LevelMultiplier: 0
   StaminaStats:
     Stamina: 10
     Base: 10
@@ -533,7 +565,6 @@ MonoBehaviour:
     B_Base: 0
     B_Regeneration: 0
     B_BaseStaminaRegeneration: 0
-    B_LevelMultiplier: 0
   ShieldStats:
     Shield: 3
     Base: 3
@@ -544,7 +575,6 @@ MonoBehaviour:
     B_Base: 0
     B_Regeneration: 0
     B_BaseShieldRegeneration: 0
-    B_LevelMultiplier: 0
   SpeedStats:
     BaseSpeed: 1
     MovementSpeed: 1
@@ -552,7 +582,8 @@ MonoBehaviour:
     AttackSpeedRatio: 5
     BulletSpeed: 5
     LeaveSpeed: 1.2
-    LevelMultiplier: 10
+    BaseSpeed_LevelMultiplier: 0
+    MovementSpeed_LevelMultiplier: 0
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
     B_BaseSpeed: 1
@@ -561,25 +592,27 @@ MonoBehaviour:
     B_AttackSpeedRatio: 0
     B_BulletSpeed: 5
     B_LeaveSpeed: 3
-    B_LevelMultiplier: 0
     B_IdleToAtkDuration: 0.2
     B_AtkToIdleDuration: 0.2
   DamageStats:
     BaseDamage: 7
     B_BaseDamage: 10
-    MultiBulletAttackNumberOfBullets: 3
-    ChildrenBulletDelay: 0.5
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 0
   DefenceStats:
     BaseDefence: 2
     Invulnerability: 0.2
+    B_BaseDefence: 10
+    B_Invulnerability: 0.2
+    LevelMultiplier: 0
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
+  ExperienceValue: 0
   MovementTimer: {x: 5, y: 8}
   B_MovementTimer: {x: 5, y: 8}
+  RelationshipList: []
 --- !u!54 &2743517199768158886
 Rigidbody:
   m_ObjectHideFlags: 0

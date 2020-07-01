@@ -82,7 +82,6 @@ public class VFXTester : MonoBehaviour
         BaseCharacter currentCharacter = (BaseCharacter)charOnScene.AddComponent(System.Type.GetType(child.GetComponentInChildren<CharacterInfoScript>().BaseCharacterType.ToString()));
         currentCharacter.UMS = currentCharacter.GetComponent<UnitManagementScript>();
         currentCharacter.UMS.CharOwner = currentCharacter;
-        currentCharacter.VFXTestMode = true;
         currentCharacter.UMS.CurrentTilePos = bts.Pos;
         currentCharacter.CurrentBattleTiles = new List<BattleTileScript>();
         for (int i = 0; i < currentCharacter.UMS.Pos.Count; i++)

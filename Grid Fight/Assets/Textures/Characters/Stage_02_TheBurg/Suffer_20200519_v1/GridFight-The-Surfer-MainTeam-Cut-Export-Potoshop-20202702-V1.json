@@ -22601,7 +22601,6 @@
 			}
 		},
 		"events": [
-			{ "time": 0.2167, "name": "FireCastParticle" },
 			{ "time": 0.2667, "name": "FireBulletParticle" }
 		]
 	},
@@ -23692,9 +23691,16 @@
 				]
 			}
 		},
-		"events": [
-			{ "time": 0.5, "name": "FireTileAttack" }
-		]
+    "events": [
+      {
+        "time": 0,
+        "name": "FireCastParticle"
+      },
+      {
+        "time": 0.5,
+        "name": "FireTileAttack"
+      }
+    ]
 	},
 	"S_DeBuff": {
 		"bones": {
@@ -25208,7 +25214,6 @@
 			}
 		},
 		"events": [
-			{ "time": 0.15, "name": "FireCastParticle" },
 			{ "time": 0.3, "name": "FireBulletParticle" }
 		]
 	},
@@ -26305,9 +26310,16 @@
 				]
 			}
 		},
-		"events": [
-			{ "time": 0.5, "name": "FireTileAttack" }
-		]
+    "events": [
+      {
+        "time": 0,
+        "name": "FireCastParticle"
+      },
+      {
+        "time": 0.5,
+        "name": "FireTileAttack"
+      }
+    ]
 	},
 	"Selection": {
 		"bones": {

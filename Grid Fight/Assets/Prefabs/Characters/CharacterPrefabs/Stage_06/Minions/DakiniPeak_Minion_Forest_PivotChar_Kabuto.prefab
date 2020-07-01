@@ -36,6 +36,7 @@ Transform:
   m_Children:
   - {fileID: 8334688196075945219}
   - {fileID: 3700217760217394624}
+  - {fileID: 8566151268564507820}
   m_Father: {fileID: 5137904085373850816}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -350,7 +351,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Kabuto
-  CharacterIcons: []
+  CharacterIcon: {fileID: 0}
+  Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: d9cbca5d088c6724c9bfaecba5f48903, type: 2}
   BaseCharacterType: 1
   CharacterID: 1122
@@ -361,6 +363,8 @@ MonoBehaviour:
   ClassType: 2
   CharaterLevel: 0
   UseLayeringSystem: 1
+  Head: {fileID: 8566151268564507820}
+  AIs: []
   CharacterRespawnLength: 180
   CharacterSelection: 0
   RapidAttack:
@@ -562,4 +566,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3855484179423491165}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8666047895960007632
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8566151268564507820}
+  m_Layer: 0
+  m_Name: Head
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8566151268564507820
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8666047895960007632}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3855484179423491165}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

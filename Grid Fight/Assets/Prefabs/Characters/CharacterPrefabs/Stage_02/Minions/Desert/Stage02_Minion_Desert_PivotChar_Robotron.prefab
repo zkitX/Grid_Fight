@@ -98,6 +98,7 @@ Transform:
   - {fileID: 1097533778837228902}
   - {fileID: 4543756500957834764}
   - {fileID: 5076170063971151307}
+  - {fileID: 5340357128370280645}
   m_Father: {fileID: 936095906940832622}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -540,19 +541,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Robotron
-  CharacterIcons:
-  - {fileID: 21300000, guid: 395154bd4e1bbdf489dd9903af25d46b, type: 3}
-  - {fileID: 21300000, guid: 2671fb6cc8a2aa14e8a026eeae17d7c7, type: 3}
+  CharacterIcon: {fileID: 0}
+  Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 18079379e5337084286a38b915064869, type: 2}
   BaseCharacterType: 0
   CharacterID: 1041
   CurrentAttackTypeInfo:
-  - {fileID: 11400000, guid: e66eeb8860355a643bf57643d65670d3, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 342af71f2b3d44a4abf11792a9e2039e, type: 2}
   Elemental: 0
   ClassType: 2
   CharaterLevel: 0
   UseLayeringSystem: 1
+  Head: {fileID: 5340357128370280645}
+  AIs: []
   CharacterRespawnLength: 180
   CharacterSelection: 0
   RapidAttack:
@@ -724,6 +726,36 @@ Transform:
   - {fileID: 3519174418659839922}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7656710485887571928
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5340357128370280645}
+  m_Layer: 0
+  m_Name: Head
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5340357128370280645
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7656710485887571928}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3519174418659839922}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8719221825449434656
 GameObject:

@@ -49,7 +49,7 @@ public class Stage04_BossMonster_Script : MinionType_Script
         while (timer <= 9)
         {
             yield return new WaitForFixedUpdate();
-            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Event))
+            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Event)
             {
                 yield return new WaitForEndOfFrame();
             }
@@ -77,7 +77,7 @@ public class Stage04_BossMonster_Script : MinionType_Script
         while (timer <= 4)
         {
             yield return new WaitForFixedUpdate();
-            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Event))
+            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Event)
             {
                 yield return new WaitForEndOfFrame();
             }
@@ -106,7 +106,7 @@ public class Stage04_BossMonster_Script : MinionType_Script
         while (timer <= 20)
         {
             yield return new WaitForFixedUpdate();
-            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause))
+            while (BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause)
             {
                 yield return new WaitForEndOfFrame();
             }

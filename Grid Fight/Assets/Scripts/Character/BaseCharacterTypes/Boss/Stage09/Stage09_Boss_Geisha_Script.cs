@@ -141,7 +141,7 @@ public class Stage09_Boss_Geisha_Script : MinionType_Script
         while (timer <= 3)
         {
             yield return new WaitForFixedUpdate();
-            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Event))
+            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Event)
             {
                 yield return new WaitForEndOfFrame();
             }

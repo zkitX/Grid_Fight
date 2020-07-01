@@ -111,7 +111,6 @@ public class CharTesterScript : MonoBehaviour
         currentCharacter.UMS.Side = SideType.LeftSide;
         currentCharacter.UMS.CurrentTilePos = bts.Pos;
         currentCharacter.CharInfo.ClassType = (CharacterClassType)Enum.Parse(typeof(CharacterClassType), CharacterClass.options[CharacterClass.value].text);
-        currentCharacter.VFXTestMode = true;
         currentCharacter.UMS.Pos.Add(bts.Pos);
         currentCharacter.SetupCharacterSide();
         currentCharacter.SpineAnimatorsetup();

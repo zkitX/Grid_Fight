@@ -38,6 +38,7 @@ Transform:
   - {fileID: 3699411627343667456}
   - {fileID: 201865410233344439}
   - {fileID: 201865410233344019}
+  - {fileID: 4405891985886701916}
   m_Father: {fileID: 201865410233345161}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -462,9 +463,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Miranda
-  CharacterIcons:
-  - {fileID: 21300000, guid: c9eb5af2d9b875e4a9751e32071c0948, type: 3}
-  - {fileID: 21300000, guid: f1018b669a56e5d4fb4ae27635c17fe7, type: 3}
+  CharacterIcon: {fileID: 0}
+  Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 62704e04b9bdc01458fb4fc6aa7ece85, type: 2}
   BaseCharacterType: 0
   CharacterID: 1186
@@ -472,23 +472,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9ef8284c48de632449591f3ba8208d85, type: 2}
   Elemental: 6
   ClassType: 0
+  CharaterLevel: 0
   UseLayeringSystem: 1
+  Head: {fileID: 4405891985886701916}
+  AIs: []
   CharacterRespawnLength: 180
   CharacterSelection: 0
   RapidAttack:
     DamageMultiplier: {x: 1, y: 1}
     CriticalChance: {x: 2, y: 2}
-    Stamina_Cost_Atk: 0
+    LevelMultiplier: 0
     B_DamageMultiplier: {x: 1, y: 1}
     B_CriticalChance: {x: 2, y: 2}
-    B_Stamina_Cost_Atk: 0
   PowerfulAttac:
     DamageMultiplier: {x: 3, y: 3}
     CriticalChance: {x: 3, y: 5}
-    Stamina_Cost_Atk: 0
+    LevelMultiplier: 0
     B_DamageMultiplier: {x: 3, y: 3}
     B_CriticalChance: {x: 3, y: 5}
-    B_Stamina_Cost_Atk: 0
   HealthStats:
     Health: 30
     Base: 30
@@ -499,7 +500,6 @@ MonoBehaviour:
     B_Base: 0
     B_Regeneration: 0
     B_BaseHealthRegeneration: 0
-    B_LevelMultiplier: 0
   StaminaStats:
     Stamina: 35
     Base: 35
@@ -510,7 +510,6 @@ MonoBehaviour:
     B_Base: 0
     B_Regeneration: 0
     B_BaseStaminaRegeneration: 0
-    B_LevelMultiplier: 0
   ShieldStats:
     Shield: 50
     Base: 50
@@ -521,7 +520,6 @@ MonoBehaviour:
     B_Base: 0
     B_Regeneration: 0
     B_BaseShieldRegeneration: 0
-    B_LevelMultiplier: 0
   SpeedStats:
     BaseSpeed: 1
     MovementSpeed: 2.3
@@ -529,7 +527,8 @@ MonoBehaviour:
     AttackSpeedRatio: 1
     BulletSpeed: 1.5
     LeaveSpeed: 3
-    LevelMultiplier: 10
+    BaseSpeed_LevelMultiplier: 0
+    MovementSpeed_LevelMultiplier: 0
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
     B_BaseSpeed: 1
@@ -538,25 +537,27 @@ MonoBehaviour:
     B_AttackSpeedRatio: 0
     B_BulletSpeed: 5
     B_LeaveSpeed: 3
-    B_LevelMultiplier: 0
     B_IdleToAtkDuration: 0.2
     B_AtkToIdleDuration: 0.2
   DamageStats:
     BaseDamage: 10
     B_BaseDamage: 10
-    MultiBulletAttackNumberOfBullets: 3
-    ChildrenBulletDelay: 0.5
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 15
   DefenceStats:
     BaseDefence: 10
     Invulnerability: 0.2
+    B_BaseDefence: 10
+    B_Invulnerability: 0.2
+    LevelMultiplier: 0
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
   Special3LoadingDuration: 0
+  ExperienceValue: 0
   MovementTimer: {x: 5, y: 8}
   B_MovementTimer: {x: 5, y: 8}
+  RelationshipList: []
 --- !u!54 &201865410233351894
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -676,6 +677,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 201865410233344979}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1520462928123777296
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4405891985886701916}
+  m_Layer: 0
+  m_Name: Head
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4405891985886701916
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520462928123777296}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 201865410233344979}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2003373611757356842
 GameObject:

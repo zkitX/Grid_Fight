@@ -617,6 +617,17 @@ public class BattleManagerScript : MonoBehaviour
         //Set up attack
         zombie.Attacking = false;
         zombie.shotsLeftInAttack = 0;
+        zombie.BuffsDebuffsList.ForEach(r =>
+        {
+            if(r.Stat != BuffDebuffStatsType.Zombification)
+            {
+                r.Duration = 0;
+                r.CurrentBuffDebuff.Effect._Duration = Vector2.zero;
+                r.CurrentBuffDebuff.Stop_Co = true;
+            }
+        }
+        );
+
 
         //Delete subscription to events
         zombie.SpineAnim.SpineAnimationState.Event -= zombie.SpineAnimationState_Event;
@@ -643,7 +654,8 @@ public class BattleManagerScript : MonoBehaviour
         playerZombie.CharInfo.BaseSpeedChangedEvent += playerZombie._CharInfo_BaseSpeedChangedEvent;
         playerZombie.CharInfo.DeathEvent += playerZombie._CharInfo_DeathEvent;
         playerZombie.CharInfo.CharacterSelection = (CharacterSelectionType)AllCharactersOnField.Count - 1;
-        playerZombie.CharInfo.BaseCharacterType = BaseCharType.CharacterType_Script;
+        playerZombie.CharInfo.BaseCharacterType = BaseCharType.MinionType_Script;
+
 
 
         //Set up UMS and side
@@ -723,6 +735,13 @@ public class BattleManagerScript : MonoBehaviour
         yield return WaitUntil(() => CurrentBattleState != BattleState.Battle, ()=> !playerZombie.gameObject.activeInHierarchy);
 
         //Set up zombie char to previous state
+        playerZombie.BuffsDebuffsList.ForEach(r =>
+        {
+            r.Duration = 0;
+            r.CurrentBuffDebuff.Effect._Duration = Vector2.zero;
+            r.CurrentBuffDebuff.Stop_Co = true;
+        }
+       );
         playerZombie.SetAttackReady(false);
         playerZombie.enabled = false;
         zombie.enabled = true;
@@ -873,6 +892,7 @@ public class BattleManagerScript : MonoBehaviour
         while (CurrentSelectedCharacters[playerController].OffsetSwap > Time.time || !CurrentSelectedCharacters[playerController].Character.IsOnField || cb.IsOnField ||
             CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle.ToString() ||
             CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving.ToString() ||
+            CurrentSelectedCharacters[playerController].Character.SkillActivation != null ||
             CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving.ToString())
         {
             if (CurrentSelectedCharacters[playerController].Character.CharInfo.Health <= 0f)

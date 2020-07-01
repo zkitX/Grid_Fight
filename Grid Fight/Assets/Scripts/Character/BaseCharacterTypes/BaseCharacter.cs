@@ -93,7 +93,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public List<BuffDebuffClass> BuffsDebuffsList = new List<BuffDebuffClass>();
     public List<CharacterActionType> CharActionlist = new List<CharacterActionType>();
-    public bool VFXTestMode = false;
     public UnitManagementScript UMS;
     public BoxCollider CharBoxCollider;
     public ScriptableObjectAttackBase _nextAttack = null;

@@ -10255,7 +10255,6 @@
 			}
 		},
 		"events": [
-			{ "time": 0.1833, "name": "FireCastParticle" },
 			{ "time": 0.2167, "name": "FireBulletParticle" }
 		]
 	},
@@ -10960,9 +10959,16 @@
 				]
 			}
 		},
-		"events": [
-			{ "time": 0.5, "name": "FireTileAttack" }
-		]
+    "events": [
+      {
+        "time": 0,
+        "name": "FireCastParticle"
+      },
+      {
+        "time": 0.5,
+        "name": "FireTileAttack"
+      }
+    ]
 	},
 	"S_DeBuff_AtkToIdle": {
 		"slots": {
@@ -11397,7 +11403,6 @@
 			}
 		],
 		"events": [
-			{ "time": 0.0833, "name": "FireCastParticle" },
 			{ "time": 0.15, "name": "FireBulletParticle" }
 		]
 	},
@@ -12042,9 +12047,16 @@
 				]
 			}
 		},
-		"events": [
-			{ "time": 0.5, "name": "FireTileAttack" }
-		]
+    "events": [
+      {
+        "time": 0,
+        "name": "FireCastParticle"
+      },
+      {
+        "time": 0.5,
+        "name": "FireTileAttack"
+      }
+    ]
 	},
 	"Selection": {
 		"slots": {

@@ -56,7 +56,7 @@ public class Stage04_BossGirl_Script : MinionType_Script
         while (timer <= 3)
         {
             yield return new WaitForFixedUpdate();
-            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.FungusPuppets))
+            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.FungusPuppets)
             {
                 yield return new WaitForEndOfFrame();
             }
@@ -85,7 +85,7 @@ public class Stage04_BossGirl_Script : MinionType_Script
         while (timer <= 5)
         {
             yield return new WaitForFixedUpdate();
-            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.FungusPuppets))
+            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.FungusPuppets)
             {
                 yield return new WaitForEndOfFrame();
             }
