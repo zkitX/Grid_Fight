@@ -11,10 +11,21 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/atkbase")]
 public class ScriptableObjectAttackBase : ScriptableObject
 {
+
+    [HideInInspector]
+    public float DamageMultiplier
+    {
+        get
+        {
+            return Random.Range(_DamageMultiplier.x, _DamageMultiplier.y);
+        }
+    }
+
     public int Chances = 100;
     public AttackType CurrentAttackType;
     public float AttackRatioMultiplier = 1;
-    public Vector2 DamageMultiplier = new Vector2(1, 1);
+    [SerializeField]
+    private Vector2 _DamageMultiplier = new Vector2(1, 1);
     public AttackInputType AttackInput;
     public AttackAnimType AttackAnim;
     public float StaminaCost = 10;

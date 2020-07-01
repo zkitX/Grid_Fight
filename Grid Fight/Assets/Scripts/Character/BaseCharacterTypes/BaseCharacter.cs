@@ -506,19 +506,19 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                                     if (nextAttack.AttackInput > AttackInputType.Weak && i == 0)
                                     {
                                         bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, res,
-                                    CharInfo.DamageStats.BaseDamage * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.x, CharInfo.Elemental, this,
+                                    (CharInfo.DamageStats.BaseDamage * nextAttack.DamageMultiplier) * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.x, CharInfo.Elemental, this,
                                     target, target.EffectChances, (nextAttack.TilesAtk.BulletTrajectories[i].BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y))) + animDelay);//(nextAttack.TilesAtk.BulletTrajectories[i].Delay * 0.1f)
                                     }
                                     else if(nextAttack.AttackInput == AttackInputType.Weak)
                                     {
                                         bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, res,
-                                    CharInfo.DamageStats.BaseDamage * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.x, CharInfo.Elemental, this,
+                                    (CharInfo.DamageStats.BaseDamage * nextAttack.DamageMultiplier) * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.x, CharInfo.Elemental, this,
                                     target, target.EffectChances, (nextAttack.TilesAtk.BulletTrajectories[i].BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y))) + animDelay); // 
                                     }
                                     else
                                     {
                                         bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, res,
-                                   CharInfo.DamageStats.BaseDamage * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.x, CharInfo.Elemental, this,
+                                   (CharInfo.DamageStats.BaseDamage * nextAttack.DamageMultiplier) * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.x, CharInfo.Elemental, this,
                                    target, target.EffectChances);
                                     }
 
@@ -1510,6 +1510,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
             SetAnimation(CharacterAnimationStateType.GettingHit);
             healthCT = isCritical ? HealthChangedType.CriticalHit : HealthChangedType.Damage;
+            healthCT = damage < 0 ? HealthChangedType.Heal : healthCT;
             res = true;
         }
 
@@ -1562,7 +1563,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         SetFinalDamage(attacker , damage / GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos).TileADStats.y);
 
 
-        HealthStatsChangedEvent?.Invoke(damage, healthCT, SpineAnim.transform);
+        HealthStatsChangedEvent?.Invoke(Mathf.Abs(damage), healthCT, SpineAnim.transform);
         return res;
     }
 
