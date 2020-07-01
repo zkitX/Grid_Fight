@@ -298,7 +298,7 @@ public enum StatsCheckerType
 
 public enum BuffDebuffStatsType
 {
-    DamagePerc,
+    DamageStats_BaseDamage,
     Health_Overtime,
     Health,
     SpeedStats_BaseSpeed,
@@ -309,7 +309,6 @@ public enum BuffDebuffStatsType
     ShieldStats_BaseShieldRegeneration,
     Drain_Overtime,
     AttackChange,
-    DamageStats_BaseDamage,
     StaminaStats_Stamina,
 }
 

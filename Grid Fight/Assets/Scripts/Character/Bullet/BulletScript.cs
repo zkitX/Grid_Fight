@@ -134,7 +134,7 @@ public class BulletScript : MonoBehaviour
                 
             }
         }
-        EndBullet(0.5f);
+        EndBullet(1f);
     }
 
     GameObject go;
@@ -280,7 +280,7 @@ public class BulletScript : MonoBehaviour
                 bulletSoundSource.ResetSource();
             }
             FireEffectParticles(transform.position);
-            EndBullet(2);
+            isMoving = false;
         }
     }
 
