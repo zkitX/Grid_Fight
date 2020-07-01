@@ -38,6 +38,7 @@ Transform:
   - {fileID: 3880446903173405739}
   - {fileID: 392624176520290598}
   - {fileID: 2718268209576608623}
+  - {fileID: 7065142930515066103}
   m_Father: {fileID: 7848723866681254696}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -471,24 +472,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Kora
-  CharacterIcons:
-  - {fileID: 21300000, guid: 395154bd4e1bbdf489dd9903af25d46b, type: 3}
-  - {fileID: 21300000, guid: 2671fb6cc8a2aa14e8a026eeae17d7c7, type: 3}
-  - {fileID: 21300000, guid: ff940d0092e77a54b94b3a5e7db11c8c, type: 3}
+  CharacterIcon: {fileID: 0}
+  Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 927ca41a96732be4384f057665d55d5e, type: 2}
   BaseCharacterType: 0
   CharacterID: 1026
   CurrentAttackTypeInfo:
   - {fileID: 11400000, guid: d52a938a0faee7c49b7230e0765c93dc, type: 2}
   - {fileID: 11400000, guid: 93af337a280d18643a962d684551568b, type: 2}
-  - {fileID: 11400000, guid: 4a5c0612965db00478cbc525408ae82e, type: 2}
-  - {fileID: 11400000, guid: 997279a54d4219b488393e7c14849d22, type: 2}
   - {fileID: 11400000, guid: aa84e2fed3d2ad3489abc4df65545443, type: 2}
   - {fileID: 11400000, guid: 9f162706892117c45a54c0fe469b6d1f, type: 2}
   Elemental: 0
   ClassType: 1
   CharaterLevel: 0
   UseLayeringSystem: 1
+  Head: {fileID: 7065142930515066103}
+  AIs: []
   CharacterRespawnLength: 180
   CharacterSelection: 0
   RapidAttack:
@@ -720,6 +719,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5724984276885798625}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8192992047852999063
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7065142930515066103}
+  m_Layer: 0
+  m_Name: Head
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7065142930515066103
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8192992047852999063}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5724984276885798625}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8530769547398159536
 GameObject:

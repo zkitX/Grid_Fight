@@ -184,7 +184,8 @@ public enum BattleFieldAttackType
 {
     OnAreaAttack,
     OnTarget,
-    OnItSelf
+    OnItSelf,
+    OnRandom
 }
 
 public enum CharacterActionType
@@ -297,10 +298,34 @@ public enum StatsCheckerType
 
 public enum BuffDebuffStatsType
 {
-    ElementalResistance,
-    ElementalPower,
-    AttackType,
     DamagePerc,
+    Health_Overtime,
+    Health,
+    SpeedStats_BaseSpeed,
+    SpeedStats_MovementSpeed,
+    Drain,
+    Zombification,
+    BlockTile,
+    ShieldStats_BaseShieldRegeneration,
+    Drain_Overtime,
+    AttackChange,
+    DamageStats_BaseDamage,
+    StaminaStats_Stamina,
+}
+
+public enum StatsCheckType
+{
+    None,
+    Health,
+    Stamina,
+    AttackSpeed,
+    MovementSpeed,
+    BaseSpeed,
+    TeamTotalHpPerc
+}
+
+public enum ModificableStatsType
+{
     RapidAttack_CriticalChance,
     RapidAttack_DamageMultiplier,
     RapidAttack_Stamina_Cost_Atk,
@@ -309,8 +334,6 @@ public enum BuffDebuffStatsType
     PowerfulAttac_Stamina_Cost_Atk,
     HealthStats_Base,
     HealthStats_BaseHealthRegeneration,
-    Health_Overtime,
-    Health,
     HealthStats_LevelMultiplier,
     HealthStats_Regeneration,
     StaminaStats_Base,
@@ -329,24 +352,34 @@ public enum BuffDebuffStatsType
     SpeedStats_IdleToAtkDuration,
     SpeedStats_AtkToIdleDuration,
     DamageStats_BaseDamage,
-    Drain,
-    Zombification,
-    BlockTile,
-    ShieldStats_BaseShieldRegeneration,
-    Drain_Overtime
 }
 
-public enum WaveStatsType
+public enum AIType
 {
-    None,
-    Health,
-    Stamina,
-    AttackSpeed,
-    MovementSpeed,
-    BaseSpeed
-
+    VeryDefensive = -2,
+    Defensive = -1,
+    Neutral = 0,
+    Aggressive = 1,
+    VeryAggressive = 2
 }
 
+public enum VisionType
+{
+    Front_Near,
+    Front_Far,
+    UpDown_Near,
+    UpDown_Far
+}
+
+
+public enum AggroType
+{
+    Hit_0,
+    Hit_3,
+    Hit_5,
+    Hit_10
+
+}
 
 public enum ValueCheckerType
 {
@@ -364,13 +397,6 @@ public enum ElementalWeaknessType
     Resistent = 1,
     VeryResistent = 2,
     ExtremelyResistent = 3
-}
-
-
-public enum AIType
-{
-    GeneralAI,
-    AggressiveAI
 }
 
 
@@ -520,7 +546,10 @@ public enum ParticlesType
     Skill_Darkening,
     Skill_Mind_1_Loop,
     Skill_Mind_2_Loop,
-    Skill_Mind_2_Teleporting
+    Skill_Mind_2_Teleporting,
+    Skill_Mind_3_In,
+    Skill_Mind_3_Loop,
+    Skill_Mind_3_Tentacle
 
 }
 
@@ -561,7 +590,8 @@ public enum FacingType
 public enum AttackType
 {
     Particles,
-    Tile
+    Tile,
+    Totem
 }
 
 

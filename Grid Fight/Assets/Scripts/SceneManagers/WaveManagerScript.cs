@@ -145,7 +145,7 @@ public class WaveManagerScript : MonoBehaviour
         res.CharInfo.B_MovementTimer = res.CharInfo.MovementTimer;
         res.CharInfo.ExperienceValue = character.Exp;
 
-        ((MinionType_Script)res).UpDownPerc = character.UpDownPerc;
+        ((MinionType_Script)res).UpDownMovementPerc = character.UpDownPerc;
         res.CharActionlist.Add(CharacterActionType.Move);
 
         return res;
@@ -418,6 +418,17 @@ public class WaveManagerScript : MonoBehaviour
         return res.Distinct().ToList();
     }
 
+    public float GetCurrentPartyHPPerc()
+    {
+        float BaseHp = 0;
+        float CurrentHp = 0;
+        WaveCharcters.Where(r => r.IsOnField && r.gameObject.activeInHierarchy).ToList().ForEach(a =>
+        {
+            BaseHp += a.CharInfo.HealthStats.Base;
+            CurrentHp += a.CharInfo.HealthStats.Health;
+        });
+        return (CurrentHp / BaseHp) * 100;
+    }
 
 }
 

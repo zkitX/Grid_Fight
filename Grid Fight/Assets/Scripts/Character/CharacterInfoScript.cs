@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -31,6 +32,9 @@ public class CharacterInfoScript : MonoBehaviour
     public CharacterClassType ClassType;
     public LevelType CharaterLevel;
     public bool UseLayeringSystem = true;
+    public Transform Head;
+
+    public List<ScriptableObjectAI> AIs = new List<ScriptableObjectAI>();
 
     public List<LevelsInfoClass> Levels = new List<LevelsInfoClass>
     {
@@ -371,6 +375,23 @@ public class CharacterInfoScript : MonoBehaviour
         DefenceStats.B_BaseDefence = DefenceStats.BaseDefence;
         DefenceStats.B_Invulnerability = DefenceStats.Invulnerability;
     }
+
+
+    public ScriptableObjectAI GetCurrentAI()
+    {
+        List<ScriptableObjectAI> res = new List<ScriptableObjectAI>();
+        foreach (ScriptableObjectAI item in AIs)
+        {
+            if(item.CheckAvailability(this))
+            {
+                res.Add(item);
+            }
+        }
+
+        return res.First();
+    }
+
+
 }
 
 

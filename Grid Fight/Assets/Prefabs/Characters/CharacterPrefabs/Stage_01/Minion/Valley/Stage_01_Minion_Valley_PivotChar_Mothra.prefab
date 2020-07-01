@@ -36,6 +36,7 @@ Transform:
   m_Children:
   - {fileID: 7995958242825483017}
   - {fileID: 3315857808538084298}
+  - {fileID: 1353945615871755450}
   m_Father: {fileID: 6489717721263758026}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -467,9 +468,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Mothra
-  CharacterIcons:
-  - {fileID: 21300000, guid: c9eb5af2d9b875e4a9751e32071c0948, type: 3}
-  - {fileID: 21300000, guid: f1018b669a56e5d4fb4ae27635c17fe7, type: 3}
+  CharacterIcon: {fileID: 0}
+  Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: c29e3aa0b63f20945a7555fc0ab073ee, type: 2}
   BaseCharacterType: 1
   CharacterID: 1023
@@ -480,6 +480,8 @@ MonoBehaviour:
   ClassType: 0
   CharaterLevel: 0
   UseLayeringSystem: 1
+  Head: {fileID: 1353945615871755450}
+  AIs: []
   CharacterRespawnLength: 180
   CharacterSelection: 0
   RapidAttack:
@@ -620,6 +622,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2944497662535907927}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5699455928695601607
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1353945615871755450}
+  m_Layer: 0
+  m_Name: Head
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1353945615871755450
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5699455928695601607}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2944497662535907927}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6489717721263758027
 GameObject:

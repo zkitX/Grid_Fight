@@ -355,8 +355,4 @@ public class Stage00_BossOctopus_Script : MinionType_Script
 
     }
 
-    public override bool GeneralTestAI()
-    {
-        return true;
-    }
 }

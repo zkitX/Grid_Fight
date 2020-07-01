@@ -38,6 +38,7 @@ Transform:
   - {fileID: 2537860791942851153}
   - {fileID: 1409827396516288348}
   - {fileID: 3700672049761645845}
+  - {fileID: 2611632405596273973}
   m_Father: {fileID: 8794988915735254354}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -471,10 +472,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Pai
-  CharacterIcons:
-  - {fileID: 21300000, guid: 395154bd4e1bbdf489dd9903af25d46b, type: 3}
-  - {fileID: 21300000, guid: 2671fb6cc8a2aa14e8a026eeae17d7c7, type: 3}
-  - {fileID: 21300000, guid: 893d0d1ce912f6b44b57e9b542d720fb, type: 3}
+  CharacterIcon: {fileID: 0}
+  Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 9f5ec7bbd54125a4689c4434aa513014, type: 2}
   BaseCharacterType: 0
   CharacterID: 1027
@@ -487,6 +486,8 @@ MonoBehaviour:
   ClassType: 2
   CharaterLevel: 0
   UseLayeringSystem: 1
+  Head: {fileID: 2611632405596273973}
+  AIs: []
   CharacterRespawnLength: 180
   CharacterSelection: 0
   RapidAttack:
@@ -658,6 +659,36 @@ Transform:
   - {fileID: 6454060453339728027}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4014787279106495204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2611632405596273973}
+  m_Layer: 0
+  m_Name: Head
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2611632405596273973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4014787279106495204}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6454060453339728027}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5385643476063636533
 GameObject:

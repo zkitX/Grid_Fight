@@ -17,7 +17,6 @@ public class BulletScript : MonoBehaviour
     public ElementalType Elemental;
     public GameObject PS;
     public GameObject TargetIndicator;
-    public bool VFXTestMode = false;
     public CastLoopImpactAudioClipInfoClass attackAudioType;
     ManagedAudioSource bulletSoundSource = null;
     public List<ScriptableObjectAttackEffect> BulletEffects = new List<ScriptableObjectAttackEffect>();
@@ -107,9 +106,9 @@ public class BulletScript : MonoBehaviour
             if (BattleManagerScript.Instance.CurrentBattleState == BattleState.Intro) isMoving = false;
 
             //In case the game ended or in pause I will block the movement
-            while (!VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle &&
+            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle &&
                 BattleManagerScript.Instance.CurrentBattleState != BattleState.FungusPuppets
-                && BattleManagerScript.Instance.CurrentBattleState != BattleState.End))
+                && BattleManagerScript.Instance.CurrentBattleState != BattleState.End)
             {
                 yield return null;
             }
@@ -185,18 +184,15 @@ public class BulletScript : MonoBehaviour
         BaseCharacter target;
         bulletSoundSource = null;
 
-        yield return BattleManagerScript.Instance.WaitFor(BulletBehaviourInfo.ChildrenBulletDelay, () => !VFXTestMode && (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.End));
+        yield return BattleManagerScript.Instance.WaitFor(BulletBehaviourInfo.ChildrenBulletDelay, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
 
         for (int i = 0; i < bet.Count; i++)
         {
             if (GridManagerScript.Instance.isPosOnField(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]))
             {
-                if (!VFXTestMode)
-                {
-                    target = BattleManagerScript.Instance.GetCharInPos(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]);
-                    MakeDamage(target, (CharOwner.CharInfo.DamageStats.BaseDamage * GridManagerScript.Instance.GetBattleTile(CharOwner.UMS.Pos[0]).TileADStats.x
-                        * (SOAttack.AttackInput == AttackInputType.Weak ? CharOwner.CharInfo.RapidAttack.DamageMultiplier.x : CharOwner.CharInfo.PowerfulAttac.DamageMultiplier.x)) * 0.3f);
-                }
+                target = BattleManagerScript.Instance.GetCharInPos(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]);
+                MakeDamage(target, (CharOwner.CharInfo.DamageStats.BaseDamage * GridManagerScript.Instance.GetBattleTile(CharOwner.UMS.Pos[0]).TileADStats.x
+                    * (SOAttack.AttackInput == AttackInputType.Weak ? CharOwner.CharInfo.RapidAttack.DamageMultiplier.x : CharOwner.CharInfo.PowerfulAttac.DamageMultiplier.x)) * 0.3f);
                 AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Impact, AudioBus.HighPrio, GridManagerScript.Instance.GetBattleTile(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]).transform);
                 FireEffectParticles(GridManagerScript.Instance.GetBattleTile(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]).transform.position);
             }
@@ -244,7 +240,7 @@ public class BulletScript : MonoBehaviour
                     {
                         foreach (ScriptableObjectAttackEffect item in BulletEffects)
                         {
-                            target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.Value, item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles, CharOwner));
+                            target.Buff_DebuffCo(new Buff_DebuffClass(new ElementalResistenceClass(), ElementalType.Dark, CharOwner, item));
                         }
                     }
                 }

@@ -1461,6 +1461,16 @@ public class BattleManagerScript : MonoBehaviour
         SetUICharacterSelectionIcons();
     }
 
+    public List<BaseCharacter> GetAllPlayerActiveChars()
+    {
+        List<BaseCharacter> res = new List<BaseCharacter>();
+        res.AddRange(AllCharactersOnField.Where(r => r.IsOnField && r.gameObject.activeInHierarchy).ToList());
+        res.AddRange(AllPlayersMinionOnField.Where(r => r.IsOnField && r.gameObject.activeInHierarchy).ToList());
+
+        return res;
+    }
+
+
     public void RestartScene()
     {
         if (CurrentBattleState == BattleState.Pause)

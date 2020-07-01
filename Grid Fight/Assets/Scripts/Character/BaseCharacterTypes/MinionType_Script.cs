@@ -8,12 +8,13 @@ public class MinionType_Script : BaseCharacter
     protected bool MoveCoOn = true;
     protected IEnumerator MoveActionCo;
     protected float LastAttackTime;
-    public float UpDownPerc = 13;
-    public AIType CurrentAI;
+    public float UpDownMovementPerc = 13;
+    public float ForwardMovementPerc = 13;
+    public float BackwardMovementPerc = 13;
     List<HitInfoClass> HittedByList = new List<HitInfoClass>();
     float totDamage = 0;
     bool strongAnimDone = false;
-
+    public ScriptableObjectAI CurrentAIState;
 
     protected bool UnderAttack
     {
@@ -67,7 +68,7 @@ public class MinionType_Script : BaseCharacter
         BuffsDebuffsList.ForEach(r =>
         {
             r.Duration = 0;
-            r.CurrentBuffDebuff.Duration = 0;
+            r.CurrentBuffDebuff.Effect._Duration = Vector2.zero;
             r.CurrentBuffDebuff.Stop_Co = true;
         }
         );
@@ -133,11 +134,11 @@ public class MinionType_Script : BaseCharacter
                     {
 
                         int randomizer = Random.Range(0, 100);
-                        if (randomizer < UpDownPerc)
+                        if (randomizer < UpDownMovementPerc)
                         {
                             yield return MoveCharOnDir_Co(InputDirection.Left);
                         }
-                        else if (randomizer > (100 - UpDownPerc))
+                        else if (randomizer > (100 - UpDownMovementPerc))
                         {
                             yield return MoveCharOnDir_Co(InputDirection.Right);
                         }
@@ -161,12 +162,118 @@ public class MinionType_Script : BaseCharacter
     }
 
 
+    public virtual IEnumerator AI_New()
+    {
+        bool val = true;
+        while (val)
+        {
+            yield return null;
+            if (IsOnField)
+            {
+
+                while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+                {
+                    yield return null;
+                }
+
+                CurrentAIState = CharInfo.GetCurrentAI();
+                SetCurrentAIValues();
+
+                int randomizer = Random.Range(0, 100);
+                if(ForwardMovementPerc > randomizer)
+                {
+                    BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(UMS.CurrentTilePos.x, UMS.Side == SideType.RightSide ? UMS.CurrentTilePos.y - 1 : UMS.CurrentTilePos.y + 1));
+                    if(bts.BattleTileState == BattleTileStateType.Empty)
+                    {
+                        yield return MoveCharOnDir_Co(UMS.Side == SideType.RightSide ? InputDirection.Left : InputDirection.Right);
+                    }
+                    else if(bts.BattleTileState == BattleTileStateType.Occupied && UMS.WalkingSide == bts.WalkingSide)
+                    {
+
+                    }
+                }
+
+
+
+
+
+
+
+/*
+                if (randomizer < UpDownMovementPerc)
+                {
+                    yield return MoveCharOnDir_Co(InputDirection.Left);
+                }
+                else if (randomizer > (100 - UpDownMovementPerc))
+                {
+                    yield return MoveCharOnDir_Co(InputDirection.Right);
+                }
+                else
+                {
+                    targetChar = GetTargetChar(enemys);
+                    if (targetChar.UMS.CurrentTilePos.x < UMS.CurrentTilePos.x)
+                    {
+                        yield return MoveCharOnDir_Co(InputDirection.Up);
+                    }
+                    else
+                    {
+                        yield return MoveCharOnDir_Co(InputDirection.Down);
+                    }
+                }
+                */
+
+
+
+
+
+
+                List<BaseCharacter> enemys = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList();
+                if (enemys.Count > 0)
+                {
+                    BaseCharacter targetChar = enemys.Where(r => r.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x).FirstOrDefault();
+                    /*BaseCharacter targetChar = null;
+                    List<BaseCharacter> possibleTargets = enemys.Where(r => Mathf.Abs(r.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x) <= 1).ToList();
+                    if (possibleTargets.Count > 0)
+                    {
+                        targetChar = possibleTargets[Random.Range(0, possibleTargets.Count)];
+                    }*/
+                    if (targetChar != null && (nextAttack == null || (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler)))
+                    {
+                        lastAttackTime = Time.time;
+                        nextAttackPos = targetChar.UMS.CurrentTilePos;
+                        yield return AttackSequence();
+                    }
+                    else
+                    {
+
+                       
+                    }
+                }
+                yield return null;
+            }
+        }
+    }
+
     protected BaseCharacter GetTargetChar(List<BaseCharacter> enemys)
     {
         return enemys.OrderBy(r => (r.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x)).First();
     }
 
-
+    protected void SetCurrentAIValues()
+    {
+        if(CurrentAIState.UpdateMoveForward)
+        {
+            ForwardMovementPerc = CurrentAIState.MoveForward;
+        }
+        if (CurrentAIState.UpdateMoveBackward)
+        {
+            BackwardMovementPerc = CurrentAIState.MoveBackward;
+        }
+        if (CurrentAIState.UpdateMoveUpDown)
+        {
+            UpDownMovementPerc = CurrentAIState.MoveUpDown;
+        }
+    }
 
     public virtual IEnumerator Move()
     {
@@ -281,59 +388,6 @@ public class MinionType_Script : BaseCharacter
         }
     }
 
-    public virtual bool GeneralTestAI()
-    {
-        List<BattleFieldAttackTileClass> tilesToCheck = new List<BattleFieldAttackTileClass>();
-
-        foreach (BulletBehaviourInfoClassOnBattleFieldClass item in nextAttack.TilesAtk.BulletTrajectories)
-        {
-            tilesToCheck.AddRange(item.BulletEffectTiles);
-        }
-        tilesToCheck = tilesToCheck.Distinct().ToList();
-        int chances = Random.Range(0, 100);
-        if (GridManagerScript.Instance.IsEnemyOnTileAttackRange(tilesToCheck, UMS.CurrentTilePos))
-        {
-            if (chances < 10)
-            {
-                return false;
-            }
-
-            return true;
-        }
-        else
-        {
-            if (chances < 50)
-            {
-                return true;
-            }
-            AIMove = true;
-            return false;
-        }
-    }
-
-    public bool AggressiveTestAI()
-    {
-        BaseCharacter cb = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x).FirstOrDefault();
-        if (cb != null)
-        {
-            if (CharInfo.HealthPerc > 20)
-            {
-                return true;
-            }
-            else
-            {
-                AIMove = false;
-                return false;
-            }
-        }
-        else
-        {
-            AIMove = true;
-            return false;
-        }
-
-    }
-
 
     public override void CreateBullet(BulletBehaviourInfoClassOnBattleFieldClass bulletBehaviourInfo)
     {
@@ -347,7 +401,6 @@ public class MinionType_Script : BaseCharacter
         bs.Elemental = CharInfo.DamageStats.CurrentElemental;
         bs.Side = UMS.Side;
         bs.isColliding = false;
-        bs.VFXTestMode = VFXTestMode;
         bs.CharOwner = this;
         bs.attackAudioType = GetAttackAudio();
         bs.BulletEffects.Clear();

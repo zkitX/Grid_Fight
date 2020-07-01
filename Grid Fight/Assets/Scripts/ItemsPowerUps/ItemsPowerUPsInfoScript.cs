@@ -48,19 +48,13 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
         if (other.tag.Contains("Side"))
         {
             CharHitted = other.GetComponentInParent<BaseCharacter>();
-            CharHitted.Buff_DebuffCo(new Buff_DebuffClass(ItemPowerUpInfo.Name, ItemPowerUpInfo.EffectDuration,
-                ItemPowerUpInfo.Value,
-                ItemPowerUpInfo.StatsToAffect, ItemPowerUpInfo.StatsChecker, new ElementalResistenceClass(),
-                ElementalType.Neutral, ItemPowerUpInfo.AnimToFire, ItemPowerUpInfo.Particles, other.GetComponentInParent<BaseCharacter>()));
+            CharHitted.Buff_DebuffCo(new Buff_DebuffClass(new ElementalResistenceClass(),
+                ElementalType.Neutral, other.GetComponentInParent<BaseCharacter>(), ItemPowerUpInfo));
             CharHitted.Sic.PotionPicked++;
             AudioClipInfoClass powerUpAudio = null;
             ItemType itemType = ItemType.PowerUP_FullRecovery;
             switch (ItemPowerUpInfo.StatsToAffect)
             {
-                case (BuffDebuffStatsType.HealthStats_BaseHealthRegeneration):
-                    itemType = ItemType.PowerUP_Health;
-                    powerUpAudio = BattleManagerScript.Instance.AudioProfile.PowerUp_Health;
-                    break;
                 case (BuffDebuffStatsType.SpeedStats_BaseSpeed):
                     itemType = ItemType.PowerUp_Speed;
                     powerUpAudio = BattleManagerScript.Instance.AudioProfile.PowerUp_Speed;
@@ -68,10 +62,6 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
                 case (BuffDebuffStatsType.StaminaStats_Stamina):
                     itemType = ItemType.PowerUP_Stamina;
                     powerUpAudio = BattleManagerScript.Instance.AudioProfile.PowerUp_Stamina;
-                    break;
-                case (BuffDebuffStatsType.RapidAttack_CriticalChance):
-                    itemType = ItemType.PowerUp_Damage;
-                    powerUpAudio = BattleManagerScript.Instance.AudioProfile.PowerUp_Damage;
                     break;
                 case (BuffDebuffStatsType.DamageStats_BaseDamage):
                     itemType = ItemType.PowerUp_Damage;

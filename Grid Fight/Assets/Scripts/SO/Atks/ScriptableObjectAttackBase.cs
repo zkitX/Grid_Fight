@@ -44,6 +44,7 @@ public class ScriptableObjectAttackBase : ScriptableObject
     public int TrajectoriesNumber;
     [HideInInspector] public ParticlesAttackTypeClass ParticlesAtk;
     [HideInInspector] public TilesAttackTypeClass TilesAtk;
+    [HideInInspector] public TotemAttackTypeClass TotemAtk;
 
 
     private void OnEnable()
@@ -80,7 +81,7 @@ public class TilesAttackTypeClass
 {
     public BattleFieldAttackType AtkType;
     public List<BulletBehaviourInfoClassOnBattleFieldClass> BulletTrajectories = new List<BulletBehaviourInfoClassOnBattleFieldClass>();
-    public WaveStatsType StatToCheck;
+    public StatsCheckType StatToCheck;
     public ValueCheckerType ValueChecker;
     public float PercToCheck;
     public int Chances;
@@ -174,3 +175,19 @@ public class BulletBehaviourInfoClass
 }
 #endregion
 
+#region Totem
+[System.Serializable]
+public class TotemAttackTypeClass
+{
+    [HideInInspector]public BattleFieldAttackType AtkType = BattleFieldAttackType.OnRandom;
+    public bool IsPlayerSide;
+    public float DurationOnField = 10;
+    public List<ScriptableObjectAttackEffect> Effects = new List<ScriptableObjectAttackEffect>();
+
+    public ParticlesType TotemIn;
+    public ParticlesType TotemOut;
+
+    public ParticlesType TentaclePrefab;
+}
+
+#endregion

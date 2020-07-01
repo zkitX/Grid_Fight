@@ -41,7 +41,7 @@ public class BattleTileTargetsScript : MonoBehaviour
             yield return BattleManagerScript.Instance.WaitFixedUpdate(new System.Action(() => { anim.speed = 0; }), () => BattleManagerScript.Instance != null && ((BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.FungusPuppets) && !BattleManagerScript.Instance.VFXScene));
 
             anim.speed = (1 / duration) * (attacker.CharInfo.BaseSpeed / attacker.CharInfo.SpeedStats.B_BaseSpeed) * BattleManagerScript.Instance.BattleSpeed;
-            timer += BattleManagerScript.Instance.FixedDeltaTime * (attacker.CharInfo.BaseSpeed / attacker.CharInfo.SpeedStats.B_BaseSpeed);
+            timer += attackerFiredAttackAnim ? BattleManagerScript.Instance.FixedDeltaTime : BattleManagerScript.Instance.FixedDeltaTime * (attacker.CharInfo.BaseSpeed / attacker.CharInfo.SpeedStats.B_BaseSpeed);
             tc.RemainingTime = duration - timer;
             if (!attacker.Attacking && tc.RemainingTime > duration * 0.1f)
             {
@@ -77,8 +77,7 @@ public class BattleTileTargetsScript : MonoBehaviour
                     {
                         foreach (ScriptableObjectAttackEffect item in atkEffects.Effects.Where(r => !r.StatsToAffect.ToString().Contains("Tile")).ToList())
                         {
-                            target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.StatsToAffect == BuffDebuffStatsType.Drain ? item.Value *2 : item.Value,
-                                item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles, attacker));
+                            target.Buff_DebuffCo(new Buff_DebuffClass(new ElementalResistenceClass(), ElementalType.Dark, attacker, item));
                         }
                     }
                 }
@@ -89,7 +88,8 @@ public class BattleTileTargetsScript : MonoBehaviour
                 ScriptableObjectAttackEffect soAE = atkEffects.Effects.Where(r => r.StatsToAffect == BuffDebuffStatsType.BlockTile).FirstOrDefault();
                 if (soAE != null)
                 {
-                    StartCoroutine(BlockTileForTime(soAE.Duration.x, pos, ParticleManagerScript.Instance.GetParticle(soAE.Particles)));
+                    BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(pos);
+                    bts.StartCoroutine(bts.BlockTileForTime(soAE.Duration, ParticleManagerScript.Instance.GetParticle(soAE.Particles)));
                 }
             }
             if(atkEffects.IsEffectOnTile)
@@ -172,7 +172,7 @@ public class BattleTileTargetsScript : MonoBehaviour
             yield return BattleManagerScript.Instance.WaitFixedUpdate(new System.Action(() => { anim.speed = 0; }), () => BattleManagerScript.Instance != null && ((BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.FungusPuppets) && !BattleManagerScript.Instance.VFXScene));
 
             anim.speed = (1 / duration) * (attacker.CharInfo.BaseSpeed / attacker.CharInfo.SpeedStats.B_BaseSpeed) * BattleManagerScript.Instance.BattleSpeed;
-            timer += BattleManagerScript.Instance.FixedDeltaTime;
+            timer += attackerFiredAttackAnim ? BattleManagerScript.Instance.FixedDeltaTime : BattleManagerScript.Instance.FixedDeltaTime * (attacker.CharInfo.BaseSpeed / attacker.CharInfo.SpeedStats.B_BaseSpeed);
             tc.RemainingTime = duration - timer;
             if (!attacker.Attacking && !attacker.bulletFired)
             {
@@ -204,8 +204,7 @@ public class BattleTileTargetsScript : MonoBehaviour
                     {
                         foreach (ScriptableObjectAttackEffect item in atkEffects.Effects.Where(r => !r.StatsToAffect.ToString().Contains("Tile")).ToList())
                         {
-                            target.Buff_DebuffCo(new Buff_DebuffClass(item.Name, item.Duration.x, item.StatsToAffect == BuffDebuffStatsType.Drain ? item.Value * 2 : item.Value,
-                                item.StatsToAffect, item.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, item.AnimToFire, item.Particles, attacker));
+                            target.Buff_DebuffCo(new Buff_DebuffClass(new ElementalResistenceClass(), ElementalType.Dark, attacker, item));
                         }
                     }
                 }
@@ -216,7 +215,8 @@ public class BattleTileTargetsScript : MonoBehaviour
                 ScriptableObjectAttackEffect soAE = atkEffects.Effects.Where(r => r.StatsToAffect == BuffDebuffStatsType.BlockTile).FirstOrDefault();
                 if (soAE != null)
                 {
-                    StartCoroutine(BlockTileForTime(soAE.Duration.x, pos, ParticleManagerScript.Instance.GetParticle(soAE.Particles)));
+                    BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(pos);
+                    bts.StartCoroutine(bts.BlockTileForTime(soAE.Duration, ParticleManagerScript.Instance.GetParticle(soAE.Particles)));
                 }
             }
             if (atkEffects.IsEffectOnTile)
@@ -250,29 +250,6 @@ public class BattleTileTargetsScript : MonoBehaviour
             }
         }
     }
-
-
-    private IEnumerator BlockTileForTime(float duration, Vector2Int pos, GameObject ps)
-    {
-        BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(pos);
-        float timer = 0;
-        bts.BattleTileState = BattleTileStateType.Blocked;
-        ps.transform.position = transform.position;
-        ps.SetActive(true);
-        PSTimeGroup pstg = ps.GetComponent<PSTimeGroup>();
-        if (pstg != null)
-        {
-            pstg.UpdatePSTime(duration);
-        }
-        while (timer < duration)
-        {
-            yield return null;
-            timer += BattleManagerScript.Instance.DeltaTime;
-        }
-        ps.SetActive(false);
-        bts.BattleTileState = BattleTileStateType.Empty;
-    }
-
 
     public void UpdateQueue()
     {

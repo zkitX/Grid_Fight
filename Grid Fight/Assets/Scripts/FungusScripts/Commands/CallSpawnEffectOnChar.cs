@@ -29,8 +29,7 @@ public class CallSpawnEffectOnChar : Command
                 }
             }
 
-            cb.Buff_DebuffCo(new Buff_DebuffClass(Effect.Name, Effect.Duration.x, Effect.StatsToAffect == BuffDebuffStatsType.Drain ? Effect.Value * 2 : Effect.Value,
-                Effect.StatsToAffect, Effect.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, Effect.AnimToFire, Effect.Particles, new BaseCharacter()));
+            cb.Buff_DebuffCo(new Buff_DebuffClass(new ElementalResistenceClass(), ElementalType.Dark, new BaseCharacter(), Effect));
         }
     }
 

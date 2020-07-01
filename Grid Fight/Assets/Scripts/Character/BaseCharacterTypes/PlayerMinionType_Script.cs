@@ -345,7 +345,6 @@ public class PlayerMinionType_Script : BaseCharacter
         bs.Elemental = CharInfo.DamageStats.CurrentElemental;
         bs.Side = UMS.Side;
         bs.isColliding = false;
-        bs.VFXTestMode = VFXTestMode;
         bs.CharOwner = this;
         bs.attackAudioType = GetAttackAudio();
         bs.BulletEffects.Clear();

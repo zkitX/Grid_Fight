@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skill_Mind_3
   m_EditorClassIdentifier: 
   Chances: 100
-  CurrentAttackType: 1
+  CurrentAttackType: 2
   AttackRatioMultiplier: 1
   DamageMultiplier: {x: 1, y: 1}
   AttackInput: 4
@@ -39,12 +39,12 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
-  TrajectoriesNumber: 1
+  TrajectoriesNumber: 0
   ParticlesAtk:
     BulletTrajectories: []
     CharacterClass: 0
   TilesAtk:
-    AtkType: 0
+    AtkType: 3
     BulletTrajectories:
     - Delay: 0
       BulletTravelDurationPerTile: 0
@@ -62,8 +62,28 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
       Show: 1
-      BulletEffectTiles: []
+      BulletEffectTiles:
+      - Pos: {x: 0, y: 0}
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: 10cd729e3bdd3984392beb4056d7d457, type: 2}
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
     StatToCheck: 0
     ValueChecker: 0
     PercToCheck: 0
-    Chances: 0
+    Chances: 100
+  TotemAtk:
+    AtkType: 3
+    IsPlayerSide: 0
+    DurationOnField: 10
+    Effects:
+    - {fileID: 11400000, guid: 10cd729e3bdd3984392beb4056d7d457, type: 2}
+    - {fileID: 11400000, guid: 53a551ed59cac324cb29525394d398ce, type: 2}
+    TotemIn: 23
+    TotemOut: 24
+    TentaclePrefab: 25

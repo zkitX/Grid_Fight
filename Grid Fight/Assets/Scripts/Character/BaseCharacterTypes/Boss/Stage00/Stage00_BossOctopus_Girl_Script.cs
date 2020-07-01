@@ -101,9 +101,4 @@ public class Stage00_BossOctopus_Girl_Script : MinionType_Script
         base.SetAnimation(animState, loop, transition);
     }
 
-    public override bool GeneralTestAI()
-    {
-        return true;
-    }
-
 }

@@ -81,6 +81,7 @@ public class CharacterType_Script : BaseCharacter
                 StartChargingAtk(AttackInputType.Skill2);
                 break;
             case InputActionType.Skill3:
+                StartChargingAtk(AttackInputType.Skill3);
                 break;
             case InputActionType.Defend:
                 StartDefending();
@@ -511,7 +512,6 @@ public class CharacterType_Script : BaseCharacter
         bs.Elemental = CharInfo.DamageStats.CurrentElemental;
         bs.Side = UMS.Side;
         bs.isColliding = true;
-        bs.VFXTestMode = VFXTestMode;
         bs.CharOwner = this;
         bs.attackAudioType = GetAttackAudio();
         ScriptableObjectAttackEffect[] abAtkBase = new ScriptableObjectAttackEffect[bulletBehaviourInfo.Effects.Count];

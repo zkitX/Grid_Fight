@@ -12,7 +12,7 @@ public class ScriptableObjectWaveEvent_CharStatsCheckInPerc : ScriptableObjectWa
 
     public List<CharacterNameType> CharactersID;
 
-    public WaveStatsType StatToCheck;
+    public StatsCheckType StatToCheck;
     public ValueCheckerType ValueChecker;
     public float PercToCheck;
 

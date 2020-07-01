@@ -416,16 +416,37 @@ public Vector2 Duration_Debuff_Trap_ForTime;
         }
     }
 
+
+    public IEnumerator BlockTileForTime(float duration, GameObject ps)
+    {
+        float timer = 0;
+        BattleTileState = BattleTileStateType.Blocked;
+        ps.transform.position = transform.position;
+        ps.SetActive(true);
+        PSTimeGroup pstg = ps.GetComponent<PSTimeGroup>();
+        if (pstg != null)
+        {
+            pstg.UpdatePSTime(duration);
+        }
+        while (timer < duration)
+        {
+            yield return null;
+            timer += BattleManagerScript.Instance.DeltaTime;
+        }
+        ps.SetActive(false);
+        BattleTileState = BattleTileStateType.Empty;
+    }
+
+
     //Setup the Tile effect
     private void TargetCharacter_TileMovementCompleteEvent(BaseCharacter movingChar)
     {
 
         movingChar.TileMovementCompleteEvent -= TargetCharacter_TileMovementCompleteEvent;
-        foreach (var Effect in Effects)
+        foreach (ScriptableObjectAttackEffect effect in Effects)
         {
             //Creation of the Buff/Debuff
-            Buff_DebuffClass bdClass = new Buff_DebuffClass(Effect.Name, Effect.Duration.x, Effect.Value,
-                Effect.StatsToAffect, Effect.StatsChecker, new ElementalResistenceClass(), ElementalType.Dark, Effect.AnimToFire, Effect.Particles, movingChar);
+            Buff_DebuffClass bdClass = new Buff_DebuffClass(new ElementalResistenceClass(), ElementalType.Dark, movingChar, effect);
 
             movingChar.Buff_DebuffCo(bdClass);
         }

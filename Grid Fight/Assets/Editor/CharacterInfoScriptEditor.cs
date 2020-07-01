@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.Linq;
 
 [CustomEditor(typeof(CharacterInfoScript))]
 public class CharacterInfoScriptEditor : Editor
@@ -25,6 +26,13 @@ public class CharacterInfoScriptEditor : Editor
                     item.CharOwnerId = origin.CharacterID;
                 }
             }
+        }
+
+        if(origin.transform.GetComponentsInChildren<Transform>().Where(r=> r.name == "Head").ToList().Count == 0)
+        {
+            GameObject head = Instantiate(new GameObject(), origin.transform);
+            head.name = "Head";
+            origin.Head = head.transform;
         }
         EditorUtility.SetDirty(origin);
     }

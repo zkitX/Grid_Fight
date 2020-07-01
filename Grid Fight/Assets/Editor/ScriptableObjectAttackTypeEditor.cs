@@ -87,7 +87,7 @@ public class ScriptableObjectAttackTypeEditor : Editor
             if (origin.TrajectoriesNumber > 0)
             {
                 origin.TilesAtk.PercToCheck = EditorGUILayout.FloatField("PercToCheck", origin.TilesAtk.PercToCheck);
-                origin.TilesAtk.StatToCheck = (WaveStatsType)EditorGUILayout.EnumPopup("StatToCheck", origin.TilesAtk.StatToCheck);
+                origin.TilesAtk.StatToCheck = (StatsCheckType)EditorGUILayout.EnumPopup("StatToCheck", origin.TilesAtk.StatToCheck);
                 origin.TilesAtk.ValueChecker = (ValueCheckerType)EditorGUILayout.EnumPopup("ValueChecker", origin.TilesAtk.ValueChecker);
                 origin.TilesAtk.Chances = EditorGUILayout.IntField("Chances", origin.TilesAtk.Chances);
                 origin.TilesAtk.BulletTrajectories = RefreshList(origin.TrajectoriesNumber, origin.TilesAtk.BulletTrajectories);
@@ -117,13 +117,20 @@ public class ScriptableObjectAttackTypeEditor : Editor
                         case BattleFieldAttackType.OnItSelf:
                             DrawBattleTileAtk(origin.TilesAtk.BulletTrajectories[i], new Vector2Int(-3, 4), new Vector2Int(-3, 4));
                             break;
-                        default:
+                        case BattleFieldAttackType.OnRandom:
+                            DrawBattleTileAtk(origin.TilesAtk.BulletTrajectories[i], new Vector2Int(0, 1), new Vector2Int(0, 1));
                             break;
                     }
                 }
                 firstOpen = false;
             }
         }
+        else if(origin.CurrentAttackType == AttackType.Totem)
+        {
+            origin.TrajectoriesNumber = 0;
+            DrawTotemAtk(origin.TotemAtk);
+        }
+
       
         EditorUtility.SetDirty(origin);
     }
@@ -246,6 +253,28 @@ public class ScriptableObjectAttackTypeEditor : Editor
         {
             WriteInfo(BattleTileTrajectory);
         }
+    }
+
+    public void DrawTotemAtk(TotemAttackTypeClass totem)
+    {
+        EditorGUILayout.Space();
+        totem.IsPlayerSide = EditorGUILayout.ToggleLeft("IsPlayerSide", totem.IsPlayerSide);
+        var list = totem.Effects;
+        int newCount = Mathf.Max(0, EditorGUILayout.IntField("Number of Effects", list.Count));
+        while (newCount < list.Count)
+            list.RemoveAt(list.Count - 1);
+        while (newCount > list.Count)
+            list.Add(null);
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            totem.Effects[i] = (ScriptableObjectAttackEffect)EditorGUILayout.ObjectField("Effect " + i, totem.Effects[i], typeof(ScriptableObjectAttackEffect), false); 
+        }
+
+        totem.DurationOnField = EditorGUILayout.FloatField("DurationOnField", totem.DurationOnField);
+        totem.TotemIn = (ParticlesType)EditorGUILayout.EnumPopup("TotemIn PS", totem.TotemIn);
+        totem.TotemOut = (ParticlesType)EditorGUILayout.EnumPopup("TotemOut PS", totem.TotemOut);
+        totem.TentaclePrefab = (ParticlesType)EditorGUILayout.EnumPopup("TentaclePrefab PS", totem.TentaclePrefab);
     }
 
 

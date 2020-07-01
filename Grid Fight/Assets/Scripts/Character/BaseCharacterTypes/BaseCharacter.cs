@@ -316,7 +316,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             atkToCheck = currentTileAtks[i];
             switch (atkToCheck.TilesAtk.StatToCheck)
             {
-                case WaveStatsType.Health:
+                case StatsCheckType.Health:
                     switch (atkToCheck.TilesAtk.ValueChecker)
                     {
                         case ValueCheckerType.LessThan:
@@ -340,7 +340,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                             break;
                     }
                     break;
-                case WaveStatsType.Stamina:
+                case StatsCheckType.Stamina:
                     switch (atkToCheck.TilesAtk.ValueChecker)
                     {
                         case ValueCheckerType.LessThan:
@@ -363,7 +363,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                             break;
                     }
                     break;
-                case WaveStatsType.None:
+                case StatsCheckType.None:
                     nextAttack = atkToCheck;
                     availableAtks.Add(atkToCheck);
                     break;
@@ -427,9 +427,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     CreateBullet(item);
                 }
             }
-            else
+            else if(nextAttack.CurrentAttackType == AttackType.Tile)
             {
                 CreateTileAttack();
+            }
+            else if(nextAttack.CurrentAttackType == AttackType.Totem)
+            {
+                CreateTotemAttack();
             }
         }
     }
@@ -541,6 +545,89 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
         }
     }
+
+    public virtual void CreateTotemAttack()
+    {
+        if (nextAttack != null && nextAttack.CurrentAttackType == AttackType.Totem && CharInfo.Health > 0 && IsOnField)
+        {
+            CharInfo.RapidAttack.DamageMultiplier = CharInfo.RapidAttack.B_DamageMultiplier * nextAttack.DamageMultiplier;
+            CharInfo.PowerfulAttac.DamageMultiplier = CharInfo.PowerfulAttac.B_DamageMultiplier * nextAttack.DamageMultiplier;
+            StartCoroutine(Totem());
+        }
+    }
+
+
+    IEnumerator Totem()
+    {
+        yield return BattleManagerScript.Instance.WaitUpdate(() => (currentAttackPhase != AttackPhasesType.End || CharInfo.HealthPerc <= 0));
+        BattleTileScript res;
+        MatchType matchType = LoaderManagerScript.Instance != null ? LoaderManagerScript.Instance.MatchInfoType : BattleInfoManagerScript.Instance.MatchInfoType;
+        SideType side = nextAttack.TotemAtk.IsPlayerSide ? UMS.Side : UMS.Side == SideType.LeftSide ? SideType.RightSide : SideType.LeftSide;
+        res = GridManagerScript.Instance.GetFreeBattleTile(side == SideType.LeftSide ? WalkingSideType.LeftSide : WalkingSideType.RightSide);
+        res.SetupEffect(nextAttack.TotemAtk.Effects, nextAttack.TotemAtk.DurationOnField, nextAttack.TotemAtk.TotemIn);
+        List<TotemTentacleClass> tentacles = new List<TotemTentacleClass>();
+        TotemTentacleClass checker;
+        GameObject ps = null;
+        if (nextAttack.TotemAtk.TentaclePrefab != ParticlesType.None)
+        {
+            float timer = 0;
+            while (timer < nextAttack.TotemAtk.DurationOnField)
+            {
+                foreach (TotemTentacleClass item in tentacles)
+                {
+                    item.isActive = false;
+                }
+                yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
+                timer += BattleManagerScript.Instance.DeltaTime;
+                List<BaseCharacter> enemy = (matchType == MatchType.PPPPvE || matchType == MatchType.PPvE || matchType == MatchType.PvE) ?
+                WaveManagerScript.Instance.WaveCharcters.Where(r => r.IsOnField && r.gameObject.activeInHierarchy).ToList() :
+                BattleManagerScript.Instance.GetAllPlayerActiveChars().Where(r => r.UMS.Side == side).ToList();
+
+                foreach (BaseCharacter item in enemy)
+                {
+                    checker = tentacles.Where(r => r.CharAffected == item).FirstOrDefault();
+                    if (checker != null)
+                    {
+                        checker.isActive = true;
+                    }
+                    else
+                    {
+                        if (nextAttack.TotemAtk.TentaclePrefab != ParticlesType.None)
+                        {
+                            ps = ParticleManagerScript.Instance.GetParticle(nextAttack.TotemAtk.TentaclePrefab);
+                            ps.transform.position = res.transform.position;
+                            ps.SetActive(true);
+                            foreach (VFXOffsetToTargetVOL pstimeG in ps.GetComponentsInChildren<VFXOffsetToTargetVOL>())
+                            {
+                                pstimeG.Target = item.CharInfo.Head;
+                            }
+                        }
+
+                        foreach (ScriptableObjectAttackEffect effect in nextAttack.TotemAtk.Effects.Where(r => r.StatsToAffect != BuffDebuffStatsType.BlockTile).ToList())
+                        {
+                            item.Buff_DebuffCo(new Buff_DebuffClass(new ElementalResistenceClass(), ElementalType.Dark, this, effect));
+                        }
+
+
+                        foreach (ScriptableObjectAttackEffect effect in nextAttack.TotemAtk.Effects.Where(r => r.StatsToAffect == BuffDebuffStatsType.BlockTile).ToList())
+                        {
+                            res.StartCoroutine(res.BlockTileForTime(effect.Duration, ParticleManagerScript.Instance.GetParticle(effect.Particles)));
+                        }
+
+
+                        tentacles.Add(new TotemTentacleClass(item, ps, true));
+                    }
+                }
+
+                foreach (TotemTentacleClass item in tentacles.Where(r => !r.isActive).ToList())
+                {
+                    item.PS.gameObject.SetActive(false);
+                    tentacles.Remove(item);
+                }
+            }
+        }
+    }
+
 
     public virtual string GetAttackAnimName()
     {
@@ -874,12 +961,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public void Buff_DebuffCo(Buff_DebuffClass bdClass)
     {
-        BuffDebuffClass item = BuffsDebuffsList.Where(r => r.Stat == bdClass.Stat).FirstOrDefault();
-        string[] newBuffDebuff = bdClass.Name.Split('_');
+        BuffDebuffClass item = BuffsDebuffsList.Where(r => r.Stat == bdClass.Effect.StatsToAffect).FirstOrDefault();
+        string[] newBuffDebuff = bdClass.Effect.Name.Split('_');
         if (item == null)
         {
             //Debug.Log(bdClass.Name + "   " + newBuffDebuff.Last());
-            item = new BuffDebuffClass(bdClass.Name, bdClass.Stat, Convert.ToInt32(newBuffDebuff.Last()), bdClass, bdClass.Duration, bdClass.EffectMaker);
+            item = new BuffDebuffClass(bdClass.Effect.Name, bdClass.Effect.StatsToAffect, Convert.ToInt32(newBuffDebuff.Last()), bdClass, bdClass.Effect.Duration, bdClass.EffectMaker);
             item.BuffDebuffCo = Buff_DebuffCoroutine(item);
             BuffsDebuffsList.Add(item);
             StartCoroutine(item.BuffDebuffCo);
@@ -891,7 +978,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 string[] currentBuffDebuff = item.Name.ToString().Split('_');
                 item.CurrentBuffDebuff.Stop_Co = true;
                 BuffsDebuffsList.Remove(item);
-                item = new BuffDebuffClass(bdClass.Name, bdClass.Stat, Convert.ToInt32(newBuffDebuff.Last()), bdClass, bdClass.Duration, bdClass.EffectMaker);
+                item = new BuffDebuffClass(bdClass.Effect.Name, bdClass.Effect.StatsToAffect, Convert.ToInt32(newBuffDebuff.Last()), bdClass, bdClass.Effect.Duration, bdClass.EffectMaker);
                 item.BuffDebuffCo = Buff_DebuffCoroutine(item);
                 BuffsDebuffsList.Add(item);
                 StartCoroutine(item.BuffDebuffCo);
@@ -903,9 +990,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public IEnumerator Buff_DebuffCoroutine(BuffDebuffClass bdClass)
     {
         GameObject ps = null;
-        if (bdClass.CurrentBuffDebuff.ParticlesToFire != ParticlesType.None)
+        if (bdClass.CurrentBuffDebuff.Effect.Particles != ParticlesType.None)
         {
-            ps = ParticleManagerScript.Instance.GetParticle(bdClass.CurrentBuffDebuff.ParticlesToFire);
+            ps = ParticleManagerScript.Instance.GetParticle(bdClass.CurrentBuffDebuff.Effect.Particles);
             ps.transform.parent = SpineAnim.transform;
             ps.transform.localPosition = Vector3.zero;
             ps.SetActive(true);
@@ -918,20 +1005,16 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         System.Reflection.FieldInfo parentField = null, field = null, B_field = null;
         string[] statToCheck = bdClass.Stat.ToString().Split('_');
 
-        if (bdClass.Stat == BuffDebuffStatsType.ElementalResistance)
-        {
-            //ElementalResistance(bdClass.CurrentBuffDebuff);
-        }
-        else if(bdClass.Stat == BuffDebuffStatsType.Drain || bdClass.Stat == BuffDebuffStatsType.Drain_Overtime)
+        if (bdClass.Stat == BuffDebuffStatsType.Drain || bdClass.Stat == BuffDebuffStatsType.Drain_Overtime)
         {
             HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, HealthChangedType.Heal, bdClass.EffectMaker.SpineAnim.transform);
-            bdClass.EffectMaker.CharInfo.Health += bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Value ? bdClass.CurrentBuffDebuff.Value : (CharInfo.HealthStats.Base / 100) * bdClass.CurrentBuffDebuff.Value;
+            bdClass.EffectMaker.CharInfo.Health += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Value ? bdClass.CurrentBuffDebuff.Value : (CharInfo.HealthStats.Base / 100) * bdClass.CurrentBuffDebuff.Value;
             EventManager.Instance?.UpdateHealth(this);
             EventManager.Instance?.UpdateHealth(bdClass.EffectMaker);
         }
         else if (bdClass.Stat == BuffDebuffStatsType.Zombification)
         {
-            if(CharInfo.Health > 0)
+            if (CharInfo.Health > 0)
             {
                 BattleManagerScript.Instance.Zombification(this, bdClass.Duration);
             }
@@ -939,11 +1022,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         else if (bdClass.Stat == BuffDebuffStatsType.Health || bdClass.Stat == BuffDebuffStatsType.Health_Overtime)
         {
             float val = 0;
-            if (bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Perc)
+            if (bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc)
             {
                 val = (CharInfo.Health / 100f) * bdClass.CurrentBuffDebuff.Value;
             }
-            else if (bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Value)
+            else if (bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Value)
             {
                 val = bdClass.CurrentBuffDebuff.Value;
             }
@@ -952,13 +1035,17 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             HealthStatsChangedEvent?.Invoke(val, HealthChangedType.Heal, bdClass.EffectMaker.SpineAnim.transform);
             EventManager.Instance?.UpdateHealth(this);
         }
+        else if (bdClass.Stat == BuffDebuffStatsType.AttackChange)
+        {
+            CharInfo.CurrentAttackTypeInfo.Add(bdClass.CurrentBuffDebuff.Effect.Atk);
+        }
         else
         {
             parentField = CharInfo.GetType().GetField(statToCheck[0]);
             field = parentField.GetValue(CharInfo).GetType().GetField(statToCheck[1]);
 
             B_field = parentField.GetValue(CharInfo).GetType().GetField("B_" + statToCheck[1]);
-            if (bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Perc)
+            if (bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc)
             {
                 if (field.FieldType == typeof(Vector2))
                 {
@@ -995,9 +1082,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             if (statToCheck[1] == "BaseSpeed")
             {
                 SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.BaseSpeed);
-                if(CharInfo.SpeedStats.BaseSpeed == 0 && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.UMS.Side == UMS.Side && r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).ToList().Count > 0)
+                if (CharInfo.SpeedStats.BaseSpeed == 0 && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.UMS.Side == UMS.Side && r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).ToList().Count > 0)
                 {
-                    if(BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == this).ToList().Count > 0)
+                    if (BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == this).ToList().Count > 0)
                     {
                         CharActionlist.Remove(CharacterActionType.SwitchCharacter);
                         ControllerType playerController = BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == this).First().Key;
@@ -1009,7 +1096,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
         }
 
-        if(bdClass.Duration > 0)
+        if (bdClass.Duration > 0)
         {
             //SetAnimation(bdClass.CurrentBuffDebuff.AnimToFire);
             int iterator = 0;
@@ -1024,13 +1111,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     iterator++;
                     if (bdClass.Stat == BuffDebuffStatsType.Health || bdClass.Stat == BuffDebuffStatsType.Health_Overtime)
                     {
-                        CharInfo.Health += bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Value ? bdClass.CurrentBuffDebuff.Value : (CharInfo.HealthStats.Base / 100) * bdClass.CurrentBuffDebuff.Value;
+                        CharInfo.Health += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Value ? bdClass.CurrentBuffDebuff.Value : (CharInfo.HealthStats.Base / 100) * bdClass.CurrentBuffDebuff.Value;
                         HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, bdClass.CurrentBuffDebuff.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, SpineAnim.transform);
                         EventManager.Instance?.UpdateHealth(this);
                     }
                     if (bdClass.Stat == BuffDebuffStatsType.Drain_Overtime)
                     {
-                        float val = bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Value ? bdClass.CurrentBuffDebuff.Value : (CharInfo.HealthStats.Base / 100) * bdClass.CurrentBuffDebuff.Value;
+                        float val = bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Value ? bdClass.CurrentBuffDebuff.Value : (CharInfo.HealthStats.Base / 100) * bdClass.CurrentBuffDebuff.Value;
                         HealthStatsChangedEvent?.Invoke(val, HealthChangedType.Heal, bdClass.EffectMaker.SpineAnim.transform);
                         HealthStatsChangedEvent?.Invoke(val, HealthChangedType.Damage, SpineAnim.transform);
                         bdClass.EffectMaker.CharInfo.Health += val;
@@ -1042,26 +1129,25 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
 
             ps?.SetActive(false);
-
-            if (bdClass.Stat == BuffDebuffStatsType.ElementalResistance)
-            {
-              
-            }
-            else if(bdClass.Stat == BuffDebuffStatsType.Zombification)
+            if (bdClass.Stat == BuffDebuffStatsType.Zombification)
             {
 
             }
             else if (bdClass.Stat == BuffDebuffStatsType.Health || bdClass.Stat == BuffDebuffStatsType.Health_Overtime)
             {
-                
+
             }
             else if (bdClass.Stat == BuffDebuffStatsType.Drain || bdClass.Stat == BuffDebuffStatsType.Drain_Overtime)
             {
 
             }
+            else if (bdClass.Stat == BuffDebuffStatsType.AttackChange)
+            {
+                CharInfo.CurrentAttackTypeInfo.Remove(bdClass.CurrentBuffDebuff.Effect.Atk);
+            }
             else
             {
-                if (bdClass.CurrentBuffDebuff.StatsChecker == StatsCheckerType.Perc)
+                if (bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc)
                 {
                     if (field.FieldType == typeof(Vector2))
                     {
@@ -1091,7 +1177,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 if (statToCheck[1] == "BaseSpeed" && !bdClass.CurrentBuffDebuff.Stop_Co)
                 {
                     SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.BaseSpeed);
-                    if(bdClass.CurrentBuffDebuff.Value == 0 && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
+                    if (bdClass.CurrentBuffDebuff.Value == 0 && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
                     {
                         CharActionlist.Add(CharacterActionType.SwitchCharacter);
                         yield return BattleManagerScript.Instance.RemoveCharacterFromBaord(ControllerType.Player1, this, true);
@@ -1103,7 +1189,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             yield return BattleManagerScript.Instance.WaitFor(2, () => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
         }
-      
+
         BuffsDebuffsList.Remove(bdClass);
         ps?.SetActive(false);
     }
@@ -1564,43 +1650,27 @@ public class WeaponClass
 [System.Serializable]
 public class Buff_DebuffClass
 {
-    public string Name;
-    public float Duration;
     public float Value
     {
         get
         {
-            return UnityEngine.Random.Range(_Value.x, _Value.y);
+            return UnityEngine.Random.Range(Effect.Value.x, Effect.Value.y);
         }
     }
-
-    public Vector2 _Value;
-    public CharacterAnimationStateType AnimToFire;
-    public BuffDebuffStatsType Stat;
-    public StatsCheckerType StatsChecker;
     public ElementalResistenceClass ElementalResistence;
     public ElementalType ElementalPower;
-    public ParticlesType ParticlesToFire;
     public float Timer;
     public bool Stop_Co = false;
     public BaseCharacter EffectMaker;
+    public ScriptableObjectAttackEffect Effect;
 
-
-    public Buff_DebuffClass(string name, float duration, Vector2 value, BuffDebuffStatsType stat,
-        StatsCheckerType statsChecker, ElementalResistenceClass elementalResistence, ElementalType elementalPower
-        , CharacterAnimationStateType animToFire, ParticlesType particlesToFire, BaseCharacter effectMaker)
+    public Buff_DebuffClass(ElementalResistenceClass elementalResistence, ElementalType elementalPower
+        , BaseCharacter effectMaker, ScriptableObjectAttackEffect effect)
     {
-        Name = name;
-        Duration = duration;
-        _Value = value;
-        Stat = stat;
-        StatsChecker = statsChecker;
-        //AttackT = attackT;
         ElementalResistence = elementalResistence;
         ElementalPower = elementalPower;
-        AnimToFire = animToFire;
-        ParticlesToFire = particlesToFire;
         EffectMaker = effectMaker;
+        Effect = effect;
     }
 
     public Buff_DebuffClass()
@@ -1701,5 +1771,24 @@ public class RelationshipClass
         CharOwnerId = charOwnerId;
         CharacterId = characterId;
         BasicValue = basicValue;
+    }
+}
+
+
+public class TotemTentacleClass
+{
+    public BaseCharacter CharAffected;
+    public GameObject PS;
+    public bool isActive;
+    public TotemTentacleClass()
+    {
+
+    }
+
+    public TotemTentacleClass(BaseCharacter charAffected, GameObject ps, bool isactive)
+    {
+        CharAffected = charAffected;
+        PS = ps;
+        isActive = isactive;
     }
 }

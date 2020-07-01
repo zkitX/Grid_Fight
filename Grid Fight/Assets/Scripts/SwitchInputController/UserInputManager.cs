@@ -218,6 +218,10 @@ public class UserInputManager : MonoBehaviour
     {
         //Debug.Log(player + "  " + "B Up");
         //VibrationController.Instance.CustomVibration(player, VibrationType.b);
+        if (BattleManagerScript.Instance.InputControllerT == InputControllerType.SelectionOnLR)
+        {
+            StopSelectedCharacterChargingAttack(player);
+        }
     }
 
     private void Instance_ButtonAUpEvent(int player)
@@ -506,6 +510,12 @@ public class UserInputManager : MonoBehaviour
         if (BattleManagerScript.Instance.InputControllerT == InputControllerType.SelectionOnABXY)
         {
             LoadSelectCharacter(CharacterSelectionType.Down, (ControllerType)player);
+        }
+        else
+        {
+#if UNITY_EDITOR
+            SelectedCharacterStartChargingAttack(player, AttackInputType.Skill3);
+#endif
         }
     }
 
