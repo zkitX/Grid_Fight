@@ -39,8 +39,7 @@ public class PlayerMinionType_Script : BaseCharacter
 
     public override void SetUpLeavingBattle()
     {
-        SetAnimation(CharacterAnimationStateType.Reverse_Arriving);
-        EventManager.Instance.AddCharacterSwitched((BaseCharacter)this);
+     
     }
 
     public override void SetAttackReady(bool value)
