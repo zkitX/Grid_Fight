@@ -57,8 +57,20 @@ public class NewIManager : MonoBehaviour
 
     public void SetSelected(bool state, ControllerType controller, CharacterNameType charName, SideType side = SideType.LeftSide)
     {
+        CharacterBaseInfoClass playerCharInfo = BattleInfoManagerScript.Instance.PlayerBattleInfo.Where(r => r.CharacterName == charName && r.PlayerController.Contains(controller)).FirstOrDefault();
+        if(playerCharInfo == null)
+        {
+            Debug.LogError("CANNOT SELECT SPECIFIED CHARACTER " + charName.ToString() + " As they do not exist under the possible control of player " + controller.ToString());
+            return;
+        }
+        side = playerCharInfo.Side;
+
         if (state)
         {
+            if(GetvitalityBoxOfCharacter(charName, side) == null)
+            {
+                
+            }
             GetvitalityBoxOfCharacter(charName, side).SelectCharacter(controller);
         }
         else

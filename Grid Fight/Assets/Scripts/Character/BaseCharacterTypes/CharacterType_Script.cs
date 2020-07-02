@@ -138,9 +138,9 @@ public class CharacterType_Script : BaseCharacter
                 UMS.SetUnit(UnitBehaviourType.ControlledByPlayer);
                 break;
         }
-        UMS.SelectionIndicator.eulerAngles = new Vector3(0, 0, CharInfo.CharacterSelection == CharacterSelectionType.Up ? 90 :
-            CharInfo.CharacterSelection == CharacterSelectionType.Down ? -90 :
-            CharInfo.CharacterSelection == CharacterSelectionType.Left ? 180 : 0);
+      //  UMS.SelectionIndicator.eulerAngles = new Vector3(0, 0, CharInfo.CharacterSelection == CharacterSelectionType.Up ? 90 :
+       //     CharInfo.CharacterSelection == CharacterSelectionType.Down ? -90 :
+      //      CharInfo.CharacterSelection == CharacterSelectionType.Left ? 180 : 0);
         CharInfo.SetupChar();
 
     }

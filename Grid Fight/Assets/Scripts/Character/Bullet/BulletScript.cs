@@ -81,7 +81,7 @@ public class BulletScript : MonoBehaviour
         Vector3 destination = bts.transform.position + new Vector3(Side == SideType.LeftSide ? 0.2f : -0.2f, 0, 0);
         if (isColliding)
         {
-            BulletDuration = (CharOwner.CharInfo.SpeedStats.BulletSpeed / 12) * (bts.Pos.y - StartingTile.y);
+            BulletDuration = (CharOwner.CharInfo.SpeedStats.BulletSpeed / 12) * (bts.Pos.y + (StartingTile.y*(Side == SideType.LeftSide ? -1f : 1f)));
         }
         //Duration of the particles 
         PSTimeGroup pstg = PS.GetComponent<PSTimeGroup>();

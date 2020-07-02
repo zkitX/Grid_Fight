@@ -479,6 +479,7 @@ public class BattleManagerScript : MonoBehaviour
                             SelectCharacter(currentPlayer.Key, (CharacterType_Script)item);
 
                             CurrentSelectedCharacters[currentPlayer.Key].NextSelectionChar.NextSelectionChar = item.CharInfo.CharacterSelection;
+                            CurrentSelectedCharacters[currentPlayer.Key].NextSelectionChar.Side = item.UMS.Side;
                             ((CharacterType_Script)item).SetCharSelected(true, currentPlayer.Key);
                             return;
                         }
@@ -1146,6 +1147,7 @@ public class BattleManagerScript : MonoBehaviour
                 //Change this player's character to the new character
                 CurrentSelectedCharacters[playerController].Character = currentCharacter;
                 CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar = currentCharacter.CharInfo.CharacterSelection;
+                CurrentSelectedCharacters[playerController].NextSelectionChar.Side = currentCharacter.UMS.Side;
                 currentCharacter.UMS.SetBattleUISelection(playerController);
                 currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", true);
 
@@ -1322,6 +1324,7 @@ public class BattleManagerScript : MonoBehaviour
                             }
                             //Debug.Log("Prev " + CurrentSelectedCharacters[playerController].NextSelectionChar.ToString());
                             CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar = cs;
+                            CurrentSelectedCharacters[playerController].NextSelectionChar.Side = cb.UMS.Side;
                             //Debug.Log(cs.ToString());
                             break;
                         }
@@ -1352,6 +1355,7 @@ public class BattleManagerScript : MonoBehaviour
         }
         //Debug.Log("Prev " + CurrentSelectedCharacters[playerController].NextSelectionChar.ToString());
         CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar = cs;
+        CurrentSelectedCharacters[playerController].NextSelectionChar.Side = cb.UMS.Side;
         Debug.Log(cs.ToString());
        
         LoadingNewCharacterToGrid(cb.CharInfo.CharacterID, side, playerController, worksOnFungusPappets);

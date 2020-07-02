@@ -82,6 +82,7 @@ public class UnitManagementScript : MonoBehaviour
         else
         {
             transform.eulerAngles = Vector3.zero;
+            SelectionIndicator.transform.localScale = new Vector3(SelectionIndicator.transform.localScale.x * -1f, SelectionIndicator.transform.localScale.y, SelectionIndicator.transform.localScale.z);
         }
         gameObject.tag = Side.ToString();
         if (CharOwner.SpineAnim == null)
