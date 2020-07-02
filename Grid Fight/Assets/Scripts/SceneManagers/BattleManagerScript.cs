@@ -514,7 +514,10 @@ public class BattleManagerScript : MonoBehaviour
         }
         else if (zombie.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script)
         {
-            StartCoroutine(MinionType_Zombification_Co(zombie, duration));
+            if(WaveManagerScript.Instance.WaveCharcters.Where(r=> r.IsOnField && r.gameObject.activeInHierarchy).ToList().Count > 1)
+            {
+                StartCoroutine(MinionType_Zombification_Co(zombie, duration));
+            }
         }
 
     }

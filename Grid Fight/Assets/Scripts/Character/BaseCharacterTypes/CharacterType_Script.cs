@@ -431,6 +431,7 @@ public class CharacterType_Script : BaseCharacter
         SkillCoolDownClass  scdc = skillCoolDown.Where(r => r.Skill == inputSkill).First();
         if (!GetCanUseStamina(nxtAtk.StaminaCost) || scdc.IsCoGoing)
         {
+            SkillActivation = null;
             yield break;
         }
 
