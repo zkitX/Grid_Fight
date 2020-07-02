@@ -298,7 +298,7 @@ public class BulletScript : MonoBehaviour
         PS.transform.parent = null;
         //CharOwner.Sic.AccuracyExp -= 1f;
         PS.GetComponent<PSTimeGroup>().UpdatePSTime(0.1f);
-        if (!hitTarget)
+        if (!hitTarget && SOAttack.AttackInput != AttackInputType.Strong)
         {
             StatisticInfoManagerScript.Instance.TriggerComboForCharacter(CharOwner.CharInfo.CharacterID, ComboType.Attack, false);
         }

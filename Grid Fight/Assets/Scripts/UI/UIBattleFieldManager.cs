@@ -32,7 +32,6 @@ public class UIBattleFieldManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        
     }
 
     private void Update()

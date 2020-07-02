@@ -393,7 +393,7 @@ public class BattleManagerScript : MonoBehaviour
         {
             StatisticInfoManagerScript.Instance.CharaterStats.Add(new StatisticInfoClass(playableCharOnScene.CharInfo.CharacterID, playableCharOnScene.UMS.PlayerController));
             NewIManager.Instance.SetUICharacterToButton((CharacterType_Script)playableCharOnScene, BattleInfoManagerScript.Instance.PlayerBattleInfo.Where(r => r.CharacterName == playableCharOnScene.CharInfo.CharacterID).FirstOrDefault().CharacterSelection);
-            if(FlowChartVariablesManagerScript.instance != null)
+            if (FlowChartVariablesManagerScript.instance != null && FlowChartVariablesManagerScript.instance.Variables.Where(r => r.Name == (playableCharOnScene.CharInfo.Name.ToUpper() + "_IN_SQUAD")).FirstOrDefault() != null)
             {
                 FlowChartVariablesManagerScript.instance.Variables.Where(r => r.Name == (playableCharOnScene.CharInfo.Name.ToUpper() + "_IN_SQUAD")).First().Value = "ON";
             }
