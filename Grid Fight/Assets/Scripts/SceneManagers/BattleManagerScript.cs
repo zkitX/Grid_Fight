@@ -536,8 +536,6 @@ public class BattleManagerScript : MonoBehaviour
         zombiePs.transform.localPosition = Vector3.zero;
         zombiePs.transform.localRotation = Quaternion.Euler(zombie.UMS.Side == SideType.LeftSide ? Vector3.zero : zombiePs.transform.eulerAngles);
 
-        yield return WaitFor(1, () => CurrentBattleState != BattleState.Battle);
-
         yield return RemoveCharacterFromBaord(playerController, zombie, true);
         zombie.CharActionlist.Remove(CharacterActionType.SwitchCharacter);
 
@@ -603,8 +601,6 @@ public class BattleManagerScript : MonoBehaviour
         zombie.SpineAnim.SetAnim(CharacterAnimationStateType.Idle);
         zombie.SetAttackReady(false);
 
-        //Wait for 1 sec
-        yield return WaitFor(1, () => CurrentBattleState != BattleState.Battle);
         yield return MoveCharToBoardWithDelay(0.1f, zombie, new Vector3(-100, -100, -100));
 
         //Emptying the occupied tiles
@@ -720,7 +716,6 @@ public class BattleManagerScript : MonoBehaviour
             zombiePs.transform.position = playerZombie.SpineAnim.transform.position;
             bts = GridManagerScript.Instance.GetFreeBattleTile(zombie.UMS.WalkingSide);
             playerZombie.SpineAnim.SetAnim(CharacterAnimationStateType.Idle);
-            yield return WaitFor(1, () => CurrentBattleState != BattleState.Battle);
             yield return MoveCharToBoardWithDelay(0.1f, playerZombie, new Vector3(-100, -100, -100));
             //Restore char events + anims
             playerZombie.SpineAnim.SpineAnimationState.ClearTracks();
