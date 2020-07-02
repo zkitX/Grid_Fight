@@ -111,7 +111,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public AttackPhasesType currentAttackPhase = AttackPhasesType.End;
     public DeathProcessStage currentDeathProcessPhase = DeathProcessStage.None;
     public SpecialAttackStatus StopPowerfulAtk;
-    private float DefendingHoldingTimer = 0;
+    protected float DefendingHoldingTimer = 0;
     public bool IsSwapping = false;
     public bool SwapWhenPossible = false;
     public GameObject chargeParticles = null;

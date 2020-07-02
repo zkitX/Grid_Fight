@@ -166,8 +166,12 @@ public class CharacterInfoScript : MonoBehaviour
     {
         public float BaseDefence = 10;
         public float Invulnerability = 0.2f;
+        public float MinionDefenceChances = 20;
+        public float MinionPerfectDefenceChances = 5;
         [HideInInspector]public float B_BaseDefence = 10;
         [HideInInspector]public float B_Invulnerability = 0.2f;
+        [HideInInspector]public float B_MinionDefenceChances = 20;
+        [HideInInspector]public float B_MinionPerfectDefenceChances = 5;
         public float LevelMultiplier;
     }
 
@@ -374,6 +378,8 @@ public class CharacterInfoScript : MonoBehaviour
 
         DefenceStats.B_BaseDefence = DefenceStats.BaseDefence;
         DefenceStats.B_Invulnerability = DefenceStats.Invulnerability;
+        DefenceStats.B_MinionDefenceChances = DefenceStats.MinionDefenceChances;
+        DefenceStats.B_MinionPerfectDefenceChances = DefenceStats.MinionPerfectDefenceChances;
     }
 
 

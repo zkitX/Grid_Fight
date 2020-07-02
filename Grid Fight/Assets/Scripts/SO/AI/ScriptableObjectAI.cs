@@ -28,7 +28,8 @@ public class ScriptableObjectAI : ScriptableObject
 
 
     public List<AIStatsModifierClass> StatsToModify = new List<AIStatsModifierClass>();
-
+    System.Reflection.FieldInfo parentField = null, field = null, B_field = null;
+    string[] statToCheck;
     public bool CheckAvailability(CharacterInfoScript charInfo)
     {
         foreach (AICheckClass item in AIChecks)
@@ -108,7 +109,44 @@ public class ScriptableObjectAI : ScriptableObject
             }
         }
 
+        switch (Vision)
+        {
+            case VisionType.Front_Near:
+                break;
+            case VisionType.Front_Far:
+                break;
+            case VisionType.UpDown_Near:
+                break;
+            case VisionType.UpDown_Far:
+                break;
+            default:
+                break;
+        }
+
+
         return true;
+    }
+
+
+    public void ModifyStats(CharacterInfoScript charinfo)
+    {
+        foreach (AIStatsModifierClass item in StatsToModify)
+        {
+
+            statToCheck = item.ModificableStats.ToString().Split('_');
+            parentField = charinfo.GetType().GetField(statToCheck[0]);
+            field = parentField.GetValue(charinfo).GetType().GetField(statToCheck[1]);
+            B_field = parentField.GetValue(charinfo).GetType().GetField("B_" + statToCheck[1]);
+            if(B_field.FieldType == typeof(Vector2))
+            {
+                field.SetValue(parentField.GetValue(charinfo), item.Multiplier * (Vector2)B_field.GetValue(charinfo));
+            }
+            else
+            {
+                field.SetValue(parentField.GetValue(charinfo), item.Multiplier * (float)B_field.GetValue(charinfo));
+            }
+
+        }
     }
 }
 

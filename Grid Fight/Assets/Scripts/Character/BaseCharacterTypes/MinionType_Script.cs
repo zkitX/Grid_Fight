@@ -175,57 +175,13 @@ public class MinionType_Script : BaseCharacter
                 {
                     yield return null;
                 }
-
+                ScriptableObjectAI prev = CurrentAIState;
                 CurrentAIState = CharInfo.GetCurrentAI();
-                SetCurrentAIValues();
-
-                int randomizer = Random.Range(0, 100);
-                if(ForwardMovementPerc > randomizer)
+                if(prev.AI_Type != CurrentAIState.AI_Type)
                 {
-                    BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(UMS.CurrentTilePos.x, UMS.Side == SideType.RightSide ? UMS.CurrentTilePos.y - 1 : UMS.CurrentTilePos.y + 1));
-                    if(bts.BattleTileState == BattleTileStateType.Empty)
-                    {
-                        yield return MoveCharOnDir_Co(UMS.Side == SideType.RightSide ? InputDirection.Left : InputDirection.Right);
-                    }
-                    else if(bts.BattleTileState == BattleTileStateType.Occupied && UMS.WalkingSide == bts.WalkingSide)
-                    {
-
-                    }
+                    SetCurrentAIValues();
+                    CurrentAIState.ModifyStats(CharInfo);
                 }
-
-
-
-
-
-
-
-/*
-                if (randomizer < UpDownMovementPerc)
-                {
-                    yield return MoveCharOnDir_Co(InputDirection.Left);
-                }
-                else if (randomizer > (100 - UpDownMovementPerc))
-                {
-                    yield return MoveCharOnDir_Co(InputDirection.Right);
-                }
-                else
-                {
-                    targetChar = GetTargetChar(enemys);
-                    if (targetChar.UMS.CurrentTilePos.x < UMS.CurrentTilePos.x)
-                    {
-                        yield return MoveCharOnDir_Co(InputDirection.Up);
-                    }
-                    else
-                    {
-                        yield return MoveCharOnDir_Co(InputDirection.Down);
-                    }
-                }
-                */
-
-
-
-
-
 
                 List<BaseCharacter> enemys = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList();
                 if (enemys.Count > 0)
@@ -245,8 +201,40 @@ public class MinionType_Script : BaseCharacter
                     }
                     else
                     {
+                        int randomizer = Random.Range(0, 100);
+                        if (ForwardMovementPerc > randomizer)
+                        {
+                            BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(UMS.CurrentTilePos.x, UMS.Side == SideType.RightSide ? UMS.CurrentTilePos.y - 1 : UMS.CurrentTilePos.y + 1));
+                            if (bts.BattleTileState == BattleTileStateType.Empty)
+                            {
+                                yield return MoveCharOnDir_Co(UMS.Side == SideType.RightSide ? InputDirection.Left : InputDirection.Right);
+                            }
+                            else if (bts.BattleTileState == BattleTileStateType.Occupied && UMS.WalkingSide == bts.WalkingSide)
+                            {
+                                int updown = Random.Range(0, 100);
+                                InputDirection dir = updown < 50 ? InputDirection.Up : InputDirection.Down;
+                                bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(updown < 50 ? UMS.CurrentTilePos.x - 1 : UMS.CurrentTilePos.x + 1, UMS.CurrentTilePos.y));
+                                if (bts != null && bts.BattleTileState != BattleTileStateType.Empty)
+                                {
+                                    bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(updown < 50 ? UMS.CurrentTilePos.x + 1 : UMS.CurrentTilePos.x - 1, UMS.CurrentTilePos.y));
+                                    dir = updown < 50 ? InputDirection.Down : InputDirection.Up;
+                                }
+                                if (bts == null || bts.BattleTileState != BattleTileStateType.Empty)
+                                {
 
-                       
+                                }
+                                else
+                                {
+                                    yield return MoveCharOnDir_Co(dir);
+                                }
+                            }
+                        }
+                        else
+                        {
+
+                        }
+
+
                     }
                 }
                 yield return null;
@@ -273,6 +261,8 @@ public class MinionType_Script : BaseCharacter
         {
             UpDownMovementPerc = CurrentAIState.MoveUpDown;
         }
+
+        
     }
 
     public virtual IEnumerator Move()
@@ -458,7 +448,6 @@ public class MinionType_Script : BaseCharacter
 
     public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
-
         if (isAttackBlocking)
         {
             int rand = UnityEngine.Random.Range(0, 100);
@@ -471,13 +460,32 @@ public class MinionType_Script : BaseCharacter
         }
 
         LastAttackTime = Time.time;
-        return base.SetDamage(attacker, damage, elemental, isCritical);
+        return SetDamage(attacker, damage, elemental, isCritical);
     }
 
 
     public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical)
     {
-        damage = damage * CharInfo.DefenceStats.BaseDefence;
+        float defenceChances = Random.Range(0, 100);
+        if(defenceChances < CharInfo.DefenceStats.MinionPerfectDefenceChances)
+        {
+            isDefending = true;
+            DefendingHoldingTimer = 0;
+            SetAnimation(CharacterAnimationStateType.Defending);
+            damage = 0;
+        }
+        else if (defenceChances < (CharInfo.DefenceStats.MinionPerfectDefenceChances + CharInfo.DefenceStats.MinionDefenceChances))
+        {
+            isDefending = true;
+            DefendingHoldingTimer = 10;
+            SetAnimation(CharacterAnimationStateType.Defending);
+            damage = damage - CharInfo.DefenceStats.BaseDefence;
+        }
+        else
+        {
+            isDefending = false;
+            DefendingHoldingTimer = 0;
+        }
         return base.SetDamage(attacker, damage, elemental, isCritical);
     }
 
