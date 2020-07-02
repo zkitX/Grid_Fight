@@ -453,8 +453,9 @@ public class CharacterType_Script : BaseCharacter
         SpineAnim.SetSkeletonOrderInLayer(CharOredrInLayer);
         CharInfo.BaseSpeed /= 100;
         CurrentCharSkillCompletedEvent?.Invoke(inputSkill, nxtAtk.CoolDown);
+        yield return BattleManagerScript.Instance.WaitFor(0.5f, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
         SkillActivation = null;
-        yield return BattleManagerScript.Instance.WaitFor(nxtAtk.CoolDown, ()=> BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
+        yield return BattleManagerScript.Instance.WaitFor(nxtAtk.CoolDown - 0.5f, ()=> BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
         scdc.IsCoGoing = false;
     }
 
