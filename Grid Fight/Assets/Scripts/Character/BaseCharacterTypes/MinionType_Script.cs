@@ -67,7 +67,6 @@ public class MinionType_Script : BaseCharacter
         BuffsDebuffsList.ForEach(r =>
         {
             r.Duration = 0;
-            r.CurrentBuffDebuff.Effect._Duration = Vector2.zero;
             r.CurrentBuffDebuff.Stop_Co = true;
         }
         );

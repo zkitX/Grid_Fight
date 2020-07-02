@@ -621,7 +621,6 @@ public class BattleManagerScript : MonoBehaviour
             if(r.Stat != BuffDebuffStatsType.Zombification)
             {
                 r.Duration = 0;
-                r.CurrentBuffDebuff.Effect._Duration = Vector2.zero;
                 r.CurrentBuffDebuff.Stop_Co = true;
             }
         }
@@ -736,7 +735,6 @@ public class BattleManagerScript : MonoBehaviour
         playerZombie.BuffsDebuffsList.ForEach(r =>
         {
             r.Duration = 0;
-            r.CurrentBuffDebuff.Effect._Duration = Vector2.zero;
             r.CurrentBuffDebuff.Stop_Co = true;
         }
        );
