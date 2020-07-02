@@ -75,8 +75,11 @@ public class MinionType_Script : BaseCharacter
      
  		for (int i = 0; i < HittedByList.Count; i++)
         {
-            StatisticInfoClass sic = StatisticInfoManagerScript.Instance.CharaterStats.Where(r => r.CharacterId == HittedByList[i].CharacterId).First();
-            sic.BaseExp += (HittedByList[i].Damage / totDamage) * CharInfo.ExperienceValue;
+            StatisticInfoClass sic = StatisticInfoManagerScript.Instance.CharaterStats.Where(r => r.CharacterId == HittedByList[i].CharacterId).FirstOrDefault();
+            if(sic != null)
+            {
+                sic.BaseExp += (HittedByList[i].Damage / totDamage) * CharInfo.ExperienceValue;
+            }
         }
         totDamage = 0;
 
