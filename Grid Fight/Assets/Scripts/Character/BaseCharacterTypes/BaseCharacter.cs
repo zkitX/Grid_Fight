@@ -1140,7 +1140,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
         }
         BuffsDebuffsList.Remove(bdClass);
-        if(ps.activeInHierarchy)
+        if(ps != null && ps.activeInHierarchy)
         {
             yield return BattleManagerScript.Instance.WaitFor(1, () => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
             ps?.SetActive(false);
