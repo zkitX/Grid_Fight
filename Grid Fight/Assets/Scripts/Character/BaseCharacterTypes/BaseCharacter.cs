@@ -995,109 +995,84 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             ps.transform.parent = SpineAnim.transform;
             ps.transform.localPosition = Vector3.zero;
             ps.SetActive(true);
-            //pstimegroup pstg = ps.getcomponent<pstimegroup>();
-            //if(pstg != null)
-            //{
-            //    pstg.updatepstime(bdclass.duration);
-            //}
         }
-        System.Reflection.FieldInfo parentField = null, field = null, B_field = null;
-        string[] statToCheck = bdClass.Stat.ToString().Split('_');
 
-        if (bdClass.Stat == BuffDebuffStatsType.Drain || bdClass.Stat == BuffDebuffStatsType.Drain_Overtime)
+        float val = 0;
+
+        switch (bdClass.Stat)
         {
-            HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, HealthChangedType.Heal, bdClass.EffectMaker.SpineAnim.transform);
-            bdClass.EffectMaker.CharInfo.Health += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Value ? bdClass.CurrentBuffDebuff.Value : (CharInfo.HealthStats.Base / 100) * bdClass.CurrentBuffDebuff.Value;
-            EventManager.Instance?.UpdateHealth(this);
-            EventManager.Instance?.UpdateHealth(bdClass.EffectMaker);
-        }
-        else if (bdClass.Stat == BuffDebuffStatsType.Zombification)
-        {
-            if (CharInfo.Health > 0)
-            {
-                BattleManagerScript.Instance.Zombification(this, bdClass.Duration);
-            }
-        }
-        else if (bdClass.Stat == BuffDebuffStatsType.Health || bdClass.Stat == BuffDebuffStatsType.Health_Overtime)
-        {
-            float val = 0;
-            if (bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc)
-            {
-                val = (CharInfo.Health / 100f) * bdClass.CurrentBuffDebuff.Value;
-            }
-            else if (bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Value)
-            {
-                val = bdClass.CurrentBuffDebuff.Value;
-            }
-
-            CharInfo.Health += val;
-            HealthStatsChangedEvent?.Invoke(val, HealthChangedType.Heal, bdClass.EffectMaker.SpineAnim.transform);
-            EventManager.Instance?.UpdateHealth(this);
-        }
-        else if (bdClass.Stat == BuffDebuffStatsType.AttackChange)
-        {
-            CharInfo.CurrentAttackTypeInfo.Add(bdClass.CurrentBuffDebuff.Effect.Atk);
-        }
-        else
-        {
-            parentField = CharInfo.GetType().GetField(statToCheck[0]);
-            field = parentField.GetValue(CharInfo).GetType().GetField(statToCheck[1]);
-
-            B_field = parentField.GetValue(CharInfo).GetType().GetField("B_" + statToCheck[1]);
-            if (bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc)
-            {
-                if (field.FieldType == typeof(Vector2))
-                {
-                    field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? Vector2.zero : (Vector2)field.GetValue(parentField.GetValue(CharInfo)) +
-                        (((Vector2)B_field.GetValue(parentField.GetValue(CharInfo))) / 100) * bdClass.CurrentBuffDebuff.Value);
-                }
-                else
-                {
-                    field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? 0 : (float)field.GetValue(parentField.GetValue(CharInfo)) +
-                        (((float)B_field.GetValue(parentField.GetValue(CharInfo))) / 100) * bdClass.CurrentBuffDebuff.Value);
-                }
-            }
-            else
-            {
-                if (field.FieldType == typeof(Vector2))
-                {
-                    field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? Vector2.zero : new Vector2(((Vector2)field.GetValue(parentField.GetValue(CharInfo))).x + bdClass.CurrentBuffDebuff.Value,
-                        ((Vector2)field.GetValue(parentField.GetValue(CharInfo))).y + bdClass.CurrentBuffDebuff.Value));
-                }
-                else
-                {
-                    field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? 0 : (float)field.GetValue(parentField.GetValue(CharInfo)) + bdClass.CurrentBuffDebuff.Value);
-                }
-
-
-            }
-
-            if (statToCheck[1].Contains("Health"))
-            {
+            case BuffDebuffStatsType.DamageStats_BaseDamage:
+                CharInfo.DamageStats.BaseDamage += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.DamageStats.B_BaseDamage / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
+                break;
+            case BuffDebuffStatsType.Health:
+                val = bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.HealthStats.B_Base / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
+                CharInfo.Health += val;
+                HealthStatsChangedEvent?.Invoke(val, HealthChangedType.Heal, bdClass.EffectMaker.SpineAnim.transform);
+                EventManager.Instance?.UpdateHealth(this);
                 HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, bdClass.CurrentBuffDebuff.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, SpineAnim.transform);
-
-            }
-
-            if (statToCheck[1] == "BaseSpeed")
-            {
-                SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.BaseSpeed);
-                if (CharInfo.SpeedStats.BaseSpeed == 0 && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.UMS.Side == UMS.Side && r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).ToList().Count > 0)
+                break;
+            case BuffDebuffStatsType.SpeedStats_BaseSpeed:
+                if(bdClass.CurrentBuffDebuff.Value == 0)
                 {
-                    if (BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == this).ToList().Count > 0)
+                    while (isMoving)
                     {
-                        CharActionlist.Remove(CharacterActionType.SwitchCharacter);
-                        ControllerType playerController = BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == this).First().Key;
-                        BattleManagerScript.Instance.DeselectCharacter(CharInfo.CharacterID, UMS.Side, playerController);
-                        BattleManagerScript.Instance.CurrentSelectedCharacters[playerController].Character = null;
-                        BattleManagerScript.Instance.Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType.Down, playerController, true);
+                        yield return null;
+                    }
+                    if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script &&
+                        BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.UMS.Side == UMS.Side && r.CharInfo.HealthPerc > 0 &&
+                        !r.IsOnField && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).ToList().Count > 0)
+                    {
+                        if (BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == this).ToList().Count > 0)
+                        {
+                            CharActionlist.Remove(CharacterActionType.SwitchCharacter);
+                            ControllerType playerController = BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == this).First().Key;
+                            BattleManagerScript.Instance.DeselectCharacter(CharInfo.CharacterID, UMS.Side, playerController);
+                            BattleManagerScript.Instance.CurrentSelectedCharacters[playerController].Character = null;
+                            BattleManagerScript.Instance.Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType.Down, playerController, true);
+                        }
                     }
                 }
-            }
+                if(bdClass.CurrentBuffDebuff.Value > 0)
+                {
+                    CharInfo.SpeedStats.BaseSpeed += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_BaseSpeed / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
+                }
+                else
+                {
+                    CharInfo.SpeedStats.BaseSpeed = 0;
+                }
+                SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.BaseSpeed);
+
+            break;
+            case BuffDebuffStatsType.SpeedStats_MovementSpeed:
+                CharInfo.SpeedStats.MovementSpeed += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_MovementSpeed / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
+                break;
+            case BuffDebuffStatsType.Drain:
+                val = bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Value ? bdClass.CurrentBuffDebuff.Value : (CharInfo.HealthStats.B_Base / 100) * bdClass.CurrentBuffDebuff.Value;
+                bdClass.EffectMaker.CharInfo.Health += val;
+                EventManager.Instance?.UpdateHealth(this);
+                EventManager.Instance?.UpdateHealth(bdClass.EffectMaker);
+                HealthStatsChangedEvent?.Invoke(val, bdClass.CurrentBuffDebuff.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, SpineAnim.transform);
+                HealthStatsChangedEvent?.Invoke(val, bdClass.CurrentBuffDebuff.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, bdClass.EffectMaker.SpineAnim.transform);
+                break;
+            case BuffDebuffStatsType.Zombification:
+                if (CharInfo.Health > 0)
+                {
+                    BattleManagerScript.Instance.Zombification(this, bdClass.Duration);
+                }
+                break;
+            case BuffDebuffStatsType.ShieldStats_BaseShieldRegeneration:
+                CharInfo.ShieldStats.BaseShieldRegeneration += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.ShieldStats.B_BaseShieldRegeneration / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
+                break;
+            case BuffDebuffStatsType.AttackChange:
+                CharInfo.CurrentAttackTypeInfo.Add(bdClass.CurrentBuffDebuff.Effect.Atk);
+                break;
+            case BuffDebuffStatsType.StaminaStats_Stamina:
+                CharInfo.StaminaStats.Stamina += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.StaminaStats.B_Base / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
+                break;
         }
 
         if (bdClass.Duration > 0)
         {
-            //SetAnimation(bdClass.CurrentBuffDebuff.AnimToFire);
             int iterator = 0;
             while (bdClass.CurrentBuffDebuff.Timer <= bdClass.Duration && !bdClass.CurrentBuffDebuff.Stop_Co)
             {
@@ -1108,7 +1083,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 if (((int)bdClass.CurrentBuffDebuff.Timer) > iterator && bdClass.Stat.ToString().Contains("Overtime"))
                 {
                     iterator++;
-                    if (bdClass.Stat == BuffDebuffStatsType.Health || bdClass.Stat == BuffDebuffStatsType.Health_Overtime)
+                    if (bdClass.Stat == BuffDebuffStatsType.Health_Overtime)
                     {
                         CharInfo.Health += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Value ? bdClass.CurrentBuffDebuff.Value : (CharInfo.HealthStats.Base / 100) * bdClass.CurrentBuffDebuff.Value;
                         HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, bdClass.CurrentBuffDebuff.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, SpineAnim.transform);
@@ -1116,7 +1091,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     }
                     if (bdClass.Stat == BuffDebuffStatsType.Drain_Overtime)
                     {
-                        float val = bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Value ? bdClass.CurrentBuffDebuff.Value : (CharInfo.HealthStats.Base / 100) * bdClass.CurrentBuffDebuff.Value;
+                        val = bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Value ? bdClass.CurrentBuffDebuff.Value : (CharInfo.HealthStats.Base / 100) * bdClass.CurrentBuffDebuff.Value;
                         HealthStatsChangedEvent?.Invoke(val, HealthChangedType.Heal, bdClass.EffectMaker.SpineAnim.transform);
                         HealthStatsChangedEvent?.Invoke(val, HealthChangedType.Damage, SpineAnim.transform);
                         bdClass.EffectMaker.CharInfo.Health += val;
@@ -1128,69 +1103,48 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
 
             ps?.SetActive(false);
-            if (bdClass.Stat == BuffDebuffStatsType.Zombification)
-            {
 
-            }
-            else if (bdClass.Stat == BuffDebuffStatsType.Health || bdClass.Stat == BuffDebuffStatsType.Health_Overtime)
+            switch (bdClass.Stat)
             {
-
-            }
-            else if (bdClass.Stat == BuffDebuffStatsType.Drain || bdClass.Stat == BuffDebuffStatsType.Drain_Overtime)
-            {
-
-            }
-            else if (bdClass.Stat == BuffDebuffStatsType.AttackChange)
-            {
-                CharInfo.CurrentAttackTypeInfo.Remove(bdClass.CurrentBuffDebuff.Effect.Atk);
-            }
-            else
-            {
-                if (bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc)
-                {
-                    if (field.FieldType == typeof(Vector2))
+                case BuffDebuffStatsType.DamageStats_BaseDamage:
+                    CharInfo.DamageStats.BaseDamage = bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.DamageStats.B_BaseDamage / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
+                    break;
+                case BuffDebuffStatsType.SpeedStats_BaseSpeed:
+                    if(bdClass.CurrentBuffDebuff.Value > 0)
                     {
-                        field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? (Vector2)B_field.GetValue(parentField.GetValue(CharInfo)) :
-                       (Vector2)field.GetValue(parentField.GetValue(CharInfo)) - (((Vector2)B_field.GetValue(parentField.GetValue(CharInfo))) / 100) * bdClass.CurrentBuffDebuff.Value);
+                        CharInfo.SpeedStats.BaseSpeed -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_BaseSpeed / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
                     }
                     else
                     {
-                        field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? (float)B_field.GetValue(parentField.GetValue(CharInfo)) :
-                        (float)field.GetValue(parentField.GetValue(CharInfo)) - (((float)B_field.GetValue(parentField.GetValue(CharInfo))) / 100) * bdClass.CurrentBuffDebuff.Value);
+                        CharInfo.SpeedStats.BaseSpeed = CharInfo.SpeedStats.B_BaseSpeed;
                     }
-                }
-                else
-                {
-                    if (field.FieldType == typeof(Vector2))
-                    {
-                        field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? (Vector2)B_field.GetValue(parentField.GetValue(CharInfo)) :
-                        new Vector2(((Vector2)field.GetValue(parentField.GetValue(CharInfo))).x - bdClass.CurrentBuffDebuff.Value, ((Vector2)field.GetValue(parentField.GetValue(CharInfo))).y - bdClass.CurrentBuffDebuff.Value));
-                    }
-                    else
-                    {
-                        field.SetValue(parentField.GetValue(CharInfo), bdClass.CurrentBuffDebuff.Value == 0 ? (float)B_field.GetValue(parentField.GetValue(CharInfo)) :
-                        (float)field.GetValue(parentField.GetValue(CharInfo)) - bdClass.CurrentBuffDebuff.Value);
-                    }
-                }
-
-                if (statToCheck[1] == "BaseSpeed" && !bdClass.CurrentBuffDebuff.Stop_Co)
-                {
                     SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.BaseSpeed);
                     if (bdClass.CurrentBuffDebuff.Value == 0 && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
                     {
                         CharActionlist.Add(CharacterActionType.SwitchCharacter);
                         yield return BattleManagerScript.Instance.RemoveCharacterFromBaord(ControllerType.Player1, this, true);
                     }
-                }
+                    break;
+                case BuffDebuffStatsType.SpeedStats_MovementSpeed:
+                    CharInfo.SpeedStats.MovementSpeed -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_MovementSpeed / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
+                    break;
+                case BuffDebuffStatsType.ShieldStats_BaseShieldRegeneration:
+                    CharInfo.ShieldStats.BaseShieldRegeneration -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.ShieldStats.B_BaseShieldRegeneration / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
+                    break;
+                case BuffDebuffStatsType.AttackChange:
+                    CharInfo.CurrentAttackTypeInfo.Remove(bdClass.CurrentBuffDebuff.Effect.Atk);
+                    break;
+                case BuffDebuffStatsType.StaminaStats_Stamina:
+                    CharInfo.StaminaStats.Stamina -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.StaminaStats.B_Base / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
+                    break;
             }
         }
-        else
-        {
-            yield return BattleManagerScript.Instance.WaitFor(2, () => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-        }
-
         BuffsDebuffsList.Remove(bdClass);
-        ps?.SetActive(false);
+        if(ps.activeInHierarchy)
+        {
+            yield return BattleManagerScript.Instance.WaitFor(1, () => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
+            ps?.SetActive(false);
+        }
     }
 
 
