@@ -1,0 +1,257 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1072692802108931392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8527285901987777838}
+  - component: {fileID: 390361566928625372}
+  - component: {fileID: 555652098188282199}
+  m_Layer: 0
+  m_Name: StatisticManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8527285901987777838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072692802108931392}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &390361566928625372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072692802108931392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab8981a6dccb1c94fae0b3f19bb55cf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharaterStats: []
+--- !u!114 &555652098188282199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072692802108931392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0c368624328069429e7af3917feb842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comboTypeInformation:
+  - Name: Attack
+    comboType: 1
+    maxIntensityCombo: 25
+    resetTimer: 5
+    displayCount: 1
+    prefix: x
+    suffix: 
+    comboThresholds:
+    - Name: 0 No Texts. Will return ''
+      val: 0
+      texts: []
+      color: {r: 1, g: 0.8066038, b: 0.8734079, a: 1}
+      fungusBlockToFire: 
+      fireBlockOnceOff: 0
+      blockFired: 0
+    - Name: 5
+      val: 5
+      texts:
+      - Ok.
+      - Alright.
+      - Decent.
+      color: {r: 1, g: 0.5707547, b: 0.6668414, a: 1}
+      fungusBlockToFire: 
+      fireBlockOnceOff: 0
+      blockFired: 0
+    - Name: 10
+      val: 10
+      texts:
+      - Good!
+      - Nice!
+      - Getting There!
+      color: {r: 1, g: 0.664, b: 0.7063589, a: 1}
+      fungusBlockToFire: 
+      fireBlockOnceOff: 0
+      blockFired: 0
+    - Name: 20
+      val: 20
+      texts:
+      - Sweet!
+      - Noice!
+      - Great Job!
+      color: {r: 0.990566, g: 0.6957636, b: 0.5653702, a: 1}
+      fungusBlockToFire: 
+      fireBlockOnceOff: 0
+      blockFired: 0
+    - Name: 35
+      val: 35
+      texts:
+      - EPIC!
+      - WOWZA!
+      - FANTASTIC!
+      color: {r: 0.9056604, g: 0.7272953, b: 0.43147027, a: 1}
+      fungusBlockToFire: 
+      fireBlockOnceOff: 0
+      blockFired: 0
+    - Name: 50
+      val: 50
+      texts:
+      - WAAAA! LEGENDARY!!!
+      - PERFECTION!!!
+      - WOW WOW WEE WOW WAH
+      color: {r: 0.8018868, g: 0.616545, b: 0.24586153, a: 1}
+      fungusBlockToFire: 
+      fireBlockOnceOff: 0
+      blockFired: 0
+  - Name: Defence
+    comboType: 2
+    maxIntensityCombo: 10
+    resetTimer: 15
+    displayCount: 1
+    prefix: x
+    suffix: 
+    comboThresholds:
+    - Name: 0 No Texts. Will return ''
+      val: 0
+      texts: []
+      color: {r: 0.80784315, g: 0.92325747, b: 1, a: 1}
+      fungusBlockToFire: 
+      fireBlockOnceOff: 0
+      blockFired: 0
+    - Name: 3
+      val: 3
+      texts:
+      - Ok.
+      - Alright.
+      - Decent.
+      color: {r: 0.6179246, g: 0.8767498, b: 0.909, a: 1}
+      fungusBlockToFire: 
+      fireBlockOnceOff: 0
+      blockFired: 0
+    - Name: 6
+      val: 6
+      texts:
+      - Good!
+      - Nice!
+      - Getting There!
+      color: {r: 0.48584908, g: 0.95831215, b: 0.874, a: 1}
+      fungusBlockToFire: 
+      fireBlockOnceOff: 0
+      blockFired: 0
+    - Name: 10
+      val: 10
+      texts:
+      - Sweet!
+      - Noice!
+      - Great Job!
+      color: {r: 0.38959596, g: 0.8018868, b: 0.6778347, a: 1}
+      fungusBlockToFire: 
+      fireBlockOnceOff: 0
+      blockFired: 0
+    - Name: 15
+      val: 15
+      texts:
+      - EPIC!
+      - WOWZA!
+      - FANTASTIC!
+      color: {r: 0.43137258, g: 0.853, b: 0.6496912, a: 1}
+      fungusBlockToFire: 
+      fireBlockOnceOff: 0
+      blockFired: 0
+    - Name: 30
+      val: 30
+      texts:
+      - WAAAA! LEGENDARY!!!
+      - PERFECTION!!!
+      - WOW WOW WEE WOW WAH
+      color: {r: 0.20518868, g: 0.692, b: 0.413, a: 1}
+      fungusBlockToFire: 
+      fireBlockOnceOff: 0
+      blockFired: 0
+  - Name: Kill
+    comboType: 3
+    maxIntensityCombo: 10
+    resetTimer: 10
+    displayCount: 1
+    prefix: x
+    suffix: 
+    comboThresholds:
+    - Name: 0 No Texts. Will return ''
+      val: 0
+      texts: []
+      color: {r: 1, g: 0.6367924, b: 0.9627217, a: 1}
+      fungusBlockToFire: 
+      fireBlockOnceOff: 0
+      blockFired: 0
+    - Name: 2
+      val: 2
+      texts:
+      - Double Kill!
+      - Two down!
+      color: {r: 1, g: 0.23113209, b: 0.51732236, a: 1}
+      fungusBlockToFire: 
+      fireBlockOnceOff: 0
+      blockFired: 0
+    - Name: 3
+      val: 3
+      texts:
+      - OH BABY A TRIPLE!
+      - That's three!
+      - Tiple Kill!
+      color: {r: 0.8773585, g: 0.15312389, b: 0.32612917, a: 1}
+      fungusBlockToFire: 
+      fireBlockOnceOff: 0
+      blockFired: 0
+    - Name: 5
+      val: 5
+      texts:
+      - On a roll!
+      - Fiver!
+      - Multikill!
+      color: {r: 0.8773585, g: 0.15312389, b: 0.32612917, a: 1}
+      fungusBlockToFire: 
+      fireBlockOnceOff: 0
+      blockFired: 0
+    - Name: 10
+      val: 10
+      texts:
+      - LEGENDARY!
+      - M-M-M-MEGA KILL!
+      - ON A SPREE!
+      color: {r: 0.735849, g: 0, b: 0.13799906, a: 1}
+      fungusBlockToFire: 
+      fireBlockOnceOff: 0
+      blockFired: 0
+    - Name: 25
+      val: 25
+      texts:
+      - UNSTOPPABLE!!
+      - INSANITY
+      - ABSOLUTE BRUTALITY
+      color: {r: 0.5377358, g: 0, b: 0.21475822, a: 1}
+      fungusBlockToFire: 
+      fireBlockOnceOff: 0
+      blockFired: 0
+  useComboGroupings: 0
+  comboGroups: []
+  comboInfo: []

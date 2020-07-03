@@ -216,7 +216,7 @@ public class BulletScript : MonoBehaviour
                 hitTarget = true;
                 CharOwner.Sic.AccuracyExp += 1f;
                 CharOwner.Sic.BulletHits++;
-                StatisticInfoManagerScript.Instance.TriggerComboForCharacter(CharOwner.CharInfo.CharacterID, ComboType.Attack, true, target.transform);
+                ComboManager.Instance.TriggerComboForCharacter(CharOwner.CharInfo.CharacterID, ComboType.Attack, true, target.transform.position);
                 bool iscritical = CharOwner.CharInfo.IsCritical(SOAttack.AttackInput == AttackInputType.Weak ? true : false);
                 //Set damage to the hitting character
                 if (SOAttack.AttackInput != AttackInputType.Weak)
@@ -300,7 +300,7 @@ public class BulletScript : MonoBehaviour
         PS.GetComponent<PSTimeGroup>().UpdatePSTime(0.1f);
         if (!hitTarget && SOAttack.AttackInput != AttackInputType.Strong)
         {
-            StatisticInfoManagerScript.Instance.TriggerComboForCharacter(CharOwner.CharInfo.CharacterID, ComboType.Attack, false);
+            ComboManager.Instance.TriggerComboForCharacter(CharOwner.CharInfo.CharacterID, ComboType.Attack, false);
         }
     }
 

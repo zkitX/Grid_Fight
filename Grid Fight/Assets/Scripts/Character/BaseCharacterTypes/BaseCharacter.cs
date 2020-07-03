@@ -166,7 +166,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         if (!UMS.PlayerController.Contains(ControllerType.Enemy))
         {
-            UMS.SelectionIndicator.parent.gameObject.SetActive(true);
+            UMS.SelectionIndicator.gameObject.SetActive(true);
         }
 
         SpineAnimatorsetup();
@@ -1428,7 +1428,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 CharInfo.Stamina += UniversalGameBalancer.Instance.staminaRegenOnPerfectBlock;
                 EventManager.Instance.AddBlock(this, BlockInfo.BlockType.full);
                 Sic.CompleteDefences++;
-                StatisticInfoManagerScript.Instance.TriggerComboForCharacter(CharInfo.CharacterID, ComboType.Defence, true, transform);
+                ComboManager.Instance.TriggerComboForCharacter(CharInfo.CharacterID, ComboType.Defence, true, transform.position);
             }
             else
             {
@@ -1440,7 +1440,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 CharInfo.Shield -= UniversalGameBalancer.Instance.partialDefenceCost;
                 EventManager.Instance.AddBlock(this, BlockInfo.BlockType.partial);
                 Sic.Defences++;
-                StatisticInfoManagerScript.Instance.TriggerComboForCharacter(CharInfo.CharacterID, ComboType.Defence, false);
+                ComboManager.Instance.TriggerComboForCharacter(CharInfo.CharacterID, ComboType.Defence, false);
                 damage = damage < 0 ? 1 : damage;
             }
             healthCT = HealthChangedType.Defend;

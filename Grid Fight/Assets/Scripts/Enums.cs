@@ -952,4 +952,5 @@ public enum ComboType
     None,
     Attack,
     Defence,
+    Kill,
 }

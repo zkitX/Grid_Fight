@@ -71,11 +71,11 @@ public class MinionType_Script : BaseCharacter
         }
         );
 
-     
- 		for (int i = 0; i < HittedByList.Count; i++)
+        ComboManager.Instance.TriggerComboForCharacter(HittedByList[HittedByList.Count - 1].CharacterId, ComboType.Kill, true, transform.position);
+        for (int i = 0; i < HittedByList.Count; i++)
         {
             StatisticInfoClass sic = StatisticInfoManagerScript.Instance.CharaterStats.Where(r => r.CharacterId == HittedByList[i].CharacterId).FirstOrDefault();
-            if(sic != null)
+            if (sic != null)
             {
                 sic.BaseExp += (HittedByList[i].Damage / totDamage) * CharInfo.ExperienceValue;
             }

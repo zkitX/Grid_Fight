@@ -49,37 +49,7 @@ public class UIBattleFieldManager : MonoBehaviour
         charOwner.HealthStatsChangedEvent += CharOwner_HealthStatsChangedEvent;
     }
 
-
-    public void DisplayCombo(ComboType type, int combo, Vector3 position, string flavorText = "", Color thaColor = new Color())
-    {
-        GameObject cI = ComboIndicators.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
-        if(cI == null)
-        {
-            cI = Instantiate(ComboIndicator, transform);
-        }
-
-        List<Color> colors = new List<Color>();
-        colors.Add(thaColor);
-        colors.Add(thaColor);
-        colors[0] *= 0.3f;
-
-        TextMeshProUGUI[] thaScaredtexts = cI.GetComponentsInChildren<TextMeshProUGUI>();
-        for (int i = 0; i < thaScaredtexts.Length; i++)
-        {
-            thaScaredtexts[i].color = colors[i];
-            thaScaredtexts[i].text = "x" + combo.ToString();
-        }
-
-        cI.transform.localScale = Vector3.one * (1f + Mathf.Clamp(((float)combo) / StatisticInfoManagerScript.Instance.maxIntensityCombo, 0f, 1f));
-        cI.transform.position = Camera.main.WorldToScreenPoint(position);
-
-        cI.GetComponent<Animation>().clip = cI.GetComponent<Animation>().GetClip("ComboSplash");
-
-        cI.SetActive(true);
-        StartCoroutine(DisplayCombo_CO(cI, type, combo, position, flavorText, thaColor));
-    }
-
-    public void DisplayComboText(ComboType type, int combo, Vector3 position, string texto, Color thaColor = new Color())
+    public void DisplayComboStyleSplasher(string text, Vector3 pos, float scaler, Color color, bool animateLong, out float animLength)
     {
         GameObject cI = ComboIndicators.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
         if (cI == null)
@@ -88,37 +58,30 @@ public class UIBattleFieldManager : MonoBehaviour
         }
 
         List<Color> colors = new List<Color>();
-        colors.Add(thaColor);
-        colors.Add(thaColor);
-        colors[0] *= 0.3f;
+        colors.Add(color * 0.3f);
+        colors.Add(color);
 
         TextMeshProUGUI[] thaScaredtexts = cI.GetComponentsInChildren<TextMeshProUGUI>();
         for (int i = 0; i < thaScaredtexts.Length; i++)
         {
             thaScaredtexts[i].color = colors[i];
-            thaScaredtexts[i].text = texto;
+            thaScaredtexts[i].text = text;
         }
 
-        cI.transform.localScale = Vector3.one * (1f + Mathf.Clamp(((float)combo) / StatisticInfoManagerScript.Instance.maxIntensityCombo, 0f, 1f));
-        cI.transform.position = Camera.main.WorldToScreenPoint(position + new Vector3(0f,0.5f,0f));
+        cI.transform.localScale = Vector3.one * scaler;
+        cI.transform.position = Camera.main.WorldToScreenPoint(pos);
 
-        cI.GetComponent<Animation>().clip = cI.GetComponent<Animation>().GetClip("ComboSplash_Long");
+        cI.GetComponent<Animation>().clip = cI.GetComponent<Animation>().GetClip(animateLong ? "ComboSplash_Long":"ComboSplash");
+        animLength = cI.GetComponent<Animation>().clip.length;
 
-        cI.SetActive(true);
-        StartCoroutine(DisplayCombo_CO(cI, type, combo, position));
+        StartCoroutine(DisplayComboSplashAnim(cI));
     }
 
-    private IEnumerator DisplayCombo_CO(GameObject obj, ComboType type, int combo, Vector3 position, string flavorText = "", Color thaColor = new Color())
+    IEnumerator DisplayComboSplashAnim(GameObject obj)
     {
+        obj.SetActive(true);
         Animation anim = obj.GetComponent<Animation>();
         anim.Play();
-
-        yield return anim.clip.length * 0.6f;
-
-        if (flavorText != "")
-        {
-            DisplayComboText(type, combo, position, flavorText, thaColor);
-        }
 
         while (anim.isPlaying)
         {
@@ -126,7 +89,6 @@ public class UIBattleFieldManager : MonoBehaviour
         }
         obj.SetActive(false);
     }
-
 
     private void CharOwner_HealthStatsChangedEvent(float value, HealthChangedType changeType, Transform charOwner)
     {
