@@ -96,6 +96,15 @@ public class SpineAnimationManager : MonoBehaviour
         return 1;
     }
 
+    public float GetAnimLenght(string anim)
+    {
+        if (skeletonAnimation.Skeleton.Data.FindAnimation(anim) != null)
+        {
+            return skeletonAnimation.Skeleton.Data.FindAnimation(anim).Duration;
+        }
+        return 1;
+    }
+
     public void SetAnimationSpeed(float speed)
     {
         if (SpineAnimationState != null)

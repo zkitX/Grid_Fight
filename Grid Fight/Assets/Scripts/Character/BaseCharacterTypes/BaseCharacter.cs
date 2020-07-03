@@ -1324,14 +1324,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         float AnimSpeed = 1;
 
-        if (animState == CharacterAnimationStateType.Atk.ToString() || animState == CharacterAnimationStateType.Atk1.ToString())
+        if (animState.Contains("IdleToAtk"))
         {
             AnimSpeed = CharInfo.SpeedStats.AttackSpeed * CharInfo.BaseSpeed;
+            AnimSpeed = SpineAnim.GetAnimLenght(animState) / 0.25f;
         }
-        else if (animState == CharacterAnimationStateType.DashDown.ToString() ||
-            animState == CharacterAnimationStateType.DashUp.ToString() ||
-            animState == CharacterAnimationStateType.DashLeft.ToString() ||
-            animState == CharacterAnimationStateType.DashRight.ToString())
+        else if (animState.Contains("Dash"))
         {
             AnimSpeed = CharInfo.SpeedStats.MovementSpeed * CharInfo.BaseSpeed;
         }
