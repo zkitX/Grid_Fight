@@ -21,6 +21,8 @@ public class BattleManagerScript : MonoBehaviour
     public event MatchLost MatchLostEvent;
 
 
+    public float MovementMultiplier = 1;
+
     public BattleState CurrentBattleState
     {
         get

@@ -923,7 +923,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         while (timer < 1 && !stopCo)
         {
             yield return BattleManagerScript.Instance.WaitFixedUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-            timer += (BattleManagerScript.Instance.FixedDeltaTime / (animLength / (CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed)));
+            timer += (BattleManagerScript.Instance.FixedDeltaTime / (animLength / (CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed * BattleManagerScript.Instance.MovementMultiplier)));
             spaceTimer = curve.Evaluate(timer);
             spineT.localPosition = Vector3.Lerp(localoffset, LocalSpinePosoffset, spaceTimer);
 
