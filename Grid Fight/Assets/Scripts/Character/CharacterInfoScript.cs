@@ -388,10 +388,10 @@ public class CharacterInfoScript : MonoBehaviour
         List<ScriptableObjectAI> res = new List<ScriptableObjectAI>();
         foreach (ScriptableObjectAI item in AIs)
         {
-            if(item.CheckAvailability(this))
+         /*   if(item.CheckAvailability(this))
             {
                 res.Add(item);
-            }
+            }*/
         }
 
         return res.First();

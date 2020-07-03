@@ -1,6 +1,7 @@
 ﻿using MyBox;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -15,8 +16,8 @@ public class ScriptableObjectAI : ScriptableObject
 
     public VisionType Vision;
     public AggroType Aggro;
-
-    public List<AICheckClass> AIChecks = new List<AICheckClass>();
+    public PartyHPType PartyHp;
+  //  public List<AICheckClass> AIChecks = new List<AICheckClass>();
 
     [Header("State effects")]
     public bool UpdateMoveForward = false;
@@ -26,13 +27,16 @@ public class ScriptableObjectAI : ScriptableObject
     public bool UpdateMoveUpDown = false;
     [ConditionalField("UpdateMoveUpDown", false)] public float MoveUpDown = 20;
 
+    public int Chances = 0;
+
 
     public List<AIStatsModifierClass> StatsToModify = new List<AIStatsModifierClass>();
     System.Reflection.FieldInfo parentField = null, field = null, B_field = null;
     string[] statToCheck;
-    public bool CheckAvailability(CharacterInfoScript charInfo)
+    public void CheckAvailability(CharacterInfoScript charInfo, List<BaseCharacter> enemies, Vector2Int currentPos)
     {
-        foreach (AICheckClass item in AIChecks)
+
+       /* foreach (AICheckClass item in AIChecks)
         {
             switch (item.StatToCheck)
             {
@@ -42,19 +46,16 @@ public class ScriptableObjectAI : ScriptableObject
                     case ValueCheckerType.LessThan:
                         if (charInfo.HealthPerc > item.PercToCheck)
                         {
-                            return false;
                         }
                         break;
                     case ValueCheckerType.EqualTo:
                         if (charInfo.HealthPerc != item.PercToCheck)
                         {
-                            return false;
                         }
                         break;
                     case ValueCheckerType.MoreThan:
                         if (charInfo.HealthPerc < item.PercToCheck)
                         {
-                            return false;
                         }
                         break;
                 }
@@ -65,19 +66,16 @@ public class ScriptableObjectAI : ScriptableObject
                     case ValueCheckerType.LessThan:
                         if (charInfo.StaminaPerc > item.PercToCheck)
                         {
-                                return false;
                         }
                         break;
                     case ValueCheckerType.EqualTo:
                         if (charInfo.StaminaPerc != item.PercToCheck)
                         {
-                                return false;
                         }
                         break;
                     case ValueCheckerType.MoreThan:
                         if (charInfo.StaminaPerc < item.PercToCheck)
                         {
-                                return false;
                         }
                         break;
                 }
@@ -89,42 +87,53 @@ public class ScriptableObjectAI : ScriptableObject
                         case ValueCheckerType.LessThan:
                             if (partyHPPerch > item.PercToCheck)
                             {
-                                return false;
                             }
                             break;
                         case ValueCheckerType.EqualTo:
                             if (partyHPPerch != item.PercToCheck)
                             {
-                                return false;
                             }
                             break;
                         case ValueCheckerType.MoreThan:
                             if (partyHPPerch < item.PercToCheck)
                             {
-                                return false;
                             }
                             break;
                     }
                     break;
             }
-        }
+        }*/
+
+
+
+
+
 
         switch (Vision)
         {
             case VisionType.Front_Near:
+                if(enemies.Where(r=> r.UMS.CurrentTilePos.x == currentPos.x && Mathf.Abs(r.UMS.CurrentTilePos.y - currentPos.y) < 3).ToList().Count == 0)
+                {
+                }
                 break;
             case VisionType.Front_Far:
+                if (enemies.Where(r => r.UMS.CurrentTilePos.x == currentPos.x && Mathf.Abs(r.UMS.CurrentTilePos.y - currentPos.y) > 3).ToList().Count == 0)
+                {
+                }
                 break;
             case VisionType.UpDown_Near:
+                if (enemies.Where(r => r.UMS.CurrentTilePos.x != currentPos.x && Mathf.Abs(r.UMS.CurrentTilePos.y - currentPos.y) < 3).ToList().Count == 0)
+                {
+                }
                 break;
             case VisionType.UpDown_Far:
-                break;
-            default:
+                if (enemies.Where(r => r.UMS.CurrentTilePos.x != currentPos.x && Mathf.Abs(r.UMS.CurrentTilePos.y - currentPos.y) > 3).ToList().Count == 0)
+                {
+                }
                 break;
         }
 
 
-        return true;
     }
 
 

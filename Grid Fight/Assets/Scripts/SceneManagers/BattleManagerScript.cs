@@ -271,7 +271,7 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
-    public IEnumerator RemoveCharacterFromBaord(ControllerType playerController, BaseCharacter currentCharacter, bool leaveEmpty)
+    public IEnumerator RemoveCharacterFromBaord(BaseCharacter currentCharacter, bool leaveEmpty)
     {
         if (leaveEmpty)
         {
@@ -294,14 +294,7 @@ public class BattleManagerScript : MonoBehaviour
         currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", false);
         currentCharacter.SetUpLeavingBattle();
 
-        if (playerController == ControllerType.Player1)
-        {
-            UIBattleManager.Instance.isLeftSidePlaying = false;
-        }
-        else if (playerController == ControllerType.Player2)
-        {
-            UIBattleManager.Instance.isRightSidePlaying = false;
-        }
+
         yield return null;
     }
 
@@ -535,7 +528,7 @@ public class BattleManagerScript : MonoBehaviour
 
         yield return WaitFor(1, () => CurrentBattleState != BattleState.Battle);
 
-        yield return RemoveCharacterFromBaord(playerController, zombie, true);
+        yield return RemoveCharacterFromBaord(zombie, true);
         zombie.CharActionlist.Remove(CharacterActionType.SwitchCharacter);
 
 
@@ -899,7 +892,7 @@ public class BattleManagerScript : MonoBehaviour
 
                     // currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", false);
                     //currentCharacter.SpineAnim.SetAnimationSpeed(2);
-                    yield return RemoveCharacterFromBaord(playerController, CurrentSelectedCharacters[playerController].Character, false);
+                    yield return RemoveCharacterFromBaord(CurrentSelectedCharacters[playerController].Character, false);
 
                     SelectCharacter(playerController, currentCharacter);
                     CurrentSelectedCharacters[playerController].Character.IsSwapping = true;
@@ -973,7 +966,7 @@ public class BattleManagerScript : MonoBehaviour
             controller = CurrentSelectedCharacters.Where(r => r.Value.Character == charToRemove).FirstOrDefault().Key;
         }
         charToRemove.SpineAnim.SetAnimationSpeed(2);
-        StartCoroutine(RemoveCharacterFromBaord(controller, charToRemove, true));
+        StartCoroutine(RemoveCharacterFromBaord(charToRemove, true));
     }
 
 
@@ -1129,6 +1122,7 @@ public class BattleManagerScript : MonoBehaviour
                 }
                 //Change this player's character to the new character
                 CurrentSelectedCharacters[playerController].Character = currentCharacter;
+                currentCharacter.CurrentPlayerController = playerController;
                 CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar = currentCharacter.CharInfo.CharacterSelection;
                 currentCharacter.UMS.SetBattleUISelection(playerController);
                 currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", true);

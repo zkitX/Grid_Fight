@@ -132,7 +132,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     }
 
     public int _shotsLeftInAttack = 0;
-
+    public ControllerType CurrentPlayerController;
     [HideInInspector]
     public bool _Attacking = false;
     public virtual bool Attacking
@@ -1180,7 +1180,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     if (bdClass.CurrentBuffDebuff.Value == 0 && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
                     {
                         CharActionlist.Add(CharacterActionType.SwitchCharacter);
-                        yield return BattleManagerScript.Instance.RemoveCharacterFromBaord(ControllerType.Player1, this, true);
+                        yield return BattleManagerScript.Instance.RemoveCharacterFromBaord(this, true);
                     }
                 }
             }

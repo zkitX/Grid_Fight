@@ -12,6 +12,7 @@ public class MinionType_Script : BaseCharacter
     public float ForwardMovementPerc = 13;
     public float BackwardMovementPerc = 13;
     List<HitInfoClass> HittedByList = new List<HitInfoClass>();
+    List<AggroInfoClass> AggroInfoList = new List<AggroInfoClass>();
     float totDamage = 0;
     bool strongAnimDone = false;
     public ScriptableObjectAI CurrentAIState;
@@ -35,6 +36,7 @@ public class MinionType_Script : BaseCharacter
     public override void SetUpEnteringOnBattle()
     {
         SetAnimation(CharacterAnimationStateType.Arriving);
+        CurrentPlayerController = ControllerType.Enemy;
         shotsLeftInAttack = 0;
     }
 
@@ -501,6 +503,23 @@ public class MinionType_Script : BaseCharacter
         {
             hic.Damage += damage;
         }
+
+        AggroInfoClass aggro = AggroInfoList.Where(r => r.PlayerController == attacker.CurrentPlayerController).FirstOrDefault();
+        if (aggro == null)
+        {
+            AggroInfoList.Add(new AggroInfoClass(attacker.CurrentPlayerController, 1));
+        }
+        else
+        {
+            aggro.Hit ++;
+            AggroInfoList.ForEach(r =>
+            {
+                if(r.PlayerController != attacker.CurrentPlayerController)
+                {
+                    r.Hit = r.Hit == 0 ? 0 : r.Hit - 1;
+                }
+            });
+        }
         attacker.Sic.DamageMade += damage;
         totDamage += damage;
         base.SetFinalDamage(attacker, damage);
@@ -633,5 +652,23 @@ public class HitInfoClass
     {
         CharacterId = characterId;
         Damage = damage;
+    }
+}
+
+
+public class AggroInfoClass
+{
+    public ControllerType PlayerController;
+    public int Hit;
+
+    public AggroInfoClass()
+    {
+
+    }
+
+    public AggroInfoClass(ControllerType playerController, int hit)
+    {
+        PlayerController = playerController;
+        Hit = hit;
     }
 }
