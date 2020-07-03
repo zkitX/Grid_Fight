@@ -15,23 +15,26 @@ MonoBehaviour:
   Chances: 100
   CurrentAttackType: 0
   AttackRatioMultiplier: 1
-  DamageMultiplier: {x: 1, y: 1}
-  AttackInput: 0
+  _DamageMultiplier: {x: 1, y: 1}
+  AttackInput: 1
   AttackAnim: 1
+  StaminaCost: 10
+  ExperiencePoints: 10
+  CoolDown: 10
   PrefixAnim: 1
   Particles:
     Left:
-      Cast: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Cast: {fileID: 1515675952422939921, guid: 6bc5e58655a92994d95b3d06dce77c76,
         type: 3}
-      Bullet: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Bullet: {fileID: 8096353889280781367, guid: fe1f67ef2e4b9d24bae54252ece4cad9,
         type: 3}
-      Hit: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73, type: 3}
+      Hit: {fileID: 1708216568413954274, guid: cf07f8a7c50a4474f97bf53355fc8b87, type: 3}
     Right:
-      Cast: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Cast: {fileID: 1515675952422939921, guid: 5c725b837bf99f24dbac26c9e5838225,
         type: 3}
-      Bullet: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Bullet: {fileID: 8096353889280781367, guid: e825affa0cfe4914d8098b4084b61e14,
         type: 3}
-      Hit: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73, type: 3}
+      Hit: {fileID: 1708216568413954274, guid: 11dd6dbc13c99db439533c9e8f0e27cb, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
@@ -89,6 +92,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+      ChildrenBulletDelay: 0.5
       BulletEffectTiles: []
       BulletGapStartingTile: {x: 0, y: 0}
       HasEffect: 0
@@ -102,3 +106,11 @@ MonoBehaviour:
     ValueChecker: 0
     PercToCheck: 0
     Chances: 0
+  TotemAtk:
+    AtkType: 3
+    IsPlayerSide: 0
+    DurationOnField: 10
+    Effects: []
+    TotemIn: 0
+    TotemOut: 0
+    TentaclePrefab: 0
