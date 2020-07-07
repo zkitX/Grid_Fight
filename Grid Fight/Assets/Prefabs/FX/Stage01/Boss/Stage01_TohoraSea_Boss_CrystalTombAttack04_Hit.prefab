@@ -19378,9 +19378,8 @@ GameObject:
   - component: {fileID: 4557907623083239573}
   - component: {fileID: 4557907623083239560}
   - component: {fileID: 8430359264003077370}
-  - component: {fileID: 4557907623083239562}
   - component: {fileID: 9049523898116472705}
-  - component: {fileID: 7691834122403819876}
+  - component: {fileID: 288818375490196193}
   m_Layer: 0
   m_Name: Stage01_TohoraSea_Boss_CrystalTombAttack04_Hit
   m_TagString: Untagged
@@ -24079,20 +24078,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &4557907623083239562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4557907623083239572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba9e6c852f53ac7448afd635fab03e07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BulletTargetTime: 1
-  BulletOriginalTime: 1
 --- !u!199 &9049523898116472705
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -24156,7 +24141,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &7691834122403819876
+--- !u!114 &288818375490196193
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -24165,9 +24150,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4557907623083239572}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c92ac842bd80264eb24a50ddfc9727b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PSTime: 10
+  Target: {fileID: 0}
+  Adjustment: {x: 0, y: 0, z: 0}
+  IncludeChildren: 1
+  timet: 0
+  iter: 0
 --- !u!1 &7370661595371584048
 GameObject:
   m_ObjectHideFlags: 0

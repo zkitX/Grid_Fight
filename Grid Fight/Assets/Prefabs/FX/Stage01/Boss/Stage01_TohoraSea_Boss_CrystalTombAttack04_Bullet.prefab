@@ -11,9 +11,7 @@ GameObject:
   - component: {fileID: 125367725908180507}
   - component: {fileID: 125367725908180480}
   - component: {fileID: 125367725908180487}
-  - component: {fileID: 125367725908180484}
-  - component: {fileID: 125367725908180481}
-  - component: {fileID: -719566572122306753}
+  - component: {fileID: -309549050072998601}
   m_Layer: 0
   m_Name: Stage01_TohoraSea_Boss_CrystalTombAttack04_Bullet
   m_TagString: Untagged
@@ -4761,7 +4759,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &125367725908180484
+--- !u!114 &-309549050072998601
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4770,38 +4768,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 125367725908180506}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba9e6c852f53ac7448afd635fab03e07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BulletTargetTime: 1
-  BulletOriginalTime: 1
---- !u!114 &125367725908180481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125367725908180506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2540eedaee99924438ce16aeff707ac9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c92ac842bd80264eb24a50ddfc9727b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PSTime: 10
-  AutoUpdate: 0
-  LongParticles: []
---- !u!114 &-719566572122306753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125367725908180506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Adjustment: {x: 0, y: 0, z: 0}
+  IncludeChildren: 1
+  timet: 0
+  iter: 0
 --- !u!1 &5240096922343393869
 GameObject:
   m_ObjectHideFlags: 0

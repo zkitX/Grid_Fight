@@ -9707,7 +9707,7 @@ GameObject:
   - component: {fileID: 1854728688966097074}
   - component: {fileID: 1854728688966097073}
   - component: {fileID: 1854728688966097072}
-  - component: {fileID: 1854728688966097039}
+  - component: {fileID: 7406953699816708788}
   m_Layer: 0
   m_Name: Stage01_TohoraSea_Boss_CrystalTombAttack04_LifeSwap
   m_TagString: Untagged
@@ -14452,7 +14452,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &1854728688966097039
+--- !u!114 &7406953699816708788
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14461,6 +14461,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1854728688966097036}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c92ac842bd80264eb24a50ddfc9727b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PSTime: 10
+  Target: {fileID: 0}
+  Adjustment: {x: 0, y: 0, z: 0}
+  IncludeChildren: 1
+  timet: 0
+  iter: 0
