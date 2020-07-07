@@ -24241,7 +24241,7 @@ GameObject:
   - component: {fileID: 8196946893858015639}
   - component: {fileID: 8196946893858015625}
   - component: {fileID: 8196946893858015624}
-  - component: {fileID: 8591446561010216296}
+  - component: {fileID: 2412399923953919210}
   m_Layer: 0
   m_Name: LVL01-LoopCharge
   m_TagString: Untagged
@@ -28989,7 +28989,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &8591446561010216296
+--- !u!114 &2412399923953919210
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -28998,6 +28998,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8196946893858015638}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c92ac842bd80264eb24a50ddfc9727b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PSTime: 10
+  Target: {fileID: 0}
+  Adjustment: {x: 0, y: 0, z: 0}
+  IncludeChildren: 1
+  timet: 0
+  iter: 0
