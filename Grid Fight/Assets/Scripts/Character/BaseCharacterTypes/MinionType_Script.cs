@@ -70,8 +70,11 @@ public class MinionType_Script : BaseCharacter
             r.CurrentBuffDebuff.Stop_Co = true;
         }
         );
+        if(HittedByList.Count > 0)
+        {
+            ComboManager.Instance.TriggerComboForCharacter(HittedByList[HittedByList.Count - 1].CharacterId, ComboType.Kill, true, transform.position);
 
-        ComboManager.Instance.TriggerComboForCharacter(HittedByList[HittedByList.Count - 1].CharacterId, ComboType.Kill, true, transform.position);
+        }
         for (int i = 0; i < HittedByList.Count; i++)
         {
             StatisticInfoClass sic = StatisticInfoManagerScript.Instance.CharaterStats.Where(r => r.CharacterId == HittedByList[i].CharacterId).FirstOrDefault();
