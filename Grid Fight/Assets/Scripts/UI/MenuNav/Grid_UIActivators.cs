@@ -182,7 +182,7 @@ public class Grid_UIActivators : MonoBehaviour
                 }
             }
 
-            activator.Name = actions.ToString() + " actions triggred by " + activator.input.Length.ToString() + (activator.input.Length != 1 ? " input" : " inputs");
+            activator.Name = activator.ID + " - " + actions.ToString() + " actions triggred by " + activator.input.Length.ToString() + (activator.input.Length != 1 ? " input" : " inputs");
         }
     }
 }

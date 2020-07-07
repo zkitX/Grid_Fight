@@ -57,6 +57,7 @@ public class CharSelectSelector : MonoBehaviour
         moving = true;
         CharacterLoadInformation loadInfo = SceneLoadManager.Instance.loadedCharacters.Where(r => r.characterID == charName).FirstOrDefault();
         curSelectedChar = charName;
+        CharSelectBox.Instance.lastSelectedChar = curSelectedChar;
 
         if (SceneLoadManager.Instance.squad.Values.Where(r => r.characterID == curSelectedChar).FirstOrDefault() == null)
         {
@@ -67,13 +68,18 @@ public class CharSelectSelector : MonoBehaviour
             SelectText.text = "DESELECT";
         }
 
+        if(parentBox.selectionMode == CharSelectBox.SelectionMode.Units)
+        {
+            SelectText.text = "MASK";
+        }
+
         if (ChatDisplayed != (loadInfo != null && loadInfo.availableChats.Count != 0 && loadInfo.encounterState == CharacterLoadInformation.EncounterState.Recruited && parentBox.selectionMode == CharSelectBox.SelectionMode.Units))
         {
             ChatDisplayed = !ChatDisplayed;
             DisplayOption(ChatDisplay, ChatDisplayed);
         }
 
-        if (SelectDisplayed != (loadInfo != null && loadInfo.encounterState == CharacterLoadInformation.EncounterState.Recruited && charName != CharacterNameType.Stage00_Character_Valley && parentBox.selectionMode == CharSelectBox.SelectionMode.Squad))
+        if (SelectDisplayed != (loadInfo != null && loadInfo.encounterState == CharacterLoadInformation.EncounterState.Recruited && (charName != CharacterNameType.Stage00_Character_Valley || parentBox.selectionMode == CharSelectBox.SelectionMode.Units) /*&& parentBox.selectionMode == CharSelectBox.SelectionMode.Squad*/))
         {
             SelectDisplayed = !SelectDisplayed;
             DisplayOption(SelectDisplay, SelectDisplayed);

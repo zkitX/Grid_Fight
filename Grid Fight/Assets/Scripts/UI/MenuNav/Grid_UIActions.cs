@@ -138,6 +138,7 @@ public class Grid_UIActions
         {
             yield return null;
         }
+        thingToAnimate.clip = null;
         yield return null;
     }
 

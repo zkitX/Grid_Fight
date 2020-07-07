@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class CharSelectBox : MonoBehaviour
 {
@@ -53,8 +54,21 @@ public class CharSelectBox : MonoBehaviour
         }
     }
     protected int currentPageIndex = 1;
+    protected int GetCharPage(CharacterNameType charName)
+    {
+        for (int i = 0; i < SceneLoadManager.Instance.loadedCharacters.Length; i++)
+        {
+            if(SceneLoadManager.Instance.loadedCharacters[i].characterID == charName)
+            {
+                return Mathf.FloorToInt(((float)(i)) / (rows * columns)) + 1;
+            }
+        }
+        return 1;
+    }
 
     protected List<CharSelectButton> activeButtons = new List<CharSelectButton>();
+
+    [HideInInspector] public CharacterNameType lastSelectedChar = CharacterNameType.None;
 
     private void Awake()
     {
@@ -73,7 +87,7 @@ public class CharSelectBox : MonoBehaviour
         SetupButtons();
         DisplayPage(currentPageIndex);
         selector?.transform.SetAsLastSibling();
-        selector?.UpdateSelection(activeButtons[0], activeButtons[0].displayedChar, activeButtons[0].transform.position, 0f);
+        //selector?.UpdateSelection(activeButtons[0], activeButtons[0].displayedChar, activeButtons[0].transform.position, 0f);
     }
 
     public void ChangeBoxXSize(float val)
@@ -89,6 +103,27 @@ public class CharSelectBox : MonoBehaviour
     public void SelectFirstButton()
     {
         Grid_UINavigator.Instance.SelectButton(activeButtons[0].GetComponent<Grid_UIButton>());
+    }
+
+    public void SelectLastSelectedButton()
+    {
+        SelectCharacterButton(lastSelectedChar);
+    }
+
+    public void SelectCharacterButton(CharacterNameType charName)
+    {
+        if (charName == CharacterNameType.None)
+        {
+            SelectFirstButton();
+            return;
+        }
+
+        if (currentPageIndex != GetCharPage(charName))
+        {
+            DisplayPage(GetCharPage(charName));
+        }
+
+        Grid_UINavigator.Instance.SelectButton(activeButtons.Where(r => r.displayedChar == charName).First().GetComponent<Grid_UIButton>());
     }
 
     void SetupButtons()
@@ -114,6 +149,7 @@ public class CharSelectBox : MonoBehaviour
                 CharSelectButton curBtn = Instantiate(selectableCharButton_Prefab, new Vector3(currentPos.x, currentPos.y), Quaternion.identity, transform).GetComponent<CharSelectButton>();
                 curBtn.selectionBoxRef = this;
                 curBtn.DisplayChar(null);
+                curBtn.GetComponent<Grid_UIButton>().parentPanel = GetComponentInParent<Grid_UIPanel>();
                 activeButtons.Add(curBtn);
 
                 if (x != columns - 1)
@@ -198,7 +234,22 @@ public class CharSelectBox : MonoBehaviour
 
     public void SelectorSelectAction()
     {
-        if (selectionMode == SelectionMode.Units) return;
+        if (selectionMode == SelectionMode.Units)
+        {
+            if (CharInfoBox.Instance.curCharID == CharacterNameType.None) return;
+
+            CharacterLoadInformation charInfo = SceneLoadManager.Instance.loadedCharacters.Where(r => r.characterID == CharInfoBox.Instance.curCharID).First();
+            if (charInfo.heldMask == MaskTypes.None)
+            {
+                Grid_UINavigator.Instance.TriggerUIActivator("UnitsMaskTransition");
+            }
+            else
+            {
+                SceneLoadManager.Instance.loadedMasks.Where(r => r.maskType == charInfo.heldMask).First().maskHolder = CharacterNameType.None;
+                CharInfoBox.Instance.UpdateCurCharInfo();
+            }
+            return;
+        }
         selector?.SelectCurrent();
     }
 
