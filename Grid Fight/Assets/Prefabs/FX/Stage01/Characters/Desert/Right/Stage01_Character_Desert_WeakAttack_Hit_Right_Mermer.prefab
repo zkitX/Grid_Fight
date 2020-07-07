@@ -15053,7 +15053,7 @@ GameObject:
   - component: {fileID: 3252666646786503414}
   - component: {fileID: 7394238600868540057}
   - component: {fileID: 8067466219775616482}
-  - component: {fileID: 5001149445674367573}
+  - component: {fileID: -3459440221243807776}
   m_Layer: 0
   m_Name: Stage01_Character_Desert_WeakAttack_Hit_Right_Mermer
   m_TagString: Untagged
@@ -15090,7 +15090,7 @@ ParticleSystem:
   serializedVersion: 6
   lengthInSec: 5
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 1
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -19801,7 +19801,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &5001149445674367573
+--- !u!114 &-3459440221243807776
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -19810,9 +19810,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3252666646786503415}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c92ac842bd80264eb24a50ddfc9727b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PSTime: 10
+  Target: {fileID: 0}
+  Adjustment: {x: 0, y: 0, z: 0}
+  IncludeChildren: 1
+  timet: 0
+  iter: 0
 --- !u!1 &3701844823571736723
 GameObject:
   m_ObjectHideFlags: 0

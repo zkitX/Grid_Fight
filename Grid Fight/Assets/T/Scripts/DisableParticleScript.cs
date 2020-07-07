@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class DisableParticleScript : MonoBehaviour
@@ -40,9 +38,14 @@ public class DisableParticleScript : MonoBehaviour
 
     public void ResetParticle()
     {
-        ps.time = 0;
-        gameObject.SetActive(false);
+
+        foreach (ParticleChildSimulationSpeed item in Children)
+        {
+            item.Child.Clear();
+        }
+
         transform.parent = null;
+        gameObject.SetActive(false);
     }
 
     public void SetSimulationSpeedToBase()
@@ -65,14 +68,3 @@ public class DisableParticleScript : MonoBehaviour
 }
 
 
-public class ParticleChildSimulationSpeed
-{
-    public float BaseValue;
-    public ParticleSystem Child;
-
-    public ParticleChildSimulationSpeed(float baseValue, ParticleSystem child)
-    {
-        BaseValue = baseValue;
-        Child = child;
-    }
-}

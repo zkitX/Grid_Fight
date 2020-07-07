@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 669376145787459272}
   - component: {fileID: 9041602243808798687}
   - component: {fileID: 4551673760888765826}
-  - component: {fileID: 3445698437903724625}
+  - component: {fileID: 6473431233254720116}
   m_Layer: 0
   m_Name: Stage02_TheBurg_Character_Desert_StrongAttack_Cast_Right_Loud
   m_TagString: Untagged
@@ -46,7 +46,7 @@ ParticleSystem:
   serializedVersion: 6
   lengthInSec: 5
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 1
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -4757,7 +4757,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &3445698437903724625
+--- !u!114 &6473431233254720116
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4766,9 +4766,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1515675952422939921}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c92ac842bd80264eb24a50ddfc9727b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PSTime: 10
+  Target: {fileID: 0}
+  Adjustment: {x: 0, y: 0, z: 0}
+  IncludeChildren: 1
+  timet: 0
+  iter: 0
 --- !u!1 &2689784560834533124
 GameObject:
   m_ObjectHideFlags: 0

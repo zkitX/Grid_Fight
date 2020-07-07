@@ -258,7 +258,7 @@ public class Stage09_Boss_Geisha_Script : MinionType_Script
             BossPhase == bossPhasesType.Phase1_? CharInfo.CharacterID : oniForme.CharInfo.CharacterID, AttackParticlePhaseTypes.Cast,
             BossPhase == bossPhasesType.Phase1_ ? SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position : 
             oniForme.SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position, UMS.Side, nextAttack.AttackInput);
-        cast.GetComponent<DisableParticleScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
+        cast.GetComponent<ParticleHelperScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
 
         if (nextAttack.CurrentAttackType == AttackType.Particles)
         {

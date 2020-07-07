@@ -52,7 +52,7 @@ public class Stage00_BossOctopus_Head_Script : MinionType_Script
                 SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position, UMS.Side, nextAttack.AttackInput);
             GOTarget = cast.GetComponentInChildren<ParticleLaserAiming>().Target.transform.gameObject;
             GOTarget.transform.position = eyeAttackTarget[i];
-            cast.GetComponent<DisableParticleScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
+            cast.GetComponent<ParticleHelperScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
             
         }
 

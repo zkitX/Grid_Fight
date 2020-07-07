@@ -29118,7 +29118,7 @@ GameObject:
   - component: {fileID: 7556380006222320513}
   - component: {fileID: 7556380006222320538}
   - component: {fileID: 7556380006222320541}
-  - component: {fileID: -4234839009484829704}
+  - component: {fileID: -5811610604457484959}
   m_Layer: 0
   m_Name: Stage06_Character_Desert_StrongAttack_Hit_Right
   m_TagString: Untagged
@@ -29156,7 +29156,7 @@ ParticleSystem:
   serializedVersion: 6
   lengthInSec: 3
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 1
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -33867,7 +33867,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &-4234839009484829704
+--- !u!114 &-5811610604457484959
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -33876,6 +33876,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7556380006222320512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c92ac842bd80264eb24a50ddfc9727b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PSTime: 10
+  Target: {fileID: 0}
+  Adjustment: {x: 0, y: 0, z: 0}
+  IncludeChildren: 1
+  timet: 0
+  iter: 0

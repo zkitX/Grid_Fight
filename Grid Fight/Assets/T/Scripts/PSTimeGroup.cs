@@ -10,18 +10,11 @@ public class PSTimeGroup : MonoBehaviour
     public bool AutoUpdate = true;
     [Tooltip("This will disable once the particles finish")]
     bool DisableTrail = false;
-    [Tooltip("Insert particles that consist in only one long particle")]
-    public List<ParticleSystem> LongParticles = new List<ParticleSystem>();
     [Tooltip("All trails inside the group")]
     List<TrailRenderer> Trails = new List<TrailRenderer>();
     [Tooltip("Cache of trail initial information")]
     List<float> TrailInitialTime = new List<float>();
     bool initialized = false;
-
-    void Awake()
-    {
-        
-    }
 
     private void Start()
     {
@@ -47,11 +40,6 @@ public class PSTimeGroup : MonoBehaviour
     {
         if (initialized)
         {
-            //Activate only if the variable AutoUpdate is enable
-            /*if (AutoUpdate)
-            {
-                UpdatePSTime();
-            }*/
             TrailStateUpdate();
         }
         
@@ -67,22 +55,12 @@ public class PSTimeGroup : MonoBehaviour
             var m = PS.main;
             m.loop = false;
             //To change the duration the particle needs to pe paused
-            PS.Pause();
+            PS.Stop();
             m.duration = PSTime / m.simulationSpeed;
             //check if the particle is finished
             PS.Play();
             DisableTrail = (PS.time>=m.duration);
         }
-        foreach(ParticleSystem p in LongParticles)
-        {
-            p.Pause();
-            //p.gameObject.SetActive(false);
-            var m = p.main;
-            m.startLifetime = m.duration;
-           // p.gameObject.SetActive(true);
-            p.Play();
-        }
-
     }
 
     /// <summary>
@@ -117,7 +95,6 @@ public class PSTimeGroup : MonoBehaviour
                 TrailRenderer trail = Trails[i];
                 trail.emitting = true;
                 trail.time = TrailInitialTime[i];
-
             }
         }
     }

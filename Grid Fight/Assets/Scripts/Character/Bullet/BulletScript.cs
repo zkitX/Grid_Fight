@@ -43,16 +43,10 @@ public class BulletScript : MonoBehaviour
     public void StartMoveToTile()
     {
         hitTarget = false;
-        StopAllCoroutines();
-        if (movingCo != null)
-        {
-            StopCoroutine(movingCo);
-        }
-
         movingCo = MoveToTile();
         StartCoroutine(movingCo);
     }
-
+    float timet = 0;
     //Move the bullet on a determinated tile using the BulletInfo.Trajectory
     public IEnumerator MoveToTile()
     {
@@ -81,25 +75,21 @@ public class BulletScript : MonoBehaviour
         Vector3 destination = bts.transform.position + new Vector3(Side == SideType.LeftSide ? 0.2f : -0.2f, 0, 0);
         if (isColliding)
         {
-            BulletDuration = (CharOwner.CharInfo.SpeedStats.BulletSpeed / 12) * (bts.Pos.y + (StartingTile.y*(Side == SideType.LeftSide ? -1f : 1f)));
+            BulletDuration = (CharOwner.CharInfo.SpeedStats.BulletSpeed / 12) * Mathf.Abs(bts.Pos.y - (StartingTile.y));
         }
         //Duration of the particles 
-        PSTimeGroup pstg = PS.GetComponent<PSTimeGroup>();
-        if (pstg != null)
-        {
-            pstg.UpdatePSTime(BulletDuration + 0.5f);
-
-        }
-        else
-        {
-
-        }
+        PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharOwner.UMS.Side == SideType.LeftSide ? SOAttack.Particles.Left.Bullet : SOAttack.Particles.Right.Bullet, CharOwner.CharInfo.CharacterID, AttackParticlePhaseTypes.Bullet, transform, CharOwner.UMS.Side,
+          SOAttack.AttackInput, BulletDuration + 0.5f, iter);
+        ParticleHelperScript pstg = PS.GetComponent<ParticleHelperScript>();
+      //  PS.SetActive(true);
 
         //float Duration = Vector3.Distance(transform.position, destination) / CharOwner.CharInfo.BulletSpeed;
         Vector3 res;
         isMoving = true;
+        timet = +Time.time;
+        pstg.timet = BulletDuration + 0.5f;
 
-        float ti = 0;
+        //Debug.Log("Bullet_1   " + timet + "   " + BulletDuration + 0.5f);
         while (isMoving)
         {
             yield return new WaitForFixedUpdate();
@@ -120,7 +110,6 @@ public class BulletScript : MonoBehaviour
 
             transform.position = res;
             timer += BattleManagerScript.Instance.FixedDeltaTime / BulletDuration;
-            ti += BattleManagerScript.Instance.FixedDeltaTime;
             //if timer ended the bullet fire the Effect
             if (timer > 1)
             {
@@ -134,6 +123,7 @@ public class BulletScript : MonoBehaviour
                 
             }
         }
+        //Debug.Log("Bullet_2   " + timet + "    " + Time.time);
         EndBullet(1f);
     }
 
@@ -206,6 +196,7 @@ public class BulletScript : MonoBehaviour
         }
     }
 
+    public int iter = 0;
     bool hitTarget = false;
     public void MakeDamage(BaseCharacter target, float baseDamage)
     {
@@ -275,12 +266,7 @@ public class BulletScript : MonoBehaviour
             StartCoroutine(ChildExplosion(BulletBehaviourInfo.BulletEffectTiles.Where(r => r != Vector2Int.zero).ToList(), new Vector2Int(DestinationTile.x, target.UMS.CurrentTilePos.y)));
             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Impact, AudioBus.MidPrio,
             GridManagerScript.Instance.GetBattleTile(target.UMS.CurrentTilePos).transform);
-            if (bulletSoundSource != null)
-            {
-                bulletSoundSource.ResetSource();
-            }
             FireEffectParticles(transform.position);
-            isMoving = false;
         }
     }
 
@@ -294,10 +280,10 @@ public class BulletScript : MonoBehaviour
 
     private void EndBullet(float timer)
     {
+        //Debug.Log("Bullet_3   " + timet);
         Invoke("RestoreBullet", timer);
         PS.transform.parent = null;
-        //CharOwner.Sic.AccuracyExp -= 1f;
-        PS.GetComponent<PSTimeGroup>().UpdatePSTime(0.1f);
+        PS.GetComponent<ParticleHelperScript>().UpdatePSTime(0.1f, 0);
         if (!hitTarget && SOAttack.AttackInput != AttackInputType.Strong)
         {
             ComboManager.Instance.TriggerComboForCharacter(CharOwner.CharInfo.CharacterID, ComboType.Attack, false);
@@ -312,14 +298,14 @@ public class BulletScript : MonoBehaviour
 
     void RestoreBullet()
     {
+        //Debug.Log("Bullet_4   " + timet);
         if (bulletSoundSource != null)
         {
             bulletSoundSource.ResetSource();
         }
         bulletSoundSource = null;
-        PS.GetComponent<DisableParticleScript>().ResetParticle();
+        //PS.GetComponent<ParticleHelperScript>().ResetParticle();
         CancelInvoke("RestoreBullet");
-        StopAllCoroutines();
         gameObject.SetActive(false);
     }
 }

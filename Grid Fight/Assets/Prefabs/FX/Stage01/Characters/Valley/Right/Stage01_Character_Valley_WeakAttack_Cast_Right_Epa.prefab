@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 437897473126573470}
   - component: {fileID: 437897473126573445}
   - component: {fileID: 437897473126573442}
-  - component: {fileID: 4839958383211175445}
+  - component: {fileID: 2096032761716610849}
   m_Layer: 0
   m_Name: Stage01_Character_Valley_WeakAttack_Cast_Right_Epa
   m_TagString: Untagged
@@ -46,7 +46,7 @@ ParticleSystem:
   serializedVersion: 6
   lengthInSec: 3
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 1
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -4757,7 +4757,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &4839958383211175445
+--- !u!114 &2096032761716610849
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4766,9 +4766,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 437897473126573471}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c92ac842bd80264eb24a50ddfc9727b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PSTime: 10
+  Target: {fileID: 0}
+  Adjustment: {x: 0, y: 0, z: 0}
+  IncludeChildren: 1
+  timet: 0
+  iter: 0
 --- !u!1 &2349048654769541145
 GameObject:
   m_ObjectHideFlags: 0

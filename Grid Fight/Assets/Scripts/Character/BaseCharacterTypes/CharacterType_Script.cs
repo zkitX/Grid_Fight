@@ -504,10 +504,11 @@ public class CharacterType_Script : BaseCharacter
     }
 
 
-
+    int iter = 0;
     //Create and set up the basic info for the bullet
     public override void CreateBullet(BulletBehaviourInfoClass bulletBehaviourInfo)
     {
+        iter++;
         // Debug.Log(isSpecialLoading);
         GameObject bullet = BulletManagerScript.Instance.GetBullet();
         bullet.transform.position = SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position;
@@ -529,6 +530,9 @@ public class CharacterType_Script : BaseCharacter
             return;
         }
 
+
+        bs.iter = iter;
+
         if (UMS.Facing == FacingType.Right)
         {
             bs.DestinationTile = new Vector2Int(UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x, UMS.CurrentTilePos.y + bulletBehaviourInfo.BulletDistanceInTile.y > 11 ? 11 : UMS.CurrentTilePos.y + bulletBehaviourInfo.BulletDistanceInTile.y);
@@ -537,8 +541,7 @@ public class CharacterType_Script : BaseCharacter
         {
             bs.DestinationTile = new Vector2Int(UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x, UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y < 0 ? 0 : UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y);
         }
-        bs.PS = ParticleManagerScript.Instance.FireParticlesInTransform(UMS.Side == SideType.LeftSide ? nextAttack.Particles.Left.Bullet : nextAttack.Particles.Right.Bullet, CharInfo.CharacterID, AttackParticlePhaseTypes.Bullet, bullet.transform, UMS.Side,
-            nextAttack.AttackInput, CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script ? true : false);
+      
 
 
         if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)

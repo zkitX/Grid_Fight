@@ -423,10 +423,10 @@ public Vector2 Duration_Debuff_Trap_ForTime;
         BattleTileState = BattleTileStateType.Blocked;
         ps.transform.position = transform.position;
         ps.SetActive(true);
-        PSTimeGroup pstg = ps.GetComponent<PSTimeGroup>();
+        ParticleHelperScript pstg = ps.GetComponent<ParticleHelperScript>();
         if (pstg != null)
         {
-            pstg.UpdatePSTime(duration);
+            pstg.UpdatePSTime(duration, 0);
         }
         while (timer < duration)
         {

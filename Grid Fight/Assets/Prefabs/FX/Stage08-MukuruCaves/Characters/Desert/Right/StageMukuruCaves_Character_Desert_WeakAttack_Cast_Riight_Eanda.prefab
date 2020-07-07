@@ -5129,7 +5129,7 @@ GameObject:
   - component: {fileID: 1644139446018381397}
   - component: {fileID: 1644139446018381390}
   - component: {fileID: 1644139446018381385}
-  - component: {fileID: 1644139446018381384}
+  - component: {fileID: 160721872887256277}
   m_Layer: 0
   m_Name: StageMukuruCaves_Character_Desert_WeakAttack_Cast_Riight_Eanda
   m_TagString: Untagged
@@ -5166,7 +5166,7 @@ ParticleSystem:
   serializedVersion: 6
   lengthInSec: 3
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 1
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -9877,7 +9877,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &1644139446018381384
+--- !u!114 &160721872887256277
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9886,9 +9886,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1644139446018381396}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c92ac842bd80264eb24a50ddfc9727b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PSTime: 10
+  Target: {fileID: 0}
+  Adjustment: {x: 0, y: 0, z: 0}
+  IncludeChildren: 1
+  timet: 0
+  iter: 0
 --- !u!1 &3749749628554483235
 GameObject:
   m_ObjectHideFlags: 0

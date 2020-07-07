@@ -60,17 +60,17 @@ public class ParticleManagerScript : MonoBehaviour
     {
         if(speed == 1)
         {
-            psG.GetComponent<DisableParticleScript>().SetSimulationSpeedToBase();
+            psG.GetComponent<ParticleHelperScript>().SetSimulationSpeedToBase();
 
         }
         else
         {
-            psG.GetComponent<DisableParticleScript>().SetSimulationSpeed(speed);
+            psG.GetComponent<ParticleHelperScript>().SetSimulationSpeed(speed);
 
         }
     }
 
-    public GameObject FireParticlesInTransform(GameObject ps, CharacterNameType characterId, AttackParticlePhaseTypes particleType, Transform parent, SideType side, AttackInputType attackInput, bool particlesVisible)
+    public GameObject FireParticlesInTransform(GameObject ps, CharacterNameType characterId, AttackParticlePhaseTypes particleType, Transform parent, SideType side, AttackInputType attackInput, float timer, int iter)
     {
         //pType = AttackParticleTypes.Test_Mesh;
         using (FiredAttackParticle psToFire = AttackParticlesFired.Where(r => r.ParticleType == particleType && r.CharaterId == characterId 
@@ -78,18 +78,20 @@ public class ParticleManagerScript : MonoBehaviour
         {
             if (psToFire != null)
             {
+                psToFire.PS.SetActive(true);
                 psToFire.PS.transform.parent = parent;
                 psToFire.PS.transform.localPosition = Vector3.zero;
-                psToFire.PS.SetActive(particlesVisible);//particlesVisible
+                psToFire.PS.GetComponent<ParticleHelperScript>().UpdatePSTime(timer, iter);
                 ChangePsSpeed(psToFire.PS, BattleManagerScript.Instance.BattleSpeed);
                 return psToFire.PS;
             }
             else
             {
                 GameObject res = Instantiate(ps, parent.position, parent.rotation, parent);
+                res.SetActive(true);
                 res.transform.localPosition = Vector3.zero;
-                res.SetActive(particlesVisible);//particlesVisible
                 AttackParticlesFired.Add(new FiredAttackParticle(res, characterId, particleType, side, attackInput));
+                res.GetComponent<ParticleHelperScript>().UpdatePSTime(timer, iter);
                 ChangePsSpeed(res, BattleManagerScript.Instance.BattleSpeed);
                 return res;
             }
