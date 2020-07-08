@@ -300,6 +300,7 @@ public class MaskLoadInformation
 {
     public string Name = "";
     public Sprite maskImage;
+    public ScriptableObjectSkillMask maskSkills;
     public MaskTypes maskType = MaskTypes.Stage1;
     public bool collected = false;
     public float xp = 0f;

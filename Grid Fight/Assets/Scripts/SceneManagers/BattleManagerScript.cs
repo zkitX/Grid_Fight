@@ -440,6 +440,13 @@ public class BattleManagerScript : MonoBehaviour
             EventManager.Instance.UpdateStamina(currentCharacter);
         }
         currentCharacter.CharInfo.CharacterSelection = charInfo.CharacterSelection;
+
+        CharacterLoadInformation squadLoadInfo = SceneLoadManager.Instance.squad.Values.Where(r => r.characterID == currentCharacter.CharInfo.CharacterID).FirstOrDefault();
+        if(squadLoadInfo != null)
+        {
+             currentCharacter.CharInfo.Mask = squadLoadInfo.heldMask != MaskTypes.None ? SceneLoadManager.Instance.loadedMasks.Where(r => r.maskType == squadLoadInfo.heldMask).First().maskSkills : null;
+        }
+
         currentCharacter.CurrentCharIsDeadEvent += CurrentCharacter_CurrentCharIsDeadEvent;
         currentCharacter.CharBoxCollider = currentCharacter.GetComponentInChildren<BoxCollider>(true);
         if (currentCharacter.CharBoxCollider != null) currentCharacter.CharBoxCollider.enabled = false;
