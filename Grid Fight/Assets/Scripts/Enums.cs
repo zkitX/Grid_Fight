@@ -954,3 +954,15 @@ public enum ComboType
     Defence,
     Kill,
 }
+
+public enum StageType
+{
+    Story = 0,
+    Pvp = 1,
+}
+public enum StageUnlockType
+{
+    locked,
+    unlocking,
+    unlocked,
+};

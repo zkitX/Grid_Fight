@@ -6,12 +6,20 @@ using TMPro;
 
 public class Grid_UIBriefing : MonoBehaviour
 {
+    public StageProfile curStage = null;
+    public static Grid_UIBriefing Instance;
     public TextMeshProUGUI title;
     public TextMeshProUGUI description;
     public Image[] squadImages;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     public void SetupBriefing(StageProfile stageInfo)
     {
+        curStage = stageInfo;
         title.text = stageInfo.Name;
         description.text = stageInfo.Description;
         SceneLoadManager.Instance.stagePrimedToLoad = stageInfo;

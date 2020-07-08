@@ -10,6 +10,7 @@ public class StageProfile : ScriptableObject
 {
     [SerializeField] public string Name;
     [SerializeField] public string ID = "S0_XMPL";
+    [SerializeField] public StageType type;
     [TextArea(15, 20)] [SerializeField] public string Description;
     [SerializeField] public RewardsRating bestAccuracyRating = new RewardsRating();
     [SerializeField] public RewardsRating bestReflexRating = new RewardsRating();
