@@ -226,28 +226,25 @@ public class BattleTileTargetsScript : MonoBehaviour
             }
         }
 
-        if (attacker.CharInfo.Health > 0)
+        if (effectOn)
         {
-            if (effectOn)
+            GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.Right.Hit, attacker.CharInfo.CharacterID, AttackParticlePhaseTypes.Hit, transform.position, attacker.UMS.Side, nextAttack.AttackInput);
+            foreach (VFXOffsetToTargetVOL item in effect.GetComponentsInChildren<VFXOffsetToTargetVOL>())
             {
-                GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.Right.Hit, attacker.CharInfo.CharacterID, AttackParticlePhaseTypes.Hit, transform.position, attacker.UMS.Side, nextAttack.AttackInput);
-                foreach (VFXOffsetToTargetVOL item in effect.GetComponentsInChildren<VFXOffsetToTargetVOL>())
+                if (target != null)
                 {
-                    if (target != null)
-                    {
-                        item.gameObject.SetActive(true);
-                        item.Target = attacker.transform;
-                    }
-                    else
-                    {
-                        item.gameObject.SetActive(false);
-                    }
+                    item.gameObject.SetActive(true);
+                    item.Target = attacker.transform;
+                }
+                else
+                {
+                    item.gameObject.SetActive(false);
                 }
             }
-            if (attacker.GetAttackAudio() != null)
-            {
-                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attacker.GetAttackAudio().Impact, AudioBus.MidPrio, transform);
-            }
+        }
+        if (attacker.GetAttackAudio() != null)
+        {
+            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attacker.GetAttackAudio().Impact, AudioBus.MidPrio, transform);
         }
     }
 
