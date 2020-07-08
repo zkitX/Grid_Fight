@@ -147,7 +147,7 @@ public class WaveManagerScript : MonoBehaviour
 
         ((MinionType_Script)res).UpDownMovementPerc = character.UpDownPerc;
         res.CharActionlist.Add(CharacterActionType.Move);
-
+        //res.CharInfo.CurrentAttackTypeInfo.Clear();
         return res;
     }
 

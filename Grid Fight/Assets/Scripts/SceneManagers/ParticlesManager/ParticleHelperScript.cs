@@ -5,7 +5,8 @@ using UnityEngine;
 public class ParticleHelperScript : MonoBehaviour
 {
     private List<ParticleChildSimulationSpeed> Children = new List<ParticleChildSimulationSpeed>();
-    [Tooltip("Set this to override the time of the particles")]
+    [Tooltip("Insert particles that consist in only one long particle")]
+    public List<ParticleSystem> LongParticles = new List<ParticleSystem>();
     public float PSTime = 10f;
     public Transform Target;
     public Vector3 Adjustment;
@@ -137,6 +138,15 @@ public class ParticleHelperScript : MonoBehaviour
             m.duration = PSTime / m.simulationSpeed;
             //check if the particle is finished
             PS.Play();
+        }
+        foreach (ParticleSystem p in LongParticles)
+        {
+            p.Pause();
+            //p.gameObject.SetActive(false);
+            var m = p.main;
+            m.startLifetime = m.duration;
+            // p.gameObject.SetActive(true);
+            p.Play();
         }
     }
 

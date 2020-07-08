@@ -14,6 +14,8 @@ public class PSTimeGroup : MonoBehaviour
     List<TrailRenderer> Trails = new List<TrailRenderer>();
     [Tooltip("Cache of trail initial information")]
     List<float> TrailInitialTime = new List<float>();
+    [Tooltip("Insert particles that consist in only one long particle")]
+    public List<ParticleSystem> LongParticles = new List<ParticleSystem>();
     bool initialized = false;
 
     private void Start()
@@ -60,6 +62,15 @@ public class PSTimeGroup : MonoBehaviour
             //check if the particle is finished
             PS.Play();
             DisableTrail = (PS.time>=m.duration);
+        }
+        foreach (ParticleSystem p in LongParticles)
+        {
+            p.Pause();
+            //p.gameObject.SetActive(false);
+            var m = p.main;
+            m.startLifetime = m.duration;
+            // p.gameObject.SetActive(true);
+            p.Play();
         }
     }
 
