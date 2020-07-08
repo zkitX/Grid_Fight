@@ -398,6 +398,7 @@ public class WaveManagerScript : MonoBehaviour
             {
                 item.CharInfo.Health = -50;
             }
+            leadCharDie = true;
         }
     }
 
