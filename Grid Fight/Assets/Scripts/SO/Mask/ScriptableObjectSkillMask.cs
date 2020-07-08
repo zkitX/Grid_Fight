@@ -11,7 +11,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/SkillMask")]
 public class ScriptableObjectSkillMask : ScriptableObject
 {
-    public Sprite MaskIcon;
     public ScriptableObjectAttackBase Skill1;
     public ScriptableObjectAttackBase Skill2;
     public ScriptableObjectAttackBase Skill3;

@@ -19,6 +19,7 @@ public class SceneLoadManager : MonoBehaviour
 
     public CharacterLoadInformation[] loadedCharacters = new CharacterLoadInformation[0];
     public MaskLoadInformation[] loadedMasks = new MaskLoadInformation[1];
+    public StageLoadInformation[] loadedStages = new StageLoadInformation[0];
 
     [HideInInspector] public Dictionary<int, CharacterLoadInformation> squad = new Dictionary<int, CharacterLoadInformation>()
     {
@@ -64,7 +65,7 @@ public class SceneLoadManager : MonoBehaviour
                 for (int j = i + 1; j < squad.Count; j++)
                 {
                     int k = i - j;
-                    if(squad[j].characterID != CharacterNameType.None)
+                    if (squad[j].characterID != CharacterNameType.None)
                     {
                         squad[i] = squad[j];
                         squad[j] = new CharacterLoadInformation();
@@ -83,7 +84,7 @@ public class SceneLoadManager : MonoBehaviour
     private void Awake()
     {
         if (Instance != null)
-        { 
+        {
             Destroy(gameObject);
             return;
         }
@@ -151,7 +152,7 @@ public class SceneLoadManager : MonoBehaviour
         {
             foreach (string scene in scenesToLoad) asyncs.Add(SceneManager.LoadSceneAsync(scene));
         }
-        if(scenesToDeload.Length != 0)
+        if (scenesToDeload.Length != 0)
         {
             foreach (string scene in scenesToDeload) asyncs.Add(SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName(scene)));
         }
@@ -204,7 +205,7 @@ public class SceneLoadManager : MonoBehaviour
         float endOpacity = state ? 1f : 0f;
         loadingTime = loadingTime <= 0 ? 0.0001f : loadingTime;
         float timeLeft = loadingTime;
-        while(timeLeft != 0f)
+        while (timeLeft != 0f)
         {
             timeLeft = Mathf.Clamp(timeLeft - Time.deltaTime, 0f, 999f);
             canv.alpha = Mathf.Lerp(canv.alpha, endOpacity, 1f - (timeLeft / loadingTime));
@@ -221,10 +222,16 @@ public class SceneLoadManager : MonoBehaviour
     }
     private void OnValidate()
     {
-        foreach(CharacterLoadInformation loadInfo in loadedCharacters)
+        foreach (CharacterLoadInformation loadInfo in loadedCharacters)
         {
             loadInfo.Name = loadInfo.displayName;
         }
+        foreach (StageLoadInformation loadInfo in loadedStages)
+        {
+            loadInfo.Name = loadInfo.stageProfile != null ? loadInfo.stageProfile.type.ToString() + " Stage: " + loadInfo.stageProfile.Name + (loadInfo.lockState == StageUnlockType.unlocked ? "" : "   -   [" + loadInfo.lockState.ToString().ToUpper() + "]") : "No stage profile!";
+        }
+
+        loadedStages = loadedStages.Where(r => r.stageProfile != null && r.stageProfile.type == StageType.Pvp).ToArray().Concat(loadedStages.Where(r => r.stageProfile == null || r.stageProfile.type != StageType.Pvp).ToArray()).ToArray();
     }
 }
 
@@ -293,6 +300,7 @@ public class MaskLoadInformation
 {
     public string Name = "";
     public Sprite maskImage;
+    public ScriptableObjectSkillMask maskSkills;
     public MaskTypes maskType = MaskTypes.Stage1;
     public bool collected = false;
     public float xp = 0f;
@@ -331,4 +339,12 @@ public class Conversation
         Name = "Generic Conversation";
         lines = new string[0];
     }
+}
+
+[System.Serializable]
+public class StageLoadInformation
+{
+    [HideInInspector] public string Name;
+    public StageProfile stageProfile;
+    public StageUnlockType lockState = StageUnlockType.locked;
 }

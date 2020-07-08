@@ -254,6 +254,7 @@ public class Grid_UIActions
 
     [ConditionalField("actionType", compareValues: UI_ActionTypes.SetWorldMapFocus)] public WorldMenuExtras worldMenuRef = null;
     [ConditionalField("actionType", compareValues: UI_ActionTypes.SetWorldMapFocus)] public float focusMapTiming = 1f;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetWorldMapFocus)] public bool focusOnCurrentBriefingStage = false;
     [ConditionalField("actionType", compareValues: UI_ActionTypes.SetWorldMapFocus)] public Transform thingToFocusMapOn = null;
     [ConditionalField("actionType", compareValues: UI_ActionTypes.SetWorldMapFocus)] public float focusMapZoom = 1f;
     [ConditionalField("actionType", compareValues: UI_ActionTypes.SetWorldMapFocus)] public bool focusMapOnScreenCentre = true;
@@ -262,6 +263,7 @@ public class Grid_UIActions
     IEnumerator SetWorldMapFocus()
     {
         if (worldMenuRef == null) yield break;
+        if (focusOnCurrentBriefingStage) thingToFocusMapOn = WorldStageSelect.Instance.GetCurrentFocusStage() != null ? WorldStageSelect.Instance.GetCurrentFocusStage() : thingToFocusMapOn ;
         if (pauseTillEndOfFocus) yield return worldMenuRef.FocusLerp((focusMapOnScreenCentre ? new Vector2(0.5f, 0.5f) : screenPositionOffset), focusMapTiming, thingToFocusMapOn, focusMapZoom);
         else worldMenuRef.SetFocusToObject((focusMapOnScreenCentre ? new Vector2(0.5f, 0.5f) : screenPositionOffset), focusMapTiming, thingToFocusMapOn, focusMapZoom);
         yield return null;
