@@ -16,7 +16,8 @@ public class ScriptableObjectAI : ScriptableObject
 
     public VisionType Vision;
    // public AggroType Aggro;
-    public PartyHPType PartyHp;
+    //public PartyHPType PartyHp;
+    public List<AICheckClass> Checks = new List<AICheckClass>();
 
     [Header("State effects")]
     public bool UpdateAttckWill = false;
@@ -82,7 +83,7 @@ public class ScriptableObjectAI : ScriptableObject
             case VisionType.Front_Near:
                 if (t.UMS.CurrentTilePos.x == currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) < 3)
                 {
-                    Score += 20;
+                    Score += 100;
                 }
                 else
                 {
@@ -92,7 +93,7 @@ public class ScriptableObjectAI : ScriptableObject
             case VisionType.Front_Far:
                 if (t.UMS.CurrentTilePos.x == currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) > 3)
                 {
-                    Score += 20;
+                    Score += 100;
                 }
                 else
                 {
@@ -102,7 +103,7 @@ public class ScriptableObjectAI : ScriptableObject
             case VisionType.UpDown_Near:
                 if (t.UMS.CurrentTilePos.x != currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) < 3)
                 {
-                    Score += 20;
+                    Score += 100;
                 }
                 else
                 {
@@ -112,7 +113,7 @@ public class ScriptableObjectAI : ScriptableObject
             case VisionType.UpDown_Far:
                 if (t.UMS.CurrentTilePos.x != currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) > 3)
                 {
-                    Score += 20;
+                    Score += 100;
                 }
                 else
                 {
@@ -122,7 +123,48 @@ public class ScriptableObjectAI : ScriptableObject
         }
 
 
-        float partyHp = WaveManagerScript.Instance.GetCurrentPartyHPPerc();
+        int i = 0;
+        foreach (AICheckClass item in Checks)
+        {
+            switch (item.StatToCheck)
+            {
+                case StatsCheckType.None:
+                    break;
+                case StatsCheckType.Health:
+                    if (CheckStatsValues(item.ValueChecker, charInfo.HealthPerc, item.PercToCheck))
+                    {
+                        Score += 100;
+                        i++;
+                    }
+                    break;
+                case StatsCheckType.Stamina:
+                    if (CheckStatsValues(item.ValueChecker, charInfo.StaminaPerc, item.PercToCheck))
+                    {
+                        Score += 100;
+                        i++;
+                    }
+                    break;
+                case StatsCheckType.AttackSpeed:
+                    break;
+                case StatsCheckType.MovementSpeed:
+                    break;
+                case StatsCheckType.BaseSpeed:
+                    break;
+                case StatsCheckType.TeamTotalHpPerc:
+                    if (CheckStatsValues(item.ValueChecker, WaveManagerScript.Instance.GetCurrentPartyHPPerc(), item.PercToCheck))
+                    {
+                        Score += 100;
+                        i++;
+                    }
+                    break;
+            }
+        }
+        if(i == Checks.Count)
+        {
+            Score += 300;
+        }
+
+       /* float partyHp = WaveManagerScript.Instance.GetCurrentPartyHPPerc();
         switch (PartyHp)
         {
             case PartyHPType.Over_5:
@@ -165,7 +207,7 @@ public class ScriptableObjectAI : ScriptableObject
                     Score -= 20;
                 }
                 break;
-        }
+        }*/
        if (t != null)
        {
            if (t.UMS.CurrentTilePos.x == currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) < 3)
@@ -184,7 +226,7 @@ public class ScriptableObjectAI : ScriptableObject
                Score += 0;
            }
 
-           if (partyHp >= 90)
+       /*    if (partyHp >= 90)
            {
                Score += 0;
            }
@@ -199,11 +241,39 @@ public class ScriptableObjectAI : ScriptableObject
            else if (partyHp >= 5)
            {
                Score += 20;
-           }
+           }*/
        }
         return Score;
     }
 
+
+
+    private bool CheckStatsValues(ValueCheckerType valueChecker, float current, float perc)
+    {
+        switch (valueChecker)
+        {
+            case ValueCheckerType.LessThan:
+                if(current < perc)
+                {
+                    return true;
+                }
+                break;
+            case ValueCheckerType.EqualTo:
+                if (current == perc)
+                {
+                    return true;
+                }
+                break;
+            case ValueCheckerType.MoreThan:
+                if (current > perc)
+                {
+                    return true;
+                }
+                break;
+            }
+
+        return false;
+    }
 
     public void ModifyStats(CharacterInfoScript charinfo)
     {
