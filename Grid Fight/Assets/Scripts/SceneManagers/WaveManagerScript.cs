@@ -145,7 +145,6 @@ public class WaveManagerScript : MonoBehaviour
         res.CharInfo.B_MovementTimer = res.CharInfo.MovementTimer;
         res.CharInfo.ExperienceValue = character.Exp;
 
-        ((MinionType_Script)res).UpDownMovementPerc = character.UpDownPerc;
         res.CharActionlist.Add(CharacterActionType.Move);
 
         return res;
@@ -461,8 +460,6 @@ public class WaveCharacterInfoClass
     public Vector2 MovementSpeed;
     public Vector2 MovementTimer;
     public float Exp;
-    public float UpDownPerc = 18;
-
 
     public List<ScriptableObjectWaveEvent> Events = new List<ScriptableObjectWaveEvent>();
 

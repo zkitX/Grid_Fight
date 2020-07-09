@@ -8,9 +8,10 @@ public class MinionType_Script : BaseCharacter
     protected bool MoveCoOn = true;
     protected IEnumerator MoveActionCo;
     protected float LastAttackTime;
-    public float UpDownMovementPerc = 13;
-    public float ForwardMovementPerc = 13;
-    public float BackwardMovementPerc = 13;
+    public int AttackWillPerc = 13;
+    public int UpDownMovementPerc = 13;
+    public int TowardMovementPerc = 13;
+    public int AwayMovementPerc = 13;
     List<HitInfoClass> HittedByList = new List<HitInfoClass>();
     List<AggroInfoClass> AggroInfoList = new List<AggroInfoClass>();
     float totDamage = 0;
@@ -163,7 +164,7 @@ public class MinionType_Script : BaseCharacter
         }
     }
 
-
+    GameObject psAI = null;
     public virtual IEnumerator AI()
     {
         bool val = true;
@@ -178,68 +179,92 @@ public class MinionType_Script : BaseCharacter
                     yield return null;
                 }
                 ScriptableObjectAI prev = CurrentAIState;
-                CurrentAIState = CharInfo.GetCurrentAI();
-                if(prev.AI_Type != CurrentAIState.AI_Type)
+                CurrentAIState = CharInfo.GetCurrentAI(AggroInfoList, UMS.CurrentTilePos);
+                if(prev == null || prev.AI_Type != CurrentAIState.AI_Type)
                 {
                     SetCurrentAIValues();
                     CurrentAIState.ModifyStats(CharInfo);
+                    if(psAI != null)
+                    {
+                        psAI.SetActive(false);
+                    }
+                    psAI = ParticleManagerScript.Instance.GetParticle(CurrentAIState.AIPs.PSType);
+                    psAI.transform.parent = SpineAnim.transform;
+                    psAI.transform.localPosition = Vector3.zero;
+                    psAI.SetActive(true);
                 }
 
-                List<BaseCharacter> enemys = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList();
-                if (enemys.Count > 0)
+                int atkChances = Random.Range(0 ,100);
+                if (CurrentAIState.t != null && (nextAttack == null || (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler)) && atkChances < AttackWillPerc && CurrentAIState.t.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x)
                 {
-                    BaseCharacter targetChar = enemys.Where(r => r.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x).FirstOrDefault();
-                    /*BaseCharacter targetChar = null;
-                    List<BaseCharacter> possibleTargets = enemys.Where(r => Mathf.Abs(r.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x) <= 1).ToList();
-                    if (possibleTargets.Count > 0)
-                    {
-                        targetChar = possibleTargets[Random.Range(0, possibleTargets.Count)];
-                    }*/
-                    if (targetChar != null && (nextAttack == null || (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler)))
-                    {
-                        lastAttackTime = Time.time;
-                        nextAttackPos = targetChar.UMS.CurrentTilePos;
-                        yield return AttackSequence();
-                    }
-                    else
-                    {
-                        int randomizer = Random.Range(0, 100);
-                        if (ForwardMovementPerc > randomizer)
-                        {
-                            BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(UMS.CurrentTilePos.x, UMS.Side == SideType.RightSide ? UMS.CurrentTilePos.y - 1 : UMS.CurrentTilePos.y + 1));
-                            if (bts.BattleTileState == BattleTileStateType.Empty)
-                            {
-                                yield return MoveCharOnDir_Co(UMS.Side == SideType.RightSide ? InputDirection.Left : InputDirection.Right);
-                            }
-                            else if (bts.BattleTileState == BattleTileStateType.Occupied && UMS.WalkingSide == bts.WalkingSide)
-                            {
-                                int updown = Random.Range(0, 100);
-                                InputDirection dir = updown < 50 ? InputDirection.Up : InputDirection.Down;
-                                bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(updown < 50 ? UMS.CurrentTilePos.x - 1 : UMS.CurrentTilePos.x + 1, UMS.CurrentTilePos.y));
-                                if (bts != null && bts.BattleTileState != BattleTileStateType.Empty)
-                                {
-                                    bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(updown < 50 ? UMS.CurrentTilePos.x + 1 : UMS.CurrentTilePos.x - 1, UMS.CurrentTilePos.y));
-                                    dir = updown < 50 ? InputDirection.Down : InputDirection.Up;
-                                }
-                                if (bts == null || bts.BattleTileState != BattleTileStateType.Empty)
-                                {
+                    lastAttackTime = Time.time;
+                    nextAttackPos = CurrentAIState.t.UMS.CurrentTilePos;
+                    yield return AttackSequence();
+                }
+                else
+                {
+                    BattleTileScript bts;
+                    int randomizer = Random.Range(0, 100);
 
-                                }
-                                else
+                    if (TowardMovementPerc > randomizer)
+                    {
+                        if (CurrentAIState.t.UMS.CurrentTilePos.x != UMS.CurrentTilePos.x)
+                        {
+                            InputDirection dir = CurrentAIState.t.UMS.CurrentTilePos.x < UMS.CurrentTilePos.x ? InputDirection.Up : InputDirection.Down;
+                            bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(dir == InputDirection.Up ? UMS.CurrentTilePos.x - 1 : UMS.CurrentTilePos.x + 1, UMS.CurrentTilePos.y));
+                            if (bts != null && bts.BattleTileState != BattleTileStateType.Empty)
+                            {
+                                bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(UMS.CurrentTilePos.x, UMS.Side == SideType.RightSide ? UMS.CurrentTilePos.y - 1 : UMS.CurrentTilePos.y + 1));
+                                if (bts.BattleTileState == BattleTileStateType.Empty)
                                 {
-                                    yield return MoveCharOnDir_Co(dir);
+                                    yield return MoveCharOnDir_Co(UMS.Side == SideType.RightSide ? InputDirection.Left : InputDirection.Right);
                                 }
+                            }
+                            else
+                            {
+                                yield return MoveCharOnDir_Co(dir);
                             }
                         }
                         else
                         {
-
+                            bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(UMS.CurrentTilePos.x, UMS.Side == SideType.RightSide ? UMS.CurrentTilePos.y - 1 : UMS.CurrentTilePos.y + 1));
+                            if (bts.BattleTileState == BattleTileStateType.Empty)
+                            {
+                                yield return MoveCharOnDir_Co(UMS.Side == SideType.RightSide ? InputDirection.Left : InputDirection.Right);
+                            }
                         }
-
-
+                    }
+                    else if (AwayMovementPerc > randomizer - TowardMovementPerc)
+                    {
+                        if (CurrentAIState.t.UMS.CurrentTilePos.x != UMS.CurrentTilePos.x)
+                        {
+                            bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(UMS.CurrentTilePos.x, UMS.Side == SideType.RightSide ? UMS.CurrentTilePos.y - 1 : UMS.CurrentTilePos.y + 1));
+                            if (bts.BattleTileState == BattleTileStateType.Empty)
+                            {
+                                yield return MoveCharOnDir_Co(UMS.Side == SideType.LeftSide ? InputDirection.Left : InputDirection.Right);
+                            }
+                        }
+                        else
+                        {
+                            int updown = Random.Range(0, 100);
+                            InputDirection dir = updown < 50 ? InputDirection.Up : InputDirection.Down;
+                            bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(dir == InputDirection.Up ? UMS.CurrentTilePos.x - 1 : UMS.CurrentTilePos.x + 1, UMS.CurrentTilePos.y));
+                            if (bts != null && bts.BattleTileState != BattleTileStateType.Empty)
+                            {
+                                bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(UMS.CurrentTilePos.x, UMS.Side == SideType.RightSide ? UMS.CurrentTilePos.y - 1 : UMS.CurrentTilePos.y + 1));
+                                if (bts.BattleTileState == BattleTileStateType.Empty)
+                                {
+                                    yield return MoveCharOnDir_Co(UMS.Side == SideType.LeftSide ? InputDirection.Left : InputDirection.Right);
+                                }
+                            }
+                            else
+                            {
+                                yield return MoveCharOnDir_Co(dir);
+                            }
+                        }
                     }
                 }
-                yield return null;
+            yield return null;
             }
         }
     }
@@ -251,13 +276,17 @@ public class MinionType_Script : BaseCharacter
 
     protected void SetCurrentAIValues()
     {
-        if(CurrentAIState.UpdateMoveForward)
+        if (CurrentAIState.UpdateAttckWill)
         {
-            ForwardMovementPerc = CurrentAIState.MoveForward;
+            AttackWillPerc = CurrentAIState.AttackWill;
+        }
+        if (CurrentAIState.UpdateMoveForward)
+        {
+            TowardMovementPerc = CurrentAIState.MoveForward;
         }
         if (CurrentAIState.UpdateMoveBackward)
         {
-            BackwardMovementPerc = CurrentAIState.MoveBackward;
+            AwayMovementPerc = CurrentAIState.MoveBackward;
         }
         if (CurrentAIState.UpdateMoveUpDown)
         {

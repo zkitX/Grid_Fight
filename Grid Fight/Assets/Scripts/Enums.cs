@@ -374,10 +374,10 @@ public enum VisionType
 
 public enum AggroType
 {
-    Hit_0 = 0,
-    Hit_3 = 3,
-    Hit_5 = 5,
-    Hit_10 = 10
+    Hit_Less0 = 0,
+    Hit_1To2 = 3,
+    Hit_3To4 = 5,
+    Hit_More5 = 10
 
 }
 

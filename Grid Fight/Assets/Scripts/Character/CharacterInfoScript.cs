@@ -382,17 +382,32 @@ public class CharacterInfoScript : MonoBehaviour
         DefenceStats.B_MinionPerfectDefenceChances = DefenceStats.MinionPerfectDefenceChances;
     }
 
-
-    public ScriptableObjectAI GetCurrentAI()
+    public ScriptableObjectAI GetCurrentAI(List<AggroInfoClass> enemies, Vector2Int currentPos)
     {
         List<ScriptableObjectAI> res = new List<ScriptableObjectAI>();
+        List<AIInfoCLass> aisInfo = new List<AIInfoCLass>();
+
+        int charTargeting = 0;
         foreach (ScriptableObjectAI item in AIs)
         {
-         /*   if(item.CheckAvailability(this))
-            {
-                res.Add(item);
-            }*/
+            aisInfo.Add(new AIInfoCLass(item, item.CheckAvailability(this, enemies, currentPos)));
+            charTargeting += Mathf.Abs(aisInfo.Last().Score);
         }
+
+        foreach (AIInfoCLass item in aisInfo)
+        {
+            int resI = Random.Range(0, charTargeting);
+
+            if (resI <= Mathf.Abs(item.Score))
+            {
+                return item.AI;
+            }
+            else
+            {
+                charTargeting -= Mathf.Abs(item.Score);
+            }
+        }
+
 
         return res.First();
     }
@@ -415,5 +430,23 @@ public class LevelsInfoClass
     {
         Level = level;
         ExpNeeded = expNeeded;
+    }
+}
+
+
+public class AIInfoCLass
+{
+    public ScriptableObjectAI AI;
+    public int Score;
+
+    public AIInfoCLass()
+    {
+
+    }
+
+    public AIInfoCLass(ScriptableObjectAI ai, int score)
+    {
+        AI = ai;
+        Score = score;
     }
 }
