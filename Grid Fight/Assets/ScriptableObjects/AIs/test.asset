@@ -14,7 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AI_Type: 20
   Vision: 10
-  PartyHp: 10
+  Checks:
+  - StatToCheck: 1
+    ValueChecker: 0
+    PercToCheck: 40
+  - StatToCheck: 6
+    ValueChecker: 0
+    PercToCheck: 30
   UpdateAttckWill: 1
   AttackWill: 100
   UpdateMoveForward: 1

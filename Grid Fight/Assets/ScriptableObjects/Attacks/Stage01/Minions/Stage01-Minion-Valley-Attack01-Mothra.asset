@@ -20,7 +20,9 @@ MonoBehaviour:
   AttackAnim: 0
   StaminaCost: 10
   ExperiencePoints: 10
+  CoolDown: 0
   PrefixAnim: 0
+  Fov: 0
   Particles:
     Left:
       Cast: {fileID: 8663874836865528596, guid: ae2ddffb2be687f478c5b7e7036b8b3b,
@@ -167,3 +169,11 @@ MonoBehaviour:
     ValueChecker: 2
     PercToCheck: 75
     Chances: 100
+  TotemAtk:
+    AtkType: 3
+    IsPlayerSide: 0
+    DurationOnField: 10
+    Effects: []
+    TotemIn: 0
+    TotemOut: 0
+    TentaclePrefab: 0
