@@ -183,7 +183,11 @@ public class MinionType_Script : BaseCharacter
                 if(prev == null || prev.AI_Type != CurrentAIState.AI_Type)
                 {
                     SetCurrentAIValues();
-                    prev.ResetStats(CharInfo);
+                    if(prev != null)
+                    {
+                        prev.ResetStats(CharInfo);
+
+                    }
                     CurrentAIState.ModifyStats(CharInfo);
                     if(psAI != null)
                     {
