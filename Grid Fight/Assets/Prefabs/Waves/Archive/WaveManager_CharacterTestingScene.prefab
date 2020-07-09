@@ -53,15 +53,95 @@ MonoBehaviour:
   - name: Wave1
     IsRandom: 0
     MaxEnemyOnScreen: 1
+    AbsoluteMaxEnemyOnScreen: 0
     DelayBetweenChars: 0
     ListOfEnemy:
     - name: Bush
       NPCType: 1
       NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 1043
-        Health: {x: 10000, y: 1}
-        HealthRegeneration: {x: 0.2, y: 0.2}
+        CharacterName: 1024
+        KillWaveIfCharDie: 0
+        Health: {x: 10000000, y: 10000000}
+        HealthRegeneration: {x: 100000, y: 100000}
+        BaseDamage: {x: 1, y: 1}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 1, y: 1}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 1, y: 2}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        Exp: 0
+        UpDownPerc: 18
+        Events: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 0
+      SpowningTile:
+      - {x: 2, y: 8}
+    - name: Bush
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1025
+        KillWaveIfCharDie: 0
+        Health: {x: 10000000, y: 10000000}
+        HealthRegeneration: {x: 100000, y: 100000}
+        BaseDamage: {x: 1, y: 1}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 1, y: 1}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 1, y: 2}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        Exp: 0
+        UpDownPerc: 18
+        Events: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 0
+      SpowningTile:
+      - {x: 2, y: 8}
+    - name: Bush
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1026
+        KillWaveIfCharDie: 0
+        Health: {x: 10000000, y: 10000000}
+        HealthRegeneration: {x: 100000, y: 100000}
+        BaseDamage: {x: 1, y: 1}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 1, y: 1}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 1, y: 2}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        Exp: 0
+        UpDownPerc: 18
+        Events: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 0
+      SpowningTile:
+      - {x: 2, y: 8}
+    - name: Bush
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1027
+        KillWaveIfCharDie: 0
+        Health: {x: 10000000, y: 10000000}
+        HealthRegeneration: {x: 100000, y: 100000}
         BaseDamage: {x: 1, y: 1}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 1, y: 1}

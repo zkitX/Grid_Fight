@@ -95,7 +95,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 267907973027261804}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
@@ -105,7 +105,7 @@ MonoBehaviour:
   initialFlipX: 0
   initialFlipY: 0
   separatorSlotNames: []
-  zSpacing: -0.00001
+  zSpacing: 0
   useClipping: 1
   immutableTriangles: 0
   pmaVertexColors: 1
@@ -120,8 +120,8 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  _animationName: Idle
-  loop: 1
+  _animationName: 
+  loop: 0
   timeScale: 1
 --- !u!114 &223799213677165606
 MonoBehaviour:
@@ -472,22 +472,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Flint
-  CharacterIcon: {fileID: 0}
+  CharacterIcon: {fileID: 21300000, guid: c9eb5af2d9b875e4a9751e32071c0948, type: 3}
   Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 18079379e5337084286a38b915064869, type: 2}
   BaseCharacterType: 0
   CharacterID: 1046
   CurrentAttackTypeInfo:
+  - {fileID: 11400000, guid: c46c9549ff404f144a0757b04c624a2e, type: 2}
+  - {fileID: 11400000, guid: 07c717698a3e7594d9027e569e2556d5, type: 2}
   - {fileID: 11400000, guid: dbeb7b871bc6af349b82e34eb27e8dcf, type: 2}
   - {fileID: 11400000, guid: 7db4f615b200f7041be417bb0151fb64, type: 2}
   - {fileID: 11400000, guid: a12b71cd6cb352d43bb2661299584e7e, type: 2}
   - {fileID: 11400000, guid: b16ceb2bc5f55bf4c876b2227484d20b, type: 2}
-  - {fileID: 11400000, guid: 07c717698a3e7594d9027e569e2556d5, type: 2}
-  - {fileID: 11400000, guid: c46c9549ff404f144a0757b04c624a2e, type: 2}
   Elemental: 0
   ClassType: 1
   CharaterLevel: 0
-  UseLayeringSystem: 1
+  UseLayeringSystem: 0
   Head: {fileID: 177649891197016364}
   AIs: []
   CharacterRespawnLength: 180
@@ -539,7 +539,7 @@ MonoBehaviour:
     MovementSpeed: 2.2
     AttackSpeed: 2.5
     AttackSpeedRatio: 2
-    BulletSpeed: 1
+    BulletSpeed: 3
     LeaveSpeed: 3
     BaseSpeed_LevelMultiplier: 0
     MovementSpeed_LevelMultiplier: 0

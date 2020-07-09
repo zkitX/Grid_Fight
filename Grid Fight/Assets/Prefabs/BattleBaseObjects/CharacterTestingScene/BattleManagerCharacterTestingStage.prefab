@@ -89,9 +89,40 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 72a91ef1c90d81b4d9f1d09d0f4fba72, type: 2}
   - {fileID: 11400000, guid: d6e185962b80f1942a4f0f3b7c7166c9, type: 2}
   - {fileID: 11400000, guid: dc73a0ccf40a41746ad0b6ffc5cf1a4d, type: 2}
+  - {fileID: 11400000, guid: 47b6c13c5507b2d49a209eb0808774b6, type: 2}
+  - {fileID: 11400000, guid: 8c78afbfebce73649abd239ab50a556d, type: 2}
+  - {fileID: 11400000, guid: 06c49030de4ad6e459d69d1999a7f76a, type: 2}
+  - {fileID: 11400000, guid: d856785f790962d4bbb4b3d3f05c095f, type: 2}
+  - {fileID: 11400000, guid: 39ba68418d6c1ae41aa8fd3794c6765c, type: 2}
+  - {fileID: 11400000, guid: 9e36c9fd480bf98428c711b13c448ef3, type: 2}
+  - {fileID: 11400000, guid: bb99711d2558cfa4490a6a9fa308b345, type: 2}
+  - {fileID: 11400000, guid: 6974f479bb009d749ac9167024e831bc, type: 2}
+  - {fileID: 11400000, guid: c6b689f90305a3740af58af2151bfdc8, type: 2}
+  - {fileID: 11400000, guid: d0782a19ccca97144bc6ec4c0161b09c, type: 2}
+  - {fileID: 11400000, guid: db682f58e749a884aba09c7624e91792, type: 2}
+  - {fileID: 11400000, guid: ab319464188ef4a4d9c913d431ff49a1, type: 2}
+  - {fileID: 11400000, guid: 2e3c79ecca1c11748a747720ac10d534, type: 2}
+  - {fileID: 11400000, guid: 2c69c0257a46a29498ed5aa717d0511c, type: 2}
+  - {fileID: 11400000, guid: 358ecc93f7ef21647bfe2bf949c30401, type: 2}
+  - {fileID: 11400000, guid: f05362fa89660f940b70d2055c6631ab, type: 2}
+  - {fileID: 11400000, guid: f4f980e24f71c984486e17bb26e7c7fa, type: 2}
+  - {fileID: 11400000, guid: d04cc88446eb0c447b58f3dae4159aa2, type: 2}
+  - {fileID: 11400000, guid: 1af5aa8409e92fc4da95d226c89c545c, type: 2}
+  - {fileID: 11400000, guid: 34fa256374470c84e90609437f601e02, type: 2}
+  - {fileID: 11400000, guid: a68efcf76541af24f9728f38668b35c2, type: 2}
+  - {fileID: 11400000, guid: 7bc08e0a009b4d44ebe39055ef8c65e1, type: 2}
+  - {fileID: 11400000, guid: 7dd27f12740ce47429c95db06a88bd5f, type: 2}
+  - {fileID: 11400000, guid: dc630f67f261bc141a6ecd46ff5f430d, type: 2}
+  - {fileID: 11400000, guid: 4403b6783b4a19f49948995accb51b6a, type: 2}
+  - {fileID: 11400000, guid: 1b1e22f89f0a92d44ae1894c62592906, type: 2}
   - {fileID: 11400000, guid: b4e9a072ab9e1474d8dc7777dcd2ecf2, type: 2}
-  - {fileID: 11400000, guid: b4e9a072ab9e1474d8dc7777dcd2ecf2, type: 2}
-  - {fileID: 11400000, guid: b4e9a072ab9e1474d8dc7777dcd2ecf2, type: 2}
+  - {fileID: 11400000, guid: d9034796be76b2c40869eedaeac5a309, type: 2}
+  - {fileID: 11400000, guid: 802f7f76787e05f4d81e9e140bbe838e, type: 2}
+  - {fileID: 11400000, guid: e8a3aed9a38516e449a052881ed310b9, type: 2}
+  - {fileID: 11400000, guid: 4ffdf2d5efaf6a0459867c3fe0f31296, type: 2}
+  - {fileID: 11400000, guid: c0159b033551a8341b33f0ac57ac2dce, type: 2}
+  - {fileID: 11400000, guid: c848fda8ae3e2bb498a598a14d280708, type: 2}
+  - {fileID: 11400000, guid: e601fe9b1182a5241ba821057d0b8d1e, type: 2}
   AllCharactersOnField: []
   AllPlayersMinionOnField: []
   CharsForTalkingPart: []
@@ -378,7 +409,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1243917464518366654
 Transform:
   m_ObjectHideFlags: 0
@@ -481,6 +512,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 256730208125820099}
     m_Modifications:
+    - target: {fileID: 1072692802108931392, guid: 730c9cdded2811142b3b17f531383548,
+        type: 3}
+      propertyPath: m_Name
+      value: StatisticManager
+      objectReference: {fileID: 0}
     - target: {fileID: 8527285901987777838, guid: 730c9cdded2811142b3b17f531383548,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -535,11 +571,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1072692802108931392, guid: 730c9cdded2811142b3b17f531383548,
-        type: 3}
-      propertyPath: m_Name
-      value: StatisticManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 730c9cdded2811142b3b17f531383548, type: 3}

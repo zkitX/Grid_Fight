@@ -10,31 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage02_Character_Mountain_EnemyAttack1
+  m_Name: Stage02_Character_Mountain_Skill2_Flint
   m_EditorClassIdentifier: 
   Chances: 100
-  CurrentAttackType: 1
+  CurrentAttackType: 0
   AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 1, y: 1}
-  AttackInput: 0
-  AttackAnim: 0
+  AttackInput: 3
+  AttackAnim: 3
   StaminaCost: 10
   ExperiencePoints: 10
   CoolDown: 0
-  PrefixAnim: 0
+  PrefixAnim: 4
   Particles:
     Left:
-      Cast: {fileID: 8678259934600349390, guid: 3d9e311e1e6d5aa458e711b76341487f,
+      Cast: {fileID: 7408961740351038302, guid: 05d6bb768fb74f84f94c8eba7a357fcb,
         type: 3}
-      Bullet: {fileID: 2590544711923149843, guid: 1e6b9b3a392ccc244987f38c7e7f2ecb,
+      Bullet: {fileID: 6224905444285755743, guid: 02c62b911ad86ad448cfac1f6dd2aaae,
         type: 3}
-      Hit: {fileID: 3340275309439334971, guid: 3628750c10e7c05468e684ba981e063d, type: 3}
+      Hit: {fileID: 9951016674067470, guid: ae0d80870c3c364469790910808d67cb, type: 3}
     Right:
-      Cast: {fileID: 8678259934600349390, guid: 3fa07c91702c4814fa5dbab4aa2b56eb,
+      Cast: {fileID: 7408961740351038302, guid: 014a54779b90a8048ab2c59633f7a8a3,
         type: 3}
-      Bullet: {fileID: 2590544711923149843, guid: 7a862cbcb8e8ef443b19cf535f0e12b4,
+      Bullet: {fileID: 6224905444285755743, guid: a490f86140e5e5643a58827b2ba8c847,
         type: 3}
-      Hit: {fileID: 3340275309439334971, guid: 65c3aa31c8312524d8cfd08d17c50b54, type: 3}
+      Hit: {fileID: 9951016674067470, guid: 597a32952e31d974c8060055cd9cf547, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
@@ -100,7 +100,7 @@ MonoBehaviour:
       EffectChances: 100
     CharacterClass: 0
   TilesAtk:
-    AtkType: 1
+    AtkType: 0
     BulletTrajectories:
     - Delay: 2
       BulletTravelDurationPerTile: 0.2
@@ -155,7 +155,16 @@ MonoBehaviour:
         m_RotationOrder: 4
       Show: 1
       BulletEffectTiles:
-      - Pos: {x: 0, y: 0}
+      - Pos: {x: 3, y: 4}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 2, y: 5}
         HasEffect: 0
         showImpact: 1
         Effects: []
