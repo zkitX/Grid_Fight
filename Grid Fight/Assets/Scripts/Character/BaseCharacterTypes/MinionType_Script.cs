@@ -183,6 +183,7 @@ public class MinionType_Script : BaseCharacter
                 if(prev == null || prev.AI_Type != CurrentAIState.AI_Type)
                 {
                     SetCurrentAIValues();
+                    prev.ResetStats(CharInfo);
                     CurrentAIState.ModifyStats(CharInfo);
                     if(psAI != null)
                     {
@@ -498,14 +499,14 @@ public class MinionType_Script : BaseCharacter
     public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical)
     {
         float defenceChances = Random.Range(0, 100);
-        if(defenceChances < CharInfo.DefenceStats.MinionPerfectDefenceChances)
+        if(defenceChances < CharInfo.DefenceStats.MinionPerfectDefenceChances && !SpineAnim.CurrentAnim.Contains("Atk"))
         {
             isDefending = true;
             DefendingHoldingTimer = 0;
             SetAnimation(CharacterAnimationStateType.Defending);
             damage = 0;
         }
-        else if (defenceChances < (CharInfo.DefenceStats.MinionPerfectDefenceChances + CharInfo.DefenceStats.MinionDefenceChances))
+        else if (defenceChances < (CharInfo.DefenceStats.MinionPerfectDefenceChances + CharInfo.DefenceStats.MinionDefenceChances) && !SpineAnim.CurrentAnim.Contains("Atk"))
         {
             isDefending = true;
             DefendingHoldingTimer = 10;
@@ -519,6 +520,7 @@ public class MinionType_Script : BaseCharacter
         }
         return base.SetDamage(attacker, damage, elemental, isCritical);
     }
+
 
 
     public override void SetFinalDamage(BaseCharacter attacker, float damage)
@@ -633,6 +635,12 @@ public class MinionType_Script : BaseCharacter
         if (completedAnim == CharacterAnimationStateType.Defeat.ToString())
         {
             return;
+        }
+
+        if (completedAnim == CharacterAnimationStateType.Defending.ToString())
+        {
+            isDefending = false;
+            DefendingHoldingTimer = 0;
         }
 
         if (completedAnim == CharacterAnimationStateType.Reverse_Arriving.ToString())

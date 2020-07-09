@@ -159,7 +159,7 @@ public class ScriptableObjectAI : ScriptableObject
                     break;
             }
         }
-        if(i == Checks.Count)
+        if(i == Checks.Count && Checks.Count != 0)
         {
             Score += 300;
         }
@@ -279,18 +279,37 @@ public class ScriptableObjectAI : ScriptableObject
     {
         foreach (AIStatsModifierClass item in StatsToModify)
         {
-
             statToCheck = item.ModificableStats.ToString().Split('_');
             parentField = charinfo.GetType().GetField(statToCheck[0]);
             field = parentField.GetValue(charinfo).GetType().GetField(statToCheck[1]);
             B_field = parentField.GetValue(charinfo).GetType().GetField("B_" + statToCheck[1]);
             if(B_field.FieldType == typeof(Vector2))
             {
-                field.SetValue(parentField.GetValue(charinfo), item.Multiplier * (Vector2)B_field.GetValue(parentField.GetValue(charinfo)));
+                field.SetValue(parentField.GetValue(charinfo), (Vector2)field.GetValue(parentField.GetValue(charinfo)) + (item.Multiplier * (Vector2)B_field.GetValue(parentField.GetValue(charinfo))));
             }
             else
             {
-                field.SetValue(parentField.GetValue(charinfo), item.Multiplier * (float)B_field.GetValue(parentField.GetValue(charinfo)));
+                field.SetValue(parentField.GetValue(charinfo), (float)field.GetValue(parentField.GetValue(charinfo)) + (item.Multiplier * (float)B_field.GetValue(parentField.GetValue(charinfo))));
+            }
+
+        }
+    }
+
+    public void ResetStats(CharacterInfoScript charinfo)
+    {
+        foreach (AIStatsModifierClass item in StatsToModify)
+        {
+            statToCheck = item.ModificableStats.ToString().Split('_');
+            parentField = charinfo.GetType().GetField(statToCheck[0]);
+            field = parentField.GetValue(charinfo).GetType().GetField(statToCheck[1]);
+            B_field = parentField.GetValue(charinfo).GetType().GetField("B_" + statToCheck[1]);
+            if (B_field.FieldType == typeof(Vector2))
+            {
+                field.SetValue(parentField.GetValue(charinfo), (Vector2)field.GetValue(parentField.GetValue(charinfo)) - (item.Multiplier * (Vector2)B_field.GetValue(parentField.GetValue(charinfo))));
+            }
+            else
+            {
+                field.SetValue(parentField.GetValue(charinfo), (float)field.GetValue(parentField.GetValue(charinfo)) - (item.Multiplier * (float)B_field.GetValue(parentField.GetValue(charinfo))));
             }
 
         }
