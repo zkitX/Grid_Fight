@@ -283,18 +283,11 @@ public class Stage09_Boss_Geisha_Script : MinionType_Script
         oniForme.UMS.CurrentTilePos = UMS.CurrentTilePos;
     }
 
-    public override IEnumerator AttackSequence(ScriptableObjectAttackBase atk = null)
+    public override IEnumerator AttackSequence()
     {
         Attacking = true;
         bulletFired = false;
-        if (atk != null)
-        {
-            nextAttack = atk;
-        }
-        else
-        {
-            GetAttack();
-        }
+        GetAttack();
         string animToFire = "bippidi boppidi";
         switch (nextAttack.AttackAnim)
         {

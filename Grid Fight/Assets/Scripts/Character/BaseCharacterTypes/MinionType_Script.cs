@@ -180,7 +180,7 @@ public class MinionType_Script : BaseCharacter
                 }
                 ScriptableObjectAI prev = CurrentAIState;
                 CurrentAIState = CharInfo.GetCurrentAI(AggroInfoList, UMS.CurrentTilePos);
-                if(prev == null || prev.AI_Type != CurrentAIState.AI_Type)
+                if(CharInfo.AIs.Count == 1 || prev == null || prev.AI_Type != CurrentAIState.AI_Type)
                 {
                     SetCurrentAIValues();
                     if(prev != null)
@@ -200,11 +200,15 @@ public class MinionType_Script : BaseCharacter
                 }
 
                 int atkChances = Random.Range(0 ,100);
-                if (CurrentAIState.t != null && (nextAttack == null || (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler)) && atkChances < AttackWillPerc && CurrentAIState.t.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x)
+                nextAttack = null;
+                GetAttack();
+
+                if (CurrentAIState.t != null && atkChances < AttackWillPerc && nextAttack != null && (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler))
                 {
                     lastAttackTime = Time.time;
                     nextAttackPos = CurrentAIState.t.UMS.CurrentTilePos;
                     yield return AttackSequence();
+                    
                 }
                 else
                 {
@@ -384,21 +388,17 @@ public class MinionType_Script : BaseCharacter
         SetAnimation(animState.ToString(), loop, transition);
     }
 
+
+
+
     //Basic attack sequence
-    public override IEnumerator AttackSequence(ScriptableObjectAttackBase atk = null)
+    public override IEnumerator AttackSequence()
     {
         Attacking = true;
         bulletFired = false;
         string animToFire;
         bool isLooped = false;
-        if (atk != null)
-        {
-            nextAttack = atk;
-        }
-        else
-        {
-            GetAttack();
-        }
+   
         if(nextAttack != null)
         {
             isLooped = false;
@@ -410,6 +410,113 @@ public class MinionType_Script : BaseCharacter
             while (Attacking)
             {
                 yield return null;
+            }
+        }
+    }
+
+
+    public override void GetAttack()
+    {
+        currentTileAtks = CharInfo.CurrentAttackTypeInfo.Where(r => r != null && r.CurrentAttackType == AttackType.Tile).ToList();
+        availableAtks.Clear();
+        for (int i = 0; i < currentTileAtks.Count; i++)
+        {
+            atkToCheck = currentTileAtks[i];
+            switch (atkToCheck.TilesAtk.StatToCheck)
+            {
+                case StatsCheckType.Health:
+                    switch (atkToCheck.TilesAtk.ValueChecker)
+                    {
+                        case ValueCheckerType.LessThan:
+                            if (CharInfo.HealthPerc < atkToCheck.TilesAtk.PercToCheck)
+                            {
+
+                                availableAtks.Add(atkToCheck);
+                            }
+                            break;
+                        case ValueCheckerType.EqualTo:
+                            if (CharInfo.HealthPerc == atkToCheck.TilesAtk.PercToCheck)
+                            {
+                                availableAtks.Add(atkToCheck);
+                            }
+                            break;
+                        case ValueCheckerType.MoreThan:
+                            if (CharInfo.HealthPerc > atkToCheck.TilesAtk.PercToCheck)
+                            {
+                                availableAtks.Add(atkToCheck);
+                            }
+                            break;
+                    }
+                    break;
+                case StatsCheckType.Stamina:
+                    switch (atkToCheck.TilesAtk.ValueChecker)
+                    {
+                        case ValueCheckerType.LessThan:
+                            if (CharInfo.StaminaPerc < atkToCheck.TilesAtk.PercToCheck)
+                            {
+                                availableAtks.Add(atkToCheck);
+                            }
+                            break;
+                        case ValueCheckerType.EqualTo:
+                            if (CharInfo.StaminaPerc == atkToCheck.TilesAtk.PercToCheck)
+                            {
+                                availableAtks.Add(atkToCheck);
+                            }
+                            break;
+                        case ValueCheckerType.MoreThan:
+                            if (CharInfo.StaminaPerc > atkToCheck.TilesAtk.PercToCheck)
+                            {
+                                availableAtks.Add(atkToCheck);
+                            }
+                            break;
+                    }
+                    break;
+                case StatsCheckType.None:
+                    nextAttack = atkToCheck;
+                    availableAtks.Add(atkToCheck);
+                    break;
+            }
+        }
+
+        int totalchances = 0;
+
+        List<ScriptableObjectAttackBase> resAtkBase = new List<ScriptableObjectAttackBase>();
+        availableAtks.ForEach(r =>
+        {
+            switch (r.Fov)
+            {
+                case FieldOfViewType.NearRange:
+                    if(CurrentAIState.t.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x)
+                    {
+                        resAtkBase.Add(r);
+                    }
+                    break;
+                case FieldOfViewType.MidRange:
+                    if (Mathf.Abs(CurrentAIState.t.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x) <= 1)
+                    {
+                        resAtkBase.Add(r);
+                    }
+                    break;
+                case FieldOfViewType.LongRange:
+                    resAtkBase.Add(r);
+                    break;
+            }
+        });
+
+        resAtkBase.ForEach(r =>
+        {
+            totalchances += r.TilesAtk.Chances;
+        });
+        int chances = UnityEngine.Random.Range(0, totalchances);
+        int sumc = 0;
+        for (int i = 0; i < resAtkBase.Count; i++)
+        {
+            sumc += resAtkBase[i].TilesAtk.Chances;
+
+            if (chances < sumc)
+            {
+                nextAttack = resAtkBase[i];
+                return;
             }
         }
     }

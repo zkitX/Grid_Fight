@@ -253,7 +253,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.Right.Hit, CharInfo.CharacterID, AttackParticlePhaseTypes.Hit, tilePos, UMS.Side, nextAttack.AttackInput);
     }
 
-    public virtual IEnumerator AttackSequence(ScriptableObjectAttackBase atk = null)
+    public virtual IEnumerator AttackSequence()
     {
         yield return null;
     }
@@ -304,10 +304,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     }*/
 
 
-    List<ScriptableObjectAttackBase> availableAtks = new List<ScriptableObjectAttackBase>();
-    List<ScriptableObjectAttackBase> currentTileAtks = new List<ScriptableObjectAttackBase>();
-    ScriptableObjectAttackBase atkToCheck;
-    public void GetAttack()
+    [HideInInspector] public List<ScriptableObjectAttackBase> availableAtks = new List<ScriptableObjectAttackBase>();
+    [HideInInspector] public List<ScriptableObjectAttackBase> currentTileAtks = new List<ScriptableObjectAttackBase>();
+    [HideInInspector] public ScriptableObjectAttackBase atkToCheck;
+    public virtual void GetAttack()
     {
         currentTileAtks = CharInfo.CurrentAttackTypeInfo.Where(r => r != null && r.CurrentAttackType == AttackType.Tile).ToList();
         availableAtks.Clear();

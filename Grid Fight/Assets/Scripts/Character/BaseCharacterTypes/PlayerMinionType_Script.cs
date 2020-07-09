@@ -250,21 +250,14 @@ public class PlayerMinionType_Script : BaseCharacter
     }
 
     //Basic attack sequence
-    public override IEnumerator AttackSequence(ScriptableObjectAttackBase atk = null)
+    public override IEnumerator AttackSequence()
     {
         Attacking = true;
         bulletFired = false;
         string animToFire;
         bool isLooped = false;
-        if (atk != null)
-        {
-            nextAttack = atk;
-        }
-        else
-        {
-            GetAttack();
-        }
-        if(nextAttack != null)
+        GetAttack();
+        if (nextAttack != null)
         {
             isLooped = false;
             animToFire = nextAttack.PrefixAnim + "_IdleToAtk";

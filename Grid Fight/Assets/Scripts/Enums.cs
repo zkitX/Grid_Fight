@@ -407,7 +407,12 @@ public enum ElementalWeaknessType
     VeryResistent = 2,
     ExtremelyResistent = 3
 }
-
+public enum FieldOfViewType
+{
+    NearRange,
+    MidRange,
+    LongRange
+}
 
 public enum AttackAnimPrefixType
 {
