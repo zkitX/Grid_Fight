@@ -37,7 +37,6 @@ Transform:
   - {fileID: 131334818631422945}
   - {fileID: 8261908238975402245}
   - {fileID: 4287471194253316734}
-  - {fileID: 4431726944073066804}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4786,6 +4785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c92ac842bd80264eb24a50ddfc9727b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LongParticles: []
   PSTime: 10
   Target: {fileID: 0}
   Adjustment: {x: 0, y: 0, z: 0}
@@ -29025,103 +29025,3 @@ Transform:
   m_Father: {fileID: 2222846166806493520}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -30, y: 0, z: 0}
---- !u!1001 &1181151950011805193
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 2222846166806493520}
-    m_Modifications:
-    - target: {fileID: 3307018011297580860, guid: 0517dbcd0f7fc7c4798d1a0fa696f073,
-        type: 3}
-      propertyPath: m_Name
-      value: Mask_Mind_Skill2_Loop_DarkWhisper_Left
-      objectReference: {fileID: 0}
-    - target: {fileID: 3307018011297580860, guid: 0517dbcd0f7fc7c4798d1a0fa696f073,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3307018011297580861, guid: 0517dbcd0f7fc7c4798d1a0fa696f073,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3307018011297580861, guid: 0517dbcd0f7fc7c4798d1a0fa696f073,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.24
-      objectReference: {fileID: 0}
-    - target: {fileID: 3307018011297580861, guid: 0517dbcd0f7fc7c4798d1a0fa696f073,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3307018011297580861, guid: 0517dbcd0f7fc7c4798d1a0fa696f073,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3307018011297580861, guid: 0517dbcd0f7fc7c4798d1a0fa696f073,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3307018011297580861, guid: 0517dbcd0f7fc7c4798d1a0fa696f073,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3307018011297580861, guid: 0517dbcd0f7fc7c4798d1a0fa696f073,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3307018011297580861, guid: 0517dbcd0f7fc7c4798d1a0fa696f073,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3307018011297580861, guid: 0517dbcd0f7fc7c4798d1a0fa696f073,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3307018011297580861, guid: 0517dbcd0f7fc7c4798d1a0fa696f073,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3307018011297580861, guid: 0517dbcd0f7fc7c4798d1a0fa696f073,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1406419516782870959, guid: 0517dbcd0f7fc7c4798d1a0fa696f073,
-        type: 3}
-      propertyPath: InitialModule.startSize.minScalar
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1406419516782870959, guid: 0517dbcd0f7fc7c4798d1a0fa696f073,
-        type: 3}
-      propertyPath: ShapeModule.radius.value
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5657024950437027484, guid: 0517dbcd0f7fc7c4798d1a0fa696f073,
-        type: 3}
-      propertyPath: InitialModule.startSize.minScalar
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8917114089438679109, guid: 0517dbcd0f7fc7c4798d1a0fa696f073,
-        type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0517dbcd0f7fc7c4798d1a0fa696f073, type: 3}
---- !u!4 &4431726944073066804 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3307018011297580861, guid: 0517dbcd0f7fc7c4798d1a0fa696f073,
-    type: 3}
-  m_PrefabInstance: {fileID: 1181151950011805193}
-  m_PrefabAsset: {fileID: 0}
