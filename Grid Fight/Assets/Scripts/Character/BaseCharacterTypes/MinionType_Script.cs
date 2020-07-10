@@ -169,6 +169,7 @@ public class MinionType_Script : BaseCharacter
     }
 
     GameObject psAI = null;
+
     public virtual IEnumerator AI()
     {
         bool val = true;
@@ -216,7 +217,6 @@ public class MinionType_Script : BaseCharacter
                 }
                 else
                 {
-                    BattleTileScript bts;
                     int randomizer = Random.Range(0, 100);
 
                     if (TowardMovementPerc > randomizer)
@@ -224,11 +224,11 @@ public class MinionType_Script : BaseCharacter
                         if (CurrentAIState.t.UMS.CurrentTilePos.x != UMS.CurrentTilePos.x)
                         {
                             InputDirection dir = CurrentAIState.t.UMS.CurrentTilePos.x < UMS.CurrentTilePos.x ? InputDirection.Up : InputDirection.Down;
-                            bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(dir == InputDirection.Up ? UMS.CurrentTilePos.x - 1 : UMS.CurrentTilePos.x + 1, UMS.CurrentTilePos.y));
-                            if (bts != null && bts.BattleTileState != BattleTileStateType.Empty)
+                            currentBattleTilesToCheck = CheckTileAvailabilityUsingDir(dir == InputDirection.Up ? new Vector2Int(-1, 0) : new Vector2Int(1, 0));
+                            if (currentBattleTilesToCheck.Count == 0)
                             {
-                                bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(UMS.CurrentTilePos.x, UMS.Side == SideType.RightSide ? UMS.CurrentTilePos.y - 1 : UMS.CurrentTilePos.y + 1));
-                                if (bts.BattleTileState == BattleTileStateType.Empty)
+                                currentBattleTilesToCheck = CheckTileAvailabilityUsingDir(UMS.Side == SideType.RightSide ? new Vector2Int(0, -1) : new Vector2Int(0, 1));
+                                if (currentBattleTilesToCheck.Count > 0)
                                 {
                                     yield return MoveCharOnDir_Co(UMS.Side == SideType.RightSide ? InputDirection.Left : InputDirection.Right);
                                 }
@@ -240,8 +240,8 @@ public class MinionType_Script : BaseCharacter
                         }
                         else
                         {
-                            bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(UMS.CurrentTilePos.x, UMS.Side == SideType.RightSide ? UMS.CurrentTilePos.y - 1 : UMS.CurrentTilePos.y + 1));
-                            if (bts.BattleTileState == BattleTileStateType.Empty)
+                            currentBattleTilesToCheck = CheckTileAvailabilityUsingDir(UMS.Side == SideType.RightSide ? new Vector2Int(0, -1) : new Vector2Int(0, 1));
+                            if (currentBattleTilesToCheck.Count > 0)
                             {
                                 yield return MoveCharOnDir_Co(UMS.Side == SideType.RightSide ? InputDirection.Left : InputDirection.Right);
                             }
@@ -251,8 +251,8 @@ public class MinionType_Script : BaseCharacter
                     {
                         if (CurrentAIState.t.UMS.CurrentTilePos.x != UMS.CurrentTilePos.x)
                         {
-                            bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(UMS.CurrentTilePos.x, UMS.Side == SideType.RightSide ? UMS.CurrentTilePos.y - 1 : UMS.CurrentTilePos.y + 1));
-                            if (bts.BattleTileState == BattleTileStateType.Empty)
+                            currentBattleTilesToCheck = CheckTileAvailabilityUsingDir(UMS.Side == SideType.RightSide ? new Vector2Int(0, -1) : new Vector2Int(0, 1));
+                            if (currentBattleTilesToCheck.Count > 0)
                             {
                                 yield return MoveCharOnDir_Co(UMS.Side == SideType.LeftSide ? InputDirection.Left : InputDirection.Right);
                             }
@@ -261,11 +261,12 @@ public class MinionType_Script : BaseCharacter
                         {
                             int updown = Random.Range(0, 100);
                             InputDirection dir = updown < 50 ? InputDirection.Up : InputDirection.Down;
-                            bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(dir == InputDirection.Up ? UMS.CurrentTilePos.x - 1 : UMS.CurrentTilePos.x + 1, UMS.CurrentTilePos.y));
-                            if (bts != null && bts.BattleTileState != BattleTileStateType.Empty)
+                            
+                            currentBattleTilesToCheck = CheckTileAvailabilityUsingDir(dir == InputDirection.Up ? new Vector2Int(-1, 0) : new Vector2Int(1, 0));
+                            if (currentBattleTilesToCheck.Count == 0)
                             {
-                                bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(UMS.CurrentTilePos.x, UMS.Side == SideType.RightSide ? UMS.CurrentTilePos.y - 1 : UMS.CurrentTilePos.y + 1));
-                                if (bts.BattleTileState == BattleTileStateType.Empty)
+                                currentBattleTilesToCheck = CheckTileAvailabilityUsingDir(UMS.Side == SideType.RightSide ? new Vector2Int(0, -1) : new Vector2Int(0, 1));
+                                if (currentBattleTilesToCheck.Count > 0)
                                 {
                                     yield return MoveCharOnDir_Co(UMS.Side == SideType.LeftSide ? InputDirection.Left : InputDirection.Right);
                                 }

@@ -146,6 +146,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
     }
     [HideInInspector] public int CharOredrInLayer = 0;
+    protected List<BattleTileScript> currentBattleTilesToCheck = new List<BattleTileScript>();
+
 
     public virtual void Start()
     {
@@ -734,18 +736,16 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         if ((CharInfo.Health > 0 && !isMoving && IsOnField && SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving.ToString() && CharActionlist.Contains(CharacterActionType.Move)) || BattleManagerScript.Instance.VFXScene)
         {
             List<BattleTileScript> prevBattleTile = CurrentBattleTiles;
-            List<BattleTileScript> CurrentBattleTilesToCheck = new List<BattleTileScript>();
-
             CharacterAnimationStateType AnimState;
             Vector2Int dir;
             AnimationCurve curve;
             GetDirectionVectorAndAnimationCurve(nextDir, out AnimState, out dir, out curve);
 
-            CurrentBattleTilesToCheck = CheckTileAvailabilityUsingDir(dir);
+            currentBattleTilesToCheck = CheckTileAvailabilityUsingDir(dir);
 
-            if (CurrentBattleTilesToCheck.Count > 0 &&
-                CurrentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos) && r.BattleTileState == BattleTileStateType.Empty).ToList().Count ==
-                CurrentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos)).ToList().Count && GridManagerScript.Instance.isPosOnField(UMS.CurrentTilePos + dir))
+            if (currentBattleTilesToCheck.Count > 0 &&
+                currentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos) && r.BattleTileState == BattleTileStateType.Empty).ToList().Count ==
+                currentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos)).ToList().Count && GridManagerScript.Instance.isPosOnField(UMS.CurrentTilePos + dir))
             {
                 SetAnimation(AnimState);
                 isMoving = true;
@@ -764,9 +764,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     SpineAnim.SetSkeletonOrderInLayer(CharOredrInLayer);
                 }
 
-                CurrentBattleTiles = CurrentBattleTilesToCheck;
+                CurrentBattleTiles = currentBattleTilesToCheck;
                 UMS.Pos = new List<Vector2Int>();
-                foreach (BattleTileScript item in CurrentBattleTilesToCheck)
+                foreach (BattleTileScript item in currentBattleTilesToCheck)
                 {
                     GridManagerScript.Instance.SetBattleTileState(item.Pos, BattleTileStateType.Occupied);
                     UMS.Pos.Add(item.Pos);
