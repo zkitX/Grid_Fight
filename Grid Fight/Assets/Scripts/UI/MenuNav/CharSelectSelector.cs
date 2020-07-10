@@ -79,7 +79,7 @@ public class CharSelectSelector : MonoBehaviour
             DisplayOption(ChatDisplay, ChatDisplayed);
         }
 
-        if (SelectDisplayed != (loadInfo != null && loadInfo.encounterState == CharacterLoadInformation.EncounterState.Recruited && (charName != CharacterNameType.Stage00_Character_Valley || parentBox.selectionMode == CharSelectBox.SelectionMode.Units) /*&& parentBox.selectionMode == CharSelectBox.SelectionMode.Squad*/))
+        if (SelectDisplayed != (loadInfo != null && loadInfo.encounterState == CharacterLoadInformation.EncounterState.Recruited && (charName != CharacterNameType.CleasTemple_Character_Valley_Donna || parentBox.selectionMode == CharSelectBox.SelectionMode.Units) /*&& parentBox.selectionMode == CharSelectBox.SelectionMode.Squad*/))
         {
             SelectDisplayed = !SelectDisplayed;
             DisplayOption(SelectDisplay, SelectDisplayed);

@@ -47,7 +47,7 @@ public class SceneLoadManager : MonoBehaviour
 
     public bool RemoveSquadMate(CharacterNameType charName)
     {
-        if (charName == CharacterNameType.Stage00_Character_Valley) return false;
+        if (charName == CharacterNameType.CleasTemple_Character_Valley_Donna) return false;
         if (squad.Values.Where(r => r.characterID == charName).FirstOrDefault() == null) return false; //If the character isn't in the squad
 
         squad[squad.Where(r => r.Value.characterID == charName).First().Key] = new CharacterLoadInformation();
@@ -94,7 +94,7 @@ public class SceneLoadManager : MonoBehaviour
         DontDestroyOnLoad(this);
 
         startingSceneID = SceneManager.GetActiveScene().name;
-        squad[0] = loadedCharacters.Where(r => r.characterID == CharacterNameType.Stage00_Character_Valley).FirstOrDefault();
+        squad[0] = loadedCharacters.Where(r => r.characterID == CharacterNameType.CleasTemple_Character_Valley_Donna).FirstOrDefault();
     }
 
     private void Start()

@@ -652,43 +652,45 @@ public enum CharacterNameType
 {
     #region CharacterNameType
     None = 0,
-    //Stage 00
-    Stage00_Minion_Mountain = 1000,
-    Stage00_Minion_Desert = 1001,
-    Stage00_Minion_Forest = 1002,
-    Stage00_Minion_Valley = 1003,
-    Stage00_Character_Mountain = 1004,
-    Stage00_Character_Valley = 1005,
-    Stage00_Character_Forest = 1006,
-    Stage00_Character_Desert = 1007,
-    Stage00_BossOctopus = 1010,
-    Stage00_BossOctopus_Head = 1011,
-    Stage00_BossOctopus_Tentacles = 1012,
-    Stage00_BossOctopus_Girl = 1013,
+    //Stage 00 - Clea's Temple
+    CleasTemple_Minion_Mountain_BigHead = 1000,
+    CleasTemple_Minion_Desert_MechDog = 1001,
+    CleasTemple_Minion_Forest_BeeDoctor = 1002,
+    CleasTemple_Minion_Valley_Chander = 1003,
+    CleasTemple_Character_Mountain_Bird = 1004,
+    CleasTemple_Character_Valley_Donna = 1005,
+    CleasTemple_Character_Forest_Koniko = 1006,
+    CleasTemple_Character_Desert_Pan = 1007,
+    CleasTemple_BossOctopus = 1010,
+    CleasTemple_BossOctopus_Head = 1011,
+    CleasTemple_BossOctopus_Tentacles = 1012,
+    CleasTemple_BossOctopus_Girl = 1013,
 
 
 
-    //Stage 01
-    Stage01_Minion_Mountain = 1020,
-    Stage01_Minion_Desert = 1021,
-    Stage01_Minion_Forest = 1022,
-    Stage01_Minion_Valley = 1023,
-    Stage01_Character_Valley = 1024,
-    Stage01_Character_Desert = 1025,
-    Stage01_Character_Mountain = 1026,
-    Stage01_Character_Forest = 1027,
-    Stage01_Boss = 1028,
+    //Stage 01 - Tohora
+    Tohora_Minion_Mountain_Toka = 1020,
+    Tohora_Minion_Desert_Fishylla = 1021,
+    Tohora_Minion_Forest_Crabera = 1022,
+    Tohora_Minion_Valley_Mothra = 1023,
+    Tohora_Character_Valley_Noiti = 1024,
+    Tohora_Character_Desert_MerMer = 1025,
+    Tohora_Character_Mountain_Kora = 1026,
+    Tohora_Character_Forest_Pai = 1027,
+    Tohora_Boss_Tikaka = 1028,
 
 
     //Stage 02
-    Stage02_Minion_Mountain = 1040,
-    Stage02_Minion_Desert = 1041,
-    Stage02_Minion_Forest = 1042,
-    Stage02_Minion_Valley = 1043,
-    Stage02_Character_Valley = 1044,
-    Stage02_Character_Desert = 1045,
-    Stage02_Character_Mountain = 1046,
-    Stage02_Character_Forest = 1047,
+    TheBurg_Minion_Mountain_IronTron = 1040,
+    TheBurg_Minion_Desert_Robotron = 1041,
+    TheBurg_Minion_Forest_HappyBot = 1042,
+    TheBurg_Minion_Valley_Ted = 1043,
+    TheBurg_Character_Valley_Switch = 1044,
+    TheBurg_Character_Desert_Loud = 1045,
+    TheBurg_Character_Mountain_Flint = 1046,
+    TheBurg_Character_Forest_Deedra = 1047,
+    TheBurg_Boss_Mainframe = 1048,
+    TheBurg_Boss_Mainframe_Minion = 1049,
 
 
     //Stage 03

@@ -13,9 +13,9 @@ public class Stage00_BossOctopus_Script : MinionType_Script
 
     private List<CharacterNameType> piecesType = new List<CharacterNameType>()
     {
-        CharacterNameType.Stage00_BossOctopus_Tentacles,
-        CharacterNameType.Stage00_BossOctopus_Head,
-        CharacterNameType.Stage00_BossOctopus_Girl
+        CharacterNameType.CleasTemple_BossOctopus_Tentacles,
+        CharacterNameType.CleasTemple_BossOctopus_Head,
+        CharacterNameType.CleasTemple_BossOctopus_Girl
     };
 
     public override void Start()
@@ -29,7 +29,7 @@ public class Stage00_BossOctopus_Script : MinionType_Script
         {
             Pieces.Add(CreatePiece(piece));
         }
-        ((Stage00_BossOctopus_Girl_Script)GetPiece(CharacterNameType.Stage00_BossOctopus_Girl)).CenteringPoint = GetComponentsInChildren<Transform>().Where(r => r.CompareTag("CenteringPoint")).FirstOrDefault();
+        ((Stage00_BossOctopus_Girl_Script)GetPiece(CharacterNameType.CleasTemple_BossOctopus_Girl)).CenteringPoint = GetComponentsInChildren<Transform>().Where(r => r.CompareTag("CenteringPoint")).FirstOrDefault();
     }
 
     private MinionType_Script CreatePiece(CharacterNameType pieceType)
@@ -40,15 +40,15 @@ public class Stage00_BossOctopus_Script : MinionType_Script
         piece.UMS.EnableBattleBars(false);
         piece.UMS.CurrentTilePos = UMS.CurrentTilePos;
         piece.SetValueFromVariableName("BaseBoss", this);
-        if (pieceType == CharacterNameType.Stage00_BossOctopus_Head)
+        if (pieceType == CharacterNameType.CleasTemple_BossOctopus_Head)
         {
             ((Stage00_BossOctopus_Head_Script)piece).bossParent = this;
         }
-        else if (pieceType == CharacterNameType.Stage00_BossOctopus_Tentacles)
+        else if (pieceType == CharacterNameType.CleasTemple_BossOctopus_Tentacles)
         {
             ((Stage00_BossOctopus_Tentacles_Script)piece).bossParent = this;
         }
-        else if (pieceType == CharacterNameType.Stage00_BossOctopus_Girl)
+        else if (pieceType == CharacterNameType.CleasTemple_BossOctopus_Girl)
         {
             ((Stage00_BossOctopus_Girl_Script)piece).bossParent = this;
         }
@@ -62,7 +62,7 @@ public class Stage00_BossOctopus_Script : MinionType_Script
 
     public override void SetUpLeavingBattle()
     {
-        ((Stage00_BossOctopus_Girl_Script)GetPiece(CharacterNameType.Stage00_BossOctopus_Girl)).SetUpLeavingBattle();
+        ((Stage00_BossOctopus_Girl_Script)GetPiece(CharacterNameType.CleasTemple_BossOctopus_Girl)).SetUpLeavingBattle();
     }
 
     public override IEnumerator Move()
@@ -82,7 +82,7 @@ public class Stage00_BossOctopus_Script : MinionType_Script
             float totalHP = 0;
             float currentHP = 0;
 
-            foreach (MinionType_Script item in Pieces.Where(r=> r.CharInfo.CharacterID != CharacterNameType.Stage00_BossOctopus_Girl))
+            foreach (MinionType_Script item in Pieces.Where(r=> r.CharInfo.CharacterID != CharacterNameType.CleasTemple_BossOctopus_Girl))
             {
                 totalHP += item.CharInfo.HealthStats.Base;
                 currentHP += item.CharInfo.HealthStats.Health;
@@ -100,7 +100,7 @@ public class Stage00_BossOctopus_Script : MinionType_Script
 
         UMS.EnableBattleBars(false); 
 
-        ((Stage00_BossOctopus_Head_Script)GetPiece(CharacterNameType.Stage00_BossOctopus_Head)).bossLady = ((Stage00_BossOctopus_Girl_Script)GetPiece(CharacterNameType.Stage00_BossOctopus_Girl));
+        ((Stage00_BossOctopus_Head_Script)GetPiece(CharacterNameType.CleasTemple_BossOctopus_Head)).bossLady = ((Stage00_BossOctopus_Girl_Script)GetPiece(CharacterNameType.CleasTemple_BossOctopus_Girl));
 
         SetAnimation(CharacterAnimationStateType.Arriving);
 
@@ -145,8 +145,8 @@ public class Stage00_BossOctopus_Script : MinionType_Script
 
     public override void SetCharDead()
     {
-        if(!((Stage00_BossOctopus_Head_Script)GetPiece(CharacterNameType.Stage00_BossOctopus_Head)).disabled ||
-            !((Stage00_BossOctopus_Tentacles_Script)GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles)).disabled)
+        if(!((Stage00_BossOctopus_Head_Script)GetPiece(CharacterNameType.CleasTemple_BossOctopus_Head)).disabled ||
+            !((Stage00_BossOctopus_Tentacles_Script)GetPiece(CharacterNameType.CleasTemple_BossOctopus_Tentacles)).disabled)
         {
             return;
         }
@@ -183,7 +183,7 @@ public class Stage00_BossOctopus_Script : MinionType_Script
     private IEnumerator PhaseOneEnd()
     {
         //float timer = 0;
-        Stage00_BossOctopus_Tentacles_Script tentacles = (Stage00_BossOctopus_Tentacles_Script)GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles);
+        Stage00_BossOctopus_Tentacles_Script tentacles = (Stage00_BossOctopus_Tentacles_Script)GetPiece(CharacterNameType.CleasTemple_BossOctopus_Tentacles);
 
         StartCoroutine(DeathExplosionPacer(new Vector2(0.1f/5f, 0.3f/5f), 20*5));
 
@@ -196,16 +196,16 @@ public class Stage00_BossOctopus_Script : MinionType_Script
         {
             yield return null;
         }
-        GetPiece(CharacterNameType.Stage00_BossOctopus_Head).SetAnimation(CharacterAnimationStateType.Death_Loop, true);
-        GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles).SetAnimation(CharacterAnimationStateType.Death_Loop, true);
+        GetPiece(CharacterNameType.CleasTemple_BossOctopus_Head).SetAnimation(CharacterAnimationStateType.Death_Loop, true);
+        GetPiece(CharacterNameType.CleasTemple_BossOctopus_Tentacles).SetAnimation(CharacterAnimationStateType.Death_Loop, true);
         yield return BirthOctopusGirl();
         yield return new WaitForSeconds(1f);
         foreach (MinionType_Script character in Pieces)
         {
             currentDeathProcessPhase = DeathProcessStage.End;
         }
-        GetPiece(CharacterNameType.Stage00_BossOctopus_Head).SetAnimation(CharacterAnimationStateType.Death_Exit);
-        GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles).SetAnimation(CharacterAnimationStateType.Death_Exit);
+        GetPiece(CharacterNameType.CleasTemple_BossOctopus_Head).SetAnimation(CharacterAnimationStateType.Death_Exit);
+        GetPiece(CharacterNameType.CleasTemple_BossOctopus_Tentacles).SetAnimation(CharacterAnimationStateType.Death_Exit);
         yield return null;
         /*Stage04_BossMonster_Script mask = (Stage04_BossMonster_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass((CharacterNameType.Stage04_BossMonster).ToString(), CharacterSelectionType.Up,
         CharacterLevelType.Novice, new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage04_BossMonster, WalkingSideType.RightSide, AttackType.Tile, BaseCharType.None), WaveManagerScript.Instance.transform);
@@ -231,9 +231,9 @@ public class Stage00_BossOctopus_Script : MinionType_Script
 
     public void OctopusGirlLeaves()
     {
-        if(!GetPiece(CharacterNameType.Stage00_BossOctopus_Girl).gameObject.activeInHierarchy &&
-            !GetPiece(CharacterNameType.Stage00_BossOctopus_Tentacles).gameObject.activeInHierarchy &&
-            !GetPiece(CharacterNameType.Stage00_BossOctopus_Head).gameObject.activeInHierarchy)
+        if(!GetPiece(CharacterNameType.CleasTemple_BossOctopus_Girl).gameObject.activeInHierarchy &&
+            !GetPiece(CharacterNameType.CleasTemple_BossOctopus_Tentacles).gameObject.activeInHierarchy &&
+            !GetPiece(CharacterNameType.CleasTemple_BossOctopus_Head).gameObject.activeInHierarchy)
         {
             gameObject.SetActive(false);
         }
@@ -247,8 +247,8 @@ public class Stage00_BossOctopus_Script : MinionType_Script
     IEnumerator BirthOctopusGirl()
     {
         //The code for the moving into position of and the creation of the octopus girl
-        ((Stage00_BossOctopus_Girl_Script)GetPiece(CharacterNameType.Stage00_BossOctopus_Girl)).SetAnimation(CharacterAnimationStateType.Death_Born);
-        yield return ((Stage00_BossOctopus_Girl_Script)GetPiece(CharacterNameType.Stage00_BossOctopus_Girl)).CenterCharacterToTile(5f);
+        ((Stage00_BossOctopus_Girl_Script)GetPiece(CharacterNameType.CleasTemple_BossOctopus_Girl)).SetAnimation(CharacterAnimationStateType.Death_Born);
+        yield return ((Stage00_BossOctopus_Girl_Script)GetPiece(CharacterNameType.CleasTemple_BossOctopus_Girl)).CenterCharacterToTile(5f);
     }
 
  /*   public override IEnumerator AttackAction(bool yieldBefore)

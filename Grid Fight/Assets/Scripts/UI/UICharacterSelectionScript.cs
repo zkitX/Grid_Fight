@@ -46,10 +46,10 @@ public class UICharacterSelectionScript : MonoBehaviour
 
     private void Awake()
     {
-        Chars.Add(new Charsinfo(Up, CharacterNameType.Stage00_Character_Desert));
-        Chars.Add(new Charsinfo(Down, CharacterNameType.Stage00_Character_Desert));
-        Chars.Add(new Charsinfo(Left, CharacterNameType.Stage00_Character_Desert));
-        Chars.Add(new Charsinfo(Right, CharacterNameType.Stage00_Character_Desert));
+        Chars.Add(new Charsinfo(Up, CharacterNameType.CleasTemple_Character_Desert_Pan));
+        Chars.Add(new Charsinfo(Down, CharacterNameType.CleasTemple_Character_Desert_Pan));
+        Chars.Add(new Charsinfo(Left, CharacterNameType.CleasTemple_Character_Desert_Pan));
+        Chars.Add(new Charsinfo(Right, CharacterNameType.CleasTemple_Character_Desert_Pan));
     }
 
 
