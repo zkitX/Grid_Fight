@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2048024311303829427}
   - component: {fileID: 1933175596444086193}
   - component: {fileID: 1642353405715201981}
-  - component: {fileID: 3857307890190083440}
+  - component: {fileID: 5832928619997905840}
   m_Layer: 0
   m_Name: DizzyEffect
   m_TagString: Untagged
@@ -4755,7 +4755,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &3857307890190083440
+--- !u!114 &5832928619997905840
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4764,11 +4764,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 49706729218659393}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2540eedaee99924438ce16aeff707ac9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c92ac842bd80264eb24a50ddfc9727b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PSTime: 5
-  AutoUpdate: 0
+  LongParticles: []
+  PSTime: 10
+  Target: {fileID: 0}
+  Adjustment: {x: 0, y: 0, z: 0}
+  IncludeChildren: 1
+  timet: 0
+  iter: 0
 --- !u!95 &1792651202759569715
 Animator:
   serializedVersion: 3
@@ -5060,6 +5065,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: e34aefa49c9b2a34098ae5fbc657ede4,
         type: 3}
+    - target: {fileID: 19873640, guid: 524b12464dce5b248a893d67a188da05, type: 3}
+      propertyPath: RotationModule.x.minScalar
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 19923762, guid: 524b12464dce5b248a893d67a188da05, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

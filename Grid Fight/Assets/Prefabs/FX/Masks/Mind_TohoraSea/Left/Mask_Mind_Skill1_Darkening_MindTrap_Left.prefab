@@ -14428,9 +14428,9 @@ GameObject:
   - component: {fileID: 8547664350850982598}
   - component: {fileID: 8547664350850982597}
   - component: {fileID: 8547664350850982596}
-  - component: {fileID: 8547664350850982599}
+  - component: {fileID: 5037396821615005823}
   m_Layer: 0
-  m_Name: Mask_Mind_Skill1_Loop_MindTrap_Left 1
+  m_Name: Mask_Mind_Skill1_Darkening_MindTrap_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19175,7 +19175,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &8547664350850982599
+--- !u!114 &5037396821615005823
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -19184,9 +19184,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 8547664350850982595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c92ac842bd80264eb24a50ddfc9727b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LongParticles: []
+  PSTime: 10
+  Target: {fileID: 0}
+  Adjustment: {x: 0, y: 0, z: 0}
+  IncludeChildren: 1
+  timet: 0
+  iter: 0
 --- !u!1 &8747309140737095529
 GameObject:
   m_ObjectHideFlags: 0

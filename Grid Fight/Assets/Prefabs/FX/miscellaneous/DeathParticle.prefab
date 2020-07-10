@@ -4848,7 +4848,7 @@ GameObject:
   - component: {fileID: 1318025210907858466}
   - component: {fileID: 1318025210907858468}
   - component: {fileID: 1318025210907858469}
-  - component: {fileID: 5686289068651046683}
+  - component: {fileID: 7340119677010846309}
   m_Layer: 0
   m_Name: DeathParticle
   m_TagString: Untagged
@@ -9592,7 +9592,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &5686289068651046683
+--- !u!114 &7340119677010846309
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9601,9 +9601,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1318025210907858467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5dfd07e3bdeec4bbcfaf4c231a3231, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c92ac842bd80264eb24a50ddfc9727b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LongParticles: []
+  PSTime: 10
+  Target: {fileID: 0}
+  Adjustment: {x: 0, y: 0, z: 0}
+  IncludeChildren: 1
+  timet: 0
+  iter: 0
 --- !u!1 &1318025211514282846
 GameObject:
   m_ObjectHideFlags: 0
