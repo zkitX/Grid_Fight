@@ -30,9 +30,9 @@ public class ScriptableObjectAttackBase : ScriptableObject
     public AttackAnimType AttackAnim;
     public float StaminaCost = 10;
     [HideInInspector] public float ExperiencePoints = 10;
-    public float CoolDown = 0;
+    public float CoolDown = 10;
     [HideInInspector] public AttackAnimPrefixType PrefixAnim;
-
+    public FieldOfViewType Fov;
     public AttackParticlesClass Particles;
     [System.Serializable]
     public class AttackParticlesClass

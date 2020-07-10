@@ -166,8 +166,12 @@ public class CharacterInfoScript : MonoBehaviour
     {
         public float BaseDefence = 10;
         public float Invulnerability = 0.2f;
+        public float MinionDefenceChances = 20;
+        public float MinionPerfectDefenceChances = 5;
         [HideInInspector]public float B_BaseDefence = 10;
         [HideInInspector]public float B_Invulnerability = 0.2f;
+        [HideInInspector]public float B_MinionDefenceChances = 20;
+        [HideInInspector]public float B_MinionPerfectDefenceChances = 5;
         public float LevelMultiplier;
     }
 
@@ -374,19 +378,36 @@ public class CharacterInfoScript : MonoBehaviour
 
         DefenceStats.B_BaseDefence = DefenceStats.BaseDefence;
         DefenceStats.B_Invulnerability = DefenceStats.Invulnerability;
+        DefenceStats.B_MinionDefenceChances = DefenceStats.MinionDefenceChances;
+        DefenceStats.B_MinionPerfectDefenceChances = DefenceStats.MinionPerfectDefenceChances;
     }
 
-
-    public ScriptableObjectAI GetCurrentAI()
+    public ScriptableObjectAI GetCurrentAI(List<AggroInfoClass> enemies, Vector2Int currentPos)
     {
         List<ScriptableObjectAI> res = new List<ScriptableObjectAI>();
+        List<AIInfoCLass> aisInfo = new List<AIInfoCLass>();
+
+        int charTargeting = 0;
         foreach (ScriptableObjectAI item in AIs)
         {
-            if(item.CheckAvailability(this))
+            aisInfo.Add(new AIInfoCLass(item, item.CheckAvailability(this, enemies, currentPos)));
+            charTargeting += Mathf.Abs(aisInfo.Last().Score);
+        }
+
+        foreach (AIInfoCLass item in aisInfo)
+        {
+            int resI = Random.Range(0, charTargeting);
+
+            if (resI <= Mathf.Abs(item.Score))
             {
-                res.Add(item);
+                return item.AI;
+            }
+            else
+            {
+                charTargeting -= Mathf.Abs(item.Score);
             }
         }
+
 
         return res.First();
     }
@@ -409,5 +430,23 @@ public class LevelsInfoClass
     {
         Level = level;
         ExpNeeded = expNeeded;
+    }
+}
+
+
+public class AIInfoCLass
+{
+    public ScriptableObjectAI AI;
+    public int Score;
+
+    public AIInfoCLass()
+    {
+
+    }
+
+    public AIInfoCLass(ScriptableObjectAI ai, int score)
+    {
+        AI = ai;
+        Score = score;
     }
 }

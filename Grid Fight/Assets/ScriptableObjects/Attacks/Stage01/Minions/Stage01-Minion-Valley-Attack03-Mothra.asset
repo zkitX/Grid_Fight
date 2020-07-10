@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage01-Minion-Valley-Attack02-Mothra
+  m_Name: Stage01-Minion-Valley-Attack03-Mothra
   m_EditorClassIdentifier: 
   Chances: 100
   CurrentAttackType: 1
@@ -22,7 +22,7 @@ MonoBehaviour:
   ExperiencePoints: 10
   CoolDown: 0
   PrefixAnim: 0
-  Fov: 0
+  Fov: 1
   Particles:
     Left:
       Cast: {fileID: 4485087807706657494, guid: fbfa3f77202ef4e4e85a5e2ffcc41917,
@@ -238,8 +238,8 @@ MonoBehaviour:
         EffectsOnTile: []
     StatToCheck: 1
     ValueChecker: 0
-    PercToCheck: 80
-    Chances: 40
+    PercToCheck: 50
+    Chances: 60
   TotemAtk:
     AtkType: 3
     IsPlayerSide: 0

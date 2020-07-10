@@ -8,10 +8,12 @@ public class MinionType_Script : BaseCharacter
     protected bool MoveCoOn = true;
     protected IEnumerator MoveActionCo;
     protected float LastAttackTime;
-    public float UpDownMovementPerc = 13;
-    public float ForwardMovementPerc = 13;
-    public float BackwardMovementPerc = 13;
+    public int AttackWillPerc = 13;
+    public int UpDownMovementPerc = 13;
+    public int TowardMovementPerc = 13;
+    public int AwayMovementPerc = 13;
     List<HitInfoClass> HittedByList = new List<HitInfoClass>();
+    List<AggroInfoClass> AggroInfoList = new List<AggroInfoClass>();
     float totDamage = 0;
     bool strongAnimDone = false;
     public ScriptableObjectAI CurrentAIState;
@@ -35,6 +37,7 @@ public class MinionType_Script : BaseCharacter
     public override void SetUpEnteringOnBattle()
     {
         SetAnimation(CharacterAnimationStateType.Arriving);
+        CurrentPlayerController = ControllerType.Enemy;
         shotsLeftInAttack = 0;
     }
 
@@ -103,7 +106,7 @@ public class MinionType_Script : BaseCharacter
     }
 
     float lastAttackTime = 0;
-    public virtual IEnumerator AI()
+    public virtual IEnumerator AI_Old()
     {
         bool val = true;
         while (val)
@@ -165,8 +168,8 @@ public class MinionType_Script : BaseCharacter
         }
     }
 
-
-    public virtual IEnumerator AI_New()
+    GameObject psAI = null;
+    public virtual IEnumerator AI()
     {
         bool val = true;
         while (val)
@@ -179,81 +182,102 @@ public class MinionType_Script : BaseCharacter
                 {
                     yield return null;
                 }
-
-                CurrentAIState = CharInfo.GetCurrentAI();
-                SetCurrentAIValues();
-
-                int randomizer = Random.Range(0, 100);
-                if(ForwardMovementPerc > randomizer)
+                ScriptableObjectAI prev = CurrentAIState;
+                CurrentAIState = CharInfo.GetCurrentAI(AggroInfoList, UMS.CurrentTilePos);
+                if(CharInfo.AIs.Count == 1 || prev == null || prev.AI_Type != CurrentAIState.AI_Type)
                 {
-                    BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(UMS.CurrentTilePos.x, UMS.Side == SideType.RightSide ? UMS.CurrentTilePos.y - 1 : UMS.CurrentTilePos.y + 1));
-                    if(bts.BattleTileState == BattleTileStateType.Empty)
+                    SetCurrentAIValues();
+                    if(prev != null)
                     {
-                        yield return MoveCharOnDir_Co(UMS.Side == SideType.RightSide ? InputDirection.Left : InputDirection.Right);
-                    }
-                    else if(bts.BattleTileState == BattleTileStateType.Occupied && UMS.WalkingSide == bts.WalkingSide)
-                    {
+                        prev.ResetStats(CharInfo);
 
                     }
+                    CurrentAIState.ModifyStats(CharInfo);
+                    if(psAI != null)
+                    {
+                        psAI.SetActive(false);
+                    }
+                    psAI = ParticleManagerScript.Instance.GetParticle(CurrentAIState.AIPs.PSType);
+                    psAI.transform.parent = SpineAnim.transform;
+                    psAI.transform.localPosition = Vector3.zero;
+                    psAI.SetActive(true);
                 }
 
+                int atkChances = Random.Range(0 ,100);
+                nextAttack = null;
+                GetAttack();
 
-
-
-
-
-
-/*
-                if (randomizer < UpDownMovementPerc)
+                if (CurrentAIState.t != null && atkChances < AttackWillPerc && nextAttack != null && (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler))
                 {
-                    yield return MoveCharOnDir_Co(InputDirection.Left);
-                }
-                else if (randomizer > (100 - UpDownMovementPerc))
-                {
-                    yield return MoveCharOnDir_Co(InputDirection.Right);
+                    lastAttackTime = Time.time;
+                    nextAttackPos = CurrentAIState.t.UMS.CurrentTilePos;
+                    yield return AttackSequence();
+                    
                 }
                 else
                 {
-                    targetChar = GetTargetChar(enemys);
-                    if (targetChar.UMS.CurrentTilePos.x < UMS.CurrentTilePos.x)
+                    BattleTileScript bts;
+                    int randomizer = Random.Range(0, 100);
+
+                    if (TowardMovementPerc > randomizer)
                     {
-                        yield return MoveCharOnDir_Co(InputDirection.Up);
+                        if (CurrentAIState.t.UMS.CurrentTilePos.x != UMS.CurrentTilePos.x)
+                        {
+                            InputDirection dir = CurrentAIState.t.UMS.CurrentTilePos.x < UMS.CurrentTilePos.x ? InputDirection.Up : InputDirection.Down;
+                            bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(dir == InputDirection.Up ? UMS.CurrentTilePos.x - 1 : UMS.CurrentTilePos.x + 1, UMS.CurrentTilePos.y));
+                            if (bts != null && bts.BattleTileState != BattleTileStateType.Empty)
+                            {
+                                bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(UMS.CurrentTilePos.x, UMS.Side == SideType.RightSide ? UMS.CurrentTilePos.y - 1 : UMS.CurrentTilePos.y + 1));
+                                if (bts.BattleTileState == BattleTileStateType.Empty)
+                                {
+                                    yield return MoveCharOnDir_Co(UMS.Side == SideType.RightSide ? InputDirection.Left : InputDirection.Right);
+                                }
+                            }
+                            else
+                            {
+                                yield return MoveCharOnDir_Co(dir);
+                            }
+                        }
+                        else
+                        {
+                            bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(UMS.CurrentTilePos.x, UMS.Side == SideType.RightSide ? UMS.CurrentTilePos.y - 1 : UMS.CurrentTilePos.y + 1));
+                            if (bts.BattleTileState == BattleTileStateType.Empty)
+                            {
+                                yield return MoveCharOnDir_Co(UMS.Side == SideType.RightSide ? InputDirection.Left : InputDirection.Right);
+                            }
+                        }
                     }
-                    else
+                    else if (AwayMovementPerc > randomizer - TowardMovementPerc)
                     {
-                        yield return MoveCharOnDir_Co(InputDirection.Down);
+                        if (CurrentAIState.t.UMS.CurrentTilePos.x != UMS.CurrentTilePos.x)
+                        {
+                            bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(UMS.CurrentTilePos.x, UMS.Side == SideType.RightSide ? UMS.CurrentTilePos.y - 1 : UMS.CurrentTilePos.y + 1));
+                            if (bts.BattleTileState == BattleTileStateType.Empty)
+                            {
+                                yield return MoveCharOnDir_Co(UMS.Side == SideType.LeftSide ? InputDirection.Left : InputDirection.Right);
+                            }
+                        }
+                        else
+                        {
+                            int updown = Random.Range(0, 100);
+                            InputDirection dir = updown < 50 ? InputDirection.Up : InputDirection.Down;
+                            bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(dir == InputDirection.Up ? UMS.CurrentTilePos.x - 1 : UMS.CurrentTilePos.x + 1, UMS.CurrentTilePos.y));
+                            if (bts != null && bts.BattleTileState != BattleTileStateType.Empty)
+                            {
+                                bts = GridManagerScript.Instance.GetBattleTile(new Vector2Int(UMS.CurrentTilePos.x, UMS.Side == SideType.RightSide ? UMS.CurrentTilePos.y - 1 : UMS.CurrentTilePos.y + 1));
+                                if (bts.BattleTileState == BattleTileStateType.Empty)
+                                {
+                                    yield return MoveCharOnDir_Co(UMS.Side == SideType.LeftSide ? InputDirection.Left : InputDirection.Right);
+                                }
+                            }
+                            else
+                            {
+                                yield return MoveCharOnDir_Co(dir);
+                            }
+                        }
                     }
                 }
-                */
-
-
-
-
-
-
-                List<BaseCharacter> enemys = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList();
-                if (enemys.Count > 0)
-                {
-                    BaseCharacter targetChar = enemys.Where(r => r.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x).FirstOrDefault();
-                    /*BaseCharacter targetChar = null;
-                    List<BaseCharacter> possibleTargets = enemys.Where(r => Mathf.Abs(r.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x) <= 1).ToList();
-                    if (possibleTargets.Count > 0)
-                    {
-                        targetChar = possibleTargets[Random.Range(0, possibleTargets.Count)];
-                    }*/
-                    if (targetChar != null && (nextAttack == null || (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler)))
-                    {
-                        lastAttackTime = Time.time;
-                        nextAttackPos = targetChar.UMS.CurrentTilePos;
-                        yield return AttackSequence();
-                    }
-                    else
-                    {
-
-                       
-                    }
-                }
-                yield return null;
+            yield return null;
             }
         }
     }
@@ -265,18 +289,24 @@ public class MinionType_Script : BaseCharacter
 
     protected void SetCurrentAIValues()
     {
-        if(CurrentAIState.UpdateMoveForward)
+        if (CurrentAIState.UpdateAttckWill)
         {
-            ForwardMovementPerc = CurrentAIState.MoveForward;
+            AttackWillPerc = CurrentAIState.AttackWill;
+        }
+        if (CurrentAIState.UpdateMoveForward)
+        {
+            TowardMovementPerc = CurrentAIState.MoveForward;
         }
         if (CurrentAIState.UpdateMoveBackward)
         {
-            BackwardMovementPerc = CurrentAIState.MoveBackward;
+            AwayMovementPerc = CurrentAIState.MoveBackward;
         }
         if (CurrentAIState.UpdateMoveUpDown)
         {
             UpDownMovementPerc = CurrentAIState.MoveUpDown;
         }
+
+        
     }
 
     public virtual IEnumerator Move()
@@ -362,21 +392,17 @@ public class MinionType_Script : BaseCharacter
         SetAnimation(animState.ToString(), loop, transition);
     }
 
+
+
+
     //Basic attack sequence
-    public override IEnumerator AttackSequence(ScriptableObjectAttackBase atk = null)
+    public override IEnumerator AttackSequence()
     {
         Attacking = true;
         bulletFired = false;
         string animToFire;
         bool isLooped = false;
-        if (atk != null)
-        {
-            nextAttack = atk;
-        }
-        else
-        {
-            GetAttack();
-        }
+   
         if(nextAttack != null)
         {
             isLooped = false;
@@ -388,6 +414,113 @@ public class MinionType_Script : BaseCharacter
             while (Attacking)
             {
                 yield return null;
+            }
+        }
+    }
+
+
+    public override void GetAttack()
+    {
+        currentTileAtks = CharInfo.CurrentAttackTypeInfo.Where(r => r != null && r.CurrentAttackType == AttackType.Tile).ToList();
+        availableAtks.Clear();
+        for (int i = 0; i < currentTileAtks.Count; i++)
+        {
+            atkToCheck = currentTileAtks[i];
+            switch (atkToCheck.TilesAtk.StatToCheck)
+            {
+                case StatsCheckType.Health:
+                    switch (atkToCheck.TilesAtk.ValueChecker)
+                    {
+                        case ValueCheckerType.LessThan:
+                            if (CharInfo.HealthPerc < atkToCheck.TilesAtk.PercToCheck)
+                            {
+
+                                availableAtks.Add(atkToCheck);
+                            }
+                            break;
+                        case ValueCheckerType.EqualTo:
+                            if (CharInfo.HealthPerc == atkToCheck.TilesAtk.PercToCheck)
+                            {
+                                availableAtks.Add(atkToCheck);
+                            }
+                            break;
+                        case ValueCheckerType.MoreThan:
+                            if (CharInfo.HealthPerc > atkToCheck.TilesAtk.PercToCheck)
+                            {
+                                availableAtks.Add(atkToCheck);
+                            }
+                            break;
+                    }
+                    break;
+                case StatsCheckType.Stamina:
+                    switch (atkToCheck.TilesAtk.ValueChecker)
+                    {
+                        case ValueCheckerType.LessThan:
+                            if (CharInfo.StaminaPerc < atkToCheck.TilesAtk.PercToCheck)
+                            {
+                                availableAtks.Add(atkToCheck);
+                            }
+                            break;
+                        case ValueCheckerType.EqualTo:
+                            if (CharInfo.StaminaPerc == atkToCheck.TilesAtk.PercToCheck)
+                            {
+                                availableAtks.Add(atkToCheck);
+                            }
+                            break;
+                        case ValueCheckerType.MoreThan:
+                            if (CharInfo.StaminaPerc > atkToCheck.TilesAtk.PercToCheck)
+                            {
+                                availableAtks.Add(atkToCheck);
+                            }
+                            break;
+                    }
+                    break;
+                case StatsCheckType.None:
+                    nextAttack = atkToCheck;
+                    availableAtks.Add(atkToCheck);
+                    break;
+            }
+        }
+
+        int totalchances = 0;
+
+        List<ScriptableObjectAttackBase> resAtkBase = new List<ScriptableObjectAttackBase>();
+        availableAtks.ForEach(r =>
+        {
+            switch (r.Fov)
+            {
+                case FieldOfViewType.NearRange:
+                    if(CurrentAIState.t.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x)
+                    {
+                        resAtkBase.Add(r);
+                    }
+                    break;
+                case FieldOfViewType.MidRange:
+                    if (Mathf.Abs(CurrentAIState.t.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x) <= 1)
+                    {
+                        resAtkBase.Add(r);
+                    }
+                    break;
+                case FieldOfViewType.LongRange:
+                    resAtkBase.Add(r);
+                    break;
+            }
+        });
+
+        resAtkBase.ForEach(r =>
+        {
+            totalchances += r.TilesAtk.Chances;
+        });
+        int chances = UnityEngine.Random.Range(0, totalchances);
+        int sumc = 0;
+        for (int i = 0; i < resAtkBase.Count; i++)
+        {
+            sumc += resAtkBase[i].TilesAtk.Chances;
+
+            if (chances < sumc)
+            {
+                nextAttack = resAtkBase[i];
+                return;
             }
         }
     }
@@ -460,7 +593,6 @@ public class MinionType_Script : BaseCharacter
 
     public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
-
         if (isAttackBlocking)
         {
             int rand = UnityEngine.Random.Range(0, 100);
@@ -473,15 +605,35 @@ public class MinionType_Script : BaseCharacter
         }
 
         LastAttackTime = Time.time;
-        return base.SetDamage(attacker, damage, elemental, isCritical);
+        return SetDamage(attacker, damage, elemental, isCritical);
     }
 
 
     public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical)
     {
-        damage = damage * CharInfo.DefenceStats.BaseDefence;
+        float defenceChances = Random.Range(0, 100);
+        if(defenceChances < CharInfo.DefenceStats.MinionPerfectDefenceChances && !SpineAnim.CurrentAnim.Contains("Atk"))
+        {
+            isDefending = true;
+            DefendingHoldingTimer = 0;
+            SetAnimation(CharacterAnimationStateType.Defending);
+            damage = 0;
+        }
+        else if (defenceChances < (CharInfo.DefenceStats.MinionPerfectDefenceChances + CharInfo.DefenceStats.MinionDefenceChances) && !SpineAnim.CurrentAnim.Contains("Atk"))
+        {
+            isDefending = true;
+            DefendingHoldingTimer = 10;
+            SetAnimation(CharacterAnimationStateType.Defending);
+            damage = damage - CharInfo.DefenceStats.BaseDefence;
+        }
+        else
+        {
+            isDefending = false;
+            DefendingHoldingTimer = 0;
+        }
         return base.SetDamage(attacker, damage, elemental, isCritical);
     }
+
 
 
     public override void SetFinalDamage(BaseCharacter attacker, float damage)
@@ -494,6 +646,23 @@ public class MinionType_Script : BaseCharacter
         else
         {
             hic.Damage += damage;
+        }
+
+        AggroInfoClass aggro = AggroInfoList.Where(r => r.PlayerController == attacker.CurrentPlayerController).FirstOrDefault();
+        if (aggro == null)
+        {
+            AggroInfoList.Add(new AggroInfoClass(attacker.CurrentPlayerController, 1));
+        }
+        else
+        {
+            aggro.Hit ++;
+            AggroInfoList.ForEach(r =>
+            {
+                if(r.PlayerController != attacker.CurrentPlayerController)
+                {
+                    r.Hit = r.Hit == 0 ? 0 : r.Hit - 1;
+                }
+            });
         }
         attacker.Sic.DamageMade += damage;
         totDamage += damage;
@@ -581,6 +750,12 @@ public class MinionType_Script : BaseCharacter
             return;
         }
 
+        if (completedAnim == CharacterAnimationStateType.Defending.ToString())
+        {
+            isDefending = false;
+            DefendingHoldingTimer = 0;
+        }
+
         if (completedAnim == CharacterAnimationStateType.Reverse_Arriving.ToString())
         {
             transform.position = new Vector3(100, 100, 100);
@@ -627,5 +802,23 @@ public class HitInfoClass
     {
         CharacterId = characterId;
         Damage = damage;
+    }
+}
+
+
+public class AggroInfoClass
+{
+    public ControllerType PlayerController;
+    public int Hit;
+
+    public AggroInfoClass()
+    {
+
+    }
+
+    public AggroInfoClass(ControllerType playerController, int hit)
+    {
+        PlayerController = playerController;
+        Hit = hit;
     }
 }

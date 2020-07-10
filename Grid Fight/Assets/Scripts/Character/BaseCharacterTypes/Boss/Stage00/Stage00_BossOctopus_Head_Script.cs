@@ -24,10 +24,7 @@ public class Stage00_BossOctopus_Head_Script : MinionType_Script
         yield return null;
     }
 
-    public override IEnumerator AttackSequence(ScriptableObjectAttackBase atk = null)
-    {
-        yield return base.AttackSequence();
-    }
+  
 
     private IEnumerator SetUpEnteringOnBattle_Co()
     {

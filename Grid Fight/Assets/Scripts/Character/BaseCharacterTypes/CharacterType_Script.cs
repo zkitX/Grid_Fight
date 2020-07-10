@@ -220,7 +220,7 @@ public class CharacterType_Script : BaseCharacter
         battleTime.isStopped = true;
         SetAnimation(CharacterAnimationStateType.Reverse_Arriving);
         isDefending = false;
-
+        CurrentPlayerController = ControllerType.None;
         AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.ExitBattleJump, AudioBus.HighPrio);
         EventManager.Instance?.AddCharacterSwitched((BaseCharacter)this);
     }

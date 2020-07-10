@@ -110,7 +110,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public AttackPhasesType currentAttackPhase = AttackPhasesType.End;
     public DeathProcessStage currentDeathProcessPhase = DeathProcessStage.None;
     public SpecialAttackStatus StopPowerfulAtk;
-    private float DefendingHoldingTimer = 0;
+    protected float DefendingHoldingTimer = 0;
     public bool IsSwapping = false;
     public bool SwapWhenPossible = false;
     public GameObject chargeParticles = null;
@@ -131,7 +131,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     }
 
     public int _shotsLeftInAttack = 0;
-
+    public ControllerType CurrentPlayerController;
     [HideInInspector]
     public bool _Attacking = false;
     public virtual bool Attacking
@@ -252,7 +252,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.Right.Hit, CharInfo.CharacterID, AttackParticlePhaseTypes.Hit, tilePos, UMS.Side, nextAttack.AttackInput);
     }
 
-    public virtual IEnumerator AttackSequence(ScriptableObjectAttackBase atk = null)
+    public virtual IEnumerator AttackSequence()
     {
         yield return null;
     }
@@ -303,10 +303,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     }*/
 
 
-    List<ScriptableObjectAttackBase> availableAtks = new List<ScriptableObjectAttackBase>();
-    List<ScriptableObjectAttackBase> currentTileAtks = new List<ScriptableObjectAttackBase>();
-    ScriptableObjectAttackBase atkToCheck;
-    public void GetAttack()
+    [HideInInspector] public List<ScriptableObjectAttackBase> availableAtks = new List<ScriptableObjectAttackBase>();
+    [HideInInspector] public List<ScriptableObjectAttackBase> currentTileAtks = new List<ScriptableObjectAttackBase>();
+    [HideInInspector] public ScriptableObjectAttackBase atkToCheck;
+    public virtual void GetAttack()
     {
         currentTileAtks = CharInfo.CurrentAttackTypeInfo.Where(r => r != null && r.CurrentAttackType == AttackType.Tile).ToList();
         availableAtks.Clear();
@@ -1122,7 +1122,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     if (bdClass.CurrentBuffDebuff.Value == 0 && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
                     {
                         CharActionlist.Add(CharacterActionType.SwitchCharacter);
-                        yield return BattleManagerScript.Instance.RemoveCharacterFromBaord(ControllerType.Player1, this, true);
+                        yield return BattleManagerScript.Instance.RemoveCharacterFromBaord(this, true);
                     }
                     break;
                 case BuffDebuffStatsType.SpeedStats_MovementSpeed:

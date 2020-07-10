@@ -116,19 +116,12 @@ public class Stage09_Boss_NoFace_Script : MinionType_Script
         yield break; //char doesnt move
         yield return baseForme.MoveCharOnDir_Co(nextDir);
     }
-    public override IEnumerator AttackSequence(ScriptableObjectAttackBase atk = null)
+    public override IEnumerator AttackSequence()
     {
         Attacking = true;
         bulletFired = false;
-        if (atk != null)
-        {
-            nextAttack = atk;
-        }
-        else
-        {
-            GetAttack();
-            baseForme.nextAttack = nextAttack;
-        }
+        GetAttack();
+        baseForme.nextAttack = nextAttack;
 
         //CreateTileAttack();
 

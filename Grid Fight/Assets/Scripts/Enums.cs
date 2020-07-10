@@ -355,30 +355,39 @@ public enum ModificableStatsType
 
 public enum AIType
 {
-    VeryDefensive = -2,
-    Defensive = -1,
+    VeryDefensive = -20,
+    Defensive = -10,
     Neutral = 0,
-    Aggressive = 1,
-    VeryAggressive = 2
+    Aggressive = 10,
+    VeryAggressive = 20
 }
 
 public enum VisionType
 {
-    Front_Near,
-    Front_Far,
-    UpDown_Near,
-    UpDown_Far
+    Front_Near = 10,
+    Front_Far = 5,
+    UpDown_Near = 1,
+    UpDown_Far = 0
 }
 
 
 public enum AggroType
 {
-    Hit_0,
-    Hit_3,
-    Hit_5,
-    Hit_10
+    Hit_Less0 = 0,
+    Hit_1To2 = 3,
+    Hit_3To4 = 5,
+    Hit_More5 = 10
 
 }
+
+public enum PartyHPType
+{
+    Over_5 = 20,
+    Over_30 = 10,
+    Over_50 = 5,
+    Over_90 = 0,
+}
+
 
 public enum ValueCheckerType
 {
@@ -397,7 +406,12 @@ public enum ElementalWeaknessType
     VeryResistent = 2,
     ExtremelyResistent = 3
 }
-
+public enum FieldOfViewType
+{
+    NearRange,
+    MidRange,
+    LongRange
+}
 
 public enum AttackAnimPrefixType
 {
