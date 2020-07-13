@@ -680,7 +680,7 @@ public enum CharacterNameType
     Tohora_Boss_Tikaka = 1028,
 
 
-    //Stage 02
+    //Stage 02 - The Burg
     TheBurg_Minion_Mountain_IronTron = 1040,
     TheBurg_Minion_Desert_Robotron = 1041,
     TheBurg_Minion_Forest_HappyBot = 1042,
@@ -693,37 +693,38 @@ public enum CharacterNameType
     TheBurg_Boss_Mainframe_Minion = 1049,
 
 
-    //Stage 03
-    Stage03_Minion_Mountain = 1060,
-    Stage03_Minion_Desert = 1061,
-    Stage03_Minion_Forest = 1062,
-    Stage03_Minion_Valley = 1063,
-    Stage03_Character_Valley = 1064,
-    Stage03_Character_Desert = 1065,
-    Stage03_Character_Mountain = 1066,
-    Stage03_Character_Forest = 1067,
+    //Stage 03 - Forest Of Kin
+    ForestOfKin_Minion_Mountain = 1060,
+    ForestOfKin_Minion_Desert = 1061,
+    ForestOfKin_Minion_Forest = 1062,
+    ForestOfKin_Minion_Valley = 1063,
+    ForestOfKin_Character_Valley_Enola = 1064,
+    ForestOfKin_Character_Desert_Valis = 1065,
+    ForestOfKin_Character_Mountain_Seke = 1066,
+    ForestOfKin_Character_Forest_Balla = 1067,
+    ForestOfKin_Boss_Forest_Kin = 1068,
 
 
-    //Stage 04
-    Stage04_Minion_Mountain = 1080,
-    Stage04_Minion_Desert = 1081,
-    Stage04_Minion_Forest = 1082,
-    Stage04_Minion_Valley = 1083,
-    Stage04_Character_Valley = 1084,
-    Stage04_Character_Desert = 1085,
-    Stage04_Character_Mountain = 1086,
-    Stage04_Character_Forest = 1087,
-    Stage04_BossGirl = 1088,
-    Stage04_BossMonster = 1089,
-    Stage04_BossGirl_Minion0 = 1090,
-    Stage04_BossGirl_Minion1 = 1091,
-    Stage04_BossGirl_Minion2 = 1092,
-    Stage04_BossGirl_Minion3 = 1093,
-    Stage04_BossMonster_Minion = 1094,
-    Stage04_BossMonster_Minion0 = 1095,
-    Stage04_BossMonster_Minion1 = 1096,
-    Stage04_BossMonster_Minion2 = 1097,
-    Stage04_BossMonster_Minion3 = 1098,
+    //Stage 05 - Ascenso Mountains
+    AscensoMountains_Minion_Mountain_Bellama = 1080,
+    AscensoMountains_Minion_Desert_LadyBush = 1081,
+    AscensoMountains_Minion_Forest_JaguarVivern = 1082,
+    AscensoMountains_Minion_Valley_Monkeyna = 1083,
+    AscensoMountains_Character_Valley_Miranda = 1084,
+    AscensoMountains_Character_Desert_Zoila = 1085,
+    AscensoMountains_Character_Mountain_Alanda = 1086,
+    AscensoMountains_Character_Forest_Zeta = 1087,
+    AscensoMountains_BossGirl_Quilla = 1088,
+    AscensoMountains_BossMonster_Pachamama = 1089,
+    AscensoMountains_BossGirl_Quilla_Minion0 = 1090,
+    AscensoMountains_BossGirl_Quilla_Minion1 = 1091,
+    AscensoMountains_BossGirl_Quilla_Minion2 = 1092,
+    AscensoMountains_BossGirl_Quilla_Minion3 = 1093,
+    AscensoMountains_BossMonster_Pachamama_Minion = 1094,
+    AscensoMountains_BossMonster_Pachamama_Minion0 = 1095,
+    AscensoMountains_BossMonster_Pachamama_Minion1 = 1096,
+    AscensoMountains_BossMonster_Pachamama_Minion2 = 1097,
+    AscensoMountains_BossMonster_Pachamama_Minion3 = 1098,
 
 
     //Stage 05
@@ -738,14 +739,15 @@ public enum CharacterNameType
 
 
     //Stage 06
-    Stage06_Minion_Mountain = 1120,
-    Stage06_Minion_Desert = 1121,
-    Stage06_Minion_Forest = 1122,
-    Stage06_Minion_Valley = 1123,
-    Stage06_Character_Valley = 1124,
-    Stage06_Character_Desert = 1125,
-    Stage06_Character_Mountain = 1126,
-    Stage06_Character_Forest = 1127,
+    DaikiniPeaks_Minion_Mountain_Tantun = 1120,
+    DaikiniPeaks_Minion_Desert_Caw = 1121,
+    DaikiniPeaks_Minion_Forest_Kabuto = 1122,
+    DaikiniPeaks_Minion_Valley_Panchitta = 1123,
+    DaikiniPeaks_Character_Valley_Thruthsayer = 1124,
+    DaikiniPeaks_Character_Desert_Daria = 1125,
+    DaikiniPeaks_Character_Mountain_Bosha = 1126,
+    DaikiniPeaks_Character_Forest_TheTwins = 1127,
+    DaikiniPeaks_Boss_Kala = 1128,
 
 
     //Stage 07
