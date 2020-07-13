@@ -163,6 +163,13 @@ public class InputController : MonoBehaviour
     public static InputController Instance; //Singleton instance
 
     public int PlayersNumber;
+    public int PlayerCount //cus PlayersNumber seems like a cap more than a count
+    {
+        get
+        {
+            return players.Count;
+        }
+    }
     public List<Player> players = new List<Player>(); // The Rewired Player
     public Vector2 Joystic; //Joysticks movement 
     void Awake()

@@ -31,6 +31,7 @@ public class Grid_UINavigator : MonoBehaviour
         else return null;
     }
 
+    public bool selectStartingButton = true;
     public bool specificStartingButton = true;
     [ConditionalField("specificStartingButton")] public Grid_UIButton startingButton = null;
     [ConditionalField("specificStartingButton", true)] public InputDirection startingDirection = InputDirection.Up;
@@ -92,6 +93,7 @@ public class Grid_UINavigator : MonoBehaviour
 
     [SerializeField] protected GameObject cursorPrefab = null;
     [HideInInspector] public Grid_UICursor cursor = null;
+    public MenuNavigationType startingNavType = MenuNavigationType.Relative;
     [HideInInspector] public List<MenuNavigationType> navTypes = new List<MenuNavigationType>();
     public bool CanNavigate(MenuNavigationType navType)
     {
@@ -152,8 +154,8 @@ public class Grid_UINavigator : MonoBehaviour
     private void Start()
     {
         EnableCollection(startingCollectionID, true);
-        StartCoroutine(SelectFirstButton());
-        SetNavigationAbsolute(MenuNavigationType.Relative);
+        if(selectStartingButton) StartCoroutine(SelectFirstButton()); 
+        SetNavigationAbsolute(startingNavType);
     }
 
     public void EnableCollection(string collectionID, bool state)

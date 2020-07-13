@@ -928,6 +928,7 @@ public enum MenuNavigationType
     Relative = 1,
     Cursor = 2,
     DirectButton = 3,
+    PlayerNavBox = 4,
 }
 
 public enum LevelType

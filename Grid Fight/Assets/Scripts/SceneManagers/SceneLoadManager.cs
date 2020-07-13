@@ -17,6 +17,7 @@ public class SceneLoadManager : MonoBehaviour
     protected bool loadingScene = false;
     [HideInInspector] public StageProfile stagePrimedToLoad = null;
 
+    public List<Color> playersColor = new List<Color>();
     public CharacterLoadInformation[] loadedCharacters = new CharacterLoadInformation[0];
     public MaskLoadInformation[] loadedMasks = new MaskLoadInformation[1];
     public StageLoadInformation[] loadedStages = new StageLoadInformation[0];
