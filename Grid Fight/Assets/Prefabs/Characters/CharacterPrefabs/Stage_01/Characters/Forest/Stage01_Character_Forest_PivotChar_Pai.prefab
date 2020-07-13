@@ -487,7 +487,8 @@ MonoBehaviour:
   CharaterLevel: 0
   UseLayeringSystem: 1
   Head: {fileID: 2611632405596273973}
-  AIs: []
+  AIs:
+  - {fileID: 11400000, guid: 6440a784888d69649bd560903a78926e, type: 2}
   CharacterRespawnLength: 180
   CharacterSelection: 0
   RapidAttack:
@@ -560,8 +561,12 @@ MonoBehaviour:
   DefenceStats:
     BaseDefence: 2
     Invulnerability: 0.2
+    MinionDefenceChances: 20
+    MinionPerfectDefenceChances: 5
     B_BaseDefence: 10
     B_Invulnerability: 0.2
+    B_MinionDefenceChances: 20
+    B_MinionPerfectDefenceChances: 5
     LevelMultiplier: 0
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0

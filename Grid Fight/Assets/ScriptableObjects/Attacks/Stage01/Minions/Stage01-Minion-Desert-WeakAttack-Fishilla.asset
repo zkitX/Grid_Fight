@@ -15,12 +15,14 @@ MonoBehaviour:
   Chances: 100
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
-  DamageMultiplier: {x: 1, y: 1}
+  _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 0
   AttackAnim: 0
   StaminaCost: 10
   ExperiencePoints: 10
+  CoolDown: 7
   PrefixAnim: 0
+  Fov: 0
   Particles:
     Left:
       Cast: {fileID: 5383297979227334417, guid: 4501c1e9affc45c4fb3f72f0abbdc978,
@@ -167,3 +169,11 @@ MonoBehaviour:
     ValueChecker: 2
     PercToCheck: 0
     Chances: 100
+  TotemAtk:
+    AtkType: 3
+    IsPlayerSide: 0
+    DurationOnField: 10
+    Effects: []
+    TotemIn: 0
+    TotemOut: 0
+    TentaclePrefab: 0

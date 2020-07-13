@@ -15,12 +15,12 @@ MonoBehaviour:
   Chances: 100
   CurrentAttackType: 1
   AttackRatioMultiplier: 2
-  DamageMultiplier: {x: 1.4, y: 1.4}
+  _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 1
   AttackAnim: 0
   StaminaCost: 10
   ExperiencePoints: 10
-  CoolDown: 0
+  CoolDown: 8
   PrefixAnim: 0
   Fov: 1
   Particles:
@@ -239,7 +239,7 @@ MonoBehaviour:
     StatToCheck: 1
     ValueChecker: 0
     PercToCheck: 50
-    Chances: 60
+    Chances: 45
   TotemAtk:
     AtkType: 3
     IsPlayerSide: 0

@@ -597,12 +597,15 @@ MonoBehaviour:
   CurrentAttackTypeInfo:
   - {fileID: 11400000, guid: 9c45e1c3d54e04c4db6e658e4ace3b29, type: 2}
   - {fileID: 11400000, guid: 30b7d90761b47774f870f1af5e52f98d, type: 2}
+  - {fileID: 11400000, guid: 8afae86da3a576d4b95264b82d88188b, type: 2}
   Elemental: 5
   ClassType: 3
   CharaterLevel: 0
   UseLayeringSystem: 1
   Head: {fileID: 2822340319966623864}
-  AIs: []
+  AIs:
+  - {fileID: 11400000, guid: 5270d0c583de8604fb627b5c63761b02, type: 2}
+  - {fileID: 11400000, guid: 790aa4b0d3160b34ea81e09a0c528c34, type: 2}
   CharacterRespawnLength: 180
   CharacterSelection: 0
   RapidAttack:
@@ -675,8 +678,12 @@ MonoBehaviour:
   DefenceStats:
     BaseDefence: 3
     Invulnerability: 0.2
+    MinionDefenceChances: 20
+    MinionPerfectDefenceChances: 5
     B_BaseDefence: 10
     B_Invulnerability: 0.2
+    B_MinionDefenceChances: 20
+    B_MinionPerfectDefenceChances: 5
     LevelMultiplier: 0
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
