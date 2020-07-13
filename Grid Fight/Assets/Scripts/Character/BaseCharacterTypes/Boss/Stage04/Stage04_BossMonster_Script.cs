@@ -25,10 +25,10 @@ public class Stage04_BossMonster_Script : MinionType_Script
 
     private Dictionary<CharacterNameType, bool> AreChildrenAlive = new Dictionary<CharacterNameType, bool>()
     {
-        { CharacterNameType.Stage04_BossMonster_Minion0, true },
-        { CharacterNameType.Stage04_BossMonster_Minion1, true },
-        { CharacterNameType.Stage04_BossMonster_Minion2, true },
-        { CharacterNameType.Stage04_BossMonster_Minion3, true }
+        { CharacterNameType.AscensoMountains_BossMonster_Pachamama_Minion0, true },
+        { CharacterNameType.AscensoMountains_BossMonster_Pachamama_Minion1, true },
+        { CharacterNameType.AscensoMountains_BossMonster_Pachamama_Minion2, true },
+        { CharacterNameType.AscensoMountains_BossMonster_Pachamama_Minion3, true }
     };
 
     public override void SetUpEnteringOnBattle()
@@ -58,8 +58,8 @@ public class Stage04_BossMonster_Script : MinionType_Script
 
         for (int i = 0; i < 4; i++)
         {
-            Stage04_BossMonster_Flower_Script flower = (Stage04_BossMonster_Flower_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(CharacterNameType.Stage04_BossMonster_Minion.ToString(), CharacterSelectionType.Up,
-            new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage04_BossMonster_Minion, WalkingSideType.RightSide, SideType.RightSide, FacingType.Left, AttackType.Tile, BaseCharType.None, new List<CharacterActionType>(), LevelType.Novice), transform);
+            Stage04_BossMonster_Flower_Script flower = (Stage04_BossMonster_Flower_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(CharacterNameType.AscensoMountains_BossMonster_Pachamama_Minion.ToString(), CharacterSelectionType.Up,
+            new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.AscensoMountains_BossMonster_Pachamama_Minion, WalkingSideType.RightSide, SideType.RightSide, FacingType.Left, AttackType.Tile, BaseCharType.None, new List<CharacterActionType>(), LevelType.Novice), transform);
             //BattleManagerScript.Instance.AllCharactersOnField.Add(flower);
             flower.mfType = (MonsterFlowerType)i;
             flower.UMS.Pos = FlowersPos.GetRange(i, 1);
