@@ -202,11 +202,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6974f479bb009d749ac9167024e831bc, type: 2}
   - {fileID: 11400000, guid: 78e4b7d515f7f2b4d959a30fc1400ef9, type: 2}
   - {fileID: 11400000, guid: 06c49030de4ad6e459d69d1999a7f76a, type: 2}
+  - {fileID: 11400000, guid: e601fe9b1182a5241ba821057d0b8d1e, type: 2}
+  - {fileID: 11400000, guid: 8510cf3c768c74344b9a63a1907604ea, type: 2}
   - {fileID: 11400000, guid: c289b9ffc1cd54b4eb0f3cc71651f74e, type: 2}
+  - {fileID: 11400000, guid: 72a91ef1c90d81b4d9f1d09d0f4fba72, type: 2}
+  - {fileID: 11400000, guid: 098ad3b275c2cd845af19186d261d9d9, type: 2}
+  - {fileID: 11400000, guid: dc73a0ccf40a41746ad0b6ffc5cf1a4d, type: 2}
   AllCharactersOnField: []
   AllPlayersMinionOnField: []
   CharsForTalkingPart: []
   CharactersContainer: {fileID: 1356531903299505061}
+  playerColors:
+  - {r: 0.8679245, g: 0.12691349, b: 0.12691349, a: 1}
+  - {r: 0.46706444, g: 0.735849, b: 0.10065861, a: 1}
+  - {r: 0.8584906, g: 0.03644534, b: 0.81808394, a: 1}
+  - {r: 0.120016046, g: 0.47106957, b: 0.8773585, a: 1}
   playersNumberBig:
   - {fileID: 21300000, guid: ca856d2fd33560c42bddbb606a65489e, type: 3}
   - {fileID: 21300000, guid: 9c2ca7117c43f5e44a126f9f5c4a4450, type: 3}
@@ -530,11 +540,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1356531903299505061}
     m_Modifications:
-    - target: {fileID: 1072692802108931392, guid: 730c9cdded2811142b3b17f531383548,
-        type: 3}
-      propertyPath: m_Name
-      value: StatisticManager
-      objectReference: {fileID: 0}
     - target: {fileID: 8527285901987777838, guid: 730c9cdded2811142b3b17f531383548,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -589,6 +594,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1072692802108931392, guid: 730c9cdded2811142b3b17f531383548,
+        type: 3}
+      propertyPath: m_Name
+      value: StatisticManager
       objectReference: {fileID: 0}
     - target: {fileID: 555652098188282199, guid: 730c9cdded2811142b3b17f531383548,
         type: 3}

@@ -140,7 +140,7 @@ public class BattleManagerScript : MonoBehaviour
     [SerializeField]
     private Transform CharactersContainer;
     private List<CharacterBaseInfoClass> PlayerBattleInfo = new List<CharacterBaseInfoClass>();
-    private List<Color> playerColors = new List<Color>();
+    public List<Color> playerColors = new List<Color>();
     public List<Color> playersColor
     {
         get
@@ -420,6 +420,7 @@ public class BattleManagerScript : MonoBehaviour
     public BaseCharacter CreateChar(CharacterBaseInfoClass charInfo, Transform parent)
     {
         GameObject characterBasePrefab = null;
+        Debug.LogError(charInfo.CharacterName);
         ScriptableObjectCharacterPrefab soCharacterPrefab = ListOfScriptableObjectCharacterPrefab.Where(r => r.CharacterName == charInfo.CharacterName).First();
         characterBasePrefab = Instantiate(CharacterBasePrefab, new Vector3(100, 100, 100), Quaternion.identity, parent);
         GameObject child = Instantiate(soCharacterPrefab.CharacterPrefab, characterBasePrefab.transform.position, Quaternion.identity, characterBasePrefab.transform);
