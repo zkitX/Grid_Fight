@@ -127,11 +127,11 @@ MonoBehaviour:
   AllPlayersMinionOnField: []
   CharsForTalkingPart: []
   CharactersContainer: {fileID: 256730208125820099}
-  playersColor:
-  - {r: 0.027411869, g: 0.7264151, b: 0.47696686, a: 1}
-  - {r: 0, g: 0.47058824, b: 1, a: 1}
-  - {r: 0.01868991, g: 0.037468422, b: 0.990566, a: 1}
-  - {r: 1, g: 0.98565185, b: 0, a: 1}
+  playerColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
   playersNumberBig:
   - {fileID: 6912616150220632482, guid: 802d7ac9cd882124c92a4bf283975a96, type: 3}
   - {fileID: -5070159640192908694, guid: 802d7ac9cd882124c92a4bf283975a96, type: 3}
@@ -512,11 +512,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 256730208125820099}
     m_Modifications:
-    - target: {fileID: 1072692802108931392, guid: 730c9cdded2811142b3b17f531383548,
-        type: 3}
-      propertyPath: m_Name
-      value: StatisticManager
-      objectReference: {fileID: 0}
     - target: {fileID: 8527285901987777838, guid: 730c9cdded2811142b3b17f531383548,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -571,6 +566,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1072692802108931392, guid: 730c9cdded2811142b3b17f531383548,
+        type: 3}
+      propertyPath: m_Name
+      value: StatisticManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 730c9cdded2811142b3b17f531383548, type: 3}
