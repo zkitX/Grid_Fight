@@ -60,6 +60,11 @@ public class MenuRelationshipInfoClass
     {
 
     }
+    public MenuRelationshipInfoClass(List<TargetRecruitableClass> charTargetRecruitable, List<CharacterNameType> charTarget)
+    {
+        CharTargetRecruitable = charTargetRecruitable;
+        CharTarget = charTarget;
+    }
 }
 
 [System.Serializable]
@@ -67,4 +72,15 @@ public class TargetRecruitableClass
 {
     public CharacterNameType CharTargetRecruitableID;
     public int Value;
+
+    public TargetRecruitableClass()
+    {
+
+    }
+
+    public TargetRecruitableClass(CharacterNameType charTargetRecruitableID, int value)
+    {
+        CharTargetRecruitableID = charTargetRecruitableID;
+        Value = value;
+    }
 }

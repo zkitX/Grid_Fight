@@ -107,6 +107,12 @@ public class GridManagerScript : MonoBehaviour
         return AreInControlledArea;
     }
 
+
+    public bool IsWalkableAndFree(Vector2Int pos, WalkingSideType wSide)
+    {
+        return BattleTiles.Where(r => r.Pos == pos && r.BattleTileState == BattleTileStateType.Empty && r.WalkingSide == wSide).ToList().Count > 0 ? true : false;
+    }
+
     public bool isPosOnField(Vector2Int pos)
     {
         return BattleTiles.Where(r => r.Pos == pos && r.BattleTileState > BattleTileStateType.NonUsable).ToList().Count > 0 ? true : false;

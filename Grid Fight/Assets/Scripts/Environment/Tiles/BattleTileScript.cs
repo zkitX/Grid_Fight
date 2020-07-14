@@ -31,6 +31,9 @@ public class BattleTileScript : MonoBehaviour
     private bool destroyEffectOnCollection = false;
     private bool isColliding = false;
     public Vector2 TileADStats = Vector2.one;
+
+    public bool isTaken = false;
+
     //Private
 
     #region Tile Variables

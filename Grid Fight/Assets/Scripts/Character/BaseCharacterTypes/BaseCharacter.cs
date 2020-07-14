@@ -756,6 +756,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 foreach (BattleTileScript item in prevBattleTile)
                 {
                     GridManagerScript.Instance.SetBattleTileState(item.Pos, BattleTileStateType.Empty);
+                    item.isTaken = false;
                 }
                 UMS.CurrentTilePos += dir;
                 CharOredrInLayer = 101 + (UMS.CurrentTilePos.x * 10) + (UMS.Facing == FacingType.Right ? UMS.CurrentTilePos.y - 12 : UMS.CurrentTilePos.y);

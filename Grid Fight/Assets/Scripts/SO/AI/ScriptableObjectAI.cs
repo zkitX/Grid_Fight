@@ -19,7 +19,9 @@ public class ScriptableObjectAI : ScriptableObject
     //public PartyHPType PartyHp;
     public List<AICheckClass> Checks = new List<AICheckClass>();
 
-    [Header("State effects")]
+    [Header("Move effects")]
+
+    public bool IdleMovement = false;
     public bool UpdateAttckWill = false;
     [ConditionalField("UpdateAttckWill", false)] public int AttackWill = 20;
     public bool UpdateMoveForward = false;
@@ -28,6 +30,8 @@ public class ScriptableObjectAI : ScriptableObject
     [ConditionalField("UpdateMoveBackward", false)] public int MoveBackward = 20;
     public bool UpdateMoveUpDown = false;
     [ConditionalField("UpdateMoveUpDown", false)] public int MoveUpDown = 20;
+
+    [Header("State effects")]
 
     public BaseCharacter t;
     public List<AIStatsModifierClass> StatsToModify = new List<AIStatsModifierClass>();

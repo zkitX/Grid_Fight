@@ -8,10 +8,10 @@ public class ParticleHelperScript : MonoBehaviour
     [Tooltip("Insert particles that consist in only one long particle")]
     public List<ParticleSystem> LongParticles = new List<ParticleSystem>();
     public float PSTime = 10f;
-    public Transform Target;
-    public Vector3 Adjustment;
-    public bool IncludeChildren = true;
-
+    [Tooltip("All trails inside the group")]
+    List<TrailRenderer> Trails = new List<TrailRenderer>();
+    [Tooltip("Cache of trail initial information")]
+    List<float> TrailInitialTime = new List<float>();
     public float timet = 0;
 
     ParticleSystem PS;
@@ -35,18 +35,23 @@ public class ParticleHelperScript : MonoBehaviour
             Children.Add(new ParticleChildSimulationSpeed(item.main.simulationSpeed, item));
         }
 
+        foreach (TrailRenderer trail in GetComponentsInChildren<TrailRenderer>())
+        {
+            Trails.Add(trail);
+            if (trail.GetComponent<VFXBulletSpeedCalibration>())
+            {
+                VFXBulletSpeedCalibration vfx = trail.GetComponent<VFXBulletSpeedCalibration>();
+                TrailInitialTime.Add(vfx.trailTimeCache * (vfx.BulletDuration / vfx.BulletOriginalDuration));
+            }
+            else
+            {
+                TrailInitialTime.Add(trail.time);
+            }
+        }
 
         if (GetComponent<ParticleSystem>())
         {
             PS = GetComponent<ParticleSystem>();
-        }
-        if (!Target)
-        {
-            Target = transform;
-        }
-        if (IncludeChildren)
-        {
-            PSChildren = GetComponentsInChildren<ParticleSystem>();
         }
         var main = GetComponent<ParticleSystem>().main;
         main.stopAction = ParticleSystemStopAction.Callback;
@@ -56,28 +61,6 @@ public class ParticleHelperScript : MonoBehaviour
     {
        // Debug.Log("System has stopped!");
         ResetParticle();
-    }
-
-
-    void FixedUpdate()
-    {
-        //Debug.Log(iter + "    " + PSTime + "    " + MyProperty);
-
-        if (Target != null)
-        {
-            var VOL = PS.velocityOverLifetime;
-            VOL.orbitalOffsetXMultiplier = Target.position.x - transform.position.x - Adjustment.x;
-            VOL.orbitalOffsetYMultiplier = Target.position.y - transform.position.y - Adjustment.y;
-            if (IncludeChildren)
-            {
-                foreach (ParticleSystem pS in PSChildren)
-                {
-                    var VOLChild = pS.velocityOverLifetime;
-                    VOLChild.orbitalOffsetXMultiplier = Target.position.x - transform.position.x - Adjustment.x;
-                    VOLChild.orbitalOffsetYMultiplier = Target.position.y - transform.position.y - Adjustment.y;
-                }
-            }
-        }
     }
 
 
@@ -138,6 +121,19 @@ public class ParticleHelperScript : MonoBehaviour
             m.duration = PSTime / m.simulationSpeed;
             //check if the particle is finished
             PS.Play();
+            if (PS.time >= m.duration)
+            {
+                for (int i = 0; i < Trails.Count; i++)
+                {
+                    TrailRenderer trail = Trails[i];
+                    trail.time = trail.time / 1.1f;
+                    if (trail.time < 0.005f)
+                    {
+                        trail.time = 0;
+                        trail.emitting = false;
+                    }
+                }
+            }
         }
         foreach (ParticleSystem p in LongParticles)
         {
