@@ -268,7 +268,7 @@ MonoBehaviour:
   - name: KoraWave
     IsRandom: 0
     MaxEnemyOnScreen: 3
-    AbsoluteMaxEnemyOnScreen: 0
+    AbsoluteMaxEnemyOnScreen: 3
     DelayBetweenChars: 1
     ListOfEnemy:
     - name: Kora
@@ -391,7 +391,7 @@ MonoBehaviour:
   - name: Wave5
     IsRandom: 0
     MaxEnemyOnScreen: 4
-    AbsoluteMaxEnemyOnScreen: 0
+    AbsoluteMaxEnemyOnScreen: 4
     DelayBetweenChars: 1
     ListOfEnemy:
     - name: Fishylla
@@ -422,7 +422,7 @@ MonoBehaviour:
       SpowningTile: []
     - name: Crabera
       NPCType: 0
-      NumberOfCharacter: 4
+      NumberOfCharacter: 2
       TypeOfCharacter:
         CharacterName: 1022
         KillWaveIfCharDie: 0
@@ -448,7 +448,7 @@ MonoBehaviour:
       SpowningTile: []
     - name: Fishylla
       NPCType: 0
-      NumberOfCharacter: 3
+      NumberOfCharacter: 2
       TypeOfCharacter:
         CharacterName: 1021
         KillWaveIfCharDie: 0
@@ -465,6 +465,32 @@ MonoBehaviour:
         MovementTimer: {x: 0, y: 0}
         Exp: 0
         AIs: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 0
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile: []
+    - name: Crabera
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1022
+        KillWaveIfCharDie: 0
+        Health: {x: 70, y: 80}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 8, y: 10}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.6, y: 1.6}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 0.8, y: 0.8}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 6440a784888d69649bd560903a78926e, type: 2}
+        - {fileID: 11400000, guid: 514190b53570a9b40abde07e0f3ba360, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 0
       StartingEnemyTiles: []
@@ -494,7 +520,9 @@ MonoBehaviour:
         MovementSpeed: {x: 0.8, y: 0.8}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        AIs: []
+        AIs:
+        - {fileID: 11400000, guid: 6440a784888d69649bd560903a78926e, type: 2}
+        - {fileID: 11400000, guid: 514190b53570a9b40abde07e0f3ba360, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 0
       StartingEnemyTiles: []
@@ -518,7 +546,9 @@ MonoBehaviour:
         MovementSpeed: {x: 1, y: 1}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        AIs: []
+        AIs:
+        - {fileID: 11400000, guid: d1128cc1e5582924f8d17af539b798c0, type: 2}
+        - {fileID: 11400000, guid: a3a40b9fde6ae6248b9558bbcc894f67, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 0
       StartingEnemyTiles: []
@@ -542,7 +572,9 @@ MonoBehaviour:
         MovementSpeed: {x: 1.7, y: 1.7}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        AIs: []
+        AIs:
+        - {fileID: 11400000, guid: 5270d0c583de8604fb627b5c63761b02, type: 2}
+        - {fileID: 11400000, guid: 790aa4b0d3160b34ea81e09a0c528c34, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 0
       StartingEnemyTiles: []
@@ -566,7 +598,9 @@ MonoBehaviour:
         MovementSpeed: {x: 0.8, y: 0.8}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        AIs: []
+        AIs:
+        - {fileID: 11400000, guid: 45250ca858729fc4e8aed46d76b6e90b, type: 2}
+        - {fileID: 11400000, guid: 09cb6649b3d747243a84d01618408ab8, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 0
       StartingEnemyTiles: []
@@ -596,7 +630,10 @@ MonoBehaviour:
         MovementSpeed: {x: 1.5, y: 1.5}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        AIs: []
+        AIs:
+        - {fileID: 11400000, guid: 12d75e12ebf80104783dee92ca05ec80, type: 2}
+        - {fileID: 11400000, guid: bf1de93dd0ed3bd459df6199fe3dc729, type: 2}
+        - {fileID: 11400000, guid: 6a9f64222ff654e43aa41c6ae2cc4bad, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -623,7 +660,9 @@ MonoBehaviour:
         MovementSpeed: {x: 0.8, y: 0.8}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        AIs: []
+        AIs:
+        - {fileID: 11400000, guid: 6440a784888d69649bd560903a78926e, type: 2}
+        - {fileID: 11400000, guid: 514190b53570a9b40abde07e0f3ba360, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -650,7 +689,9 @@ MonoBehaviour:
         MovementSpeed: {x: 1.7, y: 1.7}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        AIs: []
+        AIs:
+        - {fileID: 11400000, guid: 5270d0c583de8604fb627b5c63761b02, type: 2}
+        - {fileID: 11400000, guid: 790aa4b0d3160b34ea81e09a0c528c34, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -677,7 +718,9 @@ MonoBehaviour:
         MovementSpeed: {x: 0.8, y: 0.8}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        AIs: []
+        AIs:
+        - {fileID: 11400000, guid: 45250ca858729fc4e8aed46d76b6e90b, type: 2}
+        - {fileID: 11400000, guid: 09cb6649b3d747243a84d01618408ab8, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -710,7 +753,10 @@ MonoBehaviour:
         MovementSpeed: {x: 1.1, y: 1.1}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        AIs: []
+        AIs:
+        - {fileID: 11400000, guid: 6847113b39104dd419571ee38694b6db, type: 2}
+        - {fileID: 11400000, guid: 17ea8bc98ea838b409682a8ae30e49d9, type: 2}
+        - {fileID: 11400000, guid: b92c90b404c607348a2c589e5812f83d, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -737,7 +783,9 @@ MonoBehaviour:
         MovementSpeed: {x: 1, y: 1}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        AIs: []
+        AIs:
+        - {fileID: 11400000, guid: d1128cc1e5582924f8d17af539b798c0, type: 2}
+        - {fileID: 11400000, guid: a3a40b9fde6ae6248b9558bbcc894f67, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -764,7 +812,9 @@ MonoBehaviour:
         MovementSpeed: {x: 0.8, y: 0.8}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        AIs: []
+        AIs:
+        - {fileID: 11400000, guid: 45250ca858729fc4e8aed46d76b6e90b, type: 2}
+        - {fileID: 11400000, guid: 09cb6649b3d747243a84d01618408ab8, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []

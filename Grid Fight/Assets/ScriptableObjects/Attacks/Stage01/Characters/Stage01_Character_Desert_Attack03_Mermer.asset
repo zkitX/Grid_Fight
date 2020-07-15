@@ -10,17 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage01_Character_Desert_Attack02
+  m_Name: Stage01_Character_Desert_Attack03_Mermer
   m_EditorClassIdentifier: 
   Chances: 100
   CurrentAttackType: 1
-  AttackRatioMultiplier: 2
-  DamageMultiplier: {x: 1, y: 1}
+  AttackRatioMultiplier: 1
+  _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 1
   AttackAnim: 1
   StaminaCost: 10
   ExperiencePoints: 10
+  CoolDown: 4
   PrefixAnim: 1
+  Fov: 1
   Particles:
     Left:
       Cast: {fileID: 822955250899428374, guid: 134213d8baf0a79408eba546f27c33f7, type: 3}
@@ -315,5 +317,13 @@ MonoBehaviour:
         EffectsOnTile: []
     StatToCheck: 1
     ValueChecker: 0
-    PercToCheck: 45
-    Chances: 100
+    PercToCheck: 60
+    Chances: 70
+  TotemAtk:
+    AtkType: 3
+    IsPlayerSide: 0
+    DurationOnField: 10
+    Effects: []
+    TotemIn: 0
+    TotemOut: 0
+    TentaclePrefab: 0

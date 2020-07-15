@@ -10,23 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a973d68f2b711f34b902c3029d63e805, type: 3}
-  m_Name: Kora -Defensive
+  m_Name: Mermer-Very Agressive
   m_EditorClassIdentifier: 
-  AI_Type: -10
+  AI_Type: 10
   Vision: 10
   Checks:
   - StatToCheck: 1
     ValueChecker: 0
+    PercToCheck: 79
+  - StatToCheck: 1
+    ValueChecker: 2
+    PercToCheck: 50
+  - StatToCheck: 1
+    ValueChecker: 0
     PercToCheck: 70
+  - StatToCheck: 1
+    ValueChecker: 2
+    PercToCheck: 60
   IdleMovement: 0
   UpdateAttckWill: 1
-  AttackWill: 50
+  AttackWill: 100
   UpdateMoveForward: 1
-  MoveForward: 20
+  MoveForward: 100
   UpdateMoveBackward: 1
-  MoveBackward: 80
+  MoveBackward: 0
   UpdateMoveUpDown: 0
   MoveUpDown: 10
   t: {fileID: 0}
   StatsToModify: []
-  AIPs: {fileID: 11400000, guid: 45bac07679f71ec47b1f1c8f1e36aa8c, type: 2}
+  AIPs: {fileID: 11400000, guid: 32c35098048c3274d8beb93ef106305b, type: 2}

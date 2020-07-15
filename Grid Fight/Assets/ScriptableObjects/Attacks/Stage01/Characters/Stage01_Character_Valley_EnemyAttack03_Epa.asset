@@ -10,31 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage01-Minion-Mountain-Attack02-Toka
+  m_Name: Stage01_Character_Valley_EnemyAttack03_Epa
   m_EditorClassIdentifier: 
   Chances: 100
   CurrentAttackType: 1
-  AttackRatioMultiplier: 1
+  AttackRatioMultiplier: 2
   _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 1
-  AttackAnim: 0
+  AttackAnim: 1
   StaminaCost: 10
   ExperiencePoints: 10
-  CoolDown: 5
-  PrefixAnim: 0
+  CoolDown: 4
+  PrefixAnim: 1
   Fov: 1
   Particles:
     Left:
-      Cast: {fileID: 6798042170676295785, guid: 3b9608d1107110e44bfd9fb88f8a1c92,
+      Cast: {fileID: 4927253743441866815, guid: 355957e9d893d044ca15511ef14861b6,
         type: 3}
-      Bullet: {fileID: 5929669761749727824, guid: 5649fa67f45484d47a87f465e92c45a4,
+      Bullet: {fileID: 8662512498320452954, guid: 3f0bb1fd0ed2d3241ba2e0f231c0c96d,
         type: 3}
-      Hit: {fileID: 3719651915426297370, guid: 6d3b2e50cb75b8040a69d8ce7ddbfe6f, type: 3}
+      Hit: {fileID: 8602130236460923310, guid: 9de439602c4b058469a8720feb04beea, type: 3}
     Right:
-      Cast: {fileID: 731960222991626249, guid: b4d5e4ab41d778f4baf8b37eabed54f5, type: 3}
-      Bullet: {fileID: 1571988095091154899, guid: 1aae63add8dca8a4d8e11dd85032abda,
+      Cast: {fileID: 3465501561076678791, guid: 539d49d98e7043d4a808944229c233fa,
         type: 3}
-      Hit: {fileID: 6041259536131661630, guid: 0db0f875371378f4288dcd54f16ee8bf, type: 3}
+      Bullet: {fileID: 6344266208631520687, guid: 71909928b8851374ca5b1f2f287bb2d8,
+        type: 3}
+      Hit: {fileID: 6289738693630632087, guid: 8c0469648c4a1b642974cabe0506d205, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
@@ -43,54 +44,27 @@ MonoBehaviour:
   ParticlesAtk:
     BulletTrajectories:
     - Show: 1
-      BulletDistanceInTile: {x: 0, y: 7}
+      BulletDistanceInTile: {x: 0, y: 15}
       Trajectory_Y:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0.002503129
-          value: -0.0095821135
-          inSlope: 0.10084034
-          outSlope: -0.14595908
-          tangentMode: 1
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.19044244
-        - serializedVersion: 3
-          time: 0.20732574
-          value: 0.12470262
-          inSlope: 2.1815722
-          outSlope: 2.1815722
-          tangentMode: 1
-          weightedMode: 0
-          inWeight: 0.33333334
           outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.42717206
-          value: 1.006525
-          inSlope: 0.03406383
-          outSlope: 0.03406383
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.713425
-        - serializedVersion: 3
-          time: 0.71245766
-          value: 0.9996613
-          inSlope: -0.30817193
-          outSlope: -3.9019616
-          tangentMode: 1
-          weightedMode: 0
-          inWeight: 0.6947553
-          outWeight: 0.11206407
         - serializedVersion: 3
           time: 1
           value: 0
-          inSlope: -3.0752084
-          outSlope: -0.09917355
-          tangentMode: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
           weightedMode: 0
-          inWeight: 0.12622613
+          inWeight: 0.33333334
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -129,8 +103,8 @@ MonoBehaviour:
   TilesAtk:
     AtkType: 1
     BulletTrajectories:
-    - Delay: 1.5
-      BulletTravelDurationPerTile: 0.25
+    - Delay: 1
+      BulletTravelDurationPerTile: 0.3
       ExplosionChances: 100
       Trajectory_Y:
         serializedVersion: 2
@@ -138,30 +112,102 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 4.530805
-          outSlope: 4.530805
-          tangentMode: 0
+          inSlope: 0.49936813
+          outSlope: 0.49936813
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.100126535
+          value: 0.05
+          inSlope: -0.0006326735
+          outSlope: -0.0006326735
+          tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.26912895
+          outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.5
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
+          time: 0.2
+          value: 0
+          inSlope: -0.50031674
+          outSlope: -0.50031674
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.3
+          value: -0.05
+          inSlope: 0.000000044703484
+          outSlope: 0.000000044703484
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.4
+          value: 0
+          inSlope: 0.50167936
+          outSlope: 0.50167936
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.49933276
+          value: 0.05
+          inSlope: 0.0003463328
+          outSlope: 0.0003463328
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.5988024
+          value: 0
+          inSlope: -0.49837443
+          outSlope: -0.49837443
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.7
+          value: -0.05
+          inSlope: 0.0029585063
+          outSlope: 0.0029585063
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.8
+          value: 0
+          inSlope: 0.50884736
+          outSlope: 0.50884736
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.896582
+          value: 0.05
+          inSlope: 0.017109975
+          outSlope: 0.017109975
+          tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
           value: 0
-          inSlope: -4.648086
-          outSlope: -4.648086
-          tangentMode: 0
+          inSlope: -0.48347488
+          outSlope: -0.48347488
+          tangentMode: 34
           weightedMode: 0
-          inWeight: 0.05269456
-          outWeight: 0.33333334
+          inWeight: 0.33333334
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -200,7 +246,7 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-    - Delay: 2.1
+    - Delay: 1.5
       BulletTravelDurationPerTile: 0
       ExplosionChances: 100
       Trajectory_Y:
@@ -217,15 +263,6 @@ MonoBehaviour:
         m_RotationOrder: 4
       Show: 1
       BulletEffectTiles:
-      - Pos: {x: -1, y: 0}
-        HasEffect: 0
-        showImpact: 1
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
       - Pos: {x: -1, y: -1}
         HasEffect: 0
         showImpact: 1
@@ -235,7 +272,16 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-      - Pos: {x: 0, y: -1}
+      - Pos: {x: -1, y: 1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 1, y: 1}
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -253,19 +299,10 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-      - Pos: {x: 1, y: 0}
-        HasEffect: 0
-        showImpact: 1
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
     StatToCheck: 1
-    ValueChecker: 2
-    PercToCheck: 60
-    Chances: 75
+    ValueChecker: 0
+    PercToCheck: 50
+    Chances: 80
   TotemAtk:
     AtkType: 3
     IsPlayerSide: 0

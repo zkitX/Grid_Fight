@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage01-Minion-Mountain-Attack02-Toka
+  m_Name: Stage01-Minion-Mountain-Attack03-Toka
   m_EditorClassIdentifier: 
   Chances: 100
   CurrentAttackType: 1
-  AttackRatioMultiplier: 1
+  AttackRatioMultiplier: 2
   _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 1
   AttackAnim: 0
@@ -22,7 +22,7 @@ MonoBehaviour:
   ExperiencePoints: 10
   CoolDown: 5
   PrefixAnim: 0
-  Fov: 1
+  Fov: 2
   Particles:
     Left:
       Cast: {fileID: 6798042170676295785, guid: 3b9608d1107110e44bfd9fb88f8a1c92,
@@ -263,9 +263,9 @@ MonoBehaviour:
         DurationOnTile: 0
         EffectsOnTile: []
     StatToCheck: 1
-    ValueChecker: 2
-    PercToCheck: 60
-    Chances: 75
+    ValueChecker: 0
+    PercToCheck: 45
+    Chances: 65
   TotemAtk:
     AtkType: 3
     IsPlayerSide: 0
