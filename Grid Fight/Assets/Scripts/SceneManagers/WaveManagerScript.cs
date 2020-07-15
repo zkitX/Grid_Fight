@@ -21,7 +21,6 @@ public class WaveManagerScript : MonoBehaviour
     public List<BaseCharacter> WaveCharcters = new List<BaseCharacter>();
 
     private WaveCharClass CurrentWaveChar;
-    private List<ScriptableObjectWaveEvent> Events = new List<ScriptableObjectWaveEvent>();
     public int CurrentWave = 0;
     public bool StartWave = false;
     private IEnumerator Wave_Co;
@@ -146,6 +145,7 @@ public class WaveManagerScript : MonoBehaviour
         res.CharInfo.ExperienceValue = character.Exp;
 
         res.CharActionlist.Add(CharacterActionType.Move);
+        res.CharInfo.AIs = character.AIs;
         //res.CharInfo.CurrentAttackTypeInfo.Clear();
         return res;
     }
@@ -351,8 +351,6 @@ public class WaveManagerScript : MonoBehaviour
         {
             CurrentWaveChar = ListOfEnemy[Random.Range(0, ListOfEnemy.Count)];
             CurrentWaveChar.NumberOfCharacter--;
-            Events.AddRange(CurrentWaveChar.TypeOfCharacter.Events);
-            Events = Events.Distinct().ToList();
             return CurrentWaveChar.TypeOfCharacter;
         }
 
@@ -366,8 +364,6 @@ public class WaveManagerScript : MonoBehaviour
         if (CurrentWaveChar != null)
         {
             CurrentWaveChar.NumberOfCharacter--;
-            Events.AddRange(CurrentWaveChar.TypeOfCharacter.Events);
-            Events = Events.Distinct().ToList();
             return CurrentWaveChar.TypeOfCharacter;
         }
         return null;
@@ -462,8 +458,7 @@ public class WaveCharacterInfoClass
     public Vector2 MovementTimer;
     public float Exp;
 
-    public List<ScriptableObjectWaveEvent> Events = new List<ScriptableObjectWaveEvent>();
-
+    public List<ScriptableObjectAI> AIs = new List<ScriptableObjectAI>();
 }
 
 
