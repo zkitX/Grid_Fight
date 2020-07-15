@@ -217,6 +217,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         isMoving = false;
         SetAttackReady(false);
+        SpineAnim.SetAnim(CharacterAnimationStateType.Idle);
         Call_CurrentCharIsDeadEvent();
         shotsLeftInAttack = 0;
     }
