@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using Fungus.EditorUtils;
 using Fungus;
+using System.Linq;
 
 [CustomEditor (typeof(GridFight_Menu))]
 public class GridFight_MenuEditor : CommandEditor 
@@ -48,8 +49,6 @@ public class GridFight_MenuEditor : CommandEditor
                                new GUIContent("<None>"),
                                flowchart);
         serializedObject.ApplyModifiedProperties();
-
-
     }
 
     public void DrawInfo()
@@ -61,6 +60,36 @@ public class GridFight_MenuEditor : CommandEditor
             return;
         }
         base.OnInspectorGUI();
+        if(!origin.Unlockable)
+        {
+            origin.EnablingBlocksName.Clear();
+        }
+        if (origin.Parent != null)
+        {
+            if(string.IsNullOrEmpty(origin.ThisBlockVariableName))
+            {
+                FlowChartVariablesManagerScript vars = origin.Parent.GetComponent<FlowChartVariablesManagerScript>();
+                string vName = origin.Parent.name.Split('_').Last() + "_";
+                FlowChartVariablesClass res = vars.Variables.Where(r => r.Name.Contains(vName)).LastOrDefault();
+
+                if (res != null)
+                {
+                    int id = System.Convert.ToInt16(res.Name.Split('_').Last());
+                    res = new FlowChartVariablesClass(vName + (id + 1), "OFF");
+                }
+                else
+                {
+                    res = new FlowChartVariablesClass(vName + "0", "OFF");
+                }
+                origin.ThisBlockVariableName = res.Name;
+                vars.Variables.Add(res);
+                EditorUtility.SetDirty(origin.Parent);
+            }
+        }
+        else
+        {
+            Debug.LogError("Vini motha fuka put the parent");
+        }
         EditorUtility.SetDirty(origin);
     }
 }    

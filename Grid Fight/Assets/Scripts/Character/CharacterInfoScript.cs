@@ -384,7 +384,6 @@ public class CharacterInfoScript : MonoBehaviour
 
     public ScriptableObjectAI GetCurrentAI(List<AggroInfoClass> enemies, Vector2Int currentPos)
     {
-        List<ScriptableObjectAI> res = new List<ScriptableObjectAI>();
         List<AIInfoCLass> aisInfo = new List<AIInfoCLass>();
 
         int charTargeting = 0;
@@ -409,7 +408,7 @@ public class CharacterInfoScript : MonoBehaviour
         }
 
 
-        return res.First();
+        return AIs.First();
     }
 
 

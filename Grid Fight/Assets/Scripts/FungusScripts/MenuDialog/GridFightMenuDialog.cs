@@ -58,7 +58,7 @@ public class GridFightMenuDialog : MenuDialog
 
     }
 
-    public bool AddOption(string text, bool interactable, bool hideOption, Block targetBlock, MenuRelationshipInfoClass relationshipInfo)
+    public bool AddOption(string text, bool interactable, bool hideOption, Block targetBlock, MenuRelationshipInfoClass relationshipInfo, OptionBoxAnimType animType, string variableName)
     {
         var block = targetBlock;
         UnityEngine.Events.UnityAction action = delegate
@@ -82,10 +82,10 @@ public class GridFightMenuDialog : MenuDialog
             }
         };
 
-        return AddOption(text, interactable, hideOption, action, relationshipInfo);
+        return AddOption(text, interactable, hideOption, action, relationshipInfo, animType, variableName);
     }
 
-    protected bool AddOption(string text, bool interactable, bool hideOption, UnityEngine.Events.UnityAction action, MenuRelationshipInfoClass relationshipInfo)
+    protected bool AddOption(string text, bool interactable, bool hideOption, UnityEngine.Events.UnityAction action, MenuRelationshipInfoClass relationshipInfo, OptionBoxAnimType animType, string variableName)
     {
         if (nextOptionIndex >= Boxes.Count)
             return false;
@@ -106,6 +106,7 @@ public class GridFightMenuDialog : MenuDialog
             return true;
         box.gameObject.SetActive(true);
         box.BoxAnim.SetBool("InOut", true);
+        box.BoxAnim.SetInteger("AnimType", (int)animType);
         AnimationInfoScript[] anims = box.BoxAnim.GetBehaviours<AnimationInfoScript>();
         for (int i = 0; i < anims.Length; i++)
         {
@@ -120,6 +121,7 @@ public class GridFightMenuDialog : MenuDialog
         if (!string.IsNullOrEmpty(text))
         {
             box.RelationshipInfo = relationshipInfo;
+            box.VariableName = variableName;
             box.NextBlock = (Block)action.Target.GetType().GetField("block").GetValue(action.Target);
         }
         
@@ -224,7 +226,7 @@ public class GridFightMenuDialog : MenuDialog
             {
                 BattleManagerScript.Instance.UpdateCharactersRelationship(false, Boxes[SelectionIndex].RelationshipInfo.CharTarget, Boxes[SelectionIndex].RelationshipInfo.CharTargetRecruitable);
             }
-
+            FlowChartVariablesManagerScript.instance.Variables.Where(r => r.Name == Boxes[SelectionIndex].VariableName).First().Value = "ON";
             isMenuReady = false;
             BattleManagerScript.Instance.FungusState = FungusDialogType.Dialog;
 

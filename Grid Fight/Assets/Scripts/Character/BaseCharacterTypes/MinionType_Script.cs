@@ -188,7 +188,7 @@ public class MinionType_Script : BaseCharacter
                 }
                 ScriptableObjectAI prev = CurrentAIState;
                 CurrentAIState = CharInfo.GetCurrentAI(AggroInfoList, UMS.CurrentTilePos);
-                if(CharInfo.AIs.Count == 1 || prev == null || prev.AI_Type != CurrentAIState.AI_Type)
+                if(prev == null || prev.AI_Type != CurrentAIState.AI_Type)
                 {
                     SetCurrentAIValues();
                     if(prev != null)

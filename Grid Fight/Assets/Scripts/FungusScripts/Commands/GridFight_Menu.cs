@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using System.Collections.Generic;
 using MyBox;
+using System.Linq;
 
 namespace Fungus
 {
@@ -20,6 +21,13 @@ namespace Fungus
         [Header("Relationship info")]
         public MenuRelationshipInfoClass RelationshipInfo;
 
+        [Header("Variable Info")]
+        public string ThisBlockVariableName;
+
+        public bool Unlockable = false;
+        public List<string> EnablingBlocksName = new List<string>();
+
+        public GameObject Parent;
         #region Public members
 
         public override void OnEnter()
@@ -29,20 +37,33 @@ namespace Fungus
                 // Override the active menu dialog
                 MenuDialog.ActiveMenuDialog = setMenuDialog;
             }
+            bool unlock = true;
+            bool hiddenOn = false;
+            foreach (string item in EnablingBlocksName)
+            {
+                if(FlowChartVariablesManagerScript.instance.Variables.Where(r => r.Name == item).First().Value == "OFF")
+                {
+                    hiddenOn = false;
+                    unlock = false;
+                    break;
+                }
+                hiddenOn = true;
+            }
 
-            bool hideOption = (hideIfVisited && targetBlock != null && targetBlock.GetExecutionCount() > 0) || hideThisOption.Value;
-
-            GridFightMenuDialog menuDialog = (GridFightMenuDialog)MenuDialog.GetMenuDialog();
+            if(unlock)
+            {
+                GridFightMenuDialog menuDialog = (GridFightMenuDialog)MenuDialog.GetMenuDialog();
                 if (menuDialog != null)
                 {
                     menuDialog.SetActive(true);
 
                     var flowchart = GetFlowchart();
                     string displayText = flowchart.SubstituteVariables(text);
-
-                    menuDialog.AddOption(displayText, interactable, hideOption, targetBlock, RelationshipInfo);
+                    string varVal = FlowChartVariablesManagerScript.instance.Variables.Where(r => r.Name == ThisBlockVariableName).First().Value;
+                    menuDialog.AddOption(displayText, interactable, false, targetBlock, RelationshipInfo, varVal == "ON" ? OptionBoxAnimType.AlreadySelected :
+                        hiddenOn ? OptionBoxAnimType.Hidden : OptionBoxAnimType.Active, ThisBlockVariableName);
                 }
-            
+            }
             Continue();
         }
         #endregion

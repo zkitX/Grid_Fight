@@ -985,3 +985,11 @@ public enum StageUnlockType
     unlocking,
     unlocked,
 };
+
+
+public enum OptionBoxAnimType
+{
+    Active,
+    AlreadySelected,
+    Hidden
+}
