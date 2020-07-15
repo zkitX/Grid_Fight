@@ -14,6 +14,14 @@ public class Grid_UIPlayerNavBox : MonoBehaviour
         activeState = state;
     }
 
+    public Grid_UIPanel parentPanel
+    {
+        get
+        {
+            return GetComponentInParent<Grid_UIPanel>();
+        }
+    }
+
     public PlayerNavButton[] playerNavGrid = new PlayerNavButton[0]; 
     public PlayerNavGroup[] playerNavGroups = new PlayerNavGroup[0];
 
@@ -32,13 +40,13 @@ public class Grid_UIPlayerNavBox : MonoBehaviour
 
     protected void Instance_ButtonAUpEvent(int player)
     {
-        if (!Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.PlayerNavBox) || !activeState) return;
+        if (!Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.PlayerNavBox) || !activeState || parentPanel.focusState != UI_FocusTypes.Focused) return;
         PressForPlayer(player);
     }
     protected float offset = 0f;
     protected void Instance_LeftJoyStickUsedEvent(int player, InputDirection dir)
     {
-        if (!Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.PlayerNavBox) || !activeState) return;
+        if (!Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.PlayerNavBox) || !activeState || parentPanel.focusState != UI_FocusTypes.Focused) return;
         if (offset + 0.2f < Time.time)
         {
             MoveForPlayer(player, dir);
@@ -64,18 +72,20 @@ public class Grid_UIPlayerNavBox : MonoBehaviour
             }
             else
             {
-                btnToSelect = playerNavGrid[Random.Range(0, playerNavGrid.Length)].button;
+                int newbtn = Random.Range(0, playerNavGrid.Length);
+                btnToSelect = playerNavGrid[newbtn].button;
+                navGroup.pos = playerNavGrid[newbtn].pos;
             }
             btnToSelect.SelectAction();
         }
     }
 
-    protected virtual void PressForPlayer(int player)
+    public virtual void PressForPlayer(int player)
     {
         Debug.LogError("LOGGED PRESS FOR PLAYER " + (player + 1).ToString());
     }
 
-    protected virtual void MoveForPlayer(int player, InputDirection dir)
+    public virtual void MoveForPlayer(int player, InputDirection dir)
     {
         PlayerNavGroup playNav = playerNavGroups.Where(r => r.ContainsPlayer(player)).FirstOrDefault();
 
@@ -104,22 +114,22 @@ public class Grid_UIPlayerNavBox : MonoBehaviour
             case InputDirection.Up:
                 closestButton = playerNavGrid.Where(r => r.pos == start + new Vector2Int(0,1)).FirstOrDefault();
                 if (closestButton != null) break;
-                closestButton = playerNavGrid.Where(r => r.pos.y > start.y).OrderBy(e => (start + e.pos).magnitude).FirstOrDefault();
+                closestButton = playerNavGrid.Where(r => r.pos.y > start.y).OrderBy(e => -(start + e.pos).magnitude).FirstOrDefault();
                 break;
             case InputDirection.Down:
                 closestButton = playerNavGrid.Where(r => r.pos == start + new Vector2Int(0, -1)).FirstOrDefault();
                 if (closestButton != null) break;
-                closestButton = playerNavGrid.Where(r => r.pos.y < start.y).OrderBy(e => (start + e.pos).magnitude).FirstOrDefault();
+                closestButton = playerNavGrid.Where(r => r.pos.y < start.y).OrderBy(e => -(start + e.pos).magnitude).FirstOrDefault();
                 break;
             case InputDirection.Left:
                 closestButton = playerNavGrid.Where(r => r.pos == start + new Vector2Int(-1, 0)).FirstOrDefault();
                 if (closestButton != null) break;
-                closestButton = playerNavGrid.Where(r => r.pos.x < start.x).OrderBy(e => (start + e.pos).magnitude).FirstOrDefault();
+                closestButton = playerNavGrid.Where(r => r.pos.x < start.x).OrderBy(e => -(start + e.pos).magnitude).FirstOrDefault();
                 break;
             case InputDirection.Right:
                 closestButton = playerNavGrid.Where(r => r.pos == start + new Vector2Int(1, 0)).FirstOrDefault();
                 if (closestButton != null) break;
-                closestButton = playerNavGrid.Where(r => r.pos.x > start.x).OrderBy(e => (start + e.pos).magnitude).FirstOrDefault();
+                closestButton = playerNavGrid.Where(r => r.pos.x > start.x).OrderBy(e => -(start + e.pos).magnitude).FirstOrDefault();
                 break;
         }
 
@@ -158,11 +168,12 @@ public class PlayerNavGroup
         return players.Contains(playerIndex);
     }
 
-    public PlayerNavGroup(bool _startRandomPos, int[] _players, Vector2Int startingPos = new Vector2Int())
+    public PlayerNavGroup(bool _startRandomPos, int[] _players, Vector2Int startingPos = new Vector2Int(), string _name = "")
     {
         startInRandomPos = _startRandomPos;
         players = _players;
         pos = startingPos;
+        Name = _name;
     }
 }
 
@@ -172,4 +183,10 @@ public class PlayerNavButton
     [HideInInspector] public string Name;
     public Vector2Int pos;
     public Grid_UIButton button;
+
+    public PlayerNavButton(Vector2Int _pos, Grid_UIButton btn)
+    {
+        button = btn;
+        pos = _pos;
+    }
 }

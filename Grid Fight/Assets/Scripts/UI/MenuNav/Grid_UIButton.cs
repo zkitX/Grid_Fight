@@ -121,9 +121,9 @@ public class Grid_UIButton : MonoBehaviour
 
     public virtual bool SelectAction()
     {
-        if (selected) return false;
+        if (selected && !Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.PlayerNavBox)) return false;
 
-        if (!visuallySelected)
+        if (!visuallySelected || Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.PlayerNavBox))
         {
             if (SelectionEventsSequencer != null) StopCoroutine(SelectionEventsSequencer);
             SelectionEventsSequencer = SequenceEvents(SelectActions);
@@ -139,9 +139,9 @@ public class Grid_UIButton : MonoBehaviour
 
     public virtual bool DeselectAction(bool playDeselectEffects)
     {
-        if (!selected) return false;
+        if (!selected && !Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.PlayerNavBox)) return false;
 
-        if (playDeselectEffects && visuallySelected && isActiveAndEnabled)
+        if ((playDeselectEffects && visuallySelected && isActiveAndEnabled) ||Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.PlayerNavBox))
         {
             if (SelectionEventsSequencer != null) StopCoroutine(SelectionEventsSequencer);
             SelectionEventsSequencer = SequenceEvents(DeselectActions);

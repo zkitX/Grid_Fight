@@ -17,15 +17,15 @@ public class CharSelectButton : MonoBehaviour
     public Color RecruitedColor = Color.white;
     public Color InSquadColor = new Color(1f, 1f, 1f, 0.3f);
 
-    public bool InSquad
+    public virtual bool InSquad
     {
         get
         {
-            return SceneLoadManager.Instance.squad.Values.Where(r => r.characterID == displayedChar).FirstOrDefault() != null;
+            return SceneLoadManager.Instance.SquadContains(displayedChar, 0);
         }
     }
 
-    public void DisplayChar(CharacterLoadInformation character, bool applyEffects = true)
+    public virtual void DisplayChar(CharacterLoadInformation character, bool applyEffects = true)
     {
         lockedCharIcon?.gameObject.SetActive(false);
 
@@ -62,12 +62,12 @@ public class CharSelectButton : MonoBehaviour
         }
     }
 
-    public void RefreshButton()
+    public virtual void RefreshButton()
     {
         DisplayChar(SceneLoadManager.Instance.loadedCharacters.Where(r => r.characterID == displayedChar).FirstOrDefault());
     }
 
-    public void UpdateSelection()
+    public virtual void UpdateSelection()
     {
         selectionBoxRef.UpdateSelection(this, displayedChar, transform.position);
     }

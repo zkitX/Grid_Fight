@@ -442,6 +442,10 @@ public class Grid_UINavigator : MonoBehaviour
         {
             col.UIActivators.DoActionByName(identifier);
         }
+        foreach (Grid_UIPanel pan in panels)
+        {
+            pan.GetComponent<Grid_UIInputActivators>()?.DoActionByName(identifier);
+        }
     }
 
     public IEnumerator TriggerUIActivatorCo(string identifier)
@@ -449,6 +453,13 @@ public class Grid_UINavigator : MonoBehaviour
         foreach (Grid_UICollection col in ActiveCollections)
         {
             yield return col.UIActivators.DoActionByNameCo(identifier);
+        }
+        foreach (Grid_UIPanel pan in panels)
+        {
+            if(pan.GetComponent<Grid_UIInputActivators>() != null)
+            {
+                yield return pan.GetComponent<Grid_UIInputActivators>()?.DoActionByNameCo(identifier);
+            }
         }
     }
 

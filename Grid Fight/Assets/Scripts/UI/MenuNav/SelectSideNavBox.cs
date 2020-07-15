@@ -16,12 +16,14 @@ public class SelectSideNavBox : Grid_UIPlayerNavBox
     protected TextMeshProUGUI selectorText;
 
 
+    [HideInInspector] public ArenaSideSelectManager manager = null;
+
+
 
     protected override void Awake()
     {
         selectAnim = selector.GetComponentInChildren<Animation>();
         selectorText = selector.GetComponentInChildren<TextMeshProUGUI>();
-        Setup(0);
     }
 
     public void Setup(int playerIndex)
@@ -30,26 +32,27 @@ public class SelectSideNavBox : Grid_UIPlayerNavBox
         selectorText.text = "P" + (playerIndex + 1).ToString();
         selectorText.color = SceneLoadManager.Instance.playersColor[playerIndex];
         playerNavGroups = new PlayerNavGroup[] { new PlayerNavGroup(false, new int[] { playerIndex }, new Vector2Int(0,0)) };
-        selector.position = playerNavGrid.Where(r => r.pos == new Vector2Int(0, 0)).First().button.transform.position;
+        selector.localPosition = playerNavGrid.Where(r => r.pos == new Vector2Int(0, 0)).First().button.transform.localPosition;
         SetupInitialSelections();
     }
 
     public void SetTeam(int team)
     {
         teamSelected = team;
+        manager.RefreshCanMoveToCharSelect();
     }
 
     public void DashSelectorToPos()
     {
         if (SelectorDasher != null) StopCoroutine(SelectorDasher);
-        SelectorDasher = DashSelectorToPos_Co(playerNavGrid.Where(r => r.pos == playerNavGroups[0].pos).First().button.transform.position);
+        SelectorDasher = DashSelectorToPos_Co(playerNavGrid.Where(r => r.pos == playerNavGroups[0].pos).First().button.transform.localPosition);
         StartCoroutine(SelectorDasher);
     }
 
     IEnumerator SelectorDasher = null;
     IEnumerator DashSelectorToPos_Co(Vector3 endPos)
     {
-        AnimationClip clip = endPos.x >= selector.position.x ? selectAnim.GetClip("SideSelector_DashRight") : selectAnim.GetClip("SideSelector_DashLeft");
+        AnimationClip clip = endPos.x >= selector.localPosition.x ? selectAnim.GetClip("SideSelector_DashRight") : selectAnim.GetClip("SideSelector_DashLeft");
         if (selectAnim.isPlaying) selectAnim.Stop();
         selectAnim.clip = clip;
         selectAnim.Play();
@@ -61,7 +64,7 @@ public class SelectSideNavBox : Grid_UIPlayerNavBox
         {
             remaining = Mathf.Clamp(remaining - Time.deltaTime, 0f, 99f);
             selectorText.color = Color.Lerp(selectorText.color, endColor, 1f - (remaining / duration));
-            selector.position = Vector3.Lerp(selector.position, endPos, 1f - (remaining / duration));
+            selector.localPosition = Vector3.Lerp(selector.localPosition, endPos, 1f - (remaining / duration));
             yield return null;
         }
     }

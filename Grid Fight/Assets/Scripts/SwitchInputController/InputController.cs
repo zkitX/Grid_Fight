@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 #if UNITY_SWITCH
 using UnityEngine.Switch;
 using Rewired.Platforms.Switch;
@@ -167,13 +168,30 @@ public class InputController : MonoBehaviour
     {
         get
         {
-            return players.Count;
+            return players.Where(r => r.controllers.hasKeyboard || r.controllers.joystickCount > 0).ToArray().Length;
         }
     }
     public List<Player> players = new List<Player>(); // The Rewired Player
-    public Vector2 Joystic; //Joysticks movement 
+    public List<Vector2> Joystics = new List<Vector2>(); //Joysticks movement 
+    public Vector2 Joystic
+    {
+        get
+        {
+            Vector2 average = new Vector2();
+            foreach (Vector2 joy in Joystics)
+            {
+                if (joy.x != 0) average.x = (joy.x + average.x) / 2f;
+                if (joy.y != 0) average.y = (joy.y + average.y) / 2f;
+            }
+
+            return average;
+        }
+    }
+    
     void Awake()
     {
+        bool keyboardAssigned = false;
+
         if (Instance != null)
         {
             Destroy(this);
@@ -183,6 +201,8 @@ public class InputController : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
+
+
         if (ReInput.players.GetPlayer(0).controllers.joystickCount == 0)
         {
             PlayersNumber = 1;
@@ -191,14 +211,23 @@ public class InputController : MonoBehaviour
         for (int i = 0; i < PlayersNumber; i++)
         {
             players.Add(ReInput.players.GetPlayer(i));
-            if (players[i].controllers.joystickCount > 0)
+            if (players[i].controllers.joystickCount > 0 || keyboardAssigned)
             {
                 players[i].controllers.hasKeyboard = false;
+            }
+            else
+            {
+                keyboardAssigned = true;
             }
             players[i].AddInputEventDelegate(OnButtonDown, UpdateLoopType.Update, InputActionEventType.ButtonJustPressed);
             players[i].AddInputEventDelegate(OnButtonPress, UpdateLoopType.Update, InputActionEventType.ButtonPressed);
             players[i].AddInputEventDelegate(OnButtonUp, UpdateLoopType.Update, InputActionEventType.ButtonJustReleased);
             players[i].AddInputEventDelegate(OnAxisUpdate, UpdateLoopType.Update, InputActionEventType.AxisActive);
+        }
+
+        for (int i = 0; i < PlayerCount; i++)
+        {
+            Joystics.Add(new Vector2());
         }
         
     }
@@ -208,12 +237,12 @@ public class InputController : MonoBehaviour
         InputButtonType buttonInput = (InputButtonType)System.Enum.Parse(typeof(InputButtonType), data.actionName);
         float x = (buttonInput == InputButtonType.Left_Move_Horizontal || buttonInput == InputButtonType.Right_Move_Horizontal) ? data.GetAxis() : 0;
         float y = (buttonInput == InputButtonType.Left_Move_Vertical || buttonInput == InputButtonType.Right_Move_Vertical) ? data.GetAxis() : 0;
-        Joystic = new Vector2(x,y);
+        Joystics[data.playerId] = new Vector2(x,y);
         if (LeftJoystickUsedEvent != null && (x > 0.2f || x < -0.2f || y > 0.2f || y < -0.2f))
         {
-            if (Mathf.Abs(Joystic.x) > Mathf.Abs(Joystic.y))
+            if (Mathf.Abs(Joystics[data.playerId].x) > Mathf.Abs(Joystics[data.playerId].y))
             {
-                if (Joystic.x > 0)
+                if (Joystics[data.playerId].x > 0)
                 {
                     LeftJoystickUsedEvent(data.playerId, InputDirection.Right);
                 }
@@ -224,7 +253,7 @@ public class InputController : MonoBehaviour
             }
             else
             {
-                if (Joystic.y > 0)
+                if (Joystics[data.playerId].y > 0)
                 {
                     LeftJoystickUsedEvent(data.playerId, InputDirection.Up);
                 }

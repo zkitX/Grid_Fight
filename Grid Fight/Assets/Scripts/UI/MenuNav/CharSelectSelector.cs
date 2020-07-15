@@ -169,11 +169,11 @@ public class CharSelectSelector : MonoBehaviour
 
         if (SceneLoadManager.Instance.squad.Values.Where(r => r.characterID == curSelectedChar).FirstOrDefault() == null)
         {
-            SceneLoadManager.Instance.AddSquadMate(curSelectedChar);
+            SceneLoadManager.Instance.AddSquadMate(curSelectedChar, 0);
         }
         else
         {
-            SceneLoadManager.Instance.RemoveSquadMate(curSelectedChar);
+            SceneLoadManager.Instance.RemoveSquadMate(curSelectedChar, 0);
         }
 
         UpdateSelection(curSelectedChar, transform.position, 0f);

@@ -63,6 +63,44 @@ public class Grid_UIInputActivators : MonoBehaviour
     void Instance_ButtonLeftSRUpEvent(int player) { DoActionByButton(InputButtonType.Left_SR); }
     void Instance_ButtonRightSRUpEvent(int player) { DoActionByButton(InputButtonType.Right_SR); }
 
+    public void DoActionByName(string identifier)
+    {
+        if (!isActiveAndEnabled) return;
+
+        List<UI_ActionsClass> actions = new List<UI_ActionsClass>();
+
+        foreach (UIActivator activ in activators)
+        {
+            if (activ.ID == identifier)
+            {
+                foreach (UI_ActionsClass action in activ.actions)
+                {
+                    actions.Add(action);
+                }
+            }
+        }
+
+        StartCoroutine(SequenceEvents(actions.ToArray()));
+    }
+
+    public IEnumerator DoActionByNameCo(string identifier)
+    {
+        List<UI_ActionsClass> actions = new List<UI_ActionsClass>();
+
+        foreach (UIActivator activ in activators)
+        {
+            if (activ.ID == identifier)
+            {
+                foreach (UI_ActionsClass action in activ.actions)
+                {
+                    actions.Add(action);
+                }
+            }
+        }
+
+        yield return SequenceEvents(actions.ToArray());
+    }
+
     void DoActionByButton(InputButtonType btn)
     {
         //if (!Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.DirectButton)) return; //UNDO AFTER TESTING

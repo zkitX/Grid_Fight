@@ -18,9 +18,12 @@ public class SceneLoadManager : MonoBehaviour
     [HideInInspector] public StageProfile stagePrimedToLoad = null;
 
     public List<Color> playersColor = new List<Color>();
+    public Color[] teamsColor = new Color[2]; 
     public CharacterLoadInformation[] loadedCharacters = new CharacterLoadInformation[0];
     public MaskLoadInformation[] loadedMasks = new MaskLoadInformation[1];
     public StageLoadInformation[] loadedStages = new StageLoadInformation[0];
+
+    public ArenaLoadOut arenaLoadoutInfo = new ArenaLoadOut();
 
     [HideInInspector] public Dictionary<int, CharacterLoadInformation> squad = new Dictionary<int, CharacterLoadInformation>()
     {
@@ -29,35 +32,67 @@ public class SceneLoadManager : MonoBehaviour
         {2, new CharacterLoadInformation() },
         {3, new CharacterLoadInformation() }
     };
+
     #region SquadManagement
 
     public delegate void SquadChange();
     public event SquadChange SquadChangeEvent;
 
-    public bool AddSquadMate(CharacterNameType charName)
+    public Dictionary<int, CharacterLoadInformation> GetSquadToCheck(int squadIndex)
     {
+        Dictionary<int, CharacterLoadInformation> squadToCheck = new Dictionary<int, CharacterLoadInformation>();
+        switch (squadIndex)
+        {
+            case (0):
+                squadToCheck = squad;
+                break;
+            case (1):
+                squadToCheck = arenaLoadoutInfo.SquadT1;
+                break;
+            case (2):
+                squadToCheck = arenaLoadoutInfo.SquadT2;
+                break;
+            default:
+                break;
+        }
+        return squadToCheck;
+    }
+
+    public bool SquadContains(CharacterNameType charName, int squadIndex)
+    {
+        Dictionary<int, CharacterLoadInformation> squadToCheck = GetSquadToCheck(squadIndex);
+        if (squadToCheck.Values.Where(r => r.characterID == charName).FirstOrDefault() != null) return true;
+        return false;
+    }
+
+    public bool AddSquadMate(CharacterNameType charName, int squadIndex)
+    {
+        Dictionary<int, CharacterLoadInformation> squadToChange = GetSquadToCheck(squadIndex);
+
         CharacterLoadInformation loadInfo = loadedCharacters.Where(r => r.characterID == charName).FirstOrDefault();
 
-        if (squad.Values.Where(r => r.characterID == loadInfo.characterID).FirstOrDefault() != null) return false; //If the character isn't already in the squad
-        if (Instance.squad.Values.Where(r => r.characterID == CharacterNameType.None).FirstOrDefault() == null) return false; //If the squad has a free slot
+        if (squadToChange.Values.Where(r => r.characterID == loadInfo.characterID).FirstOrDefault() != null) return false; //If the character isn't already in the squad
+        if (squadToChange.Values.Where(r => r.characterID == CharacterNameType.None).FirstOrDefault() == null) return false; //If the squad has a free slot
 
-        squad[squad.Where(r => r.Value.characterID == CharacterNameType.None).First().Key] = loadInfo;
+        squadToChange[squadToChange.Where(r => r.Value.characterID == CharacterNameType.None).First().Key] = loadInfo;
         SquadChangeEvent?.Invoke();
         return true;
     }
 
-    public bool RemoveSquadMate(CharacterNameType charName)
+    public bool RemoveSquadMate(CharacterNameType charName, int squadIndex)
     {
-        if (charName == CharacterNameType.CleasTemple_Character_Valley_Donna) return false;
-        if (squad.Values.Where(r => r.characterID == charName).FirstOrDefault() == null) return false; //If the character isn't in the squad
+        Dictionary<int, CharacterLoadInformation> squadToChange = GetSquadToCheck(squadIndex);
 
-        squad[squad.Where(r => r.Value.characterID == charName).First().Key] = new CharacterLoadInformation();
-        CollapseSquad();
+        if (charName == CharacterNameType.CleasTemple_Character_Valley_Donna && squadIndex == 0) return false;
+        if (squadToChange.Values.Where(r => r.characterID == charName).FirstOrDefault() == null) return false; //If the character isn't in the squad
+
+        squadToChange[squadToChange.Where(r => r.Value.characterID == charName).First().Key] = new CharacterLoadInformation();
+        CollapseSquads();
         SquadChangeEvent?.Invoke();
         return true;
     }
 
-    public void CollapseSquad()
+    public void CollapseSquads()
     {
         for (int i = 0; i < squad.Count; i++)
         {
@@ -75,9 +110,42 @@ public class SceneLoadManager : MonoBehaviour
                 }
             }
         }
+        for (int i = 0; i < arenaLoadoutInfo.SquadT1.Count; i++)
+        {
+            if (arenaLoadoutInfo.SquadT1[i].characterID == CharacterNameType.None)
+            {
+                for (int j = i + 1; j < arenaLoadoutInfo.SquadT1.Count; j++)
+                {
+                    int k = i - j;
+                    if (arenaLoadoutInfo.SquadT1[j].characterID != CharacterNameType.None)
+                    {
+                        arenaLoadoutInfo.SquadT1[i] = arenaLoadoutInfo.SquadT1[j];
+                        arenaLoadoutInfo.SquadT1[j] = new CharacterLoadInformation();
+                        break;
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < arenaLoadoutInfo.SquadT2.Count; i++)
+        {
+            if (arenaLoadoutInfo.SquadT2[i].characterID == CharacterNameType.None)
+            {
+                for (int j = i + 1; j < arenaLoadoutInfo.SquadT2.Count; j++)
+                {
+                    int k = i - j;
+                    if (arenaLoadoutInfo.SquadT2[j].characterID != CharacterNameType.None)
+                    {
+                        arenaLoadoutInfo.SquadT2[i] = arenaLoadoutInfo.SquadT2[j];
+                        arenaLoadoutInfo.SquadT2[j] = new CharacterLoadInformation();
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     #endregion
+
 
     public float[] charLevelThresholds = { 2000, 4500, 7000 };
     public float[] maskLevelThresholds = { 2000, 4500, 7000 };
@@ -234,6 +302,27 @@ public class SceneLoadManager : MonoBehaviour
 
         loadedStages = loadedStages.Where(r => r.stageProfile != null && r.stageProfile.type == StageType.Pvp).ToArray().Concat(loadedStages.Where(r => r.stageProfile == null || r.stageProfile.type != StageType.Pvp).ToArray()).ToArray();
     }
+}
+
+
+public class ArenaLoadOut
+{
+    public List<int> T1Players = new List<int>();
+    public List<int> T2Players = new List<int>();
+    public Dictionary<int, CharacterLoadInformation> SquadT1 = new Dictionary<int, CharacterLoadInformation>()
+    {
+        {0, new CharacterLoadInformation() },
+        {1, new CharacterLoadInformation() },
+        {2, new CharacterLoadInformation() },
+        {3, new CharacterLoadInformation() }
+    };
+    public Dictionary<int, CharacterLoadInformation> SquadT2 = new Dictionary<int, CharacterLoadInformation>()
+    {
+        {0, new CharacterLoadInformation() },
+        {1, new CharacterLoadInformation() },
+        {2, new CharacterLoadInformation() },
+        {3, new CharacterLoadInformation() }
+    };
 }
 
 
