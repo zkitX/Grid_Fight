@@ -226,7 +226,10 @@ public class WaveManagerScript : MonoBehaviour
         currentWavePhase.MaxEnemyOnScreen = Mathf.Clamp(Mathf.RoundToInt((float)currentWavePhase.MaxEnemyOnScreen * UniversalGameBalancer.Instance.difficulty.enemySpawnScaler), 0, currentWavePhase.AbsoluteMaxEnemyOnScreen);
         foreach (WaveCharClass waveChar in currentWavePhase.ListOfEnemy)
         {
-            waveChar.NumberOfCharacter = Mathf.RoundToInt((float)waveChar.NumberOfCharacter * UniversalGameBalancer.Instance.difficulty.enemySpawnScaler);
+            if(waveChar.NPCType == WaveNPCTypes.Minion)
+            {
+                waveChar.NumberOfCharacter = Mathf.RoundToInt((float)waveChar.NumberOfCharacter * UniversalGameBalancer.Instance.difficulty.enemySpawnScaler);
+            }
         }
         //
 
