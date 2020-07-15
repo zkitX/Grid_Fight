@@ -10,25 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a973d68f2b711f34b902c3029d63e805, type: 3}
-  m_Name: Crabera-Defensive
+  m_Name: Mothra-Defensive
   m_EditorClassIdentifier: 
-  AI_Type: -10
-  Vision: 10
+  AI_Type: -20
+  Vision: 5
   Checks:
   - StatToCheck: 1
-    ValueChecker: 0
-    PercToCheck: 39
+    ValueChecker: 2
+    PercToCheck: 70
   - StatToCheck: 6
-    ValueChecker: 0
-    PercToCheck: 59
+    ValueChecker: 2
+    PercToCheck: 70
+  IdleMovement: 0
   UpdateAttckWill: 1
-  AttackWill: 100
+  AttackWill: 55
   UpdateMoveForward: 1
-  MoveForward: 10
+  MoveForward: 20
   UpdateMoveBackward: 1
   MoveBackward: 80
-  UpdateMoveUpDown: 1
-  MoveUpDown: 10
+  UpdateMoveUpDown: 0
+  MoveUpDown: 40
   t: {fileID: 0}
   StatsToModify: []
   AIPs: {fileID: 11400000, guid: 45bac07679f71ec47b1f1c8f1e36aa8c, type: 2}

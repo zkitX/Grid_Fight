@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a973d68f2b711f34b902c3029d63e805, type: 3}
+  m_Name: Pai -Defensive
+  m_EditorClassIdentifier: 
+  AI_Type: -10
+  Vision: 10
+  Checks:
+  - StatToCheck: 1
+    ValueChecker: 0
+    PercToCheck: 35
+  IdleMovement: 0
+  UpdateAttckWill: 1
+  AttackWill: 50
+  UpdateMoveForward: 1
+  MoveForward: 35
+  UpdateMoveBackward: 1
+  MoveBackward: 65
+  UpdateMoveUpDown: 0
+  MoveUpDown: 10
+  t: {fileID: 0}
+  StatsToModify:
+  - ModificableStats: 9
+    Multiplier: 1
+  AIPs: {fileID: 11400000, guid: 45bac07679f71ec47b1f1c8f1e36aa8c, type: 2}

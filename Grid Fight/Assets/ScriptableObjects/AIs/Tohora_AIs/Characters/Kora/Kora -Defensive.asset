@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a973d68f2b711f34b902c3029d63e805, type: 3}
-  m_Name: Mothra-Defensive
+  m_Name: Kora -Defensive
   m_EditorClassIdentifier: 
-  AI_Type: -20
-  Vision: 5
+  AI_Type: -10
+  Vision: 10
   Checks:
   - StatToCheck: 1
-    ValueChecker: 2
+    ValueChecker: 0
     PercToCheck: 70
-  - StatToCheck: 6
-    ValueChecker: 2
-    PercToCheck: 70
+  IdleMovement: 0
   UpdateAttckWill: 1
-  AttackWill: 60
+  AttackWill: 50
   UpdateMoveForward: 1
-  MoveForward: 0
+  MoveForward: 20
   UpdateMoveBackward: 1
-  MoveBackward: 100
+  MoveBackward: 80
   UpdateMoveUpDown: 0
-  MoveUpDown: 40
+  MoveUpDown: 10
   t: {fileID: 0}
-  StatsToModify: []
+  StatsToModify:
+  - ModificableStats: 10
+    Multiplier: 0
   AIPs: {fileID: 11400000, guid: 45bac07679f71ec47b1f1c8f1e36aa8c, type: 2}

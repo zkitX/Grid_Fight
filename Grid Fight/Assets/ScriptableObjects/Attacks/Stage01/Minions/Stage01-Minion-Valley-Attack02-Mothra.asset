@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Chances: 100
   CurrentAttackType: 1
-  AttackRatioMultiplier: 2
+  AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 1
   AttackAnim: 0
   StaminaCost: 10
   ExperiencePoints: 10
-  CoolDown: 5
+  CoolDown: 3
   PrefixAnim: 0
   Fov: 0
   Particles:
@@ -238,8 +238,8 @@ MonoBehaviour:
         EffectsOnTile: []
     StatToCheck: 1
     ValueChecker: 0
-    PercToCheck: 80
-    Chances: 40
+    PercToCheck: 85
+    Chances: 70
   TotemAtk:
     AtkType: 3
     IsPlayerSide: 0
