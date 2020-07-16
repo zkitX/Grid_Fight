@@ -31,8 +31,8 @@ public class UniversalGameBalancer : MonoBehaviour
     {
         get
         {
-            if (InputController.Instance == null) return null;
-            return difficultyScales[InputController.Instance.PlayersNumber <= 0 ? 0 : InputController.Instance.PlayersNumber - 1];
+            if (BattleManagerScript.Instance == null) return null;
+            return difficultyScales[BattleManagerScript.Instance.maxPlayersUsed <= 1 ? 0 : BattleManagerScript.Instance.maxPlayersUsed - 1];
         }
     }
 

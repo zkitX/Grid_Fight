@@ -130,6 +130,7 @@ public class BattleManagerScript : MonoBehaviour
         { ControllerType.Player3, new CurrentSelectedCharacterClass() },
         { ControllerType.Player4, new CurrentSelectedCharacterClass() }
     };
+    public int maxPlayersUsed = 0;
 
     public List<ScriptableObjectCharacterPrefab> ListOfScriptableObjectCharacterPrefab = new List<ScriptableObjectCharacterPrefab>();
     public List<BaseCharacter> AllCharactersOnField = new List<BaseCharacter>();
@@ -1166,6 +1167,8 @@ public class BattleManagerScript : MonoBehaviour
                 currentCharacter.UMS.SetBattleUISelection(playerController);
                 currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", true);
 
+                int newPlayerCount = CurrentSelectedCharacters.Values.Where(r => r._Character != null).ToList().Count;
+                maxPlayersUsed = maxPlayersUsed < newPlayerCount ? newPlayerCount : maxPlayersUsed;
                 //Change the player's UI to the new character
                 //UIBattleManager.Instance.CharacterSelected(playerController, currentCharacter);
 

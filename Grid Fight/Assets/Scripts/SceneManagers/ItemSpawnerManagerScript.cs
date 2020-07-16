@@ -65,15 +65,6 @@ public class ItemSpawnerManagerScript : MonoBehaviour
                 timer += BattleManagerScript.Instance.DeltaTime;
             }
 
-            ScriptableObjectItemPowerUps nextItemPowerUp = SOItemsPowerUps[Random.Range(0,SOItemsPowerUps.Count)];
-            ItemsPowerUPsInfoScript item = SpawnedItems.Where(r => !r.gameObject.activeInHierarchy).FirstOrDefault();
-            if(item == null)
-            {
-                item = Instantiate(ItemGO, transform).GetComponent<ItemsPowerUPsInfoScript>();
-                SpawnedItems.Add(item);
-            }
-            item.gameObject.SetActive(true);
-
             BattleTileScript bts = null;
             bool found = false;
             while(!found)
@@ -83,8 +74,18 @@ public class ItemSpawnerManagerScript : MonoBehaviour
                 {
                     found = true;
                 }
-
+                yield return null;
             }
+            ScriptableObjectItemPowerUps nextItemPowerUp = SOItemsPowerUps[Random.Range(0, SOItemsPowerUps.Count)];
+            
+            
+            ItemsPowerUPsInfoScript item = SpawnedItems.Where(r => !r.gameObject.activeInHierarchy).FirstOrDefault();
+            if (item == null)
+            {
+                item = Instantiate(ItemGO, transform).GetComponent<ItemsPowerUPsInfoScript>();
+                SpawnedItems.Add(item);
+            }
+            item.gameObject.SetActive(true);
             item.SetItemPowerUp(nextItemPowerUp, bts.transform.position, bts.Pos);
         }
     }
