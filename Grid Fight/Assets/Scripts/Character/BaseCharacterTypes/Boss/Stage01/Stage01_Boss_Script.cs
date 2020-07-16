@@ -22,6 +22,9 @@ public class Stage01_Boss_Script : MinionType_Script
     public GameObject FaceChangingWarDrums;
     public GameObject FaceChangingLifeDrums;
     public GameObject FaceChangingMoonDrums;
+
+
+
     public override IEnumerator AI()
     {
         bool val = true;
@@ -31,30 +34,70 @@ public class Stage01_Boss_Script : MinionType_Script
             if (IsOnField)
             {
 
-                yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
-
-                AttackedTilesList.Clear();
-                List<BaseCharacter> enemys = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList();
-                if (enemys.Count > 0)
+                while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
                 {
-                    BaseCharacter targetChar = null;
-                    List<BaseCharacter> possibleTargets = enemys.Where(r => Mathf.Abs(r.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x) <= 1).ToList();
-                    if(possibleTargets.Count > 0)
+                    yield return null;
+                }
+                ScriptableObjectAI prev = CurrentAIState;
+                CurrentAIState = CharInfo.GetCurrentAI(AggroInfoList, UMS.CurrentTilePos);
+                if (prev == null || prev.AI_Type != CurrentAIState.AI_Type)
+                {
+                    SetCurrentAIValues();
+                    if (prev != null)
                     {
-                        targetChar = possibleTargets[Random.Range(0, possibleTargets.Count)];
-                    }
+                        prev.ResetStats(CharInfo);
 
-                    if (targetChar != null)
+                    }
+                    CurrentAIState.ModifyStats(CharInfo);
+                    if (psAI != null)
                     {
-                        nextAttackPos = targetChar.UMS.CurrentTilePos;
-                        yield return AttackSequence();
-                        yield return BattleManagerScript.Instance.WaitFor(1, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
+                        psAI.SetActive(false);
+                    }
+                    psAI = ParticleManagerScript.Instance.GetParticle(CurrentAIState.AIPs.PSType);
+                    psAI.transform.parent = SpineAnim.transform;
+                    psAI.transform.localPosition = Vector3.zero;
+                    psAI.SetActive(true);
+                }
+
+                int atkChances = Random.Range(0, 100);
+                nextAttack = null;
+                GetAttack();
+
+                if (CurrentAIState.t != null && atkChances < AttackWillPerc && nextAttack != null && (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler))
+                {
+                    lastAttackTime = Time.time;
+                    nextAttackPos = CurrentAIState.t.UMS.CurrentTilePos;
+                    if (possiblePos != null)
+                    {
+                        possiblePos.isTaken = false;
+                        possiblePos = null;
+                    }
+                    yield return AttackSequence();
+                }
+                else
+                {
+                    int movementChances = Random.Range(0, (TowardMovementPerc + AwayMovementPerc));
+                    if (TowardMovementPerc > movementChances)
+                    {
+                        if (CurrentAIState.t != null)
+                        {
+                            possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
+                            r.BattleTileState != BattleTileStateType.NonUsable
+                            ).OrderBy(a => Mathf.Abs(a.Pos.x - CurrentAIState.t.UMS.CurrentTilePos.x)).ThenBy(b => b.Pos.y).ToList();
+                        }
                     }
                     else
                     {
-                        targetChar = GetTargetChar(enemys);
-                        yield return Teleport_Co(targetChar);
-                        yield return BattleManagerScript.Instance.WaitFor(1, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
+                        if (CurrentAIState.t != null)
+                        {
+                            possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
+                            r.BattleTileState != BattleTileStateType.NonUsable
+                            ).OrderByDescending(a => Mathf.Abs(a.Pos.x - CurrentAIState.t.UMS.CurrentTilePos.x)).ThenByDescending(b => b.Pos.y).ToList();
+                        }
+                    }
+                    if (possiblePositions.Count > 0 && CurrentAIState.t != null)
+                    {
+                        yield return Teleport_Co(possiblePositions);
                     }
                 }
                 yield return null;
@@ -62,19 +105,21 @@ public class Stage01_Boss_Script : MinionType_Script
         }
     }
 
-
-    public IEnumerator Teleport_Co(BaseCharacter targetChar)
+    public IEnumerator Teleport_Co(List<BattleTileScript> positions)
     {
         if ((CharInfo.Health > 0 && !isMoving && IsOnField && SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving.ToString() && CharActionlist.Contains(CharacterActionType.Move)) || BattleManagerScript.Instance.VFXScene)
         {
             List<BattleTileScript> prevBattleTile = CurrentBattleTiles;
             List<BattleTileScript> CurrentBattleTilesToCheck = new List<BattleTileScript>();
             Vector2Int nextPos = Vector2Int.left;
-
-            while (CurrentBattleTilesToCheck.Count == 0)
+            for (int i = 0; i < positions.Count; i++)
             {
-                nextPos = new Vector2Int(Random.Range(targetChar.UMS.CurrentTilePos.x - 1, targetChar.UMS.CurrentTilePos.x + 2), Random.Range(0, 12));
-                CurrentBattleTilesToCheck = CheckTileAvailabilityUsingPos(nextPos);
+                CurrentBattleTilesToCheck = CheckTileAvailabilityUsingPos(positions[i].Pos);
+                if(CurrentBattleTilesToCheck.Count > 0)
+                {
+                    nextPos = positions[i].Pos;
+                    break;
+                }
             }
 
             if (CurrentBattleTilesToCheck.Count > 0 &&

@@ -27,4 +27,5 @@ public class ScriptableObjectAttackEffect : ScriptableObject
     public bool recolorCharUI = false;
     [ConditionalField("recolorCharUI")] public Color statusIconColor = Color.magenta;
     [HideInInspector] public ScriptableObjectAttackBase Atk;
+    [HideInInspector] public List<ScriptableObjectAI> AIs = new List<ScriptableObjectAI>();
 }

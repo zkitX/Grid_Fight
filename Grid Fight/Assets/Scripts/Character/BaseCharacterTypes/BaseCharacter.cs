@@ -902,9 +902,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public List<Vector2Int> CalculateNextPosUsinPos(Vector2Int direction)
     {
         List<Vector2Int> res = new List<Vector2Int>();
-        UMS.Pos.ForEach(r => res.Add((UMS.CurrentTilePos - r) + direction));
+        UMS.Pos.ForEach(r => res.Add((r - UMS.CurrentTilePos) + direction));
         return res;
     }
+
 
     bool stopCo = false;
     public virtual IEnumerator MoveByTileSpace(Vector3 nextPos, AnimationCurve curve, float animLength)
@@ -1061,7 +1062,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             case BuffDebuffStatsType.Zombification:
                 if (CharInfo.Health > 0)
                 {
-                    BattleManagerScript.Instance.Zombification(this, bdClass.Duration);
+                    BattleManagerScript.Instance.Zombification(this, bdClass.Duration, bdClass.CurrentBuffDebuff.Effect.AIs);
                 }
                 break;
             case BuffDebuffStatsType.ShieldStats_BaseShieldRegeneration:
@@ -1583,6 +1584,28 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
 
         return null;
+    }
+
+    public bool AreTileNearEmpty()
+    {
+        List<BattleTileScript> res = CheckTileAvailabilityUsingDir(Vector2Int.up);
+        res.AddRange(CheckTileAvailabilityUsingDir(Vector2Int.down));
+        res.AddRange(CheckTileAvailabilityUsingDir(Vector2Int.left));
+        res.AddRange(CheckTileAvailabilityUsingDir(Vector2Int.right));
+
+        if (res.Count > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    protected BaseCharacter GetTargetChar(List<BaseCharacter> enemys)
+    {
+        return enemys.OrderBy(r => (r.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x)).First();
     }
 }
 

@@ -278,6 +278,11 @@ public class WaveManagerScript : MonoBehaviour
         }
     }
 
+    public bool WaveStillHasEnemies()
+    {
+        return currentWavePhase.ListOfEnemy.Where(r => r.NumberOfCharacter > 0).ToList().Count > 0 ? true : false;
+    }
+
     private IEnumerator Wave(WavePhaseClass wavePhase, float duration, string variableName)
     {
         IEnumerator wave = Wave(wavePhase);

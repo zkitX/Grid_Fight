@@ -513,14 +513,14 @@ public class BattleManagerScript : MonoBehaviour
 
     #region Loading_Selection Character
     public List<MinionType_Script> zombiesList = new List<MinionType_Script>();
-    public void Zombification(BaseCharacter zombie, float duration)
+    public void Zombification(BaseCharacter zombie, float duration, List<ScriptableObjectAI> ais)
     {
         if(zombie.CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
         {
             List<BaseCharacter> res = AllCharactersOnField.Where(r => !r.IsOnField && r.CharInfo.HealthPerc > 0 && r.BuffsDebuffsList.Where(a => a.Stat == BuffDebuffStatsType.Zombification).ToList().Count == 0).ToList();
             if (res.Count > 0)
             {
-                StartCoroutine(CharacterType_Zombification_Co(zombie, duration));
+                StartCoroutine(CharacterType_Zombification_Co(zombie, duration, ais));
             }
             else
             {
@@ -531,7 +531,7 @@ public class BattleManagerScript : MonoBehaviour
         }
         else if (zombie.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script)
         {
-            if(WaveManagerScript.Instance.WaveCharcters.Where(r=> r.IsOnField && r.gameObject.activeInHierarchy).ToList().Count > 1)
+            if(WaveManagerScript.Instance.WaveCharcters.Where(r=> r.IsOnField && r.gameObject.activeInHierarchy).ToList().Count > 1 || WaveManagerScript.Instance.WaveStillHasEnemies())
             {
                 StartCoroutine(MinionType_Zombification_Co(zombie, duration));
             }
@@ -539,7 +539,7 @@ public class BattleManagerScript : MonoBehaviour
 
     }
 
-    IEnumerator CharacterType_Zombification_Co(BaseCharacter zombie, float duration)
+    IEnumerator CharacterType_Zombification_Co(BaseCharacter zombie, float duration, List<ScriptableObjectAI> ais)
     {
         ControllerType playerController = CurrentSelectedCharacters.Where(r => r.Value.Character == zombie).First().Key;
         CurrentSelectedCharacters[playerController].Character = null;
@@ -557,9 +557,6 @@ public class BattleManagerScript : MonoBehaviour
 
         yield return RemoveCharacterFromBaord(zombie, true);
         zombie.CharActionlist.Remove(CharacterActionType.SwitchCharacter);
-
-
-        yield return WaitFor(duration, () => CurrentBattleState != BattleState.Battle);
         zombiePs.transform.parent = null;
         zombiePs.SetActive(false);
 
@@ -578,7 +575,8 @@ public class BattleManagerScript : MonoBehaviour
         zombiePs.transform.parent = zombiefied.SpineAnim.transform;
         zombiePs.transform.localPosition = Vector3.zero;
         zombiePs.SetActive(true);
-      
+        zombiefied.CharInfo.AIs = ais;
+
         yield return WaveManagerScript.Instance.SetCharInPos(zombiefied, GridManagerScript.Instance.GetFreeBattleTile(zombiefied.UMS.WalkingSide, zombiefied.UMS.Pos), true);
         zombiefied.CharActionlist.Add(CharacterActionType.Move);
         while (zombie.BuffsDebuffsList.Where(r=> r.Stat == BuffDebuffStatsType.Zombification).ToList().Count > 0)
@@ -672,8 +670,6 @@ public class BattleManagerScript : MonoBehaviour
         playerZombie.CharInfo.DeathEvent += playerZombie._CharInfo_DeathEvent;
         playerZombie.CharInfo.CharacterSelection = (CharacterSelectionType)AllCharactersOnField.Count - 1;
         playerZombie.CharInfo.BaseCharacterType = BaseCharType.MinionType_Script;
-
-
 
         //Set up UMS and side
         playerZombie.UMS = playerZombie.GetComponent<UnitManagementScript>();

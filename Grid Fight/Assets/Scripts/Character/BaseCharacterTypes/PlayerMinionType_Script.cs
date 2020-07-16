@@ -13,7 +13,18 @@ public class PlayerMinionType_Script : BaseCharacter
     List<HitInfoClass> HittedByList = new List<HitInfoClass>();
     float totDamage = 0;
     bool strongAnimDone = false;
-
+    public int AttackWillPerc = 13;
+    public int UpDownMovementPerc = 13;
+    public int TowardMovementPerc = 13;
+    public int AwayMovementPerc = 13;
+    public List<AggroInfoClass> AggroInfoList = new List<AggroInfoClass>();
+    public ScriptableObjectAI CurrentAIState;
+    public GameObject psAI = null;
+    public BattleTileScript possiblePos = null;
+    public Vector2Int[] path;
+    public bool found = false;
+    public List<BattleTileScript> possiblePositions = new List<BattleTileScript>();
+    protected float lastAttackTime = 0;
 
     protected bool UnderAttack
     {
@@ -71,31 +82,15 @@ public class PlayerMinionType_Script : BaseCharacter
         }
         totDamage = 0;
 
-    /*    if (SpineAnim.skeleton.Data.Animations.Where(r => r.Name == CharacterAnimationStateType.Defeat.ToString()).ToList().Count == 1)
+ 
+        for (int i = 0; i < UMS.Pos.Count; i++)
         {
-            SetAnimation(CharacterAnimationStateType.Defeat);
-            CharBoxCollider.enabled = false;
-            foreach (ManagedAudioSource audioSource in GetComponentsInChildren<ManagedAudioSource>())
-            {
-                audioSource.gameObject.transform.parent = AudioManagerMk2.Instance.transform;
-            }
-            isMoving = false;
-            Call_CurrentCharIsDeadEvent();
-            shotsLeftInAttack = 0;
+            GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
+            UMS.Pos[i] = Vector2Int.zero;
         }
-        else
-        {*/
-            for (int i = 0; i < UMS.Pos.Count; i++)
-            {
-                GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
-                UMS.Pos[i] = Vector2Int.zero;
-            }
-            base.SetCharDead();
-       // }
+        base.SetCharDead();
       
     }
-
-
     public virtual IEnumerator AI()
     {
         bool val = true;
@@ -109,46 +104,163 @@ public class PlayerMinionType_Script : BaseCharacter
                 {
                     yield return null;
                 }
-
-
-                List<BaseCharacter> enemys = WaveManagerScript.Instance.WaveCharcters.Where(r => r.IsOnField).ToList();
-                if (enemys.Count > 0)
+                ScriptableObjectAI prev = CurrentAIState;
+                CurrentAIState = CharInfo.GetCurrentAI(AggroInfoList, UMS.CurrentTilePos);
+                if (prev == null || prev.AI_Type != CurrentAIState.AI_Type)
                 {
-                    BaseCharacter targetChar = enemys.Where(r => r.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x).FirstOrDefault();
-                    /*BaseCharacter targetChar = null;
-                    List<BaseCharacter> possibleTargets = enemys.Where(r => Mathf.Abs(r.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x) <= 1).ToList();
-                    if (possibleTargets.Count > 0)
+                    SetCurrentAIValues();
+                    if (prev != null)
                     {
-                        targetChar = possibleTargets[Random.Range(0, possibleTargets.Count)];
-                    }*/
-                    if (targetChar != null)
-                    {
-                        nextAttackPos = targetChar.UMS.CurrentTilePos;
-                        yield return AttackSequence();
-                    }
-                    else
-                    {
+                        prev.ResetStats(CharInfo);
 
-                        int randomizer = Random.Range(0, 100);
-                        if (randomizer < UpDownPerc)
+                    }
+                    CurrentAIState.ModifyStats(CharInfo);
+                    if (psAI != null)
+                    {
+                        psAI.SetActive(false);
+                    }
+                    psAI = ParticleManagerScript.Instance.GetParticle(CurrentAIState.AIPs.PSType);
+                    psAI.transform.parent = SpineAnim.transform;
+                    psAI.transform.localPosition = Vector3.zero;
+                    psAI.SetActive(true);
+                }
+
+                int atkChances = Random.Range(0, 100);
+                nextAttack = null;
+                GetAttack();
+
+                if (CurrentAIState.t != null && atkChances < AttackWillPerc && nextAttack != null && (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler))
+                {
+                    lastAttackTime = Time.time;
+                    nextAttackPos = CurrentAIState.t.UMS.CurrentTilePos;
+                    if (possiblePos != null)
+                    {
+                        possiblePos.isTaken = false;
+                        possiblePos = null;
+                    }
+                    yield return AttackSequence();
+                }
+                else
+                {
+                    if (AreTileNearEmpty())
+                    {
+                        if (possiblePos == null)
                         {
-                            yield return MoveCharOnDir_Co(InputDirection.Left);
-                        }
-                        else if (randomizer > (100 - UpDownPerc))
-                        {
-                            yield return MoveCharOnDir_Co(InputDirection.Right);
-                        }
-                        else
-                        {
-                            targetChar = GetTargetChar(enemys);
-                            if (targetChar.UMS.CurrentTilePos.x < UMS.CurrentTilePos.x)
+                            int movementChances = Random.Range(0, (TowardMovementPerc + AwayMovementPerc));
+                            if (TowardMovementPerc > movementChances)
                             {
-                                yield return MoveCharOnDir_Co(InputDirection.Up);
+                                if (CurrentAIState.t != null)
+                                {
+                                    possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
+                                    r.BattleTileState != BattleTileStateType.NonUsable
+                                    ).OrderBy(a => Mathf.Abs(a.Pos.x - CurrentAIState.t.UMS.CurrentTilePos.x)).ThenBy(b => b.Pos.y).ToList();
+                                }
                             }
                             else
                             {
-                                yield return MoveCharOnDir_Co(InputDirection.Down);
+                                if (CurrentAIState.t != null)
+                                {
+                                    possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
+                                    r.BattleTileState != BattleTileStateType.NonUsable
+                                    ).OrderByDescending(a => Mathf.Abs(a.Pos.x - CurrentAIState.t.UMS.CurrentTilePos.x)).ThenByDescending(b => b.Pos.y).ToList();
+                                }
                             }
+                            if (possiblePositions.Count > 0)
+                            {
+                                found = false;
+                                while (!found)
+                                {
+                                    if (possiblePositions.Count > 0)
+                                    {
+                                        possiblePos = possiblePositions.First();
+                                        if (possiblePos.Pos != UMS.CurrentTilePos)
+                                        {
+                                            if (possiblePos.BattleTileState == BattleTileStateType.Empty)
+                                            {
+                                                path = GridManagerScript.Pathfinding.GetPathTo(possiblePos.Pos, UMS.CurrentTilePos, GridManagerScript.Instance.GetWalkableTilesLayout(UMS.WalkingSide));
+                                                if (path != null && path.Length > 0)
+                                                {
+                                                    found = true;
+                                                    Vector2Int move = path[0] - UMS.CurrentTilePos;
+                                                    possiblePos.isTaken = true;
+                                                    yield return MoveCharOnDir_Co(move == new Vector2Int(1, 0) ? InputDirection.Down : move == new Vector2Int(-1, 0) ? InputDirection.Up : move == new Vector2Int(0, 1) ? InputDirection.Right : InputDirection.Left);
+                                                }
+                                                else
+                                                {
+                                                    possiblePositions.Remove(possiblePos);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                possiblePositions.Remove(possiblePos);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (CurrentAIState.IdleMovement)
+                                            {
+                                                possiblePos = null;
+                                                found = true;
+                                            }
+                                            else
+                                            {
+                                                if (possiblePositions.Count <= 1)
+                                                {
+
+                                                }
+                                                else
+                                                {
+                                                    possiblePositions.Insert(0, GridManagerScript.Instance.GetFreeBattleTile(possiblePos.WalkingSide));
+                                                    yield return null;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        possiblePos = null;
+                                        found = true;
+                                    }
+
+                                }
+                                yield return null;
+                            }
+                            else
+                            {
+                                found = true;
+                                possiblePos = null;
+                            }
+                        }
+                        else
+                        {
+                            if (possiblePos.Pos != UMS.CurrentTilePos)
+                            {
+                                path = GridManagerScript.Pathfinding.GetPathTo(possiblePos.Pos, UMS.CurrentTilePos, GridManagerScript.Instance.GetWalkableTilesLayout(UMS.WalkingSide));
+                                if (path == null || (path != null && path.Length == 1) || possiblePos.Pos == UMS.CurrentTilePos)
+                                {
+                                    possiblePos.isTaken = false;
+                                    possiblePos = null;
+                                }
+                                if (path.Length > 0)
+                                {
+                                    Vector2Int move = path[0] - UMS.CurrentTilePos;
+
+                                    yield return MoveCharOnDir_Co(move == new Vector2Int(1, 0) ? InputDirection.Down : move == new Vector2Int(-1, 0) ? InputDirection.Up : move == new Vector2Int(0, 1) ? InputDirection.Right : InputDirection.Left);
+                                }
+                            }
+                            else
+                            {
+                                possiblePos = null;
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        if (possiblePos != null)
+                        {
+                            possiblePos.isTaken = false;
+                            possiblePos = null;
                         }
                     }
                 }
@@ -156,14 +268,6 @@ public class PlayerMinionType_Script : BaseCharacter
             }
         }
     }
-
-
-    protected BaseCharacter GetTargetChar(List<BaseCharacter> enemys)
-    {
-        return enemys.OrderBy(r => (r.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x)).First();
-    }
-
-
 
     public virtual IEnumerator Move()
     {
@@ -231,6 +335,26 @@ public class PlayerMinionType_Script : BaseCharacter
     protected override void Update()
     {
         base.Update();
+    }
+
+    protected void SetCurrentAIValues()
+    {
+        if (CurrentAIState.UpdateAttckWill)
+        {
+            AttackWillPerc = CurrentAIState.AttackWill;
+        }
+        if (CurrentAIState.UpdateMoveForward)
+        {
+            TowardMovementPerc = CurrentAIState.MoveForward;
+        }
+        if (CurrentAIState.UpdateMoveBackward)
+        {
+            AwayMovementPerc = CurrentAIState.MoveBackward;
+        }
+        if (CurrentAIState.UpdateMoveUpDown)
+        {
+            UpDownMovementPerc = CurrentAIState.MoveUpDown;
+        }
     }
 
     public override void SetAnimation(string animState, bool loop = false, float transition = 0, bool _pauseOnLastFrame = false)

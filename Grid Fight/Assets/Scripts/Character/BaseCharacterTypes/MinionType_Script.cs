@@ -12,11 +12,18 @@ public class MinionType_Script : BaseCharacter
     public int UpDownMovementPerc = 13;
     public int TowardMovementPerc = 13;
     public int AwayMovementPerc = 13;
-    List<HitInfoClass> HittedByList = new List<HitInfoClass>();
-    List<AggroInfoClass> AggroInfoList = new List<AggroInfoClass>();
-    float totDamage = 0;
+    protected List<HitInfoClass> HittedByList = new List<HitInfoClass>();
+    public List<AggroInfoClass> AggroInfoList = new List<AggroInfoClass>();
+    protected float totDamage = 0;
     bool strongAnimDone = false;
     public ScriptableObjectAI CurrentAIState;
+    public GameObject psAI = null;
+    public BattleTileScript possiblePos = null;
+    public Vector2Int[] path;
+    public bool found = false;
+    public List<BattleTileScript> possiblePositions = new List<BattleTileScript>();
+    protected float lastAttackTime = 0;
+
 
     protected bool UnderAttack
     {
@@ -105,7 +112,6 @@ public class MinionType_Script : BaseCharacter
 
     }
 
-    float lastAttackTime = 0;
     public virtual IEnumerator AI_Old()
     {
         bool val = true;
@@ -168,18 +174,14 @@ public class MinionType_Script : BaseCharacter
         }
     }
 
-    GameObject psAI = null;
-    BattleTileScript possiblePos = null;
-    Vector2Int[] path;
-    bool found = false;
-    List<BattleTileScript> possiblePositions = new List<BattleTileScript>();
+  
     public virtual IEnumerator AI()
     {
         bool val = true;
         while (val)
         {
             yield return null;
-            if (IsOnField)
+            if (IsOnField && CharInfo.Health > 0)
             {
 
                 while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
@@ -351,51 +353,6 @@ public class MinionType_Script : BaseCharacter
         }
     }
 
-
-    public bool AreTileNearEmpty()
-    {
-        List<BattleTileScript> res = CheckTileAvailabilityUsingDir(Vector2Int.up);
-        res.AddRange(CheckTileAvailabilityUsingDir(Vector2Int.down));
-        res.AddRange(CheckTileAvailabilityUsingDir(Vector2Int.left));
-        res.AddRange(CheckTileAvailabilityUsingDir(Vector2Int.right));
-
-        if(res.Count > 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    protected BaseCharacter GetTargetChar(List<BaseCharacter> enemys)
-    {
-        return enemys.OrderBy(r => (r.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x)).First();
-    }
-
-    protected void SetCurrentAIValues()
-    {
-        if (CurrentAIState.UpdateAttckWill)
-        {
-            AttackWillPerc = CurrentAIState.AttackWill;
-        }
-        if (CurrentAIState.UpdateMoveForward)
-        {
-            TowardMovementPerc = CurrentAIState.MoveForward;
-        }
-        if (CurrentAIState.UpdateMoveBackward)
-        {
-            AwayMovementPerc = CurrentAIState.MoveBackward;
-        }
-        if (CurrentAIState.UpdateMoveUpDown)
-        {
-            UpDownMovementPerc = CurrentAIState.MoveUpDown;
-        }
-
-        
-    }
-
     public virtual IEnumerator Move()
     {
         while (true)
@@ -462,6 +419,29 @@ public class MinionType_Script : BaseCharacter
     protected override void Update()
     {
         base.Update();
+    }
+
+
+    protected void SetCurrentAIValues()
+    {
+        if (CurrentAIState.UpdateAttckWill)
+        {
+            AttackWillPerc = CurrentAIState.AttackWill;
+        }
+        if (CurrentAIState.UpdateMoveForward)
+        {
+            TowardMovementPerc = CurrentAIState.MoveForward;
+        }
+        if (CurrentAIState.UpdateMoveBackward)
+        {
+            AwayMovementPerc = CurrentAIState.MoveBackward;
+        }
+        if (CurrentAIState.UpdateMoveUpDown)
+        {
+            UpDownMovementPerc = CurrentAIState.MoveUpDown;
+        }
+
+
     }
 
     public override void SetAnimation(string animState, bool loop = false, float transition = 0, bool _pauseOnLastFrame = false)
