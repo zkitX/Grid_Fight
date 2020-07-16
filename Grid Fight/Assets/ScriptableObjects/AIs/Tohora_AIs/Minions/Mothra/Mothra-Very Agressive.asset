@@ -10,32 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a973d68f2b711f34b902c3029d63e805, type: 3}
-  m_Name: Kora -Very Agressive
+  m_Name: Mothra-Very Agressive
   m_EditorClassIdentifier: 
-  AI_Type: 10
+  AI_Type: 20
   Vision: 5
   Checks:
   - StatToCheck: 1
     ValueChecker: 0
-    PercToCheck: 45
-  - StatToCheck: 1
+    PercToCheck: 50
+  - StatToCheck: 6
     ValueChecker: 0
     PercToCheck: 30
-  - StatToCheck: 1
-    ValueChecker: 2
-    PercToCheck: 20
-  - StatToCheck: 1
-    ValueChecker: 2
-    PercToCheck: 10
   IdleMovement: 0
   UpdateAttckWill: 1
-  AttackWill: 100
+  AttackWill: 90
   UpdateMoveForward: 1
-  MoveForward: 100
+  MoveForward: 80
   UpdateMoveBackward: 1
-  MoveBackward: 0
+  MoveBackward: 20
   UpdateMoveUpDown: 0
-  MoveUpDown: 10
+  MoveUpDown: 25
   t: {fileID: 0}
   StatsToModify: []
-  AIPs: {fileID: 11400000, guid: 32c35098048c3274d8beb93ef106305b, type: 2}
+  AIPs: {fileID: 11400000, guid: 3e6bd3dc9c2e69d448f0ee0298b8e7eb, type: 2}

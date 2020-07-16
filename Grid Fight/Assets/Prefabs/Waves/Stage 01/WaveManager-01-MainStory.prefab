@@ -464,7 +464,9 @@ MonoBehaviour:
         MovementSpeed: {x: 1.7, y: 1.7}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        AIs: []
+        AIs:
+        - {fileID: 11400000, guid: e554cfa107337484286671155a0327bc, type: 2}
+        - {fileID: 11400000, guid: 790aa4b0d3160b34ea81e09a0c528c34, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 0
       StartingEnemyTiles: []
@@ -502,18 +504,18 @@ MonoBehaviour:
     AbsoluteMaxEnemyOnScreen: 0
     DelayBetweenChars: 1
     ListOfEnemy:
-    - name: Crabera
+    - name: Toka
       NPCType: 0
-      NumberOfCharacter: 3
+      NumberOfCharacter: 2
       TypeOfCharacter:
-        CharacterName: 1022
+        CharacterName: 1020
         KillWaveIfCharDie: 0
-        Health: {x: 70, y: 80}
+        Health: {x: 100, y: 180}
         HealthRegeneration: {x: 1, y: 1}
-        BaseDamage: {x: 8, y: 10}
+        BaseDamage: {x: 10, y: 13}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 1.6, y: 1.6}
+        BaseSpeed: {x: 1, y: 1}
         AttackSpeedRatio: {x: 12, y: 15}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
@@ -521,8 +523,8 @@ MonoBehaviour:
         MovementTimer: {x: 0, y: 0}
         Exp: 0
         AIs:
-        - {fileID: 11400000, guid: 6440a784888d69649bd560903a78926e, type: 2}
-        - {fileID: 11400000, guid: 514190b53570a9b40abde07e0f3ba360, type: 2}
+        - {fileID: 11400000, guid: 45250ca858729fc4e8aed46d76b6e90b, type: 2}
+        - {fileID: 11400000, guid: 09cb6649b3d747243a84d01618408ab8, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 0
       StartingEnemyTiles: []
@@ -547,7 +549,7 @@ MonoBehaviour:
         MovementTimer: {x: 0, y: 0}
         Exp: 0
         AIs:
-        - {fileID: 11400000, guid: d1128cc1e5582924f8d17af539b798c0, type: 2}
+        - {fileID: 11400000, guid: 230978e430caa7c43a86486bbebcacfe, type: 2}
         - {fileID: 11400000, guid: a3a40b9fde6ae6248b9558bbcc894f67, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 0
@@ -573,25 +575,25 @@ MonoBehaviour:
         MovementTimer: {x: 0, y: 0}
         Exp: 0
         AIs:
-        - {fileID: 11400000, guid: 5270d0c583de8604fb627b5c63761b02, type: 2}
+        - {fileID: 11400000, guid: e554cfa107337484286671155a0327bc, type: 2}
         - {fileID: 11400000, guid: 790aa4b0d3160b34ea81e09a0c528c34, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 0
       StartingEnemyTiles: []
       IsRandomSpowiningTile: 1
       SpowningTile: []
-    - name: Toka
+    - name: Crabera
       NPCType: 0
-      NumberOfCharacter: 2
+      NumberOfCharacter: 3
       TypeOfCharacter:
-        CharacterName: 1020
+        CharacterName: 1022
         KillWaveIfCharDie: 0
-        Health: {x: 100, y: 150}
+        Health: {x: 70, y: 80}
         HealthRegeneration: {x: 1, y: 1}
-        BaseDamage: {x: 10, y: 13}
+        BaseDamage: {x: 8, y: 10}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 1, y: 1}
+        BaseSpeed: {x: 1.6, y: 1.6}
         AttackSpeedRatio: {x: 12, y: 15}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
@@ -599,8 +601,8 @@ MonoBehaviour:
         MovementTimer: {x: 0, y: 0}
         Exp: 0
         AIs:
-        - {fileID: 11400000, guid: 45250ca858729fc4e8aed46d76b6e90b, type: 2}
-        - {fileID: 11400000, guid: 09cb6649b3d747243a84d01618408ab8, type: 2}
+        - {fileID: 11400000, guid: 6440a784888d69649bd560903a78926e, type: 2}
+        - {fileID: 11400000, guid: 514190b53570a9b40abde07e0f3ba360, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 0
       StartingEnemyTiles: []
@@ -784,7 +786,7 @@ MonoBehaviour:
         MovementTimer: {x: 0, y: 0}
         Exp: 0
         AIs:
-        - {fileID: 11400000, guid: d1128cc1e5582924f8d17af539b798c0, type: 2}
+        - {fileID: 11400000, guid: 230978e430caa7c43a86486bbebcacfe, type: 2}
         - {fileID: 11400000, guid: a3a40b9fde6ae6248b9558bbcc894f67, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 1
