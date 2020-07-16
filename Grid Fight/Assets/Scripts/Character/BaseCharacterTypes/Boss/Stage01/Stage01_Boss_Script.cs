@@ -122,6 +122,22 @@ public class Stage01_Boss_Script : MinionType_Script
                 }
             }
 
+            if (CurrentAIState.IdleMovement)
+            {
+                bool samepos = true;
+                for (int i = 0; i < CurrentBattleTilesToCheck.Count; i++)
+                {
+                    if(!prevBattleTile.Contains(CurrentBattleTilesToCheck[i]))
+                    {
+                        samepos = false;
+                        break;
+                    }
+                }
+                if(samepos)
+                {
+                    yield break;
+                }
+            }
             if (CurrentBattleTilesToCheck.Count > 0 &&
                 CurrentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos) && r.BattleTileState == BattleTileStateType.Empty).ToList().Count ==
                 CurrentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos)).ToList().Count && GridManagerScript.Instance.isPosOnField(nextPos))
