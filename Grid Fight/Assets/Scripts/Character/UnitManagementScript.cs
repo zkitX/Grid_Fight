@@ -57,7 +57,7 @@ public class UnitManagementScript : MonoBehaviour
     public Transform HpBarContainer;
     public Transform StaminaBarContainer;
 
-    [HideInInspector] public BuffIconHandler buffIconHandler = null;
+    public BuffIconHandler buffIconHandler = null;
 
     //Used to decide the side
 
@@ -93,7 +93,6 @@ public class UnitManagementScript : MonoBehaviour
         }
         CharOwner.SpineAnim.gameObject.tag = Side.ToString();
         UnitBehaviour = ubt;
-        buffIconHandler = GetComponentInChildren<BuffIconHandler>();
     }
 
 

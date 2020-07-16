@@ -18,6 +18,8 @@ public class BuffIcon : MonoBehaviour
 
     public ScriptableObjectAttackEffect StatusEffect = null;
 
+    [HideInInspector] public Vector3 movingPos = new Vector3();
+
     protected GameObject curStatusObj = null;
     protected Animation anim = null;
 
@@ -38,7 +40,7 @@ public class BuffIcon : MonoBehaviour
         }
         DebuffObj.SetActive(false);
         BuffObj.SetActive(false);
-        statusIconStartingScale = statusIcon.transform.localScale.x;
+        statusIconStartingScale = 1f;//statusIcon.transform.localScale.x;
         statusIcon.color = Color.clear;
     }
 
@@ -55,14 +57,14 @@ public class BuffIcon : MonoBehaviour
         curStatusObj = statusEffect.classification == StatusEffectType.Buff ? BuffObj : DebuffObj;
         curStatusObj.SetActive(true);
         SpriteRenderer[] sprites = curStatusObj.GetComponentsInChildren<SpriteRenderer>();
-        for (int i = 0; i < sprites.Length; i++)
+        for (int i = 0; i < (statusEffect.classification == StatusEffectType.Buff ? BuffDefaultColors.Count : DebuffDefaultColors.Count); i++)
         {
             sprites[i].color = statusEffect.classification == StatusEffectType.Buff ? BuffDefaultColors[i] : DebuffDefaultColors[i];
             sprites[i].color += statusEffect.recolorCharUI ? statusEffect.statusIconColor : Color.clear;
         }
 
         //apply affect imagery
-        statusIcon.transform.SetParent(curStatusObj.transform);
+        statusIcon.transform.SetParent(curStatusObj.transform.GetChild(0));
         statusIcon.sprite = statusEffect.icon;
         statusIcon.transform.localScale = new Vector3(statusIconStartingScale, statusIconStartingScale, statusIconStartingScale);
         statusIcon.color = statusEffect.classification == StatusEffectType.Buff ? Color.black : Color.white;
@@ -80,7 +82,7 @@ public class BuffIcon : MonoBehaviour
 
         //Start Anims And Shit
         if (CurrentEnterExitProcess != null) StopCoroutine(CurrentEnterExitProcess);
-        CurrentEnterExitProcess = InitiatorProcess();
+        CurrentEnterExitProcess = TerminatorProcess();
         StartCoroutine(CurrentEnterExitProcess);
     }
 
@@ -116,6 +118,7 @@ public class BuffIcon : MonoBehaviour
 
     public void MoveStatusIcon(Vector3 pos, float duration = 0.4f)
     {
+        movingPos = pos;
         if (StatusEffect == null) duration = 0f;
         if (CurrentMove != null) StopCoroutine(CurrentMove);
         CurrentMove = MoveStatusIcon_Co(pos, duration);

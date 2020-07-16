@@ -1144,8 +1144,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     break;
             }
         }
-        BuffsDebuffsList.Remove(bdClass);
-        if(ps != null && ps.activeInHierarchy)
+        BuffsDebuffsList.Remove(bdClass); 
+        UMS.buffIconHandler.RefreshIcons(BuffsDebuffsList);
+        if (ps != null && ps.activeInHierarchy)
         {
             yield return BattleManagerScript.Instance.WaitFor(1, () => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
             ps?.SetActive(false);
@@ -1368,6 +1369,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 UMS.HpBarContainer.parent = SpineAnim.transform;
                 UMS.StaminaBarContainer.parent = SpineAnim.transform;
                 UMS.IndicatorContainer.parent = SpineAnim.transform;
+                UMS.buffIconHandler.transform.parent = SpineAnim.transform;
             }
         }
     }

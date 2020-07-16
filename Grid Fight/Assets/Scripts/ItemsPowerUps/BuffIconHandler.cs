@@ -25,16 +25,43 @@ public class BuffIconHandler : MonoBehaviour
 
     public void RefreshIcons(List<BuffDebuffClass> statusList)
     {
+        //Get the bufficons that should no longer be running and stop them
         foreach (BuffIcon ico in buffIcons)
         {
+            if (ico.StatusEffect == null) continue;
             for (int i = 0; i < iconSlots.Count; i++)
             {
-                if (ico.StatusEffect == null) break;
-                //statusList[i].Stat == ico.StatusEffect.StatsToAffect;
+                if (statusList.Count > i)
+                {
+                    if (statusList[i].Stat == ico.StatusEffect.StatsToAffect)
+                    {
+                        //if the bufficon isn't in the right spot move it
+                        if (ico.transform.localPosition != iconSlots[i].localPosition && ico.movingPos != iconSlots[i].localPosition)
+                        {
+                            ico.MoveStatusIcon(iconSlots[i].localPosition);
+                        }
+
+                        //return since this ico is present in the list of status list of the player
+                        break;
+                    }
+                }
+                if (i + 1 == iconSlots.Count) ico.TerminateStatusIcon();
             }
         }
 
-        
+        //Get the bufficons that need to be created and make them
+        for (int i = 0; i < iconSlots.Count && statusList.Count > i; i++)
+        {
+            if (buffIcons.Where(r => r.StatusEffect != null && r.StatusEffect.StatsToAffect == statusList[i].Stat).FirstOrDefault() == null)
+            {
+                BuffIcon bI = buffIcons.Where(r => r.StatusEffect == null).First();
+                bI.InitiateStatusIcon(statusList[i].CurrentBuffDebuff.Effect);
+                if (bI.transform.localPosition != iconSlots[i].localPosition && bI.movingPos != iconSlots[i].localPosition)
+                {
+                    bI.MoveStatusIcon(iconSlots[i].localPosition);
+                }
+            }
+        }
     }
 }
 
