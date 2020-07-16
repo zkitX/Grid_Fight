@@ -203,7 +203,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 78e4b7d515f7f2b4d959a30fc1400ef9, type: 2}
   - {fileID: 11400000, guid: 06c49030de4ad6e459d69d1999a7f76a, type: 2}
   - {fileID: 11400000, guid: e601fe9b1182a5241ba821057d0b8d1e, type: 2}
-  - {fileID: 11400000, guid: 8510cf3c768c74344b9a63a1907604ea, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: c289b9ffc1cd54b4eb0f3cc71651f74e, type: 2}
   - {fileID: 11400000, guid: 72a91ef1c90d81b4d9f1d09d0f4fba72, type: 2}
   - {fileID: 11400000, guid: 098ad3b275c2cd845af19186d261d9d9, type: 2}
@@ -540,6 +540,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1356531903299505061}
     m_Modifications:
+    - target: {fileID: 1072692802108931392, guid: 730c9cdded2811142b3b17f531383548,
+        type: 3}
+      propertyPath: m_Name
+      value: StatisticManager
+      objectReference: {fileID: 0}
     - target: {fileID: 8527285901987777838, guid: 730c9cdded2811142b3b17f531383548,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -593,16 +598,6 @@ PrefabInstance:
     - target: {fileID: 8527285901987777838, guid: 730c9cdded2811142b3b17f531383548,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1072692802108931392, guid: 730c9cdded2811142b3b17f531383548,
-        type: 3}
-      propertyPath: m_Name
-      value: StatisticManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 555652098188282199, guid: 730c9cdded2811142b3b17f531383548,
-        type: 3}
-      propertyPath: comboTypeInformation.Array.data[2].displayCount
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

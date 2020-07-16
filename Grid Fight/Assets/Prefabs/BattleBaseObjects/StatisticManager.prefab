@@ -61,7 +61,7 @@ MonoBehaviour:
   - Name: Attack
     comboType: 1
     maxIntensityCombo: 25
-    resetTimer: 5
+    resetTimer: 3
     displayCount: 1
     prefix: x
     suffix: 
@@ -69,37 +69,36 @@ MonoBehaviour:
     - Name: 0 No Texts. Will return ''
       val: 0
       texts: []
-      color: {r: 1, g: 0.8066038, b: 0.8734079, a: 1}
+      color: {r: 0, g: 0, b: 0, a: 1}
       fungusBlockToFire: 
       fireBlockOnceOff: 0
       blockFired: 0
     - Name: 5
       val: 5
       texts:
-      - Ok.
-      - Alright.
-      - Decent.
-      color: {r: 1, g: 0.5707547, b: 0.6668414, a: 1}
+      - OK
+      - ALRIGHT
+      - DECENT
+      color: {r: 0.15950133, g: 0.8584906, b: 0.1538804, a: 1}
       fungusBlockToFire: 
       fireBlockOnceOff: 0
       blockFired: 0
     - Name: 10
       val: 10
       texts:
-      - Good!
-      - Nice!
-      - Getting There!
-      color: {r: 1, g: 0.664, b: 0.7063589, a: 1}
+      - GOOD!
+      - NICE!
+      color: {r: 1, g: 0.6427546, b: 0, a: 1}
       fungusBlockToFire: 
       fireBlockOnceOff: 0
       blockFired: 0
     - Name: 20
       val: 20
       texts:
-      - Sweet!
-      - Noice!
-      - Great Job!
-      color: {r: 0.990566, g: 0.6957636, b: 0.5653702, a: 1}
+      - SWEET!
+      - NOICE!
+      - GREAT JOB!
+      color: {r: 0.8301887, g: 0.34417552, b: 0.13314348, a: 1}
       fungusBlockToFire: 
       fireBlockOnceOff: 0
       blockFired: 0
@@ -109,24 +108,23 @@ MonoBehaviour:
       - EPIC!
       - WOWZA!
       - FANTASTIC!
-      color: {r: 0.9056604, g: 0.7272953, b: 0.43147027, a: 1}
+      color: {r: 0.8679245, g: 0.11249929, b: 0.08187966, a: 1}
       fungusBlockToFire: 
       fireBlockOnceOff: 0
       blockFired: 0
     - Name: 50
       val: 50
       texts:
-      - WAAAA! LEGENDARY!!!
-      - PERFECTION!!!
-      - WOW WOW WEE WOW WAH
-      color: {r: 0.8018868, g: 0.616545, b: 0.24586153, a: 1}
+      - LEGENDARY!
+      - PERFECTION!
+      color: {r: 0.91291904, g: 0, b: 1, a: 1}
       fungusBlockToFire: 
       fireBlockOnceOff: 0
       blockFired: 0
   - Name: Defence
     comboType: 2
     maxIntensityCombo: 10
-    resetTimer: 15
+    resetTimer: 6
     displayCount: 1
     prefix: x
     suffix: 
@@ -141,9 +139,7 @@ MonoBehaviour:
     - Name: 3
       val: 3
       texts:
-      - Ok.
-      - Alright.
-      - Decent.
+      - GOOD!
       color: {r: 0.6179246, g: 0.8767498, b: 0.909, a: 1}
       fungusBlockToFire: 
       fireBlockOnceOff: 0
@@ -151,40 +147,32 @@ MonoBehaviour:
     - Name: 6
       val: 6
       texts:
-      - Good!
-      - Nice!
-      - Getting There!
-      color: {r: 0.48584908, g: 0.95831215, b: 0.874, a: 1}
+      - NINJA!
+      color: {r: 0.071288735, g: 0.8396226, b: 0.7051642, a: 1}
       fungusBlockToFire: 
       fireBlockOnceOff: 0
       blockFired: 0
     - Name: 10
       val: 10
       texts:
-      - Sweet!
-      - Noice!
-      - Great Job!
-      color: {r: 0.38959596, g: 0.8018868, b: 0.6778347, a: 1}
+      - SHADOW!
+      color: {r: 0.056959763, g: 0.6037736, b: 0.44233337, a: 1}
       fungusBlockToFire: 
       fireBlockOnceOff: 0
       blockFired: 0
     - Name: 15
       val: 15
       texts:
-      - EPIC!
-      - WOWZA!
-      - FANTASTIC!
-      color: {r: 0.43137258, g: 0.853, b: 0.6496912, a: 1}
+      - GHOST!
+      color: {r: 0.017354928, g: 0.3679245, b: 0.19913173, a: 1}
       fungusBlockToFire: 
       fireBlockOnceOff: 0
       blockFired: 0
     - Name: 30
       val: 30
       texts:
-      - WAAAA! LEGENDARY!!!
-      - PERFECTION!!!
-      - WOW WOW WEE WOW WAH
-      color: {r: 0.20518868, g: 0.692, b: 0.413, a: 1}
+      - GODDESS!
+      color: {r: 0.019312914, g: 0.2924528, b: 0.13605821, a: 1}
       fungusBlockToFire: 
       fireBlockOnceOff: 0
       blockFired: 0
@@ -192,7 +180,7 @@ MonoBehaviour:
     comboType: 3
     maxIntensityCombo: 10
     resetTimer: 10
-    displayCount: 1
+    displayCount: 0
     prefix: x
     suffix: 
     comboThresholds:
@@ -206,8 +194,8 @@ MonoBehaviour:
     - Name: 2
       val: 2
       texts:
-      - Double Kill!
-      - Two down!
+      - DOUBLE KILL!
+      - TWO DOWN!
       color: {r: 1, g: 0.23113209, b: 0.51732236, a: 1}
       fungusBlockToFire: 
       fireBlockOnceOff: 0
@@ -215,9 +203,8 @@ MonoBehaviour:
     - Name: 3
       val: 3
       texts:
-      - OH BABY A TRIPLE!
-      - That's three!
-      - Tiple Kill!
+      - TRIPLE KILL
+      - THREE DOWN!
       color: {r: 0.8773585, g: 0.15312389, b: 0.32612917, a: 1}
       fungusBlockToFire: 
       fireBlockOnceOff: 0
@@ -225,9 +212,8 @@ MonoBehaviour:
     - Name: 5
       val: 5
       texts:
-      - On a roll!
-      - Fiver!
-      - Multikill!
+      - IT'S A FIVER
+      - FIVE DOWN
       color: {r: 0.8773585, g: 0.15312389, b: 0.32612917, a: 1}
       fungusBlockToFire: 
       fireBlockOnceOff: 0
@@ -245,9 +231,8 @@ MonoBehaviour:
     - Name: 25
       val: 25
       texts:
-      - UNSTOPPABLE!!
-      - INSANITY
-      - ABSOLUTE BRUTALITY
+      - KILLING MACHINE!
+      - 25 DOWN!!!
       color: {r: 0.5377358, g: 0, b: 0.21475822, a: 1}
       fungusBlockToFire: 
       fireBlockOnceOff: 0
