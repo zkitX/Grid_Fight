@@ -15,10 +15,14 @@ MonoBehaviour:
   Chances: 100
   CurrentAttackType: 0
   AttackRatioMultiplier: 1
-  DamageMultiplier: {x: 1, y: 1}
+  _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 0
   AttackAnim: 0
+  StaminaCost: 10
+  ExperiencePoints: 10
+  CoolDown: 10
   PrefixAnim: 0
+  Fov: 0
   Particles:
     Left:
       Cast: {fileID: 2687585864804741791, guid: 1145217550c9bd4479c0151a080845ee,
@@ -89,6 +93,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+      ChildrenBulletDelay: 0.5
       BulletEffectTiles: []
       BulletGapStartingTile: {x: 0, y: 0}
       HasEffect: 0
@@ -102,3 +107,11 @@ MonoBehaviour:
     ValueChecker: 0
     PercToCheck: 0
     Chances: 0
+  TotemAtk:
+    AtkType: 3
+    IsPlayerSide: 0
+    DurationOnField: 10
+    Effects: []
+    TotemIn: 0
+    TotemOut: 0
+    TentaclePrefab: 0
