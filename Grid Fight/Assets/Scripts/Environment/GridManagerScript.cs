@@ -108,9 +108,15 @@ public class GridManagerScript : MonoBehaviour
     }
 
 
-    public bool IsWalkableAndFree(Vector2Int pos, WalkingSideType wSide)
+    public bool IsWalkableAndFree(List<Vector2Int> oldPos, Vector2Int pos, WalkingSideType wSide)
     {
-        return BattleTiles.Where(r => r.Pos == pos && r.BattleTileState == BattleTileStateType.Empty && r.WalkingSide == wSide).ToList().Count > 0 ? true : false;
+        List<Vector2Int> res = new List<Vector2Int>();
+        oldPos.ForEach(r => res.Add((r - oldPos[0]) + pos));
+        if (!AreBattleTilesInControllerArea(oldPos, res, wSide))
+        {
+            return false;
+        }
+        return true;
     }
 
     public bool isPosOnField(Vector2Int pos)
@@ -201,6 +207,16 @@ public class GridManagerScript : MonoBehaviour
         foreach (Vector2Int item in pos)
         {
             res.Add(GetBattleTile(item, walkingSide));
+        }
+        return res;
+    }
+
+    public List<BattleTileScript> GetBattleTiles(List<Vector2Int> pos)
+    {
+        List<BattleTileScript> res = new List<BattleTileScript>();
+        foreach (Vector2Int item in pos)
+        {
+            res.Add(GetBattleTile(item));
         }
         return res;
     }
