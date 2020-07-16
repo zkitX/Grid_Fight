@@ -18,7 +18,7 @@ public class ScriptableObjectAI : ScriptableObject
    // public AggroType Aggro;
     //public PartyHPType PartyHp;
     public List<AICheckClass> Checks = new List<AICheckClass>();
-
+    public int CoolDown = 0;
     [Header("Move effects")]
 
     public bool IdleMovement = false;

@@ -91,13 +91,15 @@ public class PlayerMinionType_Script : BaseCharacter
         base.SetCharDead();
       
     }
+
+    public float AICoolDownOffset = 0;
     public virtual IEnumerator AI()
     {
         bool val = true;
         while (val)
         {
             yield return null;
-            if (IsOnField)
+            if (IsOnField && CharInfo.Health > 0)
             {
 
                 while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
@@ -123,6 +125,7 @@ public class PlayerMinionType_Script : BaseCharacter
                     psAI.transform.parent = SpineAnim.transform;
                     psAI.transform.localPosition = Vector3.zero;
                     psAI.SetActive(true);
+                    AICoolDownOffset = 0;
                 }
 
                 int atkChances = Random.Range(0, 100);
@@ -147,22 +150,24 @@ public class PlayerMinionType_Script : BaseCharacter
                         if (possiblePos == null)
                         {
                             int movementChances = Random.Range(0, (TowardMovementPerc + AwayMovementPerc));
-                            if (TowardMovementPerc > movementChances)
+                            if (TowardMovementPerc > movementChances && (Time.time - AICoolDownOffset) > CurrentAIState.CoolDown)
                             {
                                 if (CurrentAIState.t != null)
                                 {
                                     possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
                                     r.BattleTileState != BattleTileStateType.NonUsable
                                     ).OrderBy(a => Mathf.Abs(a.Pos.x - CurrentAIState.t.UMS.CurrentTilePos.x)).ThenBy(b => b.Pos.y).ToList();
+                                    AICoolDownOffset = Time.time;
                                 }
                             }
-                            else
+                            else if ((Time.time - AICoolDownOffset) > CurrentAIState.CoolDown)
                             {
                                 if (CurrentAIState.t != null)
                                 {
                                     possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
                                     r.BattleTileState != BattleTileStateType.NonUsable
                                     ).OrderByDescending(a => Mathf.Abs(a.Pos.x - CurrentAIState.t.UMS.CurrentTilePos.x)).ThenByDescending(b => b.Pos.y).ToList();
+                                    AICoolDownOffset = Time.time;
                                 }
                             }
                             if (possiblePositions.Count > 0)

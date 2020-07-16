@@ -174,7 +174,7 @@ public class MinionType_Script : BaseCharacter
         }
     }
 
-  
+    public float AICoolDownOffset = 0;
     public virtual IEnumerator AI()
     {
         bool val = true;
@@ -207,6 +207,7 @@ public class MinionType_Script : BaseCharacter
                     psAI.transform.parent = SpineAnim.transform;
                     psAI.transform.localPosition = Vector3.zero;
                     psAI.SetActive(true);
+                    AICoolDownOffset = 0;
                 }
 
                 int atkChances = Random.Range(0 ,100);
@@ -231,22 +232,24 @@ public class MinionType_Script : BaseCharacter
                         if (possiblePos == null)
                         {
                             int movementChances = Random.Range(0, (TowardMovementPerc + AwayMovementPerc));
-                            if (TowardMovementPerc > movementChances)
+                            if (TowardMovementPerc > movementChances && (Time.time - AICoolDownOffset) > CurrentAIState.CoolDown)
                             {
                                 if (CurrentAIState.t != null)
                                 {
                                     possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
                                     r.BattleTileState != BattleTileStateType.NonUsable
                                     ).OrderBy(a => Mathf.Abs(a.Pos.x - CurrentAIState.t.UMS.CurrentTilePos.x)).ThenBy(b => b.Pos.y).ToList();
+                                    AICoolDownOffset = Time.time;
                                 }
                             }
-                            else
+                            else if((Time.time - AICoolDownOffset) > CurrentAIState.CoolDown)
                             {
                                 if (CurrentAIState.t != null)
                                 {
                                     possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
                                     r.BattleTileState != BattleTileStateType.NonUsable
                                     ).OrderByDescending(a => Mathf.Abs(a.Pos.x - CurrentAIState.t.UMS.CurrentTilePos.x)).ThenByDescending(b => b.Pos.y).ToList();
+                                    AICoolDownOffset = Time.time;
                                 }
                             }
                             if (possiblePositions.Count > 0)
@@ -444,22 +447,22 @@ public class MinionType_Script : BaseCharacter
 
     }
 
-    public override void SetAnimation(string animState, bool loop = false, float transition = 0, bool _pauseOnLastFrame = false)
-    {
-        if (SpineAnim == null)
-        {
-            SpineAnimatorsetup();
-        }
-
-        base.SetAnimation(animState, loop, transition, _pauseOnLastFrame);
-    }
+   
 
     public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
     {
         SetAnimation(animState.ToString(), loop, transition);
     }
 
-
+    public override void SetAnimation(string animState, bool loop = false, float transition = 0, bool _pauseOnLastFrame = false)
+    {
+        if (SpineAnim == null)
+        {
+            SpineAnimatorsetup();
+        }
+        Debug.Log(Time.time + "    " + animState);
+        base.SetAnimation(animState, loop, transition, _pauseOnLastFrame);
+    }
 
 
     //Basic attack sequence
@@ -543,7 +546,6 @@ public class MinionType_Script : BaseCharacter
                     }
                     break;
                 case StatsCheckType.None:
-                    nextAttack = atkToCheck;
                     availableAtks.Add(atkToCheck);
                     break;
             }
@@ -819,6 +821,7 @@ public class MinionType_Script : BaseCharacter
 
         if (completedAnim == CharacterAnimationStateType.Defending.ToString())
         {
+            Debug.Log("DEfending End");
             isDefending = false;
             DefendingHoldingTimer = 0;
         }
