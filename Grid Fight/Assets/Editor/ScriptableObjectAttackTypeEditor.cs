@@ -66,14 +66,12 @@ public class ScriptableObjectAttackTypeEditor : Editor
         if(origin.AttackInput > AttackInputType.Strong)
         {
             origin.ExperiencePoints = EditorGUILayout.FloatField("ExperiencePoints", origin.ExperiencePoints);
-            origin.CoolDown = EditorGUILayout.FloatField("CoolDown", origin.CoolDown);
         }
 
         if (origin.CurrentAttackType == AttackType.Particles)
         {
             if (origin.TrajectoriesNumber > 0)
             {
-
                 origin.ParticlesAtk.BulletTrajectories = RefreshList(origin.TrajectoriesNumber, origin.ParticlesAtk.BulletTrajectories);
                 for (int i = 0; i < origin.TrajectoriesNumber; i++)
                 {
