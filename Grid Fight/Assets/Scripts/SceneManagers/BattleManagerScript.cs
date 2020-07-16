@@ -840,7 +840,7 @@ public class BattleManagerScript : MonoBehaviour
         }
 
         List<MoveDetailsClass> moveDetails = new List<MoveDetailsClass>();
-        Vector2Int[] path = GridManagerScript.Pathfinding.GetPathTo(destination, character.UMS.CurrentTilePos, GridManagerScript.Instance.GetWalkableTilesLayout(character.UMS.WalkingSide));
+        Vector2Int[] path = GridManagerScript.Pathfinding.GetPathTo(destination, character.UMS.Pos, GridManagerScript.Instance.GetWalkableTilesLayout(character.UMS.WalkingSide));
         Vector2Int curPos = character.UMS.CurrentTilePos;
         foreach (Vector2Int movePos in path)
         {

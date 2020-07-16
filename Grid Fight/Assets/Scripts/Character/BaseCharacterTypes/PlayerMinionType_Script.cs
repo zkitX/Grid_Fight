@@ -182,7 +182,7 @@ public class PlayerMinionType_Script : BaseCharacter
                                         {
                                             if (possiblePos.BattleTileState == BattleTileStateType.Empty)
                                             {
-                                                path = GridManagerScript.Pathfinding.GetPathTo(possiblePos.Pos, UMS.CurrentTilePos, GridManagerScript.Instance.GetWalkableTilesLayout(UMS.WalkingSide));
+                                                path = GridManagerScript.Pathfinding.GetPathTo(possiblePos.Pos, UMS.Pos, GridManagerScript.Instance.GetWalkableTilesLayout(UMS.WalkingSide));
                                                 if (path != null && path.Length > 0)
                                                 {
                                                     found = true;
@@ -240,7 +240,7 @@ public class PlayerMinionType_Script : BaseCharacter
                         {
                             if (possiblePos.Pos != UMS.CurrentTilePos)
                             {
-                                path = GridManagerScript.Pathfinding.GetPathTo(possiblePos.Pos, UMS.CurrentTilePos, GridManagerScript.Instance.GetWalkableTilesLayout(UMS.WalkingSide));
+                                path = GridManagerScript.Pathfinding.GetPathTo(possiblePos.Pos, UMS.Pos, GridManagerScript.Instance.GetWalkableTilesLayout(UMS.WalkingSide));
                                 if (path == null || (path != null && path.Length == 1) || possiblePos.Pos == UMS.CurrentTilePos)
                                 {
                                     possiblePos.isTaken = false;

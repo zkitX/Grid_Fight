@@ -259,14 +259,14 @@ public class Stage01_Boss_Script : MinionType_Script
                 case AttackInputType.Strong:
                     if (CurrentPhase != Stage01_Boss_MaskType.CrystalTomb)
                     {
-                        if (FaceChangingWarDrums == null)
+                      /*  if (FaceChangingWarDrums == null)
                         {
                             FaceChangingWarDrums = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_CrystalTomb_Effect);
                             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, CharInfo.AudioProfile.Skill3.Cast, AudioBus.MidPrio, transform);
                         }
                         FaceChangingWarDrums.transform.parent = SpineAnim.transform;
                         FaceChangingWarDrums.transform.localPosition = Vector3.zero;
-                        FaceChangingWarDrums.SetActive(true);
+                        FaceChangingWarDrums.SetActive(true);*/
                         CurrentPhase = Stage01_Boss_MaskType.CrystalTomb;
                     }
                     base.SetAnimation(Stage01_Boss_MaskType.CrystalTomb.ToString() + "_" + animState, loop, transition, _pauseOnLastFrame);
