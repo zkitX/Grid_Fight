@@ -220,6 +220,7 @@ MonoBehaviour:
     IsRelationshipUpdateForTheWholeTeam: 1
     CharTargetRecruitable: []
     CharTarget: 
+  VariableName: 
   NextBlock: {fileID: 0}
 --- !u!1 &6461641712979318219
 GameObject:
@@ -548,7 +549,7 @@ MonoBehaviour:
   m_enableKerning: 1
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
-  m_isRichText: 0
+  m_isRichText: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -830,11 +831,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6461641713100885494}
     m_Modifications:
-    - target: {fileID: 8106900087706988067, guid: ce4d49bfff94e9f4d94d7a6b6e9e3599,
-        type: 3}
-      propertyPath: m_Name
-      value: Button-Prefab
-      objectReference: {fileID: 0}
     - target: {fileID: 1795079166275956467, guid: ce4d49bfff94e9f4d94d7a6b6e9e3599,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -939,6 +935,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8106900087706988067, guid: ce4d49bfff94e9f4d94d7a6b6e9e3599,
+        type: 3}
+      propertyPath: m_Name
+      value: Button-Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce4d49bfff94e9f4d94d7a6b6e9e3599, type: 3}
