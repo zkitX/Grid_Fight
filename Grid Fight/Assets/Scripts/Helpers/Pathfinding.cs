@@ -78,7 +78,7 @@ public class Pathfinding
             }
             curNode = null;
             i++;
-            if(!nextTileFounded || i > 10)
+            if((!nextTileFounded && nodes.Where(r=> !r.Closed).ToList().Count == 1) || i > 10)
             {
                 return new Vector2Int[] { };
             }
