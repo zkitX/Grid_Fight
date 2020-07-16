@@ -170,6 +170,7 @@ public class NewICharacterVitality : MonoBehaviour
         float prog = 0f;
         while (waitLeft != 0f)
         {
+            deadText.text = (Mathf.FloorToInt(waitLeft) + 1).ToString();
             waitLeft = Mathf.Clamp(waitLeft - Time.deltaTime, 0f, 9999f);
             prog = 1f - (waitLeft / startingWait);
             healthBar.fillAmount = Mathf.Lerp(healthStart, 1f, prog);
@@ -187,9 +188,14 @@ public class NewICharacterVitality : MonoBehaviour
 
     public void TakeDamageSlice()
     {
-        if (DamageSliceSequencer != null) StopCoroutine(DamageSliceSequencer);
+        if (DamageSliceSequencer != null) return;
         DamageSliceSequencer = DamageSliceSequence();
         StartCoroutine(DamageSliceSequencer);
+    }
+
+    void EndDamageSliceCo()
+    {
+        DamageSliceSequencer = null;
     }
 
     IEnumerator DamageSliceSequencer = null;
@@ -197,8 +203,13 @@ public class NewICharacterVitality : MonoBehaviour
     {
         Vector3 slicePos = damageSliceOrigin + (mapSide == SideType.LeftSide ? 1f : -1f) * (new Vector3(healthBar.rectTransform.sizeDelta.x * (assignedCharDetails.CharInfo.HealthPerc / 100f), 0f));
         damageSlice.transform.position = slicePos;
-        damageSlice.GetComponentInChildren<Animator>().SetTrigger("SliceDamage");
-        yield return null;
+        Animation anim = damageSlice.GetComponentInChildren<Animation>();
+        anim.Play();
+        while (anim.isPlaying)
+        {
+            yield return null;
+        }
+        EndDamageSliceCo();
     }
 
     void ToggleVisible(bool state)
@@ -215,7 +226,9 @@ public class NewICharacterVitality : MonoBehaviour
 
     void ToggleDeathTextVisablity(bool state)
     {
-        deadText.enabled = /*state*/false; //Just set to false while it's not being used and the skull icon is
+        deadText.enabled = /*state*/state; //Just set to false while it's not being used and the skull icon is
+        characterIconIdle.color = state ? new Color(0.3f, 0.3f, 0.3f, 1f) : Color.white;
+        characterIconSelected.color = state ? new Color(0.3f, 0.3f, 0.3f, 1f) : Color.white;
         if (deathIcon != null) deathIcon.enabled = state;
     }
 

@@ -623,7 +623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Pan
-  CharacterIcon: {fileID: 21300000, guid: 1b1384265f89da04cb11378aee9f60eb, type: 3}
+  CharacterIcon: {fileID: 21300000, guid: 97c277ebb28a3d042a5323663da7c6c9, type: 3}
   Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 87d03b5d6884e0e419c99c8c7c203713, type: 2}
   BaseCharacterType: 0
@@ -712,8 +712,12 @@ MonoBehaviour:
   DefenceStats:
     BaseDefence: 2
     Invulnerability: 0.2
+    MinionDefenceChances: 20
+    MinionPerfectDefenceChances: 5
     B_BaseDefence: 10
     B_Invulnerability: 0.2
+    B_MinionDefenceChances: 20
+    B_MinionPerfectDefenceChances: 5
     LevelMultiplier: 0
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
@@ -722,22 +726,22 @@ MonoBehaviour:
   MovementTimer: {x: 5, y: 8}
   B_MovementTimer: {x: 5, y: 8}
   RelationshipList:
-  - name: Stage04_Character_Valley
+  - name: AscensoMountains_Character_Valley_Miranda
     CharOwnerId: 1007
     CharacterId: 1084
     BasicValue: 1
     _CurrentValue: 0
-  - name: Stage04_Character_Desert
+  - name: AscensoMountains_Character_Desert_Zoila
     CharOwnerId: 1007
     CharacterId: 1085
     BasicValue: 2
     _CurrentValue: 0
-  - name: Stage04_Character_Mountain
+  - name: AscensoMountains_Character_Mountain_Alanda
     CharOwnerId: 1007
     CharacterId: 1086
     BasicValue: 3
     _CurrentValue: 0
-  - name: Stage04_Character_Forest
+  - name: AscensoMountains_Character_Forest_Zeta
     CharOwnerId: 1007
     CharacterId: 1087
     BasicValue: 4

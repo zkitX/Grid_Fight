@@ -624,7 +624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Donna
   CharacterIcon: {fileID: 21300000, guid: 6ab46d3be6d74fe4f8d759d19700050d, type: 3}
-  Mask: {fileID: 11400000, guid: 26d54d3a1b1573248a8a77d47d25138f, type: 2}
+  Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 93f6bf070be4af24fb8dbc3dea6f6df7, type: 2}
   BaseCharacterType: 0
   CharacterID: 1005
@@ -711,8 +711,12 @@ MonoBehaviour:
   DefenceStats:
     BaseDefence: 3
     Invulnerability: 0.2
+    MinionDefenceChances: 20
+    MinionPerfectDefenceChances: 5
     B_BaseDefence: 10
     B_Invulnerability: 0.2
+    B_MinionDefenceChances: 20
+    B_MinionPerfectDefenceChances: 5
     LevelMultiplier: 0
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
@@ -721,22 +725,22 @@ MonoBehaviour:
   MovementTimer: {x: 5, y: 8}
   B_MovementTimer: {x: 5, y: 8}
   RelationshipList:
-  - name: Stage04_Character_Valley
+  - name: AscensoMountains_Character_Valley_Miranda
     CharOwnerId: 1005
     CharacterId: 1084
     BasicValue: 1
     _CurrentValue: 0
-  - name: Stage04_Character_Desert
+  - name: AscensoMountains_Character_Desert_Zoila
     CharOwnerId: 1005
     CharacterId: 1085
     BasicValue: 2
     _CurrentValue: 0
-  - name: Stage04_Character_Mountain
+  - name: AscensoMountains_Character_Mountain_Alanda
     CharOwnerId: 1005
     CharacterId: 1086
     BasicValue: 3
     _CurrentValue: 0
-  - name: Stage04_Character_Forest
+  - name: AscensoMountains_Character_Forest_Zeta
     CharOwnerId: 1005
     CharacterId: 1087
     BasicValue: 4
