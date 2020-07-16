@@ -58,7 +58,7 @@ public class UIBattleFieldManager : MonoBehaviour
         }
 
         List<Color> colors = new List<Color>();
-        colors.Add(color * 0.3f);
+        //colors.Add(color * 0.3f);
         colors.Add(color);
 
         TextMeshProUGUI[] thaScaredtexts = cI.GetComponentsInChildren<TextMeshProUGUI>();

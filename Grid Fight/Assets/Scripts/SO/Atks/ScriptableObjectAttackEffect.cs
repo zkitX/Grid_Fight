@@ -22,5 +22,9 @@ public class ScriptableObjectAttackEffect : ScriptableObject
     public Vector2 _Duration;
     public CharacterAnimationStateType AnimToFire;
     public ParticlesType Particles;
+    public StatusEffectType classification = StatusEffectType.Buff;
+    public Sprite icon = null;
+    public bool recolorCharUI = false;
+    [ConditionalField("recolorCharUI")] public Color statusIconColor = Color.magenta;
     [HideInInspector] public ScriptableObjectAttackBase Atk;
 }

@@ -968,8 +968,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             //Debug.Log(bdClass.Name + "   " + newBuffDebuff.Last());
             item = new BuffDebuffClass(bdClass.Effect.Name, bdClass.Effect.StatsToAffect, Convert.ToInt32(newBuffDebuff.Last()), bdClass, bdClass.Effect.Duration, bdClass.EffectMaker);
-            item.BuffDebuffCo = Buff_DebuffCoroutine(item);
-            BuffsDebuffsList.Add(item);
+            item.BuffDebuffCo = Buff_DebuffCoroutine(item); 
+            BuffsDebuffsList.Insert(0, item);
+            UMS.buffIconHandler.RefreshIcons(BuffsDebuffsList);
             StartCoroutine(item.BuffDebuffCo);
         }
         else
@@ -978,10 +979,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             {
                 string[] currentBuffDebuff = item.Name.ToString().Split('_');
                 item.CurrentBuffDebuff.Stop_Co = true;
+                int index = BuffsDebuffsList.IndexOf(item);
                 BuffsDebuffsList.Remove(item);
                 item = new BuffDebuffClass(bdClass.Effect.Name, bdClass.Effect.StatsToAffect, Convert.ToInt32(newBuffDebuff.Last()), bdClass, bdClass.Effect.Duration, bdClass.EffectMaker);
                 item.BuffDebuffCo = Buff_DebuffCoroutine(item);
-                BuffsDebuffsList.Add(item);
+                BuffsDebuffsList.Insert(index, item);
                 StartCoroutine(item.BuffDebuffCo);
             }
         }
@@ -1615,6 +1617,7 @@ public class Buff_DebuffClass
     public ElementalType ElementalPower;
     public float Timer;
     public bool Stop_Co = false;
+    public Sprite icon;
     public BaseCharacter EffectMaker;
     public ScriptableObjectAttackEffect Effect;
 
@@ -1625,6 +1628,7 @@ public class Buff_DebuffClass
         ElementalPower = elementalPower;
         EffectMaker = effectMaker;
         Effect = effect;
+        icon = effect.icon;
     }
 
     public Buff_DebuffClass()

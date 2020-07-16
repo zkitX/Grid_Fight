@@ -296,6 +296,12 @@ public enum StatsCheckerType
     Value
 }
 
+public enum StatusEffectType
+{
+    Buff = 0,
+    Debuff = 1
+}
+
 public enum BuffDebuffStatsType
 {
     DamageStats_BaseDamage,
