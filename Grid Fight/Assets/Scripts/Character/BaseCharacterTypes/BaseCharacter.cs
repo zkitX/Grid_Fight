@@ -1466,7 +1466,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             {
                 // AudioManager.Instance.PlayGeneric("Get_Hit_20200217");
             }
-            SetAnimation(CharacterAnimationStateType.GettingHit);
+            SetAnimation(CharacterAnimationStateType.GettingHit, false, 0.1f);
             healthCT = isCritical ? HealthChangedType.CriticalHit : HealthChangedType.Damage;
             healthCT = damage < 0 ? HealthChangedType.Heal : healthCT;
             res = true;

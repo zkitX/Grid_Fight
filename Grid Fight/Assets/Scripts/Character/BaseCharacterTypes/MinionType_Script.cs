@@ -451,6 +451,15 @@ public class MinionType_Script : BaseCharacter
 
     public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
     {
+        if(animState == CharacterAnimationStateType.Defending && SpineAnim.CurrentAnim.Contains("Defending"))
+        {
+            return;
+        }
+
+        if (animState == CharacterAnimationStateType.GettingHit && SpineAnim.CurrentAnim.Contains("GettingHit"))
+        {
+            return;
+        }
         SetAnimation(animState.ToString(), loop, transition);
     }
 
@@ -460,7 +469,13 @@ public class MinionType_Script : BaseCharacter
         {
             SpineAnimatorsetup();
         }
+
+        if (animState.Contains("GettingHit") && SpineAnim.CurrentAnim.Contains("GettingHit"))
+        {
+            return;
+        }
         Debug.Log(Time.time + "    " + animState);
+        
         base.SetAnimation(animState, loop, transition, _pauseOnLastFrame);
     }
 
