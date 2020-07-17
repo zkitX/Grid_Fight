@@ -326,6 +326,7 @@ namespace Fungus
             if (block != null)
             {
                 block.StartExecution();
+                Debug.Log("<b>STARTED NEXT BLOCK <color=pink>" + block.BlockName + "</color> FROM WAVE");
             }
             else
             {

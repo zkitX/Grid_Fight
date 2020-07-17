@@ -71,7 +71,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
                     itemType = ItemType.PowerUp_Shield;
                     powerUpAudio = BattleManagerScript.Instance.AudioProfile.PowerUp_Shield;
                     break;
-                case (BuffDebuffStatsType.Health):
+                case (BuffDebuffStatsType.Health_Overtime):
                     itemType = ItemType.PowerUP_Health;
                     powerUpAudio = BattleManagerScript.Instance.AudioProfile.PowerUp_Health;
                     break;

@@ -108,6 +108,8 @@ public class CallNextWave : Command
 
         BattleManagerScript.Instance.CurrentBattleState = BattleState.FungusPuppets;
         SetNextBlockFromName(NextBlockToFire);
+
+        Debug.Log("<b>CONTINUE FROM WAVE</b>");
         Continue();
     }
 

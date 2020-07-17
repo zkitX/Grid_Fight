@@ -21,9 +21,7 @@ public class WaveManagerScript : MonoBehaviour
     public List<BaseCharacter> WaveCharcters = new List<BaseCharacter>();
 
     private WaveCharClass CurrentWaveChar;
-    public int CurrentWave = 0;
     public bool StartWave = false;
-    private IEnumerator Wave_Co;
     public Dictionary<string, BaseCharacter> FungusSpawnedChars = new Dictionary<string, BaseCharacter>();
 
     public List<StartingCharactersForWaveClass> StartingCharInWave = new List<StartingCharactersForWaveClass>();
