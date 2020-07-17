@@ -42,17 +42,16 @@ public class Pathfinding
                 {
                     return new Vector2Int[] { };
                 }
-                else
-                {
-                    curNode.Checked = true;
-                }
+              
             }
+            curNode.Checked = true;
 
             if (destination.x < curNode.Pos[0].x)
             {
                 if (TileAvailabilityCheck(curNode, destination, new Vector2Int(curNode.Pos[0].x - 1, curNode.Pos[0].y), new Vector2Int(curNode.Pos[0].x, curNode.Pos[0].y + 1), new Vector2Int(curNode.Pos[0].x, curNode.Pos[0].y - 1)))
                 {
                     nextTileFounded = true;
+                    curNode = nodes.Last();
                 } 
             }
             if (destination.x > curNode.Pos[0].x)
@@ -60,6 +59,7 @@ public class Pathfinding
                 if (TileAvailabilityCheck(curNode, destination, new Vector2Int(curNode.Pos[0].x + 1, curNode.Pos[0].y), new Vector2Int(curNode.Pos[0].x, curNode.Pos[0].y + 1), new Vector2Int(curNode.Pos[0].x, curNode.Pos[0].y - 1)))
                 {
                     nextTileFounded = true;
+                    curNode = nodes.Last();
                 }
             }
             if (destination.y > curNode.Pos[0].y)
@@ -67,6 +67,7 @@ public class Pathfinding
                 if (TileAvailabilityCheck(curNode, destination, new Vector2Int(curNode.Pos[0].x, curNode.Pos[0].y + 1), new Vector2Int(curNode.Pos[0].x + 1, curNode.Pos[0].y), new Vector2Int(curNode.Pos[0].x - 1, curNode.Pos[0].y)))
                 {
                     nextTileFounded = true;
+                    curNode = nodes.Last();
                 }
             }
             if (destination.y < curNode.Pos[0].y)
@@ -74,11 +75,12 @@ public class Pathfinding
                 if (TileAvailabilityCheck(curNode, destination, new Vector2Int(curNode.Pos[0].x, curNode.Pos[0].y - 1), new Vector2Int(curNode.Pos[0].x + 1, curNode.Pos[0].y), new Vector2Int(curNode.Pos[0].x - 1, curNode.Pos[0].y)))
                 {
                     nextTileFounded = true;
+                    curNode = nodes.Last();
                 }
             }
             curNode = null;
             i++;
-            if(i > 10)
+            if(nodes.Last().Weight > 10)
             {
                 return new Vector2Int[] { };
             }
