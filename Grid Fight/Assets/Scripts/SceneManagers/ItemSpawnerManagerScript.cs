@@ -66,13 +66,12 @@ public class ItemSpawnerManagerScript : MonoBehaviour
             }
 
             BattleTileScript bts = null;
-            bool found = false;
-            while(!found)
+            while(true)
             {
                 bts = GridManagerScript.Instance.GetFreeBattleTile(WalkingSideType.LeftSide);
-                if (bts.BattleTileState == BattleTileStateType.Empty && SpawnedItems.Where(r=> r.gameObject.activeInHierarchy && r.Pos == bts.Pos).ToList().Count == 0)
+                if (bts.BattleTileState == BattleTileStateType.Empty && SpawnedItems.Where(r=> r.isActiveAndEnabled && r.Pos == bts.Pos).ToList().Count == 0)
                 {
-                    found = true;
+                    break;
                 }
                 yield return null;
             }

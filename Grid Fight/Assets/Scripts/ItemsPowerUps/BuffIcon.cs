@@ -11,6 +11,7 @@ public class BuffIcon : MonoBehaviour
     Animation[] anims = new Animation[0];
     [SerializeField] protected SpriteRenderer statusIcon = null;
     protected float statusIconStartingScale = 0.5f;
+    protected Vector3 statusIconStartingPos = Vector3.zero;
     [SerializeField] protected GameObject DebuffObj = null;
     protected List<Color> DebuffDefaultColors = new List<Color>();
     [SerializeField] protected GameObject BuffObj = null;
@@ -40,6 +41,7 @@ public class BuffIcon : MonoBehaviour
         }
         statusIcon.transform.SetParent(BuffObj.transform.GetChild(0).GetChild(0));
         statusIconStartingScale = statusIcon.transform.localScale.x;
+        statusIconStartingPos = statusIcon.transform.localPosition;
         statusIcon.color = Color.clear;
         DebuffObj.SetActive(false);
         BuffObj.SetActive(false);
@@ -68,7 +70,7 @@ public class BuffIcon : MonoBehaviour
         statusIcon.transform.SetParent(curStatusObj.transform.GetChild(0).GetChild(0));
         statusIcon.sprite = statusEffect.icon;
         statusIcon.transform.localScale = new Vector3(statusIconStartingScale, statusIconStartingScale, statusIconStartingScale);
-        statusIcon.transform.localPosition = Vector3.zero;
+        statusIcon.transform.localPosition = statusIconStartingPos;
         statusIcon.color = statusEffect.classification == StatusEffectType.Buff ? Color.black : Color.white;
 
         //Start Anims And Shit
