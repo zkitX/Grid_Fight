@@ -38,10 +38,11 @@ public class BuffIcon : MonoBehaviour
         {
             BuffDefaultColors.Add(sprite.color);
         }
+        statusIcon.transform.SetParent(BuffObj.transform.GetChild(0).GetChild(0));
+        statusIconStartingScale = statusIcon.transform.localScale.x;
+        statusIcon.color = Color.clear;
         DebuffObj.SetActive(false);
         BuffObj.SetActive(false);
-        statusIconStartingScale = 1f;//statusIcon.transform.localScale.x;
-        statusIcon.color = Color.clear;
     }
 
 
