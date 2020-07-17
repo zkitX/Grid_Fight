@@ -40,7 +40,7 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
-  TrajectoriesNumber: 3
+  TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories:
     - Show: 1
@@ -93,54 +93,21 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      ChildrenBulletDelay: 0.5
-      BulletEffectTiles: []
+      ChildrenBulletDelay: 0
+      BulletEffectTiles:
+      - {x: 0, y: 0}
+      - {x: -1, y: 0}
+      - {x: -2, y: 0}
+      - {x: -3, y: 0}
+      - {x: 1, y: 0}
+      - {x: 2, y: 0}
+      - {x: 3, y: 0}
       BulletGapStartingTile: {x: 0, y: 0}
       HasEffect: 1
       Effects:
       - {fileID: 11400000, guid: 28c22cbdfe9a42140abc7f5a59100c12, type: 2}
       - {fileID: 11400000, guid: 32c658bb18d75b1498b63bfa89616058, type: 2}
       - {fileID: 11400000, guid: c2e59d3f315f87143b16586fcc52006d, type: 2}
-      EffectChances: 100
-    - Show: 1
-      BulletDistanceInTile: {x: 1, y: 1}
-      Trajectory_Y:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      Trajectory_Z:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      ChildrenBulletDelay: 0.5
-      BulletEffectTiles: []
-      BulletGapStartingTile: {x: 0, y: 0}
-      HasEffect: 0
-      Effects: []
-      EffectChances: 100
-    - Show: 1
-      BulletDistanceInTile: {x: -1, y: 1}
-      Trajectory_Y:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      Trajectory_Z:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      ChildrenBulletDelay: 0.5
-      BulletEffectTiles: []
-      BulletGapStartingTile: {x: 0, y: 0}
-      HasEffect: 0
-      Effects: []
       EffectChances: 100
     CharacterClass: 0
   TilesAtk:
