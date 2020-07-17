@@ -644,9 +644,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     #endregion
     #region Defence
 
-
-
     protected float defenceAnimSpeedMultiplier = 5f;
+    protected bool IsDefStartCo = false;
 
     public void StartDefending()
     {
@@ -661,6 +660,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             CharInfo.Shield -= UniversalGameBalancer.Instance.defenceCost;
             isDefendingStop = false;
             isDefending = true;
+            IsDefStartCo = false;
             DefendingHoldingTimer = 0;
             StartCoroutine(Defending_Co());
         }
@@ -937,9 +937,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 isMoving = false;
                 if (isDefending && !isDefe)
                 {
-                    isDefe = true;
+                   /* isDefe = true;
                     SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
-                    SpineAnim.SetAnimationSpeed(5);
+                    SpineAnim.SetAnimationSpeed(5);*/
                 }
                 TileMovementCompleteEvent?.Invoke(this);
             }
@@ -1331,10 +1331,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         float AnimSpeed = 1;
 
-        if (animState.Contains("IdleToAtk"))
+        if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && (animState.Contains("IdleToAtk") || animState.Contains("Loop")))
         {
-            AnimSpeed = CharInfo.SpeedStats.AttackSpeed * CharInfo.BaseSpeed;
-            AnimSpeed = SpineAnim.GetAnimLenght(animState) / 0.25f;
+            //AnimSpeed = CharInfo.SpeedStats.AttackSpeed * CharInfo.BaseSpeed;
+            AnimSpeed = SpineAnim.GetAnimLenght(animState) / 0.05f;
         }
         else if (animState.Contains("Dash"))
         {

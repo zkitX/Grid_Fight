@@ -605,10 +605,11 @@ public class MinionType_Script : BaseCharacter
         {
             totalchances += r.TilesAtk.Chances;
         });
-        int chances = UnityEngine.Random.Range(0, totalchances);
+        int chances = 0;
         int sumc = 0;
         for (int i = 0; i < resAtkBase.Count; i++)
         {
+            chances = UnityEngine.Random.Range(0, totalchances);
             sumc += resAtkBase[i].TilesAtk.Chances;
 
             if (chances < sumc)
@@ -616,6 +617,7 @@ public class MinionType_Script : BaseCharacter
                 nextAttack = resAtkBase[i];
                 return;
             }
+            totalchances -= sumc;
         }
     }
 
@@ -886,7 +888,7 @@ public class MinionType_Script : BaseCharacter
 
 }
 
-
+[System.Serializable]
 public class HitInfoClass
 {
     public CharacterNameType CharacterId;
@@ -904,7 +906,7 @@ public class HitInfoClass
     }
 }
 
-
+[System.Serializable]
 public class AggroInfoClass
 {
     public ControllerType PlayerController;
