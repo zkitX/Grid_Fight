@@ -103,11 +103,11 @@ public class MinionType_Script : BaseCharacter
         base.SetCharDead();
         transform.position = new Vector3(100, 100, 100);
         SpineAnim.SpineAnimationState.ClearTracks();
-        Invoke("DisableChar", 0.5f);
+        StartCoroutine(DisableChar());
     }
-    private void DisableChar()
+    private IEnumerator DisableChar()
     {
-
+        yield return BattleManagerScript.Instance.WaitFor(0.5f, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle, () => !gameObject.activeInHierarchy);
         gameObject.SetActive(false);
 
     }
