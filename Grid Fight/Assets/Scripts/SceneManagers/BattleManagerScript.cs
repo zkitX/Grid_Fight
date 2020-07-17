@@ -1387,7 +1387,7 @@ public class BattleManagerScript : MonoBehaviour
             if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null)
             {
                 CurrentSelectedCharacters[controllerType].Character.isSpecialStop = true;
-                Debug.Log("<b>FINISHED CANCELLING CHARGE ATTACK</b>");
+                Debug.Log("<b>FINISHED CANCELLING <color=red>CHARGE ATTACK</color></b>");
             }
         }
     }

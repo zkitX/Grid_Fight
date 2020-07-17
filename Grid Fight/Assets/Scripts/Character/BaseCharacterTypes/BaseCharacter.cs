@@ -650,7 +650,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public void StartDefending()
     {
-        if (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || !CharActionlist.Contains( CharacterActionType.Defence))
+        if (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || !CharActionlist.Contains( CharacterActionType.Defence) || !canDefend)
         {
             return;
         }
@@ -723,6 +723,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             isDefendingStop = true;
             if(SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Defending.ToString()))
             {
+                Debug.Log("FINISHED STOP <color=blue>DEFENDING</color>");
                 SetAnimation(CharacterAnimationStateType.Idle, true, 0.1f);
             }
         }

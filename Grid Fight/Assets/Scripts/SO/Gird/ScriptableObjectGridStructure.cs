@@ -47,14 +47,18 @@ public class ScriptableObjectGridStructure : ScriptableObject
                 BattleTileInfo[] allyRowTiles = rowTiles.Where(r => r.WalkingSide == WalkingSideType.LeftSide).ToArray();
                 if(allyRowTiles != null)
                 {
-                    for (int i = 0; i < allyRowTiles.Length; i++)
+                    if (allyRowTiles.Length == 1) allyRowTiles[0].TileADStats = new Vector2(minMaxAttackStats.y, minMaxDefenceStats.y);
+                    else
                     {
-                        float progress = 0;
-                        if (!allyRowTiles[i].OverrideTileADStats)
+                        for (int i = 0; i < allyRowTiles.Length; i++)
                         {
-                            progress = ((float)i) / ((float)allyRowTiles.Length-1f);
-                            allyRowTiles[i].TileADStats.x = Mathf.Lerp(minMaxAttackStats.x, minMaxAttackStats.y, progress);
-                            allyRowTiles[i].TileADStats.y = Mathf.Lerp(minMaxDefenceStats.y, minMaxDefenceStats.x, progress);
+                            float progress = 0;
+                            if (!allyRowTiles[i].OverrideTileADStats)
+                            {
+                                progress = ((float)i) / ((float)allyRowTiles.Length - 1f);
+                                allyRowTiles[i].TileADStats.x = Mathf.Lerp(minMaxAttackStats.x, minMaxAttackStats.y, progress);
+                                allyRowTiles[i].TileADStats.y = Mathf.Lerp(minMaxDefenceStats.y, minMaxDefenceStats.x, progress);
+                            }
                         }
                     }
                 }
@@ -62,14 +66,18 @@ public class ScriptableObjectGridStructure : ScriptableObject
                 BattleTileInfo[] enemyRowTiles = rowTiles.Where(r => r.WalkingSide == WalkingSideType.RightSide).ToArray();
                 if (enemyRowTiles != null)
                 {
-                    for (int i = 0; i < enemyRowTiles.Length; i++)
+                    if (enemyRowTiles.Length == 1) enemyRowTiles[0].TileADStats = new Vector2(minMaxAttackStats.y, minMaxDefenceStats.y);
+                    else
                     {
-                        float progress = 0;
-                        if (!enemyRowTiles[i].OverrideTileADStats)
+                        for (int i = 0; i < enemyRowTiles.Length; i++)
                         {
-                            progress = ((float)i) / ((float)enemyRowTiles.Length - 1f);
-                            enemyRowTiles[i].TileADStats.x = Mathf.Lerp(minMaxAttackStats.y, minMaxAttackStats.x, progress);
-                            enemyRowTiles[i].TileADStats.y = Mathf.Lerp(minMaxDefenceStats.x, minMaxDefenceStats.y, progress);
+                            float progress = 0;
+                            if (!enemyRowTiles[i].OverrideTileADStats)
+                            {
+                                progress = ((float)i) / ((float)enemyRowTiles.Length - 1f);
+                                enemyRowTiles[i].TileADStats.x = Mathf.Lerp(minMaxAttackStats.y, minMaxAttackStats.x, progress);
+                                enemyRowTiles[i].TileADStats.y = Mathf.Lerp(minMaxDefenceStats.x, minMaxDefenceStats.y, progress);
+                            }
                         }
                     }
                 }

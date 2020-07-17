@@ -576,7 +576,7 @@ public class UserInputManager : MonoBehaviour
 
     public void SelectedCharacterStartChargingAttack(int player, AttackInputType atk)
     {
-        Debug.Log("<b>STARTED CHARGE ATTACK</b>");
+        Debug.Log("<b>STARTED <color=red>CHARGE ATTACK</color></b>");
         BattleManagerScript.Instance.StartChargingAttack((ControllerType)player, atk);
     }
 
@@ -587,7 +587,7 @@ public class UserInputManager : MonoBehaviour
 
     public void StopSelectedCharacterChargingAttack(int player)
     {
-        Debug.Log("<b>STARTED CANCELLING CHARGE ATTACK</b>");
+        Debug.Log("<b>STARTED CANCELLING <color=red>CHARGE ATTACK</color></b>");
         BattleManagerScript.Instance.StopChargingAttack((ControllerType)player);
     }
 
@@ -616,11 +616,13 @@ public class UserInputManager : MonoBehaviour
 
     public void StartDefendingForSelectedCharacter(int player)
     {
+        Debug.Log("STARTED <color=blue>DEFENDING</color>");
         BattleManagerScript.Instance.CurrentCharacterStartDefending((ControllerType)player);
     }
 
     public void StopDefendingForSelectedCharacter(int player)
     {
+        Debug.Log("STARTED STOP <color=blue>DEFENDING</color>");
         BattleManagerScript.Instance.CurrentCharacterStopDefending((ControllerType)player);
     }
 
