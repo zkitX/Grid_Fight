@@ -576,6 +576,7 @@ public class UserInputManager : MonoBehaviour
 
     public void SelectedCharacterStartChargingAttack(int player, AttackInputType atk)
     {
+        Debug.Log("<b>STARTED CHARGE ATTACK</b>");
         BattleManagerScript.Instance.StartChargingAttack((ControllerType)player, atk);
     }
 
@@ -586,6 +587,7 @@ public class UserInputManager : MonoBehaviour
 
     public void StopSelectedCharacterChargingAttack(int player)
     {
+        Debug.Log("<b>STARTED CANCELLING CHARGE ATTACK</b>");
         BattleManagerScript.Instance.StopChargingAttack((ControllerType)player);
     }
 

@@ -94,6 +94,11 @@ public class NewIManager : MonoBehaviour
         GetvitalityBoxOfCharacter(character.CharacterID, side).UpdateVitalities();
     }
 
+    public void TakeDamageSliceOnCharacter(CharacterNameType charName, SideType side)
+    {
+        GetvitalityBoxOfCharacter(charName, side).TakeDamageSlice();
+    }
+
     public void PlayLowShieldIndicatorForCharacter(CharacterNameType charName, SideType side)
     {
         GetvitalityBoxOfCharacter(charName, side).PlayLowShieldAnimation();
