@@ -33,6 +33,7 @@ public class ScriptableObjectGridStructure : ScriptableObject
 
     private void OnValidate()
     {
+        GridInfo.OrderBy(r => Mathf.Sqrt(r.Pos.x) + Mathf.Sqrt(r.Pos.y));
         UpdateTileAdStats();
     }
 
@@ -47,7 +48,7 @@ public class ScriptableObjectGridStructure : ScriptableObject
                 BattleTileInfo[] allyRowTiles = rowTiles.Where(r => r.WalkingSide == WalkingSideType.LeftSide).ToArray();
                 if(allyRowTiles != null)
                 {
-                    if (allyRowTiles.Length == 1) allyRowTiles[0].TileADStats = new Vector2(minMaxAttackStats.y, minMaxDefenceStats.y);
+                    if (allyRowTiles.Length == 1) allyRowTiles[0].TileADStats = allyRowTiles[0].OverrideTileADStats ? allyRowTiles[0].TileADStats : new Vector2(minMaxAttackStats.y, minMaxDefenceStats.y);
                     else
                     {
                         for (int i = 0; i < allyRowTiles.Length; i++)
@@ -66,7 +67,7 @@ public class ScriptableObjectGridStructure : ScriptableObject
                 BattleTileInfo[] enemyRowTiles = rowTiles.Where(r => r.WalkingSide == WalkingSideType.RightSide).ToArray();
                 if (enemyRowTiles != null)
                 {
-                    if (enemyRowTiles.Length == 1) enemyRowTiles[0].TileADStats = new Vector2(minMaxAttackStats.y, minMaxDefenceStats.y);
+                    if (enemyRowTiles.Length == 1) enemyRowTiles[0].TileADStats = enemyRowTiles[0].OverrideTileADStats ? enemyRowTiles[0].TileADStats : new Vector2(minMaxAttackStats.y, minMaxDefenceStats.y);
                     else
                     {
                         for (int i = 0; i < enemyRowTiles.Length; i++)
