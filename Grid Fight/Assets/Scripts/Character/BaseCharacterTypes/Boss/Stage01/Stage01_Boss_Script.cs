@@ -49,14 +49,14 @@ public class Stage01_Boss_Script : MinionType_Script
 
                     }
                     CurrentAIState.ModifyStats(CharInfo);
-                    if (psAI != null)
+                 /*   if (psAI != null)
                     {
                         psAI.SetActive(false);
                     }
                     psAI = ParticleManagerScript.Instance.GetParticle(CurrentAIState.AIPs.PSType);
                     psAI.transform.parent = SpineAnim.transform;
                     psAI.transform.localPosition = Vector3.zero;
-                    psAI.SetActive(true);
+                    psAI.SetActive(true);*/
                     AICoolDownOffset = 0;
                 }
 
