@@ -352,7 +352,16 @@ public class MinionType_Script : BaseCharacter
                         }
                     }
                 }
-            yield return null;
+                yield return null;
+            }
+            else
+            {
+                if (possiblePos != null)
+                {
+                    possiblePos.isTaken = false;
+                    possiblePos = null;
+                }
+               
             }
         }
     }
