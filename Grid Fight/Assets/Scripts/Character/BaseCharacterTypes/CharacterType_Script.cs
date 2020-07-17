@@ -781,6 +781,8 @@ public class CharacterType_Script : BaseCharacter
 
         damage *= UniversalGameBalancer.Instance.difficulty.enemyDamageScaler;
 
+        NewIManager.Instance.TakeDamageSliceOnCharacter(CharInfo.CharacterID, UMS.Side);
+
         return base.SetDamage(attacker ,damage, elemental, isCritical);
     }
 
