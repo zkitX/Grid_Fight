@@ -17,7 +17,7 @@ public class MinionType_Script : BaseCharacter
     protected float totDamage = 0;
     bool strongAnimDone = false;
     public ScriptableObjectAI CurrentAIState;
-    public GameObject psAI = null;
+    //public GameObject psAI = null;
     public BattleTileScript possiblePos = null;
     public Vector2Int[] path;
     public bool found = false;
@@ -52,15 +52,23 @@ public class MinionType_Script : BaseCharacter
     {
      
     }
-
+    IEnumerator AICo = null;
     public override void SetAttackReady(bool value)
     {
         if (value)
         {
             /* StartAttakCo();
              StartMoveCo();*/
+            if(AICo == null)
+            {
+                AICo = AI();
+                StartCoroutine(AICo);
+            }
+            else
+            {
 
-            StartCoroutine(AI());
+            }
+            
             HittedByList.Clear();
         }
         CharInfo.DefenceStats.BaseDefence = Random.Range(0.7f, 1);
@@ -199,14 +207,14 @@ public class MinionType_Script : BaseCharacter
 
                     }
                     CurrentAIState.ModifyStats(CharInfo);
-                    if(psAI != null)
+                    /*if(psAI != null)
                     {
                         psAI.SetActive(false);
                     }
                     psAI = ParticleManagerScript.Instance.GetParticle(CurrentAIState.AIPs.PSType);
                     psAI.transform.parent = SpineAnim.transform;
                     psAI.transform.localPosition = Vector3.zero;
-                    psAI.SetActive(true);
+                    psAI.SetActive(true);*/
                     AICoolDownOffset = 0;
                 }
 
@@ -508,6 +516,10 @@ public class MinionType_Script : BaseCharacter
 
             while (Attacking)
             {
+                if(nextAttack == null)
+                {
+
+                }
                 yield return null;
             }
         }
