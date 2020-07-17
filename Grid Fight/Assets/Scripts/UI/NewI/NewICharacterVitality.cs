@@ -10,7 +10,6 @@ public class NewICharacterVitality : MonoBehaviour
 
     public SideType mapSide = SideType.LeftSide;
     [SerializeField] protected Image healthBar;
-    protected float previousHealthChange;
     [SerializeField] protected Image staminaBar;
     [SerializeField] protected Image specialBar;
     [SerializeField] protected Image shieldBar;
@@ -82,7 +81,6 @@ public class NewICharacterVitality : MonoBehaviour
             SkillContainer.SetActive(false);
         }
 
-        previousHealthChange = assignedCharDetails.CharInfo.HealthPerc / 100f;
         if(shieldBar != null) shieldBar.color = shieldColors.Evaluate(assignedCharDetails.CharInfo.ShieldPerc / 100f);
         characterName.text = assignedCharDetails.CharInfo.Name;
         characterIconSelected.sprite = assignedCharDetails.CharInfo.CharacterIcon;
@@ -238,11 +236,6 @@ public class NewICharacterVitality : MonoBehaviour
 
         if (assignedCharDetails.CharInfo.HealthPerc / 100f != healthBar.fillAmount)
         {
-            if(assignedCharDetails.CharInfo.HealthPerc / 100f < healthBar.fillAmount && (previousHealthChange > assignedCharDetails.CharInfo.HealthPerc / 100f))
-            {
-                TakeDamageSlice();
-            }
-            previousHealthChange = assignedCharDetails.CharInfo.HealthPerc / 100f;
             if (HealthLerper != null) StopCoroutine(HealthLerper);
             HealthLerper = LerpVitality(healthBar, animationDuration, assignedCharDetails.CharInfo.HealthPerc / 100f);
             StartCoroutine(HealthLerper);

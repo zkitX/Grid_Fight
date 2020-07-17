@@ -68,6 +68,7 @@ public class ComboManager : MonoBehaviour
         }
 
         ComboTypeInfoClass comboTypeInfo = GetComboTypeInfo(combo);
+
         string text = "";
         Color displayColor = Color.white;
         bool finalColorFound = false;
@@ -96,7 +97,7 @@ public class ComboManager : MonoBehaviour
         }
 
         float animTime;
-        UIBattleFieldManager.Instance.DisplayComboStyleSplasher(comboTypeInfo.displayCount ? comboTypeInfo.prefix + comboNum.ToString() + comboTypeInfo.suffix : "", displayTarget, 1f + Mathf.Clamp(((float)combo) / (float)comboTypeInfo.maxIntensityCombo, 0f, 1f), displayColor, false, out animTime);
+        UIBattleFieldManager.Instance.DisplayComboStyleSplasher(comboTypeInfo.displayCount && comboTypeInfo.startingNumber <= comboNum ? comboTypeInfo.prefix + comboNum.ToString() + comboTypeInfo.suffix : "", displayTarget, 1f + Mathf.Clamp(((float)combo) / (float)comboTypeInfo.maxIntensityCombo, 0f, 1f), displayColor, false, out animTime);
 
         if (text == "") yield break;
 
@@ -148,6 +149,7 @@ public class ComboTypeInfoClass
     public bool displayCount = true;
     [ConditionalField("displayCount")] public string prefix = "x";
     [ConditionalField("displayCount")] public string suffix = "";
+    [ConditionalField("displayCount")] public int startingNumber = 1;
     public ComboThresholdInfoClass[] comboThresholds = new ComboThresholdInfoClass[0];
 
 }
