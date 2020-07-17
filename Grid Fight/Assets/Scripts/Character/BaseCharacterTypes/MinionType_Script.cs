@@ -627,8 +627,12 @@ public class MinionType_Script : BaseCharacter
         bs.CharOwner = this;
         bs.attackAudioType = GetAttackAudio();
         bs.BulletEffects.Clear();
-        bs.DestinationTile = bulletBehaviourInfo.BulletEffectTiles[0].Pos + nextAttackPos;
+        bulletBehaviourInfo.BulletEffectTiles.OrderBy(r => Mathf.Sqrt(r.Pos.x) + Mathf.Sqrt(r.Pos.y));
+        BattleFieldAttackTileClass battleBulletTile = bulletBehaviourInfo.BulletEffectTiles.Where(r => GridManagerScript.Instance.GetBattleTile(r.Pos) != null).FirstOrDefault();
+        if (battleBulletTile == null) return;
+        bs.DestinationTile = battleBulletTile.Pos + nextAttackPos;
         float duration = bulletBehaviourInfo.BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y));
+
         bs.BulletDuration = duration > bulletBehaviourInfo.Delay ? bulletBehaviourInfo.Delay - SpineAnim.SpineAnimationState.GetCurrent(0).TrackTime : duration;
         bs.StartMoveToTile();
     }

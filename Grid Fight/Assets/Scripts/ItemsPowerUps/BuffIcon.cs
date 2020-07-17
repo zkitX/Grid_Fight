@@ -64,7 +64,7 @@ public class BuffIcon : MonoBehaviour
         }
 
         //apply affect imagery
-        statusIcon.transform.SetParent(curStatusObj.transform.GetChild(0));
+        statusIcon.transform.SetParent(curStatusObj.transform.GetChild(0).GetChild(0));
         statusIcon.sprite = statusEffect.icon;
         statusIcon.transform.localScale = new Vector3(statusIconStartingScale, statusIconStartingScale, statusIconStartingScale);
         statusIcon.transform.localPosition = Vector3.zero;
