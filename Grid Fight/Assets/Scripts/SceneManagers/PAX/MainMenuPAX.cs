@@ -32,7 +32,7 @@ public class MainMenuPAX : MonoBehaviour
     {
         SelectButton();
         InputController.Instance.ButtonADownEvent += Instance_ButtonADownEvent;
-        InputController.Instance.ButtonBDownEvent += Instance_ButtonBDownEvent;
+        //InputController.Instance.ButtonBDownEvent += Instance_ButtonBDownEvent;
         //InputController.Instance.LeftJoystickUsedEvent += Instance_LeftJoystickUsedEvent;
     }
 
@@ -74,10 +74,10 @@ public class MainMenuPAX : MonoBehaviour
         GoToBattleScene(selectedButton == 0 ? "BattleScene_Stage01" : selectedButton == 1 ? "BattleScene_Stage01" : "BattleScene_Stage01");
     }
 
-    private void Instance_ButtonBDownEvent(int player)
+    /*private void Instance_ButtonBDownEvent(int player)
     {
         GoToBattleScene(selectedButton == 0 ? "BattleScene_Stage04" : selectedButton == 1 ? "BattleScene_Stage04" : "BattleScene_Stage04");
-    }
+    }*/
 
 
     public void GoToBattleScene(string sceneName)
@@ -133,7 +133,7 @@ public class MainMenuPAX : MonoBehaviour
         obj.allowSceneActivation = true;
         yield return new WaitForSecondsRealtime(1f);
     //    Debug.LogError("4");
-        SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("SplashPage_GIO"));
+        SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("SplashPage202004"));
     }
 
     public void ShowBattleScene()
