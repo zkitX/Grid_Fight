@@ -1331,10 +1331,15 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         float AnimSpeed = 1;
 
-        if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && (animState.Contains("IdleToAtk") || animState.Contains("Loop")))
+        if(CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && animState.Contains("IdleToAtk"))
         {
             //AnimSpeed = CharInfo.SpeedStats.AttackSpeed * CharInfo.BaseSpeed;
-            AnimSpeed = SpineAnim.GetAnimLenght(animState) / 0.05f;
+            AnimSpeed = SpineAnim.GetAnimLenght(animState) / 0.01f;
+        }
+        else if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && animState.Contains("Loop"))
+        {
+            //AnimSpeed = CharInfo.SpeedStats.AttackSpeed * CharInfo.BaseSpeed;
+            AnimSpeed = SpineAnim.GetAnimLenght(animState) / 0.2f;
         }
         else if (animState.Contains("Dash"))
         {
