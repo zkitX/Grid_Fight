@@ -40,7 +40,7 @@ public class Pathfinding
                 curNode = nodes.Where(r => !r.Checked).OrderBy(a => a.Weight).FirstOrDefault();
                 if(curNode == null)
                 {
-                    continue;
+                    return new Vector2Int[] { };
                 }
                 else
                 {
@@ -78,7 +78,7 @@ public class Pathfinding
             }
             curNode = null;
             i++;
-            if(!nextTileFounded || i > 10)
+            if(i > 10)
             {
                 return new Vector2Int[] { };
             }
