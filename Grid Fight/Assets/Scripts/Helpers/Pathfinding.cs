@@ -31,7 +31,6 @@ public class Pathfinding
         PathNode curNode = nodes[0];
         curNode.Checked = true;
         bool nextTileFounded = false;
-        int i = 0;
         while (nodes.Where(r => r.Closed).FirstOrDefault() == null)
         {
             nextTileFounded = false;
@@ -79,7 +78,6 @@ public class Pathfinding
                 }
             }
             curNode = null;
-            i++;
             if(nodes.Last().Weight > 10)
             {
                 return new Vector2Int[] { };
@@ -108,7 +106,7 @@ public class Pathfinding
 
     public bool TileAvailabilityCheck(PathNode curNode, Vector2Int destination, Vector2Int next, Vector2Int chance2, Vector2Int chance3)
     {
-        if (GridManagerScript.Instance.IsWalkableAndFree(curNode.Pos, next, walkingSide) && (curNode.Previous != null ? curNode.Previous.Pos.Contains(next) : true))
+        if (GridManagerScript.Instance.IsWalkableAndFree(curNode.Pos, next, walkingSide) && (curNode.Previous != null ? !curNode.Previous.Pos.Contains(next) : true))
         {
             List<Vector2Int> res = new List<Vector2Int>();
             curNode.Pos.ForEach(r => res.Add((r - curNode.Pos[0]) + next));

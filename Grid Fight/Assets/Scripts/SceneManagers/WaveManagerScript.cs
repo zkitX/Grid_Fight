@@ -300,16 +300,24 @@ public class WaveManagerScript : MonoBehaviour
 
     private IEnumerator SpawChar(BaseCharacter newChar, bool isRandom, Vector2Int pos, bool withArrivingAnim)
     {
-        if (isRandom)
+        BattleTileScript bts = null;
+        while (bts == null)
         {
-            yield return SetCharInPos(newChar, GridManagerScript.Instance.GetFreeBattleTile(newChar.UMS.WalkingSide, newChar.UMS.Pos), withArrivingAnim);
+            if (isRandom)
+            {
+                bts = GridManagerScript.Instance.GetFreeBattleTile(newChar.UMS.WalkingSide, newChar.UMS.Pos);
+            }
+            else
+            {
+                bts = GridManagerScript.Instance.GetBattleTile(pos);
+            }
+            yield return null;
         }
-        else
-        {
-            yield return SetCharInPos(newChar, GridManagerScript.Instance.GetBattleTile(pos), withArrivingAnim);
-        }
+        yield return SetCharInPos(newChar, bts, withArrivingAnim);
+
         EventManager.Instance?.AddCharacterArrival(newChar);
     }
+
 
     public IEnumerator SetCharInPos(BaseCharacter currentCharacter, BattleTileScript bts, bool withArrivingAnim)
     {
@@ -344,7 +352,7 @@ public class WaveManagerScript : MonoBehaviour
 
         yield return BattleManagerScript.Instance.MoveCharToBoardWithDelay(withArrivingAnim ? 0.2f : 0, currentCharacter, bts.transform.position);
 
-        while (!currentCharacter.IsOnField && currentCharacter.CharInfo.HealthPerc > 0)
+        while (!currentCharacter.IsOnField)
         {
             yield return null;
         }

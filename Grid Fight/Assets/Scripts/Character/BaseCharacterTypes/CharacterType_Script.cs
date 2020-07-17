@@ -56,16 +56,18 @@ public class CharacterType_Script : BaseCharacter
     {
         StartCoroutine(CharacterInputQueue(action));
     }
-
     IEnumerator CharacterInputQueue(InputActionType action)
     {
         isSpecialStop = false;
-
+        if(action == InputActionType.Defend)
+        {
+            IsDefStartCo = true;
+        }
         while (isMoving)
         {
             yield return null;
         }
-
+        Debug.Log(action);
         switch (action)
         {
             case InputActionType.Weak:
@@ -87,6 +89,10 @@ public class CharacterType_Script : BaseCharacter
                 StartDefending();
                 break;
             case InputActionType.Defend_Stop:
+                while (IsDefStartCo)
+                {
+                    yield return null;
+                }
                 StopDefending();
                 break;
             case InputActionType.Move_Up:
