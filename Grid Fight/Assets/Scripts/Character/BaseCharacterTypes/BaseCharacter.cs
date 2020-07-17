@@ -498,7 +498,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                                     string animName = GetAttackAnimName();
                                     Spine.Animation anim = SpineAnim.skeleton.Data.FindAnimation(animName);
 
-                                    List<Spine.Timeline> evs = anim.Timelines.Items.Where(r => r is Spine.EventTimeline).ToList();
+                                    List<Spine.Timeline> evs = anim?.Timelines?.Items?.Where(r => r is Spine.EventTimeline).ToList();
                                     Spine.EventTimeline ev = evs.Where(r => ((Spine.EventTimeline)r).Events.Where(p => p.Data.Name == "FireBulletParticle").ToList().Count > 0).First() as Spine.EventTimeline;
 
                                     float animDelay = ev.Events.Where(r => r.Data.Name == "FireBulletParticle").First().Time;

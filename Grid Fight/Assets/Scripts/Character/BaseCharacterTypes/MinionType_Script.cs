@@ -747,23 +747,26 @@ public class MinionType_Script : BaseCharacter
         {
             hic.Damage += damage;
         }
-
-        AggroInfoClass aggro = AggroInfoList.Where(r => r.PlayerController == attacker.CurrentPlayerController).FirstOrDefault();
-        if (aggro == null)
+        if(attacker.CurrentPlayerController != ControllerType.None)
         {
-            AggroInfoList.Add(new AggroInfoClass(attacker.CurrentPlayerController, 1));
-        }
-        else
-        {
-            aggro.Hit ++;
-            AggroInfoList.ForEach(r =>
+            AggroInfoClass aggro = AggroInfoList.Where(r => r.PlayerController == attacker.CurrentPlayerController).FirstOrDefault();
+            if (aggro == null)
             {
-                if(r.PlayerController != attacker.CurrentPlayerController)
+                AggroInfoList.Add(new AggroInfoClass(attacker.CurrentPlayerController, 1));
+            }
+            else
+            {
+                aggro.Hit++;
+                AggroInfoList.ForEach(r =>
                 {
-                    r.Hit = r.Hit == 0 ? 0 : r.Hit - 1;
-                }
-            });
+                    if (r.PlayerController != attacker.CurrentPlayerController)
+                    {
+                        r.Hit = r.Hit == 0 ? 0 : r.Hit - 1;
+                    }
+                });
+            }
         }
+        
         attacker.Sic.DamageMade += damage;
         totDamage += damage;
         base.SetFinalDamage(attacker, damage);
@@ -854,6 +857,7 @@ public class MinionType_Script : BaseCharacter
         {
             Debug.Log("DEfending End");
             isDefending = false;
+            isDefendingStop = true;
             DefendingHoldingTimer = 0;
         }
 
