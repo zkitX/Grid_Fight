@@ -156,7 +156,7 @@ public class ScriptableObjectAttackTypeEditor : Editor
             particlesTrajectory.Trajectory_Y = EditorGUILayout.CurveField("Trajectory_Y", particlesTrajectory.Trajectory_Y);
             particlesTrajectory.Trajectory_Z = EditorGUILayout.CurveField("Trajectory_Z", particlesTrajectory.Trajectory_Z);
             particlesTrajectory.BulletGapStartingTile = EditorGUILayout.Vector2IntField("BulletGapStartingTile", particlesTrajectory.BulletGapStartingTile);
-
+            particlesTrajectory.ChildrenBulletDelay = EditorGUILayout.FloatField("ChildrenBulletDelay", particlesTrajectory.ChildrenBulletDelay);
             var list = particlesTrajectory.BulletEffectTiles;
             int newCount = Mathf.Max(0, EditorGUILayout.IntField("TileAffectedByExplosion", particlesTrajectory.BulletEffectTiles.Count));
 
