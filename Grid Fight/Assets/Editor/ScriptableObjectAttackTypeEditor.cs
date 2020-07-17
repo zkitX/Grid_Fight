@@ -104,6 +104,7 @@ public class ScriptableObjectAttackTypeEditor : Editor
                         origin.TilesAtk.BulletTrajectories[i].Trajectory_Z = EditorGUILayout.CurveField("Trajectory_Z", origin.TilesAtk.BulletTrajectories[i].Trajectory_Z);
                     }
                     origin.TilesAtk.BulletTrajectories[i].ExplosionChances = EditorGUILayout.IntField("ExplosionChances", origin.TilesAtk.BulletTrajectories[i].ExplosionChances);
+                    origin.TilesAtk.BulletTrajectories[i].BulletEffectTiles.OrderBy(r => Mathf.Sqrt(r.Pos.x) + Mathf.Sqrt(r.Pos.y));
                     switch (origin.TilesAtk.AtkType)
                     {
                         case BattleFieldAttackType.OnAreaAttack:
