@@ -79,8 +79,10 @@ public class ScriptableObjectAI : ScriptableObject
             Score += 10;
         }
 
-
-        t = BattleManagerScript.Instance.CurrentSelectedCharacters[target.PlayerController].Character;
+        if(BattleManagerScript.Instance.CurrentSelectedCharacters[target.PlayerController].Character != null)
+        {
+            t = BattleManagerScript.Instance.CurrentSelectedCharacters[target.PlayerController].Character;
+        }
 
         switch (Vision)
         {

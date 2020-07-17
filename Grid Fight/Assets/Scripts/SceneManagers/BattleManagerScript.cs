@@ -1382,13 +1382,10 @@ public class BattleManagerScript : MonoBehaviour
 
     public void StopChargingAttack(ControllerType controllerType)
     {
-        if (CurrentBattleState == BattleState.Battle)
+        if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null)
         {
-            if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null)
-            {
-                CurrentSelectedCharacters[controllerType].Character.isSpecialStop = true;
-                Debug.Log("<b>FINISHED CANCELLING <color=red>CHARGE ATTACK</color></b>");
-            }
+            CurrentSelectedCharacters[controllerType].Character.isSpecialStop = true;
+            Debug.Log("<b>FINISHED CANCELLING <color=red>CHARGE ATTACK</color></b>");
         }
     }
     
