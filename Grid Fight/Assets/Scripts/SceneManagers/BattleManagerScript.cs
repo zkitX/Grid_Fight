@@ -585,7 +585,7 @@ public class BattleManagerScript : MonoBehaviour
             yield return null;
         }
         zombiefied.IsOnField = false;
-        while (zombiefied.isMoving || zombiefied.currentAttackPhase != AttackPhasesType.End)
+        while (zombiefied.isMoving)
         {
             yield return null;
         }
@@ -596,7 +596,8 @@ public class BattleManagerScript : MonoBehaviour
         zombiePs.SetActive(true);
         zombiePs.transform.parent = zombiefied.SpineAnim.transform;
         zombiePs.transform.localPosition = Vector3.zero;
-
+        zombiefied.shotsLeftInAttack = 0;
+        zombiefied.Attacking = false;
         yield return RemoveZombieFromBaord(zombiefied);
         while (zombiefied.IsOnField)
         {

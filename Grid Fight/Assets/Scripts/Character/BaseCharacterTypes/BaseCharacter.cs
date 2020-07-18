@@ -1314,7 +1314,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
 
 
-        if (isMoving && (animState.ToString() != CharacterAnimationStateType.Reverse_Arriving.ToString() || animState.ToString() != CharacterAnimationStateType.Defeat_ReverseArrive.ToString()))
+        if (isMoving && (animState.ToString() != CharacterAnimationStateType.Reverse_Arriving.ToString() && animState.ToString() != CharacterAnimationStateType.Defeat_ReverseArrive.ToString()))
         {
             return;
         }
