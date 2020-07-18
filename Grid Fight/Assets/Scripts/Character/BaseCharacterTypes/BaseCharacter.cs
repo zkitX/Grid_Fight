@@ -147,7 +147,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     }
     [HideInInspector] public int CharOredrInLayer = 0;
     protected List<BattleTileScript> currentBattleTilesToCheck = new List<BattleTileScript>();
-
+    public IEnumerator AICo = null;
+    
 
     public virtual void Start()
     {
@@ -456,11 +457,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             CharInfo.RapidAttack.DamageMultiplier = CharInfo.RapidAttack.B_DamageMultiplier * nextAttack.DamageMultiplier;
             CharInfo.PowerfulAttac.DamageMultiplier = CharInfo.PowerfulAttac.B_DamageMultiplier * nextAttack.DamageMultiplier;
-            BaseCharacter charTar = null;
-            if (nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnTarget)
-            {
-                charTar = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList().OrderBy(a => a.CharInfo.HealthPerc).FirstOrDefault();
-            }
 
             if(nextAttack.AttackInput > AttackInputType.Strong && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
             {
@@ -476,7 +472,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     int rand = UnityEngine.Random.Range(0, 100);
                     if (rand <= nextAttack.TilesAtk.BulletTrajectories[i].ExplosionChances)
                     {
-                        Vector2Int res = nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnTarget && charTar != null ? target.Pos + nextAttackPos :
+                        Vector2Int res = nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnTarget ? target.Pos + nextAttackPos :
                         nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnItSelf ? target.Pos + UMS.CurrentTilePos : target.Pos;
                         if (GridManagerScript.Instance.isPosOnField(res))
                         {
@@ -1318,7 +1314,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
 
 
-        if (isMoving && animState.ToString() != CharacterAnimationStateType.Reverse_Arriving.ToString())
+        if (isMoving && (animState.ToString() != CharacterAnimationStateType.Reverse_Arriving.ToString() || animState.ToString() != CharacterAnimationStateType.Defeat_ReverseArrive.ToString()))
         {
             return;
         }
@@ -1689,7 +1685,7 @@ public class CurrentBuffsDebuffsClass
 }
 
 
-
+[System.Serializable]
 public class BuffDebuffClass
 {
     public string Name;
@@ -1763,7 +1759,7 @@ public class RelationshipClass
     }
 }
 
-
+[System.Serializable]
 public class TotemTentacleClass
 {
     public BaseCharacter CharAffected;

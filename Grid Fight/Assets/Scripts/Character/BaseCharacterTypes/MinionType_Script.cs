@@ -15,7 +15,7 @@ public class MinionType_Script : BaseCharacter
     protected List<HitInfoClass> HittedByList = new List<HitInfoClass>();
     public List<AggroInfoClass> AggroInfoList = new List<AggroInfoClass>();
     protected float totDamage = 0;
-    bool strongAnimDone = false;
+    protected bool strongAnimDone = false;
     public ScriptableObjectAI CurrentAIState;
     //public GameObject psAI = null;
     public BattleTileScript possiblePos = null;
@@ -52,23 +52,13 @@ public class MinionType_Script : BaseCharacter
     {
      
     }
-    IEnumerator AICo = null;
     public override void SetAttackReady(bool value)
     {
         if (value)
         {
-            /* StartAttakCo();
-             StartMoveCo();*/
-            if(AICo == null)
-            {
-                AICo = AI();
-                StartCoroutine(AICo);
-            }
-            else
-            {
+            AICo = AI();
+            StartCoroutine(AICo);
 
-            }
-            
             HittedByList.Clear();
         }
         CharInfo.DefenceStats.BaseDefence = Random.Range(0.7f, 1);
@@ -79,7 +69,12 @@ public class MinionType_Script : BaseCharacter
     public override void SetCharDead()
     {
         CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);
-     
+        if(AICo != null)
+        {
+            StopCoroutine(AICo);
+            AICo = null;
+        }
+        s = null;
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         Attacking = false;
         BuffsDebuffsList.ForEach(r =>
@@ -112,6 +107,7 @@ public class MinionType_Script : BaseCharacter
         transform.position = new Vector3(100, 100, 100);
         SpineAnim.SpineAnimationState.ClearTracks();
         StartCoroutine(DisableChar());
+
     }
     private IEnumerator DisableChar()
     {
@@ -183,6 +179,7 @@ public class MinionType_Script : BaseCharacter
     }
 
     public float AICoolDownOffset = 0;
+    IEnumerator s = null;
     public virtual IEnumerator AI()
     {
         bool val = true;
@@ -231,7 +228,13 @@ public class MinionType_Script : BaseCharacter
                         possiblePos.isTaken = false;
                         possiblePos = null;
                     }
-                    yield return AttackSequence();
+                    if(s != null)
+                    {
+                        StopCoroutine(s);
+                    }
+                    s = AttackSequence();
+
+                    yield return s;
                 }
                 else
                 {
@@ -523,8 +526,8 @@ public class MinionType_Script : BaseCharacter
                 yield return null;
             }
         }
+        s = null;
     }
-
 
     public override void GetAttack()
     {
@@ -650,10 +653,7 @@ public class MinionType_Script : BaseCharacter
         bs.CharOwner = this;
         bs.attackAudioType = GetAttackAudio();
         bs.BulletEffects.Clear();
-        bulletBehaviourInfo.BulletEffectTiles.OrderBy(r => Mathf.Sqrt(r.Pos.x) + Mathf.Sqrt(r.Pos.y));
-        BattleFieldAttackTileClass battleBulletTile = bulletBehaviourInfo.BulletEffectTiles.Where(r => GridManagerScript.Instance.GetBattleTile(r.Pos) != null).FirstOrDefault();
-        if (battleBulletTile == null) return;
-        bs.DestinationTile = battleBulletTile.Pos + nextAttackPos;
+        bs.DestinationTile = nextAttackPos;
         float duration = bulletBehaviourInfo.BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y));
 
         bs.BulletDuration = duration > bulletBehaviourInfo.Delay ? bulletBehaviourInfo.Delay - SpineAnim.SpineAnimationState.GetCurrent(0).TrackTime : duration;

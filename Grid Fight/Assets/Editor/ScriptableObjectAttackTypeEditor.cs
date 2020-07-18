@@ -95,6 +95,18 @@ public class ScriptableObjectAttackTypeEditor : Editor
                     if(i == 0)
                     {
                         origin.TilesAtk.BulletTrajectories[i].ExplosionChances = 100;
+                        if(origin.TilesAtk.BulletTrajectories[i].BulletEffectTiles.Count == 0)
+                        {
+                            origin.TilesAtk.BulletTrajectories[i].BulletEffectTiles.Add(new BattleFieldAttackTileClass(Vector2Int.zero));
+                        }
+                        else
+                        {
+                            origin.TilesAtk.BulletTrajectories[i].BulletEffectTiles = origin.TilesAtk.BulletTrajectories[i].BulletEffectTiles.OrderBy(r => Mathf.Abs(r.Pos.x)).ThenBy(a => Mathf.Abs(a.Pos.y)).ToList();
+                            if(origin.TilesAtk.BulletTrajectories[i].BulletEffectTiles[0].Pos != Vector2Int.zero)
+                            {
+                                origin.TilesAtk.BulletTrajectories[i].BulletEffectTiles.Add(new BattleFieldAttackTileClass(Vector2Int.zero));
+                            }
+                        }
                     }
                     origin.TilesAtk.BulletTrajectories[i].Delay = EditorGUILayout.FloatField("Delay", origin.TilesAtk.BulletTrajectories[i].Delay);
                     if((i == 0 && origin.AttackInput == AttackInputType.Strong) || origin.AttackInput == AttackInputType.Weak)
@@ -296,9 +308,6 @@ public class ScriptableObjectAttackTypeEditor : Editor
 
     private void ShowTileObject(ref BattleFieldAttackTileClass bfatc)
     {
-
-       
-
         bfatc.HasEffect = EditorGUILayout.ToggleLeft("HasEffect", bfatc.HasEffect);
         if (bfatc.HasEffect)
         {
