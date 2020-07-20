@@ -84,51 +84,6 @@ public class ScriptableObjectAI : ScriptableObject
             t = BattleManagerScript.Instance.CurrentSelectedCharacters[target.PlayerController].Character;
         }
 
-        switch (Vision)
-        {
-            case VisionType.Front_Near:
-                if (t.UMS.CurrentTilePos.x == currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) < 3)
-                {
-                    Score += 100;
-                }
-                else
-                {
-                    Score -= 20;
-                }
-                break;
-            case VisionType.Front_Far:
-                if (t.UMS.CurrentTilePos.x == currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) > 3)
-                {
-                    Score += 100;
-                }
-                else
-                {
-                    Score -= 20;
-                }
-                break;
-            case VisionType.UpDown_Near:
-                if (t.UMS.CurrentTilePos.x != currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) < 3)
-                {
-                    Score += 100;
-                }
-                else
-                {
-                    Score -= 20;
-                }
-                break;
-            case VisionType.UpDown_Far:
-                if (t.UMS.CurrentTilePos.x != currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) > 3)
-                {
-                    Score += 100;
-                }
-                else
-                {
-                    Score -= 20;
-                }
-                break;
-        }
-
-
         int i = 0;
         foreach (AICheckClass item in Checks)
         {
@@ -169,53 +124,52 @@ public class ScriptableObjectAI : ScriptableObject
         {
             Score += 300;
         }
-
-       /* float partyHp = WaveManagerScript.Instance.GetCurrentPartyHPPerc();
-        switch (PartyHp)
-        {
-            case PartyHPType.Over_5:
-                if (partyHp >= 5)
-                {
-                    Score += 20;
-                }
-                else
-                {
-                    Score -= 20;
-                }
-                break;
-            case PartyHPType.Over_30:
-                if (partyHp >= 30)
-                {
-                    Score += 20;
-                }
-                else
-                {
-                    Score -= 20;
-                }
-                break;
-            case PartyHPType.Over_50:
-                if (partyHp >= 50)
-                {
-                    Score += 20;
-                }
-                else
-                {
-                    Score -= 20;
-                }
-                break;
-            case PartyHPType.Over_90:
-                if (partyHp >= 90)
-                {
-                    Score += 20;
-                }
-                else
-                {
-                    Score -= 20;
-                }
-                break;
-        }*/
+     
        if (t != null)
        {
+            switch (Vision)
+            {
+                case VisionType.Front_Near:
+                    if (t.UMS.CurrentTilePos.x == currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) < 3)
+                    {
+                        Score += 100;
+                    }
+                    else
+                    {
+                        Score -= 20;
+                    }
+                    break;
+                case VisionType.Front_Far:
+                    if (t.UMS.CurrentTilePos.x == currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) > 3)
+                    {
+                        Score += 100;
+                    }
+                    else
+                    {
+                        Score -= 20;
+                    }
+                    break;
+                case VisionType.UpDown_Near:
+                    if (t.UMS.CurrentTilePos.x != currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) < 3)
+                    {
+                        Score += 100;
+                    }
+                    else
+                    {
+                        Score -= 20;
+                    }
+                    break;
+                case VisionType.UpDown_Far:
+                    if (t.UMS.CurrentTilePos.x != currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) > 3)
+                    {
+                        Score += 100;
+                    }
+                    else
+                    {
+                        Score -= 20;
+                    }
+                    break;
+            }
            if (t.UMS.CurrentTilePos.x == currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) < 3)
            {
                Score += 10;
