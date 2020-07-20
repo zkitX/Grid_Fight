@@ -609,7 +609,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
                         foreach (ScriptableObjectAttackEffect effect in nextAttack.TotemAtk.Effects.Where(r => r.StatsToAffect == BuffDebuffStatsType.BlockTile).ToList())
                         {
-                            res.StartCoroutine(res.BlockTileForTime(effect.Duration, ParticleManagerScript.Instance.GetParticle(effect.Particles)));
+                            res.BlockTileForTime(effect.Duration, ParticleManagerScript.Instance.GetParticle(effect.Particles));
                         }
 
 
