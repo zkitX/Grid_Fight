@@ -13,11 +13,13 @@ public class CallNextWave : Command
     public string WaveName;
 
     public float TransitionDuration = 2;
+
     public bool HasAStageUpdate = false;
     [ConditionalField("HasAStageUpdate", false)] public int FightGridToShow;
+    public CameraInOutInfoClass CamInfo;
+
     public bool HasADifferentGrid = false;
     [ConditionalField("HasADifferentGrid", false)] public ScriptableObjectGridStructure Grid;
-
 
     public bool CallPool = true;
     public List<PlayersCurrentSelectedCharClass> PlayersCurrentSelectedChars = new List<PlayersCurrentSelectedCharClass>
@@ -59,9 +61,7 @@ public class CallNextWave : Command
         BattleManagerScript.Instance.CurrentBattleState = BattleState.FungusPuppets;
         if (HasAStageUpdate)
         {
-            CameraManagerScript.Instance.CameraFocusSequence(CameraManagerScript.Instance.DurationIn,
-                CameraManagerScript.Instance.TransitionINZoomValue, CameraManagerScript.Instance.ZoomIn, BattleManagerScript.Instance.CurrentSelectedCharacters[ControllerType.Player1].Character.transform.position);
-            //CameraManagerScript.Instance.CameraJumpInOut(2);
+            CameraManagerScript.Instance.CameraFocusSequence(CamInfo.DurationIn, CamInfo.TransitionINZoomValue, CamInfo.ZoomIn, CamInfo.ZoomInCamMovement, BattleManagerScript.Instance.CurrentSelectedCharacters[ControllerType.Player1].Character.transform.position);
         }
 
         if (CallPool)
@@ -87,7 +87,7 @@ public class CallNextWave : Command
             yield return WaveManagerScript.Instance.SettingUpWave(WaveName);
         if (HasAStageUpdate)
         {
-            yield return EnvironmentManager.Instance.MoveToNewGrid(HasAStageUpdate ? FightGridToShow : -1, TransitionDuration, PlayersCurrentSelectedChars, TalkingTeam, JumpAnimSpeed, JumpUp, wt: DelayBeforeJump);
+            yield return EnvironmentManager.Instance.MoveToNewGrid(HasAStageUpdate ? FightGridToShow : -1, TransitionDuration, PlayersCurrentSelectedChars, TalkingTeam, JumpAnimSpeed, CamInfo, JumpUp, wt: DelayBeforeJump);
         }
 
         BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;
@@ -144,5 +144,25 @@ public class PlayersCurrentSelectedCharClass
     {
         PlayerController = playerController;
         Pos = pos;
+    }
+}
+
+[System.Serializable]
+public class CameraInOutInfoClass
+{
+    public float TransitionINZoomValue = 0;
+    public float DurationIn = 0;
+    public AnimationCurve ZoomIn;
+    public AnimationCurve ZoomInCamMovement;
+
+    public float TransitionOutZoomValue = 0;
+    public float DurationOut = 0;
+    public AnimationCurve ZoomOut;
+
+    public AnimationCurve MovementCurve;
+
+    public CameraInOutInfoClass()
+    {
+            
     }
 }

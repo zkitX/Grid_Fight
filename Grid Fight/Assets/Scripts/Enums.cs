@@ -999,3 +999,12 @@ public enum OptionBoxAnimType
     AlreadySelected,
     Hidden
 }
+
+
+public enum CameraMovementType
+{
+    OnWorldPosition,
+    OnCharacter,
+    OnPlayer,
+    OnTile
+}

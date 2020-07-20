@@ -7,15 +7,7 @@ public class CameraManagerScript : MonoBehaviour
 
     public static CameraManagerScript Instance;
     public Animator Anim;
-    [Header("Zoom in")]
-    public float TransitionINZoomValue = 2;
-    public float DurationIn = 1;
-    public AnimationCurve ZoomIn;
-
-    [Header("Zoom out")]
-    public float TransitionOutZoomValue = 2;
-    public float DurationOut = 1;
-    public AnimationCurve ZoomOut;
+ 
 
 
     bool isCamMoving = false;
@@ -59,32 +51,16 @@ public class CameraManagerScript : MonoBehaviour
         Anim.SetInteger("Shake", 0);
     }
 
-    public void ChangeFocusToNewGrid(CameraInfoClass newGrid, float duration, bool moveCameraInternally)
+    public void CameraFocusSequence(float duration, float endOrtho, AnimationCurve animCurveZoom, AnimationCurve animCurveMovement, Vector3 playerPos)
     {
-        if (GridManagerScript.Instance.currentGridStructureObject == null)
-        {
-            Cam.orthographicSize = newGrid.OrthographicSize;
-
-            transform.position = newGrid.CameraPosition;
-            return;
-        }
-        if (moveCameraInternally)
-        {
-          //  StartCoroutine(CameraFocusSequence(newGrid.CameraPosition, duration, newGrid.OrthographicSize, newGrid));
-        }
-    }
-
-    public void CameraFocusSequence(float duration, float endOrtho, AnimationCurve animCurve, Vector3 playerPos)
-    {
-
         if (playerPos != Vector3.zero)
         {
-            StartCoroutine(CameraMoveSequence_Co(duration, playerPos));
+            StartCoroutine(CameraMoveSequence_Co(duration, playerPos, animCurveMovement));
         }
 
         if (endOrtho > 0)
         {
-            StartCoroutine(CameraFocusSequence_Co(duration, endOrtho, animCurve));
+            StartCoroutine(CameraFocusSequence_Co(duration, endOrtho, animCurveZoom));
         }
     }
 
@@ -96,14 +72,14 @@ public class CameraManagerScript : MonoBehaviour
         while (progress < 1 || !hasStarted)
         {
             hasStarted = true;
-            progress += Time.deltaTime / duration;
-            Cam.orthographicSize = Mathf.Lerp(startingOrtho, endOrtho, animCurve.Evaluate(progress));
+            progress += BattleManagerScript.Instance.DeltaTime / duration;
+            Cam.orthographicSize = Mathf.Lerp(startingOrtho, endOrtho, animCurve == null ? progress : animCurve.Evaluate(progress));
             yield return null;
         }
         Cam.orthographicSize = endOrtho;
     }
 
-    public IEnumerator CameraMoveSequence_Co(float duration, Vector3 playerPos)
+    public IEnumerator CameraMoveSequence_Co(float duration, Vector3 playerPos, AnimationCurve animCurve)
     {
         bool hasStarted = false;
         Vector3 cameraStartingPosition = transform.position;
@@ -113,8 +89,8 @@ public class CameraManagerScript : MonoBehaviour
         while (progress < 1 || !hasStarted)
         {
             hasStarted = true;
-            progress += Time.deltaTime / duration;
-            transform.position = Vector3.Lerp(cameraStartingPosition, finalPos, progress);
+            progress += BattleManagerScript.Instance.DeltaTime / duration;
+            transform.position = Vector3.Lerp(cameraStartingPosition, finalPos, animCurve == null ? progress : animCurve.Evaluate(progress));
             yield return null;
         }
         transform.position = finalPos;

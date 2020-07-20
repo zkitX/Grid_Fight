@@ -15,9 +15,11 @@ public class EnvironmentManager : MonoBehaviour
     public Transform fightGridMaster;
     public int currentGridIndex = 0;
     public FightGrid[] fightGrids;
-    IEnumerator GridLeapSequencer = null;
 
     public CameraStageInfoScript CameraStage;
+    CharacterType_Script[] chars;
+    List<CharacterType_Script> jumpingchars = new List<CharacterType_Script>();
+
 
     private void Awake()
     {
@@ -53,28 +55,20 @@ public class EnvironmentManager : MonoBehaviour
         }
     }
 
-    public IEnumerator MoveToNewGrid(int gridIndex, float duration, List<PlayersCurrentSelectedCharClass> playersCurrentSelectedChars, List<TalkingTeamClass> arrivingChar, float jumpAnimSpeed, bool jumpUp = false, bool moveChars = true, float wt = 0.5f)
+    public IEnumerator MoveToNewGrid(int gridIndex, float duration, List<PlayersCurrentSelectedCharClass> playersCurrentSelectedChars, List<TalkingTeamClass> arrivingChar, float jumpAnimSpeed,
+    CameraInOutInfoClass camInfo, bool jumpUp = false, bool moveChars = true, float wt = 0.5f)
     {
         FightGrid destinationGrid = fightGrids[gridIndex != -1 ? gridIndex : currentGridIndex];
-
         GridManagerScript.Instance.MoveGrid_ToWorldPosition(destinationGrid.pivot);
-
-        if (duration == 1234.56789f) duration = destinationGrid.hasBaseTransitionTime ? destinationGrid.baseTransitionDuration : defaultTransitionTime;
-
-        if (GridLeapSequencer != null)
-        {
-            StopCoroutine(GridLeapSequencer);
-        }
         currentGridIndex = gridIndex != -1 ? gridIndex : currentGridIndex;
-        GridLeapSequencer = GridLeapSequence(duration, CameraStage.CameraInfo.Where(r => r.StageIndex == (gridIndex != -1 ? gridIndex : currentGridIndex)).First().CameraPosition, playersCurrentSelectedChars, arrivingChar, jumpAnimSpeed, jumpUp, moveChars, wt);
-        yield return GridLeapSequencer;
+        yield return GridLeapSequence(duration, CameraStage.CameraInfo.Where(r => r.StageIndex == (gridIndex != -1 ? gridIndex : currentGridIndex)).First().CameraPosition, playersCurrentSelectedChars, arrivingChar, jumpAnimSpeed,
+            camInfo, jumpUp, moveChars, wt);
     }
 
-
-
-    CharacterType_Script[] chars;
-    List<CharacterType_Script> jumpingchars = new List<CharacterType_Script>();
-    IEnumerator GridLeapSequence(float duration, Vector3 translation, List<PlayersCurrentSelectedCharClass> playersCurrentSelectedChars, List<TalkingTeamClass> arrivingChar, float jumpAnimSpeed, bool jumpUp = false, bool moveChars = true, float wt = 0.5f)
+    
+    IEnumerator GridLeapSequence(float duration, Vector3 translation, List<PlayersCurrentSelectedCharClass> playersCurrentSelectedChars, List<TalkingTeamClass> arrivingChar,
+        float jumpAnimSpeed, CameraInOutInfoClass camInfo,
+        bool jumpUp = false, bool moveChars = true, float wt = 0.5f)
     {
         //Ensure new grid is set and moved to correct position before everything
         CameraInfoClass cic = CameraStage.CameraInfo.Where(r => r.StageIndex == currentGridIndex && !r.used).First();
@@ -82,7 +76,6 @@ public class EnvironmentManager : MonoBehaviour
         if (duration > 0)
         {
             jumpingchars.Clear();
-            float jumpHeight = 2f;
             CharacterAnimationStateType jumpAnim = jumpUp ? CharacterAnimationStateType.Reverse_Arriving : CharacterAnimationStateType.JumpTransition_OUT;
             cic.used = true;
             //DONT FORGET TO ADD CAMERA OFFSET ADJUSTMENT
@@ -98,45 +91,11 @@ public class EnvironmentManager : MonoBehaviour
             Vector3[] charGridPosOffsets = new Vector3[chars != null ? chars.Length : 0];
             for (int i = 0; i < (chars != null ? chars.Length : 0); i++)
             {
-                if (false)
-                {
-                    charStartPositions[i] = chars[i].transform.position;
-                    BattleTileScript bts = GridManagerScript.Instance.BattleTiles.Where(r => r.Pos == chars[i].UMS.CurrentTilePos).FirstOrDefault();
-                    if (bts.BattleTileState != BattleTileStateType.Empty
-                        || chars[i].UMS.WalkingSide != bts.WalkingSide)
-                    {
-                        BattleTileScript newGridTile = GridManagerScript.Instance.GetRandomFreeAdjacentTile(chars[i].UMS.CurrentTilePos, 5, false, chars[i].UMS.WalkingSide);
-                        Debug.Log(newGridTile.Pos);
-                        charGridPosOffsets[i] = GridManagerScript.Instance.BattleTiles.Where(r => r.Pos == newGridTile.Pos).First().transform.position;
-                        GridManagerScript.Instance.SetBattleTileState(newGridTile.Pos, BattleTileStateType.Occupied);
-                        chars[i].CurrentBattleTiles = new List<BattleTileScript>() { newGridTile };
-                        chars[i].UMS.CurrentTilePos = newGridTile.Pos;
-                        chars[i].UMS.Pos = new List<Vector2Int>() { newGridTile.Pos };
-                    }
-                    else
-                    {
-                        GridManagerScript.Instance.SetBattleTileState(bts.Pos, BattleTileStateType.Occupied);
-                        charGridPosOffsets[i] = bts.transform.position;
-                    }
-
-
-                    if (translation == Vector3.zero && charGridPosOffsets[i] == Vector3.zero)
-                    {
-                        continue;
-                    }
-                }
                 jumpingchars.Add(chars[i]);
-                
                 chars[i].SetAnimation(jumpAnim);
                 chars[i].SpineAnim.SetAnimationSpeed(jumpAnimSpeed);
             }
             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.StageSwitchSound, AudioBus.HighPrio);
-            /*    while (chars.Where(r => !r.IsOnField).ToList().Count != chars.Length)
-                {
-                    yield return null;
-
-                }*/
-
             float waitingTime = 0;
             while (waitingTime < wt)
             {
@@ -147,8 +106,7 @@ public class EnvironmentManager : MonoBehaviour
 
             if (duration > 0)
             {
-                CameraManagerScript.Instance.CameraFocusSequence(CameraManagerScript.Instance.DurationOut,
-                CameraManagerScript.Instance.TransitionOutZoomValue, CameraManagerScript.Instance.ZoomOut, Vector3.zero);
+                CameraManagerScript.Instance.CameraFocusSequence(camInfo.DurationOut, camInfo.TransitionOutZoomValue, camInfo.ZoomOut, camInfo.MovementCurve, Vector3.zero);
             }
 
             List<BaseCharacter> charsToLand = new List<BaseCharacter>();
@@ -197,37 +155,13 @@ public class EnvironmentManager : MonoBehaviour
                     charsToLand.Add(cb);
                 }
             }
-
-            float timeRemaining = duration;
-            float progress = 0;
-            bool hasStarted = false;
-            Vector3 cameraStartPos = CameraManagerScript.Instance.transform.position;
-            Vector3 cameraFinalPos = BattleManagerScript.Instance.CurrentSelectedCharacters[ControllerType.Player1].Character.CurrentBattleTiles.First().transform.position;
-            cameraFinalPos.z = cameraStartPos.z;
-            while (timeRemaining >= 0 || !hasStarted)
+           
+            if (duration > 0)
             {
-                hasStarted = true;
-                timeRemaining -= BattleManagerScript.Instance.DeltaTime;
-                progress = 1f - (timeRemaining / (duration != 0f ? duration : 1f));
-                CameraManagerScript.Instance.transform.position = Vector3.Lerp(cameraStartPos, cameraFinalPos, UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
-                // MainCamera.orthographicSize = Mathf.Lerp(cameraStartOrtho, cameraEndOrtho, progress);
-
-                if (jumpUp)
-                {
-                    /* for (int i = 0; i < (jumpingchars != null ? jumpingchars.Count : 0); i++)
-                     {
-                         jumpingchars[i].transform.position = Vector3.Lerp(charStartPositions[i], charGridPosOffsets[i], UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
-                         jumpingchars[i].transform.position += new Vector3(0, jumpHeight * UniversalGameBalancer.Instance.characterJumpCurve.Evaluate(progress), 0);
-                         jumpingchars[i].SpineAnim.SetAnimationSpeed(UniversalGameBalancer.Instance.jumpAnimationCurve.Evaluate(progress));
-                     }*/
-                }
-
-                yield return null;
+                yield return CameraManagerScript.Instance.CameraMoveSequence_Co(camInfo.DurationOut, BattleManagerScript.Instance.CurrentSelectedCharacters[ControllerType.Player1].Character.CurrentBattleTiles.First().transform.position, camInfo.MovementCurve);
             }
 
-
-
-            yield return CameraManagerScript.Instance.CameraFocusSequence_Co(CameraManagerScript.Instance.DurationIn, CameraManagerScript.Instance.TransitionINZoomValue, CameraManagerScript.Instance.ZoomIn);
+            yield return CameraManagerScript.Instance.CameraFocusSequence_Co(camInfo.DurationIn, camInfo.TransitionINZoomValue, camInfo.ZoomIn);
 
             foreach (BaseCharacter item in charsToLand)
             {
@@ -248,84 +182,11 @@ public class EnvironmentManager : MonoBehaviour
                 yield return null;
             }
         }
-       
 
+     
         CameraManagerScript.Instance.CameraFocusSequence(duration >= 0 ? 1f : 0,
-         cic.OrthographicSize, CameraManagerScript.Instance.ZoomOut, cic.CameraPosition);
+         cic.OrthographicSize, camInfo.ZoomOut, camInfo.MovementCurve, cic.CameraPosition);
 
-    }
-
-    public void MoveCharactersToFitNewGrid(float duration)
-    {
-        if (GridLeapSequencer != null) StopCoroutine(GridLeapSequencer);
-        GridLeapSequencer = MoveCharactersToFitNewGridSequence(duration);
-        StartCoroutine(GridLeapSequencer);
-    }
-
-    IEnumerator MoveCharactersToFitNewGridSequence(float duration)
-    {
-        float jumpHeight = 2f;
-        CharacterAnimationStateType jumpAnim = CharacterAnimationStateType.DashUp;
-
-        CharacterType_Script[] chars = BattleManagerScript.Instance.PlayerControlledCharacters;
-        List<CharacterType_Script> charsToMove = new List<CharacterType_Script>();
-        List<Vector3> charStartPositions = new List<Vector3>();
-        List<Vector3> charGridPosOffsets = new List<Vector3>();
-        for (int i = 0; i < (chars != null ? chars.Length : 0); i++)
-        {
-            if(GridManagerScript.Instance.BattleTiles.Where(r => r.Pos == chars[i].UMS.CurrentTilePos).FirstOrDefault().BattleTileState == BattleTileStateType.NonUsable ||
-                GridManagerScript.Instance.BattleTiles.Where(r => r.Pos == chars[i].UMS.CurrentTilePos).FirstOrDefault().WalkingSide != chars[i].UMS.WalkingSide)
-            {
-                BattleTileScript newGridTile = GridManagerScript.Instance.GetRandomFreeAdjacentTile(chars[i].UMS.CurrentTilePos, 5, false, chars[i].UMS.WalkingSide);
-                GridManagerScript.Instance.SetBattleTileState(newGridTile.Pos, BattleTileStateType.Occupied);
-
-                charsToMove.Add(chars[i]);
-                charStartPositions.Add(chars[i].transform.position);
-                charGridPosOffsets.Add(GridManagerScript.GetTranslationBetweenTiles(GridManagerScript.Instance.BattleTiles.Where(r => r.Pos == chars[i].UMS.CurrentTilePos).First(), newGridTile));
-
-                chars[i].CurrentBattleTiles = new List<BattleTileScript>() { newGridTile };
-                chars[i].UMS.CurrentTilePos = newGridTile.Pos;
-                chars[i].UMS.Pos = new List<Vector2Int>() { newGridTile.Pos };
-
-                chars[i].SetAnimation(jumpAnim);
-            }
-            chars[i].SetAttackReady(false);
-        }
-
-        float timeRemaining = duration;
-        float progress = 0;
-        float xPos = 0f;
-        float yPos = 0f;
-        bool hasStarted = false;
-        while (timeRemaining != 0 || !hasStarted)
-        {
-            hasStarted = true;
-            timeRemaining = Mathf.Clamp(timeRemaining - BattleManagerScript.Instance.DeltaTime, 0f, 9999f);
-            progress = 1f - (timeRemaining / (duration != 0f ? duration : 1f));
-
-            for (int i = 0; i < (charsToMove != null ? charsToMove.Count : 0); i++)
-            {
-                xPos = Mathf.Lerp(charStartPositions[i].x, charStartPositions[i].x + charGridPosOffsets[i].x, UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
-                yPos = Mathf.Lerp(charStartPositions[i].y, charStartPositions[i].y + charGridPosOffsets[i].y, UniversalGameBalancer.Instance.cameraTravelCurve.Evaluate(progress));
-                yPos += jumpHeight * UniversalGameBalancer.Instance.characterJumpCurve.Evaluate(progress);
-                charsToMove[i].transform.position = new Vector3(xPos, yPos, charsToMove[i].transform.position.z);
-                charsToMove[i].SpineAnim.SetAnimationSpeed(UniversalGameBalancer.Instance.jumpAnimationCurve.Evaluate(progress));
-            }
-            yield return null;
-        }
-        if (chars != null)
-        {
-            foreach (CharacterType_Script character in chars)
-            {
-                character.SetAttackReady(true);
-            }
-        }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-      //  ChangeGridStructure(GridStructures[0], true);
     }
 
     //Setting up the camera position and new grid stuff
