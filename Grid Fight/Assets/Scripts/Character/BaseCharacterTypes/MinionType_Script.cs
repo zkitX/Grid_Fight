@@ -217,7 +217,10 @@ public class MinionType_Script : BaseCharacter
 
                 int atkChances = Random.Range(0 ,100);
                 nextAttack = null;
-                GetAttack();
+                if(CurrentAIState.t != null)
+                {
+                    GetAttack();
+                }
 
                 if (CurrentAIState.t != null && atkChances < AttackWillPerc && nextAttack != null && (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler))
                 {
