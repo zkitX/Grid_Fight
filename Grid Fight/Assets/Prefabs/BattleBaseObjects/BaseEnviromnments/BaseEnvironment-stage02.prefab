@@ -125,8 +125,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 6
-  hasBaseTransitionTime: 0
-  baseTransitionDuration: 3
   pivot: {x: 0, y: 0, z: 0}
 --- !u!1 &8793094425481668
 GameObject:
@@ -1180,6 +1178,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 2666256206193291185}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &2170201885005410744
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1375,6 +1374,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 2920685458647396054}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &3983383494482127954
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2196,6 +2196,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 6143319899909587299}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &1540937414297465592
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2784,6 +2785,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 5694257093870362689}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &5936657137597183438
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3010,6 +3012,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 1767578357399607043}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &2387817760477101090
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3224,6 +3227,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 2635772411995097038}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &7567408343309474841
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3812,6 +3816,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 8101334948083442767}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &4759331439871494206
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4118,6 +4123,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 6668237201207136337}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &6908934089754763802
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4252,6 +4258,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 14071107933308272}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &241598744073673624
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4729,6 +4736,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 782042237572504451}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &5536151391453582612
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5084,6 +5092,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 8824086394278310231}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &4434976698778380471
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5494,6 +5503,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 40823878388070865}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &7193511745740085493
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5849,6 +5859,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 1544129372263394479}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &200760967106158552
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5983,6 +5994,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 6630783660172446483}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &9178469617727339836
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6392,6 +6404,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 7353147892129707832}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &1864592084404561614
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6801,6 +6814,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 7368564362239816051}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &4852117415603871969
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6935,6 +6949,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 3844191594419009598}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &3152956145984222543
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7069,6 +7084,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 6105640595653765970}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &5079369938130072077
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7264,6 +7280,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 2002881807338763357}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &2128117402962782085
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7398,6 +7415,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 8860525771021764922}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &7979471916811177511
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7612,6 +7630,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 2790316509292297751}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &7549028865536285856
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7716,7 +7735,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2197831522052199070}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 44, y: 26, z: 0}
+  m_LocalPosition: {x: 45.001, y: 26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8197484673323799065}
@@ -7736,8 +7755,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 5
-  hasBaseTransitionTime: 0
-  baseTransitionDuration: 3
   pivot: {x: 0, y: 0, z: 0}
 --- !u!1 &2215301135503337992
 GameObject:
@@ -7855,6 +7872,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 4730254565435345175}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &6135454757571701032
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8336,6 +8354,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 1768938167558553903}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &293473440956662265
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8562,6 +8581,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 566986917504599335}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &1279337383558982022
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9077,6 +9097,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 5914764194943372465}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &5918527590236305337
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9371,6 +9392,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 3184722358702623772}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &8128612650150120513
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9757,6 +9779,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 94408140630200196}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &43588092016964929
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10053,8 +10076,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 1
-  hasBaseTransitionTime: 0
-  baseTransitionDuration: 3
   pivot: {x: 0, y: 0, z: 0}
 --- !u!1 &3002099773978728879
 GameObject:
@@ -10191,6 +10212,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 7799616712282853584}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &4254463109862624443
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10485,6 +10507,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 8760269580044709443}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &7016023610558072256
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10619,6 +10642,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 489636856921736476}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &2250850171906410713
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11028,6 +11052,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 4780023815351312692}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &3163804127727773651
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12718,6 +12743,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 4779578462653149093}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &642966787344072234
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12913,6 +12939,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 6416995243120045148}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &2462635771170012045
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13509,6 +13536,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 3217048824814003248}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &7045905740240933616
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13765,6 +13793,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 979096326407732737}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &2105850864491488593
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13899,6 +13928,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 1245762375788362037}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &4590843042512978457
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14033,6 +14063,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 8392187372383197963}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &2065126940062559884
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14167,6 +14198,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 1785238660373388772}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &5896052479715243156
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14473,6 +14505,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 2923966115387304301}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &7985011713440805631
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15226,6 +15259,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 3218785548019554680}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &1282952588281632749
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15360,6 +15394,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 8568619700009277593}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &2866175743803555996
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15586,6 +15621,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 9088254156094407750}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &8144160101576039714
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16430,6 +16466,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 5261228970382693370}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &3223014398322552315
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16656,6 +16693,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 4020171104957239732}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &8740630676619479783
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16790,6 +16828,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 8355209858085258533}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &4537319746978594782
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16924,6 +16963,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 8841726192819780245}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &1867573614105913697
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17597,6 +17637,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 5551232563859042943}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &4034116390994469124
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18990,6 +19031,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 115235046353538331}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &4825874499047137429
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19204,6 +19246,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 688387150367725058}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &7134610803527415228
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19430,6 +19473,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 9150107753154130232}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &3211316547284445186
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19717,6 +19761,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 1588841501330322886}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &236641197852953809
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20243,6 +20288,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 1149456658648913804}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &2119077413497547608
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21053,6 +21099,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 1728678694015800476}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &6329922406444416395
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21371,6 +21418,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 6558466305098749653}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &3389188793041563906
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21850,8 +21898,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
-  hasBaseTransitionTime: 0
-  baseTransitionDuration: 3
   pivot: {x: 0, y: 0, z: 0}
 --- !u!1 &6769437829616473626
 GameObject:
@@ -22623,6 +22669,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 3709569760182175954}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &9112108258865762933
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23157,6 +23204,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 1105030385501791190}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &376857822864515096
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23371,6 +23419,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 7113412534242397469}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &8751265800709780358
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24122,6 +24171,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 2354927203385524232}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &4452389103645713138
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24390,6 +24440,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 3954867303175409420}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &6240888949197801543
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24594,8 +24645,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 2
-  hasBaseTransitionTime: 0
-  baseTransitionDuration: 3
   pivot: {x: 0, y: 0, z: 0}
 --- !u!1 &7528603044152555053
 GameObject:
@@ -25160,6 +25209,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 5220290712099981529}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &2990424859560217446
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25454,6 +25504,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 7318242438916763827}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &993023163533126066
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25668,6 +25719,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 1179887287520947096}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &3882556082324475228
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26170,8 +26222,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 4
-  hasBaseTransitionTime: 0
-  baseTransitionDuration: 3
   pivot: {x: 0, y: 0, z: 0}
 --- !u!1 &8204534784913566361
 GameObject:
@@ -26218,8 +26268,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 3
-  hasBaseTransitionTime: 0
-  baseTransitionDuration: 3
   pivot: {x: 0, y: 0, z: 0}
 --- !u!1 &8216795630356254197
 GameObject:
@@ -26318,6 +26366,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 7692264623068402216}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &4362919680511064899
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26452,6 +26501,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 2504574822817309020}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &3911629579765811873
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26586,6 +26636,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 6735826405813110122}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &104063815672667417
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26812,6 +26863,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 4146797810081090987}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &7878559540734910868
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27026,6 +27078,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 1366521249899763222}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &4037254466860330686
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27252,6 +27305,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 700549449460590645}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &4794741353826704661
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27783,6 +27837,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 870927443326182749}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &5851542912390009752
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28273,6 +28328,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 1163112428289727165}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &134695880737914007
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28499,6 +28555,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 5077346508137406392}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &8979182717788716291
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29038,6 +29095,7 @@ MonoBehaviour:
   SP: {fileID: 0}
   BattleTargetScript: {fileID: 4052596751751572475}
   TileADStats: {x: 1, y: 1}
+  isTaken: 0
 --- !u!65 &349237096080272714
 BoxCollider:
   m_ObjectHideFlags: 0
