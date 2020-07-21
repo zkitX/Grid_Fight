@@ -412,7 +412,7 @@ public Vector2 Duration_Debuff_Trap_ForTime;
                 targetCharacter.TileMovementCompleteEvent += TargetCharacter_TileMovementCompleteEvent;
                 isColliding = true;
             }
-            else if(targetCharacter != null && targetCharacter.UMS.Pos.Contains(Pos) && targetCharacter.SpineAnim.CurrentAnim.Contains("Idle"))
+            else if(targetCharacter != null && targetCharacter.UMS.Pos.Contains(Pos))
             {
                 TargetCharacter_TileMovementCompleteEvent(targetCharacter);
             }
@@ -432,9 +432,9 @@ public Vector2 Duration_Debuff_Trap_ForTime;
     public IEnumerator BlockTileForTime_Co(float duration, GameObject ps)
     {
         float timer = 0;
-        BattleTileState = BattleTileStateType.Blocked;
         ps.transform.position = transform.position;
         ps.SetActive(true);
+        ps.GetComponent<ParticleHelperScript>().UpdatePSTime(duration);
         ParticleHelperScript pstg = ps.GetComponent<ParticleHelperScript>();
         if (pstg != null)
         {
@@ -443,6 +443,7 @@ public Vector2 Duration_Debuff_Trap_ForTime;
         while (timer < duration)
         {
             yield return null;
+            BattleTileState = BattleTileStateType.Blocked;
             timer += BattleManagerScript.Instance.DeltaTime;
         }
         ps.SetActive(false);

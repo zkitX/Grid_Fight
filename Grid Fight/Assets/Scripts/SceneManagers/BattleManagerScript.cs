@@ -1292,29 +1292,8 @@ public class BattleManagerScript : MonoBehaviour
 
                 if(isRandom)
                 {
-                    bool found = false;
-                    List<BaseCharacter> res = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 && !r.IsOnField &&
-                    r.BuffsDebuffsList.Where(a=> a.Stat == BuffDebuffStatsType.Zombification).ToList().Count == 0 && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).ToList();
-                    if(res.Count > 0)
-                    {
-                        while (!found)
-                        {
-                            cs = (CharacterSelectionType)Random.Range(0, 4);
-                            cb = res.Where(r => r.CharInfo.CharacterSelection == cs).FirstOrDefault();
 
-                        if (cb != null && CurrentSelectedCharacters.Where(r => r.Value.Character != null && ((r.Value.Character == cb)
-                        || (r.Value.NextSelectionChar.NextSelectionChar == cs && r.Value.NextSelectionChar.Side == cb.UMS.Side && r.Value.Character != null)) && r.Key != playerController).ToList().Count == 0)
-                            {
-
-                                found = true;
-                            }
-                        }
-                    }
-                    else
-                    {
-
-                    }
-                    
+                    cb = GetFreeRandomChar(side, playerController);
                 }
                 else
                 {
@@ -1363,6 +1342,35 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
+
+    public BaseCharacter GetFreeRandomChar(SideType side, ControllerType playerController)
+    {
+        bool found = false;
+        BaseCharacter cb = null;
+        CharacterSelectionType cs = CharacterSelectionType.Up;
+        List<BaseCharacter> res = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 && !r.IsOnField &&
+        r.BuffsDebuffsList.Where(a => a.Stat == BuffDebuffStatsType.Zombification).ToList().Count == 0 && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).ToList();
+        if (res.Count > 0)
+        {
+            while (!found)
+            {
+                cs = (CharacterSelectionType)Random.Range(0, 4);
+                cb = res.Where(r => r.CharInfo.CharacterSelection == cs).FirstOrDefault();
+
+                if (cb != null && CurrentSelectedCharacters.Where(r => r.Value.Character != null && ((r.Value.Character == cb)
+                || (r.Value.NextSelectionChar.NextSelectionChar == cs && r.Value.NextSelectionChar.Side == cb.UMS.Side && r.Value.Character != null)) && r.Key != playerController).ToList().Count == 0)
+                {
+
+                    found = true;
+                }
+            }
+        }
+        else
+        {
+
+        }
+        return cb;
+    }
 
     public void SetNextChar(bool deselction, BaseCharacter cb, SideType side, ControllerType playerController, CharacterSelectionType cs,  bool worksOnFungusPappets = false)
     {

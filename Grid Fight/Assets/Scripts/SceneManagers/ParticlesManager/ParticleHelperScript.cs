@@ -149,7 +149,7 @@ public class ParticleHelperScript : MonoBehaviour
     /// <summary>
     /// Set the Particle Systems Time with the inputted variable, if put to 0 it will stop immediately
     /// </summary>
-    public void UpdatePSTime(float time, int it)
+    public void UpdatePSTime(float time, int it = 0)
     {
         iter = it;
         PSTime = time;
