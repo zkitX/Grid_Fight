@@ -540,36 +540,71 @@ public enum BaseCharType
 
 }
 
-
-public enum ParticlesType
+// 0            ->      None
+// 1 to 999     ->      Basic
+// 1000 to 1999 ->      Bosses extra(leave 100 slots between bosses)
+// 2000 to 2999 ->      Mask Skills(leave 100 slots between masks)
+// 3000 to 3499 ->      Buff Status effects Buff
+// 3500 to 3999 ->      Debuff Status effects 
+// 3000 to 3999 ->      Miscelaneous
+// 4000+        ->      Test
+public enum ParticlesType   
 {
-    None,
-    CharArrivingSmoke,
-    Stage04FlowersSmoke,
-    PowerUp_Damage,
-    PowerUp_Health,
-    PowerUp_Stamina,
-    PowerUp_Speed,
-    ShieldNormal,
-    ShieldTotalDefence,
-    Stage00BossDeathSmoke,
-    Stage01_Boss_MoonDrums_Loop,
-    Stage01_Boss_MoonDrums_LoopCrumble,
-    Stage01_Boss_TeleportationIn,
-    Stage01_Boss_TeleportationOut,
-    Stage01_Boss_FaceChanging_WarDrums,
-    Stage01_Boss_FaceChanging_LifeDrums,
-    Stage01_Boss_FaceChanging_MoonDrums,
-    Stage01_Boss_CrystalTomb_Effect,
-    PowerUp_Shield,
-    Skill_Darkening,
-    Skill_Mind_1_Loop,
-    Skill_Mind_2_Loop,
-    Skill_Mind_2_Teleporting,
-    Skill_Mind_3_In,
-    Skill_Mind_3_Loop,
-    Skill_Mind_3_Tentacle
+    // 0            -> None
+    None = 0,
 
+    // 1 to 999     -> Basic
+    CharArrivingSmoke = 1,
+    ShieldNormal = 2,
+    ShieldTotalDefence = 3,
+
+    // 1000 to 1999 ->      Bosses extra(leave 100 slots between bosses)
+    Chapter00_CleasTemple_TohoraSea_BossDeathSmoke = 1000,
+    Chapter01_TohoraSea_Boss_MoonDrums_Loop = 1100,
+    Chapter01_TohoraSea_Boss_MoonDrums_LoopCrumble = 1101,
+    Chapter01_TohoraSea_Boss_TeleportationIn = 1102,
+    Chapter01_TohoraSea_Boss_TeleportationOut = 1103,
+    Chapter01_TohoraSea_Boss_FaceChanging_WarDrums = 1104,
+    Chapter01_TohoraSea_Boss_FaceChanging_LifeDrums = 1105,
+    Chapter01_TohoraSea_Boss_FaceChanging_MoonDrums = 1106,
+    Chapter01_TohoraSea_Boss_CrystalTomb_Effect = 1107,
+    Chapter05_AscensoMountain_FlowersSmoke = 5000,
+
+    // 2000 to 2999 ->      Mask Skills(leave 100 slots between masks)
+    Skill_Mind_1_Loop = 2100,
+    Skill_Mind_2_Loop = 2101,
+    Skill_Mind_2_Teleporting = 2102,
+    Skill_Mind_3_In = 2103,
+    Skill_Mind_3_Loop = 2104,
+    Skill_Mind_3_Tentacle = 2105,
+
+    // 3000 to 3499 -> Buff Status effects Buff
+    Status_Buff_Power = 3000,//Atk
+    Status_Buff_Regen = 3001,//Health
+    Status_Buff_Bliss = 3002,//stamina
+    Status_Buff_Haste = 3003,//Speed
+    Status_Buff_Armour = 3004,//shield
+    Status_Buff_Aim = 3005,
+    Status_Buff_Rebirth = 3006,
+    Status_Buff_Voice = 3007,
+    Status_Buff_Drain = 3008,
+    Status_Buff_Piercing = 3009,
+    Status_Buff_Push = 3010,
+
+    // 3500 to 3999 -> Debuff Status effects 
+    Status_Debuff_Bleed = 3500,
+    Status_Debuff_SoulCrash = 3501,
+    Status_Debuff_Slow = 3502,
+    Status_Debuff_Blind = 3503,
+    Status_Debuff_Backfire = 3504,
+    Status_Debuff_Stop = 3505,
+    Status_Debuff_Shatter = 3506,
+    Status_Debuff_Powerless = 3507,
+    Status_Debuff_Death_Sentence = 3508,
+    Status_Debuff_Silence = 3509,
+    Status_Debuff_Rage = 3510,
+    Status_Debuff_Chain = 3511,
+    Status_Debuff_Zombie = 3512
 }
 
 
