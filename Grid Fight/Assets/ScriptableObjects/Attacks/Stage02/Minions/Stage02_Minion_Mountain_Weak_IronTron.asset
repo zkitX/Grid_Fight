@@ -10,22 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage02_Minion_Mountain_EnemyAttack
+  m_Name: Stage02_Minion_Mountain_Weak_IronTron
   m_EditorClassIdentifier: 
   Chances: 100
-  CurrentAttackType: 1
+  CurrentAttackType: 0
   AttackRatioMultiplier: 1
-  DamageMultiplier: {x: 1, y: 1}
+  _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 0
-  AttackAnim: 1
-  PrefixAnim: 1
+  AttackAnim: 0
+  StaminaCost: 10
+  ExperiencePoints: 10
+  CoolDown: 0
+  PrefixAnim: 0
+  Fov: 0
   Particles:
     Left:
-      Cast: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Cast: {fileID: 4782066923225468739, guid: 4497814b93104584785944f8e60df742,
         type: 3}
-      Bullet: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Bullet: {fileID: 8076501575507356611, guid: f6d7d2d8257227249a2f483eedd90f46,
         type: 3}
-      Hit: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73, type: 3}
+      Hit: {fileID: 9186400852241564236, guid: 6369696ed5946864ca816775059b21bb, type: 3}
     Right:
       Cast: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
         type: 3}
@@ -89,6 +93,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+      ChildrenBulletDelay: 0.5
       BulletEffectTiles: []
       BulletGapStartingTile: {x: 0, y: 0}
       HasEffect: 0
@@ -99,6 +104,20 @@ MonoBehaviour:
     AtkType: 1
     BulletTrajectories:
     - Delay: 2
+      BulletTravelDurationPerTile: 0
+      ExplosionChances: 100
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
       Show: 1
       BulletEffectTiles:
       - Pos: {x: 0, y: 0}
@@ -109,7 +128,16 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
+        EffectsOnTile: []
     StatToCheck: 1
     ValueChecker: 2
     PercToCheck: 0
     Chances: 100
+  TotemAtk:
+    AtkType: 3
+    IsPlayerSide: 0
+    DurationOnField: 10
+    Effects: []
+    TotemIn: 0
+    TotemOut: 0
+    TentaclePrefab: 0

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1369504103409876770}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.28, y: 1.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3896610677496578246}
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5570812972989931939}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
@@ -592,14 +592,15 @@ MonoBehaviour:
   CharacterIcon: {fileID: 0}
   Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 18079379e5337084286a38b915064869, type: 2}
-  BaseCharacterType: 0
+  BaseCharacterType: 1
   CharacterID: 1040
   CurrentAttackTypeInfo:
   - {fileID: 11400000, guid: 71ff542b80c023c4a8c1387fa0631218, type: 2}
+  - {fileID: 11400000, guid: 3248f84141de50a42a7807722664fd99, type: 2}
   Elemental: 0
-  ClassType: 2
+  ClassType: 1
   CharaterLevel: 0
-  UseLayeringSystem: 1
+  UseLayeringSystem: 0
   Head: {fileID: 3130841396103376702}
   AIs: []
   CharacterRespawnLength: 180
@@ -674,8 +675,12 @@ MonoBehaviour:
   DefenceStats:
     BaseDefence: 2
     Invulnerability: 0.2
+    MinionDefenceChances: 20
+    MinionPerfectDefenceChances: 5
     B_BaseDefence: 10
     B_Invulnerability: 0.2
+    B_MinionDefenceChances: 20
+    B_MinionPerfectDefenceChances: 5
     LevelMultiplier: 0
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
