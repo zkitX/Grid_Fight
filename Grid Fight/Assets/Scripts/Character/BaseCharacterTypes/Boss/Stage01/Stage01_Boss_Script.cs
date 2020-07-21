@@ -192,7 +192,7 @@ public class Stage01_Boss_Script : MinionType_Script
     {
         if(MovementPsOut == null)
         {
-            MovementPsOut = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_TeleportationOut);
+            MovementPsOut = ParticleManagerScript.Instance.GetParticle(ParticlesType.Chapter01_TohoraSea_Boss_TeleportationOut);
             
         }
         AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, CharInfo.AudioProfile.Footsteps, AudioBus.LowPrio, SpineAnim.transform);
@@ -213,7 +213,7 @@ public class Stage01_Boss_Script : MinionType_Script
         timer = 0;
         if (MovementPsIn == null)
         {
-            MovementPsIn = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_TeleportationIn);
+            MovementPsIn = ParticleManagerScript.Instance.GetParticle(ParticlesType.Chapter01_TohoraSea_Boss_TeleportationIn);
         }
         MovementPsIn.transform.position = nextPos;
         MovementPsIn.SetActive(true);
@@ -247,7 +247,7 @@ public class Stage01_Boss_Script : MinionType_Script
                     {
                         if(FaceChangingWarDrums == null)
                         {
-                            FaceChangingWarDrums = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_FaceChanging_WarDrums);
+                            FaceChangingWarDrums = ParticleManagerScript.Instance.GetParticle(ParticlesType.Chapter01_TohoraSea_Boss_FaceChanging_WarDrums);
                             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, CharInfo.AudioProfile.Skill3.Cast, AudioBus.MidPrio, transform);
                         }
                         FaceChangingWarDrums.transform.parent = SpineAnim.transform;
@@ -276,7 +276,7 @@ public class Stage01_Boss_Script : MinionType_Script
                     {
                         if (FaceChangingLifeDrums == null)
                         {
-                            FaceChangingLifeDrums = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_FaceChanging_LifeDrums);
+                            FaceChangingLifeDrums = ParticleManagerScript.Instance.GetParticle(ParticlesType.Chapter01_TohoraSea_Boss_FaceChanging_LifeDrums);
                             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, CharInfo.AudioProfile.Skill3.Cast, AudioBus.MidPrio, transform);
                         }
                         FaceChangingLifeDrums.transform.parent = SpineAnim.transform;
@@ -290,7 +290,7 @@ public class Stage01_Boss_Script : MinionType_Script
                     {
                         if (FaceChangingMoonDrums == null)
                         {
-                            FaceChangingMoonDrums = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_FaceChanging_MoonDrums);
+                            FaceChangingMoonDrums = ParticleManagerScript.Instance.GetParticle(ParticlesType.Chapter01_TohoraSea_Boss_FaceChanging_MoonDrums);
                             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, CharInfo.AudioProfile.Skill3.Cast, AudioBus.MidPrio, transform);
                         }
                         FaceChangingMoonDrums.transform.parent = SpineAnim.transform;
@@ -335,7 +335,7 @@ public class Stage01_Boss_Script : MinionType_Script
             {
                 if (FaceChangingWarDrums == null)
                 {
-                    FaceChangingWarDrums = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_FaceChanging_WarDrums);
+                    FaceChangingWarDrums = ParticleManagerScript.Instance.GetParticle(ParticlesType.Chapter01_TohoraSea_Boss_FaceChanging_WarDrums);
                     AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, CharInfo.AudioProfile.Skill3.Cast, AudioBus.MidPrio, transform);
                 }
                 FaceChangingWarDrums.transform.parent = SpineAnim.transform;

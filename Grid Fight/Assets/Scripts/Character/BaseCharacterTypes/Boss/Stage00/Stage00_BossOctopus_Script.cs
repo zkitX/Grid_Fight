@@ -157,7 +157,7 @@ public class Stage00_BossOctopus_Script : MinionType_Script
 
     private void TriggerRandomDeathExplosion()
     {
-        GameObject boom = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage00BossDeathSmoke);
+        GameObject boom = ParticleManagerScript.Instance.GetParticle(ParticlesType.Chapter00_CleasTemple_TohoraSea_BossDeathSmoke);
         boom.transform.parent = transform;
         boom.transform.localPosition = Vector3.zero + new Vector3(Random.Range(0f, DeathExplosionRange.x), Random.Range(0f, DeathExplosionRange.y), 0f);
         boom.SetActive(true);

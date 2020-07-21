@@ -101,7 +101,7 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
     {
         if(Smoke == null)
         {
-            Smoke = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage04FlowersSmoke);
+            Smoke = ParticleManagerScript.Instance.GetParticle(ParticlesType.Chapter05_AscensoMountain_FlowersSmoke);
             Smoke.transform.parent = transform;
             Smoke.transform.localPosition = Vector3.zero;
         }
