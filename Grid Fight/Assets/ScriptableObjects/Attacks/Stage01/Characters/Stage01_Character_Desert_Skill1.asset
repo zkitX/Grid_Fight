@@ -15,10 +15,14 @@ MonoBehaviour:
   Chances: 100
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
-  DamageMultiplier: {x: 1, y: 1}
+  _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 0
   AttackAnim: 3
+  StaminaCost: 10
+  ExperiencePoints: 10
+  CoolDown: 10
   PrefixAnim: 4
+  Fov: 0
   Particles:
     Left:
       Cast: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
@@ -89,6 +93,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+      ChildrenBulletDelay: 0.5
       BulletEffectTiles: []
       BulletGapStartingTile: {x: 0, y: 0}
       HasEffect: 0
@@ -99,6 +104,20 @@ MonoBehaviour:
     AtkType: 2
     BulletTrajectories:
     - Delay: 0
+      BulletTravelDurationPerTile: 0
+      ExplosionChances: 100
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
       Show: 1
       BulletEffectTiles:
       - Pos: {x: 0, y: 0}
@@ -109,6 +128,7 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
+        EffectsOnTile: []
       - Pos: {x: 0, y: -1}
         HasEffect: 0
         showImpact: 0
@@ -117,30 +137,7 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
-      - Pos: {x: -1, y: -1}
-        HasEffect: 0
-        showImpact: 0
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-      - Pos: {x: -1, y: 0}
-        HasEffect: 0
-        showImpact: 0
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-      - Pos: {x: -1, y: 1}
-        HasEffect: 0
-        showImpact: 0
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
+        EffectsOnTile: []
       - Pos: {x: 0, y: 1}
         HasEffect: 0
         showImpact: 0
@@ -149,7 +146,8 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
-      - Pos: {x: 1, y: 1}
+        EffectsOnTile: []
+      - Pos: {x: -1, y: 0}
         HasEffect: 0
         showImpact: 0
         Effects: []
@@ -157,6 +155,7 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
+        EffectsOnTile: []
       - Pos: {x: 1, y: 0}
         HasEffect: 0
         showImpact: 0
@@ -165,6 +164,34 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: -1, y: -1}
+        HasEffect: 0
+        showImpact: 0
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: -1, y: 1}
+        HasEffect: 0
+        showImpact: 0
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 1, y: 1}
+        HasEffect: 0
+        showImpact: 0
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
       - Pos: {x: 1, y: -1}
         HasEffect: 0
         showImpact: 0
@@ -173,7 +200,16 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
+        EffectsOnTile: []
     StatToCheck: 0
     ValueChecker: 0
     PercToCheck: 0
     Chances: 0
+  TotemAtk:
+    AtkType: 3
+    IsPlayerSide: 0
+    DurationOnField: 10
+    Effects: []
+    TotemIn: 0
+    TotemOut: 0
+    TentaclePrefab: 0

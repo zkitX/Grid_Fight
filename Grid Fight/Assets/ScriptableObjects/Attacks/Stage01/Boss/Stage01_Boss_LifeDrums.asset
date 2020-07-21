@@ -20,7 +20,7 @@ MonoBehaviour:
   AttackAnim: 2
   StaminaCost: 10
   ExperiencePoints: 10
-  CoolDown: 4
+  CoolDown: 2
   PrefixAnim: 3
   Fov: 2
   Particles:
@@ -84,67 +84,16 @@ MonoBehaviour:
         m_RotationOrder: 4
       Show: 0
       BulletEffectTiles:
+      - Pos: {x: 0, y: 0}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
       - Pos: {x: -1, y: 0}
-        HasEffect: 1
-        showImpact: 1
-        Effects:
-        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: 4, y: 5}
-        HasEffect: 1
-        showImpact: 1
-        Effects:
-        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: 3, y: 4}
-        HasEffect: 1
-        showImpact: 1
-        Effects:
-        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: 4, y: 3}
-        HasEffect: 1
-        showImpact: 1
-        Effects:
-        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: 3, y: 2}
-        HasEffect: 1
-        showImpact: 1
-        Effects:
-        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: 4, y: 1}
-        HasEffect: 1
-        showImpact: 1
-        Effects:
-        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: 3, y: 0}
         HasEffect: 1
         showImpact: 1
         Effects:
@@ -164,27 +113,7 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-      - Pos: {x: 2, y: 1}
-        HasEffect: 1
-        showImpact: 1
-        Effects:
-        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
       - Pos: {x: 1, y: 2}
-        HasEffect: 1
-        showImpact: 1
-        Effects:
-        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: 2, y: 3}
         HasEffect: 1
         showImpact: 1
         Effects:
@@ -204,7 +133,87 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
+      - Pos: {x: 2, y: 1}
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 2, y: 3}
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
       - Pos: {x: 2, y: 5}
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 3, y: 0}
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 3, y: 2}
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 3, y: 4}
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 4, y: 1}
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 4, y: 3}
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 4, y: 5}
         HasEffect: 1
         showImpact: 1
         Effects:
@@ -229,7 +238,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      Show: 1
+      Show: 0
       BulletEffectTiles:
       - Pos: {x: 1, y: 5}
         HasEffect: 1
@@ -354,7 +363,7 @@ MonoBehaviour:
     StatToCheck: 1
     ValueChecker: 0
     PercToCheck: 60
-    Chances: 1000
+    Chances: 120
   TotemAtk:
     AtkType: 3
     IsPlayerSide: 0
