@@ -96,7 +96,8 @@ public class ArenaCharSelectButton : CharSelectButton
         {
             ArenaSquadBoxes.Instance.DisplaySelection(
                 png.Name == "T1" ? 1 : 2,
-                loadInfo == null ? null : loadInfo.charImage
+                loadInfo == null ? null : loadInfo.charSpine,
+                loadInfo == null ? true : loadInfo.encounterState != CharacterLoadInformation.EncounterState.Recruited ? true : false
                 );
         }
 

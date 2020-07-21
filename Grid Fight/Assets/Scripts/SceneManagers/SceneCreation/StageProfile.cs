@@ -11,6 +11,7 @@ public class StageProfile : ScriptableObject
     [SerializeField] public string Name;
     [SerializeField] public string ID = "S0_XMPL";
     [SerializeField] public StageType type;
+    [ConditionalField("type", false, StageType.Pvp)] public Sprite Thumbnail;
     [TextArea(15, 20)] [SerializeField] public string Description;
     [SerializeField] public RewardsRating bestAccuracyRating = new RewardsRating();
     [SerializeField] public RewardsRating bestReflexRating = new RewardsRating();

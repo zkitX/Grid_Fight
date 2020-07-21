@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using TMPro;
+using Spine.Unity;
 
 public class ArenaSquadBox : MonoBehaviour
 {
     [SerializeField] protected Image[] teammateDisplays = new Image[4];
     protected List<Image> teammateBackGrounds = new List<Image>();
 
-    public Image selectedImg = null;
+    public SkeletonGraphic selectionDisplay;
     public Image frame = null;
 
     protected Color SelectionColor = Color.magenta;
@@ -20,6 +21,8 @@ public class ArenaSquadBox : MonoBehaviour
 
     public void Setup(int squadNum)
     {
+        selectionDisplay = GetComponentInChildren<SkeletonGraphic>();
+
         squad = SceneLoadManager.Instance.GetSquadToCheck(squadNum);
 
         foreach (Image display in teammateDisplays)
@@ -56,23 +59,44 @@ public class ArenaSquadBox : MonoBehaviour
             }
         }
 
-        DisplaySelected(selectedImg.sprite);
+        DisplaySelected(selectionDisplay.skeletonDataAsset);
     }
 
-    public void DisplaySelected(Sprite charPortrait)
+    public void DisplaySelected(SkeletonDataAsset characterSpine, bool hidden = false)
     {
-        Color displayColor = new Color(1f, 1f, 1f, 1f);
-        if (charPortrait == null)
+
+        Color displayColor = !hidden ? new Color(1f, 1f, 1f, 1f) : new Color(0f, 0f, 0f, 1f);
+        if (characterSpine == null)
         {
             displayColor = new Color(1f, 1f, 1f, 0f);
         }
 
-        selectedImg.sprite = charPortrait;
-        selectedImg.color = displayColor;
+        if (selectionDisplay.skeletonDataAsset != characterSpine)
+        {
+            if (SelectedDisplayer != null) StopCoroutine(SelectedDisplayer);
+            SelectedDisplayer = ReloadSpineSkeletonData(characterSpine, displayColor);
+            StartCoroutine(SelectedDisplayer);
+        }
+
 
         if (squad.Values.Where(r => r.characterID == CharacterNameType.None).FirstOrDefault() == null) return;
 
         int key = squad.Where(r => r.Value.characterID == CharacterNameType.None).First().Key;
         teammateBackGrounds[key].color = SelectionColor;
+
+    }
+
+    IEnumerator SelectedDisplayer = null;
+    IEnumerator ReloadSpineSkeletonData(SkeletonDataAsset characterSpine, Color displayColor)
+    {
+        selectionDisplay.color = new Color(1f, 1f, 1f, 0f);
+
+        selectionDisplay.skeletonDataAsset = characterSpine;
+
+        selectionDisplay.Initialize(true);
+
+        yield return new WaitForSecondsRealtime(0.1f);
+
+        selectionDisplay.color = displayColor;
     }
 }

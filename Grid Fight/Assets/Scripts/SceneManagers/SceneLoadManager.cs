@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using Spine.Unity;
 
 [RequireComponent(typeof(CanvasRenderer))]
 public class SceneLoadManager : MonoBehaviour
@@ -307,6 +308,7 @@ public class SceneLoadManager : MonoBehaviour
 
 public class ArenaLoadOut
 {
+    public StageLoadInformation stageSelected = null;
     public List<int> T1Players = new List<int>();
     public List<int> T2Players = new List<int>();
     public Dictionary<int, CharacterLoadInformation> SquadT1 = new Dictionary<int, CharacterLoadInformation>()
@@ -325,13 +327,13 @@ public class ArenaLoadOut
     };
 }
 
-
 [System.Serializable]
 public class CharacterLoadInformation
 {
     [HideInInspector] public string Name = "";
     public Sprite charPortrait;
     public Sprite charImage;
+    public SkeletonDataAsset charSpine;
     public string displayName = "";
     public string squadBonusDetails = ""; //Replace this with an actual class in the future, that contains this display info
     public CharacterNameType characterID = CharacterNameType.None;

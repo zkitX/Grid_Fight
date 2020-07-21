@@ -86,7 +86,7 @@ public class ArenaSideSelectManager : MonoBehaviour
 
     public void ContinueToCharSelect()
     {
-        if (canMoveToCharSelect)
+        if (/*canMoveToCharSelect*/true)
         {
             SceneLoadManager.Instance.arenaLoadoutInfo.T1Players.Clear();
             SceneLoadManager.Instance.arenaLoadoutInfo.T2Players.Clear();

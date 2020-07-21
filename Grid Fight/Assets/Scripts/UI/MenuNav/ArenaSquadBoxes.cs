@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Spine.Unity;
 
 public class ArenaSquadBoxes : MonoBehaviour
 {
@@ -18,8 +19,8 @@ public class ArenaSquadBoxes : MonoBehaviour
         }
     }
 
-    public void DisplaySelection(int teamNum, Sprite charDisplay)
+    public void DisplaySelection(int teamNum, SkeletonDataAsset charDisplay, bool hide = false)
     {
-        boxes[teamNum - 1].DisplaySelected(charDisplay);
+        boxes[teamNum - 1].DisplaySelected(charDisplay, hide);
     }
 }

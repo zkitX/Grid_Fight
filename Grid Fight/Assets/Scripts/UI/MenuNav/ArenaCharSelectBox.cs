@@ -15,17 +15,20 @@ public class ArenaCharSelectBox : Grid_UIPlayerNavBox
     public float btnSpacingPerc = 0.2f;
     public bool startAtRandomPoints = true;
 
-
+    public GameObject NextButton;
+    public GameObject NextErrorText;
 
     protected override void Awake()
     {
         Instance = this;
+        SceneLoadManager.Instance.SquadChangeEvent += RefreshNextButton;
         return;
     }
 
     public void Setup()
     {
         SetupGrid();
+        RefreshNextButton();
 
         playerNavGroups = new PlayerNavGroup[] 
         { 
@@ -78,4 +81,30 @@ public class ArenaCharSelectBox : Grid_UIPlayerNavBox
 
         button.button.GetComponent<ArenaCharSelectButton>().SelectChar(playerGroup.Name == "T1" ? 1 : 2);
     }
+
+    public void RefreshNextButton()
+    {
+        NextButton.SetActive(false);
+        NextErrorText.SetActive(false);
+
+        if (SceneLoadManager.Instance.SquadContains(CharacterNameType.None, 1) || SceneLoadManager.Instance.SquadContains(CharacterNameType.None, 2))
+        {
+            NextErrorText.SetActive(true);
+        }
+        else
+        {
+            NextButton.SetActive(true);
+        }
+    }
+
+    public void CheckNextButtonPress()
+    {
+        if (SceneLoadManager.Instance.SquadContains(CharacterNameType.None, 1) || SceneLoadManager.Instance.SquadContains(CharacterNameType.None, 2))
+        {
+            //return;
+        }
+
+        Grid_UINavigator.Instance.TriggerUIActivator("Next_CharSelectToMapSelect");
+    }
+
 }
