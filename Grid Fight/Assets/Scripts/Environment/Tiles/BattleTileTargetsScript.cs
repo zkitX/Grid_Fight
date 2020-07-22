@@ -92,7 +92,7 @@ public class BattleTileTargetsScript : MonoBehaviour
                     bts.BlockTileForTime(soAE.Duration, ParticleManagerScript.Instance.GetParticle(soAE.Particles));
                 }
             }
-            if(atkEffects.IsEffectOnTile)
+            if(effectOn && atkEffects.IsEffectOnTile)
             {
                 BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(pos);
                 bts.SetupEffect(atkEffects.EffectsOnTile, atkEffects.DurationOnTile, atkEffects.TileParticlesID);
@@ -218,7 +218,7 @@ public class BattleTileTargetsScript : MonoBehaviour
                     bts.BlockTileForTime(soAE.Duration, ParticleManagerScript.Instance.GetParticle(soAE.Particles));
                 }
             }
-            if (atkEffects.IsEffectOnTile)
+            if (effectOn && atkEffects.IsEffectOnTile)
             {
                 BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(pos);
                 bts.SetupEffect(atkEffects.EffectsOnTile, atkEffects.DurationOnTile, atkEffects.TileParticlesID);

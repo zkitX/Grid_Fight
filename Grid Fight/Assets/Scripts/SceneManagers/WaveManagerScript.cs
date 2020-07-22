@@ -144,6 +144,10 @@ public class WaveManagerScript : MonoBehaviour
 
         res.CharActionlist.Add(CharacterActionType.Move);
         res.CharInfo.AIs = character.AIs;
+        if(character.AddAttacks)
+        {
+            res.CharInfo.CurrentAttackTypeInfo.AddRange(character.AttacksToAdd);
+        }
         //res.CharInfo.CurrentAttackTypeInfo.Clear();
         return res;
     }
@@ -473,6 +477,8 @@ public class WaveCharacterInfoClass
     public float Exp;
 
     public List<ScriptableObjectAI> AIs = new List<ScriptableObjectAI>();
+    public bool AddAttacks = false;
+    public List<ScriptableObjectAttackBase> AttacksToAdd = new List<ScriptableObjectAttackBase>();
 }
 
 

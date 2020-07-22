@@ -1342,6 +1342,7 @@ public class BattleManagerScript : MonoBehaviour
                 else
                 {
                     CurrentSelectedCharacters[playerController].Character = null;
+                    CurrentSelectedCharacters[playerController].NotPlayingTimer = Time.time;
                 }
             }
         }
@@ -1369,10 +1370,6 @@ public class BattleManagerScript : MonoBehaviour
                     found = true;
                 }
             }
-        }
-        else
-        {
-
         }
         return cb;
     }
@@ -1764,6 +1761,7 @@ public class CurrentSelectedCharacterClass
     public NextSelectionCharClass NextSelectionChar;
     public bool isSwapping = false;
     public float OffsetSwap;
+    public float NotPlayingTimer = 0;
 
     public CurrentSelectedCharacterClass()
     {
