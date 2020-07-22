@@ -60,6 +60,10 @@ public class ParticleManagerScript : MonoBehaviour
     {
         if(speed == 1)
         {
+            if(psG.GetComponent<ParticleHelperScript>() == null)
+            {
+                Debug.LogError(psG.name + "   is missing particles helper script");
+            }
             psG.GetComponent<ParticleHelperScript>().SetSimulationSpeedToBase();
 
         }
