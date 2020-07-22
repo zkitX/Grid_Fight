@@ -112,6 +112,12 @@ public class ParticleManagerScript : MonoBehaviour
         ChangePsSpeed(ps.PS, BattleManagerScript.Instance.BattleSpeed);
         return ps.PS;
     }
+
+    public GameObject GetParticlePrefabByName(ParticlesType particle)
+    {
+        ScriptableObjectParticle ps = ListOfParticles.Where(r => r.PSType == particle).FirstOrDefault();
+        return ps != null ? ps.PS : null;
+    }
 }
 
 

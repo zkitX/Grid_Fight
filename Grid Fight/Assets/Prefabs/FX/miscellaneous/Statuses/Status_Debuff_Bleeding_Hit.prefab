@@ -10243,8 +10243,9 @@ GameObject:
   - component: {fileID: 1001872058825514145}
   - component: {fileID: 1001872058825514175}
   - component: {fileID: 1001872058825514144}
+  - component: {fileID: 1979865652149722742}
   m_Layer: 0
-  m_Name: Status_Debuff_Bleed_Hit
+  m_Name: Status_Debuff_Bleeding_Hit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14987,3 +14988,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &1979865652149722742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001872058825514146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c92ac842bd80264eb24a50ddfc9727b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LongParticles: []
+  PSTime: 10
+  timet: 0
+  iter: 0

@@ -1096,6 +1096,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                         CharInfo.Health += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Value ? bdClass.CurrentBuffDebuff.Value : (CharInfo.HealthStats.Base / 100) * bdClass.CurrentBuffDebuff.Value;
                         HealthStatsChangedEvent?.Invoke(bdClass.CurrentBuffDebuff.Value, bdClass.CurrentBuffDebuff.Value > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, SpineAnim.transform);
                         EventManager.Instance?.UpdateHealth(this);
+
+                        //Apply Bleed
+                        if (bdClass.CurrentBuffDebuff.Value < 0)
+                        {
+                            ParticleManagerScript.Instance.FireParticlesInPosition(ParticleManagerScript.Instance.GetParticlePrefabByName(ParticlesType.Status_Debuff_Bleed), CharacterNameType.None, AttackParticlePhaseTypes.Cast, SpineAnim.transform.position, SideType.LeftSide, AttackInputType.Weak);
+                        }
                     }
                     if (bdClass.Stat == BuffDebuffStatsType.Drain_Overtime)
                     {
