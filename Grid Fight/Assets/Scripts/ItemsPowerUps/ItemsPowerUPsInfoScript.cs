@@ -5,6 +5,10 @@ using TMPro;
 
 public class ItemsPowerUPsInfoScript : MonoBehaviour
 {
+
+    public delegate void ItemPickedUp();
+    public event ItemPickedUp ItemPickedUpEvent;
+
     public ScriptableObjectItemPowerUps ItemPowerUpInfo;
     //public SpriteRenderer Icon;
     public PowerUpColorTypes color = PowerUpColorTypes.White;
@@ -47,6 +51,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
     {
         if (other.tag.Contains("Side"))
         {
+            ItemPickedUpEvent?.Invoke();
             CharHitted = other.GetComponentInParent<BaseCharacter>();
             CharHitted.Buff_DebuffCo(new Buff_DebuffClass(new ElementalResistenceClass(),
                 ElementalType.Neutral, other.GetComponentInParent<BaseCharacter>(), ItemPowerUpInfo));

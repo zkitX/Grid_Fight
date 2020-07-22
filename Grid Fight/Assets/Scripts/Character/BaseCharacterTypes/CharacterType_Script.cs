@@ -318,6 +318,7 @@ public class CharacterType_Script : BaseCharacter
             {
                 yield break;
             }
+            FireActionEvenet(CharacterActionType.StrongAttack);
             isSpecialLoading = true;
             chargingAttackTimer = 0;
             currentAttackPhase = AttackPhasesType.Start;
@@ -402,7 +403,7 @@ public class CharacterType_Script : BaseCharacter
             {
                 return;
             }
-
+            FireActionEvenet(CharacterActionType.WeakAttack);
             if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop.ToString() && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_IdleToAtk.ToString())
             {
                 SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
@@ -438,6 +439,22 @@ public class CharacterType_Script : BaseCharacter
             SkillActivation = null;
             yield break;
         }
+        switch (inputSkill)
+        {
+            case AttackInputType.Skill1:
+                FireActionEvenet(CharacterActionType.Skill1);
+
+                break;
+            case AttackInputType.Skill2:
+                FireActionEvenet(CharacterActionType.Skill2);
+
+                break;
+            case AttackInputType.Skill3:
+                FireActionEvenet(CharacterActionType.Skill3);
+
+                break;
+        }
+
 
         nextAttack = nxtAtk;
         scdc.IsCoGoing = true;

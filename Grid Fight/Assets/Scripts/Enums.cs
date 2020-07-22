@@ -197,7 +197,11 @@ public enum CharacterActionType
     Skill2,
     Skill3,
     Defence,
-    SwitchCharacter
+    SwitchCharacter,
+    MoveUp,
+    MoveDown,
+    MoveLeft,
+    MoveRight
 }
 
 public enum BattleState

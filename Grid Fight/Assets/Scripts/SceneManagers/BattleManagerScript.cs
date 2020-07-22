@@ -567,15 +567,16 @@ public class BattleManagerScript : MonoBehaviour
         AttackType.Tile, BaseCharType.MinionType_Script, new List<CharacterActionType>(), LevelType.Novice), transform);
             zombiesList.Add(zombiefied);
         }
+
         zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Chapter01_TohoraSea_Boss_MoonDrums_Loop);
         zombiePs.transform.parent = zombiefied.SpineAnim.transform;
         zombiePs.transform.localPosition = Vector3.zero;
         zombiePs.SetActive(true);
         zombiefied.CharInfo.AIs = ais;
-
+        zombiefied.CharInfo.SetupChar();
         yield return WaveManagerScript.Instance.SetCharInPos(zombiefied, GridManagerScript.Instance.GetFreeBattleTile(zombiefied.UMS.WalkingSide, zombiefied.UMS.Pos), true);
         zombiefied.CharActionlist.Add(CharacterActionType.Move);
-        while (zombie.BuffsDebuffsList.Where(r=> r.Stat == BuffDebuffStatsType.Zombification).ToList().Count > 0)
+        while (zombie.BuffsDebuffsList.Where(r=> r.Stat == BuffDebuffStatsType.Zombification).ToList().Count > 0 && zombiefied.CharInfo.HealthPerc > 0)
         {
             yield return null;
         }
@@ -1169,7 +1170,7 @@ public class BattleManagerScript : MonoBehaviour
                 CurrentSelectedCharacters[playerController].NextSelectionChar.Side = currentCharacter.UMS.Side;
                 currentCharacter.UMS.SetBattleUISelection(playerController);
                 currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", true);
-
+                currentCharacter.FireActionEvenet(CharacterActionType.SwitchCharacter);
                 int newPlayerCount = CurrentSelectedCharacters.Values.Where(r => r._Character != null).ToList().Count;
                 maxPlayersUsed = maxPlayersUsed < newPlayerCount ? newPlayerCount : maxPlayersUsed;
                 //Change the player's UI to the new character
@@ -1326,16 +1327,6 @@ public class BattleManagerScript : MonoBehaviour
                         if (cb != null && CurrentSelectedCharacters.Where(r => r.Value.Character != null && ((r.Value.Character == cb)
                         || (r.Value.NextSelectionChar.NextSelectionChar == cs && r.Value.NextSelectionChar.Side == cb.UMS.Side && r.Value.Character != null)) && r.Key != playerController).ToList().Count == 0)
                         {
-                            CharacterType_Script PrevCharacter = (CharacterType_Script)AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar && r.UMS.Side == side).First();
-
-                            if (deselction)
-                            {
-                                DeselectCharacter(PrevCharacter.CharInfo.CharacterID, side, playerController);
-                            }
-                            //Debug.Log("Prev " + CurrentSelectedCharacters[playerController].NextSelectionChar.ToString());
-                            CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar = cs;
-                            CurrentSelectedCharacters[playerController].NextSelectionChar.Side = cb.UMS.Side;
-                            //Debug.Log(cs.ToString());
                             break;
                         }
                     }                    
