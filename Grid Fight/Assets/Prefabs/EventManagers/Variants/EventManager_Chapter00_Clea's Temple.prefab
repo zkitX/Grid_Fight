@@ -1412,6 +1412,7 @@ GameObject:
   - component: {fileID: 1337397043864112092}
   - component: {fileID: 3409895622667410476}
   - component: {fileID: 5773991399321459186}
+  - component: {fileID: 496076980508069721}
   m_Layer: 0
   m_Name: EventManager_Chapter00_Clea's Temple
   m_TagString: Untagged
@@ -1475,19 +1476,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 1325.8533, y: 358.1071}
+  scrollPos: {x: 154.64938, y: -1836.1674}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
-  blockViewHeight: 313
-  zoom: 0.25
+  blockViewHeight: 384
+  zoom: 0.8199997
   scrollViewRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 0
     height: 0
-  selectedBlocks: []
-  selectedCommands: []
+  selectedBlocks:
+  - {fileID: 4127484814584735436}
+  selectedCommands:
+  - {fileID: 8869947042291234305}
   variables: []
   description: 
   stepPause: 0
@@ -3044,7 +3047,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -33.43127
     y: 374.01422
-    width: 130
+    width: 124.390274
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -4406,7 +4409,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -42.677345
     y: 697.9383
-    width: 154
+    width: 150.00003
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -5139,7 +5142,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 258.22763
     y: 358.23022
-    width: 126
+    width: 124.390274
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -6372,7 +6375,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 531.83746
     y: 427.8043
-    width: 134
+    width: 132.92685
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -6751,7 +6754,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 533.83344
     y: 573.2278
-    width: 134
+    width: 132.92685
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -6778,7 +6781,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 531.56085
     y: 639.13684
-    width: 138
+    width: 131.70734
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -6930,7 +6933,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 259.6595
+    x: 254.97198
     y: 519.9804
     width: 120
     height: 40
@@ -7233,7 +7236,7 @@ MonoBehaviour:
   UseTimer: 0
   Timer: 0
   VariableName: 
-  NextBlockToFire: IntroPan
+  NextBlockToFire: JumpPan
 --- !u!114 &1544125532842777941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7288,8 +7291,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 260.33887
-    y: 672.3086
+    x: 261.90137
+    y: 753.5586
     width: 120
     height: 40
   tint: {r: 0.2627451, g: 1, b: 0, a: 1}
@@ -7487,7 +7490,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  HasADifferentGrid: 1
+  HasADifferentGrid: 0
   Grid: {fileID: 11400000, guid: d6590f43faa7aa549afe0432531f634b, type: 2}
   CallPool: 0
   PlayersCurrentSelectedChars: []
@@ -7517,7 +7520,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 255.58002
     y: 439.07544
-    width: 138
+    width: 134.14636
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -7697,8 +7700,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 260.25754
-    y: 585.3383
+    x: 261.82004
+    y: 666.5883
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -8409,8 +8412,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 259.20715
-    y: 740.01746
+    x: 260.76965
+    y: 821.26746
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -8784,8 +8787,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 259.5363
-    y: 807.713
+    x: 261.0988
+    y: 888.963
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -8811,8 +8814,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 457.78284
-    y: 807.5085
+    x: 459.34534
+    y: 888.7585
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -9644,8 +9647,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 259.19708
-    y: 893.0096
+    x: 260.75958
+    y: 974.2596
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -9770,9 +9773,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 253.83554
-    y: 956.00653
-    width: 134
+    x: 260.08554
+    y: 1038.8191
+    width: 132.92685
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -9797,8 +9800,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 96.66188
-    y: 1025.0371
+    x: 98.22438
+    y: 1106.2871
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -10133,7 +10136,7 @@ MonoBehaviour:
   itemId: 2538
   indentLevel: 0
   targetFlowchart: {fileID: 0}
-  targetBlock: {fileID: 2920591458561258004}
+  targetBlock: {fileID: 7293557983828613281}
   startLabel:
     stringRef: {fileID: 0}
     stringVal: 
@@ -10153,14 +10156,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 256.69788
-    y: 1116.9822
-    width: 130
+    x: 259.82288
+    y: 584.1697
+    width: 120
     height: 40
-  tint: {r: 0.2627451, g: 1, b: 0, a: 1}
-  useCustomTint: 0
+  tint: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
+  useCustomTint: 1
   itemId: 2527
-  blockName: Jump Wave2
+  blockName: JumpPan
   description: 
   eventHandler: {fileID: 0}
   commandList:
@@ -10301,24 +10304,21 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   HasADifferentGrid: 1
-  Grid: {fileID: 11400000, guid: ea801730ec5fd874fac8315b3ba1467a, type: 2}
+  Grid: {fileID: 11400000, guid: d6590f43faa7aa549afe0432531f634b, type: 2}
   CallPool: 1
   PlayersCurrentSelectedChars:
   - PlayerController: 0
-    Pos: {x: 3, y: 4}
-  TalkingTeam:
-  - CharacterId: 1007
-    isRandomPos: 0
     Pos: {x: 2, y: 4}
+  TalkingTeam: []
   JumpUp: 1
-  JumpAnimSpeed: 0.9
-  DelayBeforeJump: 0.75
+  JumpAnimSpeed: 1.3
+  DelayBeforeJump: 1
   PoolDelay: 0
   UseWave: 0
   UseTimer: 0
   Timer: 0
   VariableName: 
-  NextBlockToFire: Wave2
+  NextBlockToFire: IntroPan
 --- !u!114 &7293557983828613281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10333,8 +10333,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 255.88855
-    y: 1193.1794
+    x: 260.57605
+    y: 1190.0544
     width: 120
     height: 40
   tint: {r: 0.2627451, g: 1, b: 0, a: 1}
@@ -10663,10 +10663,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 249.6587
     y: 1268.506
-    width: 146
+    width: 142.68295
     height: 40
-  tint: {r: 1, g: 1, b: 1, a: 1}
-  useCustomTint: 0
+  tint: {r: 0.17254902, g: 0.17254902, b: 0.17254902, a: 1}
+  useCustomTint: 1
   itemId: 2560
   blockName: Jump WaveBird
   description: 
@@ -10839,7 +10839,7 @@ MonoBehaviour:
   itemId: 2592
   indentLevel: 0
   WaveName: 
-  TransitionDuration: 0.7
+  TransitionDuration: 0.55
   HasAStageUpdate: 1
   FightGridToShow: 2
   CamInfo:
@@ -10952,7 +10952,7 @@ MonoBehaviour:
   - PlayerController: 3
     Pos: {x: 2, y: 4}
   TalkingTeam: []
-  JumpUp: 1
+  JumpUp: 0
   JumpAnimSpeed: 0.9
   DelayBeforeJump: 0.75
   PoolDelay: 0
@@ -11960,10 +11960,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 260.79382
     y: 1596.9733
-    width: 130
+    width: 126.8293
     height: 40
-  tint: {r: 1, g: 1, b: 1, a: 1}
-  useCustomTint: 0
+  tint: {r: 0.17254902, g: 0.17254902, b: 0.17254902, a: 1}
+  useCustomTint: 1
   itemId: 2652
   blockName: Jump Wave3
   description: 
@@ -12001,7 +12001,7 @@ MonoBehaviour:
   itemId: 2654
   indentLevel: 0
   WaveName: 
-  TransitionDuration: 0.7
+  TransitionDuration: 0.55
   HasAStageUpdate: 1
   FightGridToShow: 3
   CamInfo:
@@ -12114,11 +12114,11 @@ MonoBehaviour:
   - PlayerController: 3
     Pos: {x: 2, y: 4}
   - PlayerController: 2
-    Pos: {x: 4, y: 4}
+    Pos: {x: 3, y: 3}
   TalkingTeam: []
   JumpUp: 1
-  JumpAnimSpeed: 0.9
-  DelayBeforeJump: 0.75
+  JumpAnimSpeed: 1.3
+  DelayBeforeJump: 1
   PoolDelay: 0
   UseWave: 0
   UseTimer: 0
@@ -12368,10 +12368,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 240.1393
     y: 1732.4945
-    width: 166
+    width: 159.75613
     height: 40
-  tint: {r: 1, g: 1, b: 1, a: 1}
-  useCustomTint: 0
+  tint: {r: 0.17254902, g: 0.17254902, b: 0.17254902, a: 1}
+  useCustomTint: 1
   itemId: 2667
   blockName: Jump WaveKoniko
   description: 
@@ -12544,7 +12544,7 @@ MonoBehaviour:
   itemId: 2677
   indentLevel: 0
   WaveName: 
-  TransitionDuration: 0.7
+  TransitionDuration: 0.55
   HasAStageUpdate: 1
   FightGridToShow: 4
   CamInfo:
@@ -12657,9 +12657,9 @@ MonoBehaviour:
   - PlayerController: 3
     Pos: {x: 2, y: 4}
   - PlayerController: 2
-    Pos: {x: 4, y: 4}
+    Pos: {x: 3, y: 3}
   TalkingTeam: []
-  JumpUp: 1
+  JumpUp: 0
   JumpAnimSpeed: 0.9
   DelayBeforeJump: 0.75
   PoolDelay: 0
@@ -12684,7 +12684,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 257.6184
     y: 1807.7483
-    width: 130
+    width: 124.390274
     height: 40
   tint: {r: 0.2627451, g: 1, b: 0, a: 1}
   useCustomTint: 1
@@ -12934,7 +12934,7 @@ MonoBehaviour:
   UseTimer: 0
   Timer: 0
   VariableName: 
-  NextBlockToFire: konikoIntro
+  NextBlockToFire: KonikoIntro
 --- !u!114 &4127484814584735436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12949,12 +12949,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 261.46417
-    y: 2183.481
+    x: 268.97797
+    y: 2176.662
     width: 120
     height: 40
-  tint: {r: 1, g: 1, b: 1, a: 1}
-  useCustomTint: 0
+  tint: {r: 0.17254902, g: 0.17254902, b: 0.17254902, a: 1}
+  useCustomTint: 1
   itemId: 2691
   blockName: Jump Gora
   description: 
@@ -13127,7 +13127,7 @@ MonoBehaviour:
   itemId: 2701
   indentLevel: 0
   WaveName: 
-  TransitionDuration: 0.7
+  TransitionDuration: 0.55
   HasAStageUpdate: 1
   FightGridToShow: 5
   CamInfo:
@@ -13236,17 +13236,26 @@ MonoBehaviour:
   CallPool: 1
   PlayersCurrentSelectedChars:
   - PlayerController: 0
-    Pos: {x: 3, y: 4}
-  - PlayerController: 3
     Pos: {x: 2, y: 4}
-  - PlayerController: 2
-    Pos: {x: 4, y: 4}
   - PlayerController: 1
-    Pos: {x: 3, y: 3}
-  TalkingTeam: []
+    Pos: {x: 2, y: 5}
+  - PlayerController: 2
+    Pos: {x: 2, y: 6}
+  - PlayerController: 3
+    Pos: {x: 2, y: 7}
+  TalkingTeam:
+  - CharacterId: 1007
+    isRandomPos: 0
+    Pos: {x: 2, y: 5}
+  - CharacterId: 1006
+    isRandomPos: 0
+    Pos: {x: 2, y: 6}
+  - CharacterId: 1004
+    isRandomPos: 0
+    Pos: {x: 2, y: 7}
   JumpUp: 1
-  JumpAnimSpeed: 0.9
-  DelayBeforeJump: 0.75
+  JumpAnimSpeed: 1.3
+  DelayBeforeJump: 1
   PoolDelay: 0
   UseWave: 0
   UseTimer: 0
@@ -14134,7 +14143,7 @@ MonoBehaviour:
   indentLevel: 0
   text: "Nah\u2026 I got this!\n<size=35><color=#F1F4C9>< CONTINUE ></color></size>"
   description: 
-  targetBlock: {fileID: 2920591458561258004}
+  targetBlock: {fileID: 7293557983828613281}
   hideIfVisited: 0
   interactable:
     booleanRef: {fileID: 0}
@@ -14884,7 +14893,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 259.93564
     y: 1870.8273
-    width: 122
+    width: 121.95125
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -15037,7 +15046,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 254.42014
     y: 1931.4065
-    width: 138
+    width: 134.14636
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -15097,7 +15106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 2791
   indentLevel: 0
-  text: "You are a quiet type then. That\u2019s fine\n<size=35><color=#F1F4C9>< FIGHT
+  text: "You are a quiet type then. That\u2019s fine\n<size=35><color=#F1F4C9>< SKIP
     ></color></size>"
   description: 
   targetBlock: {fileID: 6147903628667214087}
@@ -15917,7 +15926,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 253.86505
     y: 2109.4587
-    width: 138
+    width: 140.24393
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -15939,6 +15948,7 @@ MonoBehaviour:
   - {fileID: 3176076701331719971}
   - {fileID: 957852667944631878}
   - {fileID: 169637152989138912}
+  - {fileID: 496076980508069721}
   - {fileID: 6845272458811835231}
 --- !u!114 &2313570104569825176
 MonoBehaviour:
@@ -16297,7 +16307,7 @@ MonoBehaviour:
   WaveName: Wave1
   IsRandomPos: 0
   removeFromWave: 1
-  SpawningPos: {x: 3, y: 7}
+  SpawningPos: {x: 3, y: 6}
 --- !u!114 &394985434353289030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16470,6 +16480,21 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
+--- !u!114 &496076980508069721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7618809006990338764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2cb08b74e6c6734484b062a16db3540, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 2860
+  indentLevel: 0
+  CharacterId: 1006
 --- !u!1 &8917722928403166728
 GameObject:
   m_ObjectHideFlags: 0
