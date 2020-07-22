@@ -598,9 +598,16 @@ public class BattleManagerScript : MonoBehaviour
         {
             yield return null;
         }
-
         zombiePs.transform.parent = null;
         zombiePs.SetActive(false);
+        if (CurrentSelectedCharacters.Where(r => r.Value.Character == null).ToList().Count > 0)
+        {
+            zombie.CurrentPlayerController = CurrentSelectedCharacters.Where(r => r.Value.Character == null).OrderBy(a => a.Value.NotPlayingTimer).First().Key;
+            SetCharOnBoardOnFixedPos(zombie.CurrentPlayerController, zombie.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeBattleTile(zombie.UMS.WalkingSide).Pos);
+            ((CharacterType_Script)zombie).SetCharSelected(true, zombie.CurrentPlayerController);
+            SelectCharacter(zombie.CurrentPlayerController, (CharacterType_Script)zombie);
+        }
+        
         zombie.CharActionlist.Add(CharacterActionType.SwitchCharacter);
 
     }
