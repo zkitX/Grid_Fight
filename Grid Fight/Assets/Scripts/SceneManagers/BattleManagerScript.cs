@@ -516,7 +516,7 @@ public class BattleManagerScript : MonoBehaviour
             List<BaseCharacter> res = AllCharactersOnField.Where(r => !r.IsOnField && r.CharInfo.HealthPerc > 0 && r.BuffsDebuffsList.Where(a => a.Stat == BuffDebuffStatsType.Zombification).ToList().Count == 0).ToList();
             if (res.Count > 0)
             {
-                StartCoroutine(CharacterType_Zombification_Co(zombie, duration, ais));
+                StartCoroutine(CharacterType_Zombification_Co((CharacterType_Script)zombie, duration, ais));
             }
             else
             {
@@ -535,21 +535,31 @@ public class BattleManagerScript : MonoBehaviour
 
     }
 
-    IEnumerator CharacterType_Zombification_Co(BaseCharacter zombie, float duration, List<ScriptableObjectAI> ais)
+    IEnumerator CharacterType_Zombification_Co(CharacterType_Script zombie, float duration, List<ScriptableObjectAI> ais)
     {
-        ControllerType playerController = CurrentSelectedCharacters.Where(r => r.Value.Character == zombie).First().Key;
-        CurrentSelectedCharacters[playerController].Character = null;
-        DeselectCharacter(zombie.CharInfo.CharacterID, zombie.UMS.Side, playerController);
-        Switch_LoadingNewCharacterInRandomPosition(zombie.CharInfo.CharacterSelection, playerController, true);
-        zombie.IsOnField = false;
+        if(CurrentSelectedCharacters.ContainsKey(zombie.CurrentPlayerController))
+        {
+            CurrentSelectedCharacters[zombie.CurrentPlayerController].Character = null;
+            DeselectCharacter(zombie, zombie.CurrentPlayerController);
+            Switch_LoadingNewCharacterInRandomPosition(zombie.CharInfo.CharacterSelection, zombie.CurrentPlayerController, true);
+            zombie.IsOnField = false;
+        }
 
         GameObject zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Chapter01_TohoraSea_Boss_MoonDrums_Loop);
         zombiePs.SetActive(true);
         zombiePs.transform.parent = zombie.SpineAnim.transform;
         zombiePs.transform.localPosition = Vector3.zero;
         zombiePs.transform.localRotation = Quaternion.Euler(zombie.UMS.Side == SideType.LeftSide ? Vector3.zero : zombiePs.transform.eulerAngles);
+        zombie.BuffsDebuffsList.ForEach(r =>
+        {
+            if (r.Stat != BuffDebuffStatsType.Zombification)
+            {
+                r.Duration = 0;
+                r.CurrentBuffDebuff.Stop_Co = true;
+            }
+        }
+        );
 
-        
 
         yield return RemoveCharacterFromBaord(zombie, true);
         zombie.CharActionlist.Remove(CharacterActionType.SwitchCharacter);
@@ -573,7 +583,6 @@ public class BattleManagerScript : MonoBehaviour
         zombiePs.transform.localPosition = Vector3.zero;
         zombiePs.SetActive(true);
         zombiefied.CharInfo.AIs = ais;
-        zombiefied.CharInfo.SetupChar();
         yield return WaveManagerScript.Instance.SetCharInPos(zombiefied, GridManagerScript.Instance.GetFreeBattleTile(zombiefied.UMS.WalkingSide, zombiefied.UMS.Pos), true);
         zombiefied.CharActionlist.Add(CharacterActionType.Move);
         while (zombie.BuffsDebuffsList.Where(r=> r.Stat == BuffDebuffStatsType.Zombification).ToList().Count > 0 && zombiefied.CharInfo.HealthPerc > 0)
@@ -594,6 +603,7 @@ public class BattleManagerScript : MonoBehaviour
         zombiePs.transform.localPosition = Vector3.zero;
         zombiefied.shotsLeftInAttack = 0;
         zombiefied.Attacking = false;
+        zombiefied.CharInfo.SetupChar();
         yield return RemoveZombieFromBaord(zombiefied);
         while (zombiefied.IsOnField)
         {
@@ -605,8 +615,8 @@ public class BattleManagerScript : MonoBehaviour
         {
             zombie.CurrentPlayerController = CurrentSelectedCharacters.Where(r => r.Value.Character == null).OrderBy(a => a.Value.NotPlayingTimer).First().Key;
             SetCharOnBoardOnFixedPos(zombie.CurrentPlayerController, zombie.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeBattleTile(zombie.UMS.WalkingSide).Pos);
-            ((CharacterType_Script)zombie).SetCharSelected(true, zombie.CurrentPlayerController);
-            SelectCharacter(zombie.CurrentPlayerController, (CharacterType_Script)zombie);
+            zombie.SetCharSelected(true, zombie.CurrentPlayerController);
+            SelectCharacter(zombie.CurrentPlayerController, zombie);
         }
         
         zombie.CharActionlist.Add(CharacterActionType.SwitchCharacter);
@@ -913,7 +923,7 @@ public class BattleManagerScript : MonoBehaviour
         {
             if (CurrentSelectedCharacters[playerController].Character.CharInfo.Health <= 0f)
             {
-                DeselectCharacter(cName, CurrentSelectedCharacters[playerController].Character.UMS.Side, playerController);
+                DeselectCharacter(CurrentSelectedCharacters[playerController].Character, playerController);
                 yield break;
             }
             yield return null;
@@ -989,7 +999,7 @@ public class BattleManagerScript : MonoBehaviour
             {
                 if (item.Value.Character != null && item.Value.Character == charToRemove)
                 {
-                    DeselectCharacter(charToRemove.CharInfo.CharacterID, charToRemove.UMS.Side, item.Key);
+                    DeselectCharacter((CharacterType_Script)charToRemove, item.Key);
                     item.Value.Character = null;
                 }
             }
@@ -1054,8 +1064,14 @@ public class BattleManagerScript : MonoBehaviour
 
         if (charToDeselect != null)
         {
-            charToDeselect.SetCharSelected(false, playerController);
+            DeselectCharacter(charToDeselect, playerController);
         }
+    }
+
+    public void DeselectCharacter(CharacterType_Script charToDeselect, ControllerType playerController)
+    {
+        charToDeselect.CurrentPlayerController = ControllerType.None;
+        charToDeselect.SetCharSelected(false, playerController);
     }
 
     //Used to select a char 
@@ -1378,7 +1394,7 @@ public class BattleManagerScript : MonoBehaviour
 
         if (deselction)
         {
-            DeselectCharacter(PrevCharacter.CharInfo.CharacterID, side, playerController);
+            DeselectCharacter(PrevCharacter, playerController);
         }
         //Debug.Log("Prev " + CurrentSelectedCharacters[playerController].NextSelectionChar.ToString());
         CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar = cs;

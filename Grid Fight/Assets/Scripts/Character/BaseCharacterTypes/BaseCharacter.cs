@@ -1055,7 +1055,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     {
                         yield return BattleManagerScript.Instance.WaitFor(0.5f, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
                         CharActionlist.Remove(CharacterActionType.SwitchCharacter);
-                        BattleManagerScript.Instance.DeselectCharacter(CharInfo.CharacterID, UMS.Side, CurrentPlayerController);
+                        BattleManagerScript.Instance.DeselectCharacter((CharacterType_Script)this, CurrentPlayerController);
                         BattleManagerScript.Instance.CurrentSelectedCharacters[CurrentPlayerController].Character = null;
                         UMS.IndicatorAnim.SetBool("indicatorOn", false);
                         if (BattleManagerScript.Instance.GetFreeRandomChar(UMS.Side, CurrentPlayerController) != null)
