@@ -1100,7 +1100,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                         //Apply Bleed
                         if (bdClass.CurrentBuffDebuff.Value < 0)
                         {
-                            ParticleManagerScript.Instance.FireParticlesInPosition(ParticleManagerScript.Instance.GetParticlePrefabByName(ParticlesType.Status_Debuff_Bleed), CharacterNameType.None, AttackParticlePhaseTypes.Cast, SpineAnim.transform.position, SideType.LeftSide, AttackInputType.Weak);
+                            ParticleManagerScript.Instance.FireParticlesInPosition(ParticleManagerScript.Instance.GetParticlePrefabByName(ParticlesType.Status_Debuff_Bleed), CharacterNameType.None, AttackParticlePhaseTypes.Cast, SpineAnim.transform.position, SideType.LeftSide, AttackInputType.Weak).transform.SetParent(SpineAnim.transform);
                         }
                     }
                     if (bdClass.Stat == BuffDebuffStatsType.Drain_Overtime)
