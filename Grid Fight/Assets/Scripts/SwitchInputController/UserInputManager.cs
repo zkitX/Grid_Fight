@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UserInputManager : MonoBehaviour
@@ -143,7 +144,10 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonLUpEvent(int player)
     {
         //Debug.Log(player + "  " + "L Up");
-        BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)player].OffsetSwap = Time.time + SwapDelay;
+        if(BattleManagerScript.Instance.CurrentSelectedCharacters.Keys.Contains((ControllerType)player))
+        {
+            BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)player].OffsetSwap = Time.time + SwapDelay;
+        }
     }
 
     private void Instance_ButtonZRUpEvent(int player)
@@ -162,8 +166,10 @@ public class UserInputManager : MonoBehaviour
         if (BattleManagerScript.Instance.InputControllerT == InputControllerType.SelectionOnLR)
         {
             //Debug.Log(Time.time);
-
-            BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)player].OffsetSwap = Time.time + SwapDelay;
+            if (BattleManagerScript.Instance.CurrentSelectedCharacters.Keys.Contains((ControllerType)player))
+            {
+                BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)player].OffsetSwap = Time.time + SwapDelay;
+            }
         }
         else if (BattleManagerScript.Instance.InputControllerT == InputControllerType.SelectionOnLR)
         {
@@ -295,7 +301,10 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonLPressedEvent(int player)
     {
         //Debug.Log(player + "  " + "L Press");
-        BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)player].OffsetSwap = Time.time + SwapDelay;
+        if (BattleManagerScript.Instance.CurrentSelectedCharacters.Keys.Contains((ControllerType)player))
+        {
+            BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)player].OffsetSwap = Time.time + SwapDelay;
+        }
     }
 
     private void Instance_ButtonZRPressedEvent(int player)
@@ -307,7 +316,10 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonRPressedEvent(int player)
     {
         //Debug.Log(player + "  " + "R Press");
-        BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)player].OffsetSwap = Time.time + SwapDelay;
+        if (BattleManagerScript.Instance.CurrentSelectedCharacters.Keys.Contains((ControllerType)player))
+        {
+            BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)player].OffsetSwap = Time.time + SwapDelay;
+        }
     }
 
     private void Instance_ButtonLeftPressedEvent(int player)
@@ -412,7 +424,10 @@ public class UserInputManager : MonoBehaviour
         //Debug.Log(player + "  " + "L Down");
         if (BattleManagerScript.Instance.InputControllerT == InputControllerType.SelectionOnLR)
         {
-            BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)player].OffsetSwap = Time.time + SwapDelay;
+            if (BattleManagerScript.Instance.CurrentSelectedCharacters.Keys.Contains((ControllerType)player))
+            {
+                BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)player].OffsetSwap = Time.time + SwapDelay;
+            }
             LoadSelectCharacter(CharacterSelectionType.Left, (ControllerType)player);
         }
     }
@@ -439,7 +454,10 @@ public class UserInputManager : MonoBehaviour
         }
         else if (BattleManagerScript.Instance.InputControllerT == InputControllerType.SelectionOnLR)
         {
-            BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)player].OffsetSwap = Time.time + SwapDelay;
+            if (BattleManagerScript.Instance.CurrentSelectedCharacters.Keys.Contains((ControllerType)player))
+            {
+                BattleManagerScript.Instance.CurrentSelectedCharacters[(ControllerType)player].OffsetSwap = Time.time + SwapDelay;
+            }
             LoadSelectCharacter(CharacterSelectionType.Right, (ControllerType)player);
         }
 

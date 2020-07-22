@@ -123,13 +123,8 @@ public class BattleManagerScript : MonoBehaviour
     public FungusDialogType _FungusState;
     public List<BattleTileScript> OccupiedBattleTiles = new List<BattleTileScript>();
     public GameObject CharacterBasePrefab;
-    public Dictionary<ControllerType, CurrentSelectedCharacterClass> CurrentSelectedCharacters = new Dictionary<ControllerType, CurrentSelectedCharacterClass>()
-    {
-        { ControllerType.Player1, new CurrentSelectedCharacterClass() },
-        { ControllerType.Player2, new CurrentSelectedCharacterClass() },
-        { ControllerType.Player3, new CurrentSelectedCharacterClass() },
-        { ControllerType.Player4, new CurrentSelectedCharacterClass() }
-    };
+    public Dictionary<ControllerType, CurrentSelectedCharacterClass> CurrentSelectedCharacters = new Dictionary<ControllerType, CurrentSelectedCharacterClass>();
+   
     public int maxPlayersUsed = 0;
 
     public List<ScriptableObjectCharacterPrefab> ListOfScriptableObjectCharacterPrefab = new List<ScriptableObjectCharacterPrefab>();
@@ -548,7 +543,7 @@ public class BattleManagerScript : MonoBehaviour
         Switch_LoadingNewCharacterInRandomPosition(zombie.CharInfo.CharacterSelection, playerController, true);
         zombie.IsOnField = false;
 
-        GameObject zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_MoonDrums_Loop);
+        GameObject zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Chapter01_TohoraSea_Boss_MoonDrums_Loop);
         zombiePs.SetActive(true);
         zombiePs.transform.parent = zombie.SpineAnim.transform;
         zombiePs.transform.localPosition = Vector3.zero;
@@ -572,7 +567,7 @@ public class BattleManagerScript : MonoBehaviour
         AttackType.Tile, BaseCharType.MinionType_Script, new List<CharacterActionType>(), LevelType.Novice), transform);
             zombiesList.Add(zombiefied);
         }
-        zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_MoonDrums_Loop);
+        zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Chapter01_TohoraSea_Boss_MoonDrums_Loop);
         zombiePs.transform.parent = zombiefied.SpineAnim.transform;
         zombiePs.transform.localPosition = Vector3.zero;
         zombiePs.SetActive(true);
@@ -592,7 +587,7 @@ public class BattleManagerScript : MonoBehaviour
 
         zombiePs.transform.parent = null;
         zombiePs.SetActive(false);
-        zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Stage01_Boss_MoonDrums_LoopCrumble);
+        zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Chapter01_TohoraSea_Boss_MoonDrums_LoopCrumble);
         zombiePs.SetActive(true);
         zombiePs.transform.parent = zombiefied.SpineAnim.transform;
         zombiePs.transform.localPosition = Vector3.zero;
@@ -1226,9 +1221,9 @@ public class BattleManagerScript : MonoBehaviour
     //Move selected char under determinated player
     public void MoveSelectedCharacterInDirection(ControllerType playerController, InputDirection dir)
     {
-        if (CurrentBattleState != BattleState.Battle) return;
+        if (CurrentBattleState != BattleState.Battle ) return;
 
-        if (CurrentSelectedCharacters[playerController].Character != null)
+        if (CurrentSelectedCharacters.Keys.Contains(playerController) && CurrentSelectedCharacters[playerController].Character != null)
         {
             if (CurrentSelectedCharacters[playerController].Character.UMS.UnitBehaviour == UnitBehaviourType.ControlledByPlayer)
             {
@@ -1254,11 +1249,21 @@ public class BattleManagerScript : MonoBehaviour
 
     public void Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType characterSelection, ControllerType playerController, bool isRandom = false, bool worksOnFungusPappets = false)
     {
+        if(!CurrentSelectedCharacters.ContainsKey(playerController))
+        {
+            for (int i = 0; i <= (int)playerController; i++)
+            {
+                if (!CurrentSelectedCharacters.ContainsKey((ControllerType)i))
+                {
+                    CurrentSelectedCharacters.Add((ControllerType)i, new CurrentSelectedCharacterClass());
+                }
+            }
+        }
+
         if(CurrentSelectedCharacters[playerController].Character != null && !CurrentSelectedCharacters[playerController].Character.CharActionlist.Contains(CharacterActionType.SwitchCharacter))
         {
             return;
         }
-
         SideType side = GetSideFromPlayer(new List<ControllerType> { playerController });
         BaseCharacter cb = new BaseCharacter();
         CharacterSelectionType cs = CharacterSelectionType.Up;
@@ -1391,7 +1396,7 @@ public class BattleManagerScript : MonoBehaviour
 
     public void StopChargingAttack(ControllerType controllerType)
     {
-        if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null)
+        if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null && CurrentSelectedCharacters.Keys.Contains(controllerType))
         {
             CurrentSelectedCharacters[controllerType].Character.isSpecialStop = true;
             Debug.Log("<b>FINISHED CANCELLING <color=red>CHARGE ATTACK</color></b>");
@@ -1401,7 +1406,7 @@ public class BattleManagerScript : MonoBehaviour
 
     public void StartChargingAttack(ControllerType controllerType, AttackInputType atk)
     {
-        if (CurrentBattleState == BattleState.Battle)
+        if (CurrentBattleState == BattleState.Battle && CurrentSelectedCharacters.Keys.Contains(controllerType))
         {
             if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null)
             {
@@ -1411,7 +1416,7 @@ public class BattleManagerScript : MonoBehaviour
     }
     public void StartQuickAttack(ControllerType controllerType)
     {
-        if (CurrentBattleState == BattleState.Battle)
+        if (CurrentBattleState == BattleState.Battle && CurrentSelectedCharacters.Keys.Contains(controllerType))
         {
             if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null)
             {
@@ -1424,7 +1429,7 @@ public class BattleManagerScript : MonoBehaviour
     {
         if (CurrentBattleState != BattleState.Battle) return;
 
-        if (CurrentSelectedCharacters[playerController].Character != null)
+        if (CurrentSelectedCharacters.Keys.Contains(playerController) && CurrentSelectedCharacters[playerController].Character != null)
         {
             CurrentSelectedCharacters[playerController].Character.CharacterInputHandler(InputActionType.Defend);
         }
@@ -1432,7 +1437,7 @@ public class BattleManagerScript : MonoBehaviour
 
     public void CurrentCharacterStopDefending(ControllerType playerController)
     {
-        if (CurrentSelectedCharacters[playerController].Character != null)
+        if (CurrentSelectedCharacters.Keys.Contains(playerController) && CurrentSelectedCharacters[playerController].Character != null)
         {
             CurrentSelectedCharacters[playerController].Character.CharacterInputHandler(InputActionType.Defend_Stop);
         }

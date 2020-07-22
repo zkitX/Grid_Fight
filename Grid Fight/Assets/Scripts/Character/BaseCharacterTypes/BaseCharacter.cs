@@ -767,7 +767,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 UMS.Pos = new List<Vector2Int>();
                 foreach (BattleTileScript item in currentBattleTilesToCheck)
                 {
-                    Debug.LogError(item.Pos + "               " + BattleTileStateType.Occupied);
+                    //Debug.LogError(item.Pos + "               " + BattleTileStateType.Occupied);
                     GridManagerScript.Instance.SetBattleTileState(item.Pos, BattleTileStateType.Occupied);
                     UMS.Pos.Add(item.Pos);
                 }
@@ -961,7 +961,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public void Buff_DebuffCo(Buff_DebuffClass bdClass)
     {
-        if(!SpineAnim.CurrentAnim.Contains("Reverse"))
+        if(!SpineAnim.CurrentAnim.Contains("Reverse") && CharInfo.HealthPerc > 0)
         {
             BuffDebuffClass item = BuffsDebuffsList.Where(r => r.Stat == bdClass.Effect.StatsToAffect).FirstOrDefault();
             string[] newBuffDebuff = bdClass.Effect.Name.Split('_');
@@ -1043,13 +1043,21 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                         {
                             yield return BattleManagerScript.Instance.WaitFor(0.5f, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
 
-                            CharActionlist.Remove(CharacterActionType.SwitchCharacter);
-                            BattleManagerScript.Instance.DeselectCharacter(CharInfo.CharacterID, UMS.Side, CurrentPlayerController);
-                            BattleManagerScript.Instance.CurrentSelectedCharacters[CurrentPlayerController].Character = null;
-                            CharacterType_Script cb = (CharacterType_Script)BattleManagerScript.Instance.GetFreeRandomChar(UMS.Side, CurrentPlayerController);
-                            BattleManagerScript.Instance.SetCharOnBoardOnFixedPos(CurrentPlayerController, cb.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeBattleTile(UMS.WalkingSide).Pos);
-                            cb.SetCharSelected(true, CurrentPlayerController);
-                            BattleManagerScript.Instance.SelectCharacter(CurrentPlayerController, cb);
+                            if (BattleManagerScript.Instance.GetFreeRandomChar(UMS.Side, CurrentPlayerController) != null)
+                            {
+                                CharActionlist.Remove(CharacterActionType.SwitchCharacter);
+                                BattleManagerScript.Instance.DeselectCharacter(CharInfo.CharacterID, UMS.Side, CurrentPlayerController);
+                                BattleManagerScript.Instance.CurrentSelectedCharacters[CurrentPlayerController].Character = null;
+                                CharacterType_Script cb = (CharacterType_Script)BattleManagerScript.Instance.GetFreeRandomChar(UMS.Side, CurrentPlayerController);
+                                BattleManagerScript.Instance.SetCharOnBoardOnFixedPos(CurrentPlayerController, cb.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeBattleTile(UMS.WalkingSide).Pos);
+                                cb.SetCharSelected(true, CurrentPlayerController);
+                                UMS.IndicatorAnim.SetBool("indicatorOn", false);
+                                BattleManagerScript.Instance.SelectCharacter(CurrentPlayerController, cb);
+                            }
+                            else
+                            {
+                                CharActionlist.Remove(CharacterActionType.SwitchCharacter);
+                            }
                         }
                     }
                 }
@@ -1134,7 +1142,17 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                         if (bdClass.CurrentBuffDebuff.Value == 0 && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
                         {
                             CharActionlist.Add(CharacterActionType.SwitchCharacter);
-                            yield return BattleManagerScript.Instance.RemoveCharacterFromBaord(this, true);
+                            if (BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r=> r.Value.Character == null).ToList().Count > 0)
+                            {
+                                CurrentPlayerController = BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == null).First().Key;
+                                BattleManagerScript.Instance.SetCharOnBoardOnFixedPos(CurrentPlayerController, CharInfo.CharacterID, GridManagerScript.Instance.GetFreeBattleTile(UMS.WalkingSide).Pos);
+                                ((CharacterType_Script)this).SetCharSelected(true, CurrentPlayerController);
+                                BattleManagerScript.Instance.SelectCharacter(CurrentPlayerController, (CharacterType_Script)this);
+                            }
+                            else
+                            {
+                                yield return BattleManagerScript.Instance.RemoveCharacterFromBaord(this, true);
+                            }
                         }
                         break;
                     case BuffDebuffStatsType.SpeedStats_MovementSpeed:

@@ -21,6 +21,16 @@ public class CallSelectCharacter : Command
     protected virtual void CallTheMethod()
     {
         CharacterType_Script character = (CharacterType_Script)BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == characterID).FirstOrDefault();
+        if (!BattleManagerScript.Instance.CurrentSelectedCharacters.ContainsKey(playerController))
+        {
+            for (int i = 0; i <= (int)playerController; i++)
+            {
+                if(!BattleManagerScript.Instance.CurrentSelectedCharacters.ContainsKey((ControllerType)i))
+                {
+                    BattleManagerScript.Instance.CurrentSelectedCharacters.Add((ControllerType)i, new CurrentSelectedCharacterClass());
+                }
+            }
+        }
         BattleManagerScript.Instance.SelectCharacter(playerController, character);
         NewIManager.Instance.SetSelected(true, playerController, characterID);
     }
