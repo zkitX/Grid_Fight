@@ -68,12 +68,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioProfile: {fileID: 11400000, guid: 9c7f93ca9d4ed0d43a6918dd9d582962, type: 2}
   MovementMultiplier: 1
-  _BattleSpeed: 0
+  _BattleSpeed: 1
   _CurrentBattleState: 0
   _FungusState: 0
   OccupiedBattleTiles: []
   CharacterBasePrefab: {fileID: 6286762205357209611, guid: 8fcf2c7adbb50844c8b549242125f32d,
     type: 3}
+  maxPlayersUsed: 0
   ListOfScriptableObjectCharacterPrefab:
   - {fileID: 11400000, guid: fe807e3c99eb90d41b5bb9f9b00e6e61, type: 2}
   - {fileID: 11400000, guid: 380ec67c02d34ac4081fa7fa11ea9f5f, type: 2}
@@ -211,159 +212,6 @@ MonoBehaviour:
   partialDefenceCost: 0.7
   fullDefenceCost: 1
   staminaRegenOnPerfectBlock: 5
-  cameraTravelCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0.02220983
-      outSlope: 0.02220983
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.6808758
-    - serializedVersion: 3
-      time: 0.10001354
-      value: 0.012675673
-      inSlope: 0.4191122
-      outSlope: 0.4191122
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.4513275
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.7902848
-      value: 0.9608374
-      inSlope: 0.7796381
-      outSlope: 0.7796381
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.44403103
-      outWeight: 1
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0.009599542
-      outSlope: 0.009599542
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.8770761
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  characterJumpCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 4.530805
-      outSlope: 4.530805
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.26912895
-    - serializedVersion: 3
-      time: 0.077753834
-      value: 0.62963474
-      inSlope: 2.601174
-      outSlope: 2.601174
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.10208023
-    - serializedVersion: 3
-      time: 0.49976987
-      value: 0.99814004
-      inSlope: 0.0016213584
-      outSlope: 0.0016213584
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.49110374
-    - serializedVersion: 3
-      time: 0.9289317
-      value: 0.64605826
-      inSlope: -2.6376877
-      outSlope: -2.6376877
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.21849483
-      outWeight: 0.589597
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -6.0882745
-      outSlope: -6.0882745
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.15530764
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jumpAnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 2
-      inSlope: -1.1560073
-      outSlope: -1.1560073
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.21328121
-    - serializedVersion: 3
-      time: 0.26784235
-      value: 1.2408512
-      inSlope: -5.6097584
-      outSlope: -4.9901223
-      tangentMode: 1
-      weightedMode: 0
-      inWeight: 0.13480258
-      outWeight: 0.10544875
-    - serializedVersion: 3
-      time: 0.6000595
-      value: 0.0047302246
-      inSlope: -0.48672315
-      outSlope: -0.072991215
-      tangentMode: 1
-      weightedMode: 0
-      inWeight: 0.16405858
-      outWeight: 0.2518496
-    - serializedVersion: 3
-      time: 0.7
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.7844162
-      value: 0.44525254
-      inSlope: 7.8808002
-      outSlope: 7.8808002
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.18757847
-    - serializedVersion: 3
-      time: 0.9
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   difficultyScales:
   - Name: 1 Player
     enemySpawnScaler: 1
@@ -512,6 +360,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 256730208125820099}
     m_Modifications:
+    - target: {fileID: 1072692802108931392, guid: 730c9cdded2811142b3b17f531383548,
+        type: 3}
+      propertyPath: m_Name
+      value: StatisticManager
+      objectReference: {fileID: 0}
     - target: {fileID: 8527285901987777838, guid: 730c9cdded2811142b3b17f531383548,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -566,11 +419,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1072692802108931392, guid: 730c9cdded2811142b3b17f531383548,
-        type: 3}
-      propertyPath: m_Name
-      value: StatisticManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 730c9cdded2811142b3b17f531383548, type: 3}

@@ -22,7 +22,7 @@ public class BattleManagerScript : MonoBehaviour
 
 
     public float MovementMultiplier = 1;
-
+    private float prevValue = 1;
     public BattleState CurrentBattleState
     {
         get
@@ -35,7 +35,7 @@ public class BattleManagerScript : MonoBehaviour
             if(value == BattleState.FungusPuppets)
             {
                 ResetAllActiveChars();
-                BattleSpeed = 1;
+                BattleSpeed = prevValue;
             }
             else if(value == BattleState.Pause)
             {
@@ -43,7 +43,7 @@ public class BattleManagerScript : MonoBehaviour
             }
             else if (value == BattleState.Battle)
             {
-                BattleSpeed = 1;
+                BattleSpeed = prevValue;
             }
 
 
@@ -89,6 +89,7 @@ public class BattleManagerScript : MonoBehaviour
         }
         set
         {
+            prevValue = _BattleSpeed;
             _BattleSpeed = value;
             CurrentBattleSpeedChangedEvent?.Invoke(_BattleSpeed);
             if(_BattleSpeed != 1)
