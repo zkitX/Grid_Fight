@@ -106,7 +106,7 @@ public class BulletScript : MonoBehaviour
             res = Vector3.Lerp(offset, destination, timer);
 
             res.y = BulletBehaviourInfo != null ? BulletBehaviourInfo.Trajectory_Y.Evaluate(timer) + res.y : BulletBehaviourInfoTile.Trajectory_Y.Evaluate(timer) + res.y;
-            res.z = BulletBehaviourInfo != null ? BulletBehaviourInfo.Trajectory_Z.Evaluate(timer) + res.z : BulletBehaviourInfoTile.Trajectory_Z.Evaluate(timer) + res.y;
+            res.z = BulletBehaviourInfo != null ? BulletBehaviourInfo.Trajectory_Z.Evaluate(timer) + res.z : BulletBehaviourInfoTile.Trajectory_Z.Evaluate(timer) + res.z;
 
             transform.position = res;
             timer += BattleManagerScript.Instance.FixedDeltaTime / BulletDuration;
