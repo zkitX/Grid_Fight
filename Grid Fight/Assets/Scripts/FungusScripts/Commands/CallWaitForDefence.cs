@@ -15,6 +15,7 @@ public class CallWaitForDefence : Command
     {
         BattleManagerScript.Instance.CurrentSelectedCharacters[ControllerType.Player1].Character.CurrentCharStartingActionEvent += Character_CurrentCharStartingActionEvent;
         StartCoroutine(Defence());
+        Continue();
     }
 
     private void Character_CurrentCharStartingActionEvent(ControllerType playerController, CharacterActionType action)
@@ -40,7 +41,6 @@ public class CallWaitForDefence : Command
             yield return null;
         }
         BattleManagerScript.Instance.BattleSpeed = 1;
-        Continue();
     }
 
     #region Public members
