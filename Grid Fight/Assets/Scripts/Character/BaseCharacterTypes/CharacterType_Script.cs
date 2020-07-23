@@ -318,7 +318,7 @@ public class CharacterType_Script : BaseCharacter
             {
                 yield break;
             }
-            FireActionEvenet(CharacterActionType.StrongAttack);
+           
             isSpecialLoading = true;
             chargingAttackTimer = 0;
             currentAttackPhase = AttackPhasesType.Start;
@@ -496,7 +496,7 @@ public class CharacterType_Script : BaseCharacter
         {
             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingRelease, AudioBus.LowPrio, transform);
         }
-
+        FireActionEvenet(CharacterActionType.StrongAttack);
         SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
 
         ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.CastActivationPS, CharInfo.CharacterID, AttackParticlePhaseTypes.CastActivation, transform.position, UMS.Side, nextAttack.AttackInput);

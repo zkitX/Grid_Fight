@@ -113,6 +113,7 @@ public class ItemSpawnerManagerScript : MonoBehaviour
             item = Instantiate(ItemGO, transform).GetComponent<ItemsPowerUPsInfoScript>();
             SpawnedItems.Add(item);
         }
+        item.ItemPickedUpEvent += Item_ItemPickedUpEvent;
         item.gameObject.SetActive(true);
         item.SetItemPowerUp(powerUp, GridManagerScript.Instance.GetBattleTile(pos).transform.position, pos, duration);
     }
