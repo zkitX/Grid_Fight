@@ -1656,7 +1656,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public void FireActionEvenet(CharacterActionType action)
     {
-        CurrentCharStartingActionEvent?.Invoke(CurrentPlayerController, CharacterActionType.StrongAttack);
+        CurrentCharStartingActionEvent?.Invoke(CurrentPlayerController, action);
     }
 }
 
