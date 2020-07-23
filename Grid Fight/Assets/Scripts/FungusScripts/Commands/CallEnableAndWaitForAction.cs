@@ -13,7 +13,7 @@ public class CallEnableAndWaitForAction : Command
 {
     public ControllerType PlayerController;
     public CharacterActionType Action;
-
+    public bool DeleteActionOnceUsed = true;
     public float WaitingTime = 1;
 
     #region Public members
@@ -30,6 +30,10 @@ public class CallEnableAndWaitForAction : Command
     {
         if(Action == action)
         {
+            if(DeleteActionOnceUsed)
+            {
+                BattleManagerScript.Instance.CurrentSelectedCharacters[PlayerController].Character.CharActionlist.Remove(action);
+            }
             StartCoroutine(WaitFor());
         }
     }
@@ -37,6 +41,7 @@ public class CallEnableAndWaitForAction : Command
     IEnumerator WaitFor()
     {
         yield return BattleManagerScript.Instance.WaitFor(WaitingTime, () => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
+        BattleManagerScript.Instance.CurrentSelectedCharacters[PlayerController].Character.CurrentCharStartingActionEvent -= Character_CurrentCharStartingActionEvent;
         Continue();
     }
 

@@ -33,6 +33,7 @@ public class CallItemIsPickedAndWait : Command
     IEnumerator WaitFor()
     {
         yield return BattleManagerScript.Instance.WaitFor(WaitingTime, () => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
+        ItemSpawnerManagerScript.Instance.ItemPickedUpEvent -= Instance_ItemPickedUpEvent;
         Continue();
     }
 
