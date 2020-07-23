@@ -27,10 +27,6 @@ public class UITutorialScript : MonoBehaviour
     {
         AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Menus_PressButton, AudioBus.MidPrio);
 
-        if (BattleManagerScript.Instance.CurrentBattleState == BattleState.FungusPuppets)
-        {
-            return;
-        }
         if (gameObject.activeInHierarchy)
         {
             BattleManagerScript.Instance.CurrentBattleState = previousBattleState;

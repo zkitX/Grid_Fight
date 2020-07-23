@@ -35,6 +35,7 @@ public class BattleManagerScript : MonoBehaviour
             if(value == BattleState.FungusPuppets)
             {
                 ResetAllActiveChars();
+                BattleSpeed = 1;
             }
             else if(value == BattleState.Pause)
             {

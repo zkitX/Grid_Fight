@@ -50,13 +50,15 @@ public class GridFightSayDialog : SayDialog
 
     private void Instance_ButtonAUpEvent(int player)
     {
-        if (!isAnimCompleted)
+        if(BattleManagerScript.Instance.FungusState == FungusDialogType.Dialog && BattleManagerScript.Instance.CurrentBattleState != BattleState.Pause)
         {
-            isAnimCompleted = true;
-            AudioManagerMk2.Instance?.PlaySound(AudioSourceType.Music, BattleManagerScript.Instance.AudioProfile.Dialogue_TextEnd, AudioBus.HighPrio); //GIORGIO: AudioSourceType is Music because Fungus would kill it when stopping text loop
+            if (!isAnimCompleted)
+            {
+                isAnimCompleted = true;
+                AudioManagerMk2.Instance?.PlaySound(AudioSourceType.Music, BattleManagerScript.Instance.AudioProfile.Dialogue_TextEnd, AudioBus.HighPrio); //GIORGIO: AudioSourceType is Music because Fungus would kill it when stopping text loop
+            }
+            AnimSpeedChanger(10);
         }
-
-        AnimSpeedChanger(10);
     }
 
     private void Item_AnimationInfoScriptAnimationCompletedEvent()

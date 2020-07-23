@@ -180,7 +180,7 @@ public class GridFightMenuDialog : MenuDialog
 
     private void Instance_LeftJoystickUsedEvent(int player, InputDirection dir)
     {
-        if (Time.time > TimeOffset + CoolDown && isMenuReady && (BattleManagerScript.Instance == null || BattleManagerScript.Instance.FungusState == FungusDialogType.Menu))
+        if (Time.time > TimeOffset + CoolDown && isMenuReady && BattleManagerScript.Instance.FungusState == FungusDialogType.Menu && BattleManagerScript.Instance.CurrentBattleState != BattleState.Pause)
         {
             if(SelectionIndex >=0 && SelectionIndex <= Boxes.Where(r => r.gameObject.activeInHierarchy).ToList().Count)
             {
@@ -214,7 +214,7 @@ public class GridFightMenuDialog : MenuDialog
 
     private void Instance_ButtonADownEvent(int player)
     {
-        if(isMenuReady && (BattleManagerScript.Instance == null || BattleManagerScript.Instance.FungusState == FungusDialogType.Menu))
+        if(isMenuReady && BattleManagerScript.Instance.FungusState == FungusDialogType.Menu && BattleManagerScript.Instance.CurrentBattleState != BattleState.Pause)
         {
             Boxes[SelectionIndex].NextBlock.StartExecution();
 
