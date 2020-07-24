@@ -38,7 +38,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5937666513028282135}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09b0c490261b08d4dbe285554c10a1e3, type: 3}
   m_Name: 
@@ -98,7 +98,7 @@ MonoBehaviour:
         KillWaveIfCharDie: 0
         Health: {x: 70, y: 85}
         HealthRegeneration: {x: 1, y: 1}
-        BaseDamage: {x: 5, y: 9}
+        BaseDamage: {x: 5, y: 6}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
         BaseSpeed: {x: 1, y: 1}
@@ -196,9 +196,9 @@ MonoBehaviour:
       TypeOfCharacter:
         CharacterName: 1004
         KillWaveIfCharDie: 0
-        Health: {x: 75, y: 85}
+        Health: {x: 85, y: 100}
         HealthRegeneration: {x: 1, y: 1}
-        BaseDamage: {x: 6, y: 9}
+        BaseDamage: {x: 6, y: 8}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
         BaseSpeed: {x: 1, y: 1}
@@ -285,31 +285,90 @@ MonoBehaviour:
       - {x: 4, y: 6}
   - name: Wave3
     IsRandom: 0
-    MaxEnemyOnScreen: 6
-    AbsoluteMaxEnemyOnScreen: 0
+    MaxEnemyOnScreen: 3
+    AbsoluteMaxEnemyOnScreen: 3
     DelayBetweenChars: 1
     ListOfEnemy:
-    - name: Alanda
-      NPCType: 1
+    - name: MechDog
+      NPCType: 0
       NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 1086
+        CharacterName: 1001
         KillWaveIfCharDie: 0
-        Health: {x: 250, y: 250}
+        Health: {x: 38, y: 42}
         HealthRegeneration: {x: 1, y: 1}
-        BaseDamage: {x: 12, y: 12}
+        BaseDamage: {x: 3, y: 4}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 0.8, y: 0.8}
+        BaseSpeed: {x: 1, y: 1}
         AttackSpeedRatio: {x: 12, y: 15}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 0.8, y: 0.8}
+        MovementSpeed: {x: 1.3, y: 1.3}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
         AIs:
-        - {fileID: 11400000, guid: b2be41975219f0a42b20ef4a45c3654d, type: 2}
-        - {fileID: 11400000, guid: af6d47bcebe80a64d8318e13cf450976, type: 2}
+        - {fileID: 11400000, guid: 33a26711db0d8a64191fcb6c09459f66, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Chander
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1003
+        KillWaveIfCharDie: 0
+        Health: {x: 30, y: 33}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 3, y: 4}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 8e83105305a56424a8109df5a527714f, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: BigHead
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1000
+        KillWaveIfCharDie: 0
+        Health: {x: 40, y: 45}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 4, y: 5}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 1063a5f53e7db04489f7ab61006bedee, type: 2}
         AddAttacks: 0
         AttacksToAdd: []
       AreThereStartingEnemy: 0
@@ -322,8 +381,8 @@ MonoBehaviour:
       - {x: 4, y: 6}
   - name: WaveKoniko
     IsRandom: 0
-    MaxEnemyOnScreen: 4
-    AbsoluteMaxEnemyOnScreen: 0
+    MaxEnemyOnScreen: 3
+    AbsoluteMaxEnemyOnScreen: 3
     DelayBetweenChars: 1
     ListOfEnemy:
     - name: Koniko
@@ -332,21 +391,82 @@ MonoBehaviour:
       TypeOfCharacter:
         CharacterName: 1006
         KillWaveIfCharDie: 0
-        Health: {x: 600, y: 600}
+        Health: {x: 80, y: 90}
         HealthRegeneration: {x: 1, y: 1}
-        BaseDamage: {x: 22, y: 23}
+        BaseDamage: {x: 6, y: 9}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 0.8, y: 0.8}
+        BaseSpeed: {x: 1.3, y: 1.3}
         AttackSpeedRatio: {x: 12, y: 15}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 0.8, y: 0.8}
+        MovementSpeed: {x: 1.5, y: 1.5}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
         AIs:
-        - {fileID: 11400000, guid: b2be41975219f0a42b20ef4a45c3654d, type: 2}
-        - {fileID: 11400000, guid: af6d47bcebe80a64d8318e13cf450976, type: 2}
+        - {fileID: 11400000, guid: 3c4d731e3355c284ca3386f0f2c52aa8, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: e9a90a7e45106d74cb5ef8eee4cf1a34, type: 2}
+        - {fileID: 11400000, guid: 1d60a47fcf306de4fb82b641f8e3d53a, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: BigHead
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1000
+        KillWaveIfCharDie: 0
+        Health: {x: 40, y: 45}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 4, y: 5}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 1063a5f53e7db04489f7ab61006bedee, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Chander
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1003
+        KillWaveIfCharDie: 0
+        Health: {x: 30, y: 33}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 3, y: 4}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 8e83105305a56424a8109df5a527714f, type: 2}
         AddAttacks: 0
         AttacksToAdd: []
       AreThereStartingEnemy: 0
