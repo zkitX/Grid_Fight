@@ -65,7 +65,7 @@ public class Grid_UIInputActivators : MonoBehaviour
 
     public void DoActionByName(string identifier)
     {
-        if (!isActiveAndEnabled) return;
+        if (!isActiveAndEnabled || !Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.DirectButton)) return;
 
         List<UI_ActionsClass> actions = new List<UI_ActionsClass>();
 

@@ -114,6 +114,7 @@ public class Grid_UIButton : MonoBehaviour
 
     public virtual void PressAction()
     {
+        if (!isActiveAndEnabled) return;
         if (PressEventsSequencer != null) StopCoroutine(PressEventsSequencer);
         PressEventsSequencer = SequenceEvents(PressActions);
         StartCoroutine(PressEventsSequencer);

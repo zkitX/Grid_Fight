@@ -95,5 +95,11 @@ public class StageButton : MonoBehaviour
         Grid_UIBriefing.Instance.gameObject.SetActive(true);
         Grid_UIBriefing.Instance.SetupBriefing(info.stageProfile);
         Grid_UINavigator.Instance.TriggerUIActivator("WorldBriefingTransition");
+        WorldStageSelect.Instance.ShowStageButtonsNames(false);
+    }
+
+    public void ShowStageText(bool state)
+    {
+        textDisplay.gameObject.SetActive(state);
     }
 }

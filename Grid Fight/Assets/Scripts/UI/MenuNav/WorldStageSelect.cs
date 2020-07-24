@@ -31,4 +31,12 @@ public class WorldStageSelect : MonoBehaviour
             btn.ProcessLockState();
         }
     }
+
+    public void ShowStageButtonsNames(bool state)
+    {
+        foreach (StageButton btn in stageBtns)
+        {
+            btn.ShowStageText(state);
+        }
+    }
 }

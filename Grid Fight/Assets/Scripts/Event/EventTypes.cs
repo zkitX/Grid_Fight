@@ -60,6 +60,8 @@ public enum UI_ActionTypes
     EnableCollection,
     SwitchScene,
     ResolutionMenuChange,
+    DeselectAllButtons,
+    TEMP_DemoVerWorldStuffAnimate,
 }
 
 public enum UI_FocusTypes

@@ -52,6 +52,12 @@ public class Grid_UIActions
             case (UI_ActionTypes.ResolutionMenuChange):
                 yield return ResolutionMenuChange();
                 break;
+            case (UI_ActionTypes.DeselectAllButtons):
+                yield return DeselectAllButtons();
+                break;
+            case (UI_ActionTypes.TEMP_DemoVerWorldStuffAnimate):
+                yield return TEMP_DemoVerWorldStuffAnimate();
+                break;
             default:
                 break;
         }
@@ -94,6 +100,10 @@ public class Grid_UIActions
                 return "Switch scene to " + sceneSwitchType.ToString();
             case (UI_ActionTypes.ResolutionMenuChange):
                 return resolutionMenuChange.ToString() + " the resolution";
+            case (UI_ActionTypes.DeselectAllButtons):
+                return "Deselect All Buttons";
+            case (UI_ActionTypes.TEMP_DemoVerWorldStuffAnimate):
+                return "Animate the world sprites";
             default:
                 return actionType.ToString();
         }
@@ -219,6 +229,7 @@ public class Grid_UIActions
     [ConditionalField("actionType", compareValues: UI_ActionTypes.SetNavigationSystem)] public MenuNavigationType navigationType3 = MenuNavigationType.None;
     [ConditionalField("actionType", compareValues: UI_ActionTypes.SetNavigationSystem)] public bool navigationState3 = false;
     [ConditionalField("actionType", compareValues: UI_ActionTypes.SetNavigationSystem)] public bool setNavigationAbsolute = false;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetNavigationSystem)] public Grid_UIButton buttonToFocusOn = null;
     IEnumerator SetNavigationSystem()
     {
         if (setNavigationAbsolute)
@@ -232,14 +243,15 @@ public class Grid_UIActions
             Grid_UINavigator.Instance.SetNavigationAbsolute(
                 navigationState1 ? navigationType1 : MenuNavigationType.None,
                 navigationState2 ? navigationType2 : MenuNavigationType.None,
-                navigationState3 ? navigationType3 : MenuNavigationType.None
+                navigationState3 ? navigationType3 : MenuNavigationType.None,
+                btnToFocus: buttonToFocusOn
                 );
             yield break;
         }
 
-        Grid_UINavigator.Instance.SetNavigation(navigationType1, navigationState1);
-        Grid_UINavigator.Instance.SetNavigation(navigationType2, navigationState2);
-        Grid_UINavigator.Instance.SetNavigation(navigationType3, navigationState3);
+        Grid_UINavigator.Instance.SetNavigation(navigationType1, navigationState1, buttonToFocusOn);
+        Grid_UINavigator.Instance.SetNavigation(navigationType2, navigationState2, buttonToFocusOn);
+        Grid_UINavigator.Instance.SetNavigation(navigationType3, navigationState3, buttonToFocusOn);
 
         yield return null;
     }
@@ -311,6 +323,19 @@ public class Grid_UIActions
             default:
                 break;
         }
+        yield return null;
+    }
+
+    IEnumerator DeselectAllButtons()
+    {
+        Grid_UINavigator.Instance.DeselectAllButtons(evenCurrentSelected: true);
+        yield return null;
+    }
+
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.TEMP_DemoVerWorldStuffAnimate)] public bool DemoStuffInOut = false;
+    IEnumerator TEMP_DemoVerWorldStuffAnimate()
+    {
+        if (DemoVerBGManager.Instance != null) DemoVerBGManager.Instance.FlyInOut(DemoStuffInOut);
         yield return null;
     }
 }

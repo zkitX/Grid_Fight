@@ -106,7 +106,7 @@ public class Grid_UINavigator : MonoBehaviour
         foreach (MenuNavigationType nav in navs) if (!CanNavigate(nav)) canNav = false;
         return canNav;
     }
-    public void SetNavigation(MenuNavigationType navType, bool state)
+    public void SetNavigation(MenuNavigationType navType, bool state, Grid_UIButton btnToFocusOn = null)
     {
         if (navType == MenuNavigationType.None || navType == MenuNavigationType.Unassigned) return;
 
@@ -131,7 +131,7 @@ public class Grid_UINavigator : MonoBehaviour
     }
     public void SetNavigationAbsolute(MenuNavigationType type1 = MenuNavigationType.None, 
         MenuNavigationType type2 = MenuNavigationType.None, MenuNavigationType type3 = MenuNavigationType.None, 
-        MenuNavigationType type4 = MenuNavigationType.None, MenuNavigationType type5 = MenuNavigationType.None)
+        MenuNavigationType type4 = MenuNavigationType.None, MenuNavigationType type5 = MenuNavigationType.None, Grid_UIButton btnToFocus = null)
     {
         navTypes = new List<MenuNavigationType>();
         if (type1 != MenuNavigationType.None) navTypes.Add(type1);
@@ -139,7 +139,7 @@ public class Grid_UINavigator : MonoBehaviour
         if (type3 != MenuNavigationType.None) navTypes.Add(type3);
         if (type4 != MenuNavigationType.None) navTypes.Add(type4);
         if (type5 != MenuNavigationType.None) navTypes.Add(type5);
-        UpdateNavigationInput();
+        UpdateNavigationInput(btnToFocus);
     }
    // [HideInInspector] public MenuNavigationType navType = MenuNavigationType.None;
 
@@ -160,7 +160,7 @@ public class Grid_UINavigator : MonoBehaviour
 
     public void EnableCollection(string collectionID, bool state)
     {
-        if (IsCollectionActive(collectionID) == state) return;
+        if (IsCollectionActive(collectionID) == state || collectionID == "") return;
 
         if (state)
         {
@@ -349,11 +349,11 @@ public class Grid_UINavigator : MonoBehaviour
         if (!buttons[index].DeselectAction(playDeselectEvents)) return;
     }
 
-    public void DeselectAllButtons(bool playDeselectEventsForOtherButtons = true)
+    public void DeselectAllButtons(bool playDeselectEventsForOtherButtons = true, bool evenCurrentSelected = false)
     {
         for(int i = 0; i < buttons.Length; i++)
         {
-            if(!(selectedButtonIndex == i)) DeselectButton(i, playDeselectEventsForOtherButtons);
+            if(selectedButtonIndex != i || evenCurrentSelected) DeselectButton(i, playDeselectEventsForOtherButtons);
         }
     }
 

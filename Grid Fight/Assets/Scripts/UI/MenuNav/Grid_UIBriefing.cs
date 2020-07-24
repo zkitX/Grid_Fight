@@ -10,7 +10,7 @@ public class Grid_UIBriefing : MonoBehaviour
     public static Grid_UIBriefing Instance;
     public TextMeshProUGUI title;
     public TextMeshProUGUI description;
-    public Image[] squadImages;
+    public Grid_UISpineCharDisplay[] squadSpines;
 
     private void Awake()
     {
@@ -28,16 +28,9 @@ public class Grid_UIBriefing : MonoBehaviour
 
     public void UpdateSquadImages()
     {
-        for (int i = 0; i < squadImages.Length; i++)
+        for (int i = 0; i < squadSpines.Length; i++)
         {
-            squadImages[i].color = Color.white;
-            squadImages[i].sprite = SceneLoadManager.Instance.squad[i].charImage;
-
-
-            if (squadImages[i].sprite == null)
-            {
-                squadImages[i].color = new Color(1f,1f,1f,0f);
-            }
+            squadSpines[i].DisplayChar(SceneLoadManager.Instance.squad[i].characterID, false);
         }
     }
 }

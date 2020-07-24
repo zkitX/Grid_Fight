@@ -13,8 +13,14 @@ public class PopUpItem : MonoBehaviour
     [SerializeField] protected Image displayImage;
     [SerializeField] protected TextMeshProUGUI titleText;
     [SerializeField] protected TextMeshProUGUI descriptionText;
+    [SerializeField] protected Image[] boxImages;
+    protected float[] boxColorsGrey;
 
-    protected List<Color> defaultColors = new List<Color>(); 
+    [SerializeField] protected Vector3[] TextTransforms = new Vector3[3];
+
+    protected List<Color> defaultColors = new List<Color>();
+
+    public Color defaultBoxHue = Color.magenta;
 
     public bool popupComplete;
 
@@ -22,9 +28,24 @@ public class PopUpItem : MonoBehaviour
 
     private void Awake()
     {
-        defaultColors.Add(popupBox.GetComponent<Image>().color);
+        boxColorsGrey = new float[boxImages.Length];
+        for (int i = 0; i < boxImages.Length; i++)
+        {
+            boxColorsGrey[i] = boxImages[i].color.grayscale;
+        }
+
+        defaultColors.Add(defaultBoxHue);
         defaultColors.Add(titleText.color);
         defaultColors.Add(descriptionText.color);
+
+    }
+
+    protected void SetColorOfBox(Color color)
+    {
+        for (int i = 0; i < boxImages.Length; i++)
+        {
+            boxImages[i].color = color * new Color(boxColorsGrey[i], boxColorsGrey[i], boxColorsGrey[i], 1f);
+        }
     }
 
     protected void ResetPopup()
@@ -33,6 +54,7 @@ public class PopUpItem : MonoBehaviour
         if (btnAnim == null) btnAnim = GetComponentsInChildren<Animation>()[1];
         if (popupBox == null) popupBox = transform.GetChild(0);
         popupComplete = false;
+        popupBox.gameObject.SetActive(true);
         StopAllCoroutines();
     }
 
@@ -46,14 +68,19 @@ public class PopUpItem : MonoBehaviour
     protected void SetupPopupInformation(Vector2 offset, string title, string description, Sprite image, Color boxColor, Color titleColor, Color decriptionColor)
     {
         popupBox.localPosition = offset;
+        displayImage.color = Color.clear;
         displayImage.sprite = image;
+        if (image != null) displayImage.color = Color.white;
         titleText.text = title;
         descriptionText.text = description;
         if (boxColor == new Color()) boxColor = defaultColors[0];
         if (titleColor == new Color()) titleColor = defaultColors[1];
         if (decriptionColor == new Color()) decriptionColor = defaultColors[2];
 
-        popupBox.GetComponent<Image>().color = boxColor;
+        titleText.transform.localPosition = description == "" ? TextTransforms[0] : TextTransforms[1];
+        descriptionText.transform.localPosition = TextTransforms[2];
+
+        SetColorOfBox(boxColor);
         titleText.color = titleColor;
         descriptionText.color = decriptionColor;
     }
@@ -70,11 +97,6 @@ public class PopUpItem : MonoBehaviour
         anim.clip = anim.GetClip("GameUI_PopUp_In");
         anim.Play();
         while (anim.isPlaying) yield return null;
-
-        //Play popup idle anim
-        if (anim.isPlaying) anim.Stop();
-        anim.clip = anim.GetClip("GameUI_PopUp_Idle");
-        anim.Play();
 
         //Wait for read time
         while (holdTime > 0f)
@@ -111,7 +133,7 @@ public class PopUpItem : MonoBehaviour
         BattleManagerScript.Instance.CurrentBattleState = startingBattleState;
 
         if (btnAnim.isPlaying) btnAnim.Stop();
-        btnAnim.clip = anim.GetClip("GameUI_PopUp_Button_Out");
+        btnAnim.clip = btnAnim.GetClip("GameUI_PopUp_Button_Out");
         btnAnim.Play();
 
         if (anim.isPlaying) anim.Stop();
@@ -119,5 +141,6 @@ public class PopUpItem : MonoBehaviour
         anim.Play();
         while (anim.isPlaying) yield return null;
 
+        popupBox.gameObject.SetActive(false);
     }
 }
