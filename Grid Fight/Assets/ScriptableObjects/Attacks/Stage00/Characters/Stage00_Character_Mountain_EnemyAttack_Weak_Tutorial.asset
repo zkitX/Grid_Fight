@@ -10,37 +10,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage00_Character_Desert_EnemyAttack_Strong_Tutorial
+  m_Name: Stage00_Character_Mountain_EnemyAttack_Weak_Tutorial
   m_EditorClassIdentifier: 
   Chances: 100
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 1, y: 1}
-  AttackInput: 1
-  AttackAnim: 1
+  AttackInput: 0
+  AttackAnim: 0
   StaminaCost: 10
   ExperiencePoints: 10
-  CoolDown: 2
-  PrefixAnim: 1
+  CoolDown: 3
+  PrefixAnim: 0
   Fov: 0
   Particles:
     Left:
-      Cast: {fileID: 5293222981534137803, guid: fb8c2b42e6edcaa40bb646007758c2cf,
+      Cast: {fileID: 1009008009739440373, guid: 042d07fe953ac9b45946e99a0ce7e480,
         type: 3}
-      Bullet: {fileID: 112010280237036225, guid: 5f323ba467e1d9e4fb51d3dafc9bdee5,
+      Bullet: {fileID: 5854959116545734441, guid: 4cf72c3e557cc0d46beb22958d07d745,
         type: 3}
-      Hit: {fileID: 150060741513361013, guid: 3fae6b64f9b37f04d93bab38fc5c673b, type: 3}
+      Hit: {fileID: 7636851893957382556, guid: 8723c670ceffe1a4eaa099300aa48124, type: 3}
     Right:
-      Cast: {fileID: 8945802484370848655, guid: 27b2d0b0f01fe2b4990db813e3520843,
+      Cast: {fileID: 8782556913017969411, guid: 004bd0589e557f245bcf9ad84ff15de7,
         type: 3}
-      Bullet: {fileID: 112010280237036225, guid: 60f6f96421bb03a4ca60a1d5f8a04edd,
+      Bullet: {fileID: 352028727189326818, guid: 9e46f9426828a4d4085498d379ce8e59,
         type: 3}
-      Hit: {fileID: 4699256620191732305, guid: b635c7a167266ee4baded875b7bfac7c, type: 3}
+      Hit: {fileID: 7636851893957382556, guid: aac96ca2d5a980a4ba398f1783dab1f9, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
-  TrajectoriesNumber: 2
+  TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories:
     - Show: 1
@@ -96,16 +96,15 @@ MonoBehaviour:
       ChildrenBulletDelay: 0.5
       BulletEffectTiles: []
       BulletGapStartingTile: {x: 0, y: 0}
-      HasEffect: 1
-      Effects:
-      - {fileID: 11400000, guid: 28c22cbdfe9a42140abc7f5a59100c12, type: 2}
+      HasEffect: 0
+      Effects: []
       EffectChances: 100
     CharacterClass: 0
   TilesAtk:
     AtkType: 1
     BulletTrajectories:
     - Delay: 1
-      BulletTravelDurationPerTile: 0.2
+      BulletTravelDurationPerTile: 0.3
       ExplosionChances: 100
       Trajectory_Y:
         serializedVersion: 2
@@ -166,44 +165,9 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-    - Delay: 2
-      BulletTravelDurationPerTile: 0
-      ExplosionChances: 100
-      Trajectory_Y:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      Trajectory_Z:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      Show: 1
-      BulletEffectTiles:
-      - Pos: {x: -1, y: 0}
-        HasEffect: 0
-        showImpact: 1
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: 1, y: 0}
-        HasEffect: 0
-        showImpact: 1
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
     StatToCheck: 1
-    ValueChecker: 0
-    PercToCheck: 80
+    ValueChecker: 2
+    PercToCheck: 0
     Chances: 100000
   TotemAtk:
     AtkType: 3

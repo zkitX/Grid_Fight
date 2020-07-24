@@ -38,7 +38,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5937666513028282135}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09b0c490261b08d4dbe285554c10a1e3, type: 3}
   m_Name: 
@@ -125,13 +125,13 @@ MonoBehaviour:
       - {x: 4, y: 6}
   - name: Wave2
     IsRandom: 1
-    MaxEnemyOnScreen: 3
-    AbsoluteMaxEnemyOnScreen: 3
+    MaxEnemyOnScreen: 2
+    AbsoluteMaxEnemyOnScreen: 2
     DelayBetweenChars: 1
     ListOfEnemy:
     - name: Bee Doctor
       NPCType: 0
-      NumberOfCharacter: 2
+      NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 1002
         KillWaveIfCharDie: 0
@@ -163,16 +163,16 @@ MonoBehaviour:
       TypeOfCharacter:
         CharacterName: 1001
         KillWaveIfCharDie: 0
-        Health: {x: 24, y: 28}
+        Health: {x: 38, y: 42}
         HealthRegeneration: {x: 1, y: 1}
-        BaseDamage: {x: 2, y: 3}
+        BaseDamage: {x: 3, y: 4}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
         BaseSpeed: {x: 1, y: 1}
         AttackSpeedRatio: {x: 10, y: 12}
         Stamina: {x: 10, y: 12}
         StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 1, y: 1}
+        MovementSpeed: {x: 1.3, y: 1.3}
         MovementTimer: {x: 1, y: 1}
         Exp: 0
         AIs:
@@ -186,31 +186,93 @@ MonoBehaviour:
       SpowningTile: []
   - name: WaveBird
     IsRandom: 0
-    MaxEnemyOnScreen: 1
-    AbsoluteMaxEnemyOnScreen: 0
+    MaxEnemyOnScreen: 3
+    AbsoluteMaxEnemyOnScreen: 3
     DelayBetweenChars: 1
     ListOfEnemy:
     - name: Bird
       NPCType: 1
-      NumberOfCharacter: 6
+      NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 1004
         KillWaveIfCharDie: 0
-        Health: {x: 40, y: 45}
-        HealthRegeneration: {x: 0.2, y: 0.2}
-        BaseDamage: {x: 6, y: 7}
+        Health: {x: 75, y: 85}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 6, y: 9}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 1, y: 1.3}
+        BaseSpeed: {x: 1, y: 1}
         AttackSpeedRatio: {x: 12, y: 15}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 0.8, y: 1.1}
+        MovementSpeed: {x: 1, y: 1}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
         AIs:
-        - {fileID: 11400000, guid: b2be41975219f0a42b20ef4a45c3654d, type: 2}
-        - {fileID: 11400000, guid: af6d47bcebe80a64d8318e13cf450976, type: 2}
+        - {fileID: 11400000, guid: cb2dee049eb89284a95fef6baca6c933, type: 2}
+        - {fileID: 11400000, guid: c1e232847b30b07418db312b5a22bcc2, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 7e9001550ecf36a48b157d697634bd2b, type: 2}
+        - {fileID: 11400000, guid: d5b8b19e519530846a0abc83a8793b58, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Chander
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1003
+        KillWaveIfCharDie: 0
+        Health: {x: 30, y: 33}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 3, y: 4}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 8e83105305a56424a8109df5a527714f, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: MechDog
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1001
+        KillWaveIfCharDie: 0
+        Health: {x: 38, y: 42}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 3, y: 4}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.3, y: 1.3}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 33a26711db0d8a64191fcb6c09459f66, type: 2}
         AddAttacks: 0
         AttacksToAdd: []
       AreThereStartingEnemy: 0
