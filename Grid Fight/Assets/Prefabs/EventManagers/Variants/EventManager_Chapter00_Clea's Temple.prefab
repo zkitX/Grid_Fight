@@ -1450,7 +1450,6 @@ GameObject:
   - component: {fileID: 2602902008634856921}
   - component: {fileID: 1097166343364106869}
   - component: {fileID: 3961290705641664953}
-  - component: {fileID: 2002599954163320504}
   - component: {fileID: 5543670569172415512}
   - component: {fileID: 8411605071985498686}
   - component: {fileID: 2797487905060664155}
@@ -1468,6 +1467,7 @@ GameObject:
   - component: {fileID: 7759239118768979994}
   - component: {fileID: 3416526590045985028}
   - component: {fileID: 7715753008419753068}
+  - component: {fileID: 5742700043823825609}
   m_Layer: 0
   m_Name: EventManager_Chapter00_Clea's Temple
   m_TagString: Untagged
@@ -1548,7 +1548,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 3060685057088605276}
   selectedCommands:
-  - {fileID: 7715753008419753068}
+  - {fileID: 5742700043823825609}
   variables: []
   description: 
   stepPause: 0
@@ -5322,6 +5322,7 @@ MonoBehaviour:
   - {fileID: 2602902008634856921}
   - {fileID: 2819324220536126995}
   - {fileID: 3300940788624200096}
+  - {fileID: 5742700043823825609}
   - {fileID: 8395181448824978843}
   - {fileID: 6788381741140847147}
   - {fileID: 3493733996813236218}
@@ -7066,7 +7067,6 @@ MonoBehaviour:
   - {fileID: 6483321565011101184}
   - {fileID: 9052472629850003201}
   - {fileID: 1259226902885936051}
-  - {fileID: 2002599954163320504}
   - {fileID: 277176139966075270}
   - {fileID: 7566245014531010110}
 --- !u!114 &2130145372253595099
@@ -17399,29 +17399,6 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
---- !u!114 &2002599954163320504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7618809006990338764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e4d0ac2e5ea27248a068915fbc9e10b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 2898
-  indentLevel: 0
-  characterID: 1002
-  MoveAction: 1
-  WeakAttackAction: 1
-  StrongAttackAction: 1
-  Skill1Action: 0
-  Skill2Action: 0
-  Skill3Action: 0
-  DefenceAction: 1
-  SwitchCharacterAction: 0
 --- !u!114 &5543670569172415512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17770,6 +17747,29 @@ MonoBehaviour:
     floatRef: {fileID: 0}
     floatVal: 1
   durationOLD: 0
+--- !u!114 &5742700043823825609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7618809006990338764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e4d0ac2e5ea27248a068915fbc9e10b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 2916
+  indentLevel: 0
+  characterID: 1002
+  MoveAction: 1
+  WeakAttackAction: 1
+  StrongAttackAction: 1
+  Skill1Action: 0
+  Skill2Action: 0
+  Skill3Action: 0
+  DefenceAction: 1
+  SwitchCharacterAction: 0
 --- !u!1 &8917722928403166728
 GameObject:
   m_ObjectHideFlags: 0
@@ -18211,15 +18211,15 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 7150543884516608607, guid: 5c098d6748d17784491034e47bdef3ea,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1550578901725672259, guid: 5c098d6748d17784491034e47bdef3ea,
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7150543884516608607, guid: 5c098d6748d17784491034e47bdef3ea,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c098d6748d17784491034e47bdef3ea, type: 3}
