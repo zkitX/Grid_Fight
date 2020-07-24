@@ -434,7 +434,7 @@ public class BattleManagerScript : MonoBehaviour
         currentCharacter.CharInfo.CharacterSelection = charInfo.CharacterSelection;
         if(SceneLoadManager.Instance != null)
         {
-            CharacterLoadInformation squadLoadInfo = SceneLoadManager.Instance.squad.Values.Where(r => r.characterID == currentCharacter.CharInfo.CharacterID).FirstOrDefault();
+            CharacterLoadInformation squadLoadInfo = SceneLoadManager.Instance.squad.Values.Where(r => r != null && r.characterID == currentCharacter.CharInfo.CharacterID).FirstOrDefault();
             if (squadLoadInfo != null)
             {
                 currentCharacter.CharInfo.Mask = squadLoadInfo.heldMask != MaskTypes.None ? SceneLoadManager.Instance.loadedMasks.Where(r => r.maskType == squadLoadInfo.heldMask).First().maskSkills : null;

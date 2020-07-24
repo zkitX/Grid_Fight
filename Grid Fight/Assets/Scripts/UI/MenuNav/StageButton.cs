@@ -98,6 +98,11 @@ public class StageButton : MonoBehaviour
         WorldStageSelect.Instance.ShowStageButtonsNames(false);
     }
 
+    public void UpdateBriefing()
+    {
+        SceneLoadManager.Instance.stagePrimedToLoad = info.stageProfile;
+    }
+
     public void ShowStageText(bool state)
     {
         textDisplay.gameObject.SetActive(state);

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using MyBox;
 using TMPro;
+using System.Linq;
 
 [System.Serializable]
 public class Grid_UIActions
@@ -61,6 +62,9 @@ public class Grid_UIActions
             case (UI_ActionTypes.ChangeBattleState):
                 yield return ChangeBattleState();
                 break;
+            case (UI_ActionTypes.SetSquadSelection):
+                yield return SetSquadSelection();
+                break;
             default:
                 break;
         }
@@ -109,6 +113,8 @@ public class Grid_UIActions
                 return "Animate the world sprites";
             case (UI_ActionTypes.ChangeBattleState):
                 return "Change Battle State to " + battleStateToChangeTo.ToString();
+            case (UI_ActionTypes.SetSquadSelection):
+                return "Forcing Squad Selection";
             default:
                 return actionType.ToString();
         }
@@ -352,6 +358,30 @@ public class Grid_UIActions
     IEnumerator ChangeBattleState()
     {
         BattleManagerScript.Instance.CurrentBattleState = battleStateToChangeTo;
+        yield return null;
+    }
+
+    public enum SetSquadType { Absolute, Additive }
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetSquadSelection)] public SetSquadType squadSetType = SetSquadType.Absolute;
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.SetSquadSelection)] public CharacterNameType[] squadToSet = new CharacterNameType[4];
+    IEnumerator SetSquadSelection()
+    {
+        if(squadSetType == SetSquadType.Absolute)
+        {
+            for (int i = 0; i < SceneLoadManager.Instance.squad.Count; i++)
+            {
+                SceneLoadManager.Instance.squad[i] = SceneLoadManager.Instance.loadedCharacters.Where(r => r.characterID == squadToSet[i]).FirstOrDefault();
+            }
+        }
+        else if (squadSetType == SetSquadType.Additive)
+        {
+            for (int i = 0; i < squadToSet.Length; i++)
+            {
+                SceneLoadManager.Instance.AddSquadMate(squadToSet[i], 0);
+            }
+        }
+
+
         yield return null;
     }
 }
