@@ -310,23 +310,6 @@ public class BattleManagerScript : MonoBehaviour
     }
 
 
-
-    public IEnumerator RemoveZombieFromBaord(BaseCharacter zombie)
-    {
-        for (int i = 0; i < zombie.UMS.Pos.Count; i++)
-        {
-            GridManagerScript.Instance.SetBattleTileState(zombie.UMS.Pos[i], BattleTileStateType.Empty);
-            zombie.UMS.Pos[i] = Vector2Int.zero;
-        }
-
-        zombie.SetUpLeavingBattle();
-        yield return MoveCharToBoardWithDelay(0.2f, zombie, new Vector3(100f, 100f, 100f));
-
-    }
-
-
-
-
     public IEnumerator MoveCharToBoardWithDelay(float delay, BaseCharacter cb, Vector3 nextPos)
     {
         yield return WaitFor(delay, () => CurrentBattleState == BattleState.Pause);
@@ -542,8 +525,8 @@ public class BattleManagerScript : MonoBehaviour
         if(CurrentSelectedCharacters.ContainsKey(zombie.CurrentPlayerController))
         {
             CurrentSelectedCharacters[zombie.CurrentPlayerController].Character = null;
-            DeselectCharacter(zombie, zombie.CurrentPlayerController);
             Switch_LoadingNewCharacterInRandomPosition(zombie.CharInfo.CharacterSelection, zombie.CurrentPlayerController, true);
+            DeselectCharacter(zombie, zombie.CurrentPlayerController);
             zombie.IsOnField = false;
         }
 
@@ -563,6 +546,7 @@ public class BattleManagerScript : MonoBehaviour
         );
 
 
+
         yield return RemoveCharacterFromBaord(zombie, true);
         zombie.CharActionlist.Remove(CharacterActionType.SwitchCharacter);
         zombiePs.transform.parent = null;
@@ -578,6 +562,10 @@ public class BattleManagerScript : MonoBehaviour
         zombie.UMS.Facing == FacingType.Left ? FacingType.Right : FacingType.Left,
         AttackType.Tile, BaseCharType.MinionType_Script, new List<CharacterActionType>(), LevelType.Novice), transform);
             zombiesList.Add(zombiefied);
+        }
+        else
+        {
+            zombiefied.gameObject.SetActive(true);
         }
 
         zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Chapter01_TohoraSea_Boss_MoonDrums_Loop);
@@ -606,7 +594,21 @@ public class BattleManagerScript : MonoBehaviour
         zombiefied.shotsLeftInAttack = 0;
         zombiefied.Attacking = false;
         zombiefied.CharInfo.SetupChar();
-        yield return RemoveZombieFromBaord(zombiefied);
+        zombiefied.SetAnimation(CharacterAnimationStateType.Reverse_Arriving);
+        for (int i = 0; i < zombiefied.UMS.Pos.Count; i++)
+        {
+            GridManagerScript.Instance.SetBattleTileState(zombiefied.UMS.Pos[i], BattleTileStateType.Empty);
+            zombiefied.UMS.Pos[i] = Vector2Int.zero;
+        }
+        zombiefied.BuffsDebuffsList.ForEach(r =>
+        {
+            if (r.Stat != BuffDebuffStatsType.Zombification)
+            {
+                r.Duration = 0;
+                r.CurrentBuffDebuff.Stop_Co = true;
+            }
+        }
+        );
         while (zombiefied.IsOnField)
         {
             yield return null;

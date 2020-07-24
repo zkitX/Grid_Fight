@@ -1054,16 +1054,18 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
                     {
                         yield return BattleManagerScript.Instance.WaitFor(0.5f, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
+
                         CharActionlist.Remove(CharacterActionType.SwitchCharacter);
-                        BattleManagerScript.Instance.DeselectCharacter((CharacterType_Script)this, CurrentPlayerController);
+                        ControllerType c = CurrentPlayerController;
                         BattleManagerScript.Instance.CurrentSelectedCharacters[CurrentPlayerController].Character = null;
+                        BattleManagerScript.Instance.DeselectCharacter((CharacterType_Script)this, CurrentPlayerController);
                         UMS.IndicatorAnim.SetBool("indicatorOn", false);
-                        if (BattleManagerScript.Instance.GetFreeRandomChar(UMS.Side, CurrentPlayerController) != null)
+                        if (BattleManagerScript.Instance.GetFreeRandomChar(UMS.Side, c) != null)
                         {
-                            CharacterType_Script cb = (CharacterType_Script)BattleManagerScript.Instance.GetFreeRandomChar(UMS.Side, CurrentPlayerController);
-                            BattleManagerScript.Instance.SetCharOnBoardOnFixedPos(CurrentPlayerController, cb.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeBattleTile(UMS.WalkingSide).Pos);
-                            cb.SetCharSelected(true, CurrentPlayerController);
-                            BattleManagerScript.Instance.SelectCharacter(CurrentPlayerController, cb);
+                            CharacterType_Script cb = (CharacterType_Script)BattleManagerScript.Instance.GetFreeRandomChar(UMS.Side, c);
+                            BattleManagerScript.Instance.SetCharOnBoardOnFixedPos(c, cb.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeBattleTile(UMS.WalkingSide).Pos);
+                            cb.SetCharSelected(true, c);
+                            BattleManagerScript.Instance.SelectCharacter(c, cb);
                         }
                     }
                 }
@@ -1133,51 +1135,48 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
 
             ps?.SetActive(false);
-            if (!bdClass.CurrentBuffDebuff.Stop_Co)
+            switch (bdClass.Stat)
             {
-                switch (bdClass.Stat)
-                {
-                    case BuffDebuffStatsType.DamageStats_BaseDamage:
-                        CharInfo.DamageStats.BaseDamage = bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.DamageStats.B_BaseDamage / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
-                        break;
-                    case BuffDebuffStatsType.SpeedStats_BaseSpeed:
-                        if (bdClass.CurrentBuffDebuff.Value > 0)
+                case BuffDebuffStatsType.DamageStats_BaseDamage:
+                    CharInfo.DamageStats.BaseDamage = bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.DamageStats.B_BaseDamage / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
+                    break;
+                case BuffDebuffStatsType.SpeedStats_BaseSpeed:
+                    if (bdClass.CurrentBuffDebuff.Value > 0)
+                    {
+                        CharInfo.SpeedStats.BaseSpeed -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_BaseSpeed / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
+                    }
+                    else
+                    {
+                        CharInfo.SpeedStats.BaseSpeed = CharInfo.SpeedStats.B_BaseSpeed;
+                    }
+                    SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.BaseSpeed);
+                    if (bdClass.CurrentBuffDebuff.Value == 0 && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
+                    {
+                        CharActionlist.Add(CharacterActionType.SwitchCharacter);
+                        if (BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == null).ToList().Count > 0)
                         {
-                            CharInfo.SpeedStats.BaseSpeed -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_BaseSpeed / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
+                            CurrentPlayerController = BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == null).OrderBy(a => a.Value.NotPlayingTimer).First().Key;
+                            ((CharacterType_Script)this).SetCharSelected(true, CurrentPlayerController);
+                            BattleManagerScript.Instance.SelectCharacter(CurrentPlayerController, (CharacterType_Script)this);
                         }
                         else
                         {
-                            CharInfo.SpeedStats.BaseSpeed = CharInfo.SpeedStats.B_BaseSpeed;
+                            yield return BattleManagerScript.Instance.RemoveCharacterFromBaord(this, true);
                         }
-                        SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.BaseSpeed);
-                        if (bdClass.CurrentBuffDebuff.Value == 0 && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
-                        {
-                            CharActionlist.Add(CharacterActionType.SwitchCharacter);
-                            if (BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == null).ToList().Count > 0)
-                            {
-                                CurrentPlayerController = BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == null).OrderBy(a => a.Value.NotPlayingTimer).First().Key;
-                                ((CharacterType_Script)this).SetCharSelected(true, CurrentPlayerController);
-                                BattleManagerScript.Instance.SelectCharacter(CurrentPlayerController, (CharacterType_Script)this);
-                            }
-                            else
-                            {
-                                yield return BattleManagerScript.Instance.RemoveCharacterFromBaord(this, true);
-                            }
-                        }
-                        break;
-                    case BuffDebuffStatsType.SpeedStats_MovementSpeed:
-                        CharInfo.SpeedStats.MovementSpeed -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_MovementSpeed / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
-                        break;
-                    case BuffDebuffStatsType.ShieldStats_BaseShieldRegeneration:
-                        CharInfo.ShieldStats.BaseShieldRegeneration -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.ShieldStats.B_BaseShieldRegeneration / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
-                        break;
-                    case BuffDebuffStatsType.AttackChange:
-                        CharInfo.CurrentAttackTypeInfo.Remove(bdClass.CurrentBuffDebuff.Effect.Atk);
-                        break;
-                    case BuffDebuffStatsType.StaminaStats_Stamina:
-                        CharInfo.StaminaStats.Stamina -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.StaminaStats.B_Base / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
-                        break;
-                }
+                    }
+                    break;
+                case BuffDebuffStatsType.SpeedStats_MovementSpeed:
+                    CharInfo.SpeedStats.MovementSpeed -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_MovementSpeed / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
+                    break;
+                case BuffDebuffStatsType.ShieldStats_BaseShieldRegeneration:
+                    CharInfo.ShieldStats.BaseShieldRegeneration -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.ShieldStats.B_BaseShieldRegeneration / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
+                    break;
+                case BuffDebuffStatsType.AttackChange:
+                    CharInfo.CurrentAttackTypeInfo.Remove(bdClass.CurrentBuffDebuff.Effect.Atk);
+                    break;
+                case BuffDebuffStatsType.StaminaStats_Stamina:
+                    CharInfo.StaminaStats.Stamina -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.StaminaStats.B_Base / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
+                    break;
             }
         }
         BuffsDebuffsList.Remove(bdClass);

@@ -75,6 +75,7 @@ public class EnvironmentManager : MonoBehaviour
 
         if (duration > 0)
         {
+
             jumpingchars.Clear();
             CharacterAnimationStateType jumpAnim = jumpUp ? CharacterAnimationStateType.Reverse_Arriving : CharacterAnimationStateType.JumpTransition_OUT;
             cic.used = true;
@@ -102,7 +103,7 @@ public class EnvironmentManager : MonoBehaviour
                 waitingTime += BattleManagerScript.Instance.DeltaTime;
                 yield return null;
             }
-
+            CameraManagerScript.Instance.TransitionAnimController.SetBool("UIState", true);
 
             if (duration > 0)
             {
@@ -162,7 +163,7 @@ public class EnvironmentManager : MonoBehaviour
             }
 
             yield return CameraManagerScript.Instance.CameraFocusSequence_Co(camInfo.DurationIn, camInfo.TransitionINZoomValue, camInfo.ZoomIn);
-
+            CameraManagerScript.Instance.TransitionAnimController.SetBool("UIState", false);
             foreach (BaseCharacter item in charsToLand)
             {
                 item.SetAnimation(jumpUp ? CharacterAnimationStateType.Arriving : CharacterAnimationStateType.JumpTransition_IN);

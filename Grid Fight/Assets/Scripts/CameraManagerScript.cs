@@ -7,7 +7,8 @@ public class CameraManagerScript : MonoBehaviour
 
     public static CameraManagerScript Instance;
     public Animator Anim;
- 
+    public Animator TransitionAnimController;
+
 
 
     bool isCamMoving = false;

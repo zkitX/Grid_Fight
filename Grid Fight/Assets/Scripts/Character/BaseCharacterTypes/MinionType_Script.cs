@@ -104,6 +104,7 @@ public class MinionType_Script : BaseCharacter
             UMS.Pos[i] = Vector2Int.zero;
         }
         base.SetCharDead();
+        SetAnimation(CharacterAnimationStateType.Idle);
         transform.position = new Vector3(100, 100, 100);
         SpineAnim.SpineAnimationState.ClearTracks();
         StartCoroutine(DisableChar());
