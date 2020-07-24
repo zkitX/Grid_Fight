@@ -220,7 +220,7 @@ public class UserInputManager : MonoBehaviour
         }
     }
 
-    private void Instance_ButtonBUpEvent(int player)
+    private void Instance_ButtonAUpEvent(int player)
     {
         //Debug.Log(player + "  " + "B Up");
         //VibrationController.Instance.CustomVibration(player, VibrationType.b);
@@ -230,7 +230,7 @@ public class UserInputManager : MonoBehaviour
         }
     }
 
-    private void Instance_ButtonAUpEvent(int player)
+    private void Instance_ButtonBUpEvent(int player)
     {
         //Debug.Log(player + "  " + "A Up");
 
@@ -522,7 +522,7 @@ public class UserInputManager : MonoBehaviour
         }
     }
 
-    private void Instance_ButtonBDownEvent(int player)
+    private void Instance_ButtonADownEvent(int player)
     {
         //Debug.Log(player + "  " + "B Down");
         if (BattleManagerScript.Instance.InputControllerT == InputControllerType.SelectionOnABXY)
@@ -537,7 +537,7 @@ public class UserInputManager : MonoBehaviour
         }
     }
 
-    private void Instance_ButtonADownEvent(int player)
+    private void Instance_ButtonBDownEvent(int player)
     {
         //Debug.Log(player + "  " + "A Down");
         if (BattleManagerScript.Instance.InputControllerT == InputControllerType.SelectionOnABXY)
