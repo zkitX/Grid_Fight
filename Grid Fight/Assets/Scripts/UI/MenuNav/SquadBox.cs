@@ -74,4 +74,9 @@ public class SquadBox : MonoBehaviour
         squadMateDisplays[key].color = displayColor;
         squadMateBackGrounds[key].color = SelectionColor;
     }
+
+    private void OnDestroy()
+    {
+        SceneLoadManager.Instance.SquadChangeEvent -= DisplaySquad;
+    }
 }

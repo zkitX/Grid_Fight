@@ -23,6 +23,7 @@ public class BattleManagerScript : MonoBehaviour
 
     public float MovementMultiplier = 1;
     private float prevValue = 1;
+    [HideInInspector] public BattleState PreviousBattleState = BattleState.Battle;
     public BattleState CurrentBattleState
     {
         get
@@ -31,7 +32,17 @@ public class BattleManagerScript : MonoBehaviour
         }
         set
         {
+            if(value == BattleState.Previous)
+            {
+                value = PreviousBattleState;
+            }
+            else
+            {
+                PreviousBattleState = CurrentBattleState;
+            }
+
             CurrentBattleStateChangedEvent?.Invoke(value);
+
 
             if (value == BattleState.FungusPuppets)
             {

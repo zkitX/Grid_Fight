@@ -62,7 +62,7 @@ public class SceneLoadManager : MonoBehaviour
     public bool SquadContains(CharacterNameType charName, int squadIndex)
     {
         Dictionary<int, CharacterLoadInformation> squadToCheck = GetSquadToCheck(squadIndex);
-        if (squadToCheck.Values.Where(r => r.characterID == charName).FirstOrDefault() != null) return true;
+        if (squadToCheck.Values.Where(r => r != null && r.characterID == charName).FirstOrDefault() != null) return true;
         return false;
     }
 

@@ -4452,6 +4452,8 @@ MonoBehaviour:
         resolutionMenuChange: 0
         DemoStuffInOut: 0
         battleStateToChangeTo: 4
+        squadSetType: 0
+        squadToSet: 00000000000000000000000000000000
       - Name: Configure the resolution
         parentButton: {fileID: 0}
         actionType: 12
@@ -4505,6 +4507,8 @@ MonoBehaviour:
         resolutionMenuChange: 0
         DemoStuffInOut: 0
         battleStateToChangeTo: 4
+        squadSetType: 0
+        squadToSet: 00000000000000000000000000000000
       - Name: Play ResolutionAppear on ResultsPanel
         parentButton: {fileID: 0}
         actionType: 3
@@ -4558,6 +4562,8 @@ MonoBehaviour:
         resolutionMenuChange: 0
         DemoStuffInOut: 0
         battleStateToChangeTo: 4
+        squadSetType: 0
+        squadToSet: 00000000000000000000000000000000
       - Name: Reveal the resolution
         parentButton: {fileID: 0}
         actionType: 12
@@ -4610,6 +4616,8 @@ MonoBehaviour:
         resolutionMenuChange: 1
         DemoStuffInOut: 0
         battleStateToChangeTo: 4
+        squadSetType: 0
+        squadToSet: 00000000000000000000000000000000
       - Name: Pause for 1 seconds...
         parentButton: {fileID: 0}
         actionType: 1
@@ -4662,6 +4670,8 @@ MonoBehaviour:
         resolutionMenuChange: 0
         DemoStuffInOut: 0
         battleStateToChangeTo: 4
+        squadSetType: 0
+        squadToSet: 00000000000000000000000000000000
       - Name: Resolve the resolution
         parentButton: {fileID: 0}
         actionType: 12
@@ -4714,6 +4724,8 @@ MonoBehaviour:
         resolutionMenuChange: 2
         DemoStuffInOut: 0
         battleStateToChangeTo: 4
+        squadSetType: 0
+        squadToSet: 00000000000000000000000000000000
       - Name: 'Set panel: ResultsPanel (Grid_UIPanel) to be in focus'
         parentButton: {fileID: 0}
         actionType: 5
@@ -4766,6 +4778,8 @@ MonoBehaviour:
         resolutionMenuChange: 0
         DemoStuffInOut: 0
         battleStateToChangeTo: 4
+        squadSetType: 0
+        squadToSet: 00000000000000000000000000000000
       - Name: Set navigation
         parentButton: {fileID: 0}
         actionType: 7
@@ -4818,6 +4832,8 @@ MonoBehaviour:
         resolutionMenuChange: 0
         DemoStuffInOut: 0
         battleStateToChangeTo: 4
+        squadSetType: 0
+        squadToSet: 00000000000000000000000000000000
       useStandardUnityEventsInstead: 0
       waitBefore: 0
       waitAfter: 0
@@ -4883,6 +4899,8 @@ MonoBehaviour:
         resolutionMenuChange: 0
         DemoStuffInOut: 0
         battleStateToChangeTo: 4
+        squadSetType: 0
+        squadToSet: 00000000000000000000000000000000
       - Name: 'Set panel: PausePanel (Grid_UIPanel) to be in focus'
         parentButton: {fileID: 0}
         actionType: 5
@@ -4935,6 +4953,8 @@ MonoBehaviour:
         resolutionMenuChange: 0
         DemoStuffInOut: 0
         battleStateToChangeTo: 4
+        squadSetType: 0
+        squadToSet: 00000000000000000000000000000000
       - Name: Set navigation
         parentButton: {fileID: 0}
         actionType: 7
@@ -4987,6 +5007,8 @@ MonoBehaviour:
         resolutionMenuChange: 0
         DemoStuffInOut: 0
         battleStateToChangeTo: 4
+        squadSetType: 0
+        squadToSet: 00000000000000000000000000000000
       - Name: Set Resume Game button to Selected
         parentButton: {fileID: 0}
         actionType: 4
@@ -5039,6 +5061,8 @@ MonoBehaviour:
         resolutionMenuChange: 0
         DemoStuffInOut: 0
         battleStateToChangeTo: 4
+        squadSetType: 0
+        squadToSet: 00000000000000000000000000000000
       - Name: Change Battle State to Pause
         parentButton: {fileID: 0}
         actionType: 15
@@ -5091,6 +5115,8 @@ MonoBehaviour:
         resolutionMenuChange: 0
         DemoStuffInOut: 0
         battleStateToChangeTo: 5
+        squadSetType: 0
+        squadToSet: 00000000000000000000000000000000
       useStandardUnityEventsInstead: 0
       waitBefore: 0
       waitAfter: 0
@@ -13249,6 +13275,8 @@ MonoBehaviour:
         resolutionMenuChange: 0
         DemoStuffInOut: 0
         battleStateToChangeTo: 4
+        squadSetType: 0
+        squadToSet: 00000000000000000000000000000000
       - Name: Switch scene to MenuSceneDemoVer
         parentButton: {fileID: 0}
         actionType: 11
@@ -13301,6 +13329,8 @@ MonoBehaviour:
         resolutionMenuChange: 0
         DemoStuffInOut: 0
         battleStateToChangeTo: 4
+        squadSetType: 0
+        squadToSet: 00000000000000000000000000000000
       - Name: 'Set collection: ''MainMenu'' to enabled'
         parentButton: {fileID: 0}
         actionType: 10
@@ -13353,6 +13383,8 @@ MonoBehaviour:
         resolutionMenuChange: 0
         DemoStuffInOut: 0
         battleStateToChangeTo: 4
+        squadSetType: 0
+        squadToSet: 00000000000000000000000000000000
       - Name: 'Set collection: ''GameMenu'' to disabled'
         parentButton: {fileID: 0}
         actionType: 10
@@ -13405,6 +13437,8 @@ MonoBehaviour:
         resolutionMenuChange: 0
         DemoStuffInOut: 0
         battleStateToChangeTo: 4
+        squadSetType: 0
+        squadToSet: 00000000000000000000000000000000
       useStandardUnityEventsInstead: 0
       waitBefore: 0
       waitAfter: 0
@@ -18592,7 +18626,7 @@ PrefabInstance:
     - target: {fileID: 3872561397129333766, guid: f1a8b56889e90864bb37633b00b2aba1,
         type: 3}
       propertyPath: PressActions.Array.data[0].uiActions.Array.data[0].Name
-      value: Change Battle State to Battle
+      value: Change Battle State to Previous
       objectReference: {fileID: 0}
     - target: {fileID: 3872561397129333766, guid: f1a8b56889e90864bb37633b00b2aba1,
         type: 3}
@@ -18612,7 +18646,7 @@ PrefabInstance:
     - target: {fileID: 3872561397129333766, guid: f1a8b56889e90864bb37633b00b2aba1,
         type: 3}
       propertyPath: PressActions.Array.data[0].uiActions.Array.data[0].battleStateToChangeTo
-      value: 4
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3872561397129333766, guid: f1a8b56889e90864bb37633b00b2aba1,
         type: 3}

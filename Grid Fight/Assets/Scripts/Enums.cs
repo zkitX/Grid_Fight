@@ -216,6 +216,7 @@ public enum BattleState
     WinLose = 8,
     Tutorial = 9,
     Intro = 10,
+    Previous = 1000,
 }
 
 public enum ElementalType

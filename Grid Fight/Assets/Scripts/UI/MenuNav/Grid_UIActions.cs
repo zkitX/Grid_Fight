@@ -370,7 +370,14 @@ public class Grid_UIActions
         {
             for (int i = 0; i < SceneLoadManager.Instance.squad.Count; i++)
             {
-                SceneLoadManager.Instance.squad[i] = SceneLoadManager.Instance.loadedCharacters.Where(r => r.characterID == squadToSet[i]).FirstOrDefault();
+                if (SceneLoadManager.Instance.loadedCharacters.Where(r => r.characterID == squadToSet[i]).FirstOrDefault() != null)
+                {
+                    SceneLoadManager.Instance.squad[i] = SceneLoadManager.Instance.loadedCharacters.Where(r => r.characterID == squadToSet[i]).FirstOrDefault();
+                }
+                else
+                {
+                    SceneLoadManager.Instance.squad[i] = new CharacterLoadInformation();
+                }
             }
         }
         else if (squadSetType == SetSquadType.Additive)

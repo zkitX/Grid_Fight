@@ -30,7 +30,7 @@ public class Grid_UIBriefing : MonoBehaviour
     {
         for (int i = 0; i < squadSpines.Length; i++)
         {
-            squadSpines[i].DisplayChar(SceneLoadManager.Instance.squad[i].characterID, false);
+            squadSpines[i].DisplayChar(SceneLoadManager.Instance.squad[i] == null ? CharacterNameType.None : SceneLoadManager.Instance.squad[i].characterID, false);
         }
     }
 }

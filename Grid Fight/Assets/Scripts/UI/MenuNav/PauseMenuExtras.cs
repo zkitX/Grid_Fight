@@ -7,7 +7,7 @@ public class PauseMenuExtras : MonoBehaviour
 
     public void CheckOpenPause()
     {
-        if(BattleManagerScript.Instance != null && BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle)
+        if(BattleManagerScript.Instance != null)
         {
             Grid_UINavigator.Instance.TriggerUIActivator("PauseGame");
         }
