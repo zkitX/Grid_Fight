@@ -17,15 +17,12 @@ namespace Fungus
     {
         private void Start()
         {
-            BattleManagerScript.Instance.CurrentBattleStateChangedEvent += Instance_CurrentBattleStateChangedEvent; 
+            BattleManagerBaseObjectGeneratorScript.Instance.StartMatchEvent += Instance_StartMatchEvent;
         }
 
-        private void Instance_CurrentBattleStateChangedEvent(BattleState currentBattleState)
+        private void Instance_StartMatchEvent()
         {
-            if(currentBattleState == BattleState.FungusPuppets)
-            {
-                ExecuteBlock();
-            }
+            ExecuteBlock();
         }
     }
 }

@@ -106,6 +106,7 @@ public class MinionType_Script : BaseCharacter
         base.SetCharDead();
         SetAnimation(CharacterAnimationStateType.Idle);
         transform.position = new Vector3(100, 100, 100);
+        SpineAnim.transform.localPosition = LocalSpinePosoffset;
         SpineAnim.SpineAnimationState.ClearTracks();
         StartCoroutine(DisableChar());
 

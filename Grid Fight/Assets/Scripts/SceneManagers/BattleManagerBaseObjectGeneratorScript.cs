@@ -5,6 +5,11 @@ using MyBox;
 
 public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
 {
+
+    public delegate void StartMatch();
+    public event StartMatch StartMatchEvent;
+
+
     public static BattleManagerBaseObjectGeneratorScript Instance;
     bool loadFromGameScene = false;
     public float loadingTime = 5f;
@@ -145,7 +150,7 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
         AudioManager = Instantiate(stage.AudioManager);
         StageObjects.Add(AudioManager);
 
-        yield return null;
+        StartMatchEvent?.Invoke();
 
         if (AudioManager.GetComponent<AudioManagerMk2>() != null && stage.StageAudioProfile != null)
         {
