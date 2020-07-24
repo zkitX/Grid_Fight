@@ -527,7 +527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Alanda
-  CharacterIcon: {fileID: 0}
+  CharacterIcon: {fileID: 21300000, guid: b8aafdea9113dd14082857a2884753d1, type: 3}
   Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 032d6441e0d485c469401417cf2cab42, type: 2}
   BaseCharacterType: 0
@@ -615,8 +615,12 @@ MonoBehaviour:
   DefenceStats:
     BaseDefence: 10
     Invulnerability: 0.2
+    MinionDefenceChances: 20
+    MinionPerfectDefenceChances: 5
     B_BaseDefence: 10
     B_Invulnerability: 0.2
+    B_MinionDefenceChances: 20
+    B_MinionPerfectDefenceChances: 5
     LevelMultiplier: 0
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0

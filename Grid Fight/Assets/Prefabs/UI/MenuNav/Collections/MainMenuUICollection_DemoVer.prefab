@@ -4214,7 +4214,7 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
-  - Name: WorldBriefingTransition - 6 actions triggred by 0 input
+  - Name: WorldBriefingTransition - 7 actions triggred by 0 input
     ID: WorldBriefingTransition
     input: 
     workingStates: 
@@ -4411,7 +4411,7 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
-    - Name: 2 Ui Actions
+    - Name: 3 Ui Actions
       uiActions:
       - Name: Play WorldMenu_Briefing_FlyDown on BriefingPanel
         parentButton: {fileID: 0}
@@ -4483,6 +4483,60 @@ MonoBehaviour:
         holdForAnimation: 0
         reselectButtonFromStartingDirection: 0
         setSelectionButton: {fileID: 0}
+        setSelectionForThisButtom: 0
+        setSelectionType: 0
+        ignoreDeselectEventsForAllOtherButtons: 0
+        setFocusedPanel: {fileID: 339754058227048605}
+        setFocusForPreviousPanel: 0
+        setFocusForThisPanel: 0
+        setPanelFocusType: 0
+        setPanelActiveStateAswell: 0
+        activationPauseBefore: 0
+        activationPauseAfter: 0
+        activationObject: {fileID: 0}
+        setActiveState: 0
+        navigationType1: 0
+        navigationState1: 0
+        navigationType2: 0
+        navigationState2: 0
+        navigationType3: 0
+        navigationState3: 0
+        setNavigationAbsolute: 0
+        buttonToFocusOn: {fileID: 0}
+        briefing: {fileID: 0}
+        stageForBriefing: {fileID: 0}
+        worldMenuRef: {fileID: 0}
+        focusMapTiming: 0
+        focusOnCurrentBriefingStage: 0
+        thingToFocusMapOn: {fileID: 0}
+        focusMapZoom: 0
+        focusMapOnScreenCentre: 0
+        screenPositionOffset: {x: 0, y: 0}
+        pauseTillEndOfFocus: 0
+        enablingCollectionID: 
+        collectionEnableState: 0
+        sceneSwitchType: 0
+        ResolutionMenu: {fileID: 0}
+        resolutionMenuChange: 0
+        DemoStuffInOut: 0
+        battleStateToChangeTo: 4
+        squadSetType: 0
+        squadToSet: 00000000000000000000000000000000
+      - Name: Set Start button to Selected
+        parentButton: {fileID: 0}
+        actionType: 4
+        pauseTime: 0
+        changeColorOf: 0
+        changeColorText: {fileID: 0}
+        changeColorImage: {fileID: 0}
+        changeThingColorOnThisObject: 0
+        colorToChangeTo: {r: 0, g: 0, b: 0, a: 0}
+        thingToAnimate: {fileID: 0}
+        animateThis: 0
+        animationClipToPlay: {fileID: 0}
+        holdForAnimation: 0
+        reselectButtonFromStartingDirection: 0
+        setSelectionButton: {fileID: 3957467133066545956}
         setSelectionForThisButtom: 0
         setSelectionType: 0
         ignoreDeselectEventsForAllOtherButtons: 0
@@ -6250,7 +6304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.83921576, g: 0.19607845, b: 0.53333336, a: 1}
+  m_Color: {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -20908,7 +20962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.83921576, g: 0.19607845, b: 0.53333336, a: 1}
+  m_Color: {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

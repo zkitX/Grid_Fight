@@ -111,7 +111,7 @@ Transform:
   m_LocalPosition: {x: -0.053235, y: 0.252675, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 639103573505572247}
+  - {fileID: 5181022233325503445}
   m_Father: {fileID: 1258183153}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -268,7 +268,7 @@ Transform:
   m_LocalPosition: {x: 0.21738, y: 0.20935501, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 3661095346949661865}
+  - {fileID: 4555639098598171633}
   m_Father: {fileID: 1258183153}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -320,6 +320,68 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1644212395701353759}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2197198465226696301
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 5038491232062756492}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4555639098598171633}
+  m_Layer: 0
+  m_Name: Stage04-Forest-TaserIdleRight (Missing Prefab)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4555639098598171633
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 5038491232062756492}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2197198465226696301}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3661095346949661865}
+  m_Father: {fileID: 1710861198}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2436269620792452364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 5038491231807076262}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 639103573505572247}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &639103573505572247
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 5562750678310095409, guid: 5d3dc4ae7290bd341b353180d2f42dc5,
+    type: 3}
+  m_PrefabInstance: {fileID: 5038491231807076262}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2436269620792452364}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5181022233325503445}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2508498606917085385
@@ -411,6 +473,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1644212395701353759}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5109090099329744191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 5038491231807076262}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5181022233325503445}
+  m_Layer: 0
+  m_Name: Stage04-Forest-TaserIdleLeft (Missing Prefab)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5181022233325503445
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 5038491231807076262}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5109090099329744191}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 639103573505572247}
+  m_Father: {fileID: 511344410}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5584413623622999592
 GameObject:
@@ -868,7 +961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Zeta
-  CharacterIcon: {fileID: 0}
+  CharacterIcon: {fileID: 21300000, guid: 9e6775b7fd16b624eb659df780a94506, type: 3}
   Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 3d15c8565d2de914ea71df49c7c86153, type: 2}
   BaseCharacterType: 0
@@ -956,8 +1049,12 @@ MonoBehaviour:
   DefenceStats:
     BaseDefence: 10
     Invulnerability: 0.2
+    MinionDefenceChances: 20
+    MinionPerfectDefenceChances: 5
     B_BaseDefence: 10
     B_Invulnerability: 0.2
+    B_MinionDefenceChances: 20
+    B_MinionPerfectDefenceChances: 5
     LevelMultiplier: 0
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
@@ -1039,6 +1136,37 @@ Transform:
   m_Father: {fileID: 1644212395701353759}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8854509885629396332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 5038491232062756492}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3661095346949661865}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3661095346949661865
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8584568728308445733, guid: 57669622d06b3d94cbf9b172ca9d97f9,
+    type: 3}
+  m_PrefabInstance: {fileID: 5038491232062756492}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8854509885629396332}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4555639098598171633}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9126922399256309366
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,11 +1205,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 511344410}
     m_Modifications:
-    - target: {fileID: 5562750678310095410, guid: 5d3dc4ae7290bd341b353180d2f42dc5,
-        type: 3}
-      propertyPath: m_Name
-      value: Stage04-Forest-TaserIdleLeft
-      objectReference: {fileID: 0}
     - target: {fileID: 5562750678310095409, guid: 5d3dc4ae7290bd341b353180d2f42dc5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1137,6 +1260,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5562750678310095410, guid: 5d3dc4ae7290bd341b353180d2f42dc5,
+        type: 3}
+      propertyPath: m_Name
+      value: Stage04-Forest-TaserIdleLeft
+      objectReference: {fileID: 0}
     - target: {fileID: 5562750678310095415, guid: 5d3dc4ae7290bd341b353180d2f42dc5,
         type: 3}
       propertyPath: moveWithTransform
@@ -1144,12 +1272,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d3dc4ae7290bd341b353180d2f42dc5, type: 3}
---- !u!4 &639103573505572247 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5562750678310095409, guid: 5d3dc4ae7290bd341b353180d2f42dc5,
-    type: 3}
-  m_PrefabInstance: {fileID: 5038491231807076262}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5038491232062756492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1157,11 +1279,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1710861198}
     m_Modifications:
-    - target: {fileID: 8584568728308445732, guid: 57669622d06b3d94cbf9b172ca9d97f9,
-        type: 3}
-      propertyPath: m_Name
-      value: Stage04-Forest-TaserIdleRight
-      objectReference: {fileID: 0}
     - target: {fileID: 8584568728308445733, guid: 57669622d06b3d94cbf9b172ca9d97f9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1217,6 +1334,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8584568728308445732, guid: 57669622d06b3d94cbf9b172ca9d97f9,
+        type: 3}
+      propertyPath: m_Name
+      value: Stage04-Forest-TaserIdleRight
+      objectReference: {fileID: 0}
     - target: {fileID: 8584568728308445735, guid: 57669622d06b3d94cbf9b172ca9d97f9,
         type: 3}
       propertyPath: moveWithTransform
@@ -1224,9 +1346,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57669622d06b3d94cbf9b172ca9d97f9, type: 3}
---- !u!4 &3661095346949661865 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8584568728308445733, guid: 57669622d06b3d94cbf9b172ca9d97f9,
-    type: 3}
-  m_PrefabInstance: {fileID: 5038491232062756492}
-  m_PrefabAsset: {fileID: 0}

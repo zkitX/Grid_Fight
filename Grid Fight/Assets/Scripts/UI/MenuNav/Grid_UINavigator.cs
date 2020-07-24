@@ -328,6 +328,11 @@ public class Grid_UINavigator : MonoBehaviour
     {
         if (btn == null) return;
         SelectButton(GetButtonIndex(btn), playDeselectEventsForOtherButtons);
+
+        if (CanNavigate(MenuNavigationType.Cursor))
+        {
+            cursor.SnapToButton(selectedButton);
+        }
     }
 
     public void SelectButton(int index, bool playDeselectEventsForOtherButtons = true)

@@ -174,12 +174,12 @@ public class Grid_UIActions
         if (reselectButtonFromStartingDirection)
         {
             yield return Grid_UINavigator.Instance.SelectFirstButton();
+            Grid_UINavigator.Instance.cursor.SnapToButton(Grid_UINavigator.Instance.selectedButton);
             yield break;
         }
 
         if (setSelectionType == SelectionType.Selected)
         {
-            if (Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.Cursor)) yield break;
             Grid_UINavigator.Instance.SelectButton(setSelectionButton, !ignoreDeselectEventsForAllOtherButtons);
         }
         if (setSelectionType == SelectionType.Deselected) Grid_UINavigator.Instance.DeselectButton(setSelectionButton, Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.Cursor) ? true : !ignoreDeselectEventsForAllOtherButtons);
@@ -247,7 +247,7 @@ public class Grid_UIActions
         {
             if(navigationType1 == MenuNavigationType.None && navigationType2 == MenuNavigationType.None && navigationType3 == MenuNavigationType.None)
             {
-                Grid_UINavigator.Instance.SetNavigationAbsolute();
+                Grid_UINavigator.Instance.SetNavigationAbsolute(btnToFocus: buttonToFocusOn);
                 yield break;
             }
 

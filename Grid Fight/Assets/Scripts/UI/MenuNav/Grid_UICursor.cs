@@ -111,6 +111,15 @@ public class Grid_UICursor : MonoBehaviour
             );
     }
 
+    public void SnapToButton(Grid_UIButton btn)
+    {
+        if (Grid_UINavigator.Instance.ActiveButtons.Where(r => r.ID == btn.ID).FirstOrDefault() == null || !Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.Cursor)) return;
+
+        StartCoroutine(SnapCoroutine(
+            Grid_UINavigator.Instance.ActiveButtons.Where(r => r.ID == btn.ID).First().transform.position)
+            );
+    }
+
     IEnumerator SnapCoroutine(Vector3 posToMoveTo) //TODO: THE SNAP ISN'T PERFECT, NEED TO CONSTANTLY UPDATE THE POSTOMOVE TO
     {
         float timeLeft = cursorSnapTime;
