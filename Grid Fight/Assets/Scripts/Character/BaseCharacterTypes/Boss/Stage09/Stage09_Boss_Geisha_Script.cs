@@ -76,7 +76,7 @@ public class Stage09_Boss_Geisha_Script : MinionType_Script
     void GenerateBoss()
     {
         oniForme = (Stage09_Boss_NoFace_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(CharacterNameType.Stage09_Boss_NoFace.ToString(), CharacterSelectionType.Up,
-        new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage09_Boss_NoFace, WalkingSideType.RightSide, SideType.RightSide, FacingType.Left, AttackType.Tile, BaseCharType.None, new List<CharacterActionType>(), LevelType.Novice), transform);
+        new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.Stage09_Boss_NoFace, WalkingSideType.RightSide, SideType.RightSide, FacingType.Left, BaseCharType.None, new List<CharacterActionType>(), LevelType.Novice), transform);
         oniForme.bossInfo = bossInfo;
         oniForme.UMS.Pos = UMS.Pos;
         oniForme.UMS.EnableBattleBars(false);

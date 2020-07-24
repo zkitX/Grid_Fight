@@ -35,7 +35,7 @@ public class Stage00_BossOctopus_Script : MinionType_Script
     private MinionType_Script CreatePiece(CharacterNameType pieceType)
     {
         MinionType_Script piece = (MinionType_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass(pieceType.ToString(), CharacterSelectionType.Up,
-        new List<ControllerType> { ControllerType.Enemy }, pieceType, WalkingSideType.RightSide, SideType.RightSide, FacingType.Left, AttackType.Tile, BaseCharType.None, new List<CharacterActionType>(), LevelType.Novice), transform);
+        new List<ControllerType> { ControllerType.Enemy }, pieceType, WalkingSideType.RightSide, SideType.RightSide, FacingType.Left, BaseCharType.None, new List<CharacterActionType>(), LevelType.Novice), transform);
         piece.UMS.Pos = UMS.Pos;
         piece.UMS.EnableBattleBars(false);
         piece.UMS.CurrentTilePos = UMS.CurrentTilePos;

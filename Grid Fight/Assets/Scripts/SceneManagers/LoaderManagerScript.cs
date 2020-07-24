@@ -67,7 +67,6 @@ public class CharacterBaseInfoClass
     public WalkingSideType WalkingSide;
     public SideType Side;
     public FacingType Facing;
-    public AttackType CharAttackType;
     public BaseCharType BCharType = BaseCharType.None;
     public List<CharacterActionType> CharActionlist = new List<CharacterActionType>();
     public LevelType CharaterLevel = LevelType.Novice;
@@ -75,7 +74,7 @@ public class CharacterBaseInfoClass
 
     public CharacterBaseInfoClass(string name, CharacterSelectionType characterSelection,
         List<ControllerType> playerController, CharacterNameType characterName,
-        WalkingSideType walkingSide, SideType side, FacingType facing, AttackType charAttackType, BaseCharType bCharType,
+        WalkingSideType walkingSide, SideType side, FacingType facing, BaseCharType bCharType,
         List<CharacterActionType> charActionlist, LevelType charaterLevel)
     {
         Name = name;
@@ -85,7 +84,6 @@ public class CharacterBaseInfoClass
         WalkingSide = walkingSide;
         Side = side;
         Facing = facing;
-        CharAttackType = charAttackType;
         BCharType = bCharType;
         CharActionlist = charActionlist;
 		CharaterLevel = charaterLevel;

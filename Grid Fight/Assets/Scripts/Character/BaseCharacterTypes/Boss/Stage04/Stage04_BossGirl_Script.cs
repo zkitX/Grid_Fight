@@ -66,7 +66,7 @@ public class Stage04_BossGirl_Script : MinionType_Script
         for (int i = 0; i < 4; i++)
         {
             Stage04_BossGirl_Flower_Script flower = (Stage04_BossGirl_Flower_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass((CharacterNameType.AscensoMountains_BossGirl_Quilla_Minion0 + i).ToString(), CharacterSelectionType.Up,
-            new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.AscensoMountains_BossGirl_Quilla_Minion0 + i, WalkingSideType.RightSide, SideType.RightSide, FacingType.Left, AttackType.Tile, BaseCharType.None, new List<CharacterActionType>(), LevelType.Novice), transform);
+            new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.AscensoMountains_BossGirl_Quilla_Minion0 + i, WalkingSideType.RightSide, SideType.RightSide, FacingType.Left, BaseCharType.None, new List<CharacterActionType>(), LevelType.Novice), transform);
             //BattleManagerScript.Instance.AllCharactersOnField.Add(flower);
             flower.UMS.Pos = FlowersPos.GetRange(i, 1);
             flower.BasePos = FlowersPos[i];
@@ -165,7 +165,7 @@ public class Stage04_BossGirl_Script : MinionType_Script
         }
 
         Stage04_BossMonster_Script mask = (Stage04_BossMonster_Script)BattleManagerScript.Instance.CreateChar(new CharacterBaseInfoClass((CharacterNameType.AscensoMountains_BossMonster_Pachamama).ToString(), CharacterSelectionType.Up,
-        new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.AscensoMountains_BossMonster_Pachamama, WalkingSideType.RightSide, SideType.RightSide, FacingType.Left, AttackType.Tile, BaseCharType.None, new List<CharacterActionType>(), LevelType.Novice), WaveManagerScript.Instance.transform);
+        new List<ControllerType> { ControllerType.Enemy }, CharacterNameType.AscensoMountains_BossMonster_Pachamama, WalkingSideType.RightSide, SideType.RightSide, FacingType.Left, BaseCharType.None, new List<CharacterActionType>(), LevelType.Novice), WaveManagerScript.Instance.transform);
         WaveManagerScript.Instance.WaveCharcters.Add(mask);
         mask.UMS.Pos = UMS.Pos;
         mask.UMS.CurrentTilePos = UMS.CurrentTilePos;

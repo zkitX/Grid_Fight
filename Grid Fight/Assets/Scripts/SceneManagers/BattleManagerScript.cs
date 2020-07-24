@@ -32,10 +32,11 @@ public class BattleManagerScript : MonoBehaviour
         set
         {
             CurrentBattleStateChangedEvent?.Invoke(value);
-            if(value == BattleState.FungusPuppets)
+
+            if (value == BattleState.FungusPuppets)
             {
                 ResetAllActiveChars();
-                BattleSpeed = prevValue;
+                BattleSpeed = 1;
             }
             else if(value == BattleState.Pause)
             {
@@ -46,8 +47,8 @@ public class BattleManagerScript : MonoBehaviour
                 BattleSpeed = prevValue;
             }
 
-
             _CurrentBattleState = value;
+
         }
     }
 
@@ -89,7 +90,11 @@ public class BattleManagerScript : MonoBehaviour
         }
         set
         {
-            prevValue = _BattleSpeed;
+            if(CurrentBattleState == BattleState.Battle)
+            {
+                prevValue = _BattleSpeed;
+            }
+
             _BattleSpeed = value;
             CurrentBattleSpeedChangedEvent?.Invoke(_BattleSpeed);
             if(_BattleSpeed != 1)
@@ -323,7 +328,7 @@ public class BattleManagerScript : MonoBehaviour
     public BaseCharacter CreateTalkingChar(CharacterNameType characterID)
     {
         CharsForTalkingPart.Add(CreateChar(new CharacterBaseInfoClass(characterID.ToString(), CharacterSelectionType.Up,
-        new List<ControllerType> { ControllerType.Player1 }, characterID, WalkingSideType.LeftSide, SideType.LeftSide, FacingType.Right, AttackType.Tile, BaseCharType.TalkingCharacterType_Script, 
+        new List<ControllerType> { ControllerType.Player1 }, characterID, WalkingSideType.LeftSide, SideType.LeftSide, FacingType.Right, BaseCharType.TalkingCharacterType_Script, 
         new List<CharacterActionType> {
             CharacterActionType.Defence,
             CharacterActionType.Move,
@@ -560,7 +565,7 @@ public class BattleManagerScript : MonoBehaviour
         zombie.UMS.WalkingSide == WalkingSideType.LeftSide ? WalkingSideType.RightSide : WalkingSideType.LeftSide,
         zombie.UMS.Side == SideType.LeftSide ? SideType.RightSide : SideType.LeftSide,
         zombie.UMS.Facing == FacingType.Left ? FacingType.Right : FacingType.Left,
-        AttackType.Tile, BaseCharType.MinionType_Script, new List<CharacterActionType>(), LevelType.Novice), transform);
+        BaseCharType.MinionType_Script, new List<CharacterActionType>(), LevelType.Novice), transform);
             zombiesList.Add(zombiefied);
         }
         else
@@ -1475,7 +1480,7 @@ public class BattleManagerScript : MonoBehaviour
 
     public void RecruitCharFromWave(CharacterNameType characterID)
     {
-        GameObject rC = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == characterID).FirstOrDefault().gameObject;
+        /*GameObject rC = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == characterID).FirstOrDefault().gameObject;
         WaveManagerScript.Instance.WaveCharcters.Remove(rC.GetComponent<BaseCharacter>());
         rC.transform.parent = transform;
         rC.SetActive(true);
@@ -1516,13 +1521,24 @@ public class BattleManagerScript : MonoBehaviour
         recruitableChar.CharActionlist.Add(CharacterActionType.WeakAttack);
         recruitableChar.gameObject.SetActive(true);
         recruitableChar.SetupCharacterSide();
-        /*foreach (BaseCharacter playableCharOnScene in AllCharactersOnField)
+        foreach (BaseCharacter playableCharOnScene in AllCharactersOnField)
         {
             NewIManager.Instance.SetUICharacterToButton((CharacterType_Script)playableCharOnScene, playableCharOnScene.CharInfo.CharacterSelection);
         }*/
+        List<CharacterActionType> actions = new List<CharacterActionType>();
+        actions.Add(CharacterActionType.Move);
+        actions.Add(CharacterActionType.Defence);
+        actions.Add(CharacterActionType.StrongAttack);
+        actions.Add(CharacterActionType.SwitchCharacter);
+        actions.Add(CharacterActionType.WeakAttack);
 
 
-        recruitableChar.CurrentCharIsDeadEvent += CurrentCharacter_CurrentCharIsDeadEvent;
+        BaseCharacter bsChar = CurrentSelectedCharacters[ControllerType.Player1].Character;
+        BaseCharacter cb = CreateChar(new CharacterBaseInfoClass(characterID.ToString(), (CharacterSelectionType)AllCharactersOnField.Count, bsChar.UMS.PlayerController,characterID,
+            bsChar.UMS.WalkingSide, bsChar.UMS.Side, bsChar.UMS.Facing, BaseCharType.CharacterType_Script, actions, LevelType.Novice), CharactersContainer);
+        AllCharactersOnField.Add(cb);
+        StatisticInfoManagerScript.Instance.CharaterStats.Add(new StatisticInfoClass(characterID, cb.UMS.PlayerController));
+        NewIManager.Instance.SetUICharacterToButton((CharacterType_Script)cb, cb.CharInfo.CharacterSelection);
         SetUICharacterSelectionIcons();
     }
 
