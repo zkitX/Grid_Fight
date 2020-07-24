@@ -4,23 +4,26 @@ using UnityEngine;
 
 public class UITutorialScript : MonoBehaviour
 {
-    private BattleState previousBattleState = BattleState.Battle;    
-    private bool isSetup = false;
-    // Update is called once per frame
-
     [SerializeField] UnityEngine.Audio.AudioMixerSnapshot snapshot_Default;
     [SerializeField] [Range(0f, 3f)] float snapshot_DefaultTransition = 0.2f;
     [SerializeField] UnityEngine.Audio.AudioMixerSnapshot snapshot_Pause;
     [SerializeField] [Range(0f, 3f)] float snapshot_PauseTransition = 0.2f;
 
-    void Update()
+    void Awake()
     {
-        if (!isSetup && InputController.Instance != null && UserInputManager.Instance != null && UserInputManager.Instance.IsReadyToBeSetUp)
+        StartCoroutine(Setup());
+    }
+
+    IEnumerator Setup()
+    {
+        while (InputController.Instance == null || UserInputManager.Instance == null || !UserInputManager.Instance.IsReadyToBeSetUp)
         {
-            isSetup = true;
-            InputController.Instance.ButtonMinusUpEvent += Instance_ButtonMinusUpEvent;
-            InputController.Instance.ButtonPlusUpEvent += Instance_ButtonPlusUpEvent;
+            yield return null;
         }
+        InputController.Instance.ButtonMinusUpEvent -= Instance_ButtonMinusUpEvent;
+        InputController.Instance.ButtonPlusUpEvent -= Instance_ButtonPlusUpEvent;
+        InputController.Instance.ButtonMinusUpEvent += Instance_ButtonMinusUpEvent;
+        InputController.Instance.ButtonPlusUpEvent += Instance_ButtonPlusUpEvent;
     }
 
     private void Instance_ButtonMinusUpEvent(int player)
@@ -29,16 +32,17 @@ public class UITutorialScript : MonoBehaviour
 
         if (gameObject.activeInHierarchy)
         {
-            BattleManagerScript.Instance.CurrentBattleState = previousBattleState;
+            //BattleManagerScript.Instance.CurrentBattleState = previousBattleState;
             if (snapshot_Default != null) snapshot_Default.TransitionTo(snapshot_DefaultTransition);
+            gameObject.SetActive(!gameObject.activeInHierarchy);
         }
-        else
+        /*else
         {
             previousBattleState = BattleManagerScript.Instance.CurrentBattleState;
             BattleManagerScript.Instance.CurrentBattleState = BattleState.Pause;
             if (snapshot_Pause != null) snapshot_Pause.TransitionTo(snapshot_PauseTransition);
         }
-        gameObject.SetActive(!gameObject.activeInHierarchy);
+        gameObject.SetActive(!gameObject.activeInHierarchy);*/
     }
 
     private void Instance_ButtonPlusUpEvent(int player)
@@ -47,5 +51,11 @@ public class UITutorialScript : MonoBehaviour
         {
             BattleManagerScript.Instance.RestartScene();
         }
+    }
+
+    private void OnDestroy()
+    {
+        InputController.Instance.ButtonMinusUpEvent -= Instance_ButtonMinusUpEvent;
+        InputController.Instance.ButtonPlusUpEvent -= Instance_ButtonPlusUpEvent;
     }
 }

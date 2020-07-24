@@ -181,6 +181,7 @@ public class BattleManagerScript : MonoBehaviour
     void ConfigureUsingFungus()
     {
         EventManager.Instance?.StartEventManager();
+        CurrentBattleState = BattleState.FungusPuppets;
     }
 
     #region Unity Life Cycle

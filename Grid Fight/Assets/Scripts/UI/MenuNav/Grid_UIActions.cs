@@ -58,6 +58,9 @@ public class Grid_UIActions
             case (UI_ActionTypes.TEMP_DemoVerWorldStuffAnimate):
                 yield return TEMP_DemoVerWorldStuffAnimate();
                 break;
+            case (UI_ActionTypes.ChangeBattleState):
+                yield return ChangeBattleState();
+                break;
             default:
                 break;
         }
@@ -104,6 +107,8 @@ public class Grid_UIActions
                 return "Deselect All Buttons";
             case (UI_ActionTypes.TEMP_DemoVerWorldStuffAnimate):
                 return "Animate the world sprites";
+            case (UI_ActionTypes.ChangeBattleState):
+                return "Change Battle State to " + battleStateToChangeTo.ToString();
             default:
                 return actionType.ToString();
         }
@@ -289,13 +294,17 @@ public class Grid_UIActions
         yield return null;
     }
 
-    public enum SceneSwitchType { MenuScene, BattleScene }
+    public enum SceneSwitchType { MenuScene, BattleScene, MenuSceneDemoVer }
     [ConditionalField("actionType", compareValues: UI_ActionTypes.SwitchScene)] public SceneSwitchType sceneSwitchType = SceneSwitchType.BattleScene;
     IEnumerator SwitchScene()
     {
         if(sceneSwitchType == SceneSwitchType.BattleScene)
         {
             SceneLoadManager.Instance.LoadScene("BattleSceneDefault");
+        }
+        else if (sceneSwitchType == SceneSwitchType.MenuSceneDemoVer)
+        {
+            SceneLoadManager.Instance.LoadScene("MenuScene_DemoVer");
         }
         else
         {
@@ -338,7 +347,15 @@ public class Grid_UIActions
         if (DemoVerBGManager.Instance != null) DemoVerBGManager.Instance.FlyInOut(DemoStuffInOut);
         yield return null;
     }
+
+    [ConditionalField("actionType", compareValues: UI_ActionTypes.ChangeBattleState)] public BattleState battleStateToChangeTo = BattleState.Battle;
+    IEnumerator ChangeBattleState()
+    {
+        BattleManagerScript.Instance.CurrentBattleState = battleStateToChangeTo;
+        yield return null;
+    }
 }
+
 
 [System.Serializable]
 public class SetNavigationInfoClass

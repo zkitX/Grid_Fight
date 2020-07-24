@@ -62,6 +62,7 @@ public enum UI_ActionTypes
     ResolutionMenuChange,
     DeselectAllButtons,
     TEMP_DemoVerWorldStuffAnimate,
+    ChangeBattleState,
 }
 
 public enum UI_FocusTypes
