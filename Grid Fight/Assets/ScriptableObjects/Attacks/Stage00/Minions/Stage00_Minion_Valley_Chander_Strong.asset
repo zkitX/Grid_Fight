@@ -20,9 +20,9 @@ MonoBehaviour:
   AttackAnim: 0
   StaminaCost: 10
   ExperiencePoints: 10
-  CoolDown: 4.5
+  CoolDown: 3
   PrefixAnim: 0
-  Fov: 0
+  Fov: 1
   Particles:
     Left:
       Cast: {fileID: 5756003047117702333, guid: e352cae5f39311341b8a8d16d8d33191,
@@ -135,7 +135,7 @@ MonoBehaviour:
         m_RotationOrder: 4
       Show: 1
       BulletEffectTiles:
-      - Pos: {x: 0, y: -1}
+      - Pos: {x: 1, y: -1}
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -153,18 +153,9 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-      - Pos: {x: 1, y: -1}
-        HasEffect: 0
-        showImpact: 1
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
     StatToCheck: 1
-    ValueChecker: 2
-    PercToCheck: 0
+    ValueChecker: 0
+    PercToCheck: 80
     Chances: 100
   TotemAtk:
     AtkType: 3
