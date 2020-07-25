@@ -53,12 +53,40 @@ MonoBehaviour:
   - name: Wave1
     IsRandom: 1
     MaxEnemyOnScreen: 1
-    AbsoluteMaxEnemyOnScreen: 0
-    DelayBetweenChars: 0
+    AbsoluteMaxEnemyOnScreen: 1
+    DelayBetweenChars: 1
     ListOfEnemy:
     - name: Bee
-      NPCType: 1
+      NPCType: 0
       NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1002
+        KillWaveIfCharDie: 0
+        Health: {x: 50, y: 55}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 2, y: 3}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 10, y: 12}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 2a32f09ea33094f46a60239de69bdb6e, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 2, y: 8}
+    - name: Bee
+      NPCType: 0
+      NumberOfCharacter: 2
       TypeOfCharacter:
         CharacterName: 1002
         KillWaveIfCharDie: 0
@@ -75,7 +103,8 @@ MonoBehaviour:
         MovementTimer: {x: 1, y: 1}
         Exp: 0
         AIs:
-        - {fileID: 11400000, guid: 2a32f09ea33094f46a60239de69bdb6e, type: 2}
+        - {fileID: 11400000, guid: b2be41975219f0a42b20ef4a45c3654d, type: 2}
+        - {fileID: 11400000, guid: af6d47bcebe80a64d8318e13cf450976, type: 2}
         AddAttacks: 0
         AttacksToAdd: []
       AreThereStartingEnemy: 0
