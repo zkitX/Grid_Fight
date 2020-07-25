@@ -628,6 +628,12 @@ public class BattleManagerScript : MonoBehaviour
             }
         }
         );
+        zombie.BuffsDebuffsList.ForEach(r =>
+        {
+            r.Duration = 0;
+            r.CurrentBuffDebuff.Stop_Co = true;
+        }
+        );
         zombiefied.CharInfo.SetupChar();
 
         while (zombiefied.IsOnField)
