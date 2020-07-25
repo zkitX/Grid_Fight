@@ -546,6 +546,13 @@ public class BattleManagerScript : MonoBehaviour
             DeselectCharacter(zombie, zombie.CurrentPlayerController);
             zombie.IsOnField = false;
         }
+        else if(zombie.CurrentPlayerController == ControllerType.None && CurrentSelectedCharacters.Values.Where(r=> r.Character == zombie).ToList().Count > 0)
+        {
+            CurrentSelectedCharacters.Values.Where(r => r.Character == zombie).First().Character = null;
+            Switch_LoadingNewCharacterInRandomPosition(zombie.CharInfo.CharacterSelection, zombie.CurrentPlayerController, true);
+            DeselectCharacter(zombie, zombie.CurrentPlayerController);
+            zombie.IsOnField = false;
+        }
 
         GameObject zombiePs = ParticleManagerScript.Instance.GetParticle(ParticlesType.Chapter01_TohoraSea_Boss_MoonDrums_Loop);
         zombiePs.SetActive(true);
@@ -952,6 +959,12 @@ public class BattleManagerScript : MonoBehaviour
             CurrentSelectedCharacters[playerController].Character.SkillActivation != null ||
             CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving.ToString())
         {
+
+            if (CurrentSelectedCharacters[playerController].Character == null)
+            {
+                yield break;
+            }
+
             if (CurrentSelectedCharacters[playerController].Character.CharInfo.Health <= 0f)
             {
                 DeselectCharacter(CurrentSelectedCharacters[playerController].Character, playerController);
@@ -1304,7 +1317,7 @@ public class BattleManagerScript : MonoBehaviour
 
     public void Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType characterSelection, ControllerType playerController, bool isRandom = false, bool worksOnFungusPappets = false)
     {
-        if(!CurrentSelectedCharacters.ContainsKey(playerController))
+        if(!CurrentSelectedCharacters.ContainsKey(playerController) && playerController <= ControllerType.Player4)
         {
             for (int i = 0; i <= (int)playerController; i++)
             {
@@ -1315,7 +1328,7 @@ public class BattleManagerScript : MonoBehaviour
             }
         }
 
-        if(CurrentSelectedCharacters[playerController].Character != null && !CurrentSelectedCharacters[playerController].Character.CharActionlist.Contains(CharacterActionType.SwitchCharacter))
+        if(playerController > ControllerType.Player4 || (CurrentSelectedCharacters[playerController].Character != null && !CurrentSelectedCharacters[playerController].Character.CharActionlist.Contains(CharacterActionType.SwitchCharacter)))
         {
             return;
         }
