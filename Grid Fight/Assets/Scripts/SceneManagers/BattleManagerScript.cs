@@ -953,24 +953,25 @@ public class BattleManagerScript : MonoBehaviour
         // yield return HoldPressTimer(playerController);
         CurrentSelectedCharacters[playerController].Character.SwapWhenPossible = true;
         BaseCharacter cb = AllCharactersOnField.Where(r => r.UMS.PlayerController.Contains(playerController) && r.CharInfo.CharacterID == cName).First();
-        while (CurrentSelectedCharacters[playerController].OffsetSwap > Time.time || !CurrentSelectedCharacters[playerController].Character.IsOnField || cb.IsOnField ||
+        while (CurrentSelectedCharacters[playerController].Character != null && (CurrentSelectedCharacters[playerController].OffsetSwap > Time.time || !CurrentSelectedCharacters[playerController].Character.IsOnField || cb.IsOnField ||
             CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle.ToString() ||
             CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving.ToString() ||
             CurrentSelectedCharacters[playerController].Character.SkillActivation != null ||
-            CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving.ToString())
+            CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving.ToString()))
         {
-
-            if (CurrentSelectedCharacters[playerController].Character == null)
+            if (CurrentSelectedCharacters[playerController].Character.CharInfo.Health <= 0f)// || !CurrentSelectedCharacters[playerController].Character.CharActionlist.Contains(CharacterActionType.SwitchCharacter)
             {
-                yield break;
-            }
-
-            if (CurrentSelectedCharacters[playerController].Character.CharInfo.Health <= 0f)
-            {
+                //DeselectCharacter(CurrentSelectedCharacters[playerController].Character, playerController);
                 DeselectCharacter(CurrentSelectedCharacters[playerController].Character, playerController);
                 yield break;
             }
             yield return null;
+        }
+
+
+        if (CurrentSelectedCharacters[playerController].Character == null)
+        {
+            yield break;
         }
 
         if (CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar == AllCharactersOnField.Where(r => r.CharInfo.CharacterID == cName &&

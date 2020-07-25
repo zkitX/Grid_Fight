@@ -1008,17 +1008,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
             else
             {
-                if (item.Level <= Convert.ToInt32(newBuffDebuff.Last()))
-                {
-                    string[] currentBuffDebuff = item.Name.ToString().Split('_');
-                    item.CurrentBuffDebuff.Stop_Co = true;
-                    int index = BuffsDebuffsList.IndexOf(item);
-                    BuffsDebuffsList.Remove(item);
-                    item = new BuffDebuffClass(bdClass.Effect.Name, bdClass.Effect.StatsToAffect, Convert.ToInt32(newBuffDebuff.Last()), bdClass, bdClass.Effect.Duration, bdClass.EffectMaker);
-                    item.BuffDebuffCo = Buff_DebuffCoroutine(item);
-                    BuffsDebuffsList.Insert(index, item);
-                    StartCoroutine(item.BuffDebuffCo);
-                }
+                item.Duration = bdClass.Effect.Duration;
+                item.CurrentBuffDebuff.Timer = 0;
             }
         }
     }
@@ -1068,6 +1059,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 {
                     if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
                     {
+
                         yield return BattleManagerScript.Instance.WaitFor(0.5f, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
 
                         CharActionlist.Remove(CharacterActionType.SwitchCharacter);
@@ -1078,15 +1070,19 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                             c = BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == this).First().Key;
                             BattleManagerScript.Instance.CurrentSelectedCharacters.Values.Where(r => r.Character == this).First().Character = null;
                         }
-                        else
+                        else if(CurrentPlayerController == ControllerType.None)
+                        {
+                            BattleManagerScript.Instance.DeselectCharacter((CharacterType_Script)this, c);
+                            break;
+                        }
+                        else 
                         {
                             c = CurrentPlayerController;
-                            BattleManagerScript.Instance.CurrentSelectedCharacters[CurrentPlayerController].Character = null;
-                            BattleManagerScript.Instance.DeselectCharacter((CharacterType_Script)this, CurrentPlayerController);
+                            BattleManagerScript.Instance.CurrentSelectedCharacters[c].Character = null;
                         }
-                        
+                        BattleManagerScript.Instance.DeselectCharacter((CharacterType_Script)this, c);
                         UMS.IndicatorAnim.SetBool("indicatorOn", false);
-                        if (BattleManagerScript.Instance.GetFreeRandomChar(UMS.Side, c) != null)
+                        if (BattleManagerScript.Instance.GetFreeRandomChar(UMS.Side, c) != null && c <= ControllerType.Player4)
                         {
                             CharacterType_Script cb = (CharacterType_Script)BattleManagerScript.Instance.GetFreeRandomChar(UMS.Side, c);
                             BattleManagerScript.Instance.SetCharOnBoardOnFixedPos(c, cb.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeBattleTile(UMS.WalkingSide).Pos);
@@ -1176,7 +1172,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                         CharInfo.SpeedStats.BaseSpeed = CharInfo.SpeedStats.B_BaseSpeed;
                     }
                     SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.BaseSpeed);
-                    if (bdClass.CurrentBuffDebuff.Value == 0 && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
+                    if (bdClass.CurrentBuffDebuff.Value == 0 && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && !bdClass.CurrentBuffDebuff.Stop_Co)
                     {
                         CharActionlist.Add(CharacterActionType.SwitchCharacter);
                         if (BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == null).ToList().Count > 0)
