@@ -235,7 +235,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             audioSource.gameObject.transform.parent = AudioManagerMk2.Instance.transform;
         }
         isMoving = false;
-        SetAttackReady(false);
         LocalSpinePosoffset = SpineAnim.transform.localPosition;
         Call_CurrentCharIsDeadEvent();
         shotsLeftInAttack = 0;

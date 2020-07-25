@@ -106,6 +106,10 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
             Rewired = Instantiate(stage.Rewired);
             StageObjects.Add(Rewired);
         }
+        else
+        {
+            InputController.Instance.ResetEventSubscription();
+        }
         yield return null;
 
         currentStageID = stage.ID;

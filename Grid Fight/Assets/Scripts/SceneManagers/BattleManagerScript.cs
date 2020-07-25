@@ -610,12 +610,14 @@ public class BattleManagerScript : MonoBehaviour
         zombiePs.transform.localPosition = Vector3.zero;
         zombiefied.shotsLeftInAttack = 0;
         zombiefied.Attacking = false;
-        zombiefied.CharInfo.SetupChar();
         zombiefied.SetAnimation(CharacterAnimationStateType.Reverse_Arriving);
-        for (int i = 0; i < zombiefied.UMS.Pos.Count; i++)
+        if(zombiefied.CharInfo.HealthPerc > 0)
         {
-            GridManagerScript.Instance.SetBattleTileState(zombiefied.UMS.Pos[i], BattleTileStateType.Empty);
-            zombiefied.UMS.Pos[i] = Vector2Int.zero;
+            for (int i = 0; i < zombiefied.UMS.Pos.Count; i++)
+            {
+                GridManagerScript.Instance.SetBattleTileState(zombiefied.UMS.Pos[i], BattleTileStateType.Empty);
+                zombiefied.UMS.Pos[i] = Vector2Int.zero;
+            }
         }
         zombiefied.BuffsDebuffsList.ForEach(r =>
         {
@@ -626,6 +628,8 @@ public class BattleManagerScript : MonoBehaviour
             }
         }
         );
+        zombiefied.CharInfo.SetupChar();
+
         while (zombiefied.IsOnField)
         {
             yield return null;
@@ -1663,6 +1667,16 @@ public class BattleManagerScript : MonoBehaviour
         {
             action();
             yield return null;
+        }
+    }
+
+    public IEnumerator WaitFor(float duration)
+    {
+        float timer = 0;
+        while (timer < duration)
+        {
+            yield return null;
+            timer += DeltaTime;
         }
     }
 

@@ -509,7 +509,89 @@ public class InputController : MonoBehaviour
 
     }
 
+    public void ResetEventSubscription()
+    {
+        #region Button Down
+        ButtonADownEvent = null;
+        ButtonBDownEvent = null;
+        ButtonXDownEvent = null;
+        ButtonYDownEvent = null;
+        ButtonUpDownEvent = null;
+        ButtonDownDownEvent = null;
+        ButtonRightDownEvent = null;
+        ButtonLeftDownEvent = null;
+        ButtonRDownEvent = null;
+        ButtonZRDownEvent = null;
+        ButtonLDownEvent = null;
+        ButtonZLDownEvent = null;
+        ButtonMinusDownEvent = null;
+        ButtonPlusDownEvent = null;
+        ButtonHomeDownEvent = null;
+        ButtonCaptureDownEvent = null;
+        ButtonLeftStickDownEvent = null;
+        ButtonRightStickDownEvent = null;
+        ButtonLeftSLDownEvent = null;
+        ButtonRightSLDownEvent = null;
+        ButtonLeftSRDownEvent = null;
+        ButtonRightSRDownEvent = null;
+        #endregion
 
+
+        #region Button Press
+        ButtonAPressedEvent = null;
+        ButtonBPressedEvent = null;
+        ButtonXPressedEvent = null;
+        ButtonYPressedEvent = null;
+        ButtonUpPressedEvent = null;
+        ButtonDownPressedEvent = null;
+        ButtonRightPressedEvent = null;
+        ButtonLeftPressedEvent = null;
+        ButtonRPressedEvent = null;
+        ButtonZRPressedEvent = null;
+        ButtonLPressedEvent = null;
+        ButtonZLPressedEvent = null;
+        ButtonPlusPressedEvent = null;
+        ButtonMinusPressedEvent = null;
+        ButtonHomePressedEvent = null;
+        ButtonCapturePressedEvent = null;
+        ButtonLeftStickPressedEvent = null;
+        ButtonRightStickPressedEvent = null;
+        ButtonLeftSLPressedEvent = null;
+        ButtonRightSLPressedEvent = null;
+        ButtonRightSRPressedEvent = null;
+        ButtonLeftSRPressedEvent = null;
+        #endregion
+
+        #region Button Up
+        ButtonAUpEvent = null;
+        ButtonBUpEvent = null;
+        ButtonXUpEvent = null;
+        ButtonYUpEvent = null;
+        ButtonUpUpEvent = null;
+        ButtonDownUpEvent = null;
+        ButtonRightUpEvent = null;
+        ButtonLeftUpEvent = null;
+        ButtonRUpEvent = null;
+        ButtonZRUpEvent = null;
+        ButtonLUpEvent = null;
+        ButtonZLUpEvent = null;
+        ButtonPlusUpEvent = null;
+        ButtonMinusUpEvent = null;
+        ButtonHomeUpEvent = null;
+        ButtonCaptureUpEvent = null;
+        ButtonRightStickUpEvent = null;
+        ButtonLeftStickUpEvent = null;
+        ButtonRightSLUpEvent = null;
+        ButtonLeftSLUpEvent = null;
+        ButtonLeftSRUpEvent = null;
+        ButtonRightSRUpEvent = null;
+        #endregion
+
+        #region Joystick
+        LeftJoystickUsedEvent = null;
+        RightJoystickUsedEvent = null;
+        #endregion
+    }
 
 
     /*private void Notification_notificationMessageReceived(Notification.Message obj)

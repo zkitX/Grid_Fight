@@ -156,7 +156,7 @@ public class CharacterType_Script : BaseCharacter
     {
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         SetAnimation(CharacterAnimationStateType.Defeat_ReverseArrive);
-        IsOnField = false;
+        SetAttackReady(false);
         battleTime.isStopped = true;
         base.SetCharDead();
         NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo, UMS.Side);

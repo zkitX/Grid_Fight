@@ -104,16 +104,20 @@ public class MinionType_Script : BaseCharacter
             UMS.Pos[i] = Vector2Int.zero;
         }
         base.SetCharDead();
-        SetAnimation(CharacterAnimationStateType.Idle);
-        transform.position = new Vector3(100, 100, 100);
-        SpineAnim.transform.localPosition = LocalSpinePosoffset;
-        SpineAnim.SpineAnimationState.ClearTracks();
-        StartCoroutine(DisableChar());
+        if (!SpineAnim.CurrentAnim.Contains("rriv"))
+        {
+            transform.position = new Vector3(100, 100, 100);
+            SpineAnim.transform.localPosition = LocalSpinePosoffset;
+            SpineAnim.SpineAnimationState.ClearTracks();
+            SetAnimation(CharacterAnimationStateType.Idle);
+            StartCoroutine(DisableChar());
+        }
 
     }
     private IEnumerator DisableChar()
     {
-        yield return BattleManagerScript.Instance.WaitFor(0.5f, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle, () => !gameObject.activeInHierarchy);
+        yield return BattleManagerScript.Instance.WaitFor(0.5f);
+        SetAttackReady(false);
         gameObject.SetActive(false);
 
     }
@@ -450,7 +454,6 @@ public class MinionType_Script : BaseCharacter
         base.Update();
     }
 
-
     protected void SetCurrentAIValues()
     {
         if (CurrentAIState.UpdateAttckWill)
@@ -469,11 +472,7 @@ public class MinionType_Script : BaseCharacter
         {
             UpDownMovementPerc = CurrentAIState.MoveUpDown;
         }
-
-
     }
-
-   
 
     public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
     {
@@ -883,6 +882,7 @@ public class MinionType_Script : BaseCharacter
             transform.position = new Vector3(100, 100, 100);
             SpineAnim.SpineAnimationState.SetAnimation(0, CharacterAnimationStateType.Idle.ToString(), true);
             SpineAnim.CurrentAnim = CharacterAnimationStateType.Idle.ToString();
+            SetAttackReady(false);
             gameObject.SetActive(false);
             return;
         }
