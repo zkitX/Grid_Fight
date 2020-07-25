@@ -286,4 +286,10 @@ public class GridFightSayDialog : SayDialog
             }
         }*/
     }
+
+    protected override void OnDestroy()
+    {
+        InputController.Instance.ButtonAUpEvent -= Instance_ButtonAUpEvent;
+        base.OnDestroy();
+    }
 }

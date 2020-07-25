@@ -117,7 +117,23 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public GameObject chargeParticles = null;
     protected bool canDefend = true;
     public StatisticInfoClass Sic;
-    public Vector3 LocalSpinePosoffset;
+    public Vector3 _LocalSpinePosoffset = new Vector3(-100,-100,-100);
+
+    public Vector3 LocalSpinePosoffset
+    {
+        get
+        {
+            return _LocalSpinePosoffset;
+        }
+        set
+        {
+            if(_LocalSpinePosoffset == new Vector3(-100, -100, -100))
+            {
+                _LocalSpinePosoffset = value;
+            }
+        }
+    }
+
     public int shotsLeftInAttack
     {
         get

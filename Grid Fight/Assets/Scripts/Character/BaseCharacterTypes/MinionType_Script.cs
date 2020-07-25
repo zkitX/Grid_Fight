@@ -881,6 +881,8 @@ public class MinionType_Script : BaseCharacter
         if (completedAnim == CharacterAnimationStateType.Reverse_Arriving.ToString())
         {
             transform.position = new Vector3(100, 100, 100);
+            SpineAnim.SpineAnimationState.SetAnimation(0, CharacterAnimationStateType.Idle.ToString(), true);
+            SpineAnim.CurrentAnim = CharacterAnimationStateType.Idle.ToString();
             gameObject.SetActive(false);
             return;
         }
