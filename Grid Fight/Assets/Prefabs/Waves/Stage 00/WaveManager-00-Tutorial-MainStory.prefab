@@ -51,7 +51,7 @@ MonoBehaviour:
     isStopped: 0
   WavePhases:
   - name: Wave1
-    IsRandom: 1
+    IsRandom: 0
     MaxEnemyOnScreen: 1
     AbsoluteMaxEnemyOnScreen: 1
     DelayBetweenChars: 1
@@ -62,7 +62,7 @@ MonoBehaviour:
       TypeOfCharacter:
         CharacterName: 1002
         KillWaveIfCharDie: 0
-        Health: {x: 50, y: 55}
+        Health: {x: 80, y: 90}
         HealthRegeneration: {x: 1, y: 1}
         BaseDamage: {x: 2, y: 3}
         RapidAttackMultiplier: {x: 1, y: 1}
