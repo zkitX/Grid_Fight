@@ -7,7 +7,6 @@ public class Grid_UIInputActivators : MonoBehaviour
 {
     public UIActivator[] activators = new UIActivator[0];
     Grid_UIPanel parentPanel = null;
-
     private void Awake()
     {
         parentPanel = GetComponentInParent<Grid_UIPanel>();
@@ -16,6 +15,17 @@ public class Grid_UIInputActivators : MonoBehaviour
 
     private void OnEnable()
     {
+        StartCoroutine(SetInputs());
+    }
+
+
+    public IEnumerator SetInputs()
+    {
+        while(!SceneLoadManager.Instance.GameStart)
+        {
+            yield return null;
+        }
+
         InputController.Instance.ButtonAUpEvent += Instance_ButtonAUpEvent;
         InputController.Instance.ButtonBUpEvent += Instance_ButtonBUpEvent;
         InputController.Instance.ButtonXUpEvent += Instance_ButtonXUpEvent;
@@ -105,7 +115,7 @@ public class Grid_UIInputActivators : MonoBehaviour
     {
         //if (!Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.DirectButton)) return; //UNDO AFTER TESTING
        // if (BattleManagerScript.Instance == null) return;
-        if (parentPanel.focusState != UI_FocusTypes.Focused) return;
+        if (parentPanel.focusState != UI_FocusTypes.Focused || !SceneLoadManager.Instance.GameStart) return;
 
         List<UI_ActionsClass> actions = new List<UI_ActionsClass>();
         foreach(UIActivator act in activators)

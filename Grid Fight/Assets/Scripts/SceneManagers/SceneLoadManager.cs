@@ -23,7 +23,7 @@ public class SceneLoadManager : MonoBehaviour
     public CharacterLoadInformation[] loadedCharacters = new CharacterLoadInformation[0];
     public MaskLoadInformation[] loadedMasks = new MaskLoadInformation[1];
     public StageLoadInformation[] loadedStages = new StageLoadInformation[0];
-
+    public bool GameStart = false;
     public ArenaLoadOut arenaLoadoutInfo = new ArenaLoadOut();
 
     [HideInInspector] public Dictionary<int, CharacterLoadInformation> squad = new Dictionary<int, CharacterLoadInformation>()
@@ -282,6 +282,7 @@ public class SceneLoadManager : MonoBehaviour
 
             yield return null;
         }
+        GameStart = !state;
     }
 
 
