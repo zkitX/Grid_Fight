@@ -725,6 +725,8 @@ public class CharacterType_Script : BaseCharacter
         if (completedAnim == CharacterAnimationStateType.JumpTransition_OUT.ToString())
         {
             transform.position = new Vector3(100, 100, 100);
+            SpineAnim.SpineAnimationState.SetAnimation(0, CharacterAnimationStateType.Idle.ToString(), true);
+            SpineAnim.CurrentAnim = CharacterAnimationStateType.Idle.ToString();
             SetAttackReady(false);
             return;
         }
