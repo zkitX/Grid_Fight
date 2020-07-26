@@ -65,6 +65,9 @@ public class Grid_UIActions
             case (UI_ActionTypes.SetSquadSelection):
                 yield return SetSquadSelection();
                 break;
+            case (UI_ActionTypes.ExitGame):
+                Application.Quit();
+                break;
             default:
                 break;
         }

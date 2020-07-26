@@ -64,6 +64,7 @@ public enum UI_ActionTypes
     TEMP_DemoVerWorldStuffAnimate,
     ChangeBattleState,
     SetSquadSelection,
+    ExitGame
 }
 
 public enum UI_FocusTypes
