@@ -161,6 +161,11 @@ public class InputController : MonoBehaviour
     #endregion
 
     
+    public void FireMinus()
+    {
+        ButtonMinusUpEvent?.Invoke(0);
+    }
+
     public static InputController Instance; //Singleton instance
 
     public int PlayersNumber;

@@ -53,7 +53,7 @@ public class UIWinLoseScript : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("SplashPage_GIO");
+            SceneManager.LoadScene("MenuScene_DemoVer");
         }
     }
 
