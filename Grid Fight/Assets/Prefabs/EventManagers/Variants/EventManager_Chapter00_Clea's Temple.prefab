@@ -1581,7 +1581,6 @@ GameObject:
   - component: {fileID: 5136787478859456122}
   - component: {fileID: 4378204269785996344}
   - component: {fileID: 2680810976250993139}
-  - component: {fileID: 3567073214514637673}
   m_Layer: 0
   m_Name: EventManager_Chapter00_Clea's Temple
   m_TagString: Untagged
@@ -1660,7 +1659,7 @@ MonoBehaviour:
     width: 0
     height: 0
   selectedBlocks:
-  - {fileID: 606315952860972236}
+  - {fileID: 3309871555444043576}
   selectedCommands: []
   variables: []
   description: 
@@ -1798,7 +1797,6 @@ MonoBehaviour:
   - {fileID: 4349903065471985021}
   - {fileID: 2063840410743814789}
   - {fileID: 7555751019910420270}
-  - {fileID: 3567073214514637673}
 --- !u!114 &984828865780498207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1853,7 +1851,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7618809006990338764}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dbd8c931f22994b9d90e2037fffaa770, type: 3}
   m_Name: 
@@ -20430,20 +20428,6 @@ MonoBehaviour:
     booleanRef: {fileID: 0}
     booleanVal: 1
   targetGameObjectOLD: {fileID: 0}
---- !u!114 &3567073214514637673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7618809006990338764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3188fd57995fe2a49ae2b8b0ce54b7dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 3189
-  indentLevel: 0
 --- !u!1 &8917722928403166728
 GameObject:
   m_ObjectHideFlags: 0
@@ -21325,6 +21309,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GeneralGameEvent_UI
       objectReference: {fileID: 0}
+    - target: {fileID: 8988776315421615999, guid: 673b9076e71942745b5de68d4e32f43b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5647772859653846600, guid: 673b9076e71942745b5de68d4e32f43b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -21518,6 +21507,26 @@ PrefabInstance:
     - target: {fileID: 8494089338530424627, guid: 673b9076e71942745b5de68d4e32f43b,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465182014427240638, guid: 673b9076e71942745b5de68d4e32f43b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9136094040365603719, guid: 673b9076e71942745b5de68d4e32f43b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8286367155395263203, guid: 673b9076e71942745b5de68d4e32f43b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133910542257326653, guid: 673b9076e71942745b5de68d4e32f43b,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5618466935650327078, guid: 673b9076e71942745b5de68d4e32f43b,
