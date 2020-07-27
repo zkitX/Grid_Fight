@@ -33,7 +33,7 @@ public class CallSetCharOnBoardOnFixedPos : Command
                 BaseCharacter cbOnPos = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.UMS.Pos.Contains(pos)).FirstOrDefault();
                 if (!GridManagerScript.Instance.isPosFree(pos) || cbOnPos != null)
                 {
-                    yield return BattleManagerScript.Instance.MoveCharOnPos(cbOnPos.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeTilesAdjacentTo(pos, 2, true, cbOnPos.UMS.WalkingSide).First().Pos, true);
+                    yield return BattleManagerScript.Instance.MoveCharOnPos(cbOnPos.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeTilesAdjacentTo(pos, 5, true, cbOnPos.UMS.WalkingSide).First().Pos, true);
                 }
 
                 BattleManagerScript.Instance.SetCharOnBoard(playerController, cName, pos);
@@ -55,7 +55,7 @@ public class CallSetCharOnBoardOnFixedPos : Command
             BaseCharacter cbOnPos = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.UMS.Pos.Contains(pos)).FirstOrDefault();
             if (!GridManagerScript.Instance.isPosFree(pos) || cbOnPos != null)
             {
-                yield return BattleManagerScript.Instance.MoveCharOnPos(cbOnPos.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeTilesAdjacentTo(pos, 1, true, cbOnPos.UMS.WalkingSide).First().Pos, true);
+                yield return BattleManagerScript.Instance.MoveCharOnPos(cbOnPos.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeTilesAdjacentTo(pos, 5, true, cbOnPos.UMS.WalkingSide).First().Pos, true);
             }
 
             BattleManagerScript.Instance.SetCharOnBoard(playerController, cName, pos, false);

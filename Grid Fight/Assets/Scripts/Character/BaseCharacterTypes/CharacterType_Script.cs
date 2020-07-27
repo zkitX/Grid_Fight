@@ -52,6 +52,12 @@ public class CharacterType_Script : BaseCharacter
         StartCoroutine(battleTime.standardTicker);
     }
 
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
+        CurrentCharSkillCompletedEvent = null;
+    }
+
     public void CharacterInputHandler(InputActionType action)
     {
         StartCoroutine(CharacterInputQueue(action));

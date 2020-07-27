@@ -29,4 +29,9 @@ public class GridFightDialogInput : DialogInput
             SetNextLineFlag();
         }
     }
+
+    private void OnDestroy()
+    {
+        InputController.Instance.ButtonAUpEvent -= Instance_ButtonAUpEvent;
+    }
 }

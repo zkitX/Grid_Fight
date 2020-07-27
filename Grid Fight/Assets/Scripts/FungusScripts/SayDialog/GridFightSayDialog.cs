@@ -38,16 +38,6 @@ public class GridFightSayDialog : SayDialog
         if(BattleManagerScript.Instance != null) BattleManagerScript.Instance.CurrentFungusStateChangedEvent += FungusChanged;
     }
 
-    private IEnumerator Initializer()
-    {
-        while (InputController.Instance == null)
-        {
-            yield return null;
-        }
-
-        InputController.Instance.ButtonAUpEvent += Instance_ButtonAUpEvent;
-    }
-
     private void Instance_ButtonAUpEvent(int player)
     {
         if(BattleManagerScript.Instance.FungusState == FungusDialogType.Dialog && BattleManagerScript.Instance.CurrentBattleState != BattleState.Pause)

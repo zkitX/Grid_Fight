@@ -88,7 +88,14 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
 
     private IEnumerator LevelLoadingSequence()
     {
-        Rewired = Instantiate(stage.Rewired);
+        if(InputController.Instance == null)
+        {
+            Rewired = Instantiate(stage.Rewired);
+        }
+        else
+        {
+            Rewired = InputController.Instance.gameObject;
+        }
         StageObjects.Add(Rewired);
 
         yield return InputController.Instance.Applet(2);
@@ -108,7 +115,7 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
         }
         else
         {
-            InputController.Instance.ResetEventSubscription();
+            //InputController.Instance.ResetEventSubscription();
         }
         yield return null;
 

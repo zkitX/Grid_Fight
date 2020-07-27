@@ -264,6 +264,15 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
         SetAttackReady(true);
     }
+    public virtual void OnDestroy()
+    {
+        CurrentCharIsDeadEvent = null;
+        CurrentCharIsRebirthEvent = null;
+        CurrentCharStartingActionEvent = null;
+        TileMovementCompleteEvent = null;
+        HealthStatsChangedEvent = null;
+
+    }
 
     #endregion
     #region Attack

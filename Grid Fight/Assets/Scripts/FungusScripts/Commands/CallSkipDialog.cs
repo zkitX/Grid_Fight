@@ -50,6 +50,7 @@ namespace Fungus
 
             // Label not found
             Debug.LogWarning("Label not found: " + _targetLabel.Value);
+            InputController.Instance.ButtonPlusDownEvent -= Instance_ButtonPlusDownEvent;
             Continue();
         }
 

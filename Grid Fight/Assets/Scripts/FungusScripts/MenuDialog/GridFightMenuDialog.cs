@@ -257,4 +257,10 @@ public class GridFightMenuDialog : MenuDialog
         SelectionIndex = 0;
         Clear();
     }
+
+    private void OnDestroy()
+    {
+        InputController.Instance.ButtonADownEvent -= Instance_ButtonADownEvent;
+        InputController.Instance.LeftJoystickUsedEvent -= Instance_LeftJoystickUsedEvent;
+    }
 }
