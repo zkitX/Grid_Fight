@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage01_Character_Valley_Strong_Epa
   m_EditorClassIdentifier: 
-  Chances: 0
+  Chances: 100
   CurrentAttackType: 0
   AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 1, y: 1}
@@ -51,98 +51,17 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 0.49936813
-          outSlope: 0.49936813
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.100126535
-          value: 0.05
-          inSlope: -0.0006326735
-          outSlope: -0.0006326735
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.2
-          value: 0
-          inSlope: -0.50031674
-          outSlope: -0.50031674
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.3
-          value: -0.05
-          inSlope: 0.000000044703484
-          outSlope: 0.000000044703484
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.4
-          value: 0
-          inSlope: 0.50167936
-          outSlope: 0.50167936
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.49933276
-          value: 0.05
-          inSlope: 0.0003463328
-          outSlope: 0.0003463328
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.5988024
-          value: 0
-          inSlope: -0.49837443
-          outSlope: -0.49837443
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.7
-          value: -0.05
-          inSlope: 0.0029585063
-          outSlope: 0.0029585063
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.8
-          value: 0
-          inSlope: 0.50884736
-          outSlope: 0.50884736
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.896582
-          value: 0.05
-          inSlope: 0.017109975
-          outSlope: 0.017109975
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
           time: 1
           value: 0
-          inSlope: -0.48347488
-          outSlope: -0.48347488
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
@@ -176,12 +95,13 @@ MonoBehaviour:
         m_RotationOrder: 4
       ChildrenBulletDelay: 0.5
       BulletEffectTiles:
-      - {x: 1, y: 2}
-      - {x: -1, y: 2}
+      - {x: 0, y: 1}
+      - {x: 0, y: 2}
+      - {x: 0, y: 3}
       BulletGapStartingTile: {x: 0, y: 0}
-      HasEffect: 1
+      HasEffect: 0
       Effects:
-      - {fileID: 11400000, guid: 20e193a1e9c2ce344b206b2496ada2d3, type: 2}
+      - {fileID: 11400000, guid: a9f8e768a3b34194084fc55a2876d9b6, type: 2}
       EffectChances: 100
     CharacterClass: 0
   TilesAtk:
