@@ -229,7 +229,11 @@ public class CharacterType_Script : BaseCharacter
 
     public override void SetUpLeavingBattle()
     {
-        battleTime.isStopped = true;
+        if(battleTime != null)
+        {
+            battleTime.isStopped = true;
+        }
+
         SetAnimation(CharacterAnimationStateType.Reverse_Arriving);
         isDefending = false;
         CurrentPlayerController = ControllerType.None;

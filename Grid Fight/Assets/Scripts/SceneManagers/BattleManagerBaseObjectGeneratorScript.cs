@@ -148,6 +148,34 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
         BattleInfoManager = Instantiate(stage.BattleInfoManager);
         StageObjects.Add(BattleInfoManager);
 
+        switch (BattleInfoManager.GetComponent<BattleInfoManagerScript>().MatchInfoType)
+        {
+            case MatchType.PvE:
+                InputController.Instance.PlayersNumber = 1;
+                InputController.Instance.SetChars();
+                break;
+            case MatchType.PvP:
+                InputController.Instance.PlayersNumber = 2;
+                InputController.Instance.SetChars();
+                break;
+            case MatchType.PPvE:
+                InputController.Instance.PlayersNumber = 2;
+                InputController.Instance.SetChars();
+                break;
+            case MatchType.PPvPP:
+                InputController.Instance.PlayersNumber = 4;
+                InputController.Instance.SetChars();
+                break;
+            case MatchType.PPPPvE:
+                InputController.Instance.PlayersNumber = 4;
+                InputController.Instance.SetChars();
+                break;
+            default:
+                break;
+        }
+
+
+
         Battle_UI = Instantiate(stage.UI_Battle);
         StageObjects.Add(Battle_UI);
 

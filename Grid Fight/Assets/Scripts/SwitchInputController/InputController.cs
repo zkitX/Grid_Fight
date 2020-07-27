@@ -195,6 +195,12 @@ public class InputController : MonoBehaviour
     
     void Awake()
     {
+        SetChars();
+    }
+
+
+    public void SetChars()
+    {
         bool keyboardAssigned = false;
 
         if (Instance != null)
@@ -234,8 +240,9 @@ public class InputController : MonoBehaviour
         {
             Joystics.Add(new Vector2());
         }
-        
+
     }
+
 
     void OnAxisUpdate(InputActionEventData data)
     {
