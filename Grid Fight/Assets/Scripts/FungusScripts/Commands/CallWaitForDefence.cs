@@ -13,6 +13,7 @@ public class CallWaitForDefence : Command
     bool isMoving = true;
     protected virtual void CallTheMethod()
     {
+        isMoving = true;
         BattleManagerScript.Instance.CurrentSelectedCharacters[ControllerType.Player1].Character.CurrentCharStartingActionEvent += Character_CurrentCharStartingActionEvent;
         StartCoroutine(Defence());
         Continue();

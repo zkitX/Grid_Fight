@@ -26,13 +26,13 @@ public class Grid_UISpineCharDisplay : MonoBehaviour
         {
             displayColor = new Color(1f, 1f, 1f, 0f);
         }
-        //TODO Riki put it on 
-       /* if (selectionDisplay.skeletonDataAsset != characterSpine)
+
+        if (isActiveAndEnabled && selectionDisplay?.skeletonDataAsset != characterSpine)
         {
             if (SelectedDisplayer != null) StopCoroutine(SelectedDisplayer);
             SelectedDisplayer = ReloadSpineSkeletonData(characterSpine, displayColor);
             StartCoroutine(SelectedDisplayer);
-        }*/
+        }
     }
 
     IEnumerator SelectedDisplayer = null;
