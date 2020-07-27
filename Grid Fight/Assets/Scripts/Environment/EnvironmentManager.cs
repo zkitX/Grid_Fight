@@ -159,7 +159,7 @@ public class EnvironmentManager : MonoBehaviour
            
             if (duration > 0)
             {
-                yield return CameraManagerScript.Instance.CameraMoveSequence_Co(camInfo.DurationOut, BattleManagerScript.Instance.CurrentSelectedCharacters[ControllerType.Player1].Character.CurrentBattleTiles.First().transform.position, camInfo.MovementCurve);
+                yield return CameraManagerScript.Instance.CameraMoveSequence_Co(camInfo.DurationOut, BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r=> r.Value.Character != null).First().Value.Character.CurrentBattleTiles.First().transform.position, camInfo.MovementCurve);
             }
 
             yield return CameraManagerScript.Instance.CameraFocusSequence_Co(camInfo.DurationIn, camInfo.TransitionINZoomValue, camInfo.ZoomIn);

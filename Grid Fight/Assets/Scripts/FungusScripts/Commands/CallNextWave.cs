@@ -2,6 +2,7 @@
 using MyBox;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CommandInfo("Scripting",
@@ -61,7 +62,7 @@ public class CallNextWave : Command
         BattleManagerScript.Instance.CurrentBattleState = BattleState.FungusPuppets;
         if (HasAStageUpdate)
         {
-            CameraManagerScript.Instance.CameraFocusSequence(CamInfo.DurationIn, CamInfo.TransitionINZoomValue, CamInfo.ZoomIn, CamInfo.ZoomInCamMovement, BattleManagerScript.Instance.CurrentSelectedCharacters[ControllerType.Player1].Character.transform.position);
+            CameraManagerScript.Instance.CameraFocusSequence(CamInfo.DurationIn, CamInfo.TransitionINZoomValue, CamInfo.ZoomIn, CamInfo.ZoomInCamMovement, BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r=> r.Value.Character != null).First().Value.Character.transform.position);
         }
 
         if (CallPool)

@@ -188,7 +188,7 @@ public class CharacterType_Script : BaseCharacter
     IEnumerator ReviveSequencer()
     {
         float timeElapsed = 0f;
-        float timeToWait = CharInfo.CharacterRespawnLength;
+        float timeToWait = 90;//CharInfo.CharacterRespawnLength;
         while (timeElapsed != timeToWait)
         {
             if (BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle

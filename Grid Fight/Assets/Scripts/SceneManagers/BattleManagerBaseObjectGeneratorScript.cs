@@ -148,7 +148,7 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
         BattleInfoManager = Instantiate(stage.BattleInfoManager);
         StageObjects.Add(BattleInfoManager);
 
-        switch (BattleInfoManager.GetComponent<BattleInfoManagerScript>().MatchInfoType)
+     /*   switch (BattleInfoManager.GetComponent<BattleInfoManagerScript>().MatchInfoType)
         {
             case MatchType.PvE:
                 InputController.Instance.PlayersNumber = 1;
@@ -172,9 +172,7 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
                 break;
             default:
                 break;
-        }
-
-
+        }*/
 
         Battle_UI = Instantiate(stage.UI_Battle);
         StageObjects.Add(Battle_UI);

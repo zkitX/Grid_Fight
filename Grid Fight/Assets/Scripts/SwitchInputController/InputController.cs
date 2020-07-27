@@ -166,8 +166,20 @@ public class InputController : MonoBehaviour
         ButtonMinusUpEvent?.Invoke(0);
     }
 
-    public static InputController Instance; //Singleton instance
+    public static InputController _Instance; //Singleton instance
 
+
+    public static InputController Instance
+    {
+        get
+        {
+            return _Instance;
+        }
+        set
+        {
+            _Instance = value;
+        }
+    }
     public int PlayersNumber;
     public int PlayerCount //cus PlayersNumber seems like a cap more than a count
     {
@@ -195,15 +207,7 @@ public class InputController : MonoBehaviour
     
     void Awake()
     {
-        SetChars();
-    }
-
-
-    public void SetChars()
-    {
-        bool keyboardAssigned = false;
-
-        if (Instance != null)
+        if (Instance != null && Instance != this)
         {
             Destroy(this);
             return;
@@ -211,8 +215,15 @@ public class InputController : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        SetChars();
+
+    }
 
 
+    public void SetChars()
+    {
+        bool keyboardAssigned = false;
+       
 
         if (ReInput.players.GetPlayer(0).controllers.joystickCount == 0)
         {
@@ -230,12 +241,14 @@ public class InputController : MonoBehaviour
             {
                 keyboardAssigned = true;
             }
+            players[i].ClearInputEventDelegates();
             players[i].AddInputEventDelegate(OnButtonDown, UpdateLoopType.Update, InputActionEventType.ButtonJustPressed);
             players[i].AddInputEventDelegate(OnButtonPress, UpdateLoopType.Update, InputActionEventType.ButtonPressed);
             players[i].AddInputEventDelegate(OnButtonUp, UpdateLoopType.Update, InputActionEventType.ButtonJustReleased);
             players[i].AddInputEventDelegate(OnAxisUpdate, UpdateLoopType.Update, InputActionEventType.AxisActive);
         }
 
+        Joystics.Clear();
         for (int i = 0; i < PlayerCount; i++)
         {
             Joystics.Add(new Vector2());
