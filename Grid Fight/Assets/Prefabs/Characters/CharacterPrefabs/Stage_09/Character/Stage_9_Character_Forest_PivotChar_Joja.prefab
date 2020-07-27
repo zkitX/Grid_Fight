@@ -621,13 +621,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Miranda
+  Name: Joja
   CharacterIcon: {fileID: 0}
   Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: fe1c3deca13ee8046aa075346d34f2b2, type: 2}
   BaseCharacterType: 0
   CharacterID: 1187
   CurrentAttackTypeInfo:
+  - {fileID: 11400000, guid: e4007aa1f4a476c459e410092a9d3dce, type: 2}
+  - {fileID: 11400000, guid: f2f027bf0fab6414fbf2b02bc974c939, type: 2}
   - {fileID: 11400000, guid: e369701dad3a97d45ac0ca8469d974c9, type: 2}
   Elemental: 6
   ClassType: 0
@@ -707,8 +709,12 @@ MonoBehaviour:
   DefenceStats:
     BaseDefence: 10
     Invulnerability: 0.2
+    MinionDefenceChances: 20
+    MinionPerfectDefenceChances: 5
     B_BaseDefence: 10
     B_Invulnerability: 0.2
+    B_MinionDefenceChances: 20
+    B_MinionPerfectDefenceChances: 5
     LevelMultiplier: 0
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
@@ -756,7 +762,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8099800020097375808}
   m_Layer: 0
-  m_Name: Stage_9_Character_Forest_PivotChar
+  m_Name: Stage_9_Character_Forest_PivotChar_Joja
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
