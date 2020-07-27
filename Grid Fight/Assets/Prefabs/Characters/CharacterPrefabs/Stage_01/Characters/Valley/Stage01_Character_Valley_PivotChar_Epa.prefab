@@ -526,7 +526,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1916127f8dd1cb340b381807318ad726, type: 2}
   - {fileID: 11400000, guid: 63514f1dc0dee7045957ef660c441b39, type: 2}
   - {fileID: 11400000, guid: d6d3144a5be1dc9479b98f8e70de197c, type: 2}
-  Elemental: 2
+  Elemental: 8
   ClassType: 0
   CharaterLevel: 0
   UseLayeringSystem: 1
@@ -536,55 +536,55 @@ MonoBehaviour:
   CharacterSelection: 0
   RapidAttack:
     DamageMultiplier: {x: 1, y: 1}
-    CriticalChance: {x: 2, y: 2}
+    CriticalChance: {x: 2, y: 4}
     LevelMultiplier: 0
     B_DamageMultiplier: {x: 1, y: 1}
     B_CriticalChance: {x: 2, y: 2}
   PowerfulAttac:
     DamageMultiplier: {x: 3, y: 3}
-    CriticalChance: {x: 3, y: 5}
+    CriticalChance: {x: 3, y: 6}
     LevelMultiplier: 0
     B_DamageMultiplier: {x: 3, y: 3}
     B_CriticalChance: {x: 3, y: 5}
   HealthStats:
     Health: 40
     Base: 40
-    Regeneration: 0.5
-    BaseHealthRegeneration: 0.5
-    LevelMultiplier: 15
+    Regeneration: 0.7
+    BaseHealthRegeneration: 0.7
+    LevelMultiplier: 20
     B_Health: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseHealthRegeneration: 0
   StaminaStats:
-    Stamina: 35
-    Base: 35
-    Regeneration: 1
-    BaseStaminaRegeneration: 1
-    LevelMultiplier: 30
+    Stamina: 39
+    Base: 39
+    Regeneration: 1.2
+    BaseStaminaRegeneration: 1.2
+    LevelMultiplier: 27
     B_Stamina: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseStaminaRegeneration: 0
   ShieldStats:
-    Shield: 5
-    Base: 5
-    Regeneration: 0.2
-    BaseShieldRegeneration: 0.2
-    LevelMultiplier: 30
+    Shield: 3
+    Base: 3
+    Regeneration: 0.4
+    BaseShieldRegeneration: 0.4
+    LevelMultiplier: 35
     B_Shield: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseShieldRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
-    MovementSpeed: 2
-    AttackSpeed: 2
-    AttackSpeedRatio: 1
-    BulletSpeed: 1.5
+    MovementSpeed: 1.8
+    AttackSpeed: 1.5
+    AttackSpeedRatio: 2
+    BulletSpeed: 1.9
     LeaveSpeed: 3
     BaseSpeed_LevelMultiplier: 0
-    MovementSpeed_LevelMultiplier: 0
+    MovementSpeed_LevelMultiplier: 3
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
     B_BaseSpeed: 1
@@ -596,13 +596,13 @@ MonoBehaviour:
     B_IdleToAtkDuration: 0.2
     B_AtkToIdleDuration: 0.2
   DamageStats:
-    BaseDamage: 6
+    BaseDamage: 4.5
     B_BaseDamage: 10
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 15
   DefenceStats:
-    BaseDefence: 3
+    BaseDefence: 2
     Invulnerability: 0.2
     MinionDefenceChances: 20
     MinionPerfectDefenceChances: 5

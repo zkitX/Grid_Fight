@@ -655,22 +655,22 @@ MonoBehaviour:
   CharacterSelection: 0
   RapidAttack:
     DamageMultiplier: {x: 1, y: 1}
-    CriticalChance: {x: 2, y: 2}
+    CriticalChance: {x: 2, y: 6}
     LevelMultiplier: 0
     B_DamageMultiplier: {x: 1, y: 1}
     B_CriticalChance: {x: 2, y: 2}
   PowerfulAttac:
-    DamageMultiplier: {x: 3, y: 3}
-    CriticalChance: {x: 3, y: 5}
+    DamageMultiplier: {x: 3.3, y: 3.3}
+    CriticalChance: {x: 3, y: 7}
     LevelMultiplier: 0
     B_DamageMultiplier: {x: 3, y: 3}
     B_CriticalChance: {x: 3, y: 5}
   HealthStats:
-    Health: 30
-    Base: 30
-    Regeneration: 0.5
-    BaseHealthRegeneration: 0.5
-    LevelMultiplier: 15
+    Health: 42
+    Base: 42
+    Regeneration: 0.6
+    BaseHealthRegeneration: 0.6
+    LevelMultiplier: 28
     B_Health: 0
     B_Base: 0
     B_Regeneration: 0
@@ -680,7 +680,7 @@ MonoBehaviour:
     Base: 35
     Regeneration: 1
     BaseStaminaRegeneration: 1
-    LevelMultiplier: 30
+    LevelMultiplier: 29
     B_Stamina: 0
     B_Base: 0
     B_Regeneration: 0
@@ -697,13 +697,13 @@ MonoBehaviour:
     B_BaseShieldRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
-    MovementSpeed: 2.3
-    AttackSpeed: 2
+    MovementSpeed: 2
+    AttackSpeed: 2.1
     AttackSpeedRatio: 1
     BulletSpeed: 1.5
     LeaveSpeed: 3
     BaseSpeed_LevelMultiplier: 0
-    MovementSpeed_LevelMultiplier: 0
+    MovementSpeed_LevelMultiplier: 3.7
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
     B_BaseSpeed: 1
@@ -715,13 +715,13 @@ MonoBehaviour:
     B_IdleToAtkDuration: 0.2
     B_AtkToIdleDuration: 0.2
   DamageStats:
-    BaseDamage: 10
+    BaseDamage: 5.7
     B_BaseDamage: 10
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 15
   DefenceStats:
-    BaseDefence: 10
+    BaseDefence: 2
     Invulnerability: 0.2
     MinionDefenceChances: 20
     MinionPerfectDefenceChances: 5
