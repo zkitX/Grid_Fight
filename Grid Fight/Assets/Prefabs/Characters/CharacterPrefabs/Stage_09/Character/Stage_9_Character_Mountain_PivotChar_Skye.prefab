@@ -435,13 +435,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Miranda
+  Name: Dorje
   CharacterIcon: {fileID: 0}
   Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 43a4d00463eebae40af9f2902870ce49, type: 2}
   BaseCharacterType: 0
   CharacterID: 1185
   CurrentAttackTypeInfo:
+  - {fileID: 11400000, guid: 66f667f7cd68db14d9c4524182a79019, type: 2}
+  - {fileID: 11400000, guid: c5461922004821d43a0910339c117f2c, type: 2}
   - {fileID: 11400000, guid: bc5c1bd0aae115f4ca98a93b1c697d2a, type: 2}
   Elemental: 6
   ClassType: 0
@@ -521,8 +523,12 @@ MonoBehaviour:
   DefenceStats:
     BaseDefence: 10
     Invulnerability: 0.2
+    MinionDefenceChances: 20
+    MinionPerfectDefenceChances: 5
     B_BaseDefence: 10
     B_Invulnerability: 0.2
+    B_MinionDefenceChances: 20
+    B_MinionPerfectDefenceChances: 5
     LevelMultiplier: 0
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
@@ -570,7 +576,7 @@ GameObject:
   m_Component:
   - component: {fileID: 55710729243250910}
   m_Layer: 0
-  m_Name: Stage_9_Character_Mountain_PivotChar
+  m_Name: Stage_9_Character_Mountain_PivotChar_Skye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
