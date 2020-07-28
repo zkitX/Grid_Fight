@@ -16,14 +16,15 @@ public class CharSelectBox : MonoBehaviour
     {
         get
         {
-            return selectionBox.rectTransform.sizeDelta;
+            return new Vector2(selectionBox.rectTransform.sizeDelta.x * (Screen.width / 1920f), selectionBox.rectTransform.sizeDelta.y * (Screen.height / 1080f));
         }
     }
     protected Vector2 btnDimens
     {
         get
         {
-            return selectableCharButton_Prefab.GetComponent<Image>().rectTransform.sizeDelta;
+            RectTransform rt = selectableCharButton_Prefab.GetComponent<Image>().rectTransform;
+            return new Vector2(rt.sizeDelta.x * (Screen.width / 1920f), rt.sizeDelta.y * (Screen.height / 1080f));
         }
     }
     protected CharSelectSelector selector = null;
@@ -92,7 +93,9 @@ public class CharSelectBox : MonoBehaviour
 
     public void ChangeBoxXSize(float val)
     {
-        GetComponent<Image>().rectTransform.sizeDelta = new Vector2(val, GetComponent<Image>().rectTransform.sizeDelta.y);
+        RectTransform rectTransform = GetComponent<RectTransform>();
+        rectTransform.sizeDelta.Set(val, rectTransform.sizeDelta.y);
+        rectTransform.anchoredPosition = Vector3.zero;
     }
 
     public void SetBoxSelectionMode(int mode)
@@ -181,10 +184,10 @@ public class CharSelectBox : MonoBehaviour
             if (curCharIndex < SceneLoadManager.Instance.loadedCharacters.Length)
             {
                 activeButtons[i].DisplayChar(SceneLoadManager.Instance.loadedCharacters[curCharIndex], selectionMode == SelectionMode.Squad);
-                if (activeButtons[i].GetComponent<Grid_UIButton>().selected) activeButtons[i].UpdateSelection();
             }
+            if (activeButtons[i].GetComponent<Grid_UIButton>().selected) activeButtons[i].UpdateSelection();
             curCharIndex++;
-        }   
+        }
     }
 
     public void EnableSelect(bool state)

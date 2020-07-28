@@ -90,7 +90,7 @@ public class Grid_UICursor : MonoBehaviour
         move = new Vector2(move.y * Time.deltaTime * cursorMoveSpeed * -500f, move.x * Time.deltaTime * cursorMoveSpeed * 500f);
         if (currentPos.x + move.x < screenBounds[0].x || currentPos.x + move.x > screenBounds[1].x) move.x = 0f;
         if (currentPos.y + move.y < screenBounds[0].y || currentPos.y + move.y > screenBounds[1].y) move.y = 0f;
-        transform.position += new Vector3(move.x, move.y);
+        transform.position += new Vector3(move.x * (Screen.width / 1920f), move.y * (Screen.height / 1080f));
     }
 
     IEnumerator MoveEnder = null;

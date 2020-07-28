@@ -32,6 +32,7 @@ public class CharSelectButton : MonoBehaviour
         if (character == null)
         {
             displayImageRef.color = new Color(1f, 1f, 1f, 0f);
+            displayedChar = CharacterNameType.None;
             return;
         }
 
