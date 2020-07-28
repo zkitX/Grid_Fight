@@ -129,6 +129,8 @@ public class CharacterInfoScript : MonoBehaviour
     {
         public float BaseSpeed = 1;
         public float MovementSpeed = 1;
+        [Range(0,1)]
+        public float MovementPerc = 0.85f;
         public float AttackSpeed = 1;
         public float AttackSpeedRatio;
         public float BulletSpeed = 5;

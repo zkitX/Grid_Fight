@@ -17,14 +17,14 @@ public class SayRight : Say
     {
         setSayDialog = SayDialog.GetSayDialog("RightDialog");
         LeftSay = (GridFightSayDialog)SayDialog.GetSayDialog("LeftDialog");
-        if (!showAlways && executionCount >= showCount)
+      /*  if (!showAlways && executionCount >= showCount)
         {
             Continue();
             return;
-        }
+        }*/
 
         executionCount++;
-
+        LeftSay.SayDialogAnimatorController.SetBool("IsSelected", false);
         if (setSayDialog == null && LeftSay == null)
         {
             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_Entering, AudioBus.MidPrio);

@@ -16,14 +16,14 @@ public class SayLeft : Say
     {
         setSayDialog = SayDialog.GetSayDialog("LeftDialog");
         RightSay = (GridFightSayDialog)SayDialog.GetSayDialog("RightDialog");
-        if (!showAlways && executionCount >= showCount)
+      /*  if (!showAlways && executionCount >= showCount)
         {
             Continue();
             return;
-        }
+        }*/
 
         executionCount++;
-
+        RightSay.SayDialogAnimatorController.SetBool("IsSelected", false);
         if (setSayDialog == null && RightSay == null)
         {
             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Dialogue_Entering, AudioBus.MidPrio);
@@ -79,5 +79,4 @@ public class SayLeft : Say
         yield return sayDialog.Say(text, !extendPrevious, waitForClick, fadeWhenDone, stopVoiceover, waitForVO, voiceOverClip, character);
         Continue();
     }
-
 }

@@ -969,7 +969,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             spaceTimer = curve.Evaluate(timer);
             spineT.localPosition = Vector3.Lerp(localoffset, LocalSpinePosoffset, spaceTimer);
 
-            if (timer > 0.7f && !isMovCheck)
+            if (timer > CharInfo.SpeedStats.MovementPerc && !isMovCheck)
             {
                 isMovCheck = true;
                 isMoving = false;
