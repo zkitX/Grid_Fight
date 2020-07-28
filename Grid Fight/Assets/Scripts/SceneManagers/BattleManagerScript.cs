@@ -1292,7 +1292,7 @@ public class BattleManagerScript : MonoBehaviour
     #region Move Character
 
     //Move selected char under determinated player
-    public void MoveSelectedCharacterInDirection(ControllerType playerController, InputDirection dir)
+    public void MoveSelectedCharacterInDirection(ControllerType playerController, InputDirection dir, float value)
     {
         if (CurrentBattleState != BattleState.Battle ) return;
 
@@ -1300,7 +1300,16 @@ public class BattleManagerScript : MonoBehaviour
         {
             if (CurrentSelectedCharacters[playerController].Character.UMS.UnitBehaviour == UnitBehaviourType.ControlledByPlayer)
             {
-                CurrentSelectedCharacters[playerController].Character.MoveCharOnDirection(dir);
+                if (Mathf.Abs(CurrentSelectedCharacters[playerController].Character.LastAxisValue) > Mathf.Abs(value) && (value < 0.4f && value > -0.4f))
+                {
+                    CurrentSelectedCharacters[playerController].Character.EndAxisMovement = true;
+                }
+                else
+                {
+                    CurrentSelectedCharacters[playerController].Character.MoveCharOnDirection(dir);
+                }
+
+                CurrentSelectedCharacters[playerController].Character.LastAxisValue = value;
             }
         }
     }

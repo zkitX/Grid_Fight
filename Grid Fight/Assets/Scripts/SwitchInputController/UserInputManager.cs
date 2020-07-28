@@ -104,18 +104,18 @@ public class UserInputManager : MonoBehaviour
     }
 
     #region Joystick
-    private void Instance_RightJoystickUsedEvent(int player, InputDirection dir)
+    private void Instance_RightJoystickUsedEvent(int player, InputDirection dir, float value)
     {
         //Debug.Log(player + "    " + dir);
         //UserInputJoystickHandler(PPPlayer, DDir);
-        UserInputJoystickHandler(player, dir);
+        UserInputJoystickHandler(player, dir, value);
     }
 
-    private void Instance_LeftJoystickUsedEvent(int player, InputDirection dir)
+    private void Instance_LeftJoystickUsedEvent(int player, InputDirection dir, float value)
     {
         //Debug.Log(player + "    " + dir);
         //UserInputJoystickHandler(PPPlayer, DDir);
-        UserInputJoystickHandler(player, dir);
+        UserInputJoystickHandler(player, dir, value);
     }
 
     #endregion
@@ -610,9 +610,9 @@ public class UserInputManager : MonoBehaviour
         BattleManagerScript.Instance.StopChargingAttack((ControllerType)player);
     }
 
-    public void UserInputJoystickHandler(int player, InputDirection dir)
+    public void UserInputJoystickHandler(int player, InputDirection dir, float value)
     {
-        BattleManagerScript.Instance.MoveSelectedCharacterInDirection((ControllerType)player, dir);
+        BattleManagerScript.Instance.MoveSelectedCharacterInDirection((ControllerType)player, dir, value);
     }
 
     public void SelectCharacter(CharacterSelectionType characterSelection, ControllerType controllerType)

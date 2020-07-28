@@ -25,6 +25,9 @@ public class CharacterType_Script : BaseCharacter
         new SkillCoolDownClass(AttackInputType.Skill3, false)
     };
     public IEnumerator SkillActivation = null;
+    public float LastAxisValue = 0;
+
+    
 
 
     #region Unity Life Cycles

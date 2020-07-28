@@ -154,9 +154,9 @@ public class InputController : MonoBehaviour
     #endregion
 
     #region JoyStick
-    public delegate void LeftJoystickUsed(int player, InputDirection dir);
+    public delegate void LeftJoystickUsed(int player, InputDirection dir, float value);
     public event LeftJoystickUsed LeftJoystickUsedEvent;
-    public delegate void RightJoystickUsed(int player, InputDirection dir);
+    public delegate void RightJoystickUsed(int player, InputDirection dir, float value);
     public event RightJoystickUsed RightJoystickUsedEvent;
     #endregion
 
@@ -269,22 +269,22 @@ public class InputController : MonoBehaviour
             {
                 if (Joystics[data.playerId].x > 0)
                 {
-                    LeftJoystickUsedEvent(data.playerId, InputDirection.Right);
+                    LeftJoystickUsedEvent(data.playerId, InputDirection.Right, Joystics[data.playerId].x);
                 }
                 else
                 {
-                    LeftJoystickUsedEvent(data.playerId, InputDirection.Left);
+                    LeftJoystickUsedEvent(data.playerId, InputDirection.Left, Joystics[data.playerId].x);
                 }
             }
             else
             {
                 if (Joystics[data.playerId].y > 0)
                 {
-                    LeftJoystickUsedEvent(data.playerId, InputDirection.Up);
+                    LeftJoystickUsedEvent(data.playerId, InputDirection.Up, Joystics[data.playerId].y);
                 }
                 else
                 {
-                    LeftJoystickUsedEvent(data.playerId, InputDirection.Down);
+                    LeftJoystickUsedEvent(data.playerId, InputDirection.Down, Joystics[data.playerId].y);
                 }
             }
         }
@@ -364,16 +364,16 @@ public class InputController : MonoBehaviour
                 ButtonRightStickDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.KeyboardDown:
-                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Down);
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Down, data.GetAxis());
                 break;
             case InputButtonType.KeyboardLeft:
-                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Left);
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Left, data.GetAxis());
                 break;
             case InputButtonType.KeyboardRight:
-                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Right);
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Right, data.GetAxis());
                 break;
             case InputButtonType.KeyboardUp:
-                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Up);
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Up, data.GetAxis());
                 break;
         }
     }
@@ -449,6 +449,18 @@ public class InputController : MonoBehaviour
                 break;
             case InputButtonType.Right_Stick:
                 ButtonRightStickPressedEvent?.Invoke(data.playerId);
+                break;
+            case InputButtonType.KeyboardDown:
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Down, data.GetAxis());
+                break;
+            case InputButtonType.KeyboardLeft:
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Left, data.GetAxis());
+                break;
+            case InputButtonType.KeyboardRight:
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Right, data.GetAxis());
+                break;
+            case InputButtonType.KeyboardUp:
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Up, data.GetAxis());
                 break;
         }
     }
@@ -529,9 +541,19 @@ public class InputController : MonoBehaviour
             case InputButtonType.Right_Stick:
                 ButtonRightStickUpEvent?.Invoke(data.playerId);
                 break;
+            case InputButtonType.KeyboardDown:
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Down, data.GetAxis());
+                break;
+            case InputButtonType.KeyboardLeft:
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Left, data.GetAxis());
+                break;
+            case InputButtonType.KeyboardRight:
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Right, data.GetAxis());
+                break;
+            case InputButtonType.KeyboardUp:
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Up, data.GetAxis());
+                break;
         }
-       
-
     }
 
     public void ResetEventSubscription()

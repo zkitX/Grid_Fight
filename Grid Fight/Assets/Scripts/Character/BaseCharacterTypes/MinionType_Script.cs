@@ -41,6 +41,19 @@ public class MinionType_Script : BaseCharacter
     }
     protected bool AIMove = false;
 
+
+    public override bool EndAxisMovement
+    {
+        get
+        {
+            return true;
+        }
+        set
+        {
+        }
+    }
+
+
     public override void SetUpEnteringOnBattle()
     {
         SetAnimation(CharacterAnimationStateType.Arriving);

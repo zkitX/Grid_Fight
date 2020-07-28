@@ -74,7 +74,7 @@ public class ArenaMapSelector : MonoBehaviour
         StartCoroutine(SelectionMover);
     }
 
-    public void ChangeMapSelection(int playerIndex, InputDirection dir)
+    public void ChangeMapSelection(int playerIndex, InputDirection dir, float value)
     {
         if (parentPanel.focusState != UI_FocusTypes.Focused) return;
 

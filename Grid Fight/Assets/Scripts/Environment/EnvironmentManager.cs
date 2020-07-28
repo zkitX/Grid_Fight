@@ -56,18 +56,18 @@ public class EnvironmentManager : MonoBehaviour
     }
 
     public IEnumerator MoveToNewGrid(int gridIndex, float duration, List<PlayersCurrentSelectedCharClass> playersCurrentSelectedChars, List<TalkingTeamClass> arrivingChar, float jumpAnimSpeed,
-    CameraInOutInfoClass camInfo, bool jumpUp = false, bool moveChars = true, float wt = 0.5f)
+    CameraInOutInfoClass camInfo, float windTransitionRotation, bool jumpUp = false, bool moveChars = true, float wt = 0.5f)
     {
         FightGrid destinationGrid = fightGrids[gridIndex != -1 ? gridIndex : currentGridIndex];
         GridManagerScript.Instance.MoveGrid_ToWorldPosition(destinationGrid.pivot);
         currentGridIndex = gridIndex != -1 ? gridIndex : currentGridIndex;
         yield return GridLeapSequence(duration, CameraStage.CameraInfo.Where(r => r.StageIndex == (gridIndex != -1 ? gridIndex : currentGridIndex)).First().CameraPosition, playersCurrentSelectedChars, arrivingChar, jumpAnimSpeed,
-            camInfo, jumpUp, moveChars, wt);
+            camInfo, windTransitionRotation, jumpUp, moveChars, wt);
     }
 
     
     IEnumerator GridLeapSequence(float duration, Vector3 translation, List<PlayersCurrentSelectedCharClass> playersCurrentSelectedChars, List<TalkingTeamClass> arrivingChar,
-        float jumpAnimSpeed, CameraInOutInfoClass camInfo,
+        float jumpAnimSpeed, CameraInOutInfoClass camInfo, float windTransitionRotation,
         bool jumpUp = false, bool moveChars = true, float wt = 0.5f)
     {
         //Ensure new grid is set and moved to correct position before everything
@@ -103,7 +103,7 @@ public class EnvironmentManager : MonoBehaviour
                 waitingTime += BattleManagerScript.Instance.DeltaTime;
                 yield return null;
             }
-            CameraManagerScript.Instance.TransitionAnimController.SetBool("UIState", true);
+            CameraManagerScript.Instance.SetWindTransitionAnim(true, windTransitionRotation);
 
             if (duration > 0)
             {

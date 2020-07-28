@@ -166,7 +166,18 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     protected List<BattleTileScript> currentBattleTilesToCheck = new List<BattleTileScript>();
     public IEnumerator AICo = null;
     [HideInInspector] public Vector2Int nextAttackPos;
-
+    public virtual bool EndAxisMovement
+    {
+        get
+        {
+            return _EndAxisMovement;
+        }
+        set
+        {
+            _EndAxisMovement = value;
+        }
+    }
+    private bool _EndAxisMovement = true;
 
     public virtual void Start()
     {
@@ -756,7 +767,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public virtual IEnumerator MoveCharOnDir_Co(InputDirection nextDir)
     {
-        if ((CharInfo.Health > 0 && !isMoving && IsOnField && SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving.ToString() && CharActionlist.Contains(CharacterActionType.Move)) || BattleManagerScript.Instance.VFXScene)
+        if ((CharInfo.Health > 0 && !isMoving && IsOnField && EndAxisMovement && SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving.ToString() && CharActionlist.Contains(CharacterActionType.Move)) || BattleManagerScript.Instance.VFXScene)
         {
 
             List<BattleTileScript> prevBattleTile = CurrentBattleTiles;
@@ -956,6 +967,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         float spaceTimer = 0;
         bool isMovCheck = false;
         bool isDefe = false;
+        EndAxisMovement = false;
         Transform spineT = SpineAnim.transform;
         Vector3 offset = spineT.position;
         transform.position = nextPos;

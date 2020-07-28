@@ -36,7 +36,7 @@ public class MainMenuPAX : MonoBehaviour
         //InputController.Instance.LeftJoystickUsedEvent += Instance_LeftJoystickUsedEvent;
     }
 
-    private void Instance_LeftJoystickUsedEvent(int player, InputDirection dir)
+    private void Instance_LeftJoystickUsedEvent(int player, InputDirection dir, float value)
     {
         if(Time.time > TimeOffset + CoolDown)
         {

@@ -44,7 +44,7 @@ public class Grid_UIPlayerNavBox : MonoBehaviour
         PressForPlayer(player);
     }
     protected float offset = 0f;
-    protected void Instance_LeftJoyStickUsedEvent(int player, InputDirection dir)
+    protected void Instance_LeftJoyStickUsedEvent(int player, InputDirection dir, float value)
     {
         if (!Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.PlayerNavBox) || !activeState || parentPanel.focusState != UI_FocusTypes.Focused) return;
         if (offset + 0.2f < Time.time)

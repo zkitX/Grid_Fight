@@ -264,7 +264,7 @@ public class Grid_UINavigator : MonoBehaviour
 
 
     float offset = 0f;
-    public void ButtonChangeInput(int player, InputDirection direction)
+    public void ButtonChangeInput(int player, InputDirection direction, float value)
     {
         if (offset + 0.2f < Time.time)
         {

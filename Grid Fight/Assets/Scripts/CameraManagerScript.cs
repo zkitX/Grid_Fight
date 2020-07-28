@@ -52,6 +52,12 @@ public class CameraManagerScript : MonoBehaviour
         Anim.SetInteger("Shake", 0);
     }
 
+    public void SetWindTransitionAnim(bool value, float rotation)
+    {
+        TransitionAnimController.SetBool("UIState", value);
+        TransitionAnimController.transform.parent.localEulerAngles = new Vector3(0, 0, rotation); 
+    }
+
     public void CameraFocusSequence(float duration, float endOrtho, AnimationCurve animCurveZoom, AnimationCurve animCurveMovement, Vector3 playerPos)
     {
         if (playerPos != Vector3.zero)

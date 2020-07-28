@@ -178,7 +178,7 @@ public class GridFightMenuDialog : MenuDialog
         InputController.Instance.LeftJoystickUsedEvent += Instance_LeftJoystickUsedEvent;
     }
 
-    private void Instance_LeftJoystickUsedEvent(int player, InputDirection dir)
+    private void Instance_LeftJoystickUsedEvent(int player, InputDirection dir, float value)
     {
         if (Time.time > TimeOffset + CoolDown && isMenuReady && BattleManagerScript.Instance.FungusState == FungusDialogType.Menu && BattleManagerScript.Instance.CurrentBattleState != BattleState.Pause)
         {
