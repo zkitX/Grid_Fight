@@ -24,6 +24,8 @@ public class GridFightDialogInput : DialogInput
 
     private void Instance_ButtonAUpEvent(int player)
     {
+        if (BattleManagerScript.Instance == null) return;
+
         if (BattleManagerScript.Instance.FungusState == FungusDialogType.Dialog && BattleManagerScript.Instance.CurrentBattleState != BattleState.Pause)
         {
             SetNextLineFlag();

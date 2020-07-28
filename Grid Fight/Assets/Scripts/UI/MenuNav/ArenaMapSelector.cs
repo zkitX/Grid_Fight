@@ -39,7 +39,7 @@ public class ArenaMapSelector : MonoBehaviour
 
         for(int i = 0; i < pvpStages.Length; i++)
         {
-            Vector3 pos = new Vector3(transform.position.x + (i * (dimentions.x * (1f + bufferBetweenNodes))), transform.position.y, transform.position.z);
+            Vector3 pos = new Vector3(transform.position.x + (i * (dimentions.x * (1f + bufferBetweenNodes) * (Screen.width / 1920f))), transform.position.y, transform.position.z);
             ArenaMapNode curNode = Instantiate(mapNodePrefab, pos, Quaternion.identity, transform).GetComponent<ArenaMapNode>();
             curNode.SetupStageInfo(pvpStages[i], dimentions);
             listedStages.Add(curNode);
