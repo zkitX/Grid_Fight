@@ -914,6 +914,7 @@ public class BattleManagerScript : MonoBehaviour
             for (int i = 0; i < moveDetail.amount; i++)
             {
                 yield return character.MoveCharOnDir_Co(moveDetail.nextDir);
+                character.EndAxisMovement = true;
             }
         }
     }
