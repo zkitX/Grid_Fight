@@ -965,7 +965,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         while (timer < 1 && !stopCo)
         {
             yield return BattleManagerScript.Instance.WaitFixedUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-            timer += (BattleManagerScript.Instance.FixedDeltaTime / (animLength / (CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed * BattleManagerScript.Instance.MovementMultiplier)));
+            timer += (BattleManagerScript.Instance.FixedDeltaTime / (1 / (CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed * BattleManagerScript.Instance.MovementMultiplier)));
             spaceTimer = curve.Evaluate(timer);
             spineT.localPosition = Vector3.Lerp(localoffset, LocalSpinePosoffset, spaceTimer);
 
@@ -1408,7 +1408,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         else if (animState.Contains("Dash"))
         {
-            AnimSpeed = CharInfo.SpeedStats.MovementSpeed * CharInfo.BaseSpeed;
+            AnimSpeed = (SpineAnim.GetAnimLenght(animState) / 1f) * CharInfo.SpeedStats.MovementSpeed * CharInfo.BaseSpeed;
         }
         else if (animState.Contains("JumpTransition") || animState.Contains("Arriv"))
         {
