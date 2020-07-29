@@ -195,6 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f98aab6021486341825eb862f61401a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skeletonAnimation: {fileID: 0}
   CharOwner: {fileID: 0}
   CurveType: 0
   Speed_Time_Curves:
@@ -430,29 +431,29 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        inSlope: 1.4285715
+        outSlope: 1.4285715
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.3398685
-        value: 0.78926164
-        inSlope: 1.0438001
-        outSlope: 1.0438001
-        tangentMode: 0
+        time: 0.7
+        value: 1
+        inSlope: 1.3245091
+        outSlope: 0
+        tangentMode: 1
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.07272819
+        inWeight: 0.063332915
+        outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
         value: 1
         inSlope: 0
         outSlope: 0
-        tangentMode: 0
+        tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -463,29 +464,29 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        inSlope: 1.4285715
+        outSlope: 1.4285715
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.3398685
-        value: 0.78926164
-        inSlope: 1.0438001
-        outSlope: 1.0438001
-        tangentMode: 0
+        time: 0.7
+        value: 1
+        inSlope: 1.3245091
+        outSlope: 0
+        tangentMode: 1
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.07272819
+        inWeight: 0.063332915
+        outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
         value: 1
         inSlope: 0
         outSlope: 0
-        tangentMode: 0
+        tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -578,7 +579,11 @@ MonoBehaviour:
   SpeedStats:
     BaseSpeed: 1
     MovementSpeed: 1.7
-    MovementPerc: 0.85
+    MovementPerc: 0.65
+    InterpolationTime_DashForward: 0.25
+    InterpolationTime_DashBackward: 0.25
+    InterpolationTime_DashUp: 0
+    InterpolationTime_DashDown: 0
     AttackSpeed: 1
     AttackSpeedRatio: 4
     BulletSpeed: 4

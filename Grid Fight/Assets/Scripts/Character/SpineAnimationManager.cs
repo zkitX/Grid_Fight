@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 public class SpineAnimationManager : MonoBehaviour
 {
-    private SkeletonAnimation skeletonAnimation;
+    public SkeletonAnimation skeletonAnimation;
     public Spine.AnimationState SpineAnimationState;
     public Spine.Skeleton skeleton;
     public BaseCharacter CharOwner;

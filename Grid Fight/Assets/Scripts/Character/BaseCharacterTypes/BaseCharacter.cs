@@ -782,7 +782,52 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 currentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos) && r.BattleTileState == BattleTileStateType.Empty).ToList().Count ==
                 currentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos)).ToList().Count && GridManagerScript.Instance.isPosOnField(UMS.CurrentTilePos + dir))
             {
-                SetAnimation(AnimState);
+                float transitionTime = 0;
+                if (AnimState.ToString() == SpineAnim.CurrentAnim)
+                {
+                    if (AnimState == CharacterAnimationStateType.DashLeft)
+                    {
+                        if (UMS.Facing == FacingType.Left)
+                        {
+                            transitionTime = CharInfo.SpeedStats.InterpolationTime_DashForward;
+                        }
+                        else
+                        {
+                            transitionTime = CharInfo.SpeedStats.InterpolationTime_DashBackward;
+                        }
+                    }
+                    else if (AnimState == CharacterAnimationStateType.DashRight)
+                    {
+                        if (UMS.Facing == FacingType.Right)
+                        {
+                            transitionTime = CharInfo.SpeedStats.InterpolationTime_DashForward;
+                        }
+                        else
+                        {
+                            transitionTime = CharInfo.SpeedStats.InterpolationTime_DashBackward;
+                        }
+                    }
+                    else if (AnimState == CharacterAnimationStateType.DashUp)
+                    {
+                        transitionTime = CharInfo.SpeedStats.InterpolationTime_DashUp;
+                    }
+                    else if (AnimState == CharacterAnimationStateType.DashDown)
+                    {
+                        transitionTime = CharInfo.SpeedStats.InterpolationTime_DashDown;
+                    }
+                }
+                
+                if(transitionTime > 0)
+                {
+                    float value = (SpineAnim.GetAnimLenght(AnimState) * transitionTime) / (CharInfo.SpeedStats.MovementSpeed * CharInfo.BaseSpeed);
+                    Debug.LogError(value);
+                    SpineAnim.skeletonAnimation.state.GetCurrent(0).TrackTime = value;
+                }
+                else
+                {
+                    SetAnimation(AnimState);
+
+                }
                 isMoving = true;
                 if (prevBattleTile.Count > 1)
                 {
@@ -835,7 +880,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                             FireActionEvenet(CharacterActionType.MoveRight);
                             break;
                     }
-                    MoveCo = MoveByTileSpace(resbts.transform.position, curve, SpineAnim.GetAnimLenght(AnimState));
+                    MoveCo = MoveByTileSpace(resbts.transform.position, curve, SpineAnim.GetAnimLenght(AnimState) - transitionTime);
                     yield return MoveCo;
                 }
                 else

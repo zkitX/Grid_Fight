@@ -131,6 +131,13 @@ public class CharacterInfoScript : MonoBehaviour
         public float MovementSpeed = 1;
         [Range(0,1)]
         public float MovementPerc = 0.85f;
+
+        public float InterpolationTime_DashForward = 0;
+        public float InterpolationTime_DashBackward = 0;
+        public float InterpolationTime_DashUp = 0;
+        public float InterpolationTime_DashDown = 0;
+
+
         public float AttackSpeed = 1;
         public float AttackSpeedRatio;
         public float BulletSpeed = 5;
