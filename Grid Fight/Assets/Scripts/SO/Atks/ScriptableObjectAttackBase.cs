@@ -11,7 +11,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/atkbase")]
 public class ScriptableObjectAttackBase : ScriptableObject
 {
-
     [HideInInspector]
     public float DamageMultiplier
     {

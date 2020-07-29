@@ -108,6 +108,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             _nextAttack = value;
         }
     }
+    public List<ScriptableObjectAttackBase> nextSequencedAttacks = new List<ScriptableObjectAttackBase>();
     public AttackPhasesType currentAttackPhase = AttackPhasesType.End;
     public DeathProcessStage currentDeathProcessPhase = DeathProcessStage.None;
     public SpecialAttackStatus StopPowerfulAtk;

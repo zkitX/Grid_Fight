@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using MyBox;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -26,6 +27,15 @@ public class CharacterInfoScript : MonoBehaviour
     public CharacterAudioProfileSO AudioProfile;
     public BaseCharType BaseCharacterType;
     public CharacterNameType CharacterID;
+    [ConditionalField("BaseCharacterType", true, BaseCharType.CharacterType_Script)] public List<AttackSequence> attackSequences = new List<AttackSequence>();
+    public ScriptableObjectAttackBase[] NextAttackSequence
+    {
+        get
+        {
+            AttackSequence atkSq = attackSequences.Where(r => r.CheckTrigger(this)).FirstOrDefault();
+            return atkSq != null ? atkSq.GetAttackSequence() : null;
+        }
+    }
     [Tooltip("Attacks must follow this sequence (particles attack)  WEAK/STRONG/Skills (enemy attack) no order")]
     public List<ScriptableObjectAttackBase> CurrentAttackTypeInfo = new List<ScriptableObjectAttackBase>();
     public ElementalType Elemental;
@@ -420,6 +430,14 @@ public class CharacterInfoScript : MonoBehaviour
         return AIs.First();
     }
 
+
+    private void OnValidate()
+    {
+        foreach (AttackSequence atkSeq in attackSequences)
+        {
+            atkSeq.GenerateName();
+        }
+    }
 
 }
 

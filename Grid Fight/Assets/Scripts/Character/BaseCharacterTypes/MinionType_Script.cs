@@ -50,6 +50,7 @@ public class MinionType_Script : BaseCharacter
         }
         set
         {
+
         }
     }
 
@@ -548,6 +549,21 @@ public class MinionType_Script : BaseCharacter
 
     public override void GetAttack()
     {
+        if (nextSequencedAttacks.Count > 0)
+        {
+            nextAttack = nextSequencedAttacks[0];
+            nextSequencedAttacks.RemoveAt(0);
+            return;
+        }
+
+        ScriptableObjectAttackBase[] nextAttackSequence = CharInfo.NextAttackSequence;
+        if (nextAttackSequence != null)
+        {
+            nextSequencedAttacks = nextAttackSequence.ToList();
+            GetAttack();
+            return;
+        }
+
         currentTileAtks = CharInfo.CurrentAttackTypeInfo.Where(r => r != null && r.CurrentAttackType == AttackType.Tile).ToList();
         availableAtks.Clear();
         for (int i = 0; i < currentTileAtks.Count; i++)

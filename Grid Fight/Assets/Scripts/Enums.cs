@@ -541,7 +541,8 @@ public enum BaseCharType
     Stage00_BossOctopus_Girl_Script = 9,
     Stage09_Boss_Geisha_Script = 10,
     Stage09_Boss_NoFace_Script = 11,
-    Stage01_Boss_Script = 12
+    Stage01_Boss_Script = 12,
+    Stage02_Boss_Script = 13,
 
 }
 
