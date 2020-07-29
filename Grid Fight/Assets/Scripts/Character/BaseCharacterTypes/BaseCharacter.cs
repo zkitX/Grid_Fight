@@ -174,7 +174,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         set
         {
-            _EndAxisMovement = value;
+            //_EndAxisMovement = value;
         }
     }
     private bool _EndAxisMovement = true;
