@@ -286,6 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f98aab6021486341825eb862f61401a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skeletonAnimation: {fileID: 0}
   CharOwner: {fileID: 0}
   CurveType: 0
   Speed_Time_Curves:
@@ -539,29 +540,11 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0.32886654
-        outSlope: 0.32886654
+        inSlope: 1.4285715
+        outSlope: 1.4285715
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.0652433
-        value: 0.021456337
-        inSlope: 0.6675782
-        outSlope: 0.6675782
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.60479045
-        outWeight: 0.24375838
-      - serializedVersion: 3
-        time: 0.26201296
-        value: 0.7854701
-        inSlope: 2.1653461
-        outSlope: 2.1653461
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.7
@@ -590,29 +573,11 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0.32886654
-        outSlope: 0.32886654
+        inSlope: 1.4285715
+        outSlope: 1.4285715
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.0652433
-        value: 0.021456337
-        inSlope: 0.6675782
-        outSlope: 0.6675782
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.60479045
-        outWeight: 0.24375838
-      - serializedVersion: 3
-        time: 0.26201296
-        value: 0.7854701
-        inSlope: 2.1653461
-        outSlope: 2.1653461
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.7
@@ -720,9 +685,13 @@ MonoBehaviour:
     B_Regeneration: 0
     B_BaseShieldRegeneration: 0
   SpeedStats:
-    BaseSpeed: 1
+    BaseSpeed: 1.5
     MovementSpeed: 1.6
-    MovementPerc: 0
+    MovementPerc: 0.7
+    InterpolationTime_DashForward: 0.15
+    InterpolationTime_DashBackward: 0.15
+    InterpolationTime_DashUp: 0
+    InterpolationTime_DashDown: 0
     AttackSpeed: 2
     AttackSpeedRatio: 1
     BulletSpeed: 1.5
