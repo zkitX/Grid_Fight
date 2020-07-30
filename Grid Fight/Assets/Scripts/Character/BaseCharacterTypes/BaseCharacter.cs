@@ -861,7 +861,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 if(transitionTime > 0)
                 {
                     float value = (SpineAnim.GetAnimLenght(AnimState) * transitionTime) / (CharInfo.SpeedStats.MovementSpeed * CharInfo.BaseSpeed);
-                    Debug.LogError(value);
+                    //Debug.LogError(value);
                     SpineAnim.skeletonAnimation.state.GetCurrent(0).TrackTime = value;
                 }
                 else

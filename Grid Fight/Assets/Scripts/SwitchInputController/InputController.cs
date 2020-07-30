@@ -269,7 +269,7 @@ public class InputController : MonoBehaviour
            
             Joystics[data.playerId] = new Vector2(x, y);
             i = -1;
-            if (Mathf.Abs(Mathf.Abs(Joystics[data.playerId].x) - Mathf.Abs(Joystics[data.playerId].y)) > DiagonalDeathZone)
+            if ((Mathf.Abs(Mathf.Abs(Joystics[data.playerId].x) - Mathf.Abs(Joystics[data.playerId].y)) / (Mathf.Abs(Joystics[data.playerId].x) > Mathf.Abs(Joystics[data.playerId].y) ? Mathf.Abs(Joystics[data.playerId].x) : Mathf.Abs(Joystics[data.playerId].y))) > DiagonalDeathZone)
             {
                 if (Mathf.Abs(Joystics[data.playerId].x) > Mathf.Abs(Joystics[data.playerId].y))
                 {
