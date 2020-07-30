@@ -13,7 +13,7 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
     {
         SetAnimation(CharacterAnimationStateType.Growing);
         GridManagerScript.Instance.SetBattleTileState(UMS.Pos[0], BattleTileStateType.Occupied);
-        StartCoroutine(base.MoveByTileSpace(GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).transform.position, SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.UpMovement : SpineAnim.Speed_Time_Curves.UpMovement, SpineAnim.GetAnimLenght(CharacterAnimationStateType.Growing)));
+        StartCoroutine(base.MoveByTileSpace(GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).transform.position, SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.UpMovement : SpineAnim.Speed_Time_Curves.UpMovement, SpineAnim.GetAnimLenght(CharacterAnimationStateType.Growing),0));
     }
 
     public override IEnumerator AI()

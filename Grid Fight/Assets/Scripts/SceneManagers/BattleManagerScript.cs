@@ -1236,7 +1236,7 @@ public class BattleManagerScript : MonoBehaviour
                 CurrentSelectedCharacters[playerController].NextSelectionChar.Side = currentCharacter.UMS.Side;
                 currentCharacter.UMS.SetBattleUISelection(playerController);
                 currentCharacter.UMS.IndicatorAnim.SetBool("indicatorOn", true);
-                currentCharacter.FireActionEvenet(CharacterActionType.SwitchCharacter);
+                currentCharacter.FireActionEvent(CharacterActionType.SwitchCharacter);
                 int newPlayerCount = CurrentSelectedCharacters.Values.Where(r => r._Character != null).ToList().Count;
                 maxPlayersUsed = maxPlayersUsed < newPlayerCount ? newPlayerCount : maxPlayersUsed;
                 //Change the player's UI to the new character

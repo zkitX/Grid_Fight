@@ -104,8 +104,6 @@ public class InputController : MonoBehaviour
     public event ButtonRightSRPressed ButtonRightSRPressedEvent;
     #endregion
 
-
-
     #region Button Press
     public delegate void ButtonAPressed(int player);
     public event ButtonAPressed ButtonAPressedEvent;
@@ -160,7 +158,10 @@ public class InputController : MonoBehaviour
     public event RightJoystickUsed RightJoystickUsedEvent;
     #endregion
 
-    
+
+    public float DeathZone = 0.2f;
+    public float DiagonalDeathZone = 0.05f;
+
     public void FireMinus()
     {
         ButtonMinusUpEvent?.Invoke(0);
@@ -256,38 +257,74 @@ public class InputController : MonoBehaviour
 
     }
 
-
+    int i = 0;
+    float x = 0, y = 0;
     void OnAxisUpdate(InputActionEventData data)
     {
         InputButtonType buttonInput = (InputButtonType)System.Enum.Parse(typeof(InputButtonType), data.actionName);
-        float x = (buttonInput == InputButtonType.Left_Move_Horizontal || buttonInput == InputButtonType.Right_Move_Horizontal) ? data.GetAxis() : 0;
-        float y = (buttonInput == InputButtonType.Left_Move_Vertical || buttonInput == InputButtonType.Right_Move_Vertical) ? data.GetAxis() : 0;
-        Joystics[data.playerId] = new Vector2(x,y);
-        if (LeftJoystickUsedEvent != null && (x > 0.2f || x < -0.2f || y > 0.2f || y < -0.2f))
+        x = (buttonInput == InputButtonType.Left_Move_Horizontal || buttonInput == InputButtonType.Right_Move_Horizontal) ? data.GetAxis() : x;
+        y = (buttonInput == InputButtonType.Left_Move_Vertical || buttonInput == InputButtonType.Right_Move_Vertical) ? data.GetAxis() : y;
+        if (LeftJoystickUsedEvent != null && i == 1 && (x > DeathZone || x < -DeathZone || y > DeathZone || y < -DeathZone))
         {
-            if (Mathf.Abs(Joystics[data.playerId].x) > Mathf.Abs(Joystics[data.playerId].y))
+           
+            Joystics[data.playerId] = new Vector2(x, y);
+            i = -1;
+            if (Mathf.Abs(Mathf.Abs(Joystics[data.playerId].x) - Mathf.Abs(Joystics[data.playerId].y)) > DiagonalDeathZone)
             {
-                if (Joystics[data.playerId].x > 0)
+                if (Mathf.Abs(Joystics[data.playerId].x) > Mathf.Abs(Joystics[data.playerId].y))
                 {
-                    LeftJoystickUsedEvent(data.playerId, InputDirection.Right, Joystics[data.playerId].x);
+                    if (Joystics[data.playerId].x > 0)
+                    {
+                        LeftJoystickUsedEvent(data.playerId, InputDirection.Right, Joystics[data.playerId].x);
+                    }
+                    else
+                    {
+                        LeftJoystickUsedEvent(data.playerId, InputDirection.Left, Joystics[data.playerId].x);
+                    }
                 }
                 else
                 {
-                    LeftJoystickUsedEvent(data.playerId, InputDirection.Left, Joystics[data.playerId].x);
+                    if (Joystics[data.playerId].y > 0)
+                    {
+                        LeftJoystickUsedEvent(data.playerId, InputDirection.Up, Joystics[data.playerId].y);
+                    }
+                    else
+                    {
+                        LeftJoystickUsedEvent(data.playerId, InputDirection.Down, Joystics[data.playerId].y);
+                    }
                 }
             }
             else
             {
-                if (Joystics[data.playerId].y > 0)
+                if (Joystics[data.playerId].y < 0)
                 {
-                    LeftJoystickUsedEvent(data.playerId, InputDirection.Up, Joystics[data.playerId].y);
+                    if (Joystics[data.playerId].x > 0)
+                    {
+                        //Debug.Log(new Vector2(x, y) + "    DR");
+                        LeftJoystickUsedEvent(data.playerId, InputDirection.DownRight, Joystics[data.playerId].y);
+                    }
+                    else
+                    {
+                        //Debug.Log(new Vector2(x, y) + "    DL");
+                        LeftJoystickUsedEvent(data.playerId, InputDirection.DownLeft, Joystics[data.playerId].y);
+                    }
                 }
                 else
                 {
-                    LeftJoystickUsedEvent(data.playerId, InputDirection.Down, Joystics[data.playerId].y);
+                    if (Joystics[data.playerId].x > 0)
+                    {
+                        //Debug.Log(new Vector2(x, y) + "    UR");
+                        LeftJoystickUsedEvent(data.playerId, InputDirection.UpRight, Joystics[data.playerId].y);
+                    }
+                    else
+                    {
+                        //Debug.Log(new Vector2(x, y) + "    UL");
+                        LeftJoystickUsedEvent(data.playerId, InputDirection.UpLeft, Joystics[data.playerId].y);
+                    }
                 }
             }
         }
+        i = i + 1 == 2 ? 0 : i + 1; 
     }
 
 

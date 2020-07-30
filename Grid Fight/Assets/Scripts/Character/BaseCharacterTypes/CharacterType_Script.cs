@@ -416,7 +416,7 @@ public class CharacterType_Script : BaseCharacter
             {
                 return;
             }
-            FireActionEvenet(CharacterActionType.WeakAttack);
+            FireActionEvent(CharacterActionType.WeakAttack);
             if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop.ToString() && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_IdleToAtk.ToString())
             {
                 SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
@@ -455,15 +455,15 @@ public class CharacterType_Script : BaseCharacter
         switch (inputSkill)
         {
             case AttackInputType.Skill1:
-                FireActionEvenet(CharacterActionType.Skill1);
+                FireActionEvent(CharacterActionType.Skill1);
 
                 break;
             case AttackInputType.Skill2:
-                FireActionEvenet(CharacterActionType.Skill2);
+                FireActionEvent(CharacterActionType.Skill2);
 
                 break;
             case AttackInputType.Skill3:
-                FireActionEvenet(CharacterActionType.Skill3);
+                FireActionEvent(CharacterActionType.Skill3);
 
                 break;
         }
@@ -509,7 +509,7 @@ public class CharacterType_Script : BaseCharacter
         {
             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingRelease, AudioBus.LowPrio, transform);
         }
-        FireActionEvenet(CharacterActionType.StrongAttack);
+        FireActionEvent(CharacterActionType.StrongAttack);
         SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
 
         ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.CastActivationPS, CharInfo.CharacterID, AttackParticlePhaseTypes.CastActivation, transform.position, UMS.Side, nextAttack.AttackInput);

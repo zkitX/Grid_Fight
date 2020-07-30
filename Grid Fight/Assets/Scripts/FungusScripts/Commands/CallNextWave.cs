@@ -14,7 +14,8 @@ public class CallNextWave : Command
     public string WaveName;
 
     public float TransitionDuration = 2;
-    public float WindTransitionRotation = -50;
+    public bool UseFixedRotation = false;
+    [ConditionalField("UseFIxedRotation", false)] public float WindTransitionRotation = -50;
     public bool HasAStageUpdate = false;
     [ConditionalField("HasAStageUpdate", false)] public int FightGridToShow;
     public CameraInOutInfoClass CamInfo;
@@ -88,7 +89,8 @@ public class CallNextWave : Command
             yield return WaveManagerScript.Instance.SettingUpWave(WaveName);
         if (HasAStageUpdate)
         {
-            yield return EnvironmentManager.Instance.MoveToNewGrid(HasAStageUpdate ? FightGridToShow : -1, TransitionDuration, PlayersCurrentSelectedChars, TalkingTeam, JumpAnimSpeed, CamInfo, WindTransitionRotation, JumpUp, wt: DelayBeforeJump);
+            yield return EnvironmentManager.Instance.MoveToNewGrid(HasAStageUpdate ? FightGridToShow : -1, TransitionDuration, PlayersCurrentSelectedChars, TalkingTeam, JumpAnimSpeed, CamInfo,
+                UseFixedRotation ? WindTransitionRotation : -1, JumpUp, wt: DelayBeforeJump);
         }
 
         BattleManagerScript.Instance.CurrentBattleState = BattleState.Battle;

@@ -139,9 +139,9 @@ public class CharacterInfoScript : MonoBehaviour
     {
         public float BaseSpeed = 1;
         public float MovementSpeed = 1;
-        [Range(0,1)]
-        public float MovementPerc = 0.85f;
 
+        public MovementInfoClass FirstMovement;
+        public MovementInfoClass LoopMovement;
         public float InterpolationTime_DashForward = 0;
         public float InterpolationTime_DashBackward = 0;
         public float InterpolationTime_DashUp = 0;
@@ -475,4 +475,17 @@ public class AIInfoCLass
         AI = ai;
         Score = score;
     }
+}
+
+[System.Serializable]
+public class MovementInfoClass
+{
+    [Range(0, 1)]
+    public float MovementPercUp = 0.85f;
+    [Range(0, 1)]
+    public float MovementPercDown = 0.85f;
+    [Range(0, 1)]
+    public float MovementPercForward = 0.85f;
+    [Range(0, 1)]
+    public float MovementPercBackward = 0.85f;
 }

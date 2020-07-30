@@ -59,10 +59,16 @@ public class EnvironmentManager : MonoBehaviour
     CameraInOutInfoClass camInfo, float windTransitionRotation, bool jumpUp = false, bool moveChars = true, float wt = 0.5f)
     {
         FightGrid destinationGrid = fightGrids[gridIndex != -1 ? gridIndex : currentGridIndex];
+        float v = 0;
+        if(windTransitionRotation == -1)
+        {
+            v = Vector3.Cross(Vector3.up, GridManagerScript.Instance.transform.position - destinationGrid.pivot).z;
+        }
+
         GridManagerScript.Instance.MoveGrid_ToWorldPosition(destinationGrid.pivot);
         currentGridIndex = gridIndex != -1 ? gridIndex : currentGridIndex;
         yield return GridLeapSequence(duration, CameraStage.CameraInfo.Where(r => r.StageIndex == (gridIndex != -1 ? gridIndex : currentGridIndex)).First().CameraPosition, playersCurrentSelectedChars, arrivingChar, jumpAnimSpeed,
-            camInfo, windTransitionRotation, jumpUp, moveChars, wt);
+            camInfo, v, jumpUp, moveChars, wt);
     }
 
     
@@ -103,7 +109,7 @@ public class EnvironmentManager : MonoBehaviour
                 waitingTime += BattleManagerScript.Instance.DeltaTime;
                 yield return null;
             }
-            CameraManagerScript.Instance.SetWindTransitionAnim(true, windTransitionRotation);
+            CameraManagerScript.Instance.SetWindTransitionAnim(true, windTransitionRotation == -1 ? 0 : windTransitionRotation);
 
             if (duration > 0)
             {
