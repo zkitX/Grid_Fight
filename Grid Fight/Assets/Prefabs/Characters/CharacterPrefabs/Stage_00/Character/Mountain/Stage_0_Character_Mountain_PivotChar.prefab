@@ -440,11 +440,11 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0.5
         value: 1
-        inSlope: 1.3245091
+        inSlope: 1.606194
         outSlope: 0
         tangentMode: 1
         weightedMode: 0
-        inWeight: 0.063332915
+        inWeight: 0.071364045
         outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
@@ -473,11 +473,11 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0.5
         value: 1
-        inSlope: 1.3245091
+        inSlope: 1.9505212
         outSlope: 0
         tangentMode: 1
         weightedMode: 0
-        inWeight: 0.063332915
+        inWeight: 0.0749774
         outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
@@ -520,6 +520,7 @@ MonoBehaviour:
   AudioProfile: {fileID: 11400000, guid: 97773997a1abe054b851763cbc480751, type: 2}
   BaseCharacterType: 0
   CharacterID: 1004
+  attackSequences: []
   CurrentAttackTypeInfo:
   - {fileID: 11400000, guid: bcc70cd3089c1a74889bc9ef4abea65e, type: 2}
   - {fileID: 11400000, guid: 3010dcce3071cdf47a82d1a6aaf2e59c, type: 2}
@@ -579,9 +580,18 @@ MonoBehaviour:
   SpeedStats:
     BaseSpeed: 1
     MovementSpeed: 1
-    MovementPerc: 0.5
-    InterpolationTime_DashForward: 0.15
-    InterpolationTime_DashBackward: 0.15
+    FirstMovement:
+      MovementPercUp: 0.5
+      MovementPercDown: 0.5
+      MovementPercForward: 0.7
+      MovementPercBackward: 0.5
+    LoopMovement:
+      MovementPercUp: 0.5
+      MovementPercDown: 0.5
+      MovementPercForward: 0.5
+      MovementPercBackward: 0.5
+    InterpolationTime_DashForward: 0.25
+    InterpolationTime_DashBackward: 0.25
     InterpolationTime_DashUp: 0
     InterpolationTime_DashDown: 0
     AttackSpeed: 1

@@ -438,32 +438,14 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0.32886654
-        outSlope: 0.32886654
+        inSlope: 2.5
+        outSlope: 2.5
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.0652433
-        value: 0.021456337
-        inSlope: 0.6675782
-        outSlope: 0.6675782
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.60479045
-        outWeight: 0.24375838
-      - serializedVersion: 3
-        time: 0.26201296
-        value: 0.7854701
-        inSlope: 2.1653461
-        outSlope: 2.1653461
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.7
+        time: 0.4
         value: 1
         inSlope: 0.041555207
         outSlope: 0.041555207
@@ -489,32 +471,14 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0.32886654
-        outSlope: 0.32886654
+        inSlope: 2.5
+        outSlope: 2.5
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.0652433
-        value: 0.021456337
-        inSlope: 0.6675782
-        outSlope: 0.6675782
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.60479045
-        outWeight: 0.24375838
-      - serializedVersion: 3
-        time: 0.26201296
-        value: 0.7854701
-        inSlope: 2.1653461
-        outSlope: 2.1653461
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.7
+        time: 0.4
         value: 1
         inSlope: 0.041555207
         outSlope: 0.041555207
@@ -629,6 +593,7 @@ MonoBehaviour:
   AudioProfile: {fileID: 11400000, guid: 93f6bf070be4af24fb8dbc3dea6f6df7, type: 2}
   BaseCharacterType: 0
   CharacterID: 1005
+  attackSequences: []
   CurrentAttackTypeInfo:
   - {fileID: 11400000, guid: 4b9b8eac2cea8a34495fb8dcc40b21aa, type: 2}
   - {fileID: 11400000, guid: 4ad32e46183bf814286270c50e1374d0, type: 2}
@@ -687,9 +652,18 @@ MonoBehaviour:
   SpeedStats:
     BaseSpeed: 1.5
     MovementSpeed: 1.6
-    MovementPerc: 0.7
-    InterpolationTime_DashForward: 0.15
-    InterpolationTime_DashBackward: 0.15
+    FirstMovement:
+      MovementPercUp: 0.5
+      MovementPercDown: 0.5
+      MovementPercForward: 0.7
+      MovementPercBackward: 0.7
+    LoopMovement:
+      MovementPercUp: 0.5
+      MovementPercDown: 0.5
+      MovementPercForward: 0.7
+      MovementPercBackward: 0.7
+    InterpolationTime_DashForward: 0.5
+    InterpolationTime_DashBackward: 0.5
     InterpolationTime_DashUp: 0
     InterpolationTime_DashDown: 0
     AttackSpeed: 2
