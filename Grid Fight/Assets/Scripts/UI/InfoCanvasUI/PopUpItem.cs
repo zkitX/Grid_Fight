@@ -68,9 +68,6 @@ public class PopUpItem : MonoBehaviour
     protected void SetupPopupInformation(Vector2 offset, string title, string description, Sprite image, Color boxColor, Color titleColor, Color decriptionColor)
     {
         popupBox.localPosition = offset;
-        displayImage.color = Color.clear;
-        displayImage.sprite = image;
-        if (image != null) displayImage.color = Color.white;
         titleText.text = title;
         descriptionText.text = description;
         if (boxColor == new Color()) boxColor = defaultColors[0];
@@ -83,6 +80,10 @@ public class PopUpItem : MonoBehaviour
         SetColorOfBox(boxColor);
         titleText.color = titleColor;
         descriptionText.color = decriptionColor;
+
+        displayImage.color = Color.clear;
+        displayImage.sprite = image;
+        if (image != null) displayImage.color = Color.white;
     }
 
 

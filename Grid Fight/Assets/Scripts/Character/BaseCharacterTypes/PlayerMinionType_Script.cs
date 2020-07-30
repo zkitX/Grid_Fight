@@ -14,14 +14,6 @@ public class PlayerMinionType_Script : MinionType_Script
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         Attacking = false;
      
- 		for (int i = 0; i < HittedByList.Count; i++)
-        {
-            StatisticInfoClass sic = StatisticInfoManagerScript.Instance.CharaterStats.Where(r => r.CharacterId == HittedByList[i].CharacterId).First();
-            sic.DamageExp += (HittedByList[i].Damage / totDamage) * CharInfo.ExperienceValue;
-        }
-        totDamage = 0;
-
- 
         for (int i = 0; i < UMS.Pos.Count; i++)
         {
             GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
@@ -67,6 +59,33 @@ public class PlayerMinionType_Script : MinionType_Script
                 yield return null;
             }
         }
+    }
+
+    public override void SetFinalDamage(BaseCharacter attacker, float damage)
+    {
+        if (attacker.CurrentPlayerController != ControllerType.None)
+        {
+            AggroInfoClass aggro = AggroInfoList.Where(r => r.PlayerController == attacker.CurrentPlayerController).FirstOrDefault();
+            if (aggro == null)
+            {
+                AggroInfoList.Add(new AggroInfoClass(attacker.CurrentPlayerController, 1));
+            }
+            else
+            {
+                aggro.Hit++;
+                AggroInfoList.ForEach(r =>
+                {
+                    if (r.PlayerController != attacker.CurrentPlayerController)
+                    {
+                        r.Hit = r.Hit == 0 ? 0 : r.Hit - 1;
+                    }
+                });
+            }
+        }
+
+        attacker.Sic.DamageMade += damage;
+        totDamage += damage;
+        base.SetFinalDamage(attacker, damage);
     }
 
     public override void CreateBullet(BulletBehaviourInfoClassOnBattleFieldClass bulletBehaviourInfo)

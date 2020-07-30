@@ -784,6 +784,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 currentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos)).ToList().Count && GridManagerScript.Instance.isPosOnField(UMS.CurrentTilePos + dir))
             {
                 float transitionTime = 0;
+                float animPerc = 0;
                 if (AnimState.ToString() == SpineAnim.CurrentAnim)
                 {
                     if (AnimState == CharacterAnimationStateType.DashLeft)
@@ -791,10 +792,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                         if (UMS.Facing == FacingType.Left)
                         {
                             transitionTime = CharInfo.SpeedStats.InterpolationTime_DashForward;
+                            animPerc = CharInfo.SpeedStats.LoopMovement.MovementPercForward;
                         }
                         else
                         {
                             transitionTime = CharInfo.SpeedStats.InterpolationTime_DashBackward;
+                            animPerc = CharInfo.SpeedStats.LoopMovement.MovementPercBackward;
                         }
                     }
                     else if (AnimState == CharacterAnimationStateType.DashRight)
@@ -802,19 +805,56 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                         if (UMS.Facing == FacingType.Right)
                         {
                             transitionTime = CharInfo.SpeedStats.InterpolationTime_DashForward;
+                            animPerc = CharInfo.SpeedStats.LoopMovement.MovementPercForward;
                         }
                         else
                         {
                             transitionTime = CharInfo.SpeedStats.InterpolationTime_DashBackward;
+                            animPerc = CharInfo.SpeedStats.LoopMovement.MovementPercBackward;
                         }
                     }
                     else if (AnimState == CharacterAnimationStateType.DashUp)
                     {
                         transitionTime = CharInfo.SpeedStats.InterpolationTime_DashUp;
+                        animPerc = CharInfo.SpeedStats.LoopMovement.MovementPercUp;
                     }
                     else if (AnimState == CharacterAnimationStateType.DashDown)
                     {
                         transitionTime = CharInfo.SpeedStats.InterpolationTime_DashDown;
+                        animPerc = CharInfo.SpeedStats.LoopMovement.MovementPercDown;
+                    }
+                }
+                else
+                {
+                    if (AnimState == CharacterAnimationStateType.DashLeft)
+                    {
+                        if (UMS.Facing == FacingType.Left)
+                        {
+                            animPerc = CharInfo.SpeedStats.FirstMovement.MovementPercForward;
+                        }
+                        else
+                        {
+                            animPerc = CharInfo.SpeedStats.FirstMovement.MovementPercBackward;
+                        }
+                    }
+                    else if (AnimState == CharacterAnimationStateType.DashRight)
+                    {
+                        if (UMS.Facing == FacingType.Right)
+                        {
+                            animPerc = CharInfo.SpeedStats.FirstMovement.MovementPercForward;
+                        }
+                        else
+                        {
+                            animPerc = CharInfo.SpeedStats.FirstMovement.MovementPercBackward;
+                        }
+                    }
+                    else if (AnimState == CharacterAnimationStateType.DashUp)
+                    {
+                        animPerc = CharInfo.SpeedStats.FirstMovement.MovementPercUp;
+                    }
+                    else if (AnimState == CharacterAnimationStateType.DashDown)
+                    {
+                        animPerc = CharInfo.SpeedStats.FirstMovement.MovementPercDown;
                     }
                 }
                 
@@ -865,23 +905,23 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     }
                     BattleManagerScript.Instance.OccupiedBattleTiles.AddRange(CurrentBattleTiles);
                     stopCo = true;
-                    FireActionEvenet(CharacterActionType.Move);
+                    FireActionEvent(CharacterActionType.Move);
                     switch (nextDir)
                     {
                         case InputDirection.Up:
-                            FireActionEvenet(CharacterActionType.MoveUp);
+                            FireActionEvent(CharacterActionType.MoveUp);
                             break;
                         case InputDirection.Down:
-                            FireActionEvenet(CharacterActionType.MoveDown);
+                            FireActionEvent(CharacterActionType.MoveDown);
                             break;
                         case InputDirection.Left:
-                            FireActionEvenet(CharacterActionType.MoveLeft);
+                            FireActionEvent(CharacterActionType.MoveLeft);
                             break;
                         case InputDirection.Right:
-                            FireActionEvenet(CharacterActionType.MoveRight);
+                            FireActionEvent(CharacterActionType.MoveRight);
                             break;
                     }
-                    MoveCo = MoveByTileSpace(resbts.transform.position, curve, SpineAnim.GetAnimLenght(AnimState) - transitionTime);
+                    MoveCo = MoveByTileSpace(resbts.transform.position, curve, SpineAnim.GetAnimLenght(AnimState) - transitionTime, animPerc);
                     yield return MoveCo;
                 }
                 else
@@ -898,9 +938,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
         }
     }
-
-
-
 
     public virtual void MoveCharOnDirection(InputDirection nextDir)
     {
@@ -960,7 +997,26 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 {
                     curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.ForwardMovement : SpineAnim.Speed_Time_Curves.ForwardMovement;
                 }
-
+                break;
+            case InputDirection.UpLeft:
+                dir = new Vector2Int(-1, -1);
+                curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.UpMovement : SpineAnim.Speed_Time_Curves.UpMovement;
+                AnimState = CharacterAnimationStateType.DashUp;
+                break;
+            case InputDirection.UpRight:
+                dir = new Vector2Int(-1, 1);
+                curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.UpMovement : SpineAnim.Speed_Time_Curves.UpMovement;
+                AnimState = CharacterAnimationStateType.DashUp;
+                break;
+            case InputDirection.DownLeft:
+                dir = new Vector2Int(1, -1);
+                curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.DownMovement : SpineAnim.Speed_Time_Curves.DownMovement;
+                AnimState = CharacterAnimationStateType.DashDown;
+                break;
+            case InputDirection.DownRight:
+                dir = new Vector2Int(1, 1);
+                curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.DownMovement : SpineAnim.Speed_Time_Curves.DownMovement;
+                AnimState = CharacterAnimationStateType.DashDown;
                 break;
         }
     }
@@ -1004,7 +1060,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
 
     bool stopCo = false;
-    public virtual IEnumerator MoveByTileSpace(Vector3 nextPos, AnimationCurve curve, float animLength)
+    public virtual IEnumerator MoveByTileSpace(Vector3 nextPos, AnimationCurve curve, float animLength, float animPerc)
     {
         //  Debug.Log(AnimLength + "  AnimLenght   " + AnimLength / CharInfo.MovementSpeed + " Actual duration" );
         //Debug.Log("StartMoveCo  " + Time.time);
@@ -1027,7 +1083,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             spaceTimer = curve.Evaluate(timer);
             spineT.localPosition = Vector3.Lerp(localoffset, LocalSpinePosoffset, spaceTimer);
 
-            if (timer > CharInfo.SpeedStats.MovementPerc && !isMovCheck)
+            if (timer > animPerc && !isMovCheck)
             {
                 isMovCheck = true;
                 isMoving = false;
@@ -1578,7 +1634,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 damage = damage < 0 ? 1 : damage;
             }
 
-            FireActionEvenet(CharacterActionType.Defence);
+            FireActionEvent(CharacterActionType.Defence);
             healthCT = HealthChangedType.Defend;
             res = false;
             if (UMS.Facing == FacingType.Left)
@@ -1742,7 +1798,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     }
 
 
-    public void FireActionEvenet(CharacterActionType action)
+    public void FireActionEvent(CharacterActionType action)
     {
         CurrentCharStartingActionEvent?.Invoke(CurrentPlayerController, action);
     }
