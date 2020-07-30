@@ -659,6 +659,7 @@ MonoBehaviour:
   AudioProfile: {fileID: 11400000, guid: 18079379e5337084286a38b915064869, type: 2}
   BaseCharacterType: 0
   CharacterID: 1006
+  attackSequences: []
   CurrentAttackTypeInfo:
   - {fileID: 11400000, guid: bdf362282c7031a4e86cf4380ac47667, type: 2}
   - {fileID: 11400000, guid: 0661223646bb79e408554a6755c05d77, type: 2}
@@ -716,9 +717,18 @@ MonoBehaviour:
     B_Regeneration: 0
     B_BaseShieldRegeneration: 0
   SpeedStats:
-    BaseSpeed: 1.9
+    BaseSpeed: 1.8
     MovementSpeed: 2
-    MovementPerc: 0.7
+    FirstMovement:
+      MovementPercUp: 0.7
+      MovementPercDown: 0.7
+      MovementPercForward: 0.7
+      MovementPercBackward: 0.7
+    LoopMovement:
+      MovementPercUp: 0.7
+      MovementPercDown: 0.7
+      MovementPercForward: 0.5
+      MovementPercBackward: 0.5
     InterpolationTime_DashForward: 0.15
     InterpolationTime_DashBackward: 0.15
     InterpolationTime_DashUp: 0

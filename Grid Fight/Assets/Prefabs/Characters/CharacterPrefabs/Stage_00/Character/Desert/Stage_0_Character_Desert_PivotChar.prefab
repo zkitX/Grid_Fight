@@ -438,29 +438,29 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        inSlope: 1.4285715
+        outSlope: 1.4285715
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.3398685
-        value: 0.78926164
-        inSlope: 1.0438001
-        outSlope: 1.0438001
+        time: 0.7
+        value: 1
+        inSlope: 0.041555207
+        outSlope: 0.041555207
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.07272819
+        outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
         value: 1
         inSlope: 0
         outSlope: 0
-        tangentMode: 0
+        tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -471,29 +471,29 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        inSlope: 1.4285715
+        outSlope: 1.4285715
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.3398685
-        value: 0.78926164
-        inSlope: 1.0438001
-        outSlope: 1.0438001
+        time: 0.7
+        value: 1
+        inSlope: 0.041555207
+        outSlope: 0.041555207
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.07272819
+        outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
         value: 1
         inSlope: 0
         outSlope: 0
-        tangentMode: 0
+        tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -593,6 +593,7 @@ MonoBehaviour:
   AudioProfile: {fileID: 11400000, guid: 87d03b5d6884e0e419c99c8c7c203713, type: 2}
   BaseCharacterType: 0
   CharacterID: 1007
+  attackSequences: []
   CurrentAttackTypeInfo:
   - {fileID: 11400000, guid: bf304f7dc499264448bbdd38db7b5d75, type: 2}
   - {fileID: 11400000, guid: 2504bea9d7e9c844f916ea07eb6505d8, type: 2}
@@ -652,11 +653,20 @@ MonoBehaviour:
   SpeedStats:
     BaseSpeed: 1
     MovementSpeed: 1.2
-    MovementPerc: 0.5
-    InterpolationTime_DashForward: 0.25
-    InterpolationTime_DashBackward: 0.25
-    InterpolationTime_DashUp: 0
-    InterpolationTime_DashDown: 0
+    FirstMovement:
+      MovementPercUp: 0.5
+      MovementPercDown: 0.7
+      MovementPercForward: 0.5
+      MovementPercBackward: 0.5
+    LoopMovement:
+      MovementPercUp: 0.5
+      MovementPercDown: 0.5
+      MovementPercForward: 0.5
+      MovementPercBackward: 0.5
+    InterpolationTime_DashForward: 0.5
+    InterpolationTime_DashBackward: 0.5
+    InterpolationTime_DashUp: 0.5
+    InterpolationTime_DashDown: 0.25
     AttackSpeed: 1.4
     AttackSpeedRatio: 3
     BulletSpeed: 2.5
