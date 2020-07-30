@@ -1232,6 +1232,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     BattleManagerScript.Instance.Zombification(this, bdClass.Duration, bdClass.CurrentBuffDebuff.Effect.AIs);
                 }
                 break;
+            case BuffDebuffStatsType.Legion:
+                BattleManagerScript.Instance.CloneUnit(this, bdClass.CurrentBuffDebuff.Effect.ClonePowerScale, bdClass.CurrentBuffDebuff.Effect.ClonePrefab);
+                break;
             case BuffDebuffStatsType.ShieldStats_BaseShieldRegeneration:
                 CharInfo.ShieldStats.BaseShieldRegeneration += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.ShieldStats.B_BaseShieldRegeneration / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
                 break;

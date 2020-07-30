@@ -27,7 +27,7 @@ public class CharacterInfoScript : MonoBehaviour
     public CharacterAudioProfileSO AudioProfile;
     public BaseCharType BaseCharacterType;
     public CharacterNameType CharacterID;
-    [ConditionalField("BaseCharacterType", true, BaseCharType.CharacterType_Script)] public List<AttackSequence> attackSequences = new List<AttackSequence>();
+    public List<AttackSequence> attackSequences = new List<AttackSequence>();
     public ScriptableObjectAttackBase[] NextAttackSequence
     {
         get

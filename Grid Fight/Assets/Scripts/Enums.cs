@@ -324,7 +324,8 @@ public enum BuffDebuffStatsType
     ShieldStats_BaseShieldRegeneration,
     Drain_Overtime,
     AttackChange,
-    StaminaStats_Stamina,
+    StaminaStats_Stamina, 
+    Legion,
 }
 
 public enum StatsCheckType
@@ -547,6 +548,7 @@ public enum BaseCharType
     Stage09_Boss_NoFace_Script = 11,
     Stage01_Boss_Script = 12,
     Stage02_Boss_Script = 13,
+    PlayerMinionType_Script = 14,
 
 }
 
@@ -579,14 +581,18 @@ public enum ParticlesType
     Chapter01_TohoraSea_Boss_FaceChanging_MoonDrums = 1106,
     Chapter01_TohoraSea_Boss_CrystalTomb_Effect = 1107,
     Chapter05_AscensoMountain_FlowersSmoke = 5000,
+    Chapter02_TheBurg_Boss_Copy_Effect = 2000,
 
-    // 2000 to 2999 ->      Mask Skills(leave 100 slots between masks)
+    // 2100 to 2999 ->      Mask Skills(leave 100 slots between masks)
     Skill_Mind_1_Loop = 2100,
     Skill_Mind_2_Loop = 2101,
     Skill_Mind_2_Teleporting = 2102,
     Skill_Mind_3_In = 2103,
     Skill_Mind_3_Loop = 2104,
     Skill_Mind_3_Tentacle = 2105,
+    Skill_Might_1_Copy = 2200,
+    Skill_Might_1_CloneEffects = 2201,
+    Skill_Might_1_CloneEnd = 2202,
 
     // 3000 to 3499 -> Buff Status effects Buff
     Status_Buff_Power = 3000,//Atk

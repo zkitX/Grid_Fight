@@ -836,7 +836,69 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
+    public void CloneUnit(BaseCharacter original, float strengthScale = 1f, GameObject clonePrefab = null)
+    {
+        if (original.CharInfo.Health <= 0) return;
 
+        StartCoroutine(CloneUnit_Co(original, strengthScale, clonePrefab));
+    }
+
+    IEnumerator CloneUnit_Co(BaseCharacter original, float strengthScale, GameObject clonePrefab)
+    {
+        bool isPlayer = original.CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script;
+        bool replaced = clonePrefab != null;
+        CharacterInfoScript cloneInfo = replaced ? clonePrefab.GetComponentInChildren<CharacterInfoScript>() : original.CharInfo;
+
+
+        //Set up the cloning particles
+        GameObject cloneParticles = ParticleManagerScript.Instance.GetParticle(isPlayer ? ParticlesType.Skill_Might_1_Copy : ParticlesType.Chapter02_TheBurg_Boss_Copy_Effect);
+        cloneParticles.SetActive(true);
+        cloneParticles.transform.position = original.SpineAnim.transform.position;
+
+
+        //Creating the clone
+        MinionType_Script clone = null;
+
+        clone = (MinionType_Script)CreateChar(
+            new CharacterBaseInfoClass(cloneInfo.CharacterID.ToString(), CharacterSelectionType.Up,
+            new List<ControllerType> { isPlayer ? ControllerType.None : ControllerType.Enemy }, cloneInfo.CharacterID,
+            original.UMS.WalkingSide, original.UMS.Side, original.UMS.Facing,
+            isPlayer ? BaseCharType.PlayerMinionType_Script : BaseCharType.MinionType_Script, original.CharActionlist,
+            LevelType.Novice), isPlayer ? Instance.transform : WaveManagerScript.Instance.transform
+        );
+        if (isPlayer) clone = (PlayerMinionType_Script)clone;
+        //
+
+
+        //Give the clone it's effects to distinguish it from the original
+        cloneParticles = ParticleManagerScript.Instance.GetParticle(ParticlesType.Skill_Might_1_CloneEffects);
+        cloneParticles.transform.parent = clone.SpineAnim.transform;
+        cloneParticles.transform.localPosition = Vector3.zero;
+        cloneParticles.SetActive(true);
+        //
+
+
+        //Set clone on the battlefield
+        yield return WaveManagerScript.Instance.SetCharInPos(clone, GridManagerScript.Instance.GetFreeBattleTile(original.UMS.WalkingSide, original.UMS.Pos), true);
+
+        //Add new char to wave if it's a minion or player minion if it's a player clone
+        if (!isPlayer) WaveManagerScript.Instance.WaveCharcters.Add(clone);
+        else AllPlayersMinionOnField.Add(clone);
+        //
+
+        while (clone.CharInfo.HealthPerc > 0f)
+        {
+            yield return null;
+        }
+
+        //Reset particles and have them play the ending explosion or whatever happens at the end of the clone's life
+        cloneParticles.transform.parent = null;
+        cloneParticles.SetActive(false);
+        cloneParticles = ParticleManagerScript.Instance.GetParticle(ParticlesType.Skill_Might_1_CloneEnd);
+        cloneParticles.SetActive(true);
+        cloneParticles.transform.position = clone.SpineAnim.transform.position;
+        //
+    }
 
     //Used when the char is not in the battlefield to move it on the battlefield
     /* public void LoadingNewCharacterToGrid(CharacterNameType cName,SideType side, ControllerType playerController)

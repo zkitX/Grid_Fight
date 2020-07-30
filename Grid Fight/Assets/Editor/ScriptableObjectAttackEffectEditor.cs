@@ -34,6 +34,11 @@ public class ScriptableObjectAttackEffectEditor : Editor
                 origin.AIs[i] = (ScriptableObjectAI)EditorGUILayout.ObjectField("AI " + i, origin.AIs[i], typeof(ScriptableObjectAI), false);   //"Effect", bfatc.Effects, typeof(ScriptableObjectAttackEffect), false
             }
         }
+        if(origin.StatsToAffect == BuffDebuffStatsType.Legion)
+        {
+            origin.ClonePrefab = (GameObject)EditorGUILayout.ObjectField("Clone Replacement Prefab ", origin.ClonePrefab, typeof(GameObject), false);
+            origin.ClonePowerScale = EditorGUILayout.FloatField("Clone Power Multiplier", origin.ClonePowerScale);
+        }
         EditorUtility.SetDirty(origin);
     }
 

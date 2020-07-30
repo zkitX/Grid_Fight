@@ -647,8 +647,8 @@ MonoBehaviour:
     newName: Starting Copying Sequence
     groupedAttacks:
     - {fileID: 11400000, guid: 5fe0f654afdf5cc4e90c0b41f855e14c, type: 2}
-    - {fileID: 11400000, guid: 7a16d90c0de46524c9bde78beeb64a75, type: 2}
-    - {fileID: 11400000, guid: 7a16d90c0de46524c9bde78beeb64a75, type: 2}
+    - {fileID: 11400000, guid: 6ce6e03eca598c146a12a96d998a999b, type: 2}
+    - {fileID: 11400000, guid: 6ce6e03eca598c146a12a96d998a999b, type: 2}
     triggerType: 0
     triggered: 0
     StatToCheck: 0
@@ -660,7 +660,7 @@ MonoBehaviour:
     newName: Paste > Copy Below 60%
     groupedAttacks:
     - {fileID: 11400000, guid: 5fe0f654afdf5cc4e90c0b41f855e14c, type: 2}
-    - {fileID: 11400000, guid: 7a16d90c0de46524c9bde78beeb64a75, type: 2}
+    - {fileID: 11400000, guid: 6ce6e03eca598c146a12a96d998a999b, type: 2}
     triggerType: 1
     triggered: 0
     StatToCheck: 1
@@ -668,8 +668,6 @@ MonoBehaviour:
     PercToCheck: 60
     Chances: 50
   CurrentAttackTypeInfo:
-  - {fileID: 11400000, guid: 7a16d90c0de46524c9bde78beeb64a75, type: 2}
-  - {fileID: 11400000, guid: 5fe0f654afdf5cc4e90c0b41f855e14c, type: 2}
   - {fileID: 11400000, guid: dd3ca1dad60e92e49805c468f175ea86, type: 2}
   - {fileID: 11400000, guid: 9496826400681554ba9c98d9340caa9a, type: 2}
   Elemental: 0
@@ -725,7 +723,16 @@ MonoBehaviour:
   SpeedStats:
     BaseSpeed: 1
     MovementSpeed: 2.2
-    MovementPerc: 0.85
+    FirstMovement:
+      MovementPercUp: 0.85
+      MovementPercDown: 0.85
+      MovementPercForward: 0.85
+      MovementPercBackward: 0.85
+    LoopMovement:
+      MovementPercUp: 0.85
+      MovementPercDown: 0.85
+      MovementPercForward: 0.85
+      MovementPercBackward: 0.85
     InterpolationTime_DashForward: 0
     InterpolationTime_DashBackward: 0
     InterpolationTime_DashUp: 0
