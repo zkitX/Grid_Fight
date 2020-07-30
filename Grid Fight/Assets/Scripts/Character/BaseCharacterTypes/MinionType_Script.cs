@@ -173,22 +173,22 @@ public class MinionType_Script : BaseCharacter
                         int randomizer = Random.Range(0, 100);
                         if (randomizer < UpDownMovementPerc)
                         {
-                            yield return MoveCharOnDir_Co(InputDirection.Left);
+                            yield return MoveCharOnDir_Co(InputDirectionType.Left);
                         }
                         else if (randomizer > (100 - UpDownMovementPerc))
                         {
-                            yield return MoveCharOnDir_Co(InputDirection.Right);
+                            yield return MoveCharOnDir_Co(InputDirectionType.Right);
                         }
                         else
                         {
                             targetChar = GetTargetChar(enemys);
                             if (targetChar.UMS.CurrentTilePos.x < UMS.CurrentTilePos.x)
                             {
-                                yield return MoveCharOnDir_Co(InputDirection.Up);
+                                yield return MoveCharOnDir_Co(InputDirectionType.Up);
                             }
                             else
                             {
-                                yield return MoveCharOnDir_Co(InputDirection.Down);
+                                yield return MoveCharOnDir_Co(InputDirectionType.Down);
                             }
                         }
                     }
@@ -304,7 +304,7 @@ public class MinionType_Script : BaseCharacter
                                                     found = true;
                                                     Vector2Int move = path[0] - UMS.CurrentTilePos;
                                                     possiblePos.isTaken = true;
-                                                    yield return MoveCharOnDir_Co(move == new Vector2Int(1, 0) ? InputDirection.Down : move == new Vector2Int(-1, 0) ? InputDirection.Up : move == new Vector2Int(0, 1) ? InputDirection.Right : InputDirection.Left);
+                                                    yield return MoveCharOnDir_Co(move == new Vector2Int(1, 0) ? InputDirectionType.Down : move == new Vector2Int(-1, 0) ? InputDirectionType.Up : move == new Vector2Int(0, 1) ? InputDirectionType.Right : InputDirectionType.Left);
                                                 }
                                                 else
                                                 {
@@ -367,7 +367,7 @@ public class MinionType_Script : BaseCharacter
                                 {
                                     Vector2Int move = path[0] - UMS.CurrentTilePos;
 
-                                    yield return MoveCharOnDir_Co(move == new Vector2Int(1, 0) ? InputDirection.Down : move == new Vector2Int(-1, 0) ? InputDirection.Up : move == new Vector2Int(0, 1) ? InputDirection.Right : InputDirection.Left);
+                                    yield return MoveCharOnDir_Co(move == new Vector2Int(1, 0) ? InputDirectionType.Down : move == new Vector2Int(-1, 0) ? InputDirectionType.Up : move == new Vector2Int(0, 1) ? InputDirectionType.Right : InputDirectionType.Left);
                                 }
                             }
                             else
@@ -425,11 +425,11 @@ public class MinionType_Script : BaseCharacter
                     {
                         yield return null;
                     }
-                    InputDirection dir = InputDirection.Up;
+                    InputDirectionType dir = InputDirectionType.Up;
 
                     foreach (var item in BattleManagerScript.Instance.AllCharactersOnField.Where(a => a.IsOnField).OrderBy(r => Mathf.Abs(r.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x)))
                     {
-                        dir = item.UMS.CurrentTilePos.x > UMS.CurrentTilePos.x ? InputDirection.Down : InputDirection.Up;
+                        dir = item.UMS.CurrentTilePos.x > UMS.CurrentTilePos.x ? InputDirectionType.Down : InputDirectionType.Up;
                         BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos + GridManagerScript.Instance.GetVectorFromDirection(dir));
                         if (bts != null && bts.BattleTileState == BattleTileStateType.Empty)
                         {
@@ -439,7 +439,7 @@ public class MinionType_Script : BaseCharacter
                         {
                             for (int i = 0; i < 2; i++)
                             {
-                                bts = GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos + GridManagerScript.Instance.GetVectorFromDirection((InputDirection)1 + i));
+                                bts = GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos + GridManagerScript.Instance.GetVectorFromDirection((InputDirectionType)1 + i));
                                 if (bts != null && bts.BattleTileState == BattleTileStateType.Empty)
                                 {
                                     break;

@@ -178,7 +178,7 @@ public class GridFightMenuDialog : MenuDialog
         InputController.Instance.LeftJoystickUsedEvent += Instance_LeftJoystickUsedEvent;
     }
 
-    private void Instance_LeftJoystickUsedEvent(int player, InputDirection dir, float value)
+    private void Instance_LeftJoystickUsedEvent(int player, InputDirectionType dir, float value)
     {
         if (Time.time > TimeOffset + CoolDown && isMenuReady && BattleManagerScript.Instance.FungusState == FungusDialogType.Menu && BattleManagerScript.Instance.CurrentBattleState != BattleState.Pause)
         {
@@ -189,10 +189,10 @@ public class GridFightMenuDialog : MenuDialog
             Options = Boxes.Where(r => r.gameObject.activeInHierarchy).ToList().Count;
             switch (dir)
             {
-                case InputDirection.Up:
+                case InputDirectionType.Up:
                     SelectionIndex++;
                     break;
-                case InputDirection.Down:
+                case InputDirectionType.Down:
                     SelectionIndex--;
                     break;
             }

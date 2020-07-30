@@ -185,12 +185,12 @@ public class ModeSelectionManager : MonoBehaviour
     }
 
     #region Joystick
-    private void Instance_RightJoystickUsedEvent(int player, InputDirection dir, float value)
+    private void Instance_RightJoystickUsedEvent(int player, InputDirectionType dir, float value)
     {
         Debug.Log(player + "    " + dir);
     }
 
-    private void Instance_LeftJoystickUsedEvent(int player, InputDirection dir, float value)
+    private void Instance_LeftJoystickUsedEvent(int player, InputDirectionType dir, float value)
     {
         Debug.Log(player + "    " + dir);
     }

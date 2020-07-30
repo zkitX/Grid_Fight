@@ -899,12 +899,12 @@ public class BattleManagerScript : MonoBehaviour
         Vector2Int curPos = character.UMS.CurrentTilePos;
         foreach (Vector2Int movePos in path)
         {
-            InputDirection direction = InputDirection.Down;
+            InputDirectionType direction = InputDirectionType.Down;
             Vector2Int move = movePos - curPos;
-            if (move == new Vector2Int(1, 0)) direction = InputDirection.Down;
-            else if (move == new Vector2Int(-1, 0)) direction = InputDirection.Up;
-            else if (move == new Vector2Int(0, 1)) direction = InputDirection.Right;
-            else if (move == new Vector2Int(0, -1)) direction = InputDirection.Left;
+            if (move == new Vector2Int(1, 0)) direction = InputDirectionType.Down;
+            else if (move == new Vector2Int(-1, 0)) direction = InputDirectionType.Up;
+            else if (move == new Vector2Int(0, 1)) direction = InputDirectionType.Right;
+            else if (move == new Vector2Int(0, -1)) direction = InputDirectionType.Left;
             moveDetails.Add(new MoveDetailsClass(direction));
             curPos = movePos;
         }
@@ -1293,7 +1293,7 @@ public class BattleManagerScript : MonoBehaviour
     #region Move Character
 
     //Move selected char under determinated player
-    public void MoveSelectedCharacterInDirection(ControllerType playerController, InputDirection dir, float value)
+    public void MoveSelectedCharacterInDirection(ControllerType playerController, InputDirectionType dir, float value)
     {
         if (CurrentBattleState != BattleState.Battle ) return;
 

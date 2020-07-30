@@ -39,7 +39,7 @@ public enum VibrationType
     b
 }
 
-public enum InputDirection
+public enum InputDirectionType
 {
     Up,
     Down,

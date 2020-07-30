@@ -76,7 +76,7 @@ public class Grid_UICursor : MonoBehaviour
 
 
     bool cursorMoving = false;
-    void MoveCursor(int player, InputDirection direction, float value)
+    void MoveCursor(int player, InputDirectionType direction, float value)
     {
         if (MoveEnder != null) StopCoroutine(MoveEnder);
         MoveEnder = EndMove();

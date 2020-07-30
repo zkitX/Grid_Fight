@@ -29,9 +29,9 @@ public class UIWinLoseScript : MonoBehaviour
         InputController.Instance.RightJoystickUsedEvent += JoystickUsedEvent;*/
     }
 
-    private void JoystickUsedEvent(int player, InputDirection dir)
+    private void JoystickUsedEvent(int player, InputDirectionType dir)
     {
-        if ((dir == InputDirection.Left || dir == InputDirection.Right) && Time.time > Offset + CoolDown)
+        if ((dir == InputDirectionType.Left || dir == InputDirectionType.Right) && Time.time > Offset + CoolDown)
         {
             Offset = Time.time;
             selectedBtn = !selectedBtn;

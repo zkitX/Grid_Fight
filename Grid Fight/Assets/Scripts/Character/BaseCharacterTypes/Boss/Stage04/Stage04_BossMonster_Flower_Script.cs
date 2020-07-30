@@ -29,7 +29,7 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
         yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
         while (MoveCoOn)
         {
-            InputDirection dir = (InputDirection)Random.Range(0, 4);
+            InputDirectionType dir = (InputDirectionType)Random.Range(0, 4);
             float MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y);
             yield return BattleManagerScript.Instance.WaitFor(1, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
 
@@ -43,7 +43,7 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
 
             if (CharInfo.Health > 0)
             {
-                MoveCharOnDirection(dir == InputDirection.Down ? InputDirection.Up : dir == InputDirection.Up ? InputDirection.Down : dir == InputDirection.Left ? InputDirection.Right : InputDirection.Left);
+                MoveCharOnDirection(dir == InputDirectionType.Down ? InputDirectionType.Up : dir == InputDirectionType.Up ? InputDirectionType.Down : dir == InputDirectionType.Left ? InputDirectionType.Right : InputDirectionType.Left);
             }
         }
     }

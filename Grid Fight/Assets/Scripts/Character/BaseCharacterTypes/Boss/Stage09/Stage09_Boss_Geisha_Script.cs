@@ -275,7 +275,7 @@ public class Stage09_Boss_Geisha_Script : MinionType_Script
         }
     }
 
-    public override IEnumerator MoveCharOnDir_Co(InputDirection nextDir)
+    public override IEnumerator MoveCharOnDir_Co(InputDirectionType nextDir)
     {
         yield break; //char doesnt move
         yield return base.MoveCharOnDir_Co(nextDir);

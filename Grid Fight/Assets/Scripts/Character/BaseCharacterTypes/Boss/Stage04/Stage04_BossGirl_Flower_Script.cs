@@ -25,7 +25,7 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
         int times = 0;
         int MoveTime = 0;
         bool val = true;
-        InputDirection dir = InputDirection.Down;
+        InputDirectionType dir = InputDirectionType.Down;
         bool goBack = false;
         while (val)
         {
@@ -49,7 +49,7 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
                         {
                             if (CharInfo.Health > 0)
                             {
-                                yield return MoveCharOnDir_Co(dir == InputDirection.Down ? InputDirection.Up : dir == InputDirection.Up ? InputDirection.Down : dir == InputDirection.Left ? InputDirection.Right : InputDirection.Left);
+                                yield return MoveCharOnDir_Co(dir == InputDirectionType.Down ? InputDirectionType.Up : dir == InputDirectionType.Up ? InputDirectionType.Down : dir == InputDirectionType.Left ? InputDirectionType.Right : InputDirectionType.Left);
                                 goBack = false;
                             }
 
@@ -58,9 +58,9 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
                         {
                             for (int i = 0; i < 10; i++)
                             {
-                                dir = (InputDirection)Random.Range(0, 4);
-                                BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos + (dir == InputDirection.Down ? new Vector2Int(1, 0) :
-                                    dir == InputDirection.Up ? new Vector2Int(-1, 0) : dir == InputDirection.Left ? new Vector2Int(0, -1) : new Vector2Int(0, 1)));
+                                dir = (InputDirectionType)Random.Range(0, 4);
+                                BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos + (dir == InputDirectionType.Down ? new Vector2Int(1, 0) :
+                                    dir == InputDirectionType.Up ? new Vector2Int(-1, 0) : dir == InputDirectionType.Left ? new Vector2Int(0, -1) : new Vector2Int(0, 1)));
                                 if (bts.BattleTileState == BattleTileStateType.Empty && bts.WalkingSide == UMS.WalkingSide)
                                 {
                                     break;

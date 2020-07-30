@@ -143,7 +143,7 @@ public class CharTesterScript : MonoBehaviour
 
         if (nextAnim.ToString().Contains("Dash"))
         {
-            MoveCo = MoveChar((InputDirection)Enum.Parse(typeof(InputDirection), nextAnim.ToString().Substring(4)));
+            MoveCo = MoveChar((InputDirectionType)Enum.Parse(typeof(InputDirectionType), nextAnim.ToString().Substring(4)));
             StartCoroutine(MoveCo);
             return;
         }
@@ -151,7 +151,7 @@ public class CharTesterScript : MonoBehaviour
     }
 
 
-    private IEnumerator MoveChar(InputDirection dir)
+    private IEnumerator MoveChar(InputDirectionType dir)
     {
         bool isMoving = true;
         int i = 0;

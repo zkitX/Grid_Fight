@@ -34,7 +34,7 @@ public class Grid_UINavigator : MonoBehaviour
     public bool selectStartingButton = true;
     public bool specificStartingButton = true;
     [ConditionalField("specificStartingButton")] public Grid_UIButton startingButton = null;
-    [ConditionalField("specificStartingButton", true)] public InputDirection startingDirection = InputDirection.Up;
+    [ConditionalField("specificStartingButton", true)] public InputDirectionType startingDirection = InputDirectionType.Up;
 
     [HideInInspector] public float buttonBufferPercentage = 0.5f;
 
@@ -264,7 +264,7 @@ public class Grid_UINavigator : MonoBehaviour
 
 
     float offset = 0f;
-    public void ButtonChangeInput(int player, InputDirection direction, float value)
+    public void ButtonChangeInput(int player, InputDirectionType direction, float value)
     {
         if (offset + 0.2f < Time.time)
         {
@@ -375,7 +375,7 @@ public class Grid_UINavigator : MonoBehaviour
         return closest;
     }
 
-    public Grid_UIButton GetButtonFurthestInDirection(InputDirection comparison)
+    public Grid_UIButton GetButtonFurthestInDirection(InputDirectionType comparison)
     {
         if (ActiveButtons.Length == 0) return null;
 
@@ -393,7 +393,7 @@ public class Grid_UINavigator : MonoBehaviour
     }
 
     [Tooltip("The zones scale based on the button image wherein other buttons can be selected inLine")][Range(0.1f, 2f)]public float inLineBuffer = 0.6f;
-    public Grid_UIButton GetButtonClosestInDirectionFromSelected(InputDirection direction)
+    public Grid_UIButton GetButtonClosestInDirectionFromSelected(InputDirectionType direction)
     {
         if(selectedButton == null)
         {
@@ -409,8 +409,8 @@ public class Grid_UINavigator : MonoBehaviour
         {
             if (Compare.DistanceInDirection(selectedButton.transform.position, activeUnselectedButtons[i].transform.position, direction, selectedButton.buffers) > 0f &&
                 Mathf.Abs(Compare.DistanceInDirection(selectedButton.transform.position, activeUnselectedButtons[i].transform.position,
-                (direction == InputDirection.Down || direction == InputDirection.Up) ? InputDirection.Right : InputDirection.Up)) < (
-                 (direction == InputDirection.Down || direction == InputDirection.Up) ? selectedButton.DimentionsInScreenSpace.x * 0.5f * inLineBuffer : selectedButton.DimentionsInScreenSpace.y * 0.5f * inLineBuffer))
+                (direction == InputDirectionType.Down || direction == InputDirectionType.Up) ? InputDirectionType.Right : InputDirectionType.Up)) < (
+                 (direction == InputDirectionType.Down || direction == InputDirectionType.Up) ? selectedButton.DimentionsInScreenSpace.x * 0.5f * inLineBuffer : selectedButton.DimentionsInScreenSpace.y * 0.5f * inLineBuffer))
             {
                 if (closestInDirection == null) closestInDirection = activeUnselectedButtons[i];
                 else if (Compare.DistanceInDirection(selectedButton.transform.position, activeUnselectedButtons[i].transform.position, direction, selectedButton.buffers) <
@@ -418,7 +418,7 @@ public class Grid_UINavigator : MonoBehaviour
                 {
                     if(Compare.IsInlineImage(closestInDirection.transform.position, closestInDirection.DimentionsInScreenSpace, 
                         activeUnselectedButtons[i].transform.position, activeUnselectedButtons[i].DimentionsInScreenSpace,
-                        (direction == InputDirection.Up  || direction == InputDirection.Down) ? InputDirection.Right : InputDirection.Up))
+                        (direction == InputDirectionType.Up  || direction == InputDirectionType.Down) ? InputDirectionType.Right : InputDirectionType.Up))
                     {
                         if(Vector2.Distance(closestInDirection.transform.position, selectedButton.transform.position) >
                             Vector2.Distance(activeUnselectedButtons[i].transform.position, selectedButton.transform.position))
@@ -481,17 +481,17 @@ public class Grid_UINavigator : MonoBehaviour
 
 public class Compare
 {
-    public static bool InDirectionTo(Vector2 isObject, Vector2 comparedToObject, InputDirection comparison)
+    public static bool InDirectionTo(Vector2 isObject, Vector2 comparedToObject, InputDirectionType comparison)
     {
         switch (comparison)
         {
-            case (InputDirection.Up):
+            case (InputDirectionType.Up):
                 return isObject.y > comparedToObject.y;
-            case (InputDirection.Down):
+            case (InputDirectionType.Down):
                 return isObject.y < comparedToObject.y;
-            case (InputDirection.Right):
+            case (InputDirectionType.Right):
                 return isObject.x > comparedToObject.x;
-            case (InputDirection.Left):
+            case (InputDirectionType.Left):
                 return isObject.x < comparedToObject.x;
             default:
                 Debug.LogError("input direction not an option");
@@ -501,21 +501,21 @@ public class Compare
         return false;
     }
 
-    public static float DistanceInDirection(Vector2 originObj, Vector2 distanceObj, InputDirection direction)
+    public static float DistanceInDirection(Vector2 originObj, Vector2 distanceObj, InputDirectionType direction)
     {
         return DistanceInDirection(originObj, distanceObj, direction, Vector2.zero);
     }
-    public static float DistanceInDirection(Vector2 originObj, Vector2 distanceObj, InputDirection direction, Vector2 offsets)
+    public static float DistanceInDirection(Vector2 originObj, Vector2 distanceObj, InputDirectionType direction, Vector2 offsets)
     {
         switch (direction)
         {
-            case (InputDirection.Up):
+            case (InputDirectionType.Up):
                 return distanceObj.y - originObj.y - offsets.y;
-            case (InputDirection.Down):
+            case (InputDirectionType.Down):
                 return originObj.y - distanceObj.y - offsets.y;
-            case (InputDirection.Right):
+            case (InputDirectionType.Right):
                 return distanceObj.x - originObj.x - offsets.x;
-            case (InputDirection.Left):
+            case (InputDirectionType.Left):
                 return originObj.x - distanceObj.x - offsets.x;
             default:
                 Debug.LogError("input direction not an option");
@@ -525,21 +525,21 @@ public class Compare
         return 0f;
     }
 
-    public static bool IsInlineImage(Vector2 obj1Pos, Vector2 obj1Dim, Vector2 obj2Pos, Vector2 obj2Dim, InputDirection direction, float bufferPercentage = 0.5f)
+    public static bool IsInlineImage(Vector2 obj1Pos, Vector2 obj1Dim, Vector2 obj2Pos, Vector2 obj2Dim, InputDirectionType direction, float bufferPercentage = 0.5f)
     {
         Vector2 compareLine = Vector2.zero;
-        if(direction == InputDirection.Down || direction == InputDirection.Up) compareLine = Vector2.up;
+        if(direction == InputDirectionType.Down || direction == InputDirectionType.Up) compareLine = Vector2.up;
         else compareLine = Vector2.right;
 
         if (compareLine == Vector2.up &&
-            ((Mathf.Abs(DistanceInDirection(obj1Pos, obj2Pos, InputDirection.Right)) < obj1Dim.y * (bufferPercentage / 2f)) ||
-            (Mathf.Abs(DistanceInDirection(obj1Pos, obj2Pos, InputDirection.Right)) < obj2Dim.y * (bufferPercentage / 2f))))
+            ((Mathf.Abs(DistanceInDirection(obj1Pos, obj2Pos, InputDirectionType.Right)) < obj1Dim.y * (bufferPercentage / 2f)) ||
+            (Mathf.Abs(DistanceInDirection(obj1Pos, obj2Pos, InputDirectionType.Right)) < obj2Dim.y * (bufferPercentage / 2f))))
         {
             return true;
         }
         else if(compareLine == Vector2.right &&
-            ((Mathf.Abs(DistanceInDirection(obj1Pos, obj2Pos, InputDirection.Up)) < obj1Dim.x * (bufferPercentage / 2f)) ||
-            (Mathf.Abs(DistanceInDirection(obj1Pos, obj2Pos, InputDirection.Up)) < obj2Dim.x * (bufferPercentage / 2f))))
+            ((Mathf.Abs(DistanceInDirection(obj1Pos, obj2Pos, InputDirectionType.Up)) < obj1Dim.x * (bufferPercentage / 2f)) ||
+            (Mathf.Abs(DistanceInDirection(obj1Pos, obj2Pos, InputDirectionType.Up)) < obj2Dim.x * (bufferPercentage / 2f))))
         {
             return true;
         }

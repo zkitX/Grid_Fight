@@ -209,17 +209,17 @@ public class GridManagerScript : MonoBehaviour
     }
 
 
-    public Vector2Int GetVectorFromDirection(InputDirection dir)
+    public Vector2Int GetVectorFromDirection(InputDirectionType dir)
     {
         switch (dir)
         {
-            case InputDirection.Up:
+            case InputDirectionType.Up:
                 return new Vector2Int(-1, 0);
-            case InputDirection.Down:
+            case InputDirectionType.Down:
                 return new Vector2Int(1, 0);
-            case InputDirection.Left:
+            case InputDirectionType.Left:
                 return new Vector2Int(0, 1);
-            case InputDirection.Right:
+            case InputDirectionType.Right:
                 return new Vector2Int(0, -1);
         }
         return new Vector2Int(0, -1);

@@ -44,7 +44,7 @@ public class Grid_UIPlayerNavBox : MonoBehaviour
         PressForPlayer(player);
     }
     protected float offset = 0f;
-    protected void Instance_LeftJoyStickUsedEvent(int player, InputDirection dir, float value)
+    protected void Instance_LeftJoyStickUsedEvent(int player, InputDirectionType dir, float value)
     {
         if (!Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.PlayerNavBox) || !activeState || parentPanel.focusState != UI_FocusTypes.Focused) return;
         if (offset + 0.2f < Time.time)
@@ -85,7 +85,7 @@ public class Grid_UIPlayerNavBox : MonoBehaviour
         Debug.LogError("LOGGED PRESS FOR PLAYER " + (player + 1).ToString());
     }
 
-    public virtual void MoveForPlayer(int player, InputDirection dir)
+    public virtual void MoveForPlayer(int player, InputDirectionType dir)
     {
         PlayerNavGroup playNav = playerNavGroups.Where(r => r.ContainsPlayer(player)).FirstOrDefault();
 
@@ -105,28 +105,28 @@ public class Grid_UIPlayerNavBox : MonoBehaviour
         playNav.pos = destPos;
     }
 
-    protected Vector2Int GetClosestPosInDirection(Vector2Int start, InputDirection dir)
+    protected Vector2Int GetClosestPosInDirection(Vector2Int start, InputDirectionType dir)
     {
         PlayerNavButton closestButton = null;
 
         switch (dir)
         {
-            case InputDirection.Up:
+            case InputDirectionType.Up:
                 closestButton = playerNavGrid.Where(r => r.pos == start + new Vector2Int(0,1)).FirstOrDefault();
                 if (closestButton != null) break;
                 closestButton = playerNavGrid.Where(r => r.pos.y > start.y).OrderBy(e => -(start + e.pos).magnitude).FirstOrDefault();
                 break;
-            case InputDirection.Down:
+            case InputDirectionType.Down:
                 closestButton = playerNavGrid.Where(r => r.pos == start + new Vector2Int(0, -1)).FirstOrDefault();
                 if (closestButton != null) break;
                 closestButton = playerNavGrid.Where(r => r.pos.y < start.y).OrderBy(e => -(start + e.pos).magnitude).FirstOrDefault();
                 break;
-            case InputDirection.Left:
+            case InputDirectionType.Left:
                 closestButton = playerNavGrid.Where(r => r.pos == start + new Vector2Int(-1, 0)).FirstOrDefault();
                 if (closestButton != null) break;
                 closestButton = playerNavGrid.Where(r => r.pos.x < start.x).OrderBy(e => -(start + e.pos).magnitude).FirstOrDefault();
                 break;
-            case InputDirection.Right:
+            case InputDirectionType.Right:
                 closestButton = playerNavGrid.Where(r => r.pos == start + new Vector2Int(1, 0)).FirstOrDefault();
                 if (closestButton != null) break;
                 closestButton = playerNavGrid.Where(r => r.pos.x > start.x).OrderBy(e => -(start + e.pos).magnitude).FirstOrDefault();

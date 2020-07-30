@@ -79,8 +79,8 @@ public class ArenaSideSelectManager : MonoBehaviour
         //Auto assign players if there are 2 or more
         if(InputController.Instance.PlayerCount >= 2)
         {
-            sideSelectors[0].MoveForPlayer(0, alignment == Dimention.vertical ? InputDirection.Left : InputDirection.Up);
-            sideSelectors[1].MoveForPlayer(1, alignment == Dimention.vertical ? InputDirection.Right : InputDirection.Down);
+            sideSelectors[0].MoveForPlayer(0, alignment == Dimention.vertical ? InputDirectionType.Left : InputDirectionType.Up);
+            sideSelectors[1].MoveForPlayer(1, alignment == Dimention.vertical ? InputDirectionType.Right : InputDirectionType.Down);
         }
     }
 

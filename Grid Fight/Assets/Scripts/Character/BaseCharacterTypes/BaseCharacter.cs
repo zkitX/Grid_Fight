@@ -766,7 +766,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     #endregion
     #region Move
 
-    public virtual IEnumerator MoveCharOnDir_Co(InputDirection nextDir)
+    public virtual IEnumerator MoveCharOnDir_Co(InputDirectionType nextDir)
     {
         if ((CharInfo.Health > 0 && !isMoving && IsOnField && EndAxisMovement && SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving.ToString() && CharActionlist.Contains(CharacterActionType.Move)) || BattleManagerScript.Instance.VFXScene)
         {
@@ -908,16 +908,16 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     FireActionEvent(CharacterActionType.Move);
                     switch (nextDir)
                     {
-                        case InputDirection.Up:
+                        case InputDirectionType.Up:
                             FireActionEvent(CharacterActionType.MoveUp);
                             break;
-                        case InputDirection.Down:
+                        case InputDirectionType.Down:
                             FireActionEvent(CharacterActionType.MoveDown);
                             break;
-                        case InputDirection.Left:
+                        case InputDirectionType.Left:
                             FireActionEvent(CharacterActionType.MoveLeft);
                             break;
-                        case InputDirection.Right:
+                        case InputDirectionType.Right:
                             FireActionEvent(CharacterActionType.MoveRight);
                             break;
                     }
@@ -939,7 +939,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
     }
 
-    public virtual void MoveCharOnDirection(InputDirection nextDir)
+    public virtual void MoveCharOnDirection(InputDirectionType nextDir)
     {
         if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving.ToString() || SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving.ToString() ||
             SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle.ToString() || SwapWhenPossible || CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed <= 0)
@@ -957,24 +957,24 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     }
 
-    public void GetDirectionVectorAndAnimationCurve(InputDirection nextDir, out CharacterAnimationStateType AnimState, out Vector2Int dir, out AnimationCurve curve)
+    public void GetDirectionVectorAndAnimationCurve(InputDirectionType nextDir, out CharacterAnimationStateType AnimState, out Vector2Int dir, out AnimationCurve curve)
     {
         AnimState = CharacterAnimationStateType.Idle;
         curve = new AnimationCurve();
         dir = Vector2Int.zero;
         switch (nextDir)
         {
-            case InputDirection.Up:
+            case InputDirectionType.Up:
                 dir = new Vector2Int(-1, 0);
                 curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.UpMovement : SpineAnim.Speed_Time_Curves.UpMovement;
                 AnimState = CharacterAnimationStateType.DashUp;
                 break;
-            case InputDirection.Down:
+            case InputDirectionType.Down:
                 dir = new Vector2Int(1, 0);
                 curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.DownMovement : SpineAnim.Speed_Time_Curves.DownMovement;
                 AnimState = CharacterAnimationStateType.DashDown;
                 break;
-            case InputDirection.Right:
+            case InputDirectionType.Right:
                 dir = new Vector2Int(0, 1);
                 AnimState = UMS.Facing == FacingType.Left ? CharacterAnimationStateType.DashRight : CharacterAnimationStateType.DashLeft;
                 if (AnimState == CharacterAnimationStateType.DashLeft)
@@ -986,7 +986,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.ForwardMovement : SpineAnim.Speed_Time_Curves.ForwardMovement;
                 }
                 break;
-            case InputDirection.Left:
+            case InputDirectionType.Left:
                 dir = new Vector2Int(0, -1);
                 AnimState = UMS.Facing == FacingType.Left ? CharacterAnimationStateType.DashLeft : CharacterAnimationStateType.DashRight;
                 if (AnimState == CharacterAnimationStateType.DashLeft)
@@ -998,22 +998,22 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.ForwardMovement : SpineAnim.Speed_Time_Curves.ForwardMovement;
                 }
                 break;
-            case InputDirection.UpLeft:
+            case InputDirectionType.UpLeft:
                 dir = new Vector2Int(-1, -1);
                 curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.UpMovement : SpineAnim.Speed_Time_Curves.UpMovement;
                 AnimState = CharacterAnimationStateType.DashUp;
                 break;
-            case InputDirection.UpRight:
+            case InputDirectionType.UpRight:
                 dir = new Vector2Int(-1, 1);
                 curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.UpMovement : SpineAnim.Speed_Time_Curves.UpMovement;
                 AnimState = CharacterAnimationStateType.DashUp;
                 break;
-            case InputDirection.DownLeft:
+            case InputDirectionType.DownLeft:
                 dir = new Vector2Int(1, -1);
                 curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.DownMovement : SpineAnim.Speed_Time_Curves.DownMovement;
                 AnimState = CharacterAnimationStateType.DashDown;
                 break;
-            case InputDirection.DownRight:
+            case InputDirectionType.DownRight:
                 dir = new Vector2Int(1, 1);
                 curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.DownMovement : SpineAnim.Speed_Time_Curves.DownMovement;
                 AnimState = CharacterAnimationStateType.DashDown;

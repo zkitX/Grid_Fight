@@ -104,14 +104,14 @@ public class UserInputManager : MonoBehaviour
     }
 
     #region Joystick
-    private void Instance_RightJoystickUsedEvent(int player, InputDirection dir, float value)
+    private void Instance_RightJoystickUsedEvent(int player, InputDirectionType dir, float value)
     {
         //Debug.Log(player + "    " + dir);
         //UserInputJoystickHandler(PPPlayer, DDir);
         UserInputJoystickHandler(player, dir, value);
     }
 
-    private void Instance_LeftJoystickUsedEvent(int player, InputDirection dir, float value)
+    private void Instance_LeftJoystickUsedEvent(int player, InputDirectionType dir, float value)
     {
         //Debug.Log(player + "    " + dir);
         //UserInputJoystickHandler(PPPlayer, DDir);
@@ -610,7 +610,7 @@ public class UserInputManager : MonoBehaviour
         BattleManagerScript.Instance.StopChargingAttack((ControllerType)player);
     }
 
-    public void UserInputJoystickHandler(int player, InputDirection dir, float value)
+    public void UserInputJoystickHandler(int player, InputDirectionType dir, float value)
     {
         BattleManagerScript.Instance.MoveSelectedCharacterInDirection((ControllerType)player, dir, value);
     }

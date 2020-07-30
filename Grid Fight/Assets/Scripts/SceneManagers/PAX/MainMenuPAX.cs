@@ -36,18 +36,18 @@ public class MainMenuPAX : MonoBehaviour
         //InputController.Instance.LeftJoystickUsedEvent += Instance_LeftJoystickUsedEvent;
     }
 
-    private void Instance_LeftJoystickUsedEvent(int player, InputDirection dir, float value)
+    private void Instance_LeftJoystickUsedEvent(int player, InputDirectionType dir, float value)
     {
         if(Time.time > TimeOffset + CoolDown)
         {
             Debug.Log(dir.ToString());
             switch (dir)
             {
-                case InputDirection.Up:
+                case InputDirectionType.Up:
                     selectedButton--;
                     TimeOffset = Time.time;
                     break;
-                case InputDirection.Down:
+                case InputDirectionType.Down:
                     selectedButton++;
                     TimeOffset = Time.time;
                     break;

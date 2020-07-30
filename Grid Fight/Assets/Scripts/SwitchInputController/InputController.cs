@@ -152,16 +152,17 @@ public class InputController : MonoBehaviour
     #endregion
 
     #region JoyStick
-    public delegate void LeftJoystickUsed(int player, InputDirection dir, float value);
+    public delegate void LeftJoystickUsed(int player, InputDirectionType dir, float value);
     public event LeftJoystickUsed LeftJoystickUsedEvent;
-    public delegate void RightJoystickUsed(int player, InputDirection dir, float value);
+    public delegate void RightJoystickUsed(int player, InputDirectionType dir, float value);
     public event RightJoystickUsed RightJoystickUsedEvent;
     #endregion
 
 
     public float DeathZone = 0.2f;
+    [Range(0, 45)]
     public float DiagonalDeathZone = 0.05f;
-
+    private List<UserDirInputClass> playersDirection = new List<UserDirInputClass>();
     public void FireMinus()
     {
         ButtonMinusUpEvent?.Invoke(0);
@@ -257,77 +258,188 @@ public class InputController : MonoBehaviour
 
     }
 
-    int i = 0;
     float x = 0, y = 0;
+    UserDirInputClass udic = null;
     void OnAxisUpdate(InputActionEventData data)
     {
+
         InputButtonType buttonInput = (InputButtonType)System.Enum.Parse(typeof(InputButtonType), data.actionName);
-        x = (buttonInput == InputButtonType.Left_Move_Horizontal || buttonInput == InputButtonType.Right_Move_Horizontal) ? data.GetAxis() : x;
-        y = (buttonInput == InputButtonType.Left_Move_Vertical || buttonInput == InputButtonType.Right_Move_Vertical) ? data.GetAxis() : y;
-        if (LeftJoystickUsedEvent != null && i == 1 && (x > DeathZone || x < -DeathZone || y > DeathZone || y < -DeathZone))
+        if(buttonInput == InputButtonType.Left_Move_Horizontal || buttonInput == InputButtonType.Right_Move_Horizontal || buttonInput == InputButtonType.Left_Move_Vertical || buttonInput == InputButtonType.Right_Move_Vertical)
         {
-           
-            Joystics[data.playerId] = new Vector2(x, y);
-            i = -1;
-            if ((Mathf.Abs(Mathf.Abs(Joystics[data.playerId].x) - Mathf.Abs(Joystics[data.playerId].y)) / (Mathf.Abs(Joystics[data.playerId].x) > Mathf.Abs(Joystics[data.playerId].y) ? Mathf.Abs(Joystics[data.playerId].x) : Mathf.Abs(Joystics[data.playerId].y))) > DiagonalDeathZone)
+            //Debug.Log("                  " + Time.time);
+            x = 0; y = 0;
+            x = (buttonInput == InputButtonType.Left_Move_Horizontal || buttonInput == InputButtonType.Right_Move_Horizontal) ? data.GetAxis() : x;
+            y = (buttonInput == InputButtonType.Left_Move_Vertical || buttonInput == InputButtonType.Right_Move_Vertical) ? data.GetAxis() : y;
+            if (LeftJoystickUsedEvent != null && (x > DeathZone || x < -DeathZone || y > DeathZone || y < -DeathZone))
             {
-                if (Mathf.Abs(Joystics[data.playerId].x) > Mathf.Abs(Joystics[data.playerId].y))
+                udic = playersDirection.Where(r => r.Player == data.playerId).FirstOrDefault();
+                if (udic == null)
                 {
-                    if (Joystics[data.playerId].x > 0)
-                    {
-                        LeftJoystickUsedEvent(data.playerId, InputDirection.Right, Joystics[data.playerId].x);
-                    }
-                    else
-                    {
-                        LeftJoystickUsedEvent(data.playerId, InputDirection.Left, Joystics[data.playerId].x);
-                    }
+                    playersDirection.Add(new UserDirInputClass(data.playerId, new Vector2(x, y)));
                 }
                 else
                 {
-                    if (Joystics[data.playerId].y > 0)
-                    {
-                        LeftJoystickUsedEvent(data.playerId, InputDirection.Up, Joystics[data.playerId].y);
-                    }
-                    else
-                    {
-                        LeftJoystickUsedEvent(data.playerId, InputDirection.Down, Joystics[data.playerId].y);
-                    }
+                    udic.Dirs.Add(new Vector2(x, y));
+                }
+            }
+        }
+    }
+
+    public InputDirectionType GetDir(int player, List<Vector2> dirs)
+    {
+        dirVal = 0;
+        Joystics[player] = new Vector2(dirs.OrderByDescending(r=> Mathf.Abs(r.x)).First().x, dirs.OrderByDescending(r => Mathf.Abs(r.y)).First().y);
+        float val = Mathf.Pow(Mathf.Abs(Joystics[player].x), 2) + Mathf.Pow(Mathf.Abs(Joystics[player].y), 2);
+        float Hypo = Mathf.Sqrt(val);
+        float sin = (Mathf.Abs(Joystics[player].x) > Mathf.Abs(Joystics[player].y) ? Mathf.Abs(Joystics[player].x) : Mathf.Abs(Joystics[player].y)) / Hypo;
+        float angleOfSineInDegrees = 0;
+
+        /*if (Mathf.Abs(x) > Mathf.Abs(y))
+        {
+            if (x > 0)
+            {
+                if (y > 0)
+                {
+                    angleOfSineInDegrees = (Mathf.Acos(sin) * 180) / Mathf.PI;
+                }
+                else
+                {
+                    angleOfSineInDegrees = 360 - ((Mathf.Acos(sin) * 180) / Mathf.PI);
                 }
             }
             else
             {
-                if (Joystics[data.playerId].y < 0)
+                if (y > 0)
                 {
-                    if (Joystics[data.playerId].x > 0)
-                    {
-                        //Debug.Log(new Vector2(x, y) + "    DR");
-                        LeftJoystickUsedEvent(data.playerId, InputDirection.DownRight, Joystics[data.playerId].y);
-                    }
-                    else
-                    {
-                        //Debug.Log(new Vector2(x, y) + "    DL");
-                        LeftJoystickUsedEvent(data.playerId, InputDirection.DownLeft, Joystics[data.playerId].y);
-                    }
+                    angleOfSineInDegrees = 180 - ((Mathf.Acos(sin) * 180) / Mathf.PI);
                 }
                 else
                 {
-                    if (Joystics[data.playerId].x > 0)
-                    {
-                        //Debug.Log(new Vector2(x, y) + "    UR");
-                        LeftJoystickUsedEvent(data.playerId, InputDirection.UpRight, Joystics[data.playerId].y);
-                    }
-                    else
-                    {
-                        //Debug.Log(new Vector2(x, y) + "    UL");
-                        LeftJoystickUsedEvent(data.playerId, InputDirection.UpLeft, Joystics[data.playerId].y);
-                    }
+                    angleOfSineInDegrees = 180 + ((Mathf.Acos(sin) * 180) / Mathf.PI);
                 }
             }
         }
-        i = i + 1 == 2 ? 0 : i + 1; 
+        else
+        {
+            if (y > 0)
+            {
+                if (x > 0)
+                {
+                    angleOfSineInDegrees =  90 - (Mathf.Acos(sin) * 180) / Mathf.PI;
+                }
+                else
+                {
+                    angleOfSineInDegrees = 90 + ((Mathf.Acos(sin) * 180) / Mathf.PI);
+                }
+            }
+            else
+            {
+                if (x > 0)
+                {
+                    angleOfSineInDegrees = 270 + ((Mathf.Acos(sin) * 180) / Mathf.PI);
+                }
+                else
+                {
+                    angleOfSineInDegrees = 270 - ((Mathf.Acos(sin) * 180) / Mathf.PI);
+                }
+            }
+        }*/
+
+        angleOfSineInDegrees = (Mathf.Acos(sin) * 180) / Mathf.PI;
+
+        Debug.Log(angleOfSineInDegrees + "    " + new Vector2(x, y) + "    " + sin);//
+
+        
+        //((Mathf.Abs(Mathf.Abs(Joystics[data.playerId].x) - Mathf.Abs(Joystics[data.playerId].y)) / (Mathf.Abs(Joystics[data.playerId].x) > Mathf.Abs(Joystics[data.playerId].y) ? Mathf.Abs(Joystics[data.playerId].x) : Mathf.Abs(Joystics[data.playerId].y))) > DiagonalDeathZone)
+
+        if (angleOfSineInDegrees <= DiagonalDeathZone)
+        {
+            if (Mathf.Abs(Joystics[player].x) > Mathf.Abs(Joystics[player].y))
+            {
+                if (Joystics[player].x > 0)
+                {
+                    //LeftJoystickUsedEvent(data.playerId, InputDirectionType.Right, Joystics[data.playerId].x);
+                    //playersDirection.Add(new UserDirInputClass(data, InputDirectionType.Right, Joystics[data.playerId].x));
+                    dirVal = Joystics[player].x;
+                    return InputDirectionType.Right;
+                }
+                else
+                {
+                    //LeftJoystickUsedEvent(data.playerId, InputDirectionType.Left, Joystics[data.playerId].x);
+                    //playersDirection.Add(new UserDirInputClass(data.playerId, InputDirectionType.Left, Joystics[data.playerId].x));
+                    dirVal = Joystics[player].x;
+                    return InputDirectionType.Left;
+                }
+            }
+            else
+            {
+                if (Joystics[player].y > 0)
+                {
+                    //LeftJoystickUsedEvent(data.playerId, InputDirectionType.Up, Joystics[data.playerId].y);
+                    //playersDirection.Add(new UserDirInputClass(data.playerId, InputDirectionType.Up, Joystics[data.playerId].y));
+                    dirVal = Joystics[player].y;
+                    return InputDirectionType.Up;
+                }
+                else
+                {
+                    //LeftJoystickUsedEvent(data.playerId, InputDirectionType.Down, Joystics[data.playerId].y);
+                    //playersDirection.Add(new UserDirInputClass(data.playerId, InputDirectionType.Down, Joystics[data.playerId].y));
+                    dirVal = Joystics[player].y;
+                    return InputDirectionType.Down;
+                }
+            }
+        }
+        else
+        {
+            if (Joystics[player].y < 0)
+            {
+                if (Joystics[player].x > 0)
+                {
+                    //Debug.Log(new Vector2(x, y) + "    DR");
+                    //LeftJoystickUsedEvent(data.playerId, InputDirectionType.DownRight, Joystics[data.playerId].y);
+                    // playersDirection.Add(new UserDirInputClass(data.playerId, InputDirectionType.DownRight, Joystics[data.playerId].x));
+                    dirVal = Joystics[player].y;
+                    return InputDirectionType.DownRight;
+                }
+                else
+                {
+                    //Debug.Log(new Vector2(x, y) + "    DL");
+                    //LeftJoystickUsedEvent(data.playerId, InputDirectionType.DownLeft, Joystics[data.playerId].y);
+                    // playersDirection.Add(new UserDirInputClass(data.playerId, InputDirectionType.DownLeft, Joystics[data.playerId].x));
+                    dirVal = Joystics[player].y;
+                    return InputDirectionType.DownLeft;
+                }
+            }
+            else
+            {
+                if (Joystics[player].x > 0)
+                {
+                    //Debug.Log(new Vector2(x, y) + "    UR");
+                    //LeftJoystickUsedEvent(data.playerId, InputDirectionType.UpRight, Joystics[data.playerId].y);
+                    // playersDirection.Add(new UserDirInputClass(data.playerId, InputDirectionType.UpRight, Joystics[data.playerId].x));
+                    dirVal = Joystics[player].y;
+                    return InputDirectionType.UpRight;
+                }
+                else
+                {
+                    //Debug.Log(new Vector2(x, y) + "    UL");
+                    //LeftJoystickUsedEvent(data.playerId, InputDirectionType.UpLeft, Joystics[data.playerId].y);
+                    // playersDirection.Add(new UserDirInputClass(data.playerId, InputDirectionType.UpLeft, Joystics[data.playerId].x));
+                    dirVal = Joystics[player].y;
+                    return InputDirectionType.UpLeft;
+                }
+            }
+        }
     }
-
-
+    float dirVal = 0;
+    private void Update()
+    {
+        for (int i = 0; i < playersDirection.Count; i++)
+        {
+            LeftJoystickUsedEvent(playersDirection[i].Player, GetDir(playersDirection[i].Player, playersDirection[i].Dirs), dirVal);
+        }
+        playersDirection.Clear();
+    }
     void OnButtonDown(InputActionEventData data)
     {
         InputButtonType buttonInput = (InputButtonType)System.Enum.Parse(typeof(InputButtonType), data.actionName);
@@ -401,16 +513,16 @@ public class InputController : MonoBehaviour
                 ButtonRightStickDownEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.KeyboardDown:
-                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Down, data.GetAxis());
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirectionType.Down, data.GetAxis());
                 break;
             case InputButtonType.KeyboardLeft:
-                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Left, data.GetAxis());
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirectionType.Left, data.GetAxis());
                 break;
             case InputButtonType.KeyboardRight:
-                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Right, data.GetAxis());
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirectionType.Right, data.GetAxis());
                 break;
             case InputButtonType.KeyboardUp:
-                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Up, data.GetAxis());
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirectionType.Up, data.GetAxis());
                 break;
         }
     }
@@ -488,16 +600,16 @@ public class InputController : MonoBehaviour
                 ButtonRightStickPressedEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.KeyboardDown:
-                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Down, data.GetAxis());
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirectionType.Down, data.GetAxis());
                 break;
             case InputButtonType.KeyboardLeft:
-                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Left, data.GetAxis());
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirectionType.Left, data.GetAxis());
                 break;
             case InputButtonType.KeyboardRight:
-                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Right, data.GetAxis());
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirectionType.Right, data.GetAxis());
                 break;
             case InputButtonType.KeyboardUp:
-                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Up, data.GetAxis());
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirectionType.Up, data.GetAxis());
                 break;
         }
     }
@@ -579,16 +691,16 @@ public class InputController : MonoBehaviour
                 ButtonRightStickUpEvent?.Invoke(data.playerId);
                 break;
             case InputButtonType.KeyboardDown:
-                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Down, data.GetAxis());
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirectionType.Down, data.GetAxis());
                 break;
             case InputButtonType.KeyboardLeft:
-                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Left, data.GetAxis());
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirectionType.Left, data.GetAxis());
                 break;
             case InputButtonType.KeyboardRight:
-                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Right, data.GetAxis());
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirectionType.Right, data.GetAxis());
                 break;
             case InputButtonType.KeyboardUp:
-                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirection.Up, data.GetAxis());
+                LeftJoystickUsedEvent?.Invoke(data.playerId, InputDirectionType.Up, data.GetAxis());
                 break;
         }
     }
@@ -739,3 +851,17 @@ public class InputController : MonoBehaviour
 
 }
 
+public class UserDirInputClass
+{
+    public int Player;
+    public List<Vector2> Dirs = new List<Vector2>();
+    public UserDirInputClass()
+    {
+
+    }
+    public UserDirInputClass(int player, Vector2 dir)
+    {
+        Player = player;
+        Dirs.Add(dir);
+    }
+}
