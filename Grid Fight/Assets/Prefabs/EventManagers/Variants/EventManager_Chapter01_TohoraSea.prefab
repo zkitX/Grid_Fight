@@ -29434,6 +29434,13 @@ GameObject:
   - component: {fileID: 4592790893382630588}
   - component: {fileID: 7257162185800931934}
   - component: {fileID: 4635599110782791861}
+  - component: {fileID: 4627747954783168371}
+  - component: {fileID: 4019179604387302176}
+  - component: {fileID: 3692587547800000045}
+  - component: {fileID: 5904623328929808}
+  - component: {fileID: 455976346329730507}
+  - component: {fileID: 1410818960902081300}
+  - component: {fileID: 2818914425715872257}
   m_Layer: 0
   m_Name: EventManager_Chapter01_TohoraSea
   m_TagString: Untagged
@@ -29495,21 +29502,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 902.76544, y: 467.07333}
+  scrollPos: {x: 1066.9681, y: -2550.0227}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
-  blockViewHeight: 307.33334
-  zoom: 0.8499997
+  blockViewHeight: 450
+  zoom: 0.66999984
   scrollViewRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 0
     height: 0
-  selectedBlocks:
-  - {fileID: 2609580777287407458}
-  selectedCommands:
-  - {fileID: 2247930722032251750}
+  selectedBlocks: []
+  selectedCommands: []
   variables:
   - {fileID: 5203328574989040740}
   - {fileID: 2431638329300938721}
@@ -30020,7 +30025,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -673.20215
     y: -314.0663
-    width: 130.78433
+    width: 123.134346
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -30229,7 +30234,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -1199.8447
     y: -217.32442
-    width: 317.45105
+    width: 296.26874
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -30259,7 +30264,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -731.2976
     y: -207.41063
-    width: 246.86281
+    width: 224.6269
     height: 40
   tint: {r: 0.03137255, g: 0.7137255, b: 1, a: 1}
   useCustomTint: 1
@@ -30295,7 +30300,9 @@ MonoBehaviour:
   - {fileID: 2648677128366426139}
   - {fileID: 2789756759190220385}
   - {fileID: 3851146294919212959}
+  - {fileID: 4019179604387302176}
   - {fileID: 3100478587123513206}
+  - {fileID: 4627747954783168371}
   - {fileID: 8024709323860457669}
   - {fileID: 4010931193592833797}
 --- !u!114 &8948432571500041401
@@ -30314,7 +30321,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -1434.9025
     y: -128.08777
-    width: 238.23535
+    width: 221.64183
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -30356,7 +30363,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -1148.2961
     y: -129.25275
-    width: 203.72554
+    width: 194.77615
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -30399,7 +30406,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -864.84717
     y: -129.97887
-    width: 177.84317
+    width: 164.9254
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -30714,7 +30721,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -1435.4708
     y: -31.856953
-    width: 238.23535
+    width: 221.64183
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -30890,6 +30897,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: Wave1
   TransitionDuration: 0
+  WindTransitionRotation: -50
   HasAStageUpdate: 0
   FightGridToShow: 0
   CamInfo:
@@ -31522,7 +31530,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -1113.7068
     y: -315.3464
-    width: 139.41179
+    width: 130.59703
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -31620,7 +31628,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -681.18634
     y: -406.49515
-    width: 135.49022
+    width: 127.61196
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -31757,7 +31765,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 103.93213
     y: -230.17204
-    width: 133.13728
+    width: 127.61196
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -31995,6 +32003,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: PaiWave
   TransitionDuration: 0
+  WindTransitionRotation: -50
   HasAStageUpdate: 0
   FightGridToShow: 1
   CamInfo:
@@ -32056,7 +32065,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 96.62573
     y: -175.69061
-    width: 153.52945
+    width: 144.02988
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -32160,6 +32169,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: 
   TransitionDuration: 0.55
+  WindTransitionRotation: -50
   HasAStageUpdate: 1
   FightGridToShow: 1
   CamInfo:
@@ -32699,7 +32709,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 79.82031
     y: 28.596058
-    width: 180.98044
+    width: 170.89555
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -32931,7 +32941,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -80.122314
     y: -71.328125
-    width: 122.9412
+    width: 120.14927
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -33098,7 +33108,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -605.0537
     y: 66.20378
-    width: 198.23534
+    width: 182.83585
     height: 40
   tint: {r: 0.03137255, g: 0.7137255, b: 1, a: 1}
   useCustomTint: 1
@@ -33136,6 +33146,7 @@ MonoBehaviour:
   - {fileID: 3366866754701041066}
   - {fileID: 256339975078336671}
   - {fileID: 1550211312222724781}
+  - {fileID: 3692587547800000045}
   - {fileID: 5144383963448011271}
 --- !u!114 &5334945982625136293
 MonoBehaviour:
@@ -33233,7 +33244,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -245.43347
     y: 59.914337
-    width: 158.23532
+    width: 150.00003
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -33467,6 +33478,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: Wave3
   TransitionDuration: 0
+  WindTransitionRotation: -50
   HasAStageUpdate: 0
   FightGridToShow: 2
   CamInfo:
@@ -33694,6 +33706,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: 
   TransitionDuration: 0.55
+  WindTransitionRotation: -50
   HasAStageUpdate: 1
   FightGridToShow: 3
   CamInfo:
@@ -33802,7 +33815,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -393.8935
     y: 313.75104
-    width: 144.11768
+    width: 136.56718
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -34036,6 +34049,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: KoraWave
   TransitionDuration: 0.7
+  WindTransitionRotation: -50
   HasAStageUpdate: 0
   FightGridToShow: 1
   CamInfo:
@@ -34097,7 +34111,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -578.24536
     y: 355.99942
-    width: 125.29414
+    width: 120.14927
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -34439,7 +34453,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -877.1817
     y: 517.60077
-    width: 242.15692
+    width: 226.11945
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -34948,7 +34962,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -613.20245
     y: 595.6852
-    width: 126.07845
+    width: 120.14927
     height: 40
   tint: {r: 0.9716981, g: 0.41126436, b: 0.09625311, a: 1}
   useCustomTint: 0
@@ -35002,7 +35016,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -618.40924
     y: 665.3236
-    width: 145.68631
+    width: 133.5821
     height: 40
   tint: {r: 0.03137255, g: 0.7137255, b: 1, a: 1}
   useCustomTint: 1
@@ -35041,6 +35055,7 @@ MonoBehaviour:
   - {fileID: 5614449670382351730}
   - {fileID: 7338016027026219191}
   - {fileID: 3740053719865382452}
+  - {fileID: 5904623328929808}
   - {fileID: 5708730303587400199}
 --- !u!114 &181170596282335845
 MonoBehaviour:
@@ -35124,7 +35139,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -617.167
     y: 740.13464
-    width: 143.33336
+    width: 135.07465
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -35269,6 +35284,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: Wave5
   TransitionDuration: 0.7
+  WindTransitionRotation: -50
   HasAStageUpdate: 0
   FightGridToShow: 4
   CamInfo:
@@ -35463,7 +35479,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -207.8689
     y: 904.4832
-    width: 140.1961
+    width: 135.07465
     height: 40
   tint: {r: 0.03137255, g: 0.7137255, b: 1, a: 1}
   useCustomTint: 1
@@ -35515,6 +35531,7 @@ MonoBehaviour:
   - {fileID: 6675248564754664711}
   - {fileID: 686778282715818586}
   - {fileID: 7818607179813357621}
+  - {fileID: 455976346329730507}
   - {fileID: 6851595088428885681}
 --- !u!114 &8860845372199823586
 MonoBehaviour:
@@ -35875,6 +35892,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: Wave6
   TransitionDuration: 0
+  WindTransitionRotation: -50
   HasAStageUpdate: 0
   FightGridToShow: 4
   CamInfo:
@@ -36032,7 +36050,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -389.66882
     y: 1133.6881
-    width: 130.00003
+    width: 126.11942
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -36147,7 +36165,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -660.3264
     y: 1130.0564
-    width: 144.11768
+    width: 133.5821
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -36289,7 +36307,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -673.8428
     y: 1214.0247
-    width: 167.6471
+    width: 161.94032
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -36385,7 +36403,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -882.3271
     y: 1218.3718
-    width: 123.72551
+    width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -36470,6 +36488,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: NoitiWave
   TransitionDuration: 0.7
+  WindTransitionRotation: -50
   HasAStageUpdate: 0
   FightGridToShow: 6
   CamInfo:
@@ -36642,6 +36661,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: 
   TransitionDuration: 0.55
+  WindTransitionRotation: -50
   HasAStageUpdate: 1
   FightGridToShow: 5
   CamInfo:
@@ -36849,7 +36869,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -886.344
     y: 1330.3433
-    width: 137.84317
+    width: 133.5821
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -37427,7 +37447,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -704.05286
     y: 1330.0686
-    width: 121.372574
+    width: 120
     height: 40
   tint: {r: 0, g: 1, b: 0, a: 1}
   useCustomTint: 1
@@ -37538,6 +37558,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: MermerWave
   TransitionDuration: 0.7
+  WindTransitionRotation: -50
   HasAStageUpdate: 0
   FightGridToShow: 6
   CamInfo:
@@ -37862,6 +37883,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: 
   TransitionDuration: 0.55
+  WindTransitionRotation: -50
   HasAStageUpdate: 1
   FightGridToShow: 2
   CamInfo:
@@ -38017,7 +38039,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -718.62024
     y: 1463.0302
-    width: 144.902
+    width: 139.55226
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -38148,7 +38170,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -894.74084
     y: 1524.9827
-    width: 149.60788
+    width: 145.5224
     height: 40
   tint: {r: 0.03137255, g: 0.7137255, b: 1, a: 1}
   useCustomTint: 1
@@ -38172,6 +38194,7 @@ MonoBehaviour:
   - {fileID: 9205159784673307723}
   - {fileID: 474222211026518440}
   - {fileID: 3161991963124433670}
+  - {fileID: 1410818960902081300}
   - {fileID: 1911989812950613044}
 --- !u!114 &7775489281300088475
 MonoBehaviour:
@@ -38559,7 +38582,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -214.86014
     y: 1579.1394
-    width: 155.09807
+    width: 147.01495
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -38858,7 +38881,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -70.35579
     y: 1721.4929
-    width: 137.84317
+    width: 129.10449
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -38959,6 +38982,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: 
   TransitionDuration: 0.55
+  WindTransitionRotation: -50
   HasAStageUpdate: 1
   FightGridToShow: 7
   CamInfo:
@@ -39316,6 +39340,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: Tikaka
   TransitionDuration: 0.7
+  WindTransitionRotation: -50
   HasAStageUpdate: 0
   FightGridToShow: 6
   CamInfo:
@@ -39641,7 +39666,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -728.0579
     y: 2028.4388
-    width: 172.35298
+    width: 163.43286
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -39888,7 +39913,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 42.736885
     y: 1805.1289
-    width: 137.05885
+    width: 133.5821
     height: 40
   tint: {r: 0.03137255, g: 0.7137255, b: 1, a: 1}
   useCustomTint: 1
@@ -39934,7 +39959,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -186.96172
     y: 1799.25
-    width: 132.35297
+    width: 129.10449
     height: 40
   tint: {r: 0.03137255, g: 0.7137255, b: 1, a: 1}
   useCustomTint: 1
@@ -39961,6 +39986,7 @@ MonoBehaviour:
   - {fileID: 1732702856640412462}
   - {fileID: -6211312007824205346}
   - {fileID: 7772881863904367491}
+  - {fileID: 2818914425715872257}
   - {fileID: 2225684069360288955}
 --- !u!114 &1453707550742345716
 MonoBehaviour:
@@ -40305,7 +40331,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -815.79663
     y: 2111.6118
-    width: 128.4314
+    width: 121.64181
     height: 40
   tint: {r: 0.03137255, g: 0.7137255, b: 1, a: 1}
   useCustomTint: 1
@@ -41021,7 +41047,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -408.75995
     y: 1054.0216
-    width: 155.09807
+    width: 150.00003
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -41135,6 +41161,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: 
   TransitionDuration: 0.55
+  WindTransitionRotation: -50
   HasAStageUpdate: 1
   FightGridToShow: 4
   CamInfo:
@@ -41443,6 +41470,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: 
   TransitionDuration: 0.55
+  WindTransitionRotation: -50
   HasAStageUpdate: 1
   FightGridToShow: 6
   CamInfo:
@@ -41655,6 +41683,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: 
   TransitionDuration: 0.55
+  WindTransitionRotation: -50
   HasAStageUpdate: 1
   FightGridToShow: 6
   CamInfo:
@@ -51484,6 +51513,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: KoraWave
   TransitionDuration: 0.7
+  WindTransitionRotation: -50
   HasAStageUpdate: 0
   FightGridToShow: 1
   CamInfo:
@@ -54772,7 +54802,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -355.3833
     y: 2323.915
-    width: 172.35298
+    width: 164.9254
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -55280,7 +55310,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -507.87476
     y: 2463.755
-    width: 150.39218
+    width: 145.5224
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 1
@@ -55449,7 +55479,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -506.897
     y: 2648.7957
-    width: 161.37259
+    width: 154.47763
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 1
@@ -55766,7 +55796,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -505.07062
     y: 2856.4514
-    width: 159.80396
+    width: 154.47763
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 1
@@ -56079,7 +56109,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -504.41058
     y: 3076.4263
-    width: 176.27455
+    width: 170.89555
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 1
@@ -57424,7 +57454,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -480.11472
     y: 2998.936
-    width: 123.72551
+    width: 121.64181
     height: 40
   tint: {r: 1, g: 0.3529412, b: 0.3529412, a: 1}
   useCustomTint: 1
@@ -57688,6 +57718,158 @@ MonoBehaviour:
   itemId: 1891
   indentLevel: 0
   ActivatorID: Lose
+--- !u!114 &4627747954783168371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7201212296390213037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed7b24ce53c681248a6c7c0a9c07e5e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1892
+  indentLevel: 0
+  popupTitle: TikakaTragedy
+  popupDescription: 
+  popupImage: {fileID: 0}
+  holdTime: 0.5
+  screenPositionOffset: {x: 0, y: 0}
+  adjustColors: 1
+  boxColor: {r: 0.92549026, g: 0, b: 0.54509807, a: 1}
+  titleColor: {r: 1, g: 1, b: 1, a: 1}
+  descriptionColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &4019179604387302176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7201212296390213037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc22472645a4c6f49be2acabadc84642, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1893
+  indentLevel: 0
+--- !u!114 &3692587547800000045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7201212296390213037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed7b24ce53c681248a6c7c0a9c07e5e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1894
+  indentLevel: 0
+  popupTitle: PaiSurvives
+  popupDescription: 
+  popupImage: {fileID: 0}
+  holdTime: 0.5
+  screenPositionOffset: {x: 0, y: 0}
+  adjustColors: 1
+  boxColor: {r: 0.92549026, g: 0, b: 0.54509807, a: 1}
+  titleColor: {r: 1, g: 1, b: 1, a: 1}
+  descriptionColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &5904623328929808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7201212296390213037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed7b24ce53c681248a6c7c0a9c07e5e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1895
+  indentLevel: 0
+  popupTitle: MermerBackstory
+  popupDescription: 
+  popupImage: {fileID: 0}
+  holdTime: 0.5
+  screenPositionOffset: {x: 0, y: 0}
+  adjustColors: 1
+  boxColor: {r: 0.92549026, g: 0, b: 0.54509807, a: 1}
+  titleColor: {r: 1, g: 1, b: 1, a: 1}
+  descriptionColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &455976346329730507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7201212296390213037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed7b24ce53c681248a6c7c0a9c07e5e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1896
+  indentLevel: 0
+  popupTitle: MermerPath
+  popupDescription: 
+  popupImage: {fileID: 0}
+  holdTime: 0.5
+  screenPositionOffset: {x: 0, y: 0}
+  adjustColors: 1
+  boxColor: {r: 0.92549026, g: 0, b: 0.54509807, a: 1}
+  titleColor: {r: 1, g: 1, b: 1, a: 1}
+  descriptionColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &1410818960902081300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7201212296390213037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed7b24ce53c681248a6c7c0a9c07e5e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1897
+  indentLevel: 0
+  popupTitle: MermerRealLife
+  popupDescription: 
+  popupImage: {fileID: 0}
+  holdTime: 0.5
+  screenPositionOffset: {x: 0, y: 0}
+  adjustColors: 1
+  boxColor: {r: 0.92549026, g: 0, b: 0.54509807, a: 1}
+  titleColor: {r: 1, g: 1, b: 1, a: 1}
+  descriptionColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &2818914425715872257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7201212296390213037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed7b24ce53c681248a6c7c0a9c07e5e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1898
+  indentLevel: 0
+  popupTitle: NoitiGratitude
+  popupDescription: 
+  popupImage: {fileID: 0}
+  holdTime: 0.5
+  screenPositionOffset: {x: 0, y: 0}
+  adjustColors: 1
+  boxColor: {r: 0.92549026, g: 0, b: 0.54509807, a: 1}
+  titleColor: {r: 1, g: 1, b: 1, a: 1}
+  descriptionColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &7282234787482492273
 GameObject:
   m_ObjectHideFlags: 0
@@ -63144,46 +63326,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8318091845102264445, guid: 9344281f47d6e9f499730cc735fe7990,
-        type: 3}
-      propertyPath: m_text
-      value: a
-      objectReference: {fileID: 0}
-    - target: {fileID: 7076413019283394062, guid: 9344281f47d6e9f499730cc735fe7990,
-        type: 3}
-      propertyPath: m_text
-      value: a
-      objectReference: {fileID: 0}
-    - target: {fileID: 6972901249029641585, guid: 9344281f47d6e9f499730cc735fe7990,
-        type: 3}
-      propertyPath: m_text
-      value: a
-      objectReference: {fileID: 0}
-    - target: {fileID: 6972901248352621915, guid: 9344281f47d6e9f499730cc735fe7990,
-        type: 3}
-      propertyPath: m_text
-      value: a
-      objectReference: {fileID: 0}
-    - target: {fileID: 8760266589106541368, guid: 9344281f47d6e9f499730cc735fe7990,
-        type: 3}
-      propertyPath: m_text
-      value: a
-      objectReference: {fileID: 0}
-    - target: {fileID: 9188484464073945631, guid: 9344281f47d6e9f499730cc735fe7990,
-        type: 3}
-      propertyPath: m_text
-      value: a
-      objectReference: {fileID: 0}
-    - target: {fileID: 8221283227631182701, guid: 9344281f47d6e9f499730cc735fe7990,
-        type: 3}
-      propertyPath: m_text
-      value: a
-      objectReference: {fileID: 0}
-    - target: {fileID: 5524260017135616522, guid: 9344281f47d6e9f499730cc735fe7990,
-        type: 3}
-      propertyPath: m_text
-      value: a
-      objectReference: {fileID: 0}
     - target: {fileID: 4511542661415215752, guid: 9344281f47d6e9f499730cc735fe7990,
         type: 3}
       propertyPath: m_Enabled
@@ -63202,6 +63344,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318091845102264445, guid: 9344281f47d6e9f499730cc735fe7990,
+        type: 3}
+      propertyPath: m_text
+      value: a
+      objectReference: {fileID: 0}
+    - target: {fileID: 7076413019283394062, guid: 9344281f47d6e9f499730cc735fe7990,
+        type: 3}
+      propertyPath: m_text
+      value: a
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221283227631182701, guid: 9344281f47d6e9f499730cc735fe7990,
+        type: 3}
+      propertyPath: m_text
+      value: a
+      objectReference: {fileID: 0}
+    - target: {fileID: 8760266589106541368, guid: 9344281f47d6e9f499730cc735fe7990,
+        type: 3}
+      propertyPath: m_text
+      value: a
+      objectReference: {fileID: 0}
+    - target: {fileID: 9188484464073945631, guid: 9344281f47d6e9f499730cc735fe7990,
+        type: 3}
+      propertyPath: m_text
+      value: a
+      objectReference: {fileID: 0}
+    - target: {fileID: 6972901248352621915, guid: 9344281f47d6e9f499730cc735fe7990,
+        type: 3}
+      propertyPath: m_text
+      value: a
+      objectReference: {fileID: 0}
+    - target: {fileID: 6972901249029641585, guid: 9344281f47d6e9f499730cc735fe7990,
+        type: 3}
+      propertyPath: m_text
+      value: a
+      objectReference: {fileID: 0}
+    - target: {fileID: 5524260017135616522, guid: 9344281f47d6e9f499730cc735fe7990,
+        type: 3}
+      propertyPath: m_text
+      value: a
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9344281f47d6e9f499730cc735fe7990, type: 3}
@@ -63333,26 +63515,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6307699653244066269, guid: eb81a5e3710869643ae77926e23bc59e,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6307699653244066269, guid: eb81a5e3710869643ae77926e23bc59e,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6307699653244066269, guid: eb81a5e3710869643ae77926e23bc59e,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6307699652882918689, guid: eb81a5e3710869643ae77926e23bc59e,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6307699653510129612, guid: eb81a5e3710869643ae77926e23bc59e,
         type: 3}
       propertyPath: m_Enabled
@@ -63373,12 +63535,32 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4251366343309468031, guid: eb81a5e3710869643ae77926e23bc59e,
+    - target: {fileID: 6307699652882918689, guid: eb81a5e3710869643ae77926e23bc59e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307699653244066269, guid: eb81a5e3710869643ae77926e23bc59e,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307699653244066269, guid: eb81a5e3710869643ae77926e23bc59e,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307699653244066269, guid: eb81a5e3710869643ae77926e23bc59e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2719987773688481297, guid: eb81a5e3710869643ae77926e23bc59e,
         type: 3}
       propertyPath: m_text
       value: a
       objectReference: {fileID: 0}
-    - target: {fileID: 2719987773688481297, guid: eb81a5e3710869643ae77926e23bc59e,
+    - target: {fileID: 4251366343309468031, guid: eb81a5e3710869643ae77926e23bc59e,
         type: 3}
       propertyPath: m_text
       value: a
