@@ -141,11 +141,8 @@ public class CharacterInfoScript : MonoBehaviour
         public float MovementSpeed = 1;
 
         public MovementInfoClass FirstMovement;
-        public MovementInfoClass LoopMovement;
-        public float InterpolationTime_DashForward = 0;
-        public float InterpolationTime_DashBackward = 0;
-        public float InterpolationTime_DashUp = 0;
-        public float InterpolationTime_DashDown = 0;
+        public LoopMovementInfoClass LoopMovement;
+      
 
 
         public float AttackSpeed = 1;
@@ -488,4 +485,25 @@ public class MovementInfoClass
     public float MovementPercForward = 0.85f;
     [Range(0, 1)]
     public float MovementPercBackward = 0.85f;
+}
+
+[System.Serializable]
+public class LoopMovementInfoClass
+{
+    [Range(0, 1)]
+    public float StartLoopMovementPercUp = 0.15f;
+    [Range(0, 1)]
+    public float EndLoopMovementPercUp = 0.85f;
+    [Range(0, 1)]
+    public float StartLoopMovementPercDown = 0.15f;
+    [Range(0, 1)]
+    public float EndLoopMovementPercDown = 0.85f;
+    [Range(0, 1)]
+    public float StartLoopMovementPercForward = 0.15f;
+    [Range(0, 1)]
+    public float EndLoopMovementPercForward = 0.85f;
+    [Range(0, 1)]
+    public float StartLoopMovementPercBackward = 0.15f;
+    [Range(0, 1)]
+    public float EndLoopMovementPercBackward = 0.85f;
 }

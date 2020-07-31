@@ -789,64 +789,34 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 {
                     if (AnimState == CharacterAnimationStateType.DashLeft)
                     {
-                        if (UMS.Facing == FacingType.Left)
-                        {
-                            transitionTime = CharInfo.SpeedStats.InterpolationTime_DashForward;
-                            animPerc = CharInfo.SpeedStats.LoopMovement.MovementPercForward;
-                        }
-                        else
-                        {
-                            transitionTime = CharInfo.SpeedStats.InterpolationTime_DashBackward;
-                            animPerc = CharInfo.SpeedStats.LoopMovement.MovementPercBackward;
-                        }
+                        transitionTime = CharInfo.SpeedStats.LoopMovement.StartLoopMovementPercForward;
+                        animPerc = CharInfo.SpeedStats.LoopMovement.EndLoopMovementPercForward;
                     }
                     else if (AnimState == CharacterAnimationStateType.DashRight)
                     {
-                        if (UMS.Facing == FacingType.Right)
-                        {
-                            transitionTime = CharInfo.SpeedStats.InterpolationTime_DashForward;
-                            animPerc = CharInfo.SpeedStats.LoopMovement.MovementPercForward;
-                        }
-                        else
-                        {
-                            transitionTime = CharInfo.SpeedStats.InterpolationTime_DashBackward;
-                            animPerc = CharInfo.SpeedStats.LoopMovement.MovementPercBackward;
-                        }
+                        transitionTime = CharInfo.SpeedStats.LoopMovement.StartLoopMovementPercBackward;
+                        animPerc = CharInfo.SpeedStats.LoopMovement.EndLoopMovementPercBackward;
                     }
                     else if (AnimState == CharacterAnimationStateType.DashUp)
                     {
-                        transitionTime = CharInfo.SpeedStats.InterpolationTime_DashUp;
-                        animPerc = CharInfo.SpeedStats.LoopMovement.MovementPercUp;
+                        transitionTime = CharInfo.SpeedStats.LoopMovement.StartLoopMovementPercUp;
+                        animPerc = CharInfo.SpeedStats.LoopMovement.EndLoopMovementPercUp;
                     }
                     else if (AnimState == CharacterAnimationStateType.DashDown)
                     {
-                        transitionTime = CharInfo.SpeedStats.InterpolationTime_DashDown;
-                        animPerc = CharInfo.SpeedStats.LoopMovement.MovementPercDown;
+                        transitionTime = CharInfo.SpeedStats.LoopMovement.StartLoopMovementPercDown;
+                        animPerc = CharInfo.SpeedStats.LoopMovement.EndLoopMovementPercDown;
                     }
                 }
                 else
                 {
                     if (AnimState == CharacterAnimationStateType.DashLeft)
                     {
-                        if (UMS.Facing == FacingType.Left)
-                        {
-                            animPerc = CharInfo.SpeedStats.FirstMovement.MovementPercForward;
-                        }
-                        else
-                        {
-                            animPerc = CharInfo.SpeedStats.FirstMovement.MovementPercBackward;
-                        }
+                        animPerc = CharInfo.SpeedStats.FirstMovement.MovementPercForward;
                     }
                     else if (AnimState == CharacterAnimationStateType.DashRight)
                     {
-                        if (UMS.Facing == FacingType.Right)
-                        {
-                            animPerc = CharInfo.SpeedStats.FirstMovement.MovementPercForward;
-                        }
-                        else
-                        {
-                            animPerc = CharInfo.SpeedStats.FirstMovement.MovementPercBackward;
-                        }
+                        animPerc = CharInfo.SpeedStats.FirstMovement.MovementPercBackward;
                     }
                     else if (AnimState == CharacterAnimationStateType.DashUp)
                     {

@@ -468,7 +468,7 @@ public class BattleManagerScript : MonoBehaviour
 
             if (AllCharactersOnField.Where(r => r.CharInfo.Health > 0).ToList().Count == 0)
             {
-                MatchLostEvent();
+                MatchLostEvent?.Invoke();
 
                 CurrentBattleState = BattleState.End;
                 //InputController.Instance.FireMinus();
@@ -524,7 +524,7 @@ public class BattleManagerScript : MonoBehaviour
             }
             else
             {
-                MatchLostEvent();
+                MatchLostEvent?.Invoke();
                 CurrentBattleState = BattleState.End;
                 InputController.Instance.FireMinus();
                 return;

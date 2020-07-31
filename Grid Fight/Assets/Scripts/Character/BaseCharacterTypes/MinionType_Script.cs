@@ -124,7 +124,10 @@ public class MinionType_Script : BaseCharacter
             SpineAnim.transform.localPosition = LocalSpinePosoffset;
             SpineAnim.SpineAnimationState.ClearTracks();
             SetAnimation(CharacterAnimationStateType.Idle);
-            StartCoroutine(DisableChar());
+            if(isActiveAndEnabled)
+            {
+                StartCoroutine(DisableChar());
+            }
         }
 
     }

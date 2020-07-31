@@ -43,11 +43,12 @@ public class ScriptableObjectAI : ScriptableObject
     public int CheckAvailability(CharacterInfoScript charInfo, List<AggroInfoClass> enemies, Vector2Int currentPos)
     {
         AggroInfoClass target = new AggroInfoClass(ControllerType.Player1, 0);
+        int split = 100 / BattleManagerScript.Instance.CurrentSelectedCharacters.Count;
         int Score = 0;
         int charTargeting = 0;
         foreach (AggroInfoClass item in enemies)
         {
-            charTargeting += item.Hit;
+            charTargeting += item.Hit + split;
         }
 
 
@@ -55,7 +56,7 @@ public class ScriptableObjectAI : ScriptableObject
         {
             int res = Random.Range(0, charTargeting);
 
-            if (res <= item.Hit)
+            if (res <= item.Hit + split)
             {
                 target = item;
                 break;
