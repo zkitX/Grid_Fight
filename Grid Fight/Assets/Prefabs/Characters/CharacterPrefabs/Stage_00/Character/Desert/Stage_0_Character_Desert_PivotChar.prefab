@@ -218,7 +218,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e9cd254a5d014bb4b90d331ea4d341a2, type: 2}
+  - {fileID: 2100000, guid: a5c032bcc171f2a43b48ae7460aa6feb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 6119346f18e8ad44da812aa00469e2be, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 5dcde9ab954c8e246b85601ba1668dde, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -659,14 +659,14 @@ MonoBehaviour:
       MovementPercForward: 0.5
       MovementPercBackward: 0.5
     LoopMovement:
-      MovementPercUp: 0.5
-      MovementPercDown: 0.5
-      MovementPercForward: 0.5
-      MovementPercBackward: 0.5
-    InterpolationTime_DashForward: 0.5
-    InterpolationTime_DashBackward: 0.5
-    InterpolationTime_DashUp: 0.5
-    InterpolationTime_DashDown: 0.25
+      StartLoopMovementPercUp: 0.15
+      EndLoopMovementPercUp: 0.85
+      StartLoopMovementPercDown: 0.15
+      EndLoopMovementPercDown: 0.85
+      StartLoopMovementPercForward: 0.15
+      EndLoopMovementPercForward: 0.85
+      StartLoopMovementPercBackward: 0.15
+      EndLoopMovementPercBackward: 0.85
     AttackSpeed: 1.4
     AttackSpeedRatio: 3
     BulletSpeed: 2.5
