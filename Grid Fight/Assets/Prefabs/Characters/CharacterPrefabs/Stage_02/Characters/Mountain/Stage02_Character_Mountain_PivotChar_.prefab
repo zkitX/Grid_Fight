@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 252035aa6b590ee4cb4145c047bd3d4c, type: 2}
+  - {fileID: 2100000, guid: 812a6e620a3aa784c8c4b44cb1470ec8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 1bfb11811e28bfb42a9edf7b8de6f37e, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: e11177da4660e834bb08413171c18073, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f98aab6021486341825eb862f61401a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skeletonAnimation: {fileID: 0}
   CharOwner: {fileID: 0}
   CurveType: 0
   Speed_Time_Curves:
@@ -477,6 +478,7 @@ MonoBehaviour:
   AudioProfile: {fileID: 11400000, guid: 18079379e5337084286a38b915064869, type: 2}
   BaseCharacterType: 0
   CharacterID: 1046
+  attackSequences: []
   CurrentAttackTypeInfo:
   - {fileID: 11400000, guid: c46c9549ff404f144a0757b04c624a2e, type: 2}
   - {fileID: 11400000, guid: 07c717698a3e7594d9027e569e2556d5, type: 2}
@@ -537,6 +539,20 @@ MonoBehaviour:
   SpeedStats:
     BaseSpeed: 1
     MovementSpeed: 1.7
+    FirstMovement:
+      MovementPercUp: 0.85
+      MovementPercDown: 0.85
+      MovementPercForward: 0.85
+      MovementPercBackward: 0.85
+    LoopMovement:
+      StartLoopMovementPercUp: 0.15
+      EndLoopMovementPercUp: 0.85
+      StartLoopMovementPercDown: 0.15
+      EndLoopMovementPercDown: 0.85
+      StartLoopMovementPercForward: 0.15
+      EndLoopMovementPercForward: 0.85
+      StartLoopMovementPercBackward: 0.15
+      EndLoopMovementPercBackward: 0.85
     AttackSpeed: 1.6
     AttackSpeedRatio: 4
     BulletSpeed: 2.1
