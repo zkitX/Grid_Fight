@@ -14743,7 +14743,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8584362316998880168
 RectTransform:
   m_ObjectHideFlags: 0
@@ -49774,12 +49774,6 @@ GameObject:
   - component: {fileID: 8672976789893222435}
   - component: {fileID: 2015749958365872938}
   - component: {fileID: 6664094131033982953}
-  - component: {fileID: 3939819412594112589}
-  - component: {fileID: 3915124705033059457}
-  - component: {fileID: 5822366790965290939}
-  - component: {fileID: 1964856275681953858}
-  - component: {fileID: 7156739195188068879}
-  - component: {fileID: 8657456508915141581}
   - component: {fileID: 988686852221657718}
   - component: {fileID: 9188780110973681485}
   - component: {fileID: 7536806018727613587}
@@ -49798,11 +49792,7 @@ GameObject:
   - component: {fileID: 4975271582960085322}
   - component: {fileID: 2631337866489923918}
   - component: {fileID: 1717990192687650680}
-  - component: {fileID: 6727723986752978766}
   - component: {fileID: 144832945229115556}
-  - component: {fileID: 7827433513253294298}
-  - component: {fileID: 1910055431296958511}
-  - component: {fileID: 1297525706995190747}
   - component: {fileID: 1260138892729946141}
   - component: {fileID: 7145749102582886239}
   - component: {fileID: 523263132487461766}
@@ -49851,6 +49841,51 @@ GameObject:
   - component: {fileID: 1947686794317380203}
   - component: {fileID: 7778124745068029968}
   - component: {fileID: 8629523423252977572}
+  - component: {fileID: 57855050775450589}
+  - component: {fileID: 7635872933809560291}
+  - component: {fileID: 7334932650399481149}
+  - component: {fileID: 1091858794627753676}
+  - component: {fileID: 6667324718761956985}
+  - component: {fileID: 41339472767701712}
+  - component: {fileID: 7611647356248546466}
+  - component: {fileID: 3371128090020045816}
+  - component: {fileID: 8079545411827881044}
+  - component: {fileID: 4699804849551726560}
+  - component: {fileID: 6422045691441204740}
+  - component: {fileID: 6981416435478445545}
+  - component: {fileID: 7924971805716941323}
+  - component: {fileID: 99437048093608903}
+  - component: {fileID: 6760752870288466825}
+  - component: {fileID: 6088479617343801999}
+  - component: {fileID: 7514941587358460517}
+  - component: {fileID: 7993341125160209799}
+  - component: {fileID: 2791993864642149776}
+  - component: {fileID: 795764258592322995}
+  - component: {fileID: 6414604709460019826}
+  - component: {fileID: 1894445548220381095}
+  - component: {fileID: 2922632332658664422}
+  - component: {fileID: 7228877309149553022}
+  - component: {fileID: 1897349460784140855}
+  - component: {fileID: 5006537621445883120}
+  - component: {fileID: 6874862858586479208}
+  - component: {fileID: 8548039771048855665}
+  - component: {fileID: 4893665029688859109}
+  - component: {fileID: 4859380403691987047}
+  - component: {fileID: 3114525317134656757}
+  - component: {fileID: 9219715141311498387}
+  - component: {fileID: 5463344515926283623}
+  - component: {fileID: 4816916790029342100}
+  - component: {fileID: 6976239824779412024}
+  - component: {fileID: 2646301050979582271}
+  - component: {fileID: 7276741460775603115}
+  - component: {fileID: 7769853789496941798}
+  - component: {fileID: 7072849905542381119}
+  - component: {fileID: 3646705229647044236}
+  - component: {fileID: 660982882092186801}
+  - component: {fileID: 1070722603809704032}
+  - component: {fileID: 7929510236342676616}
+  - component: {fileID: 7010351659456433648}
+  - component: {fileID: 2917099817611285631}
   m_Layer: 0
   m_Name: EventManager_Tohora_Comunity_Survivor
   m_TagString: Untagged
@@ -49918,19 +49953,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 971.94226, y: 245.64865}
+  scrollPos: {x: 871.87695, y: 581.99567}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
-  blockViewHeight: 472
-  zoom: 0.76000017
+  blockViewHeight: 584
+  zoom: 0.75999975
   scrollViewRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 0
     height: 0
-  selectedBlocks: []
-  selectedCommands: []
+  selectedBlocks:
+  - {fileID: 3595507189422326734}
+  selectedCommands:
+  - {fileID: 523263132487461766}
   variables: []
   description: 
   stepPause: 0
@@ -49992,8 +50029,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -208.81946
-    y: 403.01987
+    x: -214.77597
+    y: 863.41046
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -50022,7 +50059,7 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: -370.57196
-    y: -348.82364
+    y: -358.7138
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -50100,6 +50137,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: Wave2
   TransitionDuration: 0.7
+  UseFixedRotation: 0
   WindTransitionRotation: -50
   HasAStageUpdate: 0
   FightGridToShow: 1
@@ -50200,6 +50238,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: Wave3
   TransitionDuration: 0.7
+  UseFixedRotation: 0
   WindTransitionRotation: -50
   HasAStageUpdate: 0
   FightGridToShow: 2
@@ -50268,8 +50307,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -369.68726
-    y: -192.4847
+    x: -368.58835
+    y: -194.68251
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -50347,6 +50386,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: Wave4
   TransitionDuration: 0.7
+  UseFixedRotation: 0
   WindTransitionRotation: -50
   HasAStageUpdate: 0
   FightGridToShow: 3
@@ -50415,8 +50455,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -370.95996
-    y: -132.9392
+    x: -368.76215
+    y: -135.13701
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -50494,6 +50534,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: Wave5
   TransitionDuration: 0.7
+  UseFixedRotation: 0
   WindTransitionRotation: -50
   HasAStageUpdate: 0
   FightGridToShow: 4
@@ -50562,8 +50603,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -371.35052
-    y: -73.848236
+    x: -364.75708
+    y: -78.243835
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -50641,6 +50682,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: Wave6
   TransitionDuration: 0.7
+  UseFixedRotation: 0
   WindTransitionRotation: -50
   HasAStageUpdate: 0
   FightGridToShow: 5
@@ -50709,7 +50751,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -368.0022
+    x: -366.0022
     y: 36.075275
     width: 120
     height: 40
@@ -50789,6 +50831,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: Wave7
   TransitionDuration: 0.7
+  UseFixedRotation: 0
   WindTransitionRotation: -50
   HasAStageUpdate: 0
   FightGridToShow: 6
@@ -50905,8 +50948,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -369.16583
-    y: 403.37024
+    x: -358.12244
+    y: 862.7608
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -51059,8 +51102,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -370.34274
-    y: 88.202995
+    x: -366.34274
+    y: 86.202995
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -51138,6 +51181,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: Wave8
   TransitionDuration: 0.7
+  UseFixedRotation: 0
   WindTransitionRotation: -50
   HasAStageUpdate: 0
   FightGridToShow: 6
@@ -51206,8 +51250,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -367.2515
-    y: 137.13907
+    x: -364.2515
+    y: 134.13907
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -51285,6 +51329,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: Wave9
   TransitionDuration: 0.7
+  UseFixedRotation: 0
   WindTransitionRotation: -50
   HasAStageUpdate: 0
   FightGridToShow: 6
@@ -51353,8 +51398,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -368.62134
-    y: 264.995
+    x: -364.62134
+    y: 262.995
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -51433,6 +51478,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: Wave10
   TransitionDuration: 0.7
+  UseFixedRotation: 0
   WindTransitionRotation: -50
   HasAStageUpdate: 0
   FightGridToShow: 6
@@ -51519,12 +51565,6 @@ MonoBehaviour:
   - {fileID: 8672976789893222435}
   - {fileID: 2015749958365872938}
   - {fileID: 6664094131033982953}
-  - {fileID: 3939819412594112589}
-  - {fileID: 3915124705033059457}
-  - {fileID: 5822366790965290939}
-  - {fileID: 1964856275681953858}
-  - {fileID: 7156739195188068879}
-  - {fileID: 8657456508915141581}
   - {fileID: 988686852221657718}
   - {fileID: 9188780110973681485}
   - {fileID: 7536806018727613587}
@@ -51568,7 +51608,7 @@ MonoBehaviour:
   itemId: 310
   indentLevel: 0
   StageToShow: 0
-  Grid: {fileID: 11400000, guid: 1b315c7f19d516e49a74bc908daec39b, type: 2}
+  Grid: {fileID: 11400000, guid: 777d0a1ee27289945a1bcc3e532e7447, type: 2}
 --- !u!114 &662958582166161488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51652,111 +51692,6 @@ MonoBehaviour:
   playerController: 0
   cName: 1005
   pos: {x: 1, y: 3}
---- !u!114 &3939819412594112589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6424025815397970821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3315ad2ebb85443909a1203d56d9344e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 316
-  indentLevel: 0
-  _duration:
-    floatRef: {fileID: 0}
-    floatVal: 0.5
-  durationOLD: 0
---- !u!114 &3915124705033059457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6424025815397970821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35567ae0fbdff9447b617f78a1a914b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 317
-  indentLevel: 0
-  playerController: 0
-  cName: 1006
-  pos: {x: 1, y: 2}
---- !u!114 &5822366790965290939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6424025815397970821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3315ad2ebb85443909a1203d56d9344e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 318
-  indentLevel: 0
-  _duration:
-    floatRef: {fileID: 0}
-    floatVal: 0.5
-  durationOLD: 0
---- !u!114 &1964856275681953858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6424025815397970821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35567ae0fbdff9447b617f78a1a914b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 319
-  indentLevel: 0
-  playerController: 0
-  cName: 1007
-  pos: {x: 2, y: 2}
---- !u!114 &7156739195188068879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6424025815397970821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3315ad2ebb85443909a1203d56d9344e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 320
-  indentLevel: 0
-  _duration:
-    floatRef: {fileID: 0}
-    floatVal: 0.5
-  durationOLD: 0
---- !u!114 &8657456508915141581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6424025815397970821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35567ae0fbdff9447b617f78a1a914b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 321
-  indentLevel: 0
-  playerController: 0
-  cName: 1004
-  pos: {x: 2, y: 1}
 --- !u!114 &988686852221657718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51944,11 +51879,7 @@ MonoBehaviour:
   commandList:
   - {fileID: 2631337866489923918}
   - {fileID: 1717990192687650680}
-  - {fileID: 6727723986752978766}
   - {fileID: 144832945229115556}
-  - {fileID: 7827433513253294298}
-  - {fileID: 1910055431296958511}
-  - {fileID: 1297525706995190747}
   - {fileID: 1260138892729946141}
   - {fileID: 7145749102582886239}
   - {fileID: 523263132487461766}
@@ -52176,76 +52107,6 @@ MonoBehaviour:
     floatRef: {fileID: 0}
     floatVal: 1
   durationOLD: 0
---- !u!114 &6727723986752978766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6424025815397970821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce4db77fc791a594689886e0d16a0ccb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 1889
-  indentLevel: 0
-  CamMovementType: 0
-  Zoom: 2.4
-  ZoomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: -0.035715554
-      outSlope: -0.035715554
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.11747849
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  Duration: 0.5
-  MovementCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: -0.15552568
-      outSlope: -0.15552568
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.11690545
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  NextCamPos: {x: 0, y: 0.4, z: -8.5}
-  CharacterId: 0
-  PlayerController: 0
-  TilePos: {x: 0, y: 0}
-  WaitForCameraMovement: 0
 --- !u!114 &144832945229115556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52260,51 +52121,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 1890
   indentLevel: 0
---- !u!114 &7827433513253294298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6424025815397970821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 165492d18f7f7f249936db5fe1a3c232, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 1891
-  indentLevel: 0
-  charToRemove: 1004
---- !u!114 &1910055431296958511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6424025815397970821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 165492d18f7f7f249936db5fe1a3c232, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 1892
-  indentLevel: 0
-  charToRemove: 1006
---- !u!114 &1297525706995190747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6424025815397970821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 165492d18f7f7f249936db5fe1a3c232, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 1893
-  indentLevel: 0
-  charToRemove: 1007
 --- !u!114 &1260138892729946141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52518,6 +52334,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: Wave1
   TransitionDuration: 0
+  UseFixedRotation: 0
   WindTransitionRotation: -50
   HasAStageUpdate: 0
   FightGridToShow: 0
@@ -52578,9 +52395,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -379.88608
-    y: -21.16898
-    width: 127.63156
+    x: -373.88608
+    y: -22.16898
+    width: 127.63161
     height: 40
   tint: {r: 1, g: 0.02745098, b: 0.02745098, a: 1}
   useCustomTint: 1
@@ -52855,8 +52672,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -370.14026
-    y: 328.28647
+    x: -364.14026
+    y: 324.28647
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -52934,6 +52751,7 @@ MonoBehaviour:
   indentLevel: 0
   WaveName: Wave11
   TransitionDuration: 0.7
+  UseFixedRotation: 0
   WindTransitionRotation: -50
   HasAStageUpdate: 0
   FightGridToShow: 6
@@ -52987,7 +52805,7 @@ MonoBehaviour:
   UseTimer: 0
   Timer: 0
   VariableName: 
-  NextBlockToFire: WIN
+  NextBlockToFire: Grid12
 --- !u!114 &8948455526677967636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53160,8 +52978,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -368.392
-    y: 197.10594
+    x: -363.392
+    y: 194.10594
     width: 120
     height: 40
   tint: {r: 1, g: 0.023584902, b: 0.023584902, a: 1}
@@ -53332,6 +53150,1338 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 1945
   indentLevel: 0
+--- !u!114 &57855050775450589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: -364.01526
+    y: 379.84897
+    width: 120
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 1993
+  blockName: Grid12
+  description: 
+  eventHandler: {fileID: 0}
+  commandList:
+  - {fileID: 7635872933809560291}
+  - {fileID: 7334932650399481149}
+  - {fileID: 1091858794627753676}
+  - {fileID: 6667324718761956985}
+--- !u!114 &7635872933809560291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1948
+  indentLevel: 0
+  battleState: 1
+--- !u!114 &7334932650399481149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3315ad2ebb85443909a1203d56d9344e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1949
+  indentLevel: 0
+  _duration:
+    floatRef: {fileID: 0}
+    floatVal: 0.1
+  durationOLD: 0
+--- !u!114 &1091858794627753676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1950
+  indentLevel: 0
+  battleState: 4
+--- !u!114 &6667324718761956985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1165eb1c52e8e1340ab24ba1b6d8ad17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1951
+  indentLevel: 0
+  WaveName: Wave12
+  TransitionDuration: 0.7
+  UseFixedRotation: 0
+  WindTransitionRotation: -50
+  HasAStageUpdate: 0
+  FightGridToShow: 6
+  CamInfo:
+    TransitionINZoomValue: 0
+    DurationIn: 0
+    ZoomIn:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ZoomInCamMovement:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    TransitionOutZoomValue: 0
+    DurationOut: 0
+    ZoomOut:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    MovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  HasADifferentGrid: 0
+  Grid: {fileID: 11400000, guid: 1b315c7f19d516e49a74bc908daec39b, type: 2}
+  CallPool: 0
+  PlayersCurrentSelectedChars:
+  - PlayerController: 0
+    Pos: {x: 0, y: 0}
+  - PlayerController: 1
+    Pos: {x: 0, y: 0}
+  - PlayerController: 2
+    Pos: {x: 0, y: 0}
+  - PlayerController: 3
+    Pos: {x: 0, y: 0}
+  TalkingTeam: []
+  JumpUp: 0
+  JumpAnimSpeed: 1
+  DelayBeforeJump: 0.5
+  PoolDelay: 3
+  UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
+  NextBlockToFire: Grid13
+--- !u!114 &41339472767701712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: -364.20276
+    y: 438.53647
+    width: 120
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 1994
+  blockName: Grid13
+  description: 
+  eventHandler: {fileID: 0}
+  commandList:
+  - {fileID: 7611647356248546466}
+  - {fileID: 3371128090020045816}
+  - {fileID: 8079545411827881044}
+  - {fileID: 4699804849551726560}
+--- !u!114 &7611647356248546466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1953
+  indentLevel: 0
+  battleState: 1
+--- !u!114 &3371128090020045816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3315ad2ebb85443909a1203d56d9344e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1954
+  indentLevel: 0
+  _duration:
+    floatRef: {fileID: 0}
+    floatVal: 0.1
+  durationOLD: 0
+--- !u!114 &8079545411827881044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1955
+  indentLevel: 0
+  battleState: 4
+--- !u!114 &4699804849551726560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1165eb1c52e8e1340ab24ba1b6d8ad17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1956
+  indentLevel: 0
+  WaveName: Wave13
+  TransitionDuration: 0.7
+  UseFixedRotation: 0
+  WindTransitionRotation: -50
+  HasAStageUpdate: 0
+  FightGridToShow: 6
+  CamInfo:
+    TransitionINZoomValue: 0
+    DurationIn: 0
+    ZoomIn:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ZoomInCamMovement:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    TransitionOutZoomValue: 0
+    DurationOut: 0
+    ZoomOut:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    MovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  HasADifferentGrid: 0
+  Grid: {fileID: 11400000, guid: 1b315c7f19d516e49a74bc908daec39b, type: 2}
+  CallPool: 0
+  PlayersCurrentSelectedChars:
+  - PlayerController: 0
+    Pos: {x: 0, y: 0}
+  - PlayerController: 1
+    Pos: {x: 0, y: 0}
+  - PlayerController: 2
+    Pos: {x: 0, y: 0}
+  - PlayerController: 3
+    Pos: {x: 0, y: 0}
+  TalkingTeam: []
+  JumpUp: 0
+  JumpAnimSpeed: 1
+  DelayBeforeJump: 0.5
+  PoolDelay: 3
+  UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
+  NextBlockToFire: Grid14
+--- !u!114 &6422045691441204740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: -364.95276
+    y: 489.34897
+    width: 120
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 1995
+  blockName: Grid14
+  description: 
+  eventHandler: {fileID: 0}
+  commandList:
+  - {fileID: 6981416435478445545}
+  - {fileID: 7924971805716941323}
+  - {fileID: 99437048093608903}
+  - {fileID: 6760752870288466825}
+--- !u!114 &6981416435478445545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1958
+  indentLevel: 0
+  battleState: 1
+--- !u!114 &7924971805716941323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3315ad2ebb85443909a1203d56d9344e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1959
+  indentLevel: 0
+  _duration:
+    floatRef: {fileID: 0}
+    floatVal: 0.1
+  durationOLD: 0
+--- !u!114 &99437048093608903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1960
+  indentLevel: 0
+  battleState: 4
+--- !u!114 &6760752870288466825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1165eb1c52e8e1340ab24ba1b6d8ad17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1961
+  indentLevel: 0
+  WaveName: Wave14
+  TransitionDuration: 0.7
+  UseFixedRotation: 0
+  WindTransitionRotation: -50
+  HasAStageUpdate: 0
+  FightGridToShow: 6
+  CamInfo:
+    TransitionINZoomValue: 0
+    DurationIn: 0
+    ZoomIn:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ZoomInCamMovement:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    TransitionOutZoomValue: 0
+    DurationOut: 0
+    ZoomOut:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    MovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  HasADifferentGrid: 0
+  Grid: {fileID: 11400000, guid: 1b315c7f19d516e49a74bc908daec39b, type: 2}
+  CallPool: 0
+  PlayersCurrentSelectedChars:
+  - PlayerController: 0
+    Pos: {x: 0, y: 0}
+  - PlayerController: 1
+    Pos: {x: 0, y: 0}
+  - PlayerController: 2
+    Pos: {x: 0, y: 0}
+  - PlayerController: 3
+    Pos: {x: 0, y: 0}
+  TalkingTeam: []
+  JumpUp: 0
+  JumpAnimSpeed: 1
+  DelayBeforeJump: 0.5
+  PoolDelay: 3
+  UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
+  NextBlockToFire: Grid15
+--- !u!114 &6088479617343801999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: -364.70276
+    y: 543.59894
+    width: 120
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 1996
+  blockName: Grid15
+  description: 
+  eventHandler: {fileID: 0}
+  commandList:
+  - {fileID: 7514941587358460517}
+  - {fileID: 7993341125160209799}
+  - {fileID: 2791993864642149776}
+  - {fileID: 795764258592322995}
+--- !u!114 &7514941587358460517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1963
+  indentLevel: 0
+  battleState: 1
+--- !u!114 &7993341125160209799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3315ad2ebb85443909a1203d56d9344e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1964
+  indentLevel: 0
+  _duration:
+    floatRef: {fileID: 0}
+    floatVal: 0.1
+  durationOLD: 0
+--- !u!114 &2791993864642149776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1965
+  indentLevel: 0
+  battleState: 4
+--- !u!114 &795764258592322995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1165eb1c52e8e1340ab24ba1b6d8ad17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1966
+  indentLevel: 0
+  WaveName: Wave15
+  TransitionDuration: 0.7
+  UseFixedRotation: 0
+  WindTransitionRotation: -50
+  HasAStageUpdate: 0
+  FightGridToShow: 6
+  CamInfo:
+    TransitionINZoomValue: 0
+    DurationIn: 0
+    ZoomIn:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ZoomInCamMovement:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    TransitionOutZoomValue: 0
+    DurationOut: 0
+    ZoomOut:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    MovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  HasADifferentGrid: 0
+  Grid: {fileID: 11400000, guid: 1b315c7f19d516e49a74bc908daec39b, type: 2}
+  CallPool: 0
+  PlayersCurrentSelectedChars:
+  - PlayerController: 0
+    Pos: {x: 0, y: 0}
+  - PlayerController: 1
+    Pos: {x: 0, y: 0}
+  - PlayerController: 2
+    Pos: {x: 0, y: 0}
+  - PlayerController: 3
+    Pos: {x: 0, y: 0}
+  TalkingTeam: []
+  JumpUp: 0
+  JumpAnimSpeed: 1
+  DelayBeforeJump: 0.5
+  PoolDelay: 3
+  UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
+  NextBlockToFire: Grid16
+--- !u!114 &6414604709460019826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: -364.14026
+    y: 597.41144
+    width: 120
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 1997
+  blockName: Grid16
+  description: 
+  eventHandler: {fileID: 0}
+  commandList:
+  - {fileID: 1894445548220381095}
+  - {fileID: 2922632332658664422}
+  - {fileID: 7228877309149553022}
+  - {fileID: 1897349460784140855}
+--- !u!114 &1894445548220381095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1968
+  indentLevel: 0
+  battleState: 1
+--- !u!114 &2922632332658664422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3315ad2ebb85443909a1203d56d9344e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1969
+  indentLevel: 0
+  _duration:
+    floatRef: {fileID: 0}
+    floatVal: 0.1
+  durationOLD: 0
+--- !u!114 &7228877309149553022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1970
+  indentLevel: 0
+  battleState: 4
+--- !u!114 &1897349460784140855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1165eb1c52e8e1340ab24ba1b6d8ad17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1971
+  indentLevel: 0
+  WaveName: Wave16
+  TransitionDuration: 0.7
+  UseFixedRotation: 0
+  WindTransitionRotation: -50
+  HasAStageUpdate: 0
+  FightGridToShow: 6
+  CamInfo:
+    TransitionINZoomValue: 0
+    DurationIn: 0
+    ZoomIn:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ZoomInCamMovement:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    TransitionOutZoomValue: 0
+    DurationOut: 0
+    ZoomOut:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    MovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  HasADifferentGrid: 0
+  Grid: {fileID: 11400000, guid: 1b315c7f19d516e49a74bc908daec39b, type: 2}
+  CallPool: 0
+  PlayersCurrentSelectedChars:
+  - PlayerController: 0
+    Pos: {x: 0, y: 0}
+  - PlayerController: 1
+    Pos: {x: 0, y: 0}
+  - PlayerController: 2
+    Pos: {x: 0, y: 0}
+  - PlayerController: 3
+    Pos: {x: 0, y: 0}
+  TalkingTeam: []
+  JumpUp: 0
+  JumpAnimSpeed: 1
+  DelayBeforeJump: 0.5
+  PoolDelay: 3
+  UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
+  NextBlockToFire: Grid17
+--- !u!114 &5006537621445883120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: -363.76526
+    y: 653.66144
+    width: 120
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 1998
+  blockName: Grid17
+  description: 
+  eventHandler: {fileID: 0}
+  commandList:
+  - {fileID: 6874862858586479208}
+  - {fileID: 8548039771048855665}
+  - {fileID: 4893665029688859109}
+  - {fileID: 4859380403691987047}
+--- !u!114 &6874862858586479208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1974
+  indentLevel: 0
+  battleState: 1
+--- !u!114 &8548039771048855665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3315ad2ebb85443909a1203d56d9344e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1975
+  indentLevel: 0
+  _duration:
+    floatRef: {fileID: 0}
+    floatVal: 0.1
+  durationOLD: 0
+--- !u!114 &4893665029688859109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1976
+  indentLevel: 0
+  battleState: 4
+--- !u!114 &4859380403691987047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1165eb1c52e8e1340ab24ba1b6d8ad17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1977
+  indentLevel: 0
+  WaveName: Wave17
+  TransitionDuration: 0.7
+  UseFixedRotation: 0
+  WindTransitionRotation: -50
+  HasAStageUpdate: 0
+  FightGridToShow: 6
+  CamInfo:
+    TransitionINZoomValue: 0
+    DurationIn: 0
+    ZoomIn:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ZoomInCamMovement:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    TransitionOutZoomValue: 0
+    DurationOut: 0
+    ZoomOut:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    MovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  HasADifferentGrid: 0
+  Grid: {fileID: 11400000, guid: 1b315c7f19d516e49a74bc908daec39b, type: 2}
+  CallPool: 0
+  PlayersCurrentSelectedChars:
+  - PlayerController: 0
+    Pos: {x: 0, y: 0}
+  - PlayerController: 1
+    Pos: {x: 0, y: 0}
+  - PlayerController: 2
+    Pos: {x: 0, y: 0}
+  - PlayerController: 3
+    Pos: {x: 0, y: 0}
+  TalkingTeam: []
+  JumpUp: 0
+  JumpAnimSpeed: 1
+  DelayBeforeJump: 0.5
+  PoolDelay: 3
+  UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
+  NextBlockToFire: Grid18
+--- !u!114 &3114525317134656757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: -363.07776
+    y: 705.66144
+    width: 120
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 1999
+  blockName: Grid18
+  description: 
+  eventHandler: {fileID: 0}
+  commandList:
+  - {fileID: 9219715141311498387}
+  - {fileID: 5463344515926283623}
+  - {fileID: 4816916790029342100}
+  - {fileID: 6976239824779412024}
+--- !u!114 &9219715141311498387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1979
+  indentLevel: 0
+  battleState: 1
+--- !u!114 &5463344515926283623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3315ad2ebb85443909a1203d56d9344e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1980
+  indentLevel: 0
+  _duration:
+    floatRef: {fileID: 0}
+    floatVal: 0.1
+  durationOLD: 0
+--- !u!114 &4816916790029342100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1981
+  indentLevel: 0
+  battleState: 4
+--- !u!114 &6976239824779412024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1165eb1c52e8e1340ab24ba1b6d8ad17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1982
+  indentLevel: 0
+  WaveName: Wave18
+  TransitionDuration: 0.7
+  UseFixedRotation: 0
+  WindTransitionRotation: -50
+  HasAStageUpdate: 0
+  FightGridToShow: 6
+  CamInfo:
+    TransitionINZoomValue: 0
+    DurationIn: 0
+    ZoomIn:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ZoomInCamMovement:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    TransitionOutZoomValue: 0
+    DurationOut: 0
+    ZoomOut:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    MovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  HasADifferentGrid: 0
+  Grid: {fileID: 11400000, guid: 1b315c7f19d516e49a74bc908daec39b, type: 2}
+  CallPool: 0
+  PlayersCurrentSelectedChars:
+  - PlayerController: 0
+    Pos: {x: 0, y: 0}
+  - PlayerController: 1
+    Pos: {x: 0, y: 0}
+  - PlayerController: 2
+    Pos: {x: 0, y: 0}
+  - PlayerController: 3
+    Pos: {x: 0, y: 0}
+  TalkingTeam: []
+  JumpUp: 0
+  JumpAnimSpeed: 1
+  DelayBeforeJump: 0.5
+  PoolDelay: 3
+  UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
+  NextBlockToFire: Grid19
+--- !u!114 &2646301050979582271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: -362.60706
+    y: 757.2496
+    width: 120
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 2000
+  blockName: Grid19
+  description: 
+  eventHandler: {fileID: 0}
+  commandList:
+  - {fileID: 7276741460775603115}
+  - {fileID: 7769853789496941798}
+  - {fileID: 7072849905542381119}
+  - {fileID: 3646705229647044236}
+--- !u!114 &7276741460775603115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1984
+  indentLevel: 0
+  battleState: 1
+--- !u!114 &7769853789496941798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3315ad2ebb85443909a1203d56d9344e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1985
+  indentLevel: 0
+  _duration:
+    floatRef: {fileID: 0}
+    floatVal: 0.1
+  durationOLD: 0
+--- !u!114 &7072849905542381119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1986
+  indentLevel: 0
+  battleState: 4
+--- !u!114 &3646705229647044236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1165eb1c52e8e1340ab24ba1b6d8ad17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1987
+  indentLevel: 0
+  WaveName: Wave19
+  TransitionDuration: 0.7
+  UseFixedRotation: 0
+  WindTransitionRotation: -50
+  HasAStageUpdate: 0
+  FightGridToShow: 6
+  CamInfo:
+    TransitionINZoomValue: 0
+    DurationIn: 0
+    ZoomIn:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ZoomInCamMovement:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    TransitionOutZoomValue: 0
+    DurationOut: 0
+    ZoomOut:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    MovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  HasADifferentGrid: 0
+  Grid: {fileID: 11400000, guid: 1b315c7f19d516e49a74bc908daec39b, type: 2}
+  CallPool: 0
+  PlayersCurrentSelectedChars:
+  - PlayerController: 0
+    Pos: {x: 0, y: 0}
+  - PlayerController: 1
+    Pos: {x: 0, y: 0}
+  - PlayerController: 2
+    Pos: {x: 0, y: 0}
+  - PlayerController: 3
+    Pos: {x: 0, y: 0}
+  TalkingTeam: []
+  JumpUp: 0
+  JumpAnimSpeed: 1
+  DelayBeforeJump: 0.5
+  PoolDelay: 3
+  UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
+  NextBlockToFire: Grid20
+--- !u!114 &660982882092186801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: -359.8073
+    y: 810.149
+    width: 120
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 2001
+  blockName: Grid20
+  description: 
+  eventHandler: {fileID: 0}
+  commandList:
+  - {fileID: 1070722603809704032}
+  - {fileID: 7929510236342676616}
+  - {fileID: 7010351659456433648}
+  - {fileID: 2917099817611285631}
+--- !u!114 &1070722603809704032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1989
+  indentLevel: 0
+  battleState: 1
+--- !u!114 &7929510236342676616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3315ad2ebb85443909a1203d56d9344e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1990
+  indentLevel: 0
+  _duration:
+    floatRef: {fileID: 0}
+    floatVal: 0.1
+  durationOLD: 0
+--- !u!114 &7010351659456433648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbafc44dcf1f24f45aa83415b3db4bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1991
+  indentLevel: 0
+  battleState: 4
+--- !u!114 &2917099817611285631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1165eb1c52e8e1340ab24ba1b6d8ad17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1992
+  indentLevel: 0
+  WaveName: Wave20
+  TransitionDuration: 0.7
+  UseFixedRotation: 0
+  WindTransitionRotation: -50
+  HasAStageUpdate: 0
+  FightGridToShow: 6
+  CamInfo:
+    TransitionINZoomValue: 0
+    DurationIn: 0
+    ZoomIn:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ZoomInCamMovement:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    TransitionOutZoomValue: 0
+    DurationOut: 0
+    ZoomOut:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    MovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  HasADifferentGrid: 0
+  Grid: {fileID: 11400000, guid: 1b315c7f19d516e49a74bc908daec39b, type: 2}
+  CallPool: 0
+  PlayersCurrentSelectedChars:
+  - PlayerController: 0
+    Pos: {x: 0, y: 0}
+  - PlayerController: 1
+    Pos: {x: 0, y: 0}
+  - PlayerController: 2
+    Pos: {x: 0, y: 0}
+  - PlayerController: 3
+    Pos: {x: 0, y: 0}
+  TalkingTeam: []
+  JumpUp: 0
+  JumpAnimSpeed: 1
+  DelayBeforeJump: 0.5
+  PoolDelay: 3
+  UseWave: 1
+  UseTimer: 0
+  Timer: 0
+  VariableName: 
+  NextBlockToFire: WIN
 --- !u!1 &6431212408302048994
 GameObject:
   m_ObjectHideFlags: 0
