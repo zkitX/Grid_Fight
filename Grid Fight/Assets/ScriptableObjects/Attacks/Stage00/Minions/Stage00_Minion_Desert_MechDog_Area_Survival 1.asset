@@ -10,101 +10,45 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage01-Minion-Desert-StrongAttack-Area -Fishilla - Survival
+  m_Name: Stage00_Minion_Desert_MechDog_Area_Survival 1
   m_EditorClassIdentifier: 
   Chances: 100
   CurrentAttackType: 1
-  AttackRatioMultiplier: 2
+  AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 1
   AttackAnim: 0
   StaminaCost: 10
   ExperiencePoints: 10
-  CoolDown: 2
+  CoolDown: 3
   PrefixAnim: 0
-  Fov: 2
+  Fov: 1
   Particles:
     Left:
-      Cast: {fileID: 8230215500604754102, guid: fc1aec58e9ffb754694b25d03cc38a83,
+      Cast: {fileID: 7644002096359388931, guid: 120e9ddc9b7c68e4c8ae63dc3c74f863,
         type: 3}
-      Bullet: {fileID: 1061202688339080741, guid: 4b7f0eb1917a62f449807469bdc27c78,
+      Bullet: {fileID: 6276928451774876125, guid: f21c8c8d6577869449263b5635738686,
         type: 3}
-      Hit: {fileID: 8164511901401613173, guid: dae0e46a862d2b5408c468bf1203c340, type: 3}
+      Hit: {fileID: 1362503501609663271, guid: f348c614a478c344eb1d339fc1b5ce30, type: 3}
     Right:
-      Cast: {fileID: 8230215500604754102, guid: e787476d787e6bf4f869c10347e9f0a9,
+      Cast: {fileID: 7644002096359388931, guid: 120e9ddc9b7c68e4c8ae63dc3c74f863,
         type: 3}
-      Bullet: {fileID: 1061202688339080741, guid: 4b7f0eb1917a62f449807469bdc27c78,
+      Bullet: {fileID: 6276928451774876125, guid: f21c8c8d6577869449263b5635738686,
         type: 3}
-      Hit: {fileID: 8164511901401613173, guid: 860789549db32094baab77380effce36, type: 3}
+      Hit: {fileID: 1362503501609663271, guid: f348c614a478c344eb1d339fc1b5ce30, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
   TrajectoriesNumber: 2
   ParticlesAtk:
-    BulletTrajectories:
-    - Show: 1
-      BulletDistanceInTile: {x: 0, y: 15}
-      Trajectory_Y:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      Trajectory_Z:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      ChildrenBulletDelay: 0.5
-      BulletEffectTiles: []
-      BulletGapStartingTile: {x: 0, y: 0}
-      HasEffect: 0
-      Effects: []
-      EffectChances: 100
+    BulletTrajectories: []
     CharacterClass: 0
   TilesAtk:
     AtkType: 0
     BulletTrajectories:
     - Delay: 1
-      BulletTravelDurationPerTile: 0.25
+      BulletTravelDurationPerTile: 0.2
       ExplosionChances: 100
       Trajectory_Y:
         serializedVersion: 2
@@ -174,7 +118,7 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-      - Pos: {x: 2, y: 3}
+      - Pos: {x: 1, y: 4}
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -183,7 +127,7 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-      - Pos: {x: 2, y: 4}
+      - Pos: {x: 2, y: 5}
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -192,7 +136,7 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-      - Pos: {x: 3, y: 2}
+      - Pos: {x: 3, y: 3}
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -201,16 +145,7 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-      - Pos: {x: 3, y: 5}
-        HasEffect: 0
-        showImpact: 1
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-    - Delay: 2
+    - Delay: 1.6
       BulletTravelDurationPerTile: 0
       ExplosionChances: 100
       Trajectory_Y:
@@ -227,7 +162,16 @@ MonoBehaviour:
         m_RotationOrder: 4
       Show: 1
       BulletEffectTiles:
-      - Pos: {x: -1, y: 0}
+      - Pos: {x: -2, y: 0}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: -1, y: -1}
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -245,7 +189,7 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-      - Pos: {x: 4, y: 2}
+      - Pos: {x: 1, y: -1}
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -254,7 +198,7 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-      - Pos: {x: 5, y: 3}
+      - Pos: {x: 3, y: 4}
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -263,7 +207,7 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-      - Pos: {x: 5, y: 4}
+      - Pos: {x: 4, y: 3}
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -272,7 +216,7 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-      - Pos: {x: 4, y: 5}
+      - Pos: {x: 4, y: 1}
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -283,8 +227,8 @@ MonoBehaviour:
         EffectsOnTile: []
     StatToCheck: 1
     ValueChecker: 0
-    PercToCheck: 50
-    Chances: 110
+    PercToCheck: 80
+    Chances: 100
   TotemAtk:
     AtkType: 3
     IsPlayerSide: 0

@@ -20,7 +20,7 @@ MonoBehaviour:
   AttackAnim: 0
   StaminaCost: 10
   ExperiencePoints: 10
-  CoolDown: 2
+  CoolDown: 3
   PrefixAnim: 0
   Fov: 1
   Particles:
@@ -235,9 +235,9 @@ MonoBehaviour:
         DurationOnTile: 0
         EffectsOnTile: []
     StatToCheck: 1
-    ValueChecker: 2
-    PercToCheck: 0
-    Chances: 100
+    ValueChecker: 0
+    PercToCheck: 50
+    Chances: 110
   TotemAtk:
     AtkType: 3
     IsPlayerSide: 0
