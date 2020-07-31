@@ -865,7 +865,8 @@ public class BattleManagerScript : MonoBehaviour
             new CharacterBaseInfoClass(cloneInfo.CharacterID.ToString(), CharacterSelectionType.Up,
             new List<ControllerType> { isPlayer ? ControllerType.None : ControllerType.Enemy }, cloneInfo.CharacterID,
             original.UMS.WalkingSide, original.UMS.Side, original.UMS.Facing,
-            isPlayer ? BaseCharType.PlayerMinionType_Script : BaseCharType.MinionType_Script, original.CharActionlist,
+            isPlayer ? BaseCharType.PlayerMinionType_Script : replaced ? cloneInfo.BaseCharacterType : original.CharInfo.BaseCharacterType,
+            original.CharActionlist,
             LevelType.Novice), isPlayer ? Instance.transform : WaveManagerScript.Instance.transform
         );
         if (isPlayer) clone = (PlayerMinionType_Script)clone;

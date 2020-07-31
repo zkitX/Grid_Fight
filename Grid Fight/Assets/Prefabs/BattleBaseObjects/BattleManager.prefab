@@ -260,6 +260,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 34fa256374470c84e90609437f601e02, type: 2}
   - {fileID: 11400000, guid: 34fa256374470c84e90609437f601e02, type: 2}
   - {fileID: 11400000, guid: 34fa256374470c84e90609437f601e02, type: 2}
+  - {fileID: 11400000, guid: 480349ea997618b41ad5b71946f85bd1, type: 2}
+  - {fileID: 11400000, guid: df3081b3009e2e04d8aeb19053aad771, type: 2}
   AllCharactersOnField: []
   AllPlayersMinionOnField: []
   CharsForTalkingPart: []
@@ -422,6 +424,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1356531903299505061}
     m_Modifications:
+    - target: {fileID: 1072692802108931392, guid: 730c9cdded2811142b3b17f531383548,
+        type: 3}
+      propertyPath: m_Name
+      value: StatisticManager
+      objectReference: {fileID: 0}
     - target: {fileID: 8527285901987777838, guid: 730c9cdded2811142b3b17f531383548,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -476,11 +483,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1072692802108931392, guid: 730c9cdded2811142b3b17f531383548,
-        type: 3}
-      propertyPath: m_Name
-      value: StatisticManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 730c9cdded2811142b3b17f531383548, type: 3}

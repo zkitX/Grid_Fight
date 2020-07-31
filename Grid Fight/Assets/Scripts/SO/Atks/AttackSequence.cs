@@ -85,8 +85,7 @@ public class AttackSequence
         switch (StatToCheck)
         {
             case StatsCheckType.None:
-                Debug.LogError("No Value assigned to check in attack sequence");
-                return false;
+                break;
             case StatsCheckType.Health:
                 curCheckValPerc = charInfo.HealthPerc;
                 break;

@@ -17,11 +17,11 @@ MonoBehaviour:
   AttackRatioMultiplier: 0
   _DamageMultiplier: {x: 0, y: 0}
   AttackInput: 1
-  AttackAnim: 2
+  AttackAnim: 4
   StaminaCost: 0
   ExperiencePoints: 10
   CoolDown: 2
-  PrefixAnim: 0
+  PrefixAnim: 2
   Fov: 0
   Particles:
     Left:
@@ -219,7 +219,7 @@ MonoBehaviour:
         HasEffect: 1
         showImpact: 1
         Effects:
-        - {fileID: 0}
+        - {fileID: 11400000, guid: 9577063af6a89414fac402dcde193b6e, type: 2}
         EffectChances: 100
         IsEffectOnTile: 0
         TileParticlesID: 0
