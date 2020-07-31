@@ -1,0 +1,276 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
+  m_Name: Stage01-Minion-Mountain-Attack03-Toka-Survival
+  m_EditorClassIdentifier: 
+  Chances: 100
+  CurrentAttackType: 1
+  AttackRatioMultiplier: 2
+  _DamageMultiplier: {x: 1, y: 1}
+  AttackInput: 1
+  AttackAnim: 0
+  StaminaCost: 10
+  ExperiencePoints: 10
+  CoolDown: 4
+  PrefixAnim: 0
+  Fov: 2
+  Particles:
+    Left:
+      Cast: {fileID: 6798042170676295785, guid: 3b9608d1107110e44bfd9fb88f8a1c92,
+        type: 3}
+      Bullet: {fileID: 5929669761749727824, guid: 5649fa67f45484d47a87f465e92c45a4,
+        type: 3}
+      Hit: {fileID: 3719651915426297370, guid: 6d3b2e50cb75b8040a69d8ce7ddbfe6f, type: 3}
+    Right:
+      Cast: {fileID: 731960222991626249, guid: b4d5e4ab41d778f4baf8b37eabed54f5, type: 3}
+      Bullet: {fileID: 1571988095091154899, guid: 1aae63add8dca8a4d8e11dd85032abda,
+        type: 3}
+      Hit: {fileID: 6041259536131661630, guid: 0db0f875371378f4288dcd54f16ee8bf, type: 3}
+    CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
+      type: 3}
+    CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
+      type: 3}
+  TrajectoriesNumber: 2
+  ParticlesAtk:
+    BulletTrajectories:
+    - Show: 1
+      BulletDistanceInTile: {x: 0, y: 7}
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0.002503129
+          value: -0.0095821135
+          inSlope: 0.10084034
+          outSlope: -0.14595908
+          tangentMode: 1
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.19044244
+        - serializedVersion: 3
+          time: 0.20732574
+          value: 0.12470262
+          inSlope: 2.1815722
+          outSlope: 2.1815722
+          tangentMode: 1
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.42717206
+          value: 1.006525
+          inSlope: 0.03406383
+          outSlope: 0.03406383
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.713425
+        - serializedVersion: 3
+          time: 0.71245766
+          value: 0.9996613
+          inSlope: -0.30817193
+          outSlope: -3.9019616
+          tangentMode: 1
+          weightedMode: 0
+          inWeight: 0.6947553
+          outWeight: 0.11206407
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: -3.0752084
+          outSlope: -0.09917355
+          tangentMode: 1
+          weightedMode: 0
+          inWeight: 0.12622613
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      ChildrenBulletDelay: 0.5
+      BulletEffectTiles: []
+      BulletGapStartingTile: {x: 0, y: 0}
+      HasEffect: 0
+      Effects: []
+      EffectChances: 100
+    CharacterClass: 0
+  TilesAtk:
+    AtkType: 1
+    BulletTrajectories:
+    - Delay: 1.5
+      BulletTravelDurationPerTile: 0.25
+      ExplosionChances: 100
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 4.530805
+          outSlope: 4.530805
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.26912895
+        - serializedVersion: 3
+          time: 0.5
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: -4.648086
+          outSlope: -4.648086
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.05269456
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Show: 1
+      BulletEffectTiles:
+      - Pos: {x: 0, y: 0}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+    - Delay: 2.1
+      BulletTravelDurationPerTile: 0
+      ExplosionChances: 100
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Show: 1
+      BulletEffectTiles:
+      - Pos: {x: -1, y: 0}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: -1, y: -1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 0, y: -1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 1, y: -1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 1, y: 0}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+    StatToCheck: 1
+    ValueChecker: 2
+    PercToCheck: 0
+    Chances: 110
+  TotemAtk:
+    AtkType: 3
+    IsPlayerSide: 0
+    DurationOnField: 10
+    Effects: []
+    TotemIn: 0
+    TotemOut: 0
+    TentaclePrefab: 0

@@ -1,0 +1,1179 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &673468859892250805
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 673468859892250827}
+  - component: {fileID: 673468859892250826}
+  m_Layer: 0
+  m_Name: WaveManager-Comunity
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &673468859892250827
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673468859892250805}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.2474627, y: 0.9679096, z: -3.4060545}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &673468859892250826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673468859892250805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09b0c490261b08d4dbe285554c10a1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  battleTime:
+    hours: 0
+    minutes: 15
+    seconds: 0
+    counting: 0
+    isStopped: 0
+  WavePhases:
+  - name: Wave1
+    IsRandom: 0
+    MaxEnemyOnScreen: 1
+    AbsoluteMaxEnemyOnScreen: 1
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Bee Doctor
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1002
+        KillWaveIfCharDie: 0
+        Health: {x: 30, y: 30}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 3, y: 6}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 859bb3cf0b369a84c9715602d15ef212, type: 2}
+        - {fileID: 11400000, guid: 36bd834a800ffc7429e469485b72485b, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  - name: Wave2
+    IsRandom: 0
+    MaxEnemyOnScreen: 2
+    AbsoluteMaxEnemyOnScreen: 2
+    DelayBetweenChars: 0
+    ListOfEnemy:
+    - name: Bee Doctor
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1002
+        KillWaveIfCharDie: 0
+        Health: {x: 35, y: 35}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 3, y: 6}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 859bb3cf0b369a84c9715602d15ef212, type: 2}
+        - {fileID: 11400000, guid: df18e013400409d48978185af713ecd7, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  - name: Wave3
+    IsRandom: 0
+    MaxEnemyOnScreen: 3
+    AbsoluteMaxEnemyOnScreen: 3
+    DelayBetweenChars: 0
+    ListOfEnemy:
+    - name: Bee Doctor
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 1002
+        KillWaveIfCharDie: 0
+        Health: {x: 40, y: 40}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 4, y: 7}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 859bb3cf0b369a84c9715602d15ef212, type: 2}
+        - {fileID: 11400000, guid: df18e013400409d48978185af713ecd7, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 3fdf9191a952ba64abe6edb3b395b010, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  - name: Wave4
+    IsRandom: 0
+    MaxEnemyOnScreen: 4
+    AbsoluteMaxEnemyOnScreen: 4
+    DelayBetweenChars: 0
+    ListOfEnemy:
+    - name: Chander
+      NPCType: 0
+      NumberOfCharacter: 4
+      TypeOfCharacter:
+        CharacterName: 1003
+        KillWaveIfCharDie: 0
+        Health: {x: 45, y: 45}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 4, y: 7}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 859bb3cf0b369a84c9715602d15ef212, type: 2}
+        - {fileID: 11400000, guid: 36bd834a800ffc7429e469485b72485b, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 66d2275a97e4bb74b9be8ed6bb39ccd2, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  - name: Wave5
+    IsRandom: 1
+    MaxEnemyOnScreen: 5
+    AbsoluteMaxEnemyOnScreen: 5
+    DelayBetweenChars: 0
+    ListOfEnemy:
+    - name: Bee Doctor
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1002
+        KillWaveIfCharDie: 0
+        Health: {x: 45, y: 45}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 4, y: 7}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 01b2fcfba1829364f8fe7149f8c53696, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 3fdf9191a952ba64abe6edb3b395b010, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    - name: Chander
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 1003
+        KillWaveIfCharDie: 0
+        Health: {x: 55, y: 55}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 4, y: 7}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 01b2fcfba1829364f8fe7149f8c53696, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 66d2275a97e4bb74b9be8ed6bb39ccd2, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  - name: Wave6
+    IsRandom: 1
+    MaxEnemyOnScreen: 6
+    AbsoluteMaxEnemyOnScreen: 6
+    DelayBetweenChars: 0
+    ListOfEnemy:
+    - name: Bee Doctor
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 1002
+        KillWaveIfCharDie: 0
+        Health: {x: 45, y: 45}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 6, y: 9}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.3, y: 1.4}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.3, y: 1.3}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 01b2fcfba1829364f8fe7149f8c53696, type: 2}
+        - {fileID: 11400000, guid: db2dfdc726c2457469478a239e206218, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 3fdf9191a952ba64abe6edb3b395b010, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    - name: Chander
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 1003
+        KillWaveIfCharDie: 0
+        Health: {x: 60, y: 60}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 6, y: 9}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.2, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.3, y: 1.3}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 01b2fcfba1829364f8fe7149f8c53696, type: 2}
+        - {fileID: 11400000, guid: db2dfdc726c2457469478a239e206218, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 66d2275a97e4bb74b9be8ed6bb39ccd2, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  - name: Wave7
+    IsRandom: 0
+    MaxEnemyOnScreen: 7
+    AbsoluteMaxEnemyOnScreen: 7
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Mech Dog
+      NPCType: 0
+      NumberOfCharacter: 7
+      TypeOfCharacter:
+        CharacterName: 1001
+        KillWaveIfCharDie: 0
+        Health: {x: 100, y: 100}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 6, y: 9}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.2, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.3, y: 1.3}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: df18e013400409d48978185af713ecd7, type: 2}
+        - {fileID: 11400000, guid: 845ee167c5a8fa9469b514c33b912337, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 65a56a9ca564c2b43b12aacbf370abe9, type: 2}
+        - {fileID: 11400000, guid: 4d617ee00a6078d49b930bc2db94822f, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  - name: Wave8
+    IsRandom: 1
+    MaxEnemyOnScreen: 8
+    AbsoluteMaxEnemyOnScreen: 8
+    DelayBetweenChars: 0.7
+    ListOfEnemy:
+    - name: Chander
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1003
+        KillWaveIfCharDie: 0
+        Health: {x: 60, y: 60}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 6, y: 9}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.2, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 01b2fcfba1829364f8fe7149f8c53696, type: 2}
+        - {fileID: 11400000, guid: db2dfdc726c2457469478a239e206218, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 66d2275a97e4bb74b9be8ed6bb39ccd2, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    - name: Mech Dog
+      NPCType: 0
+      NumberOfCharacter: 6
+      TypeOfCharacter:
+        CharacterName: 1001
+        KillWaveIfCharDie: 0
+        Health: {x: 110, y: 110}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 6, y: 9}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.2, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: df18e013400409d48978185af713ecd7, type: 2}
+        - {fileID: 11400000, guid: 845ee167c5a8fa9469b514c33b912337, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 65a56a9ca564c2b43b12aacbf370abe9, type: 2}
+        - {fileID: 11400000, guid: 65a56a9ca564c2b43b12aacbf370abe9, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  - name: Wave9
+    IsRandom: 1
+    MaxEnemyOnScreen: 9
+    AbsoluteMaxEnemyOnScreen: 9
+    DelayBetweenChars: 0.5
+    ListOfEnemy:
+    - name: Big Head
+      NPCType: 0
+      NumberOfCharacter: 9
+      TypeOfCharacter:
+        CharacterName: 1000
+        KillWaveIfCharDie: 0
+        Health: {x: 110, y: 110}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 8, y: 10}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.2, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: df18e013400409d48978185af713ecd7, type: 2}
+        - {fileID: 11400000, guid: 845ee167c5a8fa9469b514c33b912337, type: 2}
+        AddAttacks: 0
+        AttacksToAdd:
+        - {fileID: 11400000, guid: a29347239c1257740b03c947d8875a67, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  - name: Wave10
+    IsRandom: 1
+    MaxEnemyOnScreen: 10
+    AbsoluteMaxEnemyOnScreen: 10
+    DelayBetweenChars: 0.5
+    ListOfEnemy:
+    - name: Big Head
+      NPCType: 0
+      NumberOfCharacter: 8
+      TypeOfCharacter:
+        CharacterName: 1000
+        KillWaveIfCharDie: 0
+        Health: {x: 120, y: 120}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 12, y: 18}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.2, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 845ee167c5a8fa9469b514c33b912337, type: 2}
+        - {fileID: 11400000, guid: 01b2fcfba1829364f8fe7149f8c53696, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: a29347239c1257740b03c947d8875a67, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    - name: Mech Dog
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1001
+        KillWaveIfCharDie: 0
+        Health: {x: 120, y: 120}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 12, y: 18}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.2, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: df18e013400409d48978185af713ecd7, type: 2}
+        - {fileID: 11400000, guid: 845ee167c5a8fa9469b514c33b912337, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 4d617ee00a6078d49b930bc2db94822f, type: 2}
+        - {fileID: 11400000, guid: 65a56a9ca564c2b43b12aacbf370abe9, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  - name: Wave11
+    IsRandom: 1
+    MaxEnemyOnScreen: 11
+    AbsoluteMaxEnemyOnScreen: 11
+    DelayBetweenChars: 0.5
+    ListOfEnemy:
+    - name: Big Head
+      NPCType: 0
+      NumberOfCharacter: 9
+      TypeOfCharacter:
+        CharacterName: 1000
+        KillWaveIfCharDie: 0
+        Health: {x: 130, y: 130}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 16, y: 22}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.3, y: 1.3}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.6, y: 1.6}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 845ee167c5a8fa9469b514c33b912337, type: 2}
+        - {fileID: 11400000, guid: 01b2fcfba1829364f8fe7149f8c53696, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: a29347239c1257740b03c947d8875a67, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    - name: Mech Dog
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1001
+        KillWaveIfCharDie: 0
+        Health: {x: 120, y: 120}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 16, y: 22}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.3, y: 1.3}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.6, y: 1.6}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: df18e013400409d48978185af713ecd7, type: 2}
+        - {fileID: 11400000, guid: 845ee167c5a8fa9469b514c33b912337, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 4d617ee00a6078d49b930bc2db94822f, type: 2}
+        - {fileID: 11400000, guid: 65a56a9ca564c2b43b12aacbf370abe9, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  - name: Wave12
+    IsRandom: 1
+    MaxEnemyOnScreen: 12
+    AbsoluteMaxEnemyOnScreen: 12
+    DelayBetweenChars: 0.5
+    ListOfEnemy:
+    - name: Mohtra
+      NPCType: 0
+      NumberOfCharacter: 12
+      TypeOfCharacter:
+        CharacterName: 1023
+        KillWaveIfCharDie: 0
+        Health: {x: 130, y: 130}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 16, y: 22}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.3, y: 1.3}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.6, y: 1.6}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 01b2fcfba1829364f8fe7149f8c53696, type: 2}
+        - {fileID: 11400000, guid: da11bdb053850d14d925c565fda67cce, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 3379ca06c2056f947884ade7ad58432f, type: 2}
+        - {fileID: 11400000, guid: 5cf88f2bb3b6b2846b049b07b6182aa3, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  - name: Wave13
+    IsRandom: 1
+    MaxEnemyOnScreen: 13
+    AbsoluteMaxEnemyOnScreen: 13
+    DelayBetweenChars: 0.5
+    ListOfEnemy:
+    - name: Mohtra
+      NPCType: 0
+      NumberOfCharacter: 10
+      TypeOfCharacter:
+        CharacterName: 1023
+        KillWaveIfCharDie: 0
+        Health: {x: 140, y: 140}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 16, y: 22}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.3, y: 1.3}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.6, y: 1.6}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 01b2fcfba1829364f8fe7149f8c53696, type: 2}
+        - {fileID: 11400000, guid: da11bdb053850d14d925c565fda67cce, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 3379ca06c2056f947884ade7ad58432f, type: 2}
+        - {fileID: 11400000, guid: 5cf88f2bb3b6b2846b049b07b6182aa3, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    - name: Big Head
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 1000
+        KillWaveIfCharDie: 0
+        Health: {x: 130, y: 130}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 16, y: 22}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.3, y: 1.3}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.6, y: 1.6}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 845ee167c5a8fa9469b514c33b912337, type: 2}
+        - {fileID: 11400000, guid: 01b2fcfba1829364f8fe7149f8c53696, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: a29347239c1257740b03c947d8875a67, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  - name: Wave14
+    IsRandom: 1
+    MaxEnemyOnScreen: 14
+    AbsoluteMaxEnemyOnScreen: 14
+    DelayBetweenChars: 0.5
+    ListOfEnemy:
+    - name: Mohtra
+      NPCType: 0
+      NumberOfCharacter: 9
+      TypeOfCharacter:
+        CharacterName: 1023
+        KillWaveIfCharDie: 0
+        Health: {x: 150, y: 150}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 16, y: 22}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.4, y: 1.4}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.6, y: 1.6}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 01b2fcfba1829364f8fe7149f8c53696, type: 2}
+        - {fileID: 11400000, guid: da11bdb053850d14d925c565fda67cce, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 3379ca06c2056f947884ade7ad58432f, type: 2}
+        - {fileID: 11400000, guid: 5cf88f2bb3b6b2846b049b07b6182aa3, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    - name: Fishylla
+      NPCType: 0
+      NumberOfCharacter: 5
+      TypeOfCharacter:
+        CharacterName: 1021
+        KillWaveIfCharDie: 0
+        Health: {x: 150, y: 150}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 16, y: 22}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.5, y: 1.5}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.6, y: 1.6}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: df18e013400409d48978185af713ecd7, type: 2}
+        - {fileID: 11400000, guid: 845ee167c5a8fa9469b514c33b912337, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 651dcbb9df10cf04083a9f69dca98318, type: 2}
+        - {fileID: 11400000, guid: 8afae86da3a576d4b95264b82d88188b, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  - name: Wave15
+    IsRandom: 1
+    MaxEnemyOnScreen: 15
+    AbsoluteMaxEnemyOnScreen: 15
+    DelayBetweenChars: 0
+    ListOfEnemy:
+    - name: Fishylla
+      NPCType: 0
+      NumberOfCharacter: 14
+      TypeOfCharacter:
+        CharacterName: 1021
+        KillWaveIfCharDie: 0
+        Health: {x: 160, y: 160}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 16, y: 22}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.4, y: 1.4}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.6, y: 1.6}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: df18e013400409d48978185af713ecd7, type: 2}
+        - {fileID: 11400000, guid: 845ee167c5a8fa9469b514c33b912337, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 651dcbb9df10cf04083a9f69dca98318, type: 2}
+        - {fileID: 11400000, guid: 8afae86da3a576d4b95264b82d88188b, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  - name: Wave16
+    IsRandom: 1
+    MaxEnemyOnScreen: 16
+    AbsoluteMaxEnemyOnScreen: 16
+    DelayBetweenChars: 0.5
+    ListOfEnemy:
+    - name: Fishylla
+      NPCType: 0
+      NumberOfCharacter: 10
+      TypeOfCharacter:
+        CharacterName: 1021
+        KillWaveIfCharDie: 0
+        Health: {x: 170, y: 170}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 16, y: 22}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.6, y: 1.6}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.6, y: 1.6}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: df18e013400409d48978185af713ecd7, type: 2}
+        - {fileID: 11400000, guid: 845ee167c5a8fa9469b514c33b912337, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 651dcbb9df10cf04083a9f69dca98318, type: 2}
+        - {fileID: 11400000, guid: 8afae86da3a576d4b95264b82d88188b, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    - name: Crabera
+      NPCType: 0
+      NumberOfCharacter: 6
+      TypeOfCharacter:
+        CharacterName: 1022
+        KillWaveIfCharDie: 0
+        Health: {x: 190, y: 190}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 16, y: 22}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.4, y: 1.4}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.6, y: 1.6}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 01b2fcfba1829364f8fe7149f8c53696, type: 2}
+        - {fileID: 11400000, guid: db2dfdc726c2457469478a239e206218, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: ad880abd2139aa84cbb47081a3889645, type: 2}
+        - {fileID: 11400000, guid: cdc052e608072ac4e83c0c4324f98cf2, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  - name: Wave17
+    IsRandom: 1
+    MaxEnemyOnScreen: 17
+    AbsoluteMaxEnemyOnScreen: 17
+    DelayBetweenChars: 0.5
+    ListOfEnemy:
+    - name: Fishylla
+      NPCType: 0
+      NumberOfCharacter: 10
+      TypeOfCharacter:
+        CharacterName: 1021
+        KillWaveIfCharDie: 0
+        Health: {x: 190, y: 190}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 16, y: 22}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.6, y: 1.6}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.6, y: 1.6}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: df18e013400409d48978185af713ecd7, type: 2}
+        - {fileID: 11400000, guid: 845ee167c5a8fa9469b514c33b912337, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 651dcbb9df10cf04083a9f69dca98318, type: 2}
+        - {fileID: 11400000, guid: 8afae86da3a576d4b95264b82d88188b, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    - name: Crabera
+      NPCType: 0
+      NumberOfCharacter: 7
+      TypeOfCharacter:
+        CharacterName: 1022
+        KillWaveIfCharDie: 0
+        Health: {x: 220, y: 220}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 16, y: 22}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.6, y: 1.6}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.6, y: 1.6}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 01b2fcfba1829364f8fe7149f8c53696, type: 2}
+        - {fileID: 11400000, guid: db2dfdc726c2457469478a239e206218, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: cdc052e608072ac4e83c0c4324f98cf2, type: 2}
+        - {fileID: 11400000, guid: ad880abd2139aa84cbb47081a3889645, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  - name: Wave18
+    IsRandom: 1
+    MaxEnemyOnScreen: 18
+    AbsoluteMaxEnemyOnScreen: 18
+    DelayBetweenChars: 0.5
+    ListOfEnemy:
+    - name: Crabera
+      NPCType: 0
+      NumberOfCharacter: 18
+      TypeOfCharacter:
+        CharacterName: 1022
+        KillWaveIfCharDie: 0
+        Health: {x: 230, y: 230}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 16, y: 22}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.6, y: 1.6}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.6, y: 1.6}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: db2dfdc726c2457469478a239e206218, type: 2}
+        - {fileID: 11400000, guid: 01b2fcfba1829364f8fe7149f8c53696, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: cdc052e608072ac4e83c0c4324f98cf2, type: 2}
+        - {fileID: 11400000, guid: ad880abd2139aa84cbb47081a3889645, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  - name: Wave19
+    IsRandom: 1
+    MaxEnemyOnScreen: 19
+    AbsoluteMaxEnemyOnScreen: 19
+    DelayBetweenChars: 0.5
+    ListOfEnemy:
+    - name: Toka
+      NPCType: 0
+      NumberOfCharacter: 4
+      TypeOfCharacter:
+        CharacterName: 1020
+        KillWaveIfCharDie: 0
+        Health: {x: 250, y: 290}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 16, y: 22}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.6, y: 1.6}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.6, y: 1.6}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: df18e013400409d48978185af713ecd7, type: 2}
+        - {fileID: 11400000, guid: 845ee167c5a8fa9469b514c33b912337, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 33a154fd3ac92834690eda51278cd677, type: 2}
+        - {fileID: 11400000, guid: 62c607aaddfb06e46aae6a0343a5fe6f, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    - name: Crabera
+      NPCType: 0
+      NumberOfCharacter: 15
+      TypeOfCharacter:
+        CharacterName: 1022
+        KillWaveIfCharDie: 0
+        Health: {x: 230, y: 230}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 16, y: 22}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.6, y: 1.6}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.6, y: 1.6}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 01b2fcfba1829364f8fe7149f8c53696, type: 2}
+        - {fileID: 11400000, guid: db2dfdc726c2457469478a239e206218, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: cdc052e608072ac4e83c0c4324f98cf2, type: 2}
+        - {fileID: 11400000, guid: ad880abd2139aa84cbb47081a3889645, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  - name: Wave20
+    IsRandom: 1
+    MaxEnemyOnScreen: 20
+    AbsoluteMaxEnemyOnScreen: 20
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Toka
+      NPCType: 0
+      NumberOfCharacter: 4
+      TypeOfCharacter:
+        CharacterName: 1020
+        KillWaveIfCharDie: 0
+        Health: {x: 290, y: 290}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 16, y: 22}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.6, y: 1.6}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.6, y: 1.6}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: df18e013400409d48978185af713ecd7, type: 2}
+        - {fileID: 11400000, guid: 845ee167c5a8fa9469b514c33b912337, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 33a154fd3ac92834690eda51278cd677, type: 2}
+        - {fileID: 11400000, guid: 62c607aaddfb06e46aae6a0343a5fe6f, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    - name: Chander
+      NPCType: 0
+      NumberOfCharacter: 4
+      TypeOfCharacter:
+        CharacterName: 1003
+        KillWaveIfCharDie: 0
+        Health: {x: 160, y: 160}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 16, y: 22}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.6, y: 1.6}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.6, y: 1.6}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 859bb3cf0b369a84c9715602d15ef212, type: 2}
+        - {fileID: 11400000, guid: 36bd834a800ffc7429e469485b72485b, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 66d2275a97e4bb74b9be8ed6bb39ccd2, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    - name: Crabera
+      NPCType: 0
+      NumberOfCharacter: 6
+      TypeOfCharacter:
+        CharacterName: 1022
+        KillWaveIfCharDie: 0
+        Health: {x: 230, y: 230}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 16, y: 22}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.6, y: 1.6}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.6, y: 1.6}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 01b2fcfba1829364f8fe7149f8c53696, type: 2}
+        - {fileID: 11400000, guid: db2dfdc726c2457469478a239e206218, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 704e21f4e7b3f6f42a87081edc60b28c, type: 2}
+        - {fileID: 11400000, guid: ad880abd2139aa84cbb47081a3889645, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    - name: Caw
+      NPCType: 0
+      NumberOfCharacter: 6
+      TypeOfCharacter:
+        CharacterName: 1121
+        KillWaveIfCharDie: 0
+        Health: {x: 300, y: 350}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 16, y: 22}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.6, y: 1.6}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1.6, y: 1.6}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 01b2fcfba1829364f8fe7149f8c53696, type: 2}
+        - {fileID: 11400000, guid: db2dfdc726c2457469478a239e206218, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 8cb84ce23888bd64c826085113de2769, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  isWaveComplete: 0
+  WaveCharcters: []
+  StartWave: 0
