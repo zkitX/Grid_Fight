@@ -1203,7 +1203,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 }
                 break;
             case BuffDebuffStatsType.Legion:
-                BattleManagerScript.Instance.CloneUnit(this, bdClass.CurrentBuffDebuff.Effect.ClonePowerScale, bdClass.CurrentBuffDebuff.Effect.ClonePrefab);
+                BattleManagerScript.Instance.CloneUnit(
+                    this, bdClass.CurrentBuffDebuff.Effect.CloneAsManyAsCurrentEnemies ?  
+                    CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script ? WaveManagerScript.Instance.WaveCharcters.Where(r => r.IsOnField && r.gameObject.activeInHierarchy).ToList().Count :
+                    BattleManagerScript.Instance.AllCharactersOnField.Where(r => !r.IsOnField && r.CharInfo.HealthPerc > 0).ToList().Count : bdClass.CurrentBuffDebuff.Effect.CloneAmount,
+                    bdClass.CurrentBuffDebuff.Effect.ClonePowerScale, bdClass.CurrentBuffDebuff.Effect.ClonePrefab
+                    );
                 break;
             case BuffDebuffStatsType.ShieldStats_BaseShieldRegeneration:
                 CharInfo.ShieldStats.BaseShieldRegeneration += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.ShieldStats.B_BaseShieldRegeneration / 100f) * bdClass.CurrentBuffDebuff.Value : bdClass.CurrentBuffDebuff.Value;
@@ -1577,7 +1582,18 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         HealthChangedType healthCT = HealthChangedType.Damage;
         bool res;
-        if (isDefending)
+
+        //If they are invulnerable
+        if(BuffsDebuffsList.Where(r => r.CurrentBuffDebuff.Effect.StatsToAffect == BuffDebuffStatsType.Invulnerable).ToArray().Length > 0)
+        {
+            damage = 0;
+            healthCT = HealthChangedType.Invulnerable;
+            GameObject go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldTotalDefence);
+            go.transform.position = transform.position;
+            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.Shield_Partial, AudioBus.MidPrio);
+            res = false;
+        }
+        else if (isDefending)
         {
             GameObject go;
             if (DefendingHoldingTimer < CharInfo.DefenceStats.Invulnerability)

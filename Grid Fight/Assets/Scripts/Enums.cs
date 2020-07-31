@@ -326,6 +326,7 @@ public enum BuffDebuffStatsType
     AttackChange,
     StaminaStats_Stamina, 
     Legion,
+    Invulnerable,
 }
 
 public enum StatsCheckType
@@ -701,7 +702,8 @@ public enum HealthChangedType
     Damage,
     Defend,
     Heal,
-    CriticalHit
+    CriticalHit,
+    Invulnerable,
 }
 
 

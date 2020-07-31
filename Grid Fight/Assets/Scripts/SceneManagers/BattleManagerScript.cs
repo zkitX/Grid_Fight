@@ -836,11 +836,13 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
-    public void CloneUnit(BaseCharacter original, float strengthScale = 1f, GameObject clonePrefab = null)
+    public void CloneUnit(BaseCharacter original, int amount, float strengthScale = 1f, GameObject clonePrefab = null)
     {
         if (original.CharInfo.Health <= 0) return;
-
-        StartCoroutine(CloneUnit_Co(original, strengthScale, clonePrefab));
+        for (int i = 0; i < Mathf.Clamp(amount, 1, 5); i++)
+        {
+            StartCoroutine(CloneUnit_Co(original, strengthScale, clonePrefab));
+        }
     }
 
     IEnumerator CloneUnit_Co(BaseCharacter original, float strengthScale, GameObject clonePrefab)
@@ -851,9 +853,9 @@ public class BattleManagerScript : MonoBehaviour
 
 
         //Set up the cloning particles
-        GameObject cloneParticles = ParticleManagerScript.Instance.GetParticle(isPlayer ? ParticlesType.Skill_Might_1_Copy : ParticlesType.Chapter02_TheBurg_Boss_Copy_Effect);
-        cloneParticles.SetActive(true);
-        cloneParticles.transform.position = original.SpineAnim.transform.position;
+        //GameObject cloneParticles = ParticleManagerScript.Instance.GetParticle(isPlayer ? ParticlesType.Skill_Might_1_Copy : ParticlesType.Chapter02_TheBurg_Boss_Copy_Effect);
+        //cloneParticles.SetActive(true);
+        //cloneParticles.transform.position = original.SpineAnim.transform.position;
 
 
         //Creating the clone
@@ -871,10 +873,10 @@ public class BattleManagerScript : MonoBehaviour
 
 
         //Give the clone it's effects to distinguish it from the original
-        cloneParticles = ParticleManagerScript.Instance.GetParticle(ParticlesType.Skill_Might_1_CloneEffects);
-        cloneParticles.transform.parent = clone.SpineAnim.transform;
-        cloneParticles.transform.localPosition = Vector3.zero;
-        cloneParticles.SetActive(true);
+        //cloneParticles = ParticleManagerScript.Instance.GetParticle(ParticlesType.Skill_Might_1_CloneEffects);
+        //cloneParticles.transform.parent = clone.SpineAnim.transform;
+        //cloneParticles.transform.localPosition = Vector3.zero;
+        //cloneParticles.SetActive(true);
         //
 
 
@@ -892,11 +894,11 @@ public class BattleManagerScript : MonoBehaviour
         }
 
         //Reset particles and have them play the ending explosion or whatever happens at the end of the clone's life
-        cloneParticles.transform.parent = null;
-        cloneParticles.SetActive(false);
-        cloneParticles = ParticleManagerScript.Instance.GetParticle(ParticlesType.Skill_Might_1_CloneEnd);
-        cloneParticles.SetActive(true);
-        cloneParticles.transform.position = clone.SpineAnim.transform.position;
+        //cloneParticles.transform.parent = null;
+        //cloneParticles.SetActive(false);
+        //cloneParticles = ParticleManagerScript.Instance.GetParticle(ParticlesType.Skill_Might_1_CloneEnd);
+        //cloneParticles.SetActive(true);
+        //cloneParticles.transform.position = clone.SpineAnim.transform.position;
         //
     }
 

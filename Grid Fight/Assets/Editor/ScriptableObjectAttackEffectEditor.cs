@@ -38,6 +38,8 @@ public class ScriptableObjectAttackEffectEditor : Editor
         {
             origin.ClonePrefab = (GameObject)EditorGUILayout.ObjectField("Clone Replacement Prefab ", origin.ClonePrefab, typeof(GameObject), false);
             origin.ClonePowerScale = EditorGUILayout.FloatField("Clone Power Multiplier", origin.ClonePowerScale);
+            origin.CloneAsManyAsCurrentEnemies = EditorGUILayout.Toggle("Clone count matches enemies", origin.CloneAsManyAsCurrentEnemies);
+            if (!origin.CloneAsManyAsCurrentEnemies) origin.CloneAmount = EditorGUILayout.IntField("Number of clones", origin.CloneAmount);
         }
         EditorUtility.SetDirty(origin);
     }

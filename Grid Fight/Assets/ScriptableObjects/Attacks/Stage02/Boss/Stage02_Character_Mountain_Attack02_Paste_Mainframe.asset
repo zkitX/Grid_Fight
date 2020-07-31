@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Stage02_Character_Mountain_Attack02_Paste_Mainframe
   m_EditorClassIdentifier: 
   Chances: 100
-  CurrentAttackType: 0
-  AttackRatioMultiplier: 1
-  _DamageMultiplier: {x: 1, y: 1}
-  AttackInput: 0
-  AttackAnim: 0
-  StaminaCost: 10
-  ExperiencePoints: 10
-  CoolDown: 0
-  PrefixAnim: 0
+  CurrentAttackType: 1
+  AttackRatioMultiplier: 0
+  _DamageMultiplier: {x: 0, y: 0}
+  AttackInput: 3
+  AttackAnim: 2
+  StaminaCost: 0
+  ExperiencePoints: 0
+  CoolDown: 5
+  PrefixAnim: 3
   Fov: 0
   Particles:
     Left:
@@ -101,12 +101,40 @@ MonoBehaviour:
       EffectChances: 100
     CharacterClass: 0
   TilesAtk:
-    AtkType: 0
-    BulletTrajectories: []
-    StatToCheck: 0
+    AtkType: 2
+    BulletTrajectories:
+    - Delay: 0
+      BulletTravelDurationPerTile: 0
+      ExplosionChances: 100
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Show: 1
+      BulletEffectTiles:
+      - Pos: {x: 0, y: 0}
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: a6f8c2f32d96fe940afbd71609f47374, type: 2}
+        - {fileID: 11400000, guid: cea58f1c17598594087604412e896d9b, type: 2}
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+    StatToCheck: 1
     ValueChecker: 0
-    PercToCheck: 0
-    Chances: 0
+    PercToCheck: 100000
+    Chances: 100
   TotemAtk:
     AtkType: 3
     IsPlayerSide: 0

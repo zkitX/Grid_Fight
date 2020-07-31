@@ -28,6 +28,9 @@ public class ScriptableObjectAttackEffect : ScriptableObject
     [ConditionalField("recolorCharUI")] public Color statusIconColor = Color.magenta;
     [HideInInspector] public ScriptableObjectAttackBase Atk;
     [HideInInspector] public List<ScriptableObjectAI> AIs = new List<ScriptableObjectAI>();
+    //Clone variables
     [HideInInspector] public GameObject ClonePrefab = null;  //If left to null, the basic character will be used in a nerfed state
     [HideInInspector] public float ClonePowerScale = 0.5f; //How much of a nerf the clone receives upon creation
+    [HideInInspector] public bool CloneAsManyAsCurrentEnemies = false;
+    [HideInInspector] public int CloneAmount = 1;
 }

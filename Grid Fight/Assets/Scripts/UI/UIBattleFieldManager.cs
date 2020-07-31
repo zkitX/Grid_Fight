@@ -107,6 +107,9 @@ public class UIBattleFieldManager : MonoBehaviour
             case HealthChangedType.CriticalHit:
                 CharOwner_CriticalHitReceivedEvent(value, charOwner);
                 break;
+            case HealthChangedType.Invulnerable:
+                CharOwner_InvulnerableAttackReceivedEvent(value, charOwner);
+                break;
             default:
                 break;
         }
@@ -131,7 +134,50 @@ public class UIBattleFieldManager : MonoBehaviour
     {
         StartCoroutine(CriticalHitCo(damage, charOwner));
     }
-    
+
+    private void CharOwner_InvulnerableAttackReceivedEvent(float damage, Transform charOwner)
+    {
+        StartCoroutine(InvulnerableCo(damage, charOwner));
+    }
+
+    private IEnumerator InvulnerableCo(float damage, Transform charOwner)
+    {
+        float timer = 0;
+        bool isAlive = true;
+        GameObject d;
+        d = Defends.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
+        if (d == null)
+        {
+            d = Instantiate(Defence, transform);
+            Defends.Add(Defends.Count, d);
+        }
+
+        d.SetActive(true);
+        d.GetComponentInChildren<TextMeshProUGUI>().text = "INVULNERABLE";
+
+        if (!charOwner.gameObject.activeInHierarchy)
+        {
+            d.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
+        }
+
+        SetAnim(d.GetComponentInChildren<Animator>(), 3);
+
+        while (timer <= 0.8f)
+        {
+            if (charOwner.gameObject.activeInHierarchy && isAlive)
+            {
+                d.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
+            }
+            else if (isAlive)
+            {
+                isAlive = false;
+            }
+            yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
+
+            timer += Time.deltaTime;
+        }
+        d.SetActive(false);
+    }
 
     private IEnumerator HealingCo(float heal, Transform charOwner)
     {
