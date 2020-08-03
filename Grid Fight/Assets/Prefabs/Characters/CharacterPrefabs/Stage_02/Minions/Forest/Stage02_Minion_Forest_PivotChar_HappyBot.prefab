@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f98aab6021486341825eb862f61401a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skeletonAnimation: {fileID: 0}
   CharOwner: {fileID: 0}
   CurveType: 0
   Speed_Time_Curves:
@@ -441,6 +442,7 @@ MonoBehaviour:
   AudioProfile: {fileID: 11400000, guid: 18079379e5337084286a38b915064869, type: 2}
   BaseCharacterType: 1
   CharacterID: 1042
+  attackSequences: []
   CurrentAttackTypeInfo:
   - {fileID: 11400000, guid: b7127bb5bcf7f4946b985d25ddaec33d, type: 2}
   - {fileID: 11400000, guid: d9bed4bff58dafe43bcc0ef40671956a, type: 2}
@@ -497,6 +499,20 @@ MonoBehaviour:
   SpeedStats:
     BaseSpeed: 1
     MovementSpeed: 2.2
+    FirstMovement:
+      MovementPercUp: 0.85
+      MovementPercDown: 0.85
+      MovementPercForward: 0.85
+      MovementPercBackward: 0.85
+    LoopMovement:
+      StartLoopMovementPercUp: 0.15
+      EndLoopMovementPercUp: 0.85
+      StartLoopMovementPercDown: 0.15
+      EndLoopMovementPercDown: 0.85
+      StartLoopMovementPercForward: 0.15
+      EndLoopMovementPercForward: 0.85
+      StartLoopMovementPercBackward: 0.15
+      EndLoopMovementPercBackward: 0.85
     AttackSpeed: 2.5
     AttackSpeedRatio: 2
     BulletSpeed: 1
@@ -522,8 +538,12 @@ MonoBehaviour:
   DefenceStats:
     BaseDefence: 2
     Invulnerability: 0.2
+    MinionDefenceChances: 20
+    MinionPerfectDefenceChances: 5
     B_BaseDefence: 10
     B_Invulnerability: 0.2
+    B_MinionDefenceChances: 20
+    B_MinionPerfectDefenceChances: 5
     LevelMultiplier: 0
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
@@ -559,8 +579,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.9, z: 0.9}
-  m_Center: {x: 0, y: 0.45, z: 0}
+  m_Size: {x: 0.7, y: 0.9, z: 0.9}
+  m_Center: {x: 0, y: 0.57, z: 0}
 --- !u!1 &813366714054206595
 GameObject:
   m_ObjectHideFlags: 0

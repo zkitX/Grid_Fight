@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a973d68f2b711f34b902c3029d63e805, type: 3}
+  m_Name: Robotron-Blocker Agressive
+  m_EditorClassIdentifier: 
+  AI_Type: 10
+  Vision: 10
+  Checks:
+  - StatToCheck: 1
+    ValueChecker: 0
+    PercToCheck: 25
+  - StatToCheck: 1
+    ValueChecker: 0
+    PercToCheck: 20
+  - StatToCheck: 1
+    ValueChecker: 2
+    PercToCheck: 15
+  - StatToCheck: 1
+    ValueChecker: 2
+    PercToCheck: 10
+  CoolDown: 2
+  IdleMovement: 1
+  UpdateAttckWill: 1
+  AttackWill: 110
+  UpdateMoveForward: 1
+  MoveForward: 98
+  UpdateMoveBackward: 1
+  MoveBackward: 2
+  UpdateMoveUpDown: 0
+  MoveUpDown: 10
+  t: {fileID: 0}
+  StatsToModify:
+  - ModificableStats: 7
+    Multiplier: 0.8
+  AIPs: {fileID: 0}
