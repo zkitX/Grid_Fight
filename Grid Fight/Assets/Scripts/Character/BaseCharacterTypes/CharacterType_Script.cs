@@ -696,20 +696,47 @@ public class CharacterType_Script : BaseCharacter
         {
             
         }
+        else if(e.Data.Name.Contains("EndLoop"))
+        {
+
+        }
     }
 
     public override void SpineAnimationState_Complete(Spine.TrackEntry trackEntry)
     {
 
         if (PlayQueuedAnim()) return;
-
         //Debug.Log(skeletonAnimation.AnimationState.Tracks.ToArray()[trackEntry.TrackIndex].Animation.Name + "   " + CurrentAnim.ToString());
         if (trackEntry.Animation.Name == "<empty>" || SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle.ToString()
-           || SpineAnim.CurrentAnim == CharacterAnimationStateType.Death.ToString())
+           || SpineAnim.CurrentAnim == CharacterAnimationStateType.Death.ToString() || (isMoving && (!trackEntry.Animation.Name.Contains("Dash") && !trackEntry.Animation.Name.Contains("_"))))
         {
             return;
         }
         string completedAnim = trackEntry.Animation.Name;
+
+
+        if(completedAnim.Contains("Dash") && NewMovementSystem)
+        {
+            if(completedAnim.Contains("Intro"))
+            {
+                string nextAnim = completedAnim.Split('_').First() + "_Loop";
+                SpineAnim.SpineAnimationState.SetAnimation(0, nextAnim, false);
+                SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.MovementSpeed);
+                SpineAnim.CurrentAnim = nextAnim;
+                return;
+
+            }
+
+            if (completedAnim.Contains("Loop"))
+            {
+                string nextAnim = completedAnim.Split('_').First() + "_End";
+                SpineAnim.SpineAnimationState.SetAnimation(0, nextAnim, false);
+                SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.EndTileMovementSpeed);
+                SpineAnim.CurrentAnim = nextAnim;
+                return;
+
+            }
+        }
 
 
         if (completedAnim == CharacterAnimationStateType.Defeat_ReverseArrive.ToString())

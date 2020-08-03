@@ -138,7 +138,21 @@ public class CharacterInfoScript : MonoBehaviour
     public class SpeedStastsClass
     {
         public float BaseSpeed = 1;
-        public float MovementSpeed = 1;
+        [Range(0, 2)]
+        public float TileMovementTime = 1;
+        [Range(0, 150)]
+        public float IntroTileMovementSpeed = 1;
+        [Range(0, 150)]
+        public float EndTileMovementSpeed = 1;
+
+        [HideInInspector]
+        public float MovementSpeed
+        {
+            get
+            {
+                return (0.5f / TileMovementTime) * BaseSpeed;
+            }
+        }
 
         public MovementInfoClass FirstMovement;
         public LoopMovementInfoClass LoopMovement;
@@ -351,7 +365,7 @@ public class CharacterInfoScript : MonoBehaviour
             ShieldStats.BaseShieldRegeneration *= ShieldStats.LevelMultiplier;
 
             SpeedStats.BaseSpeed *= SpeedStats.BaseSpeed_LevelMultiplier;
-            SpeedStats.MovementSpeed *= SpeedStats.MovementSpeed_LevelMultiplier;
+            SpeedStats.TileMovementTime /= 1 + SpeedStats.MovementSpeed_LevelMultiplier;
 
             DefenceStats.BaseDefence *= DefenceStats.LevelMultiplier;
 

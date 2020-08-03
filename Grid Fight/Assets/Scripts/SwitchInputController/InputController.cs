@@ -344,10 +344,10 @@ public class InputController : MonoBehaviour
                 }
             }
         }*/
-        Debug.Log(angleOfSineInDegrees + "    " + new Vector2(Joystics[player].x, Joystics[player].y) + "    " + sin);//
+        //Debug.Log(angleOfSineInDegrees + "    " + new Vector2(Joystics[player].x, Joystics[player].y) + "    " + sin);//
 
         angleOfSineInDegrees = (Mathf.Acos(sin) * 180) / Mathf.PI;
-        Debug.Log(angleOfSineInDegrees + "    " + new Vector2(x, y) + "    " + sin);//
+        //Debug.Log(angleOfSineInDegrees + "    " + new Vector2(x, y) + "    " + sin);//
 
 
 

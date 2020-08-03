@@ -512,7 +512,19 @@ public enum CharacterAnimationStateType
     Dialogue_To_Idle,
     Idle_To_Dialogue,
 	JumpTransition_IN,
-    JumpTransition_OUT
+    JumpTransition_OUT,
+    DashUp_Intro,
+    DashUp_Loop,
+    DashUp_End,
+    DashDown_Intro,
+    DashDown_Loop,
+    DashDown_End,
+    DashLeft_Intro,
+    DashLeft_Loop,
+    DashLeft_End,
+    DashRight_Intro,
+    DashRight_Loop,
+    DashRight_End,
 }
 
 public enum PortalType
