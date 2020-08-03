@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using PlaytraGamesLtd;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -62,7 +63,7 @@ public class EnvironmentManager : MonoBehaviour
         float v = 0;
         if(windTransitionRotation == -1)
         {
-            v = Vector3.Cross(Vector3.up, GridManagerScript.Instance.transform.position - destinationGrid.pivot).z - 90;
+            v = Utils.GetAngleInDegToPoint(GridManagerScript.Instance.transform.position - destinationGrid.pivot) + 90;
         }
 
         GridManagerScript.Instance.MoveGrid_ToWorldPosition(destinationGrid.pivot);

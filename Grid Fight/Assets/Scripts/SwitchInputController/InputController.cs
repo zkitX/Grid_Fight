@@ -294,11 +294,11 @@ public class InputController : MonoBehaviour
         float sin = (Mathf.Abs(Joystics[player].x) > Mathf.Abs(Joystics[player].y) ? Mathf.Abs(Joystics[player].x) : Mathf.Abs(Joystics[player].y)) / Hypo;
         float angleOfSineInDegrees = 0;
 
-        /*if (Mathf.Abs(x) > Mathf.Abs(y))
+        /*if (Mathf.Abs(Joystics[player].x) > Mathf.Abs(Joystics[player].y))
         {
-            if (x > 0)
+            if (Joystics[player].x > 0)
             {
-                if (y > 0)
+                if (Joystics[player].y > 0)
                 {
                     angleOfSineInDegrees = (Mathf.Acos(sin) * 180) / Mathf.PI;
                 }
@@ -309,7 +309,7 @@ public class InputController : MonoBehaviour
             }
             else
             {
-                if (y > 0)
+                if (Joystics[player].y > 0)
                 {
                     angleOfSineInDegrees = 180 - ((Mathf.Acos(sin) * 180) / Mathf.PI);
                 }
@@ -321,9 +321,9 @@ public class InputController : MonoBehaviour
         }
         else
         {
-            if (y > 0)
+            if (Joystics[player].y > 0)
             {
-                if (x > 0)
+                if (Joystics[player].x > 0)
                 {
                     angleOfSineInDegrees =  90 - (Mathf.Acos(sin) * 180) / Mathf.PI;
                 }
@@ -334,7 +334,7 @@ public class InputController : MonoBehaviour
             }
             else
             {
-                if (x > 0)
+                if (Joystics[player].x > 0)
                 {
                     angleOfSineInDegrees = 270 + ((Mathf.Acos(sin) * 180) / Mathf.PI);
                 }
@@ -344,12 +344,13 @@ public class InputController : MonoBehaviour
                 }
             }
         }*/
+        Debug.Log(angleOfSineInDegrees + "    " + new Vector2(Joystics[player].x, Joystics[player].y) + "    " + sin);//
 
         angleOfSineInDegrees = (Mathf.Acos(sin) * 180) / Mathf.PI;
-
         Debug.Log(angleOfSineInDegrees + "    " + new Vector2(x, y) + "    " + sin);//
 
-        
+
+
         //((Mathf.Abs(Mathf.Abs(Joystics[data.playerId].x) - Mathf.Abs(Joystics[data.playerId].y)) / (Mathf.Abs(Joystics[data.playerId].x) > Mathf.Abs(Joystics[data.playerId].y) ? Mathf.Abs(Joystics[data.playerId].x) : Mathf.Abs(Joystics[data.playerId].y))) > DiagonalDeathZone)
 
         if (angleOfSineInDegrees <= DiagonalDeathZone)

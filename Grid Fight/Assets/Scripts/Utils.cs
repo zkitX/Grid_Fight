@@ -14,7 +14,66 @@ namespace PlaytraGamesLtd
 {
 	public class Utils
 	{
-		public static void Serialize<T>(T obj, string path)
+
+        public static float GetAngleInDegToPoint(Vector2 finalPos)
+        {
+            float val = Mathf.Pow(Mathf.Abs(finalPos.x), 2) + Mathf.Pow(Mathf.Abs(finalPos.y), 2);
+            float Hypo = Mathf.Sqrt(val);
+            float sin = (Mathf.Abs(finalPos.x) > Mathf.Abs(finalPos.y) ? Mathf.Abs(finalPos.x) : Mathf.Abs(finalPos.y)) / Hypo;
+
+            if (Mathf.Abs(finalPos.x) > Mathf.Abs(finalPos.y))
+            {
+                if (finalPos.x > 0)
+                {
+                    if (finalPos.y > 0)
+                    {
+                        return (Mathf.Acos(sin) * 180) / Mathf.PI;
+                    }
+                    else
+                    {
+                        return 360 - ((Mathf.Acos(sin) * 180) / Mathf.PI);
+                    }
+                }
+                else
+                {
+                    if (finalPos.y > 0)
+                    {
+                        return 180 - ((Mathf.Acos(sin) * 180) / Mathf.PI);
+                    }
+                    else
+                    {
+                        return 180 + ((Mathf.Acos(sin) * 180) / Mathf.PI);
+                    }
+                }
+            }
+            else
+            {
+                if (finalPos.y > 0)
+                {
+                    if (finalPos.x > 0)
+                    {
+                        return 90 - (Mathf.Acos(sin) * 180) / Mathf.PI;
+                    }
+                    else
+                    {
+                        return 90 + ((Mathf.Acos(sin) * 180) / Mathf.PI);
+                    }
+                }
+                else
+                {
+                    if (finalPos.x > 0)
+                    {
+                        return 270 + ((Mathf.Acos(sin) * 180) / Mathf.PI);
+                    }
+                    else
+                    {
+                        return 270 - ((Mathf.Acos(sin) * 180) / Mathf.PI);
+                    }
+                }
+            }
+        }
+
+        public static void Serialize<T>(T obj, string path)
 		{
 			var serializer = new XmlSerializer(obj.GetType());
 			using (var writer = XmlWriter.Create(path))
@@ -313,6 +372,8 @@ path = System.IO.Path.Combine(Application.persistentDataPath, "Log.txt");
 
         }
     }
+
+    
 }
 
 
