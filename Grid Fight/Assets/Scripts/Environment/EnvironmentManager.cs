@@ -62,7 +62,7 @@ public class EnvironmentManager : MonoBehaviour
         float v = 0;
         if(windTransitionRotation == -1)
         {
-            v = Vector3.Cross(Vector3.up, GridManagerScript.Instance.transform.position - destinationGrid.pivot).z;
+            v = Vector3.Cross(Vector3.up, GridManagerScript.Instance.transform.position - destinationGrid.pivot).z - 90;
         }
 
         GridManagerScript.Instance.MoveGrid_ToWorldPosition(destinationGrid.pivot);
