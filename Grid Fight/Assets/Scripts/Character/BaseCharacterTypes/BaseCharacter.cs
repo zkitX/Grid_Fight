@@ -239,7 +239,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             SpineAnim.SetSkeletonOrderInLayer(CharOredrInLayer);
         }
+        
     }
+
+    
 
     public bool died = false;
     public virtual void SetCharDead()

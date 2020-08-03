@@ -97,7 +97,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 52539e4ba3d5be84c90a09c7337bc4c3, type: 2}
+  - {fileID: 2100000, guid: e4f1413ad2f9c254682b772ee9e6ffdb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 6b4780aae6a6d8d49882f69ed730766a, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 8522329bb1dcf5f46ad0b4061b63fadd, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -488,7 +488,7 @@ MonoBehaviour:
   CharacterIcon: {fileID: 0}
   Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 18079379e5337084286a38b915064869, type: 2}
-  BaseCharacterType: 1
+  BaseCharacterType: 13
   CharacterID: 1049
   attackSequences:
   - Name: Starting Redo Sequence
@@ -520,7 +520,8 @@ MonoBehaviour:
   CharaterLevel: 0
   UseLayeringSystem: 1
   Head: {fileID: 7693585729651487640}
-  AIs: []
+  AIs:
+  - {fileID: 11400000, guid: 859bb3cf0b369a84c9715602d15ef212, type: 2}
   CharacterRespawnLength: 180
   CharacterSelection: 0
   RapidAttack:

@@ -759,25 +759,28 @@ public class MinionType_Script : BaseCharacter
 
     public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical)
     {
-        float defenceChances = Random.Range(0, 100);
-        if(defenceChances < CharInfo.DefenceStats.MinionPerfectDefenceChances && !SpineAnim.CurrentAnim.Contains("Atk"))
+        if(attacker != this)
         {
-            isDefending = true;
-            DefendingHoldingTimer = 0;
-            SetAnimation(CharacterAnimationStateType.Defending);
-            damage = 0;
-        }
-        else if (defenceChances < (CharInfo.DefenceStats.MinionPerfectDefenceChances + CharInfo.DefenceStats.MinionDefenceChances) && !SpineAnim.CurrentAnim.Contains("Atk"))
-        {
-            isDefending = true;
-            DefendingHoldingTimer = 10;
-            SetAnimation(CharacterAnimationStateType.Defending);
-            damage = damage - CharInfo.DefenceStats.BaseDefence;
-        }
-        else
-        {
-            isDefending = false;
-            DefendingHoldingTimer = 0;
+            float defenceChances = Random.Range(0, 100);
+            if (defenceChances < CharInfo.DefenceStats.MinionPerfectDefenceChances && !SpineAnim.CurrentAnim.Contains("Atk"))
+            {
+                isDefending = true;
+                DefendingHoldingTimer = 0;
+                SetAnimation(CharacterAnimationStateType.Defending);
+                damage = 0;
+            }
+            else if (defenceChances < (CharInfo.DefenceStats.MinionPerfectDefenceChances + CharInfo.DefenceStats.MinionDefenceChances) && !SpineAnim.CurrentAnim.Contains("Atk"))
+            {
+                isDefending = true;
+                DefendingHoldingTimer = 10;
+                SetAnimation(CharacterAnimationStateType.Defending);
+                damage = damage - CharInfo.DefenceStats.BaseDefence;
+            }
+            else
+            {
+                isDefending = false;
+                DefendingHoldingTimer = 0;
+            }
         }
         return base.SetDamage(attacker, damage, elemental, isCritical);
     }
@@ -795,7 +798,7 @@ public class MinionType_Script : BaseCharacter
         {
             hic.Damage += damage;
         }
-        if(attacker.CurrentPlayerController != ControllerType.None)
+        if(attacker.CurrentPlayerController != ControllerType.None && attacker.CurrentPlayerController != ControllerType.Enemy)
         {
             AggroInfoClass aggro = AggroInfoList.Where(r => r.PlayerController == attacker.CurrentPlayerController).FirstOrDefault();
             if (aggro == null)

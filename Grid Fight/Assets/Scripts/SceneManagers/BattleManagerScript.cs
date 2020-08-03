@@ -882,7 +882,7 @@ public class BattleManagerScript : MonoBehaviour
 
 
         //Set clone on the battlefield
-        yield return WaveManagerScript.Instance.SetCharInPos(clone, GridManagerScript.Instance.GetFreeBattleTile(original.UMS.WalkingSide, original.UMS.Pos), true);
+        yield return WaveManagerScript.Instance.SetCharInPos(clone, GridManagerScript.Instance.GetFreeBattleTile(original.UMS.WalkingSide), true);
 
         //Add new char to wave if it's a minion or player minion if it's a player clone
         if (!isPlayer) WaveManagerScript.Instance.WaveCharcters.Add(clone);
