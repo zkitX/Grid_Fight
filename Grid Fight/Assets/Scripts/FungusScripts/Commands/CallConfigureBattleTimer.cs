@@ -16,12 +16,13 @@ public class CallConfigureBattleTimer : Command
     public bool StartStopState = true;
     public bool TriggerFungusOnComplete = false;
     [ConditionalField("TriggerFungusOnComplete")] public string BlockToTriggerOnComplete = "";
+    public bool CountDownward = true;
 
     #region Public members
 
     public override void OnEnter()
     {
-        WaveManagerScript.Instance.SetBattleTimer(ChangeTimer, battleTime.hours, battleTime.minutes, battleTime.seconds, StartStopState, TriggerFungusOnComplete ? BlockToTriggerOnComplete : "");
+        WaveManagerScript.Instance.SetBattleTimer(CountDownward, ChangeTimer, battleTime.hours, battleTime.minutes, battleTime.seconds, StartStopState, TriggerFungusOnComplete ? BlockToTriggerOnComplete : "");
         Continue();
     }
 

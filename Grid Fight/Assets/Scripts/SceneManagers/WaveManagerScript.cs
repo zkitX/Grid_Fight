@@ -42,12 +42,23 @@ public class WaveManagerScript : MonoBehaviour
         }
     }
 
-    public void ToggleBattleTimer(bool timerState)
+    public void ToggleBattleTimer(bool timerState, bool countDown = true)
     {
         if (battleTime.standardReverseTicker != null) StopCoroutine(battleTime.standardReverseTicker);
+        if (battleTime.standardTicker != null) StopCoroutine(battleTime.standardTicker);
+
         if (battleTime.standardTicker == null) battleTime.SetupBasics();
-        if (timerState) StartCoroutine(battleTime.standardReverseTicker);
-        else StopCoroutine(Instance.battleTime.standardReverseTicker);
+
+        if (countDown)
+        {
+            if (timerState) StartCoroutine(battleTime.standardReverseTicker);
+            else StopCoroutine(Instance.battleTime.standardReverseTicker);
+        }
+        else
+        {
+            if (timerState) StartCoroutine(battleTime.standardTicker);
+            else StopCoroutine(Instance.battleTime.standardTicker);
+        }
     }
 
     public void TriggerBattleTimerEnded(string block)
@@ -55,11 +66,11 @@ public class WaveManagerScript : MonoBehaviour
         OnBattleTimerComplete?.Invoke(block);
     }
 
-    public void SetBattleTimer(bool changeTime, int hours, int minutes, float seconds, bool start = true, string blockToTriggerOnComplete = "")
+    public void SetBattleTimer(bool countDown, bool changeTime, int hours, int minutes, float seconds, bool start = true, string blockToTriggerOnComplete = "")
     {
         battleTime = changeTime ? new GameTime(hours, minutes, seconds): battleTime;
         battleTime.blockToTriggerOnComplete = blockToTriggerOnComplete;
-        ToggleBattleTimer(start);
+        ToggleBattleTimer(start, countDown);
     }
 
     public IEnumerator WaveCharCreator()
