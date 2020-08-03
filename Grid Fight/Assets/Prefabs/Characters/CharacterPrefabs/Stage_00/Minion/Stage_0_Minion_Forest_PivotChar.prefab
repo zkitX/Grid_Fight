@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1061194841229031604}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SkeletonUtility-SkeletonRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4233938663970666026}
   - component: {fileID: 2668383713325877112}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bee_Body_Controler
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: d1de1604dfe4cb64c9d31246a8e43c78, type: 3}
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 6599455778496348035}
   - component: {fileID: 3578728044643202614}
   - component: {fileID: 2883728223285764134}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spine GameObject (New SkeletonDataAsset)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,8 +168,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -90983575
+  m_SortingLayer: 1
   m_SortingOrder: 20
 --- !u!114 &4865520415555439919
 MonoBehaviour:
@@ -532,6 +532,7 @@ MonoBehaviour:
   AudioProfile: {fileID: 11400000, guid: 31b8d92f46d622d4eb9cbc26a9c8778e, type: 2}
   BaseCharacterType: 1
   CharacterID: 1002
+  attackSequences: []
   CurrentAttackTypeInfo:
   - {fileID: 11400000, guid: 6732eb1582c27754b87167243eabf8e2, type: 2}
   - {fileID: 11400000, guid: 5baeefa661efce34284c8ee5cdf35d9f, type: 2}
@@ -588,11 +589,20 @@ MonoBehaviour:
   SpeedStats:
     BaseSpeed: 1
     MovementSpeed: 1
-    MovementPerc: 0.85
-    InterpolationTime_DashForward: 0
-    InterpolationTime_DashBackward: 0
-    InterpolationTime_DashUp: 0
-    InterpolationTime_DashDown: 0
+    FirstMovement:
+      MovementPercUp: 0.85
+      MovementPercDown: 0.85
+      MovementPercForward: 0.85
+      MovementPercBackward: 0.85
+    LoopMovement:
+      StartLoopMovementPercUp: 0.15
+      EndLoopMovementPercUp: 0.85
+      StartLoopMovementPercDown: 0.15
+      EndLoopMovementPercDown: 0.85
+      StartLoopMovementPercForward: 0.15
+      EndLoopMovementPercForward: 0.85
+      StartLoopMovementPercBackward: 0.15
+      EndLoopMovementPercBackward: 0.85
     AttackSpeed: 1
     AttackSpeedRatio: 5
     BulletSpeed: 5
@@ -684,7 +694,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7804744954826562182}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Stage_0_Minion_Forest_PivotChar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -716,7 +726,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7085318522026615809}
   - component: {fileID: 3660071990149266377}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: d1de1604dfe4cb64c9d31246a8e43c78, type: 3}
@@ -767,7 +777,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6650964662470146189}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -797,7 +807,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5761753832005316970}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FiringPointWeak
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -827,7 +837,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1488926880570413611}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FiringPointStrong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -859,6 +869,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BeeWings
+      objectReference: {fileID: 0}
+    - target: {fileID: 5588786330729116404, guid: 334ecfd6e68069748a8e5aa4d6e7cd14,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4439973080224159459, guid: 334ecfd6e68069748a8e5aa4d6e7cd14,
         type: 3}

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6531860947241080895}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Stage_0_Minion_Desert_PivotChar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 4811681700526239691}
   - component: {fileID: 7881344236016434490}
   - component: {fileID: 531390610516948111}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spine GameObject (New SkeletonDataAsset)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,8 +114,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -90983575
+  m_SortingLayer: 1
   m_SortingOrder: 20
 --- !u!114 &8462298651886047126
 MonoBehaviour:
@@ -559,14 +559,14 @@ MonoBehaviour:
       MovementPercForward: 0.85
       MovementPercBackward: 0.85
     LoopMovement:
-      MovementPercUp: 0.85
-      MovementPercDown: 0.85
-      MovementPercForward: 0.85
-      MovementPercBackward: 0.85
-    InterpolationTime_DashForward: 0
-    InterpolationTime_DashBackward: 0
-    InterpolationTime_DashUp: 0
-    InterpolationTime_DashDown: 0
+      StartLoopMovementPercUp: 0.15
+      EndLoopMovementPercUp: 0.85
+      StartLoopMovementPercDown: 0.15
+      EndLoopMovementPercDown: 0.85
+      StartLoopMovementPercForward: 0.15
+      EndLoopMovementPercForward: 0.85
+      StartLoopMovementPercBackward: 0.15
+      EndLoopMovementPercBackward: 0.85
     AttackSpeed: 1
     AttackSpeedRatio: 5
     BulletSpeed: 5
@@ -644,7 +644,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2475970271791976594}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FiringPointStrong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -674,7 +674,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8718984644333450195}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FiringPointWeak
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -704,7 +704,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 604324024598573984}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
