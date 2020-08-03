@@ -14,6 +14,8 @@ public class WaveManagerScript : MonoBehaviour
     public event WaveComplete WaveCompleteEvent;
 
     public GameTime battleTime = GameTime.zero;
+    public delegate void BattleTimerComplete(string blockToTrigger);
+    public event BattleTimerComplete OnBattleTimerComplete;
 
     public static WaveManagerScript Instance;
     public List<WavePhaseClass> WavePhases = new List<WavePhaseClass>();
@@ -42,9 +44,22 @@ public class WaveManagerScript : MonoBehaviour
 
     public void ToggleBattleTimer(bool timerState)
     {
+        if (battleTime.standardReverseTicker != null) StopCoroutine(battleTime.standardReverseTicker);
         if (battleTime.standardTicker == null) battleTime.SetupBasics();
         if (timerState) StartCoroutine(battleTime.standardReverseTicker);
         else StopCoroutine(Instance.battleTime.standardReverseTicker);
+    }
+
+    public void TriggerBattleTimerEnded(string block)
+    {
+        OnBattleTimerComplete?.Invoke(block);
+    }
+
+    public void SetBattleTimer(bool changeTime, int hours, int minutes, float seconds, bool start = true, string blockToTriggerOnComplete = "")
+    {
+        battleTime = changeTime ? new GameTime(hours, minutes, seconds): battleTime;
+        battleTime.blockToTriggerOnComplete = blockToTriggerOnComplete;
+        ToggleBattleTimer(start);
     }
 
     public IEnumerator WaveCharCreator()

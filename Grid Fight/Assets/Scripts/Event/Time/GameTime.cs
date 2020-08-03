@@ -12,6 +12,7 @@ public class GameTime
     [HideInInspector] public static GameTime zero = new GameTime(0, 0, 0f);
     [HideInInspector] public IEnumerator standardTicker = null;
     [HideInInspector] public IEnumerator standardReverseTicker = null;
+    [HideInInspector] public string blockToTriggerOnComplete = "";
     [HideInInspector] public bool counting = false;
     public bool isStopped = false;
     public GameTime()
@@ -72,13 +73,17 @@ public class GameTime
         counting = true;
         startingTime = new GameTime(hours, minutes, seconds);
 
-        while (true)
+        while ((rate < 0f && timeInSeconds > 0f) || rate >= 0f)
         {
             if (BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle && !isStopped)
             {
                 timeInSeconds = Mathf.Clamp(timeInSeconds + (BattleManagerScript.Instance.DeltaTime * rate), 0f, 99999999999999999999999999999f);
             }
             yield return null;
+        }
+        if(blockToTriggerOnComplete != "")
+        {
+            WaveManagerScript.Instance.TriggerBattleTimerEnded(blockToTriggerOnComplete);
         }
     }
     

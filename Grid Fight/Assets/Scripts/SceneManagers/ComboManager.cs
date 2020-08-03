@@ -12,6 +12,9 @@ public class ComboManager : MonoBehaviour
     public delegate void FungusEventTriggerAction(string blockName);
     public static event FungusEventTriggerAction OnFungusEventTrigger;
 
+    public delegate void ComboTriggered();
+    public static event ComboTriggered OnComboTriggered;
+
     [Header("Combo Type Details")]
     public ComboTypeInfoClass[] comboTypeInformation = new ComboTypeInfoClass[3];
     public ComboTypeInfoClass GetComboTypeInfo(ComboType comboType)
@@ -28,6 +31,26 @@ public class ComboManager : MonoBehaviour
     [HideInInspector] public List<PlayerComboInfoGroupClass> comboInfo = new List<PlayerComboInfoGroupClass>();
 
 
+    protected  Dictionary<ComboType, int> comboHighScores = new Dictionary<ComboType, int>
+    {
+        { ComboType.Attack, 0 },
+        { ComboType.Defence, 0 },
+        { ComboType.Kill, 0 },
+    };
+
+    public int GetHighestAchievedCombo(ComboType type)
+    {
+        int high = comboHighScores[type];
+        foreach (PlayerComboInfoGroupClass combI in comboInfo)
+        {
+            if(high < combI.comboInfo[type].ComboCount)
+            {
+                high = combI.comboInfo[type].ComboCount;
+            }
+        }
+        comboHighScores[type] = high;
+        return high;
+    }
 
 
     private void Awake()
@@ -62,6 +85,7 @@ public class ComboManager : MonoBehaviour
     protected IEnumerator TriggerComboForPlayer_Co(int playerIndex, ComboType combo, bool hit, Vector3 displayTarget = new Vector3())
     {
         int comboNum = comboInfo.Where(r => r.ContainsPlayer(playerIndex)).FirstOrDefault().TriggerCombo(combo, hit);
+        OnComboTriggered?.Invoke();
         if (displayTarget == new Vector3())
         {
             yield break;
@@ -207,14 +231,27 @@ public class PlayerComboInfoGroupClass
     public int TriggerCombo(ComboType combo, bool hit)
     {
         comboInfo[combo].TriggerCombo(hit);
-        return comboInfo[combo].comboCount;
+        return comboInfo[combo].ComboCount;
     }
 }
 
 [System.Serializable]
 public class ComboInfoClass
 {
-    public int comboCount = 0;
+    protected int comboCount = 0;
+    public int maxComboAchieved = 0;
+    public int ComboCount
+    {
+        get
+        {
+            return comboCount;
+        }
+        set
+        { 
+            comboCount = value;
+            maxComboAchieved = comboCount > maxComboAchieved ? comboCount : maxComboAchieved;
+        }
+    }
     protected float resetTime = 0f;
     public float timeRemaining = 0f;
     public IEnumerator comboCountDown = null;
@@ -222,7 +259,7 @@ public class ComboInfoClass
     public ComboInfoClass(float resetTiming)
     {
         resetTime = resetTiming;
-        comboCount = 0;
+        ComboCount = 0;
         timeRemaining = 0f;
         comboCountDown = null;
     }
@@ -231,8 +268,8 @@ public class ComboInfoClass
     public void TriggerCombo(bool hit)
     {
         bool timeBelowZero = timeRemaining <= 0f;
-        comboCount = hit ? comboCount + 1 : 0;
-        Debug.Log("<b>" + comboCount.ToString() + "</b> with seconds remaining: " + timeRemaining.ToString());
+        ComboCount = hit ? ComboCount + 1 : 0;
+        Debug.Log("<b>" + ComboCount.ToString() + "</b> with seconds remaining: " + timeRemaining.ToString());
         timeRemaining = hit ? resetTime : 0f;
         if (timeBelowZero && hit)
         {
@@ -248,6 +285,6 @@ public class ComboInfoClass
             timeRemaining -= Time.unscaledDeltaTime;
             yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.FungusPuppets);
         }
-        comboCount = 0;
+        ComboCount = 0;
     }
 }

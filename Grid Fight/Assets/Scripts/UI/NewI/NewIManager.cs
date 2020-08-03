@@ -15,6 +15,8 @@ public class NewIManager : MonoBehaviour
     [SerializeField] protected string buttonTypeY;
 
     [SerializeField] protected TextMeshProUGUI timerText;
+    [SerializeField] protected TextMeshProUGUI hitComboHighScoreText;
+    [SerializeField] protected TextMeshProUGUI killComboHighScoreText;
     IEnumerator timeBoxUpdater;
 
     protected NewICharacterVitality[] vitalityBoxes;
@@ -28,6 +30,10 @@ public class NewIManager : MonoBehaviour
             vitalityBox.SetCharacter(null);
         }
 
+        ComboManager.OnComboTriggered -= UpdateComboCounts;
+        ComboManager.OnComboTriggered += UpdateComboCounts;
+        UpdateComboCounts();
+
         timeBoxUpdater = UpdateTimerText();
         StartCoroutine(timeBoxUpdater);
     }
@@ -35,9 +41,9 @@ public class NewIManager : MonoBehaviour
     IEnumerator UpdateTimerText()
     {
         while (WaveManagerScript.Instance == null) yield return null;
-        while (WaveManagerScript.Instance.battleTime.counting == false) yield return null;
+        //while (WaveManagerScript.Instance.battleTime.counting == false) yield return null;
         GameTime time;
-        while (WaveManagerScript.Instance.battleTime.counting)
+        while (true)
         {
             time = WaveManagerScript.Instance.battleTime;
 
@@ -52,7 +58,20 @@ public class NewIManager : MonoBehaviour
 
             yield return null;
         }
-        yield return null;
+    }
+
+    public void UpdateComboCounts()
+    {
+        if (ComboManager.Instance == null) return;
+
+        if (hitComboHighScoreText != null && hitComboHighScoreText.isActiveAndEnabled)
+        {
+            hitComboHighScoreText.text = ComboManager.Instance.GetHighestAchievedCombo(ComboType.Attack).ToString();
+        }
+        if (killComboHighScoreText != null && killComboHighScoreText.isActiveAndEnabled)
+        {
+            killComboHighScoreText.text = ComboManager.Instance.GetHighestAchievedCombo(ComboType.Kill).ToString();
+        }
     }
 
     public void SetSelected(bool state, ControllerType controller, CharacterNameType charName, SideType side = SideType.LeftSide)
@@ -109,6 +128,11 @@ public class NewIManager : MonoBehaviour
     public NewICharacterVitality GetvitalityBoxOfAssignedButton(CharacterSelectionType inButton, SideType side)
     {
         return vitalityBoxes.Where(r => r.assignedButton == inButton && r.mapSide == side).FirstOrDefault();
+    }
+
+    private void OnDestroy()
+    {
+        ComboManager.OnComboTriggered -= UpdateComboCounts;
     }
 
     public string GetButtonTypeString(CharacterSelectionType input)

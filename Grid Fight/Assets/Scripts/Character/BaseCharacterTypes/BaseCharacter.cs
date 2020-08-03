@@ -225,6 +225,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public virtual void SetAttackReady(bool value)
     {
+        died = false;
         //Debug.Log(CharInfo.CharacterID + "  " + value);
         if (CharBoxCollider != null)
         {
@@ -240,8 +241,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
     }
 
+    public bool died = false;
     public virtual void SetCharDead()
     {
+        if (died) return;
+        died = true;
         foreach (ManagedAudioSource audioSource in GetComponentsInChildren<ManagedAudioSource>())
         {
             audioSource.gameObject.transform.parent = AudioManagerMk2.Instance.transform;
