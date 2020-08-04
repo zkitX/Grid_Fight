@@ -1,0 +1,1002 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3472236807422022428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3472236807422022498}
+  - component: {fileID: 3472236807422022499}
+  m_Layer: 0
+  m_Name: WaveManager-02-WaveforVideo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3472236807422022498
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3472236807422022428}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.2474627, y: 0.9679096, z: -3.4060545}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3472236807422022499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3472236807422022428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09b0c490261b08d4dbe285554c10a1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  battleTime:
+    hours: 0
+    minutes: 15
+    seconds: 0
+    blockToTriggerOnComplete: 
+    counting: 0
+    isStopped: 0
+  WavePhases:
+  - name: WaveTutorial
+    IsRandom: 1
+    MaxEnemyOnScreen: 3
+    AbsoluteMaxEnemyOnScreen: 0
+    DelayBetweenChars: 0
+    ListOfEnemy:
+    - name: Mothra
+      NPCType: 1
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1025
+        KillWaveIfCharDie: 0
+        Health: {x: 30, y: 35}
+        HealthRegeneration: {x: 0.3, y: 0.3}
+        BaseDamage: {x: 3, y: 5}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 10}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 1, y: 1}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  - name: WaveFlint
+    IsRandom: 0
+    MaxEnemyOnScreen: 1
+    AbsoluteMaxEnemyOnScreen: 0
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Flint
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1046
+        KillWaveIfCharDie: 0
+        Health: {x: 500, y: 500}
+        HealthRegeneration: {x: 1, y: 1.5}
+        BaseDamage: {x: 10, y: 16}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.5, y: 1.5}
+        AttackSpeedRatio: {x: 10, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1.3, y: 1.3}
+        MovementSpeed: {x: 1.3, y: 1.3}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 36bd834a800ffc7429e469485b72485b, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Ted
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1043
+        KillWaveIfCharDie: 0
+        Health: {x: 500, y: 500}
+        HealthRegeneration: {x: 1, y: 1.5}
+        BaseDamage: {x: 10, y: 16}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.5, y: 1.5}
+        AttackSpeedRatio: {x: 10, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1.3, y: 1.3}
+        MovementSpeed: {x: 1.3, y: 1.3}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 36bd834a800ffc7429e469485b72485b, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Ted
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1042
+        KillWaveIfCharDie: 0
+        Health: {x: 500, y: 500}
+        HealthRegeneration: {x: 1, y: 1.5}
+        BaseDamage: {x: 10, y: 16}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.5, y: 1.5}
+        AttackSpeedRatio: {x: 10, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1.3, y: 1.3}
+        MovementSpeed: {x: 1.3, y: 1.3}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 36bd834a800ffc7429e469485b72485b, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Flint
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1041
+        KillWaveIfCharDie: 0
+        Health: {x: 500, y: 500}
+        HealthRegeneration: {x: 1, y: 1.5}
+        BaseDamage: {x: 10, y: 16}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.5, y: 1.5}
+        AttackSpeedRatio: {x: 10, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1.3, y: 1.3}
+        MovementSpeed: {x: 1.3, y: 1.3}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 36bd834a800ffc7429e469485b72485b, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+  - name: WaveFlintMinion
+    IsRandom: 1
+    MaxEnemyOnScreen: 4
+    AbsoluteMaxEnemyOnScreen: 0
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Fishylla
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1021
+        KillWaveIfCharDie: 0
+        Health: {x: 32, y: 35}
+        HealthRegeneration: {x: 3, y: 3}
+        BaseDamage: {x: 4, y: 6}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.7, y: 1.7}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Mothra
+      NPCType: 0
+      NumberOfCharacter: 4
+      TypeOfCharacter:
+        CharacterName: 1023
+        KillWaveIfCharDie: 0
+        Health: {x: 40, y: 42}
+        HealthRegeneration: {x: 0.3, y: 0.3}
+        BaseDamage: {x: 4, y: 7}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+  - name: Wave2
+    IsRandom: 0
+    MaxEnemyOnScreen: 5
+    AbsoluteMaxEnemyOnScreen: 0
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Kora
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1045
+        KillWaveIfCharDie: 0
+        Health: {x: 200, y: 240}
+        HealthRegeneration: {x: 1.3, y: 1.3}
+        BaseDamage: {x: 14, y: 19}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 2, y: 2}
+        AttackSpeedRatio: {x: 15, y: 18}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.8, y: 1.8}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 6847113b39104dd419571ee38694b6db, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Fishylla
+      NPCType: 0
+      NumberOfCharacter: 4
+      TypeOfCharacter:
+        CharacterName: 1040
+        KillWaveIfCharDie: 0
+        Health: {x: 70, y: 70}
+        HealthRegeneration: {x: 3, y: 3}
+        BaseDamage: {x: 3, y: 6}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.7, y: 1.7}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: e554cfa107337484286671155a0327bc, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+  - name: WaveLoud
+    IsRandom: 0
+    MaxEnemyOnScreen: 4
+    AbsoluteMaxEnemyOnScreen: 0
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Fishylla
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 1021
+        KillWaveIfCharDie: 0
+        Health: {x: 40, y: 45}
+        HealthRegeneration: {x: 3, y: 3}
+        BaseDamage: {x: 5, y: 8}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.7, y: 1.7}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 0
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile: []
+    - name: Crabera
+      NPCType: 0
+      NumberOfCharacter: 4
+      TypeOfCharacter:
+        CharacterName: 1022
+        KillWaveIfCharDie: 0
+        Health: {x: 70, y: 80}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 8, y: 10}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.6, y: 1.6}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 0.8, y: 0.8}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 0
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile: []
+    - name: Fishylla
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 1021
+        KillWaveIfCharDie: 0
+        Health: {x: 40, y: 45}
+        HealthRegeneration: {x: 3, y: 3}
+        BaseDamage: {x: 5, y: 8}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.7, y: 1.7}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 0
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile: []
+  - name: WaveLoudAlone
+    IsRandom: 0
+    MaxEnemyOnScreen: 1
+    AbsoluteMaxEnemyOnScreen: 0
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Loud
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1045
+        KillWaveIfCharDie: 0
+        Health: {x: 40, y: 45}
+        HealthRegeneration: {x: 0, y: 0}
+        BaseDamage: {x: 5, y: 8}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.7, y: 1.7}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 0
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile: []
+  - name: WaveLoudMinion
+    IsRandom: 0
+    MaxEnemyOnScreen: 5
+    AbsoluteMaxEnemyOnScreen: 0
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Crabera
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 1022
+        KillWaveIfCharDie: 0
+        Health: {x: 70, y: 80}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 8, y: 10}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.6, y: 1.6}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 0.8, y: 0.8}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 0
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile: []
+    - name: Mothra
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1023
+        KillWaveIfCharDie: 0
+        Health: {x: 40, y: 42}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 4, y: 7}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 0
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile: []
+    - name: Fishylla
+      NPCType: 0
+      NumberOfCharacter: 6
+      TypeOfCharacter:
+        CharacterName: 1021
+        KillWaveIfCharDie: 0
+        Health: {x: 40, y: 45}
+        HealthRegeneration: {x: 3, y: 3}
+        BaseDamage: {x: 5, y: 8}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.7, y: 1.7}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 0
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile: []
+    - name: Toka
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1020
+        KillWaveIfCharDie: 0
+        Health: {x: 100, y: 150}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 10, y: 13}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 0.8, y: 0.8}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 0
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile: []
+  - name: Wave3
+    IsRandom: 0
+    MaxEnemyOnScreen: 5
+    AbsoluteMaxEnemyOnScreen: 0
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Mermer
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1025
+        KillWaveIfCharDie: 0
+        Health: {x: 300, y: 320}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 16, y: 22}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 2, y: 2}
+        AttackSpeedRatio: {x: 15, y: 20}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.5, y: 1.5}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Crabera
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1022
+        KillWaveIfCharDie: 0
+        Health: {x: 70, y: 80}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 8, y: 10}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.6, y: 1.6}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 0.8, y: 0.8}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Fishylla
+      NPCType: 0
+      NumberOfCharacter: 4
+      TypeOfCharacter:
+        CharacterName: 1021
+        KillWaveIfCharDie: 0
+        Health: {x: 40, y: 45}
+        HealthRegeneration: {x: 3, y: 3}
+        BaseDamage: {x: 5, y: 8}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.7, y: 1.7}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Toka
+      NPCType: 0
+      NumberOfCharacter: 4
+      TypeOfCharacter:
+        CharacterName: 1020
+        KillWaveIfCharDie: 0
+        Health: {x: 100, y: 150}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 10, y: 13}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 0.8, y: 0.8}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+  - name: WaveDeedra
+    IsRandom: 0
+    MaxEnemyOnScreen: 1
+    AbsoluteMaxEnemyOnScreen: 0
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Epa
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1024
+        KillWaveIfCharDie: 0
+        Health: {x: 310, y: 350}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 18, y: 21}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 2, y: 2}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.1, y: 1.1}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+  - name: WaveDeedraMinion
+    IsRandom: 0
+    MaxEnemyOnScreen: 1
+    AbsoluteMaxEnemyOnScreen: 0
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Tikaka
+      NPCType: 2
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1028
+        KillWaveIfCharDie: 0
+        Health: {x: 800, y: 800}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 17, y: 21}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 1.8, y: 1.8}
+        BaseSpeed: {x: 1.3, y: 1.3}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 15, y: 15}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.3, y: 1.3}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+  - name: WaveSwitch
+    IsRandom: 0
+    MaxEnemyOnScreen: 1
+    AbsoluteMaxEnemyOnScreen: 0
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Switch
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1044
+        KillWaveIfCharDie: 0
+        Health: {x: 1000, y: 1000}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 17, y: 21}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 1.8, y: 1.8}
+        BaseSpeed: {x: 1.3, y: 1.3}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 15, y: 15}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.3, y: 1.3}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+  - name: WaveSwitchMinion
+    IsRandom: 0
+    MaxEnemyOnScreen: 1
+    AbsoluteMaxEnemyOnScreen: 0
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Tikaka
+      NPCType: 2
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1028
+        KillWaveIfCharDie: 0
+        Health: {x: 800, y: 800}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 17, y: 21}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 1.8, y: 1.8}
+        BaseSpeed: {x: 1.3, y: 1.3}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 15, y: 15}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.3, y: 1.3}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+  - name: WaveSwitchSurvive
+    IsRandom: 0
+    MaxEnemyOnScreen: 1
+    AbsoluteMaxEnemyOnScreen: 0
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Tikaka
+      NPCType: 2
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1028
+        KillWaveIfCharDie: 0
+        Health: {x: 800, y: 800}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 17, y: 21}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 1.8, y: 1.8}
+        BaseSpeed: {x: 1.3, y: 1.3}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 15, y: 15}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.3, y: 1.3}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+  - name: WaveMainFrame
+    IsRandom: 0
+    MaxEnemyOnScreen: 1
+    AbsoluteMaxEnemyOnScreen: 0
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Tikaka
+      NPCType: 2
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1028
+        KillWaveIfCharDie: 0
+        Health: {x: 800, y: 800}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 17, y: 21}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 1.8, y: 1.8}
+        BaseSpeed: {x: 1.3, y: 1.3}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 15, y: 15}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.3, y: 1.3}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+  - name: WaveMainFrameDeedra
+    IsRandom: 0
+    MaxEnemyOnScreen: 1
+    AbsoluteMaxEnemyOnScreen: 0
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Tikaka
+      NPCType: 2
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1028
+        KillWaveIfCharDie: 0
+        Health: {x: 800, y: 800}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 17, y: 21}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 1.8, y: 1.8}
+        BaseSpeed: {x: 1.3, y: 1.3}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 15, y: 15}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.3, y: 1.3}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+  - name: WaveTalking
+    IsRandom: 0
+    MaxEnemyOnScreen: 2
+    AbsoluteMaxEnemyOnScreen: 0
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Loud
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1045
+        KillWaveIfCharDie: 0
+        Health: {x: 800, y: 800}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 17, y: 21}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 1.8, y: 1.8}
+        BaseSpeed: {x: 1.3, y: 1.3}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 15, y: 15}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.3, y: 1.3}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Switch
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1044
+        KillWaveIfCharDie: 0
+        Health: {x: 800, y: 800}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 17, y: 21}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 1.8, y: 1.8}
+        BaseSpeed: {x: 1.3, y: 1.3}
+        AttackSpeedRatio: {x: 12, y: 15}
+        Stamina: {x: 15, y: 15}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.3, y: 1.3}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+  isWaveComplete: 0
+  WaveCharcters: []
+  StartWave: 0
