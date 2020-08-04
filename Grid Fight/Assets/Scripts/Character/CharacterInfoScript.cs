@@ -162,7 +162,7 @@ public class CharacterInfoScript : MonoBehaviour
 
         [Header("OLD Movement System")]
 
-        public float MovementSpeed;
+        public float MovementSpeed = 1;
         public MovementInfoClass FirstMovement;
         public LoopMovementInfoClass LoopMovement;
       
