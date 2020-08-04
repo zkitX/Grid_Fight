@@ -924,55 +924,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 currentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos) && r.BattleTileState == BattleTileStateType.Empty).ToList().Count ==
                 currentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos)).ToList().Count && GridManagerScript.Instance.isPosOnField(UMS.CurrentTilePos + dir))
             {
-                float transitionTime = 0;
-                float animPerc = 0;
                 if (AnimState.ToString() == SpineAnim.CurrentAnim)
-                {
-                    //Debug.LogError(CharInfo.CharacterID + "     loop");
-                    if (AnimState == CharacterAnimationStateType.DashLeft)
-                    {
-                        transitionTime = CharInfo.SpeedStats.LoopMovement.StartLoopMovementPercForward;
-                        animPerc = CharInfo.SpeedStats.LoopMovement.EndLoopMovementPercForward;
-                    }
-                    else if (AnimState == CharacterAnimationStateType.DashRight)
-                    {
-                        transitionTime = CharInfo.SpeedStats.LoopMovement.StartLoopMovementPercBackward;
-                        animPerc = CharInfo.SpeedStats.LoopMovement.EndLoopMovementPercBackward;
-                    }
-                    else if (AnimState == CharacterAnimationStateType.DashUp)
-                    {
-                        transitionTime = CharInfo.SpeedStats.LoopMovement.StartLoopMovementPercUp;
-                        animPerc = CharInfo.SpeedStats.LoopMovement.EndLoopMovementPercUp;
-                    }
-                    else if (AnimState == CharacterAnimationStateType.DashDown)
-                    {
-                        transitionTime = CharInfo.SpeedStats.LoopMovement.StartLoopMovementPercDown;
-                        animPerc = CharInfo.SpeedStats.LoopMovement.EndLoopMovementPercDown;
-                    }
-                }
-                else
-                {
-                    //Debug.LogError(CharInfo.CharacterID + "     start     " + AnimState.ToString() + "   " + SpineAnim.CurrentAnim);
-                    if (AnimState == CharacterAnimationStateType.DashLeft)
-                    {
-                        animPerc = CharInfo.SpeedStats.FirstMovement.MovementPercForward;
-                    }
-                    else if (AnimState == CharacterAnimationStateType.DashRight)
-                    {
-                        animPerc = CharInfo.SpeedStats.FirstMovement.MovementPercBackward;
-                    }
-                    else if (AnimState == CharacterAnimationStateType.DashUp)
-                    {
-                        animPerc = CharInfo.SpeedStats.FirstMovement.MovementPercUp;
-                    }
-                    else if (AnimState == CharacterAnimationStateType.DashDown)
-                    {
-                        animPerc = CharInfo.SpeedStats.FirstMovement.MovementPercDown;
-                    }
-                }
-
-                if (transitionTime > 0)
-                {
+                { 
                     float speed = ((SpineAnim.GetAnimLenght(AnimState) * CharInfo.SpeedStats.LoopPerc) / CharInfo.SpeedStats.TileMovementTime) * CharInfo.SpeedStats.MovementSpeed * CharInfo.BaseSpeed;
                     SpineAnim.SetAnimationSpeed(speed);
                     SpineAnim.skeletonAnimation.state.GetCurrent(0).TrackTime = SpineAnim.GetAnimLenght(AnimState) * CharInfo.SpeedStats.IntroPerc;
@@ -1034,7 +987,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                             FireActionEvent(CharacterActionType.MoveRight);
                             break;
                     }
-                    MoveCo = MoveByTileSpace(resbts.transform.position, curve, SpineAnim.GetAnimLenght(AnimState) - transitionTime, animPerc);
+                    MoveCo = MoveByTileSpace(resbts.transform.position, curve, CharInfo.SpeedStats.CuttingPerc);
                     yield return MoveCo;
                 }
                 else
@@ -1174,7 +1127,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
 
     bool stopCo = false;
-    public virtual IEnumerator MoveByTileSpace(Vector3 nextPos, AnimationCurve curve, float animLength, float animPerc)
+    public virtual IEnumerator MoveByTileSpace(Vector3 nextPos, AnimationCurve curve, float animPerc)
     {
         //  Debug.Log(AnimLength + "  AnimLenght   " + AnimLength / CharInfo.MovementSpeed + " Actual duration" );
         //Debug.Log("StartMoveCo  " + Time.time);
@@ -1653,7 +1606,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             return;
         }
-        //Debug.Log(animState.ToString() + SpineAnim.CurrentAnim.ToString() + CharInfo.CharacterID.ToString());
+        Debug.Log(animState + SpineAnim.CurrentAnim + CharInfo.CharacterID.ToString());
         if (animState == CharacterAnimationStateType.Reverse_Arriving.ToString())
         {
         }
@@ -1696,7 +1649,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             if (animState.Contains("Intro"))
             {
-                AnimSpeed = CharInfo.SpeedStats.TileMovementTime * CharInfo.SpeedStats.IntroTileMovementSpeed;
+               // AnimSpeed = CharInfo.SpeedStats.TileMovementTime * CharInfo.SpeedStats.IntroTileMovementSpeed;
             }
         }
         else if (animState.Contains("JumpTransition") || animState.Contains("Arriv"))

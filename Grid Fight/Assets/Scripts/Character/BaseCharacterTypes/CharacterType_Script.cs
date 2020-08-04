@@ -733,7 +733,7 @@ public class CharacterType_Script : BaseCharacter
                 {
                     string nextAnim = completedAnim.Split('_').First() + "_End";
                     SpineAnim.SpineAnimationState.SetAnimation(0, nextAnim, false);
-                    SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.EndTileMovementSpeed);
+                    //SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.EndTileMovementSpeed);
                     SpineAnim.CurrentAnim = nextAnim;
                 }
                 else if (waitingForNextMove == waitingForNextMoveType.none)

@@ -138,40 +138,15 @@ public class CharacterInfoScript : MonoBehaviour
     public class SpeedStastsClass
     {
         public float BaseSpeed = 1;
-        [Header("NEW Movement System")]
         [Range(0, 2)]
         public float TileMovementTime = 1;
 
-        /*public float TileMovementTime
-        {
-            get
-            {
-                return (0.5f / _TileMovementTime) * BaseSpeed;
-            }
-            set
-            {
-                _TileMovementTime = value;
-            }
-        }*/
-
-
-        [Range(0, 150)]
-        public float IntroTileMovementSpeed = 1;
-        [Range(0, 150)]
-        public float EndTileMovementSpeed = 1;
-
-        [Header("OLD Movement System")]
-
         public float MovementSpeed = 1;
-        public MovementInfoClass FirstMovement;
-        public LoopMovementInfoClass LoopMovement;
+        public float CuttingPerc = 0.85f;
 
-
-        [Header("New_OLD Movement System")]
         public float IntroPerc = 0.15f;
         public float LoopPerc = 0.70f;
         public float EndPerc = 0.15f;
-
 
         public float AttackSpeed = 1;
         public float AttackSpeedRatio;
@@ -500,38 +475,4 @@ public class AIInfoCLass
         AI = ai;
         Score = score;
     }
-}
-
-[System.Serializable]
-public class MovementInfoClass
-{
-    [Range(0, 1)]
-    public float MovementPercUp = 0.85f;
-    [Range(0, 1)]
-    public float MovementPercDown = 0.85f;
-    [Range(0, 1)]
-    public float MovementPercForward = 0.85f;
-    [Range(0, 1)]
-    public float MovementPercBackward = 0.85f;
-}
-
-[System.Serializable]
-public class LoopMovementInfoClass
-{
-    [Range(0, 1)]
-    public float StartLoopMovementPercUp = 0.15f;
-    [Range(0, 1)]
-    public float EndLoopMovementPercUp = 0.85f;
-    [Range(0, 1)]
-    public float StartLoopMovementPercDown = 0.15f;
-    [Range(0, 1)]
-    public float EndLoopMovementPercDown = 0.85f;
-    [Range(0, 1)]
-    public float StartLoopMovementPercForward = 0.15f;
-    [Range(0, 1)]
-    public float EndLoopMovementPercForward = 0.85f;
-    [Range(0, 1)]
-    public float StartLoopMovementPercBackward = 0.15f;
-    [Range(0, 1)]
-    public float EndLoopMovementPercBackward = 0.85f;
 }

@@ -175,7 +175,7 @@ public class Stage01_Boss_Script : MinionType_Script
                     }
                     BattleManagerScript.Instance.OccupiedBattleTiles.AddRange(CurrentBattleTiles);
 
-                    MoveCo = MoveByTileSpace(resbts.transform.position, new AnimationCurve(), 0, 0);
+                    MoveCo = MoveByTileSpace(resbts.transform.position, new AnimationCurve(), 0);
                     yield return MoveCo;
                 }
                 else
@@ -188,7 +188,7 @@ public class Stage01_Boss_Script : MinionType_Script
 
 
 
-    public override IEnumerator MoveByTileSpace(Vector3 nextPos, AnimationCurve curve, float animLength, float animPerc)
+    public override IEnumerator MoveByTileSpace(Vector3 nextPos, AnimationCurve curve, float animPerc)
     {
         if(MovementPsOut == null)
         {
