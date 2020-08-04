@@ -29,7 +29,16 @@ public class ScriptableObjectAttackBase : ScriptableObject
     public AttackAnimType AttackAnim;
     public float StaminaCost = 10;
     [HideInInspector] public float ExperiencePoints = 10;
-    public float CoolDown = 10;
+    public Vector2 _CoolDown = new Vector2(3,5);
+    [HideInInspector]public float CoolDown
+    {
+        get
+        {
+            return Random.Range(_CoolDown.x, _CoolDown.y);
+        }
+    }
+
+
     [HideInInspector] public AttackAnimPrefixType PrefixAnim;
     public FieldOfViewType Fov;
     public AttackParticlesClass Particles;
