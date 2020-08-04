@@ -151,7 +151,7 @@ public class WaveManagerScript : MonoBehaviour
         res.CharInfo.RapidAttack.DamageMultiplier = character.RapidAttackMultiplier;
         res.CharInfo.PowerfulAttac.DamageMultiplier = character.PowerfulAttackMultiplier;
         res.CharInfo.Health = res.CharInfo.HealthStats.Base;
-        res.CharInfo.SpeedStats.TileMovementTime = Random.Range(character.MovementSpeed.x, character.MovementSpeed.y);
+        res.CharInfo.SpeedStats.MovementSpeed = Random.Range(character.MovementSpeed.x, character.MovementSpeed.y);
         res.CharInfo.MovementTimer = character.MovementTimer;
 
 
