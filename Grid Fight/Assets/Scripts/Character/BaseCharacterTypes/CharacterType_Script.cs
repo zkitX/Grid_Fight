@@ -729,11 +729,18 @@ public class CharacterType_Script : BaseCharacter
 
             if (completedAnim.Contains("Loop"))
             {
-                if(!waitingForNextMove)
+                if(waitingForNextMove == waitingForNextMoveType.none)
                 {
                     string nextAnim = completedAnim.Split('_').First() + "_End";
                     SpineAnim.SpineAnimationState.SetAnimation(0, nextAnim, false);
                     SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.EndTileMovementSpeed);
+                    SpineAnim.CurrentAnim = nextAnim;
+                }
+                else if (waitingForNextMove == waitingForNextMoveType.none)
+                {
+                    string nextAnim = completedAnim.Split('_').First() + "_Loop";
+                    SpineAnim.SpineAnimationState.SetAnimation(0, nextAnim, false);
+                    SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.TileMovementTime);
                     SpineAnim.CurrentAnim = nextAnim;
                 }
                 return;

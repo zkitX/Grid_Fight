@@ -773,22 +773,28 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public bool NewMovementSystem = false;
     IEnumerator nextMoveCo = null;
-    protected bool waitingForNextMove = false;
+    protected enum waitingForNextMoveType
+    {
+        none,
+        Loop,
+        Complete
+    }
+    protected waitingForNextMoveType waitingForNextMove = waitingForNextMoveType.none;
     InputDirectionType New_nextDir;
     public virtual IEnumerator MoveCharOnDir_Co(InputDirectionType nextDir)
     {
         if (NewMovementSystem)
         {
             New_nextDir = nextDir;
-            if (!waitingForNextMove && enableNextMove)
+            if (enableNextMove)
             {
-                waitingForNextMove = true;
+                waitingForNextMove = waitingForNextMoveType.Loop;
+                enableNextMove = false;
                 while (isMoving)
                 {
                     yield return null;
                 }
                 yield return NewMoveSystem();
-                waitingForNextMove = false;
             }
            
         }
@@ -967,14 +973,14 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
                 if (transitionTime > 0)
                 {
-                    float value = (SpineAnim.GetAnimLenght(AnimState) * transitionTime) / (CharInfo.SpeedStats.MovementSpeed * CharInfo.BaseSpeed);
-                    //Debug.LogError(value);
-                    SpineAnim.skeletonAnimation.state.GetCurrent(0).TrackTime = value;
+                    float speed = ((SpineAnim.GetAnimLenght(AnimState) * CharInfo.SpeedStats.LoopPerc) / CharInfo.SpeedStats.TileMovementTime) * CharInfo.SpeedStats.MovementSpeed * CharInfo.BaseSpeed;
+                    SpineAnim.SetAnimationSpeed(speed);
+                    SpineAnim.skeletonAnimation.state.GetCurrent(0).TrackTime = SpineAnim.GetAnimLenght(AnimState) * CharInfo.SpeedStats.IntroPerc;
                 }
                 else
                 {
                     SetAnimation(AnimState.ToString());
-
+                    SpineAnim.SetAnimationSpeed((SpineAnim.GetAnimLenght(AnimState) * (CharInfo.SpeedStats.IntroPerc + CharInfo.SpeedStats.LoopPerc) / CharInfo.SpeedStats.TileMovementTime) * CharInfo.SpeedStats.MovementSpeed * CharInfo.BaseSpeed);
                 }
                 isMoving = true;
                 if (prevBattleTile.Count > 1)
@@ -1187,7 +1193,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         while (timer < 1 && !stopCo)
         {
             yield return BattleManagerScript.Instance.WaitFixedUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-            timer += (BattleManagerScript.Instance.FixedDeltaTime / (1 / (CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed * BattleManagerScript.Instance.MovementMultiplier)));
+            timer += (BattleManagerScript.Instance.FixedDeltaTime / (CharInfo.SpeedStats.TileMovementTime / (CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed * BattleManagerScript.Instance.MovementMultiplier)));
             spaceTimer = curve.Evaluate(timer);
             spineT.localPosition = Vector3.Lerp(localoffset, LocalSpinePosoffset, spaceTimer);
 
@@ -1216,6 +1222,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         spineT.localPosition = LocalSpinePosoffset;
         //Debug.Log("EndMoveCo");
     }
+    public float tre = 0.95f;
     public float est = 0.8f;
     bool enableNextMove = true;
     public virtual IEnumerator MoveByTileSpace(Vector3 nextPos, AnimationCurve curve)
@@ -1226,18 +1233,17 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         stopCo = false;
         float spaceTimer = 0;
         EndAxisMovement = false;
-        enableNextMove = false;
         Transform spineT = SpineAnim.transform;
         Vector3 offset = spineT.position;
         transform.position = nextPos;
         spineT.position = offset;
         Vector3 localoffset = spineT.localPosition;
         bool s = false;
-        while (timer < 1 && !stopCo)
+        while (timer < tre && !stopCo)
         {
             Debug.Log(timer + "            timer");
             yield return BattleManagerScript.Instance.WaitFixedUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-            timer += BattleManagerScript.Instance.FixedDeltaTime * CharInfo.SpeedStats.TileMovementTime;
+            timer += BattleManagerScript.Instance.FixedDeltaTime * CharInfo.SpeedStats.TileMovementTime * 2;
             spaceTimer = curve.Evaluate(timer);
             spineT.localPosition = Vector3.Lerp(localoffset, LocalSpinePosoffset, spaceTimer);
 
@@ -1253,6 +1259,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             {
                 s = true;
                 enableNextMove = true;
+                waitingForNextMove = waitingForNextMoveType.none;
             }
         }
         

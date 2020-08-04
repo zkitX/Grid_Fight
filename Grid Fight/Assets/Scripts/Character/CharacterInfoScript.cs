@@ -140,9 +140,9 @@ public class CharacterInfoScript : MonoBehaviour
         public float BaseSpeed = 1;
         [Header("NEW Movement System")]
         [Range(0, 2)]
-        public float _TileMovementTime = 1;
+        public float TileMovementTime = 1;
 
-        public float TileMovementTime
+        /*public float TileMovementTime
         {
             get
             {
@@ -152,7 +152,7 @@ public class CharacterInfoScript : MonoBehaviour
             {
                 _TileMovementTime = value;
             }
-        }
+        }*/
 
 
         [Range(0, 150)]
@@ -165,7 +165,12 @@ public class CharacterInfoScript : MonoBehaviour
         public float MovementSpeed = 1;
         public MovementInfoClass FirstMovement;
         public LoopMovementInfoClass LoopMovement;
-      
+
+
+        [Header("New_OLD Movement System")]
+        public float IntroPerc = 0.15f;
+        public float LoopPerc = 0.70f;
+        public float EndPerc = 0.15f;
 
 
         public float AttackSpeed = 1;
