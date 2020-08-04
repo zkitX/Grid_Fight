@@ -46,6 +46,11 @@ public class Stage02_Boss_Script : MinionType_Script
         base.SpineAnimationState_Complete(trackEntry);
     }
 
+    public override string GetAttackAnimName()
+    {
+        return "Undo_Loop";
+    }
+
     public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
         if (attacker == this) return true;

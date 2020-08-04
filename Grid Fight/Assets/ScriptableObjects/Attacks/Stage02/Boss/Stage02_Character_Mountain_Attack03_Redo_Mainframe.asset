@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage02_Character_Mountain_Attack03_Redo_Mainframe
   m_EditorClassIdentifier: 
+  isSequencedAttack: 1
   Chances: 100
   CurrentAttackType: 1
   AttackRatioMultiplier: 0
@@ -25,17 +26,17 @@ MonoBehaviour:
   Fov: 0
   Particles:
     Left:
-      Cast: {fileID: 6700687939425037103, guid: f6905044782328349a427390982ac972,
+      Cast: {fileID: 4328906655471786625, guid: 2ab4082a214d88f43bfc1d1c779f1cf9,
         type: 3}
-      Bullet: {fileID: 519162401181753298, guid: 94f2bc4d521dfc641836258f5864fe4e,
+      Bullet: {fileID: 4328906655471786625, guid: 2ab4082a214d88f43bfc1d1c779f1cf9,
         type: 3}
-      Hit: {fileID: 7437313021115260856, guid: 03eabf56bbad1d0469073ea35ed60482, type: 3}
+      Hit: {fileID: 8300437257433541292, guid: 295cca7661b234141976e1fc761af2dc, type: 3}
     Right:
-      Cast: {fileID: 8678259934600349390, guid: 3fa07c91702c4814fa5dbab4aa2b56eb,
+      Cast: {fileID: 4328906655471786625, guid: 2ab4082a214d88f43bfc1d1c779f1cf9,
         type: 3}
-      Bullet: {fileID: 519162401181753298, guid: 6eaa1251c1e81f442bb170cbade492fe,
+      Bullet: {fileID: 4328906655471786625, guid: 2ab4082a214d88f43bfc1d1c779f1cf9,
         type: 3}
-      Hit: {fileID: 3340275309439334971, guid: 65c3aa31c8312524d8cfd08d17c50b54, type: 3}
+      Hit: {fileID: 8300437257433541292, guid: 295cca7661b234141976e1fc761af2dc, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
@@ -248,7 +249,7 @@ MonoBehaviour:
     StatToCheck: 1
     ValueChecker: 2
     PercToCheck: 0
-    Chances: 100
+    Chances: 50
   TotemAtk:
     AtkType: 3
     IsPlayerSide: 0

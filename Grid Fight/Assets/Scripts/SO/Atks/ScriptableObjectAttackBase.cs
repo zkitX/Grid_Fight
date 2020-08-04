@@ -11,6 +11,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/atkbase")]
 public class ScriptableObjectAttackBase : ScriptableObject
 {
+    [HideInInspector] public bool isSequencedAttack = false;
     [HideInInspector]
     public float DamageMultiplier
     {
