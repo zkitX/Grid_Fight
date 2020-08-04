@@ -141,6 +141,7 @@ public class WaveManagerScript : MonoBehaviour
         {
             res.CurrentCharIsDeadEvent += Res_CurrentCharIsDeadEvent;
         }
+        
         res.CharInfo.HealthStats.Base = Random.Range(character.Health.x, character.Health.y) * UniversalGameBalancer.Instance.difficulty.enemyHealthScaler;
         res.CharInfo.HealthStats.Regeneration = Random.Range(character.HealthRegeneration.x, character.HealthRegeneration.y);
         res.CharInfo.StaminaStats.Base = Random.Range(character.Stamina.x, character.Stamina.y);
@@ -151,21 +152,10 @@ public class WaveManagerScript : MonoBehaviour
         res.CharInfo.RapidAttack.DamageMultiplier = character.RapidAttackMultiplier;
         res.CharInfo.PowerfulAttac.DamageMultiplier = character.PowerfulAttackMultiplier;
         res.CharInfo.Health = res.CharInfo.HealthStats.Base;
+        res.CharInfo.Stamina = res.CharInfo.StaminaStats.Base;
         res.CharInfo.SpeedStats.MovementSpeed = Random.Range(character.MovementSpeed.x, character.MovementSpeed.y);
         res.CharInfo.MovementTimer = character.MovementTimer;
-
-
-        res.CharInfo.HealthStats.B_Base = res.CharInfo.HealthStats.Base;
-        res.CharInfo.HealthStats.B_Regeneration = res.CharInfo.HealthStats.Regeneration;
-        res.CharInfo.StaminaStats.B_Base = res.CharInfo.StaminaStats.Base;
-        res.CharInfo.StaminaStats.B_Regeneration = res.CharInfo.StaminaStats.Regeneration;
-        res.CharInfo.SpeedStats.B_BaseSpeed = res.CharInfo.SpeedStats.BaseSpeed;
-        res.CharInfo.SpeedStats.B_AttackSpeedRatio = res.CharInfo.SpeedStats.AttackSpeedRatio;
-        res.CharInfo.DamageStats.B_BaseDamage = res.CharInfo.DamageStats.BaseDamage;
-        res.CharInfo.RapidAttack.B_DamageMultiplier = res.CharInfo.RapidAttack.DamageMultiplier;
-        res.CharInfo.PowerfulAttac.B_DamageMultiplier = res.CharInfo.PowerfulAttac.DamageMultiplier;
-        res.CharInfo.SpeedStats.B_MovementSpeed = res.CharInfo.SpeedStats.MovementSpeed / UniversalGameBalancer.Instance.difficulty.enemyMoveDurationScaler;
-        res.CharInfo.B_MovementTimer = res.CharInfo.MovementTimer;
+        
         res.CharInfo.ExperienceValue = character.Exp;
 
         res.CharActionlist.Add(CharacterActionType.Move);
@@ -175,6 +165,7 @@ public class WaveManagerScript : MonoBehaviour
             res.CharInfo.CurrentAttackTypeInfo.AddRange(character.AttacksToAdd);
         }
         //res.CharInfo.CurrentAttackTypeInfo.Clear();
+        res.CharInfo.SetupChar();
         return res;
     }
 

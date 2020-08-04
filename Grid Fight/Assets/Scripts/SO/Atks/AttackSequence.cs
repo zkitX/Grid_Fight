@@ -38,6 +38,7 @@ public class AttackSequence
     [ConditionalField("StatToCheck", true, StatsCheckType.None)] public ValueCheckerType ValueChecker = ValueCheckerType.LessThan;
     [ConditionalField("StatToCheck", true, StatsCheckType.None)] public float PercToCheck = 100f;
     [Range(0, 100)] public int Chances = 100;
+    protected bool chanceChecked = false;
 
     protected float curCheckValPerc = 0f;
 
@@ -66,7 +67,11 @@ public class AttackSequence
             }
 
             //Reset triggered value if the value check fails
-            if(!value) triggered = triggerType == TriggerType.TriggerAndReset ? false : triggered;
+            if (!value)
+            {
+                triggered = triggerType == TriggerType.TriggerAndReset ? false : triggered;
+                chanceChecked = triggerType == TriggerType.TriggerAndReset ? false : chanceChecked;
+            }
             return value;
         }
     }
@@ -75,6 +80,8 @@ public class AttackSequence
     {
         get
         {
+            if (chanceChecked) return false;
+            chanceChecked = true;
             return Random.Range(0, 100) < Chances;
         }
     }
@@ -106,9 +113,12 @@ public class AttackSequence
                 break;
         }
 
-        if (PercCompare && PassesChanceCheck && !triggered)
+        if (PercCompare)
         {
-            return true;
+            if (PassesChanceCheck && !triggered)
+            {
+                return true;
+            }
         }
 
         return false;

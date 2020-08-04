@@ -21,7 +21,7 @@ MonoBehaviour:
   AttackAnim: 0
   StaminaCost: 0
   ExperiencePoints: 10
-  CoolDown: 1.4
+  _CoolDown: {x: 3, y: 5}
   PrefixAnim: 0
   Fov: 1
   Particles:
@@ -112,21 +112,21 @@ MonoBehaviour:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 1
+          value: 0
           inSlope: 0
           outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0
+          outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 1
+          value: 0
           inSlope: 0
           outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0
+          inWeight: 0.33333334
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -136,21 +136,21 @@ MonoBehaviour:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 1
+          value: 0
           inSlope: 0
           outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0
+          outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 1
+          value: 0
           inSlope: 0
           outSlope: 0
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0
+          inWeight: 0.33333334
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -158,106 +158,6 @@ MonoBehaviour:
       Show: 1
       BulletEffectTiles:
       - Pos: {x: 0, y: 0}
-        HasEffect: 1
-        showImpact: 1
-        Effects:
-        - {fileID: 11400000, guid: 45f7336470dc3354da19c6434fed552e, type: 2}
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: 0, y: -1}
-        HasEffect: 1
-        showImpact: 1
-        Effects:
-        - {fileID: 11400000, guid: 45f7336470dc3354da19c6434fed552e, type: 2}
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: 0, y: 1}
-        HasEffect: 1
-        showImpact: 1
-        Effects:
-        - {fileID: 11400000, guid: 45f7336470dc3354da19c6434fed552e, type: 2}
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: 0, y: -2}
-        HasEffect: 1
-        showImpact: 1
-        Effects:
-        - {fileID: 11400000, guid: 45f7336470dc3354da19c6434fed552e, type: 2}
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: 0, y: 2}
-        HasEffect: 1
-        showImpact: 1
-        Effects:
-        - {fileID: 11400000, guid: 45f7336470dc3354da19c6434fed552e, type: 2}
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: -1, y: 0}
-        HasEffect: 1
-        showImpact: 1
-        Effects:
-        - {fileID: 11400000, guid: 45f7336470dc3354da19c6434fed552e, type: 2}
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: 1, y: 0}
-        HasEffect: 1
-        showImpact: 1
-        Effects:
-        - {fileID: 11400000, guid: 45f7336470dc3354da19c6434fed552e, type: 2}
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: 1, y: -1}
-        HasEffect: 1
-        showImpact: 1
-        Effects:
-        - {fileID: 11400000, guid: 45f7336470dc3354da19c6434fed552e, type: 2}
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: -1, y: -1}
-        HasEffect: 1
-        showImpact: 1
-        Effects:
-        - {fileID: 11400000, guid: 45f7336470dc3354da19c6434fed552e, type: 2}
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: -1, y: 1}
-        HasEffect: 1
-        showImpact: 1
-        Effects:
-        - {fileID: 11400000, guid: 45f7336470dc3354da19c6434fed552e, type: 2}
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: 1, y: 1}
         HasEffect: 1
         showImpact: 1
         Effects:

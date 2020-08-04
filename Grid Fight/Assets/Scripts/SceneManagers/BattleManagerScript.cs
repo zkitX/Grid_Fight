@@ -853,9 +853,9 @@ public class BattleManagerScript : MonoBehaviour
 
 
         //Set up the cloning particles
-        //GameObject cloneParticles = ParticleManagerScript.Instance.GetParticle(isPlayer ? ParticlesType.Skill_Might_1_Copy : ParticlesType.Chapter02_TheBurg_Boss_Copy_Effect);
-        //cloneParticles.SetActive(true);
-        //cloneParticles.transform.position = original.SpineAnim.transform.position;
+        GameObject originalParticles = ParticleManagerScript.Instance.GetParticle(ParticlesType.Skill_Might_1_LegionOriginal);
+        originalParticles.SetActive(true);
+        originalParticles.transform.position = original.SpineAnim.transform.position;
 
 
         //Creating the clone
@@ -873,16 +873,20 @@ public class BattleManagerScript : MonoBehaviour
         //
 
 
+        BattleTileScript cloneSpawnTile = GridManagerScript.Instance.GetFreeBattleTile(original.UMS.WalkingSide);
+
+
         //Give the clone it's effects to distinguish it from the original
-        //cloneParticles = ParticleManagerScript.Instance.GetParticle(ParticlesType.Skill_Might_1_CloneEffects);
-        //cloneParticles.transform.parent = clone.SpineAnim.transform;
-        //cloneParticles.transform.localPosition = Vector3.zero;
-        //cloneParticles.SetActive(true);
+        GameObject cloneParticles = ParticleManagerScript.Instance.GetParticle(ParticlesType.Skill_Might_1_LegionClone);
+        cloneParticles.transform.parent = cloneSpawnTile.transform;
+        cloneParticles.transform.localPosition = Vector3.zero;
+        cloneParticles.SetActive(true);
         //
 
 
         //Set clone on the battlefield
-        yield return WaveManagerScript.Instance.SetCharInPos(clone, GridManagerScript.Instance.GetFreeBattleTile(original.UMS.WalkingSide), true);
+        yield return WaveManagerScript.Instance.SetCharInPos(clone, cloneSpawnTile, true);
+
 
         //Add new char to wave if it's a minion or player minion if it's a player clone
         if (!isPlayer) WaveManagerScript.Instance.WaveCharcters.Add(clone);

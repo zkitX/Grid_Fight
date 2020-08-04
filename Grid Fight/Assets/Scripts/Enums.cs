@@ -594,7 +594,6 @@ public enum ParticlesType
     Chapter01_TohoraSea_Boss_FaceChanging_MoonDrums = 1106,
     Chapter01_TohoraSea_Boss_CrystalTomb_Effect = 1107,
     Chapter05_AscensoMountain_FlowersSmoke = 5000,
-    Chapter02_TheBurg_Boss_Copy_Effect = 2000,
 
     // 2100 to 2999 ->      Mask Skills(leave 100 slots between masks)
     Skill_Mind_1_Loop = 2100,
@@ -603,9 +602,9 @@ public enum ParticlesType
     Skill_Mind_3_In = 2103,
     Skill_Mind_3_Loop = 2104,
     Skill_Mind_3_Tentacle = 2105,
-    Skill_Might_1_Copy = 2200,
-    Skill_Might_1_CloneEffects = 2201,
-    Skill_Might_1_CloneEnd = 2202,
+    Skill_Might_1_LegionOriginal = 2200,
+    Skill_Might_1_LegionClone = 2201,
+    Skill_Might_2_Invencible = 2202,
 
     // 3000 to 3499 -> Buff Status effects Buff
     Status_Buff_Power = 3000,//Atk
