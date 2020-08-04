@@ -722,7 +722,7 @@ public class CharacterType_Script : BaseCharacter
             {
                 string nextAnim = completedAnim.Split('_').First() + "_Loop";
                 SpineAnim.SpineAnimationState.SetAnimation(0, nextAnim, false);
-                SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.MovementSpeed);
+                SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.TileMovementTime);
                 SpineAnim.CurrentAnim = nextAnim;
                 return;
 

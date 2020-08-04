@@ -1177,7 +1177,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         while (timer < 1 && !stopCo)
         {
             yield return BattleManagerScript.Instance.WaitFixedUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-            timer += NewMovementSystem ? BattleManagerScript.Instance.FixedDeltaTime / CharInfo.SpeedStats.MovementSpeed : (BattleManagerScript.Instance.FixedDeltaTime / (1 / (CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed * BattleManagerScript.Instance.MovementMultiplier)));
+            timer += (BattleManagerScript.Instance.FixedDeltaTime / (1 / (CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed * BattleManagerScript.Instance.MovementMultiplier)));
             spaceTimer = curve.Evaluate(timer);
             spineT.localPosition = Vector3.Lerp(localoffset, LocalSpinePosoffset, spaceTimer);
 
@@ -1203,14 +1203,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 yield break;
             }
         }
-        if (NewMovementSystem)
-        {
-            isMoving = false;
-            TileMovementCompleteEvent?.Invoke(this);
-            MoveCo = null;
-            spineT.localPosition = LocalSpinePosoffset;
-        }
-
         spineT.localPosition = LocalSpinePosoffset;
         //Debug.Log("EndMoveCo");
     }
@@ -1234,7 +1226,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             Debug.Log(timer + "            timer");
             yield return BattleManagerScript.Instance.WaitFixedUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-            timer += BattleManagerScript.Instance.FixedDeltaTime * CharInfo.SpeedStats.MovementSpeed * 2;
+            timer += BattleManagerScript.Instance.FixedDeltaTime * CharInfo.SpeedStats.TileMovementTime * 2;
             spaceTimer = curve.Evaluate(timer);
             spineT.localPosition = Vector3.Lerp(localoffset, LocalSpinePosoffset, spaceTimer);
 
@@ -1687,7 +1679,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             if (animState.Contains("Intro"))
             {
-                AnimSpeed = CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.IntroTileMovementSpeed;
+                AnimSpeed = CharInfo.SpeedStats.TileMovementTime * CharInfo.SpeedStats.IntroTileMovementSpeed;
             }
         }
         else if (animState.Contains("JumpTransition") || animState.Contains("Arriv"))

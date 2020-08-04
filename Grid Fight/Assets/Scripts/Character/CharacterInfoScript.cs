@@ -138,22 +138,31 @@ public class CharacterInfoScript : MonoBehaviour
     public class SpeedStastsClass
     {
         public float BaseSpeed = 1;
+        [Header("NEW Movement System")]
         [Range(0, 2)]
-        public float TileMovementTime = 1;
+        public float _TileMovementTime = 1;
+
+        public float TileMovementTime
+        {
+            get
+            {
+                return (0.5f / _TileMovementTime) * BaseSpeed;
+            }
+            set
+            {
+                _TileMovementTime = value;
+            }
+        }
+
+
         [Range(0, 150)]
         public float IntroTileMovementSpeed = 1;
         [Range(0, 150)]
         public float EndTileMovementSpeed = 1;
 
-        [HideInInspector]
-        public float MovementSpeed
-        {
-            get
-            {
-                return (0.5f / TileMovementTime) * BaseSpeed;
-            }
-        }
+        [Header("OLD Movement System")]
 
+        public float MovementSpeed;
         public MovementInfoClass FirstMovement;
         public LoopMovementInfoClass LoopMovement;
       
