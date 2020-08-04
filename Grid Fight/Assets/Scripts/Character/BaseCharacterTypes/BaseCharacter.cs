@@ -772,21 +772,34 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
 
     public bool NewMovementSystem = false;
+    IEnumerator nextMoveCo = null;
+    protected bool waitingForNextMove = false;
+    InputDirectionType New_nextDir;
     public virtual IEnumerator MoveCharOnDir_Co(InputDirectionType nextDir)
     {
         if (NewMovementSystem)
         {
-            yield return NewMoveSystem(nextDir);
+            New_nextDir = nextDir;
+            if (!waitingForNextMove && enableNextMove)
+            {
+                waitingForNextMove = true;
+                while (isMoving)
+                {
+                    yield return null;
+                }
+                yield return NewMoveSystem();
+                waitingForNextMove = false;
+            }
+           
         }
         else
         {
             yield return OldMoveSystem(nextDir);
         }
-
     }
 
 
-    private IEnumerator NewMoveSystem(InputDirectionType nextDir)
+    private IEnumerator NewMoveSystem()
     {
         if ((CharInfo.Health > 0 && !isMoving && IsOnField && EndAxisMovement && SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving.ToString() && CharActionlist.Contains(CharacterActionType.Move)) || BattleManagerScript.Instance.VFXScene)
         {
@@ -794,6 +807,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             CharacterAnimationStateType AnimState;
             Vector2Int dir;
             AnimationCurve curve;
+            InputDirectionType nextDir = New_nextDir;
             GetDirectionVectorAndAnimationCurve(nextDir, out AnimState, out dir, out curve);
 
             currentBattleTilesToCheck = CheckTileAvailabilityUsingDir(dir);
@@ -807,10 +821,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
                 if (SpineAnim.CurrentAnim.Contains(AnimState.ToString().Split('_').First()))
                 {
-                    while (SpineAnim.CurrentAnim.Contains(AnimState.ToString() + "_Loop"))
-                    {
-                        yield return null;
-                    }
                     SetAnimation(AnimState.ToString() + "_Loop");
                 }
                 else
@@ -1207,7 +1217,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         //Debug.Log("EndMoveCo");
     }
     public float est = 0.8f;
-
+    bool enableNextMove = true;
     public virtual IEnumerator MoveByTileSpace(Vector3 nextPos, AnimationCurve curve)
     {
         //  Debug.Log(AnimLength + "  AnimLenght   " + AnimLength / CharInfo.MovementSpeed + " Actual duration" );
@@ -1216,6 +1226,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         stopCo = false;
         float spaceTimer = 0;
         EndAxisMovement = false;
+        enableNextMove = false;
         Transform spineT = SpineAnim.transform;
         Vector3 offset = spineT.position;
         transform.position = nextPos;
@@ -1226,7 +1237,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             Debug.Log(timer + "            timer");
             yield return BattleManagerScript.Instance.WaitFixedUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-            timer += BattleManagerScript.Instance.FixedDeltaTime * CharInfo.SpeedStats.TileMovementTime * 2;
+            timer += BattleManagerScript.Instance.FixedDeltaTime * CharInfo.SpeedStats.TileMovementTime;
             spaceTimer = curve.Evaluate(timer);
             spineT.localPosition = Vector3.Lerp(localoffset, LocalSpinePosoffset, spaceTimer);
 
@@ -1241,15 +1252,14 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             if (timer > est && !s)
             {
                 s = true;
-                isMoving = false;
+                enableNextMove = true;
             }
         }
-        if (NewMovementSystem)
-        {
-            TileMovementCompleteEvent?.Invoke(this);
-            MoveCo = null;
-            spineT.localPosition = LocalSpinePosoffset;
-        }
+        
+        isMoving = false;
+        TileMovementCompleteEvent?.Invoke(this);
+        MoveCo = null;
+        spineT.localPosition = LocalSpinePosoffset;
 
         spineT.localPosition = LocalSpinePosoffset;
         //Debug.Log("EndMoveCo");
@@ -1361,7 +1371,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 }
                 break;
             case BuffDebuffStatsType.SpeedStats_MovementSpeed:
-                CharInfo.SpeedStats.TileMovementTime += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_MovementSpeed / 100f) * currentBuffValue : currentBuffValue;
+                CharInfo.SpeedStats.MovementSpeed += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_MovementSpeed / 100f) * currentBuffValue : currentBuffValue;
                 break;
             case BuffDebuffStatsType.Drain:
                 val = bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Value ? currentBuffValue : (CharInfo.HealthStats.B_Base / 100) * currentBuffValue;
@@ -1464,7 +1474,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     }
                     break;
                 case BuffDebuffStatsType.SpeedStats_MovementSpeed:
-                    CharInfo.SpeedStats.TileMovementTime -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_MovementSpeed / 100f) * currentBuffValue : currentBuffValue;
+                    CharInfo.SpeedStats.MovementSpeed -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_MovementSpeed / 100f) * currentBuffValue : currentBuffValue;
                     break;
                 case BuffDebuffStatsType.ShieldStats_BaseShieldRegeneration:
                     CharInfo.ShieldStats.BaseShieldRegeneration -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.ShieldStats.B_BaseShieldRegeneration / 100f) * currentBuffValue : currentBuffValue;

@@ -725,17 +725,18 @@ public class CharacterType_Script : BaseCharacter
                 SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.TileMovementTime);
                 SpineAnim.CurrentAnim = nextAnim;
                 return;
-
             }
 
             if (completedAnim.Contains("Loop"))
             {
-                string nextAnim = completedAnim.Split('_').First() + "_End";
-                SpineAnim.SpineAnimationState.SetAnimation(0, nextAnim, false);
-                SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.EndTileMovementSpeed);
-                SpineAnim.CurrentAnim = nextAnim;
+                if(!waitingForNextMove)
+                {
+                    string nextAnim = completedAnim.Split('_').First() + "_End";
+                    SpineAnim.SpineAnimationState.SetAnimation(0, nextAnim, false);
+                    SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.EndTileMovementSpeed);
+                    SpineAnim.CurrentAnim = nextAnim;
+                }
                 return;
-
             }
         }
 
