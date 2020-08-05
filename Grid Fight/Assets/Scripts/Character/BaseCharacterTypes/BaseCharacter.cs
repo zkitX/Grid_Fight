@@ -117,6 +117,14 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             _nextAttack = value;
         }
     }
+    public float NextAttackDamage
+    {
+        get
+        {
+            return CharInfo.DamageStats.BaseDamage * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.x
+                    * (nextAttack.AttackInput == AttackInputType.Weak ? CharInfo.RapidAttack.DamageMultiplier.x : CharInfo.PowerfulAttac.DamageMultiplier.x);
+        }
+    }
     public List<ScriptableObjectAttackBase> nextSequencedAttacks = new List<ScriptableObjectAttackBase>();
     public AttackPhasesType currentAttackPhase = AttackPhasesType.End;
     public DeathProcessStage currentDeathProcessPhase = DeathProcessStage.None;
@@ -499,6 +507,23 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
     }
 
+    public virtual void BackfireEffect(float damage)
+    {
+        //BACKFIRE APPLY DAMAGE BASED ON HOW MUCH DAMAGE WAS DEALT
+        SetDamage(this, GetBuffDebuff(BuffDebuffStatsType.Backfire).CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ?
+                GetBuffDebuff(BuffDebuffStatsType.Backfire).CurrentBuffDebuff.Value * damage : GetBuffDebuff(BuffDebuffStatsType.Backfire).CurrentBuffDebuff.Value, ElementalType.Dark, false);
+
+        ParticleManagerScript.Instance.FireParticlesInPosition(
+            UMS.Side == SideType.LeftSide ? nextAttack.Particles.Left.Hit : nextAttack.Particles.Right.Hit,
+            CharInfo.CharacterID,
+            AttackParticlePhaseTypes.Hit, transform.position, UMS.Side, nextAttack.AttackInput
+            );
+
+        shotsLeftInAttack = 0;
+        Attacking = false;
+        currentAttackPhase = AttackPhasesType.End;
+        SetAnimation("Idle", true);
+    }
 
     public void FireCastParticles()
     {
@@ -558,6 +583,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public virtual void CreateTileAttack()
     {
+        if (HasBuffDebuff(BuffDebuffStatsType.Backfire))
+        {
+            BackfireEffect(NextAttackDamage);
+            return;
+        }
 
         if (nextAttack != null && nextAttack.CurrentAttackType == AttackType.Tile && CharInfo.Health > 0 && IsOnField)
         {
@@ -1784,6 +1814,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     #endregion
 
+
+
     public virtual bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
         return SetDamage(attacker, damage, elemental, isCritical);
@@ -1923,12 +1955,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public virtual void MadeDamage(BaseCharacter target, float damage)
     {
-        //BACKFIRE APPLY DAMAGE BASED ON HOW MUCH DAMAGE WAS DEALT
-        if (HasBuffDebuff(BuffDebuffStatsType.Backfire))
-        {
-            SetDamage(this, GetBuffDebuff(BuffDebuffStatsType.Backfire).CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ?
-                GetBuffDebuff(BuffDebuffStatsType.Backfire).CurrentBuffDebuff.Value * damage : GetBuffDebuff(BuffDebuffStatsType.Backfire).CurrentBuffDebuff.Value, ElementalType.Dark, false);
-        }
+
     }
 
     public ElementalWeaknessType GetElementalMultiplier(List<ElementalResistenceClass> armorElelmntals, ElementalType elementalToCheck)

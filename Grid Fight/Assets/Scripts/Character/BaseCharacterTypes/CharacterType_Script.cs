@@ -543,6 +543,12 @@ public class CharacterType_Script : BaseCharacter
     //Create and set up the basic info for the bullet
     public override void CreateBullet(BulletBehaviourInfoClass bulletBehaviourInfo)
     {
+        if (HasBuffDebuff(BuffDebuffStatsType.Backfire))
+        {
+            BackfireEffect(NextAttackDamage);
+            return;
+        }
+
         iter++;
         // Debug.Log(isSpecialLoading);
         GameObject bullet = BulletManagerScript.Instance.GetBullet();

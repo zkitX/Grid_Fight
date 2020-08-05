@@ -181,8 +181,7 @@ public class BulletScript : MonoBehaviour
             if (GridManagerScript.Instance.isPosOnField(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]))
             {
                 target = BattleManagerScript.Instance.GetCharInPos(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]);
-                MakeDamage(target, (CharOwner.CharInfo.DamageStats.BaseDamage * GridManagerScript.Instance.GetBattleTile(CharOwner.UMS.Pos[0]).TileADStats.x
-                    * (SOAttack.AttackInput == AttackInputType.Weak ? CharOwner.CharInfo.RapidAttack.DamageMultiplier.x : CharOwner.CharInfo.PowerfulAttac.DamageMultiplier.x)) * 0.3f);
+                MakeDamage(target, CharOwner.NextAttackDamage * 0.3f);
                 AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Impact, AudioBus.HighPrio, GridManagerScript.Instance.GetBattleTile(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]).transform);
                 FireEffectParticles(GridManagerScript.Instance.GetBattleTile(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]).transform.position);
             }
@@ -260,8 +259,7 @@ public class BulletScript : MonoBehaviour
         {
             isMoving = false;
             BaseCharacter target = other.GetComponentInParent<BaseCharacter>();
-            MakeDamage(target, (CharOwner.CharInfo.DamageStats.BaseDamage * SOAttack.DamageMultiplier) * GridManagerScript.Instance.GetBattleTile(CharOwner.UMS.Pos[0]).TileADStats.x
-                * (SOAttack.AttackInput == AttackInputType.Weak ? CharOwner.CharInfo.RapidAttack.DamageMultiplier.x : CharOwner.CharInfo.PowerfulAttac.DamageMultiplier.x));
+            MakeDamage(target, CharOwner.NextAttackDamage);
             //fire the Effect
             StartCoroutine(ChildExplosion(BulletBehaviourInfo.BulletEffectTiles.Where(r => r != Vector2Int.zero).ToList(), new Vector2Int(DestinationTile.x, target.UMS.CurrentTilePos.y)));
             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Impact, AudioBus.MidPrio,
