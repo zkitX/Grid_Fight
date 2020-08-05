@@ -37,7 +37,22 @@ public class CharacterInfoScript : MonoBehaviour
         }
     }
     [Tooltip("Attacks must follow this sequence (particles attack)  WEAK/STRONG/Skills (enemy attack) no order")]
-    public List<ScriptableObjectAttackBase> CurrentAttackTypeInfo = new List<ScriptableObjectAttackBase>();
+    public List<ScriptableObjectAttackBase> _CurrentAttackTypeInfo = new List<ScriptableObjectAttackBase>();
+
+    public List<ScriptableObjectAttackBase> CurrentAttackTypeInfo
+    {
+        get
+        {
+            List<ScriptableObjectAttackBase> res = _CurrentAttackTypeInfo;
+            res.AddRange(AddedAttackTypeInfo);
+            return res;
+        }
+        set
+        {
+            _CurrentAttackTypeInfo = value;
+        }
+    }
+    public List<ScriptableObjectAttackBase> AddedAttackTypeInfo = new List<ScriptableObjectAttackBase>();
     public ElementalType Elemental;
     public CharacterClassType ClassType;
     public LevelType CharaterLevel;

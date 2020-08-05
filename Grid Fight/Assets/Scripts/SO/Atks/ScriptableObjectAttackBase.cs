@@ -103,8 +103,10 @@ public class TilesAttackTypeClass
     public List<BulletBehaviourInfoClassOnBattleFieldClass> BulletTrajectories = new List<BulletBehaviourInfoClassOnBattleFieldClass>();
     public StatsCheckType StatToCheck;
     public ValueCheckerType ValueChecker;
-    public float PercToCheck;
     public int Chances;
+    [HideInInspector] public float PercToCheck;
+    [HideInInspector] public Vector2 InBetween;
+    [HideInInspector] public bool Show;
 }
 
 

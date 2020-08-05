@@ -410,7 +410,8 @@ public enum ValueCheckerType
 {
     LessThan,
     EqualTo,
-    MoreThan
+    MoreThan,
+    Between
 }
 
 public enum ElementalWeaknessType

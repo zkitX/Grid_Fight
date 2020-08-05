@@ -17,8 +17,16 @@ public class ScriptableObjectAI : ScriptableObject
     public VisionType Vision;
    // public AggroType Aggro;
     //public PartyHPType PartyHp;
-    public List<AICheckClass> Checks = new List<AICheckClass>();
-    public float CoolDown = 0;
+    [HideInInspector]public List<AICheckClass> Checks = new List<AICheckClass>();
+    public Vector2 _CoolDown = new Vector2(3, 5);
+    [HideInInspector]
+    public float CoolDown
+    {
+        get
+        {
+            return Random.Range(_CoolDown.x, _CoolDown.y);
+        }
+    }
     [Header("Move effects")]
 
     public bool IdleMovement = false;
@@ -39,6 +47,8 @@ public class ScriptableObjectAI : ScriptableObject
     string[] statToCheck;
 
     public ScriptableObjectParticle AIPs;
+
+    [HideInInspector] public bool Show;
 
     public int CheckAvailability(CharacterInfoScript charInfo, List<AggroInfoClass> enemies, Vector2Int currentPos)
     {
@@ -93,14 +103,14 @@ public class ScriptableObjectAI : ScriptableObject
                 case StatsCheckType.None:
                     break;
                 case StatsCheckType.Health:
-                    if (CheckStatsValues(item.ValueChecker, charInfo.HealthPerc, item.PercToCheck))
+                    if (CheckStatsValues(item, charInfo.HealthPerc))
                     {
                         Score += 100;
                         i++;
                     }
                     break;
                 case StatsCheckType.Stamina:
-                    if (CheckStatsValues(item.ValueChecker, charInfo.StaminaPerc, item.PercToCheck))
+                    if (CheckStatsValues(item, charInfo.StaminaPerc))
                     {
                         Score += 100;
                         i++;
@@ -113,7 +123,7 @@ public class ScriptableObjectAI : ScriptableObject
                 case StatsCheckType.BaseSpeed:
                     break;
                 case StatsCheckType.TeamTotalHpPerc:
-                    if (CheckStatsValues(item.ValueChecker, WaveManagerScript.Instance.GetCurrentPartyHPPerc(), item.PercToCheck))
+                    if (CheckStatsValues(item, WaveManagerScript.Instance.GetCurrentPartyHPPerc()))
                     {
                         Score += 100;
                         i++;
@@ -209,29 +219,35 @@ public class ScriptableObjectAI : ScriptableObject
 
 
 
-    private bool CheckStatsValues(ValueCheckerType valueChecker, float current, float perc)
+    private bool CheckStatsValues(AICheckClass aicc, float current)
     {
-        switch (valueChecker)
+        switch (aicc.ValueChecker)
         {
             case ValueCheckerType.LessThan:
-                if(current < perc)
+                if(current < aicc.PercToCheck)
                 {
                     return true;
                 }
                 break;
             case ValueCheckerType.EqualTo:
-                if (current == perc)
+                if (current == aicc.PercToCheck)
                 {
                     return true;
                 }
                 break;
             case ValueCheckerType.MoreThan:
-                if (current > perc)
+                if (current > aicc.PercToCheck)
                 {
                     return true;
                 }
                 break;
-            }
+            case ValueCheckerType.Between:
+                if (current <= aicc.InBetween.x && current >= aicc.InBetween.y)
+                {
+                    return true;
+                }
+                break;
+        }
 
         return false;
     }
@@ -282,7 +298,9 @@ public class AICheckClass
 {
     public StatsCheckType StatToCheck;
     public ValueCheckerType ValueChecker;
-    public float PercToCheck;
+    [HideInInspector]public float PercToCheck;
+    [HideInInspector]public Vector2 InBetween = new Vector2(60, 40);
+    [HideInInspector] public bool Show;
 }
 
 

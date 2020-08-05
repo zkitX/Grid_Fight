@@ -160,11 +160,14 @@ public class WaveManagerScript : MonoBehaviour
 
         res.CharActionlist.Add(CharacterActionType.Move);
         res.CharInfo.AIs = character.AIs;
-        if(character.AddAttacks)
+        if (character.AddAttacks)
         {
-            res.CharInfo.CurrentAttackTypeInfo.AddRange(character.AttacksToAdd);
+            res.CharInfo.AddedAttackTypeInfo.AddRange(character.AttacksToAdd);
         }
-        //res.CharInfo.CurrentAttackTypeInfo.Clear();
+        else
+        {
+            res.CharInfo.AddedAttackTypeInfo.Clear();
+        }
         res.CharInfo.SetupChar();
         return res;
     }

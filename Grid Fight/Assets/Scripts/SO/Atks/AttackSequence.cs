@@ -36,7 +36,8 @@ public class AttackSequence
         }
     }
     [ConditionalField("StatToCheck", true, StatsCheckType.None)] public ValueCheckerType ValueChecker = ValueCheckerType.LessThan;
-    [ConditionalField("StatToCheck", true, StatsCheckType.None)] public float PercToCheck = 100f;
+    [ConditionalField("ValueChecker", false, ValueCheckerType.Between)] public float PercToCheck = 100f;
+    [ConditionalField("ValueChecker", true, ValueCheckerType.Between)] public Vector2 InBetween = new Vector2(60,40);
     [Range(0, 100)] public int Chances = 100;
     protected bool chanceChecked = false;
 
@@ -63,6 +64,9 @@ public class AttackSequence
                     break;
                 case ValueCheckerType.MoreThan:
                     value = PercToCheck < curCheckValPerc;
+                    break;
+                case ValueCheckerType.Between:
+                    value = InBetween.x <= curCheckValPerc && InBetween.x >= curCheckValPerc;
                     break;
             }
 

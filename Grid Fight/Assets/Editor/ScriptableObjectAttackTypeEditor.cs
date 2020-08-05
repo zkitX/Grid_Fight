@@ -18,7 +18,6 @@ public class ScriptableObjectAttackTypeEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        GUIStyle style = new GUIStyle();
         base.OnInspectorGUI();
         //test = false;
         origin = (ScriptableObjectAttackBase)target;

@@ -1,0 +1,46 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
+
+
+[CustomEditor(typeof(ScriptableObjectAI))]
+public class ScriptableObjectAIEditor : Editor
+{
+    ScriptableObjectAI origin;
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        origin = (ScriptableObjectAI)target;
+
+        List<AICheckClass> list = new List<AICheckClass>();
+        list.AddRange(origin.Checks);
+        int newCount = Mathf.Max(0, EditorGUILayout.IntField("Number of Checks", list.Count));
+        while (newCount < list.Count)
+            list.RemoveAt(list.Count - 1);
+        while (newCount > list.Count)
+            list.Add(new AICheckClass());
+        origin.Checks.Clear();
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            list[i].Show = EditorGUILayout.Foldout(list[i].Show, "Checks  " + i);
+            if (list[i].Show)
+            {
+                list[i].StatToCheck = (StatsCheckType)EditorGUILayout.EnumPopup("StatToCheck", list[i].StatToCheck);
+                list[i].ValueChecker = (ValueCheckerType)EditorGUILayout.EnumPopup("ValueChecker", list[i].ValueChecker);
+                if (list[i].ValueChecker < ValueCheckerType.Between)
+                {
+                    list[i].PercToCheck = EditorGUILayout.FloatField("PercToCheck", list[i].PercToCheck);
+                }
+                else
+                {
+                    list[i].InBetween = EditorGUILayout.Vector2Field("InBetween", list[i].InBetween);
+                }
+            }
+            origin.Checks.Add(list[i]);
+        }
+
+        EditorUtility.SetDirty(origin);
+    }
+}

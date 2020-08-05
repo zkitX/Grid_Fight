@@ -383,6 +383,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                                 availableAtks.Add(atkToCheck);
                             }
                             break;
+                        case ValueCheckerType.Between:
+                            if (CharInfo.HealthPerc <= atkToCheck.TilesAtk.InBetween.x && CharInfo.HealthPerc >= atkToCheck.TilesAtk.InBetween.y)
+                            {
+                                availableAtks.Add(atkToCheck);
+                            }
+                            break;
                     }
                     break;
                 case StatsCheckType.Stamina:
@@ -402,6 +408,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                             break;
                         case ValueCheckerType.MoreThan:
                             if (CharInfo.StaminaPerc > atkToCheck.TilesAtk.PercToCheck)
+                            {
+                                availableAtks.Add(atkToCheck);
+                            }
+                            break;
+                        case ValueCheckerType.Between:
+                            if (CharInfo.StaminaPerc <= atkToCheck.TilesAtk.InBetween.x && CharInfo.StaminaPerc >= atkToCheck.TilesAtk.InBetween.y)
                             {
                                 availableAtks.Add(atkToCheck);
                             }
