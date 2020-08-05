@@ -156,7 +156,7 @@ public class CharacterType_Script : BaseCharacter
       //  UMS.SelectionIndicator.eulerAngles = new Vector3(0, 0, CharInfo.CharacterSelection == CharacterSelectionType.Up ? 90 :
        //     CharInfo.CharacterSelection == CharacterSelectionType.Down ? -90 :
       //      CharInfo.CharacterSelection == CharacterSelectionType.Left ? 180 : 0);
-        CharInfo.SetupChar();
+        CharInfo.SetupChar(this);
 
     }
 
@@ -166,7 +166,7 @@ public class CharacterType_Script : BaseCharacter
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         SetAnimation(CharacterAnimationStateType.Defeat_ReverseArrive);
         SetAttackReady(false);
-        battleTime.isStopped = true;
+        if(battleTime != null)battleTime.isStopped = true;
         base.SetCharDead();
         NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo, UMS.Side);
         ResetAudioManager();
@@ -495,10 +495,10 @@ public class CharacterType_Script : BaseCharacter
     }
 
 
-    public override void SetFinalDamage(BaseCharacter attacker, float damage)
+    public override void SetFinalDamage(BaseCharacter attacker, float damage, HitInfoClass hic = null)
     {
         Sic.DamageReceived += damage;
-        base.SetFinalDamage(attacker, damage);
+        base.SetFinalDamage(attacker, damage, hic);
     }
 
     //Set ste special attack

@@ -61,7 +61,7 @@ public class PlayerMinionType_Script : MinionType_Script
         }
     }
 
-    public override void SetFinalDamage(BaseCharacter attacker, float damage)
+    public override void SetFinalDamage(BaseCharacter attacker, float damage, HitInfoClass hic = null)
     {
         if (attacker.CurrentPlayerController != ControllerType.None)
         {
@@ -85,7 +85,7 @@ public class PlayerMinionType_Script : MinionType_Script
 
         attacker.Sic.DamageMade += damage;
         totDamage += damage;
-        base.SetFinalDamage(attacker, damage);
+        base.SetFinalDamage(attacker, damage, hic);
     }
 
     public override void CreateBullet(BulletBehaviourInfoClassOnBattleFieldClass bulletBehaviourInfo)

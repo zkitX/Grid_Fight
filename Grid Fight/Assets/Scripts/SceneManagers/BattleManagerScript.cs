@@ -644,7 +644,7 @@ public class BattleManagerScript : MonoBehaviour
             r.CurrentBuffDebuff.Stop_Co = true;
         }
         );
-        zombiefied.CharInfo.SetupChar();
+        zombiefied.CharInfo.SetupChar(zombiefied);
 
         while (zombiefied.IsOnField)
         {

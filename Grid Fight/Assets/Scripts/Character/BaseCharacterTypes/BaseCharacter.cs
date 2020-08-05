@@ -1,4 +1,5 @@
-﻿using System;
+﻿using nn.ec;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,6 +94,14 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public bool bulletFired = false;
 
     public List<BuffDebuffClass> BuffsDebuffsList = new List<BuffDebuffClass>();
+    public bool HasBuffDebuff(BuffDebuffStatsType type)
+    {
+        return BuffsDebuffsList.Where(r => r.CurrentBuffDebuff.Effect.StatsToAffect == type).ToArray().Length > 0;
+    }
+    public BuffDebuffClass GetBuffDebuff(BuffDebuffStatsType type)
+    {
+        return BuffsDebuffsList.Where(r => r.CurrentBuffDebuff.Effect.StatsToAffect == type).FirstOrDefault();
+    }
     public List<CharacterActionType> CharActionlist = new List<CharacterActionType>();
     public UnitManagementScript UMS;
     public BoxCollider CharBoxCollider;
@@ -150,6 +159,19 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public int _shotsLeftInAttack = 0;
     public ControllerType CurrentPlayerController;
+    protected List<HitInfoClass> HittedByList = new List<HitInfoClass>();
+    protected HitInfoClass LastHitter
+    {
+        get
+        {
+            HitInfoClass lastHitter = null;
+            foreach (HitInfoClass hitter in HittedByList)
+            {
+                if (lastHitter == null || lastHitter.TimeLastHit < hitter.TimeLastHit) lastHitter = hitter;
+            }
+            return lastHitter;
+        }
+    }
     [HideInInspector]
     public bool _Attacking = false;
     public virtual bool Attacking
@@ -220,12 +242,31 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public void _CharInfo_DeathEvent()
     {
+        if (HasBuffDebuff(BuffDebuffStatsType.Rebirth))
+        {
+            RebirthEffect();
+            return;
+        }
         SetCharDead();
     }
+
+    public virtual void RebirthEffect()
+    {
+        float HealAmount = CharInfo.HealthStats.Base;
+        LastHitter.hitter.CharInfo.Health += HealAmount;
+        LastHitter.hitter.HealthStatsChangedEvent?.Invoke(HealAmount, HealthChangedType.Heal, SpineAnim.transform);
+        GetBuffDebuff(BuffDebuffStatsType.Rebirth).CurrentBuffDebuff.Stop_Co = true;
+    }
+
 
     public virtual void SetAttackReady(bool value)
     {
         died = false;
+
+        if (value)
+        {
+            HittedByList.Clear();
+        }
         //Debug.Log(CharInfo.CharacterID + "  " + value);
         if (CharBoxCollider != null)
         {
@@ -246,10 +287,22 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
         if (died) return;
         died = true;
+
+        EventManager.Instance?.AddCharacterDeath(this);
+
         foreach (ManagedAudioSource audioSource in GetComponentsInChildren<ManagedAudioSource>())
         {
             audioSource.gameObject.transform.parent = AudioManagerMk2.Instance.transform;
         }
+
+        //PREVIOUS LAST HITTER CODE, CAN BE REUSED
+        //if(LastHitter != null && LastHitter.hitter != null && LastHitter.hitter.IsOnField && LastHitter.hitter.HasBuffDebuff(BuffDebuffStatsType.Rebirth))
+        //{
+        //    BuffDebuffClass rebirth = LastHitter.hitter.GetBuffDebuff(BuffDebuffStatsType.Rebirth);
+        //    float HealAmount = rebirth.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? LastHitter.hitter.CharInfo.HealthStats.Base * rebirth.CurrentBuffDebuff.Value : rebirth.CurrentBuffDebuff.Value;
+        //    LastHitter.hitter.CharInfo.Health += HealAmount;
+        //    LastHitter.hitter.HealthStatsChangedEvent?.Invoke(HealAmount, HealthChangedType.Heal, LastHitter.hitter.SpineAnim.transform);
+        //}
         isMoving = false;
         LocalSpinePosoffset = SpineAnim.transform.localPosition;
         Call_CurrentCharIsDeadEvent();
@@ -1744,7 +1797,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         HealthChangedType healthCT = HealthChangedType.Damage;
         bool res;
-        if (BuffsDebuffsList.Where(r => r.CurrentBuffDebuff.Effect.StatsToAffect == BuffDebuffStatsType.Invulnerable).ToArray().Length > 0)
+        if (HasBuffDebuff(BuffDebuffStatsType.Invulnerable))
         {
             damage = 0;
             healthCT = HealthChangedType.Invulnerable;
@@ -1846,11 +1899,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
           }*/
 
 
-
-        if (CharInfo.Health == 0)
-        {
-            EventManager.Instance?.AddCharacterDeath(this);
-        }
         EventManager.Instance?.UpdateHealth(this);
         EventManager.Instance?.UpdateStamina(this);
 
@@ -1861,11 +1909,27 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         return res;
     }
 
-    public virtual void SetFinalDamage(BaseCharacter attacker, float damage)
+    public virtual void SetFinalDamage(BaseCharacter attacker, float damage, HitInfoClass hic = null)
     {
+        if (hic == null) hic = HittedByList.Where(r => r.CharacterId == attacker.CharInfo.CharacterID).FirstOrDefault();
+        if (hic == null)  HittedByList.Add(new HitInfoClass(attacker, damage));
+        if (hic != null)
+        {
+            hic.UpdateLastHitTime();
+        }
+        attacker?.MadeDamage(this, damage);
         CharInfo.Health -= damage;
     }
 
+    public virtual void MadeDamage(BaseCharacter target, float damage)
+    {
+        //BACKFIRE APPLY DAMAGE BASED ON HOW MUCH DAMAGE WAS DEALT
+        if (HasBuffDebuff(BuffDebuffStatsType.Backfire))
+        {
+            SetDamage(this, GetBuffDebuff(BuffDebuffStatsType.Backfire).CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ?
+                GetBuffDebuff(BuffDebuffStatsType.Backfire).CurrentBuffDebuff.Value * damage : GetBuffDebuff(BuffDebuffStatsType.Backfire).CurrentBuffDebuff.Value, ElementalType.Dark, false);
+        }
+    }
 
     public ElementalWeaknessType GetElementalMultiplier(List<ElementalResistenceClass> armorElelmntals, ElementalType elementalToCheck)
     {

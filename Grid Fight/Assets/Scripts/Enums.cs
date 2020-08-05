@@ -327,6 +327,8 @@ public enum BuffDebuffStatsType
     StaminaStats_Stamina, 
     Legion,
     Invulnerable,
+    Rebirth,
+    Backfire,
 }
 
 public enum StatsCheckType

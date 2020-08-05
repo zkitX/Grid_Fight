@@ -10,7 +10,8 @@ using UnityEngine;
 /// </summary>
 public class CharacterInfoScript : MonoBehaviour
 {
-
+    [HideInInspector] public BaseCharacter charOwner = null;
+    [HideInInspector] public ScriptableObjectAttackEffect testAtkEffect = null; 
 
     #region Events
     public delegate void BaseSpeedChanged(float baseSpeed);
@@ -270,10 +271,9 @@ public class CharacterInfoScript : MonoBehaviour
         }
         set
         {
-            HealthStats.Health = value;
+            HealthStats.Health =   Mathf.Clamp(HealthStats.Health + value, 0f, 9999999f);
             if (HealthStats.Health <= 0)
             {
-                HealthStats.Health = HealthStats.Health <= 0 ? 0 : HealthStats.Health;
                 if (DeathEvent != null)
                 {
                     Invoke("SetCharDeath", 0.2f);
@@ -349,8 +349,10 @@ public class CharacterInfoScript : MonoBehaviour
     }
 
 
-    public void SetupChar()
+    public void SetupChar(BaseCharacter character)
     {
+        charOwner = character;
+
         for (int i = 0; i < (int)CharaterLevel; i++)
         {
             HealthStats.Base *= HealthStats.LevelMultiplier;

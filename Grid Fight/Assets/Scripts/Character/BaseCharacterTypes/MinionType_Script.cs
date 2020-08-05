@@ -12,7 +12,6 @@ public class MinionType_Script : BaseCharacter
     public int UpDownMovementPerc = 13;
     public int TowardMovementPerc = 13;
     public int AwayMovementPerc = 13;
-    protected List<HitInfoClass> HittedByList = new List<HitInfoClass>();
     public List<AggroInfoClass> AggroInfoList = new List<AggroInfoClass>();
     protected float totDamage = 0;
     protected bool strongAnimDone = false;
@@ -72,8 +71,6 @@ public class MinionType_Script : BaseCharacter
         {
             AICo = AI();
             StartCoroutine(AICo);
-
-            HittedByList.Clear();
         }
         CharInfo.DefenceStats.BaseDefence = Random.Range(0.7f, 1);
         base.SetAttackReady(value);
@@ -802,12 +799,12 @@ public class MinionType_Script : BaseCharacter
 
 
 
-    public override void SetFinalDamage(BaseCharacter attacker, float damage)
+    public override void SetFinalDamage(BaseCharacter attacker, float damage, HitInfoClass hic = null)
     {
-        HitInfoClass hic = HittedByList.Where(r => r.CharacterId == attacker.CharInfo.CharacterID).FirstOrDefault();
+        hic = HittedByList.Where(r => r.CharacterId == attacker.CharInfo.CharacterID).FirstOrDefault();
         if (hic == null)
         {
-            HittedByList.Add(new HitInfoClass(attacker.CharInfo.CharacterID, damage));
+            HittedByList.Add(new HitInfoClass(attacker, damage));
         }
         else
         {
@@ -835,7 +832,7 @@ public class MinionType_Script : BaseCharacter
         
         attacker.Sic.DamageMade += damage;
         totDamage += damage;
-        base.SetFinalDamage(attacker, damage);
+        base.SetFinalDamage(attacker, damage, hic);
     }
 
 
@@ -964,18 +961,27 @@ public class MinionType_Script : BaseCharacter
 [System.Serializable]
 public class HitInfoClass
 {
+    public BaseCharacter hitter = null;
     public CharacterNameType CharacterId;
     public float Damage;
+    public float TimeLastHit = 0;
 
     public HitInfoClass()
     {
-
+        TimeLastHit = Time.time;
     }
 
-    public HitInfoClass(CharacterNameType characterId, float damage)
+    public HitInfoClass(BaseCharacter character, float damage)
     {
-        CharacterId = characterId;
+        hitter = character;
+        CharacterId = character.CharInfo.CharacterID;
         Damage = damage;
+        TimeLastHit = Time.time;
+    }
+
+    public void UpdateLastHitTime()
+    {
+        TimeLastHit = Time.time;
     }
 }
 

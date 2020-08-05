@@ -168,7 +168,7 @@ public class WaveManagerScript : MonoBehaviour
         {
             res.CharInfo.AddedAttackTypeInfo.Clear();
         }
-        res.CharInfo.SetupChar();
+        res.CharInfo.SetupChar(res);
         return res;
     }
 
