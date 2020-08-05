@@ -47,22 +47,23 @@ MonoBehaviour:
     hours: 0
     minutes: 15
     seconds: 0
+    blockToTriggerOnComplete: 
     counting: 0
     isStopped: 0
   WavePhases:
   - name: WaveTutorial
     IsRandom: 1
-    MaxEnemyOnScreen: 3
-    AbsoluteMaxEnemyOnScreen: 0
+    MaxEnemyOnScreen: 1
+    AbsoluteMaxEnemyOnScreen: 1
     DelayBetweenChars: 0
     ListOfEnemy:
-    - name: Mothra
-      NPCType: 1
-      NumberOfCharacter: 2
+    - name: Bee Doctor
+      NPCType: 0
+      NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 1025
+        CharacterName: 1002
         KillWaveIfCharDie: 0
-        Health: {x: 30, y: 35}
+        Health: {x: 15, y: 15}
         HealthRegeneration: {x: 0.3, y: 0.3}
         BaseDamage: {x: 3, y: 5}
         RapidAttackMultiplier: {x: 1, y: 1}
@@ -74,8 +75,10 @@ MonoBehaviour:
         MovementSpeed: {x: 1, y: 1}
         MovementTimer: {x: 1, y: 1}
         Exp: 0
-        UpDownPerc: 18
-        Events: []
+        AIs:
+        - {fileID: 11400000, guid: 2a32f09ea33094f46a60239de69bdb6e, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -84,30 +87,133 @@ MonoBehaviour:
       - {x: 4, y: 11}
   - name: WaveFlint
     IsRandom: 0
-    MaxEnemyOnScreen: 1
-    AbsoluteMaxEnemyOnScreen: 0
+    MaxEnemyOnScreen: 3
+    AbsoluteMaxEnemyOnScreen: 3
     DelayBetweenChars: 1
     ListOfEnemy:
-    - name: Pai
-      NPCType: 0
+    - name: Flint
+      NPCType: 1
       NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 1022
+        CharacterName: 1046
         KillWaveIfCharDie: 0
         Health: {x: 150, y: 170}
         HealthRegeneration: {x: 1, y: 1.5}
-        BaseDamage: {x: 10, y: 16}
+        BaseDamage: {x: 11, y: 17}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 1.5, y: 1.5}
+        BaseSpeed: {x: 1.4, y: 1.4}
+        AttackSpeedRatio: {x: 10, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.4, y: 1.7}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: ddbd8783f8bf3b04899e8c2225050550, type: 2}
+        - {fileID: 11400000, guid: 1f105acafe0ba9a46a8306a4af8a1bcf, type: 2}
+        - {fileID: 11400000, guid: a7488b2bf4cdae742a158b9ef87d2a73, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Happy Bot
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1042
+        KillWaveIfCharDie: 0
+        Health: {x: 120, y: 140}
+        HealthRegeneration: {x: 1, y: 1.5}
+        BaseDamage: {x: 5, y: 8}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.2, y: 1.2}
         AttackSpeedRatio: {x: 10, y: 15}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1.3, y: 1.3}
+        MovementSpeed: {x: 1.1, y: 1.1}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 855763d9d4e32f3428fa9026ce4ede12, type: 2}
+        - {fileID: 11400000, guid: 10bc72c8e93923f4cb53a179ef7e665d, type: 2}
+        - {fileID: 11400000, guid: c87c294599ea3c3408091cf3aa77bb05, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 4fec03fdb2b02c14284bd27ff2e4a4e4, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Ted
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1043
+        KillWaveIfCharDie: 0
+        Health: {x: 75, y: 90}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 8, y: 10}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.3, y: 1.3}
+        AttackSpeedRatio: {x: 10, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.4, y: 1.4}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: ca5dc6d56d238154ca3821993c98ff49, type: 2}
+        - {fileID: 11400000, guid: d55237a8a45b7324480f8030a6b87eb4, type: 2}
+        - {fileID: 11400000, guid: e228abc9d5a4ba8498fddcf81389fb7e, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: a65e65225901c944180ce59e141dd924, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Robotron
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1041
+        KillWaveIfCharDie: 0
+        Health: {x: 150, y: 160}
+        HealthRegeneration: {x: 1, y: 1.5}
+        BaseDamage: {x: 6, y: 9}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.1, y: 1.1}
+        AttackSpeedRatio: {x: 10, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
         MovementSpeed: {x: 1.3, y: 1.3}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 15
-        Events: []
+        AIs:
+        - {fileID: 11400000, guid: 2d0d17310552f444aa502cc021d8095b, type: 2}
+        - {fileID: 11400000, guid: 467c19bbc9d74e74c925637ef3a23e36, type: 2}
+        - {fileID: 11400000, guid: 93eeb376f498eff47a19201b99c5209e, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 342af71f2b3d44a4abf11792a9e2039e, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -118,30 +224,35 @@ MonoBehaviour:
       - {x: 4, y: 6}
   - name: WaveFlintMinion
     IsRandom: 1
-    MaxEnemyOnScreen: 4
-    AbsoluteMaxEnemyOnScreen: 0
+    MaxEnemyOnScreen: 5
+    AbsoluteMaxEnemyOnScreen: 5
     DelayBetweenChars: 1
     ListOfEnemy:
-    - name: Fishylla
+    - name: Happy Bot
       NPCType: 0
-      NumberOfCharacter: 2
+      NumberOfCharacter: 3
       TypeOfCharacter:
-        CharacterName: 1021
+        CharacterName: 1042
         KillWaveIfCharDie: 0
-        Health: {x: 32, y: 35}
-        HealthRegeneration: {x: 3, y: 3}
-        BaseDamage: {x: 4, y: 6}
+        Health: {x: 120, y: 140}
+        HealthRegeneration: {x: 1, y: 1.5}
+        BaseDamage: {x: 5, y: 8}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 1, y: 1}
-        AttackSpeedRatio: {x: 12, y: 15}
+        BaseSpeed: {x: 1.2, y: 1.2}
+        AttackSpeedRatio: {x: 10, y: 15}
         Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 1.7, y: 1.7}
+        StaminaRegeneration: {x: 1.3, y: 1.3}
+        MovementSpeed: {x: 1.1, y: 1.1}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 20
-        Events: []
+        AIs:
+        - {fileID: 11400000, guid: 855763d9d4e32f3428fa9026ce4ede12, type: 2}
+        - {fileID: 11400000, guid: 10bc72c8e93923f4cb53a179ef7e665d, type: 2}
+        - {fileID: 11400000, guid: c87c294599ea3c3408091cf3aa77bb05, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 4fec03fdb2b02c14284bd27ff2e4a4e4, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -150,26 +261,64 @@ MonoBehaviour:
       - {x: 0, y: 6}
       - {x: 2, y: 6}
       - {x: 4, y: 6}
-    - name: Mothra
+    - name: Ted
       NPCType: 0
-      NumberOfCharacter: 4
+      NumberOfCharacter: 3
       TypeOfCharacter:
-        CharacterName: 1023
+        CharacterName: 1043
         KillWaveIfCharDie: 0
-        Health: {x: 40, y: 42}
-        HealthRegeneration: {x: 0.3, y: 0.3}
-        BaseDamage: {x: 4, y: 7}
+        Health: {x: 75, y: 90}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 8, y: 10}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 1, y: 1}
-        AttackSpeedRatio: {x: 12, y: 15}
+        BaseSpeed: {x: 1.3, y: 1.3}
+        AttackSpeedRatio: {x: 10, y: 15}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 1, y: 1}
+        MovementSpeed: {x: 1.4, y: 1.4}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 20
-        Events: []
+        AIs:
+        - {fileID: 11400000, guid: ca5dc6d56d238154ca3821993c98ff49, type: 2}
+        - {fileID: 11400000, guid: d55237a8a45b7324480f8030a6b87eb4, type: 2}
+        - {fileID: 11400000, guid: e228abc9d5a4ba8498fddcf81389fb7e, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: a65e65225901c944180ce59e141dd924, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Robotron
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1041
+        KillWaveIfCharDie: 0
+        Health: {x: 150, y: 160}
+        HealthRegeneration: {x: 1, y: 1.5}
+        BaseDamage: {x: 6, y: 9}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.1, y: 1.1}
+        AttackSpeedRatio: {x: 10, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.3, y: 1.3}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 2d0d17310552f444aa502cc021d8095b, type: 2}
+        - {fileID: 11400000, guid: 467c19bbc9d74e74c925637ef3a23e36, type: 2}
+        - {fileID: 11400000, guid: 93eeb376f498eff47a19201b99c5209e, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 342af71f2b3d44a4abf11792a9e2039e, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -179,59 +328,36 @@ MonoBehaviour:
       - {x: 2, y: 6}
       - {x: 4, y: 6}
   - name: Wave2
-    IsRandom: 0
-    MaxEnemyOnScreen: 3
-    AbsoluteMaxEnemyOnScreen: 0
+    IsRandom: 1
+    MaxEnemyOnScreen: 5
+    AbsoluteMaxEnemyOnScreen: 5
     DelayBetweenChars: 1
     ListOfEnemy:
-    - name: Kora
-      NPCType: 1
+    - name: Happy Bot
+      NPCType: 0
       NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 1026
+        CharacterName: 1042
         KillWaveIfCharDie: 0
-        Health: {x: 200, y: 240}
-        HealthRegeneration: {x: 1.3, y: 1.3}
-        BaseDamage: {x: 14, y: 19}
-        RapidAttackMultiplier: {x: 1, y: 1}
-        PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 2, y: 2}
-        AttackSpeedRatio: {x: 15, y: 18}
-        Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 1.8, y: 1.8}
-        MovementTimer: {x: 0, y: 0}
-        Exp: 0
-        UpDownPerc: 18
-        Events: []
-      AreThereStartingEnemy: 0
-      inRandomPos: 1
-      StartingEnemyTiles: []
-      IsRandomSpowiningTile: 1
-      SpowningTile:
-      - {x: 0, y: 6}
-      - {x: 2, y: 6}
-      - {x: 4, y: 6}
-    - name: Fishylla
-      NPCType: 0
-      NumberOfCharacter: 2
-      TypeOfCharacter:
-        CharacterName: 1021
-        KillWaveIfCharDie: 0
-        Health: {x: 32, y: 35}
-        HealthRegeneration: {x: 3, y: 3}
-        BaseDamage: {x: 3, y: 6}
+        Health: {x: 130, y: 150}
+        HealthRegeneration: {x: 1, y: 1.5}
+        BaseDamage: {x: 5, y: 8}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
         BaseSpeed: {x: 1, y: 1}
-        AttackSpeedRatio: {x: 12, y: 15}
+        AttackSpeedRatio: {x: 10, y: 15}
         Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 1.7, y: 1.7}
+        StaminaRegeneration: {x: 1.3, y: 1.3}
+        MovementSpeed: {x: 1.1, y: 1.1}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 18
-        Events: []
+        AIs:
+        - {fileID: 11400000, guid: 855763d9d4e32f3428fa9026ce4ede12, type: 2}
+        - {fileID: 11400000, guid: 10bc72c8e93923f4cb53a179ef7e665d, type: 2}
+        - {fileID: 11400000, guid: c87c294599ea3c3408091cf3aa77bb05, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 4fec03fdb2b02c14284bd27ff2e4a4e4, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -240,26 +366,31 @@ MonoBehaviour:
       - {x: 0, y: 6}
       - {x: 2, y: 6}
       - {x: 4, y: 6}
-    - name: Mothra
+    - name: Robotron
       NPCType: 0
-      NumberOfCharacter: 4
+      NumberOfCharacter: 2
       TypeOfCharacter:
-        CharacterName: 1023
+        CharacterName: 1042
         KillWaveIfCharDie: 0
-        Health: {x: 40, y: 42}
+        Health: {x: 150, y: 160}
         HealthRegeneration: {x: 1, y: 1}
-        BaseDamage: {x: 4, y: 7}
+        BaseDamage: {x: 6, y: 9}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
         BaseSpeed: {x: 1, y: 1}
-        AttackSpeedRatio: {x: 12, y: 15}
+        AttackSpeedRatio: {x: 10, y: 15}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 1, y: 1}
+        MovementSpeed: {x: 1.3, y: 1.3}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 18
-        Events: []
+        AIs:
+        - {fileID: 11400000, guid: 2d0d17310552f444aa502cc021d8095b, type: 2}
+        - {fileID: 11400000, guid: 467c19bbc9d74e74c925637ef3a23e36, type: 2}
+        - {fileID: 11400000, guid: 93eeb376f498eff47a19201b99c5209e, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 0e999614374112c47b74a15fd456e4d8, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -268,26 +399,31 @@ MonoBehaviour:
       - {x: 0, y: 6}
       - {x: 2, y: 6}
       - {x: 4, y: 6}
-    - name: Crabera
+    - name: Ted
       NPCType: 0
-      NumberOfCharacter: 2
+      NumberOfCharacter: 3
       TypeOfCharacter:
-        CharacterName: 1022
+        CharacterName: 1043
         KillWaveIfCharDie: 0
-        Health: {x: 70, y: 80}
+        Health: {x: 80, y: 90}
         HealthRegeneration: {x: 1, y: 1}
         BaseDamage: {x: 8, y: 10}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 1.6, y: 1.5}
-        AttackSpeedRatio: {x: 12, y: 15}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 10, y: 15}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 0.8, y: 0.8}
+        MovementSpeed: {x: 1.4, y: 1.4}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 18
-        Events: []
+        AIs:
+        - {fileID: 11400000, guid: ca5dc6d56d238154ca3821993c98ff49, type: 2}
+        - {fileID: 11400000, guid: d55237a8a45b7324480f8030a6b87eb4, type: 2}
+        - {fileID: 11400000, guid: e228abc9d5a4ba8498fddcf81389fb7e, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: a65e65225901c944180ce59e141dd924, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -297,277 +433,336 @@ MonoBehaviour:
       - {x: 2, y: 6}
       - {x: 4, y: 6}
   - name: WaveLoud
-    IsRandom: 0
+    IsRandom: 1
     MaxEnemyOnScreen: 4
-    AbsoluteMaxEnemyOnScreen: 0
+    AbsoluteMaxEnemyOnScreen: 4
     DelayBetweenChars: 1
     ListOfEnemy:
-    - name: Fishylla
+    - name: Happy Bot
       NPCType: 0
-      NumberOfCharacter: 3
+      NumberOfCharacter: 2
       TypeOfCharacter:
-        CharacterName: 1021
+        CharacterName: 1042
         KillWaveIfCharDie: 0
-        Health: {x: 40, y: 45}
-        HealthRegeneration: {x: 3, y: 3}
+        Health: {x: 130, y: 140}
+        HealthRegeneration: {x: 1, y: 1.5}
         BaseDamage: {x: 5, y: 8}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
         BaseSpeed: {x: 1, y: 1}
-        AttackSpeedRatio: {x: 12, y: 15}
+        AttackSpeedRatio: {x: 10, y: 15}
         Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 1.7, y: 1.7}
+        StaminaRegeneration: {x: 1.3, y: 1.3}
+        MovementSpeed: {x: 1.1, y: 1.1}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 20
-        Events: []
+        AIs:
+        - {fileID: 11400000, guid: 855763d9d4e32f3428fa9026ce4ede12, type: 2}
+        - {fileID: 11400000, guid: 10bc72c8e93923f4cb53a179ef7e665d, type: 2}
+        - {fileID: 11400000, guid: c87c294599ea3c3408091cf3aa77bb05, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 4fec03fdb2b02c14284bd27ff2e4a4e4, type: 2}
       AreThereStartingEnemy: 0
-      inRandomPos: 0
+      inRandomPos: 1
       StartingEnemyTiles: []
       IsRandomSpowiningTile: 1
-      SpowningTile: []
-    - name: Crabera
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Ted
       NPCType: 0
       NumberOfCharacter: 4
       TypeOfCharacter:
-        CharacterName: 1022
+        CharacterName: 1043
         KillWaveIfCharDie: 0
-        Health: {x: 70, y: 80}
+        Health: {x: 90, y: 90}
         HealthRegeneration: {x: 1, y: 1}
         BaseDamage: {x: 8, y: 10}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 1.6, y: 1.6}
-        AttackSpeedRatio: {x: 12, y: 15}
-        Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 0.8, y: 0.8}
-        MovementTimer: {x: 0, y: 0}
-        Exp: 0
-        UpDownPerc: 18
-        Events: []
-      AreThereStartingEnemy: 0
-      inRandomPos: 0
-      StartingEnemyTiles: []
-      IsRandomSpowiningTile: 1
-      SpowningTile: []
-    - name: Fishylla
-      NPCType: 0
-      NumberOfCharacter: 3
-      TypeOfCharacter:
-        CharacterName: 1021
-        KillWaveIfCharDie: 0
-        Health: {x: 40, y: 45}
-        HealthRegeneration: {x: 3, y: 3}
-        BaseDamage: {x: 5, y: 8}
-        RapidAttackMultiplier: {x: 1, y: 1}
-        PowerfulAttackMultiplier: {x: 2, y: 2}
         BaseSpeed: {x: 1, y: 1}
-        AttackSpeedRatio: {x: 12, y: 15}
+        AttackSpeedRatio: {x: 10, y: 15}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 1.7, y: 1.7}
+        MovementSpeed: {x: 1.4, y: 1.4}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 20
-        Events: []
+        AIs:
+        - {fileID: 11400000, guid: ca5dc6d56d238154ca3821993c98ff49, type: 2}
+        - {fileID: 11400000, guid: d55237a8a45b7324480f8030a6b87eb4, type: 2}
+        - {fileID: 11400000, guid: e228abc9d5a4ba8498fddcf81389fb7e, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: a65e65225901c944180ce59e141dd924, type: 2}
       AreThereStartingEnemy: 0
-      inRandomPos: 0
+      inRandomPos: 1
       StartingEnemyTiles: []
       IsRandomSpowiningTile: 1
-      SpowningTile: []
-  - name: WaveLoudAlone
-    IsRandom: 0
-    MaxEnemyOnScreen: 1
-    AbsoluteMaxEnemyOnScreen: 0
-    DelayBetweenChars: 1
-    ListOfEnemy:
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
     - name: Loud
       NPCType: 1
       NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 1045
         KillWaveIfCharDie: 0
-        Health: {x: 40, y: 45}
-        HealthRegeneration: {x: 0, y: 0}
+        Health: {x: 170, y: 175}
+        HealthRegeneration: {x: 1, y: 1.3}
+        BaseDamage: {x: 12, y: 15}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1.6, y: 1.6}
+        AttackSpeedRatio: {x: 10, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.3, y: 1.3}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 2d0d17310552f444aa502cc021d8095b, type: 2}
+        - {fileID: 11400000, guid: 467c19bbc9d74e74c925637ef3a23e36, type: 2}
+        - {fileID: 11400000, guid: 93eeb376f498eff47a19201b99c5209e, type: 2}
+        AddAttacks: 0
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 0e1f2ac19e79bd04194ce2748f0c9a72, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+  - name: WaveLoudAlone
+    IsRandom: 0
+    MaxEnemyOnScreen: 4
+    AbsoluteMaxEnemyOnScreen: 4
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Happy Bot
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1042
+        KillWaveIfCharDie: 0
+        Health: {x: 130, y: 140}
+        HealthRegeneration: {x: 1, y: 1.5}
         BaseDamage: {x: 5, y: 8}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
         BaseSpeed: {x: 1, y: 1}
-        AttackSpeedRatio: {x: 12, y: 15}
+        AttackSpeedRatio: {x: 10, y: 15}
         Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 1.7, y: 1.7}
+        StaminaRegeneration: {x: 1.3, y: 1.3}
+        MovementSpeed: {x: 1.1, y: 1.1}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 20
-        Events: []
+        AIs:
+        - {fileID: 11400000, guid: 855763d9d4e32f3428fa9026ce4ede12, type: 2}
+        - {fileID: 11400000, guid: 10bc72c8e93923f4cb53a179ef7e665d, type: 2}
+        - {fileID: 11400000, guid: c87c294599ea3c3408091cf3aa77bb05, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 4fec03fdb2b02c14284bd27ff2e4a4e4, type: 2}
       AreThereStartingEnemy: 0
-      inRandomPos: 0
+      inRandomPos: 1
       StartingEnemyTiles: []
       IsRandomSpowiningTile: 1
-      SpowningTile: []
-  - name: WaveLoudMinion
-    IsRandom: 0
-    MaxEnemyOnScreen: 5
-    AbsoluteMaxEnemyOnScreen: 0
-    DelayBetweenChars: 1
-    ListOfEnemy:
-    - name: Crabera
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Ted
       NPCType: 0
-      NumberOfCharacter: 3
+      NumberOfCharacter: 4
       TypeOfCharacter:
-        CharacterName: 1022
+        CharacterName: 1043
         KillWaveIfCharDie: 0
-        Health: {x: 70, y: 80}
+        Health: {x: 90, y: 90}
         HealthRegeneration: {x: 1, y: 1}
         BaseDamage: {x: 8, y: 10}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        AttackSpeedRatio: {x: 10, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.4, y: 1.4}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: ca5dc6d56d238154ca3821993c98ff49, type: 2}
+        - {fileID: 11400000, guid: d55237a8a45b7324480f8030a6b87eb4, type: 2}
+        - {fileID: 11400000, guid: e228abc9d5a4ba8498fddcf81389fb7e, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: a65e65225901c944180ce59e141dd924, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Loud
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1045
+        KillWaveIfCharDie: 0
+        Health: {x: 170, y: 175}
+        HealthRegeneration: {x: 1, y: 1.3}
+        BaseDamage: {x: 12, y: 15}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
         BaseSpeed: {x: 1.6, y: 1.6}
+        AttackSpeedRatio: {x: 10, y: 15}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.3, y: 1.3}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 2d0d17310552f444aa502cc021d8095b, type: 2}
+        - {fileID: 11400000, guid: 467c19bbc9d74e74c925637ef3a23e36, type: 2}
+        - {fileID: 11400000, guid: 93eeb376f498eff47a19201b99c5209e, type: 2}
+        AddAttacks: 0
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 0e1f2ac19e79bd04194ce2748f0c9a72, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+  - name: WaveLoudMinion
+    IsRandom: 1
+    MaxEnemyOnScreen: 5
+    AbsoluteMaxEnemyOnScreen: 5
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Ted
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 1043
+        KillWaveIfCharDie: 0
+        Health: {x: 90, y: 90}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 8, y: 10}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
         AttackSpeedRatio: {x: 12, y: 15}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 0.8, y: 0.8}
+        MovementSpeed: {x: 1.4, y: 1.4}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 18
-        Events: []
+        AIs:
+        - {fileID: 0}
+        - {fileID: 0}
+        - {fileID: 0}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: a65e65225901c944180ce59e141dd924, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 0
       StartingEnemyTiles: []
       IsRandomSpowiningTile: 1
       SpowningTile: []
-    - name: Mothra
+    - name: Robotron
       NPCType: 0
       NumberOfCharacter: 2
       TypeOfCharacter:
-        CharacterName: 1023
+        CharacterName: 1041
         KillWaveIfCharDie: 0
-        Health: {x: 40, y: 42}
+        Health: {x: 150, y: 160}
         HealthRegeneration: {x: 1, y: 1}
-        BaseDamage: {x: 4, y: 7}
+        BaseDamage: {x: 6, y: 9}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
         BaseSpeed: {x: 1, y: 1}
         AttackSpeedRatio: {x: 12, y: 15}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 1, y: 1}
+        MovementSpeed: {x: 1.3, y: 1.3}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 20
-        Events: []
+        AIs:
+        - {fileID: 11400000, guid: 2d0d17310552f444aa502cc021d8095b, type: 2}
+        - {fileID: 11400000, guid: 467c19bbc9d74e74c925637ef3a23e36, type: 2}
+        - {fileID: 11400000, guid: 93eeb376f498eff47a19201b99c5209e, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 0e999614374112c47b74a15fd456e4d8, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 0
       StartingEnemyTiles: []
       IsRandomSpowiningTile: 1
       SpowningTile: []
-    - name: Fishylla
-      NPCType: 0
-      NumberOfCharacter: 6
-      TypeOfCharacter:
-        CharacterName: 1021
-        KillWaveIfCharDie: 0
-        Health: {x: 40, y: 45}
-        HealthRegeneration: {x: 3, y: 3}
-        BaseDamage: {x: 5, y: 8}
-        RapidAttackMultiplier: {x: 1, y: 1}
-        PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 1, y: 1}
-        AttackSpeedRatio: {x: 12, y: 15}
-        Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 1.7, y: 1.7}
-        MovementTimer: {x: 0, y: 0}
-        Exp: 0
-        UpDownPerc: 20
-        Events: []
-      AreThereStartingEnemy: 0
-      inRandomPos: 0
-      StartingEnemyTiles: []
-      IsRandomSpowiningTile: 1
-      SpowningTile: []
-    - name: Toka
+    - name: IronTron
       NPCType: 0
       NumberOfCharacter: 2
       TypeOfCharacter:
-        CharacterName: 1020
+        CharacterName: 1040
         KillWaveIfCharDie: 0
-        Health: {x: 100, y: 150}
-        HealthRegeneration: {x: 1, y: 1}
-        BaseDamage: {x: 10, y: 13}
+        Health: {x: 145, y: 170}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 9, y: 11}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
         BaseSpeed: {x: 1, y: 1}
         AttackSpeedRatio: {x: 12, y: 15}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 0.8, y: 0.8}
+        MovementSpeed: {x: 1.6, y: 1.6}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 22
-        Events: []
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
       AreThereStartingEnemy: 0
       inRandomPos: 0
       StartingEnemyTiles: []
       IsRandomSpowiningTile: 1
       SpowningTile: []
   - name: Wave3
-    IsRandom: 0
-    MaxEnemyOnScreen: 5
-    AbsoluteMaxEnemyOnScreen: 0
+    IsRandom: 1
+    MaxEnemyOnScreen: 4
+    AbsoluteMaxEnemyOnScreen: 3
     DelayBetweenChars: 1
     ListOfEnemy:
-    - name: Mermer
-      NPCType: 1
-      NumberOfCharacter: 1
-      TypeOfCharacter:
-        CharacterName: 1025
-        KillWaveIfCharDie: 0
-        Health: {x: 300, y: 320}
-        HealthRegeneration: {x: 1.1, y: 1.1}
-        BaseDamage: {x: 16, y: 22}
-        RapidAttackMultiplier: {x: 1, y: 1}
-        PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 2, y: 2}
-        AttackSpeedRatio: {x: 15, y: 20}
-        Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 1.5, y: 1.5}
-        MovementTimer: {x: 0, y: 0}
-        Exp: 0
-        UpDownPerc: 18
-        Events: []
-      AreThereStartingEnemy: 0
-      inRandomPos: 1
-      StartingEnemyTiles: []
-      IsRandomSpowiningTile: 1
-      SpowningTile:
-      - {x: 0, y: 6}
-      - {x: 2, y: 6}
-      - {x: 4, y: 6}
-    - name: Crabera
+    - name: IronTron
       NPCType: 0
       NumberOfCharacter: 2
       TypeOfCharacter:
-        CharacterName: 1022
+        CharacterName: 1040
         KillWaveIfCharDie: 0
-        Health: {x: 70, y: 80}
-        HealthRegeneration: {x: 1, y: 1}
-        BaseDamage: {x: 8, y: 10}
+        Health: {x: 145, y: 170}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 9, y: 11}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 1.6, y: 1.6}
+        BaseSpeed: {x: 2, y: 2}
         AttackSpeedRatio: {x: 12, y: 15}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 0.8, y: 0.8}
+        MovementSpeed: {x: 1.6, y: 1.6}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 18
-        Events: []
+        AIs:
+        - {fileID: 11400000, guid: 048fd35f4d28daa479e0bedeefdff293, type: 2}
+        - {fileID: 11400000, guid: e132257cb5773774cb239c999544d920, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -576,54 +771,31 @@ MonoBehaviour:
       - {x: 0, y: 6}
       - {x: 2, y: 6}
       - {x: 4, y: 6}
-    - name: Fishylla
+    - name: Robotron
       NPCType: 0
-      NumberOfCharacter: 4
+      NumberOfCharacter: 3
       TypeOfCharacter:
-        CharacterName: 1021
+        CharacterName: 1041
         KillWaveIfCharDie: 0
-        Health: {x: 40, y: 45}
-        HealthRegeneration: {x: 3, y: 3}
-        BaseDamage: {x: 5, y: 8}
-        RapidAttackMultiplier: {x: 1, y: 1}
-        PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 1, y: 1}
-        AttackSpeedRatio: {x: 12, y: 15}
-        Stamina: {x: 10, y: 10}
-        StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 1.7, y: 1.7}
-        MovementTimer: {x: 0, y: 0}
-        Exp: 0
-        UpDownPerc: 20
-        Events: []
-      AreThereStartingEnemy: 0
-      inRandomPos: 1
-      StartingEnemyTiles: []
-      IsRandomSpowiningTile: 1
-      SpowningTile:
-      - {x: 0, y: 6}
-      - {x: 2, y: 6}
-      - {x: 4, y: 6}
-    - name: Toka
-      NPCType: 0
-      NumberOfCharacter: 4
-      TypeOfCharacter:
-        CharacterName: 1020
-        KillWaveIfCharDie: 0
-        Health: {x: 100, y: 150}
+        Health: {x: 150, y: 160}
         HealthRegeneration: {x: 1, y: 1}
-        BaseDamage: {x: 10, y: 13}
+        BaseDamage: {x: 6, y: 9}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
-        BaseSpeed: {x: 1, y: 1}
+        BaseSpeed: {x: 2, y: 2}
         AttackSpeedRatio: {x: 12, y: 15}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 0.8, y: 0.8}
+        MovementSpeed: {x: 1.3, y: 1.3}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 22
-        Events: []
+        AIs:
+        - {fileID: 11400000, guid: 2d0d17310552f444aa502cc021d8095b, type: 2}
+        - {fileID: 11400000, guid: 467c19bbc9d74e74c925637ef3a23e36, type: 2}
+        - {fileID: 11400000, guid: 93eeb376f498eff47a19201b99c5209e, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 0e999614374112c47b74a15fd456e4d8, type: 2}
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -633,31 +805,63 @@ MonoBehaviour:
       - {x: 2, y: 6}
       - {x: 4, y: 6}
   - name: WaveDeedra
-    IsRandom: 0
-    MaxEnemyOnScreen: 1
-    AbsoluteMaxEnemyOnScreen: 0
+    IsRandom: 1
+    MaxEnemyOnScreen: 4
+    AbsoluteMaxEnemyOnScreen: 4
     DelayBetweenChars: 1
     ListOfEnemy:
-    - name: Epa
+    - name: Deedra
       NPCType: 1
       NumberOfCharacter: 1
       TypeOfCharacter:
-        CharacterName: 1024
+        CharacterName: 1047
         KillWaveIfCharDie: 0
-        Health: {x: 310, y: 350}
+        Health: {x: 160, y: 180}
+        HealthRegeneration: {x: 1.3, y: 1.3}
+        BaseDamage: {x: 12, y: 18}
+        RapidAttackMultiplier: {x: 1, y: 1}
+        PowerfulAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 2, y: 2}
+        AttackSpeedRatio: {x: 14, y: 18}
+        Stamina: {x: 10, y: 10}
+        StaminaRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.3, y: 1.3}
+        MovementTimer: {x: 0, y: 0}
+        Exp: 0
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: IronTron
+      NPCType: 0
+      NumberOfCharacter: 4
+      TypeOfCharacter:
+        CharacterName: 1040
+        KillWaveIfCharDie: 0
+        Health: {x: 145, y: 170}
         HealthRegeneration: {x: 1.1, y: 1.1}
-        BaseDamage: {x: 18, y: 21}
+        BaseDamage: {x: 9, y: 11}
         RapidAttackMultiplier: {x: 1, y: 1}
         PowerfulAttackMultiplier: {x: 2, y: 2}
         BaseSpeed: {x: 2, y: 2}
         AttackSpeedRatio: {x: 12, y: 15}
         Stamina: {x: 10, y: 10}
         StaminaRegeneration: {x: 1, y: 1}
-        MovementSpeed: {x: 1.1, y: 1.1}
+        MovementSpeed: {x: 1.6, y: 1.6}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 18
-        Events: []
+        AIs:
+        - {fileID: 11400000, guid: 048fd35f4d28daa479e0bedeefdff293, type: 2}
+        - {fileID: 11400000, guid: e132257cb5773774cb239c999544d920, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -690,8 +894,9 @@ MonoBehaviour:
         MovementSpeed: {x: 1.3, y: 1.3}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 10
-        Events: []
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -724,8 +929,9 @@ MonoBehaviour:
         MovementSpeed: {x: 1.3, y: 1.3}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 10
-        Events: []
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -758,8 +964,9 @@ MonoBehaviour:
         MovementSpeed: {x: 1.3, y: 1.3}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 10
-        Events: []
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -792,8 +999,9 @@ MonoBehaviour:
         MovementSpeed: {x: 1.3, y: 1.3}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 10
-        Events: []
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -826,8 +1034,9 @@ MonoBehaviour:
         MovementSpeed: {x: 1.3, y: 1.3}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 10
-        Events: []
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -860,8 +1069,9 @@ MonoBehaviour:
         MovementSpeed: {x: 1.3, y: 1.3}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 10
-        Events: []
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -894,8 +1104,9 @@ MonoBehaviour:
         MovementSpeed: {x: 1.3, y: 1.3}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 10
-        Events: []
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -922,8 +1133,9 @@ MonoBehaviour:
         MovementSpeed: {x: 1.3, y: 1.3}
         MovementTimer: {x: 0, y: 0}
         Exp: 0
-        UpDownPerc: 10
-        Events: []
+        AIs: []
+        AddAttacks: 0
+        AttacksToAdd: []
       AreThereStartingEnemy: 0
       inRandomPos: 1
       StartingEnemyTiles: []
@@ -934,5 +1146,4 @@ MonoBehaviour:
       - {x: 4, y: 6}
   isWaveComplete: 0
   WaveCharcters: []
-  CurrentWave: 0
   StartWave: 0

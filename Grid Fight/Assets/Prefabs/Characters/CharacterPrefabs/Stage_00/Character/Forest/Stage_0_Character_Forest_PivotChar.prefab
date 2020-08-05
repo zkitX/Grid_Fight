@@ -248,7 +248,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 99877354f1f37984a95e439b064f7e68, type: 2}
+  - {fileID: 2100000, guid: 8af53db5cd23f94468702d8b29f1e0a8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 902f69d4381d3584c8e7acd7bdb69e72, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 8bfb02c2d512a7f4386ba0a67533a990, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -468,32 +468,14 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0.32886654
-        outSlope: 0.32886654
+        inSlope: 2
+        outSlope: 2
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.0652433
-        value: 0.021456337
-        inSlope: 0.6675782
-        outSlope: 0.6675782
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.60479045
-        outWeight: 0.24375838
-      - serializedVersion: 3
-        time: 0.26201296
-        value: 0.7854701
-        inSlope: 2.1653461
-        outSlope: 2.1653461
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.7
+        time: 0.5
         value: 1
         inSlope: 0.041555207
         outSlope: 0.041555207
@@ -519,32 +501,14 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0.32886654
-        outSlope: 0.32886654
+        inSlope: 2
+        outSlope: 2
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.0652433
-        value: 0.021456337
-        inSlope: 0.6675782
-        outSlope: 0.6675782
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.60479045
-        outWeight: 0.24375838
-      - serializedVersion: 3
-        time: 0.26201296
-        value: 0.7854701
-        inSlope: 2.1653461
-        outSlope: 2.1653461
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.7
+        time: 0.5
         value: 1
         inSlope: 0.041555207
         outSlope: 0.041555207
@@ -660,12 +624,8 @@ MonoBehaviour:
   BaseCharacterType: 0
   CharacterID: 1006
   attackSequences: []
-  CurrentAttackTypeInfo:
-  - {fileID: 11400000, guid: bdf362282c7031a4e86cf4380ac47667, type: 2}
-  - {fileID: 11400000, guid: 0661223646bb79e408554a6755c05d77, type: 2}
-  - {fileID: 11400000, guid: 700df5fe23b63e6468308eb995531b19, type: 2}
-  - {fileID: 11400000, guid: 890ba8d7fe9c4604f8815c9234211a5b, type: 2}
-  - {fileID: 11400000, guid: cf6ed41e59b2874448b62a9ab0f26c2f, type: 2}
+  _CurrentAttackTypeInfo: []
+  AddedAttackTypeInfo: []
   Elemental: 0
   ClassType: 2
   CharaterLevel: 0
@@ -717,22 +677,13 @@ MonoBehaviour:
     B_Regeneration: 0
     B_BaseShieldRegeneration: 0
   SpeedStats:
-    BaseSpeed: 1.8
-    MovementSpeed: 2
-    FirstMovement:
-      MovementPercUp: 0.7
-      MovementPercDown: 0.7
-      MovementPercForward: 0.7
-      MovementPercBackward: 0.7
-    LoopMovement:
-      MovementPercUp: 0.7
-      MovementPercDown: 0.7
-      MovementPercForward: 0.5
-      MovementPercBackward: 0.5
-    InterpolationTime_DashForward: 0.15
-    InterpolationTime_DashBackward: 0.15
-    InterpolationTime_DashUp: 0
-    InterpolationTime_DashDown: 0
+    BaseSpeed: 1
+    TileMovementTime: 0.3
+    MovementSpeed: 1
+    CuttingPerc: 0.85
+    IntroPerc: 0.15
+    LoopPerc: 0.5
+    EndPerc: 0.3
     AttackSpeed: 2.5
     AttackSpeedRatio: 2
     BulletSpeed: 1

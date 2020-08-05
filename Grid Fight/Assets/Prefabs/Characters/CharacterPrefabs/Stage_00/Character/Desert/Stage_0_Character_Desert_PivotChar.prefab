@@ -218,7 +218,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 84919387422db394aac09e2205c75a14, type: 2}
+  - {fileID: 2100000, guid: d8df11ef0f990644492167069cd4e610, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: efb749e17417b4949b5425b7c879a292, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: cd63e6bcc83878b49b462a650fd96154, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -652,27 +652,12 @@ MonoBehaviour:
     B_BaseShieldRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
-    TileMovementTime: 1
-    IntroTileMovementSpeed: 1
-    EndTileMovementSpeed: 1
-    MovementSpeed: 1.2
-    FirstMovement:
-      MovementPercUp: 0.85
-      MovementPercDown: 0.85
-      MovementPercForward: 0.85
-      MovementPercBackward: 0.85
-    LoopMovement:
-      StartLoopMovementPercUp: 0.15
-      EndLoopMovementPercUp: 0.85
-      StartLoopMovementPercDown: 0.15
-      EndLoopMovementPercDown: 0.85
-      StartLoopMovementPercForward: 0.15
-      EndLoopMovementPercForward: 0.85
-      StartLoopMovementPercBackward: 0.15
-      EndLoopMovementPercBackward: 0.85
+    TileMovementTime: 0.3
+    MovementSpeed: 1
+    CuttingPerc: 0.85
     IntroPerc: 0.15
-    LoopPerc: 0.7
-    EndPerc: 0.15
+    LoopPerc: 0.5
+    EndPerc: 0.3
     AttackSpeed: 1.4
     AttackSpeedRatio: 3
     BulletSpeed: 2.5
