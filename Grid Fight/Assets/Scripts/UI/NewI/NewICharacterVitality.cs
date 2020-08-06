@@ -253,7 +253,7 @@ public class NewICharacterVitality : MonoBehaviour
             StartCoroutine(ShieldLerper);
         }
 
-        if (assignedCharDetails.CharInfo.HealthPerc == 0f)
+        if (assignedCharDetails.CharInfo.HealthPerc == 0f && assignedCharDetails.died)
         {
             ///SET UI OF THE CHARACTER TO DEAD HERE
             ToggleDead(true);

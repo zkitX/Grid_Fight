@@ -726,6 +726,7 @@ public enum HealthChangedType
     CriticalHit,
     Invulnerable,
     Rebirth,
+    Backfire,
 }
 
 

@@ -53,13 +53,13 @@ public class Stage02_Boss_Script : MinionType_Script
 
     public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
-        if (attacker == this) return true;
+        if (attacker == this && damage == 0f) return true;
         return base.SetDamage(attacker, damage, elemental, isCritical, isAttackBlocking);
     }
 
     public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical)
     {
-        if (attacker == this) return true;
+        if (attacker == this && damage == 0f) return true;
         return base.SetDamage(attacker, damage, elemental, isCritical);
     }
 

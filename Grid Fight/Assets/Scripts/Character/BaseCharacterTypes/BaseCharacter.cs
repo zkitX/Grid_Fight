@@ -125,6 +125,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     * (nextAttack.AttackInput == AttackInputType.Weak ? CharInfo.RapidAttack.DamageMultiplier.x : CharInfo.PowerfulAttac.DamageMultiplier.x);
         }
     }
+    public float NextAttackTileDamage
+    {
+        get
+        {
+            return (CharInfo.DamageStats.BaseDamage * nextAttack.DamageMultiplier) * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.x;
+        }
+    }
     public List<ScriptableObjectAttackBase> nextSequencedAttacks = new List<ScriptableObjectAttackBase>();
     public AttackPhasesType currentAttackPhase = AttackPhasesType.End;
     public DeathProcessStage currentDeathProcessPhase = DeathProcessStage.None;
@@ -584,9 +591,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public virtual void CreateTileAttack()
     {
-        if (HasBuffDebuff(BuffDebuffStatsType.Backfire))
+        if (HasBuffDebuff(BuffDebuffStatsType.Backfire) && NextAttackTileDamage > 0f)
         {
-            BackfireEffect(NextAttackDamage);
+            BackfireEffect(NextAttackTileDamage);
             return;
         }
 
@@ -641,19 +648,19 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                                     if (nextAttack.AttackInput > AttackInputType.Weak && i == 0)
                                     {
                                         bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, res,
-                                    (CharInfo.DamageStats.BaseDamage * nextAttack.DamageMultiplier) * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.x, CharInfo.Elemental, this,
+                                    NextAttackTileDamage, CharInfo.Elemental, this,
                                     target, target.EffectChances, (nextAttack.TilesAtk.BulletTrajectories[i].BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y))) + animDelay);//(nextAttack.TilesAtk.BulletTrajectories[i].Delay * 0.1f)
                                     }
                                     else if (nextAttack.AttackInput == AttackInputType.Weak)
                                     {
                                         bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, res,
-                                    (CharInfo.DamageStats.BaseDamage * nextAttack.DamageMultiplier) * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.x, CharInfo.Elemental, this,
+                                    NextAttackTileDamage, CharInfo.Elemental, this,
                                     target, target.EffectChances, (nextAttack.TilesAtk.BulletTrajectories[i].BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y))) + animDelay); // 
                                     }
                                     else
                                     {
                                         bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, res,
-                                   (CharInfo.DamageStats.BaseDamage * nextAttack.DamageMultiplier) * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.x, CharInfo.Elemental, this,
+                                   NextAttackTileDamage, CharInfo.Elemental, this,
                                    target, target.EffectChances);
                                     }
 
@@ -1824,13 +1831,20 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     public virtual bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical)
     {
+
         if (!IsOnField)
         {
             return false;
         }
         HealthChangedType healthCT = HealthChangedType.Damage;
         bool res;
-        if (HasBuffDebuff(BuffDebuffStatsType.Invulnerable))
+
+        if (attacker == this && HasBuffDebuff(BuffDebuffStatsType.Backfire) && damage > 0f)
+        {
+            healthCT = HealthChangedType.Backfire;
+            res = true;
+        }
+        else if (HasBuffDebuff(BuffDebuffStatsType.Invulnerable))
         {
             damage = 0;
             healthCT = HealthChangedType.Invulnerable;

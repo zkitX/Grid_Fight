@@ -113,9 +113,43 @@ public class UIBattleFieldManager : MonoBehaviour
             case HealthChangedType.Rebirth:
                 StartCoroutine(RebirthCo(charOwner));
                 break;
+            case HealthChangedType.Backfire:
+                StartCoroutine(BackfireCo(value, charOwner));
+                break;
             default:
                 break;
         }
+    }
+
+    private IEnumerator BackfireCo(float damage, Transform charOwner)
+    {
+        float timer = 0;
+        bool isAlive = true;
+        GameObject d = Damages.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
+        if (d == null)
+        {
+            d = Instantiate(Damage, transform);
+            Damages.Add(Damages.Count, d);
+        }
+        d.SetActive(true);
+        d.GetComponentInChildren<TextMeshProUGUI>().text = ((int)(damage * 100)).ToString() + " BACKFIRE";
+        d.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
+        SetAnim(d.GetComponentInChildren<Animator>(), 1);
+        while (timer <= 0.8f)
+        {
+            if (charOwner.gameObject.activeInHierarchy && isAlive)
+            {
+                d.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
+            }
+            else if (isAlive)
+            {
+                isAlive = false;
+            }
+            yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
+
+            timer += Time.deltaTime;
+        }
+        d.SetActive(false);
     }
 
     private IEnumerator RebirthCo(Transform charOwner)
