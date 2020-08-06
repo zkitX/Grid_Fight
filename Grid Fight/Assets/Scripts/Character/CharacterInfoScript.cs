@@ -271,9 +271,11 @@ public class CharacterInfoScript : MonoBehaviour
         }
         set
         {
-            HealthStats.Health =   Mathf.Clamp(HealthStats.Health + value, 0f, 9999999f);
+
+            HealthStats.Health = value;
             if (HealthStats.Health <= 0)
             {
+                HealthStats.Health = HealthStats.Health <= 0 ? 0 : HealthStats.Health;
                 if (DeathEvent != null)
                 {
                     Invoke("SetCharDeath", 0.2f);
