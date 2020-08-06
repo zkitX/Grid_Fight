@@ -1,0 +1,236 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
+  m_Name: Stage09_Character_Valley_EnemyAttack02_Dorje
+  m_EditorClassIdentifier: 
+  isSequencedAttack: 0
+  Chances: 100
+  CurrentAttackType: 1
+  AttackRatioMultiplier: 1
+  _DamageMultiplier: {x: 1, y: 1}
+  AttackInput: 0
+  AttackAnim: 0
+  StaminaCost: 10
+  ExperiencePoints: 10
+  _CoolDown: {x: 3, y: 5}
+  PrefixAnim: 0
+  Fov: 0
+  Particles:
+    Left:
+      Cast: {fileID: 3802465517011248235, guid: bd255f17946a2cc47b73be2ee851b2a9,
+        type: 3}
+      Bullet: {fileID: 4605458647676003252, guid: 6bfde13733d7b5c4994d2db34896482d,
+        type: 3}
+      Hit: {fileID: 6509805777487376023, guid: 2325227e41361c24e922566dc71ca85c, type: 3}
+    Right:
+      Cast: {fileID: 1351462093727380714, guid: 08f87113062405446a10d47327dcc389,
+        type: 3}
+      Bullet: {fileID: 4786719601591029580, guid: 318578e1b428cf1438d3715f98933e7d,
+        type: 3}
+      Hit: {fileID: 3350126739960944554, guid: e7871abe5bd0bd44c80b804987044afc, type: 3}
+    CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
+      type: 3}
+    CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
+      type: 3}
+  TrajectoriesNumber: 1
+  ParticlesAtk:
+    BulletTrajectories:
+    - Show: 1
+      BulletDistanceInTile: {x: 0, y: 15}
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      ChildrenBulletDelay: 0.5
+      BulletEffectTiles: []
+      BulletGapStartingTile: {x: 0, y: 0}
+      HasEffect: 0
+      Effects: []
+      EffectChances: 100
+    CharacterClass: 0
+  TilesAtk:
+    AtkType: 1
+    BulletTrajectories:
+    - Delay: 3
+      BulletTravelDurationPerTile: 0
+      ExplosionChances: 100
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Show: 1
+      BulletEffectTiles:
+      - Pos: {x: 0, y: 0}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 0, y: 1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 0, y: -1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 0, y: -2}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 0, y: 2}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 1, y: 0}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: -1, y: 0}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: -1, y: -1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 1, y: 1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 1, y: -1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: -1, y: 1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+    StatToCheck: 1
+    ValueChecker: 2
+    Chances: 100
+    PercToCheck: 0
+    InBetween: {x: 0, y: 0}
+    Show: 0
+  TotemAtk:
+    AtkType: 3
+    IsPlayerSide: 0
+    DurationOnField: 10
+    Effects: []
+    TotemIn: 0
+    TotemOut: 0
+    TentaclePrefab: 0

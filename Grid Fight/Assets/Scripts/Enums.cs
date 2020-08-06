@@ -408,6 +408,13 @@ public enum PartyHPType
 }
 
 
+public enum DeathAnimType
+{
+    Explosion,
+    Defeat,
+    Reverse_Arrives
+}
+
 public enum ValueCheckerType
 {
     LessThan,
@@ -835,14 +842,16 @@ public enum CharacterNameType
 
 
     //Stage 08
-    Stage08_Minion_Mountain = 1160,
-    Stage08_Minion_Desert = 1161,
-    Stage08_Minion_Forest = 1162,
-    Stage08_Minion_Valley = 1163,
-    Stage08_Character_Valley = 1164,
-    Stage08_Character_Desert = 1165,
-    Stage08_Character_Mountain = 1166,
-    Stage08_Character_Forest = 1167,
+    MaidenShrine_Minion_Mountain = 1160,
+    MaidenShrine_Minion_Desert = 1161,
+    MaidenShrine_Minion_Forest = 1162,
+    MaidenShrine_Minion_Valley = 1163,
+    MaidenShrine_Character_Valley_Dorje = 1164,
+    MaidenShrine_Character_Desert_LinSupreme = 1165,
+    MaidenShrine_Character_Mountain_Skye = 1166,
+    MaidenShrine_Character_Forest_Joja = 1167,
+    MaidenShrine_Boss_Geisha = 1168,
+    MaidenShrine_Boss_NoFace = 1169,
 
 
     //Stage 09
@@ -854,8 +863,7 @@ public enum CharacterNameType
     Stage09_Character_Mountain = 1185,
     Stage09_Character_Desert = 1186,
     Stage09_Character_Forest = 1187,
-    Stage09_Boss_Geisha = 1188,
-    Stage09_Boss_NoFace = 1189,
+  
 
     DummyChar = 10001
     #endregion

@@ -117,16 +117,39 @@ public class MinionType_Script : BaseCharacter
         base.SetCharDead();
         if (!SpineAnim.CurrentAnim.Contains("rriv"))
         {
-            transform.position = new Vector3(100, 100, 100);
             SpineAnim.transform.localPosition = LocalSpinePosoffset;
             SpineAnim.SpineAnimationState.ClearTracks();
-            SetAnimation(CharacterAnimationStateType.Idle);
-            if(isActiveAndEnabled)
+            SpineAnim.CurrentAnim = "";
+            switch (DeathAnim)
             {
-                StartCoroutine(DisableChar());
+                case DeathAnimType.Explosion:
+                    for (int i = 0; i < UMS.Pos.Count; i++)
+                    {
+                        GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
+                        UMS.Pos[i] = Vector2Int.zero;
+                    }
+                    transform.position = new Vector3(100, 100, 100);
+                    SetAnimation(CharacterAnimationStateType.Idle);
+                    if (isActiveAndEnabled)
+                    {
+                        StartCoroutine(DisableChar());
+                    }
+                    break;
+                case DeathAnimType.Defeat:
+                    SetAnimation(CharacterAnimationStateType.Defeat);
+                    break;
+                case DeathAnimType.Reverse_Arrives:
+                    for (int i = 0; i < UMS.Pos.Count; i++)
+                    {
+                        GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
+                        UMS.Pos[i] = Vector2Int.zero;
+                    }
+                    SetAnimation(CharacterAnimationStateType.Defeat_ReverseArrive);
+                    break;
+                default:
+                    break;
             }
         }
-
     }
     private IEnumerator DisableChar()
     {
@@ -490,7 +513,12 @@ public class MinionType_Script : BaseCharacter
 
     public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
     {
-        if(animState == CharacterAnimationStateType.Defending && SpineAnim.CurrentAnim.Contains("Defending"))
+        if (BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle && SpineAnim.CurrentAnim.Contains("Defeat"))
+        {
+            return;
+        }
+
+        if (animState == CharacterAnimationStateType.Defending && SpineAnim.CurrentAnim.Contains("Defending"))
         {
             return;
         }
@@ -913,18 +941,19 @@ public class MinionType_Script : BaseCharacter
 
         if (completedAnim == CharacterAnimationStateType.Defeat.ToString())
         {
+            // SpineAnim.SpineAnimationState.SetAnimation(0, CharacterAnimationStateType.Defeat.ToString() + "_Loop", true);
+            //SpineAnim.CurrentAnim = CharacterAnimationStateType.Defeat.ToString() + "_Loop";
             return;
         }
 
         if (completedAnim == CharacterAnimationStateType.Defending.ToString())
         {
-            Debug.Log("DEfending End");
             isDefending = false;
             isDefendingStop = true;
             DefendingHoldingTimer = 0;
         }
 
-        if (completedAnim == CharacterAnimationStateType.Reverse_Arriving.ToString())
+        if (completedAnim == CharacterAnimationStateType.Reverse_Arriving.ToString() || completedAnim == CharacterAnimationStateType.Defeat_ReverseArrive.ToString())
         {
             transform.position = new Vector3(100, 100, 100);
             SpineAnim.SpineAnimationState.SetAnimation(0, CharacterAnimationStateType.Idle.ToString(), true);

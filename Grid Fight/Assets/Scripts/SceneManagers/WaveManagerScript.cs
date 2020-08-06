@@ -157,7 +157,7 @@ public class WaveManagerScript : MonoBehaviour
         res.CharInfo.MovementTimer = character.MovementTimer;
         
         res.CharInfo.ExperienceValue = character.Exp;
-
+        res.DeathAnim = character.DeathAnim;
         res.CharActionlist.Add(CharacterActionType.Move);
         res.CharInfo.AIs = character.AIs;
         if (character.AddAttacks)
@@ -261,7 +261,8 @@ public class WaveManagerScript : MonoBehaviour
             timer += BattleManagerScript.Instance.DeltaTime;
             yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
             if (timer > wavePhase.DelayBetweenChars &&
-                WaveCharcters.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script).ToList().Count < wavePhase.MaxEnemyOnScreen)
+                WaveCharcters.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script &&
+                r.CharInfo.HealthPerc > 0).ToList().Count < wavePhase.MaxEnemyOnScreen)
             {
                 if (wavePhase.IsRandom)
                 {
@@ -279,15 +280,27 @@ public class WaveManagerScript : MonoBehaviour
                         CurrentWaveChar.IsRandomSpowiningTile ? new Vector2Int() : CurrentWaveChar.SpowningTile[Random.Range(0, CurrentWaveChar.SpowningTile.Count)], true);
                     timer = 0;
                 }
-               
+
 
                 if (wavePhase.ListOfEnemy.Where(r => r.NumberOfCharacter > 0).ToList().Count == 0)
                 {
+                    List<BaseCharacter> test;
                     while (true)
                     {
-                        if (leadCharDie || WaveCharcters.Where(r => r.gameObject.activeInHierarchy && (r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script || (r.IsOnField && r.CharInfo.BaseCharacterType != BaseCharType.MinionType_Script))).ToList().Count == 0)
+                        test = WaveCharcters.Where(r =>
+                            (r.gameObject.activeInHierarchy && (r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script || (r.IsOnField && r.CharInfo.BaseCharacterType != BaseCharType.MinionType_Script)))).ToList();
+
+                        if (leadCharDie || (test.Count == 0 || test.Where(r => r.CharInfo.HealthPerc > 0).ToList().Count == 0))
                         {
                             isWaveOn = false;
+                            for (int i = 0; i < test.Count; i++)
+                            {
+                                for (int a = 0; a < test[i].UMS.Pos.Count; a++)
+                                {
+                                    GridManagerScript.Instance.SetBattleTileState(test[i].UMS.Pos[a], BattleTileStateType.Empty);
+                                    test[i].UMS.Pos[a] = Vector2Int.zero;
+                                }
+                            }
                             yield break;
                         }
                         yield return null;
@@ -494,6 +507,7 @@ public class WaveCharacterInfoClass
     public Vector2 StaminaRegeneration;
     public Vector2 MovementSpeed;
     public Vector2 MovementTimer;
+    public DeathAnimType DeathAnim;
     public float Exp;
 
     public List<ScriptableObjectAI> AIs = new List<ScriptableObjectAI>();

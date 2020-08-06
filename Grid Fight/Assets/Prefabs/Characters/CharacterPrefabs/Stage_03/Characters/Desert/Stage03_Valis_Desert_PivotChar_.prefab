@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f98aab6021486341825eb862f61401a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skeletonAnimation: {fileID: 0}
   CharOwner: {fileID: 0}
   CurveType: 0
   Speed_Time_Curves:
@@ -580,19 +581,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  charOwner: {fileID: 0}
+  testAtkEffect: {fileID: 0}
   Name: Pai
   CharacterIcon: {fileID: 0}
   Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 18079379e5337084286a38b915064869, type: 2}
   BaseCharacterType: 0
   CharacterID: 1065
-  CurrentAttackTypeInfo:
-  - {fileID: 11400000, guid: 6bbcc36a37b0ffd44bd538fc5d817290, type: 2}
-  - {fileID: 11400000, guid: c02632fe80c263046b4e9c2406fc018f, type: 2}
-  - {fileID: 11400000, guid: 9849f28f0405d914aaec2615894624ce, type: 2}
-  - {fileID: 11400000, guid: e1052265138e7b74799c4c6f99d2571e, type: 2}
-  - {fileID: 11400000, guid: 7abc9db43d6d11840bed72bdcf749871, type: 2}
-  - {fileID: 11400000, guid: 61e93e32fb387094a935be3f667138e8, type: 2}
+  attackSequences: []
+  _CurrentAttackTypeInfo: []
+  AddedAttackTypeInfo: []
   Elemental: 0
   ClassType: 2
   CharaterLevel: 0
@@ -645,7 +644,12 @@ MonoBehaviour:
     B_BaseShieldRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
+    TileMovementTime: 1
     MovementSpeed: 2.2
+    CuttingPerc: 0.85
+    IntroPerc: 0.15
+    LoopPerc: 0.7
+    EndPerc: 0.15
     AttackSpeed: 2.5
     AttackSpeedRatio: 2
     BulletSpeed: 1

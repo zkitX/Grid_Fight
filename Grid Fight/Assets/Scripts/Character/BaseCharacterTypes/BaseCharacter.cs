@@ -92,7 +92,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public bool isDefendingStop = false;
     [HideInInspector]
     public bool bulletFired = false;
-
+    public DeathAnimType DeathAnim;
     public List<BuffDebuffClass> BuffsDebuffsList = new List<BuffDebuffClass>();
     public bool HasBuffDebuff(BuffDebuffStatsType type)
     {
@@ -1705,6 +1705,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         if (animState == CharacterAnimationStateType.Reverse_Arriving.ToString())
         {
         }
+      
 
         if (animState.Contains(CharacterAnimationStateType.GettingHit.ToString()) && currentAttackPhase != AttackPhasesType.End)
         {
