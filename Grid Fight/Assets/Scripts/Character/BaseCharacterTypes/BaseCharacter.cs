@@ -255,14 +255,15 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             RebirthEffect();
             return;
         }
+        if (CharInfo.Health > 0f) return; //An additional check since for some reason the rebirth isn't applied before a second attack triggers death for some reason
         SetCharDead();
     }
 
     public virtual void RebirthEffect()
     {
         float HealAmount = CharInfo.HealthStats.Base;
-        LastHitter.hitter.CharInfo.Health += HealAmount;
-        LastHitter.hitter.HealthStatsChangedEvent?.Invoke(HealAmount, HealthChangedType.Heal, SpineAnim.transform);
+        CharInfo.Health += HealAmount;
+        HealthStatsChangedEvent?.Invoke(HealAmount, HealthChangedType.Rebirth, SpineAnim.transform);
         GetBuffDebuff(BuffDebuffStatsType.Rebirth).CurrentBuffDebuff.Stop_Co = true;
     }
 
@@ -1329,11 +1330,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         if (!SpineAnim.CurrentAnim.Contains("Reverse") && CharInfo.HealthPerc > 0)
         {
             BuffDebuffClass item = BuffsDebuffsList.Where(r => r.Stat == bdClass.Effect.StatsToAffect).FirstOrDefault();
-            string[] newBuffDebuff = bdClass.Effect.Name.Split('_');
             if (item == null)
             {
                 //Debug.Log(bdClass.Name + "   " + newBuffDebuff.Last());
-                item = new BuffDebuffClass(bdClass.Effect.Name, bdClass.Effect.StatsToAffect, Convert.ToInt32(newBuffDebuff.Last()), bdClass, bdClass.Effect.Duration, bdClass.EffectMaker);
+                item = new BuffDebuffClass(bdClass.Effect.StatsToAffect, bdClass.Effect.level, bdClass, bdClass.Effect.Duration, bdClass.EffectMaker);
                 item.BuffDebuffCo = Buff_DebuffCoroutine(item);
                 BuffsDebuffsList.Insert(0, item);
                 UMS.buffIconHandler.RefreshIcons(BuffsDebuffsList);
@@ -2120,7 +2120,6 @@ public class CurrentBuffsDebuffsClass
 [System.Serializable]
 public class BuffDebuffClass
 {
-    public string Name;
     public Buff_DebuffClass CurrentBuffDebuff;
     public IEnumerator BuffDebuffCo;
     public float Duration;
@@ -2132,9 +2131,8 @@ public class BuffDebuffClass
     {
 
     }
-    public BuffDebuffClass(string name, BuffDebuffStatsType stat, int level, Buff_DebuffClass currentCuffDebuff, float duration, BaseCharacter effectMaker)
+    public BuffDebuffClass(BuffDebuffStatsType stat, int level, Buff_DebuffClass currentCuffDebuff, float duration, BaseCharacter effectMaker)
     {
-        Name = name;
         Stat = stat;
         Level = level;
         CurrentBuffDebuff = currentCuffDebuff;
@@ -2142,9 +2140,8 @@ public class BuffDebuffClass
         EffectMaker = effectMaker;
     }
 
-    public BuffDebuffClass(string name, BuffDebuffStatsType stat, int level, Buff_DebuffClass currentCuffDebuff, IEnumerator buffDebuffCo, float duration)
+    public BuffDebuffClass(BuffDebuffStatsType stat, int level, Buff_DebuffClass currentCuffDebuff, IEnumerator buffDebuffCo, float duration)
     {
-        Name = name;
         Stat = stat;
         Level = level;
         CurrentBuffDebuff = currentCuffDebuff;

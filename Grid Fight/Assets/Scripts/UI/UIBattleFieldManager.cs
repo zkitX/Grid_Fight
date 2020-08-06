@@ -96,48 +96,55 @@ public class UIBattleFieldManager : MonoBehaviour
         {
             case HealthChangedType.Damage:
                 if (value == 0) return;
-                CharOwner_DamageReceivedEvent(value, charOwner);
+                StartCoroutine(DamageCo(value, charOwner));
                 break;
             case HealthChangedType.Defend:
-                CharOwner_DefendDamageReceivedEvent(value, charOwner);
+                StartCoroutine(DefendCo(value, charOwner));
                 break;
             case HealthChangedType.Heal:
-                CharOwner_HealReceivedEvent(value, charOwner);
+                StartCoroutine(HealingCo(value, charOwner));
                 break;
             case HealthChangedType.CriticalHit:
-                CharOwner_CriticalHitReceivedEvent(value, charOwner);
+                StartCoroutine(CriticalHitCo(value, charOwner));
                 break;
             case HealthChangedType.Invulnerable:
-                CharOwner_InvulnerableAttackReceivedEvent(value, charOwner);
+                StartCoroutine(InvulnerableCo(value, charOwner));
+                break;
+            case HealthChangedType.Rebirth:
+                StartCoroutine(RebirthCo(charOwner));
                 break;
             default:
                 break;
         }
     }
 
-    private void CharOwner_HealReceivedEvent(float heal, Transform charOwner)
+    private IEnumerator RebirthCo(Transform charOwner)
     {
-        StartCoroutine(HealingCo(heal, charOwner));
-    }
+        float timer = 0;
+        bool isAlive = true;
+        GameObject h = Healings.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
+        if (h == null)
+        {
+            h = Instantiate(Healing, transform);
+        }
+        h.SetActive(true);
+        h.GetComponentInChildren<TextMeshProUGUI>().text = "REBIRTH";
+        SetAnim(h.GetComponentInChildren<Animator>(), 5);
+        while (timer <= 0.8f)
+        {
+            if (charOwner.gameObject.activeInHierarchy && isAlive)
+            {
+                h.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
+            }
+            else if (isAlive)
+            {
+                isAlive = false;
+            }
+            yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
 
-    private void CharOwner_DamageReceivedEvent(float damage, Transform charOwner)
-    {
-        StartCoroutine(DamageCo(damage, charOwner));
-    }
-
-    private void CharOwner_DefendDamageReceivedEvent(float damage, Transform charOwner)
-    {
-        StartCoroutine(DefendCo(damage, charOwner));
-    }
-
-    private void CharOwner_CriticalHitReceivedEvent(float damage, Transform charOwner)
-    {
-        StartCoroutine(CriticalHitCo(damage, charOwner));
-    }
-
-    private void CharOwner_InvulnerableAttackReceivedEvent(float damage, Transform charOwner)
-    {
-        StartCoroutine(InvulnerableCo(damage, charOwner));
+            timer += BattleManagerScript.Instance.DeltaTime;
+        }
+        h.SetActive(false);
     }
 
     private IEnumerator InvulnerableCo(float damage, Transform charOwner)

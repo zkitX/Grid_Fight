@@ -484,6 +484,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  charOwner: {fileID: 0}
+  testAtkEffect: {fileID: 0}
   Name: MainframeCopy
   CharacterIcon: {fileID: 0}
   Mask: {fileID: 0}
@@ -501,6 +503,7 @@ MonoBehaviour:
     StatToCheck: 0
     ValueChecker: 0
     PercToCheck: 0
+    InBetween: {x: 60, y: 40}
     Chances: 100
   - Name: Copy at less than 60%
     rename: 1
@@ -512,9 +515,11 @@ MonoBehaviour:
     StatToCheck: 1
     ValueChecker: 0
     PercToCheck: 60
+    InBetween: {x: 60, y: 40}
     Chances: 50
-  CurrentAttackTypeInfo:
+  _CurrentAttackTypeInfo:
   - {fileID: 11400000, guid: 9496826400681554ba9c98d9340caa9a, type: 2}
+  AddedAttackTypeInfo: []
   Elemental: 0
   ClassType: 2
   CharaterLevel: 0
@@ -569,23 +574,8 @@ MonoBehaviour:
   SpeedStats:
     BaseSpeed: 1
     TileMovementTime: 1
-    IntroTileMovementSpeed: 1
-    EndTileMovementSpeed: 1
     MovementSpeed: 1
-    FirstMovement:
-      MovementPercUp: 0.85
-      MovementPercDown: 0.85
-      MovementPercForward: 0.85
-      MovementPercBackward: 0.85
-    LoopMovement:
-      StartLoopMovementPercUp: 0.15
-      EndLoopMovementPercUp: 0.85
-      StartLoopMovementPercDown: 0.15
-      EndLoopMovementPercDown: 0.85
-      StartLoopMovementPercForward: 0.15
-      EndLoopMovementPercForward: 0.85
-      StartLoopMovementPercBackward: 0.15
-      EndLoopMovementPercBackward: 0.85
+    CuttingPerc: 0.85
     IntroPerc: 0.15
     LoopPerc: 0.7
     EndPerc: 0.15
