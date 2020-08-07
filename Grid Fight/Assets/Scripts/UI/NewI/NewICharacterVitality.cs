@@ -163,7 +163,7 @@ public class NewICharacterVitality : MonoBehaviour
         float staminaStart = staminaBar.fillAmount;
         float shieldStart = shieldBar.fillAmount;
 
-        float waitLeft = 90;// assignedCharDetails.CharInfo.CharacterRespawnLength;
+        float waitLeft = assignedCharDetails.CharInfo.CharacterRespawnLength;
         float startingWait = waitLeft;
         float prog = 0f;
         while (waitLeft != 0f)

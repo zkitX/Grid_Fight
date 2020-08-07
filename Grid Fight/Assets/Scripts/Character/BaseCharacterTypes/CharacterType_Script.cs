@@ -191,7 +191,7 @@ public class CharacterType_Script : BaseCharacter
     IEnumerator ReviveSequencer()
     {
         float timeElapsed = 0f;
-        float timeToWait = 90;//CharInfo.CharacterRespawnLength;
+        float timeToWait = CharInfo.CharacterRespawnLength;
         while (timeElapsed != timeToWait)
         {
             if (BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle
@@ -226,7 +226,7 @@ public class CharacterType_Script : BaseCharacter
         SetAnimation(CharacterAnimationStateType.Arriving);
         AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.ArrivalSpawn, AudioBus.MidPrio);
         //AudioManager.Instance.PlayGeneric("Arriving_Spawn_20200108_V5");
-        EventManager.Instance?.AddCharacterArrival((BaseCharacter)this);
+        EventManager.Instance?.AddCharacterArrival(this);
        
     }
 
@@ -238,10 +238,11 @@ public class CharacterType_Script : BaseCharacter
         }
 
         SetAnimation(CharacterAnimationStateType.Reverse_Arriving);
+        isDefendingStop = true;
         isDefending = false;
         CurrentPlayerController = ControllerType.None;
         AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.ExitBattleJump, AudioBus.HighPrio);
-        EventManager.Instance?.AddCharacterSwitched((BaseCharacter)this);
+        EventManager.Instance?.AddCharacterSwitched(this);
     }
 
     #endregion

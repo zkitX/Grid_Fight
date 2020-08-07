@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7966445166461059056}
   m_Layer: 0
-  m_Name: Stage03_Character_Desert_PivotChar_
+  m_Name: Stage03_Character_Desert_PivotChar_Valis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,7 +158,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 915dc9da775b7284492643cb3d467f0e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 0}
+  skeletonDataAsset: {fileID: 11400000, guid: 48a05c39ed03ca5499f6d9d94db0e3d7, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f98aab6021486341825eb862f61401a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skeletonAnimation: {fileID: 0}
   CharOwner: {fileID: 0}
   CurveType: 0
   Speed_Time_Curves:
@@ -490,19 +491,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  charOwner: {fileID: 0}
+  testAtkEffect: {fileID: 0}
   Name: Pai
   CharacterIcon: {fileID: 0}
   Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 18079379e5337084286a38b915064869, type: 2}
   BaseCharacterType: 0
   CharacterID: 1065
-  CurrentAttackTypeInfo:
+  attackSequences: []
+  _CurrentAttackTypeInfo:
+  - {fileID: 11400000, guid: 61e93e32fb387094a935be3f667138e8, type: 2}
+  - {fileID: 11400000, guid: 7abc9db43d6d11840bed72bdcf749871, type: 2}
   - {fileID: 11400000, guid: 6bbcc36a37b0ffd44bd538fc5d817290, type: 2}
   - {fileID: 11400000, guid: c02632fe80c263046b4e9c2406fc018f, type: 2}
-  - {fileID: 11400000, guid: 9849f28f0405d914aaec2615894624ce, type: 2}
-  - {fileID: 11400000, guid: e1052265138e7b74799c4c6f99d2571e, type: 2}
-  - {fileID: 11400000, guid: 7abc9db43d6d11840bed72bdcf749871, type: 2}
-  - {fileID: 11400000, guid: 61e93e32fb387094a935be3f667138e8, type: 2}
+  AddedAttackTypeInfo: []
   Elemental: 0
   ClassType: 2
   CharaterLevel: 0
@@ -555,7 +558,12 @@ MonoBehaviour:
     B_BaseShieldRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
+    TileMovementTime: 1
     MovementSpeed: 2.2
+    CuttingPerc: 0.85
+    IntroPerc: 0.15
+    LoopPerc: 0.7
+    EndPerc: 0.15
     AttackSpeed: 2.5
     AttackSpeedRatio: 2
     BulletSpeed: 1
@@ -581,8 +589,12 @@ MonoBehaviour:
   DefenceStats:
     BaseDefence: 2
     Invulnerability: 0.2
+    MinionDefenceChances: 20
+    MinionPerfectDefenceChances: 5
     B_BaseDefence: 10
     B_Invulnerability: 0.2
+    B_MinionDefenceChances: 20
+    B_MinionPerfectDefenceChances: 5
     LevelMultiplier: 0
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0

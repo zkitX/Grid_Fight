@@ -777,10 +777,10 @@ public enum CharacterNameType
 
     //Stage 03 - Forest Of Kin
     ForestOfKin_Minion_Mountain = 1060,
-    ForestOfKin_Minion_Desert = 1061,
+    ForestOfKin_Minion_Desert_Wendigoat = 1061,
     ForestOfKin_Minion_Forest = 1062,
     ForestOfKin_Minion_Valley = 1063,
-    ForestOfKin_Character_Valley_Enola = 1064,
+    ForestOfKin_Character_Valley_Elu = 1064,
     ForestOfKin_Character_Desert_Valis = 1065,
     ForestOfKin_Character_Mountain_Seke = 1066,
     ForestOfKin_Character_Forest_Balla = 1067,
