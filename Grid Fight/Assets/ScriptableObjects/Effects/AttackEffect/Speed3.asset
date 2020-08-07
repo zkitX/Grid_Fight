@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2162115bd0e37014394e1dbf4dad6e54, type: 3}
   m_Name: Speed3
   m_EditorClassIdentifier: 
-  Name: Speed_Debuff_02
+  level: 1
+  StackType: 0
+  maxStack: 3
   StatsToAffect: 23
   StatsChecker: 0
   Value: {x: -500, y: -500}
@@ -24,3 +26,8 @@ MonoBehaviour:
   recolorCharUI: 0
   statusIconColor: {r: 1, g: 0, b: 1, a: 1}
   Atk: {fileID: 0}
+  AIs: []
+  ClonePrefab: {fileID: 0}
+  ClonePowerScale: 0.5
+  CloneAsManyAsCurrentEnemies: 0
+  CloneAmount: 1

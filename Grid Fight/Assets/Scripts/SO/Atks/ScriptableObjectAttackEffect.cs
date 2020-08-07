@@ -16,6 +16,8 @@ public class ScriptableObjectAttackEffect : ScriptableObject
     }
 
     [Range(1, 4)] public int level = 1;
+    public BuffDebuffStackType StackType = BuffDebuffStackType.Refreshable;
+    [ConditionalField("StackType", false, BuffDebuffStackType.Stackable)] public int maxStack = 3;
     public BuffDebuffStatsType StatsToAffect;
     public StatsCheckerType StatsChecker;
     public Vector2 Value;

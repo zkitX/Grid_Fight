@@ -1337,7 +1337,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         if (!SpineAnim.CurrentAnim.Contains("Reverse") && CharInfo.HealthPerc > 0)
         {
             BuffDebuffClass item = BuffsDebuffsList.Where(r => r.Stat == bdClass.Effect.StatsToAffect).FirstOrDefault();
-            if (item == null)
+            if (item == null) //Create the new buffDebuff
             {
                 //Debug.Log(bdClass.Name + "   " + newBuffDebuff.Last());
                 item = new BuffDebuffClass(bdClass.Effect.StatsToAffect, bdClass.Effect.level, bdClass, bdClass.Effect.Duration, bdClass.EffectMaker);
@@ -1345,9 +1345,16 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 BuffsDebuffsList.Insert(0, item);
                 UMS.buffIconHandler.RefreshIcons(BuffsDebuffsList);
                 StartCoroutine(item.BuffDebuffCo);
+                item.currentBuffValue = bdClass.Value;
             }
-            else
+            else //Refresh current BuffDebuff duration
             {
+                if(bdClass.Effect.StackType == BuffDebuffStackType.Stackable && bdClass.Effect.maxStack > item.CurrentStack)
+                {
+                    item.CurrentBuffDebuff.values += bdClass.values;
+                    item.CurrentStack++;
+                    item.UpdateBuffValue();
+                }
                 item.Duration = bdClass.Effect.Duration;
                 item.CurrentBuffDebuff.Timer = 0;
             }
@@ -1368,23 +1375,22 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
 
         float val = 0;
-        float currentBuffValue = bdClass.CurrentBuffDebuff.Value;
         switch (bdClass.Stat)
         {
             case BuffDebuffStatsType.DamageStats_BaseDamage:
-                CharInfo.DamageStats.BaseDamage += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.DamageStats.B_BaseDamage / 100f) * currentBuffValue : currentBuffValue;
+                CharInfo.DamageStats.BaseDamage += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.DamageStats.B_BaseDamage / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
                 break;
             case BuffDebuffStatsType.Health:
-                val = bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.HealthStats.B_Base / 100f) * currentBuffValue : currentBuffValue;
+                val = bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.HealthStats.B_Base / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
                 CharInfo.Health += val;
                 HealthStatsChangedEvent?.Invoke(val, HealthChangedType.Heal, bdClass.EffectMaker.SpineAnim.transform);
                 EventManager.Instance?.UpdateHealth(this);
-                HealthStatsChangedEvent?.Invoke(currentBuffValue, currentBuffValue > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, SpineAnim.transform);
+                HealthStatsChangedEvent?.Invoke(bdClass.currentBuffValue, bdClass.currentBuffValue > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, SpineAnim.transform);
                 break;
             case BuffDebuffStatsType.SpeedStats_BaseSpeed:
-                if (currentBuffValue > 0)
+                if (bdClass.currentBuffValue > 0)
                 {
-                    CharInfo.SpeedStats.BaseSpeed += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_BaseSpeed / 100f) * currentBuffValue : currentBuffValue;
+                    CharInfo.SpeedStats.BaseSpeed += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_BaseSpeed / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
                 }
                 else
                 {
@@ -1395,7 +1401,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     CharInfo.SpeedStats.BaseSpeed = 0;
                 }
                 SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.BaseSpeed);
-                if (currentBuffValue == 0)
+                if (bdClass.currentBuffValue == 0)
                 {
                     if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
                     {
@@ -1433,15 +1439,15 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 }
                 break;
             case BuffDebuffStatsType.SpeedStats_MovementSpeed:
-                CharInfo.SpeedStats.MovementSpeed += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_MovementSpeed / 100f) * currentBuffValue : currentBuffValue;
+                CharInfo.SpeedStats.MovementSpeed += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_MovementSpeed / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
                 break;
             case BuffDebuffStatsType.Drain:
-                val = bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Value ? currentBuffValue : (CharInfo.HealthStats.B_Base / 100) * currentBuffValue;
+                val = bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Value ? bdClass.currentBuffValue : (CharInfo.HealthStats.B_Base / 100) * bdClass.currentBuffValue;
                 bdClass.EffectMaker.CharInfo.Health += val;
                 EventManager.Instance?.UpdateHealth(this);
                 EventManager.Instance?.UpdateHealth(bdClass.EffectMaker);
-                HealthStatsChangedEvent?.Invoke(val, currentBuffValue > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, SpineAnim.transform);
-                HealthStatsChangedEvent?.Invoke(val, currentBuffValue > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, bdClass.EffectMaker.SpineAnim.transform);
+                HealthStatsChangedEvent?.Invoke(val, bdClass.currentBuffValue > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, SpineAnim.transform);
+                HealthStatsChangedEvent?.Invoke(val, bdClass.currentBuffValue > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, bdClass.EffectMaker.SpineAnim.transform);
                 break;
             case BuffDebuffStatsType.Zombification:
                 if (CharInfo.Health > 0)
@@ -1458,13 +1464,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 );
                 break;
             case BuffDebuffStatsType.ShieldStats_BaseShieldRegeneration:
-                CharInfo.ShieldStats.BaseShieldRegeneration += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.ShieldStats.B_BaseShieldRegeneration / 100f) * currentBuffValue : currentBuffValue;
+                CharInfo.ShieldStats.BaseShieldRegeneration += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.ShieldStats.B_BaseShieldRegeneration / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
                 break;
             case BuffDebuffStatsType.AttackChange:
                 CharInfo.CurrentAttackTypeInfo.Add(bdClass.CurrentBuffDebuff.Effect.Atk);
                 break;
             case BuffDebuffStatsType.StaminaStats_Stamina:
-                CharInfo.StaminaStats.Stamina += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.StaminaStats.B_Base / 100f) * currentBuffValue : currentBuffValue;
+                CharInfo.StaminaStats.Stamina += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.StaminaStats.B_Base / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
                 break;
         }
 
@@ -1482,18 +1488,18 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     iterator++;
                     if (bdClass.Stat == BuffDebuffStatsType.Health_Overtime)
                     {
-                        CharInfo.Health += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Value ? currentBuffValue : (CharInfo.HealthStats.Base / 100) * currentBuffValue;
-                        HealthStatsChangedEvent?.Invoke(currentBuffValue, currentBuffValue > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, SpineAnim.transform);
+                        CharInfo.Health += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Value ? bdClass.currentBuffValue : (CharInfo.HealthStats.Base / 100) * bdClass.currentBuffValue;
+                        HealthStatsChangedEvent?.Invoke(bdClass.currentBuffValue, bdClass.currentBuffValue > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, SpineAnim.transform);
                         EventManager.Instance?.UpdateHealth(this);
                         //Apply Bleed
-                        if (currentBuffValue < 0)
+                        if (bdClass.currentBuffValue < 0)
                         {
                             ParticleManagerScript.Instance.FireParticlesInPosition(ParticleManagerScript.Instance.GetParticlePrefabByName(ParticlesType.Status_Debuff_Bleed), CharacterNameType.None, AttackParticlePhaseTypes.Cast, SpineAnim.transform.position, SideType.LeftSide, AttackInputType.Weak).transform.SetParent(SpineAnim.transform);
                         }
                     }
                     if (bdClass.Stat == BuffDebuffStatsType.Drain_Overtime)
                     {
-                        val = bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Value ? currentBuffValue : (CharInfo.HealthStats.Base / 100) * currentBuffValue;
+                        val = bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Value ? bdClass.currentBuffValue : (CharInfo.HealthStats.Base / 100) * bdClass.currentBuffValue;
                         HealthStatsChangedEvent?.Invoke(val, HealthChangedType.Heal, bdClass.EffectMaker.SpineAnim.transform);
                         HealthStatsChangedEvent?.Invoke(val, HealthChangedType.Damage, SpineAnim.transform);
                         bdClass.EffectMaker.CharInfo.Health += val;
@@ -1508,19 +1514,19 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             switch (bdClass.Stat)
             {
                 case BuffDebuffStatsType.DamageStats_BaseDamage:
-                    CharInfo.DamageStats.BaseDamage = bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.DamageStats.B_BaseDamage / 100f) * currentBuffValue : currentBuffValue;
+                    CharInfo.DamageStats.BaseDamage = bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.DamageStats.B_BaseDamage / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
                     break;
                 case BuffDebuffStatsType.SpeedStats_BaseSpeed:
-                    if (currentBuffValue > 0)
+                    if (bdClass.currentBuffValue > 0)
                     {
-                        CharInfo.SpeedStats.BaseSpeed -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_BaseSpeed / 100f) * currentBuffValue : currentBuffValue;
+                        CharInfo.SpeedStats.BaseSpeed -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_BaseSpeed / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
                     }
                     else
                     {
                         CharInfo.SpeedStats.BaseSpeed = CharInfo.SpeedStats.B_BaseSpeed;
                     }
                     SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.BaseSpeed);
-                    if (currentBuffValue == 0 && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && !bdClass.CurrentBuffDebuff.Stop_Co)
+                    if (bdClass.currentBuffValue == 0 && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && !bdClass.CurrentBuffDebuff.Stop_Co)
                     {
                         CharActionlist.Add(CharacterActionType.SwitchCharacter);
                         if (BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == null).ToList().Count > 0)
@@ -1536,16 +1542,16 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     }
                     break;
                 case BuffDebuffStatsType.SpeedStats_MovementSpeed:
-                    CharInfo.SpeedStats.MovementSpeed -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_MovementSpeed / 100f) * currentBuffValue : currentBuffValue;
+                    CharInfo.SpeedStats.MovementSpeed -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_MovementSpeed / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
                     break;
                 case BuffDebuffStatsType.ShieldStats_BaseShieldRegeneration:
-                    CharInfo.ShieldStats.BaseShieldRegeneration -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.ShieldStats.B_BaseShieldRegeneration / 100f) * currentBuffValue : currentBuffValue;
+                    CharInfo.ShieldStats.BaseShieldRegeneration -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.ShieldStats.B_BaseShieldRegeneration / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
                     break;
                 case BuffDebuffStatsType.AttackChange:
                     CharInfo.CurrentAttackTypeInfo.Remove(bdClass.CurrentBuffDebuff.Effect.Atk);
                     break;
                 case BuffDebuffStatsType.StaminaStats_Stamina:
-                    CharInfo.StaminaStats.Stamina -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.StaminaStats.B_Base / 100f) * currentBuffValue : currentBuffValue;
+                    CharInfo.StaminaStats.Stamina -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.StaminaStats.B_Base / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
                     break;
             }
         }
@@ -2079,16 +2085,17 @@ public class WeaponClass
 [System.Serializable]
 public class Buff_DebuffClass
 {
+    public ElementalResistenceClass ElementalResistence;
+    public ElementalType ElementalPower;
+    public float Timer;
+    public Vector2 values = new Vector2();
     public float Value
     {
         get
         {
-            return UnityEngine.Random.Range(Effect.Value.x, Effect.Value.y);
+            return UnityEngine.Random.Range(values.x, values.y);
         }
     }
-    public ElementalResistenceClass ElementalResistence;
-    public ElementalType ElementalPower;
-    public float Timer;
     public bool Stop_Co = false;
     public Sprite icon;
     public BaseCharacter EffectMaker;
@@ -2102,6 +2109,7 @@ public class Buff_DebuffClass
         EffectMaker = effectMaker;
         Effect = effect;
         icon = effect.icon;
+        values = effect.Value;
     }
 
     public Buff_DebuffClass()
@@ -2140,6 +2148,13 @@ public class BuffDebuffClass
     public BuffDebuffStatsType Stat;
     public int Level;
     public BaseCharacter EffectMaker;
+    public float currentBuffValue = 0f;
+    public int CurrentStack = 1;
+
+    public void UpdateBuffValue()
+    {
+        currentBuffValue = CurrentBuffDebuff.Value;
+    }
 
     public BuffDebuffClass()
     {
@@ -2152,6 +2167,7 @@ public class BuffDebuffClass
         CurrentBuffDebuff = currentCuffDebuff;
         Duration = duration;
         EffectMaker = effectMaker;
+        CurrentStack = 1;
     }
 
     public BuffDebuffClass(BuffDebuffStatsType stat, int level, Buff_DebuffClass currentCuffDebuff, IEnumerator buffDebuffCo, float duration)
@@ -2161,6 +2177,7 @@ public class BuffDebuffClass
         CurrentBuffDebuff = currentCuffDebuff;
         BuffDebuffCo = buffDebuffCo;
         Duration = duration;
+        CurrentStack = 1;
     }
 }
 
