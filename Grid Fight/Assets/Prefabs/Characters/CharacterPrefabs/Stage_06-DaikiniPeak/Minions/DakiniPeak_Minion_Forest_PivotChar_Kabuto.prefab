@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f98aab6021486341825eb862f61401a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skeletonAnimation: {fileID: 0}
   CharOwner: {fileID: 0}
   CurveType: 0
   Speed_Time_Curves:
@@ -350,15 +351,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  charOwner: {fileID: 0}
+  testAtkEffect: {fileID: 0}
   Name: Kabuto
   CharacterIcon: {fileID: 0}
   Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: d9cbca5d088c6724c9bfaecba5f48903, type: 2}
   BaseCharacterType: 1
   CharacterID: 1122
-  CurrentAttackTypeInfo:
+  attackSequences: []
+  _CurrentAttackTypeInfo:
   - {fileID: 11400000, guid: e5efe459142f6594288f8c94c5044443, type: 2}
   - {fileID: 11400000, guid: 9b792991a5ae7b5439bd3f32e1e4138b, type: 2}
+  AddedAttackTypeInfo: []
   Elemental: 5
   ClassType: 2
   CharaterLevel: 0
@@ -411,7 +416,12 @@ MonoBehaviour:
     B_BaseShieldRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
+    TileMovementTime: 1
     MovementSpeed: 1
+    CuttingPerc: 0.85
+    IntroPerc: 0.15
+    LoopPerc: 0.7
+    EndPerc: 0.15
     AttackSpeed: 1
     AttackSpeedRatio: 5
     BulletSpeed: 5
@@ -437,8 +447,12 @@ MonoBehaviour:
   DefenceStats:
     BaseDefence: 3
     Invulnerability: 0.2
+    MinionDefenceChances: 20
+    MinionPerfectDefenceChances: 5
     B_BaseDefence: 10
     B_Invulnerability: 0.2
+    B_MinionDefenceChances: 20
+    B_MinionPerfectDefenceChances: 5
     LevelMultiplier: 0
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0

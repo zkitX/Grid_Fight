@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage09_Character_Forest_EnemyAttack01_Joja
+  m_Name: Stage06_Minion_Desert_EnemyAttack01_Cow
   m_EditorClassIdentifier: 
   isSequencedAttack: 0
   Chances: 100
@@ -26,17 +26,17 @@ MonoBehaviour:
   Fov: 0
   Particles:
     Left:
-      Cast: {fileID: 3839770069518606395, guid: 445e0f8ae75f14b4a942175fb27251bd,
+      Cast: {fileID: 2767444965936388806, guid: d7bbc84c846af864f8f1df7e5d6bfacd,
         type: 3}
-      Bullet: {fileID: 8767100538871545684, guid: 04d9916663411c6478e1f1df8d0d2f23,
+      Bullet: {fileID: 3348475837081534812, guid: 49def5344fbc5a94abb70880874518f8,
         type: 3}
-      Hit: {fileID: 2603959623819653859, guid: 049673235679a9948b6f4a1e3cd3b392, type: 3}
+      Hit: {fileID: 4602912456739269625, guid: e062812cb24a05246b731fe1b2655526, type: 3}
     Right:
-      Cast: {fileID: 2963007590617284718, guid: e8018e616e0e7af419af6c844747fba8,
+      Cast: {fileID: 2767444965936388806, guid: 6b4ddd1ff3e272f4dbe368fcf44dd110,
         type: 3}
-      Bullet: {fileID: 1053817659358069426, guid: 1ddd81fa605244d4d8fbfc27facf9db3,
+      Bullet: {fileID: 3348475837081534812, guid: 81602cb7fad8d7c4f879d25abc6f6031,
         type: 3}
-      Hit: {fileID: 1949286796274990580, guid: e31676cfabbff004eb3c449bcb6ea993, type: 3}
+      Hit: {fileID: 4602912456739269625, guid: 19c713fcba6c1c141b462c5649c787b0, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
@@ -104,18 +104,54 @@ MonoBehaviour:
   TilesAtk:
     AtkType: 1
     BulletTrajectories:
-    - Delay: 1.5
-      BulletTravelDurationPerTile: 0
+    - Delay: 1
+      BulletTravelDurationPerTile: 0.25
       ExplosionChances: 100
       Trajectory_Y:
         serializedVersion: 2
-        m_Curve: []
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
       Trajectory_Z:
         serializedVersion: 2
-        m_Curve: []
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -148,7 +184,7 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-      - Pos: {x: -1, y: 1}
+      - Pos: {x: 2, y: 0}
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -157,7 +193,7 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-      - Pos: {x: 1, y: 1}
+      - Pos: {x: -2, y: 0}
         HasEffect: 0
         showImpact: 1
         Effects: []

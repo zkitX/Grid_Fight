@@ -472,6 +472,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  charOwner: {fileID: 0}
+  testAtkEffect: {fileID: 0}
   Name: Caw
   CharacterIcon: {fileID: 0}
   Mask: {fileID: 0}
@@ -479,9 +481,10 @@ MonoBehaviour:
   BaseCharacterType: 1
   CharacterID: 1121
   attackSequences: []
-  CurrentAttackTypeInfo:
+  _CurrentAttackTypeInfo:
   - {fileID: 11400000, guid: 8ec814b28b9049142ad04e0e81b5f9b9, type: 2}
   - {fileID: 11400000, guid: e953716e427536049bef73a99d3529bb, type: 2}
+  AddedAttackTypeInfo: []
   Elemental: 5
   ClassType: 3
   CharaterLevel: 0
@@ -534,21 +537,12 @@ MonoBehaviour:
     B_BaseShieldRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
+    TileMovementTime: 1
     MovementSpeed: 1
-    FirstMovement:
-      MovementPercUp: 0.85
-      MovementPercDown: 0.85
-      MovementPercForward: 0.85
-      MovementPercBackward: 0.85
-    LoopMovement:
-      MovementPercUp: 0.85
-      MovementPercDown: 0.85
-      MovementPercForward: 0.85
-      MovementPercBackward: 0.85
-    InterpolationTime_DashForward: 0
-    InterpolationTime_DashBackward: 0
-    InterpolationTime_DashUp: 0
-    InterpolationTime_DashDown: 0
+    CuttingPerc: 0.85
+    IntroPerc: 0.15
+    LoopPerc: 0.7
+    EndPerc: 0.15
     AttackSpeed: 1
     AttackSpeedRatio: 5
     BulletSpeed: 5

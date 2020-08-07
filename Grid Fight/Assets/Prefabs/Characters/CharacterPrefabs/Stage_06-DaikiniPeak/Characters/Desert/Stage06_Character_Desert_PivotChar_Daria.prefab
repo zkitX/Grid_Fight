@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f98aab6021486341825eb862f61401a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skeletonAnimation: {fileID: 0}
   CharOwner: {fileID: 0}
   CurveType: 0
   Speed_Time_Curves:
@@ -435,19 +436,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  charOwner: {fileID: 0}
+  testAtkEffect: {fileID: 0}
   Name: Daria
   CharacterIcon: {fileID: 21300000, guid: cfdcc35012e54514a9c5cc1f11bfc3ef, type: 3}
   Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 93f6bf070be4af24fb8dbc3dea6f6df7, type: 2}
   BaseCharacterType: 0
   CharacterID: 1125
-  CurrentAttackTypeInfo:
+  attackSequences: []
+  _CurrentAttackTypeInfo:
   - {fileID: 11400000, guid: 01eaafa343cfd124ab135e92e2fb7439, type: 2}
   - {fileID: 11400000, guid: 42da2b5f421759743aafa868edc89e87, type: 2}
-  - {fileID: 11400000, guid: 7867a8f404905364e8f9e8098cc1e0db, type: 2}
-  - {fileID: 11400000, guid: 0b20fd70e5e89114486cb45c13734d8f, type: 2}
   - {fileID: 11400000, guid: f1dce7c6efdb03b4b9f450c62f6823b3, type: 2}
   - {fileID: 11400000, guid: 086189d8abf712841a8d988695dc768f, type: 2}
+  AddedAttackTypeInfo: []
   Elemental: 2
   ClassType: 3
   CharaterLevel: 0
@@ -500,7 +503,12 @@ MonoBehaviour:
     B_BaseShieldRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
+    TileMovementTime: 1
     MovementSpeed: 1.9
+    CuttingPerc: 0.85
+    IntroPerc: 0.15
+    LoopPerc: 0.7
+    EndPerc: 0.15
     AttackSpeed: 1.4
     AttackSpeedRatio: 3
     BulletSpeed: 2.2

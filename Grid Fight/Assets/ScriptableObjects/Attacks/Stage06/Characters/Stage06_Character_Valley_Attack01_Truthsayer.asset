@@ -10,28 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage06_Character_Forest__Attack01
+  m_Name: Stage06_Character_Valley_Attack01_Truthsayer
   m_EditorClassIdentifier: 
+  isSequencedAttack: 0
   Chances: 100
-  CurrentAttackType: 0
+  CurrentAttackType: 1
   AttackRatioMultiplier: 1
-  DamageMultiplier: {x: 1, y: 1}
+  _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 0
   AttackAnim: 0
+  StaminaCost: 10
+  ExperiencePoints: 10
+  _CoolDown: {x: 3, y: 5}
   PrefixAnim: 0
+  Fov: 0
   Particles:
     Left:
-      Cast: {fileID: 8460253344309894442, guid: 01d8cb5a52af85d45b7df39c32e773f4,
+      Cast: {fileID: 4642787647158271268, guid: 04c9658a332abf84c92b628e628c7101,
         type: 3}
-      Bullet: {fileID: 490667400547170801, guid: aa846fbc60d15fe46b6be0f751813074,
+      Bullet: {fileID: 8028301154034664018, guid: 98a80038b6884e046ba425dd8dd1dd7d,
         type: 3}
-      Hit: {fileID: 8227392708596962246, guid: 5d2547da8a7bfd649afd6b215aff5667, type: 3}
+      Hit: {fileID: 5461127284153590954, guid: 1b39a1560cec9614187a491d34e46ddd, type: 3}
     Right:
-      Cast: {fileID: 8460253344309894442, guid: fa81c00caccfc9a45ab978b60bf95c34,
+      Cast: {fileID: 7936031731953938434, guid: 7ba7312481955394ea0b9dd575b02b32,
         type: 3}
-      Bullet: {fileID: 490667400547170801, guid: da469731ea5179d40b1ab8823aee3c0a,
+      Bullet: {fileID: 4056302776752514461, guid: 413855a1a6c86c841bf9454b2a73e3ef,
         type: 3}
-      Hit: {fileID: 8227392708596962246, guid: 6a78b8e211300a14395cf83df84a5339, type: 3}
+      Hit: {fileID: 562972124574506660, guid: d2dc06a97d893bd4293df58c46a18589, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
@@ -89,6 +94,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+      ChildrenBulletDelay: 0.5
       BulletEffectTiles: []
       BulletGapStartingTile: {x: 0, y: 0}
       HasEffect: 0
@@ -96,9 +102,63 @@ MonoBehaviour:
       EffectChances: 100
     CharacterClass: 0
   TilesAtk:
-    AtkType: 0
-    BulletTrajectories: []
-    StatToCheck: 0
-    ValueChecker: 0
+    AtkType: 1
+    BulletTrajectories:
+    - Delay: 1.4
+      BulletTravelDurationPerTile: 0
+      ExplosionChances: 100
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Show: 1
+      BulletEffectTiles:
+      - Pos: {x: 0, y: 0}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 0, y: -1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 0, y: 1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+    StatToCheck: 1
+    ValueChecker: 2
+    Chances: 100
     PercToCheck: 0
-    Chances: 0
+    InBetween: {x: 0, y: 0}
+    Show: 0
+  TotemAtk:
+    AtkType: 3
+    IsPlayerSide: 0
+    DurationOnField: 10
+    Effects: []
+    TotemIn: 0
+    TotemOut: 0
+    TentaclePrefab: 0

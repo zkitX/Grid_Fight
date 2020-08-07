@@ -10,28 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage06_Character_Mountain_Attack02
+  m_Name: Stage06_Character_Mountain_Attack01_Bosha
   m_EditorClassIdentifier: 
+  isSequencedAttack: 0
   Chances: 100
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
-  DamageMultiplier: {x: 1, y: 1}
+  _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 0
   AttackAnim: 0
+  StaminaCost: 10
+  ExperiencePoints: 10
+  _CoolDown: {x: 3, y: 5}
   PrefixAnim: 0
+  Fov: 0
   Particles:
     Left:
-      Cast: {fileID: 6693046256325060716, guid: cecc55ba9fcaef147b180495ad6f2f99,
+      Cast: {fileID: 337503006135139973, guid: 6cf107fac21551449ba3404bb43b2d1a, type: 3}
+      Bullet: {fileID: 3385025967994329567, guid: 677bf6b39ebb55845b29ad9a100a37c8,
         type: 3}
-      Bullet: {fileID: 1193848465223699216, guid: 84d68e1abdad0d04397d11cae037a778,
-        type: 3}
-      Hit: {fileID: 1729779631730926610, guid: 35411a266a7a33b45b77b05cab6ca0a9, type: 3}
+      Hit: {fileID: 7748706993263576200, guid: bf2322bf2c278d7499635a5fed49842d, type: 3}
     Right:
-      Cast: {fileID: 1297975364610359232, guid: 73b456f5fc861a546828f67711b436b3,
+      Cast: {fileID: 6843925596972329198, guid: 49256a7d665425e4786dfa5806dd80bf,
         type: 3}
-      Bullet: {fileID: 1239917677985360458, guid: 3cd3034b423ea2c47a8ad7a21a8d7a18,
+      Bullet: {fileID: 8999828287735366326, guid: 4882056d1e0413641bd95eb78b6c8028,
         type: 3}
-      Hit: {fileID: 4258798040861564809, guid: a97cc7790d98ef041a1155fb3c456629, type: 3}
+      Hit: {fileID: 1475531667736532427, guid: 6b7faefe03ce38f4395cee0bbbffbe78, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
@@ -89,6 +93,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+      ChildrenBulletDelay: 0.5
       BulletEffectTiles: []
       BulletGapStartingTile: {x: 0, y: 0}
       HasEffect: 0
@@ -98,10 +103,24 @@ MonoBehaviour:
   TilesAtk:
     AtkType: 1
     BulletTrajectories:
-    - Delay: 1.7
+    - Delay: 1.4
+      BulletTravelDurationPerTile: 0
+      ExplosionChances: 100
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
       Show: 1
       BulletEffectTiles:
-      - Pos: {x: -1, y: 0}
+      - Pos: {x: 0, y: 0}
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -109,7 +128,8 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
-      - Pos: {x: 1, y: 0}
+        EffectsOnTile: []
+      - Pos: {x: 0, y: -1}
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -117,7 +137,27 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 0, y: 1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
     StatToCheck: 1
     ValueChecker: 2
-    PercToCheck: 0
     Chances: 100
+    PercToCheck: 0
+    InBetween: {x: 0, y: 0}
+    Show: 0
+  TotemAtk:
+    AtkType: 3
+    IsPlayerSide: 0
+    DurationOnField: 10
+    Effects: []
+    TotemIn: 0
+    TotemOut: 0
+    TentaclePrefab: 0

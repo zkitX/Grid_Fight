@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage06_Minion_Desert_EnemyAttack03 - Survival
+  m_Name: Stage06_Minion_Desert_EnemyAttack03_Cow_Survival
   m_EditorClassIdentifier: 
+  isSequencedAttack: 0
   Chances: 100
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
@@ -20,7 +21,7 @@ MonoBehaviour:
   AttackAnim: 0
   StaminaCost: 10
   ExperiencePoints: 10
-  CoolDown: 2
+  _CoolDown: {x: 3, y: 5}
   PrefixAnim: 0
   Fov: 2
   Particles:
@@ -299,8 +300,10 @@ MonoBehaviour:
         EffectsOnTile: []
     StatToCheck: 1
     ValueChecker: 0
-    PercToCheck: 20
     Chances: 10000
+    PercToCheck: 20
+    InBetween: {x: 0, y: 0}
+    Show: 0
   TotemAtk:
     AtkType: 3
     IsPlayerSide: 0
