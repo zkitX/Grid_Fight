@@ -664,7 +664,6 @@ public class BattleManagerScript : MonoBehaviour
 
     }
 
-
     IEnumerator MinionType_Zombification_Co(BaseCharacter zombie, float duration)
     {
         //Set up the PS and reset the anim
@@ -1498,7 +1497,7 @@ public class BattleManagerScript : MonoBehaviour
         CharacterSelectionType cs = CharacterSelectionType.Up;
         List<BaseCharacter> res = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 && !r.IsOnField &&
         r.BuffsDebuffsList.Where(a => a.Stat == BuffDebuffStatsType.Zombification).ToList().Count == 0 && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).ToList();
-        if (res.Count > 0)
+        if (res.Count > 1)
         {
             while (!found)
             {
@@ -1512,6 +1511,10 @@ public class BattleManagerScript : MonoBehaviour
                     found = true;
                 }
             }
+        }
+        else if (res.Count == 1)
+        {
+            cb = res[0];
         }
         return cb;
     }
@@ -1580,19 +1583,6 @@ public class BattleManagerScript : MonoBehaviour
         {
             CurrentSelectedCharacters[playerController].Character.CharacterInputHandler(InputActionType.Defend_Stop);
         }
-    }
-
-    #endregion
-
-    #region Mobile Input
-    public void Mobile_StopLoadingNewCharacter(CharacterNameType cName, ControllerType playerController)
-    {
-        StopLoadingNewCharacter(cName, playerController);
-    }
-
-    public void Mobile_LoadingNewCharacterInRandomPosition(CharacterNameType cName, ControllerType playerController)
-    {
-        LoadingNewCharacterToGrid(cName, GetSideFromPlayer(new List<ControllerType> { playerController }), playerController);
     }
 
     #endregion

@@ -29,6 +29,7 @@ public class ScriptableObjectAttackEffect : ScriptableObject
     public bool recolorCharUI = false;
     [ConditionalField("recolorCharUI")] public Color statusIconColor = Color.magenta;
     [HideInInspector] public ScriptableObjectAttackBase Atk;
+    [HideInInspector] public ScriptableObjectAI RageAI;
     [HideInInspector] public List<ScriptableObjectAI> AIs = new List<ScriptableObjectAI>();
     //Clone variables
     [HideInInspector] public GameObject ClonePrefab = null;  //If left to null, the basic character will be used in a nerfed state

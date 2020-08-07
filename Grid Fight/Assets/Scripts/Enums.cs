@@ -329,6 +329,7 @@ public enum BuffDebuffStatsType
     Invulnerable,
     Rebirth,
     Backfire,
+    Rage
 }
 
 public enum BuffDebuffStackType
@@ -832,7 +833,7 @@ public enum CharacterNameType
     DaikiniPeaks_Minion_Forest_Kabuto = 1122,
     DaikiniPeaks_Minion_Valley_Panchitta = 1123,
     DaikiniPeaks_Character_Valley_Thruthsayer = 1124,
-    DaikiniPeaks_Character_Desert_Daria = 1125,
+    DaikiniPeaks_Character_Desert_Hoe = 1125,
     DaikiniPeaks_Character_Mountain_Bosha = 1126,
     DaikiniPeaks_Character_Forest_TheTwins = 1127,
     DaikiniPeaks_Boss_Kala = 1128,

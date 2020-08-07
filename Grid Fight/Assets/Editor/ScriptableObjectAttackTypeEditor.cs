@@ -94,11 +94,11 @@ public class ScriptableObjectAttackTypeEditor : Editor
                     if(i == 0)
                     {
                         origin.TilesAtk.BulletTrajectories[i].ExplosionChances = 100;
-                        if(origin.TilesAtk.BulletTrajectories[i].BulletEffectTiles.Count == 0)
+                        if(origin.TilesAtk.BulletTrajectories[i].BulletEffectTiles.Count == 0 && origin.TilesAtk.AtkType != BattleFieldAttackType.OnAreaAttack)
                         {
                             origin.TilesAtk.BulletTrajectories[i].BulletEffectTiles.Add(new BattleFieldAttackTileClass(Vector2Int.zero));
                         }
-                        else
+                        else if (origin.TilesAtk.AtkType != BattleFieldAttackType.OnAreaAttack)
                         {
                             origin.TilesAtk.BulletTrajectories[i].BulletEffectTiles = origin.TilesAtk.BulletTrajectories[i].BulletEffectTiles.OrderBy(r => Mathf.Abs(r.Pos.x)).ThenBy(a => Mathf.Abs(a.Pos.y)).ToList();
                             if(origin.TilesAtk.BulletTrajectories[i].BulletEffectTiles[0].Pos != Vector2Int.zero)

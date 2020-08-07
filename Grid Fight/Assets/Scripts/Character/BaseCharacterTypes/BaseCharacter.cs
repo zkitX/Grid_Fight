@@ -7,6 +7,27 @@ using UnityEngine;
 
 public class BaseCharacter : MonoBehaviour, IDisposable
 {
+//minion
+    protected float LastAttackTime;
+    public int AttackWillPerc = 13;
+    public int UpDownMovementPerc = 13;
+    public int TowardMovementPerc = 13;
+    public int AwayMovementPerc = 13;
+    public List<AggroInfoClass> AggroInfoList = new List<AggroInfoClass>();
+    protected float totDamage = 0;
+    protected bool strongAnimDone = false;
+    public ScriptableObjectAI CurrentAIState;
+    //public GameObject psAI = null;
+    public BattleTileScript possiblePos = null;
+    public Vector2Int[] path;
+    public bool found = false;
+    public List<BattleTileScript> possiblePositions = new List<BattleTileScript>();
+    protected float lastAttackTime = 0;
+
+
+//------------------------------------
+
+
 
     public delegate void CurrentCharIsDead(CharacterNameType cName, List<ControllerType> playerController, SideType side);
     public event CurrentCharIsDead CurrentCharIsDeadEvent;
@@ -320,6 +341,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         //    LastHitter.hitter.HealthStatsChangedEvent?.Invoke(HealAmount, HealthChangedType.Heal, LastHitter.hitter.SpineAnim.transform);
         //}
         isMoving = false;
+        isDefendingStop = true;
+        isDefending = false;
         LocalSpinePosoffset = SpineAnim.transform.localPosition;
         Call_CurrentCharIsDeadEvent();
         shotsLeftInAttack = 0;
@@ -1191,6 +1214,229 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
     }
 
+    protected void SetCurrentAIValues()
+    {
+        if (CurrentAIState.UpdateAttckWill)
+        {
+            AttackWillPerc = CurrentAIState.AttackWill;
+        }
+        if (CurrentAIState.UpdateMoveForward)
+        {
+            TowardMovementPerc = CurrentAIState.MoveForward;
+        }
+        if (CurrentAIState.UpdateMoveBackward)
+        {
+            AwayMovementPerc = CurrentAIState.MoveBackward;
+        }
+        if (CurrentAIState.UpdateMoveUpDown)
+        {
+            UpDownMovementPerc = CurrentAIState.MoveUpDown;
+        }
+    }
+
+
+    public float AICoolDownOffset = 0;
+    protected IEnumerator s = null;
+    public virtual IEnumerator AI()
+    {
+        bool val = true;
+        while (val)
+        {
+            yield return null;
+            if (IsOnField && CharInfo.Health > 0)
+            {
+
+                while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+                {
+                    yield return null;
+                }
+                ScriptableObjectAI prev = CurrentAIState;
+                CurrentAIState = CharInfo.GetCurrentAI(AggroInfoList, UMS.CurrentTilePos);
+                if (prev == null || prev.AI_Type != CurrentAIState.AI_Type)
+                {
+                    SetCurrentAIValues();
+                    if (prev != null)
+                    {
+                        prev.ResetStats(CharInfo);
+
+                    }
+                    CurrentAIState.ModifyStats(CharInfo);
+                    /*if(psAI != null)
+                    {
+                        psAI.SetActive(false);
+                    }
+                    psAI = ParticleManagerScript.Instance.GetParticle(CurrentAIState.AIPs.PSType);
+                    psAI.transform.parent = SpineAnim.transform;
+                    psAI.transform.localPosition = Vector3.zero;
+                    psAI.SetActive(true);*/
+                    AICoolDownOffset = 0;
+                }
+
+                int atkChances = UnityEngine.Random.Range(0, 100);
+                nextAttack = null;
+                if (CurrentAIState.t != null)
+                {
+                    GetAttack();
+                }
+
+                if (CurrentAIState.t != null && atkChances < AttackWillPerc && nextAttack != null && (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler))
+                {
+                    lastAttackTime = Time.time;
+                    nextAttackPos = CurrentAIState.t.UMS.CurrentTilePos;
+                    if (possiblePos != null)
+                    {
+                        possiblePos.isTaken = false;
+                        possiblePos = null;
+                    }
+                    if (s != null)
+                    {
+                        StopCoroutine(s);
+                    }
+                    s = AttackSequence();
+
+                    yield return s;
+                }
+                else
+                {
+                    if (AreTileNearEmpty())
+                    {
+                        if (possiblePos == null)
+                        {
+                            int movementChances = UnityEngine.Random.Range(0, (TowardMovementPerc + AwayMovementPerc));
+                            if (TowardMovementPerc > movementChances && (Time.time - AICoolDownOffset) > CurrentAIState.CoolDown)
+                            {
+                                if (CurrentAIState.t != null)
+                                {
+                                    possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
+                                    r.BattleTileState != BattleTileStateType.NonUsable
+                                    ).OrderBy(a => Mathf.Abs(a.Pos.x - CurrentAIState.t.UMS.CurrentTilePos.x)).ThenBy(b => b.Pos.y).ToList();
+                                    AICoolDownOffset = Time.time;
+                                }
+                            }
+                            else if ((Time.time - AICoolDownOffset) > CurrentAIState.CoolDown)
+                            {
+                                if (CurrentAIState.t != null)
+                                {
+                                    possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
+                                    r.BattleTileState != BattleTileStateType.NonUsable
+                                    ).OrderByDescending(a => Mathf.Abs(a.Pos.x - CurrentAIState.t.UMS.CurrentTilePos.x)).ThenByDescending(b => b.Pos.y).ToList();
+                                    AICoolDownOffset = Time.time;
+                                }
+                            }
+                            if (possiblePositions.Count > 0)
+                            {
+                                found = false;
+                                while (!found)
+                                {
+                                    if (possiblePositions.Count > 0)
+                                    {
+                                        possiblePos = possiblePositions.First();
+                                        if (possiblePos.Pos != UMS.CurrentTilePos)
+                                        {
+                                            if (possiblePos.BattleTileState == BattleTileStateType.Empty)
+                                            {
+                                                path = GridManagerScript.Pathfinding.GetPathTo(possiblePos.Pos, UMS.Pos, GridManagerScript.Instance.GetWalkableTilesLayout(UMS.WalkingSide));
+                                                if (path != null && path.Length > 0)
+                                                {
+                                                    found = true;
+                                                    Vector2Int move = path[0] - UMS.CurrentTilePos;
+                                                    possiblePos.isTaken = true;
+                                                    yield return MoveCharOnDir_Co(move == new Vector2Int(1, 0) ? InputDirectionType.Down : move == new Vector2Int(-1, 0) ? InputDirectionType.Up : move == new Vector2Int(0, 1) ? InputDirectionType.Right : InputDirectionType.Left);
+                                                }
+                                                else
+                                                {
+                                                    possiblePositions.Remove(possiblePos);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                possiblePositions.Remove(possiblePos);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (CurrentAIState.IdleMovement)
+                                            {
+                                                possiblePos = null;
+                                                found = true;
+                                            }
+                                            else
+                                            {
+                                                if (possiblePositions.Count <= 1)
+                                                {
+                                                    possiblePos = null;
+                                                    found = true;
+                                                }
+                                                else
+                                                {
+                                                    possiblePositions.Insert(0, GridManagerScript.Instance.GetFreeBattleTile(possiblePos.WalkingSide));
+                                                    yield return null;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        possiblePos = null;
+                                        found = true;
+                                    }
+
+                                }
+                                yield return null;
+                            }
+                            else
+                            {
+                                found = true;
+                                possiblePos = null;
+                            }
+                        }
+                        else
+                        {
+                            if (possiblePos.Pos != UMS.CurrentTilePos)
+                            {
+                                path = GridManagerScript.Pathfinding.GetPathTo(possiblePos.Pos, UMS.Pos, GridManagerScript.Instance.GetWalkableTilesLayout(UMS.WalkingSide));
+                                if (path == null || (path != null && path.Length == 1) || possiblePos.Pos == UMS.CurrentTilePos)
+                                {
+                                    possiblePos.isTaken = false;
+                                    possiblePos = null;
+                                }
+                                if (path.Length > 0)
+                                {
+                                    Vector2Int move = path[0] - UMS.CurrentTilePos;
+
+                                    yield return MoveCharOnDir_Co(move == new Vector2Int(1, 0) ? InputDirectionType.Down : move == new Vector2Int(-1, 0) ? InputDirectionType.Up : move == new Vector2Int(0, 1) ? InputDirectionType.Right : InputDirectionType.Left);
+                                }
+                            }
+                            else
+                            {
+                                possiblePos = null;
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        if (possiblePos != null)
+                        {
+                            possiblePos.isTaken = false;
+                            possiblePos = null;
+                        }
+                    }
+                }
+                yield return null;
+            }
+            else
+            {
+                if (possiblePos != null)
+                {
+                    possiblePos.isTaken = false;
+                    possiblePos = null;
+                }
+
+            }
+        }
+    }
+
 
     protected List<BattleTileScript> CheckTileAvailabilityUsingDir(Vector2Int dir)
     {
@@ -1472,6 +1718,44 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             case BuffDebuffStatsType.StaminaStats_Stamina:
                 CharInfo.StaminaStats.Stamina += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.StaminaStats.B_Base / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
                 break;
+            case BuffDebuffStatsType.Rage:
+                CharInfo.SpeedStats.MovementSpeed += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_MovementSpeed / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
+                CharInfo.DamageStats.BaseDamage += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.DamageStats.B_BaseDamage / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
+                CharInfo.DefenceStats.BaseDefence -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.DefenceStats.B_BaseDefence / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
+                CharInfo.AIs.Add(bdClass.CurrentBuffDebuff.Effect.RageAI);
+                if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
+                {
+
+                    ControllerType c = ControllerType.None;
+                    CharActionlist.Remove(CharacterActionType.SwitchCharacter);
+                    if (CurrentPlayerController == ControllerType.None && BattleManagerScript.Instance.CurrentSelectedCharacters.Values.Where(r => r.Character == this).ToList().Count > 0)
+                    {
+                        c = BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == this).First().Key;
+                        BattleManagerScript.Instance.CurrentSelectedCharacters.Values.Where(r => r.Character == this).First().Character = null;
+                    }
+                    else if (CurrentPlayerController == ControllerType.None)
+                    {
+                        BattleManagerScript.Instance.DeselectCharacter((CharacterType_Script)this, c);
+                        break;
+                    }
+                    else
+                    {
+                        c = CurrentPlayerController;
+                        BattleManagerScript.Instance.CurrentSelectedCharacters[c].Character = null;
+                    }
+                    BattleManagerScript.Instance.DeselectCharacter((CharacterType_Script)this, c);
+                    UMS.IndicatorAnim.SetBool("indicatorOn", false);
+                    if (BattleManagerScript.Instance.GetFreeRandomChar(UMS.Side, c) != null && c <= ControllerType.Player4)
+                    {
+                        CharacterType_Script cb = (CharacterType_Script)BattleManagerScript.Instance.GetFreeRandomChar(UMS.Side, c);
+                        BattleManagerScript.Instance.SetCharOnBoardOnFixedPos(c, cb.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeBattleTile(UMS.WalkingSide).Pos);
+                        cb.SetCharSelected(true, c);
+                        BattleManagerScript.Instance.SelectCharacter(c, cb);
+                    }
+                    StartAI();
+                }
+                break;
+                
         }
 
         if (bdClass.Duration > 0)
@@ -1553,6 +1837,27 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 case BuffDebuffStatsType.StaminaStats_Stamina:
                     CharInfo.StaminaStats.Stamina -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.StaminaStats.B_Base / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
                     break;
+                case BuffDebuffStatsType.Rage:
+                    CharInfo.SpeedStats.MovementSpeed -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_MovementSpeed / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
+                    CharInfo.DamageStats.BaseDamage -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.DamageStats.B_BaseDamage / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
+                    CharInfo.DefenceStats.BaseDefence += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.DefenceStats.B_BaseDefence / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
+                    CharInfo.AIs.Remove(bdClass.CurrentBuffDebuff.Effect.RageAI);
+                    if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && !bdClass.CurrentBuffDebuff.Stop_Co)
+                    {
+                        StopCoroutine(AICo);
+                        CharActionlist.Add(CharacterActionType.SwitchCharacter);
+                        if (BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == null).ToList().Count > 0)
+                        {
+                            CurrentPlayerController = BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == null).OrderBy(a => a.Value.NotPlayingTimer).First().Key;
+                            ((CharacterType_Script)this).SetCharSelected(true, CurrentPlayerController);
+                            BattleManagerScript.Instance.SelectCharacter(CurrentPlayerController, (CharacterType_Script)this);
+                        }
+                        else
+                        {
+                            yield return BattleManagerScript.Instance.RemoveCharacterFromBaord(this, true);
+                        }
+                    }
+                    break;
             }
         }
 
@@ -1565,7 +1870,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             ps?.SetActive(false);
         }
     }
-
 
     private void ElementalResistance(Buff_DebuffClass bdClass)
     {
@@ -1601,8 +1905,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             StartCoroutine(newBuffDebuff.BuffDebuffCo);
         }*/
     }
-
-
 
     private IEnumerator ElementalBuffDebuffCo(CurrentBuffsDebuffsClass newBuffDebuff)
     {
@@ -2062,6 +2364,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public void FireActionEvent(CharacterActionType action)
     {
         CurrentCharStartingActionEvent?.Invoke(CurrentPlayerController, action);
+    }
+
+
+    public void StartAI()
+    {
+        AICo = AI();
+        StartCoroutine(AICo);
     }
 }
 

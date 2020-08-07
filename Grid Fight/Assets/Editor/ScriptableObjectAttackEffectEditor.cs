@@ -20,6 +20,11 @@ public class ScriptableObjectAttackEffectEditor : Editor
         {
             origin.Atk = (ScriptableObjectAttackBase)EditorGUILayout.ObjectField("Atk", origin.Atk, typeof(ScriptableObjectAttackBase), false);
         }
+
+        if (origin.StatsToAffect == BuffDebuffStatsType.Rage)
+        {
+            origin.RageAI = (ScriptableObjectAI)EditorGUILayout.ObjectField("RageAI", origin.RageAI, typeof(ScriptableObjectAI), false);
+        }
         if (origin.StatsToAffect == BuffDebuffStatsType.Zombification)
         {
             var list = origin.AIs;

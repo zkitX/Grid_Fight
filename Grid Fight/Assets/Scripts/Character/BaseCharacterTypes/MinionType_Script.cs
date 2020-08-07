@@ -6,22 +6,7 @@ using UnityEngine;
 public class MinionType_Script : BaseCharacter
 {
     protected bool MoveCoOn = true;
-    protected IEnumerator MoveActionCo;
-    protected float LastAttackTime;
-    public int AttackWillPerc = 13;
-    public int UpDownMovementPerc = 13;
-    public int TowardMovementPerc = 13;
-    public int AwayMovementPerc = 13;
-    public List<AggroInfoClass> AggroInfoList = new List<AggroInfoClass>();
-    protected float totDamage = 0;
-    protected bool strongAnimDone = false;
-    public ScriptableObjectAI CurrentAIState;
-    //public GameObject psAI = null;
-    public BattleTileScript possiblePos = null;
-    public Vector2Int[] path;
-    public bool found = false;
-    public List<BattleTileScript> possiblePositions = new List<BattleTileScript>();
-    protected float lastAttackTime = 0;
+  
 
 
     protected bool UnderAttack
@@ -69,8 +54,8 @@ public class MinionType_Script : BaseCharacter
     {
         if (value)
         {
-            AICo = AI();
-            StartCoroutine(AICo);
+            StartAI();
+
         }
         CharInfo.DefenceStats.BaseDefence = Random.Range(0.7f, 1);
         base.SetAttackReady(value);
@@ -105,11 +90,7 @@ public class MinionType_Script : BaseCharacter
         }
         totDamage = 0;
 
-        for (int i = 0; i < UMS.Pos.Count; i++)
-        {
-            GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
-            UMS.Pos[i] = Vector2Int.zero;
-        }
+      
         if (HittedByList.Count > 0)
         {
             ComboManager.Instance.TriggerComboForCharacter(HittedByList[HittedByList.Count - 1].CharacterId, ComboType.Kill, true, transform.position);
@@ -158,271 +139,7 @@ public class MinionType_Script : BaseCharacter
         gameObject.SetActive(false);
 
     }
-
-    public virtual IEnumerator AI_Old()
-    {
-        bool val = true;
-        while (val)
-        {
-            yield return null;
-            if (IsOnField)
-            {
-
-                while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
-                {
-                    yield return null;
-                }
-
-
-                List<BaseCharacter> enemys = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList();
-                if (enemys.Count > 0)
-                {
-                    BaseCharacter targetChar = enemys.Where(r => r.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x).FirstOrDefault();
-                    /*BaseCharacter targetChar = null;
-                    List<BaseCharacter> possibleTargets = enemys.Where(r => Mathf.Abs(r.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x) <= 1).ToList();
-                    if (possibleTargets.Count > 0)
-                    {
-                        targetChar = possibleTargets[Random.Range(0, possibleTargets.Count)];
-                    }*/
-                    if (targetChar != null && (nextAttack == null || (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler)))
-                    {
-                        lastAttackTime = Time.time;
-                        nextAttackPos = targetChar.UMS.CurrentTilePos;
-                        yield return AttackSequence();
-                    }
-                    else
-                    {
-
-                        int randomizer = Random.Range(0, 100);
-                        if (randomizer < UpDownMovementPerc)
-                        {
-                            yield return MoveCharOnDir_Co(InputDirectionType.Left);
-                        }
-                        else if (randomizer > (100 - UpDownMovementPerc))
-                        {
-                            yield return MoveCharOnDir_Co(InputDirectionType.Right);
-                        }
-                        else
-                        {
-                            targetChar = GetTargetChar(enemys);
-                            if (targetChar.UMS.CurrentTilePos.x < UMS.CurrentTilePos.x)
-                            {
-                                yield return MoveCharOnDir_Co(InputDirectionType.Up);
-                            }
-                            else
-                            {
-                                yield return MoveCharOnDir_Co(InputDirectionType.Down);
-                            }
-                        }
-                    }
-                }
-                yield return null;
-            }
-        }
-    }
-
-    public float AICoolDownOffset = 0;
-    IEnumerator s = null;
-    public virtual IEnumerator AI()
-    {
-        bool val = true;
-        while (val)
-        {
-            yield return null;
-            if (IsOnField && CharInfo.Health > 0)
-            {
-
-                while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
-                {
-                    yield return null;
-                }
-                ScriptableObjectAI prev = CurrentAIState;
-                CurrentAIState = CharInfo.GetCurrentAI(AggroInfoList, UMS.CurrentTilePos);
-                if(prev == null || prev.AI_Type != CurrentAIState.AI_Type)
-                {
-                    SetCurrentAIValues();
-                    if(prev != null)
-                    {
-                        prev.ResetStats(CharInfo);
-
-                    }
-                    CurrentAIState.ModifyStats(CharInfo);
-                    /*if(psAI != null)
-                    {
-                        psAI.SetActive(false);
-                    }
-                    psAI = ParticleManagerScript.Instance.GetParticle(CurrentAIState.AIPs.PSType);
-                    psAI.transform.parent = SpineAnim.transform;
-                    psAI.transform.localPosition = Vector3.zero;
-                    psAI.SetActive(true);*/
-                    AICoolDownOffset = 0;
-                }
-
-                int atkChances = Random.Range(0 ,100);
-                nextAttack = null;
-                if(CurrentAIState.t != null)
-                {
-                    GetAttack();
-                }
-
-                if (CurrentAIState.t != null && atkChances < AttackWillPerc && nextAttack != null && (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler))
-                {
-                    lastAttackTime = Time.time;
-                    nextAttackPos = CurrentAIState.t.UMS.CurrentTilePos;
-                    if(possiblePos != null)
-                    {
-                        possiblePos.isTaken = false;
-                        possiblePos = null;
-                    }
-                    if(s != null)
-                    {
-                        StopCoroutine(s);
-                    }
-                    s = AttackSequence();
-
-                    yield return s;
-                }
-                else
-                {
-                    if(AreTileNearEmpty())
-                    {
-                        if (possiblePos == null)
-                        {
-                            int movementChances = Random.Range(0, (TowardMovementPerc + AwayMovementPerc));
-                            if (TowardMovementPerc > movementChances && (Time.time - AICoolDownOffset) > CurrentAIState.CoolDown)
-                            {
-                                if (CurrentAIState.t != null)
-                                {
-                                    possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
-                                    r.BattleTileState != BattleTileStateType.NonUsable
-                                    ).OrderBy(a => Mathf.Abs(a.Pos.x - CurrentAIState.t.UMS.CurrentTilePos.x)).ThenBy(b => b.Pos.y).ToList();
-                                    AICoolDownOffset = Time.time;
-                                }
-                            }
-                            else if((Time.time - AICoolDownOffset) > CurrentAIState.CoolDown)
-                            {
-                                if (CurrentAIState.t != null)
-                                {
-                                    possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
-                                    r.BattleTileState != BattleTileStateType.NonUsable
-                                    ).OrderByDescending(a => Mathf.Abs(a.Pos.x - CurrentAIState.t.UMS.CurrentTilePos.x)).ThenByDescending(b => b.Pos.y).ToList();
-                                    AICoolDownOffset = Time.time;
-                                }
-                            }
-                            if (possiblePositions.Count > 0)
-                            {
-                                found = false;
-                                while (!found)
-                                {
-                                    if (possiblePositions.Count > 0)
-                                    {
-                                        possiblePos = possiblePositions.First();
-                                        if (possiblePos.Pos != UMS.CurrentTilePos)
-                                        {
-                                            if (possiblePos.BattleTileState == BattleTileStateType.Empty)
-                                            {
-                                                path = GridManagerScript.Pathfinding.GetPathTo(possiblePos.Pos, UMS.Pos, GridManagerScript.Instance.GetWalkableTilesLayout(UMS.WalkingSide));
-                                                if (path != null && path.Length > 0)
-                                                {
-                                                    found = true;
-                                                    Vector2Int move = path[0] - UMS.CurrentTilePos;
-                                                    possiblePos.isTaken = true;
-                                                    yield return MoveCharOnDir_Co(move == new Vector2Int(1, 0) ? InputDirectionType.Down : move == new Vector2Int(-1, 0) ? InputDirectionType.Up : move == new Vector2Int(0, 1) ? InputDirectionType.Right : InputDirectionType.Left);
-                                                }
-                                                else
-                                                {
-                                                    possiblePositions.Remove(possiblePos);
-                                                }
-                                            }
-                                            else
-                                            {
-                                                possiblePositions.Remove(possiblePos);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            if (CurrentAIState.IdleMovement)
-                                            {
-                                                possiblePos = null;
-                                                found = true;
-                                            }
-                                            else
-                                            {
-                                                if (possiblePositions.Count <= 1)
-                                                {
-                                                    possiblePos = null;
-                                                    found = true;
-                                                }
-                                                else
-                                                {
-                                                    possiblePositions.Insert(0, GridManagerScript.Instance.GetFreeBattleTile(possiblePos.WalkingSide));
-                                                    yield return null;
-                                                }
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        possiblePos = null;
-                                        found = true;
-                                    }
-
-                                }
-                                yield return null;
-                            }
-                            else
-                            {
-                                found = true;
-                                possiblePos = null;
-                            }
-                        }
-                        else
-                        {
-                            if (possiblePos.Pos != UMS.CurrentTilePos)
-                            {
-                                path = GridManagerScript.Pathfinding.GetPathTo(possiblePos.Pos, UMS.Pos, GridManagerScript.Instance.GetWalkableTilesLayout(UMS.WalkingSide));
-                                if (path == null || (path != null && path.Length == 1) || possiblePos.Pos == UMS.CurrentTilePos)
-                                {
-                                    possiblePos.isTaken = false;
-                                    possiblePos = null;
-                                }
-                                if (path.Length > 0)
-                                {
-                                    Vector2Int move = path[0] - UMS.CurrentTilePos;
-
-                                    yield return MoveCharOnDir_Co(move == new Vector2Int(1, 0) ? InputDirectionType.Down : move == new Vector2Int(-1, 0) ? InputDirectionType.Up : move == new Vector2Int(0, 1) ? InputDirectionType.Right : InputDirectionType.Left);
-                                }
-                            }
-                            else
-                            {
-                                possiblePos = null;
-                            }
-                        }
-
-                    }
-                    else
-                    {
-                        if(possiblePos != null)
-                        {
-                            possiblePos.isTaken = false;
-                            possiblePos = null;
-                        }
-                    }
-                }
-                yield return null;
-            }
-            else
-            {
-                if (possiblePos != null)
-                {
-                    possiblePos.isTaken = false;
-                    possiblePos = null;
-                }
-               
-            }
-        }
-    }
-
+   
     public virtual IEnumerator Move()
     {
         while (true)
@@ -474,7 +191,6 @@ public class MinionType_Script : BaseCharacter
                             }
                         }
                     }
-
                     MoveCharOnDirection(dir);
                 }
                 else
@@ -489,26 +205,6 @@ public class MinionType_Script : BaseCharacter
     protected override void Update()
     {
         base.Update();
-    }
-
-    protected void SetCurrentAIValues()
-    {
-        if (CurrentAIState.UpdateAttckWill)
-        {
-            AttackWillPerc = CurrentAIState.AttackWill;
-        }
-        if (CurrentAIState.UpdateMoveForward)
-        {
-            TowardMovementPerc = CurrentAIState.MoveForward;
-        }
-        if (CurrentAIState.UpdateMoveBackward)
-        {
-            AwayMovementPerc = CurrentAIState.MoveBackward;
-        }
-        if (CurrentAIState.UpdateMoveUpDown)
-        {
-            UpDownMovementPerc = CurrentAIState.MoveUpDown;
-        }
     }
 
     public override void SetAnimation(CharacterAnimationStateType animState, bool loop = false, float transition = 0)
