@@ -331,6 +331,12 @@ public enum BuffDebuffStatsType
     Backfire,
 }
 
+public enum BuffDebuffStackType
+{
+    Refreshable = 0, //Additional BuffDebuffs of the same kind will refresh the cooldown, if they are of higher level, they will also change the level to the new higher one
+    Stackable = 1,//Additional BuffDebuffs of the same kind will upgrade the level and refresh the cooldown
+}
+
 public enum StatsCheckType
 {
     None,
