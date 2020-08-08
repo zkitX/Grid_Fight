@@ -63,7 +63,7 @@ public class CharacterType_Script : BaseCharacter
 
     public void CharacterInputHandler(InputActionType action)
     {
-        if (HasBuffDebuff(BuffDebuffStatsType.Rage))
+        if (!HasBuffDebuff(BuffDebuffStatsType.Rage))
         {
             StartCoroutine(CharacterInputQueue(action));
         }
