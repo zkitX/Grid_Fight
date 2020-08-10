@@ -418,14 +418,15 @@ public class CharacterInfoScript : MonoBehaviour
         DefenceStats.B_MinionPerfectDefenceChances = DefenceStats.MinionPerfectDefenceChances;
     }
 
-    public ScriptableObjectAI GetCurrentAI(List<AggroInfoClass> enemies, Vector2Int currentPos, BaseCharacter bChar)
+    public ScriptableObjectAI GetCurrentAI(List<AggroInfoClass> enemies, Vector2Int currentPos, BaseCharacter bChar, ref BaseCharacter target)
     {
+        target = null;
         List<AIInfoCLass> aisInfo = new List<AIInfoCLass>();
 
         int charTargeting = 0;
         foreach (ScriptableObjectAI item in AIs)
         {
-            aisInfo.Add(new AIInfoCLass(item, item.CheckAvailability(bChar, enemies, currentPos)));
+            aisInfo.Add(new AIInfoCLass(item, item.CheckAvailability(bChar, enemies, currentPos, ref target)));
             charTargeting += Mathf.Abs(aisInfo.Last().Score);
         }
 

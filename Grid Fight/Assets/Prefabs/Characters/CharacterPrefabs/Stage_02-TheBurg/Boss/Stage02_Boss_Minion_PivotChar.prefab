@@ -484,8 +484,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charOwner: {fileID: 0}
-  testAtkEffect: {fileID: 0}
   Name: MainframeCopy
   CharacterIcon: {fileID: 0}
   Mask: {fileID: 0}
@@ -519,6 +517,8 @@ MonoBehaviour:
     Chances: 50
   _CurrentAttackTypeInfo:
   - {fileID: 11400000, guid: 9496826400681554ba9c98d9340caa9a, type: 2}
+  - {fileID: 11400000, guid: 2a881f642e010774687f9902420ff99c, type: 2}
+  - {fileID: 11400000, guid: dd3ca1dad60e92e49805c468f175ea86, type: 2}
   AddedAttackTypeInfo: []
   Elemental: 0
   ClassType: 2
@@ -580,7 +580,8 @@ MonoBehaviour:
     LoopPerc: 0.7
     EndPerc: 0.15
     AttackSpeed: 2.5
-    AttackSpeedRatio: 2
+    AttackLoopDuration: 0.5
+    IdleToAttackDuration: 0.01
     BulletSpeed: 1
     LeaveSpeed: 3
     BaseSpeed_LevelMultiplier: 0
@@ -590,7 +591,6 @@ MonoBehaviour:
     B_BaseSpeed: 1
     B_MovementSpeed: 1
     B_AttackSpeed: 1
-    B_AttackSpeedRatio: 0
     B_BulletSpeed: 5
     B_LeaveSpeed: 3
     B_IdleToAtkDuration: 0.2

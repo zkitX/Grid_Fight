@@ -403,6 +403,7 @@ public class GridManagerScript : MonoBehaviour
         List<BattleTileScript> emptyBattleTiles = new List<BattleTileScript>();
         emptyBattleTiles = BattleTiles.Where(r => r.BattleTileState == BattleTileStateType.Empty && (r.WalkingSide == walkingSide || walkingSide == WalkingSideType.Both)).ToList();
         int battletileCount = emptyBattleTiles.Count;
+        if (emptyBattleTiles.Count == 0) return null;
         return emptyBattleTiles[Random.Range(0, battletileCount)];
     }
     //Get free tile for a more than one tile character

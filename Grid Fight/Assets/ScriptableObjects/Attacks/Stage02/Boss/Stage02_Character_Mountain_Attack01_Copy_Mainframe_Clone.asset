@@ -105,7 +105,7 @@ MonoBehaviour:
   TilesAtk:
     AtkType: 2
     BulletTrajectories:
-    - Delay: 2
+    - Delay: 3
       BulletTravelDurationPerTile: 0.3
       ExplosionChances: 100
       Trajectory_Y:
@@ -170,8 +170,10 @@ MonoBehaviour:
         EffectsOnTile: []
     StatToCheck: 1
     ValueChecker: 0
-    PercToCheck: 90
-    Chances: 1000
+    Chances: 10
+    PercToCheck: 50
+    InBetween: {x: 0, y: 0}
+    Show: 0
   TotemAtk:
     AtkType: 3
     IsPlayerSide: 0

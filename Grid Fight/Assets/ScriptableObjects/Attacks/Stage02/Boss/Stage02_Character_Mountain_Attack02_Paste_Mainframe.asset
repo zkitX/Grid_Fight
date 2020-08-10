@@ -21,7 +21,7 @@ MonoBehaviour:
   AttackAnim: 2
   StaminaCost: 0
   ExperiencePoints: 0
-  CoolDown: 5
+  _CoolDown: {x: 3, y: 5}
   PrefixAnim: 3
   Fov: 0
   Particles:
@@ -104,7 +104,7 @@ MonoBehaviour:
   TilesAtk:
     AtkType: 2
     BulletTrajectories:
-    - Delay: 2
+    - Delay: 2.5
       BulletTravelDurationPerTile: 0.14
       ExplosionChances: 100
       Trajectory_Y:
@@ -170,8 +170,10 @@ MonoBehaviour:
         EffectsOnTile: []
     StatToCheck: 1
     ValueChecker: 0
+    Chances: 5
     PercToCheck: 100000
-    Chances: 100
+    InBetween: {x: 0, y: 0}
+    Show: 0
   TotemAtk:
     AtkType: 3
     IsPlayerSide: 0

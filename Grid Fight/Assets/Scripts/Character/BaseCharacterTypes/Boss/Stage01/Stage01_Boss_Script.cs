@@ -25,6 +25,7 @@ public class Stage01_Boss_Script : MinionType_Script
 
 
 
+    BaseCharacter target = null;
     public override IEnumerator AI()
     {
         bool val = true;
@@ -39,7 +40,9 @@ public class Stage01_Boss_Script : MinionType_Script
                     yield return null;
                 }
                 ScriptableObjectAI prev = CurrentAIState;
-                CurrentAIState = CharInfo.GetCurrentAI(AggroInfoList, UMS.CurrentTilePos, this);
+
+                CurrentAIState = CharInfo.GetCurrentAI(AggroInfoList, UMS.CurrentTilePos, this, ref target);
+
                 if (prev == null || prev.AI_Type != CurrentAIState.AI_Type)
                 {
                     SetCurrentAIValues();
@@ -64,10 +67,10 @@ public class Stage01_Boss_Script : MinionType_Script
                 nextAttack = null;
                 GetAttack();
 
-                if (CurrentAIState.t != null && atkChances < AttackWillPerc && nextAttack != null && (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler))
+                if (target != null && atkChances < AttackWillPerc && nextAttack != null && (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler))
                 {
                     lastAttackTime = Time.time;
-                    nextAttackPos = CurrentAIState.t.UMS.CurrentTilePos;
+                    nextAttackPos = target.UMS.CurrentTilePos;
                     if (possiblePos != null)
                     {
                         possiblePos.isTaken = false;
@@ -80,25 +83,25 @@ public class Stage01_Boss_Script : MinionType_Script
                     int movementChances = Random.Range(0, (TowardMovementPerc + AwayMovementPerc));
                     if (TowardMovementPerc > movementChances && (Time.time - AICoolDownOffset) > CurrentAIState.CoolDown)
                     {
-                        if (CurrentAIState.t != null)
+                        if (target != null)
                         {
                             possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
                             r.BattleTileState != BattleTileStateType.NonUsable
-                            ).OrderBy(a => Mathf.Abs(a.Pos.x - CurrentAIState.t.UMS.CurrentTilePos.x)).ThenBy(b => b.Pos.y).ToList();
+                            ).OrderBy(a => Mathf.Abs(a.Pos.x - target.UMS.CurrentTilePos.x)).ThenBy(b => b.Pos.y).ToList();
                             AICoolDownOffset = Time.time;
                         }
                     }
                     else if ((Time.time - AICoolDownOffset) > CurrentAIState.CoolDown)
                     {
-                        if (CurrentAIState.t != null)
+                        if (target != null)
                         {
                             possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
                             r.BattleTileState != BattleTileStateType.NonUsable
-                            ).OrderByDescending(a => Mathf.Abs(a.Pos.x - CurrentAIState.t.UMS.CurrentTilePos.x)).ThenByDescending(b => b.Pos.y).ToList();
+                            ).OrderByDescending(a => Mathf.Abs(a.Pos.x - target.UMS.CurrentTilePos.x)).ThenByDescending(b => b.Pos.y).ToList();
                             AICoolDownOffset = Time.time;
                         }
                     }
-                    if (possiblePositions.Count > 0 && CurrentAIState.t != null)
+                    if (possiblePositions.Count > 0 && target != null)
                     {
                         yield return Teleport_Co(possiblePositions);
                     }

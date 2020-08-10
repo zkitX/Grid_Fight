@@ -371,13 +371,13 @@ public class MinionType_Script : BaseCharacter
             switch (r.Fov)
             {
                 case FieldOfViewType.NearRange:
-                    if(CurrentAIState.t.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x)
+                    if(target.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x)
                     {
                         resAtkBase.Add(r);
                     }
                     break;
                 case FieldOfViewType.MidRange:
-                    if (Mathf.Abs(CurrentAIState.t.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x) <= 1)
+                    if (Mathf.Abs(target.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x) <= 1)
                     {
                         resAtkBase.Add(r);
                     }

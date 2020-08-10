@@ -41,7 +41,6 @@ public class ScriptableObjectAI : ScriptableObject
 
     [Header("State effects")]
 
-    public BaseCharacter t;
     public List<AIStatsModifierClass> StatsToModify = new List<AIStatsModifierClass>();
     System.Reflection.FieldInfo parentField = null, field = null, B_field = null;
     string[] statToCheck;
@@ -50,12 +49,38 @@ public class ScriptableObjectAI : ScriptableObject
 
     [HideInInspector] public bool Show;
 
-    public int CheckAvailability(BaseCharacter bChar, List<AggroInfoClass> enemies, Vector2Int currentPos)
+    public BaseCharacter GetAggro(BaseCharType baseCharacterType, Vector2Int currentPos, List<AggroInfoClass> enemies, out int Score)
     {
+        Score = 0;
+
+        if (baseCharacterType == BaseCharType.PlayerMinionType_Script || baseCharacterType == BaseCharType.CharacterType_Script)
+        {
+            if(WaveManagerScript.Instance.WaveCharcters.Count == 0)
+            {
+                return null;
+            }
+            return WaveManagerScript.Instance.WaveCharcters.Where(r => r.isActiveAndEnabled && r.IsOnField).ToArray().OrderBy(a => Mathf.Abs(a.UMS.CurrentTilePos.x - currentPos.x)).ToArray()[0];
+        }
+
+
         AggroInfoClass target = new AggroInfoClass(ControllerType.Player1, 0);
-        int split = 100 / BattleManagerScript.Instance.CurrentSelectedCharacters.Count;
-        int Score = 0;
+
         int charTargeting = 0;
+        int split = 100 / BattleManagerScript.Instance.CurrentSelectedCharacters.Count;
+
+        if (target.Hit <= 0)
+        {
+            Score -= 5;
+        }
+        else if (target.Hit >= 3 && target.Hit < 5)
+        {
+            Score += 5;
+        }
+        else if (target.Hit >= 5)
+        {
+            Score += 10;
+        }
+
         foreach (AggroInfoClass item in enemies)
         {
             charTargeting += item.Hit + split;
@@ -77,23 +102,18 @@ public class ScriptableObjectAI : ScriptableObject
             }
         }
 
-        if (target.Hit <= 0)
+
+        if (BattleManagerScript.Instance.CurrentSelectedCharacters[target.PlayerController].Character != null)
         {
-            Score -= 5;
-        }
-        else if (target.Hit >= 3 && target.Hit < 5)
-        {
-            Score += 5;
-        }
-        else if (target.Hit >= 5)
-        {
-            Score += 10;
+            return BattleManagerScript.Instance.CurrentSelectedCharacters[target.PlayerController].Character;
         }
 
-        if(BattleManagerScript.Instance.CurrentSelectedCharacters[target.PlayerController].Character != null)
-        {
-            t = BattleManagerScript.Instance.CurrentSelectedCharacters[target.PlayerController].Character;
-        }
+        return null;
+    }
+
+    public int CheckAvailability(BaseCharacter bChar, List<AggroInfoClass> enemies, Vector2Int currentPos, ref BaseCharacter target)
+    {
+        target = GetAggro(bChar.CharInfo.BaseCharacterType, currentPos, enemies, out int Score);
 
         int i = 0;
         foreach (AICheckClass item in Checks)
@@ -143,12 +163,12 @@ public class ScriptableObjectAI : ScriptableObject
             Score += 300;
         }
      
-       if (t != null)
+       if (target != null)
        {
             switch (Vision)
             {
                 case VisionType.Front_Near:
-                    if (t.UMS.CurrentTilePos.x == currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) < 3)
+                    if (target.UMS.CurrentTilePos.x == currentPos.x && Mathf.Abs(target.UMS.CurrentTilePos.y - currentPos.y) < 3)
                     {
                         Score += 100;
                     }
@@ -158,7 +178,7 @@ public class ScriptableObjectAI : ScriptableObject
                     }
                     break;
                 case VisionType.Front_Far:
-                    if (t.UMS.CurrentTilePos.x == currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) > 3)
+                    if (target.UMS.CurrentTilePos.x == currentPos.x && Mathf.Abs(target.UMS.CurrentTilePos.y - currentPos.y) > 3)
                     {
                         Score += 100;
                     }
@@ -168,7 +188,7 @@ public class ScriptableObjectAI : ScriptableObject
                     }
                     break;
                 case VisionType.UpDown_Near:
-                    if (t.UMS.CurrentTilePos.x != currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) < 3)
+                    if (target.UMS.CurrentTilePos.x != currentPos.x && Mathf.Abs(target.UMS.CurrentTilePos.y - currentPos.y) < 3)
                     {
                         Score += 100;
                     }
@@ -178,7 +198,7 @@ public class ScriptableObjectAI : ScriptableObject
                     }
                     break;
                 case VisionType.UpDown_Far:
-                    if (t.UMS.CurrentTilePos.x != currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) > 3)
+                    if (target.UMS.CurrentTilePos.x != currentPos.x && Mathf.Abs(target.UMS.CurrentTilePos.y - currentPos.y) > 3)
                     {
                         Score += 100;
                     }
@@ -188,19 +208,19 @@ public class ScriptableObjectAI : ScriptableObject
                     }
                     break;
             }
-           if (t.UMS.CurrentTilePos.x == currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) < 3)
+           if (target.UMS.CurrentTilePos.x == currentPos.x && Mathf.Abs(target.UMS.CurrentTilePos.y - currentPos.y) < 3)
            {
                Score += 10;
            }
-           else if (t.UMS.CurrentTilePos.x == currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) > 3)
+           else if (target.UMS.CurrentTilePos.x == currentPos.x && Mathf.Abs(target.UMS.CurrentTilePos.y - currentPos.y) > 3)
            {
                Score += 5;
            }
-           else if (t.UMS.CurrentTilePos.x != currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) < 3)
+           else if (target.UMS.CurrentTilePos.x != currentPos.x && Mathf.Abs(target.UMS.CurrentTilePos.y - currentPos.y) < 3)
            {
                Score += 0;
            }
-           else if (t.UMS.CurrentTilePos.x != currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) > 3)
+           else if (target.UMS.CurrentTilePos.x != currentPos.x && Mathf.Abs(target.UMS.CurrentTilePos.y - currentPos.y) > 3)
            {
                Score += 0;
            }

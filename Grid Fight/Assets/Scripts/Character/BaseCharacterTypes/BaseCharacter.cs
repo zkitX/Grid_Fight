@@ -1240,7 +1240,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
     }
 
-
+    protected BaseCharacter target = null;
     public float AICoolDownOffset = 0;
     protected IEnumerator s = null;
     public virtual IEnumerator AI()
@@ -1257,7 +1257,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     yield return null;
                 }
                 ScriptableObjectAI prev = CurrentAIState;
-                CurrentAIState = CharInfo.GetCurrentAI(AggroInfoList, UMS.CurrentTilePos, this);
+                CurrentAIState = CharInfo.GetCurrentAI(AggroInfoList, UMS.CurrentTilePos, this, ref target);
                 if (prev == null || prev.AI_Type != CurrentAIState.AI_Type)
                 {
                     SetCurrentAIValues();
@@ -1280,15 +1280,15 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
                 int atkChances = UnityEngine.Random.Range(0, 100);
                 nextAttack = null;
-                if (CurrentAIState.t != null)
+                if (target != null)
                 {
                     GetAttack();
                 }
 
-                if (CurrentAIState.t != null && atkChances < AttackWillPerc && nextAttack != null && (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler))
+                if (target != null && atkChances < AttackWillPerc && nextAttack != null && (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler))
                 {
                     lastAttackTime = Time.time;
-                    nextAttackPos = CurrentAIState.t.UMS.CurrentTilePos;
+                    nextAttackPos = target.UMS.CurrentTilePos;
                     if (possiblePos != null)
                     {
                         possiblePos.isTaken = false;
@@ -1311,21 +1311,21 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                             int movementChances = UnityEngine.Random.Range(0, (TowardMovementPerc + AwayMovementPerc));
                             if (TowardMovementPerc > movementChances && (Time.time - AICoolDownOffset) > CurrentAIState.CoolDown)
                             {
-                                if (CurrentAIState.t != null)
+                                if (target != null)
                                 {
                                     possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
                                     r.BattleTileState != BattleTileStateType.NonUsable
-                                    ).OrderBy(a => Mathf.Abs(a.Pos.x - CurrentAIState.t.UMS.CurrentTilePos.x)).ThenBy(b => b.Pos.y).ToList();
+                                    ).OrderBy(a => Mathf.Abs(a.Pos.x - target.UMS.CurrentTilePos.x)).ThenBy(b => b.Pos.y).ToList();
                                     AICoolDownOffset = Time.time;
                                 }
                             }
                             else if ((Time.time - AICoolDownOffset) > CurrentAIState.CoolDown)
                             {
-                                if (CurrentAIState.t != null)
+                                if (target != null)
                                 {
                                     possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
                                     r.BattleTileState != BattleTileStateType.NonUsable
-                                    ).OrderByDescending(a => Mathf.Abs(a.Pos.x - CurrentAIState.t.UMS.CurrentTilePos.x)).ThenByDescending(b => b.Pos.y).ToList();
+                                    ).OrderByDescending(a => Mathf.Abs(a.Pos.x - target.UMS.CurrentTilePos.x)).ThenByDescending(b => b.Pos.y).ToList();
                                     AICoolDownOffset = Time.time;
                                 }
                             }

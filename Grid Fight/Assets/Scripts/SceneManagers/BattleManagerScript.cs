@@ -851,6 +851,13 @@ public class BattleManagerScript : MonoBehaviour
         CharacterInfoScript cloneInfo = replaced ? clonePrefab.GetComponentInChildren<CharacterInfoScript>() : original.CharInfo;
 
 
+        if (GridManagerScript.Instance.GetFreeBattleTile(original.UMS.WalkingSide) == null)
+        {
+            Debug.Log("<b>Could not spawn clone: NO SPACE ON FIELD...</b>    returning with no clone");
+            yield break;
+        }
+
+
         //Set up the cloning particles
         GameObject originalParticles = ParticleManagerScript.Instance.GetParticle(ParticlesType.Skill_Might_1_LegionOriginal);
         originalParticles.SetActive(true);
@@ -858,9 +865,7 @@ public class BattleManagerScript : MonoBehaviour
 
 
         //Creating the clone
-        MinionType_Script clone = null;
-
-        clone = (MinionType_Script)CreateChar(
+        MinionType_Script clone = (MinionType_Script)CreateChar(
             new CharacterBaseInfoClass(cloneInfo.CharacterID.ToString(), CharacterSelectionType.Up,
             new List<ControllerType> { isPlayer ? ControllerType.None : ControllerType.Enemy }, cloneInfo.CharacterID,
             original.UMS.WalkingSide, original.UMS.Side, original.UMS.Facing,
