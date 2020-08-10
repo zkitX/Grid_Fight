@@ -10,8 +10,7 @@ using UnityEngine;
 /// </summary>
 public class CharacterInfoScript : MonoBehaviour
 {
-    [HideInInspector] public BaseCharacter charOwner = null;
-    [HideInInspector] public ScriptableObjectAttackEffect testAtkEffect = null; 
+   
 
     #region Events
     public delegate void BaseSpeedChanged(float baseSpeed);
@@ -165,7 +164,10 @@ public class CharacterInfoScript : MonoBehaviour
         public float EndPerc = 0.15f;
 
         public float AttackSpeed = 1;
-        public float AttackSpeedRatio;
+        [Range(0, 1)]
+        public float AttackLoopDuration = 0.5f;
+        [Range(0, 1)]
+        public float IdleToAttackDuration = 0.01f;
         public float BulletSpeed = 5;
         public float LeaveSpeed = 3;
         public float BaseSpeed_LevelMultiplier;
@@ -176,7 +178,6 @@ public class CharacterInfoScript : MonoBehaviour
         [HideInInspector] public float B_BaseSpeed = 1;
         [HideInInspector] public float B_MovementSpeed = 1;
         [HideInInspector] public float B_AttackSpeed = 1;
-        [HideInInspector] public float B_AttackSpeedRatio;
         [HideInInspector] public float B_BulletSpeed = 5;
         [HideInInspector] public float B_LeaveSpeed = 3;
         [HideInInspector] public float B_IdleToAtkDuration = 0.2f;
@@ -351,10 +352,8 @@ public class CharacterInfoScript : MonoBehaviour
     }
 
 
-    public void SetupChar(BaseCharacter character)
+    public void SetupChar()
     {
-        charOwner = character;
-
         for (int i = 0; i < (int)CharaterLevel; i++)
         {
             HealthStats.Base *= HealthStats.LevelMultiplier;
@@ -406,7 +405,6 @@ public class CharacterInfoScript : MonoBehaviour
         SpeedStats.B_BaseSpeed = SpeedStats.BaseSpeed;
         SpeedStats.B_MovementSpeed = SpeedStats.MovementSpeed;
         SpeedStats.B_AttackSpeed = SpeedStats.AttackSpeed;
-        SpeedStats.B_AttackSpeedRatio = SpeedStats.AttackSpeedRatio;
         SpeedStats.B_BulletSpeed = SpeedStats.BulletSpeed;
         SpeedStats.B_LeaveSpeed = SpeedStats.LeaveSpeed;
         SpeedStats.B_IdleToAtkDuration = SpeedStats.IdleToAtkDuration;
@@ -420,14 +418,14 @@ public class CharacterInfoScript : MonoBehaviour
         DefenceStats.B_MinionPerfectDefenceChances = DefenceStats.MinionPerfectDefenceChances;
     }
 
-    public ScriptableObjectAI GetCurrentAI(List<AggroInfoClass> enemies, Vector2Int currentPos)
+    public ScriptableObjectAI GetCurrentAI(List<AggroInfoClass> enemies, Vector2Int currentPos, BaseCharacter bChar)
     {
         List<AIInfoCLass> aisInfo = new List<AIInfoCLass>();
 
         int charTargeting = 0;
         foreach (ScriptableObjectAI item in AIs)
         {
-            aisInfo.Add(new AIInfoCLass(item, item.CheckAvailability(this, enemies, currentPos)));
+            aisInfo.Add(new AIInfoCLass(item, item.CheckAvailability(bChar, enemies, currentPos)));
             charTargeting += Mathf.Abs(aisInfo.Last().Score);
         }
 

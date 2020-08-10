@@ -90,7 +90,6 @@ public class VFXTester : MonoBehaviour
             BattleTileScript cbts = GridManagerScript.Instance.GetBattleTile(currentCharacter.UMS.Pos[i]);
             currentCharacter.CurrentBattleTiles.Add(cbts);
         }
-        currentCharacter.CharInfo.SpeedStats.AttackSpeedRatio = AttackSpeed.value;
         currentCharacter.UMS.Side = SideType.RightSide;
         currentCharacter.CharInfo.ClassType = (CharacterClassType)Enum.Parse(typeof(CharacterClassType), CharacterClass.options[CharacterClass.value].text);
         currentCharacter.CharInfo.SpeedStats.BulletSpeed = SpeedOfBullets.value;

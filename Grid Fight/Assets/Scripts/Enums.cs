@@ -346,7 +346,8 @@ public enum StatsCheckType
     AttackSpeed,
     MovementSpeed,
     BaseSpeed,
-    TeamTotalHpPerc
+    TeamTotalHpPerc,
+    BuffDebuff
 }
 
 public enum ModificableStatsType

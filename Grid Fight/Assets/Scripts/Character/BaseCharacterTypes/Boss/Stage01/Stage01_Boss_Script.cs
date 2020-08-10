@@ -39,7 +39,7 @@ public class Stage01_Boss_Script : MinionType_Script
                     yield return null;
                 }
                 ScriptableObjectAI prev = CurrentAIState;
-                CurrentAIState = CharInfo.GetCurrentAI(AggroInfoList, UMS.CurrentTilePos);
+                CurrentAIState = CharInfo.GetCurrentAI(AggroInfoList, UMS.CurrentTilePos, this);
                 if (prev == null || prev.AI_Type != CurrentAIState.AI_Type)
                 {
                     SetCurrentAIValues();

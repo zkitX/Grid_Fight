@@ -27,16 +27,26 @@ public class ScriptableObjectAIEditor : Editor
             list[i].Show = EditorGUILayout.Foldout(list[i].Show, "Checks  " + i);
             if (list[i].Show)
             {
+                list[i].CheckWeight = EditorGUILayout.IntField("CheckWeight", list[i].CheckWeight);
                 list[i].StatToCheck = (StatsCheckType)EditorGUILayout.EnumPopup("StatToCheck", list[i].StatToCheck);
-                list[i].ValueChecker = (ValueCheckerType)EditorGUILayout.EnumPopup("ValueChecker", list[i].ValueChecker);
-                if (list[i].ValueChecker < ValueCheckerType.Between)
+
+                if (list[i].StatToCheck == StatsCheckType.BuffDebuff)
                 {
-                    list[i].PercToCheck = EditorGUILayout.FloatField("PercToCheck", list[i].PercToCheck);
+                    list[i].BuffDebuff = (BuffDebuffStatsType)EditorGUILayout.EnumPopup("BuffDebuff", list[i].BuffDebuff);
                 }
                 else
                 {
-                    list[i].InBetween = EditorGUILayout.Vector2Field("InBetween", list[i].InBetween);
+                    list[i].ValueChecker = (ValueCheckerType)EditorGUILayout.EnumPopup("ValueChecker", list[i].ValueChecker);
+                    if (list[i].ValueChecker < ValueCheckerType.Between)
+                    {
+                        list[i].PercToCheck = EditorGUILayout.FloatField("PercToCheck", list[i].PercToCheck);
+                    }
+                    else
+                    {
+                        list[i].InBetween = EditorGUILayout.Vector2Field("InBetween", list[i].InBetween);
+                    }
                 }
+               
             }
             origin.Checks.Add(list[i]);
         }

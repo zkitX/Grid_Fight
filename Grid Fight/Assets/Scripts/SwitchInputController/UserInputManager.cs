@@ -234,6 +234,7 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonAUpEvent(int player)
     {
         //Debug.Log(player + "  " + "A Up");
+        SelectedCharacterStopQuickAttack(player);
 
     }
 
@@ -361,6 +362,7 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonAPressedEvent(int player)
     {
         //Debug.Log(player + "  " + "A Press");
+        SelectedCharacterStartQuickAttack(player);
     }
 
     private void Instance_ButtonLeftSRPressedEvent(int player)
@@ -602,6 +604,11 @@ public class UserInputManager : MonoBehaviour
     public void SelectedCharacterStartQuickAttack(int player)
     {
         BattleManagerScript.Instance.StartQuickAttack((ControllerType)player);
+    }
+
+    public void SelectedCharacterStopQuickAttack(int player)
+    {
+        BattleManagerScript.Instance.StopQuickAttack((ControllerType)player);
     }
 
     public void StopSelectedCharacterChargingAttack(int player)

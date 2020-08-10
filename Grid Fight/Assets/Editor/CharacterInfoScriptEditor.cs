@@ -35,12 +35,7 @@ public class CharacterInfoScriptEditor : Editor
             origin.Head = head.transform;
         }
 
-        origin.testAtkEffect = (ScriptableObjectAttackEffect)EditorGUILayout.ObjectField("Debug BuffDebuff ", origin.testAtkEffect, typeof(ScriptableObjectAttackEffect), false);
-        if (GUILayout.Button("Apply Debug BuffDebuff"))
-        {
-            origin.charOwner.Buff_DebuffCo(new Buff_DebuffClass(new ElementalResistenceClass(),
-                ElementalType.Neutral, origin.charOwner, origin.testAtkEffect));
-        }
+      
         EditorUtility.SetDirty(origin);
     }
 }

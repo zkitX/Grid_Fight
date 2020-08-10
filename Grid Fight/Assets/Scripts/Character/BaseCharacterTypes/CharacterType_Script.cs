@@ -159,7 +159,7 @@ public class CharacterType_Script : BaseCharacter
       //  UMS.SelectionIndicator.eulerAngles = new Vector3(0, 0, CharInfo.CharacterSelection == CharacterSelectionType.Up ? 90 :
        //     CharInfo.CharacterSelection == CharacterSelectionType.Down ? -90 :
       //      CharInfo.CharacterSelection == CharacterSelectionType.Left ? 180 : 0);
-        CharInfo.SetupChar(this);
+        CharInfo.SetupChar();
 
     }
 
@@ -893,7 +893,7 @@ public class CharacterType_Script : BaseCharacter
                 AICoolDownOffset = 0;
 
                 int atkChances = Random.Range(0, 100);
-                if (CurrentAIState.t != null && atkChances < AttackWillPerc && (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler))
+                if (CurrentAIState.t != null && atkChances < AttackWillPerc &&  (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler))
                 {
                     lastAttackTime = Time.time;
                     nextAttackPos = CurrentAIState.t.UMS.CurrentTilePos;

@@ -120,7 +120,6 @@ public class CharTesterScript : MonoBehaviour
 
     public void ParticlesSetup()
     {
-        currentCharacter.CharInfo.SpeedStats.AttackSpeedRatio = AttackSpeed.value;
         currentCharacter.CharInfo.SpeedStats.BulletSpeed = SpeedOfBullets.value;
         currentCharacter.CharInfo.CurrentAttackTypeInfo = AttacksTypeInfo.Where(r => r.ParticlesAtk.CharacterClass == currentCharacter.CharInfo.ClassType).ToList();
     }

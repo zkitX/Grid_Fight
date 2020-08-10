@@ -644,7 +644,7 @@ public class BattleManagerScript : MonoBehaviour
             r.CurrentBuffDebuff.Stop_Co = true;
         }
         );
-        zombiefied.CharInfo.SetupChar(zombiefied);
+        zombiefied.CharInfo.SetupChar();
 
         while (zombiefied.IsOnField)
         {
@@ -1369,16 +1369,18 @@ public class BattleManagerScript : MonoBehaviour
         {
             if (CurrentSelectedCharacters[playerController].Character.UMS.UnitBehaviour == UnitBehaviourType.ControlledByPlayer)
             {
-                if (Mathf.Abs(CurrentSelectedCharacters[playerController].Character.LastAxisValue) > Mathf.Abs(value) && (value < 0.4f && value > -0.4f))
-                {
-                    CurrentSelectedCharacters[playerController].Character.EndAxisMovement = true;
-                }
-                else
-                {
-                    CurrentSelectedCharacters[playerController].Character.MoveCharOnDirection(dir);
-                }
+                //if (Mathf.Abs(CurrentSelectedCharacters[playerController].Character.LastAxisValue) > Mathf.Abs(value) && (value < 0.4f && value > -0.4f))
+                //{
+                //    CurrentSelectedCharacters[playerController].Character.EndAxisMovement = true;
+                //}
+                //else
+                //{
+                //    CurrentSelectedCharacters[playerController].Character.MoveCharOnDirection(dir);
+                //}
 
-                CurrentSelectedCharacters[playerController].Character.LastAxisValue = value;
+                CurrentSelectedCharacters[playerController].Character.MoveCharOnDirection(dir);
+
+                //CurrentSelectedCharacters[playerController].Character.LastAxisValue = value;
             }
         }
     }
@@ -1563,6 +1565,17 @@ public class BattleManagerScript : MonoBehaviour
             if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null)
             {
                 CurrentSelectedCharacters[controllerType].Character.CharacterInputHandler(InputActionType.Weak);
+            }
+        }
+    }
+
+    public void StopQuickAttack(ControllerType controllerType)
+    {
+        if (CurrentBattleState == BattleState.Battle && CurrentSelectedCharacters.Keys.Contains(controllerType))
+        {
+            if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null)
+            {
+                CurrentSelectedCharacters[controllerType].Character.Atk1Queueing = false;
             }
         }
     }

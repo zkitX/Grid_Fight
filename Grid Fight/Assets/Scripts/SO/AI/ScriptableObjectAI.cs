@@ -50,7 +50,7 @@ public class ScriptableObjectAI : ScriptableObject
 
     [HideInInspector] public bool Show;
 
-    public int CheckAvailability(CharacterInfoScript charInfo, List<AggroInfoClass> enemies, Vector2Int currentPos)
+    public int CheckAvailability(BaseCharacter bChar, List<AggroInfoClass> enemies, Vector2Int currentPos)
     {
         AggroInfoClass target = new AggroInfoClass(ControllerType.Player1, 0);
         int split = 100 / BattleManagerScript.Instance.CurrentSelectedCharacters.Count;
@@ -103,16 +103,16 @@ public class ScriptableObjectAI : ScriptableObject
                 case StatsCheckType.None:
                     break;
                 case StatsCheckType.Health:
-                    if (CheckStatsValues(item, charInfo.HealthPerc))
+                    if (CheckStatsValues(item, bChar.CharInfo.HealthPerc))
                     {
-                        Score += 100;
+                        Score += 100 * item.CheckWeight;
                         i++;
                     }
                     break;
                 case StatsCheckType.Stamina:
-                    if (CheckStatsValues(item, charInfo.StaminaPerc))
+                    if (CheckStatsValues(item, bChar.CharInfo.StaminaPerc))
                     {
-                        Score += 100;
+                        Score += 100 * item.CheckWeight;
                         i++;
                     }
                     break;
@@ -125,7 +125,14 @@ public class ScriptableObjectAI : ScriptableObject
                 case StatsCheckType.TeamTotalHpPerc:
                     if (CheckStatsValues(item, WaveManagerScript.Instance.GetCurrentPartyHPPerc()))
                     {
-                        Score += 100;
+                        Score += 100 * item.CheckWeight;
+                        i++;
+                    }
+                    break;
+                case StatsCheckType.BuffDebuff:
+                    if(bChar.HasBuffDebuff(item.BuffDebuff))
+                    {
+                        Score += 100 * item.CheckWeight;
                         i++;
                     }
                     break;
@@ -188,7 +195,8 @@ public class ScriptableObjectAI : ScriptableObject
            else if (t.UMS.CurrentTilePos.x == currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) > 3)
            {
                Score += 5;
-           }        else if (t.UMS.CurrentTilePos.x != currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) < 3)
+           }
+           else if (t.UMS.CurrentTilePos.x != currentPos.x && Mathf.Abs(t.UMS.CurrentTilePos.y - currentPos.y) < 3)
            {
                Score += 0;
            }
@@ -196,23 +204,6 @@ public class ScriptableObjectAI : ScriptableObject
            {
                Score += 0;
            }
-
-       /*    if (partyHp >= 90)
-           {
-               Score += 0;
-           }
-           else if (partyHp >= 60)
-           {
-               Score += 5;
-           }
-           else if (partyHp >= 30)
-           {
-               Score += 10;
-           }
-           else if (partyHp >= 5)
-           {
-               Score += 20;
-           }*/
        }
         return Score;
     }
@@ -298,9 +289,12 @@ public class AICheckClass
 {
     public StatsCheckType StatToCheck;
     public ValueCheckerType ValueChecker;
+    public int CheckWeight = 1;
+
     [HideInInspector]public float PercToCheck;
     [HideInInspector]public Vector2 InBetween = new Vector2(60, 40);
-    [HideInInspector] public bool Show;
+    [HideInInspector]public bool Show;
+    [HideInInspector]public BuffDebuffStatsType BuffDebuff;
 }
 
 

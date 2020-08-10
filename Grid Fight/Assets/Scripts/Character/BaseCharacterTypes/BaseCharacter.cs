@@ -7,7 +7,13 @@ using UnityEngine;
 
 public class BaseCharacter : MonoBehaviour, IDisposable
 {
-//minion
+    [HideInInspector] public ScriptableObjectAttackEffect testAtkEffect = null;
+
+
+
+
+
+    //minion
     protected float LastAttackTime;
     public int AttackWillPerc = 13;
     public int UpDownMovementPerc = 13;
@@ -1251,7 +1257,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     yield return null;
                 }
                 ScriptableObjectAI prev = CurrentAIState;
-                CurrentAIState = CharInfo.GetCurrentAI(AggroInfoList, UMS.CurrentTilePos);
+                CurrentAIState = CharInfo.GetCurrentAI(AggroInfoList, UMS.CurrentTilePos, this);
                 if (prev == null || prev.AI_Type != CurrentAIState.AI_Type)
                 {
                     SetCurrentAIValues();
@@ -1590,8 +1596,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 item.BuffDebuffCo = Buff_DebuffCoroutine(item);
                 BuffsDebuffsList.Insert(0, item);
                 UMS.buffIconHandler.RefreshIcons(BuffsDebuffsList);
-                StartCoroutine(item.BuffDebuffCo);
                 item.currentBuffValue = bdClass.Value;
+                StartCoroutine(item.BuffDebuffCo);
             }
             else //Refresh current BuffDebuff duration
             {
@@ -1755,7 +1761,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     StartAI();
                 }
                 break;
-                
         }
 
         if (bdClass.Duration > 0)
@@ -2048,21 +2053,19 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && animState.Contains("IdleToAtk"))
         {
-            //AnimSpeed = CharInfo.SpeedStats.AttackSpeed * CharInfo.BaseSpeed;
-            AnimSpeed = SpineAnim.GetAnimLenght(animState) / 0.01f;
+            AnimSpeed = SpineAnim.GetAnimLenght(animState) / CharInfo.SpeedStats.IdleToAttackDuration;
         }
         else if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && animState.Contains("Loop"))
         {
-            //AnimSpeed = CharInfo.SpeedStats.AttackSpeed * CharInfo.BaseSpeed;
-            AnimSpeed = SpineAnim.GetAnimLenght(animState) / 0.2f;
+            AnimSpeed = SpineAnim.GetAnimLenght(animState) / CharInfo.SpeedStats.AttackLoopDuration;
         }
-        else if (animState.Contains("Dash"))
-        {
-            if (animState.Contains("Intro"))
-            {
-               // AnimSpeed = CharInfo.SpeedStats.TileMovementTime * CharInfo.SpeedStats.IntroTileMovementSpeed;
-            }
-        }
+        //else if (animState.Contains("Dash"))
+        //{
+        //    if (animState.Contains("Intro"))
+        //    {
+        //       // AnimSpeed = CharInfo.SpeedStats.TileMovementTime * CharInfo.SpeedStats.IntroTileMovementSpeed;
+        //    }
+        //}
         else if (animState.Contains("JumpTransition") || animState.Contains("Arriv"))
         {
             AnimSpeed = CharInfo.SpeedStats.LeaveSpeed;
