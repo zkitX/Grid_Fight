@@ -420,6 +420,7 @@ public class CharacterType_Script : BaseCharacter
                 return;
             }
             Attacking = true;
+            lastAttack = false;
             FireActionEvent(CharacterActionType.WeakAttack);
             if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop.ToString() && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_IdleToAtk.ToString())
             {
@@ -799,8 +800,13 @@ public class CharacterType_Script : BaseCharacter
         if (completedAnim == CharacterAnimationStateType.Atk1_Loop.ToString() &&
             SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1_Loop.ToString())
         {
-            if (Atk1Queueing)
+            if (!lastAttack && Atk1Queueing)
             {
+                QuickAttack();
+            }
+            else if (lastAttack && Atk1Queueing)
+            {
+                Atk1Queueing = false;
                 QuickAttack();
             }
             else

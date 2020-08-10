@@ -1572,7 +1572,8 @@ public class BattleManagerScript : MonoBehaviour
         {
             if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null)
             {
-                CurrentSelectedCharacters[controllerType].Character.Atk1Queueing = false;
+                // CurrentSelectedCharacters[controllerType].Character.Atk1Queueing = false;
+                CurrentSelectedCharacters[controllerType].Character.lastAttack = true;
             }
         }
     }

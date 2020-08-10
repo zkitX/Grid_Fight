@@ -234,6 +234,8 @@ public class UserInputManager : MonoBehaviour
     private void Instance_ButtonAUpEvent(int player)
     {
         //Debug.Log(player + "  " + "A Up");
+
+
         SelectedCharacterStopQuickAttack(player);
 
     }

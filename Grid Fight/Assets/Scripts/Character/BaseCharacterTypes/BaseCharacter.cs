@@ -2014,6 +2014,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     }
 
     protected bool pauseOnLastFrame = false;
+    public bool lastAttack = false;
     public virtual void SetAnimation(string animState, bool loop = false, float transition = 0, bool _pauseOnLastFrame = false)
     {
 
@@ -2057,7 +2058,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         else if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && animState.Contains("Loop"))
         {
-            AnimSpeed = SpineAnim.GetAnimLenght(animState) / CharInfo.SpeedStats.AttackLoopDuration;
+            // AnimSpeed = SpineAnim.GetAnimLenght(animState) / CharInfo.SpeedStats.AttackLoopDuration;
+            AnimSpeed = lastAttack ? SpineAnim.GetAnimLenght(animState) / (CharInfo.SpeedStats.AttackLoopDuration / 5) : SpineAnim.GetAnimLenght(animState) / CharInfo.SpeedStats.AttackLoopDuration;
         }
         //else if (animState.Contains("Dash"))
         //{
