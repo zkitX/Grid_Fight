@@ -86,7 +86,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c646e145be8df1842968271a7d7655c0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104,8 +104,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 807063151
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 4940802098303136787, guid: 44da30dc741a1b2499ad1bafe360ec15,
     type: 3}
@@ -388,11 +388,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2081106095525093386, guid: d635fc05a68c22d4ebbed1a1f71f18a7,
-        type: 3}
-      propertyPath: m_Name
-      value: ExplosionWarning
-      objectReference: {fileID: 0}
     - target: {fileID: 4907653143066131418, guid: d635fc05a68c22d4ebbed1a1f71f18a7,
         type: 3}
       propertyPath: TargetsPosition.Array.data[0].y
@@ -442,6 +437,11 @@ PrefabInstance:
         type: 3}
       propertyPath: TargetsPosition.Array.data[4].x
       value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081106095525093386, guid: d635fc05a68c22d4ebbed1a1f71f18a7,
+        type: 3}
+      propertyPath: m_Name
+      value: ExplosionWarning
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d635fc05a68c22d4ebbed1a1f71f18a7, type: 3}
