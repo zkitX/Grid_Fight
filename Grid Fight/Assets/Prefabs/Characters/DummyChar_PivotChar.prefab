@@ -61,7 +61,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304329801235356828}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.39, z: 0}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4453474158781727621}
@@ -95,7 +95,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 252035aa6b590ee4cb4145c047bd3d4c, type: 2}
+  - {fileID: 2100000, guid: 2707320975e9c314980843bf1b5501cb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -113,8 +113,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1897941405
+  m_SortingLayer: 3
   m_SortingOrder: 20
 --- !u!114 &6043056116965275083
 MonoBehaviour:
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 1bfb11811e28bfb42a9edf7b8de6f37e, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: a6f3e3428d815d44caaa16d5d8e8e789, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f98aab6021486341825eb862f61401a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skeletonAnimation: {fileID: 0}
   CharOwner: {fileID: 0}
   CurveType: 0
   Speed_Time_Curves:
@@ -313,39 +314,30 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        value: -0.003955841
+        inSlope: 1.4285715
+        outSlope: 1.4285715
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0.24903512
-        value: 0.010477209
-        inSlope: 0.15351214
-        outSlope: 0.15351214
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.17618085
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.7
-        value: 1
-        inSlope: 0
+        value: 0.99604416
+        inSlope: 1.2729329
         outSlope: 0
-        tangentMode: 0
+        tangentMode: 1
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0.06439541
+        outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
-        value: 1
+        value: 0.99604416
         inSlope: 0
         outSlope: 0
-        tangentMode: 0
+        tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -355,39 +347,30 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        value: -0.003955841
+        inSlope: 1.4285715
+        outSlope: 1.4285715
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0.31386593
-        value: 0.03338623
-        inSlope: 0.22366388
-        outSlope: 0.22366388
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.17819536
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.7
-        value: 1
-        inSlope: 0
+        value: 0.99604416
+        inSlope: 1.2729329
         outSlope: 0
-        tangentMode: 0
+        tangentMode: 1
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0.06439541
+        outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
-        value: 1
+        value: 0.99604416
         inSlope: 0
         outSlope: 0
-        tangentMode: 0
+        tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -397,39 +380,30 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        value: -0.003955841
+        inSlope: 1.4285715
+        outSlope: 1.4285715
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0.30327633
-        value: 0.04384145
-        inSlope: 0.40930632
-        outSlope: 0.40930632
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.20183854
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.7
-        value: 1
-        inSlope: 0
+        value: 0.99604416
+        inSlope: 1.2729329
         outSlope: 0
-        tangentMode: 0
+        tangentMode: 1
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0.06439541
+        outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
-        value: 1
+        value: 0.99604416
         inSlope: 0
         outSlope: 0
-        tangentMode: 0
+        tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -439,39 +413,30 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        value: -0.003955841
+        inSlope: 1.4285715
+        outSlope: 1.4285715
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0.36940792
-        value: -0.0020751953
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.7
-        value: 1
-        inSlope: 0
+        value: 0.99604416
+        inSlope: 1.2729329
         outSlope: 0
-        tangentMode: 0
+        tangentMode: 1
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0.06439541
+        outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
-        value: 1
+        value: 0.99604416
         inSlope: 0
         outSlope: 0
-        tangentMode: 0
+        tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -505,11 +470,11 @@ MonoBehaviour:
   AudioProfile: {fileID: 11400000, guid: 1d1ac6e0e6dc2f247b00f4003d59f304, type: 2}
   BaseCharacterType: 0
   CharacterID: 10001
-  CurrentAttackTypeInfo:
-  - {fileID: 11400000, guid: c46c9549ff404f144a0757b04c624a2e, type: 2}
-  - {fileID: 11400000, guid: 07c717698a3e7594d9027e569e2556d5, type: 2}
-  - {fileID: 11400000, guid: cf6ed41e59b2874448b62a9ab0f26c2f, type: 2}
-  - {fileID: 11400000, guid: bbd466251179aad44b1e756ff560384f, type: 2}
+  attackSequences: []
+  _CurrentAttackTypeInfo:
+  - {fileID: 11400000, guid: bdf362282c7031a4e86cf4380ac47667, type: 2}
+  - {fileID: 11400000, guid: 0661223646bb79e408554a6755c05d77, type: 2}
+  AddedAttackTypeInfo: []
   Elemental: 2
   ClassType: 0
   CharaterLevel: 0
@@ -562,9 +527,15 @@ MonoBehaviour:
     B_BaseShieldRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
-    MovementSpeed: 2
+    TileMovementTime: 0.5
+    MovementSpeed: 1.6
+    CuttingPerc: 0.7
+    IntroPerc: 0.16
+    LoopPerc: 0.54
+    EndPerc: 0.3
     AttackSpeed: 4
-    AttackSpeedRatio: 1
+    AttackLoopDuration: 0.5
+    IdleToAttackDuration: 0.01
     BulletSpeed: 3
     LeaveSpeed: 3
     BaseSpeed_LevelMultiplier: 0
@@ -574,7 +545,6 @@ MonoBehaviour:
     B_BaseSpeed: 1
     B_MovementSpeed: 1
     B_AttackSpeed: 1
-    B_AttackSpeedRatio: 0
     B_BulletSpeed: 5
     B_LeaveSpeed: 3
     B_IdleToAtkDuration: 0.2
@@ -588,8 +558,12 @@ MonoBehaviour:
   DefenceStats:
     BaseDefence: 1e+9
     Invulnerability: 1e+10
+    MinionDefenceChances: 20
+    MinionPerfectDefenceChances: 5
     B_BaseDefence: 10
     B_Invulnerability: 0.2
+    B_MinionDefenceChances: 20
+    B_MinionPerfectDefenceChances: 5
     LevelMultiplier: 1
   Special1LoadingDuration: 0
   Special2LoadingDuration: 0
