@@ -100,7 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1184161274543510989}
   m_Layer: 0
-  m_Name: Stage_06_Character_Mountain_PivotChar_Bosha
+  m_Name: Stage06_Character_Mountain_PivotChar_Bosha
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,7 +218,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: afc41aab41837604e943cbe347342a41, type: 2}
+  - {fileID: 2100000, guid: f4fb614253eb6b94c8a6c1f13c5d482a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -236,8 +236,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1897941405
+  m_SortingLayer: 3
   m_SortingOrder: 20
 --- !u!114 &4592325005124223588
 MonoBehaviour:
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: eb95d4fccc6654c41babc0bfd3eabaab, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: e9d1be4d79378e2419afabefea6b9e59, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -623,8 +623,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charOwner: {fileID: 0}
-  testAtkEffect: {fileID: 0}
   Name: Bosha
   CharacterIcon: {fileID: 21300000, guid: 5dd7a4f39ef7b294c98e182010e04182, type: 3}
   Mask: {fileID: 0}
@@ -697,7 +695,8 @@ MonoBehaviour:
     LoopPerc: 0.7
     EndPerc: 0.15
     AttackSpeed: 1
-    AttackSpeedRatio: 4
+    AttackLoopDuration: 0.5
+    IdleToAttackDuration: 0.01
     BulletSpeed: 3
     LeaveSpeed: 3
     BaseSpeed_LevelMultiplier: 0
@@ -707,7 +706,6 @@ MonoBehaviour:
     B_BaseSpeed: 1
     B_MovementSpeed: 1
     B_AttackSpeed: 1
-    B_AttackSpeedRatio: 0
     B_BulletSpeed: 5
     B_LeaveSpeed: 3
     B_IdleToAtkDuration: 0.2
