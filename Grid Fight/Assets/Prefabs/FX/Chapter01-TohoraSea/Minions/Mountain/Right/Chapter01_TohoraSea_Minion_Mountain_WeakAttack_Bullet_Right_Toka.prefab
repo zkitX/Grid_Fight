@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 443175094494188482}
   - component: {fileID: 2970014456719482782}
   m_Layer: 0
-  m_Name: Stage01_Minion_Mountain_WeakAttack_Bullet_Right_Toka
+  m_Name: Chapter01_TohoraSea_Minion_Mountain_WeakAttack_Bullet_Right_Toka
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4769,10 +4769,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c92ac842bd80264eb24a50ddfc9727b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LongParticles: []
   PSTime: 10
-  Target: {fileID: 0}
-  Adjustment: {x: 0, y: 0, z: 0}
-  IncludeChildren: 1
   timet: 0
   iter: 0
 --- !u!1 &1148192260465531816
@@ -9886,7 +9884,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.4
+      scalar: 0.2
       minScalar: 0.01
       maxCurve:
         serializedVersion: 2
@@ -14723,7 +14721,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.7
+      scalar: 0.4
       minScalar: 0.01
       maxCurve:
         serializedVersion: 2

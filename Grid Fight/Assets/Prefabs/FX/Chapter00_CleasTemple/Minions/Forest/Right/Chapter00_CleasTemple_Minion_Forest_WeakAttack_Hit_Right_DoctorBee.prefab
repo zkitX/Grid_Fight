@@ -115,8 +115,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.6
-      minScalar: 0.25
+      scalar: 0.1
+      minScalar: 0.3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -150,7 +150,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 6
+      scalar: 9
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -4795,7 +4795,7 @@ GameObject:
   - component: {fileID: 7602229554140369190}
   - component: {fileID: -6099775581386904332}
   m_Layer: 0
-  m_Name: Stage00_Minion_Forest_WeakAttack_Hit_Right
+  m_Name: Chapter00_CleasTemple_Minion_Forest_WeakAttack_Hit_Right_DoctorBee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9552,10 +9552,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c92ac842bd80264eb24a50ddfc9727b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LongParticles: []
   PSTime: 10
-  Target: {fileID: 0}
-  Adjustment: {x: 0, y: 0, z: 0}
-  IncludeChildren: 1
   timet: 0
   iter: 0
 --- !u!1 &5124711148149903564
@@ -9673,7 +9671,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
+      scalar: 0.1
       minScalar: 0.3
       maxCurve:
         serializedVersion: 2
@@ -14402,9 +14400,9 @@ ParticleSystem:
     enabled: 1
     startLifetime:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0.2
-      minScalar: 5
+      minScalar: 0.05
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -19104,7 +19102,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.3
+      scalar: 0.2
       minScalar: 5
       maxCurve:
         serializedVersion: 2

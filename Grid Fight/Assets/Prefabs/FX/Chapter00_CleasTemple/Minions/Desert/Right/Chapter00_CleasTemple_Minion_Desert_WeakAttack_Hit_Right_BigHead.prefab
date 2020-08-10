@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5892024389295970066}
   - component: {fileID: -4449539955342768093}
   m_Layer: 0
-  m_Name: Stage00_Minion_Desert_WeakAttack_Hit_Right
+  m_Name: Chapter00_CleasTemple_Minion_Desert_WeakAttack_Hit_Right_BigHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4772,10 +4772,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c92ac842bd80264eb24a50ddfc9727b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LongParticles: []
   PSTime: 10
-  Target: {fileID: 0}
-  Adjustment: {x: 0, y: 0, z: 0}
-  IncludeChildren: 1
   timet: 0
   iter: 0
 --- !u!1 &2660275244207854745
@@ -4893,8 +4891,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.8
-      minScalar: 0.3
+      scalar: 0.4
+      minScalar: 0.15
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4929,7 +4927,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 5
-      minScalar: 10
+      minScalar: 8
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -14355,8 +14353,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.2
-      minScalar: 0.51
+      scalar: 0.1
+      minScalar: 0.25
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -19085,8 +19083,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1.5
-      minScalar: 0.51
+      scalar: 0.5
+      minScalar: 0.2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -23833,8 +23831,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.8
-      minScalar: 1
+      scalar: 0.4
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -23868,7 +23866,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 20
+      scalar: 10
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -28624,7 +28622,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.7
+      scalar: 0.35
       minScalar: 0.1
       maxCurve:
         serializedVersion: 2
