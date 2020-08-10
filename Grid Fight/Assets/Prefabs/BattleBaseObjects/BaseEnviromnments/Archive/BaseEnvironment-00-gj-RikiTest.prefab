@@ -45,8 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 4
-  hasBaseTransitionTime: 0
-  baseTransitionDuration: 3
   pivot: {x: 0, y: 0, z: 0}
 --- !u!1 &2259303826347585286
 GameObject:
@@ -447,8 +445,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 3
-  hasBaseTransitionTime: 0
-  baseTransitionDuration: 3
   pivot: {x: 0, y: 0, z: 0}
 --- !u!1 &6808686343088897627
 GameObject:
@@ -495,8 +491,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
-  hasBaseTransitionTime: 0
-  baseTransitionDuration: 3
   pivot: {x: 0, y: 0, z: 0}
 --- !u!1 &7136738317042688888
 GameObject:
@@ -543,8 +537,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 2
-  hasBaseTransitionTime: 0
-  baseTransitionDuration: 3
   pivot: {x: 0, y: 0, z: 0}
 --- !u!1 &8552204082949427434
 GameObject:
@@ -799,8 +791,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 1
-  hasBaseTransitionTime: 0
-  baseTransitionDuration: 3
   pivot: {x: 0, y: 0, z: 0}
 --- !u!1 &9199868442122630933
 GameObject:
@@ -889,11 +879,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3195759775245970709}
     m_Modifications:
-    - target: {fileID: 3018671412517234131, guid: 3e07f27c0e1ef984bbd3be7f4f9e6f93,
-        type: 3}
-      propertyPath: m_Name
-      value: Gora-City-BG
-      objectReference: {fileID: 0}
     - target: {fileID: 5568511310185133335, guid: 3e07f27c0e1ef984bbd3be7f4f9e6f93,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -964,20 +949,25 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2582746630787521605, guid: 3e07f27c0e1ef984bbd3be7f4f9e6f93,
+    - target: {fileID: 2582746629361914526, guid: 3e07f27c0e1ef984bbd3be7f4f9e6f93,
         type: 3}
       propertyPath: m_SortingOrder
-      value: -13
+      value: -11
       objectReference: {fileID: 0}
     - target: {fileID: 2582746630751224256, guid: 3e07f27c0e1ef984bbd3be7f4f9e6f93,
         type: 3}
       propertyPath: m_SortingOrder
       value: -12
       objectReference: {fileID: 0}
-    - target: {fileID: 2582746629361914526, guid: 3e07f27c0e1ef984bbd3be7f4f9e6f93,
+    - target: {fileID: 2582746630787521605, guid: 3e07f27c0e1ef984bbd3be7f4f9e6f93,
         type: 3}
       propertyPath: m_SortingOrder
-      value: -11
+      value: -13
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018671412517234131, guid: 3e07f27c0e1ef984bbd3be7f4f9e6f93,
+        type: 3}
+      propertyPath: m_Name
+      value: Gora-City-BG
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e07f27c0e1ef984bbd3be7f4f9e6f93, type: 3}
@@ -994,10 +984,55 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2064186934768483362, guid: cf4f244213107aa4da6deb90cac9a661,
+    - target: {fileID: 1629259956607427534, guid: cf4f244213107aa4da6deb90cac9a661,
         type: 3}
-      propertyPath: m_Name
-      value: BaseEnvironment-00-gj-RikiTest
+      propertyPath: CameraInfo.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629259956607427534, guid: cf4f244213107aa4da6deb90cac9a661,
+        type: 3}
+      propertyPath: CameraInfo.Array.data[0].CameraPosition.z
+      value: -8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629259956607427534, guid: cf4f244213107aa4da6deb90cac9a661,
+        type: 3}
+      propertyPath: CameraInfo.Array.data[0].OrthographicSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629259956607427534, guid: cf4f244213107aa4da6deb90cac9a661,
+        type: 3}
+      propertyPath: CameraInfo.Array.data[1].CameraPosition.z
+      value: -8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629259956607427534, guid: cf4f244213107aa4da6deb90cac9a661,
+        type: 3}
+      propertyPath: CameraInfo.Array.data[1].OrthographicSize
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629259956607427534, guid: cf4f244213107aa4da6deb90cac9a661,
+        type: 3}
+      propertyPath: CameraInfo.Array.data[2].StageIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629259956607427534, guid: cf4f244213107aa4da6deb90cac9a661,
+        type: 3}
+      propertyPath: CameraInfo.Array.data[2].CameraPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629259956607427534, guid: cf4f244213107aa4da6deb90cac9a661,
+        type: 3}
+      propertyPath: CameraInfo.Array.data[2].CameraPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629259956607427534, guid: cf4f244213107aa4da6deb90cac9a661,
+        type: 3}
+      propertyPath: CameraInfo.Array.data[2].CameraPosition.z
+      value: -8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629259956607427534, guid: cf4f244213107aa4da6deb90cac9a661,
+        type: 3}
+      propertyPath: CameraInfo.Array.data[2].OrthographicSize
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2064186934768483361, guid: cf4f244213107aa4da6deb90cac9a661,
         type: 3}
@@ -1054,55 +1089,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1629259956607427534, guid: cf4f244213107aa4da6deb90cac9a661,
+    - target: {fileID: 2064186934768483362, guid: cf4f244213107aa4da6deb90cac9a661,
         type: 3}
-      propertyPath: CameraInfo.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629259956607427534, guid: cf4f244213107aa4da6deb90cac9a661,
-        type: 3}
-      propertyPath: CameraInfo.Array.data[0].CameraPosition.z
-      value: -8.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629259956607427534, guid: cf4f244213107aa4da6deb90cac9a661,
-        type: 3}
-      propertyPath: CameraInfo.Array.data[0].OrthographicSize
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629259956607427534, guid: cf4f244213107aa4da6deb90cac9a661,
-        type: 3}
-      propertyPath: CameraInfo.Array.data[1].CameraPosition.z
-      value: -8.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629259956607427534, guid: cf4f244213107aa4da6deb90cac9a661,
-        type: 3}
-      propertyPath: CameraInfo.Array.data[1].OrthographicSize
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629259956607427534, guid: cf4f244213107aa4da6deb90cac9a661,
-        type: 3}
-      propertyPath: CameraInfo.Array.data[2].StageIndex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629259956607427534, guid: cf4f244213107aa4da6deb90cac9a661,
-        type: 3}
-      propertyPath: CameraInfo.Array.data[2].CameraPosition.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629259956607427534, guid: cf4f244213107aa4da6deb90cac9a661,
-        type: 3}
-      propertyPath: CameraInfo.Array.data[2].CameraPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629259956607427534, guid: cf4f244213107aa4da6deb90cac9a661,
-        type: 3}
-      propertyPath: CameraInfo.Array.data[2].CameraPosition.z
-      value: -8.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629259956607427534, guid: cf4f244213107aa4da6deb90cac9a661,
-        type: 3}
-      propertyPath: CameraInfo.Array.data[2].OrthographicSize
-      value: 6
+      propertyPath: m_Name
+      value: BaseEnvironment-00-gj-RikiTest
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf4f244213107aa4da6deb90cac9a661, type: 3}
@@ -1119,11 +1109,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3195759775245970709}
     m_Modifications:
-    - target: {fileID: 5678758726324873990, guid: 3d89ace5010683b4dbbfa6ff35b64771,
-        type: 3}
-      propertyPath: m_Name
-      value: StarFieldFX
-      objectReference: {fileID: 0}
     - target: {fileID: 5678758726324873989, guid: 3d89ace5010683b4dbbfa6ff35b64771,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1183,6 +1168,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.maxNumParticles
       value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678758726324873990, guid: 3d89ace5010683b4dbbfa6ff35b64771,
+        type: 3}
+      propertyPath: m_Name
+      value: StarFieldFX
       objectReference: {fileID: 0}
     - target: {fileID: 5678758726324873991, guid: 3d89ace5010683b4dbbfa6ff35b64771,
         type: 3}
