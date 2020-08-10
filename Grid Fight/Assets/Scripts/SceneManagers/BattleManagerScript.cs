@@ -835,16 +835,16 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
-    public void CloneUnit(BaseCharacter original, int amount, float strengthScale = 1f, GameObject clonePrefab = null)
+    public void CloneUnit(BaseCharacter original, int amount, float strengthScale = 1f, GameObject clonePrefab = null, ScriptableObjectAttackEffect cloneStartingEffect = null)
     {
         if (original.CharInfo.Health <= 0) return;
         for (int i = 0; i < Mathf.Clamp(amount, 1, 5); i++)
         {
-            StartCoroutine(CloneUnit_Co(original, strengthScale, clonePrefab));
+            StartCoroutine(CloneUnit_Co(original, strengthScale, clonePrefab, cloneStartingEffect));
         }
     }
 
-    IEnumerator CloneUnit_Co(BaseCharacter original, float strengthScale, GameObject clonePrefab)
+    IEnumerator CloneUnit_Co(BaseCharacter original, float strengthScale, GameObject clonePrefab, ScriptableObjectAttackEffect cloneStartingEffect)
     {
         bool isPlayer = original.CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script;
         bool replaced = clonePrefab != null;
@@ -892,18 +892,15 @@ public class BattleManagerScript : MonoBehaviour
         else AllPlayersMinionOnField.Add(clone);
         //
 
-        while (clone.CharInfo.HealthPerc > 0f)
-        {
-            yield return null;
-        }
 
-        //Reset particles and have them play the ending explosion or whatever happens at the end of the clone's life
-        //cloneParticles.transform.parent = null;
-        //cloneParticles.SetActive(false);
-        //cloneParticles = ParticleManagerScript.Instance.GetParticle(ParticlesType.Skill_Might_1_CloneEnd);
-        //cloneParticles.SetActive(true);
-        //cloneParticles.transform.position = clone.SpineAnim.transform.position;
+        //Setup scaled strength of char as well as starting effect
+        clone.CharInfo.SetupChar(strengthScale);
+        if (cloneStartingEffect != null)
+        {
+            clone.Buff_DebuffCo(new Buff_DebuffClass(new ElementalResistenceClass(), ElementalType.Neutral, clone, cloneStartingEffect));
+        }
         //
+
     }
 
     //Used when the char is not in the battlefield to move it on the battlefield

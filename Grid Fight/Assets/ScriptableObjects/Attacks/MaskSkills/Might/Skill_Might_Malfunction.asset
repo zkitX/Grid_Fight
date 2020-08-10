@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Skill_Might_1
+  m_Name: Skill_Might_Malfunction
   m_EditorClassIdentifier: 
   isSequencedAttack: 0
   Chances: 100
   CurrentAttackType: 0
-  AttackRatioMultiplier: 1
+  AttackRatioMultiplier: 0
   _DamageMultiplier: {x: 0, y: 0}
   AttackInput: 2
   AttackAnim: 3
-  StaminaCost: 10
+  StaminaCost: 5
   ExperiencePoints: 10
-  _CoolDown: {x: 3, y: 5}
-  PrefixAnim: 4
+  _CoolDown: {x: 2, y: 2}
+  PrefixAnim: 0
   Fov: 0
   Particles:
     Left:
@@ -32,11 +32,11 @@ MonoBehaviour:
         type: 3}
       Hit: {fileID: 6046192917230238361, guid: 38f5cee39a429a94cba031200d8e7ef4, type: 3}
     Right:
-      Cast: {fileID: 4620842438502259328, guid: b17ada62a1f484244b15061df0e4d16e,
+      Cast: {fileID: 5012672367427705604, guid: a24da8320e7eec944aeb479190ec64a6,
         type: 3}
-      Bullet: {fileID: 1546727958638379251, guid: 0547ded264a3eb5469a698e63a863d7d,
+      Bullet: {fileID: 1875853362936715736, guid: 55a244383de34644ca95b3e999610737,
         type: 3}
-      Hit: {fileID: 2160571978177399329, guid: a6e0284103e26ad458ee3d5e09418ce4, type: 3}
+      Hit: {fileID: 6046192917230238361, guid: 38f5cee39a429a94cba031200d8e7ef4, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
@@ -45,7 +45,7 @@ MonoBehaviour:
   ParticlesAtk:
     BulletTrajectories:
     - Show: 1
-      BulletDistanceInTile: {x: 0, y: 12}
+      BulletDistanceInTile: {x: 0, y: 11}
       Trajectory_Y:
         serializedVersion: 2
         m_Curve:
@@ -98,15 +98,79 @@ MonoBehaviour:
       BulletEffectTiles: []
       BulletGapStartingTile: {x: 0, y: 0}
       HasEffect: 1
-      Effects: []
+      Effects:
+      - {fileID: 11400000, guid: e23855b388ae8534fa6b2a7c1ff91892, type: 2}
+      - {fileID: 11400000, guid: bc3df8b236bcb50459eb1c5c22e1d996, type: 2}
       EffectChances: 100
     CharacterClass: 0
   TilesAtk:
-    AtkType: 0
-    BulletTrajectories: []
-    StatToCheck: 0
-    ValueChecker: 0
-    Chances: 0
+    AtkType: 2
+    BulletTrajectories:
+    - Delay: 0.1
+      BulletTravelDurationPerTile: 0
+      ExplosionChances: 100
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Show: 1
+      BulletEffectTiles:
+      - Pos: {x: 0, y: 0}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+    StatToCheck: 1
+    ValueChecker: 2
+    Chances: 100
     PercToCheck: 0
     InBetween: {x: 0, y: 0}
     Show: 0

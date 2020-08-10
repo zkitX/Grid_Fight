@@ -36,4 +36,5 @@ public class ScriptableObjectAttackEffect : ScriptableObject
     [HideInInspector] public float ClonePowerScale = 0.5f; //How much of a nerf the clone receives upon creation
     [HideInInspector] public bool CloneAsManyAsCurrentEnemies = false;
     [HideInInspector] public int CloneAmount = 1;
+    [HideInInspector] public ScriptableObjectAttackEffect CloneStartingEffect;
 }

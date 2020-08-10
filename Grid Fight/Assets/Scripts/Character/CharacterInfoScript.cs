@@ -352,31 +352,31 @@ public class CharacterInfoScript : MonoBehaviour
     }
 
 
-    public void SetupChar()
+    public void SetupChar(float strengthScaler = 1f)
     {
         for (int i = 0; i < (int)CharaterLevel; i++)
         {
-            HealthStats.Base *= HealthStats.LevelMultiplier;
-            HealthStats.Health *= HealthStats.LevelMultiplier;
-            HealthStats.Regeneration *= HealthStats.LevelMultiplier;
-            HealthStats.BaseHealthRegeneration *= HealthStats.LevelMultiplier;
+            HealthStats.Base *= HealthStats.LevelMultiplier * strengthScaler;
+            HealthStats.Health *= HealthStats.LevelMultiplier * strengthScaler;
+            HealthStats.Regeneration *= HealthStats.LevelMultiplier * strengthScaler;
+            HealthStats.BaseHealthRegeneration *= HealthStats.LevelMultiplier * strengthScaler;
 
-            StaminaStats.Base *= StaminaStats.LevelMultiplier;
-            StaminaStats.Regeneration *= StaminaStats.LevelMultiplier;
-            StaminaStats.Stamina *= StaminaStats.LevelMultiplier;
-            StaminaStats.BaseStaminaRegeneration *= StaminaStats.LevelMultiplier;
+            StaminaStats.Base *= StaminaStats.LevelMultiplier * strengthScaler;
+            StaminaStats.Regeneration *= StaminaStats.LevelMultiplier * strengthScaler;
+            StaminaStats.Stamina *= StaminaStats.LevelMultiplier * strengthScaler;
+            StaminaStats.BaseStaminaRegeneration *= StaminaStats.LevelMultiplier * strengthScaler;
 
-            ShieldStats.Base *= ShieldStats.LevelMultiplier;
-            ShieldStats.Regeneration *= ShieldStats.LevelMultiplier;
-            ShieldStats.Shield *= ShieldStats.LevelMultiplier;
-            ShieldStats.BaseShieldRegeneration *= ShieldStats.LevelMultiplier;
+            ShieldStats.Base *= ShieldStats.LevelMultiplier * strengthScaler;
+            ShieldStats.Regeneration *= ShieldStats.LevelMultiplier * strengthScaler;
+            ShieldStats.Shield *= ShieldStats.LevelMultiplier * strengthScaler;
+            ShieldStats.BaseShieldRegeneration *= ShieldStats.LevelMultiplier * strengthScaler;
 
             SpeedStats.BaseSpeed *= SpeedStats.BaseSpeed_LevelMultiplier;
             SpeedStats.TileMovementTime /= 1 + SpeedStats.MovementSpeed_LevelMultiplier;
 
-            DefenceStats.BaseDefence *= DefenceStats.LevelMultiplier;
+            DefenceStats.BaseDefence *= DefenceStats.LevelMultiplier * strengthScaler;
 
-            DamageStats.BaseDamage *= DamageStats.LevelMultiplier;
+            DamageStats.BaseDamage *= DamageStats.LevelMultiplier * strengthScaler;
         }
 
 

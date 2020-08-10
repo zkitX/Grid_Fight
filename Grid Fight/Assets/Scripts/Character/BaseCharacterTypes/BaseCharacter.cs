@@ -1712,7 +1712,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 this, bdClass.CurrentBuffDebuff.Effect.CloneAsManyAsCurrentEnemies ?
                 CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script ? WaveManagerScript.Instance.WaveCharcters.Where(r => r.IsOnField && r.gameObject.activeInHierarchy).ToList().Count :
                 BattleManagerScript.Instance.AllCharactersOnField.Where(r => !r.IsOnField && r.CharInfo.HealthPerc > 0).ToList().Count : bdClass.CurrentBuffDebuff.Effect.CloneAmount,
-                bdClass.CurrentBuffDebuff.Effect.ClonePowerScale, bdClass.CurrentBuffDebuff.Effect.ClonePrefab
+                bdClass.CurrentBuffDebuff.Effect.ClonePowerScale, bdClass.CurrentBuffDebuff.Effect.ClonePrefab, bdClass.CurrentBuffDebuff.Effect.CloneStartingEffect
                 );
                 break;
             case BuffDebuffStatsType.ShieldStats_BaseShieldRegeneration:

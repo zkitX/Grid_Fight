@@ -45,7 +45,9 @@ public class ScriptableObjectAttackEffectEditor : Editor
             origin.ClonePowerScale = EditorGUILayout.FloatField("Clone Power Multiplier", origin.ClonePowerScale);
             origin.CloneAsManyAsCurrentEnemies = EditorGUILayout.Toggle("Clone count matches enemies", origin.CloneAsManyAsCurrentEnemies);
             if (!origin.CloneAsManyAsCurrentEnemies) origin.CloneAmount = EditorGUILayout.IntField("Number of clones", origin.CloneAmount);
+            origin.CloneStartingEffect = (ScriptableObjectAttackEffect)EditorGUILayout.ObjectField("Clone Starting Effect", origin.CloneStartingEffect, typeof(ScriptableObjectAttackEffect), false);
         }
+
         EditorUtility.SetDirty(origin);
     }
 
