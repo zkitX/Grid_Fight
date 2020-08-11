@@ -57,7 +57,6 @@ public class MinionType_Script : BaseCharacter
             StartAI();
 
         }
-        CharInfo.DefenceStats.BaseDefence = Random.Range(0.7f, 1);
         base.SetAttackReady(value);
     }
 
@@ -71,7 +70,6 @@ public class MinionType_Script : BaseCharacter
             StopCoroutine(AICo);
             AICo = null;
         }
-        s = null;
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         Attacking = false;
         BuffsDebuffsList.ForEach(r =>
@@ -237,7 +235,6 @@ public class MinionType_Script : BaseCharacter
         {
             return;
         }
-        Debug.Log(Time.time + "    " + animState);
         
         base.SetAnimation(animState, loop, transition, _pauseOnLastFrame);
     }
@@ -271,7 +268,6 @@ public class MinionType_Script : BaseCharacter
             }
 
         }
-        s = null;
     }
 
     public override void GetAttack()
@@ -510,7 +506,7 @@ public class MinionType_Script : BaseCharacter
                 isDefending = true;
                 DefendingHoldingTimer = 10;
                 SetAnimation(CharacterAnimationStateType.Defending);
-                damage = damage - CharInfo.DefenceStats.BaseDefence;
+                damage = damage - CharInfo.ShieldStats.ShieldOnDefence;
             }
             else
             {

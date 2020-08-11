@@ -679,7 +679,7 @@ public class Stage09_Boss_Geisha_Script : MinionType_Script
 
     }
 
-    public override void SpecialAttackImpactEffects(Vector3 tilePos)
+  /*  public override void SpecialAttackImpactEffects(Vector3 tilePos)
     {
         if(nextAttack.AttackAnim == AttackAnimType.Buff)
         {
@@ -689,5 +689,5 @@ public class Stage09_Boss_Geisha_Script : MinionType_Script
             return;
         }
         GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.Right.Hit, CharInfo.CharacterID, AttackParticlePhaseTypes.Hit, tilePos, UMS.Side, nextAttack.AttackInput);
-    }
+    }*/
 }

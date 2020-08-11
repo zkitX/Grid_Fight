@@ -140,6 +140,8 @@ public class CharacterInfoScript : MonoBehaviour
         public float Base = 50;
         public float Regeneration = 8;
         public float BaseShieldRegeneration = 8;
+        [Range(0, 1)]
+        public float ShieldOnDefence = 0.5f; 
         public float LevelMultiplier = 50;
 
         [HideInInspector] public float B_Shield;

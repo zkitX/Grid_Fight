@@ -27,9 +27,6 @@ public class CharacterType_Script : BaseCharacter
     public IEnumerator SkillActivation = null;
     public float LastAxisValue = 0;
 
-    
-
-
     #region Unity Life Cycles
     public override void Start()
     {
@@ -383,18 +380,11 @@ public class CharacterType_Script : BaseCharacter
             if (chargingAttackTimer > 1f && CharInfo.Health > 0f)
             {
                 currentAttackPhase = AttackPhasesType.Loading;
-                StopPowerfulAtk = SpecialAttackStatus.Start;
                 if (IsOnField)
                 {
                     while (isMoving)
                     {
                         yield return null;
-                        Debug.Log("Moving");
-                        if (StopPowerfulAtk == SpecialAttackStatus.Stop)
-                        {
-                            StopPowerfulAtk = SpecialAttackStatus.None;
-                            yield break;
-                        }
                     }
                     SpecialAttack(nxtAtk);
                 }
@@ -405,7 +395,7 @@ public class CharacterType_Script : BaseCharacter
             }
         }
     }
-
+    public float WeakAttackOffset = 0;
     public void StartWeakAttack(bool attackRegardless)
     {
         if (!CharActionlist.Contains(CharacterActionType.WeakAttack))
@@ -420,10 +410,12 @@ public class CharacterType_Script : BaseCharacter
                 return;
             }
             Attacking = true;
-            lastAttack = false;
+            WeakAttackOffset = Time.time;
+            //lastAttack = false;
             FireActionEvent(CharacterActionType.WeakAttack);
             if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop.ToString() && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_IdleToAtk.ToString())
             {
+                Debug.Log(SpineAnim.CurrentAnim);
                 SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
                 SpineAnim.SetAnimationSpeed(SpineAnim.GetAnimLenght(CharacterAnimationStateType.Atk2_IdleToAtk) / CharInfo.SpeedStats.IdleToAtkDuration);
             }
@@ -523,7 +515,7 @@ public class CharacterType_Script : BaseCharacter
 
     public void QuickAttack()
     {
-        Atk1Queueing = false;
+        //Atk1Queueing = false;
         nextAttack = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackAnim == AttackAnimType.Weak_Atk).First();
         currentAttackPhase = AttackPhasesType.Start;
         SetAnimation(CharacterAnimationStateType.Atk1_Loop);
@@ -535,14 +527,6 @@ public class CharacterType_Script : BaseCharacter
     {
         SetAnimation(atk + "_Charging", true);
     }
-
-    public void SecondSpecialAttackStarting()
-    {
-        Atk1Queueing = false;
-        currentAttackPhase = AttackPhasesType.Start;
-        SetAnimation(CharacterAnimationStateType.Atk1_AtkToIdle, false);
-    }
-
 
     int iter = 0;
     //Create and set up the basic info for the bullet
@@ -651,10 +635,6 @@ public class CharacterType_Script : BaseCharacter
 
     #endregion
 
-
-
-
-
     //Used to indicate the character that is selected in the battlefield
     public void SetCharSelected(bool isSelected, ControllerType player)
     {
@@ -727,38 +707,6 @@ public class CharacterType_Script : BaseCharacter
         string completedAnim = trackEntry.Animation.Name;
 
 
-        if(completedAnim.Contains("Dash") && NewMovementSystem)
-        {
-            if(completedAnim.Contains("Intro"))
-            {
-                string nextAnim = completedAnim.Split('_').First() + "_Loop";
-                SpineAnim.SpineAnimationState.SetAnimation(0, nextAnim, false);
-                SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.TileMovementTime);
-                SpineAnim.CurrentAnim = nextAnim;
-                return;
-            }
-
-            if (completedAnim.Contains("Loop"))
-            {
-                if(waitingForNextMove == waitingForNextMoveType.none)
-                {
-                    string nextAnim = completedAnim.Split('_').First() + "_End";
-                    SpineAnim.SpineAnimationState.SetAnimation(0, nextAnim, false);
-                    //SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.EndTileMovementSpeed);
-                    SpineAnim.CurrentAnim = nextAnim;
-                }
-                else if (waitingForNextMove == waitingForNextMoveType.none)
-                {
-                    string nextAnim = completedAnim.Split('_').First() + "_Loop";
-                    SpineAnim.SpineAnimationState.SetAnimation(0, nextAnim, false);
-                    SpineAnim.SetAnimationSpeed(CharInfo.SpeedStats.TileMovementTime);
-                    SpineAnim.CurrentAnim = nextAnim;
-                }
-                return;
-            }
-        }
-
-
         if (completedAnim == CharacterAnimationStateType.Defeat_ReverseArrive.ToString())
         {
             IsSwapping = false;
@@ -800,13 +748,8 @@ public class CharacterType_Script : BaseCharacter
         if (completedAnim == CharacterAnimationStateType.Atk1_Loop.ToString() &&
             SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1_Loop.ToString())
         {
-            if (!lastAttack && Atk1Queueing)
+            if (Atk1Queueing)
             {
-                QuickAttack();
-            }
-            else if (lastAttack && Atk1Queueing)
-            {
-                Atk1Queueing = false;
                 QuickAttack();
             }
             else
@@ -814,6 +757,7 @@ public class CharacterType_Script : BaseCharacter
                 SetAnimation(CharacterAnimationStateType.Atk1_AtkToIdle);
                 SpineAnim.SetAnimationSpeed(SpineAnim.GetAnimLenght(CharacterAnimationStateType.Atk1_IdleToAtk) / CharInfo.SpeedStats.IdleToAtkDuration);
             }
+            Atk1Queueing = false;
             return;
         }
         if (completedAnim.Contains("Atk2") || completedAnim.Contains("S_Buff") || completedAnim.Contains("S_DeBuff") || completedAnim.Contains("Atk3"))
@@ -846,6 +790,7 @@ public class CharacterType_Script : BaseCharacter
         if (!animState.ToString().Contains("Atk") && !animState.ToString().Contains("S_DeBuff") && !animState.ToString().Contains("S_Buff"))
         {
             currentAttackPhase = AttackPhasesType.End;
+            Atk1Queueing = false;
         }
 
         if((SpineAnim.CurrentAnim.Contains("Atk2_AtkToIdle") || 
@@ -908,13 +853,8 @@ public class CharacterType_Script : BaseCharacter
                         possiblePos.isTaken = false;
                         possiblePos = null;
                     }
-                    if (s != null)
-                    {
-                        StopCoroutine(s);
-                    }
-                    s = AttackSequence();
 
-                    yield return s;
+                    yield return AttackSequence();
                 }
                 else
                 {

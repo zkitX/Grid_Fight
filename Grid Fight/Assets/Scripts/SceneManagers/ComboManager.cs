@@ -269,7 +269,7 @@ public class ComboInfoClass
     {
         bool timeBelowZero = timeRemaining <= 0f;
         ComboCount = hit ? ComboCount + 1 : 0;
-        Debug.Log("<b>" + ComboCount.ToString() + "</b> with seconds remaining: " + timeRemaining.ToString());
+       // Debug.Log("<b>" + ComboCount.ToString() + "</b> with seconds remaining: " + timeRemaining.ToString());
         timeRemaining = hit ? resetTime : 0f;
         if (timeBelowZero && hit)
         {

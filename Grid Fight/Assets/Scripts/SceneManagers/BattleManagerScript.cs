@@ -1560,7 +1560,7 @@ public class BattleManagerScript : MonoBehaviour
             }
         }
     }
-    public void StartQuickAttack(ControllerType controllerType)
+    public void StartWeakAttack(ControllerType controllerType)
     {
         if (CurrentBattleState == BattleState.Battle && CurrentSelectedCharacters.Keys.Contains(controllerType))
         {
@@ -1571,14 +1571,32 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
-    public void StopQuickAttack(ControllerType controllerType)
+    public void LoopWeakkAttack(ControllerType controllerType)
     {
         if (CurrentBattleState == BattleState.Battle && CurrentSelectedCharacters.Keys.Contains(controllerType))
         {
-            if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null)
+            if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null &&
+                Time.time - CurrentSelectedCharacters[controllerType].Character.WeakAttackOffset > 0.5f)
             {
-                // CurrentSelectedCharacters[controllerType].Character.Atk1Queueing = false;
-                CurrentSelectedCharacters[controllerType].Character.lastAttack = true;
+                if (!CurrentSelectedCharacters[controllerType].Character.Atk1Queueing && !CurrentSelectedCharacters[controllerType].Character.SpineAnim.CurrentAnim.Contains("Loop"))
+                {
+                    CurrentSelectedCharacters[controllerType].Character.CharacterInputHandler(InputActionType.Weak);
+                }
+                CurrentSelectedCharacters[controllerType].Character.Atk1Queueing = true;
+            }
+        }
+    }
+
+
+    public void StopWeakAttack(ControllerType controllerType)
+    {
+        if (CurrentBattleState == BattleState.Battle && CurrentSelectedCharacters.Keys.Contains(controllerType))
+        {
+            if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null &&
+                Time.time - CurrentSelectedCharacters[controllerType].Character.WeakAttackOffset > 0.5f)
+            {
+                 CurrentSelectedCharacters[controllerType].Character.Atk1Queueing = false;
+                //CurrentSelectedCharacters[controllerType].Character.lastAttack = true;
             }
         }
     }
