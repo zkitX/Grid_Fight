@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e5cd960ac2a2db04a8c58541f00c04b1, type: 2}
+  - {fileID: 2100000, guid: e239644c1409fbd458bb04c2917dfc90, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,8 +85,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1897941405
+  m_SortingLayer: 3
   m_SortingOrder: 20
 --- !u!114 &55710729243261581
 MonoBehaviour:
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: e6bf0c892657d2745a390288b245d6e1, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 96396a5589c20504da6edc8a85207660, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -296,11 +296,11 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0.7
         value: 1
-        inSlope: 0.041555207
-        outSlope: 0.041555207
-        tangentMode: 0
+        inSlope: 1.2729329
+        outSlope: 0
+        tangentMode: 1
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.06439541
         outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
@@ -329,11 +329,11 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0.7
         value: 1
-        inSlope: 0.041555207
-        outSlope: 0.041555207
-        tangentMode: 0
+        inSlope: 1.2729329
+        outSlope: 0
+        tangentMode: 1
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.06439541
         outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
@@ -353,20 +353,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
+        inSlope: 1.4285715
+        outSlope: 1.4285715
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.5
+        time: 0.7
         value: 1
-        inSlope: 0.041555207
-        outSlope: 0.041555207
-        tangentMode: 0
+        inSlope: 1.2729329
+        outSlope: 0
+        tangentMode: 1
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.06439541
         outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
@@ -386,20 +386,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
+        inSlope: 1.4285715
+        outSlope: 1.4285715
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.5
+        time: 0.7
         value: 1
-        inSlope: 0.041555207
-        outSlope: 0.041555207
-        tangentMode: 0
+        inSlope: 1.2729329
+        outSlope: 0
+        tangentMode: 1
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.06439541
         outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
@@ -436,10 +436,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charOwner: {fileID: 0}
-  testAtkEffect: {fileID: 0}
   Name: Dorje
-  CharacterIcon: {fileID: 0}
+  CharacterIcon: {fileID: 21300000, guid: f40e0ad4fb7513943a0a0804b0a4081a, type: 3}
   Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 43a4d00463eebae40af9f2902870ce49, type: 2}
   BaseCharacterType: 0
@@ -503,14 +501,15 @@ MonoBehaviour:
     B_BaseShieldRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
-    TileMovementTime: 1
-    MovementSpeed: 2.3
-    CuttingPerc: 0.85
-    IntroPerc: 0.15
-    LoopPerc: 0.7
-    EndPerc: 0.15
+    TileMovementTime: 0.6
+    MovementSpeed: 1.4
+    CuttingPerc: 0.7
+    IntroPerc: 0.16
+    LoopPerc: 0.54
+    EndPerc: 0.3
     AttackSpeed: 2
-    AttackSpeedRatio: 1
+    AttackLoopDuration: 0.5
+    IdleToAttackDuration: 0.01
     BulletSpeed: 1.5
     LeaveSpeed: 3
     BaseSpeed_LevelMultiplier: 0
@@ -520,7 +519,6 @@ MonoBehaviour:
     B_BaseSpeed: 1
     B_MovementSpeed: 1
     B_AttackSpeed: 1
-    B_AttackSpeedRatio: 0
     B_BulletSpeed: 5
     B_LeaveSpeed: 3
     B_IdleToAtkDuration: 0.2
