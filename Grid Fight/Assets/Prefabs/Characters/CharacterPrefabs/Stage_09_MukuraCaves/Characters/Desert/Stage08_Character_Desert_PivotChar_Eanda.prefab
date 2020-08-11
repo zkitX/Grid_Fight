@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 11218082a3a1b98448c9dd758b885df9, type: 2}
+  - {fileID: 2100000, guid: 9a3e0eae070866440bd04d9dc1b73f9a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,8 +85,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1897941405
+  m_SortingLayer: 3
   m_SortingOrder: 20
 --- !u!114 &7497881556856467372
 MonoBehaviour:
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 18da93108d01d854aa8fb9a31f1abdf0, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: f96b2f03ec6ada84a9a8164578281185, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -472,14 +472,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charOwner: {fileID: 0}
-  testAtkEffect: {fileID: 0}
   Name: Eanda
   CharacterIcon: {fileID: 21300000, guid: ec7b9f0d162466e449c79e35289a0461, type: 3}
   Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: dc7551d64479e4f4bb7e8a1d926c9a0f, type: 2}
   BaseCharacterType: 0
-  CharacterID: 1165
+  CharacterID: 1186
   attackSequences: []
   _CurrentAttackTypeInfo:
   - {fileID: 11400000, guid: 641d1123d30b8dc47b11a4e7036f307f, type: 2}
@@ -539,14 +537,15 @@ MonoBehaviour:
     B_BaseShieldRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
-    TileMovementTime: 1
-    MovementSpeed: 1.69
-    CuttingPerc: 0.85
-    IntroPerc: 0.15
-    LoopPerc: 0.7
-    EndPerc: 0.15
+    TileMovementTime: 0.6
+    MovementSpeed: 1.6
+    CuttingPerc: 0.7
+    IntroPerc: 0.16
+    LoopPerc: 0.54
+    EndPerc: 0.3
     AttackSpeed: 1.6
-    AttackSpeedRatio: 3
+    AttackLoopDuration: 0.5
+    IdleToAttackDuration: 0.01
     BulletSpeed: 2.6
     LeaveSpeed: 3
     BaseSpeed_LevelMultiplier: 0
@@ -556,7 +555,6 @@ MonoBehaviour:
     B_BaseSpeed: 1
     B_MovementSpeed: 1
     B_AttackSpeed: 1
-    B_AttackSpeedRatio: 0
     B_BulletSpeed: 5
     B_LeaveSpeed: 3
     B_IdleToAtkDuration: 0.2
