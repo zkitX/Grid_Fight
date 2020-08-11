@@ -4,28 +4,37 @@ using UnityEngine;
 using TMPro;
 using System.Linq;
 using UnityEngine.UI;
+using MyBox;
 
-
+[RequireComponent(typeof(CanvasGroup))]
 public class StageButton : MonoBehaviour
 {
     public StageProfile stage;
+    public bool displayLockEffects = true;
+
     protected StageLoadInformation info = null;
-    public TextMeshProUGUI textDisplay;
-    public Image stageImage;
-    public Transform lockObj;
-    public Animation lockAnim;
-    public Color lockedColor;
-    public Color unlockedColor;
+    [ConditionalField("displayLockEffects")] public TextMeshProUGUI textDisplay;
+    [ConditionalField("displayLockEffects")] public Image stageImage;
+    [ConditionalField("displayLockEffects")] public Transform lockObj;
+    [ConditionalField("displayLockEffects")] public Animation lockAnim;
+    [ConditionalField("displayLockEffects")] public Color lockedColor;
+    [ConditionalField("displayLockEffects")] public Color unlockedColor;
     protected StageUnlockType displayedUnlockType = StageUnlockType.locked;
+
+    protected bool hiddenAndUnfocused = false;
+    protected CanvasGroup canvGroup = null;
 
     private void Awake()
     {
-        info = SceneLoadManager.Instance.loadedStages.Where(r => r.stageProfile.ID == stage.ID).FirstOrDefault();
+        info = stage != null ? SceneLoadManager.Instance.loadedStages.Where(r => r.stageProfile.ID == stage.ID).FirstOrDefault() : null;
+        canvGroup = GetComponent<CanvasGroup>();
         UpdateLockStateDisplay();
     }
 
     void UpdateLockStateDisplay()
     {
+        if (!displayLockEffects) return;
+
         lockObj.gameObject.SetActive(true);
 
         switch (info.lockState)
@@ -36,14 +45,14 @@ public class StageButton : MonoBehaviour
                     lockAnim.clip = null;
                     lockAnim.Play();
                 }
-                textDisplay.text = "???";
+                if(textDisplay != null) textDisplay.text = "???";
                 stageImage.color = lockedColor;
                 break;
 
             case StageUnlockType.unlocking:
                 lockAnim.clip = lockAnim.GetClip("Padlock_Shake");
                 lockAnim.Play();
-                textDisplay.text = "???";
+                if (textDisplay != null) textDisplay.text = "???";
                 stageImage.color = lockedColor;
                 break;
 
@@ -55,7 +64,7 @@ public class StageButton : MonoBehaviour
                     StartCoroutine(LerpUnlockStage(1f));
                     break;
                 }
-                textDisplay.text = info.stageProfile.Name;
+                if (textDisplay != null) textDisplay.text = info.stageProfile.Name;
                 stageImage.color = unlockedColor;
                 lockObj.gameObject.SetActive(false);
                 break;
@@ -76,12 +85,14 @@ public class StageButton : MonoBehaviour
             stageImage.color = Color.Lerp(stageImage.color, unlockedColor, 1f - (time / startTime));
             yield return null;
         }
-        textDisplay.text = info.stageProfile.Name;
+        if (textDisplay != null) textDisplay.text = info.stageProfile.Name;
         stageImage.color = unlockedColor;
     }
 
     public void ProcessLockState()
     {
+        if (info == null) return;
+
         if(info.lockState == StageUnlockType.unlocking)
         {
             info.lockState = StageUnlockType.unlocked;
@@ -91,6 +102,11 @@ public class StageButton : MonoBehaviour
 
     public void DisplayBriefing()
     {
+        if (info == null)
+        {
+            Debug.LogError("CANNOT DISPLAY BRIEFING OF A NULL STAGE");
+            return;
+        }
         if (info.lockState != StageUnlockType.unlocked) return;
         Grid_UIBriefing.Instance.gameObject.SetActive(true);
         Grid_UIBriefing.Instance.SetupBriefing(info.stageProfile);
@@ -105,6 +121,28 @@ public class StageButton : MonoBehaviour
 
     public void ShowStageText(bool state)
     {
-        textDisplay.gameObject.SetActive(state);
+        textDisplay?.gameObject.SetActive(state);
+    }
+
+    public void ShowButton(bool state)
+    {
+        if (state != hiddenAndUnfocused) return;
+        hiddenAndUnfocused = !state;
+
+        if (ShowHider != null) StopCoroutine(ShowHider);
+        ShowHider = ShowHideCo(state ? 1f : 0f);
+        StartCoroutine(ShowHider);
+    }
+
+    IEnumerator ShowHider = null;
+    IEnumerator ShowHideCo(float endVal, float duration = 0.4f)
+    {
+        float remain = duration;
+        while (remain != 0f)
+        {
+            remain = Mathf.Clamp(remain - Time.deltaTime, 0f, 10f);
+            canvGroup.alpha = Mathf.Lerp(canvGroup.alpha, endVal, 1f - (remain / duration));
+            yield return null;
+        }
     }
 }

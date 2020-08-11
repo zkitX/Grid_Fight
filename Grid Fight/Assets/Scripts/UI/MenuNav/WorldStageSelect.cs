@@ -19,9 +19,27 @@ public class WorldStageSelect : MonoBehaviour
 
     public Transform GetCurrentFocusStage()
     {
-        StageButton curBtn = stageBtns.Where(r => r.stage.ID == Grid_UIBriefing.Instance.curStage.ID).FirstOrDefault();
+        StageButton curBtn = stageBtns.Where(r => r.stage != null && r.stage.ID == Grid_UIBriefing.Instance.curStage.ID).FirstOrDefault();
         if (curBtn == null) return null;
+
         return curBtn.transform;
+    }
+
+    public void ShowUnfocusedStageButtons(bool state)
+    {
+        StageButton[] unfocused = stageBtns.Where(r => r.stage == null || r.stage.ID != Grid_UIBriefing.Instance.curStage.ID).ToArray();
+        foreach (StageButton btn in unfocused)
+        {
+            btn.ShowButton(state);
+        }
+    }
+
+    public void SelectLastFocusedButton()
+    {
+        StageButton curBtn = stageBtns.Where(r => r.stage != null && r.stage.ID == Grid_UIBriefing.Instance.curStage.ID).FirstOrDefault();
+        if (curBtn == null) return;
+
+        Grid_UINavigator.Instance.SelectButton(curBtn.GetComponent<Grid_UIButton>(), true);
     }
 
     public void RefreshStageButtons()
