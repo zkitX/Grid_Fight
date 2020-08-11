@@ -587,8 +587,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charOwner: {fileID: 0}
-  testAtkEffect: {fileID: 0}
   Name: Pan
   CharacterIcon: {fileID: 21300000, guid: 97c277ebb28a3d042a5323663da7c6c9, type: 3}
   Mask: {fileID: 0}
@@ -654,14 +652,15 @@ MonoBehaviour:
     B_BaseShieldRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
-    TileMovementTime: 0.5
+    TileMovementTime: 0.38
     MovementSpeed: 1
     CuttingPerc: 0.7
     IntroPerc: 0.16
     LoopPerc: 0.54
     EndPerc: 0.3
     AttackSpeed: 1.4
-    AttackSpeedRatio: 3
+    AttackLoopDuration: 0.3
+    IdleToAttackDuration: 0.01
     BulletSpeed: 2.5
     LeaveSpeed: 3
     BaseSpeed_LevelMultiplier: 3.5
@@ -671,7 +670,6 @@ MonoBehaviour:
     B_BaseSpeed: 1
     B_MovementSpeed: 1
     B_AttackSpeed: 1
-    B_AttackSpeedRatio: 0
     B_BulletSpeed: 5
     B_LeaveSpeed: 3
     B_IdleToAtkDuration: 0.2
