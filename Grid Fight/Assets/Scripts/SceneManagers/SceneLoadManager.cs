@@ -11,7 +11,8 @@ public class SceneLoadManager : MonoBehaviour
     public static SceneLoadManager Instance;
     public GameObject NavigatorPrefab = null;
     public GameObject RewiredPrefab = null;
-
+    public GameObject SteamManagerGO = null;
+    private GameObject steamGO = null;
     protected string startingSceneID = "";
     [SerializeField] protected const float loadingFadeTime = 2f;
     public CanvasGroup canv = null;
@@ -160,6 +161,19 @@ public class SceneLoadManager : MonoBehaviour
         }
         Instance = this;
 
+        if (steamGO == null)
+        {
+            if (SteamManagerGO == null)
+            {
+                Debug.LogError("Set in the scenemanager the steammanagerGO");
+            }
+           steamGO = Instantiate(SteamManagerGO);
+        }
+
+#if UNITY_STANDALONE_WIN
+      
+        
+#endif
         if (InputController.Instance == null) Instantiate(RewiredPrefab).name = RewiredPrefab.name;
         DontDestroyOnLoad(this);
 
@@ -167,8 +181,15 @@ public class SceneLoadManager : MonoBehaviour
         squad[0] = loadedCharacters.Where(r => r.characterID == CharacterNameType.CleasTemple_Character_Valley_Donna).FirstOrDefault();
     }
 
+
+    
+
     private void Start()
     {
+
+        if (stagePrimedToLoad != null && SteamManager.Initialized)
+        {
+        }
         StartCoroutine(InitialLoadCo());
     }
 
