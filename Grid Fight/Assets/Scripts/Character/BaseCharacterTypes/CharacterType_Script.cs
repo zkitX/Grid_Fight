@@ -209,7 +209,7 @@ public class CharacterType_Script : BaseCharacter
         gameObject.SetActive(true);
         CharInfo.HealthStats.Health = CharInfo.HealthStats.Base;
         CharInfo.ShieldStats.Shield = CharInfo.ShieldStats.Base;
-        CharInfo.StaminaStats.Stamina = CharInfo.StaminaStats.Base;
+        CharInfo.EtherStats.Ether = CharInfo.EtherStats.Base;
         //SET UI OF THE CHARACTER TO ALIVE HERE
         NewIManager.Instance.ToggleUICharacterDead(this, false);
         //NewIManager.Instance.SetUICharacterToButton(this, CharInfo.CharacterSelection);
@@ -314,7 +314,7 @@ public class CharacterType_Script : BaseCharacter
 
     public bool GetCanUseStamina(float valueRequired)
     {
-        if (CharInfo.StaminaStats.Stamina - valueRequired >= 0) return true;
+        if (CharInfo.EtherStats.Ether - valueRequired >= 0) return true;
 
         UMS.StaminaBarContainer.GetComponentInChildren<Animation>().Play();
         return false;

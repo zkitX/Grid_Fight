@@ -620,7 +620,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
             if (nextAttack.CurrentAttackType == AttackType.Particles)
             {
-                CharInfo.Stamina -= nextAttack.StaminaCost;
+                CharInfo.Ether -= nextAttack.StaminaCost;
                 EventManager.Instance?.UpdateStamina(this);
                 
                 if (nextAttack.AttackInput > AttackInputType.Weak)
@@ -1129,7 +1129,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
                     }
                     CurrentAIState.ModifyStats(CharInfo);
-                    if (CurrentAIState.AIPs.PSType != ParticlesType.None)
+                    if (CurrentAIState.AIPs != null && CurrentAIState.AIPs.PSType != ParticlesType.None)
                     {
                         if (psAI != null)
                         {
@@ -1534,12 +1534,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 CharInfo.CurrentAttackTypeInfo.Add(bdClass.CurrentBuffDebuff.Effect.Atk);
                 break;
             case BuffDebuffStatsType.StaminaStats_Stamina:
-                CharInfo.StaminaStats.Stamina += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.StaminaStats.B_Base / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
+                CharInfo.EtherStats.Ether += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.EtherStats.B_Base / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
                 break;
             case BuffDebuffStatsType.Rage:
                 CharInfo.SpeedStats.MovementSpeed += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_MovementSpeed / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
                 CharInfo.DamageStats.BaseDamage += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.DamageStats.B_BaseDamage / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
-                CharInfo.DefenceStats.BaseDefence -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.DefenceStats.B_BaseDefence / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
+                CharInfo.HealthStats.Armour -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.HealthStats.B_Armour / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
                 CharInfo.AIs.Add(bdClass.CurrentBuffDebuff.Effect.RageAI);
                 if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
                 {
@@ -1652,12 +1652,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     CharInfo.CurrentAttackTypeInfo.Remove(bdClass.CurrentBuffDebuff.Effect.Atk);
                     break;
                 case BuffDebuffStatsType.StaminaStats_Stamina:
-                    CharInfo.StaminaStats.Stamina -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.StaminaStats.B_Base / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
+                    CharInfo.EtherStats.Ether -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.EtherStats.B_Base / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
                     break;
                 case BuffDebuffStatsType.Rage:
                     CharInfo.SpeedStats.MovementSpeed -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.SpeedStats.B_MovementSpeed / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
                     CharInfo.DamageStats.BaseDamage -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.DamageStats.B_BaseDamage / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
-                    CharInfo.DefenceStats.BaseDefence += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.DefenceStats.B_BaseDefence / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
+                    CharInfo.HealthStats.Armour += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? (CharInfo.HealthStats.B_Armour / 100f) * bdClass.currentBuffValue : bdClass.currentBuffValue;
                     CharInfo.AIs.Remove(bdClass.CurrentBuffDebuff.Effect.RageAI);
                     if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && !bdClass.CurrentBuffDebuff.Stop_Co)
                     {
@@ -1972,7 +1972,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         else if (isDefending)
         {
             GameObject go;
-            if (DefendingHoldingTimer < CharInfo.DefenceStats.Invulnerability)
+            if (DefendingHoldingTimer < CharInfo.ShieldStats.Invulnerability)
             {
                 Sic.ReflexExp += damage;
                 damage = 0;
@@ -1980,7 +1980,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.Shield_Full, AudioBus.MidPrio);
                 go.transform.position = transform.position;
                 CharInfo.Shield -= UniversalGameBalancer.Instance.fullDefenceCost;
-                CharInfo.Stamina += UniversalGameBalancer.Instance.staminaRegenOnPerfectBlock;
+                CharInfo.Ether += UniversalGameBalancer.Instance.staminaRegenOnPerfectBlock;
                 EventManager.Instance.AddBlock(this, BlockInfo.BlockType.full);
                 Sic.CompleteDefences++;
                 ComboManager.Instance.TriggerComboForCharacter(CharInfo.CharacterID, ComboType.Defence, true, transform.position);
@@ -1989,7 +1989,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             {
                 Sic.ReflexExp += damage * 0.5f;
   
-                damage = damage - CharInfo.ShieldStats.ShieldOnDefence;
+                damage = damage - CharInfo.ShieldStats.ShieldAbsorbtion;
                 go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldNormal);
                 AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.Shield_Partial, AudioBus.HighPrio);
                 go.transform.position = transform.position;
@@ -2064,7 +2064,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         EventManager.Instance?.UpdateHealth(this);
         EventManager.Instance?.UpdateStamina(this);
-        SetFinalDamage(attacker, (healthCT != HealthChangedType.Heal ? damage - CharInfo.DefenceStats.BaseDefence > 0 ? damage - CharInfo.DefenceStats.BaseDefence : 0 : damage) / GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos).TileADStats.y);
+        SetFinalDamage(attacker, (healthCT != HealthChangedType.Heal ? damage - CharInfo.HealthStats.Armour > 0 ? damage - CharInfo.HealthStats.Armour : 0 : damage) / GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos).TileADStats.y);
         HealthStatsChangedEvent?.Invoke(Mathf.Abs(damage), healthCT, SpineAnim.transform);
         return res;
     }

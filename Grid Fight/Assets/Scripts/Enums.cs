@@ -360,10 +360,10 @@ public enum ModificableStatsType
     HealthStats_Base = 4,
     HealthStats_BaseHealthRegeneration = 5,
     HealthStats_Regeneration = 6,
-    StaminaStats_Base = 7,
-    StaminaStats_BaseStaminaRegeneration = 8,
-    StaminaStats_Regeneration = 9,
-    StaminaStats_Stamina = 10,
+    EtherStats_Base = 7,
+    EtherStats_BaseEtherRegeneration = 8,
+    EtherStats_Regeneration = 9,
+    EtherStats_Ether = 10,
     SpeedStats_BaseSpeed = 11,
     SpeedStats_MovementSpeed = 12,
     SpeedStats_BulletSpeed = 15,
@@ -373,9 +373,11 @@ public enum ModificableStatsType
     ShieldStats_BaseHealthRegeneration = 19,
     ShieldStats_Regeneration = 20,
     ShieldStats_ShieldOnDefence = 21,
-    DefenceStats_BaseDefence = 22,
-    DefenceStats_MinionDefenceChances = 23,
-    DefenceStats_MinionPerfectDefenceChances = 24
+    HealthStats_Armour = 22,
+    ShieldStats_MinionShieldChances = 23,
+    ShieldStats_MinionPerfectShieldChances = 24,
+    ShieldStats_ShieldAbsorbtion = 25,
+    ShieldStats_Invulnerability = 26
 }
 
 public enum AIType

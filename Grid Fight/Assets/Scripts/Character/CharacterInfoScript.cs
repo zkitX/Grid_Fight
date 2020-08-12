@@ -76,29 +76,8 @@ public class CharacterInfoScript : MonoBehaviour
     public CharacterSelectionType CharacterSelection;
     // public List<CharactersRelationshipClass> CharacterRelationships = new List<CharactersRelationshipClass>();
 
-    public WeakAttackClass WeakAttack;
-    [System.Serializable]
-    public class WeakAttackClass
-    {
-        public Vector2 DamageMultiplier = new Vector2(1, 1);
-        public Vector2 CriticalChance = new Vector2(2, 2);
-        public float LevelMultiplier;
 
-        [HideInInspector] public Vector2 B_DamageMultiplier = new Vector2(1, 1);
-        [HideInInspector] public Vector2 B_CriticalChance = new Vector2(2, 2);
-    }
 
-    public StrongfulAttackClass StrongfulAttac;
-    [System.Serializable]
-    public class StrongfulAttackClass
-    {
-        public Vector2 DamageMultiplier = new Vector2(3, 3);
-        public Vector2 CriticalChance = new Vector2(3, 5);
-        public float LevelMultiplier;
-
-        [HideInInspector] public Vector2 B_DamageMultiplier = new Vector2(3, 3);
-        [HideInInspector] public Vector2 B_CriticalChance = new Vector2(3, 5);
-    }
 
     public HealthStastsClass HealthStats;
     [System.Serializable]
@@ -108,28 +87,15 @@ public class CharacterInfoScript : MonoBehaviour
         public float Base;
         public float Regeneration;
         public float BaseHealthRegeneration;
+        public float Armour = 1;
         public float LevelMultiplier;
 
         [HideInInspector] public float B_Health;
         [HideInInspector] public float B_Base;
         [HideInInspector] public float B_Regeneration;
         [HideInInspector] public float B_BaseHealthRegeneration;
-    }
+        [HideInInspector] public float B_Armour = 1;
 
-    public StaminaStastsClass StaminaStats;
-    [System.Serializable]
-    public class StaminaStastsClass
-    {
-        public float Stamina;
-        public float Base;
-        public float Regeneration;
-        public float BaseStaminaRegeneration;
-        public float LevelMultiplier;
-
-        [HideInInspector] public float B_Stamina;
-        [HideInInspector] public float B_Base;
-        [HideInInspector] public float B_Regeneration;
-        [HideInInspector] public float B_BaseStaminaRegeneration;
     }
 
     public ShieldStastsClass ShieldStats;
@@ -141,16 +107,44 @@ public class CharacterInfoScript : MonoBehaviour
         public float Regeneration = 8;
         public float BaseShieldRegeneration = 8;
         [Range(0, 1)]
-        public float ShieldOnDefence = 0.5f; 
+        public float ShieldAbsorbtion = 0.5f;
+        public float Invulnerability = 0.2f;
+        public float MinionShieldChances = 20;
+        public float MinionPerfectShieldChances = 5;
+
+
         public float LevelMultiplier = 50;
+
 
         [HideInInspector] public float B_Shield;
         [HideInInspector] public float B_Base;
         [HideInInspector] public float B_Regeneration;
         [HideInInspector] public float B_BaseShieldRegeneration;
         [HideInInspector] public float B_ShieldOnDefence;
+        [HideInInspector] public float B_Invulnerability = 0.2f;
+        [HideInInspector] public float B_MinionShieldChances = 20;
+        [HideInInspector] public float B_MinionPerfectShieldChances = 5;
     }
 
+ 
+
+    public EtherStastsClass EtherStats;
+    [System.Serializable]
+    public class EtherStastsClass
+    {
+        public float Ether = 40;
+        public float Base = 40;
+        public float Regeneration = 1;
+        public float BaseEtherRegeneration = 1;
+        public float LevelMultiplier = 30;
+
+        [HideInInspector] public float B_Stamina;
+        [HideInInspector] public float B_Base;
+        [HideInInspector] public float B_Regeneration;
+        [HideInInspector] public float B_BaseStaminaRegeneration;
+    }
+
+   
     public SpeedStastsClass SpeedStats;
     [System.Serializable]
     public class SpeedStastsClass
@@ -197,20 +191,32 @@ public class CharacterInfoScript : MonoBehaviour
         public float LevelMultiplier;
     }
 
-    public DefenceStastsClass DefenceStats;
+
+    public WeakAttackClass WeakAttack;
     [System.Serializable]
-    public class DefenceStastsClass
+    public class WeakAttackClass
     {
-        public float BaseDefence = 10;
-        public float Invulnerability = 0.2f;
-        public float MinionDefenceChances = 20;
-        public float MinionPerfectDefenceChances = 5;
-        [HideInInspector]public float B_BaseDefence = 10;
-        [HideInInspector]public float B_Invulnerability = 0.2f;
-        [HideInInspector]public float B_MinionDefenceChances = 20;
-        [HideInInspector]public float B_MinionPerfectDefenceChances = 5;
+        public Vector2 DamageMultiplier = new Vector2(1, 1);
+        public Vector2 CriticalChance = new Vector2(2, 2);
         public float LevelMultiplier;
+
+        [HideInInspector] public Vector2 B_DamageMultiplier = new Vector2(1, 1);
+        [HideInInspector] public Vector2 B_CriticalChance = new Vector2(2, 2);
     }
+
+    public StrongfulAttackClass StrongfulAttac;
+    [System.Serializable]
+    public class StrongfulAttackClass
+    {
+        public Vector2 DamageMultiplier = new Vector2(3, 3);
+        public Vector2 CriticalChance = new Vector2(3, 5);
+        public float LevelMultiplier;
+
+        [HideInInspector] public Vector2 B_DamageMultiplier = new Vector2(3, 3);
+        [HideInInspector] public Vector2 B_CriticalChance = new Vector2(3, 5);
+    }
+
+
 
     [HideInInspector] public float ExperienceValue;
     [HideInInspector] public Vector2 MovementTimer = new Vector2(5, 8);
@@ -233,7 +239,7 @@ public class CharacterInfoScript : MonoBehaviour
     {
         get
         {
-            return (Stamina * 100) / StaminaStats.Base;
+            return (Ether * 100) / EtherStats.Base;
         }
     }
 
@@ -291,18 +297,18 @@ public class CharacterInfoScript : MonoBehaviour
         DeathEvent();
     }
 
-    public float Stamina
+    public float Ether
     {
         get
         {
-            return StaminaStats.Stamina <= 0 ? 0 : StaminaStats.Stamina;
+            return EtherStats.Ether <= 0 ? 0 : EtherStats.Ether;
         }
         set
         {
-            StaminaStats.Stamina = value;
-            if (StaminaStats.Stamina > StaminaStats.Base)
+            EtherStats.Ether = value;
+            if (EtherStats.Ether > EtherStats.Base)
             {
-                StaminaStats.Stamina = StaminaStats.Base;
+                EtherStats.Ether = EtherStats.Base;
             }
         }
     }
@@ -328,7 +334,7 @@ public class CharacterInfoScript : MonoBehaviour
     {
         if (Health > 0)
         {
-            Stamina = BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle ? StaminaStats.Stamina + StaminaStats.Regeneration / 50 : StaminaStats.Stamina;
+            Ether = BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle ? EtherStats.Ether + EtherStats.Regeneration / 50 : EtherStats.Ether;
             Health = BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle ? HealthStats.Health + HealthStats.Regeneration / 50 : HealthStats.Health;
             Shield = BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle ? ShieldStats.Shield + ShieldStats.Regeneration / 50 : ShieldStats.Shield;
         }
@@ -358,22 +364,22 @@ public class CharacterInfoScript : MonoBehaviour
             HealthStats.Regeneration *= HealthStats.LevelMultiplier * strengthScaler;
             HealthStats.BaseHealthRegeneration *= HealthStats.LevelMultiplier * strengthScaler;
 
-            StaminaStats.Base *= StaminaStats.LevelMultiplier * strengthScaler;
-            StaminaStats.Regeneration *= StaminaStats.LevelMultiplier * strengthScaler;
-            StaminaStats.Stamina *= StaminaStats.LevelMultiplier * strengthScaler;
-            StaminaStats.BaseStaminaRegeneration *= StaminaStats.LevelMultiplier * strengthScaler;
+            EtherStats.Base *= EtherStats.LevelMultiplier * strengthScaler;
+            EtherStats.Regeneration *= EtherStats.LevelMultiplier * strengthScaler;
+            EtherStats.Ether *= EtherStats.LevelMultiplier * strengthScaler;
+            EtherStats.BaseEtherRegeneration *= EtherStats.LevelMultiplier * strengthScaler;
 
             ShieldStats.Base *= ShieldStats.LevelMultiplier * strengthScaler;
             ShieldStats.Regeneration *= ShieldStats.LevelMultiplier * strengthScaler;
             ShieldStats.Shield *= ShieldStats.LevelMultiplier * strengthScaler;
             ShieldStats.BaseShieldRegeneration *= ShieldStats.LevelMultiplier * strengthScaler;
-            ShieldStats.ShieldOnDefence *= ShieldStats.LevelMultiplier * strengthScaler;
+            ShieldStats.ShieldAbsorbtion *= ShieldStats.LevelMultiplier * strengthScaler;
 
 
             SpeedStats.BaseSpeed *= SpeedStats.BaseSpeed_LevelMultiplier;
             SpeedStats.TileMovementTime /= 1 + SpeedStats.MovementSpeed_LevelMultiplier;
 
-            DefenceStats.BaseDefence *= DefenceStats.LevelMultiplier * strengthScaler;
+            HealthStats.Armour *= HealthStats.LevelMultiplier * strengthScaler;
 
             DamageStats.BaseDamage *= DamageStats.LevelMultiplier * strengthScaler;
         }
@@ -393,19 +399,23 @@ public class CharacterInfoScript : MonoBehaviour
         HealthStats.B_BaseHealthRegeneration = HealthStats.BaseHealthRegeneration;
         HealthStats.B_Health = HealthStats.Health;
         HealthStats.B_Regeneration = HealthStats.Regeneration;
+        HealthStats.B_Armour = HealthStats.Armour;
 
         //StaminaStats
-        StaminaStats.B_Base = StaminaStats.Base;
-        StaminaStats.B_BaseStaminaRegeneration = StaminaStats.BaseStaminaRegeneration;
-        StaminaStats.B_Regeneration = StaminaStats.Regeneration;
-        StaminaStats.B_Stamina = StaminaStats.Stamina;
+        EtherStats.B_Base = EtherStats.Base;
+        EtherStats.B_BaseStaminaRegeneration = EtherStats.BaseEtherRegeneration;
+        EtherStats.B_Regeneration = EtherStats.Regeneration;
+        EtherStats.B_Stamina = EtherStats.Ether;
 
         //Shield
         ShieldStats.B_Base = ShieldStats.Base;
         ShieldStats.B_BaseShieldRegeneration = ShieldStats.BaseShieldRegeneration;
         ShieldStats.B_Regeneration = ShieldStats.Regeneration;
         ShieldStats.B_Shield = ShieldStats.Shield;
-        ShieldStats.B_ShieldOnDefence = ShieldStats.ShieldOnDefence;
+        ShieldStats.B_ShieldOnDefence = ShieldStats.ShieldAbsorbtion;
+        ShieldStats.B_Invulnerability = ShieldStats.Invulnerability;
+        ShieldStats.B_MinionShieldChances = ShieldStats.MinionShieldChances;
+        ShieldStats.B_MinionPerfectShieldChances = ShieldStats.MinionPerfectShieldChances;
 
         //SpeedStats
         SpeedStats.B_BaseSpeed = SpeedStats.BaseSpeed;
@@ -416,11 +426,7 @@ public class CharacterInfoScript : MonoBehaviour
         SpeedStats.B_AtkToIdleDuration = SpeedStats.AtkToIdleDuration;
 
         DamageStats.B_BaseDamage = DamageStats.BaseDamage;
-        //Defence
-        DefenceStats.B_BaseDefence = DefenceStats.BaseDefence;
-        DefenceStats.B_Invulnerability = DefenceStats.Invulnerability;
-        DefenceStats.B_MinionDefenceChances = DefenceStats.MinionDefenceChances;
-        DefenceStats.B_MinionPerfectDefenceChances = DefenceStats.MinionPerfectDefenceChances;
+       
     }
 
     public ScriptableObjectAI GetCurrentAI(List<AggroInfoClass> enemies, Vector2Int currentPos, BaseCharacter bChar, ref BaseCharacter target)

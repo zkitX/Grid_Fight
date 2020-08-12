@@ -430,7 +430,7 @@ public class MinionType_Script : BaseCharacter
 
     public override void fireAttackAnimation(Vector3 pos)
     {
-      /*  if (!SpineAnim.CurrentAnim.Contains("Loop"))
+        if (!SpineAnim.CurrentAnim.Contains("Loop"))
         {
             if(nextAttack.PrefixAnim != AttackAnimPrefixType.Atk1)
             {
@@ -451,7 +451,7 @@ public class MinionType_Script : BaseCharacter
             chargeParticles.SetActive(false);
 
             chargeParticles = null;
-        }*/
+        }
     }
 
 
@@ -494,19 +494,19 @@ public class MinionType_Script : BaseCharacter
         if(attacker != this)
         {
             float defenceChances = Random.Range(0, 100);
-            if (defenceChances < CharInfo.DefenceStats.MinionPerfectDefenceChances && !SpineAnim.CurrentAnim.Contains("Atk"))
+            if (defenceChances < CharInfo.ShieldStats.MinionPerfectShieldChances && !SpineAnim.CurrentAnim.Contains("Atk"))
             {
                 isDefending = true;
                 DefendingHoldingTimer = 0;
                 SetAnimation(CharacterAnimationStateType.Defending);
                 damage = 0;
             }
-            else if (defenceChances < (CharInfo.DefenceStats.MinionPerfectDefenceChances + CharInfo.DefenceStats.MinionDefenceChances) && !SpineAnim.CurrentAnim.Contains("Atk"))
+            else if (defenceChances < (CharInfo.ShieldStats.MinionPerfectShieldChances + CharInfo.ShieldStats.MinionShieldChances) && !SpineAnim.CurrentAnim.Contains("Atk"))
             {
                 isDefending = true;
                 DefendingHoldingTimer = 10;
                 SetAnimation(CharacterAnimationStateType.Defending);
-                damage = damage - CharInfo.ShieldStats.ShieldOnDefence;
+                damage = damage - CharInfo.ShieldStats.ShieldAbsorbtion;
             }
             else
             {

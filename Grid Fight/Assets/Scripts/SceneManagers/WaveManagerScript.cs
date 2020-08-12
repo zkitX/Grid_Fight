@@ -144,14 +144,14 @@ public class WaveManagerScript : MonoBehaviour
         
         res.CharInfo.HealthStats.Base = Random.Range(character.Health.x, character.Health.y) * UniversalGameBalancer.Instance.difficulty.enemyHealthScaler;
         res.CharInfo.HealthStats.Regeneration = Random.Range(character.HealthRegeneration.x, character.HealthRegeneration.y);
-        res.CharInfo.StaminaStats.Base = Random.Range(character.Stamina.x, character.Stamina.y);
-        res.CharInfo.StaminaStats.Regeneration = Random.Range(character.StaminaRegeneration.x, character.StaminaRegeneration.y);
+        res.CharInfo.EtherStats.Base = Random.Range(character.Ether.x, character.Ether.y);
+        res.CharInfo.EtherStats.Regeneration = Random.Range(character.EtherRegeneration.x, character.EtherRegeneration.y);
         res.CharInfo.SpeedStats.BaseSpeed = Random.Range(character.BaseSpeed.x, character.BaseSpeed.y);
         res.CharInfo.DamageStats.BaseDamage = Random.Range(character.BaseDamage.x, character.BaseDamage.y);
-        res.CharInfo.WeakAttack.DamageMultiplier = character.RapidAttackMultiplier;
-        res.CharInfo.StrongfulAttac.DamageMultiplier = character.PowerfulAttackMultiplier;
+        res.CharInfo.WeakAttack.DamageMultiplier = character.WeakAttackMultiplier;
+        res.CharInfo.StrongfulAttac.DamageMultiplier = character.StrongAttackMultiplier;
         res.CharInfo.Health = res.CharInfo.HealthStats.Base;
-        res.CharInfo.Stamina = res.CharInfo.StaminaStats.Base;
+        res.CharInfo.Ether = res.CharInfo.EtherStats.Base;
         res.CharInfo.SpeedStats.MovementSpeed = Random.Range(character.MovementSpeed.x, character.MovementSpeed.y);
         res.CharInfo.MovementTimer = character.MovementTimer;
         
@@ -498,12 +498,11 @@ public class WaveCharacterInfoClass
     public Vector2 Health;
     public Vector2 HealthRegeneration;
     public Vector2 BaseDamage;
-    public Vector2 RapidAttackMultiplier;
-    public Vector2 PowerfulAttackMultiplier;
+    public Vector2 WeakAttackMultiplier;
+    public Vector2 StrongAttackMultiplier;
     public Vector2 BaseSpeed;
-    public Vector2 AttackSpeedRatio;
-    public Vector2 Stamina;
-    public Vector2 StaminaRegeneration;
+    public Vector2 Ether;
+    public Vector2 EtherRegeneration;
     public Vector2 MovementSpeed;
     public Vector2 MovementTimer;
     public DeathAnimType DeathAnim;
