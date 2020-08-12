@@ -23,7 +23,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     protected float totDamage = 0;
     protected bool strongAnimDone = false;
     public ScriptableObjectAI CurrentAIState;
-    //public GameObject psAI = null;
+    public GameObject psAI = null;
     public BattleTileScript possiblePos = null;
     public Vector2Int[] path;
     public bool found = false;
@@ -1129,14 +1129,18 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
                     }
                     CurrentAIState.ModifyStats(CharInfo);
-                    /*if(psAI != null)
+                    if (CurrentAIState.AIPs.PSType != ParticlesType.None)
                     {
-                        psAI.SetActive(false);
+                        if (psAI != null)
+                        {
+                            psAI.SetActive(false);
+                        }
+                        psAI = ParticleManagerScript.Instance.GetParticle(CurrentAIState.AIPs.PSType);
+                        psAI.transform.parent = SpineAnim.transform;
+                        psAI.transform.localPosition = Vector3.zero;
+                        psAI.SetActive(true);
                     }
-                    psAI = ParticleManagerScript.Instance.GetParticle(CurrentAIState.AIPs.PSType);
-                    psAI.transform.parent = SpineAnim.transform;
-                    psAI.transform.localPosition = Vector3.zero;
-                    psAI.SetActive(true);*/
+                   
                     AICoolDownOffset = 0;
                 }
 
@@ -2060,7 +2064,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         EventManager.Instance?.UpdateHealth(this);
         EventManager.Instance?.UpdateStamina(this);
-        SetFinalDamage(attacker, (healthCT != HealthChangedType.Heal ? damage - CharInfo.DefenceStats.BaseDefence : damage) / GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos).TileADStats.y);
+        SetFinalDamage(attacker, (healthCT != HealthChangedType.Heal ? damage - CharInfo.DefenceStats.BaseDefence > 0 ? damage - CharInfo.DefenceStats.BaseDefence : 0 : damage) / GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos).TileADStats.y);
         HealthStatsChangedEvent?.Invoke(Mathf.Abs(damage), healthCT, SpineAnim.transform);
         return res;
     }
