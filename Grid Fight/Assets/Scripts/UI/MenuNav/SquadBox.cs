@@ -11,22 +11,25 @@ public class SquadBox : MonoBehaviour
 
     [SerializeField] protected Image[] squadMateDisplays = new Image[3];
     [SerializeField] protected TextMeshProUGUI[] bonusDisplays = new TextMeshProUGUI[3];
-    protected List<Image> squadMateBackGrounds = new List<Image>();
+    public List<ImagesListInfoClass> squadMateBackGrounds = new List<ImagesListInfoClass>();
 
     protected Sprite selectedImg = null;
 
     public Color SelectionColor = Color.magenta;
-    protected Color backgroundGenericColor = Color.white;
+    [SerializeField] protected Color backgroundGenericColor = Color.white;
 
     private void Awake()
     {
         Instance = this;
 
-        backgroundGenericColor = GetComponent<Image>().color;
+        if(backgroundGenericColor == null) backgroundGenericColor = squadMateDisplays[0].GetComponentInParent<Image>().color;
 
-        foreach (Image display in squadMateDisplays)
+        if(squadMateBackGrounds.Count == 0)
         {
-            squadMateBackGrounds.Add(display.gameObject.GetComponentsInParent<Image>()[1]);
+            foreach (Image display in squadMateDisplays)
+            {
+                squadMateBackGrounds.Add(new ImagesListInfoClass(new Image[] { display.gameObject.GetComponentsInParent<Image>()[1] }));
+            }
         }
 
         DisplaySquad();
@@ -49,7 +52,10 @@ public class SquadBox : MonoBehaviour
             }
             if (i > 0)
             {
-                squadMateBackGrounds[i].color = backgroundGenericColor;
+                foreach (Image squadMateBackgroundImage in squadMateBackGrounds[i].images)
+                {
+                    squadMateBackgroundImage.color = backgroundGenericColor;
+                }
                 bonusDisplays[i - 1].text = SceneLoadManager.Instance.squad[i].squadBonusDetails;
             }
         }
@@ -72,11 +78,25 @@ public class SquadBox : MonoBehaviour
         int key = SceneLoadManager.Instance.squad.Where(r => r.Value.characterID == CharacterNameType.None).First().Key;
         squadMateDisplays[key].sprite = selectedImg;
         squadMateDisplays[key].color = displayColor;
-        squadMateBackGrounds[key].color = SelectionColor;
+        foreach (Image squadMateBackgroundImage in squadMateBackGrounds[key].images)
+        {
+            squadMateBackgroundImage.color = SelectionColor;
+        }
     }
 
     private void OnDestroy()
     {
         SceneLoadManager.Instance.SquadChangeEvent -= DisplaySquad;
+    }
+}
+
+[System.Serializable]
+public class ImagesListInfoClass
+{
+    public Image[] images = new Image[0];
+
+    public ImagesListInfoClass(Image[] _imgs)
+    {
+        images = _imgs;
     }
 }

@@ -8,6 +8,8 @@ public class CharSelectBox : MonoBehaviour
 {
     public static CharSelectBox Instance;
 
+    public bool indentAlternatingRows = false;
+
     bool enabled = false;
     public bool enableFromStart = true;
 
@@ -44,14 +46,21 @@ public class CharSelectBox : MonoBehaviour
     {
         get
         {
-            if(Mathf.FloorToInt(SceneLoadManager.Instance.loadedCharacters.Length / (rows * columns)) != (float)SceneLoadManager.Instance.loadedCharacters.Length / ((float)rows * (float)columns))
+            if(Mathf.FloorToInt(SceneLoadManager.Instance.loadedCharacters.Length / (btnsPerPage)) != (float)SceneLoadManager.Instance.loadedCharacters.Length / ((float)rows * (float)columns))
             {
-                return Mathf.FloorToInt(SceneLoadManager.Instance.loadedCharacters.Length / (rows * columns)) + 1;
+                return Mathf.FloorToInt(SceneLoadManager.Instance.loadedCharacters.Length / (btnsPerPage)) + 1;
             }
             else
             {
-                return Mathf.FloorToInt(SceneLoadManager.Instance.loadedCharacters.Length / (rows * columns));
+                return Mathf.FloorToInt(SceneLoadManager.Instance.loadedCharacters.Length / (btnsPerPage));
             }
+        }
+    }
+    protected int btnsPerPage
+    {
+        get
+        {
+            return rows * columns - (indentAlternatingRows ? Mathf.FloorToInt(rows / 2f) : 0);
         }
     }
     protected int currentPageIndex = 1;
@@ -61,7 +70,7 @@ public class CharSelectBox : MonoBehaviour
         {
             if(SceneLoadManager.Instance.loadedCharacters[i].characterID == charName)
             {
-                return Mathf.FloorToInt(((float)(i)) / (rows * columns)) + 1;
+                return Mathf.FloorToInt(((float)(i)) / (btnsPerPage)) + 1;
             }
         }
         return 1;
@@ -137,6 +146,7 @@ public class CharSelectBox : MonoBehaviour
         }
         activeButtons = new List<CharSelectButton>();
 
+
         //Get the space between each button, presuming the buttons will be displayed touching the outer walls and equally spaced apart inside
         Vector2 spacing = new Vector2(
             ((boxDimens.x - (btnDimens.x * columns)) / (columns - 1)) + btnDimens.x,
@@ -147,21 +157,30 @@ public class CharSelectBox : MonoBehaviour
 
         for (int y = 0; y < rows; y++)
         {
-            for (int x = 0; x < columns; x++)
+            List<CharSelectButton> currentRowBtns = new List<CharSelectButton>();
+            for (int x = 0; x < (indentAlternatingRows && (y % 2 == 1) ? columns - 1 : columns); x++)
             {
                 CharSelectButton curBtn = Instantiate(selectableCharButton_Prefab, new Vector3(currentPos.x, currentPos.y), Quaternion.identity, transform).GetComponent<CharSelectButton>();
+                currentRowBtns.Add(curBtn);
                 curBtn.selectionBoxRef = this;
                 curBtn.DisplayChar(null);
                 curBtn.GetComponent<Grid_UIButton>().parentPanel = GetComponentInParent<Grid_UIPanel>();
                 activeButtons.Add(curBtn);
 
-                if (x != columns - 1)
+                if (x != (indentAlternatingRows && (y % 2 == 1) ? columns - 1 : columns) - 1)
                 {
                     currentPos += new Vector2(spacing.x, 0f);
                 }
                 else
                 {
                     currentPos = new Vector2((transform.position.x - (boxDimens.x / 2f)) + (btnDimens.x / 2f), currentPos.y);
+                }
+            }
+            if(indentAlternatingRows && (y % 2 == 1))
+            {
+                foreach (CharSelectButton crb in currentRowBtns)
+                {
+                    crb.transform.position += new Vector3(spacing.x/2f, 0f);
                 }
             }
 
@@ -176,14 +195,16 @@ public class CharSelectBox : MonoBehaviour
         //Start adding new ones
         currentPageIndex = Mathf.Clamp(page, 1, pages);
 
-        int curCharIndex = (currentPageIndex - 1) * (rows * columns);
+        int curCharIndex = (currentPageIndex - 1) * (btnsPerPage);
 
-        for (int i = 0; i < rows * columns; i++)
+        CharacterLoadInformation[] charsToDisplay = SceneLoadManager.Instance.loadedCharacters.Where(r => r.characterID != CharacterNameType.CleasTemple_Character_Valley_Donna).ToArray();
+
+        for (int i = 0; i < btnsPerPage; i++)
         {
             activeButtons[i].DisplayChar(null);
-            if (curCharIndex < SceneLoadManager.Instance.loadedCharacters.Length)
+            if (curCharIndex < charsToDisplay.Length)
             {
-                activeButtons[i].DisplayChar(SceneLoadManager.Instance.loadedCharacters[curCharIndex], selectionMode == SelectionMode.Squad);
+                activeButtons[i].DisplayChar(charsToDisplay[curCharIndex], selectionMode == SelectionMode.Squad);
             }
             if (activeButtons[i].GetComponent<Grid_UIButton>().selected) activeButtons[i].UpdateSelection();
             curCharIndex++;
