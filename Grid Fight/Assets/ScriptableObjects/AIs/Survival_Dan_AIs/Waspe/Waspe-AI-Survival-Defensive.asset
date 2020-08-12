@@ -10,35 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a973d68f2b711f34b902c3029d63e805, type: 3}
-  m_Name: Agressive-Near
+  m_Name: Waspe-AI-Survival-Defensive
   m_EditorClassIdentifier: 
-  AI_Type: 20
-  Vision: 5
+  AI_Type: -10
+  Vision: 10
   Checks:
   - StatToCheck: 1
-    ValueChecker: 2
-    CheckWeight: 1
+    ValueChecker: 3
+    CheckWeightMultiplier: 1
     PercToCheck: 20
-    InBetween: {x: 60, y: 40}
-    Show: 0
-    BuffDebuff: 0
-  - StatToCheck: 6
-    ValueChecker: 2
-    CheckWeight: 1
-    PercToCheck: 70
-    InBetween: {x: 60, y: 40}
-    Show: 0
+    InBetween: {x: 49, y: 20}
+    Show: 1
     BuffDebuff: 0
   _CoolDown: {x: 3, y: 5}
   IdleMovement: 0
-  UpdateAttckWill: 1
-  AttackWill: 85
-  UpdateMoveForward: 1
-  MoveForward: 90
-  UpdateMoveBackward: 1
-  MoveBackward: 10
-  UpdateMoveUpDown: 0
-  MoveUpDown: 25
-  StatsToModify: []
-  AIPs: {fileID: 0}
+  AttackWill: 70
+  Chaseing_Flee: 0
+  StatsToModify:
+  - ModificableStats: 17
+    Multiplier: 0.2
+  - ModificableStats: 9
+    Multiplier: 0.3
+  AIPs: {fileID: 11400000, guid: 045bb6a40e15d9a44a49377da819c888, type: 2}
   Show: 0

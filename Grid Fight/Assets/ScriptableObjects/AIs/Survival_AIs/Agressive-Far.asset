@@ -17,11 +17,19 @@ MonoBehaviour:
   Checks:
   - StatToCheck: 1
     ValueChecker: 2
+    CheckWeight: 1
     PercToCheck: 20
+    InBetween: {x: 60, y: 40}
+    Show: 1
+    BuffDebuff: 0
   - StatToCheck: 6
     ValueChecker: 2
+    CheckWeight: 1
     PercToCheck: 70
-  CoolDown: 3
+    InBetween: {x: 60, y: 40}
+    Show: 1
+    BuffDebuff: 0
+  _CoolDown: {x: 3, y: 5}
   IdleMovement: 0
   UpdateAttckWill: 1
   AttackWill: 85
@@ -31,6 +39,6 @@ MonoBehaviour:
   MoveBackward: 90
   UpdateMoveUpDown: 0
   MoveUpDown: 25
-  t: {fileID: 0}
   StatsToModify: []
   AIPs: {fileID: 0}
+  Show: 0

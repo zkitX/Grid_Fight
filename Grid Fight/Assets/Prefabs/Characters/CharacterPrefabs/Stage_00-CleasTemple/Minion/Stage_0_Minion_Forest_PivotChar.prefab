@@ -526,8 +526,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charOwner: {fileID: 0}
-  testAtkEffect: {fileID: 0}
   Name: Waspe
   CharacterIcon: {fileID: 0}
   Mask: {fileID: 0}
@@ -538,6 +536,7 @@ MonoBehaviour:
   _CurrentAttackTypeInfo:
   - {fileID: 11400000, guid: 6732eb1582c27754b87167243eabf8e2, type: 2}
   - {fileID: 11400000, guid: 5baeefa661efce34284c8ee5cdf35d9f, type: 2}
+  - {fileID: 11400000, guid: 9464e09a4c33b014290ce4d8dae1c70a, type: 2}
   AddedAttackTypeInfo: []
   Elemental: 0
   ClassType: 2
@@ -584,6 +583,7 @@ MonoBehaviour:
     Base: 2
     Regeneration: 8
     BaseShieldRegeneration: 8
+    ShieldOnDefence: 0.5
     LevelMultiplier: 50
     B_Shield: 0
     B_Base: 0
@@ -598,7 +598,8 @@ MonoBehaviour:
     LoopPerc: 0.7
     EndPerc: 0.15
     AttackSpeed: 1
-    AttackSpeedRatio: 5
+    AttackLoopDuration: 0.5
+    IdleToAttackDuration: 0.01
     BulletSpeed: 5
     LeaveSpeed: 2
     BaseSpeed_LevelMultiplier: 0
@@ -608,7 +609,6 @@ MonoBehaviour:
     B_BaseSpeed: 1
     B_MovementSpeed: 1
     B_AttackSpeed: 1
-    B_AttackSpeedRatio: 0
     B_BulletSpeed: 5
     B_LeaveSpeed: 3
     B_IdleToAtkDuration: 0.2
@@ -620,7 +620,7 @@ MonoBehaviour:
     CurrentElemental: 0
     LevelMultiplier: 0
   DefenceStats:
-    BaseDefence: 10
+    BaseDefence: 0.5
     Invulnerability: 0.2
     MinionDefenceChances: 20
     MinionPerfectDefenceChances: 5
