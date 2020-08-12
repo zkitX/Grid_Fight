@@ -27,7 +27,7 @@ public class ScriptableObjectAIEditor : Editor
             list[i].Show = EditorGUILayout.Foldout(list[i].Show, "Checks  " + i);
             if (list[i].Show)
             {
-                list[i].CheckWeight = EditorGUILayout.IntField("CheckWeight", list[i].CheckWeight);
+                list[i].CheckWeightMultiplier = EditorGUILayout.IntField("CheckWeightMultiplier", list[i].CheckWeightMultiplier);
                 list[i].StatToCheck = (StatsCheckType)EditorGUILayout.EnumPopup("StatToCheck", list[i].StatToCheck);
 
                 if (list[i].StatToCheck == StatsCheckType.BuffDebuff)

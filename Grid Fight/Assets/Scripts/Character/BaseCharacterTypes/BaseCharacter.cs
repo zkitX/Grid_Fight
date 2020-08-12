@@ -309,7 +309,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     protected BaseCharacter target = null;
     public float AICoolDownOffset = 0;
     ScriptableObjectAI prev;
-    bool stopCo = false;
     List<Vector2Int> tempList_Vector2int = new List<Vector2Int>();
     Transform spineT;
 
@@ -985,7 +984,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                         BattleManagerScript.Instance.OccupiedBattleTiles.Remove(item);
                     }
                     BattleManagerScript.Instance.OccupiedBattleTiles.AddRange(CurrentBattleTiles);
-                    stopCo = true;
                     FireActionEvent(CharacterActionType.Move);
                     switch (nextDir)
                     {
@@ -1103,22 +1101,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     protected void SetCurrentAIValues()
     {
-        if (CurrentAIState.UpdateAttckWill)
-        {
-            AttackWillPerc = CurrentAIState.AttackWill;
-        }
-        if (CurrentAIState.UpdateMoveForward)
-        {
-            TowardMovementPerc = CurrentAIState.MoveForward;
-        }
-        if (CurrentAIState.UpdateMoveBackward)
-        {
-            AwayMovementPerc = CurrentAIState.MoveBackward;
-        }
-        if (CurrentAIState.UpdateMoveUpDown)
-        {
-            UpDownMovementPerc = CurrentAIState.MoveUpDown;
-        }
+        AttackWillPerc = CurrentAIState.AttackWill;
+        TowardMovementPerc = CurrentAIState.Chaseing_Flee;
     }
 
     public virtual IEnumerator AI()
@@ -1234,7 +1218,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                                         }
                                         else
                                         {
-                                            if (CurrentAIState.IdleMovement)
+                                            if (CurrentAIState.IdleMovement > UnityEngine.Random.Range(0f, 1f))
                                             {
                                                 possiblePos = null;
                                                 found = true;
@@ -1357,17 +1341,15 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         //  Debug.Log(AnimLength + "  AnimLenght   " + AnimLength / CharInfo.MovementSpeed + " Actual duration" );
         //Debug.Log("StartMoveCo  " + Time.time);
         float timer = 0;
-        stopCo = false;
         float spaceTimer = 0;
         bool isMovCheck = false;
-        bool isDefe = false;
         EndAxisMovement = false;
         Vector3 offset = spineT.position;
         transform.position = nextPos;
         spineT.position = offset;
         Vector3 localoffset = spineT.localPosition;
 
-        while (timer < 1 && !stopCo)
+        while (timer < 1)
         {
             yield return BattleManagerScript.Instance.WaitFixedUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
             timer += (BattleManagerScript.Instance.FixedDeltaTime / (CharInfo.SpeedStats.TileMovementTime / (CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed * BattleManagerScript.Instance.MovementMultiplier)));
@@ -1378,7 +1360,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             {
                 isMovCheck = true;
                 isMoving = false;
-                if (isDefending && !isDefe)
+                if (isDefending)
                 {
                     /* isDefe = true;
                      SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);

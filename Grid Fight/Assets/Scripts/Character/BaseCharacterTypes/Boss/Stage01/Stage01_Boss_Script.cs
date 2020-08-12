@@ -128,7 +128,7 @@ public class Stage01_Boss_Script : MinionType_Script
                 }
             }
 
-            if (CurrentAIState.IdleMovement)
+            if (CurrentAIState.IdleMovement > Random.Range(0f,1f))
             {
                 bool samepos = true;
                 for (int i = 0; i < CurrentBattleTilesToCheck.Count; i++)

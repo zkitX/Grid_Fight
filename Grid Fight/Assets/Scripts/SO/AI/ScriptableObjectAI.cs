@@ -28,16 +28,13 @@ public class ScriptableObjectAI : ScriptableObject
         }
     }
     [Header("Move effects")]
-
-    public bool IdleMovement = false;
-    public bool UpdateAttckWill = false;
-    [ConditionalField("UpdateAttckWill", false)] public int AttackWill = 20;
-    public bool UpdateMoveForward = false;
-    [ConditionalField("UpdateMoveForward", false)] public int MoveForward = 20;
-    public bool UpdateMoveBackward = false;
-    [ConditionalField("UpdateMoveBackward", false)] public int MoveBackward = 20;
-    public bool UpdateMoveUpDown = false;
-    [ConditionalField("UpdateMoveUpDown", false)] public int MoveUpDown = 20;
+    [Range(0,1)]
+    public float IdleMovement = 0.5f;
+    [Range(0, 100)]
+    public int AttackWill = 20;
+    [Range(0,100)]
+    public int Chaseing_Flee = 20;
+    
 
     [Header("State effects")]
 
@@ -125,14 +122,14 @@ public class ScriptableObjectAI : ScriptableObject
                 case StatsCheckType.Health:
                     if (CheckStatsValues(item, bChar.CharInfo.HealthPerc))
                     {
-                        Score += 100 * item.CheckWeight;
+                        Score += 100 * item.CheckWeightMultiplier;
                         i++;
                     }
                     break;
                 case StatsCheckType.Stamina:
                     if (CheckStatsValues(item, bChar.CharInfo.StaminaPerc))
                     {
-                        Score += 100 * item.CheckWeight;
+                        Score += 100 * item.CheckWeightMultiplier;
                         i++;
                     }
                     break;
@@ -145,14 +142,14 @@ public class ScriptableObjectAI : ScriptableObject
                 case StatsCheckType.TeamTotalHpPerc:
                     if (CheckStatsValues(item, WaveManagerScript.Instance.GetCurrentPartyHPPerc()))
                     {
-                        Score += 100 * item.CheckWeight;
+                        Score += 100 * item.CheckWeightMultiplier;
                         i++;
                     }
                     break;
                 case StatsCheckType.BuffDebuff:
                     if(bChar.HasBuffDebuff(item.BuffDebuff))
                     {
-                        Score += 100 * item.CheckWeight;
+                        Score += 100 * item.CheckWeightMultiplier;
                         i++;
                     }
                     break;
@@ -309,7 +306,7 @@ public class AICheckClass
 {
     public StatsCheckType StatToCheck;
     public ValueCheckerType ValueChecker;
-    public int CheckWeight = 1;
+    public int CheckWeightMultiplier = 1;
 
     [HideInInspector]public float PercToCheck;
     [HideInInspector]public Vector2 InBetween = new Vector2(60, 40);

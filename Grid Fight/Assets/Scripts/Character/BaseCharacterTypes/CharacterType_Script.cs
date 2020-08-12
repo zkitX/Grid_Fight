@@ -415,7 +415,7 @@ public class CharacterType_Script : BaseCharacter
             FireActionEvent(CharacterActionType.WeakAttack);
             if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop.ToString() && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_IdleToAtk.ToString())
             {
-                Debug.Log(SpineAnim.CurrentAnim);
+                //Debug.Log(SpineAnim.CurrentAnim);
                 SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
                 SpineAnim.SetAnimationSpeed(SpineAnim.GetAnimLenght(CharacterAnimationStateType.Atk2_IdleToAtk) / CharInfo.SpeedStats.IdleToAtkDuration);
             }
@@ -915,7 +915,7 @@ public class CharacterType_Script : BaseCharacter
                                         }
                                         else
                                         {
-                                            if (CurrentAIState.IdleMovement)
+                                            if (CurrentAIState.IdleMovement > Random.Range(0f,1f))
                                             {
                                                 possiblePos = null;
                                                 found = true;
