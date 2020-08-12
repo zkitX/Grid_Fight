@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 835633360393341015}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0.625, z: 0}
+  m_LocalPosition: {x: -0.67, y: 0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8033408239414047323}
@@ -122,7 +122,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4842812051071053045}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.39, z: 0}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3254059290524370681}
@@ -176,8 +176,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1897941405
+  m_SortingLayer: 3
   m_SortingOrder: 20
 --- !u!114 &9077081246307551926
 MonoBehaviour:
@@ -491,9 +491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charOwner: {fileID: 0}
-  testAtkEffect: {fileID: 0}
-  Name: Pai
+  Name: Valis
   CharacterIcon: {fileID: 0}
   Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 18079379e5337084286a38b915064869, type: 2}
@@ -537,8 +535,8 @@ MonoBehaviour:
     B_Regeneration: 0
     B_BaseHealthRegeneration: 0
   StaminaStats:
-    Stamina: 25
-    Base: 25
+    Stamina: 1000
+    Base: 1000
     Regeneration: 1
     BaseStaminaRegeneration: 1
     LevelMultiplier: 30
@@ -565,8 +563,9 @@ MonoBehaviour:
     LoopPerc: 0.7
     EndPerc: 0.15
     AttackSpeed: 2.5
-    AttackSpeedRatio: 2
-    BulletSpeed: 1
+    AttackLoopDuration: 0.5
+    IdleToAttackDuration: 0.01
+    BulletSpeed: 3
     LeaveSpeed: 3
     BaseSpeed_LevelMultiplier: 0
     MovementSpeed_LevelMultiplier: 0
@@ -575,7 +574,6 @@ MonoBehaviour:
     B_BaseSpeed: 1
     B_MovementSpeed: 1
     B_AttackSpeed: 1
-    B_AttackSpeedRatio: 0
     B_BulletSpeed: 5
     B_LeaveSpeed: 3
     B_IdleToAtkDuration: 0.2
@@ -656,7 +654,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6451802379838691433}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0.625, z: 0}
+  m_LocalPosition: {x: -0.6, y: 0.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8033408239414047323}
@@ -686,7 +684,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7359291822663639410}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8033408239414047323}
