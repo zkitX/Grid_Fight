@@ -120,14 +120,14 @@ public class ScriptableObjectAI : ScriptableObject
                 case StatsCheckType.None:
                     break;
                 case StatsCheckType.Health:
-                    if (CheckStatsValues(item, bChar.CharInfo.HealthPerc))
+                    if (item.CheckOnTarget ? (target != null && CheckStatsValues(item, target.CharInfo.HealthPerc)) : CheckStatsValues(item, bChar.CharInfo.HealthPerc))
                     {
                         Score += 100 * item.CheckWeightMultiplier;
                         i++;
                     }
                     break;
                 case StatsCheckType.Stamina:
-                    if (CheckStatsValues(item, bChar.CharInfo.StaminaPerc))
+                    if (item.CheckOnTarget ? (target != null && CheckStatsValues(item, target.CharInfo.StaminaPerc)) : CheckStatsValues(item, bChar.CharInfo.StaminaPerc))
                     {
                         Score += 100 * item.CheckWeightMultiplier;
                         i++;
@@ -147,7 +147,7 @@ public class ScriptableObjectAI : ScriptableObject
                     }
                     break;
                 case StatsCheckType.BuffDebuff:
-                    if(bChar.HasBuffDebuff(item.BuffDebuff))
+                    if(item.CheckOnTarget ? (target != null && target.HasBuffDebuff(item.BuffDebuff)) : bChar.HasBuffDebuff(item.BuffDebuff))
                     {
                         Score += 100 * item.CheckWeightMultiplier;
                         i++;
@@ -226,7 +226,7 @@ public class ScriptableObjectAI : ScriptableObject
     }
 
 
-
+  
     private bool CheckStatsValues(AICheckClass aicc, float current)
     {
         switch (aicc.ValueChecker)
@@ -304,6 +304,7 @@ public class ScriptableObjectAI : ScriptableObject
 [System.Serializable]
 public class AICheckClass
 {
+    public bool CheckOnTarget = false;
     public StatsCheckType StatToCheck;
     public ValueCheckerType ValueChecker;
     public int CheckWeightMultiplier = 1;

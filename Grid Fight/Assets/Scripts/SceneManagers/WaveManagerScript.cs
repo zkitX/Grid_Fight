@@ -148,8 +148,8 @@ public class WaveManagerScript : MonoBehaviour
         res.CharInfo.StaminaStats.Regeneration = Random.Range(character.StaminaRegeneration.x, character.StaminaRegeneration.y);
         res.CharInfo.SpeedStats.BaseSpeed = Random.Range(character.BaseSpeed.x, character.BaseSpeed.y);
         res.CharInfo.DamageStats.BaseDamage = Random.Range(character.BaseDamage.x, character.BaseDamage.y);
-        res.CharInfo.RapidAttack.DamageMultiplier = character.RapidAttackMultiplier;
-        res.CharInfo.PowerfulAttac.DamageMultiplier = character.PowerfulAttackMultiplier;
+        res.CharInfo.WeakAttack.DamageMultiplier = character.RapidAttackMultiplier;
+        res.CharInfo.StrongfulAttac.DamageMultiplier = character.PowerfulAttackMultiplier;
         res.CharInfo.Health = res.CharInfo.HealthStats.Base;
         res.CharInfo.Stamina = res.CharInfo.StaminaStats.Base;
         res.CharInfo.SpeedStats.MovementSpeed = Random.Range(character.MovementSpeed.x, character.MovementSpeed.y);

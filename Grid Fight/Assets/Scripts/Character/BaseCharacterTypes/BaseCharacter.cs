@@ -217,7 +217,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         get
         {
             return CharInfo.DamageStats.BaseDamage * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.x
-                    * (nextAttack.AttackInput == AttackInputType.Weak ? CharInfo.RapidAttack.DamageMultiplier.x : CharInfo.PowerfulAttac.DamageMultiplier.x);
+                    * (nextAttack.AttackInput == AttackInputType.Weak ? CharInfo.WeakAttack.DamageMultiplier.x : CharInfo.StrongfulAttac.DamageMultiplier.x);
         }
     }
     public float NextAttackTileDamage
@@ -671,8 +671,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         if (nextAttack != null && nextAttack.CurrentAttackType == AttackType.Tile && CharInfo.Health > 0 && IsOnField)
         {
-            CharInfo.RapidAttack.DamageMultiplier = CharInfo.RapidAttack.B_DamageMultiplier * nextAttack.DamageMultiplier;
-            CharInfo.PowerfulAttac.DamageMultiplier = CharInfo.PowerfulAttac.B_DamageMultiplier * nextAttack.DamageMultiplier;
+            CharInfo.WeakAttack.DamageMultiplier = CharInfo.WeakAttack.B_DamageMultiplier * nextAttack.DamageMultiplier;
+            CharInfo.StrongfulAttac.DamageMultiplier = CharInfo.StrongfulAttac.B_DamageMultiplier * nextAttack.DamageMultiplier;
 
             if (nextAttack.AttackInput > AttackInputType.Strong && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
             {
@@ -751,8 +751,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
         if (nextAttack != null && nextAttack.CurrentAttackType == AttackType.Totem && CharInfo.Health > 0 && IsOnField)
         {
-            CharInfo.RapidAttack.DamageMultiplier = CharInfo.RapidAttack.B_DamageMultiplier * nextAttack.DamageMultiplier;
-            CharInfo.PowerfulAttac.DamageMultiplier = CharInfo.PowerfulAttac.B_DamageMultiplier * nextAttack.DamageMultiplier;
+            CharInfo.WeakAttack.DamageMultiplier = CharInfo.WeakAttack.B_DamageMultiplier * nextAttack.DamageMultiplier;
+            CharInfo.StrongfulAttac.DamageMultiplier = CharInfo.StrongfulAttac.B_DamageMultiplier * nextAttack.DamageMultiplier;
             StartCoroutine(Totem());
         }
     }

@@ -76,9 +76,9 @@ public class CharacterInfoScript : MonoBehaviour
     public CharacterSelectionType CharacterSelection;
     // public List<CharactersRelationshipClass> CharacterRelationships = new List<CharactersRelationshipClass>();
 
-    public RapidAttackClass RapidAttack;
+    public WeakAttackClass WeakAttack;
     [System.Serializable]
-    public class RapidAttackClass
+    public class WeakAttackClass
     {
         public Vector2 DamageMultiplier = new Vector2(1, 1);
         public Vector2 CriticalChance = new Vector2(2, 2);
@@ -88,9 +88,9 @@ public class CharacterInfoScript : MonoBehaviour
         [HideInInspector] public Vector2 B_CriticalChance = new Vector2(2, 2);
     }
 
-    public PowerfulAttackClass PowerfulAttac;
+    public StrongfulAttackClass StrongfulAttac;
     [System.Serializable]
-    public class PowerfulAttackClass
+    public class StrongfulAttackClass
     {
         public Vector2 DamageMultiplier = new Vector2(3, 3);
         public Vector2 CriticalChance = new Vector2(3, 5);
@@ -148,6 +148,7 @@ public class CharacterInfoScript : MonoBehaviour
         [HideInInspector] public float B_Base;
         [HideInInspector] public float B_Regeneration;
         [HideInInspector] public float B_BaseShieldRegeneration;
+        [HideInInspector] public float B_ShieldOnDefence;
     }
 
     public SpeedStastsClass SpeedStats;
@@ -165,7 +166,6 @@ public class CharacterInfoScript : MonoBehaviour
         public float LoopPerc = 0.70f;
         public float EndPerc = 0.15f;
 
-        public float AttackSpeed = 1;
         [Range(0, 1)]
         public float AttackLoopDuration = 0.5f;
         [Range(0, 1)]
@@ -185,7 +185,6 @@ public class CharacterInfoScript : MonoBehaviour
         [HideInInspector] public float B_IdleToAtkDuration = 0.2f;
         [HideInInspector] public float B_AtkToIdleDuration = 0.2f;
     }
-
 
     public DamageStastsClass DamageStats;
     [System.Serializable]
@@ -212,10 +211,6 @@ public class CharacterInfoScript : MonoBehaviour
         [HideInInspector]public float B_MinionPerfectDefenceChances = 5;
         public float LevelMultiplier;
     }
-
-    public float Special1LoadingDuration;
-    public float Special2LoadingDuration;
-    public float Special3LoadingDuration;
 
     [HideInInspector] public float ExperienceValue;
     [HideInInspector] public Vector2 MovementTimer = new Vector2(5, 8);
@@ -342,8 +337,8 @@ public class CharacterInfoScript : MonoBehaviour
     public bool IsCritical(bool rapidOrPowerful)
     {
         float chance = Random.Range(0, 100);
-        if (chance <= Random.Range(rapidOrPowerful ? RapidAttack.CriticalChance.x : PowerfulAttac.CriticalChance.x,
-            rapidOrPowerful ? RapidAttack.CriticalChance.y : PowerfulAttac.CriticalChance.y))
+        if (chance <= Random.Range(rapidOrPowerful ? WeakAttack.CriticalChance.x : StrongfulAttac.CriticalChance.x,
+            rapidOrPowerful ? WeakAttack.CriticalChance.y : StrongfulAttac.CriticalChance.y))
         {
             return true;
         }
@@ -372,6 +367,8 @@ public class CharacterInfoScript : MonoBehaviour
             ShieldStats.Regeneration *= ShieldStats.LevelMultiplier * strengthScaler;
             ShieldStats.Shield *= ShieldStats.LevelMultiplier * strengthScaler;
             ShieldStats.BaseShieldRegeneration *= ShieldStats.LevelMultiplier * strengthScaler;
+            ShieldStats.ShieldOnDefence *= ShieldStats.LevelMultiplier * strengthScaler;
+
 
             SpeedStats.BaseSpeed *= SpeedStats.BaseSpeed_LevelMultiplier;
             SpeedStats.TileMovementTime /= 1 + SpeedStats.MovementSpeed_LevelMultiplier;
@@ -383,12 +380,12 @@ public class CharacterInfoScript : MonoBehaviour
 
 
         //RapidAttack
-        RapidAttack.B_CriticalChance = RapidAttack.CriticalChance;
-        RapidAttack.B_DamageMultiplier = RapidAttack.DamageMultiplier;
+        WeakAttack.B_CriticalChance = WeakAttack.CriticalChance;
+        WeakAttack.B_DamageMultiplier = WeakAttack.DamageMultiplier;
 
         //PowerfulAttac
-        PowerfulAttac.B_CriticalChance = PowerfulAttac.CriticalChance;
-        PowerfulAttac.B_DamageMultiplier = PowerfulAttac.DamageMultiplier;
+        StrongfulAttac.B_CriticalChance = StrongfulAttac.CriticalChance;
+        StrongfulAttac.B_DamageMultiplier = StrongfulAttac.DamageMultiplier;
 
         //HealthStats
         HealthStats.B_Base = HealthStats.Base;
@@ -403,17 +400,23 @@ public class CharacterInfoScript : MonoBehaviour
         StaminaStats.B_Regeneration = StaminaStats.Regeneration;
         StaminaStats.B_Stamina = StaminaStats.Stamina;
 
+        //Shield
+        ShieldStats.B_Base = ShieldStats.Base;
+        ShieldStats.B_BaseShieldRegeneration = ShieldStats.BaseShieldRegeneration;
+        ShieldStats.B_Regeneration = ShieldStats.Regeneration;
+        ShieldStats.B_Shield = ShieldStats.Shield;
+        ShieldStats.B_ShieldOnDefence = ShieldStats.ShieldOnDefence;
+
         //SpeedStats
         SpeedStats.B_BaseSpeed = SpeedStats.BaseSpeed;
         SpeedStats.B_MovementSpeed = SpeedStats.MovementSpeed;
-        SpeedStats.B_AttackSpeed = SpeedStats.AttackSpeed;
         SpeedStats.B_BulletSpeed = SpeedStats.BulletSpeed;
         SpeedStats.B_LeaveSpeed = SpeedStats.LeaveSpeed;
         SpeedStats.B_IdleToAtkDuration = SpeedStats.IdleToAtkDuration;
         SpeedStats.B_AtkToIdleDuration = SpeedStats.AtkToIdleDuration;
 
         DamageStats.B_BaseDamage = DamageStats.BaseDamage;
-
+        //Defence
         DefenceStats.B_BaseDefence = DefenceStats.BaseDefence;
         DefenceStats.B_Invulnerability = DefenceStats.Invulnerability;
         DefenceStats.B_MinionDefenceChances = DefenceStats.MinionDefenceChances;

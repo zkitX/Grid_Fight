@@ -103,9 +103,6 @@ public class AttackSequence
             case StatsCheckType.Stamina:
                 curCheckValPerc = charInfo.StaminaPerc;
                 break;
-            case StatsCheckType.AttackSpeed:
-                curCheckValPerc = charInfo.SpeedStats.AttackSpeed;
-                break;
             case StatsCheckType.MovementSpeed:
                 curCheckValPerc = charInfo.SpeedStats.MovementSpeed;
                 break;
