@@ -97,7 +97,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 39398eb7a9340a845af6ef335f29ac34, type: 2}
+  - {fileID: 2100000, guid: 3f27984e7d78f5140b16f18c5f1f4051, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 77bebf50aba9b744f8b658d22210a09a, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 382dd3a9ce767584783c51d9b2da9d9c, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -317,29 +317,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: 1.4285715
+        outSlope: 1.4285715
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.1
-        value: 0
-        inSlope: 0.15598729
-        outSlope: 0.15598729
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.60479045
-        outWeight: 0.33333334
-      - serializedVersion: 3
         time: 0.7
         value: 1
-        inSlope: 0.041555207
-        outSlope: 0.041555207
-        tangentMode: 0
+        inSlope: 1.2729329
+        outSlope: 0
+        tangentMode: 1
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.06439541
         outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
@@ -359,29 +350,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: 1.4285715
+        outSlope: 1.4285715
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.1
-        value: 0
-        inSlope: 0.15598729
-        outSlope: 0.15598729
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.60479045
-        outWeight: 0.33333334
-      - serializedVersion: 3
         time: 0.7
         value: 1
-        inSlope: 0.041555207
-        outSlope: 0.041555207
-        tangentMode: 0
+        inSlope: 1.2729329
+        outSlope: 0
+        tangentMode: 1
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.06439541
         outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
@@ -401,29 +383,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: 1.4285715
+        outSlope: 1.4285715
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.1
-        value: 0
-        inSlope: 0.15598729
-        outSlope: 0.15598729
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.60479045
-        outWeight: 0.33333334
-      - serializedVersion: 3
         time: 0.7
         value: 1
-        inSlope: 0.041555207
-        outSlope: 0.041555207
-        tangentMode: 0
+        inSlope: 1.2729329
+        outSlope: 0
+        tangentMode: 1
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.06439541
         outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
@@ -443,29 +416,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: 1.4285715
+        outSlope: 1.4285715
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.1
-        value: 0
-        inSlope: 0.15598729
-        outSlope: 0.15598729
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.60479045
-        outWeight: 0.33333334
-      - serializedVersion: 3
         time: 0.7
         value: 1
-        inSlope: 0.041555207
-        outSlope: 0.041555207
-        tangentMode: 0
+        inSlope: 1.2729329
+        outSlope: 0
+        tangentMode: 1
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.06439541
         outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
@@ -502,8 +466,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charOwner: {fileID: 0}
-  testAtkEffect: {fileID: 0}
   Name: Switch
   CharacterIcon: {fileID: 21300000, guid: 1d691900d2b519146bfb6236a1347d71, type: 3}
   Mask: {fileID: 0}
@@ -525,13 +487,13 @@ MonoBehaviour:
   AIs: []
   CharacterRespawnLength: 180
   CharacterSelection: 0
-  RapidAttack:
+  WeakAttack:
     DamageMultiplier: {x: 1, y: 1}
-    CriticalChance: {x: 2, y: 3}
+    CriticalChance: {x: 2, y: 2}
     LevelMultiplier: 0
     B_DamageMultiplier: {x: 1, y: 1}
     B_CriticalChance: {x: 2, y: 2}
-  PowerfulAttac:
+  StrongfulAttac:
     DamageMultiplier: {x: 3, y: 3}
     CriticalChance: {x: 3, y: 5}
     LevelMultiplier: 0
@@ -562,21 +524,23 @@ MonoBehaviour:
     Base: 3
     Regeneration: 0.3
     BaseShieldRegeneration: 0.3
+    ShieldOnDefence: 0.5
     LevelMultiplier: 31
     B_Shield: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseShieldRegeneration: 0
+    B_ShieldOnDefence: 0
   SpeedStats:
     BaseSpeed: 1
-    TileMovementTime: 1
-    MovementSpeed: 1.8
-    CuttingPerc: 0.85
-    IntroPerc: 0.15
-    LoopPerc: 0.7
-    EndPerc: 0.15
-    AttackSpeed: 2.1
-    AttackSpeedRatio: 1
+    TileMovementTime: 0.6
+    MovementSpeed: 1
+    CuttingPerc: 0.7
+    IntroPerc: 0.16
+    LoopPerc: 0.54
+    EndPerc: 0.3
+    AttackLoopDuration: 0.5
+    IdleToAttackDuration: 0.01
     BulletSpeed: 1.6
     LeaveSpeed: 3
     BaseSpeed_LevelMultiplier: 0
@@ -586,7 +550,6 @@ MonoBehaviour:
     B_BaseSpeed: 1
     B_MovementSpeed: 1
     B_AttackSpeed: 1
-    B_AttackSpeedRatio: 0
     B_BulletSpeed: 5
     B_LeaveSpeed: 3
     B_IdleToAtkDuration: 0.2
@@ -607,9 +570,6 @@ MonoBehaviour:
     B_MinionDefenceChances: 20
     B_MinionPerfectDefenceChances: 5
     LevelMultiplier: 0
-  Special1LoadingDuration: 0
-  Special2LoadingDuration: 0
-  Special3LoadingDuration: 0
   ExperienceValue: 0
   MovementTimer: {x: 5, y: 8}
   B_MovementTimer: {x: 5, y: 8}
