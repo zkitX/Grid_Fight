@@ -62,30 +62,4 @@ public class Stage02_Boss_Script : MinionType_Script
         if (attacker == this && damage == 0f) return true;
         return base.SetDamage(attacker, damage, elemental, isCritical);
     }
-
-    public override void fireAttackAnimation(Vector3 pos)
-    {
-          if (!SpineAnim.CurrentAnim.Contains("Loop"))
-          {
-              if(nextAttack.PrefixAnim != AttackAnimPrefixType.Atk1)
-              {
-                  if(!strongAnimDone)
-                  {
-                      strongAnimDone = true;
-                      SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
-                  }
-              }
-              else
-              {
-                  SetAnimation(nextAttack.PrefixAnim + "_Loop");
-              }
-          }
-
-          if (chargeParticles != null && shotsLeftInAttack <= 0)
-          {
-              chargeParticles.SetActive(false);
-
-              chargeParticles = null;
-          }
-    }
 }

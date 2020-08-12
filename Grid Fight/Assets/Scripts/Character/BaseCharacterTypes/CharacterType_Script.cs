@@ -515,7 +515,10 @@ public class CharacterType_Script : BaseCharacter
 
     public void QuickAttack()
     {
-        //Atk1Queueing = false;
+        if (!GetCanUseStamina(CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackInput == AttackInputType.Weak).First().StaminaCost))
+        {
+            return;
+        }
         nextAttack = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackAnim == AttackAnimType.Weak_Atk).First();
         currentAttackPhase = AttackPhasesType.Start;
         SetAnimation(CharacterAnimationStateType.Atk1_Loop);

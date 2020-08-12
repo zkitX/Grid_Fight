@@ -14,7 +14,7 @@ public class BattleTileTargetsScript : MonoBehaviour
     {
         Whiteline = transform.GetChild(0);
     }
-    public void SetAttack(float duration, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances)
+    public void SetAttack(float duration, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances, bool fireAnim = true)
     {
         GameObject nextT = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Tile);
 
@@ -27,7 +27,7 @@ public class BattleTileTargetsScript : MonoBehaviour
         StartCoroutine(FireTarget(tc, pos, damage, ele, attacker, atkEffects, effectChances));
     }
 
-    private IEnumerator FireTarget(TargetClass tc, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances)
+    private IEnumerator FireTarget(TargetClass tc, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances, bool fireAnim = true)
     {
         float timer = 0;
         Whiteline.gameObject.SetActive(true);
@@ -55,7 +55,10 @@ public class BattleTileTargetsScript : MonoBehaviour
             {
                 attackerFiredAttackAnim = true;
                 attacker.shotsLeftInAttack--;
-                attacker.fireAttackAnimation(transform.position); // trigger the shoot anim
+                if (fireAnim)
+                {
+                    attacker.fireAttackAnimation(transform.position); // trigger the shoot anim
+                }
             }
         }
 

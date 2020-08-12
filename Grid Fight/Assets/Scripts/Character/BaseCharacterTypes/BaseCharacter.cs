@@ -731,7 +731,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                                     {
                                         bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, tempVector2Int,
                                    NextAttackTileDamage, CharInfo.Elemental, this,
-                                   target, target.EffectChances);
+                                   target, target.EffectChances, false);
                                     }
                                 }
                             }
