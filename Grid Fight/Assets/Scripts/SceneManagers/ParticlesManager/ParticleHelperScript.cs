@@ -13,6 +13,8 @@ public class ParticleHelperScript : MonoBehaviour
     [Tooltip("Cache of trail initial information")]
     List<float> TrailInitialTime = new List<float>();
     public float timet = 0;
+    [Tooltip("Specify the Sorting Layer Name")]
+    public string SortingLayer = "Player";
 
     ParticleSystem PS;
     ParticleSystem[] PSChildren;
@@ -32,16 +34,20 @@ public class ParticleHelperScript : MonoBehaviour
     {
         foreach (ParticleSystem item in GetComponentsInChildren<ParticleSystem>(true))
         {
+            ParticleSystemRenderer renderer = item.GetComponent<ParticleSystemRenderer>();
+            renderer.sortingLayerName = SortingLayer;
             Children.Add(new ParticleChildSimulationSpeed(item.main.simulationSpeed, item));
         }
 
         foreach (TrailRenderer trail in GetComponentsInChildren<TrailRenderer>())
         {
+            trail.sortingLayerName = SortingLayer;
             Trails.Add(trail);
             if (trail.GetComponent<VFXBulletSpeedCalibration>())
             {
-                VFXBulletSpeedCalibration vfx = trail.GetComponent<VFXBulletSpeedCalibration>();
-                TrailInitialTime.Add(vfx.trailTimeCache * (vfx.BulletDuration / vfx.BulletOriginalDuration));
+                //VFXBulletSpeedCalibration vfx = trail.GetComponent<VFXBulletSpeedCalibration>();
+                //TrailInitialTime.Add(vfx.trailTimeCache * (vfx.BulletDuration / vfx.BulletOriginalDuration));
+                TrailInitialTime.Add(trail.time);
             }
             else
             {
