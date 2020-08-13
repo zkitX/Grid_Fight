@@ -106,8 +106,8 @@ public class Grid_UIButton : MonoBehaviour
         if (buttonImage == null)
         {
             buttonImage = GetComponent<Image>();
-            buffers = new Vector2((buttonImage.rectTransform.rect.width / 2f) * Grid_UINavigator.Instance.buttonBufferPercentage,
-                (buttonImage.rectTransform.rect.height / 2f) * Grid_UINavigator.Instance.buttonBufferPercentage);
+            buffers = new Vector2((buttonImage.rectTransform.rect.width / 2f) * Grid_UINavigator.Instance.buttonBufferPercentage * (Screen.width / 1920f),
+                (buttonImage.rectTransform.rect.height / 2f) * Grid_UINavigator.Instance.buttonBufferPercentage * (Screen.height / 1080f));
         }
         if (buttonText == null) buttonText = GetComponentInChildren<TextMeshProUGUI>();
     }
