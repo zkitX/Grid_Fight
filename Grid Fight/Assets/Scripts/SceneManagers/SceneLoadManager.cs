@@ -163,11 +163,12 @@ public class SceneLoadManager : MonoBehaviour
 
         if (steamGO == null)
         {
-            if (SteamManagerGO == null)
+            if (SteamManagerGO != null)
             {
+                steamGO = Instantiate(SteamManagerGO);
                 Debug.LogError("Set in the scenemanager the steammanagerGO");
             }
-           steamGO = Instantiate(SteamManagerGO);
+           
         }
         if (InputController.Instance == null) Instantiate(RewiredPrefab).name = RewiredPrefab.name;
         DontDestroyOnLoad(this);
