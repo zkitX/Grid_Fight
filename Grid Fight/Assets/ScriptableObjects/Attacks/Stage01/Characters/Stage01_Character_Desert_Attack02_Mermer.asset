@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage01_Character_Desert_Attack02_Mermer
   m_EditorClassIdentifier: 
+  isSequencedAttack: 0
   Chances: 100
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 1
   AttackAnim: 1
-  StaminaCost: 10
+  StaminaCost: 4
   ExperiencePoints: 10
-  CoolDown: 4
+  _CoolDown: {x: 3, y: 5}
   PrefixAnim: 1
   Fov: 0
   Particles:
@@ -300,8 +301,10 @@ MonoBehaviour:
         EffectsOnTile: []
     StatToCheck: 1
     ValueChecker: 2
-    PercToCheck: 70
     Chances: 80
+    PercToCheck: 70
+    InBetween: {x: 0, y: 0}
+    Show: 0
   TotemAtk:
     AtkType: 3
     IsPlayerSide: 0

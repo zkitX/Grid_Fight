@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage01_Character_Desert_StrongAttack
   m_EditorClassIdentifier: 
-  Chances: 100
+  isSequencedAttack: 0
+  Chances: 91
   CurrentAttackType: 0
   AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 1, y: 1}
@@ -20,7 +21,7 @@ MonoBehaviour:
   AttackAnim: 1
   StaminaCost: 4
   ExperiencePoints: 10
-  CoolDown: 10
+  _CoolDown: {x: 3, y: 5}
   PrefixAnim: 1
   Fov: 0
   Particles:
@@ -188,8 +189,10 @@ MonoBehaviour:
     BulletTrajectories: []
     StatToCheck: 0
     ValueChecker: 0
-    PercToCheck: 0
     Chances: 0
+    PercToCheck: 0
+    InBetween: {x: 0, y: 0}
+    Show: 0
   TotemAtk:
     AtkType: 3
     IsPlayerSide: 0
