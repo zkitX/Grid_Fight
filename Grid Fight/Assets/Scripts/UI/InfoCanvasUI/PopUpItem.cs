@@ -58,11 +58,13 @@ public class PopUpItem : MonoBehaviour
         StopAllCoroutines();
     }
 
-    public IEnumerator TriggerPopup(Vector2 offset, string title, string description, Sprite image, float holdTime, Color boxColor = new Color(), Color titleColor = new Color(), Color decriptionColor = new Color())
+    public IEnumerator TriggerPopup(Vector2 offset, string title, string description, Sprite image, float holdTime, bool autoEnd, float autoEndTime, Color boxColor = new Color(), Color titleColor = new Color(), Color decriptionColor = new Color())
     {
         ResetPopup();
         SetupPopupInformation(offset, title, description, image, boxColor, titleColor, decriptionColor);
-        yield return PopUpCo(holdTime);
+        if (PopUpper != null) StopCoroutine(PopUpper);
+        PopUpper = PopUpCo(holdTime, autoEnd, autoEndTime);
+        yield return PopUpper;
     }
 
     protected void SetupPopupInformation(Vector2 offset, string title, string description, Sprite image, Color boxColor, Color titleColor, Color decriptionColor)
@@ -86,9 +88,17 @@ public class PopUpItem : MonoBehaviour
         if (image != null) displayImage.color = Color.white;
     }
 
-
-    IEnumerator PopUpCo(float holdTime)
+    IEnumerator PopUpper = null;
+    IEnumerator PopUpCo(float holdTime, bool AutoEndAfterTime, float automaticCloseTime)
     {
+        //Setup auto ending
+        if (AutoEnder != null) StopCoroutine(AutoEnder);
+        if (AutoEndAfterTime)
+        {
+            AutoEnder = AutoEndPopup(automaticCloseTime);
+            StartCoroutine(AutoEnder);
+        }
+
         //Set and store current game state
         startingBattleState = BattleManagerScript.Instance.CurrentBattleState;
         BattleManagerScript.Instance.CurrentBattleState = BattleState.FungusPuppets;
@@ -118,14 +128,30 @@ public class PopUpItem : MonoBehaviour
             yield return null;
         }
 
-        yield return PopUpEnd();
+        if (AutoEnder != null) StopCoroutine(AutoEnder);
 
-        gameObject.SetActive(false);
+        StartCoroutine(PopUpEnd());
     }
 
     public void PlayerCompletePopup(int player)
     {
         popupComplete = true;
+    }
+
+    IEnumerator AutoEnder = null;
+    IEnumerator AutoEndPopup(float afterTime)
+    {
+        while(afterTime > 0f)
+        {
+            afterTime -= Time.deltaTime;
+            yield return null;
+        }
+
+        if (PopUpper != null) StopCoroutine(PopUpper);
+
+        popupComplete = true;
+
+        StartCoroutine(PopUpEnd());
     }
 
     IEnumerator PopUpEnd()
@@ -143,5 +169,7 @@ public class PopUpItem : MonoBehaviour
         while (anim.isPlaying) yield return null;
 
         popupBox.gameObject.SetActive(false);
+
+        gameObject.SetActive(false);
     }
 }

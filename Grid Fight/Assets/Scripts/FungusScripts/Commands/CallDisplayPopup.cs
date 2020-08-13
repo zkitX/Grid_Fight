@@ -18,6 +18,8 @@ public class CallDisplayPopup : Command
     [SerializeField] [TextArea(10, 15)] protected string popupDescription = "<Description Here>";
     [SerializeField] protected Sprite popupImage = null;
     [SerializeField] [Tooltip("Time before the player can skip the popup")] protected float holdTime = 0.0f;
+    [SerializeField] protected bool autoEndAfterTime = false;
+    [ConditionalField("autoEndAfterTime")] [SerializeField] protected float autoEndTime = 5f;
 
     [Header("Styling")]
     [SerializeField] protected Vector2 screenPositionOffset = Vector2.zero;
@@ -41,7 +43,7 @@ public class CallDisplayPopup : Command
         }
 
         yield return popup.TriggerPopup(
-            screenPositionOffset, popupTitle, popupDescription, popupImage, holdTime,
+            screenPositionOffset, popupTitle, popupDescription, popupImage, holdTime, autoEndAfterTime, autoEndTime,
             adjustColors ? boxColor : new Color(), adjustColors ? titleColor : new Color(), adjustColors ? descriptionColor : new Color()
             );
 
