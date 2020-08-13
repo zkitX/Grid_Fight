@@ -66,10 +66,14 @@ public class ParticleHelperScript : MonoBehaviour
 
     private void OnEnable()
     {
-        foreach (TrailRenderer item in GetComponentsInChildren<TrailRenderer>())
+
+
+        for (int i = 0; i < Trails.Count; i++)
         {
-            item.Clear();
+           // Trails[i].Clear();
+            Trails[i].time = 0;
         }
+        Invoke("ResetTrailsTime", 0.1f);
     }
 
     private void OnDisable()
@@ -77,7 +81,15 @@ public class ParticleHelperScript : MonoBehaviour
         SetSimulationSpeedToBase();
     }
 
+    private void ResetTrailsTime()
+    {
+        for (int i = 0; i < Trails.Count; i++)
+        {
+            Trails[i].time = TrailInitialTime[i];
+            Trails[i].emitting = true;
+        }
 
+    }
 
     public void ResetParticle()
     {
