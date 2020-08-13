@@ -365,7 +365,6 @@ public Vector2 Duration_Debuff_Trap_ForTime;
     public void SetupEffect(List<ScriptableObjectAttackEffect> effect, float duration, ParticlesType tileParticlesID, bool destroyOnCollection = true)
     {
         destroyEffectOnCollection = destroyOnCollection;
-        isColliding = false;
         Effects.AddRange(effect);
         StartCoroutine(EffectCo(duration, tileParticlesID, effect));
     }
@@ -414,12 +413,19 @@ public Vector2 Duration_Debuff_Trap_ForTime;
             {
                 //Subscribe to the TargetCharacter_TileMovementCompleteEvent event
                 targetCharacter.TileMovementCompleteEvent += TargetCharacter_TileMovementCompleteEvent;
-                isColliding = true;
             }
             else if(targetCharacter != null && targetCharacter.UMS.Pos.Contains(Pos))
             {
                 TargetCharacter_TileMovementCompleteEvent(targetCharacter);
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag.Contains("Side"))
+        {
+            isColliding = false;
         }
     }
 
@@ -458,7 +464,6 @@ public Vector2 Duration_Debuff_Trap_ForTime;
     //Setup the Tile effect
     private void TargetCharacter_TileMovementCompleteEvent(BaseCharacter movingChar)
     {
-
         movingChar.TileMovementCompleteEvent -= TargetCharacter_TileMovementCompleteEvent;
         foreach (ScriptableObjectAttackEffect effect in Effects)
         {
@@ -467,7 +472,8 @@ public Vector2 Duration_Debuff_Trap_ForTime;
 
             movingChar.Buff_DebuffCo(bdClass);
         }
-       
+        isColliding = true;
+
 
 
 

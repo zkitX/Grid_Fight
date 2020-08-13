@@ -1396,31 +1396,71 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
         return BuffsDebuffsList.Where(r => r.CurrentBuffDebuff.Effect.StatsToAffect == type).FirstOrDefault();
     }
+
+
+    BuffDebuffClass buffDebuff;
     public void Buff_DebuffCo(Buff_DebuffClass bdClass)
     {
         if (!SpineAnim.CurrentAnim.Contains("Reverse") && CharInfo.HealthPerc > 0)
         {
-            BuffDebuffClass item = BuffsDebuffsList.Where(r => r.Stat == bdClass.Effect.StatsToAffect).FirstOrDefault();
-            if (item == null) //Create the new buffDebuff
+            List<BuffDebuffClass> items = BuffsDebuffsList.Where(r => r.Stat == bdClass.Effect.StatsToAffect).ToList();
+            if (items.Count == 0) //Create the new buffDebuff
             {
                 //Debug.Log(bdClass.Name + "   " + newBuffDebuff.Last());
-                item = new BuffDebuffClass(bdClass.Effect.StatsToAffect, bdClass.Effect.level, bdClass, bdClass.Effect.Duration, bdClass.EffectMaker);
-                item.BuffDebuffCo = Buff_DebuffCoroutine(item);
-                BuffsDebuffsList.Insert(0, item);
+                buffDebuff = new BuffDebuffClass(bdClass.Effect.StatsToAffect, bdClass.Effect.level, bdClass, bdClass.Effect.Duration, bdClass.EffectMaker);
+                buffDebuff.BuffDebuffCo = Buff_DebuffCoroutine(buffDebuff);
+                BuffsDebuffsList.Insert(0, buffDebuff);
                 UMS.buffIconHandler.RefreshIcons(BuffsDebuffsList);
-                item.currentBuffValue = bdClass.Value;
-                StartCoroutine(item.BuffDebuffCo);
+                buffDebuff.currentBuffValue = bdClass.Value;
+                StartCoroutine(buffDebuff.BuffDebuffCo);
             }
             else //Refresh current BuffDebuff duration
             {
-                if(bdClass.Effect.StackType == BuffDebuffStackType.Stackable && bdClass.Effect.maxStack > item.CurrentStack)
+                if (items[0].CurrentBuffDebuff.Effect.level == bdClass.Effect.level)
                 {
-                    item.CurrentBuffDebuff.values += bdClass.values;
-                    item.CurrentStack++;
-                    item.UpdateBuffValue();
+                    if (bdClass.Effect.StackType == BuffDebuffStackType.Stackable && items[0].CurrentStack < bdClass.Effect.maxStack)
+                    {
+                        buffDebuff = new BuffDebuffClass(bdClass.Effect.StatsToAffect, bdClass.Effect.level, bdClass, bdClass.Effect.Duration, bdClass.EffectMaker);
+                        buffDebuff.BuffDebuffCo = Buff_DebuffCoroutine(buffDebuff);
+                        BuffsDebuffsList.Insert(0, buffDebuff);
+                        UMS.buffIconHandler.RefreshIcons(BuffsDebuffsList);
+                        buffDebuff.currentBuffValue = bdClass.Value;
+                        buffDebuff.CurrentStack = items[0].CurrentStack + 1;
+                        StartCoroutine(buffDebuff.BuffDebuffCo);
+                        foreach (var item in items)
+                        {
+                            item.CurrentStack++;
+                        }
+                    }
+                    else if (bdClass.Effect.StackType == BuffDebuffStackType.Refreshable)
+                    {
+                        items[0].Duration = bdClass.Effect.Duration;
+                        items[0].CurrentBuffDebuff.Timer = 0;
+                    }
                 }
-                item.Duration = bdClass.Effect.Duration;
-                item.CurrentBuffDebuff.Timer = 0;
+                else if (items[0].CurrentBuffDebuff.Effect.level > bdClass.Effect.level)
+                {
+                    
+                }
+                else if (items[0].CurrentBuffDebuff.Effect.level < bdClass.Effect.level)
+                {
+                    
+                    buffDebuff = new BuffDebuffClass(bdClass.Effect.StatsToAffect, bdClass.Effect.level, bdClass, bdClass.Effect.Duration, bdClass.EffectMaker);
+                    buffDebuff.BuffDebuffCo = Buff_DebuffCoroutine(buffDebuff);
+                    BuffsDebuffsList.Insert(0, buffDebuff);
+                    UMS.buffIconHandler.RefreshIcons(BuffsDebuffsList);
+                    buffDebuff.currentBuffValue = bdClass.Value;
+                    StartCoroutine(buffDebuff.BuffDebuffCo);
+                    foreach (var item in items)
+                    {
+                        item.CurrentStack++;
+                    }
+
+                    if (bdClass.Effect.StackType == BuffDebuffStackType.Refreshable)
+                    {
+                        items[0].CurrentBuffDebuff.Stop_Co = true;
+                    }
+                }
             }
         }
     }
@@ -1687,7 +1727,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
         }
 
-
+        if (bdClass.CurrentBuffDebuff.Effect.StackType == BuffDebuffStackType.Stackable || bdClass.CurrentStack > 0)
+        {
+            foreach (BuffDebuffClass item in BuffsDebuffsList.Where(r=> r.CurrentBuffDebuff.Effect.StatsToAffect == bdClass.CurrentBuffDebuff.Effect.StatsToAffect).ToList())
+            {
+                item.CurrentStack--;
+            }
+        }
         BuffsDebuffsList.Remove(bdClass);
         UMS.buffIconHandler.RefreshIcons(BuffsDebuffsList);
         if (ps != null && ps.activeInHierarchy)
