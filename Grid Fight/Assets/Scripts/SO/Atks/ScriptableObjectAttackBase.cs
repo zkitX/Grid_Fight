@@ -21,7 +21,6 @@ public class ScriptableObjectAttackBase : ScriptableObject
         }
     }
 
-    public int Chances = 100;
     public AttackType CurrentAttackType;
     public float AttackRatioMultiplier = 1;
     [SerializeField]
