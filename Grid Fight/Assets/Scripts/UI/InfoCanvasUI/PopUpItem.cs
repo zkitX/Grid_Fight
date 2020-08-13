@@ -128,9 +128,7 @@ public class PopUpItem : MonoBehaviour
             yield return null;
         }
 
-        if (AutoEnder != null) StopCoroutine(AutoEnder);
-
-        StartCoroutine(PopUpEnd());
+        EndPopupCos();
     }
 
     public void PlayerCompletePopup(int player)
@@ -147,7 +145,13 @@ public class PopUpItem : MonoBehaviour
             yield return null;
         }
 
-        if (PopUpper != null) StopCoroutine(PopUpper);
+        EndPopupCos();
+    }
+
+    void EndPopupCos()
+    {
+
+        StopAllCoroutines();
 
         popupComplete = true;
 
