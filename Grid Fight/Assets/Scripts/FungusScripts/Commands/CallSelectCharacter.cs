@@ -32,7 +32,7 @@ public class CallSelectCharacter : Command
             }
         }
         BattleManagerScript.Instance.SelectCharacter(playerController, character);
-        NewIManager.Instance.SetSelected(true, playerController, characterID);
+        NewIManager.Instance.SetSelected(true, playerController, characterID, character.UMS.Side);
     }
 
     #region Public members

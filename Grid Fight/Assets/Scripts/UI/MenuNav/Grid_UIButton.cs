@@ -33,10 +33,6 @@ public class Grid_UIButton : MonoBehaviour
     public UI_ActionsClass[] SelectActions;
     public UI_ActionsClass[] DeselectActions;
 
-    //public List<UI_ActionsClass> PressActionsL = new List<UI_ActionsClass>();
-    //public List<UI_ActionsClass> SelectActionsL = new List<UI_ActionsClass>();
-    //public List<UI_ActionsClass> DeselectActionsL = new List<UI_ActionsClass>();
-
     public bool Active
     {
         get
@@ -69,31 +65,6 @@ public class Grid_UIButton : MonoBehaviour
     {
         ID = Grid_UINavigator.Instance.SetupNewButtonInfo(this);
         GetComponent<BoxCollider2D>().size = GetComponent<Image>().rectTransform.rect.size;
-
-        /*PressActionsL = PressActions.ToList();
-        SelectActionsL = SelectActions.ToList();
-        DeselectActionsL = DeselectActions.ToList();
-        foreach(UI_ActionsClass uac in PressActionsL)
-        {
-            foreach(Grid_UIActions act in uac.uiActions)
-            {
-                uac.uiActionsL.Add(act);
-            }
-        }
-        foreach (UI_ActionsClass uac in SelectActionsL)
-        {
-            foreach (Grid_UIActions act in uac.uiActions)
-            {
-                uac.uiActionsL.Add(act);
-            }
-        }
-        foreach (UI_ActionsClass uac in DeselectActionsL)
-        {
-            foreach (Grid_UIActions act in uac.uiActions)
-            {
-                uac.uiActionsL.Add(act);
-            }
-        }*/
     }
 
     private void OnDestroy()

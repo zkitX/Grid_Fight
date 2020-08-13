@@ -183,6 +183,7 @@ MonoBehaviour:
     IsRelationshipUpdateForTheWholeTeam: 1
     CharTargetRecruitable: []
     CharTarget: 
+  VariableName: 
   NextBlock: {fileID: 0}
 --- !u!1 &61551814167393120
 GameObject:
@@ -11493,6 +11494,7 @@ MonoBehaviour:
     IsRelationshipUpdateForTheWholeTeam: 1
     CharTargetRecruitable: []
     CharTarget: 
+  VariableName: 
   NextBlock: {fileID: 0}
 --- !u!1 &2047408692139389457
 GameObject:
@@ -12920,6 +12922,7 @@ MonoBehaviour:
     IsRelationshipUpdateForTheWholeTeam: 1
     CharTargetRecruitable: []
     CharTarget: 
+  VariableName: 
   NextBlock: {fileID: 0}
 --- !u!1 &2329454538438497318
 GameObject:
@@ -19781,6 +19784,7 @@ MonoBehaviour:
     IsRelationshipUpdateForTheWholeTeam: 1
     CharTargetRecruitable: []
     CharTarget: 
+  VariableName: 
   NextBlock: {fileID: 0}
 --- !u!1 &4377668423922226249
 GameObject:
@@ -21607,6 +21611,7 @@ MonoBehaviour:
     IsRelationshipUpdateForTheWholeTeam: 1
     CharTargetRecruitable: []
     CharTarget: 
+  VariableName: 
   NextBlock: {fileID: 0}
 --- !u!1 &5123881325110189735
 GameObject:
@@ -33743,6 +33748,7 @@ MonoBehaviour:
     IsRelationshipUpdateForTheWholeTeam: 1
     CharTargetRecruitable: []
     CharTarget: 
+  VariableName: 
   NextBlock: {fileID: 0}
 --- !u!1 &7598885205253544906
 GameObject:
@@ -33945,12 +33951,12 @@ GameObject:
   - component: {fileID: 3781252380274468469}
   - component: {fileID: 6160542641867614550}
   - component: {fileID: 4391505797846440697}
-  - component: {fileID: 8095378915006816104}
   - component: {fileID: 1020548472}
   - component: {fileID: 1020548482}
   - component: {fileID: 1020548483}
   - component: {fileID: 1020548473}
   - component: {fileID: 7368442339127092342}
+  - component: {fileID: 7514015482642478215}
   m_Layer: 0
   m_Name: EventManager_PvP_Test
   m_TagString: Untagged
@@ -34023,7 +34029,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 3298265418519787414}
   selectedCommands:
-  - {fileID: 7368442339127092342}
+  - {fileID: 1020548482}
   variables: []
   description: 
   stepPause: 0
@@ -34073,7 +34079,7 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: -376.33316
-    y: -313.26685
+    y: -315.1899
     width: 120
     height: 40
   tint: {r: 0, g: 1, b: 0.0013723373, a: 1}
@@ -34081,7 +34087,7 @@ MonoBehaviour:
   itemId: 250
   blockName: Start PvP
   description: 
-  eventHandler: {fileID: 8095378915006816104}
+  eventHandler: {fileID: 7514015482642478215}
   commandList:
   - {fileID: 1020548472}
   - {fileID: 1020548483}
@@ -34204,19 +34210,6 @@ MonoBehaviour:
     floatRef: {fileID: 0}
     floatVal: 1.6
   durationOLD: 0
---- !u!114 &8095378915006816104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7646273679360761177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a71fa79f57b6f449b3d2c293b95f05d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 3298265418519787414}
 --- !u!114 &1020548472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34299,6 +34292,19 @@ MonoBehaviour:
   indentLevel: 0
   playerController: 1
   characterID: 1024
+--- !u!114 &7514015482642478215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7646273679360761177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c1f3b9a4ed8db246868573a3c0c4dcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentBlock: {fileID: 3298265418519787414}
 --- !u!1 &7749287801178792678
 GameObject:
   m_ObjectHideFlags: 0
