@@ -436,8 +436,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charOwner: {fileID: 0}
-  testAtkEffect: {fileID: 0}
   Name: Daria
   CharacterIcon: {fileID: 21300000, guid: cfdcc35012e54514a9c5cc1f11bfc3ef, type: 3}
   Mask: {fileID: 0}
@@ -459,91 +457,93 @@ MonoBehaviour:
   AIs: []
   CharacterRespawnLength: 180
   CharacterSelection: 0
-  RapidAttack:
-    DamageMultiplier: {x: 1, y: 1}
-    CriticalChance: {x: 2, y: 6.5}
-    LevelMultiplier: 0
-    B_DamageMultiplier: {x: 1, y: 1}
-    B_CriticalChance: {x: 2, y: 2}
-  PowerfulAttac:
-    DamageMultiplier: {x: 4, y: 4}
-    CriticalChance: {x: 3, y: 7}
-    LevelMultiplier: 0
-    B_DamageMultiplier: {x: 3, y: 3}
-    B_CriticalChance: {x: 3, y: 5}
   HealthStats:
-    Health: 62
-    Base: 62
-    Regeneration: 0.8
-    BaseHealthRegeneration: 0.8
-    LevelMultiplier: 30
+    Health: 59
+    Base: 59
+    Regeneration: 0.81
+    BaseHealthRegeneration: 0.81
+    Armour: 1.3
+    LevelMultiplier: 41
     B_Health: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseHealthRegeneration: 0
-  StaminaStats:
-    Stamina: 29
-    Base: 29
-    Regeneration: 1.3
-    BaseStaminaRegeneration: 1.3
-    LevelMultiplier: 37
-    B_Stamina: 0
-    B_Base: 0
-    B_Regeneration: 0
-    B_BaseStaminaRegeneration: 0
+    B_Armour: 1
   ShieldStats:
-    Shield: 4
-    Base: 4
-    Regeneration: 0.27
-    BaseShieldRegeneration: 0.27
-    LevelMultiplier: 30
+    Shield: 3.2
+    Base: 3.2
+    Regeneration: 0.22
+    BaseShieldRegeneration: 0.22
+    ShieldAbsorbtion: 0.5
+    Invulnerability: 0.2
+    MinionShieldChances: 20
+    MinionPerfectShieldChances: 5
+    LevelMultiplier: 14
     B_Shield: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseShieldRegeneration: 0
+    B_ShieldOnDefence: 0
+    B_Invulnerability: 0.2
+    B_MinionShieldChances: 20
+    B_MinionPerfectShieldChances: 5
+  EtherStats:
+    Ether: 58
+    Base: 58
+    Regeneration: 2.9
+    BaseEtherRegeneration: 2.9
+    LevelMultiplier: 45
+    B_Stamina: 0
+    B_Base: 0
+    B_Regeneration: 0
+    B_BaseStaminaRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
-    TileMovementTime: 1
+    TileMovementTime: 0.48
     MovementSpeed: 1.9
     CuttingPerc: 0.85
     IntroPerc: 0.15
     LoopPerc: 0.7
     EndPerc: 0.15
-    AttackSpeed: 1.4
-    AttackSpeedRatio: 3
-    BulletSpeed: 2.2
+    AttackLoopDuration: 0.5
+    IdleToAttackDuration: 0.01
     LeaveSpeed: 3
     BaseSpeed_LevelMultiplier: 0
-    MovementSpeed_LevelMultiplier: 4
+    MovementSpeed_LevelMultiplier: 3.4
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
+    WeakBulletSpeed: 2.1
+    StrongBulletSpeed: 2.1
     B_BaseSpeed: 1
     B_MovementSpeed: 1
     B_AttackSpeed: 1
-    B_AttackSpeedRatio: 0
-    B_BulletSpeed: 5
     B_LeaveSpeed: 3
     B_IdleToAtkDuration: 0.2
     B_AtkToIdleDuration: 0.2
+    B_WeakBulletSpeed: 5
+    B_StrongBulletSpeed: 5
   DamageStats:
-    BaseDamage: 3.8
+    BaseDamage: 6.1
     B_BaseDamage: 10
     ElementalsResistence: []
     CurrentElemental: 0
-    LevelMultiplier: 10
-  DefenceStats:
-    BaseDefence: 3
-    Invulnerability: 0.2
-    MinionDefenceChances: 20
-    MinionPerfectDefenceChances: 5
-    B_BaseDefence: 10
-    B_Invulnerability: 0.2
-    B_MinionDefenceChances: 20
-    B_MinionPerfectDefenceChances: 5
+    LevelMultiplier: 41
+  WeakAttack:
+    DamageMultiplier: {x: 0.95, y: 1.1}
+    CriticalChance: {x: 6.8, y: 7.2}
+    Chances: {x: 0.93, y: 0.95}
     LevelMultiplier: 0
-  Special1LoadingDuration: 0
-  Special2LoadingDuration: 0
-  Special3LoadingDuration: 0
+    B_DamageMultiplier: {x: 1, y: 1}
+    B_CriticalChance: {x: 2, y: 2}
+    B_Chances: {x: 2, y: 2}
+  StrongAttac:
+    DamageMultiplier: {x: 3.6, y: 3.8}
+    CriticalChance: {x: 7.9, y: 8.1}
+    Chances: {x: 0.92, y: 0.94}
+    LevelMultiplier: 0
+    B_DamageMultiplier: {x: 3, y: 3}
+    B_CriticalChance: {x: 3, y: 5}
+    B_Chances: {x: 2, y: 2}
   ExperienceValue: 0
   MovementTimer: {x: 5, y: 8}
   B_MovementTimer: {x: 5, y: 8}

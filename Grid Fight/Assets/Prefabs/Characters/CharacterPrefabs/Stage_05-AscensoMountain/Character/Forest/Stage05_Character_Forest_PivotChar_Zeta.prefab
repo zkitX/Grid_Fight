@@ -868,8 +868,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charOwner: {fileID: 0}
-  testAtkEffect: {fileID: 0}
   Name: Zeta
   CharacterIcon: {fileID: 21300000, guid: 9e6775b7fd16b624eb659df780a94506, type: 3}
   Mask: {fileID: 0}
@@ -891,91 +889,93 @@ MonoBehaviour:
   AIs: []
   CharacterRespawnLength: 180
   CharacterSelection: 3
-  RapidAttack:
-    DamageMultiplier: {x: 1, y: 1}
-    CriticalChance: {x: 2, y: 5}
-    LevelMultiplier: 0
-    B_DamageMultiplier: {x: 1, y: 1}
-    B_CriticalChance: {x: 2, y: 2}
-  PowerfulAttac:
-    DamageMultiplier: {x: 3.2, y: 3.2}
-    CriticalChance: {x: 3, y: 3}
-    LevelMultiplier: 0
-    B_DamageMultiplier: {x: 3, y: 3}
-    B_CriticalChance: {x: 3, y: 5}
   HealthStats:
-    Health: 59
-    Base: 59
-    Regeneration: 0.5
-    BaseHealthRegeneration: 0.5
-    LevelMultiplier: 26
+    Health: 71
+    Base: 71
+    Regeneration: 0.81
+    BaseHealthRegeneration: 0.81
+    Armour: 1.58
+    LevelMultiplier: 43
     B_Health: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseHealthRegeneration: 0
-  StaminaStats:
-    Stamina: 30
-    Base: 30
-    Regeneration: 1.1
-    BaseStaminaRegeneration: 1.1
-    LevelMultiplier: 38
-    B_Stamina: 0
-    B_Base: 0
-    B_Regeneration: 0
-    B_BaseStaminaRegeneration: 0
+    B_Armour: 1
   ShieldStats:
-    Shield: 4.5
-    Base: 4.5
-    Regeneration: 0.16
-    BaseShieldRegeneration: 0.16
-    LevelMultiplier: 20
+    Shield: 3.6
+    Base: 3.6
+    Regeneration: 0.38
+    BaseShieldRegeneration: 0.38
+    ShieldAbsorbtion: 0.5
+    Invulnerability: 0.2
+    MinionShieldChances: 20
+    MinionPerfectShieldChances: 5
+    LevelMultiplier: 18
     B_Shield: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseShieldRegeneration: 0
+    B_ShieldOnDefence: 0
+    B_Invulnerability: 0.2
+    B_MinionShieldChances: 20
+    B_MinionPerfectShieldChances: 5
+  EtherStats:
+    Ether: 35
+    Base: 35
+    Regeneration: 1.83
+    BaseEtherRegeneration: 1.83
+    LevelMultiplier: 25
+    B_Stamina: 0
+    B_Base: 0
+    B_Regeneration: 0
+    B_BaseStaminaRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
-    TileMovementTime: 1
+    TileMovementTime: 0.3
     MovementSpeed: 2
     CuttingPerc: 0.85
     IntroPerc: 0.15
     LoopPerc: 0.7
     EndPerc: 0.15
-    AttackSpeed: 1.8
-    AttackSpeedRatio: 2
-    BulletSpeed: 2.6
+    AttackLoopDuration: 0.5
+    IdleToAttackDuration: 0.01
     LeaveSpeed: 3
     BaseSpeed_LevelMultiplier: 0
-    MovementSpeed_LevelMultiplier: 3.9
+    MovementSpeed_LevelMultiplier: 5.2
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
+    WeakBulletSpeed: 2.6
+    StrongBulletSpeed: 2.6
     B_BaseSpeed: 1
     B_MovementSpeed: 1
     B_AttackSpeed: 1
-    B_AttackSpeedRatio: 0
-    B_BulletSpeed: 5
     B_LeaveSpeed: 3
     B_IdleToAtkDuration: 0.2
     B_AtkToIdleDuration: 0.2
+    B_WeakBulletSpeed: 5
+    B_StrongBulletSpeed: 5
   DamageStats:
-    BaseDamage: 6.1
+    BaseDamage: 5.1
     B_BaseDamage: 10
     ElementalsResistence: []
     CurrentElemental: 0
-    LevelMultiplier: 34
-  DefenceStats:
-    BaseDefence: 3
-    Invulnerability: 0.2
-    MinionDefenceChances: 20
-    MinionPerfectDefenceChances: 5
-    B_BaseDefence: 10
-    B_Invulnerability: 0.2
-    B_MinionDefenceChances: 20
-    B_MinionPerfectDefenceChances: 5
+    LevelMultiplier: 24
+  WeakAttack:
+    DamageMultiplier: {x: 0.95, y: 1.1}
+    CriticalChance: {x: 1.9, y: 2.1}
+    Chances: {x: 0.88, y: 0.89}
     LevelMultiplier: 0
-  Special1LoadingDuration: 0
-  Special2LoadingDuration: 0
-  Special3LoadingDuration: 0
+    B_DamageMultiplier: {x: 1, y: 1}
+    B_CriticalChance: {x: 2, y: 2}
+    B_Chances: {x: 2, y: 2}
+  StrongAttac:
+    DamageMultiplier: {x: 3.1, y: 3.3}
+    CriticalChance: {x: 2.8, y: 3}
+    Chances: {x: 0.86, y: 0.87}
+    LevelMultiplier: 0
+    B_DamageMultiplier: {x: 3, y: 3}
+    B_CriticalChance: {x: 3, y: 5}
+    B_Chances: {x: 2, y: 2}
   ExperienceValue: 0
   MovementTimer: {x: 5, y: 8}
   B_MovementTimer: {x: 5, y: 8}

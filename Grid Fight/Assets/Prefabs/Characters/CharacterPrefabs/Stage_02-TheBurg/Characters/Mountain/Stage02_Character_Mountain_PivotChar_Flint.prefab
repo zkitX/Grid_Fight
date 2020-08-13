@@ -472,8 +472,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charOwner: {fileID: 0}
-  testAtkEffect: {fileID: 0}
   Name: Flint
   CharacterIcon: {fileID: 21300000, guid: a747e321af29b6a44bc0cb3c745fa364, type: 3}
   Mask: {fileID: 0}
@@ -495,91 +493,93 @@ MonoBehaviour:
   AIs: []
   CharacterRespawnLength: 180
   CharacterSelection: 0
-  RapidAttack:
-    DamageMultiplier: {x: 1, y: 1}
-    CriticalChance: {x: 2, y: 3}
-    LevelMultiplier: 0
-    B_DamageMultiplier: {x: 1, y: 1}
-    B_CriticalChance: {x: 2, y: 2}
-  PowerfulAttac:
-    DamageMultiplier: {x: 3.2, y: 3.2}
-    CriticalChance: {x: 3, y: 5}
-    LevelMultiplier: 0
-    B_DamageMultiplier: {x: 3, y: 3}
-    B_CriticalChance: {x: 3, y: 5}
   HealthStats:
-    Health: 92
-    Base: 92
-    Regeneration: 0.7
-    BaseHealthRegeneration: 0.7
-    LevelMultiplier: 45
+    Health: 71
+    Base: 71
+    Regeneration: 0.91
+    BaseHealthRegeneration: 0.91
+    Armour: 1.82
+    LevelMultiplier: 52
     B_Health: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseHealthRegeneration: 0
-  StaminaStats:
-    Stamina: 37
-    Base: 37
-    Regeneration: 1.3
-    BaseStaminaRegeneration: 1.3
-    LevelMultiplier: 43
-    B_Stamina: 0
-    B_Base: 0
-    B_Regeneration: 0
-    B_BaseStaminaRegeneration: 0
+    B_Armour: 1
   ShieldStats:
-    Shield: 5.5
-    Base: 5.5
-    Regeneration: 0.26
-    BaseShieldRegeneration: 0.26
-    LevelMultiplier: 30
+    Shield: 4.4
+    Base: 4.4
+    Regeneration: 0.42
+    BaseShieldRegeneration: 0.42
+    ShieldAbsorbtion: 0.5
+    Invulnerability: 0.2
+    MinionShieldChances: 20
+    MinionPerfectShieldChances: 5
+    LevelMultiplier: 20
     B_Shield: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseShieldRegeneration: 0
+    B_ShieldOnDefence: 0
+    B_Invulnerability: 0.2
+    B_MinionShieldChances: 20
+    B_MinionPerfectShieldChances: 5
+  EtherStats:
+    Ether: 48
+    Base: 48
+    Regeneration: 2.3
+    BaseEtherRegeneration: 2.3
+    LevelMultiplier: 39
+    B_Stamina: 0
+    B_Base: 0
+    B_Regeneration: 0
+    B_BaseStaminaRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
-    TileMovementTime: 1
+    TileMovementTime: 0.45
     MovementSpeed: 1.7
     CuttingPerc: 0.85
     IntroPerc: 0.15
     LoopPerc: 0.7
     EndPerc: 0.15
-    AttackSpeed: 1.6
-    AttackSpeedRatio: 4
-    BulletSpeed: 2.1
+    AttackLoopDuration: 0.5
+    IdleToAttackDuration: 0.01
     LeaveSpeed: 3
     BaseSpeed_LevelMultiplier: 0
-    MovementSpeed_LevelMultiplier: 4
+    MovementSpeed_LevelMultiplier: 4.1
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
+    WeakBulletSpeed: 2.1
+    StrongBulletSpeed: 2.1
     B_BaseSpeed: 1
     B_MovementSpeed: 1
     B_AttackSpeed: 1
-    B_AttackSpeedRatio: 0
-    B_BulletSpeed: 5
     B_LeaveSpeed: 3
     B_IdleToAtkDuration: 0.2
     B_AtkToIdleDuration: 0.2
+    B_WeakBulletSpeed: 5
+    B_StrongBulletSpeed: 5
   DamageStats:
-    BaseDamage: 4.5
+    BaseDamage: 4.7
     B_BaseDamage: 10
     ElementalsResistence: []
     CurrentElemental: 0
-    LevelMultiplier: 5
-  DefenceStats:
-    BaseDefence: 4
-    Invulnerability: 0.2
-    MinionDefenceChances: 20
-    MinionPerfectDefenceChances: 5
-    B_BaseDefence: 10
-    B_Invulnerability: 0.2
-    B_MinionDefenceChances: 20
-    B_MinionPerfectDefenceChances: 5
+    LevelMultiplier: 29
+  WeakAttack:
+    DamageMultiplier: {x: 0.95, y: 1.1}
+    CriticalChance: {x: 5.9, y: 6.1}
+    Chances: {x: 0.85, y: 0.87}
     LevelMultiplier: 0
-  Special1LoadingDuration: 0
-  Special2LoadingDuration: 0
-  Special3LoadingDuration: 0
+    B_DamageMultiplier: {x: 1, y: 1}
+    B_CriticalChance: {x: 2, y: 2}
+    B_Chances: {x: 2, y: 2}
+  StrongAttac:
+    DamageMultiplier: {x: 3.05, y: 3.18}
+    CriticalChance: {x: 3.9, y: 4.1}
+    Chances: {x: 0.83, y: 0.85}
+    LevelMultiplier: 0
+    B_DamageMultiplier: {x: 3, y: 3}
+    B_CriticalChance: {x: 3, y: 5}
+    B_Chances: {x: 2, y: 2}
   ExperienceValue: 0
   MovementTimer: {x: 5, y: 8}
   B_MovementTimer: {x: 5, y: 8}

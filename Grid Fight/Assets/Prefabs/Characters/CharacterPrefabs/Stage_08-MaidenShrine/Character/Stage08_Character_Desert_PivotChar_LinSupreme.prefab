@@ -458,27 +458,27 @@ MonoBehaviour:
   CharacterRespawnLength: 180
   CharacterSelection: 0
   HealthStats:
-    Health: 30
-    Base: 30
-    Regeneration: 0.5
-    BaseHealthRegeneration: 0.5
-    Armour: 1
-    LevelMultiplier: 15
+    Health: 65
+    Base: 65
+    Regeneration: 0.81
+    BaseHealthRegeneration: 0.81
+    Armour: 1.38
+    LevelMultiplier: 30
     B_Health: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseHealthRegeneration: 0
     B_Armour: 1
   ShieldStats:
-    Shield: 50
-    Base: 50
-    Regeneration: 8
-    BaseShieldRegeneration: 8
+    Shield: 3.88
+    Base: 3.88
+    Regeneration: 0.35
+    BaseShieldRegeneration: 0.35
     ShieldAbsorbtion: 0.5
     Invulnerability: 0.2
     MinionShieldChances: 20
     MinionPerfectShieldChances: 5
-    LevelMultiplier: 50
+    LevelMultiplier: 10
     B_Shield: 0
     B_Base: 0
     B_Regeneration: 0
@@ -488,18 +488,18 @@ MonoBehaviour:
     B_MinionShieldChances: 20
     B_MinionPerfectShieldChances: 5
   EtherStats:
-    Ether: 40
-    Base: 40
-    Regeneration: 1
-    BaseEtherRegeneration: 1
-    LevelMultiplier: 30
+    Ether: 60
+    Base: 60
+    Regeneration: 3
+    BaseEtherRegeneration: 3
+    LevelMultiplier: 39
     B_Stamina: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseStaminaRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
-    TileMovementTime: 0.5
+    TileMovementTime: 0.47
     MovementSpeed: 1.6
     CuttingPerc: 0.7
     IntroPerc: 0.16
@@ -509,11 +509,11 @@ MonoBehaviour:
     IdleToAttackDuration: 0.01
     LeaveSpeed: 3
     BaseSpeed_LevelMultiplier: 0
-    MovementSpeed_LevelMultiplier: 0
+    MovementSpeed_LevelMultiplier: 2
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
-    WeakBulletSpeed: 5
-    StrongBulletSpeed: 5
+    WeakBulletSpeed: 2.1
+    StrongBulletSpeed: 2.1
     B_BaseSpeed: 1
     B_MovementSpeed: 1
     B_AttackSpeed: 1
@@ -523,23 +523,23 @@ MonoBehaviour:
     B_WeakBulletSpeed: 5
     B_StrongBulletSpeed: 5
   DamageStats:
-    BaseDamage: 10
+    BaseDamage: 7.5
     B_BaseDamage: 10
     ElementalsResistence: []
     CurrentElemental: 0
-    LevelMultiplier: 15
+    LevelMultiplier: 35
   WeakAttack:
-    DamageMultiplier: {x: 1, y: 1}
-    CriticalChance: {x: 2, y: 2}
-    Chances: {x: 0, y: 1}
+    DamageMultiplier: {x: 0.95, y: 1.1}
+    CriticalChance: {x: 6.95, y: 7.1}
+    Chances: {x: 0.96, y: 0.98}
     LevelMultiplier: 0
     B_DamageMultiplier: {x: 1, y: 1}
     B_CriticalChance: {x: 2, y: 2}
     B_Chances: {x: 2, y: 2}
   StrongAttac:
-    DamageMultiplier: {x: 3, y: 3}
-    CriticalChance: {x: 3, y: 5}
-    Chances: {x: 0, y: 1}
+    DamageMultiplier: {x: 3.6, y: 3.8}
+    CriticalChance: {x: 7.9, y: 8.1}
+    Chances: {x: 0.92, y: 0.94}
     LevelMultiplier: 0
     B_DamageMultiplier: {x: 3, y: 3}
     B_CriticalChance: {x: 3, y: 5}
