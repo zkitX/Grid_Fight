@@ -14,7 +14,7 @@ public class BattleTileTargetsScript : MonoBehaviour
     {
         Whiteline = transform.GetChild(0);
     }
-    public void SetAttack(float duration, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances, bool fireAnim = true)
+    public void SetAttack(float duration, Vector2Int pos, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances, bool fireAnim = true)
     {
         GameObject nextT = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Tile);
 
@@ -24,10 +24,10 @@ public class BattleTileTargetsScript : MonoBehaviour
         nextT.transform.localPosition = TargetsPosition[0];
         Targets.Add(tc);
         UpdateQueue();
-        StartCoroutine(FireTarget(tc, pos, damage, ele, attacker, atkEffects, effectChances, fireAnim));
+        StartCoroutine(FireTarget(tc, pos, ele, attacker, atkEffects, effectChances, fireAnim));
     }
 
-    private IEnumerator FireTarget(TargetClass tc, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances, bool fireAnim = true)
+    private IEnumerator FireTarget(TargetClass tc, Vector2Int pos, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances, bool fireAnim = true)
     {
         float timer = 0;
         Whiteline.gameObject.SetActive(true);
@@ -71,8 +71,7 @@ public class BattleTileTargetsScript : MonoBehaviour
             {
                 bool iscritical = attacker.CharInfo.IsCritical(true);
                 //Set damage to the hitting character
-                float dmg = damage * (iscritical ? 2 : 1);
-                effectOn = target.SetDamage(attacker, dmg, ele, iscritical);
+                effectOn = target.SetDamage(attacker, attacker.NextAttackTileDamage * (iscritical ? 2 : 1), ele, iscritical);
                 if (effectOn)
                 {
                     int chances = Random.Range(0, 100);
@@ -132,7 +131,7 @@ public class BattleTileTargetsScript : MonoBehaviour
     }
 
 
-    public void SetAttack(float duration, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances, float bulletTravelDuration)
+    public void SetAttack(float duration, Vector2Int pos, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances, float bulletTravelDuration)
     {
         GameObject nextT = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Tile);
 
@@ -142,12 +141,12 @@ public class BattleTileTargetsScript : MonoBehaviour
         nextT.transform.localPosition = TargetsPosition[0];
         Targets.Add(tc);
         UpdateQueue();
-        StartCoroutine(FireTarget_co(tc, pos, damage, ele, attacker, atkEffects, effectChances, bulletTravelDuration));
+        StartCoroutine(FireTarget_co(tc, pos, ele, attacker, atkEffects, effectChances, bulletTravelDuration));
     }
 
-    private IEnumerator FireTarget_co(TargetClass tc, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances, float bulletTravelDuration)
+    private IEnumerator FireTarget_co(TargetClass tc, Vector2Int pos, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances, float bulletTravelDuration)
     {
-        yield return FireTarget(tc, pos, damage, ele, attacker, atkEffects, effectChances, bulletTravelDuration);
+        yield return FireTarget(tc, pos, ele, attacker, atkEffects, effectChances, bulletTravelDuration);
         tc.RemainingTime = 0f;
         UpdateQueue(tc);
         if(attacker.IsOnField)
@@ -160,7 +159,7 @@ public class BattleTileTargetsScript : MonoBehaviour
         }
     }
 
-    private IEnumerator FireTarget(TargetClass tc, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances, float bulletTravelDuration)
+    private IEnumerator FireTarget(TargetClass tc, Vector2Int pos, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances, float bulletTravelDuration)
     {
         float timer = 0;
         Whiteline.gameObject.SetActive(true);
@@ -198,8 +197,7 @@ public class BattleTileTargetsScript : MonoBehaviour
             {
                 bool iscritical = attacker.CharInfo.IsCritical(true);
                 //Set damage to the hitting character
-                float dmg = damage * (iscritical ? 2 : 1);
-                effectOn = target.SetDamage(attacker, dmg, ele, iscritical);
+                effectOn = target.SetDamage(attacker, attacker.NextAttackTileDamage * (iscritical ? 2 : 1), ele, iscritical);
                 if (effectOn)
                 {
                     int chances = Random.Range(0, 100);

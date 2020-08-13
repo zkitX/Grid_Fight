@@ -517,6 +517,8 @@ public class CharacterType_Script : BaseCharacter
     {
         if (!GetCanUseStamina(CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackInput == AttackInputType.Weak).First().StaminaCost))
         {
+            SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
+            Atk1Queueing = false;
             return;
         }
         nextAttack = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackAnim == AttackAnimType.Weak_Atk).First();
