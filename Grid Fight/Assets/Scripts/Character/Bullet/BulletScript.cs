@@ -28,7 +28,6 @@ public class BulletScript : MonoBehaviour
     public BulletBehaviourInfoClass BulletBehaviourInfo;
     public BulletBehaviourInfoClassOnBattleFieldClass BulletBehaviourInfoTile;
     private bool SkillHit = false;
-	 
     //Private 
     private VFXBulletSpeedController vfx;
     private BattleTileScript bts;
@@ -61,7 +60,7 @@ public class BulletScript : MonoBehaviour
         vfx = GetComponentInChildren<VFXBulletSpeedController>();
         if (vfx != null)
         {
-            vfx.BulletTargetTime = CharOwner.CharInfo.SpeedStats.BulletSpeed;
+            vfx.BulletTargetTime = SOAttack.AttackInput == AttackInputType.Weak ? CharOwner.CharInfo.WeakAttack.BulletSpeed : CharOwner.CharInfo.StrongfulAttac.BulletSpeed;
             vfx.ApplyTargetTime();
         }
 
@@ -75,7 +74,7 @@ public class BulletScript : MonoBehaviour
         Vector3 destination = bts.transform.position + new Vector3(Side == SideType.LeftSide ? 0.2f : -0.2f, 0, 0);
         if (isColliding)
         {
-            BulletDuration = (CharOwner.CharInfo.SpeedStats.BulletSpeed / 12) * Mathf.Abs(bts.Pos.y - (StartingTile.y));
+            BulletDuration = ((SOAttack.AttackInput == AttackInputType.Weak ? CharOwner.CharInfo.WeakAttack.BulletSpeed : CharOwner.CharInfo.StrongfulAttac.BulletSpeed) / 12) * Mathf.Abs(bts.Pos.y - (StartingTile.y));
         }
         //Duration of the particles 
         PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharOwner.UMS.Side == SideType.LeftSide ? SOAttack.Particles.Left.Bullet : SOAttack.Particles.Right.Bullet, CharOwner.CharInfo.CharacterID, AttackParticlePhaseTypes.Bullet, transform, CharOwner.UMS.Side,
@@ -146,9 +145,9 @@ public class BulletScript : MonoBehaviour
             go = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Particles);
             go.transform.position = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position;
             go.GetComponent<BattleTileTargetScript>().StartTarget(
-                (Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position) * CharOwner.CharInfo.SpeedStats.BulletSpeed) /
+                (Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position) * (SOAttack.AttackInput == AttackInputType.Weak ? CharOwner.CharInfo.WeakAttack.BulletSpeed : CharOwner.CharInfo.StrongfulAttac.BulletSpeed)) /
                 Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position));
-            float duration = CharOwner.CharInfo.SpeedStats.BulletSpeed;
+            
             foreach (Vector2Int item in BulletBehaviourInfo.BulletEffectTiles)
             {
                 if (GridManagerScript.Instance.isPosOnField(DestinationTile + item))
@@ -159,7 +158,7 @@ public class BulletScript : MonoBehaviour
 
                         go = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Particles);
                         go.transform.position = btsT.transform.position;
-                        go.GetComponent<BattleTileTargetScript>().StartTarget(duration);
+                        go.GetComponent<BattleTileTargetScript>().StartTarget(SOAttack.AttackInput == AttackInputType.Weak ? CharOwner.CharInfo.WeakAttack.BulletSpeed : CharOwner.CharInfo.StrongfulAttac.BulletSpeed);
                     }
                 }
             }

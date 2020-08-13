@@ -164,7 +164,6 @@ public class CharacterInfoScript : MonoBehaviour
         public float AttackLoopDuration = 0.5f;
         [Range(0, 1)]
         public float IdleToAttackDuration = 0.01f;
-        public float BulletSpeed = 5;
         public float LeaveSpeed = 3;
         public float BaseSpeed_LevelMultiplier;
         public float MovementSpeed_LevelMultiplier;
@@ -174,7 +173,6 @@ public class CharacterInfoScript : MonoBehaviour
         [HideInInspector] public float B_BaseSpeed = 1;
         [HideInInspector] public float B_MovementSpeed = 1;
         [HideInInspector] public float B_AttackSpeed = 1;
-        [HideInInspector] public float B_BulletSpeed = 5;
         [HideInInspector] public float B_LeaveSpeed = 3;
         [HideInInspector] public float B_IdleToAtkDuration = 0.2f;
         [HideInInspector] public float B_AtkToIdleDuration = 0.2f;
@@ -198,10 +196,14 @@ public class CharacterInfoScript : MonoBehaviour
     {
         public Vector2 DamageMultiplier = new Vector2(1, 1);
         public Vector2 CriticalChance = new Vector2(2, 2);
+        public float BulletSpeed = 5;
+
         public float LevelMultiplier;
 
         [HideInInspector] public Vector2 B_DamageMultiplier = new Vector2(1, 1);
         [HideInInspector] public Vector2 B_CriticalChance = new Vector2(2, 2);
+        [HideInInspector] public float B_BulletSpeed = 5;
+
     }
 
     public StrongfulAttackClass StrongfulAttac;
@@ -210,10 +212,14 @@ public class CharacterInfoScript : MonoBehaviour
     {
         public Vector2 DamageMultiplier = new Vector2(3, 3);
         public Vector2 CriticalChance = new Vector2(3, 5);
+        public float BulletSpeed = 5;
+
         public float LevelMultiplier;
 
         [HideInInspector] public Vector2 B_DamageMultiplier = new Vector2(3, 3);
         [HideInInspector] public Vector2 B_CriticalChance = new Vector2(3, 5);
+        [HideInInspector] public float B_BulletSpeed = 5;
+
     }
 
 
@@ -388,10 +394,14 @@ public class CharacterInfoScript : MonoBehaviour
         //RapidAttack
         WeakAttack.B_CriticalChance = WeakAttack.CriticalChance;
         WeakAttack.B_DamageMultiplier = WeakAttack.DamageMultiplier;
+        WeakAttack.B_BulletSpeed = WeakAttack.BulletSpeed;
+
 
         //PowerfulAttac
         StrongfulAttac.B_CriticalChance = StrongfulAttac.CriticalChance;
         StrongfulAttac.B_DamageMultiplier = StrongfulAttac.DamageMultiplier;
+        StrongfulAttac.B_BulletSpeed = StrongfulAttac.BulletSpeed;
+
 
         //HealthStats
         HealthStats.B_Base = HealthStats.Base;
@@ -420,7 +430,6 @@ public class CharacterInfoScript : MonoBehaviour
         //SpeedStats
         SpeedStats.B_BaseSpeed = SpeedStats.BaseSpeed;
         SpeedStats.B_MovementSpeed = SpeedStats.MovementSpeed;
-        SpeedStats.B_BulletSpeed = SpeedStats.BulletSpeed;
         SpeedStats.B_LeaveSpeed = SpeedStats.LeaveSpeed;
         SpeedStats.B_IdleToAtkDuration = SpeedStats.IdleToAtkDuration;
         SpeedStats.B_AtkToIdleDuration = SpeedStats.AtkToIdleDuration;

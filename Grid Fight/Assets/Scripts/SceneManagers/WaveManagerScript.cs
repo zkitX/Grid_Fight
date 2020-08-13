@@ -154,7 +154,10 @@ public class WaveManagerScript : MonoBehaviour
         res.CharInfo.Ether = res.CharInfo.EtherStats.Base;
         res.CharInfo.SpeedStats.MovementSpeed = Random.Range(character.MovementSpeed.x, character.MovementSpeed.y);
         res.CharInfo.MovementTimer = character.MovementTimer;
-        
+        res.CharInfo.HealthStats.Armour = Random.Range(character.Armour.x, character.Armour.y);
+        res.CharInfo.ShieldStats.MinionShieldChances = Random.Range(character.MinionShieldChances.x, character.MinionShieldChances.y);
+        res.CharInfo.ShieldStats.MinionPerfectShieldChances = Random.Range(character.MinionPerfectShieldChances.x, character.MinionPerfectShieldChances.y);
+
         res.CharInfo.ExperienceValue = character.Exp;
         res.DeathAnim = character.DeathAnim;
         res.CharActionlist.Add(CharacterActionType.Move);
@@ -507,6 +510,9 @@ public class WaveCharacterInfoClass
     public Vector2 EtherRegeneration;
     public Vector2 MovementSpeed;
     public Vector2 MovementTimer;
+    public Vector2 Armour;
+    public Vector2 MinionShieldChances;
+    public Vector2 MinionPerfectShieldChances;
     public DeathAnimType DeathAnim;
     public float Exp;
 
