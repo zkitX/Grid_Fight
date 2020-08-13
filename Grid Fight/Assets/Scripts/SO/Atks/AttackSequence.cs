@@ -100,8 +100,8 @@ public class AttackSequence
             case StatsCheckType.Health:
                 curCheckValPerc = charInfo.HealthPerc;
                 break;
-            case StatsCheckType.Stamina:
-                curCheckValPerc = charInfo.StaminaPerc;
+            case StatsCheckType.Ether:
+                curCheckValPerc = charInfo.EtherPerc;
                 break;
             case StatsCheckType.MovementSpeed:
                 curCheckValPerc = charInfo.SpeedStats.MovementSpeed;

@@ -43,7 +43,7 @@ public class CharacterInfoScript : MonoBehaviour
     {
         get
         {
-            List<ScriptableObjectAttackBase> res = _CurrentAttackTypeInfo;
+            List<ScriptableObjectAttackBase> res = _CurrentAttackTypeInfo.ToList();
             res.AddRange(AddedAttackTypeInfo);
             return res;
         }
@@ -235,7 +235,7 @@ public class CharacterInfoScript : MonoBehaviour
         }
     }
 
-    public float StaminaPerc
+    public float EtherPerc
     {
         get
         {

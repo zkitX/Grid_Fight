@@ -240,10 +240,10 @@ public class NewICharacterVitality : MonoBehaviour
             HealthLerper = LerpVitality(healthBar, animationDuration, assignedCharDetails.CharInfo.HealthPerc / 100f);
             StartCoroutine(HealthLerper);
         }
-        if (assignedCharDetails.CharInfo.StaminaPerc / 100f != staminaBar.fillAmount)
+        if (assignedCharDetails.CharInfo.EtherPerc / 100f != staminaBar.fillAmount)
         {
             if (StaminaLerper != null) StopCoroutine(StaminaLerper);
-            StaminaLerper = LerpVitality(staminaBar, animationDuration, assignedCharDetails.CharInfo.StaminaPerc / 100f);
+            StaminaLerper = LerpVitality(staminaBar, animationDuration, assignedCharDetails.CharInfo.EtherPerc / 100f);
             StartCoroutine(StaminaLerper);
         }
         if (assignedCharDetails.CharInfo.ShieldPerc / 100f != shieldBar.fillAmount)

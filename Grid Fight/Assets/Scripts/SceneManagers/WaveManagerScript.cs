@@ -296,8 +296,11 @@ public class WaveManagerScript : MonoBehaviour
                             {
                                 for (int a = 0; a < test[i].UMS.Pos.Count; a++)
                                 {
-                                    GridManagerScript.Instance.SetBattleTileState(test[i].UMS.Pos[a], BattleTileStateType.Empty);
-                                    test[i].UMS.Pos[a] = Vector2Int.zero;
+                                    if(test[i].DeathAnim == DeathAnimType.Defeat)
+                                    {
+                                        GridManagerScript.Instance.SetBattleTileState(test[i].UMS.Pos[a], BattleTileStateType.Empty);
+                                        test[i].UMS.Pos[a] = Vector2Int.zero;
+                                    }
                                 }
                             }
                             yield break;
@@ -307,7 +310,6 @@ public class WaveManagerScript : MonoBehaviour
                 }
 
                 yield return new WaitForSeconds(0.5f);
-
             }
         }
     }

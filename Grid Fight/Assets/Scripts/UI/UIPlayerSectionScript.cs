@@ -64,12 +64,12 @@ public class UIPlayerSectionScript : MonoBehaviour
             if(currentSelectedCharacter.UMS.Side == SideType.LeftSide)
             {
                 CharacterHealthBar.rectTransform.anchoredPosition = new Vector2((CharacterHealthBar.rectTransform.rect.width * currentSelectedCharacter.CharInfo.HealthPerc) / 100, 0);
-                CharacterStaminaBar.rectTransform.anchoredPosition = new Vector2((CharacterStaminaBar.rectTransform.rect.width * currentSelectedCharacter.CharInfo.StaminaPerc) / 100, 0);
+                CharacterStaminaBar.rectTransform.anchoredPosition = new Vector2((CharacterStaminaBar.rectTransform.rect.width * currentSelectedCharacter.CharInfo.EtherPerc) / 100, 0);
             }
             else if (currentSelectedCharacter.UMS.Side == SideType.RightSide)
             {
                 CharacterHealthBar.rectTransform.anchoredPosition = new Vector2(-(CharacterHealthBar.rectTransform.rect.width * currentSelectedCharacter.CharInfo.HealthPerc) / 100, 0);
-                CharacterStaminaBar.rectTransform.anchoredPosition = new Vector2(-(CharacterStaminaBar.rectTransform.rect.width * currentSelectedCharacter.CharInfo.StaminaPerc) / 100, 0);
+                CharacterStaminaBar.rectTransform.anchoredPosition = new Vector2(-(CharacterStaminaBar.rectTransform.rect.width * currentSelectedCharacter.CharInfo.EtherPerc) / 100, 0);
             }
 
 

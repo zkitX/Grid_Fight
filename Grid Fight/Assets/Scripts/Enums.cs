@@ -301,7 +301,7 @@ public enum CharacterSelectionType
 
 public enum StatsCheckerType
 {
-    Perc,
+    Multiplier,
     Value
 }
 
@@ -313,23 +313,23 @@ public enum StatusEffectType
 
 public enum BuffDebuffStatsType
 {
-    DamageStats_BaseDamage,
-    Health_Overtime,
-    Health,
-    SpeedStats_BaseSpeed,
-    SpeedStats_MovementSpeed,
-    Drain,
-    Zombification,
-    BlockTile,
-    ShieldStats_BaseShieldRegeneration,
-    Drain_Overtime,
-    AttackChange,
-    StaminaStats_Stamina, 
-    Legion,
-    Invulnerable,
-    Rebirth,
-    Backfire,
-    Rage
+    Damage = 0,
+    Regen = 1,
+    Health = 2,
+    BaseSpeed = 3,
+    MovementSpeed = 4,
+    Drain = 5,
+    Zombie = 6,
+    BlockTile = 7,
+    ShieldRegeneration = 8,
+    Bleed = 9,
+    AttackChange = 10,
+    Ether = 11, 
+    Legion = 12,
+    Invulnerable = 13,
+    Rebirth = 14,
+    Backfire = 15,
+    Rage = 16
 }
 
 public enum BuffDebuffStackType
@@ -342,7 +342,7 @@ public enum StatsCheckType
 {
     None,
     Health,
-    Stamina,
+    Ether,
     AttackSpeed,
     MovementSpeed,
     BaseSpeed,

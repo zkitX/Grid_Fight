@@ -25,7 +25,7 @@ public class ScriptableObjectAttackEffectEditor : Editor
         {
             origin.RageAI = (ScriptableObjectAI)EditorGUILayout.ObjectField("RageAI", origin.RageAI, typeof(ScriptableObjectAI), false);
         }
-        if (origin.StatsToAffect == BuffDebuffStatsType.Zombification)
+        if (origin.StatsToAffect == BuffDebuffStatsType.Zombie)
         {
             var list = origin.AIs;
             int newCount = Mathf.Max(0, EditorGUILayout.IntField("Number of AIs", list.Count));
@@ -46,6 +46,14 @@ public class ScriptableObjectAttackEffectEditor : Editor
             origin.CloneAsManyAsCurrentEnemies = EditorGUILayout.Toggle("Clone count matches enemies", origin.CloneAsManyAsCurrentEnemies);
             if (!origin.CloneAsManyAsCurrentEnemies) origin.CloneAmount = EditorGUILayout.IntField("Number of clones", origin.CloneAmount);
             origin.CloneStartingEffect = (ScriptableObjectAttackEffect)EditorGUILayout.ObjectField("Clone Starting Effect", origin.CloneStartingEffect, typeof(ScriptableObjectAttackEffect), false);
+        }
+
+        if (GUILayout.Button("Apply name"))
+        {
+
+            string assetPath = AssetDatabase.GetAssetPath(origin.GetInstanceID());
+            AssetDatabase.RenameAsset(assetPath, origin.classification + "_" + origin.StatsToAffect + "_" + origin.StackType + "_" + origin.level);
+            AssetDatabase.SaveAssets();
         }
 
         EditorUtility.SetDirty(origin);

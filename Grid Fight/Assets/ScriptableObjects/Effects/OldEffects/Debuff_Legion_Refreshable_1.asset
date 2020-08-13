@@ -10,17 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2162115bd0e37014394e1dbf4dad6e54, type: 3}
-  m_Name: Speed2
+  m_Name: Debuff_Legion_Refreshable_1
   m_EditorClassIdentifier: 
-  Name: Speed_Buff_02
-  StatsToAffect: 23
+  level: 1
+  StackType: 0
+  maxStack: 3
+  StatsToAffect: 12
   StatsChecker: 0
-  Value: {x: 500, y: 500}
+  Value: {x: -2, y: -2}
   _Duration: {x: 0, y: 0}
-  AnimToFire: 11
+  AnimToFire: 13
   Particles: 1
-  classification: 0
-  icon: {fileID: 21300000, guid: 6ab3d45081819f54d8b6970ff07b7235, type: 3}
+  classification: 1
+  icon: {fileID: 21300000, guid: 7b917769af807c94cbcef8442036d37b, type: 3}
   recolorCharUI: 0
   statusIconColor: {r: 1, g: 0, b: 1, a: 1}
   Atk: {fileID: 0}
+  RageAI: {fileID: 0}
+  AIs: []
+  ClonePrefab: {fileID: 0}
+  ClonePowerScale: 0.5
+  CloneAsManyAsCurrentEnemies: 0
+  CloneAmount: 1
+  CloneStartingEffect: {fileID: 0}

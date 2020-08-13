@@ -93,7 +93,6 @@ public class MinionType_Script : BaseCharacter
         {
             ComboManager.Instance.TriggerComboForCharacter(HittedByList[HittedByList.Count - 1].CharacterId, ComboType.Kill, true, transform.position);
         }
-        base.SetCharDead();
         if (!SpineAnim.CurrentAnim.Contains("rriv"))
         {
             SpineAnim.transform.localPosition = LocalSpinePosoffset;
@@ -125,10 +124,10 @@ public class MinionType_Script : BaseCharacter
                     }
                     SetAnimation(CharacterAnimationStateType.Defeat_ReverseArrive);
                     break;
-                default:
-                    break;
             }
         }
+        base.SetCharDead();
+
     }
     private IEnumerator DisableChar()
     {
@@ -324,29 +323,29 @@ public class MinionType_Script : BaseCharacter
                             break;
                     }
                     break;
-                case StatsCheckType.Stamina:
+                case StatsCheckType.Ether:
                     switch (atkToCheck.TilesAtk.ValueChecker)
                     {
                         case ValueCheckerType.LessThan:
-                            if (CharInfo.StaminaPerc < atkToCheck.TilesAtk.PercToCheck)
+                            if (CharInfo.EtherPerc < atkToCheck.TilesAtk.PercToCheck)
                             {
                                 availableAtks.Add(atkToCheck);
                             }
                             break;
                         case ValueCheckerType.EqualTo:
-                            if (CharInfo.StaminaPerc == atkToCheck.TilesAtk.PercToCheck)
+                            if (CharInfo.EtherPerc == atkToCheck.TilesAtk.PercToCheck)
                             {
                                 availableAtks.Add(atkToCheck);
                             }
                             break;
                         case ValueCheckerType.MoreThan:
-                            if (CharInfo.StaminaPerc > atkToCheck.TilesAtk.PercToCheck)
+                            if (CharInfo.EtherPerc > atkToCheck.TilesAtk.PercToCheck)
                             {
                                 availableAtks.Add(atkToCheck);
                             }
                             break;
                         case ValueCheckerType.Between:
-                            if (CharInfo.StaminaPerc <= atkToCheck.TilesAtk.InBetween.x && CharInfo.StaminaPerc >= atkToCheck.TilesAtk.InBetween.y)
+                            if (CharInfo.EtherPerc <= atkToCheck.TilesAtk.InBetween.x && CharInfo.EtherPerc >= atkToCheck.TilesAtk.InBetween.y)
                             {
                                 availableAtks.Add(atkToCheck);
                             }

@@ -17,6 +17,10 @@ public class BattleTileScript : MonoBehaviour
         }
         set
         {
+            Debug.Log(Pos + "    " + value);
+            if (Pos == Vector2Int.zero && value == BattleTileStateType.Empty)
+            {
+            }
             _BattleTileState = value;
         }
     }

@@ -24,7 +24,7 @@ public class BattleTileTargetsScript : MonoBehaviour
         nextT.transform.localPosition = TargetsPosition[0];
         Targets.Add(tc);
         UpdateQueue();
-        StartCoroutine(FireTarget(tc, pos, damage, ele, attacker, atkEffects, effectChances));
+        StartCoroutine(FireTarget(tc, pos, damage, ele, attacker, atkEffects, effectChances, fireAnim));
     }
 
     private IEnumerator FireTarget(TargetClass tc, Vector2Int pos, float damage, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances, bool fireAnim = true)

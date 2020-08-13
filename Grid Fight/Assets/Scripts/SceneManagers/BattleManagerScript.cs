@@ -517,7 +517,7 @@ public class BattleManagerScript : MonoBehaviour
     {
         if(zombie.CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
         {
-            List<BaseCharacter> res = AllCharactersOnField.Where(r => !r.IsOnField && r.CharInfo.HealthPerc > 0 && r.BuffsDebuffsList.Where(a => a.Stat == BuffDebuffStatsType.Zombification).ToList().Count == 0).ToList();
+            List<BaseCharacter> res = AllCharactersOnField.Where(r => !r.IsOnField && r.CharInfo.HealthPerc > 0 && r.BuffsDebuffsList.Where(a => a.Stat == BuffDebuffStatsType.Zombie).ToList().Count == 0).ToList();
             if (res.Count > 0)
             {
                 StartCoroutine(CharacterType_Zombification_Co((CharacterType_Script)zombie, duration, ais));
@@ -564,7 +564,7 @@ public class BattleManagerScript : MonoBehaviour
         zombiePs.transform.localRotation = Quaternion.Euler(zombie.UMS.Side == SideType.LeftSide ? Vector3.zero : zombiePs.transform.eulerAngles);
         zombie.BuffsDebuffsList.ForEach(r =>
         {
-            if (r.Stat != BuffDebuffStatsType.Zombification)
+            if (r.Stat != BuffDebuffStatsType.Zombie)
             {
                 r.Duration = 0;
                 r.CurrentBuffDebuff.Stop_Co = true;
@@ -602,7 +602,7 @@ public class BattleManagerScript : MonoBehaviour
         zombiefied.CharInfo.AIs = ais;
         yield return WaveManagerScript.Instance.SetCharInPos(zombiefied, GridManagerScript.Instance.GetFreeBattleTile(zombiefied.UMS.WalkingSide, zombiefied.UMS.Pos), true);
         zombiefied.CharActionlist.Add(CharacterActionType.Move);
-        while (zombie.BuffsDebuffsList.Where(r=> r.Stat == BuffDebuffStatsType.Zombification).ToList().Count > 0 && zombiefied.CharInfo.HealthPerc > 0)
+        while (zombie.BuffsDebuffsList.Where(r=> r.Stat == BuffDebuffStatsType.Zombie).ToList().Count > 0 && zombiefied.CharInfo.HealthPerc > 0)
         {
             yield return null;
         }
@@ -631,7 +631,7 @@ public class BattleManagerScript : MonoBehaviour
         }
         zombiefied.BuffsDebuffsList.ForEach(r =>
         {
-            if (r.Stat != BuffDebuffStatsType.Zombification)
+            if (r.Stat != BuffDebuffStatsType.Zombie)
             {
                 r.Duration = 0;
                 r.CurrentBuffDebuff.Stop_Co = true;
@@ -690,7 +690,7 @@ public class BattleManagerScript : MonoBehaviour
         zombie.shotsLeftInAttack = 0;
         zombie.BuffsDebuffsList.ForEach(r =>
         {
-            if(r.Stat != BuffDebuffStatsType.Zombification)
+            if(r.Stat != BuffDebuffStatsType.Zombie)
             {
                 r.Duration = 0;
                 r.CurrentBuffDebuff.Stop_Co = true;
@@ -1465,7 +1465,7 @@ public class BattleManagerScript : MonoBehaviour
                         string t = cs.ToString();
                         //Debug.Log(t);
                         cb = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.CharacterSelection == cs && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 &&
-                        r.BuffsDebuffsList.Where(a => a.Stat == BuffDebuffStatsType.Zombification).ToList().Count == 0 && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).FirstOrDefault();
+                        r.BuffsDebuffsList.Where(a => a.Stat == BuffDebuffStatsType.Zombie).ToList().Count == 0 && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).FirstOrDefault();
                         if (cb != null)
                         {
                             t = cb.CharInfo.CharacterID.ToString() + "    " + cb.UMS.Side.ToString();
@@ -1500,7 +1500,7 @@ public class BattleManagerScript : MonoBehaviour
         BaseCharacter cb = null;
         CharacterSelectionType cs = CharacterSelectionType.Up;
         List<BaseCharacter> res = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 && !r.IsOnField &&
-        r.BuffsDebuffsList.Where(a => a.Stat == BuffDebuffStatsType.Zombification).ToList().Count == 0 && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).ToList();
+        r.BuffsDebuffsList.Where(a => a.Stat == BuffDebuffStatsType.Zombie).ToList().Count == 0 && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).ToList();
         if (res.Count > 1)
         {
             while (!found)

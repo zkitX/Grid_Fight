@@ -126,8 +126,8 @@ public class ScriptableObjectAI : ScriptableObject
                         i++;
                     }
                     break;
-                case StatsCheckType.Stamina:
-                    if (item.CheckOnTarget ? (target != null && CheckStatsValues(item, target.CharInfo.StaminaPerc)) : CheckStatsValues(item, bChar.CharInfo.StaminaPerc))
+                case StatsCheckType.Ether:
+                    if (item.CheckOnTarget ? (target != null && CheckStatsValues(item, target.CharInfo.EtherPerc)) : CheckStatsValues(item, bChar.CharInfo.EtherPerc))
                     {
                         Score += 100 * item.CheckWeightMultiplier;
                         i++;

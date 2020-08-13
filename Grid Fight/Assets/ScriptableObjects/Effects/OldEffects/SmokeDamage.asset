@@ -9,25 +9,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f96114dd9827f2e40a361be8628991f8, type: 3}
-  m_Name: Heal-Self-01
+  m_Script: {fileID: 11500000, guid: 2162115bd0e37014394e1dbf4dad6e54, type: 3}
+  m_Name: SmokeDamage
   m_EditorClassIdentifier: 
-  Name: 
-  StatsToAffect: 33
+  level: 1
+  StackType: 0
+  maxStack: 3
+  StatsToAffect: 3
   StatsChecker: 0
-  Value: {x: 1, y: 5}
+  Value: {x: 0, y: 0}
   _Duration: {x: 0, y: 0}
-  AnimToFire: 11
-  Particles: 4
+  AnimToFire: 13
+  Particles: 1
   classification: 0
-  icon: {fileID: 21300000, guid: 9318f02ac090e044ca9466e54ed7fbd5, type: 3}
+  icon: {fileID: 0}
   recolorCharUI: 0
   statusIconColor: {r: 1, g: 0, b: 1, a: 1}
   Atk: {fileID: 0}
-  prefab: {fileID: 0}
-  powerUpText: D
-  color: 0
-  activeParticles: {fileID: 0}
-  terminationParticles: {fileID: 0}
-  DurationOnField: 0.5
-  EffectDuration: 0.5
+  RageAI: {fileID: 0}
+  AIs: []
+  ClonePrefab: {fileID: 0}
+  ClonePowerScale: 0.5
+  CloneAsManyAsCurrentEnemies: 0
+  CloneAmount: 1
+  CloneStartingEffect: {fileID: 0}

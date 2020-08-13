@@ -60,23 +60,23 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
             ItemType itemType = ItemType.PowerUP_FullRecovery;
             switch (ItemPowerUpInfo.StatsToAffect)
             {
-                case (BuffDebuffStatsType.SpeedStats_BaseSpeed):
+                case (BuffDebuffStatsType.BaseSpeed):
                     itemType = ItemType.PowerUp_Speed;
                     powerUpAudio = BattleManagerScript.Instance.AudioProfile.PowerUp_Speed;
                     break;
-                case (BuffDebuffStatsType.StaminaStats_Stamina):
+                case (BuffDebuffStatsType.Ether):
                     itemType = ItemType.PowerUP_Stamina;
                     powerUpAudio = BattleManagerScript.Instance.AudioProfile.PowerUp_Stamina;
                     break;
-                case (BuffDebuffStatsType.DamageStats_BaseDamage):
+                case (BuffDebuffStatsType.Damage):
                     itemType = ItemType.PowerUp_Damage;
                     powerUpAudio = BattleManagerScript.Instance.AudioProfile.PowerUp_Damage;
                     break;
-                case (BuffDebuffStatsType.ShieldStats_BaseShieldRegeneration):
+                case (BuffDebuffStatsType.ShieldRegeneration):
                     itemType = ItemType.PowerUp_Shield;
                     powerUpAudio = BattleManagerScript.Instance.AudioProfile.PowerUp_Shield;
                     break;
-                case (BuffDebuffStatsType.Health_Overtime):
+                case (BuffDebuffStatsType.Regen):
                     itemType = ItemType.PowerUP_Health;
                     powerUpAudio = BattleManagerScript.Instance.AudioProfile.PowerUp_Health;
                     break;

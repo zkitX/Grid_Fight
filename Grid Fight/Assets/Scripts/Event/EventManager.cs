@@ -388,14 +388,14 @@ public class EventManager : MonoBehaviour
         {
             if (character == characterVitality.character)
             {
-                characterVitality.staminaPercentage = character.CharInfo.StaminaPerc;
+                characterVitality.staminaPercentage = character.CharInfo.EtherPerc;
                 staminaChangedLastFrame.Add(characterVitality);
                 StartCoroutine(ResetCharacterStaminaChangesLastFrame(characterVitality));
                 return;
             }
         }
         CharacterEventInfoClass charVitality = new CharacterEventInfoClass(character);
-        charVitality.staminaPercentage = character.CharInfo.StaminaPerc;
+        charVitality.staminaPercentage = character.CharInfo.EtherPerc;
         characterVitalities.Add(charVitality);
         staminaChangedLastFrame.Add(charVitality);
         StartCoroutine(ResetCharacterStaminaChangesLastFrame(charVitality));
