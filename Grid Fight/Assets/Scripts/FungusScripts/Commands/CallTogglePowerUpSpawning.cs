@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MyBox;
 using Fungus;
 
 [CommandInfo("Scripting",
@@ -10,10 +11,12 @@ using Fungus;
 public class CallTogglePowerUpSpawning : Command
 {
     public bool toggleSpawningState = true;
+    [ConditionalField("toggleSpawningState")] public bool specifyPowerUpSpawns = false;
+    [ConditionalField("toggleSpawningState")] public List<ScriptableObjectItemPowerUps> powerUpsReplacementList = new List<ScriptableObjectItemPowerUps>();
 
     protected virtual void CallTheMethod()
     {
-        if(toggleSpawningState) ItemSpawnerManagerScript.Instance.PlaySpawning();
+        if (toggleSpawningState) ItemSpawnerManagerScript.Instance.PlaySpawning(specifyPowerUpSpawns ? powerUpsReplacementList.ToArray() : null);
         else ItemSpawnerManagerScript.Instance.PauseSpawning();
     }
 

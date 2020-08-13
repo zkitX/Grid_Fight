@@ -12,7 +12,8 @@ public class ItemSpawnerManagerScript : MonoBehaviour
 
     public static ItemSpawnerManagerScript Instance;
     public GameObject ItemGO;
-    public List<ScriptableObjectItemPowerUps> SOItemsPowerUps = new List<ScriptableObjectItemPowerUps>();
+    protected List<ScriptableObjectItemPowerUps> CurrentSpecifiedPowerups = new List<ScriptableObjectItemPowerUps>();
+    public List<ScriptableObjectItemPowerUps> DefaultPowerUps = new List<ScriptableObjectItemPowerUps>();
     public Vector2 SpawningTimeRange;
     public List<ItemsPowerUPsInfoScript> SpawnedItems = new List<ItemsPowerUPsInfoScript>();
     public bool CoStopper = false;
@@ -25,6 +26,7 @@ public class ItemSpawnerManagerScript : MonoBehaviour
 
     private void Start()
     {
+        CurrentSpecifiedPowerups = DefaultPowerUps;
         StartSpawningCo(SpawningTimeRange);
     }
 
@@ -33,8 +35,9 @@ public class ItemSpawnerManagerScript : MonoBehaviour
         spawningCoPaused = true;
     }
 
-    public void PlaySpawning()
+    public void PlaySpawning(ScriptableObjectItemPowerUps[] specifiedPowerUpSpawns = null)
     {
+        CurrentSpecifiedPowerups = specifiedPowerUpSpawns != null && specifiedPowerUpSpawns.Length > 0 ? specifiedPowerUpSpawns.ToList() : DefaultPowerUps;
         spawningCoPaused = false;
     }
 
@@ -70,7 +73,7 @@ public class ItemSpawnerManagerScript : MonoBehaviour
                 timer += BattleManagerScript.Instance.DeltaTime;
             }
 
-            SpawnItemRandomPos(SOItemsPowerUps[Random.Range(0, SOItemsPowerUps.Count)], WalkingSideType.LeftSide);
+            SpawnItemRandomPos(CurrentSpecifiedPowerups[Random.Range(0, CurrentSpecifiedPowerups.Count)], WalkingSideType.LeftSide);
         }
     }
 
