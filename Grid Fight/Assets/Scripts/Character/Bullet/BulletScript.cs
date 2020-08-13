@@ -213,9 +213,9 @@ public class BulletScript : MonoBehaviour
                     CameraManagerScript.Instance.CameraShake(CameraShakeType.PowerfulAttackHit);
                 }
 
-                target.SetDamage(CharOwner, (baseDamage) * (iscritical ? 2 : 1),
+                target.SetDamage(CharOwner, CharOwner.NextAttackDamage * (iscritical ? 2 : 1),
                     Elemental, iscritical, CharOwner.CharInfo.ClassType == CharacterClassType.Desert && SOAttack.AttackInput != AttackInputType.Weak ? true : false);
-                CharOwner.Sic.DamageExp += baseDamage;
+                CharOwner.Sic.DamageExp += CharOwner.NextAttackDamage;
                 if (!SkillHit && SOAttack.AttackInput > AttackInputType.Strong)
                 {
                     SkillHit = true;

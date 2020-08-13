@@ -211,7 +211,7 @@ public class CharacterInfoScript : MonoBehaviour
         [HideInInspector] public Vector2 B_Chances = new Vector2(2, 2);
     }
 
-    public StrongfulAttackClass StrongAttac;
+    public StrongfulAttackClass StrongAttack;
     [System.Serializable]
     public class StrongfulAttackClass
     {
@@ -354,8 +354,8 @@ public class CharacterInfoScript : MonoBehaviour
     public bool IsCritical(bool rapidOrPowerful)
     {
         float chance = Random.Range(0, 100);
-        if (chance <= Random.Range(rapidOrPowerful ? WeakAttack.CriticalChance.x : StrongAttac.CriticalChance.x,
-            rapidOrPowerful ? WeakAttack.CriticalChance.y : StrongAttac.CriticalChance.y))
+        if (chance <= Random.Range(rapidOrPowerful ? WeakAttack.CriticalChance.x : StrongAttack.CriticalChance.x,
+            rapidOrPowerful ? WeakAttack.CriticalChance.y : StrongAttack.CriticalChance.y))
         {
             return true;
         }
@@ -402,9 +402,9 @@ public class CharacterInfoScript : MonoBehaviour
         WeakAttack.B_Chances = WeakAttack.Chances;
 
         //PowerfulAttac
-        StrongAttac.B_CriticalChance = StrongAttac.CriticalChance;
-        StrongAttac.B_DamageMultiplier = StrongAttac.DamageMultiplier;
-        StrongAttac.B_Chances = StrongAttac.Chances;
+        StrongAttack.B_CriticalChance = StrongAttack.CriticalChance;
+        StrongAttack.B_DamageMultiplier = StrongAttack.DamageMultiplier;
+        StrongAttack.B_Chances = StrongAttack.Chances;
 
         //HealthStats
         HealthStats.B_Base = HealthStats.Base;

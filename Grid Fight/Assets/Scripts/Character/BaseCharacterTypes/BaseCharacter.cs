@@ -217,14 +217,16 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         get
         {
             return CharInfo.DamageStats.BaseDamage * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.x
-                    * (nextAttack.AttackInput == AttackInputType.Weak ? CharInfo.WeakAttack.DamageMultiplier.x : CharInfo.StrongAttac.DamageMultiplier.x) * nextAttack.DamageMultiplier;
+                    * (nextAttack.AttackInput == AttackInputType.Weak ? UnityEngine.Random.Range(CharInfo.WeakAttack.DamageMultiplier.x, CharInfo.WeakAttack.DamageMultiplier.y) : 
+                    UnityEngine.Random.Range(CharInfo.StrongAttack.DamageMultiplier.x, CharInfo.StrongAttack.DamageMultiplier.y)) * nextAttack.DamageMultiplier;
         }
     }
     public float NextAttackTileDamage
     {
         get
         {
-            return (CharInfo.DamageStats.BaseDamage * nextAttack.DamageMultiplier) * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.x;
+            return (CharInfo.DamageStats.BaseDamage * (nextAttack.AttackInput == AttackInputType.Weak ? UnityEngine.Random.Range(CharInfo.WeakAttack.DamageMultiplier.x, CharInfo.WeakAttack.DamageMultiplier.y) :
+                UnityEngine.Random.Range(CharInfo.StrongAttack.DamageMultiplier.x, CharInfo.StrongAttack.DamageMultiplier.y)) * nextAttack.DamageMultiplier) * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.x;
         }
     }
 
@@ -672,7 +674,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         if (nextAttack != null && nextAttack.CurrentAttackType == AttackType.Tile && CharInfo.Health > 0 && IsOnField)
         {
             CharInfo.WeakAttack.DamageMultiplier = CharInfo.WeakAttack.B_DamageMultiplier * nextAttack.DamageMultiplier;
-            CharInfo.StrongAttac.DamageMultiplier = CharInfo.StrongAttac.B_DamageMultiplier * nextAttack.DamageMultiplier;
+            CharInfo.StrongAttack.DamageMultiplier = CharInfo.StrongAttack.B_DamageMultiplier * nextAttack.DamageMultiplier;
 
             if (nextAttack.AttackInput > AttackInputType.Strong && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
             {
@@ -752,7 +754,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         if (nextAttack != null && nextAttack.CurrentAttackType == AttackType.Totem && CharInfo.Health > 0 && IsOnField)
         {
             CharInfo.WeakAttack.DamageMultiplier = CharInfo.WeakAttack.B_DamageMultiplier * nextAttack.DamageMultiplier;
-            CharInfo.StrongAttac.DamageMultiplier = CharInfo.StrongAttac.B_DamageMultiplier * nextAttack.DamageMultiplier;
+            CharInfo.StrongAttack.DamageMultiplier = CharInfo.StrongAttack.B_DamageMultiplier * nextAttack.DamageMultiplier;
             StartCoroutine(Totem());
         }
     }
