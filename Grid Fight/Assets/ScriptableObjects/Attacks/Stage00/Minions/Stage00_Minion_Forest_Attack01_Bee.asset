@@ -13,15 +13,14 @@ MonoBehaviour:
   m_Name: Stage00_Minion_Forest_Attack01_Bee
   m_EditorClassIdentifier: 
   isSequencedAttack: 0
-  Chances: 100
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
-  _DamageMultiplier: {x: 1, y: 1}
+  _DamageMultiplier: {x: 0.9, y: 1.1}
   AttackInput: 0
   AttackAnim: 0
-  StaminaCost: 10
+  StaminaCost: 0
   ExperiencePoints: 10
-  _CoolDown: {x: 3, y: 5}
+  _CoolDown: {x: 2, y: 3}
   PrefixAnim: 0
   Fov: 0
   Particles:
@@ -113,7 +112,7 @@ MonoBehaviour:
     StatToCheck: 1
     ValueChecker: 2
     Chances: 100
-    PercToCheck: 0
+    PercToCheck: 30
     InBetween: {x: 0, y: 0}
     Show: 0
   TotemAtk:

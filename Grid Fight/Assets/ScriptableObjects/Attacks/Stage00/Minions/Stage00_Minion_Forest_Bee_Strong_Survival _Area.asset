@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage00_Minion_Forest_Bee_Strong_Survival _Area
   m_EditorClassIdentifier: 
-  Chances: 100
+  isSequencedAttack: 0
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 1
   AttackAnim: 0
-  StaminaCost: 10
+  StaminaCost: 0
   ExperiencePoints: 10
-  CoolDown: 0
+  _CoolDown: {x: 3, y: 5}
   PrefixAnim: 0
   Fov: 2
   Particles:
@@ -174,8 +174,10 @@ MonoBehaviour:
         EffectsOnTile: []
     StatToCheck: 1
     ValueChecker: 0
-    PercToCheck: 99
     Chances: 10000
+    PercToCheck: 99
+    InBetween: {x: 0, y: 0}
+    Show: 0
   TotemAtk:
     AtkType: 3
     IsPlayerSide: 0

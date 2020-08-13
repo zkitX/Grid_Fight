@@ -10,25 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a973d68f2b711f34b902c3029d63e805, type: 3}
-  m_Name: Protector-AI-Healing
+  m_Name: Bomber-AI-Aggressive
   m_EditorClassIdentifier: 
-  AI_Type: -20
-  Vision: 5
+  AI_Type: 10
+  Vision: 10
   Checks:
   - CheckOnTarget: 0
     StatToCheck: 1
-    ValueChecker: 0
+    ValueChecker: 3
     CheckWeightMultiplier: 1
-    PercToCheck: 50
-    InBetween: {x: 50, y: 0}
+    PercToCheck: 20
+    InBetween: {x: 100, y: 40}
     Show: 1
     BuffDebuff: 0
-  _CoolDown: {x: 1, y: 1}
-  IdleMovement: 0.5
-  AttackWill: 85
-  Chaseing_Flee: 20
-  StatsToModify:
-  - ModificableStats: 9
-    Multiplier: 1.35
-  AIPs: {fileID: 11400000, guid: 45bac07679f71ec47b1f1c8f1e36aa8c, type: 2}
+  _CoolDown: {x: 2, y: 3}
+  IdleMovement: 1
+  AttackWill: 0
+  Chaseing_Flee: 100
+  StatsToModify: []
+  AIPs: {fileID: 11400000, guid: 3e6bd3dc9c2e69d448f0ee0298b8e7eb, type: 2}
   Show: 0

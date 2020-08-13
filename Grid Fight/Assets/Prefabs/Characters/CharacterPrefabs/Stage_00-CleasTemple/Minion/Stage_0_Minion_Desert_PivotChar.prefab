@@ -510,49 +510,46 @@ MonoBehaviour:
   AIs: []
   CharacterRespawnLength: 180
   CharacterSelection: 0
-  RapidAttack:
-    DamageMultiplier: {x: 1, y: 1}
-    CriticalChance: {x: 2, y: 2}
-    LevelMultiplier: 0
-    B_DamageMultiplier: {x: 1, y: 1}
-    B_CriticalChance: {x: 2, y: 2}
-  PowerfulAttac:
-    DamageMultiplier: {x: 3, y: 3}
-    CriticalChance: {x: 3, y: 5}
-    LevelMultiplier: 0
-    B_DamageMultiplier: {x: 3, y: 3}
-    B_CriticalChance: {x: 3, y: 5}
   HealthStats:
     Health: 30
     Base: 30
     Regeneration: 1
     BaseHealthRegeneration: 1
+    Armour: 1
     LevelMultiplier: 0
     B_Health: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseHealthRegeneration: 0
-  StaminaStats:
-    Stamina: 40
-    Base: 40
-    Regeneration: 1
-    BaseStaminaRegeneration: 1
-    LevelMultiplier: 0
-    B_Stamina: 0
-    B_Base: 0
-    B_Regeneration: 0
-    B_BaseStaminaRegeneration: 0
+    B_Armour: 1
   ShieldStats:
     Shield: 50
     Base: 50
     Regeneration: 8
     BaseShieldRegeneration: 8
-    ShieldOnDefence: 0.5
+    ShieldAbsorbtion: 0.5
+    Invulnerability: 0.2
+    MinionShieldChances: 20
+    MinionPerfectShieldChances: 5
     LevelMultiplier: 50
     B_Shield: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseShieldRegeneration: 0
+    B_ShieldOnDefence: 0
+    B_Invulnerability: 0.2
+    B_MinionShieldChances: 20
+    B_MinionPerfectShieldChances: 5
+  EtherStats:
+    Ether: 40
+    Base: 40
+    Regeneration: 1
+    BaseEtherRegeneration: 1
+    LevelMultiplier: 30
+    B_Stamina: 0
+    B_Base: 0
+    B_Regeneration: 0
+    B_BaseStaminaRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
     TileMovementTime: 1
@@ -561,41 +558,45 @@ MonoBehaviour:
     IntroPerc: 0.15
     LoopPerc: 0.7
     EndPerc: 0.15
-    AttackSpeed: 1
     AttackLoopDuration: 0.5
     IdleToAttackDuration: 0.01
-    BulletSpeed: 5
     LeaveSpeed: 3
     BaseSpeed_LevelMultiplier: 0
     MovementSpeed_LevelMultiplier: 0
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
+    WeakBulletSpeed: 5
+    StrongBulletSpeed: 5
     B_BaseSpeed: 1
     B_MovementSpeed: 1
     B_AttackSpeed: 1
-    B_BulletSpeed: 5
     B_LeaveSpeed: 3
     B_IdleToAtkDuration: 0.2
     B_AtkToIdleDuration: 0.2
+    B_WeakBulletSpeed: 5
+    B_StrongBulletSpeed: 5
   DamageStats:
     BaseDamage: 10
     B_BaseDamage: 10
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 0
-  DefenceStats:
-    BaseDefence: 3
-    Invulnerability: 0.2
-    MinionDefenceChances: 35
-    MinionPerfectDefenceChances: 1
-    B_BaseDefence: 10
-    B_Invulnerability: 0.2
-    B_MinionDefenceChances: 20
-    B_MinionPerfectDefenceChances: 5
+  WeakAttack:
+    DamageMultiplier: {x: 1, y: 1}
+    CriticalChance: {x: 2, y: 2}
+    Chances: {x: 0, y: 1}
     LevelMultiplier: 0
-  Special1LoadingDuration: 0
-  Special2LoadingDuration: 0
-  Special3LoadingDuration: 0
+    B_DamageMultiplier: {x: 1, y: 1}
+    B_CriticalChance: {x: 2, y: 2}
+    B_Chances: {x: 2, y: 2}
+  StrongAttac:
+    DamageMultiplier: {x: 3, y: 3}
+    CriticalChance: {x: 3, y: 5}
+    Chances: {x: 0, y: 1}
+    LevelMultiplier: 0
+    B_DamageMultiplier: {x: 3, y: 3}
+    B_CriticalChance: {x: 3, y: 5}
+    B_Chances: {x: 2, y: 2}
   ExperienceValue: 0
   MovementTimer: {x: 5, y: 8}
   B_MovementTimer: {x: 5, y: 8}

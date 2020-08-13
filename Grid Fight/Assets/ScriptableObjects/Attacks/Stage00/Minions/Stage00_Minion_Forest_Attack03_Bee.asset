@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Stage00_Minion_Forest_Attack03_Bee
   m_EditorClassIdentifier: 
   isSequencedAttack: 0
-  Chances: 100
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 0.9, y: 1.1}
-  AttackInput: 1
+  AttackInput: 0
   AttackAnim: 0
-  StaminaCost: 10
+  StaminaCost: 0
   ExperiencePoints: 10
   _CoolDown: {x: 2, y: 3}
   PrefixAnim: 0
@@ -108,13 +107,13 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      Show: 0
+      Show: 1
       BulletEffectTiles:
       - Pos: {x: 0, y: 0}
         HasEffect: 1
         showImpact: 0
         Effects:
-        - {fileID: 11400000, guid: e23855b388ae8534fa6b2a7c1ff91892, type: 2}
+        - {fileID: 11400000, guid: 074844c7574ad5740b846fba80f417d5, type: 2}
         EffectChances: 50
         IsEffectOnTile: 0
         TileParticlesID: 0
@@ -125,34 +124,34 @@ MonoBehaviour:
       ExplosionChances: 70
       Trajectory_Y:
         serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      Trajectory_Z:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      Show: 0
-      BulletEffectTiles:
-      - Pos: {x: 0, y: 0}
-        HasEffect: 1
-        showImpact: 1
-        Effects:
-        - {fileID: 11400000, guid: e23855b388ae8534fa6b2a7c1ff91892, type: 2}
-        EffectChances: 50
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-    - Delay: 0.9
-      BulletTravelDurationPerTile: 0
-      ExplosionChances: 70
-      Trajectory_Y:
-        serializedVersion: 2
-        m_Curve: []
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.5
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: -2
+          outSlope: -2
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -168,7 +167,61 @@ MonoBehaviour:
         HasEffect: 1
         showImpact: 1
         Effects:
-        - {fileID: 11400000, guid: e23855b388ae8534fa6b2a7c1ff91892, type: 2}
+        - {fileID: 11400000, guid: 074844c7574ad5740b846fba80f417d5, type: 2}
+        EffectChances: 50
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+    - Delay: 0.9
+      BulletTravelDurationPerTile: 0
+      ExplosionChances: 70
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: -2
+          outSlope: -2
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.5
+          value: -1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Show: 1
+      BulletEffectTiles:
+      - Pos: {x: 0, y: 0}
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: 074844c7574ad5740b846fba80f417d5, type: 2}
         EffectChances: 50
         IsEffectOnTile: 0
         TileParticlesID: 0

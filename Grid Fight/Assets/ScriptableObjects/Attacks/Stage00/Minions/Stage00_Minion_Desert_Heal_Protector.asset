@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: Stage00_Minion_Desert_Heal_Protector
   m_EditorClassIdentifier: 
   isSequencedAttack: 0
-  Chances: 100
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 1, y: 1}
-  AttackInput: 1
+  AttackInput: 2
   AttackAnim: 0
   StaminaCost: 0
   ExperiencePoints: 10
@@ -26,15 +25,15 @@ MonoBehaviour:
   Fov: 1
   Particles:
     Left:
-      Cast: {fileID: 6805095864402774718, guid: b4c8ee4d948ba664cb209fdb9a5513e4,
+      Cast: {fileID: 4415641691864444121, guid: 69194683974f34345b555fce792a2adf,
         type: 3}
-      Bullet: {fileID: 1290314410025467663, guid: 9f2661e7a21fde14fa47d3ec4c1df187,
+      Bullet: {fileID: 4415641691864444121, guid: 69194683974f34345b555fce792a2adf,
         type: 3}
       Hit: {fileID: 4415641691864444121, guid: 69194683974f34345b555fce792a2adf, type: 3}
     Right:
-      Cast: {fileID: 6805095864402774718, guid: b4c8ee4d948ba664cb209fdb9a5513e4,
+      Cast: {fileID: 4415641691864444121, guid: 69194683974f34345b555fce792a2adf,
         type: 3}
-      Bullet: {fileID: 1290314410025467663, guid: 9f2661e7a21fde14fa47d3ec4c1df187,
+      Bullet: {fileID: 4415641691864444121, guid: 69194683974f34345b555fce792a2adf,
         type: 3}
       Hit: {fileID: 4415641691864444121, guid: 69194683974f34345b555fce792a2adf, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
@@ -105,7 +104,7 @@ MonoBehaviour:
         HasEffect: 1
         showImpact: 1
         Effects:
-        - {fileID: 11400000, guid: a9f8e768a3b34194084fc55a2876d9b6, type: 2}
+        - {fileID: 11400000, guid: 6107eaa473af67742b9b63642009a477, type: 2}
         EffectChances: 100
         IsEffectOnTile: 0
         TileParticlesID: 0
@@ -115,7 +114,7 @@ MonoBehaviour:
         HasEffect: 1
         showImpact: 1
         Effects:
-        - {fileID: 11400000, guid: a9f8e768a3b34194084fc55a2876d9b6, type: 2}
+        - {fileID: 11400000, guid: 6107eaa473af67742b9b63642009a477, type: 2}
         EffectChances: 100
         IsEffectOnTile: 0
         TileParticlesID: 0
@@ -125,17 +124,7 @@ MonoBehaviour:
         HasEffect: 1
         showImpact: 1
         Effects:
-        - {fileID: 11400000, guid: a9f8e768a3b34194084fc55a2876d9b6, type: 2}
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: -1, y: 0}
-        HasEffect: 1
-        showImpact: 1
-        Effects:
-        - {fileID: 11400000, guid: a9f8e768a3b34194084fc55a2876d9b6, type: 2}
+        - {fileID: 11400000, guid: 6107eaa473af67742b9b63642009a477, type: 2}
         EffectChances: 100
         IsEffectOnTile: 0
         TileParticlesID: 0
@@ -145,7 +134,17 @@ MonoBehaviour:
         HasEffect: 1
         showImpact: 1
         Effects:
-        - {fileID: 11400000, guid: a9f8e768a3b34194084fc55a2876d9b6, type: 2}
+        - {fileID: 11400000, guid: 6107eaa473af67742b9b63642009a477, type: 2}
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: -1, y: 0}
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: 6107eaa473af67742b9b63642009a477, type: 2}
         EffectChances: 100
         IsEffectOnTile: 0
         TileParticlesID: 0
