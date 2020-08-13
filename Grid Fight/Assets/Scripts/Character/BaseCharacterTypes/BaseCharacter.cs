@@ -1642,10 +1642,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                         HealthStatsChangedEvent?.Invoke(bdClass.currentBuffValue, HealthChangedType.Damage, SpineAnim.transform);
                         EventManager.Instance?.UpdateHealth(this);
                         //Apply Bleed
-                        if (bdClass.currentBuffValue < 0)
-                        {
-                            ParticleManagerScript.Instance.FireParticlesInPosition(ParticleManagerScript.Instance.GetParticlePrefabByName(ParticlesType.Status_Debuff_Bleed), CharacterNameType.None, AttackParticlePhaseTypes.Cast, SpineAnim.transform.position, SideType.LeftSide, AttackInputType.Weak).transform.SetParent(SpineAnim.transform);
-                        }
+                        ParticleManagerScript.Instance.FireParticlesInPosition(ParticleManagerScript.Instance.GetParticlePrefabByName(ParticlesType.Status_Debuff_Bleed), CharacterNameType.None, AttackParticlePhaseTypes.Cast, SpineAnim.transform.position, SideType.LeftSide, AttackInputType.Weak).transform.SetParent(SpineAnim.transform);
+                        
                     }
                     if (bdClass.Stat == BuffDebuffStatsType.Drain)
                     {
