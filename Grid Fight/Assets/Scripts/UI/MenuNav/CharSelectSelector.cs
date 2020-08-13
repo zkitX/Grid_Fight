@@ -13,6 +13,7 @@ public class CharSelectSelector : MonoBehaviour
     public bool visible = false;
     [SerializeField] protected TextMeshProUGUI NameText;
     [SerializeField] protected TextMeshProUGUI SquadBonusText;
+    [SerializeField] protected Grid_UIStarRanking levelDisplay = null;
     [SerializeField] protected Image Relations;
     [SerializeField] protected TextMeshProUGUI SelectText;
     [SerializeField] protected Animation SelectDisplay;
@@ -85,6 +86,10 @@ public class CharSelectSelector : MonoBehaviour
             DisplayOption(SelectDisplay, SelectDisplayed);
         }
 
+        if(levelDisplay != null && loadInfo != null)
+        {
+            levelDisplay.SetStarRanking((float)((float)loadInfo.Level / (float)4f));
+        }
 
         if (loadInfo == null || loadInfo.encounterState == CharacterLoadInformation.EncounterState.Hidden)
         {
