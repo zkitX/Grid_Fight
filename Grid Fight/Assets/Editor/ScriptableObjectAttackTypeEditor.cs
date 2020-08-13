@@ -83,9 +83,16 @@ public class ScriptableObjectAttackTypeEditor : Editor
             origin.TilesAtk.AtkType = (BattleFieldAttackType)EditorGUILayout.EnumPopup("BattleFieldAttackType", origin.TilesAtk.AtkType);
             if (origin.TrajectoriesNumber > 0)
             {
-                origin.TilesAtk.PercToCheck = EditorGUILayout.FloatField("PercToCheck", origin.TilesAtk.PercToCheck);
                 origin.TilesAtk.StatToCheck = (StatsCheckType)EditorGUILayout.EnumPopup("StatToCheck", origin.TilesAtk.StatToCheck);
                 origin.TilesAtk.ValueChecker = (ValueCheckerType)EditorGUILayout.EnumPopup("ValueChecker", origin.TilesAtk.ValueChecker);
+                if (origin.TilesAtk.ValueChecker < ValueCheckerType.Between)
+                {
+                    origin.TilesAtk.PercToCheck = EditorGUILayout.FloatField("PercToCheck", origin.TilesAtk.PercToCheck);
+                }
+                else
+                {
+                    origin.TilesAtk.InBetween = EditorGUILayout.Vector2Field("InBetween", origin.TilesAtk.InBetween);
+                }
                 origin.TilesAtk.Chances = EditorGUILayout.IntField("Chances", origin.TilesAtk.Chances);
                 origin.TilesAtk.BulletTrajectories = RefreshList(origin.TrajectoriesNumber, origin.TilesAtk.BulletTrajectories);
                 for (int i = 0; i < origin.TrajectoriesNumber; i++)
