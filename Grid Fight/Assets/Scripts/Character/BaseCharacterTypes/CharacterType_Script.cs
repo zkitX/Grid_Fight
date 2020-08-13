@@ -410,7 +410,7 @@ public class CharacterType_Script : BaseCharacter
                 return;
             }
             Attacking = true;
-            WeakAttackOffset = Time.time;
+            WeakAttackOffset = Atk1Queueing ? WeakAttackOffset : Time.time;
             //lastAttack = false;
             FireActionEvent(CharacterActionType.WeakAttack);
             if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop.ToString() && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_IdleToAtk.ToString())
@@ -523,7 +523,14 @@ public class CharacterType_Script : BaseCharacter
         }
         nextAttack = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackAnim == AttackAnimType.Weak_Atk).First();
         currentAttackPhase = AttackPhasesType.Start;
-        SetAnimation(CharacterAnimationStateType.Atk1_Loop);
+        if(SpineAnim.CurrentAnim.Contains("Loop"))
+        {
+            SpineAnim.skeletonAnimation.state.GetCurrent(0).TrackTime = 0;
+        }
+        else
+        {
+            SetAnimation(CharacterAnimationStateType.Atk1_Loop);
+        }
     }
 
 
@@ -753,6 +760,7 @@ public class CharacterType_Script : BaseCharacter
         if (completedAnim == CharacterAnimationStateType.Atk1_Loop.ToString() &&
             SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1_Loop.ToString())
         {
+            Debug.Log("Loop ------- completed     " + Atk1Queueing);
             if (Atk1Queueing)
             {
                 QuickAttack();
@@ -760,6 +768,7 @@ public class CharacterType_Script : BaseCharacter
             else
             {
                 SetAnimation(CharacterAnimationStateType.Atk1_AtkToIdle);
+                Debug.Log("Atk1_AtkToIdle ------- started     " + Atk1Queueing);
                 SpineAnim.SetAnimationSpeed(SpineAnim.GetAnimLenght(CharacterAnimationStateType.Atk1_IdleToAtk) / CharInfo.SpeedStats.IdleToAtkDuration);
             }
             Atk1Queueing = false;

@@ -1571,7 +1571,7 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
-    public void LoopWeakkAttack(ControllerType controllerType)
+    public void LoopWeakAttack(ControllerType controllerType)
     {
         if (CurrentBattleState == BattleState.Battle && CurrentSelectedCharacters.Keys.Contains(controllerType))
         {
@@ -1581,7 +1581,9 @@ public class BattleManagerScript : MonoBehaviour
                 if (!CurrentSelectedCharacters[controllerType].Character.Atk1Queueing && !CurrentSelectedCharacters[controllerType].Character.SpineAnim.CurrentAnim.Contains("Loop"))
                 {
                     CurrentSelectedCharacters[controllerType].Character.CharacterInputHandler(InputActionType.Weak);
+                    CurrentSelectedCharacters[controllerType].Character.WeakAttackOffset = 0;
                 }
+                Debug.Log("Atk1Queueing -------- true");
                 CurrentSelectedCharacters[controllerType].Character.Atk1Queueing = true;
             }
         }

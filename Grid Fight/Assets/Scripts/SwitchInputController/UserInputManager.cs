@@ -549,7 +549,7 @@ public class UserInputManager : MonoBehaviour
     }
     public void SelectedCharacterLoopWeakAttack(int player)
     {
-        BattleManagerScript.Instance.LoopWeakkAttack((ControllerType)player);
+        BattleManagerScript.Instance.LoopWeakAttack((ControllerType)player);
     }
     public void StopSelectedCharacterChargingAttack(int player)
     {
