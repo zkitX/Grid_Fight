@@ -268,15 +268,18 @@ public class ScriptableObjectAI : ScriptableObject
             parentField = charinfo.GetType().GetField(statToCheck[0]);
             field = parentField.GetValue(charinfo).GetType().GetField(statToCheck[1]);
             B_field = parentField.GetValue(charinfo).GetType().GetField("B_" + statToCheck[1]);
-            if(B_field.FieldType == typeof(Vector2))
+            if (B_field.FieldType == typeof(Vector2))
             {
-                field.SetValue(parentField.GetValue(charinfo), (Vector2)field.GetValue(parentField.GetValue(charinfo)) + (item.Multiplier * (Vector2)B_field.GetValue(parentField.GetValue(charinfo))));
+                Vector2 v = (Vector2)field.GetValue(parentField.GetValue(charinfo));
+                Vector2 B_v = (Vector2)B_field.GetValue(parentField.GetValue(charinfo));
+
+                Vector2 res = new Vector2(v.x + ((B_v.x * item.Multiplier) - B_v.x), v.y + ((B_v.y * item.Multiplier) - B_v.y));
+                field.SetValue(parentField.GetValue(charinfo), res);
             }
             else
             {
-                field.SetValue(parentField.GetValue(charinfo), (float)field.GetValue(parentField.GetValue(charinfo)) + (item.Multiplier * (float)B_field.GetValue(parentField.GetValue(charinfo))));
+                field.SetValue(parentField.GetValue(charinfo), (float)field.GetValue(parentField.GetValue(charinfo)) + ((item.Multiplier * (float)B_field.GetValue(parentField.GetValue(charinfo))) - (float)B_field.GetValue(parentField.GetValue(charinfo))));
             }
-
         }
     }
 
@@ -290,11 +293,15 @@ public class ScriptableObjectAI : ScriptableObject
             B_field = parentField.GetValue(charinfo).GetType().GetField("B_" + statToCheck[1]);
             if (B_field.FieldType == typeof(Vector2))
             {
-                field.SetValue(parentField.GetValue(charinfo), (Vector2)field.GetValue(parentField.GetValue(charinfo)) - (item.Multiplier * (Vector2)B_field.GetValue(parentField.GetValue(charinfo))));
+                Vector2 v = (Vector2)field.GetValue(parentField.GetValue(charinfo));
+                Vector2 B_v = (Vector2)B_field.GetValue(parentField.GetValue(charinfo));
+
+                Vector2 res = new Vector2(v.x - ((B_v.x * item.Multiplier) - B_v.x), v.y - ((B_v.y * item.Multiplier) - B_v.y));
+                field.SetValue(parentField.GetValue(charinfo), res);
             }
             else
             {
-                field.SetValue(parentField.GetValue(charinfo), (float)field.GetValue(parentField.GetValue(charinfo)) - (item.Multiplier * (float)B_field.GetValue(parentField.GetValue(charinfo))));
+                field.SetValue(parentField.GetValue(charinfo), (float)field.GetValue(parentField.GetValue(charinfo)) - ((item.Multiplier * (float)B_field.GetValue(parentField.GetValue(charinfo))) - (float)B_field.GetValue(parentField.GetValue(charinfo))));
             }
 
         }
