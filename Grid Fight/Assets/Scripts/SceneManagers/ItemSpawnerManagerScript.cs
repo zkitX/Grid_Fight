@@ -27,7 +27,10 @@ public class ItemSpawnerManagerScript : MonoBehaviour
     private void Start()
     {
         CurrentSpecifiedPowerups = DefaultPowerUps;
-        StartSpawningCo(SpawningTimeRange);
+        if (DefaultPowerUps.Count > 0)
+        {
+            StartSpawningCo(SpawningTimeRange);
+        }
     }
 
     public void PauseSpawning()
