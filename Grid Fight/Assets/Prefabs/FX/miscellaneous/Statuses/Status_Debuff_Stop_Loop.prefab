@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1642353405715201981}
   - component: {fileID: 5832928619997905840}
   m_Layer: 0
-  m_Name: DizzyEffect
+  m_Name: Status_Debuff_Stop_Loop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4769,10 +4769,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LongParticles: []
   PSTime: 10
-  Target: {fileID: 0}
-  Adjustment: {x: 0, y: 0, z: 0}
-  IncludeChildren: 1
   timet: 0
+  SortingLayer: Player
   iter: 0
 --- !u!95 &1792651202759569715
 Animator:
@@ -5080,6 +5078,14 @@ PrefabInstance:
     - target: {fileID: 19923762, guid: 524b12464dce5b248a893d67a188da05, type: 3}
       propertyPath: m_RenderMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19923762, guid: 524b12464dce5b248a893d67a188da05, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1897941405
+      objectReference: {fileID: 0}
+    - target: {fileID: 19923762, guid: 524b12464dce5b248a893d67a188da05, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 19832988, guid: 524b12464dce5b248a893d67a188da05, type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.size
