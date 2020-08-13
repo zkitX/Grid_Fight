@@ -1040,6 +1040,12 @@ public enum PowerUpColorTypes
     Purple = 3,
     Green = 4,
     Orange = 5,
+    Black = 6,
+    DarkRed = 7,
+    DarkBlue = 8,
+    DarkPurple = 9,
+    DarkGreen = 10,
+    DarkOrange = 11,
 }
 
 public enum MaskTypes

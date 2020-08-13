@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f96114dd9827f2e40a361be8628991f8, type: 3}
-  m_Name: Pup_Speed
+  m_Name: Anti_Pup_Shield
   m_EditorClassIdentifier: 
   level: 1
   StackType: 0
   maxStack: 3
-  StatsToAffect: 3
+  StatsToAffect: 8
   StatsChecker: 0
-  Value: {x: 20, y: 50}
+  Value: {x: -20, y: -50}
   _Duration: {x: 10, y: 10}
-  AnimToFire: 11
-  Particles: 3003
-  classification: 0
-  icon: {fileID: 21300000, guid: 6ab3d45081819f54d8b6970ff07b7235, type: 3}
+  AnimToFire: 12
+  Particles: 0
+  classification: 1
+  icon: {fileID: 21300000, guid: dfb7a45e12e2d954791108f5818360bc, type: 3}
   recolorCharUI: 0
   statusIconColor: {r: 1, g: 0, b: 1, a: 1}
   Atk: {fileID: 0}
@@ -35,17 +35,15 @@ MonoBehaviour:
   CloneStartingEffect: {fileID: 0}
   prefab: {fileID: 6581044320134047782, guid: 633716ab60480154bbe8cf6b14059bf0, type: 3}
   powerUpText: 
-  color: 3
-  activeParticles: {fileID: 1496232232475054243, guid: 714f16f1fb924ab40a4a9e32cb794665,
-    type: 3}
-  terminationParticles: {fileID: 6589794955604628695, guid: 6efd7414da4de1346aaf3ae3af6e150b,
-    type: 3}
+  color: 8
+  activeParticles: {fileID: 0}
+  terminationParticles: {fileID: 0}
   DurationOnField: 10
-  EffectDuration: 15
+  EffectDuration: 0
   collectionAudio:
     clip: {fileID: 0}
     clips:
-    - {fileID: 8300000, guid: 40276967bdfd77d4b85d00abd170a1aa, type: 3}
+    - {fileID: 8300000, guid: 2d69012a355927049930ecd424ab1d23, type: 3}
     audioPriority: 0
     audioBus: {fileID: 5600944808491506892, guid: 3778e2e6543dd0f4380203029dba3a7c,
       type: 2}

@@ -13,5 +13,6 @@ public class ScriptableObjectItemPowerUps : ScriptableObjectAttackEffect
     public GameObject terminationParticles = null;
     public float DurationOnField;
     [HideInInspector] public float EffectDuration = 1f; //TODO Remove later
+    public AudioClipInfoClass collectionAudio = null;
 
 }

@@ -32,8 +32,11 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
         color = itemPowerUpInfo.color;
         transform.position = worldPos;
         Duration = duration;
-        activeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(ItemPowerUpInfo.activeParticles, CharacterNameType.None, AttackParticlePhaseTypes.Bullet, worldPos, SideType.LeftSide, AttackInputType.Skill1);
-        activeParticles.transform.position -= new Vector3(0f, 0.3f, 0f);
+        if(ItemPowerUpInfo.activeParticles != null)
+        {
+            activeParticles = ParticleManagerScript.Instance.FireParticlesInPosition(ItemPowerUpInfo.activeParticles, CharacterNameType.None, AttackParticlePhaseTypes.Bullet, transform.position, SideType.LeftSide, AttackInputType.Skill1);
+            activeParticles.transform.position -= new Vector3(0f, 0.3f, 0f);
+        }
         Anim.SetInteger("Color", (int)color);
         Anim.SetBool("FadeInOut", true);
         StartCoroutine(spawn_Co());
@@ -56,37 +59,42 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
             CharHitted.Buff_DebuffCo(new Buff_DebuffClass(new ElementalResistenceClass(),
                 ElementalType.Neutral, other.GetComponentInParent<BaseCharacter>(), ItemPowerUpInfo));
             CharHitted.Sic.PotionPicked++;
-            AudioClipInfoClass powerUpAudio = null;
+
             ItemType itemType = ItemType.PowerUP_FullRecovery;
             switch (ItemPowerUpInfo.StatsToAffect)
             {
                 case (BuffDebuffStatsType.BaseSpeed):
                     itemType = ItemType.PowerUp_Speed;
-                    powerUpAudio = BattleManagerScript.Instance.AudioProfile.PowerUp_Speed;
                     break;
                 case (BuffDebuffStatsType.Ether):
                     itemType = ItemType.PowerUP_Stamina;
-                    powerUpAudio = BattleManagerScript.Instance.AudioProfile.PowerUp_Stamina;
                     break;
                 case (BuffDebuffStatsType.Damage):
                     itemType = ItemType.PowerUp_Damage;
-                    powerUpAudio = BattleManagerScript.Instance.AudioProfile.PowerUp_Damage;
                     break;
                 case (BuffDebuffStatsType.ShieldRegeneration):
                     itemType = ItemType.PowerUp_Shield;
-                    powerUpAudio = BattleManagerScript.Instance.AudioProfile.PowerUp_Shield;
                     break;
                 case (BuffDebuffStatsType.Regen):
                     itemType = ItemType.PowerUP_Health;
-                    powerUpAudio = BattleManagerScript.Instance.AudioProfile.PowerUp_Health;
                     break;
                 default:
                     Debug.LogError("Error with potion type in event collection... Collected powerup effect is: " + ItemPowerUpInfo.StatsToAffect.ToString());
                     break;
             }
-            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, powerUpAudio, AudioBus.MidPrio, other.gameObject.transform);
             EventManager.Instance?.AddPotionCollected(itemType);
-            ParticleManagerScript.Instance.FireParticlesInPosition(ItemPowerUpInfo.terminationParticles, CharacterNameType.None, AttackParticlePhaseTypes.Bullet, position, SideType.LeftSide, AttackInputType.Skill1);
+
+
+            if (ItemPowerUpInfo.collectionAudio != null)
+            {
+                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, ItemPowerUpInfo.collectionAudio, AudioBus.MidPrio, other.gameObject.transform);
+            }
+            if(ItemPowerUpInfo.terminationParticles != null)
+            {
+                ParticleManagerScript.Instance.FireParticlesInPosition(ItemPowerUpInfo.terminationParticles, CharacterNameType.None, AttackParticlePhaseTypes.Bullet, position, SideType.LeftSide, AttackInputType.Skill1);
+            }
+
+
             StopCoroutine(OnField_Co);
             StartCoroutine(StopItem_Co());
         }
@@ -95,7 +103,7 @@ public class ItemsPowerUPsInfoScript : MonoBehaviour
 
     private IEnumerator StopItem_Co()
     {
-        activeParticles.SetActive(false);
+        activeParticles?.SetActive(false);
         Anim.SetBool("FadeInOut", false);
         yield return new WaitForSeconds(0.5f);
         gameObject.SetActive(false);

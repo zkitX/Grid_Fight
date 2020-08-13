@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f96114dd9827f2e40a361be8628991f8, type: 3}
   m_Name: Pup_Stamina
   m_EditorClassIdentifier: 
-  Name: Stamina_Buff_01
+  level: 1
+  StackType: 0
+  maxStack: 3
   StatsToAffect: 11
   StatsChecker: 0
   Value: {x: 20, y: 20}
@@ -24,7 +26,13 @@ MonoBehaviour:
   recolorCharUI: 0
   statusIconColor: {r: 1, g: 0, b: 1, a: 1}
   Atk: {fileID: 0}
+  RageAI: {fileID: 0}
   AIs: []
+  ClonePrefab: {fileID: 0}
+  ClonePowerScale: 0.5
+  CloneAsManyAsCurrentEnemies: 0
+  CloneAmount: 1
+  CloneStartingEffect: {fileID: 0}
   prefab: {fileID: 6581044320134047782, guid: 633716ab60480154bbe8cf6b14059bf0, type: 3}
   powerUpText: 
   color: 5
@@ -34,3 +42,15 @@ MonoBehaviour:
     type: 3}
   DurationOnField: 15
   EffectDuration: 10
+  collectionAudio:
+    clip: {fileID: 0}
+    clips:
+    - {fileID: 8300000, guid: 196a29d467e0cb740832ba4af835801a, type: 3}
+    audioPriority: 0
+    audioBus: {fileID: 5600944808491506892, guid: 3778e2e6543dd0f4380203029dba3a7c,
+      type: 2}
+    randomiseOrder: 0
+    moreThanOneClip: 0
+    cooldownType: 0
+    cooldownPeriod: 1
+    baseVolume: 1
