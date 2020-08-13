@@ -33,15 +33,16 @@ public class CallDisplayPopup : Command
     {
         if(popup == null)
         {
-            popup = GetComponentInChildren<PopUpItem>();
+            popup = GetComponentInChildren<PopUpItem>(true);
             if (popup == null)
             {
                 Debug.LogError("No popup gameobject in the event manager prefab");
                 Continue();
                 yield break;
             }
-        }
 
+        }
+        popup.gameObject.SetActive(true);
         yield return popup.TriggerPopup(
             screenPositionOffset, popupTitle, popupDescription, popupImage, holdTime, autoEndAfterTime, autoEndTime,
             adjustColors ? boxColor : new Color(), adjustColors ? titleColor : new Color(), adjustColors ? descriptionColor : new Color()
