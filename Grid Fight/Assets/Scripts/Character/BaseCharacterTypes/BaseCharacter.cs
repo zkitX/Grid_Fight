@@ -1622,13 +1622,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
                 bdClass.CurrentBuffDebuff.Timer += BattleManagerScript.Instance.DeltaTime;
 
-                if (((int)bdClass.CurrentBuffDebuff.Timer) > iterator && bdClass.Stat.ToString().Contains("Overtime"))
+                if (((int)bdClass.CurrentBuffDebuff.Timer) > iterator)
                 {
                     iterator++;
                     if (bdClass.Stat == BuffDebuffStatsType.Regen)
                     {
                         CharInfo.Health += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.HealthStats.Base, bdClass.currentBuffValue) : bdClass.currentBuffValue;
-                        HealthStatsChangedEvent?.Invoke(bdClass.currentBuffValue, bdClass.currentBuffValue > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, SpineAnim.transform);
+                        HealthStatsChangedEvent?.Invoke(bdClass.currentBuffValue, HealthChangedType.Heal, SpineAnim.transform);
                         EventManager.Instance?.UpdateHealth(this);
                         //Apply Bleed
                         if (bdClass.currentBuffValue < 0)
@@ -1639,7 +1639,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     if (bdClass.Stat == BuffDebuffStatsType.Bleed)
                     {
                         CharInfo.Health -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.HealthStats.Base, bdClass.currentBuffValue) : bdClass.currentBuffValue;
-                        HealthStatsChangedEvent?.Invoke(bdClass.currentBuffValue, bdClass.currentBuffValue > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, SpineAnim.transform);
+                        HealthStatsChangedEvent?.Invoke(bdClass.currentBuffValue, HealthChangedType.Damage, SpineAnim.transform);
                         EventManager.Instance?.UpdateHealth(this);
                         //Apply Bleed
                         if (bdClass.currentBuffValue < 0)
