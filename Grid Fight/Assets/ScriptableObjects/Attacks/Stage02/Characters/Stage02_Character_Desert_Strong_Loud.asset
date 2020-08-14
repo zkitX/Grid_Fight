@@ -18,7 +18,7 @@ MonoBehaviour:
   _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 1
   AttackAnim: 1
-  StaminaCost: 4
+  StaminaCost: 12
   ExperiencePoints: 10
   _CoolDown: {x: 3, y: 5}
   PrefixAnim: 1
@@ -40,7 +40,7 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
-  TrajectoriesNumber: 1
+  TrajectoriesNumber: 2
   ParticlesAtk:
     BulletTrajectories:
     - Show: 1
@@ -51,17 +51,35 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 0
-          outSlope: 0
+          inSlope: -3.550508
+          outSlope: -3.550508
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
           outWeight: 0.33333334
         - serializedVersion: 3
+          time: 0.28164983
+          value: -1
+          inSlope: 0.05723818
+          outSlope: 0.05723818
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.26668245
+        - serializedVersion: 3
+          time: 0.7021592
+          value: 1
+          inSlope: 0.01557961
+          outSlope: 0.01557961
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.7145246
+        - serializedVersion: 3
           time: 1
           value: 0
-          inSlope: 0
-          outSlope: 0
+          inSlope: -3.3574986
+          outSlope: -3.3574986
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
@@ -90,6 +108,62 @@ MonoBehaviour:
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      ChildrenBulletDelay: 0.5
+      BulletEffectTiles: []
+      BulletGapStartingTile: {x: 0, y: 0}
+      HasEffect: 0
+      Effects: []
+      EffectChances: 100
+    - Show: 1
+      BulletDistanceInTile: {x: 0, y: 15}
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 3.5231204
+          outSlope: 3.5231204
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.28164983
+          value: 0.99228626
+          inSlope: 0.05723818
+          outSlope: 0.05723818
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.26668245
+        - serializedVersion: 3
+          time: 0.7021592
+          value: -0.9916886
+          inSlope: 0.01557961
+          outSlope: 0.01557961
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.7145246
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 3.3295932
+          outSlope: 3.3295932
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
