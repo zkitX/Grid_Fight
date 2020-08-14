@@ -14,6 +14,7 @@ public class NewIManager : MonoBehaviour
     [SerializeField] protected string buttonTypeX;
     [SerializeField] protected string buttonTypeY;
 
+    [SerializeField] protected GameObject timerBox = null;
     [SerializeField] protected TextMeshProUGUI timerText;
     [SerializeField] protected TextMeshProUGUI hitComboHighScoreText;
     [SerializeField] protected TextMeshProUGUI killComboHighScoreText;
@@ -36,6 +37,12 @@ public class NewIManager : MonoBehaviour
 
         timeBoxUpdater = UpdateTimerText();
         StartCoroutine(timeBoxUpdater);
+    }
+
+    public void EnableTimerBox(bool state)
+    {
+        timerBox.SetActive(state);
+        if(state) UpdateComboCounts();
     }
 
     IEnumerator UpdateTimerText()
