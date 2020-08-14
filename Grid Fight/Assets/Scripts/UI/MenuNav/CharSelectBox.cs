@@ -8,6 +8,8 @@ public class CharSelectBox : MonoBehaviour
 {
     public static CharSelectBox Instance;
 
+    protected Transform buttonContainer = null;
+
     public bool indentAlternatingRows = false;
 
     bool enabled = false;
@@ -84,6 +86,13 @@ public class CharSelectBox : MonoBehaviour
     {
         Instance = this;
 
+        if (buttonContainer == null)
+        {
+            buttonContainer = new GameObject("ButtonContainer").transform;
+            buttonContainer.parent = transform;
+            buttonContainer.SetAsFirstSibling();
+        }
+
         selectionBox = GetComponent<Image>();
 
         DisplayPage(1);
@@ -155,6 +164,7 @@ public class CharSelectBox : MonoBehaviour
 
         Vector2 currentPos = (transform.position - (new Vector3(boxDimens.x, -boxDimens.y) / 2f)) + new Vector3((btnDimens.x / 2f), -(btnDimens.y / 2f));
 
+        int positionInparent = btnsPerPage;
         for (int y = 0; y < rows; y++)
         {
             List<CharSelectButton> currentRowBtns = new List<CharSelectButton>();
@@ -163,7 +173,7 @@ public class CharSelectBox : MonoBehaviour
                 CharSelectButton curBtn = Instantiate(selectableCharButton_Prefab, new Vector3(currentPos.x, currentPos.y), Quaternion.identity, transform).GetComponent<CharSelectButton>();
                 currentRowBtns.Add(curBtn);
                 curBtn.selectionBoxRef = this;
-                curBtn.DisplayChar(null);
+                curBtn.DisplayChar(null, instantChange: true);
                 curBtn.GetComponent<Grid_UIButton>().parentPanel = GetComponentInParent<Grid_UIPanel>();
                 activeButtons.Add(curBtn);
 
@@ -176,12 +186,16 @@ public class CharSelectBox : MonoBehaviour
                     currentPos = new Vector2((transform.position.x - (boxDimens.x / 2f)) + (btnDimens.x / 2f), currentPos.y);
                 }
             }
-            if(indentAlternatingRows && (y % 2 == 1))
+            foreach (CharSelectButton crb in currentRowBtns)
             {
-                foreach (CharSelectButton crb in currentRowBtns)
+                if (indentAlternatingRows && (y % 2 == 1))
                 {
-                    crb.transform.position += new Vector3(spacing.x/2f, 0f);
+                    crb.transform.position += new Vector3(spacing.x / 2f, 0f);
                 }
+                positionInparent--;
+                crb.positionInParent = positionInparent;
+                crb.transform.parent = buttonContainer;
+                crb.transform.SetAsFirstSibling();
             }
 
             currentPos -= new Vector2(0f, spacing.y);
@@ -198,18 +212,39 @@ public class CharSelectBox : MonoBehaviour
         int curCharIndex = (currentPageIndex - 1) * (btnsPerPage);
 
         CharacterLoadInformation[] charsToDisplay = SceneLoadManager.Instance.loadedCharacters.Where(r => r.characterID != CharacterNameType.CleasTemple_Character_Valley_Donna).ToArray();
+        charsToDisplay = charsToDisplay.Where(r => r.encounterState == CharacterLoadInformation.EncounterState.Recruited).ToArray().Concat(
+            charsToDisplay.Where(r => r.encounterState != CharacterLoadInformation.EncounterState.Recruited).ToArray()
+            ).ToArray();
 
         for (int i = 0; i < btnsPerPage; i++)
         {
-            activeButtons[i].DisplayChar(null);
+            activeButtons[i].DisplayChar(null, instantChange: true);
             if (curCharIndex < charsToDisplay.Length)
             {
-                activeButtons[i].DisplayChar(charsToDisplay[curCharIndex], selectionMode == SelectionMode.Squad);
+                activeButtons[i].DisplayChar(charsToDisplay[curCharIndex], selectionMode == SelectionMode.Squad, true);
             }
             if (activeButtons[i].GetComponent<Grid_UIButton>().selected) activeButtons[i].UpdateSelection();
             curCharIndex++;
         }
+
+        if (ButtonAnimWaiter != null) StopCoroutine(ButtonAnimWaiter);
+        ButtonAnimWaiter = WaitForButtonsAnim();
+        StartCoroutine(ButtonAnimWaiter);
     }
+
+
+    IEnumerator ButtonAnimWaiter = null;
+    IEnumerator WaitForButtonsAnim()
+    {
+        while ((nextPageDisplay.isActiveAndEnabled && nextPageDisplay.isPlaying) || (prevPageDisplay.isPlaying && prevPageDisplay.isActiveAndEnabled))
+        {
+            yield return null;
+        }
+
+        nextPageDisplay.gameObject.SetActive(currentPageIndex < pages);
+        prevPageDisplay.gameObject.SetActive(currentPageIndex != 1 && pages > 1);
+    }
+
 
     public void EnableSelect(bool state)
     {
@@ -232,18 +267,20 @@ public class CharSelectBox : MonoBehaviour
         if (!enabled) return;
 
         value = value / Mathf.Abs(value);
-        DisplayPage(currentPageIndex + value);
 
-        if (Mathf.Clamp(currentPageIndex, 1, pages) == currentPageIndex - value) return;
+        if (Mathf.Clamp(currentPageIndex, 1, pages) == Mathf.Clamp(currentPageIndex + value, 1, pages)) return;
 
-        if(value == 1)
+        if (value == 1)
         {
+            if (!nextPageDisplay.isActiveAndEnabled) nextPageDisplay.gameObject.SetActive(true);
             nextPageDisplay.Play();
         }
         else if(value == -1)
         {
+            if (!prevPageDisplay.isActiveAndEnabled) prevPageDisplay.gameObject.SetActive(true);
             prevPageDisplay.Play();
         }
+        DisplayPage(currentPageIndex + value);
     }
 
     public void UpdateSelection(CharSelectButton btn, CharacterNameType charName, Vector3 selectionPosition)
@@ -282,6 +319,7 @@ public class CharSelectBox : MonoBehaviour
         if (selectionMode == SelectionMode.Squad) return;
         selector?.TalkToCurrent();
     }
+
 
     
 }

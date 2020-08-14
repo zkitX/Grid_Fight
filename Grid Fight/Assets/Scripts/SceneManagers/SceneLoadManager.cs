@@ -9,6 +9,10 @@ using Spine.Unity;
 public class SceneLoadManager : MonoBehaviour
 {
     public static SceneLoadManager Instance;
+
+    public GameObject SpineLoaderPrefab = null;
+
+
     public GameObject NavigatorPrefab = null;
     public GameObject RewiredPrefab = null;
     public GameObject SteamManagerGO = null;
@@ -69,6 +73,8 @@ public class SceneLoadManager : MonoBehaviour
 
     public bool AddSquadMate(CharacterNameType charName, int squadIndex)
     {
+        if (charName == CharacterNameType.None) return false;
+
         Dictionary<int, CharacterLoadInformation> squadToChange = GetSquadToCheck(squadIndex);
 
         CharacterLoadInformation loadInfo = loadedCharacters.Where(r => r.characterID == charName).FirstOrDefault();
@@ -192,9 +198,14 @@ public class SceneLoadManager : MonoBehaviour
     IEnumerator InitialLoadCo()
     {
         //Do all the pregame loading here
-        //
-        //
-        //
+
+        Grid_UISpineCharDisplay spinCharLoader = Instantiate(SpineLoaderPrefab, transform).GetComponent<Grid_UISpineCharDisplay>();
+        foreach (CharacterLoadInformation charLoadInfo in loadedCharacters)
+        {
+            yield return spinCharLoader.DisplayCharCo(charLoadInfo.characterID, false);
+        }
+        Destroy(spinCharLoader.gameObject);
+        
         //
         yield return null;
 

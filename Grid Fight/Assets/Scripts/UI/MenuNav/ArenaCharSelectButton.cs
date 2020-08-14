@@ -29,7 +29,7 @@ public class ArenaCharSelectButton : CharSelectButton
         TeamColors = SceneLoadManager.Instance.teamsColor;
     }
 
-    public override void DisplayChar(CharacterLoadInformation character, bool applyEffects = true)
+    public override void DisplayChar(CharacterLoadInformation character, bool applyEffects = true, bool instantly = false)
     {
         loadInfo = character;
 
@@ -42,7 +42,7 @@ public class ArenaCharSelectButton : CharSelectButton
             SelectorCharName.text = "???";
         }
 
-        base.DisplayChar(character, applyEffects);
+        base.DisplayChar(character, applyEffects, instantly);
     }
 
     public override void RefreshButton()

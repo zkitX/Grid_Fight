@@ -68,6 +68,8 @@ public class WorldStageSelect : MonoBehaviour
         Animation anim = curBtn.GetComponent<Animation>();
         anim.clip = null;
 
+        Grid_UINavigator.Instance.DeselectButton(curBtn.GetComponent<Grid_UIButton>(), false);
+
         if (state)
         {
             anim.clip = anim.GetClip("DV2_StageSelect_PRESS_low");

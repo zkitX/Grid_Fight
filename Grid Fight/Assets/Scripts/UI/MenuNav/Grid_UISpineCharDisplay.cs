@@ -35,6 +35,27 @@ public class Grid_UISpineCharDisplay : MonoBehaviour
         }
     }
 
+    public IEnumerator DisplayCharCo(CharacterNameType charID, bool hidden = false)
+    {
+        yield return DisplaySkeletonCo(charID != CharacterNameType.None ? SceneLoadManager.Instance.loadedCharacters.Where(r => r.characterID == charID).FirstOrDefault().charSpine : null, hidden);
+    }
+
+    IEnumerator DisplaySkeletonCo(SkeletonDataAsset characterSpine, bool hidden = false)
+    {
+        Color displayColor = !hidden ? new Color(1f, 1f, 1f, 1f) : new Color(0f, 0f, 0f, 1f);
+        if (characterSpine == null)
+        {
+            displayColor = new Color(1f, 1f, 1f, 0f);
+        }
+
+        if (isActiveAndEnabled && selectionDisplay?.skeletonDataAsset != characterSpine)
+        {
+            if (SelectedDisplayer != null) StopCoroutine(SelectedDisplayer);
+            SelectedDisplayer = ReloadSpineSkeletonData(characterSpine, displayColor);
+            yield return SelectedDisplayer;
+        }
+    }
+
     IEnumerator SelectedDisplayer = null;
     IEnumerator ReloadSpineSkeletonData(SkeletonDataAsset characterSpine, Color displayColor)
     {

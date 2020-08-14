@@ -26,6 +26,7 @@ public class CharSelectSelector : MonoBehaviour
 
     public CharSelectBox parentBox = null;
 
+    public AnimationClip pressAnim;
     public AnimationClip popInAnim;
     public AnimationClip popOutAnim;
 
@@ -149,6 +150,12 @@ public class CharSelectSelector : MonoBehaviour
         option.Play();
     }
 
+    void PressButton(Animation button)
+    {
+        button.clip = pressAnim;
+        button.Play();
+    }
+
     public void ShowSelector(bool state)
     {
         if (state == visible) return;
@@ -181,6 +188,8 @@ public class CharSelectSelector : MonoBehaviour
             SceneLoadManager.Instance.RemoveSquadMate(curSelectedChar, 0);
         }
 
+        PressButton(SelectDisplay);
+
         UpdateSelection(curSelectedChar, transform.position, 0f);
         curButton.RefreshButton();
     }
@@ -194,6 +203,8 @@ public class CharSelectSelector : MonoBehaviour
 
         if (!ChatDisplayed) return;
         if (loadInfo.availableChats.Count <= 0) return;
+
+        PressButton(ChatDisplay);
 
         StartCoroutine(TalkToCurrentCo(loadInfo.availableChats[0]));
         loadInfo.availableChats.RemoveAt(0);

@@ -262,6 +262,7 @@ public class InputController : MonoBehaviour
     UserDirInputClass udic = null;
     void OnAxisUpdate(InputActionEventData data)
     {
+        UpdateLastControllerType(data);
 
         InputButtonType buttonInput = (InputButtonType)System.Enum.Parse(typeof(InputButtonType), data.actionName);
         if(buttonInput == InputButtonType.Left_Move_Horizontal || buttonInput == InputButtonType.Right_Move_Horizontal || buttonInput == InputButtonType.Left_Move_Vertical || buttonInput == InputButtonType.Right_Move_Vertical)
@@ -441,8 +442,29 @@ public class InputController : MonoBehaviour
         }
         playersDirection.Clear();
     }
+
+    #region Update Last Controller Type
+
+    public delegate void LastControllerTypeChange(Rewired.ControllerType type);
+    public event LastControllerTypeChange OnLastControllerTypeChange;
+
+    [HideInInspector] public Rewired.ControllerType LastControllerType = Rewired.ControllerType.Joystick;
+    void UpdateLastControllerType(InputActionEventData data)
+    {
+        if (!data.IsCurrentInputSource(LastControllerType))
+        {
+            LastControllerType = data.GetCurrentInputSources().First().controllerType;
+            OnLastControllerTypeChange?.Invoke(LastControllerType);
+        }
+
+    }
+
+    #endregion
+
     void OnButtonDown(InputActionEventData data)
     {
+        UpdateLastControllerType(data);
+
         InputButtonType buttonInput = (InputButtonType)System.Enum.Parse(typeof(InputButtonType), data.actionName);
 
         switch (buttonInput)
@@ -530,6 +552,7 @@ public class InputController : MonoBehaviour
 
     void OnButtonPress(InputActionEventData data)
     {
+        UpdateLastControllerType(data);
         InputButtonType buttonInput = (InputButtonType)System.Enum.Parse(typeof(InputButtonType), data.actionName);
 
         switch (buttonInput)
