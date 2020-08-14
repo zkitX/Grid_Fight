@@ -255,7 +255,10 @@ public class MinionType_Script : BaseCharacter
             currentAttackPhase = AttackPhasesType.Start;
             SetAnimation(animToFire, isLooped, 0f);
 
-            if (nextAttack.isSequencedAttack && nextSequencedAttacks.Count > 0) nextSequencedAttacks.RemoveAt(0);
+            if (nextAttack.isSequencedAttack && nextSequencedAttacks.Count > 0)
+            {
+                nextSequencedAttacks.RemoveAt(0);
+            }
 
             while (Attacking)
             {

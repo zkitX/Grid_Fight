@@ -120,7 +120,7 @@ public class CharacterInfoScript : MonoBehaviour
         [HideInInspector] public float B_Base;
         [HideInInspector] public float B_Regeneration;
         [HideInInspector] public float B_BaseShieldRegeneration;
-        [HideInInspector] public float B_ShieldOnDefence;
+        [HideInInspector] public float B_ShieldAbsorbtion;
         [HideInInspector] public float B_Invulnerability = 0.2f;
         [HideInInspector] public float B_MinionShieldChances = 20;
         [HideInInspector] public float B_MinionPerfectShieldChances = 5;
@@ -425,7 +425,7 @@ public class CharacterInfoScript : MonoBehaviour
         ShieldStats.B_BaseShieldRegeneration = ShieldStats.BaseShieldRegeneration;
         ShieldStats.B_Regeneration = ShieldStats.Regeneration;
         ShieldStats.B_Shield = ShieldStats.Shield;
-        ShieldStats.B_ShieldOnDefence = ShieldStats.ShieldAbsorbtion;
+        ShieldStats.B_ShieldAbsorbtion = ShieldStats.ShieldAbsorbtion;
         ShieldStats.B_Invulnerability = ShieldStats.Invulnerability;
         ShieldStats.B_MinionShieldChances = ShieldStats.MinionShieldChances;
         ShieldStats.B_MinionPerfectShieldChances = ShieldStats.MinionPerfectShieldChances;

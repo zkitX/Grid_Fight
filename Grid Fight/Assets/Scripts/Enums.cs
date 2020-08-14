@@ -329,7 +329,28 @@ public enum BuffDebuffStatsType
     Invulnerable = 13,
     Rebirth = 14,
     Backfire = 15,
-    Rage = 16
+    Rage = 16,
+
+
+
+    HealthRegeneration = 17,
+    Armour = 18,
+    Shield = 19,
+    ShieldAbsorbtion = 20,
+    ShieldInvulnerabilityTime = 21,
+    MinionShieldChances = 22,
+    MinionPerfectShieldChances = 23,
+    EtherRegeneration = 24,
+    WeakBulletSpeed = 25,
+    StrongBulletSpeed = 26,
+    WeakAttackDamageMultiplier = 27,
+    WeakAttackCriticalChance = 28,
+    WeakAttackChances = 29,
+    StrongAttackDamageMultiplier = 30,
+    StrongAttackCriticalChance = 31,
+    StrongAttackChances = 32
+
+
 }
 
 public enum BuffDebuffStackType

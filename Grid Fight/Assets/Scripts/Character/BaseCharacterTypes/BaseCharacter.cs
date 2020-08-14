@@ -51,7 +51,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public event CurrentCharStartingAction CurrentCharStartingActionEvent;
     #endregion
 
-
     #region BaseChar Variables
 
     public virtual CharacterInfoScript CharInfo
@@ -150,7 +149,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     float AnimSpeed = 1;
     #endregion
 
-
     #region Defence Variables
     public bool isDefending
     {
@@ -174,7 +172,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     protected float defenceAnimSpeedMultiplier = 5f;
     protected bool IsDefStartCo = false;
     #endregion
-
 
     #region Attack Variables
 
@@ -245,6 +242,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             _shotsLeftInAttack = value;
             _shotsLeftInAttack = _shotsLeftInAttack < 0 ? 0 : _shotsLeftInAttack;
+          /*  if(_shotsLeftInAttack == 0)
+            {
+                Attacking = false;
+            }*/
         }
     }
     public int _shotsLeftInAttack = 0;
@@ -266,9 +267,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     #endregion
 
-
-
-
     #region Variables that we have to decide if still useful
     [HideInInspector]
     public List<BattleTileScript> CurrentBattleTiles = new List<BattleTileScript>();
@@ -285,13 +283,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     #endregion
 
-
     #region SwapChar Variables
     public bool IsSwapping = false;
     public bool SwapWhenPossible = false;
     #endregion
-
-
 
     #region SupportVariables
     protected GameObject chargeParticles = null;
@@ -1502,6 +1497,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 EventManager.Instance?.UpdateHealth(this);
                 HealthStatsChangedEvent?.Invoke(bdClass.currentBuffValue, bdClass.currentBuffValue > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, SpineAnim.transform);
                 break;
+            case BuffDebuffStatsType.HealthRegeneration:
+                CharInfo.HealthStats.Regeneration += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.HealthStats.B_Regeneration, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                break;
+            case BuffDebuffStatsType.Armour:
+                CharInfo.HealthStats.Armour += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.HealthStats.B_Armour, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                break;
             case BuffDebuffStatsType.BaseSpeed:
                 if (bdClass.currentBuffValue > 0)
                 {
@@ -1570,8 +1571,53 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 bdClass.CurrentBuffDebuff.Effect.ClonePowerScale, bdClass.CurrentBuffDebuff.Effect.ClonePrefab, bdClass.CurrentBuffDebuff.Effect.CloneStartingEffect
                 );
                 break;
+            case BuffDebuffStatsType.Shield:
+                CharInfo.ShieldStats.Shield += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.ShieldStats.B_Shield, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                break;
             case BuffDebuffStatsType.ShieldRegeneration:
                 CharInfo.ShieldStats.BaseShieldRegeneration += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.ShieldStats.B_BaseShieldRegeneration, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                break;
+            case BuffDebuffStatsType.ShieldAbsorbtion:
+                CharInfo.ShieldStats.ShieldAbsorbtion += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.ShieldStats.B_ShieldAbsorbtion, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                break;
+            case BuffDebuffStatsType.ShieldInvulnerabilityTime:
+                CharInfo.ShieldStats.Invulnerability += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.ShieldStats.B_Invulnerability, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                break;
+            case BuffDebuffStatsType.MinionShieldChances:
+                CharInfo.ShieldStats.MinionShieldChances += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.ShieldStats.B_MinionShieldChances, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                break;
+            case BuffDebuffStatsType.MinionPerfectShieldChances:
+                CharInfo.ShieldStats.MinionPerfectShieldChances += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.ShieldStats.B_MinionPerfectShieldChances, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                break;
+            case BuffDebuffStatsType.WeakBulletSpeed:
+                CharInfo.SpeedStats.WeakBulletSpeed += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.SpeedStats.B_WeakBulletSpeed, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                break;
+            case BuffDebuffStatsType.WeakAttackChances:
+                CharInfo.WeakAttack.Chances.x += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.WeakAttack.B_Chances.x, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                CharInfo.WeakAttack.Chances.y += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.WeakAttack.B_Chances.y, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                break;
+            case BuffDebuffStatsType.WeakAttackCriticalChance:
+                CharInfo.WeakAttack.CriticalChance.x += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.WeakAttack.B_CriticalChance.x, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                CharInfo.WeakAttack.CriticalChance.y += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.WeakAttack.B_CriticalChance.y, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                break;
+            case BuffDebuffStatsType.WeakAttackDamageMultiplier:
+                CharInfo.WeakAttack.DamageMultiplier.x += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.WeakAttack.B_DamageMultiplier.x, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                CharInfo.WeakAttack.DamageMultiplier.y += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.WeakAttack.B_DamageMultiplier.y, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                break;
+            case BuffDebuffStatsType.StrongBulletSpeed:
+                CharInfo.SpeedStats.StrongBulletSpeed += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.SpeedStats.B_StrongBulletSpeed, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                break;
+            case BuffDebuffStatsType.StrongAttackChances:
+                CharInfo.StrongAttack.Chances.x += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.StrongAttack.B_Chances.x, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                CharInfo.StrongAttack.Chances.y += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.StrongAttack.B_Chances.y, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                break;
+            case BuffDebuffStatsType.StrongAttackCriticalChance:
+                CharInfo.StrongAttack.CriticalChance.x += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.StrongAttack.B_CriticalChance.x, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                CharInfo.StrongAttack.CriticalChance.y += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.StrongAttack.B_CriticalChance.y, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                break;
+            case BuffDebuffStatsType.StrongAttackDamageMultiplier:
+                CharInfo.StrongAttack.DamageMultiplier.x += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.StrongAttack.B_DamageMultiplier.x, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                CharInfo.StrongAttack.DamageMultiplier.y += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.StrongAttack.B_DamageMultiplier.y, bdClass.currentBuffValue) : bdClass.currentBuffValue;
                 break;
             case BuffDebuffStatsType.AttackChange:
                 CharInfo.CurrentAttackTypeInfo.Add(bdClass.CurrentBuffDebuff.Effect.Atk);
@@ -1616,6 +1662,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     StartAI();
                 }
                 break;
+            
         }
 
         if (bdClass.Duration > 0)
@@ -1694,11 +1741,62 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                         }
                     }
                     break;
+                case BuffDebuffStatsType.HealthRegeneration:
+                    CharInfo.HealthStats.Regeneration -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.HealthStats.B_Regeneration, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    break;
+                case BuffDebuffStatsType.Armour:
+                    CharInfo.HealthStats.Armour -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.HealthStats.B_Armour, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    break;
                 case BuffDebuffStatsType.MovementSpeed:
                     CharInfo.SpeedStats.MovementSpeed -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.SpeedStats.B_MovementSpeed, bdClass.currentBuffValue) : bdClass.currentBuffValue;
                     break;
+                case BuffDebuffStatsType.Shield:
+                    CharInfo.ShieldStats.Shield -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.ShieldStats.B_Shield, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    break;
                 case BuffDebuffStatsType.ShieldRegeneration:
                     CharInfo.ShieldStats.BaseShieldRegeneration -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.ShieldStats.B_BaseShieldRegeneration, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    break;
+                case BuffDebuffStatsType.ShieldAbsorbtion:
+                    CharInfo.ShieldStats.ShieldAbsorbtion -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.ShieldStats.B_ShieldAbsorbtion, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    break;
+                case BuffDebuffStatsType.ShieldInvulnerabilityTime:
+                    CharInfo.ShieldStats.Invulnerability -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.ShieldStats.B_Invulnerability, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    break;
+                case BuffDebuffStatsType.MinionShieldChances:
+                    CharInfo.ShieldStats.MinionShieldChances -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.ShieldStats.B_MinionShieldChances, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    break;
+                case BuffDebuffStatsType.MinionPerfectShieldChances:
+                    CharInfo.ShieldStats.MinionPerfectShieldChances -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.ShieldStats.B_MinionPerfectShieldChances, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    break;
+                case BuffDebuffStatsType.WeakBulletSpeed:
+                    CharInfo.SpeedStats.WeakBulletSpeed -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.SpeedStats.B_WeakBulletSpeed, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    break;
+                case BuffDebuffStatsType.WeakAttackChances:
+                    CharInfo.WeakAttack.Chances.x -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.WeakAttack.B_Chances.x, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    CharInfo.WeakAttack.Chances.y -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.WeakAttack.B_Chances.y, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    break;
+                case BuffDebuffStatsType.WeakAttackCriticalChance:
+                    CharInfo.WeakAttack.CriticalChance.x -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.WeakAttack.B_CriticalChance.x, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    CharInfo.WeakAttack.CriticalChance.y -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.WeakAttack.B_CriticalChance.y, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    break;
+                case BuffDebuffStatsType.WeakAttackDamageMultiplier:
+                    CharInfo.WeakAttack.DamageMultiplier.x -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.WeakAttack.B_DamageMultiplier.x, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    CharInfo.WeakAttack.DamageMultiplier.y -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.WeakAttack.B_DamageMultiplier.y, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    break;
+                case BuffDebuffStatsType.StrongBulletSpeed:
+                    CharInfo.SpeedStats.StrongBulletSpeed -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.SpeedStats.B_StrongBulletSpeed, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    break;
+                case BuffDebuffStatsType.StrongAttackChances:
+                    CharInfo.StrongAttack.Chances.x -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.StrongAttack.B_Chances.x, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    CharInfo.StrongAttack.Chances.y -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.StrongAttack.B_Chances.y, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    break;
+                case BuffDebuffStatsType.StrongAttackCriticalChance:
+                    CharInfo.StrongAttack.CriticalChance.x -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.StrongAttack.B_CriticalChance.x, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    CharInfo.StrongAttack.CriticalChance.y -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.StrongAttack.B_CriticalChance.y, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    break;
+                case BuffDebuffStatsType.StrongAttackDamageMultiplier:
+                    CharInfo.StrongAttack.DamageMultiplier.x -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.StrongAttack.B_DamageMultiplier.x, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    CharInfo.StrongAttack.DamageMultiplier.y -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.StrongAttack.B_DamageMultiplier.y, bdClass.currentBuffValue) : bdClass.currentBuffValue;
                     break;
                 case BuffDebuffStatsType.AttackChange:
                     CharInfo.CurrentAttackTypeInfo.Remove(bdClass.CurrentBuffDebuff.Effect.Atk);

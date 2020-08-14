@@ -54,13 +54,13 @@ public class BattleTileTargetsScript : MonoBehaviour
             else if (tc.RemainingTime <= duration * 0.1f && !attackerFiredAttackAnim)
             {
                 attackerFiredAttackAnim = true;
-                attacker.shotsLeftInAttack--;
                 if (fireAnim)
                 {
                     attacker.fireAttackAnimation(transform.position); // trigger the shoot anim
                 }
             }
         }
+        attacker.shotsLeftInAttack--;
 
         bool effectOn = true;
         BaseCharacter target = null;
