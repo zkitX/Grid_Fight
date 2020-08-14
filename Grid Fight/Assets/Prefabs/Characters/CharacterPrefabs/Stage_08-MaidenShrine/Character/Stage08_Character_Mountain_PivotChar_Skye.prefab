@@ -458,11 +458,11 @@ MonoBehaviour:
   CharacterRespawnLength: 180
   CharacterSelection: 0
   HealthStats:
-    Health: 80
-    Base: 80
-    Regeneration: 1
-    BaseHealthRegeneration: 1
-    Armour: 2
+    Health: 75
+    Base: 75
+    Regeneration: 0.95
+    BaseHealthRegeneration: 0.95
+    Armour: 1.8
     LevelMultiplier: 50
     B_Health: 0
     B_Base: 0
@@ -470,10 +470,10 @@ MonoBehaviour:
     B_BaseHealthRegeneration: 0
     B_Armour: 1
   ShieldStats:
-    Shield: 5
-    Base: 5
-    Regeneration: 0.5
-    BaseShieldRegeneration: 0.5
+    Shield: 4.5
+    Base: 4.5
+    Regeneration: 0.45
+    BaseShieldRegeneration: 0.45
     ShieldAbsorbtion: 0.5
     Invulnerability: 0.2
     MinionShieldChances: 20
@@ -488,10 +488,10 @@ MonoBehaviour:
     B_MinionShieldChances: 20
     B_MinionPerfectShieldChances: 5
   EtherStats:
-    Ether: 56.25
-    Base: 56.25
-    Regeneration: 2.81
-    BaseEtherRegeneration: 2.81
+    Ether: 50
+    Base: 50
+    Regeneration: 2.4
+    BaseEtherRegeneration: 2.4
     LevelMultiplier: 33
     B_Stamina: 0
     B_Base: 0
@@ -499,7 +499,7 @@ MonoBehaviour:
     B_BaseStaminaRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
-    TileMovementTime: 0.38
+    TileMovementTime: 0.44
     MovementSpeed: 1.4
     CuttingPerc: 0.7
     IntroPerc: 0.16
@@ -536,10 +536,10 @@ MonoBehaviour:
     B_DamageMultiplier: {x: 1, y: 1}
     B_CriticalChance: {x: 2, y: 2}
     B_Chances: {x: 2, y: 2}
-  StrongAttac:
-    DamageMultiplier: {x: 3.4, y: 3.5}
-    CriticalChance: {x: 5.9, y: 6.1}
-    Chances: {x: 0.84, y: 0.86}
+  StrongAttack:
+    DamageMultiplier: {x: 3, y: 3}
+    CriticalChance: {x: 3, y: 5}
+    Chances: {x: 0, y: 1}
     LevelMultiplier: 0
     B_DamageMultiplier: {x: 3, y: 3}
     B_CriticalChance: {x: 3, y: 5}

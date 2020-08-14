@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: a1a624149f56bbc459729be4509232ce, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -458,11 +458,11 @@ MonoBehaviour:
   CharacterRespawnLength: 180
   CharacterSelection: 0
   HealthStats:
-    Health: 65
-    Base: 65
-    Regeneration: 0.81
-    BaseHealthRegeneration: 0.81
-    Armour: 1.38
+    Health: 57
+    Base: 57
+    Regeneration: 0.71
+    BaseHealthRegeneration: 0.71
+    Armour: 1.1
     LevelMultiplier: 30
     B_Health: 0
     B_Base: 0
@@ -470,10 +470,10 @@ MonoBehaviour:
     B_BaseHealthRegeneration: 0
     B_Armour: 1
   ShieldStats:
-    Shield: 3.88
-    Base: 3.88
-    Regeneration: 0.35
-    BaseShieldRegeneration: 0.35
+    Shield: 3
+    Base: 3
+    Regeneration: 0.25
+    BaseShieldRegeneration: 0.25
     ShieldAbsorbtion: 0.5
     Invulnerability: 0.2
     MinionShieldChances: 20
@@ -488,10 +488,10 @@ MonoBehaviour:
     B_MinionShieldChances: 20
     B_MinionPerfectShieldChances: 5
   EtherStats:
-    Ether: 60
-    Base: 60
-    Regeneration: 3
-    BaseEtherRegeneration: 3
+    Ether: 55
+    Base: 55
+    Regeneration: 2.7
+    BaseEtherRegeneration: 2.7
     LevelMultiplier: 39
     B_Stamina: 0
     B_Base: 0
@@ -499,7 +499,7 @@ MonoBehaviour:
     B_BaseStaminaRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
-    TileMovementTime: 0.47
+    TileMovementTime: 0.51
     MovementSpeed: 1.6
     CuttingPerc: 0.7
     IntroPerc: 0.16
@@ -513,7 +513,7 @@ MonoBehaviour:
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
     WeakBulletSpeed: 2.1
-    StrongBulletSpeed: 2.1
+    StrongBulletSpeed: 2.5
     B_BaseSpeed: 1
     B_MovementSpeed: 1
     B_AttackSpeed: 1
@@ -523,7 +523,7 @@ MonoBehaviour:
     B_WeakBulletSpeed: 5
     B_StrongBulletSpeed: 5
   DamageStats:
-    BaseDamage: 7.5
+    BaseDamage: 6.2
     B_BaseDamage: 10
     ElementalsResistence: []
     CurrentElemental: 0

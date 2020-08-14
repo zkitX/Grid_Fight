@@ -51,21 +51,39 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 0
-          outSlope: 0
+          inSlope: 1.5064387
+          outSlope: 1.5064387
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.06805873
+          value: 0.10252631
+          inSlope: 0.538196
+          outSlope: 0.538196
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.57741714
+          value: -0.1165216
+          inSlope: -0.07715501
+          outSlope: -0.07715501
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
           value: 0
-          inSlope: 0
-          outSlope: 0
+          inSlope: 0.2757367
+          outSlope: 0.2757367
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0
+          outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -93,8 +111,12 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      ChildrenBulletDelay: 0.5
-      BulletEffectTiles: []
+      ChildrenBulletDelay: 0.8
+      BulletEffectTiles:
+      - {x: -1, y: 1}
+      - {x: 1, y: 1}
+      - {x: -2, y: 2}
+      - {x: 2, y: 2}
       BulletGapStartingTile: {x: 0, y: 0}
       HasEffect: 0
       Effects: []
