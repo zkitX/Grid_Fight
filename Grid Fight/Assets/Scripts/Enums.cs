@@ -679,7 +679,14 @@ public enum ParticlesType
     Status_Debuff_Silence = 3509,
     Status_Debuff_Rage = 3510,
     Status_Debuff_Chain = 3511,
-    Status_Debuff_Zombie = 3512
+    Status_Debuff_Zombie = 3512,
+
+
+    // 4000 to 5999
+    AI_Status_VeryAgressive = 4000,
+    AI_Status_Scared = 4001,
+
+
 }
 
 

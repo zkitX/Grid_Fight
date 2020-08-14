@@ -15,19 +15,19 @@ MonoBehaviour:
   AI_Type: 20
   Vision: 10
   Checks:
-  - StatToCheck: 1
-    ValueChecker: 2
+  - CheckOnTarget: 0
+    StatToCheck: 1
+    ValueChecker: 3
+    CheckWeightMultiplier: 1
     PercToCheck: 70
-  CoolDown: 0
+    InBetween: {x: 100, y: 30}
+    Show: 1
+    BuffDebuff: 0
+  _CoolDown: {x: 3, y: 5}
   IdleMovement: 0
-  UpdateAttckWill: 1
-  AttackWill: 60
-  UpdateMoveForward: 1
-  MoveForward: 20
-  UpdateMoveBackward: 1
-  MoveBackward: 80
-  UpdateMoveUpDown: 0
-  MoveUpDown: 25
-  t: {fileID: 0}
+  AttackWill: 100
+  Chaseing_Flee: 100
+  MoveWill: 100
   StatsToModify: []
   AIPs: {fileID: 0}
+  Show: 0

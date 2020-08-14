@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage01_Character_Desert_Attack03_Mermer
   m_EditorClassIdentifier: 
-  Chances: 100
+  isSequencedAttack: 0
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 1, y: 1}
-  AttackInput: 1
+  AttackInput: 2
   AttackAnim: 1
-  StaminaCost: 10
+  StaminaCost: 0
   ExperiencePoints: 10
-  CoolDown: 4
+  _CoolDown: {x: 3, y: 5}
   PrefixAnim: 1
   Fov: 1
   Particles:
@@ -39,7 +39,7 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
-  TrajectoriesNumber: 2
+  TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories:
     - Show: 1
@@ -237,41 +237,16 @@ MonoBehaviour:
       Show: 1
       BulletEffectTiles:
       - Pos: {x: 0, y: 0}
-        HasEffect: 0
+        HasEffect: 1
         showImpact: 1
-        Effects: []
+        Effects:
+        - {fileID: 11400000, guid: 32c658bb18d75b1498b63bfa89616058, type: 2}
         EffectChances: 100
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
       - Pos: {x: 0, y: 1}
-        HasEffect: 0
-        showImpact: 1
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-    - Delay: 1.8
-      BulletTravelDurationPerTile: 0
-      ExplosionChances: 100
-      Trajectory_Y:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      Trajectory_Z:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      Show: 1
-      BulletEffectTiles:
-      - Pos: {x: -1, y: -1}
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -289,7 +264,52 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
+      - Pos: {x: 1, y: 0}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: -1, y: 0}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: -1, y: 1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 1, y: 1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
       - Pos: {x: 1, y: -1}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: -1, y: -1}
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -300,8 +320,10 @@ MonoBehaviour:
         EffectsOnTile: []
     StatToCheck: 1
     ValueChecker: 0
-    PercToCheck: 60
     Chances: 70
+    PercToCheck: 60
+    InBetween: {x: 0, y: 0}
+    Show: 0
   TotemAtk:
     AtkType: 3
     IsPlayerSide: 0

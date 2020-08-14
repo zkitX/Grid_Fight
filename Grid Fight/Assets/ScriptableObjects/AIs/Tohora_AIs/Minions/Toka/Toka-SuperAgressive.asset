@@ -10,24 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a973d68f2b711f34b902c3029d63e805, type: 3}
-  m_Name: Mermer-Defensive
+  m_Name: Toka-SuperAgressive
   m_EditorClassIdentifier: 
   AI_Type: -10
   Vision: 10
   Checks:
   - CheckOnTarget: 0
     StatToCheck: 1
-    ValueChecker: 3
+    ValueChecker: 0
     CheckWeightMultiplier: 1
-    PercToCheck: 20
-    InBetween: {x: 59, y: 20}
+    PercToCheck: 30
+    InBetween: {x: 60, y: 40}
     Show: 1
     BuffDebuff: 0
   _CoolDown: {x: 3, y: 5}
-  IdleMovement: 0
+  IdleMovement: 1
   AttackWill: 100
-  Chaseing_Flee: 0
+  Chaseing_Flee: 100
   MoveWill: 100
-  StatsToModify: []
-  AIPs: {fileID: 0}
+  StatsToModify:
+  - ModificableStats: 12
+    Multiplier: 2
+  - ModificableStats: 0
+    Multiplier: 40
+  AIPs: {fileID: 11400000, guid: 1a28b123b3446e645b91bbaaa75b4df8, type: 2}
   Show: 0
