@@ -2012,18 +2012,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         if (animState == CharacterAnimationStateType.Reverse_Arriving.ToString())
         {
         }
-      
 
-        if (animState.Contains(CharacterAnimationStateType.GettingHit.ToString()) && currentAttackPhase != AttackPhasesType.End)
+        if (string.Equals(animState, CharacterAnimationStateType.GettingHit.ToString()) ||
+            string.Equals(animState, CharacterAnimationStateType.Buff.ToString()) ||
+            string.Equals(animState, CharacterAnimationStateType.Debuff.ToString()) && (currentAttackPhase != AttackPhasesType.End || Attacking))
         {
             return;
         }
-
-        if (animState.Contains(CharacterAnimationStateType.GettingHit.ToString()) && Attacking)
-        {
-            return;
-        }
-
 
         if (isMoving && (animState.ToString() != CharacterAnimationStateType.Reverse_Arriving.ToString() && animState.ToString() != CharacterAnimationStateType.Defeat_ReverseArrive.ToString()) && (!animState.ToString().Contains("Dash")))
         {

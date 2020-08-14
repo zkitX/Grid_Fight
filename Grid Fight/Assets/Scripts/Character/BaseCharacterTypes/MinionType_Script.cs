@@ -215,11 +215,7 @@ public class MinionType_Script : BaseCharacter
         {
             return;
         }
-
-        if (animState == CharacterAnimationStateType.GettingHit && SpineAnim.CurrentAnim.Contains("GettingHit"))
-        {
-            return;
-        }
+      
         SetAnimation(animState.ToString(), loop, transition);
     }
 
@@ -234,7 +230,7 @@ public class MinionType_Script : BaseCharacter
         {
             return;
         }
-        
+
         base.SetAnimation(animState, loop, transition, _pauseOnLastFrame);
     }
 
@@ -260,7 +256,7 @@ public class MinionType_Script : BaseCharacter
                 nextSequencedAttacks.RemoveAt(0);
             }
 
-            while (Attacking)
+            while (Attacking && currentAttackPhase != AttackPhasesType.End)
             {
                 if(nextAttack == null)
                 {
@@ -477,13 +473,13 @@ public class MinionType_Script : BaseCharacter
     {
         if (isAttackBlocking)
         {
-            int rand = UnityEngine.Random.Range(0, 100);
+         /*   int rand = UnityEngine.Random.Range(0, 100);
 
             if (rand <= 200)
             {
                 Attacking = false;
                 shotsLeftInAttack = 0;
-            }
+            }*/
         }
 
         LastAttackTime = Time.time;
@@ -659,15 +655,29 @@ public class MinionType_Script : BaseCharacter
 
         if (completedAnim.Contains("IdleToAtk") && SpineAnim.CurrentAnim.Contains("IdleToAtk"))
         {
-            SetAnimation(nextAttack.PrefixAnim + "_Charging", true, 0);
-            return;
+            if (shotsLeftInAttack > 0)
+            {
+                SetAnimation(nextAttack.PrefixAnim + "_Charging", true, 0);
+                return;
+            }
+            else
+            {
+                Attacking = false;
+            }
         }
 
         if (completedAnim.Contains("_Loop") && SpineAnim.CurrentAnim.Contains("_Loop"))
         {
-            SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
-            currentAttackPhase = AttackPhasesType.End;
-            return;
+            if(nextAttack != null)
+            {
+                SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
+                return;
+            }
+            else
+            {
+
+            }
+            
         }
 
         if (completedAnim.Contains("AtkToIdle") || completedAnim == CharacterAnimationStateType.Atk.ToString() || completedAnim == CharacterAnimationStateType.Atk1.ToString())
