@@ -203,7 +203,6 @@ public class CharacterInfoScript : MonoBehaviour
     {
         public Vector2 DamageMultiplier = new Vector2(1, 1);
         public Vector2 CriticalChance = new Vector2(2, 2);
-        [Range(0,1)]
         public Vector2 Chances = new Vector2(1,1);
         public float LevelMultiplier;
 
@@ -218,7 +217,6 @@ public class CharacterInfoScript : MonoBehaviour
     {
         public Vector2 DamageMultiplier = new Vector2(3, 3);
         public Vector2 CriticalChance = new Vector2(3, 5);
-        [Range(0, 1)]
         public Vector2 Chances = new Vector2(1, 1);
 
         public float LevelMultiplier;

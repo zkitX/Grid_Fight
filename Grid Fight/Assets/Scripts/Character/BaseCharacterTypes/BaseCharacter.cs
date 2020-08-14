@@ -236,6 +236,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
         get
         {
+            if (_shotsLeftInAttack == 0)
+            {
+                Attacking = false;
+            }
             return _shotsLeftInAttack;
         }
         set

@@ -68,8 +68,8 @@ public class BattleTileTargetsScript : MonoBehaviour
             target = BattleManagerScript.Instance.GetCharInPos(pos);
             if (target != null)
             {
-                if ((attacker.nextAttack.AttackInput >= AttackInputType.Strong ? Random.Range(attacker.CharInfo.StrongAttack.Chances.x, attacker.CharInfo.StrongAttack.Chances.y) :
-                    Random.Range(attacker.CharInfo.WeakAttack.Chances.x, attacker.CharInfo.WeakAttack.Chances.y)) >= Random.Range(0f, 1f))
+                //if ((attacker.nextAttack.AttackInput >= AttackInputType.Strong ? Random.Range(attacker.CharInfo.StrongAttack.Chances.x, attacker.CharInfo.StrongAttack.Chances.y) :
+                  //  Random.Range(attacker.CharInfo.WeakAttack.Chances.x, attacker.CharInfo.WeakAttack.Chances.y)) >= Random.Range(0f, 1f))
                 {
                     bool iscritical = attacker.CharInfo.IsCritical(true);
                     //Set damage to the hitting character
@@ -199,8 +199,8 @@ public class BattleTileTargetsScript : MonoBehaviour
             target = BattleManagerScript.Instance.GetCharInPos(pos);
             if (target != null)
             {
-                if ((attacker.nextAttack.AttackInput >= AttackInputType.Strong ? Random.Range(attacker.CharInfo.StrongAttack.Chances.x, attacker.CharInfo.StrongAttack.Chances.y) :
-                    Random.Range(attacker.CharInfo.WeakAttack.Chances.x, attacker.CharInfo.WeakAttack.Chances.y)) >= Random.Range(0f, 1f))
+               // if ((attacker.nextAttack.AttackInput >= AttackInputType.Strong ? Random.Range(attacker.CharInfo.StrongAttack.Chances.x, attacker.CharInfo.StrongAttack.Chances.y) :
+               //     Random.Range(attacker.CharInfo.WeakAttack.Chances.x, attacker.CharInfo.WeakAttack.Chances.y)) >= Random.Range(0f, 1f))
                 {
                     bool iscritical = attacker.CharInfo.IsCritical(true);
                     //Set damage to the hitting character

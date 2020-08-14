@@ -212,8 +212,8 @@ public class BulletScript : MonoBehaviour
                 {
                     CameraManagerScript.Instance.CameraShake(CameraShakeType.PowerfulAttackHit);
                 }
-                if((SOAttack.AttackInput >= AttackInputType.Strong ? Random.Range(CharOwner.CharInfo.StrongAttack.Chances.x, CharOwner.CharInfo.StrongAttack.Chances.y) :
-                    Random.Range(CharOwner.CharInfo.WeakAttack.Chances.x, CharOwner.CharInfo.WeakAttack.Chances.y)) >= Random.Range(0f, 1f))
+               // if((SOAttack.AttackInput >= AttackInputType.Strong ? Random.Range(CharOwner.CharInfo.StrongAttack.Chances.x, CharOwner.CharInfo.StrongAttack.Chances.y) :
+                   // Random.Range(CharOwner.CharInfo.WeakAttack.Chances.x, CharOwner.CharInfo.WeakAttack.Chances.y)) >= Random.Range(0f, 1f))
                 {
                     target.SetDamage(CharOwner, CharOwner.NextAttackDamage * (iscritical ? 2 : 1),
                    Elemental, iscritical, CharOwner.CharInfo.ClassType == CharacterClassType.Desert && SOAttack.AttackInput != AttackInputType.Weak ? true : false);
