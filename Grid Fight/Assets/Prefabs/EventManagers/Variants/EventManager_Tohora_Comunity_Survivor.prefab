@@ -41842,6 +41842,8 @@ GameObject:
   - component: {fileID: 8178126292992491256}
   - component: {fileID: 5980849308614879790}
   - component: {fileID: 1913618113166166687}
+  - component: {fileID: 728168194477104150}
+  - component: {fileID: 4165547647762689125}
   m_Layer: 0
   m_Name: EventManager_Tohora_Comunity_Survivor
   m_TagString: Untagged
@@ -41900,11 +41902,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 1107.3871, y: 660.9848}
+  scrollPos: {x: 1147.3116, y: 794.5189}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 584
-  zoom: 0.8200002
+  zoom: 0.63999987
   scrollViewRect:
     serializedVersion: 2
     x: 0
@@ -41912,9 +41914,9 @@ MonoBehaviour:
     width: 0
     height: 0
   selectedBlocks:
-  - {fileID: 3595507189422326734}
+  - {fileID: 5921951363183435885}
   selectedCommands:
-  - {fileID: 7820051066546715333}
+  - {fileID: 4165547647762689125}
   variables: []
   description: 
   stepPause: 0
@@ -43513,6 +43515,8 @@ MonoBehaviour:
   - {fileID: 4337293032772388832}
   - {fileID: 3232709603531639487}
   - {fileID: 662958582166161488}
+  - {fileID: 4165547647762689125}
+  - {fileID: 728168194477104150}
   - {fileID: 3277096762025053062}
   - {fileID: 8672976789893222435}
   - {fileID: 2015749958365872938}
@@ -44140,7 +44144,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -363.88608
     y: 227.8308
-    width: 132.92682
+    width: 128.12502
     height: 40
   tint: {r: 1, g: 0.02745098, b: 0.02745098, a: 1}
   useCustomTint: 1
@@ -47103,6 +47107,47 @@ MonoBehaviour:
   boxColor: {r: 0, g: 0, b: 0, a: 1}
   titleColor: {r: 1, g: 1, b: 1, a: 1}
   descriptionColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &728168194477104150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8980ee476139a3d46b7a1e52c48830ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 2052
+  indentLevel: 0
+  state: 1
+--- !u!114 &4165547647762689125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424025815397970821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bb538ed444d5ce408e64358e0448c7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 2053
+  indentLevel: 0
+  ChangeTimer: 1
+  battleTime:
+    hours: 0
+    minutes: 0
+    seconds: 0
+    blockToTriggerOnComplete: 
+    counting: 0
+    isStopped: 0
+  StartStopState: 1
+  TriggerFungusOnComplete: 0
+  BlockToTriggerOnComplete: 
+  CountDownward: 0
 --- !u!1 &6431212408302048994
 GameObject:
   m_ObjectHideFlags: 0
