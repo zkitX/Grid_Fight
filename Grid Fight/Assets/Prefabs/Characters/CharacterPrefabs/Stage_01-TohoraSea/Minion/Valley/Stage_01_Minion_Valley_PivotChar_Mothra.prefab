@@ -486,7 +486,9 @@ MonoBehaviour:
   UseLayeringSystem: 1
   Head: {fileID: 1353945615871755450}
   AIs:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 45adae29bbe69a5449871af55c7d2739, type: 2}
+  - {fileID: 11400000, guid: c057c1d9912533243b74d2d48d732603, type: 2}
+  - {fileID: 11400000, guid: 230978e430caa7c43a86486bbebcacfe, type: 2}
   CharacterRespawnLength: 180
   CharacterSelection: 0
   HealthStats:
@@ -515,7 +517,7 @@ MonoBehaviour:
     B_Base: 0
     B_Regeneration: 0
     B_BaseShieldRegeneration: 0
-    B_ShieldOnDefence: 0
+    B_ShieldAbsorbtion: 0
     B_Invulnerability: 0.2
     B_MinionShieldChances: 20
     B_MinionPerfectShieldChances: 5
