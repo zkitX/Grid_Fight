@@ -60,7 +60,6 @@ public class BattleTileTargetsScript : MonoBehaviour
                 }
             }
         }
-        attacker.shotsLeftInAttack--;
 
         bool effectOn = true;
         BaseCharacter target = null;
@@ -69,17 +68,21 @@ public class BattleTileTargetsScript : MonoBehaviour
             target = BattleManagerScript.Instance.GetCharInPos(pos);
             if (target != null)
             {
-                bool iscritical = attacker.CharInfo.IsCritical(true);
-                //Set damage to the hitting character
-                effectOn = target.SetDamage(attacker, attacker.NextAttackTileDamage * (iscritical ? 2 : 1), ele, iscritical);
-                if (effectOn)
+                if ((attacker.nextAttack.AttackInput >= AttackInputType.Strong ? Random.Range(attacker.CharInfo.StrongAttack.Chances.x, attacker.CharInfo.StrongAttack.Chances.y) :
+                    Random.Range(attacker.CharInfo.WeakAttack.Chances.x, attacker.CharInfo.WeakAttack.Chances.y)) >= Random.Range(0f, 1f))
                 {
-                    int chances = Random.Range(0, 100);
-                    if (chances < effectChances)
+                    bool iscritical = attacker.CharInfo.IsCritical(true);
+                    //Set damage to the hitting character
+                    effectOn = target.SetDamage(attacker, attacker.NextAttackTileDamage * (iscritical ? 2 : 1), ele, iscritical);
+                    if (effectOn)
                     {
-                        foreach (ScriptableObjectAttackEffect item in atkEffects.Effects.Where(r => !r.StatsToAffect.ToString().Contains("Tile")).ToList())
+                        int chances = Random.Range(0, 100);
+                        if (chances < effectChances)
                         {
-                            target.Buff_DebuffCo(new Buff_DebuffClass(new ElementalResistenceClass(), ElementalType.Dark, attacker, item));
+                            foreach (ScriptableObjectAttackEffect item in atkEffects.Effects.Where(r => !r.StatsToAffect.ToString().Contains("Tile")).ToList())
+                            {
+                                target.Buff_DebuffCo(new Buff_DebuffClass(new ElementalResistenceClass(), ElementalType.Dark, attacker, item));
+                            }
                         }
                     }
                 }
@@ -128,6 +131,7 @@ public class BattleTileTargetsScript : MonoBehaviour
         }
         yield return new WaitForSeconds(0.2f);
         UpdateQueue(tc);
+        attacker.shotsLeftInAttack--;
     }
 
 
@@ -195,17 +199,21 @@ public class BattleTileTargetsScript : MonoBehaviour
             target = BattleManagerScript.Instance.GetCharInPos(pos);
             if (target != null)
             {
-                bool iscritical = attacker.CharInfo.IsCritical(true);
-                //Set damage to the hitting character
-                effectOn = target.SetDamage(attacker, attacker.NextAttackTileDamage * (iscritical ? 2 : 1), ele, iscritical);
-                if (effectOn)
+                if ((attacker.nextAttack.AttackInput >= AttackInputType.Strong ? Random.Range(attacker.CharInfo.StrongAttack.Chances.x, attacker.CharInfo.StrongAttack.Chances.y) :
+                    Random.Range(attacker.CharInfo.WeakAttack.Chances.x, attacker.CharInfo.WeakAttack.Chances.y)) >= Random.Range(0f, 1f))
                 {
-                    int chances = Random.Range(0, 100);
-                    if (chances < effectChances)
+                    bool iscritical = attacker.CharInfo.IsCritical(true);
+                    //Set damage to the hitting character
+                    effectOn = target.SetDamage(attacker, attacker.NextAttackTileDamage * (iscritical ? 2 : 1), ele, iscritical);
+                    if (effectOn)
                     {
-                        foreach (ScriptableObjectAttackEffect item in atkEffects.Effects.Where(r => !r.StatsToAffect.ToString().Contains("Tile")).ToList())
+                        int chances = Random.Range(0, 100);
+                        if (chances < effectChances)
                         {
-                            target.Buff_DebuffCo(new Buff_DebuffClass(new ElementalResistenceClass(), ElementalType.Dark, attacker, item));
+                            foreach (ScriptableObjectAttackEffect item in atkEffects.Effects.Where(r => !r.StatsToAffect.ToString().Contains("Tile")).ToList())
+                            {
+                                target.Buff_DebuffCo(new Buff_DebuffClass(new ElementalResistenceClass(), ElementalType.Dark, attacker, item));
+                            }
                         }
                     }
                 }

@@ -212,24 +212,30 @@ public class BulletScript : MonoBehaviour
                 {
                     CameraManagerScript.Instance.CameraShake(CameraShakeType.PowerfulAttackHit);
                 }
-
-                target.SetDamage(CharOwner, CharOwner.NextAttackDamage * (iscritical ? 2 : 1),
-                    Elemental, iscritical, CharOwner.CharInfo.ClassType == CharacterClassType.Desert && SOAttack.AttackInput != AttackInputType.Weak ? true : false);
-                CharOwner.Sic.DamageExp += CharOwner.NextAttackDamage;
-                if (!SkillHit && SOAttack.AttackInput > AttackInputType.Strong)
+                if((SOAttack.AttackInput >= AttackInputType.Strong ? Random.Range(CharOwner.CharInfo.StrongAttack.Chances.x, CharOwner.CharInfo.StrongAttack.Chances.y) :
+                    Random.Range(CharOwner.CharInfo.WeakAttack.Chances.x, CharOwner.CharInfo.WeakAttack.Chances.y)) >= Random.Range(0f, 1f))
                 {
-                    SkillHit = true;
-                    StatisticInfoClass sic = StatisticInfoManagerScript.Instance.CharaterStats.Where(r => r.CharacterId == CharOwner.CharInfo.CharacterID).First();
-                }
-
-                if(target.CharInfo.Health > 0)
-                {
-                    int chances = Random.Range(0, 100);
-                    if (chances < 100)
+                    target.SetDamage(CharOwner, CharOwner.NextAttackDamage * (iscritical ? 2 : 1),
+                   Elemental, iscritical, CharOwner.CharInfo.ClassType == CharacterClassType.Desert && SOAttack.AttackInput != AttackInputType.Weak ? true : false);
+                    CharOwner.Sic.DamageExp += CharOwner.NextAttackDamage;
+                    if (!SkillHit && SOAttack.AttackInput > AttackInputType.Strong)
                     {
-                        foreach (ScriptableObjectAttackEffect item in BulletEffects)
+                        SkillHit = true;
+                        StatisticInfoClass sic = StatisticInfoManagerScript.Instance.CharaterStats.Where(r => r.CharacterId == CharOwner.CharInfo.CharacterID).First();
+                    }
+
+                    if (target.CharInfo.Health > 0)
+                    {
+                        int chances = Random.Range(0, 100);
+                        if (chances < 100)
                         {
-                            target.Buff_DebuffCo(new Buff_DebuffClass(new ElementalResistenceClass(), ElementalType.Dark, CharOwner, item));
+                            foreach (ScriptableObjectAttackEffect item in BulletEffects)
+                            {
+                                if (item != null)
+                                {
+                                    target.Buff_DebuffCo(new Buff_DebuffClass(new ElementalResistenceClass(), ElementalType.Dark, CharOwner, item));
+                                }
+                            }
                         }
                     }
                 }

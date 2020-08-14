@@ -313,43 +313,51 @@ public enum StatusEffectType
 
 public enum BuffDebuffStatsType
 {
-    Damage = 0,
     Regen = 1,
-    Health = 2,
-    BaseSpeed = 3,
-    MovementSpeed = 4,
     Drain = 5,
     Zombie = 6,
     BlockTile = 7,
-    ShieldRegeneration = 8,
     Bleed = 9,
     AttackChange = 10,
-    Ether = 11, 
     Legion = 12,
     Invulnerable = 13,
     Rebirth = 14,
     Backfire = 15,
     Rage = 16,
+    Bliss = 32,
+    SoulCrash = 33,
 
-
-
+    Health = 2,
     HealthRegeneration = 17,
     Armour = 18,
+
+    BaseSpeed = 3,
+    MovementSpeed = 4,
+
+    Damage = 0,
+
     Shield = 19,
+    ShieldRegeneration = 8,
     ShieldAbsorbtion = 20,
     ShieldInvulnerabilityTime = 21,
     MinionShieldChances = 22,
     MinionPerfectShieldChances = 23,
+
+
+
+    Ether = 11,
     EtherRegeneration = 24,
+
+
     WeakBulletSpeed = 25,
-    StrongBulletSpeed = 26,
     WeakAttackDamageMultiplier = 27,
     WeakAttackCriticalChance = 28,
     WeakAttackChances = 29,
+
+    StrongBulletSpeed = 26,
     StrongAttackDamageMultiplier = 30,
     StrongAttackCriticalChance = 31,
-    StrongAttackChances = 32
-
+    StrongAttackChances = 32,
 
 }
 
@@ -756,6 +764,7 @@ public enum HealthChangedType
     Invulnerable,
     Rebirth,
     Backfire,
+    Miss
 }
 
 

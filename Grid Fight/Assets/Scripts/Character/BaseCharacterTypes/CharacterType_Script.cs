@@ -164,6 +164,15 @@ public class CharacterType_Script : BaseCharacter
     public override void SetCharDead()
     {
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
+        BuffsDebuffsList.ForEach(r =>
+        {
+            if (r.Stat != BuffDebuffStatsType.Zombie)
+            {
+                r.Duration = 0;
+                r.CurrentBuffDebuff.Stop_Co = true;
+            }
+        }
+        );
         SetAnimation(CharacterAnimationStateType.Defeat_ReverseArrive);
         SetAttackReady(false);
         if(battleTime != null)battleTime.isStopped = true;

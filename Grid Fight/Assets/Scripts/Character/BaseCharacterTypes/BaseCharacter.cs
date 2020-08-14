@@ -242,10 +242,10 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             _shotsLeftInAttack = value;
             _shotsLeftInAttack = _shotsLeftInAttack < 0 ? 0 : _shotsLeftInAttack;
-          /*  if(_shotsLeftInAttack == 0)
+            if(_shotsLeftInAttack == 0)
             {
                 Attacking = false;
-            }*/
+            }
         }
     }
     public int _shotsLeftInAttack = 0;
@@ -1668,7 +1668,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         if (bdClass.Duration > 0)
         {
             int iterator = 0;
-            while (bdClass.CurrentBuffDebuff.Timer <= bdClass.Duration && !bdClass.CurrentBuffDebuff.Stop_Co)
+            while (bdClass.CurrentBuffDebuff.Timer <= bdClass.Duration && !bdClass.CurrentBuffDebuff.Stop_Co && CharInfo.HealthPerc > 0)
             {
                 yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
 
@@ -1688,7 +1688,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                             ParticleManagerScript.Instance.FireParticlesInPosition(ParticleManagerScript.Instance.GetParticlePrefabByName(ParticlesType.Status_Debuff_Bleed), CharacterNameType.None, AttackParticlePhaseTypes.Cast, SpineAnim.transform.position, SideType.LeftSide, AttackInputType.Weak).transform.SetParent(SpineAnim.transform);
                         }
                     }
-                    if (bdClass.Stat == BuffDebuffStatsType.Bleed)
+                    else if (bdClass.Stat == BuffDebuffStatsType.Bleed)
                     {
                         CharInfo.Health -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.HealthStats.Base, bdClass.currentBuffValue) : bdClass.currentBuffValue;
                         HealthStatsChangedEvent?.Invoke(bdClass.currentBuffValue, HealthChangedType.Damage, SpineAnim.transform);
@@ -1697,7 +1697,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                         ParticleManagerScript.Instance.FireParticlesInPosition(ParticleManagerScript.Instance.GetParticlePrefabByName(ParticlesType.Status_Debuff_Bleed), CharacterNameType.None, AttackParticlePhaseTypes.Cast, SpineAnim.transform.position, SideType.LeftSide, AttackInputType.Weak).transform.SetParent(SpineAnim.transform);
                         
                     }
-                    if (bdClass.Stat == BuffDebuffStatsType.Drain)
+                    else if (bdClass.Stat == BuffDebuffStatsType.Drain)
                     {
                         val = bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.HealthStats.Base, bdClass.currentBuffValue) : bdClass.currentBuffValue;
                         HealthStatsChangedEvent?.Invoke(val, HealthChangedType.Heal, bdClass.EffectMaker.SpineAnim.transform);
@@ -1706,6 +1706,24 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                         CharInfo.Health -= val;
                         EventManager.Instance?.UpdateHealth(bdClass.EffectMaker);
                         EventManager.Instance?.UpdateHealth(this);
+                    }
+                    else if (bdClass.Stat == BuffDebuffStatsType.Bliss)
+                    {
+                        CharInfo.Ether += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.EtherStats.Base, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                        //Apply Bleed
+                        if (bdClass.currentBuffValue < 0)
+                        {
+                            ParticleManagerScript.Instance.FireParticlesInPosition(ParticleManagerScript.Instance.GetParticlePrefabByName(ParticlesType.Status_Debuff_Bleed), CharacterNameType.None, AttackParticlePhaseTypes.Cast, SpineAnim.transform.position, SideType.LeftSide, AttackInputType.Weak).transform.SetParent(SpineAnim.transform);
+                        }
+                    }
+                    else if (bdClass.Stat == BuffDebuffStatsType.SoulCrash)
+                    {
+                        CharInfo.Ether -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.EtherStats.Base, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                        //Apply Bleed
+                        if (bdClass.currentBuffValue < 0)
+                        {
+                            ParticleManagerScript.Instance.FireParticlesInPosition(ParticleManagerScript.Instance.GetParticlePrefabByName(ParticlesType.Status_Debuff_Bleed), CharacterNameType.None, AttackParticlePhaseTypes.Cast, SpineAnim.transform.position, SideType.LeftSide, AttackInputType.Weak).transform.SetParent(SpineAnim.transform);
+                        }
                     }
                 }
             }

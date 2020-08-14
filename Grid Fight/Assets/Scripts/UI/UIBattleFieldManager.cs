@@ -18,12 +18,14 @@ public class UIBattleFieldManager : MonoBehaviour
     public GameObject Healing;
     public GameObject CriticalHit;
     public GameObject ComboIndicator;
-    private Dictionary<int, GameObject> Damages = new Dictionary<int, GameObject>();
-    private Dictionary<int, GameObject> Defends = new Dictionary<int, GameObject>();
-    private Dictionary<int, GameObject> PartialDefends = new Dictionary<int, GameObject>();
-    private Dictionary<int, GameObject> Healings = new Dictionary<int, GameObject>();
-    private Dictionary<int, GameObject> CriticalHits = new Dictionary<int, GameObject>();
-    private Dictionary<int, GameObject> ComboIndicators = new Dictionary<int, GameObject>();
+    public GameObject Miss;
+    private List<GameObject> Damages = new List<GameObject>();
+    private List<GameObject> Defends = new List<GameObject>();
+    private List<GameObject> PartialDefends = new List<GameObject>();
+    private List<GameObject> Healings = new List<GameObject>();
+    private List<GameObject> CriticalHits = new List<GameObject>();
+    private List<GameObject> ComboIndicators = new List<GameObject>();
+    private List<GameObject> Misses = new List<GameObject>();
 
 
     private Camera mCamera;
@@ -51,7 +53,7 @@ public class UIBattleFieldManager : MonoBehaviour
 
     public void DisplayComboStyleSplasher(string text, Vector3 pos, float scaler, Color color, bool animateLong, out float animLength)
     {
-        GameObject cI = ComboIndicators.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
+        GameObject cI = ComboIndicators.Where(r => !r.activeInHierarchy).FirstOrDefault();
         if (cI == null)
         {
             cI = Instantiate(ComboIndicator, transform);
@@ -116,6 +118,9 @@ public class UIBattleFieldManager : MonoBehaviour
             case HealthChangedType.Backfire:
                 StartCoroutine(BackfireCo(value, charOwner));
                 break;
+            case HealthChangedType.Miss:
+                StartCoroutine(BackfireCo(value, charOwner));
+                break;
             default:
                 break;
         }
@@ -125,11 +130,11 @@ public class UIBattleFieldManager : MonoBehaviour
     {
         float timer = 0;
         bool isAlive = true;
-        GameObject d = Damages.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
+        GameObject d = Damages.Where(r => !r.activeInHierarchy).FirstOrDefault();
         if (d == null)
         {
             d = Instantiate(Damage, transform);
-            Damages.Add(Damages.Count, d);
+            Damages.Add(d);
         }
         d.SetActive(true);
         d.GetComponentInChildren<TextMeshProUGUI>().text = ((int)(damage * 100)).ToString() + " BACKFIRE";
@@ -156,10 +161,11 @@ public class UIBattleFieldManager : MonoBehaviour
     {
         float timer = 0;
         bool isAlive = true;
-        GameObject h = Healings.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
+        GameObject h = Healings.Where(r => !r.activeInHierarchy).FirstOrDefault();
         if (h == null)
         {
             h = Instantiate(Healing, transform);
+            Healings.Add(h);
         }
         h.SetActive(true);
         h.GetComponentInChildren<TextMeshProUGUI>().text = "REBIRTH";
@@ -186,11 +192,11 @@ public class UIBattleFieldManager : MonoBehaviour
         float timer = 0;
         bool isAlive = true;
         GameObject d;
-        d = Defends.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
+        d = Defends.Where(r => !r.activeInHierarchy).FirstOrDefault();
         if (d == null)
         {
             d = Instantiate(Defence, transform);
-            Defends.Add(Defends.Count, d);
+            Defends.Add(d);
         }
 
         d.SetActive(true);
@@ -224,10 +230,11 @@ public class UIBattleFieldManager : MonoBehaviour
     {
         float timer = 0;
         bool isAlive = true;
-        GameObject h = Healings.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
+        GameObject h = Healings.Where(r => !r.activeInHierarchy).FirstOrDefault();
         if (h == null)
         {
             h = Instantiate(Healing, transform);
+            Healings.Add(h);
         }
         h.SetActive(true);
         h.GetComponentInChildren<TextMeshProUGUI>().text = ((int)(heal * 100)).ToString();
@@ -249,15 +256,47 @@ public class UIBattleFieldManager : MonoBehaviour
         h.SetActive(false);
     }
 
+
+    private IEnumerator MissCo(Transform charOwner)
+    {
+        float timer = 0;
+        bool isAlive = true;
+        GameObject h = Misses.Where(r => !r.activeInHierarchy).FirstOrDefault();
+        if (h == null)
+        {
+            h = Instantiate(Miss, transform);
+            Misses.Add(h);
+        }
+        h.SetActive(true);
+        h.GetComponentInChildren<TextMeshProUGUI>().text = "MISS";
+        SetAnim(h.GetComponentInChildren<Animator>(), 5);
+        while (timer <= 0.8f)
+        {
+            if (charOwner.gameObject.activeInHierarchy && isAlive)
+            {
+                h.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
+            }
+            else if (isAlive)
+            {
+                isAlive = false;
+            }
+            yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
+
+            timer += BattleManagerScript.Instance.DeltaTime;
+        }
+        h.SetActive(false);
+    }
+
+
     private IEnumerator DamageCo(float damage, Transform charOwner)
     {
         float timer = 0;
         bool isAlive = true;
-        GameObject d = Damages.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
+        GameObject d = Damages.Where(r => !r.activeInHierarchy).FirstOrDefault();
         if (d == null)
         {
             d = Instantiate(Damage, transform);
-            Damages.Add(Damages.Count, d);
+            Damages.Add(d);
         }
         d.SetActive(true);
         d.GetComponentInChildren<TextMeshProUGUI>().text = ((int)(damage * 100)).ToString();
@@ -288,21 +327,21 @@ public class UIBattleFieldManager : MonoBehaviour
         GameObject d;
         if (damage == 0)
         {
-            d = Defends.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
+            d = Defends.Where(r => !r.activeInHierarchy).FirstOrDefault();
             if (d == null)
             {
                 d = Instantiate(Defence, transform);
-                Defends.Add(Defends.Count, d);
+                Defends.Add(d);
             }
             res = "DEF";
         }
         else
         {
-            d = PartialDefends.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
+            d = PartialDefends.Where(r => !r.activeInHierarchy).FirstOrDefault();
             if (d == null)
             {
                 d = Instantiate(PartialDefend, transform);
-                PartialDefends.Add(PartialDefends.Count, d);
+                PartialDefends.Add(d);
             }
         }
         
@@ -336,11 +375,11 @@ public class UIBattleFieldManager : MonoBehaviour
     {
         float timer = 0;
         bool isAlive = true;
-        GameObject c = CriticalHits.Values.Where(r => !r.activeInHierarchy).FirstOrDefault();
+        GameObject c = CriticalHits.Where(r => !r.activeInHierarchy).FirstOrDefault();
         if (c == null)
         {
             c = Instantiate(CriticalHit, transform);
-            CriticalHits.Add(CriticalHits.Count, c);
+            CriticalHits.Add(c);
         }
         c.SetActive(true);
         c.GetComponentInChildren<TextMeshProUGUI>().text = "CRITICAL  " + ((int)(damage * 100)).ToString();
