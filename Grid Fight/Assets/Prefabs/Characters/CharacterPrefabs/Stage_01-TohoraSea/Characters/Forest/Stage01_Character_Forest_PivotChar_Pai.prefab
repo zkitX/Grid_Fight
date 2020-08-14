@@ -472,8 +472,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charOwner: {fileID: 0}
-  testAtkEffect: {fileID: 0}
   Name: Pai
   CharacterIcon: {fileID: 21300000, guid: 893d0d1ce912f6b44b57e9b542d720fb, type: 3}
   Mask: {fileID: 0}
@@ -486,6 +484,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 17f5b0b788e38a144b6fbec81d43e0d7, type: 2}
   - {fileID: 11400000, guid: cbaa5d093f8f84c4193942445f39143f, type: 2}
   - {fileID: 11400000, guid: ca5244418a17e5843b5f4def6b1aa92d, type: 2}
+  - {fileID: 11400000, guid: a55ad61e26b9b5c49a50ae9b4c98464a, type: 2}
   AddedAttackTypeInfo: []
   Elemental: 8
   ClassType: 2
@@ -495,50 +494,49 @@ MonoBehaviour:
   AIs:
   - {fileID: 11400000, guid: 838de499180f7df4aaf932bcfa1f1c5b, type: 2}
   - {fileID: 11400000, guid: 7a53e8cfb43a8c341b85815baf6fc047, type: 2}
+  - {fileID: 11400000, guid: 1965ee6244c67204d9c32e0db76bc8ce, type: 2}
   CharacterRespawnLength: 180
   CharacterSelection: 0
-  RapidAttack:
-    DamageMultiplier: {x: 1, y: 1}
-    CriticalChance: {x: 2, y: 3}
-    LevelMultiplier: 0
-    B_DamageMultiplier: {x: 1, y: 1}
-    B_CriticalChance: {x: 2, y: 2}
-  PowerfulAttac:
-    DamageMultiplier: {x: 3.5, y: 3.5}
-    CriticalChance: {x: 3, y: 4}
-    LevelMultiplier: 0
-    B_DamageMultiplier: {x: 3, y: 3}
-    B_CriticalChance: {x: 3, y: 5}
   HealthStats:
     Health: 65
     Base: 65
     Regeneration: 0.7
     BaseHealthRegeneration: 0.7
+    Armour: 1
     LevelMultiplier: 15
     B_Health: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseHealthRegeneration: 0
-  StaminaStats:
-    Stamina: 29
-    Base: 29
-    Regeneration: 1.1
-    BaseStaminaRegeneration: 1.1
-    LevelMultiplier: 30
-    B_Stamina: 0
-    B_Base: 0
-    B_Regeneration: 0
-    B_BaseStaminaRegeneration: 0
+    B_Armour: 1
   ShieldStats:
     Shield: 5
     Base: 5
     Regeneration: 0.25
     BaseShieldRegeneration: 0.25
+    ShieldAbsorbtion: 0.5
+    Invulnerability: 0.2
+    MinionShieldChances: 20
+    MinionPerfectShieldChances: 5
     LevelMultiplier: 25
     B_Shield: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseShieldRegeneration: 0
+    B_ShieldOnDefence: 0
+    B_Invulnerability: 0.2
+    B_MinionShieldChances: 20
+    B_MinionPerfectShieldChances: 5
+  EtherStats:
+    Ether: 40
+    Base: 40
+    Regeneration: 1
+    BaseEtherRegeneration: 1
+    LevelMultiplier: 30
+    B_Stamina: 0
+    B_Base: 0
+    B_Regeneration: 0
+    B_BaseStaminaRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
     TileMovementTime: 1
@@ -547,41 +545,45 @@ MonoBehaviour:
     IntroPerc: 0.15
     LoopPerc: 0.7
     EndPerc: 0.15
-    AttackSpeed: 2.1
-    AttackSpeedRatio: 2
-    BulletSpeed: 2.2
+    AttackLoopDuration: 0.5
+    IdleToAttackDuration: 0.01
     LeaveSpeed: 3
     BaseSpeed_LevelMultiplier: 3.5
     MovementSpeed_LevelMultiplier: 3.5
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
+    WeakBulletSpeed: 5
+    StrongBulletSpeed: 5
     B_BaseSpeed: 1
     B_MovementSpeed: 1
     B_AttackSpeed: 1
-    B_AttackSpeedRatio: 0
-    B_BulletSpeed: 5
     B_LeaveSpeed: 3
     B_IdleToAtkDuration: 0.2
     B_AtkToIdleDuration: 0.2
+    B_WeakBulletSpeed: 5
+    B_StrongBulletSpeed: 5
   DamageStats:
     BaseDamage: 6
     B_BaseDamage: 10
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 5
-  DefenceStats:
-    BaseDefence: 3
-    Invulnerability: 0.2
-    MinionDefenceChances: 20
-    MinionPerfectDefenceChances: 5
-    B_BaseDefence: 10
-    B_Invulnerability: 0.2
-    B_MinionDefenceChances: 20
-    B_MinionPerfectDefenceChances: 5
-    LevelMultiplier: 30
-  Special1LoadingDuration: 0
-  Special2LoadingDuration: 0
-  Special3LoadingDuration: 0
+  WeakAttack:
+    DamageMultiplier: {x: 1, y: 1}
+    CriticalChance: {x: 2, y: 2}
+    Chances: {x: 0, y: 1}
+    LevelMultiplier: 0
+    B_DamageMultiplier: {x: 1, y: 1}
+    B_CriticalChance: {x: 2, y: 2}
+    B_Chances: {x: 2, y: 2}
+  StrongAttack:
+    DamageMultiplier: {x: 3, y: 3}
+    CriticalChance: {x: 3, y: 5}
+    Chances: {x: 0, y: 1}
+    LevelMultiplier: 0
+    B_DamageMultiplier: {x: 3, y: 3}
+    B_CriticalChance: {x: 3, y: 5}
+    B_Chances: {x: 2, y: 2}
   ExperienceValue: 0
   MovementTimer: {x: 5, y: 8}
   B_MovementTimer: {x: 5, y: 8}

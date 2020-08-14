@@ -12,25 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a973d68f2b711f34b902c3029d63e805, type: 3}
   m_Name: Mothra-Agressive
   m_EditorClassIdentifier: 
-  AI_Type: 20
-  Vision: 5
+  AI_Type: 10
+  Vision: 10
   Checks:
-  - StatToCheck: 1
-    ValueChecker: 0
+  - CheckOnTarget: 0
+    StatToCheck: 1
+    ValueChecker: 3
+    CheckWeightMultiplier: 1
     PercToCheck: 40
-  - StatToCheck: 6
-    ValueChecker: 0
-    PercToCheck: 30
-  CoolDown: 0
+    InBetween: {x: 100, y: 30}
+    Show: 1
+    BuffDebuff: 0
+  _CoolDown: {x: 3, y: 5}
   IdleMovement: 0
-  UpdateAttckWill: 1
-  AttackWill: 70
-  UpdateMoveForward: 1
-  MoveForward: 80
-  UpdateMoveBackward: 1
-  MoveBackward: 20
-  UpdateMoveUpDown: 0
-  MoveUpDown: 25
-  t: {fileID: 0}
+  AttackWill: 80
+  Chaseing_Flee: 80
   StatsToModify: []
   AIPs: {fileID: 0}
+  Show: 0

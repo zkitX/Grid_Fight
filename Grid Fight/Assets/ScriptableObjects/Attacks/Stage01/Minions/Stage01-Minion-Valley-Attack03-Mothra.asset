@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage01-Minion-Valley-Attack03-Mothra
   m_EditorClassIdentifier: 
-  Chances: 100
+  isSequencedAttack: 0
   CurrentAttackType: 1
   AttackRatioMultiplier: 2
   _DamageMultiplier: {x: 1, y: 1}
-  AttackInput: 1
+  AttackInput: 2
   AttackAnim: 0
-  StaminaCost: 10
+  StaminaCost: 1
   ExperiencePoints: 10
-  CoolDown: 5
+  _CoolDown: {x: 3, y: 5}
   PrefixAnim: 0
   Fov: 1
   Particles:
@@ -40,7 +40,7 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
-  TrajectoriesNumber: 2
+  TrajectoriesNumber: 3
   ParticlesAtk:
     BulletTrajectories:
     - Show: 1
@@ -130,7 +130,7 @@ MonoBehaviour:
   TilesAtk:
     AtkType: 1
     BulletTrajectories:
-    - Delay: 1.2
+    - Delay: 1
       BulletTravelDurationPerTile: 0.27
       ExplosionChances: 100
       Trajectory_Y:
@@ -193,15 +193,16 @@ MonoBehaviour:
       Show: 1
       BulletEffectTiles:
       - Pos: {x: 0, y: 0}
-        HasEffect: 0
+        HasEffect: 1
         showImpact: 0
-        Effects: []
+        Effects:
+        - {fileID: 11400000, guid: 5fa3d64744f2587488bfeadba63fa1d2, type: 2}
         EffectChances: 100
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-    - Delay: 1.5
+    - Delay: 0.8
       BulletTravelDurationPerTile: 0
       ExplosionChances: 100
       Trajectory_Y:
@@ -218,19 +219,38 @@ MonoBehaviour:
         m_RotationOrder: 4
       Show: 1
       BulletEffectTiles:
-      - Pos: {x: -1, y: -1}
-        HasEffect: 0
+      - Pos: {x: 0, y: 1}
+        HasEffect: 1
         showImpact: 1
-        Effects: []
+        Effects:
+        - {fileID: 11400000, guid: 5fa3d64744f2587488bfeadba63fa1d2, type: 2}
         EffectChances: 100
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-      - Pos: {x: 1, y: -1}
-        HasEffect: 0
+    - Delay: 1.2
+      BulletTravelDurationPerTile: 0
+      ExplosionChances: 100
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Show: 1
+      BulletEffectTiles:
+      - Pos: {x: 0, y: -1}
+        HasEffect: 1
         showImpact: 1
-        Effects: []
+        Effects:
+        - {fileID: 11400000, guid: 5fa3d64744f2587488bfeadba63fa1d2, type: 2}
         EffectChances: 100
         IsEffectOnTile: 0
         TileParticlesID: 0
@@ -238,8 +258,10 @@ MonoBehaviour:
         EffectsOnTile: []
     StatToCheck: 1
     ValueChecker: 0
-    PercToCheck: 50
-    Chances: 47
+    Chances: 200
+    PercToCheck: 10
+    InBetween: {x: 0, y: 0}
+    Show: 0
   TotemAtk:
     AtkType: 3
     IsPlayerSide: 0

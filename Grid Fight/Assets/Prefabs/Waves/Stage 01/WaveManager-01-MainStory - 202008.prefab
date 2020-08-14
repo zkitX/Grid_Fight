@@ -1,0 +1,939 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4237660525658530105
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4237660525658530119}
+  - component: {fileID: 4237660525658530118}
+  m_Layer: 0
+  m_Name: WaveManager-01-MainStory - 202008
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4237660525658530119
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4237660525658530105}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.2474627, y: 0.9679096, z: -3.4060545}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4237660525658530118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4237660525658530105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09b0c490261b08d4dbe285554c10a1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  battleTime:
+    hours: 0
+    minutes: 15
+    seconds: 0
+    blockToTriggerOnComplete: 
+    counting: 0
+    isStopped: 0
+  WavePhases:
+  - name: Wave1
+    IsRandom: 1
+    MaxEnemyOnScreen: 3
+    AbsoluteMaxEnemyOnScreen: 6
+    DelayBetweenChars: 0
+    ListOfEnemy:
+    - name: Mothra
+      NPCType: 0
+      NumberOfCharacter: 6
+      TypeOfCharacter:
+        CharacterName: 1023
+        KillWaveIfCharDie: 0
+        Health: {x: 40, y: 45}
+        HealthRegeneration: {x: 1, y: 2}
+        BaseDamage: {x: 5, y: 6}
+        WeakAttackMultiplier: {x: 0.95, y: 1.1}
+        StrongAttackMultiplier: {x: 2, y: 3}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 10, y: 10}
+        EtherRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 2, y: 3}
+        MovementTimer: {x: 1, y: 1}
+        Armour: {x: 1, y: 2}
+        MinionShieldChances: {x: 10, y: 15}
+        MinionPerfectShieldChances: {x: 2, y: 3}
+        DeathAnim: 0
+        Exp: 100
+        AIs:
+        - {fileID: 11400000, guid: d1128cc1e5582924f8d17af539b798c0, type: 2}
+        - {fileID: 11400000, guid: a3a40b9fde6ae6248b9558bbcc894f67, type: 2}
+        - {fileID: 11400000, guid: 230978e430caa7c43a86486bbebcacfe, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+  - name: PaiWave
+    IsRandom: 0
+    MaxEnemyOnScreen: 4
+    AbsoluteMaxEnemyOnScreen: 4
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Pai
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1027
+        KillWaveIfCharDie: 0
+        Health: {x: 400, y: 450}
+        HealthRegeneration: {x: 1, y: 1.5}
+        BaseDamage: {x: 13, y: 17}
+        WeakAttackMultiplier: {x: 1, y: 1}
+        StrongAttackMultiplier: {x: 1.95, y: 2.2}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 50, y: 50}
+        EtherRegeneration: {x: 2, y: 2}
+        MovementSpeed: {x: 2, y: 2.2}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 3, y: 5}
+        MinionShieldChances: {x: 30, y: 35}
+        MinionPerfectShieldChances: {x: 5, y: 10}
+        DeathAnim: 0
+        Exp: 1000
+        AIs:
+        - {fileID: 11400000, guid: 838de499180f7df4aaf932bcfa1f1c5b, type: 2}
+        - {fileID: 11400000, guid: 7a53e8cfb43a8c341b85815baf6fc047, type: 2}
+        - {fileID: 11400000, guid: 1965ee6244c67204d9c32e0db76bc8ce, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Fishylla
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1021
+        KillWaveIfCharDie: 0
+        Health: {x: 150, y: 160}
+        HealthRegeneration: {x: 3, y: 3}
+        BaseDamage: {x: 5, y: 6}
+        WeakAttackMultiplier: {x: 1, y: 1.2}
+        StrongAttackMultiplier: {x: 2, y: 2.5}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 10, y: 10}
+        EtherRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.7, y: 2.2}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 2, y: 3}
+        MinionShieldChances: {x: 10, y: 15}
+        MinionPerfectShieldChances: {x: 2, y: 5}
+        DeathAnim: 0
+        Exp: 120
+        AIs:
+        - {fileID: 11400000, guid: 5270d0c583de8604fb627b5c63761b02, type: 2}
+        - {fileID: 11400000, guid: 790aa4b0d3160b34ea81e09a0c528c34, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+  - name: Wave3
+    IsRandom: 1
+    MaxEnemyOnScreen: 4
+    AbsoluteMaxEnemyOnScreen: 4
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Fishylla
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1021
+        KillWaveIfCharDie: 0
+        Health: {x: 32, y: 35}
+        HealthRegeneration: {x: 3, y: 3}
+        BaseDamage: {x: 4, y: 6}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 1.7, y: 1.7}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 120
+        AIs:
+        - {fileID: 11400000, guid: 5270d0c583de8604fb627b5c63761b02, type: 2}
+        - {fileID: 11400000, guid: 790aa4b0d3160b34ea81e09a0c528c34, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Mothra
+      NPCType: 0
+      NumberOfCharacter: 4
+      TypeOfCharacter:
+        CharacterName: 1023
+        KillWaveIfCharDie: 0
+        Health: {x: 40, y: 42}
+        HealthRegeneration: {x: 0.3, y: 0.3}
+        BaseDamage: {x: 4, y: 7}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 100
+        AIs:
+        - {fileID: 11400000, guid: d1128cc1e5582924f8d17af539b798c0, type: 2}
+        - {fileID: 11400000, guid: a3a40b9fde6ae6248b9558bbcc894f67, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+  - name: KoraWave
+    IsRandom: 0
+    MaxEnemyOnScreen: 3
+    AbsoluteMaxEnemyOnScreen: 3
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Kora
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1026
+        KillWaveIfCharDie: 0
+        Health: {x: 200, y: 240}
+        HealthRegeneration: {x: 1.3, y: 1.3}
+        BaseDamage: {x: 14, y: 19}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 2, y: 2}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 1.8, y: 1.8}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 1000
+        AIs:
+        - {fileID: 11400000, guid: cfe7debcf908d6a4bac4706e7712b0a0, type: 2}
+        - {fileID: 11400000, guid: b724b42653c802e40ba1f9994e0fb922, type: 2}
+        - {fileID: 11400000, guid: 2dc428f387fc64741b8b0359286bd89e, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Fishylla
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1021
+        KillWaveIfCharDie: 0
+        Health: {x: 32, y: 35}
+        HealthRegeneration: {x: 3, y: 3}
+        BaseDamage: {x: 3, y: 6}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 1.7, y: 1.7}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 120
+        AIs:
+        - {fileID: 11400000, guid: 5270d0c583de8604fb627b5c63761b02, type: 2}
+        - {fileID: 11400000, guid: 790aa4b0d3160b34ea81e09a0c528c34, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Mothra
+      NPCType: 0
+      NumberOfCharacter: 4
+      TypeOfCharacter:
+        CharacterName: 1023
+        KillWaveIfCharDie: 0
+        Health: {x: 40, y: 42}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 4, y: 7}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 100
+        AIs:
+        - {fileID: 11400000, guid: d1128cc1e5582924f8d17af539b798c0, type: 2}
+        - {fileID: 11400000, guid: a3a40b9fde6ae6248b9558bbcc894f67, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Crabera
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1022
+        KillWaveIfCharDie: 0
+        Health: {x: 70, y: 80}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 8, y: 10}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1.6, y: 1.5}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 0.8, y: 0.8}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 200
+        AIs:
+        - {fileID: 11400000, guid: 6440a784888d69649bd560903a78926e, type: 2}
+        - {fileID: 11400000, guid: 514190b53570a9b40abde07e0f3ba360, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+  - name: Wave5
+    IsRandom: 0
+    MaxEnemyOnScreen: 4
+    AbsoluteMaxEnemyOnScreen: 4
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Fishylla
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 1021
+        KillWaveIfCharDie: 0
+        Health: {x: 40, y: 45}
+        HealthRegeneration: {x: 3, y: 3}
+        BaseDamage: {x: 5, y: 8}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 1.7, y: 1.7}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 120
+        AIs:
+        - {fileID: 11400000, guid: 5270d0c583de8604fb627b5c63761b02, type: 2}
+        - {fileID: 11400000, guid: 790aa4b0d3160b34ea81e09a0c528c34, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 0
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile: []
+    - name: Crabera
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1022
+        KillWaveIfCharDie: 0
+        Health: {x: 70, y: 80}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 8, y: 10}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1.6, y: 1.6}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 0.8, y: 0.8}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 200
+        AIs:
+        - {fileID: 11400000, guid: 6440a784888d69649bd560903a78926e, type: 2}
+        - {fileID: 11400000, guid: 514190b53570a9b40abde07e0f3ba360, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 0
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile: []
+    - name: Fishylla
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1021
+        KillWaveIfCharDie: 0
+        Health: {x: 40, y: 45}
+        HealthRegeneration: {x: 3, y: 3}
+        BaseDamage: {x: 5, y: 8}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 1.7, y: 1.7}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 120
+        AIs:
+        - {fileID: 0}
+        - {fileID: 11400000, guid: 790aa4b0d3160b34ea81e09a0c528c34, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 0
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile: []
+    - name: Crabera
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1022
+        KillWaveIfCharDie: 0
+        Health: {x: 70, y: 80}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 8, y: 10}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1.6, y: 1.6}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 0.8, y: 0.8}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 200
+        AIs:
+        - {fileID: 11400000, guid: 6440a784888d69649bd560903a78926e, type: 2}
+        - {fileID: 11400000, guid: 514190b53570a9b40abde07e0f3ba360, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 0
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile: []
+  - name: Wave6
+    IsRandom: 0
+    MaxEnemyOnScreen: 5
+    AbsoluteMaxEnemyOnScreen: 0
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Toka
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1020
+        KillWaveIfCharDie: 0
+        Health: {x: 100, y: 180}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 10, y: 13}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 0.8, y: 0.8}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 400
+        AIs:
+        - {fileID: 11400000, guid: 45250ca858729fc4e8aed46d76b6e90b, type: 2}
+        - {fileID: 11400000, guid: 09cb6649b3d747243a84d01618408ab8, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 0
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile: []
+    - name: Mothra
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1023
+        KillWaveIfCharDie: 0
+        Health: {x: 40, y: 42}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 4, y: 7}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 100
+        AIs:
+        - {fileID: 11400000, guid: 230978e430caa7c43a86486bbebcacfe, type: 2}
+        - {fileID: 11400000, guid: a3a40b9fde6ae6248b9558bbcc894f67, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 0
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile: []
+    - name: Fishylla
+      NPCType: 0
+      NumberOfCharacter: 6
+      TypeOfCharacter:
+        CharacterName: 1021
+        KillWaveIfCharDie: 0
+        Health: {x: 40, y: 45}
+        HealthRegeneration: {x: 3, y: 3}
+        BaseDamage: {x: 5, y: 8}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 1.7, y: 1.7}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 120
+        AIs:
+        - {fileID: 0}
+        - {fileID: 11400000, guid: 790aa4b0d3160b34ea81e09a0c528c34, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 0
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile: []
+    - name: Crabera
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 1022
+        KillWaveIfCharDie: 0
+        Health: {x: 70, y: 80}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 8, y: 10}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1.6, y: 1.6}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 0.8, y: 0.8}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 200
+        AIs:
+        - {fileID: 11400000, guid: 6440a784888d69649bd560903a78926e, type: 2}
+        - {fileID: 11400000, guid: 514190b53570a9b40abde07e0f3ba360, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 0
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile: []
+  - name: MermerWave
+    IsRandom: 0
+    MaxEnemyOnScreen: 5
+    AbsoluteMaxEnemyOnScreen: 0
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Mermer
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1025
+        KillWaveIfCharDie: 0
+        Health: {x: 300, y: 320}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 16, y: 22}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 2, y: 2}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 1.5, y: 1.5}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 1000
+        AIs:
+        - {fileID: 11400000, guid: 12d75e12ebf80104783dee92ca05ec80, type: 2}
+        - {fileID: 11400000, guid: bf1de93dd0ed3bd459df6199fe3dc729, type: 2}
+        - {fileID: 11400000, guid: 6a9f64222ff654e43aa41c6ae2cc4bad, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Crabera
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1022
+        KillWaveIfCharDie: 0
+        Health: {x: 70, y: 80}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 8, y: 10}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1.6, y: 1.6}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 0.8, y: 0.8}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 200
+        AIs:
+        - {fileID: 11400000, guid: 6440a784888d69649bd560903a78926e, type: 2}
+        - {fileID: 11400000, guid: 514190b53570a9b40abde07e0f3ba360, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Fishylla
+      NPCType: 0
+      NumberOfCharacter: 4
+      TypeOfCharacter:
+        CharacterName: 1021
+        KillWaveIfCharDie: 0
+        Health: {x: 40, y: 45}
+        HealthRegeneration: {x: 3, y: 3}
+        BaseDamage: {x: 5, y: 8}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 1.7, y: 1.7}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 120
+        AIs:
+        - {fileID: 11400000, guid: 5270d0c583de8604fb627b5c63761b02, type: 2}
+        - {fileID: 11400000, guid: 790aa4b0d3160b34ea81e09a0c528c34, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Toka
+      NPCType: 0
+      NumberOfCharacter: 4
+      TypeOfCharacter:
+        CharacterName: 1020
+        KillWaveIfCharDie: 0
+        Health: {x: 100, y: 150}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 10, y: 13}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 0.8, y: 0.8}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 400
+        AIs:
+        - {fileID: 11400000, guid: 45250ca858729fc4e8aed46d76b6e90b, type: 2}
+        - {fileID: 11400000, guid: 09cb6649b3d747243a84d01618408ab8, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+  - name: NoitiWave
+    IsRandom: 0
+    MaxEnemyOnScreen: 5
+    AbsoluteMaxEnemyOnScreen: 0
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Epa
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1024
+        KillWaveIfCharDie: 0
+        Health: {x: 310, y: 350}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 18, y: 21}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 2, y: 2}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 1.1, y: 1.1}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 1000
+        AIs:
+        - {fileID: 11400000, guid: 6847113b39104dd419571ee38694b6db, type: 2}
+        - {fileID: 11400000, guid: 17ea8bc98ea838b409682a8ae30e49d9, type: 2}
+        - {fileID: 11400000, guid: b92c90b404c607348a2c589e5812f83d, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Mothra
+      NPCType: 0
+      NumberOfCharacter: 4
+      TypeOfCharacter:
+        CharacterName: 1023
+        KillWaveIfCharDie: 0
+        Health: {x: 40, y: 42}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 4, y: 7}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 1, y: 1}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 100
+        AIs:
+        - {fileID: 11400000, guid: 230978e430caa7c43a86486bbebcacfe, type: 2}
+        - {fileID: 11400000, guid: a3a40b9fde6ae6248b9558bbcc894f67, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Toka
+      NPCType: 0
+      NumberOfCharacter: 3
+      TypeOfCharacter:
+        CharacterName: 1020
+        KillWaveIfCharDie: 0
+        Health: {x: 100, y: 150}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 10, y: 13}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1.2, y: 1.5}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 0.8, y: 0.8}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 400
+        AIs:
+        - {fileID: 11400000, guid: 45250ca858729fc4e8aed46d76b6e90b, type: 2}
+        - {fileID: 11400000, guid: 09cb6649b3d747243a84d01618408ab8, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+  - name: Tikaka
+    IsRandom: 0
+    MaxEnemyOnScreen: 1
+    AbsoluteMaxEnemyOnScreen: 0
+    DelayBetweenChars: 1
+    ListOfEnemy:
+    - name: Tikaka
+      NPCType: 2
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1028
+        KillWaveIfCharDie: 0
+        Health: {x: 800, y: 800}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 17, y: 21}
+        WeakAttackMultiplier: {x: 0, y: 0}
+        StrongAttackMultiplier: {x: 0, y: 0}
+        BaseSpeed: {x: 1.3, y: 1.3}
+        Ether: {x: 0, y: 0}
+        EtherRegeneration: {x: 0, y: 0}
+        MovementSpeed: {x: 1.3, y: 1.3}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 5000
+        AIs:
+        - {fileID: 11400000, guid: aecd33ac89734d5429dc06f6344dddac, type: 2}
+        - {fileID: 11400000, guid: dddde13df6d7e9342aa35bdbb3959379, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+  isWaveComplete: 0
+  WaveCharcters: []
+  StartWave: 0
