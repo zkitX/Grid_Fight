@@ -16,6 +16,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     //minion
     protected float LastAttackTime;
     public int AttackWillPerc = 13;
+    public int MoveWillPerc = 100;
     public int UpDownMovementPerc = 13;
     public int TowardMovementPerc = 13;
     public int AwayMovementPerc = 13;
@@ -293,13 +294,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
 
     #region SupportVariables
-    public GameObject chargeParticles = null;
-    GameObject tempGameObject = null;
-    float tempFloat_1;
-    int tempInt_1, tempInt_2, tempInt_3;
-    Vector2Int tempVector2Int;
-    Vector3 tempVector3;
-    string tempString;
+    protected GameObject chargeParticles = null;
+    protected GameObject tempGameObject = null;
+    protected float tempFloat_1;
+    protected int tempInt_1, tempInt_2, tempInt_3;
+    protected Vector2Int tempVector2Int;
+    protected Vector3 tempVector3;
+    protected string tempString;
     Spine.Animation tempAnimation;
     List<Spine.Timeline> tempTimeLine;
     Spine.EventTimeline tempEventTimeLine;
@@ -1104,6 +1105,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     protected void SetCurrentAIValues()
     {
         AttackWillPerc = CurrentAIState.AttackWill;
+        MoveWillPerc = CurrentAIState.MoveWill;
         TowardMovementPerc = CurrentAIState.Chaseing_Flee;
     }
 
@@ -1167,7 +1169,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 }
                 else
                 {
-                    if (AreTileNearEmpty())
+                    tempInt_2 = UnityEngine.Random.Range(0, 100);
+                    if (AreTileNearEmpty() && tempInt_2 < MoveWillPerc)
                     {
                         if (possiblePos == null)
                         {

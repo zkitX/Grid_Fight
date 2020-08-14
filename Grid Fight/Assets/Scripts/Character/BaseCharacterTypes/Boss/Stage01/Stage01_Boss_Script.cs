@@ -25,7 +25,6 @@ public class Stage01_Boss_Script : MinionType_Script
 
 
 
-    BaseCharacter target = null;
     public override IEnumerator AI()
     {
         bool val = true;

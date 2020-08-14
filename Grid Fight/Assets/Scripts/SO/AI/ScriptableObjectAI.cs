@@ -34,7 +34,9 @@ public class ScriptableObjectAI : ScriptableObject
     public int AttackWill = 20;
     [Range(0,100)]
     public int Chaseing_Flee = 20;
-    
+    [Range(0, 100)]
+    public int MoveWill = 100;
+
 
     [Header("State effects")]
 

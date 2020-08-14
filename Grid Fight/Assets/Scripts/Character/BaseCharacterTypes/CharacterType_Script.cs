@@ -857,8 +857,8 @@ public class CharacterType_Script : BaseCharacter
                 CurrentAIState.ModifyStats(CharInfo);
                 AICoolDownOffset = 0;
 
-                int atkChances = Random.Range(0, 100);
-                if (target != null && atkChances < AttackWillPerc &&  (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler))
+                tempInt_1 = Random.Range(0, 100);
+                if (target != null && tempInt_1 < AttackWillPerc &&  (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler))
                 {
                     lastAttackTime = Time.time;
                     nextAttackPos = target.UMS.CurrentTilePos;
@@ -872,7 +872,8 @@ public class CharacterType_Script : BaseCharacter
                 }
                 else
                 {
-                    if (AreTileNearEmpty())
+                    tempInt_2 = Random.Range(0, 100);
+                    if (AreTileNearEmpty() && tempInt_2 < MoveWillPerc)
                     {
                         if (possiblePos == null)
                         {
