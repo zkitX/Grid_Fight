@@ -13,24 +13,21 @@ MonoBehaviour:
   m_Name: Crabera-Defensive
   m_EditorClassIdentifier: 
   AI_Type: -10
-  Vision: 10
+  Vision: 5
   Checks:
-  - StatToCheck: 1
+  - CheckOnTarget: 0
+    StatToCheck: 6
     ValueChecker: 0
-    PercToCheck: 60
-  - StatToCheck: 6
-    ValueChecker: 0
-    PercToCheck: 59
-  CoolDown: 0
+    CheckWeightMultiplier: 15
+    PercToCheck: 50
+    InBetween: {x: 60, y: 40}
+    Show: 1
+    BuffDebuff: 0
+  _CoolDown: {x: 3, y: 5}
   IdleMovement: 0
-  UpdateAttckWill: 1
-  AttackWill: 100
-  UpdateMoveForward: 1
-  MoveForward: 90
-  UpdateMoveBackward: 1
-  MoveBackward: 10
-  UpdateMoveUpDown: 0
-  MoveUpDown: 10
-  t: {fileID: 0}
+  AttackWill: 60
+  Chaseing_Flee: 80
+  MoveWill: 100
   StatsToModify: []
-  AIPs: {fileID: 0}
+  AIPs: {fileID: 11400000, guid: 18a4d67ca6807df4ea27f336435f8bdf, type: 2}
+  Show: 0

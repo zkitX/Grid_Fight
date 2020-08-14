@@ -10,20 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage01-Minion-Forest-Attack02-Crabera
+  m_Name: Stage01-Minion-Forest-Attack02-Strong-Crabera
   m_EditorClassIdentifier: 
   isSequencedAttack: 0
-  Chances: 100
   CurrentAttackType: 1
   AttackRatioMultiplier: 2
   _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 1
   AttackAnim: 0
-  StaminaCost: 10
+  StaminaCost: 0
   ExperiencePoints: 10
   _CoolDown: {x: 3, y: 5}
   PrefixAnim: 0
-  Fov: 1
+  Fov: 2
   Particles:
     Left:
       Cast: {fileID: 5711570250590617338, guid: 2e3c62c06289b634f9831939d737904c,
@@ -193,9 +192,9 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-    - Delay: 2
+    - Delay: 1.9
       BulletTravelDurationPerTile: 0
-      ExplosionChances: 100
+      ExplosionChances: 80
       Trajectory_Y:
         serializedVersion: 2
         m_Curve: []
@@ -228,16 +227,7 @@ MonoBehaviour:
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-      - Pos: {x: 1, y: -1}
-        HasEffect: 0
-        showImpact: 1
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-      - Pos: {x: -1, y: -1}
+      - Pos: {x: 0, y: -1}
         HasEffect: 0
         showImpact: 1
         Effects: []
@@ -247,9 +237,9 @@ MonoBehaviour:
         DurationOnTile: 0
         EffectsOnTile: []
     StatToCheck: 1
-    ValueChecker: 0
-    Chances: 80
-    PercToCheck: 50
+    ValueChecker: 2
+    Chances: 100
+    PercToCheck: 0
     InBetween: {x: 0, y: 0}
     Show: 0
   TotemAtk:

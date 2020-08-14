@@ -10,61 +10,79 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage01_Character_Forest_EnemyAttack02_Strong_Pai
+  m_Name: Stage01-Minion-Forest-Attack03-Buff-Crabera
   m_EditorClassIdentifier: 
   isSequencedAttack: 0
   CurrentAttackType: 1
-  AttackRatioMultiplier: 1
+  AttackRatioMultiplier: 2
   _DamageMultiplier: {x: 1, y: 1}
-  AttackInput: 1
-  AttackAnim: 1
+  AttackInput: 2
+  AttackAnim: 0
   StaminaCost: 0
   ExperiencePoints: 10
-  _CoolDown: {x: 4, y: 6}
-  PrefixAnim: 1
-  Fov: 2
+  _CoolDown: {x: 4, y: 8}
+  PrefixAnim: 0
+  Fov: 1
   Particles:
     Left:
-      Cast: {fileID: 7362359623206521130, guid: 2b941c3ed561b0248acfdc0ad0494f31,
+      Cast: {fileID: 6538196122733923060, guid: 2d30550205a41064d9bb8768898775e4,
         type: 3}
-      Bullet: {fileID: 5607316002386017123, guid: 5dcfa90c89e183a46b445bf5a37ed7a5,
+      Bullet: {fileID: 6538196122733923060, guid: 2d30550205a41064d9bb8768898775e4,
         type: 3}
-      Hit: {fileID: 4366934825128067757, guid: cb735386c176b9245a29264281f39eb9, type: 3}
+      Hit: {fileID: 6538196122733923060, guid: 2d30550205a41064d9bb8768898775e4, type: 3}
     Right:
-      Cast: {fileID: 7362359623206521130, guid: 5b6a55e9c3906dc42b6c71dd303ef4cb,
+      Cast: {fileID: 6538196122733923060, guid: 2d30550205a41064d9bb8768898775e4,
         type: 3}
-      Bullet: {fileID: 5607316002386017123, guid: b8085c828f37db140a452298cdb8d8f4,
+      Bullet: {fileID: 6538196122733923060, guid: 2d30550205a41064d9bb8768898775e4,
         type: 3}
-      Hit: {fileID: 4366934825128067757, guid: 57d969f5eb4b98b448397f87aa5a1c98, type: 3}
+      Hit: {fileID: 6538196122733923060, guid: 2d30550205a41064d9bb8768898775e4, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
-  TrajectoriesNumber: 3
+  TrajectoriesNumber: 2
   ParticlesAtk:
     BulletTrajectories:
     - Show: 1
-      BulletDistanceInTile: {x: 0, y: 15}
+      BulletDistanceInTile: {x: 0, y: 7}
       Trajectory_Y:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
+          inSlope: 0.10084034
+          outSlope: 5.490564
+          tangentMode: 1
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
+          outWeight: 0.10956513
+        - serializedVersion: 3
+          time: 0.42717206
+          value: 1.006525
+          inSlope: 0.03406383
+          outSlope: 0.03406383
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.713425
+        - serializedVersion: 3
+          time: 0.66491127
+          value: 0.9735383
+          inSlope: -0.30817193
+          outSlope: -0.37254393
+          tangentMode: 1
+          weightedMode: 0
+          inWeight: 0.6947553
+          outWeight: 0.5521593
         - serializedVersion: 3
           time: 1
           value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
+          inSlope: -6.497175
+          outSlope: -0.09917355
+          tangentMode: 1
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0.055405695
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -101,10 +119,10 @@ MonoBehaviour:
       EffectChances: 100
     CharacterClass: 0
   TilesAtk:
-    AtkType: 1
+    AtkType: 2
     BulletTrajectories:
-    - Delay: 1.7
-      BulletTravelDurationPerTile: 0.3
+    - Delay: 1.6
+      BulletTravelDurationPerTile: 0.25
       ExplosionChances: 100
       Trajectory_Y:
         serializedVersion: 2
@@ -112,21 +130,30 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 0
+          inSlope: 4.530805
+          outSlope: 4.530805
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.26912895
+        - serializedVersion: 3
+          time: 0.5
+          value: 1
           inSlope: 0
           outSlope: 0
-          tangentMode: 34
+          tangentMode: 0
           weightedMode: 0
-          inWeight: 0
+          inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
           value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 34
+          inSlope: -4.648086
+          outSlope: -4.648086
+          tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
+          inWeight: 0.05269456
+          outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -158,17 +185,17 @@ MonoBehaviour:
       BulletEffectTiles:
       - Pos: {x: 0, y: 0}
         HasEffect: 1
-        showImpact: 1
+        showImpact: 0
         Effects:
-        - {fileID: 11400000, guid: d96b6514c1b1bf54ea0aadaf6216b36e, type: 2}
-        EffectChances: 50
+        - {fileID: 11400000, guid: cce107803346d3840b541ed5aca84fb8, type: 2}
+        EffectChances: 70
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-    - Delay: 1.8
+    - Delay: 1.6
       BulletTravelDurationPerTile: 0
-      ExplosionChances: 100
+      ExplosionChances: 70
       Trajectory_Y:
         serializedVersion: 2
         m_Curve: []
@@ -187,7 +214,37 @@ MonoBehaviour:
         HasEffect: 1
         showImpact: 1
         Effects:
-        - {fileID: 11400000, guid: d96b6514c1b1bf54ea0aadaf6216b36e, type: 2}
+        - {fileID: 11400000, guid: cce107803346d3840b541ed5aca84fb8, type: 2}
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: -1, y: 1}
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: cce107803346d3840b541ed5aca84fb8, type: 2}
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 0, y: 1}
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: cce107803346d3840b541ed5aca84fb8, type: 2}
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: 1, y: 1}
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: cce107803346d3840b541ed5aca84fb8, type: 2}
         EffectChances: 100
         IsEffectOnTile: 0
         TileParticlesID: 0
@@ -197,44 +254,37 @@ MonoBehaviour:
         HasEffect: 1
         showImpact: 1
         Effects:
-        - {fileID: 11400000, guid: d96b6514c1b1bf54ea0aadaf6216b36e, type: 2}
+        - {fileID: 11400000, guid: cce107803346d3840b541ed5aca84fb8, type: 2}
         EffectChances: 100
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-    - Delay: 1.9
-      BulletTravelDurationPerTile: 0
-      ExplosionChances: 100
-      Trajectory_Y:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      Trajectory_Z:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      Show: 1
-      BulletEffectTiles:
-      - Pos: {x: -2, y: 0}
+      - Pos: {x: 1, y: -1}
         HasEffect: 1
         showImpact: 1
         Effects:
-        - {fileID: 11400000, guid: d96b6514c1b1bf54ea0aadaf6216b36e, type: 2}
+        - {fileID: 11400000, guid: cce107803346d3840b541ed5aca84fb8, type: 2}
         EffectChances: 100
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
-      - Pos: {x: 2, y: 0}
+      - Pos: {x: 0, y: -1}
         HasEffect: 1
         showImpact: 1
         Effects:
-        - {fileID: 11400000, guid: d96b6514c1b1bf54ea0aadaf6216b36e, type: 2}
+        - {fileID: 11400000, guid: cce107803346d3840b541ed5aca84fb8, type: 2}
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+      - Pos: {x: -1, y: -1}
+        HasEffect: 1
+        showImpact: 1
+        Effects:
+        - {fileID: 11400000, guid: cce107803346d3840b541ed5aca84fb8, type: 2}
         EffectChances: 100
         IsEffectOnTile: 0
         TileParticlesID: 0
@@ -243,7 +293,7 @@ MonoBehaviour:
     StatToCheck: 1
     ValueChecker: 0
     Chances: 100
-    PercToCheck: 70
+    PercToCheck: 60
     InBetween: {x: 0, y: 0}
     Show: 0
   TotemAtk:
