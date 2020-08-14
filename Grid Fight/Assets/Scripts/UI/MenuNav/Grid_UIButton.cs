@@ -48,7 +48,7 @@ public class Grid_UIButton : MonoBehaviour
     {
         get
         {
-            return new Vector2((buttonImage.rectTransform.rect.width / transform.localScale.x)*(Screen.width / 1920f), (buttonImage.rectTransform.rect.height / transform.localScale.y) * (Screen.height / 1080f));
+            return new Vector2((buttonImage.rectTransform.rect.width)*(Screen.width / 1920f), (buttonImage.rectTransform.rect.height) * (Screen.height / 1080f));
         }
     }
     public Vector2 DimentionsInWorldSpace

@@ -410,7 +410,7 @@ public class Grid_UINavigator : MonoBehaviour
             if (Compare.DistanceInDirection(selectedButton.transform.position, activeUnselectedButtons[i].transform.position, direction, selectedButton.buffers) > 0f &&
                 Mathf.Abs(Compare.DistanceInDirection(selectedButton.transform.position, activeUnselectedButtons[i].transform.position,
                 (direction == InputDirectionType.Down || direction == InputDirectionType.Up) ? InputDirectionType.Right : InputDirectionType.Up)) < (
-                 (direction == InputDirectionType.Down || direction == InputDirectionType.Up) ? selectedButton.DimentionsInScreenSpace.x * 0.5f * inLineBuffer : selectedButton.DimentionsInScreenSpace.y * 0.5f * inLineBuffer))
+                 (direction == InputDirectionType.Down || direction == InputDirectionType.Up) ? selectedButton.DimentionsInScreenSpace.x * inLineBuffer : selectedButton.DimentionsInScreenSpace.y * inLineBuffer))
             {
                 if (closestInDirection == null) closestInDirection = activeUnselectedButtons[i];
                 else if (Compare.DistanceInDirection(selectedButton.transform.position, activeUnselectedButtons[i].transform.position, direction, selectedButton.buffers) <
