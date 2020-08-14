@@ -317,6 +317,7 @@ public class CharacterInfoScript : MonoBehaviour
         set
         {
             EtherStats.Ether = value;
+            Ether = Ether < 0 ? 0 : Ether;
             if (EtherStats.Ether > EtherStats.Base)
             {
                 EtherStats.Ether = EtherStats.Base;
