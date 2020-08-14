@@ -38,6 +38,7 @@ public class CallChangeCharActionList : Command
         {
             Debug.LogError("Character is missing");
             Continue();
+            return;
         }
 
         List<CharacterActionType> res = new List<CharacterActionType>();
