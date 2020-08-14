@@ -10,32 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage01_Character_Forest_EnemyAttack01_Weak_Pai
+  m_Name: Stage01_Character_Forest_EnemyAttack03_Buff_Pai
   m_EditorClassIdentifier: 
   isSequencedAttack: 0
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
-  _DamageMultiplier: {x: 1, y: 1}
-  AttackInput: 0
-  AttackAnim: 0
+  _DamageMultiplier: {x: 0, y: 0}
+  AttackInput: 2
+  AttackAnim: 2
   StaminaCost: 0
   ExperiencePoints: 10
-  _CoolDown: {x: 1, y: 1.5}
-  PrefixAnim: 0
-  Fov: 0
+  _CoolDown: {x: 15, y: 20}
+  PrefixAnim: 3
+  Fov: 2
   Particles:
     Left:
-      Cast: {fileID: 2511004692037633363, guid: f900cbfe107faf242b302b7c8762f14c,
+      Cast: {fileID: 4415641691864444121, guid: 69194683974f34345b555fce792a2adf,
         type: 3}
-      Bullet: {fileID: 2316808626851961043, guid: 94784ba7e5d6c8344ba91960bab876eb,
+      Bullet: {fileID: 4415641691864444121, guid: 69194683974f34345b555fce792a2adf,
         type: 3}
-      Hit: {fileID: 7086000286486081629, guid: 55366d96d99913148955bed838256547, type: 3}
+      Hit: {fileID: 4415641691864444121, guid: 69194683974f34345b555fce792a2adf, type: 3}
     Right:
-      Cast: {fileID: 2511004692037633363, guid: 070ae22e382c44c449bf5049427f395c,
+      Cast: {fileID: 4415641691864444121, guid: 69194683974f34345b555fce792a2adf,
         type: 3}
-      Bullet: {fileID: 2316808626851961043, guid: 1c5ae0bc2e086d342b9a715b29969563,
+      Bullet: {fileID: 4415641691864444121, guid: 69194683974f34345b555fce792a2adf,
         type: 3}
-      Hit: {fileID: 7086000286486081629, guid: 60f7037166dae23499552dd2890fc46c, type: 3}
+      Hit: {fileID: 4415641691864444121, guid: 69194683974f34345b555fce792a2adf, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
@@ -101,7 +101,7 @@ MonoBehaviour:
       EffectChances: 100
     CharacterClass: 0
   TilesAtk:
-    AtkType: 1
+    AtkType: 2
     BulletTrajectories:
     - Delay: 1
       BulletTravelDurationPerTile: 0.15
@@ -157,17 +157,19 @@ MonoBehaviour:
       Show: 1
       BulletEffectTiles:
       - Pos: {x: 0, y: 0}
-        HasEffect: 0
+        HasEffect: 1
         showImpact: 1
-        Effects: []
+        Effects:
+        - {fileID: 11400000, guid: efd3fa3d10d23af47bbfb140926c5833, type: 2}
+        - {fileID: 11400000, guid: 3c2445cc3b59b7f488fe71406aeaa823, type: 2}
         EffectChances: 100
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
         EffectsOnTile: []
     StatToCheck: 1
-    ValueChecker: 2
-    Chances: 100
+    ValueChecker: 0
+    Chances: 80
     PercToCheck: 0
     InBetween: {x: 0, y: 0}
     Show: 0

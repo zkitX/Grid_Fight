@@ -18,7 +18,7 @@ MonoBehaviour:
   - CheckOnTarget: 0
     StatToCheck: 1
     ValueChecker: 3
-    CheckWeightMultiplier: 1
+    CheckWeightMultiplier: 2
     PercToCheck: 30
     InBetween: {x: 20, y: 0}
     Show: 1
@@ -27,6 +27,7 @@ MonoBehaviour:
   IdleMovement: 0
   AttackWill: 100
   Chaseing_Flee: 100
+  MoveWill: 100
   StatsToModify:
   - ModificableStats: 0
     Multiplier: 70
@@ -34,5 +35,5 @@ MonoBehaviour:
     Multiplier: 2
   - ModificableStats: 6
     Multiplier: 2
-  AIPs: {fileID: 0}
+  AIPs: {fileID: 11400000, guid: 3e6bd3dc9c2e69d448f0ee0298b8e7eb, type: 2}
   Show: 0
