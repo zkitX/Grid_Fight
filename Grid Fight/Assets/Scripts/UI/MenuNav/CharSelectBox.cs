@@ -241,8 +241,8 @@ public class CharSelectBox : MonoBehaviour
             yield return null;
         }
 
-        nextPageDisplay.gameObject.SetActive(currentPageIndex < pages);
-        prevPageDisplay.gameObject.SetActive(currentPageIndex != 1 && pages > 1);
+        nextPageDisplay.GetComponent<CanvasGroup>().alpha = currentPageIndex < pages ? 1f : 0.2f;
+        prevPageDisplay.GetComponent<CanvasGroup>().alpha = currentPageIndex != 1 && pages > 1 ? 1f : 0.2f;
     }
 
 
@@ -272,12 +272,12 @@ public class CharSelectBox : MonoBehaviour
 
         if (value == 1)
         {
-            if (!nextPageDisplay.isActiveAndEnabled) nextPageDisplay.gameObject.SetActive(true);
+            nextPageDisplay.GetComponent<CanvasGroup>().alpha = 1f;
             nextPageDisplay.Play();
         }
         else if(value == -1)
         {
-            if (!prevPageDisplay.isActiveAndEnabled) prevPageDisplay.gameObject.SetActive(true);
+            prevPageDisplay.GetComponent<CanvasGroup>().alpha = 1f;
             prevPageDisplay.Play();
         }
         DisplayPage(currentPageIndex + value);
