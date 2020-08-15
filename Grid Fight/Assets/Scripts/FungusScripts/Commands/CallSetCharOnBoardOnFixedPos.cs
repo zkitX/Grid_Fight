@@ -61,6 +61,8 @@ public class CallSetCharOnBoardOnFixedPos : Command
             BattleManagerScript.Instance.SetCharOnBoard(playerController, cName, pos, false);
            
         }
+        Continue();
+
     }
 
     #region Public members
@@ -68,7 +70,6 @@ public class CallSetCharOnBoardOnFixedPos : Command
     public override void OnEnter()
     {
         CallTheMethod();
-        Continue();
     }
 
     public override Color GetButtonColor()

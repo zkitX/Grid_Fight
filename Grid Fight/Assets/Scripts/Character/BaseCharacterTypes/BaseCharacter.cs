@@ -2013,9 +2013,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
         }
 
-        if (string.Equals(animState, CharacterAnimationStateType.GettingHit.ToString()) ||
+        if ((string.Equals(animState, CharacterAnimationStateType.GettingHit.ToString()) ||
             string.Equals(animState, CharacterAnimationStateType.Buff.ToString()) ||
-            string.Equals(animState, CharacterAnimationStateType.Debuff.ToString()) && (currentAttackPhase != AttackPhasesType.End || Attacking))
+            string.Equals(animState, CharacterAnimationStateType.Debuff.ToString())) && (currentAttackPhase != AttackPhasesType.End || Attacking))
         {
             return;
         }
