@@ -292,7 +292,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press <color=#18D3FF>b</color> for rapid attack
+  m_text: Press <color=#18D3FF>a</color> for rapid attack
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 410767eb1e9a2ba458c57378d8533b2a, type: 2}
   m_sharedMaterial: {fileID: 8566412196547770612, guid: 410767eb1e9a2ba458c57378d8533b2a,
@@ -589,6 +589,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6891804717922514904}
     m_Modifications:
+    - target: {fileID: 4608837689350888364, guid: 5ceff978cb3ac754cbabbf1e79c49ea4,
+        type: 3}
+      propertyPath: m_Name
+      value: Tutorial-Arrow-Animated
+      objectReference: {fileID: 0}
     - target: {fileID: 8429750470786070141, guid: 5ceff978cb3ac754cbabbf1e79c49ea4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -658,11 +663,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4608837689350888364, guid: 5ceff978cb3ac754cbabbf1e79c49ea4,
-        type: 3}
-      propertyPath: m_Name
-      value: Tutorial-Arrow-Animated
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ceff978cb3ac754cbabbf1e79c49ea4, type: 3}
