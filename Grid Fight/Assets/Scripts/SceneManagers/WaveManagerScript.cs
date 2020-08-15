@@ -174,7 +174,7 @@ public class WaveManagerScript : MonoBehaviour
         return res;
     }
 
-    private void Res_CurrentCharIsDeadEvent(CharacterNameType cName, ControllerType playerController, SideType side)
+    private void Res_CurrentCharIsDeadEvent(CharacterNameType cName, List<ControllerType> playerController, SideType side)
     {
         leadCharDie = true;
         foreach (WaveCharClass item in currentWavePhase.ListOfEnemy)

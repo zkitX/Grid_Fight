@@ -35,7 +35,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     //------------------------------------
 
     #region Events
-    public delegate void CurrentCharIsDead(CharacterNameType cName, ControllerType playerController, SideType side);
+    public delegate void CurrentCharIsDead(CharacterNameType cName, List<ControllerType> playerController, SideType side);
     public event CurrentCharIsDead CurrentCharIsDeadEvent;
 
     public delegate void TileMovementComplete(BaseCharacter movingChar);
@@ -422,7 +422,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     protected virtual void Call_CurrentCharIsDeadEvent()
     {
-        CurrentCharIsDeadEvent?.Invoke(CharInfo.CharacterID, CurrentPlayerController, UMS.Side);
+        CurrentCharIsDeadEvent?.Invoke(CharInfo.CharacterID, UMS.PlayerController, UMS.Side);
     }
 
     protected virtual void Call_CurrentCharIsRebirthEvent()

@@ -74,7 +74,7 @@ public class Stage04_BossGirl_Script : MinionType_Script
             flower.transform.position = transform.position;
             flower.SetUpEnteringOnBattle();
             Flowers.Add(flower);
-            flower.CurrentCharIsDeadEvent += Flower_CurrentCharIsDeadEvent;
+            //flower.CurrentCharIsDeadEvent += Flower_CurrentCharIsDeadEvent;
             flower.CurrentCharIsRebirthEvent += Flower_CurrentCharIsRebornEvent;
             Transform t = flower.GetComponentsInChildren<Transform>().Where(r => r.name == "Stage04_GirlBoss_Minion_Target").First();
             TargetControllerList[i].Target = t;

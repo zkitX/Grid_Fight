@@ -459,24 +459,52 @@ public class BattleManagerScript : MonoBehaviour
         return currentCharacter;
     }
 
-    private void CurrentCharacter_CurrentCharIsDeadEvent(CharacterNameType cName, ControllerType playerController, SideType side)
+    private void CurrentCharacter_CurrentCharIsDeadEvent(CharacterNameType cName, List<ControllerType> playerController, SideType side)
     {
         AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Death, AudioBus.HighPrio, transform);
 
-        if (playerController != ControllerType.Enemy && playerController != ControllerType.None)
+        if (!playerController.Contains(ControllerType.Enemy))
         {
+
             if (AllCharactersOnField.Where(r => r.CharInfo.Health > 0).ToList().Count == 0)
             {
                 MatchLostEvent?.Invoke();
 
                 CurrentBattleState = BattleState.End;
+                //InputController.Instance.FireMinus();
                 return;
             }
 
+            /* if (res.Where(r => r.isUsed).ToList().Count == res.Where(r => !r.isAlive).ToList().Count)
+             {
+                 UIBattleManager.Instance.StartTimeUp(15, side);
+             }*/
+
             if (CurrentSelectedCharacters.Where(r => r.Value.Character != null && r.Value.Character.CharInfo.CharacterID == cName && r.Value.Character.UMS.Side == side).ToList().Count > 0)
             {
-                CurrentSelectedCharacters.Where(r => r.Value.Character != null && r.Value.Character.CharInfo.CharacterID == cName && r.Value.Character.UMS.Side == side).First().Value.Character = null;
-                Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType.Up, playerController, true, true);
+                KeyValuePair<ControllerType, CurrentSelectedCharacterClass> currentPlayer = CurrentSelectedCharacters.Where(r => r.Value.Character != null && r.Value.Character.CharInfo.CharacterID == cName && r.Value.Character.UMS.Side == side).First();
+                List<BaseCharacter> cbs = AllCharactersOnField.Where(r => r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.UMS.IsCharControllableByPlayers(playerController)).ToList();
+                if(cbs.Count > 0)
+                {
+                    foreach (BaseCharacter item in cbs)
+                    {
+                        List<KeyValuePair<ControllerType, CurrentSelectedCharacterClass>> controllers = CurrentSelectedCharacters.Where(r => playerController.Contains(r.Key) && r.Value.Character != null && r.Value.NextSelectionChar.NextSelectionChar == item.CharInfo.CharacterSelection).ToList();
+                        if (controllers.Count == 0)
+                        {
+                            SetCharOnBoard(currentPlayer.Key, item.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeBattleTile(item.UMS.WalkingSide, item.UMS.Pos).Pos);
+                            SelectCharacter(currentPlayer.Key, (CharacterType_Script)item);
+
+                            CurrentSelectedCharacters[currentPlayer.Key].NextSelectionChar.NextSelectionChar = item.CharInfo.CharacterSelection;
+                            CurrentSelectedCharacters[currentPlayer.Key].NextSelectionChar.Side = item.UMS.Side;
+                            ((CharacterType_Script)item).SetCharSelected(true, currentPlayer.Key);
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    currentPlayer.Value.Character = null;
+                }
             }
         }
     }

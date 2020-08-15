@@ -67,7 +67,7 @@ public class Stage04_BossMonster_Script : MinionType_Script
             flower.UMS.CurrentTilePos = FlowersPos[i];
             flower.transform.position = transform.position;
             flower.SetUpEnteringOnBattle();
-            flower.CurrentCharIsDeadEvent += Flower_CurrentCharIsDeadEvent;
+            //flower.CurrentCharIsDeadEvent += Flower_CurrentCharIsDeadEvent;
             Flowers.Add(flower);
             Transform t = flower.GetComponentsInChildren<Transform>().Where(r => r.name == "Stage04_BossMonster_Minion_Target").First();
             TargetControllerList[i].parent = t;
