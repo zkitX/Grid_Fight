@@ -40,47 +40,38 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
-  TrajectoriesNumber: 1
+  TrajectoriesNumber: 3
   ParticlesAtk:
     BulletTrajectories:
     - Show: 1
-      BulletDistanceInTile: {x: 0, y: 15}
+      BulletDistanceInTile: {x: 0, y: 4}
       Trajectory_Y:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
           time: 0
           value: -0.08139556
-          inSlope: 0.21074441
-          outSlope: 0.21074441
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 1
-        - serializedVersion: 3
-          time: 0.11104214
-          value: 0.51837015
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 136
+          inSlope: 10.162791
+          outSlope: 10.162791
+          tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.33310974
-          value: -0.26249444
-          inSlope: 1.3564216
-          outSlope: 1.3564216
-          tangentMode: 0
+          time: 0.5
+          value: 5
+          inSlope: 0.081395626
+          outSlope: 0.081395626
+          tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.07914788
+          outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
           value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 136
+          inSlope: -10
+          outSlope: -10
+          tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0.33333334
@@ -114,7 +105,100 @@ MonoBehaviour:
       ChildrenBulletDelay: 0.15
       BulletEffectTiles:
       - {x: 0, y: 1}
-      - {x: 0, y: -1}
+      BulletGapStartingTile: {x: 0, y: 0}
+      HasEffect: 0
+      Effects: []
+      EffectChances: 100
+    - Show: 1
+      BulletDistanceInTile: {x: 0, y: 4}
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: -0.08139556
+          inSlope: 10.162791
+          outSlope: 10.162791
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.5
+          value: 5
+          inSlope: 1.0813956
+          outSlope: 1.0813956
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: -8
+          outSlope: -8
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      ChildrenBulletDelay: 0.5
+      BulletEffectTiles: []
+      BulletGapStartingTile: {x: 0, y: 0}
+      HasEffect: 0
+      Effects: []
+      EffectChances: 100
+    - Show: 1
+      BulletDistanceInTile: {x: 0, y: 4}
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: -0.08139556
+          inSlope: 10.162791
+          outSlope: 10.162791
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.5
+          value: 5
+          inSlope: -0.9186044
+          outSlope: -0.9186044
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: -1
+          inSlope: -12
+          outSlope: -12
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      ChildrenBulletDelay: 0.5
+      BulletEffectTiles: []
       BulletGapStartingTile: {x: 0, y: 0}
       HasEffect: 0
       Effects: []
