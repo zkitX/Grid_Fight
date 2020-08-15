@@ -483,7 +483,7 @@ public class BattleManagerScript : MonoBehaviour
             if (CurrentSelectedCharacters.Where(r => r.Value.Character != null && r.Value.Character.CharInfo.CharacterID == cName && r.Value.Character.UMS.Side == side).ToList().Count > 0)
             {
                 KeyValuePair<ControllerType, CurrentSelectedCharacterClass> currentPlayer = CurrentSelectedCharacters.Where(r => r.Value.Character != null && r.Value.Character.CharInfo.CharacterID == cName && r.Value.Character.UMS.Side == side).First();
-                List<BaseCharacter> cbs = AllCharactersOnField.Where(r => r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.UMS.IsCharControllableByPlayers(playerController)).ToList();
+                List<BaseCharacter> cbs = AllCharactersOnField.Where(r => r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter) && r.UMS.IsCharControllableByPlayers(playerController)).ToList();
                 if(cbs.Count > 0)
                 {
                     foreach (BaseCharacter item in cbs)
