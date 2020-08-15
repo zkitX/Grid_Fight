@@ -288,7 +288,7 @@ public class GridManagerScript : MonoBehaviour
             }
         }
 
-        return res;
+        return null;
     }
 
     //Get BattleTileScript of the tile

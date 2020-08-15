@@ -564,6 +564,30 @@ public class CharacterType_Script : BaseCharacter
         GameObject bullet = BulletManagerScript.Instance.GetBullet();
         bullet.transform.position = SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position;
         BulletScript bs = bullet.GetComponent<BulletScript>();
+
+        if (UMS.Facing == FacingType.Right)
+        {
+            bs.bts = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(new Vector2Int(UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x, UMS.CurrentTilePos.y + bulletBehaviourInfo.BulletDistanceInTile.y > 11 ?
+                11 : UMS.CurrentTilePos.y + bulletBehaviourInfo.BulletDistanceInTile.y), UMS.Facing);
+            if (bs.bts == null)
+            {
+                bs.gameObject.SetActive(false);
+                return;
+            }
+            bs.DestinationTile = bs.bts.Pos;
+        }
+        else
+        {
+            bs.bts = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(new Vector2Int(UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x, UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y < 0 ? 0 :
+                UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y), UMS.Facing);
+            if (bs.bts == null)
+            {
+                bs.gameObject.SetActive(false);
+                return;
+            }
+            bs.DestinationTile = bs.bts.Pos;
+        }
+
         bs.SOAttack = nextAttack;
         bs.BulletBehaviourInfo = bulletBehaviourInfo;
         bs.Facing = UMS.Facing;
@@ -575,25 +599,10 @@ public class CharacterType_Script : BaseCharacter
         ScriptableObjectAttackEffect[] abAtkBase = new ScriptableObjectAttackEffect[bulletBehaviourInfo.Effects.Count];
         bulletBehaviourInfo.Effects.CopyTo(abAtkBase);
         bs.BulletEffects = abAtkBase.ToList();
-        if (!GridManagerScript.Instance.isPosOnFieldByHeight(UMS.CurrentTilePos + bulletBehaviourInfo.BulletDistanceInTile))
-        {
-            bs.gameObject.SetActive(false);
-            return;
-        }
-
-
+       
         bs.iter = iter;
 
-        if (UMS.Facing == FacingType.Right)
-        {
-            bs.DestinationTile = new Vector2Int(UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x, UMS.CurrentTilePos.y + bulletBehaviourInfo.BulletDistanceInTile.y > 11 ? 11 : UMS.CurrentTilePos.y + bulletBehaviourInfo.BulletDistanceInTile.y);
-        }
-        else
-        {
-            bs.DestinationTile = new Vector2Int(UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x, UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y < 0 ? 0 : UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y);
-        }
-      
-
+        
 
         if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
         {

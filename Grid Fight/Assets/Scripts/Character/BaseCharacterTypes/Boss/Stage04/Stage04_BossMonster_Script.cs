@@ -88,7 +88,7 @@ public class Stage04_BossMonster_Script : MinionType_Script
     }
 
 
-    private void Flower_CurrentCharIsDeadEvent(CharacterNameType cName, List<ControllerType> playerController, SideType side)
+    private void Flower_CurrentCharIsDeadEvent(CharacterNameType cName, ControllerType playerController, SideType side)
     {
         if (CanGetDamageCo != null)
         {

@@ -102,7 +102,7 @@ public class Stage04_BossGirl_Script : MinionType_Script
         
     }
 
-    private void Flower_CurrentCharIsDeadEvent(CharacterNameType cName, List<ControllerType> playerController, SideType side)
+    private void Flower_CurrentCharIsDeadEvent(CharacterNameType cName, ControllerType playerController, SideType side)
     {
         AreChildrenAlive[cName] = false;
         if(AreChildrenAlive.Where(r=> r.Value).ToList().Count == 0)

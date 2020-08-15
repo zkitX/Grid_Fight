@@ -459,52 +459,24 @@ public class BattleManagerScript : MonoBehaviour
         return currentCharacter;
     }
 
-    private void CurrentCharacter_CurrentCharIsDeadEvent(CharacterNameType cName, List<ControllerType> playerController, SideType side)
+    private void CurrentCharacter_CurrentCharIsDeadEvent(CharacterNameType cName, ControllerType playerController, SideType side)
     {
         AudioManagerMk2.Instance.PlaySound(AudioSourceType.Ui, BattleManagerScript.Instance.AudioProfile.Death, AudioBus.HighPrio, transform);
 
-        if (!playerController.Contains(ControllerType.Enemy))
+        if (playerController != ControllerType.Enemy && playerController != ControllerType.None)
         {
-
             if (AllCharactersOnField.Where(r => r.CharInfo.Health > 0).ToList().Count == 0)
             {
                 MatchLostEvent?.Invoke();
 
                 CurrentBattleState = BattleState.End;
-                //InputController.Instance.FireMinus();
                 return;
             }
 
-            /* if (res.Where(r => r.isUsed).ToList().Count == res.Where(r => !r.isAlive).ToList().Count)
-             {
-                 UIBattleManager.Instance.StartTimeUp(15, side);
-             }*/
-
             if (CurrentSelectedCharacters.Where(r => r.Value.Character != null && r.Value.Character.CharInfo.CharacterID == cName && r.Value.Character.UMS.Side == side).ToList().Count > 0)
             {
-                KeyValuePair<ControllerType, CurrentSelectedCharacterClass> currentPlayer = CurrentSelectedCharacters.Where(r => r.Value.Character != null && r.Value.Character.CharInfo.CharacterID == cName && r.Value.Character.UMS.Side == side).First();
-                List<BaseCharacter> cbs = AllCharactersOnField.Where(r => r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.UMS.IsCharControllableByPlayers(playerController)).ToList();
-                if(cbs.Count > 0)
-                {
-                    foreach (BaseCharacter item in cbs)
-                    {
-                        List<KeyValuePair<ControllerType, CurrentSelectedCharacterClass>> controllers = CurrentSelectedCharacters.Where(r => playerController.Contains(r.Key) && r.Value.Character != null && r.Value.NextSelectionChar.NextSelectionChar == item.CharInfo.CharacterSelection).ToList();
-                        if (controllers.Count == 0)
-                        {
-                            SetCharOnBoard(currentPlayer.Key, item.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeBattleTile(item.UMS.WalkingSide, item.UMS.Pos).Pos);
-                            SelectCharacter(currentPlayer.Key, (CharacterType_Script)item);
-
-                            CurrentSelectedCharacters[currentPlayer.Key].NextSelectionChar.NextSelectionChar = item.CharInfo.CharacterSelection;
-                            CurrentSelectedCharacters[currentPlayer.Key].NextSelectionChar.Side = item.UMS.Side;
-                            ((CharacterType_Script)item).SetCharSelected(true, currentPlayer.Key);
-                            return;
-                        }
-                    }
-                }
-                else
-                {
-                    currentPlayer.Value.Character = null;
-                }
+                CurrentSelectedCharacters.Where(r => r.Value.Character != null && r.Value.Character.CharInfo.CharacterID == cName && r.Value.Character.UMS.Side == side).First().Value.Character = null;
+                Switch_LoadingNewCharacterInRandomPosition(CharacterSelectionType.Up, playerController, true, true);
             }
         }
     }
@@ -1336,22 +1308,6 @@ public class BattleManagerScript : MonoBehaviour
         CurrentSelectedCharacters[playerController].LoadCharCo = null;
     }
 
-    //Load char in a fixed pos
-    private IEnumerator CharacterLoadingIn(CharacterNameType cName, ControllerType playerController, Vector2Int pos)
-    {
-        //yield return HoldPressTimer(playerController);
-        if (CurrentCharactersLoadingInfo.Where(r => r.CName == cName && r.PlayerController == playerController).ToList().Count > 0)
-        {
-            CharacterType_Script cb = SetCharOnBoardOnRandomPos(playerController, cName);
-            if (cb != null)
-            {
-                SelectCharacter(playerController, cb);
-            }
-        }
-
-        yield return null;
-    }
-
     public void UpdateCurrentSelectedCharacters(CharacterType_Script oldChar, CharacterType_Script newChar, SideType side)
     {
         CurrentSelectedCharacterClass cscc = CurrentSelectedCharacters.Where(r => r.Value.Character != null && r.Value.Character.CharInfo.CharacterID == oldChar.CharInfo.CharacterID && r.Value.Character.UMS.Side == side).First().Value;
@@ -1423,72 +1379,58 @@ public class BattleManagerScript : MonoBehaviour
         BaseCharacter cb = new BaseCharacter();
         CharacterSelectionType cs = CharacterSelectionType.Up;
         bool deselction = true;
-        if (InputControllerT == InputControllerType.SelectionOnABXY)
+       
+        if ((CurrentBattleState == BattleState.Battle && !CurrentSelectedCharacters[playerController].isSwapping) || worksOnFungusPappets)
         {
-            if (CurrentBattleState == BattleState.Battle)
+            cb = null;
+            if (CurrentSelectedCharacters[playerController].Character == null)
             {
-
-                cb = AllCharactersOnField.FirstOrDefault();
-                if (cb != null)
-                {
-                    LoadingNewCharacterToGrid(cb.CharInfo.CharacterID, side, playerController);
-                }
-            }
-        }
-        else if (InputControllerT == InputControllerType.SelectionOnLR)
-        {
-            if ((CurrentBattleState == BattleState.Battle && !CurrentSelectedCharacters[playerController].isSwapping) || worksOnFungusPappets)
-            {
-                cb = null;
-                if (CurrentSelectedCharacters[playerController].Character == null)
-                {
                     
-                    deselction = false;
-                }
-                else
-                {
-                    cs = CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar;
-                }
+                deselction = false;
+            }
+            else
+            {
+                cs = CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar;
+            }
 
-                if(isRandom)
-                {
+            if(isRandom)
+            {
 
-                    cb = GetFreeRandomChar(side, playerController);
-                }
-                else
+                cb = GetFreeRandomChar(side, playerController);
+            }
+            else
+            {
+                for (int i = 0; i < AllCharactersOnField.Count; i++)
                 {
-                    for (int i = 0; i < AllCharactersOnField.Count; i++)
+                    cs = cs + (characterSelection == CharacterSelectionType.Left ? -1 : 1);
+                    int maxChars = AllCharactersOnField.Count > 4 ? 4 : AllCharactersOnField.Count;
+                    cs = (int)cs >= maxChars ? 0 : cs < 0 ? ((CharacterSelectionType)maxChars - 1) : cs;
+                    string t = cs.ToString();
+                    //Debug.Log(t);
+                    cb = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.CharacterSelection == cs && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 && r.UMS.PlayerController.Contains(playerController) &&
+                    r.BuffsDebuffsList.Where(a => a.Stat == BuffDebuffStatsType.Zombie).ToList().Count == 0 && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).FirstOrDefault();
+                    if (cb != null)
                     {
-                        cs = cs + (characterSelection == CharacterSelectionType.Left ? -1 : 1);
-                        int maxChars = AllCharactersOnField.Count > 4 ? 4 : AllCharactersOnField.Count;
-                        cs = (int)cs >= maxChars ? 0 : cs < 0 ? ((CharacterSelectionType)maxChars - 1) : cs;
-                        string t = cs.ToString();
-                        //Debug.Log(t);
-                        cb = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.CharInfo.CharacterSelection == cs && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 &&
-                        r.BuffsDebuffsList.Where(a => a.Stat == BuffDebuffStatsType.Zombie).ToList().Count == 0 && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).FirstOrDefault();
-                        if (cb != null)
-                        {
-                            t = cb.CharInfo.CharacterID.ToString() + "    " + cb.UMS.Side.ToString();
-                        }
-                        //Debug.Log(t);
-                        if (cb != null && CurrentSelectedCharacters.Where(r => r.Value.Character != null && ((r.Value.Character == cb)
-                        || (r.Value.NextSelectionChar.NextSelectionChar == cs && r.Value.NextSelectionChar.Side == cb.UMS.Side && r.Value.Character != null)) && r.Key != playerController).ToList().Count == 0)
-                        {
-                            break;
-                        }
-                    }                    
-                }
-                if (cb != null)
-                {
+                        t = cb.CharInfo.CharacterID.ToString() + "    " + cb.UMS.Side.ToString();
+                    }
+                    //Debug.Log(t);
+                    if (cb != null && CurrentSelectedCharacters.Where(r => r.Value.Character != null && ((r.Value.Character == cb)
+                    || (r.Value.NextSelectionChar.NextSelectionChar == cs && r.Value.NextSelectionChar.Side == cb.UMS.Side && r.Value.Character != null)) && r.Key != playerController).ToList().Count == 0)
+                    {
+                        break;
+                    }
+                }                    
+            }
+            if (cb != null)
+            {
 
-                    //Debug.LogError(cb.CharInfo.CharacterID);
-                    SetNextChar(deselction, cb, side, playerController, cs, worksOnFungusPappets);
-                }
-                else
-                {
-                    CurrentSelectedCharacters[playerController].Character = null;
-                    CurrentSelectedCharacters[playerController].NotPlayingTimer = Time.time;
-                }
+                //Debug.LogError(cb.CharInfo.CharacterID);
+                SetNextChar(deselction, cb, side, playerController, cs, worksOnFungusPappets);
+            }
+            else
+            {
+                CurrentSelectedCharacters[playerController].Character = null;
+                CurrentSelectedCharacters[playerController].NotPlayingTimer = Time.time;
             }
         }
     }
@@ -1499,7 +1441,7 @@ public class BattleManagerScript : MonoBehaviour
         bool found = false;
         BaseCharacter cb = null;
         CharacterSelectionType cs = CharacterSelectionType.Up;
-        List<BaseCharacter> res = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 && !r.IsOnField &&
+        List<BaseCharacter> res = AllCharactersOnField.Where(r => r.gameObject.activeInHierarchy && r.UMS.Side == side && r.CharInfo.HealthPerc > 0 && !r.IsOnField && r.UMS.PlayerController.Contains(playerController) &&
         r.BuffsDebuffsList.Where(a => a.Stat == BuffDebuffStatsType.Zombie).ToList().Count == 0 && r.CharActionlist.Contains(CharacterActionType.SwitchCharacter)).ToList();
         if (res.Count > 1)
         {

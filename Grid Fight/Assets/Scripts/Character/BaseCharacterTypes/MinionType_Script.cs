@@ -420,6 +420,7 @@ public class MinionType_Script : BaseCharacter
         bs.attackAudioType = GetAttackAudio();
         bs.BulletEffects.Clear();
         bs.DestinationTile = nextAttackPos;
+        bs.bts = GridManagerScript.Instance.GetBattleTile(nextAttackPos);
         float duration = bulletBehaviourInfo.BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y));
 
         bs.BulletDuration = duration > bulletBehaviourInfo.Delay ? bulletBehaviourInfo.Delay - SpineAnim.SpineAnimationState.GetCurrent(0).TrackTime : duration;

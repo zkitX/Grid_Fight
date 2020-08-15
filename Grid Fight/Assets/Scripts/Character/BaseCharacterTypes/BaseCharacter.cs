@@ -35,7 +35,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     //------------------------------------
 
     #region Events
-    public delegate void CurrentCharIsDead(CharacterNameType cName, List<ControllerType> playerController, SideType side);
+    public delegate void CurrentCharIsDead(CharacterNameType cName, ControllerType playerController, SideType side);
     public event CurrentCharIsDead CurrentCharIsDeadEvent;
 
     public delegate void TileMovementComplete(BaseCharacter movingChar);
@@ -422,7 +422,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     protected virtual void Call_CurrentCharIsDeadEvent()
     {
-        CurrentCharIsDeadEvent?.Invoke(CharInfo.CharacterID, UMS.PlayerController, UMS.Side);
+        CurrentCharIsDeadEvent?.Invoke(CharInfo.CharacterID, CurrentPlayerController, UMS.Side);
     }
 
     protected virtual void Call_CurrentCharIsRebirthEvent()
@@ -1732,7 +1732,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             switch (bdClass.Stat)
             {
                 case BuffDebuffStatsType.Damage:
-                    CharInfo.DamageStats.BaseDamage = bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.DamageStats.B_BaseDamage, bdClass.currentBuffValue) : bdClass.currentBuffValue;
+                    CharInfo.DamageStats.BaseDamage -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.DamageStats.B_BaseDamage, bdClass.currentBuffValue) : bdClass.currentBuffValue;
                     break;
                 case BuffDebuffStatsType.BaseSpeed:
                     if (bdClass.currentBuffValue > 0)

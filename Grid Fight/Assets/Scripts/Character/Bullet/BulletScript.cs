@@ -30,7 +30,7 @@ public class BulletScript : MonoBehaviour
     private bool SkillHit = false;
     //Private 
     private VFXBulletSpeedController vfx;
-    private BattleTileScript bts;
+    public BattleTileScript bts;
     
     private Vector2Int StartingTile;
     private void OnEnable()
@@ -56,7 +56,8 @@ public class BulletScript : MonoBehaviour
         SkillHit = false;
         StartingTile = CharOwner.UMS.CurrentTilePos;
         CharOwner.Sic.BulletFired++;
-       // Debug.Log(CharOwner.Sic.BulletFired);
+
+        // Debug.Log(CharOwner.Sic.BulletFired);
         vfx = GetComponentInChildren<VFXBulletSpeedController>();
         if (vfx != null)
         {
@@ -143,10 +144,10 @@ public class BulletScript : MonoBehaviour
         if (isColliding)
         {
             go = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Particles);
-            go.transform.position = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position;
+            go.transform.position = bts.transform.position;
             go.GetComponent<BattleTileTargetScript>().StartTarget(
-                (Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position) * (SOAttack.AttackInput == AttackInputType.Weak ? CharOwner.CharInfo.SpeedStats.WeakBulletSpeed : CharOwner.CharInfo.SpeedStats.StrongBulletSpeed)) /
-                Vector3.Distance(transform.position, GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing).transform.position));
+                (Vector3.Distance(transform.position, bts.transform.position) * (SOAttack.AttackInput == AttackInputType.Weak ? CharOwner.CharInfo.SpeedStats.WeakBulletSpeed : CharOwner.CharInfo.SpeedStats.StrongBulletSpeed)) /
+                Vector3.Distance(transform.position, bts.transform.position));
             
             foreach (Vector2Int item in BulletBehaviourInfo.BulletEffectTiles)
             {
@@ -164,7 +165,6 @@ public class BulletScript : MonoBehaviour
             }
         }
        
-        bts = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(DestinationTile, Facing);
         
     }
 
