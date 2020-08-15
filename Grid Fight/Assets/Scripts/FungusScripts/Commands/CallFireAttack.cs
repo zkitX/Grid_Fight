@@ -17,7 +17,7 @@ public class CallFireAttack : Command
     //Wave
     [ConditionalField("IsPlayerCharacter", true)] public bool IsRandomWaveChar;
     [ConditionalField("IsPlayerCharacter", true)] public string Identifier;
-
+    public bool WaitForAttackAnimEnd = true;
 
     public bool randomiseAttack = false;
     [ConditionalField("randomiseAttack", true)] public ScriptableObjectAttackBase attackType;
@@ -83,10 +83,14 @@ public class CallFireAttack : Command
         }
 
         yield return new WaitForSeconds(0.5f);
-        while (character.currentAttackPhase != AttackPhasesType.End && character.SpineAnim.CurrentAnim != CharacterAnimationStateType.Idle.ToString())
+        if (WaitForAttackAnimEnd)
         {
-            yield return null;
+            while (character.currentAttackPhase != AttackPhasesType.End && character.SpineAnim.CurrentAnim != CharacterAnimationStateType.Idle.ToString())
+            {
+                yield return null;
+            }
         }
+       
         if(attackOnceCoroutine != null) StopCoroutine(attackOnceCoroutine);
         Continue();
 
