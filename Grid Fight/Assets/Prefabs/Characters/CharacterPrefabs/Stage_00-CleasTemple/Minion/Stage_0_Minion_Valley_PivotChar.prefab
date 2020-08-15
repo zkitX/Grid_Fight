@@ -660,7 +660,7 @@ MonoBehaviour:
   Name: Sentinel
   CharacterIcon: {fileID: 0}
   Mask: {fileID: 0}
-  AudioProfile: {fileID: 11400000, guid: 8aff3648b6bc5524bb91916999b33dec, type: 2}
+  AudioProfile: {fileID: 11400000, guid: 58052c0522a404942b04e51ca2269605, type: 2}
   BaseCharacterType: 1
   CharacterID: 1003
   attackSequences: []
@@ -703,7 +703,7 @@ MonoBehaviour:
     B_Base: 0
     B_Regeneration: 0
     B_BaseShieldRegeneration: 0
-    B_ShieldOnDefence: 0
+    B_ShieldAbsorbtion: 0
     B_Invulnerability: 0.2
     B_MinionShieldChances: 20
     B_MinionPerfectShieldChances: 5
@@ -756,10 +756,10 @@ MonoBehaviour:
     B_DamageMultiplier: {x: 1, y: 1}
     B_CriticalChance: {x: 2, y: 2}
     B_Chances: {x: 2, y: 2}
-  StrongAttac:
+  StrongAttack:
     DamageMultiplier: {x: 3, y: 3}
     CriticalChance: {x: 3, y: 5}
-    Chances: {x: 0, y: 1}
+    Chances: {x: 1, y: 1}
     LevelMultiplier: 0
     B_DamageMultiplier: {x: 3, y: 3}
     B_CriticalChance: {x: 3, y: 5}
