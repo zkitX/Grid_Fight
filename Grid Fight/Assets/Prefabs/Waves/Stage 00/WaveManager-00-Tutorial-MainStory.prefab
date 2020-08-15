@@ -74,7 +74,7 @@ MonoBehaviour:
         MovementSpeed: {x: 1, y: 1}
         MovementTimer: {x: 1, y: 1}
         Armour: {x: 0, y: 0}
-        MinionShieldChances: {x: 0, y: 0}
+        MinionShieldChances: {x: 10, y: 10}
         MinionPerfectShieldChances: {x: 0, y: 0}
         DeathAnim: 0
         Exp: 0
@@ -90,11 +90,11 @@ MonoBehaviour:
       - {x: 2, y: 8}
     - name: Bee
       NPCType: 0
-      NumberOfCharacter: 2
+      NumberOfCharacter: 6
       TypeOfCharacter:
         CharacterName: 1002
         KillWaveIfCharDie: 0
-        Health: {x: 20, y: 25}
+        Health: {x: 15, y: 20}
         HealthRegeneration: {x: 1, y: 1}
         BaseDamage: {x: 2, y: 3}
         WeakAttackMultiplier: {x: 1, y: 1}
@@ -105,7 +105,7 @@ MonoBehaviour:
         MovementSpeed: {x: 1, y: 1}
         MovementTimer: {x: 1, y: 1}
         Armour: {x: 0, y: 0}
-        MinionShieldChances: {x: 0, y: 0}
+        MinionShieldChances: {x: 10, y: 10}
         MinionPerfectShieldChances: {x: 0, y: 0}
         DeathAnim: 0
         Exp: 0
@@ -131,8 +131,8 @@ MonoBehaviour:
       NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 1007
-        KillWaveIfCharDie: 0
-        Health: {x: 70, y: 85}
+        KillWaveIfCharDie: 1
+        Health: {x: 80, y: 80}
         HealthRegeneration: {x: 1, y: 1}
         BaseDamage: {x: 5, y: 6}
         WeakAttackMultiplier: {x: 1, y: 1}
@@ -143,13 +143,49 @@ MonoBehaviour:
         MovementSpeed: {x: 1.3, y: 1.3}
         MovementTimer: {x: 0, y: 0}
         Armour: {x: 0, y: 0}
-        MinionShieldChances: {x: 0, y: 0}
+        MinionShieldChances: {x: 10, y: 10}
         MinionPerfectShieldChances: {x: 0, y: 0}
         DeathAnim: 0
-        Exp: 0
+        Exp: 100
         AIs:
         - {fileID: 11400000, guid: b7fb60f5f6ebfcc4da8532f7c5f5a756, type: 2}
         - {fileID: 11400000, guid: 82b846979a7bd4e468565566d0365098, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: 7683cd6e35608064691905c4d7de399d, type: 2}
+        - {fileID: 11400000, guid: 2603236cfadaeea4f9e6ae241528fdce, type: 2}
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 0, y: 6}
+      - {x: 2, y: 6}
+      - {x: 4, y: 6}
+    - name: Bees
+      NPCType: 1
+      NumberOfCharacter: 5
+      TypeOfCharacter:
+        CharacterName: 1002
+        KillWaveIfCharDie: 0
+        Health: {x: 20, y: 25}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 2, y: 3}
+        WeakAttackMultiplier: {x: 1, y: 1}
+        StrongAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 30, y: 30}
+        EtherRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.3, y: 1.3}
+        MovementTimer: {x: 0, y: 0}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 10, y: 10}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 20
+        AIs:
+        - {fileID: 11400000, guid: b2be41975219f0a42b20ef4a45c3654d, type: 2}
+        - {fileID: 11400000, guid: af6d47bcebe80a64d8318e13cf450976, type: 2}
         AddAttacks: 1
         AttacksToAdd:
         - {fileID: 11400000, guid: 7683cd6e35608064691905c4d7de399d, type: 2}
@@ -170,11 +206,11 @@ MonoBehaviour:
     ListOfEnemy:
     - name: Bee Doctor
       NPCType: 0
-      NumberOfCharacter: 1
+      NumberOfCharacter: 6
       TypeOfCharacter:
         CharacterName: 1002
         KillWaveIfCharDie: 0
-        Health: {x: 20, y: 25}
+        Health: {x: 15, y: 19}
         HealthRegeneration: {x: 1, y: 1}
         BaseDamage: {x: 2, y: 3}
         WeakAttackMultiplier: {x: 1, y: 1}
@@ -192,6 +228,36 @@ MonoBehaviour:
         AIs:
         - {fileID: 11400000, guid: b2be41975219f0a42b20ef4a45c3654d, type: 2}
         - {fileID: 11400000, guid: af6d47bcebe80a64d8318e13cf450976, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+      AreThereStartingEnemy: 0
+      inRandomPos: 0
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile: []
+    - name: MechDog
+      NPCType: 0
+      NumberOfCharacter: 2
+      TypeOfCharacter:
+        CharacterName: 1001
+        KillWaveIfCharDie: 0
+        Health: {x: 30, y: 40}
+        HealthRegeneration: {x: 1, y: 1}
+        BaseDamage: {x: 3, y: 4}
+        WeakAttackMultiplier: {x: 1, y: 1}
+        StrongAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 30, y: 30}
+        EtherRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.3, y: 1.3}
+        MovementTimer: {x: 1, y: 1}
+        Armour: {x: 0, y: 0}
+        MinionShieldChances: {x: 0, y: 0}
+        MinionPerfectShieldChances: {x: 0, y: 0}
+        DeathAnim: 0
+        Exp: 0
+        AIs:
+        - {fileID: 11400000, guid: 33a26711db0d8a64191fcb6c09459f66, type: 2}
         AddAttacks: 0
         AttacksToAdd: []
       AreThereStartingEnemy: 0
@@ -240,8 +306,8 @@ MonoBehaviour:
       NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 1004
-        KillWaveIfCharDie: 0
-        Health: {x: 85, y: 100}
+        KillWaveIfCharDie: 1
+        Health: {x: 90, y: 100}
         HealthRegeneration: {x: 1, y: 1}
         BaseDamage: {x: 6, y: 8}
         WeakAttackMultiplier: {x: 1, y: 1}
@@ -252,7 +318,7 @@ MonoBehaviour:
         MovementSpeed: {x: 1, y: 1}
         MovementTimer: {x: 0, y: 0}
         Armour: {x: 0, y: 0}
-        MinionShieldChances: {x: 0, y: 0}
+        MinionShieldChances: {x: 10, y: 10}
         MinionPerfectShieldChances: {x: 0, y: 0}
         DeathAnim: 0
         Exp: 0
@@ -453,8 +519,8 @@ MonoBehaviour:
       NumberOfCharacter: 1
       TypeOfCharacter:
         CharacterName: 1006
-        KillWaveIfCharDie: 0
-        Health: {x: 80, y: 90}
+        KillWaveIfCharDie: 1
+        Health: {x: 100, y: 120}
         HealthRegeneration: {x: 1, y: 1}
         BaseDamage: {x: 6, y: 9}
         WeakAttackMultiplier: {x: 1, y: 1}
@@ -533,7 +599,7 @@ MonoBehaviour:
         MovementSpeed: {x: 1, y: 1}
         MovementTimer: {x: 0, y: 0}
         Armour: {x: 0, y: 0}
-        MinionShieldChances: {x: 0, y: 0}
+        MinionShieldChances: {x: 10, y: 15}
         MinionPerfectShieldChances: {x: 0, y: 0}
         DeathAnim: 0
         Exp: 0
