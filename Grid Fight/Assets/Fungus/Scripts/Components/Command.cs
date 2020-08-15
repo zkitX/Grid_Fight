@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Fungus
 {   
@@ -129,11 +130,15 @@ namespace Fungus
             return flowchart;
         }
 
+
+
+        float offset = 0f;
         /// <summary>
         /// Execute the command.
         /// </summary>
         public virtual void Execute()
         {
+            offset = Time.time;
             OnEnter();
         }
 
@@ -142,6 +147,15 @@ namespace Fungus
         /// </summary>
         public virtual void Continue()
         {
+            StartCoroutine(ContinueCo());
+        }
+
+        IEnumerator ContinueCo()
+        {
+            while (Time.time - offset < 0.05f)
+            {
+                yield return null;
+            }
             // This is a noop if the Block has already been stopped
             if (IsExecuting)
             {
