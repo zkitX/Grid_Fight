@@ -152,7 +152,7 @@ namespace Fungus
 
         IEnumerator ContinueCo()
         {
-            while (Time.time - offset < 0.05f)
+            while (Time.time - offset < 0.1f)
             {
                 yield return null;
             }
