@@ -16,7 +16,14 @@ public class CallStopAudio : Command
 
     protected void TheMethod()
     {
+        StartCoroutine(StopAudio());
+    }
+
+
+    IEnumerator StopAudio()
+    {
         AudioManagerMk2.Instance.StopNamedSource(audioID, fadeoutTime);
+        yield return new WaitForEndOfFrame();
         Continue();
     }
 
