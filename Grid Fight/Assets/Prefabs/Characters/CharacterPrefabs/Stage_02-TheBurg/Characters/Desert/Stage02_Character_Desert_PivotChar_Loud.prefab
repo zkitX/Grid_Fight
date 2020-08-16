@@ -485,7 +485,7 @@ MonoBehaviour:
   UseLayeringSystem: 1
   Head: {fileID: 2382237294057506571}
   AIs: []
-  CharacterRespawnLength: 180
+  CharacterRespawnLength: 90
   CharacterSelection: 0
   HealthStats:
     Health: 62
@@ -513,7 +513,7 @@ MonoBehaviour:
     B_Base: 0
     B_Regeneration: 0
     B_BaseShieldRegeneration: 0
-    B_ShieldOnDefence: 0
+    B_ShieldAbsorbtion: 0
     B_Invulnerability: 0.2
     B_MinionShieldChances: 20
     B_MinionPerfectShieldChances: 5
@@ -566,10 +566,10 @@ MonoBehaviour:
     B_DamageMultiplier: {x: 1, y: 1}
     B_CriticalChance: {x: 2, y: 2}
     B_Chances: {x: 2, y: 2}
-  StrongAttac:
-    DamageMultiplier: {x: 3.9, y: 4.1}
-    CriticalChance: {x: 6, y: 7}
-    Chances: {x: 0.94, y: 0.95}
+  StrongAttack:
+    DamageMultiplier: {x: 3, y: 3}
+    CriticalChance: {x: 3, y: 5}
+    Chances: {x: 1, y: 1}
     LevelMultiplier: 0
     B_DamageMultiplier: {x: 3, y: 3}
     B_CriticalChance: {x: 3, y: 5}
