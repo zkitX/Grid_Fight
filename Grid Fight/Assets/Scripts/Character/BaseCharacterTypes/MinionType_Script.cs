@@ -72,6 +72,7 @@ public class MinionType_Script : BaseCharacter
         }
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         Attacking = false;
+        CurrentAIState?.ResetStats(CharInfo);
         BuffsDebuffsList.ForEach(r =>
         {
             r.Duration = 0;

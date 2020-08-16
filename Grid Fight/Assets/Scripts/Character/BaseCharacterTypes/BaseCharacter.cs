@@ -306,7 +306,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     AnimationCurve curve;
     protected BaseCharacter target = null;
     public float AICoolDownOffset = 0;
-    ScriptableObjectAI prev;
+    protected ScriptableObjectAI prev;
     List<Vector2Int> tempList_Vector2int = new List<Vector2Int>();
     Transform spineT;
 
@@ -396,7 +396,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
         if (died) return;
         died = true;
-
+        CurrentAIState = null;
+        prev = null;
         EventManager.Instance?.AddCharacterDeath(this);
 
         foreach (ManagedAudioSource audioSource in GetComponentsInChildren<ManagedAudioSource>())

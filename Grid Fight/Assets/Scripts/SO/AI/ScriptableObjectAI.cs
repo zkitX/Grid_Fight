@@ -270,6 +270,10 @@ public class ScriptableObjectAI : ScriptableObject
             parentField = charinfo.GetType().GetField(statToCheck[0]);
             field = parentField.GetValue(charinfo).GetType().GetField(statToCheck[1]);
             B_field = parentField.GetValue(charinfo).GetType().GetField("B_" + statToCheck[1]);
+
+            if (B_field == null)
+            {
+            }
             if (B_field.FieldType == typeof(Vector2))
             {
                 Vector2 v = (Vector2)field.GetValue(parentField.GetValue(charinfo));
@@ -281,6 +285,11 @@ public class ScriptableObjectAI : ScriptableObject
             else
             {
                 field.SetValue(parentField.GetValue(charinfo), (float)field.GetValue(parentField.GetValue(charinfo)) + ((item.Multiplier * (float)B_field.GetValue(parentField.GetValue(charinfo))) - (float)B_field.GetValue(parentField.GetValue(charinfo))));
+            }
+
+
+            if (charinfo.SpeedStats.MovementSpeed == 0)
+            {
             }
         }
     }
@@ -304,6 +313,10 @@ public class ScriptableObjectAI : ScriptableObject
             else
             {
                 field.SetValue(parentField.GetValue(charinfo), (float)field.GetValue(parentField.GetValue(charinfo)) - ((item.Multiplier * (float)B_field.GetValue(parentField.GetValue(charinfo))) - (float)B_field.GetValue(parentField.GetValue(charinfo))));
+            }
+
+            if (charinfo.SpeedStats.MovementSpeed == 0)
+            {
             }
 
         }
