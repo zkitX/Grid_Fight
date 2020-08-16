@@ -224,7 +224,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         get
         {
             return (CharInfo.DamageStats.BaseDamage * (nextAttack.AttackInput == AttackInputType.Weak ? UnityEngine.Random.Range(CharInfo.WeakAttack.DamageMultiplier.x, CharInfo.WeakAttack.DamageMultiplier.y) :
-                UnityEngine.Random.Range(CharInfo.StrongAttack.DamageMultiplier.x, CharInfo.StrongAttack.DamageMultiplier.y)) * nextAttack.DamageMultiplier) * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.x;
+                UnityEngine.Random.Range(CharInfo.StrongAttack.DamageMultiplier.x, CharInfo.StrongAttack.DamageMultiplier.y)) * nextAttack.DamageMultiplier) * GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos).TileADStats.x;
         }
     }
 

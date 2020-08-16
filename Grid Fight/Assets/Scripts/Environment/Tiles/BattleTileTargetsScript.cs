@@ -35,6 +35,7 @@ public class BattleTileTargetsScript : MonoBehaviour
         bool attackerFiredAttackAnim = false;
         Animator anim = tc.TargetIndicator.GetComponent<Animator>();
         anim.speed = 1 / duration;
+        float damage = attacker.NextAttackTileDamage;
         ScriptableObjectAttackBase nextAttack = attacker.nextAttack;
         while (timer < duration)
         {
@@ -73,7 +74,7 @@ public class BattleTileTargetsScript : MonoBehaviour
                 {
                     bool iscritical = attacker.CharInfo.IsCritical(true);
                     //Set damage to the hitting character
-                    effectOn = target.SetDamage(attacker, attacker.NextAttackTileDamage * (iscritical ? 2 : 1), ele, iscritical);
+                    effectOn = target.SetDamage(attacker, damage * (iscritical ? 2 : 1), ele, iscritical);
                     if (effectOn)
                     {
                         int chances = Random.Range(0, 100);
@@ -171,6 +172,7 @@ public class BattleTileTargetsScript : MonoBehaviour
         bool attackerFiredAttackAnim = false;
         Animator anim = tc.TargetIndicator.GetComponent<Animator>();
         anim.speed = 1 / duration;
+        float damage = attacker.NextAttackTileDamage;
         ScriptableObjectAttackBase nextAttack = attacker.nextAttack;
         while (timer < duration)
         {
@@ -204,7 +206,7 @@ public class BattleTileTargetsScript : MonoBehaviour
                 {
                     bool iscritical = attacker.CharInfo.IsCritical(true);
                     //Set damage to the hitting character
-                    effectOn = target.SetDamage(attacker, attacker.NextAttackTileDamage * (iscritical ? 2 : 1), ele, iscritical);
+                    effectOn = target.SetDamage(attacker, damage * (iscritical ? 2 : 1), ele, iscritical);
                     if (effectOn)
                     {
                         int chances = Random.Range(0, 100);
