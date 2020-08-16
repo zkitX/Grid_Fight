@@ -420,7 +420,7 @@ public class GridManagerScript : MonoBehaviour
             areOccupiedTileFree = true;
             foreach (Vector2Int item in occupiedTiles)
             {
-                BattleTileScript tileToCheck = BattleTiles.Where(r => r.Pos == emptyTile.Pos + item).FirstOrDefault();
+                BattleTileScript tileToCheck = BattleTiles.Where(r => r.Pos == emptyTile.Pos + (item - occupiedTiles[0])).FirstOrDefault();
                 if (tileToCheck == null)
                 {
                     areOccupiedTileFree = false;
