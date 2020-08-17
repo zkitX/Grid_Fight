@@ -913,7 +913,8 @@ public enum CharacterNameType
     Stage09_Character_Forest = 1187,
   
 
-    DummyChar = 10001
+    DummyChar = 10001,
+    DummyMinion = 10002
     #endregion
 
 }
