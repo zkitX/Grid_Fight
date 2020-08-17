@@ -22,7 +22,7 @@ class SteamStatsAndAchievements : MonoBehaviour
         new Achievement_t(Achievement.ACH_WIN_100_GAMES, "Champion", ""),
         new Achievement_t(Achievement.ACH_TRAVEL_FAR_ACCUM, "Interstellar", ""),
         new Achievement_t(Achievement.ACH_TRAVEL_FAR_SINGLE, "Orbiter", ""),
-        new Achievement_t(Achievement.TUTORIAL_COMPLETED, "Complete", ""),
+        new Achievement_t(Achievement.TUTORIAL_COMPLETED, "TUTORIAL_COMPLETED", ""),
     };
 
     // Our GameID
