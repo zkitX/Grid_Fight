@@ -439,7 +439,7 @@ public class WaveManagerScript : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.G) && BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle)
         {
-            foreach (WaveCharClass item in currentWavePhase.ListOfEnemy)
+           /* foreach (WaveCharClass item in currentWavePhase.ListOfEnemy)
             {
                 item.NumberOfCharacter = 0;
             }
@@ -448,7 +448,7 @@ public class WaveManagerScript : MonoBehaviour
             {
                 item.CharInfo.Health = -50;
             }
-            leadCharDie = true;
+            leadCharDie = true;*/
         }
     }
 
