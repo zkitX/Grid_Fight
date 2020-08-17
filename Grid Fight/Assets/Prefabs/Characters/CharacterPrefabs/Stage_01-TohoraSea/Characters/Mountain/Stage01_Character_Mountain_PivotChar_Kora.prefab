@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 108d8dbc8c15041418299302b627cfb5, type: 2}
+  - {fileID: 2100000, guid: 604c84ffb5dfac54b8bf671c47f438ec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: cf5a48d42d1ac394d8368d001efae464, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 0fb027ece8a67ae47856df3c07c4f14e, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -287,29 +287,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: 1.4285715
+        outSlope: 1.4285715
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.2
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.60479045
-        outWeight: 0.33333334
-      - serializedVersion: 3
         time: 0.7
         value: 1
-        inSlope: 0.041555207
-        outSlope: 0.041555207
-        tangentMode: 0
+        inSlope: 1.2729329
+        outSlope: 0
+        tangentMode: 1
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.06439541
         outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
@@ -329,29 +320,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: 1.4285715
+        outSlope: 1.4285715
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.2
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.60479045
-        outWeight: 0.33333334
-      - serializedVersion: 3
         time: 0.7
         value: 1
-        inSlope: 0.041555207
-        outSlope: 0.041555207
-        tangentMode: 0
+        inSlope: 1.2729329
+        outSlope: 0
+        tangentMode: 1
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.06439541
         outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
@@ -371,29 +353,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: 1.4285715
+        outSlope: 1.4285715
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.1
-        value: 0
-        inSlope: 0.15598729
-        outSlope: 0.15598729
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.60479045
-        outWeight: 0.33333334
-      - serializedVersion: 3
         time: 0.7
         value: 1
-        inSlope: 0.041555207
-        outSlope: 0.041555207
-        tangentMode: 0
+        inSlope: 1.2729329
+        outSlope: 0
+        tangentMode: 1
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.06439541
         outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
@@ -413,29 +386,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: 1.4285715
+        outSlope: 1.4285715
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.1
-        value: 0
-        inSlope: 0.15598729
-        outSlope: 0.15598729
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.60479045
-        outWeight: 0.33333334
-      - serializedVersion: 3
         time: 0.7
         value: 1
-        inSlope: 0.041555207
-        outSlope: 0.041555207
-        tangentMode: 0
+        inSlope: 1.2729329
+        outSlope: 0
+        tangentMode: 1
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0.06439541
         outWeight: 0.18962084
       - serializedVersion: 3
         time: 1
@@ -472,8 +436,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charOwner: {fileID: 0}
-  testAtkEffect: {fileID: 0}
   Name: Kora
   CharacterIcon: {fileID: 21300000, guid: ff940d0092e77a54b94b3a5e7db11c8c, type: 3}
   Mask: {fileID: 0}
@@ -496,91 +458,93 @@ MonoBehaviour:
   AIs: []
   CharacterRespawnLength: 180
   CharacterSelection: 0
-  RapidAttack:
-    DamageMultiplier: {x: 1, y: 1}
-    CriticalChance: {x: 2, y: 5}
-    LevelMultiplier: 0
-    B_DamageMultiplier: {x: 1, y: 1}
-    B_CriticalChance: {x: 2, y: 2}
-  PowerfulAttac:
-    DamageMultiplier: {x: 4, y: 4}
-    CriticalChance: {x: 3, y: 25}
-    LevelMultiplier: 0
-    B_DamageMultiplier: {x: 3, y: 3}
-    B_CriticalChance: {x: 3, y: 5}
   HealthStats:
     Health: 95
     Base: 95
     Regeneration: 0.5
     BaseHealthRegeneration: 0.5
+    Armour: 1
     LevelMultiplier: 15
     B_Health: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseHealthRegeneration: 0
-  StaminaStats:
-    Stamina: 30
-    Base: 30
-    Regeneration: 1.5
-    BaseStaminaRegeneration: 1.5
-    LevelMultiplier: 40
-    B_Stamina: 0
-    B_Base: 0
-    B_Regeneration: 0
-    B_BaseStaminaRegeneration: 0
+    B_Armour: 1
   ShieldStats:
     Shield: 6
     Base: 6
     Regeneration: 0.25
     BaseShieldRegeneration: 0.25
+    ShieldAbsorbtion: 0.5
+    Invulnerability: 0.2
+    MinionShieldChances: 20
+    MinionPerfectShieldChances: 5
     LevelMultiplier: 30
     B_Shield: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseShieldRegeneration: 0
+    B_ShieldAbsorbtion: 0
+    B_Invulnerability: 0.2
+    B_MinionShieldChances: 20
+    B_MinionPerfectShieldChances: 5
+  EtherStats:
+    Ether: 40
+    Base: 40
+    Regeneration: 1
+    BaseEtherRegeneration: 1
+    LevelMultiplier: 30
+    B_Stamina: 0
+    B_Base: 0
+    B_Regeneration: 0
+    B_BaseStaminaRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
-    TileMovementTime: 1
+    TileMovementTime: 0.5
     MovementSpeed: 1.4
-    CuttingPerc: 0.85
-    IntroPerc: 0.15
-    LoopPerc: 0.7
-    EndPerc: 0.15
-    AttackSpeed: 1.4
-    AttackSpeedRatio: 4
-    BulletSpeed: 2.5
+    CuttingPerc: 0.7
+    IntroPerc: 0.16
+    LoopPerc: 0.54
+    EndPerc: 0.3
+    AttackLoopDuration: 0.5
+    IdleToAttackDuration: 0.01
     LeaveSpeed: 3
     BaseSpeed_LevelMultiplier: 0
     MovementSpeed_LevelMultiplier: 5
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
+    WeakBulletSpeed: 5
+    StrongBulletSpeed: 5
     B_BaseSpeed: 1
     B_MovementSpeed: 1
     B_AttackSpeed: 1
-    B_AttackSpeedRatio: 0
-    B_BulletSpeed: 5
     B_LeaveSpeed: 3
     B_IdleToAtkDuration: 0.2
     B_AtkToIdleDuration: 0.2
+    B_WeakBulletSpeed: 5
+    B_StrongBulletSpeed: 5
   DamageStats:
     BaseDamage: 5.5
     B_BaseDamage: 10
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 31
-  DefenceStats:
-    BaseDefence: 2
-    Invulnerability: 0.2
-    MinionDefenceChances: 20
-    MinionPerfectDefenceChances: 5
-    B_BaseDefence: 10
-    B_Invulnerability: 0.2
-    B_MinionDefenceChances: 20
-    B_MinionPerfectDefenceChances: 5
+  WeakAttack:
+    DamageMultiplier: {x: 1, y: 1}
+    CriticalChance: {x: 2, y: 2}
+    Chances: {x: 1, y: 1}
     LevelMultiplier: 0
-  Special1LoadingDuration: 0
-  Special2LoadingDuration: 0
-  Special3LoadingDuration: 0
+    B_DamageMultiplier: {x: 1, y: 1}
+    B_CriticalChance: {x: 2, y: 2}
+    B_Chances: {x: 2, y: 2}
+  StrongAttack:
+    DamageMultiplier: {x: 3, y: 3}
+    CriticalChance: {x: 3, y: 5}
+    Chances: {x: 1, y: 1}
+    LevelMultiplier: 0
+    B_DamageMultiplier: {x: 3, y: 3}
+    B_CriticalChance: {x: 3, y: 5}
+    B_Chances: {x: 2, y: 2}
   ExperienceValue: 0
   MovementTimer: {x: 5, y: 8}
   B_MovementTimer: {x: 5, y: 8}

@@ -1,0 +1,4194 @@
+{
+"skeleton": { "hash": "yO6NyZ7FYLD84wU47tXrKCpop9Y", "spine": "3.8.97", "x": -233.61, "y": -58.51, "width": 487, "height": 776 },
+"bones": [
+	{ "name": "root" },
+	{ "name": "Zombie_Pelvies", "parent": "root", "length": 97.9, "rotation": 84.22, "x": 0.26, "y": 289.02 },
+	{ "name": "Zombie_Belly", "parent": "Zombie_Pelvies", "length": 72.31, "rotation": 29.25, "x": 98.28, "y": 0.04 },
+	{ "name": "Zombie_Torso", "parent": "Zombie_Belly", "length": 87.6, "rotation": 17.31, "x": 72.31 },
+	{ "name": "Zombie_RLeg", "parent": "Zombie_Pelvies", "length": 168.76, "rotation": 152.56, "x": 36.64, "y": 36.94 },
+	{ "name": "Zombie_RLeg2", "parent": "Zombie_RLeg", "length": 153.59, "rotation": 53.41, "x": 170.27, "y": 1.08 },
+	{ "name": "1", "parent": "root", "x": -72.09, "y": 43.34 },
+	{
+		"name": "Zombie_RLeg3",
+		"parent": "1",
+		"length": 74.26,
+		"rotation": -179.55,
+		"x": 34.07,
+		"y": -3.72,
+		"transform": "noRotationOrReflection"
+	},
+	{ "name": "Zombie_LLeg", "parent": "Zombie_Pelvies", "length": 201.2, "rotation": -159.21, "x": 36.74, "y": -31.29 },
+	{ "name": "Zombie_LLeg2", "parent": "Zombie_LLeg", "length": 135.34, "rotation": 6.55, "x": 200.92, "y": 0.32 },
+	{ "name": "2", "parent": "root", "x": 136.94, "y": 2.74 },
+	{
+		"name": "Zombie_LLeg3",
+		"parent": "2",
+		"length": 97.9,
+		"rotation": 179.75,
+		"x": 44.57,
+		"y": -1.48,
+		"transform": "onlyTranslation"
+	},
+	{ "name": "Zombie_Head", "parent": "Zombie_Torso", "length": 81.86, "rotation": -53.75, "x": 56.18, "y": 45.71 },
+	{ "name": "Zombie_Head2", "parent": "Zombie_Head", "length": 76.31, "rotation": -33.14, "x": 81.86 },
+	{
+		"name": "Zombie_LArm",
+		"parent": "Zombie_Torso",
+		"length": 106.93,
+		"rotation": -59.31,
+		"x": 57.99,
+		"y": -72.67,
+		"transform": "noRotationOrReflection"
+	},
+	{
+		"name": "Zombie_LArm2",
+		"parent": "Zombie_LArm",
+		"length": 86.18,
+		"rotation": -173.03,
+		"x": 107.5,
+		"y": -0.03,
+		"transform": "noRotationOrReflection"
+	},
+	{
+		"name": "Zombie_LArm3",
+		"parent": "Zombie_LArm2",
+		"length": 35.83,
+		"rotation": -109.87,
+		"x": 85.84,
+		"y": -0.1,
+		"transform": "noRotationOrReflection"
+	},
+	{
+		"name": "Zombie_LArm4",
+		"parent": "Zombie_LArm3",
+		"length": 19.4,
+		"rotation": -117.79,
+		"x": 40.19,
+		"y": -10.49,
+		"transform": "noRotationOrReflection"
+	},
+	{
+		"name": "Zombie_LArm5",
+		"parent": "Zombie_LArm3",
+		"length": 17.54,
+		"rotation": -97.09,
+		"x": 41.44,
+		"y": -0.98,
+		"transform": "noRotationOrReflection"
+	},
+	{
+		"name": "Zombie_LArm6",
+		"parent": "Zombie_LArm3",
+		"length": 14.07,
+		"rotation": -92.09,
+		"x": 40.71,
+		"y": 5.06,
+		"transform": "noRotationOrReflection"
+	},
+	{
+		"name": "Zombie_LArm7",
+		"parent": "Zombie_LArm3",
+		"length": 12.73,
+		"rotation": -49.84,
+		"x": 36.83,
+		"y": 12.22,
+		"transform": "noRotationOrReflection"
+	},
+	{
+		"name": "Zombie_RArm",
+		"parent": "Zombie_Torso",
+		"length": 89.63,
+		"rotation": -88.18,
+		"x": 60.25,
+		"y": 55.13,
+		"transform": "noRotationOrReflection"
+	},
+	{
+		"name": "Zombie_RArm2",
+		"parent": "Zombie_RArm",
+		"length": 211.54,
+		"rotation": -96.95,
+		"x": 89.56,
+		"y": -2.28,
+		"transform": "noRotationOrReflection"
+	},
+	{
+		"name": "Zombie_Head3",
+		"parent": "Zombie_Head2",
+		"length": 110.08,
+		"rotation": 40.15,
+		"x": 76.15,
+		"y": 0.81,
+		"transform": "noRotationOrReflection"
+	},
+	{
+		"name": "Zombie_Head4",
+		"parent": "Zombie_Head2",
+		"length": 92.18,
+		"rotation": 57.04,
+		"x": 92.57,
+		"y": 17.09,
+		"transform": "noRotationOrReflection"
+	},
+	{
+		"name": "Zombie_Head5",
+		"parent": "Zombie_Head2",
+		"length": 52.68,
+		"rotation": 61.57,
+		"x": 79.3,
+		"y": 35.17,
+		"transform": "noRotationOrReflection"
+	},
+	{
+		"name": "Zombie_Head6",
+		"parent": "Zombie_Head2",
+		"length": 122.97,
+		"rotation": 18.12,
+		"x": 88.46,
+		"y": -19.06,
+		"transform": "noRotationOrReflection"
+	},
+	{ "name": "Zombie_Head7", "parent": "Zombie_Head2", "length": 51.42, "x": 83.59, "y": -31.48, "transform": "noRotationOrReflection" },
+	{ "name": "Zombie_Head8", "parent": "Zombie_Head2", "length": 81.17, "x": 95.73, "y": -37.85, "transform": "noRotationOrReflection" },
+	{
+		"name": "Zombie_Head9",
+		"parent": "Zombie_Head2",
+		"length": 54.64,
+		"rotation": -5.84,
+		"x": 65.23,
+		"y": -37.81,
+		"transform": "noRotationOrReflection"
+	},
+	{ "name": "Shadow", "parent": "root" }
+],
+"slots": [
+	{ "name": "shadow", "bone": "Shadow", "attachment": "shadow" },
+	{ "name": "legR_detail", "bone": "Zombie_RLeg2", "attachment": "legR_detail" },
+	{ "name": "legR_2", "bone": "Zombie_RLeg", "attachment": "legR_2" },
+	{ "name": "legR_1", "bone": "Zombie_RLeg2", "attachment": "legR_1" },
+	{ "name": "armR_2", "bone": "Zombie_RArm", "attachment": "armR_2" },
+	{ "name": "armR_1", "bone": "Zombie_RArm2", "attachment": "armR_1" },
+	{ "name": "thing4", "bone": "Zombie_RArm2", "attachment": "thing4" },
+	{ "name": "thing3", "bone": "Zombie_RArm2", "attachment": "thing3" },
+	{ "name": "thing2", "bone": "Zombie_RArm2", "attachment": "thing2" },
+	{ "name": "thing1", "bone": "Zombie_RArm2", "attachment": "thing1" },
+	{ "name": "armR_detail", "bone": "Zombie_RArm2", "attachment": "armR_detail" },
+	{ "name": "legL_2", "bone": "Zombie_LLeg2", "attachment": "legL_2" },
+	{ "name": "legL_1", "bone": "Zombie_LLeg", "attachment": "legL_1" },
+	{ "name": "bottom", "bone": "Zombie_Pelvies", "attachment": "bottom" },
+	{ "name": "torso", "bone": "Zombie_Belly", "attachment": "torso" },
+	{ "name": "head", "bone": "Zombie_Head", "attachment": "head" },
+	{ "name": "hair8", "bone": "Zombie_Head9", "attachment": "hair8" },
+	{ "name": "hair7", "bone": "Zombie_Head9", "attachment": "hair7" },
+	{ "name": "hair6", "bone": "Zombie_Head8", "attachment": "hair6" },
+	{ "name": "hair5", "bone": "Zombie_Head5", "attachment": "hair5" },
+	{ "name": "hair4", "bone": "Zombie_Head6", "attachment": "hair4" },
+	{ "name": "hair3", "bone": "Zombie_Head7", "attachment": "hair3" },
+	{ "name": "hair2", "bone": "Zombie_Head4", "attachment": "hair2" },
+	{ "name": "hair1", "bone": "Zombie_Head3", "attachment": "hair1" },
+	{ "name": "armL_2", "bone": "Zombie_LArm", "attachment": "armL_2" },
+	{ "name": "armL_1", "bone": "Zombie_LArm2", "attachment": "armL_1" },
+	{ "name": "hand", "bone": "Zombie_LArm3", "attachment": "hand" },
+	{ "name": "finger4", "bone": "Zombie_LArm4", "attachment": "finger4" },
+	{ "name": "finger3", "bone": "Zombie_LArm5", "attachment": "finger3" },
+	{ "name": "finger2", "bone": "Zombie_LArm6", "attachment": "finger2" },
+	{ "name": "finger1", "bone": "Zombie_LArm7", "attachment": "finger1" }
+],
+"ik": [
+	{
+		"name": "1",
+		"bones": [ "Zombie_RLeg", "Zombie_RLeg2" ],
+		"target": "1"
+	},
+	{
+		"name": "2",
+		"order": 1,
+		"bones": [ "Zombie_LLeg", "Zombie_LLeg2" ],
+		"target": "2"
+	}
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"armL_1": {
+				"armL_1": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ -8.67, 28.83, 101.51, 15.36, 96.05, -29.3, -14.13, -15.84 ],
+					"hull": 4
+				}
+			},
+			"armL_2": {
+				"armL_2": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 129.96, 5.36, 84.02, -72.03, -27.77, -5.67, 18.17, 71.72 ],
+					"hull": 4
+				}
+			},
+			"armR_1": {
+				"armR_1": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 313.6, 69.07, 324.73, -22.25, -11.78, -63.27, -22.91, 28.05 ],
+					"hull": 4
+				}
+			},
+			"armR_2": {
+				"armR_2": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 109.14, 26.73, 107.24, -33.24, -23.7, -29.08, -21.8, 30.89 ],
+					"hull": 4
+				}
+			},
+			"armR_detail": {
+				"armR_detail": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 106.86, 37.83, 122.1, -87.25, 26.81, -98.86, 11.56, 26.21 ],
+					"hull": 4
+				}
+			},
+			"bottom": {
+				"bottom": {
+					"type": "mesh",
+					"uvs": [ 0.83866, 0.01711, 0.89335, 0.15547, 0.89875, 0.27892, 0.98042, 0.51485, 0.89854, 0.76432, 0.42365, 0.98237, 0.2151, 1, 0.01511, 0.64478, 0.0189, 0.53231, 0.15247, 0.44302, 0.12724, 0.39914, 0.25212, 0.12725, 0.50761, 0.01141, 0.25029, 0.42146, 0.49053, 0.39875, 0.71042, 0.44941 ],
+					"triangles": [ 10, 11, 14, 0, 14, 12, 14, 11, 12, 0, 1, 14, 14, 1, 2, 6, 7, 5, 7, 13, 5, 13, 7, 8, 13, 8, 9, 5, 15, 4, 5, 14, 15, 5, 13, 14, 4, 15, 3, 15, 2, 3, 15, 14, 2, 9, 10, 13, 13, 10, 14 ],
+					"vertices": [ 1, 2, 34.06, -66.96, 1, 1, 2, 10.47, -65.01, 1, 2, 1, 119.36, -54.32, 0.104, 2, -8.17, -57.73, 0.896, 2, 1, 82.47, -69.46, 0.97719, 2, -47.75, -52.92, 0.02281, 1, 1, 41.12, -62.21, 1, 1, 1, -0.67, -0.09, 1, 1, 1, -6.43, 28.47, 1, 1, 1, 48.02, 61.92, 1, 2, 1, 66.21, 63.23, 0.9971, 2, 2.89, 70.8, 0.0029, 1, 1, 82.46, 46.21, 1, 1, 2, 16.68, 48.4, 1, 1, 2, 50.17, 14.93, 1, 1, 2, 53.24, -25.12, 1, 2, 1, 87.31, 33.03, 0.88, 2, 6.55, 34.15, 0.12, 2, 1, 94.33, 0.18, 0.816, 2, -3.37, 2.05, 0.184, 2, 1, 89.24, -31.06, 0.896, 2, -23.08, -22.71, 0.104 ],
+					"hull": 13
+				}
+			},
+			"finger1": {
+				"finger1": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 26.83, 0.07, 12, -17.51, -10.93, 1.83, 3.9, 19.41 ],
+					"hull": 4
+				}
+			},
+			"finger2": {
+				"finger2": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 36.88, 10.76, 37.53, -7.23, -7.44, -8.87, -8.09, 9.12 ],
+					"hull": 4
+				}
+			},
+			"finger3": {
+				"finger3": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 38.41, 12.17, 40.38, -3.71, -6.26, -9.51, -8.23, 6.37 ],
+					"hull": 4
+				}
+			},
+			"finger4": {
+				"finger4": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 29.09, 24.21, 39.82, 3.86, 0.89, -16.66, -9.83, 3.69 ],
+					"hull": 4
+				}
+			},
+			"hair1": {
+				"hair1": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 96.11, -93.46, -12.44, -1.91, 59.77, 83.71, 168.32, -7.84 ],
+					"hull": 4
+				}
+			},
+			"hair2": {
+				"hair2": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 48.97, -87.65, -9.24, 2.13, 76.34, 57.62, 134.55, -32.16 ],
+					"hull": 4
+				}
+			},
+			"hair3": {
+				"hair3": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 84.98, -27.37, -11.02, -27.37, -11.02, 21.63, 84.98, 21.63 ],
+					"hull": 4
+				}
+			},
+			"hair4": {
+				"hair4": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 135.56, -65.09, -7.95, -18.12, 28.13, 92.12, 171.64, 45.16 ],
+					"hull": 4
+				}
+			},
+			"hair5": {
+				"hair5": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 30.19, -69.26, -10.75, 6.37, 48.17, 38.26, 89.11, -37.37 ],
+					"hull": 4
+				}
+			},
+			"hair6": {
+				"hair6": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 93.81, -29.2, -5.19, -29.2, -5.19, 28.8, 93.81, 28.8 ],
+					"hull": 4
+				}
+			},
+			"hair7": {
+				"hair7": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 72.93, -26.79, -1.68, -34.43, -7.79, 25.26, 66.82, 32.89 ],
+					"hull": 4
+				}
+			},
+			"hair8": {
+				"hair8": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 50.76, -36.1, -1.97, -41.5, -5.63, -5.68, 47.09, -0.29 ],
+					"hull": 4
+				}
+			},
+			"hand": {
+				"hand": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 37.35, 29.79, 52.64, -12.53, 5.62, -29.52, -9.67, 12.8 ],
+					"hull": 4
+				}
+			},
+			"head": {
+				"head": {
+					"type": "mesh",
+					"uvs": [ 0.87308, 0.0332, 1, 0.25828, 0.93046, 0.47012, 0.81571, 0.47958, 0.80909, 0.53632, 0.65462, 0.51551, 0.62814, 0.54767, 0.40527, 0.64035, 0.34569, 0.71033, 0.33466, 0.8938, 0.23536, 1, 0.13072, 1, 0.06048, 1, 0.02752, 0.90315, 0.05441, 0.79923, 0, 0.55081, 0.07587, 0.50468, 0.13231, 0.47037, 0.16087, 0.29551, 0.28327, 0.1941, 0.33631, 0.06121, 0.59743, 0, 0.25562, 0.54716 ],
+					"triangles": [ 1, 3, 0, 21, 0, 19, 2, 3, 1, 22, 0, 5, 19, 20, 21, 19, 0, 22, 4, 5, 3, 22, 18, 19, 0, 3, 5, 17, 18, 22, 6, 22, 5, 7, 22, 6, 16, 17, 22, 8, 22, 7, 22, 14, 15, 22, 15, 16, 11, 14, 22, 22, 8, 11, 11, 13, 14, 11, 12, 13, 11, 8, 9, 10, 11, 9 ],
+					"vertices": [ 1, 13, 128.79, -0.28, 1, 1, 13, 115.2, -41.86, 1, 1, 13, 81.98, -61.35, 1, 1, 13, 68.43, -50.6, 1, 1, 13, 60.82, -57.07, 1, 2, 12, 99.94, -57.64, 0.00465, 13, 46.65, -38.38, 0.99535, 2, 12, 93.57, -55.03, 0.01557, 13, 39.89, -39.68, 0.98443, 2, 12, 70.26, -26.09, 0.51189, 13, 4.55, -28.19, 0.48811, 2, 12, 56.33, -20.13, 0.91645, 13, -10.38, -30.82, 0.08355, 1, 12, 24.66, -25.71, 1, 1, 12, 3.21, -15.37, 1, 1, 12, -0.31, -0.07, 1, 1, 12, -2.67, 10.2, 1, 1, 12, 12.74, 18.82, 1, 1, 12, 31.37, 18.96, 1, 2, 12, 71.9, 36.66, 0.97033, 13, -28.38, 25.25, 0.02967, 2, 12, 82.32, 27.38, 0.81669, 13, -14.59, 23.18, 0.18331, 2, 12, 90.07, 20.48, 0.43896, 13, -4.32, 21.64, 0.56104, 2, 12, 120.85, 23.17, 8.0E-5, 13, 19.98, 40.72, 0.99992, 1, 13, 45.52, 40.77, 1, 1, 13, 67.37, 52.01, 1, 1, 13, 103.02, 32.57, 1, 2, 12, 81.12, -0.56, 0.64139, 13, -0.31, -0.87, 0.35861 ],
+					"hull": 22
+				}
+			},
+			"legL_1": {
+				"legL_1": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 234.07, 27.61, 199.11, -102.78, -40.43, -38.54, -5.46, 91.85 ],
+					"hull": 4
+				}
+			},
+			"legL_2": {
+				"legL_2": {
+					"type": "mesh",
+					"uvs": [ 0.75105, 0.26379, 0.80009, 0.73652, 1, 0.79115, 1, 0.8941, 1, 1, 0.5337, 1, 0, 1, 0, 0.8941, 0, 0.79535, 0.25526, 0.73652, 0.05367, 0.24067, 0.10816, 0.10621, 0.25526, 0, 0.43505, 0, 0.5304, 0.73652, 0.5357, 0.7931, 0.53564, 0.8941 ],
+					"triangles": [ 5, 16, 4, 16, 3, 4, 16, 5, 7, 5, 6, 7, 16, 15, 3, 15, 2, 3, 15, 16, 8, 16, 7, 8, 15, 8, 9, 15, 1, 2, 15, 14, 1, 15, 9, 14, 14, 0, 1, 0, 12, 13, 14, 12, 0, 11, 12, 10, 10, 14, 9, 14, 10, 12 ],
+					"vertices": [ 2, 9, 54.22, 62.29, 0.99998, 11, 15.89, -100.49, 2.0E-5, 2, 9, 139.49, 36.25, 0.22899, 11, 9.25, -11.58, 0.77101, 1, 11, -19.69, -1.16, 1, 1, 11, -19.58, 18.2, 1, 1, 11, -19.48, 38.11, 1, 1, 11, 48.13, 37.75, 1, 1, 11, 125.52, 37.34, 1, 1, 11, 125.41, 17.43, 1, 1, 11, 125.32, -1.13, 1, 2, 9, 110.47, -37.22, 0.26887, 11, 88.25, -12, 0.73113, 1, 9, 13.03, -30.16, 1, 1, 9, -7.58, -13.52, 1, 1, 9, -18.32, 13.65, 1, 1, 9, -8.74, 37.9, 1, 1, 9, 125.12, -0.12, 1, 1, 11, 47.64, -1.15, 1, 1, 11, 47.75, 17.84, 1 ],
+					"hull": 14
+				}
+			},
+			"legR_1": {
+				"legR_1": {
+					"type": "mesh",
+					"uvs": [ 0.21, 0.08014, 0.34306, 0.10048, 0.41654, 0.1764, 0.61711, 0.1886, 0.89297, 0.65013, 0.98859, 0.87914, 0.95918, 0.90029, 0.67277, 0.84931, 0.38746, 0.92646, 0.24498, 0.98781, 0.21925, 0.97662, 0.28605, 0.88, 0.36771, 0.83659, 0.03361, 0.86627, 0.02289, 0.84931, 0.17838, 0.75914, 0.35988, 0.74051, 0.36321, 0.64768, 0.34901, 0.60347, 0.38873, 0.50179, 0.27355, 0.35672, 0.11468, 0.26724, 0.12063, 0.18047, 0.05113, 0.10726, 0.08092, 0, 0.15241, 0, 0.88953, 0.7483, 0.89409, 0.78568, 0.50392, 0.35536, 0.61316, 0.64883, 0.61505, 0.74426 ],
+					"triangles": [ 29, 18, 19, 19, 28, 29, 3, 4, 28, 4, 29, 28, 29, 17, 18, 19, 20, 28, 21, 22, 20, 20, 22, 28, 2, 28, 1, 28, 0, 1, 24, 0, 28, 28, 2, 3, 28, 22, 23, 23, 24, 28, 0, 24, 25, 8, 9, 11, 9, 10, 11, 11, 12, 8, 8, 12, 7, 7, 27, 6, 6, 27, 5, 13, 15, 12, 13, 14, 15, 12, 30, 7, 7, 26, 27, 7, 30, 26, 15, 16, 12, 12, 16, 30, 27, 26, 5, 4, 5, 26, 26, 30, 4, 30, 16, 29, 16, 17, 29, 30, 29, 4 ],
+					"vertices": [ 1, 5, 5.11, -10.02, 1, 1, 5, 15.77, 6.15, 1, 1, 5, 34.25, 10.34, 1, 1, 5, 46.72, 36.04, 1, 2, 7, -0.44, -20.42, 0.66505, 5, 150.35, 38.57, 0.33495, 1, 7, -16.58, 26.9, 1, 1, 7, -16.66, 31.12, 1, 1, 7, 30, 22, 1, 1, 7, 68.73, 38.09, 1, 1, 7, 93.04, 54.24, 1, 1, 7, 91.92, 49.1, 1, 1, 7, 87.69, 29.71, 1, 1, 7, 74.28, 20.05, 1, 1, 7, 120.6, 25.67, 1, 1, 7, 125.46, 26.26, 1, 1, 7, 99.58, 2.73, 1, 2, 7, 74.51, -0.12, 0.99965, 5, 141.21, -38.54, 3.5E-4, 2, 7, 74.47, -19.43, 0.52869, 5, 123.31, -31.29, 0.47131, 2, 7, 76.69, -28.59, 0.31174, 5, 113.98, -29.93, 0.68826, 2, 7, 71.52, -49.84, 0.03017, 5, 96.19, -17.2, 0.96983, 1, 5, 62.15, -21.86, 1, 1, 5, 38.26, -36.62, 1, 1, 5, 20.26, -29.65, 1, 1, 5, 2.9, -33.23, 1, 1, 5, -16.98, -21.29, 1, 1, 5, -13.38, -11.8, 1, 2, 7, -0.35, 0.01, 0.99975, 5, 169.27, 30.87, 2.5E-4, 1, 7, -1.15, 7.77, 1, 1, 5, 73.48, 8.8, 1, 1, 5, 136.07, 1.67, 1, 2, 7, 38.44, -0.06, 0.9941, 5, 154.73, -5.1, 0.0059 ],
+					"hull": 26
+				}
+			},
+			"legR_2": {
+				"legR_2": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 124.88, 119.08, 204.87, -3.06, 38.39, -112.09, -41.6, 10.05 ],
+					"hull": 4
+				}
+			},
+			"legR_detail": {
+				"legR_detail": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 64.38, 29.68, 38.49, -38.58, -26.96, -13.75, -1.07, 54.5 ],
+					"hull": 4
+				}
+			},
+			"shadow": {
+				"shadow": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 253.39, -58.51, -233.61, -58.51, -233.61, 48.49, 253.39, 48.49 ],
+					"hull": 4
+				}
+			},
+			"thing1": {
+				"thing1": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 187.21, 31.5, 199.43, -68.75, 36.64, -88.6, 24.42, 11.66 ],
+					"hull": 4
+				}
+			},
+			"thing2": {
+				"thing2": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 160.05, 72.52, 166.95, 15.94, 20.04, -1.97, 13.14, 54.61 ],
+					"hull": 4
+				}
+			},
+			"thing3": {
+				"thing3": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 232.27, 42.03, 243.77, -52.27, 69.06, -73.57, 57.56, 20.74 ],
+					"hull": 4
+				}
+			},
+			"thing4": {
+				"thing4": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 240.87, 54.16, 251.27, -31.21, 74.58, -52.74, 64.17, 32.62 ],
+					"hull": 4
+				}
+			},
+			"torso": {
+				"torso": {
+					"type": "mesh",
+					"uvs": [ 0.64751, 0, 0.87742, 0.38614, 0.98291, 0.56332, 0.98573, 0.81081, 0.69396, 0.96111, 0.41072, 0.98103, 0.10481, 0.80682, 0.00577, 0.48312, 0.22326, 0.22365, 0.5847, 0, 0.54539, 0.59251 ],
+					"triangles": [ 4, 10, 3, 4, 5, 10, 6, 7, 10, 9, 0, 1, 10, 8, 9, 7, 8, 10, 10, 9, 1, 10, 1, 2, 5, 6, 10, 10, 2, 3 ],
+					"vertices": [ 2, 2, 158.73, -57.97, 7.6E-4, 3, 65.25, -81.06, 0.99924, 2, 2, 80.81, -67.75, 0.21946, 3, -12.05, -67.21, 0.78054, 2, 2, 45.06, -72.23, 0.49892, 3, -47.51, -60.85, 0.50108, 2, 2, 5.14, -55.43, 0.488, 1, 129.85, -45.81, 0.512, 1, 1, 98.57, 2.05, 1, 2, 2, 17.67, 48.21, 0.512, 1, 90.14, 50.73, 0.488, 2, 2, 66.84, 84.89, 0.496, 3, 20.04, 82.67, 0.504, 2, 2, 125.66, 78.13, 0.02843, 3, 74.19, 58.71, 0.97157, 1, 3, 83.84, 0.39, 1, 1, 3, 72.39, -72.79, 1, 2, 2, 70.7, -0.37, 0.79853, 3, -1.65, 0.13, 0.20147 ],
+					"hull": 10
+				}
+			}
+		}
+	}
+],
+"events": {
+	"FireBulletParticle": {},
+	"FireCastParticle": {},
+	"FireTileAttack": {}
+},
+"animations": {
+	"Arriving": {
+		"bones": {
+			"Zombie_RArm2": {
+				"rotate": [
+					{ "angle": 178.54, "curve": "stepped" },
+					{ "time": 1.15, "angle": 178.54 },
+					{ "time": 1.2167, "angle": -168.77 },
+					{ "time": 1.3, "angle": -32.06 },
+					{ "time": 1.4, "angle": -19.08 },
+					{ "time": 1.5, "angle": -19.95 },
+					{ "time": 1.75 }
+				]
+			},
+			"Zombie_LArm7": {
+				"rotate": [
+					{ "angle": 141.24, "curve": "stepped" },
+					{ "time": 1.15, "angle": 141.24 },
+					{ "time": 1.2167, "angle": 171.99 },
+					{ "time": 1.3, "angle": 141.24 },
+					{ "time": 1.4, "angle": 43.36 },
+					{ "time": 1.75 }
+				]
+			},
+			"Zombie_Head5": {
+				"rotate": [
+					{ "time": 0.8167 },
+					{ "time": 1.15, "angle": 22.96 },
+					{ "time": 1.3, "angle": -43.38 },
+					{ "time": 1.4, "angle": -76.4 },
+					{ "time": 1.55, "angle": -109.43 },
+					{ "time": 1.6833, "angle": -35.12 },
+					{ "time": 1.75 }
+				]
+			},
+			"Zombie_RArm": {
+				"rotate": [
+					{ "angle": -177.4, "curve": "stepped" },
+					{ "time": 1.15, "angle": -177.4 },
+					{ "time": 1.2167, "angle": -144.83 },
+					{ "time": 1.2667, "angle": -78.47 },
+					{ "time": 1.3, "angle": -84.43 },
+					{ "time": 1.4, "angle": -89.79 },
+					{ "time": 1.5, "angle": -71.67 },
+					{ "time": 1.75 }
+				],
+				"translate": [
+					{ "time": 1.4 },
+					{ "time": 1.5, "x": -15.63, "y": 6.13 },
+					{ "time": 1.75 }
+				]
+			},
+			"Zombie_LArm6": {
+				"rotate": [
+					{ "angle": 141.24, "curve": "stepped" },
+					{ "time": 1.15, "angle": 141.24 },
+					{ "time": 1.2167, "angle": 171.99 },
+					{ "time": 1.3, "angle": 141.24 },
+					{ "time": 1.4, "angle": 84.07 },
+					{ "time": 1.75 }
+				]
+			},
+			"Zombie_Head4": {
+				"rotate": [
+					{ "time": 0.8167 },
+					{ "time": 1.15, "angle": 22.96 },
+					{ "time": 1.3, "angle": -43.38 },
+					{ "time": 1.4, "angle": -76.4 },
+					{ "time": 1.55, "angle": -109.43 },
+					{ "time": 1.6833, "angle": -35.12 },
+					{ "time": 1.75 }
+				]
+			},
+			"Zombie_Belly": {
+				"rotate": [
+					{ "angle": -33.4, "curve": "stepped" },
+					{ "time": 0.8167, "angle": -33.4 },
+					{ "time": 1.15, "angle": -51.88 },
+					{ "time": 1.3, "angle": -115.47 },
+					{ "time": 1.4, "angle": -92.88 },
+					{ "time": 1.4833, "angle": -75.99 },
+					{ "time": 1.5667, "angle": -63.64 },
+					{ "time": 1.75 }
+				]
+			},
+			"Zombie_LArm3": {
+				"rotate": [
+					{ "angle": 142.37, "curve": "stepped" },
+					{ "time": 1.15, "angle": 142.37 },
+					{ "time": 1.2167, "angle": 173.11 },
+					{ "time": 1.3, "angle": 142.37 },
+					{ "time": 1.4, "angle": 118.84 },
+					{ "time": 1.5667, "angle": 34.33 },
+					{ "time": 1.75 }
+				]
+			},
+			"Zombie_LArm4": {
+				"rotate": [
+					{ "angle": 141.24, "curve": "stepped" },
+					{ "time": 1.15, "angle": 141.24 },
+					{ "time": 1.2167, "angle": 171.99 },
+					{ "time": 1.3, "angle": 141.24 },
+					{ "time": 1.4, "angle": 109.23 },
+					{ "time": 1.75 }
+				]
+			},
+			"Zombie_Head6": {
+				"rotate": [
+					{ "time": 0.8167 },
+					{ "time": 1.15, "angle": 22.96 },
+					{ "time": 1.3, "angle": -43.38 },
+					{ "time": 1.4, "angle": -76.4 },
+					{ "time": 1.55, "angle": -109.43 },
+					{ "time": 1.6833, "angle": -35.12 },
+					{ "time": 1.75 }
+				]
+			},
+			"Zombie_Head7": {
+				"rotate": [
+					{ "time": 0.8167 },
+					{ "time": 1.15, "angle": 22.96 },
+					{ "time": 1.3, "angle": -43.38 },
+					{ "time": 1.4, "angle": -76.4 },
+					{ "time": 1.55, "angle": -109.43 },
+					{ "time": 1.6833, "angle": -35.12 },
+					{ "time": 1.75 }
+				]
+			},
+			"Zombie_Head8": {
+				"rotate": [
+					{ "time": 0.8167 },
+					{ "time": 1.15, "angle": 22.96 },
+					{ "time": 1.3, "angle": -43.38 },
+					{ "time": 1.4, "angle": -76.4 },
+					{ "time": 1.55, "angle": -109.43 },
+					{ "time": 1.6833, "angle": -35.12 },
+					{ "time": 1.75 }
+				]
+			},
+			"Zombie_LArm5": {
+				"rotate": [
+					{ "angle": 141.24, "curve": "stepped" },
+					{ "time": 1.15, "angle": 141.24 },
+					{ "time": 1.2167, "angle": 171.99 },
+					{ "time": 1.3, "angle": 141.24 },
+					{ "time": 1.4, "angle": 81.87 },
+					{ "time": 1.75 }
+				]
+			},
+			"Zombie_Pelvies": {
+				"rotate": [
+					{ "angle": 47.54, "curve": "stepped" },
+					{ "time": 0.8167, "angle": 47.54 },
+					{ "time": 1.15, "angle": 18.04 },
+					{ "time": 1.3, "angle": 37.27 },
+					{ "time": 1.4, "angle": 42.64 },
+					{ "time": 1.4833, "angle": 5.12 },
+					{ "time": 1.5667, "angle": 7.8 },
+					{ "time": 1.75 }
+				],
+				"translate": [
+					{ "x": 101.05, "y": 4657.7 },
+					{ "time": 0.8167, "x": 101.05, "y": 3800.63 },
+					{ "time": 1.15, "x": -62.41, "y": 4.51 },
+					{ "time": 1.3, "x": 70.61, "y": -236.46 },
+					{ "time": 1.4, "x": 70.61, "y": -249.16 },
+					{ "time": 1.4833, "x": 14.56, "y": -147.31 },
+					{ "time": 1.5667, "x": 5.45, "y": -88.08 },
+					{ "time": 1.75, "x": 2.81, "y": -4.22 }
+				]
+			},
+			"Zombie_Head9": {
+				"rotate": [
+					{ "time": 0.8167 },
+					{ "time": 1.15, "angle": 22.96 },
+					{ "time": 1.3, "angle": -43.38 },
+					{ "time": 1.4, "angle": -76.4 },
+					{ "time": 1.55, "angle": -109.43 },
+					{ "time": 1.6833, "angle": -35.12 },
+					{ "time": 1.75 }
+				]
+			},
+			"Zombie_Torso": {
+				"rotate": [
+					{ "angle": -31.33, "curve": "stepped" },
+					{ "time": 0.8167, "angle": -31.33 },
+					{ "time": 1.15, "angle": -0.97 },
+					{ "time": 1.2167, "angle": 40.91 },
+					{ "time": 1.3, "angle": -37.6 },
+					{ "time": 1.4, "angle": -57.02 },
+					{ "time": 1.4833, "angle": -51.66 },
+					{ "time": 1.5667, "angle": -41.52 },
+					{ "time": 1.75 }
+				]
+			},
+			"1": {
+				"translate": [
+					{ "y": 4633.99 },
+					{ "time": 0.8167, "y": 3776.93 },
+					{ "time": 1.15 }
+				]
+			},
+			"Zombie_RLeg": {
+				"rotate": [
+					{ "angle": -2.53 }
+				],
+				"translate": [
+					{ "time": 1.15 },
+					{ "time": 1.3, "x": 115.44, "y": -70.72, "curve": "stepped" },
+					{ "time": 1.4, "x": 115.44, "y": -70.72 },
+					{ "time": 1.4667, "x": 58.14, "y": -17.98 },
+					{ "time": 1.75 }
+				]
+			},
+			"Zombie_RLeg2": {
+				"rotate": [
+					{ "angle": 3.93 }
+				]
+			},
+			"Zombie_LLeg": {
+				"rotate": [
+					{ "angle": -6.26 }
+				],
+				"translate": [
+					{ "time": 1.15 },
+					{ "time": 1.3, "x": -23.4, "y": -92.92 },
+					{ "time": 1.4, "x": -9.4, "y": -69.48 },
+					{ "time": 1.4667, "x": 26.96, "y": -20.1 },
+					{ "time": 1.75 }
+				]
+			},
+			"Zombie_LLeg2": {
+				"rotate": [
+					{ "angle": 14.94 }
+				]
+			},
+			"2": {
+				"translate": [
+					{ "x": -128.43, "y": 4803.03 },
+					{ "time": 0.8167, "x": -128.43, "y": 3945.96 },
+					{ "time": 1.15, "x": -124.67, "y": 164.85 },
+					{ "time": 1.2167 }
+				]
+			},
+			"Zombie_LLeg3": {
+				"rotate": [
+					{ "time": 0.8167 },
+					{ "time": 1.15, "angle": 47.68 },
+					{ "time": 1.2167 }
+				]
+			},
+			"Zombie_Head3": {
+				"rotate": [
+					{ "time": 0.8167 },
+					{ "time": 1.15, "angle": 22.96 },
+					{ "time": 1.3, "angle": -43.38 },
+					{ "time": 1.4, "angle": -76.4 },
+					{ "time": 1.55, "angle": -109.43 },
+					{ "time": 1.6833, "angle": -35.12 },
+					{ "time": 1.75 }
+				]
+			},
+			"Zombie_LArm": {
+				"rotate": [
+					{ "angle": 40.47, "curve": "stepped" },
+					{ "time": 1.15, "angle": 40.47 },
+					{ "time": 1.2167, "angle": 78.98 },
+					{ "time": 1.3, "angle": -10.2 },
+					{ "time": 1.4, "angle": -20.68 },
+					{ "time": 1.4833, "angle": -28.46 },
+					{ "time": 1.5667, "angle": -27.85 },
+					{ "time": 1.65, "angle": -37.4 },
+					{ "time": 1.75 }
+				]
+			},
+			"Zombie_LArm2": {
+				"rotate": [
+					{ "angle": -175.31, "curve": "stepped" },
+					{ "time": 1.15, "angle": -175.31 },
+					{ "time": 1.2167, "angle": -123.98 },
+					{ "time": 1.3, "angle": 162.88 },
+					{ "time": 1.4, "angle": 152.4 },
+					{ "time": 1.4833, "angle": 100.57 },
+					{ "time": 1.5667, "angle": 76.67 },
+					{ "time": 1.65, "angle": 84.28 },
+					{ "time": 1.75 }
+				]
+			},
+			"Shadow": {
+				"translate": [
+					{ "time": 0.8167 },
+					{ "time": 1.15, "x": -63.26, "curve": "stepped" },
+					{ "time": 1.4, "x": -63.26 },
+					{ "time": 1.75 }
+				],
+				"scale": [
+					{ "x": -0.02, "y": -0.02, "curve": "stepped" },
+					{ "time": 0.8167, "x": -0.02, "y": -0.02 },
+					{ "time": 1.15, "x": 0.644, "curve": "stepped" },
+					{ "time": 1.4, "x": 0.644 },
+					{ "time": 1.75 }
+				]
+			}
+		},
+		"drawOrder": [
+			{
+				"offsets": [
+					{ "slot": "bottom", "offset": -10 }
+				]
+			}
+		]
+	},
+	"Atk1_AtkToIdle": {
+		"bones": {
+			"Zombie_Head3": {
+				"rotate": [
+					{ "angle": 20.9 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_Head8": {
+				"rotate": [
+					{ "angle": -9.33 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_LArm2": {
+				"rotate": [
+					{ "angle": 7.7 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_Head4": {
+				"rotate": [
+					{ "angle": 40.53 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_Head9": {
+				"rotate": [
+					{ "angle": -7.17 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_Head6": {
+				"rotate": [
+					{ "angle": -0.18 },
+					{ "time": 0.5 }
+				]
+			},
+			"Shadow": {
+				"translate": [
+					{ "x": -72.67, "curve": "stepped" },
+					{ "time": 0.3167, "x": -72.67 },
+					{ "time": 0.5 }
+				],
+				"scale": [
+					{ "x": 1.367, "y": 1.177 },
+					{ "time": 0.3167, "x": 1.257, "y": 1.083 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_Head5": {
+				"rotate": [
+					{ "angle": 63.64 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_LArm3": {
+				"rotate": [
+					{ "angle": 27.27 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_LArm5": {
+				"rotate": [
+					{ "angle": 76.54 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_Head7": {
+				"rotate": [
+					{ "angle": -1.41 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_Belly": {
+				"rotate": [
+					{ "angle": 21.98 },
+					{ "time": 0.1667, "angle": -6.91 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_LArm7": {
+				"rotate": [
+					{ "angle": 76.54 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_LArm4": {
+				"rotate": [
+					{ "angle": 76.54 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_LArm6": {
+				"rotate": [
+					{ "angle": 76.54 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_Torso": {
+				"rotate": [
+					{ "angle": -41.28 },
+					{ "time": 0.1667, "angle": 0.5 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_Pelvies": {
+				"rotate": [
+					{ "angle": -23.89 },
+					{ "time": 0.1667, "angle": -6.6 },
+					{ "time": 0.5 }
+				],
+				"translate": [
+					{ "x": -110.46, "y": -67.61 },
+					{ "time": 0.1667, "x": -79.6, "y": -74.08 },
+					{ "time": 0.5, "x": 2.81, "y": -4.22 }
+				]
+			},
+			"1": {
+				"translate": [
+					{ "x": -143.77, "curve": "stepped" },
+					{ "time": 0.3167, "x": -143.77 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_Head": {
+				"rotate": [
+					{ "angle": -6.91 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_RArm": {
+				"rotate": [
+					{ "angle": -97.76 },
+					{ "time": 0.1667, "angle": -29.14 },
+					{ "time": 0.5 }
+				],
+				"translate": [
+					{ "x": 10.69, "y": -28.69 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_RLeg": {
+				"rotate": [
+					{ "angle": -3.26 },
+					{ "time": 0.5, "angle": -2.53 }
+				]
+			},
+			"Zombie_Head2": {
+				"rotate": [
+					{ "angle": 15.34 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_RLeg2": {
+				"rotate": [
+					{ "angle": 28.27 },
+					{ "time": 0.5, "angle": 3.93 }
+				]
+			},
+			"Zombie_LLeg2": {
+				"rotate": [
+					{ "angle": 40.25 },
+					{ "time": 0.5, "angle": 14.94 }
+				]
+			},
+			"Zombie_LLeg": {
+				"rotate": [
+					{ "angle": 30.89 },
+					{ "time": 0.5, "angle": -6.26 }
+				]
+			},
+			"Zombie_LArm": {
+				"rotate": [
+					{ "angle": -7.9 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_RArm2": {
+				"rotate": [
+					{ "angle": -76.11 },
+					{ "time": 0.1667, "angle": -55.61 },
+					{ "time": 0.5 }
+				]
+			}
+		},
+		"drawOrder": [
+			{
+				"offsets": [
+					{ "slot": "bottom", "offset": -10 }
+				]
+			}
+		]
+	},
+	"Atk1_Charging": {
+		"bones": {
+			"Zombie_RArm2": {
+				"rotate": [
+					{ "angle": -76.11 },
+					{ "time": 0.1667, "angle": -91.81 },
+					{ "time": 0.3333, "angle": -73.67 },
+					{ "time": 0.5, "angle": -76.11 },
+					{ "time": 0.6667, "angle": -91.81 },
+					{ "time": 0.8333, "angle": -73.67 },
+					{ "time": 1, "angle": -76.11 }
+				]
+			},
+			"Zombie_Head5": {
+				"rotate": [
+					{ "angle": 63.64 },
+					{ "time": 0.1667, "angle": 72.43 },
+					{ "time": 0.3333, "angle": 14.38 },
+					{ "time": 0.5, "angle": 63.64 },
+					{ "time": 0.6667, "angle": 72.43 },
+					{ "time": 0.8333, "angle": 14.38 },
+					{ "time": 1, "angle": 63.64 }
+				]
+			},
+			"Zombie_Head9": {
+				"rotate": [
+					{ "angle": -7.17 },
+					{ "time": 0.1667, "angle": 1.61 },
+					{ "time": 0.3333, "angle": -56.44 },
+					{ "time": 0.5, "angle": -7.17 },
+					{ "time": 0.6667, "angle": 1.61 },
+					{ "time": 0.8333, "angle": -56.44 },
+					{ "time": 1, "angle": -7.17 }
+				]
+			},
+			"Zombie_Head4": {
+				"rotate": [
+					{ "angle": 40.53 },
+					{ "time": 0.1667, "angle": 49.32 },
+					{ "time": 0.3333, "angle": -8.73 },
+					{ "time": 0.5, "angle": 40.53 },
+					{ "time": 0.6667, "angle": 49.32 },
+					{ "time": 0.8333, "angle": -8.73 },
+					{ "time": 1, "angle": 40.53 }
+				]
+			},
+			"Zombie_LArm6": {
+				"rotate": [
+					{ "angle": 76.54 },
+					{ "time": 0.1667, "angle": 8.55 },
+					{ "time": 0.3333, "angle": 74.93 },
+					{ "time": 0.5, "angle": 76.54 },
+					{ "time": 0.6667, "angle": 8.55 },
+					{ "time": 0.8333, "angle": 74.93 },
+					{ "time": 1, "angle": 76.54 }
+				]
+			},
+			"Zombie_LLeg2": {
+				"rotate": [
+					{ "angle": 40.25 }
+				]
+			},
+			"Zombie_RArm": {
+				"rotate": [
+					{ "angle": -97.76 },
+					{ "time": 0.1667, "angle": -92.08 },
+					{ "time": 0.3333, "angle": -98.28 },
+					{ "time": 0.5, "angle": -97.76 },
+					{ "time": 0.6667, "angle": -92.08 },
+					{ "time": 0.8333, "angle": -98.28 },
+					{ "time": 1, "angle": -97.76 }
+				],
+				"translate": [
+					{ "x": 10.69, "y": -28.69 }
+				]
+			},
+			"Zombie_Head6": {
+				"rotate": [
+					{ "angle": -0.18 },
+					{ "time": 0.1667, "angle": 8.61 },
+					{ "time": 0.3333, "angle": -49.44 },
+					{ "time": 0.5, "angle": -0.18 },
+					{ "time": 0.6667, "angle": 8.61 },
+					{ "time": 0.8333, "angle": -49.44 },
+					{ "time": 1, "angle": -0.18 }
+				]
+			},
+			"Zombie_Head8": {
+				"rotate": [
+					{ "angle": -9.33 },
+					{ "time": 0.1667, "angle": -0.54 },
+					{ "time": 0.3333, "angle": -58.59 },
+					{ "time": 0.5, "angle": -9.33 },
+					{ "time": 0.6667, "angle": -0.54 },
+					{ "time": 0.8333, "angle": -58.59 },
+					{ "time": 1, "angle": -9.33 }
+				]
+			},
+			"Zombie_Head7": {
+				"rotate": [
+					{ "angle": -1.41 },
+					{ "time": 0.1667, "angle": 7.38 },
+					{ "time": 0.3333, "angle": -50.67 },
+					{ "time": 0.5, "angle": -1.41 },
+					{ "time": 0.6667, "angle": 7.38 },
+					{ "time": 0.8333, "angle": -50.67 },
+					{ "time": 1, "angle": -1.41 }
+				]
+			},
+			"Zombie_LLeg": {
+				"rotate": [
+					{ "angle": 30.89 }
+				]
+			},
+			"Zombie_Head3": {
+				"rotate": [
+					{ "angle": 20.9 },
+					{ "time": 0.1667, "angle": 29.68 },
+					{ "time": 0.3333, "angle": -28.37 },
+					{ "time": 0.5, "angle": 20.9 },
+					{ "time": 0.6667, "angle": 29.68 },
+					{ "time": 0.8333, "angle": -28.37 },
+					{ "time": 1, "angle": 20.9 }
+				]
+			},
+			"1": {
+				"translate": [
+					{ "x": -143.77 }
+				]
+			},
+			"Zombie_Head": {
+				"rotate": [
+					{ "angle": -6.91 }
+				]
+			},
+			"Zombie_LArm": {
+				"rotate": [
+					{ "angle": -7.9 },
+					{ "time": 0.1667, "angle": 53.57 },
+					{ "time": 0.3333, "angle": 28.69 },
+					{ "time": 0.5, "angle": -7.9 },
+					{ "time": 0.6667, "angle": 53.57 },
+					{ "time": 0.8333, "angle": 28.69 },
+					{ "time": 1, "angle": -7.9 }
+				]
+			},
+			"Zombie_Head2": {
+				"rotate": [
+					{ "angle": 15.34 }
+				]
+			},
+			"Zombie_Torso": {
+				"rotate": [
+					{ "angle": -41.28 },
+					{ "time": 0.1667, "angle": -69.43 },
+					{ "time": 0.3333, "angle": -26.97 },
+					{ "time": 0.5, "angle": -41.28 },
+					{ "time": 0.6667, "angle": -69.43 },
+					{ "time": 0.8333, "angle": -26.97 },
+					{ "time": 1, "angle": -41.28 }
+				]
+			},
+			"Zombie_LArm5": {
+				"rotate": [
+					{ "angle": 76.54 },
+					{ "time": 0.1667, "angle": 8.55 },
+					{ "time": 0.3333, "angle": 74.93 },
+					{ "time": 0.5, "angle": 76.54 },
+					{ "time": 0.6667, "angle": 8.55 },
+					{ "time": 0.8333, "angle": 74.93 },
+					{ "time": 1, "angle": 76.54 }
+				]
+			},
+			"Zombie_LArm4": {
+				"rotate": [
+					{ "angle": 76.54 },
+					{ "time": 0.1667, "angle": 8.55 },
+					{ "time": 0.3333, "angle": 74.93 },
+					{ "time": 0.5, "angle": 76.54 },
+					{ "time": 0.6667, "angle": 8.55 },
+					{ "time": 0.8333, "angle": 74.93 },
+					{ "time": 1, "angle": 76.54 }
+				]
+			},
+			"Zombie_LArm3": {
+				"rotate": [
+					{ "angle": 27.27 },
+					{ "time": 0.1667, "angle": 18.85 },
+					{ "time": 0.3333, "angle": 25.66 },
+					{ "time": 0.5, "angle": 27.27 },
+					{ "time": 0.6667, "angle": 18.85 },
+					{ "time": 0.8333, "angle": 25.66 },
+					{ "time": 1, "angle": 27.27 }
+				]
+			},
+			"Zombie_LArm2": {
+				"rotate": [
+					{ "angle": 7.7 },
+					{ "time": 0.1667, "angle": 27.42 },
+					{ "time": 0.3333, "angle": 6.08 },
+					{ "time": 0.5, "angle": 7.7 },
+					{ "time": 0.6667, "angle": 27.42 },
+					{ "time": 0.8333, "angle": 6.08 },
+					{ "time": 1, "angle": 7.7 }
+				]
+			},
+			"Zombie_Pelvies": {
+				"rotate": [
+					{ "angle": -23.89 },
+					{ "time": 0.1667, "angle": -3.53 },
+					{ "time": 0.3333, "angle": -8.71 },
+					{ "time": 0.5, "angle": -23.89 },
+					{ "time": 0.6667, "angle": -3.53 },
+					{ "time": 0.8333, "angle": -8.71 },
+					{ "time": 1, "angle": -23.89 }
+				],
+				"translate": [
+					{ "x": -110.46, "y": -67.61 },
+					{ "time": 0.1667, "x": -110.46, "y": -109.59 },
+					{ "time": 0.3333, "x": -72.3, "y": -78.3 },
+					{ "time": 0.5, "x": -110.46, "y": -67.61 },
+					{ "time": 0.6667, "x": -110.46, "y": -109.59 },
+					{ "time": 0.8333, "x": -72.3, "y": -78.3 },
+					{ "time": 1, "x": -110.46, "y": -67.61 }
+				]
+			},
+			"Zombie_RLeg2": {
+				"rotate": [
+					{ "angle": 28.27 }
+				]
+			},
+			"Zombie_LArm7": {
+				"rotate": [
+					{ "angle": 76.54 },
+					{ "time": 0.1667, "angle": 8.55 },
+					{ "time": 0.3333, "angle": 74.93 },
+					{ "time": 0.5, "angle": 76.54 },
+					{ "time": 0.6667, "angle": 8.55 },
+					{ "time": 0.8333, "angle": 74.93 },
+					{ "time": 1, "angle": 76.54 }
+				]
+			},
+			"Zombie_Belly": {
+				"rotate": [
+					{ "angle": 21.98 },
+					{ "time": 0.1667, "angle": 21.56 },
+					{ "time": 0.3333, "angle": 10.08 },
+					{ "time": 0.5, "angle": 21.98 },
+					{ "time": 0.6667, "angle": 21.56 },
+					{ "time": 0.8333, "angle": 10.08 },
+					{ "time": 1, "angle": 21.98 }
+				]
+			},
+			"Zombie_RLeg": {
+				"rotate": [
+					{ "angle": -3.26 }
+				]
+			},
+			"Shadow": {
+				"translate": [
+					{ "x": -72.67 }
+				],
+				"scale": [
+					{ "x": 1.367, "y": 1.177 },
+					{ "time": 0.1667, "x": 1.477, "y": 1.272 },
+					{ "time": 0.3333, "x": 1.232, "y": 1.061 },
+					{ "time": 0.5, "x": 1.367, "y": 1.177 },
+					{ "time": 0.6667, "x": 1.477, "y": 1.272 },
+					{ "time": 0.8333, "x": 1.232, "y": 1.061 },
+					{ "time": 1, "x": 1.367, "y": 1.177 }
+				]
+			}
+		},
+		"deform": {
+			"default": {
+				"thing1": {
+					"thing1": [
+						{},
+						{
+							"time": 0.2333,
+							"vertices": [ 1.44872, -45.27151, -23.22525, -70.11066, 0.14363, 1.85866, 24.81746, 26.69821 ]
+						},
+						{ "time": 0.5 },
+						{
+							"time": 0.7333,
+							"vertices": [ 1.44872, -45.27151, -23.22525, -70.11066, 0.14363, 1.85866, 24.81746, 26.69821 ]
+						},
+						{ "time": 1 }
+					]
+				},
+				"thing2": {
+					"thing2": [
+						{},
+						{
+							"time": 0.2333,
+							"vertices": [ -25.82541, 46.35178, -8.38852, 42.42584, 14.61769, -16.44324, -2.819, -12.51732 ]
+						},
+						{ "time": 0.5 },
+						{
+							"time": 0.7333,
+							"vertices": [ -25.82541, 46.35178, -8.38852, 42.42584, 14.61769, -16.44324, -2.819, -12.51732 ]
+						},
+						{ "time": 1 }
+					]
+				},
+				"thing3": {
+					"thing3": [
+						{},
+						{
+							"time": 0.2333,
+							"vertices": [ 10.88416, -33.16553, -9.41415, -53.15762, 0.69043, -6.83617, 20.98875, 13.15593 ]
+						},
+						{ "time": 0.5 },
+						{
+							"time": 0.7333,
+							"vertices": [ 10.88416, -33.16553, -9.41415, -53.15762, 0.69043, -6.83617, 20.98875, 13.15593 ]
+						},
+						{ "time": 1 }
+					]
+				},
+				"thing4": {
+					"thing4": [
+						{},
+						{
+							"time": 0.2333,
+							"vertices": [ -10.1496, 27.57127, 3.89163, -7.69838, 22.40802, -31.16367, 8.36684, 4.10603 ]
+						},
+						{ "time": 0.5 },
+						{
+							"time": 0.7333,
+							"vertices": [ -10.1496, 27.57127, 3.89163, -7.69838, 22.40802, -31.16367, 8.36684, 4.10603 ]
+						},
+						{ "time": 1 }
+					]
+				}
+			}
+		},
+		"drawOrder": [
+			{
+				"offsets": [
+					{ "slot": "bottom", "offset": -10 }
+				]
+			}
+		]
+	},
+	"Atk1_IdleToAtk": {
+		"bones": {
+			"Zombie_RArm2": {
+				"rotate": [
+					{},
+					{ "time": 0.1667, "angle": 33.27 },
+					{ "time": 0.2833, "angle": -12.51 },
+					{ "time": 0.5, "angle": -76.11 }
+				]
+			},
+			"Zombie_Head4": {
+				"rotate": [
+					{},
+					{ "time": 0.5, "angle": 40.53 }
+				]
+			},
+			"Zombie_RArm": {
+				"rotate": [
+					{},
+					{ "time": 0.1667, "angle": -55.93 },
+					{ "time": 0.2833, "angle": -57.95 },
+					{ "time": 0.5, "angle": -97.76 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.5, "x": 10.69, "y": -28.69 }
+				]
+			},
+			"Zombie_Head7": {
+				"rotate": [
+					{},
+					{ "time": 0.5, "angle": -1.41 }
+				]
+			},
+			"Zombie_Head8": {
+				"rotate": [
+					{},
+					{ "time": 0.5, "angle": -9.33 }
+				]
+			},
+			"Zombie_Head9": {
+				"rotate": [
+					{},
+					{ "time": 0.5, "angle": -7.17 }
+				]
+			},
+			"Zombie_Pelvies": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": -9.76 },
+					{ "time": 0.2167, "angle": 38.63 },
+					{ "time": 0.5, "angle": -23.89 }
+				],
+				"translate": [
+					{ "x": 2.81, "y": -4.22 },
+					{ "time": 0.0833, "x": 42.18, "y": -30.22 },
+					{ "time": 0.2167, "x": -40.61, "y": -141.92 },
+					{ "time": 0.5, "x": -110.46, "y": -67.61 }
+				]
+			},
+			"Zombie_Belly": {
+				"rotate": [
+					{},
+					{ "time": 0.5, "angle": 21.98 }
+				]
+			},
+			"Zombie_Torso": {
+				"rotate": [
+					{},
+					{ "time": 0.5, "angle": -41.28 }
+				]
+			},
+			"1": {
+				"translate": [
+					{},
+					{ "time": 0.0667, "y": 49.7 },
+					{ "time": 0.15, "x": -143.77 }
+				]
+			},
+			"Zombie_Head": {
+				"rotate": [
+					{},
+					{ "time": 0.5, "angle": -6.91 }
+				]
+			},
+			"Zombie_Head2": {
+				"rotate": [
+					{},
+					{ "time": 0.5, "angle": 15.34 }
+				]
+			},
+			"Zombie_RLeg": {
+				"rotate": [
+					{ "angle": -2.53 },
+					{ "time": 0.5, "angle": -3.26 }
+				]
+			},
+			"Zombie_RLeg2": {
+				"rotate": [
+					{ "angle": 3.93 },
+					{ "time": 0.5, "angle": 28.27 }
+				]
+			},
+			"Zombie_RLeg3": {
+				"rotate": [
+					{},
+					{ "time": 0.0667, "angle": -20.09 },
+					{ "time": 0.15 }
+				]
+			},
+			"Zombie_LLeg": {
+				"rotate": [
+					{ "angle": -6.26 },
+					{ "time": 0.5, "angle": 30.89 }
+				]
+			},
+			"Zombie_LLeg2": {
+				"rotate": [
+					{ "angle": 14.94 },
+					{ "time": 0.5, "angle": 40.25 }
+				]
+			},
+			"Zombie_LArm": {
+				"rotate": [
+					{},
+					{ "time": 0.5, "angle": -7.9 }
+				]
+			},
+			"Zombie_LArm2": {
+				"rotate": [
+					{},
+					{ "time": 0.5, "angle": 7.7 }
+				]
+			},
+			"Zombie_LArm3": {
+				"rotate": [
+					{},
+					{ "time": 0.5, "angle": 27.27 }
+				]
+			},
+			"Zombie_LArm4": {
+				"rotate": [
+					{},
+					{ "time": 0.5, "angle": 76.54 }
+				]
+			},
+			"Zombie_LArm5": {
+				"rotate": [
+					{},
+					{ "time": 0.5, "angle": 76.54 }
+				]
+			},
+			"Zombie_Head5": {
+				"rotate": [
+					{},
+					{ "time": 0.5, "angle": 63.64 }
+				]
+			},
+			"Zombie_Head6": {
+				"rotate": [
+					{},
+					{ "time": 0.5, "angle": -0.18 }
+				]
+			},
+			"Zombie_Head3": {
+				"rotate": [
+					{},
+					{ "time": 0.5, "angle": 20.9 }
+				]
+			},
+			"Zombie_LArm6": {
+				"rotate": [
+					{},
+					{ "time": 0.5, "angle": 76.54 }
+				]
+			},
+			"Zombie_LArm7": {
+				"rotate": [
+					{},
+					{ "time": 0.5, "angle": 76.54 }
+				]
+			},
+			"Shadow": {
+				"translate": [
+					{},
+					{ "time": 0.0667, "x": -6.16 },
+					{ "time": 0.15, "x": -66.16 },
+					{ "time": 0.5, "x": -72.67 }
+				],
+				"scale": [
+					{},
+					{ "time": 0.15, "x": 1.129, "y": 1.053 },
+					{ "time": 0.5, "x": 1.367, "y": 1.177 }
+				]
+			}
+		},
+		"drawOrder": [
+			{
+				"offsets": [
+					{ "slot": "bottom", "offset": -10 }
+				]
+			}
+		],
+		"events": [
+			{ "time": 0.5, "name": "FireTileAttack" }
+		]
+	},
+	"Atk1_Loop": {
+		"bones": {
+			"Zombie_LArm4": {
+				"rotate": [
+					{ "angle": 76.54 },
+					{ "time": 0.25, "angle": -77.51 },
+					{ "time": 0.4, "angle": 75.92 },
+					{ "time": 0.5, "angle": 76.54 }
+				]
+			},
+			"Zombie_LArm5": {
+				"rotate": [
+					{ "angle": 76.54 },
+					{ "time": 0.25, "angle": -77.51 },
+					{ "time": 0.4, "angle": 75.92 },
+					{ "time": 0.5, "angle": 76.54 }
+				]
+			},
+			"Shadow": {
+				"translate": [
+					{ "x": -72.67 }
+				],
+				"scale": [
+					{ "x": 1.367, "y": 1.177 },
+					{ "time": 0.0833, "x": 1.532, "y": 1.32 },
+					{ "time": 0.25, "x": 1.301, "y": 1.12 },
+					{ "time": 0.5, "x": 1.367, "y": 1.177 }
+				]
+			},
+			"Zombie_Head5": {
+				"rotate": [
+					{ "angle": 63.64 },
+					{ "time": 0.0833, "angle": 101.99 },
+					{ "time": 0.3, "angle": 1.88 },
+					{ "time": 0.5, "angle": 63.64 }
+				]
+			},
+			"Zombie_LArm6": {
+				"rotate": [
+					{ "angle": 76.54 },
+					{ "time": 0.25, "angle": -77.51 },
+					{ "time": 0.4, "angle": 75.92 },
+					{ "time": 0.5, "angle": 76.54 }
+				]
+			},
+			"Zombie_LArm7": {
+				"rotate": [
+					{ "angle": 76.54 },
+					{ "time": 0.25, "angle": -77.51 },
+					{ "time": 0.4, "angle": 75.92 },
+					{ "time": 0.5, "angle": 76.54 }
+				]
+			},
+			"Zombie_Head6": {
+				"rotate": [
+					{ "angle": -0.18 },
+					{ "time": 0.0833, "angle": 38.17 },
+					{ "time": 0.3, "angle": -61.94 },
+					{ "time": 0.5, "angle": -0.18 }
+				]
+			},
+			"Zombie_Head3": {
+				"rotate": [
+					{ "angle": 20.9 },
+					{ "time": 0.0833, "angle": 59.25 },
+					{ "time": 0.3, "angle": -40.87 },
+					{ "time": 0.5, "angle": 20.9 }
+				]
+			},
+			"Zombie_RArm": {
+				"rotate": [
+					{ "angle": -97.76 },
+					{ "time": 0.0833, "angle": -82.26 },
+					{ "time": 0.15, "angle": -135.94 },
+					{ "time": 0.3333, "angle": -140.74 },
+					{ "time": 0.5, "angle": -97.76 }
+				],
+				"translate": [
+					{ "x": 10.69, "y": -28.69 }
+				]
+			},
+			"Zombie_Head4": {
+				"rotate": [
+					{ "angle": 40.53 },
+					{ "time": 0.0833, "angle": 78.89 },
+					{ "time": 0.3, "angle": -21.23 },
+					{ "time": 0.5, "angle": 40.53 }
+				]
+			},
+			"Zombie_Torso": {
+				"rotate": [
+					{ "angle": -41.28 },
+					{ "time": 0.0833, "angle": 21.97 },
+					{ "time": 0.3333, "angle": -0.07 },
+					{ "time": 0.5, "angle": -41.28 }
+				]
+			},
+			"Zombie_Head7": {
+				"rotate": [
+					{ "angle": -1.41 },
+					{ "time": 0.0833, "angle": 36.95 },
+					{ "time": 0.3, "angle": -63.17 },
+					{ "time": 0.5, "angle": -1.41 }
+				]
+			},
+			"Zombie_Head8": {
+				"rotate": [
+					{ "angle": -9.33 },
+					{ "time": 0.0833, "angle": 29.02 },
+					{ "time": 0.3, "angle": -71.09 },
+					{ "time": 0.5, "angle": -9.33 }
+				]
+			},
+			"Zombie_Head9": {
+				"rotate": [
+					{ "angle": -7.17 },
+					{ "time": 0.0833, "angle": 31.18 },
+					{ "time": 0.3, "angle": -68.94 },
+					{ "time": 0.5, "angle": -7.17 }
+				]
+			},
+			"Zombie_LArm": {
+				"rotate": [
+					{ "angle": -7.9 },
+					{ "time": 0.0833, "angle": 35.34 },
+					{ "time": 0.25, "angle": 6.11 },
+					{ "time": 0.4, "angle": -37.12 },
+					{ "time": 0.5, "angle": -7.9 }
+				]
+			},
+			"Zombie_Pelvies": {
+				"rotate": [
+					{ "angle": -23.89 },
+					{ "time": 0.0833, "angle": 6.23 },
+					{ "time": 0.5, "angle": -23.89 }
+				],
+				"translate": [
+					{ "x": -110.46, "y": -67.61 },
+					{ "time": 0.0833, "x": -32.82, "y": -94.15 },
+					{ "time": 0.25, "x": -0.23, "y": -33.53 },
+					{ "time": 0.5, "x": -110.46, "y": -67.61 }
+				]
+			},
+			"1": {
+				"translate": [
+					{ "x": -143.77 }
+				]
+			},
+			"Zombie_Head": {
+				"rotate": [
+					{ "angle": -6.91 }
+				]
+			},
+			"Zombie_Head2": {
+				"rotate": [
+					{ "angle": 15.34 }
+				]
+			},
+			"Zombie_RLeg": {
+				"rotate": [
+					{ "angle": -3.26 }
+				]
+			},
+			"Zombie_RLeg2": {
+				"rotate": [
+					{ "angle": 28.27 }
+				]
+			},
+			"Zombie_LLeg": {
+				"rotate": [
+					{ "angle": 30.89 }
+				]
+			},
+			"Zombie_LLeg2": {
+				"rotate": [
+					{ "angle": 40.25 }
+				]
+			},
+			"Zombie_Belly": {
+				"rotate": [
+					{ "angle": 21.98 },
+					{ "time": 0.0833, "angle": -8.11 },
+					{ "time": 0.3333, "angle": -38.66 },
+					{ "time": 0.5, "angle": 21.98 }
+				]
+			},
+			"Zombie_LArm2": {
+				"rotate": [
+					{ "angle": 7.7 },
+					{ "time": 0.0833, "angle": 2.75 },
+					{ "time": 0.25, "angle": 62.14 },
+					{ "time": 0.4, "angle": 99.33 },
+					{ "time": 0.5, "angle": 7.7 }
+				]
+			},
+			"Zombie_LArm3": {
+				"rotate": [
+					{ "angle": 27.27 },
+					{ "time": 0.0833, "angle": -5.29 },
+					{ "time": 0.25, "angle": -52.98 },
+					{ "time": 0.4, "angle": 61.99 },
+					{ "time": 0.5, "angle": 27.27 }
+				]
+			},
+			"Zombie_RArm2": {
+				"rotate": [
+					{ "angle": -76.11 },
+					{ "time": 0.0833, "angle": -84.45 },
+					{ "time": 0.15, "angle": 179.24 },
+					{ "time": 0.3333, "angle": -109.79 },
+					{ "time": 0.5, "angle": -76.11 }
+				]
+			}
+		},
+		"deform": {
+			"default": {
+				"thing1": {
+					"thing1": [
+						{},
+						{
+							"time": 0.0833,
+							"vertices": [ 1.44872, -45.27151, -23.22525, -70.11066, 0.14363, 1.85866, 24.81746, 26.69821 ],
+							"curve": "stepped"
+						},
+						{
+							"time": 0.2667,
+							"vertices": [ 1.44872, -45.27151, -23.22525, -70.11066, 0.14363, 1.85866, 24.81746, 26.69821 ]
+						},
+						{ "time": 0.5 }
+					]
+				},
+				"thing2": {
+					"thing2": [
+						{},
+						{
+							"time": 0.0833,
+							"vertices": [ -25.82541, 46.35178, -8.38852, 42.42584, 14.61769, -16.44324, -2.819, -12.51732 ],
+							"curve": "stepped"
+						},
+						{
+							"time": 0.2667,
+							"vertices": [ -25.82541, 46.35178, -8.38852, 42.42584, 14.61769, -16.44324, -2.819, -12.51732 ]
+						},
+						{ "time": 0.5 }
+					]
+				},
+				"thing3": {
+					"thing3": [
+						{},
+						{
+							"time": 0.0833,
+							"vertices": [ 10.88416, -33.16553, -9.41415, -53.15762, 0.69043, -6.83617, 20.98875, 13.15593 ],
+							"curve": "stepped"
+						},
+						{
+							"time": 0.2667,
+							"vertices": [ 10.88416, -33.16553, -9.41415, -53.15762, 0.69043, -6.83617, 20.98875, 13.15593 ]
+						},
+						{ "time": 0.5 }
+					]
+				},
+				"thing4": {
+					"thing4": [
+						{},
+						{
+							"time": 0.0833,
+							"vertices": [ -10.1496, 27.57127, 3.89163, -7.69838, 22.40802, -31.16367, 8.36684, 4.10603 ],
+							"curve": "stepped"
+						},
+						{
+							"time": 0.2667,
+							"vertices": [ -10.1496, 27.57127, 3.89163, -7.69838, 22.40802, -31.16367, 8.36684, 4.10603 ]
+						},
+						{ "time": 0.5 }
+					]
+				}
+			}
+		},
+		"drawOrder": [
+			{
+				"offsets": [
+					{ "slot": "bottom", "offset": -10 }
+				]
+			}
+		],
+		"events": [
+			{ "name": "FireCastParticle" },
+			{ "time": 0.0833, "name": "FireBulletParticle" }
+		]
+	},
+	"Buff": {
+		"bones": {
+			"Zombie_RArm2": {
+				"rotate": [
+					{},
+					{ "time": 0.1667, "angle": 30.69, "curve": "stepped" },
+					{ "time": 0.4833, "angle": 30.69 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_Head8": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 14.99 },
+					{ "time": 0.5, "angle": -2.47 },
+					{ "time": 0.8 }
+				],
+				"scale": [
+					{ "time": 0.25 },
+					{ "time": 0.3333, "x": 1.278, "y": 1.278, "curve": "stepped" },
+					{ "time": 0.6, "x": 1.278, "y": 1.278 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_Head9": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 14.99 },
+					{ "time": 0.5, "angle": -24.55 },
+					{ "time": 0.8 }
+				],
+				"scale": [
+					{ "time": 0.25 },
+					{ "time": 0.3333, "x": 1.278, "y": 1.278, "curve": "stepped" },
+					{ "time": 0.6, "x": 1.278, "y": 1.278 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_Pelvies": {
+				"rotate": [
+					{},
+					{ "time": 0.1667, "angle": -12.46 },
+					{ "time": 0.3333, "angle": -40.68 },
+					{ "time": 0.5667, "angle": 13.8 },
+					{ "time": 0.8 }
+				],
+				"translate": [
+					{ "x": 2.81, "y": -4.22 },
+					{ "time": 0.1667, "x": 4.72, "y": -40.47 },
+					{ "time": 0.3333, "x": -14.88, "y": -110.49 },
+					{ "time": 0.4167, "x": -5.77, "y": -74.82 },
+					{ "time": 0.5667, "x": -8.25, "y": -59.42 },
+					{ "time": 0.8, "x": 2.81, "y": -4.22 }
+				]
+			},
+			"Zombie_Belly": {
+				"rotate": [
+					{},
+					{ "time": 0.1667, "angle": -24.26 },
+					{ "time": 0.5333, "angle": -2.1 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_Torso": {
+				"rotate": [
+					{},
+					{ "time": 0.1667, "angle": 21.1 },
+					{ "time": 0.5333, "angle": -51.55 },
+					{ "time": 0.8 }
+				]
+			},
+			"1": {
+				"translate": [
+					{ "time": 0.1667 },
+					{ "time": 0.25, "y": 68.1 },
+					{ "time": 0.3333 }
+				]
+			},
+			"Zombie_RLeg": {
+				"rotate": [
+					{ "angle": -2.53 }
+				]
+			},
+			"Zombie_RLeg2": {
+				"rotate": [
+					{ "angle": 3.93 }
+				]
+			},
+			"Zombie_RLeg3": {
+				"rotate": [
+					{ "time": 0.1667 },
+					{ "time": 0.25, "angle": 18.64 },
+					{ "time": 0.3333 }
+				]
+			},
+			"Zombie_LLeg": {
+				"rotate": [
+					{ "angle": -6.26 }
+				]
+			},
+			"Zombie_LLeg2": {
+				"rotate": [
+					{ "angle": 14.94 }
+				]
+			},
+			"2": {
+				"translate": [
+					{ "time": 0.45 },
+					{ "time": 0.5833, "x": -21.28, "y": 78.29 },
+					{ "time": 0.6667 }
+				]
+			},
+			"Zombie_LLeg3": {
+				"rotate": [
+					{ "time": 0.45 },
+					{ "time": 0.5833, "angle": 37.09 },
+					{ "time": 0.6667 }
+				]
+			},
+			"Zombie_LArm": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 33.88 },
+					{ "time": 0.5167, "angle": -36.1 },
+					{ "time": 0.8 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.25, "x": -4.24, "y": 10.79 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_LArm2": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": -5.28 },
+					{ "time": 0.5167, "angle": -43.18 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_LArm3": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 18.46 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_LArm4": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 43.14 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_LArm5": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 43.14 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_LArm6": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 43.14 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_Head6": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 14.99 },
+					{ "time": 0.5, "angle": 1.68 },
+					{ "time": 0.8 }
+				],
+				"scale": [
+					{ "time": 0.25 },
+					{ "time": 0.3333, "x": 1.278, "y": 1.278, "curve": "stepped" },
+					{ "time": 0.6, "x": 1.278, "y": 1.278 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_Head7": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 14.99 },
+					{ "time": 0.5, "angle": -21.4 },
+					{ "time": 0.8 }
+				],
+				"scale": [
+					{ "time": 0.25 },
+					{ "time": 0.3333, "x": 1.278, "y": 1.278, "curve": "stepped" },
+					{ "time": 0.6, "x": 1.278, "y": 1.278 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_LArm7": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 43.14 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_RArm": {
+				"rotate": [
+					{},
+					{ "time": 0.1667, "angle": -118.28, "curve": "stepped" },
+					{ "time": 0.4833, "angle": -118.28 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_Head3": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 14.99 },
+					{ "time": 0.5, "angle": 22.12 },
+					{ "time": 0.8 }
+				],
+				"scale": [
+					{ "time": 0.25 },
+					{ "time": 0.3333, "x": 1.278, "y": 1.278, "curve": "stepped" },
+					{ "time": 0.6, "x": 1.278, "y": 1.278 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_Head4": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 14.99 },
+					{ "time": 0.5, "angle": 34.01 },
+					{ "time": 0.8 }
+				],
+				"scale": [
+					{ "time": 0.25 },
+					{ "time": 0.3333, "x": 1.278, "y": 1.278, "curve": "stepped" },
+					{ "time": 0.6, "x": 1.278, "y": 1.278 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_Head5": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 14.99 },
+					{ "time": 0.5, "angle": 58.83 },
+					{ "time": 0.8 }
+				],
+				"scale": [
+					{ "time": 0.25 },
+					{ "time": 0.3333, "x": 1.278, "y": 1.278, "curve": "stepped" },
+					{ "time": 0.6, "x": 1.278, "y": 1.278 },
+					{ "time": 0.8 }
+				]
+			},
+			"Shadow": {
+				"scale": [
+					{},
+					{ "time": 0.1667, "x": 1.056, "y": 1.056 },
+					{ "time": 0.3333, "x": 1.183, "y": 1.183 },
+					{ "time": 0.8 }
+				]
+			}
+		},
+		"deform": {
+			"default": {
+				"thing1": {
+					"thing1": [
+						{},
+						{
+							"time": 0.25,
+							"vertices": [ 1.91129, -43.00969, -45.99442, -45.25633, -16.79343, 13.93826, 31.11246, 16.18506 ]
+						},
+						{
+							"time": 0.4833,
+							"vertices": [ -20.57934, 36.01339, -1.13294, 34.08044, 22.74573, -9.28146, 3.2995, -7.34813 ]
+						},
+						{ "time": 0.8 }
+					]
+				},
+				"thing3": {
+					"thing3": [
+						{},
+						{
+							"time": 0.25,
+							"vertices": [ 0.13654, -36.49492, -43.59497, -42.48737, -4.69531, 7.07265, 39.0361, 13.06506 ]
+						},
+						{
+							"time": 0.4833,
+							"vertices": [ -32.10327, 47.08881, -4.32069, 44.52928, 32.84138, -27.79365, 5.05877, -25.23402 ]
+						},
+						{ "time": 0.8 }
+					]
+				},
+				"thing4": {
+					"thing4": [
+						{},
+						{
+							"time": 0.25,
+							"vertices": [ 18.20886, -22.72704, -7.40744, -31.20882, 13.67883, -14.34196, 39.29541, -5.86028 ]
+						},
+						{
+							"time": 0.4833,
+							"vertices": [ -2.05923, 30.19403, 7.2446, 22.34293, 25.95998, -24.64054, 16.65658, -16.78946 ]
+						},
+						{ "time": 0.8 }
+					]
+				}
+			}
+		},
+		"drawOrder": [
+			{
+				"offsets": [
+					{ "slot": "armR_1", "offset": 20 },
+					{ "slot": "thing4", "offset": 20 },
+					{ "slot": "thing3", "offset": 20 },
+					{ "slot": "thing2", "offset": 20 },
+					{ "slot": "thing1", "offset": 20 },
+					{ "slot": "armR_detail", "offset": 20 },
+					{ "slot": "bottom", "offset": -10 }
+				]
+			},
+			{
+				"time": 0.8,
+				"offsets": [
+					{ "slot": "bottom", "offset": -10 }
+				]
+			}
+		]
+	},
+	"DashDown": {
+		"bones": {
+			"Zombie_RArm2": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": -17.06 },
+					{ "time": 0.4667, "angle": -70.02 },
+					{ "time": 0.6, "angle": -133.15 },
+					{ "time": 0.8333 }
+				]
+			},
+			"Zombie_Belly": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 19.12 },
+					{ "time": 0.3333, "angle": 34.33 },
+					{ "time": 0.4667, "angle": 31.83 },
+					{ "time": 0.5667, "angle": -10.85 },
+					{ "time": 0.6833, "angle": 6.11 },
+					{ "time": 0.8333 }
+				]
+			},
+			"Zombie_RArm": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 2.57 },
+					{ "time": 0.4667, "angle": -108.86 },
+					{ "time": 0.6, "angle": -99 },
+					{ "time": 0.8333 }
+				]
+			},
+			"Zombie_Pelvies": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 13.27 },
+					{ "time": 0.3, "angle": 29.35 },
+					{ "time": 0.4667, "angle": -21.54 },
+					{ "time": 0.6, "angle": 20.85 },
+					{ "time": 0.8333 }
+				],
+				"translate": [
+					{ "x": 2.81, "y": -4.22 },
+					{ "time": 0.0833, "x": 21.43, "y": -76.04 },
+					{ "time": 0.3, "x": 31.47, "y": 61.93 },
+					{ "time": 0.4667, "x": 17.95, "y": 73.7 },
+					{ "time": 0.6, "x": 22.55, "y": -165.68 },
+					{ "time": 0.8333, "x": 2.81, "y": -4.22 }
+				]
+			},
+			"Zombie_LArm2": {
+				"rotate": [
+					{},
+					{ "time": 0.3333, "angle": -16.68 },
+					{ "time": 0.5167, "angle": -100.27 },
+					{ "time": 0.6833, "angle": -9.83 },
+					{ "time": 0.8333 }
+				]
+			},
+			"Zombie_LArm3": {
+				"rotate": [
+					{},
+					{ "time": 0.2667, "angle": -26.49 },
+					{ "time": 0.5167, "angle": -110.79 },
+					{ "time": 0.6833, "angle": -140.9 },
+					{ "time": 0.8333 }
+				]
+			},
+			"2": {
+				"translate": [
+					{ "time": 0.2 },
+					{ "time": 0.3, "x": -87.75, "y": 192.65 },
+					{ "time": 0.4167, "x": -20.99, "y": 211.46 },
+					{ "time": 0.4833, "y": 117.14 },
+					{ "time": 0.5333 }
+				]
+			},
+			"Zombie_RLeg3": {
+				"rotate": [
+					{ "time": 0.1667 },
+					{ "time": 0.25, "angle": 30.57 },
+					{ "time": 0.4167, "angle": -9.54 },
+					{ "time": 0.55 }
+				]
+			},
+			"Zombie_Head8": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 65.86 },
+					{ "time": 0.3333, "angle": 117.65 },
+					{ "time": 0.5667, "angle": 38.47 },
+					{ "time": 0.7167, "angle": -7.28 },
+					{ "time": 0.8333 }
+				]
+			},
+			"Zombie_Head5": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 65.86 },
+					{ "time": 0.3333, "angle": 117.65 },
+					{ "time": 0.5667, "angle": 38.47 },
+					{ "time": 0.7167, "angle": -7.28 },
+					{ "time": 0.8333 }
+				]
+			},
+			"Zombie_Head3": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 65.86 },
+					{ "time": 0.3333, "angle": 117.65 },
+					{ "time": 0.5667, "angle": 38.47 },
+					{ "time": 0.7167, "angle": -7.28 },
+					{ "time": 0.8333 }
+				]
+			},
+			"Zombie_LLeg2": {
+				"rotate": [
+					{ "angle": 14.94 }
+				]
+			},
+			"1": {
+				"translate": [
+					{ "time": 0.1667 },
+					{ "time": 0.3, "x": 26.73, "y": 118.38 },
+					{ "time": 0.45, "y": 143.64 },
+					{ "time": 0.4667, "y": 129.11 },
+					{ "time": 0.5167 }
+				]
+			},
+			"Zombie_Torso": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 19.12 },
+					{ "time": 0.3333, "angle": 34.33 },
+					{ "time": 0.4667, "angle": 22.52 },
+					{ "time": 0.5667, "angle": -10.85 },
+					{ "time": 0.6833, "angle": 6.11 },
+					{ "time": 0.8333 }
+				]
+			},
+			"Zombie_Head6": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 65.86 },
+					{ "time": 0.3333, "angle": 117.65 },
+					{ "time": 0.5667, "angle": 38.47 },
+					{ "time": 0.7167, "angle": -7.28 },
+					{ "time": 0.8333 }
+				]
+			},
+			"Zombie_RLeg": {
+				"rotate": [
+					{ "angle": -2.53 }
+				]
+			},
+			"Zombie_LArm7": {
+				"rotate": [
+					{},
+					{ "time": 0.2667, "angle": 4.18 },
+					{ "time": 0.5167, "angle": -51.38 },
+					{ "time": 0.6833, "angle": -143.14 },
+					{ "time": 0.8333 }
+				]
+			},
+			"Zombie_Head7": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 65.86 },
+					{ "time": 0.3333, "angle": 117.65 },
+					{ "time": 0.5667, "angle": 38.47 },
+					{ "time": 0.7167, "angle": -7.28 },
+					{ "time": 0.8333 }
+				]
+			},
+			"Zombie_Head4": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 65.86 },
+					{ "time": 0.3333, "angle": 117.65 },
+					{ "time": 0.5667, "angle": 38.47 },
+					{ "time": 0.7167, "angle": -7.28 },
+					{ "time": 0.8333 }
+				]
+			},
+			"Zombie_LArm4": {
+				"rotate": [
+					{},
+					{ "time": 0.2667, "angle": 4.18 },
+					{ "time": 0.5167, "angle": -51.38 },
+					{ "time": 0.6833, "angle": -143.14 },
+					{ "time": 0.8333 }
+				]
+			},
+			"Zombie_LLeg": {
+				"rotate": [
+					{ "angle": -6.26 }
+				]
+			},
+			"Zombie_LLeg3": {
+				"rotate": [
+					{ "time": 0.2 },
+					{ "time": 0.3, "angle": 49.79 },
+					{ "time": 0.4833, "angle": -0.18 },
+					{ "time": 0.8333 }
+				]
+			},
+			"Zombie_RLeg2": {
+				"rotate": [
+					{ "angle": 3.93 }
+				]
+			},
+			"Zombie_LArm": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 49.46 },
+					{ "time": 0.3333, "angle": 100.27 },
+					{ "time": 0.5167, "angle": 45.46 },
+					{ "time": 0.6833, "angle": 37.87 },
+					{ "time": 0.8333 }
+				]
+			},
+			"Zombie_LArm5": {
+				"rotate": [
+					{},
+					{ "time": 0.2667, "angle": 4.18 },
+					{ "time": 0.5167, "angle": -51.38 },
+					{ "time": 0.6833, "angle": -143.14 },
+					{ "time": 0.8333 }
+				]
+			},
+			"Zombie_Head9": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 65.86 },
+					{ "time": 0.3333, "angle": 117.65 },
+					{ "time": 0.5667, "angle": 38.47 },
+					{ "time": 0.7167, "angle": -7.28 },
+					{ "time": 0.8333 }
+				]
+			},
+			"Zombie_LArm6": {
+				"rotate": [
+					{},
+					{ "time": 0.2667, "angle": 4.18 },
+					{ "time": 0.5167, "angle": -51.38 },
+					{ "time": 0.6833, "angle": -143.14 },
+					{ "time": 0.8333 }
+				]
+			},
+			"Shadow": {
+				"scale": [
+					{},
+					{ "time": 0.0833, "x": 1.099, "y": 1.099 },
+					{ "time": 0.25, "x": 0.802, "y": 0.802 },
+					{ "time": 0.4, "x": 0.713, "y": 0.713 },
+					{ "time": 0.6, "x": 1.271, "y": 1.271 },
+					{ "time": 0.8333 }
+				]
+			}
+		},
+		"drawOrder": [
+			{
+				"offsets": [
+					{ "slot": "bottom", "offset": -10 }
+				]
+			}
+		]
+	},
+	"DashLeft": {
+		"bones": {
+			"Zombie_RArm2": {
+				"rotate": [
+					{},
+					{ "time": 0.0667, "angle": 12.71 },
+					{ "time": 0.2, "angle": 18.13 },
+					{ "time": 0.3667, "angle": -9.55 },
+					{ "time": 0.5333 }
+				]
+			},
+			"Zombie_LArm7": {
+				"rotate": [
+					{},
+					{ "time": 0.2833, "angle": -36.3 },
+					{ "time": 0.4167, "angle": -47.13 },
+					{ "time": 0.5333 }
+				]
+			},
+			"Zombie_RArm": {
+				"rotate": [
+					{},
+					{ "time": 0.0667, "angle": 12.71 },
+					{ "time": 0.2, "angle": 3.45 },
+					{ "time": 0.3667, "angle": -25.06 },
+					{ "time": 0.5333 }
+				]
+			},
+			"Zombie_LArm3": {
+				"rotate": [
+					{},
+					{ "time": 0.2833, "angle": -42.6 },
+					{ "time": 0.4167, "angle": -50.29 },
+					{ "time": 0.5333 }
+				]
+			},
+			"Zombie_Head3": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "angle": -8.34 },
+					{ "time": 0.2667, "angle": 33 },
+					{ "time": 0.3833, "angle": 37 },
+					{ "time": 0.5333 }
+				]
+			},
+			"Zombie_LArm4": {
+				"rotate": [
+					{},
+					{ "time": 0.2833, "angle": -36.3 },
+					{ "time": 0.4167, "angle": -47.13 },
+					{ "time": 0.5333 }
+				]
+			},
+			"Zombie_LArm6": {
+				"rotate": [
+					{},
+					{ "time": 0.2833, "angle": -36.3 },
+					{ "time": 0.4167, "angle": -47.13 },
+					{ "time": 0.5333 }
+				]
+			},
+			"Zombie_LArm5": {
+				"rotate": [
+					{},
+					{ "time": 0.2833, "angle": -36.3 },
+					{ "time": 0.4167, "angle": -47.13 },
+					{ "time": 0.5333 }
+				]
+			},
+			"Zombie_Head4": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "angle": -8.34 },
+					{ "time": 0.2667, "angle": 33 },
+					{ "time": 0.3833, "angle": 37 },
+					{ "time": 0.5333 }
+				]
+			},
+			"Zombie_Head5": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "angle": -8.34 },
+					{ "time": 0.2667, "angle": 33 },
+					{ "time": 0.3833, "angle": 37 },
+					{ "time": 0.5333 }
+				]
+			},
+			"Zombie_Head6": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "angle": -8.34 },
+					{ "time": 0.2667, "angle": 33 },
+					{ "time": 0.3833, "angle": 37 },
+					{ "time": 0.5333 }
+				]
+			},
+			"Zombie_Head7": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "angle": -8.34 },
+					{ "time": 0.2667, "angle": 33 },
+					{ "time": 0.3833, "angle": 37 },
+					{ "time": 0.5333 }
+				]
+			},
+			"Zombie_Head8": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "angle": -8.34 },
+					{ "time": 0.2667, "angle": 33 },
+					{ "time": 0.3833, "angle": 37 },
+					{ "time": 0.5333 }
+				]
+			},
+			"Zombie_Head9": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "angle": -8.34 },
+					{ "time": 0.2667, "angle": 33 },
+					{ "time": 0.3833, "angle": 37 },
+					{ "time": 0.5333 }
+				]
+			},
+			"Zombie_Pelvies": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "angle": 21.61 },
+					{ "time": 0.2167, "angle": 21.44 },
+					{ "time": 0.2833, "angle": 25.15 },
+					{ "time": 0.3833, "angle": -18.43 },
+					{ "time": 0.5333, "angle": 14.63 },
+					{ "time": 0.7167, "angle": 8.38 },
+					{ "time": 1 }
+				],
+				"translate": [
+					{ "x": 2.81, "y": -4.22 },
+					{ "time": 0.1, "x": 2.81, "y": -45.69 },
+					{ "time": 0.2167, "x": -30.02, "y": -56.28 },
+					{ "time": 0.2833, "x": -5.56, "y": -11.07 },
+					{ "time": 0.3833, "x": -31.48, "y": -53.9 },
+					{ "time": 0.5333, "x": 2.81, "y": -44.18 },
+					{ "time": 0.7167, "x": 0.34, "y": -13.87 },
+					{ "time": 0.8, "x": 13.28, "y": -57.13 },
+					{ "time": 1, "x": 2.81, "y": -4.22 }
+				]
+			},
+			"1": {
+				"translate": [
+					{ "time": 0.2 },
+					{ "time": 0.2833, "x": -35, "y": 73.99 },
+					{ "time": 0.4, "x": -122.78, "y": -0.48 },
+					{ "time": 0.5333 },
+					{ "time": 0.8, "x": 96.74 },
+					{ "time": 0.8667, "x": 59.53, "y": 34.17 },
+					{ "time": 1 }
+				]
+			},
+			"Zombie_Torso": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "angle": 10.89 },
+					{ "time": 0.2167, "angle": -4.15 },
+					{ "time": 0.2833, "angle": -18.74 },
+					{ "time": 0.4667, "angle": 13.36 },
+					{ "time": 0.5333 },
+					{ "time": 0.6667, "angle": 15.59 },
+					{ "time": 0.8, "angle": -12.16 },
+					{ "time": 0.8833, "angle": -25.91 },
+					{ "time": 1 }
+				]
+			},
+			"Zombie_Belly": {
+				"rotate": [
+					{},
+					{ "time": 0.2167, "angle": 1.45 },
+					{ "time": 0.2833, "angle": 9.18 },
+					{ "time": 0.4667, "angle": -2.65 },
+					{ "time": 0.5333 },
+					{ "time": 0.6667, "angle": 15.59 },
+					{ "time": 0.8, "angle": -12.16 },
+					{ "time": 1 }
+				]
+			},
+			"Zombie_RLeg": {
+				"rotate": [
+					{ "angle": -2.53 }
+				]
+			},
+			"Zombie_RLeg2": {
+				"rotate": [
+					{ "angle": 3.93 }
+				]
+			},
+			"Zombie_RLeg3": {
+				"rotate": [
+					{ "time": 0.2 },
+					{ "time": 0.2833, "angle": 23.35 },
+					{ "time": 0.4, "angle": -4.22 },
+					{ "time": 0.5333, "curve": "stepped" },
+					{ "time": 0.7667 },
+					{ "time": 0.8667, "angle": 19.65 },
+					{ "time": 1 }
+				]
+			},
+			"Zombie_LLeg": {
+				"rotate": [
+					{ "angle": -6.26 }
+				]
+			},
+			"Zombie_LLeg2": {
+				"rotate": [
+					{ "angle": 14.94 }
+				]
+			},
+			"2": {
+				"translate": [
+					{},
+					{ "time": 0.1, "x": -80.29, "y": 109.44 },
+					{ "time": 0.2167, "x": -146.04, "y": 6.37, "curve": "stepped" },
+					{ "time": 0.3667, "x": -146.04, "y": 6.37 },
+					{ "time": 0.5333 },
+					{ "time": 0.6667, "x": -63.09, "y": 106.61 },
+					{ "time": 0.8, "x": -236.8, "y": 14.26 },
+					{ "time": 1 }
+				]
+			},
+			"Zombie_LLeg3": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "angle": 17.6 },
+					{ "time": 0.2167, "angle": 0.7 },
+					{ "time": 0.5333 },
+					{ "time": 0.6667, "angle": 39.22 },
+					{ "time": 0.7833, "angle": -16.88 },
+					{ "time": 0.8667, "angle": -1.93 },
+					{ "time": 1 }
+				]
+			},
+			"Zombie_LArm": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "angle": -41.55 },
+					{ "time": 0.2833, "angle": -63.57 },
+					{ "time": 0.4167, "angle": -60.77 },
+					{ "time": 0.5333 }
+				]
+			},
+			"Zombie_LArm2": {
+				"rotate": [
+					{},
+					{ "time": 0.1, "angle": -24.15 },
+					{ "time": 0.2833, "angle": -1.09 },
+					{ "time": 0.4167, "angle": -29.53 },
+					{ "time": 0.5333 }
+				]
+			},
+			"Shadow": {
+				"translate": [
+					{},
+					{ "time": 0.1, "x": -25.08 },
+					{ "time": 0.2167, "x": -70.68 },
+					{ "time": 0.3667, "x": -108.01 },
+					{ "time": 0.5333 },
+					{ "time": 0.7167, "x": -18.35 },
+					{ "time": 0.85, "x": -31.16 },
+					{ "time": 1 }
+				],
+				"scale": [
+					{},
+					{ "time": 0.1, "x": 0.886 },
+					{ "time": 0.5333 },
+					{ "time": 0.7167, "x": 0.79 },
+					{ "time": 1 }
+				]
+			}
+		},
+		"drawOrder": [
+			{
+				"offsets": [
+					{ "slot": "bottom", "offset": -10 }
+				]
+			}
+		]
+	},
+	"DashRight": {
+		"bones": {
+			"Zombie_RArm2": {
+				"rotate": [
+					{},
+					{ "time": 0.3833, "angle": -32.43 },
+					{ "time": 0.5333, "angle": -33.3 },
+					{ "time": 0.6833, "angle": 23.14 },
+					{ "time": 0.9167 }
+				]
+			},
+			"Zombie_Head7": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 49.22 },
+					{ "time": 0.2833, "angle": 66.3 },
+					{ "time": 0.6333, "angle": -67.17 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_LArm7": {
+				"rotate": [
+					{},
+					{ "time": 0.3833, "angle": -41.66 },
+					{ "time": 0.5667, "angle": -127.9 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_Head4": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 49.22 },
+					{ "time": 0.2833, "angle": 66.3 },
+					{ "time": 0.6333, "angle": -67.17 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_LArm4": {
+				"rotate": [
+					{},
+					{ "time": 0.3833, "angle": -41.66 },
+					{ "time": 0.5667, "angle": -127.9 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_LLeg": {
+				"rotate": [
+					{ "angle": -6.26 }
+				]
+			},
+			"Zombie_RLeg": {
+				"rotate": [
+					{ "angle": -2.53 }
+				]
+			},
+			"Zombie_LArm": {
+				"rotate": [
+					{},
+					{ "time": 0.1333, "angle": -28.67 },
+					{ "time": 0.3833, "angle": -122.31 },
+					{ "time": 0.5667, "angle": -92.87 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_Head6": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 49.22 },
+					{ "time": 0.2833, "angle": 66.3 },
+					{ "time": 0.6333, "angle": -67.17 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_Head5": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 49.22 },
+					{ "time": 0.2833, "angle": 66.3 },
+					{ "time": 0.6333, "angle": -67.17 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_Belly": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 11.46 },
+					{ "time": 0.3833, "angle": 26.4 },
+					{ "time": 0.6167, "angle": -7.73 },
+					{ "time": 0.7833, "angle": 7.14 },
+					{ "time": 0.9167 }
+				]
+			},
+			"Zombie_Head9": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 49.22 },
+					{ "time": 0.2833, "angle": 66.3 },
+					{ "time": 0.6333, "angle": -67.17 },
+					{ "time": 0.7833 }
+				]
+			},
+			"1": {
+				"translate": [
+					{ "time": 0.15 },
+					{ "time": 0.25, "x": 49.65, "y": 133.54 },
+					{ "time": 0.3833, "x": 178.48, "y": 183.23 },
+					{ "time": 0.4833, "x": 197.19, "y": 26.46 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_LLeg3": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 63.45 },
+					{ "time": 0.3333, "angle": -0.57 },
+					{ "time": 0.3833 }
+				]
+			},
+			"Zombie_Pelvies": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 17.68 },
+					{ "time": 0.15, "angle": 41.15 },
+					{ "time": 0.2333, "angle": 17.68 },
+					{ "time": 0.3833, "angle": -13.35 },
+					{ "time": 0.6, "angle": -17.37 },
+					{ "time": 0.7833, "angle": 11.28 },
+					{ "time": 0.9167 }
+				],
+				"translate": [
+					{ "x": 2.81, "y": -4.22 },
+					{ "time": 0.0833, "x": 29.94, "y": -78.2 },
+					{ "time": 0.15, "x": 92.94, "y": -34.67 },
+					{ "time": 0.2333, "x": 224.75, "y": -14.08 },
+					{ "time": 0.3833, "x": 290.36, "y": -36.97 },
+					{ "time": 0.6, "x": 149.4, "y": -148.35 },
+					{ "time": 0.7833, "x": 5.68, "y": -38.66 },
+					{ "time": 0.9167, "x": 2.81, "y": -4.22 }
+				]
+			},
+			"Zombie_LArm2": {
+				"rotate": [
+					{},
+					{ "time": 0.1333, "angle": 19.02 },
+					{ "time": 0.3833, "angle": -60.11 },
+					{ "time": 0.5667, "angle": -65.04 },
+					{ "time": 0.7833 }
+				]
+			},
+			"2": {
+				"translate": [
+					{},
+					{ "time": 0.0833, "x": -43.42, "y": 134.9 },
+					{ "time": 0.2333, "x": 130.5, "y": 174.97 },
+					{ "time": 0.3833, "x": 166.06 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_Head8": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 49.22 },
+					{ "time": 0.2833, "angle": 66.3 },
+					{ "time": 0.6333, "angle": -67.17 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_LArm3": {
+				"rotate": [
+					{},
+					{ "time": 0.3833, "angle": -40.75 },
+					{ "time": 0.5667, "angle": -115.73 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_LArm6": {
+				"rotate": [
+					{},
+					{ "time": 0.3833, "angle": -41.66 },
+					{ "time": 0.5667, "angle": -127.9 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_LLeg2": {
+				"rotate": [
+					{ "angle": 14.94 }
+				]
+			},
+			"Zombie_RLeg2": {
+				"rotate": [
+					{ "angle": 3.93 }
+				]
+			},
+			"Zombie_LArm5": {
+				"rotate": [
+					{},
+					{ "time": 0.3833, "angle": -41.66 },
+					{ "time": 0.5667, "angle": -127.9 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_Torso": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 10.81 },
+					{ "time": 0.3833, "angle": -43.3 },
+					{ "time": 0.6167, "angle": -49.77 },
+					{ "time": 0.7833, "angle": 15.13 },
+					{ "time": 0.9167 }
+				]
+			},
+			"Zombie_Head3": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 49.22 },
+					{ "time": 0.2833, "angle": 66.3 },
+					{ "time": 0.6333, "angle": -67.17 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_RArm": {
+				"rotate": [
+					{},
+					{ "time": 0.3833, "angle": -32.43 },
+					{ "time": 0.5333, "angle": 10.27 },
+					{ "time": 0.6, "angle": -27.51 },
+					{ "time": 0.6833, "angle": -2.79 },
+					{ "time": 0.7833, "angle": -13.84 },
+					{ "time": 0.9167 }
+				]
+			},
+			"Shadow": {
+				"translate": [
+					{},
+					{ "time": 0.2333, "x": 112.41 },
+					{ "time": 0.4, "x": 170.21 },
+					{ "time": 0.7833 }
+				],
+				"scale": [
+					{},
+					{ "time": 0.0833, "x": 1.106, "y": 1.106 },
+					{ "time": 0.2333, "x": 0.983, "y": 0.983 },
+					{ "time": 0.7833 }
+				]
+			}
+		},
+		"drawOrder": [
+			{
+				"offsets": [
+					{ "slot": "bottom", "offset": -10 }
+				]
+			}
+		]
+	},
+	"DashUp": {
+		"bones": {
+			"Zombie_RArm2": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": -32.73 },
+					{ "time": 0.2667, "angle": -0.65 },
+					{ "time": 0.4833, "angle": -40.76 },
+					{ "time": 0.6, "angle": -46.74 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_LArm2": {
+				"rotate": [
+					{},
+					{ "time": 0.3667, "angle": 6.03 },
+					{ "time": 0.4667, "angle": 32.32 },
+					{ "time": 0.5667, "angle": -16.84 },
+					{ "time": 0.7833 }
+				]
+			},
+			"2": {
+				"translate": [
+					{ "time": 0.15 },
+					{ "time": 0.25, "x": -80.47, "y": 228 },
+					{ "time": 0.3833, "x": -81.26, "y": 348.35 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_Head8": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 46.63 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_LArm3": {
+				"rotate": [
+					{},
+					{ "time": 0.1167, "angle": 27.34 },
+					{ "time": 0.2833, "angle": -22.76 },
+					{ "time": 0.55, "angle": -64.48 },
+					{ "time": 0.65, "angle": 11.32 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_LArm6": {
+				"rotate": [
+					{},
+					{ "time": 0.1167, "angle": 69.74 },
+					{ "time": 0.2833, "angle": 17.47 },
+					{ "time": 0.55, "angle": -111.57 },
+					{ "time": 0.65, "angle": 48.79 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_Head7": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 46.63 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_Belly": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 11.83 },
+					{ "time": 0.25, "angle": 26.46 },
+					{ "time": 0.4333, "angle": -25.62 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_RArm": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 5.24 },
+					{ "time": 0.2667, "angle": -3.61 },
+					{ "time": 0.4833, "angle": -82.32 },
+					{ "time": 0.6, "angle": -32.81 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_LArm": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": -42.19 },
+					{ "time": 0.3667, "angle": 15.11 },
+					{ "time": 0.4667, "angle": -31.89 },
+					{ "time": 0.5667, "angle": 19.91 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_LLeg3": {
+				"rotate": [
+					{ "time": 0.15 },
+					{ "time": 0.25, "angle": 63.24 },
+					{ "time": 0.5 }
+				]
+			},
+			"Zombie_Head3": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 46.63 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_Head5": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 46.63 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_Head4": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 46.63 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_LArm7": {
+				"rotate": [
+					{},
+					{ "time": 0.1167, "angle": 69.74 },
+					{ "time": 0.2833, "angle": 17.47 },
+					{ "time": 0.55, "angle": -111.57 },
+					{ "time": 0.65, "angle": 48.79 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_LArm4": {
+				"rotate": [
+					{},
+					{ "time": 0.1167, "angle": 69.74 },
+					{ "time": 0.2833, "angle": 17.47 },
+					{ "time": 0.55, "angle": -111.57 },
+					{ "time": 0.65, "angle": 48.79 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_LLeg": {
+				"rotate": [
+					{ "angle": -6.26 }
+				]
+			},
+			"Zombie_RLeg": {
+				"rotate": [
+					{ "angle": -2.53 }
+				]
+			},
+			"Zombie_Pelvies": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 12.86 },
+					{ "time": 0.25, "angle": -18.84 },
+					{ "time": 0.3833, "angle": 13.21 },
+					{ "time": 0.5667, "angle": 30.99 },
+					{ "time": 0.7833 }
+				],
+				"translate": [
+					{ "x": 2.81, "y": -4.22 },
+					{ "time": 0.0833, "x": 69.31, "y": -105.3 },
+					{ "time": 0.25, "x": -16.29, "y": 59.84 },
+					{ "time": 0.3833, "x": 57.43, "y": 171.06 },
+					{ "time": 0.5667, "x": 118.01, "y": -89.72 },
+					{ "time": 0.7833, "x": 2.81, "y": -4.22 }
+				]
+			},
+			"Zombie_LArm5": {
+				"rotate": [
+					{},
+					{ "time": 0.1167, "angle": 69.74 },
+					{ "time": 0.2833, "angle": 17.47 },
+					{ "time": 0.55, "angle": -111.57 },
+					{ "time": 0.65, "angle": 48.79 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_Head6": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 46.63 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Zombie_Torso": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 23.44 },
+					{ "time": 0.25, "angle": 58.51 },
+					{ "time": 0.4333, "angle": -21.68 },
+					{ "time": 0.6167, "angle": 26.92 },
+					{ "time": 0.7833 }
+				]
+			},
+			"1": {
+				"translate": [
+					{ "time": 0.15 },
+					{ "time": 0.25, "y": 170.52 },
+					{ "time": 0.3833, "x": 65.96, "y": 311.13 },
+					{ "time": 0.5167 }
+				]
+			},
+			"Zombie_LLeg2": {
+				"rotate": [
+					{ "angle": 14.94 }
+				]
+			},
+			"Zombie_RLeg2": {
+				"rotate": [
+					{ "angle": 3.93 }
+				]
+			},
+			"Zombie_Head9": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 46.63 },
+					{ "time": 0.7833 }
+				]
+			},
+			"Shadow": {
+				"scale": [
+					{},
+					{ "time": 0.0833, "x": 1.246, "y": 1.246 },
+					{ "time": 0.25, "x": 0.727, "y": 0.727 },
+					{ "time": 0.4, "x": 0.727, "y": 0.727 },
+					{ "time": 0.5667, "x": 1.246, "y": 1.246 },
+					{ "time": 0.7833 }
+				]
+			}
+		},
+		"drawOrder": [
+			{
+				"offsets": [
+					{ "slot": "bottom", "offset": -10 }
+				]
+			}
+		]
+	},
+	"Defending": {
+		"bones": {
+			"Zombie_Head6": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "angle": 18.42 },
+					{ "time": 0.0667, "angle": -24.04 },
+					{ "time": 0.3833, "angle": 19.98 },
+					{ "time": 0.6667 }
+				]
+			},
+			"Zombie_Head7": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "angle": 18.42 },
+					{ "time": 0.0667, "angle": -24.04 },
+					{ "time": 0.3833, "angle": 19.98 },
+					{ "time": 0.6667 }
+				]
+			},
+			"Zombie_RArm2": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "angle": 4.69 },
+					{ "time": 0.0667, "angle": -1.64 },
+					{ "time": 0.1667, "angle": 12.94 },
+					{ "time": 0.4833, "angle": -13.45 },
+					{ "time": 0.6167, "angle": -27.93 },
+					{ "time": 0.6667 }
+				]
+			},
+			"Zombie_Head8": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "angle": 18.42 },
+					{ "time": 0.0667, "angle": -24.04 },
+					{ "time": 0.3833, "angle": 19.98 },
+					{ "time": 0.6667 }
+				]
+			},
+			"Zombie_Head9": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "angle": 18.42 },
+					{ "time": 0.0667, "angle": -24.04 },
+					{ "time": 0.3833, "angle": 19.98 },
+					{ "time": 0.6667 }
+				]
+			},
+			"Zombie_Pelvies": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "angle": 2.35 },
+					{ "time": 0.0667, "angle": -1.85 },
+					{ "time": 0.4833, "angle": 2.35 },
+					{ "time": 0.6667 }
+				],
+				"translate": [
+					{ "x": 2.81, "y": -4.22 },
+					{ "time": 0.0333, "x": -16.53, "y": -82.52 },
+					{ "time": 0.0667, "x": 86.08, "y": -116.93 },
+					{ "time": 0.4833, "x": 41.91, "y": -134.16 },
+					{ "time": 0.6667, "x": 2.81, "y": -4.22 }
+				]
+			},
+			"Zombie_Belly": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "angle": -27.1 },
+					{ "time": 0.0667, "angle": -35.62 },
+					{ "time": 0.4833, "angle": -27.1 },
+					{ "time": 0.6667 }
+				]
+			},
+			"Zombie_Torso": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "angle": 20.38 },
+					{ "time": 0.0667, "angle": 56.46 },
+					{ "time": 0.2667, "angle": 50.6 },
+					{ "time": 0.4833, "angle": 20.38 },
+					{ "time": 0.6667 }
+				]
+			},
+			"Zombie_RLeg": {
+				"rotate": [
+					{ "angle": -2.53 }
+				]
+			},
+			"Zombie_RLeg2": {
+				"rotate": [
+					{ "angle": 3.93 }
+				]
+			},
+			"Zombie_LLeg": {
+				"rotate": [
+					{ "angle": -6.26 }
+				]
+			},
+			"Zombie_LLeg2": {
+				"rotate": [
+					{ "angle": 14.94 }
+				]
+			},
+			"2": {
+				"translate": [
+					{},
+					{ "time": 0.0333, "x": 70.9, "curve": "stepped" },
+					{ "time": 0.4833, "x": 70.9 },
+					{ "time": 0.6667 }
+				]
+			},
+			"Zombie_LArm": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "angle": 26.75 },
+					{ "time": 0.0667, "angle": 40.95 },
+					{ "time": 0.4833, "angle": 26.75 },
+					{ "time": 0.6667 }
+				]
+			},
+			"Zombie_LArm2": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "angle": -24.74 },
+					{ "time": 0.0667, "angle": 24.48 },
+					{ "time": 0.4833, "angle": -24.74 },
+					{ "time": 0.6667 }
+				]
+			},
+			"Zombie_Head4": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "angle": 18.42 },
+					{ "time": 0.0667, "angle": -24.04 },
+					{ "time": 0.3833, "angle": 19.98 },
+					{ "time": 0.6667 }
+				]
+			},
+			"Zombie_Head5": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "angle": 18.42 },
+					{ "time": 0.0667, "angle": -24.04 },
+					{ "time": 0.3833, "angle": 19.98 },
+					{ "time": 0.6667 }
+				]
+			},
+			"Zombie_RArm": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "angle": -134.42 },
+					{ "time": 0.0667, "angle": -154.24 },
+					{ "time": 0.4833, "angle": -157.96 },
+					{ "time": 0.6167, "angle": -20.41 },
+					{ "time": 0.6667 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.0333, "x": 58.72, "y": -68.97, "curve": "stepped" },
+					{ "time": 0.4833, "x": 58.72, "y": -68.97 },
+					{ "time": 0.6667 }
+				]
+			},
+			"Zombie_Head3": {
+				"rotate": [
+					{},
+					{ "time": 0.0333, "angle": 18.42 },
+					{ "time": 0.0667, "angle": -24.04 },
+					{ "time": 0.3833, "angle": 19.98 },
+					{ "time": 0.6667 }
+				]
+			},
+			"Shadow": {
+				"translate": [
+					{},
+					{ "time": 0.0667, "x": 44.33 },
+					{ "time": 0.4833, "x": 15.96 },
+					{ "time": 0.6667 }
+				],
+				"scale": [
+					{},
+					{ "time": 0.0333, "x": 1.147, "y": 1.089 },
+					{ "time": 0.0667, "x": 1.096, "y": 1.145, "curve": "stepped" },
+					{ "time": 0.4833, "x": 1.096, "y": 1.145 },
+					{ "time": 0.6667 }
+				]
+			}
+		},
+		"drawOrder": [
+			{
+				"offsets": [
+					{ "slot": "bottom", "offset": -10 }
+				]
+			},
+			{
+				"time": 0.0333,
+				"offsets": [
+					{ "slot": "armR_1", "offset": 20 },
+					{ "slot": "thing4", "offset": 20 },
+					{ "slot": "thing3", "offset": 20 },
+					{ "slot": "thing2", "offset": 20 },
+					{ "slot": "thing1", "offset": 20 },
+					{ "slot": "armR_detail", "offset": 20 },
+					{ "slot": "bottom", "offset": -10 }
+				]
+			},
+			{
+				"time": 0.6667,
+				"offsets": [
+					{ "slot": "bottom", "offset": -10 }
+				]
+			}
+		]
+	},
+	"GettingHit": {
+		"bones": {
+			"Zombie_Pelvies": {
+				"rotate": [
+					{},
+					{ "time": 0.05, "angle": 11.93 },
+					{ "time": 0.0833, "angle": 30.93 },
+					{ "time": 0.1167, "angle": 15.57 },
+					{ "time": 0.5833 }
+				],
+				"translate": [
+					{ "x": 2.81, "y": -4.22 },
+					{ "time": 0.05, "x": 13.53, "y": -32.8 },
+					{ "time": 0.0833, "x": 143.24, "y": -38.16 },
+					{ "time": 0.1167, "x": 96.43, "y": -65.29 },
+					{ "time": 0.5833, "x": 2.81, "y": -4.22 }
+				]
+			},
+			"Zombie_Belly": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 9.76 },
+					{ "time": 0.1167, "angle": -18.34 },
+					{ "time": 0.5833 }
+				]
+			},
+			"Zombie_Torso": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": -62.49 },
+					{ "time": 0.1167, "angle": -56.95 },
+					{ "time": 0.5833 }
+				]
+			},
+			"Zombie_RLeg": {
+				"rotate": [
+					{ "angle": -2.53 }
+				]
+			},
+			"Zombie_RLeg2": {
+				"rotate": [
+					{ "angle": 3.93 }
+				]
+			},
+			"Zombie_LLeg": {
+				"rotate": [
+					{ "angle": -6.26 }
+				]
+			},
+			"Zombie_LLeg2": {
+				"rotate": [
+					{ "angle": 14.94 }
+				]
+			},
+			"Zombie_LArm": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": -12.43 },
+					{ "time": 0.1833, "angle": 12.26 },
+					{ "time": 0.3667, "angle": -19.82 },
+					{ "time": 0.5833 }
+				]
+			},
+			"Zombie_LArm2": {
+				"rotate": [
+					{},
+					{ "time": 0.1833, "angle": 104.41 },
+					{ "time": 0.3667, "angle": 95.89 },
+					{ "time": 0.5833 }
+				]
+			},
+			"Zombie_LArm3": {
+				"rotate": [
+					{},
+					{ "time": 0.1833, "angle": 50.01 },
+					{ "time": 0.3667, "angle": 72.33 },
+					{ "time": 0.5833 }
+				]
+			},
+			"Zombie_LArm4": {
+				"rotate": [
+					{},
+					{ "time": 0.1833, "angle": 78.42 },
+					{ "time": 0.3667, "angle": 118.07 },
+					{ "time": 0.5833 }
+				]
+			},
+			"Zombie_LArm5": {
+				"rotate": [
+					{},
+					{ "time": 0.1833, "angle": 78.42 },
+					{ "time": 0.3667, "angle": 118.07 },
+					{ "time": 0.5833 }
+				]
+			},
+			"Zombie_LArm6": {
+				"rotate": [
+					{},
+					{ "time": 0.1833, "angle": 78.42 },
+					{ "time": 0.3667, "angle": 118.07 },
+					{ "time": 0.5833 }
+				]
+			},
+			"Zombie_LArm7": {
+				"rotate": [
+					{},
+					{ "time": 0.1833, "angle": 78.42 },
+					{ "time": 0.3667, "angle": 118.07 },
+					{ "time": 0.5833 }
+				]
+			},
+			"Zombie_RArm": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": -15.19 },
+					{ "time": 0.1167, "angle": -22.58 },
+					{ "time": 0.3167, "angle": 6.46 },
+					{ "time": 0.4833, "angle": -10.97 },
+					{ "time": 0.5833 }
+				]
+			},
+			"Zombie_RArm2": {
+				"rotate": [
+					{},
+					{ "time": 0.0833, "angle": 19.99 },
+					{ "time": 0.1167, "angle": 18.72 },
+					{ "time": 0.3167, "angle": 26.63 },
+					{ "time": 0.4833, "angle": 28.93 },
+					{ "time": 0.5833 }
+				]
+			},
+			"Shadow": {
+				"translate": [
+					{ "time": 0.05 },
+					{ "time": 0.1, "x": 31.5 },
+					{ "time": 0.5833 }
+				],
+				"scale": [
+					{},
+					{ "time": 0.05, "x": 1.09, "y": 1.09 },
+					{ "time": 0.1, "x": 0.952, "y": 1.082 },
+					{ "time": 0.5833 }
+				]
+			}
+		},
+		"drawOrder": [
+			{
+				"offsets": [
+					{ "slot": "bottom", "offset": -10 }
+				]
+			}
+		]
+	},
+	"Idle": {
+		"bones": {
+			"Zombie_Pelvies": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": -4 },
+					{ "time": 0.4333, "angle": -20.52 },
+					{ "time": 0.75 }
+				],
+				"translate": [
+					{ "x": 2.81, "y": -4.22 },
+					{ "time": 0.4333, "x": 25.33, "y": -40.08 },
+					{ "time": 0.5833, "x": -48.95, "y": -28.6 },
+					{ "time": 0.75, "x": 2.81, "y": -4.22 }
+				]
+			},
+			"Zombie_Belly": {
+				"rotate": [
+					{},
+					{ "time": 0.3167, "angle": -10.73 },
+					{ "time": 0.5833, "angle": -12.5 },
+					{ "time": 0.75 }
+				]
+			},
+			"Zombie_Torso": {
+				"rotate": [
+					{},
+					{ "time": 0.3167, "angle": 40.62 },
+					{ "time": 0.5833, "angle": 6.12 },
+					{ "time": 0.75 }
+				]
+			},
+			"Zombie_RLeg": {
+				"rotate": [
+					{ "angle": -2.53 }
+				]
+			},
+			"Zombie_RLeg2": {
+				"rotate": [
+					{ "angle": 3.93 }
+				]
+			},
+			"Zombie_LLeg": {
+				"rotate": [
+					{ "angle": -6.26 }
+				]
+			},
+			"Zombie_LLeg2": {
+				"rotate": [
+					{ "angle": 14.94 }
+				]
+			},
+			"Zombie_LArm": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 20.12 },
+					{ "time": 0.4333, "angle": -24.46 },
+					{ "time": 0.75 }
+				]
+			},
+			"Zombie_LArm2": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": -13.98 },
+					{ "time": 0.4333, "angle": 11.43 },
+					{ "time": 0.75 }
+				]
+			},
+			"Zombie_LArm3": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": -1.25 },
+					{ "time": 0.4333, "angle": -31.91 },
+					{ "time": 0.5833, "angle": 14.73 },
+					{ "time": 0.75 }
+				]
+			},
+			"Zombie_LArm4": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 20.12 },
+					{ "time": 0.4333, "angle": -38 },
+					{ "time": 0.5833, "angle": 21.4 },
+					{ "time": 0.75 }
+				]
+			},
+			"Zombie_LArm5": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 20.12 },
+					{ "time": 0.4333, "angle": -38 },
+					{ "time": 0.5833, "angle": 21.4 },
+					{ "time": 0.75 }
+				]
+			},
+			"Zombie_LArm6": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 20.12 },
+					{ "time": 0.4333, "angle": -38 },
+					{ "time": 0.5833, "angle": 21.4 },
+					{ "time": 0.75 }
+				]
+			},
+			"Zombie_LArm7": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 20.12 },
+					{ "time": 0.4333, "angle": -38 },
+					{ "time": 0.5833, "angle": 21.4 },
+					{ "time": 0.75 }
+				]
+			},
+			"Zombie_RArm": {
+				"rotate": [
+					{},
+					{ "time": 0.3333, "angle": -2.35 },
+					{ "time": 0.5333, "angle": 1.86 },
+					{ "time": 0.75 }
+				]
+			},
+			"Zombie_RArm2": {
+				"rotate": [
+					{},
+					{ "time": 0.3333, "angle": -2.35 },
+					{ "time": 0.5333, "angle": 10.59 },
+					{ "time": 0.75 }
+				]
+			},
+			"Zombie_Head3": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 3.88 },
+					{ "time": 0.4667, "angle": 19.63 },
+					{ "time": 0.65, "angle": -15.66 },
+					{ "time": 0.75 }
+				]
+			},
+			"Zombie_Head4": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 3.88 },
+					{ "time": 0.4667, "angle": 19.63 },
+					{ "time": 0.65, "angle": -15.66 },
+					{ "time": 0.75 }
+				]
+			},
+			"Zombie_Head5": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 3.88 },
+					{ "time": 0.4667, "angle": 19.63 },
+					{ "time": 0.65, "angle": -15.66 },
+					{ "time": 0.75 }
+				]
+			},
+			"Zombie_Head6": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 3.88 },
+					{ "time": 0.4667, "angle": 21.8 },
+					{ "time": 0.65, "angle": -15.66 },
+					{ "time": 0.75 }
+				]
+			},
+			"Zombie_Head7": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 3.88 },
+					{ "time": 0.4667, "angle": 26.46 },
+					{ "time": 0.65, "angle": -15.66 },
+					{ "time": 0.75 }
+				]
+			},
+			"Zombie_Head8": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 3.88 },
+					{ "time": 0.4667, "angle": 14.59 },
+					{ "time": 0.65, "angle": -15.66 },
+					{ "time": 0.75 }
+				]
+			},
+			"Zombie_Head9": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 3.88 },
+					{ "time": 0.4667, "angle": 22.09 },
+					{ "time": 0.65, "angle": -15.66 },
+					{ "time": 0.75 }
+				]
+			},
+			"Shadow": {
+				"translate": [
+					{},
+					{ "time": 0.4667, "x": 21.22 },
+					{ "time": 0.6, "x": -8.47 },
+					{ "time": 0.75 }
+				],
+				"scale": [
+					{},
+					{ "time": 0.3333, "x": 1.107, "y": 1.107 },
+					{ "time": 0.4667, "x": 1.007, "y": 1.072 },
+					{ "time": 0.6, "x": 1.08, "y": 1.038 },
+					{ "time": 0.75 }
+				]
+			}
+		},
+		"deform": {
+			"default": {
+				"thing1": {
+					"thing1": [
+						{},
+						{
+							"time": 0.1333,
+							"vertices": [ 6.68439, -32.22258, -17.80066, -41.1102, -0.6077, 3.23551, 23.87726, 12.12323 ]
+						},
+						{
+							"time": 0.4833,
+							"vertices": [ -13.91043, 17.37522, 0.681, 23.76043, 17.98785, -2.72269, 3.39624, -9.10802 ]
+						},
+						{ "time": 0.75 }
+					]
+				},
+				"thing2": {
+					"thing2": [
+						{},
+						{
+							"time": 0.2167,
+							"vertices": [ -11.92923, 24.2802, -0.51935, 26.88126, 6.23404, -2.74436, -5.17581, -5.34529 ]
+						},
+						{
+							"time": 0.4833,
+							"vertices": [ 26.84012, -32.83499, 10.40247, -32.32922, 11.71583, 10.35068, 28.15349, 9.84488 ]
+						},
+						{ "time": 0.5167 }
+					]
+				},
+				"thing3": {
+					"thing3": [
+						{},
+						{
+							"time": 0.1667,
+							"vertices": [ 6.48044, -38.46825, -12.22516, -40.19073, 6.19894, -1.87705, 24.90442, -0.15475 ]
+						},
+						{
+							"time": 0.5167,
+							"vertices": [ -11.82672, 12.43241, 5.29568, 19.85198, 15.34494, -10.30746, -1.77731, -17.72706 ]
+						},
+						{ "time": 0.75 }
+					]
+				},
+				"thing4": {
+					"thing4": [
+						{},
+						{
+							"time": 0.2167,
+							"vertices": [ -2.58649, -13.97216, -2.99112, -19.39837, 6.69012, -14.79929, 7.09485, -9.37312 ]
+						},
+						{
+							"time": 0.5833,
+							"vertices": [ -12.08902, 23.72462, 3.42981, 19.8304, 16.74585, -21.65044, 1.22742, -17.75636 ]
+						},
+						{ "time": 0.75 }
+					]
+				}
+			}
+		},
+		"drawOrder": [
+			{
+				"offsets": [
+					{ "slot": "bottom", "offset": -10 }
+				]
+			}
+		]
+	},
+	"Victory": {
+		"bones": {
+			"Zombie_RArm2": {
+				"rotate": [
+					{},
+					{ "time": 0.1667, "angle": 30.69, "curve": "stepped" },
+					{ "time": 0.4833, "angle": 30.69 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_Head8": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 14.99 },
+					{ "time": 0.5, "angle": -2.47 },
+					{ "time": 0.8 }
+				],
+				"scale": [
+					{ "time": 0.25 },
+					{ "time": 0.3333, "x": 1.278, "y": 1.278, "curve": "stepped" },
+					{ "time": 0.6, "x": 1.278, "y": 1.278 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_Head9": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 14.99 },
+					{ "time": 0.5, "angle": -24.55 },
+					{ "time": 0.8 }
+				],
+				"scale": [
+					{ "time": 0.25 },
+					{ "time": 0.3333, "x": 1.278, "y": 1.278, "curve": "stepped" },
+					{ "time": 0.6, "x": 1.278, "y": 1.278 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_Pelvies": {
+				"rotate": [
+					{},
+					{ "time": 0.1667, "angle": -12.46 },
+					{ "time": 0.3333, "angle": -40.68 },
+					{ "time": 0.5667, "angle": 13.8 },
+					{ "time": 0.8 }
+				],
+				"translate": [
+					{ "x": 2.81, "y": -4.22 },
+					{ "time": 0.1667, "x": 4.72, "y": -40.47 },
+					{ "time": 0.3333, "x": -14.88, "y": -110.49 },
+					{ "time": 0.4167, "x": -5.77, "y": -74.82 },
+					{ "time": 0.5667, "x": -8.25, "y": -59.42 },
+					{ "time": 0.8, "x": 2.81, "y": -4.22 }
+				]
+			},
+			"Zombie_Belly": {
+				"rotate": [
+					{},
+					{ "time": 0.1667, "angle": -24.26 },
+					{ "time": 0.5333, "angle": -2.1 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_Torso": {
+				"rotate": [
+					{},
+					{ "time": 0.1667, "angle": 21.1 },
+					{ "time": 0.5333, "angle": -51.55 },
+					{ "time": 0.8 }
+				]
+			},
+			"1": {
+				"translate": [
+					{ "time": 0.1667 },
+					{ "time": 0.25, "y": 68.1 },
+					{ "time": 0.3333 }
+				]
+			},
+			"Zombie_RLeg": {
+				"rotate": [
+					{ "angle": -2.53 }
+				]
+			},
+			"Zombie_RLeg2": {
+				"rotate": [
+					{ "angle": 3.93 }
+				]
+			},
+			"Zombie_RLeg3": {
+				"rotate": [
+					{ "time": 0.1667 },
+					{ "time": 0.25, "angle": 18.64 },
+					{ "time": 0.3333 }
+				]
+			},
+			"Zombie_LLeg": {
+				"rotate": [
+					{ "angle": -6.26 }
+				]
+			},
+			"Zombie_LLeg2": {
+				"rotate": [
+					{ "angle": 14.94 }
+				]
+			},
+			"2": {
+				"translate": [
+					{ "time": 0.45 },
+					{ "time": 0.5833, "x": -21.28, "y": 78.29 },
+					{ "time": 0.6667 }
+				]
+			},
+			"Zombie_LLeg3": {
+				"rotate": [
+					{ "time": 0.45 },
+					{ "time": 0.5833, "angle": 37.09 },
+					{ "time": 0.6667 }
+				]
+			},
+			"Zombie_LArm": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 33.88 },
+					{ "time": 0.5167, "angle": -36.1 },
+					{ "time": 0.8 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.25, "x": -4.24, "y": 10.79 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_LArm2": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": -5.28 },
+					{ "time": 0.5167, "angle": -43.18 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_LArm3": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 18.46 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_LArm4": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 43.14 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_LArm5": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 43.14 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_LArm6": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 43.14 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_Head6": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 14.99 },
+					{ "time": 0.5, "angle": 1.68 },
+					{ "time": 0.8 }
+				],
+				"scale": [
+					{ "time": 0.25 },
+					{ "time": 0.3333, "x": 1.278, "y": 1.278, "curve": "stepped" },
+					{ "time": 0.6, "x": 1.278, "y": 1.278 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_Head7": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 14.99 },
+					{ "time": 0.5, "angle": -21.4 },
+					{ "time": 0.8 }
+				],
+				"scale": [
+					{ "time": 0.25 },
+					{ "time": 0.3333, "x": 1.278, "y": 1.278, "curve": "stepped" },
+					{ "time": 0.6, "x": 1.278, "y": 1.278 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_LArm7": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 43.14 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_RArm": {
+				"rotate": [
+					{},
+					{ "time": 0.1667, "angle": -118.28, "curve": "stepped" },
+					{ "time": 0.4833, "angle": -118.28 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_Head3": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 14.99 },
+					{ "time": 0.5, "angle": 22.12 },
+					{ "time": 0.8 }
+				],
+				"scale": [
+					{ "time": 0.25 },
+					{ "time": 0.3333, "x": 1.278, "y": 1.278, "curve": "stepped" },
+					{ "time": 0.6, "x": 1.278, "y": 1.278 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_Head4": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 14.99 },
+					{ "time": 0.5, "angle": 34.01 },
+					{ "time": 0.8 }
+				],
+				"scale": [
+					{ "time": 0.25 },
+					{ "time": 0.3333, "x": 1.278, "y": 1.278, "curve": "stepped" },
+					{ "time": 0.6, "x": 1.278, "y": 1.278 },
+					{ "time": 0.8 }
+				]
+			},
+			"Zombie_Head5": {
+				"rotate": [
+					{},
+					{ "time": 0.25, "angle": 14.99 },
+					{ "time": 0.5, "angle": 58.83 },
+					{ "time": 0.8 }
+				],
+				"scale": [
+					{ "time": 0.25 },
+					{ "time": 0.3333, "x": 1.278, "y": 1.278, "curve": "stepped" },
+					{ "time": 0.6, "x": 1.278, "y": 1.278 },
+					{ "time": 0.8 }
+				]
+			},
+			"Shadow": {
+				"scale": [
+					{},
+					{ "time": 0.1667, "x": 1.056, "y": 1.056 },
+					{ "time": 0.3333, "x": 1.183, "y": 1.183 },
+					{ "time": 0.8 }
+				]
+			}
+		},
+		"deform": {
+			"default": {
+				"thing1": {
+					"thing1": [
+						{},
+						{
+							"time": 0.25,
+							"vertices": [ 1.91129, -43.00969, -45.99442, -45.25633, -16.79343, 13.93826, 31.11246, 16.18506 ]
+						},
+						{
+							"time": 0.4833,
+							"vertices": [ -20.57934, 36.01339, -1.13294, 34.08044, 22.74573, -9.28146, 3.2995, -7.34813 ]
+						},
+						{ "time": 0.8 }
+					]
+				},
+				"thing3": {
+					"thing3": [
+						{},
+						{
+							"time": 0.25,
+							"vertices": [ 0.13654, -36.49492, -43.59497, -42.48737, -4.69531, 7.07265, 39.0361, 13.06506 ]
+						},
+						{
+							"time": 0.4833,
+							"vertices": [ -32.10327, 47.08881, -4.32069, 44.52928, 32.84138, -27.79365, 5.05877, -25.23402 ]
+						},
+						{ "time": 0.8 }
+					]
+				},
+				"thing4": {
+					"thing4": [
+						{},
+						{
+							"time": 0.25,
+							"vertices": [ 18.20886, -22.72704, -7.40744, -31.20882, 13.67883, -14.34196, 39.29541, -5.86028 ]
+						},
+						{
+							"time": 0.4833,
+							"vertices": [ -2.05923, 30.19403, 7.2446, 22.34293, 25.95998, -24.64054, 16.65658, -16.78946 ]
+						},
+						{ "time": 0.8 }
+					]
+				}
+			}
+		},
+		"drawOrder": [
+			{
+				"offsets": [
+					{ "slot": "armR_1", "offset": 20 },
+					{ "slot": "thing4", "offset": 20 },
+					{ "slot": "thing3", "offset": 20 },
+					{ "slot": "thing2", "offset": 20 },
+					{ "slot": "thing1", "offset": 20 },
+					{ "slot": "armR_detail", "offset": 20 },
+					{ "slot": "bottom", "offset": -10 }
+				]
+			},
+			{
+				"time": 0.8,
+				"offsets": [
+					{ "slot": "bottom", "offset": -10 }
+				]
+			}
+		]
+	}
+}
+}
