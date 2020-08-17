@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using Fungus;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ResolutionExtras : MonoBehaviour
@@ -18,11 +20,12 @@ public class ResolutionExtras : MonoBehaviour
 
         Vector3 spawnPoint = tallyStartPoint.position;
         bool indent = true;
-        for (int i = 0; i < BattleInfoManagerScript.Instance.PlayerBattleInfo.Count; i++)
+        CharacterLoadInformation[] charsInSquad = SceneLoadManager.Instance.squad.Values.Where(r => r != null && r.characterID != CharacterNameType.None).ToArray();
+        for (int i = 0; i < charsInSquad.Length; i++)
         {
             Tallies.Add(Instantiate(tallyPrefab, spawnPoint, Quaternion.identity, tallyStartPoint).GetComponent<Grid_UITally>());
             Tallies[i].transform.SetAsFirstSibling();
-            Tallies[i].SetupTally(BattleInfoManagerScript.Instance.PlayerBattleInfo[i].CharacterName, indent);
+            Tallies[i].SetupTally(charsInSquad[i].characterID, indent);
             Tallies[i].GetComponent<CanvasGroup>().alpha = 0;
 
             indent = !indent;
