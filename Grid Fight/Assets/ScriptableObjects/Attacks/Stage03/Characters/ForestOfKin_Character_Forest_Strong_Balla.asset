@@ -1,0 +1,267 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
+  m_Name: ForestOfKin_Character_Forest_Strong_Balla
+  m_EditorClassIdentifier: 
+  isSequencedAttack: 0
+  CurrentAttackType: 0
+  AttackRatioMultiplier: 1
+  _DamageMultiplier: {x: 1, y: 1}
+  AttackInput: 1
+  AttackAnim: 1
+  StaminaCost: 10
+  ExperiencePoints: 10
+  _CoolDown: {x: 3, y: 5}
+  PrefixAnim: 1
+  Fov: 0
+  Particles:
+    Left:
+      Cast: {fileID: 1478303938414853960, guid: f4929244277fd9341a238854d9fe6394,
+        type: 3}
+      Bullet: {fileID: 4493353495562203329, guid: 347dfcbcd90bde543acca70c797db8d0,
+        type: 3}
+      Hit: {fileID: 7266810137054743328, guid: f8567e559d358974588eed44ea368c60, type: 3}
+    Right:
+      Cast: {fileID: 1478303938414853960, guid: 71ce3bed392d87e4b9ec278a15c95b55,
+        type: 3}
+      Bullet: {fileID: 4493353495562203329, guid: 1f027244201c5984f92981c0d0133d0b,
+        type: 3}
+      Hit: {fileID: 7266810137054743328, guid: d5d0a43b669a1ce41918e6b084d0c3c3, type: 3}
+    CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
+      type: 3}
+    CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
+      type: 3}
+  TrajectoriesNumber: 3
+  ParticlesAtk:
+    BulletTrajectories:
+    - Show: 1
+      BulletDistanceInTile: {x: 0, y: 15}
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: -0.0031738281
+          value: 0
+          inSlope: 0.7419021
+          outSlope: 0.7419021
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.12966919
+          value: 0.09855652
+          inSlope: -0.27433807
+          outSlope: -0.27433807
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.27750176
+          value: -0.09223299
+          inSlope: -0.43572044
+          outSlope: -0.43572044
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.49824658
+          value: 0.00028940942
+          inSlope: 0.8800825
+          outSlope: 0.8800825
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.17648312
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 1
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      ChildrenBulletDelay: 0.5
+      BulletEffectTiles: []
+      BulletGapStartingTile: {x: 0, y: 0}
+      HasEffect: 0
+      Effects: []
+      EffectChances: 100
+    - Show: 1
+      BulletDistanceInTile: {x: 1, y: 15}
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0.00014970459
+          value: 0.00007766485
+          inSlope: -0.028593738
+          outSlope: -0.028593738
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.59159964
+        - serializedVersion: 3
+          time: 0.14932296
+          value: -0.14475352
+          inSlope: 0.00047931075
+          outSlope: 0.00047931075
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.29884544
+          value: 0.00056007504
+          inSlope: 0.2410056
+          outSlope: 0.2410056
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 1
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 1
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      ChildrenBulletDelay: 0.5
+      BulletEffectTiles: []
+      BulletGapStartingTile: {x: 0, y: 0}
+      HasEffect: 0
+      Effects: []
+      EffectChances: 100
+    - Show: 1
+      BulletDistanceInTile: {x: -1, y: 15}
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: -0.0031738281
+          value: 0
+          inSlope: 0.022599692
+          outSlope: 0.022599692
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 1
+        - serializedVersion: 3
+          time: 0.14322339
+          value: 0.15154408
+          inSlope: 0.03209564
+          outSlope: 0.03209564
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.2988912
+          value: 0.00039601588
+          inSlope: 0.012089572
+          outSlope: 0.012089572
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.36049694
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 1
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      ChildrenBulletDelay: 0.5
+      BulletEffectTiles: []
+      BulletGapStartingTile: {x: 0, y: 0}
+      HasEffect: 0
+      Effects: []
+      EffectChances: 100
+    CharacterClass: 0
+  TilesAtk:
+    AtkType: 0
+    BulletTrajectories: []
+    StatToCheck: 0
+    ValueChecker: 0
+    Chances: 0
+    PercToCheck: 0
+    InBetween: {x: 0, y: 0}
+    Show: 0
+  TotemAtk:
+    AtkType: 3
+    IsPlayerSide: 0
+    DurationOnField: 10
+    Effects: []
+    TotemIn: 0
+    TotemOut: 0
+    TentaclePrefab: 0
