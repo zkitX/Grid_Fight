@@ -16,11 +16,6 @@ public class Stage00_BossOctopus_Tentacles_Script : MinionType_Script
        // StartCoroutine(SetUpEnteringOnBattle_Co());
     }
 
-    public override IEnumerator Move()
-    {
-        yield return null;
-    }
-
 
     private IEnumerator SetUpEnteringOnBattle_Co()
     {

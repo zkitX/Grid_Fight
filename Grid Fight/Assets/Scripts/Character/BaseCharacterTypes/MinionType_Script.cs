@@ -94,42 +94,40 @@ public class MinionType_Script : BaseCharacter
         {
             ComboManager.Instance.TriggerComboForCharacter(HittedByList[HittedByList.Count - 1].CharacterId, ComboType.Kill, true, transform.position);
         }
-        if (!SpineAnim.CurrentAnim.Contains("rriv"))
+        SpineAnim.transform.localPosition = LocalSpinePosoffset;
+        SpineAnim.SpineAnimationState.ClearTracks();
+        SpineAnim.CurrentAnim = "";
+        switch (DeathAnim)
         {
-            SpineAnim.transform.localPosition = LocalSpinePosoffset;
-            SpineAnim.SpineAnimationState.ClearTracks();
-            SpineAnim.CurrentAnim = "";
-            switch (DeathAnim)
-            {
-                case DeathAnimType.Explosion:
-                    for (int i = 0; i < UMS.Pos.Count; i++)
-                    {
-                        GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
-                        UMS.Pos[i] = Vector2Int.zero;
-                    }
-                    transform.position = new Vector3(100, 100, 100);
-                    SetAnimation(CharacterAnimationStateType.Idle);
-                    if (isActiveAndEnabled)
-                    {
-                        StartCoroutine(DisableChar());
-                    }
-                    break;
-                case DeathAnimType.Defeat:
-                    SetAnimation(CharacterAnimationStateType.Defeat);
-                    break;
-                case DeathAnimType.Reverse_Arrives:
-                    for (int i = 0; i < UMS.Pos.Count; i++)
-                    {
-                        GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
-                        UMS.Pos[i] = Vector2Int.zero;
-                    }
-                    SetAnimation(CharacterAnimationStateType.Defeat_ReverseArrive);
-                    break;
-            }
+            case DeathAnimType.Explosion:
+                for (int i = 0; i < UMS.Pos.Count; i++)
+                {
+                    GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
+                    UMS.Pos[i] = Vector2Int.zero;
+                }
+                transform.position = new Vector3(100, 100, 100);
+                SetAnimation(CharacterAnimationStateType.Idle);
+                if (isActiveAndEnabled)
+                {
+                    StartCoroutine(DisableChar());
+                }
+                break;
+            case DeathAnimType.Defeat:
+                SetAnimation(CharacterAnimationStateType.Defeat);
+                break;
+            case DeathAnimType.Reverse_Arrives:
+                for (int i = 0; i < UMS.Pos.Count; i++)
+                {
+                    GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
+                    UMS.Pos[i] = Vector2Int.zero;
+                }
+                SetAnimation(CharacterAnimationStateType.Defeat_ReverseArrive);
+                break;
         }
         base.SetCharDead();
 
     }
+
     private IEnumerator DisableChar()
     {
         yield return BattleManagerScript.Instance.WaitFor(0.5f);
@@ -138,68 +136,6 @@ public class MinionType_Script : BaseCharacter
 
     }
    
-    public virtual IEnumerator Move()
-    {
-        while (true)
-        {
-            if (MoveCoOn && currentAttackPhase == AttackPhasesType.End && !Attacking)
-            {
-                float timer = 0;
-                float MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y) / 3;
-                while (timer < MoveTime && !AIMove)
-                {
-                    yield return null;
-                    while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || Attacking)
-                    {
-                        yield return null;
-                    }
-                    // Debug.Log(timer + "    " + MoveTime);
-                    timer += BattleManagerScript.Instance.DeltaTime;
-                }
-                AIMove = false;
-                if (CharInfo.Health > 0)
-                {
-                    while (currentAttackPhase != AttackPhasesType.End)
-                    {
-                        yield return null;
-                    }
-                    InputDirectionType dir = InputDirectionType.Up;
-
-                    foreach (var item in BattleManagerScript.Instance.AllCharactersOnField.Where(a => a.IsOnField).OrderBy(r => Mathf.Abs(r.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x)))
-                    {
-                        dir = item.UMS.CurrentTilePos.x > UMS.CurrentTilePos.x ? InputDirectionType.Down : InputDirectionType.Up;
-                        BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos + GridManagerScript.Instance.GetVectorFromDirection(dir));
-                        if (bts != null && bts.BattleTileState == BattleTileStateType.Empty)
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            for (int i = 0; i < 2; i++)
-                            {
-                                bts = GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos + GridManagerScript.Instance.GetVectorFromDirection((InputDirectionType)1 + i));
-                                if (bts != null && bts.BattleTileState == BattleTileStateType.Empty)
-                                {
-                                    break;
-                                }
-                            }
-                            if (bts != null && bts.BattleTileState == BattleTileStateType.Empty)
-                            {
-                                break;
-                            }
-                        }
-                    }
-                    MoveCharOnDirection(dir);
-                }
-                else
-                {
-                    timer = 0;
-                }
-            }
-            yield return null;
-        }
-    }
-
     protected override void Update()
     {
         base.Update();

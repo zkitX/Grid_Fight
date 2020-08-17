@@ -153,7 +153,6 @@ public class WaveManagerScript : MonoBehaviour
         res.CharInfo.Health = res.CharInfo.HealthStats.Base;
         res.CharInfo.Ether = res.CharInfo.EtherStats.Base;
         res.CharInfo.SpeedStats.MovementSpeed = Random.Range(character.MovementSpeed.x, character.MovementSpeed.y);
-        res.CharInfo.MovementTimer = character.MovementTimer;
         res.CharInfo.HealthStats.Armour = Random.Range(character.Armour.x, character.Armour.y);
         res.CharInfo.ShieldStats.MinionShieldChances = Random.Range(character.MinionShieldChances.x, character.MinionShieldChances.y);
         res.CharInfo.ShieldStats.MinionPerfectShieldChances = Random.Range(character.MinionPerfectShieldChances.x, character.MinionPerfectShieldChances.y);
@@ -393,7 +392,7 @@ public class WaveManagerScript : MonoBehaviour
 
         yield return BattleManagerScript.Instance.MoveCharToBoardWithDelay(withArrivingAnim ? 0.2f : 0, currentCharacter, bts.transform.position);
 
-        while (!currentCharacter.IsOnField)
+        while (currentCharacter.isActiveAndEnabled && !currentCharacter.IsOnField)
         {
             yield return null;
         }
@@ -439,7 +438,7 @@ public class WaveManagerScript : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.G) && BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle)
         {
-           /* foreach (WaveCharClass item in currentWavePhase.ListOfEnemy)
+            foreach (WaveCharClass item in currentWavePhase.ListOfEnemy)
             {
                 item.NumberOfCharacter = 0;
             }
@@ -448,7 +447,7 @@ public class WaveManagerScript : MonoBehaviour
             {
                 item.CharInfo.Health = -50;
             }
-            leadCharDie = true;*/
+            leadCharDie = true;
         }
     }
 
@@ -509,7 +508,6 @@ public class WaveCharacterInfoClass
     public Vector2 Ether;
     public Vector2 EtherRegeneration;
     public Vector2 MovementSpeed;
-    public Vector2 MovementTimer;
     public Vector2 Armour;
     public Vector2 MinionShieldChances;
     public Vector2 MinionPerfectShieldChances;

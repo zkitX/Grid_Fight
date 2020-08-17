@@ -181,11 +181,6 @@ public class Stage04_BossMonster_Script : MinionType_Script
 
     }
 
-    public override IEnumerator Move()
-    {
-        yield return null;
-    }
-
     public override void SetCharDead()
     {
         CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);

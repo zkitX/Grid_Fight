@@ -302,13 +302,17 @@ public class GridManagerScript : MonoBehaviour
         BattleTileScript originTile = BattleTiles.Where(r => r.Pos == originPos).FirstOrDefault();
         if (originTile == null) return null;
 
-        Vector2Int curTilePos = new Vector2Int();
-        BattleTileScript curTile = null;
+       // Vector2Int curTilePos = new Vector2Int();
+       // BattleTileScript curTile = null;
 
-        List<BattleTileScript> adjTiles = new List<BattleTileScript>();
+        List<BattleTileScript> adjTiles = BattleTiles.Where(r => r.WalkingSide == side && r.BattleTileState == BattleTileStateType.Empty && (r.Pos.x > originPos.x - withinRadius && r.Pos.x < originPos.x + withinRadius)
+        && (r.Pos.y > originPos.y - withinRadius && r.Pos.y < originPos.y + withinRadius)).ToList();
 
 
-        for (int i = 1; i < withinRadius + 1; i++)
+
+
+
+       /* for (int i = 1; i < withinRadius + 1; i++)
         {
             for (int x = -i; x <= i; x++)
             {
@@ -322,7 +326,7 @@ public class GridManagerScript : MonoBehaviour
                     }
                 }
             }
-        }
+        }*/
 
         //WalkingSideType side = BattleTiles.Where(r => r.Pos == originPos).First().WalkingSide;
        

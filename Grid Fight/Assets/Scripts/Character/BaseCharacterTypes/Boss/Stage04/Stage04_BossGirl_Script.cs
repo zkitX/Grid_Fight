@@ -36,11 +36,6 @@ public class Stage04_BossGirl_Script : MinionType_Script
         StartCoroutine(SetUpEnteringOnBattle_Co());
     }
 
-    public override IEnumerator Move()
-    {
-        yield return null;
-    }
-
     private IEnumerator SetUpEnteringOnBattle_Co()
     {
 

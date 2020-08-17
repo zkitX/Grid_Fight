@@ -2093,6 +2093,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             IsSwapping = false;
             SwapWhenPossible = false;
+            if (CharInfo.HealthPerc<= 0 || died)
+            {
+                died = false;
+                SetCharDead();
+            }
             CharArrivedOnBattleField();
         }
 

@@ -23,31 +23,6 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
         SpineAnim.SpineAnimationState.Apply(SpineAnim.skeleton);
     }
 
-    public override IEnumerator Move()
-    {
-
-        yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
-        while (MoveCoOn)
-        {
-            InputDirectionType dir = (InputDirectionType)Random.Range(0, 4);
-            float MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y);
-            yield return BattleManagerScript.Instance.WaitFor(1, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
-
-            if (CharInfo.Health > 0)
-            {
-                MoveCharOnDirection(dir);
-            }
-            MoveTime = Random.Range(CharInfo.MovementTimer.x, CharInfo.MovementTimer.y);
-
-            yield return BattleManagerScript.Instance.WaitFor(1, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
-
-            if (CharInfo.Health > 0)
-            {
-                MoveCharOnDirection(dir == InputDirectionType.Down ? InputDirectionType.Up : dir == InputDirectionType.Up ? InputDirectionType.Down : dir == InputDirectionType.Left ? InputDirectionType.Right : InputDirectionType.Left);
-            }
-        }
-    }
-
     public override void SetCharDead()
     {
         if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Death.ToString())

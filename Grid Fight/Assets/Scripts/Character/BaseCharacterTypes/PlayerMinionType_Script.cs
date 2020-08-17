@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class PlayerMinionType_Script : MinionType_Script
 {
-  
-
     public override void SetCharDead()
     {
         CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);

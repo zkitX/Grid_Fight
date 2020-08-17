@@ -65,11 +65,6 @@ public class Stage00_BossOctopus_Script : MinionType_Script
         ((Stage00_BossOctopus_Girl_Script)GetPiece(CharacterNameType.CleasTemple_BossOctopus_Girl)).SetUpLeavingBattle();
     }
 
-    public override IEnumerator Move()
-    {
-        yield return null;
-    }
-
     protected override void Update()
     {
         if (UIBattleManager.Instance != null && IsOnField)

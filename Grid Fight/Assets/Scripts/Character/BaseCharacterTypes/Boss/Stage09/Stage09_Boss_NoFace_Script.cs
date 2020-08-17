@@ -169,11 +169,6 @@ public class Stage09_Boss_NoFace_Script : MinionType_Script
         baseForme.SpineAnimationState_Complete(trackEntry);
     }
 
-    public override IEnumerator Move()
-    {
-        yield break;
-    }
-
     public override void SetAttackReady(bool value)
     {
         return;
