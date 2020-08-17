@@ -1640,6 +1640,20 @@ public class BattleManagerScript : MonoBehaviour
         {
             NewIManager.Instance.SetUICharacterToButton((CharacterType_Script)playableCharOnScene, playableCharOnScene.CharInfo.CharacterSelection);
         }*/
+        CharacterLoadInformation charLoadInfo = SceneLoadManager.Instance.loadedCharacters.Where(r => r.characterID == characterID).First();
+        charLoadInfo.encounterState = CharacterLoadInformation.EncounterState.Recruited;
+
+        if(SceneLoadManager.Instance.squad.Values.Where(r => r == null || r.characterID == CharacterNameType.None).ToArray().Length >= 4)
+        {
+            return;
+        }
+        if (SceneLoadManager.Instance.squad.Values.Where(r => r.characterID == characterID).FirstOrDefault() != null)
+        {
+            return;
+        }
+
+        SceneLoadManager.Instance.AddSquadMate(characterID, 0);
+
         List<CharacterActionType> actions = new List<CharacterActionType>();
         actions.Add(CharacterActionType.Move);
         actions.Add(CharacterActionType.Defence);
