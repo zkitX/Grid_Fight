@@ -26,7 +26,7 @@ public class ResolutionExtras : MonoBehaviour
             Tallies[i].GetComponent<CanvasGroup>().alpha = 0;
 
             indent = !indent;
-            spawnPoint += new Vector3(0, -tallySpacing, 0);
+            spawnPoint += new Vector3(0, -tallySpacing * (Screen.height / 1080f), 0);
         }
     }
 

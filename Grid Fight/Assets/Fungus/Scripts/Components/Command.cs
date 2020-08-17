@@ -152,7 +152,7 @@ namespace Fungus
 
         IEnumerator ContinueCo()
         {
-            while (Time.time - offset < 0.1f)
+            while (Time.time - offset < 0.1f && !(this is CallPlayAudio || this is CallStopAudio))
             {
                 yield return null;
             }

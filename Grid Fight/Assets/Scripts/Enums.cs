@@ -382,7 +382,7 @@ public enum StatsCheckType
 public enum ModificableStatsType
 {
     WeakAttack_CriticalChance = 0,
-    weakAttack_DamageMultiplier = 1,
+    WeakAttack_DamageMultiplier = 1,
     StrongfulAttac_CriticalChance = 2,
     StrongfulAttac_DamageMultiplier = 3,
     HealthStats_Health = 13,
