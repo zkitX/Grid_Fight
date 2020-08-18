@@ -1665,27 +1665,30 @@ public class BattleManagerScript : MonoBehaviour
         {
             NewIManager.Instance.SetUICharacterToButton((CharacterType_Script)playableCharOnScene, playableCharOnScene.CharInfo.CharacterSelection);
         }*/
-        CharacterLoadInformation charLoadInfo = SceneLoadManager.Instance.loadedCharacters.Where(r => r.characterID == characterID).First();
-        if (trackAnalytics)
+        if(SceneLoadManager.Instance != null)
         {
-            if(!(trackSecondaryRecruitments && charLoadInfo.encounterState == CharacterLoadInformation.EncounterState.Recruited))
+            CharacterLoadInformation charLoadInfo = SceneLoadManager.Instance.loadedCharacters.Where(r => r.characterID == characterID).First();
+            if (trackAnalytics)
             {
-                AnalyticsManager.Instance.Track_CharacterEvent(characterID, AnalyticsManager.CharEvent.Recruited);
+                if (!(trackSecondaryRecruitments && charLoadInfo.encounterState == CharacterLoadInformation.EncounterState.Recruited))
+                {
+                    AnalyticsManager.Instance.Track_CharacterEvent(characterID, AnalyticsManager.CharEvent.Recruited);
+                }
             }
-        }
-        charLoadInfo.encounterState = CharacterLoadInformation.EncounterState.Recruited;
+            charLoadInfo.encounterState = CharacterLoadInformation.EncounterState.Recruited;
 
 
-        if (SceneLoadManager.Instance.squad.Values.Where(r => r == null || r.characterID == CharacterNameType.None).ToArray().Length >= 4)
-        {
-            return;
-        }
-        if (SceneLoadManager.Instance.squad.Values.Where(r => r.characterID == characterID).FirstOrDefault() != null)
-        {
-            return;
-        }
+            if (SceneLoadManager.Instance.squad.Values.Where(r => r == null || r.characterID == CharacterNameType.None).ToArray().Length >= 4)
+            {
+                return;
+            }
+            if (SceneLoadManager.Instance.squad.Values.Where(r => r.characterID == characterID).FirstOrDefault() != null)
+            {
+                return;
+            }
 
-        SceneLoadManager.Instance.AddSquadMate(characterID, 0);
+            SceneLoadManager.Instance.AddSquadMate(characterID, 0);
+        }
 
         List<CharacterActionType> actions = new List<CharacterActionType>();
         actions.Add(CharacterActionType.Move);
