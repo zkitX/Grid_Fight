@@ -14,6 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   ID: S4_REG
+  type: 0
+  Thumbnail: {fileID: 0}
+  Description: 
+  bestAccuracyRating:
+    ValueToAchieve: 1
+    UseMaximumRewardSystem: 1
+    MaximumReward: 500
+  bestReflexRating:
+    ValueToAchieve: 1
+    UseMaximumRewardSystem: 1
+    MaximumReward: 500
+  bestDamageRating:
+    ValueToAchieve: 1
+    UseMaximumRewardSystem: 1
+    MaximumReward: 500
   Rewired: {fileID: 161136, guid: 14ee31e976b2b344fb160d8a2deffe62, type: 3}
   BattleInfoManager: {fileID: 5196204998305896951, guid: 9be0a1ab75fc4d943891a15ff6ef8d25,
     type: 3}
@@ -26,6 +41,9 @@ MonoBehaviour:
   EventManager: {fileID: 5481280108936761610, guid: 232d2cd94b086c94da01cb2c22c6bfa9,
     type: 3}
   Wave: {fileID: 2992208178951566622, guid: 68d17fadb0a885241b00acbad0b53079, type: 3}
+  IndicatorCanvas: {fileID: 3443286775646217826, guid: a773f83c4fb5df148a616cdb209008c5,
+    type: 3}
   AudioManager: {fileID: 1251593967129298512, guid: e64de0257965e1b429f1bc742aaac2ba,
     type: 3}
   StageAudioProfile: {fileID: 0}
+  trackPhases: 0

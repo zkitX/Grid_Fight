@@ -763,7 +763,7 @@ public enum CharacterClassType
     Desert
 }
 
-public enum HealthChangedType
+public enum BattleFieldIndicatorType
 {
     Damage,
     Defend,
@@ -772,7 +772,10 @@ public enum HealthChangedType
     Invulnerable,
     Rebirth,
     Backfire,
-    Miss
+    Miss,
+    CompleteDefend,
+    Buff,
+    Debuff
 }
 
 

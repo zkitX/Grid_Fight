@@ -14,6 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Tutorial
   ID: S0_TUT
+  type: 0
+  Thumbnail: {fileID: 0}
+  Description: 
+  bestAccuracyRating:
+    ValueToAchieve: 1
+    UseMaximumRewardSystem: 1
+    MaximumReward: 500
+  bestReflexRating:
+    ValueToAchieve: 1
+    UseMaximumRewardSystem: 1
+    MaximumReward: 500
+  bestDamageRating:
+    ValueToAchieve: 1
+    UseMaximumRewardSystem: 1
+    MaximumReward: 500
   Rewired: {fileID: 6192422185397378475, guid: 3cff1e4a15195e54aa3806fbe296ec15, type: 3}
   BattleInfoManager: {fileID: 5196204998305896951, guid: 9be0a1ab75fc4d943891a15ff6ef8d25,
     type: 3}
@@ -26,6 +41,9 @@ MonoBehaviour:
   EventManager: {fileID: 6427025554798635227, guid: 2e1d1cb060a7e1f4696410f259fd2081,
     type: 3}
   Wave: {fileID: 6646315339502922087, guid: 70f6980f4e8c9854e89f977b89636707, type: 3}
+  IndicatorCanvas: {fileID: 3443286775646217826, guid: a773f83c4fb5df148a616cdb209008c5,
+    type: 3}
   AudioManager: {fileID: 1251593967129298512, guid: e64de0257965e1b429f1bc742aaac2ba,
     type: 3}
   StageAudioProfile: {fileID: 0}
+  trackPhases: 0

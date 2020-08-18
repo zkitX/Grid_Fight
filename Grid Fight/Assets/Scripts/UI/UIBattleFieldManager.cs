@@ -8,24 +8,17 @@ using UnityEngine.UI;
 public class UIBattleFieldManager : MonoBehaviour
 {
     public static UIBattleFieldManager Instance;
-    public GameObject UIBattleField;
+    public GameObject BaseBattleFieldIndicator;
 
-    private List<GameObject> ListOfUIBattleField = new List<GameObject>();
 
-    public GameObject Damage;
-    public GameObject Defence;
-    public GameObject PartialDefend;
-    public GameObject Healing;
-    public GameObject CriticalHit;
+    TextMeshProUGUI currentTMP;
+    GameObject b;
+    BattleFieldIndicatorMaterialClass currentBFIM;
     public GameObject ComboIndicator;
-    public GameObject Miss;
-    private List<GameObject> Damages = new List<GameObject>();
-    private List<GameObject> Defends = new List<GameObject>();
-    private List<GameObject> PartialDefends = new List<GameObject>();
-    private List<GameObject> Healings = new List<GameObject>();
-    private List<GameObject> CriticalHits = new List<GameObject>();
+    private List<GameObject> BattleFieldIndicators = new List<GameObject>();
     private List<GameObject> ComboIndicators = new List<GameObject>();
-    private List<GameObject> Misses = new List<GameObject>();
+
+    public List<BattleFieldIndicatorMaterialClass> Materials = new List<BattleFieldIndicatorMaterialClass>();
 
 
     private Camera mCamera;
@@ -34,16 +27,7 @@ public class UIBattleFieldManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-    }
-
-    private void Update()
-    {
-
-        if(BattleManagerScript.Instance != null && !setupIsComplete)
-        {
-            mCamera = Camera.main;
-            setupIsComplete = true;
-        }
+        mCamera = Camera.main;
     }
 
     public void SetupCharListener(BaseCharacter charOwner)
@@ -51,6 +35,8 @@ public class UIBattleFieldManager : MonoBehaviour
         charOwner.HealthStatsChangedEvent += CharOwner_HealthStatsChangedEvent;
     }
 
+
+    #region Combo
     public void DisplayComboStyleSplasher(string text, Vector3 pos, float scaler, Color color, bool animateLong, out float animLength)
     {
         GameObject cI = ComboIndicators.Where(r => !r.activeInHierarchy).FirstOrDefault();
@@ -92,325 +78,156 @@ public class UIBattleFieldManager : MonoBehaviour
         obj.SetActive(false);
     }
 
-    private void CharOwner_HealthStatsChangedEvent(float value, HealthChangedType changeType, Transform charOwner)
+    #endregion
+
+    #region BattleFieldIndicator
+
+    private void CharOwner_HealthStatsChangedEvent(float value, BattleFieldIndicatorType changeType, Transform charOwner)
     {
+        StartCoroutine(BackfireCo(value, changeType, charOwner));
+    }
+
+    private IEnumerator BackfireCo(float damage, BattleFieldIndicatorType changeType, Transform charOwner)
+    {
+        if (damage == 0) yield break;
+
+        float timer = 0;
+        GameObject d = GetBattleFieldIndicator();
+        d.SetActive(true);
         switch (changeType)
         {
-            case HealthChangedType.Damage:
-                if (value == 0) return;
-                StartCoroutine(DamageCo(value, charOwner));
+            case BattleFieldIndicatorType.Damage:
+                SetupIndicator(changeType, ((int)(damage * 100)).ToString(), d);
+                timer = 0.8f;
+                SetAnim(d.GetComponentInChildren<Animator>(), 1);
                 break;
-            case HealthChangedType.Defend:
-                StartCoroutine(DefendCo(value, charOwner));
+            case BattleFieldIndicatorType.Defend:
+                SetupIndicator(changeType, ((int)(damage * 100)).ToString(), d);
+                timer = 0.8f;
+                SetAnim(d.GetComponentInChildren<Animator>(), 4);
                 break;
-            case HealthChangedType.Heal:
-                StartCoroutine(HealingCo(value, charOwner));
+            case BattleFieldIndicatorType.CompleteDefend:
+                SetupIndicator(changeType, "DEFEND", d);
+                timer = 0.8f;
+                SetAnim(d.GetComponentInChildren<Animator>(), 3);
                 break;
-            case HealthChangedType.CriticalHit:
-                StartCoroutine(CriticalHitCo(value, charOwner));
+            case BattleFieldIndicatorType.Heal:
+                SetupIndicator(changeType, ((int)(damage * 100)).ToString(), d);
+                timer = 0.8f;
+                SetAnim(d.GetComponentInChildren<Animator>(), 5);
                 break;
-            case HealthChangedType.Invulnerable:
-                StartCoroutine(InvulnerableCo(value, charOwner));
+            case BattleFieldIndicatorType.CriticalHit:
+                SetupIndicator(changeType, "CRITICAL  " + ((int)(damage * 100)).ToString(), d);
+                timer = 0.8f;
+                SetAnim(d.GetComponentInChildren<Animator>(), 2);
                 break;
-            case HealthChangedType.Rebirth:
-                StartCoroutine(RebirthCo(charOwner));
+            case BattleFieldIndicatorType.Invulnerable:
+                SetupIndicator(changeType, "INVULNERABLE", d);
+                timer = 0.8f;
+                SetAnim(d.GetComponentInChildren<Animator>(), 5);
                 break;
-            case HealthChangedType.Backfire:
-                StartCoroutine(BackfireCo(value, charOwner));
+            case BattleFieldIndicatorType.Rebirth:
+                SetupIndicator(changeType, "RIBIRTH", d);
+                timer = 0.8f;
+                SetAnim(d.GetComponentInChildren<Animator>(), 5);
                 break;
-            case HealthChangedType.Miss:
-                StartCoroutine(BackfireCo(value, charOwner));
+            case BattleFieldIndicatorType.Backfire:
+                SetupIndicator(changeType, "BACKFIRE", d);
+                timer = 0.8f;
+                SetAnim(d.GetComponentInChildren<Animator>(), 5);
                 break;
-            default:
+            case BattleFieldIndicatorType.Miss:
+                SetupIndicator(changeType, "MISS", d);
+                timer = 0.8f;
+                SetAnim(d.GetComponentInChildren<Animator>(), 5);
                 break;
         }
+
+        while (timer >= 0f)
+        {
+            if (charOwner.gameObject.activeInHierarchy)
+            {
+                d.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
+            }
+            yield return BattleManagerScript.Instance.WaitFixedUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
+
+            timer -= BattleManagerScript.Instance.FixedDeltaTime;
+        }
+        d.SetActive(false);
     }
 
-    private IEnumerator BackfireCo(float damage, Transform charOwner)
+
+    private void CharOwner_HealthStatsChangedEvent(string text, BattleFieldIndicatorType changeType, Transform charOwner)
+    {
+        StartCoroutine(BackfireCo(text, changeType, charOwner));
+    }
+
+    private IEnumerator BackfireCo(string text, BattleFieldIndicatorType changeType, Transform charOwner)
     {
         float timer = 0;
-        bool isAlive = true;
-        GameObject d = Damages.Where(r => !r.activeInHierarchy).FirstOrDefault();
-        if (d == null)
-        {
-            d = Instantiate(Damage, transform);
-            Damages.Add(d);
-        }
+        GameObject d = GetBattleFieldIndicator();
         d.SetActive(true);
-        d.GetComponentInChildren<TextMeshProUGUI>().text = ((int)(damage * 100)).ToString() + " BACKFIRE";
-        d.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
+        SetupIndicator(changeType, text, d);
+        timer = 2f;
+        SetAnim(d.GetComponentInChildren<Animator>(), changeType == BattleFieldIndicatorType.Buff ? 6 : 7);
+
+        while (timer >= 0f)
+        {
+            if (charOwner.gameObject.activeInHierarchy)
+            {
+                d.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
+            }
+            yield return BattleManagerScript.Instance.WaitFixedUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
+
+            timer -= BattleManagerScript.Instance.FixedDeltaTime;
+        }
+        d.SetActive(false);
+    }
+
+
+    private void SetupIndicator(BattleFieldIndicatorType changeType, string txt, GameObject d)
+    {
+        currentBFIM = Materials.Where(r => r.BattleFieldIndicatorT == changeType).First();
+        currentTMP = d.GetComponentInChildren<TextMeshProUGUI>();
+        currentTMP.text = txt;
+        currentTMP.material = currentBFIM.Mat;
         SetAnim(d.GetComponentInChildren<Animator>(), 1);
-        while (timer <= 0.8f)
-        {
-            if (charOwner.gameObject.activeInHierarchy && isAlive)
-            {
-                d.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
-            }
-            else if (isAlive)
-            {
-                isAlive = false;
-            }
-            yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-
-            timer += Time.deltaTime;
-        }
-        d.SetActive(false);
     }
-
-    private IEnumerator RebirthCo(Transform charOwner)
-    {
-        float timer = 0;
-        bool isAlive = true;
-        GameObject h = Healings.Where(r => !r.activeInHierarchy).FirstOrDefault();
-        if (h == null)
-        {
-            h = Instantiate(Healing, transform);
-            Healings.Add(h);
-        }
-        h.SetActive(true);
-        h.GetComponentInChildren<TextMeshProUGUI>().text = "REBIRTH";
-        SetAnim(h.GetComponentInChildren<Animator>(), 5);
-        while (timer <= 0.8f)
-        {
-            if (charOwner.gameObject.activeInHierarchy && isAlive)
-            {
-                h.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
-            }
-            else if (isAlive)
-            {
-                isAlive = false;
-            }
-            yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-
-            timer += BattleManagerScript.Instance.DeltaTime;
-        }
-        h.SetActive(false);
-    }
-
-    private IEnumerator InvulnerableCo(float damage, Transform charOwner)
-    {
-        float timer = 0;
-        bool isAlive = true;
-        GameObject d;
-        d = Defends.Where(r => !r.activeInHierarchy).FirstOrDefault();
-        if (d == null)
-        {
-            d = Instantiate(Defence, transform);
-            Defends.Add(d);
-        }
-
-        d.SetActive(true);
-        d.GetComponentInChildren<TextMeshProUGUI>().text = "INVULNERABLE";
-
-        if (!charOwner.gameObject.activeInHierarchy)
-        {
-            d.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
-        }
-
-        SetAnim(d.GetComponentInChildren<Animator>(), 3);
-
-        while (timer <= 0.8f)
-        {
-            if (charOwner.gameObject.activeInHierarchy && isAlive)
-            {
-                d.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
-            }
-            else if (isAlive)
-            {
-                isAlive = false;
-            }
-            yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-
-            timer += Time.deltaTime;
-        }
-        d.SetActive(false);
-    }
-
-    private IEnumerator HealingCo(float heal, Transform charOwner)
-    {
-        float timer = 0;
-        bool isAlive = true;
-        GameObject h = Healings.Where(r => !r.activeInHierarchy).FirstOrDefault();
-        if (h == null)
-        {
-            h = Instantiate(Healing, transform);
-            Healings.Add(h);
-        }
-        h.SetActive(true);
-        h.GetComponentInChildren<TextMeshProUGUI>().text = ((int)(heal * 100)).ToString();
-        SetAnim(h.GetComponentInChildren<Animator>(), 5);
-        while (timer <= 0.8f)
-        {
-            if(charOwner.gameObject.activeInHierarchy && isAlive)
-            {
-                h.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
-            }
-            else if(isAlive)
-            {
-                isAlive = false;
-            }
-            yield return BattleManagerScript.Instance.WaitUpdate(()=> BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-
-            timer += BattleManagerScript.Instance.DeltaTime;
-        }
-        h.SetActive(false);
-    }
-
-
-    private IEnumerator MissCo(Transform charOwner)
-    {
-        float timer = 0;
-        bool isAlive = true;
-        GameObject h = Misses.Where(r => !r.activeInHierarchy).FirstOrDefault();
-        if (h == null)
-        {
-            h = Instantiate(Miss, transform);
-            Misses.Add(h);
-        }
-        h.SetActive(true);
-        h.GetComponentInChildren<TextMeshProUGUI>().text = "MISS";
-        SetAnim(h.GetComponentInChildren<Animator>(), 5);
-        while (timer <= 0.8f)
-        {
-            if (charOwner.gameObject.activeInHierarchy && isAlive)
-            {
-                h.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
-            }
-            else if (isAlive)
-            {
-                isAlive = false;
-            }
-            yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-
-            timer += BattleManagerScript.Instance.DeltaTime;
-        }
-        h.SetActive(false);
-    }
-
-
-    private IEnumerator DamageCo(float damage, Transform charOwner)
-    {
-        float timer = 0;
-        bool isAlive = true;
-        GameObject d = Damages.Where(r => !r.activeInHierarchy).FirstOrDefault();
-        if (d == null)
-        {
-            d = Instantiate(Damage, transform);
-            Damages.Add(d);
-        }
-        d.SetActive(true);
-        d.GetComponentInChildren<TextMeshProUGUI>().text = ((int)(damage * 100)).ToString();
-        d.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
-        SetAnim(d.GetComponentInChildren<Animator>(), 1);
-        while (timer <= 0.8f)
-        {
-            if (charOwner.gameObject.activeInHierarchy && isAlive)
-            {
-                d.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
-            }
-            else if (isAlive)
-            {
-                isAlive = false;
-            }
-            yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-
-            timer += Time.deltaTime;
-        }
-        d.SetActive(false);
-    }
-
-    private IEnumerator DefendCo(float damage, Transform charOwner)
-    {
-        float timer = 0;
-        bool isAlive = true;
-        string res = ((int)(damage * 100)).ToString();
-        GameObject d;
-        if (damage == 0)
-        {
-            d = Defends.Where(r => !r.activeInHierarchy).FirstOrDefault();
-            if (d == null)
-            {
-                d = Instantiate(Defence, transform);
-                Defends.Add(d);
-            }
-            res = "DEF";
-        }
-        else
-        {
-            d = PartialDefends.Where(r => !r.activeInHierarchy).FirstOrDefault();
-            if (d == null)
-            {
-                d = Instantiate(PartialDefend, transform);
-                PartialDefends.Add(d);
-            }
-        }
-        
-        d.SetActive(true);
-        d.GetComponentInChildren<TextMeshProUGUI>().text = res;
-        if (!charOwner.gameObject.activeInHierarchy)
-        {
-            d.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
-        }
-
-        SetAnim(d.GetComponentInChildren<Animator>(), res == "DEF" ?  3 : 4);
-
-        while (timer <= 0.8f)
-        {
-            if (charOwner.gameObject.activeInHierarchy && isAlive)
-            {
-                d.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
-            }
-            else if (isAlive)
-            {
-                isAlive = false;
-            }
-            yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-
-            timer += Time.deltaTime;
-        }
-        d.SetActive(false);
-    }
-
-    private IEnumerator CriticalHitCo(float damage, Transform charOwner)
-    {
-        float timer = 0;
-        bool isAlive = true;
-        GameObject c = CriticalHits.Where(r => !r.activeInHierarchy).FirstOrDefault();
-        if (c == null)
-        {
-            c = Instantiate(CriticalHit, transform);
-            CriticalHits.Add(c);
-        }
-        c.SetActive(true);
-        c.GetComponentInChildren<TextMeshProUGUI>().text = "CRITICAL  " + ((int)(damage * 100)).ToString();
-        if (!charOwner.gameObject.activeInHierarchy)
-        {
-            c.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
-        }
-
-        SetAnim(c.GetComponentInChildren<Animator>(), 2);
-
-        while (timer <= 0.8f)
-        {
-            if (charOwner.gameObject.activeInHierarchy && isAlive)
-            {
-                c.transform.position = mCamera.WorldToScreenPoint(charOwner.transform.position);
-            }
-            else if (isAlive)
-            {
-                isAlive = false;
-            }
-            yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-
-            timer += Time.deltaTime;
-        }
-        c.SetActive(false);
-    }
-
 
     private void SetAnim(Animator anim, int value)
     {
         anim.SetInteger("State", value);
     }
+    private GameObject GetBattleFieldIndicator()
+    {
+        b = BattleFieldIndicators.Where(r => !r.activeInHierarchy).FirstOrDefault();
+        if (b == null)
+        {
+            b = Instantiate(BaseBattleFieldIndicator, transform);
+            BattleFieldIndicators.Add(b);
+        }
 
+        return b;
+    }
+    #endregion
+}
+
+
+[System.Serializable]
+public class BattleFieldIndicatorMaterialClass
+{
+    [HideInInspector]public string name;
+    public BattleFieldIndicatorType BattleFieldIndicatorT;
+    public Material Mat;
+
+    public BattleFieldIndicatorMaterialClass()
+    {
+
+    }
+
+    public BattleFieldIndicatorMaterialClass(BattleFieldIndicatorType battleFieldIndicatorT, Material mat)
+    {
+        BattleFieldIndicatorT = battleFieldIndicatorT;
+        Mat = mat;
+    }
 }

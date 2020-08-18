@@ -27,7 +27,7 @@ public class StageProfile : ScriptableObject
     [SerializeField] public GameObject UI_Battle;
     [SerializeField] public GameObject EventManager;
     [SerializeField] public GameObject Wave;
-
+    [SerializeField] public GameObject IndicatorCanvas;
     [SerializeField] public GameObject AudioManager;
     [SerializeField] public StageAudioProfileSO StageAudioProfile;
 

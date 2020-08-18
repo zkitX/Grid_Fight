@@ -22,6 +22,7 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
     protected GameObject AudioManager;
     protected GameObject BattleInfoManager;
     protected GameObject BattleManager;
+    protected GameObject IndicatorCanvas;
     protected GameObject BaseEnvironment;
     protected GameObject Battle_UI;
     protected GameObject EventManager;
@@ -139,12 +140,12 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
 
         yield return null;
 
-      
-
-
         BattleManager = Instantiate(stage.BattleManager);
         StageObjects.Add(BattleManager);
 
+        IndicatorCanvas = Instantiate(stage.IndicatorCanvas);
+        StageObjects.Add(IndicatorCanvas);
+        
         if (stage.EventManager != null)
         {
             EventManager = Instantiate(stage.EventManager);

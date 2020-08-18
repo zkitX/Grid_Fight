@@ -41,7 +41,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     public delegate void TileMovementComplete(BaseCharacter movingChar);
     public event TileMovementComplete TileMovementCompleteEvent;
 
-    public delegate void HealthStatsChanged(float value, HealthChangedType changeType, Transform charOwner);
+    public delegate void HealthStatsChanged(float value, BattleFieldIndicatorType changeType, Transform charOwner);
     public event HealthStatsChanged HealthStatsChangedEvent;
 
     public delegate void CurrentCharIsRebirth(CharacterNameType cName, List<ControllerType> playerController, SideType side);
@@ -365,7 +365,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     {
         tempFloat_1 = CharInfo.HealthStats.Base;
         CharInfo.Health += tempFloat_1;
-        HealthStatsChangedEvent?.Invoke(tempFloat_1, HealthChangedType.Rebirth, SpineAnim.transform);
+        HealthStatsChangedEvent?.Invoke(tempFloat_1, BattleFieldIndicatorType.Rebirth, SpineAnim.transform);
         GetBuffDebuff(BuffDebuffStatsType.Rebirth).CurrentBuffDebuff.Stop_Co = true;
     }
 
@@ -1494,9 +1494,9 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             case BuffDebuffStatsType.Health:
                 val = bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.HealthStats.B_Base, bdClass.currentBuffValue) : bdClass.currentBuffValue;
                 CharInfo.Health += val;
-                HealthStatsChangedEvent?.Invoke(val, HealthChangedType.Heal, bdClass.EffectMaker.SpineAnim.transform);
+                HealthStatsChangedEvent?.Invoke(val, BattleFieldIndicatorType.Heal, bdClass.EffectMaker.SpineAnim.transform);
                 EventManager.Instance?.UpdateHealth(this);
-                HealthStatsChangedEvent?.Invoke(bdClass.currentBuffValue, bdClass.currentBuffValue > 0 ? HealthChangedType.Heal : HealthChangedType.Damage, SpineAnim.transform);
+                HealthStatsChangedEvent?.Invoke(bdClass.currentBuffValue, bdClass.currentBuffValue > 0 ? BattleFieldIndicatorType.Heal : BattleFieldIndicatorType.Damage, SpineAnim.transform);
                 break;
             case BuffDebuffStatsType.HealthRegeneration:
                 CharInfo.HealthStats.Regeneration += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.HealthStats.B_Regeneration, bdClass.currentBuffValue) : bdClass.currentBuffValue;
@@ -1681,7 +1681,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     if (bdClass.Stat == BuffDebuffStatsType.Regen)
                     {
                         CharInfo.Health += bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.HealthStats.Base, bdClass.currentBuffValue) : bdClass.currentBuffValue;
-                        HealthStatsChangedEvent?.Invoke(bdClass.currentBuffValue, HealthChangedType.Heal, SpineAnim.transform);
+                        HealthStatsChangedEvent?.Invoke(bdClass.currentBuffValue, BattleFieldIndicatorType.Heal, SpineAnim.transform);
                         EventManager.Instance?.UpdateHealth(this);
                         //Apply Bleed
                         if (bdClass.currentBuffValue < 0)
@@ -1692,7 +1692,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     else if (bdClass.Stat == BuffDebuffStatsType.Bleed)
                     {
                         CharInfo.Health -= bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.HealthStats.Base, bdClass.currentBuffValue) : bdClass.currentBuffValue;
-                        HealthStatsChangedEvent?.Invoke(bdClass.currentBuffValue, HealthChangedType.Damage, SpineAnim.transform);
+                        HealthStatsChangedEvent?.Invoke(bdClass.currentBuffValue, BattleFieldIndicatorType.Damage, SpineAnim.transform);
                         EventManager.Instance?.UpdateHealth(this);
                         //Apply Bleed
                         ParticleManagerScript.Instance.FireParticlesInPosition(ParticleManagerScript.Instance.GetParticlePrefabByName(ParticlesType.Status_Debuff_Bleed), CharacterNameType.None, AttackParticlePhaseTypes.Cast, SpineAnim.transform.position, SideType.LeftSide, AttackInputType.Weak).transform.SetParent(SpineAnim.transform);
@@ -1701,8 +1701,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                     else if (bdClass.Stat == BuffDebuffStatsType.Drain)
                     {
                         val = bdClass.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ? StatsMultipler(CharInfo.HealthStats.Base, bdClass.currentBuffValue) : bdClass.currentBuffValue;
-                        HealthStatsChangedEvent?.Invoke(val, HealthChangedType.Heal, bdClass.EffectMaker.SpineAnim.transform);
-                        HealthStatsChangedEvent?.Invoke(val, HealthChangedType.Damage, SpineAnim.transform);
+                        HealthStatsChangedEvent?.Invoke(val, BattleFieldIndicatorType.Heal, bdClass.EffectMaker.SpineAnim.transform);
+                        HealthStatsChangedEvent?.Invoke(val, BattleFieldIndicatorType.Damage, SpineAnim.transform);
                         bdClass.EffectMaker.CharInfo.Health += val;
                         CharInfo.Health -= val;
                         EventManager.Instance?.UpdateHealth(bdClass.EffectMaker);
@@ -2127,18 +2127,18 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             return false;
         }
-        HealthChangedType healthCT = HealthChangedType.Damage;
+        BattleFieldIndicatorType healthCT = BattleFieldIndicatorType.Damage;
         bool res;
 
         if (attacker == this && HasBuffDebuff(BuffDebuffStatsType.Backfire) && damage > 0f)
         {
-            healthCT = HealthChangedType.Backfire;
+            healthCT = BattleFieldIndicatorType.Backfire;
             res = true;
         }
         else if (HasBuffDebuff(BuffDebuffStatsType.Invulnerable))
         {
             damage = 0;
-            healthCT = HealthChangedType.Invulnerable;
+            healthCT = BattleFieldIndicatorType.Invulnerable;
             GameObject go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldTotalDefence);
             go.transform.position = transform.position;
             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.Shield_Partial, AudioBus.MidPrio);
@@ -2176,7 +2176,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
 
             FireActionEvent(CharacterActionType.Defence);
-            healthCT = HealthChangedType.Defend;
+            healthCT = BattleFieldIndicatorType.Defend;
             res = false;
             if (UMS.Facing == FacingType.Left)
             {
@@ -2195,8 +2195,8 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 // AudioManager.Instance.PlayGeneric("Get_Hit_20200217");
             }
             SetAnimation(CharacterAnimationStateType.GettingHit, false, 0.1f);
-            healthCT = isCritical ? HealthChangedType.CriticalHit : HealthChangedType.Damage;
-            healthCT = damage < 0 ? HealthChangedType.Heal : healthCT;
+            healthCT = isCritical ? BattleFieldIndicatorType.CriticalHit : BattleFieldIndicatorType.Damage;
+            healthCT = damage < 0 ? BattleFieldIndicatorType.Heal : healthCT;
             res = true;
         }
 
@@ -2239,7 +2239,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
         EventManager.Instance?.UpdateHealth(this);
         EventManager.Instance?.UpdateStamina(this);
-        SetFinalDamage(attacker, (healthCT != HealthChangedType.Heal ? damage - CharInfo.HealthStats.Armour > 0 ? damage - CharInfo.HealthStats.Armour : 0 : damage) / GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos).TileADStats.y);
+        SetFinalDamage(attacker, (healthCT != BattleFieldIndicatorType.Heal ? damage - CharInfo.HealthStats.Armour > 0 ? damage - CharInfo.HealthStats.Armour : 0 : damage) / GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos).TileADStats.y);
         HealthStatsChangedEvent?.Invoke(Mathf.Abs(damage), healthCT, SpineAnim.transform);
         return res;
     }
