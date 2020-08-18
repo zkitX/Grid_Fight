@@ -554,10 +554,10 @@ MonoBehaviour:
     BaseSpeed: 1
     TileMovementTime: 1
     MovementSpeed: 1
-    CuttingPerc: 0.85
-    IntroPerc: 0.15
-    LoopPerc: 0.7
-    EndPerc: 0.15
+    CuttingPerc: 1
+    IntroPerc: 0
+    LoopPerc: 1
+    EndPerc: 0
     AttackLoopDuration: 0.5
     IdleToAttackDuration: 0.01
     LeaveSpeed: 3
@@ -598,8 +598,6 @@ MonoBehaviour:
     B_CriticalChance: {x: 3, y: 5}
     B_Chances: {x: 2, y: 2}
   ExperienceValue: 0
-  MovementTimer: {x: 5, y: 8}
-  B_MovementTimer: {x: 5, y: 8}
   RelationshipList: []
 --- !u!54 &7881344236016434490
 Rigidbody:
