@@ -212,7 +212,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7673166384534935408}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.39, z: 0}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7935392759938558074}
@@ -468,20 +468,29 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2.3705637
-        outSlope: 2.3705637
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.04293263
+        outWeight: 0
       - serializedVersion: 3
-        time: 0.8
-        value: 1
-        inSlope: 0.029485026
-        outSlope: 0.029485026
+        time: 0.31386593
+        value: 0.03338623
+        inSlope: 0.22366388
+        outSlope: 0.22366388
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.08850731
+        inWeight: 0.17819536
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.7
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
@@ -501,20 +510,29 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2.3705637
-        outSlope: 2.3705637
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.04293263
+        outWeight: 0
       - serializedVersion: 3
-        time: 0.8
-        value: 1
-        inSlope: 0.029485026
-        outSlope: 0.029485026
+        time: 0.36940792
+        value: -0.0020751953
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.08850731
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.7
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
@@ -541,8 +559,8 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.3
-        value: 0
+        time: 0.29808834
+        value: 0.0021362305
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -550,7 +568,7 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.8
+        time: 0.73566705
         value: 1
         inSlope: 0
         outSlope: 0
@@ -583,7 +601,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.3
+        time: 0.31789425
         value: 0
         inSlope: 0
         outSlope: 0
@@ -592,8 +610,8 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.8
-        value: 1
+        time: 0.7435791
+        value: 1.0020866
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -652,94 +670,94 @@ MonoBehaviour:
   AIs: []
   CharacterRespawnLength: 180
   CharacterSelection: 0
-  RapidAttack:
-    DamageMultiplier: {x: 1, y: 1}
-    CriticalChance: {x: 2, y: 2}
-    LevelMultiplier: 0
-    B_DamageMultiplier: {x: 1, y: 1}
-    B_CriticalChance: {x: 2, y: 2}
-  PowerfulAttac:
-    DamageMultiplier: {x: 3, y: 3}
-    CriticalChance: {x: 3, y: 5}
-    LevelMultiplier: 0
-    B_DamageMultiplier: {x: 3, y: 3}
-    B_CriticalChance: {x: 3, y: 5}
   HealthStats:
     Health: 50
     Base: 50
     Regeneration: 0.5
     BaseHealthRegeneration: 0.5
+    Armour: 1
     LevelMultiplier: 15
     B_Health: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseHealthRegeneration: 0
-  StaminaStats:
-    Stamina: 25
-    Base: 25
-    Regeneration: 1
-    BaseStaminaRegeneration: 1
-    LevelMultiplier: 30
-    B_Stamina: 0
-    B_Base: 0
-    B_Regeneration: 0
-    B_BaseStaminaRegeneration: 0
+    B_Armour: 1
   ShieldStats:
     Shield: 4
     Base: 4
     Regeneration: 0.15
     BaseShieldRegeneration: 0.15
+    ShieldAbsorbtion: 0.5
+    Invulnerability: 0.2
+    MinionShieldChances: 20
+    MinionPerfectShieldChances: 5
     LevelMultiplier: 30
     B_Shield: 0
     B_Base: 0
     B_Regeneration: 0
     B_BaseShieldRegeneration: 0
+    B_ShieldAbsorbtion: 0
+    B_Invulnerability: 0.2
+    B_MinionShieldChances: 20
+    B_MinionPerfectShieldChances: 5
+  EtherStats:
+    Ether: 40
+    Base: 40
+    Regeneration: 1
+    BaseEtherRegeneration: 1
+    LevelMultiplier: 30
+    B_Stamina: 0
+    B_Base: 0
+    B_Regeneration: 0
+    B_BaseStaminaRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
     TileMovementTime: 0.8
     MovementSpeed: 1.4
     CuttingPerc: 1
-    IntroPerc: 0.15
-    LoopPerc: 0.7
-    EndPerc: 0.15
-    AttackSpeed: 2.5
+    IntroPerc: 0
+    LoopPerc: 1
+    EndPerc: 0
     AttackLoopDuration: 0.5
     IdleToAttackDuration: 0.01
-    BulletSpeed: 1
     LeaveSpeed: 3
     BaseSpeed_LevelMultiplier: 0
     MovementSpeed_LevelMultiplier: 0
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
+    WeakBulletSpeed: 5
+    StrongBulletSpeed: 5
     B_BaseSpeed: 1
     B_MovementSpeed: 1
     B_AttackSpeed: 1
-    B_BulletSpeed: 5
     B_LeaveSpeed: 3
     B_IdleToAtkDuration: 0.2
     B_AtkToIdleDuration: 0.2
+    B_WeakBulletSpeed: 5
+    B_StrongBulletSpeed: 5
   DamageStats:
     BaseDamage: 5
     B_BaseDamage: 10
     ElementalsResistence: []
     CurrentElemental: 0
     LevelMultiplier: 5
-  DefenceStats:
-    BaseDefence: 2
-    Invulnerability: 0.2
-    MinionDefenceChances: 20
-    MinionPerfectDefenceChances: 5
-    B_BaseDefence: 10
-    B_Invulnerability: 0.2
-    B_MinionDefenceChances: 20
-    B_MinionPerfectDefenceChances: 5
+  WeakAttack:
+    DamageMultiplier: {x: 1, y: 1}
+    CriticalChance: {x: 2, y: 2}
+    Chances: {x: 1, y: 1}
     LevelMultiplier: 0
-  Special1LoadingDuration: 0
-  Special2LoadingDuration: 0
-  Special3LoadingDuration: 0
+    B_DamageMultiplier: {x: 1, y: 1}
+    B_CriticalChance: {x: 2, y: 2}
+    B_Chances: {x: 2, y: 2}
+  StrongAttack:
+    DamageMultiplier: {x: 3, y: 3}
+    CriticalChance: {x: 3, y: 5}
+    Chances: {x: 1, y: 1}
+    LevelMultiplier: 0
+    B_DamageMultiplier: {x: 3, y: 3}
+    B_CriticalChance: {x: 3, y: 5}
+    B_Chances: {x: 2, y: 2}
   ExperienceValue: 0
-  MovementTimer: {x: 5, y: 8}
-  B_MovementTimer: {x: 5, y: 8}
   RelationshipList: []
 --- !u!54 &8265113493020195462
 Rigidbody:
