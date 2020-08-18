@@ -8,6 +8,7 @@ using MyBox;
 [CreateAssetMenu(fileName = "New_Stage_Profile", menuName = "ScriptableObjects/Stage/Stage Profile")]
 public class StageProfile : ScriptableObject
 {
+    [Header("General")]
     [SerializeField] public string Name;
     [SerializeField] public string ID = "S0_XMPL";
     [SerializeField] public StageType type;
@@ -29,6 +30,10 @@ public class StageProfile : ScriptableObject
 
     [SerializeField] public GameObject AudioManager;
     [SerializeField] public StageAudioProfileSO StageAudioProfile;
+
+    [Space(5)]
+    [Header("Analytics")]
+    [SerializeField] public bool trackPhases = false;
 
 }
 

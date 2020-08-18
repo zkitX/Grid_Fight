@@ -29445,6 +29445,8 @@ GameObject:
   - component: {fileID: 6365134112130289128}
   - component: {fileID: 1016249176381841986}
   - component: {fileID: 3052646481282622819}
+  - component: {fileID: 9103652608197075794}
+  - component: {fileID: 347281192551320028}
   m_Layer: 0
   m_Name: EventManager_Chapter01_TohoraSea
   m_TagString: Untagged
@@ -29506,10 +29508,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 1172.9011, y: -2070.4224}
+  scrollPos: {x: 1178.7664, y: -1914.9976}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
-  blockViewHeight: 516
+  blockViewHeight: 487
   zoom: 0.682001
   scrollViewRect:
     serializedVersion: 2
@@ -29518,8 +29520,9 @@ MonoBehaviour:
     width: 0
     height: 0
   selectedBlocks:
-  - {fileID: 3175339975378253969}
-  selectedCommands: []
+  - {fileID: 2391511206036954281}
+  selectedCommands:
+  - {fileID: 347281192551320028}
   variables:
   - {fileID: 5203328574989040740}
   - {fileID: 2431638329300938721}
@@ -29605,6 +29608,7 @@ MonoBehaviour:
   - {fileID: 4065603068945464633}
   - {fileID: 8047518767591437578}
   - {fileID: 1458234920693721657}
+  - {fileID: 9103652608197075794}
   - {fileID: 8782196486323603548}
 --- !u!114 &4713769038583790866
 MonoBehaviour:
@@ -38898,6 +38902,7 @@ MonoBehaviour:
   description: 
   eventHandler: {fileID: 0}
   commandList:
+  - {fileID: 347281192551320028}
   - {fileID: 1125241093396409050}
   - {fileID: 1340404753432423540}
   - {fileID: 2662522860963709175}
@@ -57992,6 +57997,35 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
+--- !u!114 &9103652608197075794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7201212296390213037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1497752a524dc1479f21c1c5e08c460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1965
+  indentLevel: 0
+--- !u!114 &347281192551320028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7201212296390213037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd5fd926db703484d88b16663e7f261d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 1966
+  indentLevel: 0
+  CustomEventName: Tikaka_FaceTheTruth
 --- !u!1 &7282234787482492273
 GameObject:
   m_ObjectHideFlags: 0
@@ -62603,11 +62637,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3881950440420302024}
     m_Modifications:
-    - target: {fileID: 6810241948238253233, guid: 673b9076e71942745b5de68d4e32f43b,
-        type: 3}
-      propertyPath: m_Name
-      value: WinLose_UI
-      objectReference: {fileID: 0}
     - target: {fileID: 5647772859653846600, guid: 673b9076e71942745b5de68d4e32f43b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -62712,6 +62741,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810241948238253233, guid: 673b9076e71942745b5de68d4e32f43b,
+        type: 3}
+      propertyPath: m_Name
+      value: WinLose_UI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 673b9076e71942745b5de68d4e32f43b, type: 3}
@@ -62728,11 +62762,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7201212296390213015}
     m_Modifications:
-    - target: {fileID: 6810241948238253233, guid: 673b9076e71942745b5de68d4e32f43b,
-        type: 3}
-      propertyPath: m_Name
-      value: WinLose_UI
-      objectReference: {fileID: 0}
     - target: {fileID: 5647772859653846600, guid: 673b9076e71942745b5de68d4e32f43b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -62837,6 +62866,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810241948238253233, guid: 673b9076e71942745b5de68d4e32f43b,
+        type: 3}
+      propertyPath: m_Name
+      value: WinLose_UI
       objectReference: {fileID: 0}
     - target: {fileID: 8988776315421615999, guid: 673b9076e71942745b5de68d4e32f43b,
         type: 3}
@@ -62858,16 +62892,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7201212296390213015}
     m_Modifications:
-    - target: {fileID: 9099798966072092009, guid: fe9ed664a6623b04587486a1986c38ff,
-        type: 3}
-      propertyPath: m_Name
-      value: Canvas-Dialogue
-      objectReference: {fileID: 0}
-    - target: {fileID: 9099798966072092009, guid: fe9ed664a6623b04587486a1986c38ff,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4807440897932059006, guid: fe9ed664a6623b04587486a1986c38ff,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -62971,6 +62995,16 @@ PrefabInstance:
     - target: {fileID: 4807440897932059006, guid: fe9ed664a6623b04587486a1986c38ff,
         type: 3}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099798966072092009, guid: fe9ed664a6623b04587486a1986c38ff,
+        type: 3}
+      propertyPath: m_Name
+      value: Canvas-Dialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099798966072092009, guid: fe9ed664a6623b04587486a1986c38ff,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6704853012077773911, guid: fe9ed664a6623b04587486a1986c38ff,

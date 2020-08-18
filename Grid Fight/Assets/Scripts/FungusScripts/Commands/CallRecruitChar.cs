@@ -10,14 +10,17 @@ using UnityEngine;
 [AddComponentMenu("")]
 public class CallRecruitChar : Command
 {
-
+    [Header("General")]
     public CharacterNameType CharacterId;
+    [Header("Analytics")]
+    public bool track = true;
+    public bool onlyTrackFirstRecruitment = false;
 
     #region Public members
 
     public override void OnEnter()
     {
-        BattleManagerScript.Instance.RecruitCharFromWave(CharacterId);
+        BattleManagerScript.Instance.RecruitCharFromWave(CharacterId, track, onlyTrackFirstRecruitment);
         Continue();
     }
 

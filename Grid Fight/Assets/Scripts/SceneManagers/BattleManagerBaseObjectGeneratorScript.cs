@@ -38,7 +38,20 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
     public IEnumerator ConfigureBattleScene(string stageName)
     {
         SelectStage(stageName);
+
         yield return SetupScene();
+    }
+
+    void StageStartAnalytics()
+    {
+        AnalyticsManager.Instance?.Track_LevelPhase(AnalyticsManager.PhaseEvent.Started);
+
+        foreach (CharacterBaseInfoClass character in BattleInfoManagerScript.Instance.PlayerBattleInfo)
+        {
+            if (character == null || character.CharacterName == CharacterNameType.None) continue;
+
+            AnalyticsManager.Instance?.Track_CharacterEvent(character.CharacterName, AnalyticsManager.CharEvent.Selected);
+        }
     }
 
     void SelectStage(string stageName)
@@ -199,6 +212,8 @@ public class BattleManagerBaseObjectGeneratorScript : MonoBehaviour
 
         UserInputManager.Instance.StartUserInputManager();
         BattleManagerScript.Instance.SetupBattleState();
+
+        StageStartAnalytics();
     }
 
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using MyBox;
+using UnityEngine.Analytics;
 
 public class WaveManagerScript : MonoBehaviour
 {
@@ -114,7 +115,7 @@ public class WaveManagerScript : MonoBehaviour
     {
         WavePhaseClass wpc = WavePhases.Where(r => r.name == waveName).First();
         CurrentWaveChar = wpc.ListOfEnemy.Where(a => a.TypeOfCharacter.CharacterName == characterID).First();
-        BaseCharacter newChar = GetWaveCharacter(CurrentWaveChar.TypeOfCharacter);
+        BaseCharacter newChar = GetWaveCharacter(CurrentWaveChar.TypeOfCharacter, false);
         if (removeFromWave)
         {
             CurrentWaveChar.NumberOfCharacter--;
@@ -123,7 +124,7 @@ public class WaveManagerScript : MonoBehaviour
         yield return SpawChar(newChar, isRandom, pos, true);
     }
 
-    public BaseCharacter GetWaveCharacter(WaveCharacterInfoClass character)
+    public BaseCharacter GetWaveCharacter(WaveCharacterInfoClass character, bool trackDeath)
     {
         BaseCharacter res;
         res = WaveCharcters.Where(r => r.CharInfo.CharacterID == character.CharacterName && !r.IsOnField && ((r.CharInfo.BaseCharacterType == BaseCharType.MinionType_Script && !r.gameObject.activeInHierarchy)
@@ -141,7 +142,13 @@ public class WaveManagerScript : MonoBehaviour
         {
             res.CurrentCharIsDeadEvent += Res_CurrentCharIsDeadEvent;
         }
-        
+
+        res.CurrentCharIsDeadEvent -= WaveCharDeadAnalytics;
+        if (trackDeath) 
+        {
+            res.CurrentCharIsDeadEvent += WaveCharDeadAnalytics;
+        }
+
         res.CharInfo.HealthStats.Base = Random.Range(character.Health.x, character.Health.y) * UniversalGameBalancer.Instance.difficulty.enemyHealthScaler;
         res.CharInfo.HealthStats.Regeneration = Random.Range(character.HealthRegeneration.x, character.HealthRegeneration.y);
         res.CharInfo.EtherStats.Base = Random.Range(character.Ether.x, character.Ether.y);
@@ -170,7 +177,14 @@ public class WaveManagerScript : MonoBehaviour
             res.CharInfo.AddedAttackTypeInfo.Clear();
         }
         res.CharInfo.SetupChar();
+
+
         return res;
+    }
+
+    public void WaveCharDeadAnalytics(CharacterNameType charName, List<ControllerType> playerController, SideType side)
+    {
+        AnalyticsManager.Instance?.Track_CharacterEvent(charName, AnalyticsManager.CharEvent.Defeated);
     }
 
     private void Res_CurrentCharIsDeadEvent(CharacterNameType cName, List<ControllerType> playerController, SideType side)
@@ -226,7 +240,7 @@ public class WaveManagerScript : MonoBehaviour
         {
             for (int i = 0; i < startingCharacters.Pos.Count; i++)
             {
-                newChar = GetWaveCharacter(startingCharacters.TypeOfCharacter);
+                newChar = GetWaveCharacter(startingCharacters.TypeOfCharacter, startingCharacters.TypeOfCharacter.trackCharsDefeated);
                 yield return SpawChar(newChar, startingCharacters.InRandomPos, startingCharacters.Pos[i], false);
             }
         }
@@ -244,6 +258,8 @@ public class WaveManagerScript : MonoBehaviour
         leadCharDie = false;
         float timer = 0;
         currentWavePhase = wavePhase;
+
+        if (wavePhase.trackWavePhases) AnalyticsManager.Instance?.Track_WavePhase(wavePhase.name, AnalyticsManager.PhaseEvent.Started);
 
         //Wave scaling
         currentWavePhase.MaxEnemyOnScreen = Mathf.Clamp(Mathf.RoundToInt((float)currentWavePhase.MaxEnemyOnScreen * UniversalGameBalancer.Instance.difficulty.enemySpawnScaler), 0, currentWavePhase.AbsoluteMaxEnemyOnScreen);
@@ -276,7 +292,7 @@ public class WaveManagerScript : MonoBehaviour
 
                 if(waveCharacterInfoClass != null)
                 {
-                    newChar = GetWaveCharacter(waveCharacterInfoClass);
+                    newChar = GetWaveCharacter(waveCharacterInfoClass, waveCharacterInfoClass.trackCharsDefeated);
                     yield return SpawChar(newChar, CurrentWaveChar.IsRandomSpowiningTile,
                         CurrentWaveChar.IsRandomSpowiningTile ? new Vector2Int() : CurrentWaveChar.SpowningTile[Random.Range(0, CurrentWaveChar.SpowningTile.Count)], true);
                     timer = 0;
@@ -305,6 +321,7 @@ public class WaveManagerScript : MonoBehaviour
                                     }
                                 }
                             }
+                            if (wavePhase.trackWavePhases) AnalyticsManager.Instance?.Track_WavePhase(wavePhase.name, AnalyticsManager.PhaseEvent.Completed);
                             yield break;
                         }
                         yield return null;
@@ -314,6 +331,7 @@ public class WaveManagerScript : MonoBehaviour
                 yield return new WaitForSeconds(0.5f);
             }
         }
+        if (wavePhase.trackWavePhases) AnalyticsManager.Instance?.Track_WavePhase(wavePhase.name, AnalyticsManager.PhaseEvent.Completed);
     }
 
     public bool WaveStillHasEnemies()
@@ -485,6 +503,7 @@ public class WaveManagerScript : MonoBehaviour
 [System.Serializable]
 public class WavePhaseClass
 {
+    [Header("General")]
     public string name;
     public bool IsRandom = false;
     public int MaxEnemyOnScreen;
@@ -492,11 +511,15 @@ public class WavePhaseClass
     public float DelayBetweenChars;
 
     public List<WaveCharClass> ListOfEnemy = new List<WaveCharClass>();
+
+    [Header("Analytics")]
+    public bool trackWavePhases = false;
 }
 
 [System.Serializable]
 public class WaveCharacterInfoClass
 {
+    [Header("General")]
     public CharacterNameType CharacterName;
     public bool KillWaveIfCharDie = false;
     public Vector2 Health;
@@ -517,6 +540,9 @@ public class WaveCharacterInfoClass
     public List<ScriptableObjectAI> AIs = new List<ScriptableObjectAI>();
     public bool AddAttacks = false;
     public List<ScriptableObjectAttackBase> AttacksToAdd = new List<ScriptableObjectAttackBase>();
+
+    [Header("Analytics")]
+    public bool trackCharsDefeated = false;
 }
 
 

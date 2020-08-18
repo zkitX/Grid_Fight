@@ -20,6 +20,9 @@ public class BattleManagerScript : MonoBehaviour
     public delegate void MatchLost();
     public event MatchLost MatchLostEvent;
 
+    public delegate void MatchWon();
+    public event MatchWon MatchWonEvent;
+
 
     public float MovementMultiplier = 1;
     private float prevValue = 1;
@@ -199,11 +202,33 @@ public class BattleManagerScript : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        MatchLostEvent += MatchLostAnalytics;
+        MatchWonEvent += MatchWonAnalytics;
+    }
+
+    private void OnDestroy()
+    {
+        MatchLostEvent -= MatchLostAnalytics;
+        MatchWonEvent -= MatchWonAnalytics;
     }
     #endregion
 
     #region Events
 
+    public void WonMatch()
+    {
+        MatchWonEvent?.Invoke();
+    }
+
+    void MatchLostAnalytics()
+    {
+        AnalyticsManager.Instance?.Track_LevelPhase(AnalyticsManager.PhaseEvent.Failed);
+    }
+
+    void MatchWonAnalytics()
+    {
+        AnalyticsManager.Instance?.Track_LevelPhase(AnalyticsManager.PhaseEvent.Completed);
+    }
 
     #endregion
 
@@ -1593,7 +1618,7 @@ public class BattleManagerScript : MonoBehaviour
 
     #endregion
 
-    public void RecruitCharFromWave(CharacterNameType characterID)
+    public void RecruitCharFromWave(CharacterNameType characterID, bool trackAnalytics = false, bool trackSecondaryRecruitments = false)
     {
         /*GameObject rC = WaveManagerScript.Instance.WaveCharcters.Where(r => r.CharInfo.CharacterID == characterID).FirstOrDefault().gameObject;
         WaveManagerScript.Instance.WaveCharcters.Remove(rC.GetComponent<BaseCharacter>());
@@ -1641,9 +1666,17 @@ public class BattleManagerScript : MonoBehaviour
             NewIManager.Instance.SetUICharacterToButton((CharacterType_Script)playableCharOnScene, playableCharOnScene.CharInfo.CharacterSelection);
         }*/
         CharacterLoadInformation charLoadInfo = SceneLoadManager.Instance.loadedCharacters.Where(r => r.characterID == characterID).First();
+        if (trackAnalytics)
+        {
+            if(!(trackSecondaryRecruitments && charLoadInfo.encounterState == CharacterLoadInformation.EncounterState.Recruited))
+            {
+                AnalyticsManager.Instance.Track_CharacterEvent(characterID, AnalyticsManager.CharEvent.Recruited);
+            }
+        }
         charLoadInfo.encounterState = CharacterLoadInformation.EncounterState.Recruited;
 
-        if(SceneLoadManager.Instance.squad.Values.Where(r => r == null || r.characterID == CharacterNameType.None).ToArray().Length >= 4)
+
+        if (SceneLoadManager.Instance.squad.Values.Where(r => r == null || r.characterID == CharacterNameType.None).ToArray().Length >= 4)
         {
             return;
         }
