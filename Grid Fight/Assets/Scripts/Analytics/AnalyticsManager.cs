@@ -7,6 +7,8 @@ public class AnalyticsManager : MonoBehaviour
 {
     public static AnalyticsManager Instance = null;
 
+    public bool TrackAnalytics = true;
+
     public enum PhaseEvent 
     { 
         Started = 0,
@@ -54,11 +56,15 @@ public class AnalyticsManager : MonoBehaviour
 
     public void Track_CharacterEvent(CharacterNameType charName, CharEvent charEvent)
     {
+        if (!TrackAnalytics) return;
+
         AnalyticsEvent.Custom("Character_" + charEvent.ToString(), new Dictionary<string, object> { { "CharacterID", charName } });
     }
 
     public void Track_LevelPhase(PhaseEvent LevelPhase)
     {
+        if (!TrackAnalytics) return;
+
         if (SceneLoadManager.Instance.stagePrimedToLoad == null || !SceneLoadManager.Instance.stagePrimedToLoad.trackPhases) return;
 
         AnalyticsEvent.Custom("Level_" + LevelPhase.ToString(), SquadTimeStageInfo());
@@ -66,6 +72,8 @@ public class AnalyticsManager : MonoBehaviour
 
     public void Track_WavePhase(string WaveName, PhaseEvent WavePhase)
     {
+        if (!TrackAnalytics) return;
+
         AnalyticsEvent.Custom("Wave_" + WavePhase.ToString(), 
             new Dictionary<string, object>
             {
@@ -81,6 +89,8 @@ public class AnalyticsManager : MonoBehaviour
 
     public void Track_FungusEventReached(string EventName)
     {
+        if (!TrackAnalytics) return;
+
         AnalyticsEvent.Custom("FungusEvent_Reached",
             new Dictionary<string, object>
             {

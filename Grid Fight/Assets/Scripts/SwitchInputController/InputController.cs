@@ -221,7 +221,6 @@ public class InputController : MonoBehaviour
 
     }
 
-
     public void SetChars()
     {
         bool keyboardAssigned = false;
@@ -455,6 +454,7 @@ public class InputController : MonoBehaviour
         {
             LastControllerType = data.GetCurrentInputSources().First().controllerType;
             OnLastControllerTypeChange?.Invoke(LastControllerType);
+            Grid_UINavigator.Instance?.RefreshButtonsCanReceiveMouseInput();
         }
 
     }

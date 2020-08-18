@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using TMPro;
 using MyBox;
 
@@ -28,6 +29,7 @@ public class Grid_UIButton : MonoBehaviour
 
     [HideInInspector] public TextMeshProUGUI buttonText;
     [HideInInspector] public Image buttonImage;
+    protected Collider2D col = null;
 
     public UI_ActionsClass[] PressActions;
     public UI_ActionsClass[] SelectActions;
@@ -64,7 +66,9 @@ public class Grid_UIButton : MonoBehaviour
     private void Awake()
     {
         ID = Grid_UINavigator.Instance.SetupNewButtonInfo(this);
-        GetComponent<BoxCollider2D>().size = GetComponent<Image>().rectTransform.rect.size;
+        col = GetComponent<BoxCollider2D>();
+        ((BoxCollider2D)col).size = GetComponent<Image>().rectTransform.rect.size;
+        CheckForMouseInput();
     }
 
     private void OnDestroy()
@@ -202,6 +206,52 @@ public class Grid_UIButton : MonoBehaviour
 
     #endregion
 
+
+
+
+    bool cursorOnButton = false;
+    bool canNavWithMouse = false;
+    public bool CheckForMouseInput()
+    {
+        canNavWithMouse = Grid_UINavigator.Instance.CanNavigate(MenuNavigationType.MouseInput) &&
+            (InputController.Instance.LastControllerType == Rewired.ControllerType.Keyboard || 
+            InputController.Instance.LastControllerType == Rewired.ControllerType.Mouse) &&
+            Active;
+
+        if (MouseMoveChecker != null || !canNavWithMouse) return false;
+        MouseMoveChecker = CheckForMouseMove();
+        StartCoroutine(MouseMoveChecker);
+        return true;
+    }
+
+    IEnumerator MouseMoveChecker = null;
+    IEnumerator CheckForMouseMove()
+    {
+        while (canNavWithMouse)
+        {
+            if(cursorOnButton != col.OverlapPoint(Input.mousePosition))
+            {
+                cursorOnButton = !cursorOnButton;
+                if (cursorOnButton)
+                {
+                    Grid_UINavigator.Instance.SelectButtonByID(ID);
+                }
+                else
+                {
+                    Grid_UINavigator.Instance.DeselectButton(this);
+                }
+            }
+
+            yield return null;
+        }
+
+        EndCheckForMouseInput();
+    }
+
+    void EndCheckForMouseInput()
+    {
+        MouseMoveChecker = null;
+    }
 
 
     private void OnEnable()

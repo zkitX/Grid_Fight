@@ -193,6 +193,11 @@ public class Grid_UINavigator : MonoBehaviour
             InputController.Instance.LeftJoystickUsedEvent += ButtonChangeInput;
         }
 
+        if (CanNavigate(MenuNavigationType.MouseInput))
+        {
+            RefreshButtonsCanReceiveMouseInput();
+        }
+
         if (CanNavigate(MenuNavigationType.Cursor) && !cursor.state)
         {
             cursor.EnableCursor(true, buttonToFocusOn == null ? selectedButton : buttonToFocusOn);
@@ -203,6 +208,14 @@ public class Grid_UINavigator : MonoBehaviour
         }
 
         InputController.Instance.ButtonAUpEvent += ButtonPressInput;
+    }
+
+    public void RefreshButtonsCanReceiveMouseInput()
+    {
+        foreach (Grid_UIButton btn in buttons)
+        {
+            btn.CheckForMouseInput();
+        }
     }
 
     public IEnumerator SelectFirstButton()
@@ -467,9 +480,6 @@ public class Grid_UINavigator : MonoBehaviour
             }
         }
     }
-
-
-
 
     private void OnDestroy()
     {

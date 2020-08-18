@@ -220,7 +220,9 @@ public class Grid_UIActions
         {
             setFocusedPanel.lastActivateCallPanel = parentButton == null ? null : parentButton.parentPanel;
             Grid_UINavigator.Instance.RefreshCursorCheck();
+            Grid_UINavigator.Instance.RefreshButtonsCanReceiveMouseInput();
         }
+
         if (setPanelActiveStateAswell) setFocusedPanel.gameObject.SetActive(setFocusedPanel.focusState == UI_FocusTypes.Focused ? true : false);
         yield return null;
     }
