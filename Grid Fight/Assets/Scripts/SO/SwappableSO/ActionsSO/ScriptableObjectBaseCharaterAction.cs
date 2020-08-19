@@ -1,0 +1,16 @@
+﻿using MyBox;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+
+public class ScriptableObjectBaseCharaterAction : ScriptableObjectSwappableBase
+{
+    public virtual IEnumerator MoveByTileSpace(Vector3 nextPos, AnimationCurve curve, float animPerc)
+    {
+        yield return null;
+    }
+}
+
+

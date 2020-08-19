@@ -17,8 +17,6 @@ public class Stage01_Boss_Script : MinionType_Script
 
     public Stage01_Boss_MaskType CurrentPhase;
     public List<BattleTileScript> AttackedTilesList = new List<BattleTileScript>();
-    public GameObject MovementPsIn;
-    public GameObject MovementPsOut;
     public GameObject FaceChangingWarDrums;
     public GameObject FaceChangingLifeDrums;
     public GameObject FaceChangingMoonDrums;

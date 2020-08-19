@@ -396,10 +396,17 @@ public class GridManagerScript : MonoBehaviour
     {
         return Vector3.Distance(BattleTiles[0].transform.position, BattleTiles[1].transform.position);
     }
-
+    BattleTileScript Temp_bts;
     public void SetBattleTileState(Vector2Int pos, BattleTileStateType battleTileState)
     {
-        BattleTiles.Where(r => r.Pos == pos).FirstOrDefault().BattleTileState = battleTileState;
+        Temp_bts = BattleTiles.Where(r => r.Pos == pos).FirstOrDefault();
+        if(Temp_bts == null)
+        {
+            return;
+        }
+
+        Temp_bts.BattleTileState = battleTileState;
+        Temp_bts.isTaken = Temp_bts.BattleTileState != BattleTileStateType.Empty;
     }
     //Get free tile for a one tile character
     public BattleTileScript GetFreeBattleTile(WalkingSideType walkingSide)

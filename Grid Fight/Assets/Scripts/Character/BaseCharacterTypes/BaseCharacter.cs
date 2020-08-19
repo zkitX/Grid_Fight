@@ -303,12 +303,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
     List<BattleTileScript> prevBattleTile = new List<BattleTileScript>();
     CharacterAnimationStateType animState;
     Vector2Int dir;
-    AnimationCurve curve;
+    public AnimationCurve curve;
     protected BaseCharacter target = null;
     public float AICoolDownOffset = 0;
     protected ScriptableObjectAI prev;
     List<Vector2Int> tempList_Vector2int = new List<Vector2Int>();
-    Transform spineT;
+    [HideInInspector]public Transform spineT;
 
     #endregion
 
@@ -999,7 +999,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                             FireActionEvent(CharacterActionType.MoveRight);
                             break;
                     }
-                    yield return MoveByTileSpace(tempBattleTileScript.transform.position, curve, CharInfo.SpeedStats.CuttingPerc);
+                    yield return MoveByTileSpace(tempBattleTileScript.transform.position, curve, CharInfo.SpeedStats.CuttingPerc);//currentmovementSO.MoveByTileSpace
                 }
                 else
                 {
@@ -1015,6 +1015,12 @@ public class BaseCharacter : MonoBehaviour, IDisposable
             }
         }
     }
+
+    public void Invoke_TileMovementCompleteEvent()
+    {
+        TileMovementCompleteEvent?.Invoke(this);
+    }
+
 
     public virtual void MoveCharOnDirection(InputDirectionType nextDir)
     {
