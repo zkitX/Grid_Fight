@@ -10,33 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage03_Character_Valley_EnemyAttack1_Elu
+  m_Name: ForestOfKin_Character_Valley_Weak_Elu
   m_EditorClassIdentifier: 
   isSequencedAttack: 0
-  Chances: 100
-  CurrentAttackType: 1
+  CurrentAttackType: 0
   AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 0
-  AttackAnim: 1
+  AttackAnim: 0
   StaminaCost: 10
   ExperiencePoints: 10
   _CoolDown: {x: 3, y: 5}
-  PrefixAnim: 1
+  PrefixAnim: 0
   Fov: 0
   Particles:
     Left:
-      Cast: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Cast: {fileID: 1774639327898716138, guid: 8cb6de0d0fe2b3748b8748734a1de030,
         type: 3}
-      Bullet: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Bullet: {fileID: 7022504728547412385, guid: 6d08af4140c2eac498636d842c2c3645,
         type: 3}
-      Hit: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73, type: 3}
+      Hit: {fileID: 4435835079389877854, guid: 0525aa8e0407a7040833c5ffc7fae8f6, type: 3}
     Right:
-      Cast: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Cast: {fileID: 1774639327898716138, guid: 551a66815e7b3b4419481d7dd280842b,
         type: 3}
-      Bullet: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Bullet: {fileID: 7022504728547412385, guid: 664d0ce147c0e294fb311dd03f90f27c,
         type: 3}
-      Hit: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73, type: 3}
+      Hit: {fileID: 4435835079389877854, guid: 8db9554ba490cab43af5c4d7d342c9c0, type: 3}
     CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
@@ -102,37 +101,11 @@ MonoBehaviour:
       EffectChances: 100
     CharacterClass: 0
   TilesAtk:
-    AtkType: 1
-    BulletTrajectories:
-    - Delay: 2
-      BulletTravelDurationPerTile: 0
-      ExplosionChances: 100
-      Trajectory_Y:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      Trajectory_Z:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      Show: 1
-      BulletEffectTiles:
-      - Pos: {x: 0, y: 0}
-        HasEffect: 0
-        showImpact: 1
-        Effects: []
-        EffectChances: 100
-        IsEffectOnTile: 0
-        TileParticlesID: 0
-        DurationOnTile: 0
-        EffectsOnTile: []
-    StatToCheck: 1
-    ValueChecker: 2
-    Chances: 100
+    AtkType: 0
+    BulletTrajectories: []
+    StatToCheck: 0
+    ValueChecker: 0
+    Chances: 0
     PercToCheck: 0
     InBetween: {x: 0, y: 0}
     Show: 0
