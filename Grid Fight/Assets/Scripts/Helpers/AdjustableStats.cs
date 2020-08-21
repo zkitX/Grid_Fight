@@ -10,6 +10,14 @@ public class AdjustableStat
 {
     public float statValue;
     protected List<StatAdjuster> statAjusters = new List<StatAdjuster>();
+    public int statAdjusterCount
+    {
+        get
+        {
+            RefreshAdjustments();
+            return statAjusters.Count;
+        }
+    }
     public float Val
     {
         get
@@ -21,6 +29,12 @@ public class AdjustableStat
             statValue = value;
         }
     }
+
+    public void RefreshAdjustments()
+    {
+        StatAdjusting.AdjustStatMultiple(statAjusters, statValue, out statAjusters);
+    }
+
     public string AddAdjustment(StatAdjuster adjustment)
     {
         statAjusters.Add(adjustment);
@@ -78,19 +92,21 @@ public class StatAdjuster
     public bool ApplyIndefinitely = false;
     [ConditionalField("ApplyIndefinitely", true)][SerializeField] protected float duration = 0f;
     protected float startTime = 0f;
+    protected bool timeUnscaled = false;
 
-    public StatAdjuster(Operation op, float val, float dur, bool applyForever = false)
+    public StatAdjuster(Operation op, float val, float dur, bool applyForever = false, bool useUnscaledTime = false)
     {
+        timeUnscaled = useUnscaledTime;
         operation = op;
         value = val;
         duration = dur;
-        startTime = Time.time;
+        startTime = timeUnscaled ? Time.unscaledTime : Time.time;
         ApplyIndefinitely = applyForever;
     }
 
     public bool ApplyOperation(float inVal, out float outVal)
     {
-        if ((Time.time - startTime > duration && !ApplyIndefinitely) || operation == Operation.None)
+        if (((timeUnscaled ? Time.unscaledTime : Time.time) - startTime > duration && !ApplyIndefinitely) || operation == Operation.None)
         {
             outVal = inVal;
             return false;

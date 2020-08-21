@@ -262,6 +262,11 @@ public class BulletScript : MonoBehaviour
         //If the bullet collide with a character 
         if (other.tag.Contains("Side") && other.tag != Side.ToString() && CharOwner.CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && isMoving)
         {
+            if (SOAttack.effectTimeOnImpact)
+            {
+                BattleManagerScript.Instance.AdjustSetTimeScale(SOAttack.timeEffectMultiplier, SOAttack.durationOfTimeEffect);
+            }
+
             isMoving = false;
             BaseCharacter target = other.GetComponentInParent<BaseCharacter>();
             MakeDamage(target, CharOwner.NextAttackDamage);

@@ -198,6 +198,38 @@ public class BattleManagerScript : MonoBehaviour
         //CurrentBattleState = BattleState.FungusPuppets;
     }
 
+    #region Set Time Management
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.KeypadPlus)) AdjustSetTimeScale(2f, 3f);
+        if (Input.GetKeyDown(KeyCode.KeypadMinus)) AdjustSetTimeScale(0.5f, 3f);
+    }
+
+    protected AdjustableStat setTimeScale = new AdjustableStat(1f);
+
+    public void AdjustSetTimeScale(float timeAdjustment, float realTimeDuration)
+    {
+        setTimeScale.AddAdjustment(new StatAdjuster(Operation.Multiplication, timeAdjustment, realTimeDuration, useUnscaledTime: true));
+
+        if (setTimeScale.statAdjusterCount > 1) return;
+
+        StartCoroutine(RefreshAdjustedTime());
+    }
+
+    IEnumerator RefreshAdjustedTime()
+    {
+        while (true)
+        {
+            Time.timeScale = setTimeScale.Val;
+            if (setTimeScale.statAdjusterCount == 0) break;
+            yield return null;
+        }
+    }
+
+    #endregion
+
+
     #region Unity Life Cycle
     private void Awake()
     {

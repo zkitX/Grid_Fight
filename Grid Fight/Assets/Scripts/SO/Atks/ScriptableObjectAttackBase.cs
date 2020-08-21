@@ -21,12 +21,12 @@ public class ScriptableObjectAttackBase : ScriptableObject
         }
     }
 
+    [Header("General")]
     public AttackType CurrentAttackType;
     public float AttackRatioMultiplier = 1;
     [SerializeField]
     private Vector2 _DamageMultiplier = new Vector2(1, 1);
     public AttackInputType AttackInput;
-    public AttackAnimType AttackAnim;
     public float StaminaCost = 10;
     [HideInInspector] public float ExperiencePoints = 10;
     public Vector2 _CoolDown = new Vector2(3,5);
@@ -41,7 +41,14 @@ public class ScriptableObjectAttackBase : ScriptableObject
 
     [HideInInspector] public AttackAnimPrefixType PrefixAnim;
     public FieldOfViewType Fov;
+
+    [Header("Style")]
+    public AttackAnimType AttackAnim;
     public AttackParticlesClass Particles;
+    public bool effectTimeOnImpact = false;
+    [ConditionalField("effectTimeOnImpact")] public float timeEffectMultiplier = 1f;
+    [ConditionalField("effectTimeOnImpact")] public float durationOfTimeEffect = 1f;
+
     [System.Serializable]
     public class AttackParticlesClass
     {
@@ -59,7 +66,7 @@ public class ScriptableObjectAttackBase : ScriptableObject
         public GameObject CastActivationPS;
     }
 
-
+    [Header("Trajectories")]
     public int TrajectoriesNumber;
     [HideInInspector] public ParticlesAttackTypeClass ParticlesAtk;
     [HideInInspector] public TilesAttackTypeClass TilesAtk;
