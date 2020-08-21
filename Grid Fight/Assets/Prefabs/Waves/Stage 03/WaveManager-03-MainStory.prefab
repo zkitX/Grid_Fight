@@ -1,0 +1,253 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3911330453652705751
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3911330453652705705}
+  - component: {fileID: 3911330453652705704}
+  m_Layer: 0
+  m_Name: WaveManager-03-MainStory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3911330453652705705
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3911330453652705751}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.2474627, y: 0.9679096, z: -3.4060545}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3911330453652705704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3911330453652705751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09b0c490261b08d4dbe285554c10a1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  battleTime:
+    hours: 0
+    minutes: 15
+    seconds: 0
+    blockToTriggerOnComplete: 
+    counting: 0
+    isStopped: 0
+  WavePhases:
+  - name: WaveElu
+    IsRandom: 1
+    MaxEnemyOnScreen: 3
+    AbsoluteMaxEnemyOnScreen: 3
+    DelayBetweenChars: 0.5
+    ListOfEnemy:
+    - name: Elu
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1064
+        KillWaveIfCharDie: 0
+        Health: {x: 80, y: 90}
+        HealthRegeneration: {x: 1.1, y: 1.2}
+        BaseDamage: {x: 6, y: 7}
+        WeakAttackMultiplier: {x: 1, y: 1}
+        StrongAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 30, y: 30}
+        EtherRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 2, y: 3}
+        Armour: {x: 1, y: 3}
+        MinionShieldChances: {x: 20, y: 25}
+        MinionPerfectShieldChances: {x: 5, y: 10}
+        DeathAnim: 0
+        Exp: 100
+        AIs:
+        - {fileID: 11400000, guid: 2187c18d4a220be4e8bf02fbd4f1a7c4, type: 2}
+        - {fileID: 11400000, guid: 4d4233c165a3d8349a4e0030ecec71b3, type: 2}
+        - {fileID: 11400000, guid: 63f5879982535504d9e1a64be5761770, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+        trackCharsDefeated: 0
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    trackWavePhases: 1
+  - name: WaveValis
+    IsRandom: 1
+    MaxEnemyOnScreen: 3
+    AbsoluteMaxEnemyOnScreen: 4
+    DelayBetweenChars: 0
+    ListOfEnemy:
+    - name: Valis
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1065
+        KillWaveIfCharDie: 0
+        Health: {x: 100, y: 120}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 5, y: 6}
+        WeakAttackMultiplier: {x: 1, y: 1}
+        StrongAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 30, y: 30}
+        EtherRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1, y: 1}
+        Armour: {x: 2, y: 4}
+        MinionShieldChances: {x: 35, y: 37}
+        MinionPerfectShieldChances: {x: 5, y: 8}
+        DeathAnim: 0
+        Exp: 120
+        AIs:
+        - {fileID: 11400000, guid: 693932504cf5a194c8beade56452d488, type: 2}
+        - {fileID: 11400000, guid: 7b166031358d51b4cac93766aaeab8c4, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+        trackCharsDefeated: 0
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    trackWavePhases: 1
+  - name: WaveBalla
+    IsRandom: 1
+    MaxEnemyOnScreen: 4
+    AbsoluteMaxEnemyOnScreen: 5
+    DelayBetweenChars: 0
+    ListOfEnemy:
+    - name: Balla
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1067
+        KillWaveIfCharDie: 0
+        Health: {x: 110, y: 130}
+        HealthRegeneration: {x: 1.1, y: 1.1}
+        BaseDamage: {x: 8, y: 8}
+        WeakAttackMultiplier: {x: 1, y: 1}
+        StrongAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 30, y: 30}
+        EtherRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.1, y: 1.3}
+        Armour: {x: 2, y: 5}
+        MinionShieldChances: {x: 30, y: 35}
+        MinionPerfectShieldChances: {x: 5, y: 10}
+        DeathAnim: 0
+        Exp: 200
+        AIs:
+        - {fileID: 11400000, guid: 693932504cf5a194c8beade56452d488, type: 2}
+        - {fileID: 11400000, guid: 7b166031358d51b4cac93766aaeab8c4, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+        trackCharsDefeated: 0
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    trackWavePhases: 1
+  - name: WaveSeke
+    IsRandom: 1
+    MaxEnemyOnScreen: 4
+    AbsoluteMaxEnemyOnScreen: 5
+    DelayBetweenChars: 0
+    ListOfEnemy:
+    - name: Seke
+      NPCType: 1
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1066
+        KillWaveIfCharDie: 0
+        Health: {x: 90, y: 120}
+        HealthRegeneration: {x: 1.1, y: 1.2}
+        BaseDamage: {x: 13, y: 18}
+        WeakAttackMultiplier: {x: 1, y: 1}
+        StrongAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 30, y: 30}
+        EtherRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 1.5, y: 2}
+        Armour: {x: 1.5, y: 3}
+        MinionShieldChances: {x: 20, y: 25}
+        MinionPerfectShieldChances: {x: 5, y: 10}
+        DeathAnim: 0
+        Exp: 250
+        AIs:
+        - {fileID: 11400000, guid: faedaa3da64f3c54687725e8a147bc45, type: 2}
+        - {fileID: 11400000, guid: 871c68e09610e9d4abba8ec5f57d6920, type: 2}
+        AddAttacks: 0
+        AttacksToAdd: []
+        trackCharsDefeated: 0
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    trackWavePhases: 1
+  - name: WaveKin
+    IsRandom: 1
+    MaxEnemyOnScreen: 8
+    AbsoluteMaxEnemyOnScreen: 10
+    DelayBetweenChars: 0.2
+    ListOfEnemy:
+    - name: Kin
+      NPCType: 0
+      NumberOfCharacter: 1
+      TypeOfCharacter:
+        CharacterName: 1060
+        KillWaveIfCharDie: 0
+        Health: {x: 50, y: 60}
+        HealthRegeneration: {x: 1.5, y: 2}
+        BaseDamage: {x: 10, y: 12}
+        WeakAttackMultiplier: {x: 1, y: 1}
+        StrongAttackMultiplier: {x: 2, y: 2}
+        BaseSpeed: {x: 1, y: 1}
+        Ether: {x: 30, y: 30}
+        EtherRegeneration: {x: 1, y: 1}
+        MovementSpeed: {x: 2, y: 2.5}
+        Armour: {x: 5, y: 9}
+        MinionShieldChances: {x: 100, y: 100}
+        MinionPerfectShieldChances: {x: 95, y: 97}
+        DeathAnim: 0
+        Exp: 300
+        AIs:
+        - {fileID: 11400000, guid: c1341c2414a67e744900ac446f951ae2, type: 2}
+        - {fileID: 11400000, guid: 88be5a08fd1732c4a80948bb91b57eec, type: 2}
+        AddAttacks: 1
+        AttacksToAdd:
+        - {fileID: 11400000, guid: ba799f854706c7b44be0099d4b05530f, type: 2}
+        trackCharsDefeated: 0
+      AreThereStartingEnemy: 0
+      inRandomPos: 1
+      StartingEnemyTiles: []
+      IsRandomSpowiningTile: 1
+      SpowningTile:
+      - {x: 4, y: 11}
+    trackWavePhases: 1
+  isWaveComplete: 0
+  WaveCharcters: []
+  StartWave: 0
