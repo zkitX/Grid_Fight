@@ -653,21 +653,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1b372a58d2ea48b566d82d0b64ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Pai
+  Name: Wendigoat
   CharacterIcon: {fileID: 0}
   Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 18079379e5337084286a38b915064869, type: 2}
-  BaseCharacterType: 0
+  BaseCharacterType: 1
   CharacterID: 1061
   attackSequences: []
-  _CurrentAttackTypeInfo: []
+  _CurrentAttackTypeInfo:
+  - {fileID: 11400000, guid: 14118a4906cbeec4d8f1063bc6a517e4, type: 2}
+  - {fileID: 11400000, guid: c5db3877330ef074c85cc8b6075735fa, type: 2}
   AddedAttackTypeInfo: []
   Elemental: 0
-  ClassType: 2
+  ClassType: 3
   CharaterLevel: 0
   UseLayeringSystem: 1
   Head: {fileID: 3367859268216717277}
-  AIs: []
+  AIs:
+  - {fileID: 11400000, guid: b2be41975219f0a42b20ef4a45c3654d, type: 2}
   CharacterRespawnLength: 180
   CharacterSelection: 0
   HealthStats:
