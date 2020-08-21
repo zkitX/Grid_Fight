@@ -7,6 +7,8 @@ public class AnalyticsManager : MonoBehaviour
 {
     public static AnalyticsManager Instance = null;
 
+    public ulong SteamUserID = 0;
+
     public bool TrackAnalytics = true;
 
     public enum PhaseEvent 
@@ -31,10 +33,19 @@ public class AnalyticsManager : MonoBehaviour
     {
         if (Instance != null) Destroy(gameObject);
         Instance = this;
+
+        Application.logMessageReceived += Application_logMessageReceived; ;
     }
 
+    private void Application_logMessageReceived(string condition, string stackTrace, LogType type)
+    {
+        if (type != LogType.Error) return;
 
-
+        AnalyticsEvent.Custom("ErrorLog", new Dictionary<string, object> {
+            { "ErrorHead", condition },
+            { "StackTrace", stackTrace },
+        });
+    }
 
     Dictionary<string, object> SquadTimeStageInfo() //Only use in story mode, NOT FOR PVP
     {
@@ -48,6 +59,7 @@ public class AnalyticsManager : MonoBehaviour
             { "Stage", SceneLoadManager.Instance.stagePrimedToLoad != null ? SceneLoadManager.Instance.stagePrimedToLoad.Name : "No particular stage" },
             { "Player_Count", BattleManagerScript.Instance != null ? BattleManagerScript.Instance.maxPlayersUsed : 0 },
             { "Co-op_Used", BattleManagerScript.Instance != null ? BattleManagerScript.Instance.maxPlayersUsed > 1 : false },
+            { "UserID", SteamUserID != 0 ? SteamUserID.ToString() : "NO STEAM USER DATA" },
         };
     }
 
@@ -58,7 +70,10 @@ public class AnalyticsManager : MonoBehaviour
     {
         if (!TrackAnalytics) return;
 
-        AnalyticsEvent.Custom("Character_" + charEvent.ToString(), new Dictionary<string, object> { { "CharacterID", charName } });
+        AnalyticsEvent.Custom("Character_" + charEvent.ToString(), new Dictionary<string, object> {
+            { "CharacterID", charName },
+            { "UserID", SteamUserID != 0 ? SteamUserID.ToString() : "NO STEAM USER DATA" },
+        });
     }
 
     public void Track_LevelPhase(PhaseEvent LevelPhase)
@@ -83,6 +98,7 @@ public class AnalyticsManager : MonoBehaviour
                 { "Squadie_2", SceneLoadManager.Instance.squad[1].characterID },
                 { "Squadie_3", SceneLoadManager.Instance.squad[2].characterID },
                 { "Squadie_4", SceneLoadManager.Instance.squad[3].characterID },
+                { "UserID", SteamUserID != 0 ? SteamUserID.ToString() : "NO STEAM USER DATA" },
             }
         );
     }
@@ -100,6 +116,7 @@ public class AnalyticsManager : MonoBehaviour
                 { "Squadie_2", SceneLoadManager.Instance.squad[1].characterID },
                 { "Squadie_3", SceneLoadManager.Instance.squad[2].characterID },
                 { "Squadie_4", SceneLoadManager.Instance.squad[3].characterID },
+                { "UserID", SteamUserID != 0 ? SteamUserID.ToString() : "NO STEAM USER DATA" },
             }
         );
     }

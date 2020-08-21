@@ -200,8 +200,9 @@ class SteamStatsAndAchievements : MonoBehaviour
         {
             if (EResult.k_EResultOK == pCallback.m_eResult)
             {
-                Debug.Log("Received stats and achievements from Steam\n");
+                Debug.Log("Received stats and achievements from Steam user " + pCallback.m_steamIDUser.m_SteamID.ToString() + "\n");
 
+                AnalyticsManager.Instance.SteamUserID = pCallback.m_steamIDUser.m_SteamID;
                 m_bStatsValid = true;
 
                 // load achievements
