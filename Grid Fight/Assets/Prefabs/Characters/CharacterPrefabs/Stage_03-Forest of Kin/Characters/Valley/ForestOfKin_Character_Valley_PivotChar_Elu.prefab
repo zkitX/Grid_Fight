@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8915813901604424605}
   m_Layer: 0
-  m_Name: Stage03_Character_Valley_PivotChar_Elu
+  m_Name: ForestOfKin_Character_Valley_PivotChar_Elu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -248,7 +248,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3e016489cfc4e9a4693d4f6c8c5406ea, type: 2}
+  - {fileID: 2100000, guid: edb496f402bb32243af5fba35cc0974c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 557c3b85c4978864e8cee6b0fe3de876, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: e6297451af410c442b94eefae69e03e1, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -618,7 +618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Elu
-  CharacterIcon: {fileID: 0}
+  CharacterIcon: {fileID: 21300000, guid: f59b5fe3811a53e45b4e39b77dce39a9, type: 3}
   Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 18079379e5337084286a38b915064869, type: 2}
   BaseCharacterType: 0
@@ -680,12 +680,12 @@ MonoBehaviour:
     B_BaseStaminaRegeneration: 0
   SpeedStats:
     BaseSpeed: 1
-    TileMovementTime: 1
-    MovementSpeed: 2.2
-    CuttingPerc: 0.85
-    IntroPerc: 0.15
-    LoopPerc: 0.7
-    EndPerc: 0.15
+    TileMovementTime: 0.5
+    MovementSpeed: 1
+    CuttingPerc: 0.6
+    IntroPerc: 0.16
+    LoopPerc: 0.54
+    EndPerc: 0.3
     AttackLoopDuration: 0.5
     IdleToAttackDuration: 0.01
     LeaveSpeed: 3
