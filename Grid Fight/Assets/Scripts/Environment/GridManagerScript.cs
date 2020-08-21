@@ -259,7 +259,7 @@ public class GridManagerScript : MonoBehaviour
     public BattleTileScript GetBattleBestTileInsideTheBattlefield(Vector2Int pos, FacingType facing)
     {
         BattleTileScript res = BattleTiles.Where(r => r.Pos == pos).FirstOrDefault();
-        if(res.BattleTileState != BattleTileStateType.NonUsable)
+        if(res != null && res.BattleTileState != BattleTileStateType.NonUsable)
         {
             return res;
         }
@@ -270,7 +270,7 @@ public class GridManagerScript : MonoBehaviour
             {
                 
                 res = BattleTiles.Where(r => r.Pos == new Vector2Int(pos.x, i)).FirstOrDefault();
-                if (res.BattleTileState != BattleTileStateType.NonUsable && res.WalkingSide != WalkingSideType.RightSide)
+                if (res != null && res.BattleTileState != BattleTileStateType.NonUsable && res.WalkingSide != WalkingSideType.RightSide)
                 {
                     return res;
                 }
@@ -281,7 +281,7 @@ public class GridManagerScript : MonoBehaviour
             for (int i = pos.y; i > 0; i--)
             {
                 res = BattleTiles.Where(r => r.Pos == new Vector2Int(pos.x, i)).FirstOrDefault();
-                if (res.BattleTileState != BattleTileStateType.NonUsable && res.WalkingSide != WalkingSideType.LeftSide)
+                if (res != null && res.BattleTileState != BattleTileStateType.NonUsable && res.WalkingSide != WalkingSideType.LeftSide)
                 {
                     return res;
                 }
