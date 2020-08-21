@@ -314,7 +314,7 @@ public class WaveManagerScript : MonoBehaviour
                             {
                                 for (int a = 0; a < test[i].UMS.Pos.Count; a++)
                                 {
-                                    if(test[i].DeathAnim == DeathAnimType.Defeat)
+                                    if(test[i].DeathAnim == DeathBehaviourType.Defeat)
                                     {
                                         GridManagerScript.Instance.SetBattleTileState(test[i].UMS.Pos[a], BattleTileStateType.Empty);
                                         test[i].UMS.Pos[a] = Vector2Int.zero;
@@ -534,7 +534,7 @@ public class WaveCharacterInfoClass
     public Vector2 Armour;
     public Vector2 MinionShieldChances;
     public Vector2 MinionPerfectShieldChances;
-    public DeathAnimType DeathAnim;
+    public DeathBehaviourType DeathAnim;
     public float Exp;
 
     public List<ScriptableObjectAI> AIs = new List<ScriptableObjectAI>();

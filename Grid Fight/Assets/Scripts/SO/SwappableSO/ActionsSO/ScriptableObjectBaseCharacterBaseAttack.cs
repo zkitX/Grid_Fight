@@ -15,7 +15,7 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
     protected bool isStrongChargingParticlesOn = false;
     protected ManagedAudioSource strongChargeAudio = null;
     protected ManagedAudioSource strongChargeudioStrong = null;
-    public bool isSrongLoading
+    public bool isStrongLoading
     {
         get
         {
@@ -78,9 +78,83 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
 
     public virtual IEnumerator Attack()
     {
-        yield break;
+        ScriptableObjectAttackBase currentAtk = CharOwner.nextAttack;
+        CharOwner.SetAnimation(currentAtk.PrefixName + "_IdleToAtk");
+        currentAtk.currentAttackPhase = AttackPhasesType.Start;
+        yield return StartIdleToAtk();
+        while (currentAttackPhase < AttackPhasesType.Charging && shotsLeftInAttack > 0)
+        {
+            yield return IdleToAtk();
+        }
+
+        CharOwner.SetAnimation(currentAtk.PrefixName + "_Charging");
+        yield return StartCharging();
+        while (currentAttackPhase == AttackPhasesType.Cast_Strong && shotsLeftInAttack > 0)
+        {
+
+            yield return Charging();
+        }
+
+        yield return StartLoop();
+        if (shotsLeftInAttack > 0)
+        {
+            while (shotsLeftInAttack > 0)
+            {
+                currentAttackPhase = AttackPhasesType.Cast_Strong;
+                CharOwner.SetAnimation(currentAtk.PrefixName + "_Loop");
+                shotsLeftInAttack = 0;
+                while (currentAttackPhase != AttackPhasesType.End)
+                {
+                    yield return Loop();
+                }
+                yield return null;
+            }
+            CharOwner.SetAnimation(currentAtk.PrefixName + "_AtkToIdle");
+        }
+        else
+        {
+            CharOwner.SetAnimation(CharacterAnimationStateType.Idle, true, 0.1f);
+        }
     }
 
+
+
+    public virtual IEnumerator StartCharging()
+    {
+        yield break;
+
+    }
+    public virtual IEnumerator Charging()
+    {
+        yield break;
+    }
+    public virtual IEnumerator StartIdleToAtk()
+    {
+        yield break;
+
+    }
+    public virtual IEnumerator IdleToAtk()
+    {
+        yield break;
+    }
+    public virtual IEnumerator StartLoop()
+    {
+        yield break;
+
+    }
+    public virtual IEnumerator Loop()
+    {
+        yield break;
+    }
+    public virtual IEnumerator StartAtkToIdle()
+    {
+        yield break;
+
+    }
+    public virtual IEnumerator AtkToIdle()
+    {
+        yield break;
+    }
     public virtual IEnumerator StartStrongAttack()
     {
         yield break;
@@ -248,6 +322,32 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
                     tentacles.Remove(item);
                 }
             }
+        }
+    }
+
+    public override void SpineAnimationState_Complete(string completedAnim)
+    {
+        if (completedAnim == CharacterAnimationStateType.Defeat_ReverseArrive.ToString())
+        {
+            IsSwapping = false;
+            SwapWhenPossible = false;
+            for (int i = 0; i < UMS.Pos.Count; i++)
+            {
+                GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
+                UMS.Pos[i] = Vector2Int.zero;
+            }
+            SetAttackReady(false);
+            transform.position = new Vector3(100, 100, 100);
+            return;
+        }
+
+
+        if (completedAnim == CharacterAnimationStateType.Reverse_Arriving.ToString())
+        {
+            IsSwapping = false;
+            SwapWhenPossible = false;
+            transform.position = new Vector3(100, 100, 100);
+            SetAttackReady(false);
         }
     }
 

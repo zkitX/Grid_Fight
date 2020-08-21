@@ -158,7 +158,7 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
 
     public SpineAnimationManager SpineAnim;
 
-    public DeathAnimType DeathAnim;
+    public DeathBehaviourType DeathAnim;
 
     public List<CharacterActionType> CharActionlist = new List<CharacterActionType>();
     public UnitManagementScript UMS;
@@ -659,7 +659,7 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
             return;
         }
 
-        if (currentAttackPhase == AttackPhasesType.Loading || currentAttackPhase == AttackPhasesType.Cast_Strong || currentAttackPhase == AttackPhasesType.Bullet_Strong ||
+        if (currentAttackPhase == AttackPhasesType.Charging || currentAttackPhase == AttackPhasesType.Cast_Strong || currentAttackPhase == AttackPhasesType.Bullet_Strong ||
              SpineAnim.CurrentAnim.Contains("S_Buff") || SpineAnim.CurrentAnim.Contains("S_DeBuff"))
         {
             return;

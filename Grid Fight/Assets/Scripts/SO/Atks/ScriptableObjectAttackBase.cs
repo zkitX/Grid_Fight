@@ -39,6 +39,15 @@ public class ScriptableObjectAttackBase : ScriptableObject
         }
     }
 
+    public bool useCustomChargeTime = false;
+    [ConditionalField("useCustomChargeTime")]public float customChargeTime = 0f;
+    public float ChargingTime
+    {
+        get
+        {
+            return useCustomChargeTime ? customChargeTime : AttackInput == AttackInputType.Strong ? 1f : 0f;
+        }
+    }
 
     [HideInInspector] public AttackAnimPrefixType PrefixAnim;
     public FieldOfViewType Fov;

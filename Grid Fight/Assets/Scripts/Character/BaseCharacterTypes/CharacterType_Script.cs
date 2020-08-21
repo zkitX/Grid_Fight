@@ -58,64 +58,7 @@ public class CharacterType_Script : BaseCharacter
         CurrentCharSkillCompletedEvent = null;
     }
 
-    public void CharacterInputHandler(InputActionType action)
-    {
-        if (!HasBuffDebuff(BuffDebuffStatsType.Rage))
-        {
-            StartCoroutine(CharacterInputQueue(action));
-        }
-    }
-    IEnumerator CharacterInputQueue(InputActionType action)
-    {
-        isSpecialStop = false;
-        if(action == InputActionType.Defend)
-        {
-            IsDefStartCo = true;
-        }
-        while (isMoving)
-        {
-            yield return null;
-        }
-        Debug.Log(action);
-        switch (action)
-        {
-            case InputActionType.Weak:
-                StartWeakAttack(false);
-                break;
-            case InputActionType.Strong:
-                StartChargingAtk(AttackInputType.Strong);
-                break;
-            case InputActionType.Skill1:
-                StartChargingAtk(AttackInputType.Skill1);
-                break;
-            case InputActionType.Skill2:
-                StartChargingAtk(AttackInputType.Skill2);
-                break;
-            case InputActionType.Skill3:
-                StartChargingAtk(AttackInputType.Skill3);
-                break;
-            case InputActionType.Defend:
-                StartDefending();
-                break;
-            case InputActionType.Defend_Stop:
-                while (IsDefStartCo)
-                {
-                    yield return null;
-                }
-                StopDefending();
-                break;
-            case InputActionType.Move_Up:
-                break;
-            case InputActionType.Move_Down:
-                break;
-            case InputActionType.Move_Left:
-                break;
-            case InputActionType.Move_Right:
-                break;
-            default:
-                break;
-        }
-    }
+    
 
     public override void SetupCharacterSide()
     {
@@ -258,61 +201,8 @@ public class CharacterType_Script : BaseCharacter
 
     #region Attack
 
-    public void StartChargingAtk(AttackInputType atkType)
-    {
-        switch (atkType)
-        {
-            case AttackInputType.Strong:
-                if (!CharActionlist.Contains(CharacterActionType.StrongAttack))
-                {
-                    return;
-                }
-                StartCoroutine(StartChargingAttack(atkType));
-                break;
-            case AttackInputType.Skill1:
-                if (!CharActionlist.Contains(CharacterActionType.Skill1) || CharInfo.Mask == null || SkillActivation != null)
-                {
-                    return;
-                }
-                SkillActivation = StartSkillAttack(AttackInputType.Skill1);
-                StartCoroutine(SkillActivation);
-
-                break;
-            case AttackInputType.Skill2:
-                if (!CharActionlist.Contains(CharacterActionType.Skill2) || CharInfo.Mask == null || SkillActivation != null)
-                {
-                    return;
-                }
-                SkillActivation = StartSkillAttack(AttackInputType.Skill2);
-                StartCoroutine(SkillActivation);
-                break;
-            case AttackInputType.Skill3:
-                if (!CharActionlist.Contains(CharacterActionType.Skill3) || CharInfo.Mask == null || SkillActivation != null)
-                {
-                    return;
-                }
-                SkillActivation = StartSkillAttack(AttackInputType.Skill3);
-                StartCoroutine(SkillActivation);
-                break;
-                
-        }
-    }
-
-    IEnumerator StartChargingAttack(AttackInputType nextAtkType)
-    {
-        yield return StartChargingAttack_Co(nextAtkType);
-        if (chargingPs != null)
-        {
-            chargingPs.transform.parent = null;
-            chargingPs.SetActive(false);
-            chargingPs = null;
-        }
-        isSpecialStop = false;
-        isSpecialLoading = false;
-        isChargingParticlesOn = false;
-        ResetAudioManager();
-    }
-
+   
+   
     public bool GetCanUseStamina(float valueRequired)
     {
         if (CharInfo.EtherStats.Ether - valueRequired >= 0) return true;
@@ -321,270 +211,16 @@ public class CharacterType_Script : BaseCharacter
         return false;
     }
 
-    //Load the special attack and fire it if the load is complete
-    bool isChargingParticlesOn = false;
-    GameObject chargingPs = null;
-    public IEnumerator StartChargingAttack_Co(AttackInputType nextAtkType)
-    {
-        if (CanAttack && !isSpecialLoading)
-        {
-            ScriptableObjectAttackBase nxtAtk = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackInput == nextAtkType).First();
-            if(!GetCanUseStamina(nxtAtk.StaminaCost))
-            {
-                yield break;
-            }
-           
-            isSpecialLoading = true;
-            chargingAttackTimer = 0;
-            currentAttackPhase = AttackPhasesType.Start;
-            SetAnimation(nxtAtk.PrefixAnim + "_IdleToAtk", false, 0);
-            if (chargingAudio != null)
-            {
-                chargingAudio.ResetSource();
-            }
-            if (chargingAudioStrong != null)
-            {
-                chargingAudioStrong.ResetSource();
-            }
-            chargingAudio = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoop, AudioBus.MidPrio, transform, true, 1f);
-            while (isSpecialLoading)
-            {
-                yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-                chargingAttackTimer += BattleManagerScript.Instance.DeltaTime;
-                if(chargingAudioStrong == null && chargingAttackTimer >= 1.5f)
-                {
-                    chargingAudioStrong = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoopStrong, AudioBus.MidPrio, transform, true, 1f);
-                }
-
-                if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle.ToString())
-                {
-                    SetAnimation(nxtAtk.PrefixAnim + "_IdleToAtk");
-                }
-                if (!isChargingParticlesOn || chargingPs == null)
-                {
-                    isChargingParticlesOn = true;
-                    //Check
-                    chargingPs = ParticleManagerScript.Instance.FireParticlesInTransform(nxtAtk.Particles.CastLoopPS, CharInfo.CharacterID, AttackParticlePhaseTypes.Charging, SpineAnim.transform, UMS.Side, nxtAtk.AttackInput);
-                }
-                else
-                {
-                    ParticleManagerScript.Instance.SetParticlesLayer(chargingPs, CharOredrInLayer);
-                }
-
-                if (!IsOnField)
-                {
-                    yield break;
-                }
-            }
-            if (chargingAttackTimer > 1f && CharInfo.Health > 0f)
-            {
-                currentAttackPhase = AttackPhasesType.Loading;
-                if (IsOnField)
-                {
-                    while (isMoving)
-                    {
-                        yield return null;
-                    }
-                    SpecialAttack(nxtAtk);
-                }
-            }
-            else
-            {
-                SetAnimation(CharacterAnimationStateType.Idle, true, 0.1f);
-            }
-        }
-    }
-    public float WeakAttackOffset = 0;
-    public void StartWeakAttack(bool attackRegardless)
-    {
-        if (!CharActionlist.Contains(CharacterActionType.WeakAttack))
-        {
-            return;
-        }
-        if (CanAttack || attackRegardless)
-        {
-            ScriptableObjectAttackBase nxtAtk = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackInput == AttackInputType.Weak).First();
-            if (!GetCanUseStamina(nxtAtk.StaminaCost))
-            {
-                return;
-            }
-            Attacking = true;
-            WeakAttackOffset = Atk1Queueing ? WeakAttackOffset : Time.time;
-            //lastAttack = false;
-            FireActionEvent(CharacterActionType.WeakAttack);
-            if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_Loop.ToString() && SpineAnim.CurrentAnim != CharacterAnimationStateType.Atk1_IdleToAtk.ToString())
-            {
-                //Debug.Log(SpineAnim.CurrentAnim);
-                SetAnimation(CharacterAnimationStateType.Atk1_IdleToAtk);
-                SpineAnim.SetAnimationSpeed(SpineAnim.GetAnimLenght(CharacterAnimationStateType.Atk2_IdleToAtk) / CharInfo.SpeedStats.IdleToAtkDuration);
-            }
-            else if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1_Loop.ToString())
-            {
-                Atk1Queueing = true;
-            }
-        }
-    }
-
-    public IEnumerator StartSkillAttack(AttackInputType inputSkill)
-    {
-        ScriptableObjectAttackBase nxtAtk = null;
-
-        switch (inputSkill)
-        {
-            case AttackInputType.Skill1:
-                nxtAtk = CharInfo.Mask.Skill1;
-                break;
-            case AttackInputType.Skill2:
-                nxtAtk = CharInfo.Mask.Skill2;
-                break;
-            case AttackInputType.Skill3:
-                nxtAtk = CharInfo.Mask.Skill3;
-                break;
-        }
-
-        SkillCoolDownClass  scdc = skillCoolDown.Where(r => r.Skill == inputSkill).First();
-        if (!GetCanUseStamina(nxtAtk.StaminaCost) || scdc.IsCoGoing)
-        {
-            SkillActivation = null;
-            yield break;
-        }
-        switch (inputSkill)
-        {
-            case AttackInputType.Skill1:
-                FireActionEvent(CharacterActionType.Skill1);
-
-                break;
-            case AttackInputType.Skill2:
-                FireActionEvent(CharacterActionType.Skill2);
-
-                break;
-            case AttackInputType.Skill3:
-                FireActionEvent(CharacterActionType.Skill3);
-
-                break;
-        }
-
-
-        nextAttack = nxtAtk;
-        scdc.IsCoGoing = true;
-        yield return BattleManagerScript.Instance.WaitUpdate(() => currentAttackPhase != AttackPhasesType.End);
-        CharInfo.BaseSpeed *= 100;
-        BattleManagerScript.Instance.BattleSpeed = 0.01f;
-        SpineAnim.SetSkeletonOrderInLayer(300);
-        SetAnimation(nxtAtk.PrefixAnim + "_IdleToAtk", false, 0);
-        currentAttackPhase = AttackPhasesType.Start;
-        yield return BattleManagerScript.Instance.WaitFor(0.018f, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle, ()=> CharInfo.HealthPerc <= 0);
-        if(CharInfo.HealthPerc > 0)
-        {
-            SetAnimation(nxtAtk.PrefixAnim + "_AtkToIdle", false, 0);
-        }
-        yield return BattleManagerScript.Instance.WaitUpdate(() => (currentAttackPhase != AttackPhasesType.End || CharInfo.HealthPerc <= 0));
-        BattleManagerScript.Instance.BattleSpeed = 1;
-        SpineAnim.SetSkeletonOrderInLayer(CharOredrInLayer);
-        CharInfo.BaseSpeed /= 100;
-        float coolDown = nxtAtk.CoolDown;
-        CurrentCharSkillCompletedEvent?.Invoke(inputSkill, coolDown);
-        yield return BattleManagerScript.Instance.WaitFor(0.5f, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
-        SkillActivation = null;
-        yield return BattleManagerScript.Instance.WaitFor(coolDown - 0.5f, ()=> BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
-        scdc.IsCoGoing = false;
-    }
-
-
+   
     public override void SetFinalDamage(BaseCharacter attacker, float damage, HitInfoClass hic = null)
     {
         Sic.DamageReceived += damage;
         base.SetFinalDamage(attacker, damage, hic);
     }
 
-    //Set ste special attack
-    public void SpecialAttack(ScriptableObjectAttackBase atkType)
-    {
-        nextAttack = atkType;
-
-        if (chargingAudio != null)
-        {
-            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingRelease, AudioBus.LowPrio, transform);
-        }
-        FireActionEvent(CharacterActionType.StrongAttack);
-        SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
-
-        ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.CastActivationPS, CharInfo.CharacterID, AttackParticlePhaseTypes.CastActivation, transform.position, UMS.Side, nextAttack.AttackInput);
-    }
-
-    public void QuickAttack()
-    {
-        if (!GetCanUseStamina(CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackInput == AttackInputType.Weak).First().StaminaCost))
-        {
-            SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
-            Atk1Queueing = false;
-            return;
-        }
-        nextAttack = CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackAnim == AttackAnimType.Weak_Atk).First();
-        currentAttackPhase = AttackPhasesType.Start;
-        if(SpineAnim.CurrentAnim.Contains("Loop"))
-        {
-            SpineAnim.skeletonAnimation.state.GetCurrent(0).TrackTime = 0;
-        }
-        else
-        {
-            SetAnimation(CharacterAnimationStateType.Atk1_Loop);
-        }
-    }
-
-
-
-    public void ChargingLoop(string atk)
-    {
-        SetAnimation(atk + "_Charging", true);
-    }
-
-
     #endregion
 
     #region Move
-
-    #endregion
-
-    #region Changing
-    /*IEnumerator GridJumpSequencer = null;
-    public void StartGridJump(float duration)
-    {
-        if (GridJumpSequencer != null) StopCoroutine(GridJumpSequencer);
-        GridJumpSequencer = GridJumpSequence(duration);
-        StartCoroutine(GridJumpSequencer);
-    }
-
-    IEnumerator GridJumpSequence(float duration) //WHEN REFACTORING: MAKE THIS CURVE BASED AND NOT 2 LERPS WITH A WEIRD WAIT IN BETWEEN
-    {
-        CharacterAnimationStateType jumpAnim = CharacterAnimationStateType.DashUp;
-        float jumpAnimLength = SpineAnim.GetAnimLenght(jumpAnim);
-        float jumpHeight = 2f;
-        //float jumpSlowAmount = 1.2f;
-
-        SetAnimation(jumpAnim);
-
-        Vector3 startPos = transform.position;
-        Vector3 endPos = transform.position + new Vector3(0, jumpHeight, 0);
-
-        float timeCounter = 0f;
-        float animProg = 0f;
-        float jumpProg = 0f;
-        Vector3 newPos = Vector3.zero;
-        while(timeCounter != duration)
-        {
-            timeCounter = Mathf.Clamp(timeCounter + Time.deltaTime, 0f, duration);
-
-            jumpProg = EnvironmentManager.Instance.characterJumpCurve.Evaluate(timeCounter / duration);
-            animProg = EnvironmentManager.Instance.jumpAnimationCurve.Evaluate(timeCounter / duration);
-
-            SpineAnim.SetAnimationSpeed(animProg);
-            newPos = Vector3.Lerp(startPos, endPos, jumpProg);
-            transform.position = new Vector3(transform.position.x, newPos.y, transform.position.z);
-            yield return null;
-        }
-    }*/
-
 
     #endregion
 
@@ -615,7 +251,7 @@ public class CharacterType_Script : BaseCharacter
 
             if (SpineAnim.CurrentAnim.Contains("Atk1"))
             {
-                currentAttackPhase = AttackPhasesType.Cast_Weak;
+                currentAttackPhase = AttackPhasesType.Firing;
                 CreateParticleAttack();
             }
             else
@@ -629,7 +265,7 @@ public class CharacterType_Script : BaseCharacter
         {
             if (SpineAnim.CurrentAnim.Contains("Atk1"))
             {
-                currentAttackPhase = AttackPhasesType.Cast_Weak;
+                currentAttackPhase = AttackPhasesType.Firing;
             }
             else
             {

@@ -169,7 +169,43 @@ public enum ControllerType
 }
 
 
+public enum InputBehaviourType
+{
+    AIInput,
+    PlayerInput
+}
+public enum AttackActionType
+{
+    ParticleAttack,
+    TileAttack
+}
+public enum MovementActionType
+{
+    Move,
+    Teleport
+}
 
+
+public enum DeathBehaviourType
+{
+    Explosion,
+    Defeat,
+    Reverse_Arrives
+}
+
+public enum SwappableActionType
+{
+    AIInput,
+    PlayerInput,
+    ParticleAttack,
+    TileAttack,
+    Move,
+    Teleport,
+    Explosion,
+    Defeat,
+    Reverse_Arrives,
+
+}
 
 public enum UnitBehaviourType
 {
@@ -241,11 +277,8 @@ public enum ElementalType
 public enum AttackPhasesType
 {
     Start,
-    Loading,
-    Cast_Weak,
-    Cast_Strong,
-    Bullet_Weak,
-    Bullet_Strong,
+    Charging,
+    Firing,
     End
 
 }
@@ -446,12 +479,6 @@ public enum PartyHPType
 }
 
 
-public enum DeathAnimType
-{
-    Explosion,
-    Defeat,
-    Reverse_Arrives
-}
 
 public enum ElementalWeaknessType
 {

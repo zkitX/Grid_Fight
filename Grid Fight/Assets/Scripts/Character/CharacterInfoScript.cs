@@ -10,7 +10,8 @@ using UnityEngine;
 /// </summary>
 public class CharacterInfoScript : MonoBehaviour
 {
-   
+
+    protected List<ScriptableObjectSwappableBase> SwappableSOs = new List<ScriptableObjectSwappableBase>();
 
     #region Events
     public delegate void BaseSpeedChanged(float baseSpeed);
@@ -61,23 +62,95 @@ public class CharacterInfoScript : MonoBehaviour
 
     public List<ScriptableObjectAI> AIs = new List<ScriptableObjectAI>();
 
-    public List<LevelsInfoClass> Levels = new List<LevelsInfoClass>
-    {
-        new LevelsInfoClass(LevelType.Novice, 0),
-        new LevelsInfoClass(LevelType.Defiant, 1000),
-        new LevelsInfoClass(LevelType.Heroine, 3600),
-        new LevelsInfoClass(LevelType.Goddess, 9850)
-    };
 
+    public CharActionBeheaviourClass Behaviour;
+    [System.Serializable]
+    public class CharActionBeheaviourClass
+    {
+
+        public delegate void InputBehaviourChanged(InputBehaviourType inputBehaviour);
+        public event InputBehaviourChanged InputBehaviourChangedEvent;
+        public delegate void AttackActionChanged(AttackActionType attackAction);
+        public event AttackActionChanged AttackActionChangedEvent;
+        public delegate void MovementActionChanged(MovementActionType movementAction);
+        public event MovementActionChanged MovementActionChangedEvent;
+        public delegate void DeathBehaviourChanged(DeathBehaviourType deathBehaviour);
+        public event DeathBehaviourChanged DeathBehaviourChangedEvent;
+
+
+        public InputBehaviourType InputBehaviour
+        {
+            get
+            {
+                return _InputBehaviour;
+            }
+            set
+            {
+                if(value != _InputBehaviour)
+                {
+                    InputBehaviourChangedEvent?.Invoke(value);
+                }
+                _InputBehaviour = value;
+            }
+        }
+        protected InputBehaviourType _InputBehaviour;
+        public AttackActionType AttackAction
+        {
+            get
+            {
+                return _AttackAction;
+            }
+            set
+            {
+                if (value != _AttackAction)
+                {
+                    AttackActionChangedEvent?.Invoke(value);
+                }
+                _AttackAction = value;
+            }
+        }
+        protected AttackActionType _AttackAction;
+        public MovementActionType MovementAction
+        {
+            get
+            {
+                return _MovementAction;
+            }
+            set
+            {
+                if (value != _MovementAction)
+                {
+                    MovementActionChangedEvent?.Invoke(value);
+                }
+                _MovementAction = value;
+            }
+        }
+        protected MovementActionType _MovementAction;
+        public DeathBehaviourType DeathBehaviour
+        {
+            get
+            {
+                return _DeathBehaviour;
+            }
+            set
+            {
+                if (value != _DeathBehaviour)
+                {
+                    DeathBehaviourChangedEvent.Invoke(value);
+                }
+                _DeathBehaviour = value;
+            }
+        }
+        protected DeathBehaviourType _DeathBehaviour;
+
+    }
+   
     [Tooltip("Length of time, in seconds, that the character will take to respawn once killed")]
     public float CharacterRespawnLength = 180f;
 
     [HideInInspector]
     public CharacterSelectionType CharacterSelection;
     // public List<CharactersRelationshipClass> CharacterRelationships = new List<CharactersRelationshipClass>();
-
-
-
 
     public HealthStastsClass HealthStats;
     [System.Serializable]
@@ -340,6 +413,15 @@ public class CharacterInfoScript : MonoBehaviour
             {
                 Shield = ShieldStats.Base;
             }
+        }
+    }
+
+
+    private void Awake()
+    {
+        for (int i = 0; i < SwappableSOs.Count; i++)
+        {
+            SwappableSOs[i] = Instantiate(SwappableSOs[i]);
         }
     }
 

@@ -7,7 +7,9 @@ public class ScriptableObjectSwappableBase : ScriptableObject
 
     public BaseCharacter CharOwner;
 
-    public virtual void SpineAnimationState_Complete()
+    public SwappableActionType SwappableType;
+
+    public virtual void SpineAnimationState_Complete(string completedAnim)
     {
 
     }

@@ -8,9 +8,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/ScriptableObjectBaseCharaterAction/ParticlesAttack")]
 public class ScriptableObjectBaseCharaterParticlesAttack : ScriptableObjectBaseCharacterBaseAttack
 {
-    public override IEnumerator StartStrongAttack()
+    public override IEnumerator Attack()
     {
-        yield return StartStrongAttack_Co();
+        yield return base.Attack();
         if (strongChargePs != null)
         {
             strongChargePs.transform.parent = null;
@@ -18,15 +18,63 @@ public class ScriptableObjectBaseCharaterParticlesAttack : ScriptableObjectBaseC
             strongChargePs = null;
         }
         isStrongStop = false;
-        isSrongLoading = false;
+        isStrongLoading = false;
         isStrongChargingParticlesOn = false;
         CharOwner.ResetAudioManager();
     }
 
 
+
+
+    public override IEnumerator StartCharging()
+    {
+        yield break;
+    }
+    public override IEnumerator Charging()
+    {
+        yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
+        strongAttackTimer += BattleManagerScript.Instance.DeltaTime;
+    }
+    public override IEnumerator StartIdleToAtk()
+    {
+        yield break;
+    }
+    public override IEnumerator IdleToAtk()
+    {
+        yield break;
+    }
+    public override IEnumerator StartLoop()
+    {
+        if (strongAttackTimer < CharOwner.nextAttack.ChargingTime && CharOwner.CharInfo.Health <= 0f)
+        {
+            shotsLeftInAttack = 0;
+        }
+        yield return null;
+    }
+    public override IEnumerator Loop()
+    {
+        shotsLeftInAttack = isStrongLoading ? 1 : 0;
+        yield break;
+    }
+    public override IEnumerator StartAtkToIdle()
+    {
+        yield break;
+    }
+    public override IEnumerator AtkToIdle()
+    {
+        yield break;
+    }
+
+
+
+
+
+
+
+
     public override IEnumerator StartStrongAttack_Co()
     {
-        if (CharOwner.CanAttack && !isSrongLoading)
+        if (CharOwner.CanAttack && !isStrongLoading)
         {
             ScriptableObjectAttackBase nxtAtk = CharOwner.CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackInput == AttackInputType.Strong).First();
             if (!CharOwner.GetCanUseStamina(nxtAtk.StaminaCost))
@@ -34,7 +82,7 @@ public class ScriptableObjectBaseCharaterParticlesAttack : ScriptableObjectBaseC
                 yield break;
             }
 
-            isSrongLoading = true;
+            isStrongLoading = true;
             strongAttackTimer = 0;
             currentAttackPhase = AttackPhasesType.Start;
             CharOwner.SetAnimation(nxtAtk.PrefixAnim + "_IdleToAtk", false, 0);
@@ -47,7 +95,7 @@ public class ScriptableObjectBaseCharaterParticlesAttack : ScriptableObjectBaseC
                 strongChargeudioStrong.ResetSource();
             }
             strongChargeAudio = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoop, AudioBus.MidPrio, CharOwner.transform, true, 1f);
-            while (isSrongLoading)
+            while (isStrongLoading)
             {
                 yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
                 strongAttackTimer += BattleManagerScript.Instance.DeltaTime;
@@ -78,7 +126,7 @@ public class ScriptableObjectBaseCharaterParticlesAttack : ScriptableObjectBaseC
             }
             if (strongAttackTimer > 1f && CharOwner.CharInfo.Health > 0f)
             {
-                currentAttackPhase = AttackPhasesType.Loading;
+                currentAttackPhase = AttackPhasesType.Charging;
                 if (CharOwner.IsOnField)
                 {
                     while (CharOwner.isMoving)
@@ -127,7 +175,6 @@ public class ScriptableObjectBaseCharaterParticlesAttack : ScriptableObjectBaseC
         }
     }
 
-
     public override void StrongAttack(ScriptableObjectAttackBase atkType)
     {
         nextAttack = atkType;
@@ -141,7 +188,6 @@ public class ScriptableObjectBaseCharaterParticlesAttack : ScriptableObjectBaseC
 
         ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.CastActivationPS, CharInfo.CharacterID, AttackParticlePhaseTypes.CastActivation, transform.position, UMS.Side, nextAttack.AttackInput);
     }
-
 
     public override void WeakAttack()
     {
@@ -163,16 +209,65 @@ public class ScriptableObjectBaseCharaterParticlesAttack : ScriptableObjectBaseC
         }
     }
 
-
     public override void ChargingLoop()
     {
         CharOwner.SetAnimation(nextAttack.PrefixAnim + "_Charging", true);
     }
 
-
-    public override void SpineAnimationState_Complete()
+    public override void SpineAnimationState_Complete(string completedAnim)
     {
+       
 
+        if (completedAnim == CharacterAnimationStateType.JumpTransition_OUT.ToString())
+        {
+            transform.position = new Vector3(100, 100, 100);
+            SpineAnim.SpineAnimationState.SetAnimation(0, CharacterAnimationStateType.Idle.ToString(), true);
+            SpineAnim.CurrentAnim = CharacterAnimationStateType.Idle.ToString();
+            SetAttackReady(false);
+            return;
+        }
+
+
+        if (completedAnim == CharacterAnimationStateType.Atk1_IdleToAtk.ToString() && SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1_IdleToAtk.ToString())
+        {
+            WeakAttack();
+            return;
+        }
+        if (completedAnim == CharacterAnimationStateType.Atk1_Loop.ToString() &&
+            SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1_Loop.ToString())
+        {
+            Debug.Log("Loop ------- completed     " + Atk1Queueing);
+            if (Atk1Queueing)
+            {
+                WeakAttack();
+            }
+            else
+            {
+                SetAnimation(CharacterAnimationStateType.Atk1_AtkToIdle);
+                Debug.Log("Atk1_AtkToIdle ------- started     " + Atk1Queueing);
+                SpineAnim.SetAnimationSpeed(SpineAnim.GetAnimLenght(CharacterAnimationStateType.Atk1_IdleToAtk) / CharInfo.SpeedStats.IdleToAtkDuration);
+            }
+            Atk1Queueing = false;
+            return;
+        }
+        if (completedAnim.Contains("Atk2") || completedAnim.Contains("S_Buff") || completedAnim.Contains("S_DeBuff") || completedAnim.Contains("Atk3"))
+        {
+            if (completedAnim.Contains("IdleToAtk") && SpineAnim.CurrentAnim.ToString().Contains("IdleToAtk"))
+            {
+                string[] res = completedAnim.Split('_');
+                ChargingLoop(res.Length == 2 ? res.First() : res[0] + "_" + res[1]);
+                return;
+            }
+        }
+
+        if (completedAnim.Contains("AtkToIdle") || completedAnim == CharacterAnimationStateType.Atk.ToString() || completedAnim == CharacterAnimationStateType.Atk1.ToString())
+        {
+            currentAttackPhase = AttackPhasesType.End;
+            Attacking = false;
+        }
+
+
+        base.SpineAnimationState_Complete(completedAnim);
     }
 
     public override void CreateAttack()
@@ -217,6 +312,14 @@ public class ScriptableObjectBaseCharaterParticlesAttack : ScriptableObjectBaseC
 
         CompleteBulletSetup();
     }
+
+
+
+
+
+
+
+
 }
 
 

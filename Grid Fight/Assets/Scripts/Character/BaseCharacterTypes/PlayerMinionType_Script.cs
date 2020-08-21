@@ -103,7 +103,7 @@ public class PlayerMinionType_Script : MinionType_Script
 
             if (SpineAnim.CurrentAnim.Contains("Atk1"))
             {
-                currentAttackPhase = AttackPhasesType.Cast_Weak;
+                currentAttackPhase = AttackPhasesType.Firing;
             }
             else
             {
@@ -116,7 +116,7 @@ public class PlayerMinionType_Script : MinionType_Script
         {
             if (SpineAnim.CurrentAnim.Contains("Atk1"))
             {
-                currentAttackPhase = AttackPhasesType.Cast_Weak;
+                currentAttackPhase = AttackPhasesType.Firing;
             }
             else
             {

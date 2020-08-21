@@ -99,7 +99,7 @@ public class MinionType_Script : BaseCharacter
         SpineAnim.CurrentAnim = "";
         switch (DeathAnim)
         {
-            case DeathAnimType.Explosion:
+            case DeathBehaviourType.Explosion:
                 for (int i = 0; i < UMS.Pos.Count; i++)
                 {
                     GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
@@ -112,10 +112,10 @@ public class MinionType_Script : BaseCharacter
                     StartCoroutine(DisableChar());
                 }
                 break;
-            case DeathAnimType.Defeat:
+            case DeathBehaviourType.Defeat:
                 SetAnimation(CharacterAnimationStateType.Defeat);
                 break;
-            case DeathAnimType.Reverse_Arrives:
+            case DeathBehaviourType.Reverse_Arrives:
                 for (int i = 0; i < UMS.Pos.Count; i++)
                 {
                     GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
@@ -357,7 +357,7 @@ public class MinionType_Script : BaseCharacter
 
             if (SpineAnim.CurrentAnim.Contains("Atk1"))
             {
-                currentAttackPhase = AttackPhasesType.Cast_Weak;
+                currentAttackPhase = AttackPhasesType.Firing;
             }
             else
             {
@@ -370,7 +370,7 @@ public class MinionType_Script : BaseCharacter
         {
             if (SpineAnim.CurrentAnim.Contains("Atk1"))
             {
-                currentAttackPhase = AttackPhasesType.Cast_Weak;
+                currentAttackPhase = AttackPhasesType.Firing;
             }
             else
             {
