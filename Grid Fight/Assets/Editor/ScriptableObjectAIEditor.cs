@@ -13,13 +13,13 @@ public class ScriptableObjectAIEditor : Editor
         base.OnInspectorGUI();
         origin = (ScriptableObjectAI)target;
 
-        List<AICheckClass> list = new List<AICheckClass>();
+        List<CheckClass> list = new List<CheckClass>();
         list.AddRange(origin.Checks);
         int newCount = Mathf.Max(0, EditorGUILayout.IntField("Number of Checks", list.Count));
         while (newCount < list.Count)
             list.RemoveAt(list.Count - 1);
         while (newCount > list.Count)
-            list.Add(new AICheckClass());
+            list.Add(new CheckClass());
         origin.Checks.Clear();
 
         for (int i = 0; i < list.Count; i++)

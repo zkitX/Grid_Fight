@@ -1,13 +1,82 @@
 ﻿//using nn.ec;
-using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
-public class BaseCharacter : MonoBehaviour, IDisposable
+public class BaseCharacter : MonoBehaviour, System.IDisposable
 {
     [HideInInspector] public ScriptableObjectAttackEffect testAtkEffect = null;
+
+
+    #region Queueing
+    public List<ScriptableObjectAttackBase> nextSequencedAttacks = new List<ScriptableObjectAttackBase>();
+    public virtual ScriptableObjectAttackBase nextAttack
+    {
+        get
+        {
+            return _nextAttack;
+        }
+        set
+        {
+            _nextAttack = value;
+        }
+    }
+    public ScriptableObjectAttackBase _nextAttack = null;
+    public float NextAttackDamage
+    {
+        get
+        {
+            return CharInfo.DamageStats.BaseDamage * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.x
+                    * (nextAttack.AttackInput == AttackInputType.Weak ? Random.Range(CharInfo.WeakAttack.DamageMultiplier.x, CharInfo.WeakAttack.DamageMultiplier.y) :
+                    Random.Range(CharInfo.StrongAttack.DamageMultiplier.x, CharInfo.StrongAttack.DamageMultiplier.y)) * nextAttack.DamageMultiplier;
+        }
+    }
+    public float NextAttackTileDamage
+    {
+        get
+        {
+            return (CharInfo.DamageStats.BaseDamage * (nextAttack.AttackInput == AttackInputType.Weak ? Random.Range(CharInfo.WeakAttack.DamageMultiplier.x, CharInfo.WeakAttack.DamageMultiplier.y) :
+                Random.Range(CharInfo.StrongAttack.DamageMultiplier.x, CharInfo.StrongAttack.DamageMultiplier.y)) * nextAttack.DamageMultiplier) * GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos).TileADStats.x;
+        }
+    }
+    #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -171,100 +240,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
 
     protected float defenceAnimSpeedMultiplier = 5f;
     protected bool IsDefStartCo = false;
-    #endregion
-
-    #region Attack Variables
-
-    public bool isSpecialLoading
-    {
-        get
-        {
-            return isSpecialStop ? false : _isSpecialLoading;
-        }
-        set
-        {
-            _isSpecialLoading = value;
-        }
-    }
-
-    public bool _isSpecialLoading = false;
-    public bool isSpecialStop = false;
-
-    [HideInInspector]
-    public bool bulletFired = false;
-    [HideInInspector] public List<ScriptableObjectAttackBase> availableAtks = new List<ScriptableObjectAttackBase>();
-    [HideInInspector] public List<ScriptableObjectAttackBase> currentTileAtks = new List<ScriptableObjectAttackBase>();
-    [HideInInspector] public ScriptableObjectAttackBase atkToCheck;
-
-
-    public virtual ScriptableObjectAttackBase nextAttack
-    {
-        get
-        {
-            return _nextAttack;
-        }
-        set
-        {
-            _nextAttack = value;
-        }
-    }
-    public ScriptableObjectAttackBase _nextAttack = null;
-
-    public float NextAttackDamage
-    {
-        get
-        {
-            return CharInfo.DamageStats.BaseDamage * GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).TileADStats.x
-                    * (nextAttack.AttackInput == AttackInputType.Weak ? UnityEngine.Random.Range(CharInfo.WeakAttack.DamageMultiplier.x, CharInfo.WeakAttack.DamageMultiplier.y) : 
-                    UnityEngine.Random.Range(CharInfo.StrongAttack.DamageMultiplier.x, CharInfo.StrongAttack.DamageMultiplier.y)) * nextAttack.DamageMultiplier;
-        }
-    }
-    public float NextAttackTileDamage
-    {
-        get
-        {
-            return (CharInfo.DamageStats.BaseDamage * (nextAttack.AttackInput == AttackInputType.Weak ? UnityEngine.Random.Range(CharInfo.WeakAttack.DamageMultiplier.x, CharInfo.WeakAttack.DamageMultiplier.y) :
-                UnityEngine.Random.Range(CharInfo.StrongAttack.DamageMultiplier.x, CharInfo.StrongAttack.DamageMultiplier.y)) * nextAttack.DamageMultiplier) * GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos).TileADStats.x;
-        }
-    }
-
-    public List<ScriptableObjectAttackBase> nextSequencedAttacks = new List<ScriptableObjectAttackBase>();
-
-    public AttackPhasesType currentAttackPhase = AttackPhasesType.End;
-
-    public int shotsLeftInAttack
-    {
-        get
-        {
-            return _shotsLeftInAttack;
-        }
-        set
-        {
-            _shotsLeftInAttack = value;
-            _shotsLeftInAttack = _shotsLeftInAttack < 0 ? 0 : _shotsLeftInAttack;
-            if(_shotsLeftInAttack == 0)
-            {
-                Attacking = false;
-            }
-        }
-    }
-    public int _shotsLeftInAttack = 0;
-
-   
-    public virtual bool Attacking
-    {
-        get
-        {
-            return shotsLeftInAttack > 0 ? true : _Attacking;
-        }
-        set
-        {
-            _Attacking = value;
-        }
-    }
-    public bool _Attacking = false;
-
-
     #endregion
 
     #region Variables that we have to decide if still useful
@@ -464,127 +439,6 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         yield return null;
     }
 
-    public virtual void fireAttackAnimation(Vector3 pos)
-    {
-
-    }
-
-    public virtual void FireAttackAnimAndBullet(Vector3 pos)
-    {
-
-    }
-
-    public int GetHowManyAttackAreOnBattleField(List<BulletBehaviourInfoClassOnBattleFieldClass> bulTraj)
-    {
-        tempInt_1 = 0;
-        foreach (BulletBehaviourInfoClassOnBattleFieldClass item in bulTraj)
-        {
-            foreach (BattleFieldAttackTileClass target in item.BulletEffectTiles)
-            {
-                if (GridManagerScript.Instance.isPosOnField(target.Pos))
-                {
-                    tempInt_1++;
-                }
-            }
-        }
-
-        return tempInt_1;
-    }
-
-    public virtual void GetAttack()
-    {
-        currentTileAtks = CharInfo.CurrentAttackTypeInfo.Where(r => r != null && r.CurrentAttackType == AttackType.Tile).ToList();
-        availableAtks.Clear();
-        for (int i = 0; i < currentTileAtks.Count; i++)
-        {
-            atkToCheck = currentTileAtks[i];
-            switch (atkToCheck.TilesAtk.StatToCheck)
-            {
-                case StatsCheckType.Health:
-                    switch (atkToCheck.TilesAtk.ValueChecker)
-                    {
-                        case ValueCheckerType.LessThan:
-                            if (CharInfo.HealthPerc < atkToCheck.TilesAtk.PercToCheck)
-                            {
-
-                                availableAtks.Add(atkToCheck);
-                            }
-                            break;
-                        case ValueCheckerType.EqualTo:
-                            if (CharInfo.HealthPerc == atkToCheck.TilesAtk.PercToCheck)
-                            {
-                                availableAtks.Add(atkToCheck);
-                            }
-                            break;
-                        case ValueCheckerType.MoreThan:
-                            if (CharInfo.HealthPerc > atkToCheck.TilesAtk.PercToCheck)
-                            {
-                                availableAtks.Add(atkToCheck);
-                            }
-                            break;
-                        case ValueCheckerType.Between:
-                            if (CharInfo.HealthPerc <= atkToCheck.TilesAtk.InBetween.x && CharInfo.HealthPerc >= atkToCheck.TilesAtk.InBetween.y)
-                            {
-                                availableAtks.Add(atkToCheck);
-                            }
-                            break;
-                    }
-                    break;
-                case StatsCheckType.Ether:
-                    switch (atkToCheck.TilesAtk.ValueChecker)
-                    {
-                        case ValueCheckerType.LessThan:
-                            if (CharInfo.EtherPerc < atkToCheck.TilesAtk.PercToCheck)
-                            {
-                                availableAtks.Add(atkToCheck);
-                            }
-                            break;
-                        case ValueCheckerType.EqualTo:
-                            if (CharInfo.EtherPerc == atkToCheck.TilesAtk.PercToCheck)
-                            {
-                                availableAtks.Add(atkToCheck);
-                            }
-                            break;
-                        case ValueCheckerType.MoreThan:
-                            if (CharInfo.EtherPerc > atkToCheck.TilesAtk.PercToCheck)
-                            {
-                                availableAtks.Add(atkToCheck);
-                            }
-                            break;
-                        case ValueCheckerType.Between:
-                            if (CharInfo.EtherPerc <= atkToCheck.TilesAtk.InBetween.x && CharInfo.EtherPerc >= atkToCheck.TilesAtk.InBetween.y)
-                            {
-                                availableAtks.Add(atkToCheck);
-                            }
-                            break;
-                    }
-                    break;
-                case StatsCheckType.None:
-                    nextAttack = atkToCheck;
-                    availableAtks.Add(atkToCheck);
-                    break;
-            }
-        }
-
-        tempInt_1 = 0;
-        availableAtks.ForEach(r =>
-        {
-            tempInt_1 += r.TilesAtk.Chances;
-        });
-        tempInt_1 = UnityEngine.Random.Range(0, tempInt_1);
-        tempInt_2 = 0;
-        for (int i = 0; i < availableAtks.Count; i++)
-        {
-            tempInt_2 += availableAtks[i].TilesAtk.Chances;
-
-            if (tempInt_1 < tempInt_2)
-            {
-                nextAttack = availableAtks[i];
-                return;
-            }
-        }
-    }
-
     public virtual void BackfireEffect(float damage)
     {
         //BACKFIRE APPLY DAMAGE BASED ON HOW MUCH DAMAGE WAS DEALT
@@ -603,238 +457,13 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         SetAnimation("Idle", true);
     }
 
-    public void FireCastParticles()
-    {
-        CastAttackParticles();
-    }
+   
+  
 
-    //start the casting particlaes foe the attack
-    public virtual void CastAttackParticles()
-    {
-        if (nextAttack != null)
-        {
-            tempGameObject = ParticleManagerScript.Instance.FireParticlesInPosition(UMS.Side == SideType.LeftSide ? nextAttack.Particles.Left.Cast : nextAttack.Particles.Right.Cast, CharInfo.CharacterID, AttackParticlePhaseTypes.Cast,
-           SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position, UMS.Side, nextAttack.AttackInput);
-            tempGameObject.GetComponent<ParticleHelperScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
-
-            if (nextAttack.CurrentAttackType == AttackType.Particles)
-            {
-                CharInfo.Ether -= nextAttack.StaminaCost;
-                EventManager.Instance?.UpdateStamina(this);
-                
-                if (nextAttack.AttackInput > AttackInputType.Weak)
-                {
-                    CameraManagerScript.Instance.CameraShake(CameraShakeType.Powerfulattack);
-                }
-            }
-        }
-    }
-
-    public void CreateParticleAttack()
-    {
-        if (nextAttack != null)
-        {
-            if (nextAttack.CurrentAttackType == AttackType.Particles)
-            {
-                foreach (BulletBehaviourInfoClass item in nextAttack.ParticlesAtk.BulletTrajectories)
-                {
-                    CreateBullet(item);
-                }
-            }
-            else if (nextAttack.CurrentAttackType == AttackType.Tile)
-            {
-                CreateTileAttack();
-            }
-            else if (nextAttack.CurrentAttackType == AttackType.Totem)
-            {
-                CreateTotemAttack();
-            }
-        }
-    }
-
-    public virtual void CreateBullet(BulletBehaviourInfoClass bulletBehaviourInfo)
-    {
-    }
-
-    public virtual void CreateBullet(BulletBehaviourInfoClassOnBattleFieldClass bulletBehaviourInfo)
-    {
-    }
-
-    public virtual void CreateTileAttack()
-    {
-        if (HasBuffDebuff(BuffDebuffStatsType.Backfire) && NextAttackTileDamage > 0f)
-        {
-            BackfireEffect(NextAttackTileDamage);
-            return;
-        }
-
-        if (nextAttack != null && nextAttack.CurrentAttackType == AttackType.Tile && CharInfo.Health > 0 && IsOnField)
-        {
-            CharInfo.WeakAttack.DamageMultiplier = CharInfo.WeakAttack.B_DamageMultiplier * nextAttack.DamageMultiplier;
-            CharInfo.StrongAttack.DamageMultiplier = CharInfo.StrongAttack.B_DamageMultiplier * nextAttack.DamageMultiplier;
-
-            if (nextAttack.AttackInput > AttackInputType.Strong && CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
-            {
-                StatisticInfoManagerScript.Instance.CharaterStats.Where(r => r.CharacterId == CharInfo.CharacterID).First().DamageExp += nextAttack.ExperiencePoints;
-            }
-
-            for (int i = 0; i < nextAttack.TilesAtk.BulletTrajectories.Count; i++)
-            {
-                foreach (BattleFieldAttackTileClass target in nextAttack.TilesAtk.BulletTrajectories[i].BulletEffectTiles)
-                {
-                    tempInt_1 = UnityEngine.Random.Range(0, 100);
-                    if (tempInt_1 <= nextAttack.TilesAtk.BulletTrajectories[i].ExplosionChances)
-                    {
-                        tempVector2Int = nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnTarget ? target.Pos + nextAttackPos :
-                        nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnItSelf ? target.Pos + UMS.CurrentTilePos : target.Pos;
-                        if (GridManagerScript.Instance.isPosOnField(tempVector2Int))
-                        {
-                            BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(tempVector2Int);
-                            if (bts._BattleTileState != BattleTileStateType.NonUsable)
-                            {
-                                if (nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnItSelf && bts.WalkingSide == UMS.WalkingSide)
-                                {
-                                    shotsLeftInAttack++;
-
-                                    bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, tempVector2Int,
-                                    CharInfo.Elemental, this,
-                                    target, target.EffectChances);
-                                }
-                                else if (nextAttack.TilesAtk.AtkType != BattleFieldAttackType.OnItSelf && bts.WalkingSide != UMS.WalkingSide)
-                                {
-                                    //new way
-
-                                    tempString = GetAttackAnimName();
-                                    tempAnimation = SpineAnim.skeleton.Data.FindAnimation(tempString);
-
-                                    tempTimeLine = tempAnimation?.Timelines?.Items?.Where(r => r is Spine.EventTimeline).ToList();
-                                    tempEventTimeLine = tempTimeLine.Where(r => ((Spine.EventTimeline)r).Events.Where(p => p.Data.Name == "FireBulletParticle").ToList().Count > 0).First() as Spine.EventTimeline;
-
-                                    tempFloat_1 = tempEventTimeLine.Events.Where(r => r.Data.Name == "FireBulletParticle").First().Time;
-
-                                    shotsLeftInAttack++;
-                                    AttackedTiles(bts);
-                                    if (nextAttack.AttackInput > AttackInputType.Weak && i == 0)
-                                    {
-                                        bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, tempVector2Int,
-                                    CharInfo.Elemental, this,
-                                    target, target.EffectChances, (nextAttack.TilesAtk.BulletTrajectories[i].BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y))) + tempFloat_1);//(nextAttack.TilesAtk.BulletTrajectories[i].Delay * 0.1f)
-                                    }
-                                    else if (nextAttack.AttackInput == AttackInputType.Weak)
-                                    {
-                                        bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, tempVector2Int,
-                                    CharInfo.Elemental, this,
-                                    target, target.EffectChances, (nextAttack.TilesAtk.BulletTrajectories[i].BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y))) + tempFloat_1); // 
-                                    }
-                                    else
-                                    {
-                                        bts.BattleTargetScript.SetAttack(nextAttack.TilesAtk.BulletTrajectories[i].Delay, tempVector2Int,
-                                    CharInfo.Elemental, this,
-                                    target, target.EffectChances, false);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            if (shotsLeftInAttack == 0)
-            {
-                Attacking = false;
-                currentAttackPhase = AttackPhasesType.End;
-            }
-        }
-    }
-
-    public virtual void CreateTotemAttack()
-    {
-        if (nextAttack != null && nextAttack.CurrentAttackType == AttackType.Totem && CharInfo.Health > 0 && IsOnField)
-        {
-            CharInfo.WeakAttack.DamageMultiplier = CharInfo.WeakAttack.B_DamageMultiplier * nextAttack.DamageMultiplier;
-            CharInfo.StrongAttack.DamageMultiplier = CharInfo.StrongAttack.B_DamageMultiplier * nextAttack.DamageMultiplier;
-            StartCoroutine(Totem());
-        }
-    }
-    //TODO to rework
-    IEnumerator Totem()
-    {
-        yield return BattleManagerScript.Instance.WaitUpdate(() => (currentAttackPhase != AttackPhasesType.End || CharInfo.HealthPerc <= 0));
-        BattleTileScript res;
-        MatchType matchType = LoaderManagerScript.Instance != null ? LoaderManagerScript.Instance.MatchInfoType : BattleInfoManagerScript.Instance.MatchInfoType;
-        SideType side = nextAttack.TotemAtk.IsPlayerSide ? UMS.Side : UMS.Side == SideType.LeftSide ? SideType.RightSide : SideType.LeftSide;
-        res = GridManagerScript.Instance.GetFreeBattleTile(side == SideType.LeftSide ? WalkingSideType.LeftSide : WalkingSideType.RightSide);
-        res.SetupEffect(nextAttack.TotemAtk.Effects, nextAttack.TotemAtk.DurationOnField, nextAttack.TotemAtk.TotemIn);
-        List<TotemTentacleClass> tentacles = new List<TotemTentacleClass>();
-        TotemTentacleClass checker;
-        GameObject ps = null;
-        if (nextAttack.TotemAtk.TentaclePrefab != ParticlesType.None)
-        {
-            float timer = 0;
-            while (timer < nextAttack.TotemAtk.DurationOnField)
-            {
-                foreach (TotemTentacleClass item in tentacles)
-                {
-                    item.isActive = false;
-                }
-                yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
-                timer += BattleManagerScript.Instance.DeltaTime;
-                List<BaseCharacter> enemy = (matchType == MatchType.PPPPvE || matchType == MatchType.PPvE || matchType == MatchType.PvE) ?
-                WaveManagerScript.Instance.WaveCharcters.Where(r => r.IsOnField && r.gameObject.activeInHierarchy).ToList() :
-                BattleManagerScript.Instance.GetAllPlayerActiveChars().Where(r => r.UMS.Side == side).ToList();
-
-                foreach (BaseCharacter item in enemy)
-                {
-                    checker = tentacles.Where(r => r.CharAffected == item).FirstOrDefault();
-                    if (checker != null)
-                    {
-                        checker.isActive = true;
-                    }
-                    else
-                    {
-                        if (nextAttack.TotemAtk.TentaclePrefab != ParticlesType.None)
-                        {
-                            ps = ParticleManagerScript.Instance.GetParticle(nextAttack.TotemAtk.TentaclePrefab);
-                            ps.transform.position = res.transform.position;
-                            ps.SetActive(true);
-                            foreach (VFXOffsetToTargetVOL pstimeG in ps.GetComponentsInChildren<VFXOffsetToTargetVOL>())
-                            {
-                                pstimeG.Target = item.CharInfo.Head;
-                            }
-                        }
-
-                        foreach (ScriptableObjectAttackEffect effect in nextAttack.TotemAtk.Effects.Where(r => r.StatsToAffect != BuffDebuffStatsType.BlockTile).ToList())
-                        {
-                            item.Buff_DebuffCo(new Buff_DebuffClass(new ElementalResistenceClass(), ElementalType.Dark, this, effect));
-                        }
-
-
-                        foreach (ScriptableObjectAttackEffect effect in nextAttack.TotemAtk.Effects.Where(r => r.StatsToAffect == BuffDebuffStatsType.BlockTile).ToList())
-                        {
-                            res.BlockTileForTime(effect.Duration, ParticleManagerScript.Instance.GetParticle(effect.Particles));
-                        }
-
-
-                        tentacles.Add(new TotemTentacleClass(item, ps, true));
-                    }
-                }
-
-                foreach (TotemTentacleClass item in tentacles.Where(r => !r.isActive).ToList())
-                {
-                    item.PS.gameObject.SetActive(false);
-                    tentacles.Remove(item);
-                }
-            }
-        }
-    }
-
+   
     public virtual string GetAttackAnimName()
     {
         return nextAttack.PrefixAnim + (nextAttack.PrefixAnim == AttackAnimPrefixType.Atk1 ? "_Loop" : "_AtkToIdle");
-    }
-
-    public virtual void AttackedTiles(BattleTileScript bts)
-    {
-
     }
 
     #endregion
@@ -1996,7 +1625,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         SetAnimation(animState.ToString(), loop, transition);
     }
 
-    public IEnumerator SlowDownAnimation(float perc, Func<bool> condition)
+    public IEnumerator SlowDownAnimation(float perc, System.Func<bool> condition)
     {
         yield return BattleManagerScript.Instance.WaitUpdate(() =>
         {

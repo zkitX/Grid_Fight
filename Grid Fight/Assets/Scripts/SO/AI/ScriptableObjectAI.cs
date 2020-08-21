@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using PlaytraGamesLtd;
 
 
 /// <summary>
@@ -122,14 +123,16 @@ public class ScriptableObjectAI : ScriptableObject
                 case StatsCheckType.None:
                     break;
                 case StatsCheckType.Health:
-                    if (item.CheckOnTarget ? (target != null && CheckStatsValues(item, target.CharInfo.HealthPerc)) : CheckStatsValues(item, bChar.CharInfo.HealthPerc))
+                    if (item.CheckOnTarget ? (target != null && Utils.CheckStatsValues(item.ValueChecker == ValueCheckerType.Between ? item.InBetween : new Vector2(item.PercToCheck, 0f), item.ValueChecker, target.CharInfo.HealthPerc)) : 
+                        Utils.CheckStatsValues(item.ValueChecker == ValueCheckerType.Between ? item.InBetween : new Vector2(item.PercToCheck, 0f), item.ValueChecker, bChar.CharInfo.HealthPerc))
                     {
                         Score += 100 * item.CheckWeightMultiplier;
                         i++;
                     }
                     break;
                 case StatsCheckType.Ether:
-                    if (item.CheckOnTarget ? (target != null && CheckStatsValues(item, target.CharInfo.EtherPerc)) : CheckStatsValues(item, bChar.CharInfo.EtherPerc))
+                    if (item.CheckOnTarget ? (target != null && Utils.CheckStatsValues(item.ValueChecker == ValueCheckerType.Between ? item.InBetween : new Vector2(item.PercToCheck, 0f), item.ValueChecker, target.CharInfo.EtherPerc)) : 
+                        Utils.CheckStatsValues(item.ValueChecker == ValueCheckerType.Between ? item.InBetween : new Vector2(item.PercToCheck, 0f), item.ValueChecker, bChar.CharInfo.EtherPerc))
                     {
                         Score += 100 * item.CheckWeightMultiplier;
                         i++;
@@ -142,7 +145,7 @@ public class ScriptableObjectAI : ScriptableObject
                 case StatsCheckType.BaseSpeed:
                     break;
                 case StatsCheckType.TeamTotalHpPerc:
-                    if (CheckStatsValues(item, WaveManagerScript.Instance.GetCurrentPartyHPPerc()))
+                    if (Utils.CheckStatsValues(item.ValueChecker == ValueCheckerType.Between ? item.InBetween : new Vector2(item.PercToCheck, 0f), item.ValueChecker, WaveManagerScript.Instance.GetCurrentPartyHPPerc()))
                     {
                         Score += 100 * item.CheckWeightMultiplier;
                         i++;
@@ -225,41 +228,6 @@ public class ScriptableObjectAI : ScriptableObject
            }
        }
         return Score;
-    }
-
-
-  
-    private bool CheckStatsValues(AICheckClass aicc, float current)
-    {
-        switch (aicc.ValueChecker)
-        {
-            case ValueCheckerType.LessThan:
-                if(current < aicc.PercToCheck)
-                {
-                    return true;
-                }
-                break;
-            case ValueCheckerType.EqualTo:
-                if (current == aicc.PercToCheck)
-                {
-                    return true;
-                }
-                break;
-            case ValueCheckerType.MoreThan:
-                if (current > aicc.PercToCheck)
-                {
-                    return true;
-                }
-                break;
-            case ValueCheckerType.Between:
-                if (current <= aicc.InBetween.x && current >= aicc.InBetween.y)
-                {
-                    return true;
-                }
-                break;
-        }
-
-        return false;
     }
 
     public void ModifyStats(CharacterInfoScript charinfo)

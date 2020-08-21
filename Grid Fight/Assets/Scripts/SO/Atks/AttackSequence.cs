@@ -3,6 +3,7 @@ using MyBox;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PlaytraGamesLtd;
 
 [System.Serializable]
 public class AttackSequence

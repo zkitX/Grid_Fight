@@ -7,19 +7,19 @@ using UnityEngine;
 public class Stage09_Boss_Geisha_Script : MinionType_Script
 {
 
-    public override bool Attacking
-    {
-        get
-        {
-            if (oniFormeActive) return oniForme.Attacking;
-            else return _Attacking;
-        }
-        set
-        {
-            if (oniFormeActive) oniForme.Attacking = value;
-            else _Attacking = value;
-        }
-    }
+    //public override bool Attacking
+    //{
+    //    get
+    //    {
+    //        if (oniFormeActive) return oniForme.Attacking;
+    //        else return _Attacking;
+    //    }
+    //    set
+    //    {
+    //        if (oniFormeActive) oniForme.Attacking = value;
+    //        else _Attacking = value;
+    //    }
+    //}
     public override CharacterInfoScript CharInfo
     {
         get
@@ -238,42 +238,42 @@ public class Stage09_Boss_Geisha_Script : MinionType_Script
 
     #region Combat
     bool creatingShield = false;
-    public override void CreateTileAttack()
-    {
-        base.CreateTileAttack();
-    }
+    //public override void CreateTileAttack()
+    //{
+    //    base.CreateTileAttack();
+    //}
 
 
-    public override void CastAttackParticles()
-    {
-        //Debug.Log("Cast");
-        if (creatingShield)
-        {
-            creatingShield = false;
-            return;
-        }
+    //public override void CastAttackParticles()
+    //{
+    //    //Debug.Log("Cast");
+    //    if (creatingShield)
+    //    {
+    //        creatingShield = false;
+    //        return;
+    //    }
 
 
-        GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(UMS.Side == SideType.LeftSide ? nextAttack.Particles.Left.Cast : nextAttack.Particles.Right.Cast, 
-            BossPhase == bossPhasesType.Phase1_? CharInfo.CharacterID : oniForme.CharInfo.CharacterID, AttackParticlePhaseTypes.Cast,
-            BossPhase == bossPhasesType.Phase1_ ? SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position : 
-            oniForme.SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position, UMS.Side, nextAttack.AttackInput);
-        cast.GetComponent<ParticleHelperScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
+    //    GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(UMS.Side == SideType.LeftSide ? nextAttack.Particles.Left.Cast : nextAttack.Particles.Right.Cast, 
+    //        BossPhase == bossPhasesType.Phase1_? CharInfo.CharacterID : oniForme.CharInfo.CharacterID, AttackParticlePhaseTypes.Cast,
+    //        BossPhase == bossPhasesType.Phase1_ ? SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position : 
+    //        oniForme.SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position, UMS.Side, nextAttack.AttackInput);
+    //    cast.GetComponent<ParticleHelperScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
 
-        if (nextAttack.CurrentAttackType == AttackType.Particles)
-        {
-            if (SpineAnim.CurrentAnim.Contains("Atk1"))
-            {
-                //_CharInfo.Stamina -= _CharInfo.RapidAttack.Stamina_Cost_Atk;
-                EventManager.Instance?.UpdateStamina(this);
-            }
-            else if (SpineAnim.CurrentAnim.Contains("Atk2"))
-            {
-                //_CharInfo.Stamina -= _CharInfo.PowerfulAttac.Stamina_Cost_Atk;
-                EventManager.Instance?.UpdateStamina(this);
-            }
-        }
-    }
+    //    if (nextAttack.CurrentAttackType == AttackType.Particles)
+    //    {
+    //        if (SpineAnim.CurrentAnim.Contains("Atk1"))
+    //        {
+    //            //_CharInfo.Stamina -= _CharInfo.RapidAttack.Stamina_Cost_Atk;
+    //            EventManager.Instance?.UpdateStamina(this);
+    //        }
+    //        else if (SpineAnim.CurrentAnim.Contains("Atk2"))
+    //        {
+    //            //_CharInfo.Stamina -= _CharInfo.PowerfulAttac.Stamina_Cost_Atk;
+    //            EventManager.Instance?.UpdateStamina(this);
+    //        }
+    //    }
+    //}
 
     public override IEnumerator MoveCharOnDir_Co(InputDirectionType nextDir)
     {

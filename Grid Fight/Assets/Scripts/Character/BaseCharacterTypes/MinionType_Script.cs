@@ -205,207 +205,50 @@ public class MinionType_Script : BaseCharacter
         }
     }
 
-    public override void GetAttack()
-    {
-        if (nextSequencedAttacks.Count > 0)
-        {
-            nextAttack = nextSequencedAttacks[0];
-            nextAttack.isSequencedAttack = true;
-            return;
-        }
-
-        ScriptableObjectAttackBase[] nextAttackSequence = CharInfo.NextAttackSequence;
-        if (nextAttackSequence != null)
-        {
-            nextSequencedAttacks = nextAttackSequence.ToList();
-            GetAttack();
-            return;
-        }
-
-        currentTileAtks = CharInfo.CurrentAttackTypeInfo.Where(r => r != null && r.CurrentAttackType == AttackType.Tile).ToList();
-        availableAtks.Clear();
-        for (int i = 0; i < currentTileAtks.Count; i++)
-        {
-            atkToCheck = currentTileAtks[i];
-            switch (atkToCheck.TilesAtk.StatToCheck)
-            {
-                case StatsCheckType.Health:
-                    switch (atkToCheck.TilesAtk.ValueChecker)
-                    {
-                        case ValueCheckerType.LessThan:
-                            if (CharInfo.HealthPerc < atkToCheck.TilesAtk.PercToCheck)
-                            {
-
-                                availableAtks.Add(atkToCheck);
-                            }
-                            break;
-                        case ValueCheckerType.EqualTo:
-                            if (CharInfo.HealthPerc == atkToCheck.TilesAtk.PercToCheck)
-                            {
-                                availableAtks.Add(atkToCheck);
-                            }
-                            break;
-                        case ValueCheckerType.MoreThan:
-                            if (CharInfo.HealthPerc > atkToCheck.TilesAtk.PercToCheck)
-                            {
-                                availableAtks.Add(atkToCheck);
-                            }
-                            break;
-                        case ValueCheckerType.Between:
-                            if (CharInfo.HealthPerc <= atkToCheck.TilesAtk.InBetween.x && CharInfo.HealthPerc >= atkToCheck.TilesAtk.InBetween.y)
-                            {
-                                availableAtks.Add(atkToCheck);
-                            }
-                            break;
-                    }
-                    break;
-                case StatsCheckType.Ether:
-                    switch (atkToCheck.TilesAtk.ValueChecker)
-                    {
-                        case ValueCheckerType.LessThan:
-                            if (CharInfo.EtherPerc < atkToCheck.TilesAtk.PercToCheck)
-                            {
-                                availableAtks.Add(atkToCheck);
-                            }
-                            break;
-                        case ValueCheckerType.EqualTo:
-                            if (CharInfo.EtherPerc == atkToCheck.TilesAtk.PercToCheck)
-                            {
-                                availableAtks.Add(atkToCheck);
-                            }
-                            break;
-                        case ValueCheckerType.MoreThan:
-                            if (CharInfo.EtherPerc > atkToCheck.TilesAtk.PercToCheck)
-                            {
-                                availableAtks.Add(atkToCheck);
-                            }
-                            break;
-                        case ValueCheckerType.Between:
-                            if (CharInfo.EtherPerc <= atkToCheck.TilesAtk.InBetween.x && CharInfo.EtherPerc >= atkToCheck.TilesAtk.InBetween.y)
-                            {
-                                availableAtks.Add(atkToCheck);
-                            }
-                            break;
-                    }
-                    break;
-                case StatsCheckType.None:
-                    availableAtks.Add(atkToCheck);
-                    break;
-            }
-        }
-
-        int totalchances = 0;
-
-        List<ScriptableObjectAttackBase> resAtkBase = new List<ScriptableObjectAttackBase>();
-        availableAtks.ForEach(r =>
-        {
-            switch (r.Fov)
-            {
-                case FieldOfViewType.NearRange:
-                    if(target.UMS.CurrentTilePos.x == UMS.CurrentTilePos.x)
-                    {
-                        resAtkBase.Add(r);
-                    }
-                    break;
-                case FieldOfViewType.MidRange:
-                    if (Mathf.Abs(target.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x) <= 1)
-                    {
-                        resAtkBase.Add(r);
-                    }
-                    break;
-                case FieldOfViewType.LongRange:
-                    resAtkBase.Add(r);
-                    break;
-            }
-        });
-
-        resAtkBase.ForEach(r =>
-        {
-            totalchances += r.TilesAtk.Chances;
-        });
-        int chances = 0;
-        int sumc = 0;
-        for (int i = 0; i < resAtkBase.Count; i++)
-        {
-            chances = UnityEngine.Random.Range(0, totalchances);
-            sumc += resAtkBase[i].TilesAtk.Chances;
-
-            if (chances < sumc)
-            {
-                nextAttack = resAtkBase[i];
-                return;
-            }
-            totalchances -= sumc;
-        }
-    }
 
 
-    public override void CreateBullet(BulletBehaviourInfoClassOnBattleFieldClass bulletBehaviourInfo)
-    {
-        GameObject bullet = BulletManagerScript.Instance.GetBullet();
-        bullet.transform.position = SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position;
-        BulletScript bs = bullet.GetComponent<BulletScript>();
-        bs.gameObject.SetActive(true);
-        bs.SOAttack = nextAttack;
-        bs.BulletBehaviourInfo = null; 
-        bs.BulletBehaviourInfoTile = bulletBehaviourInfo;
-        bs.Facing = UMS.Facing;
-        bs.Elemental = CharInfo.DamageStats.CurrentElemental;
-        bs.Side = UMS.Side;
-        bs.isColliding = false;
-        bs.CharOwner = this;
-        bs.attackAudioType = GetAttackAudio();
-        bs.BulletEffects.Clear();
-        bs.DestinationTile = nextAttackPos;
-        bs.bts = GridManagerScript.Instance.GetBattleTile(nextAttackPos);
-        float duration = bulletBehaviourInfo.BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y));
+    //public override void fireAttackAnimation(Vector3 pos)
+    //{
+    //    if (!SpineAnim.CurrentAnim.Contains("Loop"))
+    //    {
+    //        if(nextAttack.PrefixAnim != AttackAnimPrefixType.Atk1)
+    //        {
+    //            if(!strongAnimDone)
+    //            {
+    //                strongAnimDone = true;
+    //                SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
+    //            }
+    //        }
+    //        else
+    //        {
+    //            SetAnimation(nextAttack.PrefixAnim + "_Loop");
+    //        }
+    //    }
 
-        bs.BulletDuration = duration > bulletBehaviourInfo.Delay ? bulletBehaviourInfo.Delay - SpineAnim.SpineAnimationState.GetCurrent(0).TrackTime : duration;
-        bs.StartMoveToTile();
-    }
+    //    if (chargeParticles != null && shotsLeftInAttack <= 0)
+    //    {
+    //        chargeParticles.SetActive(false);
 
-    public override void fireAttackAnimation(Vector3 pos)
-    {
-        if (!SpineAnim.CurrentAnim.Contains("Loop"))
-        {
-            if(nextAttack.PrefixAnim != AttackAnimPrefixType.Atk1)
-            {
-                if(!strongAnimDone)
-                {
-                    strongAnimDone = true;
-                    SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
-                }
-            }
-            else
-            {
-                SetAnimation(nextAttack.PrefixAnim + "_Loop");
-            }
-        }
-
-        if (chargeParticles != null && shotsLeftInAttack <= 0)
-        {
-            chargeParticles.SetActive(false);
-
-            chargeParticles = null;
-        }
-    }
+    //        chargeParticles = null;
+    //    }
+    //}
 
 
-    public override void FireAttackAnimAndBullet(Vector3 pos)
-    {
-        if (nextAttack.AttackInput != AttackInputType.Weak)
-        {
-            if (!strongAnimDone)
-            {
-                strongAnimDone = true;
-                SetAnimation(nextAttack.PrefixAnim == AttackAnimPrefixType.Atk1 ? nextAttack.PrefixAnim + "_Loop" : nextAttack.PrefixAnim + "_AtkToIdle");
-            }
-        }
-        else
-        {
-            SetAnimation(nextAttack.PrefixAnim + "_Loop");
-        }
-    }
+    //public override void FireAttackAnimAndBullet(Vector3 pos)
+    //{
+    //    if (nextAttack.AttackInput != AttackInputType.Weak)
+    //    {
+    //        if (!strongAnimDone)
+    //        {
+    //            strongAnimDone = true;
+    //            SetAnimation(nextAttack.PrefixAnim == AttackAnimPrefixType.Atk1 ? nextAttack.PrefixAnim + "_Loop" : nextAttack.PrefixAnim + "_AtkToIdle");
+    //        }
+    //    }
+    //    else
+    //    {
+    //        SetAnimation(nextAttack.PrefixAnim + "_Loop");
+    //    }
+    //}
 
     public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {

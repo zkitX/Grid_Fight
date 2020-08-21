@@ -371,9 +371,56 @@ path = System.IO.Path.Combine(Application.persistentDataPath, "Log.txt");
 
 
         }
+
+        public static bool CheckStatsValues(Vector2 valuesToCheck, ValueCheckerType typeOfCheck, float current)
+        {
+            switch (typeOfCheck)
+            {
+                case ValueCheckerType.LessThan:
+                    if (current < valuesToCheck.x)
+                    {
+                        return true;
+                    }
+                    break;
+                case ValueCheckerType.EqualTo:
+                    if (current == valuesToCheck.x)
+                    {
+                        return true;
+                    }
+                    break;
+                case ValueCheckerType.MoreThan:
+                    if (current > valuesToCheck.x)
+                    {
+                        return true;
+                    }
+                    break;
+                case ValueCheckerType.Between:
+                    valuesToCheck = valuesToCheck.x > valuesToCheck.y ? new Vector2(valuesToCheck.x, valuesToCheck.y) : new Vector2(valuesToCheck.y, valuesToCheck.x);
+                    if (current <= valuesToCheck.x && current >= valuesToCheck.y)
+                    {
+                        return true;
+                    }
+                    break;
+            }
+
+            return false;
+        }
+
+
+
     }
 
-    
+    #region Checks
+
+    public enum ValueCheckerType
+    {
+        LessThan,
+        EqualTo,
+        MoreThan,
+        Between
+    }
+
+    #endregion
 }
 
 

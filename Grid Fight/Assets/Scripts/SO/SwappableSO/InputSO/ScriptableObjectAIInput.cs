@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using PlaytraGamesLtd;
 
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/CharaqcterInput/AIInput")]
 public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
 {
+    protected BaseCharacter target = null;
+
     public virtual IEnumerator AI()
     {
         bool val = true;
@@ -51,7 +54,7 @@ public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
                 nextAttack = null;
                 if (target != null)
                 {
-                    GetAttack();
+                    CharOwner.nextAttack = GetRandomAttack();
                 }
 
                 if (target != null && tempInt_1 < AttackWillPerc && nextAttack != null && (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler))
@@ -68,12 +71,12 @@ public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
                 }
                 else
                 {
-                    tempInt_2 = UnityEngine.Random.Range(0, 100);
+                    tempInt_2 = Random.Range(0, 100);
                     if (AreTileNearEmpty() && tempInt_2 < MoveWillPerc)
                     {
                         if (possiblePos == null)
                         {
-                            tempInt_1 = UnityEngine.Random.Range(0, (TowardMovementPerc + AwayMovementPerc));
+                            tempInt_1 = Random.Range(0, (TowardMovementPerc + AwayMovementPerc));
                             if (TowardMovementPerc > tempInt_1 && (Time.time - AICoolDownOffset) > CurrentAIState.CoolDown)
                             {
                                 if (target != null)
@@ -206,6 +209,90 @@ public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
 
             }
         }
+    }
+
+
+    public ScriptableObjectAttackBase GetRandomAttack()
+    {
+        ScriptableObjectAttackBase nextAtk = null;
+
+        if (CharOwner.nextSequencedAttacks.Count > 0)
+        {
+            nextAtk = CharOwner.nextSequencedAttacks[0];
+            nextAtk.isSequencedAttack = true;
+            return nextAtk;
+        }
+
+        ScriptableObjectAttackBase[] nextAttackSequence = CharOwner.CharInfo.NextAttackSequence;
+        if (nextAttackSequence != null)
+        {
+            CharOwner.nextSequencedAttacks = nextAttackSequence.ToList();
+            nextAtk = GetRandomAttack();
+            return nextAtk;
+        }
+
+        CharOwner.currentTileAtks = CharOwner.CharInfo.CurrentAttackTypeInfo.Where(r => r != null && r.CurrentAttackType == AttackType.Tile).ToList();
+        CharOwner.availableAtks.Clear();
+        for (int i = 0; i < CharOwner.currentTileAtks.Count; i++)
+        {
+            CharOwner.atkToCheck = CharOwner.currentTileAtks[i];
+            switch (CharOwner.atkToCheck.TilesAtk.StatToCheck)
+            {
+                case StatsCheckType.Health:
+                    Utils.CheckStatsValues(new Vector2(CharOwner.atkToCheck.TilesAtk.PercToCheck, 0f), CharOwner.atkToCheck.TilesAtk.ValueChecker, CharOwner.CharInfo.HealthPerc);
+                    break;
+                case StatsCheckType.Ether:
+                    Utils.CheckStatsValues(new Vector2(CharOwner.atkToCheck.TilesAtk.PercToCheck, 0f), CharOwner.atkToCheck.TilesAtk.ValueChecker, CharOwner.CharInfo.EtherPerc);
+                    break;
+                case StatsCheckType.None:
+                    CharOwner.availableAtks.Add(CharOwner.atkToCheck);
+                    break;
+            }
+        }
+
+        int totalchances = 0;
+
+        List<ScriptableObjectAttackBase> resAtkBase = new List<ScriptableObjectAttackBase>();
+        CharOwner.availableAtks.ForEach(r =>
+        {
+            switch (r.Fov)
+            {
+                case FieldOfViewType.NearRange:
+                    if (target.UMS.CurrentTilePos.x == CharOwner.UMS.CurrentTilePos.x)
+                    {
+                        resAtkBase.Add(r);
+                    }
+                    break;
+                case FieldOfViewType.MidRange:
+                    if (Mathf.Abs(target.UMS.CurrentTilePos.x - CharOwner.UMS.CurrentTilePos.x) <= 1)
+                    {
+                        resAtkBase.Add(r);
+                    }
+                    break;
+                case FieldOfViewType.LongRange:
+                    resAtkBase.Add(r);
+                    break;
+            }
+        });
+
+        resAtkBase.ForEach(r =>
+        {
+            totalchances += r.TilesAtk.Chances;
+        });
+        int chances = 0;
+        int sumc = 0;
+        for (int i = 0; i < resAtkBase.Count; i++)
+        {
+            chances = Random.Range(0, totalchances);
+            sumc += resAtkBase[i].TilesAtk.Chances;
+
+            if (chances < sumc)
+            {
+                return resAtkBase[i];
+            }
+            totalchances -= sumc;
+        }
+        return null;
     }
 }
 

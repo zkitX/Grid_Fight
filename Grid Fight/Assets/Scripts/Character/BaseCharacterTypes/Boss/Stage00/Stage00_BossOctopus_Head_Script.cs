@@ -24,41 +24,41 @@ public class Stage00_BossOctopus_Head_Script : MinionType_Script
         yield return null;
     }
 
-    public override void fireAttackAnimation(Vector3 pos)
-    {
-        eyeAttackTarget.Add(pos);
-        base.fireAttackAnimation(pos);
-    }
+    //public override void fireAttackAnimation(Vector3 pos)
+    //{
+    //    eyeAttackTarget.Add(pos);
+    //    base.fireAttackAnimation(pos);
+    //}
 
-    public override void CastAttackParticles()
-    {
-        GameObject cast;
-        GameObject GOTarget;
-        //Debug.Log("Cast");
+    //public override void CastAttackParticles()
+    //{
+    //    GameObject cast;
+    //    GameObject GOTarget;
+    //    //Debug.Log("Cast");
 
-        for (int i = 0; i < eyeAttackTarget.Count; i++)
-        {
-            cast = ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.Right.Cast, CharInfo.CharacterID, AttackParticlePhaseTypes.Cast,
-                SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position, UMS.Side, nextAttack.AttackInput);
-            GOTarget = cast.GetComponentInChildren<ParticleLaserAiming>().Target.transform.gameObject;
-            GOTarget.transform.position = eyeAttackTarget[i];
-            cast.GetComponent<ParticleHelperScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
+    //    for (int i = 0; i < eyeAttackTarget.Count; i++)
+    //    {
+    //        cast = ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.Right.Cast, CharInfo.CharacterID, AttackParticlePhaseTypes.Cast,
+    //            SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position, UMS.Side, nextAttack.AttackInput);
+    //        GOTarget = cast.GetComponentInChildren<ParticleLaserAiming>().Target.transform.gameObject;
+    //        GOTarget.transform.position = eyeAttackTarget[i];
+    //        cast.GetComponent<ParticleHelperScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
             
-        }
+    //    }
 
-        if (SpineAnim.CurrentAnim.Contains("Atk1"))
-        {
-            //CharInfo.Stamina -= CharInfo.RapidAttack.Stamina_Cost_Atk;
-            EventManager.Instance.UpdateStamina(this);
-        }
-        else if (SpineAnim.CurrentAnim.Contains("Atk2"))
-        {
-            // CharInfo.Stamina -= CharInfo.PowerfulAttac.Stamina_Cost_Atk;
-            EventManager.Instance.UpdateStamina(this);
-        }
+    //    if (SpineAnim.CurrentAnim.Contains("Atk1"))
+    //    {
+    //        //CharInfo.Stamina -= CharInfo.RapidAttack.Stamina_Cost_Atk;
+    //        EventManager.Instance.UpdateStamina(this);
+    //    }
+    //    else if (SpineAnim.CurrentAnim.Contains("Atk2"))
+    //    {
+    //        // CharInfo.Stamina -= CharInfo.PowerfulAttac.Stamina_Cost_Atk;
+    //        EventManager.Instance.UpdateStamina(this);
+    //    }
 
-        eyeAttackTarget.Clear();
-    }
+    //    eyeAttackTarget.Clear();
+    //}
 
     public override void CharArrivedOnBattleField()
     {

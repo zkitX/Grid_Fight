@@ -258,14 +258,6 @@ public class CharacterType_Script : BaseCharacter
 
     #region Attack
 
-    public void SetParticlesLayer(GameObject ps)
-    {
-        foreach (ParticleSystemRenderer item in ps.GetComponentsInChildren<ParticleSystemRenderer>())
-        {
-            item.sortingOrder = CharOredrInLayer;
-        }
-    }
-
     public void StartChargingAtk(AttackInputType atkType)
     {
         switch (atkType)
@@ -372,13 +364,11 @@ public class CharacterType_Script : BaseCharacter
                 {
                     isChargingParticlesOn = true;
                     //Check
-                    chargingPs = ParticleManagerScript.Instance.FireParticlesInPosition(nxtAtk.Particles.CastLoopPS, CharInfo.CharacterID, AttackParticlePhaseTypes.Charging, transform.position, UMS.Side, nxtAtk.AttackInput);
-                    chargingPs.transform.parent = SpineAnim.transform;
-                    chargingPs.transform.localPosition = Vector3.zero;
+                    chargingPs = ParticleManagerScript.Instance.FireParticlesInTransform(nxtAtk.Particles.CastLoopPS, CharInfo.CharacterID, AttackParticlePhaseTypes.Charging, SpineAnim.transform, UMS.Side, nxtAtk.AttackInput);
                 }
                 else
                 {
-                    SetParticlesLayer(chargingPs);
+                    ParticleManagerScript.Instance.SetParticlesLayer(chargingPs, CharOredrInLayer);
                 }
 
                 if (!IsOnField)
@@ -548,73 +538,6 @@ public class CharacterType_Script : BaseCharacter
     {
         SetAnimation(atk + "_Charging", true);
     }
-
-    int iter = 0;
-    //Create and set up the basic info for the bullet
-    public override void CreateBullet(BulletBehaviourInfoClass bulletBehaviourInfo)
-    {
-        if (HasBuffDebuff(BuffDebuffStatsType.Backfire))
-        {
-            BackfireEffect(NextAttackDamage);
-            return;
-        }
-
-        iter++;
-        // Debug.Log(isSpecialLoading);
-        GameObject bullet = BulletManagerScript.Instance.GetBullet();
-        bullet.transform.position = SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position;
-        BulletScript bs = bullet.GetComponent<BulletScript>();
-
-        if (UMS.Facing == FacingType.Right)
-        {
-            bs.bts = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(new Vector2Int(UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x, UMS.CurrentTilePos.y + bulletBehaviourInfo.BulletDistanceInTile.y > 11 ?
-                11 : UMS.CurrentTilePos.y + bulletBehaviourInfo.BulletDistanceInTile.y), UMS.Facing);
-            if (bs.bts == null)
-            {
-                bs.gameObject.SetActive(false);
-                return;
-            }
-            bs.DestinationTile = bs.bts.Pos;
-        }
-        else
-        {
-            bs.bts = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(new Vector2Int(UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x, UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y < 0 ? 0 :
-                UMS.CurrentTilePos.y - bulletBehaviourInfo.BulletDistanceInTile.y), UMS.Facing);
-            if (bs.bts == null)
-            {
-                bs.gameObject.SetActive(false);
-                return;
-            }
-            bs.DestinationTile = bs.bts.Pos;
-        }
-
-        bs.SOAttack = nextAttack;
-        bs.BulletBehaviourInfo = bulletBehaviourInfo;
-        bs.Facing = UMS.Facing;
-        bs.Elemental = CharInfo.DamageStats.CurrentElemental;
-        bs.Side = UMS.Side;
-        bs.isColliding = true;
-        bs.CharOwner = this;
-        bs.attackAudioType = GetAttackAudio();
-        ScriptableObjectAttackEffect[] abAtkBase = new ScriptableObjectAttackEffect[bulletBehaviourInfo.Effects.Count];
-        bulletBehaviourInfo.Effects.CopyTo(abAtkBase);
-        bs.BulletEffects = abAtkBase.ToList();
-       
-        bs.iter = iter;
-
-        
-
-        if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
-        {
-            bs.gameObject.SetActive(true);
-            bs.StartMoveToTile();
-        }
-        else
-        {
-            bs.gameObject.SetActive(false);
-        }
-    }
-
 
 
     #endregion

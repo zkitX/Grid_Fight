@@ -74,8 +74,9 @@ public class ParticleManagerScript : MonoBehaviour
         }
     }
 
-    public GameObject FireParticlesInTransform(GameObject ps, CharacterNameType characterId, AttackParticlePhaseTypes particleType, Transform parent, SideType side, AttackInputType attackInput, float timer, int iter)
+    public GameObject FireParticlesInTransform(GameObject ps, CharacterNameType characterId, AttackParticlePhaseTypes particleType, Transform parent, SideType side, AttackInputType attackInput, float timer = 0f)
     {
+
         //pType = AttackParticleTypes.Test_Mesh;
         using (FiredAttackParticle psToFire = AttackParticlesFired.Where(r => r.ParticleType == particleType && r.CharaterId == characterId 
         && !r.PS.gameObject.activeInHierarchy && r.Side == side && r.AttackInput == attackInput).FirstOrDefault())
@@ -85,7 +86,10 @@ public class ParticleManagerScript : MonoBehaviour
                 psToFire.PS.SetActive(true);
                 psToFire.PS.transform.parent = parent;
                 psToFire.PS.transform.localPosition = Vector3.zero;
-                psToFire.PS.GetComponent<ParticleHelperScript>().UpdatePSTime(timer, iter);
+                if(timer != 0f)
+                {
+                    psToFire.PS.GetComponent<ParticleHelperScript>().UpdatePSTime(timer);
+                }
                 ChangePsSpeed(psToFire.PS, BattleManagerScript.Instance.BattleSpeed);
                 return psToFire.PS;
             }
@@ -95,7 +99,10 @@ public class ParticleManagerScript : MonoBehaviour
                 res.SetActive(true);
                 res.transform.localPosition = Vector3.zero;
                 AttackParticlesFired.Add(new FiredAttackParticle(res, characterId, particleType, side, attackInput));
-                res.GetComponent<ParticleHelperScript>().UpdatePSTime(timer, iter);
+                if (timer != 0f)
+                {
+                    psToFire.PS.GetComponent<ParticleHelperScript>().UpdatePSTime(timer);
+                }
                 ChangePsSpeed(res, BattleManagerScript.Instance.BattleSpeed);
                 return res;
             }
@@ -117,6 +124,14 @@ public class ParticleManagerScript : MonoBehaviour
     {
         ScriptableObjectParticle ps = ListOfParticles.Where(r => r.PSType == particle).FirstOrDefault();
         return ps != null ? ps.PS : null;
+    }
+
+    public void SetParticlesLayer(GameObject ps, int sortingLayer)
+    {
+        foreach (ParticleSystemRenderer item in ps.GetComponentsInChildren<ParticleSystemRenderer>())
+        {
+            item.sortingOrder = sortingLayer;
+        }
     }
 }
 

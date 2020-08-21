@@ -453,14 +453,6 @@ public enum DeathAnimType
     Reverse_Arrives
 }
 
-public enum ValueCheckerType
-{
-    LessThan,
-    EqualTo,
-    MoreThan,
-    Between
-}
-
 public enum ElementalWeaknessType
 {
     ExtremelyWeak = -3,

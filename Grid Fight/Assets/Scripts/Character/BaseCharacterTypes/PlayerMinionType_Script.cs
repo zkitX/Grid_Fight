@@ -86,28 +86,6 @@ public class PlayerMinionType_Script : MinionType_Script
         base.SetFinalDamage(attacker, damage, hic);
     }
 
-    public override void CreateBullet(BulletBehaviourInfoClassOnBattleFieldClass bulletBehaviourInfo)
-    {
-        GameObject bullet = BulletManagerScript.Instance.GetBullet();
-        bullet.transform.position = SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position;
-        BulletScript bs = bullet.GetComponent<BulletScript>();
-        bs.SOAttack = nextAttack;
-        bs.BulletBehaviourInfo = null; 
-        bs.BulletBehaviourInfoTile = bulletBehaviourInfo;
-        bs.Facing = UMS.Facing;
-        bs.Elemental = CharInfo.DamageStats.CurrentElemental;
-        bs.Side = UMS.Side;
-        bs.isColliding = false;
-        bs.CharOwner = this;
-        bs.attackAudioType = GetAttackAudio();
-        bs.BulletEffects.Clear();
-        bs.DestinationTile = bulletBehaviourInfo.BulletEffectTiles[0].Pos + nextAttackPos;
-        float duration = bulletBehaviourInfo.BulletTravelDurationPerTile * (float)(Mathf.Abs(UMS.CurrentTilePos.y - nextAttackPos.y));
-        bs.BulletDuration = duration > bulletBehaviourInfo.Delay ? bulletBehaviourInfo.Delay - SpineAnim.SpineAnimationState.GetCurrent(0).TrackTime : duration;
-       
-        bs.gameObject.SetActive(true);
-        bs.StartMoveToTile();
-    }
 
     public override void SpineAnimationState_Event(Spine.TrackEntry trackEntry, Spine.Event e)
     {

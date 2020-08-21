@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PlaytraGamesLtd;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Wave/WaveEvent/CharStatsCheckInPerc")]
 public class ScriptableObjectWaveEvent_CharStatsCheckInPerc : ScriptableObjectWaveEvent

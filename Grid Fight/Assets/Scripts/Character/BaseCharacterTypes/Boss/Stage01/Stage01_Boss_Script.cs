@@ -357,26 +357,26 @@ public class Stage01_Boss_Script : MinionType_Script
         }
     }
 
-    public override void AttackedTiles(BattleTileScript bts)
+    public void AttackedTiles(BattleTileScript bts)
     {
         AttackedTilesList.Add(bts);
 
     }
 
-    public override void CastAttackParticles()
-    {
-        GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.Right.Cast, CharInfo.CharacterID, AttackParticlePhaseTypes.Cast,
-          SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position, UMS.Side, nextAttack.AttackInput);
+    //public override void CastAttackParticles()
+    //{
+    //    GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.Right.Cast, CharInfo.CharacterID, AttackParticlePhaseTypes.Cast,
+    //      SpineAnim.FiringPints[(int)nextAttack.AttackAnim].position, UMS.Side, nextAttack.AttackInput);
 
-        cast.GetComponent<ParticleHelperScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
-        if(nextAttack.AttackInput == AttackInputType.Skill1)
-        {
-            foreach (VFXOffsetToTargetVOL item in cast.GetComponentsInChildren<VFXOffsetToTargetVOL>())
-            {
-                item.Target = AttackedTilesList.First().transform;
-            }
-        }
-    }
+    //    cast.GetComponent<ParticleHelperScript>().SetSimulationSpeed(CharInfo.BaseSpeed);
+    //    if(nextAttack.AttackInput == AttackInputType.Skill1)
+    //    {
+    //        foreach (VFXOffsetToTargetVOL item in cast.GetComponentsInChildren<VFXOffsetToTargetVOL>())
+    //        {
+    //            item.Target = AttackedTilesList.First().transform;
+    //        }
+    //    }
+    //}
 
     public override string GetAttackAnimName()
     {
