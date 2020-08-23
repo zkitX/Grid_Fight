@@ -89,7 +89,7 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
 
         CharOwner.SetAnimation(currentAtk.PrefixName + "_Charging");
         yield return StartCharging();
-        while (currentAttackPhase == AttackPhasesType.Cast_Strong && shotsLeftInAttack > 0)
+        while (currentAttackPhase == AttackPhasesType.Charging && shotsLeftInAttack > 0 && currentAtk.ChargingTime > 0)
         {
 
             yield return Charging();
@@ -100,7 +100,7 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
         {
             while (shotsLeftInAttack > 0)
             {
-                currentAttackPhase = AttackPhasesType.Cast_Strong;
+                currentAttackPhase = AttackPhasesType.Firing;
                 CharOwner.SetAnimation(currentAtk.PrefixName + "_Loop");
                 shotsLeftInAttack = 0;
                 while (currentAttackPhase != AttackPhasesType.End)

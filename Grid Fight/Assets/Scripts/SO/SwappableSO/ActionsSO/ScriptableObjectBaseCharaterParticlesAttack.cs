@@ -25,7 +25,14 @@ public class ScriptableObjectBaseCharaterParticlesAttack : ScriptableObjectBaseC
 
 
 
-
+    public override IEnumerator StartIdleToAtk()
+    {
+        yield break;
+    }
+    public override IEnumerator IdleToAtk()
+    {
+        yield break;
+    }
     public override IEnumerator StartCharging()
     {
         yield break;
@@ -35,14 +42,7 @@ public class ScriptableObjectBaseCharaterParticlesAttack : ScriptableObjectBaseC
         yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
         strongAttackTimer += BattleManagerScript.Instance.DeltaTime;
     }
-    public override IEnumerator StartIdleToAtk()
-    {
-        yield break;
-    }
-    public override IEnumerator IdleToAtk()
-    {
-        yield break;
-    }
+  
     public override IEnumerator StartLoop()
     {
         if (strongAttackTimer < CharOwner.nextAttack.ChargingTime && CharOwner.CharInfo.Health <= 0f)

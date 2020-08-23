@@ -212,7 +212,7 @@ public class ScriptableObjectBaseCharaterTilesAttack : ScriptableObjectBaseChara
         strongAttackTimer += BattleManagerScript.Instance.DeltaTime;
         if (strongAttackTimer > ChargingTime && CharOwner.CharInfo.Health > 0f)
         {
-            currentAttackPhase = AttackPhasesType.Cast_Strong;
+            currentAttackPhase = AttackPhasesType.Firing;
         }
     }
   
