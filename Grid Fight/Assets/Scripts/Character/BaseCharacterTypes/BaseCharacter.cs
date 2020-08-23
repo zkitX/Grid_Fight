@@ -1382,6 +1382,11 @@ public class BaseCharacter : MonoBehaviour, IDisposable
                 yield break;
             }
         }
+
+        if(isMoving && !isMovCheck)
+        {
+            isMoving = false;
+        }
         spineT.localPosition = LocalSpinePosoffset;
         //Debug.Log("EndMoveCo");
     }
