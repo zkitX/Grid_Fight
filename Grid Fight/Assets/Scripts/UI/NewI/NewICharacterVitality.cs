@@ -171,7 +171,7 @@ public class NewICharacterVitality : MonoBehaviour
             deadText.text = (Mathf.FloorToInt(waitLeft) + 1).ToString();
             waitLeft = Mathf.Clamp(waitLeft - Time.deltaTime, 0f, 9999f);
             prog = 1f - (waitLeft / startingWait);
-            healthBar.fillAmount = Mathf.Lerp(healthStart, 1f, prog);
+            healthBar.fillAmount = Mathf.Lerp(0f, 1f, prog);
             staminaBar.fillAmount = Mathf.Lerp(staminaStart, 1f, prog);
             shieldBar.fillAmount = Mathf.Lerp(shieldStart, 1f, prog);
             yield return null;
