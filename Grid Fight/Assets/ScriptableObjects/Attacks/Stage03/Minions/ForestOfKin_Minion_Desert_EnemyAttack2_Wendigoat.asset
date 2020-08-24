@@ -17,12 +17,12 @@ MonoBehaviour:
   AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 1
-  AttackAnim: 0
   StaminaCost: 10
   ExperiencePoints: 10
   _CoolDown: {x: 3, y: 5}
-  PrefixAnim: 1
+  PrefixAnim: 0
   Fov: 0
+  AttackAnim: 0
   Particles:
     Left:
       Cast: {fileID: 5677120806498836123, guid: 68be038f0ed813a4b9b65e430b29221e,
@@ -40,6 +40,9 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
+  effectTimeOnImpact: 0
+  timeEffectMultiplier: 1
+  durationOfTimeEffect: 1
   TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories:
@@ -167,7 +170,7 @@ MonoBehaviour:
         EffectsOnTile: []
     StatToCheck: 1
     ValueChecker: 2
-    Chances: 100
+    Chances: 0
     PercToCheck: 0
     InBetween: {x: 0, y: 0}
     Show: 0

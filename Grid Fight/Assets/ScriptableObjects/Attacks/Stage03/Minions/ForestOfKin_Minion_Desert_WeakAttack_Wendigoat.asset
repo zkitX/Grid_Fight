@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: ForestOfKin_Minion_Desert_EnemyAttack1_Wendigoat 1
+  m_Name: ForestOfKin_Minion_Desert_WeakAttack_Wendigoat
   m_EditorClassIdentifier: 
   isSequencedAttack: 0
-  CurrentAttackType: 1
+  CurrentAttackType: 0
   AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 0
-  AttackAnim: 0
   StaminaCost: 10
   ExperiencePoints: 10
   _CoolDown: {x: 3, y: 5}
   PrefixAnim: 0
   Fov: 0
+  AttackAnim: 0
   Particles:
     Left:
       Cast: {fileID: 1675229723060638762, guid: 576147d6cee7162419c8f7ec7708a524,
@@ -40,6 +40,9 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
+  effectTimeOnImpact: 0
+  timeEffectMultiplier: 1
+  durationOfTimeEffect: 1
   TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories:
