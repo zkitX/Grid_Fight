@@ -43,62 +43,51 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
     #endregion
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //minion
-    protected float LastAttackTime;
-    public int AttackWillPerc = 13;
-    public int MoveWillPerc = 100;
-    public int UpDownMovementPerc = 13;
-    public int TowardMovementPerc = 13;
-    public int AwayMovementPerc = 13;
-    public List<AggroInfoClass> AggroInfoList = new List<AggroInfoClass>();
     protected float totDamage = 0;
-    protected bool strongAnimDone = false;
-    public ScriptableObjectAI CurrentAIState;
-    public GameObject psAI = null;
-    public BattleTileScript possiblePos = null;
-    public Vector2Int[] path;
-    public bool found = false;
-    public List<BattleTileScript> possiblePositions = new List<BattleTileScript>();
-    protected float lastAttackTime = 0;
+
+    [HideInInspector] public ScriptableObjectBaseCharaterInput currentInputProfile;
+    [HideInInspector] public ScriptableObjectBaseCharacterBaseAttack currentAttackProfile;
+    [HideInInspector] public ScriptableObjectBaseCharaterBaseMove currentMoveProfile;
+    
+
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     //------------------------------------
@@ -118,6 +107,23 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
 
     public delegate void CurrentCharStartingAction(ControllerType playerController, CharacterActionType action);
     public event CurrentCharStartingAction CurrentCharStartingActionEvent;
+
+
+
+    protected virtual void Call_CurrentCharIsDeadEvent()
+    {
+        CurrentCharIsDeadEvent?.Invoke(CharInfo.CharacterID, UMS.PlayerController, UMS.Side);
+    }
+
+    protected virtual void Call_CurrentCharIsRebirthEvent()
+    {
+        CurrentCharIsRebirthEvent(CharInfo.CharacterID, UMS.PlayerController, UMS.Side);
+    }
+
+    public void Invoke_TileMovementCompleteEvent()
+    {
+        TileMovementCompleteEvent?.Invoke(this);
+    }
     #endregion
 
     #region BaseChar Variables
@@ -139,7 +145,6 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
 
     public bool died = false;
 
-
     public bool IsOnField
     {
         get
@@ -152,19 +157,10 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
         }
     }
     public bool _IsOnField = false;
-
-
     public bool isMoving = false;
 
     public SpineAnimationManager SpineAnim;
-
     public DeathBehaviourType DeathAnim;
-
-    public List<CharacterActionType> CharActionlist = new List<CharacterActionType>();
-    public UnitManagementScript UMS;
-    public BoxCollider CharBoxCollider;
-    public StatisticInfoClass Sic;
-
     public Vector3 LocalSpinePosoffset
     {
         get
@@ -180,74 +176,25 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
         }
     }
     public Vector3 _LocalSpinePosoffset = new Vector3(-100, -100, -100);
-    public ControllerType CurrentPlayerController;
+    float AnimSpeed = 1;
+    protected bool pauseOnLastFrame = false;
 
-    protected List<HitInfoClass> HittedByList = new List<HitInfoClass>();
-    protected HitInfoClass LastHitter
-    {
-        get
-        {
-            HitInfoClass lastHitter = null;
-            foreach (HitInfoClass hitter in HittedByList)
-            {
-                if (lastHitter == null || lastHitter.TimeLastHit < hitter.TimeLastHit) lastHitter = hitter;
-            }
-            return lastHitter;
-        }
-    }
+    public List<CharacterActionType> CharActionlist = new List<CharacterActionType>();
+    public UnitManagementScript UMS;
+    public BoxCollider CharBoxCollider;
+    public StatisticInfoClass Sic;
+
+    public ControllerType CurrentPlayerController;
 
     [HideInInspector] public int CharOredrInLayer = 0;
     protected List<BattleTileScript> currentBattleTilesToCheck = new List<BattleTileScript>();
-    public IEnumerator AICo = null;
 
-    [HideInInspector] public Vector2Int nextAttackPos;
-    public virtual bool EndAxisMovement
-    {
-        get
-        {
-            return _EndAxisMovement;
-        }
-        set
-        {
-            //_EndAxisMovement = value;
-        }
-    }
-    private bool _EndAxisMovement = true;
-    protected bool pauseOnLastFrame = false;
-    public bool lastAttack = false;
-    float AnimSpeed = 1;
     #endregion
 
-    #region Defence Variables
-    public bool isDefending
-    {
-        get
-        {
-            return isDefendingStop ? false : _isDefending;
-        }
-        set
-        {
-            _isDefending = value;
-        }
-    }
-
-    public bool _isDefending = false;
-    public bool isDefendingStop = false;
-
-    protected float DefendingHoldingTimer = 0;
-
-    protected bool canDefend = true;
-
-    protected float defenceAnimSpeedMultiplier = 5f;
-    protected bool IsDefStartCo = false;
-    #endregion
-
+    
     #region Variables that we have to decide if still useful
-    [HideInInspector]
-    public List<BattleTileScript> CurrentBattleTiles = new List<BattleTileScript>();
-    public bool CanAttack = false;
 
-    public DeathProcessStage currentDeathProcessPhase = DeathProcessStage.None;
+    public bool CanAttack = false;
 
     #endregion
 
@@ -264,47 +211,32 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
     #endregion
 
     #region SupportVariables
-    protected GameObject chargeParticles = null;
     protected GameObject tempGameObject = null;
     protected float tempFloat_1;
     protected int tempInt_1, tempInt_2, tempInt_3;
     protected Vector2Int tempVector2Int;
     protected Vector3 tempVector3;
     protected string tempString;
-    Spine.Animation tempAnimation;
-    List<Spine.Timeline> tempTimeLine;
-    Spine.EventTimeline tempEventTimeLine;
-    BattleTileScript tempBattleTileScript;
-    List<BattleTileScript> prevBattleTile = new List<BattleTileScript>();
-    CharacterAnimationStateType animState;
-    Vector2Int dir;
-    public AnimationCurve curve;
-    protected BaseCharacter target = null;
-    public float AICoolDownOffset = 0;
-    protected ScriptableObjectAI prev;
     List<Vector2Int> tempList_Vector2int = new List<Vector2Int>();
     [HideInInspector]public Transform spineT;
 
     #endregion
 
 
-    public virtual void Start()
+    public void Start()
     {
         Sic = new StatisticInfoClass(CharInfo.CharacterID, UMS.PlayerController);
     }
 
     protected virtual void Update()
     {
-
         UMS.HPBar.localScale = new Vector3((1f / 100f) * CharInfo.HealthPerc, 1, 1);
-
         UMS.StaminaBar.localScale = new Vector3((1f / 100f) * CharInfo.EtherPerc, 1, 1);
     }
 
     #region Setup Character
     public virtual void SetupCharacterSide()
     {
-
         if (!UMS.PlayerController.Contains(ControllerType.Enemy))
         {
             UMS.SelectionIndicator.gameObject.SetActive(true);
@@ -316,8 +248,6 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
         {
             SpineAnim.gameObject.layer = layer;
         }
-
-
     }
 
     public void _CharInfo_BaseSpeedChangedEvent(float baseSpeed)
@@ -332,7 +262,7 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
             RebirthEffect();
             return;
         }
-        if (CharInfo.Health > 0f) return; //An additional check since for some reason the rebirth isn't applied before a second attack triggers death for some reason
+        if (CharInfo.Health > 0f) return;
         SetCharDead();
     }
 
@@ -347,19 +277,17 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
     public virtual void SetAttackReady(bool value)
     {
         died = false;
-
-        if (value)
-        {
-            HittedByList.Clear();
-        }
-        //Debug.Log(CharInfo.CharacterID + "  " + value);
         if (CharBoxCollider != null)
         {
             CharBoxCollider.enabled = value;
         }
         CanAttack = value;
         IsOnField = value;
-        currentAttackPhase = AttackPhasesType.End;
+
+        currentInputProfile.SetAttackReady(value);
+        currentAttackProfile.SetAttackReady(value);
+        currentMoveProfile.SetAttackReady(value);
+
         CharOredrInLayer = 101 + (UMS.CurrentTilePos.x * 10) + (UMS.Facing == FacingType.Right ? UMS.CurrentTilePos.y - 12 : UMS.CurrentTilePos.y);
         if (CharInfo.UseLayeringSystem)
         {
@@ -371,54 +299,44 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
     {
         if (died) return;
         died = true;
-        CurrentAIState = null;
-        prev = null;
         EventManager.Instance?.AddCharacterDeath(this);
+        Call_CurrentCharIsDeadEvent();
+
+        currentInputProfile.SetCharDead();
+        currentAttackProfile.SetCharDead();
+        currentMoveProfile.SetCharDead();
 
         foreach (ManagedAudioSource audioSource in GetComponentsInChildren<ManagedAudioSource>())
         {
             audioSource.gameObject.transform.parent = AudioManagerMk2.Instance.transform;
         }
 
-        //PREVIOUS LAST HITTER CODE, CAN BE REUSED
-        //if(LastHitter != null && LastHitter.hitter != null && LastHitter.hitter.IsOnField && LastHitter.hitter.HasBuffDebuff(BuffDebuffStatsType.Rebirth))
-        //{
-        //    BuffDebuffClass rebirth = LastHitter.hitter.GetBuffDebuff(BuffDebuffStatsType.Rebirth);
-        //    float HealAmount = rebirth.CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Perc ? LastHitter.hitter.CharInfo.HealthStats.Base * rebirth.CurrentBuffDebuff.Value : rebirth.CurrentBuffDebuff.Value;
-        //    LastHitter.hitter.CharInfo.Health += HealAmount;
-        //    LastHitter.hitter.HealthStatsChangedEvent?.Invoke(HealAmount, HealthChangedType.Heal, LastHitter.hitter.SpineAnim.transform);
-        //}
         isMoving = false;
-        isDefendingStop = true;
-        isDefending = false;
+
         LocalSpinePosoffset = SpineAnim.transform.localPosition;
-        Call_CurrentCharIsDeadEvent();
-        shotsLeftInAttack = 0;
-    }
-
-    protected virtual void Call_CurrentCharIsDeadEvent()
-    {
-        CurrentCharIsDeadEvent?.Invoke(CharInfo.CharacterID, UMS.PlayerController, UMS.Side);
-    }
-
-    protected virtual void Call_CurrentCharIsRebirthEvent()
-    {
-        CurrentCharIsRebirthEvent(CharInfo.CharacterID, UMS.PlayerController, UMS.Side);
     }
 
     public virtual void SetUpEnteringOnBattle()
     {
-
+        currentInputProfile.SetUpEnteringOnBattle();
+        currentAttackProfile.SetUpEnteringOnBattle();
+        currentMoveProfile.SetUpEnteringOnBattle();
     }
 
     public virtual void SetUpLeavingBattle()
     {
-
+        currentInputProfile.SetUpLeavingBattle();
+        currentAttackProfile.SetUpLeavingBattle();
+        currentMoveProfile.SetUpLeavingBattle();
     }
 
     public virtual void CharArrivedOnBattleField()
     {
         SetAttackReady(true);
+
+        currentInputProfile.CharArrivedOnBattleField();
+        currentAttackProfile.CharArrivedOnBattleField();
+        currentMoveProfile.CharArrivedOnBattleField();
     }
 
     public virtual void OnDestroy()
@@ -434,11 +352,6 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
     #endregion
     #region Attack
 
-    public virtual IEnumerator AttackSequence()
-    {
-        yield return null;
-    }
-
     public virtual void BackfireEffect(float damage)
     {
         //BACKFIRE APPLY DAMAGE BASED ON HOW MUCH DAMAGE WAS DEALT
@@ -451,15 +364,9 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
             AttackParticlePhaseTypes.Hit, transform.position, UMS.Side, nextAttack.AttackInput
             );
 
-        shotsLeftInAttack = 0;
-        Attacking = false;
-        currentAttackPhase = AttackPhasesType.End;
+        currentAttackProfile.InteruptAttack();
         SetAnimation("Idle", true);
     }
-
-   
-  
-
    
     public virtual string GetAttackAnimName()
     {
@@ -467,561 +374,27 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
     }
 
     #endregion
-    #region Defence
-
-    public void StartDefending()
-    {
-        if (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || !CharActionlist.Contains(CharacterActionType.Defence) || !canDefend)
-        {
-            return;
-        }
-        SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
-        SpineAnim.SetAnimationSpeed(defenceAnimSpeedMultiplier);
-        if (canDefend && CharInfo.Shield >= UniversalGameBalancer.Instance.defenceCost)
-        {
-            CharInfo.Shield -= UniversalGameBalancer.Instance.defenceCost;
-            isDefendingStop = false;
-            isDefending = true;
-            IsDefStartCo = false;
-            DefendingHoldingTimer = 0;
-            StartCoroutine(Defending_Co());
-        }
-        else
-        {
-            StartCoroutine(RejectDefending_Co());
-        }
-    }
-
-    private IEnumerator RejectDefending_Co()
-    {
-        BattleManagerScript.Instance.WaitFor((SpineAnim.GetAnimLenght(CharacterAnimationStateType.Defending) / defenceAnimSpeedMultiplier) * 0.25f);
-        SetAnimation(CharacterAnimationStateType.Idle, true);
-        yield return null;
-    }
-
-    private IEnumerator ReloadDefending_Co()
-    {
-        NewIManager.Instance.PlayLowShieldIndicatorForCharacter(CharInfo.CharacterID, UMS.Side);
-        StopDefending();
-        canDefend = false;
-        while (CharInfo.ShieldPerc != 100f)
-        {
-            yield return null;
-        }
-
-        NewIManager.Instance.StopLowShieldIndicatorForCharacter(CharInfo.CharacterID, UMS.Side);
-        canDefend = true;
-    }
-
-    private IEnumerator Defending_Co()
-    {
-        while (isDefending && CharInfo.Shield > 0f && canDefend)
-        {
-            if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle.ToString())
-            {
-                SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
-                SpineAnim.SetAnimationSpeed(5);
-            }
-            yield return null;
-            DefendingHoldingTimer += BattleManagerScript.Instance.DeltaTime;
-            if (CharInfo.ShieldPerc == 0)
-            {
-                StartCoroutine(ReloadDefending_Co());
-            }
-        }
-        DefendingHoldingTimer = 0;
-    }
-
-    public void StopDefending()
-    {
-        if (isDefending)
-        {
-            isDefendingStop = true;
-            if (SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Defending.ToString()))
-            {
-                Debug.Log("FINISHED STOP <color=blue>DEFENDING</color>");
-                SetAnimation(CharacterAnimationStateType.Idle, true, 0.1f);
-            }
-        }
-
-    }
-
-    #endregion
+  
     #region Move
+    //public virtual void MoveCharOnDirection(InputDirectionType nextDir)
+    //{
+    //    if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving.ToString() || SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving.ToString() ||
+    //        SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle.ToString() || SwapWhenPossible || CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed <= 0)
+    //    {
+    //        return;
+    //    }
 
-    public virtual IEnumerator MoveCharOnDir_Co(InputDirectionType nextDir)
-    {
-        yield return MoveSystem(nextDir);
-    }
+    //    if (currentAttackPhase == AttackPhasesType.Charging || currentAttackPhase == AttackPhasesType.Cast_Strong || currentAttackPhase == AttackPhasesType.Bullet_Strong ||
+    //         SpineAnim.CurrentAnim.Contains("S_Buff") || SpineAnim.CurrentAnim.Contains("S_DeBuff"))
+    //    {
+    //        return;
+    //    }
 
-    private IEnumerator MoveSystem(InputDirectionType nextDir)
-    {
-        if ((CharInfo.Health > 0 && !isMoving && IsOnField && EndAxisMovement && SpineAnim.CurrentAnim != CharacterAnimationStateType.Arriving.ToString() && CharActionlist.Contains(CharacterActionType.Move)) || BattleManagerScript.Instance.VFXScene)
-        {
-            prevBattleTile = CurrentBattleTiles;
-            GetDirectionVectorAndAnimationCurve(nextDir);
-            currentBattleTilesToCheck = CheckTileAvailabilityUsingDir(dir);
-
-            if (currentBattleTilesToCheck.Count > 0 &&
-                currentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos) && r.BattleTileState == BattleTileStateType.Empty).ToList().Count ==
-                currentBattleTilesToCheck.Where(r => !UMS.Pos.Contains(r.Pos)).ToList().Count && GridManagerScript.Instance.isPosOnField(UMS.CurrentTilePos + dir))
-            {
-                if (animState.ToString() == SpineAnim.CurrentAnim)
-                { 
-                    tempFloat_1 = ((SpineAnim.GetAnimLenght(animState) * CharInfo.SpeedStats.LoopPerc) / CharInfo.SpeedStats.TileMovementTime) * CharInfo.SpeedStats.MovementSpeed * CharInfo.BaseSpeed;
-                    SpineAnim.SetAnimationSpeed(tempFloat_1);
-                    SpineAnim.skeletonAnimation.state.GetCurrent(0).TrackTime = SpineAnim.GetAnimLenght(animState) * CharInfo.SpeedStats.IntroPerc;
-                }
-                else
-                {
-                    SetAnimation(animState.ToString());
-                    SpineAnim.SetAnimationSpeed((SpineAnim.GetAnimLenght(animState) * (CharInfo.SpeedStats.IntroPerc + CharInfo.SpeedStats.LoopPerc) / CharInfo.SpeedStats.TileMovementTime) * CharInfo.SpeedStats.MovementSpeed * CharInfo.BaseSpeed);
-                }
-                isMoving = true;
-                if (prevBattleTile.Count > 1)
-                {
-
-                }
-                foreach (BattleTileScript item in prevBattleTile)
-                {
-                    GridManagerScript.Instance.SetBattleTileState(item.Pos, BattleTileStateType.Empty);
-                    item.isTaken = false;
-                }
-                UMS.CurrentTilePos += dir;
-                CharOredrInLayer = 101 + (UMS.CurrentTilePos.x * 10) + (UMS.Facing == FacingType.Right ? UMS.CurrentTilePos.y - 12 : UMS.CurrentTilePos.y);
-                if (CharInfo.UseLayeringSystem)
-                {
-                    SpineAnim.SetSkeletonOrderInLayer(CharOredrInLayer);
-                }
-
-                CurrentBattleTiles = currentBattleTilesToCheck;
-                UMS.Pos.Clear();
-                foreach (BattleTileScript item in currentBattleTilesToCheck)
-                {
-                    //Debug.LogError(item.Pos + "               " + BattleTileStateType.Occupied);
-                    GridManagerScript.Instance.SetBattleTileState(item.Pos, BattleTileStateType.Occupied);
-                    UMS.Pos.Add(item.Pos);
-                }
-
-                tempBattleTileScript = CurrentBattleTiles.Where(r => r.Pos == UMS.CurrentTilePos).First();
-
-                if (tempBattleTileScript != null)
-                {
-                    foreach (BattleTileScript item in prevBattleTile)
-                    {
-                        BattleManagerScript.Instance.OccupiedBattleTiles.Remove(item);
-                    }
-                    BattleManagerScript.Instance.OccupiedBattleTiles.AddRange(CurrentBattleTiles);
-                    FireActionEvent(CharacterActionType.Move);
-                    switch (nextDir)
-                    {
-                        case InputDirectionType.Up:
-                            FireActionEvent(CharacterActionType.MoveUp);
-                            break;
-                        case InputDirectionType.Down:
-                            FireActionEvent(CharacterActionType.MoveDown);
-                            break;
-                        case InputDirectionType.Left:
-                            FireActionEvent(CharacterActionType.MoveLeft);
-                            break;
-                        case InputDirectionType.Right:
-                            FireActionEvent(CharacterActionType.MoveRight);
-                            break;
-                    }
-                    yield return MoveByTileSpace(tempBattleTileScript.transform.position, curve, CharInfo.SpeedStats.CuttingPerc);//currentmovementSO.MoveByTileSpace
-                }
-                else
-                {
-                    yield break;
-                }
-            }
-            else
-            {
-                if (TileMovementCompleteEvent != null && TileMovementCompleteEvent.Target != null)
-                {
-                    TileMovementCompleteEvent(this);
-                }
-            }
-        }
-    }
-
-    public void Invoke_TileMovementCompleteEvent()
-    {
-        TileMovementCompleteEvent?.Invoke(this);
-    }
-
-
-    public virtual void MoveCharOnDirection(InputDirectionType nextDir)
-    {
-        if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving.ToString() || SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving.ToString() ||
-            SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle.ToString() || SwapWhenPossible || CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed <= 0)
-        {
-            return;
-        }
-
-        if (currentAttackPhase == AttackPhasesType.Charging || currentAttackPhase == AttackPhasesType.Cast_Strong || currentAttackPhase == AttackPhasesType.Bullet_Strong ||
-             SpineAnim.CurrentAnim.Contains("S_Buff") || SpineAnim.CurrentAnim.Contains("S_DeBuff"))
-        {
-            return;
-        }
-
-        StartCoroutine(MoveCharOnDir_Co(nextDir));
-
-    }
-
-    public void GetDirectionVectorAndAnimationCurve(InputDirectionType nextDir)
-    {
-        animState = CharacterAnimationStateType.Idle;
-        curve = new AnimationCurve();
-        dir = Vector2Int.zero;
-        switch (nextDir)
-        {
-            case InputDirectionType.Up:
-                dir = new Vector2Int(-1, 0);
-                curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.UpMovement : SpineAnim.Speed_Time_Curves.UpMovement;
-                animState = CharacterAnimationStateType.DashUp;
-                break;
-            case InputDirectionType.Down:
-                dir = new Vector2Int(1, 0);
-                curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.DownMovement : SpineAnim.Speed_Time_Curves.DownMovement;
-                animState = CharacterAnimationStateType.DashDown;
-                break;
-            case InputDirectionType.Right:
-                dir = new Vector2Int(0, 1);
-                animState = UMS.Facing == FacingType.Left ? CharacterAnimationStateType.DashRight : CharacterAnimationStateType.DashLeft;
-                if (animState == CharacterAnimationStateType.DashLeft)
-                {
-                    curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.BackwardMovement : SpineAnim.Speed_Time_Curves.BackwardMovement;
-                }
-                else
-                {
-                    curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.ForwardMovement : SpineAnim.Speed_Time_Curves.ForwardMovement;
-                }
-                break;
-            case InputDirectionType.Left:
-                dir = new Vector2Int(0, -1);
-                animState = UMS.Facing == FacingType.Left ? CharacterAnimationStateType.DashLeft : CharacterAnimationStateType.DashRight;
-                if (animState == CharacterAnimationStateType.DashLeft)
-                {
-                    curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.BackwardMovement : SpineAnim.Speed_Time_Curves.BackwardMovement;
-                }
-                else
-                {
-                    curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.ForwardMovement : SpineAnim.Speed_Time_Curves.ForwardMovement;
-                }
-                break;
-            case InputDirectionType.UpLeft:
-                dir = new Vector2Int(-1, -1);
-                curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.UpMovement : SpineAnim.Speed_Time_Curves.UpMovement;
-                animState = CharacterAnimationStateType.DashUp;
-                break;
-            case InputDirectionType.UpRight:
-                dir = new Vector2Int(-1, 1);
-                curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.UpMovement : SpineAnim.Speed_Time_Curves.UpMovement;
-                animState = CharacterAnimationStateType.DashUp;
-                break;
-            case InputDirectionType.DownLeft:
-                dir = new Vector2Int(1, -1);
-                curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.DownMovement : SpineAnim.Speed_Time_Curves.DownMovement;
-                animState = CharacterAnimationStateType.DashDown;
-                break;
-            case InputDirectionType.DownRight:
-                dir = new Vector2Int(1, 1);
-                curve = SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.DownMovement : SpineAnim.Speed_Time_Curves.DownMovement;
-                animState = CharacterAnimationStateType.DashDown;
-                break;
-        }
-    }
-
-    protected void SetCurrentAIValues()
-    {
-        AttackWillPerc = CurrentAIState.AttackWill;
-        MoveWillPerc = CurrentAIState.MoveWill;
-        TowardMovementPerc = CurrentAIState.Chaseing_Flee;
-    }
-
-    public virtual IEnumerator AI()
-    {
-        bool val = true;
-        while (val)
-        {
-            yield return null;
-            if (IsOnField && CharInfo.Health > 0)
-            {
-
-                while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
-                {
-                    yield return null;
-                }
-                prev = CurrentAIState;
-                CurrentAIState = CharInfo.GetCurrentAI(AggroInfoList, UMS.CurrentTilePos, this, ref target);
-                if (prev == null || prev.AI_Type != CurrentAIState.AI_Type)
-                {
-                    SetCurrentAIValues();
-                    if (prev != null)
-                    {
-                        prev.ResetStats(CharInfo);
-
-                    }
-                    CurrentAIState.ModifyStats(CharInfo);
-                    if (CurrentAIState.AIPs != null && CurrentAIState.AIPs.PSType != ParticlesType.None)
-                    {
-                        if (psAI != null)
-                        {
-                            psAI.SetActive(false);
-                        }
-                        psAI = ParticleManagerScript.Instance.GetParticle(CurrentAIState.AIPs.PSType);
-                        psAI.transform.parent = SpineAnim.transform;
-                        psAI.transform.localPosition = Vector3.zero;
-                        psAI.SetActive(true);
-                    }
-                   
-                    AICoolDownOffset = 0;
-                }
-
-                tempInt_1 = UnityEngine.Random.Range(0, 100);
-                nextAttack = null;
-                if (target != null)
-                {
-                    GetAttack();
-                }
-
-                if (target != null && tempInt_1 < AttackWillPerc && nextAttack != null && (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler))
-                {
-                    lastAttackTime = Time.time;
-                    nextAttackPos = target.UMS.CurrentTilePos;
-                    if (possiblePos != null)
-                    {
-                        possiblePos.isTaken = false;
-                        possiblePos = null;
-                    }
-
-                    yield return AttackSequence();
-                }
-                else
-                {
-                    tempInt_2 = UnityEngine.Random.Range(0, 100);
-                    if (AreTileNearEmpty() && tempInt_2 < MoveWillPerc)
-                    {
-                        if (possiblePos == null)
-                        {
-                            tempInt_1 = UnityEngine.Random.Range(0, (TowardMovementPerc + AwayMovementPerc));
-                            if (TowardMovementPerc > tempInt_1 && (Time.time - AICoolDownOffset) > CurrentAIState.CoolDown)
-                            {
-                                if (target != null)
-                                {
-                                    possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
-                                    r.BattleTileState != BattleTileStateType.NonUsable
-                                    ).OrderBy(a => Mathf.Abs(a.Pos.x - target.UMS.CurrentTilePos.x)).ThenBy(b => b.Pos.y).ToList();
-                                    AICoolDownOffset = Time.time;
-                                }
-                            }
-                            else if ((Time.time - AICoolDownOffset) > CurrentAIState.CoolDown)
-                            {
-                                if (target != null)
-                                {
-                                    possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
-                                    r.BattleTileState != BattleTileStateType.NonUsable
-                                    ).OrderByDescending(a => Mathf.Abs(a.Pos.x - target.UMS.CurrentTilePos.x)).ThenByDescending(b => b.Pos.y).ToList();
-                                    AICoolDownOffset = Time.time;
-                                }
-                            }
-                            if (possiblePositions.Count > 0)
-                            {
-                                found = false;
-                                while (!found)
-                                {
-                                    if (possiblePositions.Count > 0)
-                                    {
-                                        possiblePos = possiblePositions.First();
-                                        if (possiblePos.Pos != UMS.CurrentTilePos)
-                                        {
-                                            if (possiblePos.BattleTileState == BattleTileStateType.Empty)
-                                            {
-                                                path = GridManagerScript.Pathfinding.GetPathTo(possiblePos.Pos, UMS.Pos, GridManagerScript.Instance.GetWalkableTilesLayout(UMS.WalkingSide));
-                                                if (path != null && path.Length > 0)
-                                                {
-                                                    found = true;
-                                                    tempVector2Int = path[0] - UMS.CurrentTilePos;
-                                                    possiblePos.isTaken = true;
-                                                    yield return MoveCharOnDir_Co(tempVector2Int == Vector2Int.right ? InputDirectionType.Down : tempVector2Int == Vector2Int.left ? InputDirectionType.Up : tempVector2Int == Vector2Int.up ? InputDirectionType.Right : InputDirectionType.Left);
-                                                }
-                                                else
-                                                {
-                                                    possiblePositions.Remove(possiblePos);
-                                                }
-                                            }
-                                            else
-                                            {
-                                                possiblePositions.Remove(possiblePos);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            if (CurrentAIState.IdleMovement > UnityEngine.Random.Range(0f, 1f))
-                                            {
-                                                possiblePos = null;
-                                                found = true;
-                                            }
-                                            else
-                                            {
-                                                if (possiblePositions.Count <= 1)
-                                                {
-                                                    possiblePos = null;
-                                                    found = true;
-                                                }
-                                                else
-                                                {
-                                                    possiblePositions.Insert(0, GridManagerScript.Instance.GetFreeBattleTile(possiblePos.WalkingSide));
-                                                    yield return null;
-                                                }
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        possiblePos = null;
-                                        found = true;
-                                    }
-
-                                }
-                                yield return null;
-                            }
-                            else
-                            {
-                                found = true;
-                                possiblePos = null;
-                            }
-                        }
-                        else
-                        {
-                            if (possiblePos.Pos != UMS.CurrentTilePos)
-                            {
-                                path = GridManagerScript.Pathfinding.GetPathTo(possiblePos.Pos, UMS.Pos, GridManagerScript.Instance.GetWalkableTilesLayout(UMS.WalkingSide));
-                                if (path == null || (path != null && path.Length == 1) || possiblePos.Pos == UMS.CurrentTilePos)
-                                {
-                                    possiblePos.isTaken = false;
-                                    possiblePos = null;
-                                }
-                                if (path.Length > 0)
-                                {
-                                    tempVector2Int = path[0] - UMS.CurrentTilePos;
-
-                                    yield return MoveCharOnDir_Co(tempVector2Int == Vector2Int.right ? InputDirectionType.Down : tempVector2Int == Vector2Int.left ? InputDirectionType.Up : tempVector2Int == Vector2Int.up ? InputDirectionType.Right : InputDirectionType.Left);
-                                }
-                            }
-                            else
-                            {
-                                possiblePos = null;
-                            }
-                        }
-
-                    }
-                    else
-                    {
-                        if (possiblePos != null)
-                        {
-                            possiblePos.isTaken = false;
-                            possiblePos = null;
-                        }
-                    }
-                }
-                yield return null;
-            }
-            else
-            {
-                if (possiblePos != null)
-                {
-                    possiblePos.isTaken = false;
-                    possiblePos = null;
-                }
-
-            }
-        }
-    }
-
-    protected List<BattleTileScript> CheckTileAvailabilityUsingDir(Vector2Int dir)
-    {
-        tempList_Vector2int = CalculateNextPosUsingDir(dir);
-        if (GridManagerScript.Instance.AreBattleTilesInControllerArea(UMS.Pos, tempList_Vector2int, UMS.WalkingSide))
-        {
-            return GridManagerScript.Instance.GetBattleTiles(tempList_Vector2int, UMS.WalkingSide);
-        }
-        return new List<BattleTileScript>();
-    }
-
-    protected List<BattleTileScript> CheckTileAvailabilityUsingPos(Vector2Int dir)
-    {
-        tempList_Vector2int = CalculateNextPosUsinPos(dir);
-        if (GridManagerScript.Instance.AreBattleTilesInControllerArea(UMS.Pos, tempList_Vector2int, UMS.WalkingSide))
-        {
-            return GridManagerScript.Instance.GetBattleTiles(tempList_Vector2int, UMS.WalkingSide);
-        }
-        return new List<BattleTileScript>();
-    }
-
-    //Calculate the next position fro the actual 
-    public List<Vector2Int> CalculateNextPosUsingDir(Vector2Int direction)
-    {
-        tempList_Vector2int.Clear();
-        UMS.Pos.ForEach(r => tempList_Vector2int.Add(r + direction));
-        return tempList_Vector2int;
-    }
-
-    //Calculate the next position fro the actual 
-    public List<Vector2Int> CalculateNextPosUsinPos(Vector2Int direction)
-    {
-        tempList_Vector2int.Clear();
-        UMS.Pos.ForEach(r => tempList_Vector2int.Add((r - UMS.CurrentTilePos) + direction));
-        return tempList_Vector2int;
-    }
-
-    public virtual IEnumerator MoveByTileSpace(Vector3 nextPos, AnimationCurve curve, float animPerc)
-    {
-        //  Debug.Log(AnimLength + "  AnimLenght   " + AnimLength / CharInfo.MovementSpeed + " Actual duration" );
-        //Debug.Log("StartMoveCo  " + Time.time);
-        float timer = 0;
-        float spaceTimer = 0;
-        bool isMovCheck = false;
-        EndAxisMovement = false;
-        Vector3 offset = spineT.position;
-        transform.position = nextPos;
-        spineT.position = offset;
-        Vector3 localoffset = spineT.localPosition;
-
-        while (timer < 1)
-        {
-            yield return BattleManagerScript.Instance.WaitFixedUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
-            timer += (BattleManagerScript.Instance.FixedDeltaTime / (CharInfo.SpeedStats.TileMovementTime / (CharInfo.SpeedStats.MovementSpeed * CharInfo.SpeedStats.BaseSpeed * BattleManagerScript.Instance.MovementMultiplier)));
-            spaceTimer = curve.Evaluate(timer);
-            spineT.localPosition = Vector3.Lerp(localoffset, LocalSpinePosoffset, spaceTimer);
-
-            if (timer > animPerc && !isMovCheck)
-            {
-                isMovCheck = true;
-                isMoving = false;
-                if (isDefending)
-                {
-                    /* isDefe = true;
-                     SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
-                     SpineAnim.SetAnimationSpeed(5);*/
-                }
-                TileMovementCompleteEvent?.Invoke(this);
-            }
-
-            if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving.ToString())
-            {
-                isMoving = false;
-                TileMovementCompleteEvent?.Invoke(this);
-                spineT.localPosition = LocalSpinePosoffset;
-                yield break;
-            }
-        }
-        spineT.localPosition = LocalSpinePosoffset;
-        //Debug.Log("EndMoveCo");
-    }
-
+    //    StartCoroutine(MoveCharOnDir_Co(nextDir));
+    //}
     #endregion
+
+
     #region Buff/Debuff
 
     public bool HasBuffDebuff(BuffDebuffStatsType type)
@@ -1295,7 +668,7 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
                         cb.SetCharSelected(true, c);
                         BattleManagerScript.Instance.SelectCharacter(c, cb);
                     }
-                    StartAI();
+                    currentInputProfile.StartInput();
                 }
                 break;
             
@@ -1561,6 +934,7 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
     }
 
     #endregion
+
     #region Animation
 
     public void ArrivingEvent()
@@ -1982,13 +1356,6 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
     public void FireActionEvent(CharacterActionType action)
     {
         CurrentCharStartingActionEvent?.Invoke(CurrentPlayerController, action);
-    }
-
-
-    public void StartAI()
-    {
-        AICo = AI();
-        StartCoroutine(AICo);
     }
 }
 

@@ -131,8 +131,6 @@ public class EnvironmentManager : MonoBehaviour
                         cb.UMS.CurrentTilePos = nextBts.Pos;
                         cb.UMS.Pos.Clear();
                         cb.UMS.Pos.Add(nextBts.Pos);
-                        cb.CurrentBattleTiles.Clear();
-                        cb.CurrentBattleTiles.Add(nextBts);
                         charsToLand.Add(cb);
                         break;
                     }
@@ -158,15 +156,13 @@ public class EnvironmentManager : MonoBehaviour
                     cb.UMS.CurrentTilePos = nextBts.Pos;
                     cb.UMS.Pos.Clear();
                     cb.UMS.Pos.Add(nextBts.Pos);
-                    cb.CurrentBattleTiles.Clear();
-                    cb.CurrentBattleTiles.Add(nextBts);
                     charsToLand.Add(cb);
                 }
             }
            
             if (duration > 0)
             {
-                yield return CameraManagerScript.Instance.CameraMoveSequence_Co(camInfo.DurationOut, BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r=> r.Value.Character != null).First().Value.Character.CurrentBattleTiles.First().transform.position, camInfo.MovementCurve);
+                yield return CameraManagerScript.Instance.CameraMoveSequence_Co(camInfo.DurationOut, GridManagerScript.Instance.GetBattleTile(BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r=> r.Value.Character != null).First().Value.Character.UMS.CurrentTilePos).transform.position, camInfo.MovementCurve);
             }
 
             yield return CameraManagerScript.Instance.CameraFocusSequence_Co(camInfo.DurationIn, camInfo.TransitionINZoomValue, camInfo.ZoomIn);
@@ -181,7 +177,7 @@ public class EnvironmentManager : MonoBehaviour
 
             foreach (BaseCharacter item in charsToLand)
             {
-                item.transform.position = item.CurrentBattleTiles.Last().transform.position;
+                item.transform.position = GridManagerScript.Instance.GetBattleTile(item.UMS.CurrentTilePos).transform.position;
 
             }
 

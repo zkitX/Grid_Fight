@@ -7,10 +7,6 @@ using UnityEngine;
 
 public class ScriptableObjectBaseCharaterAction : ScriptableObjectSwappableBase
 {
-    public virtual IEnumerator MoveByTileSpace(Vector3 nextPos, AnimationCurve curve, float animPerc)
-    {
-        yield return null;
-    }
 }
 
 

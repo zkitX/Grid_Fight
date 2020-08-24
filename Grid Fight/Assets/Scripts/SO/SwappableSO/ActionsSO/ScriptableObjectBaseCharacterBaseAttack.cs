@@ -6,9 +6,8 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
 {
 
     #region WeakAtk
-    protected float WeakAttackOffset = 0;
+    [HideInInspector] public float WeakAttackOffset = 0;
     #endregion
-
 
     #region Strong Attack
     public float strongAttackTimer = 0f;
@@ -30,7 +29,6 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
     public bool isStrongStop = false;
     protected GameObject strongChargePs = null;
     #endregion
-
 
     #region Phase
     public int shotsLeftInAttack
@@ -62,10 +60,8 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
         }
     }
     public bool _Attacking = false;
-    [HideInInspector] public bool bulletFired = false;
     public AttackPhasesType currentAttackPhase = AttackPhasesType.End;
     #endregion
-
 
     #region Temp
     [HideInInspector] public List<ScriptableObjectAttackBase> availableAtks = new List<ScriptableObjectAttackBase>();
@@ -75,6 +71,11 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
     #endregion
 
 
+
+    public virtual IEnumerator AttackSequence()
+    {
+        yield return null;
+    }
 
     public virtual IEnumerator Attack()
     {
@@ -351,4 +352,22 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
         }
     }
 
+    public virtual void InteruptAttack()
+    {
+        shotsLeftInAttack = 0;
+        currentAttackPhase = AttackPhasesType.End;
+    }
+
+
+    public override void SetAttackReady(bool value)
+    {
+        currentAttackPhase = AttackPhasesType.End;
+        base.SetAttackReady(value);
+    }
+
+    public override void SetCharDead()
+    {
+        InteruptAttack();
+        base.SetCharDead();
+    }
 }

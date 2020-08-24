@@ -14,127 +14,6 @@ public class BattleTileTargetsScript : MonoBehaviour
     {
         Whiteline = transform.GetChild(0);
     }
-    public void SetAttack(float duration, Vector2Int pos, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances, bool fireAnim = true)
-    {
-        GameObject nextT = TargetIndicatorManagerScript.Instance.GetTargetIndicator(AttackType.Tile);
-
-        nextT.SetActive(true);
-        TargetClass tc = new TargetClass(duration, nextT);
-        nextT.transform.parent = transform;
-        nextT.transform.localPosition = TargetsPosition[0];
-        Targets.Add(tc);
-        UpdateQueue();
-        StartCoroutine(FireTarget(tc, pos, ele, attacker, atkEffects, effectChances, fireAnim));
-    }
-
-    private IEnumerator FireTarget(TargetClass tc, Vector2Int pos, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances, bool fireAnim = true)
-    {
-        float timer = 0;
-        Whiteline.gameObject.SetActive(true);
-        float duration = tc.Duration;
-        bool attackerFiredAttackAnim = false;
-        Animator anim = tc.TargetIndicator.GetComponent<Animator>();
-        anim.speed = 1 / duration;
-        float damage = attacker.NextAttackTileDamage;
-        ScriptableObjectAttackBase nextAttack = attacker.nextAttack;
-        while (timer < duration)
-        {
-            yield return BattleManagerScript.Instance.WaitFixedUpdate(new System.Action(() => { anim.speed = 0; }), () => BattleManagerScript.Instance != null && ((BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle && BattleManagerScript.Instance.CurrentBattleState != BattleState.FungusPuppets) && !BattleManagerScript.Instance.VFXScene));
-
-            anim.speed = (1 / duration) * (attacker.CharInfo.BaseSpeed / attacker.CharInfo.SpeedStats.B_BaseSpeed) * BattleManagerScript.Instance.BattleSpeed;
-            timer += attackerFiredAttackAnim ? BattleManagerScript.Instance.FixedDeltaTime : BattleManagerScript.Instance.FixedDeltaTime * (attacker.CharInfo.BaseSpeed / attacker.CharInfo.SpeedStats.B_BaseSpeed);
-            tc.RemainingTime = duration - timer;
-            if (!attacker.Attacking && tc.RemainingTime > duration * 0.1f)
-            {
-                //Stop the firing of the attacks to the tiles
-                attacker.shotsLeftInAttack = 0;
-                tc.RemainingTime = 0f;
-                UpdateQueue(tc);
-                yield break;
-            }
-            else if (tc.RemainingTime <= duration * 0.1f && !attackerFiredAttackAnim)
-            {
-                attackerFiredAttackAnim = true;
-                if (fireAnim)
-                {
-                    attacker.fireAttackAnimation(transform.position); // trigger the shoot anim
-                }
-            }
-        }
-
-        bool effectOn = true;
-        BaseCharacter target = null;
-        if (BattleManagerScript.Instance != null)
-        {
-            target = BattleManagerScript.Instance.GetCharInPos(pos);
-            if (target != null)
-            {
-                //if ((attacker.nextAttack.AttackInput >= AttackInputType.Strong ? Random.Range(attacker.CharInfo.StrongAttack.Chances.x, attacker.CharInfo.StrongAttack.Chances.y) :
-                  //  Random.Range(attacker.CharInfo.WeakAttack.Chances.x, attacker.CharInfo.WeakAttack.Chances.y)) >= Random.Range(0f, 1f))
-                {
-                    bool iscritical = attacker.CharInfo.IsCritical(true);
-                    //Set damage to the hitting character
-                    effectOn = target.SetDamage(attacker, damage * (iscritical ? 2 : 1), ele, iscritical);
-                    if (effectOn)
-                    {
-                        int chances = Random.Range(0, 100);
-                        if (chances < effectChances)
-                        {
-                            foreach (ScriptableObjectAttackEffect item in atkEffects.Effects.Where(r => !r.StatsToAffect.ToString().Contains("Tile")).ToList())
-                            {
-                                target.Buff_DebuffCo(new Buff_DebuffClass(new ElementalResistenceClass(), ElementalType.Dark, attacker, item));
-                            }
-                        }
-                    }
-                }
-            }
-            else
-            {
-
-                ScriptableObjectAttackEffect soAE = atkEffects.Effects.Where(r => r.StatsToAffect == BuffDebuffStatsType.BlockTile).FirstOrDefault();
-                if (soAE != null)
-                {
-                    BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(pos);
-                    bts.BlockTileForTime(soAE.Duration, ParticleManagerScript.Instance.GetParticle(soAE.Particles));
-                }
-            }
-            if(effectOn && atkEffects.IsEffectOnTile)
-            {
-                BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(pos);
-                bts.SetupEffect(atkEffects.EffectsOnTile, atkEffects.DurationOnTile, atkEffects.TileParticlesID);
-            }
-
-        }
-
-
-        if (attacker.CharInfo.Health > 0)
-        {
-            if (effectOn)
-            {
-                GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.Right.Hit, attacker.CharInfo.CharacterID, AttackParticlePhaseTypes.Hit, transform.position, attacker.UMS.Side, nextAttack.AttackInput);
-                foreach (VFXOffsetToTargetVOL item in effect.GetComponentsInChildren<VFXOffsetToTargetVOL>())
-                {
-                    if (target != null)
-                    {
-                        item.gameObject.SetActive(true);
-                        item.Target = attacker.transform;
-                    }
-                    else
-                    {
-                        item.gameObject.SetActive(false);
-                    }
-                }  
-            }
-            if (attacker.GetAttackAudio() != null)
-            {
-                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attacker.GetAttackAudio().Impact, AudioBus.MidPrio, transform);
-            }
-        }
-        yield return new WaitForSeconds(0.2f);
-        UpdateQueue(tc);
-        attacker.shotsLeftInAttack--;
-    }
-
 
     public void SetAttack(float duration, Vector2Int pos, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances, float bulletTravelDuration)
     {
@@ -154,14 +33,6 @@ public class BattleTileTargetsScript : MonoBehaviour
         yield return FireTarget(tc, pos, ele, attacker, atkEffects, effectChances, bulletTravelDuration);
         tc.RemainingTime = 0f;
         UpdateQueue(tc);
-        if(attacker.IsOnField)
-        {
-            attacker.shotsLeftInAttack--;
-        }
-        else
-        {
-
-        }
     }
 
     private IEnumerator FireTarget(TargetClass tc, Vector2Int pos, ElementalType ele, BaseCharacter attacker, BattleFieldAttackTileClass atkEffects, float effectChances, float bulletTravelDuration)
@@ -182,15 +53,10 @@ public class BattleTileTargetsScript : MonoBehaviour
             anim.speed = (1 / duration) * (attacker.CharInfo.BaseSpeed / attacker.CharInfo.SpeedStats.B_BaseSpeed) * BattleManagerScript.Instance.BattleSpeed;
             timer += attackerFiredAttackAnim ? BattleManagerScript.Instance.FixedDeltaTime : BattleManagerScript.Instance.FixedDeltaTime * (attacker.CharInfo.BaseSpeed / attacker.CharInfo.SpeedStats.B_BaseSpeed);
             tc.RemainingTime = duration - timer;
-            if (!attacker.Attacking && !attacker.bulletFired)
+            if (!attacker.currentAttackProfile.Attacking && attacker.currentAttackProfile.currentAttackPhase < AttackPhasesType.Firing)
             {
                 //Stop the firing of the attacks to the tiles
                 yield break;
-            }
-            else if (tc.RemainingTime <= bulletTravelDuration && !attackerFiredAttackAnim)
-            {
-                attackerFiredAttackAnim = true;
-                attacker.FireAttackAnimAndBullet(transform.position); // trigger the shoot anim
             }
         }
 

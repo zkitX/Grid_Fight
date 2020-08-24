@@ -9,7 +9,69 @@ using PlaytraGamesLtd;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/CharaqcterInput/AIInput")]
 public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
 {
+    //NPC BEHAVIOUR
+    [Header("NPC Behaviour")]
+    public int AttackWillPerc = 13;
+    public int MoveWillPerc = 100;
+    public int UpDownMovementPerc = 13;
+    public int TowardMovementPerc = 13;
+    public int AwayMovementPerc = 13;
+
+    //AI STATE
+    [HideInInspector] public ScriptableObjectAI CurrentAIState;
+    protected ScriptableObjectAI previousAIState;
+    public IEnumerator AICo = null;
+
+    protected List<AggroInfoClass> AggroInfoList = new List<AggroInfoClass>();
     protected BaseCharacter target = null;
+    protected List<HitInfoClass> HittedByList = new List<HitInfoClass>();
+    protected HitInfoClass LastHitter
+    {
+        get
+        {
+            HitInfoClass lastHitter = null;
+            foreach (HitInfoClass hitter in HittedByList)
+            {
+                if (lastHitter == null || lastHitter.TimeLastHit < hitter.TimeLastHit) lastHitter = hitter;
+            }
+            return lastHitter;
+        }
+    }
+
+    [HideInInspector] public Vector2Int nextAttackPos;
+    protected float lastAttackTime = 0;
+    public float AICoolDownOffset = 0;
+
+    //Visuals
+    protected bool strongAnimDone = false;
+    protected GameObject psAI = null;
+
+    //PATHFINDING
+    protected BattleTileScript possiblePos = null;
+    protected Vector2Int[] path;
+    protected bool pathFound = false;
+    protected List<BattleTileScript> possiblePositions = new List<BattleTileScript>();
+
+
+
+    protected void SetCurrentAIValues()
+    {
+        AttackWillPerc = CurrentAIState.AttackWill;
+        MoveWillPerc = CurrentAIState.MoveWill;
+        TowardMovementPerc = CurrentAIState.Chaseing_Flee;
+    }
+
+
+    public override void StartInput()
+    {
+        AICo = AI();
+        CharOwner.StartCoroutine(AICo);
+    }
+
+    public override void EndInput()
+    {
+    }
+
 
     public virtual IEnumerator AI()
     {
@@ -99,8 +161,8 @@ public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
                             }
                             if (possiblePositions.Count > 0)
                             {
-                                found = false;
-                                while (!found)
+                                pathFound = false;
+                                while (!pathFound)
                                 {
                                     if (possiblePositions.Count > 0)
                                     {
@@ -112,7 +174,7 @@ public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
                                                 path = GridManagerScript.Pathfinding.GetPathTo(possiblePos.Pos, UMS.Pos, GridManagerScript.Instance.GetWalkableTilesLayout(UMS.WalkingSide));
                                                 if (path != null && path.Length > 0)
                                                 {
-                                                    found = true;
+                                                    pathFound = true;
                                                     tempVector2Int = path[0] - UMS.CurrentTilePos;
                                                     possiblePos.isTaken = true;
                                                     yield return MoveCharOnDir_Co(tempVector2Int == Vector2Int.right ? InputDirectionType.Down : tempVector2Int == Vector2Int.left ? InputDirectionType.Up : tempVector2Int == Vector2Int.up ? InputDirectionType.Right : InputDirectionType.Left);
@@ -132,14 +194,14 @@ public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
                                             if (CurrentAIState.IdleMovement > UnityEngine.Random.Range(0f, 1f))
                                             {
                                                 possiblePos = null;
-                                                found = true;
+                                                pathFound = true;
                                             }
                                             else
                                             {
                                                 if (possiblePositions.Count <= 1)
                                                 {
                                                     possiblePos = null;
-                                                    found = true;
+                                                    pathFound = true;
                                                 }
                                                 else
                                                 {
@@ -152,7 +214,7 @@ public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
                                     else
                                     {
                                         possiblePos = null;
-                                        found = true;
+                                        pathFound = true;
                                     }
 
                                 }
@@ -160,7 +222,7 @@ public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
                             }
                             else
                             {
-                                found = true;
+                                pathFound = true;
                                 possiblePos = null;
                             }
                         }
@@ -293,6 +355,26 @@ public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
             totalchances -= sumc;
         }
         return null;
+    }
+
+
+    public override IEnumerator AttackSequence()
+    {
+        yield return null;
+    }
+
+    public override void SetAttackReady(bool value)
+    {
+        if (value)
+        {
+            HittedByList.Clear();
+        }
+    }
+
+    public override void SetCharDead()
+    {
+        CurrentAIState = null;
+        previousAIState = null;
     }
 }
 

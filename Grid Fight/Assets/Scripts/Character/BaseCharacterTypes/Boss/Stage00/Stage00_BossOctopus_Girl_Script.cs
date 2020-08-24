@@ -34,10 +34,10 @@ public class Stage00_BossOctopus_Girl_Script : MinionType_Script
         bossParent.OctopusGirlLeaves();
     }
 
-    public override IEnumerator AttackSequence()
-    {
-        yield return null;
-    }
+    //public override IEnumerator AttackSequence()
+    //{
+    //    yield return null;
+    //}
 
     private IEnumerator SetUpEnteringOnBattle_Co()
     {

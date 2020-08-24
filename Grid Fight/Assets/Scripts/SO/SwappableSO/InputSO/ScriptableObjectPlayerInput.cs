@@ -21,6 +21,14 @@ public class ScriptableObjectPlayerInput : ScriptableObjectBaseCharaterInput
     public IEnumerator SkillActivation = null;
 
 
+    public override void StartInput()
+    {
+    }
+
+    public override void EndInput()
+    {
+    }
+
     public void StartChargingAtk(AttackInputType atkType)
     {
         switch (atkType)
@@ -62,7 +70,7 @@ public class ScriptableObjectPlayerInput : ScriptableObjectBaseCharaterInput
     }
 
 
-    public void CharacterInputHandler(InputActionType action)
+    public override void CharacterInputHandler(InputActionType action)
     {
         if (!HasBuffDebuff(BuffDebuffStatsType.Rage))
         {
@@ -185,6 +193,106 @@ public class ScriptableObjectPlayerInput : ScriptableObjectBaseCharaterInput
         SkillActivation = null;
         yield return BattleManagerScript.Instance.WaitFor(coolDown - 0.5f, () => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
         scdc.IsCoGoing = false;
+    }
+
+    #region Defence
+
+    public void StartDefending()
+    {
+        if (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle || !CharActionlist.Contains(CharacterActionType.Defence) || !canDefend)
+        {
+            return;
+        }
+        SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
+        SpineAnim.SetAnimationSpeed(defenceAnimSpeedMultiplier);
+        if (canDefend && CharInfo.Shield >= UniversalGameBalancer.Instance.defenceCost)
+        {
+            CharInfo.Shield -= UniversalGameBalancer.Instance.defenceCost;
+            isDefendingStop = false;
+            isDefending = true;
+            DefendingHoldingTimer = 0;
+            StartCoroutine(Defending_Co());
+        }
+        else
+        {
+            StartCoroutine(RejectDefending_Co());
+        }
+    }
+
+    private IEnumerator RejectDefending_Co()
+    {
+        BattleManagerScript.Instance.WaitFor((SpineAnim.GetAnimLenght(CharacterAnimationStateType.Defending) / defenceAnimSpeedMultiplier) * 0.25f);
+        SetAnimation(CharacterAnimationStateType.Idle, true);
+        yield return null;
+    }
+
+    private IEnumerator ReloadDefending_Co()
+    {
+        NewIManager.Instance.PlayLowShieldIndicatorForCharacter(CharInfo.CharacterID, UMS.Side);
+        StopDefending();
+        canDefend = false;
+        while (CharInfo.ShieldPerc != 100f)
+        {
+            yield return null;
+        }
+
+        NewIManager.Instance.StopLowShieldIndicatorForCharacter(CharInfo.CharacterID, UMS.Side);
+        canDefend = true;
+    }
+
+    private IEnumerator Defending_Co()
+    {
+        while (isDefending && CharInfo.Shield > 0f && canDefend)
+        {
+            if (SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle.ToString())
+            {
+                SetAnimation(CharacterAnimationStateType.Defending, true, 0.0f);
+                SpineAnim.SetAnimationSpeed(5);
+            }
+            yield return null;
+            DefendingHoldingTimer += BattleManagerScript.Instance.DeltaTime;
+            if (CharInfo.ShieldPerc == 0)
+            {
+                StartCoroutine(ReloadDefending_Co());
+            }
+        }
+        DefendingHoldingTimer = 0;
+    }
+
+    public void StopDefending()
+    {
+        if (isDefending)
+        {
+            isDefendingStop = true;
+            if (SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Defending.ToString()))
+            {
+                Debug.Log("FINISHED STOP <color=blue>DEFENDING</color>");
+                SetAnimation(CharacterAnimationStateType.Idle, true, 0.1f);
+            }
+        }
+
+    }
+
+    #endregion
+
+
+    public override IEnumerator AttackSequence()
+    {
+        yield return CharacterInputQueue(InputActionType.Weak);
+        while (CharOwner.currentAttackProfile.Attacking)
+        {
+            yield return null;
+        }
+    }
+
+    public override void SetAttackReady(bool value)
+    {
+
+    }
+
+    public override void SetCharDead()
+    {
+
     }
 }
 

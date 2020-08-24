@@ -300,7 +300,6 @@ public class BattleManagerScript : MonoBehaviour
             }
             BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(pos);
             currentCharacter.UMS.CurrentTilePos = bts.Pos;
-            currentCharacter.CurrentBattleTiles = new List<BattleTileScript>();
             currentCharacter.UMS.Pos = new List<Vector2Int>();
             ScriptableObjectCharacterPrefab soCharacterPrefab = ListOfScriptableObjectCharacterPrefab.Where(r => r.CharacterName == currentCharacter.CharInfo.CharacterID).First();
             foreach (Vector2Int item in soCharacterPrefab.OccupiedTiles)
@@ -313,7 +312,6 @@ public class BattleManagerScript : MonoBehaviour
                 //Debug.Log(currentCharacter.UMS.Pos[i].ToString());
                 GridManagerScript.Instance.SetBattleTileState(currentCharacter.UMS.Pos[i], BattleTileStateType.Occupied);
                 BattleTileScript cbts = GridManagerScript.Instance.GetBattleTile(currentCharacter.UMS.Pos[i]);
-                currentCharacter.CurrentBattleTiles.Add(cbts);
             }
             currentCharacter.SetUpEnteringOnBattle();
             StartCoroutine(MoveCharToBoardWithDelay(0.1f, currentCharacter, bts.transform.position));
@@ -642,8 +640,7 @@ public class BattleManagerScript : MonoBehaviour
         zombiePs.SetActive(true);
         zombiePs.transform.parent = zombiefied.SpineAnim.transform;
         zombiePs.transform.localPosition = Vector3.zero;
-        zombiefied.shotsLeftInAttack = 0;
-        zombiefied.Attacking = false;
+        zombiefied.currentAttackProfile.InteruptAttack();
         zombiefied.SetAnimation(CharacterAnimationStateType.Reverse_Arriving);
         if(zombiefied.CharInfo.HealthPerc > 0)
         {
@@ -710,8 +707,7 @@ public class BattleManagerScript : MonoBehaviour
         zombie.SpineAnim.SetAnim(CharacterAnimationStateType.Idle);
 
         //Set up attack
-        zombie.Attacking = false;
-        zombie.shotsLeftInAttack = 0;
+        zombie.currentAttackProfile.InteruptAttack();
         zombie.BuffsDebuffsList.ForEach(r =>
         {
             if(r.Stat != BuffDebuffStatsType.Zombie)
@@ -837,8 +833,7 @@ public class BattleManagerScript : MonoBehaviour
         zombie.enabled = true;
         zombie.SpineAnim.SpineAnimationState.ClearTracks();
         zombie.SpineAnim.SetAnim(CharacterAnimationStateType.Idle);
-        zombie.Attacking = false;
-        zombie.shotsLeftInAttack = 0;
+        zombie.currentAttackProfile.InteruptAttack();
         zombie.SetupCharacterSide();
         zombie.CharInfo.BaseSpeedChangedEvent += zombie._CharInfo_BaseSpeedChangedEvent;
         zombie.CharInfo.DeathEvent += zombie._CharInfo_DeathEvent;
@@ -989,27 +984,11 @@ public class BattleManagerScript : MonoBehaviour
         }
 
         List<MoveDetailsClass> moveDetails = new List<MoveDetailsClass>();
-        Vector2Int[] path = GridManagerScript.Pathfinding.GetPathTo(destination, character.UMS.Pos, GridManagerScript.Instance.GetWalkableTilesLayout(character.UMS.WalkingSide));
-        Vector2Int curPos = character.UMS.CurrentTilePos;
-        foreach (Vector2Int movePos in path)
-        {
-            InputDirectionType direction = InputDirectionType.Down;
-            Vector2Int move = movePos - curPos;
-            if (move == new Vector2Int(1, 0)) direction = InputDirectionType.Down;
-            else if (move == new Vector2Int(-1, 0)) direction = InputDirectionType.Up;
-            else if (move == new Vector2Int(0, 1)) direction = InputDirectionType.Right;
-            else if (move == new Vector2Int(0, -1)) direction = InputDirectionType.Left;
-            moveDetails.Add(new MoveDetailsClass(direction));
-            curPos = movePos;
-        }
+        Vector2Int[] path = character.currentMoveProfile.GetMovesTo(new Vector2Int[] { destination });
 
-        foreach (MoveDetailsClass moveDetail in moveDetails)
+        foreach (Vector2Int move in path)
         {
-            for (int i = 0; i < moveDetail.amount; i++)
-            {
-                yield return character.MoveCharOnDir_Co(moveDetail.nextDir);
-                character.EndAxisMovement = true;
-            }
+            yield return character.currentMoveProfile.StartMovement(move);
         }
     }
 
@@ -1388,7 +1367,7 @@ public class BattleManagerScript : MonoBehaviour
                 //    CurrentSelectedCharacters[playerController].Character.MoveCharOnDirection(dir);
                 //}
 
-                CurrentSelectedCharacters[playerController].Character.MoveCharOnDirection(dir);
+                CurrentSelectedCharacters[playerController].Character.currentMoveProfile.StartMovement(dir);
 
                 //CurrentSelectedCharacters[playerController].Character.LastAxisValue = value;
             }
@@ -1538,7 +1517,7 @@ public class BattleManagerScript : MonoBehaviour
     {
         if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null && CurrentSelectedCharacters.Keys.Contains(controllerType))
         {
-            CurrentSelectedCharacters[controllerType].Character.isSpecialStop = true;
+            CurrentSelectedCharacters[controllerType].Character.currentAttackProfile.isStrongStop = true;
             Debug.Log("<b>FINISHED CANCELLING <color=red>CHARGE ATTACK</color></b>");
         }
     }
@@ -1550,7 +1529,7 @@ public class BattleManagerScript : MonoBehaviour
         {
             if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null)
             {
-                CurrentSelectedCharacters[controllerType].Character.CharacterInputHandler((InputActionType)System.Enum.Parse(typeof(InputActionType), atk.ToString()));
+                CurrentSelectedCharacters[controllerType].Character.currentInputProfile.CharacterInputHandler((InputActionType)System.Enum.Parse(typeof(InputActionType), atk.ToString()));
             }
         }
     }
@@ -1560,7 +1539,7 @@ public class BattleManagerScript : MonoBehaviour
         {
             if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null)
             {
-                CurrentSelectedCharacters[controllerType].Character.CharacterInputHandler(InputActionType.Weak);
+                CurrentSelectedCharacters[controllerType].Character.currentInputProfile.CharacterInputHandler(InputActionType.Weak);
             }
         }
     }
@@ -1570,12 +1549,12 @@ public class BattleManagerScript : MonoBehaviour
         if (CurrentBattleState == BattleState.Battle && CurrentSelectedCharacters.Keys.Contains(controllerType))
         {
             if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null &&
-                Time.time - CurrentSelectedCharacters[controllerType].Character.WeakAttackOffset > 0.5f)
+                Time.time - CurrentSelectedCharacters[controllerType].Character.currentAttackProfile.WeakAttackOffset > 0.5f)
             {
                 if (!CurrentSelectedCharacters[controllerType].Character.Atk1Queueing && !CurrentSelectedCharacters[controllerType].Character.SpineAnim.CurrentAnim.Contains("Loop"))
                 {
-                    CurrentSelectedCharacters[controllerType].Character.CharacterInputHandler(InputActionType.Weak);
-                    CurrentSelectedCharacters[controllerType].Character.WeakAttackOffset = 0;
+                    CurrentSelectedCharacters[controllerType].Character.currentInputProfile.CharacterInputHandler(InputActionType.Weak);
+                    CurrentSelectedCharacters[controllerType].Character.currentAttackProfile.WeakAttackOffset = 0;
                 }
                 Debug.Log("Atk1Queueing -------- true");
                 CurrentSelectedCharacters[controllerType].Character.Atk1Queueing = true;
@@ -1589,7 +1568,7 @@ public class BattleManagerScript : MonoBehaviour
         if (CurrentBattleState == BattleState.Battle && CurrentSelectedCharacters.Keys.Contains(controllerType))
         {
             if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null &&
-                Time.time - CurrentSelectedCharacters[controllerType].Character.WeakAttackOffset > 0.5f)
+                Time.time - CurrentSelectedCharacters[controllerType].Character.currentAttackProfile.WeakAttackOffset > 0.5f)
             {
                  CurrentSelectedCharacters[controllerType].Character.Atk1Queueing = false;
                 //CurrentSelectedCharacters[controllerType].Character.lastAttack = true;
@@ -1603,7 +1582,7 @@ public class BattleManagerScript : MonoBehaviour
 
         if (CurrentSelectedCharacters.Keys.Contains(playerController) && CurrentSelectedCharacters[playerController].Character != null)
         {
-            CurrentSelectedCharacters[playerController].Character.CharacterInputHandler(InputActionType.Defend);
+            CurrentSelectedCharacters[playerController].Character.currentInputProfile.CharacterInputHandler(InputActionType.Defend);
         }
     }
 
@@ -1611,7 +1590,7 @@ public class BattleManagerScript : MonoBehaviour
     {
         if (CurrentSelectedCharacters.Keys.Contains(playerController) && CurrentSelectedCharacters[playerController].Character != null)
         {
-            CurrentSelectedCharacters[playerController].Character.CharacterInputHandler(InputActionType.Defend_Stop);
+            CurrentSelectedCharacters[playerController].Character.currentInputProfile.CharacterInputHandler(InputActionType.Defend_Stop);
         }
     }
 

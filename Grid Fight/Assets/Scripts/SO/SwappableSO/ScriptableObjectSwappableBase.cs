@@ -19,5 +19,28 @@ public class ScriptableObjectSwappableBase : ScriptableObject
 
     }
 
-    
+    public virtual void SetUpEnteringOnBattle()
+    {
+
+    }
+
+    public virtual void SetUpLeavingBattle()
+    {
+
+    }
+
+    public virtual void SetAttackReady(bool value)
+    {
+
+    }
+
+    public virtual void SetCharDead()
+    {
+
+    }
+
+    public virtual void CharArrivedOnBattleField()
+    {
+
+    }
 }

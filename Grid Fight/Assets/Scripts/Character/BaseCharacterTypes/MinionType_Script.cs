@@ -7,36 +7,7 @@ public class MinionType_Script : BaseCharacter
 {
     protected bool MoveCoOn = true;
   
-
-
-    protected bool UnderAttack
-    {
-        get
-        {
-            if (Time.time > LastAttackTime + 10f)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-    }
     protected bool AIMove = false;
-
-
-    public override bool EndAxisMovement
-    {
-        get
-        {
-            return true;
-        }
-        set
-        {
-
-        }
-    }
 
 
     public override void SetUpEnteringOnBattle()
@@ -172,38 +143,38 @@ public class MinionType_Script : BaseCharacter
     }
 
 
-    //Basic attack sequence
-    public override IEnumerator AttackSequence()
-    {
-        Attacking = true;
-        bulletFired = false;
-        string animToFire;
-        bool isLooped = false;
+    ////Basic attack sequence
+    //public override IEnumerator AttackSequence()
+    //{
+    //    Attacking = true;
+    //    bulletFired = false;
+    //    string animToFire;
+    //    bool isLooped = false;
    
-        if(nextAttack != null)
-        {
-            isLooped = false;
-            animToFire = nextAttack.PrefixAnim + "_IdleToAtk";
-            strongAnimDone = false;
-            currentAttackPhase = AttackPhasesType.Start;
-            SetAnimation(animToFire, isLooped, 0f);
+    //    if(nextAttack != null)
+    //    {
+    //        isLooped = false;
+    //        animToFire = nextAttack.PrefixAnim + "_IdleToAtk";
+    //        strongAnimDone = false;
+    //        currentAttackPhase = AttackPhasesType.Start;
+    //        SetAnimation(animToFire, isLooped, 0f);
 
-            if (nextAttack.isSequencedAttack && nextSequencedAttacks.Count > 0)
-            {
-                nextSequencedAttacks.RemoveAt(0);
-            }
+    //        if (nextAttack.isSequencedAttack && nextSequencedAttacks.Count > 0)
+    //        {
+    //            nextSequencedAttacks.RemoveAt(0);
+    //        }
 
-            while (Attacking && currentAttackPhase != AttackPhasesType.End)
-            {
-                if(nextAttack == null)
-                {
+    //        while (Attacking && currentAttackPhase != AttackPhasesType.End)
+    //        {
+    //            if(nextAttack == null)
+    //            {
 
-                }
-                yield return null;
-            }
+    //            }
+    //            yield return null;
+    //        }
 
-        }
-    }
+    //    }
+    //}
 
 
 

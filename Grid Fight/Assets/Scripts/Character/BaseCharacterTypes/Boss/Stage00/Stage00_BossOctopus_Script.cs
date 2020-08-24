@@ -18,7 +18,7 @@ public class Stage00_BossOctopus_Script : MinionType_Script
         CharacterNameType.CleasTemple_BossOctopus_Girl
     };
 
-    public override void Start()
+    public void Start()
     {
         GenerateBoss();
     }

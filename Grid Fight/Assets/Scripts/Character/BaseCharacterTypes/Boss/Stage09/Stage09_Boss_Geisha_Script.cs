@@ -57,7 +57,7 @@ public class Stage09_Boss_Geisha_Script : MinionType_Script
 
     #region Initial Setup
 
-    public override void Start()
+    public  void Start()
     {
         if (bossInfo == null) SetupFromBossInfo();
 
@@ -184,10 +184,6 @@ public class Stage09_Boss_Geisha_Script : MinionType_Script
 
     #region AI
 
-    public override IEnumerator AI()
-    {
-        yield return GeishaAI();
-    }
     public IEnumerator ActiveAI = null;
     IEnumerator GeishaAI()
     {
@@ -275,15 +271,7 @@ public class Stage09_Boss_Geisha_Script : MinionType_Script
     //    }
     //}
 
-    public override IEnumerator MoveCharOnDir_Co(InputDirectionType nextDir)
-    {
-        yield break; //char doesnt move
-        yield return base.MoveCharOnDir_Co(nextDir);
-        oniForme.UMS.Pos = UMS.Pos;
-        oniForme.UMS.CurrentTilePos = UMS.CurrentTilePos;
-    }
-
-    public override IEnumerator AttackSequence()
+    public IEnumerator AttackSequence()
     {
         Attacking = true;
         bulletFired = false;

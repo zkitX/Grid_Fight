@@ -28,10 +28,6 @@ public class CharacterType_Script : BaseCharacter
     public float LastAxisValue = 0;
 
     #region Unity Life Cycles
-    public override void Start()
-    {
-        base.Start();
-    }
     protected override void Update()
     {
         NewIManager.Instance.UpdateVitalitiesOfCharacter(CharInfo, UMS.Side);
@@ -413,192 +409,184 @@ public class CharacterType_Script : BaseCharacter
 
 
 
-    public override IEnumerator AI()
-    {
-        nextAttack = CharInfo.CurrentAttackTypeInfo.Where(r=> r.PrefixAnim == AttackAnimPrefixType.Atk1).First();
-        bool val = true;
-        while (val)
-        {
-            yield return null;
-            if (IsOnField && CharInfo.Health > 0)
-            {
+    //public override IEnumerator AI()
+    //{
+    //    nextAttack = CharInfo.CurrentAttackTypeInfo.Where(r=> r.PrefixAnim == AttackAnimPrefixType.Atk1).First();
+    //    bool val = true;
+    //    while (val)
+    //    {
+    //        yield return null;
+    //        if (IsOnField && CharInfo.Health > 0)
+    //        {
 
-                while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
-                {
-                    yield return null;
-                }
-                CurrentAIState = CharInfo.AIs[0];
-                target = WaveManagerScript.Instance.WaveCharcters.Where(r => r.isActiveAndEnabled && r.IsOnField).ToList().OrderBy(a => (Mathf.Abs(a.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x))).FirstOrDefault();
+    //            while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
+    //            {
+    //                yield return null;
+    //            }
+    //            CurrentAIState = CharInfo.AIs[0];
+    //            target = WaveManagerScript.Instance.WaveCharcters.Where(r => r.isActiveAndEnabled && r.IsOnField).ToList().OrderBy(a => (Mathf.Abs(a.UMS.CurrentTilePos.x - UMS.CurrentTilePos.x))).FirstOrDefault();
                    
-                SetCurrentAIValues();
-                CurrentAIState.ModifyStats(CharInfo);
-                AICoolDownOffset = 0;
+    //            SetCurrentAIValues();
+    //            CurrentAIState.ModifyStats(CharInfo);
+    //            AICoolDownOffset = 0;
 
-                tempInt_1 = Random.Range(0, 100);
-                if (target != null && tempInt_1 < AttackWillPerc &&  (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler))
-                {
-                    lastAttackTime = Time.time;
-                    nextAttackPos = target.UMS.CurrentTilePos;
-                    if (possiblePos != null)
-                    {
-                        possiblePos.isTaken = false;
-                        possiblePos = null;
-                    }
+    //            tempInt_1 = Random.Range(0, 100);
+    //            if (target != null && tempInt_1 < AttackWillPerc &&  (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler))
+    //            {
+    //                lastAttackTime = Time.time;
+    //                nextAttackPos = target.UMS.CurrentTilePos;
+    //                if (possiblePos != null)
+    //                {
+    //                    possiblePos.isTaken = false;
+    //                    possiblePos = null;
+    //                }
 
-                    yield return AttackSequence();
-                }
-                else
-                {
-                    tempInt_2 = Random.Range(0, 100);
-                    if (AreTileNearEmpty() && tempInt_2 < MoveWillPerc)
-                    {
-                        if (possiblePos == null)
-                        {
-                            int movementChances = UnityEngine.Random.Range(0, (TowardMovementPerc + AwayMovementPerc));
-                            if (TowardMovementPerc > movementChances && (Time.time - AICoolDownOffset) > CurrentAIState.CoolDown)
-                            {
-                                if (target != null)
-                                {
-                                    possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
-                                    r.BattleTileState != BattleTileStateType.NonUsable
-                                    ).OrderBy(a => Mathf.Abs(a.Pos.x - target.UMS.CurrentTilePos.x)).ThenBy(b => b.Pos.y).ToList();
-                                    AICoolDownOffset = Time.time;
-                                }
-                            }
-                            else if ((Time.time - AICoolDownOffset) > CurrentAIState.CoolDown)
-                            {
-                                if (target != null)
-                                {
-                                    possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
-                                    r.BattleTileState != BattleTileStateType.NonUsable
-                                    ).OrderByDescending(a => Mathf.Abs(a.Pos.x - target.UMS.CurrentTilePos.x)).ThenByDescending(b => b.Pos.y).ToList();
-                                    AICoolDownOffset = Time.time;
-                                }
-                            }
-                            if (possiblePositions.Count > 0)
-                            {
-                                found = false;
-                                while (!found)
-                                {
-                                    if (possiblePositions.Count > 0)
-                                    {
-                                        possiblePos = possiblePositions.First();
-                                        if (possiblePos.Pos != UMS.CurrentTilePos)
-                                        {
-                                            if (possiblePos.BattleTileState == BattleTileStateType.Empty)
-                                            {
-                                                path = GridManagerScript.Pathfinding.GetPathTo(possiblePos.Pos, UMS.Pos, GridManagerScript.Instance.GetWalkableTilesLayout(UMS.WalkingSide));
-                                                if (path != null && path.Length > 0)
-                                                {
-                                                    found = true;
-                                                    Vector2Int move = path[0] - UMS.CurrentTilePos;
-                                                    possiblePos.isTaken = true;
-                                                    yield return MoveCharOnDir_Co(move == new Vector2Int(1, 0) ? InputDirectionType.Down : move == new Vector2Int(-1, 0) ? InputDirectionType.Up : move == new Vector2Int(0, 1) ? InputDirectionType.Right : InputDirectionType.Left);
-                                                }
-                                                else
-                                                {
-                                                    possiblePositions.Remove(possiblePos);
-                                                }
-                                            }
-                                            else
-                                            {
-                                                possiblePositions.Remove(possiblePos);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            if (CurrentAIState.IdleMovement > Random.Range(0f,1f))
-                                            {
-                                                possiblePos = null;
-                                                found = true;
-                                            }
-                                            else
-                                            {
-                                                if (possiblePositions.Count <= 1)
-                                                {
-                                                    possiblePos = null;
-                                                    found = true;
-                                                }
-                                                else
-                                                {
-                                                    possiblePositions.Insert(0, GridManagerScript.Instance.GetFreeBattleTile(possiblePos.WalkingSide));
-                                                    yield return null;
-                                                }
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        possiblePos = null;
-                                        found = true;
-                                    }
+    //                yield return AttackSequence();
+    //            }
+    //            else
+    //            {
+    //                tempInt_2 = Random.Range(0, 100);
+    //                if (AreTileNearEmpty() && tempInt_2 < MoveWillPerc)
+    //                {
+    //                    if (possiblePos == null)
+    //                    {
+    //                        int movementChances = UnityEngine.Random.Range(0, (TowardMovementPerc + AwayMovementPerc));
+    //                        if (TowardMovementPerc > movementChances && (Time.time - AICoolDownOffset) > CurrentAIState.CoolDown)
+    //                        {
+    //                            if (target != null)
+    //                            {
+    //                                possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
+    //                                r.BattleTileState != BattleTileStateType.NonUsable
+    //                                ).OrderBy(a => Mathf.Abs(a.Pos.x - target.UMS.CurrentTilePos.x)).ThenBy(b => b.Pos.y).ToList();
+    //                                AICoolDownOffset = Time.time;
+    //                            }
+    //                        }
+    //                        else if ((Time.time - AICoolDownOffset) > CurrentAIState.CoolDown)
+    //                        {
+    //                            if (target != null)
+    //                            {
+    //                                possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
+    //                                r.BattleTileState != BattleTileStateType.NonUsable
+    //                                ).OrderByDescending(a => Mathf.Abs(a.Pos.x - target.UMS.CurrentTilePos.x)).ThenByDescending(b => b.Pos.y).ToList();
+    //                                AICoolDownOffset = Time.time;
+    //                            }
+    //                        }
+    //                        if (possiblePositions.Count > 0)
+    //                        {
+    //                            found = false;
+    //                            while (!found)
+    //                            {
+    //                                if (possiblePositions.Count > 0)
+    //                                {
+    //                                    possiblePos = possiblePositions.First();
+    //                                    if (possiblePos.Pos != UMS.CurrentTilePos)
+    //                                    {
+    //                                        if (possiblePos.BattleTileState == BattleTileStateType.Empty)
+    //                                        {
+    //                                            path = GridManagerScript.Pathfinding.GetPathTo(possiblePos.Pos, UMS.Pos, GridManagerScript.Instance.GetWalkableTilesLayout(UMS.WalkingSide));
+    //                                            if (path != null && path.Length > 0)
+    //                                            {
+    //                                                found = true;
+    //                                                Vector2Int move = path[0] - UMS.CurrentTilePos;
+    //                                                possiblePos.isTaken = true;
+    //                                                yield return MoveCharOnDir_Co(move == new Vector2Int(1, 0) ? InputDirectionType.Down : move == new Vector2Int(-1, 0) ? InputDirectionType.Up : move == new Vector2Int(0, 1) ? InputDirectionType.Right : InputDirectionType.Left);
+    //                                            }
+    //                                            else
+    //                                            {
+    //                                                possiblePositions.Remove(possiblePos);
+    //                                            }
+    //                                        }
+    //                                        else
+    //                                        {
+    //                                            possiblePositions.Remove(possiblePos);
+    //                                        }
+    //                                    }
+    //                                    else
+    //                                    {
+    //                                        if (CurrentAIState.IdleMovement > Random.Range(0f,1f))
+    //                                        {
+    //                                            possiblePos = null;
+    //                                            found = true;
+    //                                        }
+    //                                        else
+    //                                        {
+    //                                            if (possiblePositions.Count <= 1)
+    //                                            {
+    //                                                possiblePos = null;
+    //                                                found = true;
+    //                                            }
+    //                                            else
+    //                                            {
+    //                                                possiblePositions.Insert(0, GridManagerScript.Instance.GetFreeBattleTile(possiblePos.WalkingSide));
+    //                                                yield return null;
+    //                                            }
+    //                                        }
+    //                                    }
+    //                                }
+    //                                else
+    //                                {
+    //                                    possiblePos = null;
+    //                                    found = true;
+    //                                }
 
-                                }
-                                yield return null;
-                            }
-                            else
-                            {
-                                found = true;
-                                possiblePos = null;
-                            }
-                        }
-                        else
-                        {
-                            if (possiblePos.Pos != UMS.CurrentTilePos)
-                            {
-                                path = GridManagerScript.Pathfinding.GetPathTo(possiblePos.Pos, UMS.Pos, GridManagerScript.Instance.GetWalkableTilesLayout(UMS.WalkingSide));
-                                if (path == null || (path != null && path.Length == 1) || possiblePos.Pos == UMS.CurrentTilePos)
-                                {
-                                    possiblePos.isTaken = false;
-                                    possiblePos = null;
-                                }
-                                if (path.Length > 0)
-                                {
-                                    Vector2Int move = path[0] - UMS.CurrentTilePos;
+    //                            }
+    //                            yield return null;
+    //                        }
+    //                        else
+    //                        {
+    //                            found = true;
+    //                            possiblePos = null;
+    //                        }
+    //                    }
+    //                    else
+    //                    {
+    //                        if (possiblePos.Pos != UMS.CurrentTilePos)
+    //                        {
+    //                            path = GridManagerScript.Pathfinding.GetPathTo(possiblePos.Pos, UMS.Pos, GridManagerScript.Instance.GetWalkableTilesLayout(UMS.WalkingSide));
+    //                            if (path == null || (path != null && path.Length == 1) || possiblePos.Pos == UMS.CurrentTilePos)
+    //                            {
+    //                                possiblePos.isTaken = false;
+    //                                possiblePos = null;
+    //                            }
+    //                            if (path.Length > 0)
+    //                            {
+    //                                Vector2Int move = path[0] - UMS.CurrentTilePos;
 
-                                    yield return MoveCharOnDir_Co(move == new Vector2Int(1, 0) ? InputDirectionType.Down : move == new Vector2Int(-1, 0) ? InputDirectionType.Up : move == new Vector2Int(0, 1) ? InputDirectionType.Right : InputDirectionType.Left);
-                                }
-                            }
-                            else
-                            {
-                                possiblePos = null;
-                            }
-                        }
+    //                                yield return MoveCharOnDir_Co(move == new Vector2Int(1, 0) ? InputDirectionType.Down : move == new Vector2Int(-1, 0) ? InputDirectionType.Up : move == new Vector2Int(0, 1) ? InputDirectionType.Right : InputDirectionType.Left);
+    //                            }
+    //                        }
+    //                        else
+    //                        {
+    //                            possiblePos = null;
+    //                        }
+    //                    }
 
-                    }
-                    else
-                    {
-                        if (possiblePos != null)
-                        {
-                            possiblePos.isTaken = false;
-                            possiblePos = null;
-                        }
-                    }
-                }
-                yield return null;
-            }
-            else
-            {
-                if (possiblePos != null)
-                {
-                    possiblePos.isTaken = false;
-                    possiblePos = null;
-                }
+    //                }
+    //                else
+    //                {
+    //                    if (possiblePos != null)
+    //                    {
+    //                        possiblePos.isTaken = false;
+    //                        possiblePos = null;
+    //                    }
+    //                }
+    //            }
+    //            yield return null;
+    //        }
+    //        else
+    //        {
+    //            if (possiblePos != null)
+    //            {
+    //                possiblePos.isTaken = false;
+    //                possiblePos = null;
+    //            }
 
-            }
-        }
-    }
+    //        }
+    //    }
+    //}
 
 
 
-    public override IEnumerator AttackSequence()
-    {
-        yield return CharacterInputQueue(InputActionType.Weak);
-        while (Attacking)
-        {
-            yield return null;
-        }
-    }
 }
 
 public class SkillCoolDownClass

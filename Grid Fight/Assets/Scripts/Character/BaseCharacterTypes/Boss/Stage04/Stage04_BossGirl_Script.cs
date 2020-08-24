@@ -194,28 +194,5 @@ public class Stage04_BossGirl_Script : MinionType_Script
     }
 
 
-    public override IEnumerator AI()
-    {
-        while (BattleManagerScript.Instance.PlayerControlledCharacters.Length == 0)
-        {
-            yield return null;
-        }
-
-        bool val = true;
-        while (val)
-        {
-            yield return null;
-            if (IsOnField)
-            {
-                yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
-
-                List<BaseCharacter> enemys = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToList();
-                if (enemys.Count > 0)
-                {
-                    //GetAttack(CharacterAnimationStateType.Atk);
-                }
-                yield return null;
-            }
-        }
-    }
+   
 }

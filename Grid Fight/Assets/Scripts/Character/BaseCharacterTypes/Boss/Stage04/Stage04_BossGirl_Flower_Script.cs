@@ -16,76 +16,7 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
         StartCoroutine(base.MoveByTileSpace(GridManagerScript.Instance.GetBattleTile(UMS.Pos[0]).transform.position, SpineAnim.CurveType == MovementCurveType.Space_Time ? SpineAnim.Space_Time_Curves.UpMovement : SpineAnim.Speed_Time_Curves.UpMovement,0));
     }
 
-    public override IEnumerator AI()
-    {
-        while (BattleManagerScript.Instance.PlayerControlledCharacters.Length == 0)
-        {
-            yield return null;
-        }
-        int times = 0;
-        int MoveTime = 0;
-        bool val = true;
-        InputDirectionType dir = InputDirectionType.Down;
-        bool goBack = false;
-        while (val)
-        {
-            yield return null;
-            if (IsOnField)
-            {
-
-                yield return BattleManagerScript.Instance.WaitUpdate(() =>BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle);
-
-                if (MoveTime == 0)
-                {
-                    MoveTime = Random.Range(1, 2);
-                }
-                else
-                {
-                    times++;
-                    if (times == MoveTime)
-                    {
-                        yield return new WaitForSecondsRealtime(1);
-                        if (goBack)
-                        {
-                            if (CharInfo.Health > 0)
-                            {
-                                yield return MoveCharOnDir_Co(dir == InputDirectionType.Down ? InputDirectionType.Up : dir == InputDirectionType.Up ? InputDirectionType.Down : dir == InputDirectionType.Left ? InputDirectionType.Right : InputDirectionType.Left);
-                                goBack = false;
-                            }
-
-                        }
-                        else
-                        {
-                            for (int i = 0; i < 10; i++)
-                            {
-                                dir = (InputDirectionType)Random.Range(0, 4);
-                                BattleTileScript bts = GridManagerScript.Instance.GetBattleTile(UMS.CurrentTilePos + (dir == InputDirectionType.Down ? new Vector2Int(1, 0) :
-                                    dir == InputDirectionType.Up ? new Vector2Int(-1, 0) : dir == InputDirectionType.Left ? new Vector2Int(0, -1) : new Vector2Int(0, 1)));
-                                if (bts.BattleTileState == BattleTileStateType.Empty && bts.WalkingSide == UMS.WalkingSide)
-                                {
-                                    break;
-                                }
-                            }
-                            
-                            goBack = true;
-                            if (CharInfo.Health > 0)
-                            {
-                                yield return MoveCharOnDir_Co(dir);
-                            }
-                        }
-
-                        times = 0;
-                        MoveTime = 0;
-                    }
-                }
-                yield return AttackSequence();
-                yield return null;
-            }
-        }
-    }
-
-  
-
+   
     public override void SetCharDead()
     {
         if (SpineAnim.CurrentAnim != CharacterAnimationStateType.Death.ToString())
