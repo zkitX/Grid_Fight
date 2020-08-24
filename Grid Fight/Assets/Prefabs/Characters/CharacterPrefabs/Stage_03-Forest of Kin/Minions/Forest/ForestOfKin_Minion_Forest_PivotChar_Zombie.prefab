@@ -566,17 +566,22 @@ MonoBehaviour:
   CharacterIcon: {fileID: 0}
   Mask: {fileID: 0}
   AudioProfile: {fileID: 11400000, guid: 18079379e5337084286a38b915064869, type: 2}
-  BaseCharacterType: 0
+  BaseCharacterType: 1
   CharacterID: 1062
   attackSequences: []
-  _CurrentAttackTypeInfo: []
+  _CurrentAttackTypeInfo:
+  - {fileID: 11400000, guid: f525249828203694fb5e51bd732c94c0, type: 2}
+  - {fileID: 11400000, guid: 7f66f37f31e9d46409e836d86599c7ca, type: 2}
+  - {fileID: 11400000, guid: 934b57617658a304488d13859cc877be, type: 2}
+  - {fileID: 11400000, guid: 91944f29fe918e44ca63a4edc2b335f0, type: 2}
   AddedAttackTypeInfo: []
   Elemental: 0
   ClassType: 2
   CharaterLevel: 0
   UseLayeringSystem: 1
   Head: {fileID: 2269178473166972728}
-  AIs: []
+  AIs:
+  - {fileID: 11400000, guid: 1965ee6244c67204d9c32e0db76bc8ce, type: 2}
   CharacterRespawnLength: 180
   CharacterSelection: 0
   HealthStats:
@@ -610,8 +615,8 @@ MonoBehaviour:
     B_MinionShieldChances: 20
     B_MinionPerfectShieldChances: 5
   EtherStats:
-    Ether: 40
-    Base: 40
+    Ether: 4000
+    Base: 4000
     Regeneration: 1
     BaseEtherRegeneration: 1
     LevelMultiplier: 30
@@ -634,8 +639,8 @@ MonoBehaviour:
     MovementSpeed_LevelMultiplier: 0
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
-    WeakBulletSpeed: 5
-    StrongBulletSpeed: 5
+    WeakBulletSpeed: 2
+    StrongBulletSpeed: 2
     B_BaseSpeed: 1
     B_MovementSpeed: 1
     B_AttackSpeed: 1
@@ -707,7 +712,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1504996559644482988}
   m_Layer: 0
-  m_Name: Stage03_Minion_Forest_PivotChar_Zombie
+  m_Name: ForestOfKin_Minion_Forest_PivotChar_Zombie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
