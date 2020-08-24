@@ -1278,6 +1278,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4545539599896197989}
   - component: {fileID: 4076159808370681182}
+  - component: {fileID: 6972443801263203400}
+  - component: {fileID: 3078237971514088882}
   m_Layer: 0
   m_Name: Balla-Leaves-Right-2
   m_TagString: Untagged
@@ -1348,6 +1350,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &6972443801263203400
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440283477867720572}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 179e473e482ee1844acef21afe68182a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3078237971514088882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440283477867720572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6293d6521ec70c8408191540a3744a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpeedMinMax: {x: 0.6, y: 1}
 --- !u!1 &1537183526759083062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1438,6 +1472,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3542292881878196850}
   - component: {fileID: 4850665696424696336}
+  - component: {fileID: 6954234835593545402}
   m_Layer: 0
   m_Name: Kin-Tree-Shadow-3
   m_TagString: Untagged
@@ -1508,6 +1543,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &6954234835593545402
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602406572262963218}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 337c3b4a79a4e9641ade92e18bc59be5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1638676321547076201
 GameObject:
   m_ObjectHideFlags: 0
@@ -1695,6 +1749,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5518661753479960269}
   - component: {fileID: 8250201416525850868}
+  - component: {fileID: 2430015509128528131}
+  - component: {fileID: 2533900626975117512}
   m_Layer: 0
   m_Name: Balla-Leave-Left-1
   m_TagString: Untagged
@@ -1765,6 +1821,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2430015509128528131
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965904089285129990}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d840b496d432d274ea1a786815fae354, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2533900626975117512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965904089285129990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6293d6521ec70c8408191540a3744a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpeedMinMax: {x: 0.8, y: 1}
 --- !u!1 &2084197886114515104
 GameObject:
   m_ObjectHideFlags: 0
@@ -2177,6 +2265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7682413601148108786}
   - component: {fileID: 2052202746454886535}
+  - component: {fileID: 852400107108313867}
   m_Layer: 0
   m_Name: Valis-Tree-Shadoes
   m_TagString: Untagged
@@ -2247,6 +2336,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &852400107108313867
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2402096184741186971}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 821d60f08ca70eb45a03afbe07c32006, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2503333675355316182
 GameObject:
   m_ObjectHideFlags: 0
@@ -2288,6 +2396,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6349183398656375251}
   - component: {fileID: 333603154467474107}
+  - component: {fileID: 9051865041646884765}
+  - component: {fileID: 1271617548972918299}
   m_Layer: 0
   m_Name: Balla-Leave-Right-1
   m_TagString: Untagged
@@ -2358,6 +2468,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &9051865041646884765
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2592016136017855465}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 529d89bb0172eb24f91ce9e773c94fd5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1271617548972918299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2592016136017855465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6293d6521ec70c8408191540a3744a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpeedMinMax: {x: 0.6, y: 1}
 --- !u!1 &2657079867141660995
 GameObject:
   m_ObjectHideFlags: 0
@@ -2751,6 +2893,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3011286753207338850}
   - component: {fileID: 1906659389504260765}
+  - component: {fileID: 8158371843934760497}
+  - component: {fileID: 7631587042616805146}
   m_Layer: 0
   m_Name: Balla-Grid
   m_TagString: Untagged
@@ -2821,6 +2965,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &8158371843934760497
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3456941093461198106}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 228d0de1c59489144a4995123b38ff0c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7631587042616805146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3456941093461198106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6293d6521ec70c8408191540a3744a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpeedMinMax: {x: 0.6, y: 1}
 --- !u!1 &3515064017236667292
 GameObject:
   m_ObjectHideFlags: 0
@@ -3361,6 +3537,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8414817127664858947}
   - component: {fileID: 3875091550612216370}
+  - component: {fileID: 7287479767499367387}
+  - component: {fileID: 6073857562304677712}
   m_Layer: 0
   m_Name: Balla-Leaves-SH-Right-1
   m_TagString: Untagged
@@ -3431,6 +3609,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7287479767499367387
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4036270781751793697}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 571d793021f804c4ea59d9ee561b8d18, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6073857562304677712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4036270781751793697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6293d6521ec70c8408191540a3744a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpeedMinMax: {x: 0.8, y: 1}
 --- !u!1 &4081693369818087813
 GameObject:
   m_ObjectHideFlags: 0
@@ -3983,6 +4193,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1265994177627780277}
   - component: {fileID: 9140617285366684429}
+  - component: {fileID: 5082777234469076550}
+  - component: {fileID: 997857488470760437}
   m_Layer: 0
   m_Name: Balla-Main-Leaves-Right-2
   m_TagString: Untagged
@@ -3998,7 +4210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4445000391148569751}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.252, y: 7.0606995, z: 0}
+  m_LocalPosition: {x: 20.09, y: 6.61, z: 0}
   m_LocalScale: {x: 0.722372, y: 0.722372, z: 0.722372}
   m_Children: []
   m_Father: {fileID: 7581154689519356106}
@@ -4053,6 +4265,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &5082777234469076550
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4445000391148569751}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7f448ac04253afd4f858a18023c87f40, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &997857488470760437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4445000391148569751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6293d6521ec70c8408191540a3744a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpeedMinMax: {x: 0.7, y: 1}
 --- !u!1 &4499175290732946948
 GameObject:
   m_ObjectHideFlags: 0
@@ -4254,7 +4498,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4696836472093295397}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.21, y: 5.43, z: 0}
+  m_LocalPosition: {x: 20.12, y: 6.47, z: 0}
   m_LocalScale: {x: 0.722372, y: -0.722372, z: 0.722372}
   m_Children: []
   m_Father: {fileID: 7581154689519356106}
@@ -4433,6 +4677,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2220914226963288038}
   - component: {fileID: 1129797978780222812}
+  - component: {fileID: 2346201405443274114}
   m_Layer: 0
   m_Name: Kin-Tree-Shadow-1
   m_TagString: Untagged
@@ -4503,6 +4748,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2346201405443274114
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4820943037253220463}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b57fdb9b4874e8447b585323093fdf9c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4837857851273870620
 GameObject:
   m_ObjectHideFlags: 0
@@ -4608,7 +4872,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4876180803434517675}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 5.93, y: 8.029, z: 0}
+  m_LocalPosition: {x: 7.236, y: 6.103, z: 0}
   m_LocalScale: {x: 0.722372, y: 0.722372, z: 0.722372}
   m_Children: []
   m_Father: {fileID: 7581154689519356106}
@@ -4753,6 +5017,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9006816394526354270}
   - component: {fileID: 8071267491699663840}
+  - component: {fileID: 4812611660248309883}
+  - component: {fileID: 7609843271090668142}
   m_Layer: 0
   m_Name: Balla-Leaves-SH-Right-2
   m_TagString: Untagged
@@ -4823,6 +5089,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4812611660248309883
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5056376030809412358}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0f15a1020ad4e6443a38bb96e1b90e83, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7609843271090668142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5056376030809412358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6293d6521ec70c8408191540a3744a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpeedMinMax: {x: 0.7, y: 1}
 --- !u!1 &5078685163118281106
 GameObject:
   m_ObjectHideFlags: 0
@@ -5138,6 +5436,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4939568196018117633}
   - component: {fileID: 7701914225009039669}
+  - component: {fileID: 3917804057103913964}
   m_Layer: 0
   m_Name: Kin-Tree-Shadow-2
   m_TagString: Untagged
@@ -5208,6 +5507,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &3917804057103913964
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5245050212868734776}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0da3130663918fd48942f001ef7869c6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5266500656954804728
 GameObject:
   m_ObjectHideFlags: 0
@@ -5923,6 +6241,8 @@ GameObject:
   m_Component:
   - component: {fileID: 291863893810856523}
   - component: {fileID: 1644750916821210067}
+  - component: {fileID: 6715484036498121671}
+  - component: {fileID: 6178309654716734840}
   m_Layer: 0
   m_Name: Balla-Leaves-SH-Left-2
   m_TagString: Untagged
@@ -5993,6 +6313,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &6715484036498121671
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5661932514719448538}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 27c4400294aa31e4ca1060277da27b34, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6178309654716734840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5661932514719448538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6293d6521ec70c8408191540a3744a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpeedMinMax: {x: 0.8, y: 1}
 --- !u!1 &5669308818052419325
 GameObject:
   m_ObjectHideFlags: 0
@@ -7272,6 +7624,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7486771674346845512}
   - component: {fileID: 7038030535381696773}
+  - component: {fileID: 2186927263319878358}
   m_Layer: 0
   m_Name: Kin-Tree-Shadow-4
   m_TagString: Untagged
@@ -7342,6 +7695,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2186927263319878358
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7123028039569094428}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1f86945586cf4c049add1daf2e23b056, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7174824672556954282
 GameObject:
   m_ObjectHideFlags: 0
@@ -7768,6 +8140,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7926126647102304883}
   - component: {fileID: 2564287380979701289}
+  - component: {fileID: 7891376703325365336}
+  - component: {fileID: 4721344589948044318}
   m_Layer: 0
   m_Name: Balla-Leaves-Left-2
   m_TagString: Untagged
@@ -7838,6 +8212,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7891376703325365336
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7553883216652052586}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 623f534bedd179a40bea418c0ca95713, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4721344589948044318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7553883216652052586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6293d6521ec70c8408191540a3744a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpeedMinMax: {x: 0.7, y: 1}
 --- !u!1 &7668772352244971619
 GameObject:
   m_ObjectHideFlags: 0
@@ -8920,6 +9326,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6249675267977389291}
   - component: {fileID: 618900066158049368}
+  - component: {fileID: 972197457249872930}
+  - component: {fileID: 4035664917103797124}
   m_Layer: 0
   m_Name: Balla-Leaves-SH-Left-1
   m_TagString: Untagged
@@ -8990,6 +9398,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &972197457249872930
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8806498191514131373}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: acb0e8ee00ba6f947880ba1c75b204bd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4035664917103797124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8806498191514131373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6293d6521ec70c8408191540a3744a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpeedMinMax: {x: 0.5, y: 1}
 --- !u!1 &8844797338560498804
 GameObject:
   m_ObjectHideFlags: 0
@@ -9434,6 +9874,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7900061229404905336}
   - component: {fileID: 6460934648672038977}
+  - component: {fileID: 5683567251939759435}
+  - component: {fileID: 3281680414926171781}
   m_Layer: 0
   m_Name: Balla-Main-Leaves-Left-1
   m_TagString: Untagged
@@ -9449,7 +9891,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9082266647537679733}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.5902, y: 8.115399, z: 0}
+  m_LocalPosition: {x: 7.242, y: 6.24, z: 0}
   m_LocalScale: {x: 0.722372, y: 0.722372, z: 0.722372}
   m_Children: []
   m_Father: {fileID: 7581154689519356106}
@@ -9504,6 +9946,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &5683567251939759435
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9082266647537679733}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dc63da309fd93054a83781f939f64448, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3281680414926171781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9082266647537679733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6293d6521ec70c8408191540a3744a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpeedMinMax: {x: 0.9, y: 1}
 --- !u!1 &9097643729822225267
 GameObject:
   m_ObjectHideFlags: 0
