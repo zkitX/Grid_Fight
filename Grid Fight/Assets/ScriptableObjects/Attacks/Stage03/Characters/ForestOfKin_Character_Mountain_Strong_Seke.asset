@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: ForestOfKin_Character_Mountain_Strong_Seke
   m_EditorClassIdentifier: 
+  SlowDown: {fileID: 11400000, guid: 29f605f49af583e4ea7515d7c98ddfee, type: 2}
   isSequencedAttack: 0
   CurrentAttackType: 0
   AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 1
-  AttackAnim: 1
   StaminaCost: 10
   ExperiencePoints: 10
   _CoolDown: {x: 3, y: 5}
   PrefixAnim: 1
   Fov: 0
+  AttackAnim: 1
   Particles:
     Left:
       Cast: {fileID: 5455041310733658740, guid: 6aa86c229809e0d40b56a44b652c6040,
@@ -40,6 +41,11 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
+  EffectTimeOnImpact: 1
+  TimeEffectMultiplier: 0.04
+  DurationOfTimeEffect: 0.4
+  TimeEffectDelay: 0.1
+  TimeEffectChildExplosion: 1
   TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories:
