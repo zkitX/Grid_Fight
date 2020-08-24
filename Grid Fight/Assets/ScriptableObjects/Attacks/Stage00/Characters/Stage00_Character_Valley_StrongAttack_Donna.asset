@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage00_Character_Valley_StrongAttack_Donna
   m_EditorClassIdentifier: 
+  SlowDown: {fileID: 11400000, guid: 29f605f49af583e4ea7515d7c98ddfee, type: 2}
   isSequencedAttack: 0
-  Chances: 100
   CurrentAttackType: 0
   AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 1
-  AttackAnim: 1
   StaminaCost: 6
   ExperiencePoints: 10
   _CoolDown: {x: 3, y: 5}
   PrefixAnim: 1
   Fov: 0
+  AttackAnim: 1
   Particles:
     Left:
       Cast: {fileID: 4157935763129435728, guid: ca70acfe0ad9e144e81de18afb43760c,
@@ -41,6 +41,11 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
+  EffectTimeOnImpact: 1
+  TimeEffectMultiplier: 0.2
+  DurationOfTimeEffect: 1
+  TimeEffectDelay: 0.1
+  TimeEffectChildExplosion: 0
   TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories:

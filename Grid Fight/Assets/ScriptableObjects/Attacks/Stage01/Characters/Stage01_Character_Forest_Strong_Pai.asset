@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage01_Character_Forest_Strong_Pai
   m_EditorClassIdentifier: 
+  SlowDown: {fileID: 11400000, guid: 29f605f49af583e4ea7515d7c98ddfee, type: 2}
   isSequencedAttack: 0
   CurrentAttackType: 0
   AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 1
-  AttackAnim: 1
   StaminaCost: 3
   ExperiencePoints: 10
   _CoolDown: {x: 3, y: 5}
   PrefixAnim: 1
   Fov: 0
+  AttackAnim: 1
   Particles:
     Left:
       Cast: {fileID: 7362359623206521130, guid: 2b941c3ed561b0248acfdc0ad0494f31,
@@ -40,6 +41,9 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
+  EffectTimeOnImpact: 0
+  TimeEffectMultiplier: 1
+  DurationOfTimeEffect: 1
   TrajectoriesNumber: 3
   ParticlesAtk:
     BulletTrajectories:

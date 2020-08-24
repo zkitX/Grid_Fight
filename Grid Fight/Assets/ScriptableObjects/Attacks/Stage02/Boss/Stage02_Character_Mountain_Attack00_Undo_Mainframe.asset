@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage02_Character_Mountain_Attack00_Undo_Mainframe
   m_EditorClassIdentifier: 
+  SlowDown: {fileID: 11400000, guid: 29f605f49af583e4ea7515d7c98ddfee, type: 2}
   isSequencedAttack: 0
-  Chances: 100
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 0.8, y: 1.2}
   AttackInput: 0
-  AttackAnim: 0
   StaminaCost: 0
   ExperiencePoints: 10
   _CoolDown: {x: 3, y: 5}
   PrefixAnim: 0
   Fov: 1
+  AttackAnim: 0
   Particles:
     Left:
       Cast: {fileID: 6700687939425037103, guid: f6905044782328349a427390982ac972,
@@ -41,6 +41,9 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
+  EffectTimeOnImpact: 0
+  TimeEffectMultiplier: 1
+  DurationOfTimeEffect: 1
   TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories:

@@ -25,6 +25,7 @@ public class BuffIconHandler : MonoBehaviour
 
     public void RefreshIcons(List<BuffDebuffClass> statusList)
     {
+        statusList = statusList.Where(r=> r.CurrentBuffDebuff.Effect.icon != null).ToList();
         //Get the bufficons that should no longer be running and stop them
         foreach (BuffIcon ico in buffIcons)
         {

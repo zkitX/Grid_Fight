@@ -14,6 +14,7 @@ public class ScriptableObjectAttackTypeEditor : Editor
     public GameObject ChargingActivationPs;
     public GameObject ChargingLoopPs;
     public GameObject PlaceHolder;
+    public ScriptableObjectAttackEffect SlowDown;
 
 
     public override void OnInspectorGUI()
@@ -22,6 +23,8 @@ public class ScriptableObjectAttackTypeEditor : Editor
         //test = false;
         origin = (ScriptableObjectAttackBase)target;
 
+
+        origin.SlowDown = SlowDown;
 
         if (origin.Particles.Left.Cast == null)
         {

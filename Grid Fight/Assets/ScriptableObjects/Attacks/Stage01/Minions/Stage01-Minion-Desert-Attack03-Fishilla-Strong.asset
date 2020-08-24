@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage01-Minion-Desert-Attack03-Fishilla-Strong
   m_EditorClassIdentifier: 
+  SlowDown: {fileID: 11400000, guid: 29f605f49af583e4ea7515d7c98ddfee, type: 2}
   isSequencedAttack: 0
   CurrentAttackType: 1
   AttackRatioMultiplier: 2
   _DamageMultiplier: {x: 2, y: 2}
   AttackInput: 1
-  AttackAnim: 0
   StaminaCost: 1
   ExperiencePoints: 10
   _CoolDown: {x: 3, y: 5}
   PrefixAnim: 0
   Fov: 2
+  AttackAnim: 0
   Particles:
     Left:
       Cast: {fileID: 8230215500604754102, guid: fc1aec58e9ffb754694b25d03cc38a83,
@@ -40,6 +41,9 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
+  EffectTimeOnImpact: 0
+  TimeEffectMultiplier: 1
+  DurationOfTimeEffect: 1
   TrajectoriesNumber: 2
   ParticlesAtk:
     BulletTrajectories:

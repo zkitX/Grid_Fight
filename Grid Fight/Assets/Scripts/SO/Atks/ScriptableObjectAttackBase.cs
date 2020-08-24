@@ -11,6 +11,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/atkbase")]
 public class ScriptableObjectAttackBase : ScriptableObject
 {
+    public ScriptableObjectAttackEffect SlowDown;
+
+
+
     [HideInInspector] public bool isSequencedAttack = false;
     [HideInInspector]
     public float DamageMultiplier
@@ -45,9 +49,11 @@ public class ScriptableObjectAttackBase : ScriptableObject
     [Header("Style")]
     public AttackAnimType AttackAnim;
     public AttackParticlesClass Particles;
-    public bool effectTimeOnImpact = false;
-    [ConditionalField("effectTimeOnImpact")] public float timeEffectMultiplier = 1f;
-    [ConditionalField("effectTimeOnImpact")] public float durationOfTimeEffect = 1f;
+    public bool EffectTimeOnImpact = false;
+    [ConditionalField("effectTimeOnImpact")] public float TimeEffectMultiplier = 1f;
+    [ConditionalField("effectTimeOnImpact")] public float DurationOfTimeEffect = 1f;
+    [ConditionalField("effectTimeOnImpact")] public float TimeEffectDelay = 1f;
+    [ConditionalField("effectTimeOnImpact")] public bool TimeEffectChildExplosion = false;
 
     [System.Serializable]
     public class AttackParticlesClass

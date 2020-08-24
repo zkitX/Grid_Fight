@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage05_Minion_Desert_StrongAttack_LadyBush
   m_EditorClassIdentifier: 
+  SlowDown: {fileID: 11400000, guid: 29f605f49af583e4ea7515d7c98ddfee, type: 2}
   isSequencedAttack: 0
-  Chances: 100
   CurrentAttackType: 1
   AttackRatioMultiplier: 2
   _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 0
-  AttackAnim: 0
   StaminaCost: 10
   ExperiencePoints: 10
   _CoolDown: {x: 3, y: 5}
   PrefixAnim: 0
   Fov: 0
+  AttackAnim: 0
   Particles:
     Left:
       Cast: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
@@ -41,6 +41,9 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
+  EffectTimeOnImpact: 0
+  TimeEffectMultiplier: 1
+  DurationOfTimeEffect: 1
   TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories: []

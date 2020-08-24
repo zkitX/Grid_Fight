@@ -180,23 +180,16 @@ public class BulletScript : MonoBehaviour
             if (GridManagerScript.Instance.isPosOnField(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]))
             {
                 target = BattleManagerScript.Instance.GetCharInPos(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]);
-                MakeDamage(target, CharOwner.NextAttackDamage * 0.3f);
+                MakeDamage(target, CharOwner.NextAttackDamage * 0.3f, true);
                 AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Impact, AudioBus.HighPrio, GridManagerScript.Instance.GetBattleTile(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]).transform);
-                FireEffectParticles(GridManagerScript.Instance.GetBattleTile(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]).transform.position);
-            }
-            else
-            {
-                /* Vector3 dest = new Vector3(bet[i].y * GridManagerScript.Instance.GetWorldDistanceBetweenTiles() * (-1),
-                     bet[i].x * GridManagerScript.Instance.GetWorldDistanceBetweenTiles() * (-1), 0);
-                 FireEffectParticles(GridManagerScript.Instance.GetBattleTile(basePos).transform.position
-                     + dest, i == bet.Count - 1 ? true : false);*/
+                FireEffectParticles(GridManagerScript.Instance.GetBattleTile(Side == SideType.LeftSide ? basePos + bet[i] : basePos - bet[i]).transform.position, target != null ? true : false);
             }
         }
     }
 
     public int iter = 0;
     bool hitTarget = false;
-    public void MakeDamage(BaseCharacter target, float baseDamage)
+    public void MakeDamage(BaseCharacter target, float baseDamage, bool isChildExplosion = false)
     {
         if (target != null)
         {
@@ -238,6 +231,17 @@ public class BulletScript : MonoBehaviour
                             }
                         }
                     }
+
+                    if(SOAttack.EffectTimeOnImpact)
+                    {
+                        ScriptableObjectAttackEffect soE = Instantiate(SOAttack.SlowDown);
+                        soE._Duration = new Vector2(SOAttack.DurationOfTimeEffect, SOAttack.DurationOfTimeEffect);
+                        soE.Value = new Vector2(SOAttack.TimeEffectMultiplier, SOAttack.TimeEffectMultiplier);
+                        if(!isChildExplosion || (isChildExplosion && SOAttack.TimeEffectChildExplosion))
+                        {
+                            target.Buff_DebuffCo(new Buff_DebuffClass(new ElementalResistenceClass(), ElementalType.Dark, CharOwner, soE));
+                        }
+                    }
                 }
             }
         }
@@ -262,9 +266,10 @@ public class BulletScript : MonoBehaviour
         //If the bullet collide with a character 
         if (other.tag.Contains("Side") && other.tag != Side.ToString() && CharOwner.CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && isMoving)
         {
-            if (SOAttack.effectTimeOnImpact)
+            if (SOAttack.EffectTimeOnImpact)
             {
-                BattleManagerScript.Instance.AdjustSetTimeScale(SOAttack.timeEffectMultiplier, SOAttack.durationOfTimeEffect);
+                //BattleManagerScript.Instance.AdjustSetTimeScale(SOAttack.TimeEffectMultiplier, SOAttack.DurationOfTimeEffect);
+
             }
 
             isMoving = false;
@@ -274,17 +279,35 @@ public class BulletScript : MonoBehaviour
             StartCoroutine(ChildExplosion(BulletBehaviourInfo.BulletEffectTiles.Where(r => r != Vector2Int.zero).ToList(), new Vector2Int(DestinationTile.x, target.UMS.CurrentTilePos.y)));
             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackAudioType.Impact, AudioBus.MidPrio,
             GridManagerScript.Instance.GetBattleTile(target.UMS.CurrentTilePos).transform);
-            FireEffectParticles(transform.position);
+            FireEffectParticles(transform.position, true);
+            if (SOAttack.EffectTimeOnImpact)
+            {
+                StartCoroutine(SlowDownPs(PS.GetComponent<ParticleHelperScript>()));
+            }
         }
     }
 
-
-
-    public void FireEffectParticles(Vector3 pos)
+    public void FireEffectParticles(Vector3 pos, bool onCollision = false)
     {
         //fire the Effect
-        GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(Side == SideType.LeftSide ? SOAttack.Particles.Left.Hit : SOAttack.Particles.Right.Hit, CharOwner.CharInfo.CharacterID, AttackParticlePhaseTypes.Hit, pos, Side, SOAttack.AttackInput);
+        ParticleHelperScript effect = ParticleManagerScript.Instance.FireParticlesInPosition(Side == SideType.LeftSide ? SOAttack.Particles.Left.Hit : SOAttack.Particles.Right.Hit, CharOwner.CharInfo.CharacterID, AttackParticlePhaseTypes.Hit, pos, Side, SOAttack.AttackInput).GetComponent<ParticleHelperScript>();
+        if(SOAttack.EffectTimeOnImpact && onCollision)
+        {
+            effect.StartCoroutine(SlowDownPs(effect));
+        }
     }
+
+    private IEnumerator SlowDownPs(ParticleHelperScript psH)
+    {
+        yield return BattleManagerScript.Instance.WaitFor(SOAttack.TimeEffectDelay, () => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
+
+        psH.SetSimulationSpeed(SOAttack.TimeEffectMultiplier);
+
+        yield return BattleManagerScript.Instance.WaitFor(SOAttack.DurationOfTimeEffect, () => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
+
+        psH.SetSimulationSpeedToBase();
+    }
+
 
     private void EndBullet(float timer)
     {

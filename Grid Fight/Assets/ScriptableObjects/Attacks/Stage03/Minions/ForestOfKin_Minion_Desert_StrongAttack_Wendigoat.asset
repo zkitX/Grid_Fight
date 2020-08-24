@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: ForestOfKin_Minion_Desert_StrongAttack_Wendigoat
   m_EditorClassIdentifier: 
+  SlowDown: {fileID: 11400000, guid: 29f605f49af583e4ea7515d7c98ddfee, type: 2}
   isSequencedAttack: 0
   CurrentAttackType: 0
   AttackRatioMultiplier: 1
@@ -40,9 +41,11 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
-  effectTimeOnImpact: 0
-  timeEffectMultiplier: 1
-  durationOfTimeEffect: 1
+  EffectTimeOnImpact: 0
+  TimeEffectMultiplier: 1
+  DurationOfTimeEffect: 1
+  TimeEffectDelay: 1
+  TimeEffectChildExplosion: 0
   TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories:

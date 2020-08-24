@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage02_Minion_Mountain_Strong_IronTron
   m_EditorClassIdentifier: 
-  Chances: 100
+  SlowDown: {fileID: 11400000, guid: 29f605f49af583e4ea7515d7c98ddfee, type: 2}
+  isSequencedAttack: 0
   CurrentAttackType: 0
   AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 0
-  AttackAnim: 0
   StaminaCost: 10
   ExperiencePoints: 10
-  CoolDown: 0
+  _CoolDown: {x: 3, y: 5}
   PrefixAnim: 0
   Fov: 0
+  AttackAnim: 0
   Particles:
     Left:
       Cast: {fileID: 3416239013106552467, guid: 44ab6b6123cc3184eb1abfdffd7453db,
@@ -40,6 +41,9 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
+  EffectTimeOnImpact: 0
+  TimeEffectMultiplier: 1
+  DurationOfTimeEffect: 1
   TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories:
@@ -131,8 +135,10 @@ MonoBehaviour:
         EffectsOnTile: []
     StatToCheck: 1
     ValueChecker: 2
-    PercToCheck: 0
     Chances: 100
+    PercToCheck: 0
+    InBetween: {x: 0, y: 0}
+    Show: 0
   TotemAtk:
     AtkType: 3
     IsPlayerSide: 0

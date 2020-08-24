@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage05_Character_Desert_Strong_Zoila
   m_EditorClassIdentifier: 
+  SlowDown: {fileID: 11400000, guid: 29f605f49af583e4ea7515d7c98ddfee, type: 2}
   isSequencedAttack: 0
   CurrentAttackType: 0
   AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 1
-  AttackAnim: 1
   StaminaCost: 4
   ExperiencePoints: 10
   _CoolDown: {x: 3, y: 5}
   PrefixAnim: 1
   Fov: 0
+  AttackAnim: 1
   Particles:
     Left:
       Cast: {fileID: 1597727431493035549, guid: 890c2dd5b0bb4094983dc7138c8092b6,
@@ -40,6 +41,9 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
+  EffectTimeOnImpact: 0
+  TimeEffectMultiplier: 1
+  DurationOfTimeEffect: 1
   TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories:

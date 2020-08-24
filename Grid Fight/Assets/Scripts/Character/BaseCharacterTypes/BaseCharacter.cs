@@ -259,6 +259,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         }
         set
         {
+            Debug.Log(CharInfo.CharacterID + "    " + Attacking + "   " + SpineAnim.CurrentAnim + "    " + value);
             _Attacking = value;
         }
     }
@@ -2014,7 +2015,7 @@ public class BaseCharacter : MonoBehaviour, IDisposable
         {
             return;
         }
-        Debug.Log(animState + SpineAnim.CurrentAnim + CharInfo.CharacterID.ToString());
+        //Debug.Log(animState + SpineAnim.CurrentAnim + CharInfo.CharacterID.ToString());
         if (animState == CharacterAnimationStateType.Reverse_Arriving.ToString())
         {
         }

@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage01-Minion-Desert-Attack02-Fishilla-Buff
   m_EditorClassIdentifier: 
+  SlowDown: {fileID: 11400000, guid: 29f605f49af583e4ea7515d7c98ddfee, type: 2}
   isSequencedAttack: 0
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 0, y: 0}
   AttackInput: 2
-  AttackAnim: 0
   StaminaCost: 1
   ExperiencePoints: 10
   _CoolDown: {x: 12, y: 15}
   PrefixAnim: 0
   Fov: 2
+  AttackAnim: 0
   Particles:
     Left:
       Cast: {fileID: 168020828543796015, guid: f356f18b6605aac4a872afabbc94f074, type: 3}
@@ -38,6 +39,9 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
+  EffectTimeOnImpact: 0
+  TimeEffectMultiplier: 1
+  DurationOfTimeEffect: 1
   TrajectoriesNumber: 2
   ParticlesAtk:
     BulletTrajectories:

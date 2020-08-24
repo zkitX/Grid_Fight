@@ -163,7 +163,7 @@ public class MinionType_Script : BaseCharacter
             SpineAnimatorsetup();
         }
 
-        if (animState.Contains("GettingHit") && SpineAnim.CurrentAnim.Contains("GettingHit"))
+        if (animState.Contains("GettingHit") && (SpineAnim.CurrentAnim.Contains("GettingHit") || Attacking))
         {
             return;
         }
@@ -193,7 +193,7 @@ public class MinionType_Script : BaseCharacter
                 nextSequencedAttacks.RemoveAt(0);
             }
 
-            while (Attacking && currentAttackPhase != AttackPhasesType.End)
+            while (Attacking)
             {
                 if(nextAttack == null)
                 {
@@ -430,14 +430,14 @@ public class MinionType_Script : BaseCharacter
         if(attacker != this)
         {
             float defenceChances = Random.Range(0, 100);
-            if (defenceChances < CharInfo.ShieldStats.MinionPerfectShieldChances && !SpineAnim.CurrentAnim.Contains("Atk"))
+            if (defenceChances < CharInfo.ShieldStats.MinionPerfectShieldChances && !Attacking && !isDefending && !isMoving)
             {
                 isDefending = true;
                 DefendingHoldingTimer = 0;
                 SetAnimation(CharacterAnimationStateType.Defending);
                 damage = 0;
             }
-            else if (defenceChances < (CharInfo.ShieldStats.MinionPerfectShieldChances + CharInfo.ShieldStats.MinionShieldChances) && !SpineAnim.CurrentAnim.Contains("Atk"))
+            else if (defenceChances < (CharInfo.ShieldStats.MinionPerfectShieldChances + CharInfo.ShieldStats.MinionShieldChances) && !Attacking && !isDefending && !isMoving)
             {
                 isDefending = true;
                 DefendingHoldingTimer = 10;

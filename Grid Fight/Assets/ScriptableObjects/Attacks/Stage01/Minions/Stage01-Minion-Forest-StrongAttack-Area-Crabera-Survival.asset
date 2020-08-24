@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage01-Minion-Forest-StrongAttack-Area-Crabera-Survival
   m_EditorClassIdentifier: 
-  Chances: 100
+  SlowDown: {fileID: 11400000, guid: 29f605f49af583e4ea7515d7c98ddfee, type: 2}
+  isSequencedAttack: 0
   CurrentAttackType: 1
   AttackRatioMultiplier: 2
   _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 1
-  AttackAnim: 0
   StaminaCost: 10
   ExperiencePoints: 10
-  CoolDown: 2
+  _CoolDown: {x: 3, y: 5}
   PrefixAnim: 0
   Fov: 2
+  AttackAnim: 0
   Particles:
     Left:
       Cast: {fileID: 5711570250590617338, guid: 2e3c62c06289b634f9831939d737904c,
@@ -40,6 +41,9 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
+  EffectTimeOnImpact: 0
+  TimeEffectMultiplier: 1
+  DurationOfTimeEffect: 1
   TrajectoriesNumber: 4
   ParticlesAtk:
     BulletTrajectories:
@@ -389,8 +393,10 @@ MonoBehaviour:
         EffectsOnTile: []
     StatToCheck: 1
     ValueChecker: 0
-    PercToCheck: 40
     Chances: 140
+    PercToCheck: 40
+    InBetween: {x: 0, y: 0}
+    Show: 0
   TotemAtk:
     AtkType: 3
     IsPlayerSide: 0

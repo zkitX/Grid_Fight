@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage02_Character_Mountain_Attack02_Paste_Mainframe
   m_EditorClassIdentifier: 
+  SlowDown: {fileID: 11400000, guid: 29f605f49af583e4ea7515d7c98ddfee, type: 2}
   isSequencedAttack: 1
-  Chances: 100
   CurrentAttackType: 1
   AttackRatioMultiplier: 0
   _DamageMultiplier: {x: 0, y: 0}
   AttackInput: 1
-  AttackAnim: 2
   StaminaCost: 0
   ExperiencePoints: 0
   _CoolDown: {x: 3, y: 5}
   PrefixAnim: 3
   Fov: 0
+  AttackAnim: 2
   Particles:
     Left:
       Cast: {fileID: 2573397876816585607, guid: 6e244158a307d3f45aec496ba2691cab,
@@ -41,6 +41,9 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
+  EffectTimeOnImpact: 0
+  TimeEffectMultiplier: 1
+  DurationOfTimeEffect: 1
   TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories:

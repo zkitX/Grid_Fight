@@ -12,13 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
   m_Name: Stage05_Character_Desert_EnemyAttack2
   m_EditorClassIdentifier: 
-  Chances: 100
+  SlowDown: {fileID: 11400000, guid: 29f605f49af583e4ea7515d7c98ddfee, type: 2}
+  isSequencedAttack: 0
   CurrentAttackType: 1
   AttackRatioMultiplier: 1
-  DamageMultiplier: {x: 1, y: 1}
+  _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 0
-  AttackAnim: 0
+  StaminaCost: 10
+  ExperiencePoints: 10
+  _CoolDown: {x: 3, y: 5}
   PrefixAnim: 0
+  Fov: 0
+  AttackAnim: 0
   Particles:
     Left:
       Cast: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
@@ -36,6 +41,9 @@ MonoBehaviour:
       type: 3}
     CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
       type: 3}
+  EffectTimeOnImpact: 0
+  TimeEffectMultiplier: 1
+  DurationOfTimeEffect: 1
   TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories:
@@ -89,6 +97,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+      ChildrenBulletDelay: 0.5
       BulletEffectTiles: []
       BulletGapStartingTile: {x: 0, y: 0}
       HasEffect: 0
@@ -99,6 +108,20 @@ MonoBehaviour:
     AtkType: 1
     BulletTrajectories:
     - Delay: 2
+      BulletTravelDurationPerTile: 0
+      ExplosionChances: 100
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
       Show: 1
       BulletEffectTiles:
       - Pos: {x: 0, y: 0}
@@ -109,7 +132,18 @@ MonoBehaviour:
         IsEffectOnTile: 0
         TileParticlesID: 0
         DurationOnTile: 0
+        EffectsOnTile: []
     StatToCheck: 1
     ValueChecker: 2
-    PercToCheck: 0
     Chances: 100
+    PercToCheck: 0
+    InBetween: {x: 0, y: 0}
+    Show: 0
+  TotemAtk:
+    AtkType: 3
+    IsPlayerSide: 0
+    DurationOnField: 10
+    Effects: []
+    TotemIn: 0
+    TotemOut: 0
+    TentaclePrefab: 0

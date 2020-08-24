@@ -15,7 +15,6 @@ public class ParticleHelperScript : MonoBehaviour
     public float timet = 0;
     [Tooltip("Specify the Sorting Layer Name")]
     public string SortingLayer = "Player";
-
     ParticleSystem PS;
     ParticleSystem[] PSChildren;
     public int iter = 0;

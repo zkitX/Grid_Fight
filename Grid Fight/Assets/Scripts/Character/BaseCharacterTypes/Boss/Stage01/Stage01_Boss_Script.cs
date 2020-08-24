@@ -239,7 +239,8 @@ public class Stage01_Boss_Script : MinionType_Script
             return;
         }
 
-        if(animState.Contains("Atk") || animState.Contains("Charging") || animState.Contains("Loop"))
+        //Debug.Log(animState + SpineAnim.CurrentAnim + CharInfo.CharacterID.ToString());
+        if (animState.Contains("Atk") || animState.Contains("Charging") || animState.Contains("Loop"))
         {
             switch (nextAttack.AttackInput)
             {
