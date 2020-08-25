@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Stage09_Boss_Geisha_Script : MinionType_Script
+public class Stage09_Boss_Geisha_Script 
 {
 
-    //public override bool Attacking
+  /*  //public override bool Attacking
     //{
     //    get
     //    {

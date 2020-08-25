@@ -20,7 +20,7 @@ public class CallSelectCharacter : Command
 
     protected virtual void CallTheMethod()
     {
-        CharacterType_Script character = (CharacterType_Script)BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == characterID).FirstOrDefault();
+        BaseCharacter character = BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.CharInfo.CharacterID == characterID).FirstOrDefault();
         if (!BattleManagerScript.Instance.CurrentSelectedCharacters.ContainsKey(playerController))
         {
             for (int i = 0; i <= (int)playerController; i++)

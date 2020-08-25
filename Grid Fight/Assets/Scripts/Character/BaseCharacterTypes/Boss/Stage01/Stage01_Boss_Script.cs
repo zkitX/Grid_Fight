@@ -4,9 +4,9 @@ using System.Linq;
 using Spine;
 using UnityEngine;
 
-public class Stage01_Boss_Script : MinionType_Script
+public class Stage01_Boss_Script 
 {
-    public enum Stage01_Boss_MaskType
+  /*  public enum Stage01_Boss_MaskType
     {
         WarDrums,
         LifeDrums,
@@ -16,7 +16,6 @@ public class Stage01_Boss_Script : MinionType_Script
 
 
     public Stage01_Boss_MaskType CurrentPhase;
-    public List<BattleTileScript> AttackedTilesList = new List<BattleTileScript>();
     public GameObject FaceChangingWarDrums;
     public GameObject FaceChangingLifeDrums;
     public GameObject FaceChangingMoonDrums;
@@ -58,7 +57,7 @@ public class Stage01_Boss_Script : MinionType_Script
                         FaceChangingWarDrums.transform.parent = SpineAnim.transform;
                         FaceChangingWarDrums.transform.localPosition = Vector3.zero;
                         FaceChangingWarDrums.SetActive(true);*/
-                        CurrentPhase = Stage01_Boss_MaskType.CrystalTomb;
+                       /* CurrentPhase = Stage01_Boss_MaskType.CrystalTomb;
                     }
                     base.SetAnimation(Stage01_Boss_MaskType.CrystalTomb.ToString() + "_" + animState, loop, transition, _pauseOnLastFrame);
                     return;
@@ -149,12 +148,6 @@ public class Stage01_Boss_Script : MinionType_Script
         }
     }
 
-    public void AttackedTiles(BattleTileScript bts)
-    {
-        AttackedTilesList.Add(bts);
-
-    }
-
     //public override void CastAttackParticles()
     //{
     //    GameObject cast = ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.Right.Cast, CharInfo.CharacterID, AttackParticlePhaseTypes.Cast,
@@ -173,5 +166,5 @@ public class Stage01_Boss_Script : MinionType_Script
     public override string GetAttackAnimName()
     {
         return CurrentPhase.ToString() + "_" +  nextAttack.PrefixAnim + (nextAttack.PrefixAnim == AttackAnimPrefixType.Atk1 ? "_Loop" : "_AtkToIdle");
-    }
+    }*/
 }

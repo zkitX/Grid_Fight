@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseCharaterAction
@@ -13,7 +14,7 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
     public float strongAttackTimer = 0f;
     protected bool isStrongChargingParticlesOn = false;
     protected ManagedAudioSource strongChargeAudio = null;
-    protected ManagedAudioSource strongChargeudioStrong = null;
+    protected ManagedAudioSource strongChargeAudioStrong = null;
     public bool isStrongLoading
     {
         get
@@ -68,6 +69,7 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
     [HideInInspector] public List<ScriptableObjectAttackBase> currentTileAtks = new List<ScriptableObjectAttackBase>();
     [HideInInspector] public ScriptableObjectAttackBase atkToCheck;
     [HideInInspector] public BulletScript bullet = null;
+    protected GameObject tempGameObject = null;
     #endregion
 
 
@@ -80,15 +82,15 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
     public virtual IEnumerator Attack()
     {
         ScriptableObjectAttackBase currentAtk = CharOwner.nextAttack;
-        CharOwner.SetAnimation(currentAtk.PrefixName + "_IdleToAtk");
-        currentAtk.currentAttackPhase = AttackPhasesType.Start;
+        CharOwner.SetAnimation(currentAtk.PrefixAnim + "_IdleToAtk");
+        currentAttackPhase = AttackPhasesType.Start;
         yield return StartIdleToAtk();
         while (currentAttackPhase < AttackPhasesType.Charging && shotsLeftInAttack > 0)
         {
             yield return IdleToAtk();
         }
 
-        CharOwner.SetAnimation(currentAtk.PrefixName + "_Charging");
+        CharOwner.SetAnimation(currentAtk.PrefixAnim + "_Charging");
         yield return StartCharging();
         while (currentAttackPhase == AttackPhasesType.Charging && shotsLeftInAttack > 0 && currentAtk.ChargingTime > 0)
         {
@@ -99,10 +101,10 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
         yield return StartLoop();
         if (shotsLeftInAttack > 0)
         {
-            while (shotsLeftInAttack > 0)
+            while (shotsLeftInAttack > 0 && currentAtk.AttackInput == AttackInputType.Weak)
             {
                 currentAttackPhase = AttackPhasesType.Firing;
-                CharOwner.SetAnimation(currentAtk.PrefixName + "_Loop");
+                CharOwner.SetAnimation(currentAtk.PrefixAnim + "_Loop");
                 shotsLeftInAttack = 0;
                 while (currentAttackPhase != AttackPhasesType.End)
                 {
@@ -110,7 +112,7 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
                 }
                 yield return null;
             }
-            CharOwner.SetAnimation(currentAtk.PrefixName + "_AtkToIdle");
+            CharOwner.SetAnimation(currentAtk.PrefixAnim + "_AtkToIdle");
         }
         else
         {
@@ -208,7 +210,7 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
         }
     }
 
-    public virtual void CreateAttack()
+    public virtual void CreateAttack(Vector2Int nextAttackPos)
     {
         if (CharOwner.nextAttack == null) return;
 
@@ -219,7 +221,7 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
     {
     }
 
-    public virtual void CreateTileBullet(BulletBehaviourInfoClassOnBattleFieldClass bulletBehaviourInfo)
+    public virtual void CreateTileBullet(BulletBehaviourInfoClassOnBattleFieldClass bulletBehaviourInfo, Vector2Int nextAttackPos)
     {
     }
 
@@ -260,16 +262,16 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
         yield return BattleManagerScript.Instance.WaitUpdate(() => (currentAttackPhase != AttackPhasesType.End || CharOwner.CharInfo.HealthPerc <= 0));
         BattleTileScript res;
         MatchType matchType = LoaderManagerScript.Instance != null ? LoaderManagerScript.Instance.MatchInfoType : BattleInfoManagerScript.Instance.MatchInfoType;
-        SideType side = nextAttack.TotemAtk.IsPlayerSide ? UMS.Side : UMS.Side == SideType.LeftSide ? SideType.RightSide : SideType.LeftSide;
+        SideType side = CharOwner.nextAttack.TotemAtk.IsPlayerSide ? CharOwner.UMS.Side : CharOwner.UMS.Side == SideType.LeftSide ? SideType.RightSide : SideType.LeftSide;
         res = GridManagerScript.Instance.GetFreeBattleTile(side == SideType.LeftSide ? WalkingSideType.LeftSide : WalkingSideType.RightSide);
-        res.SetupEffect(nextAttack.TotemAtk.Effects, nextAttack.TotemAtk.DurationOnField, nextAttack.TotemAtk.TotemIn);
+        res.SetupEffect(CharOwner.nextAttack.TotemAtk.Effects, CharOwner.nextAttack.TotemAtk.DurationOnField, CharOwner.nextAttack.TotemAtk.TotemIn);
         List<TotemTentacleClass> tentacles = new List<TotemTentacleClass>();
         TotemTentacleClass checker;
         GameObject ps = null;
-        if (nextAttack.TotemAtk.TentaclePrefab != ParticlesType.None)
+        if (CharOwner.nextAttack.TotemAtk.TentaclePrefab != ParticlesType.None)
         {
             float timer = 0;
-            while (timer < nextAttack.TotemAtk.DurationOnField)
+            while (timer < CharOwner.nextAttack.TotemAtk.DurationOnField)
             {
                 foreach (TotemTentacleClass item in tentacles)
                 {
@@ -290,9 +292,9 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
                     }
                     else
                     {
-                        if (nextAttack.TotemAtk.TentaclePrefab != ParticlesType.None)
+                        if (CharOwner.nextAttack.TotemAtk.TentaclePrefab != ParticlesType.None)
                         {
-                            ps = ParticleManagerScript.Instance.GetParticle(nextAttack.TotemAtk.TentaclePrefab);
+                            ps = ParticleManagerScript.Instance.GetParticle(CharOwner.nextAttack.TotemAtk.TentaclePrefab);
                             ps.transform.position = res.transform.position;
                             ps.SetActive(true);
                             foreach (VFXOffsetToTargetVOL pstimeG in ps.GetComponentsInChildren<VFXOffsetToTargetVOL>())
@@ -301,13 +303,13 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
                             }
                         }
 
-                        foreach (ScriptableObjectAttackEffect effect in nextAttack.TotemAtk.Effects.Where(r => r.StatsToAffect != BuffDebuffStatsType.BlockTile).ToList())
+                        foreach (ScriptableObjectAttackEffect effect in CharOwner.nextAttack.TotemAtk.Effects.Where(r => r.StatsToAffect != BuffDebuffStatsType.BlockTile).ToList())
                         {
-                            item.Buff_DebuffCo(new Buff_DebuffClass(new ElementalResistenceClass(), ElementalType.Dark, this, effect));
+                            item.Buff_DebuffCo(new Buff_DebuffClass(new ElementalResistenceClass(), ElementalType.Dark, CharOwner, effect));
                         }
 
 
-                        foreach (ScriptableObjectAttackEffect effect in nextAttack.TotemAtk.Effects.Where(r => r.StatsToAffect == BuffDebuffStatsType.BlockTile).ToList())
+                        foreach (ScriptableObjectAttackEffect effect in CharOwner.nextAttack.TotemAtk.Effects.Where(r => r.StatsToAffect == BuffDebuffStatsType.BlockTile).ToList())
                         {
                             res.BlockTileForTime(effect.Duration, ParticleManagerScript.Instance.GetParticle(effect.Particles));
                         }
@@ -326,36 +328,18 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
         }
     }
 
-    public override void SpineAnimationState_Complete(string completedAnim)
+    public override bool SpineAnimationState_Complete(string completedAnim)
     {
-        if (completedAnim == CharacterAnimationStateType.Defeat_ReverseArrive.ToString())
-        {
-            IsSwapping = false;
-            SwapWhenPossible = false;
-            for (int i = 0; i < UMS.Pos.Count; i++)
-            {
-                GridManagerScript.Instance.SetBattleTileState(UMS.Pos[i], BattleTileStateType.Empty);
-                UMS.Pos[i] = Vector2Int.zero;
-            }
-            SetAttackReady(false);
-            transform.position = new Vector3(100, 100, 100);
-            return;
-        }
+        
 
-
-        if (completedAnim == CharacterAnimationStateType.Reverse_Arriving.ToString())
-        {
-            IsSwapping = false;
-            SwapWhenPossible = false;
-            transform.position = new Vector3(100, 100, 100);
-            SetAttackReady(false);
-        }
+        return false;
     }
 
     public virtual void InteruptAttack()
     {
         shotsLeftInAttack = 0;
         currentAttackPhase = AttackPhasesType.End;
+        Attacking = false;
     }
 
 
@@ -370,4 +354,19 @@ public class ScriptableObjectBaseCharacterBaseAttack : ScriptableObjectBaseChara
         InteruptAttack();
         base.SetCharDead();
     }
+
+    public void ResetAudioManager()
+    {
+        if (strongChargeAudio != null)
+        {
+            strongChargeAudio.ResetSource();
+            strongChargeAudio = null;
+        }
+        if (strongChargeAudioStrong != null)
+        {
+            strongChargeAudioStrong.ResetSource();
+            strongChargeAudioStrong = null;
+        }
+    }
+
 }

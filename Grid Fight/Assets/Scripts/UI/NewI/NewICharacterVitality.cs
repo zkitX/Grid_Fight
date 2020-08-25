@@ -74,7 +74,7 @@ public class NewICharacterVitality : MonoBehaviour
         assignedCharDetails = character;
         if(character.CharInfo.Mask != null)
         {
-            ((CharacterType_Script)assignedCharDetails).CurrentCharSkillCompletedEvent += RefillSkills;
+            assignedCharDetails.currentInputProfile.CurrentCharSkillCompletedEvent += RefillSkills;
         }
         else
         {

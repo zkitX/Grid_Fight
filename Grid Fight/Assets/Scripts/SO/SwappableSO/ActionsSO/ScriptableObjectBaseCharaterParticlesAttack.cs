@@ -90,18 +90,18 @@ public class ScriptableObjectBaseCharaterParticlesAttack : ScriptableObjectBaseC
             {
                 strongChargeAudio.ResetSource();
             }
-            if (strongChargeudioStrong != null)
+            if (strongChargeAudioStrong != null)
             {
-                strongChargeudioStrong.ResetSource();
+                strongChargeAudioStrong.ResetSource();
             }
             strongChargeAudio = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoop, AudioBus.MidPrio, CharOwner.transform, true, 1f);
             while (isStrongLoading)
             {
                 yield return BattleManagerScript.Instance.WaitUpdate(() => BattleManagerScript.Instance.CurrentBattleState == BattleState.Pause);
                 strongAttackTimer += BattleManagerScript.Instance.DeltaTime;
-                if (strongChargeudioStrong == null && strongAttackTimer >= 1.5f)
+                if (strongChargeAudioStrong == null && strongAttackTimer >= 1.5f)
                 {
-                    strongChargeudioStrong = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoopStrong, AudioBus.MidPrio, CharOwner.transform, true, 1f);
+                    strongChargeAudioStrong = AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingLoopStrong, AudioBus.MidPrio, CharOwner.transform, true, 1f);
                 }
 
                 if (CharOwner.SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle.ToString())
@@ -177,27 +177,27 @@ public class ScriptableObjectBaseCharaterParticlesAttack : ScriptableObjectBaseC
 
     public override void StrongAttack(ScriptableObjectAttackBase atkType)
     {
-        nextAttack = atkType;
+        CharOwner.nextAttack = atkType;
 
         if (strongChargeAudio != null)
         {
-            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingRelease, AudioBus.LowPrio, transform);
+            AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.SpecialAttackChargingRelease, AudioBus.LowPrio, CharOwner.transform);
         }
         CharOwner.FireActionEvent(CharacterActionType.StrongAttack);
-        CharOwner.SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
+        CharOwner.SetAnimation(CharOwner.nextAttack.PrefixAnim + "_AtkToIdle");
 
-        ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.CastActivationPS, CharInfo.CharacterID, AttackParticlePhaseTypes.CastActivation, transform.position, UMS.Side, nextAttack.AttackInput);
+        ParticleManagerScript.Instance.FireParticlesInPosition(CharOwner.nextAttack.Particles.CastActivationPS, CharOwner.CharInfo.CharacterID, AttackParticlePhaseTypes.CastActivation, CharOwner.transform.position, CharOwner.UMS.Side, CharOwner.nextAttack.AttackInput);
     }
 
     public override void WeakAttack()
     {
         if (!CharOwner.GetCanUseStamina(CharOwner.CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackInput == AttackInputType.Weak).First().StaminaCost))
         {
-            CharOwner.SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
+            CharOwner.SetAnimation(CharOwner.nextAttack.PrefixAnim + "_AtkToIdle");
             shotsLeftInAttack = 0;
             return;
         }
-        nextAttack = CharOwner.CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackAnim == AttackAnimType.Weak_Atk).First();
+        CharOwner.nextAttack = CharOwner.CharInfo.CurrentAttackTypeInfo.Where(r => r.AttackAnim == AttackAnimType.Weak_Atk).First();
         currentAttackPhase = AttackPhasesType.Start;
         if (CharOwner.SpineAnim.CurrentAnim.Contains("Loop"))
         {
@@ -209,74 +209,56 @@ public class ScriptableObjectBaseCharaterParticlesAttack : ScriptableObjectBaseC
         }
     }
 
-    public override void ChargingLoop()
+    public override bool SetAnimation(string animState, bool loop = false, float transition = 0, bool _pauseOnLastFrame = false)
     {
-        CharOwner.SetAnimation(nextAttack.PrefixAnim + "_Charging", true);
+
+        if (!animState.ToString().Contains("Atk") && !animState.ToString().Contains("S_DeBuff") && !animState.ToString().Contains("S_Buff"))
+        {
+            currentAttackPhase = AttackPhasesType.End;
+            shotsLeftInAttack = 0;
+        }
+
+        if ((string.Equals(animState, CharacterAnimationStateType.GettingHit.ToString()) ||
+           string.Equals(animState, CharacterAnimationStateType.Buff.ToString()) ||
+           string.Equals(animState, CharacterAnimationStateType.Debuff.ToString())) && (currentAttackPhase != AttackPhasesType.End || Attacking))
+        {
+            return true;
+        }
+
+        return base.SetAnimation(animState, loop, transition, _pauseOnLastFrame);
     }
 
-    public override void SpineAnimationState_Complete(string completedAnim)
+    public override bool SpineAnimationState_Complete(string completedAnim)
     {
-       
-
-        if (completedAnim == CharacterAnimationStateType.JumpTransition_OUT.ToString())
+        if (completedAnim.Contains("IdleToAtk") && CharOwner.SpineAnim.CurrentAnim.ToString().Contains("IdleToAtk"))
         {
-            transform.position = new Vector3(100, 100, 100);
-            SpineAnim.SpineAnimationState.SetAnimation(0, CharacterAnimationStateType.Idle.ToString(), true);
-            SpineAnim.CurrentAnim = CharacterAnimationStateType.Idle.ToString();
-            SetAttackReady(false);
-            return;
+            currentAttackPhase = AttackPhasesType.Charging;
+            return true;
         }
 
-
-        if (completedAnim == CharacterAnimationStateType.Atk1_IdleToAtk.ToString() && SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1_IdleToAtk.ToString())
-        {
-            WeakAttack();
-            return;
-        }
         if (completedAnim == CharacterAnimationStateType.Atk1_Loop.ToString() &&
-            SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1_Loop.ToString())
+          CharOwner.SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk1_Loop.ToString())
         {
-            Debug.Log("Loop ------- completed     " + Atk1Queueing);
-            if (Atk1Queueing)
-            {
-                WeakAttack();
-            }
-            else
-            {
-                SetAnimation(CharacterAnimationStateType.Atk1_AtkToIdle);
-                Debug.Log("Atk1_AtkToIdle ------- started     " + Atk1Queueing);
-                SpineAnim.SetAnimationSpeed(SpineAnim.GetAnimLenght(CharacterAnimationStateType.Atk1_IdleToAtk) / CharInfo.SpeedStats.IdleToAtkDuration);
-            }
-            Atk1Queueing = false;
-            return;
-        }
-        if (completedAnim.Contains("Atk2") || completedAnim.Contains("S_Buff") || completedAnim.Contains("S_DeBuff") || completedAnim.Contains("Atk3"))
-        {
-            if (completedAnim.Contains("IdleToAtk") && SpineAnim.CurrentAnim.ToString().Contains("IdleToAtk"))
-            {
-                string[] res = completedAnim.Split('_');
-                ChargingLoop(res.Length == 2 ? res.First() : res[0] + "_" + res[1]);
-                return;
-            }
+            currentAttackPhase = AttackPhasesType.End;
+            return true;
         }
 
-        if (completedAnim.Contains("AtkToIdle") || completedAnim == CharacterAnimationStateType.Atk.ToString() || completedAnim == CharacterAnimationStateType.Atk1.ToString())
+        if (completedAnim.Contains("AtkToIdle"))
         {
             currentAttackPhase = AttackPhasesType.End;
             Attacking = false;
         }
 
-
-        base.SpineAnimationState_Complete(completedAnim);
+        return base.SpineAnimationState_Complete(completedAnim);
     }
 
-    public override void CreateAttack()
+    public override void CreateAttack(Vector2Int nextAttackPos)
     {
-        if (nextAttack == null) return;
+        if (CharOwner.nextAttack == null) return;
 
-        if (nextAttack.CurrentAttackType == AttackType.Totem)
+        if (CharOwner.nextAttack.CurrentAttackType == AttackType.Totem)
         {
-            base.CreateAttack();
+            base.CreateAttack(nextAttackPos);
             return;
         }
 
@@ -285,7 +267,7 @@ public class ScriptableObjectBaseCharaterParticlesAttack : ScriptableObjectBaseC
 
     public void CreateParticleAttack()
     {
-        foreach (BulletBehaviourInfoClass item in nextAttack.ParticlesAtk.BulletTrajectories)
+        foreach (BulletBehaviourInfoClass item in CharOwner.nextAttack.ParticlesAtk.BulletTrajectories)
         {
             CreateParticleBullet(item);
         }
@@ -294,8 +276,8 @@ public class ScriptableObjectBaseCharaterParticlesAttack : ScriptableObjectBaseC
     public override void CreateParticleBullet(BulletBehaviourInfoClass bulletBehaviourInfo)
     {
         bullet = BulletManagerScript.Instance.GetBullet().GetComponent<BulletScript>();
-        bullet.bts = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(new Vector2Int(UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x, UMS.CurrentTilePos.y - Mathf.Clamp(bulletBehaviourInfo.BulletDistanceInTile.y, 0, 11),
-            UMS.CurrentTilePos.y + ((UMS.Facing == FacingType.Right ? 1 : -1) * bulletBehaviourInfo.BulletDistanceInTile.y)), UMS.Facing);
+        bullet.bts = GridManagerScript.Instance.GetBattleBestTileInsideTheBattlefield(new Vector2Int(CharOwner.UMS.CurrentTilePos.x + bulletBehaviourInfo.BulletDistanceInTile.x, CharOwner.UMS.CurrentTilePos.y - Mathf.Clamp(bulletBehaviourInfo.BulletDistanceInTile.y, 0, 11)
+        + ((CharOwner.UMS.Facing == FacingType.Right ? 1 : -1) * bulletBehaviourInfo.BulletDistanceInTile.y)), CharOwner.UMS.Facing);
         if (bullet.bts == null)
         {
             bullet.gameObject.SetActive(false);
@@ -317,7 +299,13 @@ public class ScriptableObjectBaseCharaterParticlesAttack : ScriptableObjectBaseC
 
 
 
-
+    public override void Reset()
+    {
+        isStrongLoading = false;
+        isStrongStop = false;
+        strongAttackTimer = 0f;
+        base.Reset();
+    }
 
 
 }

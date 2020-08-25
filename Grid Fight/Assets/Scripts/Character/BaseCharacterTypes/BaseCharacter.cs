@@ -43,52 +43,49 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
     #endregion
 
 
-    protected float totDamage = 0;
 
     [HideInInspector] public ScriptableObjectBaseCharaterInput currentInputProfile;
     [HideInInspector] public ScriptableObjectBaseCharacterBaseAttack currentAttackProfile;
     [HideInInspector] public ScriptableObjectBaseCharaterBaseMove currentMoveProfile;
-    
-
-    
-    
-    
-    
 
 
+    public IEnumerator ReviveSequencer()
+    {
+        float timeElapsed = 0f;
+        float timeToWait = CharInfo.CharacterRespawnLength;
+        while (timeElapsed != timeToWait)
+        {
+            if (BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle
+                || BattleManagerScript.Instance.CurrentBattleState == BattleState.FungusPuppets)
+            {
+                timeElapsed = Mathf.Clamp(timeElapsed + BattleManagerScript.Instance.DeltaTime, 0f, timeToWait);
+            }
+            yield return null;
+        }
+        CharBackFromDeath();
+    }
 
+    public void CharBackFromDeath()
+    {
+        gameObject.SetActive(true);
+        CharInfo.HealthStats.Health = CharInfo.HealthStats.Base;
+        CharInfo.ShieldStats.Shield = CharInfo.ShieldStats.Base;
+        CharInfo.EtherStats.Ether = CharInfo.EtherStats.Base;
+        NewIManager.Instance.ToggleUICharacterDead(this, false);
+    }
 
+    public void ResetAudioManager()
+    {
+        currentAttackProfile.ResetAudioManager();
+    }
 
+    public bool GetCanUseStamina(float valueRequired)
+    {
+        if (CharInfo.EtherStats.Ether - valueRequired >= 0) return true;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        UMS.StaminaBarContainer.GetComponentInChildren<Animation>().Play();
+        return false;
+    }
 
     //------------------------------------
 
@@ -219,6 +216,7 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
     protected string tempString;
     List<Vector2Int> tempList_Vector2int = new List<Vector2Int>();
     [HideInInspector]public Transform spineT;
+    [HideInInspector]public BattleFieldIndicatorType healthCT = BattleFieldIndicatorType.Damage;
 
     #endregion
 
@@ -230,6 +228,15 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
 
     protected virtual void Update()
     {
+        UpdateVitalities();
+    }
+
+    public void UpdateVitalities()
+    {
+        currentInputProfile.UpdateVitalities();
+        currentAttackProfile.UpdateVitalities();
+        currentMoveProfile.UpdateVitalities();
+
         UMS.HPBar.localScale = new Vector3((1f / 100f) * CharInfo.HealthPerc, 1, 1);
         UMS.StaminaBar.localScale = new Vector3((1f / 100f) * CharInfo.EtherPerc, 1, 1);
     }
@@ -237,6 +244,11 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
     #region Setup Character
     public virtual void SetupCharacterSide()
     {
+        currentAttackProfile.SetupCharacterSide();
+        currentMoveProfile.SetupCharacterSide();
+        currentInputProfile.SetupCharacterSide();
+
+
         if (!UMS.PlayerController.Contains(ControllerType.Enemy))
         {
             UMS.SelectionIndicator.gameObject.SetActive(true);
@@ -341,12 +353,34 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
 
     public virtual void OnDestroy()
     {
+        currentAttackProfile.OnDestroy();
+        currentInputProfile.OnDestroy();
+        currentMoveProfile.OnDestroy();
+
         CurrentCharIsDeadEvent = null;
         CurrentCharIsRebirthEvent = null;
         CurrentCharStartingActionEvent = null;
         TileMovementCompleteEvent = null;
         HealthStatsChangedEvent = null;
 
+    }
+
+    public void ResetBaseChar()
+    {
+        isMoving = false;
+        currentInputProfile.Reset();
+        currentMoveProfile.Reset();
+        currentAttackProfile.Reset();
+        ResetAudioManager();
+        BuffsDebuffsList.ForEach(r =>
+        {
+            r.Duration = 0;
+            r.CurrentBuffDebuff.Stop_Co = true;
+        }
+        );
+        SpineAnim.transform.localPosition = LocalSpinePosoffset;
+        SpineAnim.SpineAnimationState.ClearTracks();
+        SpineAnim.CurrentAnim = "";
     }
 
     #endregion
@@ -356,7 +390,7 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
     {
         //BACKFIRE APPLY DAMAGE BASED ON HOW MUCH DAMAGE WAS DEALT
         SetDamage(this, GetBuffDebuff(BuffDebuffStatsType.Backfire).CurrentBuffDebuff.Effect.StatsChecker == StatsCheckerType.Multiplier ?
-                GetBuffDebuff(BuffDebuffStatsType.Backfire).CurrentBuffDebuff.Value * damage : GetBuffDebuff(BuffDebuffStatsType.Backfire).CurrentBuffDebuff.Value, ElementalType.Dark, false);
+                GetBuffDebuff(BuffDebuffStatsType.Backfire).CurrentBuffDebuff.Value * damage : GetBuffDebuff(BuffDebuffStatsType.Backfire).CurrentBuffDebuff.Value, ElementalType.Dark, false, false);
 
         ParticleManagerScript.Instance.FireParticlesInPosition(
             UMS.Side == SideType.LeftSide ? nextAttack.Particles.Left.Hit : nextAttack.Particles.Right.Hit,
@@ -543,7 +577,7 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
                         }
                         else if (CurrentPlayerController == ControllerType.None)
                         {
-                            BattleManagerScript.Instance.DeselectCharacter((CharacterType_Script)this, c);
+                            BattleManagerScript.Instance.DeselectCharacter(this, c);
                             break;
                         }
                         else
@@ -551,13 +585,13 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
                             c = CurrentPlayerController;
                             BattleManagerScript.Instance.CurrentSelectedCharacters[c].Character = null;
                         }
-                        BattleManagerScript.Instance.DeselectCharacter((CharacterType_Script)this, c);
+                        BattleManagerScript.Instance.DeselectCharacter(this, c);
                         UMS.IndicatorAnim.SetBool("indicatorOn", false);
                         if (BattleManagerScript.Instance.GetFreeRandomChar(UMS.Side, c) != null && c <= ControllerType.Player4)
                         {
-                            CharacterType_Script cb = (CharacterType_Script)BattleManagerScript.Instance.GetFreeRandomChar(UMS.Side, c);
+                            BaseCharacter cb = BattleManagerScript.Instance.GetFreeRandomChar(UMS.Side, c);
                             BattleManagerScript.Instance.SetCharOnBoardOnFixedPos(c, cb.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeBattleTile(UMS.WalkingSide).Pos);
-                            cb.SetCharSelected(true, c);
+                            cb.currentInputProfile.SetCharSelected(true, c);
                             BattleManagerScript.Instance.SelectCharacter(c, cb);
                         }
                     }
@@ -651,7 +685,7 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
                     }
                     else if (CurrentPlayerController == ControllerType.None)
                     {
-                        BattleManagerScript.Instance.DeselectCharacter((CharacterType_Script)this, c);
+                        BattleManagerScript.Instance.DeselectCharacter(this, c);
                         break;
                     }
                     else
@@ -659,13 +693,13 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
                         c = CurrentPlayerController;
                         BattleManagerScript.Instance.CurrentSelectedCharacters[c].Character = null;
                     }
-                    BattleManagerScript.Instance.DeselectCharacter((CharacterType_Script)this, c);
+                    BattleManagerScript.Instance.DeselectCharacter(this, c);
                     UMS.IndicatorAnim.SetBool("indicatorOn", false);
                     if (BattleManagerScript.Instance.GetFreeRandomChar(UMS.Side, c) != null && c <= ControllerType.Player4)
                     {
-                        CharacterType_Script cb = (CharacterType_Script)BattleManagerScript.Instance.GetFreeRandomChar(UMS.Side, c);
+                        BaseCharacter cb = BattleManagerScript.Instance.GetFreeRandomChar(UMS.Side, c);
                         BattleManagerScript.Instance.SetCharOnBoardOnFixedPos(c, cb.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeBattleTile(UMS.WalkingSide).Pos);
-                        cb.SetCharSelected(true, c);
+                        cb.currentInputProfile.SetCharSelected(true, c);
                         BattleManagerScript.Instance.SelectCharacter(c, cb);
                     }
                     currentInputProfile.StartInput();
@@ -759,8 +793,8 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
                         if (BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == null).ToList().Count > 0)
                         {
                             CurrentPlayerController = BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == null).OrderBy(a => a.Value.NotPlayingTimer).First().Key;
-                            ((CharacterType_Script)this).SetCharSelected(true, CurrentPlayerController);
-                            BattleManagerScript.Instance.SelectCharacter(CurrentPlayerController, (CharacterType_Script)this);
+                            currentInputProfile.SetCharSelected(true, CurrentPlayerController);
+                            BattleManagerScript.Instance.SelectCharacter(CurrentPlayerController, this);
                         }
                         else
                         {
@@ -838,13 +872,13 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
                     CharInfo.AIs.Remove(bdClass.CurrentBuffDebuff.Effect.RageAI);
                     if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && !bdClass.CurrentBuffDebuff.Stop_Co)
                     {
-                        StopCoroutine(AICo);
+                        currentInputProfile.EndInput();
                         CharActionlist.Add(CharacterActionType.SwitchCharacter);
                         if (BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == null).ToList().Count > 0)
                         {
                             CurrentPlayerController = BattleManagerScript.Instance.CurrentSelectedCharacters.Where(r => r.Value.Character == null).OrderBy(a => a.Value.NotPlayingTimer).First().Key;
-                            ((CharacterType_Script)this).SetCharSelected(true, CurrentPlayerController);
-                            BattleManagerScript.Instance.SelectCharacter(CurrentPlayerController, (CharacterType_Script)this);
+                            currentInputProfile.SetCharSelected(true, CurrentPlayerController);
+                            BattleManagerScript.Instance.SelectCharacter(CurrentPlayerController, this);
                         }
                         else
                         {
@@ -1014,33 +1048,25 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
     public virtual void SetAnimation(string animState, bool loop = false, float transition = 0, bool _pauseOnLastFrame = false)
     {
 
-        if (CharInfo.SpeedStats.BaseSpeed <= 0)
+        if (SpineAnim == null)
         {
-            return;
-        }
-        Debug.Log(animState + SpineAnim.CurrentAnim + CharInfo.CharacterID.ToString());
-        if (animState == CharacterAnimationStateType.Reverse_Arriving.ToString())
-        {
+            SpineAnimatorsetup();
         }
 
-        if ((string.Equals(animState, CharacterAnimationStateType.GettingHit.ToString()) ||
-            string.Equals(animState, CharacterAnimationStateType.Buff.ToString()) ||
-            string.Equals(animState, CharacterAnimationStateType.Debuff.ToString())) && (currentAttackPhase != AttackPhasesType.End || Attacking))
-        {
-            return;
-        }
-
-        if (isMoving && (animState.ToString() != CharacterAnimationStateType.Reverse_Arriving.ToString() && animState.ToString() != CharacterAnimationStateType.Defeat_ReverseArrive.ToString()) && (!animState.ToString().Contains("Dash")))
+        if ((currentAttackProfile.Attacking && !animState.Contains("Reverse"))
+            || CharInfo.SpeedStats.BaseSpeed <= 0 ||
+            SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Arriving.ToString()) ||
+            SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Reverse_Arriving.ToString()))
         {
             return;
         }
 
-
-        if (SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Arriving.ToString()) || SpineAnim.CurrentAnim.Contains(CharacterAnimationStateType.Reverse_Arriving.ToString()))
+        if (currentAttackProfile.SetAnimation(animState, loop, transition, _pauseOnLastFrame) ||
+          currentMoveProfile.SetAnimation(animState, loop, transition, _pauseOnLastFrame) ||
+          currentInputProfile.SetAnimation(animState, loop, transition, _pauseOnLastFrame))
         {
             return;
         }
-
 
         if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script && animState.Contains("IdleToAtk"))
         {
@@ -1087,7 +1113,54 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
 
     public virtual void SpineAnimationState_Event(Spine.TrackEntry trackEntry, Spine.Event e)
     {
+        CastLoopImpactAudioClipInfoClass attackTypeAudioInfo = GetAttackAudio();
+        if (e.Data.Name.Contains("StopDefending"))
+        {
+            SpineAnim.SetAnimationSpeed(0);
+        }
+        else if (e.Data.Name.Contains("FireArrivingParticle"))
+        {
+            ArrivingEvent();
+        }
+        else if (e.Data.Name.Contains("FireCastParticle"))
+        {
+            if (attackTypeAudioInfo != null)
+            {
+                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, attackTypeAudioInfo.Cast, AudioBus.LowPrio, transform);
+            }
 
+            if (SpineAnim.CurrentAnim.Contains("Atk1"))
+            {
+                currentAttackPhase = AttackPhasesType.Firing;
+                CreateParticleAttack();
+            }
+            else
+            {
+                currentAttackPhase = AttackPhasesType.Cast_Strong;
+
+            }
+            FireCastParticles();
+        }
+        else if (e.Data.Name.Contains("FireBulletParticle"))
+        {
+            if (SpineAnim.CurrentAnim.Contains("Atk1"))
+            {
+                currentAttackPhase = AttackPhasesType.Firing;
+            }
+            else
+            {
+                currentAttackPhase = AttackPhasesType.Cast_Strong;
+                CreateParticleAttack();
+            }
+        }
+        else if (e.Data.Name.Contains("FireTileAttack") && !trackEntry.Animation.Name.Contains("Loop"))
+        {
+
+        }
+        else if (e.Data.Name.Contains("EndLoop"))
+        {
+
+        }
     }
 
     public virtual void SpineAnimationState_Complete(Spine.TrackEntry trackEntry)
@@ -1096,12 +1169,18 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
         if (pauseOnLastFrame) return;
         if (PlayQueuedAnim()) return;
 
+        if (trackEntry.Animation.Name == "<empty>" || SpineAnim.CurrentAnim == CharacterAnimationStateType.Idle.ToString()
+          || SpineAnim.CurrentAnim == CharacterAnimationStateType.Death.ToString() || (isMoving && (!trackEntry.Animation.Name.Contains("Dash") && !trackEntry.Animation.Name.Contains("_"))))
+        {
+            return;
+        }
         string completedAnim = trackEntry.Animation.Name;
 
         if (completedAnim == CharacterAnimationStateType.Arriving.ToString() || completedAnim == CharacterAnimationStateType.JumpTransition_IN.ToString() || completedAnim.Contains("Growing"))
         {
             IsSwapping = false;
             SwapWhenPossible = false;
+            //Killing NPCs on arrive after the death of the recruitable/boss
             if (CharInfo.HealthPerc<= 0 || died)
             {
                 died = false;
@@ -1109,6 +1188,24 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
             }
             CharArrivedOnBattleField();
         }
+
+        if (completedAnim == CharacterAnimationStateType.Defeat.ToString())
+        {
+            // SpineAnim.SpineAnimationState.SetAnimation(0, CharacterAnimationStateType.Defeat.ToString() + "_Loop", true);
+            //SpineAnim.CurrentAnim = CharacterAnimationStateType.Defeat.ToString() + "_Loop";
+            return;
+        }
+
+
+        if (currentAttackProfile.SpineAnimationState_Complete(completedAnim) ||
+            currentMoveProfile.SpineAnimationState_Complete(completedAnim) ||
+            currentInputProfile.SpineAnimationState_Complete(completedAnim))
+        {
+            return;
+        }
+
+
+
 
         if (completedAnim != CharacterAnimationStateType.Idle.ToString() && !SpineAnim.Loop)
         {
@@ -1126,23 +1223,17 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
 
     public virtual bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical, bool isAttackBlocking)
     {
-        return SetDamage(attacker, damage, elemental, isCritical);
-    }
-
-    public virtual bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical)
-    {
-
         if (!IsOnField)
         {
             return false;
         }
-        BattleFieldIndicatorType healthCT = BattleFieldIndicatorType.Damage;
         bool res;
+
+
 
         if (attacker == this && HasBuffDebuff(BuffDebuffStatsType.Backfire) && damage > 0f)
         {
             healthCT = BattleFieldIndicatorType.Backfire;
-            res = true;
         }
         else if (HasBuffDebuff(BuffDebuffStatsType.Invulnerable))
         {
@@ -1153,60 +1244,14 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
             AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.Shield_Partial, AudioBus.MidPrio);
             res = false;
         }
-        else if (isDefending)
-        {
-            GameObject go;
-            if (DefendingHoldingTimer < CharInfo.ShieldStats.Invulnerability)
-            {
-                Sic.ReflexExp += damage;
-                damage = 0;
-                go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldTotalDefence);
-                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.Shield_Full, AudioBus.MidPrio);
-                go.transform.position = transform.position;
-                CharInfo.Shield -= UniversalGameBalancer.Instance.fullDefenceCost;
-                CharInfo.Ether += UniversalGameBalancer.Instance.staminaRegenOnPerfectBlock;
-                EventManager.Instance.AddBlock(this, BlockInfo.BlockType.full);
-                Sic.CompleteDefences++;
-                ComboManager.Instance.TriggerComboForCharacter(CharInfo.CharacterID, ComboType.Defence, true, transform.position);
-            }
-            else
-            {
-                Sic.ReflexExp += damage * 0.5f;
-  
-                damage = damage - CharInfo.ShieldStats.ShieldAbsorbtion;
-                go = ParticleManagerScript.Instance.GetParticle(ParticlesType.ShieldNormal);
-                AudioManagerMk2.Instance.PlaySound(AudioSourceType.Game, BattleManagerScript.Instance.AudioProfile.Shield_Partial, AudioBus.HighPrio);
-                go.transform.position = transform.position;
-                CharInfo.Shield -= UniversalGameBalancer.Instance.partialDefenceCost;
-                EventManager.Instance.AddBlock(this, BlockInfo.BlockType.partial);
-                Sic.Defences++;
-                ComboManager.Instance.TriggerComboForCharacter(CharInfo.CharacterID, ComboType.Defence, false);
-                damage = damage < 0 ? 1 : damage;
-            }
 
-            FireActionEvent(CharacterActionType.Defence);
-            healthCT = BattleFieldIndicatorType.Defend;
-            res = false;
-            if (UMS.Facing == FacingType.Left)
-            {
-                go.transform.localScale = Vector3.one;
-            }
-            else
-            {
-                go.transform.localScale = new Vector3(-1, 1, 1);
-            }
-        }
-        else
+        res = currentInputProfile.SetDamage(attacker, elemental, isCritical, isAttackBlocking, ref damage);
+
+        if(res)
         {
-            //Play getting hit sound only if the character is a playable one
-            if (CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
-            {
-                // AudioManager.Instance.PlayGeneric("Get_Hit_20200217");
-            }
             SetAnimation(CharacterAnimationStateType.GettingHit, false, 0.1f);
             healthCT = isCritical ? BattleFieldIndicatorType.CriticalHit : BattleFieldIndicatorType.Damage;
             healthCT = damage < 0 ? BattleFieldIndicatorType.Heal : healthCT;
-            res = true;
         }
 
         /*  ElementalWeaknessType ElaboratedWeakness;
@@ -1255,14 +1300,11 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
 
     public virtual void SetFinalDamage(BaseCharacter attacker, float damage, HitInfoClass hic = null)
     {
+        currentMoveProfile.SetFinalDamage(attacker,ref damage, hic);
+        currentInputProfile.SetFinalDamage(attacker,ref damage, hic);
+        currentAttackProfile.SetFinalDamage(attacker,ref damage, hic);
         if (CharInfo.HealthPerc > 0)
         {
-            if (hic == null) hic = HittedByList.Where(r => r.CharacterId == attacker.CharInfo.CharacterID).FirstOrDefault();
-            if (hic == null) HittedByList.Add(new HitInfoClass(attacker, damage));
-            if (hic != null)
-            {
-                hic.UpdateLastHitTime();
-            }
             attacker?.MadeDamage(this, damage);
             CharInfo.Health -= damage;
         }
@@ -1330,22 +1372,7 @@ public class BaseCharacter : MonoBehaviour, System.IDisposable
         return null;
     }
 
-    public bool AreTileNearEmpty()
-    {
-        List<BattleTileScript> res = CheckTileAvailabilityUsingDir(Vector2Int.up);
-        res.AddRange(CheckTileAvailabilityUsingDir(Vector2Int.down));
-        res.AddRange(CheckTileAvailabilityUsingDir(Vector2Int.left));
-        res.AddRange(CheckTileAvailabilityUsingDir(Vector2Int.right));
-
-        if (res.Count > 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+  
 
     protected BaseCharacter GetTargetChar(List<BaseCharacter> enemys)
     {

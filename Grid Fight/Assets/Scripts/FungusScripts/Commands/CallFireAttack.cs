@@ -67,19 +67,19 @@ public class CallFireAttack : Command
         {
             if (randomiseAttack || attackType == null)
             {
-                character.GetAttack();
+                character.currentInputProfile.GetRandomAttack();
             }
             else
             {
                 character.nextAttack = attackType;
             }
-            character.nextAttackPos = TargetPosition;
+            character.currentInputProfile.nextAttackPos = TargetPosition;
             attackOnceCoroutine = character.AttackSequence();
             StartCoroutine(attackOnceCoroutine);
         }
         else
         {
-            ((CharacterType_Script)character).StartWeakAttack(true);
+            character.StartWeakAttack(true);
         }
 
         yield return new WaitForSeconds(0.5f);

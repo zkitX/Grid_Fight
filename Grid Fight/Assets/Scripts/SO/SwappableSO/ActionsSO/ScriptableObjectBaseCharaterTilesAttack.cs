@@ -9,103 +9,72 @@ using UnityEngine;
 public class ScriptableObjectBaseCharaterTilesAttack : ScriptableObjectBaseCharacterBaseAttack
 {
 
+    protected float tempFloat_1;
+    protected int tempInt_1, tempInt_2, tempInt_3;
+    protected Vector2Int tempVector2Int;
+    protected Vector3 tempVector3;
     protected string tempString;
     private Spine.Animation tempAnimation;
     private List<Spine.Timeline> tempTimeLine;
     private Spine.EventTimeline tempEventTimeLine;
     private float ChargingTime;
 
-    public override void SpineAnimationState_Complete(string completedAnim)
+    public override bool SpineAnimationState_Complete(string completedAnim)
     {
-        if (completedAnim == CharacterAnimationStateType.Defeat.ToString())
-        {
-            // SpineAnim.SpineAnimationState.SetAnimation(0, CharacterAnimationStateType.Defeat.ToString() + "_Loop", true);
-            //SpineAnim.CurrentAnim = CharacterAnimationStateType.Defeat.ToString() + "_Loop";
-            return;
-        }
-
-        if (completedAnim == CharacterAnimationStateType.Defending.ToString())
-        {
-            CharOwner.isDefending = false;
-            CharOwner.isDefendingStop = true;
-            CharOwner.DefendingHoldingTimer = 0;
-        }
-
         if (completedAnim == CharacterAnimationStateType.Reverse_Arriving.ToString() || completedAnim == CharacterAnimationStateType.Defeat_ReverseArrive.ToString())
         {
             CharOwner.transform.position = new Vector3(100, 100, 100);
-            CharOwner.SpineAnim.SpineAnimationState.SetAnimation(0, CharacterAnimationStateType.Idle.ToString(), true);
-            CharOwner.SpineAnim.CurrentAnim = CharacterAnimationStateType.Idle.ToString();
             CharOwner.SetAttackReady(false);
             CharOwner.gameObject.SetActive(false);
-            return;
         }
 
-        if (completedAnim.Contains("IdleToAtk") && SpineAnim.CurrentAnim.Contains("IdleToAtk"))
+        if (completedAnim.Contains("IdleToAtk") && CharOwner.SpineAnim.CurrentAnim.Contains("IdleToAtk"))
         {
-            if (shotsLeftInAttack > 0)
-            {
-                SetAnimation(nextAttack.PrefixAnim + "_Charging", true, 0);
-                return;
-            }
-            else
-            {
-                Attacking = false;
-            }
+            currentAttackPhase = AttackPhasesType.Charging;
         }
 
-        if (completedAnim.Contains("_Loop") && SpineAnim.CurrentAnim.Contains("_Loop"))
+        if (completedAnim.Contains("_Loop") && CharOwner.SpineAnim.CurrentAnim.Contains("_Loop"))
         {
-            if (nextAttack != null)
-            {
-                SetAnimation(nextAttack.PrefixAnim + "_AtkToIdle");
-                return;
-            }
-            else
-            {
-
-            }
-
+            currentAttackPhase = AttackPhasesType.End;
         }
 
         if (completedAnim.Contains("AtkToIdle") || completedAnim == CharacterAnimationStateType.Atk.ToString() || completedAnim == CharacterAnimationStateType.Atk1.ToString())
         {
-            currentAttackPhase = AttackPhasesType.End;
-            Attacking = false;
+            InteruptAttack();
         }
 
-        base.SpineAnimationState_Complete(completedAnim);
+        return base.SpineAnimationState_Complete(completedAnim);
     }
 
-    public override void CreateAttack()
+    public override void CreateAttack(Vector2Int nextAttackPos)
     {
-        if (nextAttack == null) return;
+        if (CharOwner.nextAttack == null) return;
 
-        if (nextAttack.CurrentAttackType == AttackType.Totem)
+        if (CharOwner.nextAttack.CurrentAttackType == AttackType.Totem)
         {
-            base.CreateAttack();
+            base.CreateAttack(nextAttackPos);
             return;
         }
 
-        CreateTileAttack();
+        CreateTileAttack(nextAttackPos);
     }
 
-    public override void CreateTileBullet(BulletBehaviourInfoClassOnBattleFieldClass bulletBehaviourInfo)
+    public override void CreateTileBullet(BulletBehaviourInfoClassOnBattleFieldClass bulletBehaviourInfo, Vector2Int nextAttackPos)
     {
         bullet = BulletManagerScript.Instance.GetBullet().GetComponent<BulletScript>();
         bullet.isColliding = false;
         bullet.BulletBehaviourInfo = null;
         bullet.BulletBehaviourInfoTile = bulletBehaviourInfo;
-        float duration = bulletBehaviourInfo.BulletTravelDurationPerTile * (float)(Mathf.Abs(CharOwner.UMS.CurrentTilePos.y - CharOwner.nextAttackPos.y));
+        float duration = bulletBehaviourInfo.BulletTravelDurationPerTile * (float)(Mathf.Abs(CharOwner.UMS.CurrentTilePos.y - nextAttackPos.y));
         bullet.BulletDuration = duration > bulletBehaviourInfo.Delay ? bulletBehaviourInfo.Delay - CharOwner.SpineAnim.SpineAnimationState.GetCurrent(0).TrackTime : duration;
         bullet.BulletEffects.Clear();
-        bullet.bts = GridManagerScript.Instance.GetBattleTile(CharOwner.nextAttackPos);
-        bullet.DestinationTile = CharOwner.nextAttackPos;
+        bullet.bts = GridManagerScript.Instance.GetBattleTile(nextAttackPos);
+        bullet.DestinationTile = nextAttackPos;
 
         CompleteBulletSetup();
     }
 
-    public void CreateTileAttack()
+    public void CreateTileAttack(Vector2Int nextAttackPos)
     {
         if (CharOwner.nextAttack != null && CharOwner.nextAttack.CurrentAttackType == AttackType.Tile && CharOwner.CharInfo.Health > 0 && CharOwner.IsOnField)
         {
@@ -124,7 +93,7 @@ public class ScriptableObjectBaseCharaterTilesAttack : ScriptableObjectBaseChara
                     tempInt_1 = UnityEngine.Random.Range(0, 100);
                     if (tempInt_1 <= CharOwner.nextAttack.TilesAtk.BulletTrajectories[i].ExplosionChances)
                     {
-                        tempVector2Int = CharOwner.nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnTarget ? target.Pos + CharOwner.nextAttackPos :
+                        tempVector2Int = CharOwner.nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnTarget ? target.Pos + nextAttackPos :
                         CharOwner.nextAttack.TilesAtk.AtkType == BattleFieldAttackType.OnItSelf ? target.Pos + CharOwner.UMS.CurrentTilePos : target.Pos;
                         if (GridManagerScript.Instance.isPosOnField(tempVector2Int))
                         {
@@ -135,7 +104,7 @@ public class ScriptableObjectBaseCharaterTilesAttack : ScriptableObjectBaseChara
                                 {
                                     shotsLeftInAttack = 1;
 
-                                    bts.BattleTargetScript.SetAttack(CharOwner.nextAttack.TilesAtk.BulletTrajectories[i].Delay, CharOwner.tempVector2Int,
+                                    bts.BattleTargetScript.SetAttack(CharOwner.nextAttack.TilesAtk.BulletTrajectories[i].Delay, tempVector2Int,
                                     CharOwner.CharInfo.Elemental, this,
                                     target, target.EffectChances);
                                 }
@@ -152,24 +121,17 @@ public class ScriptableObjectBaseCharaterTilesAttack : ScriptableObjectBaseChara
                                     ChargingTime = tempEventTimeLine.Events.Where(r => r.Data.Name == "FireBulletParticle").First().Time;
 
                                     shotsLeftInAttack = 1;
-                                    CharOwner.AttackedTiles(bts);
                                     if (CharOwner.nextAttack.AttackInput > AttackInputType.Weak && i == 0)
                                     {
                                         bts.BattleTargetScript.SetAttack(CharOwner.nextAttack.TilesAtk.BulletTrajectories[i].Delay, tempVector2Int,
-                                    CharOwner.CharInfo.Elemental, this,
+                                    CharOwner.CharInfo.Elemental, CharOwner,
                                     target, target.EffectChances, (CharOwner.nextAttack.TilesAtk.BulletTrajectories[i].BulletTravelDurationPerTile * (float)(Mathf.Abs(CharOwner.UMS.CurrentTilePos.y - CharOwner.nextAttackPos.y))) + tempFloat_1);//(nextAttack.TilesAtk.BulletTrajectories[i].Delay * 0.1f)
                                     }
                                     else if (CharOwner.nextAttack.AttackInput == AttackInputType.Weak)
                                     {
                                         bts.BattleTargetScript.SetAttack(CharOwner.nextAttack.TilesAtk.BulletTrajectories[i].Delay, tempVector2Int,
-                                    CharOwner.CharInfo.Elemental, this,
+                                    CharOwner.CharInfo.Elemental, CharOwner,
                                     target, target.EffectChances, (CharOwner.nextAttack.TilesAtk.BulletTrajectories[i].BulletTravelDurationPerTile * (float)(Mathf.Abs(CharOwner.UMS.CurrentTilePos.y - CharOwner.nextAttackPos.y))) + tempFloat_1); // 
-                                    }
-                                    else
-                                    {
-                                        bts.BattleTargetScript.SetAttack(CharOwner.nextAttack.TilesAtk.BulletTrajectories[i].Delay, tempVector2Int,
-                                    CharOwner.CharInfo.Elemental, this,
-                                    target, target.EffectChances, false);
                                     }
                                 }
                             }
@@ -179,12 +141,10 @@ public class ScriptableObjectBaseCharaterTilesAttack : ScriptableObjectBaseChara
             }
             if (shotsLeftInAttack == 0)
             {
-                Attacking = false;
-                currentAttackPhase = AttackPhasesType.End;
+               InteruptAttack();
             }
         }
     }
-
 
     public override IEnumerator Attack()
     {

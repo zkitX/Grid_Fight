@@ -13,11 +13,11 @@ public class CallRemoveControllerCharacter : Command
     public SideType Side;
     protected virtual void CallTheMethod()
     {
-        CharacterType_Script charToRemove = null;
+        BaseCharacter charToRemove = null;
         foreach (ControllerType controller in controllers)
         {
             charToRemove = BattleManagerScript.Instance.CurrentSelectedCharacters[controller].Character;
-            if(charToRemove != new CharacterType_Script() || charToRemove != null)
+            if(charToRemove != null)
             {
                 BattleManagerScript.Instance.RemoveNamedCharacterFromBoard(charToRemove.CharInfo.CharacterID);
                 BattleManagerScript.Instance.DeselectCharacter(charToRemove.CharInfo.CharacterID, Side, controller);

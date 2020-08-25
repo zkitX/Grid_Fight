@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class Stage00_BossOctopus_Tentacles_Script : MinionType_Script
+public class Stage00_BossOctopus_Tentacles_Script 
 {
-    public Stage00_BossOctopus_Script bossParent;
+   /* public Stage00_BossOctopus_Script bossParent;
     public bool CanGetDamage = true;
     private List<VFXOffsetToTargetVOL> TargetControllerList = new List<VFXOffsetToTargetVOL>();
     public Stage00_BossOctopus_Script BaseBoss;
@@ -71,7 +71,7 @@ public class Stage00_BossOctopus_Tentacles_Script : MinionType_Script
         GameObject effect = ParticleManagerScript.Instance.FireParticlesInPosition(nextAttack.Particles.Right.Hit, CharInfo.CharacterID, AttackParticlePhaseTypes.Hit, tilePos, UMS.Side, nextAttack.AttackInput);
     }*/
 
-    private IEnumerator DeathStasy()
+   /* private IEnumerator DeathStasy()
     {
         yield return null;
     }
@@ -117,7 +117,7 @@ public class Stage00_BossOctopus_Tentacles_Script : MinionType_Script
         return false;
 
     }
-
+    */
 
   
 }

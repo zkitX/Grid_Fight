@@ -79,7 +79,7 @@ public class BulletScript : MonoBehaviour
         }
         //Duration of the particles 
         PS = ParticleManagerScript.Instance.FireParticlesInTransform(CharOwner.UMS.Side == SideType.LeftSide ? SOAttack.Particles.Left.Bullet : SOAttack.Particles.Right.Bullet, CharOwner.CharInfo.CharacterID, AttackParticlePhaseTypes.Bullet, transform, CharOwner.UMS.Side,
-          SOAttack.AttackInput, BulletDuration + 0.5f, iter);
+          SOAttack.AttackInput, BulletDuration + 0.5f);
         ParticleHelperScript pstg = PS.GetComponent<ParticleHelperScript>();
       //  PS.SetActive(true);
 
@@ -194,7 +194,6 @@ public class BulletScript : MonoBehaviour
         }
     }
 
-    public int iter = 0;
     bool hitTarget = false;
     public void MakeDamage(BaseCharacter target, float baseDamage)
     {

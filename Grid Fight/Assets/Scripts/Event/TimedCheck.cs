@@ -294,7 +294,7 @@ public class TimedCheck
     bool AvailableCharacterCountCheck()
     {
         int charsAlive = 0;
-        foreach(CharacterType_Script character in BattleManagerScript.Instance.AllCharactersOnField)
+        foreach(BaseCharacter character in BattleManagerScript.Instance.AllCharactersOnField)
         {
             if (character.CharInfo.Health > 0) charsAlive++;
         }

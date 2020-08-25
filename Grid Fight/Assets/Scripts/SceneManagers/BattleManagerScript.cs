@@ -79,11 +79,11 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
-    public CharacterType_Script[] PlayerControlledCharacters
+    public BaseCharacter[] PlayerControlledCharacters
     {
         get
         {
-            List<CharacterType_Script> chars = new List<CharacterType_Script>();
+            List<BaseCharacter> chars = new List<BaseCharacter>();
             for (int i = 0; i < CurrentSelectedCharacters.Count; i++)
             {
                 if (CurrentSelectedCharacters[(ControllerType)i].Character != null)
@@ -238,7 +238,7 @@ public class BattleManagerScript : MonoBehaviour
 
     #region SetCharacterOnBoard
     //Used to set the already created char on a random Position in the battlefield
-    public CharacterType_Script SetCharOnBoardOnRandomPos(ControllerType playerController, CharacterNameType cName)
+    public BaseCharacter SetCharOnBoardOnRandomPos(ControllerType playerController, CharacterNameType cName)
     {
         bool isPlayer = true;
         BaseCharacter currentCharacter = AllCharactersOnField.Where(r => r.UMS.PlayerController.Contains(playerController) && r.CharInfo.CharacterID == cName && !r.IsOnField).FirstOrDefault();
@@ -278,7 +278,7 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
-    public CharacterType_Script SetCharOnBoardOnFixedPos(ControllerType playerController, CharacterNameType cName, Vector2Int pos)
+    public BaseCharacter SetCharOnBoardOnFixedPos(ControllerType playerController, CharacterNameType cName, Vector2Int pos)
     {
         if (CurrentSelectedCharacters[playerController].Character != null && (!CurrentSelectedCharacters[playerController].Character.IsOnField
           || (CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle.ToString())))
@@ -289,7 +289,7 @@ public class BattleManagerScript : MonoBehaviour
         return SetCharOnBoard(playerController, cName, pos);
     }
 
-    public CharacterType_Script SetCharOnBoard(ControllerType playerController, CharacterNameType cName, Vector2Int pos, bool isPlayer = true)
+    public BaseCharacter SetCharOnBoard(ControllerType playerController, CharacterNameType cName, Vector2Int pos, bool isPlayer = true)
     {
         using (BaseCharacter currentCharacter = isPlayer ? AllCharactersOnField.Where(r => r.UMS.PlayerController.Contains(playerController) && r.CharInfo.CharacterID == cName).First() :
             CharsForTalkingPart.Where(r => r.CharInfo.CharacterID == cName).First())
@@ -317,7 +317,7 @@ public class BattleManagerScript : MonoBehaviour
             StartCoroutine(MoveCharToBoardWithDelay(0.1f, currentCharacter, bts.transform.position));
 
             UIBattleManager.Instance.isLeftSidePlaying = true;
-            return (CharacterType_Script)currentCharacter;
+            return (BaseCharacter)currentCharacter;
         }
     }
 
@@ -418,7 +418,7 @@ public class BattleManagerScript : MonoBehaviour
         foreach (BaseCharacter playableCharOnScene in AllCharactersOnField)
         {
             StatisticInfoManagerScript.Instance.CharaterStats.Add(new StatisticInfoClass(playableCharOnScene.CharInfo.CharacterID, playableCharOnScene.UMS.PlayerController));
-            NewIManager.Instance.SetUICharacterToButton((CharacterType_Script)playableCharOnScene, BattleInfoManagerScript.Instance.PlayerBattleInfo.Where(r => r.CharacterName == playableCharOnScene.CharInfo.CharacterID).FirstOrDefault().CharacterSelection);
+            NewIManager.Instance.SetUICharacterToButton(playableCharOnScene, BattleInfoManagerScript.Instance.PlayerBattleInfo.Where(r => r.CharacterName == playableCharOnScene.CharInfo.CharacterID).FirstOrDefault().CharacterSelection);
             if (FlowChartVariablesManagerScript.instance != null && FlowChartVariablesManagerScript.instance.Variables.Where(r => r.Name == (playableCharOnScene.CharInfo.Name.ToUpper() + "_IN_SQUAD")).FirstOrDefault() != null)
             {
                 FlowChartVariablesManagerScript.instance.Variables.Where(r => r.Name == (playableCharOnScene.CharInfo.Name.ToUpper() + "_IN_SQUAD")).First().Value = "ON";
@@ -514,11 +514,11 @@ public class BattleManagerScript : MonoBehaviour
                         if (controllers.Count == 0)
                         {
                             SetCharOnBoard(currentPlayer.Key, item.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeBattleTile(item.UMS.WalkingSide, item.UMS.Pos).Pos);
-                            SelectCharacter(currentPlayer.Key, (CharacterType_Script)item);
+                            SelectCharacter(currentPlayer.Key, item);
 
                             CurrentSelectedCharacters[currentPlayer.Key].NextSelectionChar.NextSelectionChar = item.CharInfo.CharacterSelection;
                             CurrentSelectedCharacters[currentPlayer.Key].NextSelectionChar.Side = item.UMS.Side;
-                            ((CharacterType_Script)item).SetCharSelected(true, currentPlayer.Key);
+                            item.currentInputProfile.SetCharSelected(true, currentPlayer.Key);
                             return;
                         }
                     }
@@ -534,7 +534,7 @@ public class BattleManagerScript : MonoBehaviour
     #endregion
 
     #region Loading_Selection Character
-    public List<MinionType_Script> zombiesList = new List<MinionType_Script>();
+    public List<BaseCharacter> zombiesList = new List<BaseCharacter>();
     public void Zombification(BaseCharacter zombie, float duration, List<ScriptableObjectAI> ais)
     {
         if(zombie.CharInfo.BaseCharacterType == BaseCharType.CharacterType_Script)
@@ -542,7 +542,7 @@ public class BattleManagerScript : MonoBehaviour
             List<BaseCharacter> res = AllCharactersOnField.Where(r => !r.IsOnField && r.CharInfo.HealthPerc > 0 && r.BuffsDebuffsList.Where(a => a.Stat == BuffDebuffStatsType.Zombie).ToList().Count == 0).ToList();
             if (res.Count > 0)
             {
-                StartCoroutine(CharacterType_Zombification_Co((CharacterType_Script)zombie, duration, ais));
+                StartCoroutine(CharacterType_Zombification_Co((BaseCharacter)zombie, duration, ais));
             }
             else
             {
@@ -562,7 +562,7 @@ public class BattleManagerScript : MonoBehaviour
 
     }
 
-    IEnumerator CharacterType_Zombification_Co(CharacterType_Script zombie, float duration, List<ScriptableObjectAI> ais)
+    IEnumerator CharacterType_Zombification_Co(BaseCharacter zombie, float duration, List<ScriptableObjectAI> ais)
     {
         if(CurrentSelectedCharacters.ContainsKey(zombie.CurrentPlayerController))
         {
@@ -601,10 +601,10 @@ public class BattleManagerScript : MonoBehaviour
         zombiePs.transform.parent = null;
         zombiePs.SetActive(false);
 
-        MinionType_Script zombiefied = zombiesList.Where(r => r.CharInfo.CharacterID == zombie.CharInfo.CharacterID).FirstOrDefault();
+        BaseCharacter zombiefied = zombiesList.Where(r => r.CharInfo.CharacterID == zombie.CharInfo.CharacterID).FirstOrDefault();
         if(zombiefied == null)
         {
-            zombiefied = (MinionType_Script)CreateChar(new CharacterBaseInfoClass(zombie.CharInfo.CharacterID.ToString(), CharacterSelectionType.Up,
+            zombiefied = CreateChar(new CharacterBaseInfoClass(zombie.CharInfo.CharacterID.ToString(), CharacterSelectionType.Up,
         new List<ControllerType> { ControllerType.Enemy }, zombie.CharInfo.CharacterID, 
         zombie.UMS.WalkingSide == WalkingSideType.LeftSide ? WalkingSideType.RightSide : WalkingSideType.LeftSide,
         zombie.UMS.Side == SideType.LeftSide ? SideType.RightSide : SideType.LeftSide,
@@ -677,7 +677,7 @@ public class BattleManagerScript : MonoBehaviour
         {
             zombie.CurrentPlayerController = CurrentSelectedCharacters.Where(r => r.Value.Character == null).OrderBy(a => a.Value.NotPlayingTimer).First().Key;
             SetCharOnBoardOnFixedPos(zombie.CurrentPlayerController, zombie.CharInfo.CharacterID, GridManagerScript.Instance.GetFreeBattleTile(zombie.UMS.WalkingSide).Pos);
-            zombie.SetCharSelected(true, zombie.CurrentPlayerController);
+            zombie.currentInputProfile.SetCharSelected(true, zombie.CurrentPlayerController);
             SelectCharacter(zombie.CurrentPlayerController, zombie);
         }
         
@@ -730,10 +730,10 @@ public class BattleManagerScript : MonoBehaviour
 
 
         //Getting char
-        PlayerMinionType_Script playerZombie = zombie.GetComponent<PlayerMinionType_Script>();
+        BaseCharacter playerZombie = zombie.GetComponent<BaseCharacter>();
         if(playerZombie == null)
         {
-            playerZombie = zombie.gameObject.AddComponent<PlayerMinionType_Script>();
+            playerZombie = zombie.gameObject.AddComponent<BaseCharacter>();
         }
         
         AllPlayersMinionOnField.Add(playerZombie);
@@ -884,7 +884,7 @@ public class BattleManagerScript : MonoBehaviour
 
 
         //Creating the clone
-        MinionType_Script clone = (MinionType_Script)CreateChar(
+        BaseCharacter clone = CreateChar(
             new CharacterBaseInfoClass(cloneInfo.CharacterID.ToString(), CharacterSelectionType.Up,
             new List<ControllerType> { isPlayer ? ControllerType.None : ControllerType.Enemy }, cloneInfo.CharacterID,
             original.UMS.WalkingSide, original.UMS.Side, original.UMS.Facing,
@@ -892,8 +892,6 @@ public class BattleManagerScript : MonoBehaviour
             original.CharActionlist,
             LevelType.Novice), isPlayer ? Instance.transform : WaveManagerScript.Instance.transform
         );
-        if (isPlayer) clone = (PlayerMinionType_Script)clone;
-        //
 
 
         BattleTileScript cloneSpawnTile = GridManagerScript.Instance.GetFreeBattleTile(original.UMS.WalkingSide);
@@ -999,8 +997,8 @@ public class BattleManagerScript : MonoBehaviour
             return;
         }
 
-        CharacterType_Script currentCharacter = (CharacterType_Script)AllCharactersOnField.Where(r => r.CharInfo.CharacterID == cName && r.UMS.Side == side).First();
-        currentCharacter.SetCharSelected(true, playerController);
+        BaseCharacter currentCharacter = (BaseCharacter)AllCharactersOnField.Where(r => r.CharInfo.CharacterID == cName && r.UMS.Side == side).First();
+        currentCharacter.currentInputProfile.SetCharSelected(true, playerController);
         if (CurrentSelectedCharacters[playerController].Character == null || !singleUnitControls)
         {
             //Spawn first character for player to a random position on the grid
@@ -1033,7 +1031,7 @@ public class BattleManagerScript : MonoBehaviour
         while (CurrentSelectedCharacters[playerController].Character != null && (CurrentSelectedCharacters[playerController].OffsetSwap > Time.time || !CurrentSelectedCharacters[playerController].Character.IsOnField || cb.IsOnField ||
             CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Atk2_AtkToIdle.ToString() ||
             CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Reverse_Arriving.ToString() ||
-            CurrentSelectedCharacters[playerController].Character.SkillActivation != null ||
+            //CurrentSelectedCharacters[playerController].Character.currentInputProfile.SkillActivation != null ||  TODO wait for skill to be completed
             CurrentSelectedCharacters[playerController].Character.SpineAnim.CurrentAnim == CharacterAnimationStateType.Arriving.ToString()))
         {
 
@@ -1059,7 +1057,7 @@ public class BattleManagerScript : MonoBehaviour
             {
                 CurrentSelectedCharacters[playerController].isSwapping = true;
                 Vector2Int spawnPos = CurrentSelectedCharacters[playerController].Character.UMS._CurrentTilePos;
-                CharacterType_Script currentCharacter = SetCharOnBoardOnFixedPos(playerController, cName, spawnPos);
+                BaseCharacter currentCharacter = SetCharOnBoardOnFixedPos(playerController, cName, spawnPos);
                 //Debug.Log("Exit  " + CurrentSelectedCharacters[playerController].OffsetSwap + "    " + Time.time + CurrentSelectedCharacters[playerController].NextSelectionChar + AllCharactersOnField.Where(r => r.CharInfo.CharacterID == cName).First().CharInfo.CharacterSelection);
                 if (currentCharacter != null)
                 {
@@ -1122,7 +1120,7 @@ public class BattleManagerScript : MonoBehaviour
             {
                 if (item.Value.Character != null && item.Value.Character == charToRemove)
                 {
-                    DeselectCharacter((CharacterType_Script)charToRemove, item.Key);
+                    DeselectCharacter((BaseCharacter)charToRemove, item.Key);
                     item.Value.Character = null;
                 }
             }
@@ -1148,16 +1146,9 @@ public class BattleManagerScript : MonoBehaviour
 
     public void ResetAllActiveChars()
     {
-        foreach (CharacterType_Script item in AllCharactersOnField.Where(r => r.IsOnField).ToList())
+        foreach (BaseCharacter item in AllCharactersOnField.Where(r => r.IsOnField).ToList())
         {
-            item.isMoving = false;
-            item.isDefending = false;
-            item.isDefendingStop = false;
-            item.isSpecialLoading = false;
-            item.isSpecialStop = false;
-            item.chargingAttackTimer = 0f;
-            item.ResetAudioManager();
-            item.SpineAnim.transform.localPosition = item.LocalSpinePosoffset;
+            item.ResetBaseChar();
         }
     }
 
@@ -1173,7 +1164,7 @@ public class BattleManagerScript : MonoBehaviour
     //Used to select a char under a determinated player
     public void SetCharacterSelection(CharacterSelectionType characterSelection, ControllerType playerController)
     {
-        SelectCharacter(playerController, (CharacterType_Script)AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == characterSelection && r.UMS.PlayerController.Contains(playerController)).FirstOrDefault());
+        SelectCharacter(playerController, (BaseCharacter)AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == characterSelection && r.UMS.PlayerController.Contains(playerController)).FirstOrDefault());
     }
 
     public void DeselectCharacter(CharacterNameType charToDeselectName, SideType side, ControllerType playerController)
@@ -1183,7 +1174,7 @@ public class BattleManagerScript : MonoBehaviour
             return;
         }
 
-        CharacterType_Script charToDeselect = (CharacterType_Script)AllCharactersOnField.Where(r => r.CharInfo.CharacterID == charToDeselectName && r.UMS.Side == side).FirstOrDefault();
+        BaseCharacter charToDeselect = (BaseCharacter)AllCharactersOnField.Where(r => r.CharInfo.CharacterID == charToDeselectName && r.UMS.Side == side).FirstOrDefault();
 
         if (charToDeselect != null)
         {
@@ -1191,14 +1182,14 @@ public class BattleManagerScript : MonoBehaviour
         }
     }
 
-    public void DeselectCharacter(CharacterType_Script charToDeselect, ControllerType playerController)
+    public void DeselectCharacter(BaseCharacter charToDeselect, ControllerType playerController)
     {
         charToDeselect.CurrentPlayerController = ControllerType.None;
-        charToDeselect.SetCharSelected(false, playerController);
+        charToDeselect.currentInputProfile.SetCharSelected(false, playerController);
     }
 
     //Used to select a char 
-    public void SelectCharacter(ControllerType playerController, CharacterType_Script currentCharacter)
+    public void SelectCharacter(ControllerType playerController, BaseCharacter currentCharacter)
     {
         if (currentCharacter != null && currentCharacter.CharInfo.HealthPerc > 0)
         {
@@ -1328,7 +1319,7 @@ public class BattleManagerScript : MonoBehaviour
         // yield return HoldPressTimer(playerController);
         if (CurrentCharactersLoadingInfo.Where(r => r.CName == cName && r.PlayerController == playerController).ToList().Count > 0)
         {
-            CharacterType_Script cb = SetCharOnBoardOnRandomPos(playerController, cName);
+            BaseCharacter cb = SetCharOnBoardOnRandomPos(playerController, cName);
             if (cb != null)
             {
                 SelectCharacter(playerController, cb);
@@ -1339,7 +1330,7 @@ public class BattleManagerScript : MonoBehaviour
         CurrentSelectedCharacters[playerController].LoadCharCo = null;
     }
 
-    public void UpdateCurrentSelectedCharacters(CharacterType_Script oldChar, CharacterType_Script newChar, SideType side)
+    public void UpdateCurrentSelectedCharacters(BaseCharacter oldChar, BaseCharacter newChar, SideType side)
     {
         CurrentSelectedCharacterClass cscc = CurrentSelectedCharacters.Where(r => r.Value.Character != null && r.Value.Character.CharInfo.CharacterID == oldChar.CharInfo.CharacterID && r.Value.Character.UMS.Side == side).First().Value;
         cscc.Character = newChar;
@@ -1498,7 +1489,7 @@ public class BattleManagerScript : MonoBehaviour
 
     public void SetNextChar(bool deselction, BaseCharacter cb, SideType side, ControllerType playerController, CharacterSelectionType cs,  bool worksOnFungusPappets = false)
     {
-        CharacterType_Script PrevCharacter = (CharacterType_Script)AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar && r.UMS.Side == side).First();
+        BaseCharacter PrevCharacter = (BaseCharacter)AllCharactersOnField.Where(r => r.CharInfo.CharacterSelection == CurrentSelectedCharacters[playerController].NextSelectionChar.NextSelectionChar && r.UMS.Side == side).First();
 
         if (deselction)
         {
@@ -1551,13 +1542,12 @@ public class BattleManagerScript : MonoBehaviour
             if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null &&
                 Time.time - CurrentSelectedCharacters[controllerType].Character.currentAttackProfile.WeakAttackOffset > 0.5f)
             {
-                if (!CurrentSelectedCharacters[controllerType].Character.Atk1Queueing && !CurrentSelectedCharacters[controllerType].Character.SpineAnim.CurrentAnim.Contains("Loop"))
+                if (CurrentSelectedCharacters[controllerType].Character.currentAttackProfile.shotsLeftInAttack == 0 && !CurrentSelectedCharacters[controllerType].Character.SpineAnim.CurrentAnim.Contains("Loop"))
                 {
                     CurrentSelectedCharacters[controllerType].Character.currentInputProfile.CharacterInputHandler(InputActionType.Weak);
                     CurrentSelectedCharacters[controllerType].Character.currentAttackProfile.WeakAttackOffset = 0;
                 }
-                Debug.Log("Atk1Queueing -------- true");
-                CurrentSelectedCharacters[controllerType].Character.Atk1Queueing = true;
+                CurrentSelectedCharacters[controllerType].Character.currentAttackProfile.shotsLeftInAttack = 1;
             }
         }
     }
@@ -1570,7 +1560,7 @@ public class BattleManagerScript : MonoBehaviour
             if (CurrentSelectedCharacters.ContainsKey(controllerType) && CurrentSelectedCharacters[controllerType] != null && CurrentSelectedCharacters[controllerType].Character != null &&
                 Time.time - CurrentSelectedCharacters[controllerType].Character.currentAttackProfile.WeakAttackOffset > 0.5f)
             {
-                 CurrentSelectedCharacters[controllerType].Character.Atk1Queueing = false;
+                CurrentSelectedCharacters[controllerType].Character.currentAttackProfile.shotsLeftInAttack =0;
                 //CurrentSelectedCharacters[controllerType].Character.lastAttack = true;
             }
         }
@@ -1681,7 +1671,7 @@ public class BattleManagerScript : MonoBehaviour
             bsChar.UMS.WalkingSide, bsChar.UMS.Side, bsChar.UMS.Facing, BaseCharType.CharacterType_Script, actions, LevelType.Novice), CharactersContainer);
         AllCharactersOnField.Add(cb);
         StatisticInfoManagerScript.Instance.CharaterStats.Add(new StatisticInfoClass(characterID, cb.UMS.PlayerController));
-        NewIManager.Instance.SetUICharacterToButton((CharacterType_Script)cb, cb.CharInfo.CharacterSelection);
+        NewIManager.Instance.SetUICharacterToButton((BaseCharacter)cb, cb.CharInfo.CharacterSelection);
         SetUICharacterSelectionIcons();
     }
 
@@ -1930,9 +1920,9 @@ public class PlayableCharOnScene
 
 public class CurrentSelectedCharacterClass
 {
-    public CharacterType_Script _Character;
+    public BaseCharacter _Character;
 
-    public CharacterType_Script Character
+    public BaseCharacter Character
     {
         get
         {

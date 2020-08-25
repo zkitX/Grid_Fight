@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stage04_BossGirl_Flower_Script : MinionType_Script
+public class Stage04_BossGirl_Flower_Script 
 {
-
+/*
     public Vector2Int BasePos;
     public float StasyTime = 50;
     public bool CanRebirth = true;
@@ -65,7 +65,7 @@ public class Stage04_BossGirl_Flower_Script : MinionType_Script
             loop = true;
         }
         base.SetAnimation(animState, loop, transition);
-    }
+    }*/
 }
 
 

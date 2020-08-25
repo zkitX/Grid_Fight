@@ -4,9 +4,9 @@ using System.Linq;
 using Spine;
 using UnityEngine;
 
-public class Stage02_Boss_Script : MinionType_Script
+public class Stage02_Boss_Script 
 {
-    public override void SetAnimation(string animState, bool loop = false, float transition = 0, bool _pauseOnLastFrame = false)
+  /*  public override void SetAnimation(string animState, bool loop = false, float transition = 0, bool _pauseOnLastFrame = false)
     {
         if (Attacking && animState.Contains("Defending")) return;
 
@@ -61,5 +61,5 @@ public class Stage02_Boss_Script : MinionType_Script
     {
         if (attacker == this && damage == 0f) return true;
         return base.SetDamage(attacker, damage, elemental, isCritical);
-    }
+    }*/
 }

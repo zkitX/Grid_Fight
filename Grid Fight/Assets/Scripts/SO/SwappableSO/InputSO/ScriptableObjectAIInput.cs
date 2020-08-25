@@ -52,7 +52,15 @@ public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
     protected bool pathFound = false;
     protected List<BattleTileScript> possiblePositions = new List<BattleTileScript>();
 
+    //Temp
+    protected float totDamage = 0;
+    
 
+    public override void SetUpEnteringOnBattle()
+    {
+        CharOwner.SetAnimation(CharacterAnimationStateType.Arriving);
+        base.SetUpEnteringOnBattle();
+    }
 
     protected void SetCurrentAIValues()
     {
@@ -70,8 +78,30 @@ public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
 
     public override void EndInput()
     {
+        CharOwner.StopCoroutine(AICo);
     }
 
+    public override void SetupCharacterSide()
+    {
+        base.SetupCharacterSide();
+        CharOwner.UMS.SetUnit(UnitBehaviourType.NPC);
+    }
+    public bool AreTileNearEmpty()
+    {
+        List<BattleTileScript> res = CharOwner.currentMoveProfile.CheckTileAvailabilityUsingDir(Vector2Int.up);
+        res.AddRange(CharOwner.currentMoveProfile.CheckTileAvailabilityUsingDir(Vector2Int.down));
+        res.AddRange(CharOwner.currentMoveProfile.CheckTileAvailabilityUsingDir(Vector2Int.left));
+        res.AddRange(CharOwner.currentMoveProfile.CheckTileAvailabilityUsingDir(Vector2Int.right));
+
+        if (res.Count > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     public virtual IEnumerator AI()
     {
@@ -79,24 +109,24 @@ public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
         while (val)
         {
             yield return null;
-            if (IsOnField && CharInfo.Health > 0)
+            if (CharOwner.IsOnField && CharOwner.CharInfo.Health > 0)
             {
 
                 while (BattleManagerScript.Instance.CurrentBattleState != BattleState.Battle)
                 {
                     yield return null;
                 }
-                prev = CurrentAIState;
-                CurrentAIState = CharInfo.GetCurrentAI(AggroInfoList, UMS.CurrentTilePos, this, ref target);
-                if (prev == null || prev.AI_Type != CurrentAIState.AI_Type)
+                previousAIState = CurrentAIState;
+                CurrentAIState = CharOwner.CharInfo.GetCurrentAI(AggroInfoList, CharOwner.UMS.CurrentTilePos, CharOwner, ref target);
+                if (previousAIState == null || previousAIState.AI_Type != CurrentAIState.AI_Type)
                 {
                     SetCurrentAIValues();
-                    if (prev != null)
+                    if (previousAIState != null)
                     {
-                        prev.ResetStats(CharInfo);
+                        previousAIState.ResetStats(CharOwner.CharInfo);
 
                     }
-                    CurrentAIState.ModifyStats(CharInfo);
+                    CurrentAIState.ModifyStats(CharOwner.CharInfo);
                     if (CurrentAIState.AIPs != null && CurrentAIState.AIPs.PSType != ParticlesType.None)
                     {
                         if (psAI != null)
@@ -104,7 +134,7 @@ public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
                             psAI.SetActive(false);
                         }
                         psAI = ParticleManagerScript.Instance.GetParticle(CurrentAIState.AIPs.PSType);
-                        psAI.transform.parent = SpineAnim.transform;
+                        psAI.transform.parent = CharOwner.SpineAnim.transform;
                         psAI.transform.localPosition = Vector3.zero;
                         psAI.SetActive(true);
                     }
@@ -113,13 +143,13 @@ public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
                 }
 
                 tempInt_1 = UnityEngine.Random.Range(0, 100);
-                nextAttack = null;
+                CharOwner.nextAttack = null;
                 if (target != null)
                 {
                     CharOwner.nextAttack = GetRandomAttack();
                 }
 
-                if (target != null && tempInt_1 < AttackWillPerc && nextAttack != null && (Time.time - lastAttackTime > nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler))
+                if (target != null && tempInt_1 < AttackWillPerc && CharOwner.nextAttack != null && (Time.time - lastAttackTime > CharOwner.nextAttack.CoolDown * UniversalGameBalancer.Instance.difficulty.enemyAttackCooldownScaler))
                 {
                     lastAttackTime = Time.time;
                     nextAttackPos = target.UMS.CurrentTilePos;
@@ -143,7 +173,7 @@ public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
                             {
                                 if (target != null)
                                 {
-                                    possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
+                                    possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == CharOwner.UMS.WalkingSide &&
                                     r.BattleTileState != BattleTileStateType.NonUsable
                                     ).OrderBy(a => Mathf.Abs(a.Pos.x - target.UMS.CurrentTilePos.x)).ThenBy(b => b.Pos.y).ToList();
                                     AICoolDownOffset = Time.time;
@@ -153,7 +183,7 @@ public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
                             {
                                 if (target != null)
                                 {
-                                    possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == UMS.WalkingSide &&
+                                    possiblePositions = GridManagerScript.Instance.BattleTiles.Where(r => r.WalkingSide == CharOwner.UMS.WalkingSide &&
                                     r.BattleTileState != BattleTileStateType.NonUsable
                                     ).OrderByDescending(a => Mathf.Abs(a.Pos.x - target.UMS.CurrentTilePos.x)).ThenByDescending(b => b.Pos.y).ToList();
                                     AICoolDownOffset = Time.time;
@@ -167,17 +197,17 @@ public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
                                     if (possiblePositions.Count > 0)
                                     {
                                         possiblePos = possiblePositions.First();
-                                        if (possiblePos.Pos != UMS.CurrentTilePos)
+                                        if (possiblePos.Pos != CharOwner.UMS.CurrentTilePos)
                                         {
                                             if (possiblePos.BattleTileState == BattleTileStateType.Empty)
                                             {
-                                                path = GridManagerScript.Pathfinding.GetPathTo(possiblePos.Pos, UMS.Pos, GridManagerScript.Instance.GetWalkableTilesLayout(UMS.WalkingSide));
+                                                path = GridManagerScript.Pathfinding.GetPathTo(possiblePos.Pos, CharOwner.UMS.Pos, GridManagerScript.Instance.GetWalkableTilesLayout(CharOwner.UMS.WalkingSide));
                                                 if (path != null && path.Length > 0)
                                                 {
                                                     pathFound = true;
-                                                    tempVector2Int = path[0] - UMS.CurrentTilePos;
+                                                    tempVector2Int = path[0] - CharOwner.UMS.CurrentTilePos;
                                                     possiblePos.isTaken = true;
-                                                    yield return MoveCharOnDir_Co(tempVector2Int == Vector2Int.right ? InputDirectionType.Down : tempVector2Int == Vector2Int.left ? InputDirectionType.Up : tempVector2Int == Vector2Int.up ? InputDirectionType.Right : InputDirectionType.Left);
+                                                    yield return CharOwner.currentMoveProfile.StartMovement(tempVector2Int == Vector2Int.right ? InputDirectionType.Down : tempVector2Int == Vector2Int.left ? InputDirectionType.Up : tempVector2Int == Vector2Int.up ? InputDirectionType.Right : InputDirectionType.Left);
                                                 }
                                                 else
                                                 {
@@ -228,19 +258,19 @@ public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
                         }
                         else
                         {
-                            if (possiblePos.Pos != UMS.CurrentTilePos)
+                            if (possiblePos.Pos != CharOwner.UMS.CurrentTilePos)
                             {
-                                path = GridManagerScript.Pathfinding.GetPathTo(possiblePos.Pos, UMS.Pos, GridManagerScript.Instance.GetWalkableTilesLayout(UMS.WalkingSide));
-                                if (path == null || (path != null && path.Length == 1) || possiblePos.Pos == UMS.CurrentTilePos)
+                                path = GridManagerScript.Pathfinding.GetPathTo(possiblePos.Pos, CharOwner.UMS.Pos, GridManagerScript.Instance.GetWalkableTilesLayout(CharOwner.UMS.WalkingSide));
+                                if (path == null || (path != null && path.Length == 1) || possiblePos.Pos == CharOwner.UMS.CurrentTilePos)
                                 {
                                     possiblePos.isTaken = false;
                                     possiblePos = null;
                                 }
                                 if (path.Length > 0)
                                 {
-                                    tempVector2Int = path[0] - UMS.CurrentTilePos;
+                                    tempVector2Int = path[0] - CharOwner.UMS.CurrentTilePos;
 
-                                    yield return MoveCharOnDir_Co(tempVector2Int == Vector2Int.right ? InputDirectionType.Down : tempVector2Int == Vector2Int.left ? InputDirectionType.Up : tempVector2Int == Vector2Int.up ? InputDirectionType.Right : InputDirectionType.Left);
+                                    yield return CharOwner.currentMoveProfile.StartMovement(tempVector2Int == Vector2Int.right ? InputDirectionType.Down : tempVector2Int == Vector2Int.left ? InputDirectionType.Up : tempVector2Int == Vector2Int.up ? InputDirectionType.Right : InputDirectionType.Left);
                                 }
                             }
                             else
@@ -274,7 +304,7 @@ public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
     }
 
 
-    public ScriptableObjectAttackBase GetRandomAttack()
+    public override ScriptableObjectAttackBase GetRandomAttack()
     {
         ScriptableObjectAttackBase nextAtk = null;
 
@@ -368,14 +398,211 @@ public class ScriptableObjectAIInput : ScriptableObjectBaseCharaterInput
         if (value)
         {
             HittedByList.Clear();
+            StartInput();
         }
+        
     }
 
     public override void SetCharDead()
     {
+        CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);
+        if (AICo != null)
+        {
+            CharOwner.StopCoroutine(AICo);
+            AICo = null;
+        }
+        Instantiate(CharOwner.UMS.DeathParticles, CharOwner.transform.position, Quaternion.identity);
+        CurrentAIState?.ResetStats(CharOwner.CharInfo);
         CurrentAIState = null;
         previousAIState = null;
+        
+        for (int i = 0; i < HittedByList.Count; i++)
+        {
+            StatisticInfoClass sic = StatisticInfoManagerScript.Instance.CharaterStats.Where(r => r.CharacterId == HittedByList[i].CharacterId).FirstOrDefault();
+            if (sic != null)
+            {
+                sic.BaseExp += (HittedByList[i].Damage / totDamage) * CharOwner.CharInfo.ExperienceValue;
+            }
+        }
+        totDamage = 0;
+
+
+        if (HittedByList.Count > 0)
+        {
+            ComboManager.Instance.TriggerComboForCharacter(HittedByList[HittedByList.Count - 1].CharacterId, ComboType.Kill, true, CharOwner.transform.position);
+        }
+        
+        switch (CharOwner.DeathAnim)
+        {
+            case DeathBehaviourType.Explosion:
+                for (int i = 0; i < CharOwner.UMS.Pos.Count; i++)
+                {
+                    GridManagerScript.Instance.SetBattleTileState(CharOwner.UMS.Pos[i], BattleTileStateType.Empty);
+                    CharOwner.UMS.Pos[i] = Vector2Int.zero;
+                }
+                CharOwner.transform.position = new Vector3(100, 100, 100);
+                CharOwner.SetAnimation(CharacterAnimationStateType.Idle);
+                if (CharOwner.isActiveAndEnabled)
+                {
+                    CharOwner.StartCoroutine(DisableChar());
+                }
+                break;
+            case DeathBehaviourType.Defeat:
+                CharOwner.SetAnimation(CharacterAnimationStateType.Defeat);
+                break;
+            case DeathBehaviourType.Reverse_Arrives:
+                for (int i = 0; i < CharOwner.UMS.Pos.Count; i++)
+                {
+                    GridManagerScript.Instance.SetBattleTileState(CharOwner.UMS.Pos[i], BattleTileStateType.Empty);
+                    CharOwner.UMS.Pos[i] = Vector2Int.zero;
+                }
+                CharOwner.SetAnimation(CharacterAnimationStateType.Defeat_ReverseArrive);
+                break;
+        }
+        base.SetCharDead();
+
+    }
+
+    private IEnumerator DisableChar()
+    {
+        yield return BattleManagerScript.Instance.WaitFor(0.5f);
+        CharOwner.gameObject.SetActive(false);
+    }
+
+
+    public override bool SetDamage(BaseCharacter attacker, ElementalType elemental, bool isCritical, bool isAttackBlocking, ref float damage)
+    {
+        if (attacker != this)
+        {
+            temp_Bool = true;
+            float defenceChances = Random.Range(0, 100);
+            if (defenceChances < CharOwner.CharInfo.ShieldStats.MinionPerfectShieldChances && !CharOwner.SpineAnim.CurrentAnim.Contains("Atk"))
+            {
+                isDefending = true;
+                DefendingHoldingTimer = 0;
+                CharOwner.SetAnimation(CharacterAnimationStateType.Defending);
+                damage = 0;
+                temp_Bool = false;
+            }
+            else if (defenceChances < (CharOwner.CharInfo.ShieldStats.MinionPerfectShieldChances + CharOwner.CharInfo.ShieldStats.MinionShieldChances) && !CharOwner.SpineAnim.CurrentAnim.Contains("Atk"))
+            {
+                isDefending = true;
+                DefendingHoldingTimer = 10;
+                CharOwner.SetAnimation(CharacterAnimationStateType.Defending);
+                damage = damage - CharOwner.CharInfo.ShieldStats.ShieldAbsorbtion;
+                temp_Bool = false;
+            }
+            else
+            {
+                isDefending = false;
+                DefendingHoldingTimer = 0;
+            }
+        }
+        return temp_Bool;
+    }
+
+    public override void SetFinalDamage(BaseCharacter attacker,ref float damage, HitInfoClass hic = null)
+    {
+        hic = HittedByList.Where(r => r.CharacterId == attacker.CharInfo.CharacterID).FirstOrDefault();
+        if (hic == null)
+        {
+            HittedByList.Add(new HitInfoClass(attacker, damage));
+        }
+        else
+        {
+            hic.Damage += damage;
+        }
+        if (attacker.CurrentPlayerController != ControllerType.None && attacker.CurrentPlayerController != ControllerType.Enemy)
+        {
+            AggroInfoClass aggro = AggroInfoList.Where(r => r.PlayerController == attacker.CurrentPlayerController).FirstOrDefault();
+            if (aggro == null)
+            {
+                AggroInfoList.Add(new AggroInfoClass(attacker.CurrentPlayerController, 1));
+            }
+            else
+            {
+                aggro.Hit++;
+                AggroInfoList.ForEach(r =>
+                {
+                    if (r.PlayerController != attacker.CurrentPlayerController)
+                    {
+                        r.Hit = r.Hit == 0 ? 0 : r.Hit - 1;
+                    }
+                });
+            }
+        }
+
+        attacker.Sic.DamageMade += damage;
+        base.SetFinalDamage(attacker,ref damage, hic);
+    }
+
+
+    public override bool SpineAnimationState_Complete(string completedAnim)
+    {
+        if (completedAnim == CharacterAnimationStateType.Defending.ToString())
+        {
+            isDefending = false;
+            isDefendingStop = true;
+            DefendingHoldingTimer = 0;
+        }
+        return base.SpineAnimationState_Complete(completedAnim);
+    }
+
+    public override bool SetAnimation(string animState, bool loop = false, float transition = 0, bool _pauseOnLastFrame = false)
+    {
+        if ((BattleManagerScript.Instance.CurrentBattleState == BattleState.Battle && CharOwner.SpineAnim.CurrentAnim.Contains("Defeat")) ||
+            (animState == CharacterAnimationStateType.Defending.ToString() && CharOwner.SpineAnim.CurrentAnim.Contains("Defending")) ||
+            (animState.Contains("GettingHit") && CharOwner.SpineAnim.CurrentAnim.Contains("GettingHit"))) 
+        {
+            return true;
+        }
+
+        return base.SetAnimation(animState, loop, transition, _pauseOnLastFrame);
     }
 }
 
 
+[System.Serializable]
+public class HitInfoClass
+{
+    public BaseCharacter hitter = null;
+    public CharacterNameType CharacterId;
+    public float Damage;
+    public float TimeLastHit = 0;
+
+    public HitInfoClass()
+    {
+        TimeLastHit = Time.time;
+    }
+
+    public HitInfoClass(BaseCharacter character, float damage)
+    {
+        hitter = character;
+        CharacterId = character.CharInfo.CharacterID;
+        Damage = damage;
+        TimeLastHit = Time.time;
+    }
+
+    public void UpdateLastHitTime()
+    {
+        TimeLastHit = Time.time;
+    }
+}
+
+[System.Serializable]
+public class AggroInfoClass
+{
+    public ControllerType PlayerController;
+    public int Hit;
+
+    public AggroInfoClass()
+    {
+
+    }
+
+    public AggroInfoClass(ControllerType playerController, int hit)
+    {
+        PlayerController = playerController;
+        Hit = hit;
+    }
+}

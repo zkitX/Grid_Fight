@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class Stage00_BossOctopus_Script : MinionType_Script
+public class Stage00_BossOctopus_Script 
 {
-    public bool CanGetDamage = false;
+   /* public bool CanGetDamage = false;
     private List<MinionType_Script> Pieces = new List<MinionType_Script>();
     public bool IsCharArrived = false;
     public bool DialogueComplete = true;
@@ -222,7 +222,7 @@ public class Stage00_BossOctopus_Script : MinionType_Script
         }
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         base.SetCharDead();*/
-    }
+   /* }
 
     public void OctopusGirlLeaves()
     {
@@ -327,7 +327,7 @@ public class Stage00_BossOctopus_Script : MinionType_Script
         }
     }*/
 
-    public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical)
+  /*  public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical)
     {
         if (CanGetDamage)
         {
@@ -349,5 +349,5 @@ public class Stage00_BossOctopus_Script : MinionType_Script
     {
 
     }
-
+*/
 }

@@ -7,10 +7,6 @@ using UnityEngine.Analytics;
 
 public class WaveManagerScript : MonoBehaviour
 {
-
-    public delegate void WaveBossApper(MinionType_Script boss);
-    public event WaveBossApper WaveBossApperEvent;
-
     public delegate void WaveComplete(string startBlockName);
     public event WaveComplete WaveCompleteEvent;
 
@@ -438,17 +434,6 @@ public class WaveManagerScript : MonoBehaviour
         }
         return null;
     }
-
-    #region WaveEvents
-
-    public void BossArrived(MinionType_Script boss)
-    {
-        WaveBossApperEvent?.Invoke(boss);
-    }
-
-    #endregion
-
-
 
     private void Update()
     {

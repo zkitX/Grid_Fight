@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stage04_BossMonster_Flower_Script : MinionType_Script
+public class Stage04_BossMonster_Flower_Script
 {
-    public Vector2Int BasePos;
+   /* public Vector2Int BasePos;
     public float StasyTime = 15;
     public bool CanRebirth = true;
     public MonsterFlowerType mfType;
@@ -60,5 +60,5 @@ public class Stage04_BossMonster_Flower_Script : MinionType_Script
             loop = true;
         }
         base.SetAnimation(animState, loop, transition);
-    }
+    }*/
 }

@@ -18,8 +18,8 @@ public class EnvironmentManager : MonoBehaviour
     public FightGrid[] fightGrids;
 
     public CameraStageInfoScript CameraStage;
-    CharacterType_Script[] chars;
-    List<CharacterType_Script> jumpingchars = new List<CharacterType_Script>();
+    BaseCharacter[] chars;
+    List<BaseCharacter> jumpingchars = new List<BaseCharacter>();
 
 
     private void Awake()
@@ -89,11 +89,11 @@ public class EnvironmentManager : MonoBehaviour
             //DONT FORGET TO ADD CAMERA OFFSET ADJUSTMENT
             if (moveChars)
             {
-                chars = System.Array.ConvertAll(BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToArray(), item => (CharacterType_Script)item);
+                chars = System.Array.ConvertAll(BattleManagerScript.Instance.AllCharactersOnField.Where(r => r.IsOnField).ToArray(), item => (BaseCharacter)item);
             }
             else
             {
-                chars = new CharacterType_Script[0];
+                chars = new BaseCharacter[0];
             }
             Vector3[] charStartPositions = new Vector3[chars != null ? chars.Length : 0];
             Vector3[] charGridPosOffsets = new Vector3[chars != null ? chars.Length : 0];

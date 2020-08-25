@@ -155,15 +155,7 @@ public class ScriptableObjectBaseCharaterBaseMove : ScriptableObjectBaseCharater
         }
     }
 
-    protected List<BattleTileScript> CheckTileAvailabilityUsingDir(Vector2Int dir)
-    {
-        tempList_Vector2int = CalculateNextPosUsingDir(dir);
-        if (GridManagerScript.Instance.AreBattleTilesInControllerArea(CharOwner.UMS.Pos, tempList_Vector2int, CharOwner.UMS.WalkingSide))
-        {
-            return GridManagerScript.Instance.GetBattleTiles(tempList_Vector2int, CharOwner.UMS.WalkingSide);
-        }
-        return new List<BattleTileScript>();
-    }
+  
 
     protected List<BattleTileScript> CheckTileAvailabilityUsingPos(Vector2Int dir)
     {
@@ -191,6 +183,10 @@ public class ScriptableObjectBaseCharaterBaseMove : ScriptableObjectBaseCharater
         return tempList_Vector2int;
     }
 
+    public virtual List<BattleTileScript> CheckTileAvailabilityUsingDir(Vector2Int dir)
+    {
+        return new List<BattleTileScript>();
+    }
 }
 
 

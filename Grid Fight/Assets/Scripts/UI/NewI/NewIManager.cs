@@ -97,12 +97,12 @@ public class NewIManager : MonoBehaviour
         }
     }
 
-    public void SetUICharacterToButton(CharacterType_Script character, CharacterSelectionType buttonToAssignTo)
+    public void SetUICharacterToButton(BaseCharacter character, CharacterSelectionType buttonToAssignTo)
     {
         GetvitalityBoxOfAssignedButton(buttonToAssignTo, character.UMS.Side).SetCharacter(character);
     }
 
-    public void ToggleUICharacterDead(CharacterType_Script character, bool state)
+    public void ToggleUICharacterDead(BaseCharacter character, bool state)
     {
         GetvitalityBoxOfCharacter(character.CharInfo.CharacterID, character.UMS.Side).ToggleDead(state);
     }

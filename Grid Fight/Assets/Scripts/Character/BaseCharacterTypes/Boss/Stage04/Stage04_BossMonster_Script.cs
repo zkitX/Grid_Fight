@@ -4,10 +4,10 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Experimental.U2D.IK;
 
-public class Stage04_BossMonster_Script : MinionType_Script
+public class Stage04_BossMonster_Script 
 {
 
-    public GameObject Flower1;
+   /* public GameObject Flower1;
 
     private IEnumerator CanGetDamageCo;
 
@@ -171,7 +171,7 @@ public class Stage04_BossMonster_Script : MinionType_Script
          }
      }*/
 
-    public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical)
+  /*  public override bool SetDamage(BaseCharacter attacker, float damage, ElementalType elemental, bool isCritical)
     {
         if (CanGetDamage)
         {
@@ -186,5 +186,5 @@ public class Stage04_BossMonster_Script : MinionType_Script
         CameraManagerScript.Instance.CameraShake(CameraShakeType.Arrival);
         Instantiate(UMS.DeathParticles, transform.position, Quaternion.identity);
         base.SetCharDead();
-    }
+    }*/
 }

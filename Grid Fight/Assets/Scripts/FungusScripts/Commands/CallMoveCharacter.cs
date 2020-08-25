@@ -34,7 +34,7 @@ public class CallMoveCharacter : Command
             comeBackCount = 0;
             for (int i = 0; i < moveDetail.amount; i++)
             {
-                character.MoveCharOnDirection(moveDetail.nextDir);
+                character.StartCoroutine(character.currentMoveProfile.StartMovement(moveDetail.nextDir));
                 while(comeBackCount == i)
                 {
                     yield return null;

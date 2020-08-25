@@ -9,10 +9,20 @@ public class ScriptableObjectSwappableBase : ScriptableObject
 
     public SwappableActionType SwappableType;
 
-    public virtual void SpineAnimationState_Complete(string completedAnim)
+    public virtual bool SpineAnimationState_Complete(string completedAnim)
     {
-
+        return false;
     }
+    public virtual bool SetAnimation(string animState, bool loop = false, float transition = 0, bool _pauseOnLastFrame = false)
+    {
+        if (CharOwner.isMoving && (animState.ToString() != CharacterAnimationStateType.Reverse_Arriving.ToString() && animState.ToString() != CharacterAnimationStateType.Defeat_ReverseArrive.ToString()) && (!animState.ToString().Contains("Dash")))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
 
     public virtual void Reset()
     {
@@ -43,4 +53,29 @@ public class ScriptableObjectSwappableBase : ScriptableObject
     {
 
     }
+
+
+    public virtual void SetFinalDamage(BaseCharacter attacker,ref float damage, HitInfoClass hic = null)
+    {
+    }
+
+    public virtual bool SetDamage(BaseCharacter attacker, ElementalType elemental, bool isCritical, bool isAttackBlocking, ref float damage)
+    {
+        return true;
+    }
+
+    public virtual void SetupCharacterSide()
+    {
+    }
+
+    public virtual void UpdateVitalities()
+    {
+
+    }
+
+    public virtual void OnDestroy()
+    {
+    }
+
+  
 }

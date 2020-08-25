@@ -4,9 +4,9 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.Experimental.U2D.IK;
 
-public class Stage04_BossGirl_Script : MinionType_Script
+public class Stage04_BossGirl_Script 
 {
-    public GameObject Flower1;
+  /*  public GameObject Flower1;
     public GameObject Flower2;
     public GameObject Flower3;
     public GameObject Flower4;
@@ -193,6 +193,6 @@ public class Stage04_BossGirl_Script : MinionType_Script
 
     }
 
-
+    */
    
 }

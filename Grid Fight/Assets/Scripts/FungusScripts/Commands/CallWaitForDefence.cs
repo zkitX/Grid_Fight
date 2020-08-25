@@ -31,7 +31,7 @@ public class CallWaitForDefence : Command
     {
         while (isMoving)
         {
-            if(BattleManagerScript.Instance.CurrentSelectedCharacters[ControllerType.Player1].Character.isDefending)
+            if(BattleManagerScript.Instance.CurrentSelectedCharacters[ControllerType.Player1].Character.currentInputProfile.isDefending)
             {
                 BattleManagerScript.Instance.BattleSpeed = 1;
             }

@@ -4,9 +4,9 @@ using UnityEngine;
 using System.Linq;
 using Spine;
 
-public class Stage09_Boss_NoFace_Script : MinionType_Script
+public class Stage09_Boss_NoFace_Script 
 {
-    public Stage09_BossInfo_Script bossInfo = null;
+/*    public Stage09_BossInfo_Script bossInfo = null;
     public Stage09_Boss_Geisha_Script baseForme;
     public bool isImmune = true;
     public bool isDead = false;
@@ -174,5 +174,5 @@ public class Stage09_Boss_NoFace_Script : MinionType_Script
             return ((Boss_Stage09AudioProfileSO)CharInfo.AudioProfile).BossAttack3;
         }
         return base.GetAttackAudio();
-    }
+    }*/
 }

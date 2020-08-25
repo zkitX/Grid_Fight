@@ -72,7 +72,7 @@ public class BattleTileTargetsScript : MonoBehaviour
                 {
                     bool iscritical = attacker.CharInfo.IsCritical(true);
                     //Set damage to the hitting character
-                    effectOn = target.SetDamage(attacker, damage * (iscritical ? 2 : 1), ele, iscritical);
+                    effectOn = target.SetDamage(attacker, damage * (iscritical ? 2 : 1), ele, iscritical, false);
                     if (effectOn)
                     {
                         int chances = Random.Range(0, 100);

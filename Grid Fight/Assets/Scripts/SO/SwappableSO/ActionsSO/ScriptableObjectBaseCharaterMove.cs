@@ -59,6 +59,16 @@ public class ScriptableObjectBaseCharaterMove : ScriptableObjectBaseCharaterBase
     }
 
 
+    public override List<BattleTileScript> CheckTileAvailabilityUsingDir(Vector2Int dir)
+    {
+        tempList_Vector2int = CalculateNextPosUsingDir(dir);
+        if (GridManagerScript.Instance.AreBattleTilesInControllerArea(CharOwner.UMS.Pos, tempList_Vector2int, CharOwner.UMS.WalkingSide))
+        {
+            return GridManagerScript.Instance.GetBattleTiles(tempList_Vector2int, CharOwner.UMS.WalkingSide);
+        }
+        return base.CheckTileAvailabilityUsingDir(dir);
+    }
+
 }
 
 
