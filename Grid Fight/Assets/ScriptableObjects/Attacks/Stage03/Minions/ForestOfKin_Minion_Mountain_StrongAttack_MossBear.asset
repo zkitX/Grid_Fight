@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
-  m_Name: Stage03_Minion_Mountain_EnemyAttack
+  m_Name: ForestOfKin_Minion_Mountain_StrongAttack_MossBear
   m_EditorClassIdentifier: 
   SlowDown: {fileID: 11400000, guid: 29f605f49af583e4ea7515d7c98ddfee, type: 2}
   isSequencedAttack: 0
-  CurrentAttackType: 1
+  CurrentAttackType: 0
   AttackRatioMultiplier: 1
   _DamageMultiplier: {x: 1, y: 1}
   AttackInput: 0
   StaminaCost: 10
   ExperiencePoints: 10
   _CoolDown: {x: 3, y: 5}
-  PrefixAnim: 1
+  PrefixAnim: 0
   Fov: 0
-  AttackAnim: 1
+  AttackAnim: 0
   Particles:
     Left:
-      Cast: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Cast: {fileID: 3345051030054040811, guid: 53b492f5b90e32f4e9f5cec124eba31c,
         type: 3}
-      Bullet: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
+      Bullet: {fileID: 5848528695879014836, guid: 92beeba59e8c28d4c8f0a5c5f4bedf43,
         type: 3}
-      Hit: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73, type: 3}
+      Hit: {fileID: 3808390831893716983, guid: 0aae896b3d971b84d8994acee60c299a, type: 3}
     Right:
       Cast: {fileID: 1870565263516131471, guid: 9496ca7e76f959e4583a4fd685974e73,
         type: 3}
@@ -44,6 +44,8 @@ MonoBehaviour:
   EffectTimeOnImpact: 0
   TimeEffectMultiplier: 1
   DurationOfTimeEffect: 1
+  TimeEffectDelay: 1
+  TimeEffectChildExplosion: 0
   TrajectoriesNumber: 1
   ParticlesAtk:
     BulletTrajectories:
@@ -108,17 +110,53 @@ MonoBehaviour:
     AtkType: 1
     BulletTrajectories:
     - Delay: 2
-      BulletTravelDurationPerTile: 0
+      BulletTravelDurationPerTile: 1
       ExplosionChances: 100
       Trajectory_Y:
         serializedVersion: 2
-        m_Curve: []
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
       Trajectory_Z:
         serializedVersion: 2
-        m_Curve: []
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4

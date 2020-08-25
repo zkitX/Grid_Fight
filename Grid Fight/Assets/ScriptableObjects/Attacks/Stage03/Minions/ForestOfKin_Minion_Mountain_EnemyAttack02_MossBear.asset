@@ -1,0 +1,187 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 661d3779646d38b458b753570c737d23, type: 3}
+  m_Name: ForestOfKin_Minion_Mountain_EnemyAttack02_MossBear
+  m_EditorClassIdentifier: 
+  SlowDown: {fileID: 11400000, guid: 29f605f49af583e4ea7515d7c98ddfee, type: 2}
+  isSequencedAttack: 0
+  CurrentAttackType: 1
+  AttackRatioMultiplier: 1
+  _DamageMultiplier: {x: 1, y: 1}
+  AttackInput: 0
+  StaminaCost: 10
+  ExperiencePoints: 10
+  _CoolDown: {x: 3, y: 5}
+  PrefixAnim: 0
+  Fov: 0
+  AttackAnim: 0
+  Particles:
+    Left:
+      Cast: {fileID: 3345051030054040811, guid: 53b492f5b90e32f4e9f5cec124eba31c,
+        type: 3}
+      Bullet: {fileID: 5848528695879014836, guid: 92beeba59e8c28d4c8f0a5c5f4bedf43,
+        type: 3}
+      Hit: {fileID: 3808390831893716983, guid: 0aae896b3d971b84d8994acee60c299a, type: 3}
+    Right:
+      Cast: {fileID: 3345051030054040811, guid: 57d3ff3b29ddeef4e959bbfbdbc0762e,
+        type: 3}
+      Bullet: {fileID: 5848528695879014836, guid: e6d9a18a0533ec54c9c385c63a256314,
+        type: 3}
+      Hit: {fileID: 3808390831893716983, guid: 10671dae09bec414284dd59b4f884136, type: 3}
+    CastLoopPS: {fileID: 8196946893858015638, guid: 3e30953258a772a49bff6906dff2d099,
+      type: 3}
+    CastActivationPS: {fileID: 419970958309357329, guid: 641623cf9b57cdc42a77fbc24a6a891a,
+      type: 3}
+  EffectTimeOnImpact: 0
+  TimeEffectMultiplier: 1
+  DurationOfTimeEffect: 1
+  TimeEffectDelay: 1
+  TimeEffectChildExplosion: 0
+  TrajectoriesNumber: 1
+  ParticlesAtk:
+    BulletTrajectories:
+    - Show: 1
+      BulletDistanceInTile: {x: 0, y: 15}
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      ChildrenBulletDelay: 0.5
+      BulletEffectTiles: []
+      BulletGapStartingTile: {x: 0, y: 0}
+      HasEffect: 0
+      Effects: []
+      EffectChances: 100
+    CharacterClass: 0
+  TilesAtk:
+    AtkType: 1
+    BulletTrajectories:
+    - Delay: 2
+      BulletTravelDurationPerTile: 1
+      ExplosionChances: 100
+      Trajectory_Y:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Trajectory_Z:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      Show: 1
+      BulletEffectTiles:
+      - Pos: {x: 0, y: 0}
+        HasEffect: 0
+        showImpact: 1
+        Effects: []
+        EffectChances: 100
+        IsEffectOnTile: 0
+        TileParticlesID: 0
+        DurationOnTile: 0
+        EffectsOnTile: []
+    StatToCheck: 1
+    ValueChecker: 2
+    Chances: 100
+    PercToCheck: 0
+    InBetween: {x: 0, y: 0}
+    Show: 0
+  TotemAtk:
+    AtkType: 3
+    IsPlayerSide: 0
+    DurationOnField: 10
+    Effects: []
+    TotemIn: 0
+    TotemOut: 0
+    TentaclePrefab: 0

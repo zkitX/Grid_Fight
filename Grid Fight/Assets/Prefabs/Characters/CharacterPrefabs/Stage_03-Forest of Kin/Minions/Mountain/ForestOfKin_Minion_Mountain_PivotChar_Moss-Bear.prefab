@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1217872557417258419}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0.625, z: 0}
+  m_LocalPosition: {x: -0.596, y: 0.185, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6175370465017794971}
@@ -660,14 +660,17 @@ MonoBehaviour:
   BaseCharacterType: 1
   CharacterID: 1060
   attackSequences: []
-  _CurrentAttackTypeInfo: []
+  _CurrentAttackTypeInfo:
+  - {fileID: 11400000, guid: 5f7e9feaa8e0b8d4798a69ed6ec9155b, type: 2}
+  - {fileID: 11400000, guid: 3f64752b9b6d8a54da1d980fa68b8727, type: 2}
   AddedAttackTypeInfo: []
   Elemental: 0
   ClassType: 2
   CharaterLevel: 0
   UseLayeringSystem: 1
   Head: {fileID: 6272426115780661162}
-  AIs: []
+  AIs:
+  - {fileID: 11400000, guid: c1341c2414a67e744900ac446f951ae2, type: 2}
   CharacterRespawnLength: 180
   CharacterSelection: 0
   HealthStats:
@@ -701,8 +704,8 @@ MonoBehaviour:
     B_MinionShieldChances: 20
     B_MinionPerfectShieldChances: 5
   EtherStats:
-    Ether: 40
-    Base: 40
+    Ether: 4000
+    Base: 4000
     Regeneration: 1
     BaseEtherRegeneration: 1
     LevelMultiplier: 30
@@ -725,8 +728,8 @@ MonoBehaviour:
     MovementSpeed_LevelMultiplier: 0
     IdleToAtkDuration: 0.2
     AtkToIdleDuration: 0.2
-    WeakBulletSpeed: 5
-    StrongBulletSpeed: 5
+    WeakBulletSpeed: 2
+    StrongBulletSpeed: 2
     B_BaseSpeed: 1
     B_MovementSpeed: 1
     B_AttackSpeed: 1
