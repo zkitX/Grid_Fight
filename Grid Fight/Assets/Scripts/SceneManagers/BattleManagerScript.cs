@@ -475,8 +475,30 @@ public class BattleManagerScript : MonoBehaviour
     public BaseCharacter CreateChar(CharacterBaseInfoClass charInfo, Transform parent)
     {
         GameObject characterBasePrefab = null;
-       // Debug.LogError(charInfo.CharacterName);
-        ScriptableObjectCharacterPrefab soCharacterPrefab = ListOfScriptableObjectCharacterPrefab.Where(r => r.CharacterName == charInfo.CharacterName).First();
+        ScriptableObjectCharacterPrefab soCharacterPrefab = null;
+
+        for (int i = 0; i < ListOfScriptableObjectCharacterPrefab.Count; i++)
+        {
+            if(ListOfScriptableObjectCharacterPrefab[i] != null)
+            {
+               
+                if(ListOfScriptableObjectCharacterPrefab[i].CharacterName == charInfo.CharacterName)
+                {
+                    soCharacterPrefab = ListOfScriptableObjectCharacterPrefab[i];
+                    break;
+                }
+            }
+            else
+            {
+                Debug.LogError("one of the scrptableObject is null check in the battlemanger and delete the element that is null");
+            }
+        }
+        if(soCharacterPrefab == null)
+        {
+            Debug.LogError("scrptableObject of this char is missing ----" + charInfo.CharacterName);
+            return null; 
+        }
+
         characterBasePrefab = Instantiate(CharacterBasePrefab, new Vector3(100, 100, 100), Quaternion.identity, parent);
         GameObject child = Instantiate(soCharacterPrefab.CharacterPrefab, characterBasePrefab.transform.position, Quaternion.identity, characterBasePrefab.transform);
         BaseCharacter currentCharacter = (BaseCharacter)characterBasePrefab.AddComponent(System.Type.GetType(charInfo.BCharType == BaseCharType.None ? child.GetComponentInChildren<CharacterInfoScript>().BaseCharacterType.ToString() : charInfo.BCharType.ToString()));
